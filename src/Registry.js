@@ -80,16 +80,19 @@ function proxy(pathname) {
 function Registry(params) {
   const [state, setState] = React.useState({ contents: "loading", rUrl: null });
 
-  React.useEffect(() => {
-    const { pathname } = params.location;
-    const { entry, path } = proxy(pathname);
-    const rUrl = entry.url + path;
-    console.log("fetch", rUrl);
-    fetch(rUrl).then(async response => {
-      const m = await response.text();
-      setState({ contents: m, rUrl });
-    });
-  }, []);
+  React.useEffect(
+    () => {
+      const { pathname } = params.location;
+      const { entry, path } = proxy(pathname);
+      const rUrl = `${entry.url}${path}`;
+      console.log("fetch", rUrl);
+      fetch(rUrl).then(async response => {
+        const m = await response.text();
+        setState({ contents: m, rUrl });
+      });
+    },
+    [params.location]
+  );
 
   let contentComponent;
   if (state.rUrl) {
