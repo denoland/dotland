@@ -39,6 +39,11 @@ header {
   align-items: center;
 }
 
+pre {
+  background-color: #F0F0F0 !important;
+  padding: 8px 16px !important;
+}
+
 #spinner-overlay {
   display: none;
   position: fixed;

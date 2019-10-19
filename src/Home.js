@@ -148,9 +148,7 @@ function Home() {
 
       <p>Or a more complex one:</p>
 
-      <pre>
-        <SyntaxHighlighter language="typescript">{code}</SyntaxHighlighter>
-      </pre>
+      <SyntaxHighlighter language="typescript">{code}</SyntaxHighlighter>
 
       <h2 id="dig-in">
         Dig in... <a href="#dig-in">#</a>
