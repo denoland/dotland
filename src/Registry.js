@@ -3,6 +3,7 @@ import { Breadcrumbs, Box } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import assert from "assert";
 import Markdown from "./Markdown";
+import CodeBlock from "./CodeBlock";
 const DATABASE = require("./database.json");
 
 /**
@@ -52,51 +53,70 @@ function getEntry(name, branch = "master") {
   return null;
 }
 
-function matchParamsToModule({
-  stdPath,
-  stdVersion,
-  modName,
-  modVersion,
-  modPath
-}) {
-  if (stdPath) {
-    assert(!modName && !modPath && !modVersion);
-    return { name: "std", version: stdVersion, path: stdPath };
-  } else {
-    assert(!stdPath && !stdVersion);
-    return { name: modName, version: modVersion, path: modPath };
+function proxy(pathname) {
+  if (pathname.startsWith("/core") || pathname.startsWith("/std")) {
+    console.log("proxy", pathname);
+    return proxy("/x" + pathname);
   }
+  if (!pathname.startsWith("/x/")) {
+    return null;
+  }
+
+  const i = pathname.indexOf("/", 3);
+  const rest = pathname.slice(i + 1);
+  const nameBranch = pathname.slice(3, i);
+  let [name, branch] = nameBranch.split("@", 2);
+  const entry = getEntry(name, branch);
+
+  if (!entry || !entry.url) {
+    return null;
+  }
+
+  assert(entry.url.endsWith("/"));
+  assert(!rest.startsWith("/"));
+  return { entry, path: rest };
 }
 
 function Registry(params) {
-  const { match } = params;
-  const mod = matchParamsToModule(match.params);
+  const [state, setState] = React.useState({ contents: "loading", rUrl: null });
 
-  const entry = getEntry(mod.name, mod.version);
-  const rUrl = entry.url + mod.path;
+  React.useEffect(
+    () => {
+      const { pathname } = params.location;
+      const { entry, path } = proxy(pathname);
+      const rUrl = `${entry.url}${path}`;
+      console.log("fetch", rUrl);
+      fetch(rUrl).then(async response => {
+        const m = await response.text();
+        setState({ contents: m, rUrl });
+      });
+    },
+    [params.location]
+  );
 
-  const [state, setState] = React.useState({ contents: "loading" });
-
-  React.useEffect(() => {
-    fetch(rUrl).then(async response => {
-      const m = await response.text();
-      setState({ contents: m });
-    });
-  });
-
-  console.log("rUrl", rUrl);
-  console.log("entry", entry);
-  console.log("entry", mod);
+  let contentComponent;
+  if (state.rUrl) {
+    if (state.rUrl.endsWith(".md")) {
+      contentComponent = <Markdown source={state.contents} />;
+    } else {
+      // TODO(ry) pass language to CodeBlock.
+      contentComponent = <CodeBlock value={state.contents} />;
+    }
+  }
 
   return (
     <Box>
       <Breadcrumbs separator="/">
-        {params.location.pathname.split("/").map(part => {
-          return <Link href="/">{part}</Link>;
+        {params.location.pathname.split("/").map((part, i) => {
+          // TODO(ry) Fix link destination in breadcrumbs.
+          return (
+            <Link to="/" key={i}>
+              {part}
+            </Link>
+          );
         })}
       </Breadcrumbs>
-      {/* TODO handle types other than markdown */}
-      <Markdown source={state.contents} />
+      {contentComponent}
     </Box>
   );
 }

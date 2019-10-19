@@ -12,7 +12,7 @@ function Manual() {
       const m = await response.text();
       setState({ markdown: m });
     });
-  });
+  }, []);
 
   return (
     <div>
