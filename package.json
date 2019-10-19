@@ -2,17 +2,18 @@
   "name": "deno_website2",
   "version": "0.0.1",
   "private": true,
+  "devDependencies": {
+    "eslint": "^6.5.1"
+  },
   "dependencies": {
     "@material-ui/core": "^4.5.1",
     "@material-ui/icons": "^4.5.1",
-    "eslint": "^6.5.1",
-    "highlight.js": "^9.15.10",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "react-lowlight": "^2.0.0",
+    "react-markdown": "^4.2.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
-    "react-showdown": "^1.6.0"
+    "react-syntax-highlighter": "^11.0.2"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,16 +1,11 @@
 import React from "react";
-import Lowlight from "react-lowlight";
-import js from "highlight.js/lib/languages/javascript";
-
-Lowlight.registerLanguage("js", js);
+import SyntaxHighlighter from "react-syntax-highlighter";
 
 function CodeBlock(props) {
   return (
-    <Lowlight
-      language={props.language || "js"}
-      value={props.literal}
-      inline={props.inline}
-    />
+    <SyntaxHighlighter language={props.language || "js"}>
+      {props.value}
+    </SyntaxHighlighter>
   );
 }
 

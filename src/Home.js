@@ -29,61 +29,76 @@ function Home() {
       </header>
 
       <table>
-        <tr>
-          <th />
-          <th>Linux &amp; Mac</th>
-          <th>Windows</th>
-        </tr>
-        <tr>
-          <th>
-            <a href="https://github.com/denoland/deno">deno</a>
-          </th>
-          <td colspan="2">
-            <a class="badge" href="https://github.com/denoland/deno/actions">
-              <img
-                alt="deno ci badge"
-                src="https://github.com/denoland/deno/workflows/build/badge.svg"
-              />
-            </a>
-          </td>
-        </tr>
-        <tr>
-          <th>
-            <a href="https://github.com/denoland/deno_install">deno_install</a>
-          </th>
-          <td>
-            <a class="badge" href="https://travis-ci.com/denoland/deno_install">
-              <img
-                alt="deno_install ci badge travis"
-                src="https://travis-ci.com/denoland/deno_install.svg?branch=master"
-              />
-            </a>
-          </td>
-          <td>
-            <a
-              class="badge"
-              href="https://ci.appveyor.com/project/deno/deno-install"
-            >
-              <img
-                alt="deno_install ci badge appveyor"
-                src="https://ci.appveyor.com/api/projects/status/gtekeaf7r60xa896?branch=master&svg=true"
-              />
-            </a>
-          </td>
-        </tr>
-        <tr>
-          <th>
-            <a href="https://github.com/denoland/registry">registry</a>
-          </th>
-          <td colspan="2">
-            <a class="badge" href="https://travis-ci.com/denoland/registry">
-              <img
-                alt="registry ci badge"
-                src="https://travis-ci.com/denoland/registry.svg?branch=master"
-              />
-            </a>
-          </td>
-        </tr>
+        <thead>
+          <tr>
+            <th />
+            <th>Linux &amp; Mac</th>
+            <th>Windows</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>
+              <a href="https://github.com/denoland/deno">deno</a>
+            </th>
+            <td colSpan="2">
+              <a
+                className="badge"
+                href="https://github.com/denoland/deno/actions"
+              >
+                <img
+                  alt="deno ci badge"
+                  src="https://github.com/denoland/deno/workflows/build/badge.svg"
+                />
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="https://github.com/denoland/deno_install">
+                deno_install
+              </a>
+            </th>
+            <td>
+              <a
+                className="badge"
+                href="https://travis-ci.com/denoland/deno_install"
+              >
+                <img
+                  alt="deno_install ci badge travis"
+                  src="https://travis-ci.com/denoland/deno_install.svg?branch=master"
+                />
+              </a>
+            </td>
+            <td>
+              <a
+                className="badge"
+                href="https://ci.appveyor.com/project/deno/deno-install"
+              >
+                <img
+                  alt="deno_install ci badge appveyor"
+                  src="https://ci.appveyor.com/api/projects/status/gtekeaf7r60xa896?branch=master&svg=true"
+                />
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="https://github.com/denoland/registry">registry</a>
+            </th>
+            <td colSpan="2">
+              <a
+                className="badge"
+                href="https://travis-ci.com/denoland/registry"
+              >
+                <img
+                  alt="registry ci badge"
+                  src="https://travis-ci.com/denoland/registry.svg?branch=master"
+                />
+              </a>
+            </td>
+          </tr>
+        </tbody>
       </table>
 
       <h2 id="install">

@@ -1,6 +1,6 @@
 // import SyntaxHighlighter from 'react-syntax-highlighter';
 import React from "react";
-import { Markdown } from "react-showdown";
+import ReactMarkdown from "react-markdown";
 import CodeBlock from "./CodeBlock";
 import d from "./manual.md";
 
@@ -14,18 +14,9 @@ function Manual() {
       setState({ markdown: m });
     });
   });
-  const x = state.markdown ? (
-    <Markdown
-      markup={state.markdown}
-      renderers={{
-        CodeBlock,
-        Code: CodeBlock
-      }}
-    />
-  ) : (
-    <p>loading</p>
+  return (
+    <ReactMarkdown source={state.markdown} renderers={{ code: CodeBlock }} />
   );
-  return <main>{x}</main>;
 }
 
 export default Manual;
