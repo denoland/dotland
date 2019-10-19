@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import { Container } from "@material-ui/core";
+import SyntaxHighlighter from 'react-syntax-highlighter';
 
 const code = `import { serve } from "https://deno.land/std@v0.19.0/http/server.ts";
 const body = new TextEncoder().encode("Hello World\\n");
@@ -141,7 +142,9 @@ function App() {
         <p>Or a more complex one:</p>
 
         <pre>
-          <code class="typescript language-typescript">{code}</code>
+					<SyntaxHighlighter language="typescript">
+						{code}
+					</SyntaxHighlighter>
         </pre>
 
         <h2 id="dig-in">
