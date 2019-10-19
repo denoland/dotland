@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.5.1",
     "@material-ui/icons": "^4.5.1",
+    "eslint": "^6.5.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-scripts": "3.2.0"
@@ -14,7 +15,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write 'src/**/*.{js,ts,jsx,tsx}'"
+    "format": "prettier --write 'src/**/*.{js,ts,jsx,tsx}' 'public/**/*.html'",
+    "lint": "eslint src/"
   },
   "eslintConfig": {
     "extends": "react-app"
