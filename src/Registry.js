@@ -84,6 +84,10 @@ function Registry(params) {
     });
   });
 
+  console.log("rUrl", rUrl);
+  console.log("entry", entry);
+  console.log("entry", mod);
+
   return (
     <Box>
       <Breadcrumbs separator="/">
@@ -91,11 +95,6 @@ function Registry(params) {
           return <Link href="/">{part}</Link>;
         })}
       </Breadcrumbs>
-      <p>
-        origin <a href={rUrl}>{rUrl}</a>
-      </p>
-      <p>entry {JSON.stringify(entry)}</p>
-      <p>mod {JSON.stringify(mod)}</p>
       {/* TODO handle types other than markdown */}
       <Markdown source={state.contents} />
     </Box>
