@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    // react requirement
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    // react suggestion
+    "target": "es5",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "jsx": "react",
+    "lib": [
+        "esnext",
+        "dom",
+        "dom.iterable"
+    ],
+  },
+  "include": [
+    "src/**/*"
+  ]
+}

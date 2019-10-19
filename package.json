@@ -3,7 +3,13 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
-    "eslint": "^6.5.1"
+    "@types/react": "^16.9.9",
+    "@types/react-dom": "^16.9.2",
+    "@types/react-router-dom": "^5.1.0",
+    "@typescript-eslint/eslint-plugin": "^2.4.0",
+    "@typescript-eslint/parser": "^2.4.0",
+    "eslint": "^6.5.1",
+    "typescript": "^3.6.4"
   },
   "dependencies": {
     "@material-ui/core": "^4.5.1",
@@ -21,10 +27,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier --write '**/*.md' 'src/**/*.{js,ts,jsx,tsx}' 'public/**/*.html'",
-    "lint": "eslint src/"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "lint": "eslint src/",
+    "lint:fix": "eslint --fix src/"
   },
   "browserslist": {
     "production": [
