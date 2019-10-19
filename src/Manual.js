@@ -1,6 +1,7 @@
 // import SyntaxHighlighter from 'react-syntax-highlighter';
 import React from "react";
 import { Markdown } from "react-showdown";
+import CodeBlock from "./CodeBlock";
 import d from "./manual.md";
 
 // TODO showdown_toc
@@ -14,7 +15,13 @@ function Manual() {
     });
   });
   const x = state.markdown ? (
-    <Markdown markup={state.markdown} />
+    <Markdown
+      markup={state.markdown}
+      renderers={{
+        CodeBlock,
+        Code: CodeBlock
+      }}
+    />
   ) : (
     <p>loading</p>
   );
