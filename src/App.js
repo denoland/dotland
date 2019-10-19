@@ -11,16 +11,12 @@ function App() {
     <Router>
       <Container maxWidth="sm">
         <Switch>
-          <Route path="/manual">
-            <Manual />
-          </Route>
+          <Route path="/manual" component={Manual} />
           <Route path="/std/:stdPath" component={Registry} />
           <Route path="/std@:stdVersion/:stdPath" component={Registry} />
           <Route path="/x/:mod@:modVersion/:modPath" component={Registry} />
           <Route path="/x/:mod/:modPath" component={Registry} />
-          <Route exact path="/">
-            <Home />
-          </Route>
+          <Route exact path="/" component={Home} />
         </Switch>
       </Container>
     </Router>

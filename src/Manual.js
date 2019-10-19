@@ -1,12 +1,11 @@
 import React from "react";
-import ReactMarkdown from "react-markdown";
-import CodeBlock from "./CodeBlock";
+import Markdown from "./Markdown";
 import d from "./manual.md";
 
 // TODO showdown_toc
 
 function Manual() {
-  const [state, setState] = React.useState({ markdown: null });
+  const [state, setState] = React.useState({ markdown: "loading" });
 
   React.useEffect(() => {
     fetch(d).then(async response => {
@@ -19,11 +18,12 @@ function Manual() {
     <div>
       <a href="/">
         <img
+          alt="deno logo"
           src="https://denolib.github.io/animated-deno-logo/deno-circle-thunder.gif"
           width="200"
         />
       </a>
-      <ReactMarkdown source={state.markdown} renderers={{ code: CodeBlock }} />
+      <Markdown source={state.markdown} />
     </div>
   );
 }

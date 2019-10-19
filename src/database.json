@@ -1,0 +1,477 @@
+{
+  "abc": {
+    "type": "github",
+    "owner": "zhmushan",
+    "repo": "abc"
+  },
+  "alosaur": {
+    "type": "github",
+    "owner": "irustm",
+    "repo": "alosaur"
+  },
+  "arkoren": {
+    "type": "github",
+    "owner": "arkoren",
+    "repo": "framework"
+  },
+  "base64": {
+    "type": "github",
+    "owner": "chiefbiiko",
+    "repo": "base64"
+  },
+  "bigfloat": {
+    "type": "github",
+    "owner": "davidmartinez10",
+    "repo": "bigfloat-deno"
+  },
+  "blake2b": {
+    "type": "github",
+    "owner": "chiefbiiko",
+    "repo": "blake2b"
+  },
+  "bwt": {
+    "type": "github",
+    "owner": "chiefbiiko",
+    "repo": "bwt"
+  },
+  "bytes_formater": {
+    "type": "github",
+    "owner": "manyuanrong",
+    "repo": "bytes_formater"
+  },
+  "case": {
+    "type": "github",
+    "owner": "justjavac",
+    "repo": "deno-change-case"
+  },
+  "case_style": {
+    "type": "github",
+    "owner": "zekth",
+    "repo": "deno_case_style"
+  },
+  "cat_you": {
+    "type": "github",
+    "owner": "SuperC03",
+    "repo": "CatYou-Deno"
+  },
+  "chacha20": {
+    "type": "github",
+    "owner": "chiefbiiko",
+    "repo": "chacha20"
+  },
+  "chacha20_poly1305": {
+    "type": "github",
+    "owner": "chiefbiiko",
+    "repo": "chacha20-poly1305"
+  },
+  "chunked": {
+    "type": "github",
+    "owner": "aynik",
+    "repo": "deno-chunked"
+  },
+  "ci": {
+    "type": "github",
+    "owner": "justjavac",
+    "repo": "deno-ci"
+  },
+  "cli_spinners": {
+    "type": "github",
+    "owner": "ameerthehacker",
+    "repo": "cli-spinners"
+  },
+  "clone": {
+    "type": "github",
+    "owner": "ekaragodin",
+    "repo": "clone"
+  },
+  "collections": {
+    "type": "github",
+    "owner": "hayd",
+    "repo": "deno-collections"
+  },
+  "core": {
+    "type": "github",
+    "owner": "denoland",
+    "repo": "deno"
+  },
+  "checksum": {
+    "type": "github",
+    "owner": "manyuanrong",
+    "repo": "deno-checksum"
+  },
+  "curve25519": {
+    "type": "github",
+    "owner": "chiefbiiko",
+    "repo": "curve25519"
+  },
+  "databatcher": {
+    "type": "github",
+    "owner": "allain",
+    "repo": "deno-databatcher"
+  },
+  "date_fns": {
+    "type": "github",
+    "owner": "date-fns",
+    "repo": "date-fns",
+    "path": "src/"
+  },
+  "debuglog": {
+    "type": "github",
+    "owner": "rista404",
+    "repo": "deno-debug"
+  },
+  "dedupe": {
+    "type": "github",
+    "owner": "Sab94",
+    "repo": "dedupe"
+  },
+  "dem": {
+    "type": "github",
+    "owner": "syumai",
+    "repo": "dem"
+  },
+  "deno": {
+    "type": "github",
+    "owner": "denoland",
+    "repo": "deno"
+  },
+  "deno_init": {
+    "type": "github",
+    "owner": "maxuuell",
+    "repo": "deno_init"
+  },
+  "denoget": {
+    "type": "github",
+    "owner": "syumai",
+    "repo": "denoget"
+  },
+  "denofun": {
+    "type": "github",
+    "owner": "galkowskit",
+    "repo": "denofun"
+  },
+  "denoversion": {
+    "type": "github",
+    "owner": "lucascaro",
+    "repo": "denoversion"
+  },
+  "dejs": {
+    "type": "github",
+    "owner": "syumai",
+    "repo": "dejs"
+  },
+  "dirname": {
+    "type": "github",
+    "owner": "rsp",
+    "repo": "deno-dirname"
+  },
+  "djwt": {
+    "type": "github",
+    "owner": "timonson",
+    "repo": "djwt"
+  },
+  "docable": {
+    "type": "github",
+    "owner": "crookse",
+    "repo": "docable"
+  },
+  "dso": {
+    "type": "github",
+    "owner": "manyuanrong",
+    "repo": "dso"
+  },
+  "dotenv": {
+    "type": "github",
+    "owner": "pietvanzoen",
+    "repo": "deno-dotenv"
+  },
+  "drash": {
+    "type": "github",
+    "owner": "crookse",
+    "repo": "deno-drash"
+  },
+  "dynamodb": {
+    "type": "github",
+    "owner": "chiefbiiko",
+    "repo": "dynamodb"
+  },
+  "eaisercolors": {
+    "type": "github",
+    "owner": "herohamp",
+    "repo": "EaiserColors"
+  },
+  "easypath": {
+    "type": "github",
+    "owner": "zekth",
+    "repo": "deno_easypath"
+  },
+  "endianess": {
+    "type": "github",
+    "owner": "denolibs",
+    "repo": "endianness"
+  },
+  "escape_string_regexp": {
+    "type": "github",
+    "owner": "Sab94",
+    "repo": "escape-string-regexp"
+  },
+  "event_emitter": {
+    "type": "github",
+    "owner": "ozjd",
+    "repo": "deno_event_emitter"
+  },
+  "expect": {
+    "type": "github",
+    "owner": "allain",
+    "repo": "expect"
+  },
+  "fen": {
+    "type": "github",
+    "owner": "fen-land",
+    "repo": "deno-fen"
+  },
+  "gardens": {
+    "type": "github",
+    "owner": "partheseas",
+    "repo": "gardens"
+  },
+  "hchacha20": {
+    "type": "github",
+    "owner": "chiefbiiko",
+    "repo": "hchacha20"
+  },
+  "hmac": {
+    "type": "github",
+    "owner": "chiefbiiko",
+    "repo": "hmac"
+  },
+  "install": {
+    "type": "github",
+    "owner": "denoland",
+    "repo": "deno_install"
+  },
+  "is": {
+    "type": "github",
+    "owner": "justjavac",
+    "repo": "deno-is"
+  },
+  "jbq": {
+    "type": "github",
+    "owner": "krnik",
+    "repo": "jbq"
+  },
+  "keycode": {
+    "type": "github",
+    "owner": "kabirbaidhya",
+    "repo": "keycode-js"
+  },
+  "ky": {
+    "type": "github",
+    "owner": "sindresorhus",
+    "repo": "ky"
+  },
+  "lazy": {
+    "type": "github",
+    "owner": "luvies",
+    "repo": "lazy",
+    "path": "lib/"
+  },
+  "license_checker": {
+    "type": "github",
+    "owner": "kt3k",
+    "repo": "deno_license_checker"
+  },
+  "lodash": {
+    "type": "github",
+    "owner": "lodash",
+    "repo": "lodash"
+  },
+  "math": {
+    "type": "github",
+    "owner": "axetroy",
+    "repo": "deno_math"
+  },
+  "moment": {
+    "type": "github",
+    "owner": "lisniuse",
+    "repo": "deno_moment"
+  },
+  "minimatch": {
+    "type": "github",
+    "owner": "chrisdothtml",
+    "repo": "deno-minimatch"
+  },
+  "ms": {
+    "type": "github",
+    "owner": "denolib",
+    "repo": "ms"
+  },
+  "mysql": {
+    "type": "github",
+    "owner": "manyuanrong",
+    "repo": "deno_mysql"
+  },
+  "normalize_diacritics": {
+    "type": "github",
+    "owner": "motss",
+    "repo": "deno_mod",
+    "path": "normalize_diacritics/"
+  },
+  "oak": {
+    "type": "github",
+    "owner": "oakserver",
+    "repo": "oak"
+  },
+  "panoptes": {
+    "type": "github",
+    "owner": "TokenChingy",
+    "repo": "panoptes"
+  },
+  "parseargs": {
+    "type": "github",
+    "owner": "bartlomieju",
+    "repo": "parseargs"
+  },
+  "pbkdf2": {
+    "type": "github",
+    "owner": "chiefbiiko",
+    "repo": "pbkdf2"
+  },
+  "perlinnoise": {
+    "type": "github",
+    "owner": "herohamp",
+    "repo": "PerlinNoise-Deno"
+  },
+  "pipeline": {
+    "type": "github",
+    "owner": "Focinfi",
+    "repo": "deno-pipeline"
+  },
+  "pogo": {
+    "type": "github",
+    "owner": "sholladay",
+    "repo": "pogo"
+  },
+  "poly1305": {
+    "type": "github",
+    "owner": "chiefbiiko",
+    "repo": "poly1305"
+  },
+  "postgres": {
+    "type": "github",
+    "owner": "buildondata",
+    "repo": "deno-postgres"
+  },
+  "pretty_assert": {
+    "type": "github",
+    "owner": "bokuweb",
+    "repo": "deno-pretty-assert"
+  },
+  "purify": {
+    "type": "github",
+    "owner": "aynik",
+    "repo": "deno-purify"
+  },
+  "random_interval": {
+    "type": "github",
+    "owner": "zekth",
+    "repo": "deno_random_interval"
+  },
+  "redis": {
+    "type": "github",
+    "owner": "keroxp",
+    "repo": "deno-redis"
+  },
+  "semver": {
+    "type": "github",
+    "owner": "justjavac",
+    "repo": "deno-semver"
+  },
+  "sha1": {
+    "type": "github",
+    "owner": "chiefbiiko",
+    "repo": "sha1"
+  },
+  "sha256": {
+    "type": "github",
+    "owner": "chiefbiiko",
+    "repo": "sha256"
+  },
+  "sha512": {
+    "type": "github",
+    "owner": "chiefbiiko",
+    "repo": "sha512"
+  },
+  "siphash24": {
+    "type": "github",
+    "owner": "chiefbiiko",
+    "repo": "siphash24"
+  },
+  "slugify": {
+    "type": "github",
+    "owner": "jcardama",
+    "repo": "deno_slugify"
+  },
+  "smtp": {
+    "type": "github",
+    "owner": "manyuanrong",
+    "repo": "deno-smtp"
+  },
+  "sql_builder": {
+    "type": "github",
+    "owner": "manyuanrong",
+    "repo": "sql-builder"
+  },
+  "std": {
+    "type": "github",
+    "owner": "denoland",
+    "repo": "deno",
+    "path": "/std/"
+  },
+  "task_runner": {
+    "type": "github",
+    "owner": "jinjor",
+    "repo": "deno-task-runner"
+  },
+  "tiny_templates": {
+    "type": "github",
+    "owner": "zekth",
+    "repo": "deno_tiny_templates"
+  },
+  "tokenizer": {
+    "type": "github",
+    "owner": "eliassjogreen",
+    "repo": "deno_tokenizer"
+  },
+  "unexpected": {
+    "type": "esm",
+    "owner": "alexjeffburke",
+    "url": "https://unpkg.com/unexpected@${v}/",
+    "repo": "https://unexpected.js.org/"
+  },
+  "uuid": {
+    "type": "github",
+    "owner": "lucascaro",
+    "repo": "deno-uuid"
+  },
+  "using": {
+    "type": "github",
+    "owner": "hayd",
+    "repo": "deno-using"
+  },
+  "watch": {
+    "type": "github",
+    "owner": "jinjor",
+    "repo": "deno-watch"
+  },
+  "xchacha20": {
+    "type": "github",
+    "owner": "chiefbiiko",
+    "repo": "xchacha20"
+  },
+  "xchacha20_poly1305": {
+    "type": "github",
+    "owner": "chiefbiiko",
+    "repo": "xchacha20-poly1305"
+  }
+}
