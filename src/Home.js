@@ -23,7 +23,7 @@ function Home() {
           width="200"
         />
         <div>
-          <h1>Deno</h1>A secure runtime for JavaScript and TypeScript built with
+          <h1>Deno!!!</h1>A secure runtime for JavaScript and TypeScript built with
           V8, Rust, and Tokio
         </div>
       </header>
