@@ -158,16 +158,18 @@ function Home() {
         <a href="/typedoc/">API Reference</a>
       </p>
 
-      <p>
-        <a href="/std/">Standard Modules</a>
-      </p>
+      <p>Modules:</p>
+      <ul>
+        <li>
+          <a href="/std/">Standard</a>
+        </li>
+        <li>
+          <a href="/x/">Third Party</a>
+        </li>
+      </ul>
 
       <p>
         <a href="/style_guide">Style Guide</a>
-      </p>
-
-      <p>
-        <a href="/x/">Module repository</a>
       </p>
 
       <p>
