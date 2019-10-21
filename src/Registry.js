@@ -1,6 +1,6 @@
 import React from "react";
 import { Breadcrumbs, Box } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import assert from "assert";
 import Markdown from "./Markdown";
 import CodeBlock from "./CodeBlock";
@@ -79,10 +79,11 @@ function proxy(pathname) {
 
 function Registry(params) {
   const [state, setState] = React.useState({ contents: "loading", rUrl: null });
+  const location = useLocation();
 
   React.useEffect(
     () => {
-      const { pathname } = params.location;
+      const { pathname } = location;
       const { entry, path } = proxy(pathname);
       const rUrl = `${entry.url}${path}`;
       console.log("fetch", rUrl);
@@ -91,7 +92,7 @@ function Registry(params) {
         setState({ contents: m, rUrl });
       });
     },
-    [params.location]
+    [location]
   );
 
   let contentComponent;
@@ -107,7 +108,7 @@ function Registry(params) {
   return (
     <Box>
       <Breadcrumbs separator="/">
-        {params.location.pathname.split("/").map((part, i) => {
+        {location.pathname.split("/").map((part, i) => {
           // TODO(ry) Fix link destination in breadcrumbs.
           return (
             <Link to="/" key={i}>
