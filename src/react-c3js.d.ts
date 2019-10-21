@@ -1,1 +1,1 @@
-declare module 'react-c3js';
+declare module "react-c3js";
