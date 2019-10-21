@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import Manual from "./Manual";
 import Home from "./Home";
 import Registry from "./Registry";
