@@ -101,9 +101,7 @@ function Home() {
         </tbody>
       </table>
 
-      <h2 id="install">
-        Install <a href="#install">#</a>
-      </h2>
+      <h2 id="install">Install</h2>
 
       <p>Using Shell:</p>
       <pre>
@@ -139,9 +137,7 @@ function Home() {
         for more installation options.
       </p>
 
-      <h2 id="example">
-        Example <a href="#example">#</a>
-      </h2>
+      <h2 id="example">Example</h2>
 
       <p>Try running a simple program:</p>
       <pre>deno https://deno.land/welcome.ts</pre>
@@ -150,9 +146,7 @@ function Home() {
 
       <SyntaxHighlighter language="typescript">{code}</SyntaxHighlighter>
 
-      <h2 id="dig-in">
-        Dig in... <a href="#dig-in">#</a>
-      </h2>
+      <h2 id="dig-in">Dig in...</h2>
 
       <p>
         <b>
@@ -165,7 +159,7 @@ function Home() {
       </p>
 
       <p>
-        <a href="/std">Standard Modules</a>
+        <a href="/std/">Standard Modules</a>
       </p>
 
       <p>
@@ -173,7 +167,7 @@ function Home() {
       </p>
 
       <p>
-        <a href="/x">Module repository</a>
+        <a href="/x/">Module repository</a>
       </p>
 
       <p>
