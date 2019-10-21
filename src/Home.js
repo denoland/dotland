@@ -108,7 +108,7 @@ function Home() {
       <p>Using Shell:</p>
       <pre>
         curl -fsSL{" "}
-        <a href="https://deno.land/x/install/install.sh">
+        <a href="/x/install/install.sh">
           https://deno.land/x/install/install.sh
         </a>{" "}
         | sh
@@ -116,7 +116,7 @@ function Home() {
       <p>Or using PowerShell:</p>
       <pre>
         iwr{" "}
-        <a href="https://deno.land/x/install/install.ps1">
+        <a href="/x/install/install.ps1">
           https://deno.land/x/install/install.ps1
         </a>{" "}
         -useb | iex
@@ -161,19 +161,19 @@ function Home() {
       </p>
 
       <p>
-        <a href="https://deno.land/typedoc/">API Reference</a>
+        <a href="/typedoc/">API Reference</a>
       </p>
 
       <p>
-        <a href="https://deno.land/std/">Standard Modules</a>
+        <a href="/std">Standard Modules</a>
       </p>
 
       <p>
-        <a href="style_guide.html">Style Guide</a>
+        <a href="/style_guide">Style Guide</a>
       </p>
 
       <p>
-        <a href="https://deno.land/x/">Module repository</a>
+        <a href="/x">Module repository</a>
       </p>
 
       <p>
@@ -191,7 +191,7 @@ function Home() {
       </p>
 
       <p>
-        <a href="benchmarks.html">Benchmarks</a>
+        <a href="/benchmarks">Benchmarks</a>
       </p>
 
       <p>
