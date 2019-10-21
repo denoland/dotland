@@ -4,6 +4,7 @@ import StyleGuide from "./StyleGuide";
 import Home from "./Home";
 import Registry from "./Registry";
 import NotFound from "./NotFound";
+import Benchmarks from "./Benchmarks";
 import { Container } from "@material-ui/core";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -12,6 +13,7 @@ function App() {
     <Router>
       <Container maxWidth="sm">
         <Switch>
+          <Route path="/benchmarks(.html)?" component={Benchmarks} />
           <Route path="/manual(.html)?" component={Manual} />
           <Route path="/style_guide(.html)?" component={StyleGuide} />
           <Route path="/std/:stdPath" component={Registry} />
