@@ -1,5 +1,6 @@
 import React from "react";
 import Manual from "./Manual";
+import StyleGuide from "./StyleGuide";
 import Home from "./Home";
 import Registry from "./Registry";
 import NotFound from "./NotFound";
@@ -12,6 +13,7 @@ function App() {
       <Container maxWidth="sm">
         <Switch>
           <Route path="/manual(.html)?" component={Manual} />
+          <Route path="/style_guide(.html)?" component={StyleGuide} />
           <Route path="/std/:stdPath" component={Registry} />
           <Route path="/std@:stdVersion/:stdPath" component={Registry} />
           <Route path="/x/:mod@:modVersion/:modPath" component={Registry} />
