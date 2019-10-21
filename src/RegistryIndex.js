@@ -7,7 +7,7 @@ export default function RegistryIndex(params) {
       <a href="/">
         <img alt="deno logo" src="/images/deno_logo_4.gif" width="200" />
       </a>
-      <h1>Deno Modules</h1>
+      <h1>Third Party Modules</h1>
 
       <p>This is a code hosting service for Deno scripts.</p>
 
@@ -19,27 +19,13 @@ export default function RegistryIndex(params) {
 
       <p>
         Functionality built-in to Deno is not listed here. The built-in runtime
-        is documented at{" "}
-        <a href="https://deno.land/typedoc/">deno.land/typedoc</a> and in{" "}
-        <a href="https://deno.land/manual.html">the manual</a>.
+        is documented at <a href="/typedoc/">deno.land/typedoc</a> and in{" "}
+        <a href="/manual">the manual</a>.
       </p>
-
-      <h2>Standard</h2>
 
       <p>
-        <a href="https://deno.land/std/README.md">deno.land/std</a>
+        See <a href="/std/README.md">/std</a> for the standard modules.
       </p>
-      <ul>
-        <li>maintained by the Deno authors,</li>
-        <li>have no external dependencies,</li>
-        <li>are MIT or Apache licensed, and</li>
-        <li>
-          conform to{" "}
-          <a href="https://deno.land/style_guide.html">the style guide</a>.
-        </li>
-      </ul>
-
-      <h2 id="modules">Third Party</h2>
 
       <p>
         To add to this list, edit{" "}
@@ -51,14 +37,14 @@ export default function RegistryIndex(params) {
 
       <p>{Object.entries(DATABASE).length} third party modules:</p>
 
-      <ul class="modules">
+      <ul>
         {Object.keys(DATABASE)
           .sort((nameA, nameB) => nameA.localeCompare(nameB))
-          .map(name => {
+          .map((name, i) => {
             const entry = getEntry(name);
-            const link = `./${name}/`;
+            const link = `/x/${name}/`;
             return (
-              <li>
+              <li key={i}>
                 <a href={link}>{name}</a> (<a href={entry.repo}>repo</a>)
               </li>
             );
