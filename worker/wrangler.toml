@@ -1,0 +1,20 @@
+account_id = "895762025d37fc687ecd72d7cc80204a"
+zone_id = "c192cf8ac042c681023493c52edd44c8"
+
+name = "worker-dev"
+type = "webpack"
+
+route = "dev.deno.land/*"
+
+# top level configruation
+workers_dot_dev = true
+
+# environment configuration
+[env.staging]
+name = "worker-staging"
+route = "staging.deno.land/*"
+
+# environment configuration
+[env.production]
+name = "worker"
+route = "deno.land/*"

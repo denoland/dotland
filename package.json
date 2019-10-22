@@ -22,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write '**/*.md' 'src/**/*.{js,ts,jsx,tsx}' 'public/**/*.html'",
+    "format": "prettier --write '**/*.md' '{worker,src}/**/*.{js,ts,jsx,tsx}' 'public/**/*.html'",
     "lint": "eslint src/"
   },
   "eslintConfig": {

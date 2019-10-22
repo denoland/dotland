@@ -1,4 +1,33 @@
+import assert from "assert";
 export const DATABASE = require("./database.json");
+
+export function proxy(pathname) {
+  if (pathname.startsWith("/std")) {
+    console.log("proxy", pathname);
+    return proxy("/x" + pathname);
+  }
+  if (!pathname.startsWith("/x/")) {
+    return null;
+  }
+
+  const nameBranchRest = pathname.replace(/^\/x\//, "");
+  console.log("nameBranchRest", nameBranchRest);
+  let [nameBranch, ...rest] = nameBranchRest.split("/");
+  let [name, branch] = nameBranch.split("@", 2);
+
+  const path = rest.join("/");
+
+  console.log("getEntry", { name, branch, path });
+  const entry = getEntry(name, branch);
+
+  if (!entry || !entry.url) {
+    return null;
+  }
+
+  assert(entry.url.endsWith("/"));
+  assert(!path.startsWith("/"));
+  return { entry, path };
+}
 
 /**
  * Pull an entry from the database
