@@ -5,35 +5,7 @@ import assert from "assert";
 import Markdown from "./Markdown";
 import CodeBlock from "./CodeBlock";
 import PathBreadcrumbs from "./PathBreadcrumbs";
-import { getEntry } from "./registry_utils";
-
-function proxy(pathname) {
-  if (pathname.startsWith("/std")) {
-    console.log("proxy", pathname);
-    return proxy("/x" + pathname);
-  }
-  if (!pathname.startsWith("/x/")) {
-    return null;
-  }
-
-  const nameBranchRest = pathname.replace(/^\/x\//, "");
-  console.log("nameBranchRest", nameBranchRest);
-  let [nameBranch, ...rest] = nameBranchRest.split("/");
-  let [name, branch] = nameBranch.split("@", 2);
-
-  const path = rest.join("/");
-
-  console.log("getEntry", { name, branch, path });
-  const entry = getEntry(name, branch);
-
-  if (!entry || !entry.url) {
-    return null;
-  }
-
-  assert(entry.url.endsWith("/"));
-  assert(!path.startsWith("/"));
-  return { entry, path };
-}
+import { proxy, getEntry } from "./registry_utils";
 
 export default function Registry(params) {
   const [state, setState] = React.useState({ contents: "loading", rUrl: null });
