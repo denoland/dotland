@@ -7,7 +7,7 @@ import RegistryIndex from "./RegistryIndex";
 import NotFound from "./NotFound";
 import PathBreadcrumbs from "./PathBreadcrumbs";
 import Benchmarks from "./Benchmarks";
-import { Container, Box } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {

@@ -39,7 +39,7 @@ export function getEntry(name, branch = "master") {
   // denoland/deno_std was merged into denoland/deno. For a while we will try
   // to maintain old links for backwards compatibility with denoland/deno_std
   // but eventually tags before v0.20.0 will break.
-  if (name == "std" && !(branch == "master" || branch == "v0.21.0")) {
+  if (name === "std" && !(branch === "master" || branch.startsWith("v0.2"))) {
     name = "std_old";
   }
 

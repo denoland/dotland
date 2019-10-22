@@ -41,8 +41,7 @@ export default function Registry(params) {
   if (state.dir) {
     const entries = [];
     for (let d of state.dir) {
-      const hasExtension = d.name.indexOf(".") >= 1;
-      const name = hasExtension ? d.name : d.name + "/";
+      const name = d.type !== "dir" ? d.name : d.name + "/";
       entries.push(
         <tr>
           <td>{d.type}</td>
