@@ -428,6 +428,11 @@
     "repo": "deno",
     "path": "/std/"
   },
+  "std_old": {
+    "type": "github",
+    "owner": "denoland",
+    "repo": "deno_std"
+  },
   "task_runner": {
     "type": "github",
     "owner": "jinjor",
