@@ -5,6 +5,7 @@ import Home from "./Home";
 import Registry from "./Registry";
 import RegistryIndex from "./RegistryIndex";
 import NotFound from "./NotFound";
+import PathBreadcrumbs from "./PathBreadcrumbs";
 import Benchmarks from "./Benchmarks";
 import { Container } from "@material-ui/core";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -13,6 +14,7 @@ function App() {
   return (
     <Router>
       <Container maxWidth="sm">
+        <PathBreadcrumbs />
         <Switch>
           <Route path="/benchmarks(.html)?" component={Benchmarks} />
           <Route path="/manual(.html)?" component={Manual} />

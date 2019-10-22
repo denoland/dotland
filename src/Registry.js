@@ -1,11 +1,9 @@
 import React from "react";
 import { Box } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
-import assert from "assert";
 import Markdown from "./Markdown";
 import CodeBlock from "./CodeBlock";
-import PathBreadcrumbs from "./PathBreadcrumbs";
-import { proxy, getEntry } from "./registry_utils";
+import { proxy } from "./registry_utils";
 
 export default function Registry(params) {
   const [state, setState] = React.useState({ contents: "loading", rUrl: null });
@@ -38,10 +36,5 @@ export default function Registry(params) {
     }
   }
 
-  return (
-    <Box>
-      <PathBreadcrumbs />
-      {contentComponent}
-    </Box>
-  );
+  return <Box>{contentComponent}</Box>;
 }
