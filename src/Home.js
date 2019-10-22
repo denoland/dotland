@@ -1,5 +1,5 @@
 import React from "react";
-import SyntaxHighlighter from "react-syntax-highlighter";
+import CodeBlock from "./CodeBlock";
 import { Link } from "react-router-dom";
 
 const code = `import { serve } from "https://deno.land/std@v0.19.0/http/server.ts";
@@ -144,7 +144,7 @@ function Home() {
 
       <p>Or a more complex one:</p>
 
-      <SyntaxHighlighter language="typescript">{code}</SyntaxHighlighter>
+      <CodeBlock language={"typescript"} value={code} />
 
       <h2 id="dig-in">Dig in...</h2>
 
