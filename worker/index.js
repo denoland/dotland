@@ -2,6 +2,7 @@ import { proxy } from '../src/registry_utils'
 
 // const REMOTE_URL = "https://deno.land";
 const REMOTE_URL = 'https://denoland.netlify.com'
+const S3_REMOTE_URL = 'http://deno.land.s3-website-us-east-1.amazonaws.com'
 
 addEventListener('fetch', event => {
   console.log('proxy', proxy)
@@ -18,15 +19,20 @@ async function handleRequest(request) {
   const maybeProxyElsewhere =
     url.pathname.startsWith('/std') || url.pathname.startsWith('/x')
 
+  // TODO(ry) Support docs without hitting S3...
+  if (url.pathname.startsWith('/typedoc')) {
+    return redirect(url, S3_REMOTE_URL, request)
+  }
+
   if (isHtml) {
-    return redirect(url, request)
+    return redirect(url, REMOTE_URL, request)
   }
 
   if (!maybeProxyElsewhere) {
-    return redirect(url, request)
+    return redirect(url, REMOTE_URL, request)
   }
 
-  console.log('serve up text?', url.pathname)
+  console.log('serve up text', url.pathname)
   let { entry, path } = proxy(url.pathname)
   if (!entry) {
     return new Response('Not in database.json ' + url.pathname, {
@@ -40,13 +46,12 @@ async function handleRequest(request) {
   return fetch(rUrl)
 }
 
-function redirect(url, request) {
+function redirect(url, remote_url, request) {
   const init = {
     method: request.method,
     headers: request.headers,
   }
-  const urlR = REMOTE_URL + url.pathname
-  console.log('url', urlR)
+  const urlR = remote_url + url.pathname
   console.log(`Proxy ${url} to ${urlR}`)
   const modifiedRequest = new Request(urlR, init)
   return fetch(modifiedRequest)
