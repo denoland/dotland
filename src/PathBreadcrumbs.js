@@ -1,27 +1,43 @@
 import React from "react";
-import { Breadcrumbs } from "@material-ui/core";
+import { Box, Breadcrumbs } from "@material-ui/core";
 import { Link, useLocation } from "react-router-dom";
+import assert from "assert";
 
 export default function PathBreadcrumbs() {
   const location = useLocation();
-  const parts = location.pathname.split("/").slice(1);
+  const parts = location.pathname.split("/");
 
   return (
-    <Breadcrumbs separator="/">
-      <span /> {/* Empty one so it starts with / */}
-      {parts.map((part, i) => {
-        const last = i === parts.length - 1;
-        let url = "/" + parts.slice(0, i + 1).join("/");
-        if (!last || location.pathname.endsWith("/")) {
-          url += "/";
-        }
-        console.log({ parts, url });
-        return (
-          <Link to={url} key={i}>
-            {part}
-          </Link>
-        );
-      })}
-    </Breadcrumbs>
+    <Box my={3}>
+      <Breadcrumbs separator="/">
+        {parts.map((part, i) => {
+          console.log({ part, i });
+          if (i === 0) {
+            assert(!part);
+            return (
+              <Link to="/" key={i}>
+                deno.land
+              </Link>
+            );
+          }
+
+          const last = i === parts.length - 1;
+          if (last || !parts[i + 1]) {
+            return <span key={i}>{part}</span>;
+          }
+
+          let url = parts.slice(0, i + 1).join("/");
+          if (location.pathname.endsWith("/")) {
+            url += "/";
+          }
+          console.log({ parts, url });
+          return (
+            <Link to={url} key={i}>
+              {part}
+            </Link>
+          );
+        })}
+      </Breadcrumbs>
+    </Box>
   );
 }
