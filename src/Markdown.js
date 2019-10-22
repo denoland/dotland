@@ -5,7 +5,13 @@ import CodeBlock from "./CodeBlock";
 const renderers = { code: CodeBlock };
 
 function Markdown(props) {
-  return <ReactMarkdown source={props.source} renderers={renderers} />;
+  return (
+    <ReactMarkdown
+      source={props.source}
+      renderers={renderers}
+      escapeHtml={false}
+    />
+  );
 }
 
 export default Markdown;
