@@ -27,7 +27,9 @@ export default function PathBreadcrumbs() {
           }
 
           let url = parts.slice(0, i + 1).join("/");
-          if (location.pathname.endsWith("/")) {
+
+          // Always add a trailing slash to dir URLs.
+          if (!last && !url.endsWith("/")) {
             url += "/";
           }
           console.log({ parts, url });
