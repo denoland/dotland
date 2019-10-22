@@ -29,7 +29,6 @@ export function proxy(pathname) {
   return { entry, path };
 }
 
-
 /**
  * Pull an entry from the database
  * @param  {string} name
