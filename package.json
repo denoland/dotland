@@ -18,6 +18,7 @@
     "typescript": "^3.6.4"
   },
   "scripts": {
+    "publish": "cd worker && wrangler publish --env=production",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
