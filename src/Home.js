@@ -48,7 +48,7 @@ function Home() {
               >
                 <img
                   alt="deno ci badge"
-                  src="https://github.com/denoland/deno/workflows/build/badge.svg"
+                  src="https://github.com/denoland/deno/workflows/build/badge.svg?branch=master"
                 />
               </a>
             </td>
