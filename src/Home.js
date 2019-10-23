@@ -2,7 +2,7 @@ import React from "react";
 import CodeBlock from "./CodeBlock";
 import { Link } from "react-router-dom";
 
-const code = `import { serve } from "https://deno.land/std@v0.19.0/http/server.ts";
+const code = `import { serve } from "https://deno.land/std@v0.21.0/http/server.ts";
 const body = new TextEncoder().encode("Hello World\\n");
 const s = serve(":8000");
 window.onload = async () => {
@@ -140,7 +140,7 @@ function Home() {
       <h2 id="example">Example</h2>
 
       <p>Try running a simple program:</p>
-      <pre>deno https://deno.land/welcome.ts</pre>
+      <pre>deno https://deno.land/std/examples/welcome.ts</pre>
 
       <p>Or a more complex one:</p>
 
