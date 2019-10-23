@@ -68,9 +68,10 @@ export default function Registry(params) {
 async function renderDir(pathname, entry) {
   console.log({ pathname, entry });
   if (entry.raw.type === "github") {
-    const url = `https://api.github.com/repos/${entry.raw.owner}/${
-      entry.raw.repo
-    }/contents/${entry.raw.path}${pathname}?ref=${entry.branch}`;
+    const owner = entry.raw.owner;
+    const repo = entry.raw.repo;
+    const path = [entry.raw.path, pathname].join('');
+    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${entry.branch}`;
     console.log("renderDir", url);
     const res = await fetch(url, {
       headers: {
