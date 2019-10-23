@@ -230,6 +230,12 @@
     "owner": "fen-land",
     "repo": "deno-fen"
   },
+  "fiona": {
+    "type": "github",
+    "owner": "billymoon",
+    "repo": "fiona",
+    "path": "src/"
+  },
   "gardens": {
     "type": "github",
     "owner": "partheseas",
