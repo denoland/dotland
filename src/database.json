@@ -217,8 +217,8 @@
   },
   "event_emitter": {
     "type": "github",
-    "owner": "ozjd",
-    "repo": "deno_event_emitter"
+    "owner": "denolibs",
+    "repo": "event_emitter"
   },
   "expect": {
     "type": "github",
