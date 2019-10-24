@@ -1,5 +1,6 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
+import toc from "remark-toc";
 import CodeBlock from "./CodeBlock";
 
 function flatten(text, child) {
@@ -31,7 +32,13 @@ function HeadingRenderer(props) {
 const renderers = { code: CodeBlock, heading: HeadingRenderer };
 
 function Markdown(props) {
-  return <ReactMarkdown source={props.source} renderers={renderers} />;
+  return (
+    <ReactMarkdown
+      source={props.source}
+      renderers={renderers}
+      plugins={[toc]}
+    />
+  );
 }
 
 export default Markdown;

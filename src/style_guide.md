@@ -2,23 +2,6 @@
 
 ## Table of Contents
 
-- [Use TypeScript](#use-typescript)
-- [Use the term "module" instead of "library" or "package"](#use-the-term-module-instead-of-library-or-package)
-- [Do not use the filename `index.ts` nor `index.js`](#do-not-use-the-filename-indexts-nor-indexjs)
-- [Within `deno_std`, do not depend on external code](#within-deno_std-do-not-depend-on-external-code)
-- [Within `deno_std`, minimize dependencies; do not make circular imports.](#within-deno_std-minimize-dependencies-do-not-make-circular-imports)
-- [For consistency, use underscores, not dashes in filenames.](#for-consistency-use-underscores-not-dashes-in-filenames)
-- [Format code using prettier.](#format-code-using-prettier)
-- [Exported functions: max 2 args, put the rest into an options object.](#exported-functions-max-2-args-put-the-rest-into-an-options-object)
-- [TODO Comments](#todo-comments)
-- [Copyright headers](#copyright-headers)
-- [Top level functions should not use arrow syntax](#top-level-functions-should-not-use-arrow-syntax)
-- [Meta-programming is discouraged. Including the use of Proxy.](#meta-programming-is-discouraged-including-the-use-of-proxy)
-- [If a filename starts with underscore, do not link to it: `_foo.ts`](#if-a-filename-starts-with-underscore-do-not-link-to-it-_foots)
-- [Use JSDoc to document exported machinery](#use-jsdoc-to-document-exported-machinery)
-- [Each module should come with tests](#each-module-should-come-with-tests)
-- [Unit Tests should be explicit](#unit-tests-should-be-explicit)
-
 ## Use TypeScript
 
 ## Use the term "module" instead of "library" or "package"
