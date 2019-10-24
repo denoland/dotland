@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
-    "eslint": "^6.5.1"
+    "eslint": "^6.5.1",
+    "markdown-toc": "^1.2.0"
   },
   "dependencies": {
     "@material-ui/core": "^4.5.1",
