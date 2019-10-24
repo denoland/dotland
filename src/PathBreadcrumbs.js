@@ -5,6 +5,12 @@ import assert from "assert";
 
 export default function PathBreadcrumbs() {
   const location = useLocation();
+
+  // Don't show breadcrumbs on root page.
+  if (location.pathname === "/") {
+    return null;
+  }
+
   const parts = location.pathname.split("/");
 
   return (
