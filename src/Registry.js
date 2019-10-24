@@ -15,7 +15,7 @@ export default function Registry(params) {
 
   React.useEffect(() => {
     const { pathname } = location;
-    let { entry, path } = proxy(pathname);
+    const { entry, path } = proxy(pathname);
     console.log({ path });
     if (!path || path.endsWith("/")) {
       // Render dir.
@@ -37,7 +37,7 @@ export default function Registry(params) {
   let contentComponent;
   if (state.dir) {
     const entries = [];
-    for (let d of state.dir) {
+    for (const d of state.dir) {
       const name = d.type !== "dir" ? d.name : d.name + "/";
       entries.push(
         <tr>

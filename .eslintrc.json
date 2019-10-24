@@ -9,7 +9,9 @@
   "extends": [
     "plugin:@typescript-eslint/recommended",
     "prettier",
-    "prettier/@typescript-eslint"
+    "prettier/@typescript-eslint",
+    "eslint:recommended",
+    "plugin:react/recommended"
   ],
   "rules": {
     "@typescript-eslint/array-type": ["error", { "default": "array-simple" }],
