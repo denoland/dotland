@@ -3,7 +3,7 @@ zone_id = "c192cf8ac042c681023493c52edd44c8"
 
 # shared
 type = "webpack"
-webpack_config = "worker/webpack.config.js"
+webpack_config = "worker_webpack.config.js"
 
 
 # default dev environment
