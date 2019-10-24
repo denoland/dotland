@@ -23,7 +23,7 @@ jobs:
           apiKey: ${{ secrets.cloudflareKey }}
           email: ${{ secrets.email }}
       - name: Publish Staging
-        if: github.event_name == 'pull_request' && github.repository == 'denoland/deno_website2'
+        if: github.event_name == 'push' && github.repository == 'denoland/deno_website2'
         uses: cloudflare/wrangler-action@1.0.0
         with:
           environment: 'staging'
