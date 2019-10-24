@@ -2,6 +2,13 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import toc from "remark-toc";
 import CodeBlock from "./CodeBlock";
+import htmlParser from "react-markdown/plugins/html-parser";
+
+// We want to allow HTML in markdown, but not anything unsafe like script tags.
+// https://github.com/aknuds1/html-to-react#with-custom-processing-instructions
+const parseHtml = htmlParser({
+  isValidNode: (node: any) => node.type !== "script"
+});
 
 function flatten(text: any, child: any) {
   return typeof child === "string"
@@ -42,6 +49,8 @@ function Markdown(props: Props) {
       source={props.source}
       renderers={renderers}
       plugins={[toc]}
+      escapeHtml={false}
+      astPlugins={[parseHtml]}
     />
   );
 }
