@@ -1,7 +1,7 @@
 import React from "react";
 import { DATABASE, getEntry } from "./registry_utils";
 
-export default function RegistryIndex(params) {
+export default function RegistryIndex() {
   return (
     <main>
       <a href="/">

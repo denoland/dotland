@@ -1,5 +1,5 @@
 import assert from "assert";
-export const DATABASE = require("./database.json");
+import DATABASE from "./database.json";
 
 export function proxy(pathname) {
   if (pathname.startsWith("/std")) {

@@ -5,7 +5,7 @@ import Markdown from "./Markdown";
 import CodeBlock from "./CodeBlock";
 import { proxy } from "./registry_utils";
 
-export default function Registry(params) {
+export default function Registry() {
   const [state, setState] = React.useState({
     contents: "loading",
     rUrl: null,

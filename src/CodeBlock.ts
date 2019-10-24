@@ -2,7 +2,11 @@ import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import theme from "react-syntax-highlighter/dist/esm/styles/hljs/github-gist";
 
-function CodeBlock(props) {
+interface Props {
+  language: string;
+}
+
+function CodeBlock(props: Props) {
   return (
     <SyntaxHighlighter style={theme} language={props.language || "js"}>
       {props.value}

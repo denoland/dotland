@@ -4,7 +4,10 @@
     "allowUnreachableCode": false,
     "baseUrl": ".",
     "checkJs": true,
-    "lib": ["esnext"],
+    "lib": [
+      "dom",
+      "esnext"
+    ],
     "module": "esnext",
     "moduleResolution": "node",
     "noImplicitReturns": true,
@@ -18,6 +21,15 @@
     "strict": true,
     "target": "esnext",
     "jsx": "react",
-    "types": []
-  }
+    "types": [],
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "noEmit": true
+  },
+  "include": [
+    "src"
+  ]
 }

@@ -21,7 +21,11 @@ function slugify(text) {
   return text;
 }
 
-function HeadingRenderer(props) {
+interface Props {
+  source: string;
+}
+
+function HeadingRenderer(props: Props) {
   const children = React.Children.toArray(props.children);
   const text = children.reduce(flatten, "");
   const id = slugify(text);
@@ -30,7 +34,7 @@ function HeadingRenderer(props) {
 
 const renderers = { code: CodeBlock, heading: HeadingRenderer };
 
-function Markdown(props) {
+function Markdown(props: Props) {
   return (
     <ReactMarkdown
       source={props.source}
