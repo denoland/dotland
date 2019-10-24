@@ -9,8 +9,7 @@ function flatten(text, child) {
     : React.Children.toArray(child.props.children).reduce(flatten, text);
 }
 
-// Using logic from markdown-toc
-const slugify = text => {
+function slugify(text) {
   text = text.toLowerCase();
   text = text.split(" ").join("-");
   text = text.split(/\t/).join("--");
@@ -23,10 +22,10 @@ const slugify = text => {
 };
 
 function HeadingRenderer(props) {
-  var children = React.Children.toArray(props.children);
-  var text = children.reduce(flatten, "");
-  var slug = slugify(text);
-  return React.createElement("h" + props.level, { id: slug }, props.children);
+  const children = React.Children.toArray(props.children);
+  const text = children.reduce(flatten, "");
+  const id = slugify(text);
+  return React.createElement("h" + props.level, { id }, props.children);
 }
 
 const renderers = { code: CodeBlock, heading: HeadingRenderer };
