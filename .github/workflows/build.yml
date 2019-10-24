@@ -12,9 +12,9 @@ jobs:
           node-version: 12
       - run: yarn --frozen-lockfile
       - run: yarn run lint
+      #
       # TODO(ry) tests!
-      - run: yarn run publish_prod
-
+      #
       - name: Publish Production
         if: github.ref == 'refs/heads/master'
         uses: cloudflare/wrangler-action@1.0.0
