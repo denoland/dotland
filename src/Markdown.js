@@ -19,7 +19,7 @@ function slugify(text) {
     .join("");
 
   return text;
-};
+}
 
 function HeadingRenderer(props) {
   const children = React.Children.toArray(props.children);
