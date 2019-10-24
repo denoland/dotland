@@ -16,14 +16,14 @@ jobs:
       # TODO(ry) tests!
       #
       - name: Publish Production
-        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push' && github.repository == 'denoland/deno_website2'
         uses: cloudflare/wrangler-action@1.0.0
         with:
           environment: 'production'
           apiKey: ${{ secrets.cloudflareKey }}
           email: ${{ secrets.email }}
       - name: Publish Staging
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && github.repository == 'denoland/deno_website2'
         uses: cloudflare/wrangler-action@1.0.0
         with:
           environment: 'staging'
