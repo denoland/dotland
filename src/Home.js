@@ -150,7 +150,7 @@ function Home() {
 
       <p>
         <b>
-          <Link to="/manual">Manual</Link>
+          <Link to="/std/manual.md">Manual</Link>
         </b>
       </p>
 
@@ -169,7 +169,7 @@ function Home() {
       </ul>
 
       <p>
-        <a href="/style_guide">Style Guide</a>
+        <a href="/std/style_guide.md">Style Guide</a>
       </p>
 
       <p>
