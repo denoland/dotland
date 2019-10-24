@@ -45,7 +45,10 @@ export function getEntry(name, branch = "master") {
       branch === "v0.17.0" ||
       branch === "v0.18.0" ||
       branch === "v0.19.0" ||
-      branch === "v0.20.0")
+      branch === "v0.20.0" ||
+      branch.startsWith("8c90bd") ||
+      branch.startsWith("17a214") ||
+      branch.startsWith("6958a4"))
   ) {
     name = "std_old";
   }
