@@ -13,29 +13,26 @@ export default function Registry(params) {
   });
   const location = useLocation();
 
-  React.useEffect(
-    () => {
-      const { pathname } = location;
-      let { entry, path } = proxy(pathname);
-      console.log({ path });
-      if (!path || path.endsWith("/")) {
-        // Render dir.
-        renderDir(path, entry).then(dir => {
-          console.log({ dir });
-          setState({ dir });
-        });
-      } else {
-        // Render file.
-        const rUrl = `${entry.url}${path}`;
-        console.log("fetch", rUrl);
-        fetch(rUrl).then(async response => {
-          const m = await response.text();
-          setState({ contents: m, rUrl });
-        });
-      }
-    },
-    [location]
-  );
+  React.useEffect(() => {
+    const { pathname } = location;
+    let { entry, path } = proxy(pathname);
+    console.log({ path });
+    if (!path || path.endsWith("/")) {
+      // Render dir.
+      renderDir(path, entry).then(dir => {
+        console.log({ dir });
+        setState({ dir });
+      });
+    } else {
+      // Render file.
+      const rUrl = `${entry.url}${path}`;
+      console.log("fetch", rUrl);
+      fetch(rUrl).then(async response => {
+        const m = await response.text();
+        setState({ contents: m, rUrl });
+      });
+    }
+  }, [location]);
 
   let contentComponent;
   if (state.dir) {
@@ -71,9 +68,7 @@ async function renderDir(pathname, entry) {
     const owner = entry.raw.owner;
     const repo = entry.raw.repo;
     const path = [entry.raw.path, pathname].join("");
-    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${
-      entry.branch
-    }`;
+    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${entry.branch}`;
     console.log("renderDir", url);
     const res = await fetch(url, {
       headers: {

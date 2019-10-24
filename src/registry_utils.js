@@ -12,7 +12,7 @@ export function proxy(pathname) {
 
   const nameBranchRest = pathname.replace(/^\/x\//, "");
   console.log("nameBranchRest", nameBranchRest);
-  let [nameBranch, ...rest] = nameBranchRest.split("/");
+  var [nameBranch, ...rest] = nameBranchRest.split("/");
   let [name, branch] = nameBranch.split("@", 2);
 
   const path = rest.join("/");
