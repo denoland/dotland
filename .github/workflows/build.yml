@@ -1,0 +1,19 @@
+name: build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: yarn --frozen-lockfile
+      - run: yarn run lint
+      # TODO(ry) tests!
+      - run: yarn run publish_prod
+        if: github.ref == 'refs/heads/master'
+      - run: yarn run publish_staging
+        if: github.ref != 'refs/heads/master'
