@@ -10,8 +10,5 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: yarn --frozen-lockfile --ignore-engines --ignore-optional --no-bin-links --non-interactive --silent --ignore-scripts --production=false
-      - uses: tinovyatkin/action-eslint@v1
-        with:
-          repo-token: ${{secrets.GITHUB_TOKEN}}
-          check-name: eslint
+      - run: yarn --frozen-lockfile
+      - run: yarn run lint
