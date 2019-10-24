@@ -14,6 +14,18 @@ jobs:
       - run: yarn run lint
       # TODO(ry) tests!
       - run: yarn run publish_prod
+
+			- name: Publish Production
         if: github.ref == 'refs/heads/master'
-      - run: yarn run publish_staging
+        uses: cloudflare/wrangler-action@1.0.0
+        with:
+        	environment: 'production'
+          apiKey: ${{ secrets.apiKey }}
+          email: ${{ secrets.email }}
+			- name: Publish Staging
         if: github.ref != 'refs/heads/master'
+        uses: cloudflare/wrangler-action@1.0.0
+        with:
+        	environment: 'staging'
+          apiKey: ${{ secrets.apiKey }}
+          email: ${{ secrets.email }}
