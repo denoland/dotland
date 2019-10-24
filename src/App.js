@@ -1,6 +1,4 @@
 import React from "react";
-import Manual from "./Manual";
-import StyleGuide from "./StyleGuide";
 import Home from "./Home";
 import Registry from "./Registry";
 import RegistryIndex from "./RegistryIndex";
@@ -8,17 +6,21 @@ import NotFound from "./NotFound";
 import PathBreadcrumbs from "./PathBreadcrumbs";
 import Benchmarks from "./Benchmarks";
 import { Container } from "@material-ui/core";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Redirect, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <Container maxWidth="md">
         <PathBreadcrumbs />
         <Switch>
           <Route path="/benchmarks(.html)?" component={Benchmarks} />
-          <Route path="/manual(.html)?" component={Manual} />
-          <Route path="/style_guide(.html)?" component={StyleGuide} />
+          <Route path="/manual(.html)?">
+            <Redirect to="/std/manual.md" />
+          </Route>
+          <Route path="/style_guide(.html)?">
+            <Redirect to="/std/style_guide.md" />
+          </Route>
           <Route path="/std/:stdPath" component={Registry} />
           <Route path="/std/" component={Registry} />
           <Route path="/std@:stdVersion/:stdPath" component={Registry} />
@@ -31,7 +33,7 @@ function App() {
           <Route path="*" component={NotFound} />
         </Switch>
       </Container>
-    </Router>
+    </BrowserRouter>
   );
 }
 
