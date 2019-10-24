@@ -1,6 +1,6 @@
 # Deno Manual
 
-[toc]
+## Table of Contents
 
 ## Disclaimer
 

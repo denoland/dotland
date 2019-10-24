@@ -15,6 +15,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "react-syntax-highlighter": "^11.0.2",
+    "remark-toc": "^6.0.0",
     "typescript": "^3.6.4"
   },
   "scripts": {
