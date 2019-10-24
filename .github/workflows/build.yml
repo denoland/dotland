@@ -1,0 +1,31 @@
+name: build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: yarn --frozen-lockfile
+      - run: yarn run lint
+      #
+      # TODO(ry) tests!
+      #
+      - name: Publish Production
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        uses: cloudflare/wrangler-action@1.0.0
+        with:
+          environment: 'production'
+          apiKey: ${{ secrets.cloudflareKey }}
+          email: ${{ secrets.email }}
+      - name: Publish Staging
+        if: github.event_name == 'pull_request'
+        uses: cloudflare/wrangler-action@1.0.0
+        with:
+          environment: 'staging'
+          apiKey: ${{ secrets.cloudflareKey }}
+          email: ${{ secrets.email }}

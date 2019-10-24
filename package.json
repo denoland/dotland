@@ -2,6 +2,17 @@
   "name": "deno_website2",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "publish_prod": "wrangler publish --env=production",
+    "publish_staging": "wrangler publish --env=staging",
+    "publish": "wrangler publish",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "format": "prettier --write '**/*.md' '{worker,src}/**/*.{js,ts,jsx,tsx}' 'public/**/*.html'",
+    "lint": "eslint src/ worker/"
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.5.0",
     "@typescript-eslint/parser": "^2.5.0",
@@ -25,15 +36,6 @@
     "react-syntax-highlighter": "^11.0.2",
     "remark-toc": "^6.0.0",
     "typescript": "^3.6.4"
-  },
-  "scripts": {
-    "publish": "cd worker && wrangler publish --env=production",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "format": "prettier --write '**/*.md' '{worker,src}/**/*.{js,ts,jsx,tsx}' 'public/**/*.html'",
-    "lint": "eslint src/"
   },
   "eslintConfig": {
     "extends": "react-app"
