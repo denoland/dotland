@@ -3,6 +3,7 @@ import Spinner from "./Spinner";
 import C3Chart from "react-c3js";
 import "c3/c3.css";
 import {
+  BenchmarkData,
   reshape,
   logScale,
   formatLogScale,
@@ -11,8 +12,15 @@ import {
   formatKB
 } from "./benchmark_utils";
 
-function BenchmarkChart(props) {
-  function viewCommitOnClick(d): void {
+interface Props {
+  yTickFormat?: (n: number) => string;
+  columns: any;
+  yLabel?: string;
+  sha1List: string[];
+}
+
+function BenchmarkChart(props: Props) {
+  function viewCommitOnClick(d: any): void {
     window.open(
       `https://github.com/denoland/deno/commit/${props.sha1List[d.index]}`
     );
@@ -28,7 +36,7 @@ function BenchmarkChart(props) {
   if (props.yTickFormat) {
     yAxis.tick = {
       format: props.yTickFormat
-    };
+    } as any;
     if (props.yTickFormat === formatLogScale) {
       delete yAxis.min;
       logScale(props.columns);
@@ -51,10 +59,14 @@ function BenchmarkChart(props) {
   );
 }
 
+interface State {
+  data: BenchmarkData | null;
+}
+
 export default function Benchmarks() {
   const [state, setState] = React.useState({
     data: null
-  });
+  } as State);
 
   React.useEffect(() => {
     // TODO(ry) handle all.json

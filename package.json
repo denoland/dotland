@@ -13,6 +13,9 @@
   "dependencies": {
     "@material-ui/core": "^4.5.1",
     "@material-ui/icons": "^4.5.1",
+    "@types/react-dom": "^16.9.2",
+    "@types/react-router-dom": "^5.1.0",
+    "@types/react-syntax-highlighter": "^11.0.1",
     "react": "^16.10.2",
     "react-c3js": "^0.1.20",
     "react-dom": "^16.10.2",

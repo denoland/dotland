@@ -1,5 +1,6 @@
 import React from "react";
-import { DATABASE, getEntry } from "./registry_utils";
+import { getEntry } from "./registry_utils";
+import DATABASE from "./database.json";
 
 export default function RegistryIndex() {
   return (

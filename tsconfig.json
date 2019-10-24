@@ -3,7 +3,7 @@
     "allowJs": true,
     "allowUnreachableCode": false,
     "baseUrl": ".",
-    "checkJs": true,
+    "checkJs": false,
     "lib": [
       "dom",
       "esnext"

@@ -39,25 +39,13 @@ export type BenchmarkName = Exclude<keyof BenchmarkRun, "created_at" | "sha1">;
 
 type Column = [string, ...Array<number | null>];
 
-interface C3DataNode {
-  id: string;
-  index: number;
-  name: string;
-  value: number;
-  x: number;
-}
-
-type C3OnClickCallback = (C3DataNode, unknown) => void;
-type C3OnRenderedCallback = () => void;
-type C3TickFormatter = (number) => number | string;
-
 function getBenchmarkVarieties(
   data: BenchmarkRun[],
   benchmarkName: BenchmarkName
 ): string[] {
   // Look at last sha hash.
   const last = data[data.length - 1];
-  return Object.keys(last[benchmarkName]);
+  return Object.keys(last[benchmarkName]!);
 }
 
 function createColumns(
@@ -68,9 +56,12 @@ function createColumns(
   return varieties.map(variety => [
     variety,
     ...data.map(d => {
+      // TODO fix typescript madness.
+      d = d as any;
       if (d[benchmarkName] != null) {
-        if (d[benchmarkName][variety] != null) {
-          const v = d[benchmarkName][variety];
+        const b = d[benchmarkName] as any;
+        if (b[variety] != null) {
+          const v = b[variety];
           if (benchmarkName === "benchmark") {
             const meanValue = v ? v.mean : 0;
             return meanValue || null;
@@ -84,53 +75,10 @@ function createColumns(
   ]);
 }
 
-function createNormalizedColumns(
-  data: BenchmarkRun[],
-  benchmarkName: BenchmarkName,
-  baselineBenchmark: BenchmarkName,
-  baselineVariety: string
-): Column[] {
-  const varieties = getBenchmarkVarieties(data, benchmarkName);
-  return varieties.map(variety => [
-    variety,
-    ...data.map(d => {
-      if (d[baselineBenchmark] != null) {
-        if (d[baselineBenchmark][baselineVariety] != null) {
-          const baseline = d[baselineBenchmark][baselineVariety];
-          if (d[benchmarkName] != null) {
-            if (d[benchmarkName][variety] !== null && baseline !== 0) {
-              const v = d[benchmarkName][variety];
-              if (benchmarkName === "benchmark") {
-                const meanValue = v ? v.mean : 0;
-                return meanValue || null;
-              } else {
-                return v / baseline;
-              }
-            }
-          }
-        }
-      }
-      return null;
-    })
-  ]);
-}
-
-function createNormalizedProxyColumns(data: BenchmarkRun[]): Column[] {
-  return createNormalizedColumns(
-    data,
-    "req_per_sec_proxy",
-    "req_per_sec",
-    "hyper"
-  );
-}
-
-function createNormalizedReqPerSecColumns(data: BenchmarkRun[]): Column[] {
-  return createNormalizedColumns(data, "req_per_sec", "req_per_sec", "hyper");
-}
-
 function createBinarySizeColumns(data: BenchmarkRun[]): Column[] {
   const propName = "binary_size";
-  const binarySizeNames = Object.keys(data[data.length - 1][propName]);
+  const last = data[data.length - 1]!;
+  const binarySizeNames = Object.keys(last[propName]!);
   return binarySizeNames.map(name => [
     name,
     ...data.map(d => {
@@ -150,7 +98,8 @@ function createBinarySizeColumns(data: BenchmarkRun[]): Column[] {
 
 function createThreadCountColumns(data: BenchmarkRun[]): Column[] {
   const propName = "thread_count";
-  const threadCountNames = Object.keys(data[data.length - 1][propName]);
+  const last = data[data.length - 1];
+  const threadCountNames = Object.keys(last[propName]!);
   return threadCountNames.map(name => [
     name,
     ...data.map(d => {
@@ -165,7 +114,7 @@ function createThreadCountColumns(data: BenchmarkRun[]): Column[] {
 
 function createSyscallCountColumns(data: BenchmarkRun[]): Column[] {
   const propName = "syscall_count";
-  const syscallCountNames = Object.keys(data[data.length - 1][propName]);
+  const syscallCountNames = Object.keys(data[data.length - 1][propName]!);
   return syscallCountNames.map(name => [
     name,
     ...data.map(d => {
@@ -217,12 +166,13 @@ function extractProxyFields(data: BenchmarkRun[]): void {
       if (!d) continue;
       const name = field + "_proxy";
       const newField = {};
-      row[name] = newField;
+      (row as any)[name] = newField;
       for (const k of Object.getOwnPropertyNames(d)) {
         if (k.includes("_proxy")) {
-          const v = d[k];
-          delete d[k];
-          newField[k] = v;
+          let d2 = d as any;
+          const v = d2[k];
+          delete d2[k];
+          (newField as any)[k] = v;
         }
       }
     }
