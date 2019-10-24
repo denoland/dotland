@@ -1,5 +1,5 @@
 import assert from "assert";
-export const DATABASE = require("./database.json");
+import DATABASE from "./database.json";
 
 export function proxy(pathname) {
   if (pathname.startsWith("/std")) {
@@ -12,8 +12,8 @@ export function proxy(pathname) {
 
   const nameBranchRest = pathname.replace(/^\/x\//, "");
   console.log("nameBranchRest", nameBranchRest);
-  let [nameBranch, ...rest] = nameBranchRest.split("/");
-  let [name, branch] = nameBranch.split("@", 2);
+  const [nameBranch, ...rest] = nameBranchRest.split("/");
+  const [name, branch] = nameBranch.split("@", 2);
 
   const path = rest.join("/");
 

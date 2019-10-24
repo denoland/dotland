@@ -3,11 +3,19 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
-    "eslint": "^6.5.1"
+    "@typescript-eslint/eslint-plugin": "^2.5.0",
+    "@typescript-eslint/parser": "^2.5.0",
+    "eslint": "^6.5.1",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-react": "^7.16.0",
+    "prettier": "^1.18.2"
   },
   "dependencies": {
     "@material-ui/core": "^4.5.1",
     "@material-ui/icons": "^4.5.1",
+    "@types/react-dom": "^16.9.2",
+    "@types/react-router-dom": "^5.1.0",
+    "@types/react-syntax-highlighter": "^11.0.1",
     "react": "^16.10.2",
     "react-c3js": "^0.1.20",
     "react-dom": "^16.10.2",

@@ -41,7 +41,7 @@ function Home() {
             <th>
               <a href="https://github.com/denoland/deno">deno</a>
             </th>
-            <td colSpan="2">
+            <td colSpan={2}>
               <a
                 className="badge"
                 href="https://github.com/denoland/deno/actions"
@@ -86,7 +86,7 @@ function Home() {
             <th>
               <a href="https://github.com/denoland/registry">registry</a>
             </th>
-            <td colSpan="2">
+            <td colSpan={2}>
               <a
                 className="badge"
                 href="https://travis-ci.com/denoland/registry"

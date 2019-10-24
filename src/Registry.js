@@ -5,7 +5,7 @@ import Markdown from "./Markdown";
 import CodeBlock from "./CodeBlock";
 import { proxy } from "./registry_utils";
 
-export default function Registry(params) {
+export default function Registry() {
   const [state, setState] = React.useState({
     contents: "loading",
     rUrl: null,
@@ -13,34 +13,31 @@ export default function Registry(params) {
   });
   const location = useLocation();
 
-  React.useEffect(
-    () => {
-      const { pathname } = location;
-      let { entry, path } = proxy(pathname);
-      console.log({ path });
-      if (!path || path.endsWith("/")) {
-        // Render dir.
-        renderDir(path, entry).then(dir => {
-          console.log({ dir });
-          setState({ dir });
-        });
-      } else {
-        // Render file.
-        const rUrl = `${entry.url}${path}`;
-        console.log("fetch", rUrl);
-        fetch(rUrl).then(async response => {
-          const m = await response.text();
-          setState({ contents: m, rUrl });
-        });
-      }
-    },
-    [location]
-  );
+  React.useEffect(() => {
+    const { pathname } = location;
+    const { entry, path } = proxy(pathname);
+    console.log({ path });
+    if (!path || path.endsWith("/")) {
+      // Render dir.
+      renderDir(path, entry).then(dir => {
+        console.log({ dir });
+        setState({ dir });
+      });
+    } else {
+      // Render file.
+      const rUrl = `${entry.url}${path}`;
+      console.log("fetch", rUrl);
+      fetch(rUrl).then(async response => {
+        const m = await response.text();
+        setState({ contents: m, rUrl });
+      });
+    }
+  }, [location]);
 
   let contentComponent;
   if (state.dir) {
     const entries = [];
-    for (let d of state.dir) {
+    for (const d of state.dir) {
       const name = d.type !== "dir" ? d.name : d.name + "/";
       entries.push(
         <tr>
@@ -71,9 +68,7 @@ async function renderDir(pathname, entry) {
     const owner = entry.raw.owner;
     const repo = entry.raw.repo;
     const path = [entry.raw.path, pathname].join("");
-    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${
-      entry.branch
-    }`;
+    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${entry.branch}`;
     console.log("renderDir", url);
     const res = await fetch(url, {
       headers: {
