@@ -1,8 +1,9 @@
 import React from "react";
-import { Box } from "@material-ui/core";
+import { Box, Button } from "@material-ui/core";
 import { Link, useLocation } from "react-router-dom";
 import Markdown from "./Markdown";
 import CodeBlock from "./CodeBlock";
+import Docs from "./Docs";
 import { proxy } from "./registry_utils";
 
 export default function Registry() {
@@ -54,8 +55,27 @@ export default function Registry() {
     if (state.rUrl && state.rUrl.endsWith(".md")) {
       contentComponent = <Markdown source={state.contents} />;
     } else {
-      // TODO(ry) pass language to CodeBlock.
-      contentComponent = <CodeBlock value={state.contents} />;
+      console.log("looking for doc in location.search", location.search);
+      if (location.search.includes("doc") && state.contents) {
+        contentComponent = (
+          <div>
+            <Button>
+              <a href="?">Source Code</a>
+            </Button>
+            <Docs source={state.contents} />;
+          </div>
+        );
+      } else {
+        // TODO(ry) pass language to CodeBlock.
+        contentComponent = (
+          <div>
+            <Button>
+              <Link to="?doc">Documentation</Link>
+            </Button>
+            <CodeBlock value={state.contents} />;
+          </div>
+        );
+      }
     }
   }
 

@@ -2,7 +2,22 @@
   "name": "deno_website2",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "publish_prod": "wrangler publish --env=production",
+    "publish_staging": "wrangler publish --env=staging",
+    "publish": "wrangler publish",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "format": "prettier --write '**/*.md' '{worker,src}/**/*.{js,ts,jsx,tsx}' 'public/**/*.html'",
+    "lint": "eslint src/ worker/"
+  },
   "devDependencies": {
+    "@types/assert": "^1.4.3",
+    "@types/react-dom": "^16.9.2",
+    "@types/react-router-dom": "^5.1.0",
+    "@types/react-syntax-highlighter": "^11.0.1",
     "@typescript-eslint/eslint-plugin": "^2.5.0",
     "@typescript-eslint/parser": "^2.5.0",
     "eslint": "^6.5.1",
@@ -13,10 +28,9 @@
   "dependencies": {
     "@material-ui/core": "^4.5.1",
     "@material-ui/icons": "^4.5.1",
-    "@types/react-dom": "^16.9.2",
-    "@types/react-router-dom": "^5.1.0",
-    "@types/react-syntax-highlighter": "^11.0.1",
     "apexcharts": "^3.10.0",
+    "assert": "^2.0.0",
+    "query-string": "^6.8.3",
     "react": "^16.10.2",
     "react-apexcharts": "^1.3.3",
     "react-dom": "^16.10.2",
@@ -26,15 +40,6 @@
     "react-syntax-highlighter": "^11.0.2",
     "remark-toc": "^6.0.0",
     "typescript": "^3.6.4"
-  },
-  "scripts": {
-    "publish": "cd worker && wrangler publish --env=production",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "format": "prettier --write '**/*.md' '{worker,src}/**/*.{js,ts,jsx,tsx}' 'public/**/*.html'",
-    "lint": "eslint src/"
   },
   "eslintConfig": {
     "extends": "react-app"

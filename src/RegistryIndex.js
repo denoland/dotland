@@ -30,7 +30,7 @@ export default function RegistryIndex() {
 
       <p>
         To add to this list, edit{" "}
-        <a href="https://github.com/denoland/registry/blob/master/src/database.json">
+        <a href="https://github.com/denoland/deno_website2/blob/master/src/database.json">
           database.json
         </a>
         .

@@ -1,6 +1,7 @@
 import React from "react";
 import CodeBlock from "./CodeBlock";
 import { Link } from "react-router-dom";
+import "./Home.css";
 
 const code = `import { serve } from "https://deno.land/std@v0.21.0/http/server.ts";
 const body = new TextEncoder().encode("Hello World\\n");
@@ -28,14 +29,7 @@ function Home() {
         </div>
       </header>
 
-      <table>
-        <thead>
-          <tr>
-            <th />
-            <th>Linux &amp; Mac</th>
-            <th>Windows</th>
-          </tr>
-        </thead>
+      <table id="badges">
         <tbody>
           <tr>
             <th>
@@ -49,6 +43,24 @@ function Home() {
                 <img
                   alt="deno ci badge"
                   src="https://github.com/denoland/deno/workflows/build/badge.svg?branch=master"
+                />
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="https://github.com/denoland/deno_website2">
+                deno_website2
+              </a>
+            </th>
+            <td colSpan={2}>
+              <a
+                className="badge"
+                href="https://github.com/denoland/deno_website2/actions"
+              >
+                <img
+                  alt="deno ci badge"
+                  src="https://github.com/denoland/deno_website2/workflows/build/badge.svg?branch=master"
                 />
               </a>
             </td>
@@ -82,22 +94,6 @@ function Home() {
               </a>
             </td>
           </tr>
-          <tr>
-            <th>
-              <a href="https://github.com/denoland/registry">registry</a>
-            </th>
-            <td colSpan={2}>
-              <a
-                className="badge"
-                href="https://travis-ci.com/denoland/registry"
-              >
-                <img
-                  alt="registry ci badge"
-                  src="https://travis-ci.com/denoland/registry.svg?branch=master"
-                />
-              </a>
-            </td>
-          </tr>
         </tbody>
       </table>
 
@@ -120,8 +116,8 @@ function Home() {
         -useb | iex
       </pre>
       <p>
-        Using <a href="https://formulae.brew.sh/formula/deno">Homebrew</a>{" "}
-        (mac):
+        Using <a href="https://formulae.brew.sh/formula/deno">Homebrew</a> (mac
+        or Linux):
       </p>
       <pre>brew install deno</pre>
       <p>
@@ -150,7 +146,7 @@ function Home() {
 
       <p>
         <b>
-          <Link to="/manual">Manual</Link>
+          <Link to="/std/manual.md">Manual</Link>
         </b>
       </p>
 
@@ -169,7 +165,7 @@ function Home() {
       </ul>
 
       <p>
-        <a href="/style_guide">Style Guide</a>
+        <a href="/std/style_guide.md">Style Guide</a>
       </p>
 
       <p>

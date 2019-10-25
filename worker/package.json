@@ -1,16 +1,8 @@
 {
   "private": true,
-  "name": "worker2",
-  "version": "1.0.0",
-  "description": "A template for kick starting a Cloudflare Workers project",
+  "name": "worker",
+  "version": "0.0.1",
+  "description": "Cloudflare Workers for deno.land",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --write '**/*.{js,css,json,md}'"
-  },
-  "author": "Ryan Dahl <ry@tinyclouds.org>",
-  "license": "MIT",
-  "devDependencies": {
-    "prettier": "^1.18.2"
-  }
+  "license": "MIT"
 }
