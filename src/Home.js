@@ -1,6 +1,7 @@
 import React from "react";
 import CodeBlock from "./CodeBlock";
 import { Link } from "react-router-dom";
+import "./Home.css";
 
 const code = `import { serve } from "https://deno.land/std@v0.21.0/http/server.ts";
 const body = new TextEncoder().encode("Hello World\\n");
@@ -28,14 +29,7 @@ function Home() {
         </div>
       </header>
 
-      <table>
-        <thead>
-          <tr>
-            <th />
-            <th>Linux &amp; Mac</th>
-            <th>Windows</th>
-          </tr>
-        </thead>
+      <table id="badges">
         <tbody>
           <tr>
             <th>
@@ -49,6 +43,24 @@ function Home() {
                 <img
                   alt="deno ci badge"
                   src="https://github.com/denoland/deno/workflows/build/badge.svg?branch=master"
+                />
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <a href="https://github.com/denoland/deno_website2">
+                deno_website2
+              </a>
+            </th>
+            <td colSpan={2}>
+              <a
+                className="badge"
+                href="https://github.com/denoland/deno_website2/actions"
+              >
+                <img
+                  alt="deno ci badge"
+                  src="https://github.com/denoland/deno_website2/workflows/build/badge.svg?branch=master"
                 />
               </a>
             </td>
@@ -78,22 +90,6 @@ function Home() {
                 <img
                   alt="deno_install ci badge appveyor"
                   src="https://ci.appveyor.com/api/projects/status/gtekeaf7r60xa896?branch=master&svg=true"
-                />
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <th>
-              <a href="https://github.com/denoland/registry">registry</a>
-            </th>
-            <td colSpan={2}>
-              <a
-                className="badge"
-                href="https://travis-ci.com/denoland/registry"
-              >
-                <img
-                  alt="registry ci badge"
-                  src="https://travis-ci.com/denoland/registry.svg?branch=master"
                 />
               </a>
             </td>
