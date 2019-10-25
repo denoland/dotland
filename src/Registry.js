@@ -54,46 +54,48 @@ export default function Registry() {
           <td>{d.type}</td>
           <td>{d.size}</td>
           <td>
-            <Link component={RouterLink} to={name}>{name}</Link>
+            <Link component={RouterLink} to={name}>
+              {name}
+            </Link>
           </td>
         </tr>
       );
     }
     contentComponent = <table>{entries}</table>;
   } else {
-    if (state.rawUrl && state.rawUrl.endsWith(".md")) {
-      contentComponent = <Markdown source={state.contents} />;
-    } else {
-      console.log("looking for doc in location.search", location.search);
-      if (location.search.includes("doc") && state.contents) {
-        contentComponent = (
-          <div>
-            <Button>
-              <Link component={RouterLink} to="?">
+    const isMarkdown = state.rawUrl && state.rawUrl.endsWith(".md");
+    const hasDocsAvailable = state.rawUrl && state.rawUrl.endsWith(".ts");
+    const isDocsPage = location.search.includes("doc") && state.contents;
+    contentComponent = (
+      <div>
+        <ButtonGroup color="primary">
+          {hasDocsAvailable ? (
+            isDocsPage ? (
+              <Button component={RouterLink} to="?">
                 Source Code
-              </Link>
-            </Button>
-            <Docs source={state.contents} />;
-          </div>
-        );
-      } else {
-        // TODO(ry) pass language to CodeBlock.
-        contentComponent = (
-          <div>
-            <ButtonGroup>
+              </Button>
+            ) : (
               <Button component={RouterLink} to="?doc">
                 Documentation
               </Button>
-              {state.repoUrl ? (
-                <Button href={state.repoUrl}>Repository</Button>
-              ) : null}
-              {state.rawUrl ? <Button href={state.rawUrl}>Raw</Button> : null}
-            </ButtonGroup>
-            <CodeBlock value={state.contents} />
-          </div>
-        );
-      }
-    }
+            )
+          ) : null}
+          {state.repoUrl ? (
+            <Button href={state.repoUrl}>Repository</Button>
+          ) : null}
+          {state.rawUrl ? <Button href={state.rawUrl}>Raw</Button> : null}
+        </ButtonGroup>
+        {(() => {
+          if (isMarkdown) {
+            return <Markdown source={state.contents} />;
+          } else if (isDocsPage) {
+            return <Docs source={state.contents} />;
+          } else {
+            return <CodeBlock value={state.contents} />;
+          }
+        })()}
+      </div>
+    );
   }
 
   return <Box>{contentComponent}</Box>;
