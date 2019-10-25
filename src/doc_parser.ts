@@ -63,18 +63,18 @@ export class Parser {
         break;
       }
     }
-    assert(rootSourceFile);
+    if (!rootSourceFile) {
+      throw Error(`rootFile not found ${rootFile}`);
+    }
 
     // Add all exported symbols of root module to visitQueue.
-    const moduleSymbol = this.checker.getSymbolAtLocation(rootSourceFile!);
+    const moduleSymbol = this.checker.getSymbolAtLocation(rootSourceFile);
     console.log("moduleSymbol", moduleSymbol);
 
     if (moduleSymbol == null) {
       // FIXME
       // debugger;
-      for (const s of (rootSourceFile as any).symbol.exports.values()) {
-        this.requestVisit(s);
-      }
+      console.log("moduleSymbol null");
     } else {
       for (const s of this.checker.getExportsOfModule(moduleSymbol)) {
         this.requestVisit(s);

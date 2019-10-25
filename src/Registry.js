@@ -56,7 +56,7 @@ export default function Registry() {
       contentComponent = <Markdown source={state.contents} />;
     } else {
       console.log("looking for doc in location.search", location.search);
-      if (location.search.includes("doc")) {
+      if (location.search.includes("doc") && state.contents) {
         contentComponent = <Docs source={state.contents} />;
       } else {
         // TODO(ry) pass language to CodeBlock.
