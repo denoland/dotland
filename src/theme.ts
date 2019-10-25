@@ -10,11 +10,6 @@ export const generateTheme = (darkMode: boolean) =>
       type: darkMode ? "dark" : "light",
       primary: blue,
       secondary: cyan,
-      error: {
-        main: red.A400
-      },
-      background: {
-        default: darkMode ? "#000" : "#fff"
-      }
+      error: red
     }
   });
