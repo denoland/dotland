@@ -117,7 +117,7 @@ function Home() {
       </pre>
       <p>
         Using <a href="https://formulae.brew.sh/formula/deno">Homebrew</a>{" "}
-        (mac):
+        (mac or Linux):
       </p>
       <pre>brew install deno</pre>
       <p>
