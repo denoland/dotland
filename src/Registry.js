@@ -5,16 +5,20 @@ import Markdown from "./Markdown";
 import CodeBlock from "./CodeBlock";
 import Docs from "./Docs";
 import { proxy } from "./registry_utils";
+import Spinner from "./Spinner";
 
 export default function Registry() {
+  const [isLoading, setIsLoading] = React.useState(true);
   const [state, setState] = React.useState({
-    contents: "loading",
-    rUrl: null,
+    contents: null,
+    rawUrl: null,
+    repoUrl: null,
     dir: null
   });
   const location = useLocation();
 
   React.useEffect(() => {
+    setIsLoading(true);
     const { pathname } = location;
     const { entry, path } = proxy(pathname);
     console.log({ path });
@@ -23,20 +27,25 @@ export default function Registry() {
       renderDir(path, entry).then(dir => {
         console.log({ dir });
         setState({ dir });
+        setIsLoading(false);
       });
     } else {
       // Render file.
-      const rUrl = `${entry.url}${path}`;
-      console.log("fetch", rUrl);
-      fetch(rUrl).then(async response => {
+      const rawUrl = `${entry.url}${path}`;
+      const repoUrl = `${entry.repo}${path}`;
+      console.log("fetch", rawUrl);
+      fetch(rawUrl).then(async response => {
         const m = await response.text();
-        setState({ contents: m, rUrl });
+        setState({ contents: m, rawUrl, repoUrl });
+        setIsLoading(false);
       });
     }
   }, [location]);
 
   let contentComponent;
-  if (state.dir) {
+  if (isLoading) {
+    contentComponent = <Spinner />;
+  } else if (state.dir) {
     const entries = [];
     for (const d of state.dir) {
       const name = d.type !== "dir" ? d.name : d.name + "/";
@@ -52,7 +61,7 @@ export default function Registry() {
     }
     contentComponent = <table>{entries}</table>;
   } else {
-    if (state.rUrl && state.rUrl.endsWith(".md")) {
+    if (state.rawUrl && state.rawUrl.endsWith(".md")) {
       contentComponent = <Markdown source={state.contents} />;
     } else {
       console.log("looking for doc in location.search", location.search);
@@ -60,7 +69,7 @@ export default function Registry() {
         contentComponent = (
           <div>
             <Button>
-              <a href="?">Source Code</a>
+              <Link to="?">Source Code</Link>
             </Button>
             <Docs source={state.contents} />;
           </div>
@@ -72,6 +81,11 @@ export default function Registry() {
             <Button>
               <Link to="?doc">Documentation</Link>
             </Button>
+            {state.repoUrl ? (
+              <Button>
+                <a href={state.repoUrl}>Repo</a>
+              </Button>
+            ) : null}
             <CodeBlock value={state.contents} />
           </div>
         );

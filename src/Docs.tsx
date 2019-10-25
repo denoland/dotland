@@ -1,11 +1,9 @@
 import React from "react";
 import { main } from "./doc_utils";
-import CodeBlock from "./CodeBlock";
 import Markdown from "./Markdown";
 import { useLocation } from "react-router-dom";
 import {
   Link,
-  Typography,
   List,
   ListItem,
   ListItemText,
