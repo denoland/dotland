@@ -1,0 +1,13 @@
+.docs {
+  .sidebar {
+    min-width: 100px;
+    max-width: 200px;
+    @media screen and (max-width: 800px) {
+      display: none;
+    }
+    .header {
+      margin: 10px auto 0 auto;
+      text-align: center;
+    }
+  }
+}
