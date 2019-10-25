@@ -24,9 +24,10 @@ export default function Registry() {
     console.log({ path });
     if (!path || path.endsWith("/")) {
       // Render dir.
+      const repoUrl = `${entry.repo}${path}`;
       renderDir(path, entry).then(dir => {
         console.log({ dir });
-        setState({ dir });
+        setState({ dir, repoUrl });
         setIsLoading(false);
       });
     } else {
@@ -50,7 +51,7 @@ export default function Registry() {
     for (const d of state.dir) {
       const name = d.type !== "dir" ? d.name : d.name + "/";
       entries.push(
-        <tr>
+        <tr key={name}>
           <td>{d.type}</td>
           <td>{d.size}</td>
           <td>
@@ -61,7 +62,18 @@ export default function Registry() {
         </tr>
       );
     }
-    contentComponent = <table>{entries}</table>;
+    contentComponent = (
+      <div>
+        <ButtonGroup color="primary">
+          <Button href={state.repoUrl}>Repository</Button>
+        </ButtonGroup>
+        <br />
+        <br />
+        <table>
+          <tbody>{entries}</tbody>
+        </table>
+      </div>
+    );
   } else {
     const isMarkdown = state.rawUrl && state.rawUrl.endsWith(".md");
     const hasDocsAvailable = state.rawUrl && state.rawUrl.endsWith(".ts");
@@ -69,16 +81,14 @@ export default function Registry() {
     contentComponent = (
       <div>
         <ButtonGroup color="primary">
-          {hasDocsAvailable ? (
-            isDocsPage ? (
-              <Button component={RouterLink} to="?">
-                Source Code
-              </Button>
-            ) : (
-              <Button component={RouterLink} to="?doc">
-                Documentation
-              </Button>
-            )
+          {isDocsPage ? (
+            <Button component={RouterLink} to="?">
+              Source Code
+            </Button>
+          ) : hasDocsAvailable ? (
+            <Button component={RouterLink} to="?doc">
+              Documentation
+            </Button>
           ) : null}
           {state.repoUrl ? (
             <Button href={state.repoUrl}>Repository</Button>
@@ -89,7 +99,11 @@ export default function Registry() {
           if (isMarkdown) {
             return <Markdown source={state.contents} />;
           } else if (isDocsPage) {
-            return <Docs source={state.contents} />;
+            if (hasDocsAvailable) {
+              return <Docs source={state.contents} />;
+            } else {
+              return <CodeBlock value="No documentation avaiable." />;
+            }
           } else {
             return <CodeBlock value={state.contents} />;
           }
