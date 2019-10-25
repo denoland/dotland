@@ -1,5 +1,6 @@
 import React from "react";
 import { main } from "./doc_utils";
+import CodeBlock from "./CodeBlock";
 import { useLocation } from "react-router-dom";
 import { Box, Card, CardHeader, CardContent } from "@material-ui/core";
 
@@ -18,10 +19,13 @@ export default function Docs(props: Props) {
         return (
           <Box m={2}>
             <Card>
-              <CardHeader title={docEntry.name} />
+              <CardHeader title={docEntry.name} subheader={docEntry.typestr} />
               <CardContent>
-                <pre>{docEntry.typestr}</pre>
                 <p>{docEntry.docstr}</p>
+                <CodeBlock
+                  language="json"
+                  value={JSON.stringify(docEntry, null, 1)}
+                />
               </CardContent>
             </Card>
           </Box>
@@ -29,6 +33,4 @@ export default function Docs(props: Props) {
       })}
     </div>
   );
-
-  //return <pre>{JSON.stringify(result, null, 2)}</pre>;
 }
