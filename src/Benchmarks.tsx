@@ -1,72 +1,86 @@
 import React from "react";
 import Spinner from "./Spinner";
-import C3Chart from "react-c3js";
-import "c3/c3.css";
+import ApexChart from "react-apexcharts";
 import {
   BenchmarkData,
+  Column,
   reshape,
   logScale,
   formatLogScale,
   formatReqSec,
   formatMB,
-  formatKB
+  formatKB,
+  formatPercentage
 } from "./benchmark_utils";
 
 interface Props {
   yTickFormat?: (n: number) => string;
-  columns: any;
+  columns: Column[];
   yLabel?: string;
   sha1List: string[];
 }
 
 function BenchmarkChart(props: Props) {
-  function viewCommitOnClick(d: any): void {
+  function viewCommitOnClick(c1: any, c2: any, { dataPointIndex }: any): void {
     window.open(
-      `https://github.com/denoland/deno/commit/${props.sha1List[d.index]}`
+      `https://github.com/denoland/deno/commit/${props.sha1List[dataPointIndex]}`
     );
   }
 
-  const yAxis = {
-    padding: { bottom: 0 },
-    min: 0,
-    label: props.yLabel,
-    tick: null
-  };
-
-  if (props.yTickFormat) {
-    yAxis.tick = {
-      format: props.yTickFormat
-    } as any;
-    if (props.yTickFormat === formatLogScale) {
-      delete yAxis.min;
-      logScale(props.columns);
-    }
+  if (props.yTickFormat && props.yTickFormat === formatLogScale) {
+    logScale(props.columns);
   }
 
+  const options = {
+    chart: {
+      toolbar: {
+        show: true
+      },
+      animations: {
+        enabled: false
+      },
+      events: {
+        markerClick: viewCommitOnClick
+      }
+    },
+    stroke: {
+      width: 2,
+      curve: "straight"
+    },
+    legend: {
+      show: true,
+      showForSingleSeries: true,
+      position: "bottom"
+    },
+    yaxis: {
+      labels: {
+        formatter: props.yTickFormat
+      },
+      title: {
+        text: props.yLabel
+      }
+    },
+    xaxis: {
+      labels: {
+        show: false
+      },
+      categories: props.sha1List,
+      tooltip: {
+        enabled: false
+      }
+    }
+  };
+
+  const series = props.columns;
+
   return (
-    <C3Chart
-      data={{ columns: props.columns, onclick: viewCommitOnClick }}
-      axis={{
-        x: {
-          type: "category",
-          show: false,
-          categories: props.sha1List.map(s => s.slice(0, 6))
-        },
-        y: yAxis
-      }}
-      zoom={{ enabled: true }}
-    />
+    <ApexChart type="line" options={options} series={series} height={300} />
   );
 }
 
-interface State {
-  data: BenchmarkData | null;
-}
-
 export default function Benchmarks() {
-  const [state, setState] = React.useState({
-    data: null
-  } as State);
+  const [data, setData] = React.useState<BenchmarkData | null>(null);
+  const [showNormalized, setShowNormalized] = React.useState(false);
 
   React.useEffect(() => {
     // TODO(ry) handle all.json
@@ -75,13 +89,13 @@ export default function Benchmarks() {
     fetch(dataUrl).then(async response => {
       const rawData = await response.json();
       const data = reshape(rawData);
-      setState({ data });
+      setData(data);
     });
   }, []);
 
   // TODO(ry) error message of load failed.
 
-  if (!state.data) {
+  if (!data) {
     return <Spinner />;
   }
 
@@ -93,7 +107,7 @@ export default function Benchmarks() {
       <h1>Deno Continuous Benchmarks</h1>
 
       <p>
-        These plots are updated on every commit to
+        These plots are updated on every commit to the{" "}
         <a href="https://github.com/denoland/deno">master branch</a>.
       </p>
 
@@ -108,16 +122,26 @@ export default function Benchmarks() {
       <p>
         <a href="#all">all data</a> (takes a moment to load)
       </p>
+      <p>
+        <label>
+          <input
+            type="checkbox"
+            checked={showNormalized}
+            onChange={e => setShowNormalized(e.target.checked)}
+          />{" "}
+          Show Normalized Graphs
+        </label>
+      </p>
 
       <h3 id="req-per-sec">
         Req/Sec <a href="#req-per-sec">#</a>
       </h3>
 
       <BenchmarkChart
-        columns={state.data.reqPerSec}
-        sha1List={state.data.sha1List}
-        yLabel="1k req/sec"
-        yTickFormat={formatReqSec}
+        columns={showNormalized ? data.normalizedReqPerSec : data.reqPerSec}
+        sha1List={data.sha1List}
+        yLabel={showNormalized ? "% of hyper througput" : "1k req/sec"}
+        yTickFormat={showNormalized ? formatPercentage : formatReqSec}
       />
 
       <p>
@@ -186,10 +210,10 @@ export default function Benchmarks() {
       </h3>
 
       <BenchmarkChart
-        columns={state.data.proxy}
-        sha1List={state.data.sha1List}
-        yLabel="k req/sec"
-        yTickFormat={formatReqSec}
+        columns={showNormalized ? data.normalizedProxy : data.proxy}
+        sha1List={data.sha1List}
+        yLabel={showNormalized ? "% of hyper througput" : "1k req/sec"}
+        yTickFormat={showNormalized ? formatPercentage : formatReqSec}
       />
 
       <p>
@@ -234,8 +258,8 @@ export default function Benchmarks() {
       </h3>
 
       <BenchmarkChart
-        columns={state.data.maxLatency}
-        sha1List={state.data.sha1List}
+        columns={data.maxLatency}
+        sha1List={data.sha1List}
         yLabel="milliseconds"
         yTickFormat={formatLogScale}
       />
@@ -250,8 +274,8 @@ export default function Benchmarks() {
       </h3>
 
       <BenchmarkChart
-        columns={state.data.execTime}
-        sha1List={state.data.sha1List}
+        columns={data.execTime}
+        sha1List={data.sha1List}
         yLabel="seconds"
         yTickFormat={formatLogScale}
       />
@@ -285,8 +309,8 @@ export default function Benchmarks() {
       </h3>
 
       <BenchmarkChart
-        columns={state.data.throughput}
-        sha1List={state.data.sha1List}
+        columns={data.throughput}
+        sha1List={data.sha1List}
         yLabel="seconds"
         yTickFormat={formatLogScale}
       />
@@ -307,8 +331,8 @@ export default function Benchmarks() {
         Max Memory Usage <a href="#max-memory">#</a>
       </h3>
       <BenchmarkChart
-        columns={state.data.maxMemory}
-        sha1List={state.data.sha1List}
+        columns={data.maxMemory}
+        sha1List={data.sha1List}
         yLabel="megabytes"
         yTickFormat={formatMB}
       />
@@ -318,8 +342,8 @@ export default function Benchmarks() {
         Executable size <a href="#size">#</a>
       </h3>
       <BenchmarkChart
-        columns={state.data.binarySize}
-        sha1List={state.data.sha1List}
+        columns={data.binarySize}
+        sha1List={data.sha1List}
         yLabel="megabytes"
         yTickFormat={formatMB}
       />
@@ -328,19 +352,13 @@ export default function Benchmarks() {
       <h3 id="threads">
         Thread count <a href="#threads">#</a>
       </h3>
-      <BenchmarkChart
-        columns={state.data.threadCount}
-        sha1List={state.data.sha1List}
-      />
+      <BenchmarkChart columns={data.threadCount} sha1List={data.sha1List} />
       <p>How many threads various programs use. Smaller is better.</p>
 
       <h3 id="bundles">
         Syscall count <a href="#bundles">#</a>
       </h3>
-      <BenchmarkChart
-        columns={state.data.syscallCount}
-        sha1List={state.data.sha1List}
-      />
+      <BenchmarkChart columns={data.syscallCount} sha1List={data.sha1List} />
       <p>
         How many total syscalls are performed when executing a given script.
         Smaller is better.
@@ -350,8 +368,8 @@ export default function Benchmarks() {
         Bundle size <a href="#syscalls">#</a>
       </h3>
       <BenchmarkChart
-        columns={state.data.bundleSize}
-        sha1List={state.data.sha1List}
+        columns={data.bundleSize}
+        sha1List={data.sha1List}
         yTickFormat={formatKB}
         yLabel="kb"
       />
