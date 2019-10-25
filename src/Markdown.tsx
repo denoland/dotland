@@ -4,6 +4,12 @@ import toc from "remark-toc";
 import CodeBlock from "./CodeBlock";
 import htmlParser from "react-markdown/plugins/html-parser";
 
+interface Props {
+  source: string;
+  children?: any;
+  level?: any;
+}
+
 // We want to allow HTML in markdown, but not anything unsafe like script tags.
 // https://github.com/aknuds1/html-to-react#with-custom-processing-instructions
 const parseHtml = htmlParser({
@@ -28,12 +34,6 @@ function slugify(text: string): string {
   return text;
 }
 
-interface Props {
-  source: string;
-  children: any;
-  level: any;
-}
-
 function HeadingRenderer(props: Props) {
   const children = React.Children.toArray(props.children);
   const text = children.reduce(flatten, "");
@@ -44,6 +44,9 @@ function HeadingRenderer(props: Props) {
 const renderers = { code: CodeBlock, heading: HeadingRenderer };
 
 function Markdown(props: Props) {
+  if (!props.source) {
+    return null;
+  }
   return (
     <ReactMarkdown
       source={props.source}

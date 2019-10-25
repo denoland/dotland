@@ -14,9 +14,7 @@ export function main(rootModule: string, rootSource: string): DocEntry[] {
 }
 
 class Host implements ts.CompilerHost {
-  constructor(public rootModule: string, public rootSource: string) {
-    console.log("hi");
-  }
+  constructor(public rootModule: string, public rootSource: string) {}
 
   getDefaultLibFileName(options: ts.CompilerOptions): string {
     return "";
@@ -28,7 +26,7 @@ class Host implements ts.CompilerHost {
     onError?: (message: string) => void,
     shouldCreateNewSourceFile?: boolean
   ): ts.SourceFile | undefined {
-    console.log("getSourceFile", fileName);
+    // console.log("getSourceFile", fileName);
     return ts.createSourceFile(fileName, this.rootSource, languageVersion);
   }
 
@@ -47,7 +45,7 @@ class Host implements ts.CompilerHost {
   }
 
   getCanonicalFileName(fileName: string): string {
-    console.log("getCanonicalFileName", fileName);
+    // console.log("getCanonicalFileName", fileName);
     return fileName;
   }
 
@@ -60,7 +58,7 @@ class Host implements ts.CompilerHost {
   }
 
   fileExists(path: string): boolean {
-    console.log("fileExists", path);
+    // console.log("fileExists", path);
     return true;
   }
 

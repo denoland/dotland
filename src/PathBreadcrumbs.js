@@ -17,7 +17,7 @@ export default function PathBreadcrumbs() {
     <Box my={3}>
       <Breadcrumbs separator="/">
         {parts.map((part, i) => {
-          console.log({ part, i });
+          // console.log({ part, i });
           if (i === 0) {
             assert(!part);
             return (
@@ -38,7 +38,7 @@ export default function PathBreadcrumbs() {
           if (!last && !url.endsWith("/")) {
             url += "/";
           }
-          console.log({ parts, url });
+          // console.log({ parts, url });
           return (
             <Link to={url} key={i}>
               {part}

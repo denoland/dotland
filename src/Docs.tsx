@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { main } from "./doc_utils";
 import CodeBlock from "./CodeBlock";
-import { Link, useLocation } from "react-router-dom";
+import Markdown from "./Markdown";
+import { useLocation } from "react-router-dom";
 import {
+  Link,
+  List,
   ListItem,
   Box,
+  Button,
+  Divider,
   Card,
   CardHeader,
   CardContent,
   Drawer,
-  Button,
 } from "@material-ui/core";
 import "./Docs.scss";
 
@@ -37,7 +41,7 @@ export default function Docs(props: Props) {
           </div>
           {docs.map((d, i) => {
             return (
-              <ListItem key={i}>
+              <ListItem key={d.name}>
                 <a href={`?doc#${d.name}`}>{d.name}</a>
               </ListItem>
             );
@@ -45,14 +49,24 @@ export default function Docs(props: Props) {
         </Drawer>
       </nav>
       <main>
-        {<Button onClick={() => setDrawerOpen(!drawerOpen)}>{drawerOpen ? "Hide Menu" : "Open Menu"}</Button>}
+        {<Button onClick={() => setDrawerOpen(!drawerOpen)}>{drawerOpen ? "Hide Menu" : "Show Menu"}</Button>}
         {docs.map(d => {
+          const href = "?doc#" + d.name;
+          const title = (
+            <Link href={href} color="inherit">
+              <code>{d.name}</code>
+            </Link>
+          );
+          const subheader = <code>{d.typestr}</code>;
+          let frag = location.hash.substr(1);
+          const raised = frag === d.name;
           return (
-            <Box my={3} id={d.name}>
-              <Card raised={true}>
-                <CardHeader title={d.name} subheader={d.typestr} />
+            <Box key={d.name} my={3} id={d.name}>
+              <Card raised={raised}>
+                <CardHeader title={title} subheader={subheader} />
                 <CardContent>
-                  <p>{d.docstr}</p>
+                  <Markdown source={d.docstr} />
+                  <Divider />
                   <CodeBlock language="json" value={JSON.stringify(d, null, 1)} />
                 </CardContent>
               </Card>
