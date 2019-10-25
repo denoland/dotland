@@ -1,6 +1,6 @@
 import React from "react";
-import { Box, Button } from "@material-ui/core";
-import { Link, useLocation } from "react-router-dom";
+import { Box, Button, Link } from "@material-ui/core";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import Markdown from "./Markdown";
 import CodeBlock from "./CodeBlock";
 import Docs from "./Docs";
@@ -60,7 +60,9 @@ export default function Registry() {
         contentComponent = (
           <div>
             <Button>
-              <a href="?">Source Code</a>
+              <Link component={RouterLink} to="?">
+                Source Code
+              </Link>
             </Button>
             <Docs source={state.contents} />;
           </div>
@@ -70,7 +72,9 @@ export default function Registry() {
         contentComponent = (
           <div>
             <Button>
-              <Link to="?doc">Documentation</Link>
+              <Link component={RouterLink} to="?doc">
+                Documentation
+              </Link>
             </Button>
             <CodeBlock value={state.contents} />
           </div>

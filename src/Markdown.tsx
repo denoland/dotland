@@ -3,8 +3,9 @@ import ReactMarkdown from "react-markdown";
 import toc from "remark-toc";
 import CodeBlock from "./CodeBlock";
 import htmlParser from "react-markdown/plugins/html-parser";
+import { Link } from "@material-ui/core";
 
-interface Props {
+interface HeadingRendererProps {
   source: string;
   children?: any;
   level?: any;
@@ -34,16 +35,34 @@ function slugify(text: string): string {
   return text;
 }
 
-function HeadingRenderer(props: Props) {
+function HeadingRenderer(props: HeadingRendererProps) {
   const children = React.Children.toArray(props.children);
   const text = children.reduce(flatten, "");
   const id = slugify(text);
   return React.createElement("h" + props.level, { id }, props.children);
 }
 
-const renderers = { code: CodeBlock, heading: HeadingRenderer };
+interface LinkRendererProps {
+  children?: any;
+  href?: string;
+}
 
-function Markdown(props: Props) {
+function LinkRenderer(props: LinkRendererProps) {
+  const children = React.Children.toArray(props.children);
+  return <Link href={props.href}>{children}</Link>;
+}
+
+const renderers = {
+  code: CodeBlock,
+  heading: HeadingRenderer,
+  link: LinkRenderer
+};
+
+interface MarkdownProps {
+  source: string;
+}
+
+function Markdown(props: MarkdownProps) {
   if (!props.source) {
     return null;
   }

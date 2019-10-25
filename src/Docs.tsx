@@ -2,7 +2,7 @@ import React from "react";
 import { main } from "./doc_utils";
 import CodeBlock from "./CodeBlock";
 import Markdown from "./Markdown";
-import { useLocation } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import {
   Link,
   Typography,
@@ -30,7 +30,9 @@ export default function Docs(props: Props) {
           {docs.map(d => {
             return (
               <ListItem key={d.name}>
-                <a href={`?doc#${d.name}`}>{d.name}</a>
+                <Link component={RouterLink} to={`?doc#${d.name}`}>
+                  {d.name}
+                </Link>
               </ListItem>
             );
           })}

@@ -1,6 +1,8 @@
 import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import theme from "react-syntax-highlighter/dist/esm/styles/hljs/github-gist";
+import lightTheme from "react-syntax-highlighter/dist/esm/styles/hljs/atom-one-light";
+import darkTheme from "react-syntax-highlighter/dist/esm/styles/hljs/atom-one-dark";
+import { useDarkMode } from "./theme";
 
 interface Props {
   language?: string;
@@ -8,8 +10,12 @@ interface Props {
 }
 
 function CodeBlock(props: Props) {
+  const darkMode = useDarkMode();
   return (
-    <SyntaxHighlighter style={theme} language={props.language || "js"}>
+    <SyntaxHighlighter
+      style={darkMode ? darkTheme : lightTheme}
+      language={props.language || "js"}
+    >
       {props.value}
     </SyntaxHighlighter>
   );
