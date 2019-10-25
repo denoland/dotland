@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { main } from "./doc_utils";
 import CodeBlock from "./CodeBlock";
 import Markdown from "./Markdown";
@@ -12,8 +12,11 @@ import {
   Box,
   Card,
   CardHeader,
-  CardContent
+  CardContent,
+  Drawer,
+  Button
 } from "@material-ui/core";
+import "./Docs.css";
 
 interface Props {
   source: string;
@@ -22,19 +25,20 @@ interface Props {
 export default function Docs(props: Props) {
   const location = useLocation();
   const docs = main(location.pathname, props.source);
+  const [drawerOpen, setDrawerOpen] = useState(true);
 
   return (
-    <div>
-      <nav>
-        <List>
-          {docs.map(d => {
+    <div className="docs">
+      <nav className="sidebar">
+        <Drawer variant="permanent" anchor="left" open={true}>
+          {docs.map((d, i) => {
             return (
-              <ListItem key={d.name}>
+              <ListItem key={i}>
                 <a href={`?doc#${d.name}`}>{d.name}</a>
               </ListItem>
             );
           })}
-        </List>
+        </Drawer>
       </nav>
       {docs.map(d => {
         const href = "?doc#" + d.name;

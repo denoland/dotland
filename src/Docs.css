@@ -1,0 +1,10 @@
+main {
+  margin-left: 256px;
+}
+.docs .sidebar {
+  min-width: 100px;
+  max-width: 256px - 32px;
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
+}
