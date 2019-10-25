@@ -40,15 +40,16 @@ export default function Docs(props: Props) {
         const href = "?doc#" + d.name;
         const title = (
           <Link href={href} color="inherit">
-            <code>{`${d.name}: ${d.typestr}`}</code>
+            <code>{d.name}</code>
           </Link>
         );
+        const subheader = <code>{d.typestr}</code>;
         let frag = location.hash.substr(1);
         const raised = frag === d.name;
         return (
           <Box key={d.name} my={3} id={d.name}>
             <Card raised={raised}>
-              <CardHeader title={title} />
+              <CardHeader title={title} subheader={subheader} />
               <CardContent>
                 <Markdown source={d.docstr} />
                 <Divider />
