@@ -116,8 +116,8 @@ function Home() {
         -useb | iex
       </pre>
       <p>
-        Using <a href="https://formulae.brew.sh/formula/deno">Homebrew</a>{" "}
-        (mac or Linux):
+        Using <a href="https://formulae.brew.sh/formula/deno">Homebrew</a> (mac
+        or Linux):
       </p>
       <pre>brew install deno</pre>
       <p>

@@ -1,12 +1,15 @@
 import React from "react";
 import { main } from "./doc_utils";
 import CodeBlock from "./CodeBlock";
-import { Link, useLocation } from "react-router-dom";
+import Markdown from "./Markdown";
+import { useLocation } from "react-router-dom";
 import {
+  Link,
   List,
   ListItem,
   Box,
   Button,
+  Divider,
   Card,
   CardHeader,
   CardContent
@@ -26,7 +29,7 @@ export default function Docs(props: Props) {
         <List>
           {docs.map(d => {
             return (
-              <ListItem>
+              <ListItem key={d.name}>
                 <a href={`?doc#${d.name}`}>{d.name}</a>
               </ListItem>
             );
@@ -34,12 +37,22 @@ export default function Docs(props: Props) {
         </List>
       </nav>
       {docs.map(d => {
+        const href = "?doc#" + d.name;
+        const title = (
+          <Link href={href} color="inherit">
+            <code>{d.name}</code>
+          </Link>
+        );
+        const subheader = <code>{d.typestr}</code>;
+        let frag = location.hash.substr(1);
+        const raised = frag === d.name;
         return (
-          <Box my={3} id={d.name}>
-            <Card raised={true}>
-              <CardHeader title={d.name} subheader={d.typestr} />
+          <Box key={d.name} my={3} id={d.name}>
+            <Card raised={raised}>
+              <CardHeader title={title} subheader={subheader} />
               <CardContent>
-                <p>{d.docstr}</p>
+                <Markdown source={d.docstr} />
+                <Divider />
                 <CodeBlock language="json" value={JSON.stringify(d, null, 1)} />
               </CardContent>
             </Card>
