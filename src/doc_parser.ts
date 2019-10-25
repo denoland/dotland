@@ -72,8 +72,6 @@ export class Parser {
     console.log("moduleSymbol", moduleSymbol);
 
     if (moduleSymbol == null) {
-      // FIXME
-      // debugger;
       console.log("moduleSymbol null");
     } else {
       for (const s of this.checker.getExportsOfModule(moduleSymbol)) {
