@@ -37,7 +37,10 @@ export interface BenchmarkRun {
 
 export type BenchmarkName = Exclude<keyof BenchmarkRun, "created_at" | "sha1">;
 
-type Column = [string, ...Array<number | null>];
+export interface Column {
+  name: string;
+  data: Array<number | null>;
+}
 
 function getBenchmarkVarieties(
   data: BenchmarkRun[],
@@ -53,9 +56,9 @@ function createColumns(
   benchmarkName: BenchmarkName
 ): Column[] {
   const varieties = getBenchmarkVarieties(data, benchmarkName);
-  return varieties.map(variety => [
-    variety,
-    ...data.map(d => {
+  return varieties.map(variety => ({
+    name: variety,
+    data: data.map(d => {
       // TODO fix typescript madness.
       d = d as any;
       if (d[benchmarkName] != null) {
@@ -72,16 +75,48 @@ function createColumns(
       }
       return null;
     })
-  ]);
+  }));
 }
 
+export function createNormalizedColumns(
+  data: BenchmarkRun[],
+  benchmarkName: BenchmarkName,
+  baselineBenchmark: BenchmarkName,
+  baselineVariety: string
+): Column[] {
+  const varieties = getBenchmarkVarieties(data, benchmarkName);
+  return varieties.map(variety => ({
+    name: variety,
+    data: data.map(d => {
+      if (d[baselineBenchmark] != null) {
+        const bb = d[baselineBenchmark] as any;
+        if (bb[baselineVariety] != null) {
+          const baseline = bb[baselineVariety];
+          if (d[benchmarkName] != null) {
+            const b = d[benchmarkName] as any;
+            if (b[variety] != null && baseline !== 0) {
+              const v = b[variety];
+              if (benchmarkName === "benchmark") {
+                const meanValue = v ? v.mean : 0;
+                return meanValue || null;
+              } else {
+                return v / baseline;
+              }
+            }
+          }
+        }
+      }
+      return null;
+    })
+  }));
+}
 function createBinarySizeColumns(data: BenchmarkRun[]): Column[] {
   const propName = "binary_size";
   const last = data[data.length - 1]!;
   const binarySizeNames = Object.keys(last[propName]!);
-  return binarySizeNames.map(name => [
+  return binarySizeNames.map(name => ({
     name,
-    ...data.map(d => {
+    data: data.map(d => {
       const binarySizeData = d["binary_size"];
       switch (typeof binarySizeData) {
         case "number": // legacy implementation
@@ -93,38 +128,38 @@ function createBinarySizeColumns(data: BenchmarkRun[]): Column[] {
           return binarySizeData[name] || null;
       }
     })
-  ]);
+  }));
 }
 
 function createThreadCountColumns(data: BenchmarkRun[]): Column[] {
   const propName = "thread_count";
   const last = data[data.length - 1];
   const threadCountNames = Object.keys(last[propName]!);
-  return threadCountNames.map(name => [
+  return threadCountNames.map(name => ({
     name,
-    ...data.map(d => {
+    data: data.map(d => {
       const threadCountData = d[propName];
       if (!threadCountData) {
         return null;
       }
       return threadCountData[name] || null;
     })
-  ]);
+  }));
 }
 
 function createSyscallCountColumns(data: BenchmarkRun[]): Column[] {
   const propName = "syscall_count";
   const syscallCountNames = Object.keys(data[data.length - 1][propName]!);
-  return syscallCountNames.map(name => [
+  return syscallCountNames.map(name => ({
     name,
-    ...data.map(d => {
+    data: data.map(d => {
       const syscallCountData = d[propName];
       if (!syscallCountData) {
         return null;
       }
       return syscallCountData[name] || null;
     })
-  ]);
+  }));
 }
 
 export function formatKB(bytes: number): string {
@@ -149,11 +184,11 @@ export function formatLogScale(t: number): string {
 
 export function logScale(columns: Column[]): void {
   for (const col of columns) {
-    for (let i = 1; i < col.length; i++) {
-      if (col[i] == null || col[i] === 0) {
+    for (let i = 0; i < col.data.length; i++) {
+      if (col.data[i] == null || col.data[i] === 0) {
         continue;
       }
-      col[i] = Math.log10((col[i] as number) * TimeScaleFactor);
+      col.data[i] = Math.log10((col.data[i] as number) * TimeScaleFactor);
     }
   }
 }
@@ -183,7 +218,9 @@ export interface BenchmarkData {
   execTime: Column[];
   throughput: Column[];
   reqPerSec: Column[];
+  normalizedReqPerSec: Column[];
   proxy: Column[];
+  normalizedProxy: Column[];
   maxLatency: Column[];
   maxMemory: Column[];
   binarySize: Column[];
@@ -197,15 +234,26 @@ export function reshape(data: BenchmarkRun[]): BenchmarkData {
   // hack to extract proxy fields from req/s fields
   extractProxyFields(data);
 
-  // TODO(ry) normalized data...
-  // const normalizedReqPerSec = createNormalizedReqPerSecColumns(data);
-  // const normalizedProxyColumns = createNormalizedProxyColumns(data);
+  const normalizedReqPerSec = createNormalizedColumns(
+    data,
+    "req_per_sec",
+    "req_per_sec",
+    "hyper"
+  );
+  const normalizedProxy = createNormalizedColumns(
+    data,
+    "req_per_sec_proxy",
+    "req_per_sec",
+    "hyper"
+  );
 
   return {
     execTime: createColumns(data, "benchmark"),
     throughput: createColumns(data, "throughput"),
     reqPerSec: createColumns(data, "req_per_sec"),
+    normalizedReqPerSec,
     proxy: createColumns(data, "req_per_sec_proxy"),
+    normalizedProxy,
     maxLatency: createColumns(data, "max_latency"),
     maxMemory: createColumns(data, "max_memory"),
     binarySize: createBinarySizeColumns(data),
