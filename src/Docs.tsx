@@ -1,8 +1,16 @@
 import React from "react";
 import { main } from "./doc_utils";
 import CodeBlock from "./CodeBlock";
-import { useLocation } from "react-router-dom";
-import { Box, Card, CardHeader, CardContent } from "@material-ui/core";
+import { Link, useLocation } from "react-router-dom";
+import {
+  List,
+  ListItem,
+  Drawer,
+  Box,
+  Card,
+  CardHeader,
+  CardContent
+} from "@material-ui/core";
 
 interface Props {
   source: string;
@@ -14,21 +22,31 @@ export default function Docs(props: Props) {
 
   return (
     <div>
-      {docs.map(docEntry => {
-        console.log("docEntry", docEntry);
+      <Drawer open={true} variant="persistent">
+        <List>
+          {docs.map(d => {
+            return (
+              <ListItem>
+                <a href={"?doc#" + d.name}>{d.name}</a>
+              </ListItem>
+            );
+          })}
+        </List>
+      </Drawer>
+      <p>
+        <a href="?">Code</a>
+      </p>
+      {docs.map(d => {
         return (
-          <Box m={2}>
+          <div id={"#" + d.name}>
             <Card>
-              <CardHeader title={docEntry.name} subheader={docEntry.typestr} />
+              <CardHeader title={d.name} subheader={d.typestr} />
               <CardContent>
-                <p>{docEntry.docstr}</p>
-                <CodeBlock
-                  language="json"
-                  value={JSON.stringify(docEntry, null, 1)}
-                />
+                <p>{d.docstr}</p>
+                <CodeBlock language="json" value={JSON.stringify(d, null, 1)} />
               </CardContent>
             </Card>
-          </Box>
+          </div>
         );
       })}
     </div>
