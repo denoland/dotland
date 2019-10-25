@@ -27,7 +27,7 @@ export default function Docs(props: Props) {
           {docs.map(d => {
             return (
               <ListItem>
-                <a href={`#${d.name}?doc`}>{d.name}</a>
+                <a href={`?doc#${d.name}`}>{d.name}</a>
               </ListItem>
             );
           })}
@@ -35,8 +35,8 @@ export default function Docs(props: Props) {
       </nav>
       {docs.map(d => {
         return (
-          <Box my={3} id={"#" + d.name}>
-            <Card>
+          <Box my={3} id={d.name}>
+            <Card raised={true}>
               <CardHeader title={d.name} subheader={d.typestr} />
               <CardContent>
                 <p>{d.docstr}</p>
