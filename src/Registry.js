@@ -60,7 +60,14 @@ export default function Registry() {
         contentComponent = <Docs source={state.contents} />;
       } else {
         // TODO(ry) pass language to CodeBlock.
-        contentComponent = <CodeBlock value={state.contents} />;
+        contentComponent = (
+          <div>
+            <p>
+              <Link to="?doc">Documentation</Link>
+            </p>
+            <CodeBlock value={state.contents} />;
+          </div>
+        );
       }
     }
   }
