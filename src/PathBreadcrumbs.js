@@ -40,7 +40,7 @@ export default function PathBreadcrumbs() {
           }
           // console.log({ parts, url });
           return (
-            <Link to={url} key={i}>
+            <Link component={RouterLink} to={url} key={i}>
               {part}
             </Link>
           );
