@@ -4,16 +4,13 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/styles";
 import { useMediaQuery } from "@material-ui/core";
 import App from "./App";
-import generateTheme from "./theme";
+import { generateTheme, useDarkMode } from "./theme";
 
 ReactDOM.render(<Index />, document.getElementById("root"));
 
 function Index() {
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-
-  const theme = React.useMemo(() => generateTheme(prefersDarkMode), [
-    prefersDarkMode
-  ]);
+  const darkMode = useDarkMode();
+  const theme = React.useMemo(() => generateTheme(darkMode), [darkMode]);
 
   return (
     <ThemeProvider theme={theme}>

@@ -1,7 +1,8 @@
 import React from "react";
 import CodeBlock from "./CodeBlock";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import "./Home.css";
+import { Link } from "@material-ui/core";
 
 const code = `import { serve } from "https://deno.land/std@v0.21.0/http/server.ts";
 const body = new TextEncoder().encode("Hello World\\n");
@@ -33,10 +34,10 @@ function Home() {
         <tbody>
           <tr>
             <th>
-              <a href="https://github.com/denoland/deno">deno</a>
+              <Link href="https://github.com/denoland/deno">deno</Link>
             </th>
             <td colSpan={2}>
-              <a
+              <Link
                 className="badge"
                 href="https://github.com/denoland/deno/actions"
               >
@@ -44,17 +45,17 @@ function Home() {
                   alt="deno ci badge"
                   src="https://github.com/denoland/deno/workflows/build/badge.svg?branch=master"
                 />
-              </a>
+              </Link>
             </td>
           </tr>
           <tr>
             <th>
-              <a href="https://github.com/denoland/deno_website2">
+              <Link href="https://github.com/denoland/deno_website2">
                 deno_website2
-              </a>
+              </Link>
             </th>
             <td colSpan={2}>
-              <a
+              <Link
                 className="badge"
                 href="https://github.com/denoland/deno_website2/actions"
               >
@@ -62,17 +63,17 @@ function Home() {
                   alt="deno ci badge"
                   src="https://github.com/denoland/deno_website2/workflows/build/badge.svg?branch=master"
                 />
-              </a>
+              </Link>
             </td>
           </tr>
           <tr>
             <th>
-              <a href="https://github.com/denoland/deno_install">
+              <Link href="https://github.com/denoland/deno_install">
                 deno_install
-              </a>
+              </Link>
             </th>
             <td>
-              <a
+              <Link
                 className="badge"
                 href="https://travis-ci.com/denoland/deno_install"
               >
@@ -80,10 +81,10 @@ function Home() {
                   alt="deno_install ci badge travis"
                   src="https://travis-ci.com/denoland/deno_install.svg?branch=master"
                 />
-              </a>
+              </Link>
             </td>
             <td>
-              <a
+              <Link
                 className="badge"
                 href="https://ci.appveyor.com/project/deno/deno-install"
               >
@@ -91,7 +92,7 @@ function Home() {
                   alt="deno_install ci badge appveyor"
                   src="https://ci.appveyor.com/api/projects/status/gtekeaf7r60xa896?branch=master&svg=true"
                 />
-              </a>
+              </Link>
             </td>
           </tr>
         </tbody>
@@ -102,34 +103,37 @@ function Home() {
       <p>Using Shell:</p>
       <pre>
         curl -fsSL{" "}
-        <a href="/x/install/install.sh">
+        <Link href="/x/install/install.sh">
           https://deno.land/x/install/install.sh
-        </a>{" "}
+        </Link>{" "}
         | sh
       </pre>
       <p>Or using PowerShell:</p>
       <pre>
         iwr{" "}
-        <a href="/x/install/install.ps1">
+        <Link href="/x/install/install.ps1">
           https://deno.land/x/install/install.ps1
-        </a>{" "}
+        </Link>{" "}
         -useb | iex
       </pre>
       <p>
-        Using <a href="https://formulae.brew.sh/formula/deno">Homebrew</a> (mac
-        or Linux):
+        Using <Link href="https://formulae.brew.sh/formula/deno">Homebrew</Link>{" "}
+        (mac or Linux):
       </p>
       <pre>brew install deno</pre>
       <p>
-        Using <a href="https://scoop.sh/">Scoop</a> (windows):
+        Using <Link href="https://scoop.sh/">Scoop</Link> (windows):
       </p>
       <pre>scoop install deno</pre>
       <p>
-        Using <a href="https://crates.io/crates/deno_cli">Cargo</a>:
+        Using <Link href="https://crates.io/crates/deno_cli">Cargo</Link>:
       </p>
       <pre>cargo install deno_cli</pre>
       <p>
-        See <a href="https://github.com/denoland/deno_install">deno_install</a>{" "}
+        See{" "}
+        <Link href="https://github.com/denoland/deno_install">
+          deno_install
+        </Link>{" "}
         for more installation options.
       </p>
 
@@ -146,50 +150,62 @@ function Home() {
 
       <p>
         <b>
-          <Link to="/std/manual.md">Manual</Link>
+          <Link component={RouterLink} to="/std/manual.md">
+            Manual
+          </Link>
         </b>
       </p>
 
       <p>
-        <a href="/typedoc/">API Reference</a>
+        <Link component={RouterLink} to="/typedoc/">
+          API Reference
+        </Link>
       </p>
 
       <p>Modules:</p>
       <ul>
         <li>
-          <a href="/std/">Standard</a>
+          <Link component={RouterLink} to="/std/">
+            Standard
+          </Link>
         </li>
         <li>
-          <a href="/x/">Third Party</a>
+          <Link component={RouterLink} to="/x/">
+            Third Party
+          </Link>
         </li>
       </ul>
 
       <p>
-        <a href="/std/style_guide.md">Style Guide</a>
+        <Link component={RouterLink} to="/std/style_guide.md">
+          Style Guide
+        </Link>
       </p>
 
       <p>
-        <a href="https://twitter.com/deno_land">Twitter Account</a>
+        <Link href="https://twitter.com/deno_land">Twitter Account</Link>
       </p>
 
       <p>
-        <a href="https://github.com/denoland/deno/blob/master/Releases.md">
+        <Link href="https://github.com/denoland/deno/blob/master/Releases.md">
           Release notes
-        </a>
+        </Link>
       </p>
 
       <p>
-        <a href="https://gitter.im/denolife/Lobby">Community chat room</a>
+        <Link href="https://gitter.im/denolife/Lobby">Community chat room</Link>
       </p>
 
       <p>
-        <a href="/benchmarks">Benchmarks</a>
+        <Link component={RouterLink} to="/benchmarks">
+          Benchmarks
+        </Link>
       </p>
 
       <p>
-        <a href="https://github.com/denolib/awesome-deno">
+        <Link href="https://github.com/denolib/awesome-deno">
           A curated list of awesome Deno things
-        </a>
+        </Link>
       </p>
     </main>
   );

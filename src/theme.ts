@@ -1,8 +1,10 @@
 import { red, blue, cyan } from "@material-ui/core/colors";
 import { createMuiTheme } from "@material-ui/core/styles";
+import { useMediaQuery } from "@material-ui/core";
 
-// A custom theme for this app
-const generateTheme = (darkMode: boolean) =>
+export const useDarkMode = () => useMediaQuery("(prefers-color-scheme: dark)");
+
+export const generateTheme = (darkMode: boolean) =>
   createMuiTheme({
     palette: {
       type: darkMode ? "dark" : "light",
@@ -16,5 +18,3 @@ const generateTheme = (darkMode: boolean) =>
       }
     }
   });
-
-export default generateTheme;
