@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { main } from "./doc_utils";
 import CodeBlock from "./CodeBlock";
 import Markdown from "./Markdown";
@@ -25,7 +25,6 @@ interface Props {
 export default function Docs(props: Props) {
   const location = useLocation();
   const docs = main(location.pathname, props.source);
-  const [drawerOpen, setDrawerOpen] = useState(true);
 
   return (
     <div className="docs">
