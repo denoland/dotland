@@ -5,8 +5,8 @@ import { Link, useLocation } from "react-router-dom";
 import {
   List,
   ListItem,
-  Drawer,
   Box,
+  Button,
   Card,
   CardHeader,
   CardContent
@@ -22,23 +22,20 @@ export default function Docs(props: Props) {
 
   return (
     <div>
-      <Drawer open={true} variant="persistent">
+      <nav>
         <List>
           {docs.map(d => {
             return (
               <ListItem>
-                <a href={"?doc#" + d.name}>{d.name}</a>
+                <a href={`#${d.name}?doc`}>{d.name}</a>
               </ListItem>
             );
           })}
         </List>
-      </Drawer>
-      <p>
-        <a href="?">Code</a>
-      </p>
+      </nav>
       {docs.map(d => {
         return (
-          <div id={"#" + d.name}>
+          <Box my={3} id={"#" + d.name}>
             <Card>
               <CardHeader title={d.name} subheader={d.typestr} />
               <CardContent>
@@ -46,7 +43,7 @@ export default function Docs(props: Props) {
                 <CodeBlock language="json" value={JSON.stringify(d, null, 1)} />
               </CardContent>
             </Card>
-          </div>
+          </Box>
         );
       })}
     </div>
