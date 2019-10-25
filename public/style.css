@@ -3,31 +3,6 @@
   max-width: 800px;
 }
 
-table {
-  margin-left: 8px;
-  margin-right: 8px;
-}
-
-table {
-  border-collapse: collapse;
-  margin-top: 8px;
-}
-
-td,
-th {
-  font-weight: normal;
-  text-align: center;
-  border: 1px solid #aaa;
-  padding: 4px;
-}
-
-@media only screen and (min-width: 768px) {
-  td,
-  th {
-    padding: 8px 16px;
-  }
-}
-
 svg {
   margin: 0px;
   width: 100%;
@@ -37,38 +12,6 @@ svg {
 header {
   display: flex;
   align-items: center;
-}
-
-#spinner-overlay {
-  display: none;
-  position: fixed;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  background: rgba(0, 0, 0, 0.3);
-}
-
-@keyframes spinner {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.spinner:before {
-  content: "";
-  box-sizing: border-box;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 60px;
-  height: 60px;
-  margin-top: -30px;
-  margin-left: -30px;
-  border-radius: 50%;
-  border: 2px solid #ccc;
-  border-top-color: #000;
-  animation: spinner 0.6s linear infinite;
 }
 
 .hidden {
