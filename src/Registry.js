@@ -72,7 +72,7 @@ export default function Registry() {
             <Button>
               <Link to="?doc">Documentation</Link>
             </Button>
-            <CodeBlock value={state.contents} />;
+            <CodeBlock value={state.contents} />
           </div>
         );
       }
