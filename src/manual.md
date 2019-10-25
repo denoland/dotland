@@ -26,9 +26,7 @@ standard browser-compatible protocol for loading modules: URLs.
 Deno provides security guarantees about how programs can access your system with
 the default being the most restrictive secure sandbox.
 
-Deno provides <a href="https://github.com/denoland/deno/tree/master/std">a set
-of reviewed (audited) standard modules</a> that are guaranteed to work with
-Deno.
+Deno provides [a set of reviewed (audited) standard modules](https://github.com/denoland/deno/tree/master/std) that are guaranteed to work with Deno.
 
 ### Goals
 

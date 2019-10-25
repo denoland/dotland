@@ -12,6 +12,9 @@ import {
   formatKB,
   formatPercentage
 } from "./benchmark_utils";
+import { useDarkMode } from "./theme";
+import { Link } from "@material-ui/core";
+import { Link as RouterLink } from "react-router-dom";
 
 interface Props {
   yTickFormat?: (n: number) => string;
@@ -21,6 +24,8 @@ interface Props {
 }
 
 function BenchmarkChart(props: Props) {
+  const darkMode = useDarkMode();
+
   function viewCommitOnClick(c1: any, c2: any, { dataPointIndex }: any): void {
     window.open(
       `https://github.com/denoland/deno/commit/${props.sha1List[dataPointIndex]}`
@@ -32,6 +37,9 @@ function BenchmarkChart(props: Props) {
   }
 
   const options = {
+    theme: {
+      mode: darkMode ? "dark" : "light"
+    },
     chart: {
       toolbar: {
         show: true
@@ -101,14 +109,17 @@ export default function Benchmarks() {
 
   return (
     <main>
-      <a href="/">
+      <Link component={RouterLink} to="/">
         <img alt="deno logo" src="/images/deno_logo_4.gif" width="200" />
-      </a>
+      </Link>
       <h1>Deno Continuous Benchmarks</h1>
 
       <p>
         These plots are updated on every commit to the{" "}
-        <a href="https://github.com/denoland/deno">master branch</a>.
+        <Link component={RouterLink} to="https://github.com/denoland/deno">
+          master branch
+        </Link>
+        .
       </p>
 
       <p>
@@ -117,10 +128,15 @@ export default function Benchmarks() {
       </p>
 
       <p>
-        <a href="#recent">recent data</a>
+        <Link component={RouterLink} to="#recent">
+          recent data
+        </Link>
       </p>
       <p>
-        <a href="#all">all data</a> (takes a moment to load)
+        <Link component={RouterLink} to="#all">
+          all data
+        </Link>{" "}
+        (takes a moment to load)
       </p>
       <p>
         <label>
@@ -134,7 +150,10 @@ export default function Benchmarks() {
       </p>
 
       <h3 id="req-per-sec">
-        Req/Sec <a href="#req-per-sec">#</a>
+        Req/Sec{" "}
+        <Link component={RouterLink} to="#req-per-sec">
+          #
+        </Link>
       </h3>
 
       <BenchmarkChart
@@ -151,24 +170,36 @@ export default function Benchmarks() {
 
       <ul>
         <li>
-          <a href="https://github.com/denoland/deno/blob/master/tools/deno_tcp.ts">
+          <Link
+            component={RouterLink}
+            to="https://github.com/denoland/deno/blob/master/tools/deno_tcp.ts"
+          >
             deno_tcp
-          </a>{" "}
+          </Link>{" "}
           is a fake http server that doesn't parse HTTP. It is comparable to{" "}
-          <a href="https://github.com/denoland/deno/blob/master/tools/node_tcp.js">
+          <Link
+            component={RouterLink}
+            to="https://github.com/denoland/deno/blob/master/tools/node_tcp.js"
+          >
             node_tcp
-          </a>
+          </Link>
           .
         </li>
 
         <li>
-          <a href="https://github.com/denoland/deno_std/blob/master/http/http_bench.ts">
+          <Link
+            component={RouterLink}
+            to="https://github.com/denoland/deno_std/blob/master/http/http_bench.ts"
+          >
             deno_http
-          </a>{" "}
+          </Link>{" "}
           is a web server written in TypeScript. It is comparable to{" "}
-          <a href="https://github.com/denoland/deno/blob/master/tools/node_http.js">
+          <Link
+            component={RouterLink}
+            to="https://github.com/denoland/deno/blob/master/tools/node_http.js"
+          >
             node_http
-          </a>
+          </Link>
           .
         </li>
 
@@ -177,36 +208,56 @@ export default function Benchmarks() {
           fake HTTP server. It blindly reads and writes fixed HTTP packets. It
           is comparable to deno_tcp and node_tcp. This is a standalone
           executable that uses{" "}
-          <a href="https://crates.io/crates/deno">the deno rust crate</a>. The
-          code is in{" "}
-          <a href="https://github.com/denoland/deno/blob/master/core/examples/http_bench.rs">
+          <Link component={RouterLink} to="https://crates.io/crates/deno">
+            the deno rust crate
+          </Link>
+          . The code is in{" "}
+          <Link
+            component={RouterLink}
+            to="https://github.com/denoland/deno/blob/master/core/examples/http_bench.rs"
+          >
             http_bench.rs
-          </a>{" "}
+          </Link>{" "}
           and{" "}
-          <a href="https://github.com/denoland/deno/blob/master/core/examples/http_bench.js">
+          <Link
+            component={RouterLink}
+            to="https://github.com/denoland/deno/blob/master/core/examples/http_bench.js"
+          >
             http_bench.js
-          </a>
+          </Link>
           . single uses{" "}
-          <a href="https://docs.rs/tokio/0.1.19/tokio/runtime/current_thread/index.html">
+          <Link
+            component={RouterLink}
+            to="https://docs.rs/tokio/0.1.19/tokio/runtime/current_thread/index.html"
+          >
             tokio::runtime::current_thread
-          </a>{" "}
+          </Link>{" "}
           and multi uses
-          <a href="https://docs.rs/tokio/0.1.19/tokio/runtime/">
+          <Link
+            component={RouterLink}
+            to="https://docs.rs/tokio/0.1.19/tokio/runtime/"
+          >
             tokio::runtime::threadpool
-          </a>
+          </Link>
           .
         </li>
 
         <li>
-          <a href="https://github.com/denoland/deno/blob/master/tools/hyper_hello.rs">
+          <Link
+            component={RouterLink}
+            to="https://github.com/denoland/deno/blob/master/tools/hyper_hello.rs"
+          >
             hyper
-          </a>{" "}
+          </Link>{" "}
           is a Rust HTTP server and represents an upper bound.
         </li>
       </ul>
 
       <h3 id="proxy-req-per-sec">
-        Proxy Req/Sec <a href="#proxy-eq-per-sec">#</a>
+        Proxy Req/Sec{" "}
+        <Link component={RouterLink} to="#proxy-eq-per-sec">
+          #
+        </Link>
       </h3>
 
       <BenchmarkChart
@@ -223,38 +274,56 @@ export default function Benchmarks() {
 
       <ul>
         <li>
-          <a href="https://github.com/denoland/deno/blob/master/tools/deno_tcp_proxy.ts">
+          <Link
+            component={RouterLink}
+            to="https://github.com/denoland/deno/blob/master/tools/deno_tcp_proxy.ts"
+          >
             deno_proxy_tcp
-          </a>{" "}
+          </Link>{" "}
           is a fake tcp proxy server that doesn't parse HTTP. It is comparable
           to{" "}
-          <a href="https://github.com/denoland/deno/blob/master/tools/node_tcp_proxy.js">
+          <Link
+            component={RouterLink}
+            to="https://github.com/denoland/deno/blob/master/tools/node_tcp_proxy.js"
+          >
             node_proxy_tcp
-          </a>
+          </Link>
           .
         </li>
 
         <li>
-          <a href="https://github.com/denoland/deno/blob/master/tools/deno_http_proxy.ts">
+          <Link
+            component={RouterLink}
+            to="https://github.com/denoland/deno/blob/master/tools/deno_http_proxy.ts"
+          >
             deno_proxy
-          </a>{" "}
+          </Link>{" "}
           is an HTTP proxy server written in TypeScript. It is comparable to{" "}
-          <a href="https://github.com/denoland/deno/blob/master/tools/node_http_proxy.js">
+          <Link
+            component={RouterLink}
+            to="https://github.com/denoland/deno/blob/master/tools/node_http_proxy.js"
+          >
             node_proxy
-          </a>
+          </Link>
           .
         </li>
 
         <li>
-          <a href="https://github.com/denoland/deno/blob/master/tools/hyper_hello.rs">
+          <Link
+            component={RouterLink}
+            to="https://github.com/denoland/deno/blob/master/tools/hyper_hello.rs"
+          >
             hyper
-          </a>{" "}
+          </Link>{" "}
           is a Rust HTTP server used as the origin for the proxy tests
         </li>
       </ul>
 
       <h3 id="max-latency">
-        Max Latency <a href="#max-latency">#</a>
+        Max Latency{" "}
+        <Link component={RouterLink} to="#max-latency">
+          #
+        </Link>
       </h3>
 
       <BenchmarkChart
@@ -270,7 +339,10 @@ export default function Benchmarks() {
       </p>
 
       <h3 id="exec-time">
-        Execution time <a href="#exec-time">#</a>
+        Execution time{" "}
+        <Link component={RouterLink} to="#exec-time">
+          #
+        </Link>
       </h3>
 
       <BenchmarkChart
@@ -283,21 +355,33 @@ export default function Benchmarks() {
       <p>
         Log scale. This shows how much time total it takes to run a few simple
         deno programs:{" "}
-        <a href="https://github.com/denoland/deno/blob/master/tests/002_hello.ts">
+        <Link
+          component={RouterLink}
+          to="https://github.com/denoland/deno/blob/master/tests/002_hello.ts"
+        >
           tests/002_hello.ts
-        </a>
+        </Link>
         ,{" "}
-        <a href="https://github.com/denoland/deno/blob/master/tests/003_relative_import.ts">
+        <Link
+          component={RouterLink}
+          to="https://github.com/denoland/deno/blob/master/tests/003_relative_import.ts"
+        >
           tests/003_relative_import.ts
-        </a>
+        </Link>
         ,{" "}
-        <a href="https://github.com/denoland/deno/blob/master/tests/workers_round_robin_bench.ts">
+        <Link
+          component={RouterLink}
+          to="https://github.com/denoland/deno/blob/master/tests/workers_round_robin_bench.ts"
+        >
           tests/workers_round_robin_bench.ts
-        </a>
+        </Link>
         , and{" "}
-        <a href="https://github.com/denoland/deno/blob/master/tests/workers_startup_bench.ts">
+        <Link
+          component={RouterLink}
+          to="https://github.com/denoland/deno/blob/master/tests/workers_startup_bench.ts"
+        >
           tests/workers_startup_bench.ts
-        </a>
+        </Link>
         . For deno to execute typescript, it must first compile it to JS. A warm
         startup is when deno has a cached JS output already, so it should be
         fast because it bypasses the TS compiler. A cold startup is when deno
@@ -305,7 +389,10 @@ export default function Benchmarks() {
       </p>
 
       <h3 id="throughput">
-        Throughput <a href="#throughput">#</a>
+        Throughput{" "}
+        <Link component={RouterLink} to="#throughput">
+          #
+        </Link>
       </h3>
 
       <BenchmarkChart
@@ -317,18 +404,27 @@ export default function Benchmarks() {
 
       <p>
         Log scale. Time it takes to pipe a certain amount of data through Deno.
-        <a href="https://github.com/denoland/deno/blob/master/tests/echo_server.ts">
+        <Link
+          component={RouterLink}
+          to="https://github.com/denoland/deno/blob/master/tests/echo_server.ts"
+        >
           echo_server.ts
-        </a>{" "}
+        </Link>{" "}
         and{" "}
-        <a href="https://github.com/denoland/deno/blob/master/tests/cat.ts">
+        <Link
+          component={RouterLink}
+          to="https://github.com/denoland/deno/blob/master/tests/cat.ts"
+        >
           cat.ts
-        </a>
+        </Link>
         . Smaller is better.
       </p>
 
       <h3 id="max-memory">
-        Max Memory Usage <a href="#max-memory">#</a>
+        Max Memory Usage{" "}
+        <Link component={RouterLink} to="#max-memory">
+          #
+        </Link>
       </h3>
       <BenchmarkChart
         columns={data.maxMemory}
@@ -339,7 +435,10 @@ export default function Benchmarks() {
       <p>Max memory usage during execution. Smaller is better.</p>
 
       <h3 id="size">
-        Executable size <a href="#size">#</a>
+        Executable size{" "}
+        <Link component={RouterLink} to="#size">
+          #
+        </Link>
       </h3>
       <BenchmarkChart
         columns={data.binarySize}
@@ -350,13 +449,19 @@ export default function Benchmarks() {
       <p>deno ships only a single binary. We track its size here.</p>
 
       <h3 id="threads">
-        Thread count <a href="#threads">#</a>
+        Thread count{" "}
+        <Link component={RouterLink} to="#threads">
+          #
+        </Link>
       </h3>
       <BenchmarkChart columns={data.threadCount} sha1List={data.sha1List} />
       <p>How many threads various programs use. Smaller is better.</p>
 
       <h3 id="bundles">
-        Syscall count <a href="#bundles">#</a>
+        Syscall count{" "}
+        <Link component={RouterLink} to="#bundles">
+          #
+        </Link>
       </h3>
       <BenchmarkChart columns={data.syscallCount} sha1List={data.sha1List} />
       <p>
@@ -365,7 +470,10 @@ export default function Benchmarks() {
       </p>
 
       <h3 id="bundles">
-        Bundle size <a href="#syscalls">#</a>
+        Bundle size{" "}
+        <Link component={RouterLink} to="#syscalls">
+          #
+        </Link>
       </h3>
       <BenchmarkChart
         columns={data.bundleSize}
@@ -377,11 +485,21 @@ export default function Benchmarks() {
 
       <ul>
         <li>
-          <a href="https://deno.land/std/http/file_server.ts">file_server</a>
+          <Link
+            component={RouterLink}
+            to="https://deno.land/std/http/file_server.ts"
+          >
+            file_server
+          </Link>
         </li>
 
         <li>
-          <a href="https://deno.land/std/examples/gist.ts">gist</a>
+          <Link
+            component={RouterLink}
+            to="https://deno.land/std/examples/gist.ts"
+          >
+            gist
+          </Link>
         </li>
       </ul>
     </main>

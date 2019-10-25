@@ -1,13 +1,14 @@
 import React from "react";
 import { getEntry } from "./registry_utils";
 import DATABASE from "./database.json";
+import { Link } from "@material-ui/core";
 
 export default function RegistryIndex() {
   return (
     <main>
-      <a href="/">
+      <Link href="/">
         <img alt="deno logo" src="/images/deno_logo_4.gif" width="200" />
-      </a>
+      </Link>
       <h1>Third Party Modules</h1>
 
       <p>This is a code hosting service for Deno scripts.</p>
@@ -20,19 +21,19 @@ export default function RegistryIndex() {
 
       <p>
         Functionality built-in to Deno is not listed here. The built-in runtime
-        is documented at <a href="/typedoc/">deno.land/typedoc</a> and in{" "}
-        <a href="/manual">the manual</a>.
+        is documented at <Link href="/typedoc/">deno.land/typedoc</Link> and in{" "}
+        <Link href="/manual">the manual</Link>.
       </p>
 
       <p>
-        See <a href="/std/README.md">/std</a> for the standard modules.
+        See <Link href="/std/README.md">/std</Link> for the standard modules.
       </p>
 
       <p>
         To add to this list, edit{" "}
-        <a href="https://github.com/denoland/deno_website2/blob/master/src/database.json">
+        <Link href="https://github.com/denoland/deno_website2/blob/master/src/database.json">
           database.json
-        </a>
+        </Link>
         .
       </p>
 
@@ -46,7 +47,8 @@ export default function RegistryIndex() {
             const link = `/x/${name}/`;
             return (
               <li key={i}>
-                <a href={link}>{name}</a> (<a href={entry.repo}>repo</a>)
+                <Link href={link}>{name}</Link> (
+                <Link href={entry.repo}>repo</Link>)
               </li>
             );
           })}

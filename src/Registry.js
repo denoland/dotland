@@ -1,6 +1,6 @@
 import React from "react";
-import { Box, Button } from "@material-ui/core";
-import { Link, useLocation } from "react-router-dom";
+import { Box, Button, Link, ButtonGroup } from "@material-ui/core";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import Markdown from "./Markdown";
 import CodeBlock from "./CodeBlock";
 import Docs from "./Docs";
@@ -69,7 +69,9 @@ export default function Registry() {
         contentComponent = (
           <div>
             <Button>
-              <Link to="?">Source Code</Link>
+              <Link component={RouterLink} to="?">
+                Source Code
+              </Link>
             </Button>
             <Docs source={state.contents} />;
           </div>
@@ -78,14 +80,15 @@ export default function Registry() {
         // TODO(ry) pass language to CodeBlock.
         contentComponent = (
           <div>
-            <Button>
-              <Link to="?doc">Documentation</Link>
-            </Button>
-            {state.repoUrl ? (
-              <Button>
-                <a href={state.repoUrl}>Repo</a>
+            <ButtonGroup>
+              <Button component={RouterLink} to="?doc">
+                Documentation
               </Button>
-            ) : null}
+              {state.repoUrl ? (
+                <Button href={state.repoUrl}>Repository</Button>
+              ) : null}
+              {state.rawUrl ? <Button href={state.rawUrl}>Raw</Button> : null}
+            </ButtonGroup>
             <CodeBlock value={state.contents} />
           </div>
         );

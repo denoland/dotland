@@ -3,6 +3,12 @@
   max-width: 800px;
 }
 
+@media (prefers-color-scheme: dark) {
+  #logo {
+    filter: invert();
+  }
+}
+
 header {
   display: flex;
   align-items: center;
