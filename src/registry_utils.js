@@ -85,9 +85,9 @@ export function getEntry(name, branch = "master") {
       url: `https://raw.githubusercontent.com/${rawEntry.owner}/${
         rawEntry.repo
       }/${branch}${rawEntry.path || "/"}`,
-      repo: `https://github.com/${rawEntry.owner}/${rawEntry.repo}${
-        rawEntry.path ? `/tree/${branch}${rawEntry.path || "/"}` : ""
-      }`
+      repo: `https://github.com/${rawEntry.owner}/${
+        rawEntry.repo
+      }/tree/${branch}${rawEntry.path || "/"}`
     };
   }
   return null;
