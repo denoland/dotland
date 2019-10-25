@@ -54,7 +54,7 @@ export default function Registry() {
           <td>{d.type}</td>
           <td>{d.size}</td>
           <td>
-            <Link to={name}>{name}</Link>
+            <Link component={RouterLink} to={name}>{name}</Link>
           </td>
         </tr>
       );
