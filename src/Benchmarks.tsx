@@ -12,9 +12,9 @@ import {
   formatKB,
   formatPercentage
 } from "./benchmark_utils";
-import { useDarkMode } from "./theme";
-import { Link } from "@material-ui/core";
-import { Link as RouterLink } from "react-router-dom";
+import { Link, Theme } from "@material-ui/core";
+import { HashLink as RouterLink } from "react-router-hash-link";
+import { useTheme } from "@material-ui/styles";
 
 interface Props {
   yTickFormat?: (n: number) => string;
@@ -24,7 +24,7 @@ interface Props {
 }
 
 function BenchmarkChart(props: Props) {
-  const darkMode = useDarkMode();
+  const theme = useTheme<Theme>();
 
   function viewCommitOnClick(c1: any, c2: any, { dataPointIndex }: any): void {
     window.open(
@@ -38,9 +38,14 @@ function BenchmarkChart(props: Props) {
 
   const options = {
     theme: {
-      mode: darkMode ? "dark" : "light"
+      mode: theme.palette.type,
+      palette: "palette1"
     },
     chart: {
+      background: theme.palette.background.default,
+      foreColor: theme.palette.getContrastText(
+        theme.palette.background.default
+      ),
       toolbar: {
         show: true
       },
