@@ -1,7 +1,8 @@
 import React from "react";
 import { main } from "./doc_utils";
 import Markdown from "./Markdown";
-import { Link as RouterLink, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { HashLink as RouterLink } from "react-router-hash-link";
 import {
   Link,
   List,
@@ -39,7 +40,7 @@ export default function Docs(props: Props) {
       {docs.map(d => {
         const href = "?doc#" + d.name;
         const title = (
-          <Link href={href} color="inherit">
+          <Link component={RouterLink} to={href} color="inherit">
             <code>{d.name}</code>
           </Link>
         );

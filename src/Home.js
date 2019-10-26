@@ -1,6 +1,6 @@
 import React from "react";
 import CodeBlock from "./CodeBlock";
-import { Link as RouterLink } from "react-router-dom";
+import { HashLink as RouterLink } from "react-router-hash-link";
 import "./Home.css";
 import { Link } from "@material-ui/core";
 

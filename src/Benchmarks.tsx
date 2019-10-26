@@ -12,9 +12,8 @@ import {
   formatKB,
   formatPercentage
 } from "./benchmark_utils";
-import { useDarkMode } from "./theme";
 import { Link, Theme } from "@material-ui/core";
-import { Link as RouterLink } from "react-router-dom";
+import { HashLink as RouterLink } from "react-router-hash-link";
 import { useTheme } from "@material-ui/styles";
 
 interface Props {
