@@ -16,11 +16,10 @@ export default function Registry() {
     repoUrl: null,
     dir: null
   });
-  const location = useLocation();
+  const { pathname, search } = useLocation();
 
   React.useEffect(() => {
     setIsLoading(true);
-    const { pathname } = location;
     const { entry, path } = proxy(pathname);
     console.log({ path });
     if (!path || path.endsWith("/")) {
@@ -42,7 +41,7 @@ export default function Registry() {
         setIsLoading(false);
       });
     }
-  }, [location.pathname, location.search]);
+  }, [pathname]);
 
   let contentComponent;
   if (isLoading) {
@@ -78,7 +77,7 @@ export default function Registry() {
   } else {
     const isMarkdown = state.rawUrl && state.rawUrl.endsWith(".md");
     const hasDocsAvailable = state.rawUrl && state.rawUrl.endsWith(".ts");
-    const isDocsPage = location.search.includes("doc") && state.contents;
+    const isDocsPage = search.includes("doc") && state.contents;
     contentComponent = (
       <div>
         <ButtonGroup color="primary">
