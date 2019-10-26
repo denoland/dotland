@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Breadcrumbs, Link } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
-import { HashLink as RouterLink } from "react-router-hash-link";
+import { InternalLink } from "./InternalLink";
 import assert from "assert";
 
 export default function PathBreadcrumbs() {
@@ -22,7 +22,7 @@ export default function PathBreadcrumbs() {
           if (i === 0) {
             assert(!part);
             return (
-              <Link component={RouterLink} to="/" key={i}>
+              <Link component={InternalLink} to="/" key={i}>
                 deno.land
               </Link>
             );
@@ -41,7 +41,7 @@ export default function PathBreadcrumbs() {
           }
           // console.log({ parts, url });
           return (
-            <Link component={RouterLink} to={url} key={i}>
+            <Link component={InternalLink} to={url} key={i}>
               {part}
             </Link>
           );
