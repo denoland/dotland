@@ -1,6 +1,6 @@
 import React from "react";
 import CodeBlock from "./CodeBlock";
-import { HashLink as RouterLink } from "react-router-hash-link";
+import { InternalLink } from "./InternalLink";
 import "./Home.css";
 import { Link } from "@material-ui/core";
 
@@ -150,7 +150,7 @@ function Home() {
 
       <p>
         <b>
-          <Link component={RouterLink} to="/std/manual.md">
+          <Link component={InternalLink} to="/std/manual.md">
             Manual
           </Link>
         </b>
@@ -172,19 +172,19 @@ function Home() {
       <p>Modules:</p>
       <ul>
         <li>
-          <Link component={RouterLink} to="/std/">
+          <Link component={InternalLink} to="/std/">
             Standard
           </Link>
         </li>
         <li>
-          <Link component={RouterLink} to="/x/">
+          <Link component={InternalLink} to="/x/">
             Third Party
           </Link>
         </li>
       </ul>
 
       <p>
-        <Link component={RouterLink} to="/std/style_guide.md">
+        <Link component={InternalLink} to="/std/style_guide.md">
           Style Guide
         </Link>
       </p>
@@ -204,7 +204,7 @@ function Home() {
       </p>
 
       <p>
-        <Link component={RouterLink} to="/benchmarks">
+        <Link component={InternalLink} to="/benchmarks">
           Benchmarks
         </Link>
       </p>

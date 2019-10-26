@@ -2,7 +2,7 @@ import React from "react";
 import { main } from "./doc_utils";
 import Markdown from "./Markdown";
 import { useLocation } from "react-router-dom";
-import { HashLink as RouterLink } from "react-router-hash-link";
+import { InternalLink } from "./InternalLink";
 import {
   Link,
   List,
@@ -29,7 +29,7 @@ export default function Docs(props: Props) {
           {docs.map(d => {
             return (
               <ListItem key={d.name}>
-                <Link component={RouterLink} to={`?doc#${d.name}`}>
+                <Link component={InternalLink} to={`?doc#${d.name}`}>
                   {d.name}
                 </Link>
               </ListItem>
@@ -40,7 +40,7 @@ export default function Docs(props: Props) {
       {docs.map(d => {
         const href = "?doc#" + d.name;
         const title = (
-          <Link component={RouterLink} to={href} color="inherit">
+          <Link component={InternalLink} to={href} color="inherit">
             <code>{d.name}</code>
           </Link>
         );
