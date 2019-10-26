@@ -373,6 +373,11 @@
     "owner": "bokuweb",
     "repo": "deno-pretty-assert"
   },
+  "prettystring": {
+    "type": "github",
+    "owner": "OnikurYH",
+    "repo": "deno-prettystring"
+  },
   "purify": {
     "type": "github",
     "owner": "aynik",
