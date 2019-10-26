@@ -1,7 +1,7 @@
 import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import lightTheme from "react-syntax-highlighter/dist/esm/styles/hljs/atom-one-light";
-import darkTheme from "react-syntax-highlighter/dist/esm/styles/hljs/atom-one-dark";
+import lightTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-light";
+import darkTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark";
 import { useDarkMode } from "./theme";
 
 interface Props {

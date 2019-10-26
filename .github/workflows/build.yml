@@ -12,9 +12,7 @@ jobs:
           node-version: 12
       - run: yarn --frozen-lockfile
       - run: yarn run lint
-      #
-      # TODO(ry) tests!
-      #
+      - run: CI=true yarn test
       - name: Publish Production
         if: github.ref == 'refs/heads/master' && github.event_name == 'push' && github.repository == 'denoland/deno_website2'
         uses: cloudflare/wrangler-action@1.0.0
