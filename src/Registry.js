@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Button, Link, ButtonGroup } from "@material-ui/core";
-import { Link as RouterLink, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { HashLink as RouterLink } from "react-router-hash-link";
 import Markdown from "./Markdown";
 import CodeBlock from "./CodeBlock";
 import Docs from "./Docs";
@@ -41,7 +42,7 @@ export default function Registry() {
         setIsLoading(false);
       });
     }
-  }, [location]);
+  }, [location.pathname, location.search]);
 
   let contentComponent;
   if (isLoading) {
