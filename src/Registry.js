@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Button, Link, ButtonGroup } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
-import { HashLink as RouterLink } from "react-router-hash-link";
+import { InternalLink } from "./InternalLink";
 import Markdown from "./Markdown";
 import CodeBlock from "./CodeBlock";
 import Docs from "./Docs";
@@ -55,7 +55,7 @@ export default function Registry() {
           <td>{d.type}</td>
           <td>{d.size}</td>
           <td>
-            <Link component={RouterLink} to={name}>
+            <Link component={InternalLink} to={name}>
               {name}
             </Link>
           </td>
@@ -82,11 +82,11 @@ export default function Registry() {
       <div>
         <ButtonGroup color="primary">
           {isDocsPage ? (
-            <Button component={RouterLink} to="?">
+            <Button component={InternalLink} to="?">
               Source Code
             </Button>
           ) : hasDocsAvailable ? (
-            <Button component={RouterLink} to="?doc">
+            <Button component={InternalLink} to="?doc">
               Documentation
             </Button>
           ) : null}
