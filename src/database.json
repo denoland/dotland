@@ -113,7 +113,7 @@
     "type": "github",
     "owner": "date-fns",
     "repo": "date-fns",
-    "path": "/src/"
+    "path": "src/"
   },
   "debuglog": {
     "type": "github",
@@ -234,7 +234,7 @@
     "type": "github",
     "owner": "billymoon",
     "repo": "fiona",
-    "path": "/src/"
+    "path": "src/"
   },
   "gardens": {
     "type": "github",
@@ -280,7 +280,7 @@
     "type": "github",
     "owner": "luvies",
     "repo": "lazy",
-    "path": "/lib/"
+    "path": "lib/"
   },
   "license_checker": {
     "type": "github",
@@ -321,7 +321,7 @@
     "type": "github",
     "owner": "motss",
     "repo": "deno_mod",
-    "path": "/normalize_diacritics/"
+    "path": "normalize_diacritics/"
   },
   "oak": {
     "type": "github",
@@ -437,7 +437,7 @@
     "type": "github",
     "owner": "denoland",
     "repo": "deno",
-    "path": "/std/"
+    "path": "std/"
   },
   "std_old": {
     "type": "github",

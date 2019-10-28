@@ -84,10 +84,10 @@ export function getEntry(name, branch = "master") {
       type: "github",
       url: `https://raw.githubusercontent.com/${rawEntry.owner}/${
         rawEntry.repo
-      }/${branch}${rawEntry.path || "/"}`,
+      }/${branch}/${rawEntry.path}`,
       repo: `https://github.com/${rawEntry.owner}/${
         rawEntry.repo
-      }/tree/${branch}${rawEntry.path || "/"}`
+      }/tree/${branch}/${rawEntry.path}`
     };
   }
   return null;
