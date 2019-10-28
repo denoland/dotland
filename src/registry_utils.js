@@ -65,8 +65,7 @@ export function getEntry(name, branch = "master") {
       url: rawEntry.url.replace(/\$\{b}/, branch),
       repo: rawEntry.repo.replace(/\$\{b}/, branch)
     };
-  }
-  if (rawEntry.type === "esm") {
+  } else if (rawEntry.type === "esm") {
     const version = branch === "master" ? "latest" : branch;
     return {
       name,
@@ -75,19 +74,14 @@ export function getEntry(name, branch = "master") {
       url: rawEntry.url.replace(/\$\{v}/, version),
       repo: rawEntry.repo.replace(/\$\{v}/, version)
     };
-  }
-  if (rawEntry.type === "github") {
+  } else if (rawEntry.type === "github") {
     return {
       name,
       branch,
       raw: rawEntry,
       type: "github",
-      url: `https://raw.githubusercontent.com/${rawEntry.owner}/${
-        rawEntry.repo
-      }/${branch}${rawEntry.path || "/"}`,
-      repo: `https://github.com/${rawEntry.owner}/${
-        rawEntry.repo
-      }/tree/${branch}${rawEntry.path || "/"}`
+      url: `https://raw.githubusercontent.com/${rawEntry.owner}/${rawEntry.repo}/${branch}/${rawEntry.path}`,
+      repo: `https://github.com/${rawEntry.owner}/${rawEntry.repo}/tree/${branch}/${rawEntry.path}`
     };
   }
   return null;
