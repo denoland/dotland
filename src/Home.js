@@ -156,7 +156,7 @@ function Home() {
       </p>
 
       <p>
-        {/* 
+        {/*
           TODO(ry) The /typedoc/ path is not part of the react app. It's a
           separate static site hosted in S3 and to proxied by the CF worker.
           This is a legacy documentation site. The goal is to handle Deno's own
@@ -177,24 +177,20 @@ function Home() {
         </li>
         <li>
           <Link component={InternalLink} to="/x/">
-            Third Party
+            Third party
           </Link>
         </li>
       </ul>
 
       <p>
-        <Link component={InternalLink} to="/std/style_guide.md">
-          Style Guide
+        <Link href="https://github.com/denoland/deno/blob/master/Releases.md">
+          Releases
         </Link>
       </p>
 
       <p>
-        <Link href="https://twitter.com/deno_land">Twitter Account</Link>
-      </p>
-
-      <p>
-        <Link href="https://github.com/denoland/deno/blob/master/Releases.md">
-          Release notes
+        <Link component={InternalLink} to="/benchmarks">
+          Benchmarks
         </Link>
       </p>
 
@@ -203,9 +199,7 @@ function Home() {
       </p>
 
       <p>
-        <Link component={InternalLink} to="/benchmarks">
-          Benchmarks
-        </Link>
+        <Link href="https://twitter.com/deno_land">Twitter</Link>
       </p>
 
       <p>
