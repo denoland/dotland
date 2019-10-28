@@ -164,7 +164,7 @@ function Home() {
           https://github.com/denoland/deno_website2/issues/57
         */}
         <Link target="_blank" rel="noopener noreferrer" href="/typedoc/">
-          API reference
+          API Reference
         </Link>
       </p>
 
@@ -177,7 +177,7 @@ function Home() {
         </li>
         <li>
           <Link component={InternalLink} to="/x/">
-            Third party
+            Third Party
           </Link>
         </li>
       </ul>
@@ -195,7 +195,7 @@ function Home() {
       </p>
 
       <p>
-        <Link href="https://gitter.im/denolife/Lobby">Community chat room</Link>
+        <Link href="https://gitter.im/denolife/Lobby">Community Chat Room</Link>
       </p>
 
       <p>
@@ -204,7 +204,7 @@ function Home() {
 
       <p>
         <Link href="https://github.com/denolib/awesome-deno">
-          A curated list of awesome Deno things
+          More Links
         </Link>
       </p>
     </main>
