@@ -14,7 +14,7 @@ test("a database entry should never have a path starting with /", () => {
   for (const key in DATABASE) {
     const entry = DATABASE[key];
     if (entry.path) {
-      expect(entry.path[0]).not.toMatch("/");
+      expect(entry.path[0]).not.toBe("/");
     }
   }
 });

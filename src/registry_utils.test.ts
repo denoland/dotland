@@ -5,14 +5,14 @@ test("check that the registry correctly handles std module", () => {
   expect(DATABASE["std"]).toBeTruthy();
   const entry = getEntry("std");
   expect(entry).toBeTruthy();
-  expect(entry.name).toEqual("std");
-  expect(entry.branch).toEqual("master");
+  expect(entry.name).toBe("std");
+  expect(entry.branch).toBe("master");
   expect(entry.raw).toEqual(DATABASE["std"]);
-  expect(entry.type).toEqual("github");
-  expect(entry.url).toEqual(
+  expect(entry.type).toBe("github");
+  expect(entry.url).toBe(
     "https://raw.githubusercontent.com/denoland/deno/master/std/"
   );
-  expect(entry.repo).toEqual(
+  expect(entry.repo).toBe(
     "https://github.com/denoland/deno/tree/master/std/"
   );
 });
