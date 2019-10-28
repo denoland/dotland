@@ -12,9 +12,7 @@ test("check that the registry correctly handles std module", () => {
   expect(entry.url).toBe(
     "https://raw.githubusercontent.com/denoland/deno/master/std/"
   );
-  expect(entry.repo).toBe(
-    "https://github.com/denoland/deno/tree/master/std/"
-  );
+  expect(entry.repo).toBe("https://github.com/denoland/deno/tree/master/std/");
 });
 
 test("check that the registry correctly handles non existing module", () => {
