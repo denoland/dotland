@@ -1,12 +1,17 @@
 import React from "react";
 import Spinner from "./Spinner";
-import ApexChart from "react-apexcharts";
+import {
+  LineChart,
+  Line,
+  ResponsiveContainer,
+  Tooltip,
+  Legend,
+  YAxis
+} from "recharts";
 import {
   BenchmarkData,
   Column,
   reshape,
-  logScale,
-  formatLogScale,
   formatReqSec,
   formatMB,
   formatKB,
@@ -21,73 +26,92 @@ interface Props {
   columns: Column[];
   yLabel?: string;
   sha1List: string[];
+  scale: "linear" | "log";
 }
+
+const COLORS = [
+  "#a6cee3",
+  "#1f78b4",
+  "#b2df8a",
+  "#33a02c",
+  "#fb9a99",
+  "#e31a1c",
+  "#fdbf6f",
+  "#ff7f00",
+  "#cab2d6",
+  "#6a3d9a",
+  "#ffff99",
+  "#b15928"
+];
 
 function BenchmarkChart(props: Props) {
   const theme = useTheme<Theme>();
 
-  function viewCommitOnClick(c1: any, c2: any, { dataPointIndex }: any): void {
+  function viewCommitOnClick(d: any): void {
     window.open(
-      `https://github.com/denoland/deno/commit/${props.sha1List[dataPointIndex]}`
+      `https://github.com/denoland/deno/commit/${props.sha1List[d.index]}`
     );
   }
 
-  if (props.yTickFormat && props.yTickFormat === formatLogScale) {
-    logScale(props.columns);
-  }
-
-  const options = {
-    theme: {
-      mode: theme.palette.type,
-      palette: "palette1"
-    },
-    chart: {
-      background: theme.palette.background.default,
-      foreColor: theme.palette.getContrastText(
-        theme.palette.background.default
-      ),
-      toolbar: {
-        show: true
-      },
-      animations: {
-        enabled: false
-      },
-      events: {
-        markerClick: viewCommitOnClick
+  const data: { name: string }[] = [];
+  const series: string[] = [];
+  props.columns.forEach(column => {
+    series.push(column.name);
+    column.data.forEach((y, x) => {
+      if (!data[x]) {
+        data[x] = { name: props.sha1List[x] };
       }
-    },
-    stroke: {
-      width: 2,
-      curve: "straight"
-    },
-    legend: {
-      show: true,
-      showForSingleSeries: true,
-      position: "bottom"
-    },
-    yaxis: {
-      labels: {
-        formatter: props.yTickFormat
-      },
-      title: {
-        text: props.yLabel
-      }
-    },
-    xaxis: {
-      labels: {
-        show: false
-      },
-      categories: props.sha1List,
-      tooltip: {
-        enabled: false
-      }
-    }
-  };
-
-  const series = props.columns;
+      data[x][column.name] = y ? y : 0;
+    });
+  });
 
   return (
-    <ApexChart type="line" options={options} series={series} height={300} />
+    <ResponsiveContainer height={300} width="100%">
+      <LineChart data={data}>
+        {series.map((n, i) => (
+          <Line
+            type="linear"
+            dataKey={n}
+            stroke={COLORS[i]}
+            strokeWidth={2}
+            isAnimationActive={false}
+            key={n}
+            dot={false}
+            activeDot={{ onClick: viewCommitOnClick }}
+          />
+        ))}
+        <Tooltip
+          isAnimationActive={false}
+          labelFormatter={i => props.sha1List[i]}
+          cursor={false}
+          contentStyle={{ backgroundColor: theme.palette.background.default }}
+        />
+        <Legend
+          wrapperStyle={{ backgroundColor: theme.palette.background.default }}
+        />
+        <YAxis
+          label={{
+            value: props.yLabel,
+            angle: -90,
+            position: "insideLeft",
+            offset: 2,
+            fill: theme.palette.getContrastText(
+              theme.palette.background.default
+            )
+          }}
+          width={70}
+          padding={{ top: 10, bottom: 10 }}
+          tickFormatter={
+            props.yTickFormat ? props.yTickFormat : v => v.toFixed(2)
+          }
+          scale={props.scale}
+          domain={["auto", "auto"]}
+          stroke={theme.palette.getContrastText(
+            theme.palette.background.default
+          )}
+        />
+      </LineChart>
+    </ResponsiveContainer>
   );
 }
 
@@ -166,6 +190,7 @@ export default function Benchmarks() {
         sha1List={data.sha1List}
         yLabel={showNormalized ? "% of hyper througput" : "1k req/sec"}
         yTickFormat={showNormalized ? formatPercentage : formatReqSec}
+        scale="linear"
       />
 
       <p>
@@ -270,6 +295,7 @@ export default function Benchmarks() {
         sha1List={data.sha1List}
         yLabel={showNormalized ? "% of hyper througput" : "1k req/sec"}
         yTickFormat={showNormalized ? formatPercentage : formatReqSec}
+        scale="linear"
       />
 
       <p>
@@ -335,7 +361,7 @@ export default function Benchmarks() {
         columns={data.maxLatency}
         sha1List={data.sha1List}
         yLabel="milliseconds"
-        yTickFormat={formatLogScale}
+        scale="log"
       />
 
       <p>
@@ -354,7 +380,7 @@ export default function Benchmarks() {
         columns={data.execTime}
         sha1List={data.sha1List}
         yLabel="seconds"
-        yTickFormat={formatLogScale}
+        scale="log"
       />
 
       <p>
@@ -404,7 +430,7 @@ export default function Benchmarks() {
         columns={data.throughput}
         sha1List={data.sha1List}
         yLabel="seconds"
-        yTickFormat={formatLogScale}
+        scale="log"
       />
 
       <p>
@@ -436,6 +462,7 @@ export default function Benchmarks() {
         sha1List={data.sha1List}
         yLabel="megabytes"
         yTickFormat={formatMB}
+        scale="linear"
       />
       <p>Max memory usage during execution. Smaller is better.</p>
 
@@ -450,6 +477,7 @@ export default function Benchmarks() {
         sha1List={data.sha1List}
         yLabel="megabytes"
         yTickFormat={formatMB}
+        scale="linear"
       />
       <p>deno ships only a single binary. We track its size here.</p>
 
@@ -459,7 +487,11 @@ export default function Benchmarks() {
           #
         </Link>
       </h3>
-      <BenchmarkChart columns={data.threadCount} sha1List={data.sha1List} />
+      <BenchmarkChart
+        columns={data.threadCount}
+        sha1List={data.sha1List}
+        scale="linear"
+      />
       <p>How many threads various programs use. Smaller is better.</p>
 
       <h3 id="bundles">
@@ -468,7 +500,11 @@ export default function Benchmarks() {
           #
         </Link>
       </h3>
-      <BenchmarkChart columns={data.syscallCount} sha1List={data.sha1List} />
+      <BenchmarkChart
+        columns={data.syscallCount}
+        sha1List={data.sha1List}
+        scale="linear"
+      />
       <p>
         How many total syscalls are performed when executing a given script.
         Smaller is better.
@@ -485,6 +521,7 @@ export default function Benchmarks() {
         sha1List={data.sha1List}
         yTickFormat={formatKB}
         yLabel="kb"
+        scale="linear"
       />
       <p>Size of different bundled scripts.</p>
 

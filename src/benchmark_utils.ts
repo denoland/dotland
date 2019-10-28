@@ -1,8 +1,5 @@
 // Copyright 2018-2019 the Deno authors. All rights reserved. MIT license.
 
-// How much to multiply time values in order to process log graphs properly.
-const TimeScaleFactor = 10000;
-
 export interface BenchmarkExecTimeResult {
   min?: number;
   max?: number;
@@ -171,26 +168,11 @@ export function formatMB(bytes: number): string {
 }
 
 export function formatReqSec(reqPerSec: number): string {
-  return (reqPerSec / 1000).toFixed(3);
+  return (reqPerSec / 1000).toFixed(2);
 }
 
 export function formatPercentage(decimal: number): string {
   return (decimal * 100).toFixed(2);
-}
-
-export function formatLogScale(t: number): string {
-  return (Math.pow(10, t) / TimeScaleFactor).toFixed(4);
-}
-
-export function logScale(columns: Column[]): void {
-  for (const col of columns) {
-    for (let i = 0; i < col.data.length; i++) {
-      if (col.data[i] == null || col.data[i] === 0) {
-        continue;
-      }
-      col.data[i] = Math.log10((col.data[i] as number) * TimeScaleFactor);
-    }
-  }
 }
 
 const proxyFields: BenchmarkName[] = ["req_per_sec"];
