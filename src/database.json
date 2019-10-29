@@ -437,7 +437,7 @@
     "type": "github",
     "owner": "denoland",
     "repo": "deno",
-    "path": "/std/"
+    "path": "std/"
   },
   "std_old": {
     "type": "github",

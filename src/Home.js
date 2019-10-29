@@ -3,15 +3,14 @@ import CodeBlock from "./CodeBlock";
 import { Link } from "./components/Link";
 import "./Home.css";
 
-const code = `import { serve } from "https://deno.land/std@v0.21.0/http/server.ts";
+const code = `import { serve } from "https://deno.land/std@v0.22.0/http/server.ts";
 const body = new TextEncoder().encode("Hello World\\n");
 const s = serve(":8000");
-window.onload = async () => {
-  console.log("http://localhost:8000/");
-  for await (const req of s) {
-    req.respond({ body });
-  }
-};`;
+console.log("http://localhost:8000/");
+for await (const req of s) {
+  req.respond({ body });
+}
+`;
 
 function Home() {
   return (
@@ -35,14 +34,14 @@ function Home() {
             <th>
               <Link to="https://github.com/denoland/deno">deno</Link>
             </th>
-            <td colSpan={2}>
+            <td>
               <Link
                 className="badge"
                 to="https://github.com/denoland/deno/actions"
               >
                 <img
                   alt="deno ci badge"
-                  src="https://github.com/denoland/deno/workflows/build/badge.svg?branch=master"
+                  src="https://github.com/denoland/deno/workflows/ci/badge.svg?branch=master&event=push"
                 />
               </Link>
             </td>
@@ -53,14 +52,14 @@ function Home() {
                 deno_website2
               </Link>
             </th>
-            <td colSpan={2}>
+            <td>
               <Link
                 className="badge"
                 to="https://github.com/denoland/deno_website2/actions"
               >
                 <img
                   alt="deno ci badge"
-                  src="https://github.com/denoland/deno_website2/workflows/build/badge.svg?branch=master"
+                  src="https://github.com/denoland/deno_website2/workflows/ci/badge.svg?branch=master&event=push"
                 />
               </Link>
             </td>
@@ -74,22 +73,11 @@ function Home() {
             <td>
               <Link
                 className="badge"
-                to="https://travis-ci.com/denoland/deno_install"
+                to="https://github.com/denoland/deno_install/actions"
               >
                 <img
-                  alt="deno_install ci badge travis"
-                  src="https://travis-ci.com/denoland/deno_install.svg?branch=master"
-                />
-              </Link>
-            </td>
-            <td>
-              <Link
-                className="badge"
-                to="https://ci.appveyor.com/project/deno/deno-install"
-              >
-                <img
-                  alt="deno_install ci badge appveyor"
-                  src="https://ci.appveyor.com/api/projects/status/gtekeaf7r60xa896?branch=master&svg=true"
+                  alt="deno_install ci badge"
+                  src="https://github.com/denoland/deno_install/workflows/ci/badge.svg?branch=master&event=push"
                 />
               </Link>
             </td>
@@ -152,7 +140,7 @@ function Home() {
       </p>
 
       <p>
-        {/* 
+        {/*
           TODO(ry) The /typedoc/ path is not part of the react app. It's a
           separate static site hosted in S3 and to proxied by the CF worker.
           This is a legacy documentation site. The goal is to handle Deno's own
@@ -160,7 +148,7 @@ function Home() {
           https://github.com/denoland/deno_website2/issues/57
         */}
         <Link target="_blank" rel="noopener noreferrer" to="/typedoc/">
-          API reference
+          API Reference
         </Link>
       </p>
 
@@ -175,21 +163,9 @@ function Home() {
       </ul>
 
       <p>
-        <Link to="/std/style_guide.md">Style Guide</Link>
-      </p>
-
-      <p>
-        <Link to="https://twitter.com/deno_land">Twitter Account</Link>
-      </p>
-
-      <p>
         <Link to="https://github.com/denoland/deno/blob/master/Releases.md">
-          Release notes
+          Releases
         </Link>
-      </p>
-
-      <p>
-        <Link to="https://gitter.im/denolife/Lobby">Community chat room</Link>
       </p>
 
       <p>
@@ -197,9 +173,15 @@ function Home() {
       </p>
 
       <p>
-        <Link to="https://github.com/denolib/awesome-deno">
-          A curated list of awesome Deno things
-        </Link>
+        <Link to="https://gitter.im/denolife/Lobby">Community Chat Room</Link>
+      </p>
+
+      <p>
+        <Link to="https://twitter.com/deno_land">Twitter</Link>
+      </p>
+
+      <p>
+        <Link to="https://github.com/denolib/awesome-deno">More Links</Link>
       </p>
     </main>
   );

@@ -3,27 +3,19 @@ import DATABASE from "./database.json";
 
 export function proxy(pathname) {
   if (pathname.startsWith("/std")) {
-    console.log("proxy", pathname);
     return proxy("/x" + pathname);
   }
   if (!pathname.startsWith("/x/")) {
     return null;
   }
-
   const nameBranchRest = pathname.replace(/^\/x\//, "");
-  console.log("nameBranchRest", nameBranchRest);
   const [nameBranch, ...rest] = nameBranchRest.split("/");
   const [name, branch] = nameBranch.split("@", 2);
-
   const path = rest.join("/");
-
-  console.log("getEntry", { name, branch, path });
   const entry = getEntry(name, branch);
-
   if (!entry || !entry.url) {
     return null;
   }
-
   assert(entry.url.endsWith("/"));
   assert(!path.startsWith("/"));
   return { entry, path };
@@ -65,8 +57,7 @@ export function getEntry(name, branch = "master") {
       url: rawEntry.url.replace(/\$\{b}/, branch),
       repo: rawEntry.repo.replace(/\$\{b}/, branch)
     };
-  }
-  if (rawEntry.type === "esm") {
+  } else if (rawEntry.type === "esm") {
     const version = branch === "master" ? "latest" : branch;
     return {
       name,
@@ -75,19 +66,17 @@ export function getEntry(name, branch = "master") {
       url: rawEntry.url.replace(/\$\{v}/, version),
       repo: rawEntry.repo.replace(/\$\{v}/, version)
     };
-  }
-  if (rawEntry.type === "github") {
+  } else if (rawEntry.type === "github") {
+    const path = rawEntry.path || "";
+    const url = `https://raw.githubusercontent.com/${rawEntry.owner}/${rawEntry.repo}/${branch}/${path}`;
+    const repo = `https://github.com/${rawEntry.owner}/${rawEntry.repo}/tree/${branch}/${path}`;
     return {
       name,
       branch,
       raw: rawEntry,
       type: "github",
-      url: `https://raw.githubusercontent.com/${rawEntry.owner}/${
-        rawEntry.repo
-      }/${branch}${rawEntry.path || "/"}`,
-      repo: `https://github.com/${rawEntry.owner}/${
-        rawEntry.repo
-      }/tree/${branch}${rawEntry.path || "/"}`
+      url,
+      repo
     };
   }
   return null;
