@@ -12,9 +12,7 @@ import {
   formatKB,
   formatPercentage
 } from "./benchmark_utils";
-import { 
-  // Link, 
-  Theme } from "@material-ui/core";
+import { Theme } from "@material-ui/core";
 import { Link } from "./Link"
 import { useTheme } from "@material-ui/styles";
 
