@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import Spinner from "./Spinner";
 import {
   LineChart,
@@ -6,7 +6,9 @@ import {
   ResponsiveContainer,
   Tooltip,
   Legend,
-  YAxis
+  YAxis,
+  XAxis,
+  ReferenceArea
 } from "recharts";
 import {
   BenchmarkData,
@@ -48,105 +50,152 @@ function BenchmarkChart(props: Props) {
   const theme = useTheme<Theme>();
   const [hovered, setHovered] = useState<string>(null);
   const [disabled, setDisabled] = useState<string[]>([]);
+  const [refLeft, setRefLeft] = useState<number>(null);
+  const [refRight, setRefRight] = useState<number>(null);
+  const [boundLeft, setBoundLeft] = useState<number>(null);
+  const [boundRight, setBoundRight] = useState<number>(null);
 
-  function viewCommitOnClick(d: any): void {
-    window.open(
-      `https://github.com/denoland/deno/commit/${props.sha1List[d.index]}`
-    );
+  function viewCommitOnClick(d: number): void {
+    window.open(`https://github.com/denoland/deno/commit/${sha1List[d]}`);
   }
 
-  const data: { name: string }[] = [];
-  const series: string[] = [];
-  props.columns.forEach(column => {
-    series.push(column.name);
-    column.data.forEach((y, x) => {
-      if (!data[x]) {
-        data[x] = { name: props.sha1List[x] };
+  function zoom() {
+    if (refLeft !== null) {
+      if (refRight !== null && refLeft !== refRight) {
+        const newLeft = Math.min(refLeft, refRight) + boundLeft;
+        const newRight = Math.max(refLeft, refRight) + boundLeft;
+        setBoundLeft(newLeft);
+        setBoundRight(newRight);
+      } else {
+        viewCommitOnClick(refLeft);
       }
-      data[x][column.name] = y ? y : 0;
+    }
+
+    setRefLeft(null);
+    setRefRight(null);
+  }
+
+  const [data, series, sha1List] = useMemo(() => {
+    let data: { name: string }[] = [];
+    let series: string[] = [];
+    props.columns.forEach(column => {
+      series.push(column.name);
+      column.data.forEach((y, x) => {
+        if (!data[x]) {
+          data[x] = { name: props.sha1List[x] };
+        }
+        data[x][column.name] = y ? y : 0;
+      });
     });
-  });
+    let sha1List = props.sha1List;
+    if (boundLeft !== null && boundRight !== null) {
+      data = data.splice(boundLeft, boundRight - boundLeft + 1);
+      sha1List = sha1List.splice(boundLeft, boundRight - boundLeft + 1);
+    }
+    return [data, series, sha1List];
+  }, [props.columns, props.sha1List, boundLeft, boundRight]);
 
   return (
-    <ResponsiveContainer height={300} width="100%">
-      <LineChart data={data}>
-        {series.map((n, i) => {
-          if (disabled.includes(n)) return null;
-          let alpha = "";
-          if (hovered) {
-            if (hovered !== n) {
-              alpha = "33";
+    <>
+      <ResponsiveContainer height={300} width="100%">
+        <LineChart
+          data={data}
+          onMouseDown={e => e && setRefLeft(e.activeLabel)}
+          onMouseMove={e => e && refLeft !== null && setRefRight(e.activeLabel)}
+          onMouseUp={() => zoom()}
+        >
+          {series.map((n, i) => {
+            if (disabled.includes(n)) return null;
+            let alpha = "";
+            if (hovered) {
+              if (hovered !== n) {
+                alpha = "33";
+              }
             }
-          }
-          return (
-            <Line
-              type="linear"
-              dataKey={n}
-              stroke={COLORS[i] + alpha}
-              strokeWidth={2}
-              isAnimationActive={false}
-              key={n}
-              dot={false}
-              activeDot={{ onClick: viewCommitOnClick }}
-            />
-          );
-        })}
-        <Tooltip
-          isAnimationActive={false}
-          labelFormatter={i => props.sha1List[i]}
-          cursor={false}
-          contentStyle={{ backgroundColor: theme.palette.background.default }}
-        />
-        <Legend
-          wrapperStyle={{ backgroundColor: theme.palette.background.default }}
-          onMouseEnter={v => setHovered(v.id)}
-          onMouseLeave={() => setHovered(null)}
-          onClick={v => {
-            if (disabled.includes(v.id)) {
-              setDisabled(disabled.filter(d => v.id !== d));
-            } else {
-              setDisabled([...disabled, v.id]);
+            return (
+              <Line
+                type="linear"
+                dataKey={n}
+                stroke={COLORS[i] + alpha}
+                strokeWidth={2}
+                isAnimationActive={false}
+                key={n}
+                dot={false}
+                activeDot={{ onClick: viewCommitOnClick }}
+              />
+            );
+          })}
+          <Tooltip
+            isAnimationActive={false}
+            labelFormatter={i => sha1List[i]}
+            cursor={false}
+            contentStyle={{ backgroundColor: theme.palette.background.default }}
+          />
+          <Legend
+            wrapperStyle={{ backgroundColor: theme.palette.background.default }}
+            onMouseEnter={v => setHovered(v.id)}
+            onMouseLeave={() => setHovered(null)}
+            onClick={v => {
+              if (disabled.includes(v.id)) {
+                setDisabled(disabled.filter(d => v.id !== d));
+              } else {
+                setDisabled([...disabled, v.id]);
+              }
+            }}
+            payload={series.map((n, i) => ({
+              id: n,
+              value: (
+                <span
+                  style={{
+                    opacity: disabled.includes(n) ? 0.2 : 1,
+                    userSelect: "none"
+                  }}
+                >
+                  {n}
+                </span>
+              ),
+              type: "circle",
+              color: COLORS[i] + (disabled.includes(n) ? "33" : "")
+            }))}
+          />
+          <XAxis tickFormatter={() => ""} />
+          <YAxis
+            label={{
+              value: props.yLabel,
+              angle: -90,
+              position: "insideLeft",
+              offset: 2,
+              fill: theme.palette.getContrastText(
+                theme.palette.background.default
+              )
+            }}
+            width={70}
+            padding={{ top: 10, bottom: 10 }}
+            tickFormatter={
+              props.yTickFormat ? props.yTickFormat : v => v.toFixed(2)
             }
-          }}
-          payload={series.map((n, i) => ({
-            id: n,
-            value: (
-              <span
-                style={{
-                  opacity: disabled.includes(n) ? 0.2 : 1,
-                  userSelect: "none"
-                }}
-              >
-                {n}
-              </span>
-            ),
-            type: "circle",
-            color: COLORS[i] + (disabled.includes(n) ? "33" : "")
-          }))}
-        />
-        <YAxis
-          label={{
-            value: props.yLabel,
-            angle: -90,
-            position: "insideLeft",
-            offset: 2,
-            fill: theme.palette.getContrastText(
+            scale={props.scale}
+            domain={["auto", "auto"]}
+            stroke={theme.palette.getContrastText(
               theme.palette.background.default
-            )
+            )}
+          />
+          {refLeft !== null && refRight !== null ? (
+            <ReferenceArea x1={refLeft} x2={refRight} />
+          ) : null}
+        </LineChart>
+      </ResponsiveContainer>
+      {boundLeft || boundRight ? (
+        <Link
+          onClick={() => {
+            setBoundLeft(null);
+            setBoundRight(null);
           }}
-          width={70}
-          padding={{ top: 10, bottom: 10 }}
-          tickFormatter={
-            props.yTickFormat ? props.yTickFormat : v => v.toFixed(2)
-          }
-          scale={props.scale}
-          domain={["auto", "auto"]}
-          stroke={theme.palette.getContrastText(
-            theme.palette.background.default
-          )}
-        />
-      </LineChart>
-    </ResponsiveContainer>
+        >
+          Reset Zoom
+        </Link>
+      ) : null}
+    </>
   );
 }
 
