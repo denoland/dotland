@@ -42,7 +42,7 @@ function Home() {
               >
                 <img
                   alt="deno ci badge"
-                  src="https://github.com/denoland/deno/workflows/build/badge.svg?branch=master"
+                  src="https://github.com/denoland/deno/workflows/build/badge.svg?branch=master&event=push"
                 />
               </Link>
             </td>
@@ -60,7 +60,7 @@ function Home() {
               >
                 <img
                   alt="deno ci badge"
-                  src="https://github.com/denoland/deno_website2/workflows/ci/badge.svg?branch=master"
+                  src="https://github.com/denoland/deno_website2/workflows/ci/badge.svg?branch=master&event=push"
                 />
               </Link>
             </td>
@@ -78,7 +78,7 @@ function Home() {
               >
                 <img
                   alt="deno_install ci badge"
-                  src="https://github.com/denoland/deno_install/workflows/ci/badge.svg?branch=master"
+                  src="https://github.com/denoland/deno_install/workflows/ci/badge.svg?branch=master&event=push"
                 />
               </Link>
             </td>
