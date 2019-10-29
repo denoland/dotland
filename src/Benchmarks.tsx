@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Spinner from "./Spinner";
 import {
   LineChart,
@@ -46,6 +46,8 @@ const COLORS = [
 
 function BenchmarkChart(props: Props) {
   const theme = useTheme<Theme>();
+  const [hovered, setHovered] = useState<string>(null);
+  const [disabled, setDisabled] = useState<string[]>([]);
 
   function viewCommitOnClick(d: any): void {
     window.open(
@@ -68,18 +70,27 @@ function BenchmarkChart(props: Props) {
   return (
     <ResponsiveContainer height={300} width="100%">
       <LineChart data={data}>
-        {series.map((n, i) => (
-          <Line
-            type="linear"
-            dataKey={n}
-            stroke={COLORS[i]}
-            strokeWidth={2}
-            isAnimationActive={false}
-            key={n}
-            dot={false}
-            activeDot={{ onClick: viewCommitOnClick }}
-          />
-        ))}
+        {series.map((n, i) => {
+          if (disabled.includes(n)) return null;
+          let alpha = "";
+          if (hovered) {
+            if (hovered !== n) {
+              alpha = "33";
+            }
+          }
+          return (
+            <Line
+              type="linear"
+              dataKey={n}
+              stroke={COLORS[i] + alpha}
+              strokeWidth={2}
+              isAnimationActive={false}
+              key={n}
+              dot={false}
+              activeDot={{ onClick: viewCommitOnClick }}
+            />
+          );
+        })}
         <Tooltip
           isAnimationActive={false}
           labelFormatter={i => props.sha1List[i]}
@@ -88,6 +99,30 @@ function BenchmarkChart(props: Props) {
         />
         <Legend
           wrapperStyle={{ backgroundColor: theme.palette.background.default }}
+          onMouseEnter={v => setHovered(v.id)}
+          onMouseLeave={() => setHovered(null)}
+          onClick={v => {
+            if (disabled.includes(v.id)) {
+              setDisabled(disabled.filter(d => v.id !== d));
+            } else {
+              setDisabled([...disabled, v.id]);
+            }
+          }}
+          payload={series.map((n, i) => ({
+            id: n,
+            value: (
+              <span
+                style={{
+                  opacity: disabled.includes(n) ? 0.2 : 1,
+                  userSelect: "none"
+                }}
+              >
+                {n}
+              </span>
+            ),
+            type: "circle",
+            color: COLORS[i] + (disabled.includes(n) ? "33" : "")
+          }))}
         />
         <YAxis
           label={{
