@@ -1,7 +1,8 @@
 import React from "react";
-import { Box, Button, Link, ButtonGroup } from "@material-ui/core";
+import { Box, ButtonGroup } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
-import { InternalLink } from "./InternalLink";
+import { Link } from "./components/Link.tsx";
+import { Button } from "./components/Button.tsx";
 import Markdown from "./Markdown";
 import CodeBlock from "./CodeBlock";
 import Docs from "./Docs";
@@ -55,9 +56,7 @@ export default function Registry() {
           <td>{d.type}</td>
           <td>{d.size}</td>
           <td>
-            <Link component={InternalLink} to={name}>
-              {name}
-            </Link>
+            <Link to={name}>{name}</Link>
           </td>
         </tr>
       );
@@ -65,7 +64,7 @@ export default function Registry() {
     contentComponent = (
       <div>
         <ButtonGroup color="primary">
-          <Button href={state.repoUrl}>Repository</Button>
+          <Button to={state.repoUrl}>Repository</Button>
         </ButtonGroup>
         <br />
         <br />
@@ -82,18 +81,14 @@ export default function Registry() {
       <div>
         <ButtonGroup color="primary">
           {isDocsPage ? (
-            <Button component={InternalLink} to="?">
-              Source Code
-            </Button>
+            <Button to="?">Source Code</Button>
           ) : hasDocsAvailable ? (
-            <Button component={InternalLink} to="?doc">
-              Documentation
-            </Button>
+            <Button to="?doc">Documentation</Button>
           ) : null}
           {state.repoUrl ? (
-            <Button href={state.repoUrl}>Repository</Button>
+            <Button to={state.repoUrl}>Repository</Button>
           ) : null}
-          {state.rawUrl ? <Button href={state.rawUrl}>Raw</Button> : null}
+          {state.rawUrl ? <Button to={state.rawUrl}>Raw</Button> : null}
         </ButtonGroup>
         {(() => {
           if (isMarkdown) {

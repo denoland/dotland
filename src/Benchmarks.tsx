@@ -13,7 +13,7 @@ import {
   formatPercentage
 } from "./benchmark_utils";
 import { Theme } from "@material-ui/core";
-import { Link } from "./Link";
+import { Link } from "./components/Link";
 import { useTheme } from "@material-ui/styles";
 
 interface Props {
