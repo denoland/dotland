@@ -35,7 +35,7 @@ function Home() {
             <th>
               <Link href="https://github.com/denoland/deno">deno</Link>
             </th>
-            <td colSpan={2}>
+            <td>
               <Link
                 className="badge"
                 href="https://github.com/denoland/deno/actions"
@@ -53,7 +53,7 @@ function Home() {
                 deno_website2
               </Link>
             </th>
-            <td colSpan={2}>
+            <td>
               <Link
                 className="badge"
                 href="https://github.com/denoland/deno_website2/actions"
@@ -74,22 +74,11 @@ function Home() {
             <td>
               <Link
                 className="badge"
-                href="https://travis-ci.com/denoland/deno_install"
+                href="https://github.com/denoland/deno_install/actions"
               >
                 <img
-                  alt="deno_install ci badge travis"
-                  src="https://travis-ci.com/denoland/deno_install.svg?branch=master"
-                />
-              </Link>
-            </td>
-            <td>
-              <Link
-                className="badge"
-                href="https://ci.appveyor.com/project/deno/deno-install"
-              >
-                <img
-                  alt="deno_install ci badge appveyor"
-                  src="https://ci.appveyor.com/api/projects/status/gtekeaf7r60xa896?branch=master&svg=true"
+                  alt="deno_install ci badge"
+                  src="https://github.com/denoland/deno_install/workflows/ci/badge.svg?branch=master"
                 />
               </Link>
             </td>
@@ -203,9 +192,7 @@ function Home() {
       </p>
 
       <p>
-        <Link href="https://github.com/denolib/awesome-deno">
-          More Links
-        </Link>
+        <Link href="https://github.com/denolib/awesome-deno">More Links</Link>
       </p>
     </main>
   );
