@@ -6,10 +6,10 @@ const InternalLink = React.forwardRef((props: HashLinkProps, ref) => (
   <HashLink {...props} />
 ));
 
-export const Link = (props) => {
-  if (props.to.indexOf("://")=== -1) {
-    return <MaterialLink component={InternalLink} {...props}/>
+export const Link = props => {
+  if (props.to.indexOf("://") === -1) {
+    return <MaterialLink component={InternalLink} {...props} />;
   } else {
-    return <MaterialLink {...props} component="a" href={props.to} />
+    return <MaterialLink {...props} component="a" href={props.to} />;
   }
-}
+};
