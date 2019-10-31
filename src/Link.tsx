@@ -13,7 +13,7 @@ interface Props {
 }
 
 /** Use this component instead of MaterialUI's Link or ReactRouter's Link. */
-export const Link: React.FC<Props & LinkProps> = props => {
+export const Link: React.FC<Props & Omit<LinkProps, 'href'>> = props => {
   if (props.to.indexOf("://") === -1) {
     return <MaterialLink component={InternalLink} {...props} />;
   } else {
