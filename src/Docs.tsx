@@ -2,7 +2,7 @@ import React from "react";
 import { main } from "./doc_utils";
 import Markdown from "./Markdown";
 import { useLocation } from "react-router-dom";
-import { Link } from "./components/Link";
+import { Link } from "./Link";
 import {
   List,
   ListItem,

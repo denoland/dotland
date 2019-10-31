@@ -1,8 +1,8 @@
 import React from "react";
 import { Box, ButtonGroup } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
-import { Link } from "./components/Link.tsx";
-import { Button } from "./components/Button.tsx";
+import { Link } from "./Link.tsx";
+import { Button } from "./Button.tsx";
 import Markdown from "./Markdown";
 import CodeBlock from "./CodeBlock";
 import Docs from "./Docs";

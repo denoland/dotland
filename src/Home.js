@@ -1,6 +1,6 @@
 import React from "react";
 import CodeBlock from "./CodeBlock";
-import { Link } from "./components/Link";
+import { Link } from "./Link";
 import "./Home.css";
 
 const code = `import { serve } from "https://deno.land/std@v0.22.0/http/server.ts";
