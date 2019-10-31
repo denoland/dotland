@@ -1,5 +1,4 @@
 import React from "react";
-import { getEntry } from "./registry_utils";
 import DATABASE from "./database.json";
 import { Link } from "@material-ui/core";
 
@@ -43,13 +42,9 @@ export default function RegistryIndex() {
         {Object.keys(DATABASE)
           .sort((nameA, nameB) => nameA.localeCompare(nameB))
           .map((name, i) => {
-            const entry = getEntry(name);
             const link = `/x/${name}/`;
             return (
-              <li key={i}>
-                <Link href={link}>{name}</Link> (
-                <Link href={entry.repo}>repo</Link>)
-              </li>
+              <li key={i}><Link href={link}>{name}</Link></li>
             );
           })}
       </ul>
