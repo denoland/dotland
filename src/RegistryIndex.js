@@ -1,5 +1,4 @@
 import React from "react";
-import { getEntry } from "./registry_utils";
 import DATABASE from "./database.json";
 import { Link } from "@material-ui/core";
 
@@ -7,7 +6,11 @@ export default function RegistryIndex() {
   return (
     <main>
       <Link href="/">
-        <img alt="deno logo" src="/images/deno_logo_4.gif" width="200" />
+        <img
+          alt="deno logo"
+          src="/images/deno-circle-thunder.gif"
+          width="200"
+        />
       </Link>
       <h1>Third Party Modules</h1>
 
@@ -43,12 +46,10 @@ export default function RegistryIndex() {
         {Object.keys(DATABASE)
           .sort((nameA, nameB) => nameA.localeCompare(nameB))
           .map((name, i) => {
-            const entry = getEntry(name);
             const link = `/x/${name}/`;
             return (
               <li key={i}>
-                <Link href={link}>{name}</Link> (
-                <Link href={entry.repo}>repo</Link>)
+                <Link href={link}>{name}</Link>
               </li>
             );
           })}
