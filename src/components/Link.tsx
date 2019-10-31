@@ -3,7 +3,7 @@ import { HashLink, HashLinkProps } from "react-router-hash-link";
 import { Link as MaterialLink } from "@material-ui/core";
 import { LinkProps } from "@material-ui/core/Link/Link";
 
-const InternalLink = React.forwardRef((props: HashLinkProps, ref) => (
+export const InternalLink = React.forwardRef((props: HashLinkProps, ref) => (
   <HashLink {...props} />
 ));
 
