@@ -6,7 +6,7 @@ import { ButtonProps } from "@material-ui/core/Button/Button";
 interface Props {
   /** Supports both internal and external links */
   to?: string;
-  component?: any;
+  component?: HTMLElement;
 }
 
 /** Use this component instead of MaterialUI's Button or ReactRouter's Link */
