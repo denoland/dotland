@@ -10,7 +10,7 @@ interface Props {
 }
 
 /** Use this component instead of MaterialUI's Button or ReactRouter's Link */
-export const Button: React.FC<Props & ButtonProps> = props => {
+export const Button: React.FC<Props & Omit<ButtonProps, 'href'> = props => {
   let { to, ...rest } = props;
   if (!props.to) {
     return <MaterialButton {...props} />;
