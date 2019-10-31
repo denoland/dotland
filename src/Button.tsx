@@ -1,20 +1,20 @@
 import React from "react";
-import { InternalLink } from "./Link";
+import { InternalLink, isInternalLink } from "./Link";
 import { Button as MaterialButton } from "@material-ui/core";
 import { ButtonProps } from "@material-ui/core/Button/Button";
 
 interface Props {
-  /** Supports both internal and external links */
+  /** Supports internal and external links */
   to?: string;
   component?: HTMLElement;
 }
 
 /** Use this component instead of MaterialUI's Button or ReactRouter's Link */
-export const Button: React.FC<Props & Omit<ButtonProps, 'href'>> = props => {
+export const Button: React.FC<Props & Omit<ButtonProps, "href">> = props => {
   let { to, ...rest } = props;
-  if (!props.to) {
+  if (!to) {
     return <MaterialButton {...props} />;
-  } else if (props.to.indexOf("://") === -1) {
+  } else if (isInternalLink(to)) {
     return <MaterialButton component={InternalLink} {...props} />;
   } else {
     return <MaterialButton {...rest} href={to} />;
