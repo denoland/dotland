@@ -1,8 +1,7 @@
 import React from "react";
 import CodeBlock from "./CodeBlock";
-import { InternalLink } from "./InternalLink";
+import Link from "./Link";
 import "./Home.css";
-import { Link } from "@material-ui/core";
 
 const code = `import { serve } from "https://deno.land/std@v0.22.0/http/server.ts";
 const body = new TextEncoder().encode("Hello World\\n");
@@ -32,12 +31,12 @@ function Home() {
         <tbody>
           <tr>
             <th>
-              <Link href="https://github.com/denoland/deno">deno</Link>
+              <Link to="https://github.com/denoland/deno">deno</Link>
             </th>
             <td>
               <Link
                 className="badge"
-                href="https://github.com/denoland/deno/actions"
+                to="https://github.com/denoland/deno/actions"
               >
                 <img
                   alt="deno ci badge"
@@ -48,14 +47,14 @@ function Home() {
           </tr>
           <tr>
             <th>
-              <Link href="https://github.com/denoland/deno_website2">
+              <Link to="https://github.com/denoland/deno_website2">
                 deno_website2
               </Link>
             </th>
             <td>
               <Link
                 className="badge"
-                href="https://github.com/denoland/deno_website2/actions"
+                to="https://github.com/denoland/deno_website2/actions"
               >
                 <img
                   alt="deno ci badge"
@@ -66,14 +65,14 @@ function Home() {
           </tr>
           <tr>
             <th>
-              <Link href="https://github.com/denoland/deno_install">
+              <Link to="https://github.com/denoland/deno_install">
                 deno_install
               </Link>
             </th>
             <td>
               <Link
                 className="badge"
-                href="https://github.com/denoland/deno_install/actions"
+                to="https://github.com/denoland/deno_install/actions"
               >
                 <img
                   alt="deno_install ci badge"
@@ -90,7 +89,7 @@ function Home() {
       <p>Using Shell:</p>
       <pre>
         curl -fsSL{" "}
-        <Link href="/x/install/install.sh">
+        <Link to="/x/install/install.sh">
           https://deno.land/x/install/install.sh
         </Link>{" "}
         | sh
@@ -98,29 +97,27 @@ function Home() {
       <p>Or using PowerShell:</p>
       <pre>
         iwr{" "}
-        <Link href="/x/install/install.ps1">
+        <Link to="/x/install/install.ps1">
           https://deno.land/x/install/install.ps1
         </Link>{" "}
         -useb | iex
       </pre>
       <p>
-        Using <Link href="https://formulae.brew.sh/formula/deno">Homebrew</Link>{" "}
+        Using <Link to="https://formulae.brew.sh/formula/deno">Homebrew</Link>{" "}
         (mac or Linux):
       </p>
       <pre>brew install deno</pre>
       <p>
-        Using <Link href="https://scoop.sh/">Scoop</Link> (windows):
+        Using <Link to="https://scoop.sh/">Scoop</Link> (windows):
       </p>
       <pre>scoop install deno</pre>
       <p>
-        Using <Link href="https://crates.io/crates/deno_cli">Cargo</Link>:
+        Using <Link to="https://crates.io/crates/deno_cli">Cargo</Link>:
       </p>
       <pre>cargo install deno_cli</pre>
       <p>
         See{" "}
-        <Link href="https://github.com/denoland/deno_install">
-          deno_install
-        </Link>{" "}
+        <Link to="https://github.com/denoland/deno_install">deno_install</Link>{" "}
         for more installation options.
       </p>
 
@@ -137,9 +134,7 @@ function Home() {
 
       <p>
         <b>
-          <Link component={InternalLink} to="/std/manual.md">
-            Manual
-          </Link>
+          <Link to="/std/manual.md">Manual</Link>
         </b>
       </p>
 
@@ -151,7 +146,7 @@ function Home() {
           internal documentation using the same system that handles /std/.
           https://github.com/denoland/deno_website2/issues/57
         */}
-        <Link target="_blank" rel="noopener noreferrer" href="/typedoc/">
+        <Link target="_blank" rel="noopener noreferrer" to="/typedoc/">
           API Reference
         </Link>
       </p>
@@ -159,39 +154,33 @@ function Home() {
       <p>Modules:</p>
       <ul>
         <li>
-          <Link component={InternalLink} to="/std/">
-            Standard
-          </Link>
+          <Link to="/std/">Standard</Link>
         </li>
         <li>
-          <Link component={InternalLink} to="/x/">
-            Third Party
-          </Link>
+          <Link to="/x/">Third Party</Link>
         </li>
       </ul>
 
       <p>
-        <Link href="https://github.com/denoland/deno/blob/master/Releases.md">
+        <Link to="https://github.com/denoland/deno/blob/master/Releases.md">
           Releases
         </Link>
       </p>
 
       <p>
-        <Link component={InternalLink} to="/benchmarks">
-          Benchmarks
-        </Link>
+        <Link to="/benchmarks">Benchmarks</Link>
       </p>
 
       <p>
-        <Link href="https://gitter.im/denolife/Lobby">Community Chat Room</Link>
+        <Link to="https://gitter.im/denolife/Lobby">Community Chat Room</Link>
       </p>
 
       <p>
-        <Link href="https://twitter.com/deno_land">Twitter</Link>
+        <Link to="https://twitter.com/deno_land">Twitter</Link>
       </p>
 
       <p>
-        <Link href="https://github.com/denolib/awesome-deno">More Links</Link>
+        <Link to="https://github.com/denolib/awesome-deno">More Links</Link>
       </p>
     </main>
   );

@@ -2,9 +2,8 @@ import React from "react";
 import { main } from "./doc_utils";
 import Markdown from "./Markdown";
 import { useLocation } from "react-router-dom";
-import { InternalLink } from "./InternalLink";
+import Link from "./Link";
 import {
-  Link,
   List,
   ListItem,
   ListItemText,
@@ -29,9 +28,7 @@ export default function Docs(props: Props) {
           {docs.map(d => {
             return (
               <ListItem key={d.name}>
-                <Link component={InternalLink} to={`?doc#${d.name}`}>
-                  {d.name}
-                </Link>
+                <Link to={`?doc#${d.name}`}>{d.name}</Link>
               </ListItem>
             );
           })}
@@ -40,7 +37,7 @@ export default function Docs(props: Props) {
       {docs.map(d => {
         const href = "?doc#" + d.name;
         const title = (
-          <Link component={InternalLink} to={href} color="inherit">
+          <Link to={href} color="inherit">
             <code>{d.name}</code>
           </Link>
         );
