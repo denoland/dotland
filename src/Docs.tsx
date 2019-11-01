@@ -25,24 +25,22 @@ export default function Docs(props: Props) {
   return (
     <Grid
       container
-      zeroMinWidth
       spacing={3}
       direction="row"
       justify="flex-start"
       alignItems="flex-start"
     >
-      <Grid item>
-        <nav>
-          <List>
-            {docs.map(d => {
-              return (
-                <ListItem key={d.name}>
-                  <Link to={`?doc#${d.name}`}>{d.name}</Link>
-                </ListItem>
-              );
-            })}
-          </List>
-        </nav>
+      <Grid item sm={4}>
+        <List>
+          {docs.map(d => {
+            const link = <Link to={`?doc#${d.name}`}>{d.name}</Link>;
+            return (
+              <ListItem key={d.name}>
+                <ListItemText primary={link} secondary={d.typestr} />
+              </ListItem>
+            );
+          })}
+        </List>
       </Grid>
       <Grid item>
         {docs.map(d => {
@@ -66,7 +64,7 @@ export default function Docs(props: Props) {
           let args = null;
           if (d.args) {
             args = (
-              <p>
+              <div>
                 <b>Arguments</b>
                 <List>
                   {d.args.map(arg => {
@@ -75,13 +73,13 @@ export default function Docs(props: Props) {
                       <Markdown source={arg.docstr} />
                     ) : null;
                     return (
-                      <ListItem>
+                      <ListItem key={arg.name}>
                         <ListItemText primary={name} secondary={docstr} />
                       </ListItem>
                     );
                   })}
                 </List>
-              </p>
+              </div>
             );
           }
           let ret = null;
