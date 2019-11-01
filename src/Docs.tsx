@@ -42,7 +42,7 @@ export default function Docs(props: Props) {
           })}
         </List>
       </Grid>
-      <Grid item>
+      <Grid item sm={8}>
         {docs.map(d => {
           const href = "?doc#" + d.name;
           const title = (
