@@ -19,7 +19,7 @@ import {
   formatKB,
   formatPercentage
 } from "./benchmark_utils";
-import { Theme } from "@material-ui/core";
+import { Theme, Button } from "@material-ui/core";
 import Link from "./Link";
 import { useTheme } from "@material-ui/styles";
 
@@ -186,14 +186,13 @@ function BenchmarkChart(props: Props) {
         </LineChart>
       </ResponsiveContainer>
       {boundLeft || boundRight ? (
-        <Link
-          onClick={() => {
+        <Button>
+          {/*onClick={() => {
             setBoundLeft(null);
             setBoundRight(null);
-          }}
-        >
+          }} */}
           Reset Zoom
-        </Link>
+        </Button>
       ) : null}
     </>
   );
