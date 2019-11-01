@@ -10,20 +10,29 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: yarn --frozen-lockfile
+      - uses: actions/cache@preview
+        id: yarn
+        with:
+          path: node_modules
+          # prettier-ignore
+          key: ${{ runner.os }}-yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+      - if: steps.yarn.outputs.cache-hit != 'true'
+        run: yarn --frozen-lockfile
       - run: yarn run lint
       - run: CI=true yarn test
       - name: Publish Production
+        # prettier-ignore
         if: github.ref == 'refs/heads/master' && github.event_name == 'push' && github.repository == 'denoland/deno_website2'
         uses: cloudflare/wrangler-action@1.0.0
         with:
-          environment: 'production'
+          environment: "production"
           apiKey: ${{ secrets.cloudflareKey }}
           email: ${{ secrets.email }}
       - name: Publish Staging
+        # prettier-ignore
         if: github.event_name == 'push' && github.repository == 'denoland/deno_website2'
         uses: cloudflare/wrangler-action@1.0.0
         with:
-          environment: 'staging'
+          environment: "staging"
           apiKey: ${{ secrets.cloudflareKey }}
           email: ${{ secrets.email }}
