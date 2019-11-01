@@ -1,8 +1,7 @@
 import React from "react";
-import { Box, ButtonGroup } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
-import { Link } from "./Link.tsx";
-import { Button } from "./Button.tsx";
+import Link from "./Link.tsx";
 import Markdown from "./Markdown";
 import CodeBlock from "./CodeBlock";
 import Docs from "./Docs";
@@ -63,9 +62,7 @@ export default function Registry() {
     }
     contentComponent = (
       <div>
-        <ButtonGroup color="primary">
-          <Button to={state.repoUrl}>Repository</Button>
-        </ButtonGroup>
+        <Link to={state.repoUrl}>Repository</Link>
         <br />
         <br />
         <table>
@@ -79,17 +76,13 @@ export default function Registry() {
     const isDocsPage = search.includes("doc") && state.contents;
     contentComponent = (
       <div>
-        <ButtonGroup color="primary">
-          {isDocsPage ? (
-            <Button to="?">Source Code</Button>
-          ) : hasDocsAvailable ? (
-            <Button to="?doc">Documentation</Button>
-          ) : null}
-          {state.repoUrl ? (
-            <Button to={state.repoUrl}>Repository</Button>
-          ) : null}
-          {state.rawUrl ? <Button to={state.rawUrl}>Raw</Button> : null}
-        </ButtonGroup>
+        {isDocsPage ? (
+          <Link to="?">Source Code</Link>
+        ) : hasDocsAvailable ? (
+          <Link to="?doc">Documentation</Link>
+        ) : null}{" "}
+        {state.repoUrl ? <Link to={state.repoUrl}>Repository</Link> : null}{" "}
+        {state.rawUrl ? <Link to={state.rawUrl}>Raw</Link> : null}
         {(() => {
           if (isMarkdown) {
             return <Markdown source={state.contents} />;

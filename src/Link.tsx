@@ -1,3 +1,5 @@
+// Ideally this file can be removed.
+//
 // Its funny how the simplest things get super complicated in React.
 //
 // If we use <a href> the browser makes a new get request to the server to get
@@ -32,6 +34,7 @@
 // to=""> for internal links. If it could be either then use href - this slows
 // down internal redirects, but it is safer. These are Link components from
 // material-ui.
+
 import React from "react";
 import { HashLink, HashLinkProps } from "react-router-hash-link";
 import { Link as MaterialLink } from "@material-ui/core";
@@ -47,16 +50,16 @@ export function isInternalLink(link: string): Boolean {
   return false;
 }
 
-interface Props {
+interface Props extends LinkProps {
   /** Supports internal and external links */
   to: string;
 }
 
 /** Use this component instead of MaterialUI's Link or ReactRouter's Link. */
-export const Link: React.FC<Props & Omit<LinkProps, "href">> = props => {
+export default function Link(props: Props) {
   if (isInternalLink(props.to)) {
     return <MaterialLink component={InternalLink} {...props} />;
   } else {
     return <MaterialLink {...props} component="a" href={props.to} />;
   }
-};
+}
