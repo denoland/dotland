@@ -69,12 +69,9 @@ export default function Docs(props: Props) {
                 <List>
                   {d.args.map(arg => {
                     let name = <code>{`${arg.name}: ${arg.typestr}`}</code>;
-                    let docstr = arg.docstr ? (
-                      <Markdown source={arg.docstr} />
-                    ) : null;
                     return (
                       <ListItem key={arg.name}>
-                        <ListItemText primary={name} secondary={docstr} />
+                        <ListItemText primary={name} secondary={arg.docstr} />
                       </ListItem>
                     );
                   })}
