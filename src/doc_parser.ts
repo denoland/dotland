@@ -154,7 +154,7 @@ export class Parser {
       //this.visitMethod(node, symbol.getName());
     } else {
       log("Unknown node", node.kind);
-      assert(false, "Unknown node");
+      // assert(false, "Unknown node");
     }
   }
 
