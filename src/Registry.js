@@ -1,7 +1,7 @@
 import React from "react";
-import { Box, Button, Link, ButtonGroup } from "@material-ui/core";
+import { List, ListItem, Box } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
-import { InternalLink } from "./InternalLink";
+import Link from "./Link.tsx";
 import Markdown from "./Markdown";
 import CodeBlock from "./CodeBlock";
 import Docs from "./Docs";
@@ -55,18 +55,14 @@ export default function Registry() {
           <td>{d.type}</td>
           <td>{d.size}</td>
           <td>
-            <Link component={InternalLink} to={name}>
-              {name}
-            </Link>
+            <Link to={name}>{name}</Link>
           </td>
         </tr>
       );
     }
     contentComponent = (
       <div>
-        <ButtonGroup color="primary">
-          <Button href={state.repoUrl}>Repository</Button>
-        </ButtonGroup>
+        <Link to={state.repoUrl}>Repository</Link>
         <br />
         <br />
         <table>
@@ -80,21 +76,23 @@ export default function Registry() {
     const isDocsPage = search.includes("doc") && state.contents;
     contentComponent = (
       <div>
-        <ButtonGroup color="primary">
-          {isDocsPage ? (
-            <Button component={InternalLink} to="?">
-              Source Code
-            </Button>
-          ) : hasDocsAvailable ? (
-            <Button component={InternalLink} to="?doc">
-              Documentation
-            </Button>
-          ) : null}
-          {state.repoUrl ? (
-            <Button href={state.repoUrl}>Repository</Button>
-          ) : null}
-          {state.rawUrl ? <Button href={state.rawUrl}>Raw</Button> : null}
-        </ButtonGroup>
+        <List>
+          <ListItem>
+            {isDocsPage ? (
+              <Link to="?">Source Code</Link>
+            ) : hasDocsAvailable ? (
+              <Link color="primary" to="?doc">
+                Documentation
+              </Link>
+            ) : null}
+          </ListItem>
+          <ListItem>
+            {state.repoUrl ? <Link to={state.repoUrl}>Repository</Link> : null}
+          </ListItem>
+          <ListItem>
+            {state.rawUrl ? <Link to={state.rawUrl}>Raw</Link> : null}
+          </ListItem>
+        </List>
         {(() => {
           if (isMarkdown) {
             return <Markdown source={state.contents} />;
