@@ -25,11 +25,13 @@ export default function Docs(props: Props) {
   return (
     <Grid
       container
+      zeroMinWidth
+      spacing={3}
       direction="row"
       justify="flex-start"
       alignItems="flex-start"
     >
-      <Grid item xs={12}>
+      <Grid item>
         <nav>
           <List>
             {docs.map(d => {
@@ -42,7 +44,7 @@ export default function Docs(props: Props) {
           </List>
         </nav>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item>
         {docs.map(d => {
           const href = "?doc#" + d.name;
           const title = (
