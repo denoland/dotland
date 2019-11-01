@@ -25,7 +25,6 @@ export default function Docs(props: Props) {
   return (
     <Grid
       container
-      spacing={3}
       direction="row"
       justify="flex-start"
       alignItems="flex-start"
