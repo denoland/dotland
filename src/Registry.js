@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@material-ui/core";
+import { List, ListItem, Box } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 import Link from "./Link.tsx";
 import Markdown from "./Markdown";
@@ -76,13 +76,23 @@ export default function Registry() {
     const isDocsPage = search.includes("doc") && state.contents;
     contentComponent = (
       <div>
-        {isDocsPage ? (
-          <Link to="?">Source Code</Link>
-        ) : hasDocsAvailable ? (
-          <Link to="?doc">Documentation</Link>
-        ) : null}{" "}
-        {state.repoUrl ? <Link to={state.repoUrl}>Repository</Link> : null}{" "}
-        {state.rawUrl ? <Link to={state.rawUrl}>Raw</Link> : null}
+        <List>
+          <ListItem>
+            {isDocsPage ? (
+              <Link to="?">Source Code</Link>
+            ) : hasDocsAvailable ? (
+              <Link color="primary" to="?doc">
+                Documentation
+              </Link>
+            ) : null}
+          </ListItem>
+          <ListItem>
+            {state.repoUrl ? <Link to={state.repoUrl}>Repository</Link> : null}
+          </ListItem>
+          <ListItem>
+            {state.rawUrl ? <Link to={state.rawUrl}>Raw</Link> : null}
+          </ListItem>
+        </List>
         {(() => {
           if (isMarkdown) {
             return <Markdown source={state.contents} />;
