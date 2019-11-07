@@ -29,7 +29,7 @@ export default function Docs(props: Props) {
       justify="flex-start"
       alignItems="flex-start"
     >
-      <Grid item sm={4}>
+      <Grid item xs={12} sm={4}>
         <List>
           {docs.map(d => {
             const link = <Link to={`?doc#${d.name}`}>{d.name}</Link>;
@@ -41,7 +41,7 @@ export default function Docs(props: Props) {
           })}
         </List>
       </Grid>
-      <Grid item sm={8}>
+      <Grid item xs={12} sm={8}>
         {docs.map(d => {
           const href = "?doc#" + d.name;
           const title = (
@@ -49,11 +49,7 @@ export default function Docs(props: Props) {
               <code>{d.name}</code>
             </Link>
           );
-          const subheader = (
-            <span>
-              {d.kind} <code>{d.typestr}</code>
-            </span>
-          );
+          const subheader = <code>{d.typestr}</code>;
           let frag = location.hash.substr(1);
           const raised = frag === d.name;
           let docstr = null;
