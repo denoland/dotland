@@ -38,7 +38,7 @@ function BenchmarkChart(props: Props) {
 
   const options = {
     theme: {
-      mode: theme.palette.type,
+      mode: theme.palette.type
     },
     chart: {
       background: theme.palette.background.default,
