@@ -276,6 +276,12 @@
     "owner": "sindresorhus",
     "repo": "ky"
   },
+  "lambda": {
+    "type": "github",
+    "owner": "hayd",
+    "repo": "deno_lambda",
+    "path": "runtime/"
+  },
   "lazy": {
     "type": "github",
     "owner": "luvies",
