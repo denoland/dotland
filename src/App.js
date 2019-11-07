@@ -2,6 +2,7 @@ import React from "react";
 import Home from "./Home";
 import Registry from "./Registry";
 import RegistryIndex from "./RegistryIndex";
+import useHashLink from "./useHashLink";
 import NotFound from "./NotFound";
 import PathBreadcrumbs from "./PathBreadcrumbs";
 import Benchmarks from "./Benchmarks";
@@ -9,6 +10,7 @@ import { Container } from "@material-ui/core";
 import { BrowserRouter, Redirect, Switch, Route } from "react-router-dom";
 
 function App() {
+  useHashLink();
   return (
     <BrowserRouter>
       <Container maxWidth="md">
