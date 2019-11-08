@@ -23,7 +23,8 @@ test("enum", () => {
   const rootSource = `
     /** HTTP status codes */
     export enum Status {
-      Continue = 100, // RFC 7231, 6.2.1
+      /** RFC 7231, 6.2.1 */
+      Continue = 100,
       SwitchingProtocols = 101, // RFC 7231, 6.2.2
       Processing = 102 // RFC 2518, 10.1
     };
@@ -34,6 +35,22 @@ test("enum", () => {
       name: "Status",
       kind: "enum",
       docstr: "HTTP status codes"
+    },
+    {
+      name: "Status.Continue",
+      kind: "enumMember",
+      docstr: "RFC 7231, 6.2.1",
+      typestr: "100"
+    },
+    {
+      name: "Status.SwitchingProtocols",
+      kind: "enumMember",
+      typestr: "101"
+    },
+    {
+      name: "Status.Processing",
+      kind: "enumMember",
+      typestr: "102"
     }
   ]);
 });

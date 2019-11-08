@@ -15,7 +15,7 @@ import * as ts from "typescript";
 import assert from "assert";
 
 export interface DocEntry {
-  kind: "class" | "method" | "property" | "enum";
+  kind: "class" | "method" | "property" | "enum" | "enumMember";
   name: string;
   typestr?: string;
   docstr?: string;
@@ -162,9 +162,20 @@ export class Parser {
         kind: "enum",
         docstr
       });
+      for (let m of node.members) {
+        const sym = this.checker.getSymbolAtLocation(m.name);
+        const memberName = sym ? sym.getName() : "<unknown>";
+        const memberDocstr = this.getFlatDocstr(sym);
+        const typestr = m.initializer.getText();
+        this.output.push({
+          name: `${name}.${memberName}`,
+          kind: "enumMember",
+          docstr: memberDocstr,
+          typestr
+        });
+      }
     } else {
       log("Unknown node", node.kind);
-      // assert(false, "Unknown node");
     }
   }
 
