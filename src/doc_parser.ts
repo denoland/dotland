@@ -15,7 +15,7 @@ import * as ts from "typescript";
 import assert from "assert";
 
 export interface DocEntry {
-  kind: "class" | "method" | "property";
+  kind: "class" | "method" | "property" | "enum";
   name: string;
   typestr?: string;
   docstr?: string;
@@ -37,7 +37,7 @@ function skipAlias(symbol: ts.Symbol, checker: ts.TypeChecker) {
 }
 
 const debug = false;
-function log(...args: Array<string | number>): void {
+function log(...args: Array<any>): void {
   if (debug) {
     console.log(...args);
   }
@@ -69,10 +69,10 @@ export class Parser {
 
     // Add all exported symbols of root module to visitQueue.
     const moduleSymbol = this.checker.getSymbolAtLocation(rootSourceFile);
-    // console.log("moduleSymbol", moduleSymbol);
+    // log("moduleSymbol", moduleSymbol);
 
     if (moduleSymbol == null) {
-      console.log("moduleSymbol null");
+      log("moduleSymbol null");
     } else {
       for (const s of this.checker.getExportsOfModule(moduleSymbol)) {
         this.requestVisit(s);
@@ -94,7 +94,7 @@ export class Parser {
       log("requestVisit", s.getName());
       const decls = s.getDeclarations()!;
       // What does it mean to have multiple declarations?
-      // assert(decls.length === 1);
+      assert(decls.length === 1);
       // const sourceFileName = decls[0].getSourceFile().fileName;
       // Dont visit if sourceFileName is in tsconfig excludes
       this.visitQueue.push(decls[0]);
@@ -137,8 +137,8 @@ export class Parser {
     } else if (ts.isFunctionTypeNode(node)) {
       log("- FunctionTypeNode.. ?");
     } else if (ts.isFunctionExpression(node)) {
-      const symbol = this.checker.getSymbolAtLocation(node.name);
-      const name = symbol ? symbol.getName() : "<unknown>";
+      const sym = this.checker.getSymbolAtLocation(node.name);
+      const name = sym ? sym.getName() : "<unknown>";
       log("- FunctionExpression", name);
     } else if (ts.isInterfaceDeclaration(node)) {
       this.visitClass(node);
@@ -152,6 +152,16 @@ export class Parser {
       log("- PropertyAccessExpression");
       //const symbol = this.checker.getSymbolAtLocation(node.name);
       //this.visitMethod(node, symbol.getName());
+    } else if (ts.isEnumDeclaration(node)) {
+      const sym = this.checker.getSymbolAtLocation(node.name);
+      const name = sym ? sym.getName() : "<unknown>";
+      log("- EnumDeclaration", name);
+      const docstr = this.getFlatDocstr(sym);
+      this.output.push({
+        name,
+        kind: "enum",
+        docstr
+      });
     } else {
       log("Unknown node", node.kind);
       // assert(false, "Unknown node");
