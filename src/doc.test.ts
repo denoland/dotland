@@ -17,3 +17,23 @@ test("basic", () => {
     }
   ]);
 });
+
+test("enum", () => {
+  const rootModule = "http_status.ts";
+  const rootSource = `
+    /** HTTP status codes */
+    export enum Status {
+      Continue = 100, // RFC 7231, 6.2.1
+      SwitchingProtocols = 101, // RFC 7231, 6.2.2
+      Processing = 102 // RFC 2518, 10.1
+    };
+  `;
+  const docEntries = main(rootModule, rootSource);
+  expect(docEntries).toEqual([
+    {
+      name: "Status",
+      kind: "enum",
+      docstr: "HTTP status codes"
+    }
+  ]);
+});
