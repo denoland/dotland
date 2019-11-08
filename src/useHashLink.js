@@ -2,10 +2,10 @@
 // https://github.com/rafrex/react-router-hash-link/blob/06822346273c0548d79dacdf7d73ae48910c6b6f/src/index.js
 //
 // This module provides useHashLink() which should be called at the top-level of
-// a React application. It ensure that the browser window is appropriately
+// a React application. It ensures that the browser window is appropriately
 // scrolled to anchor tags (hash links). This is necessary because the anchor
 // tags might not exist when the page is initially rendered (like if there is a
-// large markdown page being rendered).
+// markdown which renders into anchor points).
 
 import { useEffect } from "react";
 
