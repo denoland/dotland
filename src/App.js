@@ -11,6 +11,12 @@ import { BrowserRouter, Redirect, Switch, Route } from "react-router-dom";
 
 function App() {
   useHashLink();
+
+  React.useEffect(() => {
+    const { pathname } = document.location;
+    document.title = `deno ${pathname}`;
+  }, []);
+
   return (
     <BrowserRouter>
       <Container maxWidth="md">
