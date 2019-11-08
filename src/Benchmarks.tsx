@@ -1,6 +1,7 @@
 import React from "react";
 import Spinner from "./Spinner";
 import ApexChart from "react-apexcharts";
+import { useLocation } from "react-router-dom";
 import {
   BenchmarkData,
   Column,
@@ -94,16 +95,20 @@ export default function Benchmarks() {
   const [data, setData] = React.useState<BenchmarkData | null>(null);
   const [showNormalized, setShowNormalized] = React.useState(false);
 
+  const { search } = useLocation();
+
   React.useEffect(() => {
-    // TODO(ry) handle all.json
-    const dataUrl = "https://denoland.github.io/deno/recent.json";
+    let dataUrl = "https://denoland.github.io/deno/recent.json";
+    if (search.includes("all")) {
+      dataUrl = "https://denoland.github.io/deno/data.json";
+    }
 
     fetch(dataUrl).then(async response => {
       const rawData = await response.json();
       const data = reshape(rawData);
       setData(data);
     });
-  }, []);
+  }, [search]);
 
   // TODO(ry) error message of load failed.
 
@@ -129,10 +134,10 @@ export default function Benchmarks() {
       </p>
 
       <p>
-        <Link to="#recent">recent data</Link>
+        <Link to="?recent">recent data</Link>
       </p>
       <p>
-        <Link to="#all">all data</Link> (takes a moment to load)
+        <Link to="?all">all data</Link> (takes a moment to load)
       </p>
       <p>
         <label>
