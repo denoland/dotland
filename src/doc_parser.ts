@@ -36,7 +36,7 @@ function skipAlias(symbol: ts.Symbol, checker: ts.TypeChecker) {
     : symbol;
 }
 
-const debug = true;
+const debug = false;
 function log(...args: Array<string | number>): void {
   if (debug) {
     console.log(...args);
@@ -69,7 +69,7 @@ export class Parser {
 
     // Add all exported symbols of root module to visitQueue.
     const moduleSymbol = this.checker.getSymbolAtLocation(rootSourceFile);
-    console.log("moduleSymbol", moduleSymbol);
+    // console.log("moduleSymbol", moduleSymbol);
 
     if (moduleSymbol == null) {
       console.log("moduleSymbol null");
