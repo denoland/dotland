@@ -92,6 +92,14 @@ function BenchmarkChart(props: Props) {
   );
 }
 
+function SourceLink({ name, path }) {
+  return (
+    <Link to={`https://github.com/denoland/deno/blob/master/${path}`}>
+      {name}
+    </Link>
+  );
+}
+
 export default function Benchmarks() {
   const [data, setData] = React.useState<BenchmarkData | null>(null);
   const [showNormalized, setShowNormalized] = React.useState(false);
@@ -140,6 +148,99 @@ export default function Benchmarks() {
       <p>
         <Link to="?all">all data</Link> (takes a moment to load)
       </p>
+
+      <h2>Runtime Metrics</h2>
+
+      <p>In this section we measure various metrics of the following scripts</p>
+      <ul>
+        <li>
+          <SourceLink
+            path="tests/003_relative_import.ts"
+            name="cold_relative_import"
+          />
+        </li>
+        <li>
+          <SourceLink
+            path="cli/tests/text_decoder_perf.js"
+            name="text_decoder"
+          />
+        </li>
+        <li>
+          <SourceLink path="tests/error_001.ts" name="error_001" />
+        </li>
+        <li>
+          <SourceLink path="tests/002_hello.ts" name="cold_hello" />
+        </li>
+        <li>
+          <SourceLink
+            path="tests/workers_round_robin_bench.ts"
+            name="workers_round_robin"
+          />
+        </li>
+        <li>
+          <SourceLink
+            path="tests/003_relative_import.ts"
+            name="relative_import"
+          />
+        </li>
+        <li>
+          <SourceLink
+            path="tests/workers_startup_bench.ts"
+            name="workers_startup"
+          />
+        </li>
+        <li>
+          <SourceLink path="tests/002_hello.ts" name="hello" />
+        </li>
+      </ul>
+
+      <h3 id="exec-time">
+        Execution time <Link to="#exec-time">#</Link>
+      </h3>
+
+      <BenchmarkChart
+        columns={data.execTime}
+        sha1List={data.sha1List}
+        yLabel="seconds"
+        yTickFormat={formatLogScale}
+      />
+
+      <p>
+        Log scale. This shows how much time total it takes to run a script. For
+        deno to execute typescript, it must first compile it to JS. A warm
+        startup is when deno has a cached JS output already, so it should be
+        fast because it bypasses the TS compiler. A cold startup is when deno
+        must compile from scratch.
+      </p>
+
+      <h3 id="threads">
+        Thread count <Link to="#threads">#</Link>
+      </h3>
+      <BenchmarkChart columns={data.threadCount} sha1List={data.sha1List} />
+      <p>How many threads various programs use. Smaller is better.</p>
+
+      <h3 id="bundles">
+        Syscall count <Link to="#bundles">#</Link>
+      </h3>
+      <BenchmarkChart columns={data.syscallCount} sha1List={data.sha1List} />
+      <p>
+        How many total syscalls are performed when executing a given script.
+        Smaller is better.
+      </p>
+
+      <h3 id="max-memory">
+        Max Memory Usage <Link to="#max-memory">#</Link>
+      </h3>
+      <BenchmarkChart
+        columns={data.maxMemory}
+        sha1List={data.sha1List}
+        yLabel="megabytes"
+        yTickFormat={formatMB}
+      />
+      <p>Max memory usage during execution. Smaller is better.</p>
+
+      <h2>I/O</h2>
+
       <p>
         <label>
           <input
@@ -287,41 +388,6 @@ export default function Benchmarks() {
         is better. Log scale.
       </p>
 
-      <h3 id="exec-time">
-        Execution time <Link to="#exec-time">#</Link>
-      </h3>
-
-      <BenchmarkChart
-        columns={data.execTime}
-        sha1List={data.sha1List}
-        yLabel="seconds"
-        yTickFormat={formatLogScale}
-      />
-
-      <p>
-        Log scale. This shows how much time total it takes to run a few simple
-        deno programs:{" "}
-        <Link to="https://github.com/denoland/deno/blob/master/tests/002_hello.ts">
-          tests/002_hello.ts
-        </Link>
-        ,{" "}
-        <Link to="https://github.com/denoland/deno/blob/master/tests/003_relative_import.ts">
-          tests/003_relative_import.ts
-        </Link>
-        ,{" "}
-        <Link to="https://github.com/denoland/deno/blob/master/tests/workers_round_robin_bench.ts">
-          tests/workers_round_robin_bench.ts
-        </Link>
-        , and{" "}
-        <Link to="https://github.com/denoland/deno/blob/master/tests/workers_startup_bench.ts">
-          tests/workers_startup_bench.ts
-        </Link>
-        . For deno to execute typescript, it must first compile it to JS. A warm
-        startup is when deno has a cached JS output already, so it should be
-        fast because it bypasses the TS compiler. A cold startup is when deno
-        must compile from scratch.
-      </p>
-
       <h3 id="throughput">
         Throughput <Link to="#throughput">#</Link>
       </h3>
@@ -345,16 +411,7 @@ export default function Benchmarks() {
         . Smaller is better.
       </p>
 
-      <h3 id="max-memory">
-        Max Memory Usage <Link to="#max-memory">#</Link>
-      </h3>
-      <BenchmarkChart
-        columns={data.maxMemory}
-        sha1List={data.sha1List}
-        yLabel="megabytes"
-        yTickFormat={formatMB}
-      />
-      <p>Max memory usage during execution. Smaller is better.</p>
+      <h2>Size</h2>
 
       <h3 id="size">
         Executable size <Link to="#size">#</Link>
@@ -366,21 +423,6 @@ export default function Benchmarks() {
         yTickFormat={formatMB}
       />
       <p>deno ships only a single binary. We track its size here.</p>
-
-      <h3 id="threads">
-        Thread count <Link to="#threads">#</Link>
-      </h3>
-      <BenchmarkChart columns={data.threadCount} sha1List={data.sha1List} />
-      <p>How many threads various programs use. Smaller is better.</p>
-
-      <h3 id="bundles">
-        Syscall count <Link to="#bundles">#</Link>
-      </h3>
-      <BenchmarkChart columns={data.syscallCount} sha1List={data.sha1List} />
-      <p>
-        How many total syscalls are performed when executing a given script.
-        Smaller is better.
-      </p>
 
       <h3 id="bundles">
         Bundle size <Link to="#syscalls">#</Link>
