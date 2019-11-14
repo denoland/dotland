@@ -27,6 +27,8 @@ interface Props {
 function BenchmarkChart(props: Props) {
   const theme = useTheme<Theme>();
 
+  const shortSha1List = props.sha1List.map(s => s.slice(0, 6));
+
   function viewCommitOnClick(c1: any, c2: any, { dataPointIndex }: any): void {
     window.open(
       `https://github.com/denoland/deno/commit/${props.sha1List[dataPointIndex]}`
@@ -57,7 +59,7 @@ function BenchmarkChart(props: Props) {
       }
     },
     stroke: {
-      width: 2,
+      width: 1,
       curve: "straight"
     },
     legend: {
@@ -77,7 +79,7 @@ function BenchmarkChart(props: Props) {
       labels: {
         show: false
       },
-      categories: props.sha1List,
+      categories: shortSha1List,
       tooltip: {
         enabled: false
       }
@@ -85,7 +87,6 @@ function BenchmarkChart(props: Props) {
   };
 
   const series = props.columns;
-
   return (
     <ApexChart type="line" options={options} series={series} height={300} />
   );
