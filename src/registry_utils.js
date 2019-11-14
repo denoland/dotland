@@ -33,7 +33,16 @@ export function getEntry(name, branch = "master") {
   // but eventually tags before v0.20.0 will break.
   if (
     name === "std" &&
-    (branch === "v0.16.0" ||
+    (branch === "v0.7.0" ||
+      branch === "v0.8.0" ||
+      branch === "v0.9.0" ||
+      branch === "v0.10.0" ||
+      branch === "v0.11.0" ||
+      branch === "v0.12.0" ||
+      branch === "v0.13.0" ||
+      branch === "v0.14.0" ||
+      branch === "v0.15.0" ||
+      branch === "v0.16.0" ||
       branch === "v0.17.0" ||
       branch === "v0.18.0" ||
       branch === "v0.19.0" ||
