@@ -54,6 +54,11 @@
     "owner": "SuperC03",
     "repo": "CatYou-Deno"
   },
+  "caught": {
+    "type": "github",
+    "owner": "rsp",
+    "repo": "deno-caught"
+  },
   "chacha20": {
     "type": "github",
     "owner": "chiefbiiko",
