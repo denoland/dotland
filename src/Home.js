@@ -124,7 +124,7 @@ function Home() {
       <h2 id="example">Example</h2>
 
       <p>Try running a simple program:</p>
-      <pre>deno https://deno.land/std/examples/welcome.ts</pre>
+      <pre>deno run https://deno.land/std/examples/welcome.ts</pre>
 
       <p>Or a more complex one:</p>
 
