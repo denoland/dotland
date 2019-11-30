@@ -429,6 +429,11 @@
     "owner": "chiefbiiko",
     "repo": "siphash24"
   },
+  "slash": {
+    "type": "github",
+    "owner": "justjavac",
+    "repo": "deno-slash"
+  },
   "slugify": {
     "type": "github",
     "owner": "jcardama",
