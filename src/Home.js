@@ -87,34 +87,28 @@ function Home() {
       <h2 id="install">Install</h2>
 
       <p>Using Shell:</p>
-      <pre>
-        curl -fsSL{" "}
-        <Link to="/x/install/install.sh">
-          https://deno.land/x/install/install.sh
-        </Link>{" "}
-        | sh
-      </pre>
+      <CodeBlock
+        language={"shell"}
+        value={"curl -fsSL https://deno.land/x/install/install.sh | sh"}
+      />
       <p>Or using PowerShell:</p>
-      <pre>
-        iwr{" "}
-        <Link to="/x/install/install.ps1">
-          https://deno.land/x/install/install.ps1
-        </Link>{" "}
-        -useb | iex
-      </pre>
+      <CodeBlock
+        language={"shell"}
+        value={"iwr https://deno.land/x/install/install.ps1 -useb | iex"}
+      />
       <p>
         Using <Link to="https://formulae.brew.sh/formula/deno">Homebrew</Link>{" "}
         (mac or Linux):
       </p>
-      <pre>brew install deno</pre>
+      <CodeBlock language={"shell"} value={"brew install deno"} />
       <p>
         Using <Link to="https://scoop.sh/">Scoop</Link> (windows):
       </p>
-      <pre>scoop install deno</pre>
+      <CodeBlock language={"shell"} value={"scoop install deno"} />
       <p>
         Using <Link to="https://crates.io/crates/deno_cli">Cargo</Link>:
       </p>
-      <pre>cargo install deno_cli</pre>
+      <CodeBlock language={"shell"} value={"cargo install deno_cli"} />
       <p>
         See{" "}
         <Link to="https://github.com/denoland/deno_install">deno_install</Link>{" "}
@@ -124,7 +118,10 @@ function Home() {
       <h2 id="example">Example</h2>
 
       <p>Try running a simple program:</p>
-      <pre>deno https://deno.land/std/examples/welcome.ts</pre>
+      <CodeBlock
+        language={"shell"}
+        value={"deno https://deno.land/std/examples/welcome.ts"}
+      />
 
       <p>Or a more complex one:</p>
 
