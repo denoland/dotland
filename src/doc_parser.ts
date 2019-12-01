@@ -93,11 +93,9 @@ export class Parser {
       s = skipAlias(s, this.checker);
       log("requestVisit", s.getName());
       const decls = s.getDeclarations()!;
-      // What does it mean to have multiple declarations?
-      assert(decls.length === 1);
       // const sourceFileName = decls[0].getSourceFile().fileName;
       // Dont visit if sourceFileName is in tsconfig excludes
-      this.visitQueue.push(decls[0]);
+      this.visitQueue.push(...decls);
       this.visitHistory.set(s, true);
     }
   }
