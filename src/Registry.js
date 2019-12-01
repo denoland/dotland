@@ -14,9 +14,11 @@ export default function Registry() {
     contents: null,
     rawUrl: null,
     repoUrl: null,
-    dir: null
+    dir: null,
+    lineSelectionRange: null
   });
-  const { pathname, search } = useLocation();
+  const { pathname, search, hash } = useLocation();
+  const firstSelectedLine = React.useRef(null);
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -32,16 +34,34 @@ export default function Registry() {
       });
     } else {
       // Render file.
+      const lineSelectionRangeMatch = hash.match(/^#L(\d+)(?:-L(\d+))?$/) || [];
+      lineSelectionRangeMatch.shift(); // Get rid of complete match
+      // Handle highlighting "#LX" (same as range [X, X])
+      if (
+        lineSelectionRangeMatch.length > 0 &&
+        lineSelectionRangeMatch[1] === undefined
+      ) {
+        lineSelectionRangeMatch[1] = lineSelectionRangeMatch[0];
+      }
+      const lineSelectionRange = lineSelectionRangeMatch.map(Number);
       const rawUrl = `${entry.url}${path}`;
       const repoUrl = `${entry.repo}${path}`;
       console.log("fetch", rawUrl);
       fetch(rawUrl).then(async response => {
         const m = await response.text();
-        setState({ contents: m, rawUrl, repoUrl });
+        setState({
+          contents: m,
+          rawUrl,
+          repoUrl,
+          lineSelectionRange
+        });
         setIsLoading(false);
+        if (firstSelectedLine.current) {
+          window.scrollTo(0, firstSelectedLine.current.offsetTop);
+        }
       });
     }
-  }, [pathname]);
+  }, [pathname, hash]);
 
   let contentComponent;
   if (isLoading) {
@@ -103,7 +123,24 @@ export default function Registry() {
               return <CodeBlock value="No documentation avaiable." />;
             }
           } else {
-            return <CodeBlock value={state.contents} />;
+            return (
+              <CodeBlock
+                value={state.contents}
+                lineProps={lineNumber => {
+                  const lineProps = {};
+                  if (
+                    lineNumber >= state.lineSelectionRange[0] &&
+                    lineNumber <= state.lineSelectionRange[1]
+                  ) {
+                    lineProps.className = "hljs-selection";
+                  }
+                  if (lineNumber === state.lineSelectionRange[0]) {
+                    lineProps.ref = firstSelectedLine;
+                  }
+                  return lineProps;
+                }}
+              />
+            );
           }
         })()}
       </div>
