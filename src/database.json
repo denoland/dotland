@@ -30,7 +30,7 @@
     "repo": "blake2b"
   },
   "bls12-381": {
-    "type: "github",
+    "type": "github",
     "owner": "paulmillr",
     "repo": "noble-bls12-381"
   },
@@ -216,7 +216,7 @@
     "repo": "deno_easypath"
   },
   "ed25519": {
-    "type: "github",
+    "type": "github",
     "owner": "paulmillr",
     "repo": "noble-ed25519"
   },
@@ -415,12 +415,12 @@
     "repo": "deno-redis"
   },
   "ripemd160": {
-    "type: "github",
+    "type": "github",
     "owner": "paulmillr",
     "repo": "noble-ripemd160"
   },
   "secp256k1": {
-    "type: "github",
+    "type": "github",
     "owner": "paulmillr",
     "repo": "noble-secp256k1"
   },
