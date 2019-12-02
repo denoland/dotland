@@ -54,3 +54,97 @@ test("enum", () => {
     }
   ]);
 });
+
+test("multiple declarations", () => {
+  const rootModule = "http_exception.ts";
+
+  // copy from `https://deno.land/x/abc/http_exception.ts`
+  const rootSource = `
+    export function createHttpExceptionBody(
+      message: string,
+      error?: string,
+      statusCode?: number
+    ): HttpExceptionBody;
+    export function createHttpExceptionBody<T extends Record<string, any>>(
+      body: T
+    ): T;
+    export function createHttpExceptionBody<T extends Record<string, any>>(
+      msgOrBody: string | T,
+      error?: string,
+      statusCode?: number
+    ): HttpExceptionBody | T {
+      if (typeof msgOrBody === "object" && !Array.isArray(msgOrBody)) {
+        return msgOrBody;
+      } else if (typeof msgOrBody === "string") {
+        return { statusCode, error, message: msgOrBody };
+      }
+      return { statusCode, error };
+    }
+  `;
+  const docEntries = main(rootModule, rootSource);
+  expect(docEntries).toEqual([
+    {
+      name: "createHttpExceptionBody",
+      kind: "method",
+      typestr: "(message: string, error?: string, statusCode?: number): any",
+      args: [
+        {
+          docstr: undefined,
+          name: "message",
+          typestr: "string"
+        },
+        {
+          docstr: undefined,
+          name: "error",
+          typestr: "string"
+        },
+        {
+          docstr: undefined,
+          name: "statusCode",
+          typestr: "number"
+        }
+      ],
+      retType: "any",
+      docstr: undefined
+    },
+    {
+      name: "createHttpExceptionBody",
+      kind: "method",
+      typestr: "<T extends any>(body: T): T",
+      args: [
+        {
+          docstr: undefined,
+          name: "body",
+          typestr: "T"
+        }
+      ],
+      retType: "T",
+      docstr: undefined
+    },
+    {
+      name: "createHttpExceptionBody",
+      kind: "method",
+      typestr:
+        "<T extends any>(msgOrBody: string | T, error?: string, statusCode?: number): any",
+      args: [
+        {
+          docstr: undefined,
+          name: "msgOrBody",
+          typestr: "string | T"
+        },
+        {
+          docstr: undefined,
+          name: "error",
+          typestr: "string"
+        },
+        {
+          docstr: undefined,
+          name: "statusCode",
+          typestr: "number"
+        }
+      ],
+      retType: "any",
+      docstr: undefined
+    }
+  ]);
+});
