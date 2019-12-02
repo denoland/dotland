@@ -303,6 +303,11 @@
     "owner": "lodash",
     "repo": "lodash"
   },
+  "lodash-deno": {
+    "type": "github",
+    "owner": "TokenChingy",
+    "repo": "lodash-deno"
+  },
   "math": {
     "type": "github",
     "owner": "axetroy",
