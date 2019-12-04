@@ -29,58 +29,22 @@ function Home() {
 
       <table id="badges">
         <tbody>
-          <tr>
-            <th>
-              <Link to="https://github.com/denoland/deno">deno</Link>
-            </th>
-            <td>
-              <Link
-                className="badge"
-                to="https://github.com/denoland/deno/actions"
-              >
-                <img
-                  alt="deno ci badge"
-                  src="https://github.com/denoland/deno/workflows/ci/badge.svg?branch=master&event=push"
-                />
-              </Link>
-            </td>
-          </tr>
-          <tr>
-            <th>
-              <Link to="https://github.com/denoland/deno_website2">
-                deno_website2
-              </Link>
-            </th>
-            <td>
-              <Link
-                className="badge"
-                to="https://github.com/denoland/deno_website2/actions"
-              >
-                <img
-                  alt="deno ci badge"
-                  src="https://github.com/denoland/deno_website2/workflows/ci/badge.svg?branch=master&event=push"
-                />
-              </Link>
-            </td>
-          </tr>
-          <tr>
-            <th>
-              <Link to="https://github.com/denoland/deno_install">
-                deno_install
-              </Link>
-            </th>
-            <td>
-              <Link
-                className="badge"
-                to="https://github.com/denoland/deno_install/actions"
-              >
-                <img
-                  alt="deno_install ci badge"
-                  src="https://github.com/denoland/deno_install/workflows/ci/badge.svg?branch=master&event=push"
-                />
-              </Link>
-            </td>
-          </tr>
+          {["deno", "deno_website2", "deno_install", "rusty_v8"].map((repo, i) => {
+            const url = `https://github.com/denoland/${repo}`;
+            const badge = `https://github.com/denoland/${repo}/workflows/ci/badge.svg?branch=master&event=push`;
+            return (
+              <tr key={i}>
+                <th>
+                  <Link to={url}>{repo}</Link>
+                </th>
+                <td>
+                  <Link className="badge" to={`${url}/actions`}>
+                    <img alt={`${repo} ci badge`} src={badge} />
+                  </Link>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
 
