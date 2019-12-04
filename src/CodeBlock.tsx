@@ -19,7 +19,7 @@ function CodeBlock(props: SyntaxHighlighterProps) {
     <SyntaxHighlighter
       style={darkMode ? darkTheme : lightTheme}
       language={props.language || "js"}
-      showLineNumbers={true}
+      showLineNumbers={props.showLineNumbers || false}
       wrapLines={true}
       lineProps={props.lineProps}
     >

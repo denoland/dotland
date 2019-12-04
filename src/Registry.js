@@ -125,6 +125,7 @@ export default function Registry() {
           } else {
             return (
               <CodeBlock
+                showLineNumbers={true}
                 value={state.contents}
                 lineProps={lineNumber => {
                   const lineProps = {};
