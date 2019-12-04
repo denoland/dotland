@@ -29,6 +29,11 @@
     "owner": "chiefbiiko",
     "repo": "blake2b"
   },
+  "bls12-381": {
+    "type": "github",
+    "owner": "paulmillr",
+    "repo": "noble-bls12-381"
+  },
   "bwt": {
     "type": "github",
     "owner": "chiefbiiko",
@@ -209,6 +214,11 @@
     "type": "github",
     "owner": "zekth",
     "repo": "deno_easypath"
+  },
+  "ed25519": {
+    "type": "github",
+    "owner": "paulmillr",
+    "repo": "noble-ed25519"
   },
   "endianess": {
     "type": "github",
@@ -403,6 +413,16 @@
     "type": "github",
     "owner": "keroxp",
     "repo": "deno-redis"
+  },
+  "ripemd160": {
+    "type": "github",
+    "owner": "paulmillr",
+    "repo": "noble-ripemd160"
+  },
+  "secp256k1": {
+    "type": "github",
+    "owner": "paulmillr",
+    "repo": "noble-secp256k1"
   },
   "semver": {
     "type": "github",
