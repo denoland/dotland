@@ -89,6 +89,11 @@
     "owner": "ameerthehacker",
     "repo": "cli-spinners"
   },
+  "clipboard": {
+    "type": "github",
+    "owner": "rsp",
+    "repo": "deno-clipboard"
+  },
   "clone": {
     "type": "github",
     "owner": "ekaragodin",
