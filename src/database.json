@@ -501,6 +501,11 @@
     "url": "https://unpkg.com/unexpected@${v}/",
     "repo": "https://unexpected.js.org/"
   },
+  "username": {
+    "type": "github",
+    "owner": "justjavac",
+    "repo": "deno-username"
+  },
   "uuid": {
     "type": "github",
     "owner": "lucascaro",
