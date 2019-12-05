@@ -313,6 +313,11 @@
     "owner": "lodash",
     "repo": "lodash"
   },
+  "lodash_require": {
+    "type": "github",
+    "owner": "TokenChingy",
+    "repo": "lodash_require"
+  },
   "math": {
     "type": "github",
     "owner": "axetroy",
