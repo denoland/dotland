@@ -303,10 +303,10 @@
     "owner": "lodash",
     "repo": "lodash"
   },
-  "lodash-deno": {
+  "lodash_require": {
     "type": "github",
     "owner": "TokenChingy",
-    "repo": "lodash-deno"
+    "repo": "lodash_require"
   },
   "math": {
     "type": "github",
