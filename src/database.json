@@ -220,6 +220,11 @@
     "owner": "paulmillr",
     "repo": "noble-ed25519"
   },
+  "ende": {
+    "type": "github",
+    "owner": "rsp",
+    "repo": "deno-ende"
+  },
   "endianess": {
     "type": "github",
     "owner": "denolibs",
