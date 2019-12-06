@@ -348,6 +348,11 @@
     "owner": "denolib",
     "repo": "ms"
   },
+  "murmurhash": {
+    "type": "github",
+    "owner": "justjavac",
+    "repo": "deno-murmurhash"
+  },
   "mysql": {
     "type": "github",
     "owner": "manyuanrong",
