@@ -29,22 +29,24 @@ function Home() {
 
       <table id="badges">
         <tbody>
-          {["deno", "deno_website2", "deno_install", "rusty_v8"].map((repo, i) => {
-            const url = `https://github.com/denoland/${repo}`;
-            const badge = `https://github.com/denoland/${repo}/workflows/ci/badge.svg?branch=master&event=push`;
-            return (
-              <tr key={i}>
-                <th>
-                  <Link to={url}>{repo}</Link>
-                </th>
-                <td>
-                  <Link className="badge" to={`${url}/actions`}>
-                    <img alt={`${repo} ci badge`} src={badge} />
-                  </Link>
-                </td>
-              </tr>
-            );
-          })}
+          {["deno", "deno_website2", "deno_install", "rusty_v8"].map(
+            (repo, i) => {
+              const url = `https://github.com/denoland/${repo}`;
+              const badge = `https://github.com/denoland/${repo}/workflows/ci/badge.svg?branch=master&event=push`;
+              return (
+                <tr key={i}>
+                  <th>
+                    <Link to={url}>{repo}</Link>
+                  </th>
+                  <td>
+                    <Link className="badge" to={`${url}/actions`}>
+                      <img alt={`${repo} ci badge`} src={badge} />
+                    </Link>
+                  </td>
+                </tr>
+              );
+            }
+          )}
         </tbody>
       </table>
 
@@ -66,13 +68,10 @@ function Home() {
       </p>
       <CodeBlock language={"shell"} value={"brew install deno"} />
       <p>
-        Using <Link to="https://scoop.sh/">Scoop</Link> (windows):
+        Using <Link to="https://chocolatey.org/packages/deno">Chocolatey</Link>{" "}
+        (windows):
       </p>
-      <CodeBlock language={"shell"} value={"scoop install deno"} />
-      <p>
-        Using <Link to="https://crates.io/crates/deno_cli">Cargo</Link>:
-      </p>
-      <CodeBlock language={"shell"} value={"cargo install deno_cli"} />
+      <CodeBlock language={"shell"} value={"choco install deno"} />
       <p>
         See{" "}
         <Link to="https://github.com/denoland/deno_install">deno_install</Link>{" "}
