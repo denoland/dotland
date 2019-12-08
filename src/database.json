@@ -74,6 +74,11 @@
     "owner": "chiefbiiko",
     "repo": "chacha20-poly1305"
   },
+  "checksum": {
+    "type": "github",
+    "owner": "manyuanrong",
+    "repo": "deno-checksum"
+  },
   "chunked": {
     "type": "github",
     "owner": "aynik",
@@ -109,11 +114,6 @@
     "owner": "denoland",
     "repo": "deno"
   },
-  "checksum": {
-    "type": "github",
-    "owner": "manyuanrong",
-    "repo": "deno-checksum"
-  },
   "curve25519": {
     "type": "github",
     "owner": "chiefbiiko",
@@ -140,6 +140,11 @@
     "owner": "Sab94",
     "repo": "dedupe"
   },
+  "dejs": {
+    "type": "github",
+    "owner": "syumai",
+    "repo": "dejs"
+  },
   "dem": {
     "type": "github",
     "owner": "syumai",
@@ -155,25 +160,20 @@
     "owner": "maxuuell",
     "repo": "deno_init"
   },
-  "denoget": {
-    "type": "github",
-    "owner": "syumai",
-    "repo": "denoget"
-  },
   "denofun": {
     "type": "github",
     "owner": "galkowskit",
     "repo": "denofun"
   },
+  "denoget": {
+    "type": "github",
+    "owner": "syumai",
+    "repo": "denoget"
+  },
   "denoversion": {
     "type": "github",
     "owner": "lucascaro",
     "repo": "denoversion"
-  },
-  "dejs": {
-    "type": "github",
-    "owner": "syumai",
-    "repo": "dejs"
   },
   "dirname": {
     "type": "github",
@@ -190,11 +190,6 @@
     "owner": "crookse",
     "repo": "docable"
   },
-  "dso": {
-    "type": "github",
-    "owner": "manyuanrong",
-    "repo": "dso"
-  },
   "dotenv": {
     "type": "github",
     "owner": "pietvanzoen",
@@ -204,6 +199,11 @@
     "type": "github",
     "owner": "crookse",
     "repo": "deno-drash"
+  },
+  "dso": {
+    "type": "github",
+    "owner": "manyuanrong",
+    "repo": "dso"
   },
   "dynamodb": {
     "type": "github",
@@ -333,15 +333,15 @@
     "owner": "axetroy",
     "repo": "deno_math"
   },
-  "moment": {
-    "type": "github",
-    "owner": "lisniuse",
-    "repo": "deno_moment"
-  },
   "minimatch": {
     "type": "github",
     "owner": "chrisdothtml",
     "repo": "deno-minimatch"
+  },
+  "moment": {
+    "type": "github",
+    "owner": "lisniuse",
+    "repo": "deno_moment"
   },
   "ms": {
     "type": "github",
@@ -526,15 +526,15 @@
     "owner": "justjavac",
     "repo": "deno-username"
   },
-  "uuid": {
-    "type": "github",
-    "owner": "lucascaro",
-    "repo": "deno-uuid"
-  },
   "using": {
     "type": "github",
     "owner": "hayd",
     "repo": "deno-using"
+  },
+  "uuid": {
+    "type": "github",
+    "owner": "lucascaro",
+    "repo": "deno-uuid"
   },
   "watch": {
     "type": "github",
