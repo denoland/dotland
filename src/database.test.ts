@@ -21,7 +21,7 @@ test("a database entry should never have a path starting with /", () => {
 
 test("database names with dashes are not allowed", () => {
   for (let key in DATABASE) {
-    expect(key.indexOf("-") < 0);
+    expect(key.includes("-")).toBeFalsy();
   }
 });
 
