@@ -24,3 +24,8 @@ test("database names with dashes are not allowed", () => {
     expect(key.indexOf("-") < 0);
   }
 });
+
+test("database names should be sorted alphabetically", () => {
+  const sortedNames = Object.keys(DATABASE).sort()
+  expect(sortedNames).toEqual(Object.keys(DATABASE));
+});

@@ -190,11 +190,6 @@
     "owner": "crookse",
     "repo": "docable"
   },
-  "dso": {
-    "type": "github",
-    "owner": "manyuanrong",
-    "repo": "dso"
-  },
   "dotenv": {
     "type": "github",
     "owner": "pietvanzoen",
@@ -204,6 +199,11 @@
     "type": "github",
     "owner": "crookse",
     "repo": "deno-drash"
+  },
+  "dso": {
+    "type": "github",
+    "owner": "manyuanrong",
+    "repo": "dso"
   },
   "dynamodb": {
     "type": "github",
