@@ -29,7 +29,7 @@
     "owner": "chiefbiiko",
     "repo": "blake2b"
   },
-  "bls12-381": {
+  "bls12_381": {
     "type": "github",
     "owner": "paulmillr",
     "repo": "noble-bls12-381"
