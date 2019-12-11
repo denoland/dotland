@@ -424,6 +424,11 @@
     "owner": "aynik",
     "repo": "deno-purify"
   },
+  "rand": {
+    "type": "github",
+    "owner": "rsp",
+    "repo": "deno-rand"
+  },
   "random_interval": {
     "type": "github",
     "owner": "zekth",
