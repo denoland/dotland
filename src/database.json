@@ -494,6 +494,11 @@
     "owner": "manyuanrong",
     "repo": "sql-builder"
   },
+  "sqlite": {
+    "type": "github",
+    "owner": "dyedgreen",
+    "repo": "deno-sqlite"
+  },
   "std": {
     "type": "github",
     "owner": "denoland",
