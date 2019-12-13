@@ -527,9 +527,9 @@
   },
   "unexpected": {
     "type": "esm",
-    "owner": "alexjeffburke",
-    "url": "https://unpkg.com/unexpected@${v}/",
-    "repo": "https://unexpected.js.org/"
+    "owner": "unexpectedjs",
+    "repo": "unexpected",
+    "url": "https://unpkg.com/unexpected@${v}/"
   },
   "username": {
     "type": "github",
