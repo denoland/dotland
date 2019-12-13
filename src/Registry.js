@@ -67,8 +67,9 @@ export default function Registry() {
   if (isLoading) {
     contentComponent = <Spinner />;
   } else if (state.dir) {
+    const { body, files } = state.dir;
     const entries = [];
-    for (const d of state.dir) {
+    for (const d of files) {
       const name = d.type !== "dir" ? d.name : d.name + "/";
       entries.push(
         <tr key={name}>
@@ -80,14 +81,18 @@ export default function Registry() {
         </tr>
       );
     }
+
     contentComponent = (
       <div>
         <Link to={state.repoUrl}>Repository</Link>
         <br />
         <br />
-        <table>
-          <tbody>{entries}</tbody>
-        </table>
+        {body && <Markdown source={body} />}
+        {entries.length > 0 && (
+          <table>
+            <tbody>{entries}</tbody>
+          </table>
+        )}
       </div>
     );
   } else {
@@ -153,7 +158,8 @@ export default function Registry() {
 
 async function renderDir(pathname, entry) {
   console.log({ pathname, entry });
-  if (entry.raw.type === "github") {
+  const entryType = entry.raw.type;
+  if (entryType === "github" || entryType === "esm") {
     const owner = entry.raw.owner;
     const repo = entry.raw.repo;
     const path = [entry.raw.path, pathname].join("");
@@ -182,11 +188,36 @@ async function renderDir(pathname, entry) {
       );
     }
 
-    return data.entries.map(entry => ({
+    const files = data.entries.map(entry => ({
       name: entry.name,
       type: entry.type, // "file" | "dir" | "symlink"
       size: entry.size, // file only
       target: entry.target // symlink only
     }));
+
+    if (entryType == "esm") {
+      let body;
+
+      // no useful files exist in the repository, so opt to attempt
+      // showing the contents of the README file instead if it exists.
+      if (files.some(entry => entry.name === "README.md")) {
+        const rawUrl = `${entry.url}${path}README.md`;
+        try {
+          const response = await fetch(rawUrl);
+          body = await response.text();
+        } catch (e) {
+          // ignore
+        }
+      }
+
+      return { body, files: [] };
+    }
+
+    return { files };
   }
+
+  return {
+    body: `Directories not yet supported for entry type ${entry.raw.type}.`,
+    files: []
+  };
 }

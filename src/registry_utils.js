@@ -70,6 +70,7 @@ export function getEntry(name, branch = "master") {
     const version = branch === "master" ? "latest" : branch;
     return {
       name,
+      branch,
       raw: rawEntry,
       type: "esm",
       url: rawEntry.url.replace(/\$\{v}/, version),
