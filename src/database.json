@@ -328,6 +328,11 @@
     "owner": "TokenChingy",
     "repo": "lodash_require"
   },
+  "machine_id": {
+    "type": "github",
+    "owner": "axetroy",
+    "repo": "deno_machine_id"
+  },
   "math": {
     "type": "github",
     "owner": "axetroy",
