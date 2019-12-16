@@ -1,9 +1,20 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import toc from "remark-toc";
-import CodeBlock from "./CodeBlock";
 import htmlParser from "react-markdown/plugins/html-parser";
 import { Link } from "@material-ui/core";
+
+const { Suspense } = React;
+
+const CodeBlockLazy = React.lazy(() => import("./CodeBlock"));
+
+function CodeBlock(props) {
+  return (
+    <Suspense fallback={""}>
+      <CodeBlockLazy {...props}></CodeBlockLazy>
+    </Suspense>
+  );
+}
 
 interface HeadingRendererProps {
   source: string;

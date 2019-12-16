@@ -1,7 +1,18 @@
 import React from "react";
-import CodeBlock from "./CodeBlock";
 import Link from "./Link";
 import "./Home.css";
+
+const { Suspense } = React;
+
+const CodeBlockLazy = React.lazy(() => import("./CodeBlock"));
+
+function CodeBlock(props) {
+  return (
+    <Suspense fallback={""}>
+      <CodeBlockLazy {...props}></CodeBlockLazy>
+    </Suspense>
+  );
+}
 
 const code = `import { serve } from "https://deno.land/std@v0.24.0/http/server.ts";
 const body = new TextEncoder().encode("Hello World\\n");

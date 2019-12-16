@@ -2,11 +2,12 @@ import React from "react";
 import { List, ListItem, Box } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 import Link from "./Link.tsx";
-import Markdown from "./Markdown";
-import CodeBlock from "./CodeBlock";
-import Docs from "./Docs";
 import { proxy } from "./registry_utils";
 import Spinner from "./Spinner";
+
+const CodeBlock = React.lazy(() => import("./CodeBlock"));
+const Markdown = React.lazy(() => import("./Markdown"));
+const Docs = React.lazy(() => import("./Docs"));
 
 export default function Registry() {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -195,7 +196,7 @@ async function renderDir(pathname, entry) {
       target: entry.target // symlink only
     }));
 
-    if (entryType == "esm") {
+    if (entryType === "esm") {
       let body;
 
       // no useful files exist in the repository, so opt to attempt
