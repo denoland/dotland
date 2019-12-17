@@ -1,6 +1,5 @@
 import React from "react";
 import Spinner from "./Spinner";
-import ApexChart from "react-apexcharts";
 import { useLocation } from "react-router-dom";
 import {
   BenchmarkData,
@@ -16,6 +15,8 @@ import {
 import { Theme } from "@material-ui/core";
 import Link from "./Link";
 import { useTheme } from "@material-ui/styles";
+
+const ApexChart = React.lazy(() => import('react-apexcharts'))
 
 interface Props {
   yTickFormat?: (n: number) => string;

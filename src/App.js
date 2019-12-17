@@ -1,13 +1,28 @@
 import React from "react";
-import Home from "./Home";
-import Registry from "./Registry";
-import RegistryIndex from "./RegistryIndex";
 import useHashLink from "./useHashLink";
-import NotFound from "./NotFound";
 import PathBreadcrumbs from "./PathBreadcrumbs";
-import Benchmarks from "./Benchmarks";
 import { Container } from "@material-ui/core";
 import { BrowserRouter, Redirect, Switch, Route } from "react-router-dom";
+import Spinner from "./Spinner";
+
+const { Suspense } = React;
+
+const Home = React.lazy(() => import("./Home"));
+const RegistryIndex = React.lazy(() => import("./RegistryIndex"));
+const Benchmarks = React.lazy(() => import("./Benchmarks"));
+const NotFound = React.lazy(() => import("./NotFound"));
+const LazyRegistry = React.lazy(() => import("./Registry"));
+function Registry() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <LazyRegistry />
+    </Suspense>
+  );
+}
+
+function Loading() {
+  return <Spinner />;
+}
 
 function App() {
   useHashLink();
@@ -22,7 +37,14 @@ function App() {
       <Container maxWidth="md">
         <PathBreadcrumbs />
         <Switch>
-          <Route path="/benchmarks(.html)?" component={Benchmarks} />
+          <Route
+            path="/benchmarks(.html)?"
+            render={() => (
+              <Suspense fallback={<Loading />}>
+                <Benchmarks />
+              </Suspense>
+            )}
+          />
           <Route path="/manual(.html)?">
             <Redirect to="/std/manual.md" />
           </Route>
@@ -36,9 +58,31 @@ function App() {
           <Route path="/x/:mod/:modPath" component={Registry} />
           <Route path="/x/:mod" component={Registry} />
           <Route path="/x/:mod@:modVersion" component={Registry} />
-          <Route path="/x/" component={RegistryIndex} />
-          <Route exact path="/" component={Home} />
-          <Route path="*" component={NotFound} />
+          <Route
+            path="/x/"
+            render={() => (
+              <Suspense fallback={<Loading />}>
+                <RegistryIndex />
+              </Suspense>
+            )}
+          />
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <Suspense fallback={<Loading />}>
+                <Home></Home>
+              </Suspense>
+            )}
+          />
+          <Route
+            path="*"
+            render={() => (
+              <Suspense fallback={<Loading />}>
+                <NotFound />
+              </Suspense>
+            )}
+          />
         </Switch>
       </Container>
     </BrowserRouter>
