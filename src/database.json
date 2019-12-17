@@ -424,6 +424,11 @@
     "owner": "OnikurYH",
     "repo": "deno-prettystring"
   },
+  "process": {
+    "type": "github",
+    "owner": "axetroy",
+    "repo": "deno_process"
+  },
   "purify": {
     "type": "github",
     "owner": "aynik",
