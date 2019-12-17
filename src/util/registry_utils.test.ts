@@ -1,4 +1,4 @@
-import DATABASE from "./database.json";
+import DATABASE from "../database.json";
 import { proxy, getEntry } from "./registry_utils";
 
 test("check that the registry correctly handles std module", () => {
