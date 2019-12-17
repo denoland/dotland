@@ -4,7 +4,7 @@ import SyntaxHighlighter, {
 } from "react-syntax-highlighter";
 import lightTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-light";
 import darkTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark";
-import { useDarkMode } from "./theme";
+import { useDarkMode } from "../hook/theme";
 
 lightTheme["hljs-selection"] = {
   backgroundColor: "#ebebeb" // https://github.com/atom/one-light-ui/blob/master/styles/ui-variables.less#L32

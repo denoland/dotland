@@ -1,8 +1,8 @@
 import React from "react";
 import { Box, Breadcrumbs } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
-import Link from "./Link";
 import assert from "assert";
+import Link from "./Link";
 
 export default function PathBreadcrumbs() {
   const location = useLocation();

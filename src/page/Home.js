@@ -1,10 +1,10 @@
 import React from "react";
-import Link from "./Link";
+import Link from "../component/Link";
 import "./Home.css";
 
 const { Suspense } = React;
 
-const CodeBlockLazy = React.lazy(() => import("./CodeBlock"));
+const CodeBlockLazy = React.lazy(() => import("../component/CodeBlock"));
 
 function CodeBlock(props) {
   return (
