@@ -130,6 +130,11 @@
     "repo": "date-fns",
     "path": "src/"
   },
+  "deamon": {
+    "type": "github",
+    "owner": "manyuanrong",
+    "repo": "deno-deamon"
+  },
   "debuglog": {
     "type": "github",
     "owner": "rista404",
