@@ -1,22 +1,22 @@
 import React from "react";
-import Spinner from "./Spinner";
+import { Theme } from "@material-ui/core";
+import { useTheme } from "@material-ui/styles";
 import { useLocation } from "react-router-dom";
 import {
   BenchmarkData,
   Column,
-  reshape,
-  logScale,
-  formatLogScale,
-  formatReqSec,
-  formatMB,
   formatKB,
-  formatPercentage
-} from "./benchmark_utils";
-import { Theme } from "@material-ui/core";
-import Link from "./Link";
-import { useTheme } from "@material-ui/styles";
+  formatLogScale,
+  formatMB,
+  formatPercentage,
+  formatReqSec,
+  logScale,
+  reshape
+} from "../util/benchmark_utils";
+import Link from "../component/Link";
+import Spinner from "../component/Spinner";
 
-const ApexChart = React.lazy(() => import('react-apexcharts'))
+const ApexChart = React.lazy(() => import("react-apexcharts"));
 
 interface Props {
   yTickFormat?: (n: number) => string;

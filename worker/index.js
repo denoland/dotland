@@ -1,4 +1,4 @@
-import { proxy } from "../src/registry_utils";
+import { proxy } from "../src/util/registry_utils";
 
 // const REMOTE_URL = "https://deno.land";
 const REMOTE_URL = "https://denoland.netlify.com";

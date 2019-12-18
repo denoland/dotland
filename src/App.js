@@ -1,27 +1,24 @@
 import React from "react";
-import useHashLink from "./useHashLink";
-import PathBreadcrumbs from "./PathBreadcrumbs";
 import { Container } from "@material-ui/core";
-import { BrowserRouter, Redirect, Switch, Route } from "react-router-dom";
-import Spinner from "./Spinner";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import PathBreadcrumbs from "./component/PathBreadcrumbs";
+import Spinner from "./component/Spinner";
+import useHashLink from "./hook/useHashLink";
 
 const { Suspense } = React;
 
-const Home = React.lazy(() => import("./Home"));
-const RegistryIndex = React.lazy(() => import("./RegistryIndex"));
-const Benchmarks = React.lazy(() => import("./Benchmarks"));
-const NotFound = React.lazy(() => import("./NotFound"));
-const LazyRegistry = React.lazy(() => import("./Registry"));
+const Home = React.lazy(() => import("./page/Home"));
+const RegistryIndex = React.lazy(() => import("./page/RegistryIndex"));
+const Benchmarks = React.lazy(() => import("./page/Benchmarks"));
+const NotFound = React.lazy(() => import("./page/NotFound"));
+const LazyRegistry = React.lazy(() => import("./page/Registry"));
+
 function Registry() {
   return (
-    <Suspense fallback={<Loading />}>
+    <Suspense fallback={<Spinner />}>
       <LazyRegistry />
     </Suspense>
   );
-}
-
-function Loading() {
-  return <Spinner />;
 }
 
 function App() {
@@ -40,7 +37,7 @@ function App() {
           <Route
             path="/benchmarks(.html)?"
             render={() => (
-              <Suspense fallback={<Loading />}>
+              <Suspense fallback={<Spinner />}>
                 <Benchmarks />
               </Suspense>
             )}
@@ -61,7 +58,7 @@ function App() {
           <Route
             path="/x/"
             render={() => (
-              <Suspense fallback={<Loading />}>
+              <Suspense fallback={<Spinner />}>
                 <RegistryIndex />
               </Suspense>
             )}
@@ -70,7 +67,7 @@ function App() {
             exact
             path="/"
             render={() => (
-              <Suspense fallback={<Loading />}>
+              <Suspense fallback={<Spinner />}>
                 <Home></Home>
               </Suspense>
             )}
@@ -78,7 +75,7 @@ function App() {
           <Route
             path="*"
             render={() => (
-              <Suspense fallback={<Loading />}>
+              <Suspense fallback={<Spinner />}>
                 <NotFound />
               </Suspense>
             )}

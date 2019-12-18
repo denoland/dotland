@@ -1,18 +1,18 @@
 import React from "react";
-import { main } from "./doc_utils";
-import Markdown from "./Markdown";
-import { useLocation } from "react-router-dom";
-import Link from "./Link";
 import {
-  List,
-  Grid,
-  ListItem,
-  ListItemText,
   Box,
   Card,
+  CardContent,
   CardHeader,
-  CardContent
+  Grid,
+  List,
+  ListItem,
+  ListItemText
 } from "@material-ui/core";
+import { useLocation } from "react-router-dom";
+import { main } from "../util/doc_utils";
+import Link from "./Link";
+import Markdown from "./Markdown";
 
 interface Props {
   source: string;

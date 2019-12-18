@@ -1,13 +1,13 @@
 import React from "react";
-import { List, ListItem, Box } from "@material-ui/core";
+import { Box, List, ListItem } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
-import Link from "./Link.tsx";
-import { proxy } from "./registry_utils";
-import Spinner from "./Spinner";
+import Link from "../component/Link.tsx";
+import Spinner from "../component/Spinner";
+import { proxy } from "../util/registry_utils";
 
-const CodeBlock = React.lazy(() => import("./CodeBlock"));
-const Markdown = React.lazy(() => import("./Markdown"));
-const Docs = React.lazy(() => import("./Docs"));
+const CodeBlock = React.lazy(() => import("../component/CodeBlock"));
+const Markdown = React.lazy(() => import("../component/Markdown"));
+const Docs = React.lazy(() => import("../component/Docs"));
 
 export default function Registry() {
   const [isLoading, setIsLoading] = React.useState(true);
