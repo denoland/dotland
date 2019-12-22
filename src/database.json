@@ -266,6 +266,11 @@
     "repo": "fiona",
     "path": "src/"
   },
+  "free_port": {
+    "type": "github",
+    "owner": "axetroy",
+    "repo": "deno_free_port"
+  },
   "gardens": {
     "type": "github",
     "owner": "partheseas",
