@@ -419,6 +419,11 @@
     "owner": "chiefbiiko",
     "repo": "poly1305"
   },
+  "pool": {
+    "type": "github",
+    "owner": "axetroy",
+    "repo": "deno_pool"
+  },
   "postgres": {
     "type": "github",
     "owner": "buildondata",
