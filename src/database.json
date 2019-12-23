@@ -514,6 +514,11 @@
     "owner": "manyuanrong",
     "repo": "deno-smtp"
   },
+  "soxa": {
+    "type": "github",
+    "owner": "fakoua",
+    "repo": "soxa"
+  },
   "sql_builder": {
     "type": "github",
     "owner": "manyuanrong",
