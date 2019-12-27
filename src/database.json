@@ -175,6 +175,11 @@
     "owner": "syumai",
     "repo": "denoget"
   },
+  "deno_gui": {
+    "type": "github",
+    "owner": "fakoua",
+    "repo": "deno_gui"
+  },
   "denoversion": {
     "type": "github",
     "owner": "lucascaro",
