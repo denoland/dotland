@@ -202,7 +202,7 @@
   },
   "drash": {
     "type": "github",
-    "owner": "crookse",
+    "owner": "drashland",
     "repo": "deno-drash"
   },
   "dso": {
