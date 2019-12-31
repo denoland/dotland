@@ -114,6 +114,11 @@
     "owner": "denoland",
     "repo": "deno"
   },
+  "cowsay": {
+    "type": "github",
+    "owner": "fakoua",
+    "repo": "cowsay"
+  },
   "curve25519": {
     "type": "github",
     "owner": "chiefbiiko",
