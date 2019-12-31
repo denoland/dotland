@@ -165,6 +165,11 @@
     "owner": "maxuuell",
     "repo": "deno_init"
   },
+  "deno_gui": {
+    "type": "github",
+    "owner": "fakoua",
+    "repo": "deno_gui"
+  },
   "denofun": {
     "type": "github",
     "owner": "galkowskit",
@@ -174,11 +179,6 @@
     "type": "github",
     "owner": "syumai",
     "repo": "denoget"
-  },
-  "deno_gui": {
-    "type": "github",
-    "owner": "fakoua",
-    "repo": "deno_gui"
   },
   "denoversion": {
     "type": "github",
