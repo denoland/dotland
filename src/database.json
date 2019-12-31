@@ -160,15 +160,15 @@
     "owner": "denoland",
     "repo": "deno"
   },
-  "deno_init": {
-    "type": "github",
-    "owner": "maxuuell",
-    "repo": "deno_init"
-  },
   "deno_gui": {
     "type": "github",
     "owner": "fakoua",
     "repo": "deno_gui"
+  },
+  "deno_init": {
+    "type": "github",
+    "owner": "maxuuell",
+    "repo": "deno_init"
   },
   "denofun": {
     "type": "github",
