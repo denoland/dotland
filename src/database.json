@@ -124,6 +124,11 @@
     "owner": "chiefbiiko",
     "repo": "curve25519"
   },
+  "dargs": {
+    "type": "github",
+    "owner": "fakoua",
+    "repo": "dargs"
+  },
   "databatcher": {
     "type": "github",
     "owner": "allain",
