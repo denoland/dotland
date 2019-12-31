@@ -114,15 +114,15 @@
     "owner": "denoland",
     "repo": "deno"
   },
-  "curve25519": {
-    "type": "github",
-    "owner": "chiefbiiko",
-    "repo": "curve25519"
-  },
   "cowsay": {
     "type": "github",
     "owner": "fakoua",
     "repo": "cowsay"
+  },
+  "curve25519": {
+    "type": "github",
+    "owner": "chiefbiiko",
+    "repo": "curve25519"
   },
   "databatcher": {
     "type": "github",
