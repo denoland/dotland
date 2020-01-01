@@ -296,6 +296,11 @@
     "owner": "chiefbiiko",
     "repo": "hmac"
   },
+  "ink": {
+    "type": "github",
+    "owner": "fakoua",
+    "repo": "ink"
+  },
   "install": {
     "type": "github",
     "owner": "denoland",
