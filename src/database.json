@@ -296,6 +296,11 @@
     "owner": "chiefbiiko",
     "repo": "hmac"
   },
+  "humanizer.ts": {
+    "type": "github",
+    "owner": "fakoua",
+    "repo": "Humanizer.ts"
+  },
   "ink": {
     "type": "github",
     "owner": "fakoua",
