@@ -119,6 +119,12 @@
     "owner": "fakoua",
     "repo": "cowsay"
   },
+  "cursornext": {
+    "type": "github",
+    "owner": "clitetailor",
+    "repo": "cursornext",
+    "path": "deno/"
+  },
   "curve25519": {
     "type": "github",
     "owner": "chiefbiiko",
