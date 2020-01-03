@@ -1,6 +1,11 @@
 import React from "react";
 import { Link } from "@material-ui/core";
 import DATABASE from "../database.json";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import Divider from "@material-ui/core/Divider";
+import ListItemText from "@material-ui/core/ListItemText";
+import Paper from '@material-ui/core/Paper';
 
 export default function RegistryIndex() {
   return (
@@ -41,19 +46,30 @@ export default function RegistryIndex() {
       </p>
 
       <p>{Object.entries(DATABASE).length} third party modules:</p>
-
-      <ul>
+      <Paper>
+      <List dense>
         {Object.keys(DATABASE)
           .sort((nameA, nameB) => nameA.localeCompare(nameB))
           .map((name, i) => {
             const link = `/x/${name}/`;
             return (
-              <li key={i}>
-                <Link href={link}>{name}</Link>
-              </li>
+              <React.Fragment>
+              <ListItem alignItems="flex-start">
+                <ListItemText
+                  primary={<Link href={link}>{name}</Link>}
+                  secondary={
+                    <React.Fragment>
+                      {DATABASE[name].desc}
+                    </React.Fragment>
+                  }
+                />
+              </ListItem>
+              <Divider/>
+              </React.Fragment>
             );
           })}
-      </ul>
+      </List>
+      </Paper>
     </main>
   );
 }
