@@ -15,7 +15,7 @@ export default function Registry() {
     contents: null,
     rawUrl: null,
     repoUrl: null,
-    dir: null,
+    dir: null
   });
   const { pathname, search, hash } = useLocation();
   const firstSelectedLine = React.useRef(null);
@@ -102,21 +102,27 @@ export default function Registry() {
     contentComponent = (
       <div>
         <List>
-          <ListItem>
-            {isDocsPage ? (
+          {isDocsPage ? (
+            <ListItem>
               <Link to="?">Source Code</Link>
-            ) : hasDocsAvailable ? (
+            </ListItem>
+          ) : hasDocsAvailable ? (
+            <ListItem>
               <Link color="primary" to="?doc">
                 Documentation
               </Link>
-            ) : null}
-          </ListItem>
-          <ListItem>
-            {state.repoUrl ? <Link to={state.repoUrl}>Repository</Link> : null}
-          </ListItem>
-          <ListItem>
-            {state.rawUrl ? <Link to={state.rawUrl}>Raw</Link> : null}
-          </ListItem>
+            </ListItem>
+          ) : null}
+          {state.repoUrl ? (
+            <ListItem>
+              <Link to={state.repoUrl}>Repository</Link>
+            </ListItem>
+          ) : null}
+          {state.rawUrl ? (
+            <ListItem>
+              <Link to={state.rawUrl}>Raw</Link>
+            </ListItem>
+          ) : null}
         </List>
         {(() => {
           if (isMarkdown) {
