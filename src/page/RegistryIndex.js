@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "@material-ui/core";
+import Link from "../component/Link";
 import DATABASE from "../database.json";
 
 export default function RegistryIndex() {
