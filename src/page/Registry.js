@@ -16,7 +16,6 @@ export default function Registry() {
     rawUrl: null,
     repoUrl: null,
     dir: null,
-    lineSelectionRange: null
   });
   const { pathname, search, hash } = useLocation();
   const firstSelectedLine = React.useRef(null);
@@ -35,16 +34,6 @@ export default function Registry() {
       });
     } else {
       // Render file.
-      const lineSelectionRangeMatch = hash.match(/^#L(\d+)(?:-L(\d+))?$/) || [];
-      lineSelectionRangeMatch.shift(); // Get rid of complete match
-      // Handle highlighting "#LX" (same as range [X, X])
-      if (
-        lineSelectionRangeMatch.length > 0 &&
-        lineSelectionRangeMatch[1] === undefined
-      ) {
-        lineSelectionRangeMatch[1] = lineSelectionRangeMatch[0];
-      }
-      const lineSelectionRange = lineSelectionRangeMatch.map(Number);
       const rawUrl = `${entry.url}${path}`;
       const repoUrl = `${entry.repo}${path}`;
       console.log("fetch", rawUrl);
@@ -53,8 +42,7 @@ export default function Registry() {
         setState({
           contents: m,
           rawUrl,
-          repoUrl,
-          lineSelectionRange
+          repoUrl
         });
         setIsLoading(false);
         if (firstSelectedLine.current) {
@@ -62,7 +50,18 @@ export default function Registry() {
         }
       });
     }
-  }, [pathname, hash]);
+  }, [pathname]);
+
+  const lineSelectionRangeMatch = hash.match(/^#L(\d+)(?:-L(\d+))?$/) || [];
+  lineSelectionRangeMatch.shift(); // Get rid of complete match
+  // Handle highlighting "#LX" (same as range [X, X])
+  if (
+    lineSelectionRangeMatch.length > 0 &&
+    lineSelectionRangeMatch[1] === undefined
+  ) {
+    lineSelectionRangeMatch[1] = lineSelectionRangeMatch[0];
+  }
+  const lineSelectionRange = lineSelectionRangeMatch.map(Number);
 
   let contentComponent;
   if (isLoading) {
@@ -136,12 +135,12 @@ export default function Registry() {
                 lineProps={lineNumber => {
                   const lineProps = {};
                   if (
-                    lineNumber >= state.lineSelectionRange[0] &&
-                    lineNumber <= state.lineSelectionRange[1]
+                    lineNumber >= lineSelectionRange[0] &&
+                    lineNumber <= lineSelectionRange[1]
                   ) {
                     lineProps.className = "hljs-selection";
                   }
-                  if (lineNumber === state.lineSelectionRange[0]) {
+                  if (lineNumber === lineSelectionRange[0]) {
                     lineProps.ref = firstSelectedLine;
                   }
                   return lineProps;
