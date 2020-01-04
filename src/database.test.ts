@@ -26,6 +26,6 @@ test("database names with dashes are not allowed", () => {
 });
 
 test("database names should be sorted alphabetically", () => {
-  const sortedNames = Object.keys(DATABASE).sort()
+  const sortedNames = Object.keys(DATABASE).sort();
   expect(sortedNames).toEqual(Object.keys(DATABASE));
 });
