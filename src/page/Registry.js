@@ -101,29 +101,27 @@ export default function Registry() {
     const isDocsPage = search.includes("doc") && state.contents;
     contentComponent = (
       <div>
-        <List>
-          {isDocsPage ? (
-            <ListItem>
-              <Link to="?">Source Code</Link>
-            </ListItem>
-          ) : hasDocsAvailable ? (
-            <ListItem>
-              <Link color="primary" to="?doc">
-                Documentation
-              </Link>
-            </ListItem>
-          ) : null}
-          {state.repoUrl ? (
-            <ListItem>
-              <Link to={state.repoUrl}>Repository</Link>
-            </ListItem>
-          ) : null}
-          {state.rawUrl ? (
-            <ListItem>
-              <Link to={state.rawUrl}>Raw</Link>
-            </ListItem>
-          ) : null}
-        </List>
+        {isDocsPage ? (
+          <p>
+            <Link to="?">Source Code</Link>
+          </p>
+        ) : hasDocsAvailable ? (
+          <p>
+            <Link color="primary" to="?doc">
+              Documentation
+            </Link>
+          </p>
+        ) : null}
+        {state.repoUrl ? (
+          <p>
+            <Link to={state.repoUrl}>Repository</Link>
+          </p>
+        ) : null}
+        {state.rawUrl ? (
+          <p>
+            <Link to={state.rawUrl}>Raw</Link>
+          </p>
+        ) : null}
         {(() => {
           if (isMarkdown) {
             return <Markdown source={state.contents} />;
