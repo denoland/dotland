@@ -51,7 +51,7 @@ export default function RegistryIndex() {
           .map((name, i) => {
             const link = `/x/${name}/`;
             return (
-              <React.Fragment>
+              <React.Fragment key={i}>
               <ListItem alignItems="flex-start">
                 <ListItemText
                   primary={<Link href={link}>{name}</Link>}
