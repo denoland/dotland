@@ -51,6 +51,7 @@ function App() {
             <Route path="/std/:stdPath" component={Registry} />
             <Route path="/std/" component={Registry} />
             <Route path="/std@:stdVersion/:stdPath" component={Registry} />
+            <Route path="/std@:stdVersion/" component={Registry} />
             <Route path="/x/:mod@:modVersion/:modPath" component={Registry} />
             <Route path="/x/:mod/:modPath" component={Registry} />
             <Route path="/x/:mod" component={Registry} />
