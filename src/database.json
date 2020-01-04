@@ -9,12 +9,13 @@
     "type": "github",
     "owner": "irustm",
     "repo": "alosaur",
-    "desc": "Alosaur - Deno web framework ??."
+    "desc": "Alosaur - Deno web framework 🦖."
   },
   "arkoren": {
     "type": "github",
     "owner": "arkoren",
-    "repo": "framework"
+    "repo": "framework",
+    "desc": ""
   },
   "base64": {
     "type": "github",
@@ -127,7 +128,8 @@
   "collections": {
     "type": "github",
     "owner": "hayd",
-    "repo": "deno-collections"
+    "repo": "deno-collections",
+    "desc": ""
   },
   "core": {
     "type": "github",
@@ -141,10 +143,18 @@
     "repo": "cowsay",
     "desc": "Configurable talking cow for Deno"
   },
+  "cursornext": {
+    "type": "github",
+    "owner": "clitetailor",
+    "repo": "cursornext",
+    "path": "deno/",
+    "desc": ""
+  },
   "curve25519": {
     "type": "github",
     "owner": "chiefbiiko",
-    "repo": "curve25519"
+    "repo": "curve25519",
+    "desc": ""
   },
   "databatcher": {
     "type": "github",
@@ -204,7 +214,7 @@
     "type": "github",
     "owner": "maxuuell",
     "repo": "deno_init",
-    "desc": "The executable to set up a deno project ??"
+    "desc": "The executable to set up a deno project 🦕"
   },
   "denofun": {
     "type": "github",
@@ -324,7 +334,8 @@
     "type": "github",
     "owner": "billymoon",
     "repo": "fiona",
-    "path": "src/"
+    "path": "src/",
+    "desc": ""
   },
   "free_port": {
     "type": "github",

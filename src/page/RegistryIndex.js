@@ -46,7 +46,6 @@ export default function RegistryIndex() {
       </p>
 
       <p>{Object.entries(DATABASE).length} third party modules:</p>
-      <Paper>
       <List dense>
         {Object.keys(DATABASE)
           .sort((nameA, nameB) => nameA.localeCompare(nameB))
@@ -69,7 +68,6 @@ export default function RegistryIndex() {
             );
           })}
       </List>
-      </Paper>
     </main>
   );
 }
