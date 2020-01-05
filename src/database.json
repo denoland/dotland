@@ -150,17 +150,6 @@
     "path": "deno/",
     "desc": ""
   },
-  "cowsay": {
-    "type": "github",
-    "owner": "fakoua",
-    "repo": "cowsay"
-  },
-  "cursornext": {
-    "type": "github",
-    "owner": "clitetailor",
-    "repo": "cursornext",
-    "path": "deno/"
-  },
   "curve25519": {
     "type": "github",
     "owner": "chiefbiiko",
@@ -220,11 +209,6 @@
     "owner": "fakoua",
     "repo": "deno_gui",
     "desc": "Deno Web GUI"
-  },
-  "deno_gui": {
-    "type": "github",
-    "owner": "fakoua",
-    "repo": "deno_gui"
   },
   "deno_init": {
     "type": "github",
@@ -359,11 +343,6 @@
     "repo": "deno_free_port",
     "desc": "get free port for Deno"
   },
-  "free_port": {
-    "type": "github",
-    "owner": "axetroy",
-    "repo": "deno_free_port"
-  },
   "gardens": {
     "type": "github",
     "owner": "partheseas",
@@ -393,16 +372,6 @@
     "owner": "fakoua",
     "repo": "ink",
     "desc": "HTML like terminal string color for Deno"
-  },
-  "humanizer.ts": {
-    "type": "github",
-    "owner": "fakoua",
-    "repo": "Humanizer.ts"
-  },
-  "ink": {
-    "type": "github",
-    "owner": "fakoua",
-    "repo": "ink"
   },
   "install": {
     "type": "github",
@@ -569,11 +538,6 @@
     "repo": "deno_pool",
     "desc": "A generic resource pool management library"
   },
-  "pool": {
-    "type": "github",
-    "owner": "axetroy",
-    "repo": "deno_pool"
-  },
   "postgres": {
     "type": "github",
     "owner": "buildondata",
@@ -687,11 +651,6 @@
     "owner": "fakoua",
     "repo": "soxa",
     "desc": "Promise based HTTP client for deno"
-  },
-  "soxa": {
-    "type": "github",
-    "owner": "fakoua",
-    "repo": "soxa"
   },
   "sql_builder": {
     "type": "github",
