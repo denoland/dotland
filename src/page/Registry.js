@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, List, ListItem } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 import Link from "../component/Link.tsx";
 import Spinner from "../component/Spinner";
@@ -15,7 +15,7 @@ export default function Registry() {
     contents: null,
     rawUrl: null,
     repoUrl: null,
-    dir: null,
+    dir: null
   });
   const { pathname, search, hash } = useLocation();
   const firstSelectedLine = React.useRef(null);
@@ -101,23 +101,27 @@ export default function Registry() {
     const isDocsPage = search.includes("doc") && state.contents;
     contentComponent = (
       <div>
-        <List>
-          <ListItem>
-            {isDocsPage ? (
-              <Link to="?">Source Code</Link>
-            ) : hasDocsAvailable ? (
-              <Link color="primary" to="?doc">
-                Documentation
-              </Link>
-            ) : null}
-          </ListItem>
-          <ListItem>
-            {state.repoUrl ? <Link to={state.repoUrl}>Repository</Link> : null}
-          </ListItem>
-          <ListItem>
-            {state.rawUrl ? <Link to={state.rawUrl}>Raw</Link> : null}
-          </ListItem>
-        </List>
+        {isDocsPage ? (
+          <p>
+            <Link to="?">Source Code</Link>
+          </p>
+        ) : hasDocsAvailable ? (
+          <p>
+            <Link color="primary" to="?doc">
+              Documentation
+            </Link>
+          </p>
+        ) : null}
+        {state.repoUrl ? (
+          <p>
+            <Link to={state.repoUrl}>Repository</Link>
+          </p>
+        ) : null}
+        {state.rawUrl ? (
+          <p>
+            <Link to={state.rawUrl}>Raw</Link>
+          </p>
+        ) : null}
         {(() => {
           if (isMarkdown) {
             return <Markdown source={state.contents} />;
