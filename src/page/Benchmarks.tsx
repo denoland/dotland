@@ -156,7 +156,7 @@ export default function Benchmarks() {
       <ul>
         <li>
           <SourceLink
-            path="tests/003_relative_import.ts"
+            path="cli/tests/003_relative_import.ts"
             name="cold_relative_import"
           />
         </li>
@@ -167,31 +167,31 @@ export default function Benchmarks() {
           />
         </li>
         <li>
-          <SourceLink path="tests/error_001.ts" name="error_001" />
+          <SourceLink path="cli/tests/error_001.ts" name="error_001" />
         </li>
         <li>
-          <SourceLink path="tests/002_hello.ts" name="cold_hello" />
+          <SourceLink path="cli/tests/002_hello.ts" name="cold_hello" />
         </li>
         <li>
           <SourceLink
-            path="tests/workers_round_robin_bench.ts"
+            path="cli/tests/workers_round_robin_bench.ts"
             name="workers_round_robin"
           />
         </li>
         <li>
           <SourceLink
-            path="tests/003_relative_import.ts"
+            path="cli/tests/003_relative_import.ts"
             name="relative_import"
           />
         </li>
         <li>
           <SourceLink
-            path="tests/workers_startup_bench.ts"
+            path="cli/tests/workers_startup_bench.ts"
             name="workers_startup"
           />
         </li>
         <li>
-          <SourceLink path="tests/002_hello.ts" name="hello" />
+          <SourceLink path="cli/tests/002_hello.ts" name="hello" />
         </li>
       </ul>
 
