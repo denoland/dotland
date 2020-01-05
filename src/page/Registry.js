@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, List, ListItem } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 import Link from "../component/Link.tsx";
 import Spinner from "../component/Spinner";
@@ -15,8 +15,7 @@ export default function Registry() {
     contents: null,
     rawUrl: null,
     repoUrl: null,
-    dir: null,
-    lineSelectionRange: null
+    dir: null
   });
   const { pathname, search, hash } = useLocation();
   const firstSelectedLine = React.useRef(null);
@@ -35,16 +34,6 @@ export default function Registry() {
       });
     } else {
       // Render file.
-      const lineSelectionRangeMatch = hash.match(/^#L(\d+)(?:-L(\d+))?$/) || [];
-      lineSelectionRangeMatch.shift(); // Get rid of complete match
-      // Handle highlighting "#LX" (same as range [X, X])
-      if (
-        lineSelectionRangeMatch.length > 0 &&
-        lineSelectionRangeMatch[1] === undefined
-      ) {
-        lineSelectionRangeMatch[1] = lineSelectionRangeMatch[0];
-      }
-      const lineSelectionRange = lineSelectionRangeMatch.map(Number);
       const rawUrl = `${entry.url}${path}`;
       const repoUrl = `${entry.repo}${path}`;
       console.log("fetch", rawUrl);
@@ -53,8 +42,7 @@ export default function Registry() {
         setState({
           contents: m,
           rawUrl,
-          repoUrl,
-          lineSelectionRange
+          repoUrl
         });
         setIsLoading(false);
         if (firstSelectedLine.current) {
@@ -62,7 +50,18 @@ export default function Registry() {
         }
       });
     }
-  }, [pathname, hash]);
+  }, [pathname]);
+
+  const lineSelectionRangeMatch = hash.match(/^#L(\d+)(?:-L(\d+))?$/) || [];
+  lineSelectionRangeMatch.shift(); // Get rid of complete match
+  // Handle highlighting "#LX" (same as range [X, X])
+  if (
+    lineSelectionRangeMatch.length > 0 &&
+    lineSelectionRangeMatch[1] === undefined
+  ) {
+    lineSelectionRangeMatch[1] = lineSelectionRangeMatch[0];
+  }
+  const lineSelectionRange = lineSelectionRangeMatch.map(Number);
 
   let contentComponent;
   if (isLoading) {
@@ -102,23 +101,27 @@ export default function Registry() {
     const isDocsPage = search.includes("doc") && state.contents;
     contentComponent = (
       <div>
-        <List>
-          <ListItem>
-            {isDocsPage ? (
-              <Link to="?">Source Code</Link>
-            ) : hasDocsAvailable ? (
-              <Link color="primary" to="?doc">
-                Documentation
-              </Link>
-            ) : null}
-          </ListItem>
-          <ListItem>
-            {state.repoUrl ? <Link to={state.repoUrl}>Repository</Link> : null}
-          </ListItem>
-          <ListItem>
-            {state.rawUrl ? <Link to={state.rawUrl}>Raw</Link> : null}
-          </ListItem>
-        </List>
+        {isDocsPage ? (
+          <p>
+            <Link to="?">Source Code</Link>
+          </p>
+        ) : hasDocsAvailable ? (
+          <p>
+            <Link color="primary" to="?doc">
+              Documentation
+            </Link>
+          </p>
+        ) : null}
+        {state.repoUrl ? (
+          <p>
+            <Link to={state.repoUrl}>Repository</Link>
+          </p>
+        ) : null}
+        {state.rawUrl ? (
+          <p>
+            <Link to={state.rawUrl}>Raw</Link>
+          </p>
+        ) : null}
         {(() => {
           if (isMarkdown) {
             return <Markdown source={state.contents} />;
@@ -136,12 +139,12 @@ export default function Registry() {
                 lineProps={lineNumber => {
                   const lineProps = {};
                   if (
-                    lineNumber >= state.lineSelectionRange[0] &&
-                    lineNumber <= state.lineSelectionRange[1]
+                    lineNumber >= lineSelectionRange[0] &&
+                    lineNumber <= lineSelectionRange[1]
                   ) {
                     lineProps.className = "hljs-selection";
                   }
-                  if (lineNumber === state.lineSelectionRange[0]) {
+                  if (lineNumber === lineSelectionRange[0]) {
                     lineProps.ref = firstSelectedLine;
                   }
                   return lineProps;

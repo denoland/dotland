@@ -2,7 +2,7 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import toc from "remark-toc";
 import htmlParser from "react-markdown/plugins/html-parser";
-import { Link } from "@material-ui/core";
+import Link from "../component/Link";
 
 const { Suspense } = React;
 
@@ -92,7 +92,7 @@ interface LinkRendererProps {
 
 function LinkRenderer(props: LinkRendererProps) {
   const children = React.Children.toArray(props.children);
-  return <Link href={props.href}>{children}</Link>;
+  return <Link to={props.href}>{children}</Link>;
 }
 
 const renderers = {

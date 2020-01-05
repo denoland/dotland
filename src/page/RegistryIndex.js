@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "@material-ui/core";
+import Link from "../component/Link";
 import DATABASE from "../database.json";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -9,7 +9,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 export default function RegistryIndex() {
   return (
     <main>
-      <Link href="/">
+      <Link to="/">
         <img
           alt="deno logo"
           src="/images/deno-circle-thunder.gif"
@@ -28,17 +28,17 @@ export default function RegistryIndex() {
 
       <p>
         Functionality built-in to Deno is not listed here. The built-in runtime
-        is documented at <Link href="/typedoc/">deno.land/typedoc</Link> and in{" "}
-        <Link href="/manual">the manual</Link>.
+        is documented at <Link to="/typedoc/">deno.land/typedoc</Link> and in{" "}
+        <Link to="/manual">the manual</Link>.
       </p>
 
       <p>
-        See <Link href="/std/README.md">/std</Link> for the standard modules.
+        See <Link to="/std/README.md">/std</Link> for the standard modules.
       </p>
 
       <p>
         To add to this list, edit{" "}
-        <Link href="https://github.com/denoland/deno_website2/blob/master/src/database.json">
+        <Link to="https://github.com/denoland/deno_website2/blob/master/src/database.json">
           database.json
         </Link>
         .
@@ -52,17 +52,15 @@ export default function RegistryIndex() {
             const link = `/x/${name}/`;
             return (
               <React.Fragment key={i}>
-              <ListItem alignItems="flex-start">
-                <ListItemText
-                  primary={<Link href={link}>{name}</Link>}
-                  secondary={
-                    <React.Fragment>
-                      {DATABASE[name].desc}
-                    </React.Fragment>
-                  }
-                />
-              </ListItem>
-              <Divider/>
+                <ListItem alignItems="flex-start">
+                  <ListItemText
+                    primary={<Link to={link}>{name}</Link>}
+                    secondary={
+                      <React.Fragment>{DATABASE[name].desc}</React.Fragment>
+                    }
+                  />
+                </ListItem>
+                <Divider />
               </React.Fragment>
             );
           })}

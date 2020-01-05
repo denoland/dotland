@@ -8,6 +8,7 @@
 // markdown which renders into anchor points).
 
 import { useEffect } from "react";
+import { useLocation } from "react-router";
 
 let observer = null;
 let timerId = null;
@@ -35,27 +36,33 @@ function reset() {
 
 function hashLinkScroll() {
   const { hash } = window.location;
+  console.log("hash link scroll", hash);
   if (hash !== "") {
-    // Push onto callback queue so it runs after the DOM is updated,
-    // this is required when navigating from a different page so that
-    // the element is rendered on the page before trying to getElementById.
-    setTimeout(() => {
-      if (!getElAndScroll()) {
-        if (!observer) {
-          observer = new MutationObserver(getElAndScroll);
+    if (!getElAndScroll()) {
+      // Push onto callback queue so it runs after the DOM is updated,
+      // this is required when navigating from a different page so that
+      // the element is rendered on the page before trying to getElementById.
+      setTimeout(() => {
+        if (!getElAndScroll()) {
+          if (!observer) {
+            observer = new MutationObserver(getElAndScroll);
+          }
+          observer.observe(document, {
+            attributes: true,
+            childList: true,
+            subtree: true
+          });
+          // if the element doesn't show up in 10 seconds, stop checking
+          timerId = setTimeout(reset, 10000);
         }
-        observer.observe(document, {
-          attributes: true,
-          childList: true,
-          subtree: true
-        });
-        // if the element doesn't show up in 10 seconds, stop checking
-        timerId = setTimeout(reset, 10000);
-      }
-    }, 0);
+      }, 0);
+    }
   }
 }
 
-export default function useHashLink() {
-  useEffect(hashLinkScroll, []);
+export default function HashLinkHandler({ children }) {
+  const { hash } = useLocation();
+  useEffect(hashLinkScroll, [hash]);
+
+  return children;
 }
