@@ -52,15 +52,17 @@ export default function RegistryIndex() {
             const link = `/x/${name}/`;
             return (
               <React.Fragment key={i}>
-                <ListItem alignItems="flex-start">
-                  <ListItemText
-                    primary={<Link href={link}>{name}</Link>}
-                    secondary={
-                      <React.Fragment>{DATABASE[name].desc}</React.Fragment>
-                    }
-                  />
-                </ListItem>
-                <Divider />
+              <ListItem alignItems="flex-start">
+                <ListItemText
+                  primary={<Link href={link}>{name}</Link>}
+                  secondary={
+                    <React.Fragment>
+                      {DATABASE[name].desc}
+                    </React.Fragment>
+                  }
+                />
+              </ListItem>
+              <Divider/>
               </React.Fragment>
             );
           })}

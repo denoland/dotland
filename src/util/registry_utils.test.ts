@@ -27,12 +27,7 @@ test("proxy1", () => {
       name: "install",
       branch: "master",
       type: "github",
-      raw: {
-        type: "github",
-        owner: "denoland",
-        repo: "deno_install",
-        desc: "One-line commands to install Deno on your system."
-      },
+      raw: { type: "github", owner: "denoland", repo: "deno_install", desc: "One-line commands to install Deno on your system." },
       url: "https://raw.githubusercontent.com/denoland/deno_install/master/",
       repo: "https://github.com/denoland/deno_install/tree/master/"
     },
@@ -47,12 +42,7 @@ test("proxy2", () => {
       name: "install",
       branch: "v0.1.2",
       type: "github",
-      raw: {
-        type: "github",
-        owner: "denoland",
-        repo: "deno_install",
-        desc: "One-line commands to install Deno on your system."
-      },
+      raw: { type: "github", owner: "denoland", repo: "deno_install", desc: "One-line commands to install Deno on your system." },
       url: "https://raw.githubusercontent.com/denoland/deno_install/v0.1.2/",
       repo: "https://github.com/denoland/deno_install/tree/v0.1.2/"
     },
