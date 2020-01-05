@@ -9,7 +9,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 export default function RegistryIndex() {
   return (
     <main>
-      <Link href="/">
+      <Link to="/">
         <img
           alt="deno logo"
           src="/images/deno-circle-thunder.gif"
@@ -28,17 +28,17 @@ export default function RegistryIndex() {
 
       <p>
         Functionality built-in to Deno is not listed here. The built-in runtime
-        is documented at <Link href="/typedoc/">deno.land/typedoc</Link> and in{" "}
-        <Link href="/manual">the manual</Link>.
+        is documented at <Link to="/typedoc/">deno.land/typedoc</Link> and in{" "}
+        <Link to="/manual">the manual</Link>.
       </p>
 
       <p>
-        See <Link href="/std/README.md">/std</Link> for the standard modules.
+        See <Link to="/std/README.md">/std</Link> for the standard modules.
       </p>
 
       <p>
         To add to this list, edit{" "}
-        <Link href="https://github.com/denoland/deno_website2/blob/master/src/database.json">
+        <Link to="https://github.com/denoland/deno_website2/blob/master/src/database.json">
           database.json
         </Link>
         .
@@ -54,7 +54,7 @@ export default function RegistryIndex() {
               <React.Fragment key={i}>
                 <ListItem alignItems="flex-start">
                   <ListItemText
-                    primary={<Link href={link}>{name}</Link>}
+                    primary={<Link to={link}>{name}</Link>}
                     secondary={
                       <React.Fragment>{DATABASE[name].desc}</React.Fragment>
                     }
