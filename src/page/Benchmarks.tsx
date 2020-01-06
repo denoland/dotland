@@ -156,7 +156,7 @@ export default function Benchmarks() {
       <ul>
         <li>
           <SourceLink
-            path="tests/003_relative_import.ts"
+            path="cli/tests/003_relative_import.ts"
             name="cold_relative_import"
           />
         </li>
@@ -167,31 +167,31 @@ export default function Benchmarks() {
           />
         </li>
         <li>
-          <SourceLink path="tests/error_001.ts" name="error_001" />
+          <SourceLink path="cli/tests/error_001.ts" name="error_001" />
         </li>
         <li>
-          <SourceLink path="tests/002_hello.ts" name="cold_hello" />
+          <SourceLink path="cli/tests/002_hello.ts" name="cold_hello" />
         </li>
         <li>
           <SourceLink
-            path="tests/workers_round_robin_bench.ts"
+            path="cli/tests/workers_round_robin_bench.ts"
             name="workers_round_robin"
           />
         </li>
         <li>
           <SourceLink
-            path="tests/003_relative_import.ts"
+            path="cli/tests/003_relative_import.ts"
             name="relative_import"
           />
         </li>
         <li>
           <SourceLink
-            path="tests/workers_startup_bench.ts"
+            path="cli/tests/workers_startup_bench.ts"
             name="workers_startup"
           />
         </li>
         <li>
-          <SourceLink path="tests/002_hello.ts" name="hello" />
+          <SourceLink path="cli/tests/002_hello.ts" name="hello" />
         </li>
       </ul>
 
@@ -307,18 +307,18 @@ export default function Benchmarks() {
             http_bench.js
           </Link>
           . single uses{" "}
-          <Link to="https://docs.rs/tokio/0.1.19/tokio/runtime/current_thread/index.html">
-            tokio::runtime::current_thread
+          <Link to="https://docs.rs/tokio/latest/tokio/runtime/struct.Builder.html#method.basic_scheduler">
+            tokio::runtime::Builder::basic_scheduler
           </Link>{" "}
-          and multi uses
-          <Link to="https://docs.rs/tokio/0.1.19/tokio/runtime/">
-            tokio::runtime::threadpool
+          and multi uses{" "}
+          <Link to="https://docs.rs/tokio/latest/tokio/runtime/struct.Builder.html#method.threaded_scheduler">
+            tokio::runtime::Builder::threaded_scheduler
           </Link>
           .
         </li>
 
         <li>
-          <Link to="https://github.com/denoland/deno/blob/master/tools/hyper_hello.rs">
+          <Link to="https://github.com/denoland/deno/blob/master/tools/hyper_hello/hyper_hello.rs">
             hyper
           </Link>{" "}
           is a Rust HTTP server and represents an upper bound.
@@ -366,7 +366,7 @@ export default function Benchmarks() {
         </li>
 
         <li>
-          <Link to="https://github.com/denoland/deno/blob/master/tools/hyper_hello.rs">
+          <Link to="https://github.com/denoland/deno/blob/master/tools/hyper_hello/hyper_hello.rs">
             hyper
           </Link>{" "}
           is a Rust HTTP server used as the origin for the proxy tests
@@ -402,11 +402,11 @@ export default function Benchmarks() {
 
       <p>
         Log scale. Time it takes to pipe a certain amount of data through Deno.
-        <Link to="https://github.com/denoland/deno/blob/master/tests/echo_server.ts">
+        <Link to="https://github.com/denoland/deno/blob/master/cli/tests/echo_server.ts">
           echo_server.ts
         </Link>{" "}
         and{" "}
-        <Link to="https://github.com/denoland/deno/blob/master/tests/cat.ts">
+        <Link to="https://github.com/denoland/deno/blob/master/cli/tests/cat.ts">
           cat.ts
         </Link>
         . Smaller is better.
