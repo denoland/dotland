@@ -402,11 +402,11 @@ export default function Benchmarks() {
 
       <p>
         Log scale. Time it takes to pipe a certain amount of data through Deno.
-        <Link to="https://github.com/denoland/deno/blob/master/tests/echo_server.ts">
+        <Link to="https://github.com/denoland/deno/blob/master/cli/tests/echo_server.ts">
           echo_server.ts
         </Link>{" "}
         and{" "}
-        <Link to="https://github.com/denoland/deno/blob/master/tests/cat.ts">
+        <Link to="https://github.com/denoland/deno/blob/master/cli/tests/cat.ts">
           cat.ts
         </Link>
         . Smaller is better.
