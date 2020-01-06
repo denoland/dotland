@@ -318,7 +318,7 @@ export default function Benchmarks() {
         </li>
 
         <li>
-          <Link to="https://github.com/denoland/deno/blob/master/tools/hyper_hello.rs">
+          <Link to="https://github.com/denoland/deno/blob/master/tools/hyper_hello/hyper_hello.rs">
             hyper
           </Link>{" "}
           is a Rust HTTP server and represents an upper bound.
@@ -366,7 +366,7 @@ export default function Benchmarks() {
         </li>
 
         <li>
-          <Link to="https://github.com/denoland/deno/blob/master/tools/hyper_hello.rs">
+          <Link to="https://github.com/denoland/deno/blob/master/tools/hyper_hello/hyper_hello.rs">
             hyper
           </Link>{" "}
           is a Rust HTTP server used as the origin for the proxy tests
