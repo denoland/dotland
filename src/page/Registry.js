@@ -76,7 +76,7 @@ export default function Registry() {
           <td>{d.type}</td>
           <td>{d.size}</td>
           <td>
-            <Link to={name}>{name}</Link>
+            <Link to={name} style={name.toLowerCase() === 'readme.md'? readmeStyle : null}>{name}</Link>
           </td>
         </tr>
       );
@@ -159,6 +159,10 @@ export default function Registry() {
 
   return <Box>{contentComponent}</Box>;
 }
+
+const readmeStyle = {
+  fontWeight: '900'
+};
 
 async function renderDir(pathname, entry) {
   console.log({ pathname, entry });
