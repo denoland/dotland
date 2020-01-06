@@ -307,12 +307,12 @@ export default function Benchmarks() {
             http_bench.js
           </Link>
           . single uses{" "}
-          <Link to="https://docs.rs/tokio/0.1.19/tokio/runtime/current_thread/index.html">
-            tokio::runtime::current_thread
+          <Link to="https://docs.rs/tokio/latest/tokio/runtime/struct.Builder.html#method.basic_scheduler">
+            tokio::runtime::Builder::basic_scheduler
           </Link>{" "}
-          and multi uses
-          <Link to="https://docs.rs/tokio/0.1.19/tokio/runtime/">
-            tokio::runtime::threadpool
+          and multi uses{" "}
+          <Link to="https://docs.rs/tokio/latest/tokio/runtime/struct.Builder.html#method.threaded_scheduler">
+            tokio::runtime::Builder::threaded_scheduler
           </Link>
           .
         </li>
