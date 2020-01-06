@@ -75,7 +75,7 @@
     "type": "github",
     "owner": "rsp",
     "repo": "deno-caught",
-    "desc": "This module lets you attach empty rejcetion handlers to promises to avoid errors when we want to handle rejections asynchronously."
+    "desc": "This module lets you attach empty rejection handlers to promises to avoid errors when we want to handle rejections asynchronously."
   },
   "chacha20": {
     "type": "github",
