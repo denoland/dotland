@@ -32,6 +32,19 @@ async function handleRequest(request) {
     return redirect(url, REMOTE_URL, request);
   }
 
+  if (
+    url.pathname == "/std" ||
+    url.pathname == "/std/" ||
+    url.pathname == "/x" ||
+    url.pathname == "/x/"
+  ) {
+    return new Response("No module specified", {
+      status: 404,
+      statusText: "Not Found",
+      headers: { "content-type": "text/plain" }
+    });
+  }
+
   console.log("serve up text", url.pathname);
   const { entry, path } = proxy(url.pathname);
   if (!entry) {
