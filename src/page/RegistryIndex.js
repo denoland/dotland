@@ -9,7 +9,11 @@ import TextField from "@material-ui/core/TextField";
 
 export default function RegistryIndex() {
   const [query, setQuery] = React.useState("");
-  const filtered = Object.keys(DATABASE).filter(name => name.includes(query));
+
+  const filtered = Object.keys(DATABASE).filter(
+    name => name.includes(query) || (DATABASE[name].desc || "").includes(query)
+  );
+
   return (
     <main>
       <Link to="/">
