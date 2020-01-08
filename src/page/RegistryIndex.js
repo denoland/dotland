@@ -5,8 +5,15 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Divider from "@material-ui/core/Divider";
 import ListItemText from "@material-ui/core/ListItemText";
+import TextField from "@material-ui/core/TextField";
 
 export default function RegistryIndex() {
+  const [query, setQuery] = React.useState("");
+
+  const filtered = Object.keys(DATABASE).filter(
+    name => name.includes(query) || (DATABASE[name].desc || "").includes(query)
+  );
+
   return (
     <main>
       <Link to="/">
@@ -44,9 +51,18 @@ export default function RegistryIndex() {
         .
       </p>
 
-      <p>{Object.entries(DATABASE).length} third party modules:</p>
+      <TextField
+        label="Search"
+        type="search"
+        value={query}
+        onChange={e => setQuery(e.target.value)}
+        autoFocus
+      />
+
+      <p>{filtered.length} third party modules:</p>
+
       <List dense>
-        {Object.keys(DATABASE)
+        {filtered
           .sort((nameA, nameB) => nameA.localeCompare(nameB))
           .map((name, i) => {
             const link = `/x/${name}/`;
