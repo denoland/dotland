@@ -35,6 +35,7 @@
     "query-string": "^6.8.3",
     "react": "^16.10.2",
     "react-apexcharts": "^1.3.3",
+    "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.10.2",
     "react-markdown": "^4.2.2",
     "react-router-dom": "^5.1.2",

@@ -76,7 +76,12 @@ export default function Registry() {
           <td>{d.type}</td>
           <td>{d.size}</td>
           <td>
-            <Link to={name} style={name.toLowerCase() === 'readme.md'? readmeStyle : null}>{name}</Link>
+            <Link
+              to={name}
+              style={name.toLowerCase() === "readme.md" ? readmeStyle : null}
+            >
+              {name}
+            </Link>
           </td>
         </tr>
       );
@@ -136,6 +141,9 @@ export default function Registry() {
               <CodeBlock
                 showLineNumbers={true}
                 value={state.contents}
+                language={state.rawUrl.substr(
+                  state.rawUrl.lastIndexOf(".") + 1
+                )}
                 lineProps={lineNumber => {
                   const lineProps = {};
                   if (
@@ -161,7 +169,7 @@ export default function Registry() {
 }
 
 const readmeStyle = {
-  fontWeight: '900'
+  fontWeight: "900"
 };
 
 async function renderDir(pathname, entry) {
