@@ -1,3 +1,5 @@
+import { handleAPIRequest } from "./api";
+// @ts-ignore
 import { proxy } from "../src/util/registry_utils";
 
 // const REMOTE_URL = "https://deno.land";
@@ -18,6 +20,10 @@ async function handleRequest(request) {
   // console.log('request.url', url.pathname);
   const maybeProxyElsewhere =
     url.pathname.startsWith("/std") || url.pathname.startsWith("/x");
+
+  if (url.pathname.startsWith("/api")) {
+    return handleAPIRequest(request);
+  }
 
   // TODO(ry) Support docs without hitting S3...
   if (url.pathname.startsWith("/typedoc")) {
