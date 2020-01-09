@@ -1,5 +1,4 @@
 import { handleAPIRequest } from "./api";
-// @ts-ignore
 import { proxy } from "../src/util/registry_utils";
 
 // const REMOTE_URL = "https://deno.land";

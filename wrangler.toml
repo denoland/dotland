@@ -1,6 +1,6 @@
 # Cloudflare Worker configuration
-account_id = "895762025d37fc687ecd72d7cc80204a"
-zone_id = "c192cf8ac042c681023493c52edd44c8"
+account_id = "93bfcf72dfea0e9f2bf5563bc71052cf"
+zone_id = "0ce0e4d3281b88d402b5e7b874f99d2f"
 
 # shared
 type = "webpack"
