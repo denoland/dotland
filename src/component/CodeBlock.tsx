@@ -41,6 +41,10 @@ function CodeBlock(props: SyntaxHighlighterProps) {
   const darkMode = useDarkMode();
   const classes = useStyles(darkMode);
 
+  const [timerState, setTimer] = React.useState({
+    timerId: 0,
+  });
+
   const [showCopyState, setShowCopy] = React.useState({
     showCopy: false,
   });
@@ -50,11 +54,17 @@ function CodeBlock(props: SyntaxHighlighterProps) {
   });
 
   function onContainerEnter() {
-    setShowCopy({showCopy: true});
+    let timerId = setTimeout(() => {
+      setShowCopy({showCopy: true});
+    }, 250);
+    setTimer({timerId: timerId})
   }
 
   function onContainerLeave() {
-    setShowCopy({showCopy: false});
+    clearTimeout(timerState.timerId);
+    setTimeout(() => {
+      setShowCopy({showCopy: false});
+    }, 500);
   }
 
   function onCopy() {
