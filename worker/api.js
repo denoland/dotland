@@ -1,17 +1,5 @@
 export async function handleAPIRequest(request) {
   const url = new URL(request.url);
-  const accept = request.headers.get("accept");
-  const isJSON = accept && accept.indexOf("application/json") >= 0;
-
-  if (!isJSON) {
-    return new Response(
-      "The client does not accept 'application/json' content",
-      {
-        status: 400,
-        statusText: "Bad Request"
-      }
-    );
-  }
 
   if (url.pathname == "/api/versions") {
     const resp = await fetch("https://github.com/denoland/deno/releases.atom");
