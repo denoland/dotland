@@ -6,6 +6,7 @@ import lightTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-l
 import darkTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark";
 import { useDarkMode } from "../hook/theme";
 import FileCopyIcon from '@material-ui/icons/FileCopy';
+import CheckIcon from '@material-ui/icons/Check';
 import { IconButton, Container, Zoom } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -19,55 +20,56 @@ darkTheme["hljs-selection"] = {
 
 const useStyles = makeStyles(theme => ({
   copyButton: {
-    float: 'left'
+    position: 'relative',
+    right: '5px',
+    float: 'right'
   },
   hidden: {
     display: 'none'
   },
-  copied: {
-    opacity: 0,
-    transition: 'opacity 0.3s'
+  container: {
+    position: 'relative',
+    paddingLeft: '0',
+    paddingRight: '0'
+  },
+  checkIcon: {
+    color: 'rgb(80, 161, 79)'
   }
 }));
-
 
 function CodeBlock(props: SyntaxHighlighterProps) {
   const darkMode = useDarkMode();
   const classes = useStyles(darkMode);
 
+  const [showCopyState, setShowCopy] = React.useState({
+    showCopy: false,
+  });
+  
+  const [copiedState, setCopied] = React.useState({
+    copied: false,
+  });
+
   function onContainerEnter() {
-    let newState = Object.assign({}, state)
-    newState.showCopy = true
-    setState( newState );
+    setShowCopy({showCopy: true});
   }
 
   function onContainerLeave() {
-    let newState = Object.assign({}, state)
-    newState.showCopy = false
-    setState( newState );
+    setShowCopy({showCopy: false});
   }
 
   function onCopy() {
-    let newState = Object.assign({}, state)
-    newState.copied = true
-    setState( newState );
+    setCopied({copied: true});
     setTimeout(() => {
-      newState = Object.assign({}, state)
-      newState.copied = false;
-      setState(newState)
-    }, 300)
+      setCopied({copied: false});
+    }, 1300)
   }
-
-  const [state, setState] = React.useState({
-    showCopy: false,
-    copied: false,
-  });
 
   return (
     <Container
       onMouseEnter={onContainerEnter}
-      onMouseLeave={onContainerLeave}>
-      <Zoom in={state.showCopy} style={{ transitionDelay: '50ms' }}>
+      onMouseLeave={onContainerLeave}
+      className={classes.container}>
+      <Zoom in={showCopyState.showCopy || copiedState.copied} style={{ transitionDelay: '50ms' }}>
         <CopyToClipboard
           text={props.value}
           onCopy={onCopy}>
@@ -75,12 +77,13 @@ function CodeBlock(props: SyntaxHighlighterProps) {
             aria-label="copy"
             size="small"
             className={`${classes.copyButton}`}>
-            <FileCopyIcon fontSize="inherit" />
+            {copiedState.copied ?
+              <CheckIcon fontSize="inherit" className={classes.checkIcon} /> :
+              <FileCopyIcon fontSize="inherit" /> }
           </IconButton>
         </CopyToClipboard>
       </Zoom>
       <SyntaxHighlighter
-        className={state.copied ? classes.copied : ''}
         style={darkMode ? darkTheme : lightTheme}
         language={props.language || "js"}
         showLineNumbers={props.showLineNumbers || false}
