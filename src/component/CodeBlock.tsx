@@ -54,17 +54,16 @@ function CodeBlock(props: SyntaxHighlighterProps) {
   });
 
   function onContainerEnter() {
-    let timerId = setTimeout(() => {
-      setShowCopy({showCopy: true});
-    }, 250);
-    setTimer({timerId: timerId})
+    clearTimeout(timerState.timerId);
+    setShowCopy({showCopy: true});
   }
 
   function onContainerLeave() {
     clearTimeout(timerState.timerId);
-    setTimeout(() => {
+    let timerId = setTimeout(() => {
       setShowCopy({showCopy: false});
     }, 500);
+    setTimer({timerId: timerId})
   }
 
   function onCopy() {
