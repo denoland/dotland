@@ -143,6 +143,12 @@
     "repo": "cowsay",
     "desc": "Configurable talking cow for Deno"
   },
+  "cross_env": {
+    "type": "github",
+    "owner": "axetroy",
+    "repo": "deno_cross_env",
+    "desc": "A tool for setting environment variables across platforms"
+  },
   "cursornext": {
     "type": "github",
     "owner": "clitetailor",
