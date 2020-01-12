@@ -41,35 +41,27 @@ function CodeBlock(props: SyntaxHighlighterProps) {
   const darkMode = useDarkMode();
   const classes = useStyles(darkMode);
 
-  const [timerState, setTimer] = React.useState({
-    timerId: 0,
-  });
-
-  const [showCopyState, setShowCopy] = React.useState({
-    showCopy: false,
-  });
-  
-  const [copiedState, setCopied] = React.useState({
-    copied: false,
-  });
+  const [timer, setTimer] = React.useState(0);
+  const [showCopy, setShowCopy] = React.useState(false);
+  const [copied, setCopied] = React.useState(false);
 
   function onContainerEnter() {
-    clearTimeout(timerState.timerId);
-    setShowCopy({showCopy: true});
+    clearTimeout(timer);
+    setShowCopy(true);
   }
 
   function onContainerLeave() {
-    clearTimeout(timerState.timerId);
+    clearTimeout(timer);
     let timerId = setTimeout(() => {
-      setShowCopy({showCopy: false});
+      setShowCopy(false);
     }, 500);
-    setTimer({timerId: timerId})
+    setTimer(timerId)
   }
 
   function onCopy() {
-    setCopied({copied: true});
+    setCopied(true);
     setTimeout(() => {
-      setCopied({copied: false});
+      setCopied(false);
     }, 1300)
   }
 
@@ -78,7 +70,7 @@ function CodeBlock(props: SyntaxHighlighterProps) {
       onMouseEnter={onContainerEnter}
       onMouseLeave={onContainerLeave}
       className={classes.container}>
-      <Zoom in={showCopyState.showCopy || copiedState.copied} style={{ transitionDelay: '50ms' }}>
+      <Zoom in={showCopy || copied} style={{ transitionDelay: '50ms' }}>
         <CopyToClipboard
           text={props.value}
           onCopy={onCopy}>
@@ -86,7 +78,7 @@ function CodeBlock(props: SyntaxHighlighterProps) {
             aria-label="copy"
             size="small"
             className={`${classes.copyButton}`}>
-            {copiedState.copied ?
+            {copied ?
               <CheckIcon fontSize="inherit" className={classes.checkIcon} /> :
               <FileCopyIcon fontSize="inherit" /> }
           </IconButton>
