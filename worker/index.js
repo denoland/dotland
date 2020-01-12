@@ -33,14 +33,15 @@ async function handleRequest(request) {
   }
 
   console.log("serve up text", url.pathname);
-  const { entry, path } = proxy(url.pathname);
-  if (!entry) {
+  const proxied = proxy(url.pathname);
+  if (!proxied) {
     return new Response("Not in database.json " + url.pathname, {
       status: 404,
       statusText: "Not Found",
       headers: { "content-type": "text/plain" }
     });
   }
+  const { entry, path } = proxied;
   const rUrl = `${entry.url}${path}`;
   console.log("text proxy", rUrl);
   return fetch(rUrl);

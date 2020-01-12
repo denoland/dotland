@@ -143,6 +143,12 @@
     "repo": "cowsay",
     "desc": "Configurable talking cow for Deno"
   },
+  "cross_env": {
+    "type": "github",
+    "owner": "axetroy",
+    "repo": "deno_cross_env",
+    "desc": "A tool for setting environment variables across platforms"
+  },
   "cursornext": {
     "type": "github",
     "owner": "clitetailor",
@@ -391,6 +397,12 @@
     "repo": "jbq",
     "desc": "This repository has been archived by the owner. It is now read-only."
   },
+  "jpeg.ts": {
+    "type": "github",
+    "owner": "fakoua",
+    "repo": "jpeg.ts",
+    "desc": "A pure TypeScript JPEG encoder and decoder for deno."
+  },
   "keycode": {
     "type": "github",
     "owner": "kabirbaidhya",
@@ -585,6 +597,12 @@
     "owner": "keroxp",
     "repo": "deno-redis",
     "desc": "An experimental implementation of redis client for deno"
+  },
+  "reno": {
+    "type": "github",
+    "owner": "reno-router",
+    "repo": "reno",
+    "desc": "A thin, testable routing library designed to sit on top of Deno's standard HTTP module"
   },
   "ripemd160": {
     "type": "github",
