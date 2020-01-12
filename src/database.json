@@ -433,7 +433,7 @@
     "type": "github",
     "owner": "brandonkal",
     "repo": "deno-lib",
-    "desc": "A collection of useful Typescript libraries for Deno",
+    "desc": "A collection of useful Typescript libraries for Deno"
   },
   "license_checker": {
     "type": "github",
