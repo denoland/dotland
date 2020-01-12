@@ -397,6 +397,12 @@
     "repo": "jbq",
     "desc": "This repository has been archived by the owner. It is now read-only."
   },
+  "jpeg.ts": {
+    "type": "github",
+    "owner": "fakoua",
+    "repo": "jpeg.ts",
+    "desc": "A pure TypeScript JPEG encoder and decoder for deno."
+  },
   "keycode": {
     "type": "github",
     "owner": "kabirbaidhya",
