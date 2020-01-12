@@ -598,6 +598,12 @@
     "repo": "deno-redis",
     "desc": "An experimental implementation of redis client for deno"
   },
+  "reno": {
+    "type": "github",
+    "owner": "reno-router",
+    "repo": "reno",
+    "desc": "A thin, testable routing library designed to sit on top of Deno's standard HTTP module"
+  },
   "ripemd160": {
     "type": "github",
     "owner": "paulmillr",
