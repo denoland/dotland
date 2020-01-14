@@ -92,7 +92,7 @@ export class Parser {
       // Find original symbol (might not be in api.ts).
       s = skipAlias(s, this.checker);
       log("requestVisit", s.getName());
-      const decls = s.getDeclarations()!;
+      const decls = s.getDeclarations() || [];
       // const sourceFileName = decls[0].getSourceFile().fileName;
       // Dont visit if sourceFileName is in tsconfig excludes
       this.visitQueue.push(...decls);

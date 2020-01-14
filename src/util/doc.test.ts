@@ -148,3 +148,10 @@ test("multiple declarations", () => {
     }
   ]);
 });
+
+test("undefined declarations", () => {
+  const rootModule = "mod.ts";
+  const rootSource = `export { blah } from "./blah.d.ts"`;
+  const docEntries = main(rootModule, rootSource);
+  expect(docEntries).toEqual([]);
+})
