@@ -5,6 +5,7 @@ import assert from "assert";
 import { Parser, DocEntry } from "./doc_parser";
 
 export function main(rootModule: string, rootSource: string): DocEntry[] {
+  if (rootModule[0] !== "/") rootModule = "/" + rootModule;
   const fileNames: string[] = [rootModule];
   const host = new Host(rootModule, rootSource);
   const options = {}; //host.getCompilationSettings();
