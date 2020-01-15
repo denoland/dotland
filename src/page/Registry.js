@@ -5,9 +5,9 @@ import Link from "../component/Link.tsx";
 import Spinner from "../component/Spinner";
 import { proxy } from "../util/registry_utils";
 
+const CodeBlock = React.lazy(() => import("../component/CodeBlock"));
 const Markdown = React.lazy(() => import("../component/Markdown"));
 const Docs = React.lazy(() => import("../component/Docs"));
-const CodeBlock = React.lazy(() => import("../component/CodeBlock"));
 
 export default function Registry() {
   const [isLoading, setIsLoading] = React.useState(true);
