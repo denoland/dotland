@@ -1,18 +1,7 @@
 import React from "react";
 import Link from "../component/Link";
+import CodeBlock from "../component/CodeBlock";
 import "./Home.css";
-
-const { Suspense } = React;
-
-const CodeBlockLazy = React.lazy(() => import("../component/CodeBlock"));
-
-function CodeBlock(props) {
-  return (
-    <Suspense fallback={""}>
-      <CodeBlockLazy {...props}></CodeBlockLazy>
-    </Suspense>
-  );
-}
 
 const code = `import { serve } from "https://deno.land/std@v0.24.0/http/server.ts";
 const body = new TextEncoder().encode("Hello World\\n");
@@ -27,14 +16,10 @@ function Home() {
   return (
     <main>
       <header>
-        <img
-          id="logo"
-          src="images/deno_logo_3.svg"
-          alt="deno logo"
-          width="200"
-        />
+        <img id="logo" src="images/deno_logo_3.svg" alt="deno logo" />
         <div>
-          <h1>Deno</h1>A secure runtime for JavaScript and TypeScript
+          <h1 id="deno_title">Deno</h1> A secure runtime for JavaScript and
+          TypeScript
         </div>
       </header>
 

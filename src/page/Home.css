@@ -4,3 +4,7 @@
   text-align: center;
   padding: 4px;
 }
+
+#badges img {
+  height: 20px;
+}
