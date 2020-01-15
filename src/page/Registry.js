@@ -3,11 +3,11 @@ import { Box } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 import Link from "../component/Link.tsx";
 import Spinner from "../component/Spinner";
-import CodeBlock from "../component/CodeBlock";
 import { proxy } from "../util/registry_utils";
 
 const Markdown = React.lazy(() => import("../component/Markdown"));
 const Docs = React.lazy(() => import("../component/Docs"));
+const CodeBlock = React.lazy(() => import("../component/CodeBlock"));
 
 export default function Registry() {
   const [isLoading, setIsLoading] = React.useState(true);

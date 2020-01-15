@@ -50,13 +50,13 @@ function Home() {
 
       <p>Using Shell:</p>
       <CodeBlock
-        language={"shell"}
-        value={"curl -fsSL https://deno.land/x/install/install.sh | sh"}
+        language="shell"
+        value="curl -fsSL https://deno.land/x/install/install.sh | sh"
       />
       <p>Or using PowerShell:</p>
       <CodeBlock
-        language={"shell"}
-        value={"iwr https://deno.land/x/install/install.ps1 -useb | iex"}
+        language="shell"
+        value="iwr https://deno.land/x/install/install.ps1 -useb | iex"
       />
       <p>
         Using <Link to="https://formulae.brew.sh/formula/deno">Homebrew</Link>{" "}
@@ -78,13 +78,13 @@ function Home() {
 
       <p>Try running a simple program:</p>
       <CodeBlock
-        language={"shell"}
-        value={"deno https://deno.land/std/examples/welcome.ts"}
+        language="shell"
+        value="deno https://deno.land/std/examples/welcome.ts"
       />
 
       <p>Or a more complex one:</p>
 
-      <CodeBlock language={"typescript"} value={code} />
+      <CodeBlock language="ts" value={code} />
 
       <h2 id="dig-in">Dig in...</h2>
 
