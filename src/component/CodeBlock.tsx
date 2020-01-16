@@ -5,11 +5,11 @@ import {
 } from "react-syntax-highlighter";
 import lightTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-light";
 import darkTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark";
-import javascript from "react-syntax-highlighter/dist/esm/languages/hljs/javascript";
-import typescript from "react-syntax-highlighter/dist/esm/languages/hljs/typescript";
-import json from "react-syntax-highlighter/dist/esm/languages/hljs/json";
-import markdown from "react-syntax-highlighter/dist/esm/languages/hljs/markdown";
-import shell from "react-syntax-highlighter/dist/esm/languages/hljs/shell";
+import javascript from "react-syntax-highlighter/dist/cjs/languages/hljs/javascript";
+import typescript from "react-syntax-highlighter/dist/cjs/languages/hljs/typescript";
+import json from "react-syntax-highlighter/dist/cjs/languages/hljs/json";
+import markdown from "react-syntax-highlighter/dist/cjs/languages/hljs/markdown";
+import shell from "react-syntax-highlighter/dist/cjs/languages/hljs/shell";
 import { useDarkMode } from "../hook/theme";
 
 lightTheme["hljs-selection"] = {
