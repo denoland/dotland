@@ -1,18 +1,7 @@
 import React from "react";
 import Link from "../component/Link";
+import CodeBlock from "../component/CodeBlock";
 import "./Home.css";
-
-const { Suspense } = React;
-
-const CodeBlockLazy = React.lazy(() => import("../component/CodeBlock"));
-
-function CodeBlock(props) {
-  return (
-    <Suspense fallback={""}>
-      <CodeBlockLazy {...props}></CodeBlockLazy>
-    </Suspense>
-  );
-}
 
 const code = `import { serve } from "https://deno.land/std@v0.24.0/http/server.ts";
 const body = new TextEncoder().encode("Hello World\\n");
@@ -27,14 +16,10 @@ function Home() {
   return (
     <main>
       <header>
-        <img
-          id="logo"
-          src="images/deno_logo_3.svg"
-          alt="deno logo"
-          width="200"
-        />
+        <img id="logo" src="images/deno_logo_3.svg" alt="deno logo" />
         <div>
-          <h1>Deno</h1>A secure runtime for JavaScript and TypeScript
+          <h1 id="deno_title">Deno</h1> A secure runtime for JavaScript and
+          TypeScript
         </div>
       </header>
 
@@ -65,13 +50,13 @@ function Home() {
 
       <p>Using Shell:</p>
       <CodeBlock
-        language={"shell"}
-        value={"curl -fsSL https://deno.land/x/install/install.sh | sh"}
+        language="shell"
+        value="curl -fsSL https://deno.land/x/install/install.sh | sh"
       />
       <p>Or using PowerShell:</p>
       <CodeBlock
-        language={"shell"}
-        value={"iwr https://deno.land/x/install/install.ps1 -useb | iex"}
+        language="shell"
+        value="iwr https://deno.land/x/install/install.ps1 -useb | iex"
       />
       <p>
         Using <Link to="https://formulae.brew.sh/formula/deno">Homebrew</Link>{" "}
@@ -93,13 +78,13 @@ function Home() {
 
       <p>Try running a simple program:</p>
       <CodeBlock
-        language={"shell"}
-        value={"deno https://deno.land/std/examples/welcome.ts"}
+        language="shell"
+        value="deno https://deno.land/std/examples/welcome.ts"
       />
 
       <p>Or a more complex one:</p>
 
-      <CodeBlock language={"typescript"} value={code} />
+      <CodeBlock language="ts" value={code} />
 
       <h2 id="dig-in">Dig in...</h2>
 

@@ -14,6 +14,17 @@ header {
   align-items: center;
 }
 
+#deno_title {
+  margin: 0 0 10px 0;
+}
+
+#logo {
+  width: 40%;
+  min-width: 100px;
+  max-width: 200px;
+  height: 200px;
+}
+
 .hidden {
   display: none;
 }
