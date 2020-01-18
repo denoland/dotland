@@ -701,6 +701,12 @@
     "repo": "deno_std",
     "desc": "NOTICE: The deno_std repository has been moved to the main Deno repo https://github.com/denoland/deno/tree/master/std"
   },
+  "swissKnife": {
+    "type": "github",
+    "owner": "fakoua",
+    "repo": "SwissKnife",
+    "desc": "SwissKnife is a Deno module that allows you to do some useful tasks on Windows OS using NirCmd v2.86"
+  },
   "task_runner": {
     "type": "github",
     "owner": "jinjor",
