@@ -19,7 +19,6 @@ export default function Registry() {
   });
   const { pathname, search, hash } = useLocation();
   const firstSelectedLine = React.useRef(null);
-
   React.useEffect(() => {
     setIsLoading(true);
     const { entry, path } = proxy(pathname);
@@ -107,25 +106,23 @@ export default function Registry() {
     contentComponent = (
       <div>
         {isDocsPage ? (
-          <p>
+          <span>
             <Link to="?">Source Code</Link>
-          </p>
+          </span>
         ) : hasDocsAvailable ? (
-          <p>
-            <Link color="primary" to="?doc">
-              Documentation
-            </Link>
-          </p>
+          <span>
+            <Link color="primary" to="?doc">Documentation</Link>
+          </span>
         ) : null}
         {state.repoUrl ? (
-          <p>
-            <Link to={state.repoUrl}>Repository</Link>
-          </p>
+          <span>
+            {hasDocsAvailable ? " | " : ""}<Link to={state.repoUrl}>Repository</Link>
+          </span>
         ) : null}
         {state.rawUrl ? (
-          <p>
-            <Link to={state.rawUrl}>Raw</Link>
-          </p>
+          <span>
+            &nbsp;|&nbsp;<Link to={state.rawUrl}>Raw</Link>
+          </span>
         ) : null}
         {(() => {
           if (isMarkdown) {
