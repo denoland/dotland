@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Divider } from "@material-ui/core";
+import { Box, Button } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 import Link from "../component/Link.tsx";
 import Spinner from "../component/Spinner";
@@ -8,15 +8,6 @@ import { proxy } from "../util/registry_utils";
 const CodeBlock = React.lazy(() => import("../component/CodeBlock"));
 const Markdown = React.lazy(() => import("../component/Markdown"));
 const Docs = React.lazy(() => import("../component/Docs"));
-const verticalDividerStyle = {
-  backgroundColor: "rgba(0, 0, 0, 0.54)",
-  height: "12px",
-  display: "inline-block",
-  marginLeft: "5px",
-  marginRight: "5px",
-  marginBottom: "-2px",
-  width: "1px"
-};
 
 export default function Registry() {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -115,23 +106,23 @@ export default function Registry() {
     contentComponent = (
       <div>
         {isDocsPage ? (
-          <span>
-            <Link to="?">Source Code</Link>
-          </span>
+          <Button variant="outlined" href="?">
+            Source Code
+          </Button>
         ) : hasDocsAvailable ? (
-          <span>
-            <Link color="primary" to="?doc">Documentation</Link>
-          </span>
+          <Button variant="outlined" href="?doc">
+            Documentation
+          </Button>
         ) : null}
         {state.repoUrl ? (
-          <span>
-            {hasDocsAvailable ? <Divider orientation="vertical" style={verticalDividerStyle} /> : ""}<Link to={state.repoUrl}>Repository</Link>
-          </span>
+          <Button variant="outlined" href={state.repoUrl}>
+            Repository
+          </Button>
         ) : null}
         {state.rawUrl ? (
-          <span>
-            <Divider orientation="vertical" style={verticalDividerStyle} /><Link to={state.rawUrl}>Raw</Link>
-          </span>
+          <Button variant="outlined" href={state.rawUrl}>
+            Raw
+          </Button>
         ) : null}
         {(() => {
           if (isMarkdown) {
