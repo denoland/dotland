@@ -11,7 +11,9 @@ export default function RegistryIndex() {
   const [query, setQuery] = React.useState("");
 
   const filtered = Object.keys(DATABASE).filter(
-    name => name.includes(query) || (DATABASE[name].desc || "").includes(query)
+    name =>
+      name.toLowerCase().includes(query.toLowerCase()) ||
+      (DATABASE[name].desc || "").toLowerCase().includes(query.toLowerCase())
   );
 
   return (
