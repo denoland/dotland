@@ -240,6 +240,12 @@
     "repo": "denoversion",
     "desc": "Deno cli to manage and bump release versions."
   },
+  "dinocord": {
+    "type": "github",
+    "owner": "sunsetkookaburra",
+    "repo": "dinocord",
+    "desc": "A Discord API Library for Deno."
+  },
   "dirname": {
     "type": "github",
     "owner": "rsp",
