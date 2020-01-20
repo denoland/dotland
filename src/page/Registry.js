@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Divider } from "@material-ui/core";
+import { Box, ButtonGroup, Button } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 import Link from "../component/Link.tsx";
 import Spinner from "../component/Spinner";
@@ -8,15 +8,6 @@ import { proxy } from "../util/registry_utils";
 const CodeBlock = React.lazy(() => import("../component/CodeBlock"));
 const Markdown = React.lazy(() => import("../component/Markdown"));
 const Docs = React.lazy(() => import("../component/Docs"));
-const verticalDividerStyle = {
-  backgroundColor: "rgba(0, 0, 0, 0.54)",
-  height: "12px",
-  display: "inline-block",
-  marginLeft: "5px",
-  marginRight: "5px",
-  marginBottom: "-2px",
-  width: "1px"
-};
 
 export default function Registry() {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -114,25 +105,21 @@ export default function Registry() {
     const isDocsPage = search.includes("doc") && state.contents;
     contentComponent = (
       <div>
-        {isDocsPage ? (
-          <span>
-            <Link to="?">Source Code</Link>
-          </span>
-        ) : hasDocsAvailable ? (
-          <span>
-            <Link color="primary" to="?doc">Documentation</Link>
-          </span>
-        ) : null}
-        {state.repoUrl ? (
-          <span>
-            {hasDocsAvailable ? <Divider orientation="vertical" style={verticalDividerStyle} /> : ""}<Link to={state.repoUrl}>Repository</Link>
-          </span>
-        ) : null}
-        {state.rawUrl ? (
-          <span>
-            <Divider orientation="vertical" style={verticalDividerStyle} /><Link to={state.rawUrl}>Raw</Link>
-          </span>
-        ) : null}
+        <ButtonGroup
+          size="small"
+          variant="text"
+          color="primary"
+        >
+          {isDocsPage ? (
+            <Button href="?">Source Code</Button>
+          ) : hasDocsAvailable ? (
+            <Button href="?doc">Documentation</Button>
+          ) : null}
+          {state.repoUrl ? (
+            <Button href={state.repoUrl}>Repository</Button>
+          ) : null}
+          {state.rawUrl ? <Button href={state.rawUrl}>Raw</Button> : null}
+        </ButtonGroup>
         {(() => {
           if (isMarkdown) {
             return <Markdown source={state.contents} />;
