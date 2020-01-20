@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@material-ui/core";
+import { Box, ButtonGroup, Button } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 import Link from "../component/Link.tsx";
 import Spinner from "../component/Spinner";
@@ -19,7 +19,6 @@ export default function Registry() {
   });
   const { pathname, search, hash } = useLocation();
   const firstSelectedLine = React.useRef(null);
-
   React.useEffect(() => {
     setIsLoading(true);
     const { entry, path } = proxy(pathname);
@@ -106,27 +105,21 @@ export default function Registry() {
     const isDocsPage = search.includes("doc") && state.contents;
     contentComponent = (
       <div>
-        {isDocsPage ? (
-          <p>
-            <Link to="?">Source Code</Link>
-          </p>
-        ) : hasDocsAvailable ? (
-          <p>
-            <Link color="primary" to="?doc">
-              Documentation
-            </Link>
-          </p>
-        ) : null}
-        {state.repoUrl ? (
-          <p>
-            <Link to={state.repoUrl}>Repository</Link>
-          </p>
-        ) : null}
-        {state.rawUrl ? (
-          <p>
-            <Link to={state.rawUrl}>Raw</Link>
-          </p>
-        ) : null}
+        <ButtonGroup
+          size="small"
+          variant="text"
+          color="primary"
+        >
+          {isDocsPage ? (
+            <Button href="?">Source Code</Button>
+          ) : hasDocsAvailable ? (
+            <Button href="?doc">Documentation</Button>
+          ) : null}
+          {state.repoUrl ? (
+            <Button href={state.repoUrl}>Repository</Button>
+          ) : null}
+          {state.rawUrl ? <Button href={state.rawUrl}>Raw</Button> : null}
+        </ButtonGroup>
         {(() => {
           if (isMarkdown) {
             return <Markdown source={state.contents} />;
