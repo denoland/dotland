@@ -87,7 +87,7 @@ function BenchmarkChart(props: Props) {
     }
   };
 
-  const series = props.columns;
+  const series = props.columns.sort((a, b) => (a.name > b.name ? 1 : -1));
   return (
     <ApexChart type="line" options={options} series={series} height={300} />
   );
