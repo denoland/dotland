@@ -11,11 +11,11 @@ import json from "react-syntax-highlighter/dist/cjs/languages/hljs/json";
 import markdown from "react-syntax-highlighter/dist/cjs/languages/hljs/markdown";
 import shell from "react-syntax-highlighter/dist/cjs/languages/hljs/shell";
 import { useDarkMode } from "../hook/theme";
-import FileCopyIcon from '@material-ui/icons/FileCopy';
-import CheckIcon from '@material-ui/icons/Check';
+import FileCopyIcon from "@material-ui/icons/FileCopy";
+import CheckIcon from "@material-ui/icons/Check";
 import { IconButton, Container, Zoom } from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { makeStyles } from "@material-ui/core/styles";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 lightTheme["hljs-selection"] = {
   backgroundColor: "#ebebeb" // https://github.com/atom/one-light-ui/blob/master/styles/ui-variables.less#L32
@@ -26,20 +26,20 @@ darkTheme["hljs-selection"] = {
 
 const useStyles = makeStyles(theme => ({
   copyButton: {
-    position: 'relative',
-    right: '5px',
-    float: 'right'
+    position: "relative",
+    right: "5px",
+    float: "right"
   },
   hidden: {
-    display: 'none'
+    display: "none"
   },
   container: {
-    position: 'relative',
-    paddingLeft: '0',
-    paddingRight: '0'
+    position: "relative",
+    paddingLeft: "0",
+    paddingRight: "0"
   },
   checkIcon: {
-    color: 'rgb(80, 161, 79)'
+    color: "rgb(80, 161, 79)"
   }
 }));
 SyntaxHighlighter.registerLanguage("javascript", javascript);
@@ -66,32 +66,34 @@ function CodeBlock(props: SyntaxHighlighterProps) {
     let timerId = setTimeout(() => {
       setShowCopy(false);
     }, 500);
-    setTimer(timerId)
+    setTimer(timerId);
   }
 
   function onCopy() {
     setCopied(true);
     setTimeout(() => {
       setCopied(false);
-    }, 1300)
+    }, 1300);
   }
 
   return (
     <Container
       onMouseEnter={onContainerEnter}
       onMouseLeave={onContainerLeave}
-      className={classes.container}>
-      <Zoom in={showCopy || copied} style={{ transitionDelay: '50ms' }}>
-        <CopyToClipboard
-          text={props.value}
-          onCopy={onCopy}>
+      className={classes.container}
+    >
+      <Zoom in={showCopy || copied} style={{ transitionDelay: "50ms" }}>
+        <CopyToClipboard text={props.value} onCopy={onCopy}>
           <IconButton
             aria-label="copy"
             size="small"
-            className={`${classes.copyButton}`}>
-            {copied ?
-              <CheckIcon fontSize="inherit" className={classes.checkIcon} /> :
-              <FileCopyIcon fontSize="inherit" /> }
+            className={`${classes.copyButton}`}
+          >
+            {copied ? (
+              <CheckIcon fontSize="inherit" className={classes.checkIcon} />
+            ) : (
+              <FileCopyIcon fontSize="inherit" />
+            )}
           </IconButton>
         </CopyToClipboard>
       </Zoom>
@@ -104,7 +106,7 @@ function CodeBlock(props: SyntaxHighlighterProps) {
       >
         {props.value}
       </SyntaxHighlighter>
-    </Container >
+    </Container>
   );
 }
 
