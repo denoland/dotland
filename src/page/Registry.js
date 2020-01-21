@@ -105,11 +105,7 @@ export default function Registry() {
     const isDocsPage = search.includes("doc") && state.contents;
     contentComponent = (
       <div>
-        <ButtonGroup
-          size="small"
-          variant="text"
-          color="primary"
-        >
+        <ButtonGroup size="small" variant="text" color="primary">
           {isDocsPage ? (
             <Button href="?">Source Code</Button>
           ) : hasDocsAvailable ? (

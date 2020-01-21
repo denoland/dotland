@@ -154,4 +154,4 @@ test("undefined declarations", () => {
   const rootSource = `export { blah } from "./blah.d.ts"`;
   const docEntries = main(rootModule, rootSource);
   expect(docEntries).toEqual([]);
-})
+});
