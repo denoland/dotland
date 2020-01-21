@@ -713,6 +713,12 @@
     "repo": "SwissKnife",
     "desc": "SwissKnife is a Deno module that allows you to do some useful tasks on Windows OS using NirCmd v2.86"
   },
+  "take_five": {
+    "type": "github",
+    "owner": "toddself",
+    "repo": "take-five",
+    "desc": "A minimal (no external dependency) REST framework"
+  },
   "task_runner": {
     "type": "github",
     "owner": "jinjor",
