@@ -22,12 +22,6 @@ function Registry() {
 }
 
 function App() {
-  const { pathname } = document.location;
-
-  React.useEffect(() => {
-    document.title = `deno ${pathname}`;
-  }, [pathname]);
-
   return (
     <BrowserRouter>
       <HashLinkHandler>

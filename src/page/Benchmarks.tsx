@@ -1,6 +1,7 @@
 import React from "react";
 import { Theme } from "@material-ui/core";
 import { useTheme } from "@material-ui/styles";
+import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
 import {
   BenchmarkData,
@@ -133,6 +134,9 @@ export default function Benchmarks() {
 
   return (
     <main>
+      <Helmet>
+        <title>Deno Continuous Benchmarks</title>
+      </Helmet>
       <Link to="/">
         <img alt="deno logo" src="/images/deno_logo_4.gif" width="200" />
       </Link>

@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, ButtonGroup, Button } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import Link from "../component/Link.tsx";
 import Spinner from "../component/Spinner";
 import { proxy } from "../util/registry_utils";
@@ -154,7 +155,14 @@ export default function Registry() {
     );
   }
 
-  return <Box>{contentComponent}</Box>;
+  return (
+    <Box>
+      <Helmet>
+        <title>Deno {pathname}</title>
+      </Helmet>
+      {contentComponent}
+    </Box>
+  );
 }
 
 const readmeStyle = {
