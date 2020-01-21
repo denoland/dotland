@@ -87,7 +87,12 @@ function BenchmarkChart(props: Props) {
     }
   };
 
-  const series = props.columns;
+  const series = props.columns.sort((a, b) => {
+    // Sort by last benchmark.
+    let a_last = a.data[a.data.length - 1];
+    let b_last = b.data[b.data.length - 1];
+    return b_last - a_last;
+  });
   return (
     <ApexChart type="line" options={options} series={series} height={300} />
   );
