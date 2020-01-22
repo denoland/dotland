@@ -234,6 +234,12 @@
     "repo": "denoget",
     "desc": "denoget installs executable deno script."
   },
+  "denon": {
+    "type": "github",
+    "owner": "eliassjogreen",
+    "repo": "denon",
+    "desc": "Like nodemon but made in and for deno. Also a deno style file watcher"
+  },
   "denoversion": {
     "type": "github",
     "owner": "lucascaro",
