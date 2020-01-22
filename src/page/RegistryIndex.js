@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "../component/Link";
+import Title from "../component/Title";
 import DATABASE from "../database.json";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -18,6 +19,7 @@ export default function RegistryIndex() {
 
   return (
     <main>
+      <Title>Deno Third Party Modules</Title>
       <Link to="/">
         <img
           alt="deno logo"

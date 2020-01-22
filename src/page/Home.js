@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "../component/Link";
 import CodeBlock from "../component/CodeBlock";
+import Title from "../component/Title";
 import "./Home.css";
 
 const code = `import { serve } from "https://deno.land/std@v0.30.0/http/server.ts";
@@ -14,6 +15,7 @@ for await (const req of s) {
 function Home() {
   return (
     <main>
+      <Title>Deno, a secure runtime for JavaScript and TypeScript</Title>
       <header>
         <img id="logo" src="images/deno_logo_3.svg" alt="deno logo" />
         <div>

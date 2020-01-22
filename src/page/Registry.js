@@ -3,6 +3,7 @@ import { Box, ButtonGroup, Button } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 import Link from "../component/Link.tsx";
 import Spinner from "../component/Spinner";
+import Title from "../component/Title";
 import { proxy } from "../util/registry_utils";
 
 const CodeBlock = React.lazy(() => import("../component/CodeBlock"));
@@ -154,7 +155,12 @@ export default function Registry() {
     );
   }
 
-  return <Box>{contentComponent}</Box>;
+  return (
+    <Box>
+      <Title>Deno {pathname}</Title>
+      {contentComponent}
+    </Box>
+  );
 }
 
 const readmeStyle = {
