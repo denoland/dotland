@@ -1,7 +1,6 @@
 import React from "react";
 import { Theme } from "@material-ui/core";
 import { useTheme } from "@material-ui/styles";
-import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
 import {
   BenchmarkData,
@@ -16,6 +15,7 @@ import {
 } from "../util/benchmark_utils";
 import Link from "../component/Link";
 import Spinner from "../component/Spinner";
+import Title from "../component/Title";
 
 const ApexChart = React.lazy(() => import("react-apexcharts"));
 
@@ -134,9 +134,7 @@ export default function Benchmarks() {
 
   return (
     <main>
-      <Helmet>
-        <title>Deno Continuous Benchmarks</title>
-      </Helmet>
+      <Title>Deno Continuous Benchmarks</Title>
       <Link to="/">
         <img alt="deno logo" src="/images/deno_logo_4.gif" width="200" />
       </Link>

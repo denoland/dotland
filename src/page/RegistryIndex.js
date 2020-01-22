@@ -1,12 +1,12 @@
 import React from "react";
 import Link from "../component/Link";
+import Title from "../component/Title";
 import DATABASE from "../database.json";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Divider from "@material-ui/core/Divider";
 import ListItemText from "@material-ui/core/ListItemText";
 import TextField from "@material-ui/core/TextField";
-import { Helmet } from "react-helmet";
 
 export default function RegistryIndex() {
   const [query, setQuery] = React.useState("");
@@ -19,9 +19,7 @@ export default function RegistryIndex() {
 
   return (
     <main>
-      <Helmet>
-        <title>Deno Third Party Modules</title>
-      </Helmet>
+      <Title>Deno Third Party Modules</Title>
       <Link to="/">
         <img
           alt="deno logo"
