@@ -4,7 +4,12 @@ type Props = {
   children: string | string[];
 };
 
-export default ({ children }: Props) => {
+/**
+ * Title is the component for setting the page title.
+ *
+ *     <Title>Deno Homepage</Title>
+ */
+export default function Title({ children }: Props) {
   useEffect(() => {
     const originalTitle = document.title;
     document.title = Array.isArray(children) ? children.join("") : children;
@@ -14,4 +19,4 @@ export default ({ children }: Props) => {
   }, [children]);
 
   return null;
-};
+}
