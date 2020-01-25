@@ -222,10 +222,10 @@
     "repo": "deno_init",
     "desc": "The executable to set up a deno project 🦕"
   },
-   "deno-servicr": {
+   "deno_servicr": {
     "type": "github",
     "owner": "astanciu",
-    "repo": "deno-servicr",
+    "repo": "deno_servicr",
     "desc": "⚙️ Small app/script/service manager to manage startup and shutdown gracefully ⚙️"
   },
   "denofun": {
