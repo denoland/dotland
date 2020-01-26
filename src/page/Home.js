@@ -61,12 +61,12 @@ function Home() {
       />
       <p>
         Using <Link to="https://formulae.brew.sh/formula/deno">Homebrew</Link>{" "}
-        (mac or Linux):
+        (macOS or Linux):
       </p>
       <CodeBlock language={"shell"} value={"brew install deno"} />
       <p>
         Using <Link to="https://chocolatey.org/packages/deno">Chocolatey</Link>{" "}
-        (windows):
+        (Windows):
       </p>
       <CodeBlock language={"shell"} value={"choco install deno"} />
       <p>
