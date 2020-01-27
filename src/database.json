@@ -17,6 +17,12 @@
     "repo": "framework",
     "desc": ""
   },
+  "await_mutex": {
+    "type": "github",
+    "owner": "Matthew-Smith",
+    "repo": "awaitable_mutex",
+    "desc": "Blocking execution of a section of code to one at a time"
+  },
   "base64": {
     "type": "github",
     "owner": "chiefbiiko",
