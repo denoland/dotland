@@ -222,7 +222,7 @@
     "repo": "deno_init",
     "desc": "The executable to set up a deno project 🦕"
   },
-   "deno_servicr": {
+   "servicr": {
     "type": "github",
     "owner": "astanciu",
     "repo": "deno_servicr",
