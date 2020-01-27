@@ -221,7 +221,7 @@
     "owner": "maxuuell",
     "repo": "deno_init",
     "desc": "The executable to set up a deno project 🦕"
-  }
+  },
   "denofun": {
     "type": "github",
     "owner": "galkowskit",
