@@ -221,13 +221,7 @@
     "owner": "maxuuell",
     "repo": "deno_init",
     "desc": "The executable to set up a deno project 🦕"
-  },
-   "servicr": {
-    "type": "github",
-    "owner": "astanciu",
-    "repo": "deno_servicr",
-    "desc": "⚙️ Small app/script/service manager to manage startup and shutdown gracefully ⚙️"
-  },
+  }
   "denofun": {
     "type": "github",
     "owner": "galkowskit",
@@ -645,6 +639,12 @@
     "owner": "justjavac",
     "repo": "deno-semver",
     "desc": "A fork of node-semver using TypeScript"
+  },
+   "servicr": {
+    "type": "github",
+    "owner": "astanciu",
+    "repo": "deno_servicr",
+    "desc": "⚙️ Small app/script/service manager to manage startup and shutdown gracefully ⚙️"
   },
   "sha1": {
     "type": "github",
