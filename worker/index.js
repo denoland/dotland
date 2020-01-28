@@ -18,13 +18,22 @@ async function handleRequest(request) {
   // console.log('request.url', url.pathname);
   const maybeProxyElsewhere =
     url.pathname.startsWith("/std") || url.pathname.startsWith("/x");
-
+  
+  // Handle line number references in ":X" format
+  const hasAltLineRef =
+    url.pathname.match('.*.[a-z]{2}:');
+  
   // TODO(ry) Support docs without hitting S3...
   if (url.pathname.startsWith("/typedoc")) {
     return redirect(url, S3_REMOTE_URL, request);
   }
 
-  if (isHtml) {
+  if (isHtml) { 
+    if (hasAltLineRef) {
+      const splitPath = url.pathname.split(':');
+      const newUrl = `${url.origin}${splitPath[0]}#L${splitPath[1]}`; 
+      return redirect(newUrl, REMOTE_URL, request);
+    }
     return redirect(url, REMOTE_URL, request);
   }
 
