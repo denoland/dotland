@@ -21,35 +21,36 @@ export default function Registry() {
   const { pathname, search, hash } = useLocation();
   const firstSelectedLine = React.useRef(null);
   React.useEffect(() => {
-    setIsLoading(true);
-    const { entry, path } = proxy(pathname);
-    console.log({ path });
-    if (!path || path.endsWith("/")) {
-      // Render dir.
-      const repoUrl = `${entry.repo}${path}`;
-      renderDir(path, entry).then(dir => {
-        console.log({ dir });
-        setState({ dir, repoUrl });
-        setIsLoading(false);
-      });
-    } else {
-      // Render file.
-      const rawUrl = `${entry.url}${path}`;
-      const repoUrl = `${entry.repo}${path}`;
-      console.log("fetch", rawUrl);
-      fetch(rawUrl).then(async response => {
-        const m = await response.text();
-        setState({
-          contents: m,
-          rawUrl,
-          repoUrl
+    (async () => {
+      setIsLoading(true);
+      const { entry, path } = await proxy(pathname);
+      if (!path || path.endsWith("/")) {
+        // Render dir.
+        const repoUrl = `${entry.repo}${path}`;
+        renderDir(path, entry).then(dir => {
+          console.log({ dir });
+          setState({ dir, repoUrl });
+          setIsLoading(false);
         });
-        setIsLoading(false);
-        if (firstSelectedLine.current) {
-          window.scrollTo(0, firstSelectedLine.current.offsetTop);
-        }
-      });
-    }
+      } else {
+        // Render file.
+        const rawUrl = `${entry.url}${path}`;
+        const repoUrl = `${entry.repo}${path}`;
+        console.log("fetch", rawUrl);
+        fetch(rawUrl).then(async response => {
+          const m = await response.text();
+          setState({
+            contents: m,
+            rawUrl,
+            repoUrl
+          });
+          setIsLoading(false);
+          if (firstSelectedLine.current) {
+            window.scrollTo(0, firstSelectedLine.current.offsetTop);
+          }
+        });
+      }
+    })();
   }, [pathname]);
 
   const lineSelectionRangeMatch = hash.match(/^#L(\d+)(?:-L(\d+))?$/) || [];

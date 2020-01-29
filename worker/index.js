@@ -33,7 +33,7 @@ async function handleRequest(request) {
   }
 
   console.log("serve up text", url.pathname);
-  const proxied = proxy(url.pathname);
+  const proxied = await proxy(url.pathname);
   if (!proxied) {
     return new Response("Not in database.json " + url.pathname, {
       status: 404,

@@ -1,9 +1,16 @@
 import React from "react";
 import { Container } from "@material-ui/core";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter,
+  Redirect,
+  Route,
+  Switch,
+  useLocation
+} from "react-router-dom";
 import PathBreadcrumbs from "./component/PathBreadcrumbs";
 import Spinner from "./component/Spinner";
 import HashLinkHandler from "./component/HashLinkHandler";
+import { proxy } from "./util/registry_utils";
 
 const { Suspense } = React;
 
@@ -19,6 +26,29 @@ function Registry() {
       <LazyRegistry />
     </Suspense>
   );
+}
+
+function AddRef() {
+  const [path, setPath] = React.useState(null);
+  const { pathname, search, hash } = useLocation();
+  React.useEffect(() => {
+    (async () => {
+      const {
+        entry: { branch }
+      } = await proxy(pathname);
+      let pathWithRef;
+      if (pathname.startsWith("/std")) {
+        pathWithRef = pathname.replace(/^\/std/, `/std@${branch}`);
+      } else {
+        pathWithRef = pathname.replace(/^\/x\/([^/]+)/, `/x/$1@${branch}`);
+      }
+      setPath(pathWithRef);
+    })();
+  }, [pathname]);
+  if (path == null) {
+    return <Spinner />;
+  }
+  return <Redirect to={`${path}${search}${hash}`} />;
 }
 
 function App() {
@@ -42,14 +72,14 @@ function App() {
             <Route path="/style_guide(.html)?">
               <Redirect to="/std/style_guide.md" />
             </Route>
-            <Route path="/std/:stdPath" component={Registry} />
-            <Route path="/std/" component={Registry} />
             <Route path="/std@:stdVersion/:stdPath" component={Registry} />
-            <Route path="/std@:stdVersion/" component={Registry} />
+            <Route path="/std@:stdVersion" component={Registry} />
             <Route path="/x/:mod@:modVersion/:modPath" component={Registry} />
-            <Route path="/x/:mod/:modPath" component={Registry} />
-            <Route path="/x/:mod" component={Registry} />
             <Route path="/x/:mod@:modVersion" component={Registry} />
+            <Route path="/std/:stdPath" component={AddRef} />
+            <Route path="/std" component={AddRef} />
+            <Route path="/x/:mod/:modPath" component={AddRef} />
+            <Route path="/x/:mod" component={AddRef} />
             <Route
               path="/x/"
               render={() => (
