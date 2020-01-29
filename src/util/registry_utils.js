@@ -120,10 +120,6 @@ async function getGithubLatestCommit(owner, repo) {
   if (response.ok) {
     return (await response.json())[0]["sha"].substring(0, 6);
   } else {
-    console.log(
-      `https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`,
-      response.status
-    );
     throw new Error(
       `Couldn't fetch latest commit of https://github.com/${owner}/${repo}`
     );
