@@ -513,6 +513,12 @@
     "repo": "deno_mysql",
     "desc": "MySQL and MariaDB (5.5 and 10.2+) database driver for Deno."
   },
+  "nanoid": {
+    "type": "github",
+    "owner": "ianfabs",
+    "repo": "nanoid",
+    "desc": "A tiny, secure, URL-friendly, unique string ID generator for JavaScript."
+  },
   "normalize_diacritics": {
     "type": "github",
     "owner": "motss",
