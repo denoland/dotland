@@ -421,6 +421,12 @@
     "repo": "jpeg.ts",
     "desc": "A pure TypeScript JPEG encoder and decoder for deno."
   },
+  "json_rpc": {
+    "type": "github",
+    "owner": "ondras",
+    "repo": "deno-json-rpc",
+    "desc": "JSON-RPC interface"
+  },
   "keycode": {
     "type": "github",
     "owner": "kabirbaidhya",
