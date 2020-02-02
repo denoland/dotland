@@ -26,9 +26,9 @@ darkTheme["hljs-selection"] = {
 
 const useStyles = makeStyles(theme => ({
   copyButton: {
-    position: "relative",
-    right: "5px",
-    float: "right"
+    position: "absolute",
+    right: "2px",
+    top: "2px"
   },
   hidden: {
     display: "none"
@@ -87,7 +87,7 @@ function CodeBlock(props: SyntaxHighlighterProps) {
           <IconButton
             aria-label="copy"
             size="small"
-            className={`${classes.copyButton}`}
+            className={classes.copyButton}
           >
             {copied ? (
               <CheckIcon fontSize="inherit" className={classes.checkIcon} />
