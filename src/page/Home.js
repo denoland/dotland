@@ -24,6 +24,15 @@ for await (const req of s) {
 `;
 
 function Home() {
+  const [latestVersion, setLatestVersion] = React.useState(null);
+
+  React.useEffect(() => {
+    fetch("/api/versions")
+      .then(resp => resp.json())
+      .then(versions => setLatestVersion(versions[0]))
+      .catch(err => console.error("Failed to get latest version: " + err));
+  }, []);
+
   return (
     <main>
       <header>
@@ -87,6 +96,20 @@ function Home() {
         See{" "}
         <Link to="https://github.com/denoland/deno_install">deno_install</Link>{" "}
         for more installation options.
+      </p>
+      <p>
+        Release notes for latest stable version
+        {latestVersion !== null ? `, ${latestVersion.tag},` : null} can be found{" "}
+        <Link
+          to={
+            latestVersion !== null
+              ? latestVersion.url
+              : "https://github.com/denoland/deno/releases"
+          }
+        >
+          here
+        </Link>
+        .
       </p>
 
       <h2 id="example">Example</h2>
