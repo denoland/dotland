@@ -1,7 +1,7 @@
 export async function handleAPIRequest(request) {
   const url = new URL(request.url);
 
-  if (url.pathname == "/api/versions") {
+  if (url.pathname === "/api/versions") {
     return handleVersionRequest(request);
   }
 
@@ -14,7 +14,7 @@ export async function handleAPIRequest(request) {
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type"
+  "Access-Control-Allow-Headers": ""
 };
 
 async function handleVersionRequest(request) {
