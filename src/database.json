@@ -592,6 +592,12 @@
     "repo": "deno-postgres",
     "desc": "PostgreSQL driver for Deno."
   },
+  "prettier": {
+    "type": "github",
+    "owner": "denolib",
+    "repo": "prettier",
+    "desc": "Prettier for Deno. Formerly std/prettier"
+  },
   "pretty_assert": {
     "type": "github",
     "owner": "bokuweb",
