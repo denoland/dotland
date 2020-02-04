@@ -286,7 +286,7 @@
     "type": "github",
     "owner": "drashland",
     "repo": "deno-drash",
-    "desc": "A microframework for Deno focused on resource creation and content negotiation."
+    "desc": "A REST microframework for Deno."
    },
   "dso": {
     "type": "github",
