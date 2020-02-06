@@ -16,7 +16,7 @@
   "devDependencies": {
     "@testing-library/react": "^9.3.0",
     "@types/assert": "^1.4.3",
-    "@types/jest": "^24.0.20",
+    "@types/jest": "^25.1.2",
     "@types/react-dom": "^16.9.2",
     "@types/react-router-dom": "^5.1.0",
     "@types/react-syntax-highlighter": "^11.0.1",
@@ -39,9 +39,9 @@
     "react-dom": "^16.10.2",
     "react-markdown": "^4.2.2",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0",
-    "react-syntax-highlighter": "^11.0.2",
-    "remark-toc": "^6.0.0",
+    "react-scripts": "^3.3.1",
+    "react-syntax-highlighter": "^12.2.1",
+    "remark-toc": "^7.0.0",
     "typescript": "^3.6.4"
   },
   "eslintConfig": {
