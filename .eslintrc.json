@@ -26,10 +26,16 @@
     ],
     "@typescript-eslint/ban-ts-ignore": ["off"],
     "@typescript-eslint/no-empty-function": ["off"],
-    "@typescript-eslint/explicit-function-return-type": ["off"]
+    "@typescript-eslint/explicit-function-return-type": ["off"],
+    "@typescript-eslint/no-explicit-any": ["off"],
+    "//replaced by @typescript-eslint/no-unused-vars": 0,
+    "no-unused-vars": ["off"],
+    "react/no-unescaped-entities": ["error", { "forbid": [">", "}"] }],
+    "react/prop-types": ["off"]
   },
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "es6": true
   }
 }

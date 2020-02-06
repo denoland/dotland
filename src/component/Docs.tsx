@@ -50,7 +50,7 @@ export default function Docs(props: Props) {
             </Link>
           );
           const subheader = <code>{d.typestr}</code>;
-          let frag = location.hash.substr(1);
+          const frag = location.hash.substr(1);
           const raised = frag === d.name;
           let docstr = null;
           if (d.docstr) {
@@ -63,7 +63,7 @@ export default function Docs(props: Props) {
                 <b>Arguments</b>
                 <List>
                   {d.args.map(arg => {
-                    let name = <code>{`${arg.name}: ${arg.typestr}`}</code>;
+                    const name = <code>{`${arg.name}: ${arg.typestr}`}</code>;
                     return (
                       <ListItem key={arg.name}>
                         <ListItemText primary={name} secondary={arg.docstr} />

@@ -204,7 +204,7 @@ function extractProxyFields(data: BenchmarkRun[]): void {
       (row as any)[name] = newField;
       for (const k of Object.getOwnPropertyNames(d)) {
         if (k.includes("_proxy")) {
-          let d2 = d as any;
+          const d2 = d as any;
           const v = d2[k];
           delete d2[k];
           (newField as any)[k] = v;

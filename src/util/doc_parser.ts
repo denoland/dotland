@@ -37,7 +37,7 @@ function skipAlias(symbol: ts.Symbol, checker: ts.TypeChecker) {
 }
 
 const debug = false;
-function log(...args: Array<any>): void {
+function log(...args: any[]): void {
   if (debug) {
     console.log(...args);
   }
@@ -160,7 +160,7 @@ export class Parser {
         kind: "enum",
         docstr
       });
-      for (let m of node.members) {
+      for (const m of node.members) {
         const sym = this.checker.getSymbolAtLocation(m.name);
         const memberName = sym ? sym.getName() : "<unknown>";
         const memberDocstr = this.getFlatDocstr(sym);

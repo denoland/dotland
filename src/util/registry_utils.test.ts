@@ -1,5 +1,6 @@
 import DATABASE from "../database.json";
 import { proxy, getEntry } from "./registry_utils";
+/* eslint-env jest */
 
 test("check that the registry correctly handles std module", () => {
   expect(DATABASE["std"]).toBeTruthy();
