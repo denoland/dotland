@@ -24,7 +24,7 @@ darkTheme["hljs-selection"] = {
   backgroundColor: "#3a404b" // https://github.com/atom/one-dark-ui/blob/master/styles/ui-variables.less#L32
 };
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(_theme => ({
   copyButton: {
     position: "absolute",
     right: "2px",
@@ -63,7 +63,7 @@ function CodeBlock(props: SyntaxHighlighterProps) {
 
   function onContainerLeave() {
     clearTimeout(timer);
-    let timerId = setTimeout(() => {
+    const timerId = setTimeout(() => {
       setShowCopy(false);
     }, 500);
     setTimer(timerId);

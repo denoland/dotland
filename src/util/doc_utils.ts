@@ -17,26 +17,26 @@ export function main(rootModule: string, rootSource: string): DocEntry[] {
 class Host implements ts.CompilerHost {
   constructor(public rootModule: string, public rootSource: string) {}
 
-  getDefaultLibFileName(options: ts.CompilerOptions): string {
+  getDefaultLibFileName(_options: ts.CompilerOptions): string {
     return "";
   }
 
   getSourceFile(
     fileName: string,
     languageVersion: ts.ScriptTarget,
-    onError?: (message: string) => void,
-    shouldCreateNewSourceFile?: boolean
+    _onError?: (message: string) => void,
+    _shouldCreateNewSourceFile?: boolean
   ): ts.SourceFile | undefined {
     // console.log("getSourceFile", fileName);
     return ts.createSourceFile(fileName, this.rootSource, languageVersion);
   }
 
   writeFile(
-    fileName: string,
-    data: string,
-    writeByteOrderMark: boolean,
-    onError?: (message: string) => void,
-    sourceFiles?: ReadonlyArray<ts.SourceFile>
+    _fileName: string,
+    _data: string,
+    _writeByteOrderMark: boolean,
+    _onError?: (message: string) => void,
+    _sourceFiles?: readonly ts.SourceFile[]
   ): void {
     assert(false);
   }
@@ -58,12 +58,12 @@ class Host implements ts.CompilerHost {
     return "\n";
   }
 
-  fileExists(path: string): boolean {
+  fileExists(_path: string): boolean {
     // console.log("fileExists", path);
     return true;
   }
 
-  readFile(path: string, encoding?: string): string | undefined {
+  readFile(_path: string, _encoding?: string): string | undefined {
     assert(false);
     return "x";
   }

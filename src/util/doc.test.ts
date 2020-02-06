@@ -1,6 +1,5 @@
 import { main } from "./doc_utils";
-import { readFileSync } from "fs";
-import * as path from "path";
+/* eslint-env jest */
 
 test("basic", () => {
   const rootModule = "foo.ts";

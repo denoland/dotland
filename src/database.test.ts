@@ -1,4 +1,5 @@
 import DATABASE from "./database.json";
+/* eslint-env jest */
 
 test("a database entry of type github should have a owner and repo", () => {
   for (const key in DATABASE) {
@@ -20,7 +21,7 @@ test("a database entry should never have a path starting with /", () => {
 });
 
 test("database names with dashes are not allowed", () => {
-  for (let key in DATABASE) {
+  for (const key in DATABASE) {
     expect(key.includes("-")).toBeFalsy();
   }
 });
