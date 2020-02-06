@@ -47,6 +47,12 @@
     "repo": "noble-bls12-381",
     "desc": "bls12-381, a pairing-friendly elliptic curve construction."
   },
+  "buffer": {
+    "type": "github",
+    "owner": "socket-deno",
+    "repo": "buffer",
+    "desc": "Extreme buffer module for deno"
+  },
   "bwt": {
     "type": "github",
     "owner": "chiefbiiko",
