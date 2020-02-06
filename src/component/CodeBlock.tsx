@@ -66,7 +66,7 @@ function CodeBlock(props: SyntaxHighlighterProps) {
     const timerId = setTimeout(() => {
       setShowCopy(false);
     }, 500);
-    setTimer(timerId);
+    setTimer(timerId as any);
   }
 
   function onCopy() {
