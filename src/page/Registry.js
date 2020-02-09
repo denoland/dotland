@@ -217,7 +217,7 @@ async function renderDir(pathname, entry) {
           : `${entry.url}README.md`;
       try {
         const response = await fetch(rawUrl);
-        body = await response.text();
+        if (response.ok) body = await response.text();
       } catch (e) {
         // ignore
       }
