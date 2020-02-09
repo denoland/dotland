@@ -91,9 +91,7 @@ export default function Registry() {
     contentComponent = (
       <div>
         <ButtonGroup size="small" variant="text" color="primary">
-          <Button component={Link} to={state.repoUrl}>
-            Repository
-          </Button>
+          <Button to={state.repoUrl}>Repository</Button>
         </ButtonGroup>
         <br />
         <br />
@@ -113,24 +111,14 @@ export default function Registry() {
       <div>
         <ButtonGroup size="small" variant="text" color="primary">
           {isDocsPage ? (
-            <Button component={Link} to="?">
-              Source Code
-            </Button>
+            <Button to="?">Source Code</Button>
           ) : hasDocsAvailable ? (
-            <Button component={Link} to="?doc">
-              Documentation
-            </Button>
+            <Button to="?doc">Documentation</Button>
           ) : null}
           {state.repoUrl ? (
-            <Button component={Link} to={state.repoUrl}>
-              Repository
-            </Button>
+            <Button to={state.repoUrl}>Repository</Button>
           ) : null}
-          {state.rawUrl ? (
-            <Button component={Link} to={state.rawUrl}>
-              Raw
-            </Button>
-          ) : null}
+          {state.rawUrl ? <Button to={state.rawUrl}>Raw</Button> : null}
         </ButtonGroup>
         {(() => {
           if (isMarkdown) {
