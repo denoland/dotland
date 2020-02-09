@@ -1,7 +1,8 @@
 import React from "react";
-import { Box, ButtonGroup, Button } from "@material-ui/core";
+import { Box, ButtonGroup } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
-import Link from "../component/Link.tsx";
+import Link from "../component/Link";
+import Button from "../component/Button";
 import Spinner from "../component/Spinner";
 import Title from "../component/Title";
 import { proxy } from "../util/registry_utils";
@@ -89,7 +90,9 @@ export default function Registry() {
 
     contentComponent = (
       <div>
-        <Link to={state.repoUrl}>Repository</Link>
+        <ButtonGroup size="small" variant="text" color="primary">
+          <Button to={state.repoUrl}>Repository</Button>
+        </ButtonGroup>
         <br />
         <br />
         {body && <Markdown source={body} />}
@@ -108,14 +111,14 @@ export default function Registry() {
       <div>
         <ButtonGroup size="small" variant="text" color="primary">
           {isDocsPage ? (
-            <Button href="?">Source Code</Button>
+            <Button to="?">Source Code</Button>
           ) : hasDocsAvailable ? (
-            <Button href="?doc">Documentation</Button>
+            <Button to="?doc">Documentation</Button>
           ) : null}
           {state.repoUrl ? (
-            <Button href={state.repoUrl}>Repository</Button>
+            <Button to={state.repoUrl}>Repository</Button>
           ) : null}
-          {state.rawUrl ? <Button href={state.rawUrl}>Raw</Button> : null}
+          {state.rawUrl ? <Button to={state.rawUrl}>Raw</Button> : null}
         </ButtonGroup>
         {(() => {
           if (isMarkdown) {

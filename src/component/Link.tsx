@@ -22,6 +22,6 @@ export default function Link(props: Props) {
   );
 }
 
-function isExternal(url: string): boolean {
+export function isExternal(url: string): boolean {
   return url.startsWith("http://") || url.startsWith("https://");
 }
