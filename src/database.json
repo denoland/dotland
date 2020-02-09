@@ -610,6 +610,12 @@
     "repo": "deno-pretty-assert",
     "desc": "This package has already moved to https://github.com/denoland/deno_std/tree/master/testing."
   },
+  "pretty_bytes": {
+    "type": "github",
+    "owner": "brunnerlivio",
+    "repo": "deno-pretty-bytes",
+    "desc": "The Deno implementation of sindresorhus/pretty-bytes. Convert bytes to a human readable string: 1337 → 1.34 kB"
+  },
   "prettystring": {
     "type": "github",
     "owner": "OnikurYH",
