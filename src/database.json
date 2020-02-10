@@ -367,12 +367,12 @@
     "path": "src/",
     "desc": ""
   },
-   "fp-ts": {
+   "fp_ts": {
     "type": "github",
     "owner": "gcanti",
     "repo": "fp-ts",
     "path": "src/",
-    "desc": "Functional programming in TypeScript "
+    "desc": "Functional programming in TypeScript"
   },
   "free_port": {
     "type": "github",
