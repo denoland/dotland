@@ -409,6 +409,12 @@
     "repo": "deno_install",
     "desc": "One-line commands to install Deno on your system."
   },
+  "interpreter": {
+    "type": "github",
+    "owner": "lynellf",
+    "repo": "Interpreter",
+    "desc": "Interprets a description of your application and handles the rest."
+  },
   "is": {
     "type": "github",
     "owner": "justjavac",
