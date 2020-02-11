@@ -95,12 +95,12 @@ export default function Registry() {
         </ButtonGroup>
         <br />
         <br />
+        {body && <Markdown source={body} />}
         {entries.length > 0 && (
           <table>
             <tbody>{entries}</tbody>
           </table>
         )}
-        {body && <Markdown source={body} />}
       </div>
     );
   } else {
@@ -209,24 +209,25 @@ async function renderDir(pathname, entry) {
       target: entry.target // symlink only
     }));
 
-    let body;
+    if (entryType === "esm") {
+      let body;
 
-    // no useful files exist in the repository, so opt to attempt
-    // showing the contents of the README file instead if it exists.
-    if (files.some(entry => entry.name === "README.md")) {
-      const rawUrl =
-        entryType === "esm"
-          ? `${entry.url}${path}README.md`
-          : `${entry.url}README.md`;
-      try {
-        const response = await fetch(rawUrl);
-        if (response.ok) body = await response.text();
-      } catch (e) {
-        // ignore
+      // no useful files exist in the repository, so opt to attempt
+      // showing the contents of the README file instead if it exists.
+      if (files.some(entry => entry.name === "README.md")) {
+        const rawUrl = `${entry.url}${path}README.md`;
+        try {
+          const response = await fetch(rawUrl);
+          body = await response.text();
+        } catch (e) {
+          // ignore
+        }
       }
+
+      return { body, files: [] };
     }
 
-    return { body, files };
+    return { files };
   }
 
   return {
