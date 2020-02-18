@@ -598,6 +598,12 @@
     "repo": "deno_pool",
     "desc": "A generic resource pool management library"
   },
+   "portl": {
+    "type": "github",
+    "owner": "FalkZ",
+    "repo": "portl",
+    "desc": "0 configuration backend, for serving js functions and generators"
+  },
   "postgres": {
     "type": "github",
     "owner": "buildondata",
