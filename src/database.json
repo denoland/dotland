@@ -785,6 +785,12 @@
     "repo": "deno-task-runner",
     "desc": "deno-task-runner"
   },
+  "task_runner_v2: {
+    "type": "github",
+    "owner": "ebebbington",
+    "repo": "deno-task-runner",
+    "desc": "deno-task-runner but with someone maintaining it"
+  },
   "tiny_templates": {
     "type": "github",
     "owner": "zekth",
