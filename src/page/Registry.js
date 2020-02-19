@@ -23,7 +23,15 @@ export default function Registry() {
   const firstSelectedLine = React.useRef(null);
   React.useEffect(() => {
     setIsLoading(true);
-    const { entry, path } = proxy(pathname);
+    const x = proxy(pathname);
+    if (!x || !x.entry) {
+      setState({
+        contents: "Module not found in database."
+      });
+      setIsLoading(false);
+      return;
+    }
+    const { entry, path } = x;
     console.log({ path });
     if (!path || path.endsWith("/")) {
       // Render dir.
@@ -134,9 +142,11 @@ export default function Registry() {
               <CodeBlock
                 showLineNumbers={true}
                 value={state.contents}
-                language={state.rawUrl.substr(
-                  state.rawUrl.lastIndexOf(".") + 1
-                )}
+                language={
+                  state.rawUrl
+                    ? state.rawUrl.substr(state.rawUrl.lastIndexOf(".") + 1)
+                    : "text"
+                }
                 lineProps={lineNumber => {
                   const lineProps = {};
                   if (
