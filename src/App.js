@@ -42,14 +42,26 @@ function App() {
             <Route path="/style_guide(.html)?">
               <Redirect to="/std/style_guide.md" />
             </Route>
+            <Route path="/std/" component={Registry} strict />
             <Route path="/std/:stdPath" component={Registry} />
-            <Route path="/std/" component={Registry} />
+            <Route path="/std@:stdVersion/" component={Registry} strict />
             <Route path="/std@:stdVersion/:stdPath" component={Registry} />
-            <Route path="/std@:stdVersion/" component={Registry} />
-            <Route path="/x/:mod@:modVersion/:modPath" component={Registry} />
+            <Route path="/std" component={AddTrailingSlash} strict />
+            <Route
+              path="/std@:stdVersion"
+              component={AddTrailingSlash}
+              strict
+            />
+            <Route path="/x/:mod/" component={Registry} strict />
             <Route path="/x/:mod/:modPath" component={Registry} />
-            <Route path="/x/:mod" component={Registry} />
-            <Route path="/x/:mod@:modVersion" component={Registry} />
+            <Route path="/x/:mod@:modVersion/" component={Registry} strict />
+            <Route path="/x/:mod@:modVersion/:modPath" component={Registry} />
+            <Route path="/x/:mod" component={AddTrailingSlash} strict />
+            <Route
+              path="/x/:mod@:modVersion"
+              component={AddTrailingSlash}
+              strict
+            />
             <Route
               path="/x/"
               render={() => (
@@ -57,6 +69,7 @@ function App() {
                   <RegistryIndex />
                 </Suspense>
               )}
+              exact
             />
             <Route
               exact
@@ -81,5 +94,9 @@ function App() {
     </BrowserRouter>
   );
 }
+
+const AddTrailingSlash = ({ location: { pathname } }) => (
+  <Redirect to={`${pathname}/`} />
+);
 
 export default App;
