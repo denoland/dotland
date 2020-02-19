@@ -227,7 +227,7 @@ async function renderDir(pathname, entry) {
       const rawUrl =
         entryType === "esm"
           ? `${entry.url}${path}README.md`
-          : `${entry.url}README.md`;
+          : `https://raw.githubusercontent.com/${owner}/${repo}/${entry.branch}/${path}README.md`;
       try {
         const response = await fetch(rawUrl);
         if (response.ok) body = await response.text();
