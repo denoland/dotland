@@ -785,6 +785,12 @@
     "repo": "deno-task-runner",
     "desc": "deno-task-runner"
   },
+  "task_runner_v2": {
+    "type": "github",
+    "owner": "ebebbington",
+    "repo": "deno-task-runner-v2",
+    "desc": "deno-task-runner-v2"
+  },
   "tiny_templates": {
     "type": "github",
     "owner": "zekth",
@@ -827,6 +833,12 @@
     "owner": "jinjor",
     "repo": "deno-watch",
     "desc": "A pure deno file watcher."
+  },
+  "watch_v2": {
+    "type": "github",
+    "owner": "ebebbington",
+    "repo": "deno-watch-v2",
+    "desc": "deno-watch-v2"
   },
   "xchacha20": {
     "type": "github",
