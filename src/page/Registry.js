@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, ButtonGroup } from "@material-ui/core";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import Link from "../component/Link";
 import Button from "../component/Button";
 import Spinner from "../component/Spinner";
@@ -12,6 +12,7 @@ const Markdown = React.lazy(() => import("../component/Markdown"));
 const Docs = React.lazy(() => import("../component/Docs"));
 
 export default function Registry() {
+  const history = useHistory();
   const [isLoading, setIsLoading] = React.useState(true);
   const [state, setState] = React.useState({
     contents: null,
@@ -47,6 +48,15 @@ export default function Registry() {
       const repoUrl = `${entry.repo}${path}`;
       console.log("fetch", rawUrl);
       fetch(rawUrl).then(async response => {
+        if (response.status === 404) {
+          try {
+            await renderDir(path, entry);
+            history.replace(path + "/");
+          } catch {
+            console.log("also not a directory", path);
+          }
+        }
+
         const m = await response.text();
         setState({
           contents: m,
@@ -59,7 +69,7 @@ export default function Registry() {
         }
       });
     }
-  }, [pathname]);
+  }, [pathname, history]);
 
   const lineSelectionRangeMatch = hash.match(/^#L(\d+)(?:-L(\d+))?$/) || [];
   lineSelectionRangeMatch.shift(); // Get rid of complete match
