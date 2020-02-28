@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "dev": "NODE_ENV=development npm run build",
-    "format": "prettier --write '**/*.{ts,js,css,json,md}'",
+    "format": "prettier --write 'src/**/*.{ts,js,css,json,md}'",
     "test:clean": "rimraf ./transpiled/shared ./transpiled/worker",
     "test": "npm run test:clean && npm run transpile && mocha --require source-map-support/register --recursive transpiled/worker/test",
     "transpile": "tsc --project ./test"
