@@ -49,7 +49,7 @@ export default function RegistryIndex() {
 
       <p>
         To add to this list, edit{" "}
-        <Link to="https://github.com/denoland/deno_website2/blob/master/src/database.json">
+        <Link to="https://github.com/denoland/deno_website2/blob/master/shared/database.json">
           database.json
         </Link>
         .

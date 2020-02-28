@@ -42,6 +42,7 @@ jobs:
           environment: 'production'
           apiKey: ${{ secrets.cloudflareKey }}
           email: ${{ secrets.email }}
+          workingDirectory: ${{env.working-directory}}
       - name: Publish Staging
         if: github.event_name == 'push' && github.repository == 'denoland/deno_website2'
         uses: cloudflare/wrangler-action@1.0.0
@@ -49,3 +50,4 @@ jobs:
           environment: 'staging'
           apiKey: ${{ secrets.cloudflareKey }}
           email: ${{ secrets.email }}
+          workingDirectory: ${{env.working-directory}}
