@@ -184,7 +184,8 @@
     "type": "github",
     "owner": "date-fns",
     "repo": "date-fns",
-    "path": "src/"
+    "path": "src/",
+    "desc": "Modern JavaScript date utility library"
   },
   "deamon": {
     "type": "github",
@@ -293,7 +294,7 @@
     "owner": "drashland",
     "repo": "deno-drash",
     "desc": "A REST microframework for Deno."
-   },
+  },
   "dso": {
     "type": "github",
     "owner": "manyuanrong",
@@ -604,7 +605,7 @@
     "repo": "deno_pool",
     "desc": "A generic resource pool management library"
   },
-   "portl": {
+  "portl": {
     "type": "github",
     "owner": "FalkZ",
     "repo": "portl",
@@ -694,7 +695,7 @@
     "repo": "deno-semver",
     "desc": "A fork of node-semver using TypeScript"
   },
-   "servicr": {
+  "servicr": {
     "type": "github",
     "owner": "astanciu",
     "repo": "deno_servicr",

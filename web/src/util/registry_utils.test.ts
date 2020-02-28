@@ -1,5 +1,5 @@
 import DATABASE from "../database.json";
-import { proxy, getEntry } from "./registry_utils";
+import { proxy, getEntry } from "../../../shared/registry_utils";
 /* eslint-env jest */
 
 test("check that the registry correctly handles std module", () => {

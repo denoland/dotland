@@ -3,17 +3,30 @@ name: ci
 on: [push, pull_request]
 
 jobs:
-  build:
+  website:
     runs-on: ubuntu-latest
+    env:
+      working-directory: web
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
         with:
           node-version: 12
       - run: yarn --frozen-lockfile
+        working-directory: ${{env.working-directory}}
       - run: yarn run lint
+        working-directory: ${{env.working-directory}}
       - run: yarn format --check
+        working-directory: ${{env.working-directory}}
       - run: CI=true yarn test
+        working-directory: ${{env.working-directory}}
+  worker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
       - name: Publish Production
         if: github.ref == 'refs/heads/master' && github.event_name == 'push' && github.repository == 'denoland/deno_website2'
         uses: cloudflare/wrangler-action@1.0.0

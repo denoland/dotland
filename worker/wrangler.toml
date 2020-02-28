@@ -1,0 +1,6 @@
+name = "deno_website2"
+type = "webpack"
+account_id = ""
+workers_dev = true
+route = ""
+zone_id = ""
