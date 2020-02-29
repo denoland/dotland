@@ -288,6 +288,12 @@
     "repo": "deno-dotenv",
     "desc": "Dotenv handling for deno."
   },
+  "drake": {
+    "type": "github",
+    "owner": "srackham",
+    "repo": "drake",
+    "desc": "Drake, a Make-like task runner for Deno inspired by Make, Rake and Jake."
+  },
   "drash": {
     "type": "github",
     "owner": "drashland",
