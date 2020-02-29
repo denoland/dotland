@@ -676,6 +676,12 @@
     "repo": "reno",
     "desc": "A thin, testable routing library designed to sit on top of Deno's standard HTTP module"
   },
+  "rimu": {
+    "type": "github",
+    "owner": "srackham",
+    "repo": "rimu-deno",
+    "desc": "Rimu, a readable text markup language inspired by AsciiDoc and Markdown."
+  },
   "ripemd160": {
     "type": "github",
     "owner": "paulmillr",
