@@ -10,8 +10,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write '**/*.md' '{worker,src}/**/*.{js,ts,jsx,tsx}' 'public/**/*.html'",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx src/ worker/"
+    "format": "prettier --write '**/*.md' 'src/**/*.{js,ts,jsx,tsx}' 'public/**/*.html'",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx src/"
   },
   "devDependencies": {
     "@testing-library/react": "^9.3.0",
