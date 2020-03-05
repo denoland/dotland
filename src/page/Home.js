@@ -129,7 +129,7 @@ function Home() {
       </p>
 
       <p>
-        <Link to="https://gitter.im/denolife/Lobby">Community Chat Room</Link>
+        <Link to="https://discord.gg/TGMHGv6">Community Chat Room</Link>
       </p>
 
       <p>
