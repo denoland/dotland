@@ -114,9 +114,9 @@ export default function Benchmarks() {
   const { search } = useLocation();
 
   React.useEffect(() => {
-    let dataUrl = "https://denoland.github.io/deno/recent.json";
+    let dataUrl = "https://denoland.github.io/benchmark_data/recent.json";
     if (search.includes("all")) {
-      dataUrl = "https://denoland.github.io/deno/data.json";
+      dataUrl = "https://denoland.github.io/benchmark_data/data.json";
     }
 
     fetch(dataUrl).then(async response => {
