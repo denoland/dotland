@@ -881,5 +881,11 @@
     "owner": "chiefbiiko",
     "repo": "xchacha20-poly1305",
     "desc": "XChaCha20-Poly1305 as defined by the XChaCha20 IRTF CFRG draft, and IETF RFC 8439"
+  }, 
+  "deno_chalk": {
+    "type": "github",
+    "owner": "AvexCodes",
+    "repo": "denochalk",
+    "desc": "Style your console with colours and backgrounds like a boss, with Deno Chalk!"
   }
 }
