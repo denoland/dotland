@@ -19,6 +19,7 @@ export default function Registry() {
     dir: null
   });
   const { pathname, search, hash } = useLocation();
+  
   const firstSelectedLine = React.useRef(null);
   React.useEffect(() => {
     setIsLoading(true);
