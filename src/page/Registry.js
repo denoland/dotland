@@ -72,7 +72,7 @@ export default function Registry() {
   }, [pathname, history]);
   const lineSelectionRangeMatch =
     hash.match(/^#L(\d+)(?:-L(\d+))?$/) ||
-    handleAltLineRef(pathname).match(/.*\#L(\d+)/) ||
+    handleAltLineRef(pathname).match(/.*#L(\d+)/) ||
     [];
   lineSelectionRangeMatch.shift(); // Get rid of complete match
   // Handle highlighting "#LX" (same as range [X, X])
