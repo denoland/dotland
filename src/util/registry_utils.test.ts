@@ -60,3 +60,23 @@ test("proxy2", () => {
     path: "foo/bar.js"
   });
 });
+
+test("proxy3", () => {
+  const r = proxy("/x/install@v0.1.2/foo/bar.js:100:10");
+  expect(r).toEqual({
+    entry: {
+      name: "install",
+      branch: "v0.1.2",
+      type: "github",
+      raw: {
+        type: "github",
+        owner: "denoland",
+        repo: "deno_install",
+        desc: "One-line commands to install Deno on your system."
+      },
+      url: "https://raw.githubusercontent.com/denoland/deno_install/v0.1.2/",
+      repo: "https://github.com/denoland/deno_install/tree/v0.1.2/"
+    },
+    path: "foo/bar.js#L100"
+  });
+});

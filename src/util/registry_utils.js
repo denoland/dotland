@@ -11,7 +11,7 @@ export function proxy(pathname) {
   const nameBranchRest = pathname.replace(/^\/x\//, "");
   const [nameBranch, ...rest] = nameBranchRest.split("/");
   const [name, branch] = nameBranch.split("@", 2);
-  const path = rest.join("/");
+  const path = handleAltLineRef(rest.join("/"));
   const entry = getEntry(name, branch);
   if (!entry || !entry.url) {
     return null;
@@ -90,4 +90,17 @@ export function getEntry(name, branch = "master") {
     };
   }
   return null;
+}
+
+export function handleAltLineRef(rawPath) {
+  // handle paths that contain alternate line # references,
+  // such as example.ts:100:10.
+  const hasAltLineRef = /(.*\.[\w]*)(:.*)/.test(rawPath);
+  if (!hasAltLineRef) {
+    return rawPath;
+  }
+  const pathGroup = rawPath.match(/(.*\.[\w]*)(:.*)/)[1];
+  const lineRefGroup = rawPath.match(/(.*\.[\w]*)(:.*)/)[2];
+  const lineRef = lineRefGroup.match(/^:(\d+)/)[1];
+  return `${pathGroup}#L${lineRef}`;
 }

@@ -5,7 +5,7 @@ import Link from "../component/Link";
 import Button from "../component/Button";
 import Spinner from "../component/Spinner";
 import Title from "../component/Title";
-import { proxy } from "../util/registry_utils";
+import { proxy, handleAltLineRef } from "../util/registry_utils";
 
 const CodeBlock = React.lazy(() => import("../component/CodeBlock"));
 const Markdown = React.lazy(() => import("../component/Markdown"));
@@ -70,8 +70,10 @@ export default function Registry() {
       });
     }
   }, [pathname, history]);
-
-  const lineSelectionRangeMatch = hash.match(/^#L(\d+)(?:-L(\d+))?$/) || [];
+  const lineSelectionRangeMatch =
+    hash.match(/^#L(\d+)(?:-L(\d+))?$/) ||
+    handleAltLineRef(pathname).match(/.*\#L(\d+)/) ||
+    [];
   lineSelectionRangeMatch.shift(); // Get rid of complete match
   // Handle highlighting "#LX" (same as range [X, X])
   if (
