@@ -833,6 +833,12 @@
     "repo": "deno_tokenizer",
     "desc": "A simple tokenizer for deno."
   },
+  "udd": {
+    "type": "github",
+    "owner": "hayd",
+    "repo": "deno-udd",
+    "desc": "Update Deno Dependencies to their latest published versions"
+  },
   "unexpected": {
     "type": "esm",
     "owner": "unexpectedjs",
