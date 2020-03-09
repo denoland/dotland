@@ -385,6 +385,12 @@
     "repo": "gardens",
     "desc": "Using gardens makes it easier to handle your log output and debugging code by giving you the ability to break your output into named scopes"
   },
+  "gentleRpc": {
+    "type": "github",
+    "owner": "timonson",
+    "repo": "gentleRpc",
+    "desc": "JSON-RPC 2.0 TypeScript library for deno and browser."
+  },
   "hchacha20": {
     "type": "github",
     "owner": "chiefbiiko",
