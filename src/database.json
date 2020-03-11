@@ -53,6 +53,12 @@
     "repo": "buffer",
     "desc": "Extreme buffer module for deno"
   },
+  "bump": {
+    "type": "github",
+    "owner": "iamnathanj",
+    "repo": "bump",
+    "desc": "Versioning and tagging tool for Deno projects"
+  },
   "bwt": {
     "type": "github",
     "owner": "chiefbiiko",
