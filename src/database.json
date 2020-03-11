@@ -882,6 +882,12 @@
     "repo": "deno-watch-v2",
     "desc": "deno-watch-v2"
   },
+  "webview": {
+    "type": "github",
+    "owner": "eliassjogreen",
+    "repo": "deno_webview",
+    "desc": "Deno bindings for webview, a tiny library for creating web-based desktop GUIs "
+  },
   "xchacha20": {
     "type": "github",
     "owner": "chiefbiiko",
