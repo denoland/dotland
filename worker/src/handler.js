@@ -1,15 +1,10 @@
-import { proxy } from "../src/util/registry_utils";
+import { proxy } from "../../web/src/util/registry_utils";
 
 // const REMOTE_URL = "https://deno.land";
 const REMOTE_URL = "https://denoland.netlify.com";
 const S3_REMOTE_URL = "http://deno.land.s3-website-us-east-1.amazonaws.com";
 
-addEventListener("fetch", event => {
-  console.log("proxy", proxy);
-  event.respondWith(handleRequest(event.request));
-});
-
-async function handleRequest(request) {
+export async function handleRequest(request) {
   const accept = request.headers.get("accept");
   // console.log("accept header", accept);
   const isHtml = accept && accept.indexOf("html") >= 0;
@@ -55,5 +50,6 @@ function redirect(url, remoteUrl, request) {
   const urlR = remoteUrl + url.pathname;
   console.log(`Proxy ${url} to ${urlR}`);
   const modifiedRequest = new Request(urlR, init);
+  console.log("modifiedRequest", modifiedRequest.url);
   return fetch(modifiedRequest);
 }

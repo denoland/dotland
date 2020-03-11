@@ -3,7 +3,7 @@ name: ci
 on: [push, pull_request]
 
 jobs:
-  build:
+  website:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -11,9 +11,24 @@ jobs:
         with:
           node-version: 12
       - run: yarn --frozen-lockfile
+        working-directory: web
       - run: yarn run lint
+        working-directory: web
       - run: yarn format --check
+        working-directory: web
       - run: CI=true yarn test
+        working-directory: web
+  worker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: yarn --frozen-lockfile
+        working-directory: worker
+      - run: yarn format --check
+        working-directory: worker
       - name: Publish Production
         if: github.ref == 'refs/heads/master' && github.event_name == 'push' && github.repository == 'denoland/deno_website2'
         uses: cloudflare/wrangler-action@1.0.0
@@ -21,6 +36,7 @@ jobs:
           environment: 'production'
           apiKey: ${{ secrets.cloudflareKey }}
           email: ${{ secrets.email }}
+          workingDirectory: worker
       - name: Publish Staging
         if: github.event_name == 'push' && github.repository == 'denoland/deno_website2'
         uses: cloudflare/wrangler-action@1.0.0
@@ -28,3 +44,4 @@ jobs:
           environment: 'staging'
           apiKey: ${{ secrets.cloudflareKey }}
           email: ${{ secrets.email }}
+          workingDirectory: worker
