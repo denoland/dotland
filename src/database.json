@@ -580,6 +580,12 @@
     "repo": "oak",
     "desc": "A middleware framework for Deno's http server, including a router middleware."
   },
+  "open": {
+    "type": "github",
+    "owner": "SkoshRG",
+    "repo": "deno-open",
+    "desc": "A package for opening URLs, files and executables."
+  },
   "panoptes": {
     "type": "github",
     "owner": "TokenChingy",
