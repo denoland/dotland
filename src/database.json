@@ -288,6 +288,12 @@
     "repo": "docable",
     "desc": "An open-source doc block parser for generating documenation as JSON."
   },
+  "docopt": {
+    "type": "github",
+    "owner": "eyal-shalev",
+    "repo": "docopt.js",
+    "desc": "The command line option parser, that will make you smile."
+  },
   "dotenv": {
     "type": "github",
     "owner": "pietvanzoen",
