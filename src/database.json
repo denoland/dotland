@@ -228,6 +228,12 @@
     "repo": "deno",
     "desc": "A secure runtime for JavaScript and TypeScript."
   },
+   "deno_chalk": {
+    "type:" "github",
+    "owner": "avexcodes",
+    "repo": "denochalk",
+    "desc": "Allows you to add colour, and styling to your console!"
+  },
   "deno_gui": {
     "type": "github",
     "owner": "fakoua",
