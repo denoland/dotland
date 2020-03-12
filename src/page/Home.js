@@ -4,7 +4,7 @@ import CodeBlock from "../component/CodeBlock";
 import Title from "../component/Title";
 import "./Home.css";
 
-const code = `import { serve } from "https://deno.land/std@v0.30.0/http/server.ts";
+const code = `import { serve } from "https://deno.land/std@v0.36.0/http/server.ts";
 const s = serve({ port: 8000 });
 console.log("http://localhost:8000/");
 for await (const req of s) {
