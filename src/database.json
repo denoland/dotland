@@ -244,6 +244,7 @@
     "type": "github",
     "owner": "galkowskit",
     "repo": "denofun",
+    "path": "lib",
     "desc": "Small utility library for Deno containing functions, monads and other fun stuff."
   },
   "denoget": {
