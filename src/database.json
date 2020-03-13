@@ -796,6 +796,13 @@
     "repo": "soxa",
     "desc": "Promise based HTTP client for deno"
   },
+  "sparkpost": {
+    "type": "github",
+    "owner": "hayd",
+    "path": "lib/",
+    "repo": "deno-sparkpost",
+    "desc": "SparkPost email client library for deno"
+  },
   "sql_builder": {
     "type": "github",
     "owner": "manyuanrong",
