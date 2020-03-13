@@ -593,6 +593,12 @@
     "repo": "oak",
     "desc": "A middleware framework for Deno's http server, including a router middleware."
   },
+  "once": {
+    "type": "github",
+    "owner": "KSXGitHub",
+    "repo": "deno-once",
+    "desc": "Create a function that calls and cache a function once"
+  },
   "open": {
     "type": "github",
     "owner": "SkoshRG",
