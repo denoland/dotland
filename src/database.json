@@ -167,6 +167,12 @@
     "repo": "deno_cross_env",
     "desc": "A tool for setting environment variables across platforms"
   },
+  "cursor": {
+    "type": "github",
+    "owner": "iamnathanj",
+    "repo": "cursor",
+    "desc": "ANSI control sequences for your terminal cursor"
+  },
   "cursornext": {
     "type": "github",
     "owner": "clitetailor",
