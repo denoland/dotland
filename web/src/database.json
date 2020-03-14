@@ -53,6 +53,12 @@
     "repo": "buffer",
     "desc": "Extreme buffer module for deno"
   },
+  "bump": {
+    "type": "github",
+    "owner": "iamnathanj",
+    "repo": "bump",
+    "desc": "Versioning and tagging tool for Deno projects"
+  },
   "bwt": {
     "type": "github",
     "owner": "chiefbiiko",
@@ -161,6 +167,12 @@
     "repo": "deno_cross_env",
     "desc": "A tool for setting environment variables across platforms"
   },
+  "cursor": {
+    "type": "github",
+    "owner": "iamnathanj",
+    "repo": "cursor",
+    "desc": "ANSI control sequences for your terminal cursor"
+  },
   "cursornext": {
     "type": "github",
     "owner": "clitetailor",
@@ -238,6 +250,7 @@
     "type": "github",
     "owner": "galkowskit",
     "repo": "denofun",
+    "path": "lib",
     "desc": "Small utility library for Deno containing functions, monads and other fun stuff."
   },
   "denoget": {
@@ -281,6 +294,12 @@
     "owner": "crookse",
     "repo": "docable",
     "desc": "An open-source doc block parser for generating documenation as JSON."
+  },
+  "docopt": {
+    "type": "github",
+    "owner": "eyal-shalev",
+    "repo": "docopt.js",
+    "desc": "The command line option parser, that will make you smile."
   },
   "dotenv": {
     "type": "github",
@@ -559,7 +578,7 @@
     "type": "github",
     "owner": "ianfabs",
     "repo": "nanoid",
-    "desc": "A tiny, secure, URL-friendly, unique string ID generator for JavaScript."
+    "desc": "A tiny, secure, URL-friendly, unique string ID generator for JavaScript."
   },
   "normalize_diacritics": {
     "type": "github",
@@ -573,6 +592,18 @@
     "owner": "oakserver",
     "repo": "oak",
     "desc": "A middleware framework for Deno's http server, including a router middleware."
+  },
+  "once": {
+    "type": "github",
+    "owner": "KSXGitHub",
+    "repo": "deno-once",
+    "desc": "Create a function that calls and cache a function once"
+  },
+  "open": {
+    "type": "github",
+    "owner": "SkoshRG",
+    "repo": "deno-open",
+    "desc": "A package for opening URLs, files and executables."
   },
   "panoptes": {
     "type": "github",
@@ -777,6 +808,13 @@
     "owner": "fakoua",
     "repo": "soxa",
     "desc": "Promise based HTTP client for deno"
+  },
+  "sparkpost": {
+    "type": "github",
+    "owner": "hayd",
+    "path": "lib/",
+    "repo": "deno-sparkpost",
+    "desc": "SparkPost email client library for deno"
   },
   "sql_builder": {
     "type": "github",
