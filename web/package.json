@@ -42,7 +42,7 @@
     "react-scripts": "^3.3.1",
     "react-syntax-highlighter": "^12.2.1",
     "remark-toc": "^7.0.0",
-    "typescript": "^3.8.3"
+    "typescript": "~3.7.4"
   },
   "eslintConfig": {
     "extends": "react-app"
