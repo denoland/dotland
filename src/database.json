@@ -708,6 +708,13 @@
     "repo": "deno_process",
     "desc": "process module for Deno"
   },
+  "protobuf": {
+    "type": "github",
+    "owner": "seishun",
+    "repo": "deno-protobuf",
+    "path": "runtime/",
+    "desc": "Protocol Buffers - Google's data interchange format"
+  },
   "purify": {
     "type": "github",
     "owner": "aynik",
