@@ -429,6 +429,12 @@
     "repo": "hmac",
     "desc": "Convenience function for macing singular data. hash should be one of sha1, sha256, or sha512"
   },
+  "http_server": {
+    "type": "github",
+    "owner": "SkoshRG",
+    "repo": "http-server",
+    "desc": "http-server is a tiny and zero-configuration HTTP server with useful features to serve static files with Deno"
+  },
   "humanizer.ts": {
     "type": "github",
     "owner": "fakoua",
