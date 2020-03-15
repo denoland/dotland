@@ -705,7 +705,7 @@
     "type": "github",
     "owner": "seishun",
     "repo": "deno-protobuf",
-    "path": "/runtime",
+    "path": "runtime/",
     "desc": "Protocol Buffers - Google's data interchange format"
   },
   "purify": {
