@@ -15,7 +15,7 @@
     "type": "github",
     "owner": "KSXGitHub",
     "repo": "deno-args",
-    "path": "lib",
+    "path": "lib/",
     "desc": "Extensible CLI arguments parser for Deno with intelligent TypeScript inference"
   },
   "arkoren": {
@@ -257,7 +257,7 @@
     "type": "github",
     "owner": "galkowskit",
     "repo": "denofun",
-    "path": "lib",
+    "path": "lib/",
     "desc": "Small utility library for Deno containing functions, monads and other fun stuff."
   },
   "denoget": {
