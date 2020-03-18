@@ -138,6 +138,12 @@
     "repo": "cli-spinners",
     "desc": "Awesome deno terminal spinners"
   },
+  "cliffy": {
+    "type": "github",
+    "owner": "c4spar",
+    "repo": "deno-cliffy",
+    "desc": "Command line framework for Deno."
+  },
   "clipboard": {
     "type": "github",
     "owner": "rsp",
