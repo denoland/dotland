@@ -30,3 +30,9 @@ test("database names should be sorted alphabetically", () => {
   const sortedNames = Object.keys(DATABASE).sort();
   expect(sortedNames).toEqual(Object.keys(DATABASE));
 });
+
+test("a database path (if any) should ends with a trailing slash", () => {
+  const invalidEntries = Object.entries(DATABASE)
+    .filter(([_, value]) => "path" in value && !value.path.endsWith("/"));
+  expect(invalidEntries).toEqual([]);
+})
