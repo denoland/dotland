@@ -272,6 +272,12 @@
     "repo": "denoget",
     "desc": "denoget installs executable deno script."
   },
+  "denomander": {
+    "type": "github",
+    "owner": "siokas",
+    "repo": "denomander",
+    "desc": "Deno command-line interfaces inspired from commander.js"
+  },
   "denon": {
     "type": "github",
     "owner": "eliassjogreen",
