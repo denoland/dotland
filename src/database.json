@@ -811,6 +811,12 @@
     "repo": "sha512",
     "desc": "SHA2-512 for deno."
   },
+  "simple_type_assert": {
+    "type": "github",
+    "owner": "KSXGitHub",
+    "repo": "deno_simple_type_assert",
+    "desc": "Simple type assertion library for Deno."
+  },
   "siphash24": {
     "type": "github",
     "owner": "chiefbiiko",
