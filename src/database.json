@@ -527,6 +527,12 @@
     "repo": "deno-lib",
     "desc": "A collection of useful Typescript libraries for Deno"
   },
+  "libhydrogen": {
+    "type": "github",
+    "owner": "chiefbiiko",
+    "repo": "deno-libhydrogen",
+    "desc": "deno plugin 2 libhydrogen"
+  },
   "license_checker": {
     "type": "github",
     "owner": "kt3k",
