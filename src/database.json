@@ -915,6 +915,12 @@
     "repo": "deno_tokenizer",
     "desc": "A simple tokenizer for deno."
   },
+  "tree": {
+    "type": "github",
+    "owner": "KSXGitHub",
+    "repo": "deno-tree",
+    "desc": "Traverse filesystem tree"
+  },
   "udd": {
     "type": "github",
     "owner": "hayd",
