@@ -489,6 +489,12 @@
     "repo": "jpeg.ts",
     "desc": "A pure TypeScript JPEG encoder and decoder for deno."
   },
+  "js_yaml_port": {
+    "type": "github",
+    "owner": "KSXGitHub",
+    "repo": "simple-js-yaml-port-for-deno",
+    "desc": "A simple port of JS-YAML for Deno"
+  },
   "json_rpc": {
     "type": "github",
     "owner": "ondras",
