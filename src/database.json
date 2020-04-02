@@ -993,5 +993,11 @@
     "owner": "chiefbiiko",
     "repo": "xchacha20-poly1305",
     "desc": "XChaCha20-Poly1305 as defined by the XChaCha20 IRTF CFRG draft, and IETF RFC 8439"
+  },
+  "yaml_wasm": {
+    "type": "github",
+    "owner": "KSXGitHub",
+    "repo": "yaml-wasm",
+    "desc": "WebAssembly module to parse YAML"
   }
 }
