@@ -575,6 +575,12 @@
     "repo": "deno_math",
     "desc": "The math module is used to provide a helper for high-precision calculations and scientific computing."
   },
+  "media_types": {
+    "type": "github",
+    "owner": "oakserver",
+    "repo": "media_types",
+    "desc": "A module that assists in resolving media types and extensions."
+  },
   "minimatch": {
     "type": "github",
     "owner": "chrisdothtml",
