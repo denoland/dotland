@@ -22,42 +22,10 @@ interface HeadingRendererProps {
   level?: any;
 }
 
-const allowedTags = [
-  "h3",
-  "h4",
-  "h5",
-  "h6",
-  "blockquote",
-  "p",
-  "ul",
-  "ol",
-  "nl",
-  "li",
-  "b",
-  "i",
-  "strong",
-  "em",
-  "strike",
-  "code",
-  "hr",
-  "br",
-  "div",
-  "table",
-  "thead",
-  "caption",
-  "tbody",
-  "tr",
-  "th",
-  "td",
-  "pre"
-];
-
 // We want to allow HTML in markdown, but not anything unsafe like script tags.
 // https://github.com/aknuds1/html-to-react#with-custom-processing-instructions
 const parseHtml = htmlParser({
-  isValidNode: (node: any) => {
-    return allowedTags.indexOf(node.type.toLowerCase()) >= 0;
-  }
+  isValidNode: node => node.type !== 'script',
 });
 
 function flatten(text: any, child: any) {
