@@ -10,7 +10,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write '**/*.md' '{worker,src}/**/*.{js,ts,jsx,tsx}' 'public/**/*.html'",
+    "format": "yarn format_check --write",
+    "format_check": "prettier --check **/*.md {worker,src}/**/*.{js,ts,jsx,tsx} public/**/*.html",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src/ worker/"
   },
   "devDependencies": {
