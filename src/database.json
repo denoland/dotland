@@ -790,7 +790,7 @@
   "rimu": {
     "type": "github",
     "owner": "srackham",
-    "repo": "rimu-deno",
+    "repo": "rimu",
     "desc": "Rimu, a readable text markup language inspired by AsciiDoc and Markdown."
   },
   "ripemd160": {
