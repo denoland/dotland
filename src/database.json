@@ -290,6 +290,12 @@
     "repo": "denoversion",
     "desc": "Deno cli to manage and bump release versions."
   },
+  "denv": {
+    "type": "github",
+    "owner": "crowlKats",
+    "repo": "denv",
+    "desc": "A module similar to dotEnv, but for Deno"
+  },
   "dinocord": {
     "type": "github",
     "owner": "sunsetkookaburra",
