@@ -396,7 +396,7 @@
     "type": "github",
     "owner": "disizali",
     "repo": "espresso",
-    "desc": "deno minimal web freamework"
+    "desc": "deno minimal web framework"
   },
   "event_emitter": {
     "type": "github",
