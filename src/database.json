@@ -392,6 +392,12 @@
     "repo": "escape-string-regexp",
     "desc": "Escape RegExp special characters"
   },
+  "espresso": {
+    "type": "github",
+    "owner": "disizali",
+    "repo": "espresso",
+    "desc": "deno minimal web framework"
+  },
   "event_emitter": {
     "type": "github",
     "owner": "denolibs",
