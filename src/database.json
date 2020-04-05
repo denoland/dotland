@@ -11,6 +11,12 @@
     "repo": "alosaur",
     "desc": "Alosaur - Deno web framework 🦖."
   },
+  "amqp": {
+    "type": "github",
+    "owner": "lenkan",
+    "repo": "deno-amqp",
+    "desc": "AMQP 0.9.1"
+  },
   "args": {
     "type": "github",
     "owner": "KSXGitHub",
