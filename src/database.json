@@ -453,6 +453,12 @@
     "repo": "hmac",
     "desc": "Convenience function for macing singular data. hash should be one of sha1, sha256, or sha512"
   },
+  "html_entities": {
+    "type": "github",
+    "owner": "matschik",
+    "repo": "deno_html_entities",
+    "desc": "Fast html entities decode & encode library"
+  },
   "http_server": {
     "type": "github",
     "owner": "SkoshRG",
