@@ -841,6 +841,13 @@
     "repo": "sha512",
     "desc": "SHA2-512 for deno."
   },
+  "shell_escape": {
+    "type": "github",
+    "owner": "KSXGitHub",
+    "repo": "deno-shell-escape",
+    "path": "lib/",
+    "desc": "Escape and stringify an array of arguments to be executed on the shell."
+  },
   "simple_type_assert": {
     "type": "github",
     "owner": "KSXGitHub",
