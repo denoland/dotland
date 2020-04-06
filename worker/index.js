@@ -20,7 +20,11 @@ async function handleRequest(request) {
 
   // TODO(ry) Support docs without hitting S3...
   if (url.pathname.startsWith("/typedoc")) {
-    return redirect(url, "https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts", request);
+    return redirect(
+      url,
+      "https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts",
+      request
+    );
   }
 
   if (isHtml) {
