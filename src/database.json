@@ -168,6 +168,12 @@
     "repo": "deno-collections",
     "desc": ""
   },
+  "compose": {
+    "type": "github",
+    "owner": "KSXGitHub",
+    "repo": "deno-compose",
+    "desc": "pipe, pipeline, and compose functions with 64 overloads per function"
+  },
   "core": {
     "type": "github",
     "owner": "denoland",
