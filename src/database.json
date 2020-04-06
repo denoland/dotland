@@ -785,7 +785,6 @@
     "type": "github",
     "owner": "Pingid",
     "repo": "ts-prove",
-    "path": "src/",
     "desc": "Decode and validate unknown data"
   },
   "purify": {
