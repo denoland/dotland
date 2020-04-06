@@ -775,6 +775,13 @@
     "path": "runtime/",
     "desc": "Protocol Buffers - Google's data interchange format"
   },
+  "prove": {
+    "type": "github",
+    "owner": "Pingid",
+    "repo": "ts-prove",
+    "path": "src/",
+    "desc": "Decode and validate unknown data"
+  },
   "purify": {
     "type": "github",
     "owner": "aynik",
