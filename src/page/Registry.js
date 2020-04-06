@@ -9,7 +9,6 @@ import { proxy } from "../util/registry_utils";
 
 const CodeBlock = React.lazy(() => import("../component/CodeBlock"));
 const Markdown = React.lazy(() => import("../component/Markdown"));
-const Docs = React.lazy(() => import("../component/Docs"));
 
 export default function Registry() {
   const history = useHistory();
@@ -123,16 +122,14 @@ export default function Registry() {
     );
   } else {
     const isMarkdown = state.rawUrl && state.rawUrl.endsWith(".md");
-    const hasDocsAvailable = state.rawUrl && state.rawUrl.endsWith(".ts");
-    const isDocsPage = search.includes("doc") && state.contents;
+    const docsURL = `https://doc.deno.land/https/deno.land/${pathname}`;
+    if (search.includes("doc") && state.contents) {
+      window.location.href = docsURL;
+    }
     contentComponent = (
       <div>
         <ButtonGroup size="small" variant="text" color="primary">
-          {isDocsPage ? (
-            <Button to="?">Source Code</Button>
-          ) : hasDocsAvailable ? (
-            <Button to="?doc">Documentation</Button>
-          ) : null}
+          <Button to={docsURL}>Documentation</Button>
           {state.repoUrl ? (
             <Button to={state.repoUrl}>Repository</Button>
           ) : null}
@@ -141,12 +138,6 @@ export default function Registry() {
         {(() => {
           if (isMarkdown) {
             return <Markdown source={state.contents} />;
-          } else if (isDocsPage) {
-            if (hasDocsAvailable) {
-              return <Docs source={state.contents} />;
-            } else {
-              return <CodeBlock value="No documentation avaiable." />;
-            }
           } else {
             return (
               <CodeBlock
