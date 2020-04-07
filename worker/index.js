@@ -18,12 +18,10 @@ async function handleRequest(request) {
   const maybeProxyElsewhere =
     url.pathname.startsWith("/std") || url.pathname.startsWith("/x");
 
-  // TODO(ry) Support docs without hitting S3...
   if (url.pathname.startsWith("/typedoc")) {
-    return redirect(
-      url,
+    return Response.redirect(
       "https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts",
-      request
+      307
     );
   }
 
