@@ -96,7 +96,11 @@ function Home() {
       </p>
 
       <p>
-        <Link target="_blank" rel="noopener noreferrer" to="https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts">
+        <Link
+          target="_blank"
+          rel="noopener noreferrer"
+          to="https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts"
+        >
           API Reference
         </Link>
       </p>
