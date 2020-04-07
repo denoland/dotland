@@ -1048,5 +1048,11 @@
     "owner": "KSXGitHub",
     "repo": "yaml-wasm",
     "desc": "WebAssembly module to parse YAML"
+  },
+  "observable": {
+    "type": "github",
+    "owner": "bsunderhus",
+    "repo": "deno-observable",
+    "desc": "tc39 proposal spec compatible observable"
   }
 }
