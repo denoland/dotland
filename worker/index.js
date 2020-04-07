@@ -2,6 +2,7 @@ import { proxy } from "../src/util/registry_utils";
 
 // const REMOTE_URL = "https://deno.land";
 const REMOTE_URL = "https://denoland.netlify.com";
+const S3_REMOTE_URL = "http://deno.land.s3-website-us-east-1.amazonaws.com";
 
 addEventListener("fetch", event => {
   console.log("proxy", proxy);
@@ -18,11 +19,9 @@ async function handleRequest(request) {
   const maybeProxyElsewhere =
     url.pathname.startsWith("/std") || url.pathname.startsWith("/x");
 
+  // TODO(ry) Support docs without hitting S3...
   if (url.pathname.startsWith("/typedoc")) {
-    return Response.redirect(
-      "https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts",
-      307
-    );
+    return redirect(url, S3_REMOTE_URL, request);
   }
 
   if (isHtml) {
