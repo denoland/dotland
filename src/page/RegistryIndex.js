@@ -39,8 +39,15 @@ export default function RegistryIndex() {
 
       <p>
         Functionality built-in to Deno is not listed here. The built-in runtime
-        is documented at <Link to="/typedoc/">deno.land/typedoc</Link> and in{" "}
-        <Link to="/manual">the manual</Link>.
+        is documented on{" "}
+        <Link
+          target="_blank"
+          rel="noopener noreferrer"
+          to="https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts"
+        >
+          deno doc
+        </Link>{" "}
+        and in <Link to="/manual">the manual</Link>.
       </p>
 
       <p>

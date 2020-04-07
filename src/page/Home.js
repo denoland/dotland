@@ -96,14 +96,11 @@ function Home() {
       </p>
 
       <p>
-        {/*
-          TODO(ry) The /typedoc/ path is not part of the react app. It's a
-          separate static site hosted in S3 and to proxied by the CF worker.
-          This is a legacy documentation site. The goal is to handle Deno's own
-          internal documentation using the same system that handles /std/.
-          https://github.com/denoland/deno_website2/issues/57
-        */}
-        <Link target="_blank" rel="noopener noreferrer" to="/typedoc/">
+        <Link
+          target="_blank"
+          rel="noopener noreferrer"
+          to="https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts"
+        >
           API Reference
         </Link>
       </p>
