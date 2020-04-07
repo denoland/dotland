@@ -428,6 +428,13 @@
     "repo": "deno-fen",
     "desc": "A simple web framework for deno."
   },
+  "filesize": {
+    "type": "github",
+    "owner": "davidjamesstone",
+    "repo": "deno_modules",
+    "path": "filesize/",
+    "desc": "filesize provides a simple way to get a human readable file size string from a number."
+  },
   "fiona": {
     "type": "github",
     "owner": "billymoon",
