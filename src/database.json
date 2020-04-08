@@ -490,6 +490,12 @@
     "repo": "Humanizer.ts",
     "desc": "Humanizer meets all your TypeScript needs for manipulating and displaying strings, dates, times, timespans, numbers and quantities."
   },
+  "ini": {
+    "type": "github",
+    "owner": "chances",
+    "repo": "ini",
+    "desc": "INI configuration serializer for the Deno runtime"
+  },
   "ink": {
     "type": "github",
     "owner": "fakoua",
