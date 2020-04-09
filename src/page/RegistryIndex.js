@@ -66,8 +66,8 @@ export default function RegistryIndex() {
         label="Search"
         type="search"
         value={query}
-        autoFocus={true}
         onChange={e => setQuery(e.target.value)}
+        autoFocus
       />
 
       <p>{filtered.length} third party modules:</p>
