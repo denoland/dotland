@@ -398,6 +398,12 @@
     "repo": "endianness",
     "desc": "A very simple Deno module to determine the endianness of the host"
   },
+  "enum": {
+    "type": "github",
+    "owner": "adrai",
+    "repo": "enum",
+    "desc": "Enum is a javascript module that introduces the Enum Type. It works for node.js, in the browser and for deno."
+  },
   "escape_string_regexp": {
     "type": "github",
     "owner": "Sab94",
