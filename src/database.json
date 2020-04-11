@@ -550,6 +550,12 @@
     "repo": "deno-json-rpc",
     "desc": "JSON-RPC interface"
   },
+  "jszip": {
+    "type": "github",
+    "owner": "hayd",
+    "repo": "deno-zip",
+    "desc": "A wrapper around JSZip for handling zipfiles in deno"
+  },
   "keycode": {
     "type": "github",
     "owner": "kabirbaidhya",
