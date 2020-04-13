@@ -854,6 +854,12 @@
     "repo": "noble-ripemd160",
     "desc": "RIPEMD160, a cryptographic hash function."
   },
+  "run_exclusive": {
+    "type": "github",
+    "owner": "garronej",
+    "repo": "run_exclusive",
+    "desc": "⚡🔒 Generate functions that do not allow parallel executions 🔒 ⚡"
+  },
   "secp256k1": {
     "type": "github",
     "owner": "paulmillr",
