@@ -17,6 +17,12 @@
     "repo": "deno-amqp",
     "desc": "AMQP 0.9.1"
   },
+  "argon2": {
+    "type": "github",
+    "owner": "fdionisi",
+    "repo": "deno-argon2",
+    "desc": "Deno library for hashing passwords using Argon2"
+  },
   "args": {
     "type": "github",
     "owner": "KSXGitHub",
