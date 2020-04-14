@@ -995,6 +995,12 @@
     "repo": "deno-task-runner-v2",
     "desc": "deno-task-runner-v2"
   },
+  "test_on_localhost": {
+    "type": "github",
+    "owner": "KSXGitHub",
+    "repo": "deno_run_tests_on_localhost",
+    "desc": "Create a localhost server and run tests"
+  },
   "tiny_templates": {
     "type": "github",
     "owner": "zekth",
