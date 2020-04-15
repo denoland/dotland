@@ -502,6 +502,12 @@
     "repo": "Humanizer.ts",
     "desc": "Humanizer meets all your TypeScript needs for manipulating and displaying strings, dates, times, timespans, numbers and quantities."
   },
+  "i18next": {
+    "type": "github",
+    "owner": "i18next",
+    "repo": "i18next",
+    "path": "src/"
+  },
   "ini": {
     "type": "github",
     "owner": "chances",
