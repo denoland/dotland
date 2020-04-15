@@ -636,6 +636,12 @@
     "repo": "deno_math",
     "desc": "The math module is used to provide a helper for high-precision calculations and scientific computing."
   },
+  "md5": {
+    "type": "github",
+    "owner": "halvardssm",
+    "repo": "deno-md5",
+    "desc": "MD5 for deno."
+  },
   "media_types": {
     "type": "github",
     "owner": "oakserver",
