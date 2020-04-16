@@ -434,6 +434,12 @@
     "repo": "event_emitter",
     "desc": "A NodeJS-like EventEmitter for Deno written in 100% Typescript."
   },
+  "evt": {
+    "type": "github",
+    "owner": "garronej",
+    "repo": "evt",
+    "desc": "💧A type safe replacement for Node's EventEmitter💧"
+  },
   "expect": {
     "type": "github",
     "owner": "allain",
