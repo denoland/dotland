@@ -1037,6 +1037,12 @@
     "repo": "deno-tree",
     "desc": "Traverse filesystem tree"
   },
+  "types": {
+    "type": "github",
+    "owner": "Soremwar",
+    "repo": "deno_types",
+    "desc": "Definition files for JavaScript libraries compatible with Deno"
+  },
   "udd": {
     "type": "github",
     "owner": "hayd",
