@@ -1086,6 +1086,12 @@
     "repo": "deno-uuid",
     "desc": "Warning: the library code of this module has been moved to https://deno.land/std/testing/mod.ts."
   },
+  "uwuifier": {
+    "type": "github",
+    "owner": "schotsl",
+    "repo": "uwuifier",
+    "desc": "This very lightweight package allows you to uwuify any sentence or word (excluding URL's) with many configurable parameters while giving you access to many vewy kawaii sentences and faces"
+  },
   "watch": {
     "type": "github",
     "owner": "jinjor",
