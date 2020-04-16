@@ -221,7 +221,7 @@
     "type": "github",
     "owner": "xpyxel",
     "repo": "dash",
-    "desc": "Fast, simple, and efficient LFU cache library for Deno."
+    "desc": "Fast, simple, and efficient LRU cache library for Deno."
   },
   "databatcher": {
     "type": "github",
