@@ -217,6 +217,12 @@
     "repo": "curve25519",
     "desc": ""
   },
+  "dash": {
+    "type": "github",
+    "owner": "xpyxel",
+    "repo": "dash",
+    "desc": "Fast, simple, and efficient LFU cache library for Deno."
+  },
   "databatcher": {
     "type": "github",
     "owner": "allain",
