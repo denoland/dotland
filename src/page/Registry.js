@@ -224,11 +224,9 @@ async function renderDir(pathname, entry) {
 
     // no useful files exist in the repository, so opt to attempt
     // showing the contents of the README file instead if it exists.
-    if (files.some(entry => entry.name === "README.md")) {
+    if (files.some(entry => entry.name.toLowerCase() === "readme.md")) {
       const rawUrl =
-        entryType === "esm"
-          ? `${entry.url}${path}README.md`
-          : `https://raw.githubusercontent.com/${owner}/${repo}/${entry.branch}/${path}README.md`;
+        entryType === "esm" ? `${entry.url}${path}${entry.name}` : `https://raw.githubusercontent.com/${owner}/${repo}/${entry.branch}/${path}${entry.name}`;
       try {
         const response = await fetch(rawUrl);
         if (response.ok) body = await response.text();
