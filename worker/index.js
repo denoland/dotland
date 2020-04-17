@@ -1,7 +1,6 @@
 import { proxy } from "../src/util/registry_utils";
 
-// const REMOTE_URL = "https://deno.land";
-const REMOTE_URL = "https://denoland.netlify.com";
+const REMOTE_URL = "https://deno-website2.now.sh";
 const S3_REMOTE_URL = "http://deno.land.s3-website-us-east-1.amazonaws.com";
 
 addEventListener("fetch", event => {
