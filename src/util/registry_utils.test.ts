@@ -32,12 +32,12 @@ test("proxy1", () => {
         type: "github",
         owner: "denoland",
         repo: "deno_install",
-        desc: "One-line commands to install Deno on your system."
+        desc: "One-line commands to install Deno on your system.",
       },
       url: "https://raw.githubusercontent.com/denoland/deno_install/master/",
-      repo: "https://github.com/denoland/deno_install/tree/master/"
+      repo: "https://github.com/denoland/deno_install/tree/master/",
     },
-    path: "foo/bar.js"
+    path: "foo/bar.js",
   });
 });
 
@@ -52,11 +52,11 @@ test("proxy2", () => {
         type: "github",
         owner: "denoland",
         repo: "deno_install",
-        desc: "One-line commands to install Deno on your system."
+        desc: "One-line commands to install Deno on your system.",
       },
       url: "https://raw.githubusercontent.com/denoland/deno_install/v0.1.2/",
-      repo: "https://github.com/denoland/deno_install/tree/v0.1.2/"
+      repo: "https://github.com/denoland/deno_install/tree/v0.1.2/",
     },
-    path: "foo/bar.js"
+    path: "foo/bar.js",
   });
 });

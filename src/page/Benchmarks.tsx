@@ -11,7 +11,7 @@ import {
   formatPercentage,
   formatReqSec,
   logScale,
-  reshape
+  reshape,
 } from "../util/benchmark_utils";
 import Link from "../component/Link";
 import Spinner from "../component/Spinner";
@@ -29,7 +29,7 @@ interface Props {
 function BenchmarkChart(props: Props) {
   const theme = useTheme<Theme>();
 
-  const shortSha1List = props.sha1List.map(s => s.slice(0, 6));
+  const shortSha1List = props.sha1List.map((s) => s.slice(0, 6));
 
   function viewCommitOnClick(c1: any, c2: any, { dataPointIndex }: any): void {
     window.open(
@@ -43,7 +43,7 @@ function BenchmarkChart(props: Props) {
 
   const options = {
     theme: {
-      mode: theme.palette.type
+      mode: theme.palette.type,
     },
     chart: {
       background: theme.palette.background.default,
@@ -51,41 +51,41 @@ function BenchmarkChart(props: Props) {
         theme.palette.background.default
       ),
       toolbar: {
-        show: true
+        show: true,
       },
       animations: {
-        enabled: false
+        enabled: false,
       },
       events: {
-        markerClick: viewCommitOnClick
-      }
+        markerClick: viewCommitOnClick,
+      },
     },
     stroke: {
       width: 1,
-      curve: "straight"
+      curve: "straight",
     },
     legend: {
       show: true,
       showForSingleSeries: true,
-      position: "bottom"
+      position: "bottom",
     },
     yaxis: {
       labels: {
-        formatter: props.yTickFormat
+        formatter: props.yTickFormat,
       },
       title: {
-        text: props.yLabel
-      }
+        text: props.yLabel,
+      },
     },
     xaxis: {
       labels: {
-        show: false
+        show: false,
       },
       categories: shortSha1List,
       tooltip: {
-        enabled: false
-      }
-    }
+        enabled: false,
+      },
+    },
   };
 
   const series = props.columns.sort((a, b) => {
@@ -119,7 +119,7 @@ export default function Benchmarks() {
       dataUrl = "https://denoland.github.io/benchmark_data/data.json";
     }
 
-    fetch(dataUrl).then(async response => {
+    fetch(dataUrl).then(async (response) => {
       const rawData = await response.json();
       const data = reshape(rawData);
       setData(data);
@@ -254,7 +254,7 @@ export default function Benchmarks() {
           <input
             type="checkbox"
             checked={showNormalized}
-            onChange={e => setShowNormalized(e.target.checked)}
+            onChange={(e) => setShowNormalized(e.target.checked)}
           />{" "}
           Show Normalized Graphs
         </label>

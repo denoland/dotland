@@ -49,7 +49,7 @@ const allowedTags = [
   "tr",
   "th",
   "td",
-  "pre"
+  "pre",
 ];
 
 // We want to allow HTML in markdown, but not anything unsafe like script tags.
@@ -57,7 +57,7 @@ const allowedTags = [
 const parseHtml = htmlParser({
   isValidNode: (node: any) => {
     return allowedTags.indexOf(node.type.toLowerCase()) >= 0;
-  }
+  },
 });
 
 function flatten(text: any, child: any) {
@@ -98,7 +98,7 @@ function LinkRenderer(props: LinkRendererProps) {
 const renderers = {
   code: CodeBlock,
   heading: HeadingRenderer,
-  link: LinkRenderer
+  link: LinkRenderer,
 };
 
 interface MarkdownProps {

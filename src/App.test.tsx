@@ -1,5 +1,7 @@
 import React from "react";
-import { render, wait } from "@testing-library/react";
+import { render } from "@testing-library/react";
+// @ts-ignore because @types is not up to date
+import { waitFor } from "@testing-library/react";
 import { createMemoryHistory } from "history";
 import { Router } from "react-router-dom";
 import App from "./App";
@@ -13,8 +15,8 @@ test("/x/std redirects to /x/std/", async () => {
       <App />
     </Router>
   );
-  await wait(() => expect(history.location.pathname).toEqual("/x/std/"));
-  await wait(() => expect(getByText("Deno Standard Modules")).toBeTruthy());
+  await waitFor(() => expect(history.location.pathname).toEqual("/x/std/"));
+  await waitFor(() => expect(getByText("Deno Standard Modules")).toBeTruthy());
 });
 
 test("/std redirects to /std/", async () => {
@@ -25,8 +27,8 @@ test("/std redirects to /std/", async () => {
       <App />
     </Router>
   );
-  await wait(() => expect(history.location.pathname).toEqual("/std/"));
-  await wait(() => expect(getByText("Deno Standard Modules")).toBeTruthy());
+  await waitFor(() => expect(history.location.pathname).toEqual("/std/"));
+  await waitFor(() => expect(getByText("Deno Standard Modules")).toBeTruthy());
 });
 
 test("/std/bytes redirects to /std/bytes/", async () => {
@@ -37,7 +39,7 @@ test("/std/bytes redirects to /std/bytes/", async () => {
       <App />
     </Router>
   );
-  await wait(() => expect(history.location.pathname).toEqual("/std/bytes/"));
-  await wait(() => expect(getByText("mod.ts")).toBeTruthy());
+  await waitFor(() => expect(history.location.pathname).toEqual("/std/bytes/"));
+  await waitFor(() => expect(getByText("mod.ts")).toBeTruthy());
   expect(getByText("test.ts")).toBeTruthy();
 });

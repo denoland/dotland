@@ -3,7 +3,7 @@ import { proxy } from "../src/util/registry_utils";
 const REMOTE_URL = "https://deno-website2-v1.now.sh";
 const S3_REMOTE_URL = "http://deno.land.s3-website-us-east-1.amazonaws.com";
 
-addEventListener("fetch", event => {
+addEventListener("fetch", (event) => {
   console.log("proxy", proxy);
   event.respondWith(handleRequest(event.request));
 });
@@ -37,7 +37,7 @@ async function handleRequest(request) {
     return new Response("Not in database.json " + url.pathname, {
       status: 404,
       statusText: "Not Found",
-      headers: { "content-type": "text/plain" }
+      headers: { "content-type": "text/plain" },
     });
   }
   const { entry, path } = proxied;
@@ -49,7 +49,7 @@ async function handleRequest(request) {
 function redirect(url, remoteUrl, request) {
   const init = {
     method: request.method,
-    headers: request.headers
+    headers: request.headers,
   };
   const urlR = remoteUrl + url.pathname;
   console.log(`Proxy ${url} to ${urlR}`);

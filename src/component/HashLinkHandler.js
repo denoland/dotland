@@ -50,7 +50,7 @@ function hashLinkScroll() {
           observer.observe(document, {
             attributes: true,
             childList: true,
-            subtree: true
+            subtree: true,
           });
           // if the element doesn't show up in 10 seconds, stop checking
           timerId = setTimeout(reset, 10000);

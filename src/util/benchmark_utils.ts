@@ -56,9 +56,9 @@ function createColumns(
   benchmarkName: BenchmarkName
 ): Column[] {
   const varieties = getBenchmarkVarieties(data, benchmarkName);
-  return varieties.map(variety => ({
+  return varieties.map((variety) => ({
     name: variety,
-    data: data.map(d => {
+    data: data.map((d) => {
       // TODO fix typescript madness.
       d = d as any;
       if (d[benchmarkName] != null) {
@@ -74,7 +74,7 @@ function createColumns(
         }
       }
       return null;
-    })
+    }),
   }));
 }
 
@@ -85,9 +85,9 @@ export function createNormalizedColumns(
   baselineVariety: string
 ): Column[] {
   const varieties = getBenchmarkVarieties(data, benchmarkName);
-  return varieties.map(variety => ({
+  return varieties.map((variety) => ({
     name: variety,
-    data: data.map(d => {
+    data: data.map((d) => {
       if (d[baselineBenchmark] != null) {
         const bb = d[baselineBenchmark] as any;
         if (bb[baselineVariety] != null) {
@@ -107,16 +107,16 @@ export function createNormalizedColumns(
         }
       }
       return null;
-    })
+    }),
   }));
 }
 function createBinarySizeColumns(data: BenchmarkRun[]): Column[] {
   const propName = "binary_size";
   const last = data[data.length - 1]!;
   const binarySizeNames = Object.keys(last[propName]!);
-  return binarySizeNames.map(name => ({
+  return binarySizeNames.map((name) => ({
     name,
-    data: data.map(d => {
+    data: data.map((d) => {
       const binarySizeData = d["binary_size"];
       switch (typeof binarySizeData) {
         case "number": // legacy implementation
@@ -127,7 +127,7 @@ function createBinarySizeColumns(data: BenchmarkRun[]): Column[] {
           }
           return binarySizeData[name] || null;
       }
-    })
+    }),
   }));
 }
 
@@ -135,30 +135,30 @@ function createThreadCountColumns(data: BenchmarkRun[]): Column[] {
   const propName = "thread_count";
   const last = data[data.length - 1];
   const threadCountNames = Object.keys(last[propName]!);
-  return threadCountNames.map(name => ({
+  return threadCountNames.map((name) => ({
     name,
-    data: data.map(d => {
+    data: data.map((d) => {
       const threadCountData = d[propName];
       if (!threadCountData) {
         return null;
       }
       return threadCountData[name] || null;
-    })
+    }),
   }));
 }
 
 function createSyscallCountColumns(data: BenchmarkRun[]): Column[] {
   const propName = "syscall_count";
   const syscallCountNames = Object.keys(data[data.length - 1][propName]!);
-  return syscallCountNames.map(name => ({
+  return syscallCountNames.map((name) => ({
     name,
-    data: data.map(d => {
+    data: data.map((d) => {
       const syscallCountData = d[propName];
       if (!syscallCountData) {
         return null;
       }
       return syscallCountData[name] || null;
-    })
+    }),
   }));
 }
 
@@ -260,6 +260,6 @@ export function reshape(data: BenchmarkRun[]): BenchmarkData {
     threadCount: createThreadCountColumns(data),
     syscallCount: createSyscallCountColumns(data),
     bundleSize: createColumns(data, "bundle_size"),
-    sha1List: data.map(d => d.sha1)
+    sha1List: data.map((d) => d.sha1),
   };
 }

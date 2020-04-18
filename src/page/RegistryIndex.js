@@ -12,7 +12,7 @@ export default function RegistryIndex() {
   const [query, setQuery] = React.useState("");
 
   const filtered = Object.keys(DATABASE).filter(
-    name =>
+    (name) =>
       name.toLowerCase().includes(query.toLowerCase()) ||
       (DATABASE[name].desc || "").toLowerCase().includes(query.toLowerCase())
   );
@@ -66,7 +66,7 @@ export default function RegistryIndex() {
         label="Search"
         type="search"
         value={query}
-        onChange={e => setQuery(e.target.value)}
+        onChange={(e) => setQuery(e.target.value)}
       />
 
       <p>{filtered.length} third party modules:</p>
