@@ -2,7 +2,7 @@
 // the worker sub-directory but it seems the github actions deployment doesn't
 // like that.
 module.exports = {
-  target: 'webworker',
-  entry: './worker/index.js',
-  mode: 'production',
-}
+  target: "webworker",
+  entry: "./index.js",
+  mode: "production"
+};

@@ -15,16 +15,16 @@ jobs:
       - run: yarn format_check
       - run: CI=true yarn test
       - name: Publish Production
-        if: github.ref == 'refs/heads/master' && github.event_name == 'push' && github.repository == 'denoland/deno_website2'
-        uses: cloudflare/wrangler-action@1.0.0
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push' && github.repository == 'antipycorp/deno_website2'
+        uses: cloudflare/wrangler-action@1.1.0
         with:
           environment: 'production'
-          apiKey: ${{ secrets.cloudflareKey }}
-          email: ${{ secrets.email }}
+          apiToken: ${{ secrets.cloudflareToken }}
+          workingDirectory: worker
       - name: Publish Staging
-        if: github.event_name == 'push' && github.repository == 'denoland/deno_website2'
-        uses: cloudflare/wrangler-action@1.0.0
+        if: github.event_name == 'push' && github.repository == 'antipycorp/deno_website2'
+        uses: cloudflare/wrangler-action@1.1.0
         with:
           environment: 'staging'
-          apiKey: ${{ secrets.cloudflareKey }}
-          email: ${{ secrets.email }}
+          apiToken: ${{ secrets.cloudflareToken }}
+          workingDirectory: worker
