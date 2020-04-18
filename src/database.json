@@ -739,6 +739,12 @@
     "repo": "panoptes",
     "desc": "A simple array and object watcher function for Deno."
   },
+  "parry": {
+    "type": "github",
+    "owner": "eliassjogreen",
+    "repo": "parry",
+    "desc": "A simple way of running functions in their own WebWorkers"
+  },
   "parseargs": {
     "type": "github",
     "owner": "bartlomieju",
