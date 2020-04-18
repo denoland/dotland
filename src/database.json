@@ -902,6 +902,12 @@
     "repo": "run_exclusive",
     "desc": "⚡🔒 Generate functions that do not allow parallel executions 🔒 ⚡"
   },
+  "saur": {
+    "type": "github",
+    "owner": "tubbo",
+    "repo": "saur",
+    "desc": "Deno Saur is a full-stack web application framework with a focus on rapid development, similar to Django or Ruby on Rails."
+  },
   "secp256k1": {
     "type": "github",
     "owner": "paulmillr",
