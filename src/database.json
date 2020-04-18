@@ -721,6 +721,12 @@
     "repo": "oak",
     "desc": "A middleware framework for Deno's http server, including a router middleware."
   },
+  "observable": {
+    "type": "github",
+    "owner": "bsunderhus",
+    "repo": "deno-observable",
+    "desc": "tc39 proposal spec compatible observable"
+  },
   "once": {
     "type": "github",
     "owner": "KSXGitHub",
