@@ -1013,7 +1013,7 @@
     "repo": "take-five",
     "desc": "A minimal (no external dependency) REST framework"
   },
-  "talk-lib": {
+  "talk_lib": {
     "type": "github",
     "owner": "jipfr",
     "repo": "talk-lib",
