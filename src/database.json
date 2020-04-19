@@ -1031,6 +1031,12 @@
     "repo": "take-five",
     "desc": "A minimal (no external dependency) REST framework"
   },
+  "talk_lib": {
+    "type": "github",
+    "owner": "jipfr",
+    "repo": "talk-lib",
+    "desc": "A send & receive library for Nextcloud Talk"
+  },
   "task_runner": {
     "type": "github",
     "owner": "jinjor",
