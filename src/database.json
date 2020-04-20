@@ -518,7 +518,32 @@
     "type": "github",
     "owner": "i18next",
     "repo": "i18next",
-    "path": "src/"
+    "path": "src/",
+    "desc": "i18next: learn once - translate everywhere"
+  },
+  "i18next_fs_backend": {
+    "type": "github",
+    "owner": "i18next",
+    "repo": "i18next-fs-backend",
+    "desc": "A simple i18next backend for i18next used in Node.js and for Deno to load translations from the filesystem."
+  },
+  "i18next_http_backend": {
+    "type": "github",
+    "owner": "i18next",
+    "repo": "i18next-http-backend",
+    "desc": "A simple i18next backend to be used in Node.js, in the browser and for Deno. It will load resources from a backend server using the XMLHttpRequest or the fetch API."
+  },
+  "i18next_http_middleware": {
+    "type": "github",
+    "owner": "i18next",
+    "repo": "i18next-http-middleware",
+    "desc": "A simple i18next middleware to be used with Node.js web frameworks like express or Fastify and also for Deno."
+  },
+  "i18next_locize_backend": {
+    "type": "github",
+    "owner": "locize",
+    "repo": "i18next-locize-backend",
+    "desc": "A simple i18next backend for locize.com which can be used in Node.js, in the browser and for Deno."
   },
   "ini": {
     "type": "github",
