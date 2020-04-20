@@ -708,6 +708,12 @@
     "repo": "nanoid",
     "desc": "A tiny, secure, URL-friendly, unique string ID generator for JavaScript."
   },
+  "nessie": {
+    "type": "github",
+    "owner": "halvardssm",
+    "repo": "deno-nessie",
+    "desc": "A database migration tool for deno."
+  },
   "normalize_diacritics": {
     "type": "github",
     "owner": "motss",
