@@ -1188,5 +1188,11 @@
     "owner": "KSXGitHub",
     "repo": "yaml-wasm",
     "desc": "WebAssembly module to parse YAML"
+  },
+  "zstd": {
+    "type": "github",
+    "owner": "xpyxel",
+    "repo": "deno-zstd",
+    "desc": "Zstd compression library bindings for Deno"
   }
 }
