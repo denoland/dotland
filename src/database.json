@@ -72,6 +72,12 @@
     "repo": "buffer",
     "desc": "Extreme buffer module for deno"
   },
+  "dblapi.ts": {
+    "type": "github",
+    "owner": "zSnails",
+    "repo": "dblapi.ts",
+    "desc": "TypeScript top.gg api wrapper"
+  },
   "bump": {
     "type": "github",
     "owner": "iamnathanj",
