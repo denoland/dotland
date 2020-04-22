@@ -235,6 +235,12 @@
     "repo": "date-fns",
     "path": "src/"
   },
+  "dblapi.ts": {
+    "type": "github",
+    "owner": "zSnails",
+    "repo": "dblapi.ts",
+    "desc": "TypeScript top.gg api wrapper"
+  },
   "deamon": {
     "type": "github",
     "owner": "manyuanrong",
