@@ -1,6 +1,5 @@
 import React from "react";
 import { CircularProgress, makeStyles } from "@material-ui/core";
-import { useDarkMode } from "../hook/theme";
 
 const useStyles = makeStyles(_theme => ({
   spinner: {
@@ -12,8 +11,7 @@ const useStyles = makeStyles(_theme => ({
 }));
 
 export default function Spinner() {
-  const darkMode = useDarkMode();
-  const classes = useStyles(darkMode);
+  const classes = useStyles();
 
   return (
     <div className={classes.spinner}>
