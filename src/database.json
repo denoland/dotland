@@ -404,6 +404,12 @@
     "repo": "deno_easypath",
     "desc": "Path wrapper to manipulate Filesystem using Deno. Mostly inspired by Path.swift"
   },
+  "easy_soap_request": {
+    "type": "github",
+    "owner": "circa10a",
+    "repo": "easy-soap-request",
+    "desc": "A small library to make SOAP requests easier via Node.js, Deno, and your browserA small library to make SOAP requests easier via Node.js, Deno, and your browser"
+  },
   "ed25519": {
     "type": "github",
     "owner": "paulmillr",
