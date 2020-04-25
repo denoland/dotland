@@ -305,7 +305,7 @@
     "type": "github",
     "owner": "denjucks",
     "repo": "denoforge",
-    "desc": "Deno data science library similar to Python's Pandas. Port of the NodeJS library data-forge "
+    "desc": "Deno data science library similar to Python's Pandas. Port of the NodeJS library data-forge"
   },
   "denofun": {
     "type": "github",
