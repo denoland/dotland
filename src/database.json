@@ -408,7 +408,7 @@
     "type": "github",
     "owner": "circa10a",
     "repo": "easy-soap-request",
-    "desc": "A small library to make SOAP requests easier via Node.js, Deno, and your browserA small library to make SOAP requests easier via Node.js, Deno, and your browser"
+    "desc": "A small library to make SOAP requests easier via Node.js, Deno, and your browser"
   },
   "ed25519": {
     "type": "github",
