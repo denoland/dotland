@@ -314,6 +314,12 @@
     "repo": "denon",
     "desc": "Like nodemon but made in and for deno. Also a deno style file watcher"
   },
+  "denotrain": {
+    "type": "github",
+    "owner": "Caesar2011",
+    "repo": "denotrain",
+    "desc": "An easy to use webserver engine like express in nodejs fully written in Typescript."
+  },
   "denoversion": {
     "type": "github",
     "owner": "lucascaro",
