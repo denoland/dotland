@@ -32,12 +32,12 @@ test("/std redirects to /std/", async () => {
 test("/std/bytes redirects to /std/bytes/", async () => {
   const history = createMemoryHistory();
   history.push("/std/bytes");
-  const { getByText } = render(
+  const { getAllByText } = render(
     <Router history={history}>
       <App />
     </Router>
   );
   await wait(() => expect(history.location.pathname).toEqual("/std/bytes/"));
-  await wait(() => expect(getByText("mod.ts")).toBeTruthy());
-  expect(getByText("test.ts")).toBeTruthy();
-});
+  await wait(() => expect(getAllByText("mod.ts").length).toBeGreaterThan(0));
+  expect(getAllByText("test.ts").length).toBeGreaterThan(0);
+}, 20000);
