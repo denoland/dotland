@@ -398,17 +398,17 @@
     "repo": "EaiserColors",
     "desc": "Eaiser colors is a wrapper for the std/colors module with the goal of making it much eaiser to see what is happening"
   },
-  "easypath": {
-    "type": "github",
-    "owner": "zekth",
-    "repo": "deno_easypath",
-    "desc": "Path wrapper to manipulate Filesystem using Deno. Mostly inspired by Path.swift"
-  },
   "easy_soap_request": {
     "type": "github",
     "owner": "circa10a",
     "repo": "easy-soap-request",
     "desc": "A small library to make SOAP requests easier via Node.js, Deno, and your browser"
+  },
+  "easypath": {
+    "type": "github",
+    "owner": "zekth",
+    "repo": "deno_easypath",
+    "desc": "Path wrapper to manipulate Filesystem using Deno. Mostly inspired by Path.swift"
   },
   "ed25519": {
     "type": "github",
