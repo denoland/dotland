@@ -138,6 +138,10 @@ function Home() {
       </p>
 
       <p>
+        <Link to="/std/manual.md#contributing">Contributing</Link>
+      </p>
+
+      <p>
         <Link to="https://github.com/denolib/awesome-deno">More Links</Link>
       </p>
     </main>

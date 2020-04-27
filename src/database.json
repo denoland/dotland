@@ -301,6 +301,12 @@
     "repo": "deno_init",
     "desc": "The executable to set up a deno project 🦕"
   },
+  "deno_search": {
+    "type": "github",
+    "owner": "etopiei",
+    "repo": "deno_search",
+    "desc": "A CLI tool to search for third party packages on deno.land"
+  },
   "denoforge": {
     "type": "github",
     "owner": "denjucks",
@@ -331,6 +337,12 @@
     "owner": "eliassjogreen",
     "repo": "denon",
     "desc": "Like nodemon but made in and for deno. Also a deno style file watcher"
+  },
+  "denotrain": {
+    "type": "github",
+    "owner": "Caesar2011",
+    "repo": "denotrain",
+    "desc": "An easy to use webserver engine like express in nodejs fully written in Typescript."
   },
   "denoversion": {
     "type": "github",
@@ -427,6 +439,12 @@
     "owner": "herohamp",
     "repo": "EaiserColors",
     "desc": "Eaiser colors is a wrapper for the std/colors module with the goal of making it much eaiser to see what is happening"
+  },
+  "easy_soap_request": {
+    "type": "github",
+    "owner": "circa10a",
+    "repo": "easy-soap-request",
+    "desc": "A small library to make SOAP requests easier via Node.js, Deno, and your browser"
   },
   "easypath": {
     "type": "github",
@@ -932,6 +950,12 @@
     "owner": "aynik",
     "repo": "deno-purify",
     "desc": "A deno port of purify-ts."
+  },
+  "rad": {
+    "type": "github",
+    "owner": "cdaringe",
+    "repo": "rad",
+    "desc": "General purpose build tool. statically typed, batteries included. command, function, and make-style tasks supported"
   },
   "rand": {
     "type": "github",
