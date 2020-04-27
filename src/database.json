@@ -48,6 +48,12 @@
     "repo": "base64",
     "desc": "base64 strings from/to Uint8Arrays"
   },
+  "bb64": {
+    "type": "github",
+    "owner": "denjucks",
+    "repo": "bb64",
+    "desc": "A better base64 encoder and decoder for Deno for easily encoding strings, Uint8Arrays, and files, including MIME types into encoding"
+  },
   "bigfloat": {
     "type": "github",
     "owner": "davidmartinez10",
@@ -271,6 +277,12 @@
     "repo": "dem",
     "desc": "A module version manager for Deno."
   },
+  "denjucks": {
+    "type": "github",
+    "owner": "denjucks",
+    "repo": "denjucks",
+    "desc": "A powerful and easy to use templating engine ported from Mozilla's Nunjucks"
+  },
   "deno": {
     "type": "github",
     "owner": "denoland",
@@ -294,6 +306,12 @@
     "owner": "etopiei",
     "repo": "deno_search",
     "desc": "A CLI tool to search for third party packages on deno.land"
+  },
+  "denoforge": {
+    "type": "github",
+    "owner": "denjucks",
+    "repo": "denoforge",
+    "desc": "Deno data science library similar to Python's Pandas. Port of the NodeJS library data-forge"
   },
   "denofun": {
     "type": "github",
@@ -337,6 +355,18 @@
     "owner": "crowlKats",
     "repo": "denv",
     "desc": "A module similar to dotEnv, but for Deno"
+  },
+  "dex": {
+    "type": "github",
+    "owner": "denjucks",
+    "repo": "dex",
+    "desc": "An SQL query builder port of Knex for Deno"
+  },
+  "dinja": {
+    "type": "github",
+    "owner": "denjucks",
+    "repo": "dinja",
+    "desc": "An scalable, Rails-like web framework for Deno"
   },
   "dinocord": {
     "type": "github",
