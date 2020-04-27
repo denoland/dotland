@@ -921,6 +921,12 @@
     "repo": "deno-purify",
     "desc": "A deno port of purify-ts."
   },
+  "rad": {
+    "type": "github",
+    "owner": "cdaringe",
+    "repo": "rad",
+    "desc": "General purpose build tool. statically typed, batteries included. command, function, and make-style tasks supported"
+  },
   "rand": {
     "type": "github",
     "owner": "rsp",
