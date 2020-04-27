@@ -289,6 +289,12 @@
     "repo": "deno_init",
     "desc": "The executable to set up a deno project 🦕"
   },
+  "deno_search": {
+    "type": "github",
+    "owner": "etopiei",
+    "repo": "deno_search",
+    "desc": "A CLI tool to search for third party packages on deno.land"
+  },
   "denofun": {
     "type": "github",
     "owner": "galkowskit",
