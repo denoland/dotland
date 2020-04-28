@@ -1,0 +1,20 @@
+/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+
+/* purgecss start ignore */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+/* purgecss end ignore */
+
+@import "tailwindcss/utilities";
+
+.link {
+  @apply text-blue-500 transition duration-75 ease-in-out;
+}
+
+.link:hover {
+  @apply text-blue-400;
+}
+
+span.token.plain:empty:before {
+  content: "\200b";
+}

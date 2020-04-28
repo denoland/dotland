@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "outDir": "../transpiled",
+    "target": "es2015",
+    "module": "commonjs",
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "lib": ["esnext", "webworker"],
+    "resolveJsonModule": true,
+    "esModuleInterop": true
+  },
+  "include": ["./*.ts", "../node_modules/@cloudflare/workers-types/index.d.ts"]
+}

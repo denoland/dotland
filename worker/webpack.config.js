@@ -1,8 +1,29 @@
-// This is for the CloudFlare worker. Ideally this configuration could live in
-// the worker sub-directory but it seems the github actions deployment doesn't
-// like that.
+const path = require("path");
+const webpack = require("webpack");
+
+const mode = process.env.NODE_ENV || "production";
+
 module.exports = {
-  target: "webworker",
-  entry: "./index.js",
-  mode: "production",
+  output: {
+    filename: `worker.${mode}.js`,
+    path: path.join(__dirname, "dist"),
+  },
+  devtool: "source-map",
+  mode,
+  resolve: {
+    extensions: [".ts", ".tsx", ".js"],
+    plugins: [],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        loader: "ts-loader",
+        options: {
+          transpileOnly: true,
+        },
+      },
+      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
+    ],
+  },
 };
