@@ -40,6 +40,12 @@ export default function Registry() {
         console.log({ dir });
         setState({ dir, repoUrl });
         setIsLoading(false);
+      })
+      .catch(err => {
+        if(err.name === "FileAsDirException" && path.endsWith("/")) {
+          history.replace(window.location.pathname.slice(0,-1));
+        }
+        else throw err;
       });
     } else {
       // Render file.
@@ -206,6 +212,11 @@ async function renderDir(pathname, entry) {
     }
     const data = await res.json();
     if (data.type !== "dir") {
+      if(data.type === "file") {
+        const e = Error("This is actually a file");
+        e.name = "FileAsDirException";
+        throw e;
+      }
       throw Error(
         `Unexpected type ${
           data.type
