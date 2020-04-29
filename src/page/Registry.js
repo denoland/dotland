@@ -36,17 +36,17 @@ export default function Registry() {
     if (!path || path.endsWith("/")) {
       // Render dir.
       const repoUrl = `${entry.repo}${path}`;
-      renderDir(path, entry).then(dir => {
-        console.log({ dir });
-        setState({ dir, repoUrl });
-        setIsLoading(false);
-      })
-      .catch(err => {
-        if(err.name === "FileAsDirException" && path.endsWith("/")) {
-          history.replace(window.location.pathname.slice(0,-1));
-        }
-        else throw err;
-      });
+      renderDir(path, entry)
+        .then(dir => {
+          console.log({ dir });
+          setState({ dir, repoUrl });
+          setIsLoading(false);
+        })
+        .catch(err => {
+          if (err.name === "FileAsDirException" && path.endsWith("/")) {
+            history.replace(window.location.pathname.slice(0, -1));
+          } else throw err;
+        });
     } else {
       // Render file.
       const rawUrl = `${entry.url}${path}`;
@@ -212,7 +212,7 @@ async function renderDir(pathname, entry) {
     }
     const data = await res.json();
     if (data.type !== "dir") {
-      if(data.type === "file") {
+      if (data.type === "file") {
         const e = Error("This is actually a file");
         e.name = "FileAsDirException";
         throw e;
