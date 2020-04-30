@@ -1060,6 +1060,12 @@
     "repo": "siphash24",
     "desc": "SipHash24 implemented in WebAssembly."
   },
+  "skimming": {
+    "type": "github",
+    "owner": "petruki",
+    "repo": "skimming",
+    "desc": "Skimming is a search engine module for Deno."
+  },
   "slash": {
     "type": "github",
     "owner": "justjavac",
