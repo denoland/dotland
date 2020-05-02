@@ -271,6 +271,12 @@
     "repo": "dejs",
     "desc": "ejs template engine for deno."
   },
+  "deku": {
+    "type": "github",
+    "owner": "yisar",
+    "repo": "deku",
+    "desc": "No bundle dev server for es modules."
+  },
   "dem": {
     "type": "github",
     "owner": "syumai",
