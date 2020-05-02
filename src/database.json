@@ -362,6 +362,12 @@
     "repo": "denv",
     "desc": "A module similar to dotEnv, but for Deno"
   },
+  "dev_server": {
+    "type": "github",
+    "owner": "zhmushan",
+    "repo": "dev_server",
+    "desc": "Feel free to import TypeScript files in the script tag!"
+  },
   "dex": {
     "type": "github",
     "owner": "denjucks",
