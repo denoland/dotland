@@ -556,6 +556,12 @@
     "repo": "gentleRpc",
     "desc": "JSON-RPC 2.0 TypeScript library for deno and browser."
   },
+  "handlebars": {
+    "type": "github",
+    "owner": "alosaur",
+    "repo": "handlebars",
+    "desc": "Handlebars template engine"
+  },
   "hchacha20": {
     "type": "github",
     "owner": "chiefbiiko",
@@ -804,6 +810,12 @@
     "owner": "justjavac",
     "repo": "deno-murmurhash",
     "desc": "An incremental implementation of MurmurHash3 for JavaScript"
+  },
+  "mustache": {
+    "type": "github",
+    "owner": "alosaur",
+    "repo": "mustache",
+    "desc": "Mustache template renderer"
   },
   "mysql": {
     "type": "github",
