@@ -769,6 +769,18 @@
     "repo": "deno-minimatch",
     "desc": "A deno port of minimatch"
   },
+  "mixins": {
+    "type": "github",
+    "owner": "udibo",
+    "repo": "mixins",
+    "desc": "This module provides a few basic functions to help combine objects or build up classes from partial classes."
+  },
+  "mock": {
+    "type": "github",
+    "owner": "udibo",
+    "repo": "mock",
+    "desc": "This module provides utilities to help mock behavior and spy on function calls for tests."
+  },
   "moment": {
     "type": "github",
     "owner": "lisniuse",
