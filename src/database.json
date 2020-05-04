@@ -1084,6 +1084,12 @@
     "path": "lib/",
     "desc": "Escape and stringify an array of arguments to be executed on the shell."
   },
+  "short_uuid": {
+    "type": "github",
+    "owner": "jeanlescure",
+    "repo": "short_uuid",
+    "desc": "Generate random or sequential UUID of any length."
+  },
   "simple_type_assert": {
     "type": "github",
     "owner": "KSXGitHub",
