@@ -1255,6 +1255,27 @@
     "repo": "uwuifier",
     "desc": "This very lightweight package allows you to uwuify any sentence or word (excluding URL's) with many configurable parameters while giving you access to many vewy kawaii sentences and faces"
   },
+  "vscode_languageserver_protocol": {
+    "type": "github",
+    "owner": "denodev",
+    "repo": "deno_vscode_languageserver",
+    "path": "protocol/",
+    "desc": "The VSCode language server protocol definition in TypeScript."
+  },
+  "vscode_languageserver_textdocument": {
+    "type": "github",
+    "owner": "denodev",
+    "repo": "deno_vscode_languageserver",
+    "path": "textdocument/",
+    "desc": "Implement text documents usable in a LSP server using Deno as a runtime."
+  },
+  "vscode_languageserver_types": {
+    "type": "github",
+    "owner": "denodev",
+    "repo": "deno_vscode_languageserver",
+    "path": "types/",
+    "desc": "Data types used by the VSCode language server client and server."
+  },
   "watch": {
     "type": "github",
     "owner": "jinjor",
