@@ -54,6 +54,12 @@
     "repo": "bb64",
     "desc": "A better base64 encoder and decoder for Deno for easily encoding strings, Uint8Arrays, and files, including MIME types into encoding"
   },
+  "berror": {
+    "type": "github",
+    "owner": "baptistemarchand",
+    "repo": "berror",
+    "desc": "Rich Errors including chain of causes, metadata and easy logging"
+  },
   "bigfloat": {
     "type": "github",
     "owner": "davidmartinez10",
