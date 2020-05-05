@@ -84,7 +84,7 @@ function Home() {
       <p>Try running a simple program:</p>
       <CodeBlock
         language="shell"
-        value="deno https://deno.land/std/examples/welcome.ts"
+        value="deno run https://deno.land/std/examples/welcome.ts"
       />
 
       <p>Or a more complex one:</p>
