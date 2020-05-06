@@ -36,7 +36,19 @@ function App() {
             )}
           />
           <Route path="/manual(.html)?">
-            <Redirect to="/std/manual.md" />
+            <Redirect to="https://github.com/denoland/deno/blob/master/docs" />
+          </Route>
+          <Route path="/std/manual.md">
+            <Redirect to="https://github.com/denoland/deno/blob/master/docs" />
+          </Route>
+          <Route path="/std@:stdVersion/manual.md">
+            <Redirect to="https://github.com/denoland/deno/blob/master/docs" />
+          </Route>
+          <Route path="/x/std/manual.md">
+            <Redirect to="https://github.com/denoland/deno/blob/master/docs" />
+          </Route>
+          <Route path="/x/std@:stdVersion/manual.md">
+            <Redirect to="https://github.com/denoland/deno/blob/master/docs" />
           </Route>
           <Route path="/style_guide(.html)?">
             <Redirect to="/std/style_guide.md" />
