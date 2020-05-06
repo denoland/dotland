@@ -67,6 +67,7 @@ export async function getVersionList(name: string): Promise<string[] | null> {
       return null;
   }
 }
+
 export function parseNameVersion(nameVersion: string) {
   const [name, version] = nameVersion.split("@", 2);
   return [name, version as string | undefined] as const;

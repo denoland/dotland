@@ -99,7 +99,7 @@ const Registry = () => {
     getVersionList(name)
       .then(setVersions)
       .catch((e) => {
-        console.error("Failed to fetch dir entry:", e);
+        console.error("Failed to fetch versions:", e);
         setVersions(null);
       });
   }, [name]);
@@ -153,7 +153,9 @@ const Registry = () => {
 
   return (
     <div className="bg-gray-50 min-h-full">
-      <Header subtitle={isStd ? "Standard Library" : "Third Party Modules"} />
+      <Header
+        subtitle={name === "std" ? "Standard Library" : "Third Party Modules"}
+      />
       <div className="">
         <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8">
           <p className="text-gray-500 pt-2 pb-4">
@@ -201,14 +203,14 @@ const Registry = () => {
               })}
           </p>
           <div>
-            <label htmlFor="country" className="sr-only">
+            <label htmlFor="version" className="sr-only">
               Version
             </label>
             {versions && (
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <div className="max-w-xs rounded-md shadow-sm">
                   <select
-                    id="country"
+                    id="version"
                     className="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                     value={version}
                     onChange={({ target: { value: newVersion } }) =>

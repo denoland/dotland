@@ -37,8 +37,15 @@ export const RawCodeBlock = ({
           }
           style={{ ...style }}
         >
+          {tokens.length === 1 && language == "bash" && (
+            <code className="pr-2 sm:pr-3">
+              <div className="text-gray-400 token-line text-right select-none">
+                $
+              </div>
+            </code>
+          )}
           {tokens.length > 1 && (
-            <code className="pr-2 sm:pr-3 md:pr-4">
+            <code className="pr-2 sm:pr-3">
               {tokens.map((line, i) => (
                 <div
                   key={i + "l"}
@@ -69,7 +76,7 @@ const CodeBlock = ({ code, language }: CodeBlockProps) => {
     <RawCodeBlock
       code={code}
       language={language}
-      className="rounded-lg border border-gray-200 shadow p-2 sm:px-3 md:px-4"
+      className="rounded border border-gray-200 p-1 px-2 sm:px-3"
     />
   );
 };

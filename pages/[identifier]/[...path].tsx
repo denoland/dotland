@@ -5,6 +5,8 @@ import Registry from "../../components/Registry";
 import { useRouter } from "next/router";
 import ErrorPage from "next/error";
 import { parseNameVersion } from "../../util/registry_utils";
+import Manual from "../../components/Manual";
+import LoadingPage from "../../components/LoadingPage";
 
 const RegistryPage = () => {
   const { query } = useRouter();
@@ -19,9 +21,12 @@ const RegistryPage = () => {
     return { name, version, path: path ? `/${path}` : "" };
   }, [query]);
 
-  if (name !== "std") return <ErrorPage statusCode={404} />;
+  if (name === "std") return <Registry />;
+  if (name === "manual") return <Manual />;
 
-  return <Registry />;
+  if (name === "") return <LoadingPage />;
+
+  return <ErrorPage statusCode={404} />;
 };
 
 export default RegistryPage;

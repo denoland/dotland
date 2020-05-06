@@ -4,7 +4,7 @@ import React from "react";
 
 function InlineCode(props: { children: React.ReactNode }) {
   return (
-    <code className="py-px px-1 font-mono bg-gray-100 rounded-sm">
+    <code className="py-0.5 px-1 font-mono rounded-sm bg-gray-100 deno-inlinecode">
       {props.children}
     </code>
   );

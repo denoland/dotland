@@ -1,17 +1,14 @@
 /* TODO(lucacasonato): make this look good */
 
-/* Additional vertical padding used by kbd tag. */
-.py-05 {
-  padding-top: 0.125rem;
-  padding-bottom: 0.125rem;
-}
-
 .markdown {
-  @apply text-gray-900 leading-normal break-words;
+  @apply text-gray-900;
+  @apply leading-normal;
+  @apply break-words;
 }
 
 .markdown > * + * {
-  @apply mt-0 mb-4;
+  @apply mt-0;
+  @apply mb-4;
 }
 
 .markdown li + li {
@@ -27,67 +24,109 @@
 }
 
 .markdown h1 {
-  @apply leading-tight border-b text-4xl font-semibold mb-4 mt-6 pb-2;
+  @apply leading-tight;
+  @apply border-b;
+  @apply border-gray-200;
+  @apply text-4xl;
+  @apply font-bold;
+  @apply mb-4;
+  @apply mt-6;
+  @apply pb-1;
 }
 
 .markdown h2 {
-  @apply leading-tight border-b text-2xl font-semibold mb-4 mt-6 pb-2;
+  @apply leading-tight;
+  @apply border-b;
+  @apply border-gray-200;
+  @apply text-2xl;
+  @apply font-bold;
+  @apply mb-4;
+  @apply mt-6;
+  @apply pb-1;
 }
 
 .markdown h3 {
-  @apply leading-snug text-lg font-semibold mb-4 mt-6;
+  @apply leading-snug;
+  @apply text-xl;
+  @apply font-bold;
+  @apply mb-4;
+  @apply mt-6;
 }
 
 .markdown h4 {
-  @apply leading-none text-base font-semibold mb-4 mt-6;
+  @apply leading-none;
+  @apply text-lg;
+  @apply font-semibold;
+  @apply mb-4;
+  @apply mt-6;
 }
 
 .markdown h5 {
-  @apply leading-tight text-sm font-semibold mb-4 mt-6;
+  @apply leading-tight;
+  @apply text-sm;
+  @apply font-semibold;
+  @apply mb-4;
+  @apply mt-6;
 }
 
 .markdown h6 {
-  @apply leading-tight text-sm font-semibold text-gray-600 mb-4 mt-6;
+  @apply leading-tight;
+  @apply text-sm;
+  @apply font-semibold;
+  @apply text-gray-600;
+  @apply mb-4;
+  @apply mt-6;
 }
 
 .markdown blockquote {
-  @apply text-base border-l-4 border-gray-300 pl-4 pr-4 text-gray-600;
-}
-
-.markdown code {
-  @apply font-mono text-sm inline bg-gray-200 rounded px-1 py-05;
-}
-
-.markdown pre {
-  @apply bg-gray-100 rounded p-4;
-}
-
-.markdown pre code {
-  @apply block bg-transparent p-0 overflow-visible rounded-none;
+  @apply text-base;
+  @apply border-l-4;
+  @apply border-gray-300;
+  @apply pl-4;
+  @apply pr-4;
+  @apply text-gray-600;
 }
 
 .markdown ul {
-  @apply text-base pl-8 list-disc;
+  @apply text-base;
+  @apply pl-8;
+  @apply list-disc;
 }
 
 .markdown ol {
-  @apply text-base pl-8 list-decimal;
+  @apply text-base;
+  @apply pl-8;
+  @apply list-decimal;
 }
 
 .markdown kbd {
-  @apply text-xs inline-block rounded border px-1 py-05 align-middle font-normal font-mono shadow;
+  @apply text-xs;
+  @apply inline-block;
+  @apply rounded;
+  @apply border;
+  @apply px-1;
+  @apply align-middle;
+  @apply font-normal;
+  @apply font-mono;
+  @apply shadow;
+  @apply py-0.5;
 }
 
 .markdown table {
-  @apply text-base border-gray-600;
+  @apply text-base;
+  @apply border-gray-600;
 }
 
 .markdown th {
-  @apply border py-1 px-3;
+  @apply border;
+  @apply py-1;
+  @apply px-3;
 }
 
 .markdown td {
-  @apply border py-1 px-3;
+  @apply border;
+  @apply py-1;
+  @apply px-3;
 }
 
 .markdown input[type="checkbox"] {
