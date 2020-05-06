@@ -21,6 +21,11 @@ function Registry() {
   );
 }
 
+function manualRedirect() {
+  window.location.href = "https://github.com/denoland/deno/blob/master/docs";
+  return null;
+}
+
 function App() {
   return (
     <HashLinkHandler>
@@ -35,21 +40,14 @@ function App() {
               </Suspense>
             )}
           />
-          <Route path="/manual(.html)?">
-            <Redirect to="https://github.com/denoland/deno/blob/master/docs" />
-          </Route>
-          <Route path="/std/manual.md">
-            <Redirect to="https://github.com/denoland/deno/blob/master/docs" />
-          </Route>
-          <Route path="/std@:stdVersion/manual.md">
-            <Redirect to="https://github.com/denoland/deno/blob/master/docs" />
-          </Route>
-          <Route path="/x/std/manual.md">
-            <Redirect to="https://github.com/denoland/deno/blob/master/docs" />
-          </Route>
-          <Route path="/x/std@:stdVersion/manual.md">
-            <Redirect to="https://github.com/denoland/deno/blob/master/docs" />
-          </Route>
+          <Route path="/manual(.html)?" component={manualRedirect} />
+          <Route path="/std/manual.md" component={manualRedirect} />
+          <Route path="/std@:stdVersion/manual.md" component={manualRedirect} />
+          <Route path="/x/std/manual.md" component={manualRedirect} />
+          <Route
+            path="/x/std@:stdVersion/manual.md"
+            component={manualRedirect}
+          />
           <Route path="/style_guide(.html)?">
             <Redirect to="/std/style_guide.md" />
           </Route>
