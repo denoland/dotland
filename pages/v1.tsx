@@ -19,16 +19,12 @@ const V1 = () => {
         />
       </Head>
       <Header />
-      <img
-        src="/v1_banner.jpeg"
-        alt=""
-        className="object-cover md:h-64 w-full border-b border-gray-200"
-      />
+      <img src="/v1.jpg" alt="" className="max-w-screen-md mx-auto" />
       <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 py-8">
         <h1 className="text-3xl tracking-tight font-bold text-5xl leading-10 mt-4">
           Deno 1.0
         </h1>
-        <p className="text-gray-500 mt-3">Monday, March 9th 2020</p>
+        <p className="text-gray-500 mt-3">March 13th 2020</p>
         <p className="mt-8">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
           vitae pulvinar quam. Suspendisse rutrum libero vitae elit egestas,

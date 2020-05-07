@@ -9,7 +9,7 @@
     "build": "next build",
     "start": "next start",
     "format": "yarn format_check --write",
-    "format_check": "prettier --check **/*.md {util,public,pages,components}/**/*.{js,ts,jsx,tsx}",
+    "format_check": "prettier --check **/*.md {util,public,pages,components}/**/*.{js,ts,jsx,tsx} {util,public,pages,components}/*.{js,ts,jsx,tsx}",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx util/ pages/ components/"
   },
   "dependencies": {
