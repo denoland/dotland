@@ -19,6 +19,8 @@ interface HomeProps {
   thirdPartyEntries: SimpleEntry[];
 }
 
+const NUM_THIRD_PARTY = 12;
+
 // TODO(lucacasonato): add anchor points to headers
 const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
   const [thirdPartySelection, setThirdPartySelection] = useState<
@@ -26,7 +28,7 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
   >(null);
   useEffect(() => {
     const thirdPartySelection = [];
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < NUM_THIRD_PARTY; i++) {
       const s = Math.floor(thirdPartyEntries.length * Math.random());
       thirdPartySelection.push(thirdPartyEntries[s]);
       thirdPartyEntries.splice(s, 1);

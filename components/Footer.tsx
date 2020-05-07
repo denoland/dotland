@@ -72,12 +72,6 @@ const Footer = (props: { simple?: boolean }) => (
           </svg>
         </a>
       </div>
-      <div className="mt-8">
-        <p className="text-center text-base leading-6 text-gray-400">
-          &copy; {new Date().getFullYear()} the Deno authors. All rights
-          reserved. MIT license.
-        </p>
-      </div>
       <div className="mt-6 flex justify-center flex-wrap">
         <a href="https://github.com/denoland/deno">
           <img
