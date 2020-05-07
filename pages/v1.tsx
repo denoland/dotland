@@ -18,7 +18,7 @@ const V1 = () => {
           content="Deno, a secure runtime for JavaScript and TypeScript."
         />
       </Head>
-      <Header small />
+      <Header />
       <img
         src="/v1_banner.jpeg"
         alt=""

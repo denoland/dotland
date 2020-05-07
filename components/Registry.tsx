@@ -16,6 +16,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import FileDisplay from "./FileDisplay";
 import { DirEntry } from "../util/registries";
+import Head from "next/head";
 
 const Registry = () => {
   const { query, asPath, push } = useRouter();
@@ -152,140 +153,149 @@ const Registry = () => {
   const segments = path.split("/").splice(1);
 
   return (
-    <div className="bg-gray-50 min-h-full">
-      <Header
-        subtitle={name === "std" ? "Standard Library" : "Third Party Modules"}
-      />
-      <div className="">
-        <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8">
-          <p className="text-gray-500 pt-2 pb-4">
-            <Link href="/">
-              <a className="link">deno.land</a>
-            </Link>{" "}
-            /{" "}
-            {!isStd && (
-              <>
-                <Link href="/x">
-                  <a className="link">x</a>
-                </Link>{" "}
-                /{" "}
-              </>
-            )}
-            <Link
-              href={(!isStd ? "/x" : "") + "/[identifier]"}
-              as={`${!isStd ? "/x" : ""}/${name}${
-                version ? `@${version}` : ""
-              }`}
-            >
-              <a className="link">
-                {name}
-                {version ? `@${version}` : ""}
-              </a>
-            </Link>
-            {path &&
-              path.length > 0 &&
-              segments.map((p, i) => {
-                const link = segments.slice(0, i + 1).join("/");
-                return (
-                  <React.Fragment key={i}>
-                    {" "}
-                    /{" "}
-                    <Link
-                      href={(!isStd ? "/x" : "") + "/[identifier]/[...path]"}
-                      as={`${!isStd ? "/x" : ""}/${name}${
-                        version ? `@${version}` : ""
-                      }${link ? `/${link}` : ""}`}
+    <>
+      <Head>
+        <title>
+          {name}
+          {version && `@${version}`} - deno.land/x
+        </title>
+        <meta name="description" content="A third party module for Deno." />
+      </Head>
+      <div className="bg-gray-50 min-h-full">
+        <Header
+          subtitle={name === "std" ? "Standard Library" : "Third Party Modules"}
+        />
+        <div className="">
+          <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8">
+            <p className="text-gray-500 pt-2 pb-4">
+              <Link href="/">
+                <a className="link">deno.land</a>
+              </Link>{" "}
+              /{" "}
+              {!isStd && (
+                <>
+                  <Link href="/x">
+                    <a className="link">x</a>
+                  </Link>{" "}
+                  /{" "}
+                </>
+              )}
+              <Link
+                href={(!isStd ? "/x" : "") + "/[identifier]"}
+                as={`${!isStd ? "/x" : ""}/${name}${
+                  version ? `@${version}` : ""
+                }`}
+              >
+                <a className="link">
+                  {name}
+                  {version ? `@${version}` : ""}
+                </a>
+              </Link>
+              {path &&
+                path.length > 0 &&
+                segments.map((p, i) => {
+                  const link = segments.slice(0, i + 1).join("/");
+                  return (
+                    <React.Fragment key={i}>
+                      {" "}
+                      /{" "}
+                      <Link
+                        href={(!isStd ? "/x" : "") + "/[identifier]/[...path]"}
+                        as={`${!isStd ? "/x" : ""}/${name}${
+                          version ? `@${version}` : ""
+                        }${link ? `/${link}` : ""}`}
+                      >
+                        <a className="link">{p}</a>
+                      </Link>
+                    </React.Fragment>
+                  );
+                })}
+            </p>
+            <div>
+              <label htmlFor="version" className="sr-only">
+                Version
+              </label>
+              {versions && (
+                <div className="mt-1 sm:mt-0 sm:col-span-2">
+                  <div className="max-w-xs rounded-md shadow-sm">
+                    <select
+                      id="version"
+                      className="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                      value={version}
+                      onChange={({ target: { value: newVersion } }) =>
+                        gotoVersion(newVersion)
+                      }
                     >
-                      <a className="link">{p}</a>
-                    </Link>
-                  </React.Fragment>
-                );
-              })}
-          </p>
-          <div>
-            <label htmlFor="version" className="sr-only">
-              Version
-            </label>
-            {versions && (
-              <div className="mt-1 sm:mt-0 sm:col-span-2">
-                <div className="max-w-xs rounded-md shadow-sm">
-                  <select
-                    id="version"
-                    className="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                    value={version}
-                    onChange={({ target: { value: newVersion } }) =>
-                      gotoVersion(newVersion)
-                    }
-                  >
-                    {version && !versions.includes(version) && (
-                      <option key={version} value={version}>
-                        {version}
+                      {version && !versions.includes(version) && (
+                        <option key={version} value={version}>
+                          {version}
+                        </option>
+                      )}
+                      <option key="" value="">
+                        master
                       </option>
-                    )}
-                    <option key="" value="">
-                      master
-                    </option>
-                    {versions.map((v) => (
-                      <option key={v} value={v}>
-                        {v}
-                      </option>
-                    ))}
-                  </select>
+                      {versions.map((v) => (
+                        <option key={v} value={v}>
+                          {v}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              )}
+            </div>
+            {!dirEntries && !raw && !(dirEntries === null && raw === null) && (
+              // loading
+              <div className="mt-4 rounded-lg overflow-hidden border border-gray-200 bg-white">
+                <div className="bg-gray-100 h-10 w-full border-b border-gray-200 px-4 py-3">
+                  <div className="w-3/5 sm:w-1/5 bg-gray-200 h-4"></div>
+                </div>
+                <div className="w-full p-4">
+                  <div className="w-4/5 sm:w-1/3 bg-gray-100 h-8"></div>
+                  <div className="sm:w-2/3 bg-gray-100 h-3 mt-6"></div>
+                  <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
+                  <div className="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                  <div className="w-3/4 bg-gray-100 h-3 mt-4"></div>
+                  <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
+                  <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
                 </div>
               </div>
             )}
-          </div>
-          {!dirEntries && !raw && !(dirEntries === null && raw === null) && (
-            // loading
-            <div className="mt-4 rounded-lg overflow-hidden border border-gray-200 bg-white">
-              <div className="bg-gray-100 h-10 w-full border-b border-gray-200 px-4 py-3">
-                <div className="w-3/5 sm:w-1/5 bg-gray-200 h-4"></div>
-              </div>
-              <div className="w-full p-4">
-                <div className="w-4/5 sm:w-1/3 bg-gray-100 h-8"></div>
-                <div className="sm:w-2/3 bg-gray-100 h-3 mt-6"></div>
-                <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
-                <div className="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                <div className="w-3/4 bg-gray-100 h-3 mt-4"></div>
-                <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
-                <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-              </div>
-            </div>
-          )}
-          {dirEntries && (
-            <DirectoryListing
-              dirEntries={dirEntries}
-              repositoryURL={repositoryURL}
-              name={name}
-              version={version}
-              path={path}
-            />
-          )}
-          {raw && (
-            <div className="mt-4">
-              <FileDisplay
-                raw={raw}
-                canonicalPath={canonicalPath}
-                sourceURL={sourceURL!}
+            {dirEntries && (
+              <DirectoryListing
+                dirEntries={dirEntries}
                 repositoryURL={repositoryURL}
-                documentationURL={documentationURL}
+                name={name}
+                version={version}
+                path={path}
               />
-            </div>
-          )}
-          {readme && (
-            <div className="mt-4">
-              <FileDisplay
-                raw={readme}
-                canonicalPath={readmeCanonicalPath!}
-                sourceURL={readmeURL!}
-                repositoryURL={readmeRepositoryURL}
-              />
-            </div>
-          )}
+            )}
+            {raw && (
+              <div className="mt-4">
+                <FileDisplay
+                  raw={raw}
+                  canonicalPath={canonicalPath}
+                  sourceURL={sourceURL!}
+                  repositoryURL={repositoryURL}
+                  documentationURL={documentationURL}
+                />
+              </div>
+            )}
+            {readme && (
+              <div className="mt-4">
+                <FileDisplay
+                  raw={readme}
+                  canonicalPath={readmeCanonicalPath!}
+                  sourceURL={readmeURL!}
+                  repositoryURL={readmeRepositoryURL}
+                />
+              </div>
+            )}
+          </div>
         </div>
+        <Footer simple />
       </div>
-      <Footer simple />
-    </div>
+    </>
   );
 };
 

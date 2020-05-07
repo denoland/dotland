@@ -183,9 +183,11 @@ function Manual() {
         </div>
         <div className="flex flex-col w-0 flex-1 overflow-hidden">
           <div className="relative z-10 flex-shrink-0 flex h-16 bg-white shadow">
-            <div className="px-4 border-r border-gray-200 flex items-center justify-center md:hidden">
-              <img src="/logo.svg" alt="logo" className="w-auto h-10" />
-            </div>
+            <Link href="/">
+              <a className="px-4 border-r border-gray-200 flex items-center justify-center md:hidden">
+                <img src="/logo.svg" alt="logo" className="w-auto h-10" />
+              </a>
+            </Link>
             <div className="flex-1 px-4 flex justify-between">
               <div className="flex-1 flex">
                 <div className="w-full flex md:ml-0">
@@ -298,7 +300,7 @@ function Version({
 
 function ToC({ tableOfContents }: { tableOfContents: TableOfContents }) {
   return (
-    <div className="pt-2 pb-4 h-0 flex-1 flex flex-col overflow-y-auto">
+    <div className="pt-2 pb-8 h-0 flex-1 flex flex-col overflow-y-auto">
       <nav className="flex-1 px-2 px-4">
         <ol className="pl-2 list-decimal list-inside font-semibold nested">
           {tableOfContents &&

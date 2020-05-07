@@ -9,6 +9,7 @@ import Footer from "../components/Footer";
 import { entries } from "../util/registry_utils";
 import { NextPage, GetStaticProps } from "next";
 import InlineCode from "../components/InlineCode";
+import Header from "../components/Header";
 
 interface SimpleEntry {
   name: string;
@@ -42,17 +43,39 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
           content="Deno, a secure runtime for JavaScript and TypeScript."
         />
       </Head>
-      <div className="bg-gray-50">
-        <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 py-20 flex flex-col items-center">
-          <img src="/logo.svg" alt="Deno logo" className="w-32 h-32" />
-          <h1 className="mt-8 font-extrabold text-4xl sm:text-5xl leading-10 tracking-tight">
-            Deno
-          </h1>
-          <h2 className="mt-1 sm:mt-2 font-light text-lg sm:text-xl text-center">
-            A secure runtime for JavaScript and TypeScript.
-          </h2>
+      <div className="bg-white">
+        <div className="bg-gray-50 border-b border-gray-200">
+          <Header />
+          <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-16 sm:pt-24 pb-20 sm:pb-36 flex flex-col items-center">
+            <h1 className="font-extrabold text-5xl leading-10 tracking-tight text-gray-900">
+              Deno
+            </h1>
+            <h2 className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900">
+              A <strong className="font-semibold">secure</strong> runtime for{" "}
+              <strong className="font-semibold">JavaScript</strong> and{" "}
+              <strong className="font-semibold">TypeScript</strong>.
+            </h2>
+            <div className="mt-8 flex justify-center">
+              <div className="rounded-md shadow">
+                <a
+                  href="#"
+                  className="flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-black hover:bg-cool-gray-900 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out"
+                >
+                  Get Started
+                </a>
+              </div>
+              <div className="ml-3">
+                <a
+                  href="#"
+                  className="flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-gray-800 bg-gray-200 hover:bg-gray-300 focus:outline-none focus:shadow-outline focus:border-gray-300 transition duration-150 ease-in-out"
+                >
+                  View Docs
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-4">
+        <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <h3 className="font-bold text-xl">Introduction</h3>
           <p className="my-4 text-gray-700">
             Deno is a simple, modern and secure runtime for JavaScript and
@@ -303,8 +326,6 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
       });
     }
   });
-
-  console.log(thirdPartyEntries.length);
 
   return {
     props: { thirdPartyEntries },

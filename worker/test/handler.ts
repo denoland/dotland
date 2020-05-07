@@ -50,9 +50,7 @@ describe("worker proxying", () => {
     );
     expect(result.headers.get("Content-Type")).to.include("text/html");
     const text = await result.text();
-    expect(text).to.include(
-      'content="Deno, a secure runtime for JavaScript and TypeScript."'
-    );
+    expect(text).to.include('content="A third party module for Deno."');
   }).timeout("5000");
 
   it("/x/std/style_guide.md with no Accept responds with raw markdown", async () => {
@@ -94,9 +92,7 @@ describe("worker proxying", () => {
     );
     expect(result.headers.get("Content-Type")).to.include("text/html");
     const text = await result.text();
-    expect(text).to.include(
-      'content="Deno, a secure runtime for JavaScript and TypeScript."'
-    );
+    expect(text).to.include('content="A third party module for Deno."');
   }).timeout("5000");
 
   it("/x/std@v0.34.0/style_guide.md with no Accept responds with raw markdown", async () => {

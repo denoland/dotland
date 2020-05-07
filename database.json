@@ -48,6 +48,12 @@
     "repo": "base64",
     "desc": "base64 strings from/to Uint8Arrays"
   },
+  "bb64": {
+    "type": "github",
+    "owner": "denjucks",
+    "repo": "bb64",
+    "desc": "A better base64 encoder and decoder for Deno for easily encoding strings, Uint8Arrays, and files, including MIME types into encoding"
+  },
   "bigfloat": {
     "type": "github",
     "owner": "davidmartinez10",
@@ -236,6 +242,12 @@
     "path": "/src",
     "desc": "Modern JavaScript date utility library"
   },
+  "dblapi.ts": {
+    "type": "github",
+    "owner": "zSnails",
+    "repo": "dblapi.ts",
+    "desc": "TypeScript top.gg api wrapper"
+  },
   "deamon": {
     "type": "github",
     "owner": "manyuanrong",
@@ -260,11 +272,23 @@
     "repo": "dejs",
     "desc": "ejs template engine for deno."
   },
+  "deku": {
+    "type": "github",
+    "owner": "yisar",
+    "repo": "deku",
+    "desc": "No bundle dev server for es modules."
+  },
   "dem": {
     "type": "github",
     "owner": "syumai",
     "repo": "dem",
     "desc": "A module version manager for Deno."
+  },
+  "denjucks": {
+    "type": "github",
+    "owner": "denjucks",
+    "repo": "denjucks",
+    "desc": "A powerful and easy to use templating engine ported from Mozilla's Nunjucks"
   },
   "deno": {
     "type": "github",
@@ -283,6 +307,18 @@
     "owner": "maxuuell",
     "repo": "deno_init",
     "desc": "The executable to set up a deno project 🦕"
+  },
+  "deno_search": {
+    "type": "github",
+    "owner": "etopiei",
+    "repo": "deno_search",
+    "desc": "A CLI tool to search for third party packages on deno.land"
+  },
+  "denoforge": {
+    "type": "github",
+    "owner": "denjucks",
+    "repo": "denoforge",
+    "desc": "Deno data science library similar to Python's Pandas. Port of the NodeJS library data-forge"
   },
   "denofun": {
     "type": "github",
@@ -309,6 +345,12 @@
     "repo": "denon",
     "desc": "Like nodemon but made in and for deno. Also a deno style file watcher"
   },
+  "denotrain": {
+    "type": "github",
+    "owner": "Caesar2011",
+    "repo": "denotrain",
+    "desc": "An easy to use webserver engine like express in nodejs fully written in Typescript."
+  },
   "denoversion": {
     "type": "github",
     "owner": "lucascaro",
@@ -320,6 +362,24 @@
     "owner": "crowlKats",
     "repo": "denv",
     "desc": "A module similar to dotEnv, but for Deno"
+  },
+  "dev_server": {
+    "type": "github",
+    "owner": "zhmushan",
+    "repo": "dev_server",
+    "desc": "Feel free to import TypeScript files in the script tag!"
+  },
+  "dex": {
+    "type": "github",
+    "owner": "denjucks",
+    "repo": "dex",
+    "desc": "An SQL query builder port of Knex for Deno"
+  },
+  "dinja": {
+    "type": "github",
+    "owner": "denjucks",
+    "repo": "dinja",
+    "desc": "An scalable, Rails-like web framework for Deno"
   },
   "dinocord": {
     "type": "github",
@@ -369,6 +429,12 @@
     "repo": "deno-drash",
     "desc": "A REST microframework for Deno."
   },
+  "drun": {
+    "type": "github",
+    "owner": "MarcHanin",
+    "repo": "drun",
+    "desc": "Drun helps to restart automatically your deno application during development"
+  },
   "dso": {
     "type": "github",
     "owner": "manyuanrong",
@@ -386,6 +452,12 @@
     "owner": "herohamp",
     "repo": "EaiserColors",
     "desc": "Eaiser colors is a wrapper for the std/colors module with the goal of making it much eaiser to see what is happening"
+  },
+  "easy_soap_request": {
+    "type": "github",
+    "owner": "circa10a",
+    "repo": "easy-soap-request",
+    "desc": "A small library to make SOAP requests easier via Node.js, Deno, and your browser"
   },
   "easypath": {
     "type": "github",
@@ -521,6 +593,30 @@
     "repo": "i18next",
     "path": "/src",
     "desc": "i18next: learn once - translate everywhere"
+  },
+  "i18next_fs_backend": {
+    "type": "github",
+    "owner": "i18next",
+    "repo": "i18next-fs-backend",
+    "desc": "A simple i18next backend for i18next used in Node.js and for Deno to load translations from the filesystem."
+  },
+  "i18next_http_backend": {
+    "type": "github",
+    "owner": "i18next",
+    "repo": "i18next-http-backend",
+    "desc": "A simple i18next backend to be used in Node.js, in the browser and for Deno. It will load resources from a backend server using the XMLHttpRequest or the fetch API."
+  },
+  "i18next_http_middleware": {
+    "type": "github",
+    "owner": "i18next",
+    "repo": "i18next-http-middleware",
+    "desc": "A simple i18next middleware to be used with Node.js web frameworks like express or Fastify and also for Deno."
+  },
+  "i18next_locize_backend": {
+    "type": "github",
+    "owner": "locize",
+    "repo": "i18next-locize-backend",
+    "desc": "A simple i18next backend for locize.com which can be used in Node.js, in the browser and for Deno."
   },
   "ini": {
     "type": "github",
@@ -674,6 +770,18 @@
     "repo": "deno-minimatch",
     "desc": "A deno port of minimatch"
   },
+  "mixins": {
+    "type": "github",
+    "owner": "udibo",
+    "repo": "mixins",
+    "desc": "This module provides a few basic functions to help combine objects or build up classes from partial classes."
+  },
+  "mock": {
+    "type": "github",
+    "owner": "udibo",
+    "repo": "mock",
+    "desc": "This module provides utilities to help mock behavior and spy on function calls for tests."
+  },
   "moment": {
     "type": "github",
     "owner": "lisniuse",
@@ -708,7 +816,13 @@
     "type": "github",
     "owner": "ianfabs",
     "repo": "nanoid",
-    "desc": "A tiny, secure, URL-friendly, unique string ID generator for JavaScript."
+    "desc": "A tiny, secure, URL-friendly, unique string ID generator for JavaScript."
+  },
+  "nessie": {
+    "type": "github",
+    "owner": "halvardssm",
+    "repo": "deno-nessie",
+    "desc": "A database migration tool for deno."
   },
   "normalize_diacritics": {
     "type": "github",
@@ -722,6 +836,12 @@
     "owner": "oakserver",
     "repo": "oak",
     "desc": "A middleware framework for Deno's http server, including a router middleware."
+  },
+  "observable": {
+    "type": "github",
+    "owner": "bsunderhus",
+    "repo": "deno-observable",
+    "desc": "tc39 proposal spec compatible observable"
   },
   "once": {
     "type": "github",
@@ -740,6 +860,12 @@
     "owner": "TokenChingy",
     "repo": "panoptes",
     "desc": "A simple array and object watcher function for Deno."
+  },
+  "parry": {
+    "type": "github",
+    "owner": "eliassjogreen",
+    "repo": "parry",
+    "desc": "A simple way of running functions in their own WebWorkers"
   },
   "parseargs": {
     "type": "github",
@@ -850,6 +976,12 @@
     "repo": "deno-purify",
     "desc": "A deno port of purify-ts."
   },
+  "rad": {
+    "type": "github",
+    "owner": "cdaringe",
+    "repo": "rad",
+    "desc": "General purpose build tool. statically typed, batteries included. command, function, and make-style tasks supported"
+  },
   "rand": {
     "type": "github",
     "owner": "rsp",
@@ -891,6 +1023,12 @@
     "owner": "garronej",
     "repo": "run_exclusive",
     "desc": "⚡🔒 Generate functions that do not allow parallel executions 🔒 ⚡"
+  },
+  "saur": {
+    "type": "github",
+    "owner": "tubbo",
+    "repo": "saur",
+    "desc": "Deno Saur is a full-stack web application framework with a focus on rapid development, similar to Django or Ruby on Rails."
   },
   "secp256k1": {
     "type": "github",
@@ -946,6 +1084,12 @@
     "owner": "chiefbiiko",
     "repo": "siphash24",
     "desc": "SipHash24 implemented in WebAssembly."
+  },
+  "skimming": {
+    "type": "github",
+    "owner": "petruki",
+    "repo": "skimming",
+    "desc": "Skimming is a search engine module for Deno."
   },
   "slash": {
     "type": "github",
@@ -1014,6 +1158,12 @@
     "owner": "toddself",
     "repo": "take-five",
     "desc": "A minimal (no external dependency) REST framework"
+  },
+  "talk_lib": {
+    "type": "github",
+    "owner": "jipfr",
+    "repo": "talk-lib",
+    "desc": "A send & receive library for Nextcloud Talk"
   },
   "task_runner": {
     "type": "github",
@@ -1129,5 +1279,11 @@
     "owner": "KSXGitHub",
     "repo": "yaml-wasm",
     "desc": "WebAssembly module to parse YAML"
+  },
+  "zstd": {
+    "type": "github",
+    "owner": "xpyxel",
+    "repo": "deno-zstd",
+    "desc": "Zstd compression library bindings for Deno"
   }
 }

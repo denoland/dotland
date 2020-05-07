@@ -49,7 +49,7 @@ const Benchmarks = () => {
         <meta name="description" content="Continuous benchmarks for Deno." />
       </Head>
       <div className="bg-gray-50 min-h-full">
-        <Header small subtitle="Continuous Benchmarks" />
+        <Header subtitle="Continuous Benchmarks" />
         <div className="mb-12">
           <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 mt-8 pb-8">
             <h4 className="text-2xl font-bold tracking-tight">About</h4>
