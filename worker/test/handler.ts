@@ -71,9 +71,9 @@ describe("worker proxying", () => {
     expect(text).to.include("# Deno Style Guide");
   }).timeout("5000");
 
-  it("/std@v0.34.0/style_guide.md with Accept: 'text/html' responds with React html", async () => {
+  it("/std@v0.42.0/style_guide.md with Accept: 'text/html' responds with React html", async () => {
     const result = await handleRequest(
-      new Request("https://deno.land/std@v0.34.0/style_guide.md", {
+      new Request("https://deno.land/std@v0.42.0/style_guide.md", {
         headers: { Accept: "text/html" },
       })
     );
@@ -84,18 +84,18 @@ describe("worker proxying", () => {
     );
   }).timeout("5000");
 
-  it("/std@v0.34.0/style_guide.md with no Accept responds with raw markdown", async () => {
+  it("/std@v0.42.0/style_guide.md with no Accept responds with raw markdown", async () => {
     const result = await handleRequest(
-      new Request("https://deno.land/std@v0.34.0/style_guide.md")
+      new Request("https://deno.land/std@v0.42.0/style_guide.md")
     );
     expect(result.headers.get("Content-Type")).to.include("text/plain");
     const text = await result.text();
     expect(text).to.include("# Deno Style Guide");
   }).timeout("5000");
 
-  it("/x/std@0.34.0/style_guide.md with Accept: 'text/html' responds with React html", async () => {
+  it("/x/std@0.42.0/style_guide.md with Accept: 'text/html' responds with React html", async () => {
     const result = await handleRequest(
-      new Request("https://deno.land/x/std@0.34.0/style_guide.md", {
+      new Request("https://deno.land/x/std@0.42.0/style_guide.md", {
         headers: { Accept: "text/html" },
       })
     );
@@ -104,9 +104,9 @@ describe("worker proxying", () => {
     expect(text).to.include('content="A third party module for Deno."');
   }).timeout("5000");
 
-  it("/x/std@v0.34.0/style_guide.md with no Accept responds with raw markdown", async () => {
+  it("/x/std@v0.42.0/style_guide.md with no Accept responds with raw markdown", async () => {
     const result = await handleRequest(
-      new Request("https://deno.land/x/std@v0.34.0/style_guide.md")
+      new Request("https://deno.land/x/std@v0.42.0/style_guide.md")
     );
     expect(result.headers.get("Content-Type")).to.include("text/plain");
     const text = await result.text();

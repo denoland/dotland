@@ -68,9 +68,17 @@ export async function getVersionList(name: string): Promise<string[] | null> {
   }
 }
 
-export function parseNameVersion(nameVersion: string) {
-  const [name, version] = nameVersion.split("@", 2);
-  return [name, version as string | undefined] as const;
+export function parseNameVersion(
+  nameVersion: string
+): [string, string | undefined] {
+  const s = nameVersion.split("@", 2);
+  const name = s[0];
+  let version = s[1];
+  // std@0.42.0 should use git tag std/0.42.0
+  if (name === "std" && version && version !== "master") {
+    version = "std/" + version.replace(/^v/, "");
+  }
+  return [name, version];
 }
 
 export function fileTypeFromURL(filename: string) {
