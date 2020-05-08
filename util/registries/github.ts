@@ -60,7 +60,6 @@ export class GithubRegistry implements Registry<GithubEntry> {
     const res = await fetch(url, {
       headers: {
         accept: "application/vnd.github.v3.object",
-        authorization: "Bearer b20ba83145b9aab44caf38fe0de4a5edb95bc764",
       },
     });
     if (res.status !== 200) {
