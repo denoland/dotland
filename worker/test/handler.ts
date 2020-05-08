@@ -33,13 +33,14 @@ describe("worker proxying", () => {
     );
   }).timeout("5000");
 
-  it("/std/style_guide.md with no Accept responds with raw markdown", async () => {
+  it("/std/http/server.ts with no Accept responds with raw markdown", async () => {
     const result = await handleRequest(
-      new Request("https://deno.land/std/style_guide.md")
+      new Request("https://deno.land/std/http/server.ts")
     );
     expect(result.headers.get("Content-Type")).to.include("text/plain");
+    expect(result.headers.get("X-Deno-Warning")).to.include("Linking to master branch");
     const text = await result.text();
-    expect(text).to.include("# Deno Style Guide");
+    expect(text).to.include("import");
   }).timeout("5000");
 
   it("/x/std/style_guide.md with Accept: 'text/html' responds with React html", async () => {

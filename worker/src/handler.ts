@@ -12,8 +12,6 @@ export async function handleRequest(request: Request) {
 
   const url = new URL(request.url);
   // console.log('request.url', url.pathname);
-  const maybeProxyElsewhere =
-    url.pathname.startsWith("/std") || url.pathname.startsWith("/x");
 
   // TODO(ry) Support docs without hitting S3...
   if (url.pathname.startsWith("/typedoc")) {
@@ -24,22 +22,33 @@ export async function handleRequest(request: Request) {
     return redirect(url, REMOTE_URL, request);
   }
 
+  const maybeProxyElsewhere =
+    url.pathname.startsWith("/std") || url.pathname.startsWith("/x");
   if (!maybeProxyElsewhere) {
     return redirect(url, REMOTE_URL, request);
   }
 
   console.log("serve up text", url.pathname);
-  const proxied = proxy(url.pathname);
-  if (!proxied) {
+  const remoteUrl = proxy(url.pathname);
+  if (!remoteUrl) {
     return new Response("Not in database.json " + url.pathname, {
       status: 404,
       statusText: "Not Found",
       headers: { "content-type": "text/plain" },
     });
   }
-  const rUrl = proxied;
-  console.log("text proxy", rUrl);
-  return fetch(rUrl);
+
+  console.log("text proxy", remoteUrl);
+  let response = await fetch(remoteUrl);
+  if (needsWarning(url.pathname)) {
+    response = new Response(response.body, response);
+    response.headers.set("X-Deno-Warning", "Linking to master branch");
+  }
+  return response;
+}
+
+function needsWarning(pathname: string): boolean {
+  return pathname.startsWith("/std") && !pathname.startsWith("/std@");
 }
 
 function redirect(url: URL, remoteUrl: string, request: Request) {
