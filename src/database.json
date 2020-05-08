@@ -198,6 +198,12 @@
     "repo": "deno",
     "desc": "A secure runtime for JavaScript and TypeScript."
   },
+  "coward": {
+    "type": "github",
+    "owner": "fox-cat",
+    "repo": "coward",
+    "desc": "🐔 Coward is a Deno module for easy interaction with the Discord API. "
+  },
   "cowsay": {
     "type": "github",
     "owner": "fakoua",
