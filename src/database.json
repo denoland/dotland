@@ -1029,6 +1029,12 @@
     "repo": "reno",
     "desc": "A thin, testable routing library designed to sit on top of Deno's standard HTTP module"
   },
+  "rewrite_compiled_ext": {
+    "type": "github",
+    "owner": "brtheo",
+    "repo": "deno_rewrite_compiled_ext",
+    "desc": "Rewrite file extension of imported module after typescript compilation"
+  },
   "rimu": {
     "type": "github",
     "owner": "srackham",
