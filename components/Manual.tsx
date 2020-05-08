@@ -63,7 +63,10 @@ function Manual() {
   useEffect(() => {
     setVersions(undefined);
     getVersionList("deno")
-      .then(setVersions)
+      .then((v) =>
+        // do not show old versions that do not have the new manual yet
+        setVersions(v?.filter((v) => v.startsWith("v1") && v !== "v1.0.0-rc1"))
+      )
       .catch((e) => {
         console.error("Failed to fetch versions:", e);
         setVersions(null);

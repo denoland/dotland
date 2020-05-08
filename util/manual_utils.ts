@@ -1,5 +1,4 @@
-const basepath =
-  "https://raw.githubusercontent.com/luca-rand/deno/multi-page-manual/docs";
+const basepath = "https://raw.githubusercontent.com/denoland/deno/";
 
 export interface TableOfContents {
   [slug: string]: {
@@ -11,9 +10,9 @@ export interface TableOfContents {
 }
 
 export async function getTableOfContents(
-  _version: string
+  version: string
 ): Promise<TableOfContents> {
-  const res = await fetch(`${basepath}/toc.json`);
+  const res = await fetch(`${basepath}${version}/docs/toc.json`);
   if (res.status !== 200) {
     throw Error(
       `Got an error (${
@@ -24,8 +23,8 @@ export async function getTableOfContents(
   return await res.json();
 }
 
-export async function getFile(_version: string, path: string): Promise<string> {
-  const res = await fetch(`${basepath}${path}.md`);
+export async function getFile(version: string, path: string): Promise<string> {
+  const res = await fetch(`${basepath}${version}/docs/${path}.md`);
   if (res.status !== 200) {
     throw Error(
       `Got an error (${
