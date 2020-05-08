@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { handleRequest } from "../src/handler";
+import { needsWarning, handleRequest } from "../src/handler";
 
 describe("worker proxying", () => {
   it("/ responds with React html", async () => {
@@ -10,6 +10,13 @@ describe("worker proxying", () => {
       'content="Deno, a secure runtime for JavaScript and TypeScript."'
     );
   }).timeout("5000");
+
+  it("needsWarning", async () => {
+    expect(needsWarning("/std/http/server.ts")).to.equal(true);
+    expect(needsWarning("/std@v0.1.2/http/server.ts")).to.equal(false);
+    expect(needsWarning("/x/foo/bar.txt")).to.equal(false);
+    expect(needsWarning("/index.html")).to.equal(false);
+  });
 
   it("/typedoc/ responds with typedoc", async () => {
     const result = await handleRequest(
@@ -33,12 +40,13 @@ describe("worker proxying", () => {
     );
   }).timeout("5000");
 
-  it("/std/http/server.ts with no Accept responds with raw markdown", async () => {
+  it("/std/http/server.ts had x-deno-warning", async () => {
     const result = await handleRequest(
       new Request("https://deno.land/std/http/server.ts")
     );
     expect(result.headers.get("Content-Type")).to.include("text/plain");
-    expect(result.headers.get("X-Deno-Warning")).to.include("Linking to master branch");
+    expect(result.headers.get("X-Deno-Warning")).to.include("master branch");
+    expect(result.headers.get("X-Deno-Warning")).to.include("/std/http/server.ts");
     const text = await result.text();
     expect(text).to.include("import");
   }).timeout("5000");

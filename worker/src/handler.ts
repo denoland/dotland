@@ -42,12 +42,15 @@ export async function handleRequest(request: Request) {
   let response = await fetch(remoteUrl);
   if (needsWarning(url.pathname)) {
     response = new Response(response.body, response);
-    response.headers.set("X-Deno-Warning", "Linking to master branch");
+    response.headers.set(
+      "X-Deno-Warning",
+      `Implicitly using master branch ${url}`
+    );
   }
   return response;
 }
 
-function needsWarning(pathname: string): boolean {
+export function needsWarning(pathname: string): boolean {
   return pathname.startsWith("/std") && !pathname.startsWith("/std@");
 }
 
