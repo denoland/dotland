@@ -12,7 +12,7 @@ import Markdown from "./Markdown";
 import Transition from "./Transition";
 
 function Manual() {
-  const { query, push } = useRouter();
+  const { query, push, replace } = useRouter();
   const { version, path } = useMemo(() => {
     const path =
       (Array.isArray(query.path) ? query.path.join("/") : query.path) ?? "";
@@ -27,6 +27,17 @@ function Manual() {
       path: path ? `/${path}` : "/introduction",
     };
   }, [query]);
+
+  if (path.endsWith(".md")) {
+    replace(
+      `/[identifier]${path ? "/[...path]" : ""}`,
+      `/manual${version && version !== "" ? `@${version}` : ""}${path.replace(
+        /\.md$/,
+        ""
+      )}`
+    );
+    return <></>;
+  }
 
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
 

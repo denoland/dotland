@@ -24,7 +24,7 @@ export async function getTableOfContents(
 }
 
 export async function getFile(version: string, path: string): Promise<string> {
-  const res = await fetch(`${basepath}${version}/docs/${path}.md`);
+  const res = await fetch(`${basepath}${version}/docs${path}.md`);
   if (res.status !== 200) {
     throw Error(
       `Got an error (${
