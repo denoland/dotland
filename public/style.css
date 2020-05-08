@@ -1,3 +1,7 @@
+#root img {
+  max-width: 100%;
+}
+
 #manual img {
   width: 100%;
   max-width: 800px;
