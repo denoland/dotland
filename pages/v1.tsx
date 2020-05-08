@@ -19,7 +19,18 @@ const V1 = () => {
         />
       </Head>
       <Header />
-      <img src="/v1.jpg" alt="" className="max-w-screen-md mx-auto" />
+      <div className="w-full" style={{ backgroundColor: "#302d2d" }}>
+        <img
+          src="/v1_wide.png"
+          alt=""
+          className="max-w-screen-lg mx-auto w-full hidden md:block"
+        />
+        <img
+          src="/v1.png"
+          alt=""
+          className="max-w-screen-lg mx-auto w-full block md:hidden"
+        />
+      </div>
       <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 py-8">
         <h1 className="text-3xl tracking-tight font-bold text-5xl leading-10 mt-4">
           Deno 1.0
