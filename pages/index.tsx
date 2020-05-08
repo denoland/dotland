@@ -84,10 +84,6 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
             Deno is a simple, modern and secure runtime for JavaScript and
             TypeScript that uses V8 and is built in Rust.
           </p>
-          <p className="my-4 text-gray-700">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur
-            non rem nemo ad temporibus laboriosam.
-          </p>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <h3 className="font-bold text-xl">Installation</h3>
