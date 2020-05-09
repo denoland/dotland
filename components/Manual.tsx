@@ -258,7 +258,31 @@ function Manual() {
             tabIndex={0}
           >
             <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20">
-              {content && <Markdown source={content} />}
+              {content ? (
+                <Markdown source={content} />
+              ) : (
+                <div className="w-full my-8">
+                  <div className="w-4/5 sm:w-1/3 bg-gray-100 h-8"></div>
+                  <div className="sm:w-2/3 bg-gray-100 h-3 mt-10"></div>
+                  <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
+                  <div className="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                  <div className="w-3/4 bg-gray-100 h-3 mt-4"></div>
+                  <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
+                  <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                  <div className="sm:w-2/3 bg-gray-100 h-3 mt-10"></div>
+                  <div className="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                  <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
+                  <div className="w-3/4 bg-gray-100 h-3 mt-4"></div>
+                  <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                  <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
+                  <div className="w-3/4 bg-gray-100 h-3 mt-10"></div>
+                  <div className="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                  <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
+                  <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
+                  <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                  <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
+                </div>
+              )}
             </div>
           </main>
         </div>

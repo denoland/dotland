@@ -48,20 +48,20 @@ interface LinkRendererProps {
   href?: string;
 }
 
-// Use next.js Link
 function LinkRenderer(props: LinkRendererProps) {
   const { asPath } = useRouter();
   const currentPath = new URL(asPath, location.origin).pathname;
   let href: string | undefined = undefined;
-  if (props.href) {
-    if (props.href.startsWith("#")) {
-      href = props.href;
-    } else if (props.href.startsWith("./") || props.href.startsWith("../")) {
-      href = currentPath + "/" + props.href;
-    } else {
-      href = props.href;
-    }
+  if (
+    props.href &&
+    (props.href.startsWith("./") || props.href.startsWith("../")) &&
+    currentPath.startsWith("/manual")
+  ) {
+    href = props.href.replace(/\.md$/, "");
+  } else {
+    href = props.href;
   }
+  // TODO(lucacasonato): Use next.js Link
   return (
     <a href={href} className="link">
       {props.children}

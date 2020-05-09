@@ -15,6 +15,7 @@ export interface CodeBlockProps {
     | "yaml"
     | "markdown"
     | "bash"
+    | "shell"
     | "text";
 }
 
@@ -28,7 +29,9 @@ export const RawCodeBlock = ({
       Prism={Prism}
       theme={light}
       code={code}
-      language={language === "text" ? "diff" : language}
+      language={
+        language === "shell" ? "bash" : language === "text" ? "diff" : language
+      }
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre
@@ -37,13 +40,14 @@ export const RawCodeBlock = ({
           }
           style={{ ...style }}
         >
-          {tokens.length === 1 && language == "bash" && (
-            <code className="pr-2 sm:pr-3">
-              <div className="text-gray-400 token-line text-right select-none">
-                $
-              </div>
-            </code>
-          )}
+          {tokens.length === 1 &&
+            (language === "bash" || language === "shell") && (
+              <code className="pr-2 sm:pr-3">
+                <div className="text-gray-400 token-line text-right select-none">
+                  $
+                </div>
+              </code>
+            )}
           {tokens.length > 1 && (
             <code className="pr-2 sm:pr-3">
               {tokens.map((line, i) => (
