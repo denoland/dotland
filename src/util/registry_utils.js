@@ -15,7 +15,7 @@ export function proxy(pathname) {
   const name = s[0];
   let branch = s[1];
   // std@0.42.0 should use git tag std/0.42.0
-  if (name == "std" && branch && branch !== "master") {
+  if (name == "std" && branch?.match(/^v?\d+\.\d+\.\d+$/)) {
     branch = branch.replace(/^v/, "");
     branch = "std/" + branch;
   }
