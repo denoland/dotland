@@ -19,14 +19,14 @@ const V1 = () => {
         />
       </Head>
       <Header />
-      <div className="w-full" style={{ backgroundColor: "#302d2d" }}>
+      <div className="w-full" style={{ backgroundColor: "#2f2e2c" }}>
         <img
-          src="/v1_wide_opt.png"
+          src="/v1_wide.jpg"
           alt=""
           className="max-w-screen-lg mx-auto w-full hidden md:block"
         />
         <img
-          src="/v1.png"
+          src="/v1.jpg"
           alt=""
           className="max-w-screen-lg mx-auto w-full block md:hidden"
         />
