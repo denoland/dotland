@@ -21,7 +21,7 @@ const V1 = () => {
       <Header />
       <div className="w-full" style={{ backgroundColor: "#302d2d" }}>
         <img
-          src="/v1_wide.png"
+          src="/v1_wide_opt.png"
           alt=""
           className="max-w-screen-lg mx-auto w-full hidden md:block"
         />
