@@ -10,7 +10,16 @@ export function proxy(pathname) {
   }
   const nameBranchRest = pathname.replace(/^\/x\//, "");
   const [nameBranch, ...rest] = nameBranchRest.split("/");
-  const [name, branch] = nameBranch.split("@", 2);
+  const s = nameBranch.split("@", 2);
+
+  const name = s[0];
+  let branch = s[1];
+  // std@0.42.0 should use git tag std/0.42.0
+  if (name == "std" && branch && branch !== "master") {
+    branch = branch.replace(/^v/, "");
+    branch = "std/" + branch;
+  }
+
   const path = rest.join("/");
   const entry = getEntry(name, branch);
   if (!entry || !entry.url) {
