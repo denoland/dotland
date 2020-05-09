@@ -14,12 +14,10 @@
   },
   "include": [
     "./src/*.ts",
-    "./test/*.ts",
+    "__tests__/*.ts",
     "./src/**/*.ts",
-    "./test/**/*.ts",
-    "./node_modules/@cloudflare/workers-types/index.d.ts",
-    "../web/src/database.json",
-    "../web/src/util/registry_utils.ts"
+    "__tests__/**/*.ts",
+    "./node_modules/@cloudflare/workers-types/index.d.ts"
   ],
-  "exclude": ["node_modules/", "dist/"]
+  "exclude": ["node_modules/", "dist/", "**/*.test.ts"]
 }

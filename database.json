@@ -34,7 +34,7 @@
     "type": "github",
     "owner": "arkoren",
     "repo": "framework",
-    "desc": ""
+    "desc": "The next-generation type-safe Deno web framework."
   },
   "await_mutex": {
     "type": "github",
@@ -178,7 +178,7 @@
     "type": "github",
     "owner": "hayd",
     "repo": "deno-collections",
-    "desc": ""
+    "desc": "A utility to handle collections"
   },
   "compose": {
     "type": "github",
@@ -215,13 +215,13 @@
     "owner": "clitetailor",
     "repo": "cursornext",
     "path": "/deno",
-    "desc": ""
+    "desc": "A minimalist library for parsing"
   },
   "curve25519": {
     "type": "github",
     "owner": "chiefbiiko",
     "repo": "curve25519",
-    "desc": ""
+    "desc": "djb's Curve25519 in TypeScript"
   },
   "dash": {
     "type": "github",
@@ -537,7 +537,7 @@
     "owner": "billymoon",
     "repo": "fiona",
     "path": "/src",
-    "desc": ""
+    "desc": "A tool for creating large sets of pseudo random data."
   },
   "free_port": {
     "type": "github",

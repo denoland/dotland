@@ -5,25 +5,20 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack",
-    "dev": "NODE_ENV=development npm run build",
-    "format": "prettier --write 'src/**/*.{ts,js,css,json,md}'",
-    "test:clean": "rimraf ./transpiled/shared ./transpiled/worker",
-    "test": "npm run test:clean && npm run transpile && mocha --require source-map-support/register --recursive transpiled/worker/test",
-    "transpile": "tsc --project ./test"
+    "dev": "NODE_ENV=development yarn build",
+    "format": "yarn format:check --write",
+    "format:check": "prettier --check 'src/**/*.{ts,js,css,json,md}'",
+    "test": "jest"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^1.0.9",
     "@dollarshaveclub/cloudworker": "^0.1.2",
-    "@types/chai": "^4.2.11",
-    "@types/mocha": "^7.0.2",
+    "@types/jest": "^25.2.1",
     "@types/node": "^13.13.0",
-    "chai": "^4.2.0",
-    "mocha": "^7.1.1",
+    "jest": "25",
     "prettier": "^2.0.4",
-    "rimraf": "^3.0.2",
-    "source-map-loader": "^0.2.4",
-    "source-map-support": "^0.5.16",
-    "ts-loader": "^7.0.0",
+    "ts-loader": "^7.0.3",
+    "ts-jest": "^25.5.1",
     "typescript": "^3.8.3",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"

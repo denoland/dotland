@@ -6,24 +6,20 @@ export interface GithubEntry extends Entry {
   type: "github";
   owner: string;
   repo: string;
-  path: string;
+  path?: string;
   default_version?: string;
 }
 
 export class GithubRegistry implements Registry<GithubEntry> {
   getSourceURL(entry: GithubEntry, path: string, version?: string): string {
-    return `https://raw.githubusercontent.com/${entry.owner}/${
-      entry.repo
-    }/${encodeURIComponent(version ?? entry.default_version ?? "master")}${
-      entry.path ?? ""
-    }${path}`;
+    return `https://raw.githubusercontent.com/${entry.owner}/${entry.repo}/${
+      version ?? entry.default_version ?? "master"
+    }${entry.path ?? ""}${path}`;
   }
   getRepositoryURL(entry: GithubEntry, path: string, version?: string): string {
-    return `https://github.com/${entry.owner}/${
-      entry.repo
-    }/tree/${encodeURIComponent(version ?? entry.default_version ?? "master")}${
-      entry.path ?? ""
-    }${path}`;
+    return `https://github.com/${entry.owner}/${entry.repo}/tree/${
+      version ?? entry.default_version ?? "master"
+    }${entry.path ?? ""}${path}`;
   }
   async getDirectoryListing(
     entry: GithubEntry,
@@ -32,9 +28,9 @@ export class GithubRegistry implements Registry<GithubEntry> {
   ): Promise<DirEntry[] | null> {
     const url = `https://api.github.com/repos/${entry.owner}/${
       entry.repo
-    }/contents/${entry.path ?? ""}${path}?ref=${encodeURIComponent(
+    }/contents/${entry.path ?? ""}${path}?ref=${
       version ?? entry.default_version ?? "master"
-    )}`;
+    }`;
     const res = await fetch(url, {
       headers: {
         accept: "application/vnd.github.v3.object",

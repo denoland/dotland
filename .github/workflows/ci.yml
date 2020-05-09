@@ -20,8 +20,9 @@ jobs:
           restore-keys: |
             web-${{ runner.os }}-yarn-
       - run: yarn --frozen-lockfile
-      - run: yarn run lint
-      - run: yarn format_check
+      - run: yarn format:check
+      - run: yarn lint
+      - run: yarn test
   worker:
     runs-on: ubuntu-latest
     steps:
@@ -41,7 +42,7 @@ jobs:
             worker-${{ runner.os }}-yarn-
       - run: yarn --frozen-lockfile
         working-directory: worker
-      - run: yarn format --check
+      - run: yarn format:check
         working-directory: worker
       - run: CI=true yarn test
         working-directory: worker
