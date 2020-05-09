@@ -1135,10 +1135,7 @@
     "desc": "JavaScript SQLite Module"
   },
   "std": {
-    "type": "github",
-    "owner": "denoland",
-    "repo": "deno",
-    "path": "/std",
+    "type": "deno_std",
     "desc": "Deno Standard Modules"
   },
   "std_old": {
@@ -1217,7 +1214,7 @@
     "type": "url",
     "url": "https://unpkg.com/unexpected@${v}/unexpected.esm.js",
     "repo": "https://github.com/unexpectedjs/unexpected/",
-    "defaultVersion": "latest",
+    "default_version": "latest",
     "desc": "Extensible BDD assertion toolkit"
   },
   "username": {

@@ -7,19 +7,23 @@ export interface GithubEntry extends Entry {
   owner: string;
   repo: string;
   path: string;
-  defaultVersion?: string;
+  default_version?: string;
 }
 
 export class GithubRegistry implements Registry<GithubEntry> {
   getSourceURL(entry: GithubEntry, path: string, version?: string): string {
-    return `https://raw.githubusercontent.com/${entry.owner}/${entry.repo}/${
-      version ?? entry.defaultVersion ?? "master"
-    }${entry.path ?? ""}${path}`;
+    return `https://raw.githubusercontent.com/${entry.owner}/${
+      entry.repo
+    }/${encodeURIComponent(version ?? entry.default_version ?? "master")}${
+      entry.path ?? ""
+    }${path}`;
   }
   getRepositoryURL(entry: GithubEntry, path: string, version?: string): string {
-    return `https://github.com/${entry.owner}/${entry.repo}/tree/${
-      version ?? entry.defaultVersion ?? "master"
-    }${entry.path ?? ""}${path}`;
+    return `https://github.com/${entry.owner}/${
+      entry.repo
+    }/tree/${encodeURIComponent(version ?? entry.default_version ?? "master")}${
+      entry.path ?? ""
+    }${path}`;
   }
   async getDirectoryListing(
     entry: GithubEntry,
@@ -28,9 +32,9 @@ export class GithubRegistry implements Registry<GithubEntry> {
   ): Promise<DirEntry[] | null> {
     const url = `https://api.github.com/repos/${entry.owner}/${
       entry.repo
-    }/contents/${entry.path ?? ""}${path}?ref=${
-      version ?? entry.defaultVersion ?? "master"
-    }`;
+    }/contents/${entry.path ?? ""}${path}?ref=${encodeURIComponent(
+      version ?? entry.default_version ?? "master"
+    )}`;
     const res = await fetch(url, {
       headers: {
         accept: "application/vnd.github.v3.object",
@@ -69,9 +73,9 @@ export class GithubRegistry implements Registry<GithubEntry> {
         }) while querying the GitHub API:\n${await res.text()}`
       );
     }
-    const data = await res.json();
-    const tags: string[] | null = data?.map((tag: any) => tag.name);
-    return tags;
+    const data: any[] = await res.json();
+    const tags: string[] | undefined = data?.map((tag: any) => tag.name);
+    return tags ?? null;
   }
 }
 

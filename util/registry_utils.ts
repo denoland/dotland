@@ -2,10 +2,11 @@
 
 import DATABASE from "../database.json";
 import { github, GithubEntry } from "./registries/github";
+import { denoStd, DenoStdEntry } from "./registries/deno_std";
 import { url, URLEntry } from "./registries/url";
 import { DirEntry, Entry } from "./registries";
 
-export function find(name: string): GithubEntry | URLEntry {
+export function find(name: string): GithubEntry | DenoStdEntry | URLEntry {
   // @ts-ignore
   return DATABASE[name];
 }
@@ -19,6 +20,8 @@ export function getSourceURL(
   switch (entry?.type) {
     case "github":
       return github.getSourceURL(entry, path, version);
+    case "deno_std":
+      return denoStd.getSourceURL(entry, path, version);
     case "url":
       return url.getSourceURL(entry, path, version);
     default:
@@ -34,6 +37,8 @@ export function getRepositoryURL(
   switch (entry?.type) {
     case "github":
       return github.getRepositoryURL(entry, path, version);
+    case "deno_std":
+      return denoStd.getRepositoryURL(entry, path, version);
     case "url":
       return url.getRepositoryURL(entry, path, version);
     default:
@@ -49,6 +54,8 @@ export async function getDirectoryListing(
   switch (entry?.type) {
     case "github":
       return github.getDirectoryListing(entry, path, version);
+    case "deno_std":
+      return denoStd.getDirectoryListing(entry, path, version);
     case "url":
       return url.getDirectoryListing(entry, path, version);
     default:
@@ -61,6 +68,8 @@ export async function getVersionList(name: string): Promise<string[] | null> {
   switch (entry?.type) {
     case "github":
       return github.getVersionList(entry);
+    case "deno_std":
+      return denoStd.getVersionList(entry);
     case "url":
       return url.getVersionList(entry);
     default:
@@ -71,13 +80,7 @@ export async function getVersionList(name: string): Promise<string[] | null> {
 export function parseNameVersion(
   nameVersion: string
 ): [string, string | undefined] {
-  const s = nameVersion.split("@", 2);
-  const name = s[0];
-  let version = s[1];
-  // std@0.42.0 should use git tag std/0.42.0
-  if (name === "std" && version && version !== "master") {
-    version = "std/" + version.replace(/^v/, "");
-  }
+  const [name, version] = nameVersion.split("@", 2);
   return [name, version];
 }
 
