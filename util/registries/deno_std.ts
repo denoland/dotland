@@ -17,12 +17,19 @@ const stdEntry: GithubEntry = {
   desc: "",
 };
 
+function stdVersion(version?: string): string | undefined {
+  if (version?.match(/^v?\d+\.\d+\.\d+$/)) {
+    return `std/${version.replace(/^v/, "")}`;
+  }
+  return version;
+}
+
 export class DenoStdRegistry implements Registry<DenoStdEntry> {
   getSourceURL(_entry: DenoStdEntry, path: string, version?: string): string {
     return github.getSourceURL(
       stdEntry,
       path,
-      version ? `std/${version.replace(/^v/, "")}` : undefined
+      version ? stdVersion(version) : undefined
     );
   }
   getRepositoryURL(
@@ -33,7 +40,7 @@ export class DenoStdRegistry implements Registry<DenoStdEntry> {
     return github.getRepositoryURL(
       stdEntry,
       path,
-      version ? `std/${version.replace(/^v/, "")}` : undefined
+      version ? stdVersion(version) : undefined
     );
   }
   getDirectoryListing(
@@ -44,7 +51,7 @@ export class DenoStdRegistry implements Registry<DenoStdEntry> {
     return github.getDirectoryListing(
       stdEntry,
       path,
-      version ? `std/${version.replace(/^v/, "")}` : undefined
+      version ? stdVersion(version) : undefined
     );
   }
   async getVersionList(_entry: DenoStdEntry): Promise<string[] | null> {

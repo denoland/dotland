@@ -11,8 +11,14 @@ const testEntry: DenoStdEntry = {
 };
 
 test("source url", () => {
-  expect(denoStd.getSourceURL(testEntry, "/index.js", "1.0")).toEqual(
-    "https://raw.githubusercontent.com/denoland/deno/std/1.0/std/index.js"
+  expect(denoStd.getSourceURL(testEntry, "/index.js", "0.50.0")).toEqual(
+    "https://raw.githubusercontent.com/denoland/deno/std/0.50.0/std/index.js"
+  );
+});
+
+test("source url with commit hash", () => {
+  expect(denoStd.getSourceURL(testEntry, "/index.js", "a1cd4f")).toEqual(
+    "https://raw.githubusercontent.com/denoland/deno/a1cd4f/std/index.js"
   );
 });
 
@@ -23,14 +29,20 @@ test("source url with default version", () => {
 });
 
 test("source url with empty path", () => {
-  expect(denoStd.getSourceURL(testEntry, "", "1.0")).toEqual(
-    "https://raw.githubusercontent.com/denoland/deno/std/1.0/std"
+  expect(denoStd.getSourceURL(testEntry, "", "0.50.0")).toEqual(
+    "https://raw.githubusercontent.com/denoland/deno/std/0.50.0/std"
   );
 });
 
 test("repo url", () => {
-  expect(denoStd.getRepositoryURL(testEntry, "/index.js", "1.0")).toEqual(
-    "https://github.com/denoland/deno/tree/std/1.0/std/index.js"
+  expect(denoStd.getRepositoryURL(testEntry, "/index.js", "0.50.0")).toEqual(
+    "https://github.com/denoland/deno/tree/std/0.50.0/std/index.js"
+  );
+});
+
+test("repo url with commit hash", () => {
+  expect(denoStd.getRepositoryURL(testEntry, "/index.js", "a1cd4f")).toEqual(
+    "https://github.com/denoland/deno/tree/a1cd4f/std/index.js"
   );
 });
 
@@ -41,8 +53,8 @@ test("repo url with default version", () => {
 });
 
 test("repo url with empty path", () => {
-  expect(denoStd.getRepositoryURL(testEntry, "", "1.0")).toEqual(
-    "https://github.com/denoland/deno/tree/std/1.0/std"
+  expect(denoStd.getRepositoryURL(testEntry, "", "0.50.0")).toEqual(
+    "https://github.com/denoland/deno/tree/std/0.50.0/std"
   );
 });
 
