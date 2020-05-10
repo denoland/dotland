@@ -17,6 +17,12 @@
     "repo": "deno-amqp",
     "desc": "AMQP 0.9.1"
   },
+  "aqua": {
+    "type": "github",
+    "owner": "l2ig",
+    "repo": "aqua",
+    "desc": "A minimal and fast web framework for Deno 🏃"
+  },
   "argon2": {
     "type": "github",
     "owner": "fdionisi",
