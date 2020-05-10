@@ -30,6 +30,9 @@ export class URLRegistry implements Registry<URLEntry> {
   async getVersionList(_entry: URLEntry): Promise<string[] | null> {
     return null;
   }
+  getDefaultVersion(entry: URLEntry): string {
+    return entry.default_version;
+  }
 }
 
 export const url = new URLRegistry();

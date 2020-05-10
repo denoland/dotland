@@ -20,4 +20,5 @@ export interface Registry<T extends Entry> {
     version?: string
   ): Promise<DirEntry[] | null>;
   getVersionList(entry: T): Promise<string[] | null>;
+  getDefaultVersion(entry: T): string;
 }

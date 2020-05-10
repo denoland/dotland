@@ -1211,10 +1211,8 @@
     "desc": "Update Deno Dependencies to their latest published versions"
   },
   "unexpected": {
-    "type": "url",
-    "url": "https://unpkg.com/unexpected@${v}/unexpected.esm.js",
-    "repo": "https://github.com/unexpectedjs/unexpected/",
-    "default_version": "latest",
+    "type": "npm",
+    "package": "unexpected",
     "desc": "Extensible BDD assertion toolkit"
   },
   "username": {

@@ -4,77 +4,70 @@ import DATABASE from "../database.json";
 import { github, GithubEntry } from "./registries/github";
 import { denoStd, DenoStdEntry } from "./registries/deno_std";
 import { url, URLEntry } from "./registries/url";
-import { DirEntry, Entry } from "./registries";
+import { npm, NPMEntry } from "./registries/npm";
+import { DirEntry, Entry, Registry } from "./registries";
 
-export function find(name: string): GithubEntry | DenoStdEntry | URLEntry {
+export function find(
+  name: string
+): GithubEntry | DenoStdEntry | URLEntry | NPMEntry {
   // @ts-ignore
   return DATABASE[name];
 }
 
+function registryByType(type?: string): Registry<Entry> | null {
+  switch (type) {
+    case "github":
+      return github;
+    case "deno_std":
+      return denoStd;
+    case "url":
+      return url;
+    case "npm":
+      return npm;
+    default:
+      return null;
+  }
+}
 export function getSourceURL(
   name: string,
   path: string,
   version?: string
 ): string | null {
   const entry = find(name);
-  switch (entry?.type) {
-    case "github":
-      return github.getSourceURL(entry, path, version);
-    case "deno_std":
-      return denoStd.getSourceURL(entry, path, version);
-    case "url":
-      return url.getSourceURL(entry, path, version);
-    default:
-      return null;
-  }
+  const registry = registryByType(entry?.type);
+  return registry?.getSourceURL(entry, path, version) ?? null;
 }
+
 export function getRepositoryURL(
   name: string,
   path: string,
   version?: string
 ): string | null {
   const entry = find(name);
-  switch (entry?.type) {
-    case "github":
-      return github.getRepositoryURL(entry, path, version);
-    case "deno_std":
-      return denoStd.getRepositoryURL(entry, path, version);
-    case "url":
-      return url.getRepositoryURL(entry, path, version);
-    default:
-      return null;
-  }
+  const registry = registryByType(entry?.type);
+  return registry?.getRepositoryURL(entry, path, version) ?? null;
 }
+
 export async function getDirectoryListing(
   name: string,
   path: string,
   version?: string
 ): Promise<DirEntry[] | null> {
   const entry = find(name);
-  switch (entry?.type) {
-    case "github":
-      return github.getDirectoryListing(entry, path, version);
-    case "deno_std":
-      return denoStd.getDirectoryListing(entry, path, version);
-    case "url":
-      return url.getDirectoryListing(entry, path, version);
-    default:
-      return null;
-  }
+  const registry = registryByType(entry?.type);
+  return registry?.getDirectoryListing(entry, path, version) ?? null;
 }
 
 export async function getVersionList(name: string): Promise<string[] | null> {
   const entry = find(name);
-  switch (entry?.type) {
-    case "github":
-      return github.getVersionList(entry);
-    case "deno_std":
-      return denoStd.getVersionList(entry);
-    case "url":
-      return url.getVersionList(entry);
-    default:
-      return null;
-  }
+  const registry = registryByType(entry?.type);
+  return registry?.getVersionList(entry) ?? null;
+}
+
+export function getDefaultVersion(name: string): string | undefined {
+  const entry = find(name);
+  const registry = registryByType(entry?.type);
+  return registry?.getDefaultVersion(entry);
 }
 
 export function parseNameVersion(

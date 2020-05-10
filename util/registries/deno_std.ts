@@ -57,6 +57,9 @@ export class DenoStdRegistry implements Registry<DenoStdEntry> {
   async getVersionList(_entry: DenoStdEntry): Promise<string[] | null> {
     return stdVersions;
   }
+  getDefaultVersion(_entry: DenoStdEntry): string {
+    return "master";
+  }
 }
 
 export const denoStd = new DenoStdRegistry();

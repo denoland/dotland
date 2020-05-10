@@ -11,6 +11,7 @@ import {
   denoDocAvailableForURL,
   isReadme,
   getVersionList,
+  getDefaultVersion,
 } from "../util/registry_utils";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -46,6 +47,7 @@ const Registry = () => {
     path,
     version,
   ]);
+  const defaultVersion = useMemo(() => getDefaultVersion(name), [name]);
 
   const documentationURL = useMemo(() => {
     const doc = `https://doc.deno.land/https/deno.land/${canonicalPath}`;
@@ -232,7 +234,7 @@ const Registry = () => {
                         </option>
                       )}
                       <option key="" value="">
-                        master
+                        {defaultVersion}
                       </option>
                       {versions.map((v) => (
                         <option key={v} value={v}>

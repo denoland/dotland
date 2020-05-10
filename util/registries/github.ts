@@ -73,6 +73,9 @@ export class GithubRegistry implements Registry<GithubEntry> {
     const tags: string[] | undefined = data?.map((tag: any) => tag.name);
     return tags ?? null;
   }
+  getDefaultVersion(entry: GithubEntry): string {
+    return entry.default_version ?? "master";
+  }
 }
 
 export const github = new GithubRegistry();
