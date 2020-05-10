@@ -18,7 +18,7 @@ const stdEntry = new GithubEntry({
 });
 
 function stdVersion(version?: string): string | undefined {
-  if (version?.match(/^v?\d+\.\d+\.\d+$/)) {
+  if (version?.match(/^v?\d+\.\d+\.\d+(-.*)?$/)) {
     return `std/${version.replace(/^v/, "")}`;
   }
   return version;
