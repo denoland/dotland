@@ -1,8 +1,8 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import { Entry, Registry, DirEntry } from "../registries";
+import { Entry, DirEntry, DatabaseEntry } from "../registries";
 
-export interface GithubEntry extends Entry {
+export interface GithubDatabaseEntry extends DatabaseEntry {
   type: "github";
   owner: string;
   repo: string;
@@ -10,26 +10,39 @@ export interface GithubEntry extends Entry {
   default_version?: string;
 }
 
-export class GithubRegistry implements Registry<GithubEntry> {
-  getSourceURL(entry: GithubEntry, path: string, version?: string): string {
-    return `https://raw.githubusercontent.com/${entry.owner}/${entry.repo}/${
-      version ?? entry.default_version ?? "master"
-    }${entry.path ?? ""}${path}`;
+export class GithubEntry implements Entry {
+  public desc: string;
+  private owner: string;
+  private repo: string;
+  private path?: string;
+  private defaultVersion?: string;
+
+  constructor(databaseEntry: GithubDatabaseEntry) {
+    this.desc = databaseEntry.desc;
+    this.owner = databaseEntry.owner;
+    this.repo = databaseEntry.repo;
+    this.path = databaseEntry.path;
+    this.defaultVersion = databaseEntry.default_version;
   }
-  getRepositoryURL(entry: GithubEntry, path: string, version?: string): string {
-    return `https://github.com/${entry.owner}/${entry.repo}/tree/${
-      version ?? entry.default_version ?? "master"
-    }${entry.path ?? ""}${path}`;
+
+  getSourceURL(path: string, version?: string): string {
+    return `https://raw.githubusercontent.com/${this.owner}/${this.repo}/${
+      version ?? this.defaultVersion ?? "master"
+    }${this.path ?? ""}${path}`;
+  }
+  getRepositoryURL(path: string, version?: string): string {
+    return `https://github.com/${this.owner}/${this.repo}/tree/${
+      version ?? this.defaultVersion ?? "master"
+    }${this.path ?? ""}${path}`;
   }
   async getDirectoryListing(
-    entry: GithubEntry,
     path: string,
     version?: string
   ): Promise<DirEntry[] | null> {
-    const url = `https://api.github.com/repos/${entry.owner}/${
-      entry.repo
-    }/contents/${entry.path ?? ""}${path}?ref=${
-      version ?? entry.default_version ?? "master"
+    const url = `https://api.github.com/repos/${this.owner}/${
+      this.repo
+    }/contents/${this.path ?? ""}${path}?ref=${
+      version ?? this.defaultVersion ?? "master"
     }`;
     const res = await fetch(url, {
       headers: {
@@ -55,8 +68,8 @@ export class GithubRegistry implements Registry<GithubEntry> {
     }));
     return files;
   }
-  async getVersionList(entry: GithubEntry): Promise<string[] | null> {
-    const url = `https://api.github.com/repos/${entry.owner}/${entry.repo}/tags`;
+  async getVersionList(): Promise<string[] | null> {
+    const url = `https://api.github.com/repos/${this.owner}/${this.repo}/tags`;
     const res = await fetch(url, {
       headers: {
         accept: "application/vnd.github.v3.object",
@@ -73,9 +86,7 @@ export class GithubRegistry implements Registry<GithubEntry> {
     const tags: string[] | undefined = data?.map((tag: any) => tag.name);
     return tags ?? null;
   }
-  getDefaultVersion(entry: GithubEntry): string {
-    return entry.default_version ?? "master";
+  getDefaultVersion(): string {
+    return this.defaultVersion ?? "master";
   }
 }
-
-export const github = new GithubRegistry();

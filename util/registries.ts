@@ -1,7 +1,18 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-export interface Entry {
+export interface DatabaseEntry {
   desc: string;
+}
+
+export interface Entry extends DatabaseEntry {
+  getSourceURL(path: string, version?: string): string;
+  getRepositoryURL(path: string, version?: string): string;
+  getDirectoryListing(
+    path: string,
+    version?: string
+  ): Promise<DirEntry[] | null>;
+  getVersionList(): Promise<string[] | null>;
+  getDefaultVersion(): string;
 }
 
 export interface DirEntry {
@@ -9,16 +20,4 @@ export interface DirEntry {
   type: "file" | "dir" | "symlink";
   size?: number;
   target?: string;
-}
-
-export interface Registry<T extends Entry> {
-  getSourceURL(entry: T, path: string, version?: string): string;
-  getRepositoryURL(entry: T, path: string, version?: string): string;
-  getDirectoryListing(
-    entry: T,
-    path: string,
-    version?: string
-  ): Promise<DirEntry[] | null>;
-  getVersionList(entry: T): Promise<string[] | null>;
-  getDefaultVersion(entry: T): string;
 }

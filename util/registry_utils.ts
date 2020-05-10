@@ -1,73 +1,38 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
 import DATABASE from "../database.json";
-import { github, GithubEntry } from "./registries/github";
-import { denoStd, DenoStdEntry } from "./registries/deno_std";
-import { url, URLEntry } from "./registries/url";
-import { npm, NPMEntry } from "./registries/npm";
-import { DirEntry, Entry, Registry } from "./registries";
+import { GithubEntry, GithubDatabaseEntry } from "./registries/github";
+import { DenoStdEntry, DenoStdDatabaseEntry } from "./registries/deno_std";
+import { URLEntry, URLDatabaseEntry } from "./registries/url";
+import { NPMEntry, NPMDatabaseEntry } from "./registries/npm";
+import { Entry, DatabaseEntry } from "./registries";
 
-export function find(
+function findDatabaseEntry(
   name: string
-): GithubEntry | DenoStdEntry | URLEntry | NPMEntry {
+):
+  | GithubDatabaseEntry
+  | DenoStdDatabaseEntry
+  | URLDatabaseEntry
+  | NPMDatabaseEntry
+  | undefined {
   // @ts-ignore
   return DATABASE[name];
 }
 
-function registryByType(type?: string): Registry<Entry> | null {
-  switch (type) {
+export function findEntry(name: string): Entry | null {
+  const dbEntry = findDatabaseEntry(name);
+  switch (dbEntry?.type) {
     case "github":
-      return github;
+      return new GithubEntry(dbEntry);
     case "deno_std":
-      return denoStd;
+      return new DenoStdEntry(dbEntry);
     case "url":
-      return url;
+      return new URLEntry(dbEntry);
     case "npm":
-      return npm;
+      return new NPMEntry(dbEntry);
     default:
       return null;
   }
-}
-export function getSourceURL(
-  name: string,
-  path: string,
-  version?: string
-): string | null {
-  const entry = find(name);
-  const registry = registryByType(entry?.type);
-  return registry?.getSourceURL(entry, path, version) ?? null;
-}
-
-export function getRepositoryURL(
-  name: string,
-  path: string,
-  version?: string
-): string | null {
-  const entry = find(name);
-  const registry = registryByType(entry?.type);
-  return registry?.getRepositoryURL(entry, path, version) ?? null;
-}
-
-export async function getDirectoryListing(
-  name: string,
-  path: string,
-  version?: string
-): Promise<DirEntry[] | null> {
-  const entry = find(name);
-  const registry = registryByType(entry?.type);
-  return registry?.getDirectoryListing(entry, path, version) ?? null;
-}
-
-export async function getVersionList(name: string): Promise<string[] | null> {
-  const entry = find(name);
-  const registry = registryByType(entry?.type);
-  return registry?.getVersionList(entry) ?? null;
-}
-
-export function getDefaultVersion(name: string): string | undefined {
-  const entry = find(name);
-  const registry = registryByType(entry?.type);
-  return registry?.getDefaultVersion(entry);
 }
 
 export function parseNameVersion(
@@ -118,4 +83,4 @@ export function isReadme(filename: string) {
   return filename.toLowerCase() === "readme.md";
 }
 
-export const entries = DATABASE as { [name: string]: Entry };
+export const entries = DATABASE as { [name: string]: DatabaseEntry };

@@ -1,21 +1,21 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import { Entry, Registry, DirEntry } from "../registries";
-import { GithubEntry, github } from "./github";
+import { Entry, DirEntry, DatabaseEntry } from "../registries";
+import { GithubEntry } from "./github";
 
 import stdVersions from "../../deno_std_versions.json";
 
-export interface DenoStdEntry extends Entry {
+export interface DenoStdDatabaseEntry extends DatabaseEntry {
   type: "deno_std";
 }
 
-const stdEntry: GithubEntry = {
+const stdEntry = new GithubEntry({
   type: "github",
   owner: "denoland",
   repo: "deno",
   path: "/std",
   desc: "",
-};
+});
 
 function stdVersion(version?: string): string | undefined {
   if (version?.match(/^v?\d+\.\d+\.\d+$/)) {
@@ -24,42 +24,38 @@ function stdVersion(version?: string): string | undefined {
   return version;
 }
 
-export class DenoStdRegistry implements Registry<DenoStdEntry> {
-  getSourceURL(_entry: DenoStdEntry, path: string, version?: string): string {
-    return github.getSourceURL(
-      stdEntry,
+export class DenoStdEntry implements Entry {
+  public desc: string;
+
+  constructor(databaseEntry: DenoStdDatabaseEntry) {
+    this.desc = databaseEntry.desc;
+  }
+
+  getSourceURL(path: string, version?: string): string {
+    return stdEntry.getSourceURL(
       path,
       version ? stdVersion(version) : undefined
     );
   }
-  getRepositoryURL(
-    _entry: DenoStdEntry,
-    path: string,
-    version?: string
-  ): string {
-    return github.getRepositoryURL(
-      stdEntry,
+  getRepositoryURL(path: string, version?: string): string {
+    return stdEntry.getRepositoryURL(
       path,
       version ? stdVersion(version) : undefined
     );
   }
   getDirectoryListing(
-    _entry: DenoStdEntry,
     path: string,
     version?: string
   ): Promise<DirEntry[] | null> {
-    return github.getDirectoryListing(
-      stdEntry,
+    return stdEntry.getDirectoryListing(
       path,
       version ? stdVersion(version) : undefined
     );
   }
-  async getVersionList(_entry: DenoStdEntry): Promise<string[] | null> {
+  async getVersionList(): Promise<string[] | null> {
     return stdVersions;
   }
-  getDefaultVersion(_entry: DenoStdEntry): string {
+  getDefaultVersion(): string {
     return "master";
   }
 }
-
-export const denoStd = new DenoStdRegistry();

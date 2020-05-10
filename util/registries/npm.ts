@@ -1,31 +1,41 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import { Entry, Registry, DirEntry } from "../registries";
+import { Entry, DirEntry, DatabaseEntry } from "../registries";
 
-export interface NPMEntry extends Entry {
+export interface NPMDatabaseEntry extends DatabaseEntry {
   type: "npm";
+  desc: string;
   package: string;
   path?: string;
 }
 
-export class NPMRegistry implements Registry<NPMEntry> {
-  getSourceURL(entry: NPMEntry, path: string, version?: string): string {
-    return `https://unpkg.com/${entry.package}@${version ?? "latest"}${
-      entry.path ?? ""
+export class NPMEntry implements Entry {
+  public desc: string;
+  private package_: string;
+  private path?: string;
+
+  constructor(databaseEntry: NPMDatabaseEntry) {
+    this.desc = databaseEntry.desc;
+    this.package_ = databaseEntry.package;
+    this.path = databaseEntry.path;
+  }
+
+  getSourceURL(path: string, version?: string): string {
+    return `https://unpkg.com/${this.package_}@${version ?? "latest"}${
+      this.path ?? ""
     }${path}`;
   }
-  getRepositoryURL(entry: NPMEntry, path: string, version?: string): string {
-    return `https://unpkg.com/browse/${entry.package}@${version ?? "latest"}${
-      entry.path ?? ""
+  getRepositoryURL(path: string, version?: string): string {
+    return `https://unpkg.com/browse/${this.package_}@${version ?? "latest"}${
+      this.path ?? ""
     }${path || "/"}`;
   }
   async getDirectoryListing(
-    entry: NPMEntry,
     path: string,
     version?: string
   ): Promise<DirEntry[] | null> {
-    const url = `https://unpkg.com/${entry.package}@${version ?? "latest"}${
-      entry.path ?? ""
+    const url = `https://unpkg.com/${this.package_}@${version ?? "latest"}${
+      this.path ?? ""
     }${path}/?meta`;
     const res = await fetch(url, {
       headers: {
@@ -53,10 +63,10 @@ export class NPMRegistry implements Registry<NPMEntry> {
     });
     return files;
   }
-  async getVersionList(entry: NPMEntry): Promise<string[] | null> {
+  async getVersionList(): Promise<string[] | null> {
     const url = `https://${
       process ? "" : "cors-anywhere.herokuapp.com/"
-    }registry.npmjs.org/${entry.package}`;
+    }registry.npmjs.org/${this.package_}`;
     const res = await fetch(url, {
       headers: {
         accept: "application/vnd.npm.install-v1+json",
@@ -75,9 +85,7 @@ export class NPMRegistry implements Registry<NPMEntry> {
       : [];
     return tags ?? null;
   }
-  getDefaultVersion(_entry: NPMEntry): string {
+  getDefaultVersion(): string {
     return "latest";
   }
 }
-
-export const npm = new NPMRegistry();

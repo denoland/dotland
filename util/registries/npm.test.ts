@@ -1,64 +1,71 @@
-import { npm, NPMEntry } from "./npm";
+import { NPMEntry, NPMDatabaseEntry } from "./npm";
 import "isomorphic-unfetch";
 
 /* eslint-env jest */
 
-const testEntry: NPMEntry = {
+const testDbEntry: NPMDatabaseEntry = {
   type: "npm",
   desc: "A entry for testing",
   package: "example",
 };
+const testEntry = new NPMEntry(testDbEntry);
 
 test("source url", () => {
-  expect(npm.getSourceURL(testEntry, "/index.js", "1.0.0")).toEqual(
+  expect(testEntry.getSourceURL("/index.js", "1.0.0")).toEqual(
     "https://unpkg.com/example@1.0.0/index.js"
   );
 });
 
 test("source url with default version", () => {
-  expect(npm.getSourceURL(testEntry, "/index.js", undefined)).toEqual(
+  expect(testEntry.getSourceURL("/index.js", undefined)).toEqual(
     "https://unpkg.com/example@latest/index.js"
   );
 });
 
 test("source url with empty path", () => {
-  expect(npm.getSourceURL(testEntry, "", "1.0.0")).toEqual(
+  expect(testEntry.getSourceURL("", "1.0.0")).toEqual(
     "https://unpkg.com/example@1.0.0"
   );
 });
 
 test("source url with subdirectory", () => {
   expect(
-    npm.getSourceURL({ ...testEntry, path: "/test" }, "/index.js", "1.0.0")
+    new NPMEntry({ ...testDbEntry, path: "/test" }).getSourceURL(
+      "/index.js",
+      "1.0.0"
+    )
   ).toEqual("https://unpkg.com/example@1.0.0/test/index.js");
 });
 
 test("repo url", () => {
-  expect(npm.getRepositoryURL(testEntry, "/index.js", "1.0.0")).toEqual(
+  expect(testEntry.getRepositoryURL("/index.js", "1.0.0")).toEqual(
     "https://unpkg.com/browse/example@1.0.0/index.js"
   );
 });
 
 test("repo url with default version", () => {
-  expect(npm.getRepositoryURL(testEntry, "/index.js", undefined)).toEqual(
+  expect(testEntry.getRepositoryURL("/index.js", undefined)).toEqual(
     "https://unpkg.com/browse/example@latest/index.js"
   );
 });
 
 test("repo url with empty path", () => {
-  expect(npm.getRepositoryURL(testEntry, "", "1.0.0")).toEqual(
+  expect(testEntry.getRepositoryURL("", "1.0.0")).toEqual(
     "https://unpkg.com/browse/example@1.0.0/"
   );
 });
 
 test("repo url with subdirectory", () => {
   expect(
-    npm.getRepositoryURL({ ...testEntry, path: "/test" }, "/index.js", "1.0.0")
+    new NPMEntry({ ...testDbEntry, path: "/test" }).getRepositoryURL(
+      "/index.js",
+      "1.0.0"
+    )
   ).toEqual("https://unpkg.com/browse/example@1.0.0/test/index.js");
 });
 
 test("directory listing", async () => {
-  expect(await npm.getDirectoryListing(testEntry, "", "0.0.0")).toEqual([
+  expect(await testEntry.getDirectoryListing("", "0.0.0")).toEqual([
     {
       name: "package.json",
       size: 291,
@@ -73,5 +80,5 @@ test("directory listing", async () => {
 });
 
 test("version list", async () => {
-  expect(await npm.getVersionList(testEntry)).toEqual(["0.0.0"]);
+  expect(await testEntry.getVersionList()).toEqual(["0.0.0"]);
 });

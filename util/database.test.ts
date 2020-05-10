@@ -1,11 +1,16 @@
 import db from "../database.json";
-import { URLEntry } from "./registries/url";
-import { GithubEntry } from "./registries/github";
-import { DenoStdEntry } from "./registries/deno_std";
+import { GithubDatabaseEntry } from "./registries/github";
+import { DenoStdDatabaseEntry } from "./registries/deno_std";
+import { NPMDatabaseEntry } from "./registries/npm";
+import { URLDatabaseEntry } from "./registries/url";
+
 /* eslint-env jest */
 
 const DATABASE: {
-  [str: string]: URLEntry & GithubEntry & DenoStdEntry;
+  [name: string]: GithubDatabaseEntry &
+    DenoStdDatabaseEntry &
+    NPMDatabaseEntry &
+    URLDatabaseEntry;
 } = db as any;
 
 test("each database entry should have a description", () => {

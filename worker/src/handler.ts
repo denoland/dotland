@@ -1,6 +1,6 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import { parseNameVersion, getSourceURL } from "../../util/registry_utils";
+import { parseNameVersion, findEntry } from "../../util/registry_utils";
 
 const REMOTE_URL = "https://deno-website2-v1.now.sh";
 const S3_REMOTE_URL = "http://deno.land.s3-website-us-east-1.amazonaws.com";
@@ -66,16 +66,17 @@ function redirect(url: URL, remoteUrl: string, request: Request) {
   return fetch(modifiedRequest);
 }
 
-export function proxy(pathname: string): string | null {
+export function proxy(pathname: string): string | undefined {
   if (pathname.startsWith("/std")) {
     return proxy("/x" + pathname);
   }
   if (!pathname.startsWith("/x/")) {
-    return null;
+    return undefined;
   }
   const nameBranchRest = pathname.replace(/^\/x\//, "");
   const [nameBranch, ...rest] = nameBranchRest.split("/");
   const [name, version] = parseNameVersion(nameBranch);
   const path = rest.join("/");
-  return getSourceURL(name, "/" + path, version);
+  const entry = findEntry(name);
+  return entry?.getSourceURL("/" + path, version);
 }

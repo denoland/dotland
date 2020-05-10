@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { parseNameVersion, getVersionList } from "../util/registry_utils";
+import { parseNameVersion, findEntry } from "../util/registry_utils";
 import {
   TableOfContents,
   getTableOfContents,
@@ -10,6 +10,8 @@ import {
 } from "../util/manual_utils";
 import Markdown from "./Markdown";
 import Transition from "./Transition";
+
+const denoEntry = findEntry("deno");
 
 function Manual() {
   const { query, push, replace } = useRouter();
@@ -73,7 +75,8 @@ function Manual() {
 
   useEffect(() => {
     setVersions(undefined);
-    getVersionList("deno")
+    denoEntry
+      ?.getVersionList()
       .then((v) =>
         // do not show old versions that do not have the new manual yet
         setVersions(v?.filter((v) => v.startsWith("v1") && v !== "v1.0.0-rc1"))

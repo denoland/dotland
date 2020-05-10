@@ -5,13 +5,9 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import {
   parseNameVersion,
-  getSourceURL,
-  getRepositoryURL,
-  getDirectoryListing,
   denoDocAvailableForURL,
   isReadme,
-  getVersionList,
-  getDefaultVersion,
+  findEntry,
 } from "../util/registry_utils";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -37,17 +33,18 @@ const Registry = () => {
     () => `${isStd ? "" : "/x"}/${name}${version ? `@${version}` : ""}${path}`,
     [name, version, path]
   );
-  const sourceURL = useMemo(() => getSourceURL(name, path, version), [
-    name,
+  const entry = useMemo(() => findEntry(name), [name]);
+  const sourceURL = useMemo(() => entry?.getSourceURL(path, version), [
+    entry,
     path,
     version,
   ]);
-  const repositoryURL = useMemo(() => getRepositoryURL(name, path, version), [
-    name,
+  const repositoryURL = useMemo(() => entry?.getRepositoryURL(path, version), [
+    entry,
     path,
     version,
   ]);
-  const defaultVersion = useMemo(() => getDefaultVersion(name), [name]);
+  const defaultVersion = useMemo(() => entry?.getDefaultVersion(), [entry]);
 
   const documentationURL = useMemo(() => {
     const doc = `https://doc.deno.land/https/deno.land/${canonicalPath}`;
@@ -88,24 +85,26 @@ const Registry = () => {
   // TODO(lucacasonato): only try to load if raw failed or if no file extension
   useEffect(() => {
     setDirEntries(undefined);
-    getDirectoryListing(name, path, version)
+    entry
+      ?.getDirectoryListing(path, version)
       .then(setDirEntries)
       .catch((e) => {
         console.error("Failed to fetch dir entry:", e);
         setDirEntries(null);
       });
-  }, [name, path, version]);
+  }, [entry, path, version]);
 
   // TODO(lucacasonato): only load once per module
   useEffect(() => {
     setVersions(undefined);
-    getVersionList(name)
+    entry
+      ?.getVersionList()
       .then(setVersions)
       .catch((e) => {
         console.error("Failed to fetch versions:", e);
         setVersions(null);
       });
-  }, [name]);
+  }, [entry]);
 
   useEffect(() => {
     setReadmeCanonicalPath(undefined);
@@ -114,9 +113,9 @@ const Registry = () => {
     const readmeEntry = dirEntries?.find((d) => isReadme(d.name));
     if (readmeEntry) {
       setReadmeCanonicalPath(canonicalPath + "/" + readmeEntry.name);
-      setReadmeURL(getSourceURL(name, path + "/" + readmeEntry.name, version));
+      setReadmeURL(entry?.getSourceURL(path + "/" + readmeEntry.name, version));
       setReadmeRepositoryURL(
-        getRepositoryURL(name, path + "/" + readmeEntry.name, version)
+        entry?.getRepositoryURL(path + "/" + readmeEntry.name, version)
       );
     } else {
       setReadmeCanonicalPath(null);

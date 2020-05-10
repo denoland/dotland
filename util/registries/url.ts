@@ -1,38 +1,44 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import { Entry, Registry } from "../registries";
+import { Entry, DatabaseEntry } from "../registries";
 
-export interface URLEntry extends Entry {
+export interface URLDatabaseEntry extends DatabaseEntry {
   type: "url";
   url: string;
   repo: string;
   default_version: string;
 }
 
-export class URLRegistry implements Registry<URLEntry> {
-  getSourceURL(entry: URLEntry, path: string, version?: string): string {
-    return entry.url
-      .replace(/\$\{v}/, version ?? entry.default_version)
+export class URLEntry implements Entry {
+  public desc: string;
+  private url: string;
+  private repo: string;
+  private defaultVersion: string;
+
+  constructor(databaseEntry: URLDatabaseEntry) {
+    this.desc = databaseEntry.desc;
+    this.url = databaseEntry.url;
+    this.repo = databaseEntry.repo;
+    this.defaultVersion = databaseEntry.default_version;
+  }
+
+  getSourceURL(path: string, version?: string): string {
+    return this.url
+      .replace(/\$\{v}/, version ?? this.defaultVersion)
       .replace(/\$\{p}/, path);
   }
-  getRepositoryURL(entry: URLEntry, path: string, version?: string): string {
-    return entry.repo
-      .replace(/\$\{v}/, version ?? entry.default_version)
+  getRepositoryURL(path: string, version?: string): string {
+    return this.repo
+      .replace(/\$\{v}/, version ?? this.defaultVersion)
       .replace(/\$\{p}/, path);
   }
-  async getDirectoryListing(
-    _entry: URLEntry,
-    _path: string,
-    _version?: string
-  ): Promise<null> {
+  async getDirectoryListing(_path: string, _version?: string): Promise<null> {
     return null;
   }
-  async getVersionList(_entry: URLEntry): Promise<string[] | null> {
+  async getVersionList(): Promise<string[] | null> {
     return null;
   }
-  getDefaultVersion(entry: URLEntry): string {
-    return entry.default_version;
+  getDefaultVersion(): string {
+    return this.defaultVersion;
   }
 }
-
-export const url = new URLRegistry();
