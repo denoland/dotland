@@ -779,6 +779,12 @@
     "type": "github",
     "owner": "oakserver",
     "repo": "media_types",
+    "desc": "A simple and easy to use memoize lib for deno."
+  },
+  "memoize": {
+    "type": "github",
+    "owner": "rubiin",
+    "repo": "memoize",
     "desc": "A module that assists in resolving media types and extensions."
   },
   "minimatch": {
