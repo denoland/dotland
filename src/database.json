@@ -325,6 +325,12 @@
     "repo": "deno_search",
     "desc": "A CLI tool to search for third party packages on deno.land"
   },
+  "denoenv": {
+    "type": "github",
+    "owner": "rubiin",
+    "repo": "deno-env",
+    "desc": "Deno module for reading env files with added options"
+  },
   "denoforge": {
     "type": "github",
     "owner": "denjucks",
