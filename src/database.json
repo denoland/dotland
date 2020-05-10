@@ -1336,7 +1336,7 @@
     "repo": "yaml-wasm",
     "desc": "WebAssembly module to parse YAML"
   },
-  "youtube-deno": {
+  "youtube_deno": {
     "type": "github",
     "owner": "akshgpt7",
     "repo": "youtube-deno",
