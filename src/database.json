@@ -40,7 +40,7 @@
     "type": "github",
     "owner": "arkoren",
     "repo": "framework",
-    "desc": ""
+    "desc": "The next-generation type-safe web framework."
   },
   "await_mutex": {
     "type": "github",
