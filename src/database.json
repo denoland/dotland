@@ -805,6 +805,12 @@
     "repo": "media_types",
     "desc": "A module that assists in resolving media types and extensions."
   },
+  "memoize": {
+    "type": "github",
+    "owner": "rubiin",
+    "repo": "memoize",
+    "desc": "A simple and easy to use memoize lib for deno."
+  },
   "minimatch": {
     "type": "github",
     "owner": "chrisdothtml",
