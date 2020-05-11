@@ -689,6 +689,12 @@
     "repo": "deno-is",
     "desc": "Detect the running environment and context of the current script."
   },
+  "is_exe": {
+    "type": "github",
+    "owner": "eankeen",
+    "repo": "is_exe",
+    "desc": "detect if a file is executable or not"
+  },
   "jbq": {
     "type": "github",
     "owner": "krnik",
