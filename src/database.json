@@ -259,6 +259,12 @@
     "repo": "deno-databatcher",
     "desc": "The ideas of DataLoader but applied to both loading and saving."
   },
+  "dataformsjs": {
+    "type": "github",
+    "owner": "dataformsjs",
+    "repo": "dataformsjs",
+    "desc": "A minimal JavaScript Framework and standalone components for rapid development of high quality websites and single page applications."
+  },
   "date_fns": {
     "type": "github",
     "owner": "date-fns",
