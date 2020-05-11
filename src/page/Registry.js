@@ -358,9 +358,9 @@ function getVersion() {
   let type; // std | x
   let version; // master | v0.4.0
   if (pathArr[1].indexOf("std") === 0) {
-    [type, version] = pathArr[1].split("@") || ["std"];
+    [type, version] = (pathArr[1] || '').split("@") || ["std"];
   } else {
-    [type, version] = pathArr[2].split("@") || ["x"];
+    [type, version] = (pathArr[2] || '').split("@") || ["x"];
   }
 
   version = version || "master";
