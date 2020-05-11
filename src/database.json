@@ -731,6 +731,12 @@
     "repo": "keycode-js",
     "desc": "A minimal JavaScript package with key code constants."
   },
+  "kia": {
+    "type": "github",
+    "owner": "HarryPeach",
+    "repo": "kia",
+    "desc": "Simple terminal spinners for Deno 🦕 (Based on Ora)"
+  },
   "ky": {
     "type": "github",
     "owner": "sindresorhus",
