@@ -60,6 +60,12 @@
     "repo": "bb64",
     "desc": "A better base64 encoder and decoder for Deno for easily encoding strings, Uint8Arrays, and files, including MIME types into encoding"
   },
+  "bcrypt": {
+    "type": "github",
+    "owner": "jamesbroadberry",
+    "repo": "deno-bcrypt",
+    "desc": "BCrypt support for hashing and checking passwords"
+  },
   "berror": {
     "type": "github",
     "owner": "baptistemarchand",
