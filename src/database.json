@@ -1378,6 +1378,12 @@
     "repo": "yaml-wasm",
     "desc": "WebAssembly module to parse YAML"
   },
+  "youtube_deno": {
+    "type": "github",
+    "owner": "akshgpt7",
+    "repo": "youtube-deno",
+    "desc": "A Deno client for the YouTube Data API v3. Lets you incorporate core YouTube features and almost any interaction with YouTube in your application."
+  },
   "zstd": {
     "type": "github",
     "owner": "xpyxel",
