@@ -34,7 +34,7 @@ export default function Registry() {
       return;
     }
     const { entry, path } = x;
-    const { version = 'master' } = getVersion() || {};
+    const { version = "master" } = getVersion() || {};
     console.log({ path });
     if (!path || path.endsWith("/")) {
       // Render dir.
@@ -89,40 +89,50 @@ export default function Registry() {
   const lineSelectionRange = lineSelectionRangeMatch.map(Number);
 
   // Create versions list
-  const versItems = [<option key="master" value="master">master</option>];
+  const versItems = [
+    <option key="master" value="master">
+      master
+    </option>
+  ];
   const versions = state.versions;
-  if(versions) {
-    for(const ver of versions) {
-      versItems.push(<option key={ver} value={ver}>{ver}</option>);
+  if (versions) {
+    for (const ver of versions) {
+      versItems.push(
+        <option key={ver} value={ver}>
+          {ver}
+        </option>
+      );
     }
   }
 
-  const handleChangeVersion = async (event) => {
+  const handleChangeVersion = async event => {
     const newBranch = event.target.value;
     setState({
       ...state,
-      version: newBranch,
+      version: newBranch
     });
-    const pathArr = window.location.pathname.split('/');
+    const pathArr = window.location.pathname.split("/");
     let versionedSegment; // std | module-name
     let newVersionedSegment;
-    if(pathArr[1].indexOf('std') === 0) {
-      [versionedSegment] = pathArr[1].split('@') || ['std'];
-      newVersionedSegment = (newBranch === 'master') 
-        ? `${versionedSegment}` 
-        : `${versionedSegment}@${newBranch}`;
-        pathArr[1] = newVersionedSegment;
+    if (pathArr[1].indexOf("std") === 0) {
+      [versionedSegment] = pathArr[1].split("@") || ["std"];
+      newVersionedSegment =
+        newBranch === "master"
+          ? `${versionedSegment}`
+          : `${versionedSegment}@${newBranch}`;
+      pathArr[1] = newVersionedSegment;
     } else {
-      [versionedSegment] = pathArr[2].split('@') || ['x'];
-      newVersionedSegment = (newBranch === 'master') 
-        ? `${versionedSegment}` 
-        : `${versionedSegment}@${newBranch}`;
+      [versionedSegment] = pathArr[2].split("@") || ["x"];
+      newVersionedSegment =
+        newBranch === "master"
+          ? `${versionedSegment}`
+          : `${versionedSegment}@${newBranch}`;
       pathArr[2] = newVersionedSegment;
     }
-    
-    const newURL = `${window.location.origin}${pathArr.join('/')}`;
+
+    const newURL = `${window.location.origin}${pathArr.join("/")}`;
     window.location.href = newURL;
-  }
+  };
 
   let contentComponent;
   if (isLoading) {
@@ -157,7 +167,7 @@ export default function Registry() {
         <NativeSelect
           value={state.version}
           onChange={handleChangeVersion}
-          style={{float: 'right'}}
+          style={{ float: "right" }}
         >
           {versItems}
         </NativeSelect>
@@ -187,11 +197,11 @@ export default function Registry() {
           ) : null}
           {state.rawUrl ? <Button to={state.rawUrl}>Raw</Button> : null}
         </ButtonGroup>
-        
+
         <select
           value={state.version}
           onChange={handleChangeVersion}
-          style={{float: 'right'}}
+          style={{ float: "right" }}
         >
           {versItems}
         </select>
@@ -316,8 +326,8 @@ async function renderVer(entry) {
   const url = `https://api.github.com/repos/${owner}/${repo}/git/refs/tags`;
   const res = await fetch(url, {
     headers: {
-      'Content-Type': 'application/json',
-      // authorization: 
+      "Content-Type": "application/json",
+      // authorization:
       //  process.env.GH_TOKEN && "token " + process.env.GH_TOKEN,
       accept: "application/vnd.github.v3+json"
     }
@@ -327,31 +337,32 @@ async function renderVer(entry) {
   }
   const data = await res.json();
   const { type } = getVersion();
-  const tags = (data || []).map(tag => {
-    if(type === 'std') {
-      if(tag.ref && tag.ref.indexOf('refs/tags/std/') === 0) {
-        return tag.ref.replace('refs/tags/std/', '');
+  const tags = (data || [])
+    .map(tag => {
+      if (type === "std") {
+        if (tag.ref && tag.ref.indexOf("refs/tags/std/") === 0) {
+          return tag.ref.replace("refs/tags/std/", "");
+        }
+      } else {
+        return tag.ref && tag.ref.replace("refs/tags/", "");
       }
-    } else {
-      return tag.ref && tag.ref.replace('refs/tags/', '');
-    }
-  })
-  .filter(tag => tag)
-  .reverse();
+    })
+    .filter(tag => tag)
+    .reverse();
 
   return tags;
 }
 
 function getVersion() {
-  const pathArr = window.location.pathname.split('/');
+  const pathArr = window.location.pathname.split("/");
   let type; // std | x
   let version; // master | v0.4.0
-  if(pathArr[1].indexOf('std') === 0) {
-    [type, version] = pathArr[1].split('@') || ['std'];
+  if (pathArr[1].indexOf("std") === 0) {
+    [type, version] = pathArr[1].split("@") || ["std"];
   } else {
-    [type, version] = pathArr[2].split('@') || ['x'];
+    [type, version] = pathArr[2].split("@") || ["x"];
   }
 
-  version = version || 'master';
-  return {type, version};
+  version = version || "master";
+  return { type, version };
 }
