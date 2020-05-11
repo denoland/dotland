@@ -374,7 +374,7 @@
     "repo": "denotrain",
     "desc": "An easy to use webserver engine like express in nodejs fully written in Typescript."
   },
-  "deno_trie": {
+  "denotrie": {
     "type": "github",
     "owner": "silver-xu",
     "repo": "deno-trie",
