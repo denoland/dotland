@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, ButtonGroup } from "@material-ui/core";
+import { Box, ButtonGroup, NativeSelect } from "@material-ui/core";
 import { useLocation, useHistory } from "react-router-dom";
 import Link from "../component/Link";
 import Button from "../component/Button";
@@ -17,7 +17,9 @@ export default function Registry() {
     contents: null,
     rawUrl: null,
     repoUrl: null,
-    dir: null
+    dir: null,
+    versions: null,
+    version: null
   });
   const { pathname, search, hash } = useLocation();
   const firstSelectedLine = React.useRef(null);
@@ -32,13 +34,15 @@ export default function Registry() {
       return;
     }
     const { entry, path } = x;
+    const { version = 'master' } = getVersion() || {};
     console.log({ path });
     if (!path || path.endsWith("/")) {
       // Render dir.
       const repoUrl = `${entry.repo}${path}`;
-      renderDir(path, entry).then(dir => {
+      renderDir(path, entry).then(async dir => {
         console.log({ dir });
-        setState({ dir, repoUrl });
+        const versions = await renderVer(entry);
+        setState({ dir, repoUrl, entry, versions, version });
         setIsLoading(false);
       });
     } else {
@@ -57,10 +61,13 @@ export default function Registry() {
         }
 
         const m = await response.text();
+        const versions = await renderVer(entry);
         setState({
           contents: m,
           rawUrl,
-          repoUrl
+          repoUrl,
+          versions,
+          version
         });
         setIsLoading(false);
         if (firstSelectedLine.current) {
@@ -80,6 +87,42 @@ export default function Registry() {
     lineSelectionRangeMatch[1] = lineSelectionRangeMatch[0];
   }
   const lineSelectionRange = lineSelectionRangeMatch.map(Number);
+
+  // Create versions list
+  const versItems = [<option key="master" value="master">master</option>];
+  const versions = state.versions;
+  if(versions) {
+    for(const ver of versions) {
+      versItems.push(<option key={ver} value={ver}>{ver}</option>);
+    }
+  }
+
+  const handleChangeVersion = async (event) => {
+    const newBranch = event.target.value;
+    setState({
+      ...state,
+      version: newBranch,
+    });
+    const pathArr = window.location.pathname.split('/');
+    let versionedSegment; // std | module-name
+    let newVersionedSegment;
+    if(pathArr[1].indexOf('std') === 0) {
+      [versionedSegment] = pathArr[1].split('@') || ['std'];
+      newVersionedSegment = (newBranch === 'master') 
+        ? `${versionedSegment}` 
+        : `${versionedSegment}@${newBranch}`;
+        pathArr[1] = newVersionedSegment;
+    } else {
+      [versionedSegment] = pathArr[2].split('@') || ['x'];
+      newVersionedSegment = (newBranch === 'master') 
+        ? `${versionedSegment}` 
+        : `${versionedSegment}@${newBranch}`;
+      pathArr[2] = newVersionedSegment;
+    }
+    
+    const newURL = `${window.location.origin}${pathArr.join('/')}`;
+    window.location.href = newURL;
+  }
 
   let contentComponent;
   if (isLoading) {
@@ -110,6 +153,15 @@ export default function Registry() {
         <ButtonGroup size="small" variant="text" color="primary">
           <Button to={state.repoUrl}>Repository</Button>
         </ButtonGroup>
+
+        <NativeSelect
+          value={state.version}
+          onChange={handleChangeVersion}
+          style={{float: 'right'}}
+        >
+          {versItems}
+        </NativeSelect>
+
         <br />
         <br />
         {entries.length > 0 && (
@@ -135,6 +187,15 @@ export default function Registry() {
           ) : null}
           {state.rawUrl ? <Button to={state.rawUrl}>Raw</Button> : null}
         </ButtonGroup>
+        
+        <select
+          value={state.version}
+          onChange={handleChangeVersion}
+          style={{float: 'right'}}
+        >
+          {versItems}
+        </select>
+
         {(() => {
           if (isMarkdown) {
             return <Markdown source={state.contents} />;
@@ -248,4 +309,49 @@ async function renderDir(pathname, entry) {
     body: `Directories not yet supported for entry type ${entry.raw.type}.`,
     files: []
   };
+}
+
+async function renderVer(entry) {
+  const { owner, repo } = entry.raw;
+  const url = `https://api.github.com/repos/${owner}/${repo}/git/refs/tags`;
+  const res = await fetch(url, {
+    headers: {
+      'Content-Type': 'application/json',
+      // authorization: 
+      //  process.env.GH_TOKEN && "token " + process.env.GH_TOKEN,
+      accept: "application/vnd.github.v3+json"
+    }
+  });
+  if (res.status !== 200) {
+    return [];
+  }
+  const data = await res.json();
+  const { type } = getVersion();
+  const tags = (data || []).map(tag => {
+    if(type === 'std') {
+      if(tag.ref && tag.ref.indexOf('refs/tags/std/') === 0) {
+        return tag.ref.replace('refs/tags/std/', '');
+      }
+    } else {
+      return tag.ref && tag.ref.replace('refs/tags/', '');
+    }
+  })
+  .filter(tag => tag)
+  .reverse();
+
+  return tags;
+}
+
+function getVersion() {
+  const pathArr = window.location.pathname.split('/');
+  let type; // std | x
+  let version; // master | v0.4.0
+  if(pathArr[1].indexOf('std') === 0) {
+    [type, version] = pathArr[1].split('@') || ['std'];
+  } else {
+    [type, version] = pathArr[2].split('@') || ['x'];
+  }
+
+  version = version || 'master';
+  return {type, version};
 }
