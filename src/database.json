@@ -1065,6 +1065,12 @@
     "repo": "run_exclusive",
     "desc": "⚡🔒 Generate functions that do not allow parallel executions 🔒 ⚡"
   },
+  "rute": {
+    "type": "github",
+    "owner": "jabernardo",
+    "repo": "rute",
+    "desc": "A Simple Router for Deno"
+  },
   "saur": {
     "type": "github",
     "owner": "tubbo",
