@@ -18,7 +18,7 @@ function FileDisplay(props: {
   const filename = segments[segments.length - 1];
 
   return (
-    <div className="shadow rounded-lg border border-gray-200 overflow-hidden bg-white">
+    <div className="shadow-sm rounded-lg border border-gray-200 overflow-hidden bg-white">
       <div className="bg-gray-100 border-b border-gray-200 py-2 px-4 flex justify-between">
         <div className="flex items-center">
           {isReadme(filename) && (

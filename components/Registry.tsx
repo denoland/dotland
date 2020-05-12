@@ -77,7 +77,7 @@ const Registry = () => {
       fetch(sourceURL, { method: "GET" })
         .then((resp) => {
           if (!resp.ok) {
-            if (resp.status === 404) return null;
+            if (resp.status === 400 || resp.status === 404) return null;
             throw new Error(`${resp.status}: ${resp.statusText}`);
           }
           return resp.text();
@@ -419,7 +419,7 @@ function DirectoryListing(props: {
   return (
     <div className="flex flex-col pt-4">
       <div className="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-        <div className="inline-block min-w-full shadow rounded-lg border border-gray-200 overflow-hidden">
+        <div className="inline-block min-w-full shadow-sm rounded-lg border border-gray-200 overflow-hidden">
           <div className="bg-gray-100 border-b border-gray-200 py-2 px-4 flex justify-between">
             <div className="flex items-center">
               <svg

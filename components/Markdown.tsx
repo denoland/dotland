@@ -89,7 +89,6 @@ interface MarkdownProps {
   source: string;
 }
 
-// TODO(lucacasonato): add anchor points to headers
 function Markdown(props: MarkdownProps) {
   useEffect(() => {
     let { hash } = location;

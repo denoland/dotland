@@ -21,7 +21,6 @@ interface HomeProps {
 
 const NUM_THIRD_PARTY = 12;
 
-// TODO(lucacasonato): add anchor points to headers
 const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
   const [thirdPartySelection, setThirdPartySelection] = useState<
     SimpleEntry[] | null
