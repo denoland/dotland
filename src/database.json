@@ -598,6 +598,12 @@
     "repo": "gentleRpc",
     "desc": "JSON-RPC 2.0 TypeScript library for deno and browser."
   },
+  "heap": {
+    "type": "github",
+    "owner": "gobengo",
+    "repo": "heap",
+    "desc": "Heap data structure"
+  },
   "handlebars": {
     "type": "github",
     "owner": "alosaur",
