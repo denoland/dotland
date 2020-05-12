@@ -1,5 +1,6 @@
 import { fetch, URL, Request, Response } from "@dollarshaveclub/cloudworker";
-import { needsWarning, handleRequest } from "../src/handler";
+import { handleRequest } from "../src/handler";
+import { needsWarning } from "../src/registry";
 
 /* eslint-env jest */
 
@@ -51,7 +52,9 @@ describe("worker proxying", () => {
     const result = await handleRequest(
       new Request("https://deno.land/std/http/server.ts")
     );
-    expect(result.headers.get("Content-Type")).toContain("text/plain");
+    expect(result.headers.get("Content-Type")).toContain(
+      "application/typescript"
+    );
     expect(result.headers.get("X-Deno-Warning")).toContain("master branch");
     expect(result.headers.get("X-Deno-Warning")).toContain(
       "/std/http/server.ts"
@@ -75,7 +78,9 @@ describe("worker proxying", () => {
     const result = await handleRequest(
       new Request("https://deno.land/x/std/version.ts")
     );
-    expect(result.headers.get("Content-Type")).toContain("text/plain");
+    expect(result.headers.get("Content-Type")).toContain(
+      "application/typescript"
+    );
     const text = await result.text();
     expect(text).toContain("/** Version of the Deno standard modules");
   }, 5000);
@@ -97,7 +102,9 @@ describe("worker proxying", () => {
     const result = await handleRequest(
       new Request("https://deno.land/std@v0.50.0/version.ts")
     );
-    expect(result.headers.get("Content-Type")).toContain("text/plain");
+    expect(result.headers.get("Content-Type")).toContain(
+      "application/typescript"
+    );
     const text = await result.text();
     expect(text).toContain("/** Version of the Deno standard modules");
   }, 5000);
@@ -117,7 +124,9 @@ describe("worker proxying", () => {
     const result = await handleRequest(
       new Request("https://deno.land/x/std@v0.50.0/version.ts")
     );
-    expect(result.headers.get("Content-Type")).toContain("text/plain");
+    expect(result.headers.get("Content-Type")).toContain(
+      "application/typescript"
+    );
     const text = await result.text();
     expect(text).toContain("/** Version of the Deno standard modules");
   }, 5000);
