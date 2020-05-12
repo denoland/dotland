@@ -74,6 +74,11 @@ function Home() {
       </p>
       <CodeBlock language={"shell"} value={"choco install deno"} />
       <p>
+        Using <Link to="https://scoop.sh/">Scoop</Link>{" "}
+        (Windows):
+      </p>
+      <CodeBlock language={"shell"} value={"scoop install deno"} />
+      <p>
         See{" "}
         <Link to="https://github.com/denoland/deno_install">deno_install</Link>{" "}
         for more installation options.
