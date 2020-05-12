@@ -598,12 +598,6 @@
     "repo": "gentleRpc",
     "desc": "JSON-RPC 2.0 TypeScript library for deno and browser."
   },
-  "heap": {
-    "type": "github",
-    "owner": "gobengo",
-    "repo": "heap",
-    "desc": "Heap data structure"
-  },
   "handlebars": {
     "type": "github",
     "owner": "alosaur",
@@ -615,6 +609,12 @@
     "owner": "chiefbiiko",
     "repo": "hchacha20",
     "desc": "Special-purpose hashing, such as X25519 key derivation, or XChacha20 initialization. If in doubt, do not use."
+  },
+  "heap": {
+    "type": "github",
+    "owner": "gobengo",
+    "repo": "heap",
+    "desc": "Heap data structure"
   },
   "hmac": {
     "type": "github",
