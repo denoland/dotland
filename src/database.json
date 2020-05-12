@@ -1083,6 +1083,12 @@
     "repo": "noble-ripemd160",
     "desc": "RIPEMD160, a cryptographic hash function."
   },
+  "rubico": {
+    "type": "github",
+    "owner": "richytong",
+    "repo": "rubico",
+    "desc": "a functional promise library"
+  },
   "run_exclusive": {
     "type": "github",
     "owner": "garronej",
