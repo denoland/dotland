@@ -42,6 +42,7 @@ export class NPMEntry implements Entry {
         accept: "application/json",
       },
     });
+    if (res.status === 404) return null;
     if (res.status !== 200) {
       throw Error(
         `Got an error (${

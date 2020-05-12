@@ -3,6 +3,7 @@
 import React, { useMemo, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Head from "next/head";
 import {
   parseNameVersion,
   denoDocAvailableForURL,
@@ -13,7 +14,10 @@ import Header from "./Header";
 import Footer from "./Footer";
 import FileDisplay from "./FileDisplay";
 import { DirEntry } from "../util/registries";
-import Head from "next/head";
+
+class RegistryError {
+  constructor(public message: string) {}
+}
 
 const Registry = () => {
   const { query, asPath, push } = useRouter();
@@ -51,8 +55,10 @@ const Registry = () => {
     return denoDocAvailableForURL(canonicalPath) ? doc : null;
   }, [canonicalPath]);
 
-  const [dirEntries, setDirEntries] = useState<DirEntry[] | null | undefined>();
-  const [raw, setRaw] = useState<string | null | undefined>();
+  const [dirEntries, setDirEntries] = useState<
+    DirEntry[] | RegistryError | null | undefined
+  >();
+  const [raw, setRaw] = useState<string | RegistryError | null | undefined>();
   const [versions, setVersions] = useState<string[] | null | undefined>();
 
   const [readmeCanonicalPath, setReadmeCanonicalPath] = useState<
@@ -64,18 +70,22 @@ const Registry = () => {
   >();
   const [readme, setReadme] = useState<string | null | undefined>();
 
+  // Fetch raw source
   useEffect(() => {
     setRaw(undefined);
     if (sourceURL) {
       fetch(sourceURL, { method: "GET" })
         .then((resp) => {
-          if (!resp.ok) throw Error("Raw source fetch failed.");
+          if (!resp.ok) {
+            if (resp.status === 404) return null;
+            throw new Error(`${resp.status}: ${resp.statusText}`);
+          }
           return resp.text();
         })
         .then(setRaw)
         .catch((e) => {
           console.error("Failed to fetch raw source:", e);
-          setRaw(null);
+          setRaw(new RegistryError(e?.message ?? e.toString()));
         });
     } else {
       setRaw(null);
@@ -83,6 +93,7 @@ const Registry = () => {
   }, [sourceURL]);
 
   // TODO(lucacasonato): only try to load if raw failed or if no file extension
+  // Fetch directory listing
   useEffect(() => {
     setDirEntries(undefined);
     entry
@@ -90,11 +101,11 @@ const Registry = () => {
       .then(setDirEntries)
       .catch((e) => {
         console.error("Failed to fetch dir entry:", e);
-        setDirEntries(null);
+        setDirEntries(new RegistryError(e?.message ?? e.toString()));
       });
   }, [entry, path, version]);
 
-  // TODO(lucacasonato): only load once per module
+  // Fetch versions
   useEffect(() => {
     setVersions(undefined);
     entry
@@ -106,30 +117,33 @@ const Registry = () => {
       });
   }, [entry]);
 
+  // Check if readme is available in directory listing
   useEffect(() => {
-    setReadmeCanonicalPath(undefined);
-    setReadmeURL(undefined);
-    setReadmeRepositoryURL(undefined);
-    const readmeEntry = dirEntries?.find((d) => isReadme(d.name));
-    if (readmeEntry) {
-      setReadmeCanonicalPath(canonicalPath + "/" + readmeEntry.name);
-      setReadmeURL(entry?.getSourceURL(path + "/" + readmeEntry.name, version));
-      setReadmeRepositoryURL(
-        entry?.getRepositoryURL(path + "/" + readmeEntry.name, version)
-      );
-    } else {
-      setReadmeCanonicalPath(null);
-      setReadmeURL(null);
-      setReadmeRepositoryURL(null);
+    if (!(dirEntries instanceof RegistryError)) {
+      const readmeEntry = dirEntries?.find((d) => isReadme(d.name));
+      if (readmeEntry) {
+        setReadmeCanonicalPath(canonicalPath + "/" + readmeEntry.name);
+        setReadmeURL(
+          entry?.getSourceURL(path + "/" + readmeEntry.name, version)
+        );
+        setReadmeRepositoryURL(
+          entry?.getRepositoryURL(path + "/" + readmeEntry.name, version)
+        );
+        return;
+      }
     }
+    setReadmeCanonicalPath(null);
+    setReadmeURL(null);
+    setReadmeRepositoryURL(null);
   }, [name, path, version, dirEntries, canonicalPath]);
 
+  // Fetch readme
   useEffect(() => {
     if (readmeURL) {
       setReadme(undefined);
       fetch(readmeURL)
         .then((resp) => {
-          if (!resp.ok) throw Error("README fetch failed.");
+          if (!resp.ok) throw new Error("README fetch failed.");
           return resp.text();
         })
         .then(setReadme)
@@ -151,8 +165,6 @@ const Registry = () => {
     );
   }
 
-  const segments = path.split("/").splice(1);
-
   return (
     <>
       <Head>
@@ -168,119 +180,78 @@ const Registry = () => {
         />
         <div className="">
           <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8">
-            <p className="text-gray-500 pt-2 pb-4">
-              <Link href="/">
-                <a className="link">deno.land</a>
-              </Link>{" "}
-              /{" "}
-              {!isStd && (
-                <>
-                  <Link href="/x">
-                    <a className="link">x</a>
-                  </Link>{" "}
-                  /{" "}
-                </>
-              )}
-              <Link
-                href={(!isStd ? "/x" : "") + "/[identifier]"}
-                as={`${!isStd ? "/x" : ""}/${name}${
-                  version ? `@${version}` : ""
-                }`}
-              >
-                <a className="link">
-                  {name}
-                  {version ? `@${version}` : ""}
-                </a>
-              </Link>
-              {path &&
-                path.length > 0 &&
-                segments.map((p, i) => {
-                  const link = segments.slice(0, i + 1).join("/");
+            <Breadcrumbs
+              name={name}
+              version={version}
+              path={path}
+              isStd={isStd}
+            />
+            <VersionSelector
+              versions={versions}
+              defaultVersion={defaultVersion}
+              selectedVersion={version}
+              onChange={gotoVersion}
+            />
+            {(() => {
+              if (!dirEntries && !raw) {
+                if (dirEntries === null && raw === null) {
                   return (
-                    <React.Fragment key={i}>
-                      {" "}
-                      /{" "}
-                      <Link
-                        href={(!isStd ? "/x" : "") + "/[identifier]/[...path]"}
-                        as={`${!isStd ? "/x" : ""}/${name}${
-                          version ? `@${version}` : ""
-                        }${link ? `/${link}` : ""}`}
-                      >
-                        <a className="link">{p}</a>
-                      </Link>
-                    </React.Fragment>
+                    <ErrorMessage
+                      title="404 - Not Found"
+                      body="This file or directory could not be found."
+                    />
                   );
-                })}
-            </p>
-            <div>
-              <label htmlFor="version" className="sr-only">
-                Version
-              </label>
-              {versions && (
-                <div className="mt-1 sm:mt-0 sm:col-span-2">
-                  <div className="max-w-xs rounded-md shadow-sm">
-                    <select
-                      id="version"
-                      className="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                      value={version}
-                      onChange={({ target: { value: newVersion } }) =>
-                        gotoVersion(newVersion)
-                      }
-                    >
-                      {version && !versions.includes(version) && (
-                        <option key={version} value={version}>
-                          {version}
-                        </option>
-                      )}
-                      <option key="" value="">
-                        {defaultVersion}
-                      </option>
-                      {versions.map((v) => (
-                        <option key={v} value={v}>
-                          {v}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-              )}
-            </div>
-            {!dirEntries && !raw && !(dirEntries === null && raw === null) && (
-              // loading
-              <div className="mt-4 rounded-lg overflow-hidden border border-gray-200 bg-white">
-                <div className="bg-gray-100 h-10 w-full border-b border-gray-200 px-4 py-3">
-                  <div className="w-3/5 sm:w-1/5 bg-gray-200 h-4"></div>
-                </div>
-                <div className="w-full p-4">
-                  <div className="w-4/5 sm:w-1/3 bg-gray-100 h-8"></div>
-                  <div className="sm:w-2/3 bg-gray-100 h-3 mt-6"></div>
-                  <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
-                  <div className="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                  <div className="w-3/4 bg-gray-100 h-3 mt-4"></div>
-                  <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
-                  <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                </div>
-              </div>
-            )}
-            {dirEntries && (
-              <DirectoryListing
-                dirEntries={dirEntries}
-                repositoryURL={repositoryURL}
-                name={name}
-                version={version}
-                path={path}
+                } else if (dirEntries === undefined && raw === undefined) {
+                  // loading
+                  return (
+                    <div className="mt-4 rounded-lg overflow-hidden border border-gray-200 bg-white">
+                      <div className="bg-gray-100 h-10 w-full border-b border-gray-200 px-4 py-3">
+                        <div className="w-3/5 sm:w-1/5 bg-gray-200 h-4"></div>
+                      </div>
+                      <div className="w-full p-4">
+                        <div className="w-4/5 sm:w-1/3 bg-gray-100 h-8"></div>
+                        <div className="sm:w-2/3 bg-gray-100 h-3 mt-6"></div>
+                        <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
+                        <div className="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                        <div className="w-3/4 bg-gray-100 h-3 mt-4"></div>
+                        <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
+                        <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                      </div>
+                    </div>
+                  );
+                }
+              }
+            })()}
+            {dirEntries instanceof RegistryError ? (
+              <ErrorMessage
+                title="Failed to get directory listing"
+                body={dirEntries.message}
               />
-            )}
-            {raw && (
-              <div className="mt-4">
-                <FileDisplay
-                  raw={raw}
-                  canonicalPath={canonicalPath}
-                  sourceURL={sourceURL!}
+            ) : (
+              dirEntries && (
+                <DirectoryListing
+                  dirEntries={dirEntries}
                   repositoryURL={repositoryURL}
-                  documentationURL={documentationURL}
+                  name={name}
+                  version={version}
+                  path={path}
                 />
-              </div>
+              )
+            )}
+            {raw instanceof RegistryError ? (
+              <ErrorMessage title="Failed to get raw file" body={raw.message} />
+            ) : (
+              raw && (
+                <div className="mt-4">
+                  <FileDisplay
+                    raw={raw}
+                    canonicalPath={canonicalPath}
+                    sourceURL={sourceURL!}
+                    repositoryURL={repositoryURL}
+                    documentationURL={documentationURL}
+                  />
+                </div>
+              )
             )}
             {readme && (
               <div className="mt-4">
@@ -299,6 +270,142 @@ const Registry = () => {
     </>
   );
 };
+
+function ErrorMessage(props: { title: string; body: string }) {
+  return (
+    <div className="rounded-md bg-red-50 border border-red-200 p-4 my-4">
+      <div className="flex">
+        <div className="flex-shrink-0">
+          <svg
+            className="h-5 w-5 text-red-400"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </div>
+        <div className="ml-3">
+          <h3 className="text-sm leading-5 font-medium text-red-800">
+            {props.title}
+          </h3>
+          <div className="mt-2 text-sm leading-5 text-red-700">
+            {props.body}
+          </div>
+        </div>
+      </div>{" "}
+    </div>
+  );
+}
+
+function Breadcrumbs({
+  name,
+  version,
+  path,
+  isStd,
+}: {
+  name: string;
+  version: string | undefined;
+  path: string;
+  isStd: boolean;
+}) {
+  const segments = path.split("/").splice(1);
+  return (
+    <p className="text-gray-500 pt-2 pb-4">
+      <Link href="/">
+        <a className="link">deno.land</a>
+      </Link>{" "}
+      /{" "}
+      {!isStd && (
+        <>
+          <Link href="/x">
+            <a className="link">x</a>
+          </Link>{" "}
+          /{" "}
+        </>
+      )}
+      <Link
+        href={(!isStd ? "/x" : "") + "/[identifier]"}
+        as={`${!isStd ? "/x" : ""}/${name}${version ? `@${version}` : ""}`}
+      >
+        <a className="link">
+          {name}
+          {version ? `@${version}` : ""}
+        </a>
+      </Link>
+      {path &&
+        path.length > 0 &&
+        segments.map((p, i) => {
+          const link = segments.slice(0, i + 1).join("/");
+          return (
+            <React.Fragment key={i}>
+              {" "}
+              /{" "}
+              <Link
+                href={(!isStd ? "/x" : "") + "/[identifier]/[...path]"}
+                as={`${!isStd ? "/x" : ""}/${name}${
+                  version ? `@${version}` : ""
+                }${link ? `/${link}` : ""}`}
+              >
+                <a className="link">{p}</a>
+              </Link>
+            </React.Fragment>
+          );
+        })}
+    </p>
+  );
+}
+
+function VersionSelector({
+  versions,
+  selectedVersion,
+  defaultVersion,
+  onChange,
+}: {
+  versions: string[] | null | undefined;
+  selectedVersion: string | undefined;
+  defaultVersion: string | undefined;
+  onChange: (newVersion: string) => void;
+}) {
+  return (
+    <div>
+      <label htmlFor="version" className="sr-only">
+        Version
+      </label>
+      {versions && (
+        <div className="mt-1 sm:mt-0 sm:col-span-2">
+          <div className="max-w-xs rounded-md shadow-sm">
+            <select
+              id="version"
+              className="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+              value={selectedVersion}
+              onChange={({ target: { value: newVersion } }) =>
+                onChange(newVersion)
+              }
+            >
+              {selectedVersion && !versions.includes(selectedVersion) && (
+                <option key={selectedVersion} value={selectedVersion}>
+                  {selectedVersion}
+                </option>
+              )}
+              <option key="" value="">
+                {defaultVersion}
+              </option>
+              {versions.map((v) => (
+                <option key={v} value={v}>
+                  {v}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 function DirectoryListing(props: {
   dirEntries: DirEntry[];

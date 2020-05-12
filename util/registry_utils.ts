@@ -80,7 +80,10 @@ export function denoDocAvailableForURL(filename: string) {
 }
 
 export function isReadme(filename: string) {
-  return filename.toLowerCase() === "readme.md";
+  return (
+    filename.toLowerCase() === "readme.md" ||
+    filename.toLowerCase() === "readme"
+  );
 }
 
 export const entries = DATABASE as { [name: string]: DatabaseEntry };
