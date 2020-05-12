@@ -1284,6 +1284,12 @@
     "repo": "deno_tokenizer",
     "desc": "A simple tokenizer for deno."
   },
+  "trc": {
+    "type": "github",
+    "owner": "AlexVagrant",
+    "repo": "trc",
+    "desc": "tcr will complie and run with deno when typescript file change, you can direct run tstypescript file",
+  },
   "tree": {
     "type": "github",
     "owner": "KSXGitHub",
