@@ -73,7 +73,7 @@ export function getEntry(name, branch = "master") {
       raw: rawEntry,
       type: "url",
       url: rawEntry.url.replace(/\$\{b}/, branch),
-      repo: rawEntry.repo.replace(/\$\{b}/, branch)
+      repo: rawEntry.repo.replace(/\$\{b}/, branch),
     };
   } else if (rawEntry.type === "esm") {
     const version = branch === "master" ? "latest" : branch;
@@ -83,7 +83,7 @@ export function getEntry(name, branch = "master") {
       raw: rawEntry,
       type: "esm",
       url: rawEntry.url.replace(/\$\{v}/, version),
-      repo: rawEntry.repo.replace(/\$\{v}/, version)
+      repo: rawEntry.repo.replace(/\$\{v}/, version),
     };
   } else if (rawEntry.type === "github") {
     const path = rawEntry.path || "";
@@ -95,7 +95,7 @@ export function getEntry(name, branch = "master") {
       raw: rawEntry,
       type: "github",
       url,
-      repo
+      repo,
     };
   }
   return null;

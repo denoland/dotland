@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Light as SyntaxHighlighter,
-  SyntaxHighlighterProps
+  SyntaxHighlighterProps,
 } from "react-syntax-highlighter";
 import lightTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-light";
 import darkTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark";
@@ -18,29 +18,29 @@ import { makeStyles } from "@material-ui/core/styles";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 lightTheme["hljs-selection"] = {
-  backgroundColor: "#ebebeb" // https://github.com/atom/one-light-ui/blob/master/styles/ui-variables.less#L32
+  backgroundColor: "#ebebeb", // https://github.com/atom/one-light-ui/blob/master/styles/ui-variables.less#L32
 };
 darkTheme["hljs-selection"] = {
-  backgroundColor: "#3a404b" // https://github.com/atom/one-dark-ui/blob/master/styles/ui-variables.less#L32
+  backgroundColor: "#3a404b", // https://github.com/atom/one-dark-ui/blob/master/styles/ui-variables.less#L32
 };
 
-const useStyles = makeStyles(_theme => ({
+const useStyles = makeStyles((_theme) => ({
   copyButton: {
     position: "absolute",
     right: "2px",
-    top: "2px"
+    top: "2px",
   },
   hidden: {
-    display: "none"
+    display: "none",
   },
   container: {
     position: "relative",
     paddingLeft: "0",
-    paddingRight: "0"
+    paddingRight: "0",
   },
   checkIcon: {
-    color: "rgb(80, 161, 79)"
-  }
+    color: "rgb(80, 161, 79)",
+  },
 }));
 SyntaxHighlighter.registerLanguage("javascript", javascript);
 SyntaxHighlighter.registerLanguage("typescript", typescript);

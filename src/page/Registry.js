@@ -17,7 +17,7 @@ export default function Registry() {
     contents: null,
     rawUrl: null,
     repoUrl: null,
-    dir: null
+    dir: null,
   });
   const { pathname, search, hash } = useLocation();
   const firstSelectedLine = React.useRef(null);
@@ -26,7 +26,7 @@ export default function Registry() {
     const x = proxy(pathname);
     if (!x || !x.entry) {
       setState({
-        contents: "Module not found in database."
+        contents: "Module not found in database.",
       });
       setIsLoading(false);
       return;
@@ -36,7 +36,7 @@ export default function Registry() {
     if (!path || path.endsWith("/")) {
       // Render dir.
       const repoUrl = `${entry.repo}${path}`;
-      renderDir(path, entry).then(dir => {
+      renderDir(path, entry).then((dir) => {
         console.log({ dir });
         setState({ dir, repoUrl });
         setIsLoading(false);
@@ -46,7 +46,7 @@ export default function Registry() {
       const rawUrl = `${entry.url}${path}`;
       const repoUrl = `${entry.repo}${path}`;
       console.log("fetch", rawUrl);
-      fetch(rawUrl).then(async response => {
+      fetch(rawUrl).then(async (response) => {
         if (response.status === 404) {
           try {
             await renderDir(path, entry);
@@ -60,7 +60,7 @@ export default function Registry() {
         setState({
           contents: m,
           rawUrl,
-          repoUrl
+          repoUrl,
         });
         setIsLoading(false);
         if (firstSelectedLine.current) {
@@ -148,7 +148,7 @@ export default function Registry() {
                     ? state.rawUrl.substr(state.rawUrl.lastIndexOf(".") + 1)
                     : "text"
                 }
-                lineProps={lineNumber => {
+                lineProps={(lineNumber) => {
                   const lineProps = {};
                   if (
                     lineNumber >= lineSelectionRange[0] &&
@@ -178,7 +178,7 @@ export default function Registry() {
 }
 
 const readmeStyle = {
-  fontWeight: "900"
+  fontWeight: "900",
 };
 
 async function renderDir(pathname, entry) {
@@ -194,8 +194,8 @@ async function renderDir(pathname, entry) {
       headers: {
         //authorization:
         //  process.env.GH_TOKEN && "token " + process.env.GH_TOKEN,
-        accept: "application/vnd.github.v3.object"
-      }
+        accept: "application/vnd.github.v3.object",
+      },
     });
     if (res.status !== 200) {
       throw Error(
@@ -213,11 +213,11 @@ async function renderDir(pathname, entry) {
       );
     }
 
-    const files = data.entries.map(entry => ({
+    const files = data.entries.map((entry) => ({
       name: entry.name,
       type: entry.type, // "file" | "dir" | "symlink"
       size: entry.size, // file only
-      target: entry.target // symlink only
+      target: entry.target, // symlink only
     }));
 
     let body;
@@ -225,7 +225,7 @@ async function renderDir(pathname, entry) {
     // no useful files exist in the repository, so opt to attempt
     // showing the contents of the README file instead if it exists.
     const readme = files.find(
-      entry => entry.name.toLowerCase() === "readme.md"
+      (entry) => entry.name.toLowerCase() === "readme.md"
     );
 
     if (readme) {
@@ -246,6 +246,6 @@ async function renderDir(pathname, entry) {
 
   return {
     body: `Directories not yet supported for entry type ${entry.raw.type}.`,
-    files: []
+    files: [],
   };
 }

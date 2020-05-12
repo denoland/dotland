@@ -31,7 +31,7 @@ function Home() {
             "rusty_v8",
             "deno_website2",
             "doc_website",
-            "deno_install"
+            "deno_install",
           ].map((repo, i) => {
             const url = `https://github.com/denoland/${repo}`;
             const badge = `https://github.com/denoland/${repo}/workflows/ci/badge.svg?branch=master&event=push`;
@@ -74,8 +74,7 @@ function Home() {
       </p>
       <CodeBlock language={"shell"} value={"choco install deno"} />
       <p>
-        Using <Link to="https://scoop.sh/">Scoop</Link>{" "}
-        (Windows):
+        Using <Link to="https://scoop.sh/">Scoop</Link> (Windows):
       </p>
       <CodeBlock language={"shell"} value={"scoop install deno"} />
       <p>
