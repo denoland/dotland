@@ -7,7 +7,7 @@
 }
 
 .markdown > * + * {
-  @apply mt-0;
+  @apply mt-4;
   @apply mb-4;
 }
 
@@ -29,8 +29,8 @@
   @apply border-gray-200;
   @apply text-4xl;
   @apply font-bold;
-  @apply mb-4;
-  @apply mt-6;
+  @apply mt-8;
+  @apply mb-6;
   @apply pb-1;
 }
 
@@ -40,8 +40,8 @@
   @apply border-gray-200;
   @apply text-2xl;
   @apply font-bold;
-  @apply mb-4;
-  @apply mt-6;
+  @apply mt-8;
+  @apply mb-6;
   @apply pb-1;
 }
 

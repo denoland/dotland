@@ -50,7 +50,7 @@ interface LinkRendererProps {
 
 function LinkRenderer(props: LinkRendererProps) {
   const { asPath } = useRouter();
-  const currentPath = new URL(asPath, location.origin).pathname;
+  const currentPath = new URL(asPath, "https://deno.land").pathname;
   let href: string | undefined = undefined;
   if (
     props.href &&
