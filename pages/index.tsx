@@ -93,24 +93,46 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
           </div>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
-          <h3 className="font-bold text-xl" id="introduction">
-            Introduction
-          </h3>
+          <Link href="#introduction">
+            <a className="hover:underline">
+              <h3 className="font-bold text-xl" id="introduction">
+                Introduction
+              </h3>
+            </a>
+          </Link>
           <p className="my-4 text-gray-700">
             Deno is a simple, modern and secure runtime for JavaScript and
             TypeScript that uses V8 and is built in Rust.
           </p>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
-          <h3 className="font-bold text-xl">Installation</h3>
+          <Link href="#installation">
+            <a className="hover:underline">
+              <h3 className="font-bold text-xl" id="installation">
+                Installation
+              </h3>
+            </a>
+          </Link>
           <InstallSection />
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
-          <h3 className="font-bold text-xl">Getting Started</h3>
+          <Link href="#getting-started">
+            <a className="hover:underline">
+              <h3 className="font-bold text-xl" id="getting-started">
+                Getting Started
+              </h3>
+            </a>
+          </Link>
           <GettingStartedSection />
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
-          <h3 className="font-bold text-xl">Runtime Documentation</h3>
+          <Link href="#runtime-documentation">
+            <a className="hover:underline">
+              <h3 className="font-bold text-xl" id="runtime-documentation">
+                Runtime Documentation
+              </h3>
+            </a>
+          </Link>
           <p className="my-4 text-gray-700">
             The basic runtime documentation for Deno can be found on{" "}
             <a
@@ -122,11 +144,11 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
             .
           </p>
           <p className="my-4 text-gray-700">
-            Deno also has{" "}
+            Deno comes with{" "}
             <Link href="/[identifier]" as="/manual">
               <a className="link">a manual</a>
             </Link>{" "}
-            which contains more in depth explainations about the more complex
+            which contains more in depth explanations about the more complex
             functions of the runtime, a introduction to the concepts that Deno
             is built on, details about the internals of Deno, how to embed Deno
             in your own application and how to extend Deno using Rust plugins.
@@ -137,7 +159,13 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
           </p>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
-          <h3 className="font-bold text-xl">Standard Modules</h3>
+          <Link href="#standard-modules">
+            <a className="hover:underline">
+              <h3 className="font-bold text-xl" id="standard-modules">
+                Standard Modules
+              </h3>
+            </a>
+          </Link>
           <p className="my-4 text-gray-700">
             Next to the Deno runtime, Deno also provides a list of audited
             standard modules that are reviewed by the core Deno team and are
@@ -146,7 +174,7 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
             <a href="https://github.com/denoland/deno" className="link">
               denoland/deno
             </a>{" "}
-            repository and are versioned together with the Deno runtime.
+            repository.
           </p>
           <p className="my-4 text-gray-700">
             These standard modules are hosted at{" "}
@@ -158,10 +186,16 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
           </p>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
-          <h3 className="font-bold text-xl">Third Party Modules</h3>
+          <Link href="#third-party-modules">
+            <a className="hover:underline">
+              <h3 className="font-bold text-xl" id="third-party-modules">
+                Third Party Modules
+              </h3>
+            </a>
+          </Link>
           <p className="my-4 text-gray-700">
-            Deno can import modules from any location on the web, for example
-            GitHub, a personal webserver, or a CDN like{" "}
+            Deno can import modules from any location on the web, like GitHub, a
+            personal webserver, or a CDN like{" "}
             <a href="https://pika.dev" className="link">
               pika.dev
             </a>{" "}
@@ -172,7 +206,7 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
             .
           </p>
           <p className="my-4 text-gray-700">
-            To make it easier to use third party modules Deno provides some
+            To make it easier to consume third party modules Deno provides some
             built in tooling like <InlineCode>deno info</InlineCode> and{" "}
             <InlineCode>deno doc</InlineCode>. deno.land also provides a web UI
             for viewing module documentation. It is available at{" "}
@@ -182,8 +216,8 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
             .
           </p>
           <p className="my-4 text-gray-700">
-            deno.land provides a simple public hosting service for ES modules
-            that work with Deno. It can be found at{" "}
+            deno.land also provides a simple public hosting service for ES
+            modules that work with Deno. It can be found at{" "}
             <Link href="/x">
               <a className="link">deno.land/x</a>
             </Link>
@@ -297,7 +331,7 @@ const InstallSection = () => {
   );
 };
 
-export const complexExampleProgram = `import { serve } from "https://deno.land/std@v0.36.0/http/server.ts";
+export const complexExampleProgram = `import { serve } from "https://deno.land/std@0.50.0/http/server.ts";
 const s = serve({ port: 8000 });
 console.log("http://localhost:8000/");
 for await (const req of s) {
@@ -314,9 +348,10 @@ const GettingStartedSection = () => (
     <p className="my-4 text-gray-700">Or a more complex one:</p>
     <CodeBlock code={complexExampleProgram} language="typescript" />
     <p className="my-4 text-gray-700">
-      You can find the manual that contains more guides and examples{" "}
+      You can find a more in depth introduction, examples, and environment setup
+      guides in{" "}
       <Link href="/[identifier]" as="/manual">
-        <a className="link">here</a>
+        <a className="link">the manual</a>
       </Link>
       .
     </p>
