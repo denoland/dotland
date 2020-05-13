@@ -54,7 +54,7 @@ const Footer = (props: { simple?: boolean }) => (
           </svg>
         </a>
         <a
-          href="https://discord.gg/TGMHGv6"
+          href="https://discord.gg/deno"
           className="ml-6 text-gray-400 hover:text-gray-500"
         >
           <span className="sr-only">Discord</span>
