@@ -63,7 +63,7 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
         </div>
         <div className="bg-gray-50 border-b border-gray-200">
           <Header />
-          <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-16 sm:pt-24 pb-20 sm:pb-36 flex flex-col items-center">
+          <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
             <h1 className="font-extrabold text-5xl leading-10 tracking-tight text-gray-900">
               Deno
             </h1>
@@ -72,23 +72,6 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
               <strong className="font-semibold">JavaScript</strong> and{" "}
               <strong className="font-semibold">TypeScript</strong>.
             </h2>
-            <div className="mt-8 flex justify-center">
-              <div className="rounded-md shadow">
-                <a
-                  href="#introduction"
-                  className="flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-black hover:bg-cool-gray-900 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out"
-                >
-                  Get Started
-                </a>
-              </div>
-              <div className="ml-3">
-                <Link href="/[identifier]" as="/manual">
-                  <a className="flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-gray-800 bg-gray-200 hover:bg-gray-300 focus:outline-none focus:shadow-outline focus:border-gray-300 transition duration-150 ease-in-out">
-                    View Docs
-                  </a>
-                </Link>
-              </div>
-            </div>
           </div>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
