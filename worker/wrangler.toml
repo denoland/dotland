@@ -1,0 +1,23 @@
+# Cloudflare Worker configuration
+account_id = "05de195b9a104acc60c4d6e43c9cc137"
+zone_id = "20c47e97067d5e82abedeeb4c71889e6"
+
+# shared
+type = "webpack"
+webpack_config = "webpack.config.js"
+
+# default dev environment
+name = "worker-dev"
+workers_dev = true
+
+# environment configuration
+[env.staging]
+name = "worker-staging"
+route = "staging.deno.antipy.cf/*"
+workers_dev = false
+
+# environment configuration
+[env.production]
+name = "worker"
+route = "deno.antipy.cf/*"
+workers_dev = false
