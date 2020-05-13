@@ -1,6 +1,6 @@
 # Cloudflare Worker configuration
-account_id = "05de195b9a104acc60c4d6e43c9cc137"
-zone_id = "20c47e97067d5e82abedeeb4c71889e6"
+account_id = "895762025d37fc687ecd72d7cc80204a"
+zone_id = "c192cf8ac042c681023493c52edd44c8"
 
 # shared
 type = "webpack"
@@ -13,11 +13,11 @@ workers_dev = true
 # environment configuration
 [env.staging]
 name = "worker-staging"
-route = "staging.deno.antipy.cf/*"
+route = "staging.deno.land/*"
 workers_dev = false
 
 # environment configuration
 [env.production]
 name = "worker"
-route = "deno.antipy.cf/*"
+route = "deno.land/*"
 workers_dev = false

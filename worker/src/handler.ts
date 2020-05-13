@@ -2,7 +2,7 @@
 
 import { handleRegistryRequest } from "./registry";
 
-const REMOTE_URL = "https://deno-website2-v1.now.sh";
+const REMOTE_URL = "https://deno-website2.now.sh";
 const TYPEDOC_REMOTE_URL =
   "http://deno.land.s3-website-us-east-1.amazonaws.com";
 

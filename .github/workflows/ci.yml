@@ -47,14 +47,14 @@ jobs:
       - run: CI=true yarn test
         working-directory: worker
       - name: Publish Production
-        if: github.ref == 'refs/heads/master' && github.event_name == 'push' && github.repository == 'antipycorp/deno_website2'
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push' && github.repository == 'denoland/deno_website2'
         uses: cloudflare/wrangler-action@1.1.0
         with:
           environment: "production"
           apiToken: ${{ secrets.cloudflareToken }}
           workingDirectory: worker
       - name: Publish Staging
-        if: github.event_name == 'push' && github.repository == 'antipycorp/deno_website2'
+        if: github.event_name == 'push' && github.repository == 'denoland/deno_website2'
         uses: cloudflare/wrangler-action@1.1.0
         with:
           environment: "staging"
