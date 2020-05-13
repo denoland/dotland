@@ -1223,6 +1223,13 @@
     "repo": "deno-sqlite",
     "desc": "JavaScript SQLite Module"
   },
+  "docs": {
+    "type": "github",
+    "owner": "denoland",
+    "repo": "deno",
+    "path": "docs/",
+    "desc": "Deno Documentation"
+  },
   "std": {
     "type": "github",
     "owner": "denoland",
