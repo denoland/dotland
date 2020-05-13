@@ -6,6 +6,7 @@ import light from "prism-react-renderer/themes/github";
 
 export interface CodeBlockProps {
   code: string;
+  disablePrefixes?: boolean;
   language:
     | "javascript"
     | "typescript"
@@ -23,6 +24,7 @@ export const RawCodeBlock = ({
   code,
   language,
   className: extraClassName,
+  disablePrefixes,
 }: CodeBlockProps & { className?: string }) => {
   return (
     <Highlight
@@ -40,7 +42,8 @@ export const RawCodeBlock = ({
           }
           style={{ ...style }}
         >
-          {tokens.length === 1 &&
+          {!disablePrefixes &&
+            tokens.length === 1 &&
             (language === "bash" || language === "shell") && (
               <code className="pr-2 sm:pr-3">
                 <div className="text-gray-400 token-line text-right select-none">
@@ -48,7 +51,7 @@ export const RawCodeBlock = ({
                 </div>
               </code>
             )}
-          {tokens.length > 1 && (
+          {tokens.length > 1 && !disablePrefixes && (
             <code className="pr-2 sm:pr-3">
               {tokens.map((line, i) => (
                 <div
@@ -75,11 +78,12 @@ export const RawCodeBlock = ({
   );
 };
 
-const CodeBlock = ({ code, language }: CodeBlockProps) => {
+const CodeBlock = ({ code, language, disablePrefixes }: CodeBlockProps) => {
   return (
     <RawCodeBlock
       code={code}
       language={language}
+      disablePrefixes={disablePrefixes}
       className="rounded border border-gray-200 p-1 px-2 sm:px-3"
     />
   );

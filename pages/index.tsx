@@ -131,8 +131,15 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
           />
           <p className="my-4 text-gray-700">Or a more complex one:</p>
         </div>
-        <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8">
-          <CodeBlock code={complexExampleProgram} language="typescript" />
+        <div
+          className="mx-auto px-4 sm:px-6 md:px-8"
+          style={{ maxWidth: "46rem" }}
+        >
+          <CodeBlock
+            code={complexExampleProgram}
+            language="typescript"
+            disablePrefixes
+          />
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8">
           <p className="my-4 text-gray-700">
