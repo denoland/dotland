@@ -52,6 +52,7 @@ const Benchmarks = () => {
         <Header subtitle="Continuous Benchmarks" />
         <div className="mb-12">
           <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 mt-8 pb-8">
+            <img src="/deno_logo_4.gif" className="py-8" />
             <h4 className="text-2xl font-bold tracking-tight">About</h4>
             <p className="mt-4">
               As part of Deno's continuous integration and testing pipeline we
@@ -199,7 +200,9 @@ const Benchmarks = () => {
                 </span>
               </p>
               <div className="mt-8">
-                <h5 className="text-lg font-medium tracking-tight">Req/Sec</h5>
+                <h5 className="text-lg font-medium tracking-tight">
+                  HTTP Server Throughput
+                </h5>
                 <BenchmarkOrLoading
                   data={data}
                   columns={
@@ -274,9 +277,24 @@ const Benchmarks = () => {
                   </li>
                 </ul>
               </div>
+              <div className="mt-8">
+                <h5 className="text-lg font-medium tracking-tight">
+                  HTTP Latency
+                </h5>
+                <BenchmarkOrLoading
+                  data={data}
+                  columns={data?.maxLatency}
+                  yLabel={"milliseconds"}
+                  yTickFormat={formatLogScale}
+                />
+                <p className="mt-1">
+                  Max latency during the same test used above for
+                  requests/second. Smaller is better. Log scale.
+                </p>
+              </div>
               <div className="mt-20">
                 <h5 className="text-lg font-medium tracking-tight">
-                  Proxy Req/Sec
+                  HTTP Proxy Throughput
                 </h5>
                 <BenchmarkOrLoading
                   data={data}
