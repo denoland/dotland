@@ -338,6 +338,12 @@
     "repo": "deno",
     "desc": "A secure runtime for JavaScript and TypeScript."
   },
+  "deno_aws_sign_v4":{
+    "type": "github",
+    "owner": "silverxu",
+    "repo": "deno-aws-sign-v4",
+    "desc": "Generates AWS Signature V4 for AWS low-level REST APIs"
+  },
   "deno_gui": {
     "type": "github",
     "owner": "fakoua",
