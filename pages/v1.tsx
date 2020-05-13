@@ -26,16 +26,22 @@ const V1 = (props: Props) => {
       </Head>
       <Header />
       <div className="w-full" style={{ backgroundColor: "#2f2e2c" }}>
-        <img
-          src="/v1_wide.jpg"
-          alt=""
-          className="max-w-screen-lg mx-auto w-full hidden md:block"
-        />
-        <img
-          src="/v1.jpg"
-          alt=""
-          className="max-w-screen-lg mx-auto w-full block md:hidden"
-        />
+        <div className="max-w-screen-lg mx-auto">
+          <img
+            src="/v1_wide.jpg"
+            alt=""
+            className="w-full h-auto hidden md:block"
+            width="2000"
+            height="1024"
+          />
+          <img
+            src="/v1.jpg"
+            alt=""
+            width="1366"
+            height="1024"
+            className="w-full h-auto block md:hidden"
+          />
+        </div>
       </div>
       <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 py-8 mb-16">
         <h1 className="text-3xl tracking-tight font-bold text-5xl leading-10 mt-4 py-8">
