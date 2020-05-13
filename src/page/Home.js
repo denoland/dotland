@@ -95,7 +95,7 @@ function Home() {
 
       <p>
         <b>
-          <Link to="/std/manual.md">Manual</Link>
+          <Link to="/docs/introduction.md">Manual</Link>
         </b>
       </p>
 
@@ -138,7 +138,7 @@ function Home() {
       </p>
 
       <p>
-        <Link to="/std/manual.md#contributing">Contributing</Link>
+        <Link to="/docs/contributing.md">Contributing</Link>
       </p>
 
       <p>
