@@ -129,7 +129,9 @@ export default function Registry() {
     contentComponent = (
       <div>
         <ButtonGroup size="small" variant="text" color="primary">
-          <Button to={docsURL}>Documentation</Button>
+          {!isMarkdown ? (
+            <Button to={docsURL}>Documentation</Button>
+          ) : null}
           {state.repoUrl ? (
             <Button to={state.repoUrl}>Repository</Button>
           ) : null}
