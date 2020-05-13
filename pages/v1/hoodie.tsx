@@ -101,6 +101,52 @@ const V1Hoodie = () => {
                   </button>
                 </span>
               </div>
+              <div className="mt-6">
+                <h4 className="text-gray-500">Size chart (in inches)</h4>
+                {/* Gildan Heavy Blend Adult Full Zip Hooded Sweatshirt 18600 */}
+                <table className="table-auto mt-1 overflow-x-auto w-full rounded">
+                  <thead>
+                    <tr>
+                      <th className="border px-4 py-2">Size</th>
+                      <th className="border px-4 py-2">Width</th>
+                      <th className="border px-4 py-2">Length</th>
+                      <th className="border px-4 py-2">Sleeve Center Back</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="border px-4 py-2">S</td>
+                      <td className="border px-4 py-2">19.25</td>
+                      <td className="border px-4 py-2">27</td>
+                      <td className="border px-4 py-2">33.5</td>
+                    </tr>
+                    <tr>
+                      <td className="border px-4 py-2">M</td>
+                      <td className="border px-4 py-2">21.25</td>
+                      <td className="border px-4 py-2">28</td>
+                      <td className="border px-4 py-2">34.5</td>
+                    </tr>
+                    <tr>
+                      <td className="border px-4 py-2">L</td>
+                      <td className="border px-4 py-2">23.25</td>
+                      <td className="border px-4 py-2">29</td>
+                      <td className="border px-4 py-2">35.5</td>
+                    </tr>
+                    <tr>
+                      <td className="border px-4 py-2">XL</td>
+                      <td className="border px-4 py-2">25.25</td>
+                      <td className="border px-4 py-2">30</td>
+                      <td className="border px-4 py-2">36.5</td>
+                    </tr>
+                    <tr>
+                      <td className="border px-4 py-2">XXL</td>
+                      <td className="border px-4 py-2">27.25</td>
+                      <td className="border px-4 py-2">31</td>
+                      <td className="border px-4 py-2">37.5</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </form>
           </div>
         </div>
