@@ -34,14 +34,18 @@ const V1Hoodie = () => {
             <p className="text-gray-900 mt-4">
               Help support the Deno project by pre-ordering a limited time,
               special edition Deno v1.0 hoodie. This black zip-up hoodie
-              features the v1.0 artwork by the famed Tokyo-based hacker artist{" "}
-              <a href="https://github.com/hashrock">hashrock</a>.
+              features the v1.0 artwork by the famed Tokyo-based hacker/artist{" "}
+              <a className="link" href="https://github.com/hashrock">
+                hashrock
+              </a>
+              .
             </p>
             <p className="text-gray-900 mt-4">
-              To be clear: this is a pre-order. We have not yet produced
-              hoodies. We will be taking orders until June 1, after which this
-              limited edition hoodie will never again be sold by us. We expect
-              to ship these out in July.
+              To be clear: this is a pre-order. We have not yet had these
+              manufactured. The image above is a photoshopped mock-up. We will
+              be taking orders until June 1, after which this limited edition
+              hoodie will never again be sold. We expect to ship these out in
+              July.
             </p>
             <p className="text-gray-900 font-bold text-2xl mt-4">$100</p>
             <p className="text-gray-500 mt-3 leading-tight">$15 shipping</p>
