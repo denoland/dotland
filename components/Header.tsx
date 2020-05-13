@@ -96,7 +96,7 @@ const Header = ({ subtitle }: { subtitle?: string }) => {
         leaveFrom="opacity-100 scale-100"
         leaveTo="opacity-0 scale-95"
       >
-        <div className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
+        <div className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right lg:hidden">
           <div className="rounded-lg shadow-md">
             <div className="rounded-lg bg-white shadow-xs overflow-hidden">
               <div className="px-5 pt-4 flex items-center justify-between">
