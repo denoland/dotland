@@ -48,6 +48,12 @@
     "repo": "awaitable_mutex",
     "desc": "Blocking execution of a section of code to one at a time"
   },
+  "azure_functions": {
+    "type": "github",
+    "owner": "anthonychu",
+    "repo": "azure-functions-deno-worker",
+    "desc": "Deno on Azure Functions"
+  },
   "base64": {
     "type": "github",
     "owner": "chiefbiiko",
