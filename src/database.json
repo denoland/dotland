@@ -1278,6 +1278,12 @@
     "repo": "deno-task-runner-v2",
     "desc": "deno-task-runner-v2"
   },
+  "tcr": {
+    "type": "github",
+    "owner": "AlexVagrant",
+    "repo": "tcr",
+    "desc": "tcr will complie and run with deno when typescript file change, you can direct run tstypescript file"
+  },
   "test_on_localhost": {
     "type": "github",
     "owner": "KSXGitHub",
