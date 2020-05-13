@@ -17,6 +17,12 @@
     "repo": "deno-amqp",
     "desc": "AMQP 0.9.1"
   },
+  "aqua": {
+    "type": "github",
+    "owner": "l2ig",
+    "repo": "aqua",
+    "desc": "A minimal and fast web framework for Deno 🏃"
+  },
   "argon2": {
     "type": "github",
     "owner": "fdionisi",
@@ -34,13 +40,19 @@
     "type": "github",
     "owner": "arkoren",
     "repo": "framework",
-    "desc": ""
+    "desc": "The next-generation type-safe web framework."
   },
   "await_mutex": {
     "type": "github",
     "owner": "Matthew-Smith",
     "repo": "awaitable_mutex",
     "desc": "Blocking execution of a section of code to one at a time"
+  },
+  "azure_functions": {
+    "type": "github",
+    "owner": "anthonychu",
+    "repo": "azure-functions-deno-worker",
+    "desc": "Deno on Azure Functions"
   },
   "base64": {
     "type": "github",
@@ -53,6 +65,12 @@
     "owner": "denjucks",
     "repo": "bb64",
     "desc": "A better base64 encoder and decoder for Deno for easily encoding strings, Uint8Arrays, and files, including MIME types into encoding"
+  },
+  "bcrypt": {
+    "type": "github",
+    "owner": "jamesbroadberry",
+    "repo": "deno-bcrypt",
+    "desc": "BCrypt support for hashing and checking passwords"
   },
   "berror": {
     "type": "github",
@@ -247,6 +265,12 @@
     "repo": "deno-databatcher",
     "desc": "The ideas of DataLoader but applied to both loading and saving."
   },
+  "dataformsjs": {
+    "type": "github",
+    "owner": "dataformsjs",
+    "repo": "dataformsjs",
+    "desc": "A minimal JavaScript Framework and standalone components for rapid development of high quality websites and single page applications."
+  },
   "date_fns": {
     "type": "github",
     "owner": "date-fns",
@@ -368,6 +392,12 @@
     "repo": "denotrain",
     "desc": "An easy to use webserver engine like express in nodejs fully written in Typescript."
   },
+  "denotrie": {
+    "type": "github",
+    "owner": "silver-xu",
+    "repo": "deno-trie",
+    "desc": "Deno implementation of Trie for faster string searches."
+  },  
   "denoversion": {
     "type": "github",
     "owner": "lucascaro",
@@ -586,6 +616,12 @@
     "repo": "hchacha20",
     "desc": "Special-purpose hashing, such as X25519 key derivation, or XChacha20 initialization. If in doubt, do not use."
   },
+  "heap": {
+    "type": "github",
+    "owner": "gobengo",
+    "repo": "heap",
+    "desc": "Heap data structure"
+  },
   "hmac": {
     "type": "github",
     "owner": "chiefbiiko",
@@ -671,6 +707,12 @@
     "repo": "deno-is",
     "desc": "Detect the running environment and context of the current script."
   },
+  "is_exe": {
+    "type": "github",
+    "owner": "eankeen",
+    "repo": "is_exe",
+    "desc": "detect if a file is executable or not"
+  },
   "jbq": {
     "type": "github",
     "owner": "krnik",
@@ -706,6 +748,12 @@
     "owner": "kabirbaidhya",
     "repo": "keycode-js",
     "desc": "A minimal JavaScript package with key code constants."
+  },
+  "kia": {
+    "type": "github",
+    "owner": "HarryPeach",
+    "repo": "kia",
+    "desc": "Simple terminal spinners for Deno 🦕 (Based on Ora)"
   },
   "ky": {
     "type": "github",
@@ -786,6 +834,12 @@
     "owner": "oakserver",
     "repo": "media_types",
     "desc": "A module that assists in resolving media types and extensions."
+  },
+  "memoize": {
+    "type": "github",
+    "owner": "rubiin",
+    "repo": "memoize",
+    "desc": "A simple and easy to use memoize lib for deno."
   },
   "minimatch": {
     "type": "github",
@@ -1047,11 +1101,23 @@
     "repo": "noble-ripemd160",
     "desc": "RIPEMD160, a cryptographic hash function."
   },
+  "rubico": {
+    "type": "github",
+    "owner": "richytong",
+    "repo": "rubico",
+    "desc": "a functional promise library"
+  },
   "run_exclusive": {
     "type": "github",
     "owner": "garronej",
     "repo": "run_exclusive",
     "desc": "⚡🔒 Generate functions that do not allow parallel executions 🔒 ⚡"
+  },
+  "rute": {
+    "type": "github",
+    "owner": "jabernardo",
+    "repo": "rute",
+    "desc": "A Simple Router for Deno"
   },
   "saur": {
     "type": "github",
@@ -1212,6 +1278,12 @@
     "repo": "deno-task-runner-v2",
     "desc": "deno-task-runner-v2"
   },
+  "tcr": {
+    "type": "github",
+    "owner": "AlexVagrant",
+    "repo": "tcr",
+    "desc": "tcr will complie and run with deno when typescript file change, you can direct run tstypescript file"
+  },
   "test_on_localhost": {
     "type": "github",
     "owner": "KSXGitHub",
@@ -1341,6 +1413,12 @@
     "owner": "KSXGitHub",
     "repo": "yaml-wasm",
     "desc": "WebAssembly module to parse YAML"
+  },
+  "youtube_deno": {
+    "type": "github",
+    "owner": "akshgpt7",
+    "repo": "youtube-deno",
+    "desc": "A Deno client for the YouTube Data API v3. Lets you incorporate core YouTube features and almost any interaction with YouTube in your application."
   },
   "zstd": {
     "type": "github",
