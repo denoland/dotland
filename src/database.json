@@ -616,6 +616,12 @@
     "repo": "hchacha20",
     "desc": "Special-purpose hashing, such as X25519 key derivation, or XChacha20 initialization. If in doubt, do not use."
   },
+  "heap": {
+    "type": "github",
+    "owner": "gobengo",
+    "repo": "heap",
+    "desc": "Heap data structure"
+  },
   "hmac": {
     "type": "github",
     "owner": "chiefbiiko",
