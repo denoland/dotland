@@ -126,7 +126,7 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
           </Link>
           <p className="my-4 text-gray-700">Try running a simple program:</p>
           <CodeBlock
-            code="deno https://deno.land/std/examples/welcome.ts"
+            code="deno run https://deno.land/std/examples/welcome.ts"
             language="bash"
           />
           <p className="my-4 text-gray-700">Or a more complex one:</p>
