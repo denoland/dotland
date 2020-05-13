@@ -45,7 +45,10 @@ const V1 = (props: Props) => {
           May 13th 2020 – Ryan Dahl and Bert Belder
         </p>
         <div className="mt-8">
-          <Markdown source={props.markdown} />
+          <Markdown
+            source={props.markdown}
+            canonicalURL={"https://deno.land/v1.md"}
+          />
         </div>
         <div className="mt-6 py-32">
           <h2 className="text-3xl tracking-tight font-bold ">One last thing</h2>

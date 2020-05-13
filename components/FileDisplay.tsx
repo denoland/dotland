@@ -96,7 +96,7 @@ function FileDisplay(props: {
           case "markdown":
             return (
               <div className="px-4">
-                <Markdown source={props.raw!} />
+                <Markdown source={props.raw!} canonicalURL={props.sourceURL} />
               </div>
             );
           case "image":

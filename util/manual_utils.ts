@@ -23,14 +23,6 @@ export async function getTableOfContents(
   return await res.json();
 }
 
-export async function getFile(version: string, path: string): Promise<string> {
-  const res = await fetch(`${basepath}${version}/docs${path}.md`);
-  if (res.status !== 200) {
-    throw Error(
-      `Got an error (${
-        res.status
-      }) while getting the file of contents:\n${await res.text()}`
-    );
-  }
-  return await res.text();
+export function getFileURL(version: string, path: string) {
+  return `${basepath}${version}/docs${path}.md`;
 }

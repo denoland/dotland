@@ -73,20 +73,37 @@ function CodeRenderer(props: any) {
   return <CodeBlock {...{ ...props, code: props.value, value: undefined }} />;
 }
 
-function ImageRenderer(props: any) {
-  return <img {...{ ...props }} className="max-w-full inline-block" />;
+function ImageRenderer(props: { src: string; canonicalURL: string }) {
+  let src = props.src;
+
+  if (src?.startsWith("./") || src?.startsWith("../")) {
+    const url = new URL(props.canonicalURL);
+    const parts = url.pathname.split("/");
+    parts.pop();
+    url.pathname = parts.join("/") + "/" + src;
+    src = url.href;
+  }
+
+  return (
+    <a href={src}>
+      <img src={src} className="max-w-full inline-block" />
+    </a>
+  );
 }
 
-const renderers = {
+const renderers = (canonicalURL: string) => ({
   inlineCode: InlineCode,
   code: CodeRenderer,
   heading: HeadingRenderer,
   link: LinkRenderer,
-  image: ImageRenderer,
-};
+  image: function ImageRendererWrapper(props: any) {
+    return <ImageRenderer {...props} canonicalURL={canonicalURL} />;
+  },
+});
 
 interface MarkdownProps {
   source: string;
+  canonicalURL: string;
 }
 
 function Markdown(props: MarkdownProps) {
@@ -107,7 +124,7 @@ function Markdown(props: MarkdownProps) {
   return (
     <ReactMarkdown
       source={props.source}
-      renderers={renderers}
+      renderers={renderers(props.canonicalURL)}
       skipHtml={true}
       className="markdown"
     />

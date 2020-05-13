@@ -6,7 +6,7 @@ import { parseNameVersion, findEntry } from "../util/registry_utils";
 import {
   TableOfContents,
   getTableOfContents,
-  getFile,
+  getFileURL,
 } from "../util/manual_utils";
 import Markdown from "./Markdown";
 import Transition from "./Transition";
@@ -49,7 +49,6 @@ function Manual() {
   ] = useState<TableOfContents | null>(null);
 
   const [content, setContent] = useState<string | null>(null);
-
   const [versions, setVersions] = useState<string[] | null | undefined>();
 
   useEffect(() => {
@@ -61,9 +60,22 @@ function Manual() {
       });
   }, [version]);
 
+  const sourceURL = useMemo(() => getFileURL(version ?? "master", path), [
+    version,
+    path,
+  ]);
+
   useEffect(() => {
     setContent(null);
-    getFile(version ?? "master", path)
+    fetch(sourceURL)
+      .then((res) => {
+        if (res.status !== 200) {
+          throw Error(
+            `Got an error (${res.status}) while getting the documentation file.`
+          );
+        }
+        return res.text();
+      })
       .then(setContent)
       .catch((e) => {
         console.error("Failed to fetch content:", e);
@@ -71,7 +83,7 @@ function Manual() {
           "# 404 - Not Found\nWhoops, the page does not seem to exist."
         );
       });
-  }, [version, path]);
+  }, [sourceURL]);
 
   useEffect(() => {
     setVersions(undefined);
@@ -166,7 +178,9 @@ function Manual() {
                       gotoVersion={gotoVersion}
                     />
                   </div>
-                  {tableOfContents && <ToC tableOfContents={tableOfContents} />}
+                  {tableOfContents && (
+                    <ToC tableOfContents={tableOfContents} version={version} />
+                  )}
                 </div>
               </Transition>
               <div className="flex-shrink-0 w-14">
@@ -195,7 +209,9 @@ function Manual() {
                 gotoVersion={gotoVersion}
               />
             </div>
-            {tableOfContents && <ToC tableOfContents={tableOfContents} />}
+            {tableOfContents && (
+              <ToC tableOfContents={tableOfContents} version={version} />
+            )}
           </div>
         </div>
         <div className="flex flex-col w-0 flex-1 overflow-hidden">
@@ -262,7 +278,7 @@ function Manual() {
           >
             <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20">
               {content ? (
-                <Markdown source={content} />
+                <Markdown source={content} canonicalURL={sourceURL} />
               ) : (
                 <div className="w-full my-8">
                   <div className="w-4/5 sm:w-1/3 bg-gray-100 h-8"></div>
@@ -339,7 +355,13 @@ function Version({
   );
 }
 
-function ToC({ tableOfContents }: { tableOfContents: TableOfContents }) {
+function ToC({
+  tableOfContents,
+  version,
+}: {
+  tableOfContents: TableOfContents;
+  version: string | undefined;
+}) {
   return (
     <div className="pt-2 pb-8 h-0 flex-1 flex flex-col overflow-y-auto">
       <nav className="flex-1 px-2 px-4">
@@ -348,7 +370,10 @@ function ToC({ tableOfContents }: { tableOfContents: TableOfContents }) {
             Object.entries(tableOfContents).map(([slug, entry]) => {
               return (
                 <li key={slug} className="my-2">
-                  <Link href="/[identifier]/[...path]" as={`/manual/${slug}`}>
+                  <Link
+                    href="/[identifier]/[...path]"
+                    as={`/manual${version ? `@${version}` : ""}/${slug}`}
+                  >
                     <a className="text-gray-900 hover:text-gray-600 font-normal">
                       {entry.name}
                     </a>
@@ -360,7 +385,9 @@ function ToC({ tableOfContents }: { tableOfContents: TableOfContents }) {
                           <li key={`${slug}/${childSlug}`} className="my-0.5">
                             <Link
                               href="/[identifier]/[...path]"
-                              as={`/manual/${slug}/${childSlug}`}
+                              as={`/manual${
+                                version ? `@${version}` : ""
+                              }/${slug}/${childSlug}`}
                             >
                               <a className="text-gray-900 hover:text-gray-600 font-normal">
                                 {name}
