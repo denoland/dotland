@@ -38,11 +38,12 @@ const V1 = (props: Props) => {
         />
       </div>
       <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 py-8 mb-16">
-        <h1 className="text-3xl tracking-tight font-bold text-5xl leading-10 mt-4">
+        <h1 className="text-3xl tracking-tight font-bold text-5xl leading-10 mt-4 py-8">
           Deno 1.0
         </h1>
+        <p className="text-gray-500 mt-3 leading-tight">2020-05-13</p>
         <p className="text-gray-500 mt-3 leading-tight">
-          May 13th 2020 – Ryan Dahl and Bert Belder
+          Ryan Dahl, Bert Belder, and Bartek Iwańczuk
         </p>
         <div className="mt-8">
           <Markdown
@@ -50,7 +51,7 @@ const V1 = (props: Props) => {
             canonicalURL={"https://deno.land/v1.md"}
           />
         </div>
-        <div className="text-gray-900">
+        <div className="py-32 text-gray-900">
           <h2 className="text-2xl tracking-tight leading-tight font-bold border-b border-gray-200 mt-12 mb-6 pb-1">
             One last thing
           </h2>
