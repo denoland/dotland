@@ -441,6 +441,12 @@
     "repo": "denoversion",
     "desc": "Deno cli to manage and bump release versions."
   },
+  "denox": {
+    "type": "github",
+    "owner": "bentoumitech",
+    "repo": "denox",
+    "desc": "Workspace support for your Deno projects, allow you to specify and share a list of scripts and their respective permissions."
+  },
   "denv": {
     "type": "github",
     "owner": "crowlKats",
