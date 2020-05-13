@@ -75,17 +75,27 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
           </div>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
-          <Link href="#introduction">
-            <a className="hover:underline">
-              <h3 className="font-bold text-xl" id="introduction">
-                Introduction
-              </h3>
-            </a>
-          </Link>
           <p className="my-4 text-gray-700">
             Deno is a simple, modern and secure runtime for JavaScript and
             TypeScript that uses V8 and is built in Rust.
           </p>
+          <ol className="ml-8 list-disc">
+            <li>
+              Secure by default. No file, network, or environment access, unless
+              explicitly enabled.
+            </li>
+            <li>Supports TypeScript out of the box.</li>
+            <li>Ships only a single executable file.</li>
+            <li>
+              Has built-in utilities like a dependency inspector (deno info) and
+              a code formatter (deno fmt).
+            </li>
+            <li>
+              Has a set of reviewed (audited) standard modules that are
+              guaranteed to work with Deno:{" "}
+              <a href="https://deno.land/std">deno.land/std</a>
+            </li>
+          </ol>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <Link href="#installation">
