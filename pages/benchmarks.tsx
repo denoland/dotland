@@ -52,7 +52,7 @@ const Benchmarks = () => {
         <Header subtitle="Continuous Benchmarks" />
         <div className="mb-12">
           <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 mt-8 pb-8">
-            <img src="/deno_logo_4.gif" className="py-8" />
+            <img src="/deno_logo_4.gif" className="mb-12 w-32 h-32" />
             <h4 className="text-2xl font-bold tracking-tight">About</h4>
             <p className="mt-4">
               As part of Deno's continuous integration and testing pipeline we
@@ -80,7 +80,7 @@ const Benchmarks = () => {
                 In this section we measure various metrics of the following
                 scripts:
               </p>
-              <ul className="ml-8 list list-disc my-2">
+              <ul className="ml-8 list-disc my-2">
                 <li>
                   <SourceLink
                     path="cli/tests/003_relative_import.ts"
@@ -217,7 +217,7 @@ const Benchmarks = () => {
                   Tests HTTP server performance. 10 keep-alive connections do as
                   many hello-world requests as possible. Bigger is better.
                 </p>
-                <ul className="ml-8 list list-disc my-2">
+                <ul className="ml-8 list-disc my-2">
                   <li>
                     <SourceLink path="tools/deno_tcp.ts" name="deno_tcp" /> is a
                     fake http server that doesn't parse HTTP. It is comparable
@@ -292,7 +292,7 @@ const Benchmarks = () => {
                   requests/second. Smaller is better. Log scale.
                 </p>
               </div>
-              <div className="mt-20">
+              <div className="mt-8">
                 <h5 className="text-lg font-medium tracking-tight">
                   HTTP Proxy Throughput
                 </h5>
@@ -308,7 +308,7 @@ const Benchmarks = () => {
                   Tests proxy performance. 10 keep-alive connections do as many
                   hello-world requests as possible. Bigger is better.
                 </p>
-                <ul className="ml-8 list list-disc my-2">
+                <ul className="ml-8 list-disc my-2">
                   <li>
                     <SourceLink
                       path="tools/deno_tcp_proxy.ts"
@@ -392,7 +392,7 @@ const Benchmarks = () => {
                   yTickFormat={formatKB}
                 />
                 <p className="mt-1">Size of different bundled scripts.</p>
-                <ul className="ml-8 list list-disc my-2">
+                <ul className="ml-8 list-disc my-2">
                   <li>
                     <Link
                       href="/[identifier]/[...path]"

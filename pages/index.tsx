@@ -21,6 +21,13 @@ interface HomeProps {
 
 const NUM_THIRD_PARTY = 12;
 
+export const complexExampleProgram = `import { serve } from "https://deno.land/std@0.50.0/http/server.ts";
+const s = serve({ port: 8000 });
+console.log("http://localhost:8000/");
+for await (const req of s) {
+  req.respond({ body: "Hello World\\n" });
+}`;
+
 const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
   const [thirdPartySelection, setThirdPartySelection] = useState<
     SimpleEntry[] | null
@@ -79,7 +86,7 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
             Deno is a simple, modern and secure runtime for JavaScript and
             TypeScript that uses V8 and is built in Rust.
           </p>
-          <ol className="ml-8 list-disc">
+          <ol className="ml-8 list-disc text-gray-700">
             <li>
               Secure by default. No file, network, or environment access, unless
               explicitly enabled.
@@ -93,7 +100,9 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
             <li>
               Has a set of reviewed (audited) standard modules that are
               guaranteed to work with Deno:{" "}
-              <a href="https://deno.land/std">deno.land/std</a>
+              <a href="https://deno.land/std" className="link">
+                deno.land/std
+              </a>
             </li>
           </ol>
         </div>
@@ -115,7 +124,25 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
               </h3>
             </a>
           </Link>
-          <GettingStartedSection />
+          <p className="my-4 text-gray-700">Try running a simple program:</p>
+          <CodeBlock
+            code="deno https://deno.land/std/examples/welcome.ts"
+            language="bash"
+          />
+          <p className="my-4 text-gray-700">Or a more complex one:</p>
+        </div>
+        <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8">
+          <CodeBlock code={complexExampleProgram} language="typescript" />
+        </div>
+        <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8">
+          <p className="my-4 text-gray-700">
+            You can find a more in depth introduction, examples, and environment
+            setup guides in{" "}
+            <Link href="/[identifier]" as="/manual">
+              <a className="link">the manual</a>
+            </Link>
+            .
+          </p>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <Link href="#runtime-documentation">
@@ -322,33 +349,6 @@ const InstallSection = () => {
     </>
   );
 };
-
-export const complexExampleProgram = `import { serve } from "https://deno.land/std@0.50.0/http/server.ts";
-const s = serve({ port: 8000 });
-console.log("http://localhost:8000/");
-for await (const req of s) {
-  req.respond({ body: "Hello World\\n" });
-}`;
-
-const GettingStartedSection = () => (
-  <>
-    <p className="my-4 text-gray-700">Try running a simple program:</p>
-    <CodeBlock
-      code="deno https://deno.land/std/examples/welcome.ts"
-      language="bash"
-    />
-    <p className="my-4 text-gray-700">Or a more complex one:</p>
-    <CodeBlock code={complexExampleProgram} language="typescript" />
-    <p className="my-4 text-gray-700">
-      You can find a more in depth introduction, examples, and environment setup
-      guides in{" "}
-      <Link href="/[identifier]" as="/manual">
-        <a className="link">the manual</a>
-      </Link>
-      .
-    </p>
-  </>
-);
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const thirdPartyEntries: SimpleEntry[] = [];
