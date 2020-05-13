@@ -19,19 +19,19 @@ const V1Hoodie = () => {
         />
       </Head>
       <Header />
-      <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 py-8 mb-16">
+      <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 py-8 mb-16">
         <h1 className="text-3xl tracking-tight font-bold text-5xl leading-10">
           Deno 1.0 Hoodie
         </h1>
         <p className="text-gray-500 mt-3 leading-tight">
           Limited Time, Premium Quality
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 col-gap-4 mt-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
           <div>
             <img src="/v1_hoodie_mock.png" alt="deno hoodie" />
           </div>
           <div>
-            <p className="text-gray-900 mt-4">
+            <p className="text-gray-900">
               Help support the Deno project by pre-ordering a limited time,
               special edition Deno v1.0 hoodie. This black zip-up hoodie
               features the v1.0 artwork by the famed Tokyo-based hacker/artist{" "}
@@ -47,8 +47,10 @@ const V1Hoodie = () => {
               hoodie will never again be sold. We expect to ship these out in
               July.
             </p>
-            <p className="text-gray-900 font-bold text-2xl mt-4">$100</p>
-            <p className="text-gray-500 mt-3 leading-tight">$15 shipping</p>
+            <p className="text-gray-900 font-bold text-2xl leading-tight mt-4">
+              $100
+            </p>
+            <p className="text-gray-500 mt-1 leading-tight">$15 shipping</p>
             <form
               action="https://www.paypal.com/cgi-bin/webscr"
               method="post"
@@ -63,7 +65,7 @@ const V1Hoodie = () => {
               <input type="hidden" name="currency_code" value="USD" />
               <input type="hidden" name="on0" value="Sizes" />
 
-              <div className="mt-6 w-full">
+              <div className="mt-4 w-full">
                 <label htmlFor="size" className="text-sm">
                   Size
                 </label>

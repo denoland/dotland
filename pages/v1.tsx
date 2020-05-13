@@ -50,8 +50,10 @@ const V1 = (props: Props) => {
             canonicalURL={"https://deno.land/v1.md"}
           />
         </div>
-        <div className="mt-6 py-32">
-          <h2 className="text-3xl tracking-tight font-bold ">One last thing</h2>
+        <div className="text-gray-900">
+          <h2 className="text-2xl tracking-tight leading-tight font-bold border-b border-gray-200 mt-12 mb-6 pb-1">
+            One last thing
+          </h2>
           <p>
             Consider supporting this open source software work by pre-ordering a
             Deno v1.0 hoodie:
@@ -59,7 +61,7 @@ const V1 = (props: Props) => {
           <img
             src="/v1_hoodie_mock.png"
             alt="deno 1.0 hoodie"
-            className="mx-auto p-8 max-w-sm"
+            className="mx-auto py-8 max-w-sm w-full"
           />
           <span className="block rounded-md shadow-sm">
             <Link href="/v1/hoodie">

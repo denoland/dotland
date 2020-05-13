@@ -152,9 +152,9 @@ const Registry = () => {
           setReadme(null);
         });
     } else {
-      setReadmeURL(null);
+      setReadme(null);
     }
-  }, [name, path, version, readmeURL]);
+  }, [readmeURL]);
 
   function gotoVersion(newVersion: string) {
     push(
@@ -201,7 +201,7 @@ const Registry = () => {
                       body="This file or directory could not be found."
                     />
                   );
-                } else if (dirEntries === undefined && raw === undefined) {
+                } else {
                   // loading
                   return (
                     <div className="mt-4 rounded-lg overflow-hidden border border-gray-200 bg-white">
