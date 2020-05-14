@@ -320,6 +320,12 @@
     "repo": "deku",
     "desc": "No bundle dev server for es modules."
   },
+  "delay": {
+    "type": "github",
+    "owner": "vincentvictoria",
+    "repo": "delay",
+    "desc": "delay - ES Module for Deno, Node and Web"
+  },
   "dem": {
     "type": "github",
     "owner": "syumai",
