@@ -1102,6 +1102,12 @@
     "repo": "deno_random_interval",
     "desc": "deno random interval"
   },
+  "recursive_readdir": {
+    "type": "github",
+    "owner": "denorg",
+    "repo": "recursive-readdir",
+    "desc": "Recursively read a directory"
+  },
   "redis": {
     "type": "github",
     "owner": "keroxp",
