@@ -453,6 +453,12 @@
     "repo": "deno-dirname",
     "desc": "Node-style __dirname and __filename polyfill for Deno"
   },
+  "discordeno": {
+    "type": "github",
+    "owner": "skillz4killz",
+    "repo": "discordeno",
+    "desc": "Discord API library wrapper for Deno https://discordeno.js.org"
+  },
   "djwt": {
     "type": "github",
     "owner": "timonson",
