@@ -812,6 +812,12 @@
     "repo": "lodash_require",
     "desc": "Lodash for the Deno runtime."
   },
+  "mandarineTS": {
+    "type": "github",
+    "owner": "mandarineorg",
+    "repo": "mandarinets",
+    "desc": "Mandarine.TS is a MVC framework that runs on Deno. Create web-applications by using built-in systems including security modules in seconds"
+  },
   "machine_id": {
     "type": "github",
     "owner": "axetroy",
