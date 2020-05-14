@@ -1090,6 +1090,12 @@
     "repo": "deno_random_interval",
     "desc": "deno random interval"
   },
+  "readline": {
+    "type": "github",
+    "owner": "vslinko",
+    "repo": "deno-readline",
+    "desc": "Read lines from Deno.Reader"
+  },
   "redis": {
     "type": "github",
     "owner": "keroxp",
