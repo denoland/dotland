@@ -933,6 +933,12 @@
     "repo": "oak",
     "desc": "A middleware framework for Deno's http server, including a router middleware."
   },
+  "oak-json-parser": {
+    "type": "github",
+    "owner": "gjuoun",
+    "repo": "oak-json-parser",
+    "desc": "Parsing JSON middleware for oka framework"
+  },
   "observable": {
     "type": "github",
     "owner": "bsunderhus",
