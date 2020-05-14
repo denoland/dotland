@@ -933,6 +933,12 @@
     "repo": "oak",
     "desc": "A middleware framework for Deno's http server, including a router middleware."
   },
+  "oak-query-parser": {
+    "type": "github",
+    "owner": "gjuoun",
+    "repo": "oak-query-parser",
+    "desc": "Query parameter parsing middleware for oka framework"
+  },
   "observable": {
     "type": "github",
     "owner": "bsunderhus",
