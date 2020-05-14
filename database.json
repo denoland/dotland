@@ -228,6 +228,12 @@
     "repo": "cowsay",
     "desc": "Configurable talking cow for Deno"
   },
+  "create-denyo": {
+    "type": "github",
+    "owner": "mrpeker",
+    "repo": "create-denyo",
+    "desc": "Easily install deno with a single command and run a sample server 🔮"
+  },
   "cross_env": {
     "type": "github",
     "owner": "axetroy",
