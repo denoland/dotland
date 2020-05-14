@@ -543,6 +543,12 @@
     "repo": "endianness",
     "desc": "A very simple Deno module to determine the endianness of the host"
   },
+  "ensure": {
+    "type": "github",
+    "owner": "eankeen",
+    "repo": "ensure",
+    "desc": "Ensure you are running on a minimum version of Deno, Typescript, or V8"
+  },
   "enum": {
     "type": "github",
     "owner": "adrai",
