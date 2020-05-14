@@ -981,6 +981,12 @@
     "repo": "parseargs",
     "desc": "Migrated to denoland/deno_std."
   },
+  "path": {
+    "type": "github",
+    "owner": "halvardssm",
+    "repo": "deno-path",
+    "desc": "A simple path resolver."
+  },
   "pbkdf2": {
     "type": "github",
     "owner": "chiefbiiko",
