@@ -543,12 +543,6 @@
     "repo": "deno_easypath",
     "desc": "Path wrapper to manipulate Filesystem using Deno. Mostly inspired by Path.swift"
   },
-  "ed25519": {
-    "type": "github",
-    "owner": "paulmillr",
-    "repo": "noble-ed25519",
-    "desc": "ed25519, an elliptic curve that could be used for assymetric encryption and EDDSA signature scheme."
-  },
   "ende": {
     "type": "github",
     "owner": "rsp",
