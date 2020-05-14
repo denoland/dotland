@@ -46,10 +46,16 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
     <>
       <Head>
         <title>Deno</title>
-        <meta
-          name="description"
-          content="Deno, a secure runtime for JavaScript and TypeScript."
-        />
+        <meta name="description" content="Deno, a secure runtime for JavaScript and TypeScript." />
+        <meta name="keywords" content="deno,javascript,typescript,runtime,denojs" />
+        <meta property="og:title" content="Deno" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="/favicon.svg" />
+        <meta property="og:url" content="https://deno.land" />
+        <meta property="og:site_name" content="Deno" />
+        <meta property="og:description" content="Deno, a secure runtime for JavaScript and TypeScript." />
+        <meta property="og:locale" content="en_us" />
+        <meta name="theme-color" content="#161e2e" />
       </Head>
       <div className="bg-white">
         <div className="bg-black">
