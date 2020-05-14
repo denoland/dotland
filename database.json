@@ -647,6 +647,12 @@
     "repo": "http-server",
     "desc": "http-server is a tiny and zero-configuration HTTP server with useful features to serve static files with Deno"
   },
+  "http_wrapper": {
+    "type": "github",
+    "owner": "lindsaykwardell",
+    "repo": "http-wrapper",
+    "desc": "Simple Server/Router wrapper around Deno's existing HTTP module"
+  },
   "humanizer.ts": {
     "type": "github",
     "owner": "fakoua",
