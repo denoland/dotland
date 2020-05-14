@@ -1192,6 +1192,12 @@
     "repo": "deno-semver",
     "desc": "A fork of node-semver using TypeScript"
   },
+  "serializexml": {
+    "type": "github",
+    "owner": "olaven", 
+    "repo": "serialize-xml", 
+    "desc": "Serialize (i.e. stringify) XML"
+  }, 
   "servicr": {
     "type": "github",
     "owner": "astanciu",
