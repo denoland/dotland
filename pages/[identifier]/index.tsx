@@ -3,10 +3,10 @@
 import React, { useMemo } from "react";
 import { useRouter } from "next/router";
 import ErrorPage from "next/error";
-import Registry from "../../components/Registry";
-import { parseNameVersion } from "../../util/registry_utils";
-import Manual from "../../components/Manual";
-import LoadingPage from "../../components/LoadingPage";
+import Registry from "components/Registry";
+import { parseNameVersion } from "util/registry_utils";
+import Manual from "components/Manual";
+import LoadingPage from "components/LoadingPage";
 
 const RegistryPage = () => {
   const { query } = useRouter();

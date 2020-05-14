@@ -9,11 +9,11 @@ import {
   denoDocAvailableForURL,
   isReadme,
   findEntry,
-} from "../util/registry_utils";
+} from "util/registry_utils";
 import Header from "./Header";
 import Footer from "./Footer";
 import FileDisplay from "./FileDisplay";
-import { DirEntry } from "../util/registries";
+import { DirEntry } from "util/registries";
 
 class RegistryError {
   constructor(public message: string) {}

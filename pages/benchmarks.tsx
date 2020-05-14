@@ -2,8 +2,8 @@
 
 import React from "react";
 import Head from "next/head";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "components/Header";
+import Footer from "components/Footer";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import {
@@ -15,8 +15,8 @@ import {
   formatPercentage,
   formatReqSec,
   formatKB,
-} from "../util/benchmark_utils";
-import BenchmarkChart, { BenchmarkLoading } from "../components/BenchmarkChart";
+} from "util/benchmark_utils";
+import BenchmarkChart, { BenchmarkLoading } from "components/BenchmarkChart";
 
 // TODO(lucacasonato): add anchor points to headers
 const Benchmarks = () => {

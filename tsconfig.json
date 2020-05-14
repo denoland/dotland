@@ -12,7 +12,8 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "baseUrl": "."
   },
   "exclude": ["node_modules", "worker"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]

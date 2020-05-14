@@ -3,8 +3,8 @@
 import React from "react";
 import App from "next/app";
 import Head from "next/head";
-import "../components/app.css";
-import "../components/markdown.css";
+import "components/app.css";
+import "components/markdown.css";
 
 export default class DenoWebsiteApp extends App {
   render() {

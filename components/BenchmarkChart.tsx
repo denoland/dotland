@@ -7,7 +7,7 @@ const ApexChart = dynamic(() => import("react-apexcharts"), {
   loading: BenchmarkLoading,
 });
 
-import { Column, formatLogScale, logScale } from "../util/benchmark_utils";
+import { Column, formatLogScale, logScale } from "util/benchmark_utils";
 
 export interface BenchmarkChartProps {
   yTickFormat?: (n: number) => string;

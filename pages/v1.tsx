@@ -3,9 +3,9 @@
 import React from "react";
 import Head from "next/head";
 
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import Markdown from "../components/Markdown";
+import Footer from "components/Footer";
+import Header from "components/Header";
+import Markdown from "components/Markdown";
 import { GetStaticProps } from "next";
 import { promises as fs } from "fs";
 import Link from "next/link";

@@ -4,7 +4,7 @@ import React from "react";
 import { RawCodeBlock } from "./CodeBlock";
 import Markdown from "./Markdown";
 import Link from "next/link";
-import { fileTypeFromURL, isReadme } from "../util/registry_utils";
+import { fileTypeFromURL, isReadme } from "util/registry_utils";
 
 function FileDisplay(props: {
   raw?: string;

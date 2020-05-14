@@ -2,12 +2,12 @@ import React, { useState, useEffect, useMemo } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { parseNameVersion, findEntry } from "../util/registry_utils";
+import { parseNameVersion, findEntry } from "util/registry_utils";
 import {
   TableOfContents,
   getTableOfContents,
   getFileURL,
-} from "../util/manual_utils";
+} from "util/manual_utils";
 import Markdown from "./Markdown";
 import Transition from "./Transition";
 

@@ -1,7 +1,7 @@
 import { DenoStdEntry, DenoStdDatabaseEntry } from "./deno_std";
 import "isomorphic-unfetch";
 
-import denoStdVersions from "../../deno_std_versions.json";
+import denoStdVersions from "deno_std_versions.json";
 
 /* eslint-env jest */
 

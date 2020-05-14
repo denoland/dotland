@@ -3,13 +3,13 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import CodeBlock from "../components/CodeBlock";
-import { useOS } from "../util/platform";
-import Footer from "../components/Footer";
-import { entries } from "../util/registry_utils";
+import CodeBlock from "components/CodeBlock";
+import { useOS } from "util/platform";
+import Footer from "components/Footer";
+import { entries } from "util/registry_utils";
 import { NextPage, GetStaticProps } from "next";
-import InlineCode from "../components/InlineCode";
-import Header from "../components/Header";
+import InlineCode from "components/InlineCode";
+import Header from "components/Header";
 
 interface SimpleEntry {
   name: string;
