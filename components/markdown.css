@@ -1,0 +1,135 @@
+/* TODO(lucacasonato): make this look good */
+
+.markdown {
+  @apply text-gray-900;
+  @apply leading-normal;
+  @apply break-words;
+}
+
+.markdown > * + * {
+  @apply mt-4;
+  @apply mb-4;
+}
+
+.markdown li + li {
+  @apply mt-1;
+}
+
+.markdown li > p + p {
+  @apply mt-6;
+}
+
+.markdown strong {
+  @apply font-semibold;
+}
+
+.markdown h1 {
+  @apply leading-tight;
+  @apply border-b;
+  @apply border-gray-200;
+  @apply text-4xl;
+  @apply font-bold;
+  @apply mt-8;
+  @apply mb-6;
+  @apply pb-1;
+}
+
+.markdown h2 {
+  @apply leading-tight;
+  @apply border-b;
+  @apply border-gray-200;
+  @apply text-2xl;
+  @apply font-bold;
+  @apply mt-8;
+  @apply mb-6;
+  @apply pb-1;
+}
+
+.markdown h3 {
+  @apply leading-snug;
+  @apply text-xl;
+  @apply font-bold;
+  @apply mb-4;
+  @apply mt-6;
+}
+
+.markdown h4 {
+  @apply leading-none;
+  @apply text-lg;
+  @apply font-semibold;
+  @apply mb-4;
+  @apply mt-6;
+}
+
+.markdown h5 {
+  @apply leading-tight;
+  @apply text-sm;
+  @apply font-semibold;
+  @apply mb-4;
+  @apply mt-6;
+}
+
+.markdown h6 {
+  @apply leading-tight;
+  @apply text-sm;
+  @apply font-semibold;
+  @apply text-gray-600;
+  @apply mb-4;
+  @apply mt-6;
+}
+
+.markdown blockquote {
+  @apply text-base;
+  @apply border-l-4;
+  @apply border-gray-300;
+  @apply pl-4;
+  @apply pr-4;
+  @apply text-gray-600;
+}
+
+.markdown ul {
+  @apply text-base;
+  @apply pl-8;
+  @apply list-disc;
+}
+
+.markdown ol {
+  @apply text-base;
+  @apply pl-8;
+  @apply list-decimal;
+}
+
+.markdown kbd {
+  @apply text-xs;
+  @apply inline-block;
+  @apply rounded;
+  @apply border;
+  @apply px-1;
+  @apply align-middle;
+  @apply font-normal;
+  @apply font-mono;
+  @apply shadow;
+  @apply py-0.5;
+}
+
+.markdown table {
+  @apply text-base;
+  @apply border-gray-600;
+}
+
+.markdown th {
+  @apply border;
+  @apply py-1;
+  @apply px-3;
+}
+
+.markdown td {
+  @apply border;
+  @apply py-1;
+  @apply px-3;
+}
+
+.markdown input[type="checkbox"] {
+  @apply mr-2;
+  pointer-events: none;
+}

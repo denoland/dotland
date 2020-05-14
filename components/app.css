@@ -1,0 +1,42 @@
+/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+
+/* purgecss start ignore */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+/* purgecss end ignore */
+
+@import "tailwindcss/utilities";
+
+.link {
+  @apply text-blue-500;
+  @apply transition;
+  @apply duration-75;
+  @apply ease-in-out;
+}
+
+.link:hover {
+  @apply text-blue-400;
+}
+
+span.token.plain:empty:before {
+  content: "\200b";
+}
+
+ol.nested {
+  counter-reset: item;
+}
+ol.nested li {
+  display: block;
+}
+ol.nested li:before {
+  font-feature-settings: "kern" 1, "tnum" 1;
+  -webkit-font-feature-settings: "kern" 1, "tnum" 1;
+  -ms-font-feature-settings: "kern" 1, "tnum" 1;
+  -moz-font-feature-settings: "kern" 1, "tnum" 1;
+  content: counters(item, ".") ". ";
+  counter-increment: item;
+}
+
+.deno-offwhite .deno-inlinecode {
+  @apply bg-gray-200;
+}

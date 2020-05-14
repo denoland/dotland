@@ -1,63 +1,52 @@
 {
   "name": "deno_website2",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "publish_prod": "wrangler publish --env=production",
     "publish_staging": "wrangler publish --env=staging",
-    "publish": "wrangler publish",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "format": "yarn format_check --write",
-    "format_check": "prettier --check **/*.md {worker,src}/**/*.{js,ts,jsx,tsx} public/**/*.html",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx src/ worker/"
-  },
-  "devDependencies": {
-    "@testing-library/react": "^9.3.0",
-    "@types/assert": "^1.4.3",
-    "@types/jest": "^25.1.2",
-    "@types/react-dom": "^16.9.2",
-    "@types/react-router-dom": "^5.1.0",
-    "@types/react-syntax-highlighter": "^11.0.1",
-    "@typescript-eslint/eslint-plugin": "^2.5.0",
-    "@typescript-eslint/parser": "^2.5.0",
-    "eslint": "^6.5.1",
-    "eslint-config-prettier": "^6.4.0",
-    "eslint-plugin-react": "^7.16.0",
-    "prettier": "^1.18.2"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "jest",
+    "format": "yarn format:check --write",
+    "format:check": "prettier --check **/*.md {util,public,pages,components}/**/*.{js,ts,jsx,tsx} {util,public,pages,components}/*.{js,ts,jsx,tsx}",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx util/ pages/ components/"
   },
   "dependencies": {
-    "@material-ui/core": "^4.5.1",
-    "@material-ui/icons": "^4.5.1",
-    "apexcharts": "^3.10.0",
-    "assert": "^2.0.0",
-    "query-string": "^6.8.3",
-    "react": "^16.10.2",
-    "react-apexcharts": "^1.3.3",
-    "react-copy-to-clipboard": "^5.0.2",
-    "react-dom": "^16.10.2",
-    "react-markdown": "^4.2.2",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "^3.3.1",
-    "react-syntax-highlighter": "^12.2.1",
-    "remark-toc": "^7.0.0",
-    "typescript": "^3.6.4"
+    "@tailwindcss/ui": "^0.3.0",
+    "apexcharts": "^3.19.0",
+    "next": "9.4.0",
+    "preact": "^10.4.1",
+    "preact-render-to-string": "^5.1.8",
+    "prism": "^4.1.2",
+    "prism-react-renderer": "^1.1.0",
+    "react": "github:preact-compat/react#1.0.0",
+    "react-apexcharts": "^1.3.7",
+    "react-dom": "github:preact-compat/react-dom#1.0.0",
+    "react-markdown": "^4.3.1",
+    "react-ssr-prepass": "npm:preact-ssr-prepass@^1.0.1",
+    "react-transition-group": "^4.4.1",
+    "tailwindcss": "^1.4.6",
+    "tailwindcss-hyphens": "^0.1.0"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^2.2.0",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.5",
+    "@types/react": "^16.9.35",
+    "@types/react-transition-group": "^4.2.4",
+    "@typescript-eslint/eslint-plugin": "^2.31.0",
+    "@typescript-eslint/parser": "^2.31.0",
+    "autoprefixer": "^9.7.4",
+    "eslint": "^7.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-react": "^7.19.0",
+    "isomorphic-unfetch": "^3.0.0",
+    "jest": "^26.0.1",
+    "postcss-import": "^12.0.1",
+    "prettier": "^2.0.5",
+    "ts-jest": "^25.5.1",
+    "typescript": "^3.8.3"
   }
 }
