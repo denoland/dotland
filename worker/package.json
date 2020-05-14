@@ -1,8 +1,27 @@
 {
-  "private": true,
   "name": "worker",
-  "version": "0.0.1",
-  "description": "Cloudflare Workers for deno.land",
-  "main": "index.js",
-  "license": "MIT"
+  "version": "1.0.0",
+  "description": "Cloudflare worker for deno.land",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack",
+    "dev": "NODE_ENV=development yarn build",
+    "format": "yarn format:check --write",
+    "format:check": "prettier --check 'src/**/*.{ts,js,css,json,md}'",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^1.0.9",
+    "@dollarshaveclub/cloudworker": "^0.1.2",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.0",
+    "jest": "25",
+    "prettier": "^2.0.4",
+    "source-map-loader": "^0.2.4",
+    "ts-jest": "^25.5.1",
+    "ts-loader": "^7.0.3",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  }
 }

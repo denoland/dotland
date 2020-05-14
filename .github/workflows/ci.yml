@@ -3,28 +3,60 @@ name: ci
 on: [push, pull_request]
 
 jobs:
-  build:
+  web:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
         with:
           node-version: 12
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: web-${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            web-${{ runner.os }}-yarn-
       - run: yarn --frozen-lockfile
-      - run: yarn run lint
-      - run: yarn format_check
+      - run: yarn format:check
+      - run: yarn lint
+      - run: yarn test
+  worker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+        working-directory: worker
+      - uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: worker-${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            worker-${{ runner.os }}-yarn-
+      - run: yarn --frozen-lockfile
+        working-directory: worker
+      - run: yarn format:check
+        working-directory: worker
       - run: CI=true yarn test
+        working-directory: worker
       - name: Publish Production
         if: github.ref == 'refs/heads/master' && github.event_name == 'push' && github.repository == 'denoland/deno_website2'
-        uses: cloudflare/wrangler-action@1.0.0
+        uses: cloudflare/wrangler-action@1.1.0
         with:
-          environment: 'production'
-          apiKey: ${{ secrets.cloudflareKey }}
-          email: ${{ secrets.email }}
+          environment: "production"
+          apiToken: ${{ secrets.cloudflareToken }}
+          workingDirectory: worker
       - name: Publish Staging
         if: github.event_name == 'push' && github.repository == 'denoland/deno_website2'
-        uses: cloudflare/wrangler-action@1.0.0
+        uses: cloudflare/wrangler-action@1.1.0
         with:
-          environment: 'staging'
-          apiKey: ${{ secrets.cloudflareKey }}
-          email: ${{ secrets.email }}
+          environment: "staging"
+          apiToken: ${{ secrets.cloudflareToken }}
+          workingDirectory: worker
