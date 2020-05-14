@@ -102,7 +102,7 @@ function Manual() {
   useEffect(() => {
     // Is doc Markdown loaded?
     if (content && content.length > 0) {
-      let title = content.match(/# (.*?)(\r|\n)/);
+      const title = content.match(/# (.*?)(\r|\n)/);
       if (title && title.length > 0) {
         document.title = `${title[1]} | The Deno Manual`;
       }
