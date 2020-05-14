@@ -284,12 +284,6 @@
     "repo": "dblapi.ts",
     "desc": "TypeScript top.gg api wrapper"
   },
-  "dblapi.ts": {
-    "type": "github",
-    "owner": "zSnails",
-    "repo": "dblapi.ts",
-    "desc": "TypeScript top.gg api wrapper"
-  },
   "deamon": {
     "type": "github",
     "owner": "manyuanrong",
@@ -914,12 +908,6 @@
     "repo": "deno-nessie",
     "desc": "A database migration tool for deno."
   },
-  "nessie": {
-    "type": "github",
-    "owner": "halvardssm",
-    "repo": "deno-nessie",
-    "desc": "A database migration tool for deno."
-  },
   "normalize_diacritics": {
     "type": "github",
     "owner": "motss",
@@ -1257,6 +1245,12 @@
     "owner": "denoland",
     "repo": "deno_std",
     "desc": "NOTICE: The deno_std repository has been moved to the main Deno repo https://github.com/denoland/deno/tree/master/std"
+  },
+  "super_duper_umbrella": {
+    "type": "github",
+    "owner": "cahuzacf",
+    "repo": "super_duper_umbrella",
+    "desc": "this is just an automation test"
   },
   "swissKnife": {
     "type": "github",
