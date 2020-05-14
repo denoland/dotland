@@ -720,6 +720,11 @@
     "repo": "is_exe",
     "desc": "detect if a file is executable or not"
   },
+  "is-promise": {
+    "type": "npm",
+    "package": "is-promise",
+    "desc": "Test whether an object looks like a promise"
+  },
   "jbq": {
     "type": "github",
     "owner": "krnik",
