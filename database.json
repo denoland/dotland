@@ -593,6 +593,12 @@
     "path": "/src",
     "desc": "A tool for creating large sets of pseudo random data."
   },
+  "fox": {
+    "type": "github",
+    "owner": "eankeen",
+    "repo": "fox",
+    "desc": "A cute little utility to help you bootstrap and sample Deno libraries"
+  },
   "free_port": {
     "type": "github",
     "owner": "axetroy",
