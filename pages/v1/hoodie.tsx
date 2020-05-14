@@ -15,7 +15,7 @@ const V1Hoodie = () => {
         <title>Deno 1.0 Hoodie</title>
         <meta
           name="description"
-          content="Deno, a secure runtime htmlFor JavaScript and TypeScript."
+          content="A limited edition, premium quality Deno 1.0 hoodie that you can order to help support the Deno project."
         />
       </Head>
       <Header />
