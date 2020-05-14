@@ -23,7 +23,7 @@ request to Vercel. (We use Vercel because of their nice GitHub integration.)
 ## History
 
 This is a rewrite of the Deno website it will combine the code in
-https://github.com/denoland/deno/tree/master/website and
+https://github.com/denoland/deno/tree/master and
 https://github.com/denoland/registry and have faster deployment.
 
 This is written in React / TailwindCSS / Vercel / CloudFlare Workers. Not in
