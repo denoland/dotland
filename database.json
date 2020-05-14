@@ -271,6 +271,12 @@
     "repo": "dataformsjs",
     "desc": "A minimal JavaScript Framework and standalone components for rapid development of high quality websites and single page applications."
   },
+  "datauri": {
+    "type": "github",
+    "owner": "data-uri",
+    "repo": "datauri-deno",
+    "desc": "Generate Data URI schemes."
+  },
   "date_fns": {
     "type": "github",
     "owner": "date-fns",
