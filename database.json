@@ -647,6 +647,12 @@
     "repo": "http-server",
     "desc": "http-server is a tiny and zero-configuration HTTP server with useful features to serve static files with Deno"
   },
+  "http_wrapper": {
+    "type": "github",
+    "owner": "lindsaykwardell",
+    "repo": "http-wrapper",
+    "desc": "Simple Server/Router wrapper around Deno's existing HTTP module"
+  },
   "humanizer.ts": {
     "type": "github",
     "owner": "fakoua",
@@ -878,6 +884,12 @@
     "repo": "deno_mongo",
     "desc": "MongoDB driver for Deno."
   },
+  "mqtt": {
+    "type": "github",
+    "owner": "jdiamond",
+    "repo": "MQTT.ts",
+    "desc": "MQTT for Deno."
+  },
   "ms": {
     "type": "github",
     "owner": "denolib",
@@ -1095,6 +1107,12 @@
     "owner": "vslinko",
     "repo": "deno-readline",
     "desc": "Read lines from Deno.Reader"
+  },
+  "recursive_readdir": {
+    "type": "github",
+    "owner": "denorg",
+    "repo": "recursive-readdir",
+    "desc": "Recursively read a directory"
   },
   "redis": {
     "type": "github",
