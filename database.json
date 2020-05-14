@@ -878,6 +878,12 @@
     "repo": "deno_mongo",
     "desc": "MongoDB driver for Deno."
   },
+  "mqtt": {
+    "type": "github",
+    "owner": "jdiamond",
+    "repo": "MQTT.ts",
+    "desc": "MQTT for Deno."
+  },
   "ms": {
     "type": "github",
     "owner": "denolib",
