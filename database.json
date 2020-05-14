@@ -417,6 +417,12 @@
     "repo": "denv",
     "desc": "A module similar to dotEnv, but for Deno"
   },
+  "denyo": {
+    "type": "github",
+    "owner": "hmert",
+    "repo": "denyo",
+    "desc": "Returns Yo!"
+  },
   "dev_server": {
     "type": "github",
     "owner": "zhmushan",
