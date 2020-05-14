@@ -1065,6 +1065,12 @@
     "repo": "deno-prettystring",
     "desc": "A deno module for trim and remove extra spaces between characters. Make paragraph looks organised."
   },
+  "prio_queue": {
+    "type": "github",
+    "owner": "Sourcico",
+    "repo": "deno-queueing",
+    "desc": "A priority queue implemented using binary heap"
+  },
   "process": {
     "type": "github",
     "owner": "axetroy",
