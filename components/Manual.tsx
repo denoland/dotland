@@ -99,6 +99,16 @@ function Manual() {
       });
   }, []);
 
+  useEffect(() => {
+    // Is doc Markdown loaded?
+    if (content && content.length > 0) {
+      let title = content?.match(/# (.*?)(\r|\n)/)[1];
+      if (title && title.length > 0) {
+        document.title = `${title} | The Deno Manual`;
+      }
+    }
+  }, [content]);
+
   function gotoVersion(newVersion: string) {
     push(
       `/[identifier]${path ? "/[...path]" : ""}`,
