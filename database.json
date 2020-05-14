@@ -1446,6 +1446,12 @@
     "repo": "xchacha20-poly1305",
     "desc": "XChaCha20-Poly1305 as defined by the XChaCha20 IRTF CFRG draft, and IETF RFC 8439"
   },
+  "xrange": {
+    "type": "github",
+    "owner": "parzh",
+    "repo": "xrange",
+    "desc": "Python-esque iterator for number ranges"
+  },
   "yaml_wasm": {
     "type": "github",
     "owner": "KSXGitHub",
