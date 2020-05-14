@@ -362,10 +362,10 @@
     "repo": "deno-env",
     "desc": "Deno module for reading env files with added options"
   },
-  "denoDate": {
+  "denodate": {
     "type": "github",
     "owner": "t-heu",
-    "repo": "denoDate",
+    "repo": "denodate",
     "desc": "Deno module for Intl-based dates"
   },
   "denoforge": {
