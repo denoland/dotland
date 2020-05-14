@@ -7,6 +7,10 @@
 
 @import "tailwindcss/utilities";
 
+html {
+  scroll-behavior: smooth;
+}
+
 .link {
   @apply text-blue-500;
   @apply transition;
