@@ -175,7 +175,7 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
               <a className="link">a manual</a>
             </Link>{" "}
             which contains more in depth explanations about the more complex
-            functions of the runtime, a introduction to the concepts that Deno
+            functions of the runtime, an introduction to the concepts that Deno
             is built on, details about the internals of Deno, how to embed Deno
             in your own application and how to extend Deno using Rust plugins.
           </p>

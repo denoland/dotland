@@ -7,6 +7,13 @@
 
 @import "tailwindcss/utilities";
 
+/* removes focus outlines on mouse clicks */
+*:focus:not(:focus-visible),
+*::before:focus:not(:focus-visible),
+*::after:focus:not(:focus-visible) {
+  outline: none;
+}
+
 .link {
   @apply text-blue-500;
   @apply transition;
