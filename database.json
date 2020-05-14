@@ -362,6 +362,12 @@
     "repo": "deno_search",
     "desc": "A CLI tool to search for third party packages on deno.land"
   },
+  "denodate": {
+   "type": "github",
+   "owner": "t-heu",
+   "repo": "denodate",
+   "desc": "Deno module for Intl-based dates"
+  },
   "denoenv": {
     "type": "github",
     "owner": "rubiin",
