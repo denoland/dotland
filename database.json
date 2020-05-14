@@ -652,7 +652,7 @@
     "owner": "lindsaykwardell",
     "repo": "http-wrapper",
     "desc": "Simple Server/Router wrapper around Deno's existing HTTP module"
-  }
+  },
   "humanizer.ts": {
     "type": "github",
     "owner": "fakoua",
