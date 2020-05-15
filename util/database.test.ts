@@ -5,7 +5,9 @@ import { NPMDatabaseEntry } from "./registries/npm";
 
 /* eslint-env jest */
 
-function hasPath(entry: DatabaseEntry): entry is GithubDatabaseEntry | NPMDatabaseEntry {
+function hasPath(
+  entry: DatabaseEntry
+): entry is GithubDatabaseEntry | NPMDatabaseEntry {
   return "path" in entry && entry.path !== undefined;
 }
 

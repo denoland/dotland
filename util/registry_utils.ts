@@ -11,14 +11,9 @@ export type DatabaseEntry =
   | GithubDatabaseEntry
   | DenoStdDatabaseEntry
   | URLDatabaseEntry
-  | NPMDatabaseEntry
-  ;
+  | NPMDatabaseEntry;
 
-function findDatabaseEntry(
-  name: string
-):
-  | DatabaseEntry
-  | undefined {
+function findDatabaseEntry(name: string): DatabaseEntry | undefined {
   return DATABASE[name];
 }
 
