@@ -1444,17 +1444,17 @@
     "repo": "text-clipper",
     "desc": "Fast and correct clip functions for HTML and plain text"
   },
-  "tiny_templates": {
-    "type": "github",
-    "owner": "zekth",
-    "repo": "deno_tiny_templates",
-    "desc": "Deno Tiny Templates"
-  },
   "timezone": {
     "type": "github",
     "owner": "wrzonki",
     "repo": "deno-timezone",
     "desc": "Simple timezone syncronization"
+  },
+  "tiny_templates": {
+    "type": "github",
+    "owner": "zekth",
+    "repo": "deno_tiny_templates",
+    "desc": "Deno Tiny Templates"
   },
   "tokenizer": {
     "type": "github",
