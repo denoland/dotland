@@ -1362,6 +1362,12 @@
     "repo": "deno-sparkpost",
     "desc": "SparkPost email client library for deno"
   },
+  "specosaur": {
+    "type": "github",
+    "owner": "sachacr",
+    "repo": "specosaur",
+    "desc": "Specification pattern library for Deno."
+  },
   "sql_builder": {
     "type": "github",
     "owner": "manyuanrong",
