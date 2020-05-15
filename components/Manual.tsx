@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -10,6 +10,7 @@ import {
 } from "../util/manual_utils";
 import Markdown from "./Markdown";
 import Transition from "./Transition";
+import MetaDescription from "./MetaDescription";
 
 const denoEntry = findEntry("deno");
 
@@ -50,6 +51,11 @@ function Manual() {
 
   const [content, setContent] = useState<string | null>(null);
   const [versions, setVersions] = useState<string[] | null | undefined>();
+
+  const partialContent = useMemo(
+    () => content?.split(" ").slice(0, 20).join(""),
+    [content]
+  );
 
   useEffect(() => {
     getTableOfContents(version ?? "master")
@@ -110,6 +116,13 @@ function Manual() {
     <div>
       <Head>
         <title>The Deno Manual</title>
+        <MetaDescription
+          labels={{
+            title: "The Deno Manual",
+            description: partialContent || "The Deno Manual",
+            image: "/v1_wide.jpg",
+          }}
+        />
       </Head>
       <div className="h-screen flex overflow-hidden">
         <Transition show={showSidebar}>

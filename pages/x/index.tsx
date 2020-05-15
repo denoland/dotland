@@ -7,6 +7,7 @@ import Footer from "../../components/Footer";
 import { entries } from "../../util/registry_utils";
 import InlineCode from "../../components/InlineCode";
 import Head from "next/head";
+import MetaDescription from "../../components/MetaDescription";
 
 const ThirdPartyRegistryList = () => {
   const [query, setQuery] = React.useState("");
@@ -29,7 +30,13 @@ const ThirdPartyRegistryList = () => {
     <>
       <Head>
         <title>Deno Third Party Modules</title>
-        <meta name="description" content="Third Party Modules for Deno." />
+        <MetaDescription
+          labels={{
+            title: "Deno Third Party Modules",
+            description: "Third Party Modules for Deno.",
+            image: "/v1_wide.jpg",
+          }}
+        />
       </Head>
       <div className="bg-gray-50 min-h-full">
         <Header subtitle="Third Party Modules" />

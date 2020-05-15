@@ -10,6 +10,7 @@ import { entries } from "../util/registry_utils";
 import { NextPage, GetStaticProps } from "next";
 import InlineCode from "../components/InlineCode";
 import Header from "../components/Header";
+import MetaDescription from "../components/MetaDescription";
 
 interface SimpleEntry {
   name: string;
@@ -46,38 +47,14 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
     <>
       <Head>
         <title>Deno</title>
-        <meta
-          name="title"
-          content="Deno — A secure runtime for JavaScript and TypeScript."
+        <MetaDescription
+          labels={{
+            title: "Deno — A secure runtime for JavaScript and TypeScript.",
+            description:
+              "Deno is a simple, modern and secure runtime for JavaScript and TypeScript that uses V8 and is built in Rust.",
+            image: "/v1_wide.jpg",
+          }}
         />
-        <meta
-          name="description"
-          content="Deno is a simple, modern and secure runtime for JavaScript and TypeScript that uses V8 and is built in Rust."
-        />
-
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://deno.land/" />
-        <meta
-          property="og:title"
-          content="Deno — A secure runtime for JavaScript and TypeScript."
-        />
-        <meta
-          property="og:description"
-          content="Deno is a simple, modern and secure runtime for JavaScript and TypeScript that uses V8 and is built in Rust."
-        />
-        <meta property="og:image" content="/v1_wide.jpg" />
-
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://deno.land/" />
-        <meta
-          property="twitter:title"
-          content="Deno — A secure runtime for JavaScript and TypeScript."
-        />
-        <meta
-          property="twitter:description"
-          content="Deno is a simple, modern and secure runtime for JavaScript and TypeScript that uses V8 and is built in Rust."
-        />
-        <meta property="twitter:image" content="/v1_wide.jpg" />
       </Head>
       <div className="bg-white">
         <div className="bg-black">

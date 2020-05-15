@@ -14,6 +14,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import FileDisplay from "./FileDisplay";
 import { DirEntry } from "../util/registries";
+import MetaDescription from "./MetaDescription";
 
 class RegistryError {
   constructor(public message: string) {}
@@ -69,6 +70,8 @@ const Registry = () => {
     string | null | undefined
   >();
   const [readme, setReadme] = useState<string | null | undefined>();
+
+  const getTitle = () => `${name} ${version && `@${version}`} - deno.land/x`;
 
   // Fetch raw source
   useEffect(() => {
@@ -168,11 +171,14 @@ const Registry = () => {
   return (
     <>
       <Head>
-        <title>
-          {name}
-          {version && `@${version}`} - deno.land/x
-        </title>
-        <meta name="description" content="A third party module for Deno." />
+        <title>{getTitle()}</title>
+        <MetaDescription
+          labels={{
+            title: getTitle(),
+            description: "A third party module for Deno.",
+            image: "/v1_wide.jpg",
+          }}
+        />
       </Head>
       <div className="bg-gray-50 min-h-full">
         <Header
