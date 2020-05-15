@@ -228,11 +228,23 @@
     "repo": "cowsay",
     "desc": "Configurable talking cow for Deno"
   },
+  "crone": {
+    "type": "github",
+    "owner": "wrzonki",
+    "repo": "deno-crone",
+    "desc": "Simple crone scheduler for Deno"
+  },
   "cross_env": {
     "type": "github",
     "owner": "axetroy",
     "repo": "deno_cross_env",
     "desc": "A tool for setting environment variables across platforms"
+  },
+  "csv": {
+    "type": "github",
+    "owner": "vslinko",
+    "repo": "deno-csv",
+    "desc": "Streaming CSV file reader for Deno"
   },
   "cursor": {
     "type": "github",
@@ -270,6 +282,12 @@
     "owner": "dataformsjs",
     "repo": "dataformsjs",
     "desc": "A minimal JavaScript Framework and standalone components for rapid development of high quality websites and single page applications."
+  },
+  "datauri": {
+    "type": "github",
+    "owner": "data-uri",
+    "repo": "datauri-deno",
+    "desc": "Generate Data URI schemes."
   },
   "date_fns": {
     "type": "github",
@@ -320,6 +338,12 @@
     "repo": "deku",
     "desc": "No bundle dev server for es modules."
   },
+  "delay": {
+    "type": "github",
+    "owner": "vincentvictoria",
+    "repo": "delay",
+    "desc": "delay - ES Module for Deno, Node and Web"
+  },
   "dem": {
     "type": "github",
     "owner": "syumai",
@@ -355,6 +379,12 @@
     "owner": "etopiei",
     "repo": "deno_search",
     "desc": "A CLI tool to search for third party packages on deno.land"
+  },
+  "denodate": {
+   "type": "github",
+   "owner": "t-heu",
+   "repo": "denodate",
+   "desc": "Deno module for Intl-based dates"
   },
   "denoenv": {
     "type": "github",
@@ -447,6 +477,12 @@
     "repo": "deno-dirname",
     "desc": "Node-style __dirname and __filename polyfill for Deno"
   },
+  "discordeno": {
+    "type": "github",
+    "owner": "skillz4killz",
+    "repo": "discordeno",
+    "desc": "Discord API library wrapper for Deno https://discordeno.js.org"
+  },
   "djwt": {
     "type": "github",
     "owner": "timonson",
@@ -537,6 +573,12 @@
     "repo": "endianness",
     "desc": "A very simple Deno module to determine the endianness of the host"
   },
+  "ensure": {
+    "type": "github",
+    "owner": "eankeen",
+    "repo": "ensure",
+    "desc": "Ensure you are running on a minimum version of Deno, Typescript, or V8"
+  },
   "enum": {
     "type": "github",
     "owner": "adrai",
@@ -593,6 +635,12 @@
     "path": "/src",
     "desc": "A tool for creating large sets of pseudo random data."
   },
+  "fox": {
+    "type": "github",
+    "owner": "eankeen",
+    "repo": "fox",
+    "desc": "A cute little utility to help you bootstrap and sample Deno libraries"
+  },
   "free_port": {
     "type": "github",
     "owner": "axetroy",
@@ -646,6 +694,12 @@
     "owner": "SkoshRG",
     "repo": "http-server",
     "desc": "http-server is a tiny and zero-configuration HTTP server with useful features to serve static files with Deno"
+  },
+  "http_wrapper": {
+    "type": "github",
+    "owner": "lindsaykwardell",
+    "repo": "http-wrapper",
+    "desc": "Simple Server/Router wrapper around Deno's existing HTTP module"
   },
   "humanizer.ts": {
     "type": "github",
@@ -707,6 +761,12 @@
     "owner": "lynellf",
     "repo": "Interpreter",
     "desc": "Interprets a description of your application and handles the rest."
+  },
+  "invert_kv": {
+    "type": "github",
+    "owner": "denorg",
+    "repo": "invert-kv",
+    "desc": "Invert key-value pairs in an object"
   },
   "is": {
     "type": "github",
@@ -878,6 +938,12 @@
     "repo": "deno_mongo",
     "desc": "MongoDB driver for Deno."
   },
+  "mqtt": {
+    "type": "github",
+    "owner": "jdiamond",
+    "repo": "MQTT.ts",
+    "desc": "MQTT for Deno."
+  },
   "ms": {
     "type": "github",
     "owner": "denolib",
@@ -927,6 +993,12 @@
     "path": "/normalize_diacritics",
     "desc": "Simple deno module to remove any accents/ diacritics found in a string."
   },
+  "novelcovid_wrapper": {
+    "type": "github",
+    "owner": "Joralmo",
+    "repo": "deno-wrapper-novelcovid",
+    "desc": "Wrapper of NovelCOVID/API for Deno"
+  },
   "oak": {
     "type": "github",
     "owner": "oakserver",
@@ -944,6 +1016,12 @@
     "owner": "KSXGitHub",
     "repo": "deno-once",
     "desc": "Create a function that calls and cache a function once"
+  },
+  "online": {
+    "type": "github",
+    "owner": "denorg",
+    "repo": "online",
+    "desc": "Check if you're currently online and connected to the internet"
   },
   "open": {
     "type": "github",
@@ -1047,6 +1125,12 @@
     "repo": "deno-prettystring",
     "desc": "A deno module for trim and remove extra spaces between characters. Make paragraph looks organised."
   },
+  "prio_queue": {
+    "type": "github",
+    "owner": "Sourcico",
+    "repo": "deno-queueing",
+    "desc": "A priority queue implemented using binary heap"
+  },
   "process": {
     "type": "github",
     "owner": "axetroy",
@@ -1084,11 +1168,29 @@
     "repo": "deno-rand",
     "desc": "Deno rand library"
   },
+   "random": {
+    "type": "github",
+    "owner": "vincentvictoria",
+    "repo": "random",
+    "desc": "Random - ES Module for Deno, Node and Web"
+  },
   "random_interval": {
     "type": "github",
     "owner": "zekth",
     "repo": "deno_random_interval",
     "desc": "deno random interval"
+  },
+  "readline": {
+    "type": "github",
+    "owner": "vslinko",
+    "repo": "deno-readline",
+    "desc": "Read lines from Deno.Reader"
+  },
+  "recursive_readdir": {
+    "type": "github",
+    "owner": "denorg",
+    "repo": "recursive-readdir",
+    "desc": "Recursively read a directory"
   },
   "redis": {
     "type": "github",
@@ -1150,6 +1252,12 @@
     "repo": "deno-semver",
     "desc": "A fork of node-semver using TypeScript"
   },
+  "serializexml": {
+    "type": "github",
+    "owner": "olaven", 
+    "repo": "serialize-xml", 
+    "desc": "Serialize (i.e. stringify) XML"
+  }, 
   "servicr": {
     "type": "github",
     "owner": "astanciu",
@@ -1343,6 +1451,12 @@
     "package": "unexpected",
     "desc": "Extensible BDD assertion toolkit"
   },
+  "up": {
+    "type": "github",
+    "owner": "denorg",
+    "repo": "up",
+    "desc": "Check if a website is currently up"
+  },
   "username": {
     "type": "github",
     "owner": "justjavac",
@@ -1412,6 +1526,12 @@
     "repo": "deno_webview",
     "desc": "Deno bindings for webview, a tiny library for creating web-based desktop GUIs "
   },
+  "x_name": {
+    "type": "github",
+    "owner": "denorg",
+    "repo": "x-name",
+    "desc": "Check if a package name is available in deno.land/x"
+  },
   "xchacha20": {
     "type": "github",
     "owner": "chiefbiiko",
@@ -1423,6 +1543,12 @@
     "owner": "chiefbiiko",
     "repo": "xchacha20-poly1305",
     "desc": "XChaCha20-Poly1305 as defined by the XChaCha20 IRTF CFRG draft, and IETF RFC 8439"
+  },
+  "xrange": {
+    "type": "github",
+    "owner": "parzh",
+    "repo": "xrange",
+    "desc": "Python-esque iterator for number ranges"
   },
   "yaml_wasm": {
     "type": "github",
