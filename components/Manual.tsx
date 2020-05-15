@@ -215,7 +215,7 @@ function Manual() {
           </div>
         </div>
         <div className="flex flex-col w-0 flex-1 overflow-hidden">
-          <div className="relative z-10 flex-shrink-0 flex h-16 bg-white shadow">
+          {/* <div className="relative z-10 flex-shrink-0 flex h-16 bg-white shadow">
             <Link href="/">
               <a className="px-4 border-r border-gray-200 flex items-center justify-center md:hidden">
                 <img src="/logo.svg" alt="logo" className="w-auto h-10" />
@@ -270,7 +270,7 @@ function Manual() {
                 />
               </svg>
             </button>
-          </div>
+          </div> */}
 
           <main
             className="flex-1 relative z-0 overflow-y-auto focus:outline-none"
