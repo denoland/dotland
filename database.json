@@ -302,12 +302,6 @@
     "repo": "dblapi.ts",
     "desc": "TypeScript top.gg api wrapper"
   },
-  "dblapi.ts": {
-    "type": "github",
-    "owner": "zSnails",
-    "repo": "dblapi.ts",
-    "desc": "TypeScript top.gg api wrapper"
-  },
   "deamon": {
     "type": "github",
     "owner": "manyuanrong",
@@ -992,12 +986,6 @@
     "repo": "deno-nessie",
     "desc": "A database migration tool for deno."
   },
-  "nessie": {
-    "type": "github",
-    "owner": "halvardssm",
-    "repo": "deno-nessie",
-    "desc": "A database migration tool for deno."
-  },
   "normalize_diacritics": {
     "type": "github",
     "owner": "motss",
@@ -1266,10 +1254,10 @@
   },
   "serializexml": {
     "type": "github",
-    "owner": "olaven", 
-    "repo": "serialize-xml", 
+    "owner": "olaven",
+    "repo": "serialize-xml",
     "desc": "Serialize (i.e. stringify) XML"
-  }, 
+  },
   "servicr": {
     "type": "github",
     "owner": "astanciu",
