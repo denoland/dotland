@@ -445,7 +445,7 @@
     "type": "github",
     "owner": "bentoumitech",
     "repo": "denox",
-    "desc": "Workspace support for your Deno projects, allow you to specify and share a list of scripts and their respective permissions."
+    "desc": "DenoX is a script runner and workspace wrapper for Deno"
   },
   "denv": {
     "type": "github",
