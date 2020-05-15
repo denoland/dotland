@@ -1420,6 +1420,12 @@
     "repo": "deno_run_tests_on_localhost",
     "desc": "Create a localhost server and run tests"
   },
+  "text_clipper": {
+    "type": "github",
+    "owner": "arendjr",
+    "repo": "text-clipper",
+    "desc": "Fast and correct clip functions for HTML and plain text"
+  },
   "tiny_templates": {
     "type": "github",
     "owner": "zekth",
