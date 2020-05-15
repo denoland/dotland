@@ -423,6 +423,12 @@
     "repo": "denomander",
     "desc": "Deno command-line interfaces inspired from commander.js"
   },
+  "denom": {
+    "type": "github",
+    "owner": "Qu4k",
+    "repo": "denom",
+    "desc": "Monitor any changes in your Deno application and automagically restart 🌟"
+  },
   "denon": {
     "type": "github",
     "owner": "eliassjogreen",
