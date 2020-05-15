@@ -860,6 +860,12 @@
     "path": "/lib",
     "desc": "This module is meant to provide memory-efficient lazy-evaluation iteration for iterable objects. The aim of this project is to support deno, node and browser, and support all native JavaScript systems for iteration (for-of, for-await-of, etc)."
   },
+  "levenshtein": {
+    "type": "github",
+    "owner": "aosync",
+    "repo": "levenshtein",
+    "desc": "Module to compute the Levenshtein distance between two strings"
+  },
   "lib": {
     "type": "github",
     "owner": "brandonkal",
