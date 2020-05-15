@@ -975,6 +975,12 @@
     "path": "/normalize_diacritics",
     "desc": "Simple deno module to remove any accents/ diacritics found in a string."
   },
+  "novelcovid_wrapper": {
+    "type": "github",
+    "owner": "Joralmo",
+    "repo": "deno-wrapper-novelcovid",
+    "desc": "Wrapper of NovelCOVID/API for Deno"
+  },
   "oak": {
     "type": "github",
     "owner": "oakserver",
