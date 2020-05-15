@@ -228,6 +228,12 @@
     "repo": "cowsay",
     "desc": "Configurable talking cow for Deno"
   },
+  "crone": {
+    "type": "github",
+    "owner": "wrzonki",
+    "repo": "deno-crone",
+    "desc": "Simple crone scheduler for Deno"
+  },
   "cross_env": {
     "type": "github",
     "owner": "axetroy",
