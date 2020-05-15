@@ -419,7 +419,7 @@
   },
   "denom": {
     "type": "github",
-    "owner": "Qu4k",
+    "owner": "denosaurs",
     "repo": "denom",
     "desc": "Monitor any changes in your Deno application and automagically restart 🌟"
   },
