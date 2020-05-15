@@ -701,6 +701,12 @@
     "repo": "deno_html_entities",
     "desc": "Fast html entities decode & encode library"
   },
+  "http": {
+    "type": "github",
+    "owner": "eankeen",
+    "repo": "http",
+    "desc": "Easily get HTTP status codes and status texts"
+  },
   "http_server": {
     "type": "github",
     "owner": "SkoshRG",
@@ -1245,6 +1251,12 @@
     "owner": "jabernardo",
     "repo": "rute",
     "desc": "A Simple Router for Deno"
+  },
+  "search": {
+    "type": "github",
+    "owner": "eankeen",
+    "repo": "search",
+    "desc": "Module to search 3rd party packages"
   },
   "saur": {
     "type": "github",
