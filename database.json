@@ -1542,6 +1542,12 @@
     "path": "/types",
     "desc": "Data types used by the VSCode language server client and server."
   },
+  "vuniq": {
+    "type": "github",
+    "owner": "vasuvanka",
+    "repo": "vuniq",
+    "desc": "Uniq ID generator with variable length"
+  },
   "watch": {
     "type": "github",
     "owner": "jinjor",
