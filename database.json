@@ -374,6 +374,12 @@
     "repo": "deno_init",
     "desc": "The executable to set up a deno project 🦕"
   },
+  "deno_scripts": {
+    "type": "github",
+    "owner": "PabloSzx",
+    "repo": "deno_scripts",
+    "desc": "Type-safe centralized Deno project scripts 🦕"
+  },
   "deno_search": {
     "type": "github",
     "owner": "etopiei",
