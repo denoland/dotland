@@ -7,15 +7,10 @@
 
 @import "tailwindcss/utilities";
 
-<<<<<<< HEAD
-
-=======
->>>>>>> e2a01accde36dbed89413ca9dc2d23d0ce461a4a
 html {
   scroll-behavior: smooth;
 }
 
-<<<<<<< HEAD
 /* removes focus outlines on mouse clicks */
 *:focus:not(:focus-visible),
 *::before:focus:not(:focus-visible),
@@ -23,8 +18,6 @@ html {
   outline: none;
 }
 
-=======
->>>>>>> e2a01accde36dbed89413ca9dc2d23d0ce461a4a
 .link {
   @apply text-blue-500;
   @apply transition;
