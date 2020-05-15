@@ -250,7 +250,7 @@
     "type": "github",
     "owner": "vslinko",
     "repo": "deno-csv",
-    "desc": "Streaming CSV file reader for Deno"
+    "desc": "Streaming API for reading and writing CSV"
   },
   "cursor": {
     "type": "github",
