@@ -762,6 +762,12 @@
     "repo": "Interpreter",
     "desc": "Interprets a description of your application and handles the rest."
   },
+  "invert_kv": {
+    "type": "github",
+    "owner": "denorg",
+    "repo": "invert-kv",
+    "desc": "Invert key-value pairs in an object"
+  },
   "is": {
     "type": "github",
     "owner": "justjavac",
@@ -1010,6 +1016,12 @@
     "owner": "KSXGitHub",
     "repo": "deno-once",
     "desc": "Create a function that calls and cache a function once"
+  },
+  "online": {
+    "type": "github",
+    "owner": "denorg",
+    "repo": "online",
+    "desc": "Check if you're currently online and connected to the internet"
   },
   "open": {
     "type": "github",
@@ -1431,6 +1443,12 @@
     "package": "unexpected",
     "desc": "Extensible BDD assertion toolkit"
   },
+  "up": {
+    "type": "github",
+    "owner": "denorg",
+    "repo": "up",
+    "desc": "Check if a website is currently up"
+  },
   "username": {
     "type": "github",
     "owner": "justjavac",
@@ -1499,6 +1517,12 @@
     "owner": "eliassjogreen",
     "repo": "deno_webview",
     "desc": "Deno bindings for webview, a tiny library for creating web-based desktop GUIs "
+  },
+  "x_name": {
+    "type": "github",
+    "owner": "denorg",
+    "repo": "x-name",
+    "desc": "Check if a package name is available in deno.land/x"
   },
   "xchacha20": {
     "type": "github",
