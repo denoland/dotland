@@ -5,15 +5,19 @@ import { GithubEntry, GithubDatabaseEntry } from "./registries/github";
 import { DenoStdEntry, DenoStdDatabaseEntry } from "./registries/deno_std";
 import { URLEntry, URLDatabaseEntry } from "./registries/url";
 import { NPMEntry, NPMDatabaseEntry } from "./registries/npm";
-import { Entry, DatabaseEntry } from "./registries";
+import { Entry, DatabaseEntry as DatabaseEntryBase } from "./registries";
 
-function findDatabaseEntry(
-  name: string
-):
+export type DatabaseEntry =
   | GithubDatabaseEntry
   | DenoStdDatabaseEntry
   | URLDatabaseEntry
   | NPMDatabaseEntry
+  ;
+
+function findDatabaseEntry(
+  name: string
+):
+  | DatabaseEntry
   | undefined {
   // @ts-ignore
   return DATABASE[name];
@@ -86,4 +90,4 @@ export function isReadme(filename: string) {
   );
 }
 
-export const entries = DATABASE as { [name: string]: DatabaseEntry };
+export const entries = DATABASE as { [name: string]: DatabaseEntryBase };

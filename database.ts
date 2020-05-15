@@ -1,14 +1,4 @@
-import type { GithubDatabaseEntry } from "./util/registries/github";
-import type { DenoStdDatabaseEntry } from "./util/registries/deno_std";
-import type { NPMDatabaseEntry } from "./util/registries/npm";
-import type { URLDatabaseEntry } from "./util/registries/url";
-
-type DatabaseEntry =
-  | GithubDatabaseEntry
-  | DenoStdDatabaseEntry
-  | NPMDatabaseEntry
-  | URLDatabaseEntry
-  ;
+import type { DatabaseEntry } from "./util/registry_utils";
 
 /* eslint-disable @typescript-eslint/camelcase */
 const database: Record<string, DatabaseEntry> = {
