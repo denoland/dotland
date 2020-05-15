@@ -1390,6 +1390,12 @@
     "repo": "deno_std",
     "desc": "NOTICE: The deno_std repository has been moved to the main Deno repo https://github.com/denoland/deno/tree/master/std"
   },
+  "suzhou_numerals": {
+    "type": "github",
+    "owner": "weakish",
+    "repo": "suzhou-numerals",
+    "desc": "Encoding and decoding Suzhou numerals."
+  },
   "swissKnife": {
     "type": "github",
     "owner": "fakoua",
