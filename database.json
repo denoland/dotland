@@ -42,6 +42,12 @@
     "repo": "framework",
     "desc": "The next-generation type-safe web framework."
   },
+   "attain": {
+    "type": "github",
+    "owner": "aaronwlee",
+    "repo": "attain",
+    "desc": "A middleware web framework, inspired by express.js"
+  },
   "await_mutex": {
     "type": "github",
     "owner": "Matthew-Smith",
