@@ -1005,6 +1005,12 @@
     "repo": "oak",
     "desc": "A middleware framework for Deno's http server, including a router middleware."
   },
+  "oak-view-engine": {
+    "type": "github",
+    "owner": "gjuoun",
+    "repo": "oak-view-engine",
+    "desc": "A View Engine middleware for oka framework"
+  },
   "observable": {
     "type": "github",
     "owner": "bsunderhus",
