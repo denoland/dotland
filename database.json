@@ -228,11 +228,11 @@
     "repo": "cowsay",
     "desc": "Configurable talking cow for Deno"
   },
-  "crone": {
+  "cron": {
     "type": "github",
     "owner": "wrzonki",
-    "repo": "deno-crone",
-    "desc": "Simple crone scheduler for Deno"
+    "repo": "deno-cron",
+    "desc": "Simple cron scheduler for Deno"
   },
   "cross_env": {
     "type": "github",
@@ -1443,6 +1443,12 @@
     "owner": "arendjr",
     "repo": "text-clipper",
     "desc": "Fast and correct clip functions for HTML and plain text"
+  },
+  "timezone": {
+    "type": "github",
+    "owner": "wrzonki",
+    "repo": "deno-timezone",
+    "desc": "Simple timezone syncronization"
   },
   "tiny_templates": {
     "type": "github",
