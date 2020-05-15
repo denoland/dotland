@@ -65,10 +65,10 @@ const ThirdPartyRegistryList = () => {
               <p className="text-gray-900 mt-4">
                 To add to this list, edit{" "}
                 <a
-                  href="https://github.com/denoland/deno_website2/blob/master/database.json"
+                  href="https://github.com/denoland/deno_website2/blob/master/database.ts"
                   className="link"
                 >
-                  database.json
+                  database.ts
                 </a>
                 .
               </p>

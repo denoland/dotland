@@ -4,7 +4,7 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
   console.log("registry request", url.pathname);
   const remoteUrl = getRegistrySourceURL(url.pathname);
   if (!remoteUrl) {
-    return new Response("Not in database.json: " + url.pathname, {
+    return new Response("Not in database.ts: " + url.pathname, {
       status: 404,
       statusText: "Not Found",
       headers: { "content-type": "text/plain" },
