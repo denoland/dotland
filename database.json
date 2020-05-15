@@ -441,6 +441,12 @@
     "repo": "denoversion",
     "desc": "Deno cli to manage and bump release versions."
   },
+  "denox": {
+    "type": "github",
+    "owner": "bentoumitech",
+    "repo": "denox",
+    "desc": "DenoX is a script runner and workspace wrapper for Deno"
+  },
   "denv": {
     "type": "github",
     "owner": "crowlKats",
