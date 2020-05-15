@@ -417,17 +417,17 @@
     "repo": "denoget",
     "desc": "denoget installs executable deno script."
   },
-  "denomander": {
-    "type": "github",
-    "owner": "siokas",
-    "repo": "denomander",
-    "desc": "Deno command-line interfaces inspired from commander.js"
-  },
   "denom": {
     "type": "github",
     "owner": "Qu4k",
     "repo": "denom",
     "desc": "Monitor any changes in your Deno application and automagically restart 🌟"
+  },
+  "denomander": {
+    "type": "github",
+    "owner": "siokas",
+    "repo": "denomander",
+    "desc": "Deno command-line interfaces inspired from commander.js"
   },
   "denon": {
     "type": "github",
