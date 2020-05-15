@@ -1425,6 +1425,12 @@
     "package": "unexpected",
     "desc": "Extensible BDD assertion toolkit"
   },
+  "up": {
+    "type": "github",
+    "owner": "denorg",
+    "repo": "up",
+    "desc": "Check if a website is currently up"
+  },
   "username": {
     "type": "github",
     "owner": "justjavac",
@@ -1442,12 +1448,6 @@
     "owner": "lucascaro",
     "repo": "deno-uuid",
     "desc": "Warning: the library code of this module has been moved to https://deno.land/std/testing/mod.ts."
-  },
-  "up": {
-    "type": "github",
-    "owner": "denorg",
-    "repo": "up",
-    "desc": "Check if a website is currently up"
   },
   "uwuifier": {
     "type": "github",
