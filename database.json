@@ -896,6 +896,12 @@
     "repo": "deno_machine_id",
     "desc": "Get the unique ID of the current machine"
   },
+  "mandarinets": {
+    "type": "github",
+    "owner": "mandarineorg",
+    "repo": "mandarinets",
+    "desc": "A MVC Framework built on Typescript that runs on Deno. Components, Dependency Injection, Sessions, Security and more."
+  },
   "match": {
     "type": "github",
     "owner": "gustavofsantos",
