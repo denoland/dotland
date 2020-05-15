@@ -884,6 +884,12 @@
     "repo": "lodash_require",
     "desc": "Lodash for the Deno runtime."
   },
+  "luhn": {
+    "type": "github",
+    "owner": "howlowck",
+    "repo": "deno-luhn",
+    "desc": "Luhn Algorithm Validator"
+  },
   "machine_id": {
     "type": "github",
     "owner": "axetroy",
