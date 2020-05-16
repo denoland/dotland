@@ -228,6 +228,12 @@
     "repo": "deno",
     "desc": "A secure runtime for JavaScript and TypeScript."
   },
+  "countryfinder": {
+    "type": "github",
+    "owner": "yonas-g",
+    "repo": "country-list",
+    "desc": "🦕 module to get a list of world countries and their information."
+  },
   "coward": {
     "type": "github",
     "owner": "fox-cat",
@@ -374,6 +380,12 @@
     "repo": "deno-deblong",
     "desc": "another simple rest api with deno"
   },
+  "deno_flatten": {
+    "type": "github",
+    "owner": "yanislavgalyov",
+    "repo": "deno-flatten",
+    "desc": "A recursive array flattening function"
+  },
   "deno_gui": {
     "type": "github",
     "owner": "fakoua",
@@ -434,6 +446,12 @@
     "owner": "syumai",
     "repo": "denoget",
     "desc": "denoget installs executable deno script."
+  },
+  "denoliver": {
+    "type": "github",
+    "owner": "joakimunge",
+    "repo": "denoliver",
+    "desc": "A simple, dependency free web server for Deno"
   },
   "denom": {
     "type": "github",
@@ -657,6 +675,12 @@
     "repo": "expect",
     "desc": "A deno implementation of expect in order to write tests in a more jest like style."
   },
+  "fastro": {
+    "type": "github",
+    "owner": "fastrojs",
+    "repo": "fastro-server",
+    "desc": "deno fast web framework"
+  },
   "fen": {
     "type": "github",
     "owner": "fen-land",
@@ -822,6 +846,12 @@
     "repo": "invert-kv",
     "desc": "Invert key-value pairs in an object"
   },
+  "iro": {
+    "type": "github",
+    "owner": "jozsefsallai",
+    "repo": "iro",
+    "desc": "Fast and clean terminal coloring and styling utility."
+  },
   "is": {
     "type": "github",
     "owner": "justjavac",
@@ -980,6 +1010,12 @@
     "repo": "memoize",
     "desc": "A simple and easy to use memoize lib for deno."
   },
+  "microraptor": {
+    "type": "github",
+    "owner": "matteocrippa",
+    "repo": "microraptor",
+    "desc": "A deno lightweight middleware for easy REST development"
+  },
   "minimatch": {
     "type": "github",
     "owner": "chrisdothtml",
@@ -1051,6 +1087,12 @@
     "owner": "halvardssm",
     "repo": "deno-nessie",
     "desc": "A database migration tool for deno."
+  },
+  "nexo": {
+    "type": "github",
+    "owner": "nexojs",
+    "repo": "nexo",
+    "desc": "A Deno and Next Cocktail"
   },
   "normalize_diacritics": {
     "type": "github",
@@ -1209,6 +1251,12 @@
     "repo": "deno_process",
     "desc": "process module for Deno"
   },
+  "progressbar": {
+    "type": "github",
+    "owner": "jakobhellermann",
+    "repo": "deno-progressbar",
+    "desc": "create terminal progressbars"
+  },
   "protobuf": {
     "type": "github",
     "owner": "seishun",
@@ -1222,11 +1270,23 @@
     "repo": "ts-prove",
     "desc": "Decode and validate unknown data"
   },
+  "proxy_bind": {
+    "type": "github",
+    "owner": "imcotton",
+    "repo": "proxy-bind",
+    "desc": "From foobar.fn.bind(foobar) to bind(foobar).fn"
+  },
   "purify": {
     "type": "github",
     "owner": "aynik",
     "repo": "deno-purify",
     "desc": "A deno port of purify-ts."
+  },
+  "qrcode": {
+    "type": "github",
+    "owner": "denorg",
+    "repo": "qrcode",
+    "desc": "Generate QR codes in Deno as base64-encoded images without any dependencies or binaries"
   },
   "rad": {
     "type": "github",
@@ -1287,6 +1347,12 @@
     "owner": "paulmillr",
     "repo": "noble-ripemd160",
     "desc": "RIPEMD160, a cryptographic hash function."
+  },
+  "rsync_parser": {
+    "type": "github",
+    "owner": "daniel-araujo",
+    "repo": "deno-rsync-parser",
+    "desc": "Parses output of rsync program."
   },
   "rubico": {
     "type": "github",
@@ -1361,6 +1427,12 @@
     "path": "/lib",
     "desc": "Escape and stringify an array of arguments to be executed on the shell."
   },
+  "shodan_deno": {
+    "type": "github",
+    "owner": "aldinp16",
+    "repo": "shodan_deno",
+    "desc": "Simple Shodan API Wrapper For Deno"
+  },
   "short_uuid": {
     "type": "github",
     "owner": "jeanlescure",
@@ -1396,6 +1468,14 @@
     "owner": "jcardama",
     "repo": "deno_slugify",
     "desc": "A string slugifier"
+  },
+  "smoothish": {
+    "type": "github",
+    "owner": "smoothish",
+    "repo": "smoothish",
+    "path": "/index.js",
+    "defaultVersion": "deno",
+    "desc": "Smoothing out time-series data with boundary and missing data handling"
   },
   "smtp": {
     "type": "github",
@@ -1439,6 +1519,12 @@
     "owner": "dyedgreen",
     "repo": "deno-sqlite",
     "desc": "JavaScript SQLite Module"
+  },
+  "status": {
+    "type": "github",
+    "owner": "denosaurs",
+    "repo": "status",
+    "desc": "HTTP status utility for Deno. Based on Java Apache HttpStatus"
   },
   "std": {
     "type": "deno_std",
@@ -1534,6 +1620,12 @@
     "repo": "deno_types",
     "desc": "Definition files for JavaScript libraries compatible with Deno"
   },
+  "typescript": {
+    "type": "github",
+    "owner": "microsoft",
+    "repo": "typescript",
+    "desc": "TypeScript is a superset of JavaScript that compiles to clean JavaScript output."
+  },
   "udd": {
     "type": "github",
     "owner": "hayd",
@@ -1574,6 +1666,17 @@
     "owner": "schotsl",
     "repo": "uwuifier",
     "desc": "This very lightweight package allows you to uwuify any sentence or word (excluding URL's) with many configurable parameters while giving you access to many vewy kawaii sentences and faces"
+  },
+  "validator": {
+    "type": "github",
+    "owner": "ryo-ma",
+    "repo": "deno-validator",
+    "desc": "🦕A simple string validation for deno"
+  },
+  "value_schema": {
+    "type": "npm",
+    "package": "value-schema",
+    "desc": "simple, easy-to-use, and declarative schema validator"
   },
   "velociraptor": {
     "type": "github",
