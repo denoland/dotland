@@ -677,6 +677,12 @@
     "repo": "gentleRpc",
     "desc": "JSON-RPC 2.0 TypeScript library for deno and browser."
   },
+  "gusano": {
+    "type": "github",
+    "owner": "krthr",
+    "repo": "gusano",
+    "desc": "Gusano 🐍 - A minimal workflows lib for Deno 🦖"
+  },
   "handlebars": {
     "type": "github",
     "owner": "alosaur",
