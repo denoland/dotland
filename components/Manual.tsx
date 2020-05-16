@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter, Router } from "next/router";
 import { parseNameVersion, findEntry } from "../util/registry_utils";
 import {
   TableOfContents,
@@ -42,6 +42,8 @@ function Manual() {
   }
 
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
+
+  Router.events.on('routeChangeStart', () => setShowSidebar(false))
 
   const [
     tableOfContents,
@@ -124,7 +126,7 @@ function Manual() {
                 leaveTo="opacity-0"
               >
                 <div className="fixed inset-0">
-                  <div className="absolute inset-0 bg-gray-600 opacity-75"></div>
+                  <div className="absolute inset-0 bg-gray-600 opacity-75" onClick={() => setShowSidebar(false)}></div>
                 </div>
               </Transition>
               <Transition
@@ -136,27 +138,6 @@ function Manual() {
                 leaveTo="-translate-x-full"
               >
                 <div className="relative flex-1 flex flex-col max-w-xs w-full bg-white">
-                  <div className="absolute top-0 right-0 -mr-14 p-1">
-                    <button
-                      className="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600"
-                      aria-label="Close sidebar"
-                      onClick={() => setShowSidebar(false)}
-                    >
-                      <svg
-                        className="h-6 w-6 text-white"
-                        stroke="currentColor"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
-                    </button>
-                  </div>
                   <div className="bg-gray-100 pb-4 pt-4 border-b border-gray-200">
                     <Link href="/">
                       <a className="block flex items-center flex-shrink-0 px-4">
