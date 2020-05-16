@@ -1,4 +1,4 @@
-const basepath = "https://raw.githubusercontent.com/denoland/deno/";
+const basepath = "https://cdn.jsdelivr.net/gh/denoland/deno";
 
 export interface TableOfContents {
   [slug: string]: {
@@ -12,7 +12,7 @@ export interface TableOfContents {
 export async function getTableOfContents(
   version: string
 ): Promise<TableOfContents> {
-  const res = await fetch(`${basepath}${version}/docs/toc.json`);
+  const res = await fetch(`${basepath}@${version}/docs/toc.json`);
   if (res.status !== 200) {
     throw Error(
       `Got an error (${
@@ -24,5 +24,5 @@ export async function getTableOfContents(
 }
 
 export function getFileURL(version: string, path: string) {
-  return `${basepath}${version}/docs${path}.md`;
+  return `${basepath}@${version}/docs${path}.md`;
 }
