@@ -216,6 +216,12 @@
     "repo": "deno-compose",
     "desc": "pipe, pipeline, and compose functions with 64 overloads per function"
   },
+  "config": {
+    "type": "github",
+    "owner": "eankeen",
+    "repo": "config",
+    "desc": "Load dotfiles / modules for a project consistently"
+  },
   "core": {
     "type": "github",
     "owner": "denoland",
