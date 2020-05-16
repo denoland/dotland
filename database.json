@@ -846,6 +846,12 @@
     "repo": "invert-kv",
     "desc": "Invert key-value pairs in an object"
   },
+  "iro": {
+    "type": "github",
+    "owner": "jozsefsallai",
+    "repo": "iro",
+    "desc": "Fast and clean terminal coloring and styling utility."
+  },
   "is": {
     "type": "github",
     "owner": "justjavac",
