@@ -228,6 +228,12 @@
     "repo": "deno",
     "desc": "A secure runtime for JavaScript and TypeScript."
   },
+  "country-finder": {
+    "type": "github",
+    "owner": "yonas-g",
+    "repo": "country-list",
+    "desc": "🦕 module to get a list of world countries and their information."
+  },
   "coward": {
     "type": "github",
     "owner": "fox-cat",
@@ -434,12 +440,6 @@
     "owner": "syumai",
     "repo": "denoget",
     "desc": "denoget installs executable deno script."
-  },
-  "denoliver": {
-    "type": "github",
-    "owner": "joakimunge",
-    "repo": "denoliver",
-    "desc": "A simple, dependency free web server for Deno"
   },
   "denom": {
     "type": "github",
