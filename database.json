@@ -1527,7 +1527,7 @@
     "repo": "velociraptor",
     "desc": "An npm-style script runner for Deno"
   },
-   "velociraptor": {
+   "view_engine": {
     "type": "github",
     "owner": "gjuoun",
     "repo": "view-engine",
