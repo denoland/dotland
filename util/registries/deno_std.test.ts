@@ -13,25 +13,25 @@ const testEntry = new DenoStdEntry(testDbEntry);
 
 test("source url", () => {
   expect(testEntry.getSourceURL("/index.js", "0.50.0")).toEqual(
-    "https://raw.githubusercontent.com/denoland/deno/std/0.50.0/std/index.js"
+    "https://cdn.jsdelivr.net/gh/denoland/deno@std/0.50.0/std/index.js"
   );
 });
 
 test("source url with commit hash", () => {
   expect(testEntry.getSourceURL("/index.js", "a1cd4f")).toEqual(
-    "https://raw.githubusercontent.com/denoland/deno/a1cd4f/std/index.js"
+    "https://cdn.jsdelivr.net/gh/denoland/deno@a1cd4f/std/index.js"
   );
 });
 
 test("source url with default version", () => {
   expect(testEntry.getSourceURL("/index.js", undefined)).toEqual(
-    "https://raw.githubusercontent.com/denoland/deno/master/std/index.js"
+    "https://cdn.jsdelivr.net/gh/denoland/deno@master/std/index.js"
   );
 });
 
 test("source url with empty path", () => {
   expect(testEntry.getSourceURL("", "0.50.0")).toEqual(
-    "https://raw.githubusercontent.com/denoland/deno/std/0.50.0/std"
+    "https://cdn.jsdelivr.net/gh/denoland/deno@std/0.50.0/std"
   );
 });
 

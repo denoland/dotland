@@ -32,10 +32,7 @@ export class DenoStdEntry implements Entry {
   }
 
   getSourceURL(path: string, version?: string): string {
-    return stdEntry.getSourceURL(
-      path,
-      version ? stdVersion(version) : undefined
-    );
+    return stdEntry.getCDNURL(path, version ? stdVersion(version) : undefined);
   }
   getRepositoryURL(path: string, version?: string): string {
     return stdEntry.getRepositoryURL(

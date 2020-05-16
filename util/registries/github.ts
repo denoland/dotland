@@ -30,6 +30,11 @@ export class GithubEntry implements Entry {
       version ?? this.defaultVersion ?? "master"
     }${this.path ?? ""}${path}`;
   }
+  getCDNURL(path: string, version?: string): string {
+    return `https://cdn.jsdelivr.net/gh/${this.owner}/${this.repo}@${
+      version ?? this.defaultVersion ?? "master"
+    }${this.path ?? ""}${path}`;
+  }
   getRepositoryURL(path: string, version?: string): string {
     return `https://github.com/${this.owner}/${this.repo}/tree/${
       version ?? this.defaultVersion ?? "master"
