@@ -172,18 +172,12 @@ const Registry = () => {
           {name}
           {version && `@${version}`} - deno.land/x
         </title>
-        <meta
-          name="title"
-          content={`${name}${version ? `@${version}` : ""} - deno.land/x`}
-        />
+        <meta name="title" content="deno.land/x" />
         <meta name="description" content="A third party module for Deno." />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content="https://deno.land" />
-        <meta
-          name="twitter:title"
-          content={`${name}${version ? `@${version}` : ""} - deno.land/x`}
-        />
+        <meta name="twitter:title" content="deno.land/x" />
         <meta
           name="twitter:description"
           content="A third party module for Deno."
@@ -192,10 +186,7 @@ const Registry = () => {
 
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://deno.land" />
-        <meta
-          property="og:title"
-          content={`${name}${version ? `@${version}` : ""} - deno.land/x`}
-        />
+        <meta property="og:title" content="deno.land/x" />
         <meta
           property="og:description"
           content="A third party module for Deno."
