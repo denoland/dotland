@@ -1361,6 +1361,12 @@
     "repo": "short_uuid",
     "desc": "Generate random or sequential UUID of any length."
   },
+  "shodan_deno": {
+    "type": "github",
+    "owner": "aldinp16",
+    "repo": "shodan_deno",
+    "desc": "Simple Shodan API Wrapper For Deno"
+  },
   "simple_type_assert": {
     "type": "github",
     "owner": "KSXGitHub",
