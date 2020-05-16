@@ -663,6 +663,12 @@
     "repo": "expect",
     "desc": "A deno implementation of expect in order to write tests in a more jest like style."
   },
+  "fastro": {
+    "type": "github",
+    "owner": "fastrojs",
+    "repo": "fastro-server",
+    "desc": "deno fast web framework"
+  },
   "fen": {
     "type": "github",
     "owner": "fen-land",
