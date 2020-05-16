@@ -7,6 +7,7 @@ import {
   TableOfContents,
   getTableOfContents,
   getFileURL,
+  getDocURL,
 } from "../util/manual_utils";
 import Markdown from "./Markdown";
 import Transition from "./Transition";
@@ -298,7 +299,17 @@ function Manual() {
           >
             <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20">
               {content ? (
-                <Markdown source={content} canonicalURL={sourceURL} />
+                <div className="divide-y divide-gray-200">
+                  <Markdown source={content} canonicalURL={sourceURL} />
+                  <div className="pt-3">
+                    <a
+                      className="text-gray-500 hover:text-gray-400"
+                      href={getDocURL(version ?? "master", path)}
+                    >
+                      View on GitHub
+                    </a>
+                  </div>
+                </div>
               ) : (
                 <div className="w-full my-8">
                   <div className="w-4/5 sm:w-1/3 bg-gray-100 h-8"></div>
