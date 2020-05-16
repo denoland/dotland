@@ -179,7 +179,11 @@ function Manual() {
                     />
                   </div>
                   {tableOfContents && (
-                    <ToC tableOfContents={tableOfContents} version={version} path={path} />
+                    <ToC
+                      tableOfContents={tableOfContents}
+                      version={version}
+                      path={path}
+                    />
                   )}
                 </div>
               </Transition>
@@ -210,7 +214,11 @@ function Manual() {
               />
             </div>
             {tableOfContents && (
-              <ToC tableOfContents={tableOfContents} version={version} path={path} />
+              <ToC
+                tableOfContents={tableOfContents}
+                version={version}
+                path={path}
+              />
             )}
           </div>
         </div>
@@ -358,7 +366,7 @@ function Version({
 function ToC({
   tableOfContents,
   version,
-  path
+  path,
 }: {
   tableOfContents: TableOfContents;
   version: string | undefined;
@@ -376,7 +384,13 @@ function ToC({
                     href="/[identifier]/[...path]"
                     as={`/manual${version ? `@${version}` : ""}/${slug}`}
                   >
-                    <a className={`${path === `/${slug}` ? "text-blue-600 hover:text-blue-500" : "text-gray-900 hover:text-gray-600"} font-bold`}>
+                    <a
+                      className={`${
+                        path === `/${slug}`
+                          ? "text-blue-600 hover:text-blue-500"
+                          : "text-gray-900 hover:text-gray-600"
+                      } font-bold`}
+                    >
                       {entry.name}
                     </a>
                   </Link>
@@ -391,7 +405,13 @@ function ToC({
                                 version ? `@${version}` : ""
                               }/${slug}/${childSlug}`}
                             >
-                              <a className={`${path === `/${slug}/${childSlug}` ? "text-blue-600 hover:text-blue-500" : "text-gray-900 hover:text-gray-600"} font-normal`}>
+                              <a
+                                className={`${
+                                  path === `/${slug}/${childSlug}`
+                                    ? "text-blue-600 hover:text-blue-500"
+                                    : "text-gray-900 hover:text-gray-600"
+                                } font-normal`}
+                              >
                                 {name}
                               </a>
                             </Link>
