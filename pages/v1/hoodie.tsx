@@ -43,7 +43,7 @@ const V1Hoodie = () => {
             <p className="text-gray-900 mt-4">
               To be clear: this is a pre-order. We have not yet had these
               manufactured. The image above is a photoshopped mock-up. We will
-              be taking orders until June 1, after which this limited edition
+              be taking orders until May 21st, after which this limited edition
               hoodie will never again be sold. We expect to ship these out in
               July.
             </p>

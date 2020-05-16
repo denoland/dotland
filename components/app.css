@@ -7,6 +7,10 @@
 
 @import "tailwindcss/utilities";
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* removes focus outlines on mouse clicks */
 *:focus:not(:focus-visible),
 *::before:focus:not(:focus-visible),
