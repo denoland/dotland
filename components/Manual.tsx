@@ -10,7 +10,6 @@ import {
 } from "../util/manual_utils";
 import Markdown from "./Markdown";
 import Transition from "./Transition";
-import MetaDescription from "./MetaDescription";
 
 const denoEntry = findEntry("deno");
 
@@ -116,13 +115,30 @@ function Manual() {
     <div>
       <Head>
         <title>The Deno Manual</title>
-        <MetaDescription
-          labels={{
-            title: "The Deno Manual",
-            description: partialContent || "The Deno Manual",
-            image: "/v1_wide.jpg",
-          }}
+
+        <meta name="title" content="The Deno Manual" />
+        <meta
+          name="description"
+          content={partialContent || "The Deno Manual"}
         />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://deno.land" />
+        <meta property="og:title" content="The Deno Manual" />
+        <meta
+          property="og:description"
+          content={partialContent || "The Deno Manual"}
+        />
+        <meta property="og:image" content="https://deno.land/v1_wide.jpg" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://deno.land" />
+        <meta name="twitter:title" content="The Deno Manual" />
+        <meta
+          name="twitter:description"
+          content={partialContent || "The Deno Manual"}
+        />
+        <meta name="twitter:image" content="https://deno.land/v1_wide.jpg" />
       </Head>
       <div className="h-screen flex overflow-hidden">
         <Transition show={showSidebar}>

@@ -47,14 +47,38 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
     <>
       <Head>
         <title>Deno</title>
-        <MetaDescription
-          labels={{
-            title: "Deno — A secure runtime for JavaScript and TypeScript.",
-            description:
-              "Deno is a simple, modern and secure runtime for JavaScript and TypeScript that uses V8 and is built in Rust.",
-            image: "/v1_wide.jpg",
-          }}
+        <meta
+          name="title"
+          content="Deno — A secure runtime for JavaScript and TypeScript."
         />
+        <meta
+          name="description"
+          content="Deno is a simple, modern and secure runtime for JavaScript and TypeScript that uses V8 and is built in Rust."
+        />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://deno.land" />
+        <meta
+          name="twitter:title"
+          content="Deno — A secure runtime for JavaScript and TypeScript."
+        />
+        <meta
+          name="twitter:description"
+          content="Deno is a simple, modern and secure runtime for JavaScript and TypeScript that uses V8 and is built in Rust."
+        />
+        <meta name="twitter:image" content="https://deno.land/v1_wide.jpg" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://deno.land" />
+        <meta
+          property="og:title"
+          content="Deno — A secure runtime for JavaScript and TypeScript."
+        />
+        <meta
+          property="og:description"
+          content="Deno is a simple, modern and secure runtime for JavaScript and TypeScript that uses V8 and is built in Rust."
+        />
+        <meta property="og:image" content="https://deno.land/v1_wide.jpg" />
       </Head>
       <div className="bg-white">
         <div className="bg-black">

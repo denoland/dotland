@@ -14,7 +14,6 @@ import Header from "./Header";
 import Footer from "./Footer";
 import FileDisplay from "./FileDisplay";
 import { DirEntry } from "../util/registries";
-import MetaDescription from "./MetaDescription";
 
 class RegistryError {
   constructor(public message: string) {}
@@ -70,8 +69,6 @@ const Registry = () => {
     string | null | undefined
   >();
   const [readme, setReadme] = useState<string | null | undefined>();
-
-  const getTitle = () => `${name} ${version && `@${version}`} - deno.land/x`;
 
   // Fetch raw source
   useEffect(() => {
@@ -171,14 +168,39 @@ const Registry = () => {
   return (
     <>
       <Head>
-        <title>{getTitle()}</title>
-        <MetaDescription
-          labels={{
-            title: getTitle(),
-            description: "A third party module for Deno.",
-            image: "/v1_wide.jpg",
-          }}
+        <title>
+          {name}
+          {version && `@${version}`} - deno.land/x
+        </title>
+        <meta
+          name="title"
+          content={`${name}${version ? `@${version}` : ""} - deno.land/x`}
         />
+        <meta name="description" content="A third party module for Deno." />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://deno.land" />
+        <meta
+          name="twitter:title"
+          content={`${name}${version ? `@${version}` : ""} - deno.land/x`}
+        />
+        <meta
+          name="twitter:description"
+          content="A third party module for Deno."
+        />
+        <meta name="twitter:image" content="https://deno.land/v1_wide.jpg" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://deno.land" />
+        <meta
+          property="og:title"
+          content={`${name}${version ? `@${version}` : ""} - deno.land/x`}
+        />
+        <meta
+          property="og:description"
+          content="A third party module for Deno."
+        />
+        <meta property="og:image" content="https://deno.land/v1_wide.jpg" />
       </Head>
       <div className="bg-gray-50 min-h-full">
         <Header

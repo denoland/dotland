@@ -47,13 +47,27 @@ const Benchmarks = () => {
     <>
       <Head>
         <title>Benchmarks - Deno</title>
-        <MetaDescription
-          labels={{
-            title: "Benchmarks - Deno",
-            description: "Continuous benchmarks for Deno.",
-            image: "/v1_wide.jpg",
-          }}
+
+        <meta name="title" content="Benchmarks - Deno" />
+        <meta name="description" content="Continuous benchmarks for Deno." />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://deno.land" />
+        <meta name="twitter:title" content="Benchmarks - Deno" />
+        <meta
+          name="twitter:description"
+          content="Continuous benchmarks for Deno."
         />
+        <meta name="twitter:image" content="https://deno.land/v1_wide.jpg" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://deno.land" />
+        <meta property="og:title" content="Benchmarks - Deno" />
+        <meta
+          property="og:description"
+          content="Continuous benchmarks for Deno."
+        />
+        <meta property="og:image" content="https://deno.land/v1_wide.jpg" />
       </Head>
       <div className="bg-gray-50 min-h-full">
         <Header subtitle="Continuous Benchmarks" />

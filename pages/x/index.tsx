@@ -7,7 +7,6 @@ import Footer from "../../components/Footer";
 import { entries } from "../../util/registry_utils";
 import InlineCode from "../../components/InlineCode";
 import Head from "next/head";
-import MetaDescription from "../../components/MetaDescription";
 
 const ThirdPartyRegistryList = () => {
   const [query, setQuery] = React.useState("");
@@ -30,13 +29,27 @@ const ThirdPartyRegistryList = () => {
     <>
       <Head>
         <title>Deno Third Party Modules</title>
-        <MetaDescription
-          labels={{
-            title: "Deno Third Party Modules",
-            description: "Third Party Modules for Deno.",
-            image: "/v1_wide.jpg",
-          }}
+
+        <meta name="title" content="Deno Third Party Modules" />
+        <meta name="description" content="Third Party Modules for Deno." />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://deno.land" />
+        <meta name="twitter:title" content="Deno Third Party Modules" />
+        <meta
+          name="twitter:description"
+          content="Third Party Modules for Deno."
         />
+        <meta name="twitter:image" content="https://deno.land/v1_wide.jpg" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://deno.land" />
+        <meta property="og:title" content="Deno Third Party Modules" />
+        <meta
+          property="og:description"
+          content="Third Party Modules for Deno."
+        />
+        <meta property="og:image" content="https://deno.land/v1_wide.jpg" />
       </Head>
       <div className="bg-gray-50 min-h-full">
         <Header subtitle="Third Party Modules" />
