@@ -320,6 +320,15 @@ const InstallSection = () => {
       <CodeBlock language="bash" code={`scoop install deno`} />
     </div>
   );
+  const cargo = (
+    <div key="cargo" className="my-4 text-gray-700">
+      <p className="py-2 font-bold">Using Cargo (Windows, macOS, Linux):</p>
+      <CodeBlock
+        language="bash"
+        code={`cargo install deno`}
+      />
+    </div>
+  );
 
   return (
     <>
@@ -333,9 +342,11 @@ const InstallSection = () => {
       </p>
       {shell}
       {powershell}
+      {cargo}
       {homebrew}
       {chocolatey}
       {scoop}
+      {cargo}
       <p className="my-4 text-gray-700">
         See{" "}
         <a className="link" href="https://github.com/denoland/deno_install">
