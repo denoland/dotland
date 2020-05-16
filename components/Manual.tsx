@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter, Router } from "next/router";
 import { parseNameVersion, findEntry } from "../util/registry_utils";
 import {
   TableOfContents,
   getTableOfContents,
   getFileURL,
+  getDocURL,
 } from "../util/manual_utils";
 import Markdown from "./Markdown";
 import Transition from "./Transition";
@@ -43,6 +44,8 @@ function Manual() {
 
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
 
+  Router.events.on("routeChangeStart", () => setShowSidebar(false));
+
   const [
     tableOfContents,
     setTableOfContents,
@@ -54,6 +57,13 @@ function Manual() {
   useEffect(() => {
     getTableOfContents(version ?? "master")
       .then(setTableOfContents)
+      .then(() =>
+        setTimeout(
+          () =>
+            document.getElementsByClassName("toc-active")[0].scrollIntoView(),
+          0
+        )
+      )
       .catch((e) => {
         console.error("Failed to fetch table of contents:", e);
         setTableOfContents(null);
@@ -124,7 +134,10 @@ function Manual() {
                 leaveTo="opacity-0"
               >
                 <div className="fixed inset-0">
-                  <div className="absolute inset-0 bg-gray-600 opacity-75"></div>
+                  <div
+                    className="absolute inset-0 bg-gray-600 opacity-75"
+                    onClick={() => setShowSidebar(false)}
+                  ></div>
                 </div>
               </Transition>
               <Transition
@@ -179,7 +192,11 @@ function Manual() {
                     />
                   </div>
                   {tableOfContents && (
-                    <ToC tableOfContents={tableOfContents} version={version} />
+                    <ToC
+                      tableOfContents={tableOfContents}
+                      version={version}
+                      path={path}
+                    />
                   )}
                 </div>
               </Transition>
@@ -210,7 +227,11 @@ function Manual() {
               />
             </div>
             {tableOfContents && (
-              <ToC tableOfContents={tableOfContents} version={version} />
+              <ToC
+                tableOfContents={tableOfContents}
+                version={version}
+                path={path}
+              />
             )}
           </div>
         </div>
@@ -278,7 +299,17 @@ function Manual() {
           >
             <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20">
               {content ? (
-                <Markdown source={content} canonicalURL={sourceURL} />
+                <div className="divide-y divide-gray-200">
+                  <Markdown source={content} canonicalURL={sourceURL} />
+                  <div className="pt-3">
+                    <a
+                      className="text-gray-500 hover:text-gray-400"
+                      href={getDocURL(version ?? "master", path)}
+                    >
+                      View on GitHub
+                    </a>
+                  </div>
+                </div>
               ) : (
                 <div className="w-full my-8">
                   <div className="w-4/5 sm:w-1/3 bg-gray-100 h-8"></div>
@@ -358,9 +389,11 @@ function Version({
 function ToC({
   tableOfContents,
   version,
+  path,
 }: {
   tableOfContents: TableOfContents;
   version: string | undefined;
+  path: string;
 }) {
   return (
     <div className="pt-2 pb-8 h-0 flex-1 flex flex-col overflow-y-auto">
@@ -374,7 +407,13 @@ function ToC({
                     href="/[identifier]/[...path]"
                     as={`/manual${version ? `@${version}` : ""}/${slug}`}
                   >
-                    <a className="text-gray-900 hover:text-gray-600 font-normal">
+                    <a
+                      className={`${
+                        path === `/${slug}`
+                          ? "text-blue-600 hover:text-blue-500 toc-active"
+                          : "text-gray-900 hover:text-gray-600"
+                      } font-bold`}
+                    >
                       {entry.name}
                     </a>
                   </Link>
@@ -389,7 +428,13 @@ function ToC({
                                 version ? `@${version}` : ""
                               }/${slug}/${childSlug}`}
                             >
-                              <a className="text-gray-900 hover:text-gray-600 font-normal">
+                              <a
+                                className={`${
+                                  path === `/${slug}/${childSlug}`
+                                    ? "text-blue-600 hover:text-blue-500 toc-active"
+                                    : "text-gray-900 hover:text-gray-600"
+                                } font-normal`}
+                              >
                                 {name}
                               </a>
                             </Link>
