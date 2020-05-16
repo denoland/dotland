@@ -1052,6 +1052,12 @@
     "repo": "deno-nessie",
     "desc": "A database migration tool for deno."
   },
+  "nexo": {
+    "type": "github",
+    "owner": "nexojs",
+    "repo": "nexo",
+    "desc": "A Deno and Next Cocktail"
+  },
   "normalize_diacritics": {
     "type": "github",
     "owner": "motss",
