@@ -1216,6 +1216,12 @@
     "repo": "ts-prove",
     "desc": "Decode and validate unknown data"
   },
+  "proxy_bind": {
+    "type": "github",
+    "owner": "imcotton",
+    "repo": "proxy-bind",
+    "desc": "From foobar.fn.bind(foobar) to bind(foobar).fn"
+  },
   "purify": {
     "type": "github",
     "owner": "aynik",
