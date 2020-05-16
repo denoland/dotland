@@ -368,6 +368,12 @@
     "repo": "deno",
     "desc": "A secure runtime for JavaScript and TypeScript."
   },
+  "deno_deblong": {
+    "type": "github",
+    "owner": "nusendra",
+    "repo": "deno-deblong",
+    "desc": "another simple rest api with deno"
+  },
   "deno_gui": {
     "type": "github",
     "owner": "fakoua",
