@@ -54,6 +54,13 @@ function Manual() {
   useEffect(() => {
     getTableOfContents(version ?? "master")
       .then(setTableOfContents)
+      .then(() =>
+        setTimeout(
+          () =>
+            document.getElementsByClassName("toc-active")[0].scrollIntoView(),
+          0
+        )
+      )
       .catch((e) => {
         console.error("Failed to fetch table of contents:", e);
         setTableOfContents(null);
@@ -387,7 +394,7 @@ function ToC({
                     <a
                       className={`${
                         path === `/${slug}`
-                          ? "text-blue-600 hover:text-blue-500"
+                          ? "text-blue-600 hover:text-blue-500 toc-active"
                           : "text-gray-900 hover:text-gray-600"
                       } font-bold`}
                     >
@@ -408,7 +415,7 @@ function ToC({
                               <a
                                 className={`${
                                   path === `/${slug}/${childSlug}`
-                                    ? "text-blue-600 hover:text-blue-500"
+                                    ? "text-blue-600 hover:text-blue-500 toc-active"
                                     : "text-gray-900 hover:text-gray-600"
                                 } font-normal`}
                               >
