@@ -417,6 +417,12 @@
     "repo": "denoget",
     "desc": "denoget installs executable deno script."
   },
+  "denom": {
+    "type": "github",
+    "owner": "denosaurs",
+    "repo": "denom",
+    "desc": "Monitor any changes in your Deno application and automagically restart 🌟"
+  },
   "denomander": {
     "type": "github",
     "owner": "siokas",
