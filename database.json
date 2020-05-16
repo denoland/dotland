@@ -1463,6 +1463,14 @@
     "repo": "deno_slugify",
     "desc": "A string slugifier"
   },
+  "smoothish": {
+    "type": "github",
+    "owner": "smoothish",
+    "repo": "smoothish",
+    "path": "/index.js",
+    "defaultVersion": "deno",
+    "desc": "Smoothing out time-series data with boundary and missing data handling"
+  },
   "smtp": {
     "type": "github",
     "owner": "manyuanrong",
