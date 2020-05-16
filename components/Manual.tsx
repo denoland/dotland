@@ -43,7 +43,7 @@ function Manual() {
 
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
 
-  Router.events.on('routeChangeStart', () => setShowSidebar(false))
+  Router.events.on("routeChangeStart", () => setShowSidebar(false));
 
   const [
     tableOfContents,
@@ -126,7 +126,10 @@ function Manual() {
                 leaveTo="opacity-0"
               >
                 <div className="fixed inset-0">
-                  <div className="absolute inset-0 bg-gray-600 opacity-75" onClick={() => setShowSidebar(false)}></div>
+                  <div
+                    className="absolute inset-0 bg-gray-600 opacity-75"
+                    onClick={() => setShowSidebar(false)}
+                  ></div>
                 </div>
               </Transition>
               <Transition
