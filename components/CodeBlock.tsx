@@ -66,9 +66,17 @@ export const RawCodeBlock = ({
           <code>
             {tokens.map((line, i) => (
               <div key={i} {...getLineProps({ line, key: i })}>
-                {line.map((token, key) => (
-                  <span key={key} {...getTokenProps({ token, key })} />
-                ))}
+                {line.length === 1 ? (
+                  <span
+                    {...getTokenProps({ token: line[0], key: 0 })}
+                    // eslint-disable-next-line react/no-children-prop
+                    children={"\n"}
+                  />
+                ) : (
+                  line.map((token, key) => (
+                    <span key={key} {...getTokenProps({ token, key })} />
+                  ))
+                )}
               </div>
             ))}
           </code>
