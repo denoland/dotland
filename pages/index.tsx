@@ -296,7 +296,7 @@ const InstallSection = () => {
   const homebrew = (
     <div key="homebrew" className="my-4 text-gray-700">
       <p className="mb-2 font-bold">Using Homebrew (macOS):</p>
-      <CodeBlock language="typescript" code={`brew install deno`} />
+      <CodeBlock language="bash" code={`brew install deno`} />
     </div>
   );
   const powershell = (
