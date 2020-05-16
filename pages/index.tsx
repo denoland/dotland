@@ -296,7 +296,7 @@ const InstallSection = () => {
   const homebrew = (
     <div key="homebrew" className="my-4 text-gray-700">
       <p className="mb-2 font-bold">Using Homebrew (macOS):</p>
-      <CodeBlock language="typescript" code={`brew install deno`} />
+      <CodeBlock language="bash" code={`brew install deno`} />
     </div>
   );
   const powershell = (
@@ -320,6 +320,12 @@ const InstallSection = () => {
       <CodeBlock language="bash" code={`scoop install deno`} />
     </div>
   );
+  const cargo = (
+    <div key="cargo" className="my-4 text-gray-700">
+      <p className="py-2 font-bold">Using Cargo (Windows, macOS, Linux):</p>
+      <CodeBlock language="bash" code={`cargo install deno`} />
+    </div>
+  );
 
   return (
     <>
@@ -333,6 +339,7 @@ const InstallSection = () => {
       </p>
       {shell}
       {powershell}
+      {cargo}
       {homebrew}
       {chocolatey}
       {scoop}
