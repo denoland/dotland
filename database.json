@@ -1506,6 +1506,12 @@
     "repo": "deno-sqlite",
     "desc": "JavaScript SQLite Module"
   },
+  "status": {
+    "type": "github",
+    "owner": "denosaurs",
+    "repo": "status",
+    "desc": "HTTP status utility for Deno. Based on Java Apache HttpStatus"
+  },
   "std": {
     "type": "deno_std",
     "desc": "Deno Standard Modules"
