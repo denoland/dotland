@@ -489,6 +489,12 @@
     "repo": "dex",
     "desc": "An SQL query builder port of Knex for Deno"
   },
+  "dexecutor": {
+    "type": "github",
+    "owner": "denjucks",
+    "repo": "dexecutor",
+    "desc": "An SQL query executor that supports MySql, MariaDB, Postgres, and Sqlite"
+  },
   "dinja": {
     "type": "github",
     "owner": "denjucks",
@@ -1384,6 +1390,12 @@
     "owner": "manyuanrong",
     "repo": "deno-smtp",
     "desc": "Deno SMTP mail client"
+  },
+  "snelm": {
+    "type": "github",
+    "owner": "denjucks",
+    "repo": "snelm",
+    "desc": "Improved security middleware for the Oak, ABC, Alosaur, and Pogo web frameworks. Derived from the helmet middleware for Node"
   },
   "soxa": {
     "type": "github",
