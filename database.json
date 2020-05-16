@@ -1209,6 +1209,12 @@
     "repo": "deno_process",
     "desc": "process module for Deno"
   },
+  "progressbar": {
+    "type": "github",
+    "owner": "jakobhellermann",
+    "repo": "deno-progressbar",
+    "desc": "create terminal progressbars"
+  },
   "protobuf": {
     "type": "github",
     "owner": "seishun",
