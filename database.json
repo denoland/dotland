@@ -228,6 +228,12 @@
     "repo": "deno",
     "desc": "A secure runtime for JavaScript and TypeScript."
   },
+  "countryfinder": {
+    "type": "github",
+    "owner": "yonas-g",
+    "repo": "country-list",
+    "desc": "🦕 module to get a list of world countries and their information."
+  },
   "coward": {
     "type": "github",
     "owner": "fox-cat",
