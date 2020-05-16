@@ -346,7 +346,6 @@ const InstallSection = () => {
       {homebrew}
       {chocolatey}
       {scoop}
-      {cargo}
       <p className="my-4 text-gray-700">
         See{" "}
         <a className="link" href="https://github.com/denoland/deno_install">
