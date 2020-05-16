@@ -55,7 +55,7 @@ export const RawCodeBlock = ({
             <code className="pr-2 sm:pr-3">
               {tokens.map(
                 (line, i) =>
-                  !(line.length === 1 && i === tokens.length - 1) && (
+                  !(i === tokens.length - 1 && line.length === 1) && (
                     <div
                       key={i + "l"}
                       className="text-gray-400 token-line text-right select-none"
@@ -70,7 +70,7 @@ export const RawCodeBlock = ({
             {tokens.map((line, i) => (
               <div key={i} {...getLineProps({ line, key: i })}>
                 {line.length === 1
-                  ? !(tokens.length > 1 && i === tokens.length - 1) && (
+                  ? i !== tokens.length - 1 && (
                       <span
                         {...getTokenProps({ token: line[0], key: 0 })}
                         // eslint-disable-next-line react/no-children-prop
