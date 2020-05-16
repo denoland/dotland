@@ -56,6 +56,13 @@ function Manual() {
   useEffect(() => {
     getTableOfContents(version ?? "master")
       .then(setTableOfContents)
+      .then(() =>
+        setTimeout(
+          () =>
+            document.getElementsByClassName("toc-active")[0].scrollIntoView(),
+          0
+        )
+      )
       .catch((e) => {
         console.error("Failed to fetch table of contents:", e);
         setTableOfContents(null);
@@ -184,7 +191,11 @@ function Manual() {
                     />
                   </div>
                   {tableOfContents && (
-                    <ToC tableOfContents={tableOfContents} version={version} />
+                    <ToC
+                      tableOfContents={tableOfContents}
+                      version={version}
+                      path={path}
+                    />
                   )}
                 </div>
               </Transition>
@@ -215,7 +226,11 @@ function Manual() {
               />
             </div>
             {tableOfContents && (
-              <ToC tableOfContents={tableOfContents} version={version} />
+              <ToC
+                tableOfContents={tableOfContents}
+                version={version}
+                path={path}
+              />
             )}
           </div>
         </div>
@@ -363,9 +378,11 @@ function Version({
 function ToC({
   tableOfContents,
   version,
+  path,
 }: {
   tableOfContents: TableOfContents;
   version: string | undefined;
+  path: string;
 }) {
   return (
     <div className="pt-2 pb-8 h-0 flex-1 flex flex-col overflow-y-auto">
@@ -379,7 +396,13 @@ function ToC({
                     href="/[identifier]/[...path]"
                     as={`/manual${version ? `@${version}` : ""}/${slug}`}
                   >
-                    <a className="text-gray-900 hover:text-gray-600 font-normal">
+                    <a
+                      className={`${
+                        path === `/${slug}`
+                          ? "text-blue-600 hover:text-blue-500 toc-active"
+                          : "text-gray-900 hover:text-gray-600"
+                      } font-bold`}
+                    >
                       {entry.name}
                     </a>
                   </Link>
@@ -394,7 +417,13 @@ function ToC({
                                 version ? `@${version}` : ""
                               }/${slug}/${childSlug}`}
                             >
-                              <a className="text-gray-900 hover:text-gray-600 font-normal">
+                              <a
+                                className={`${
+                                  path === `/${slug}/${childSlug}`
+                                    ? "text-blue-600 hover:text-blue-500 toc-active"
+                                    : "text-gray-900 hover:text-gray-600"
+                                } font-normal`}
+                              >
                                 {name}
                               </a>
                             </Link>
