@@ -386,6 +386,12 @@
     "repo": "deno_search",
     "desc": "A CLI tool to search for third party packages on deno.land"
   },
+  "deno_structured_logging": {
+    "type": "github",
+    "owner": "Yamboy1",
+    "repo": "deno-structured-logging",
+    "desc": "A structured logging module for Deno"
+  },
   "denodate": {
    "type": "github",
    "owner": "t-heu",
