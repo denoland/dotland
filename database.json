@@ -1545,6 +1545,12 @@
     "repo": "velociraptor",
     "desc": "An npm-style script runner for Deno"
   },
+   "view_engine": {
+    "type": "github",
+    "owner": "gjuoun",
+    "repo": "view-engine",
+    "desc": "🚀A Template View Engine for Deno frameworks"
+  },
   "vscode_languageserver_protocol": {
     "type": "github",
     "owner": "denodev",
