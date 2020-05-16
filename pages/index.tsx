@@ -323,10 +323,7 @@ const InstallSection = () => {
   const cargo = (
     <div key="cargo" className="my-4 text-gray-700">
       <p className="py-2 font-bold">Using Cargo (Windows, macOS, Linux):</p>
-      <CodeBlock
-        language="bash"
-        code={`cargo install deno`}
-      />
+      <CodeBlock language="bash" code={`cargo install deno`} />
     </div>
   );
 
