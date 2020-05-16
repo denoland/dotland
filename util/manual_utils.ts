@@ -29,5 +29,5 @@ export function getFileURL(version: string, path: string) {
 }
 
 export function getDocURL(version: string, path: string) {
-  return `${docpath}${version}/docs${path}.md#readme`;
+  return `${docpath}${version}/docs${path}.md`;
 }
