@@ -55,9 +55,12 @@ const Header = ({ subtitle }: { subtitle?: string }) => {
           </Link>
           <Link href="/[identifier]" as="/manual">
             <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              The Manual
+              Manual
             </a>
           </Link>
+          <a href="https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts" className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
+            Runtime API
+          </a>
           <Link href="/[identifier]" as="/std">
             <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
               Standard Library
