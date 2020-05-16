@@ -435,6 +435,12 @@
     "repo": "denoget",
     "desc": "denoget installs executable deno script."
   },
+  "denoliver": {
+    "type": "github",
+    "owner": "joakimunge",
+    "repo": "denoliver",
+    "desc": "A simple, dependency free web server for Deno"
+  },
   "denom": {
     "type": "github",
     "owner": "denosaurs",
