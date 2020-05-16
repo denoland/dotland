@@ -23,6 +23,7 @@ module.exports = {
     },
   },
   variants: {
+    textColor: ["responsive", "hover", "focus", "active", "visited"],
     backgroundColor: ["responsive", "hover", "focus", "active"],
   },
   plugins: [require("@tailwindcss/ui"), require("tailwindcss-hyphens")],

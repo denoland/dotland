@@ -374,7 +374,7 @@ function ToC({
                     href="/[identifier]/[...path]"
                     as={`/manual${version ? `@${version}` : ""}/${slug}`}
                   >
-                    <a className="text-gray-900 hover:text-gray-600 font-normal">
+                    <a className="text-blue-600 hover:underline visited:text-blue-900 font-normal">
                       {entry.name}
                     </a>
                   </Link>
@@ -389,7 +389,7 @@ function ToC({
                                 version ? `@${version}` : ""
                               }/${slug}/${childSlug}`}
                             >
-                              <a className="text-gray-900 hover:text-gray-600 font-normal">
+                              <a className="text-blue-600 hover:underline visited:text-blue-900 font-normal">
                                 {name}
                               </a>
                             </Link>
