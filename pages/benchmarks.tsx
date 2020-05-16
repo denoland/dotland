@@ -17,7 +17,6 @@ import {
   formatKB,
 } from "../util/benchmark_utils";
 import BenchmarkChart, { BenchmarkLoading } from "../components/BenchmarkChart";
-import MetaDescription from "../components/MetaDescription";
 
 // TODO(lucacasonato): add anchor points to headers
 const Benchmarks = () => {

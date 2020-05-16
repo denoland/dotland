@@ -10,7 +10,6 @@ import { entries } from "../util/registry_utils";
 import { NextPage, GetStaticProps } from "next";
 import InlineCode from "../components/InlineCode";
 import Header from "../components/Header";
-import MetaDescription from "../components/MetaDescription";
 
 interface SimpleEntry {
   name: string;
