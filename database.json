@@ -1240,6 +1240,12 @@
     "repo": "deno-purify",
     "desc": "A deno port of purify-ts."
   },
+  "qrcode": {
+    "type": "github",
+    "owner": "denorg",
+    "repo": "qrcode",
+    "desc": "Generate QR codes in Deno as base64-encoded images without any dependencies or binaries"
+  },
   "rad": {
     "type": "github",
     "owner": "cdaringe",
