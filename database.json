@@ -1355,6 +1355,12 @@
     "path": "/lib",
     "desc": "Escape and stringify an array of arguments to be executed on the shell."
   },
+  "shodan_deno": {
+    "type": "github",
+    "owner": "aldinp16",
+    "repo": "shodan_deno",
+    "desc": "Simple Shodan API Wrapper For Deno"
+  },
   "short_uuid": {
     "type": "github",
     "owner": "jeanlescure",
