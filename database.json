@@ -1004,6 +1004,12 @@
     "repo": "memoize",
     "desc": "A simple and easy to use memoize lib for deno."
   },
+  "microraptor": {
+    "type": "github",
+    "owner": "matteocrippa",
+    "repo": "microraptor",
+    "desc": "A deno lightweight middleware for easy REST development"
+  },
   "minimatch": {
     "type": "github",
     "owner": "chrisdothtml",
