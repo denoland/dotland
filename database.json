@@ -380,6 +380,12 @@
     "repo": "deno-deblong",
     "desc": "another simple rest api with deno"
   },
+  "deno_flatten": {
+    "type": "github",
+    "owner": "yanislavgalyov",
+    "repo": "deno-flatten",
+    "desc": "A recursive array flattening function"
+  },
   "deno_gui": {
     "type": "github",
     "owner": "fakoua",
