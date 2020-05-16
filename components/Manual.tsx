@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter, Router } from "next/router";
 import { parseNameVersion, findEntry } from "../util/registry_utils";
 import {
   TableOfContents,
@@ -42,6 +42,8 @@ function Manual() {
   }
 
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
+
+  Router.events.on("routeChangeStart", () => setShowSidebar(false));
 
   const [
     tableOfContents,
@@ -124,7 +126,10 @@ function Manual() {
                 leaveTo="opacity-0"
               >
                 <div className="fixed inset-0">
-                  <div className="absolute inset-0 bg-gray-600 opacity-75"></div>
+                  <div
+                    className="absolute inset-0 bg-gray-600 opacity-75"
+                    onClick={() => setShowSidebar(false)}
+                  ></div>
                 </div>
               </Transition>
               <Transition
