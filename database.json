@@ -42,7 +42,7 @@
     "repo": "framework",
     "desc": "The next-generation type-safe web framework."
   },
-   "attain": {
+  "attain": {
     "type": "github",
     "owner": "aaronwlee",
     "repo": "attain",
@@ -429,10 +429,10 @@
     "desc": "A structured logging module for Deno"
   },
   "denodate": {
-   "type": "github",
-   "owner": "t-heu",
-   "repo": "denodate",
-   "desc": "Deno module for Intl-based dates"
+    "type": "github",
+    "owner": "t-heu",
+    "repo": "denodate",
+    "desc": "Deno module for Intl-based dates"
   },
   "denodb": {
    "type": "github",
@@ -1312,6 +1312,12 @@
     "repo": "qrcode",
     "desc": "Generate QR codes in Deno as base64-encoded images without any dependencies or binaries"
   },
+  "qs": {
+    "type": "github",
+    "owner": "adrijere",
+    "repo": "deno-qs",
+    "desc": "A querystring parser"
+  },
   "rad": {
     "type": "github",
     "owner": "cdaringe",
@@ -1324,7 +1330,7 @@
     "repo": "deno-rand",
     "desc": "Deno rand library"
   },
-   "random": {
+  "random": {
     "type": "github",
     "owner": "vincentvictoria",
     "repo": "random",
@@ -1416,10 +1422,10 @@
   },
   "serializexml": {
     "type": "github",
-    "owner": "olaven", 
-    "repo": "serialize-xml", 
+    "owner": "olaven",
+    "repo": "serialize-xml",
     "desc": "Serialize (i.e. stringify) XML"
-  }, 
+  },
   "servicr": {
     "type": "github",
     "owner": "astanciu",
@@ -1714,7 +1720,7 @@
     "repo": "velociraptor",
     "desc": "An npm-style script runner for Deno"
   },
-   "view_engine": {
+  "view_engine": {
     "type": "github",
     "owner": "gjuoun",
     "repo": "view-engine",
