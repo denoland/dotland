@@ -43,7 +43,7 @@ const ThirdPartyRegistryList = () => {
                 <InlineCode>
                   https://deno.land/x/MODULE_NAME@BRANCH/SCRIPT.ts
                 </InlineCode>
-                . If you leave out the branch, it will default to the modules
+                . If you leave out the branch, it will default to the module’s
                 default branch, usually <InlineCode>master</InlineCode>.
               </p>
               <p className="text-gray-900 mt-4">
