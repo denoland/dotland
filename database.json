@@ -1311,6 +1311,12 @@
     "repo": "deno-progressbar",
     "desc": "create terminal progressbars"
   },
+  "propx": {
+    "type": "github",
+    "owner": "luispagarcia",
+    "repo": "propx",
+    "desc": "Access and create object props safe and with confidence"
+  },
   "protobuf": {
     "type": "github",
     "owner": "seishun",
