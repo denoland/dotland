@@ -52,7 +52,7 @@ function Manual() {
   Router.events.on("routeChangeComplete", () =>
     manualEl.current?.scrollTo(0, 0)
   );
-                   
+
   useEffect(() => {
     if (showSidebar) {
       scrollTOCIntoView();
