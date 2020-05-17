@@ -1028,6 +1028,12 @@
     "repo": "microraptor",
     "desc": "A deno lightweight middleware for easy REST development"
   },
+  "minidate": {
+    "type": "github",
+    "owner": "bernardini687",
+    "repo": "minidate",
+    "desc": "Shape a date from minimal input"
+  },
   "minimatch": {
     "type": "github",
     "owner": "chrisdothtml",
