@@ -42,6 +42,12 @@
     "repo": "framework",
     "desc": "The next-generation type-safe web framework."
   },
+  "ask": {
+    "type": "github",
+    "owner": "jozsefsallai",
+    "repo": "ask",
+    "desc": "Interactive command-line prompts for Deno."
+  },
   "attain": {
     "type": "github",
     "owner": "aaronwlee",
