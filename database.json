@@ -447,10 +447,10 @@
     "desc": "Deno module for Intl-based dates"
   },
   "denodb": {
-   "type": "github",
-   "owner": "eveningkid",
-   "repo": "denodb",
-   "desc": "MySQL, SQLite and PostgreSQL ORM for Deno"
+    "type": "github",
+    "owner": "eveningkid",
+    "repo": "denodb",
+    "desc": "MySQL, SQLite and PostgreSQL ORM for Deno"
   },
   "denoenv": {
     "type": "github",
@@ -985,6 +985,12 @@
     "owner": "kt3k",
     "repo": "deno_license_checker",
     "desc": "This tool checks the license headers in the files in a git repository. You can configure which files should have which license texts with .licenserc.json."
+  },
+  "lifeson_ipsum": {
+    "type": "github",
+    "owner": "snerks",
+    "repo": "lifeson-ipsum",
+    "desc": "Lorem Ipsum generator, based on Alex Lifeson's acceptance speech for Rush in 2013."
   },
   "lodash": {
     "type": "github",
