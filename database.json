@@ -84,6 +84,12 @@
     "repo": "berror",
     "desc": "Rich Errors including chain of causes, metadata and easy logging"
   },
+  "behin": {
+    "type": "github",
+    "owner": "lolivei",
+    "repo": "behin",
+    "desc": "OTP - One-time password for Deno 🦕 (TOTP/HOTP)"
+  },
   "bigfloat": {
     "type": "github",
     "owner": "davidmartinez10",
