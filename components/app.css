@@ -51,3 +51,8 @@ ol.nested li:before {
 .deno-offwhite .deno-inlinecode {
   @apply bg-gray-200;
 }
+
+.prism-code {
+  tab-size: 2;
+  -moz-tab-size: 2;
+}
