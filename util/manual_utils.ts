@@ -1,4 +1,5 @@
 const basepath = "https://raw.githubusercontent.com/denoland/deno/";
+const docpath = "https://github.com/denoland/deno/blob/";
 
 export interface TableOfContents {
   [slug: string]: {
@@ -25,4 +26,8 @@ export async function getTableOfContents(
 
 export function getFileURL(version: string, path: string) {
   return `${basepath}${version}/docs${path}.md`;
+}
+
+export function getDocURL(version: string, path: string) {
+  return `${docpath}${version}/docs${path}.md`;
 }
