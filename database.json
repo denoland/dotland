@@ -1010,17 +1010,17 @@
     "repo": "lodash",
     "desc": "A modern JavaScript utility library delivering modularity, performance & extras."
   },
-  "lolcat": {
-    "type": "github",
-    "owner": "qwerttty",
-    "repo": "lolcat",
-    "desc": "This is a Deno port of the node port of the famous lolcat gem."
-  },
   "lodash_require": {
     "type": "github",
     "owner": "TokenChingy",
     "repo": "lodash_require",
     "desc": "Lodash for the Deno runtime."
+  },
+  "lolcat": {
+    "type": "github",
+    "owner": "qwerttty",
+    "repo": "lolcat",
+    "desc": "This is a Deno port of the node port of the famous lolcat gem."
   },
   "luhn": {
     "type": "github",
