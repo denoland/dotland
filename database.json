@@ -1022,6 +1022,12 @@
     "repo": "deno-minimatch",
     "desc": "A deno port of minimatch"
   },
+  "mith": {
+    "type": "github",
+    "owner": "jwebcoder",
+    "repo": "mith",
+    "desc": "A middleware framework for http/s servers"
+  },
   "mixins": {
     "type": "github",
     "owner": "udibo",
