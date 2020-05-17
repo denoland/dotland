@@ -1137,6 +1137,12 @@
     "repo": "deno-wrapper-novelcovid",
     "desc": "Wrapper of NovelCOVID/API for Deno"
   },
+  "number_formatter": {
+    "type": "github",
+    "owner": "nusendra",
+    "repo": "deno-number-formatter",
+    "desc": "A number formmatter for Deno"
+  },
   "oak": {
     "type": "github",
     "owner": "oakserver",
