@@ -78,17 +78,17 @@
     "repo": "deno-bcrypt",
     "desc": "BCrypt support for hashing and checking passwords"
   },
-  "berror": {
-    "type": "github",
-    "owner": "baptistemarchand",
-    "repo": "berror",
-    "desc": "Rich Errors including chain of causes, metadata and easy logging"
-  },
   "behin": {
     "type": "github",
     "owner": "lolivei",
     "repo": "behin",
     "desc": "OTP - One-time password for Deno 🦕 (TOTP/HOTP)"
+  },
+  "berror": {
+    "type": "github",
+    "owner": "baptistemarchand",
+    "repo": "berror",
+    "desc": "Rich Errors including chain of causes, metadata and easy logging"
   },
   "bigfloat": {
     "type": "github",
