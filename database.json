@@ -894,6 +894,12 @@
     "repo": "is_exe",
     "desc": "detect if a file is executable or not"
   },
+    "is_url": {
+    "type": "github",
+    "owner": "rubiin",
+    "repo": "is_url",
+    "desc": "Check if a URL is absolute"
+  },
   "jbq": {
     "type": "github",
     "owner": "krnik",
