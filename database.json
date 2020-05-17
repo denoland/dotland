@@ -464,12 +464,6 @@
     "repo": "deno-env",
     "desc": "Deno module for reading env files with added options"
   },
-  "dislocator": {
-    "type": "github",
-    "owner": "abhi11210646",
-    "repo": "dislocator",
-    "desc": "Deno module for Service Locator pattern"
-  },
   "denoforge": {
     "type": "github",
     "owner": "denjucks",
@@ -584,6 +578,12 @@
     "owner": "skillz4killz",
     "repo": "discordeno",
     "desc": "Discord API library wrapper for Deno https://discordeno.js.org"
+  },
+  "dislocator": {
+    "type": "github",
+    "owner": "abhi11210646",
+    "repo": "dislocator",
+    "desc": "Deno module for Service Locator pattern"
   },
   "djwt": {
     "type": "github",
