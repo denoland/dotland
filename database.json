@@ -1831,6 +1831,12 @@
     "repo": "deno-watch-v2",
     "desc": "deno-watch-v2"
   },
+  "websocket": {
+    "type": "github",
+    "owner": "ryo-ma",
+    "repo": "deno-websocket",
+    "desc": "🦕A simple WebScoket library like ws of node.js"
+  },
   "webview": {
     "type": "github",
     "owner": "eliassjogreen",
