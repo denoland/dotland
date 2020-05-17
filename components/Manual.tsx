@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter, Router } from "next/router";
@@ -45,8 +45,11 @@ function Manual() {
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
 
   Router.events.on("routeChangeStart", () => setShowSidebar(false));
+
+  const manualEl = useRef<HTMLElement>(null);
+
   Router.events.on("routeChangeComplete", () =>
-    document.getElementsByClassName("manual")[0].scrollTo(0, 0)
+    manualEl.current?.scrollTo(0, 0)
   );
 
   const [
@@ -297,8 +300,9 @@ function Manual() {
           </div>
 
           <main
-            className="flex-1 relative z-0 overflow-y-auto focus:outline-none manual"
+            className="flex-1 relative z-0 overflow-y-auto focus:outline-none"
             tabIndex={0}
+            ref={manualEl}
           >
             <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20">
               {content ? (
