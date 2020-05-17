@@ -1299,6 +1299,12 @@
     "repo": "deno_process",
     "desc": "process module for Deno"
   },
+  "propx": {
+    "type": "github",
+    "owner": "luispagarcia",
+    "repo": "propx",
+    "desc": "Access and create object props safe and with confidence"
+  },
   "progressbar": {
     "type": "github",
     "owner": "jakobhellermann",
