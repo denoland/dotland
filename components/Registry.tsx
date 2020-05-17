@@ -176,7 +176,7 @@ const Registry = () => {
         {metaDescription({
           title: "deno.land/x",
           description: "A third party module for Deno.",
-          url: "https://deno.land/v1/",
+          url: `https://deno.land/x/${name || ""}`,
           image: "https://deno.land/v1_wide.jpg",
         })}
       </Head>
