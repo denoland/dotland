@@ -45,6 +45,9 @@ function Manual() {
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
 
   Router.events.on("routeChangeStart", () => setShowSidebar(false));
+  Router.events.on("routeChangeComplete", () =>
+    document.getElementsByClassName("manual")[0].scrollTo(0, 0)
+  );
 
   const [
     tableOfContents,
@@ -294,7 +297,7 @@ function Manual() {
           </div>
 
           <main
-            className="flex-1 relative z-0 overflow-y-auto focus:outline-none"
+            className="flex-1 relative z-0 overflow-y-auto focus:outline-none manual"
             tabIndex={0}
           >
             <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20">
