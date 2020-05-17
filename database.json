@@ -1233,6 +1233,12 @@
     "repo": "deno-plugin-prepare",
     "desc": "A library for managing deno native plugin dependencies."
   },
+  "podio": {
+    "type": "github",
+    "owner": "open-zhy",
+    "repo": "podio-ts",
+    "desc": "Podio client module for Deno and Typescript programming"
+  },  
   "pogo": {
     "type": "github",
     "owner": "sholladay",
