@@ -1112,6 +1112,12 @@
     "repo": "nanoid",
     "desc": "A tiny, secure, URL-friendly, unique string ID generator for JavaScript."
   },
+  "negotiator": {
+    "type": "github",
+    "owner": "ako-deno",
+    "repo": "negotiator",
+    "desc": "An HTTP content negotiator for Deno."
+  },
   "nessie": {
     "type": "github",
     "owner": "halvardssm",
