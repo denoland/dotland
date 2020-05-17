@@ -264,6 +264,12 @@
     "repo": "deno-csv",
     "desc": "Streaming API for reading and writing CSV"
   },
+  "cuid": {
+    "type": "github",
+    "owner": "grantcarthew",
+    "repo": "deno-cuid",
+    "desc": "Collision-resistant ids optimized for horizontal scaling and performance"
+  },
   "cursor": {
     "type": "github",
     "owner": "iamnathanj",
