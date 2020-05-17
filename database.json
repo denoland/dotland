@@ -84,6 +84,12 @@
     "repo": "deno-bcrypt",
     "desc": "BCrypt support for hashing and checking passwords"
   },
+  "behin": {
+    "type": "github",
+    "owner": "lolivei",
+    "repo": "behin",
+    "desc": "OTP - One-time password for Deno 🦕 (TOTP/HOTP)"
+  },
   "berror": {
     "type": "github",
     "owner": "baptistemarchand",
