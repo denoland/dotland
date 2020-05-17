@@ -1602,6 +1602,12 @@
     "repo": "tcr",
     "desc": "tcr will complie and run with deno when typescript file change, you can direct run tstypescript file"
   },
+  "teddytags": {
+    "type": "github",
+    "owner": "teddytags",
+    "repo": "teddytags",
+    "desc": "The superfast way to custom elements."
+  },
   "test_on_localhost": {
     "type": "github",
     "owner": "KSXGitHub",
