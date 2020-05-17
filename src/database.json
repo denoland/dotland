@@ -1407,5 +1407,11 @@
     "owner": "xpyxel",
     "repo": "deno-zstd",
     "desc": "Zstd compression library bindings for Deno"
+  },
+  "denopen": {
+    "type": "github",
+    "owner": "pagoru",
+    "repo": "denopen",
+    "desc": "Small deno module to open a link on browser."
   }
 }
