@@ -434,6 +434,12 @@
    "repo": "denodate",
    "desc": "Deno module for Intl-based dates"
   },
+  "denodb": {
+   "type": "github",
+   "owner": "eveningkid",
+   "repo": "denodb",
+   "desc": "MySQL, SQLite and PostgreSQL ORM for Deno"
+  },
   "denoenv": {
     "type": "github",
     "owner": "rubiin",
