@@ -17,6 +17,7 @@ import {
   formatKB,
 } from "../util/benchmark_utils";
 import BenchmarkChart, { BenchmarkLoading } from "../components/BenchmarkChart";
+import { metaDescription } from ".";
 
 // TODO(lucacasonato): add anchor points to headers
 const Benchmarks = () => {
@@ -47,26 +48,12 @@ const Benchmarks = () => {
       <Head>
         <title>Benchmarks - Deno</title>
 
-        <meta name="title" content="Benchmarks - Deno" />
-        <meta name="description" content="Continuous benchmarks for Deno." />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:url" content="https://deno.land" />
-        <meta name="twitter:title" content="Benchmarks - Deno" />
-        <meta
-          name="twitter:description"
-          content="Continuous benchmarks for Deno."
-        />
-        <meta name="twitter:image" content="https://deno.land/v1_wide.jpg" />
-
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://deno.land" />
-        <meta property="og:title" content="Benchmarks - Deno" />
-        <meta
-          property="og:description"
-          content="Continuous benchmarks for Deno."
-        />
-        <meta property="og:image" content="https://deno.land/v1_wide.jpg" />
+        {metaDescription({
+          title: "Benchmarks - Deno",
+          description: "Continuous benchmarks for Deno.",
+          url: "https://deno.land/benchmarks",
+          image: "https://deno.land/v1_wide.jpg",
+        })}
       </Head>
       <div className="bg-gray-50 min-h-full">
         <Header subtitle="Continuous Benchmarks" />
