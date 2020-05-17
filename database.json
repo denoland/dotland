@@ -222,6 +222,12 @@
     "repo": "config",
     "desc": "Load dotfiles / modules for a project consistently"
   },
+  "context": {
+    "type": "github",
+    "owner": "code-hex",
+    "repo": "deno-context",
+    "desc": "🦕 Propagate deadlines, a cancellation and other request-scoped values to multiple promise. The behaviour is like Go's context"
+  },
   "core": {
     "type": "github",
     "owner": "denoland",
