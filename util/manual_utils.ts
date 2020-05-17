@@ -31,3 +31,10 @@ export function getFileURL(version: string, path: string) {
 export function getDocURL(version: string, path: string) {
   return `${docpath}${version}/docs${path}.md`;
 }
+
+export function scrollTOCIntoView() {
+  setTimeout(
+    () => document.getElementsByClassName("toc-active")[0].scrollIntoView(),
+    0
+  );
+}

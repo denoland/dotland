@@ -42,7 +42,7 @@
     "repo": "framework",
     "desc": "The next-generation type-safe web framework."
   },
-   "attain": {
+  "attain": {
     "type": "github",
     "owner": "aaronwlee",
     "repo": "attain",
@@ -264,6 +264,12 @@
     "repo": "deno-csv",
     "desc": "Streaming API for reading and writing CSV"
   },
+  "cuid": {
+    "type": "github",
+    "owner": "grantcarthew",
+    "repo": "deno-cuid",
+    "desc": "Collision-resistant ids optimized for horizontal scaling and performance"
+  },
   "cursor": {
     "type": "github",
     "owner": "iamnathanj",
@@ -374,6 +380,12 @@
     "repo": "deno",
     "desc": "A secure runtime for JavaScript and TypeScript."
   },
+  "deno_app_setuper": {
+    "type": "github",
+    "owner": "alreadyExisted",
+    "repo": "deno_app_setuper",
+    "desc": "A CLI to setup apps like a Create React App."
+  },
   "deno_deblong": {
     "type": "github",
     "owner": "nusendra",
@@ -417,10 +429,16 @@
     "desc": "A structured logging module for Deno"
   },
   "denodate": {
+    "type": "github",
+    "owner": "t-heu",
+    "repo": "denodate",
+    "desc": "Deno module for Intl-based dates"
+  },
+  "denodb": {
    "type": "github",
-   "owner": "t-heu",
-   "repo": "denodate",
-   "desc": "Deno module for Intl-based dates"
+   "owner": "eveningkid",
+   "repo": "denodb",
+   "desc": "MySQL, SQLite and PostgreSQL ORM for Deno"
   },
   "denoenv": {
     "type": "github",
@@ -1016,11 +1034,23 @@
     "repo": "microraptor",
     "desc": "A deno lightweight middleware for easy REST development"
   },
+  "minidate": {
+    "type": "github",
+    "owner": "bernardini687",
+    "repo": "minidate",
+    "desc": "Shape a date from minimal input"
+  },
   "minimatch": {
     "type": "github",
     "owner": "chrisdothtml",
     "repo": "deno-minimatch",
     "desc": "A deno port of minimatch"
+  },
+  "mith": {
+    "type": "github",
+    "owner": "jwebcoder",
+    "repo": "mith",
+    "desc": "A middleware framework for http/s servers"
   },
   "mixins": {
     "type": "github",
@@ -1106,6 +1136,12 @@
     "owner": "Joralmo",
     "repo": "deno-wrapper-novelcovid",
     "desc": "Wrapper of NovelCOVID/API for Deno"
+  },
+  "number_formatter": {
+    "type": "github",
+    "owner": "nusendra",
+    "repo": "deno-number-formatter",
+    "desc": "A number formmatter for Deno"
   },
   "oak": {
     "type": "github",
@@ -1282,6 +1318,12 @@
     "repo": "qrcode",
     "desc": "Generate QR codes in Deno as base64-encoded images without any dependencies or binaries"
   },
+  "qs": {
+    "type": "github",
+    "owner": "adrijere",
+    "repo": "deno-qs",
+    "desc": "A querystring parser"
+  },
   "rad": {
     "type": "github",
     "owner": "cdaringe",
@@ -1294,7 +1336,7 @@
     "repo": "deno-rand",
     "desc": "Deno rand library"
   },
-   "random": {
+  "random": {
     "type": "github",
     "owner": "vincentvictoria",
     "repo": "random",
@@ -1342,6 +1384,12 @@
     "repo": "noble-ripemd160",
     "desc": "RIPEMD160, a cryptographic hash function."
   },
+  "router": {
+    "type": "github",
+    "owner": "zhmushan",
+    "repo": "router",
+    "desc": "A high-performance basic router works everywhere."
+  },
   "rsync_parser": {
     "type": "github",
     "owner": "daniel-araujo",
@@ -1386,10 +1434,10 @@
   },
   "serializexml": {
     "type": "github",
-    "owner": "olaven", 
-    "repo": "serialize-xml", 
+    "owner": "olaven",
+    "repo": "serialize-xml",
     "desc": "Serialize (i.e. stringify) XML"
-  }, 
+  },
   "servicr": {
     "type": "github",
     "owner": "astanciu",
@@ -1572,6 +1620,12 @@
     "repo": "tcr",
     "desc": "tcr will complie and run with deno when typescript file change, you can direct run tstypescript file"
   },
+  "teddytags": {
+    "type": "github",
+    "owner": "teddytags",
+    "repo": "teddytags",
+    "desc": "The superfast way to custom elements."
+  },
   "test_on_localhost": {
     "type": "github",
     "owner": "KSXGitHub",
@@ -1678,7 +1732,7 @@
     "repo": "velociraptor",
     "desc": "An npm-style script runner for Deno"
   },
-   "view_engine": {
+  "view_engine": {
     "type": "github",
     "owner": "gjuoun",
     "repo": "view-engine",

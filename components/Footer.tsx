@@ -10,11 +10,18 @@ const Footer = (props: { simple?: boolean }) => (
     <div className="max-w-screen-xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
       <nav className="-mx-5 -my-2 flex flex-wrap justify-center">
         <div className="px-5 py-2">
+          <Link href="/[identifier]" as="/manual">
+            <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
+              The Manual
+            </a>
+          </Link>
+        </div>
+        <div className="px-5 py-2">
           <a
             href="https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts"
             className="text-base leading-6 text-gray-500 hover:text-gray-900"
           >
-            Runtime Documentation
+            API Docs
           </a>
         </div>
         <div className="px-5 py-2">
