@@ -1046,6 +1046,12 @@
     "repo": "mandarinets",
     "desc": "A MVC Framework built on Typescript that runs on Deno. Components, Dependency Injection, Sessions, Security and more."
   },
+  "markdown": {
+    "type": "github",
+    "owner": "ubersl0th",
+    "repo": "markdown",
+    "desc": "A full-featured markdown parser and compiler, written in TypeScript. Forked from https://github.com/ts-stack/markdown"
+  },
   "match": {
     "type": "github",
     "owner": "gustavofsantos",
