@@ -1522,6 +1522,12 @@
     "repo": "rubico",
     "desc": "a functional promise library"
   },
+  "rug": {
+    "type": "github",
+    "owner": "naktrem",
+    "repo": "rug",
+    "desc": "Simple username generator for deno."
+  },
   "run_exclusive": {
     "type": "github",
     "owner": "garronej",
