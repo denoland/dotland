@@ -370,9 +370,9 @@ function Manual() {
                       </Link>
                     )}
                   </div>
-                  <div className="pt-2">
+                  <div className="pt-2 clear-both">
                     <a
-                      className="text-gray-500 hover:text-gray-400 font-normal float-right clear-both"
+                      className="text-gray-500 hover:text-gray-400 font-normal float-right"
                       href={getDocURL(version ?? "master", path)}
                     >
                       View on GitHub
