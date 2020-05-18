@@ -53,35 +53,29 @@ export const RawCodeBlock = ({
             )}
           {tokens.length > 1 && !disablePrefixes && (
             <code className="pr-2 sm:pr-3">
-              {tokens.map(
-                (line, i) =>
-                  !(i === tokens.length - 1 && line.length === 1) && (
-                    <div
-                      key={i + "l"}
-                      className="text-gray-400 token-line text-right select-none"
-                    >
-                      {i + 1}{" "}
-                    </div>
-                  )
+              {tokens.map((line, i) =>
+                line[0]?.empty && i === tokens.length - 1 ? null : (
+                  <div
+                    key={i + "l"}
+                    className="text-gray-400 token-line text-right select-none"
+                  >
+                    {i + 1}{" "}
+                  </div>
+                )
               )}
             </code>
           )}
           <code>
-            {tokens.map((line, i) => (
-              <div key={i} {...getLineProps({ line, key: i })}>
-                {line.length === 1
-                  ? i !== tokens.length - 1 && (
-                      <span
-                        {...getTokenProps({ token: line[0], key: 0 })}
-                        // eslint-disable-next-line react/no-children-prop
-                        children={"\n"}
-                      />
-                    )
-                  : line.map((token, key) => (
-                      <span key={key} {...getTokenProps({ token, key })} />
-                    ))}
-              </div>
-            ))}
+            {tokens.map((line, i) =>
+              line[0]?.empty && i === tokens.length - 1 ? null : (
+                <div key={i} {...getLineProps({ line, key: i })}>
+                  {line.map((token, key) => (
+                    <span key={key} {...getTokenProps({ token, key })} />
+                  ))}
+                  {line[0]?.empty ? "\n" : ""}
+                </div>
+              )
+            )}
           </code>
         </pre>
       )}
