@@ -930,6 +930,12 @@
     "repo": "deno-is",
     "desc": "Detect the running environment and context of the current script."
   },
+  "isIP": {
+    "type": "github",
+    "owner": "ako-deno",
+    "repo": "isIP",
+    "desc": "IP address detector for Deno."
+  },
   "is_exe": {
     "type": "github",
     "owner": "eankeen",
