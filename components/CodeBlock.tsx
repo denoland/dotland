@@ -117,4 +117,3 @@ const CodeBlock = ({ code, language, disablePrefixes }: CodeBlockProps) => {
 };
 
 export default CodeBlock;
-
