@@ -1317,6 +1317,12 @@
     "repo": "deno-postgres",
     "desc": "PostgreSQL driver for Deno."
   },
+  "postjs": {
+    "type": "github",
+    "owner": "postui",
+    "repo": "postjs",
+    "desc": "The radical new Front-End Framework with deno."
+  },
   "prettier": {
     "type": "github",
     "owner": "denolib",
