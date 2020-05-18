@@ -1902,5 +1902,11 @@
     "owner": "xpyxel",
     "repo": "deno-zstd",
     "desc": "Zstd compression library bindings for Deno"
-  }
+  },
+  "denet": {
+    "type": "github", 
+    "owner": "ryaangu", 
+    "repo": "denet",
+    "desc": "Easy Game Networking module for Deno."
+  },
 }
