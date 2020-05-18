@@ -906,7 +906,7 @@
     "repo": "is_exe",
     "desc": "detect if a file is executable or not"
   },
-    "is_url": {
+  "is_url": {
     "type": "github",
     "owner": "rubiin",
     "repo": "is_url",
@@ -1209,6 +1209,12 @@
     "repo": "oak",
     "desc": "A middleware framework for Deno's http server, including a router middleware."
   },
+  "oak-middleware": {
+    "type": "github",
+    "owner": "oakserver",
+    "repo": "middleware",
+    "desc": "A collection of middleware for the oak middleware framework."
+  },
   "observable": {
     "type": "github",
     "owner": "bsunderhus",
@@ -1280,7 +1286,7 @@
     "owner": "open-zhy",
     "repo": "podio-ts",
     "desc": "Podio client module for Deno and Typescript programming"
-  },  
+  },
   "pogo": {
     "type": "github",
     "owner": "sholladay",
