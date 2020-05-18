@@ -735,6 +735,12 @@
     "repo": "evt",
     "desc": "💧A type safe replacement for Node's EventEmitter💧"
   },
+  "exec": {
+    "type": "github",
+    "owner": "gpasq",
+    "repo": "deno-exec",
+    "desc": "Run external applications more easily and with numerous options."
+  },
   "expect": {
     "type": "github",
     "owner": "allain",
