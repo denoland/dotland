@@ -9,7 +9,7 @@ const Header = ({ subtitle }: { subtitle?: string }) => {
 
   return (
     <div className="relative py-6">
-      <nav className="max-w-screen-lg mx-auto flex items-center justify-between px-4 sm:px-6">
+      <nav className="max-w-screen-lg mx-auto flex items-center justify-between px-3">
         <Link href="/">
           <a className="block flex items-center">
             <img className="h-10 w-auto sm:h-12 my-2" src="/logo.svg" alt="" />
