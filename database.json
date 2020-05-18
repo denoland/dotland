@@ -398,6 +398,12 @@
     "repo": "dem",
     "desc": "A module version manager for Deno."
   },
+  "denet": {
+    "type": "github",
+    "owner": "ryaangu",
+    "repo": "denet",
+    "desc": "Easy Game Networking module for Deno."
+  },
   "denjucks": {
     "type": "github",
     "owner": "denjucks",
