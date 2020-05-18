@@ -1676,6 +1676,12 @@
     "repo": "deno-sqlite",
     "desc": "JavaScript SQLite Module"
   },
+  "sqlite_plugin": {
+    "type": "github",
+    "owner": "crabmusket",
+    "repo": "deno_sqlite_plugin",
+    "desc": "Native plugin for SQLite using rusqlite"
+  },
   "status": {
     "type": "github",
     "owner": "denosaurs",
