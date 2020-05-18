@@ -42,6 +42,12 @@
     "repo": "framework",
     "desc": "The next-generation type-safe web framework."
   },
+  "ask": {
+    "type": "github",
+    "owner": "jozsefsallai",
+    "repo": "ask",
+    "desc": "Interactive command-line prompts for Deno."
+  },
   "attain": {
     "type": "github",
     "owner": "aaronwlee",
@@ -77,6 +83,12 @@
     "owner": "jamesbroadberry",
     "repo": "deno-bcrypt",
     "desc": "BCrypt support for hashing and checking passwords"
+  },
+  "behin": {
+    "type": "github",
+    "owner": "lolivei",
+    "repo": "behin",
+    "desc": "OTP - One-time password for Deno 🦕 (TOTP/HOTP)"
   },
   "berror": {
     "type": "github",
@@ -441,10 +453,10 @@
     "desc": "Deno module for Intl-based dates"
   },
   "denodb": {
-   "type": "github",
-   "owner": "eveningkid",
-   "repo": "denodb",
-   "desc": "MySQL, SQLite and PostgreSQL ORM for Deno"
+    "type": "github",
+    "owner": "eveningkid",
+    "repo": "denodb",
+    "desc": "MySQL, SQLite and PostgreSQL ORM for Deno"
   },
   "denoenv": {
     "type": "github",
@@ -566,6 +578,12 @@
     "owner": "skillz4killz",
     "repo": "discordeno",
     "desc": "Discord API library wrapper for Deno https://discordeno.js.org"
+  },
+  "dislocator": {
+    "type": "github",
+    "owner": "abhi11210646",
+    "repo": "dislocator",
+    "desc": "Deno module for Service Locator pattern"
   },
   "djwt": {
     "type": "github",
@@ -888,6 +906,12 @@
     "repo": "is_exe",
     "desc": "detect if a file is executable or not"
   },
+    "is_url": {
+    "type": "github",
+    "owner": "rubiin",
+    "repo": "is_url",
+    "desc": "Check if a URL is absolute"
+  },
   "jbq": {
     "type": "github",
     "owner": "krnik",
@@ -911,6 +935,12 @@
     "owner": "ondras",
     "repo": "deno-json-rpc",
     "desc": "JSON-RPC interface"
+  },
+  "json_server": {
+    "type": "github",
+    "owner": "magnattic",
+    "repo": "json-server",
+    "desc": "Zero code fake backend for development"
   },
   "jszip": {
     "type": "github",
@@ -974,6 +1004,12 @@
     "repo": "deno_license_checker",
     "desc": "This tool checks the license headers in the files in a git repository. You can configure which files should have which license texts with .licenserc.json."
   },
+  "lifeson_ipsum": {
+    "type": "github",
+    "owner": "snerks",
+    "repo": "lifeson-ipsum",
+    "desc": "Lorem Ipsum generator, based on Alex Lifeson's acceptance speech for Rush in 2013."
+  },
   "lodash": {
     "type": "github",
     "owner": "lodash",
@@ -985,6 +1021,12 @@
     "owner": "TokenChingy",
     "repo": "lodash_require",
     "desc": "Lodash for the Deno runtime."
+  },
+  "lolcat": {
+    "type": "github",
+    "owner": "qwerttty",
+    "repo": "lolcat",
+    "desc": "This is a Deno port of the node port of the famous lolcat gem."
   },
   "luhn": {
     "type": "github",
@@ -1003,6 +1045,12 @@
     "owner": "mandarineorg",
     "repo": "mandarinets",
     "desc": "A MVC Framework built on Typescript that runs on Deno. Components, Dependency Injection, Sessions, Security and more."
+  },
+  "markdown": {
+    "type": "github",
+    "owner": "ubersl0th",
+    "repo": "markdown",
+    "desc": "A full-featured markdown parser and compiler, written in TypeScript. Forked from https://github.com/ts-stack/markdown"
   },
   "match": {
     "type": "github",
@@ -1227,6 +1275,12 @@
     "repo": "deno-plugin-prepare",
     "desc": "A library for managing deno native plugin dependencies."
   },
+  "podio": {
+    "type": "github",
+    "owner": "open-zhy",
+    "repo": "podio-ts",
+    "desc": "Podio client module for Deno and Typescript programming"
+  },  
   "pogo": {
     "type": "github",
     "owner": "sholladay",
@@ -1298,6 +1352,12 @@
     "owner": "jakobhellermann",
     "repo": "deno-progressbar",
     "desc": "create terminal progressbars"
+  },
+  "propx": {
+    "type": "github",
+    "owner": "luispagarcia",
+    "repo": "propx",
+    "desc": "Access and create object props safe and with confidence"
   },
   "protobuf": {
     "type": "github",
@@ -1788,6 +1848,12 @@
     "owner": "ebebbington",
     "repo": "deno-watch-v2",
     "desc": "deno-watch-v2"
+  },
+  "websocket": {
+    "type": "github",
+    "owner": "ryo-ma",
+    "repo": "deno-websocket",
+    "desc": "🦕A simple WebScoket library like ws of node.js"
   },
   "webview": {
     "type": "github",
