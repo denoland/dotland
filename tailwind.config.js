@@ -25,5 +25,5 @@ module.exports = {
   variants: {
     backgroundColor: ["responsive", "hover", "focus", "active"],
   },
-  plugins: [require("@tailwindcss/ui")],
+  plugins: [require("@tailwindcss/ui"), require("tailwindcss-hyphens")],
 };
