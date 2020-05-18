@@ -45,13 +45,21 @@ function Manual() {
 
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
 
-  Router.events.on("routeChangeStart", () => setShowSidebar(false));
+  const hideSidebar = () => setShowSidebar(false);
 
   const manualEl = useRef<HTMLElement>(null);
 
-  Router.events.on("routeChangeComplete", () =>
-    manualEl.current?.scrollTo(0, 0)
-  );
+  const handleRouteChange = () => manualEl.current?.scrollTo(0, 0);
+
+  useEffect(() => {
+    Router.events.on("routeChangeStart", hideSidebar);
+    Router.events.on("routeChangeComplete", handleRouteChange);
+
+    return () => {
+      Router.events.off("routeChangeStart", hideSidebar);
+      Router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  });
 
   useEffect(() => {
     if (showSidebar) {
@@ -143,7 +151,7 @@ function Manual() {
                 <div className="fixed inset-0">
                   <div
                     className="absolute inset-0 bg-gray-600 opacity-75"
-                    onClick={() => setShowSidebar(false)}
+                    onClick={hideSidebar}
                   ></div>
                 </div>
               </Transition>
@@ -160,7 +168,7 @@ function Manual() {
                     <button
                       className="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600"
                       aria-label="Close sidebar"
-                      onClick={() => setShowSidebar(false)}
+                      onClick={hideSidebar}
                     >
                       <svg
                         className="h-6 w-6 text-white"
