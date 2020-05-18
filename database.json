@@ -984,6 +984,12 @@
     "repo": "deno-zip",
     "desc": "A wrapper around JSZip for handling zipfiles in deno"
   },
+  "katana": {
+    "type": "github",
+    "owner": "ansonfoong",
+    "repo": "katana",
+    "desc": "Unofficial Discord API & Gateway Wrapper for building Discord Bots"
+  },
   "keycode": {
     "type": "github",
     "owner": "kabirbaidhya",
