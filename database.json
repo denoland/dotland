@@ -1209,7 +1209,7 @@
     "repo": "oak",
     "desc": "A middleware framework for Deno's http server, including a router middleware."
   },
-  "oak-middleware": {
+  "oak_middleware": {
     "type": "github",
     "owner": "oakserver",
     "repo": "middleware",
