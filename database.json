@@ -222,6 +222,12 @@
     "repo": "clone",
     "desc": "A simple utility for the convenient clone."
   },
+  "cmd": {
+    "type": "github",
+    "owner": "Acathur",
+    "repo": "cmd",
+    "desc": "Commander.js (command-line interfaces) for Deno."
+  },
   "collections": {
     "type": "github",
     "owner": "hayd",
