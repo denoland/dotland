@@ -108,6 +108,12 @@
     "repo": "blake2b",
     "desc": "BLAKE2b implemented in WebAssembly."
   },
+  "blox": {
+    "type": "github",
+    "owner": "goldyydev",
+    "repo": "deno-blox",
+    "desc": "A Roblox API Wrapper in Deno."
+  },
   "bls12_381": {
     "type": "github",
     "owner": "paulmillr",
