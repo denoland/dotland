@@ -1088,7 +1088,7 @@
     "repo": "microraptor",
     "desc": "A deno lightweight middleware for easy REST development"
   },
-  "mime-types": {
+  "mimes": {
     "type": "github",
     "owner": "CoolDeveloper101",
     "repo": "mime-types",
