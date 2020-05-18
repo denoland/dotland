@@ -1202,6 +1202,12 @@
     "repo": "nanoid",
     "desc": "A tiny, secure, URL-friendly, unique string ID generator for JavaScript."
   },
+  "ndjson": {
+    "type": "github",
+    "owner": "FaberVitale",
+    "repo": "deno-ndjson",
+    "desc": "Read, write and parse new line delimited json in deno."
+  },
   "negotiator": {
     "type": "github",
     "owner": "ako-deno",
