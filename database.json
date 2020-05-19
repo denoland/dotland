@@ -1782,6 +1782,12 @@
     "repo": "teddytags",
     "desc": "The superfast way to custom elements."
   },
+  "termcolorizer": {
+    "type": "github",
+    "owner": "jahzielv",
+    "repo": "deno-term-color",
+    "desc": "TermColorizer adds color your terminal/console output! ANSI and RGB colors supported 🎨"
+  },
   "test_on_localhost": {
     "type": "github",
     "owner": "KSXGitHub",
