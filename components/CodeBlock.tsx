@@ -1,6 +1,8 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import Router from "next/router";
 import Highlight, { Prism } from "prism-react-renderer";
 import light from "prism-react-renderer/themes/github";
 
@@ -20,12 +22,25 @@ export interface CodeBlockProps {
     | "text";
 }
 
+const regex = /#L([\d,-]+)/;
+
 export const RawCodeBlock = ({
   code,
   language,
   className: extraClassName,
   disablePrefixes,
 }: CodeBlockProps & { className?: string }) => {
+  const [hashValue, setHashValue] = useState("");
+  const { hash } = location;
+  setHashValue(hash);
+  useEffect(() => {
+    Router.events.on("hashChangeComplete", (url: any) => {
+      setHashValue(url.slice(url.indexOf("#")));
+    });
+    return () => {
+      Router.events.off("hashChangeComplete");
+    };
+  }, []);
   return (
     <Highlight
       Prism={Prism}
@@ -59,23 +74,28 @@ export const RawCodeBlock = ({
                     key={i + "l"}
                     className="text-gray-400 token-line text-right select-none"
                   >
-                    {i + 1}{" "}
+                    <Link href={`#L${i + 1}`}>
+                      <a>{i + 1} </a>
+                    </Link>
                   </div>
                 )
               )}
             </code>
           )}
           <code>
-            {tokens.map((line, i) =>
-              line[0]?.empty && i === tokens.length - 1 ? null : (
-                <div key={i} {...getLineProps({ line, key: i })}>
+            {tokens.map((line, i) => {
+              const lineProps = getLineProps({ line, key: i });
+              if (!regex.test(hashValue) ? false : parseInt(regex.exec(hashValue)[1], 10) === (i + 1))
+                lineProps.className = `${lineProps.className} highlight-line`;
+              return line[0]?.empty && i === tokens.length - 1 ? null : (
+                <div key={i} {...lineProps}>
                   {line.map((token, key) => (
                     <span key={key} {...getTokenProps({ token, key })} />
                   ))}
                   {line[0]?.empty ? "\n" : ""}
                 </div>
-              )
-            )}
+              );
+            })}
           </code>
         </pre>
       )}
