@@ -9,7 +9,8 @@ function LoadingPage() {
         <title>Deno</title>
         {metaDescription({
           title: "Deno",
-          description: "Deno, a secure runtime for JavaScript and TypeScript.",
+          description:
+            "Deno is a simple, modern and secure runtime for JavaScript and TypeScript that uses V8 and is built in Rust.",
           image: "https://deno.land/v1_wide.jpg",
         })}
       </Head>

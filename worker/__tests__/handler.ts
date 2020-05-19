@@ -15,7 +15,7 @@ describe("worker proxying", () => {
     expect(result.headers.get("Content-Type")).toContain("text/html");
     const text = await result.text();
     expect(text).toContain(
-      'content="Deno, a secure runtime for JavaScript and TypeScript."'
+      'content="Deno is a simple, modern and secure runtime for JavaScript and TypeScript that uses V8 and is built in Rust."'
     );
   }, 5000);
 
@@ -44,7 +44,7 @@ describe("worker proxying", () => {
     expect(result.headers.get("Content-Type")).toContain("text/html");
     const text = await result.text();
     expect(text).toContain(
-      'content="Deno, a secure runtime for JavaScript and TypeScript."'
+      'content="Deno is a simple, modern and secure runtime for JavaScript and TypeScript that uses V8 and is built in Rust."'
     );
   }, 5000);
 
@@ -94,7 +94,7 @@ describe("worker proxying", () => {
     expect(result.headers.get("Content-Type")).toContain("text/html");
     const text = await result.text();
     expect(text).toContain(
-      'content="Deno, a secure runtime for JavaScript and TypeScript."'
+      'content="Deno is a simple, modern and secure runtime for JavaScript and TypeScript that uses V8 and is built in Rust."'
     );
   }, 5000);
 

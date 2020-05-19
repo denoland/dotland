@@ -175,7 +175,8 @@ const Registry = () => {
         </title>
         {metaDescription({
           title: "deno.land/x",
-          description: "A third party module for Deno.",
+          description:
+            "Deno is a simple, modern and secure runtime for JavaScript and TypeScript that uses V8 and is built in Rust.",
           url: `https://deno.land/x/${name || ""}`,
           image: "https://deno.land/v1_wide.jpg",
         })}
