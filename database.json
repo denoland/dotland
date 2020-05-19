@@ -1450,6 +1450,12 @@
     "repo": "deno-purify",
     "desc": "A deno port of purify-ts."
   },
+  "q": {
+    "type": "github",
+    "owner": "phil-r",
+    "repo": "q",
+    "desc": "Simple task/job queue"
+  },
   "qrcode": {
     "type": "github",
     "owner": "denorg",
