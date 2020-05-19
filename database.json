@@ -1323,7 +1323,7 @@
     "repo": "PerlinNoise-Deno",
     "desc": "A simple to use perlin noise module for typescript."
   },
-  "pg-format": {
+  "pg_format": {
     "type": "github",
     "owner": "grantcarthew",
     "repo": "deno-pg-format",
