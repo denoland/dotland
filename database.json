@@ -1933,7 +1933,7 @@
     "repo": "deno_webview",
     "desc": "Deno bindings for webview, a tiny library for creating web-based desktop GUIs "
   },
-  "deno-windows": {
+  "deno_windows": {
 	"type": "github",
     "owner": "rafaelferres",
     "repo": "deno-windows",
