@@ -747,6 +747,12 @@
     "repo": "deno-exec",
     "desc": "Run external applications more easily and with numerous options."
   },
+  "execute": {
+    "type": "github",
+    "owner": "Acathur",
+    "repo": "exec",
+    "desc": "Execute and get the output of a shell or bash command in Deno."
+  },
   "expect": {
     "type": "github",
     "owner": "allain",
