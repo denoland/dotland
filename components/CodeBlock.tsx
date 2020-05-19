@@ -5,6 +5,7 @@ import Link from "next/link";
 import Router from "next/router";
 import Highlight, { Prism } from "prism-react-renderer";
 import light from "prism-react-renderer/themes/github";
+import { useLayoutEffect } from "react";
 
 export interface CodeBlockProps {
   code: string;
@@ -21,8 +22,6 @@ export interface CodeBlockProps {
     | "shell"
     | "text";
 }
-
-const regex = /([\d]+)/;
 
 export const RawCodeBlock = ({
   code,
@@ -41,6 +40,23 @@ export const RawCodeBlock = ({
       Router.events.off("hashChangeComplete", () => {});
     };
   }, []);
+
+  useLayoutEffect(() => {
+    const hash = hashValue
+      .split("-")
+      .map((e) => /([\d]+)/.exec(e)![0])
+      .map((e) => parseInt(e, 10))
+      .sort((a, b) => a - b)
+      .map((e) => `L${e}`);
+    if (hash.length) {
+      const idEl = document.getElementById(hash[0]);
+      if (idEl) {
+        idEl.scrollIntoView({ block: "center", behavior: "smooth" });
+        return;
+      }
+    }
+  });
+
   return (
     <Highlight
       Prism={Prism}
@@ -75,7 +91,9 @@ export const RawCodeBlock = ({
                     className="text-gray-400 token-line text-right select-none"
                   >
                     <Link href={`#L${i + 1}`}>
-                      <a id={`L${i + 1}`} href={`#L${i + 1}`}>{i + 1} </a>
+                      <a id={`L${i + 1}`} href={`#L${i + 1}`}>
+                        {i + 1}{" "}
+                      </a>
                     </Link>
                   </div>
                 )
@@ -91,7 +109,7 @@ export const RawCodeBlock = ({
                   Math.min(...arr) <= index && index <= Math.max(...arr))(
                   hashValue
                     .split("-")
-                    .map((e) => regex.exec(e)![1])
+                    .map((e) => /([\d]+)/.exec(e)![1])
                     .map((n) => parseInt(n, 10)),
                   i + 1
                 )
