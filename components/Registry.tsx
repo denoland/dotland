@@ -513,8 +513,12 @@ function DirectoryListing(props: {
                         </td>
                         <td className="px-4 py-1 whitespace-no-wrap text-sm leading-5 text-gray-500 text-right">
                           {
-                          // TODO(kennanseno): Directory should pull total size inside it. 
-                          entry.type === "dir" ? "" : (entry.size !== undefined ? bytesToSize(entry.size) : "N/A")
+                            /** TODO(kennanseno): Directory should pull total size inside it.  */
+                            entry.type === "dir"
+                              ? ""
+                              : entry.size !== undefined
+                              ? bytesToSize(entry.size)
+                              : "N/A"
                           }
                         </td>
                       </tr>
