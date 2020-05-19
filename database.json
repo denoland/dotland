@@ -573,6 +573,12 @@
     "repo": "denv",
     "desc": "A module similar to dotEnv, but for Deno"
   },
+  "descord": {
+    "type": "github",
+    "owner": "TheDrone7",
+    "repo": "descord",
+    "desc": "A discord bot library for Deno."
+  },
   "dev_server": {
     "type": "github",
     "owner": "zhmushan",
