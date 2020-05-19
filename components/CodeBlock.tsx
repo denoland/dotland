@@ -31,14 +31,14 @@ export const RawCodeBlock = ({
   disablePrefixes,
 }: CodeBlockProps & { className?: string }) => {
   const [hashValue, setHashValue] = useState("");
-  const { hash } = location;
-  setHashValue(hash);
   useEffect(() => {
     Router.events.on("hashChangeComplete", (url: any) => {
       setHashValue(url.slice(url.indexOf("#")));
     });
+    const { hash } = location;
+    setHashValue(hash);
     return () => {
-      Router.events.off("hashChangeComplete");
+      Router.events.off("hashChangeComplete", () => {});
     };
   }, []);
   return (
@@ -75,7 +75,7 @@ export const RawCodeBlock = ({
                     className="text-gray-400 token-line text-right select-none"
                   >
                     <Link href={`#L${i + 1}`}>
-                      <a>{i + 1} </a>
+                      <a id={`L${i + 1}`} href={`#L${i + 1}`}>{i + 1} </a>
                     </Link>
                   </div>
                 )
@@ -89,7 +89,10 @@ export const RawCodeBlock = ({
                 hashValue &&
                 ((arr, index) =>
                   Math.min(...arr) <= index && index <= Math.max(...arr))(
-                  hashValue.split("-").map((e) => regex.exec(e)[1]),
+                  hashValue
+                    .split("-")
+                    .map((e) => regex.exec(e)![1])
+                    .map((n) => parseInt(n, 10)),
                   i + 1
                 )
               ) {
