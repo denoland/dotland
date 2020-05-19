@@ -470,6 +470,12 @@
     "repo": "deno_twitter_api",
     "desc": "A module to make accessing the Twitter Developer Api easy"
   },
+  "deno_windows": {
+	"type": "github",
+    "owner": "rafaelferres",
+    "repo": "deno-windows",
+    "desc": "Windows Service controller for Deno."
+  },
   "denodate": {
     "type": "github",
     "owner": "t-heu",
