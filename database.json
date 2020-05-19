@@ -422,6 +422,12 @@
     "repo": "deno",
     "desc": "A secure runtime for JavaScript and TypeScript."
   },
+  "deno-check-updates": {
+    "type": "github",
+    "owner": "fzwael",
+    "repo": "deno-check-updates",
+    "desc": "Automatically checks deno dependencies versions from import maps file."
+  },
   "deno_app_setuper": {
     "type": "github",
     "owner": "alreadyExisted",
