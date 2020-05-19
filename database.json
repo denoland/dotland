@@ -1088,6 +1088,12 @@
     "repo": "deno-luhn",
     "desc": "Luhn Algorithm Validator"
   },
+  "mac": {
+    "type": "github",
+    "owner": "Acathur",
+    "repo": "mac",
+    "desc": "Get the MAC addresses of the current machine."
+  },
   "machine_id": {
     "type": "github",
     "owner": "axetroy",
