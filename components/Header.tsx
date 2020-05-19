@@ -14,8 +14,8 @@ const Header = ({ subtitle }: { subtitle?: string }) => {
           <a className="block flex items-center">
             <img className="h-10 w-auto sm:h-12 my-2" src="/logo.svg" alt="" />
             <div className="ml-5 flex flex-col justify-center">
-              <div className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
-                Deno
+              <div className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight capitalize">
+                {"node".split("").sort().join("")}
               </div>
               {subtitle && (
                 <div className="font-normal text-sm sm:text-lg leading-tight tracking-tight">
