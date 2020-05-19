@@ -28,7 +28,8 @@ export const RawCodeBlock = ({
   language,
   className: extraClassName,
   disablePrefixes,
-}: CodeBlockProps & { className?: string }) => {
+  enableLineRef = false,
+}: CodeBlockProps & { className?: string; enableLineRef?: boolean }) => {
   const [hashValue, setHashValue] = useState("");
   useEffect(() => {
     Router.events.on("hashChangeComplete", (url: any) => {
@@ -90,11 +91,15 @@ export const RawCodeBlock = ({
                     key={i + "l"}
                     className="text-gray-400 token-line text-right select-none"
                   >
-                    <Link href={`#L${i + 1}`}>
-                      <a id={`L${i + 1}`} href={`#L${i + 1}`}>
-                        {i + 1}{" "}
-                      </a>
-                    </Link>
+                    {enableLineRef ? (
+                      <Link href={`#L${i + 1}`}>
+                        <a id={`L${i + 1}`} href={`#L${i + 1}`}>
+                          {i + 1}{" "}
+                        </a>
+                      </Link>
+                    ) : (
+                      i + 1
+                    )}
                   </div>
                 )
               )}
@@ -104,6 +109,7 @@ export const RawCodeBlock = ({
             {tokens.map((line, i) => {
               const lineProps = getLineProps({ line, key: i });
               if (
+                enableLineRef &&
                 hashValue &&
                 ((arr, index) =>
                   Math.min(...arr) <= index && index <= Math.max(...arr))(
