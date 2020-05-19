@@ -1184,7 +1184,7 @@
     "repo": "mith",
     "desc": "A middleware framework for http/s servers"
   },
-  "mith-router": {
+  "mith_router": {
     "type": "github",
     "owner": "jwebcoder",
     "repo": "mith-router",
