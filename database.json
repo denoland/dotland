@@ -476,8 +476,14 @@
     "repo": "deno_twitter_api",
     "desc": "A module to make accessing the Twitter Developer Api easy"
   },
+  "deno_weather": {
+    "type": "github",
+    "owner": "yeukfei02",
+    "repo": "deno-weather",
+    "desc": "get current weather by city name, state and country code"
+  },
   "deno_windows": {
-	"type": "github",
+	  "type": "github",
     "owner": "rafaelferres",
     "repo": "deno-windows",
     "desc": "Windows Service controller for Deno."
@@ -2034,11 +2040,5 @@
     "owner": "xpyxel",
     "repo": "deno-zstd",
     "desc": "Zstd compression library bindings for Deno"
-  },
-  "deno-weather": {
-    "type": "github",
-    "owner": "yeukfei02",
-    "repo": "deno-weather",
-    "desc": "get current weather by city name, state and country code"
   }
 }
