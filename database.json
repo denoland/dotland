@@ -2034,5 +2034,11 @@
     "owner": "xpyxel",
     "repo": "deno-zstd",
     "desc": "Zstd compression library bindings for Deno"
+  },
+  "deno-weather": {
+    "type": "github",
+    "owner": "yeukfei02",
+    "repo": "deno-weather",
+    "desc": "get current weather by city name, state and country code"
   }
 }
