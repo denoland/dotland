@@ -542,7 +542,7 @@
     "owner": "TheDrone7",
     "repo": "descord",
     "desc": "A discord bot library for Deno."
-  }
+  },
   "dev_server": {
     "type": "github",
     "owner": "zhmushan",
