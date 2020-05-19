@@ -22,7 +22,7 @@ export interface CodeBlockProps {
     | "text";
 }
 
-const regex = /#L([\d,-]+)/;
+const regex = /([\d]+)/;
 
 export const RawCodeBlock = ({
   code,
@@ -85,8 +85,16 @@ export const RawCodeBlock = ({
           <code>
             {tokens.map((line, i) => {
               const lineProps = getLineProps({ line, key: i });
-              if (!regex.test(hashValue) ? false : parseInt(regex.exec(hashValue)[1], 10) === (i + 1))
+              if (
+                hashValue &&
+                ((arr, index) =>
+                  Math.min(...arr) <= index && index <= Math.max(...arr))(
+                  hashValue.split("-").map((e) => regex.exec(e)[1]),
+                  i + 1
+                )
+              ) {
                 lineProps.className = `${lineProps.className} highlight-line`;
+              }
               return line[0]?.empty && i === tokens.length - 1 ? null : (
                 <div key={i} {...lineProps}>
                   {line.map((token, key) => (
