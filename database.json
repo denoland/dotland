@@ -1588,6 +1588,12 @@
     "repo": "deno-semver",
     "desc": "A fork of node-semver using TypeScript"
   },
+ "sendgrid": {
+    "type": "github",
+    "owner": "gpasq",
+    "repo": "deno-sendgrid",
+    "desc": "An interface to the Sendgrid mailer"
+  },
   "serializexml": {
     "type": "github",
     "owner": "olaven",
