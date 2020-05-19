@@ -525,6 +525,12 @@
     "repo": "denom",
     "desc": "Monitor any changes in your Deno application and automagically restart 🌟"
   },
+  "denomon": {
+    "type": "github",
+    "owner": "remy",
+    "repo": "denomon",
+    "desc": "Reload automatically. A port of nodemon"
+  },
   "denomander": {
     "type": "github",
     "owner": "siokas",
