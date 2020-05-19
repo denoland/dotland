@@ -1329,6 +1329,12 @@
     "repo": "PerlinNoise-Deno",
     "desc": "A simple to use perlin noise module for typescript."
   },
+  "pg_format": {
+    "type": "github",
+    "owner": "grantcarthew",
+    "repo": "deno-pg-format",
+    "desc": "Deno implementation of PostgreSQL's format() to safely create dynamic SQL queries."
+  },
   "pipeline": {
     "type": "github",
     "owner": "Focinfi",
