@@ -803,6 +803,12 @@
     "path": "/src",
     "desc": "A tool for creating large sets of pseudo random data."
   },
+  "firebaseID": {
+    "type": "github",
+    "owner": "ajimae",
+    "repo": "UniqueIDGenerator",
+    "desc": "Firebase Push ID generator for unique database IDs"
+  },
   "fox": {
     "type": "github",
     "owner": "eankeen",
