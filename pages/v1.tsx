@@ -9,7 +9,6 @@ import Markdown from "../components/Markdown";
 import { GetStaticProps } from "next";
 import { promises as fs } from "fs";
 import Link from "next/link";
-import { metaDescription } from ".";
 
 interface Props {
   markdown: string;
@@ -20,13 +19,10 @@ const V1 = (props: Props) => {
     <>
       <Head>
         <title>Deno 1.0</title>
-
-        {metaDescription({
-          title: "Deno 1.0",
-          description: "Deno, a secure runtime for JavaScript and TypeScript.",
-          url: "https://deno.land/v1/",
-          image: "https://deno.land/v1_wide.jpg",
-        })}
+        <meta
+          name="description"
+          content="Deno, a secure runtime for JavaScript and TypeScript."
+        />
       </Head>
       <Header />
       <div className="w-full" style={{ backgroundColor: "#2f2e2c" }}>
