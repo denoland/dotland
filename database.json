@@ -258,6 +258,12 @@
     "repo": "deno",
     "desc": "A secure runtime for JavaScript and TypeScript."
   },
+  "cors": {
+    "type": "github",
+    "owner": "tajpouria",
+    "repo": "cors",
+    "desc": "Providing a middleware that can be used to enable CORS with various options"
+  },
   "countryfinder": {
     "type": "github",
     "owner": "yonas-g",
