@@ -451,7 +451,7 @@
     "owner": "rafaelferres",
     "repo": "deno-hidefile",
     "desc": "Create hidden file or folder in Deno 🦕"
-  }
+  },
   "deno_init": {
     "type": "github",
     "owner": "maxuuell",
