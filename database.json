@@ -343,12 +343,6 @@
     "repo": "dash",
     "desc": "Fast, simple, and efficient LRU cache library for Deno."
   },
-  "dino-blox": {
-    "type": "github",
-    "owner": "FracturX",
-    "repo": "dino-blox",
-    "desc": "A Deno wrapper for interacting with the Roblox Web API."
-  },
   "databatcher": {
     "type": "github",
     "owner": "allain",
@@ -650,6 +644,12 @@
     "owner": "denjucks",
     "repo": "dinja",
     "desc": "An scalable, Rails-like web framework for Deno"
+  },
+  "dinoblox": {
+    "type": "github",
+    "owner": "FracturX",
+    "repo": "dinoblox",
+    "desc": "A Deno wrapper for interacting with the Roblox Web API."
   },
   "dinocord": {
     "type": "github",
