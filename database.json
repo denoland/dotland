@@ -845,6 +845,12 @@
     "repo": "gentleRpc",
     "desc": "JSON-RPC 2.0 TypeScript library for deno and browser."
   },
+  "graphql": {
+    "type": "github",
+    "owner": "CreatCodeBuild",
+    "repo": "graphql-projects",
+    "desc": "A Deno GraphQL port"
+  },
   "gusano": {
     "type": "github",
     "owner": "krthr",
