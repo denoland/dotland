@@ -1836,6 +1836,12 @@
     "repo": "deno_std",
     "desc": "NOTICE: The deno_std repository has been moved to the main Deno repo https://github.com/denoland/deno/tree/master/std"
   },
+  "supreme_api": {
+    "type": "github",
+    "owner": "desire",
+    "repo": "supreme_api",
+    "desc": "Unofficial Supreme API wrapper for monitoring products."
+  },
   "suzhou_numerals": {
     "type": "github",
     "owner": "weakish",
