@@ -458,6 +458,12 @@
     "repo": "deno_init",
     "desc": "The executable to set up a deno project 🦕"
   },
+  "deno_pixabay": {
+    "type": "github",
+    "owner": "yeukfei02",
+    "repo": "deno-pixabay",
+    "desc": "search image and video from pixabay in deno"
+  },
   "deno_scripts": {
     "type": "github",
     "owner": "PabloSzx",
