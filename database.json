@@ -483,10 +483,16 @@
     "desc": "get current weather by city name, state and country code"
   },
   "deno_windows": {
-	  "type": "github",
+    "type": "github",
     "owner": "rafaelferres",
     "repo": "deno-windows",
     "desc": "Windows Service controller for Deno."
+  },
+  "denock": {
+    "type": "github",
+    "owner": "sachacr",
+    "repo": "denock",
+    "desc": "Denock can be used to test modules that perform HTTP requests in isolation. It intercept HTTP requests and respond with the mock you specified"
   },
   "denodate": {
     "type": "github",
@@ -1190,6 +1196,12 @@
     "repo": "mith",
     "desc": "A middleware framework for http/s servers"
   },
+  "mith_router": {
+    "type": "github",
+    "owner": "jwebcoder",
+    "repo": "mith_router",
+    "desc": "Routing system for Mith framework"
+  },
   "mixins": {
     "type": "github",
     "owner": "udibo",
@@ -1630,7 +1642,7 @@
     "repo": "deno-semver",
     "desc": "A fork of node-semver using TypeScript"
   },
- "sendgrid": {
+  "sendgrid": {
     "type": "github",
     "owner": "gpasq",
     "repo": "deno-sendgrid",
@@ -1771,6 +1783,12 @@
     "owner": "crabmusket",
     "repo": "deno_sqlite_plugin",
     "desc": "Native plugin for SQLite using rusqlite"
+  },
+  "statistics": {
+    "type": "github",
+    "owner": "ergenekonyigit",
+    "repo": "statistics",
+    "desc": "Deno basic statistics module"
   },
   "status": {
     "type": "github",
