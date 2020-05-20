@@ -252,6 +252,12 @@
     "repo": "deno-collections",
     "desc": "A utility to handle collections"
   },
+  "colors": {
+    "type": "github",
+    "owner": "maheshkareeya",
+    "repo": "colors",
+    "desc": "Material Design Colors ༼ つ ◕_◕ ༽つ"
+  },
   "compose": {
     "type": "github",
     "owner": "KSXGitHub",
