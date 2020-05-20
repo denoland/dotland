@@ -1841,6 +1841,12 @@
     "owner": "Acathur",
     "repo": "store",
     "desc": "A key-value store that persists on disk for Deno."
+  }
+  "supreme_api": {
+    "type": "github",
+    "owner": "desire",
+    "repo": "supreme_api",
+    "desc": "Unofficial Supreme API wrapper for monitoring products."
   },
   "suzhou_numerals": {
     "type": "github",
