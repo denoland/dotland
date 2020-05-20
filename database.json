@@ -1842,6 +1842,12 @@
     "repo": "deno_std",
     "desc": "NOTICE: The deno_std repository has been moved to the main Deno repo https://github.com/denoland/deno/tree/master/std"
   },
+  "store": {
+    "type": "github",
+    "owner": "Acathur",
+    "repo": "store",
+    "desc": "A key-value store that persists on disk for Deno."
+  },
   "supreme_api": {
     "type": "github",
     "owner": "desire",
