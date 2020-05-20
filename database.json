@@ -440,6 +440,12 @@
     "repo": "deno_app_setuper",
     "desc": "A CLI to setup apps like a Create React App."
   },
+  "deno_check_updates": {
+    "type": "github",
+    "owner": "fzwael",
+    "repo": "deno-check-updates",
+    "desc": "Automatically checks deno dependencies versions from import maps file."
+  },
   "deno_deblong": {
     "type": "github",
     "owner": "nusendra",
