@@ -120,6 +120,12 @@
     "repo": "noble-bls12-381",
     "desc": "bls12-381, a pairing-friendly elliptic curve construction."
   },
+  "bsv": {
+    "type": "github",
+    "owner": "bitcartel",
+    "repo": "bsv-deno",
+    "desc": "Bitcoin SV library for Deno"
+  },
   "buffer": {
     "type": "github",
     "owner": "socket-deno",
