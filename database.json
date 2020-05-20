@@ -452,6 +452,12 @@
     "repo": "deno_gui",
     "desc": "Deno Web GUI"
   },
+  "deno_hidefile":{
+	"type": "github",
+    "owner": "rafaelferres",
+    "repo": "deno-hidefile",
+    "desc": "Create hidden file or folder in Deno 🦕"
+  },
   "deno_init": {
     "type": "github",
     "owner": "maxuuell",
