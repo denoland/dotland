@@ -144,6 +144,12 @@
     "repo": "bytes_formater",
     "desc": "Deno Bytes Formater"
   },
+  "bzfquery.js": {
+    "type": "github",
+    "owner": "The-Noah",
+    "repo": "bzfquery.js",
+    "desc": "JavaScript/TypeScript version of bzfquery for Deno"
+  },
   "case": {
     "type": "github",
     "owner": "justjavac",
