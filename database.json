@@ -1973,17 +1973,17 @@
     "repo": "up",
     "desc": "Check if a website is currently up"
   },
-  "url_parse": {
-    "type": "github",
-    "owner": "roonie007",
-    "repo": "url-parse",
-    "desc": "Parse/Build an url from a javascript object or a string"
-  },
   "url_join": {
     "type": "github",
     "owner": "roonie007",
     "repo": "url-join",
     "desc": "Join all arguments together and normalize the resulting url"
+  },
+  "url_parse": {
+    "type": "github",
+    "owner": "roonie007",
+    "repo": "url-parse",
+    "desc": "Parse/Build an url from a javascript object or a string"
   },
   "username": {
     "type": "github",
