@@ -18,6 +18,27 @@ interface HomeProps {
   thirdPartyEntries: SimpleEntry[];
 }
 
+export const metaDescription = ({
+  title,
+  description,
+  image,
+  url = "https://deno.land/",
+}: {
+  title: string;
+  description: string;
+  url?: string;
+  image: string;
+}) => [
+  <meta name="title" key="title" content={title} />,
+  <meta name="description" key="description" content={description} />,
+  <meta name="twitter:card" key="twitter:card" content="summary_large_image" />,
+  <meta property="og:type" key="og:type" content="website" />,
+  <meta property="og:url" key="og:url" content={url} />,
+  <meta property="og:title" key="og:title" content={title} />,
+  <meta property="og:description" key="og:description" content={description} />,
+  <meta property="og:image" key="og:image" content={image} />,
+];
+
 const NUM_THIRD_PARTY = 12;
 
 export const complexExampleProgram = `import { serve } from "https://deno.land/std@0.50.0/http/server.ts";
@@ -45,10 +66,12 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
     <>
       <Head>
         <title>Deno</title>
-        <meta
-          name="description"
-          content="Deno, a secure runtime for JavaScript and TypeScript."
-        />
+        {metaDescription({
+          title: "Deno — A secure runtime for JavaScript and TypeScript.",
+          description:
+            "Deno is a simple, modern and secure runtime for JavaScript and TypeScript that uses V8 and is built in Rust.",
+          image: "https://deno.land/v1_wide.jpg",
+        })}
       </Head>
       <div className="bg-white">
         <div className="bg-black">

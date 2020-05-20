@@ -1347,6 +1347,12 @@
     "repo": "parseargs",
     "desc": "Migrated to denoland/deno_std."
   },
+  "path_to_regexp": {
+    "type": "github",
+    "owner": "namelos",
+    "repo": "deno-path-to-regexp",
+    "desc": "path-to-regexp for Deno."
+  },
   "pbkdf2": {
     "type": "github",
     "owner": "chiefbiiko",
