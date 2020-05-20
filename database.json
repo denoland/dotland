@@ -464,6 +464,12 @@
     "repo": "deno-flatten",
     "desc": "A recursive array flattening function"
   },
+  "deno_google_protobuf": {
+    "type": "github",
+    "owner": "marcushultman",
+    "repo": "deno-google-protobuf",
+    "desc": "Protocol Buffers - Google's data interchange format"
+  },
   "deno_gui": {
     "type": "github",
     "owner": "fakoua",
