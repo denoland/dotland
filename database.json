@@ -5,6 +5,12 @@
     "repo": "abc",
     "desc": "A better Deno framework to create web application"
   },
+  "actdb": {
+    "type": "github",
+    "owner": "searchableguy",
+    "repo": "actdb",
+    "desc": "A simple nosql reactive db or database."
+  },
   "alosaur": {
     "type": "github",
     "owner": "irustm",
