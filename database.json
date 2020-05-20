@@ -1826,6 +1826,12 @@
     "repo": "deno_sqlite_plugin",
     "desc": "Native plugin for SQLite using rusqlite"
   },
+   "ssr": {
+    "type": "github",
+    "owner": "maheshkareeya",
+    "repo": "ssr",
+    "desc": "Server Side HTML Functions for rapid development in Node and Deno."
+  },
   "statistics": {
     "type": "github",
     "owner": "ergenekonyigit",
