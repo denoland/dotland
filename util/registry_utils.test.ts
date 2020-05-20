@@ -20,7 +20,7 @@ test("Resolve virtual 'gh:owner:repo'", () => {
       type: "github",
       desc: "owner/repo",
       owner: "owner",
-      repo: 'repo'
+      repo: "repo",
     })
   );
 });
