@@ -1961,6 +1961,12 @@
     "repo": "up",
     "desc": "Check if a website is currently up"
   },
+  "url_join": {
+    "type": "github",
+    "owner": "roonie007",
+    "repo": "url-join",
+    "desc": "Join all arguments together and normalize the resulting url"
+  },
   "username": {
     "type": "github",
     "owner": "justjavac",
