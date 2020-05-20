@@ -1973,11 +1973,11 @@
     "repo": "up",
     "desc": "Check if a website is currently up"
   },
-  "url_build": {
+  "url_parse": {
     "type": "github",
     "owner": "roonie007",
-    "repo": "url-build",
-    "desc": "Build url from a javascript object or a string"
+    "repo": "url-parse",
+    "desc": "Parse/Build an url from a javascript object or a string"
   },
   "url_join": {
     "type": "github",
