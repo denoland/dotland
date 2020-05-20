@@ -14,6 +14,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import FileDisplay from "./FileDisplay";
 import { DirEntry } from "../util/registries";
+import { metaDescription } from "../pages";
 
 class RegistryError {
   constructor(public message: string) {}
@@ -172,7 +173,12 @@ const Registry = () => {
           {name}
           {version && `@${version}`} - deno.land/x
         </title>
-        <meta name="description" content="A third party module for Deno." />
+        {metaDescription({
+          title: "deno.land/x",
+          description: "A third party module for Deno.",
+          url: `https://deno.land/x/${name || ""}`,
+          image: "https://deno.land/v1_wide.jpg",
+        })}
       </Head>
       <div className="bg-gray-50 min-h-full">
         <Header
