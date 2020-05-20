@@ -240,6 +240,12 @@
     "repo": "cmd",
     "desc": "Commander.js (command-line interfaces) for Deno."
   },
+  "colors": {
+    "type": "github",
+    "owner": "maheshkareeya",
+    "repo": "colors",
+    "desc": "Material Design Colors"
+  },
   "collections": {
     "type": "github",
     "owner": "hayd",
