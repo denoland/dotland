@@ -477,10 +477,16 @@
     "desc": "A module to make accessing the Twitter Developer Api easy"
   },
   "deno_windows": {
-	"type": "github",
+    "type": "github",
     "owner": "rafaelferres",
     "repo": "deno-windows",
     "desc": "Windows Service controller for Deno."
+  },
+  "denock": {
+    "type": "github",
+    "owner": "sachacr",
+    "repo": "denock",
+    "desc": "Denock can be used to test modules that perform HTTP requests in isolation. It intercept HTTP requests and respond with the mock you specified"
   },
   "denodate": {
     "type": "github",
@@ -1630,7 +1636,7 @@
     "repo": "deno-semver",
     "desc": "A fork of node-semver using TypeScript"
   },
- "sendgrid": {
+  "sendgrid": {
     "type": "github",
     "owner": "gpasq",
     "repo": "deno-sendgrid",
