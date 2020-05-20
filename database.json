@@ -1184,6 +1184,12 @@
     "repo": "mith",
     "desc": "A middleware framework for http/s servers"
   },
+  "mith_router": {
+    "type": "github",
+    "owner": "jwebcoder",
+    "repo": "mith_router",
+    "desc": "Routing system for Mith framework"
+  },
   "mixins": {
     "type": "github",
     "owner": "udibo",
