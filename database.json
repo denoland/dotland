@@ -893,6 +893,12 @@
     "repo": "graphql-projects",
     "desc": "A Deno GraphQL port"
   },
+  "graphql_deno": {
+    "type": "github",
+    "owner": "adelsz",
+    "repo": "graphql-deno",
+    "desc": "Graphql-js ported to deno. Includes TS types and runtime."
+  },
   "gusano": {
     "type": "github",
     "owner": "krthr",
