@@ -1955,7 +1955,7 @@
     "repo": "up",
     "desc": "Check if a website is currently up"
   },
-  "url-join": {
+  "url_join": {
     "type": "github",
     "owner": "roonie007",
     "repo": "url-join",
