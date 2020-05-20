@@ -422,7 +422,7 @@
     "repo": "deno",
     "desc": "A secure runtime for JavaScript and TypeScript."
   },
-  "deno-check-updates": {
+  "deno_check_updates": {
     "type": "github",
     "owner": "fzwael",
     "repo": "deno-check-updates",
