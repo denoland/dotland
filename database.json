@@ -1766,6 +1766,12 @@
     "repo": "deno_sqlite_plugin",
     "desc": "Native plugin for SQLite using rusqlite"
   },
+  "statistics": {
+    "type": "github",
+    "owner": "ergenekonyigit",
+    "repo": "statistics",
+    "desc": "Deno basic statistics module"
+  },
   "status": {
     "type": "github",
     "owner": "denosaurs",
