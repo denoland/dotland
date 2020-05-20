@@ -1890,6 +1890,12 @@
     "repo": "deno-task-runner-v2",
     "desc": "deno-task-runner-v2"
   },
+  "tckimlik": {
+    "type": "github",
+    "owner": "serkanalgur",
+    "repo": "tckimlik",
+    "desc": "A tool for validate Turkish Identification Number"
+  },
   "tcr": {
     "type": "github",
     "owner": "AlexVagrant",
