@@ -651,6 +651,12 @@
     "repo": "dinja",
     "desc": "An scalable, Rails-like web framework for Deno"
   },
+  "dinoblox": {
+    "type": "github",
+    "owner": "FracturX",
+    "repo": "dinoblox",
+    "desc": "A Deno wrapper for interacting with the Roblox Web API."
+  },
   "dinocord": {
     "type": "github",
     "owner": "sunsetkookaburra",
