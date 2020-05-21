@@ -651,6 +651,12 @@
     "repo": "descord",
     "desc": "A discord bot library for Deno."
   },
+  "destr": {
+    "type": "github",
+    "owner": "nuxt-contrib",
+    "repo": "destr",
+    "desc": "Faster, secure and convenient alternative for JSON.parse"
+  },
   "dev_server": {
     "type": "github",
     "owner": "zhmushan",
