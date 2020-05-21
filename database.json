@@ -1,4 +1,10 @@
 {
+  "a1": {
+    "type": "github",
+    "owner": "maheshkareeya",
+    "repo": "a1",
+    "desc": "A1 Is Micro framework for rapid API Development in Deno"
+  },
   "abc": {
     "type": "github",
     "owner": "zhmushan",
