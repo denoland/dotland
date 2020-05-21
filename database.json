@@ -2046,7 +2046,7 @@
     "repo": "deno-tree",
     "desc": "Traverse filesystem tree"
   },
-  "type-check": {
+  "type_check": {
     "type": "github",
     "owner": "zemse",
     "repo": "deno-type-check",
