@@ -1449,6 +1449,12 @@
     "repo": "deno-open",
     "desc": "A package for opening URLs, files and executables."
   },
+  "opine": {
+    "type": "github",
+    "owner": "asos-craigmorten",
+    "repo": "opine",
+    "desc": "Fast, minimalist web framework for Deno ported from ExpressJS."
+  },
   "panoptes": {
     "type": "github",
     "owner": "TokenChingy",
