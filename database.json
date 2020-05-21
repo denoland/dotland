@@ -1902,6 +1902,12 @@
     "repo": "store",
     "desc": "A key-value store that persists on disk for Deno."
   },
+  "strcolors.ts": {
+    "type": "github",
+    "owner": "jabernardo",
+    "repo": "strcolors.ts",
+    "desc": "FMT String Extensions for Deno"
+  },
   "supreme_api": {
     "type": "github",
     "owner": "desire",
