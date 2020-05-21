@@ -1256,6 +1256,12 @@
     "repo": "deno-md5",
     "desc": "MD5 for deno."
   },
+  "media_typer": {
+    "type": "github",
+    "owner": "ako-deno",
+    "repo": "media_typer",
+    "desc": "Simple RFC 6838 media type parser and formatter for Deno."
+  },
   "media_types": {
     "type": "github",
     "owner": "oakserver",
