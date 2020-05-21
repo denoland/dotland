@@ -7,6 +7,17 @@
 
 @import "tailwindcss/utilities";
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* removes focus outlines on mouse clicks */
+*:focus:not(:focus-visible),
+*::before:focus:not(:focus-visible),
+*::after:focus:not(:focus-visible) {
+  outline: none;
+}
+
 .link {
   @apply text-blue-500;
   @apply transition;
@@ -39,4 +50,11 @@ ol.nested li:before {
 
 .deno-offwhite .deno-inlinecode {
   @apply bg-gray-200;
+}
+.prism-code {
+  tab-size: 2;
+  -moz-tab-size: 2;
+}
+.highlight-line {
+  background-color: #fffbdd;
 }
