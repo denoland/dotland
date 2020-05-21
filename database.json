@@ -542,6 +542,12 @@
     "repo": "denock",
     "desc": "Denock can be used to test modules that perform HTTP requests in isolation. It intercept HTTP requests and respond with the mock you specified"
   },
+  "denoconfig": {
+    "type": "github",
+    "owner": "rclarey",
+    "repo": "deno-emacs",
+    "desc": "A small cli tool to generate a tsconfig.json that allows editors to understand deno."
+  },
   "denodate": {
     "type": "github",
     "owner": "t-heu",
