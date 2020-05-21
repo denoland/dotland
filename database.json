@@ -11,6 +11,12 @@
     "repo": "actdb",
     "desc": "A simple nosql reactive db or database."
   },
+  "airtable": {
+    "type": "github",
+    "owner": "grikomsn",
+    "repo": "airtable-deno",
+    "desc": "Unofficial Airtable Client for Deno"
+  },
   "alosaur": {
     "type": "github",
     "owner": "irustm",
