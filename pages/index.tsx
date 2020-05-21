@@ -6,6 +6,7 @@ import Link from "next/link";
 import CodeBlock from "../components/CodeBlock";
 import Footer from "../components/Footer";
 import { entries } from "../util/registry_utils";
+import stdVersions from "../deno_std_versions.json";
 import { NextPage, GetStaticProps } from "next";
 import InlineCode from "../components/InlineCode";
 import Header from "../components/Header";
@@ -16,6 +17,7 @@ interface SimpleEntry {
 }
 interface HomeProps {
   thirdPartyEntries: SimpleEntry[];
+  latestStd: string;
 }
 
 export const metaDescription = ({
@@ -41,14 +43,14 @@ export const metaDescription = ({
 
 const NUM_THIRD_PARTY = 12;
 
-export const complexExampleProgram = `import { serve } from "https://deno.land/std@0.50.0/http/server.ts";
-const s = serve({ port: 8000 });
-console.log("http://localhost:8000/");
-for await (const req of s) {
-  req.respond({ body: "Hello World\\n" });
-}`;
+const Home: NextPage<HomeProps> = ({ thirdPartyEntries, latestStd }) => {
+  const complexExampleProgram = `import { serve } from "https://deno.land/std@${latestStd}/http/server.ts";
+  const s = serve({ port: 8000 });
+  console.log("http://localhost:8000/");
+  for await (const req of s) {
+    req.respond({ body: "Hello World\\n" });
+  }`;
 
-const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
   const [thirdPartySelection, setThirdPartySelection] = useState<
     SimpleEntry[] | null
   >(null);
@@ -412,7 +414,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   });
 
   return {
-    props: { thirdPartyEntries },
+    props: { thirdPartyEntries, latestStd: stdVersions[0] },
   };
 };
 
