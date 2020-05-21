@@ -2113,6 +2113,12 @@
     "repo": "vuniq",
     "desc": "Uniq ID generator with variable length"
   },
+  "wasi": {
+    "type": "github",
+    "owner": "caspervonb",
+    "repo": "deno-wasi",
+    "desc": "WebAssembly System Interface bindings"
+  },
   "watch": {
     "type": "github",
     "owner": "jinjor",
