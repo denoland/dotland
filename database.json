@@ -2189,7 +2189,7 @@
     "type": "github",
     "owner": "ryo-ma",
     "repo": "deno-websocket",
-    "desc": "🦕A simple WebScoket library like ws of node.js"
+    "desc": "🦕A simple WebSocket library like ws of node.js"
   },
   "webview": {
     "type": "github",
