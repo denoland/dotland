@@ -891,6 +891,12 @@
     "repo": "expect",
     "desc": "A deno implementation of expect in order to write tests in a more jest like style."
   },
+  "fastlist": {
+    "type": "github",
+    "owner": "MarkTiedemann",
+    "repo": "deno_fastlist",
+    "desc": "List all running processes on Windows."
+  },
   "fastro": {
     "type": "github",
     "owner": "fastrojs",
