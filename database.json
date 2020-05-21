@@ -1086,6 +1086,12 @@
     "repo": "deno-zip",
     "desc": "A wrapper around JSZip for handling zipfiles in deno"
   },
+  "jurassic": {
+    "type": "github",
+    "owner": "oknoorap",
+    "repo": "jurassic",
+    "desc": "A Straightforward API Server for Deno"
+  },
   "katana": {
     "type": "github",
     "owner": "ansonfoong",
