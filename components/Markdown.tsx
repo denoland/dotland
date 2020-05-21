@@ -85,9 +85,7 @@ function ImageRenderer(props: { src: string; canonicalURL: string }) {
   }
 
   return (
-    <a href={src}>
-      <img src={src} className="max-w-full inline-block" />
-    </a>
+    <img src={src} className="max-w-full inline-block" />
   );
 }
 
