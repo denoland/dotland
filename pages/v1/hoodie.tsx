@@ -1,6 +1,6 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import React, { useState } from "react";
+import React from "react";
 import Head from "next/head";
 
 import Footer from "../../components/Footer";
@@ -8,8 +8,6 @@ import Header from "../../components/Header";
 import { metaDescription } from "..";
 
 const V1Hoodie = () => {
-  const [size, setSize] = useState("M");
-
   return (
     <>
       <Head>

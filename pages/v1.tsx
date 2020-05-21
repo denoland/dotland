@@ -8,7 +8,6 @@ import Header from "../components/Header";
 import Markdown from "../components/Markdown";
 import { GetStaticProps } from "next";
 import { promises as fs } from "fs";
-import Link from "next/link";
 import { metaDescription } from ".";
 
 interface Props {
