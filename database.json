@@ -2028,6 +2028,12 @@
     "repo": "deno-tree",
     "desc": "Traverse filesystem tree"
   },
+  "type_is": {
+    "type": "github",
+    "owner": "ako-deno",
+    "repo": "type_is",
+    "desc": "Infer the content-type of a HTTP Header for Deno"
+  },
   "types": {
     "type": "github",
     "owner": "Soremwar",
