@@ -55,14 +55,14 @@ const Header = ({ subtitle }: { subtitle?: string }) => {
           </Link>
           <Link href="/[identifier]" as="/manual">
             <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              The Manual
+              Manual
             </a>
           </Link>
           <a
             href="https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts"
             className="ml-10 font-medium text-gray-500 hover:text-gray-900 focus:outline-none focus:text-gray-900 transition duration-150 ease-in-out"
           >
-            API Docs
+            Runtime API
           </a>
           <Link href="/[identifier]" as="/std">
             <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
@@ -157,14 +157,14 @@ const Header = ({ subtitle }: { subtitle?: string }) => {
                 </Link>
                 <Link href="/[identifier]" as="/manual">
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    The Manual
+                    Manual
                   </a>
                 </Link>
                 <a
                   href="https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts"
                   className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
                 >
-                  API Docs
+                  Runtime API
                 </a>
                 <Link href="/[identifier]" as="/std">
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">

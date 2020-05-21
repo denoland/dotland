@@ -1,8 +1,11 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import Router from "next/router";
 import Highlight, { Prism } from "prism-react-renderer";
 import light from "prism-react-renderer/themes/github";
+import { useLayoutEffect } from "react";
 
 export interface CodeBlockProps {
   code: string;
@@ -25,7 +28,36 @@ export const RawCodeBlock = ({
   language,
   className: extraClassName,
   disablePrefixes,
-}: CodeBlockProps & { className?: string }) => {
+  enableLineRef = false,
+}: CodeBlockProps & { className?: string; enableLineRef?: boolean }) => {
+  const [hashValue, setHashValue] = useState("");
+  useEffect(() => {
+    Router.events.on("hashChangeComplete", (url: any) => {
+      setHashValue(url.slice(url.indexOf("#")));
+    });
+    const { hash } = location;
+    setHashValue(hash);
+    return () => {
+      Router.events.off("hashChangeComplete", () => {});
+    };
+  }, []);
+
+  useLayoutEffect(() => {
+    const hash = hashValue
+      .split("-")
+      .map((e) => /([\d]+)/.exec(e)![0])
+      .map((e) => parseInt(e, 10))
+      .sort((a, b) => a - b)
+      .map((e) => `L${e}`);
+    if (hash.length) {
+      const idEl = document.getElementById(hash[0]);
+      if (idEl) {
+        idEl.scrollIntoView({ block: "center", behavior: "smooth" });
+        return;
+      }
+    }
+  });
+
   return (
     <Highlight
       Prism={Prism}
@@ -59,23 +91,46 @@ export const RawCodeBlock = ({
                     key={i + "l"}
                     className="text-gray-400 token-line text-right select-none"
                   >
-                    {i + 1}{" "}
+                    {enableLineRef ? (
+                      <Link href={`#L${i + 1}`}>
+                        <a id={`L${i + 1}`} href={`#L${i + 1}`}>
+                          {i + 1}{" "}
+                        </a>
+                      </Link>
+                    ) : (
+                      i + 1
+                    )}
                   </div>
                 )
               )}
             </code>
           )}
           <code>
-            {tokens.map((line, i) =>
-              line[0]?.empty && i === tokens.length - 1 ? null : (
-                <div key={i} {...getLineProps({ line, key: i })}>
+            {tokens.map((line, i) => {
+              const lineProps = getLineProps({ line, key: i });
+              if (
+                enableLineRef &&
+                hashValue &&
+                ((arr, index) =>
+                  Math.min(...arr) <= index && index <= Math.max(...arr))(
+                  hashValue
+                    .split("-")
+                    .map((e) => /([\d]+)/.exec(e)![1])
+                    .map((n) => parseInt(n, 10)),
+                  i + 1
+                )
+              ) {
+                lineProps.className = `${lineProps.className} highlight-line`;
+              }
+              return line[0]?.empty && i === tokens.length - 1 ? null : (
+                <div key={i} {...lineProps}>
                   {line.map((token, key) => (
                     <span key={key} {...getTokenProps({ token, key })} />
                   ))}
                   {line[0]?.empty ? "\n" : ""}
                 </div>
-              )
-            )}
+              );
+            })}
           </code>
         </pre>
       )}

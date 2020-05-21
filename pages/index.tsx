@@ -309,7 +309,7 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
 const InstallSection = () => {
   const shell = (
     <div key="shell" className="my-4 text-gray-700">
-      <p className="py-2 font-bold">Using Shell (macOS, Linux):</p>
+      <p className="py-2">Shell (Mac, Linux):</p>
       <CodeBlock
         language="bash"
         code={`curl -fsSL https://deno.land/x/install/install.sh | sh`}
@@ -318,13 +318,18 @@ const InstallSection = () => {
   );
   const homebrew = (
     <div key="homebrew" className="my-4 text-gray-700">
-      <p className="mb-2 font-bold">Using Homebrew (macOS):</p>
+      <p className="mb-2">
+        <a href="https://formulae.brew.sh/formula/deno" className="link">
+          Homebrew
+        </a>{" "}
+        (Mac):
+      </p>
       <CodeBlock language="bash" code={`brew install deno`} />
     </div>
   );
   const powershell = (
     <div key="powershell" className="my-4 text-gray-700">
-      <p className="mb-2 font-bold">Using PowerShell (Windows):</p>
+      <p className="mb-2">PowerShell (Windows):</p>
       <CodeBlock
         language="bash"
         code={`iwr https://deno.land/x/install/install.ps1 -useb | iex`}
@@ -333,19 +338,29 @@ const InstallSection = () => {
   );
   const chocolatey = (
     <div key="chocolatey" className="my-4 text-gray-700">
-      <p className="mb-2 font-bold">Using Chocolatey (Windows):</p>
+      <p className="mb-2">
+        <a href="https://chocolatey.org/packages/deno" className="link">
+          Chocolatey
+        </a>{" "}
+        (Windows):
+      </p>
       <CodeBlock language="bash" code={`choco install deno`} />
     </div>
   );
   const scoop = (
     <div key="scoop" className="my-4 text-gray-700">
-      <p className="mb-2 font-bold">Using Scoop (Windows):</p>
+      <p className="mb-2">Scoop (Windows):</p>
       <CodeBlock language="bash" code={`scoop install deno`} />
     </div>
   );
   const cargo = (
     <div key="cargo" className="my-4 text-gray-700">
-      <p className="py-2 font-bold">Using Cargo (Windows, macOS, Linux):</p>
+      <p className="py-2">
+        Build and install from source using{" "}
+        <a href="https://crates.io/crates/deno" className="link">
+          Cargo
+        </a>
+      </p>
       <CodeBlock language="bash" code={`cargo install deno`} />
     </div>
   );
@@ -362,10 +377,10 @@ const InstallSection = () => {
       </p>
       {shell}
       {powershell}
-      {cargo}
       {homebrew}
       {chocolatey}
       {scoop}
+      {cargo}
       <p className="my-4 text-gray-700">
         See{" "}
         <a className="link" href="https://github.com/denoland/deno_install">

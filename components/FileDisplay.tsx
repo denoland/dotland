@@ -82,6 +82,7 @@ function FileDisplay(props: {
               <RawCodeBlock
                 code={props.raw!}
                 language={filetype}
+                enableLineRef={true}
                 className="p-2 sm:px-3 md:px-4"
               />
             );
@@ -90,6 +91,7 @@ function FileDisplay(props: {
               <RawCodeBlock
                 code={props.raw!}
                 language="markdown"
+                enableLineRef={true}
                 className="p-2 sm:px-3 md:px-4"
               />
             );
@@ -106,6 +108,7 @@ function FileDisplay(props: {
               <RawCodeBlock
                 code={props.raw!}
                 language="text"
+                enableLineRef={true}
                 className="p-2 sm:px-3 md:px-4"
               />
             );
