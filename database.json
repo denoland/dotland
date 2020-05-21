@@ -470,6 +470,12 @@
     "repo": "deno-flatten",
     "desc": "A recursive array flattening function"
   },
+  "deno_giphy_api": {
+    "desc": "giphy api in deno",
+    "owner": "yeukfei02",
+    "repo": "deno-giphy-api",
+    "type": "github"
+  },
   "deno_google_protobuf": {
     "type": "github",
     "owner": "marcushultman",
