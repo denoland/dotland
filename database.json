@@ -837,6 +837,12 @@
     "repo": "enum",
     "desc": "Enum is a javascript module that introduces the Enum Type. It works for node.js, in the browser and for deno."
   },
+  "env_paths": {
+    "type": "github",
+    "owner": "lemarier",
+    "repo": "deno-env-paths",
+    "desc": "Get paths for storing things like data, config, cache, etc"
+  },
   "escape_string_regexp": {
     "type": "github",
     "owner": "Sab94",
