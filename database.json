@@ -270,6 +270,12 @@
     "repo": "config",
     "desc": "Load dotfiles / modules for a project consistently"
   },
+  "content_type": {
+    "type": "github",
+    "owner": "ako-deno",
+    "repo": "content_type",
+    "desc": "Create and parse HTTP Content-Type header according to RFC 7231 for Deno"
+  },
   "context": {
     "type": "github",
     "owner": "code-hex",
