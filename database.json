@@ -1364,6 +1364,12 @@
     "repo": "deno-nessie",
     "desc": "A database migration tool for deno."
   },
+  "neta": {
+    "type": "github",
+    "owner": "XiangnianZhou",
+    "repo": "neta",
+    "desc": "A SRT and ASS/SSA subtitle parser for Deno."
+  },
   "nexo": {
     "type": "github",
     "owner": "nexojs",
