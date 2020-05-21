@@ -2046,6 +2046,12 @@
     "repo": "deno-tree",
     "desc": "Traverse filesystem tree"
   },
+  "type-check": {
+    "type": "github",
+    "owner": "zemse",
+    "repo": "deno-type-check",
+    "desc": "Runtime type check library for Deno"
+  },
   "type_is": {
     "type": "github",
     "owner": "ako-deno",
