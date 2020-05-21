@@ -1032,6 +1032,12 @@
     "repo": "i18next-locize-backend",
     "desc": "A simple i18next backend for locize.com which can be used in Node.js, in the browser and for Deno."
   },
+  "iftt": { 
+    "type": "github", 
+    "owner": "0xVesion", 
+    "repo": "deno-ifttt", 
+    "desc": "IFTTT webhook api client for deno" 
+  },
   "indigobird": {
     "type": "github",
     "owner": "ralusek",
