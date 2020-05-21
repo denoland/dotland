@@ -1600,6 +1600,12 @@
     "repo": "proxy-bind",
     "desc": "From foobar.fn.bind(foobar) to bind(foobar).fn"
   },
+  "punycode": {
+    "type": "github",
+    "owner": "ClementD64",
+    "repo": "punycode.ts",
+    "desc": "A robust Punycode converter that fully complies to RFC 3492 and RFC 5891. (port of Punycode.js)"
+  },
   "purify": {
     "type": "github",
     "owner": "aynik",
