@@ -657,12 +657,6 @@
     "repo": "denoliver",
     "desc": "A simple, dependency free web server for Deno"
   },
-  "denom": {
-    "type": "github",
-    "owner": "denosaurs",
-    "repo": "denom",
-    "desc": "Monitor any changes in your Deno application and automagically restart 🌟"
-  },
   "denomander": {
     "type": "github",
     "owner": "siokas",
