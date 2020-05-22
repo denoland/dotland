@@ -1524,7 +1524,7 @@
   "docker": {
     "type": "github",
     "owner": "denorg",
-    "repo": "docker",
+    "repo": "isdocker",
     "desc": "Check if the process is running inside a Docker container in Deno"
   },
   "open": {
