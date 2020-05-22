@@ -1852,6 +1852,12 @@
     "repo": "session",
     "desc": "Sessions for deno web frameworks"
   },
+  "sf": {
+    "type": "github",
+    "owner": "txthinking",
+    "repo": "sf",
+    "desc": "A stupid javascript web framework for deno"
+  },
   "sha1": {
     "type": "github",
     "owner": "chiefbiiko",
