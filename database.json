@@ -348,6 +348,12 @@
     "repo": "deno_cross_env",
     "desc": "A tool for setting environment variables across platforms"
   },
+  "csp": {
+    "type": "github",
+    "owner": "CreatCodeBuild",
+    "repo": "csp",
+    "desc": "A CSP implementation that works in Browser, Node and Deno that has 0 dependencies. Provide Channel and select function."
+  },
   "csv": {
     "type": "github",
     "owner": "vslinko",
