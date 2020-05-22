@@ -1521,7 +1521,7 @@
     "repo": "online",
     "desc": "Check if you're currently online and connected to the internet"
   },
-  "docker": {
+  "isdocker": {
     "type": "github",
     "owner": "denorg",
     "repo": "isdocker",
