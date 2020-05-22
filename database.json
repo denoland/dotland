@@ -1660,6 +1660,12 @@
     "repo": "proxy-bind",
     "desc": "From foobar.fn.bind(foobar) to bind(foobar).fn"
   },
+  "pubsub": {
+    "type": "github",
+    "owner": "zorbyte",
+    "repo": "pubsub",
+    "desc": "A simplistic PubSub module for Deno."
+  },
   "punycode": {
     "type": "github",
     "owner": "ClementD64",
