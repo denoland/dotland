@@ -1533,6 +1533,12 @@
     "repo": "opine",
     "desc": "Fast, minimalist web framework for Deno ported from ExpressJS."
   },
+  "pagic": {
+    "type": "github",
+    "owner": "xcatliu",
+    "repo": "pagic",
+    "desc": "The easiest way to generate static html page from markdown, built with Deno! 🦕"
+  },
   "panoptes": {
     "type": "github",
     "owner": "TokenChingy",
