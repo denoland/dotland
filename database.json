@@ -476,12 +476,6 @@
     "repo": "deno_app_setuper",
     "desc": "A CLI to setup apps like a Create React App."
   },
-  "deno_aws_sign_v4":{
-    "type": "github",
-    "owner": "silverxu",
-    "repo": "deno-aws-sign-v4",
-    "desc": "Generates AWS Signature V4 for AWS low-level REST APIs"
-  },	
   "deno_check_updates": {
     "type": "github",
     "owner": "fzwael",
@@ -928,12 +922,6 @@
     "repo": "fiona",
     "path": "/src",
     "desc": "A tool for creating large sets of pseudo random data."
-  },
-  "fireflix": {
-    "type": "github",
-    "owner": "AlfieriChou",
-    "repo": "deno-fireflix",
-    "desc": "Summary of common functions."
   },
   "fox": {
     "type": "github",
@@ -1666,12 +1654,6 @@
     "repo": "proxy-bind",
     "desc": "From foobar.fn.bind(foobar) to bind(foobar).fn"
   },
-  "pubsub": {
-    "type": "github",
-    "owner": "zorbyte",
-    "repo": "pubsub",
-    "desc": "A simplistic PubSub module for Deno."
-  },
   "punycode": {
     "type": "github",
     "owner": "ClementD64",
@@ -1834,12 +1816,6 @@
     "repo": "deno_servicr",
     "desc": "⚙️ Small app/script/service manager to manage startup and shutdown gracefully ⚙️"
   },
-  "session": {
-    "type": "github",
-    "owner": "denjucks",
-    "repo": "session",
-    "desc": "Sessions for deno web frameworks"
-  },
   "sha1": {
     "type": "github",
     "owner": "chiefbiiko",
@@ -1946,6 +1922,12 @@
     "repo": "specosaur",
     "desc": "Specification pattern library for Deno."
   },
+  "sql": {
+    "type": "github",
+    "owner": "yourtion",
+    "repo": "deno-sql",
+    "desc": "Powerful and Easy use SQL Query Builder on Deno"
+  },
   "sql_builder": {
     "type": "github",
     "owner": "manyuanrong",
@@ -2003,12 +1985,6 @@
     "owner": "jabernardo",
     "repo": "strcolors.ts",
     "desc": "FMT String Extensions for Deno"
-  },
-  "supports_color": {
-    "type": "github",
-    "owner": "frunkad",
-    "repo": "supports-color",
-    "desc": "Detect whether a terminal supports color (basic, 256 or 16m)"
   },
   "supreme_api": {
     "type": "github",
@@ -2205,12 +2181,6 @@
     "owner": "umbopepato",
     "repo": "velociraptor",
     "desc": "An npm-style script runner for Deno"
-  },
-  "verbalexpressions": {
-    "type": "github",
-    "owner": "evosland",
-    "repo": "denoverbalexpressions",
-    "desc": "Deno module implementing the verbal expressions library"
   },
   "view_engine": {
     "type": "github",
