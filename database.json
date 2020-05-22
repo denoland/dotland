@@ -65,6 +65,12 @@
     "owner": "jozsefsallai",
     "repo": "ask",
     "desc": "Interactive command-line prompts for Deno."
+  },	
+  "async_ray": {
+    "type": "github",
+    "owner": "rpgeeganage",
+    "repo": "async-ray-deno",
+    "desc": "Provide async/await callbacks for Array methods."
   },
   "attain": {
     "type": "github",
