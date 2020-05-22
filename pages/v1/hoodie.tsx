@@ -1,6 +1,6 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import React from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 
 import Footer from "../../components/Footer";
@@ -8,6 +8,8 @@ import Header from "../../components/Header";
 import { metaDescription } from "..";
 
 const V1Hoodie = () => {
+  const [size, setSize] = useState("M");
+
   return (
     <>
       <Head>
@@ -54,7 +56,103 @@ const V1Hoodie = () => {
               $100
             </p>
             <p className="text-gray-500 mt-1 leading-tight">$15 shipping</p>
-            <h1 className="py-8 text-3xl tracking-tight">Sold Out</h1>
+            <form
+              action="https://www.paypal.com/cgi-bin/webscr"
+              method="post"
+              target="_top"
+            >
+              <input type="hidden" name="cmd" value="_s-xclick" />
+              <input
+                type="hidden"
+                name="hosted_button_id"
+                value="FRK9AR6WRLBBJ"
+              />
+              <input type="hidden" name="currency_code" value="USD" />
+              <input type="hidden" name="on0" value="Sizes" />
+
+              <div className="mt-4 w-full">
+                <label htmlFor="size" className="text-sm">
+                  Size
+                </label>
+                <div className="mt-1">
+                  <div className="rounded-md shadow-sm">
+                    <select
+                      id="size"
+                      name="os0"
+                      className="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                      value={size}
+                      onChange={({ target: { value: newSize } }) =>
+                        setSize(newSize)
+                      }
+                    >
+                      {["S", "M", "L", "XL", "XXL"].map((v) => (
+                        <option key={v} value={v}>
+                          {v}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <img src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" />
+              <div className="mt-2">
+                <span className="block w-full rounded-md shadow-sm">
+                  <button
+                    name="submit"
+                    type="submit"
+                    className="flex w-full justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:shadow-outline-indigo active:bg-gray-700 transition duration-150 ease-in-out"
+                  >
+                    Purchase with PayPal
+                  </button>
+                </span>
+              </div>
+              <div className="mt-6">
+                <h4 className="text-gray-500">Size chart (in inches)</h4>
+                {/* Gildan Heavy Blend Adult Full Zip Hooded Sweatshirt 18600 */}
+                <table className="table-auto mt-1 overflow-x-auto w-full rounded">
+                  <thead>
+                    <tr>
+                      <th className="border px-4 py-2">Size</th>
+                      <th className="border px-4 py-2">Width</th>
+                      <th className="border px-4 py-2">Length</th>
+                      <th className="border px-4 py-2">Sleeve Center Back</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="border px-4 py-2">S</td>
+                      <td className="border px-4 py-2">19.25</td>
+                      <td className="border px-4 py-2">27</td>
+                      <td className="border px-4 py-2">33.5</td>
+                    </tr>
+                    <tr>
+                      <td className="border px-4 py-2">M</td>
+                      <td className="border px-4 py-2">21.25</td>
+                      <td className="border px-4 py-2">28</td>
+                      <td className="border px-4 py-2">34.5</td>
+                    </tr>
+                    <tr>
+                      <td className="border px-4 py-2">L</td>
+                      <td className="border px-4 py-2">23.25</td>
+                      <td className="border px-4 py-2">29</td>
+                      <td className="border px-4 py-2">35.5</td>
+                    </tr>
+                    <tr>
+                      <td className="border px-4 py-2">XL</td>
+                      <td className="border px-4 py-2">25.25</td>
+                      <td className="border px-4 py-2">30</td>
+                      <td className="border px-4 py-2">36.5</td>
+                    </tr>
+                    <tr>
+                      <td className="border px-4 py-2">XXL</td>
+                      <td className="border px-4 py-2">27.25</td>
+                      <td className="border px-4 py-2">31</td>
+                      <td className="border px-4 py-2">37.5</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </form>
           </div>
         </div>
       </div>
