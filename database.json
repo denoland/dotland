@@ -1816,6 +1816,12 @@
     "repo": "deno_servicr",
     "desc": "⚙️ Small app/script/service manager to manage startup and shutdown gracefully ⚙️"
   },
+  "session": {
+    "type": "github",
+    "owner": "denjucks",
+    "repo": "session",
+    "desc": "Sessions for deno web frameworks"
+  },
   "sha1": {
     "type": "github",
     "owner": "chiefbiiko",
