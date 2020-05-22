@@ -1986,6 +1986,12 @@
     "repo": "strcolors.ts",
     "desc": "FMT String Extensions for Deno"
   },
+  "supports_color": {
+    "type": "github",
+    "owner": "frunkad",
+    "repo": "supports-color",
+    "desc": "Detect whether a terminal supports color (basic, 256 or 16m)"
+  },
   "supreme_api": {
     "type": "github",
     "owner": "desire",
