@@ -2170,6 +2170,12 @@
     "repo": "velociraptor",
     "desc": "An npm-style script runner for Deno"
   },
+  "verbalexpressions": {
+    "type": "github",
+    "owner": "evosland",
+    "repo": "denoverbalexpressions",
+    "desc": "Deno module implementing the verbal expressions library"
+  },
   "view_engine": {
     "type": "github",
     "owner": "gjuoun",
