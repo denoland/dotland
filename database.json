@@ -306,6 +306,12 @@
     "repo": "deno-context",
     "desc": "🦕 Propagate deadlines, a cancellation and other request-scoped values to multiple promise. The behaviour is like Go's context"
   },
+  "cordeno": {
+    "type": "github",
+    "owner": "cordeno",
+    "repo": "cordeno",
+    "desc": "A Disocord API wrapper for developing discord bots using the Deno runtime."
+  },
   "core": {
     "type": "github",
     "owner": "denoland",
