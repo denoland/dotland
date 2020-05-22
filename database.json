@@ -476,6 +476,12 @@
     "repo": "deno_app_setuper",
     "desc": "A CLI to setup apps like a Create React App."
   },
+  "deno_aws_sign_v4":{
+    "type": "github",
+    "owner": "silverxu",
+    "repo": "deno-aws-sign-v4",
+    "desc": "Generates AWS Signature V4 for AWS low-level REST APIs"
+  },	
   "deno_check_updates": {
     "type": "github",
     "owner": "fzwael",
