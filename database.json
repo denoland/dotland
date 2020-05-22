@@ -312,6 +312,12 @@
     "repo": "cors",
     "desc": "Providing a middleware that can be used to enable CORS with various options"
   },
+  "cotton": {
+    "type": "github",
+    "owner": "rahmanfadhil",
+    "repo": "cotton",
+    "desc": "SQL Database Toolkit for Deno"
+  },
   "countryfinder": {
     "type": "github",
     "owner": "yonas-g",
