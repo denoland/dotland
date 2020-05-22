@@ -1857,7 +1857,7 @@
     "owner": "glatan",
     "repo": "sha2",
     "desc": "SHA-2 family for Deno."
-  }
+  },
   "sha256": {
     "type": "github",
     "owner": "chiefbiiko",
