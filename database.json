@@ -348,6 +348,12 @@
     "repo": "cowsay",
     "desc": "Configurable talking cow for Deno"
   },
+  "create_deno_plugin": {
+    "type": "github",
+    "owner": "chiefbiiko",
+    "repo": "create-deno-plugin",
+    "desc": "Scaffolding for deno native plugins"
+  },
   "cron": {
     "type": "github",
     "owner": "wrzonki",
