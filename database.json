@@ -677,9 +677,9 @@
   },
   "denon": {
     "type": "github",
-    "owner": "eliassjogreen",
+    "owner": "denosaurs",
     "repo": "denon",
-    "desc": "Like nodemon but made in and for deno. Also a deno style file watcher"
+    "desc": "denon is the deno replacement for nodemon providing a feature packed and easy to use experience."
   },
   "denotrain": {
     "type": "github",
