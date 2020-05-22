@@ -735,6 +735,12 @@
     "repo": "dexecutor",
     "desc": "An SQL query executor that supports MySql, MariaDB, Postgres, and Sqlite"
   },
+  "di": {
+    "type": "github",
+    "owner": "luvies",
+    "repo": "deno_di",
+    "desc": "A dependency injection (DI) (inversion of control (IoC)) module for deno."
+  },
   "dinja": {
     "type": "github",
     "owner": "denjucks",
