@@ -923,6 +923,12 @@
     "path": "/src",
     "desc": "A tool for creating large sets of pseudo random data."
   },
+  "fireflix": {
+    "type": "github",
+    "owner": "AlfieriChou",
+    "repo": "deno-fireflix",
+    "desc": "Summary of common functions."
+  },
   "fox": {
     "type": "github",
     "owner": "eankeen",
