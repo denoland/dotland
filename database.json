@@ -270,6 +270,12 @@
     "repo": "deno-collections",
     "desc": "A utility to handle collections"
   },
+  "color": {
+    "type": "github",
+    "owner": "maheshkareeya",
+    "repo": "color",
+    "desc": "Write Colourful Messages In console. It's easy to learn and use. ༼ つ ◕_◕ ༽つ"
+  },
   "colors": {
     "type": "github",
     "owner": "maheshkareeya",
