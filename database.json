@@ -1888,6 +1888,12 @@
     "repo": "sha1",
     "desc": "SHA1 for deno."
   },
+  "sha2": {
+    "type": "github",
+    "owner": "glatan",
+    "repo": "sha2",
+    "desc": "SHA-2 family for Deno."
+  },
   "sha256": {
     "type": "github",
     "owner": "chiefbiiko",
