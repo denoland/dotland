@@ -1958,6 +1958,12 @@
     "repo": "specosaur",
     "desc": "Specification pattern library for Deno."
   },
+  "sql": {
+    "type": "github",
+    "owner": "yourtion",
+    "repo": "deno-sql",
+    "desc": "Powerful and Easy use SQL Query Builder on Deno"
+  },
   "sql_builder": {
     "type": "github",
     "owner": "manyuanrong",
