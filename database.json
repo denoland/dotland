@@ -1521,6 +1521,12 @@
     "repo": "online",
     "desc": "Check if you're currently online and connected to the internet"
   },
+  "docker": {
+    "type": "github",
+    "owner": "denorg",
+    "repo": "docker",
+    "desc": "Check if the process is running inside a Docker container in Deno"
+  },
   "open": {
     "type": "github",
     "owner": "SkoshRG",
