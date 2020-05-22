@@ -1780,6 +1780,12 @@
     "repo": "reno",
     "desc": "A thin, testable routing library designed to sit on top of Deno's standard HTTP module"
   },
+  "resulty": {
+    "type": "github",
+    "owner": "robdwaller",
+    "repo": "resulty",
+    "desc": "Provides simple, Rust-like Result and Option objects for Deno."
+  },
   "rimu": {
     "type": "github",
     "owner": "srackham",
