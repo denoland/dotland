@@ -1146,6 +1146,12 @@
     "repo": "isIP",
     "desc": "IP address detector for Deno."
   },
+  "isdocker": {
+    "type": "github",
+    "owner": "denorg",
+    "repo": "isdocker",
+    "desc": "Check if the process is running inside a Docker container in Deno"
+  },
   "is_exe": {
     "type": "github",
     "owner": "eankeen",
@@ -1520,12 +1526,6 @@
     "owner": "denorg",
     "repo": "online",
     "desc": "Check if you're currently online and connected to the internet"
-  },
-  "isdocker": {
-    "type": "github",
-    "owner": "denorg",
-    "repo": "isdocker",
-    "desc": "Check if the process is running inside a Docker container in Deno"
   },
   "open": {
     "type": "github",
