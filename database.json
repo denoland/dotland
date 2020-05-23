@@ -11,6 +11,12 @@
     "repo": "abc",
     "desc": "A better Deno framework to create web application"
   },
+  "accepts": {
+    "type": "github",
+    "owner": "ako-deno",
+    "repo": "accepts",
+    "desc": "Higher level content negotiation for Deno."
+  },
   "actdb": {
     "type": "github",
     "owner": "searchableguy",
