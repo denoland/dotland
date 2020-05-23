@@ -993,6 +993,12 @@
     "repo": "deno-fen",
     "desc": "A simple web framework for deno."
   },
+  "file_chunk": {
+    "type": "github",
+    "owner": "ClementD64",
+    "repo": "deno-file-chunk",
+    "desc": "Read a chunk of file"
+  },
   "filesize": {
     "type": "github",
     "owner": "davidjamesstone",
