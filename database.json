@@ -584,7 +584,7 @@
     "repo": "deno_init",
     "desc": "The executable to set up a deno project 🦕"
   },
-  "deno-matrix": {
+  "deno_matrix": {
     "type": "github",
     "owner": "anirudhgiri",
     "repo": "deno-matrix",
