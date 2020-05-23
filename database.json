@@ -1732,6 +1732,12 @@
     "repo": "deno-qs",
     "desc": "A querystring parser"
   },
+  "quarrel": {
+    "type": "github",
+    "owner": "fatalcenturion",
+    "repo": "quarrel",
+    "desc": "A command line argument parser"
+  },
   "rad": {
     "type": "github",
     "owner": "cdaringe",
