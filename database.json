@@ -1853,6 +1853,12 @@
     "repo": "deno_random_interval",
     "desc": "deno random interval"
   },
+  "reactive": {
+    "type": "github",
+    "owner": "bordoley",
+    "repo": "reactive-js",
+    "desc": "Functional reactive programming including Observables, Bi-directional asynchronous streams, and utilities"
+  },
   "readline": {
     "type": "github",
     "owner": "vslinko",
