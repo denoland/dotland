@@ -396,6 +396,12 @@
     "repo": "deno-cuid",
     "desc": "Collision-resistant ids optimized for horizontal scaling and performance"
   },
+  "currency_finder": {
+    "type": "github",
+    "owner": "yeukfei02",
+    "repo": "currencyFinder",
+    "desc": "find currency information in deno"
+  },
   "cursor": {
     "type": "github",
     "owner": "iamnathanj",
