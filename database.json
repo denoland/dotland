@@ -885,6 +885,12 @@
     "repo": "noble-ed25519",
     "desc": "ed25519, an elliptic curve that could be used for assymetric encryption and EDDSA signature scheme."
   },
+  "ejs_deno": {
+    "type": "github",
+    "owner": "femiruby",
+    "repo": "ejs-deno",
+    "desc": "EJS in Deno"
+  },
   "ende": {
     "type": "github",
     "owner": "rsp",
