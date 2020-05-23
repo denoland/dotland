@@ -989,6 +989,12 @@
     "repo": "gentleRpc",
     "desc": "JSON-RPC 2.0 TypeScript library for deno and browser."
   },
+  "getip": {
+    "type": "github",
+    "owner": "denorg",
+    "repo": "getip",
+    "desc": "Get your public IP address in Deno"
+  },
   "graphql": {
     "type": "github",
     "owner": "CreatCodeBuild",
