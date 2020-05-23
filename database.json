@@ -1152,6 +1152,12 @@
     "repo": "isIP",
     "desc": "IP address detector for Deno."
   },
+  "is_docker": {
+    "type": "github",
+    "owner": "denorg",
+    "repo": "is-docker",
+    "desc": "Check if the process is running inside a Docker container in Deno"
+  },
   "is_exe": {
     "type": "github",
     "owner": "eankeen",
@@ -1163,12 +1169,6 @@
     "owner": "rubiin",
     "repo": "is_url",
     "desc": "Check if a URL is absolute"
-  },
-  "is_docker": {
-    "type": "github",
-    "owner": "denorg",
-    "repo": "is-docker",
-    "desc": "Check if the process is running inside a Docker container in Deno"
   },
   "jbq": {
     "type": "github",
