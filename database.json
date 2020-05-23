@@ -1097,6 +1097,12 @@
     "repo": "deno_html_entities",
     "desc": "Fast html entities decode & encode library"
   },
+  "http_errors": {
+    "type": "github",
+    "owner": "ako-deno",
+    "repo": "http_errors",
+    "desc": "Create HTTP Error for Deno."
+  },
   "http_server": {
     "type": "github",
     "owner": "SkoshRG",
