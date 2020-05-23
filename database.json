@@ -909,6 +909,12 @@
     "repo": "event_emitter",
     "desc": "A NodeJS-like EventEmitter for Deno written in 100% Typescript."
   },
+  "event_kit": {
+    "type": "github",
+    "owner": "lemarier",
+    "repo": "deno-event-kit",
+    "desc": "Simple module for implementing event subscription APIs"
+  },
   "evt": {
     "type": "github",
     "owner": "garronej",
