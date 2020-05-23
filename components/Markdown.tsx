@@ -61,12 +61,16 @@ function LinkRenderer(props: LinkRendererProps) {
   } else {
     href = props.href;
   }
-  // TODO(lucacasonato): Use next.js Link
-  return (
-    <a href={href} className="link">
-      {props.children}
-    </a>
-  );
+
+  if (href) {
+    // TODO(lucacasonato): Use next.js Link
+    return (
+      <a href={href} className="link">
+        {props.children}
+      </a>
+    );
+  }
+  return (<>[{props.children}]</>)
 }
 
 function CodeRenderer(props: any) {
@@ -92,6 +96,7 @@ const renderers = (canonicalURL: string) => ({
   code: CodeRenderer,
   heading: HeadingRenderer,
   link: LinkRenderer,
+  linkReference: LinkRenderer,
   image: function ImageRendererWrapper(props: any) {
     return <ImageRenderer {...props} canonicalURL={canonicalURL} />;
   },
