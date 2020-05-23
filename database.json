@@ -1527,6 +1527,13 @@
     "repo": "deno-observable",
     "desc": "tc39 proposal spec compatible observable"
   },
+  "omelette": {
+    "type": "github",
+    "owner": "f",
+    "repo": "omelette",
+    "path": "/deno",
+    "desc": "A simple, template based autocompletion tool for Node and Deno projects with super easy API. (For Bash, Zsh and Fish)"
+  },
   "once": {
     "type": "github",
     "owner": "KSXGitHub",
