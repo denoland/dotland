@@ -989,10 +989,10 @@
     "repo": "gentleRpc",
     "desc": "JSON-RPC 2.0 TypeScript library for deno and browser."
   },
-  "getip": {
+  "get_ip": {
     "type": "github",
     "owner": "denorg",
-    "repo": "getip",
+    "repo": "get-ip",
     "desc": "Get your public IP address in Deno"
   },
   "graphql": {
@@ -1164,10 +1164,10 @@
     "repo": "is_url",
     "desc": "Check if a URL is absolute"
   },
-  "isdocker": {
+  "is_docker": {
     "type": "github",
     "owner": "denorg",
-    "repo": "isdocker",
+    "repo": "is-docker",
     "desc": "Check if the process is running inside a Docker container in Deno"
   },
   "jbq": {
