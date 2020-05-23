@@ -2268,6 +2268,12 @@
     "repo": "url-parse",
     "desc": "Parse/Build an url from a javascript object or a string"
   },
+  "url_validator": {
+    "type": "github",
+    "owner": "r-kgy",
+    "repo": "url_validator",
+    "desc": "simple url validator for Deno"
+  },
   "username": {
     "type": "github",
     "owner": "justjavac",
