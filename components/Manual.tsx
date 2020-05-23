@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter, Router } from "next/router";
@@ -11,6 +11,7 @@ import {
 } from "../util/manual_utils";
 import Markdown from "./Markdown";
 import Transition from "./Transition";
+import { metaDescription } from "../pages";
 
 const denoEntry = findEntry("deno");
 
@@ -44,7 +45,33 @@ function Manual() {
 
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
 
-  Router.events.on("routeChangeStart", () => setShowSidebar(false));
+  const hideSidebar = () => setShowSidebar(false);
+
+  const manualEl = useRef<HTMLElement>(null);
+
+  const handleRouteChange = (url: string) => {
+    manualEl.current?.scrollTo(0, 0);
+    setPageIndex(pageList.findIndex((page) => page.path === url));
+  };
+
+  useEffect(() => {
+    Router.events.on("routeChangeStart", hideSidebar);
+    Router.events.on("routeChangeComplete", handleRouteChange);
+
+    return () => {
+      Router.events.off("routeChangeStart", hideSidebar);
+      Router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  });
+
+  const scrollTOCIntoView = () =>
+    document.getElementsByClassName("toc-active")[0]?.scrollIntoView();
+
+  useEffect(() => {
+    if (showSidebar) {
+      scrollTOCIntoView();
+    }
+  }, [showSidebar]);
 
   const [
     tableOfContents,
@@ -54,21 +81,46 @@ function Manual() {
   const [content, setContent] = useState<string | null>(null);
   const [versions, setVersions] = useState<string[] | null | undefined>();
 
+  const partialContent = useMemo(
+    () => content?.split(" ").slice(0, 20).join(""),
+    [content]
+  );
+
   useEffect(() => {
     getTableOfContents(version ?? "master")
       .then(setTableOfContents)
-      .then(() =>
-        setTimeout(
-          () =>
-            document.getElementsByClassName("toc-active")[0].scrollIntoView(),
-          0
-        )
-      )
+      .then(scrollTOCIntoView)
       .catch((e) => {
         console.error("Failed to fetch table of contents:", e);
         setTableOfContents(null);
       });
   }, [version]);
+
+  const [pageIndex, setPageIndex] = useState(0);
+  const [pageList, setPageList] = useState<
+    Array<{ path: string; name: string }>
+  >([]);
+
+  useEffect(() => {
+    if (tableOfContents) {
+      const tempList: Array<{ path: string; name: string }> = [];
+
+      Object.entries(tableOfContents).map(([slug, entry]) => {
+        tempList.push({ path: `/manual/${slug}`, name: entry.name });
+
+        if (entry.children) {
+          Object.entries(entry.children).map(([childSlug, name]) =>
+            tempList.push({ path: `/manual/${slug}/${childSlug}`, name })
+          );
+        }
+      });
+
+      setPageList(tempList);
+      setPageIndex(
+        tempList.findIndex((page) => page.path === `/manual${path}`)
+      );
+    }
+  }, [tableOfContents]);
 
   const sourceURL = useMemo(() => getFileURL(version ?? "master", path), [
     version,
@@ -120,6 +172,12 @@ function Manual() {
     <div>
       <Head>
         <title>The Deno Manual</title>
+        {metaDescription({
+          title: "The Deno Manual",
+          description: partialContent || "The Deno Manual",
+          url: "https://deno.land/manual",
+          image: "https://deno.land/v1_wide.jpg",
+        })}
       </Head>
       <div className="h-screen flex overflow-hidden">
         <Transition show={showSidebar}>
@@ -136,7 +194,7 @@ function Manual() {
                 <div className="fixed inset-0">
                   <div
                     className="absolute inset-0 bg-gray-600 opacity-75"
-                    onClick={() => setShowSidebar(false)}
+                    onClick={hideSidebar}
                   ></div>
                 </div>
               </Transition>
@@ -153,7 +211,7 @@ function Manual() {
                     <button
                       className="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600"
                       aria-label="Close sidebar"
-                      onClick={() => setShowSidebar(false)}
+                      onClick={hideSidebar}
                     >
                       <svg
                         className="h-6 w-6 text-white"
@@ -236,15 +294,15 @@ function Manual() {
           </div>
         </div>
         <div className="flex flex-col w-0 flex-1 overflow-hidden">
-          <div className="relative z-10 flex-shrink-0 flex h-16 bg-white shadow">
+          <div className="relative z-10 flex-shrink-0 flex h-16 bg-white shadow md:hidden">
             <Link href="/">
-              <a className="px-4 border-r border-gray-200 flex items-center justify-center md:hidden">
+              <a className="px-4 flex items-center justify-center md:hidden">
                 <img src="/logo.svg" alt="logo" className="w-auto h-10" />
               </a>
             </Link>
             <div className="flex-1 px-4 flex justify-between">
               <div className="flex-1 flex">
-                <div className="w-full flex md:ml-0">
+                {/* <div className="w-full flex md:ml-0">
                   <label htmlFor="search_field" className="sr-only">
                     Search
                   </label>
@@ -269,11 +327,11 @@ function Manual() {
                       type="search"
                     />
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
             <button
-              className="px-4 border-l border-gray-200 text-gray-500 focus:outline-none focus:bg-gray-100 focus:text-gray-600 md:hidden"
+              className="px-4 text-gray-500 focus:outline-none focus:bg-gray-100 focus:text-gray-600 md:hidden"
               aria-label="Open sidebar"
               onClick={() => setShowSidebar(true)}
             >
@@ -296,20 +354,43 @@ function Manual() {
           <main
             className="flex-1 relative z-0 overflow-y-auto focus:outline-none"
             tabIndex={0}
+            ref={manualEl}
           >
             <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20">
               {content ? (
-                <div className="divide-y divide-gray-200">
+                <>
                   <Markdown source={content} canonicalURL={sourceURL} />
-                  <div className="pt-3">
+                  <div className="pt-4 border-t border-gray-200">
+                    {pageIndex !== 0 && (
+                      <Link
+                        href="/[identifier]/[...path]"
+                        as={pageList[pageIndex - 1].path}
+                      >
+                        <a className="text-gray-900 hover:text-gray-600 font-normal">
+                          ← {pageList[pageIndex - 1].name}
+                        </a>
+                      </Link>
+                    )}
+                    {pageIndex !== pageList.length - 1 && (
+                      <Link
+                        href="/[identifier]/[...path]"
+                        as={pageList[pageIndex + 1].path}
+                      >
+                        <a className="text-gray-900 hover:text-gray-600 font-normal float-right">
+                          {pageList[pageIndex + 1].name} →
+                        </a>
+                      </Link>
+                    )}
+                  </div>
+                  <div className="pt-2 clear-both">
                     <a
-                      className="text-gray-500 hover:text-gray-400"
+                      className="text-gray-500 hover:text-gray-400 font-normal float-right"
                       href={getDocURL(version ?? "master", path)}
                     >
                       View on GitHub
                     </a>
                   </div>
-                </div>
+                </>
               ) : (
                 <div className="w-full my-8">
                   <div className="w-4/5 sm:w-1/3 bg-gray-100 h-8"></div>

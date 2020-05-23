@@ -5,6 +5,7 @@ import Head from "next/head";
 
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
+import { metaDescription } from "..";
 
 const V1Hoodie = () => {
   const [size, setSize] = useState("M");
@@ -13,10 +14,14 @@ const V1Hoodie = () => {
     <>
       <Head>
         <title>Deno 1.0 Hoodie</title>
-        <meta
-          name="description"
-          content="A limited edition, premium quality Deno 1.0 hoodie that you can order to help support the Deno project."
-        />
+
+        {metaDescription({
+          title: "Deno 1.0 Hoodie",
+          description:
+            "A limited edition, premium quality Deno 1.0 hoodie that you can order to help support the Deno project.",
+          url: "https://deno.land/v1/hoodie",
+          image: "https://deno.land/v1_wide.jpg",
+        })}
       </Head>
       <Header />
       <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 py-8 mb-16">

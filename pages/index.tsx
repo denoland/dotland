@@ -6,6 +6,7 @@ import Link from "next/link";
 import CodeBlock from "../components/CodeBlock";
 import Footer from "../components/Footer";
 import { entries } from "../util/registry_utils";
+import stdVersions from "../deno_std_versions.json";
 import { NextPage, GetStaticProps } from "next";
 import InlineCode from "../components/InlineCode";
 import Header from "../components/Header";
@@ -16,18 +17,40 @@ interface SimpleEntry {
 }
 interface HomeProps {
   thirdPartyEntries: SimpleEntry[];
+  latestStd: string;
 }
+
+export const metaDescription = ({
+  title,
+  description,
+  image,
+  url = "https://deno.land/",
+}: {
+  title: string;
+  description: string;
+  url?: string;
+  image: string;
+}) => [
+  <meta name="title" key="title" content={title} />,
+  <meta name="description" key="description" content={description} />,
+  <meta name="twitter:card" key="twitter:card" content="summary_large_image" />,
+  <meta property="og:type" key="og:type" content="website" />,
+  <meta property="og:url" key="og:url" content={url} />,
+  <meta property="og:title" key="og:title" content={title} />,
+  <meta property="og:description" key="og:description" content={description} />,
+  <meta property="og:image" key="og:image" content={image} />,
+];
 
 const NUM_THIRD_PARTY = 12;
 
-export const complexExampleProgram = `import { serve } from "https://deno.land/std@0.50.0/http/server.ts";
-const s = serve({ port: 8000 });
-console.log("http://localhost:8000/");
-for await (const req of s) {
-  req.respond({ body: "Hello World\\n" });
-}`;
+const Home: NextPage<HomeProps> = ({ thirdPartyEntries, latestStd }) => {
+  const complexExampleProgram = `import { serve } from "https://deno.land/std@${latestStd}/http/server.ts";
+  const s = serve({ port: 8000 });
+  console.log("http://localhost:8000/");
+  for await (const req of s) {
+    req.respond({ body: "Hello World\\n" });
+  }`;
 
-const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
   const [thirdPartySelection, setThirdPartySelection] = useState<
     SimpleEntry[] | null
   >(null);
@@ -45,10 +68,12 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
     <>
       <Head>
         <title>Deno</title>
-        <meta
-          name="description"
-          content="Deno, a secure runtime for JavaScript and TypeScript."
-        />
+        {metaDescription({
+          title: "Deno — A secure runtime for JavaScript and TypeScript.",
+          description:
+            "Deno is a simple, modern and secure runtime for JavaScript and TypeScript that uses V8 and is built in Rust.",
+          image: "https://deno.land/v1_wide.jpg",
+        })}
       </Head>
       <div className="bg-white">
         <div className="bg-black">
@@ -286,7 +311,7 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
 const InstallSection = () => {
   const shell = (
     <div key="shell" className="my-4 text-gray-700">
-      <p className="py-2 font-bold">Using Shell (macOS, Linux):</p>
+      <p className="py-2">Shell (Mac, Linux):</p>
       <CodeBlock
         language="bash"
         code={`curl -fsSL https://deno.land/x/install/install.sh | sh`}
@@ -295,13 +320,18 @@ const InstallSection = () => {
   );
   const homebrew = (
     <div key="homebrew" className="my-4 text-gray-700">
-      <p className="mb-2 font-bold">Using Homebrew (macOS):</p>
-      <CodeBlock language="typescript" code={`brew install deno`} />
+      <p className="mb-2">
+        <a href="https://formulae.brew.sh/formula/deno" className="link">
+          Homebrew
+        </a>{" "}
+        (Mac):
+      </p>
+      <CodeBlock language="bash" code={`brew install deno`} />
     </div>
   );
   const powershell = (
     <div key="powershell" className="my-4 text-gray-700">
-      <p className="mb-2 font-bold">Using PowerShell (Windows):</p>
+      <p className="mb-2">PowerShell (Windows):</p>
       <CodeBlock
         language="bash"
         code={`iwr https://deno.land/x/install/install.ps1 -useb | iex`}
@@ -310,14 +340,30 @@ const InstallSection = () => {
   );
   const chocolatey = (
     <div key="chocolatey" className="my-4 text-gray-700">
-      <p className="mb-2 font-bold">Using Chocolatey (Windows):</p>
+      <p className="mb-2">
+        <a href="https://chocolatey.org/packages/deno" className="link">
+          Chocolatey
+        </a>{" "}
+        (Windows):
+      </p>
       <CodeBlock language="bash" code={`choco install deno`} />
     </div>
   );
   const scoop = (
     <div key="scoop" className="my-4 text-gray-700">
-      <p className="mb-2 font-bold">Using Scoop (Windows):</p>
+      <p className="mb-2">Scoop (Windows):</p>
       <CodeBlock language="bash" code={`scoop install deno`} />
+    </div>
+  );
+  const cargo = (
+    <div key="cargo" className="my-4 text-gray-700">
+      <p className="py-2">
+        Build and install from source using{" "}
+        <a href="https://crates.io/crates/deno" className="link">
+          Cargo
+        </a>
+      </p>
+      <CodeBlock language="bash" code={`cargo install deno`} />
     </div>
   );
 
@@ -336,6 +382,7 @@ const InstallSection = () => {
       {homebrew}
       {chocolatey}
       {scoop}
+      {cargo}
       <p className="my-4 text-gray-700">
         See{" "}
         <a className="link" href="https://github.com/denoland/deno_install">
@@ -367,7 +414,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   });
 
   return {
-    props: { thirdPartyEntries },
+    props: { thirdPartyEntries, latestStd: stdVersions[0] },
   };
 };
 
