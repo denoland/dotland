@@ -41,6 +41,12 @@
     "repo": "deno-amqp",
     "desc": "AMQP 0.9.1"
   },
+  "api": {
+    "type": "github",
+    "owner": "maheshkareeya",
+    "repo": "api",
+    "desc": "Promise based HTTP client for the Deno. ༼ つ ◕_◕ ༽つ"
+  },
   "aqua": {
     "type": "github",
     "owner": "l2ig",
