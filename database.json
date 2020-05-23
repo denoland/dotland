@@ -1031,6 +1031,12 @@
     "repo": "gentleRpc",
     "desc": "JSON-RPC 2.0 TypeScript library for deno and browser."
   },
+  "get_ip": {
+    "type": "github",
+    "owner": "denorg",
+    "repo": "get-ip",
+    "desc": "Get your public IP address in Deno"
+  },
   "graphql": {
     "type": "github",
     "owner": "CreatCodeBuild",
@@ -1193,6 +1199,12 @@
     "owner": "ako-deno",
     "repo": "isIP",
     "desc": "IP address detector for Deno."
+  },
+  "is_docker": {
+    "type": "github",
+    "owner": "denorg",
+    "repo": "is-docker",
+    "desc": "Check if the process is running inside a Docker container in Deno"
   },
   "is_exe": {
     "type": "github",
