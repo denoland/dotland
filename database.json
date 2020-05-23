@@ -959,6 +959,12 @@
     "path": "/src",
     "desc": "A tool for creating large sets of pseudo random data."
   },
+  "firebasePushID": {
+    "type": "github",
+    "owner": "ajimae",
+    "repo": "UniqueIDGenerator",
+    "desc": "A tool for generating unique database IDs."
+  },
   "fireflix": {
     "type": "github",
     "owner": "AlfieriChou",
