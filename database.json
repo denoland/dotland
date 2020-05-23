@@ -11,6 +11,12 @@
     "repo": "abc",
     "desc": "A better Deno framework to create web application"
   },
+  "accepts": {
+    "type": "github",
+    "owner": "ako-deno",
+    "repo": "accepts",
+    "desc": "Higher level content negotiation for Deno."
+  },
   "actdb": {
     "type": "github",
     "owner": "searchableguy",
@@ -270,6 +276,12 @@
     "repo": "deno-collections",
     "desc": "A utility to handle collections"
   },
+  "color": {
+    "type": "github",
+    "owner": "maheshkareeya",
+    "repo": "color",
+    "desc": "Write Colourful Messages In console. It's easy to learn and use. ༼ つ ◕_◕ ༽つ"
+  },
   "colors": {
     "type": "github",
     "owner": "maheshkareeya",
@@ -383,6 +395,12 @@
     "owner": "grantcarthew",
     "repo": "deno-cuid",
     "desc": "Collision-resistant ids optimized for horizontal scaling and performance"
+  },
+  "currency_finder": {
+    "type": "github",
+    "owner": "yeukfei02",
+    "repo": "currencyFinder",
+    "desc": "find currency information in deno"
   },
   "cursor": {
     "type": "github",
@@ -517,6 +535,12 @@
     "owner": "fzwael",
     "repo": "deno-check-updates",
     "desc": "Automatically checks deno dependencies versions from import maps file."
+  },
+  "deno_cron": {
+    "type": "github",
+    "owner": "rbrahul",
+    "repo": "deno_cron",
+    "desc": "Cron Job Scheduler - to write human readable cron syntax with tons of flexibility"
   },
   "deno_deblong": {
     "type": "github",
@@ -735,6 +759,12 @@
     "repo": "dexecutor",
     "desc": "An SQL query executor that supports MySql, MariaDB, Postgres, and Sqlite"
   },
+  "di": {
+    "type": "github",
+    "owner": "luvies",
+    "repo": "deno_di",
+    "desc": "A dependency injection (DI) (inversion of control (IoC)) module for deno."
+  },
   "dinja": {
     "type": "github",
     "owner": "denjucks",
@@ -897,6 +927,12 @@
     "repo": "event_emitter",
     "desc": "A NodeJS-like EventEmitter for Deno written in 100% Typescript."
   },
+  "event_kit": {
+    "type": "github",
+    "owner": "lemarier",
+    "repo": "deno-event-kit",
+    "desc": "Simple module for implementing event subscription APIs"
+  },
   "evt": {
     "type": "github",
     "owner": "garronej",
@@ -920,6 +956,12 @@
     "owner": "allain",
     "repo": "expect",
     "desc": "A deno implementation of expect in order to write tests in a more jest like style."
+  },
+  "fanfou_sdk": {
+    "type": "github",
+    "owner": "LitoMore",
+    "repo": "fanfou-sdk-deno",
+    "desc": "Fanfou SDK for Deno"
   },
   "fastlist": {
     "type": "github",
@@ -952,6 +994,12 @@
     "repo": "fiona",
     "path": "/src",
     "desc": "A tool for creating large sets of pseudo random data."
+  },
+  "firebasePushID": {
+    "type": "github",
+    "owner": "ajimae",
+    "repo": "UniqueIDGenerator",
+    "desc": "A tool for generating unique database IDs."
   },
   "fireflix": {
     "type": "github",
@@ -1080,7 +1128,13 @@
     "repo": "i18next-locize-backend",
     "desc": "A simple i18next backend for locize.com which can be used in Node.js, in the browser and for Deno."
   },
-  "ifttt": { 
+  "i18next_mongo_backend": {
+    "type": "github",
+    "owner": "lamualfa",
+    "repo": "dn-i18next-mongo-backend",
+    "desc": "i18next mongodb backend https://www.i18next.com/ - Only for Deno 🦖"
+  },
+  "iftt": { 
     "type": "github", 
     "owner": "0xVesion", 
     "repo": "deno-ifttt", 
@@ -1503,6 +1557,13 @@
     "repo": "deno-observable",
     "desc": "tc39 proposal spec compatible observable"
   },
+  "omelette": {
+    "type": "github",
+    "owner": "f",
+    "repo": "omelette",
+    "path": "/deno",
+    "desc": "A simple, template based autocompletion tool for Node and Deno projects with super easy API. (For Bash, Zsh and Fish)"
+  },
   "once": {
     "type": "github",
     "owner": "KSXGitHub",
@@ -1731,6 +1792,12 @@
     "owner": "adrijere",
     "repo": "deno-qs",
     "desc": "A querystring parser"
+  },
+  "quarrel": {
+    "type": "github",
+    "owner": "fatalcenturion",
+    "repo": "quarrel",
+    "desc": "A command line argument parser"
   },
   "rad": {
     "type": "github",
@@ -2218,6 +2285,12 @@
     "owner": "roonie007",
     "repo": "url-parse",
     "desc": "Parse/Build an url from a javascript object or a string"
+  },
+  "url_validator": {
+    "type": "github",
+    "owner": "r-kgy",
+    "repo": "url_validator",
+    "desc": "simple url validator for Deno"
   },
   "username": {
     "type": "github",
