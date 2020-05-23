@@ -825,6 +825,12 @@
     "repo": "deno-dotenv",
     "desc": "Dotenv handling for deno."
   },
+  "dpx": {
+    "type": "github",
+    "owner": "denorg",
+    "repo": "dpx",
+    "desc": "CLI to run a Deno package without installing it (like npx for Deno)"
+  },
   "drake": {
     "type": "github",
     "owner": "srackham",
