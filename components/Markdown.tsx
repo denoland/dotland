@@ -70,7 +70,7 @@ function LinkRenderer(props: LinkRendererProps) {
       </a>
     );
   }
-  return (<>[{props.children}]</>)
+  return <>[{props.children}]</>;
 }
 
 function CodeRenderer(props: any) {
