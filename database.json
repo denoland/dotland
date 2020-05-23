@@ -1448,6 +1448,12 @@
     "repo": "deno-minimatch",
     "desc": "A deno port of minimatch"
   },
+  "minitable": {
+    "type": "github",
+    "owner": "bernardini687",
+    "repo": "minitable",
+    "desc": "Shape a list of data into a table"
+  },
   "mith": {
     "type": "github",
     "owner": "jwebcoder",
