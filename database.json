@@ -1853,7 +1853,7 @@
     "repo": "deno_random_interval",
     "desc": "deno random interval"
   },
-  "reactive-js": {
+  "reactive": {
     "type": "github",
     "owner": "bordoley",
     "repo": "reactive-js",
