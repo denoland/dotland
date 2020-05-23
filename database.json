@@ -1164,6 +1164,12 @@
     "repo": "deno-ifttt", 
     "desc": "IFTTT webhook api client for deno" 
   },
+  "imt": {
+    "type": "github",
+    "owner": "iosamuel",
+    "repo": "imt",
+    "desc": "Implementation of TMI.JS as Twitch client for Deno"
+  },
   "indigobird": {
     "type": "github",
     "owner": "ralusek",
@@ -1235,12 +1241,6 @@
     "owner": "rubiin",
     "repo": "is_url",
     "desc": "Check if a URL is absolute"
-  },
-  "imt": {
-    "type": "github",
-    "owner": "iosamuel",
-    "repo": "imt",
-    "desc": "Implementation of TMI.JS as Twitch client for Deno"
   },
   "jbq": {
     "type": "github",
