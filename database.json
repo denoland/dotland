@@ -210,6 +210,12 @@
     "repo": "deno_case_style",
     "desc": "A string validator and formater for case Style"
   },
+  "casualdb": {
+    "type": "github",
+    "owner": "campvanilla",
+    "repo": "casualdb",
+    "desc": "Simple JSON database for Deno with type-safety. Inspired by lowdb, with a mongoose-like API."
+  },
   "cat_you": {
     "type": "github",
     "owner": "SuperC03",
