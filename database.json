@@ -1273,6 +1273,12 @@
     "repo": "invert-kv",
     "desc": "Invert key-value pairs in an object"
   },
+  "ip": {
+    "type": "github",
+    "owner": "damianperera",
+    "repo": "deno-ip",
+    "desc": "Detect your IP address and/or fetch geolocation data on an IP address, domain or email via ipify.org"
+  }
   "iro": {
     "type": "github",
     "owner": "jozsefsallai",
