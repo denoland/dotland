@@ -2387,6 +2387,12 @@
     "package": "value-schema",
     "desc": "simple, easy-to-use, and declarative schema validator"
   },
+  "vary": {
+    "type": "github",
+    "owner": "ako-deno",
+    "repo": "vary",
+    "desc": "Manipulate the HTTP Vary header for Deno"
+  },
   "velociraptor": {
     "type": "github",
     "owner": "umbopepato",
