@@ -100,7 +100,7 @@ function FileDisplay(props: {
               <div className="px-4">
                 <Markdown
                   source={props.raw!}
-                  displayURL={props.canonicalPath}
+                  displayURL={location.origin + props.canonicalPath}
                   sourceURL={props.sourceURL}
                 />
               </div>

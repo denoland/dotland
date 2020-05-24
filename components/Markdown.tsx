@@ -49,11 +49,11 @@ interface LinkRendererProps {
 }
 
 function isRelative(path: string): boolean {
-  return !(
-    path.startsWith("/") ||
-    path.startsWith("https://") ||
-    path.startsWith("http://") ||
-    path.startsWith("//")
+  return (
+    !path.startsWith("/") &&
+    !path.startsWith("https://") &&
+    !path.startsWith("http://") &&
+    !path.startsWith("//")
   );
 }
 
