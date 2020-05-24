@@ -1176,6 +1176,12 @@
     "repo": "http-wrapper",
     "desc": "Simple Server/Router wrapper around Deno's existing HTTP module"
   },
+  "humanize_url": {
+    "type": "github",
+    "owner": "denorg",
+    "repo": "humanize-url",
+    "desc": "Humanize a URL in Deno https://yogi.codes → yogi.codes"
+  },
   "humanizer.ts": {
     "type": "github",
     "owner": "fakoua",
