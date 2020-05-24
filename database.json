@@ -1080,6 +1080,12 @@
     "repo": "deno-fireflix",
     "desc": "Summary of common functions."
   },
+  "fossil": {
+    "type": "github",
+    "owner": "matteocrippa",
+    "repo": "fossil",
+    "desc": "A validation suite for type and values."
+  },
   "fox": {
     "type": "github",
     "owner": "eankeen",
