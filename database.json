@@ -766,6 +766,12 @@
     "repo": "denv",
     "desc": "A module similar to dotEnv, but for Deno"
   },
+  "deps": {
+    "type": "github",
+    "owner": "denosaurs",
+    "repo": "deps",
+    "desc": "deps.ts & depencency manager for Deno"
+  },
   "descord": {
     "type": "github",
     "owner": "TheDrone7",
