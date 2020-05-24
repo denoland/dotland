@@ -518,12 +518,6 @@
     "repo": "deno",
     "desc": "A secure runtime for JavaScript and TypeScript."
   },
-  "deno_validator": {
-    "type": "github",
-    "owner": "parasg1999",
-    "repo": "deno-validator",
-    "desc": "A String Validator for deno inspired by validator.js"
-  },
   "deno_app_setuper": {
     "type": "github",
     "owner": "alreadyExisted",
@@ -619,6 +613,12 @@
     "owner": "stefanuros",
     "repo": "deno_twitter_api",
     "desc": "A module to make accessing the Twitter Developer Api easy"
+  },
+  "deno_validator": {
+    "type": "github",
+    "owner": "parasg1999",
+    "repo": "deno-validator",
+    "desc": "A String Validator for deno inspired by validator.js"
   },
   "deno_weather": {
     "type": "github",
