@@ -590,6 +590,12 @@
     "repo": "deno-hidefile",
     "desc": "Create hidden file or folder in Deno 🦕"
   },
+  "deno_http_router": {
+    "type": "github",
+    "owner": "yuenc",
+    "repo": "deno_http_router",
+    "desc": "deno http router"
+  },
   "deno_init": {
     "type": "github",
     "owner": "maxuuell",
