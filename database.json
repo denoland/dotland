@@ -336,6 +336,12 @@
     "repo": "cors",
     "desc": "Providing a middleware that can be used to enable CORS with various options"
   },
+  "convert_size": {
+     "type": "github",
+     "owner": "AliBasicCoder",
+     "repo": "convert-size",
+     "desc": "convert size units like MB GB",
+  },
   "cotton": {
     "type": "github",
     "owner": "rahmanfadhil",
