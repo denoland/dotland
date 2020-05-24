@@ -1769,6 +1769,12 @@
     "repo": "deno-pg-format",
     "desc": "Deno implementation of PostgreSQL's format() to safely create dynamic SQL queries."
   },
+  "pgc4d": {
+    "type": "github",
+    "owner": "jakajancar",
+    "repo": "pgc4d",
+    "desc": "A full-featured PostgreSQL client for Deno."
+  },
   "pipeline": {
     "type": "github",
     "owner": "Focinfi",
