@@ -1758,7 +1758,7 @@
   },
   "postgres": {
     "type": "github",
-    "owner": "buildondata",
+    "owner": "deno-postgres",
     "repo": "deno-postgres",
     "desc": "PostgreSQL driver for Deno."
   },
