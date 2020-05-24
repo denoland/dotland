@@ -359,7 +359,11 @@ function Manual() {
             <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20">
               {content ? (
                 <>
-                  <Markdown source={content} canonicalURL={sourceURL} />
+                  <Markdown
+                    source={content}
+                    displayURL={location.origin + path}
+                    sourceURL={sourceURL}
+                  />
                   <div className="pt-4 border-t border-gray-200">
                     {pageIndex !== 0 && (
                       <Link

@@ -58,7 +58,8 @@ const V1 = (props: Props) => {
         <div className="mt-8">
           <Markdown
             source={props.markdown}
-            canonicalURL={"https://deno.land/v1.md"}
+            displayURL="https://deno.land/v1"
+            sourceURL="https://deno.land/v1.md"
           />
         </div>
         <div className="py-32 text-gray-900">

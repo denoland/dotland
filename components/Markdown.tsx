@@ -4,7 +4,6 @@ import React, { useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import CodeBlock from "./CodeBlock";
 import InlineCode from "./InlineCode";
-import { useRouter } from "next/router";
 
 interface HeadingRendererProps {
   source: string;
@@ -46,21 +45,47 @@ function HeadingRenderer(props: HeadingRendererProps) {
 interface LinkRendererProps {
   children?: any;
   href?: string;
+  displayURL: string;
+}
+
+function isRelative(path: string): boolean {
+  return (
+    !path.startsWith("/") &&
+    !path.startsWith("https://") &&
+    !path.startsWith("http://") &&
+    !path.startsWith("//")
+  );
+}
+
+function relativeToAbsolute(base: string, relative: string): string {
+  const baseURL = new URL(base);
+  baseURL.search = "";
+  baseURL.hash = "";
+  const parts = baseURL.pathname.split("/");
+  parts[parts.length - 1] = relative;
+  baseURL.pathname = parts.join("/");
+  return baseURL.href;
 }
 
 function LinkRenderer(props: LinkRendererProps) {
-  const { asPath } = useRouter();
-  const currentPath = new URL(asPath, "https://deno.land").pathname;
-  let href: string | undefined = undefined;
-  if (
-    props.href &&
-    (props.href.startsWith("./") || props.href.startsWith("../")) &&
-    currentPath.startsWith("/manual")
-  ) {
-    href = props.href.replace(/\.md$/, "");
-  } else {
-    href = props.href;
+  let href = props.href;
+
+  // If the URL is relative, it should be relative to the canonical URL of the file.
+  if (href !== undefined && isRelative(href)) {
+    href = relativeToAbsolute(props.displayURL, href);
   }
+
+  const hrefURL = href ? new URL(href) : undefined;
+
+  // Manual links should not have trailing .md
+  if (
+    hrefURL?.pathname?.startsWith("/manual") &&
+    hrefURL?.origin === location.origin
+  ) {
+    hrefURL.pathname = hrefURL.pathname.replace(/\.md$/, "");
+    href = hrefURL.href;
+  }
+
   // TODO(lucacasonato): Use next.js Link
   return (
     <a href={href} className="link">
@@ -73,33 +98,32 @@ function CodeRenderer(props: any) {
   return <CodeBlock {...{ ...props, code: props.value, value: undefined }} />;
 }
 
-function ImageRenderer(props: { src: string; canonicalURL: string }) {
+function ImageRenderer(props: { src: string; sourceURL: string }) {
   let src = props.src;
 
-  if (src?.startsWith("./") || src?.startsWith("../")) {
-    const url = new URL(props.canonicalURL);
-    const parts = url.pathname.split("/");
-    parts.pop();
-    url.pathname = parts.join("/") + "/" + src;
-    src = url.href;
+  if (isRelative(props.sourceURL)) {
+    src = relativeToAbsolute(props.sourceURL, src);
   }
 
   return <img src={src} className="max-w-full inline-block" />;
 }
 
-const renderers = (canonicalURL: string) => ({
+const renderers = (displayURL: string, sourceURL: string) => ({
   inlineCode: InlineCode,
   code: CodeRenderer,
   heading: HeadingRenderer,
-  link: LinkRenderer,
+  link: function LinkRendererWrapper(props: any) {
+    return <LinkRenderer {...props} displayURL={displayURL} />;
+  },
   image: function ImageRendererWrapper(props: any) {
-    return <ImageRenderer {...props} canonicalURL={canonicalURL} />;
+    return <ImageRenderer {...props} sourceURL={sourceURL} />;
   },
 });
 
 interface MarkdownProps {
   source: string;
-  canonicalURL: string;
+  displayURL: string;
+  sourceURL: string;
 }
 
 function Markdown(props: MarkdownProps) {
@@ -120,7 +144,7 @@ function Markdown(props: MarkdownProps) {
   return (
     <ReactMarkdown
       source={props.source}
-      renderers={renderers(props.canonicalURL)}
+      renderers={renderers(props.displayURL, props.sourceURL)}
       skipHtml={true}
       className="markdown"
     />
