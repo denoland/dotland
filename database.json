@@ -464,6 +464,13 @@
     "path": "/src",
     "desc": "Modern JavaScript date utility library"
   },
+  "datetoken": {
+    "type": "github",
+    "owner": "sonirico",
+    "repo": "datetoken.js",
+    "path": "/src",
+    "desc": "datetoken is a time toolkit for deno and typescript, with support for relative deltas and string parsing"
+  },
   "dblapi.ts": {
     "type": "github",
     "owner": "zSnails",
