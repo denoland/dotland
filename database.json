@@ -717,6 +717,12 @@
     "repo": "denon",
     "desc": "denon is the deno replacement for nodemon providing a feature packed and easy to use experience."
   },
+  "denosaur": {
+    "type": "github",
+    "owner": "ClementD64",
+    "repo": "denosaur",
+    "desc": "Yet another web framework"
+  },
   "denotrain": {
     "type": "github",
     "owner": "Caesar2011",
