@@ -1134,6 +1134,12 @@
     "repo": "graphql-deno",
     "desc": "Graphql-js ported to deno. Includes TS types and runtime."
   },
+  "graphql_tag": {
+    "type": "github",
+    "owner": "davidmwhynot",
+    "repo": "graphql-tag-deno",
+    "desc": "graphql-tag ported to deno."
+  },
   "graphviz": {
     "type": "github",
     "owner": "ts-graphviz",
