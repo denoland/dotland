@@ -2479,6 +2479,12 @@
     "repo": "deno-validator",
     "desc": "🦕A simple string validation for deno"
   },
+ "validatorjs": {
+    "type": "github",
+    "owner": "rubiin",
+    "repo": "validator",
+    "desc": "A Port of validatorjs to deno"
+  },
   "value_schema": {
     "type": "npm",
     "package": "value-schema",
