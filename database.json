@@ -1128,6 +1128,12 @@
     "repo": "graphql-deno",
     "desc": "Graphql-js ported to deno. Includes TS types and runtime."
   },
+  "graphviz": {
+    "type": "github",
+    "owner": "ts-graphviz",
+    "repo": "deno",
+    "desc": "Simple Graphviz library for Deno🦕"
+  },
   "gusano": {
     "type": "github",
     "owner": "krthr",
