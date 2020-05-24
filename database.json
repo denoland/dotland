@@ -192,6 +192,12 @@
     "repo": "bzfquery.js",
     "desc": "JavaScript/TypeScript version of bzfquery for Deno"
   },
+  "carol": {
+    "type": "github",
+    "owner": "uki00a",
+    "repo": "carol",
+    "desc": "Build cross-platform desktop apps with Deno and HTML."
+  },
   "case": {
     "type": "github",
     "owner": "justjavac",
