@@ -1243,7 +1243,7 @@
     "repo": "dn-i18next-mongo-backend",
     "desc": "i18next mongodb backend https://www.i18next.com/ - Only for Deno 🦖"
   },
-  "iftt": { 
+  "ifttt": { 
     "type": "github", 
     "owner": "0xVesion", 
     "repo": "deno-ifttt", 
