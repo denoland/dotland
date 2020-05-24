@@ -2547,6 +2547,12 @@
     "repo": "deno-websocket",
     "desc": "🦕A simple WebSocket library like ws of node.js"
   },
+  "websocket_server": {
+    "type": "github",
+    "owner": "JohanWinther",
+    "repo": "websocket_server",
+    "desc": "A WebSocket server library for Deno 🔌"
+  },
   "webview": {
     "type": "github",
     "owner": "eliassjogreen",
