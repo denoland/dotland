@@ -518,6 +518,12 @@
     "repo": "deno",
     "desc": "A secure runtime for JavaScript and TypeScript."
   },
+  "deno_validator": {
+    "type": "github",
+    "owner": "parasg1999",
+    "repo": "deno-validator",
+    "desc": "A String Validator for deno inspired by validator.js"
+  },
   "deno_app_setuper": {
     "type": "github",
     "owner": "alreadyExisted",
