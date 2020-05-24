@@ -2281,6 +2281,12 @@
     "repo": "deno_tokenizer",
     "desc": "A simple tokenizer for deno."
   },
+  "toolbelt": {
+    "type": "github",
+    "owner": "gokayokyay",
+    "repo": "toolbelt",
+    "desc": "Toolbelt for Deno"
+  },
   "tree": {
     "type": "github",
     "owner": "KSXGitHub",
