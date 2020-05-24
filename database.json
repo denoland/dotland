@@ -2323,6 +2323,12 @@
     "repo": "deno-tree",
     "desc": "Traverse filesystem tree"
   },
+  "twitch": {
+    "type": "github",
+    "owner": "denoparty",
+    "repo": "twitch",
+    "desc": "Framework for Twitch bots"
+  },
   "type_check": {
     "type": "github",
     "owner": "zemse",
