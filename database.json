@@ -360,6 +360,12 @@
     "repo": "cowsay",
     "desc": "Configurable talking cow for Deno"
   },
+  "Commands": {
+    "type": "github",
+    "owner": "buttercubz",
+    "repo": "Commands",
+    "desc": "Create commands shortcuts for Deno"
+  },
   "create_deno_plugin": {
     "type": "github",
     "owner": "chiefbiiko",
