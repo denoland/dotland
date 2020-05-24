@@ -1533,6 +1533,12 @@
     "repo": "memoize",
     "desc": "A simple and easy to use memoize lib for deno."
   },
+  "meteorite": {
+    "type": "github",
+    "owner": "AhmedAlYousif",
+    "repo": "meteorite",
+    "desc": "A framework to build REST APIs in Deno runtime."  
+  },
   "microraptor": {
     "type": "github",
     "owner": "matteocrippa",
