@@ -105,11 +105,7 @@ function ImageRenderer(props: { src: string; sourceURL: string }) {
     src = relativeToAbsolute(props.sourceURL, src);
   }
 
-  return (
-    <a href={src}>
-      <img src={src} className="max-w-full inline-block" />
-    </a>
-  );
+  return <img src={src} className="max-w-full inline-block" />;
 }
 
 const renderers = (displayURL: string, sourceURL: string) => ({
