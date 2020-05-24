@@ -427,6 +427,12 @@
     "repo": "curve25519",
     "desc": "djb's Curve25519 in TypeScript"
   },
+  "dactyl": {
+    "type": "github",
+    "owner": "liamtan28",
+    "repo": "dactyl",
+    "desc": "Backend REST web framework for Deno, built on top of Oak"
+  },
   "dash": {
     "type": "github",
     "owner": "xpyxel",
