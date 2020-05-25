@@ -1152,6 +1152,12 @@
     "repo": "graphql-projects",
     "desc": "A Deno GraphQL port"
   },
+  "graphql_abc": {
+    "type": "github",
+    "owner": "danielrearden",
+    "repo": "graphql_abc",
+    "desc": "GraphQL middleware for abc"
+  },
   "graphql_deno": {
     "type": "github",
     "owner": "adelsz",
