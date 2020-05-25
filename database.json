@@ -96,6 +96,12 @@
     "repo": "awaitable_mutex",
     "desc": "Blocking execution of a section of code to one at a time"
   },
+  "autopilot": {
+    "type": "github",
+    "owner": "divy-work",
+    "repo": "autopilot-deno",
+    "desc": "A cross-platform desktop automation library."
+  },
   "azure_functions": {
     "type": "github",
     "owner": "anthonychu",
