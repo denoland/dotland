@@ -806,7 +806,7 @@
     "type": "github",
     "owner": "denosaurs",
     "repo": "deps",
-    "desc": "deps.ts & depencency manager for Deno"
+    "desc": "deps.ts & dependency manager for Deno"
   },
   "descord": {
     "type": "github",
