@@ -1702,6 +1702,12 @@
     "repo": "oak",
     "desc": "A middleware framework for Deno's http server, including a router middleware."
   },
+  "oak_graphql" {
+    "type": "github",
+    "owner": "aaronwlee",
+    "repo": "oak-graphql",
+    "desc": "A simple graphql middleware for oak deno framework."
+  },
   "oak_middleware": {
     "type": "github",
     "owner": "oakserver",
