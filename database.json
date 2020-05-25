@@ -669,6 +669,12 @@
     "repo": "deno-structured-logging",
     "desc": "A structured logging module for Deno"
   },
+  "deno_string_validator": {
+    "type": "github",
+    "owner": "okwudav",
+    "repo": "deno-string-validator",
+    "desc": "String validation for Deno, inspired by Validator.js => https://github.com/validatorjs/validator.js"
+  },
   "deno_twitter_api": {
     "type": "github",
     "owner": "stefanuros",
