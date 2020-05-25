@@ -2444,6 +2444,12 @@
     "repo": "toolbelt",
     "desc": "Toolbelt for Deno"
   },
+  "transport": {
+    "type": "github",
+    "owner": "SASNOVACAT08",
+    "repo": "transport",
+    "desc": "🦕 WebSocket for Deno 🦕"
+  },
   "tree": {
     "type": "github",
     "owner": "KSXGitHub",
