@@ -306,6 +306,12 @@
     "repo": "colors",
     "desc": "Material Design Colors ༼ つ ◕_◕ ༽つ"
   },
+  "commands": {
+    "type": "github",
+    "owner": "buttercubz",
+    "repo": "Commands",
+    "desc": "Create commands shortcuts for Deno"
+  },
   "compose": {
     "type": "github",
     "owner": "KSXGitHub",
