@@ -1164,7 +1164,7 @@
     "repo": "dn-i18next-mongo-backend",
     "desc": "i18next mongodb backend https://www.i18next.com/ - Only for Deno 🦖"
   },
-  "iam-policies": {
+  "iam_policies": {
     "type": "github",
     "owner": "roggervalf",
     "repo": "iam-policies",
