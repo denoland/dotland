@@ -520,7 +520,7 @@ function DirectoryListing(props: {
                         </td>
                         <td className="px-4 py-1 whitespace-no-wrap text-sm leading-5 text-gray-500 text-right">
                           {entry.size !== undefined
-                            ? bytesToSize(entry.size)
+                            ? ( bytesToSize(entry.size) != '0' ? bytesToSize(entry.size) : "N/A")
                             : "N/A"}
                         </td>
                       </tr>
