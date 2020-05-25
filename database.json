@@ -2038,7 +2038,7 @@
     "type": "github",
     "owner": "richytong",
     "repo": "rubico",
-    "desc": "a functional promise library"
+    "desc": "🏞 [a]synchronous function composition; it just works"
   },
   "rug": {
     "type": "github",
