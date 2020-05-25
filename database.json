@@ -627,6 +627,12 @@
     "repo": "deno-matrix",
     "desc": "🦕 Lightweight Deno Library To Handle Matrices 🦖"
   },
+  "deno_log":{
+	"type": "github",
+    "owner": "rafaelferres",
+    "repo": "deno-log",
+    "desc": "Create hidden file or folder in Deno 🦕"
+  },
   "deno_pixabay": {
     "type": "github",
     "owner": "yeukfei02",
