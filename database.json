@@ -90,6 +90,12 @@
     "repo": "attain",
     "desc": "A middleware web framework, inspired by express.js"
   },
+  "attain_graphql": {
+    "type": "github",
+    "owner": "aaronwlee",
+    "repo": "attain-graphql",
+    "desc": "A simple graphql middleware for Attain framework."
+  },
   "await_mutex": {
     "type": "github",
     "owner": "Matthew-Smith",
