@@ -49,7 +49,7 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries, latestStd }) => {
   console.log("http://localhost:8000/");
   for await (const req of s) {
     req.respond({ body: "Hello World\\n" });
-  }`;
+  }`.replace(/\n\s\s/g, "\n");
 
   const [thirdPartySelection, setThirdPartySelection] = useState<
     SimpleEntry[] | null
