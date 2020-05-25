@@ -72,6 +72,12 @@
     "repo": "framework",
     "desc": "The next-generation type-safe web framework."
   },
+  "arrays": {
+    "type": "github",
+    "owner": "damianperera",
+    "repo": "array-utils",
+    "desc": "Provides support for common Array operations."
+  },
   "ask": {
     "type": "github",
     "owner": "jozsefsallai",
