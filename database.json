@@ -1653,6 +1653,12 @@
     "repo": "mustache",
     "desc": "Mustache template renderer"
   },
+  "mutevents": {
+    "type": "github",
+    "owner": "hazae41",
+    "repo": "mutevents",
+    "desc": "Typed, mutable, async events for deno"
+  },
   "mysql": {
     "type": "github",
     "owner": "manyuanrong",
