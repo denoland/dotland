@@ -2570,7 +2570,7 @@
   },
   "view_engine": {
     "type": "github",
-    "owner": "gjuoun",
+    "owner": "deligenius",
     "repo": "view-engine",
     "desc": "🚀A Template View Engine for Deno frameworks"
   },
