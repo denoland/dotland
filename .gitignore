@@ -34,3 +34,4 @@ dist/
 worker/script.js
 
 .now
+.vercel
