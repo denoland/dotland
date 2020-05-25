@@ -904,6 +904,12 @@
     "repo": "docopt.js",
     "desc": "The command line option parser, that will make you smile."
   },
+  "dodecasaurus": {
+    "type": "github",
+    "owner": "mikeStr8s",
+    "repo": "dodecasaurus",
+    "desc": "Dice utility that makes generating random dice values simple and convenient."
+  },
   "dotenv": {
     "type": "github",
     "owner": "pietvanzoen",
