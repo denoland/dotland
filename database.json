@@ -2426,6 +2426,12 @@
     "repo": "deno-tree",
     "desc": "Traverse filesystem tree"
   },
+  "trex":{
+    "type": "github",
+    "owner": "buttercubz",
+    "repo": "Trex",
+    "desc": "Package management for deno like npm"
+  },
   "twitch": {
     "type": "github",
     "owner": "denoparty",
