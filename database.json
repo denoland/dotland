@@ -2430,7 +2430,7 @@
     "type": "github",
     "owner": "denoparty",
     "repo": "twitch",
-    "desc": "Framework for Twitch bots"
+    "desc": "Framework for building Twitch bots with Deno"
   },
   "type_check": {
     "type": "github",
