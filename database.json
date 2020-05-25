@@ -90,6 +90,12 @@
     "repo": "attain",
     "desc": "A middleware web framework, inspired by express.js"
   },
+  "autopilot": {
+    "type": "github",
+    "owner": "divy-work",
+    "repo": "autopilot-deno",
+    "desc": "A cross-platform desktop automation library."
+  },
   "await_mutex": {
     "type": "github",
     "owner": "Matthew-Smith",
