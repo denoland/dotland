@@ -319,9 +319,8 @@
     "desc": "🦕 Propagate deadlines, a cancellation and other request-scoped values to multiple promise. The behaviour is like Go's context"
   },
   "convert_size": {
-     "type": "github",
-     "owner": "AliBasicCoder",
-     "repo": "convert-size",
+     "type": "npm",
+     "package": "convert-size",
      "desc": "convert size units like MB GB"
   },
   "cordeno": {
