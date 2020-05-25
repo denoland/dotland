@@ -615,6 +615,12 @@
     "repo": "deno-google-protobuf",
     "desc": "Protocol Buffers - Google's data interchange format"
   },
+  "deno_graphql": {
+    "type": "github",
+    "owner": "cvng",
+    "repo": "deno_graphql",
+    "desc": "GraphQL HTTP middlewares for Deno"
+  },
   "deno_gui": {
     "type": "github",
     "owner": "fakoua",
