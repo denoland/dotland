@@ -631,7 +631,7 @@
 	"type": "github",
     "owner": "rafaelferres",
     "repo": "deno-log",
-    "desc": "Create hidden file or folder in Deno 🦕"
+    "desc": "Lightweight logger with an extensible configuration 🦕"
   },
   "deno_pixabay": {
     "type": "github",
