@@ -26,4 +26,8 @@ module.exports = {
     backgroundColor: ["responsive", "hover", "focus", "active"],
   },
   plugins: [require("@tailwindcss/ui"), require("tailwindcss-hyphens")],
+  purge: {
+    enabled: true,
+    content: ['./components/**/*.tsx', './pages/**/*.tsx'],
+  },
 };
