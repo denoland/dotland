@@ -1036,6 +1036,12 @@
     "repo": "deno-env-paths",
     "desc": "Get paths for storing things like data, config, cache, etc"
   },
+  "escape_html": {
+    "type": "github",
+    "owner": "ako-deno",
+    "repo": "escape_html",
+    "desc": "Escape string for use in HTML for Deno."
+  },
   "escape_string_regexp": {
     "type": "github",
     "owner": "Sab94",
