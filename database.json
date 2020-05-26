@@ -2190,6 +2190,12 @@
     "repo": "noble-secp256k1",
     "desc": "secp256k1, an elliptic curve that could be used for assymetric encryption and ECDSA signature scheme."
   },
+  "secure_compare": {
+    "type": "github",
+    "owner": "hkatzdev",
+    "repo": "secure-compare",
+    "desc": "Constant-time comparison algorithm to prevent timing attacks (Deno edition)"
+  },
   "semver": {
     "type": "github",
     "owner": "justjavac",
