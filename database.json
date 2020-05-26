@@ -2480,7 +2480,7 @@
     "repo": "Trex",
     "desc": "Package management for deno like npm"
   },
-  "tweetnacl-deno": {
+  "tweetnacl_deno": {
     "type": "github",
     "owner": "dr-useless",
     "repo": "tweetnacl-deno",
