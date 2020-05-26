@@ -5,7 +5,15 @@ import { GithubEntry, GithubDatabaseEntry } from "./registries/github";
 import { DenoStdEntry, DenoStdDatabaseEntry } from "./registries/deno_std";
 import { URLEntry, URLDatabaseEntry } from "./registries/url";
 import { NPMEntry, NPMDatabaseEntry } from "./registries/npm";
-import { Entry, DatabaseEntry } from "./registries";
+import { Entry } from "./registries";
+
+interface DatabaseEntry {
+  desc: string;
+  name: string;
+  owner: string;
+  repo: string;
+  type: string;
+}
 
 function findDatabaseEntry(
   name: string
