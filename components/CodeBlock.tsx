@@ -31,32 +31,34 @@ export const RawCodeBlock = ({
   enableLineRef = false,
 }: CodeBlockProps & { className?: string; enableLineRef?: boolean }) => {
   const [hashValue, setHashValue] = useState("");
-  useEffect(() => {
-    Router.events.on("hashChangeComplete", (url: any) => {
-      setHashValue(url.slice(url.indexOf("#")));
-    });
-    const { hash } = location;
-    setHashValue(hash);
-    return () => {
-      Router.events.off("hashChangeComplete", () => {});
-    };
-  }, []);
+  if (enableLineRef) {
+    useEffect(() => {
+      Router.events.on("hashChangeComplete", (url: any) => {
+        setHashValue(url.slice(url.indexOf("#")));
+      });
+      const { hash } = location;
+      setHashValue(hash);
+      return () => {
+        Router.events.off("hashChangeComplete", () => {});
+      };
+    }, []);
 
-  useLayoutEffect(() => {
-    const hash = hashValue
-      .split("-")
-      .map((e) => /([\d]+)/.exec(e)![0])
-      .map((e) => parseInt(e, 10))
-      .sort((a, b) => a - b)
-      .map((e) => `L${e}`);
-    if (hash.length) {
-      const idEl = document.getElementById(hash[0]);
-      if (idEl) {
-        idEl.scrollIntoView({ block: "center", behavior: "smooth" });
-        return;
+    useLayoutEffect(() => {
+      const hash = hashValue
+        .split("-")
+        .map((e) => /([\d]+)/.exec(e)![0])
+        .map((e) => parseInt(e, 10))
+        .sort((a, b) => a - b)
+        .map((e) => `L${e}`);
+      if (hash.length) {
+        const idEl = document.getElementById(hash[0]);
+        if (idEl) {
+          idEl.scrollIntoView({ block: "center", behavior: "smooth" });
+          return;
+        }
       }
-    }
-  });
+    });
+  }
 
   return (
     <Highlight
