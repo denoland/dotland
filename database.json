@@ -1000,6 +1000,12 @@
     "repo": "ejs-deno",
     "desc": "EJS in Deno"
   },
+  "encodeurl": {
+    "type": "github",
+    "owner": "ako-deno",
+    "repo": "encodeurl",
+    "desc": "Encode a URL to a percent-encoded form, excluding already-encoded sequences. Build for Deno."
+  },
   "ende": {
     "type": "github",
     "owner": "rsp",
