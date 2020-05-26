@@ -1623,7 +1623,7 @@
     "repo": "microraptor",
     "desc": "A deno lightweight middleware for easy REST development"
   },
-  "microraptor": {
+  "mime": {
     "type": "github",
     "owner": "DenoBRComunitty",
     "repo": "mime",
