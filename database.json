@@ -2458,7 +2458,7 @@
   },
   "trex":{
     "type": "github",
-    "owner": "buttercubz",
+    "owner": "crewdevio",
     "repo": "Trex",
     "desc": "Package management for deno like npm"
   },
