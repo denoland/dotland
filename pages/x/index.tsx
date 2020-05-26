@@ -6,6 +6,8 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { entries } from "../../util/registry_utils";
 import InlineCode from "../../components/InlineCode";
+import { metaDescription } from "../";
+
 import Head from "next/head";
 
 const ThirdPartyRegistryList = () => {
@@ -29,7 +31,13 @@ const ThirdPartyRegistryList = () => {
     <>
       <Head>
         <title>Deno Third Party Modules</title>
-        <meta name="description" content="Third Party Modules for Deno." />
+
+        {metaDescription({
+          title: "Deno Third Party Modules",
+          description: "Third Party Modules for Deno.",
+          url: "https://deno.land/x",
+          image: "https://deno.land/v1_wide.jpg",
+        })}
       </Head>
       <div className="bg-gray-50 min-h-full">
         <Header subtitle="Third Party Modules" />

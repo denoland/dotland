@@ -82,6 +82,7 @@ function FileDisplay(props: {
               <RawCodeBlock
                 code={props.raw!}
                 language={filetype}
+                enableLineRef={true}
                 className="p-2 sm:px-3 md:px-4"
               />
             );
@@ -90,13 +91,18 @@ function FileDisplay(props: {
               <RawCodeBlock
                 code={props.raw!}
                 language="markdown"
+                enableLineRef={true}
                 className="p-2 sm:px-3 md:px-4"
               />
             );
           case "markdown":
             return (
               <div className="px-4">
-                <Markdown source={props.raw!} canonicalURL={props.sourceURL} />
+                <Markdown
+                  source={props.raw!}
+                  displayURL={location.origin + props.canonicalPath}
+                  sourceURL={props.sourceURL}
+                />
               </div>
             );
           case "image":
@@ -106,6 +112,7 @@ function FileDisplay(props: {
               <RawCodeBlock
                 code={props.raw!}
                 language="text"
+                enableLineRef={true}
                 className="p-2 sm:px-3 md:px-4"
               />
             );

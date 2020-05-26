@@ -14,6 +14,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import FileDisplay from "./FileDisplay";
 import { DirEntry } from "../util/registries";
+import { metaDescription } from "../pages";
 
 class RegistryError {
   constructor(public message: string) {}
@@ -170,9 +171,21 @@ const Registry = () => {
       <Head>
         <title>
           {name}
-          {version && `@${version}`} - deno.land/x
+          {version && `@${version}`} - deno.land{!isStd ? "/x" : ""}
         </title>
-        <meta name="description" content="A third party module for Deno." />
+        {metaDescription({
+          title: `deno.land${!isStd ? "/x" : ""}/${name}${
+            version && `@${version}`
+          }`,
+          description:
+            name === "std"
+              ? "The Deno standard library."
+              : "A third party module for Deno.",
+          url: `https://deno.land${!isStd ? "/x" : ""}/${name}${
+            version && `@${version}`
+          }`,
+          image: "https://deno.land/v1_wide.jpg",
+        })}
       </Head>
       <div className="bg-gray-50 min-h-full">
         <Header
@@ -471,13 +484,7 @@ function DirectoryListing(props: {
                                 case "file":
                                   if (isReadme(entry.name)) {
                                     return (
-                                      <svg
-                                        fill="currentColor"
-                                        viewBox="0 0 20 20"
-                                        className="w-6 h-6 text-gray-400 inline-block mr-2 group-hover:text-blue-300 transition duration-100 ease-in-out"
-                                      >
-                                        <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
-                                      </svg>
+                                      <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
                                     );
                                   }
                                   return (
@@ -512,9 +519,9 @@ function DirectoryListing(props: {
                           {entry.name}
                         </td>
                         <td className="px-4 py-1 whitespace-no-wrap text-sm leading-5 text-gray-500 text-right">
-                          {entry.size !== undefined
+                          {entry.type !== "dir" && entry.size
                             ? bytesToSize(entry.size)
-                            : "N/A"}
+                            : ""}
                         </td>
                       </tr>
                     </Link>
