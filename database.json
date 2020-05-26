@@ -2569,7 +2569,7 @@
     "repo": "deno-validator",
     "desc": "🦕A simple string validation for deno"
   },
-  "validator-deno": {
+  "validator_deno": {
     "type": "github",
     "owner": "validatorjs",
     "repo": "validator-deno",
