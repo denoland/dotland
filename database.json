@@ -579,12 +579,6 @@
     "repo": "deno_app_setuper",
     "desc": "A CLI to setup apps like a Create React App."
   },
-  "deno_aws_sign_v4":{
-    "type": "github",
-    "owner": "silverxu",
-    "repo": "deno-aws-sign-v4",
-    "desc": "Generates AWS Signature V4 for AWS low-level REST APIs"
-  },	
   "deno_check_thai_pid": {
     "type": "github",
     "owner": "thiti-y",
@@ -2299,14 +2293,6 @@
     "repo": "deno_slugify",
     "desc": "A string slugifier"
   },
-  "smoothish": {
-    "type": "github",
-    "owner": "smoothish",
-    "repo": "smoothish",
-    "path": "/index.js",
-    "defaultVersion": "deno",
-    "desc": "Smoothing out time-series data with boundary and missing data handling"
-  },
   "smtp": {
     "type": "github",
     "owner": "manyuanrong",
@@ -2533,12 +2519,6 @@
     "owner": "dr-useless",
     "repo": "tweetnacl-deno",
     "desc": "Port of TweetNaCl cryptographic library to TypeScript for Deno"
-  },
-  "twitch": {
-    "type": "github",
-    "owner": "denoparty",
-    "repo": "twitch",
-    "desc": "Framework for building Twitch bots with Deno"
   },
   "type_check": {
     "type": "github",
