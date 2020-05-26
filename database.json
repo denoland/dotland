@@ -94,7 +94,7 @@
     "type": "github",
     "owner": "divy-work",
     "repo": "autopilot-deno",
-    "desc": "A cross-platform desktop automation library."
+    "desc": "A cross-platform desktop automation library"
   },
   "await_mutex": {
     "type": "github",
