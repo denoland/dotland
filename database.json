@@ -2154,6 +2154,12 @@
     "repo": "rute",
     "desc": "A Simple Router for Deno"
   },
+  "rxjs": {
+    "type": "github",
+    "owner": "DenoBRComunitty",
+    "repo": "rxjs",
+    "desc": "🦕 A reactive programming library for Deno ⚡ "
+  },
   "saur": {
     "type": "github",
     "owner": "tubbo",
