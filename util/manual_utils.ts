@@ -1,5 +1,6 @@
 const basepath = "https://raw.githubusercontent.com/denoland/deno/";
 const docpath = "https://github.com/denoland/deno/blob/";
+const doceditpath = "https://github.com/denoland/deno/edit/";
 
 export interface TableOfContents {
   [slug: string]: {
@@ -30,4 +31,8 @@ export function getFileURL(version: string, path: string) {
 
 export function getDocURL(version: string, path: string) {
   return `${docpath}${version}/docs${path}.md`;
+}
+
+export function getDocEditURL(version: string, path: string) {
+  return `${doceditpath}${version}/docs${path}.md`;
 }

@@ -7,7 +7,7 @@ import {
   TableOfContents,
   getTableOfContents,
   getFileURL,
-  getDocURL,
+  getDocEditURL,
 } from "../util/manual_utils";
 import Markdown from "./Markdown";
 import Transition from "./Transition";
@@ -390,9 +390,9 @@ function Manual() {
                   <div className="pt-2 clear-both">
                     <a
                       className="text-gray-500 hover:text-gray-400 font-normal float-right"
-                      href={getDocURL(version ?? "master", path)}
+                      href={getDocEditURL(version ?? "master", path)}
                     >
-                      View on GitHub
+                      Edit on GitHub
                     </a>
                   </div>
                 </>
