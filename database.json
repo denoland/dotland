@@ -1170,6 +1170,12 @@
     "repo": "deno_free_port",
     "desc": "get free port for Deno"
   },
+  "funky": {
+    "type": "github",
+    "owner": "ful-stackz",
+    "repo": "funky",
+    "desc": "Bring the beloved Option<T>, Result<T, E> and other functional utilities into your next Deno masterpiece!"
+  },
   "gardens": {
     "type": "github",
     "owner": "partheseas",
