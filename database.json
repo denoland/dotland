@@ -2464,9 +2464,9 @@
   },
   "twitch": {
     "type": "github",
-    "owner": "denoparty",
+    "owner": "hacked",
     "repo": "twitch",
-    "desc": "Framework for building Twitch bots with Deno"
+    "desc": "Framework for building Twitch Bots with Deno"
   },
   "type_check": {
     "type": "github",
