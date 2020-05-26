@@ -102,6 +102,12 @@
     "repo": "attain-graphql",
     "desc": "A simple graphql middleware for Attain framework."
   },
+  "autopilot": {
+    "type": "github",
+    "owner": "divy-work",
+    "repo": "autopilot-deno",
+    "desc": "A cross-platform desktop automation library"
+  },
   "await_mutex": {
     "type": "github",
     "owner": "Matthew-Smith",
