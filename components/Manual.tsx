@@ -209,6 +209,7 @@ function Manual() {
                 <div className="relative flex-1 flex flex-col max-w-xs w-full bg-white">
                   <div className="absolute top-0 right-0 -mr-14 p-1">
                     <button
+                      role="button"
                       className="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600"
                       aria-label="Close sidebar"
                       onClick={hideSidebar}
@@ -361,7 +362,7 @@ function Manual() {
                 <>
                   <Markdown
                     source={content}
-                    displayURL={location.origin + path}
+                    displayURL={location.origin + "/manual" + path}
                     sourceURL={sourceURL}
                   />
                   <div className="pt-4 border-t border-gray-200">

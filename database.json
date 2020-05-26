@@ -72,6 +72,12 @@
     "repo": "framework",
     "desc": "The next-generation type-safe web framework."
   },
+  "arrays": {
+    "type": "github",
+    "owner": "damianperera",
+    "repo": "array-utils",
+    "desc": "Provides support for common Array operations."
+  },
   "ask": {
     "type": "github",
     "owner": "jozsefsallai",
@@ -95,6 +101,12 @@
     "owner": "aaronwlee",
     "repo": "attain-graphql",
     "desc": "A simple graphql middleware for Attain framework."
+  },
+  "autopilot": {
+    "type": "github",
+    "owner": "divy-work",
+    "repo": "autopilot-deno",
+    "desc": "A cross-platform desktop automation library"
   },
   "await_mutex": {
     "type": "github",
@@ -609,6 +621,12 @@
     "repo": "deno-google-protobuf",
     "desc": "Protocol Buffers - Google's data interchange format"
   },
+  "deno_graphql": {
+    "type": "github",
+    "owner": "cvng",
+    "repo": "deno_graphql",
+    "desc": "GraphQL HTTP middlewares for Deno"
+  },
   "deno_gui": {
     "type": "github",
     "owner": "fakoua",
@@ -806,7 +824,7 @@
     "type": "github",
     "owner": "denosaurs",
     "repo": "deps",
-    "desc": "deps.ts & depencency manager for Deno"
+    "desc": "deps.ts & dependency manager for Deno"
   },
   "descord": {
     "type": "github",
@@ -897,6 +915,12 @@
     "owner": "eyal-shalev",
     "repo": "docopt.js",
     "desc": "The command line option parser, that will make you smile."
+  },
+  "dodecasaurus": {
+    "type": "github",
+    "owner": "mikeStr8s",
+    "repo": "dodecasaurus",
+    "desc": "Dice utility that makes generating random dice values simple and convenient."
   },
   "dotenv": {
     "type": "github",
@@ -1145,6 +1169,12 @@
     "owner": "CreatCodeBuild",
     "repo": "graphql-projects",
     "desc": "A Deno GraphQL port"
+  },
+  "graphql_abc": {
+    "type": "github",
+    "owner": "danielrearden",
+    "repo": "graphql_abc",
+    "desc": "GraphQL middleware for abc"
   },
   "graphql_deno": {
     "type": "github",
@@ -1569,6 +1599,12 @@
     "repo": "microraptor",
     "desc": "A deno lightweight middleware for easy REST development"
   },
+  "microraptor": {
+    "type": "github",
+    "owner": "DenoBRComunitty",
+    "repo": "mime",
+    "desc": "🦕 A mime types for deno"
+  },
   "minidate": {
     "type": "github",
     "owner": "bernardini687",
@@ -1635,6 +1671,12 @@
     "repo": "ms",
     "desc": "Use this package to easily convert various time formats to milliseconds. It is ported from https://github.com/zeit/ms to work with Deno."
   },
+  "multiparser": {
+    "type": "github",
+    "owner": "deligenius",
+    "repo": "multiparser",
+    "desc": "A Deno module for parsing multipart/form-data"
+  },
   "murmurhash": {
     "type": "github",
     "owner": "justjavac",
@@ -1646,6 +1688,12 @@
     "owner": "alosaur",
     "repo": "mustache",
     "desc": "Mustache template renderer"
+  },
+  "mutevents": {
+    "type": "github",
+    "owner": "hazae41",
+    "repo": "mutevents",
+    "desc": "Typed, mutable, async events for deno"
   },
   "mysql": {
     "type": "github",
@@ -2420,23 +2468,41 @@
     "repo": "toolbelt",
     "desc": "Toolbelt for Deno"
   },
+  "transport": {
+    "type": "github",
+    "owner": "SASNOVACAT08",
+    "repo": "transport",
+    "desc": "🦕 WebSocket for Deno 🦕"
+  },
   "tree": {
     "type": "github",
     "owner": "KSXGitHub",
     "repo": "deno-tree",
     "desc": "Traverse filesystem tree"
   },
+  "trex": {
+    "type": "github",
+    "owner": "crewdevio",
+    "repo": "Trex",
+    "desc": "Package management for deno like npm"
+  },
   "twitch": {
     "type": "github",
     "owner": "denoparty",
     "repo": "twitch",
-    "desc": "Framework for Twitch bots"
+    "desc": "Framework for building Twitch bots with Deno"
   },
   "type_check": {
     "type": "github",
     "owner": "zemse",
     "repo": "deno-type-check",
     "desc": "Runtime type check library for Deno"
+  },
+  "type_detect": {
+    "type": "github",
+    "owner": "chaijs",
+    "repo": "type-detect",
+    "desc": "Improved typeof detection for node.js and the browser."
   },
   "type_is": {
     "type": "github",
@@ -2521,6 +2587,12 @@
     "repo": "deno-validator",
     "desc": "🦕A simple string validation for deno"
   },
+  "validator_deno": {
+    "type": "github",
+    "owner": "validatorjs",
+    "repo": "validator-deno",
+    "desc": "The official port of validator.js for Deno"
+  },
   "validatorjs": {
     "type": "github",
     "owner": "rubiin",
@@ -2552,7 +2624,7 @@
   },
   "view_engine": {
     "type": "github",
-    "owner": "gjuoun",
+    "owner": "deligenius",
     "repo": "view-engine",
     "desc": "🚀A Template View Engine for Deno frameworks"
   },
