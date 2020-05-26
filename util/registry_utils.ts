@@ -9,9 +9,8 @@ import { Entry } from "./registries";
 
 interface DatabaseEntry {
   desc: string;
-  name: string;
-  owner: string;
-  repo: string;
+  owner?: string;
+  repo?: string;
   type: string;
 }
 
