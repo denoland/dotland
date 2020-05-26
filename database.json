@@ -1587,6 +1587,12 @@
     "repo": "microraptor",
     "desc": "A deno lightweight middleware for easy REST development"
   },
+  "microraptor": {
+    "type": "github",
+    "owner": "DenoBRComunitty",
+    "repo": "mime",
+    "desc": "🦕 A mime types for deno"
+  },
   "minidate": {
     "type": "github",
     "owner": "bernardini687",
