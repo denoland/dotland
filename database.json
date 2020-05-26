@@ -1429,6 +1429,12 @@
     "repo": "is_url",
     "desc": "Check if a URL is absolute"
   },
+  "is_int": {
+    "type": "github",
+    "owner": "load1n9",
+    "repo": "denoint",
+    "desc": "checks if a number is an integer or not"
+  },
   "jbq": {
     "type": "github",
     "owner": "krnik",
