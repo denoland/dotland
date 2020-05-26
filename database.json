@@ -75,7 +75,7 @@
   "arrays": {
     "type": "github",
     "owner": "damianperera",
-    "repo": "array-utils",
+    "repo": "ts-arrays",
     "desc": "Provides support for common Array operations."
   },
   "ask": {
@@ -585,6 +585,12 @@
     "repo": "deno-aws-sign-v4",
     "desc": "Generates AWS Signature V4 for AWS low-level REST APIs"
   },	
+  "deno_check_thai_pid": {
+    "type": "github",
+    "owner": "thiti-y",
+    "repo": "deno-check-thai-pid",
+    "desc": "Check thai personal ID."
+  },
   "deno_check_updates": {
     "type": "github",
     "owner": "fzwael",
@@ -994,6 +1000,12 @@
     "repo": "ejs-deno",
     "desc": "EJS in Deno"
   },
+  "encodeurl": {
+    "type": "github",
+    "owner": "ako-deno",
+    "repo": "encodeurl",
+    "desc": "Encode a URL to a percent-encoded form, excluding already-encoded sequences. Build for Deno."
+  },
   "ende": {
     "type": "github",
     "owner": "rsp",
@@ -1023,6 +1035,12 @@
     "owner": "lemarier",
     "repo": "deno-env-paths",
     "desc": "Get paths for storing things like data, config, cache, etc"
+  },
+  "escape_html": {
+    "type": "github",
+    "owner": "ako-deno",
+    "repo": "escape_html",
+    "desc": "Escape string for use in HTML for Deno."
   },
   "escape_string_regexp": {
     "type": "github",
@@ -1218,6 +1236,12 @@
     "repo": "hchacha20",
     "desc": "Special-purpose hashing, such as X25519 key derivation, or XChacha20 initialization. If in doubt, do not use."
   },
+  "hctk": {
+    "type": "github",
+    "owner": "miZyind",
+    "repo": "deno-hctk",
+    "desc": "Deno HantChar to Keyboard 漢字轉鍵盤配置"
+  },
   "heap": {
     "type": "github",
     "owner": "gobengo",
@@ -1302,6 +1326,12 @@
     "owner": "lamualfa",
     "repo": "dn-i18next-mongo-backend",
     "desc": "i18next mongodb backend https://www.i18next.com/ - Only for Deno 🦖"
+  },
+  "iam_policies": {
+    "type": "github",
+    "owner": "roggervalf",
+    "repo": "iam-policies",
+    "desc": "Role and Attribute based Access Control minimal lib for Deno 🦖"
   },
   "ifttt": { 
     "type": "github", 
@@ -1599,7 +1629,7 @@
     "repo": "microraptor",
     "desc": "A deno lightweight middleware for easy REST development"
   },
-  "microraptor": {
+  "mime": {
     "type": "github",
     "owner": "DenoBRComunitty",
     "repo": "mime",
@@ -2136,6 +2166,12 @@
     "repo": "rute",
     "desc": "A Simple Router for Deno"
   },
+  "rxjs": {
+    "type": "github",
+    "owner": "DenoBRComunitty",
+    "repo": "rxjs",
+    "desc": "🦕 A reactive programming library for Deno ⚡ "
+  },
   "saur": {
     "type": "github",
     "owner": "tubbo",
@@ -2485,6 +2521,12 @@
     "owner": "crewdevio",
     "repo": "Trex",
     "desc": "Package management for deno like npm"
+  },
+  "tweetnacl_deno": {
+    "type": "github",
+    "owner": "dr-useless",
+    "repo": "tweetnacl-deno",
+    "desc": "Port of TweetNaCl cryptographic library to TypeScript for Deno"
   },
   "twitch": {
     "type": "github",

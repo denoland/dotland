@@ -128,6 +128,27 @@ const ThirdPartyRegistryList = () => {
                                 </div>
                               </div>
                               <div>
+                                {entries[name]?.type === "github" ? (
+                                  <img
+                                    src={`https://img.shields.io/github/stars/${
+                                      entries[name]?.owner ?? ""
+                                    }/${
+                                      entries[name]?.repo ?? ""
+                                    }.svg?style=flat`}
+                                    alt={`${entries[name]?.owner ?? ""}/${
+                                      entries[name]?.owner ?? ""
+                                    }`}
+                                  />
+                                ) : entries[name]?.type === "npm" ? (
+                                  <img
+                                    src={`https://img.shields.io/npm/dm/${
+                                      entries[name]?.package ?? ""
+                                    }.svg?style=flat`}
+                                    alt={`${entries[name]?.package ?? ""}`}
+                                  />
+                                ) : null}
+                              </div>
+                              <div>
                                 <svg
                                   className="h-5 w-5 text-gray-400"
                                   fill="currentColor"

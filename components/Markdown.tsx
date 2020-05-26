@@ -101,7 +101,7 @@ function CodeRenderer(props: any) {
 function ImageRenderer(props: { src: string; sourceURL: string }) {
   let src = props.src;
 
-  if (isRelative(props.sourceURL)) {
+  if (isRelative(src)) {
     src = relativeToAbsolute(props.sourceURL, src);
   }
 
