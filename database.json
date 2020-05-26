@@ -657,8 +657,14 @@
     "repo": "deno_init",
     "desc": "The executable to set up a deno project 🦕"
   },
+  "deno_lodash": {
+    "type": "github",
+    "owner": "alirealasad",
+    "repo": "deno_lodash",
+    "desc": "Lodash for the Deno via import statement"
+  },
   "deno_log":{
-	"type": "github",
+    "type": "github",
     "owner": "rafaelferres",
     "repo": "deno-log",
     "desc": "Lightweight logger with an extensible configuration 🦕"
