@@ -118,13 +118,13 @@ const ThirdPartyRegistryList = () => {
                                     </div>
                                   )}
                                 </div>
-                                  {entries[name]?.type === "github" && (
-                                    <div className="mr-5">
-                                      <img
-                                        src={`https://img.shields.io/github/stars/${entries[name]?.owner}/${entries[name]?.repo}.svg?style=social&label=Star&maxAge=2592000`}
-                                      />
-                                    </div>
-                                  )}
+                                {entries[name]?.type === "github" && (
+                                  <div className="mr-5">
+                                    <img
+                                      src={`https://img.shields.io/github/stars/${entries[name]?.owner}/${entries[name]?.repo}.svg?style=social&label=Star&maxAge=2592000`}
+                                    />
+                                  </div>
+                                )}
                               </div>
                               <div>
                                 <svg
