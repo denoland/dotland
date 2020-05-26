@@ -2486,6 +2486,12 @@
     "repo": "deno-type-check",
     "desc": "Runtime type check library for Deno"
   },
+  "type_detect": {
+    "type": "github",
+    "owner": "chaijs",
+    "repo": "type-detect",
+    "desc": "Improved typeof detection for node.js and the browser."
+  },
   "type_is": {
     "type": "github",
     "owner": "ako-deno",
