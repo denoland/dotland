@@ -2504,6 +2504,12 @@
     "repo": "Trex",
     "desc": "Package management for deno like npm"
   },
+  "tweetnacl_deno": {
+    "type": "github",
+    "owner": "dr-useless",
+    "repo": "tweetnacl-deno",
+    "desc": "Port of TweetNaCl cryptographic library to TypeScript for Deno"
+  },
   "twitch": {
     "type": "github",
     "owner": "denoparty",
