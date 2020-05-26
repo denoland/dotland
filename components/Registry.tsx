@@ -243,7 +243,7 @@ const Registry = () => {
                 title="Failed to get directory listing"
                 body={dirEntries.message}
               />
-            ) : typeof dirEntries === "string" ? (
+            ) : dirEntries !== undefined && dirEntries !== null ? (
               <DirectoryListing
                 dirEntries={dirEntries}
                 repositoryURL={repositoryURL}
