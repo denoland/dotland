@@ -1152,17 +1152,17 @@
     "repo": "graphql-deno",
     "desc": "Graphql-js ported to deno. Includes TS types and runtime."
   },
-  "graphql_ts": {
-    "type": "github",
-    "owner": "simwipado",
-    "repo": "graphql-ts",
-    "desc": "GraphQL in Typescript"
-  },
   "graphql_tag": {
     "type": "github",
     "owner": "davidmwhynot",
     "repo": "graphql-tag-deno",
     "desc": "graphql-tag ported to deno."
+  },
+  "graphql_ts": {
+    "type": "github",
+    "owner": "simwipado",
+    "repo": "graphql-ts",
+    "desc": "GraphQL in Typescript"
   },
   "graphviz": {
     "type": "github",
