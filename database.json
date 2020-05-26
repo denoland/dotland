@@ -585,6 +585,12 @@
     "repo": "deno-aws-sign-v4",
     "desc": "Generates AWS Signature V4 for AWS low-level REST APIs"
   },	
+  "deno_check_thai_pid": {
+    "type": "github",
+    "owner": "thiti-y",
+    "repo": "deno-check-thai-pid",
+    "desc": "Check thai personal ID."
+  },
   "deno_check_updates": {
     "type": "github",
     "owner": "fzwael",
