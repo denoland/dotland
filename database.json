@@ -2191,6 +2191,12 @@
     "path": "/lib",
     "desc": "Escape and stringify an array of arguments to be executed on the shell."
   },
+  "shio": {
+    "type": "github",
+    "owner": "shiocms",
+    "repo": "shio-js-sdk",
+    "desc": "Shio CMS API For Deno"
+  },
   "shodan_deno": {
     "type": "github",
     "owner": "aldinp16",
