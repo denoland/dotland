@@ -1321,6 +1321,12 @@
     "repo": "dn-i18next-mongo-backend",
     "desc": "i18next mongodb backend https://www.i18next.com/ - Only for Deno 🦖"
   },
+  "iam_policies": {
+    "type": "github",
+    "owner": "roggervalf",
+    "repo": "iam-policies",
+    "desc": "Role and Attribute based Access Control minimal lib for Deno 🦖"
+  },
   "ifttt": { 
     "type": "github", 
     "owner": "0xVesion", 
