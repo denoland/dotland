@@ -1653,6 +1653,12 @@
     "repo": "ms",
     "desc": "Use this package to easily convert various time formats to milliseconds. It is ported from https://github.com/zeit/ms to work with Deno."
   },
+  "multiparser": {
+    "type": "github",
+    "owner": "deligenius",
+    "repo": "multiparser",
+    "desc": "A Deno module for parsing multipart/form-data"
+  },
   "murmurhash": {
     "type": "github",
     "owner": "justjavac",
