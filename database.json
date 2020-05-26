@@ -75,7 +75,7 @@
   "arrays": {
     "type": "github",
     "owner": "damianperera",
-    "repo": "array-utils",
+    "repo": "ts-arrays",
     "desc": "Provides support for common Array operations."
   },
   "ask": {
@@ -585,6 +585,12 @@
     "repo": "deno-aws-sign-v4",
     "desc": "Generates AWS Signature V4 for AWS low-level REST APIs"
   },	
+  "deno_check_thai_pid": {
+    "type": "github",
+    "owner": "thiti-y",
+    "repo": "deno-check-thai-pid",
+    "desc": "Check thai personal ID."
+  },
   "deno_check_updates": {
     "type": "github",
     "owner": "fzwael",
@@ -994,6 +1000,12 @@
     "repo": "ejs-deno",
     "desc": "EJS in Deno"
   },
+  "encodeurl": {
+    "type": "github",
+    "owner": "ako-deno",
+    "repo": "encodeurl",
+    "desc": "Encode a URL to a percent-encoded form, excluding already-encoded sequences. Build for Deno."
+  },
   "ende": {
     "type": "github",
     "owner": "rsp",
@@ -1023,6 +1035,12 @@
     "owner": "lemarier",
     "repo": "deno-env-paths",
     "desc": "Get paths for storing things like data, config, cache, etc"
+  },
+  "escape_html": {
+    "type": "github",
+    "owner": "ako-deno",
+    "repo": "escape_html",
+    "desc": "Escape string for use in HTML for Deno."
   },
   "escape_string_regexp": {
     "type": "github",
@@ -1211,6 +1229,12 @@
     "owner": "chiefbiiko",
     "repo": "hchacha20",
     "desc": "Special-purpose hashing, such as X25519 key derivation, or XChacha20 initialization. If in doubt, do not use."
+  },
+  "hctk": {
+    "type": "github",
+    "owner": "miZyind",
+    "repo": "deno-hctk",
+    "desc": "Deno HantChar to Keyboard 漢字轉鍵盤配置"
   },
   "heap": {
     "type": "github",
