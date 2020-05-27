@@ -316,7 +316,7 @@
     "type": "github",
     "owner": "CIDARO",
     "repo": "cobalt",
-    "desc": "Simple but awesome LRU cache for Deno, named after the bluest color."	  
+    "desc": "Simple but awesome LRU cache for Deno, named after the bluest color."
   },
   "collections": {
     "type": "github",
@@ -669,7 +669,7 @@
     "repo": "deno_lodash",
     "desc": "Lodash for the Deno via import statement"
   },
-  "deno_log":{
+  "deno_log": {
     "type": "github",
     "owner": "rafaelferres",
     "repo": "deno-log",
@@ -1199,7 +1199,7 @@
     "owner": "bartholomej",
     "repo": "geosearch-deno",
     "desc": "Simple CLI library to find places all around the world"
-  },  
+  },
   "get_ip": {
     "type": "github",
     "owner": "denorg",
@@ -1357,11 +1357,11 @@
     "repo": "iam-policies",
     "desc": "Role and Attribute based Access Control minimal lib for Deno 🦖"
   },
-  "ifttt": { 
-    "type": "github", 
-    "owner": "0xVesion", 
-    "repo": "deno-ifttt", 
-    "desc": "IFTTT webhook api client for deno" 
+  "ifttt": {
+    "type": "github",
+    "owner": "0xVesion",
+    "repo": "deno-ifttt",
+    "desc": "IFTTT webhook api client for deno"
   },
   "imt": {
     "type": "github",
