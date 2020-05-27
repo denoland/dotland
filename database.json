@@ -2220,6 +2220,12 @@
     "repo": "router",
     "desc": "A high-performance basic router works everywhere."
   },
+ "rsocket": {
+    "type": "github",
+    "owner": "linux-china",
+    "repo": "rsocket-deno",
+    "desc": "Deno library to create/consume RSocket services."
+  },
   "rsync_parser": {
     "type": "github",
     "owner": "daniel-araujo",
