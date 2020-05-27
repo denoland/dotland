@@ -1387,6 +1387,12 @@
     "repo": "ink",
     "desc": "HTML like terminal string color for Deno"
   },
+  "input": {
+    "type": "github",
+    "owner": "keegandonley",
+    "repo": "input-deno",
+    "desc": "A utility for handling user input to a Deno command line program"
+  },
   "install": {
     "type": "github",
     "owner": "denoland",
