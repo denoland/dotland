@@ -171,7 +171,8 @@ const Registry = () => {
       <Head>
         <title>
           {name}
-          {version && `@${version}`} - deno.land{!isStd ? "/x" : ""}
+          {version && `@${version}`}
+          {" | Deno"}
         </title>
         {metaDescription({
           title: `deno.land${!isStd ? "/x" : ""}/${name}${

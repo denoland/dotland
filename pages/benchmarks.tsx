@@ -46,7 +46,7 @@ const Benchmarks = () => {
   return (
     <>
       <Head>
-        <title>Benchmarks - Deno</title>
+        <title>Benchmarks | Deno</title>
 
         {metaDescription({
           title: "Benchmarks - Deno",

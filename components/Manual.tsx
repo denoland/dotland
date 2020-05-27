@@ -171,7 +171,7 @@ function Manual() {
   return (
     <div>
       <Head>
-        <title>The Deno Manual</title>
+        <title>Manual | Deno</title>
         {metaDescription({
           title: "The Deno Manual",
           description: partialContent || "The Deno Manual",

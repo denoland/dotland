@@ -11,7 +11,7 @@ const V1Hoodie = () => {
   return (
     <>
       <Head>
-        <title>Deno 1.0 Hoodie</title>
+        <title>1.0 Hoodie | Deno</title>
 
         {metaDescription({
           title: "Deno 1.0 Hoodie",
