@@ -820,6 +820,12 @@
     "repo": "deno-trie",
     "desc": "Deno implementation of Trie for faster string searches."
   },
+  "denova": {
+    "type": "github",
+    "owner": "viandwi24",
+    "repo": "denova",
+    "desc": "A Typescript Framework For Deno - Framework Looks Like Laravel."      
+  },
   "denovel": {
     "type": "github",
     "owner": "fauzan121002",
