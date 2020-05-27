@@ -1557,6 +1557,12 @@
     "repo": "lodash_require",
     "desc": "Lodash for the Deno runtime."
   },
+  "logger": {
+    "type": "github",
+    "owner": "fuxingZhang",
+    "repo": "deno-logger",
+    "desc": "A simple logger for deno."
+  },
   "lolcat": {
     "type": "github",
     "owner": "qwerttty",
