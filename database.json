@@ -1188,6 +1188,12 @@
     "repo": "gentleRpc",
     "desc": "JSON-RPC 2.0 TypeScript library for deno and browser."
   },
+  "geosearch": {
+    "type": "github",
+    "owner": "bartholomej",
+    "repo": "geosearch-deno",
+    "desc": "Simple CLI library to find places all around the world"
+  },  
   "get_ip": {
     "type": "github",
     "owner": "denorg",
