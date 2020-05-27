@@ -27,7 +27,7 @@ module.exports = {
   },
   plugins: [require("@tailwindcss/ui"), require("tailwindcss-hyphens")],
   purge: {
-    enabled: true,
-    content: ['./components/**/*.tsx', './pages/**/*.tsx'],
+    enabled: process.env.NODE_ENV === "production",
+    content: ["./components/**/*.tsx", "./pages/**/*.tsx"],
   },
 };
