@@ -108,6 +108,12 @@
     "repo": "audit",
     "desc": "Add an audit notification for insecure versions of your modules"
   },
+  "auto_bind": {
+    "type": "github",
+    "owner": "jgchk",
+    "repo": "auto-bind",
+    "desc": "Automatically bind methods to their class instance"
+  },
   "autopilot": {
     "type": "github",
     "owner": "divy-work",
