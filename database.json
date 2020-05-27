@@ -1473,7 +1473,7 @@
     "repo": "PerlinNoise-Deno",
     "desc": "A simple to use perlin noise module for typescript."
   },
-  "permission-guard": {
+  "permissionGuard": {
     "type": "github",
     "owner": "asos-craigmorten",
     "repo": "permission-guard",
