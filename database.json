@@ -1865,6 +1865,12 @@
     "repo": "opine",
     "desc": "Fast, minimalist web framework for Deno ported from ExpressJS."
   },
+  "organ": {
+    "type": "github",
+    "owner": "denjucks",
+    "repo": "organ",
+    "desc": "Logging middleware for the Oak framework, based on the morgan middleware for ExpressJS."
+  },
   "pagic": {
     "type": "github",
     "owner": "xcatliu",
