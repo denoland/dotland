@@ -42,6 +42,12 @@
     "repo": "framework",
     "desc": "The next-generation type-safe web framework."
   },
+   "attain": {
+    "type": "github",
+    "owner": "aaronwlee",
+    "repo": "attain",
+    "desc": "A middleware web framework, inspired by express.js"
+  },
   "await_mutex": {
     "type": "github",
     "owner": "Matthew-Smith",
@@ -228,11 +234,11 @@
     "repo": "cowsay",
     "desc": "Configurable talking cow for Deno"
   },
-  "crone": {
+  "cron": {
     "type": "github",
     "owner": "wrzonki",
-    "repo": "deno-crone",
-    "desc": "Simple crone scheduler for Deno"
+    "repo": "deno-cron",
+    "desc": "Simple cron scheduler for Deno"
   },
   "cross_env": {
     "type": "github",
@@ -244,7 +250,7 @@
     "type": "github",
     "owner": "vslinko",
     "repo": "deno-csv",
-    "desc": "Streaming CSV file reader for Deno"
+    "desc": "Streaming API for reading and writing CSV"
   },
   "cursor": {
     "type": "github",
@@ -295,12 +301,6 @@
     "repo": "date-fns",
     "path": "/src",
     "desc": "Modern JavaScript date utility library"
-  },
-  "dblapi.ts": {
-    "type": "github",
-    "owner": "zSnails",
-    "repo": "dblapi.ts",
-    "desc": "TypeScript top.gg api wrapper"
   },
   "dblapi.ts": {
     "type": "github",
@@ -756,6 +756,12 @@
     "repo": "i18next-locize-backend",
     "desc": "A simple i18next backend for locize.com which can be used in Node.js, in the browser and for Deno."
   },
+  "indigobird": {
+    "type": "github",
+    "owner": "ralusek",
+    "repo": "indigobird",
+    "desc": "A library for parallelizing promise execution, similar to bluebird but with additional concurrency params."
+  },
   "ini": {
     "type": "github",
     "owner": "chances",
@@ -890,11 +896,23 @@
     "repo": "lodash_require",
     "desc": "Lodash for the Deno runtime."
   },
+  "luhn": {
+    "type": "github",
+    "owner": "howlowck",
+    "repo": "deno-luhn",
+    "desc": "Luhn Algorithm Validator"
+  },
   "machine_id": {
     "type": "github",
     "owner": "axetroy",
     "repo": "deno_machine_id",
     "desc": "Get the unique ID of the current machine"
+  },
+  "mandarinets": {
+    "type": "github",
+    "owner": "mandarineorg",
+    "repo": "mandarinets",
+    "desc": "A MVC Framework built on Typescript that runs on Deno. Components, Dependency Injection, Sessions, Security and more."
   },
   "match": {
     "type": "github",
@@ -991,12 +1009,6 @@
     "owner": "ianfabs",
     "repo": "nanoid",
     "desc": "A tiny, secure, URL-friendly, unique string ID generator for JavaScript."
-  },
-  "nessie": {
-    "type": "github",
-    "owner": "halvardssm",
-    "repo": "deno-nessie",
-    "desc": "A database migration tool for deno."
   },
   "nessie": {
     "type": "github",
@@ -1368,6 +1380,12 @@
     "repo": "deno-sparkpost",
     "desc": "SparkPost email client library for deno"
   },
+  "specosaur": {
+    "type": "github",
+    "owner": "sachacr",
+    "repo": "specosaur",
+    "desc": "Specification pattern library for Deno."
+  },
   "sql_builder": {
     "type": "github",
     "owner": "manyuanrong",
@@ -1389,6 +1407,12 @@
     "owner": "denoland",
     "repo": "deno_std",
     "desc": "NOTICE: The deno_std repository has been moved to the main Deno repo https://github.com/denoland/deno/tree/master/std"
+  },
+  "suzhou_numerals": {
+    "type": "github",
+    "owner": "weakish",
+    "repo": "suzhou-numerals",
+    "desc": "Encoding and decoding Suzhou numerals."
   },
   "swissKnife": {
     "type": "github",
@@ -1431,6 +1455,18 @@
     "owner": "KSXGitHub",
     "repo": "deno_run_tests_on_localhost",
     "desc": "Create a localhost server and run tests"
+  },
+  "text_clipper": {
+    "type": "github",
+    "owner": "arendjr",
+    "repo": "text-clipper",
+    "desc": "Fast and correct clip functions for HTML and plain text"
+  },
+  "timezone": {
+    "type": "github",
+    "owner": "wrzonki",
+    "repo": "deno-timezone",
+    "desc": "Simple timezone syncronization"
   },
   "tiny_templates": {
     "type": "github",
@@ -1523,6 +1559,12 @@
     "repo": "deno_vscode_languageserver",
     "path": "/types",
     "desc": "Data types used by the VSCode language server client and server."
+  },
+  "vuniq": {
+    "type": "github",
+    "owner": "vasuvanka",
+    "repo": "vuniq",
+    "desc": "Uniq ID generator with variable length"
   },
   "watch": {
     "type": "github",

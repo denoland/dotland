@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import CodeBlock from "../components/CodeBlock";
-import { useOS } from "../util/platform";
 import Footer from "../components/Footer";
 import { entries } from "../util/registry_utils";
 import { NextPage, GetStaticProps } from "next";
@@ -285,11 +284,9 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
 };
 
 const InstallSection = () => {
-  const os = useOS();
-
   const shell = (
     <div key="shell" className="my-4 text-gray-700">
-      <p className="py-2 font-bold">Using Shell:</p>
+      <p className="py-2 font-bold">Using Shell (macOS, Linux):</p>
       <CodeBlock
         language="bash"
         code={`curl -fsSL https://deno.land/x/install/install.sh | sh`}
@@ -298,13 +295,13 @@ const InstallSection = () => {
   );
   const homebrew = (
     <div key="homebrew" className="my-4 text-gray-700">
-      <p className="mb-2 font-bold">Using Homebrew:</p>
+      <p className="mb-2 font-bold">Using Homebrew (macOS):</p>
       <CodeBlock language="typescript" code={`brew install deno`} />
     </div>
   );
   const powershell = (
     <div key="powershell" className="my-4 text-gray-700">
-      <p className="mb-2 font-bold">Using PowerShell:</p>
+      <p className="mb-2 font-bold">Using PowerShell (Windows):</p>
       <CodeBlock
         language="bash"
         code={`iwr https://deno.land/x/install/install.ps1 -useb | iex`}
@@ -313,13 +310,13 @@ const InstallSection = () => {
   );
   const chocolatey = (
     <div key="chocolatey" className="my-4 text-gray-700">
-      <p className="mb-2 font-bold">Using Chocolatey:</p>
+      <p className="mb-2 font-bold">Using Chocolatey (Windows):</p>
       <CodeBlock language="bash" code={`choco install deno`} />
     </div>
   );
   const scoop = (
     <div key="scoop" className="my-4 text-gray-700">
-      <p className="mb-2 font-bold">Using Scoop:</p>
+      <p className="mb-2 font-bold">Using Scoop (Windows):</p>
       <CodeBlock language="bash" code={`scoop install deno`} />
     </div>
   );
@@ -334,18 +331,11 @@ const InstallSection = () => {
         </a>
         .
       </p>
-      {(() => {
-        switch (os) {
-          case "mac":
-            return [shell, homebrew];
-          case "linux":
-            return shell;
-          case "win":
-            return [powershell, chocolatey, scoop];
-          default:
-            return [shell, powershell, homebrew, chocolatey, scoop];
-        }
-      })()}
+      {shell}
+      {powershell}
+      {homebrew}
+      {chocolatey}
+      {scoop}
       <p className="my-4 text-gray-700">
         See{" "}
         <a className="link" href="https://github.com/denoland/deno_install">
