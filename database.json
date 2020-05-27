@@ -1955,6 +1955,12 @@
     "repo": "deno-plugin-prepare",
     "desc": "A library for managing deno native plugin dependencies."
   },
+  "plugin_use": {
+    "type": "github",
+    "owner": "chaijs",
+    "repo": "plugin-use",
+    "desc": "A simple Event Emitter, tuned to be used as a plugin driver."
+  },
   "podio": {
     "type": "github",
     "owner": "open-zhy",
