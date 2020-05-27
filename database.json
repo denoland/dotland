@@ -1919,6 +1919,12 @@
     "repo": "PerlinNoise-Deno",
     "desc": "A simple to use perlin noise module for typescript."
   },
+  "permissionGuard": {
+    "type": "github",
+    "owner": "asos-craigmorten",
+    "repo": "permission-guard",
+    "desc": "A zero-dependency, minimal permission guard."
+  },
   "pg_format": {
     "type": "github",
     "owner": "grantcarthew",
