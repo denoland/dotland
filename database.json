@@ -1082,7 +1082,7 @@
     "type": "github",
     "owner": "garronej",
     "repo": "evt",
-    "desc": "💧A type safe replacement for Node's EventEmitter💧"
+    "desc": "💧Type safe replacement for EventEmitter and alternative to RxJS💧"
   },
   "exec": {
     "type": "github",
