@@ -2136,12 +2136,6 @@
     "repo": "noble-ripemd160",
     "desc": "RIPEMD160, a cryptographic hash function."
   },
-  "rsocket": {
-    "type": "github",
-    "owner": "linux-china",
-    "repo": "rsocket-deno",
-    "desc": "Deno library to create/consume RSocket services."
-  },
   "router": {
     "type": "github",
     "owner": "zhmushan",
@@ -2153,6 +2147,12 @@
     "owner": "daniel-araujo",
     "repo": "deno-rsync-parser",
     "desc": "Parses output of rsync program."
+  },
+  "rsocket": {
+    "type": "github",
+    "owner": "linux-china",
+    "repo": "rsocket-deno",
+    "desc": "Deno library to create/consume RSocket services."
   },
   "rubico": {
     "type": "github",
