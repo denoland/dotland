@@ -312,6 +312,12 @@
     "repo": "cmd",
     "desc": "Commander.js (command-line interfaces) for Deno."
   },
+  "cobalt": {
+    "type": "github",
+    "owner": "CIDARO",
+    "repo": "cobalt",
+    "desc": "Simple but awesome LRU cache for Deno, named after the bluest color."	  
+  },
   "collections": {
     "type": "github",
     "owner": "hayd",
