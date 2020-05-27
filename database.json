@@ -2214,6 +2214,12 @@
     "repo": "run_exclusive",
     "desc": "⚡🔒 Generate functions that do not allow parallel executions 🔒 ⚡"
   },
+  "run_with_limit": {
+    "type": "github",
+    "owner": "alextes",
+    "repo": "run_with_limit",
+    "desc": "Run promise-returning & async functions with limited concurrency"
+  },
   "rupiah": {
     "type": "github",
     "owner": "andriawan",
