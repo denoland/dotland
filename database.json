@@ -2034,6 +2034,12 @@
     "repo": "pubsub",
     "desc": "A simplistic PubSub module for Deno."
   },
+  "pug": {
+    "type": "github",
+    "owner": "DenoBRComunitty",
+    "repo": "pug",
+    "desc": "Pug – robust, elegant, feature rich template engine for Deno."
+  },
   "punycode": {
     "type": "github",
     "owner": "ClementD64",
