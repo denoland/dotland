@@ -2586,17 +2586,17 @@
     "repo": "type-detect",
     "desc": "Improved typeof detection for node.js and the browser."
   },
-  "typed_numeric": {
-    "type": "github",
-    "owner": "glatan",
-    "repo": "typed_numeric_deno",
-    "desc": "TypedNumeric for Deno."
-  },
   "type_is": {
     "type": "github",
     "owner": "ako-deno",
     "repo": "type_is",
     "desc": "Infer the content-type of a HTTP Header for Deno"
+  },
+  "typed_numeric": {
+    "type": "github",
+    "owner": "glatan",
+    "repo": "typed_numeric_deno",
+    "desc": "TypedNumeric for Deno."
   },
   "types": {
     "type": "github",
