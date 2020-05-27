@@ -1264,17 +1264,17 @@
     "repo": "rute",
     "desc": "A Simple Router for Deno"
   },
-  "search": {
-    "type": "github",
-    "owner": "eankeen",
-    "repo": "search",
-    "desc": "Module to search 3rd party packages"
-  },
   "saur": {
     "type": "github",
     "owner": "tubbo",
     "repo": "saur",
     "desc": "Deno Saur is a full-stack web application framework with a focus on rapid development, similar to Django or Ruby on Rails."
+  },
+  "search": {
+    "type": "github",
+    "owner": "eankeen",
+    "repo": "search",
+    "desc": "Module to search 3rd party packages"
   },
   "secp256k1": {
     "type": "github",
