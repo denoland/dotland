@@ -1877,6 +1877,12 @@
     "repo": "pagic",
     "desc": "The easiest way to generate static html page from markdown, built with Deno! 🦕"
   },
+  "paleontologist": {
+    "type": "github",
+    "owner": "TrueWill",
+    "repo": "paleontologist",
+    "desc": "Scientist-like refactoring module for Deno in TypeScript"
+  },
   "panoptes": {
     "type": "github",
     "owner": "TokenChingy",
