@@ -820,6 +820,12 @@
     "repo": "deno-trie",
     "desc": "Deno implementation of Trie for faster string searches."
   },
+  "denovel": {
+    "type": "github",
+    "owner": "fauzan121002",
+    "repo": "denovel",
+    "desc": "A Deno Framework for Web Artisan - Inspired by Laravel."      
+  },
   "denoversion": {
     "type": "github",
     "owner": "lucascaro",
