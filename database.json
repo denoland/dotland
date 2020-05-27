@@ -102,6 +102,12 @@
     "repo": "attain-graphql",
     "desc": "A simple graphql middleware for Attain framework."
   },
+  "audit": {
+    "type": "github",
+    "owner": "maximousblk",
+    "repo": "audit",
+    "desc": "Add an audit notification for insecure versions of your modules"
+  },
   "autopilot": {
     "type": "github",
     "owner": "divy-work",
@@ -306,6 +312,12 @@
     "repo": "cmd",
     "desc": "Commander.js (command-line interfaces) for Deno."
   },
+  "cobalt": {
+    "type": "github",
+    "owner": "CIDARO",
+    "repo": "cobalt",
+    "desc": "Simple but awesome LRU cache for Deno, named after the bluest color."	  
+  },
   "collections": {
     "type": "github",
     "owner": "hayd",
@@ -364,7 +376,7 @@
     "type": "github",
     "owner": "cordeno",
     "repo": "cordeno",
-    "desc": "A Disocord API wrapper for developing discord bots using the Deno runtime."
+    "desc": "A Discord API wrapper for developing discord bots using the Deno runtime."
   },
   "core": {
     "type": "github",
@@ -579,12 +591,6 @@
     "repo": "deno_app_setuper",
     "desc": "A CLI to setup apps like a Create React App."
   },
-  "deno_aws_sign_v4": {
-    "type": "github",
-    "owner": "silverxu",
-    "repo": "deno-aws-sign-v4",
-    "desc": "Generates AWS Signature V4 for AWS low-level REST APIs"
-  },	
   "deno_check_thai_pid": {
     "type": "github",
     "owner": "thiti-y",
@@ -657,7 +663,13 @@
     "repo": "deno_init",
     "desc": "The executable to set up a deno project 🦕"
   },
-  "deno_log": {
+  "deno_lodash": {
+    "type": "github",
+    "owner": "alirealasad",
+    "repo": "deno_lodash",
+    "desc": "Lodash for the Deno via import statement"
+  },
+  "deno_log":{
     "type": "github",
     "owner": "rafaelferres",
     "repo": "deno-log",
@@ -1164,6 +1176,12 @@
     "repo": "deno_free_port",
     "desc": "get free port for Deno"
   },
+  "funky": {
+    "type": "github",
+    "owner": "ful-stackz",
+    "repo": "funky",
+    "desc": "Bring the beloved Option<T>, Result<T, E> and other functional utilities into your next Deno masterpiece!"
+  },
   "gardens": {
     "type": "github",
     "owner": "partheseas",
@@ -1176,6 +1194,12 @@
     "repo": "gentleRpc",
     "desc": "JSON-RPC 2.0 TypeScript library for deno and browser."
   },
+  "geosearch": {
+    "type": "github",
+    "owner": "bartholomej",
+    "repo": "geosearch-deno",
+    "desc": "Simple CLI library to find places all around the world"
+  },  
   "get_ip": {
     "type": "github",
     "owner": "denorg",
@@ -1545,6 +1569,12 @@
     "repo": "lodash_require",
     "desc": "Lodash for the Deno runtime."
   },
+  "logger": {
+    "type": "github",
+    "owner": "fuxingZhang",
+    "repo": "deno-logger",
+    "desc": "A simple logger for deno."
+  },
   "lolcat": {
     "type": "github",
     "owner": "qwerttty",
@@ -1841,11 +1871,23 @@
     "repo": "opine",
     "desc": "Fast, minimalist web framework for Deno ported from ExpressJS."
   },
+  "organ": {
+    "type": "github",
+    "owner": "denjucks",
+    "repo": "organ",
+    "desc": "Logging middleware for the Oak framework, based on the morgan middleware for ExpressJS."
+  },
   "pagic": {
     "type": "github",
     "owner": "xcatliu",
     "repo": "pagic",
     "desc": "The easiest way to generate static html page from markdown, built with Deno! 🦕"
+  },
+  "paleontologist": {
+    "type": "github",
+    "owner": "TrueWill",
+    "repo": "paleontologist",
+    "desc": "Scientist-like refactoring module for Deno in TypeScript"
   },
   "panoptes": {
     "type": "github",
@@ -2022,6 +2064,12 @@
     "repo": "pubsub",
     "desc": "A simplistic PubSub module for Deno."
   },
+  "pug": {
+    "type": "github",
+    "owner": "DenoBRComunitty",
+    "repo": "pug",
+    "desc": "Pug – robust, elegant, feature rich template engine for Deno."
+  },
   "punycode": {
     "type": "github",
     "owner": "ClementD64",
@@ -2160,6 +2208,12 @@
     "repo": "run_exclusive",
     "desc": "⚡🔒 Generate functions that do not allow parallel executions 🔒 ⚡"
   },
+  "rupiah": {
+    "type": "github",
+    "owner": "andriawan",
+    "repo": "rupiah_ts",
+    "desc": "Simple indonesian rupiah currency format"
+  },
   "rute": {
     "type": "github",
     "owner": "jabernardo",
@@ -2183,6 +2237,12 @@
     "owner": "paulmillr",
     "repo": "noble-secp256k1",
     "desc": "secp256k1, an elliptic curve that could be used for assymetric encryption and ECDSA signature scheme."
+  },
+  "secure_compare": {
+    "type": "github",
+    "owner": "hkatzdev",
+    "repo": "secure-compare",
+    "desc": "Constant-time comparison algorithm to prevent timing attacks (Deno edition)"
   },
   "semver": {
     "type": "github",
@@ -2292,14 +2352,6 @@
     "owner": "jcardama",
     "repo": "deno_slugify",
     "desc": "A string slugifier"
-  },
-  "smoothish": {
-    "type": "github",
-    "owner": "smoothish",
-    "repo": "smoothish",
-    "path": "/index.js",
-    "defaultVersion": "deno",
-    "desc": "Smoothing out time-series data with boundary and missing data handling"
   },
   "smtp": {
     "type": "github",
@@ -2527,12 +2579,6 @@
     "owner": "dr-useless",
     "repo": "tweetnacl-deno",
     "desc": "Port of TweetNaCl cryptographic library to TypeScript for Deno"
-  },
-  "twitch": {
-    "type": "github",
-    "owner": "denoparty",
-    "repo": "twitch",
-    "desc": "Framework for building Twitch bots with Deno"
   },
   "type_check": {
     "type": "github",

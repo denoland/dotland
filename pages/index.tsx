@@ -45,11 +45,11 @@ const NUM_THIRD_PARTY = 12;
 
 const Home: NextPage<HomeProps> = ({ thirdPartyEntries, latestStd }) => {
   const complexExampleProgram = `import { serve } from "https://deno.land/std@${latestStd}/http/server.ts";
-  const s = serve({ port: 8000 });
-  console.log("http://localhost:8000/");
-  for await (const req of s) {
-    req.respond({ body: "Hello World\\n" });
-  }`;
+const s = serve({ port: 8000 });
+console.log("http://localhost:8000/");
+for await (const req of s) {
+  req.respond({ body: "Hello World\\n" });
+}`;
 
   const [thirdPartySelection, setThirdPartySelection] = useState<
     SimpleEntry[] | null

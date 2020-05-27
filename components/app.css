@@ -1,9 +1,7 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-/* purgecss start ignore */
 @import "tailwindcss/base";
 @import "tailwindcss/components";
-/* purgecss end ignore */
 
 @import "tailwindcss/utilities";
 
