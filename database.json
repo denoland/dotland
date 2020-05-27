@@ -2196,6 +2196,12 @@
     "repo": "run_exclusive",
     "desc": "⚡🔒 Generate functions that do not allow parallel executions 🔒 ⚡"
   },
+  "rupiah": {
+    "type": "github",
+    "owner": "andriawan",
+    "repo": "rupiah_ts",
+    "desc": "Simple indonesian rupiah currency format"
+  },
   "rute": {
     "type": "github",
     "owner": "jabernardo",
