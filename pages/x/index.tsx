@@ -30,7 +30,7 @@ const ThirdPartyRegistryList = () => {
   return (
     <>
       <Head>
-        <title>Deno Third Party Modules</title>
+        <title>Third Party Modules | Deno</title>
 
         {metaDescription({
           title: "Deno Third Party Modules",

@@ -19,7 +19,7 @@ const V1 = (props: Props) => {
   return (
     <>
       <Head>
-        <title>Deno 1.0</title>
+        <title>1.0 | Deno</title>
 
         {metaDescription({
           title: "Deno 1.0",
