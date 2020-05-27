@@ -5,7 +5,7 @@ import { GithubEntry, GithubDatabaseEntry } from "./registries/github";
 import { DenoStdEntry, DenoStdDatabaseEntry } from "./registries/deno_std";
 import { URLEntry, URLDatabaseEntry } from "./registries/url";
 import { NPMEntry, NPMDatabaseEntry } from "./registries/npm";
-import { Entry, DatabaseEntry } from "./registries";
+import { Entry } from "./registries";
 
 function findDatabaseEntry(
   name: string
@@ -86,4 +86,9 @@ export function isReadme(filename: string) {
   );
 }
 
-export const entries = DATABASE as { [name: string]: DatabaseEntry };
+export const entries = (DATABASE as unknown) as {
+  [name: string]: GithubDatabaseEntry &
+    DenoStdDatabaseEntry &
+    URLDatabaseEntry &
+    NPMDatabaseEntry;
+};

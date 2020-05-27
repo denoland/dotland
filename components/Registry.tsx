@@ -206,7 +206,10 @@ const Registry = () => {
               onChange={gotoVersion}
             />
             {(() => {
-              if (!dirEntries && !raw) {
+              if (
+                (dirEntries === undefined || dirEntries === null) &&
+                (raw === undefined || raw === null)
+              ) {
                 if (dirEntries === null && raw === null) {
                   return (
                     <ErrorMessage
@@ -240,33 +243,29 @@ const Registry = () => {
                 title="Failed to get directory listing"
                 body={dirEntries.message}
               />
-            ) : (
-              dirEntries && (
-                <DirectoryListing
-                  dirEntries={dirEntries}
-                  repositoryURL={repositoryURL}
-                  name={name}
-                  version={version}
-                  path={path}
-                />
-              )
-            )}
+            ) : dirEntries !== undefined && dirEntries !== null ? (
+              <DirectoryListing
+                dirEntries={dirEntries}
+                repositoryURL={repositoryURL}
+                name={name}
+                version={version}
+                path={path}
+              />
+            ) : null}
             {raw instanceof RegistryError ? (
               <ErrorMessage title="Failed to get raw file" body={raw.message} />
-            ) : (
-              raw && (
-                <div className="mt-4">
-                  <FileDisplay
-                    raw={raw}
-                    canonicalPath={canonicalPath}
-                    sourceURL={sourceURL!}
-                    repositoryURL={repositoryURL}
-                    documentationURL={documentationURL}
-                  />
-                </div>
-              )
-            )}
-            {readme && (
+            ) : typeof raw === "string" ? (
+              <div className="mt-4">
+                <FileDisplay
+                  raw={raw}
+                  canonicalPath={canonicalPath}
+                  sourceURL={sourceURL!}
+                  repositoryURL={repositoryURL}
+                  documentationURL={documentationURL}
+                />
+              </div>
+            ) : null}
+            {typeof readme === "string" ? (
               <div className="mt-4">
                 <FileDisplay
                   raw={readme}
@@ -275,7 +274,7 @@ const Registry = () => {
                   repositoryURL={readmeRepositoryURL}
                 />
               </div>
-            )}
+            ) : null}
           </div>
         </div>
         <Footer simple />
@@ -519,9 +518,9 @@ function DirectoryListing(props: {
                           {entry.name}
                         </td>
                         <td className="px-4 py-1 whitespace-no-wrap text-sm leading-5 text-gray-500 text-right">
-                          {entry.size !== undefined
+                          {entry.type !== "dir" && entry.size
                             ? bytesToSize(entry.size)
-                            : "N/A"}
+                            : ""}
                         </td>
                       </tr>
                     </Link>
