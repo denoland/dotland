@@ -426,6 +426,12 @@
     "repo": "deno-cron",
     "desc": "Simple cron scheduler for Deno"
   },
+  "crontab": {
+    "type": "github",
+    "owner": "jchen1",
+    "repo": "crontab-deno",
+    "desc": "cron-based job runner for deno"
+  },
   "cross_env": {
     "type": "github",
     "owner": "axetroy",
