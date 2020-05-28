@@ -288,6 +288,12 @@
     "repo": "deno-checksum",
     "desc": "deno-checksum"
   },
+  "cheerio": {
+    "type": "github",
+    "owner": "DenoBRComunitty",
+    "repo": "cheerio",
+    "desc": "Fast, flexible, and lean implementation of core jQuery designed specifically for the server."
+  },
   "chunked": {
     "type": "github",
     "owner": "aynik",
