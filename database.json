@@ -757,7 +757,7 @@
     "type": "github",
     "owner": "Denocord",
     "repo": "Denocord",
-    "desc": "A fast, strongly typed and versatile Discord API wrapper for the Deno runtime."
+    "desc": "A fast, strongly typed and versatile Discord API wrapper for the Deno runtime"
   },
   "denodate": {
     "type": "github",
