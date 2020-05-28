@@ -190,7 +190,7 @@
     "type": "github",
     "owner": "DenoBRComunitty",
     "repo": "boolbase",
-    "desc": "boolbase: Only two functions: one that returns true, one that returns false."
+    "desc": "BoolBase, only two functions: one that returns true, one that returns false."
   },
   "bsv": {
     "type": "github",
