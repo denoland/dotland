@@ -2214,6 +2214,12 @@
     "repo": "resulty",
     "desc": "Provides simple, Rust-like Result and Option objects for Deno."
   },
+  "rhinoder": {
+    "type": "github",
+    "owner": "Caesar2011",
+    "repo": "rhinoder",
+    "desc": "Reloads a deno application on every file change"
+  },
   "rimu": {
     "type": "github",
     "owner": "srackham",
