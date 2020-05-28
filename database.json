@@ -1870,6 +1870,12 @@
     "repo": "middleware",
     "desc": "A collection of middleware for the oak middleware framework."
   },
+  "oauth-1.0a": {
+    "type": "github",
+    "owner": "alkihis",
+    "repo": "oauth-1.0a",
+    "desc": "OAuth 1.0a Request Authorization for Deno."
+  },
   "observable": {
     "type": "github",
     "owner": "bsunderhus",
@@ -2675,6 +2681,12 @@
     "owner": "microsoft",
     "repo": "typescript",
     "desc": "TypeScript is a superset of JavaScript that compiles to clean JavaScript output."
+  },
+  "twitter-lite-deno": {
+    "type": "github",
+    "owner": "alkihis",
+    "repo": "twitter-lite-deno",
+    "desc": "Port of Twitter Lite library to Deno, a tiny, modern and full-featured library for the Twitter API."
   },
   "udd": {
     "type": "github",
