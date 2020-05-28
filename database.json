@@ -988,7 +988,7 @@
     "repo": "domhandler",
     "desc": "Dom Handler: htmlparser2's dom as a separate module for deno"
   },
-  "dom_serializer": {
+  "domserializer": {
     "type": "github",
     "owner": "DenoBRComunitty",
     "repo": "dom-serializer",
