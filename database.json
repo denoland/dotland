@@ -2795,6 +2795,12 @@
     "repo": "up",
     "desc": "Check if a website is currently up"
   },
+  "upload_middleware_for_oak_framework": {
+    "type": "github",
+    "owner": "hviana",
+    "repo": "Upload-middleware-for-Oak-Deno-framework",
+    "desc": "Upload middleware for Oak framework"
+  },
   "url_join": {
     "type": "github",
     "owner": "roonie007",
