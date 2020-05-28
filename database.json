@@ -450,6 +450,12 @@
     "repo": "crontab-deno",
     "desc": "cron-based job runner for deno"
   },
+  "crony": {
+    "type": "github",
+    "owner": "uchm4n",
+    "repo": "crony",
+    "desc": "Manage all your cron jobs in one file"
+  },
   "cross_env": {
     "type": "github",
     "owner": "axetroy",
