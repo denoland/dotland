@@ -1716,7 +1716,7 @@
   "mime_db": {
     "type": "github",
     "owner": "alirealasad",
-    "repo": "mime",
+    "repo": "mime_db",
     "desc": "This is a database of all mime types"
   },
   "minidate": {
