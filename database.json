@@ -2652,6 +2652,12 @@
     "repo": "type_is",
     "desc": "Infer the content-type of a HTTP Header for Deno"
   },
+  "typed_numeric": {
+    "type": "github",
+    "owner": "glatan",
+    "repo": "typed_numeric_deno",
+    "desc": "TypedNumeric for Deno."
+  },
   "types": {
     "type": "github",
     "owner": "Soremwar",
