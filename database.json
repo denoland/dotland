@@ -966,6 +966,12 @@
   },
   "dotenv": {
     "type": "github",
+    "owner": "DenoBRComunitty",
+    "repo": "domelementtype",
+    "desc": "All the types of dom for Deno"
+  },
+  "dotenv": {
+    "type": "github",
     "owner": "pietvanzoen",
     "repo": "deno-dotenv",
     "desc": "Dotenv handling for deno."
