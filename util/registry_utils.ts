@@ -15,6 +15,27 @@ function findDatabaseEntry(
   | URLDatabaseEntry
   | NPMDatabaseEntry
   | undefined {
+  if (name.startsWith("npm:")) {
+    const [_, packageName] = name.split(":");
+    const entry: NPMDatabaseEntry = {
+      desc: packageName,
+      package: packageName,
+      type: "npm",
+    };
+    return entry;
+  }
+
+  if (name.startsWith("gh:")) {
+    const [_, owner, repo] = name.split(":");
+    const entry: GithubDatabaseEntry = {
+      desc: `${owner}/${repo}`,
+      owner,
+      repo,
+      type: "github",
+    };
+    return entry;
+  }
+
   // @ts-ignore
   return DATABASE[name];
 }
