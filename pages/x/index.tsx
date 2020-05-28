@@ -44,7 +44,7 @@ const ThirdPartyRegistryList = () => {
         <div className="">
           <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 pt-4">
             <div className="text-gray-900 mt-4 sm:mt-8 break-words">
-              <p>
+              <p className="text-gray-900 mt-4">
                 <span className="font-semibold">deno.land/x</span> is a URL
                 rewriting service for Deno scripts. The basic format of code
                 URLs is{" "}
@@ -55,7 +55,7 @@ const ThirdPartyRegistryList = () => {
                 default branch, usually <InlineCode>master</InlineCode>.
               </p>
 
-              <p>
+              <p className="text-gray-900 mt-4">
                 Experimental: Use <InlineCode>npm:[package]</InlineCode> or
                 <InlineCode>gh:[owner]:[repo]</InlineCode> as module name to
                 resolve any artibrary repository or npm package.
@@ -85,7 +85,9 @@ const ThirdPartyRegistryList = () => {
                 >
                   database.json
                 </a>
-                .
+                {". "}
+                Run the tests and formatting before submitting a patch - the PR
+                must be green to be considered.
               </p>
             </div>
             <div className="mt-12">
