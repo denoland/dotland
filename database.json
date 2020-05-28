@@ -1004,7 +1004,7 @@
     "type": "github",
     "owner": "DenoBRComunitty",
     "repo": "domutils",
-    "desc": "🦕 DOM utils for Deno"
+    "desc": "🦕 DOM utils for Deno."
   },
   "dotenv": {
     "type": "github",
