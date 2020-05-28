@@ -1870,6 +1870,12 @@
     "repo": "deno-wrapper-novelcovid",
     "desc": "Wrapper of NovelCOVID/API for Deno"
   },
+  "nth_check": {
+    "type": "github",
+    "owner": "DenoBRComunitty",
+    "repo": "nth-check",
+    "desc": "Performant nth-check parser & compiler for Deno"
+  },
   "number_formatter": {
     "type": "github",
     "owner": "nusendra",
