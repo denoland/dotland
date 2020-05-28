@@ -1072,6 +1072,12 @@
     "repo": "ensure",
     "desc": "Ensure you are running on a minimum version of Deno, Typescript, or V8"
   },
+  "entities": {
+    "type": "github",
+    "owner": "DenoBRComunitty",
+    "repo": "entities",
+    "desc": "🦕 encode & decode XML/HTML entities with easy for deno"
+  },
   "enum": {
     "type": "github",
     "owner": "adrai",
