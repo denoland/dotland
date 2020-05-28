@@ -964,6 +964,12 @@
     "repo": "dodecasaurus",
     "desc": "Dice utility that makes generating random dice values simple and convenient."
   },
+  "domhandler": {
+    "type": "github",
+    "owner": "DenoBRComunitty",
+    "repo": "domhandler",
+    "desc": "Dom Handler: htmlparser2's dom as a separate module for deno"
+  },
   "dotenv": {
     "type": "github",
     "owner": "pietvanzoen",
