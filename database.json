@@ -2214,6 +2214,12 @@
     "repo": "resulty",
     "desc": "Provides simple, Rust-like Result and Option objects for Deno."
   },
+  "retry": {
+    "type": "github",
+    "owner": "franckLdx",
+    "repo": "retry",
+    "desc": "Re-execute a function until the function does not throw an error."
+  },
   "rimu": {
     "type": "github",
     "owner": "srackham",
