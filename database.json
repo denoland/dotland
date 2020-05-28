@@ -1837,7 +1837,7 @@
     "type": "github",
     "owner": "deno-nonstd",
     "repo": "nonstd",
-    "desc": "A library of useful features for things that do not currently exist in the std library."
+    "desc": "A library of features that do not currently exist in the std library."
   },
   "normalize_diacritics": {
     "type": "github",
