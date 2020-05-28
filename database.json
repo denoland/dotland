@@ -192,12 +192,6 @@
     "repo": "boolbase",
     "desc": "BoolBase, only two functions: one that returns true, one that returns false."
   },
-  "brotli": {
-    "type": "github",
-    "owner": "denosaurs",
-    "repo": "deno_brotli",
-    "desc": "A brotli compression and decompression module implemented in WASM"
-  },
   "bsv": {
     "type": "github",
     "owner": "bitcartel",
@@ -998,19 +992,19 @@
     "type": "github",
     "owner": "DenoBRComunitty",
     "repo": "domelementtype",
-    "desc": "All the types of dom for Deno"
-  },
-  "domhandler": {
-    "type": "github",
-    "owner": "DenoBRComunitty",
-    "repo": "domhandler",
-    "desc": "Dom Handler: htmlparser2's dom as a separate module for deno"
+    "desc": "🦕 All the types of DOM for Deno"
   },
   "domserializer": {
     "type": "github",
     "owner": "DenoBRComunitty",
     "repo": "dom-serializer",
-    "desc": "🦕 render dom nodes for node"
+    "desc": "🦕 Render DOM nodes for Deno"
+  },
+  "domutils": {
+    "type": "github",
+    "owner": "DenoBRComunitty",
+    "repo": "domutils",
+    "desc": "🦕 DOM utils for Deno"
   },
   "dotenv": {
     "type": "github",
