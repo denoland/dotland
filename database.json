@@ -1689,6 +1689,12 @@
     "repo": "mime",
     "desc": "🦕 A mime types for deno"
   },
+  "mime_db": {
+    "type": "github",
+    "owner": "alirealasad",
+    "repo": "mime",
+    "desc": "This is a database of all mime types"
+  },
   "minidate": {
     "type": "github",
     "owner": "bernardini687",
