@@ -836,13 +836,13 @@
     "type": "github",
     "owner": "viandwi24",
     "repo": "denova",
-    "desc": "A Typescript Framework For Deno - Framework Looks Like Laravel."      
+    "desc": "A Typescript Framework For Deno - Framework Looks Like Laravel."
   },
   "denovel": {
     "type": "github",
     "owner": "fauzan121002",
     "repo": "denovel",
-    "desc": "A Deno Framework for Web Artisan - Inspired by Laravel."      
+    "desc": "A Deno Framework for Web Artisan - Inspired by Laravel."
   },
   "denoversion": {
     "type": "github",
@@ -2232,7 +2232,7 @@
     "repo": "router",
     "desc": "A high-performance basic router works everywhere."
   },
- "rsocket": {
+  "rsocket": {
     "type": "github",
     "owner": "linux-china",
     "repo": "rsocket-deno",
