@@ -210,6 +210,12 @@
     "repo": "bump",
     "desc": "Versioning and tagging tool for Deno projects"
   },
+  "brotli": {
+    "type": "github",
+    "owner": "denosaurs",
+    "repo": "deno_brotli",
+    "desc": "A brotli compression and decompression module implemented in WASM"
+  },
   "bwt": {
     "type": "github",
     "owner": "chiefbiiko",
