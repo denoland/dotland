@@ -2815,12 +2815,6 @@
     "repo": "deno-watch",
     "desc": "A pure deno file watcher."
   },
-  "watch_v2": {
-    "type": "github",
-    "owner": "ebebbington",
-    "repo": "deno-watch-v2",
-    "desc": "deno-watch-v2"
-  },
   "websocket": {
     "type": "github",
     "owner": "ryo-ma",
