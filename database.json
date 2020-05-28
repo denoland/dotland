@@ -2226,6 +2226,12 @@
     "repo": "noble-ripemd160",
     "desc": "RIPEMD160, a cryptographic hash function."
   },
+  "rhinoder": {
+    "type": "github",
+    "owner": "Caesar2011",
+    "repo": "rhinoder",
+    "desc": "Reloads a deno application on every file change"
+  },
   "router": {
     "type": "github",
     "owner": "zhmushan",
@@ -2752,6 +2758,12 @@
     "owner": "rubiin",
     "repo": "validator",
     "desc": "A Port of validatorjs to deno"
+  },
+  "valideno": {
+    "type": "github",
+    "owner": "Caesar2011",
+    "repo": "valideno",
+    "desc": "Validate your values and schemes with this extendable validator"
   },
   "value_schema": {
     "type": "npm",
