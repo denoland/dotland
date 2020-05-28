@@ -964,6 +964,12 @@
     "repo": "dodecasaurus",
     "desc": "Dice utility that makes generating random dice values simple and convenient."
   },
+  "dom_serializer": {
+    "type": "github",
+    "owner": "DenoBRComunitty",
+    "repo": "dom-serializer",
+    "desc": "🦕 render dom nodes for node"
+  },
   "dotenv": {
     "type": "github",
     "owner": "pietvanzoen",
