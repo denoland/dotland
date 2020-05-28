@@ -2232,12 +2232,6 @@
     "repo": "noble-ripemd160",
     "desc": "RIPEMD160, a cryptographic hash function."
   },
-  "rhinoder": {
-    "type": "github",
-    "owner": "Caesar2011",
-    "repo": "rhinoder",
-    "desc": "Reloads a deno application on every file change"
-  },
   "router": {
     "type": "github",
     "owner": "zhmushan",
