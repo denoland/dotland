@@ -753,6 +753,12 @@
     "repo": "deno-emacs",
     "desc": "A small cli tool to generate a tsconfig.json that allows editors to understand deno."
   },
+  "denocord": {
+    "type": "github",
+    "owner": "Denocord",
+    "repo": "Denocord",
+    "desc": "A fast, strongly typed and versatile Discord API wrapper for the Deno runtime."
+  },
   "denodate": {
     "type": "github",
     "owner": "t-heu",
