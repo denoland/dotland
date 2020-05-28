@@ -2765,6 +2765,12 @@
     "repo": "validator",
     "desc": "A Port of validatorjs to deno"
   },
+  "valideno": {
+    "type": "github",
+    "owner": "Caesar2011",
+    "repo": "valideno",
+    "desc": "Validate your values and schemes with this extendable validator"
+  },
   "value_schema": {
     "type": "npm",
     "package": "value-schema",
