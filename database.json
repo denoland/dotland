@@ -186,6 +186,12 @@
     "repo": "noble-bls12-381",
     "desc": "bls12-381, a pairing-friendly elliptic curve construction."
   },
+  "boolbase": {
+    "type": "github",
+    "owner": "DenoBRComunitty",
+    "repo": "boolbase",
+    "desc": "BoolBase, only two functions: one that returns true, one that returns false."
+  },
   "bsv": {
     "type": "github",
     "owner": "bitcartel",
