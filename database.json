@@ -994,6 +994,12 @@
     "repo": "domelementtype",
     "desc": "All the types of dom for Deno"
   },
+  "domhandler": {
+    "type": "github",
+    "owner": "DenoBRComunitty",
+    "repo": "domhandler",
+    "desc": "Dom Handler: htmlparser2's dom as a separate module for deno"
+  },
   "domserializer": {
     "type": "github",
     "owner": "DenoBRComunitty",
