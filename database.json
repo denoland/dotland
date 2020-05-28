@@ -192,6 +192,12 @@
     "repo": "boolbase",
     "desc": "BoolBase, only two functions: one that returns true, one that returns false."
   },
+  "brotli": {
+    "type": "github",
+    "owner": "denosaurs",
+    "repo": "deno_brotli",
+    "desc": "A brotli compression and decompression module implemented in WASM"
+  },
   "bsv": {
     "type": "github",
     "owner": "bitcartel",
@@ -209,12 +215,6 @@
     "owner": "iamnathanj",
     "repo": "bump",
     "desc": "Versioning and tagging tool for Deno projects"
-  },
-  "brotli": {
-    "type": "github",
-    "owner": "denosaurs",
-    "repo": "deno_brotli",
-    "desc": "A brotli compression and decompression module implemented in WASM"
   },
   "bwt": {
     "type": "github",
