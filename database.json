@@ -1875,6 +1875,12 @@
     "repo": "nexo",
     "desc": "A Deno and Next Cocktail"
   },
+  "nonstd": {
+    "type": "github",
+    "owner": "deno-nonstd",
+    "repo": "nonstd",
+    "desc": "A library of useful features that currently do not exist in the standard lib."
+  },
   "normalize_diacritics": {
     "type": "github",
     "owner": "motss",
