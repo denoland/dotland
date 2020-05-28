@@ -988,7 +988,7 @@
     "repo": "domelementtype",
     "desc": "All the types of dom for Deno"
   },
-  "dom_serializer": {
+  "domserializer": {
     "type": "github",
     "owner": "DenoBRComunitty",
     "repo": "dom-serializer",
