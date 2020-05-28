@@ -1006,6 +1006,12 @@
     "repo": "dodecasaurus",
     "desc": "Dice utility that makes generating random dice values simple and convenient."
   },
+  "dog": {
+    "type": "github",
+    "owner": "marc2332",
+    "repo": "deno_dog",
+    "desc": "Dog API wrapper"
+  },
   "domelementtype": {
     "type": "github",
     "owner": "DenoBRComunitty",
