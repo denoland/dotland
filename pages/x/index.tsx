@@ -52,11 +52,15 @@ const ThirdPartyRegistryList = () => {
                   https://deno.land/x/MODULE_NAME@BRANCH/SCRIPT.ts
                 </InlineCode>
                 . If you leave out the branch, it will default to the module’s
-                default branch, usually <InlineCode>master</InlineCode>. You can
-                use <InlineCode>npm:[package]</InlineCode> or
+                default branch, usually <InlineCode>master</InlineCode>.
+              </p>
+
+              <p>
+                Experimental: Use <InlineCode>npm:[package]</InlineCode> or
                 <InlineCode>gh:[owner]:[repo]</InlineCode> as module name to
                 resolve any artibrary repository or npm package.
               </p>
+
               <p className="text-gray-900 mt-4">
                 Functionality built-in to Deno is not listed here. The built-in
                 runtime is documented on{" "}
