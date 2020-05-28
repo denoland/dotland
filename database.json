@@ -627,6 +627,12 @@
     "repo": "deno-deblong",
     "desc": "another simple rest api with deno"
   },
+  "deno_dinvishesh": {
+    "type": "github",
+    "owner": "vinodnimbalkar",
+    "repo": "deno-dinvishesh",
+    "desc": "A simple deno module which returns marathi dinvishesh"
+  },
   "deno_flatten": {
     "type": "github",
     "owner": "yanislavgalyov",
