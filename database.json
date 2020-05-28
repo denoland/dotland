@@ -2220,6 +2220,12 @@
     "repo": "retry",
     "desc": "Re-execute a function until the function does not throw an error."
   },
+  "rhinoder": {
+    "type": "github",
+    "owner": "Caesar2011",
+    "repo": "rhinoder",
+    "desc": "Reloads a deno application on every file change"
+  },
   "rimu": {
     "type": "github",
     "owner": "srackham",
