@@ -777,6 +777,12 @@
     "repo": "deno-env",
     "desc": "Deno module for reading env files with added options"
   },
+  "denof": {
+    "type": "github",
+    "owner": "r37r0m0d3l",
+    "repo": "denof",
+    "desc": "Syntactic sugar for asynchronous functions, promises, generators and synchronous functions."
+  },
   "denoforge": {
     "type": "github",
     "owner": "denjucks",
