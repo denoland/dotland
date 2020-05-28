@@ -621,6 +621,12 @@
     "repo": "deno-check-updates",
     "desc": "Automatically checks deno dependencies versions from import maps file."
   },
+  "deno_correiobr": {
+    "type": "github",
+    "owner": "rafaelferres",
+    "repo": "deno-correiobr",
+    "desc": "Complete module to consult information about the zip code - calculate the price and delivery times of orders and also perform their tracking"
+  },
   "deno_cron": {
     "type": "github",
     "owner": "rbrahul",
