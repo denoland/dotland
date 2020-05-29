@@ -1713,6 +1713,12 @@
     "repo": "deno-luhn",
     "desc": "Luhn Algorithm Validator"
   },
+  "lz4": {
+    "type": "github",
+    "owner": "denosaurs",
+    "repo": "deno_lz4",
+    "desc": "A lz4 compression and decompression module implemented in WASM"
+  },
   "mac": {
     "type": "github",
     "owner": "Acathur",
