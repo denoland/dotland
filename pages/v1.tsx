@@ -8,7 +8,6 @@ import Header from "../components/Header";
 import Markdown from "../components/Markdown";
 import { GetStaticProps } from "next";
 import { promises as fs } from "fs";
-import Link from "next/link";
 import { metaDescription } from ".";
 
 interface Props {
@@ -62,26 +61,13 @@ const V1 = (props: Props) => {
             sourceURL="https://deno.land/v1.md"
           />
         </div>
-        <div className="py-32 text-gray-900">
-          <h2 className="text-2xl tracking-tight leading-tight font-bold border-b border-gray-200 mt-12 mb-6 pb-1">
-            One last thing
-          </h2>
-          <p>
-            Consider supporting this open source software work by pre-ordering a
-            Deno v1.0 hoodie:
-          </p>
-          <img
-            src="/v1_hoodie_mock.png"
-            alt="deno 1.0 hoodie"
-            className="mx-auto py-8 max-w-sm w-full"
-          />
-          <span className="block rounded-md shadow-sm">
-            <Link href="/v1/hoodie">
-              <a className="flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:shadow-outline-indigo active:bg-gray-700 transition duration-150 ease-in-out">
-                Order here &rarr;
-              </a>
-            </Link>
-          </span>
+        <div className="py-8 text-gray-900">
+          <a
+            href="https://news.ycombinator.com/item?id=23172483"
+            className="link"
+          >
+            HN Comments
+          </a>
         </div>
       </div>
       <Footer />
