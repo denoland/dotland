@@ -699,6 +699,12 @@
     "repo": "deno_http_router",
     "desc": "deno http router"
   },
+  "deno_imagemagick": {
+    "type": "github",
+    "owner": "leonelv",
+    "repo": "deno-imagemagick",
+    "desc": "Deno port of the WASM library for ImageMagick 🦕"
+  },
   "deno_init": {
     "type": "github",
     "owner": "maxuuell",
