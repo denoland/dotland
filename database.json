@@ -2819,6 +2819,12 @@
     "package": "unexpected",
     "desc": "Extensible BDD assertion toolkit"
   },
+  "unrar": {
+    "type": "github",
+    "owner": "fuxingZhang",
+    "repo": "deno-unrar",
+    "desc": "uncompress rar file for deno"
+  },
   "up": {
     "type": "github",
     "owner": "denorg",
