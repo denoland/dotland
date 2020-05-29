@@ -850,6 +850,12 @@
     "repo": "denoliver",
     "desc": "A simple, dependency free web server for Deno"
   },
+  "denologger": {
+  "type": "github",
+  "owner": "wuperguy",
+  "repo": "denologger",
+  "desc": "A simple tool to format console logs"
+  },
   "denomander": {
     "type": "github",
     "owner": "siokas",
