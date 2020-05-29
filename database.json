@@ -735,6 +735,12 @@
     "repo": "deno-matrix",
     "desc": "🦕 Lightweight Deno Library To Handle Matrices 🦖"
   },
+  "deno_minimist": {
+    "type": "github",
+    "owner": "FaberVitale",
+    "repo": "deno_minimist",
+    "desc": "💾 Parses command line arguments. Port & rewrite of the node library minimist"
+  },
   "deno_pixabay": {
     "type": "github",
     "owner": "yeukfei02",
