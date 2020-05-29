@@ -2189,6 +2189,12 @@
     "repo": "deno_process",
     "desc": "process module for Deno"
   },
+  "progress": {
+    "type": "github",
+    "owner": "fuxingZhang",
+    "repo": "deno-progress",
+    "desc": "Progress bar in terminal for deno"
+  },
   "progressbar": {
     "type": "github",
     "owner": "jakobhellermann",
