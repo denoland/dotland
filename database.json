@@ -1036,6 +1036,12 @@
     "repo": "deno-dotenv",
     "desc": "Dotenv handling for deno."
   },
+  "download": {
+    "type": "github",
+    "owner": "deno-module",
+    "repo": "download",
+    "desc": "Deno fetch api based module to download file from a URL."
+  },
   "dpx": {
     "type": "github",
     "owner": "denorg",
