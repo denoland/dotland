@@ -186,6 +186,18 @@
     "repo": "noble-bls12-381",
     "desc": "bls12-381, a pairing-friendly elliptic curve construction."
   },
+  "boolbase": {
+    "type": "github",
+    "owner": "DenoBRComunitty",
+    "repo": "boolbase",
+    "desc": "BoolBase, only two functions: one that returns true, one that returns false."
+  },
+  "brotli": {
+    "type": "github",
+    "owner": "denosaurs",
+    "repo": "deno_brotli",
+    "desc": "A brotli compression and decompression module implemented in WASM"
+  },
   "bsv": {
     "type": "github",
     "owner": "bitcartel",
@@ -275,6 +287,12 @@
     "owner": "manyuanrong",
     "repo": "deno-checksum",
     "desc": "deno-checksum"
+  },
+  "cheerio": {
+    "type": "github",
+    "owner": "DenoBRComunitty",
+    "repo": "cheerio",
+    "desc": "Fast, flexible, and lean implementation of core jQuery designed specifically for the server."
   },
   "chunked": {
     "type": "github",
@@ -437,6 +455,12 @@
     "owner": "jchen1",
     "repo": "crontab-deno",
     "desc": "cron-based job runner for deno"
+  },
+  "crony": {
+    "type": "github",
+    "owner": "uchm4n",
+    "repo": "crony",
+    "desc": "Manage all your cron jobs in one file"
   },
   "cross_env": {
     "type": "github",
@@ -615,6 +639,12 @@
     "repo": "deno-check-updates",
     "desc": "Automatically checks deno dependencies versions from import maps file."
   },
+  "deno_correiobr": {
+    "type": "github",
+    "owner": "rafaelferres",
+    "repo": "deno-correiobr",
+    "desc": "Complete module to consult information about the zip code - calculate the price and delivery times of orders and also perform their tracking"
+  },
   "deno_cron": {
     "type": "github",
     "owner": "rbrahul",
@@ -759,6 +789,12 @@
     "repo": "deno-emacs",
     "desc": "A small cli tool to generate a tsconfig.json that allows editors to understand deno."
   },
+  "denocord": {
+    "type": "github",
+    "owner": "Denocord",
+    "repo": "Denocord",
+    "desc": "A fast, strongly typed and versatile Discord API wrapper for the Deno runtime."
+  },
   "denodate": {
     "type": "github",
     "owner": "t-heu",
@@ -776,6 +812,12 @@
     "owner": "rubiin",
     "repo": "deno-env",
     "desc": "Deno module for reading env files with added options"
+  },
+  "denof": {
+    "type": "github",
+    "owner": "r37r0m0d3l",
+    "repo": "denof",
+    "desc": "Syntactic sugar for asynchronous functions, promises, generators and synchronous functions."
   },
   "denoforge": {
     "type": "github",
@@ -970,6 +1012,30 @@
     "repo": "dodecasaurus",
     "desc": "Dice utility that makes generating random dice values simple and convenient."
   },
+  "dog": {
+    "type": "github",
+    "owner": "marc2332",
+    "repo": "deno_dog",
+    "desc": "Dog API wrapper"
+  },
+  "domelementtype": {
+    "type": "github",
+    "owner": "DenoBRComunitty",
+    "repo": "domelementtype",
+    "desc": "All the types of dom for Deno"
+  },
+  "domhandler": {
+    "type": "github",
+    "owner": "DenoBRComunitty",
+    "repo": "domhandler",
+    "desc": "Dom Handler: htmlparser2's dom as a separate module for deno"
+  },
+  "domserializer": {
+    "type": "github",
+    "owner": "DenoBRComunitty",
+    "repo": "dom-serializer",
+    "desc": "🦕 render dom nodes for node"
+  },
   "dotenv": {
     "type": "github",
     "owner": "pietvanzoen",
@@ -1036,6 +1102,12 @@
     "repo": "noble-ed25519",
     "desc": "ed25519, an elliptic curve that could be used for assymetric encryption and EDDSA signature scheme."
   },
+  "effector": {
+    "type": "github",
+    "owner": "zerobias",
+    "repo": "effector",
+    "desc": "The state manager ☄️"
+  },
   "ejs_deno": {
     "type": "github",
     "owner": "femiruby",
@@ -1065,6 +1137,12 @@
     "owner": "eankeen",
     "repo": "ensure",
     "desc": "Ensure you are running on a minimum version of Deno, Typescript, or V8"
+  },
+  "entities": {
+    "type": "github",
+    "owner": "DenoBRComunitty",
+    "repo": "entities",
+    "desc": "🦕 encode & decode XML/HTML entities with easy for deno"
   },
   "enum": {
     "type": "github",
@@ -1704,7 +1782,7 @@
   "mime_db": {
     "type": "github",
     "owner": "alirealasad",
-    "repo": "mime",
+    "repo": "mime_db",
     "desc": "This is a database of all mime types"
   },
   "minidate": {
@@ -1839,6 +1917,12 @@
     "repo": "nexo",
     "desc": "A Deno and Next Cocktail"
   },
+  "nonstd": {
+    "type": "github",
+    "owner": "deno-nonstd",
+    "repo": "nonstd",
+    "desc": "A library of useful features that currently do not exist in the standard lib."
+  },
   "normalize_diacritics": {
     "type": "github",
     "owner": "motss",
@@ -1851,6 +1935,12 @@
     "owner": "Joralmo",
     "repo": "deno-wrapper-novelcovid",
     "desc": "Wrapper of NovelCOVID/API for Deno"
+  },
+  "nth_check": {
+    "type": "github",
+    "owner": "DenoBRComunitty",
+    "repo": "nth-check",
+    "desc": "Performant nth-check parser & compiler for Deno"
   },
   "number_formatter": {
     "type": "github",
@@ -2225,6 +2315,12 @@
     "owner": "franckLdx",
     "repo": "retry",
     "desc": "Re-execute a function until the function does not throw an error."
+  },
+  "rhinoder": {
+    "type": "github",
+    "owner": "Caesar2011",
+    "repo": "rhinoder",
+    "desc": "Reloads a deno application on every file change"
   },
   "rimu": {
     "type": "github",
@@ -2705,6 +2801,12 @@
     "repo": "up",
     "desc": "Check if a website is currently up"
   },
+  "upload_middleware_for_oak_framework": {
+    "type": "github",
+    "owner": "hviana",
+    "repo": "Upload-middleware-for-Oak-Deno-framework",
+    "desc": "Upload middleware for Oak framework"
+  },
   "url_join": {
     "type": "github",
     "owner": "roonie007",
@@ -2764,6 +2866,12 @@
     "owner": "rubiin",
     "repo": "validator",
     "desc": "A Port of validatorjs to deno"
+  },
+  "valideno": {
+    "type": "github",
+    "owner": "Caesar2011",
+    "repo": "valideno",
+    "desc": "Validate your values and schemes with this extendable validator"
   },
   "value_schema": {
     "type": "npm",
