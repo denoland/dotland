@@ -288,12 +288,6 @@
     "repo": "deno-checksum",
     "desc": "deno-checksum"
   },
-  "cheerio": {
-    "type": "github",
-    "owner": "DenoBRComunitty",
-    "repo": "cheerio",
-    "desc": "Fast, flexible, and lean implementation of core jQuery designed specifically for the server."
-  },
   "chunked": {
     "type": "github",
     "owner": "aynik",
@@ -1940,6 +1934,12 @@
     "owner": "nexojs",
     "repo": "nexo",
     "desc": "A Deno and Next Cocktail"
+  },
+  "next": {
+    "type": "github",
+    "owner": "mtwzim",
+    "repo": "next",
+    "desc": "Next is a reactive framework for Deno, inspired by ReactJS and Angular"
   },
   "nonstd": {
     "type": "github",
