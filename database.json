@@ -2935,6 +2935,12 @@
     "repo": "deno-wasi",
     "desc": "WebAssembly System Interface bindings"
   },
+  "wasm_gzip": {
+    "type": "github",
+    "owner": "manyuanrong",
+    "repo": "wasm_gzip",
+    "desc": "Gzip encryption and decryption WebAssembly implementation for Deno"
+  },
   "watch": {
     "type": "github",
     "owner": "jinjor",
