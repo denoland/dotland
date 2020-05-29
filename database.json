@@ -2171,6 +2171,12 @@
     "repo": "deno-pretty-bytes",
     "desc": "The Deno implementation of sindresorhus/pretty-bytes. Convert bytes to a human readable string: 1337 → 1.34 kB"
   },
+  "pretty_benching": {
+    "type": "github",
+    "owner": "littletof",
+    "repo": "prettyBenching",
+    "desc": "A simple Deno library, that gives you pretty benchmarking progress and results in the commandline"
+  },
   "prettystring": {
     "type": "github",
     "owner": "OnikurYH",
