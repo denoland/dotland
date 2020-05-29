@@ -699,17 +699,17 @@
     "repo": "deno_http_router",
     "desc": "deno http router"
   },
-  "deno_init": {
-    "type": "github",
-    "owner": "maxuuell",
-    "repo": "deno_init",
-    "desc": "The executable to set up a deno project 🦕"
-  },
   "deno_imagemagick": {
     "type": "github",
     "owner": "leonelv",
     "repo": "deno-imagemagick",
     "desc": "Deno port of the WASM library for ImageMagick 🦕"
+  },
+  "deno_init": {
+    "type": "github",
+    "owner": "maxuuell",
+    "repo": "deno_init",
+    "desc": "The executable to set up a deno project 🦕"
   },
   "deno_lodash": {
     "type": "github",
