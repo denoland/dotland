@@ -2003,6 +2003,12 @@
     "repo": "deno-open",
     "desc": "A package for opening URLs, files and executables."
   },
+  "opener": {
+    "type": "github",
+    "owner": "denjucks",
+    "repo": "opener",
+    "desc": "A simple cross-platform browser opener for Deno."
+  },
   "opine": {
     "type": "github",
     "owner": "asos-craigmorten",
