@@ -1240,6 +1240,12 @@
     "repo": "expect",
     "desc": "A deno implementation of expect in order to write tests in a more jest like style."
   },
+  "fae": {
+    "type": "github",
+    "owner": "Jozty",
+    "repo": "fae",
+    "desc": "A functional programming module inspired from Ramda."
+  },
   "fanfou_sdk": {
     "type": "github",
     "owner": "LitoMore",
