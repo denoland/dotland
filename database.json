@@ -23,6 +23,12 @@
     "repo": "actdb",
     "desc": "A simple nosql reactive db or database."
   },
+  "adka": {
+    "type": "github",
+    "owner": "apiel",
+    "repo": "adka",
+    "desc": "Transpiler to generate static html websites using JSX without React."
+  },
   "airtable": {
     "type": "github",
     "owner": "grikomsn",
