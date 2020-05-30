@@ -1288,6 +1288,12 @@
     "repo": "fastro-server",
     "desc": "deno fast web framework"
   },
+  "favQuote_cli": {
+    "desc": "Get favourite or random quote cli",
+    "owner": "yeukfei02",
+    "repo": "favQuote-cli",
+    "type": "github"
+  },
   "fen": {
     "type": "github",
     "owner": "fen-land",
