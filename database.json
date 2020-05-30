@@ -372,6 +372,12 @@
     "repo": "deno-compose",
     "desc": "pipe, pipeline, and compose functions with 64 overloads per function"
   },
+  "computed_types": {
+    "type": "github",
+    "owner": "neuledge",
+    "repo": "computed-types",
+    "desc": "🦩 Joi like validation for TypeScript"
+  },
   "conf": {
     "type": "github",
     "owner": "lemarier",
