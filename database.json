@@ -2420,9 +2420,9 @@
   },
   "rubico": {
     "type": "github",
-    "owner": "richytong",
+    "owner": "a-synchronous",
     "repo": "rubico",
-    "desc": "a functional promise library"
+    "desc": "🏞 [a]synchronous functional syntax"
   },
   "rug": {
     "type": "github",
