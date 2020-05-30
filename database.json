@@ -376,7 +376,6 @@
     "type": "github",
     "owner": "neuledge",
     "repo": "computed-types",
-    "path": "/src",
     "desc": "🦩 Joi like validation for TypeScript"
   },
   "conf": {
