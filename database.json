@@ -3073,6 +3073,12 @@
     "repo": "youtube-deno",
     "desc": "A Deno client for the YouTube Data API v3. Lets you incorporate core YouTube features and almost any interaction with YouTube in your application."
   },
+  "zap": {
+    "type": "github",
+    "owner": "deno-nonstd",
+    "repo": "zap",
+    "desc": "A wrapper for Deno command args to make it easier to run with complex options."
+  },
   "zstd": {
     "type": "github",
     "owner": "xpyxel",
