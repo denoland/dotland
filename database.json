@@ -1785,6 +1785,12 @@
     "repo": "deno_math",
     "desc": "The math module is used to provide a helper for high-precision calculations and scientific computing."
   },
+  "maybe": {
+    "type": "github",
+    "owner": "iMarv",
+    "repo": "Maybe",
+    "desc": "A module for handling null and undefined values, inspired by Rusts Option<T>"
+  },
   "md5": {
     "type": "github",
     "owner": "halvardssm",
