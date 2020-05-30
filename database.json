@@ -2514,6 +2514,12 @@
     "repo": "rxjs",
     "desc": "🦕 A reactive programming library for Deno ⚡ "
   },
+  "rua": {
+    "type": "github",
+    "owner": "often",
+    "repo": "rua",
+    "desc": "Random user-agent generator module for Deno."
+  },
   "saur": {
     "type": "github",
     "owner": "tubbo",
@@ -3144,11 +3150,5 @@
     "owner": "xpyxel",
     "repo": "deno-zstd",
     "desc": "Zstd compression library bindings for Deno"
-  },
-  "rua": {
-    "type": "github",
-    "owner": "often",
-    "repo": "rua",
-    "desc": "Random user-agent generator module for Deno."
   }
 }
