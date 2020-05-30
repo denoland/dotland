@@ -1713,6 +1713,12 @@
     "repo": "lolcat",
     "desc": "This is a Deno port of the node port of the famous lolcat gem."
   },
+  "lru": {
+    "type": "github",
+    "owner": "liltoto",
+    "repo": "lru",
+    "desc": "Simple and powerful LRU cache"
+  },
   "luhn": {
     "type": "github",
     "owner": "howlowck",
