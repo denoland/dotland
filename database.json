@@ -2760,6 +2760,12 @@
     "repo": "talk-lib",
     "desc": "A send & receive library for Nextcloud Talk"
   },
+  "tar": {
+    "type": "github",
+    "owner": "divy-work",
+    "repo": "deno-tar",
+    "desc": "TAR archive management with Deno"
+  },
   "task_runner": {
     "type": "github",
     "owner": "jinjor",
