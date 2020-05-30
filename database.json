@@ -2754,6 +2754,12 @@
     "repo": "take-five",
     "desc": "A minimal (no external dependency) REST framework"
   },
+  "tar": {
+    "type": "github",
+    "owner": "divy-work",
+    "repo": "deno-tar",
+    "desc": "TAR archive management with Deno"
+  },
   "talk_lib": {
     "type": "github",
     "owner": "jipfr",
