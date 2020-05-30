@@ -2340,6 +2340,12 @@
     "repo": "deno-purify",
     "desc": "A deno port of purify-ts."
   },
+  "proxyScrape": {
+    "type": "github",
+    "owner": "often",
+    "repo": "proxyScrape",
+    "desc": "Lightweight proxy scraper for Deno."
+  },
   "q": {
     "type": "github",
     "owner": "phil-r",
