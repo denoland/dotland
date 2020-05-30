@@ -1827,7 +1827,7 @@
     "repo": "Maybe",
     "desc": "A module for handling null and undefined values, inspired by Rusts Option<T>"
   },
-  "maze_generator":{
+  "maze_generator": {
     "type": "github",
     "owner": "TheWizardBear",
     "repo": "maze_generator",
