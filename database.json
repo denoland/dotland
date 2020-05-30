@@ -741,6 +741,12 @@
     "repo": "deno_minimist",
     "desc": "💾 Parses command line arguments. Port & rewrite of the node library minimist"
   },
+  "deno_notify": {
+    "type": "github",
+    "owner": "PandawanFr",
+    "repo": "deno_notify",
+    "desc": "Send desktop notifications on all platforms in Deno"
+  },
   "deno_pixabay": {
     "type": "github",
     "owner": "yeukfei02",
