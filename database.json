@@ -850,7 +850,7 @@
     "repo": "denoliver",
     "desc": "A simple, dependency free web server for Deno"
   },
-  "denoliver": {
+  "denologger": {
     "type": "github",
     "owner": "wuperguy",
     "repo": "denologger",
