@@ -943,7 +943,7 @@
   "dep": {
     "type": "github",
     "owner": "denodep",
-    "repo": "cli",
+    "repo": "dep",
     "desc": "Deno dependency management tool."
   },
   "deps": {
