@@ -934,6 +934,12 @@
     "repo": "denv",
     "desc": "A module similar to dotEnv, but for Deno"
   },
+  "dep": {
+    "type": "github",
+    "owner": "denodep",
+    "repo": "cli",
+    "desc": "Deno dependency management tool."
+  },
   "deps": {
     "type": "github",
     "owner": "denosaurs",
