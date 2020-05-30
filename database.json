@@ -1639,6 +1639,12 @@
     "repo": "json-server",
     "desc": "Zero code fake backend for development"
   },
+  "jsx_html": {
+    "type": "github",
+    "owner": "apiel",
+    "repo": "jsx-html",
+    "desc": "Render JSX template to HTML"
+  },
   "jszip": {
     "type": "github",
     "owner": "hayd",
