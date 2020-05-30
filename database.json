@@ -78,6 +78,12 @@
     "repo": "ts-arrays",
     "desc": "Provides support for common Array operations."
   },
+  "ascii_table": {
+    "type": "github",
+    "owner": "eeve",
+    "repo": "ascii_table",
+    "desc": "Quickly format table in ASCII."
+  },
   "ask": {
     "type": "github",
     "owner": "jozsefsallai",
