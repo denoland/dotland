@@ -705,6 +705,12 @@
     "repo": "deno_http_router",
     "desc": "deno http router"
   },
+  "deno_http_server": {
+    "type": "github",
+    "owner": "pandres95",
+    "repo": "deno-http-server",
+    "desc": "Minimal HTTP Server for Deno"
+  },
   "deno_imagemagick": {
     "type": "github",
     "owner": "leonelv",
