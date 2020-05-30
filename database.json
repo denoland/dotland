@@ -2310,6 +2310,12 @@
     "repo": "ts-prove",
     "desc": "Decode and validate unknown data"
   },
+  "proxyScrape": {
+    "type": "github",
+    "owner": "often",
+    "repo": "proxyScrape",
+    "desc": "Lightweight proxy scraper for Deno."
+  },
   "proxy_bind": {
     "type": "github",
     "owner": "imcotton",
@@ -2339,12 +2345,6 @@
     "owner": "aynik",
     "repo": "deno-purify",
     "desc": "A deno port of purify-ts."
-  },
-  "proxyScrape": {
-    "type": "github",
-    "owner": "often",
-    "repo": "proxyScrape",
-    "desc": "Lightweight proxy scraper for Deno."
   },
   "q": {
     "type": "github",
