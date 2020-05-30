@@ -1102,6 +1102,12 @@
     "repo": "dso",
     "desc": "dso is a simple ORM Library based on deno_mysql"
   },
+  "due": {
+    "type": "github",
+    "owner": "lemueldls",
+    "repo": "due",
+    "desc": "A framework built for Deno, using Vue.js"
+  },
   "dynamodb": {
     "type": "github",
     "owner": "chiefbiiko",
