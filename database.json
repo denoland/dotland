@@ -2400,6 +2400,12 @@
     "repo": "retry",
     "desc": "Re-execute a function until the function does not throw an error."
   },
+  "rhino": {
+    "type": "github",
+    "owner": "faustotnc",
+    "repo": "rhino",
+    "desc": "Rhino 🦏 - Deno Framework for scalable APIs."
+  },
   "rhinoder": {
     "type": "github",
     "owner": "Caesar2011",
