@@ -2790,6 +2790,12 @@
     "repo": "strcolors.ts",
     "desc": "FMT String Extensions for Deno"
   },
+  "superdeno": {
+    "type": "github",
+    "owner": "asos-craigmorten",
+    "repo": "superdeno",
+    "desc": "HTTP assertions for Deno made easy via superagent."
+  },
   "supports_color": {
     "type": "github",
     "owner": "frunkad",
