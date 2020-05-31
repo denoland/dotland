@@ -1555,6 +1555,12 @@
     "repo": "iam-policies",
     "desc": "Role and Attribute based Access Control minimal lib for Deno 🦖"
   },
+  "idea": {
+    "type": "github",
+    "owner": "notsyntax",
+    "repo": "idea",
+    "desc": "Quickly generate words/ideas in both Javascript and Typescript! 🦖"
+  },
   "ifttt": {
     "type": "github",
     "owner": "0xVesion",
