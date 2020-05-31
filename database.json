@@ -2328,6 +2328,12 @@
     "repo": "ts-prove",
     "desc": "Decode and validate unknown data"
   },
+  "proxyScrape": {
+    "type": "github",
+    "owner": "often",
+    "repo": "proxyScrape",
+    "desc": "Lightweight proxy scraper for Deno."
+  },
   "proxy_bind": {
     "type": "github",
     "owner": "imcotton",
