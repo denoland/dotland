@@ -705,6 +705,12 @@
     "repo": "deno-hidefile",
     "desc": "Create hidden file or folder in Deno 🦕"
   },
+   "deno_hoarders": {
+    "type": "github",
+    "owner": "searchableguy",
+    "repo": "deno-hoarders",
+    "desc": "A simple utility to import every external deno module from deno/x/ 🚒."
+  },
   "deno_http_router": {
     "type": "github",
     "owner": "yuenc",
@@ -867,12 +873,6 @@
     "owner": "syumai",
     "repo": "denoget",
     "desc": "denoget installs executable deno script."
-  },
-  "deno-hoarders": {
-    "type": "github",
-    "owner": "searchableguy",
-    "repo": "deno-hoarders",
-    "desc": "A simple utility to import every external deno module from deno/x/ 🚒."
   },
   "denoliver": {
     "type": "github",
