@@ -21,7 +21,7 @@
     "type": "github",
     "owner": "searchableguy",
     "repo": "actdb",
-    "desc": "A simple nosql reactive db or database."
+    "desc": "A simple nosql reactive db or database 🐈."
   },
   "airtable": {
     "type": "github",
@@ -867,6 +867,12 @@
     "owner": "syumai",
     "repo": "denoget",
     "desc": "denoget installs executable deno script."
+  },
+  "deno-hoarders": {
+    "type": "github",
+    "owner": "searchableguy",
+    "repo": "deno-hoarders",
+    "desc": "A simple utility to import every external deno module from deno/x/ 🚒."
   },
   "denoliver": {
     "type": "github",
