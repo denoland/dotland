@@ -1168,6 +1168,12 @@
     "repo": "ejs-deno",
     "desc": "EJS in Deno"
   },
+  "emoji": {
+    "type": "github",
+    "owner": "s1mpson",
+    "repo": "emoji",
+    "desc": "🦕 Simple emoji support for Deno (validate, detect, trim, extract)"
+  },
   "encodeurl": {
     "type": "github",
     "owner": "ako-deno",
