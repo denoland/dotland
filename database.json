@@ -3217,6 +3217,12 @@
     "repo": "web-name",
     "desc": "simple module to generate random usernames"
   },
+  "webcomponent": {
+    "type": "github",
+    "owner": "DenoBRComunitty",
+    "repo": "webcomponent",
+    "desc": "Lightweight utilities for constructing web components"
+  },
   "websocket": {
     "type": "github",
     "owner": "ryo-ma",
