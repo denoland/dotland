@@ -693,6 +693,12 @@
     "repo": "deno-dinvishesh",
     "desc": "A simple deno module which returns marathi dinvishesh"
   },
+  "deno_dotenv": {
+    "type": "github",
+    "owner": "PodaruDragos",
+    "repo": "deno_dotenv",
+    "desc": "dotenv for Deno, with exapnd capabilities"
+  },
   "deno_flatten": {
     "type": "github",
     "owner": "yanislavgalyov",
