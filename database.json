@@ -3079,7 +3079,6 @@
     "repo": "deno-watch",
     "desc": "A pure deno file watcher."
   },
-  },
     "web-name": {
     "type": "github",
     "owner": "letskhabar",
