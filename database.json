@@ -2309,6 +2309,12 @@
     "repo": "poly1305",
     "desc": "Poly1305 as defined by RFC 8439."
   },
+  "port": {
+    "type": "github",
+    "owner": "adoi",
+    "repo": "deno-port",
+    "desc": "Deno module to get an available TCP port for your server"
+  },
   "pool": {
     "type": "github",
     "owner": "axetroy",
