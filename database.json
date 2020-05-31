@@ -21,7 +21,7 @@
     "type": "github",
     "owner": "searchableguy",
     "repo": "actdb",
-    "desc": "A simple nosql reactive db or database."
+    "desc": "A simple nosql reactive db or database 🐈."
   },
   "adka": {
     "type": "github",
@@ -740,6 +740,12 @@
     "owner": "rafaelferres",
     "repo": "deno-hidefile",
     "desc": "Create hidden file or folder in Deno 🦕"
+  },
+  "deno_hoarders": {
+    "type": "github",
+    "owner": "searchableguy",
+    "repo": "deno-hoarders",
+    "desc": "A simple utility to import every external deno module from deno/x/ 🚒."
   },
   "deno_http_router": {
     "type": "github",
