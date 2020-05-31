@@ -1156,6 +1156,12 @@
     "repo": "dso",
     "desc": "dso is a simple ORM Library based on deno_mysql"
   },
+  "duckduckgo": {
+    "type": "github",
+    "owner": "0vw",
+    "repo": "duckduckgo",
+    "desc": "A Deno wrapper for the DuckDuckGo API"
+  },
   "due": {
     "type": "github",
     "owner": "lemueldls",
