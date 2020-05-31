@@ -312,6 +312,12 @@
     "repo": "chacha20-poly1305",
     "desc": "ChaCha20-Poly1305 as defined by RFC 8439"
   },
+  "checkhost": {
+    "type": "github",
+    "owner": "0vw",
+    "repo": "checkhost",
+    "desc": "A Deno wrapper for the check-host API"
+  },
   "checksum": {
     "type": "github",
     "owner": "manyuanrong",
