@@ -186,6 +186,12 @@
     "repo": "bigfloat-deno",
     "desc": "A library for arbitrary precision decimal floating point arithmetic that can exactly represent all decimal fractions, unlike JavaScript's number data type which is 64-bit binary floating point."
   },
+  "binary": {
+    "type": "github",
+    "owner": "bqio",
+    "repo": "binary",
+    "desc": "Binary library for Deno."
+  },
   "blake2b": {
     "type": "github",
     "owner": "chiefbiiko",
