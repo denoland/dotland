@@ -2802,6 +2802,12 @@
     "repo": "deno-task-runner-v2",
     "desc": "deno-task-runner-v2"
   },
+  "tbl": {
+    "type": "github",
+    "owner": "jozsefsallai",
+    "repo": "tbl",
+    "desc": "Tiny and versatile command-line table generator."
+  },
   "tckimlik": {
     "type": "github",
     "owner": "serkanalgur",
