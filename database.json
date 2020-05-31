@@ -2524,7 +2524,7 @@
     "type": "github",
     "owner": "denorg",
     "repo": "scrypt",
-    "desc": "Deno library for hashing passwords using scrypt "
+    "desc": "Deno library for hashing passwords using scrypt"
   },
   "secp256k1": {
     "type": "github",
