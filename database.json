@@ -138,6 +138,12 @@
     "repo": "awaitable_mutex",
     "desc": "Blocking execution of a section of code to one at a time"
   },
+  "axiod": {
+    "type": "github",
+    "owner": "roonie007",
+    "repo": "axiod",
+    "desc": "Promise based HTTP client for Deno inpired by axios"
+  },
   "azure_functions": {
     "type": "github",
     "owner": "anthonychu",
