@@ -1398,6 +1398,12 @@
     "repo": "deno_free_port",
     "desc": "get free port for Deno"
   },
+  "fs_cli": {
+    "type": "github",
+    "owner": "franckLdx",
+    "repo": "fs_cli",
+    "desc": "A deno command line tool to handle directories and files. It aims to be use in automated scripts."
+  },
   "funky": {
     "type": "github",
     "owner": "ful-stackz",
