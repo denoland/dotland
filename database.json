@@ -1506,6 +1506,12 @@
     "repo": "hk-stock-api",
     "desc": "get hk stock information in deno"
   },
+  "hk_stock_cli": {
+    "type": "github",
+    "owner": "yeukfei02",
+    "repo": "hk-stock-cli",
+    "desc": "get hk stock information cli"
+  },
   "hmac": {
     "type": "github",
     "owner": "chiefbiiko",
