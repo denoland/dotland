@@ -2313,7 +2313,7 @@
     "type": "github",
     "owner": "adoi",
     "repo": "deno-port",
-    "desc": "Deno module to get an available TCP port for your server"
+    "desc": "Deno module to get an available TCP deno port for your server"
   },
   "pool": {
     "type": "github",
