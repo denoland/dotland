@@ -27,7 +27,7 @@
     "type": "github",
     "owner": "apiel",
     "repo": "adka",
-    "desc": "Transpiler to generate static html websites using JSX without React."
+    "desc": "Static site generator using JSX without React."
   },
   "airtable": {
     "type": "github",
