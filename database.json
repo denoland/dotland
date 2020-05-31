@@ -1464,6 +1464,12 @@
     "repo": "heap",
     "desc": "Heap data structure"
   },
+  "hk_stock_api": {
+    "type": "github",
+    "owner": "yeukfei02",
+    "repo": "hk-stock-api",
+    "desc": "get hk stock information in deno"
+  },
   "hmac": {
     "type": "github",
     "owner": "chiefbiiko",
