@@ -3145,6 +3145,12 @@
     "repo": "deno-watch",
     "desc": "A pure deno file watcher."
   },
+  "web_name": {
+    "type": "github",
+    "owner": "letskhabar",
+    "repo": "web-name",
+    "desc": "simple module to generate random usernames"
+  },
   "websocket": {
     "type": "github",
     "owner": "ryo-ma",
