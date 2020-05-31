@@ -2969,12 +2969,6 @@
     "repo": "deno-using",
     "desc": "A python-style with statement for deno."
   },
-  "uuid": {
-    "type": "github",
-    "owner": "lucascaro",
-    "repo": "deno-uuid",
-    "desc": "Warning: the library code of this module has been moved to https://deno.land/std/testing/mod.ts."
-  },
   "uwuifier": {
     "type": "github",
     "owner": "schotsl",
