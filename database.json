@@ -23,6 +23,12 @@
     "repo": "actdb",
     "desc": "A simple nosql reactive db or database."
   },
+  "adka": {
+    "type": "github",
+    "owner": "apiel",
+    "repo": "adka",
+    "desc": "Transpiler to generate static html websites using JSX without React."
+  },
   "airtable": {
     "type": "github",
     "owner": "grikomsn",
@@ -131,6 +137,12 @@
     "owner": "Matthew-Smith",
     "repo": "awaitable_mutex",
     "desc": "Blocking execution of a section of code to one at a time"
+  },
+  "axiod": {
+    "type": "github",
+    "owner": "roonie007",
+    "repo": "axiod",
+    "desc": "Promise based HTTP client for Deno inpired by axios"
   },
   "azure_functions": {
     "type": "github",
@@ -1168,6 +1180,12 @@
     "repo": "ejs-deno",
     "desc": "EJS in Deno"
   },
+  "emoji": {
+    "type": "github",
+    "owner": "s1mpson",
+    "repo": "emoji",
+    "desc": "🦕 Simple emoji support for Deno (validate, detect, trim, extract)"
+  },
   "encodeurl": {
     "type": "github",
     "owner": "ako-deno",
@@ -1827,6 +1845,12 @@
     "repo": "Maybe",
     "desc": "A module for handling null and undefined values, inspired by Rusts Option<T>"
   },
+  "maze_generator": {
+    "type": "github",
+    "owner": "TheWizardBear",
+    "repo": "maze_generator",
+    "desc": "A library for generating mazes."
+  },
   "md5": {
     "type": "github",
     "owner": "halvardssm",
@@ -2310,6 +2334,12 @@
     "repo": "ts-prove",
     "desc": "Decode and validate unknown data"
   },
+  "proxyScrape": {
+    "type": "github",
+    "owner": "often",
+    "repo": "proxyScrape",
+    "desc": "Lightweight proxy scraper for Deno."
+  },
   "proxy_bind": {
     "type": "github",
     "owner": "imcotton",
@@ -2653,6 +2683,12 @@
     "repo": "snelm",
     "desc": "Improved security middleware for the Oak, ABC, Alosaur, and Pogo web frameworks. Derived from the helmet middleware for Node"
   },
+  "snowlight": {
+    "type": "github",
+    "owner": "trylix",
+    "repo": "snowlight",
+    "desc": "A middleware web framework like Express for Deno 🦕"
+  },
   "sockets": {
     "type": "github",
     "owner": "drashland",
@@ -2796,6 +2832,12 @@
     "repo": "deno-task-runner-v2",
     "desc": "deno-task-runner-v2"
   },
+  "tbl": {
+    "type": "github",
+    "owner": "jozsefsallai",
+    "repo": "tbl",
+    "desc": "Tiny and versatile command-line table generator."
+  },
   "tckimlik": {
     "type": "github",
     "owner": "serkanalgur",
@@ -2879,6 +2921,12 @@
     "owner": "dr-useless",
     "repo": "tweetnacl-deno",
     "desc": "Port of TweetNaCl cryptographic library to TypeScript for Deno"
+  },
+  "twitter": {
+    "type": "github",
+    "owner": "iosamuel",
+    "repo": "twitter",
+    "desc": "Twitter's library in Deno"
   },
   "type_check": {
     "type": "github",
