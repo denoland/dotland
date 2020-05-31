@@ -258,6 +258,12 @@
     "repo": "bzfquery.js",
     "desc": "JavaScript/TypeScript version of bzfquery for Deno"
   },
+  "caller": {
+    "type": "github",
+    "owner": "apiel",
+    "repo": "caller",
+    "desc": "Return the filepath of the parent function."
+  },
   "carol": {
     "type": "github",
     "owner": "uki00a",
