@@ -2062,6 +2062,12 @@
     "path": "/normalize_diacritics",
     "desc": "Simple deno module to remove any accents/ diacritics found in a string."
   },
+  "notify": {
+    "type": "github",
+    "owner": "divy-work",
+    "repo": "deno-notify",
+    "desc": "Simple cross-platform desktop notifications for Deno"
+  },
   "novelcovid_wrapper": {
     "type": "github",
     "owner": "Joralmo",
