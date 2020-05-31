@@ -3047,6 +3047,12 @@
     "repo": "Upload-middleware-for-Oak-Deno-framework",
     "desc": "Upload middleware for Oak framework"
   },
+  "urban": {
+    "type": "github",
+    "owner": "0vw",
+    "repo": "urban",
+    "desc": "A Deno wrapper for the UrbanDictionary API"
+  },
   "url_join": {
     "type": "github",
     "owner": "roonie007",
