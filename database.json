@@ -705,7 +705,7 @@
     "repo": "deno-hidefile",
     "desc": "Create hidden file or folder in Deno 🦕"
   },
-   "deno_hoarders": {
+  "deno_hoarders": {
     "type": "github",
     "owner": "searchableguy",
     "repo": "deno-hoarders",
