@@ -2695,6 +2695,12 @@
     "repo": "snowlight",
     "desc": "A middleware web framework like Express for Deno 🦕"
   },
+  "sockets": {
+    "type": "github",
+    "owner": "drashland",
+    "repo": "sockets",
+    "desc": "A WebSocket library for Deno."
+  },
   "soxa": {
     "type": "github",
     "owner": "fakoua",
