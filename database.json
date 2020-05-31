@@ -2665,6 +2665,12 @@
     "repo": "snelm",
     "desc": "Improved security middleware for the Oak, ABC, Alosaur, and Pogo web frameworks. Derived from the helmet middleware for Node"
   },
+  "snowlight": {
+    "type": "github",
+    "owner": "trylix",
+    "repo": "snowlight",
+    "desc": "A middleware web framework like Express for Deno 🦕"
+  },
   "soxa": {
     "type": "github",
     "owner": "fakoua",
