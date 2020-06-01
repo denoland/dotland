@@ -438,6 +438,12 @@
     "repo": "deno-context",
     "desc": "🦕 Propagate deadlines, a cancellation and other request-scoped values to multiple promise. The behaviour is like Go's context"
   },
+  "convertTime": {
+    "type": "github",
+    "owner": "guptamohit004",
+    "repo": "convert_time",
+    "desc": "Convert Time from one Timezone to Another based on User's Location using DENO. Useful when a particular time is to be shown for a user from Different Country."
+  },
   "cordeno": {
     "type": "github",
     "owner": "cordeno",
@@ -830,6 +836,12 @@
     "owner": "etopiei",
     "repo": "deno_search",
     "desc": "A CLI tool to search for third party packages on deno.land"
+  },
+  "deno_string_validator": {
+    "type": "github",
+    "owner": "okwudav",
+    "repo": "deno-string-validator",
+    "desc": "String validation for Deno, inspired by Validator.js => https://github.com/validatorjs/validator.js"
   },
   "deno_structured_logging": {
     "type": "github",
@@ -1404,6 +1416,12 @@
     "repo": "deno-fireflix",
     "desc": "Summary of common functions."
   },
+  "flowed": {
+    "type": "github",
+    "owner": "danielduarte",
+    "repo": "flowed",
+    "desc": "A fast and reliable flow manager and task runner for Node.js and web browsers"
+  },
   "fossil": {
     "type": "github",
     "owner": "matteocrippa",
@@ -1693,6 +1711,12 @@
     "repo": "ip_details",
     "desc": " Get All information of an IP address."
   },
+  "ipapi": {
+    "type": "github",
+    "owner": "often",
+    "repo": "ipapi",
+    "desc": "Simple ip-api.com API wrapper for Deno."
+  },
   "iro": {
     "type": "github",
     "owner": "jozsefsallai",
@@ -1868,6 +1892,12 @@
     "owner": "fuxingZhang",
     "repo": "deno-logger",
     "desc": "A simple logger for deno."
+  },
+  "logol": {
+    "type": "github",
+    "owner": "apiel",
+    "repo": "logol",
+    "desc": "Console.log wrapper to had some color in the terminal."
   },
   "lolcat": {
     "type": "github",
@@ -2892,6 +2922,12 @@
     "repo": "superdeno",
     "desc": "HTTP assertions for Deno made easy via superagent."
   },
+  "superoak": {
+    "type": "github",
+    "owner": "asos-craigmorten",
+    "repo": "superoak",
+    "desc": "HTTP assertions for Oak made easy via superdeno."
+  },
   "supports_color": {
     "type": "github",
     "owner": "frunkad",
@@ -2969,6 +3005,12 @@
     "owner": "teddytags",
     "repo": "teddytags",
     "desc": "The superfast way to custom elements."
+  },
+  "teejay": {
+    "type": "github",
+    "owner": "0vw",
+    "repo": "teejay",
+    "desc": "Returns a random phrase from the popular author and philosopher known as Teejayx6"
   },
   "telegram": {
     "type": "github",
