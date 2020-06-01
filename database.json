@@ -300,6 +300,12 @@
     "repo": "deno-caught",
     "desc": "This module lets you attach empty rejection handlers to promises to avoid errors when we want to handle rejections asynchronously."
   },
+  "census": {
+    "type": "github",
+    "owner": "being-curious",
+    "repo": "census",
+    "desc": "Count modules in https://deno.land/x."
+  },
   "chacha20": {
     "type": "github",
     "owner": "chiefbiiko",
