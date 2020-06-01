@@ -1729,6 +1729,12 @@
     "repo": "is_url",
     "desc": "Check if a URL is absolute"
   },
+  "javascript-obfuscator": {
+    "type": "github",
+    "owner": "javascript-obfuscator",
+    "repo": "javascript-obfuscator",
+    "desc": "JavaScript Obfuscator is a powerful free obfuscator for JavaScript, containing a variety of features which provide protection for your source code"
+  },
   "jbq": {
     "type": "github",
     "owner": "krnik",
