@@ -1693,6 +1693,12 @@
     "repo": "ip_details",
     "desc": " Get All information of an IP address."
   },
+  "ipapi": {
+    "type": "github",
+    "owner": "often",
+    "repo": "ipapi",
+    "desc": "Simple ip-api.com API wrapper for Deno."
+  },
   "iro": {
     "type": "github",
     "owner": "jozsefsallai",
