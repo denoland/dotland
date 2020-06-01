@@ -831,6 +831,12 @@
     "repo": "deno_search",
     "desc": "A CLI tool to search for third party packages on deno.land"
   },
+  "deno_string_validator": {
+    "type": "github",
+    "owner": "okwudav",
+    "repo": "deno-string-validator",
+    "desc": "String validation for Deno, inspired by Validator.js => https://github.com/validatorjs/validator.js"
+  },
   "deno_structured_logging": {
     "type": "github",
     "owner": "Yamboy1",
