@@ -171,19 +171,19 @@ const Registry = () => {
       <Head>
         <title>
           {name}
-          {version && `@${version}`}
+          {version ? `@${version}` : ""}
           {" | Deno"}
         </title>
         {metaDescription({
           title: `deno.land${!isStd ? "/x" : ""}/${name}${
-            version && `@${version}`
+            version ? `@${version}` : ""
           }`,
           description:
             name === "std"
               ? "The Deno standard library."
               : "A third party module for Deno.",
           url: `https://deno.land${!isStd ? "/x" : ""}/${name}${
-            version && `@${version}`
+            version ? `@${version}` : ""
           }`,
           image: "https://deno.land/v1_wide.jpg",
         })}
