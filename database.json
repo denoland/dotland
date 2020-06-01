@@ -2904,6 +2904,12 @@
     "repo": "superdeno",
     "desc": "HTTP assertions for Deno made easy via superagent."
   },
+  "superoak": {
+    "type": "github",
+    "owner": "asos-craigmorten",
+    "repo": "superoak",
+    "desc": "HTTP assertions for Oak made easy via superdeno."
+  },
   "supports_color": {
     "type": "github",
     "owner": "frunkad",
