@@ -964,6 +964,12 @@
     "repo": "deno-trie",
     "desc": "Deno implementation of Trie for faster string searches."
   },
+  "denotrodon": {
+    "type": "github",
+    "owner": "jabernardo",
+    "repo": "denotrodon",
+    "desc": "Bare Minimum Command-Line (CLI) Application Skeleton"
+  },
   "denova": {
     "type": "github",
     "owner": "viandwi24",
