@@ -300,6 +300,12 @@
     "repo": "deno-caught",
     "desc": "This module lets you attach empty rejection handlers to promises to avoid errors when we want to handle rejections asynchronously."
   },
+  "census": {
+    "type": "github",
+    "owner": "being-curious",
+    "repo": "census",
+    "desc": "Count modules in https://deno.land/x."
+  },
   "chacha20": {
     "type": "github",
     "owner": "chiefbiiko",
@@ -963,6 +969,12 @@
     "owner": "silver-xu",
     "repo": "deno-trie",
     "desc": "Deno implementation of Trie for faster string searches."
+  },
+  "denotrodon": {
+    "type": "github",
+    "owner": "jabernardo",
+    "repo": "denotrodon",
+    "desc": "Bare Minimum Command-Line (CLI) Application Skeleton"
   },
   "denova": {
     "type": "github",
@@ -1681,6 +1693,12 @@
     "repo": "ipapi",
     "desc": "Simple ip-api.com API wrapper for Deno."
   },
+  "ip_details": {
+    "type": "github",
+    "owner": "guptamohit004",
+    "repo": "ip_details",
+    "desc": " Get All information of an IP address."
+  },
   "iro": {
     "type": "github",
     "owner": "jozsefsallai",
@@ -1802,6 +1820,12 @@
     "repo": "lazy",
     "path": "/lib",
     "desc": "This module is meant to provide memory-efficient lazy-evaluation iteration for iterable objects. The aim of this project is to support deno, node and browser, and support all native JavaScript systems for iteration (for-of, for-await-of, etc)."
+  },
+  "leet": {
+    "type": "github",
+    "owner": "often",
+    "repo": "leet",
+    "desc": "Text to leetspeak module for Deno."
   },
   "levenshtein": {
     "type": "github",
@@ -2320,6 +2344,12 @@
     "owner": "axetroy",
     "repo": "deno_pool",
     "desc": "A generic resource pool management library"
+  },
+  "port": {
+    "type": "github",
+    "owner": "adoi",
+    "repo": "deno-port",
+    "desc": "Deno module to get an available TCP deno port for your server"
   },
   "portl": {
     "type": "github",
@@ -3294,6 +3324,12 @@
     "owner": "KSXGitHub",
     "repo": "yaml-wasm",
     "desc": "WebAssembly module to parse YAML"
+  },
+  "yo_mamma": {
+    "type": "github",
+    "owner": "0vw",
+    "repo": "yo_mamma",
+    "desc": "https://github.com/Fadyazmy/yo-mamma ported to Deno"
   },
   "youtube_deno": {
     "type": "github",
