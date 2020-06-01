@@ -468,6 +468,12 @@
     "repo": "country-list",
     "desc": "🦕 module to get a list of world countries and their information."
   },
+  "convertTime": {
+    "type": "github",
+    "owner": "guptamohit004",
+    "repo": "convert_time",
+    "desc": "Convert Time from one Timezone to Another based on User's Location.Useful when a particular time is to be shown for a user from Different Country."
+  },
   "coward": {
     "type": "github",
     "owner": "fox-cat",
