@@ -1404,6 +1404,12 @@
     "repo": "deno-fireflix",
     "desc": "Summary of common functions."
   },
+  "flowed": {
+    "type": "github",
+    "owner": "danielduarte",
+    "repo": "flowed",
+    "desc": "A fast and reliable flow manager and task runner for Node.js and web browsers"
+  },
   "fossil": {
     "type": "github",
     "owner": "matteocrippa",
