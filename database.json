@@ -1693,6 +1693,12 @@
     "repo": "isIP",
     "desc": "IP address detector for Deno."
   },
+  "ip_details": {
+    "type": "github",
+    "owner": "guptamohit004",
+    "repo": "ip_details",
+    "desc": " Get All information of an IP address."
+  },
   "is_docker": {
     "type": "github",
     "owner": "denorg",
