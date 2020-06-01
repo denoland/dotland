@@ -1893,6 +1893,12 @@
     "repo": "deno-logger",
     "desc": "A simple logger for deno."
   },
+  "logol": {
+    "type": "github",
+    "owner": "apiel",
+    "repo": "logol",
+    "desc": "Console.log wrapper to had some color in the terminal."
+  },
   "lolcat": {
     "type": "github",
     "owner": "qwerttty",
