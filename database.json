@@ -438,6 +438,12 @@
     "repo": "deno-context",
     "desc": "🦕 Propagate deadlines, a cancellation and other request-scoped values to multiple promise. The behaviour is like Go's context"
   },
+  "convertTime": {
+    "type": "github",
+    "owner": "guptamohit004",
+    "repo": "convert_time",
+    "desc": "Convert Time from one Timezone to Another based on User's Location using DENO. Useful when a particular time is to be shown for a user from Different Country."
+  },
   "cordeno": {
     "type": "github",
     "owner": "cordeno",
