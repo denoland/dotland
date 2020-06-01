@@ -2315,6 +2315,12 @@
     "repo": "deno_pool",
     "desc": "A generic resource pool management library"
   },
+  "port": {
+    "type": "github",
+    "owner": "adoi",
+    "repo": "deno-port",
+    "desc": "Deno module to get an available TCP deno port for your server"
+  },
   "portl": {
     "type": "github",
     "owner": "FalkZ",
