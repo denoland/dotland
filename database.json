@@ -2964,6 +2964,12 @@
     "repo": "tcr",
     "desc": "tcr will complie and run with deno when typescript file change, you can direct run tstypescript file"
   },
+  "teejay": {
+    "type": "github",
+    "owner": "0vw",
+    "repo": "teejay",
+    "desc": "Returns a random phrase from the popular author and philosopher known as Teejayx6"
+  },
   "teddytags": {
     "type": "github",
     "owner": "teddytags",
