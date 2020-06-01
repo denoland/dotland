@@ -3295,6 +3295,12 @@
     "repo": "yaml-wasm",
     "desc": "WebAssembly module to parse YAML"
   },
+  "yo_mamma": {
+    "type": "github",
+    "owner": "0vw",
+    "repo": "yo_mamma",
+    "desc": "https://github.com/Fadyazmy/yo-mamma ported to Deno"
+  },
   "youtube_deno": {
     "type": "github",
     "owner": "akshgpt7",
