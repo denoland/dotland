@@ -1687,17 +1687,17 @@
     "repo": "deno-ip",
     "desc": "Detect your IP address and/or fetch geolocation data for an IP address, domain or email via ipify.org"
   },
-  "ipapi": {
-    "type": "github",
-    "owner": "often",
-    "repo": "ipapi",
-    "desc": "Simple ip-api.com API wrapper for Deno."
-  },
   "ip_details": {
     "type": "github",
     "owner": "guptamohit004",
     "repo": "ip_details",
     "desc": " Get All information of an IP address."
+  },
+  "ipapi": {
+    "type": "github",
+    "owner": "often",
+    "repo": "ipapi",
+    "desc": "Simple ip-api.com API wrapper for Deno."
   },
   "iro": {
     "type": "github",
