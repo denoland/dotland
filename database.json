@@ -53,6 +53,12 @@
     "repo": "api",
     "desc": "Promise based HTTP client for the Deno. ༼ つ ◕_◕ ༽つ"
   },
+  "appwrite": {
+    "type": "github",
+    "owner": "appwrite",
+    "repo": "sdk-for-deno",
+    "desc": "Official Deno SDK for the Appwrite open-source backend server 🚀"
+  },
   "aqua": {
     "type": "github",
     "owner": "l2ig",
