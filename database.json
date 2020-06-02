@@ -3006,12 +3006,6 @@
     "repo": "teddytags",
     "desc": "The superfast way to custom elements."
   },
-  "teejay": {
-    "type": "github",
-    "owner": "0vw",
-    "repo": "teejay",
-    "desc": "Returns a random phrase from the popular author and philosopher known as Teejayx6"
-  },
   "termcolorizer": {
     "type": "github",
     "owner": "jahzielv",
