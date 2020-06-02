@@ -1893,6 +1893,12 @@
     "repo": "lifeson-ipsum",
     "desc": "Lorem Ipsum generator, based on Alex Lifeson's acceptance speech for Rush in 2013."
   },
+  "local_ip": {
+    "type": "github",
+    "owner": "joakimunge",
+    "repo": "deno-local-ip",
+    "desc": "Tiny module to get local network interface address."
+  },
   "lodash": {
     "type": "github",
     "owner": "lodash",
