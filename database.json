@@ -1789,6 +1789,12 @@
     "repo": "json-server",
     "desc": "Zero code fake backend for development"
   },
+  "json_tree": {
+    "type": "github",
+    "owner": "satty1987",
+    "repo": "json_tree",
+    "desc": "Json Tree converts a JS object into a nice, visible depth-indented tree for console printing"
+  },
   "jsx_html": {
     "type": "github",
     "owner": "apiel",
