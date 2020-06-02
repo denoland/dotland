@@ -1114,6 +1114,12 @@
     "repo": "djwt",
     "desc": "The absolute minimum to make JSON Web Tokens on deno. Based on JWT and JWS specifications."
   },
+  "dmm": {
+    "type": "github",
+    "owner": "ebebbington",
+    "repo": "dmm",
+    "desc": "A module manager for Deno"
+  },
   "docable": {
     "type": "github",
     "owner": "crookse",
