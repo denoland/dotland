@@ -2163,6 +2163,12 @@
     "repo": "next",
     "desc": "Next is a reactive framework for Deno, inspired by ReactJS and Angular"
   },
+  "njalla": {
+    "type": "github",
+    "owner": "finder",
+    "repo": "njalla",
+    "desc": "Njalla API wrapper for Deno."
+  },
   "nonstd": {
     "type": "github",
     "owner": "deno-nonstd",
