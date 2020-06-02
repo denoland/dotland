@@ -819,6 +819,12 @@
     "repo": "deno-pixabay",
     "desc": "search image and video from pixabay in deno"
   },
+  "deno_riot": {
+    "type": "github",
+    "owner": "rafaelferres",
+    "repo": "deno-riot",
+    "desc": "League of legends api wrapper"
+  },
   "deno_scripts": {
     "type": "github",
     "owner": "PabloSzx",
