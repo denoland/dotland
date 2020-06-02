@@ -1747,6 +1747,12 @@
     "repo": "isIP",
     "desc": "IP address detector for Deno."
   },
+  "isUp": {
+    "type": "github",
+    "owner": "rjoydip",
+    "repo": "isUp",
+    "desc": "Check whether a website is up or down using the isitup.org API"
+  },
   "is_docker": {
     "type": "github",
     "owner": "denorg",
