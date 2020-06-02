@@ -1518,6 +1518,12 @@
     "repo": "deno",
     "desc": "Simple Graphviz library for Deno🦕"
   },
+  "greet_user": {
+    "type": "github",
+    "owner": "guptamohit004",
+    "repo": "greet_user",
+    "desc": "Greet a user according to the TimeZone."
+  },
   "gusano": {
     "type": "github",
     "owner": "krthr",
@@ -2199,6 +2205,12 @@
     "owner": "nusendra",
     "repo": "deno-number-formatter",
     "desc": "A number formmatter for Deno"
+  },
+  "number-to-words": {
+    "type": "github",
+    "owner": "guptamohit004",
+    "repo": "number-to-words",
+    "desc": "Convert a Number to Words"
   },
   "oak": {
     "type": "github",
