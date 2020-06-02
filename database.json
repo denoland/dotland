@@ -53,6 +53,12 @@
     "repo": "api",
     "desc": "Promise based HTTP client for the Deno. ༼ つ ◕_◕ ༽つ"
   },
+  "appwrite": {
+    "type": "github",
+    "owner": "appwrite",
+    "repo": "sdk-for-deno",
+    "desc": "Official Deno SDK for the Appwrite open-source backend server 🚀"
+  },
   "aqua": {
     "type": "github",
     "owner": "l2ig",
@@ -317,12 +323,6 @@
     "owner": "chiefbiiko",
     "repo": "chacha20-poly1305",
     "desc": "ChaCha20-Poly1305 as defined by RFC 8439"
-  },
-  "checkhost": {
-    "type": "github",
-    "owner": "0vw",
-    "repo": "checkhost",
-    "desc": "A Deno wrapper for the check-host API"
   },
   "checksum": {
     "type": "github",
@@ -825,6 +825,12 @@
     "repo": "deno-pixabay",
     "desc": "search image and video from pixabay in deno"
   },
+  "deno_riot": {
+    "type": "github",
+    "owner": "rafaelferres",
+    "repo": "deno-riot",
+    "desc": "League of legends api wrapper"
+  },
   "deno_scripts": {
     "type": "github",
     "owner": "PabloSzx",
@@ -1191,12 +1197,6 @@
     "owner": "manyuanrong",
     "repo": "dso",
     "desc": "dso is a simple ORM Library based on deno_mysql"
-  },
-  "duckduckgo": {
-    "type": "github",
-    "owner": "0vw",
-    "repo": "duckduckgo",
-    "desc": "A Deno wrapper for the DuckDuckGo API"
   },
   "due": {
     "type": "github",
@@ -3006,12 +3006,6 @@
     "repo": "teddytags",
     "desc": "The superfast way to custom elements."
   },
-  "teejay": {
-    "type": "github",
-    "owner": "0vw",
-    "repo": "teejay",
-    "desc": "Returns a random phrase from the popular author and philosopher known as Teejayx6"
-  },
   "telegram": {
     "type": "github",
     "owner": "stanislavstrelnikov",
@@ -3154,12 +3148,6 @@
     "owner": "hviana",
     "repo": "Upload-middleware-for-Oak-Deno-framework",
     "desc": "Upload middleware for Oak framework"
-  },
-  "urban": {
-    "type": "github",
-    "owner": "0vw",
-    "repo": "urban",
-    "desc": "A Deno wrapper for the UrbanDictionary API"
   },
   "url_join": {
     "type": "github",
@@ -3366,12 +3354,6 @@
     "owner": "KSXGitHub",
     "repo": "yaml-wasm",
     "desc": "WebAssembly module to parse YAML"
-  },
-  "yo_mamma": {
-    "type": "github",
-    "owner": "0vw",
-    "repo": "yo_mamma",
-    "desc": "https://github.com/Fadyazmy/yo-mamma ported to Deno"
   },
   "youtube_deno": {
     "type": "github",
