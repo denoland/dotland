@@ -318,6 +318,12 @@
     "repo": "chacha20-poly1305",
     "desc": "ChaCha20-Poly1305 as defined by RFC 8439"
   },
+  "checkhost": {
+    "type": "github",
+    "owner": "0vw",
+    "repo": "checkhost",
+    "desc": "A Deno wrapper for the check-host API"
+  },
   "checksum": {
     "type": "github",
     "owner": "manyuanrong",
@@ -1185,6 +1191,12 @@
     "owner": "manyuanrong",
     "repo": "dso",
     "desc": "dso is a simple ORM Library based on deno_mysql"
+  },
+  "duckduckgo": {
+    "type": "github",
+    "owner": "0vw",
+    "repo": "duckduckgo",
+    "desc": "A Deno wrapper for the DuckDuckGo API"
   },
   "due": {
     "type": "github",
@@ -2622,6 +2634,12 @@
     "repo": "deno-rsync-parser",
     "desc": "Parses output of rsync program."
   },
+  "rua": {
+    "type": "github",
+    "owner": "often",
+    "repo": "rua",
+    "desc": "Random user-agent generator module for Deno."
+  },
   "rubico": {
     "type": "github",
     "owner": "a-synchronous",
@@ -2994,6 +3012,12 @@
     "repo": "teddytags",
     "desc": "The superfast way to custom elements."
   },
+  "teejay": {
+    "type": "github",
+    "owner": "0vw",
+    "repo": "teejay",
+    "desc": "Returns a random phrase from the popular author and philosopher known as Teejayx6"
+  },
   "termcolorizer": {
     "type": "github",
     "owner": "jahzielv",
@@ -3130,6 +3154,12 @@
     "owner": "hviana",
     "repo": "Upload-middleware-for-Oak-Deno-framework",
     "desc": "Upload middleware for Oak framework"
+  },
+  "urban": {
+    "type": "github",
+    "owner": "0vw",
+    "repo": "urban",
+    "desc": "A Deno wrapper for the UrbanDictionary API"
   },
   "url_join": {
     "type": "github",
@@ -3336,6 +3366,12 @@
     "owner": "KSXGitHub",
     "repo": "yaml-wasm",
     "desc": "WebAssembly module to parse YAML"
+  },
+  "yo_mamma": {
+    "type": "github",
+    "owner": "0vw",
+    "repo": "yo_mamma",
+    "desc": "https://github.com/Fadyazmy/yo-mamma ported to Deno"
   },
   "youtube_deno": {
     "type": "github",
