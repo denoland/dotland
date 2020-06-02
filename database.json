@@ -1312,12 +1312,6 @@
     "repo": "espresso",
     "desc": "deno minimal web framework"
   },
-  "events": {
-    "type": "github",
-    "owner": "fuxingZhang",
-    "repo": "deno-EventEmitter",
-    "desc": "EventEmitter for deno, API is the same as Nodejs, Only one Typescript file, Have all the APIs of nodejs"
-  },
   "event_emitter": {
     "type": "github",
     "owner": "denolibs",
@@ -1329,6 +1323,12 @@
     "owner": "lemarier",
     "repo": "deno-event-kit",
     "desc": "Simple module for implementing event subscription APIs"
+  },
+  "events": {
+    "type": "github",
+    "owner": "fuxingZhang",
+    "repo": "deno-EventEmitter",
+    "desc": "EventEmitter for deno, API is the same as Nodejs, Only one Typescript file, Have all the APIs of nodejs"
   },
   "evt": {
     "type": "github",
