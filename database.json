@@ -1789,12 +1789,6 @@
     "repo": "json-server",
     "desc": "Zero code fake backend for development"
   },
-  "json_tree": {
-    "type": "github",
-    "owner": "satty1987",
-    "repo": "json_tree",
-    "desc": "Json Tree converts a JS object into a nice, visible depth-indented tree for console printing"
-  },
   "jsx_html": {
     "type": "github",
     "owner": "apiel",
@@ -3041,6 +3035,12 @@
     "owner": "arendjr",
     "repo": "text-clipper",
     "desc": "Fast and correct clip functions for HTML and plain text"
+  },
+  "time_ago": {
+    "type": "github",
+    "owner": "satty1987",
+    "repo": "time_ago",
+    "desc": "This is the smallest, fully unit tested module to convert Date objects into human readable relative timestamps"
   },
   "timezone": {
     "type": "github",
