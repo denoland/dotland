@@ -2465,6 +2465,12 @@
     "repo": "deno-progressbar",
     "desc": "create terminal progressbars"
   },
+  "prompts": {
+    "type": "github",
+    "owner": "caspervonb",
+    "repo": "deno-prompts",
+    "desc": "Terminal prompts for Deno"
+  },
   "propx": {
     "type": "github",
     "owner": "luispagarcia",
