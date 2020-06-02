@@ -2646,6 +2646,12 @@
     "repo": "deno-rsync-parser",
     "desc": "Parses output of rsync program."
   },
+  "rua": {
+    "type": "github",
+    "owner": "often",
+    "repo": "rua",
+    "desc": "Random user-agent generator module for Deno."
+  },
   "rubico": {
     "type": "github",
     "owner": "a-synchronous",
