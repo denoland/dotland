@@ -3060,6 +3060,12 @@
     "repo": "text-clipper",
     "desc": "Fast and correct clip functions for HTML and plain text"
   },
+  "time_ago": {
+    "type": "github",
+    "owner": "satty1987",
+    "repo": "time_ago",
+    "desc": "This is the smallest, fully unit tested module to convert Date objects into human readable relative timestamps"
+  },
   "timezone": {
     "type": "github",
     "owner": "wrzonki",
