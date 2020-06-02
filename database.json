@@ -831,6 +831,12 @@
     "repo": "deno_scripts",
     "desc": "Type-safe centralized Deno project scripts 🦕"
   },
+  "deno_riot": {
+    "type": "github",
+    "owner": "rafaelferres",
+    "repo": "deno-riot",
+    "desc": "League of legends api wrapper"
+  },
   "deno_search": {
     "type": "github",
     "owner": "etopiei",
