@@ -3006,6 +3006,12 @@
     "repo": "teddytags",
     "desc": "The superfast way to custom elements."
   },
+  "telegram": {
+    "type": "github",
+    "owner": "stanislavstrelnikov",
+    "repo": "deno-telegram",
+    "desc": "Telegram Bot API"
+  },
   "termcolorizer": {
     "type": "github",
     "owner": "jahzielv",
