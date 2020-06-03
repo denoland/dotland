@@ -693,6 +693,12 @@
     "repo": "deno-check-updates",
     "desc": "Automatically checks deno dependencies versions from import maps file."
   },
+  "deno_context_finder": {
+    "type": "github",
+    "owner": "ebebbington",
+    "repo": "deno-context-finder",
+    "desc": "Extract context blocks from a configuration file"
+  },
   "deno_correiobr": {
     "type": "github",
     "owner": "rafaelferres",
