@@ -2339,7 +2339,7 @@
     "repo": "parseargs",
     "desc": "Migrated to denoland/deno_std."
   },
-  "password-generator": {
+  "password_generator": {
     "type": "github",
     "owner": "satty1987",
     "repo": "password-generator",
