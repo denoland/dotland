@@ -2135,9 +2135,9 @@
   },
   "moment": {
     "type": "github",
-    "owner": "lisniuse",
+    "owner": "MilesWells",
     "repo": "deno_moment",
-    "desc": "The Moment.ts library for Deno that was ported from moment@2.24.0, Hope you like it."
+    "desc": "The Moment.ts library for Deno that was ported from moment@2.24.0 and includes typedefs."
   },
   "mongo": {
     "type": "github",
