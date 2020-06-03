@@ -27,7 +27,7 @@
     "type": "github",
     "owner": "apiel",
     "repo": "adka",
-    "desc": "Static site generator using JSX without React."
+    "desc": "SSG & SSR: Static site generator and server side rendering using JSX."
   },
   "airtable": {
     "type": "github",
