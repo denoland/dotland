@@ -342,6 +342,12 @@
     "repo": "deno-ci",
     "desc": "Get details about the current Continuous Integration environment."
   },
+  "ciphers": {
+    "type": "github",
+    "owner": "divy-work",
+    "repo": "deno-ciphers",
+    "desc": "WASM bindings to Ciphers for Deno."
+  },
   "cli_spinners": {
     "type": "github",
     "owner": "ameerthehacker",
