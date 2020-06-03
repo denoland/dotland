@@ -1518,6 +1518,12 @@
     "repo": "deno",
     "desc": "Simple Graphviz library for Deno🦕"
   },
+  "greet_user": {
+    "type": "github",
+    "owner": "guptamohit004",
+    "repo": "greet_user",
+    "desc": "Greet a user according to the TimeZone."
+  },
   "gusano": {
     "type": "github",
     "owner": "krthr",
@@ -1741,6 +1747,12 @@
     "repo": "isIP",
     "desc": "IP address detector for Deno."
   },
+  "isUp": {
+    "type": "github",
+    "owner": "rjoydip",
+    "repo": "isUp",
+    "desc": "Check whether a website is up or down using the isitup.org API"
+  },
   "is_docker": {
     "type": "github",
     "owner": "denorg",
@@ -1887,6 +1899,12 @@
     "repo": "lifeson-ipsum",
     "desc": "Lorem Ipsum generator, based on Alex Lifeson's acceptance speech for Rush in 2013."
   },
+  "local_ip": {
+    "type": "github",
+    "owner": "joakimunge",
+    "repo": "deno-local-ip",
+    "desc": "Tiny module to get local network interface address."
+  },
   "lodash": {
     "type": "github",
     "owner": "lodash",
@@ -1898,6 +1916,12 @@
     "owner": "TokenChingy",
     "repo": "lodash_require",
     "desc": "Lodash for the Deno runtime."
+  },
+  "log4deno": {
+    "type": "github",
+    "owner": "klimentru1986",
+    "repo": "log4deno",
+    "desc": "log4deno is a tool to help the programmer output log statements to a variety of output targets. In case of problems with an application, it is helpful to enable logging so that the problem can be located."
   },
   "logger": {
     "type": "github",
@@ -2169,6 +2193,12 @@
     "repo": "next",
     "desc": "Next is a reactive framework for Deno, inspired by ReactJS and Angular"
   },
+  "njalla": {
+    "type": "github",
+    "owner": "finder",
+    "repo": "njalla",
+    "desc": "Njalla API wrapper for Deno."
+  },
   "nonstd": {
     "type": "github",
     "owner": "deno-nonstd",
@@ -2205,6 +2235,12 @@
     "owner": "nusendra",
     "repo": "deno-number-formatter",
     "desc": "A number formmatter for Deno"
+  },
+  "number_to_words": {
+    "type": "github",
+    "owner": "guptamohit004",
+    "repo": "number_to_words",
+    "desc": "Convert a Number to Words"
   },
   "oak": {
     "type": "github",
@@ -2459,6 +2495,12 @@
     "repo": "deno-progressbar",
     "desc": "create terminal progressbars"
   },
+  "prompts": {
+    "type": "github",
+    "owner": "caspervonb",
+    "repo": "deno-prompts",
+    "desc": "Terminal prompts for Deno"
+  },
   "propx": {
     "type": "github",
     "owner": "luispagarcia",
@@ -2645,6 +2687,12 @@
     "owner": "daniel-araujo",
     "repo": "deno-rsync-parser",
     "desc": "Parses output of rsync program."
+  },
+  "rua": {
+    "type": "github",
+    "owner": "often",
+    "repo": "rua",
+    "desc": "Random user-agent generator module for Deno."
   },
   "rubico": {
     "type": "github",
@@ -3041,6 +3089,12 @@
     "owner": "arendjr",
     "repo": "text-clipper",
     "desc": "Fast and correct clip functions for HTML and plain text"
+  },
+  "time_ago": {
+    "type": "github",
+    "owner": "satty1987",
+    "repo": "time_ago",
+    "desc": "This is the smallest, fully unit tested module to convert Date objects into human readable relative timestamps"
   },
   "timezone": {
     "type": "github",
