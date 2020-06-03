@@ -454,7 +454,7 @@
     "type": "github",
     "owner": "cordeno",
     "repo": "cordeno",
-    "desc": "A Discord API wrapper for developing discord bots using the Deno runtime."
+    "desc": "🦕 A Discord API wrapper for developing discord bots using the Deno runtime."
   },
   "core": {
     "type": "github",
