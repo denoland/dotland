@@ -1572,6 +1572,12 @@
     "repo": "hmac",
     "desc": "Convenience function for macing singular data. hash should be one of sha1, sha256, or sha512"
   },
+  "html": {
+    "type": "github",
+    "owner": "denomod",
+    "repo": "deno_html",
+    "desc": "Useful template literal tags for create html strings in ES2015+"
+  },
   "html_entities": {
     "type": "github",
     "owner": "matschik",
