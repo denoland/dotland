@@ -2796,6 +2796,12 @@
     "repo": "serialize-xml",
     "desc": "Serialize (i.e. stringify) XML"
   },
+  "servest": {
+    "type": "github",
+    "owner": "keroxp",
+    "repo": "servest",
+    "desc": "🌾A progressive http server for Deno🌾"
+  },
   "servicr": {
     "type": "github",
     "owner": "astanciu",
