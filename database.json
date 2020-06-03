@@ -390,6 +390,12 @@
     "repo": "color",
     "desc": "Write Colourful Messages In console. It's easy to learn and use. ༼ つ ◕_◕ ༽つ"
   },
+  "colorlog": {
+    "type": "github",
+    "owner": "Vuelancer",
+    "repo": "color-deno",
+    "desc": "Printing Colored logs in console."
+  },
   "colors": {
     "type": "github",
     "owner": "maheshkareeya",
