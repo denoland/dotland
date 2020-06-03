@@ -3385,6 +3385,12 @@
     "repo": "vuniq",
     "desc": "Uniq ID generator with variable length"
   },
+  "wait_for_localhost": {
+    "type": "github",
+    "owner": "rjoydip",
+    "repo": "wait_for_localhost",
+    "desc": "Wait for localhost to be ready"
+  },
   "wasi": {
     "type": "github",
     "owner": "caspervonb",
