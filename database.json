@@ -2013,6 +2013,12 @@
     "repo": "mandarinets",
     "desc": "A MVC Framework built on Typescript that runs on Deno. Components, Dependency Injection, Sessions, Security and more."
   },
+  "makehelp": {
+    "type": "github",
+    "owner": "konsumer",
+    "repo": "deno-make-help",
+    "desc": "A very simple help-provider for deno makefiles"
+  },
   "markdown": {
     "type": "github",
     "owner": "ubersl0th",
