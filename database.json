@@ -1006,6 +1006,12 @@
     "repo": "denova",
     "desc": "A Typescript Framework For Deno - Framework Looks Like Laravel."
   },
+  "denovamon": {
+    "type": "github",
+    "owner": "viandwi24",
+    "repo": "denovamon",
+    "desc": "A Module to detect any change files and automatically restart your server. Inspired by Nodemon."
+  },
   "denovel": {
     "type": "github",
     "owner": "fauzan121002",
