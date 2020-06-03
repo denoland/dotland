@@ -186,7 +186,7 @@
     "repo": "berror",
     "desc": "Rich Errors including chain of causes, metadata and easy logging"
   },
-    "betalander": {
+  "betalander": {
     "type": "github",
     "owner": "genemators",
     "repo": "betalander",
