@@ -3433,6 +3433,12 @@
     "repo": "yaml-wasm",
     "desc": "WebAssembly module to parse YAML"
   },
+  "yolk": {
+    "type": "github",
+    "owner": "denjucks",
+    "repo": "yolk",
+    "desc": "Oak-based, Batteries-included. A CLI tool used to create and run scalable and maintainable Oak web applications."
+  },
   "youtube_deno": {
     "type": "github",
     "owner": "akshgpt7",
