@@ -849,6 +849,12 @@
     "repo": "deno_search",
     "desc": "A CLI tool to search for third party packages on deno.land"
   },
+  "deno_serialize_error": {
+    "type": "github",
+    "owner": "rjoydip",
+    "repo": "deno_serialize_error",
+    "desc": "Serialize/deserialize an error into a plain object"
+  },
   "deno_string_validator": {
     "type": "github",
     "owner": "okwudav",
