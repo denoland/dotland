@@ -1168,6 +1168,12 @@
     "repo": "download",
     "desc": "Deno fetch api based module to download file from a URL."
   },
+  "dpng": {
+    "type": "github",
+    "owner": "MartonDev",
+    "repo": "dpng",
+    "desc": "Easily create and draw image files in Deno"
+  },
   "dpx": {
     "type": "github",
     "owner": "denorg",
