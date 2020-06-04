@@ -29,6 +29,12 @@
     "repo": "adka",
     "desc": "SSG & SSR: Static site generator and server side rendering using JSX."
   },
+  "adka_server": {
+    "type": "github",
+    "owner": "apiel",
+    "repo": "adka_server",
+    "desc": "HTTP file server with live reloading."
+  },
   "airtable": {
     "type": "github",
     "owner": "grikomsn",
