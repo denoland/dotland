@@ -2417,6 +2417,12 @@
     "repo": "parseargs",
     "desc": "Migrated to denoland/deno_std."
   },
+  "password_generator": {
+    "type": "github",
+    "owner": "satty1987",
+    "repo": "password-generator",
+    "desc": "Generate random password of a specified length using simple character sequences."
+  },
   "path_to_regexp": {
     "type": "github",
     "owner": "namelos",
