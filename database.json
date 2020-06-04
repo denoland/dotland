@@ -1530,6 +1530,12 @@
     "repo": "get-ip",
     "desc": "Get your public IP address in Deno"
   },
+  "get_stdin": {
+    "type": "github",
+    "owner": "rjoydip",
+    "repo": "get_stdin",
+    "desc": "Get stdin as a string or buffer"
+  },
   "graphql": {
     "type": "github",
     "owner": "CreatCodeBuild",
