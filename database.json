@@ -1114,6 +1114,12 @@
     "repo": "dinocord",
     "desc": "A Discord API Library for Deno."
   },
+  "diosaur": {
+    "type": "github",
+    "owner": "ovesco",
+    "repo": "diosaur",
+    "desc": "A lightweight yet complete dependency injection solution"
+  },
   "dirname": {
     "type": "github",
     "owner": "rsp",
