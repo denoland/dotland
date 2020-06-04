@@ -705,6 +705,12 @@
     "repo": "deno-check-updates",
     "desc": "Automatically checks deno dependencies versions from import maps file."
   },
+  "deno_context_finder": {
+    "type": "github",
+    "owner": "ebebbington",
+    "repo": "deno-context-finder",
+    "desc": "Extract context blocks from a configuration file"
+  },
   "deno_correiobr": {
     "type": "github",
     "owner": "rafaelferres",
@@ -1143,6 +1149,12 @@
     "owner": "timonson",
     "repo": "djwt",
     "desc": "The absolute minimum to make JSON Web Tokens on deno. Based on JWT and JWS specifications."
+  },
+  "dmm": {
+    "type": "github",
+    "owner": "ebebbington",
+    "repo": "dmm",
+    "desc": "A module manager for Deno"
   },
   "docable": {
     "type": "github",
