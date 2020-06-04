@@ -33,7 +33,7 @@
     "type": "github",
     "owner": "apiel",
     "repo": "adka_server",
-    "desc": "Static file server with live reloading."
+    "desc": "HTTP file server with live reloading."
   },
   "airtable": {
     "type": "github",
