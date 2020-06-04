@@ -186,6 +186,12 @@
     "repo": "berror",
     "desc": "Rich Errors including chain of causes, metadata and easy logging"
   },
+  "betalander": {
+    "type": "github",
+    "owner": "genemators",
+    "repo": "betalander",
+    "desc": "Minecraft: Java Edition server manager & updater"
+  },
   "bigfloat": {
     "type": "github",
     "owner": "davidmartinez10",
