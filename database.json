@@ -2038,10 +2038,16 @@
     "desc": "Get the MAC addresses of the current machine."
   },
   "machine_id": {
-    "type": "github",
+    "desc": "Get the unique ID of the current machine",
     "owner": "axetroy",
     "repo": "deno_machine_id",
-    "desc": "Get the unique ID of the current machine"
+    "type": "github"
+  },
+  "makehelp": {
+    "desc": "A very simple help-provider for deno makefiles",
+    "owner": "konsumer",
+    "repo": "deno-make-help",
+    "type": "github"
   },
   "mandarinets": {
     "type": "github",
