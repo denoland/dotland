@@ -3162,6 +3162,12 @@
     "repo": "text-clipper",
     "desc": "Fast and correct clip functions for HTML and plain text"
   },
+  "thai_baht_text": {
+    "type": "github",
+    "owner": "pthongtaem",
+    "repo": "thai-baht-text-deno",
+    "desc": "Convert number to Thai Baht as Text"
+  },
   "time_ago": {
     "type": "github",
     "owner": "satty1987",
