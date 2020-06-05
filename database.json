@@ -1192,6 +1192,12 @@
     "repo": "deno_dog",
     "desc": "Dog API wrapper"
   },
+  "domdom": {
+    "type": "github",
+    "owner": "eirikb",
+    "repo": "domdom-deno",
+    "desc": "The proactive web framework for the unprofessional"
+  },
   "domelementtype": {
     "type": "github",
     "owner": "DenoBRComunitty",
