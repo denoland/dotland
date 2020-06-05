@@ -2826,6 +2826,12 @@
     "repo": "saur",
     "desc": "Deno Saur is a full-stack web application framework with a focus on rapid development, similar to Django or Ruby on Rails."
   },
+  "sass": {
+    "type": "github",
+    "owner": "divy-work",
+    "repo": "deno-sass",
+    "desc": "Fast SASS to CSS compiler for Deno."
+  },
   "scrypt": {
     "type": "github",
     "owner": "denorg",
