@@ -1270,6 +1270,12 @@
     "repo": "dynamodb",
     "desc": "DynamoDB client."
   },
+  "dubartesql": {
+    "type": "github",
+    "owner": "namadnuno",
+    "repo": "dubartesql",
+    "desc": "Deno MYSQL interface"
+  },
   "eaisercolors": {
     "type": "github",
     "owner": "herohamp",
