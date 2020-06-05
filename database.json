@@ -1989,6 +1989,12 @@
     "repo": "levenshtein",
     "desc": "Module to compute the Levenshtein distance between two strings"
   },
+  "levo": {
+    "type": "github",
+    "owner": "levo-framework",
+    "repo": "core",
+    "desc": "Web framework with server-side rendering and The Elm Architecture capabilities"
+  },
   "lib": {
     "type": "github",
     "owner": "brandonkal",
