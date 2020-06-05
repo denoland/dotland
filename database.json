@@ -1536,6 +1536,12 @@
     "repo": "funky",
     "desc": "Bring the beloved Option<T>, Result<T, E> and other functional utilities into your next Deno masterpiece!"
   },
+  "fuse": {
+    "type": "github",
+    "owner": "krisk",
+    "repo": "Fuse",
+    "desc": "Fuse.js is a powerful, lightweight fuzzy-search library, with zero dependencies."
+  },
   "gardens": {
     "type": "github",
     "owner": "partheseas",
