@@ -1258,6 +1258,12 @@
     "repo": "dso",
     "desc": "dso is a simple ORM Library based on deno_mysql"
   },
+  "dubartesql": {
+    "type": "github",
+    "owner": "namadnuno",
+    "repo": "dubartesql",
+    "desc": "Deno MYSQL interface"
+  },
   "due": {
     "type": "github",
     "owner": "lemueldls",
@@ -1269,12 +1275,6 @@
     "owner": "chiefbiiko",
     "repo": "dynamodb",
     "desc": "DynamoDB client."
-  },
-  "dubartesql": {
-    "type": "github",
-    "owner": "namadnuno",
-    "repo": "dubartesql",
-    "desc": "Deno MYSQL interface"
   },
   "eaisercolors": {
     "type": "github",
