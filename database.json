@@ -2121,6 +2121,12 @@
     "repo": "memoize",
     "desc": "A simple and easy to use memoize lib for deno."
   },
+  "merc": {
+    "type": "github",
+    "owner": "spitlo",
+    "repo": "mercuriceratops",
+    "desc": "A basic command line client for the Gemini protocol for deno."
+  },
   "meteorite": {
     "type": "github",
     "owner": "AhmedAlYousif",
