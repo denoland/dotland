@@ -1,4 +1,10 @@
 {
+  "a0": {
+    "type": "github",
+    "owner": "being-curious",
+    "repo": "a0",
+    "desc": "A command line utility to manage `text/number/email/password/address/note` with Alias to easy recall & copy to clipboard."
+  },
   "a1": {
     "type": "github",
     "owner": "maheshkareeya",
