@@ -589,6 +589,12 @@
     "repo": "curve25519",
     "desc": "djb's Curve25519 in TypeScript"
   },
+  "cute": {
+    "type": "github",
+    "owner": "llbarbosas",
+    "repo": "cute",
+    "desc": "Tokenizer/lexer generator for Deno"
+  },
   "dactyl": {
     "type": "github",
     "owner": "liamtan28",
