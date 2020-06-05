@@ -2688,6 +2688,12 @@
     "repo": "deno_random_interval",
     "desc": "deno random interval"
   },
+  "rcon": {
+    "type": "github",
+    "owner": "RisingStack",
+    "repo": "rcon-deno",
+    "desc": "Valve RCON protocol implementation to control game servers"
+  },
   "reactive": {
     "type": "github",
     "owner": "bordoley",
