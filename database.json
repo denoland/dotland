@@ -1958,6 +1958,12 @@
     "path": "/runtime",
     "desc": "deno on AWS Lambda"
   },
+  "lavadeno": {
+    "type": "github",
+    "owner": "lavaclient",
+    "repo": "lavadeno",
+    "desc": "lavadeno is a simple, easy-to-use, and flexible lavalink client built on the Deno Runtime."
+  },
   "lazy": {
     "type": "github",
     "owner": "luvies",
