@@ -1837,6 +1837,12 @@
     "repo": "is_exe",
     "desc": "detect if a file is executable or not"
   },
+  "is_type": {
+    "type": "github",
+    "owner": "rjoydip",
+    "repo": "is_type",
+    "desc": "Type check values"
+  },
   "is_url": {
     "type": "github",
     "owner": "rubiin",
