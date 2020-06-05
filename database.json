@@ -3475,6 +3475,12 @@
     "repo": "wasm_gzip",
     "desc": "Gzip encryption and decryption WebAssembly implementation for Deno"
   },
+  "wasm_imports": {
+    "type": "github",
+    "owner": "AliBasicCoder",
+    "repo": "wasm-imports",
+    "desc": "import wasm easily"
+  },
   "watch": {
     "type": "github",
     "owner": "jinjor",
