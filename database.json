@@ -2862,6 +2862,12 @@
     "repo": "rxjs",
     "desc": "🦕 A reactive programming library for Deno ⚡ "
   },
+  "sass": {
+    "type": "github",
+    "owner": "divy-work",
+    "repo": "deno-sass",
+    "desc": "Fast SASS to CSS compiler for Deno."
+  },
   "saur": {
     "type": "github",
     "owner": "tubbo",
