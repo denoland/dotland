@@ -2337,6 +2337,12 @@
     "repo": "njalla",
     "desc": "Njalla API wrapper for Deno."
   },
+  "node_buffer": {
+    "type": "github",
+    "owner": "AliBasicCoder",
+    "repo": "node-buffer",
+    "desc": "nodejs buffer polyfill"
+  },
   "nonstd": {
     "type": "github",
     "owner": "deno-nonstd",
