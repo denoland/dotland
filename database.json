@@ -2253,6 +2253,12 @@
     "repo": "deno_moment",
     "desc": "The Moment.ts library for Deno that was ported from moment@2.24.0, Hope you like it."
   },
+  "monads": {
+    "type": "github",
+    "owner": "hqoss",
+    "repo": "monads",
+    "desc": "Type safe Option, Result, and Either types; inspired by Rust."
+  },
   "mongo": {
     "type": "github",
     "owner": "manyuanrong",
