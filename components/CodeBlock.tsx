@@ -6,12 +6,9 @@ import Router from "next/router";
 import Highlight, { Prism } from "prism-react-renderer";
 import light from "prism-react-renderer/themes/github";
 import { useLayoutEffect } from "react";
+import { loadLanguages } from "./prism";
 
-import PrismRust from "./prism-rust";
-import PrismToml from "./prism-toml";
-
-PrismRust(Prism);
-PrismToml(Prism);
+loadLanguages(Prism);
 
 export interface CodeBlockProps {
   code: string;
@@ -29,7 +26,10 @@ export interface CodeBlockProps {
     | "text"
     | "rust"
     | "toml"
-    | "python";
+    | "python"
+    | "wasm"
+    | "makefile"
+    | "dockerfile";
 }
 
 export const RawCodeBlock = ({

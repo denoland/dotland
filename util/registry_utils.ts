@@ -84,6 +84,12 @@ export function fileTypeFromURL(filename: string) {
     return "rust";
   } else if (f.endsWith(".py")) {
     return "python";
+  } else if (f.endsWith(".wasm")) {
+    return "wasm";
+  } else if (f.endsWith("makefile") || f.endsWith("Makefile")) {
+    return "makefile";
+  } else if (f.endsWith(".dockerfile")) {
+    return "dockerfile";
   } else if (f.endsWith(".yml") || f.endsWith(".yaml")) {
     return "yaml";
   } else if (f.endsWith(".htm") || f.endsWith(".html")) {

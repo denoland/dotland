@@ -81,6 +81,9 @@ function FileDisplay(props: {
           case "rust":
           case "toml":
           case "python":
+          case "wasm":
+          case "makefile":
+          case "dockerfile":
             return (
               <RawCodeBlock
                 code={props.raw!}
