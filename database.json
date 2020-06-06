@@ -2241,7 +2241,7 @@
     "repo": "deno_mongo",
     "desc": "MongoDB driver for Deno."
   },
-  "mongo-repository": {
+  "mongo_repository": {
     "type": "github",
     "owner": "0xVesion",
     "repo": "deno-mongo-repository",
