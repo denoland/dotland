@@ -2241,6 +2241,12 @@
     "repo": "deno_mongo",
     "desc": "MongoDB driver for Deno."
   },
+  "mongo-repository": {
+    "type": "github",
+    "owner": "0xVesion",
+    "repo": "deno-mongo-repository",
+    "desc": "This library makes integrating MongoDB in your project easy."
+  },
   "mqtt": {
     "type": "github",
     "owner": "jdiamond",
