@@ -72,7 +72,8 @@ function LinkRenderer(props: LinkRendererProps) {
 
   // If the URL is relative, it should be relative to the canonical URL of the file.
   if (href !== undefined && isRelative(href)) {
-    href = relativeToAbsolute(props.displayURL, href);
+    // https://github.com/denoland/deno_website2/issues/1047
+    href = decodeURIComponent(relativeToAbsolute(props.displayURL, href));
   }
 
   const hrefURL = href ? new URL(href) : undefined;

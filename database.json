@@ -77,6 +77,12 @@
     "repo": "aqua",
     "desc": "A minimal and fast web framework for Deno 🏃"
   },
+  "arangeno": {
+    "type": "github",
+    "owner": "HarryET",
+    "repo": "Arangeno",
+    "desc": "Deno port of ArangoJS - ArangoDB Driver 🥑"
+  },
   "argon2": {
     "type": "github",
     "owner": "fdionisi",
@@ -687,6 +693,12 @@
     "repo": "dem",
     "desc": "A module version manager for Deno."
   },
+  "den": {
+    "type": "github",
+    "owner": "apiel",
+    "repo": "den",
+    "desc": "A better deno cli with deno.json"
+  },
   "denet": {
     "type": "github",
     "owner": "ryaangu",
@@ -1176,7 +1188,7 @@
   },
   "dmm": {
     "type": "github",
-    "owner": "ebebbington",
+    "owner": "drashland",
     "repo": "dmm",
     "desc": "A module manager for Deno"
   },
@@ -1418,7 +1430,7 @@
     "type": "github",
     "owner": "garronej",
     "repo": "evt",
-    "desc": "💧A type safe replacement for Node's EventEmitter💧"
+    "desc": "💧EventEmitter's typesafe replacement. Alternative to RxJS. Supports Deno/Node/Browser/RN"
   },
   "exec": {
     "type": "github",
@@ -2229,6 +2241,12 @@
     "repo": "mock",
     "desc": "This module provides utilities to help mock behavior and spy on function calls for tests."
   },
+  "mojang": {
+    "type": "github",
+    "owner": "often",
+    "repo": "mojang",
+    "desc": "Simple and lightweight Mojang API wrapper."
+  },
   "moment": {
     "type": "github",
     "owner": "lisniuse",
@@ -2240,6 +2258,12 @@
     "owner": "manyuanrong",
     "repo": "deno_mongo",
     "desc": "MongoDB driver for Deno."
+  },
+  "mongo_repository": {
+    "type": "github",
+    "owner": "0xVesion",
+    "repo": "deno-mongo-repository",
+    "desc": "This library makes integrating MongoDB in your project easy."
   },
   "mqtt": {
     "type": "github",
@@ -2330,6 +2354,12 @@
     "owner": "finder",
     "repo": "njalla",
     "desc": "Njalla API wrapper for Deno."
+  },
+  "node_buffer": {
+    "type": "github",
+    "owner": "AliBasicCoder",
+    "repo": "node-buffer",
+    "desc": "nodejs buffer polyfill"
   },
   "nonstd": {
     "type": "github",
@@ -2910,6 +2940,12 @@
     "repo": "secure-compare",
     "desc": "Constant-time comparison algorithm to prevent timing attacks (Deno edition)"
   },
+  "seed": {
+    "type": "github",
+    "owner": "krijn-inc",
+    "repo": "krijn-inc/seed",
+    "desc": "Deno package used to generate good, short and fast pseudorandom numbers using a seed"
+  },
   "semver": {
     "type": "github",
     "owner": "justjavac",
@@ -3252,6 +3288,12 @@
     "repo": "thai-baht-text-deno",
     "desc": "Convert number to Thai Baht as Text"
   },
+  "time.ts": {
+    "type": "github",
+    "owner": "burhanahmeed",
+    "repo": "time.ts",
+    "desc": " Time.ts - A straightforward Deno timezone manipulation"
+  },
   "time_ago": {
     "type": "github",
     "owner": "satty1987",
@@ -3570,6 +3612,12 @@
     "owner": "rjoydip",
     "repo": "win_taskkill",
     "desc": "Wrapper for the Windows `taskkill` command. Ends one or more tasks or processes."
+  },
+  "win_tasklist": {
+    "type": "github",
+    "owner": "rjoydip",
+    "repo": "win_tasklist",
+    "desc": "Wrapper for the Windows tasklist command"
   },
   "x_name": {
     "type": "github",
