@@ -76,6 +76,14 @@ export function fileTypeFromURL(filename: string) {
     return "jsx";
   } else if (f.endsWith(".json")) {
     return "json";
+  } else if (f.endsWith(".toml")) {
+    return "toml";
+  } else if (f.endsWith(".lock")) {
+    return "toml";
+  } else if (f.endsWith(".rs")) {
+    return "rust";
+  } else if (f.endsWith(".py")) {
+    return "python";
   } else if (f.endsWith(".yml") || f.endsWith(".yaml")) {
     return "yaml";
   } else if (f.endsWith(".htm") || f.endsWith(".html")) {

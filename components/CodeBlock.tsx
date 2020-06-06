@@ -7,6 +7,12 @@ import Highlight, { Prism } from "prism-react-renderer";
 import light from "prism-react-renderer/themes/github";
 import { useLayoutEffect } from "react";
 
+import PrismRust from "./prism-rust";
+import PrismToml from "./prism-toml";
+
+PrismRust(Prism);
+PrismToml(Prism);
+
 export interface CodeBlockProps {
   code: string;
   disablePrefixes?: boolean;
@@ -20,7 +26,10 @@ export interface CodeBlockProps {
     | "markdown"
     | "bash"
     | "shell"
-    | "text";
+    | "text"
+    | "rust"
+    | "toml"
+    | "python";
 }
 
 export const RawCodeBlock = ({

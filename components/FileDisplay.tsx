@@ -78,6 +78,9 @@ function FileDisplay(props: {
           case "jsx":
           case "json":
           case "yaml":
+          case "rust":
+          case "toml":
+          case "python":
             return (
               <RawCodeBlock
                 code={props.raw!}
