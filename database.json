@@ -2434,6 +2434,12 @@
     "repo": "middleware",
     "desc": "A collection of middleware for the oak middleware framework."
   },
+  "oauth_1.0a": {
+    "type": "github",
+    "owner": "alkihis",
+    "repo": "oauth_1.0a",
+    "desc": "OAuth 1.0a Request Authorization for Deno."
+  },
   "observable": {
     "type": "github",
     "owner": "bsunderhus",
@@ -3365,6 +3371,12 @@
     "owner": "iosamuel",
     "repo": "twitter",
     "desc": "Twitter's library in Deno"
+  },
+  "twitter_lite_deno": {
+    "type": "github",
+    "owner": "alkihis",
+    "repo": "twitter_lite_deno",
+    "desc": "Port of Twitter Lite library to Deno, a tiny, modern and full-featured library for the Twitter API."
   },
   "type_check": {
     "type": "github",
