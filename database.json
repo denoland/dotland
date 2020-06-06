@@ -2235,6 +2235,12 @@
     "repo": "mock",
     "desc": "This module provides utilities to help mock behavior and spy on function calls for tests."
   },
+  "mojang": {
+    "type": "github",
+    "owner": "often",
+    "repo": "mojang",
+    "desc": "Simple and lightweight Mojang API wrapper."
+  },
   "moment": {
     "type": "github",
     "owner": "lisniuse",
