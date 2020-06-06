@@ -80,11 +80,6 @@ function Manual() {
   const [content, setContent] = useState<string | null>(null);
   const [versions, setVersions] = useState<string[] | null | undefined>();
 
-  const partialContent = useMemo(
-    () => content?.split(" ").slice(0, 20).join(""),
-    [content]
-  );
-
   useEffect(() => {
     getTableOfContents(version ?? "master")
       .then(setTableOfContents)
