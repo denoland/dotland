@@ -1182,7 +1182,7 @@
   },
   "dmm": {
     "type": "github",
-    "owner": "ebebbington",
+    "owner": "drashland",
     "repo": "dmm",
     "desc": "A module manager for Deno"
   },
