@@ -1424,7 +1424,7 @@
     "type": "github",
     "owner": "garronej",
     "repo": "evt",
-    "desc": "💧A type safe replacement for Node's EventEmitter💧"
+    "desc": "💧EventEmitter's typesafe replacement. Alternative to RxJS. Supports Deno/Node/Browser/RN"
   },
   "exec": {
     "type": "github",
