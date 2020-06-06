@@ -1680,6 +1680,12 @@
     "repo": "hmac",
     "desc": "Convenience function for macing singular data. hash should be one of sha1, sha256, or sha512"
   },
+  "houston": {
+    "type": "github",
+    "owner": "MartonDev",
+    "repo": "Houston",
+    "desc": "An advanced Deno logger, like Winston for Nodejs, with no dependencies"
+  },
   "html": {
     "type": "github",
     "owner": "denomod",
