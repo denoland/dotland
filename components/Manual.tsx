@@ -11,7 +11,6 @@ import {
 } from "../util/manual_utils";
 import Markdown from "./Markdown";
 import Transition from "./Transition";
-import { metaDescription } from "../pages";
 
 const denoEntry = findEntry("deno");
 
@@ -172,12 +171,6 @@ function Manual() {
     <div>
       <Head>
         <title>Manual | Deno</title>
-        {metaDescription({
-          title: "The Deno Manual",
-          description: partialContent || "The Deno Manual",
-          url: "https://deno.land/manual",
-          image: "https://deno.land/v1_wide.jpg",
-        })}
       </Head>
       <div className="h-screen flex overflow-hidden">
         <Transition show={showSidebar}>
