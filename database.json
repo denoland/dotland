@@ -3276,6 +3276,12 @@
     "repo": "thai-baht-text-deno",
     "desc": "Convert number to Thai Baht as Text"
   },
+  "time.ts": {
+    "type": "github",
+    "owner": "burhanahmeed",
+    "repo": "time.ts",
+    "desc": " Time.ts - A straightforward Deno timezone manipulation"
+  },
   "time_ago": {
     "type": "github",
     "owner": "satty1987",
