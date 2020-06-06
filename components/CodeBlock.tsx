@@ -6,9 +6,12 @@ import Router from "next/router";
 import Highlight, { Prism } from "prism-react-renderer";
 import light from "prism-react-renderer/themes/github";
 import { useLayoutEffect } from "react";
-import { loadLanguages } from "./prism";
 
-loadLanguages(Prism);
+import PrismRust from "./prism-rust";
+import PrismToml from "./prism-toml";
+
+PrismRust(Prism);
+PrismToml(Prism);
 
 export interface CodeBlockProps {
   code: string;

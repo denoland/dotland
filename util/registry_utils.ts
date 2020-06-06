@@ -86,9 +86,9 @@ export function fileTypeFromURL(filename: string) {
     return "python";
   } else if (f.endsWith(".wasm")) {
     return "wasm";
-  } else if (f.endsWith("makefile") || f.endsWith("Makefile")) {
+  } else if (f.toLocaleLowerCase().endsWith("makefile")) {
     return "makefile";
-  } else if (f.endsWith(".dockerfile")) {
+  } else if (f.endsWith(".dockerfile") || f.endsWith("Dockerfile")) {
     return "dockerfile";
   } else if (f.endsWith(".yml") || f.endsWith(".yaml")) {
     return "yaml";

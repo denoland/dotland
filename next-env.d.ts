@@ -39,9 +39,6 @@ declare module "prism-react-renderer" {
     | "yaml"
     | "rust"
     | "toml"
-    | "python"
-    | "wasm"
-    | "makefile"
     | "dockerfile";
 
   type PrismGrammar = {
