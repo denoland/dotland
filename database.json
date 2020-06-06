@@ -2916,6 +2916,12 @@
     "repo": "secure-compare",
     "desc": "Constant-time comparison algorithm to prevent timing attacks (Deno edition)"
   },
+  "seed": {
+    "type": "github",
+    "owner": "krijn-inc",
+    "repo": "krijn-inc/seed",
+    "desc": "Deno package used to generate good, short and fast pseudorandom numbers using a seed"
+  },
   "semver": {
     "type": "github",
     "owner": "justjavac",
