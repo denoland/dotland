@@ -693,6 +693,12 @@
     "repo": "dem",
     "desc": "A module version manager for Deno."
   },
+  "den": {
+    "type": "github",
+    "owner": "apiel",
+    "repo": "den",
+    "desc": "A better deno cli with deno.json"
+  },
   "denet": {
     "type": "github",
     "owner": "ryaangu",
