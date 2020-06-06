@@ -65,7 +65,7 @@
     "repo": "aqua",
     "desc": "A minimal and fast web framework for Deno 🏃"
   },
-  "arangeno" : {
+  "arangeno": {
     "type": "github",
     "owner": "HarryET",
     "repo": "Arangeno",
