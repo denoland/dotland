@@ -3180,7 +3180,7 @@
     "repo": "strcolors.ts",
     "desc": "FMT String Extensions for Deno"
   },
-  "string-builder": {
+  "stringBuilder": {
     "type": "github",
     "owner": "bqio",
     "repo": "deno-string-builder",
