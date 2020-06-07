@@ -7,11 +7,10 @@ import Highlight, { Prism } from "prism-react-renderer";
 import light from "prism-react-renderer/themes/github";
 import { useLayoutEffect } from "react";
 
-import PrismRust from "./prism-rust";
-import PrismToml from "./prism-toml";
+(typeof global !== "undefined" ? global : (window as any)).Prism = Prism;
 
-PrismRust(Prism);
-PrismToml(Prism);
+require("prismjs/components/prism-rust");
+require("prismjs/components/prism-toml");
 
 export interface CodeBlockProps {
   code: string;
@@ -28,8 +27,8 @@ export interface CodeBlockProps {
     | "shell"
     | "text"
     | "rust"
-    | "toml"
     | "python"
+    | "toml"
     | "wasm"
     | "makefile"
     | "dockerfile";
@@ -77,6 +76,7 @@ export const RawCodeBlock = ({
       Prism={Prism}
       theme={light}
       code={code}
+      // @ts-ignore
       language={
         language === "shell" ? "bash" : language === "text" ? "diff" : language
       }
