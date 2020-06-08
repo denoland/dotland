@@ -2814,7 +2814,7 @@
     "repo": "deno-redis",
     "desc": "An experimental implementation of redis client for deno"
   },
-  "remove-forever": {
+  "remove_forever": {
     "type": "github",
     "owner": "oganexon",
     "repo": "deno-remove-forever",
