@@ -330,17 +330,17 @@
     "repo": "deno-caught",
     "desc": "This module lets you attach empty rejection handlers to promises to avoid errors when we want to handle rejections asynchronously."
   },
-  "centroid": {
-    "type": "github",
-    "owner": "themost-framework",
-    "repo": "centroid",
-    "desc": "Build scalable web applications and services with MOST Web Framework Centroid, a next-gen MVC framework for Deno."
-  },
   "census": {
     "type": "github",
     "owner": "being-curious",
     "repo": "census",
     "desc": "Count modules in https://deno.land/x."
+  },
+  "centroid": {
+    "type": "github",
+    "owner": "themost-framework",
+    "repo": "centroid",
+    "desc": "Build scalable web applications and services with MOST Web Framework Centroid, a next-gen MVC framework for Deno."
   },
   "chacha20": {
     "type": "github",
