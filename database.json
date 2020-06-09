@@ -3673,6 +3673,12 @@
     "repo": "deno_webview",
     "desc": "Deno bindings for webview, a tiny library for creating web-based desktop GUIs "
   },
+  "win_taskkill": {
+    "type": "github",
+    "owner": "rjoydip",
+    "repo": "win_taskkill",
+    "desc": "Wrapper for the Windows `taskkill` command. Ends one or more tasks or processes."
+  },
   "win_tasklist": {
     "type": "github",
     "owner": "rjoydip",
