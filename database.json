@@ -3372,6 +3372,12 @@
     "repo": "Trex",
     "desc": "Package management for deno like npm"
   },
+  "troodon": {
+    "type": "github",
+    "owner": "shandysiswandi",
+    "repo": "troodon",
+    "desc": "Troodon is a lightweight Deno Library to Handle Algorithms"
+  },
   "tweetnacl_deno": {
     "type": "github",
     "owner": "dr-useless",
