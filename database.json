@@ -47,6 +47,12 @@
     "repo": "airtable-deno",
     "desc": "Unofficial Airtable Client for Deno"
   },
+  "ako": {
+    "type": "github",
+    "owner": "ako-deno",
+    "repo": "ako",
+    "desc": "Expressive HTTP middleware framework for deno using async functions. Aiming to port Koa to Deno."
+  },
   "alosaur": {
     "type": "github",
     "owner": "irustm",
