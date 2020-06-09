@@ -2802,6 +2802,18 @@
     "repo": "random",
     "desc": "Random - ES Module for Deno, Node and Web"
   },
+  "random_float": {
+    "type": "github",
+    "owner": "yg",
+    "repo": "random-float",
+    "desc": "Generate a random float in deno"
+  },
+  "random_int": {
+    "type": "github",
+    "owner": "yg",
+    "repo": "random-int",
+    "desc": "Generate a random integer in deno"
+  },
   "random_interval": {
     "type": "github",
     "owner": "zekth",
