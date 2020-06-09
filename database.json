@@ -1252,6 +1252,12 @@
     "repo": "download",
     "desc": "Deno fetch api based module to download file from a URL."
   },
+  "dpm": {
+    "type": "github",
+    "owner": "MartonDev",
+    "repo": "dpm",
+    "desc": "3rd party Deno Package Manager CLI tool for savages"
+  },
   "dpng": {
     "type": "github",
     "owner": "MartonDev",
