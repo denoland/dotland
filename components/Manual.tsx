@@ -11,7 +11,6 @@ import {
 } from "../util/manual_utils";
 import Markdown from "./Markdown";
 import Transition from "./Transition";
-import { metaDescription } from "../pages";
 
 const denoEntry = findEntry("deno");
 
@@ -80,11 +79,6 @@ function Manual() {
 
   const [content, setContent] = useState<string | null>(null);
   const [versions, setVersions] = useState<string[] | null | undefined>();
-
-  const partialContent = useMemo(
-    () => content?.split(" ").slice(0, 20).join(""),
-    [content]
-  );
 
   useEffect(() => {
     getTableOfContents(version ?? "master")
@@ -172,12 +166,6 @@ function Manual() {
     <div>
       <Head>
         <title>Manual | Deno</title>
-        {metaDescription({
-          title: "The Deno Manual",
-          description: partialContent || "The Deno Manual",
-          url: "https://deno.land/manual",
-          image: "https://deno.land/v1_wide.jpg",
-        })}
       </Head>
       <div className="h-screen flex overflow-hidden">
         <Transition show={showSidebar}>
