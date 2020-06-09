@@ -184,6 +184,7 @@
     "type": "github",
     "owner": "patrickkunka",
     "repo": "bandwidth-throttle-stream",
+    "path": "/lib",
     "desc": "A transform stream for throttling bandwidth"
   },
   "base64": {
