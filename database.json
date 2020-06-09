@@ -47,6 +47,12 @@
     "repo": "airtable-deno",
     "desc": "Unofficial Airtable Client for Deno"
   },
+  "ako": {
+    "type": "github",
+    "owner": "ako-deno",
+    "repo": "ako",
+    "desc": "Expressive HTTP middleware framework for deno using async functions. Aiming to port Koa to Deno."
+  },
   "alosaur": {
     "type": "github",
     "owner": "irustm",
@@ -1258,6 +1264,12 @@
     "repo": "download",
     "desc": "Deno fetch api based module to download file from a URL."
   },
+  "dpm": {
+    "type": "github",
+    "owner": "MartonDev",
+    "repo": "dpm",
+    "desc": "3rd party Deno Package Manager CLI tool for savages"
+  },
   "dpng": {
     "type": "github",
     "owner": "MartonDev",
@@ -1969,6 +1981,12 @@
     "repo": "keycode-js",
     "desc": "A minimal JavaScript package with key code constants."
   },
+  "keypress": {
+    "type": "github",
+    "owner": "dmitriytat",
+    "repo": "keypress",
+    "desc": "Deno keypress stdin reader."
+  },
   "kia": {
     "type": "github",
     "owner": "HarryPeach",
@@ -2489,6 +2507,12 @@
     "repo": "organ",
     "desc": "Logging middleware for the Oak framework, based on the morgan middleware for ExpressJS."
   },
+  "otpauth": {
+    "type": "github",
+    "owner": "hectorm",
+    "repo": "otpauth",
+    "desc": "One Time Password (HOTP/TOTP) library for Node.js, Deno and browsers."
+  },
   "pagic": {
     "type": "github",
     "owner": "xcatliu",
@@ -2783,6 +2807,18 @@
     "owner": "vincentvictoria",
     "repo": "random",
     "desc": "Random - ES Module for Deno, Node and Web"
+  },
+  "random_float": {
+    "type": "github",
+    "owner": "yg",
+    "repo": "random-float",
+    "desc": "Generate a random float in deno"
+  },
+  "random_int": {
+    "type": "github",
+    "owner": "yg",
+    "repo": "random-int",
+    "desc": "Generate a random integer in deno"
   },
   "random_interval": {
     "type": "github",
@@ -3186,6 +3222,12 @@
     "repo": "strcolors.ts",
     "desc": "FMT String Extensions for Deno"
   },
+  "stringBuilder": {
+    "type": "github",
+    "owner": "bqio",
+    "repo": "deno-string-builder",
+    "desc": "Simple string builder."
+  },
   "superdeno": {
     "type": "github",
     "owner": "asos-craigmorten",
@@ -3330,6 +3372,12 @@
     "repo": "deno_tiny_templates",
     "desc": "Deno Tiny Templates"
   },
+  "title": {
+    "type": "github",
+    "owner": "satyarohith",
+    "repo": "deno-title",
+    "desc": "Capitalize your titles as per The Chicago Manual of Style."
+  },
   "tokenizer": {
     "type": "github",
     "owner": "eliassjogreen",
@@ -3359,6 +3407,12 @@
     "owner": "crewdevio",
     "repo": "Trex",
     "desc": "Package management for deno like npm"
+  },
+  "troodon": {
+    "type": "github",
+    "owner": "shandysiswandi",
+    "repo": "troodon",
+    "desc": "Troodon is a lightweight Deno Library to Handle Algorithms"
   },
   "tweetnacl_deno": {
     "type": "github",
@@ -3624,6 +3678,12 @@
     "owner": "eliassjogreen",
     "repo": "deno_webview",
     "desc": "Deno bindings for webview, a tiny library for creating web-based desktop GUIs "
+  },
+  "win_taskkill": {
+    "type": "github",
+    "owner": "rjoydip",
+    "repo": "win_taskkill",
+    "desc": "Wrapper for the Windows `taskkill` command. Ends one or more tasks or processes."
   },
   "win_tasklist": {
     "type": "github",
