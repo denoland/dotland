@@ -3354,6 +3354,12 @@
     "repo": "Trex",
     "desc": "Package management for deno like npm"
   },
+  "ts_serialize": {
+    "type": "github",
+    "owner": "GameBridgeAI",
+    "repo": "ts_serialize",
+    "desc": "A zero dependency library for serializing data"
+  },
   "tweetnacl_deno": {
     "type": "github",
     "owner": "dr-useless",
