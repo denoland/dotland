@@ -2501,6 +2501,12 @@
     "repo": "organ",
     "desc": "Logging middleware for the Oak framework, based on the morgan middleware for ExpressJS."
   },
+  "otpauth": {
+    "type": "github",
+    "owner": "hectorm",
+    "repo": "otpauth",
+    "desc": "One Time Password (HOTP/TOTP) library for Node.js, Deno and browsers."
+  },
   "pagic": {
     "type": "github",
     "owner": "xcatliu",
