@@ -3330,6 +3330,12 @@
     "repo": "deno_tiny_templates",
     "desc": "Deno Tiny Templates"
   },
+  "title": {
+    "type": "github",
+    "owner": "satyarohith",
+    "repo": "deno-title",
+    "desc": "Capitalize your titles as per The Chicago Manual of Style."
+  },
   "tokenizer": {
     "type": "github",
     "owner": "eliassjogreen",
