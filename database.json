@@ -723,7 +723,7 @@
     "repo": "deno",
     "desc": "A secure runtime for JavaScript and TypeScript."
   },
-  "deno-swagger-doc": {
+  "deno_swagger_doc": {
     "type": "github",
     "owner": "singhcool",
     "repo": "deno-swagger-doc",
