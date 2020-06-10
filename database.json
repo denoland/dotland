@@ -723,12 +723,6 @@
     "repo": "deno",
     "desc": "A secure runtime for JavaScript and TypeScript."
   },
-  "deno_swagger_doc": {
-    "type": "github",
-    "owner": "singhcool",
-    "repo": "deno-swagger-doc",
-    "desc": "Document your code and keep a live and reusable OpenAPI (Swagger) specification."
-  },
   "deno_app_setuper": {
     "type": "github",
     "owner": "alreadyExisted",
@@ -926,6 +920,12 @@
     "owner": "Yamboy1",
     "repo": "deno-structured-logging",
     "desc": "A structured logging module for Deno"
+  },
+  "deno_swagger_doc": {
+    "type": "github",
+    "owner": "singhcool",
+    "repo": "deno-swagger-doc",
+    "desc": "Document your code and keep a live and reusable OpenAPI (Swagger) specification."
   },
   "deno_twitter_api": {
     "type": "github",
