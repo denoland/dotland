@@ -1570,7 +1570,7 @@
     "type": "github",
     "owner": "franckLdx",
     "repo": "fs_cli",
-    "desc": "A deno command line tool to handle directories and files. It aims to be use in automated scripts."
+    "desc": "A deno command line tool to handle directories and files. Inspired by rimraf and mkdirp, fs-cli aims to write build scripts that can run under any shells."
   },
   "funky": {
     "type": "github",
