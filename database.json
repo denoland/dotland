@@ -2862,6 +2862,12 @@
     "repo": "deno-redis",
     "desc": "An experimental implementation of redis client for deno"
   },
+  "remove_forever": {
+    "type": "github",
+    "owner": "oganexon",
+    "repo": "deno-remove-forever",
+    "desc": "Data erasure solution for files on deno 🦕"
+  },
   "reno": {
     "type": "github",
     "owner": "reno-router",
