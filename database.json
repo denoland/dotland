@@ -2532,6 +2532,12 @@
     "repo": "opine",
     "desc": "Fast, minimalist web framework for Deno ported from ExpressJS."
   },
+  "opineHttpProxy": {
+    "type": "github",
+    "owner": "asos-craigmorten",
+    "repo": "opine-http-proxy",
+    "desc": "Proxy middleware for Opine HTTP servers."
+  },
   "organ": {
     "type": "github",
     "owner": "denjucks",
