@@ -355,6 +355,12 @@
     "repo": "census",
     "desc": "Count modules in https://deno.land/x."
   },
+  "centroid": {
+    "type": "github",
+    "owner": "themost-framework",
+    "repo": "centroid",
+    "desc": "Build scalable web applications and services with MOST Web Framework Centroid, a next-gen MVC framework for Deno."
+  },
   "chacha20": {
     "type": "github",
     "owner": "chiefbiiko",
