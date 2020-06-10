@@ -1,6 +1,6 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import React, { useMemo } from "react";
+import React, { useMemo, ChangeEvent } from "react";
 import Link from "next/link";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -8,9 +8,14 @@ import { entries } from "../../util/registry_utils";
 import InlineCode from "../../components/InlineCode";
 
 import Head from "next/head";
+import { debounce } from "../../util/debounce";
 
 const ThirdPartyRegistryList = () => {
   const [query, setQuery] = React.useState("");
+
+  function handleSearchInput(event: ChangeEvent<HTMLInputElement>) {
+    setQuery(event.target.value);
+  }
 
   const list = useMemo(
     () =>
@@ -92,7 +97,7 @@ const ThirdPartyRegistryList = () => {
                 type="text"
                 placeholder="Search"
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={debounce(handleSearchInput)}
               />
             </div>
           </div>
