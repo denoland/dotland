@@ -186,6 +186,13 @@
     "repo": "azure-functions-deno-worker",
     "desc": "Deno on Azure Functions"
   },
+  "bandwidth_throttle_stream": {
+    "type": "github",
+    "owner": "patrickkunka",
+    "repo": "bandwidth-throttle-stream",
+    "path": "/lib",
+    "desc": "A transform stream for throttling bandwidth"
+  },
   "base64": {
     "type": "github",
     "owner": "chiefbiiko",
