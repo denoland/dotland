@@ -1150,6 +1150,12 @@
     "repo": "dexecutor",
     "desc": "An SQL query executor that supports MySql, MariaDB, Postgres, and Sqlite"
   },
+  "dexr": {
+    "type": "github",
+    "owner": "AkifumiSato",
+    "repo": "dexr",
+    "desc": "A small library for server side rendering of React."
+  },
   "di": {
     "type": "github",
     "owner": "luvies",
