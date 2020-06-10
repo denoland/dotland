@@ -3369,9 +3369,9 @@
   },
   "telegram": {
     "type": "github",
-    "owner": "stanislavstrelnikov",
-    "repo": "deno-telegram",
-    "desc": "Telegram Bot API"
+    "owner": "denogram",
+    "repo": "denogram",
+    "desc": "A Telegram Bot framework"
   },
   "termcolorizer": {
     "type": "github",
