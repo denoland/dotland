@@ -265,7 +265,7 @@ for await (const req of s) {
                 <h4 className="text-lg font-bold">{s.name}</h4>
                 <p
                   className="whitespace-normal break-words text-gray-700 mt-2 overflow-hidden"
-                  style={{ textOverflow: "ellipsis", minHeight: "4.5em", webkitLineClamp: "3", webkitBoxOrient: "vertical", display: "-webkit-box" }}
+                  style={{ textOverflow: "ellipsis", minHeight: "4.5em", WebkitLineClamp: "3", WebkitBoxOrient: "vertical", display: "-webkit-box" }}
                 >
                   {s.desc}
                 </p>
