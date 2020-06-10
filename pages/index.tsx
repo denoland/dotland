@@ -264,8 +264,8 @@ for await (const req of s) {
               >
                 <h4 className="text-lg font-bold">{s.name}</h4>
                 <p
-                  className="whitespace-normal break-words text-gray-700 mt-2"
-                  style={{ textOverflow: "ellipsis" }}
+                  className="whitespace-normal break-words text-gray-700 mt-2 overflow-hidden"
+                  style={{ textOverflow: "ellipsis", minHeight: "4.5em", webkitLineClamp: "3", webkitBoxOrient: "vertical", display: "-webkit-box" }}
                 >
                   {s.desc}
                 </p>
@@ -374,8 +374,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
     const entry = entries[name];
     if (
       entry &&
-      entry.desc.length >= 70 &&
-      entry.desc.length <= 90 &&
+      entry.desc.length >= 10 &&
       name !== "std" &&
       name !== "std_old"
     ) {
