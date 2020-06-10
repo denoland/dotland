@@ -933,6 +933,12 @@
     "repo": "deno_twitter_api",
     "desc": "A module to make accessing the Twitter Developer Api easy"
   },
+  "deno_util": {
+    "type": "github",
+    "owner": "deepakshrma",
+    "repo": "deno_util",
+    "desc": "A collection of util libraries for Deno like logger [supports color, format, level], prompts [password]"
+  },
   "deno_validator": {
     "type": "github",
     "owner": "parasg1999",
