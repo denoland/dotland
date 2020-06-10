@@ -257,7 +257,7 @@ for await (const req of s) {
         </div>
         <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 my-8">
           {thirdPartySelection?.map((s, i) => (
-            <Link href="/x/[identifier]" as={`/x/${s.name}`}>
+            <Link key={i} href="/x/[identifier]" as={`/x/${s.name}`}>
               <a
                 className="rounded-lg bg-white shadow border border-gray-100 p-4 overflow-hidden hover:shadow-sm transition duration-75 ease-in-out cursor-pointer  "
                 key={i}
