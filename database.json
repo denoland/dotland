@@ -2513,6 +2513,12 @@
     "repo": "middleware",
     "desc": "A collection of middleware for the oak middleware framework."
   },
+  "oak_middlewares": {
+    "type": "github",
+    "owner": "deepakshrma",
+    "repo": "oak_middlewares",
+    "desc": "A non official collection of Custom middlewares for oak server[https://github.com/oakserver/oak]"
+  },
   "observable": {
     "type": "github",
     "owner": "bsunderhus",
