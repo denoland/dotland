@@ -16,7 +16,7 @@ interface SimpleEntry {
   desc: string;
 }
 interface HomeProps {
-  thirdPartyEntries: SimpleEntry[];
+  thirdPartyEntryPool: SimpleEntry[];
   latestStd: string;
 }
 
