@@ -2290,6 +2290,12 @@
     "repo": "mith_router",
     "desc": "Routing system for Mith framework"
   },
+  "mith_static": {
+    "type": "github",
+    "owner": "jwebcoder",
+    "repo": "mith_static",
+    "desc": "Serve static files under Mith framework"
+  },
   "mixins": {
     "type": "github",
     "owner": "udibo",
