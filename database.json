@@ -880,6 +880,12 @@
     "repo": "deno-log",
     "desc": "Lightweight logger with an extensible configuration 🦕"
   },
+  "deno_markdown": {
+    "type": "github",
+    "owner": "jasonhughes94",
+    "repo": "deno-markdown",
+    "desc": "Generate markdown files with ease 🦕"
+  },
   "deno_matrix": {
     "type": "github",
     "owner": "anirudhgiri",
