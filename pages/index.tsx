@@ -21,8 +21,9 @@ interface HomeProps {
 }
 
 const NUM_THIRD_PARTY = 12;
+const POOL_NUM_THIRD_PARTY = 50;
 
-const Home: NextPage<HomeProps> = ({ thirdPartyEntries, latestStd }) => {
+const Home: NextPage<HomeProps> = ({ thirdPartyEntryPool, latestStd }) => {
   const complexExampleProgram = `import { serve } from "https://deno.land/std@${latestStd}/http/server.ts";
 const s = serve({ port: 8000 });
 console.log("http://localhost:8000/");
@@ -36,9 +37,9 @@ for await (const req of s) {
   useEffect(() => {
     const thirdPartySelection = [];
     for (let i = 0; i < NUM_THIRD_PARTY; i++) {
-      const s = Math.floor(thirdPartyEntries.length * Math.random());
-      thirdPartySelection.push(thirdPartyEntries[s]);
-      thirdPartyEntries.splice(s, 1);
+      const s = Math.floor(thirdPartyEntryPool.length * Math.random());
+      thirdPartySelection.push(thirdPartyEntryPool[s]);
+      thirdPartyEntryPool.splice(s, 1);
     }
     setThirdPartySelection(thirdPartySelection);
   }, []);
@@ -385,8 +386,15 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
     }
   });
 
+  const thirdPartyEntryPool = [];
+  for (let i = 0; i < POOL_NUM_THIRD_PARTY; i++) {
+    const s = Math.floor(thirdPartyEntries.length * Math.random());
+    thirdPartyEntryPool.push(thirdPartyEntries[s]);
+    thirdPartyEntries.splice(s, 1);
+  }
+
   return {
-    props: { thirdPartyEntries, latestStd: stdVersions[0] },
+    props: { thirdPartyEntryPool, latestStd: stdVersions[0] },
   };
 };
 
