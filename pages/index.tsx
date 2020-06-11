@@ -16,13 +16,14 @@ interface SimpleEntry {
   desc: string;
 }
 interface HomeProps {
-  thirdPartyEntries: SimpleEntry[];
+  thirdPartyEntryPool: SimpleEntry[];
   latestStd: string;
 }
 
 const NUM_THIRD_PARTY = 12;
+const POOL_NUM_THIRD_PARTY = 50;
 
-const Home: NextPage<HomeProps> = ({ thirdPartyEntries, latestStd }) => {
+const Home: NextPage<HomeProps> = ({ thirdPartyEntryPool, latestStd }) => {
   const complexExampleProgram = `import { serve } from "https://deno.land/std@${latestStd}/http/server.ts";
 const s = serve({ port: 8000 });
 console.log("http://localhost:8000/");
@@ -34,13 +35,9 @@ for await (const req of s) {
     SimpleEntry[] | null
   >(null);
   useEffect(() => {
-    const thirdPartySelection = [];
-    for (let i = 0; i < NUM_THIRD_PARTY; i++) {
-      const s = Math.floor(thirdPartyEntries.length * Math.random());
-      thirdPartySelection.push(thirdPartyEntries[s]);
-      thirdPartyEntries.splice(s, 1);
-    }
-    setThirdPartySelection(thirdPartySelection);
+    setThirdPartySelection(
+      RandomEntriesFromArray(thirdPartyEntryPool, NUM_THIRD_PARTY)
+    );
   }, []);
 
   return (
@@ -264,8 +261,14 @@ for await (const req of s) {
               >
                 <h4 className="text-lg font-bold">{s.name}</h4>
                 <p
-                  className="whitespace-normal break-words text-gray-700 mt-2"
-                  style={{ textOverflow: "ellipsis" }}
+                  className="whitespace-normal break-words text-gray-700 mt-2 overflow-hidden"
+                  style={{
+                    textOverflow: "ellipsis",
+                    minHeight: "4.5em",
+                    WebkitLineClamp: 3,
+                    WebkitBoxOrient: "vertical",
+                    display: "-webkit-box",
+                  }}
                 >
                   {s.desc}
                 </p>
@@ -367,6 +370,19 @@ const InstallSection = () => {
   );
 };
 
+const RandomEntriesFromArray = (sourceArray: SimpleEntry[], count: number) => {
+  const source = sourceArray;
+  const selection = [];
+
+  for (let i = 0; i < Math.min(count, source.length); i++) {
+    const s = Math.floor(sourceArray.length * Math.random());
+    selection.push(sourceArray[s]);
+    source.splice(s, 1);
+  }
+
+  return selection;
+};
+
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const thirdPartyEntries: SimpleEntry[] = [];
 
@@ -374,8 +390,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
     const entry = entries[name];
     if (
       entry &&
-      entry.desc.length >= 70 &&
-      entry.desc.length <= 90 &&
+      entry.desc.length >= 10 &&
       name !== "std" &&
       name !== "std_old"
     ) {
@@ -387,7 +402,13 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   });
 
   return {
-    props: { thirdPartyEntries, latestStd: stdVersions[0] },
+    props: {
+      thirdPartyEntryPool: RandomEntriesFromArray(
+        thirdPartyEntries,
+        POOL_NUM_THIRD_PARTY
+      ),
+      latestStd: stdVersions[0],
+    },
   };
 };
 
