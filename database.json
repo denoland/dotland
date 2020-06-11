@@ -3517,6 +3517,12 @@
     "repo": "typescript",
     "desc": "TypeScript is a superset of JavaScript that compiles to clean JavaScript output."
   },
+  "uapi": {
+    "type": "github",
+    "owner": "shynome",
+    "repo": "uapi",
+    "desc": "your serverless framework with typescript base on deno"
+  },
   "udd": {
     "type": "github",
     "owner": "hayd",
