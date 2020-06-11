@@ -35,13 +35,9 @@ for await (const req of s) {
     SimpleEntry[] | null
   >(null);
   useEffect(() => {
-    const thirdPartySelection = [];
-    for (let i = 0; i < NUM_THIRD_PARTY; i++) {
-      const s = Math.floor(thirdPartyEntryPool.length * Math.random());
-      thirdPartySelection.push(thirdPartyEntryPool[s]);
-      thirdPartyEntryPool.splice(s, 1);
-    }
-    setThirdPartySelection(thirdPartySelection);
+    setThirdPartySelection(
+      RandomEntriesFromArray(thirdPartyEntryPool, NUM_THIRD_PARTY)
+    );
   }, []);
 
   return (
@@ -266,7 +262,13 @@ for await (const req of s) {
                 <h4 className="text-lg font-bold">{s.name}</h4>
                 <p
                   className="whitespace-normal break-words text-gray-700 mt-2 overflow-hidden"
-                  style={{ textOverflow: "ellipsis", minHeight: "4.5em", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", display: "-webkit-box" }}
+                  style={{
+                    textOverflow: "ellipsis",
+                    minHeight: "4.5em",
+                    WebkitLineClamp: 3,
+                    WebkitBoxOrient: "vertical",
+                    display: "-webkit-box",
+                  }}
                 >
                   {s.desc}
                 </p>
@@ -368,6 +370,19 @@ const InstallSection = () => {
   );
 };
 
+const RandomEntriesFromArray = (sourceArray: SimpleEntry[], count: number) => {
+  const source = sourceArray;
+  const selection = [];
+
+  for (let i = 0; i < Math.min(count, source.length); i++) {
+    const s = Math.floor(sourceArray.length * Math.random());
+    selection.push(sourceArray[s]);
+    source.splice(s, 1);
+  }
+
+  return selection;
+};
+
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const thirdPartyEntries: SimpleEntry[] = [];
 
@@ -386,15 +401,14 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
     }
   });
 
-  const thirdPartyEntryPool = [];
-  for (let i = 0; i < POOL_NUM_THIRD_PARTY; i++) {
-    const s = Math.floor(thirdPartyEntries.length * Math.random());
-    thirdPartyEntryPool.push(thirdPartyEntries[s]);
-    thirdPartyEntries.splice(s, 1);
-  }
-
   return {
-    props: { thirdPartyEntryPool, latestStd: stdVersions[0] },
+    props: {
+      thirdPartyEntryPool: RandomEntriesFromArray(
+        thirdPartyEntries,
+        POOL_NUM_THIRD_PARTY
+      ),
+      latestStd: stdVersions[0],
+    },
   };
 };
 
