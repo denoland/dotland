@@ -1505,6 +1505,12 @@
     "repo": "expect",
     "desc": "A deno implementation of expect in order to write tests in a more jest like style."
   },
+  "explicitly": {
+    "type": "github",
+    "owner": "robdwaller",
+    "repo": "explicitly",
+    "desc": "Additional assertions for Deno so developers can write more explicit unit tests."
+  },
   "fae": {
     "type": "github",
     "owner": "Jozty",
