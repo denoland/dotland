@@ -1585,6 +1585,12 @@
     "repo": "flowed",
     "desc": "A fast and reliable flow manager and task runner for Node.js and web browsers"
   },
+  "flux_annotated_csv_parser": {
+    "type": "github",
+    "owner": "tiagostutz",
+    "repo": "annotated-csv-parser",
+    "desc": "Flux Annotated CSV Parser"
+  },
   "fossil": {
     "type": "github",
     "owner": "matteocrippa",
