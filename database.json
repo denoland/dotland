@@ -1531,9 +1531,9 @@
   },
   "fastro": {
     "type": "github",
-    "owner": "fastrojs",
-    "repo": "fastro-server",
-    "desc": "deno fast web framework"
+    "owner": "fastrodev",
+    "repo": "fastro",
+    "desc": "Simple & fast web framework for deno."
   },
   "favQuote_cli": {
     "desc": "Get favourite or random quote cli",
