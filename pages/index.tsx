@@ -6,6 +6,7 @@ import Link from "next/link";
 import CodeBlock from "../components/CodeBlock";
 import Footer from "../components/Footer";
 import { entries } from "../util/registry_utils";
+import stdVersions from "../deno_std_versions.json";
 import { NextPage, GetStaticProps } from "next";
 import InlineCode from "../components/InlineCode";
 import Header from "../components/Header";
@@ -15,40 +16,34 @@ interface SimpleEntry {
   desc: string;
 }
 interface HomeProps {
-  thirdPartyEntries: SimpleEntry[];
+  thirdPartyEntryPool: SimpleEntry[];
+  latestStd: string;
 }
 
 const NUM_THIRD_PARTY = 12;
+const POOL_NUM_THIRD_PARTY = 50;
 
-export const complexExampleProgram = `import { serve } from "https://deno.land/std@0.50.0/http/server.ts";
+const Home: NextPage<HomeProps> = ({ thirdPartyEntryPool, latestStd }) => {
+  const complexExampleProgram = `import { serve } from "https://deno.land/std@${latestStd}/http/server.ts";
 const s = serve({ port: 8000 });
 console.log("http://localhost:8000/");
 for await (const req of s) {
   req.respond({ body: "Hello World\\n" });
 }`;
 
-const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
   const [thirdPartySelection, setThirdPartySelection] = useState<
     SimpleEntry[] | null
   >(null);
   useEffect(() => {
-    const thirdPartySelection = [];
-    for (let i = 0; i < NUM_THIRD_PARTY; i++) {
-      const s = Math.floor(thirdPartyEntries.length * Math.random());
-      thirdPartySelection.push(thirdPartyEntries[s]);
-      thirdPartyEntries.splice(s, 1);
-    }
-    setThirdPartySelection(thirdPartySelection);
+    setThirdPartySelection(
+      RandomEntriesFromArray(thirdPartyEntryPool, NUM_THIRD_PARTY)
+    );
   }, []);
 
   return (
     <>
       <Head>
         <title>Deno</title>
-        <meta
-          name="description"
-          content="Deno, a secure runtime for JavaScript and TypeScript."
-        />
       </Head>
       <div className="bg-white">
         <div className="bg-black">
@@ -259,15 +254,21 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
         </div>
         <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 my-8">
           {thirdPartySelection?.map((s, i) => (
-            <Link href="/x/[identifier]" as={`/x/${s.name}`}>
+            <Link key={i} href="/x/[identifier]" as={`/x/${s.name}`}>
               <a
                 className="rounded-lg bg-white shadow border border-gray-100 p-4 overflow-hidden hover:shadow-sm transition duration-75 ease-in-out cursor-pointer  "
                 key={i}
               >
                 <h4 className="text-lg font-bold">{s.name}</h4>
                 <p
-                  className="whitespace-normal break-words text-gray-700 mt-2"
-                  style={{ textOverflow: "ellipsis" }}
+                  className="whitespace-normal break-words text-gray-700 mt-2 overflow-hidden"
+                  style={{
+                    textOverflow: "ellipsis",
+                    minHeight: "4.5em",
+                    WebkitLineClamp: 3,
+                    WebkitBoxOrient: "vertical",
+                    display: "-webkit-box",
+                  }}
                 >
                   {s.desc}
                 </p>
@@ -286,7 +287,7 @@ const Home: NextPage<HomeProps> = ({ thirdPartyEntries }) => {
 const InstallSection = () => {
   const shell = (
     <div key="shell" className="my-4 text-gray-700">
-      <p className="py-2 font-bold">Using Shell (macOS, Linux):</p>
+      <p className="py-2">Shell (Mac, Linux):</p>
       <CodeBlock
         language="bash"
         code={`curl -fsSL https://deno.land/x/install/install.sh | sh`}
@@ -295,13 +296,18 @@ const InstallSection = () => {
   );
   const homebrew = (
     <div key="homebrew" className="my-4 text-gray-700">
-      <p className="mb-2 font-bold">Using Homebrew (macOS):</p>
-      <CodeBlock language="typescript" code={`brew install deno`} />
+      <p className="mb-2">
+        <a href="https://formulae.brew.sh/formula/deno" className="link">
+          Homebrew
+        </a>{" "}
+        (Mac):
+      </p>
+      <CodeBlock language="bash" code={`brew install deno`} />
     </div>
   );
   const powershell = (
     <div key="powershell" className="my-4 text-gray-700">
-      <p className="mb-2 font-bold">Using PowerShell (Windows):</p>
+      <p className="mb-2">PowerShell (Windows):</p>
       <CodeBlock
         language="bash"
         code={`iwr https://deno.land/x/install/install.ps1 -useb | iex`}
@@ -310,14 +316,30 @@ const InstallSection = () => {
   );
   const chocolatey = (
     <div key="chocolatey" className="my-4 text-gray-700">
-      <p className="mb-2 font-bold">Using Chocolatey (Windows):</p>
+      <p className="mb-2">
+        <a href="https://chocolatey.org/packages/deno" className="link">
+          Chocolatey
+        </a>{" "}
+        (Windows):
+      </p>
       <CodeBlock language="bash" code={`choco install deno`} />
     </div>
   );
   const scoop = (
     <div key="scoop" className="my-4 text-gray-700">
-      <p className="mb-2 font-bold">Using Scoop (Windows):</p>
+      <p className="mb-2">Scoop (Windows):</p>
       <CodeBlock language="bash" code={`scoop install deno`} />
+    </div>
+  );
+  const cargo = (
+    <div key="cargo" className="my-4 text-gray-700">
+      <p className="py-2">
+        Build and install from source using{" "}
+        <a href="https://crates.io/crates/deno" className="link">
+          Cargo
+        </a>
+      </p>
+      <CodeBlock language="bash" code={`cargo install deno`} />
     </div>
   );
 
@@ -336,6 +358,7 @@ const InstallSection = () => {
       {homebrew}
       {chocolatey}
       {scoop}
+      {cargo}
       <p className="my-4 text-gray-700">
         See{" "}
         <a className="link" href="https://github.com/denoland/deno_install">
@@ -347,6 +370,19 @@ const InstallSection = () => {
   );
 };
 
+const RandomEntriesFromArray = (sourceArray: SimpleEntry[], count: number) => {
+  const source = sourceArray;
+  const selection = [];
+
+  for (let i = 0; i < Math.min(count, source.length); i++) {
+    const s = Math.floor(sourceArray.length * Math.random());
+    selection.push(sourceArray[s]);
+    source.splice(s, 1);
+  }
+
+  return selection;
+};
+
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const thirdPartyEntries: SimpleEntry[] = [];
 
@@ -354,8 +390,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
     const entry = entries[name];
     if (
       entry &&
-      entry.desc.length >= 70 &&
-      entry.desc.length <= 90 &&
+      entry.desc.length >= 10 &&
       name !== "std" &&
       name !== "std_old"
     ) {
@@ -367,7 +402,13 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   });
 
   return {
-    props: { thirdPartyEntries },
+    props: {
+      thirdPartyEntryPool: RandomEntriesFromArray(
+        thirdPartyEntries,
+        POOL_NUM_THIRD_PARTY
+      ),
+      latestStd: stdVersions[0],
+    },
   };
 };
 

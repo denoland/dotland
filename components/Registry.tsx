@@ -170,9 +170,9 @@ const Registry = () => {
       <Head>
         <title>
           {name}
-          {version && `@${version}`} - deno.land/x
+          {version ? `@${version}` : ""}
+          {" | Deno"}
         </title>
-        <meta name="description" content="A third party module for Deno." />
       </Head>
       <div className="bg-gray-50 min-h-full">
         <Header
@@ -193,7 +193,10 @@ const Registry = () => {
               onChange={gotoVersion}
             />
             {(() => {
-              if (!dirEntries && !raw) {
+              if (
+                (dirEntries === undefined || dirEntries === null) &&
+                (raw === undefined || raw === null)
+              ) {
                 if (dirEntries === null && raw === null) {
                   return (
                     <ErrorMessage
@@ -227,33 +230,29 @@ const Registry = () => {
                 title="Failed to get directory listing"
                 body={dirEntries.message}
               />
-            ) : (
-              dirEntries && (
-                <DirectoryListing
-                  dirEntries={dirEntries}
-                  repositoryURL={repositoryURL}
-                  name={name}
-                  version={version}
-                  path={path}
-                />
-              )
-            )}
+            ) : dirEntries !== undefined && dirEntries !== null ? (
+              <DirectoryListing
+                dirEntries={dirEntries}
+                repositoryURL={repositoryURL}
+                name={name}
+                version={version}
+                path={path}
+              />
+            ) : null}
             {raw instanceof RegistryError ? (
               <ErrorMessage title="Failed to get raw file" body={raw.message} />
-            ) : (
-              raw && (
-                <div className="mt-4">
-                  <FileDisplay
-                    raw={raw}
-                    canonicalPath={canonicalPath}
-                    sourceURL={sourceURL!}
-                    repositoryURL={repositoryURL}
-                    documentationURL={documentationURL}
-                  />
-                </div>
-              )
-            )}
-            {readme && (
+            ) : typeof raw === "string" ? (
+              <div className="mt-4">
+                <FileDisplay
+                  raw={raw}
+                  canonicalPath={canonicalPath}
+                  sourceURL={sourceURL!}
+                  repositoryURL={repositoryURL}
+                  documentationURL={documentationURL}
+                />
+              </div>
+            ) : null}
+            {typeof readme === "string" ? (
               <div className="mt-4">
                 <FileDisplay
                   raw={readme}
@@ -262,7 +261,7 @@ const Registry = () => {
                   repositoryURL={readmeRepositoryURL}
                 />
               </div>
-            )}
+            ) : null}
           </div>
         </div>
         <Footer simple />
@@ -471,13 +470,7 @@ function DirectoryListing(props: {
                                 case "file":
                                   if (isReadme(entry.name)) {
                                     return (
-                                      <svg
-                                        fill="currentColor"
-                                        viewBox="0 0 20 20"
-                                        className="w-6 h-6 text-gray-400 inline-block mr-2 group-hover:text-blue-300 transition duration-100 ease-in-out"
-                                      >
-                                        <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
-                                      </svg>
+                                      <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
                                     );
                                   }
                                   return (
@@ -512,9 +505,9 @@ function DirectoryListing(props: {
                           {entry.name}
                         </td>
                         <td className="px-4 py-1 whitespace-no-wrap text-sm leading-5 text-gray-500 text-right">
-                          {entry.size !== undefined
+                          {entry.type !== "dir" && entry.size
                             ? bytesToSize(entry.size)
-                            : "N/A"}
+                            : ""}
                         </td>
                       </tr>
                     </Link>

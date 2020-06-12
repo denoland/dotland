@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter, Router } from "next/router";
 import { parseNameVersion, findEntry } from "../util/registry_utils";
 import {
   TableOfContents,
   getTableOfContents,
   getFileURL,
+  getDocURL,
 } from "../util/manual_utils";
 import Markdown from "./Markdown";
 import Transition from "./Transition";
@@ -43,6 +44,34 @@ function Manual() {
 
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
 
+  const hideSidebar = () => setShowSidebar(false);
+
+  const manualEl = useRef<HTMLElement>(null);
+
+  const handleRouteChange = (url: string) => {
+    manualEl.current?.scrollTo(0, 0);
+    setPageIndex(pageList.findIndex((page) => page.path === url));
+  };
+
+  useEffect(() => {
+    Router.events.on("routeChangeStart", hideSidebar);
+    Router.events.on("routeChangeComplete", handleRouteChange);
+
+    return () => {
+      Router.events.off("routeChangeStart", hideSidebar);
+      Router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  });
+
+  const scrollTOCIntoView = () =>
+    document.getElementsByClassName("toc-active")[0]?.scrollIntoView();
+
+  useEffect(() => {
+    if (showSidebar) {
+      scrollTOCIntoView();
+    }
+  }, [showSidebar]);
+
   const [
     tableOfContents,
     setTableOfContents,
@@ -54,11 +83,38 @@ function Manual() {
   useEffect(() => {
     getTableOfContents(version ?? "master")
       .then(setTableOfContents)
+      .then(scrollTOCIntoView)
       .catch((e) => {
         console.error("Failed to fetch table of contents:", e);
         setTableOfContents(null);
       });
   }, [version]);
+
+  const [pageIndex, setPageIndex] = useState(0);
+  const [pageList, setPageList] = useState<
+    Array<{ path: string; name: string }>
+  >([]);
+
+  useEffect(() => {
+    if (tableOfContents) {
+      const tempList: Array<{ path: string; name: string }> = [];
+
+      Object.entries(tableOfContents).map(([slug, entry]) => {
+        tempList.push({ path: `/manual/${slug}`, name: entry.name });
+
+        if (entry.children) {
+          Object.entries(entry.children).map(([childSlug, name]) =>
+            tempList.push({ path: `/manual/${slug}/${childSlug}`, name })
+          );
+        }
+      });
+
+      setPageList(tempList);
+      setPageIndex(
+        tempList.findIndex((page) => page.path === `/manual${path}`)
+      );
+    }
+  }, [tableOfContents]);
 
   const sourceURL = useMemo(() => getFileURL(version ?? "master", path), [
     version,
@@ -109,7 +165,7 @@ function Manual() {
   return (
     <div>
       <Head>
-        <title>The Deno Manual</title>
+        <title>Manual | Deno</title>
       </Head>
       <div className="h-screen flex overflow-hidden">
         <Transition show={showSidebar}>
@@ -124,7 +180,10 @@ function Manual() {
                 leaveTo="opacity-0"
               >
                 <div className="fixed inset-0">
-                  <div className="absolute inset-0 bg-gray-600 opacity-75"></div>
+                  <div
+                    className="absolute inset-0 bg-gray-600 opacity-75"
+                    onClick={hideSidebar}
+                  ></div>
                 </div>
               </Transition>
               <Transition
@@ -138,9 +197,10 @@ function Manual() {
                 <div className="relative flex-1 flex flex-col max-w-xs w-full bg-white">
                   <div className="absolute top-0 right-0 -mr-14 p-1">
                     <button
+                      role="button"
                       className="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600"
                       aria-label="Close sidebar"
-                      onClick={() => setShowSidebar(false)}
+                      onClick={hideSidebar}
                     >
                       <svg
                         className="h-6 w-6 text-white"
@@ -179,7 +239,11 @@ function Manual() {
                     />
                   </div>
                   {tableOfContents && (
-                    <ToC tableOfContents={tableOfContents} version={version} />
+                    <ToC
+                      tableOfContents={tableOfContents}
+                      version={version}
+                      path={path}
+                    />
                   )}
                 </div>
               </Transition>
@@ -210,20 +274,24 @@ function Manual() {
               />
             </div>
             {tableOfContents && (
-              <ToC tableOfContents={tableOfContents} version={version} />
+              <ToC
+                tableOfContents={tableOfContents}
+                version={version}
+                path={path}
+              />
             )}
           </div>
         </div>
         <div className="flex flex-col w-0 flex-1 overflow-hidden">
-          <div className="relative z-10 flex-shrink-0 flex h-16 bg-white shadow">
+          <div className="relative z-10 flex-shrink-0 flex h-16 bg-white shadow md:hidden">
             <Link href="/">
-              <a className="px-4 border-r border-gray-200 flex items-center justify-center md:hidden">
+              <a className="px-4 flex items-center justify-center md:hidden">
                 <img src="/logo.svg" alt="logo" className="w-auto h-10" />
               </a>
             </Link>
             <div className="flex-1 px-4 flex justify-between">
               <div className="flex-1 flex">
-                <div className="w-full flex md:ml-0">
+                {/* <div className="w-full flex md:ml-0">
                   <label htmlFor="search_field" className="sr-only">
                     Search
                   </label>
@@ -248,11 +316,11 @@ function Manual() {
                       type="search"
                     />
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
             <button
-              className="px-4 border-l border-gray-200 text-gray-500 focus:outline-none focus:bg-gray-100 focus:text-gray-600 md:hidden"
+              className="px-4 text-gray-500 focus:outline-none focus:bg-gray-100 focus:text-gray-600 md:hidden"
               aria-label="Open sidebar"
               onClick={() => setShowSidebar(true)}
             >
@@ -275,10 +343,57 @@ function Manual() {
           <main
             className="flex-1 relative z-0 overflow-y-auto focus:outline-none"
             tabIndex={0}
+            ref={manualEl}
           >
             <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20">
               {content ? (
-                <Markdown source={content} canonicalURL={sourceURL} />
+                <>
+                  <a
+                    href={getDocURL(version ?? "master", path)}
+                    className="text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right mt-1"
+                  >
+                    <span className="sr-only">GitHub</span>
+                    <svg
+                      className="h-6 w-6 inline"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <title>Github | Deno</title>
+                      <path
+                        fillRule="evenodd"
+                        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </a>
+                  <Markdown
+                    source={content}
+                    displayURL={location.origin + "/manual" + path}
+                    sourceURL={sourceURL}
+                  />
+                  <div className="pt-4 border-t border-gray-200">
+                    {pageIndex !== 0 && (
+                      <Link
+                        href="/[identifier]/[...path]"
+                        as={pageList[pageIndex - 1].path}
+                      >
+                        <a className="text-gray-900 hover:text-gray-600 font-normal">
+                          ← {pageList[pageIndex - 1].name}
+                        </a>
+                      </Link>
+                    )}
+                    {pageIndex !== pageList.length - 1 && (
+                      <Link
+                        href="/[identifier]/[...path]"
+                        as={pageList[pageIndex + 1].path}
+                      >
+                        <a className="text-gray-900 hover:text-gray-600 font-normal float-right">
+                          {pageList[pageIndex + 1].name} →
+                        </a>
+                      </Link>
+                    )}
+                  </div>
+                </>
               ) : (
                 <div className="w-full my-8">
                   <div className="w-4/5 sm:w-1/3 bg-gray-100 h-8"></div>
@@ -358,9 +473,11 @@ function Version({
 function ToC({
   tableOfContents,
   version,
+  path,
 }: {
   tableOfContents: TableOfContents;
   version: string | undefined;
+  path: string;
 }) {
   return (
     <div className="pt-2 pb-8 h-0 flex-1 flex flex-col overflow-y-auto">
@@ -374,7 +491,13 @@ function ToC({
                     href="/[identifier]/[...path]"
                     as={`/manual${version ? `@${version}` : ""}/${slug}`}
                   >
-                    <a className="text-gray-900 hover:text-gray-600 font-normal">
+                    <a
+                      className={`${
+                        path === `/${slug}`
+                          ? "text-blue-600 hover:text-blue-500 toc-active"
+                          : "text-gray-900 hover:text-gray-600"
+                      } font-bold`}
+                    >
                       {entry.name}
                     </a>
                   </Link>
@@ -389,7 +512,13 @@ function ToC({
                                 version ? `@${version}` : ""
                               }/${slug}/${childSlug}`}
                             >
-                              <a className="text-gray-900 hover:text-gray-600 font-normal">
+                              <a
+                                className={`${
+                                  path === `/${slug}/${childSlug}`
+                                    ? "text-blue-600 hover:text-blue-500 toc-active"
+                                    : "text-gray-900 hover:text-gray-600"
+                                } font-normal`}
+                              >
                                 {name}
                               </a>
                             </Link>

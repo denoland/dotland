@@ -45,8 +45,7 @@ const Benchmarks = () => {
   return (
     <>
       <Head>
-        <title>Benchmarks - Deno</title>
-        <meta name="description" content="Continuous benchmarks for Deno." />
+        <title>Benchmarks | Deno</title>
       </Head>
       <div className="bg-gray-50 min-h-full">
         <Header subtitle="Continuous Benchmarks" />

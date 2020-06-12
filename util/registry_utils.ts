@@ -15,6 +15,27 @@ function findDatabaseEntry(
   | URLDatabaseEntry
   | NPMDatabaseEntry
   | undefined {
+  if (name.startsWith("npm:")) {
+    const [_, packageName] = name.split(":");
+    const entry: NPMDatabaseEntry = {
+      desc: packageName,
+      package: packageName,
+      type: "npm",
+    };
+    return entry;
+  }
+
+  if (name.startsWith("gh:")) {
+    const [_, owner, repo] = name.split(":");
+    const entry: GithubDatabaseEntry = {
+      desc: `${owner}/${repo}`,
+      owner,
+      repo,
+      type: "github",
+    };
+    return entry;
+  }
+
   // @ts-ignore
   return DATABASE[name];
 }
@@ -55,6 +76,20 @@ export function fileTypeFromURL(filename: string) {
     return "jsx";
   } else if (f.endsWith(".json")) {
     return "json";
+  } else if (f.endsWith(".toml")) {
+    return "toml";
+  } else if (f.endsWith(".lock")) {
+    return "toml";
+  } else if (f.endsWith(".rs")) {
+    return "rust";
+  } else if (f.endsWith(".py")) {
+    return "python";
+  } else if (f.endsWith(".wasm")) {
+    return "wasm";
+  } else if (f.toLocaleLowerCase().endsWith("makefile")) {
+    return "makefile";
+  } else if (f.endsWith(".dockerfile") || f.endsWith("Dockerfile")) {
+    return "dockerfile";
   } else if (f.endsWith(".yml") || f.endsWith(".yaml")) {
     return "yaml";
   } else if (f.endsWith(".htm") || f.endsWith(".html")) {

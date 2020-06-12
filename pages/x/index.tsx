@@ -1,15 +1,21 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import React, { useMemo } from "react";
+import React, { useMemo, ChangeEvent } from "react";
 import Link from "next/link";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { entries } from "../../util/registry_utils";
 import InlineCode from "../../components/InlineCode";
+
 import Head from "next/head";
+import { debounce } from "../../util/debounce";
 
 const ThirdPartyRegistryList = () => {
   const [query, setQuery] = React.useState("");
+
+  function handleSearchInput(event: ChangeEvent<HTMLInputElement>) {
+    setQuery(event.target.value);
+  }
 
   const list = useMemo(
     () =>
@@ -28,24 +34,30 @@ const ThirdPartyRegistryList = () => {
   return (
     <>
       <Head>
-        <title>Deno Third Party Modules</title>
-        <meta name="description" content="Third Party Modules for Deno." />
+        <title>Third Party Modules | Deno</title>
       </Head>
       <div className="bg-gray-50 min-h-full">
         <Header subtitle="Third Party Modules" />
         <div className="">
           <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 pt-4">
             <div className="text-gray-900 mt-4 sm:mt-8 break-words">
-              <p>
+              <p className="text-gray-900 mt-4">
                 <span className="font-semibold">deno.land/x</span> is a URL
                 rewriting service for Deno scripts. The basic format of code
                 URLs is{" "}
                 <InlineCode>
                   https://deno.land/x/MODULE_NAME@BRANCH/SCRIPT.ts
                 </InlineCode>
-                . If you leave out the branch, it will default to the modules
+                . If you leave out the branch, it will default to the module’s
                 default branch, usually <InlineCode>master</InlineCode>.
               </p>
+
+              <p className="text-gray-900 mt-4">
+                Experimental: Use <InlineCode>npm:[package]</InlineCode> or
+                <InlineCode>gh:[owner]:[repo]</InlineCode> as module name to
+                resolve any arbitrary repository or npm package.
+              </p>
+
               <p className="text-gray-900 mt-4">
                 Functionality built-in to Deno is not listed here. The built-in
                 runtime is documented on{" "}
@@ -70,7 +82,9 @@ const ThirdPartyRegistryList = () => {
                 >
                   database.json
                 </a>
-                .
+                {". "}
+                Run the tests and formatting before submitting a patch - the PR
+                must be green to be considered.
               </p>
             </div>
             <div className="mt-12">
@@ -83,7 +97,7 @@ const ThirdPartyRegistryList = () => {
                 type="text"
                 placeholder="Search"
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={debounce(handleSearchInput)}
               />
             </div>
           </div>
