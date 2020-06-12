@@ -55,7 +55,7 @@ const ThirdPartyRegistryList = () => {
               <p className="text-gray-900 mt-4">
                 Experimental: Use <InlineCode>npm:[package]</InlineCode> or
                 <InlineCode>gh:[owner]:[repo]</InlineCode> as module name to
-                resolve any artibrary repository or npm package.
+                resolve any arbitrary repository or npm package.
               </p>
 
               <p className="text-gray-900 mt-4">
