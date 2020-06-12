@@ -2113,7 +2113,7 @@
   "linked-list": {
     "type": "github",
     "owner": "k-koehler",
-    "repo": "deno-linked-list",
+    "repo": "deno_linked_list",
     "desc": "Basic linked list in Deno."
   },
   "local_ip": {
