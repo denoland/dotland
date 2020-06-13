@@ -2110,6 +2110,12 @@
     "repo": "lifeson-ipsum",
     "desc": "Lorem Ipsum generator, based on Alex Lifeson's acceptance speech for Rush in 2013."
   },
+  "linked_list": {
+    "type": "github",
+    "owner": "k-koehler",
+    "repo": "deno_linked_list",
+    "desc": "Basic linked list in Deno."
+  },
   "local_ip": {
     "type": "github",
     "owner": "joakimunge",
