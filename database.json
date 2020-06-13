@@ -2228,7 +2228,7 @@
     "type": "github",
     "owner": "TheWizardBear",
     "repo": "maze_generator",
-    "desc": "A library for generating mazes."
+    "desc": "A module for generating mazes."
   },
   "md5": {
     "type": "github",
