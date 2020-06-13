@@ -2911,6 +2911,12 @@
     "repo": "deno_random_interval",
     "desc": "deno random interval"
   },
+  "ranking": {
+    "type": "github",
+    "owner": "yoshixmk",
+    "repo": "deno-x-ranking",
+    "desc": "🦕 Deno Third Party Modules Ranking 👑"
+  },
   "rcon": {
     "type": "github",
     "owner": "RisingStack",
