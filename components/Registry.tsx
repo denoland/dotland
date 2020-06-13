@@ -14,7 +14,6 @@ import Header from "./Header";
 import Footer from "./Footer";
 import FileDisplay from "./FileDisplay";
 import { DirEntry } from "../util/registries";
-import { metaDescription } from "../pages";
 import { InfoBar } from "./InfoBar";
 
 class RegistryError {
@@ -175,19 +174,6 @@ const Registry = () => {
           {version ? `@${version}` : ""}
           {" | Deno"}
         </title>
-        {metaDescription({
-          title: `deno.land${!isStd ? "/x" : ""}/${name}${
-            version ? `@${version}` : ""
-          }`,
-          description:
-            name === "std"
-              ? "The Deno standard library."
-              : "A third party module for Deno.",
-          url: `https://deno.land${!isStd ? "/x" : ""}/${name}${
-            version ? `@${version}` : ""
-          }`,
-          image: "https://deno.land/v1_wide.jpg",
-        })}
       </Head>
       <div className="bg-gray-50 min-h-full">
         <InfoBar />

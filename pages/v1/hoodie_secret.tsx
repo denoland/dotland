@@ -5,7 +5,6 @@ import Head from "next/head";
 
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import { metaDescription } from "..";
 import { InfoBar } from "../../components/InfoBar";
 
 const V1Hoodie = () => {
@@ -15,14 +14,6 @@ const V1Hoodie = () => {
     <>
       <Head>
         <title>1.0 Hoodie | Deno</title>
-
-        {metaDescription({
-          title: "Deno 1.0 Hoodie",
-          description:
-            "A limited edition, premium quality Deno 1.0 hoodie that you can order to help support the Deno project.",
-          url: "https://deno.land/v1/hoodie",
-          image: "https://deno.land/v1_wide.jpg",
-        })}
       </Head>
       <InfoBar />
       <Header />

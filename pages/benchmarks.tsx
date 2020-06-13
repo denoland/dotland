@@ -17,7 +17,6 @@ import {
   formatKB,
 } from "../util/benchmark_utils";
 import BenchmarkChart, { BenchmarkLoading } from "../components/BenchmarkChart";
-import { metaDescription } from ".";
 import { InfoBar } from "../components/InfoBar";
 
 // TODO(lucacasonato): add anchor points to headers
@@ -48,13 +47,6 @@ const Benchmarks = () => {
     <>
       <Head>
         <title>Benchmarks | Deno</title>
-
-        {metaDescription({
-          title: "Benchmarks - Deno",
-          description: "Continuous benchmarks for Deno.",
-          url: "https://deno.land/benchmarks",
-          image: "https://deno.land/v1_wide.jpg",
-        })}
       </Head>
       <div className="bg-gray-50 min-h-full">
         <InfoBar />

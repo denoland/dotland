@@ -1,18 +1,22 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import React, { useMemo } from "react";
+import React, { useMemo, ChangeEvent } from "react";
 import Link from "next/link";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { entries } from "../../util/registry_utils";
 import InlineCode from "../../components/InlineCode";
-import { metaDescription } from "../";
 
 import Head from "next/head";
 import { InfoBar } from "../../components/InfoBar";
+import { debounce } from "../../util/debounce";
 
 const ThirdPartyRegistryList = () => {
   const [query, setQuery] = React.useState("");
+
+  function handleSearchInput(event: ChangeEvent<HTMLInputElement>) {
+    setQuery(event.target.value);
+  }
 
   const list = useMemo(
     () =>
@@ -32,13 +36,6 @@ const ThirdPartyRegistryList = () => {
     <>
       <Head>
         <title>Third Party Modules | Deno</title>
-
-        {metaDescription({
-          title: "Deno Third Party Modules",
-          description: "Third Party Modules for Deno.",
-          url: "https://deno.land/x",
-          image: "https://deno.land/v1_wide.jpg",
-        })}
       </Head>
       <div className="bg-gray-50 min-h-full">
         <InfoBar />
@@ -60,7 +57,7 @@ const ThirdPartyRegistryList = () => {
               <p className="text-gray-900 mt-4">
                 Experimental: Use <InlineCode>npm:[package]</InlineCode> or
                 <InlineCode>gh:[owner]:[repo]</InlineCode> as module name to
-                resolve any artibrary repository or npm package.
+                resolve any arbitrary repository or npm package.
               </p>
 
               <p className="text-gray-900 mt-4">
@@ -102,7 +99,7 @@ const ThirdPartyRegistryList = () => {
                 type="text"
                 placeholder="Search"
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={debounce(handleSearchInput)}
               />
             </div>
           </div>
