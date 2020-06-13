@@ -3818,6 +3818,12 @@
     "repo": "youtube-deno",
     "desc": "A Deno client for the YouTube Data API v3. Lets you incorporate core YouTube features and almost any interaction with YouTube in your application."
   },
+  "yt_xml2srt": {
+    "type": "github",
+    "owner": "Aasim-A",
+    "repo": "yt_xml2srt",
+    "desc": "A tiny package to convert YouTube caption format from XML to SRT with ZERO dependencies."
+  },
   "zap": {
     "type": "github",
     "owner": "deno-nonstd",
