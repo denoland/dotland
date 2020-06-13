@@ -1303,8 +1303,8 @@
   },
   "dpm": {
     "type": "github",
-    "owner": "MartonDev",
-    "repo": "dpm",
+    "owner": "dpmland",
+    "repo": "dpm-cli",
     "desc": "3rd party Deno Package Manager CLI tool for savages"
   },
   "dpng": {
