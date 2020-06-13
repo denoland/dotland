@@ -2845,6 +2845,12 @@
     "repo": "deno-purify",
     "desc": "A deno port of purify-ts."
   },
+  "pwn": {
+    "type": "github",
+    "owner": "pitust",
+    "repo": "denopwn",
+    "desc": "A library for pwning things in deno"
+  },
   "q": {
     "type": "github",
     "owner": "phil-r",
