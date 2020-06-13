@@ -9,6 +9,7 @@ import Markdown from "../components/Markdown";
 import { GetStaticProps } from "next";
 import { promises as fs } from "fs";
 import { metaDescription } from ".";
+import { InfoBar } from "../components/InfoBar";
 
 interface Props {
   markdown: string;
@@ -27,6 +28,7 @@ const V1 = (props: Props) => {
           image: "https://deno.land/v1_wide.jpg",
         })}
       </Head>
+      <InfoBar />
       <Header />
       <div className="w-full" style={{ backgroundColor: "#2f2e2c" }}>
         <div className="max-w-screen-lg mx-auto">

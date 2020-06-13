@@ -12,6 +12,7 @@ import {
 import Markdown from "./Markdown";
 import Transition from "./Transition";
 import { metaDescription } from "../pages";
+import { InfoBar } from "./InfoBar";
 
 const denoEntry = findEntry("deno");
 
@@ -357,6 +358,7 @@ function Manual() {
             tabIndex={0}
             ref={manualEl}
           >
+            <InfoBar />
             <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20">
               {content ? (
                 <>

@@ -18,6 +18,7 @@ import {
 } from "../util/benchmark_utils";
 import BenchmarkChart, { BenchmarkLoading } from "../components/BenchmarkChart";
 import { metaDescription } from ".";
+import { InfoBar } from "../components/InfoBar";
 
 // TODO(lucacasonato): add anchor points to headers
 const Benchmarks = () => {
@@ -56,6 +57,7 @@ const Benchmarks = () => {
         })}
       </Head>
       <div className="bg-gray-50 min-h-full">
+        <InfoBar />
         <Header subtitle="Continuous Benchmarks" />
         <div className="mb-12">
           <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 mt-8 pb-8">

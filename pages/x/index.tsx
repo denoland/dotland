@@ -9,6 +9,7 @@ import InlineCode from "../../components/InlineCode";
 import { metaDescription } from "../";
 
 import Head from "next/head";
+import { InfoBar } from "../../components/InfoBar";
 
 const ThirdPartyRegistryList = () => {
   const [query, setQuery] = React.useState("");
@@ -40,6 +41,7 @@ const ThirdPartyRegistryList = () => {
         })}
       </Head>
       <div className="bg-gray-50 min-h-full">
+        <InfoBar />
         <Header subtitle="Third Party Modules" />
         <div className="">
           <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 pt-4">

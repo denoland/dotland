@@ -6,6 +6,7 @@ import Head from "next/head";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { metaDescription } from "..";
+import { InfoBar } from "../../components/InfoBar";
 
 const V1Hoodie = () => {
   const [size, setSize] = useState("M");
@@ -23,6 +24,7 @@ const V1Hoodie = () => {
           image: "https://deno.land/v1_wide.jpg",
         })}
       </Head>
+      <InfoBar />
       <Header />
       <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 py-8 mb-16">
         <h1 className="text-3xl tracking-tight font-bold text-5xl leading-10">

@@ -15,6 +15,7 @@ import Footer from "./Footer";
 import FileDisplay from "./FileDisplay";
 import { DirEntry } from "../util/registries";
 import { metaDescription } from "../pages";
+import { InfoBar } from "./InfoBar";
 
 class RegistryError {
   constructor(public message: string) {}
@@ -189,6 +190,7 @@ const Registry = () => {
         })}
       </Head>
       <div className="bg-gray-50 min-h-full">
+        <InfoBar />
         <Header
           subtitle={name === "std" ? "Standard Library" : "Third Party Modules"}
         />
