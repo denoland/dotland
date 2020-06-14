@@ -1477,8 +1477,8 @@
   },
   "events": {
     "type": "github",
-    "owner": "fuxingZhang",
-    "repo": "deno-EventEmitter",
+    "owner": "deno-library",
+    "repo": "events",
     "desc": "EventEmitter for deno, API is the same as Nodejs, Only one Typescript file, Have all the APIs of nodejs"
   },
   "evt": {
@@ -2142,8 +2142,8 @@
   },
   "logger": {
     "type": "github",
-    "owner": "fuxingZhang",
-    "repo": "deno-logger",
+    "owner": "deno-library",
+    "repo": "logger",
     "desc": "A simple logger for deno."
   },
   "logol": {
@@ -2774,8 +2774,8 @@
   },
   "progress": {
     "type": "github",
-    "owner": "fuxingZhang",
-    "repo": "deno-progress",
+    "owner": "deno-library",
+    "repo": "progress",
     "desc": "Progress bar in terminal for deno"
   },
   "progressbar": {
@@ -3578,8 +3578,8 @@
   },
   "unrar": {
     "type": "github",
-    "owner": "fuxingZhang",
-    "repo": "deno-unrar",
+    "owner": "deno-library",
+    "repo": "unrar",
     "desc": "uncompress rar file for deno"
   },
   "up": {
