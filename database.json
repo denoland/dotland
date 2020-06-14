@@ -53,6 +53,12 @@
     "repo": "ako",
     "desc": "Expressive HTTP middleware framework for deno using async functions. Aiming to port Koa to Deno."
   },
+  "algebra": {
+    "type": "github",
+    "owner": "denosaurs",
+    "repo": "algebra",
+    "desc": "➗ Powerful math library for Deno, powered by wasm."
+  },
   "alosaur": {
     "type": "github",
     "owner": "irustm",
