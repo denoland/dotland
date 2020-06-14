@@ -2036,6 +2036,12 @@
     "repo": "keypress",
     "desc": "Deno keypress stdin reader."
   },
+  "keygrip": {
+    "type": "github",
+    "owner": "ifaxity",
+    "repo": "keygrip-deno",
+    "desc": "Keygrip for Deno 🦕 (ported from NPM package with same name)."
+  },
   "kia": {
     "type": "github",
     "owner": "HarryPeach",
