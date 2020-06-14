@@ -2036,17 +2036,17 @@
     "repo": "keycode-js",
     "desc": "A minimal JavaScript package with key code constants."
   },
-  "keypress": {
-    "type": "github",
-    "owner": "dmitriytat",
-    "repo": "keypress",
-    "desc": "Deno keypress stdin reader."
-  },
   "keygrip": {
     "type": "github",
     "owner": "ifaxity",
     "repo": "keygrip-deno",
     "desc": "Keygrip for Deno 🦕 (ported from NPM package with same name)."
+  },
+  "keypress": {
+    "type": "github",
+    "owner": "dmitriytat",
+    "repo": "keypress",
+    "desc": "Deno keypress stdin reader."
   },
   "kia": {
     "type": "github",
