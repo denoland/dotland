@@ -1591,6 +1591,12 @@
     "repo": "flowed",
     "desc": "A fast and reliable flow manager and task runner for Node.js and web browsers"
   },
+  "fluffcord": {
+    "type": "github",
+    "owner": "timeraa",
+    "repo": "fluffcord",
+    "desc": "Fast Discord API wrapper for deno."
+  },
   "flux_annotated_csv_parser": {
     "type": "github",
     "owner": "tiagostutz",
