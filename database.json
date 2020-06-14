@@ -1645,12 +1645,6 @@
     "repo": "geosearch-deno",
     "desc": "Simple CLI library to find places all around the world"
   },
-  "getfiles": {
-    "type": "github",
-    "owner": "lencx",
-    "repo": "deno-getfiles",
-    "desc": "Recursively get all files in a directory"
-  },
   "get_ip": {
     "type": "github",
     "owner": "denorg",
@@ -1662,6 +1656,12 @@
     "owner": "rjoydip",
     "repo": "get_stdin",
     "desc": "Get stdin as a string or buffer"
+  },
+  "getfiles": {
+    "type": "github",
+    "owner": "lencx",
+    "repo": "deno-getfiles",
+    "desc": "Recursively get all files in a directory"
   },
   "graphql": {
     "type": "github",
