@@ -601,6 +601,12 @@
     "repo": "csp",
     "desc": "A CSP implementation that works in Browser, Node and Deno that has 0 dependencies. Provide Channel and select function."
   },
+  "cstring": {
+    "type": "github",
+    "owner": "often",
+    "repo": "cstring",
+    "desc": "Generate cryptographically random strings with ease."
+  },
   "csv": {
     "type": "github",
     "owner": "vslinko",
