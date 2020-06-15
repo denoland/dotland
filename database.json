@@ -2458,6 +2458,13 @@
     "desc": "Ky is a tiny and elegant HTTP client based on the browser Fetch API",
     "default_version": "master"
   },
+  "l9t": {
+    "type": "github",
+    "owner": "nvbn",
+    "repo": "l9t",
+    "desc": "Reusable typesafe kubernetes configurations with fast development cycle and hot reloading, and zero yaml",
+    "default_version": "master"
+  },
   "lambda": {
     "type": "github",
     "owner": "hayd",
