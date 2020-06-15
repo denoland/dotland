@@ -1379,6 +1379,12 @@
     "repo": "due",
     "desc": "A framework built for Deno, using Vue.js"
   },
+  "dunner": {
+    "type": "github",
+    "owner": "luvies",
+    "repo": "dunner",
+    "desc": "A flexible declarative task runner"
+  },
   "dynamodb": {
     "type": "github",
     "owner": "chiefbiiko",
