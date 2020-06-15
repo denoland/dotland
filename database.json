@@ -3808,8 +3808,8 @@
   },
   "webview": {
     "type": "github",
-    "owner": "eliassjogreen",
-    "repo": "deno_webview",
+    "owner": "webview",
+    "repo": "webview_deno",
     "desc": "Deno bindings for webview, a tiny library for creating web-based desktop GUIs "
   },
   "win_taskkill": {
