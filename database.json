@@ -205,6 +205,12 @@
     "repo": "base64",
     "desc": "base64 strings from/to Uint8Arrays"
   },
+  "base64_stream": {
+    "type": "github",
+    "owner": "marcosc90",
+    "repo": "base64-stream",
+    "desc": "Base64 stream decoder/encoder"
+  },
   "bb64": {
     "type": "github",
     "owner": "denjucks",
