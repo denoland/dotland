@@ -3242,6 +3242,12 @@
     "repo": "short_uuid",
     "desc": "Generate random or sequential UUID of any length."
   },
+  "simple_slackbot": {
+    "type": "github",
+    "owner": "cesar-faria",
+    "repo": "simple_slackbot",
+    "desc": "A simple wrapper for Slack API."
+  },
   "simple_type_assert": {
     "type": "github",
     "owner": "KSXGitHub",
