@@ -241,6 +241,12 @@
     "repo": "betalander",
     "desc": "Minecraft: Java Edition server manager & updater"
   },
+  "bgpview": {
+    "type": "github",
+    "owner": "often",
+    "repo": "bgpview",
+    "desc": "Lightweight BGPView API wrapper."
+  },
   "bigfloat": {
     "type": "github",
     "owner": "davidmartinez10",
