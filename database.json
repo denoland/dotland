@@ -1229,6 +1229,12 @@
     "repo": "dinocord",
     "desc": "A Discord API Library for Deno."
   },
+  "dinoenv": {
+    "type": "github",
+    "owner": "crewdevio",
+    "repo": "dino_env",
+    "desc": "🌈 manage environment variables with deno."
+  },
   "diosaur": {
     "type": "github",
     "owner": "ovesco",
