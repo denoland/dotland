@@ -6,16 +6,16 @@ export interface GithubDatabaseEntry extends DatabaseEntry {
   type: "github";
   owner: string;
   repo: string;
+  default_version: string;
   path?: string;
-  default_version?: string;
 }
 
 export class GithubEntry implements Entry {
   public desc: string;
   private owner: string;
   private repo: string;
+  private defaultVersion: string;
   private path?: string;
-  private defaultVersion?: string;
 
   constructor(databaseEntry: GithubDatabaseEntry) {
     this.desc = databaseEntry.desc;
@@ -27,12 +27,12 @@ export class GithubEntry implements Entry {
 
   getSourceURL(path: string, version?: string): string {
     return `https://raw.githubusercontent.com/${this.owner}/${this.repo}/${
-      version ?? this.defaultVersion ?? "master"
+      version ?? this.defaultVersion
     }${this.path ?? ""}${path}`;
   }
   getRepositoryURL(path: string, version?: string): string {
     return `https://github.com/${this.owner}/${this.repo}/tree/${
-      version ?? this.defaultVersion ?? "master"
+      version ?? this.defaultVersion
     }${this.path ?? ""}${path}`;
   }
   async getDirectoryListing(
@@ -43,7 +43,7 @@ export class GithubEntry implements Entry {
       const url = `https://api.github.com/repos/${this.owner}/${
         this.repo
       }/contents${this.path ?? ""}${path}?ref=${
-        version ?? this.defaultVersion ?? "master"
+        version ?? this.defaultVersion
       }`;
       const res = await fetch(url, {
         headers: {
@@ -97,6 +97,6 @@ export class GithubEntry implements Entry {
     return tags ?? null;
   }
   getDefaultVersion(): string {
-    return this.defaultVersion ?? "master";
+    return this.defaultVersion;
   }
 }

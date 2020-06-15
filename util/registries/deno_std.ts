@@ -15,6 +15,8 @@ const stdEntry = new GithubEntry({
   repo: "deno",
   path: "/std",
   desc: "",
+  // eslint-disable-next-line @typescript-eslint/camelcase
+  default_version: "master",
 });
 
 function stdVersion(version?: string): string | undefined {
@@ -56,6 +58,6 @@ export class DenoStdEntry implements Entry {
     return stdVersions;
   }
   getDefaultVersion(): string {
-    return "master";
+    return stdEntry.getDefaultVersion();
   }
 }

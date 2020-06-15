@@ -32,6 +32,8 @@ function findDatabaseEntry(
       owner,
       repo,
       type: "github",
+      // eslint-disable-next-line @typescript-eslint/camelcase
+      default_version: "master",
     };
     return entry;
   }

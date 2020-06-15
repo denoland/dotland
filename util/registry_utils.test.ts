@@ -21,6 +21,8 @@ test("Resolve virtual 'gh:owner:repo'", () => {
       desc: "owner/repo",
       owner: "owner",
       repo: "repo",
+      // eslint-disable-next-line @typescript-eslint/camelcase
+      default_version: "master",
     })
   );
 });
