@@ -1705,6 +1705,12 @@
     "repo": "deno-getfiles",
     "desc": "Recursively get all files in a directory"
   },
+  "gml": {
+    "type": "github",
+    "owner": "ryaangu",
+    "repo": "gml",
+    "desc": "A Deno library with GML Networking for Javascript/Typescript."
+  },
   "graphql": {
     "type": "github",
     "owner": "CreatCodeBuild",
