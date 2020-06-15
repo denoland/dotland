@@ -285,7 +285,8 @@
     "type": "github",
     "owner": "often",
     "repo": "bgpview",
-    "desc": "Lightweight BGPView API wrapper."
+    "desc": "Lightweight BGPView API wrapper.",
+    "default_version": "master"
   },
   "bigfloat": {
     "type": "github",
@@ -704,7 +705,8 @@
     "type": "github",
     "owner": "often",
     "repo": "cstring",
-    "desc": "Generate cryptographically random strings with ease."
+    "desc": "Generate cryptographically random strings with ease.",
+    "default_version": "master"
   },
   "csv": {
     "type": "github",
@@ -1610,7 +1612,8 @@
     "type": "github",
     "owner": "luvies",
     "repo": "dunner",
-    "desc": "A flexible declarative task runner"
+    "desc": "A flexible declarative task runner",
+    "default_version": "master"
   },
   "dynamodb": {
     "type": "github",
@@ -1989,7 +1992,8 @@
     "type": "github",
     "owner": "ryaangu",
     "repo": "gml",
-    "desc": "A Deno library with GML Networking for Javascript/Typescript."
+    "desc": "A Deno library with GML Networking for Javascript/Typescript.",
+    "default_version": "master"
   },
   "graphql": {
     "type": "github",
@@ -3780,7 +3784,8 @@
     "type": "github",
     "owner": "cesar-faria",
     "repo": "simple_slackbot",
-    "desc": "A simple wrapper for Slack API."
+    "desc": "A simple wrapper for Slack API.",
+    "default_version": "master"
   },
   "simple_type_assert": {
     "type": "github",
