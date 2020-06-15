@@ -1621,6 +1621,12 @@
     "repo": "deno_free_port",
     "desc": "get free port for Deno"
   },
+  "fresh": {
+    "type": "github",
+    "owner": "ifaxity",
+    "repo": "fresh-deno",
+    "desc": "Connect fresh for Deno 🦕 (ported from NPM package with same name)."
+  },
   "fs_cli": {
     "type": "github",
     "owner": "franckLdx",
@@ -2047,6 +2053,12 @@
     "owner": "kabirbaidhya",
     "repo": "keycode-js",
     "desc": "A minimal JavaScript package with key code constants."
+  },
+  "keygrip": {
+    "type": "github",
+    "owner": "ifaxity",
+    "repo": "keygrip-deno",
+    "desc": "Keygrip for Deno 🦕 (ported from NPM package with same name)."
   },
   "keypress": {
     "type": "github",
