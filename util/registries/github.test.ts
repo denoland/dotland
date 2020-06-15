@@ -8,6 +8,8 @@ const testDbEntry: GithubDatabaseEntry = {
   desc: "A entry for testing",
   owner: "octocat",
   repo: "test-repo1",
+  // eslint-disable-next-line @typescript-eslint/camelcase
+  default_version: "master",
 };
 const testEntry = new GithubEntry(testDbEntry);
 
