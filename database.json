@@ -3028,6 +3028,13 @@
     "desc": "tc39 proposal spec compatible observable",
     "default_version": "master"
   },
+  "ogone": {
+    "type": "github",
+    "owner": "SRNV",
+    "repo": "Ogone",
+    "desc": "Web-components compiler, for progressive web applications and minimalistic dev[https://github.com/SRNV/Ogone] based on Deno.",
+    "default_version": "master"
+  },
   "omelette": {
     "type": "github",
     "owner": "f",
