@@ -533,6 +533,13 @@
     "desc": "Simple but awesome LRU cache for Deno, named after the bluest color.",
     "default_version": "master"
   },
+  "cookies": {
+    "type": "github",
+    "owner": "ako-deno",
+    "repo": "cookies",
+    "desc": "Cookies parser based on the Map built-in",
+    "default_version": "master"
+  },
   "collections": {
     "type": "github",
     "owner": "hayd",
@@ -601,6 +608,13 @@
     "owner": "ako-deno",
     "repo": "content_type",
     "desc": "Create and parse HTTP Content-Type header according to RFC 7231 for Deno",
+    "default_version": "master"
+  },
+  "content_disposition": {
+    "type": "github",
+    "owner": "ako-deno",
+    "repo": "content_disposition",
+    "desc": "Create and parse HTTP Content-Disposition header according to RFC 2616 for Deno",
     "default_version": "master"
   },
   "context": {
