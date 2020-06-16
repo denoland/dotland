@@ -83,6 +83,13 @@
     "desc": "AMQP 0.9.1",
     "default_version": "master"
   },
+  "ansi_styles": {
+    "type": "github",
+    "owner": "tavofigse",
+    "repo": "ansi-styles",
+    "desc": "ANSI escape codes for styling strings in the terminal",
+    "default_version": "master"
+  },
   "api": {
     "type": "github",
     "owner": "maheshkareeya",
