@@ -2318,6 +2318,13 @@
     "desc": "Detect the running environment and context of the current script.",
     "default_version": "master"
   },
+  "isEven": {
+    "type": "github",
+    "owner": "ajimae",
+    "repo": "isEven",
+    "desc": "a deno module to check if a given number is an even number.",
+    "default_version": "master"
+  },
   "isIP": {
     "type": "github",
     "owner": "ako-deno",
