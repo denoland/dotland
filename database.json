@@ -3028,6 +3028,14 @@
     "desc": "tc39 proposal spec compatible observable",
     "default_version": "master"
   },
+  "ogone": {
+    "type": "github",
+    "owner": "srnv",
+    "repo": "ogone",
+    "tags": ["ogone", "o3", "typescript", "fullstack", "frontend", "framework", "vue", "svelte", "angular", "react"],
+    "desc": "Web component compiler for PWA and advanced dev environment",
+    "default_version": "master"
+  },
   "omelette": {
     "type": "github",
     "owner": "f",
