@@ -88,6 +88,9 @@ const ThirdPartyRegistryList = () => {
               </p>
             </div>
             <div className="mt-12">
+              Total third-party modules: {Object.keys(entries).length}
+            </div>
+            <div className="mt-12">
               <label htmlFor="query" className="font-medium sr-only">
                 Search
               </label>
