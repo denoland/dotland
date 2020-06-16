@@ -2703,7 +2703,7 @@
     "owner": "oakserver",
     "repo": "media_types",
     "desc": "A module that assists in resolving media types and extensions.",
-    "default_version": "master"
+    "default_version": "main"
   },
   "memoize": {
     "type": "github",
@@ -3026,7 +3026,7 @@
     "owner": "oakserver",
     "repo": "middleware",
     "desc": "A collection of middleware for the oak middleware framework.",
-    "default_version": "master"
+    "default_version": "main"
   },
   "oak_middlewares": {
     "type": "github",
