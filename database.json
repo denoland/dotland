@@ -3162,6 +3162,13 @@
     "desc": "A zero-dependency, minimal permission guard.",
     "default_version": "master"
   },
+  "pg": {
+    "type": "github",
+    "owner": "deno-library",
+    "repo": "pg",
+    "desc": "PostgreSQL client for Deno.",
+    "default_version": "master"
+  },
   "pg_format": {
     "type": "github",
     "owner": "grantcarthew",
