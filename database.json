@@ -2325,6 +2325,13 @@
     "desc": "IP address detector for Deno.",
     "default_version": "master"
   },
+  "isOdd": {
+    "type": "github",
+    "owner": "ajimae",
+    "repo": "isOdd",
+    "desc": "a deno module to check if a given number is an odd number",
+    "default_version": "master"
+  },
   "isUp": {
     "type": "github",
     "owner": "rjoydip",
