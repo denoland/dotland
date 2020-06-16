@@ -533,13 +533,6 @@
     "desc": "Simple but awesome LRU cache for Deno, named after the bluest color.",
     "default_version": "master"
   },
-  "cookies": {
-    "type": "github",
-    "owner": "ako-deno",
-    "repo": "cookies",
-    "desc": "Cookies parser based on the Map built-in",
-    "default_version": "master"
-  },
   "collections": {
     "type": "github",
     "owner": "hayd",
@@ -603,18 +596,18 @@
     "desc": "Load dotfiles / modules for a project consistently",
     "default_version": "master"
   },
-  "content_type": {
-    "type": "github",
-    "owner": "ako-deno",
-    "repo": "content_type",
-    "desc": "Create and parse HTTP Content-Type header according to RFC 7231 for Deno",
-    "default_version": "master"
-  },
   "content_disposition": {
     "type": "github",
     "owner": "ako-deno",
     "repo": "content_disposition",
     "desc": "Create and parse HTTP Content-Disposition header according to RFC 2616 for Deno",
+    "default_version": "master"
+  },
+  "content_type": {
+    "type": "github",
+    "owner": "ako-deno",
+    "repo": "content_type",
+    "desc": "Create and parse HTTP Content-Type header according to RFC 7231 for Deno",
     "default_version": "master"
   },
   "context": {
@@ -629,6 +622,13 @@
     "owner": "guptamohit004",
     "repo": "convert_time",
     "desc": "Convert Time from one Timezone to Another based on User's Location using DENO. Useful when a particular time is to be shown for a user from Different Country.",
+    "default_version": "master"
+  },
+  "cookies": {
+    "type": "github",
+    "owner": "ako-deno",
+    "repo": "cookies",
+    "desc": "Cookies parser based on the Map built-in",
     "default_version": "master"
   },
   "cordeno": {
