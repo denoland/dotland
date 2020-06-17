@@ -865,6 +865,13 @@
     "desc": "delay - ES Module for Deno, Node and Web",
     "default_version": "master"
   },
+  "deligenius": {
+    "type": "github",
+    "owner": "deligenius",
+    "repo": "deligenius",
+    "desc": "Lightweight Deno middleware framework",
+    "default_version": "master"
+  },
   "dem": {
     "type": "github",
     "owner": "syumai",
