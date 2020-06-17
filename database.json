@@ -1839,6 +1839,13 @@
     "type": "github",
     "default_version": "master"
   },
+  "felony": {
+  "type": "github",
+  "owner": "barrage",
+  "repo": "felony",
+  "desc": "Criminally easy framework.",
+  "default_version": "master"
+  },
   "fen": {
     "type": "github",
     "owner": "fen-land",
