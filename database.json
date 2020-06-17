@@ -1447,6 +1447,13 @@
     "desc": "A Discord API Library for Deno.",
     "default_version": "master"
   },
+  "dinoenv": {
+    "type": "github",
+    "owner": "crewdevio",
+    "repo": "dino_env",
+    "desc": "🌈 manage environment variables with deno.",
+    "default_version": "master"
+  },
   "diosaur": {
     "type": "github",
     "owner": "ovesco",
