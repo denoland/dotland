@@ -246,13 +246,6 @@
     "desc": "base64 strings from/to Uint8Arrays",
     "default_version": "master"
   },
-  "base64_stream": {
-    "type": "github",
-    "owner": "marcosc90",
-    "repo": "base64-stream",
-    "desc": "Base64 stream decoder/encoder",
-    "default_version": "master"
-  },
   "bb64": {
     "type": "github",
     "owner": "denjucks",
@@ -4200,6 +4193,13 @@
     "owner": "gokayokyay",
     "repo": "toolbelt",
     "desc": "Toolbelt for Deno",
+    "default_version": "master"
+  },
+  "transform": {
+    "type": "github",
+    "owner": "marcosc90",
+    "repo": "transform",
+    "desc": "Transformer for Deno",
     "default_version": "master"
   },
   "transport": {
