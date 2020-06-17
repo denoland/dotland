@@ -2353,6 +2353,13 @@
     "desc": "IP address detector for Deno.",
     "default_version": "master"
   },
+  "isNumber": {
+    "type": "github",
+    "owner": "ajimae",
+    "repo": "isNumber",
+    "desc": "a deno module to check if a given value or variable is a javascript number",
+    "default_version": "master"
+  },
   "isUp": {
     "type": "github",
     "owner": "rjoydip",
