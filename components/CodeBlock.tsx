@@ -42,6 +42,8 @@ export const RawCodeBlock = ({
   enableLineRef = false,
 }: CodeBlockProps & { className?: string; enableLineRef?: boolean }) => {
   const [hashValue, setHashValue] = useState("");
+  const codeDivClassNames =
+    "text-gray-300 token-line text-right select-none text-xs";
   if (enableLineRef) {
     useEffect(() => {
       Router.events.on("hashChangeComplete", (url: any) => {
@@ -92,19 +94,14 @@ export const RawCodeBlock = ({
             tokens.length === 1 &&
             (language === "bash" || language === "shell") && (
               <code className="pr-2 sm:pr-3">
-                <div className="text-gray-400 token-line text-right select-none">
-                  $
-                </div>
+                <div className={codeDivClassNames}>$</div>
               </code>
             )}
           {tokens.length > 1 && !disablePrefixes && (
-            <code className="pr-2 sm:pr-3">
+            <code>
               {tokens.map((line, i) =>
                 line[0]?.empty && i === tokens.length - 1 ? null : (
-                  <div
-                    key={i + "l"}
-                    className="text-gray-400 token-line text-right select-none"
-                  >
+                  <div key={i + "l"} className={codeDivClassNames}>
                     {enableLineRef ? (
                       <Link href={`#L${i + 1}`}>
                         <a id={`L${i + 1}`} href={`#L${i + 1}`}>
@@ -122,6 +119,7 @@ export const RawCodeBlock = ({
           <code>
             {tokens.map((line, i) => {
               const lineProps = getLineProps({ line, key: i });
+              lineProps.className += " text-xs";
               if (
                 enableLineRef &&
                 hashValue &&
