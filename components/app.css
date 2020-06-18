@@ -16,6 +16,10 @@ html {
   outline: none;
 }
 
+.table {
+  display: inline;
+}
+
 .link {
   @apply text-blue-500;
   @apply transition;
