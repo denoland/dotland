@@ -93,7 +93,7 @@ export const RawCodeBlock = ({
           {!disablePrefixes &&
             tokens.length === 1 &&
             (language === "bash" || language === "shell") && (
-              <code>
+              <code className="pr-2 sm:pr-3">
                 <div className={codeDivClassNames}>$</div>
               </code>
             )}
