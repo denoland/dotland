@@ -4495,6 +4495,13 @@
     "desc": "Wait for localhost to be ready",
     "default_version": "master"
   },
+  "waitgroup": {
+    "type": "github",
+    "owner": "jpwilliams",
+    "repo": "waitgroup-deno",
+    "desc": "A tiny version of Golang's WaitGroup with promises and zero dependencies outside of `std`.",
+    "default_version": "master"
+  },
   "wasi": {
     "type": "github",
     "owner": "caspervonb",
