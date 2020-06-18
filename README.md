@@ -34,6 +34,7 @@ to listen for FS events and reload the web server).
 
 ## Image License
 
-These Deno images are distributed under the MIT license (public domain and free for use).
+These Deno images are distributed under the MIT license (public domain and free
+for use).
 
 - [A graphic for the v1 blog post by @hashrock](https://deno.land/v1.jpg)
