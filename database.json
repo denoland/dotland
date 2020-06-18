@@ -3106,6 +3106,13 @@
     "desc": "A simple cross-platform browser opener for Deno.",
     "default_version": "master"
   },
+  "open_deno_weather": {
+    "type": "github",
+    "owner": "FriendlyUser",
+    "repo": "open-deno-weather",
+    "desc": "Simple Wrapper around the openweather api",
+    "default_version": "master"
+  },
   "opine": {
     "type": "github",
     "owner": "asos-craigmorten",
