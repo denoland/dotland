@@ -2936,6 +2936,13 @@
     "desc": "A tiny, secure, URL-friendly, unique string ID generator for JavaScript.",
     "default_version": "master"
   },
+  "nattramn": {
+    "type": "github",
+    "owner": "Vufuzi",
+    "repo": "nattramn",
+    "desc": "Express-like PRPL-pattern server for universal web applications.",
+    "default_version": "master"
+  },
   "ndjson": {
     "type": "github",
     "owner": "FaberVitale",
