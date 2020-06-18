@@ -3106,6 +3106,13 @@
     "desc": "A package for opening URLs, files and executables.",
     "default_version": "master"
   },
+  "open_deno_weather": {
+    "type": "github",
+    "owner": "FriendlyUser",
+    "repo": "open-deno-weather",
+    "desc": "Simple Wrapper around the openweather api",
+    "default_version": "master"
+  },
   "opener": {
     "type": "github",
     "owner": "denjucks",
