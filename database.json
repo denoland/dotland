@@ -4244,6 +4244,13 @@
     "desc": "Troodon is a lightweight Deno Library to Handle Algorithms",
     "default_version": "master"
   },
+  "ts_prometheus": {
+    "type": "github",
+    "owner": "marcopacini",
+    "repo": "ts-prometheus",
+    "desc": "A Prometheus client in Typescript for Deno",
+    "default_version": "master"
+  },
   "tweetnacl_deno": {
     "type": "github",
     "owner": "dr-useless",
