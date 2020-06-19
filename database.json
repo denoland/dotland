@@ -1194,6 +1194,12 @@
     "desc": "Windows Service controller for Deno.",
     "default_version": "master"
   },
+  "denoCEF": {
+    "type": "github",
+    "owner": "denjucks",
+    "repo": "deno-cef",
+    "desc": "The Chromium Embedded Framework for Deno. Make desktop GUI applications using web technologies."
+  },
   "denock": {
     "type": "github",
     "owner": "sachacr",
