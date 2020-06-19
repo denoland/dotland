@@ -1159,13 +1159,6 @@
     "desc": "Document your code and keep a live and reusable OpenAPI (Swagger) specification.",
     "default_version": "master"
   },
-  "deno_telegram_bot_api": {
-    "type": "github",
-    "owner": "dfvgbh",
-    "repo": "deno-telegram-bot-api",
-    "desc": "Telegram bot API",
-    "default_version": "master"
-  },
   "deno_twitter_api": {
     "type": "github",
     "owner": "stefanuros",
@@ -4137,6 +4130,13 @@
     "owner": "denogram",
     "repo": "denogram",
     "desc": "A Telegram Bot framework",
+    "default_version": "master"
+  },
+  "telegram_bot_api": {
+    "type": "github",
+    "owner": "dfvgbh",
+    "repo": "deno-telegram-bot-api",
+    "desc": "Telegram bot API",
     "default_version": "master"
   },
   "termcolorizer": {
