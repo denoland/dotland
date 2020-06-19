@@ -4027,6 +4027,13 @@
     "desc": "Simple string builder.",
     "default_version": "master"
   },
+  "studlyfy": {
+    "type": "github",
+    "owner": "lewislbr",
+    "repo": "studlyfy",
+    "desc": "Transforms text to StUdLy CaPs",
+    "default_version": "master"
+  },
   "superdeno": {
     "type": "github",
     "owner": "asos-craigmorten",
