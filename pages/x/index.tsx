@@ -19,16 +19,20 @@ const ThirdPartyRegistryList = () => {
 
   // Sorting the list only if entries are changed
   const list = useMemo(() => {
-    return Object.keys(entries)
-      .sort((nameA, nameB) => nameA.localeCompare(nameB));
+    return Object.keys(entries).sort((nameA, nameB) =>
+      nameA.localeCompare(nameB)
+    );
   }, [entries]);
 
   // Filtering the memoized list
-  const filteredList = useMemo(() => list.filter((name) => {
-      const queryReg = new RegExp(query.split(' ').join('.*?'), 'i');
-      const desc = entries[name].desc;
-      return name.match(queryReg) || (desc ?? "").match(queryReg);
-    }), [list, query]
+  const filteredList = useMemo(
+    () =>
+      list.filter((name) => {
+        const queryReg = new RegExp(query.split(" ").join(".*?"), "i");
+        const desc = entries[name].desc;
+        return name.match(queryReg) || (desc ?? "").match(queryReg);
+      }),
+    [list, query]
   );
 
   return (
