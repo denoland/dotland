@@ -1,0 +1,55 @@
+{
+  "artists": {
+    "hashrock": {
+      "name": "hashrock",
+      "profile_image": "https://avatars0.githubusercontent.com/u/3132889",
+      "twitter": "hashedrock",
+      "github": "hashrock",
+      "web": "https://hashrock.studio.design/"
+    },
+    "ry": {
+      "name": "ry",
+      "profile_image": "https://avatars3.githubusercontent.com/u/80",
+      "github": "ry",
+      "web": "https://tinyclouds.org/"
+    },
+    "kevinkassimo": {
+      "name": "kevinkassimo",
+      "profile_image": "https://avatars2.githubusercontent.com/u/15007517",
+      "github": "kevinkassimo",
+      "web": "https://ksm.sh/"
+    }
+  },
+  "licenses": {
+    "MIT": {
+      "name": "MIT Licence",
+      "link": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "artworks": [
+    {
+      "image": "/v1.png",
+      "alt": "a gloomy scene with a white dinosaur standing in the rain on a purple planet",
+      "artist": "hashrock",
+      "license": "MIT"
+    },
+    {
+      "image": "https://github.com/denolib/animated-deno-logo/raw/master/deno-rect-24fps.gif",
+      "alt": "a animated deno logo",
+      "artist": "hashrock",
+      "license": "MIT"
+    },
+    {
+      "image": "/images/deno_logo.png",
+      "alt": "a hand drawn deno logo",
+      "artist": "ry",
+      "license": "MIT"
+    },
+    {
+      "image": "https://raw.githubusercontent.com/denolib/high-res-deno-logo/master/deno_hr_circle.svg",
+      "alt": "a high resolution deno logo",
+      "artist": "kevinkassimo",
+      "license": "MIT"
+    }
+  ]
+}
