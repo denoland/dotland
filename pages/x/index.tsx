@@ -25,15 +25,22 @@ const ThirdPartyRegistryList = () => {
   }, [entries]);
 
   // Filtering the memoized list
-  const filteredList = useMemo(
-    () =>
-      list.filter((name) => {
-        const queryReg = new RegExp(query.split(" ").join(".*?"), "i");
-        const desc = entries[name].desc;
-        return name.match(queryReg) || (desc ?? "").match(queryReg);
-      }),
-    [list, query]
-  );
+  const filteredList = useMemo(() => {
+    const queryWords = query.split(" ").filter((word) => word.length); // Split by space & ignore empty ones
+    const nameReg = new RegExp(queryWords.join("|"), "i"); // Match any word of search query
+    const descReg = new RegExp(
+      queryWords.reduce((a, b) => {
+        if (a === "") return b;
+        return a + "[^" + b + "]*" + b;
+      }, ""),
+      "i"
+    );
+
+    return list.filter((name) => {
+      const desc = entries[name].desc;
+      return name.match(nameReg) || (desc ?? "").match(descReg);
+    });
+  }, [list, query]);
 
   return (
     <>
