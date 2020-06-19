@@ -98,7 +98,7 @@ export const RawCodeBlock = ({
               </code>
             )}
           {tokens.length > 1 && !disablePrefixes && (
-            <code>
+            <code className="pr-2 sm:pr-3">
               {tokens.map((line, i) =>
                 line[0]?.empty && i === tokens.length - 1 ? null : (
                   <div key={i + "l"} className={codeDivClassNames}>
