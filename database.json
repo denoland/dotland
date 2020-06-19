@@ -1314,6 +1314,13 @@
     "desc": "Yet another web framework",
     "default_version": "master"
   },
+  "DenoShot": {
+    "type": "github",
+    "owner": "fakoua",
+    "repo": "DenoShot",
+    "desc": "A Deno module/cli to capture web page screenshots.",
+    "default_version": "master"
+  },
   "denotrain": {
     "type": "github",
     "owner": "Caesar2011",
