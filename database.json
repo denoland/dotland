@@ -4628,6 +4628,13 @@
     "desc": "WebAssembly module to parse YAML",
     "default_version": "master"
   },
+  "yeswehack": {
+    "type": "github",
+    "owner": "tchenu",
+    "repo": "yeswehack-sdk",
+    "desc": "A simple Deno client for YesWeHack API.",
+    "default_version": "master"
+  },
   "yolk": {
     "type": "github",
     "owner": "denjucks",
