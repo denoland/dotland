@@ -17,18 +17,18 @@ const ThirdPartyRegistryList = () => {
     setQuery(event.target.value);
   }
 
-  const list = useMemo(
-    () =>
-      Object.keys(entries)
-        .filter(
-          (name) =>
-            name.toLowerCase().includes(query.toLowerCase()) ||
-            (entries[name].desc ?? "")
-              .toLowerCase()
-              .includes(query.toLowerCase())
-        )
-        .sort((nameA, nameB) => nameA.localeCompare(nameB)),
-    [entries, query]
+  // Sorting the list only if entries are changed
+  const list = useMemo(() => {
+    return Object.keys(entries)
+      .sort((nameA, nameB) => nameA.localeCompare(nameB));
+  }, [entries]);
+
+  // Filtering the memoized list
+  const filteredList = useMemo(() => list.filter((name) => {
+      const queryReg = new RegExp(query.split(' ').join('.*?'), 'i');
+      const desc = entries[name].desc;
+      return name.match(queryReg) || (desc ?? "").match(queryReg);
+    }), [list, query]
   );
 
   return (
@@ -105,14 +105,14 @@ const ThirdPartyRegistryList = () => {
             </div>
           </div>
           <div className="sm:max-w-screen-lg sm:mx-auto sm:px-6 md:px-8 pb-4 sm:pb-12">
-            {list.length == 0 ? (
+            {filteredList.length == 0 ? (
               <div className="px-4 sm:px-0 py-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
                 No modules found
               </div>
             ) : (
               <div className="bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4">
                 <ul>
-                  {list.map((name, i) => {
+                  {filteredList.map((name, i) => {
                     const link = `/x/${name}`;
                     return (
                       <li
