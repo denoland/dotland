@@ -6,6 +6,8 @@ export const ARTWORKS: Artwork[] = json;
 
 export interface Artwork {
   image: string;
+  title: string;
+  link?: string;
   alt: string;
   artist: Artist;
   license: string;
@@ -16,5 +18,6 @@ export interface Artist {
   profile_image?: string;
   twitter?: string;
   github?: string;
+  instagram?: string;
   web?: string;
 }
