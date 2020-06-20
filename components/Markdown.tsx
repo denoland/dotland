@@ -106,12 +106,13 @@ function ImageRenderer(props: {
 }) {
   let src = props.src;
   const className = "max-w-full inline-block";
+  const isManual = new URL(props.displayURL).pathname.startsWith("/manual");
 
   if (isRelative(src)) {
     src = relativeToAbsolute(props.sourceURL, src);
   }
 
-  return props.displayURL.includes("/manual") ? (
+  return isManual ? (
     <a href={src} className={className}>
       <img src={src} />
     </a>
