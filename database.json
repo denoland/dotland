@@ -1138,6 +1138,13 @@
     "desc": "Serialize/deserialize an error into a plain object",
     "default_version": "master"
   },
+  "deno_shot": {
+    "type": "github",
+    "owner": "fakoua",
+    "repo": "deno_shot",
+    "desc": "A Deno module/cli to capture web page screenshots.",
+    "default_version": "master"
+  },
   "deno_string_validator": {
     "type": "github",
     "owner": "okwudav",
