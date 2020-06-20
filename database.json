@@ -4195,6 +4195,13 @@
     "desc": "Simple timezone syncronization",
     "default_version": "master"
   },
+  "tiny_env": {
+    "type": "github",
+    "owner": "bretanac93",
+    "repo": "tiny-env",
+    "desc": "Inject your configuration from a .env to the environment",
+    "default_version": "master"
+  },
   "tiny_templates": {
     "type": "github",
     "owner": "zekth",
