@@ -1166,7 +1166,7 @@
     "desc": "Document your code and keep a live and reusable OpenAPI (Swagger) specification.",
     "default_version": "master"
   },
-   "deno_tft": {
+  "deno_tft": {
     "type": "github",
     "owner": "FriendlyUser",
     "repo": "deno-tft",
