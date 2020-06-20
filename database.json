@@ -3499,6 +3499,13 @@
     "desc": "General purpose build tool. statically typed, batteries included. command, function, and make-style tasks supported",
     "default_version": "master"
   },
+  "ramda": {
+    "type": "github",
+    "owner": "ramda",
+    "repo": "ramda",
+    "desc": "A practical functional library for JavaScript programmers.",
+    "default_version": "master"
+  },
   "rand": {
     "type": "github",
     "owner": "rsp",
