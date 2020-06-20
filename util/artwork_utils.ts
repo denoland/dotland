@@ -2,9 +2,12 @@
 
 import json from "../artwork.json";
 
-export const ARTWORKS: Artwork[] = json;
+export const ARTWORKS: Artwork[] = json.sort((a, b) =>
+  a.date > b.date ? -1 : 1
+);
 
 export interface Artwork {
+  date: string;
   image: string;
   title: string;
   link?: string;
