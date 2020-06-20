@@ -2953,7 +2953,7 @@
     "owner": "nats-io",
     "repo": "nats.deno",
     "desc": "Deno client for NATS, a lightweight, high-performance cloud native messaging system.",
-    "default_version": "master"
+    "default_version": "main"
   },
   "nattramn": {
     "type": "github",
