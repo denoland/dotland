@@ -1,5 +1,6 @@
 [
   {
+    "date": "2020-05-13",
     "image": "/v1.png",
     "title": "Deno 1.0",
     "alt": "a gloomy scene with a white dinosaur standing in the rain on a purple planet",
@@ -13,6 +14,7 @@
     "license": "MIT"
   },
   {
+    "date": "2019-02-02",
     "image": "https://github.com/denolib/animated-deno-logo/raw/master/deno-rect-24fps.gif",
     "title": "An animated Deno logo",
     "alt": "a animated deno logo",
@@ -26,6 +28,7 @@
     "license": "MIT"
   },
   {
+    "date": "2020-06-01",
     "image": "/images/hashrock_simple.png",
     "title": "Colorful Deno logo",
     "alt": "light blue, light green simple logo",
@@ -39,6 +42,7 @@
     "license": "MIT"
   },
   {
+    "date": "2018-11-01",
     "image": "/images/deno_logo.png",
     "title": "The Original",
     "alt": "a hand drawn deno logo",
@@ -51,6 +55,7 @@
     "license": "MIT"
   },
   {
+    "date": "2018-12-20",
     "image": "https://raw.githubusercontent.com/denolib/high-res-deno-logo/master/deno_hr_circle.svg",
     "title": "High-res Deno logo",
     "alt": "a high resolution deno logo",
@@ -63,6 +68,7 @@
     "license": "MIT"
   },
   {
+    "date": "2020-03-23",
     "image": "/images/duri4n.png",
     "title": "Tattoo design",
     "alt": "a deno logo as a tattoo design",
@@ -73,6 +79,7 @@
     "license": "Restricted use"
   },
   {
+    "date": "2020-06-16",
     "image": "/images/stone.jpeg",
     "title": "Stone Deno",
     "alt": "the classic deno logo, hand painted onto a circular gray rock",
@@ -84,6 +91,7 @@
     "license": "Restricted use"
   },
   {
+    "date": "2020-06-17",
     "image": "/images/DenoLogo3D-Anim.gif",
     "title": "Deno Logo in 3D",
     "alt": "a animated, green 3d deno mascot standing in the rain",
@@ -96,6 +104,7 @@
     "license": "Unknown license"
   },
   {
+    "date": "2019-04-14",
     "image": "/images/deno_logo_4.gif",
     "title": "Pixelated Deno",
     "alt": "an animated deno logo in 8-bit style",
