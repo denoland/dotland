@@ -21,13 +21,7 @@ const ThirdPartyRegistryList = () => {
   const filteredList = useMemo(() => {
     const queryWords = query.split(" ").filter((word) => word.length); // Split by space & ignore empty ones
     const nameReg = new RegExp(queryWords.join("|"), "i"); // Match any word of search query
-    const descReg = new RegExp(
-      queryWords.reduce((a, b) => {
-        if (a === "") return b;
-        return a + "[^" + b + "]*" + b;
-      }, ""),
-      "i"
-    );
+    const descReg = new RegExp(queryWords.join(".*?"), "i");
 
     return Object.keys(entries).filter((name) => {
       const desc = entries[name].desc;
