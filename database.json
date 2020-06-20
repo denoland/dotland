@@ -1166,6 +1166,13 @@
     "desc": "Document your code and keep a live and reusable OpenAPI (Swagger) specification.",
     "default_version": "master"
   },
+  "deno_tft": {
+    "type": "github",
+    "owner": "FriendlyUser",
+    "repo": "deno-tft",
+    "desc": "A simple wrapper for the tft endpoints from the riot api.",
+    "default_version": "master"
+  },
   "deno_twitter_api": {
     "type": "github",
     "owner": "stefanuros",
