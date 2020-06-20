@@ -22,6 +22,17 @@
       "web": "https://hashrock.studio.design/"
     },
     "license": "MIT"
+  }{
+    "image": "/images/hashrock_simple.png",
+    "alt": "light blue, light green simple logo",
+    "artist": {
+      "name": "hashrock",
+      "profile_image": "https://avatars0.githubusercontent.com/u/3132889",
+      "twitter": "hashedrock",
+      "github": "hashrock",
+      "web": "https://hashrock.studio.design/"
+    },
+    "license": "MIT"
   },
   {
     "image": "/images/deno_logo.png",
