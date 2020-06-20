@@ -44,5 +44,32 @@
       "web": "https://ksm.sh/"
     },
     "license": "MIT"
+  },
+  {
+    "image": "/images/duri4n.png",
+    "alt": "Tattoo design",
+    "artist": {
+      "name": "duri4n",
+      "web": "https://www.instagram.com/duri4n/"
+    },
+    "license": "Restricted use"
+  },
+  {
+    "image": "/images/stone.jpeg",
+    "alt": "Stone Deno",
+    "artist": {
+      "name": "Shannon Lienhart",
+      "twitter": "shannonlienhart"
+    },
+    "license": "Restricted use"
+  },
+  {
+    "image": "/images/DenoLogo3D-Anim.gif",
+    "alt": "Deno Logo in 3D",
+    "artist": {
+      "name": "Master James",
+      "github": "MasterJames"
+    },
+    "license": "Unknown license"
   }
 ]
