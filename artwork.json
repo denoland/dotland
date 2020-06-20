@@ -73,7 +73,7 @@
     "license": "Unknown license"
   },
   {
-    "image": "images/deno_logo_4.gif",
+    "image": "/images/deno_logo_4.gif",
     "alt": "Pixelated Deno",
     "artist": {
       "name": "tanakaworld",
