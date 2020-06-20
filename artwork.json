@@ -71,5 +71,15 @@
       "github": "MasterJames"
     },
     "license": "Unknown license"
+  },
+  {
+    "image": "images/deno_logo_4.gif",
+    "alt": "Pixelated Deno",
+    "artist": {
+      "name": "tanakaworld",
+      "twitter": "_tanakaworld",
+      "web": "https://twitter.com/_tanakaworld/status/1117419541393358848"
+    },
+    "license": "Unknown license"
   }
 ]
