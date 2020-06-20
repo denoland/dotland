@@ -3132,14 +3132,14 @@
     "owner": "asos-craigmorten",
     "repo": "opine",
     "desc": "Fast, minimalist web framework for Deno ported from ExpressJS.",
-    "default_version": "master"
+    "default_version": "main"
   },
   "opineHttpProxy": {
     "type": "github",
     "owner": "asos-craigmorten",
     "repo": "opine-http-proxy",
     "desc": "Proxy middleware for Opine HTTP servers.",
-    "default_version": "main"
+    "default_version": "master"
   },
   "organ": {
     "type": "github",
