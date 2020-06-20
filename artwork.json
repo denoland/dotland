@@ -1,0 +1,119 @@
+[
+  {
+    "date": "2020-05-13",
+    "image": "/v1.png",
+    "title": "Deno 1.0",
+    "alt": "a gloomy scene with a white dinosaur standing in the rain on a purple planet",
+    "artist": {
+      "name": "hashrock",
+      "profile_image": "https://avatars0.githubusercontent.com/u/3132889",
+      "twitter": "hashedrock",
+      "github": "hashrock",
+      "web": "https://hashrock.studio.design/"
+    },
+    "license": "MIT"
+  },
+  {
+    "date": "2019-02-02",
+    "image": "https://github.com/denolib/animated-deno-logo/raw/master/deno-rect-24fps.gif",
+    "title": "An animated Deno logo",
+    "alt": "a animated deno logo",
+    "artist": {
+      "name": "hashrock",
+      "profile_image": "https://avatars0.githubusercontent.com/u/3132889",
+      "twitter": "hashedrock",
+      "github": "hashrock",
+      "web": "https://hashrock.studio.design/"
+    },
+    "license": "MIT"
+  },
+  {
+    "date": "2020-06-01",
+    "image": "/images/hashrock_simple.png",
+    "title": "Colorful Deno logo",
+    "alt": "light blue, light green simple logo",
+    "artist": {
+      "name": "hashrock",
+      "profile_image": "https://avatars0.githubusercontent.com/u/3132889",
+      "twitter": "hashedrock",
+      "github": "hashrock",
+      "web": "https://hashrock.studio.design/"
+    },
+    "license": "MIT"
+  },
+  {
+    "date": "2018-11-01",
+    "image": "/images/deno_logo.png",
+    "title": "The Original",
+    "alt": "a hand drawn deno logo",
+    "artist": {
+      "name": "ry",
+      "profile_image": "https://avatars3.githubusercontent.com/u/80",
+      "github": "ry",
+      "web": "https://tinyclouds.org/"
+    },
+    "license": "MIT"
+  },
+  {
+    "date": "2018-12-20",
+    "image": "https://raw.githubusercontent.com/denolib/high-res-deno-logo/master/deno_hr_circle.svg",
+    "title": "High-res Deno logo",
+    "alt": "a high resolution deno logo",
+    "artist": {
+      "name": "kevinkassimo",
+      "profile_image": "https://avatars2.githubusercontent.com/u/15007517",
+      "github": "kevinkassimo",
+      "web": "https://ksm.sh/"
+    },
+    "license": "MIT"
+  },
+  {
+    "date": "2020-03-23",
+    "image": "/images/duri4n.png",
+    "title": "Tattoo design",
+    "alt": "a deno logo as a tattoo design",
+    "artist": {
+      "name": "duri4n",
+      "instagram": "duri4n"
+    },
+    "license": "Restricted use"
+  },
+  {
+    "date": "2020-06-16",
+    "image": "/images/stone.jpeg",
+    "title": "Stone Deno",
+    "alt": "the classic deno logo, hand painted onto a circular gray rock",
+    "artist": {
+      "name": "Shannon Lienhart",
+      "profile_image": "https://pbs.twimg.com/profile_images/1046719234481385472/30m57yNI_400x400.jpg",
+      "twitter": "shannonlienhart"
+    },
+    "license": "Restricted use"
+  },
+  {
+    "date": "2020-06-17",
+    "image": "/images/DenoLogo3D-Anim.gif",
+    "title": "Deno Logo in 3D",
+    "alt": "a animated, green 3d deno mascot standing in the rain",
+    "link": "https://github.com/MasterJames/high-res-deno-logo",
+    "artist": {
+      "name": "Master James",
+      "profile_image": "https://avatars1.githubusercontent.com/u/1840183",
+      "github": "MasterJames"
+    },
+    "license": "Restricted use"
+  },
+  {
+    "date": "2019-04-14",
+    "image": "/images/deno_logo_4.gif",
+    "title": "Pixelated Deno",
+    "alt": "an animated deno logo in 8-bit style",
+    "link": "https://twitter.com/_tanakaworld/status/1117419541393358848",
+    "artist": {
+      "name": "tanakaworld",
+      "profile_image": "https://pbs.twimg.com/profile_images/1217807880667033606/MtlP0hsP_400x400.jpg",
+      "twitter": "_tanakaworld"
+    },
+    "license": "MIT"
+  }
+]

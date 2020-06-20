@@ -61,3 +61,31 @@ ol.nested li:before {
 .highlight-line {
   background-color: #fffbdd;
 }
+.deno-artwork {
+  -webkit-column-count: 1;
+  -webkit-column-gap: 4rem;
+  -moz-column-count: 1;
+  -moz-column-gap: 4rem;
+  column-count: 1;
+  column-gap: 4rem;
+}
+
+@media (min-width: 640px) {
+  .deno-artwork {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .deno-artwork {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+  }
+}
+
+.deno-nobreakinside {
+  break-inside: avoid-column;
+}
