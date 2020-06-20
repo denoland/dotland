@@ -50,19 +50,20 @@ function Item({ artwork }: { artwork: Artwork }) {
       />
       <div className="mt-4 flex justify-between items-center">
         <div className="flex justify-start items-center">
-          <img
-            src={artwork.artist.profile_image}
-            alt={artwork.artist.name}
-            className="rounded-full w-12 h-12"
-          />
+          {artwork.artist.profile_image ? (
+            <img
+              src={artwork.artist.profile_image}
+              alt={artwork.artist.name}
+              className="rounded-full w-12 h-12"
+            />
+          ) : (
+            <div className="rounded-full w-12 h-12 bg-gray-200" />
+          )}
           <div className="ml-4 flex flex-col justify-center">
             <div className="text-xl leading-tight">{artwork.artist.name}</div>
-            <a
-              className="text-gray-600 hover:text-gray-800 leading-tight"
-              href={artwork.license.link}
-            >
-              {artwork.license.name}
-            </a>
+            <span className="text-gray-600 leading-tight">
+              {artwork.license}
+            </span>
           </div>
         </div>
         <div className="flex justify-start items-center">
