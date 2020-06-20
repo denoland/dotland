@@ -2558,6 +2558,11 @@
     "desc": "A collection of useful Typescript libraries for Deno",
     "default_version": "master"
   },
+  "libauth": {
+    "type": "npm",
+    "package": "@bitauth/libauth",
+    "desc": " Library for Bitcoin, Bitcoin Cash, and Bitauth applications."
+  },
   "libhydrogen": {
     "type": "github",
     "owner": "chiefbiiko",
