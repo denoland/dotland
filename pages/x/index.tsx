@@ -17,13 +17,6 @@ const ThirdPartyRegistryList = () => {
     setQuery(event.target.value);
   }
 
-  // Sorting the list only if entries are changed
-  const list = useMemo(() => {
-    return Object.keys(entries).sort((nameA, nameB) =>
-      nameA.localeCompare(nameB)
-    );
-  }, [entries]);
-
   // Filtering the memoized list
   const filteredList = useMemo(() => {
     const queryWords = query.split(" ").filter((word) => word.length); // Split by space & ignore empty ones
@@ -36,11 +29,11 @@ const ThirdPartyRegistryList = () => {
       "i"
     );
 
-    return list.filter((name) => {
+    return Object.keys(entries).filter((name) => {
       const desc = entries[name].desc;
       return name.match(nameReg) || (desc ?? "").match(descReg);
     });
-  }, [list, query]);
+  }, [query]);
 
   return (
     <>
