@@ -17,19 +17,17 @@ const ThirdPartyRegistryList = () => {
     setQuery(event.target.value);
   }
 
-  const list = useMemo(
-    () =>
-      Object.keys(entries)
-        .filter(
-          (name) =>
-            name.toLowerCase().includes(query.toLowerCase()) ||
-            (entries[name].desc ?? "")
-              .toLowerCase()
-              .includes(query.toLowerCase())
-        )
-        .sort((nameA, nameB) => nameA.localeCompare(nameB)),
-    [entries, query]
-  );
+  // Filtering the memoized list
+  const filteredList = useMemo(() => {
+    const queryWords = query.split(" ").filter((word) => word.length); // Split by space & ignore empty ones
+    const nameReg = new RegExp(queryWords.join("|"), "i"); // Match any word of search query
+    const descReg = new RegExp(queryWords.join(".*?"), "i");
+
+    return Object.keys(entries).filter((name) => {
+      const desc = entries[name].desc;
+      return name.match(nameReg) || (desc ?? "").match(descReg);
+    });
+  }, [query]);
 
   return (
     <>
@@ -105,14 +103,14 @@ const ThirdPartyRegistryList = () => {
             </div>
           </div>
           <div className="sm:max-w-screen-lg sm:mx-auto sm:px-6 md:px-8 pb-4 sm:pb-12">
-            {list.length == 0 ? (
+            {filteredList.length == 0 ? (
               <div className="px-4 sm:px-0 py-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
                 No modules found
               </div>
             ) : (
               <div className="bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4">
                 <ul>
-                  {list.map((name, i) => {
+                  {filteredList.map((name, i) => {
                     const link = `/x/${name}`;
                     return (
                       <li

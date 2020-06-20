@@ -3158,7 +3158,7 @@
     "owner": "asos-craigmorten",
     "repo": "opine-http-proxy",
     "desc": "Proxy middleware for Opine HTTP servers.",
-    "default_version": "master"
+    "default_version": "main"
   },
   "organ": {
     "type": "github",
