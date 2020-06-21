@@ -2269,6 +2269,13 @@
     "desc": "IFTTT webhook api client for deno",
     "default_version": "master"
   },
+  "importql": {
+    "type": "github",
+    "owner": "crewdevio",
+    "repo": "importql",
+    "desc": "easy way to import and parse graphql files 🎡",
+    "default_version": "master"
+  },
   "imt": {
     "type": "github",
     "owner": "iosamuel",
