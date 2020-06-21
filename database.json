@@ -772,6 +772,13 @@
     "desc": "Tokenizer/lexer generator for Deno",
     "default_version": "master"
   },
+  "cep": {
+    "type": "github",
+    "owner": "Desenroladev",
+    "repo": "deno-cep",
+    "desc": "Busca por CEP integrado diretamente ao serviço do ViaCEP (Deno)",
+    "default_version": "master"
+  },
   "dactyl": {
     "type": "github",
     "owner": "liamtan28",
