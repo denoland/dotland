@@ -517,9 +517,11 @@ function DirectoryListing(props: {
                               className="px-4 py-1 w-full h-full block"
                               tabIndex={-1}
                             >
-                              {entry.type !== "dir" && entry.size
-                                ? bytesToSize(entry.size)
-                                : ""}
+                              {entry.type !== "dir" && entry.size ? (
+                                bytesToSize(entry.size)
+                              ) : (
+                                <>&nbsp;</>
+                              )}
                             </a>
                           </Link>
                         </td>
