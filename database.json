@@ -1,6 +1,6 @@
 {
   "a0": {
-    "type": "github",
+    "type": "github",easy way to import and parse graphql files 🎡
     "owner": "being-curious",
     "repo": "a0",
     "desc": "A command line utility to manage `text/number/email/password/address/note` with Alias to easy recall & copy to clipboard.",
@@ -2274,6 +2274,13 @@
     "owner": "iosamuel",
     "repo": "imt",
     "desc": "Implementation of TMI.JS as Twitch client for Deno",
+    "default_version": "master"
+  },
+  "importql": {
+    "type": "github",
+    "owner": "crewdevio",
+    "repo": "importql",
+    "desc": "easy way to import and parse graphql files 🎡",
     "default_version": "master"
   },
   "indigobird": {
