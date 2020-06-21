@@ -454,7 +454,6 @@ function DirectoryListing(props: {
                             ? " border-b border-gray-200"
                             : ""
                         }`}
-                        style={{ verticalAlign: "inherit" }}
                       >
                         <td className="whitespace-no-wrap text-sm leading-5 text-gray-400 w-6">
                           <Link href={href} as={as}>
