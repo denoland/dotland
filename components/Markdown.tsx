@@ -119,6 +119,13 @@ const renderers = (displayURL: string, sourceURL: string) => ({
   image: function ImageRendererWrapper(props: any) {
     return <ImageRenderer {...props} sourceURL={sourceURL} />;
   },
+  table: function TableRenderer(props: any) {
+    return (
+      <div className="overflow-x-auto">
+        <table {...props} />
+      </div>
+    );
+  },
 });
 
 interface MarkdownProps {
