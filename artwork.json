@@ -14,6 +14,20 @@
     "license": "MIT"
   },
   {
+    "date": "2020-05-14",
+    "image": "/images/deno_v1_congrats.jpeg",
+    "title": "Congrats on Deno 1.0",
+    "alt": "a drawing with two large deno mascots in the front and smaller ones behind, standing on brown ground in front of a blue sky. above them text reads: deno 1.0 congrats!",
+    "artist": {
+      "name": "hashrock",
+      "profile_image": "https://avatars0.githubusercontent.com/u/3132889",
+      "twitter": "hashedrock",
+      "github": "hashrock",
+      "web": "https://hashrock.studio.design/"
+    },
+    "license": "MIT"
+  },
+  {
     "date": "2019-02-02",
     "image": "https://github.com/denolib/animated-deno-logo/raw/master/deno-rect-24fps.gif",
     "title": "An animated Deno logo",
@@ -38,6 +52,20 @@
       "twitter": "hashedrock",
       "github": "hashrock",
       "web": "https://hashrock.studio.design/"
+    },
+    "license": "MIT"
+  },
+  {
+    "date": "2020-05-14",
+    "image": "/images/deno_city.jpeg",
+    "title": "Deno in the City",
+    "alt": "the deno mascot standing between a some tall lit up buildings at night",
+    "artist": {
+      "name": "Dimitrij Agal",
+      "profile_image": "https://pbs.twimg.com/profile_images/1242014548896264194/VJJtVXVG_400x400.jpg",
+      "twitter": "masbagal",
+      "github": "masbagal",
+      "web": "https://masbagal.com/"
     },
     "license": "MIT"
   },
