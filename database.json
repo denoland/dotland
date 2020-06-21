@@ -2276,6 +2276,13 @@
     "desc": "Implementation of TMI.JS as Twitch client for Deno",
     "default_version": "master"
   },
+  "importql": {
+  "type": "github",
+  "owner": "crewdevio",
+  "repo": "importql",
+  "desc": "easy way to import and parse graphql files 🎡",
+  "default_version": "master"
+  },
   "indigobird": {
     "type": "github",
     "owner": "ralusek",
