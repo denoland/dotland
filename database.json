@@ -231,6 +231,13 @@
     "desc": "Deno on Azure Functions",
     "default_version": "master"
   },
+  "b32": {
+    "type": "github",
+    "owner": "orzv",
+    "repo": "b32",
+    "desc": "Base32 encoder & decoder",
+    "default_version": "master"
+  },
   "bandwidth_throttle_stream": {
     "type": "github",
     "owner": "patrickkunka",
