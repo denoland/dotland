@@ -295,6 +295,13 @@
     "desc": "Lightweight BGPView API wrapper.",
     "default_version": "master"
   },
+  "bigdenary": {
+    "type": "github",
+    "owner": "uzyn",
+    "repo": "bigdenary",
+    "desc": "Arbitrary-length decimal library, like bigdecimal or bignumber, implemented with ES2020's native BigInt.",
+    "default_version": "master"
+  },
   "bigfloat": {
     "type": "github",
     "owner": "davidmartinez10",
