@@ -1,5 +1,17 @@
 [
   {
+    "date": "2020-06-21",
+    "image": "/images/deno_matrix.png",
+    "title": "Deno Matrix",
+    "alt": "a deno logo with The Matrix theme",
+    "artist": {
+      "name": "bramaudi",
+      "profile_image": "https://avatars1.githubusercontent.com/u/14371119",
+      "github": "bramaudi"
+    },
+    "license": "MIT"
+  },
+  {
     "date": "2020-05-13",
     "image": "/v1.png",
     "title": "Deno 1.0",
