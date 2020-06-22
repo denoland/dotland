@@ -1131,6 +1131,13 @@
     "desc": "search image and video from pixabay in deno",
     "default_version": "master"
   },
+  "deno_plural": {
+    "type": "github",
+    "owner": "mauroerta",
+    "repo": "deno-plural",
+    "desc": "deno-plural module helps you to pluralize or singularize a given word.",
+    "default_version": "master"
+  },
   "deno_riot": {
     "type": "github",
     "owner": "rafaelferres",
