@@ -1307,6 +1307,13 @@
     "desc": "denoget installs executable deno script.",
     "default_version": "master"
   },
+  "denohub": {
+    "type": "github",
+    "owner": "ncplayz",
+    "repo": "denohub",
+    "desc": "A Github API v3 Client for Deno",
+    "default_version": "master"
+  },
   "denoliver": {
     "type": "github",
     "owner": "joakimunge",
