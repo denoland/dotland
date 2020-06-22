@@ -2822,6 +2822,13 @@
     "desc": "A framework to build REST APIs in Deno runtime.",
     "default_version": "master"
   },
+  "metle": {
+    "type": "github",
+    "owner": "jwebcoder",
+    "repo": "metle",
+    "desc": "Memory storage with ttl and optional request count for improved cache refresh",
+    "default_version": "master"
+  },
   "microraptor": {
     "type": "github",
     "owner": "matteocrippa",
