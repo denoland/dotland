@@ -449,6 +449,13 @@
     "desc": "Build scalable web applications and services with MOST Web Framework Centroid, a next-gen MVC framework for Deno.",
     "default_version": "master"
   },
+  "cep": {
+    "type": "github",
+    "owner": "Desenroladev",
+    "repo": "deno-cep",
+    "desc": "Busca por CEP integrado diretamente ao serviço do ViaCEP (Deno)",
+    "default_version": "master"
+  },
   "chacha20": {
     "type": "github",
     "owner": "chiefbiiko",
