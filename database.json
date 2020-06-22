@@ -3172,7 +3172,7 @@
     "owner": "asos-craigmorten",
     "repo": "opine",
     "desc": "Fast, minimalist web framework for Deno ported from ExpressJS.",
-    "default_version": "master"
+    "default_version": "main"
   },
   "opineHttpProxy": {
     "type": "github",
@@ -4079,7 +4079,7 @@
     "owner": "asos-craigmorten",
     "repo": "superdeno",
     "desc": "HTTP assertions for Deno made easy via superagent.",
-    "default_version": "master"
+    "default_version": "main"
   },
   "superoak": {
     "type": "github",
