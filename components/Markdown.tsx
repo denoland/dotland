@@ -99,14 +99,26 @@ function CodeRenderer(props: any) {
   return <CodeBlock {...{ ...props, code: props.value, value: undefined }} />;
 }
 
-function ImageRenderer(props: { src: string; sourceURL: string }) {
+function ImageRenderer(props: {
+  src: string;
+  sourceURL: string;
+  displayURL: string;
+}) {
   let src = props.src;
+  const className = "max-w-full inline-block";
+  const isManual = new URL(props.displayURL).pathname.startsWith("/manual");
 
   if (isRelative(src)) {
     src = relativeToAbsolute(props.sourceURL, src);
   }
 
-  return <img src={src} className="max-w-full inline-block" />;
+  return isManual ? (
+    <a href={src} className={className}>
+      <img src={src} />
+    </a>
+  ) : (
+    <img className={className} src={src} />
+  );
 }
 
 const renderers = (displayURL: string, sourceURL: string) => ({
@@ -117,7 +129,9 @@ const renderers = (displayURL: string, sourceURL: string) => ({
     return <LinkRenderer {...props} displayURL={displayURL} />;
   },
   image: function ImageRendererWrapper(props: any) {
-    return <ImageRenderer {...props} sourceURL={sourceURL} />;
+    return (
+      <ImageRenderer {...props} sourceURL={sourceURL} displayURL={displayURL} />
+    );
   },
 });
 
