@@ -42,12 +42,12 @@ const ArtworkPage = () => {
 
 function Item({ artwork }: { artwork: Artwork }) {
   return (
-    <div>
+    <div className="p-2">
       <div className="flex justify-center">
         <img
           src={artwork.image}
           alt={artwork.alt}
-          className="rounded-md max-h-56"
+          className="rounded-md h-56"
         />
       </div>
       <div className="mt-3 text-xl font-semibold text-center">
