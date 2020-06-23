@@ -1586,7 +1586,7 @@
     "repo": "deno_dog",
     "desc": "Dog API wrapper",
     "default_version": "master"
-  },  
+  },
   "domdom": {
     "type": "github",
     "owner": "eirikb",
