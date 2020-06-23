@@ -29,7 +29,7 @@ const ArtworkPage = () => {
             </a>
           </p>
         </div>
-        <div className="deno-artwork lg:flex-col">
+        <div className="my-16 flex flex-row flex-wrap gap-16 justify-evenly">
           {ARTWORKS.map((artwork, i) => (
             <Item key={i} artwork={artwork} />
           ))}
@@ -42,13 +42,15 @@ const ArtworkPage = () => {
 
 function Item({ artwork }: { artwork: Artwork }) {
   return (
-    <div className="pt-16 deno-nobreakinside">
-      <img
-        src={artwork.image}
-        alt={artwork.alt}
-        className="w-full rounded-md"
-      />
-      <div className="mt-2 text-xl font-semibold">
+    <div>
+      <div className="flex justify-center">
+        <img
+          src={artwork.image}
+          alt={artwork.alt}
+          className="rounded-md max-h-56"
+        />
+      </div>
+      <div className="mt-3 text-xl font-semibold text-center">
         {artwork.link ? (
           <a
             href={artwork.link}
@@ -60,7 +62,7 @@ function Item({ artwork }: { artwork: Artwork }) {
           artwork.title
         )}
       </div>
-      <div className="mt-2 flex justify-between items-center">
+      <div className="mt-3 flex justify-between items-center">
         <div className="flex justify-start items-center">
           {artwork.artist.profile_image ? (
             <img
@@ -78,7 +80,7 @@ function Item({ artwork }: { artwork: Artwork }) {
             </span>
           </div>
         </div>
-        <div className="flex justify-start items-center">
+        <div className="flex justify-start items-center ml-4">
           {artwork.artist.web && (
             <a
               href={artwork.artist.web}
