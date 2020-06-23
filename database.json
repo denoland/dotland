@@ -1,4 +1,11 @@
 {
+  "30_seconds_of_typescript": {
+    "type": "github",
+    "owner": "deepakshrma",
+    "repo": "30-seconds-of-typescript",
+    "desc": "A collection of utility functions like arrayToCSV, aperture and many more. Inspired by 30 seconds of code, Fully converted in Typescript.",
+    "default_version": "master"
+  },
   "a0": {
     "type": "github",
     "owner": "being-curious",
