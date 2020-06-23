@@ -2549,6 +2549,13 @@
     "desc": "Simple terminal spinners for Deno 🦕 (Based on Ora)",
     "default_version": "master"
   },
+  "kill_port": {
+    "type": "github",
+    "owner": "gustavofabro",
+    "repo": "deno_kill_port",
+    "desc": "Deno module that kills the process of an informed port.",
+    "default_version": "master"
+  },
   "ky": {
     "type": "github",
     "owner": "sindresorhus",
