@@ -3581,6 +3581,13 @@
     "desc": "A command line argument parser",
     "default_version": "master"
   },
+  "qwikid": {
+    "type": "github",
+    "owner": "mrgeedee",
+    "repo": "qwikid",
+    "desc": "Generate IDs fast and easy!",
+    "default_version": "master"
+  },
   "rad": {
     "type": "github",
     "owner": "cdaringe",
