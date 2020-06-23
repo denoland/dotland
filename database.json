@@ -1580,6 +1580,13 @@
     "desc": "Dog API wrapper",
     "default_version": "master"
   },
+  "docker_names": {
+    "type": "github",
+    "owner": "rodolphocastro",
+    "repo": "deno_dockernames",
+    "desc": "🐋 Moby's name generation ported to Deno! Easily create random names for your needs",
+    "default_version": "master"
+  },
   "domdom": {
     "type": "github",
     "owner": "eirikb",
