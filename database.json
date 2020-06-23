@@ -3700,6 +3700,13 @@
     "desc": "Reloads a deno application on every file change",
     "default_version": "master"
   },
+  "rhum": {
+    "type": "github",
+    "owner": "drashland",
+    "repo": "rhum",
+    "desc": "A lightweight testing framework for Deno.",
+    "default_version": "master"
+  },
   "rimu": {
     "type": "github",
     "owner": "srackham",
