@@ -2388,6 +2388,13 @@
     "desc": "Simple ip-api.com API wrapper for Deno.",
     "default_version": "master"
   },
+  "irc": {
+    "type": "github",
+    "owner": "hacked",
+    "repo": "irc",
+    "desc": "🦕 Internet Relay Chat (IRC) Message Parser for Deno",
+    "default_version": "master"
+  },
   "iro": {
     "type": "github",
     "owner": "jozsefsallai",
