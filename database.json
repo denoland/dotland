@@ -4085,7 +4085,7 @@
     "owner": "ergenekonyigit",
     "repo": "statistics",
     "desc": "Deno basic statistics module",
-    "default_version": "master"
+    "default_version": "main"
   },
   "status": {
     "type": "github",
