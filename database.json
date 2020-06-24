@@ -3742,6 +3742,13 @@
     "desc": "A high-performance basic router works everywhere.",
     "default_version": "master"
   },
+  "rss": {
+    "type": "github",
+    "owner": "MikaelPorttila",
+    "repo": "rss",
+    "desc": "RSS and ATOM parser",
+    "default_version": "master"
+  },
   "rsocket": {
     "type": "github",
     "owner": "linux-china",
