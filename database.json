@@ -1019,6 +1019,13 @@
     "desc": "dotenv for Deno, with exapnd capabilities",
     "default_version": "master"
   },
+  "deno_faker": {
+    "type": "github",
+    "owner": "jackfiszr",
+    "repo": "deno-faker",
+    "desc": "Generate fake data. Deno port of Marak/faker.js",
+    "default_version": "master"
+  },
   "deno_flatten": {
     "type": "github",
     "owner": "yanislavgalyov",
