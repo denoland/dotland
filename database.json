@@ -3342,6 +3342,13 @@
     "desc": "A zero-dependency, minimal permission guard.",
     "default_version": "master"
   },
+  "perpetual_futures": {
+    "type": "github",
+    "owner": "zynesis",
+    "repo": "perpetual-futures",
+    "desc": "Calculator for perpetual swaps/futures, similar with that on Binance & BitMEX.",
+    "default_version": "master"
+  },
   "pg": {
     "type": "github",
     "owner": "deno-library",
