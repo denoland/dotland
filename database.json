@@ -3358,7 +3358,8 @@
     "type": "github",
     "owner": "GameBridgeAI",
     "repo": "ts_serialize",
-    "desc": "A zero dependency library for serializing data"
+    "desc": "A zero dependency library for serializing data",
+    "default_version": "develop"
   },
   "tweetnacl_deno": {
     "type": "github",
