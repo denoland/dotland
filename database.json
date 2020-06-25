@@ -1552,6 +1552,13 @@
     "desc": "Deno module for Service Locator pattern",
     "default_version": "master"
   },
+  "distancecalculator": {
+    "type": "github",
+    "owner": "michael-spengler",
+    "repo": "distance-calculator",
+    "desc": "Deno module for calculating distances based on latitude & longitude",
+    "default_version": "master"
+  },
   "djwt": {
     "type": "github",
     "owner": "timonson",
