@@ -1566,6 +1566,13 @@
     "desc": "An open-source doc block parser for generating documenation as JSON.",
     "default_version": "master"
   },
+  "docker_names": {
+    "type": "github",
+    "owner": "rodolphocastro",
+    "repo": "deno_dockernames",
+    "desc": "🐋 Moby's name generation ported to Deno! Easily create random names for your needs",
+    "default_version": "master"
+  },
   "docopt": {
     "type": "github",
     "owner": "eyal-shalev",
