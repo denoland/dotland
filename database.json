@@ -812,7 +812,7 @@
     "owner": "xpyxel",
     "repo": "dash",
     "desc": "Fast, simple, and efficient LRU cache library for Deno.",
-    "default_version": "master"
+    "default_version": "main"
   },
   "databatcher": {
     "type": "github",
