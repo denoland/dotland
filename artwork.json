@@ -155,5 +155,18 @@
       "twitter": "_tanakaworld"
     },
     "license": "MIT"
+  },
+  {
+    "date": "2020-06-23",
+    "image": "/images/glitchy-deno.jpg",
+    "title": "Glitchy Deno",
+    "alt": "Deno logo glitching while trying to access Multi-verse",
+    "link": "https://twitter.com/SamipPoudel3",
+    "artist": {
+      "name": "Samip Poudel",
+      "profile_image": "https://avatars1.githubusercontent.com/u/59493809",
+      "github": "SamipPoudel58"
+    },
+    "license": "Restricted use"
   }
 ]
