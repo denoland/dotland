@@ -956,6 +956,13 @@
     "desc": "Generates AWS Signature V4 for AWS low-level REST APIs",
     "default_version": "master"
   },
+  "deno_cef": {
+    "type": "github",
+    "owner": "denjucks",
+    "repo": "deno-cef",
+    "desc": "The Chromium Embedded Framework for Deno, for making GUI apps using Chromium technologies.",
+    "default_version": "master"
+  },
   "deno_check_thai_pid": {
     "type": "github",
     "owner": "thiti-y",
