@@ -4752,6 +4752,13 @@
     "desc": "Wrapper for the Windows tasklist command",
     "default_version": "master"
   },
+  "worldtides": {
+    "type": "github",
+    "owner": "jwebcoder",
+    "repo": "deno_worldtides",
+    "desc": "Wrapper for the worldtides.info V2 API to retrieve tidal data",
+    "default_version": "master"
+  },
   "x_name": {
     "type": "github",
     "owner": "denorg",
