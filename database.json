@@ -3777,6 +3777,13 @@
     "desc": "RIPEMD160, a cryptographic hash function.",
     "default_version": "master"
   },
+  "roblox": {
+    "type": "github",
+    "owner": "lenneths",
+    "repo": "deno-roblox",
+    "desc": "A roblox api wrapper made in deno.",
+    "default_version": "master"
+  },
   "router": {
     "type": "github",
     "owner": "zhmushan",
