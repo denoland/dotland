@@ -4431,6 +4431,13 @@
     "desc": "A Prometheus client in Typescript for Deno",
     "default_version": "master"
   },
+  "ts_serialize": {
+    "type": "github",
+    "owner": "GameBridgeAI",
+    "repo": "ts_serialize",
+    "desc": "A zero dependency library for serializing data",
+    "default_version": "develop"
+  },
   "tweetnacl_deno": {
     "type": "github",
     "owner": "dr-useless",
