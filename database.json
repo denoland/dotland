@@ -400,6 +400,13 @@
     "desc": "JavaScript/TypeScript version of bzfquery for Deno",
     "default_version": "master"
   },
+  "cabinet": {
+    "type": "github",
+    "owner": "dan-online",
+    "repo": "cabinet",
+    "desc": "The easier way to manage local files in Deno.",
+    "default_version": "master"
+  },
   "caller": {
     "type": "github",
     "owner": "apiel",
