@@ -4597,6 +4597,13 @@
     "desc": "A python-style with statement for deno.",
     "default_version": "master"
   },
+  "utfstring": {
+    "type": "github",
+    "owner": "sant123",
+    "repo": "utfstring",
+    "desc": "UTF-safe string operations in Deno",
+    "default_version": "master"
+  },
   "uuid": {
     "type": "github",
     "owner": "lucascaro",
