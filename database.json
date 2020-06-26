@@ -3222,6 +3222,13 @@
     "desc": "tc39 proposal spec compatible observable",
     "default_version": "master"
   },
+  "ogone": {
+    "type": "github",
+    "owner": "SRNV",
+    "repo": "Ogone",
+    "desc": "a Web-Components compiler to create modern Apps (SPA, PWA). includes: Single file components, true reactivity, router, store, async-components, dev-tool",
+    "default_version": "master"
+  },
   "omelette": {
     "type": "github",
     "owner": "f",
