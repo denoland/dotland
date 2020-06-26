@@ -4129,6 +4129,13 @@
     "desc": "Native plugin for SQLite using rusqlite",
     "default_version": "master"
   },
+  "ssds": {
+    "type": "github",
+    "owner": "claytsay",
+    "repo": "ssds-deno",
+    "desc": "Some specialized data structures for Deno.",
+    "default_version": "master"
+  },
   "ssr": {
     "type": "github",
     "owner": "maheshkareeya",
