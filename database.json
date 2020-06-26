@@ -2955,6 +2955,13 @@
     "desc": "This module provides utilities to help mock behavior and spy on function calls for tests.",
     "default_version": "master"
   },
+  "modify_via_query": {
+    "type": "github",
+    "owner": "wongjiahau",
+    "repo": "modify-via-query",
+    "desc": "Mutate a copy of data without changing the original source with natural and type-safe query.",
+    "default_version": "master"
+  },
   "mojang": {
     "type": "github",
     "owner": "often",
