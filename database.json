@@ -404,7 +404,7 @@
     "type": "github",
     "owner": "dan-online",
     "repo": "cabinet",
-    "desc": "The easier way to manage files in Deno",
+    "desc": "The easier way to manage local files in Deno.",
     "default_version": "master"
   },
   "caller": {
