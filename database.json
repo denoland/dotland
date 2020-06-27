@@ -140,13 +140,6 @@
     "desc": "The next-generation type-safe web framework.",
     "default_version": "master"
   },
-  "flux": {
-    "type": "github",
-    "owner": "xpyxel",
-    "repo": "flux",
-    "desc": "A simple, yet powerful state library in TypeScript for Deno",
-    "default_version": "main"
-  },
   "arrays": {
     "type": "github",
     "owner": "damianperera",
@@ -1980,6 +1973,13 @@
     "repo": "fluffcord",
     "desc": "Fast Discord API wrapper for deno.",
     "default_version": "master"
+  },
+  "flux": {
+    "type": "github",
+    "owner": "xpyxel",
+    "repo": "flux",
+    "desc": "A simple, yet powerful state library in TypeScript for Deno",
+    "default_version": "main"
   },
   "flux_annotated_csv_parser": {
     "type": "github",
