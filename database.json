@@ -2205,7 +2205,7 @@
     "desc": "Heap data structure",
     "default_version": "master"
   },
-  "hex-functions": {
+  "hex": {
     "type": "github",
     "owner": "eserozvataf",
     "repo": "hex-functions",
