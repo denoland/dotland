@@ -140,6 +140,13 @@
     "desc": "The next-generation type-safe web framework.",
     "default_version": "master"
   },
+  "arkoren": {
+    "type": "github",
+    "owner": "xpyxel",
+    "repo": "flux",
+    "desc": "A simple, yet powerful state library in TypeScript for Deno",
+    "default_version": "main"
+  },
   "arrays": {
     "type": "github",
     "owner": "damianperera",
