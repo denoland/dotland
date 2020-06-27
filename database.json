@@ -140,7 +140,7 @@
     "desc": "The next-generation type-safe web framework.",
     "default_version": "master"
   },
-  "arkoren": {
+  "flux": {
     "type": "github",
     "owner": "xpyxel",
     "repo": "flux",
