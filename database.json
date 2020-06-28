@@ -2268,6 +2268,13 @@
     "desc": "Convenience function for macing singular data. hash should be one of sha1, sha256, or sha512",
     "default_version": "master"
   },
+  "hooked": {
+    "type": "github",
+    "owner": "luvies",
+    "repo": "deno_hooked",
+    "desc": "A simple single file test module providing grouping and hooks.",
+    "default_version": "master"
+  },
   "houston": {
     "type": "github",
     "owner": "MartonDev",
