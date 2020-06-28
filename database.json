@@ -2044,6 +2044,13 @@
     "desc": "Flux Annotated CSV Parser",
     "default_version": "master"
   },
+  "food": {
+    "type": "github",
+    "owner": "michael-spengler",
+    "repo": "food",
+    "desc": "Deno module for food lovers. Leveraging https://world.openfoodfacts.org/ and more.",
+    "default_version": "master"
+  },
   "fossil": {
     "type": "github",
     "owner": "matteocrippa",
