@@ -814,6 +814,13 @@
     "desc": "Backend REST web framework for Deno, built on top of Oak",
     "default_version": "master"
   },
+  "dance": {
+    "type": "github",
+    "owner": "dance-planner",
+    "repo": "dance",
+    "desc": "Deno module for dance fans. Providing dance events etc.",
+    "default_version": "master"
+  },
   "dash": {
     "type": "github",
     "owner": "xpyxel",
