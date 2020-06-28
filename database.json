@@ -519,6 +519,13 @@
     "desc": "WASM bindings to Ciphers for Deno.",
     "default_version": "master"
   },
+  "cities": {
+    "type": "github",
+    "owner": "michael-spengler",
+    "repo": "cities",
+    "desc": "Deno module to get city data.",
+    "default_version": "master"
+  },
   "cli_spinners": {
     "type": "github",
     "owner": "ameerthehacker",
