@@ -2212,6 +2212,13 @@
     "desc": "Heap data structure",
     "default_version": "master"
   },
+  "hex": {
+    "type": "github",
+    "owner": "eserozvataf",
+    "repo": "hex-functions",
+    "desc": "Function abstraction for better portability between platforms. Write once, run on cli, bots, function runtimes and web apis.",
+    "default_version": "master"
+  },
   "hk_stock_api": {
     "type": "github",
     "owner": "yeukfei02",
