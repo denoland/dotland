@@ -3300,6 +3300,13 @@
     "desc": "Proxy middleware for Opine HTTP servers.",
     "default_version": "main"
   },
+  "orange": {
+    "type": "github",
+    "owner": "mandarineorg",
+    "repo": "orange",
+    "desc": "A decorator-driven testing library for Deno & mandarine-powered applications",
+    "default_version": "master"
+  },
   "organ": {
     "type": "github",
     "owner": "denjucks",
