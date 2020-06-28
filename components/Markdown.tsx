@@ -81,7 +81,7 @@ function LinkRenderer(props: LinkRendererProps) {
   // Manual links should not have trailing .md
   if (
     hrefURL?.pathname?.startsWith("/manual") &&
-    hrefURL?.origin === location.origin
+    hrefURL?.origin === "https://deno.land"
   ) {
     hrefURL.pathname = hrefURL.pathname.replace(/\.md$/, "");
     href = hrefURL.href;

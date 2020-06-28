@@ -1,4 +1,4 @@
-import { parseNameVersion, findEntry } from "../../util/registry_utils";
+import { parseNameVersion, getSourceURL } from "../../util/registry_utils";
 
 export async function handleRegistryRequest(url: URL): Promise<Response> {
   console.log("registry request", url.pathname);
@@ -16,7 +16,7 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
   if (needsWarning(url.pathname)) {
     response.headers.set(
       "X-Deno-Warning",
-      `Implicitly using master branch ${url}`
+      `Implicitly using master branch ${url}`,
     );
   }
   const originContentType = response.headers.get("content-type");
@@ -53,7 +53,7 @@ export function getRegistrySourceURL(pathname: string): string | undefined {
   const nameBranchRest = pathname.replace(/^\/x\//, "");
   const [nameBranch, ...rest] = nameBranchRest.split("/");
   const [name, version] = parseNameVersion(nameBranch);
+  if (!version) return undefined;
   const path = rest.join("/");
-  const entry = findEntry(name);
-  return entry?.getSourceURL("/" + path, version);
+  return getSourceURL(name, version, "/" + path);
 }

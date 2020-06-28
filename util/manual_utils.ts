@@ -1,5 +1,8 @@
 const basepath = "https://raw.githubusercontent.com/denoland/deno/";
 const docpath = "https://github.com/denoland/deno/blob/";
+import VERSIONS from "../deno_versions.json";
+
+export const versions = VERSIONS.cli;
 
 export interface TableOfContents {
   [slug: string]: {
@@ -11,14 +14,13 @@ export interface TableOfContents {
 }
 
 export async function getTableOfContents(
-  version: string
+  version: string,
 ): Promise<TableOfContents> {
   const res = await fetch(`${basepath}${version}/docs/toc.json`);
   if (res.status !== 200) {
     throw Error(
-      `Got an error (${
-        res.status
-      }) while getting the manual table of contents:\n${await res.text()}`
+      `Got an error (${res.status}) while getting the manual table of contents:\n${await res
+        .text()}`,
     );
   }
   return await res.json();

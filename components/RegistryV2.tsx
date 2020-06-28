@@ -1,219 +1,67 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import React, { useMemo, useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
+import React, { useMemo } from "react";
 import Head from "next/head";
-import {
-  parseNameVersion,
-  denoDocAvailableForURL,
-  isReadme,
-  getSourceURL,
-  getRepositoryURL,
-  DirEntry,
-  getDirectoryListing,
-  getVersionList,
-  VersionInfo,
-  DirListing,
-  MetaInfo,
-  getMeta,
-} from "../util/registry_utils";
 import Header from "./Header";
 import Footer from "./Footer";
+import {
+  MetaInfo,
+  VersionInfo,
+  DirEntry,
+  isReadme,
+  getRepositoryURL,
+  denoDocAvailableForURL,
+} from "../util/registry_utils";
+import { useRouter } from "next/router";
+import Link from "next/link";
 import FileDisplay from "./FileDisplay";
 
-const Registry = () => {
-  const [raw, setRaw] = useState<string | null | undefined>();
-  const [dirListing, setDirListing] = useState<
-    DirListing[] | null | undefined
-  >();
-  const [meta, setMeta] = useState<MetaInfo | null | undefined>();
-  const [versions, setVersions] = useState<VersionInfo | null | undefined>();
-
-  const [readmeCanonicalPath, setReadmeCanonicalPath] = useState<
-    string | null | undefined
-  >();
-  const [readmeURL, setReadmeURL] = useState<string | null | undefined>();
-  const [readmeRepositoryURL, setReadmeRepositoryURL] = useState<
-    string | null | undefined
-  >();
-  const [readme, setReadme] = useState<string | null | undefined>();
-
-  const { query, asPath, push } = useRouter();
+interface RegistryProps {
+  name: string;
+  version: string;
+  path: string;
+  sourceURL: string;
+  meta: MetaInfo | null;
+  versionList: VersionInfo | null;
+  dirEntries: DirEntry[] | null;
+  raw: string | null;
+}
+const RegistryV2 = ({
+  name,
+  version,
+  path,
+  sourceURL,
+  meta,
+  versionList,
+  dirEntries,
+  raw,
+}: RegistryProps) => {
+  const { isFallback, push, asPath } = useRouter();
   const isStd = asPath.startsWith("/std");
-  const { name, version, path } = useMemo(() => {
-    const path =
-      (Array.isArray(query.path) ? query.path.join("/") : query.path) ?? "";
-    const [name, version] = parseNameVersion(
-      (Array.isArray(query.identifier)
-        ? query.identifier[0]
-        : query.identifier) ?? ""
-    );
-    return { name, version, path: path ? `/${path}` : "" };
-  }, [query]);
-
   const canonicalPath = useMemo(
     () => `${isStd ? "" : "/x"}/${name}${version ? `@${version}` : ""}${path}`,
-    [name, version, path]
-  );
-  const sourceURL = useMemo(
-    () => (name && version ? getSourceURL(name, version, path) : undefined),
     [name, version, path]
   );
   const repositoryURL = useMemo(
     () => (meta && version ? getRepositoryURL(meta, version, path) : undefined),
     [meta, version, path]
   );
-
   const documentationURL = useMemo(() => {
     const doc = `https://doc.deno.land/https/deno.land/${canonicalPath}`;
     return denoDocAvailableForURL(canonicalPath) ? doc : null;
   }, [canonicalPath]);
 
-  const dirEntries = useMemo(() => {
-    if (Array.isArray(dirListing)) {
-      const files = dirListing
-        .filter(
-          (f) =>
-            f.path.startsWith(path) &&
-            f.path.split("/").length - 2 === path.split("/").length - 1
-        )
-        .map<DirEntry>((f) => {
-          const [name] = f.path.slice(path.length + 1).split("/");
-          return {
-            name,
-            type: f.type,
-          };
-        });
-      return files.length > 0 ? files : null;
-    }
-    return dirListing;
-  }, [dirListing, path]);
-
-  // Fetch raw source
-  useEffect(() => {
-    setRaw(undefined);
-    if (version) {
-      if (sourceURL) {
-        fetch(sourceURL, { method: "GET" })
-          .then((resp) => {
-            if (!resp.ok) {
-              if (
-                resp.status === 400 ||
-                resp.status === 403 ||
-                resp.status === 404
-              )
-                return null;
-              throw new Error(`${resp.status}: ${resp.statusText}`);
-            }
-            return resp.text();
-          })
-          .then(setRaw)
-          .catch((e) => {
-            console.error("Failed to fetch raw source:", e);
-            setRaw(null);
-          });
-      } else {
-        setRaw(null);
-      }
-    }
-  }, [sourceURL]);
-
-  // Fetch directory listing
-  useEffect(() => {
-    setDirListing(undefined);
-    if (version) {
-      if (name) {
-        getDirectoryListing(name, version)
-          .then(setDirListing)
-          .catch((e) => {
-            console.error("Failed to fetch dir entry:", e);
-            setDirListing(null);
-          });
-      } else {
-        setDirListing(null);
-      }
-    }
-  }, [name, version]);
-
-  // Fetch versions
-  useEffect(() => {
-    setVersions(undefined);
-    if (name) {
-      getVersionList(name)
-        .then(setVersions)
-        .catch((e) => {
-          console.error("Failed to fetch versions:", e);
-          setVersions(null);
-        });
-    }
-  }, [name]);
-
-  // Fetch meta
-  useEffect(() => {
-    setMeta(undefined);
-    if (name) {
-      getMeta(name)
-        .then(setMeta)
-        .catch((e) => {
-          console.error("Failed to fetch meta info:", e);
-          setMeta(null);
-        });
-    }
-  }, [name]);
-
-  // Check if readme is available in directory listing
-  useEffect(() => {
-    const readmeEntry = dirEntries?.find((d) => isReadme(d.name));
-    if (readmeEntry) {
-      setReadmeCanonicalPath(canonicalPath + "/" + readmeEntry.name);
-      setReadmeURL(getSourceURL(name, version, path + "/" + readmeEntry.name));
-      setReadmeRepositoryURL(
-        meta
-          ? getRepositoryURL(meta, version, path + "/" + readmeEntry.name)
-          : null
-      );
-      return;
-    }
-    setReadmeCanonicalPath(null);
-    setReadmeURL(null);
-    setReadmeRepositoryURL(null);
-  }, [meta, name, path, version, dirEntries, canonicalPath]);
-
-  // Fetch readme
-  useEffect(() => {
-    if (readmeURL) {
-      setReadme(undefined);
-      fetch(readmeURL)
-        .then((resp) => {
-          if (!resp.ok) throw new Error("README fetch failed.");
-          return resp.text();
-        })
-        .then(setReadme)
-        .catch((e) => {
-          console.error("Failed to fetch README:", e);
-          setReadme(null);
-        });
-    } else {
-      setReadme(null);
-    }
-  }, [readmeURL]);
-
-  useEffect(() => {
-    if (!version && versions) {
-      gotoVersion(versions.latest ?? "");
-    }
-  }, [versions?.latest, version]);
-
   function gotoVersion(newVersion: string) {
     push(
-      `${!isStd ? "/x" : ""}/[identifier]${path ? "/[...path]" : ""}`,
+      `${!isStd ? "/x" : ""}/[...rest]`,
       `${!isStd ? "/x" : ""}/${
         name + (newVersion !== "" ? `@${newVersion}` : "")
       }${path}`
     );
   }
-
+  if (!version && versionList && !isFallback && typeof window !== "undefined") {
+    gotoVersion(versionList?.latest);
+  }
   return (
     <>
       <Head>
@@ -227,124 +75,86 @@ const Registry = () => {
         <Header
           subtitle={name === "std" ? "Standard Library" : "Third Party Modules"}
         />
-        <div className="">
-          <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8">
-            <Breadcrumbs
-              name={name}
-              version={version}
-              path={path}
-              isStd={isStd}
-            />
-            <VersionSelector
-              versions={versions?.versions}
-              selectedVersion={version}
-              onChange={gotoVersion}
-            />
-            {(() => {
-              if (meta === null) {
-                return (
-                  <ErrorMessage
-                    title="404 - Not Found"
-                    body="This module does not exist."
-                  />
-                );
-              } else if (
-                dirListing &&
-                dirListing.filter((d) => d.path === path).length === 0
-              ) {
-                return (
-                  <ErrorMessage
-                    title="404 - Not Found"
-                    body="This file or directory could not be found."
-                  />
-                );
-              } else if (!dirEntries && typeof raw !== "string") {
-                // loading
-                return (
-                  <div className="mt-4 rounded-lg overflow-hidden border border-gray-200 bg-white">
-                    <div className="bg-gray-100 h-10 w-full border-b border-gray-200 px-4 py-3">
-                      <div className="w-3/5 sm:w-1/5 bg-gray-200 h-4"></div>
-                    </div>
-                    <div className="w-full p-4">
-                      <div className="w-4/5 sm:w-1/3 bg-gray-100 h-8"></div>
-                      <div className="sm:w-2/3 bg-gray-100 h-3 mt-6"></div>
-                      <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
-                      <div className="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                      <div className="w-3/4 bg-gray-100 h-3 mt-4"></div>
-                      <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
-                      <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                    </div>
-                  </div>
-                );
-              }
-            })()}
-            {dirEntries !== undefined && dirEntries !== null ? (
-              <DirectoryListing
-                dirEntries={dirEntries}
-                repositoryURL={repositoryURL}
+        <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8">
+          {isFallback || (!version && meta) ? (
+            <>
+              <div className="mt-4 rounded-lg overflow-hidden border border-gray-200 bg-white">
+                <div className="bg-gray-100 h-10 w-full border-b border-gray-200 px-4 py-3">
+                  <div className="w-3/5 sm:w-1/5 bg-gray-200 h-4"></div>
+                </div>
+                <div className="w-full p-4">
+                  <div className="w-4/5 sm:w-1/3 bg-gray-100 h-8"></div>
+                  <div className="sm:w-2/3 bg-gray-100 h-3 mt-6"></div>
+                  <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
+                  <div className="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                  <div className="w-3/4 bg-gray-100 h-3 mt-4"></div>
+                  <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
+                  <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <Breadcrumbs
                 name={name}
                 version={version}
                 path={path}
+                isStd={false}
               />
-            ) : null}
-            {typeof raw === "string" ? (
-              <div className="mt-4">
-                <FileDisplay
-                  raw={raw}
-                  canonicalPath={canonicalPath}
-                  sourceURL={sourceURL!}
-                  repositoryURL={repositoryURL}
-                  documentationURL={documentationURL}
-                />
-              </div>
-            ) : null}
-            {typeof readme === "string" ? (
-              <div className="mt-4">
-                <FileDisplay
-                  raw={readme}
-                  canonicalPath={readmeCanonicalPath!}
-                  sourceURL={readmeURL!}
-                  repositoryURL={readmeRepositoryURL}
-                />
-              </div>
-            ) : null}
-          </div>
+              {(() => {
+                if (!meta) {
+                  return (
+                    <ErrorMessage
+                      title="404 - Module not found"
+                      body="This module does not exist."
+                    />
+                  );
+                } else if (!versionList?.versions.includes(version)) {
+                  return (
+                    <ErrorMessage
+                      title="404 - Version not found"
+                      body="This version does not exist for this module."
+                    />
+                  );
+                } else {
+                  return (
+                    <>
+                      <VersionSelector
+                        selectedVersion={version}
+                        versions={versionList?.versions}
+                        onChange={gotoVersion}
+                      />
+                      {dirEntries && (
+                        <DirectoryListing
+                          name={name}
+                          version={version}
+                          path={path}
+                          dirEntries={dirEntries}
+                        />
+                      )}
+                      {typeof raw === "string" ? (
+                        <div className="mt-4">
+                          <FileDisplay
+                            raw={raw}
+                            canonicalPath={canonicalPath}
+                            sourceURL={sourceURL}
+                            repositoryURL={repositoryURL}
+                            documentationURL={documentationURL}
+                          />
+                        </div>
+                      ) : null}
+                    </>
+                  );
+                }
+              })()}
+            </>
+          )}
         </div>
         <Footer simple />
       </div>
     </>
   );
 };
-
-function ErrorMessage(props: { title: string; body: string }) {
-  return (
-    <div className="rounded-md bg-red-50 border border-red-200 p-4 my-4">
-      <div className="flex">
-        <div className="flex-shrink-0">
-          <svg
-            className="h-5 w-5 text-red-400"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
-            <path
-              fillRule="evenodd"
-              d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </div>
-        <div className="ml-3">
-          <h3 className="text-sm leading-5 font-medium text-red-800">
-            {props.title}
-          </h3>
-          <div className="mt-2 text-sm leading-5 text-red-700">
-            {props.body}
-          </div>
-        </div>
-      </div>{" "}
-    </div>
-  );
-}
 
 function Breadcrumbs({
   name,
@@ -373,7 +183,7 @@ function Breadcrumbs({
         </>
       )}
       <Link
-        href={(!isStd ? "/x" : "") + "/[identifier]"}
+        href={(!isStd ? "/x" : "") + "/[...rest]"}
         as={`${!isStd ? "/x" : ""}/${name}${version ? `@${version}` : ""}`}
       >
         <a className="link">
@@ -390,7 +200,7 @@ function Breadcrumbs({
               {" "}
               /{" "}
               <Link
-                href={(!isStd ? "/x" : "") + "/[identifier]/[...path]"}
+                href={(!isStd ? "/x" : "") + "/[...rest]"}
                 as={`${!isStd ? "/x" : ""}/${name}${
                   version ? `@${version}` : ""
                 }${link ? `/${link}` : ""}`}
@@ -589,4 +399,33 @@ function bytesToSize(bytes: number) {
   return (bytes / Math.pow(1024, i)).toFixed(0) + " " + sizes[i];
 }
 
-export default Registry;
+function ErrorMessage(props: { title: string; body: string }) {
+  return (
+    <div className="rounded-md bg-red-50 border border-red-200 p-4 my-4">
+      <div className="flex">
+        <div className="flex-shrink-0">
+          <svg
+            className="h-5 w-5 text-red-400"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </div>
+        <div className="ml-3">
+          <h3 className="text-sm leading-5 font-medium text-red-800">
+            {props.title}
+          </h3>
+          <div className="mt-2 text-sm leading-5 text-red-700">
+            {props.body}
+          </div>
+        </div>
+      </div>{" "}
+    </div>
+  );
+}
+export default RegistryV2;

@@ -1,73 +1,119 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import DATABASE from "../database.json";
-import { GithubEntry, GithubDatabaseEntry } from "./registries/github";
-import { DenoStdEntry, DenoStdDatabaseEntry } from "./registries/deno_std";
-import { URLEntry, URLDatabaseEntry } from "./registries/url";
-import { NPMEntry, NPMDatabaseEntry } from "./registries/npm";
-import { Entry, DatabaseEntry } from "./registries";
+const S3_BUCKET =
+  "https://dregv3-production-storagebucket-1x6i8sakxohjf.s3.us-east-2.amazonaws.com/";
 
-function findDatabaseEntry(
-  name: string
-):
-  | GithubDatabaseEntry
-  | DenoStdDatabaseEntry
-  | URLDatabaseEntry
-  | NPMDatabaseEntry
-  | undefined {
-  if (name.startsWith("npm:")) {
-    const [_, packageName] = name.split(":");
-    const entry: NPMDatabaseEntry = {
-      desc: packageName,
-      package: packageName,
-      type: "npm",
-    };
-    return entry;
-  }
-
-  if (name.startsWith("gh:")) {
-    const [_, owner, repo] = name.split(":");
-    const entry: GithubDatabaseEntry = {
-      desc: `${owner}/${repo}`,
-      owner,
-      repo,
-      type: "github",
-      // eslint-disable-next-line @typescript-eslint/camelcase
-      default_version: "master",
-    };
-    return entry;
-  }
-
-  // @ts-ignore
-  return DATABASE[name];
+export interface DirEntry {
+  name: string;
+  type: "file" | "dir" | "symlink";
+  size?: number;
+  target?: string;
 }
 
-export function findEntry(name: string): Entry | null {
-  const dbEntry = findDatabaseEntry(name);
-  switch (dbEntry?.type) {
+export function getSourceURL(
+  module: string,
+  version: string,
+  path: string,
+): string {
+  return `${S3_BUCKET}${module}/versions/${version}/raw${path}`;
+}
+
+export function getRepositoryURL(
+  meta: MetaInfo,
+  version: string,
+  path: string,
+): string | undefined {
+  switch (meta?.type) {
     case "github":
-      return new GithubEntry(dbEntry);
-    case "deno_std":
-      return new DenoStdEntry(dbEntry);
-    case "url":
-      return new URLEntry(dbEntry);
-    case "npm":
-      return new NPMEntry(dbEntry);
+      return `https://github.com/${meta.repository}/tree/${version}${path}`;
     default:
-      return null;
+      return undefined;
   }
+}
+
+export interface DirListing {
+  path: string;
+  type: "dir" | "file";
+}
+
+export async function getDirectoryListing(
+  module: string,
+  version: string,
+): Promise<DirListing[] | null> {
+  const url =
+    `${S3_BUCKET}${module}/versions/${version}/meta/directory_listing.json`;
+  const res = await fetch(url, {
+    headers: {
+      accept: "application/json",
+    },
+  });
+  if (res.status === 403 || res.status === 404) return null;
+  if (res.status !== 200) {
+    throw Error(
+      `Got an error (${res.status}) while getting the directory listing:\n${await res
+        .text()}`,
+    );
+  }
+  return await res.json();
+}
+
+export interface VersionInfo {
+  latest: string;
+  versions: string[];
+}
+
+export async function getVersionList(
+  module: string,
+): Promise<VersionInfo | null> {
+  const url = `${S3_BUCKET}${module}/meta/versions.json`;
+  const res = await fetch(url, {
+    headers: {
+      accept: "application/json",
+    },
+  });
+  if (res.status === 403 || res.status === 404) return null;
+  if (res.status !== 200) {
+    throw Error(
+      `Got an error (${res.status}) while getting the version list:\n${await res
+        .text()}`,
+    );
+  }
+  return res.json();
+}
+
+export interface MetaInfo {
+  type: "github";
+  repository: string;
+}
+
+export async function getMeta(
+  module: string,
+): Promise<MetaInfo | null> {
+  const url = `${S3_BUCKET}${module}/meta/meta.json`;
+  const res = await fetch(url, {
+    headers: {
+      accept: "application/json",
+    },
+  });
+  if (res.status === 403 || res.status === 404) return null;
+  if (res.status !== 200) {
+    throw Error(
+      `Got an error (${res.status}) while getting the meta info:\n${await res
+        .text()}`,
+    );
+  }
+  return res.json();
 }
 
 export function parseNameVersion(
-  nameVersion: string
-): [string, string | undefined] {
+  nameVersion: string,
+): [string, string] {
   const [name, version] = nameVersion.split("@", 2);
   return [name, version];
 }
 
 export function fileTypeFromURL(filename: string) {
   const f = filename.toLowerCase();
-
   if (f.endsWith(".ts")) {
     return "typescript";
   } else if (f.endsWith(".js")) {
@@ -122,5 +168,3 @@ export function isReadme(filename: string) {
     filename.toLowerCase() === "readme"
   );
 }
-
-export const entries = DATABASE as { [name: string]: DatabaseEntry };

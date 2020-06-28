@@ -5,6 +5,7 @@ import { RawCodeBlock } from "./CodeBlock";
 import Markdown from "./Markdown";
 import Link from "next/link";
 import { fileTypeFromURL, isReadme } from "../util/registry_utils";
+import { useRouter } from "next/router";
 
 function FileDisplay(props: {
   raw?: string;
@@ -13,6 +14,7 @@ function FileDisplay(props: {
   repositoryURL?: string | null;
   documentationURL?: string | null;
 }) {
+  const { pathname } = useRouter();
   const filetype = fileTypeFromURL(props.sourceURL);
   const segments = props.sourceURL.split("/");
   const filename = segments[segments.length - 1];
@@ -31,7 +33,7 @@ function FileDisplay(props: {
             </svg>
           )}
           <span className="font-medium">
-            {props.canonicalPath === location.pathname ? (
+            {props.canonicalPath === pathname ? (
               filename
             ) : (
               <Link href={props.canonicalPath}>
@@ -106,7 +108,7 @@ function FileDisplay(props: {
               <div className="px-4">
                 <Markdown
                   source={props.raw!}
-                  displayURL={location.origin + props.canonicalPath}
+                  displayURL={"https://deno.land" + props.canonicalPath}
                   sourceURL={props.sourceURL}
                 />
               </div>

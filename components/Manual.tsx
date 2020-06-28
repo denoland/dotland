@@ -2,17 +2,16 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter, Router } from "next/router";
-import { parseNameVersion, findEntry } from "../util/registry_utils";
+import { parseNameVersion } from "../util/registry_utils";
 import {
   TableOfContents,
   getTableOfContents,
   getFileURL,
   getDocURL,
+  versions,
 } from "../util/manual_utils";
 import Markdown from "./Markdown";
 import Transition from "./Transition";
-
-const denoEntry = findEntry("deno");
 
 function Manual() {
   const { query, push, replace } = useRouter();
@@ -78,7 +77,6 @@ function Manual() {
   ] = useState<TableOfContents | null>(null);
 
   const [content, setContent] = useState<string | null>(null);
-  const [versions, setVersions] = useState<string[] | null | undefined>();
 
   useEffect(() => {
     getTableOfContents(version ?? "master")
@@ -140,20 +138,6 @@ function Manual() {
         );
       });
   }, [sourceURL]);
-
-  useEffect(() => {
-    setVersions(undefined);
-    denoEntry
-      ?.getVersionList()
-      .then((v) =>
-        // do not show old versions that do not have the new manual yet
-        setVersions(v?.filter((v) => v.startsWith("v1") && v !== "v1.0.0-rc1"))
-      )
-      .catch((e) => {
-        console.error("Failed to fetch versions:", e);
-        setVersions(null);
-      });
-  }, []);
 
   function gotoVersion(newVersion: string) {
     push(
@@ -368,7 +352,7 @@ function Manual() {
                   </a>
                   <Markdown
                     source={content}
-                    displayURL={location.origin + "/manual" + path}
+                    displayURL={"https://deno.land/manual" + path}
                     sourceURL={sourceURL}
                   />
                   <div className="pt-4 border-t border-gray-200">
