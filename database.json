@@ -1313,6 +1313,13 @@
     "desc": "Syntactic sugar for asynchronous functions, promises, generators and synchronous functions.",
     "default_version": "master"
   },
+  "denoflate": {
+    "type": "github",
+    "owner": "hazae41",
+    "repo": "denoflate",
+    "desc": "WebAssembly powered Deflate compression for Deno, written in Rust.",
+    "default_version": "master"
+  },
   "denoforge": {
     "type": "github",
     "owner": "denjucks",
