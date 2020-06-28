@@ -3250,6 +3250,13 @@
     "desc": "A non official collection of Custom middlewares for oak server[https://github.com/oakserver/oak]",
     "default_version": "master"
   },
+  "oauth2": {
+    "type": "github",
+    "owner": "hacked",
+    "repo": "oauth2",
+    "desc": "🔒 OAuth 2.0 for Deno (RFC 6749)",
+    "default_version": "master"
+  },
   "observable": {
     "type": "github",
     "owner": "bsunderhus",
