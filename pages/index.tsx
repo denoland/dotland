@@ -140,7 +140,7 @@ for await (const req of s) {
           <p className="my-4 text-gray-700">
             You can find a more in depth introduction, examples, and environment
             setup guides in{" "}
-            <Link href="/[identifier]" as="/manual">
+            <Link href="/[...rest]" as="/manual">
               <a className="link">the manual</a>
             </Link>
             .
@@ -166,7 +166,7 @@ for await (const req of s) {
           </p>
           <p className="my-4 text-gray-700">
             Deno comes with{" "}
-            <Link href="/[identifier]" as="/manual">
+            <Link href="/[...rest]" as="/manual">
               <a className="link">a manual</a>
             </Link>{" "}
             which contains more in depth explanations about the more complex
@@ -199,7 +199,7 @@ for await (const req of s) {
           </p>
           <p className="my-4 text-gray-700">
             These standard modules are hosted at{" "}
-            <Link href="/[identifier]" as="/std">
+            <Link href="/[...rest]" as="/std">
               <a className="link">deno.land/std</a>
             </Link>{" "}
             and are distributed via URLs like all other ES modules that are
@@ -255,7 +255,7 @@ for await (const req of s) {
         </div>
         <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 my-8">
           {thirdPartySelection?.map((s, i) => (
-            <Link key={i} href="/x/[identifier]" as={`/x/${s.name}`}>
+            <Link key={i} href="/x/[...rest]" as={`/x/${s.name}`}>
               <a
                 className="rounded-lg bg-white shadow border border-gray-100 p-4 overflow-hidden hover:shadow-sm transition duration-75 ease-in-out cursor-pointer  "
                 key={i}

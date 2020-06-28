@@ -4,7 +4,7 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
   console.log("registry request", url.pathname);
   const remoteUrl = getRegistrySourceURL(url.pathname);
   if (!remoteUrl) {
-    return new Response("Not in database.json: " + url.pathname, {
+    return new Response("Module does not exist: " + url.pathname, {
       status: 404,
       statusText: "Not Found",
       headers: { "content-type": "text/plain" },
@@ -13,12 +13,6 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
 
   let response = await fetch(remoteUrl);
   response = new Response(response.body, response);
-  if (needsWarning(url.pathname)) {
-    response.headers.set(
-      "X-Deno-Warning",
-      `Implicitly using master branch ${url}`,
-    );
-  }
   const originContentType = response.headers.get("content-type");
   if (
     response.ok &&
@@ -37,10 +31,6 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
   response.headers.set("Access-Control-Allow-Origin", "*");
 
   return response;
-}
-
-export function needsWarning(pathname: string): boolean {
-  return pathname.startsWith("/std") && !pathname.startsWith("/std@");
 }
 
 export function getRegistrySourceURL(pathname: string): string | undefined {

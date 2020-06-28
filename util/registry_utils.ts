@@ -34,6 +34,7 @@ export function getRepositoryURL(
 export interface DirListing {
   path: string;
   type: "dir" | "file";
+  size?: number;
 }
 
 export async function getDirectoryListing(

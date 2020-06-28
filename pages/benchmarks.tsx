@@ -394,7 +394,7 @@ const Benchmarks = () => {
                 <ul className="ml-8 list-disc my-2">
                   <li>
                     <Link
-                      href="/[identifier]/[...path]"
+                      href="/[...rest]"
                       as="/std/http/file_server.ts"
                     >
                       <a className="link">file_server</a>
@@ -402,7 +402,7 @@ const Benchmarks = () => {
                   </li>
                   <li>
                     <Link
-                      href="/[identifier]/[...path]"
+                      href="/[...rest]"
                       as="/std/examples/gist.ts"
                     >
                       <a className="link">gist</a>

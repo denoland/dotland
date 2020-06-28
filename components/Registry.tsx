@@ -23,101 +23,84 @@ import Footer from "./Footer";
 import FileDisplay from "./FileDisplay";
 
 const Registry = () => {
-  const [raw, setRaw] = useState<string | null | undefined>();
+  // State
+  const [meta, setMeta] = useState<MetaInfo | null | undefined>();
+  const [versions, setVersions] = useState<VersionInfo | null | undefined>();
   const [dirListing, setDirListing] = useState<
     DirListing[] | null | undefined
   >();
-  const [meta, setMeta] = useState<MetaInfo | null | undefined>();
-  const [versions, setVersions] = useState<VersionInfo | null | undefined>();
-
-  const [readmeCanonicalPath, setReadmeCanonicalPath] = useState<
-    string | null | undefined
-  >();
-  const [readmeURL, setReadmeURL] = useState<string | null | undefined>();
-  const [readmeRepositoryURL, setReadmeRepositoryURL] = useState<
-    string | null | undefined
-  >();
+  const [raw, setRaw] = useState<string | null | undefined>();
   const [readme, setReadme] = useState<string | null | undefined>();
 
+  // Name, version and path
   const { query, asPath, push } = useRouter();
   const isStd = asPath.startsWith("/std");
   const { name, version, path } = useMemo(() => {
-    const path =
-      (Array.isArray(query.path) ? query.path.join("/") : query.path) ?? "";
-    const [name, version] = parseNameVersion(
-      (Array.isArray(query.identifier)
-        ? query.identifier[0]
-        : query.identifier) ?? ""
-    );
-    return { name, version, path: path ? `/${path}` : "" };
+    const [identifier, ...pathParts] = (query.rest as string[]) ?? [];
+    const path = pathParts.length === 0 ? "" : `/${pathParts.join("/")}`;
+    const [name, version] = parseNameVersion(identifier ?? "");
+    return { name, version, path };
   }, [query]);
+  function gotoVersion(newVersion: string) {
+    push(
+      `${!isStd ? "/x" : ""}/[...rest]`,
+      `${!isStd ? "/x" : ""}/${
+        name + (newVersion !== "" ? `@${newVersion}` : "")
+      }${path}`
+    );
+  }
 
+  // File paths
   const canonicalPath = useMemo(
     () => `${isStd ? "" : "/x"}/${name}${version ? `@${version}` : ""}${path}`,
     [name, version, path]
   );
-  const sourceURL = useMemo(
-    () => (name && version ? getSourceURL(name, version, path) : undefined),
-    [name, version, path]
-  );
+  const sourceURL = useMemo(() => getSourceURL(name, version, path), [
+    name,
+    version,
+    path,
+  ]);
   const repositoryURL = useMemo(
     () => (meta && version ? getRepositoryURL(meta, version, path) : undefined),
     [meta, version, path]
   );
-
   const documentationURL = useMemo(() => {
     const doc = `https://doc.deno.land/https/deno.land/${canonicalPath}`;
     return denoDocAvailableForURL(canonicalPath) ? doc : null;
   }, [canonicalPath]);
 
-  const dirEntries = useMemo(() => {
-    if (Array.isArray(dirListing)) {
-      const files = dirListing
-        .filter(
-          (f) =>
-            f.path.startsWith(path) &&
-            f.path.split("/").length - 2 === path.split("/").length - 1
-        )
-        .map<DirEntry>((f) => {
-          const [name] = f.path.slice(path.length + 1).split("/");
-          return {
-            name,
-            type: f.type,
-          };
-        });
-      return files.length > 0 ? files : null;
-    }
-    return dirListing;
-  }, [dirListing, path]);
-
-  // Fetch raw source
+  // Fetch meta
   useEffect(() => {
-    setRaw(undefined);
-    if (version) {
-      if (sourceURL) {
-        fetch(sourceURL, { method: "GET" })
-          .then((resp) => {
-            if (!resp.ok) {
-              if (
-                resp.status === 400 ||
-                resp.status === 403 ||
-                resp.status === 404
-              )
-                return null;
-              throw new Error(`${resp.status}: ${resp.statusText}`);
-            }
-            return resp.text();
-          })
-          .then(setRaw)
-          .catch((e) => {
-            console.error("Failed to fetch raw source:", e);
-            setRaw(null);
-          });
-      } else {
-        setRaw(null);
-      }
+    setMeta(undefined);
+    if (name) {
+      getMeta(name)
+        .then(setMeta)
+        .catch((e) => {
+          console.error("Failed to fetch meta info:", e);
+          setMeta(null);
+        });
     }
-  }, [sourceURL]);
+  }, [name]);
+
+  // Fetch versions
+  useEffect(() => {
+    setVersions(undefined);
+    if (name) {
+      getVersionList(name)
+        .then(setVersions)
+        .catch((e) => {
+          console.error("Failed to fetch versions:", e);
+          setVersions(null);
+        });
+    }
+  }, [name]);
+
+  // If no version is specified, redirect to latest version
+  useEffect(() => {
+    if (!version && versions) {
+      gotoVersion(versions.latest ?? "");
+    }
+  }, [versions?.latest, version]);
 
   // Fetch directory listing
   useEffect(() => {
@@ -136,83 +119,107 @@ const Registry = () => {
     }
   }, [name, version]);
 
-  // Fetch versions
-  useEffect(() => {
-    setVersions(undefined);
-    if (name) {
-      getVersionList(name)
-        .then(setVersions)
-        .catch((e) => {
-          console.error("Failed to fetch versions:", e);
-          setVersions(null);
+  // Get directory entries for path
+  const dirEntries = useMemo(() => {
+    if (Array.isArray(dirListing)) {
+      const files = dirListing
+        .filter(
+          (f) =>
+            f.path.startsWith(path) &&
+            f.path.split("/").length - 2 === path.split("/").length - 1
+        )
+        .map<DirEntry>((f) => {
+          const [name] = f.path.slice(path.length + 1).split("/");
+          return {
+            name,
+            size: f.size,
+            type: f.type,
+          };
         });
+      files.sort((a, b) => a.name.codePointAt(0)! - b.name.codePointAt(0)!);
+      return files.length > 0 ? files : null;
     }
-  }, [name]);
+    return dirListing;
+  }, [dirListing, path]);
 
-  // Fetch meta
-  useEffect(() => {
-    setMeta(undefined);
-    if (name) {
-      getMeta(name)
-        .then(setMeta)
-        .catch((e) => {
-          console.error("Failed to fetch meta info:", e);
-          setMeta(null);
-        });
-    }
-  }, [name]);
-
-  // Check if readme is available in directory listing
-  useEffect(() => {
+  const {
+    readmeCanonicalPath,
+    readmeURL,
+    readmeRepositoryURL,
+  } = useMemo(() => {
     const readmeEntry = dirEntries?.find((d) => isReadme(d.name));
     if (readmeEntry) {
-      setReadmeCanonicalPath(canonicalPath + "/" + readmeEntry.name);
-      setReadmeURL(getSourceURL(name, version, path + "/" + readmeEntry.name));
-      setReadmeRepositoryURL(
-        meta
+      return {
+        readmeCanonicalPath: canonicalPath + "/" + readmeEntry.name,
+        readmeURL: getSourceURL(name, version, path + "/" + readmeEntry.name),
+        readmeRepositoryURL: meta
           ? getRepositoryURL(meta, version, path + "/" + readmeEntry.name)
-          : null
-      );
-      return;
+          : null,
+      };
     }
-    setReadmeCanonicalPath(null);
-    setReadmeURL(null);
-    setReadmeRepositoryURL(null);
-  }, [meta, name, path, version, dirEntries, canonicalPath]);
+    return {
+      readmeCanonicalPath: null,
+      readmeURL: null,
+      readmeRepositoryURL: null,
+    };
+  }, [dirEntries, name, version, path, meta]);
 
-  // Fetch readme
+  // Fetch raw file
   useEffect(() => {
-    if (readmeURL) {
-      setReadme(undefined);
-      fetch(readmeURL)
-        .then((resp) => {
-          if (!resp.ok) throw new Error("README fetch failed.");
-          return resp.text();
-        })
-        .then(setReadme)
-        .catch((e) => {
-          console.error("Failed to fetch README:", e);
-          setReadme(null);
-        });
-    } else {
-      setReadme(null);
+    setRaw(undefined);
+    if (version) {
+      if (
+        sourceURL &&
+        dirListing &&
+        dirListing.filter((d) => d.path === path && d.type == "file").length !==
+          0
+      ) {
+        fetch(sourceURL, { method: "GET" })
+          .then((resp) => {
+            if (!resp.ok) {
+              if (
+                resp.status === 400 ||
+                resp.status === 403 ||
+                resp.status === 404
+              )
+                return null;
+              throw new Error(`${resp.status}: ${resp.statusText}`);
+            }
+            return resp.text();
+          })
+          .then(setRaw)
+          .catch(() => setRaw(null));
+      } else {
+        setRaw(null);
+      }
     }
-  }, [readmeURL]);
+  }, [sourceURL, dirListing, version, path]);
 
+  // Fetch readme file
   useEffect(() => {
-    if (!version && versions) {
-      gotoVersion(versions.latest ?? "");
+    setReadme(undefined);
+    if (version) {
+      if (readmeURL) {
+        fetch(readmeURL, { method: "GET" })
+          .then((resp) => {
+            if (!resp.ok) {
+              if (
+                resp.status === 400 ||
+                resp.status === 403 ||
+                resp.status === 404
+              )
+                return null;
+              throw new Error(`${resp.status}: ${resp.statusText}`);
+            }
+            return resp.text();
+          })
+          .then(setReadme)
+          .catch(() => setReadme(null));
+      } else {
+        setReadme(null);
+      }
     }
-  }, [versions?.latest, version]);
-
-  function gotoVersion(newVersion: string) {
-    push(
-      `${!isStd ? "/x" : ""}/[identifier]${path ? "/[...path]" : ""}`,
-      `${!isStd ? "/x" : ""}/${
-        name + (newVersion !== "" ? `@${newVersion}` : "")
-      }${path}`
-    );
-  }
+  }, [readmeURL, dirListing, version, path]);
 
   return (
     <>
@@ -227,91 +234,105 @@ const Registry = () => {
         <Header
           subtitle={name === "std" ? "Standard Library" : "Third Party Modules"}
         />
-        <div className="">
-          <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8">
-            <Breadcrumbs
-              name={name}
-              version={version}
-              path={path}
-              isStd={isStd}
-            />
-            <VersionSelector
-              versions={versions?.versions}
-              selectedVersion={version}
-              onChange={gotoVersion}
-            />
-            {(() => {
-              if (meta === null) {
-                return (
-                  <ErrorMessage
-                    title="404 - Not Found"
-                    body="This module does not exist."
-                  />
-                );
-              } else if (
-                dirListing &&
-                dirListing.filter((d) => d.path === path).length === 0
-              ) {
-                return (
-                  <ErrorMessage
-                    title="404 - Not Found"
-                    body="This file or directory could not be found."
-                  />
-                );
-              } else if (!dirEntries && typeof raw !== "string") {
-                // loading
-                return (
-                  <div className="mt-4 rounded-lg overflow-hidden border border-gray-200 bg-white">
-                    <div className="bg-gray-100 h-10 w-full border-b border-gray-200 px-4 py-3">
-                      <div className="w-3/5 sm:w-1/5 bg-gray-200 h-4"></div>
-                    </div>
-                    <div className="w-full p-4">
-                      <div className="w-4/5 sm:w-1/3 bg-gray-100 h-8"></div>
-                      <div className="sm:w-2/3 bg-gray-100 h-3 mt-6"></div>
-                      <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
-                      <div className="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                      <div className="w-3/4 bg-gray-100 h-3 mt-4"></div>
-                      <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
-                      <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                    </div>
+        <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8">
+          <Breadcrumbs
+            name={name}
+            version={version}
+            path={path}
+            isStd={isStd}
+          />
+          <VersionSelector
+            versions={versions?.versions}
+            selectedVersion={version}
+            onChange={gotoVersion}
+          />
+          {(() => {
+            if (meta === null) {
+              return (
+                <ErrorMessage
+                  title="404 - Not Found"
+                  body="This module does not exist."
+                />
+              );
+            } else if (
+              version &&
+              versions &&
+              !versions?.versions.includes(version)
+            ) {
+              return (
+                <ErrorMessage
+                  title="404 - Not Found"
+                  body="This version does not exist for this module."
+                />
+              );
+            } else if (
+              dirListing &&
+              dirListing.filter((d) => d.path === path).length === 0
+            ) {
+              return (
+                <ErrorMessage
+                  title="404 - Not Found"
+                  body="This file or directory could not be found."
+                />
+              );
+            } else if (!dirEntries && typeof raw !== "string") {
+              // loading
+              return (
+                <div className="mt-4 rounded-lg overflow-hidden border border-gray-200 bg-white">
+                  <div className="bg-gray-100 h-10 w-full border-b border-gray-200 px-4 py-3">
+                    <div className="w-3/5 sm:w-1/5 bg-gray-200 h-4"></div>
                   </div>
-                );
-              }
-            })()}
-            {dirEntries !== undefined && dirEntries !== null ? (
-              <DirectoryListing
-                dirEntries={dirEntries}
-                repositoryURL={repositoryURL}
-                name={name}
-                version={version}
-                path={path}
-              />
-            ) : null}
-            {typeof raw === "string" ? (
-              <div className="mt-4">
-                <FileDisplay
-                  raw={raw}
-                  canonicalPath={canonicalPath}
-                  sourceURL={sourceURL!}
-                  repositoryURL={repositoryURL}
-                  documentationURL={documentationURL}
-                />
-              </div>
-            ) : null}
-            {typeof readme === "string" ? (
-              <div className="mt-4">
-                <FileDisplay
-                  raw={readme}
-                  canonicalPath={readmeCanonicalPath!}
-                  sourceURL={readmeURL!}
-                  repositoryURL={readmeRepositoryURL}
-                />
-              </div>
-            ) : null}
-          </div>
+                  <div className="w-full p-4">
+                    <div className="w-4/5 sm:w-1/3 bg-gray-100 h-8"></div>
+                    <div className="sm:w-2/3 bg-gray-100 h-3 mt-6"></div>
+                    <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
+                    <div className="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                    <div className="w-3/4 bg-gray-100 h-3 mt-4"></div>
+                    <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
+                    <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                  </div>
+                </div>
+              );
+            } else {
+              return (
+                <>
+                  {dirEntries && (
+                    <DirectoryListing
+                      name={name}
+                      version={version}
+                      path={path}
+                      dirEntries={dirEntries}
+                      repositoryURL={repositoryURL}
+                    />
+                  )}
+                  {typeof raw === "string" ? (
+                    <div className="mt-4">
+                      <FileDisplay
+                        raw={raw}
+                        canonicalPath={canonicalPath}
+                        sourceURL={sourceURL}
+                        repositoryURL={repositoryURL}
+                        documentationURL={documentationURL}
+                      />
+                    </div>
+                  ) : null}
+                  {typeof readme === "string" ? (
+                    <div className="mt-4">
+                      <FileDisplay
+                        raw={readme}
+                        canonicalPath={readmeCanonicalPath!}
+                        sourceURL={readmeURL!}
+                        repositoryURL={readmeRepositoryURL}
+                      />
+                    </div>
+                  ) : null}
+                </>
+              );
+            }
+          })()}
         </div>
-        <Footer simple />
       </div>
+      <Footer simple />
     </>
   );
 };
@@ -373,7 +394,7 @@ function Breadcrumbs({
         </>
       )}
       <Link
-        href={(!isStd ? "/x" : "") + "/[identifier]"}
+        href={(!isStd ? "/x" : "") + "/[...rest]"}
         as={`${!isStd ? "/x" : ""}/${name}${version ? `@${version}` : ""}`}
       >
         <a className="link">
@@ -390,7 +411,7 @@ function Breadcrumbs({
               {" "}
               /{" "}
               <Link
-                href={(!isStd ? "/x" : "") + "/[identifier]/[...path]"}
+                href={(!isStd ? "/x" : "") + "/[...rest]"}
                 as={`${!isStd ? "/x" : ""}/${name}${
                   version ? `@${version}` : ""
                 }${link ? `/${link}` : ""}`}
@@ -418,31 +439,33 @@ function VersionSelector({
       <label htmlFor="version" className="sr-only">
         Version
       </label>
-      {versions && (
-        <div className="mt-1 sm:mt-0 sm:col-span-2">
-          <div className="max-w-xs rounded-md shadow-sm">
-            <select
-              id="version"
-              className="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-              value={selectedVersion}
-              onChange={({ target: { value: newVersion } }) =>
-                onChange(newVersion)
-              }
-            >
-              {selectedVersion && !versions.includes(selectedVersion) && (
-                <option key={selectedVersion} value={selectedVersion}>
-                  {selectedVersion}
-                </option>
-              )}
-              {versions.map((v) => (
-                <option key={v} value={v}>
-                  {v}
-                </option>
-              ))}
-            </select>
-          </div>
+      <div className="mt-1 sm:mt-0 sm:col-span-2">
+        <div className="max-w-xs rounded-md shadow-sm">
+          <select
+            id="version"
+            className="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+            value={selectedVersion}
+            onChange={({ target: { value: newVersion } }) =>
+              onChange(newVersion)
+            }
+          >
+            {versions && (
+              <>
+                {selectedVersion && !versions.includes(selectedVersion) && (
+                  <option key={selectedVersion} value={selectedVersion}>
+                    {selectedVersion}
+                  </option>
+                )}
+                {versions.map((v) => (
+                  <option key={v} value={v}>
+                    {v}
+                  </option>
+                ))}
+              </>
+            )}
+          </select>
         </div>
-      )}
+      </div>
     </div>
   );
 }
@@ -483,7 +506,7 @@ function DirectoryListing(props: {
                 {props.dirEntries
                   .sort((a, b) => a.type.localeCompare(b.type))
                   .map((entry, i) => {
-                    const href = `${isStd ? "" : "/x"}/[identifier]/[...path]`;
+                    const href = `${isStd ? "" : "/x"}/[...rest]`;
                     const as = `${isStd ? "" : "/x"}/${props.name}${
                       props.version ? `@${props.version}` : ""
                     }${props.path}/${entry.name}`;
@@ -562,7 +585,7 @@ function DirectoryListing(props: {
                               className="px-4 py-1 w-full h-full block"
                               tabIndex={-1}
                             >
-                              {entry.type !== "dir" && entry.size ? (
+                              {entry.size ? (
                                 bytesToSize(entry.size)
                               ) : (
                                 <>&nbsp;</>

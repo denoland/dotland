@@ -64,11 +64,11 @@ const ThirdPartyRegistryList = () => {
                   deno doc
                 </a>{" "}
                 and in{" "}
-                <Link href="/[identifier]" as="/manual">
+                <Link href="/[...rest]" as="/manual">
                   <a className="link">the manual</a>
                 </Link>
                 . See{" "}
-                <Link href="/[identifier]" as="/std">
+                <Link href="/[...rest]" as="/std">
                   <a className="link">/std</a>
                 </Link>{" "}
                 for the standard modules.
@@ -118,7 +118,7 @@ const ThirdPartyRegistryList = () => {
                         className={i !== 0 ? "border-t border-gray-200" : ""}
                         key={i}
                       >
-                        <Link href="/x/[identifier]" as={link}>
+                        <Link href="/x/[...rest]" as={link}>
                           <a className="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
                             <div className="flex items-center px-4 sm:px-6 py-2">
                               <div className="min-w-0 flex-1 flex items-center">

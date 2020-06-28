@@ -16,23 +16,15 @@ import Transition from "./Transition";
 function Manual() {
   const { query, push, replace } = useRouter();
   const { version, path } = useMemo(() => {
-    const path =
-      (Array.isArray(query.path) ? query.path.join("/") : query.path) ?? "";
-    const [name, version] = parseNameVersion(
-      (Array.isArray(query.identifier)
-        ? query.identifier[0]
-        : query.identifier) ?? ""
-    );
-    return {
-      name,
-      version,
-      path: path ? `/${path}` : "/introduction",
-    };
+    const [identifier, ...pathParts] = (query.rest as string[]) ?? [];
+    const path = pathParts.length === 0 ? "" : `/${pathParts.join("/")}`;
+    const [_, version] = parseNameVersion(identifier ?? "");
+    return { version, path };
   }, [query]);
 
   if (path.endsWith(".md")) {
     replace(
-      `/[identifier]${path ? "/[...path]" : ""}`,
+      `/[...rest]`,
       `/manual${version && version !== "" ? `@${version}` : ""}${path.replace(
         /\.md$/,
         ""
@@ -141,7 +133,7 @@ function Manual() {
 
   function gotoVersion(newVersion: string) {
     push(
-      `/[identifier]${path ? "/[...path]" : ""}`,
+      `/[...rest]`,
       `/manual${newVersion !== "" ? `@${newVersion}` : ""}${path}`
     );
   }
@@ -358,7 +350,7 @@ function Manual() {
                   <div className="pt-4 border-t border-gray-200">
                     {pageIndex !== 0 && (
                       <Link
-                        href="/[identifier]/[...path]"
+                        href="/[...rest]"
                         as={pageList[pageIndex - 1].path}
                       >
                         <a className="text-gray-900 hover:text-gray-600 font-normal">
@@ -368,7 +360,7 @@ function Manual() {
                     )}
                     {pageIndex !== pageList.length - 1 && (
                       <Link
-                        href="/[identifier]/[...path]"
+                        href="/[...rest]"
                         as={pageList[pageIndex + 1].path}
                       >
                         <a className="text-gray-900 hover:text-gray-600 font-normal float-right">
@@ -472,7 +464,7 @@ function ToC({
               return (
                 <li key={slug} className="my-2">
                   <Link
-                    href="/[identifier]/[...path]"
+                    href="/[...rest]"
                     as={`/manual${version ? `@${version}` : ""}/${slug}`}
                   >
                     <a
@@ -491,7 +483,7 @@ function ToC({
                         ([childSlug, name]) => (
                           <li key={`${slug}/${childSlug}`} className="my-0.5">
                             <Link
-                              href="/[identifier]/[...path]"
+                              href="/[...rest]"
                               as={`/manual${
                                 version ? `@${version}` : ""
                               }/${slug}/${childSlug}`}
