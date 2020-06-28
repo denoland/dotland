@@ -2233,6 +2233,13 @@
     "desc": "Heap data structure",
     "default_version": "master"
   },
+  "helix": {
+    "type": "github",
+    "owner": "rodolphocastro",
+    "repo": "helix",
+    "desc": "🐚 Helix is a non-ambitious wrapper for npm commands! Run your favorite npm commands directly from your Deno app!",
+    "default_version": "master"
+  },
   "hex": {
     "type": "github",
     "owner": "eserozvataf",
@@ -2259,6 +2266,13 @@
     "owner": "chiefbiiko",
     "repo": "hmac",
     "desc": "Convenience function for macing singular data. hash should be one of sha1, sha256, or sha512",
+    "default_version": "master"
+  },
+  "hooked": {
+    "type": "github",
+    "owner": "luvies",
+    "repo": "deno_hooked",
+    "desc": "A simple single file test module providing grouping and hooks.",
     "default_version": "master"
   },
   "houston": {
@@ -3248,6 +3262,13 @@
     "owner": "deepakshrma",
     "repo": "oak_middlewares",
     "desc": "A non official collection of Custom middlewares for oak server[https://github.com/oakserver/oak]",
+    "default_version": "master"
+  },
+  "oauth2": {
+    "type": "github",
+    "owner": "hacked",
+    "repo": "oauth2",
+    "desc": "🔒 OAuth 2.0 for Deno (RFC 6749)",
     "default_version": "master"
   },
   "observable": {
