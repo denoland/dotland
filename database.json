@@ -2226,6 +2226,13 @@
     "desc": "Heap data structure",
     "default_version": "master"
   },
+  "helix": {
+    "type": "github",
+    "owner": "rodolphocastro",
+    "repo": "helix",
+    "desc": "🐚 Helix is a non-ambitious wrapper for npm commands! Run your favorite npm commands directly from your Deno app!",
+    "default_version": "master"
+  },
   "hex": {
     "type": "github",
     "owner": "eserozvataf",
