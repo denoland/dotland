@@ -1,13 +1,12 @@
 # Cloudflare Worker configuration
-account_id = "05de195b9a104acc60c4d6e43c9cc137"
-zone_id = "20c47e97067d5e82abedeeb4c71889e6"
+account_id = "93bfcf72dfea0e9f2bf5563bc71052cf"
 
 # shared
 type = "webpack"
 webpack_config = "webpack.config.js"
 
 # default dev environment
-name = "worker-dev"
+name = "deno-dev"
 workers_dev = true
 
 # environment configuration

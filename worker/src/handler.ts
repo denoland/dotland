@@ -2,25 +2,26 @@
 
 import { handleRegistryRequest } from "./registry";
 
-const REMOTE_URL = "https://deno-website2.now.sh";
-const TYPEDOC_REMOTE_URL =
-  "http://deno.land.s3-website-us-east-1.amazonaws.com";
+const REMOTE_URL = "https://deno-website2.lucacasonato.vercel.app";
 
-export async function handleRequest(request: Request) {
+export async function handleRequest(event: FetchEvent) {
+  const request = event.request;
   const accept = request.headers.get("accept");
   const isHtml = accept && accept.indexOf("html") >= 0;
 
   const url = new URL(request.url);
 
-  if (url.pathname.startsWith("/typedoc")) {
-    return proxyFile(url, TYPEDOC_REMOTE_URL, request);
-  }
-
-  const isRegistryRequest =
-    url.pathname.startsWith("/std") || url.pathname.startsWith("/x");
+  const isRegistryRequest = url.pathname.startsWith("/std") ||
+    url.pathname.startsWith("/x");
 
   if (isRegistryRequest && !isHtml) {
-    return handleRegistryRequest(url);
+    const cache = caches.default;
+    let response = await cache.match(request);
+    if (!response) {
+      response = await handleRegistryRequest(url);
+      event.waitUntil(cache.put(request, response));
+    }
+    return response;
   }
 
   return proxyFile(url, REMOTE_URL, request);

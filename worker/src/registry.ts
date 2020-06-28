@@ -10,7 +10,7 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
       headers: { "content-type": "text/plain" },
     });
   }
-
+  
   let response = await fetch(remoteUrl);
   response = new Response(response.body, response);
   const originContentType = response.headers.get("content-type");
@@ -29,6 +29,7 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
   }
 
   response.headers.set("Access-Control-Allow-Origin", "*");
+  response.headers.set("Cache-Control", "max-age=86400");
 
   return response;
 }
