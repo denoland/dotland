@@ -1,4 +1,11 @@
 {
+  "30_seconds_of_typescript": {
+    "type": "github",
+    "owner": "deepakshrma",
+    "repo": "30-seconds-of-typescript",
+    "desc": "A collection of utility functions like arrayToCSV, aperture and many more. Inspired by 30 seconds of code, Fully converted in Typescript.",
+    "default_version": "master"
+  },
   "a0": {
     "type": "github",
     "owner": "being-curious",
@@ -391,6 +398,13 @@
     "owner": "The-Noah",
     "repo": "bzfquery.js",
     "desc": "JavaScript/TypeScript version of bzfquery for Deno",
+    "default_version": "master"
+  },
+  "cabinet": {
+    "type": "github",
+    "owner": "dan-online",
+    "repo": "cabinet",
+    "desc": "The easier way to manage local files in Deno.",
     "default_version": "master"
   },
   "caller": {
@@ -800,12 +814,19 @@
     "desc": "Backend REST web framework for Deno, built on top of Oak",
     "default_version": "master"
   },
+  "dance": {
+    "type": "github",
+    "owner": "dance-planner",
+    "repo": "dance",
+    "desc": "Deno module for dance fans. Providing dance events etc.",
+    "default_version": "master"
+  },
   "dash": {
     "type": "github",
     "owner": "xpyxel",
     "repo": "dash",
     "desc": "Fast, simple, and efficient LRU cache library for Deno.",
-    "default_version": "master"
+    "default_version": "main"
   },
   "databatcher": {
     "type": "github",
@@ -949,6 +970,13 @@
     "desc": "Generates AWS Signature V4 for AWS low-level REST APIs",
     "default_version": "master"
   },
+  "deno_cef": {
+    "type": "github",
+    "owner": "denjucks",
+    "repo": "deno-cef",
+    "desc": "The Chromium Embedded Framework for Deno, for making GUI apps using Chromium technologies.",
+    "default_version": "master"
+  },
   "deno_check_thai_pid": {
     "type": "github",
     "owner": "thiti-y",
@@ -1003,6 +1031,13 @@
     "owner": "PodaruDragos",
     "repo": "deno_dotenv",
     "desc": "dotenv for Deno, with exapnd capabilities",
+    "default_version": "master"
+  },
+  "deno_faker": {
+    "type": "github",
+    "owner": "jackfiszr",
+    "repo": "deno-faker",
+    "desc": "Generate fake data. Deno port of Marak/faker.js",
     "default_version": "master"
   },
   "deno_flatten": {
@@ -1285,6 +1320,13 @@
     "desc": "Syntactic sugar for asynchronous functions, promises, generators and synchronous functions.",
     "default_version": "master"
   },
+  "denoflate": {
+    "type": "github",
+    "owner": "hazae41",
+    "repo": "denoflate",
+    "desc": "WebAssembly powered Deflate compression for Deno, written in Rust.",
+    "default_version": "master"
+  },
   "denoforge": {
     "type": "github",
     "owner": "denjucks",
@@ -1564,6 +1606,13 @@
     "owner": "crookse",
     "repo": "docable",
     "desc": "An open-source doc block parser for generating documenation as JSON.",
+    "default_version": "master"
+  },
+  "docker_names": {
+    "type": "github",
+    "owner": "rodolphocastro",
+    "repo": "deno_dockernames",
+    "desc": "🐋 Moby's name generation ported to Deno! Easily create random names for your needs",
     "default_version": "master"
   },
   "docopt": {
@@ -1981,6 +2030,13 @@
     "desc": "Fast Discord API wrapper for deno.",
     "default_version": "master"
   },
+  "flux": {
+    "type": "github",
+    "owner": "xpyxel",
+    "repo": "flux",
+    "desc": "A simple, yet powerful state library in TypeScript for Deno",
+    "default_version": "main"
+  },
   "flux_annotated_csv_parser": {
     "type": "github",
     "owner": "tiagostutz",
@@ -2168,6 +2224,13 @@
     "owner": "gobengo",
     "repo": "heap",
     "desc": "Heap data structure",
+    "default_version": "master"
+  },
+  "hex": {
+    "type": "github",
+    "owner": "eserozvataf",
+    "repo": "hex-functions",
+    "desc": "Function abstraction for better portability between platforms. Write once, run on cli, bots, function runtimes and web apis.",
     "default_version": "master"
   },
   "hk_stock_api": {
@@ -2927,6 +2990,13 @@
     "desc": "This module provides utilities to help mock behavior and spy on function calls for tests.",
     "default_version": "master"
   },
+  "modify_via_query": {
+    "type": "github",
+    "owner": "wongjiahau",
+    "repo": "modify-via-query",
+    "desc": "Mutate a copy of data without changing the original source with natural and type-safe query.",
+    "default_version": "master"
+  },
   "mojang": {
     "type": "github",
     "owner": "often",
@@ -3180,6 +3250,13 @@
     "desc": "tc39 proposal spec compatible observable",
     "default_version": "master"
   },
+  "ogone": {
+    "type": "github",
+    "owner": "SRNV",
+    "repo": "Ogone",
+    "desc": "a Web-Components compiler to create modern Apps (SPA, PWA). includes: Single file components, true reactivity, router, store, async-components, dev-tool",
+    "default_version": "master"
+  },
   "omelette": {
     "type": "github",
     "owner": "f",
@@ -3236,6 +3313,13 @@
     "repo": "opine-http-proxy",
     "desc": "Proxy middleware for Opine HTTP servers.",
     "default_version": "main"
+  },
+  "orange": {
+    "type": "github",
+    "owner": "mandarineorg",
+    "repo": "orange",
+    "desc": "A decorator-driven testing library for Deno & mandarine-powered applications",
+    "default_version": "master"
   },
   "organ": {
     "type": "github",
@@ -3319,6 +3403,13 @@
     "owner": "asos-craigmorten",
     "repo": "permission-guard",
     "desc": "A zero-dependency, minimal permission guard.",
+    "default_version": "master"
+  },
+  "perpetual_futures": {
+    "type": "github",
+    "owner": "zynesis",
+    "repo": "perpetual-futures",
+    "desc": "Calculator for perpetual swaps/futures, similar with that on Binance & BitMEX.",
     "default_version": "master"
   },
   "pg": {
@@ -3588,6 +3679,13 @@
     "desc": "A command line argument parser",
     "default_version": "master"
   },
+  "qwikid": {
+    "type": "github",
+    "owner": "mrgeedee",
+    "repo": "qwikid",
+    "desc": "Generate IDs fast and easy!",
+    "default_version": "master"
+  },
   "rad": {
     "type": "github",
     "owner": "cdaringe",
@@ -3740,6 +3838,13 @@
     "owner": "paulmillr",
     "repo": "noble-ripemd160",
     "desc": "RIPEMD160, a cryptographic hash function.",
+    "default_version": "master"
+  },
+  "roblox": {
+    "type": "github",
+    "owner": "lenneths",
+    "repo": "deno-roblox",
+    "desc": "A roblox api wrapper made in deno.",
     "default_version": "master"
   },
   "router": {
@@ -4080,6 +4185,13 @@
     "desc": "Native plugin for SQLite using rusqlite",
     "default_version": "master"
   },
+  "ssds": {
+    "type": "github",
+    "owner": "claytsay",
+    "repo": "ssds-deno",
+    "desc": "Some specialized data structures for Deno.",
+    "default_version": "master"
+  },
   "ssr": {
     "type": "github",
     "owner": "maheshkareeya",
@@ -4092,7 +4204,7 @@
     "owner": "ergenekonyigit",
     "repo": "statistics",
     "desc": "Deno basic statistics module",
-    "default_version": "master"
+    "default_version": "main"
   },
   "status": {
     "type": "github",
@@ -4382,6 +4494,13 @@
     "desc": "A Prometheus client in Typescript for Deno",
     "default_version": "master"
   },
+  "ts_serialize": {
+    "type": "github",
+    "owner": "GameBridgeAI",
+    "repo": "ts_serialize",
+    "desc": "A zero dependency library for serializing data",
+    "default_version": "develop"
+  },
   "tweetnacl_deno": {
     "type": "github",
     "owner": "dr-useless",
@@ -4511,6 +4630,13 @@
     "owner": "hayd",
     "repo": "deno-using",
     "desc": "A python-style with statement for deno.",
+    "default_version": "master"
+  },
+  "utfstring": {
+    "type": "github",
+    "owner": "sant123",
+    "repo": "utfstring",
+    "desc": "UTF-safe string operations in Deno",
     "default_version": "master"
   },
   "uuid": {
@@ -4715,6 +4841,13 @@
     "owner": "rjoydip",
     "repo": "win_tasklist",
     "desc": "Wrapper for the Windows tasklist command",
+    "default_version": "master"
+  },
+  "worldtides": {
+    "type": "github",
+    "owner": "jwebcoder",
+    "repo": "deno_worldtides",
+    "desc": "Wrapper for the worldtides.info V2 API to retrieve tidal data",
     "default_version": "master"
   },
   "x_name": {
