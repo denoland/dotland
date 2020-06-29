@@ -694,6 +694,13 @@
     "desc": "SQL Database Toolkit for Deno",
     "default_version": "master"
   },
+  "countries": {
+    "type": "github",
+    "owner": "michael-spengler",
+    "repo": "countries",
+    "desc": "Deno module providing country data. It includes a country flag server which you can use optionally.",
+    "default_version": "master"
+  },
   "countryfinder": {
     "type": "github",
     "owner": "yonas-g",
