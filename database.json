@@ -59,14 +59,7 @@
     "type": "github",
     "owner": "hazae41",
     "repo": "deno-aes-cfb",
-    "desc": "WebAssembly powered AES-CFB encryption for Deno, written in Rust.",
-    "default_version": "master"
-  },
-  "aes_cfb8": {
-    "type": "github",
-    "owner": "hazae41",
-    "repo": "deno-aes-cfb8",
-    "desc": "WebAssembly powered AES-CFB8 encryption for Deno, written in Rust.",
+    "desc": "WebAssembly powered AES-CFB / AES-CFB8 encryption for Deno, written in Rust.",
     "default_version": "master"
   },
   "airtable": {
