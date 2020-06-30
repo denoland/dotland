@@ -1,7 +1,7 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
 const S3_BUCKET =
-  "https://dregv3-production-storagebucket-1x6i8sakxohjf.s3.us-east-2.amazonaws.com/";
+  "https://deno-registry2-storagebucket-fklr2u336n14.s3.us-east-2.amazonaws.com/";
 
 export interface DirEntry {
   name: string;
