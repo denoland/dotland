@@ -21,31 +21,76 @@ import BenchmarkChart, { BenchmarkLoading } from "../components/BenchmarkChart";
 // TODO(lucacasonato): add anchor points to headers
 const Benchmarks = () => {
   const _ = useRouter();
+  const location = typeof window !== "undefined" ? window.location : null;
 
-  const showAll =
-    typeof window === "undefined" ? false : location.search.endsWith("?all");
+  let show!: { dataFile: string; range: number[]; search: string };
+  // Default (recent).
+  show = {
+    dataFile: "recent.json",
+    range: [],
+    search: "",
+  };
+  while (location) {
+    // Show all.
+    if (location.search.endsWith("?all")) {
+      show = { dataFile: "data.json", range: [], search: "all" };
+      break;
+    }
+    // Custom range.
+    const range = decodeURIComponent(location.search)
+      .split(/([?,]|\.{2,})/g)
+      .filter(Boolean)
+      .map(Number)
+      .filter(Number.isInteger);
+    if ([1, 2].includes(range.length)) {
+      const search = range.join("...");
+      show = { dataFile: "data.json", range, search };
+      break;
+    }
+    break;
+  }
+  if (
+    location != null &&
+    location.search !== show.search &&
+    location.search !== `?${show.search}`
+  ) {
+    location.replace(location.toString().replace(/\?.*$/, `?${show.search}`));
+  }
+
+  const showAll = show.dataFile !== "recent.json";
+  const dataUrl = `https://denoland.github.io/benchmark_data/${show.dataFile}`;
 
   const [data, setData] = React.useState<BenchmarkData | null>(null);
+  const [dataRangeTitle, setDataRangeTitle] = React.useState<string>("");
   const [showNormalized, setShowNormalized] = React.useState(false);
 
   React.useEffect(() => {
     setData(null);
-    let dataUrl = "https://denoland.github.io/benchmark_data/recent.json";
-    if (showAll) {
-      dataUrl = "https://denoland.github.io/benchmark_data/data.json";
-    }
-
     fetch(dataUrl).then(async (response) => {
       const rawData = await response.json();
-      const data = reshape(rawData);
+      const data = reshape(rawData.slice(...show.range));
       setData(data);
+
+      // Show actual range in title bar (except when showing 'recent' only).
+      if (typeof window !== "undefined") {
+        setDataRangeTitle(
+          showAll
+            ? [(ks: number[]) => ks[0], (ks: number[]) => ks.pop()]
+                .map((f) => f([...rawData.keys()].slice(...show.range)))
+                .filter((k) => k != null)
+                .join("...")
+            : ""
+        );
+      }
     });
-  }, [showAll]);
+  }, [show.search]);
 
   return (
     <>
       <Head>
-        <title>Benchmarks | Deno</title>
+        <title>
+          Benchmarks {dataRangeTitle ? `(${dataRangeTitle})` : `| Deno`}
+        </title>
       </Head>
       <div className="bg-gray-50 min-h-full">
         <Header subtitle="Continuous Benchmarks" />
