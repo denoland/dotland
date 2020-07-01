@@ -4770,6 +4770,13 @@
     "desc": "Deno module implementing the verbal expressions library",
     "default_version": "master"
   },
+  "vicis": {
+    "type": "github",
+    "owner": "r37r0m0d3l",
+    "repo": "deno-vicis",
+    "desc": "Presentation and transformation layer for data output in RESTful APIs.",
+    "default_version": "master"
+  },
   "view_engine": {
     "type": "github",
     "owner": "deligenius",
