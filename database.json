@@ -55,6 +55,13 @@
     "desc": "HTTP file server with live reloading.",
     "default_version": "master"
   },
+  "aes_cfb": {
+    "type": "github",
+    "owner": "hazae41",
+    "repo": "deno-aes-cfb",
+    "desc": "WebAssembly powered AES-CFB / AES-CFB8 encryption for Deno, written in Rust.",
+    "default_version": "master"
+  },
   "airtable": {
     "type": "github",
     "owner": "grikomsn",
@@ -519,12 +526,19 @@
     "desc": "WASM bindings to Ciphers for Deno.",
     "default_version": "master"
   },
+  "cities": {
+    "type": "github",
+    "owner": "michael-spengler",
+    "repo": "cities",
+    "desc": "Deno module to get city data.",
+    "default_version": "master"
+  },
   "class_transformer": {
     "type": "github",
     "owner": "tnifey",
     "repo": "class-transformer",
     "desc": "Deno port of class-transformer",
-    "default_version": "master"
+    "default_version": "master" 
   },
   "cli_spinners": {
     "type": "github",
@@ -692,6 +706,13 @@
     "owner": "rahmanfadhil",
     "repo": "cotton",
     "desc": "SQL Database Toolkit for Deno",
+    "default_version": "master"
+  },
+  "countries": {
+    "type": "github",
+    "owner": "michael-spengler",
+    "repo": "countries",
+    "desc": "Deno module providing country data. It includes a country flag server which you can use optionally.",
     "default_version": "master"
   },
   "countryfinder": {
@@ -1331,7 +1352,7 @@
     "type": "github",
     "owner": "hazae41",
     "repo": "denoflate",
-    "desc": "WebAssembly powered Deflate compression for Deno, written in Rust.",
+    "desc": "WebAssembly powered Deflate/Gzip/Zlib compression for Deno, written in Rust.",
     "default_version": "master"
   },
   "denoforge": {
