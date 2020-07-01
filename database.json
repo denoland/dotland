@@ -4036,6 +4036,13 @@
     "desc": "Serialize (i.e. stringify) XML",
     "default_version": "master"
   },
+  "serva": {
+    "type": "github",
+    "owner": "servaland",
+    "repo": "serva",
+    "desc": "The zero setup web framework for Deno.",
+    "default_version": "master"
+  },
   "servest": {
     "type": "github",
     "owner": "keroxp",
