@@ -2194,7 +2194,7 @@
   "gravatar-utils": {
     "type": "github",
     "owner": "aniketgargya",
-    "repo": "gravatar-utils",
+    "repo": "gravatar_utils",
     "desc": "Gravatar utility functions module for deno",
     "default_version": "master"
   },
