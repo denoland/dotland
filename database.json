@@ -55,6 +55,13 @@
     "desc": "HTTP file server with live reloading.",
     "default_version": "master"
   },
+  "aes_cfb": {
+    "type": "github",
+    "owner": "hazae41",
+    "repo": "deno-aes-cfb",
+    "desc": "WebAssembly powered AES-CFB / AES-CFB8 encryption for Deno, written in Rust.",
+    "default_version": "master"
+  },
   "airtable": {
     "type": "github",
     "owner": "grikomsn",
