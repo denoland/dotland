@@ -3754,7 +3754,8 @@
     "owner": "ramda",
     "repo": "ramda",
     "desc": "A practical functional library for JavaScript programmers.",
-    "default_version": "master"
+    "default_version": "master",
+    "path": "/source"
   },
   "rand": {
     "type": "github",
