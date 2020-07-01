@@ -519,6 +519,13 @@
     "desc": "WASM bindings to Ciphers for Deno.",
     "default_version": "master"
   },
+  "cities": {
+    "type": "github",
+    "owner": "michael-spengler",
+    "repo": "cities",
+    "desc": "Deno module to get city data.",
+    "default_version": "master"
+  },
   "cli_spinners": {
     "type": "github",
     "owner": "ameerthehacker",
@@ -685,6 +692,13 @@
     "owner": "rahmanfadhil",
     "repo": "cotton",
     "desc": "SQL Database Toolkit for Deno",
+    "default_version": "master"
+  },
+  "countries": {
+    "type": "github",
+    "owner": "michael-spengler",
+    "repo": "countries",
+    "desc": "Deno module providing country data. It includes a country flag server which you can use optionally.",
     "default_version": "master"
   },
   "countryfinder": {
