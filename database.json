@@ -2191,6 +2191,13 @@
     "desc": "Simple Graphviz library for Deno🦕",
     "default_version": "master"
   },
+  "gravatar-utils": {
+    "type": "github",
+    "owner": "aniketgargya",
+    "repo": "gravatar-utils",
+    "desc": "Gravatar utility functions module for deno",
+    "default_version": "master"
+  },
   "greet_user": {
     "type": "github",
     "owner": "guptamohit004",
