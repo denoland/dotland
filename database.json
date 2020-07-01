@@ -1345,7 +1345,7 @@
     "type": "github",
     "owner": "hazae41",
     "repo": "denoflate",
-    "desc": "WebAssembly powered Deflate compression for Deno, written in Rust.",
+    "desc": "WebAssembly powered Deflate/Gzip/Zlib compression for Deno, written in Rust.",
     "default_version": "master"
   },
   "denoforge": {
