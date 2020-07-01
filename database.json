@@ -935,13 +935,6 @@
     "desc": "A better deno cli with deno.json",
     "default_version": "master"
   },
-  "denet": {
-    "type": "github",
-    "owner": "ryaangu",
-    "repo": "denet",
-    "desc": "Easy Game Networking module for Deno.",
-    "default_version": "master"
-  },
   "denjucks": {
     "type": "github",
     "owner": "denjucks",
