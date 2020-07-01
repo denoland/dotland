@@ -2481,9 +2481,9 @@
   },
   "irc": {
     "type": "github",
-    "owner": "hacked",
+    "owner": "nx",
     "repo": "irc",
-    "desc": "🦕 Internet Relay Chat (IRC) Message Parser for Deno",
+    "desc": "Parser for Deno (RFC 2812 and IRCv3)",
     "default_version": "master"
   },
   "iro": {
@@ -3266,9 +3266,9 @@
   },
   "oauth2": {
     "type": "github",
-    "owner": "hacked",
+    "owner": "nx",
     "repo": "oauth2",
-    "desc": "🔒 OAuth 2.0 for Deno (RFC 6749)",
+    "desc": "OAuth 2.0 for Deno (RFC 6749)",
     "default_version": "master"
   },
   "observable": {
