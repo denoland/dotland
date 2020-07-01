@@ -1208,6 +1208,13 @@
     "desc": "A Deno module/cli to capture web page screenshots.",
     "default_version": "master"
   },
+  "deno_stars": {
+    "type": "github",
+    "owner": "fakoua",
+    "repo": "DenoStars",
+    "desc": "Deno modules as it should be!",
+    "default_version": "master"
+  },
   "deno_string_validator": {
     "type": "github",
     "owner": "okwudav",
