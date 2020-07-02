@@ -2584,6 +2584,13 @@
     "desc": "Check if a URL is absolute",
     "default_version": "master"
   },
+  "is_wsl": {
+    "type": "github",
+    "owner": "denorg",
+    "repo": "is-wsl",
+    "desc": "Check if the process is running inside a WSL container in Deno",
+    "default_version": "master"
+  },
   "jbq": {
     "type": "github",
     "owner": "krnik",
