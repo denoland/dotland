@@ -48,7 +48,7 @@ function getBenchmarkVarieties(
 ): string[] {
   // Look at last sha hash.
   const last = data[data.length - 1];
-  return Object.keys(last[benchmarkName]!);
+  return Object.keys(last[benchmarkName] ?? {});
 }
 
 function createColumns(
