@@ -3306,6 +3306,13 @@
     "desc": "tc39 proposal spec compatible observable",
     "default_version": "master"
   },
+  "odds_converter": {
+    "type": "github",
+    "owner": "c-m-hunt",
+    "repo": "odds-converter",
+    "desc": "Betting odds conversion class. CLI to follow.",
+    "default_version": "master"
+  },
   "ogone": {
     "type": "github",
     "owner": "SRNV",
