@@ -4012,7 +4012,7 @@
   "seed": {
     "type": "github",
     "owner": "krijn-inc",
-    "repo": "krijn-inc/seed",
+    "repo": "seed",
     "desc": "Deno package used to generate good, short and fast pseudorandom numbers using a seed",
     "default_version": "master"
   },
