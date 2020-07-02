@@ -533,6 +533,13 @@
     "desc": "Deno module to get city data.",
     "default_version": "master"
   },
+  "class_transformer": {
+    "type": "github",
+    "owner": "tnifey",
+    "repo": "class-transformer",
+    "desc": "Deno port of class-transformer",
+    "default_version": "master"
+  },
   "cli_spinners": {
     "type": "github",
     "owner": "ameerthehacker",
