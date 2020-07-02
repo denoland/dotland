@@ -1412,6 +1412,13 @@
     "desc": "denon is the deno replacement for nodemon providing a feature packed and easy to use experience.",
     "default_version": "master"
   },
+  "denorand": {
+    "type": "github",
+    "owner": "hazae41",
+    "repo": "denorand",
+    "desc": "WebAssembly powered random TypedArray generation for Deno, written in Rust.",
+    "default_version": "master"
+  },
   "denosaur": {
     "type": "github",
     "owner": "ClementD64",
