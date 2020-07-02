@@ -3186,6 +3186,12 @@
     "desc": "A SRT and ASS/SSA subtitle parser for Deno.",
     "default_version": "master"
   },
+  "newdash": {
+    "type": "npm",
+    "owner": "theosun",
+    "package": "@newdash/newdash-deno",
+    "desc": "NewDash is a hard fork of the lodash utility project, and re-build it with typescript."
+  },
   "nexo": {
     "type": "github",
     "owner": "nexojs",
@@ -4284,7 +4290,10 @@
     "desc": "HTTP status utility for Deno. Based on Java Apache HttpStatus",
     "default_version": "master"
   },
-  "std": { "type": "deno_std", "desc": "Deno Standard Modules" },
+  "std": {
+    "type": "deno_std",
+    "desc": "Deno Standard Modules"
+  },
   "std_old": {
     "type": "github",
     "owner": "denoland",
