@@ -2913,13 +2913,6 @@
     "desc": "A module for generating mazes.",
     "default_version": "master"
   },
-  "md5": {
-    "type": "github",
-    "owner": "halvardssm",
-    "repo": "deno-md5",
-    "desc": "MD5 for deno.",
-    "default_version": "master"
-  },
   "media_typer": {
     "type": "github",
     "owner": "ako-deno",
@@ -3176,7 +3169,7 @@
     "type": "github",
     "owner": "halvardssm",
     "repo": "deno-nessie",
-    "desc": "A database migration tool for deno.",
+    "desc": "A modular library for SQL migrations. Supports PostgreSQL, MySQL and SQLite.",
     "default_version": "master"
   },
   "neta": {
