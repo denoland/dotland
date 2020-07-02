@@ -3306,7 +3306,7 @@
     "desc": "tc39 proposal spec compatible observable",
     "default_version": "master"
   },
-  "odds-converter": {
+  "odds_converter": {
     "type": "github",
     "owner": "c-m-hunt",
     "repo": "odds-converter",
