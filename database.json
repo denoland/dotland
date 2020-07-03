@@ -97,6 +97,13 @@
     "desc": "AMQP 0.9.1",
     "default_version": "master"
   },
+  "angular_deno": {
+    "type": "github",
+    "owner": "alosaur",
+    "repo": "angular_deno",
+    "desc": "Angular renderer engine for Deno (SSR)",
+    "default_version": "master"
+  },
   "ansi_styles": {
     "type": "github",
     "owner": "tavofigse",
