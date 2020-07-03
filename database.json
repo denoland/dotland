@@ -2345,6 +2345,13 @@
     "desc": "Fast html entities decode & encode library",
     "default_version": "master"
   },
+  "htmlparser": {
+    "type": "github",
+    "owner": "tbjgolden",
+    "repo": "deno-htmlparser2",
+    "desc": "Forgiving html and xml parser (port from Node)",
+    "default_version": "master"
+  },
   "http_errors": {
     "type": "github",
     "owner": "ako-deno",
