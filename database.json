@@ -1306,6 +1306,13 @@
     "desc": "Denock can be used to test modules that perform HTTP requests in isolation. It intercept HTTP requests and respond with the mock you specified",
     "default_version": "master"
   },
+  "denocker": {
+    "type": "github",
+    "owner": "Oursin",
+    "repo": "denocker",
+    "desc": "Docker API wrapper for Deno",
+    "default_version": "master"
+  },
   "denoconfig": {
     "type": "github",
     "owner": "rclarey",
