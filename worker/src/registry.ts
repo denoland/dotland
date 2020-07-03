@@ -21,12 +21,12 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
   } else if (needsGHDeprecationWarning(entry)) {
     response.headers.set(
       "X-Deno-Warning",
-      `The https://deno.land/x/gh:owner:repo redirects are deprecated will be removed on September 1st 2020. Import ${entry.url} instead of ${url}`
+      `The https://deno.land/x/gh:owner:repo redirects are deprecated will be removed on August 1st 2020. Import ${entry.url} instead of ${url}`
     );
   } else if (needsNPMDeprecationWarning(entry)) {
     response.headers.set(
       "X-Deno-Warning",
-      `The https://deno.land/x/npm:project redirects are deprecated will be removed on September 1st 2020. Import ${entry.url} instead of ${url}`
+      `The https://deno.land/x/npm:project redirects are deprecated will be removed on August 1st 2020. Import ${entry.url} instead of ${url}`
     );
   }
   const originContentType = response.headers.get("content-type");

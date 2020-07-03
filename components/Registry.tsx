@@ -183,7 +183,7 @@ const Registry = () => {
             {name.startsWith("gh:") && (
               <WarningMessage
                 title="deno.land/x/gh:owner:repo redirect deprecation notice"
-                body={`The https://deno.land/x/gh:owner:repo style redirects are deprecated and will be removed on September 1st 2020. Instead of importing via deno.land you can import this module directly from GitHub${
+                body={`The https://deno.land/x/gh:owner:repo style redirects are deprecated and will be removed on August 1st 2020. Instead of importing via deno.land you can import this module directly from GitHub${
                   raw ? ` via the URL ${sourceURL}` : ""
                 }.`}
               />
@@ -191,7 +191,7 @@ const Registry = () => {
             {name.startsWith("npm:") && (
               <WarningMessage
                 title="deno.land/x/npm:project redirect deprecation notice"
-                body={`The https://deno.land/x/npm:project style redirects are deprecated and will be removed on September 1st 2020. Instead of importing via deno.land you can import this module directly from unpkg.com via the URL ${
+                body={`The https://deno.land/x/npm:project style redirects are deprecated and will be removed on August 1st 2020. Instead of importing via deno.land you can import this module directly from unpkg.com via the URL ${
                   raw ? ` via the URL ${sourceURL}` : ""
                 }.`}
               />
