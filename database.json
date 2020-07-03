@@ -2815,6 +2815,13 @@
     "desc": "Tiny module to get local network interface address.",
     "default_version": "master"
   },
+  "location": {
+    "type": "github",
+    "owner": "michael-spengler",
+    "repo": "location",
+    "desc": "Deno module to get location data e.g. by IP or by cityname.",
+    "default_version": "master"
+  },
   "lodash": {
     "type": "github",
     "owner": "lodash",
