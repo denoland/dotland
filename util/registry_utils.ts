@@ -1,7 +1,7 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
 const S3_BUCKET =
-  "https://deno-registry2-storagebucket-fklr2u336n14.s3.us-east-2.amazonaws.com/";
+  "https://deno-registry-prod-storagebucket-1op8hmxk9om83.s3.us-east-2.amazonaws.com/";
 
 export interface DirEntry {
   name: string;
@@ -13,7 +13,7 @@ export interface DirEntry {
 export function getSourceURL(
   module: string,
   version: string,
-  path: string,
+  path: string
 ): string {
   return `${S3_BUCKET}${module}/versions/${version}/raw${path}`;
 }
@@ -21,7 +21,7 @@ export function getSourceURL(
 export function getRepositoryURL(
   meta: MetaInfo,
   version: string,
-  path: string,
+  path: string
 ): string | undefined {
   switch (meta?.type) {
     case "github":
@@ -39,10 +39,9 @@ export interface DirListing {
 
 export async function getDirectoryListing(
   module: string,
-  version: string,
+  version: string
 ): Promise<DirListing[] | null> {
-  const url =
-    `${S3_BUCKET}${module}/versions/${version}/meta/directory_listing.json`;
+  const url = `${S3_BUCKET}${module}/versions/${version}/meta/directory_listing.json`;
   const res = await fetch(url, {
     headers: {
       accept: "application/json",
@@ -51,8 +50,9 @@ export async function getDirectoryListing(
   if (res.status === 403 || res.status === 404) return null;
   if (res.status !== 200) {
     throw Error(
-      `Got an error (${res.status}) while getting the directory listing:\n${await res
-        .text()}`,
+      `Got an error (${
+        res.status
+      }) while getting the directory listing:\n${await res.text()}`
     );
   }
   return await res.json();
@@ -64,7 +64,7 @@ export interface VersionInfo {
 }
 
 export async function getVersionList(
-  module: string,
+  module: string
 ): Promise<VersionInfo | null> {
   const url = `${S3_BUCKET}${module}/meta/versions.json`;
   const res = await fetch(url, {
@@ -75,8 +75,9 @@ export async function getVersionList(
   if (res.status === 403 || res.status === 404) return null;
   if (res.status !== 200) {
     throw Error(
-      `Got an error (${res.status}) while getting the version list:\n${await res
-        .text()}`,
+      `Got an error (${
+        res.status
+      }) while getting the version list:\n${await res.text()}`
     );
   }
   return res.json();
@@ -87,9 +88,7 @@ export interface MetaInfo {
   repository: string;
 }
 
-export async function getMeta(
-  module: string,
-): Promise<MetaInfo | null> {
+export async function getMeta(module: string): Promise<MetaInfo | null> {
   const url = `${S3_BUCKET}${module}/meta/meta.json`;
   const res = await fetch(url, {
     headers: {
@@ -99,16 +98,15 @@ export async function getMeta(
   if (res.status === 403 || res.status === 404) return null;
   if (res.status !== 200) {
     throw Error(
-      `Got an error (${res.status}) while getting the meta info:\n${await res
-        .text()}`,
+      `Got an error (${
+        res.status
+      }) while getting the meta info:\n${await res.text()}`
     );
   }
   return res.json();
 }
 
-export function parseNameVersion(
-  nameVersion: string,
-): [string, string] {
+export function parseNameVersion(nameVersion: string): [string, string] {
   const [name, version] = nameVersion.split("@", 2);
   return [name, version];
 }
