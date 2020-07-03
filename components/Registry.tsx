@@ -180,6 +180,22 @@ const Registry = () => {
         />
         <div className="">
           <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8">
+            {name.startsWith("gh:") && (
+              <WarningMessage
+                title="deno.land/x/gh:owner:repo redirect deprecation notice"
+                body={`The https://deno.land/x/gh:owner:repo style redirects are deprecated and will be removed on August 1st 2020. Instead of importing via deno.land you can import this module directly from GitHub${
+                  raw ? ` via the URL ${sourceURL}` : ""
+                }.`}
+              />
+            )}
+            {name.startsWith("npm:") && (
+              <WarningMessage
+                title="deno.land/x/npm:project redirect deprecation notice"
+                body={`The https://deno.land/x/npm:project style redirects are deprecated and will be removed on August 1st 2020. Instead of importing via deno.land you can import this module directly from unpkg.com via the URL ${
+                  raw ? ` via the URL ${sourceURL}` : ""
+                }.`}
+              />
+            )}
             <Breadcrumbs
               name={name}
               version={version}
@@ -270,6 +286,36 @@ const Registry = () => {
   );
 };
 
+function WarningMessage(props: { title: string; body: string }) {
+  return (
+    <div className="rounded-md bg-yellow-50 border border-yellow-200 p-4 my-4">
+      <div className="flex">
+        <div className="flex-shrink-0">
+          <svg
+            className="h-5 w-5 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              fillRule="evenodd"
+              d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+              clipRule="evenodd"
+            ></path>
+          </svg>
+        </div>
+        <div className="ml-3">
+          <h3 className="text-sm leading-5 font-medium text-yellow-800">
+            {props.title}
+          </h3>
+          <div className="mt-2 text-sm leading-5 text-yellow-700">
+            {props.body}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ErrorMessage(props: { title: string; body: string }) {
   return (
     <div className="rounded-md bg-red-50 border border-red-200 p-4 my-4">
@@ -295,7 +341,7 @@ function ErrorMessage(props: { title: string; body: string }) {
             {props.body}
           </div>
         </div>
-      </div>{" "}
+      </div>
     </div>
   );
 }

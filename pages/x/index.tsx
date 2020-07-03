@@ -51,12 +51,6 @@ const ThirdPartyRegistryList = () => {
               </p>
 
               <p className="text-gray-900 mt-4">
-                Experimental: Use <InlineCode>npm:[package]</InlineCode> or
-                <InlineCode>gh:[owner]:[repo]</InlineCode> as module name to
-                resolve any arbitrary repository or npm package.
-              </p>
-
-              <p className="text-gray-900 mt-4">
                 Functionality built-in to Deno is not listed here. The built-in
                 runtime is documented on{" "}
                 <a href="https://doc.deno.land" className="link">
