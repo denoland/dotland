@@ -2043,6 +2043,13 @@
     "desc": "filesize provides a simple way to get a human readable file size string from a number.",
     "default_version": "master"
   },
+  "financial": {
+    "type": "github",
+    "owner": "lmammino",
+    "repo": "financial",
+    "desc": "A Zero-dependency TypeScript/JavaScript port of numpy-financial.",
+    "default_version": "master"
+  },
   "fiona": {
     "type": "github",
     "owner": "billymoon",
