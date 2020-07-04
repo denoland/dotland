@@ -55,10 +55,10 @@
     "desc": "HTTP file server with live reloading.",
     "default_version": "master"
   },
-  "adyen-deno": {
+  "adyen_deno": {
     "type": "github",
     "owner": "KadoBOT",
-    "repo": "adyen-deno",
+    "repo": "adyen_deno",
     "desc": "Adyen API Library for Deno.",
     "default_version": "master"
   },
