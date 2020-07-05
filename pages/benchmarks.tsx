@@ -249,12 +249,12 @@ const Benchmarks = () => {
                   yLabel="seconds"
                 />
                 <p className="mt-1">
-                  In both cases, a full type check is run for&nbsp;
-                  <code>std/examples/chat/server_test.ts</code>&nbsp;which is a
-                  workload that contains 20 unique TypeScript modules.
-                  With&nbsp;<em>check</em>&nbsp;a full TypeScript type check,
-                  while&nbsp;<em>no_check</em>&nbsp;uses the&nbsp;
-                  <code>--no-check</code>&nbsp;flag to skip a full type check.
+                  In both cases, a full type check is run for{" "}
+                  <code>std/examples/chat/server_test.ts</code> which is a
+                  workload that contains 20 unique TypeScript modules. With{" "}
+                  <em>check</em> a full TypeScript type check, while{" "}
+                  <em>no_check</em> uses the <code>--no-check</code> flag to
+                  skip a full type check.
                 </p>
               </div>
             </div>
