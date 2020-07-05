@@ -631,6 +631,13 @@
     "desc": "pipe, pipeline, and compose functions with 64 overloads per function",
     "default_version": "master"
   },
+  "compress": {
+    "type": "github",
+    "owner": "deno-library",
+    "repo": "compress",
+    "desc": "compress or uncompress tar, gzip, tgz, zip files for deno",
+    "default_version": "master"
+  },
   "computed_types": {
     "type": "github",
     "owner": "neuledge",
