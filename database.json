@@ -921,6 +921,13 @@
     "desc": "Debug utility for deno. Under development.",
     "default_version": "master"
   },
+  "decognition": {
+    "type": "github",
+    "owner": "viandwi24",
+    "repo": "decognition",
+    "desc": "a Pretty Exception Handler for Deno. Inspirated from Laravel & Flare Ignition.",
+    "default_version": "master"
+  },
   "dedupe": {
     "type": "github",
     "owner": "Sab94",
