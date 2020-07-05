@@ -1657,6 +1657,13 @@
     "desc": "A module manager for Deno",
     "default_version": "master"
   },
+  "doa": {
+    "type": "github",
+    "owner": "johannlai",
+    "repo": "doa",
+    "desc": "A middleware framework for Deno's http serve.Transplanted from Koa.",
+    "default_version": "master"
+  },
   "docable": {
     "type": "github",
     "owner": "crookse",
