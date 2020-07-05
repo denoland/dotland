@@ -4693,6 +4693,13 @@
     "desc": "TypedNumeric for Deno.",
     "default_version": "master"
   },
+  "typeorm": {
+    "type": "github",
+    "owner": "denolib",
+    "repo": "typeorm",
+    "desc": "A Deno fork of the TypeORM",
+    "default_version": "master"
+  },
   "types": {
     "type": "github",
     "owner": "Soremwar",
