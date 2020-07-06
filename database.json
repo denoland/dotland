@@ -281,6 +281,13 @@
     "desc": "base64 strings from/to Uint8Arrays",
     "default_version": "master"
   },
+  "base91": {
+    "type": "github",
+    "owner": "oplik0",
+    "repo": "base91-deno",
+    "desc": "Ascii-based encoding more space efficient than base64 or base85",
+    "default_version": "master"
+  },
   "bb64": {
     "type": "github",
     "owner": "denjucks",
