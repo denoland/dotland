@@ -230,7 +230,7 @@
     "repo": "authlete-deno",
     "desc": "Authlete library for Deno",
     "default_version": "master"
-  },  
+  },
   "auto_bind": {
     "type": "github",
     "owner": "jgchk",
