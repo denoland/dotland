@@ -125,9 +125,7 @@ for await (const req of s) {
           />
           <p className="my-4 text-gray-700">Or a more complex one:</p>
         </div>
-        <div
-          className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8"
-        >
+        <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8">
           <CodeBlock
             code={complexExampleProgram}
             language="typescript"
