@@ -956,6 +956,13 @@
     "desc": "removes duplicates from your array.",
     "default_version": "master"
   },
+  "deenvo": {
+    "type": "github",
+    "owner": "OctoD",
+    "repo": "deenvo",
+    "desc": "Data structures and data types for Deno.",
+    "default_version": "master"
+  },
   "dejs": {
     "type": "github",
     "owner": "syumai",
