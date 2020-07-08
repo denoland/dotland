@@ -3947,6 +3947,13 @@
     "desc": "deno random interval",
     "default_version": "master"
   },
+  "random_primes": {
+    "type": "github",
+    "owner": "jacob-ian",
+    "repo": "deno_random_primes",
+    "desc": "Generate random prime numbers by bit-length with Deno and the Miller-Rabin test.",
+    "default_version": "master"
+  },
   "ranking": {
     "type": "github",
     "owner": "yoshixmk",
