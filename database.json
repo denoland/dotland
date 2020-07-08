@@ -3875,6 +3875,13 @@
     "desc": "Random - ES Module for Deno, Node and Web",
     "default_version": "master"
   },
+  "random_bigint": {
+    "type": "github",
+    "owner": "jacob-ian",
+    "repo": "deno_random_bigint",
+    "desc": "Generate a random BigInt from a bit-length with Deno",
+    "default_version": "master"
+  },
   "random_float": {
     "type": "github",
     "owner": "yg",
