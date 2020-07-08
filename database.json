@@ -688,6 +688,13 @@
     "desc": "🦩 Joi like validation for TypeScript",
     "default_version": "master"
   },
+  "console_bark": {
+    "type": "github",
+    "owner": "Jack5079",
+    "repo": "console.bark",
+    "desc": "Logging your console, one bark at a time!",
+    "default_version": "master"
+  },
   "conf": {
     "type": "github",
     "owner": "lemarier",
