@@ -1848,6 +1848,13 @@
     "desc": "Drake, a Make-like task runner for Deno inspired by Make, Rake and Jake.",
     "default_version": "master"
   },
+  "drand_client": {
+    "type": "github",
+    "owner": "drand",
+    "repo": "drand-client",
+    "desc": "A client to the drand randomness beacon network. Verifiable, unpredictable and unbiased random numbers as a service.",
+    "default_version": "master"
+  },
   "drash": {
     "type": "github",
     "owner": "drashland",
