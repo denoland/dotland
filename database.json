@@ -55,6 +55,13 @@
     "desc": "HTTP file server with live reloading.",
     "default_version": "master"
   },
+  "adyen_deno": {
+    "type": "github",
+    "owner": "KadoBOT",
+    "repo": "adyen_deno",
+    "desc": "Adyen API Library for Deno.",
+    "default_version": "master"
+  },
   "aes_cfb": {
     "type": "github",
     "owner": "hazae41",
@@ -90,11 +97,26 @@
     "desc": "Alosaur - Deno web framework 🦖.",
     "default_version": "master"
   },
+  "amq": {
+    "type": "github",
+    "owner": "amatiasq",
+    "repo": "deno",
+    "path": "/amq",
+    "desc": "Toolkit of utility functions and components",
+    "default_version": "master"
+  },
   "amqp": {
     "type": "github",
     "owner": "lenkan",
     "repo": "deno-amqp",
     "desc": "AMQP 0.9.1",
+    "default_version": "master"
+  },
+  "angular_deno": {
+    "type": "github",
+    "owner": "alosaur",
+    "repo": "angular_deno",
+    "desc": "Angular renderer engine for Deno (SSR)",
     "default_version": "master"
   },
   "ansi_styles": {
@@ -210,6 +232,20 @@
     "desc": "Add an audit notification for insecure versions of your modules",
     "default_version": "master"
   },
+  "authlete_deno": {
+    "type": "github",
+    "owner": "authlete",
+    "repo": "authlete-deno",
+    "desc": "Authlete library for Deno",
+    "default_version": "master"
+  },
+  "authlete_deno_fen_oauth_server": {
+    "type": "github",
+    "owner": "authlete",
+    "repo": "deno-fen-oauth-server",
+    "desc": "Authorization server that supports OAuth 2.0 and OpenID Connect. The server is powered by Authlete.",
+    "default_version": "master"
+  },
   "auto_bind": {
     "type": "github",
     "owner": "jgchk",
@@ -265,6 +301,13 @@
     "owner": "chiefbiiko",
     "repo": "base64",
     "desc": "base64 strings from/to Uint8Arrays",
+    "default_version": "master"
+  },
+  "base91": {
+    "type": "github",
+    "owner": "oplik0",
+    "repo": "base91-deno",
+    "desc": "Ascii-based encoding more space efficient than base64 or base85",
     "default_version": "master"
   },
   "bb64": {
@@ -498,6 +541,13 @@
     "desc": "ChaCha20-Poly1305 as defined by RFC 8439",
     "default_version": "master"
   },
+  "changelog": {
+    "type": "github",
+    "owner": "oscarotero",
+    "repo": "keep-a-changelog",
+    "desc": "Parse and generate changelogs following the keepachangelog.com format",
+    "default_version": "deno"
+  },
   "checksum": {
     "type": "github",
     "owner": "manyuanrong",
@@ -582,6 +632,13 @@
     "desc": "Simple but awesome LRU cache for Deno, named after the bluest color.",
     "default_version": "master"
   },
+  "coffee": {
+    "type": "github",
+    "owner": "irandeno",
+    "repo": "coffee",
+    "desc": "Deno Configuration",
+    "default_version": "master"
+  },
   "collections": {
     "type": "github",
     "owner": "hayd",
@@ -624,6 +681,13 @@
     "desc": "pipe, pipeline, and compose functions with 64 overloads per function",
     "default_version": "master"
   },
+  "compress": {
+    "type": "github",
+    "owner": "deno-library",
+    "repo": "compress",
+    "desc": "compress or uncompress tar, gzip, tgz, zip files for deno",
+    "default_version": "master"
+  },
   "computed_types": {
     "type": "github",
     "owner": "neuledge",
@@ -643,6 +707,13 @@
     "owner": "eankeen",
     "repo": "config",
     "desc": "Load dotfiles / modules for a project consistently",
+    "default_version": "master"
+  },
+  "console_bark": {
+    "type": "github",
+    "owner": "Jack5079",
+    "repo": "console.bark",
+    "desc": "Logging your console, one bark at a time!",
     "default_version": "master"
   },
   "content_disposition": {
@@ -914,11 +985,25 @@
     "desc": "Debug utility for deno. Under development.",
     "default_version": "master"
   },
+  "decognition": {
+    "type": "github",
+    "owner": "viandwi24",
+    "repo": "decognition",
+    "desc": "a Pretty Exception Handler for Deno. Inspirated from Laravel & Flare Ignition.",
+    "default_version": "master"
+  },
   "dedupe": {
     "type": "github",
     "owner": "Sab94",
     "repo": "dedupe",
     "desc": "removes duplicates from your array.",
+    "default_version": "master"
+  },
+  "deenvo": {
+    "type": "github",
+    "owner": "OctoD",
+    "repo": "deenvo",
+    "desc": "Data structures and data types for Deno.",
     "default_version": "master"
   },
   "dejs": {
@@ -1306,6 +1391,13 @@
     "desc": "Denock can be used to test modules that perform HTTP requests in isolation. It intercept HTTP requests and respond with the mock you specified",
     "default_version": "master"
   },
+  "denocker": {
+    "type": "github",
+    "owner": "Oursin",
+    "repo": "denocker",
+    "desc": "Docker API wrapper for Deno",
+    "default_version": "master"
+  },
   "denoconfig": {
     "type": "github",
     "owner": "rclarey",
@@ -1424,6 +1516,14 @@
     "owner": "hazae41",
     "repo": "denorand",
     "desc": "WebAssembly powered random TypedArray generation for Deno, written in Rust.",
+    "default_version": "master"
+  },
+  "denord": {
+    "type": "github",
+    "owner": "amatiasq",
+    "repo": "deno",
+    "path": "/denord",
+    "desc": "Idiomatic library to accces Discord API",
     "default_version": "master"
   },
   "denosaur": {
@@ -1636,6 +1736,13 @@
     "desc": "A module manager for Deno",
     "default_version": "master"
   },
+  "doa": {
+    "type": "github",
+    "owner": "johannlai",
+    "repo": "doa",
+    "desc": "A middleware framework for Deno's http serve.Transplanted from Koa.",
+    "default_version": "master"
+  },
   "docable": {
     "type": "github",
     "owner": "crookse",
@@ -1739,6 +1846,13 @@
     "owner": "srackham",
     "repo": "drake",
     "desc": "Drake, a Make-like task runner for Deno inspired by Make, Rake and Jake.",
+    "default_version": "master"
+  },
+  "drand_client": {
+    "type": "github",
+    "owner": "drand",
+    "repo": "drand-client",
+    "desc": "A client to the drand randomness beacon network. Verifiable, unpredictable and unbiased random numbers as a service.",
     "default_version": "master"
   },
   "drash": {
@@ -2027,6 +2141,13 @@
     "repo": "deno_modules",
     "path": "/filesize",
     "desc": "filesize provides a simple way to get a human readable file size string from a number.",
+    "default_version": "master"
+  },
+  "financial": {
+    "type": "github",
+    "owner": "lmammino",
+    "repo": "financial",
+    "desc": "A Zero-dependency TypeScript/JavaScript port of numpy-financial.",
     "default_version": "master"
   },
   "fiona": {
@@ -2338,6 +2459,13 @@
     "desc": "Fast html entities decode & encode library",
     "default_version": "master"
   },
+  "htmlparser": {
+    "type": "github",
+    "owner": "tbjgolden",
+    "repo": "deno-htmlparser2",
+    "desc": "Forgiving html and xml parser (port from Node)",
+    "default_version": "master"
+  },
   "http_errors": {
     "type": "github",
     "owner": "ako-deno",
@@ -2596,6 +2724,13 @@
     "owner": "denorg",
     "repo": "is-wsl",
     "desc": "Check if the process is running inside a WSL container in Deno",
+    "default_version": "master"
+  },
+  "isuuid": {
+    "type": "github",
+    "owner": "deno-library",
+    "repo": "isuuid",
+    "desc": "uuid check for Deno",
     "default_version": "master"
   },
   "jbq": {
@@ -3114,6 +3249,13 @@
     "owner": "denolib",
     "repo": "ms",
     "desc": "Use this package to easily convert various time formats to milliseconds. It is ported from https://github.com/zeit/ms to work with Deno.",
+    "default_version": "master"
+  },
+  "mtrand": {
+    "type": "github",
+    "owner": "koji",
+    "repo": "deno-mtrand",
+    "desc": "mt19937 for Deno.",
     "default_version": "master"
   },
   "multiparser": {
@@ -3805,6 +3947,13 @@
     "desc": "Random - ES Module for Deno, Node and Web",
     "default_version": "master"
   },
+  "random_bigint": {
+    "type": "github",
+    "owner": "jacob-ian",
+    "repo": "deno_random_bigint",
+    "desc": "Generate a random BigInt from a bit-length with Deno",
+    "default_version": "master"
+  },
   "random_float": {
     "type": "github",
     "owner": "yg",
@@ -3824,6 +3973,13 @@
     "owner": "zekth",
     "repo": "deno_random_interval",
     "desc": "deno random interval",
+    "default_version": "master"
+  },
+  "random_primes": {
+    "type": "github",
+    "owner": "jacob-ian",
+    "repo": "deno_random_primes",
+    "desc": "Generate random prime numbers by bit-length with Deno and the Miller-Rabin test.",
     "default_version": "master"
   },
   "ranking": {
@@ -3880,6 +4036,13 @@
     "owner": "reno-router",
     "repo": "reno",
     "desc": "A thin, testable routing library designed to sit on top of Deno's standard HTTP module",
+    "default_version": "master"
+  },
+  "response_time": {
+    "type": "github",
+    "owner": "johannlai",
+    "repo": "response-time",
+    "desc": "x-response-time for deno middleware framework serve.",
     "default_version": "master"
   },
   "resulty": {
@@ -4642,6 +4805,13 @@
     "owner": "glatan",
     "repo": "typed_numeric_deno",
     "desc": "TypedNumeric for Deno.",
+    "default_version": "master"
+  },
+  "typeorm": {
+    "type": "github",
+    "owner": "denolib",
+    "repo": "typeorm",
+    "desc": "A Deno fork of the TypeORM",
     "default_version": "master"
   },
   "types": {

@@ -2,8 +2,8 @@ import { parseNameVersion, findEntry } from "../../util/registry_utils";
 
 export async function handleRegistryRequest(url: URL): Promise<Response> {
   console.log("registry request", url.pathname);
-  const remoteUrl = getRegistrySourceURL(url.pathname);
-  if (!remoteUrl) {
+  const entry = getRegistrySourceURL(url.pathname);
+  if (!entry) {
     return new Response("Not in database.json: " + url.pathname, {
       status: 404,
       statusText: "Not Found",
@@ -11,12 +11,22 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
     });
   }
 
-  let response = await fetch(remoteUrl);
+  let response = await fetch(entry.url);
   response = new Response(response.body, response);
-  if (needsWarning(url.pathname)) {
+  if (needsMasterBranchWarning(entry)) {
     response.headers.set(
       "X-Deno-Warning",
       `Implicitly using master branch ${url}`
+    );
+  } else if (needsGHDeprecationWarning(entry)) {
+    response.headers.set(
+      "X-Deno-Warning",
+      `The https://deno.land/x/gh:owner:repo redirects are deprecated will be removed on August 1st 2020. Import ${entry.url} instead of ${url}`
+    );
+  } else if (needsNPMDeprecationWarning(entry)) {
+    response.headers.set(
+      "X-Deno-Warning",
+      `The https://deno.land/x/npm:project redirects are deprecated will be removed on August 1st 2020. Import ${entry.url} instead of ${url}`
     );
   }
   const originContentType = response.headers.get("content-type");
@@ -39,11 +49,25 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
   return response;
 }
 
-export function needsWarning(pathname: string): boolean {
-  return pathname.startsWith("/std") && !pathname.startsWith("/std@");
+export function needsMasterBranchWarning(entry: Entry): boolean {
+  return entry.name === "std" && entry.version === undefined;
 }
 
-export function getRegistrySourceURL(pathname: string): string | undefined {
+export function needsGHDeprecationWarning(entry: Entry): boolean {
+  return entry.name.startsWith("gh:");
+}
+
+export function needsNPMDeprecationWarning(entry: Entry): boolean {
+  return entry.name.startsWith("npm:");
+}
+
+export interface Entry {
+  name: string;
+  version: string | undefined;
+  url: string;
+}
+
+export function getRegistrySourceURL(pathname: string): Entry | undefined {
   if (pathname.startsWith("/std")) {
     return getRegistrySourceURL("/x" + pathname);
   }
@@ -55,5 +79,10 @@ export function getRegistrySourceURL(pathname: string): string | undefined {
   const [name, version] = parseNameVersion(nameBranch);
   const path = rest.join("/");
   const entry = findEntry(name);
-  return entry?.getSourceURL("/" + path, version);
+  if (!entry) return undefined;
+  return {
+    name,
+    version,
+    url: entry.getSourceURL("/" + path, version),
+  };
 }
