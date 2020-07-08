@@ -702,6 +702,13 @@
     "desc": "Load dotfiles / modules for a project consistently",
     "default_version": "master"
   },
+  "console_bark": {
+    "type": "github",
+    "owner": "Jack5079",
+    "repo": "console.bark",
+    "desc": "Logging your console, one bark at a time!",
+    "default_version": "master"
+  },
   "content_disposition": {
     "type": "github",
     "owner": "ako-deno",
