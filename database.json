@@ -239,6 +239,13 @@
     "desc": "Authlete library for Deno",
     "default_version": "master"
   },
+  "authlete_deno_fen_oauth_server": {
+    "type": "github",
+    "owner": "authlete",
+    "repo": "deno-fen-oauth-server",
+    "desc": "Authorization server that supports OAuth 2.0 and OpenID Connect. The server is powered by Authlete.",
+    "default_version": "master"
+  },
   "auto_bind": {
     "type": "github",
     "owner": "jgchk",
