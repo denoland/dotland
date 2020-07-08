@@ -2719,6 +2719,13 @@
     "desc": "Check if the process is running inside a WSL container in Deno",
     "default_version": "master"
   },
+  "isuuid": {
+    "type": "github",
+    "owner": "deno-library",
+    "repo": "isuuid",
+    "desc": "uuid check for Deno",
+    "default_version": "master"
+  },
   "jbq": {
     "type": "github",
     "owner": "krnik",
