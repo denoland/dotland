@@ -534,6 +534,13 @@
     "desc": "ChaCha20-Poly1305 as defined by RFC 8439",
     "default_version": "master"
   },
+  "changelog": {
+    "type": "github",
+    "owner": "oscarotero",
+    "repo": "keep-a-changelog",
+    "desc": "Parse and generate changelogs following the keepachangelog.com format",
+    "default_version": "deno"
+  },
   "checksum": {
     "type": "github",
     "owner": "manyuanrong",
