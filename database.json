@@ -232,6 +232,13 @@
     "desc": "Add an audit notification for insecure versions of your modules",
     "default_version": "master"
   },
+  "authlete_deno": {
+    "type": "github",
+    "owner": "authlete",
+    "repo": "authlete-deno",
+    "desc": "Authlete library for Deno",
+    "default_version": "master"
+  },
   "auto_bind": {
     "type": "github",
     "owner": "jgchk",
