@@ -97,6 +97,14 @@
     "desc": "Alosaur - Deno web framework 🦖.",
     "default_version": "master"
   },
+  "amq": {
+    "type": "github",
+    "owner": "amatiasq",
+    "repo": "deno",
+    "path": "/amq",
+    "desc": "Toolkit of utility functions and components",
+    "default_version": "master"
+  },
   "amqp": {
     "type": "github",
     "owner": "lenkan",
@@ -1473,6 +1481,14 @@
     "owner": "hazae41",
     "repo": "denorand",
     "desc": "WebAssembly powered random TypedArray generation for Deno, written in Rust.",
+    "default_version": "master"
+  },
+  "denord": {
+    "type": "github",
+    "owner": "amatiasq",
+    "repo": "deno",
+    "path": "/denord",
+    "desc": "Idiomatic library to accces Discord API",
     "default_version": "master"
   },
   "denosaur": {
