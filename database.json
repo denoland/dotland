@@ -3945,6 +3945,13 @@
     "desc": "A thin, testable routing library designed to sit on top of Deno's standard HTTP module",
     "default_version": "master"
   },
+  "response_time": {
+    "type": "github",
+    "owner": "johannlai",
+    "repo": "response-time",
+    "desc": "x-response-time for deno middleware framework serve.",
+    "default_version": "master"
+  },
   "resulty": {
     "type": "github",
     "owner": "robdwaller",
