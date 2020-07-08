@@ -3230,6 +3230,13 @@
     "desc": "Use this package to easily convert various time formats to milliseconds. It is ported from https://github.com/zeit/ms to work with Deno.",
     "default_version": "master"
   },
+  "mtrand": {
+    "type": "github",
+    "owner": "koji",
+    "repo": "deno-mtrand",
+    "desc": "mt19937 for Deno.",
+    "default_version": "master"
+  },
   "multiparser": {
     "type": "github",
     "owner": "deligenius",
