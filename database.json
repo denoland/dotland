@@ -948,6 +948,13 @@
     "desc": "Generate Data URI schemes.",
     "default_version": "master"
   },
+  "data_format_converter": {
+    "type": "github",
+    "owner": "ebebbington",
+    "repo": "deno-data-format-converter",
+    "desc": "Data Format Converter for Deno. JSON to XML, XML to JSON.",
+    "default_version": "master"
+  },
   "date_fns": {
     "type": "github",
     "owner": "date-fns",
