@@ -1834,7 +1834,7 @@
     "desc": "Drake, a Make-like task runner for Deno inspired by Make, Rake and Jake.",
     "default_version": "master"
   },
-  "drand-client": {
+  "drand_client": {
     "type": "github",
     "owner": "drand",
     "repo": "drand-client",
