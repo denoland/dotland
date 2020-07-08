@@ -625,6 +625,13 @@
     "desc": "Simple but awesome LRU cache for Deno, named after the bluest color.",
     "default_version": "master"
   },
+  "coffee": {
+    "type": "github",
+    "owner": "irandeno",
+    "repo": "coffee",
+    "desc": "Deno Configuration",
+    "default_version": "master"
+  },
   "collections": {
     "type": "github",
     "owner": "hayd",
