@@ -4744,6 +4744,13 @@
     "desc": "Package management for deno like npm",
     "default_version": "master"
   },
+  "trypoxylus": {
+    "type": "github",
+    "owner": "GGICE",
+    "repo": "trypoxylus",
+    "desc": "Deno based service engine",
+    "default_version": "master"
+  },
   "troodon": {
     "type": "github",
     "owner": "shandysiswandi",
