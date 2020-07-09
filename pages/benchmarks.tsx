@@ -249,12 +249,11 @@ const Benchmarks = () => {
                   yLabel="seconds"
                 />
                 <p className="mt-1">
-                  In both cases, a full type check is run for{" "}
-                  <code>std/examples/chat/server_test.ts</code> which is a
-                  workload that contains 20 unique TypeScript modules. With{" "}
-                  <em>check</em> a full TypeScript type check, while{" "}
-                  <em>no_check</em> uses the <code>--no-check</code> flag to
-                  skip a full type check.
+                  In both cases, <code>std/examples/chat/server_test.ts</code>{" "}
+                  is cached by Deno. The workload contains 20 unique TypeScript
+                  modules. With <em>check</em>a full TypeScript type check is
+                  performed, while <em>no_check</em> uses the{" "}
+                  <code>--no-check</code> flag to skip a full type check.
                 </p>
               </div>
             </div>
