@@ -251,7 +251,7 @@ const Benchmarks = () => {
                 <p className="mt-1">
                   In both cases, <code>std/examples/chat/server_test.ts</code>{" "}
                   is cached by Deno. The workload contains 20 unique TypeScript
-                  modules. With <em>check</em>a full TypeScript type check is
+                  modules. With <em>check</em> a full TypeScript type check is
                   performed, while <em>no_check</em> uses the{" "}
                   <code>--no-check</code> flag to skip a full type check.
                 </p>
