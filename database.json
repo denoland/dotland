@@ -4758,6 +4758,13 @@
     "desc": "Troodon is a lightweight Deno Library to Handle Algorithms",
     "default_version": "master"
   },
+  "trypoxylus": {
+    "type": "github",
+    "owner": "GGICE",
+    "repo": "trypoxylus",
+    "desc": "Deno based service engine",
+    "default_version": "master"
+  },
   "ts_prometheus": {
     "type": "github",
     "owner": "marcopacini",
