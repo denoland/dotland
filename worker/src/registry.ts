@@ -1,7 +1,7 @@
 import {
   parseNameVersion,
   findEntry,
-  entries,
+  findDatabaseEntry,
 } from "../../util/registry_utils";
 
 export async function handleRegistryRequest(url: URL): Promise<Response> {
@@ -71,8 +71,8 @@ export function needsNPMDeprecationWarning(entry: Entry): boolean {
 }
 
 export function needsNPMTypeDeprecationWarning(entry: Entry): boolean {
-  const e = entries[entry.name];
-  return e && e.type === "npm";
+  const e = findDatabaseEntry(entry.name);
+  return e?.type === "npm";
 }
 
 export interface Entry {

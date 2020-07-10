@@ -9,7 +9,7 @@ import {
   denoDocAvailableForURL,
   isReadme,
   findEntry,
-  entries,
+  findDatabaseEntry,
 } from "../util/registry_utils";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -197,7 +197,7 @@ const Registry = () => {
                 }.`}
               />
             )}
-            {entries[name]?.type === "npm" && !name.startsWith("npm:") && (
+            {findDatabaseEntry(name)?.type === "npm" && !name.startsWith("npm:") && (
               <WarningMessage
                 title="NPM entries deprecation notice"
                 body={`NPM backed deno.land/x entries like ${name} are deprecated will be removed on August 1st 2020. Instead of importing via deno.land you can import this module directly from unpkg.com${
