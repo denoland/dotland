@@ -4532,7 +4532,7 @@
     "owner": "asos-craigmorten",
     "repo": "superoak",
     "desc": "HTTP assertions for Oak made easy via superdeno.",
-    "default_version": "master"
+    "default_version": "main"
   },
   "supports_color": {
     "type": "github",
