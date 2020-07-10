@@ -1869,6 +1869,13 @@
     "desc": "A REST microframework for Deno's HTTP server with zero dependencies.",
     "default_version": "master"
   },
+  "drest": {
+    "type": "github",
+    "owner": "joeattardi",
+    "repo": "drest",
+    "desc": "A simple REST client for Deno. An abstraction layer on top of the Fetch API.",
+    "default_version": "master"
+  },
   "drun": {
     "type": "github",
     "owner": "MarcHanin",
