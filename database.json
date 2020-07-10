@@ -2803,6 +2803,13 @@
     "desc": "A Straightforward API Server for Deno",
     "default_version": "master"
   },
+  "kall": {
+    "type:": "github",
+    "owner": "olaven",
+    "repo": "kall",
+    "desc": "A small and intuitive wrapper around `fetch` for consuming REST+JSON-APIs.",
+    "default_version": "master"
+  },
   "katana": {
     "type": "github",
     "owner": "ansonfoong",
