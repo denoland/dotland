@@ -927,6 +927,13 @@
     "desc": "Fast, simple, and efficient LRU cache library for Deno.",
     "default_version": "main"
   },
+  "data_format_converter": {
+    "type": "github",
+    "owner": "ebebbington",
+    "repo": "deno-data-format-converter",
+    "desc": "Data Format Converter for Deno. JSON to XML, XML to JSON.",
+    "default_version": "master"
+  },
   "databatcher": {
     "type": "github",
     "owner": "allain",
