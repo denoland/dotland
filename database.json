@@ -1164,7 +1164,7 @@
     "type": "github",
     "owner": "bawix",
     "repo": "Deno-F1",
-    "desc": "Library for activating and using FN keys.",
+    "desc": "Library for activating and using FN keys",
     "default_version": "master"
   },
   "deno_giphy_api": {
