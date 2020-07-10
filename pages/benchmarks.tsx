@@ -106,8 +106,8 @@ const Benchmarks = () => {
             <p className="mt-4">
               You are currently viewing data for{" "}
               {showAll ? "all" : "the most recent"} commits to the{" "}
-              <a href="https://github.com/denoland/deno">master</a> branch. You
-              can also view{" "}
+              <a href="https://github.com/denoland/deno">master</a>
+              branch. You can also view{" "}
               <Link
                 href="/benchmarks"
                 as={!showAll ? "/benchmarks?all" : "/benchmarks"}
@@ -171,7 +171,9 @@ const Benchmarks = () => {
                 </h5>
                 <BenchmarkOrLoading
                   data={data}
-                  columns={data?.execTime}
+                  columns={data?.execTime.filter(
+                    ({ name }) => !["check", "no_check"].includes(name)
+                  )}
                   yLabel="seconds"
                   yTickFormat={formatLogScale}
                 />
@@ -188,7 +190,12 @@ const Benchmarks = () => {
                 <h5 className="text-lg font-medium tracking-tight">
                   Thread count
                 </h5>
-                <BenchmarkOrLoading data={data} columns={data?.threadCount} />
+                <BenchmarkOrLoading
+                  data={data}
+                  columns={data?.threadCount.filter(
+                    ({ name }) => !["check", "no_check"].includes(name)
+                  )}
+                />
                 <p className="mt-1">
                   How many threads various programs use. Smaller is better.
                 </p>
@@ -197,7 +204,12 @@ const Benchmarks = () => {
                 <h5 className="text-lg font-medium tracking-tight">
                   Syscall count
                 </h5>
-                <BenchmarkOrLoading data={data} columns={data?.syscallCount} />
+                <BenchmarkOrLoading
+                  data={data}
+                  columns={data?.syscallCount.filter(
+                    ({ name }) => !["check", "no_check"].includes(name)
+                  )}
+                />
                 <p className="mt-1">
                   How many total syscalls are performed when executing a given
                   script. Smaller is better.
@@ -209,12 +221,39 @@ const Benchmarks = () => {
                 </h5>
                 <BenchmarkOrLoading
                   data={data}
-                  columns={data?.maxMemory}
+                  columns={data?.maxMemory.filter(
+                    ({ name }) => !["check", "no_check"].includes(name)
+                  )}
                   yLabel="megabytes"
                   yTickFormat={formatMB}
                 />
                 <p className="mt-1">
                   Max memory usage during execution. Smaller is better.
+                </p>
+              </div>
+            </div>
+            <div className="mt-20">
+              <h4 className="text-2xl font-bold tracking-tight">
+                TypeScript Performance
+              </h4>
+              <div className="mt-8">
+                <h5 className="text-lg font-medium tracking-tight">
+                  Type Checking
+                </h5>
+                <BenchmarkOrLoading
+                  data={data}
+                  columns={data?.execTime.filter(({ name }) => {
+                    console.log(name);
+                    return ["check", "no_check"].includes(name);
+                  })}
+                  yLabel="seconds"
+                />
+                <p className="mt-1">
+                  In both cases, <code>std/examples/chat/server_test.ts</code>{" "}
+                  is cached by Deno. The workload contains 20 unique TypeScript
+                  modules. With <em>check</em> a full TypeScript type check is
+                  performed, while <em>no_check</em> uses the{" "}
+                  <code>--no-check</code> flag to skip a full type check.
                 </p>
               </div>
             </div>
@@ -263,9 +302,10 @@ const Benchmarks = () => {
                 </p>
                 <ul className="ml-8 list-disc my-2">
                   <li>
-                    <SourceLink path="tools/deno_tcp.ts" name="deno_tcp" /> is a
-                    fake http server that doesn't parse HTTP. It is comparable
-                    to <SourceLink path="tools/node_tcp.js" name="node_tcp" />
+                    <SourceLink path="tools/deno_tcp.ts" name="deno_tcp" />
+                    is a fake http server that doesn't parse HTTP. It is
+                    comparable to{" "}
+                    <SourceLink path="tools/node_tcp.js" name="node_tcp" />
                   </li>
                   <li>
                     <SourceLink
