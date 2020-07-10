@@ -3883,6 +3883,13 @@
     "desc": "From foobar.fn.bind(foobar) to bind(foobar).fn",
     "default_version": "master"
   },
+  "pterodactyl": {
+    "type": "github",
+    "owner": "JoeKalb",
+    "repo": "pterodactyl",
+    "desc": "A Twitch IRC client for Deno.",
+    "default_version": "master"
+  },
   "pubsub": {
     "type": "github",
     "owner": "zorbyte",
