@@ -3819,6 +3819,13 @@
     "desc": "create terminal progressbars",
     "default_version": "master"
   },
+  "prompt": {
+    "type": "github",
+    "owner": "akunchen",
+    "repo": "deno-prompt",
+    "desc": "A command line interaction utils like inquirer.",
+    "default_version": "master"
+  },
   "prompts": {
     "type": "github",
     "owner": "caspervonb",
