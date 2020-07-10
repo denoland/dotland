@@ -1146,6 +1146,13 @@
     "desc": "dotenv for Deno, with exapnd capabilities",
     "default_version": "master"
   },
+  "deno_f1": {
+    "type": "github",
+    "owner": "bawix",
+    "repo": "Deno-F1",
+    "desc": "Library for activating and using FN keys",
+    "default_version": "master"
+  },
   "deno_faker": {
     "type": "github",
     "owner": "jackfiszr",
@@ -1158,13 +1165,6 @@
     "owner": "yanislavgalyov",
     "repo": "deno-flatten",
     "desc": "A recursive array flattening function",
-    "default_version": "master"
-  },
- "deno_f1": {
-    "type": "github",
-    "owner": "bawix",
-    "repo": "Deno-F1",
-    "desc": "Library for activating and using FN keys",
     "default_version": "master"
   },
   "deno_giphy_api": {
