@@ -3258,6 +3258,13 @@
     "desc": "MongoDB driver for Deno.",
     "default_version": "master"
   },
+  "mongo_query_dot_notation": {
+    "type": "github",
+    "owner": "skyledge",
+    "repo": "mongo_query_dot_notation",
+    "desc": "Fast, lightweight library to transform objects to mongo update instructions using operators and dot notation. Ported from Node to Deno.",
+    "default_version": "master"
+  },
   "mongo_repository": {
     "type": "github",
     "owner": "0xVesion",
