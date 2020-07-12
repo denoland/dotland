@@ -1596,6 +1596,13 @@
     "desc": "Deno cli to manage and bump release versions.",
     "default_version": "master"
   },
+  "denowiki": {
+    "type": "github",
+    "owner": "el3um4s",
+    "repo": "DenoWiki",
+    "desc": "A simple API for DenoJS to query Wikipedia and parse the results.",
+    "default_version": "master"
+  },
   "denox": {
     "type": "github",
     "owner": "bentoumitech",
