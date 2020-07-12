@@ -913,7 +913,7 @@
     "desc": "Backend REST web framework for Deno, built on top of Oak",
     "default_version": "master"
   },
-  "damerau-levenshtein": {
+  "damerau_levenshtein": {
     "type": "github",
     "owner": "el3um4s",
     "repo": "damerau-levenshtein",
