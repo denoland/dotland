@@ -913,6 +913,13 @@
     "desc": "Backend REST web framework for Deno, built on top of Oak",
     "default_version": "master"
   },
+  "damerau-levenshtein": {
+     "type": "github",
+    "owner": "el3um4s",
+    "repo": "damerau-levenshtein",
+    "desc": "Calculate the Damerau–Levenshtein distance between strings.",
+    "default_version": "master"
+  },
   "dance": {
     "type": "github",
     "owner": "dance-planner",
@@ -1599,7 +1606,7 @@
   "denowiki": {
     "type": "github",
     "owner": "el3um4s",
-    "repo": "DenoWiki",
+    "repo": "denowiki",
     "desc": "A simple API for DenoJS to query Wikipedia and parse the results.",
     "default_version": "master"
   },
