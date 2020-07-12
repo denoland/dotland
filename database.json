@@ -914,7 +914,7 @@
     "default_version": "master"
   },
   "damerau-levenshtein": {
-     "type": "github",
+    "type": "github",
     "owner": "el3um4s",
     "repo": "damerau-levenshtein",
     "desc": "Calculate the Damerau–Levenshtein distance between strings",
