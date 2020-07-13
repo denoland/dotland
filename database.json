@@ -126,6 +126,13 @@
     "desc": "ANSI escape codes for styling strings in the terminal",
     "default_version": "master"
   },
+  "apex_logs": {
+    "type": "github",
+    "owner": "apex",
+    "repo": "logs-js",
+    "desc": "API client for Apex Logs.",
+    "default_version": "master"
+  },
   "api": {
     "type": "github",
     "owner": "maheshkareeya",
