@@ -218,6 +218,20 @@
     "desc": "Provide async/await callbacks for Array methods.",
     "default_version": "master"
   },
+  "atenas": {
+    "type": "github",
+    "owner": "atenasjs",
+    "repo": "atenas",
+    "desc": "The Deno framework for building server-side applications",
+    "default_version": "stable"
+  },
+  "atenas_cli": {
+    "type": "github",
+    "owner": "atenasjs",
+    "repo": "cli",
+    "desc": "The Deno CLI Tool for Atenas",
+    "default_version": "stable"
+  },
   "attain": {
     "type": "github",
     "owner": "aaronwlee",
