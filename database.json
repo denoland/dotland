@@ -5059,9 +5059,11 @@
     "default_version": "master"
   },
   "value_schema": {
-    "type": "npm",
-    "package": "value-schema",
-    "desc": "simple, easy-to-use, and declarative schema validator"
+    "type": "github",
+    "owner": "shimataro",
+    "repo": "value-schema",
+    "desc": "simple, easy-to-use, and declarative schema validator",
+    "default_version": "develop"
   },
   "vary": {
     "type": "github",
