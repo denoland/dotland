@@ -639,6 +639,13 @@
     "desc": "Simple but awesome LRU cache for Deno, named after the bluest color.",
     "default_version": "master"
   },
+  "coder": {
+    "type": "github",
+    "owner": "timreichen",
+    "repo": "coder",
+    "desc": "Encode and decode data while retaining data types.",
+    "default_version": "master"
+  },
   "coffee": {
     "type": "github",
     "owner": "irandeno",
