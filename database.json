@@ -352,6 +352,13 @@
     "desc": "Minecraft: Java Edition server manager & updater",
     "default_version": "master"
   },
+  "better_permissions": {
+    "type": "github",
+    "owner": "rafaelmotaalves",
+    "repo": "better_permissions",
+    "desc": "Better Permissions: A nicer way for handling permissions on Deno",
+    "default_version": "master"
+  },
   "bgpview": {
     "type": "github",
     "owner": "often",
