@@ -1189,6 +1189,13 @@
     "desc": "Generate fake data. Deno port of Marak/faker.js",
     "default_version": "master"
   },
+  "deno_figlet": {
+    "type": "github",
+    "owner": "denyncrawford",
+    "repo": "deno-figlet",
+    "desc": "A Deno :sauropod: Figlet from text generator",
+    "default_version": "master"
+  },
   "deno_flatten": {
     "type": "github",
     "owner": "yanislavgalyov",
