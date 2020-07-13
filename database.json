@@ -6,6 +6,13 @@
     "desc": "A collection of utility functions like arrayToCSV, aperture and many more. Inspired by 30 seconds of code, Fully converted in Typescript.",
     "default_version": "master"
   },
+  "apex_logs": {
+    "type": "github",
+    "owner": "apex",
+    "repo": "logs-js",
+    "desc": "API client for Apex Logs.",
+    "default_version": "master"
+  },
   "a0": {
     "type": "github",
     "owner": "being-curious",
