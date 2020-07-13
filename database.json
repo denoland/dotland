@@ -3028,6 +3028,13 @@
     "desc": "Lorem Ipsum generator, based on Alex Lifeson's acceptance speech for Rush in 2013.",
     "default_version": "master"
   },
+  "linecopyprotocol": {
+    "type": "github",
+    "owner": "paulmj7",
+    "repo": "linecopyprotocol",
+    "desc": "Easily copy and paste lines of data from one file to another. Built on top of Deno.",
+    "default_version": "master"
+  },
   "linked_list": {
     "type": "github",
     "owner": "k-koehler",
