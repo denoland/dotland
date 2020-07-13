@@ -4702,6 +4702,13 @@
     "desc": "Telegram bot API",
     "default_version": "master"
   },
+  "template": {
+    "type": "github",
+    "owner": "deno-library",
+    "repo": "template",
+    "desc": "Template engine for Deno",
+    "default_version": "master"
+  },
   "termcolorizer": {
     "type": "github",
     "owner": "jahzielv",
