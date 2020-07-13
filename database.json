@@ -977,6 +977,14 @@
     "desc": "Modern JavaScript date utility library",
     "default_version": "master"
   },
+  "datebs": {
+    "type": "github",
+    "owner": "shubhajeet",
+    "repo": "DateBS",
+    "path": "/src",
+    "desc": "Convert date from BS to AD and vice versa",
+    "default_version": "master"
+  },
   "datetoken": {
     "type": "github",
     "owner": "sonirico",
