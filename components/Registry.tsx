@@ -9,6 +9,7 @@ import {
   denoDocAvailableForURL,
   isReadme,
   findEntry,
+  findDatabaseEntry,
 } from "../util/registry_utils";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -191,11 +192,20 @@ const Registry = () => {
             {name.startsWith("npm:") && (
               <WarningMessage
                 title="deno.land/x/npm:project redirect deprecation notice"
-                body={`The https://deno.land/x/npm:project style redirects are deprecated and will be removed on August 1st 2020. Instead of importing via deno.land you can import this module directly from unpkg.com via the URL ${
+                body={`The https://deno.land/x/npm:project style redirects are deprecated and will be removed on August 1st 2020. Instead of importing via deno.land you can import this module directly from unpkg.com${
                   raw ? ` via the URL ${sourceURL}` : ""
                 }.`}
               />
             )}
+            {findDatabaseEntry(name)?.type === "npm" &&
+              !name.startsWith("npm:") && (
+                <WarningMessage
+                  title="NPM entries deprecation notice"
+                  body={`NPM backed deno.land/x entries like ${name} are deprecated will be removed on August 1st 2020. Instead of importing via deno.land you can import this module directly from unpkg.com${
+                    raw ? ` via the URL ${sourceURL}` : ""
+                  }.`}
+                />
+              )}
             <Breadcrumbs
               name={name}
               version={version}
