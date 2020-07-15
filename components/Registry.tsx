@@ -11,12 +11,10 @@ import {
   getSourceURL,
   getRepositoryURL,
   DirEntry,
-  getDirectoryListing,
+  getVersionMeta,
   getVersionList,
   VersionInfo,
-  DirListing,
-  MetaInfo,
-  getMeta,
+  VersionMetaInfo,
 } from "../util/registry_utils";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -24,10 +22,9 @@ import FileDisplay from "./FileDisplay";
 
 const Registry = () => {
   // State
-  const [meta, setMeta] = useState<MetaInfo | null | undefined>();
   const [versions, setVersions] = useState<VersionInfo | null | undefined>();
-  const [dirListing, setDirListing] = useState<
-    DirListing[] | null | undefined
+  const [versionMeta, setVersionMeta] = useState<
+    VersionMetaInfo | null | undefined
   >();
   const [raw, setRaw] = useState<string | null | undefined>();
   const [readme, setReadme] = useState<string | null | undefined>();
@@ -61,26 +58,16 @@ const Registry = () => {
     path,
   ]);
   const repositoryURL = useMemo(
-    () => (meta && version ? getRepositoryURL(meta, version, path) : undefined),
-    [meta, version, path]
+    () =>
+      versionMeta && version
+        ? getRepositoryURL(versionMeta, version, path)
+        : undefined,
+    [versionMeta, version, path]
   );
   const documentationURL = useMemo(() => {
     const doc = `https://doc.deno.land/https/deno.land/${canonicalPath}`;
     return denoDocAvailableForURL(canonicalPath) ? doc : null;
   }, [canonicalPath]);
-
-  // Fetch meta
-  useEffect(() => {
-    setMeta(undefined);
-    if (name) {
-      getMeta(name)
-        .then(setMeta)
-        .catch((e) => {
-          console.error("Failed to fetch meta info:", e);
-          setMeta(null);
-        });
-    }
-  }, [name]);
 
   // Fetch versions
   useEffect(() => {
@@ -102,27 +89,27 @@ const Registry = () => {
     }
   }, [versions?.latest, version]);
 
-  // Fetch directory listing
+  // Fetch version meta data
   useEffect(() => {
-    setDirListing(undefined);
+    setVersionMeta(undefined);
     if (version) {
       if (name) {
-        getDirectoryListing(name, version)
-          .then(setDirListing)
+        getVersionMeta(name, version)
+          .then(setVersionMeta)
           .catch((e) => {
             console.error("Failed to fetch dir entry:", e);
-            setDirListing(null);
+            setVersionMeta(null);
           });
       } else {
-        setDirListing(null);
+        setVersionMeta(null);
       }
     }
   }, [name, version]);
 
   // Get directory entries for path
   const dirEntries = useMemo(() => {
-    if (Array.isArray(dirListing)) {
-      const files = dirListing
+    if (versionMeta) {
+      const files = versionMeta.directoryListing
         .filter(
           (f) =>
             f.path.startsWith(path) &&
@@ -137,10 +124,10 @@ const Registry = () => {
           };
         });
       files.sort((a, b) => a.name.codePointAt(0)! - b.name.codePointAt(0)!);
-      return files.length > 0 ? files : null;
+      return files;
     }
-    return dirListing;
-  }, [dirListing, path]);
+    return versionMeta;
+  }, [versionMeta, path]);
 
   const {
     readmeCanonicalPath,
@@ -152,8 +139,12 @@ const Registry = () => {
       return {
         readmeCanonicalPath: canonicalPath + "/" + readmeEntry.name,
         readmeURL: getSourceURL(name, version, path + "/" + readmeEntry.name),
-        readmeRepositoryURL: meta
-          ? getRepositoryURL(meta, version, path + "/" + readmeEntry.name)
+        readmeRepositoryURL: versionMeta
+          ? getRepositoryURL(
+              versionMeta,
+              version,
+              path + "/" + readmeEntry.name
+            )
           : null,
       };
     }
@@ -162,7 +153,7 @@ const Registry = () => {
       readmeURL: null,
       readmeRepositoryURL: null,
     };
-  }, [dirEntries, name, version, path, meta]);
+  }, [dirEntries, name, version, path, versionMeta]);
 
   // Fetch raw file
   useEffect(() => {
@@ -170,9 +161,10 @@ const Registry = () => {
     if (version) {
       if (
         sourceURL &&
-        dirListing &&
-        dirListing.filter((d) => d.path === path && d.type == "file").length !==
-          0
+        versionMeta &&
+        versionMeta.directoryListing.filter(
+          (d) => d.path === path && d.type == "file"
+        ).length !== 0
       ) {
         fetch(sourceURL, { method: "GET" })
           .then((resp) => {
@@ -193,7 +185,7 @@ const Registry = () => {
         setRaw(null);
       }
     }
-  }, [sourceURL, dirListing, version, path]);
+  }, [sourceURL, versionMeta, version, path]);
 
   // Fetch readme file
   useEffect(() => {
@@ -219,7 +211,7 @@ const Registry = () => {
         setReadme(null);
       }
     }
-  }, [readmeURL, dirListing, version, path]);
+  }, [readmeURL, versionMeta, version, path]);
 
   return (
     <>
@@ -247,7 +239,7 @@ const Registry = () => {
             onChange={gotoVersion}
           />
           {(() => {
-            if (meta === null) {
+            if (versions === null) {
               return (
                 <ErrorMessage
                   title="404 - Not Found"
@@ -266,8 +258,9 @@ const Registry = () => {
                 />
               );
             } else if (
-              dirListing &&
-              dirListing.filter((d) => d.path === path).length === 0
+              versionMeta &&
+              versionMeta.directoryListing.filter((d) => d.path === path)
+                .length === 0
             ) {
               return (
                 <ErrorMessage

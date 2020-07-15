@@ -14,22 +14,47 @@ export interface DirEntry {
 export function getSourceURL(
   module: string,
   version: string,
-  path: string
+  path: string,
 ): string {
   return `${S3_BUCKET}${module}/versions/${version}/raw${path}`;
 }
 
+function pathJoin(...parts: string[]) {
+  const replace = new RegExp("/{1,}", "g");
+  return parts.join("/").replace(replace, "/");
+}
+
 export function getRepositoryURL(
-  meta: MetaInfo,
+  meta: VersionMetaInfo,
   version: string,
-  path: string
+  path: string,
 ): string | undefined {
-  switch (meta?.type) {
+  switch (meta.uploadOptions.type) {
     case "github":
-      return `https://github.com/${meta.repository}/tree/${version}${path}`;
+      return `https://github.com/${
+        pathJoin(
+          meta.uploadOptions.repository,
+          "tree",
+          version,
+          meta.uploadOptions.subdir ?? "",
+          path,
+        )
+      }`;
     default:
       return undefined;
   }
+}
+
+export interface VersionMetaInfo {
+  uploadedAt: Date;
+  directoryListing: DirListing[];
+  uploadOptions: UploadOptions;
+}
+
+export interface UploadOptions {
+  type: "github";
+  repository: string;
+  subdir: string | null;
 }
 
 export interface DirListing {
@@ -38,11 +63,11 @@ export interface DirListing {
   size?: number;
 }
 
-export async function getDirectoryListing(
+export async function getVersionMeta(
   module: string,
-  version: string
-): Promise<DirListing[] | null> {
-  const url = `${S3_BUCKET}${module}/versions/${version}/meta/directory_listing.json`;
+  version: string,
+): Promise<VersionMetaInfo | null> {
+  const url = `${S3_BUCKET}${module}/versions/${version}/meta/meta.json`;
   const res = await fetch(url, {
     headers: {
       accept: "application/json",
@@ -51,12 +76,19 @@ export async function getDirectoryListing(
   if (res.status === 403 || res.status === 404) return null;
   if (res.status !== 200) {
     throw Error(
-      `Got an error (${
-        res.status
-      }) while getting the directory listing:\n${await res.text()}`
+      `Got an error (${res.status}) while getting the directory listing:\n${await res
+        .text()}`,
     );
   }
-  return await res.json();
+
+  const meta = await res.json();
+  if (!meta) return null;
+
+  return {
+    uploadedAt: new Date(meta.uploaded_at),
+    directoryListing: meta.directory_listing,
+    uploadOptions: meta.upload_options,
+  };
 }
 
 export interface VersionInfo {
@@ -65,7 +97,7 @@ export interface VersionInfo {
 }
 
 export async function getVersionList(
-  module: string
+  module: string,
 ): Promise<VersionInfo | null> {
   const url = `${S3_BUCKET}${module}/meta/versions.json`;
   const res = await fetch(url, {
@@ -76,32 +108,8 @@ export async function getVersionList(
   if (res.status === 403 || res.status === 404) return null;
   if (res.status !== 200) {
     throw Error(
-      `Got an error (${
-        res.status
-      }) while getting the version list:\n${await res.text()}`
-    );
-  }
-  return res.json();
-}
-
-export interface MetaInfo {
-  type: "github";
-  repository: string;
-}
-
-export async function getMeta(module: string): Promise<MetaInfo | null> {
-  const url = `${S3_BUCKET}${module}/meta/meta.json`;
-  const res = await fetch(url, {
-    headers: {
-      accept: "application/json",
-    },
-  });
-  if (res.status === 403 || res.status === 404) return null;
-  if (res.status !== 200) {
-    throw Error(
-      `Got an error (${
-        res.status
-      }) while getting the meta info:\n${await res.text()}`
+      `Got an error (${res.status}) while getting the version list:\n${await res
+        .text()}`,
     );
   }
   return res.json();
@@ -120,11 +128,13 @@ export interface SearchResult {
 export async function getModules(
   page: number,
   limit: number,
-  query: string
+  query: string,
 ): Promise<{ results: SearchResult[]; totalCount: number } | null> {
-  const url = `${API_ENDPOINT}modules?page=${page}&limit=${limit}&query=${encodeURIComponent(
-    query
-  )}`;
+  const url = `${API_ENDPOINT}modules?page=${page}&limit=${limit}&query=${
+    encodeURIComponent(
+      query,
+    )
+  }`;
   const res = await fetch(url, {
     headers: {
       accept: "application/json",
@@ -132,18 +142,17 @@ export async function getModules(
   });
   if (res.status !== 200) {
     throw Error(
-      `Got an error (${
-        res.status
-      }) while getting the module list:\n${await res.text()}`
+      `Got an error (${res.status}) while getting the module list:\n${await res
+        .text()}`,
     );
   }
   const data = await res.json();
-  if (!data.success)
+  if (!data.success) {
     throw Error(
-      `Got an error (${
-        data.info
-      }) while getting the module list:\n${await res.text()}`
+      `Got an error (${data.info}) while getting the module list:\n${await res
+        .text()}`,
     );
+  }
 
   return { totalCount: data.data.total_count, results: data.data.results };
 }
