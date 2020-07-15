@@ -3369,7 +3369,7 @@
     "owner": "Srinivasa314",
     "repo": "msgpack-deno",
     "desc": "Msgpack for Deno.",
-    "default_version":"master"
+    "default_version": "master"
   },
   "mtrand": {
     "type": "github",
