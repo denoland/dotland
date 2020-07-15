@@ -1,7 +1,8 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
 const S3_BUCKET =
-  "https://deno-registry-prod-storagebucket-1op8hmxk9om83.s3.us-east-2.amazonaws.com/";
+  "https://deno-registry2-storagebucket-1wbpv5tm1e9p1.s3.us-east-1.amazonaws.com/";
+const API_ENDPOINT = "https://pfntx4kl6k.execute-api.us-east-1.amazonaws.com/";
 
 export interface DirEntry {
   name: string;
@@ -104,6 +105,47 @@ export async function getMeta(module: string): Promise<MetaInfo | null> {
     );
   }
   return res.json();
+}
+
+export interface SearchResult {
+  name: string;
+  description: string;
+  type: "github";
+  owner: string;
+  repository: string;
+  star_count: string;
+  search_score: string;
+}
+
+export async function getModules(
+  page: number,
+  limit: number,
+  query: string
+): Promise<{ results: SearchResult[]; totalCount: number } | null> {
+  const url = `${API_ENDPOINT}modules?page=${page}&limit=${limit}&query=${encodeURIComponent(
+    query
+  )}`;
+  const res = await fetch(url, {
+    headers: {
+      accept: "application/json",
+    },
+  });
+  if (res.status !== 200) {
+    throw Error(
+      `Got an error (${
+        res.status
+      }) while getting the module list:\n${await res.text()}`
+    );
+  }
+  const data = await res.json();
+  if (!data.success)
+    throw Error(
+      `Got an error (${
+        data.info
+      }) while getting the module list:\n${await res.text()}`
+    );
+
+  return { totalCount: data.data.total_count, results: data.data.results };
 }
 
 export function parseNameVersion(nameVersion: string): [string, string] {
