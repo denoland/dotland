@@ -2846,6 +2846,13 @@
     "desc": "A simple port of JS-YAML for Deno",
     "default_version": "master"
   },
+  "json2yaml": {
+    "type": "github",
+    "owner": "Rikilele",
+    "repo": "json2yaml",
+    "desc": "Converts a JSON string to a (pretty) YAML string",
+    "default_version": "master"
+  },
   "json_rpc": {
     "type": "github",
     "owner": "ondras",
