@@ -2848,7 +2848,7 @@
   },
   "json2yaml": {
     "type": "github",
-    "owner": "rikilele",
+    "owner": "Rikilele",
     "repo": "json2yaml",
     "desc": "Converts a JSON string to a (pretty) YAML string",
     "default_version": "master"
