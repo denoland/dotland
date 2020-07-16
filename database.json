@@ -4871,6 +4871,13 @@
     "desc": "Toolbelt for Deno",
     "default_version": "master"
   },
+  "transfire": {
+    "type": "github",
+    "owner": "aaronwlee",
+    "repo": "transfire",
+    "desc": "Create a class-based data transfer object(DTO) with decorators and validating data at the same time.",
+    "default_version": "master"
+  },
   "transform": {
     "type": "github",
     "owner": "marcosc90",
