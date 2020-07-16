@@ -1814,6 +1814,13 @@
     "desc": "A module manager for Deno",
     "default_version": "master"
   },
+  "dnit": {
+    "type": "github",
+    "owner": "PaulThompson",
+    "repo": "dnit",
+    "desc": "Dnit - a task runner that uses typescript for tasks and dependencies, aimed at larger projects with tasks split across many files or shared between projects.",
+    "default_version": "main"
+  },
   "doa": {
     "type": "github",
     "owner": "johannlai",
