@@ -2881,13 +2881,6 @@
     "desc": "Zero code fake backend for development",
     "default_version": "master"
   },
-  "json_to_csv": {
-    "type": "github",
-    "owner": "michael-spengler",
-    "repo": "json-to-csv",
-    "desc": "Deno Module to convert JSON Data to CSV. Improvements are welcome.",
-    "default_version": "master"
-  },
   "json_tree": {
     "type": "github",
     "owner": "satty1987",
