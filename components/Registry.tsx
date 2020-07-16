@@ -58,11 +58,8 @@ const Registry = () => {
     path,
   ]);
   const repositoryURL = useMemo(
-    () =>
-      versionMeta && version
-        ? getRepositoryURL(versionMeta, version, path)
-        : undefined,
-    [versionMeta, version, path]
+    () => (versionMeta ? getRepositoryURL(versionMeta, path) : undefined),
+    [versionMeta, path]
   );
   const documentationURL = useMemo(() => {
     const doc = `https://doc.deno.land/https/deno.land/${canonicalPath}`;
@@ -124,7 +121,7 @@ const Registry = () => {
           };
         });
       files.sort((a, b) => a.name.codePointAt(0)! - b.name.codePointAt(0)!);
-      return files;
+      return files.length === 0 ? null : files;
     }
     return versionMeta;
   }, [versionMeta, path]);
@@ -140,11 +137,7 @@ const Registry = () => {
         readmeCanonicalPath: canonicalPath + "/" + readmeEntry.name,
         readmeURL: getSourceURL(name, version, path + "/" + readmeEntry.name),
         readmeRepositoryURL: versionMeta
-          ? getRepositoryURL(
-              versionMeta,
-              version,
-              path + "/" + readmeEntry.name
-            )
+          ? getRepositoryURL(versionMeta, path + "/" + readmeEntry.name)
           : null,
       };
     }

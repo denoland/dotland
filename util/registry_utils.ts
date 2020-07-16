@@ -26,7 +26,6 @@ function pathJoin(...parts: string[]) {
 
 export function getRepositoryURL(
   meta: VersionMetaInfo,
-  version: string,
   path: string,
 ): string | undefined {
   switch (meta.uploadOptions.type) {
@@ -35,7 +34,7 @@ export function getRepositoryURL(
         pathJoin(
           meta.uploadOptions.repository,
           "tree",
-          version,
+          meta.uploadOptions.ref,
           meta.uploadOptions.subdir ?? "",
           path,
         )
@@ -55,6 +54,7 @@ export interface UploadOptions {
   type: "github";
   repository: string;
   subdir: string | null;
+  ref: string;
 }
 
 export interface DirListing {
