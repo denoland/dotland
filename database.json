@@ -3203,6 +3203,13 @@
     "desc": "A simple and easy to use memoize lib for deno.",
     "default_version": "master"
   },
+  "memoizy": {
+    "type": "github",
+    "owner": "ramiel",
+    "repo": "deno-memoizy",
+    "desc": "A light but powerful memoization library for deno.",
+    "default_version": "master"
+  },
   "merc": {
     "type": "github",
     "owner": "spitlo",
