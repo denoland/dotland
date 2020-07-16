@@ -3785,6 +3785,13 @@
     "desc": "Configurable data pipeline in Deno.",
     "default_version": "master"
   },
+  "pkce_deno": {
+    "type": "github",
+    "owner": "DiFronzo",
+    "repo": "pkce-deno",
+    "desc": "PKCE code verifier and challenge generator for Deno.",
+    "default_version": "master"
+  },
   "plugin_prepare": {
     "type": "github",
     "owner": "manyuanrong",
