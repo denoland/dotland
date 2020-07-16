@@ -3378,6 +3378,13 @@
     "desc": "Use this package to easily convert various time formats to milliseconds. It is ported from https://github.com/zeit/ms to work with Deno.",
     "default_version": "master"
   },
+  "msgpack": {
+    "type": "github",
+    "owner": "Srinivasa314",
+    "repo": "msgpack-deno",
+    "desc": "msgpack for Deno. It was ported from https://github.com/msgpack/msgpack-javascript",
+    "default_version": "master"
+  },
   "mtrand": {
     "type": "github",
     "owner": "koji",
