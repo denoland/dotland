@@ -126,6 +126,13 @@
     "desc": "ANSI escape codes for styling strings in the terminal",
     "default_version": "master"
   },
+  "apex_logs": {
+    "type": "github",
+    "owner": "apex",
+    "repo": "logs-js",
+    "desc": "API client for Apex Logs.",
+    "default_version": "master"
+  },
   "api": {
     "type": "github",
     "owner": "maheshkareeya",
@@ -210,6 +217,20 @@
     "repo": "async-ray-deno",
     "desc": "Provide async/await callbacks for Array methods.",
     "default_version": "master"
+  },
+  "atenas": {
+    "type": "github",
+    "owner": "atenasjs",
+    "repo": "atenas",
+    "desc": "The Deno framework for building server-side applications",
+    "default_version": "stable"
+  },
+  "atenas_cli": {
+    "type": "github",
+    "owner": "atenasjs",
+    "repo": "cli",
+    "desc": "The Deno CLI Tool for Atenas",
+    "default_version": "stable"
   },
   "attain": {
     "type": "github",
@@ -343,6 +364,13 @@
     "owner": "genemators",
     "repo": "betalander",
     "desc": "Minecraft: Java Edition server manager & updater",
+    "default_version": "master"
+  },
+  "better_permissions": {
+    "type": "github",
+    "owner": "rafaelmotaalves",
+    "repo": "better_permissions",
+    "desc": "Better Permissions: A nicer way for handling permissions on Deno",
     "default_version": "master"
   },
   "bgpview": {
@@ -632,6 +660,13 @@
     "desc": "Simple but awesome LRU cache for Deno, named after the bluest color.",
     "default_version": "master"
   },
+  "coder": {
+    "type": "github",
+    "owner": "timreichen",
+    "repo": "coder",
+    "desc": "Encode and decode data while retaining data types.",
+    "default_version": "master"
+  },
   "coffee": {
     "type": "github",
     "owner": "irandeno",
@@ -913,6 +948,13 @@
     "desc": "Backend REST web framework for Deno, built on top of Oak",
     "default_version": "master"
   },
+  "damerau_levenshtein": {
+    "type": "github",
+    "owner": "el3um4s",
+    "repo": "damerau-levenshtein",
+    "desc": "Calculate the Damerau–Levenshtein distance between strings",
+    "default_version": "master"
+  },
   "dance": {
     "type": "github",
     "owner": "dance-planner",
@@ -926,6 +968,13 @@
     "repo": "dash",
     "desc": "Fast, simple, and efficient LRU cache library for Deno.",
     "default_version": "main"
+  },
+  "data_format_converter": {
+    "type": "github",
+    "owner": "ebebbington",
+    "repo": "deno-data-format-converter",
+    "desc": "Data Format Converter for Deno. JSON to XML, XML to JSON.",
+    "default_version": "master"
   },
   "databatcher": {
     "type": "github",
@@ -954,6 +1003,14 @@
     "repo": "date-fns",
     "path": "/src",
     "desc": "Modern JavaScript date utility library",
+    "default_version": "master"
+  },
+  "datebs": {
+    "type": "github",
+    "owner": "shubhajeet",
+    "repo": "DateBS",
+    "path": "/src",
+    "desc": "Convert date from BS to AD and vice versa",
     "default_version": "master"
   },
   "datetoken": {
@@ -1146,11 +1203,25 @@
     "desc": "dotenv for Deno, with exapnd capabilities",
     "default_version": "master"
   },
+  "deno_f1": {
+    "type": "github",
+    "owner": "bawix",
+    "repo": "Deno-F1",
+    "desc": "Library for activating and using FN keys",
+    "default_version": "master"
+  },
   "deno_faker": {
     "type": "github",
     "owner": "jackfiszr",
     "repo": "deno-faker",
     "desc": "Generate fake data. Deno port of Marak/faker.js",
+    "default_version": "master"
+  },
+  "deno_figlet": {
+    "type": "github",
+    "owner": "denyncrawford",
+    "repo": "deno-figlet",
+    "desc": "A Deno :sauropod: Figlet from text generator",
     "default_version": "master"
   },
   "deno_flatten": {
@@ -1582,6 +1653,13 @@
     "desc": "Deno cli to manage and bump release versions.",
     "default_version": "master"
   },
+  "denowiki": {
+    "type": "github",
+    "owner": "el3um4s",
+    "repo": "denowiki",
+    "desc": "A simple API for DenoJS to query Wikipedia and parse the results.",
+    "default_version": "master"
+  },
   "denox": {
     "type": "github",
     "owner": "bentoumitech",
@@ -1736,6 +1814,13 @@
     "desc": "A module manager for Deno",
     "default_version": "master"
   },
+  "dnit": {
+    "type": "github",
+    "owner": "PaulThompson",
+    "repo": "dnit",
+    "desc": "Dnit - a task runner that uses typescript for tasks and dependencies, aimed at larger projects with tasks split across many files or shared between projects.",
+    "default_version": "main"
+  },
   "doa": {
     "type": "github",
     "owner": "johannlai",
@@ -1860,6 +1945,20 @@
     "owner": "drashland",
     "repo": "deno-drash",
     "desc": "A REST microframework for Deno's HTTP server with zero dependencies.",
+    "default_version": "master"
+  },
+  "drash_middleware": {
+    "type": "github",
+    "owner": "drashland",
+    "repo": "deno-drash-middleware",
+    "desc": "A middleware library for Drash.",
+    "default_version": "master"
+  },
+  "drest": {
+    "type": "github",
+    "owner": "joeattardi",
+    "repo": "drest",
+    "desc": "A simple REST client for Deno. An abstraction layer on top of the Fetch API.",
     "default_version": "master"
   },
   "drun": {
@@ -2754,6 +2853,13 @@
     "desc": "A simple port of JS-YAML for Deno",
     "default_version": "master"
   },
+  "json2yaml": {
+    "type": "github",
+    "owner": "Rikilele",
+    "repo": "json2yaml",
+    "desc": "Converts a JSON string to a (pretty) YAML string",
+    "default_version": "master"
+  },
   "json_rpc": {
     "type": "github",
     "owner": "ondras",
@@ -2801,6 +2907,13 @@
     "owner": "oknoorap",
     "repo": "jurassic",
     "desc": "A Straightforward API Server for Deno",
+    "default_version": "master"
+  },
+  "kall": {
+    "type:": "github",
+    "owner": "olaven",
+    "repo": "kall",
+    "desc": "A small and intuitive wrapper around `fetch` for consuming REST+JSON-APIs.",
     "default_version": "master"
   },
   "katana": {
@@ -2934,6 +3047,13 @@
     "owner": "snerks",
     "repo": "lifeson-ipsum",
     "desc": "Lorem Ipsum generator, based on Alex Lifeson's acceptance speech for Rush in 2013.",
+    "default_version": "master"
+  },
+  "linecopyprotocol": {
+    "type": "github",
+    "owner": "paulmj7",
+    "repo": "linecopyprotocol",
+    "desc": "Easily copy and paste lines of data from one file to another. Built on top of Deno.",
     "default_version": "master"
   },
   "linked_list": {
@@ -3104,6 +3224,13 @@
     "desc": "A simple and easy to use memoize lib for deno.",
     "default_version": "master"
   },
+  "memoizy": {
+    "type": "github",
+    "owner": "ramiel",
+    "repo": "deno-memoizy",
+    "desc": "A light but powerful memoization library for deno.",
+    "default_version": "master"
+  },
   "merc": {
     "type": "github",
     "owner": "spitlo",
@@ -3237,6 +3364,13 @@
     "desc": "MongoDB driver for Deno.",
     "default_version": "master"
   },
+  "mongo_query_dot_notation": {
+    "type": "github",
+    "owner": "skyledge",
+    "repo": "mongo_query_dot_notation",
+    "desc": "Fast, lightweight library to transform objects to mongo update instructions using operators and dot notation. Ported from Node to Deno.",
+    "default_version": "master"
+  },
   "mongo_repository": {
     "type": "github",
     "owner": "0xVesion",
@@ -3256,6 +3390,13 @@
     "owner": "denolib",
     "repo": "ms",
     "desc": "Use this package to easily convert various time formats to milliseconds. It is ported from https://github.com/zeit/ms to work with Deno.",
+    "default_version": "master"
+  },
+  "msgpack": {
+    "type": "github",
+    "owner": "Srinivasa314",
+    "repo": "msgpack-deno",
+    "desc": "msgpack for Deno. It was ported from https://github.com/msgpack/msgpack-javascript",
     "default_version": "master"
   },
   "mtrand": {
@@ -3679,6 +3820,13 @@
     "desc": "Configurable data pipeline in Deno.",
     "default_version": "master"
   },
+  "pkce_deno": {
+    "type": "github",
+    "owner": "DiFronzo",
+    "repo": "pkce-deno",
+    "desc": "PKCE code verifier and challenge generator for Deno.",
+    "default_version": "master"
+  },
   "plugin_prepare": {
     "type": "github",
     "owner": "manyuanrong",
@@ -3812,6 +3960,13 @@
     "desc": "create terminal progressbars",
     "default_version": "master"
   },
+  "prompt": {
+    "type": "github",
+    "owner": "akunchen",
+    "repo": "deno-prompt",
+    "desc": "A command line interaction utils like inquirer.",
+    "default_version": "master"
+  },
   "prompts": {
     "type": "github",
     "owner": "caspervonb",
@@ -3853,6 +4008,13 @@
     "owner": "imcotton",
     "repo": "proxy-bind",
     "desc": "From foobar.fn.bind(foobar) to bind(foobar).fn",
+    "default_version": "master"
+  },
+  "pterodactyl": {
+    "type": "github",
+    "owner": "JoeKalb",
+    "repo": "pterodactyl",
+    "desc": "A Twitch IRC client for Deno.",
     "default_version": "master"
   },
   "pubsub": {
@@ -4532,7 +4694,7 @@
     "owner": "asos-craigmorten",
     "repo": "superoak",
     "desc": "HTTP assertions for Oak made easy via superdeno.",
-    "default_version": "master"
+    "default_version": "main"
   },
   "supports_color": {
     "type": "github",
@@ -4639,6 +4801,13 @@
     "desc": "Telegram bot API",
     "default_version": "master"
   },
+  "template": {
+    "type": "github",
+    "owner": "deno-library",
+    "repo": "template",
+    "desc": "Template engine for Deno",
+    "default_version": "master"
+  },
   "termcolorizer": {
     "type": "github",
     "owner": "jahzielv",
@@ -4723,6 +4892,13 @@
     "desc": "Toolbelt for Deno",
     "default_version": "master"
   },
+  "transfire": {
+    "type": "github",
+    "owner": "aaronwlee",
+    "repo": "transfire",
+    "desc": "Create a class-based data transfer object(DTO) with decorators and validating data at the same time.",
+    "default_version": "master"
+  },
   "transform": {
     "type": "github",
     "owner": "marcosc90",
@@ -4756,6 +4932,13 @@
     "owner": "shandysiswandi",
     "repo": "troodon",
     "desc": "Troodon is a lightweight Deno Library to Handle Algorithms",
+    "default_version": "master"
+  },
+  "trypoxylus": {
+    "type": "github",
+    "owner": "GGICE",
+    "repo": "trypoxylus",
+    "desc": "Deno based service engine",
     "default_version": "master"
   },
   "ts_prometheus": {
@@ -4967,9 +5150,11 @@
     "default_version": "master"
   },
   "value_schema": {
-    "type": "npm",
-    "package": "value-schema",
-    "desc": "simple, easy-to-use, and declarative schema validator"
+    "type": "github",
+    "owner": "shimataro",
+    "repo": "value-schema",
+    "desc": "simple, easy-to-use, and declarative schema validator",
+    "default_version": "develop"
   },
   "vary": {
     "type": "github",

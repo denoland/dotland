@@ -7,7 +7,7 @@ import { URLEntry, URLDatabaseEntry } from "./registries/url";
 import { NPMEntry, NPMDatabaseEntry } from "./registries/npm";
 import { Entry, DatabaseEntry } from "./registries";
 
-function findDatabaseEntry(
+export function findDatabaseEntry(
   name: string
 ):
   | GithubDatabaseEntry

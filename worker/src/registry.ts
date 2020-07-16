@@ -1,4 +1,8 @@
-import { parseNameVersion, findEntry } from "../../util/registry_utils";
+import {
+  parseNameVersion,
+  findEntry,
+  findDatabaseEntry,
+} from "../../util/registry_utils";
 
 export async function handleRegistryRequest(url: URL): Promise<Response> {
   console.log("registry request", url.pathname);
@@ -27,6 +31,11 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
     response.headers.set(
       "X-Deno-Warning",
       `The https://deno.land/x/npm:project redirects are deprecated will be removed on August 1st 2020. Import ${entry.url} instead of ${url}`
+    );
+  } else if (needsNPMTypeDeprecationWarning(entry)) {
+    response.headers.set(
+      "X-Deno-Warning",
+      `NPM backed deno.land/x entries like ${entry.name} are deprecated will be removed on August 1st 2020. Import ${entry.url} instead of ${url}`
     );
   }
   const originContentType = response.headers.get("content-type");
@@ -59,6 +68,11 @@ export function needsGHDeprecationWarning(entry: Entry): boolean {
 
 export function needsNPMDeprecationWarning(entry: Entry): boolean {
   return entry.name.startsWith("npm:");
+}
+
+export function needsNPMTypeDeprecationWarning(entry: Entry): boolean {
+  const e = findDatabaseEntry(entry.name);
+  return e?.type === "npm";
 }
 
 export interface Entry {
