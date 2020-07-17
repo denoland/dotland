@@ -1,8 +1,8 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
 const S3_BUCKET =
-  "https://deno-registry-prod-storagebucket-d7uq3yal946u.s3.us-east-1.amazonaws.com/";
-const API_ENDPOINT = "https://akoa3109y0.execute-api.us-east-1.amazonaws.com/";
+  "https://deno-registry2-storagebucket-1wbpv5tm1e9p1.s3.us-east-1.amazonaws.com/";
+const API_ENDPOINT = "https://6t0xvw5ds3.execute-api.us-east-1.amazonaws.com/";
 
 export interface DirEntry {
   name: string;
@@ -155,6 +155,39 @@ export async function getModules(
   }
 
   return { totalCount: data.data.total_count, results: data.data.results };
+}
+
+export interface Build {
+  id: string;
+  options: {
+    moduleName: string;
+    type: string;
+    repository: string;
+    ref: string;
+    version: string;
+    subdir?: string;
+  };
+  status: string;
+  message?: string;
+}
+
+export async function getBuild(id: string): Promise<Build> {
+  const url = `${API_ENDPOINT}builds/${id}`;
+  const res = await fetch(url, { headers: { accept: "application/json" } });
+  if (res.status !== 200) {
+    throw Error(
+      `Got an error (${res.status}) while getting the build info:\n${await res
+        .text()}`,
+    );
+  }
+  const data = await res.json();
+  if (!data.success) {
+    throw Error(
+      `Got an error (${data.info}) while getting the build info:\n${await res
+        .text()}`,
+    );
+  }
+  return data.data.build;
 }
 
 export function parseNameVersion(nameVersion: string): [string, string] {

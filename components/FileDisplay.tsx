@@ -58,7 +58,7 @@ function FileDisplay(props: {
       {props.documentationURL && (
         <a
           href={props.documentationURL}
-          className="bg-gray-100 border-b border-gray-200 py-1 px-4 flex align-middle justify-between block link group"
+          className="bg-gray-100 border-b border-gray-200 py-1 px-4 flex align-middle justify-between link group"
         >
           <span>
             <svg

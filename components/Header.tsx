@@ -9,9 +9,9 @@ const Header = ({ subtitle }: { subtitle?: string }) => {
 
   return (
     <div className="relative py-6">
-      <nav className="max-w-screen-lg mx-auto flex items-center justify-between px-3 px-4 sm:px-6 md:px-8 lg:px-0">
+      <nav className="max-w-screen-lg mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-0">
         <Link href="/">
-          <a className="block flex items-center">
+          <a className="flex items-center">
             <img className="h-10 w-auto sm:h-12 my-2" src="/logo.svg" alt="" />
             <div className="ml-5 flex flex-col justify-center">
               <div className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
@@ -109,7 +109,7 @@ const Header = ({ subtitle }: { subtitle?: string }) => {
             <div className="rounded-lg bg-white shadow-xs overflow-hidden">
               <div className="px-5 pt-4 flex items-center justify-between">
                 <Link href="/">
-                  <a className="block flex items-center">
+                  <a className="flex items-center">
                     <img
                       className="h-10 w-auto sm:h-12 my-2"
                       src="/logo.svg"

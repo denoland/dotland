@@ -28,6 +28,7 @@
     "react-markdown": "^4.3.1",
     "react-ssr-prepass": "npm:preact-ssr-prepass@^1.0.1",
     "react-transition-group": "^4.4.1",
+    "swr": "^0.2.3",
     "tailwindcss": "^1.4.6",
     "tailwindcss-hyphens": "^0.1.0"
   },
