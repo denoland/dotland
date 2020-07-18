@@ -709,6 +709,13 @@
     "desc": "Material Design Colors ༼ つ ◕_◕ ༽つ",
     "default_version": "master"
   },
+  "commandline_processor": {
+    "type": "github",
+    "owner": "michael-spengler",
+    "repo": "commandline_processor",
+    "desc": "🦕 module to execute commands on the command line",
+    "default_version": "master"
+  },
   "commands": {
     "type": "github",
     "owner": "buttercubz",
