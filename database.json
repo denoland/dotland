@@ -5383,6 +5383,13 @@
     "desc": "A wrapper for Deno command args to make it easier to run with complex options.",
     "default_version": "master"
   },
+  "zlib.es": {
+    "type": "github",
+    "owner": "brecert",
+    "repo": "zlib.es",
+    "desc": "ECMAScript/Deno lightweight zlib implementation",
+    "default_version": "master"
+  },
   "zstd": {
     "type": "github",
     "owner": "xpyxel",
