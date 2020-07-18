@@ -1035,6 +1035,13 @@
     "desc": "TypeScript top.gg api wrapper",
     "default_version": "master"
   },
+  "ddoc": {
+    "type": "github",
+    "owner": "denosaurs",
+    "repo": "ddoc",
+    "desc": "Offline / Local deno documentation.",
+    "default_version": "master"
+  },
   "deamon": {
     "type": "github",
     "owner": "manyuanrong",
