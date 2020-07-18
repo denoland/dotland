@@ -429,6 +429,13 @@
     "desc": "BoolBase, only two functions: one that returns true, one that returns false.",
     "default_version": "master"
   },
+  "branch": {
+    "type": "github",
+    "owner": "denosaurs",
+    "repo": "branch",
+    "desc": "Denosaurs pretty logger",
+    "default_version": "master"
+  },
   "brotli": {
     "type": "github",
     "owner": "denosaurs",
@@ -1026,6 +1033,13 @@
     "owner": "zSnails",
     "repo": "dblapi.ts",
     "desc": "TypeScript top.gg api wrapper",
+    "default_version": "master"
+  },
+  "ddoc": {
+    "type": "github",
+    "owner": "denosaurs",
+    "repo": "ddoc",
+    "desc": "Offline / Local deno documentation.",
     "default_version": "master"
   },
   "deamon": {
