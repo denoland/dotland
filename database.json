@@ -1849,6 +1849,13 @@
     "desc": "Dnit - a task runner that uses typescript for tasks and dependencies, aimed at larger projects with tasks split across many files or shared between projects.",
     "default_version": "main"
   },
+  "dndb": {
+    "type": "github",
+    "owner": "denyncrawford",
+    "repo": "dndb",
+    "desc": "A Deno 🦕 persistent database for JS & TS",
+    "default_version": "master"
+  },
   "doa": {
     "type": "github",
     "owner": "johannlai",
