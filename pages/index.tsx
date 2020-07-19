@@ -10,6 +10,7 @@ import stdVersions from "../deno_std_versions.json";
 import { NextPage, GetStaticProps } from "next";
 import InlineCode from "../components/InlineCode";
 import Header from "../components/Header";
+import { useOS } from "../util/platform";
 
 interface SimpleEntry {
   name: string;
@@ -282,9 +283,11 @@ for await (const req of s) {
 };
 
 const InstallSection = () => {
+  const os = useOS();
+
   const shell = (
     <div key="shell" className="my-4 text-gray-700">
-      <p className="py-2">Shell (Mac, Linux):</p>
+      <p className="py-2">Shell (Mac, Linux, Windows):</p>
       <CodeBlock
         language="bash"
         code={`curl -fsSL https://deno.land/x/install/install.sh | sh`}
@@ -350,12 +353,16 @@ const InstallSection = () => {
         </a>
         .
       </p>
-      {shell}
-      {powershell}
-      {homebrew}
-      {chocolatey}
-      {scoop}
-      {cargo}
+      {(() => {
+        switch (os) {
+          case "win":
+            return [powershell, chocolatey, scoop, shell, homebrew, cargo];
+          case "mac":
+          case "linux":
+          default:
+            return [shell, powershell, homebrew, chocolatey, scoop, cargo];
+        }
+      })()}
       <p className="my-4 text-gray-700">
         See{" "}
         <a className="link" href="https://github.com/denoland/deno_install">
