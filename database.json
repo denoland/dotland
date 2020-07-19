@@ -1853,7 +1853,7 @@
     "type": "github",
     "owner": "denyncrawford",
     "repo": "dndb",
-    "desc": "A Deno 🦕 persistent database for JS & TS",
+    "desc": "A Deno 🦕 persistent database for JS & TS.",
     "default_version": "master"
   },
   "doa": {
