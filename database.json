@@ -492,6 +492,13 @@
     "desc": "The easier way to manage local files in Deno.",
     "default_version": "master"
   },
+  "calcite": {
+    "type": "github",
+    "owner": "Srinivasa314",
+    "repo": "calcite-ts",
+    "desc": "A library to create deno plugins",
+    "default_version": "master"
+  },
   "caller": {
     "type": "github",
     "owner": "apiel",
