@@ -4368,6 +4368,13 @@
     "desc": "🦕 A reactive programming library for Deno ⚡ ",
     "default_version": "master"
   },
+  "s3": {
+    "type": "github",
+    "owner": "lucacasonato",
+    "repo": "deno_s3",
+    "desc": "Amazon S3 for Deno",
+    "default_version": "main"
+  },
   "sass": {
     "type": "github",
     "owner": "divy-work",
@@ -4642,6 +4649,13 @@
     "repo": "deno_sqlite_plugin",
     "desc": "Native plugin for SQLite using rusqlite",
     "default_version": "master"
+  },
+  "sqs": {
+    "type": "github",
+    "owner": "lucacasonato",
+    "repo": "deno_sqs",
+    "desc": "Amazon SQS for Deno",
+    "default_version": "main"
   },
   "ssds": {
     "type": "github",
