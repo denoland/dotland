@@ -60,3 +60,43 @@ jobs:
           environment: "staging"
           apiToken: ${{ secrets.cloudflareToken }}
           workingDirectory: worker
+  merge:
+    needs: [web, worker]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/github-script@v2
+        if: github.event_name == 'pull_request'
+        with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          let isDatabaseChanges = false, isArtworkChanges = false;
+          const repo = context.repo;
+          const regInp = ["artwork.json", ".png", ".jpeg", ".jpg", ".gif"];
+          const pull_issue_number = context.issue.number;
+          const options = await github.pulls.listFiles({
+            ...repo,
+            pull_number: pull_issue_number,
+          });
+          const files = (
+            (await github.paginate(options, (response) => response.data)) || []
+          )
+            .map((x) => x.filename)
+            .filter(Boolean);
+          if (
+            files.length === 1 &&
+            files.filter((f) => f.includes("database.json")).length === 1
+          ) {
+            isDatabaseChanges = true;
+          }
+          if (
+            files.filter((t) => regInp.map((re) => new RegExp(re, "i")).filter((re) => re.test(t)).length).length === 2
+          ) {
+            isArtworkChanges = true;
+          }
+          if (isDatabaseChanges || isArtworkChanges) {
+            await github.pulls.merge({
+              ...repo,
+              pull_number: pull_issue_number,
+            });
+          }
