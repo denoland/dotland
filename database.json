@@ -4403,6 +4403,13 @@
     "desc": "Deno package used to generate good, short and fast pseudorandom numbers using a seed",
     "default_version": "master"
   },
+  "segno": {
+    "type": "github",
+    "owner": "Keimeno",
+    "repo": "segno",
+    "desc": "segno (Segnosaurus). Validation library for Deno 🦕. Enforcing a high security standard.",
+    "default_version": "master"
+  },
   "semver": {
     "type": "github",
     "owner": "justjavac",
