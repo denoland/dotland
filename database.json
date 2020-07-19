@@ -2706,6 +2706,13 @@
     "desc": "Implementation of TMI.JS as Twitch client for Deno",
     "default_version": "master"
   },
+  "indenosia": {
+    "type": "github",
+    "owner": "indenosia",
+    "repo": "server",
+    "desc": "HTTP server framework for Deno.",
+    "default_version": "master"
+  },
   "indigobird": {
     "type": "github",
     "owner": "ralusek",
