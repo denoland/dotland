@@ -1856,6 +1856,13 @@
     "desc": "A module manager for Deno",
     "default_version": "master"
   },
+  "dndb": {
+    "type": "github",
+    "owner": "denyncrawford",
+    "repo": "dndb",
+    "desc": "A Deno 🦕 persistent database for JS & TS.",
+    "default_version": "master"
+  },
   "dnit": {
     "type": "github",
     "owner": "PaulThompson",
