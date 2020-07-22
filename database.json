@@ -4766,6 +4766,13 @@
     "desc": "HTTP assertions for Deno made easy via superagent.",
     "default_version": "main"
   },
+  "supermemo": {
+    "type": "github",
+    "owner": "maxvien",
+    "repo": "supermemo",
+    "desc": "A JavaScript/TypeScript implementation of the SuperMemo 2 (SM2) algorithm for spaced based repetition flashcards.",
+    "default_version": "master"
+  },
   "superoak": {
     "type": "github",
     "owner": "asos-craigmorten",
