@@ -3883,6 +3883,13 @@
     "desc": "PKCE code verifier and challenge generator for Deno.",
     "default_version": "master"
   },
+  "plug": {
+    "type": "github",
+    "owner": "denosaurs",
+    "repo": "plug",
+    "desc": "A module for managing deno plugins",
+    "default_version": "master"
+  },
   "plugin_prepare": {
     "type": "github",
     "owner": "manyuanrong",
