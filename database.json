@@ -499,6 +499,13 @@
     "desc": "The easier way to manage local files in Deno.",
     "default_version": "master"
   },
+  "cache": {
+    "type": "github",
+    "owner": "denosaurs",
+    "repo": "cache",
+    "desc": "Library to handle deno file caching ",
+    "default_version": "master"
+  },
   "calcite": {
     "type": "github",
     "owner": "Srinivasa314",
