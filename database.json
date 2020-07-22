@@ -2227,7 +2227,7 @@
     "desc": "Fanfou SDK for Deno",
     "default_version": "master"
   },
-  "fastest-levenshtein": {
+  "fastest_levenshtein": {
     "type": "github",
     "owner": "ka-weihe",
     "repo": "fastest-levenshtein",
