@@ -3229,7 +3229,7 @@
     "owner": "TheWizardBear",
     "repo": "maze_generator",
     "desc": "A module for generating mazes.",
-    "default_version": "master"
+    "default_version": "main"
   },
   "media_typer": {
     "type": "github",
