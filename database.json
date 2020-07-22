@@ -4752,6 +4752,13 @@
     "desc": "Transforms text to StUdLy CaPs",
     "default_version": "master"
   },
+  "summon": {
+    "type": "github",
+    "owner": "MartonDev",
+    "repo": "summon",
+    "desc": "An elegant requests library for Deno, modelled after axios",
+    "default_version": "master"
+  },
   "superdeno": {
     "type": "github",
     "owner": "asos-craigmorten",
