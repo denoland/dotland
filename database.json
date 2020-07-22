@@ -5439,6 +5439,13 @@
     "desc": "A tiny package to convert YouTube caption format from XML to SRT with ZERO dependencies.",
     "default_version": "master"
   },
+  "yummy": {
+    "type": "github",
+    "owner": "satyawikananda",
+    "repo": "yummy",
+    "desc": "A simple wrapper themealdb.com API for Deno 🦕.",
+    "default_version": "master"
+  },
   "zap": {
     "type": "github",
     "owner": "deno-nonstd",
