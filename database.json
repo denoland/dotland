@@ -422,6 +422,13 @@
     "desc": "bls12-381, a pairing-friendly elliptic curve construction.",
     "default_version": "master"
   },
+  "body_parser": {
+    "type": "github",
+    "owner": "Cretezy",
+    "repo": "deno_body_parser",
+    "desc": "A generic Deno HTTP body parser",
+    "default_version": "master"
+  },
   "boolbase": {
     "type": "github",
     "owner": "DenoBRComunitty",
