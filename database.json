@@ -2227,6 +2227,13 @@
     "desc": "Fanfou SDK for Deno",
     "default_version": "master"
   },
+  "fastest_levenshtein": {
+    "type": "github",
+    "owner": "ka-weihe",
+    "repo": "fastest-levenshtein",
+    "desc": "The fastest Levenshtein distance implementation.",
+    "default_version": "master"
+  },
   "fastlist": {
     "type": "github",
     "owner": "MarkTiedemann",
