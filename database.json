@@ -4927,6 +4927,13 @@
     "desc": "Deno Tiny Templates",
     "default_version": "master"
   },
+  "tinyfiledialogs": {
+    "type": "github",
+    "owner": "Srinivasa314",
+    "repo": "tinyfiledialogs-deno",
+    "desc": "A port of tinyfiledialogs-rs for use in Deno",
+    "default_version": "master"
+  },
   "title": {
     "type": "github",
     "owner": "satyarohith",
