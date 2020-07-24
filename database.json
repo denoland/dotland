@@ -90,6 +90,13 @@
     "desc": "➗ Powerful math library for Deno, powered by wasm.",
     "default_version": "master"
   },
+  "aloedb": {
+    "type": "github",
+    "owner": "Kirlovon",
+    "repo": "AloeDB",
+    "desc": "Light, Embeddable, NoSQL database for Deno 🌿",
+    "default_version": "master"
+  },
   "alosaur": {
     "type": "github",
     "owner": "irustm",
