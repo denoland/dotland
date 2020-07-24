@@ -422,11 +422,25 @@
     "desc": "bls12-381, a pairing-friendly elliptic curve construction.",
     "default_version": "master"
   },
+  "body_parser": {
+    "type": "github",
+    "owner": "Cretezy",
+    "repo": "deno_body_parser",
+    "desc": "A generic Deno HTTP body parser",
+    "default_version": "master"
+  },
   "boolbase": {
     "type": "github",
     "owner": "DenoBRComunitty",
     "repo": "boolbase",
     "desc": "BoolBase, only two functions: one that returns true, one that returns false.",
+    "default_version": "master"
+  },
+  "branch": {
+    "type": "github",
+    "owner": "denosaurs",
+    "repo": "branch",
+    "desc": "Denosaurs pretty logger",
     "default_version": "master"
   },
   "brotli": {
@@ -483,6 +497,20 @@
     "owner": "dan-online",
     "repo": "cabinet",
     "desc": "The easier way to manage local files in Deno.",
+    "default_version": "master"
+  },
+  "cache": {
+    "type": "github",
+    "owner": "denosaurs",
+    "repo": "cache",
+    "desc": "Library to handle deno file caching ",
+    "default_version": "master"
+  },
+  "calcite": {
+    "type": "github",
+    "owner": "Srinivasa314",
+    "repo": "calcite-ts",
+    "desc": "A library to create deno plugins",
     "default_version": "master"
   },
   "caller": {
@@ -1033,6 +1061,13 @@
     "owner": "zSnails",
     "repo": "dblapi.ts",
     "desc": "TypeScript top.gg api wrapper",
+    "default_version": "master"
+  },
+  "ddoc": {
+    "type": "github",
+    "owner": "denosaurs",
+    "repo": "ddoc",
+    "desc": "Offline / Local deno documentation.",
     "default_version": "master"
   },
   "deamon": {
@@ -1821,6 +1856,13 @@
     "desc": "A module manager for Deno",
     "default_version": "master"
   },
+  "dndb": {
+    "type": "github",
+    "owner": "denyncrawford",
+    "repo": "dndb",
+    "desc": "A Deno 🦕 persistent database for JS & TS.",
+    "default_version": "master"
+  },
   "dnit": {
     "type": "github",
     "owner": "PaulThompson",
@@ -2204,6 +2246,13 @@
     "owner": "LitoMore",
     "repo": "fanfou-sdk-deno",
     "desc": "Fanfou SDK for Deno",
+    "default_version": "master"
+  },
+  "fastest_levenshtein": {
+    "type": "github",
+    "owner": "ka-weihe",
+    "repo": "fastest-levenshtein",
+    "desc": "The fastest Levenshtein distance implementation.",
     "default_version": "master"
   },
   "fastlist": {
@@ -2683,6 +2732,13 @@
     "owner": "iosamuel",
     "repo": "imt",
     "desc": "Implementation of TMI.JS as Twitch client for Deno",
+    "default_version": "master"
+  },
+  "indenosia": {
+    "type": "github",
+    "owner": "indenosia",
+    "repo": "server",
+    "desc": "HTTP server framework for Deno.",
     "default_version": "master"
   },
   "indigobird": {
@@ -3201,7 +3257,7 @@
     "owner": "TheWizardBear",
     "repo": "maze_generator",
     "desc": "A module for generating mazes.",
-    "default_version": "master"
+    "default_version": "main"
   },
   "media_typer": {
     "type": "github",
@@ -3827,6 +3883,13 @@
     "desc": "PKCE code verifier and challenge generator for Deno.",
     "default_version": "master"
   },
+  "plug": {
+    "type": "github",
+    "owner": "denosaurs",
+    "repo": "plug",
+    "desc": "A module for managing deno plugins",
+    "default_version": "master"
+  },
   "plugin_prepare": {
     "type": "github",
     "owner": "manyuanrong",
@@ -4347,6 +4410,13 @@
     "desc": "🦕 A reactive programming library for Deno ⚡ ",
     "default_version": "master"
   },
+  "s3": {
+    "type": "github",
+    "owner": "lucacasonato",
+    "repo": "deno_s3",
+    "desc": "Amazon S3 for Deno",
+    "default_version": "main"
+  },
   "sass": {
     "type": "github",
     "owner": "divy-work",
@@ -4387,6 +4457,13 @@
     "owner": "krijn-inc",
     "repo": "seed",
     "desc": "Deno package used to generate good, short and fast pseudorandom numbers using a seed",
+    "default_version": "master"
+  },
+  "segno": {
+    "type": "github",
+    "owner": "Keimeno",
+    "repo": "segno",
+    "desc": "segno (Segnosaurus). Validation library for Deno 🦕. Enforcing a high security standard.",
     "default_version": "master"
   },
   "semver": {
@@ -4615,6 +4692,13 @@
     "desc": "Native plugin for SQLite using rusqlite",
     "default_version": "master"
   },
+  "sqs": {
+    "type": "github",
+    "owner": "lucacasonato",
+    "repo": "deno_sqs",
+    "desc": "Amazon SQS for Deno",
+    "default_version": "main"
+  },
   "ssds": {
     "type": "github",
     "owner": "claytsay",
@@ -4682,12 +4766,26 @@
     "desc": "Transforms text to StUdLy CaPs",
     "default_version": "master"
   },
+  "summon": {
+    "type": "github",
+    "owner": "MartonDev",
+    "repo": "summon",
+    "desc": "An elegant requests library for Deno, modelled after axios",
+    "default_version": "master"
+  },
   "superdeno": {
     "type": "github",
     "owner": "asos-craigmorten",
     "repo": "superdeno",
     "desc": "HTTP assertions for Deno made easy via superagent.",
     "default_version": "main"
+  },
+  "supermemo": {
+    "type": "github",
+    "owner": "maxvien",
+    "repo": "supermemo",
+    "desc": "A JavaScript/TypeScript implementation of the SuperMemo 2 (SM2) algorithm for spaced based repetition flashcards.",
+    "default_version": "master"
   },
   "superoak": {
     "type": "github",
@@ -4869,6 +4967,13 @@
     "owner": "zekth",
     "repo": "deno_tiny_templates",
     "desc": "Deno Tiny Templates",
+    "default_version": "master"
+  },
+  "tinyfiledialogs": {
+    "type": "github",
+    "owner": "Srinivasa314",
+    "repo": "tinyfiledialogs-deno",
+    "desc": "A port of tinyfiledialogs-rs for use in Deno",
     "default_version": "master"
   },
   "title": {
@@ -5383,11 +5488,25 @@
     "desc": "A tiny package to convert YouTube caption format from XML to SRT with ZERO dependencies.",
     "default_version": "master"
   },
+  "yummy": {
+    "type": "github",
+    "owner": "satyawikananda",
+    "repo": "yummy",
+    "desc": "A simple wrapper themealdb.com API for Deno 🦕.",
+    "default_version": "master"
+  },
   "zap": {
     "type": "github",
     "owner": "deno-nonstd",
     "repo": "zap",
     "desc": "A wrapper for Deno command args to make it easier to run with complex options.",
+    "default_version": "master"
+  },
+  "zlib.es": {
+    "type": "github",
+    "owner": "brecert",
+    "repo": "zlib.es",
+    "desc": "ECMAScript/Deno lightweight zlib implementation",
     "default_version": "master"
   },
   "zstd": {
