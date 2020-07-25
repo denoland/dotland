@@ -4745,6 +4745,13 @@
     "desc": "A key-value store that persists on disk for Deno.",
     "default_version": "master"
   },
+  "store-o-saurus": {
+    "type": "github",
+    "owner": "felixblaschke",
+    "repo": "store-o-saurus",
+    "desc": "Super simple JSON store.",
+    "default_version": "master"
+  },
   "strcolors.ts": {
     "type": "github",
     "owner": "jabernardo",
