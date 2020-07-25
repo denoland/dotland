@@ -1,8 +1,8 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
 const S3_BUCKET =
-  "https://deno-registry2-storagebucket-1wbpv5tm1e9p1.s3.us-east-1.amazonaws.com/";
-const API_ENDPOINT = "https://6t0xvw5ds3.execute-api.us-east-1.amazonaws.com/";
+  "https://deno-registry-prod-storagebucket-d7uq3yal946u.s3.us-east-1.amazonaws.com/";
+const API_ENDPOINT = "https://akoa3109y0.execute-api.us-east-1.amazonaws.com/";
 
 export interface DirEntry {
   name: string;
@@ -94,6 +94,7 @@ export async function getVersionMeta(
 export interface VersionInfo {
   latest: string;
   versions: string[];
+  isLegacy: true;
 }
 
 export async function getVersionList(

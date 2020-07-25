@@ -81,7 +81,7 @@ const Registry = () => {
 
   // If no version is specified, redirect to latest version
   useEffect(() => {
-    if (!version && versions) {
+    if (!version && versions && versions.latest !== null) {
       gotoVersion(versions.latest ?? "");
     }
   }, [versions?.latest, version]);
@@ -237,6 +237,20 @@ const Registry = () => {
                 <ErrorMessage
                   title="404 - Not Found"
                   body="This module does not exist."
+                />
+              );
+            } else if (
+              versions?.latest === null &&
+              versions.versions.length === 0
+            ) {
+              return (
+                <ErrorMessage
+                  title="No uploaded versions"
+                  body={`This module name has been reserved for a repository, but no versions have been uploaded yet. Modules that do not upload a version within 30 days of registration will be removed. ${
+                    versions.isLegacy
+                      ? "If you are the owner of this module, please re-link the GitHub repository with deno.land/x, and publish a new version."
+                      : ""
+                  }`}
                 />
               );
             } else if (
