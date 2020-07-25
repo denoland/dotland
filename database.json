@@ -2635,7 +2635,7 @@
     "desc": "http-server is a tiny and zero-configuration HTTP server with useful features to serve static files with Deno",
     "default_version": "master"
   },
-   "http_status": {
+  "http_status": {
     "type": "github",
     "owner": "brion-fuller",
     "repo": "http-status",
