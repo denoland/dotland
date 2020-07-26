@@ -3329,6 +3329,13 @@
     "desc": "A basic command line client for the Gemini protocol for deno.",
     "default_version": "master"
   },
+  "merlin": {
+    "type": "github",
+    "owner": "crewdevio",
+    "repo": "merlin",
+    "desc": "Testing and Benchmarking framework for deno 🧙‍♂️",
+    "default_version": "master"
+  },
   "meteorite": {
     "type": "github",
     "owner": "AhmedAlYousif",
