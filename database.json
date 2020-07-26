@@ -3636,6 +3636,13 @@
     "desc": "Njalla API wrapper for Deno.",
     "default_version": "master"
   },
+  "nlp": {
+    "type": "github",
+    "owner": "michael-spengler",
+    "repo": "nlp",
+    "desc": "Deno Module for Natural Language Processing (NLP)",
+    "default_version": "master"
+  },
   "node_buffer": {
     "type": "github",
     "owner": "AliBasicCoder",
