@@ -3273,6 +3273,13 @@
     "desc": "A module that assists in resolving media types and extensions.",
     "default_version": "main"
   },
+  "memes": {
+    "type": "github",
+    "owner": "Snowflake107",
+    "repo": "memes",
+    "desc": "Simple module to fetch memes from subreddit.",
+    "default_version": "master"
+  },
   "memoize": {
     "type": "github",
     "owner": "rubiin",
