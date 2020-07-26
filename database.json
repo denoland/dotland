@@ -168,6 +168,13 @@
     "desc": "Deno port of ArangoJS - ArangoDB Driver 🥑",
     "default_version": "master"
   },
+  "arch": {
+    "type": "github",
+    "owner": "denorg",
+    "repo": "arch",
+    "desc": "Get the actual operating system CPU architecture",
+    "default_version": "master"
+  },
   "argon2": {
     "type": "github",
     "owner": "fdionisi",
