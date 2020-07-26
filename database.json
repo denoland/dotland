@@ -1105,6 +1105,13 @@
     "desc": "Make the Deno program run in the background",
     "default_version": "master"
   },
+  "debot": {
+    "type": "github",
+    "owner": "viandwi24",
+    "repo": "debot",
+    "desc": "A simple framework for help you build a bot.",
+    "default_version": "master"
+  },
   "debuglog": {
     "type": "github",
     "owner": "rista404",
