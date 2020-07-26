@@ -46,22 +46,6 @@ for await (const req of s) {
         <title>Deno</title>
       </Head>
       <div className="bg-white">
-        <div className="bg-black">
-          <div className="max-w-screen-xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
-            <div className="pr-16 sm:text-center sm:px-16">
-              <p className="font-medium text-white">
-                <span>Deno 1.0 is out!</span>
-                <span className="block sm:ml-2 sm:inline-block">
-                  <Link href="/v1">
-                    <a className="text-white font-bold underline">
-                      Read the blog post &rarr;
-                    </a>
-                  </Link>
-                </span>
-              </p>
-            </div>
-          </div>
-        </div>
         <div className="bg-gray-50 border-b border-gray-200">
           <Header />
           <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
