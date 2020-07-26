@@ -877,6 +877,13 @@
     "desc": "Configurable talking cow for Deno",
     "default_version": "master"
   },
+  "crc32": {
+    "type": "github",
+    "owner": "deno-library",
+    "repo": "crc32",
+    "desc": "crc32 for Deno",
+    "default_version": "master"
+  },
   "create_deno_plugin": {
     "type": "github",
     "owner": "chiefbiiko",
