@@ -3785,6 +3785,13 @@
     "desc": "Proxy middleware for Opine HTTP servers.",
     "default_version": "main"
   },
+  "optic": {
+    "type": "github",
+    "owner": "onjara",
+    "repo": "optic",
+    "desc": "Powerful, extensible, easy to use logging framework for Deno",
+    "default_version": "master"
+  },
   "orange": {
     "type": "github",
     "owner": "mandarineorg",
