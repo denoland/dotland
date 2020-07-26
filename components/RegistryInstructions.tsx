@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
+import useSWR from "swr";
 import Transition from "./Transition";
 import InlineCode from "./InlineCode";
 import { getVersionList } from "../util/registry_utils";
@@ -6,35 +7,26 @@ import { getVersionList } from "../util/registry_utils";
 const VALID_NAME = /[A-Za-z0-9_]{3,40}/;
 
 function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
+  // Stage of the instructions
   const [stage, setStage] = useState(0);
 
+  // Name of the module to be registered
   const [moduleName, setModuleName] = useState("");
-  const [isModuleNameAvailable, setIsModuleNameAvailable] = useState<
-    null | boolean
-  >(null);
 
+  // Validity of the module name
   const isModuleNameValid = useMemo(() => VALID_NAME.test(moduleName), [
     moduleName,
   ]);
-
-  useEffect(() => {
-    let cancel = false;
-    if (isModuleNameValid) {
+  const { data: isModuleNameAvailable } = useSWR(
+    () => (isModuleNameValid ? moduleName : null),
+    (moduleName) =>
       getVersionList(moduleName)
-        .then((e) => {
-          if (!cancel) setIsModuleNameAvailable(!e);
-        })
-        .catch(() => {
-          if (!cancel) setIsModuleNameAvailable(false);
-        });
-    } else {
-      setIsModuleNameAvailable(null);
-    }
-    return () => {
-      cancel = true;
-    };
-  }, [isModuleNameValid, moduleName]);
+        .then((e) => !e)
+        .catch(() => false),
+    { refreshInterval: 2000 }
+  );
 
+  // No page scroll when sidebar is open
   useEffect(() => {
     if (props.isOpen) {
       document.body.style.overflow = "hidden";
@@ -262,19 +254,36 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                           </li>
                         </ol>
                         <video
+                          className="rounded-md border border-gray-200"
                           src="/images/add_webhook.mp4"
                           autoPlay
                           muted
                           loop
                         />
-                        <span className="block w-full rounded-md shadow-sm">
-                          <button
-                            className="w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
-                            onClick={props.close}
-                          >
-                            Done
-                          </button>
-                        </span>
+                        <div className="mt-2">
+                          {isModuleNameAvailable ? (
+                            <div className="text-gray-800 p-2 bg-gray-50 rounded-md border border-gray-200">
+                              Waiting to receive initial WebHook event from
+                              GitHub...
+                            </div>
+                          ) : (
+                            <>
+                              <div className="text-green-800 p-2 bg-gray-50 rounded-md border border-green-200">
+                                Module successfully registered! To upload a
+                                version, create a new tag / release in the
+                                repository.
+                              </div>
+                              <div className="mt-4 rounded-md shadow-sm">
+                                <button
+                                  className="w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
+                                  onClick={props.close}
+                                >
+                                  Done
+                                </button>
+                              </div>
+                            </>
+                          )}
+                        </div>
                         <button className="link" onClick={() => setStage(1)}>
                           Previous
                         </button>
