@@ -898,6 +898,13 @@
     "desc": "Simple cron scheduler for Deno",
     "default_version": "master"
   },
+  "cron_expressions": {
+    "type": "github",
+    "owner": "rkrx",
+    "repo": "cron-expressions",
+    "desc": "Cron-expression parser and tooling",
+    "default_version": "master"
+  },
   "crontab": {
     "type": "github",
     "owner": "jchen1",
