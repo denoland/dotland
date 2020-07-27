@@ -1998,7 +1998,7 @@
   },
   "dpng": {
     "type": "github",
-    "owner": "MartonDev",
+    "owner": "martonlederer",
     "repo": "dpng",
     "desc": "Easily create and draw image files in Deno",
     "default_version": "master"
@@ -2637,7 +2637,7 @@
   },
   "houston": {
     "type": "github",
-    "owner": "MartonDev",
+    "owner": "martonlederer",
     "repo": "Houston",
     "desc": "An advanced Deno logger, like Winston for Nodejs, with no dependencies",
     "default_version": "master"
@@ -4859,7 +4859,7 @@
   },
   "summon": {
     "type": "github",
-    "owner": "MartonDev",
+    "owner": "martonlederer",
     "repo": "summon",
     "desc": "An elegant requests library for Deno, modelled after axios",
     "default_version": "master"
