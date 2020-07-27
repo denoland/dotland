@@ -2453,6 +2453,13 @@
     "desc": "Using gardens makes it easier to handle your log output and debugging code by giving you the ability to break your output into named scopes",
     "default_version": "master"
   },
+  "gaussian": {
+    "type": "github",
+    "owner": "deanlyz",
+    "repo": "gaussian",
+    "desc": "A JavaScript model of the normal distribution.",
+    "default_version": "main"
+  },
   "gentleRpc": {
     "type": "github",
     "owner": "timonson",
