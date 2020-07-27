@@ -3932,6 +3932,13 @@
     "desc": "Calculator for perpetual swaps/futures, similar with that on Binance & BitMEX.",
     "default_version": "master"
   },
+  "persistence": {
+    "type": "github",
+    "owner": "michael-spengler",
+    "repo": "persistence",
+    "desc": "With this deno module you can use GitHub as a database for small projects.",
+    "default_version": "master"
+  },
   "pg": {
     "type": "github",
     "owner": "deno-library",
