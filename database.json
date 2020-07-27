@@ -3161,6 +3161,13 @@
     "desc": "Basic linked list in Deno.",
     "default_version": "master"
   },
+  "linkedlist": {
+    "type": "github",
+    "owner": "dmpjs",
+    "repo": "linkedlist",
+    "desc": "A doubly linked list (Bi-directional) implementation.",
+    "default_version": "master"
+  },
   "local_ip": {
     "type": "github",
     "owner": "joakimunge",
