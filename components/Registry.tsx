@@ -356,7 +356,8 @@ function ErrorMessage(props: {
             {props.body}
             {props.repositoryURL && (
               <>
-                {" "}You may{" "}
+                {" "}
+                You may{" "}
                 <a className="link" href={props.repositoryURL}>
                   view it on GitHub
                 </a>
