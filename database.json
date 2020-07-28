@@ -2390,6 +2390,13 @@
     "desc": "Flux Annotated CSV Parser",
     "default_version": "master"
   },
+  "flux-standard-action": {
+    "type": "github",
+    "owner": "arsenykruglikov",
+    "repo": "flux-standard-action",
+    "desc": "Flux standard action utility",
+    "default_version": "master"
+  },
   "food": {
     "type": "github",
     "owner": "michael-spengler",
