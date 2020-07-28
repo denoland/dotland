@@ -16,6 +16,18 @@ module.exports = withPrefresh({
           destination: "/benchmarks",
           permanent: true,
         },
+        {
+          source: "/typedoc",
+          destination:
+            "https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts",
+          permanent: true,
+        },
+        {
+          source: "/typedoc/index.html",
+          destination:
+            "https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts",
+          permanent: true,
+        },
       ];
     },
   },
@@ -23,7 +35,8 @@ module.exports = withPrefresh({
     const splitChunks = config.optimization && config.optimization.splitChunks;
     if (splitChunks) {
       const cacheGroups = splitChunks.cacheGroups;
-      const preactModules = /[\\/]node_modules[\\/](preact|preact-render-to-string|preact-context-provider)[\\/]/;
+      const preactModules =
+        /[\\/]node_modules[\\/](preact|preact-render-to-string|preact-context-provider)[\\/]/;
       if (cacheGroups.framework) {
         cacheGroups.preact = Object.assign({}, cacheGroups.framework, {
           test: preactModules,
@@ -44,7 +57,7 @@ module.exports = withPrefresh({
       config.entry = () =>
         entry().then((entries) => {
           entries["main.js"] = ["preact/debug"].concat(
-            entries["main.js"] || []
+            entries["main.js"] || [],
           );
           return entries;
         });
