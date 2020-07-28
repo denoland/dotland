@@ -6,6 +6,13 @@
     "desc": "A collection of utility functions like arrayToCSV, aperture and many more. Inspired by 30 seconds of code, Fully converted in Typescript.",
     "default_version": "master"
   },
+   "Observe": {
+    "type": "github",
+    "owner": "duart38",
+    "repo": "Observe",
+    "desc": "Type-safe observable values in Deno",
+    "default_version": "master"
+  },
   "a0": {
     "type": "github",
     "owner": "being-curious",
@@ -3754,13 +3761,6 @@
     "owner": "bsunderhus",
     "repo": "deno-observable",
     "desc": "tc39 proposal spec compatible observable",
-    "default_version": "master"
-  },
-  "Observe": {
-    "type": "github",
-    "owner": "duart38",
-    "repo": "Observe",
-    "desc": "Type-safe observable values in Deno",
     "default_version": "master"
   },
   "odds_converter": {
