@@ -15,13 +15,7 @@ export async function handleRequest(event: FetchEvent) {
     url.pathname.startsWith("/x");
 
   if (isRegistryRequest && !isHtml) {
-    const cache = caches.default;
-    let response = await cache.match(request);
-    if (!response) {
-      response = await handleRegistryRequest(url);
-      event.waitUntil(cache.put(request, response));
-    }
-    return response;
+    return handleRegistryRequest(url);
   }
 
   return proxyFile(url, REMOTE_URL, request);

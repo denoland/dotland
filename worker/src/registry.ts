@@ -1,4 +1,7 @@
-import { parseNameVersion, getSourceURL } from "../../util/registry_utils";
+import { parseNameVersion } from "../../util/registry_utils";
+
+const S3_BUCKET =
+  "http://deno-registry-prod-storagebucket-d7uq3yal946u.s3-website-us-east-1.amazonaws.com/";
 
 export async function handleRegistryRequest(url: URL): Promise<Response> {
   console.log("registry request", url.pathname);
@@ -10,28 +13,10 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
       headers: { "content-type": "text/plain" },
     });
   }
-  
-  let response = await fetch(remoteUrl);
-  response = new Response(response.body, response);
-  const originContentType = response.headers.get("content-type");
-  if (
-    response.ok &&
-    (!originContentType || originContentType?.includes("text/plain"))
-  ) {
-    const charset = originContentType?.includes("charset=utf-8")
-      ? "; charset=utf-8"
-      : "";
-    if (url.pathname.endsWith(".js")) {
-      response.headers.set("content-type", `application/javascript${charset}`);
-    } else if (url.pathname.endsWith(".ts")) {
-      response.headers.set("content-type", `application/typescript${charset}`);
-    }
-  }
-
-  response.headers.set("Access-Control-Allow-Origin", "*");
-  response.headers.set("Cache-Control", "max-age=86400");
-
-  return response;
+  const resp = await fetch(remoteUrl, { cf: { cacheEverything: true } });
+  const resp2 = new Response(resp.body, resp);
+  resp2.headers.set("Access-Control-Allow-Origin", "*");
+  return resp2;
 }
 
 export function getRegistrySourceURL(pathname: string): string | undefined {
@@ -46,5 +31,5 @@ export function getRegistrySourceURL(pathname: string): string | undefined {
   const [name, version] = parseNameVersion(nameBranch);
   if (!version) return undefined;
   const path = rest.join("/");
-  return getSourceURL(name, version, "/" + path);
+  return `${S3_BUCKET}${name}/versions/${version}/raw/${path}`;
 }

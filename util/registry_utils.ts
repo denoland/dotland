@@ -1,8 +1,7 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-const S3_BUCKET =
-  "https://deno-registry-prod-storagebucket-d7uq3yal946u.s3.us-east-1.amazonaws.com/";
-const API_ENDPOINT = "https://akoa3109y0.execute-api.us-east-1.amazonaws.com/";
+const CDN_ENDPOINT = "https://cdn.deno.land/";
+const API_ENDPOINT = "https://api.deno.land/";
 
 export interface DirEntry {
   name: string;
@@ -16,7 +15,7 @@ export function getSourceURL(
   version: string,
   path: string,
 ): string {
-  return `${S3_BUCKET}${module}/versions/${version}/raw${path}`;
+  return encodeURI(`${CDN_ENDPOINT}${module}/versions/${version}/raw${path}`);
 }
 
 function pathJoin(...parts: string[]) {
@@ -67,7 +66,7 @@ export async function getVersionMeta(
   module: string,
   version: string,
 ): Promise<VersionMetaInfo | null> {
-  const url = `${S3_BUCKET}${module}/versions/${version}/meta/meta.json`;
+  const url = `${CDN_ENDPOINT}${module}/versions/${version}/meta/meta.json`;
   const res = await fetch(url, {
     headers: {
       accept: "application/json",
@@ -100,7 +99,7 @@ export interface VersionInfo {
 export async function getVersionList(
   module: string,
 ): Promise<VersionInfo | null> {
-  const url = `${S3_BUCKET}${module}/meta/versions.json`;
+  const url = `${CDN_ENDPOINT}${module}/meta/versions.json`;
   const res = await fetch(url, {
     headers: {
       accept: "application/json",
