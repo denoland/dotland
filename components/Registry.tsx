@@ -507,9 +507,11 @@ function DirectoryListing(props: {
                   .sort((a, b) => a.type.localeCompare(b.type))
                   .map((entry, i) => {
                     const href = `${isStd ? "" : "/x"}/[...rest]`;
-                    const as = `${isStd ? "" : "/x"}/${props.name}${
-                      props.version ? `@${props.version}` : ""
-                    }${props.path}/${entry.name}`;
+                    const as = encodeURI(
+                      `${isStd ? "" : "/x"}/${props.name}${
+                        props.version ? `@${props.version}` : ""
+                      }${props.path}/${entry.name}`
+                    );
                     return (
                       <tr
                         key={i}
