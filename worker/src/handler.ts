@@ -10,8 +10,8 @@ export async function handleRequest(request: Request) {
 
   const url = new URL(request.url);
 
-  const isRegistryRequest = url.pathname.startsWith("/std") ||
-    url.pathname.startsWith("/x");
+  const isRegistryRequest =
+    url.pathname.startsWith("/std") || url.pathname.startsWith("/x");
 
   if (isRegistryRequest && !isHtml) {
     return handleRegistryRequest(url);
