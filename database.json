@@ -1,11 +1,4 @@
 {
-  "Observe": {
-    "type": "github",
-    "owner": "duart38",
-    "repo": "Observe",
-    "desc": "Type-safe observable values in Deno",
-    "default_version": "master"
-  },
   "30_seconds_of_typescript": {
     "type": "github",
     "owner": "deepakshrma",
@@ -3761,6 +3754,13 @@
     "owner": "bsunderhus",
     "repo": "deno-observable",
     "desc": "tc39 proposal spec compatible observable",
+    "default_version": "master"
+  },
+  "Observe": {
+    "type": "github",
+    "owner": "duart38",
+    "repo": "Observe",
+    "desc": "Type-safe observable values in Deno",
     "default_version": "master"
   },
   "odds_converter": {
