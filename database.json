@@ -2390,7 +2390,7 @@
     "desc": "Flux Annotated CSV Parser",
     "default_version": "master"
   },
-  "flux-standard-action": {
+  "flux_standard_action": {
     "type": "github",
     "owner": "arsenykruglikov",
     "repo": "flux-standard-action",
