@@ -16,18 +16,6 @@ module.exports = withPrefresh({
           destination: "/benchmarks",
           permanent: true,
         },
-        {
-          source: "/typedoc",
-          destination:
-            "https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts",
-          permanent: true,
-        },
-        {
-          source: "/typedoc/index.html",
-          destination:
-            "https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts",
-          permanent: true,
-        },
       ];
     },
   },
