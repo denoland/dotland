@@ -255,6 +255,7 @@ const Registry = () => {
               <ErrorMessage
                 title="Failed to get directory listing"
                 body={dirEntries.message}
+                repositoryURL={repositoryURL}
               />
             ) : dirEntries !== undefined && dirEntries !== null ? (
               <DirectoryListing
@@ -326,7 +327,7 @@ function WarningMessage(props: { title: string; body: string }) {
   );
 }
 
-function ErrorMessage(props: { title: string; body: string }) {
+function ErrorMessage(props: { title: string; body: string; repositoryURL?: string }) {
   return (
     <div className="rounded-md bg-red-50 border border-red-200 p-4 my-4">
       <div className="flex">
@@ -349,6 +350,7 @@ function ErrorMessage(props: { title: string; body: string }) {
           </h3>
           <div className="mt-2 text-sm leading-5 text-red-700">
             {props.body}
+            {props.repositoryURL && <>You may <a className="link" href={props.repositoryURL}>view it on GitHub</a>.</>}
           </div>
         </div>
       </div>
