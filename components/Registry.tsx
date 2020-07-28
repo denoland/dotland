@@ -103,7 +103,7 @@ const Registry = () => {
       .catch((e) => {
         console.error("Failed to fetch dir entry:", e);
         setDirEntries(new RegistryError(e?.message ?? e.toString()));
-      });
+      }) ?? setDirEntries(null);
   }, [entry, path, version]);
 
   // Fetch versions
