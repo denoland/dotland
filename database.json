@@ -2839,7 +2839,7 @@
     "desc": "Invert key-value pairs in an object",
     "default_version": "master"
   },
-  "investec-openapi": {
+  "investec_openapi": {
     "type": "github",
     "owner": "barrymichaeldoyle",
     "repo": "investec-openapi",
