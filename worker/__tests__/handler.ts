@@ -41,15 +41,6 @@ describe("worker proxying", () => {
     ).toEqual(false);
   });
 
-  it("/typedoc/ responds with typedoc", async () => {
-    const result = await handleRequest(
-      new Request("https://deno.land/typedoc/")
-    );
-    expect(result.headers.get("Content-Type")).toContain("text/html");
-    const text = await result.text();
-    expect(text).toContain("<title>Deno | deno</title>");
-  }, 5000);
-
   it("/std/version.ts with Accept: 'text/html' responds with React html", async () => {
     const result = await handleRequest(
       new Request("https://deno.land/std/version.ts", {
