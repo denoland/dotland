@@ -3650,6 +3650,13 @@
     "desc": "Njalla API wrapper for Deno.",
     "default_version": "master"
   },
+  "nkeys": {
+    "type": "github",
+    "owner": "nats-io",
+    "repo": "nkeys.js",
+    "desc": "A public-key signature system based on Ed25519 for the NATS ecosystem system for JavaScript",
+    "default_version": "main"
+  },
   "nlp": {
     "type": "github",
     "owner": "michael-spengler",
