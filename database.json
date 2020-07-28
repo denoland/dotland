@@ -2839,6 +2839,13 @@
     "desc": "Invert key-value pairs in an object",
     "default_version": "master"
   },
+  "investec-openapi": {
+    "type": "github",
+    "owner": "barrymichaeldoyle",
+    "repo": "investec-openapi",
+    "desc": "A JavaScript/TypeScript wrapper to get up and running fast with Investec's Open API for programmable banking.",
+    "default_version": "master"
+  },
   "ip": {
     "type": "github",
     "owner": "damianperera",
