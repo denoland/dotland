@@ -10,6 +10,13 @@ export async function handleRequest(request: Request) {
 
   const url = new URL(request.url);
 
+  if (url.pathname.startsWith("/typedoc")) {
+    return Response.redirect(
+      "https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts",
+      301
+    );
+  }
+
   const isRegistryRequest =
     url.pathname.startsWith("/std") || url.pathname.startsWith("/x");
 
