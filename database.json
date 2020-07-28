@@ -2397,7 +2397,7 @@
     "desc": "Deno module for food lovers. Leveraging https://world.openfoodfacts.org/ and more.",
     "default_version": "master"
   },
-   "force": {
+  "force": {
     "type": "github",
     "owner": "fakoua",
     "repo": "force",
