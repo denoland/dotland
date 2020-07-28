@@ -17,7 +17,7 @@ module.exports = withPrefresh({
           permanent: true,
         },
         {
-          source: "/typedoc/",
+          source: "/typedoc",
           destination:
             "https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts",
           permanent: true,
