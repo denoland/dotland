@@ -4990,6 +4990,13 @@
     "desc": "Telegram bot API",
     "default_version": "master"
   },
+  "temperature": {
+    "type": "github",
+    "owner": "Snowflake107",
+    "repo": "temperature",
+    "desc": "Simple package for deno to convert temperature.",
+    "default_version": "master"
+  },
   "template": {
     "type": "github",
     "owner": "deno-library",
