@@ -1681,6 +1681,13 @@
     "desc": "Yet another web framework",
     "default_version": "master"
   },
+  "denosh": {
+    "type": "github",
+    "owner": "denosh",
+    "repo": "denosh",
+    "desc": "A deno cli solution",
+    "default_version": "master"
+  },
   "denotrain": {
     "type": "github",
     "owner": "Caesar2011",
