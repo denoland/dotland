@@ -1273,6 +1273,13 @@
     "desc": "A simple deno module which returns marathi dinvishesh",
     "default_version": "master"
   },
+  "deno_dom": {
+    "type": "github",
+    "owner": "b-fuze",
+    "repo": "deno-dom",
+    "desc": "HTML parser with browser compatible DOM API",
+    "default_version": "master"
+  },
   "deno_dotenv": {
     "type": "github",
     "owner": "PodaruDragos",
