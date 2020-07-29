@@ -1659,6 +1659,13 @@
     "desc": "denon is the deno replacement for nodemon providing a feature packed and easy to use experience.",
     "default_version": "master"
   },
+  "denopack": {
+    "type": "github",
+    "owner": "denofn",
+    "repo": "denopack",
+    "desc": "Bundling and minification toolset for Deno",
+    "default_version": "main"
+  },
   "denorand": {
     "type": "github",
     "owner": "hazae41",
