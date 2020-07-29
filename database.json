@@ -1203,6 +1203,13 @@
     "desc": "A secure runtime for JavaScript and TypeScript.",
     "default_version": "master"
   },
+  "deno_adodb": {
+    "type": "github",
+    "owner": "el3um4s",
+    "repo": "deno-adodb",
+    "desc": "A deno.js javascript client implementing the ADODB protocol on windows.",
+    "default_version": "master"
+  },
   "deno_app_setuper": {
     "type": "github",
     "owner": "alreadyExisted",
