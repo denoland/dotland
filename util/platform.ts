@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 export function getOS() {
   const oses = ["mac", "linux", "win"] as const;
   const os = oses.find(
-    (v) => navigator.userAgent.toLowerCase().indexOf(v) >= 0,
+    (v) => navigator.userAgent.toLowerCase().indexOf(v) >= 0
   );
   return os === undefined ? null : os;
 }
