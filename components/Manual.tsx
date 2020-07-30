@@ -373,7 +373,7 @@ function Manual() {
                     </svg>
                   </a>
                   <Markdown
-                    source={content.replace(/__STD_VERSION__/g, stdVersion)}
+                    source={content.replace(/$STD_VERSION/g, stdVersion)}
                     displayURL={location.origin + "/manual" + path}
                     sourceURL={sourceURL}
                   />
