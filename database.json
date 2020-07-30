@@ -5359,6 +5359,13 @@
     "desc": "Manipulate the HTTP Vary header for Deno",
     "default_version": "master"
   },
+  "velo": {
+    "type": "github",
+    "owner": "velo-org",
+    "repo": "velo",
+    "desc": "Performant caching library for deno. Supports LRU, LFU, ARC and other policies",
+    "default_version": "master"
+  },
   "velociraptor": {
     "type": "github",
     "owner": "umbopepato",
