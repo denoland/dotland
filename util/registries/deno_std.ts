@@ -3,7 +3,7 @@
 import { Entry, DirEntry, DatabaseEntry } from "../registries";
 import { GithubEntry } from "./github";
 
-import stdVersions from "../../deno_std_versions.json";
+import versions from "../../versions.json";
 
 export interface DenoStdDatabaseEntry extends DatabaseEntry {
   type: "deno_std";
@@ -55,7 +55,7 @@ export class DenoStdEntry implements Entry {
     );
   }
   async getVersionList(): Promise<string[] | null> {
-    return stdVersions;
+    return versions.std;
   }
   getDefaultVersion(): string {
     return stdEntry.getDefaultVersion();
