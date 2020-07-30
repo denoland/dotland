@@ -1,7 +1,7 @@
 import { DenoStdEntry, DenoStdDatabaseEntry } from "./deno_std";
 import "isomorphic-unfetch";
 
-import denoStdVersions from "../../deno_std_versions.json";
+import denoVersions from "../../versions.json";
 
 /* eslint-env jest */
 
@@ -60,5 +60,5 @@ test("repo url with empty path", () => {
 });
 
 test("version list", async () => {
-  expect(await testEntry.getVersionList()).toEqual(denoStdVersions);
+  expect(await testEntry.getVersionList()).toEqual(denoVersions.std);
 });

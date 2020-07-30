@@ -6,7 +6,7 @@ import Link from "next/link";
 import CodeBlock from "../components/CodeBlock";
 import Footer from "../components/Footer";
 import { entries } from "../util/registry_utils";
-import stdVersions from "../deno_std_versions.json";
+import versions from "../versions.json";
 import { NextPage, GetStaticProps } from "next";
 import InlineCode from "../components/InlineCode";
 import Header from "../components/Header";
@@ -388,7 +388,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
         thirdPartyEntries,
         POOL_NUM_THIRD_PARTY
       ),
-      latestStd: stdVersions[0],
+      latestStd: versions.std[0],
     },
   };
 };

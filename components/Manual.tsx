@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter, Router } from "next/router";
+import versionMeta from "../versions.json";
 import { parseNameVersion, findEntry } from "../util/registry_utils";
 import {
   TableOfContents,
@@ -162,6 +163,11 @@ function Manual() {
     );
   }
 
+  const stdVersion =
+    version === ""
+      ? (versionMeta.cli_to_std as any)[versionMeta.std[0]]
+      : ((versionMeta.cli_to_std as any)[version ?? ""] as string) ?? version;
+
   return (
     <div>
       <Head>
@@ -219,7 +225,7 @@ function Manual() {
                   </div>
                   <div className="bg-gray-100 pb-4 pt-4 border-b border-gray-200">
                     <Link href="/">
-                      <a className="block flex items-center flex-shrink-0 px-4">
+                      <a className="flex items-center flex-shrink-0 px-4">
                         <img
                           src="/logo.svg"
                           alt="logo"
@@ -258,7 +264,7 @@ function Manual() {
           <div className="flex flex-col w-72 border-r border-gray-200 bg-gray-50">
             <div className="bg-gray-100 pb-4 pt-4 border-b border-gray-200">
               <Link href="/">
-                <a className="block flex items-center flex-shrink-0 px-4">
+                <a className="flex items-center flex-shrink-0 px-4">
                   <img src="/logo.svg" alt="logo" className="w-auto h-12" />
                   <div className="mx-4 flex flex-col justify-center">
                     <div className="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
@@ -367,7 +373,7 @@ function Manual() {
                     </svg>
                   </a>
                   <Markdown
-                    source={content}
+                    source={content.replace(/$STD_VERSION/g, stdVersion)}
                     displayURL={location.origin + "/manual" + path}
                     sourceURL={sourceURL}
                   />
@@ -481,7 +487,7 @@ function ToC({
 }) {
   return (
     <div className="pt-2 pb-8 h-0 flex-1 flex flex-col overflow-y-auto">
-      <nav className="flex-1 px-2 px-4">
+      <nav className="flex-1 px-4">
         <ol className="pl-2 list-decimal list-inside font-semibold nested">
           {tableOfContents &&
             Object.entries(tableOfContents).map(([slug, entry]) => {
