@@ -3504,6 +3504,13 @@
     "desc": "This library makes integrating MongoDB in your project easy.",
     "default_version": "master"
   },
+  "monitoring": {
+    "type": "github",
+    "owner": "michael-spengler",
+    "repo": "monitoring",
+    "desc": "Deno Module for Availability Monitoring - Sending Notifications via Telegram.",
+    "default_version": "master"
+  },
   "mqtt": {
     "type": "github",
     "owner": "jdiamond",
