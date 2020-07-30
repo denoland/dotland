@@ -164,7 +164,7 @@ function Manual() {
   }
 
   const stdVersion =
-    version === "master"
+    version === ""
       ? (versionMeta.cli_to_std as any)[versionMeta.std[0]]
       : ((versionMeta.cli_to_std as any)[version ?? ""] as string) ?? version;
 
