@@ -5551,6 +5551,13 @@
     "desc": "WebAssembly module to parse YAML",
     "default_version": "master"
   },
+  "yargs_parser": {
+    "type": "github",
+    "owner": "yargs",
+    "repo": "yargs-parser",
+    "desc": "💪the mighty option parser used by yargs",
+    "default_version": "deno"
+  },
   "yeswehack": {
     "type": "github",
     "owner": "tchenu",
