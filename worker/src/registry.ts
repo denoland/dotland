@@ -1,5 +1,4 @@
 import { parseNameVersion } from "../../util/registry_utils";
-import { version } from "punycode";
 
 const S3_BUCKET =
   "http://deno-registry-prod-storagebucket-d7uq3yal946u.s3-website-us-east-1.amazonaws.com/";
