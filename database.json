@@ -4100,6 +4100,13 @@
     "desc": "process module for Deno",
     "default_version": "master"
   },
+  "program": {
+    "type": "github",
+    "owner": "timreichen",
+    "repo": "program",
+    "desc": "cli generator for deno",
+    "default_version": "master"
+  },
   "progress": {
     "type": "github",
     "owner": "deno-library",
