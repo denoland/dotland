@@ -5123,6 +5123,13 @@
     "desc": "Package management for deno like npm",
     "default_version": "master"
   },
+  "triggercd": {
+    "type": "github",
+    "owner": "SirJosh3917",
+    "repo": "TriggerCD",
+    "desc": "Setup Continuous Deployment. Now. No abstract congfig, just shell scripts.",
+    "default_version": "master"
+  },
   "troodon": {
     "type": "github",
     "owner": "shandysiswandi",
