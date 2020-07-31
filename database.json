@@ -4104,7 +4104,7 @@
     "type": "github",
     "owner": "timreichen",
     "repo": "program",
-    "desc": "cli generator for deno",
+    "desc": "cli for deno programs",
     "default_version": "master"
   },
   "progress": {
