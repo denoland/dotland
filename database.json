@@ -753,7 +753,7 @@
   },
   "commands": {
     "type": "github",
-    "owner": "buttercubz",
+    "owner": "crewdevio",
     "repo": "Commands",
     "desc": "Create commands shortcuts for Deno",
     "default_version": "master"
