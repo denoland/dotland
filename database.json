@@ -793,6 +793,13 @@
     "desc": "Load dotfiles / modules for a project consistently",
     "default_version": "master"
   },
+  "consistent_task_dispatcher": {
+    "type": "github",
+    "owner": "10yung",
+    "repo": "consistent_task_dispatcher",
+    "desc": "Consistent dispatch tasks to servers with consistent hashing",
+    "default_version": "master"
+  },
   "console_bark": {
     "type": "github",
     "owner": "Jack5079",
