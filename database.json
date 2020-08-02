@@ -597,6 +597,13 @@
     "desc": "Busca por CEP integrado diretamente ao serviço do ViaCEP (Deno)",
     "default_version": "master"
   },
+  "cfg": {
+    "type": "github",
+    "owner": "ymonb1291",
+    "repo": "cfg",
+    "desc": "Configuration handler for deno with support for .env and scopes",
+    "default_version": "master"
+  },
   "chacha20": {
     "type": "github",
     "owner": "chiefbiiko",
