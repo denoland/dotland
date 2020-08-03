@@ -2,21 +2,6 @@
   "title": "Updates to deno.land/x",
   "author": "Luca Casonato",
   "publish_date": "2020-08-03T13:00:00.000Z",
-  "images": [
-    {
-      "image": "/v1_wide.jpg",
-      "width": 2000,
-      "height": 1024,
-      "className": "hidden md:block",
-      "preview": false
-    },
-    {
-      "image": "/v1.jpg",
-      "width": 1366,
-      "height": 1024,
-      "className": "block md:hidden",
-      "preview": true
-    }
-  ],
-  "snippet": "Dynamic languages are useful tools. Scripting allows users to rapidly and succinctly tie together complex systems and express ideas without worrying about details like memory management or build systems."
+  "images": [],
+  "snippet": "Since the beginning the goal for deno.land/x is to give all modules in the Deno ecosystem a reliable, easy to use, and free host. With the increased adoption of Deno in the recent month there have been more and more requests to add features like download counts, immutable versions, and a self service module upload."
 }
