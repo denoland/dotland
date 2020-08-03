@@ -225,16 +225,16 @@ for await (const req of s) {
             </Link>
             .
           </p>
-          <p className="my-4 text-gray-700">
+          {/* <p className="my-4 text-gray-700">
             Here is a random selection of the modules that are currently
             available on{" "}
             <Link href="/x">
               <a className="link">deno.land/x</a>
             </Link>
             :
-          </p>
+          </p> */}
         </div>
-        <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 my-8">
+        {/* <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 my-8">
           {thirdPartySelection?.map((s, i) => (
             <Link key={i} href="/x/[...rest]" as={`/x/${s.name}`}>
               <a
@@ -257,7 +257,7 @@ for await (const req of s) {
               </a>
             </Link>
           ))}
-        </div>
+        </div> */}
         <div className="mt-20">
           <Footer simple />
         </div>

@@ -21,16 +21,20 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
         {
           status: 404,
           headers: { "content-type": "text/plain" },
-        },
+        }
       );
     }
     console.log("registry redirect", module, latest);
-    return Response.redirect(
-      (`${url.origin}${
-        module === "std" ? "" : "/x"
-      }/${module}@${latest}/${path}`),
-      302,
-    );
+    const resp = new Response(undefined, {
+      headers: {
+        Location: `${module === "std" ? "" : "/x"}/${module}@${latest}/${path}`,
+        "x-deno-warning": `Implicitly using latest version (${latest}) for ${
+          url.origin
+        }${module === "std" ? "" : "/x"}/${module}/${path}`,
+      },
+      status: 302,
+    });
+    return resp;
   }
   const remoteUrl = getBackingURL(module, version, path);
   const resp = await fetch(remoteUrl, { cf: { cacheEverything: true } });
@@ -40,7 +44,7 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
 }
 
 export function parsePathname(
-  pathname: string,
+  pathname: string
 ): { module: string; version: string | undefined; path: string } | undefined {
   if (pathname.startsWith("/std")) {
     return parsePathname("/x" + pathname);
@@ -60,7 +64,7 @@ export function getBackingURL(module: string, version: string, path: string) {
 }
 
 export async function getLatestVersion(
-  module: string,
+  module: string
 ): Promise<string | undefined> {
   const res = await fetch(`${S3_BUCKET}${module}/meta/versions.json`);
   if (!res.ok) return undefined;
