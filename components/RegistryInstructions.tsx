@@ -13,6 +13,9 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
   // Name of the module to be registered
   const [moduleName, setModuleName] = useState("");
 
+  // Subdirectory where the repository is located
+  const [subdirectory, setSubdirectory] = useState("");
+
   // Validity of the module name
   const isModuleNameValid = useMemo(() => VALID_NAME.test(moduleName), [
     moduleName,
@@ -185,7 +188,7 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                                 ? "text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50"
                                 : "text-gray-400 bg-gray-50 cursor-default"
                             } focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out`}
-                            onClick={() => setStage(3)}
+                            onClick={() => setStage(2)}
                           >
                             Next
                           </button>
@@ -197,8 +200,25 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                     )}
                     {stage === 2 && (
                       <>
-                        <p>There are some advanced options you can select:</p>
-                        <span className="block w-full rounded-md shadow-sm">
+                        <p>There are some more optional settings to set up:</p>
+                        <div className="mt-2">
+                          <label htmlFor="subdirectory" className="font-medium">
+                            Subdirectory
+                          </label>
+                          <input
+                            id="subdirectory"
+                            className={`block w-full px-4 py-2 my-1 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1`}
+                            type="text"
+                            placeholder="Subdirectory"
+                            value={subdirectory}
+                            onChange={(e) => setSubdirectory(e.target.value)}
+                          />
+                          <span className="text-gray-500">
+                            Optional. A subdirectory in your repository that the
+                            module to be published is located in.
+                          </span>
+                        </div>
+                        <span className="block w-full rounded-md shadow-sm mt-2">
                           <button
                             type="submit"
                             className="w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
@@ -231,6 +251,9 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                             Enter the URL{" "}
                             <InlineCode>
                               https://api.deno.land/webhook/gh/{moduleName}
+                              {subdirectory
+                                ? `?subdir=${encodeURIComponent(subdirectory)}`
+                                : ""}
                             </InlineCode>{" "}
                             in the payload URL field.
                           </li>
@@ -284,7 +307,7 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                             </>
                           )}
                         </div>
-                        <button className="link" onClick={() => setStage(1)}>
+                        <button className="link" onClick={() => setStage(2)}>
                           Previous
                         </button>
                       </>
