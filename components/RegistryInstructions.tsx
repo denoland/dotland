@@ -4,7 +4,7 @@ import Transition from "./Transition";
 import InlineCode from "./InlineCode";
 import { getVersionList } from "../util/registry_utils";
 
-const VALID_NAME = /^[A-Za-z0-9_]{3,40}$/;
+const VALID_NAME = /^[a-z0-9_]{3,40}$/;
 
 function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
   // Stage of the instructions
