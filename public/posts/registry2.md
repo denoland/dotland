@@ -43,8 +43,8 @@ If you are the **author of a module**, there are a few things you need to do:
 2. If you do not have any Git tags in your repository, please create a tag. Only
    tagged versions are published on deno.land/x.
 
-We will remove all modules that don't publish a tag within 30 days of publishing
-a release.
+We will remove all modules that don't publish a tag within 30 days of adding the
+webhook.
 
 ## Future plans
 
