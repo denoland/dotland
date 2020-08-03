@@ -91,7 +91,7 @@ const Registry = () => {
 
   // If std version starts with v, redirect to version without v
   useEffect(() => {
-    if (version.startsWith("v") && name === "std") {
+    if (version && version.startsWith("v") && name === "std") {
       gotoVersion(version.substring(1), true);
     }
   }, [name, version]);
