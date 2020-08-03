@@ -20,7 +20,7 @@ function Manual() {
     const [identifier, ...pathParts] = (query.rest as string[]) ?? [];
     const path = pathParts.length === 0 ? "" : `/${pathParts.join("/")}`;
     const [_, version] = parseNameVersion(identifier ?? "");
-    return { version, path };
+    return { version, path: path || "/introduction" };
   }, [query]);
 
   if (path.endsWith(".md")) {
