@@ -1,6 +1,6 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Head from "next/head";
 import Link from "next/link";
 import CodeBlock from "../components/CodeBlock";
@@ -10,21 +10,20 @@ import { NextPage, GetStaticProps } from "next";
 import InlineCode from "../components/InlineCode";
 import Header from "../components/Header";
 
-const entries: { [key: string]: any } = {};
+// interface SimpleEntry {
+//   name: string;
+//   desc: string;
+// }
 
-interface SimpleEntry {
-  name: string;
-  desc: string;
-}
 interface HomeProps {
-  thirdPartyEntryPool: SimpleEntry[];
+  // thirdPartyEntryPool: SimpleEntry[];
   latestStd: string;
 }
 
-const NUM_THIRD_PARTY = 12;
-const POOL_NUM_THIRD_PARTY = 50;
+// const NUM_THIRD_PARTY = 12;
+// const POOL_NUM_THIRD_PARTY = 50;
 
-const Home: NextPage<HomeProps> = ({ thirdPartyEntryPool, latestStd }) => {
+const Home: NextPage<HomeProps> = ({ /* thirdPartyEntryPool ,*/ latestStd }) => {
   const complexExampleProgram = `import { serve } from "https://deno.land/std@${latestStd}/http/server.ts";
 const s = serve({ port: 8000 });
 console.log("http://localhost:8000/");
@@ -32,14 +31,14 @@ for await (const req of s) {
   req.respond({ body: "Hello World\\n" });
 }`;
 
-  const [thirdPartySelection, setThirdPartySelection] = useState<
-    SimpleEntry[] | null
-  >(null);
-  useEffect(() => {
-    setThirdPartySelection(
-      RandomEntriesFromArray(thirdPartyEntryPool, NUM_THIRD_PARTY)
-    );
-  }, []);
+  // const [thirdPartySelection, setThirdPartySelection] = useState<
+  //   SimpleEntry[] | null
+  // >(null);
+  // useEffect(() => {
+  //   setThirdPartySelection(
+  //     RandomEntriesFromArray(thirdPartyEntryPool, NUM_THIRD_PARTY)
+  //   );
+  // }, []);
 
   return (
     <>
@@ -352,43 +351,43 @@ const InstallSection = () => {
   );
 };
 
-const RandomEntriesFromArray = (sourceArray: SimpleEntry[], count: number) => {
-  const source = sourceArray;
-  const selection = [];
+// const RandomEntriesFromArray = (sourceArray: SimpleEntry[], count: number) => {
+//   const source = sourceArray;
+//   const selection = [];
 
-  for (let i = 0; i < Math.min(count, source.length); i++) {
-    const s = Math.floor(sourceArray.length * Math.random());
-    selection.push(sourceArray[s]);
-    source.splice(s, 1);
-  }
+//   for (let i = 0; i < Math.min(count, source.length); i++) {
+//     const s = Math.floor(sourceArray.length * Math.random());
+//     selection.push(sourceArray[s]);
+//     source.splice(s, 1);
+//   }
 
-  return selection;
-};
+//   return selection;
+// };
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-  const thirdPartyEntries: SimpleEntry[] = [];
+  // const thirdPartyEntries: SimpleEntry[] = [];
 
-  Object.keys(entries).forEach((name) => {
-    const entry = entries[name];
-    if (
-      entry &&
-      entry.desc.length >= 10 &&
-      name !== "std" &&
-      name !== "std_old"
-    ) {
-      thirdPartyEntries.push({
-        name,
-        desc: entry.desc,
-      });
-    }
-  });
+  // Object.keys(entries).forEach((name) => {
+  //   const entry = entries[name];
+  //   if (
+  //     entry &&
+  //     entry.desc.length >= 10 &&
+  //     name !== "std" &&
+  //     name !== "std_old"
+  //   ) {
+  //     thirdPartyEntries.push({
+  //       name,
+  //       desc: entry.desc,
+  //     });
+  //   }
+  // });
 
   return {
     props: {
-      thirdPartyEntryPool: RandomEntriesFromArray(
-        thirdPartyEntries,
-        POOL_NUM_THIRD_PARTY
-      ),
+      // thirdPartyEntryPool: RandomEntriesFromArray(
+      //   thirdPartyEntries,
+      //   POOL_NUM_THIRD_PARTY
+      // ),
       latestStd: versions.std[0],
     },
   };
