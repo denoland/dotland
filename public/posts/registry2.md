@@ -25,8 +25,8 @@ integrated into your repository, will save an immutable version of any git tags.
 - Publishing modules works through a Webhook now, rather than by opening a PR on
   the deno_website2 repository.
 - You can not import from arbitrary commits or branches anymore, only tags /
-  releases. Example: `https://deno.land/std@master` will not work anymore, only
-  versioned URLs like `https://deno.land/std@0.63.0`.
+  releases. Example: `https://deno.land/std@BRANCH` will not work anymore, only
+  tagged commits like `https://deno.land/std@0.63.0`.
 - All files served from the registry are immutable. They can not be changed or
   removed by the package author.
 
