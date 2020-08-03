@@ -5228,6 +5228,13 @@
     "desc": "Update Deno Dependencies to their latest published versions",
     "default_version": "master"
   },
+  "udibo_collections": {
+    "type": "github",
+    "owner": "udibo",
+    "repo": "collections",
+    "desc": "This module provides implementations of collection objects that are not standard built-in objects in JavaScript.",
+    "default_version": "master"
+  },
   "unexpected": {
     "type": "npm",
     "package": "unexpected",
