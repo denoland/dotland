@@ -31,7 +31,7 @@ module.exports = {
     content: [
       "./components/**/*.tsx",
       "./pages/**/*.tsx",
-      "./static/posts/*.json",
+      "./public/posts/*.json",
     ],
   },
 };
