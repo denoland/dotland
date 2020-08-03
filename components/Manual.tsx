@@ -20,7 +20,7 @@ function Manual() {
     const [identifier, ...pathParts] = (query.rest as string[]) ?? [];
     const path = pathParts.length === 0 ? "" : `/${pathParts.join("/")}`;
     const [_, version] = parseNameVersion(identifier ?? "");
-    return { version, path };
+    return { version, path: path || "/introduction" };
   }, [query]);
 
   if (path.endsWith(".md")) {
@@ -53,7 +53,7 @@ function Manual() {
       Router.events.off("routeChangeStart", hideSidebar);
       Router.events.off("routeChangeComplete", handleRouteChange);
     };
-  });
+  }, []);
 
   const scrollTOCIntoView = () =>
     document.getElementsByClassName("toc-active")[0]?.scrollIntoView();
@@ -90,7 +90,7 @@ function Manual() {
     if (tableOfContents) {
       const tempList: Array<{ path: string; name: string }> = [];
 
-      Object.entries(tableOfContents).map(([slug, entry]) => {
+      Object.entries(tableOfContents).forEach(([slug, entry]) => {
         tempList.push({ path: `/manual/${slug}`, name: entry.name });
 
         if (entry.children) {
@@ -354,20 +354,24 @@ function Manual() {
                     sourceURL={sourceURL}
                   />
                   <div className="pt-4 border-t border-gray-200">
-                    {pageIndex !== 0 && (
+                    {pageIndex !== 0 && pageList[pageIndex - 1] !== undefined && (
                       <Link href="/[...rest]" as={pageList[pageIndex - 1].path}>
                         <a className="text-gray-900 hover:text-gray-600 font-normal">
                           ← {pageList[pageIndex - 1].name}
                         </a>
                       </Link>
                     )}
-                    {pageIndex !== pageList.length - 1 && (
-                      <Link href="/[...rest]" as={pageList[pageIndex + 1].path}>
-                        <a className="text-gray-900 hover:text-gray-600 font-normal float-right">
-                          {pageList[pageIndex + 1].name} →
-                        </a>
-                      </Link>
-                    )}
+                    {pageIndex !== pageList.length - 1 &&
+                      pageList[pageIndex + 1] !== undefined && (
+                        <Link
+                          href="/[...rest]"
+                          as={pageList[pageIndex + 1].path}
+                        >
+                          <a className="text-gray-900 hover:text-gray-600 font-normal float-right">
+                            {pageList[pageIndex + 1].name} →
+                          </a>
+                        </Link>
+                      )}
                   </div>
                 </>
               ) : (
