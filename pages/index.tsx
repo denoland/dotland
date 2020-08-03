@@ -10,37 +10,17 @@ import { NextPage, GetStaticProps } from "next";
 import InlineCode from "../components/InlineCode";
 import Header from "../components/Header";
 
-// interface SimpleEntry {
-//   name: string;
-//   desc: string;
-// }
-
 interface HomeProps {
-  // thirdPartyEntryPool: SimpleEntry[];
   latestStd: string;
 }
 
-// const NUM_THIRD_PARTY = 12;
-// const POOL_NUM_THIRD_PARTY = 50;
-
-const Home: NextPage<HomeProps> = ({
-  /* thirdPartyEntryPool ,*/ latestStd,
-}) => {
+const Home: NextPage<HomeProps> = ({ latestStd }) => {
   const complexExampleProgram = `import { serve } from "https://deno.land/std@${latestStd}/http/server.ts";
 const s = serve({ port: 8000 });
 console.log("http://localhost:8000/");
 for await (const req of s) {
   req.respond({ body: "Hello World\\n" });
 }`;
-
-  // const [thirdPartySelection, setThirdPartySelection] = useState<
-  //   SimpleEntry[] | null
-  // >(null);
-  // useEffect(() => {
-  //   setThirdPartySelection(
-  //     RandomEntriesFromArray(thirdPartyEntryPool, NUM_THIRD_PARTY)
-  //   );
-  // }, []);
 
   return (
     <>
@@ -226,39 +206,7 @@ for await (const req of s) {
             </Link>
             .
           </p>
-          {/* <p className="my-4 text-gray-700">
-            Here is a random selection of the modules that are currently
-            available on{" "}
-            <Link href="/x">
-              <a className="link">deno.land/x</a>
-            </Link>
-            :
-          </p> */}
         </div>
-        {/* <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 my-8">
-          {thirdPartySelection?.map((s, i) => (
-            <Link key={i} href="/x/[...rest]" as={`/x/${s.name}`}>
-              <a
-                className="rounded-lg bg-white shadow border border-gray-100 p-4 overflow-hidden hover:shadow-sm transition duration-75 ease-in-out cursor-pointer  "
-                key={i}
-              >
-                <h4 className="text-lg font-bold">{s.name}</h4>
-                <p
-                  className="whitespace-normal break-words text-gray-700 mt-2 overflow-hidden"
-                  style={{
-                    textOverflow: "ellipsis",
-                    minHeight: "4.5em",
-                    WebkitLineClamp: 3,
-                    WebkitBoxOrient: "vertical",
-                    display: "-webkit-box",
-                  }}
-                >
-                  {s.desc}
-                </p>
-              </a>
-            </Link>
-          ))}
-        </div> */}
         <div className="mt-20">
           <Footer simple />
         </div>
@@ -353,43 +301,9 @@ const InstallSection = () => {
   );
 };
 
-// const RandomEntriesFromArray = (sourceArray: SimpleEntry[], count: number) => {
-//   const source = sourceArray;
-//   const selection = [];
-
-//   for (let i = 0; i < Math.min(count, source.length); i++) {
-//     const s = Math.floor(sourceArray.length * Math.random());
-//     selection.push(sourceArray[s]);
-//     source.splice(s, 1);
-//   }
-
-//   return selection;
-// };
-
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-  // const thirdPartyEntries: SimpleEntry[] = [];
-
-  // Object.keys(entries).forEach((name) => {
-  //   const entry = entries[name];
-  //   if (
-  //     entry &&
-  //     entry.desc.length >= 10 &&
-  //     name !== "std" &&
-  //     name !== "std_old"
-  //   ) {
-  //     thirdPartyEntries.push({
-  //       name,
-  //       desc: entry.desc,
-  //     });
-  //   }
-  // });
-
   return {
     props: {
-      // thirdPartyEntryPool: RandomEntriesFromArray(
-      //   thirdPartyEntries,
-      //   POOL_NUM_THIRD_PARTY
-      // ),
       latestStd: versions.std[0],
     },
   };
