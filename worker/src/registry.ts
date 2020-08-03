@@ -21,20 +21,33 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
         {
           status: 404,
           headers: { "content-type": "text/plain" },
-        }
+        },
       );
     }
     console.log("registry redirect", module, latest);
-    const resp = new Response(undefined, {
+    return new Response(undefined, {
       headers: {
         Location: `${module === "std" ? "" : "/x"}/${module}@${latest}/${path}`,
-        "x-deno-warning": `Implicitly using latest version (${latest}) for ${
-          url.origin
-        }${module === "std" ? "" : "/x"}/${module}/${path}`,
+        "x-deno-warning":
+          `Implicitly using latest version (${latest}) for ${url.origin}${
+            module === "std" ? "" : "/x"
+          }/${module}/${path}`,
       },
       status: 302,
     });
-    return resp;
+  }
+  if (version.startsWith("v") && module === "std") {
+    console.log("std version prefix", module, version);
+    return new Response(undefined, {
+      headers: {
+        Location: `/std@${version.substring(1)}/${path}`,
+        // "x-deno-warning":
+        //   `Implicitly using latest version (${latest}) for ${url.origin}${
+        //     module === "std" ? "" : "/x"
+        //   }/${module}/${path}`,
+      },
+      status: 302,
+    });
   }
   const remoteUrl = getBackingURL(module, version, path);
   // @ts-ignore
@@ -45,7 +58,7 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
 }
 
 export function parsePathname(
-  pathname: string
+  pathname: string,
 ): { module: string; version: string | undefined; path: string } | undefined {
   if (pathname.startsWith("/std")) {
     return parsePathname("/x" + pathname);
@@ -65,7 +78,7 @@ export function getBackingURL(module: string, version: string, path: string) {
 }
 
 export async function getLatestVersion(
-  module: string
+  module: string,
 ): Promise<string | undefined> {
   const res = await fetch(`${S3_BUCKET}${module}/meta/versions.json`);
   if (!res.ok) return undefined;
