@@ -1,5 +1,3 @@
-# Updates to deno.land/x
-
 Since the beginning the goal for deno.land/x is to give all modules in the Deno
 ecosystem a reliable, easy to use, and free host. With the increased adoption of
 Deno in the recent month there have been more and more requests to add features
@@ -8,7 +6,7 @@ like download counts, immutable versions, and a self service module upload.
 We also have some long standing issues like rate limits on the GitHub API that
 we use, and `https://deno.land/std` being an alias to
 `https://deno.land/std@master` rather than the latest version. These were issues
-we could not adress without a redesign deno.land/x.
+we could not adress without a redesign of deno.land/x.
 
 ## Issues to solve
 
