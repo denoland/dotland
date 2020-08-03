@@ -30,7 +30,7 @@ interface Props {
   posts: PostMeta[];
 }
 
-const NewsIndexPage = (props: Props) => {
+const PostsIndexPage = (props: Props) => {
   return (
     <>
       <Head>
@@ -89,11 +89,11 @@ const NewsIndexPage = (props: Props) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const dir = await promises.readdir("./public/news");
+  const dir = await promises.readdir("./public/posts");
   const postIds = dir.filter((name) => name.endsWith(".json"));
   const posts = await Promise.all(
     postIds.map(async (name) => {
-      const file = await promises.readFile(join("./public/news", name), {
+      const file = await promises.readFile(join("./public/posts", name), {
         encoding: "utf8",
       });
       return { ...JSON.parse(file), id: name.replace(/\.json$/, "") };
@@ -104,4 +104,4 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   };
 };
 
-export default NewsIndexPage;
+export default PostsIndexPage;
