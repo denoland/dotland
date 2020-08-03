@@ -29,7 +29,7 @@ interface Props {
   };
 }
 
-const BlogArticlePage = (props: Props) => {
+const NewsPostPage = (props: Props) => {
   const date = new Date(props.meta.publish_date);
   const format = new Intl.DateTimeFormat(undefined, {
     month: "long",
@@ -57,7 +57,7 @@ const BlogArticlePage = (props: Props) => {
         </div>
       </div>
       <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 py-8 mb-16">
-        <Link href="/blog">
+        <Link href="/posts">
           <a className="link">&lt;- Back to overview</a>
         </Link>
 
@@ -71,8 +71,8 @@ const BlogArticlePage = (props: Props) => {
         <div className="mt-8">
           <Markdown
             source={props.markdown}
-            displayURL={`https://deno.land/blog/${props.meta.id}`}
-            sourceURL={`https://deno.land/blog/${props.meta.id}.md`}
+            displayURL={`https://deno.land/posts/${props.meta.id}`}
+            sourceURL={`https://deno.land/posts/${props.meta.id}.md`}
           />
         </div>
       </div>
@@ -82,28 +82,28 @@ const BlogArticlePage = (props: Props) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const dir = await fs.readdir("./public/blog");
-  const articleIds = dir.filter((name) => name.endsWith(".json"));
-  const paths = articleIds.map((id) => ({
-    params: { article: id.replace(/\.json$/, "") },
+  const dir = await fs.readdir("./public/news");
+  const postIds = dir.filter((name) => name.endsWith(".json"));
+  const paths = postIds.map((id) => ({
+    params: { post: id.replace(/\.json$/, "") },
   }));
   return { paths, fallback: false };
 };
 
 export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
-  const article = ctx.params!.article;
-  const markdown = await fs.readFile(join("./public/blog", article + ".md"), {
+  const post = ctx.params!.post;
+  const markdown = await fs.readFile(join("./public/news", post + ".md"), {
     encoding: "utf8",
   });
-  const meta = await fs.readFile(join("./public/blog", article + ".json"), {
+  const meta = await fs.readFile(join("./public/news", post + ".json"), {
     encoding: "utf8",
   });
   return {
     props: {
       markdown,
-      meta: { ...JSON.parse(meta), id: article },
+      meta: { ...JSON.parse(meta), id: post },
     },
   };
 };
 
-export default BlogArticlePage;
+export default NewsPostPage;

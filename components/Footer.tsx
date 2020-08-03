@@ -53,9 +53,9 @@ const Footer = (props: { simple?: boolean }) => (
           </Link>
         </div>
         <div className="px-5 py-2">
-          <Link href="/blog">
+          <Link href="/posts">
             <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-              Blog
+              News
             </a>
           </Link>
         </div>
