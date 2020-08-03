@@ -5233,6 +5233,13 @@
     "package": "unexpected",
     "desc": "Extensible BDD assertion toolkit"
   },
+  "uniqueString": {
+    "type": "github",
+    "owner": "moncefplastin07",
+    "repo": "unique-string",
+    "desc": "unique&random string or ID's for Deno",
+    "default_version": "master"
+  },
   "unrar": {
     "type": "github",
     "owner": "deno-library",
