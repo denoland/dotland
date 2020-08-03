@@ -1,33 +1,29 @@
-Since the beginning the goal for deno.land/x has been to give all modules in the
-Deno ecosystem a reliable, easy to use, and free host. With the increased
-adoption of Deno in the recent month there have been more and more requests to
-add features like download counts, immutable versions, and a self service module
-upload.
+The goal of deno.land/x has been to provide a central location for third party
+Deno modules consistant with how Deno operates. We want people to be able to
+copy and paste source code URLs like https://deno.land/x/oak/mod.ts directly
+into the browser and be able to view marked up source code and have links to
+auto-generated documentation.
 
-We also have some long standing issues like rate limits on the GitHub API that
-we use, and `https://deno.land/std` being an alias to
-`https://deno.land/std@master` rather than the latest version. These were issues
-we could not adress without a redesign of deno.land/x.
+Today we are releasing a major rewrite of the deno.land/x service that solves
+some long standing issues like rate limits on the GitHub API and providing
+immutable source code downloads (like on crates.io).
 
-## Issues to solve
+## Goals
 
-The main issues we wanted to address in this first stage were:
+- make all source code links immutable
+- remove the GitHub API rate limits on the website
+- remove non versioned imports
+- remove the need to manually update database.json to add modules
 
-- making module upload self service
-- making all versions immutable
-- removing non versioned imports
-- and removing the GitHub API rate limits on the website
-
-To do this we setteled on a design where all source code is stored our servers,
-and we retrieve a new version from GitHub whenever it is published. We get
-notified of this by a GitHub Webhook you add to your repository.
+To do this we settled on a design where we provide a webhook, which when
+integrated into your repository, will save an immutable version of any git tags.
 
 ## What has changed?
 
-- Source code is no longer stored on raw.githubusercontent.com but rather on our
-  own servers.
-- Publishing modules works through a GitHub Webhook now, rather than by opening
-  a PR on the deno_website2 repository.
+- Source code is no longer fetched from raw.githubusercontent.com but rather
+  from our S3 bucket, where we can preserve it forever.
+- Publishing modules works through a Webhook now, rather than by opening a PR on
+  the deno_website2 repository.
 - You can not import from arbitrary commits or branches anymore, only tags /
   releases. Example: `https://deno.land/std@master` will not work anymore, only
   versioned URLs like `https://deno.land/std@0.63.0`.
@@ -43,9 +39,7 @@ website should be faster, and all modules now display their GitHub star count.
 If you are the **author of a module**, there are a few things you need to do:
 
 1. Add a GitHub Webhook to your repository. You can find instructions for how to
-   do so on https://deno.land/x by pressing the `Add a module` button. If you
-   have any questions about this process, please reach out on
-   [Discord](https://discord.gg/deno).
+   do so on https://deno.land/x by pressing the "Add a module" button.
 2. If you do not have any Git tags in your repository, please create a tag. Only
    tagged versions are published on deno.land/x.
 
@@ -54,7 +48,7 @@ a release.
 
 ## Future plans
 
-With this architechture we have the possibility to add all kinds of features.
+With this new architecture we have the possibility to add all kinds of features.
 Here are a few that we have planned:
 
 1. Display download counts for all modules

@@ -23,7 +23,9 @@ interface HomeProps {
 // const NUM_THIRD_PARTY = 12;
 // const POOL_NUM_THIRD_PARTY = 50;
 
-const Home: NextPage<HomeProps> = ({ /* thirdPartyEntryPool ,*/ latestStd }) => {
+const Home: NextPage<HomeProps> = ({
+  /* thirdPartyEntryPool ,*/ latestStd,
+}) => {
   const complexExampleProgram = `import { serve } from "https://deno.land/std@${latestStd}/http/server.ts";
 const s = serve({ port: 8000 });
 console.log("http://localhost:8000/");

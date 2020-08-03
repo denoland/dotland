@@ -3,5 +3,5 @@
   "author": "Luca Casonato",
   "publish_date": "2020-08-03T13:00:00.000Z",
   "images": [],
-  "snippet": "Since the beginning the goal for deno.land/x has been to give all modules in the Deno ecosystem a reliable, easy to use, and free hosting. With the increased adoption of Deno in the recent month there have been more and more requests to add features like download counts, immutable versions, and a self service module upload."
+  "snippet": "Goals and design considerations for the new deno.land/x service."
 }
