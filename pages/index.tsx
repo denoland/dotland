@@ -5,7 +5,7 @@ import Head from "next/head";
 import Link from "next/link";
 import CodeBlock from "../components/CodeBlock";
 import Footer from "../components/Footer";
-import VERSIONS from "../deno_versions.json";
+import versions from "../versions.json";
 import { NextPage, GetStaticProps } from "next";
 import InlineCode from "../components/InlineCode";
 import Header from "../components/Header";
@@ -47,22 +47,6 @@ for await (const req of s) {
         <title>Deno</title>
       </Head>
       <div className="bg-white">
-        <div className="bg-black">
-          <div className="max-w-screen-xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
-            <div className="pr-16 sm:text-center sm:px-16">
-              <p className="font-medium text-white">
-                <span>Deno 1.0 is out!</span>
-                <span className="block sm:ml-2 sm:inline-block">
-                  <Link href="/v1">
-                    <a className="text-white font-bold underline">
-                      Read the blog post &rarr;
-                    </a>
-                  </Link>
-                </span>
-              </p>
-            </div>
-          </div>
-        </div>
         <div className="bg-gray-50 border-b border-gray-200">
           <Header />
           <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
@@ -126,10 +110,7 @@ for await (const req of s) {
           />
           <p className="my-4 text-gray-700">Or a more complex one:</p>
         </div>
-        <div
-          className="mx-auto px-4 sm:px-6 md:px-8"
-          style={{ maxWidth: "46rem" }}
-        >
+        <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8">
           <CodeBlock
             code={complexExampleProgram}
             language="typescript"
@@ -408,7 +389,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
         thirdPartyEntries,
         POOL_NUM_THIRD_PARTY
       ),
-      latestStd: VERSIONS.std[0],
+      latestStd: versions.std[0],
     },
   };
 };

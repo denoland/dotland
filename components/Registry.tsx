@@ -362,7 +362,7 @@ export function ErrorMessage(props: { title: string; body: string }) {
             {props.body}
           </div>
         </div>
-      </div>{" "}
+      </div>
     </div>
   );
 }

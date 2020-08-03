@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter, Router } from "next/router";
+import versionMeta from "../versions.json";
 import { parseNameVersion } from "../util/registry_utils";
 import {
   TableOfContents,
@@ -137,6 +138,11 @@ function Manual() {
       `/manual${newVersion !== "" ? `@${newVersion}` : ""}${path}`
     );
   }
+
+  const stdVersion =
+    version === undefined
+      ? versionMeta.std[0]
+      : ((versionMeta.cli_to_std as any)[version ?? ""] as string) ?? version;
 
   return (
     <div>
@@ -343,26 +349,20 @@ function Manual() {
                     </svg>
                   </a>
                   <Markdown
-                    source={content}
+                    source={content.replace(/\$STD_VERSION/g, stdVersion)}
                     displayURL={"https://deno.land/manual" + path}
                     sourceURL={sourceURL}
                   />
                   <div className="pt-4 border-t border-gray-200">
                     {pageIndex !== 0 && (
-                      <Link
-                        href="/[...rest]"
-                        as={pageList[pageIndex - 1].path}
-                      >
+                      <Link href="/[...rest]" as={pageList[pageIndex - 1].path}>
                         <a className="text-gray-900 hover:text-gray-600 font-normal">
                           ← {pageList[pageIndex - 1].name}
                         </a>
                       </Link>
                     )}
                     {pageIndex !== pageList.length - 1 && (
-                      <Link
-                        href="/[...rest]"
-                        as={pageList[pageIndex + 1].path}
-                      >
+                      <Link href="/[...rest]" as={pageList[pageIndex + 1].path}>
                         <a className="text-gray-900 hover:text-gray-600 font-normal float-right">
                           {pageList[pageIndex + 1].name} →
                         </a>

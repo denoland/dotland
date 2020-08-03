@@ -2,7 +2,7 @@
 
 import { handleRegistryRequest } from "./registry";
 
-const REMOTE_URL = "https://deno-website2.lucacasonato.vercel.app";
+const REMOTE_URL = "https://deno-website2.now.sh";
 
 export async function handleRequest(event: FetchEvent) {
   const request = event.request;
@@ -10,6 +10,17 @@ export async function handleRequest(event: FetchEvent) {
   const isHtml = accept && accept.indexOf("html") >= 0;
 
   const url = new URL(request.url);
+
+  if (url.pathname === "/v1") {
+    return Response.redirect("https://deno.land/posts/v1", 301);
+  }
+
+  if (url.pathname.startsWith("/typedoc")) {
+    return Response.redirect(
+      "https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts",
+      301,
+    );
+  }
 
   const isRegistryRequest = url.pathname.startsWith("/std") ||
     url.pathname.startsWith("/x");

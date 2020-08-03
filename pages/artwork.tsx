@@ -29,7 +29,7 @@ const ArtworkPage = () => {
             </a>
           </p>
         </div>
-        <div className="my-16 flex flex-row flex-wrap gap-16 justify-evenly">
+        <div className="my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end">
           {ARTWORKS.map((artwork, i) => (
             <Item key={i} artwork={artwork} />
           ))}
@@ -42,7 +42,7 @@ const ArtworkPage = () => {
 
 function Item({ artwork }: { artwork: Artwork }) {
   return (
-    <div>
+    <div className="p-2 mx-1 mb-5">
       <div className="flex justify-center">
         <img
           src={artwork.image}
