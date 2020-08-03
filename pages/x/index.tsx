@@ -2,11 +2,12 @@
 
 import React, { ChangeEvent, useState, useEffect } from "react";
 import Link from "next/link";
+import Head from "next/head";
+import { useRouter } from "next/router";
+
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import InlineCode from "../../components/InlineCode";
-
-import Head from "next/head";
 import { debounce } from "../../util/debounce";
 import { SearchResult, getModules } from "../../util/registry_utils";
 import * as pageutils from "../../util/pagination_utils";
@@ -15,7 +16,8 @@ import RegistryInstructions from "../../components/RegistryInstructions";
 const PER_PAGE = 20;
 
 const ThirdPartyRegistryList = () => {
-  const [overlayOpen, setOverlayOpen] = React.useState(false);
+  const { asPath } = useRouter();
+  const [overlayOpen, setOverlayOpen] = React.useState(asPath.endsWith("#add"));
 
   const [page, setPage] = React.useState(1);
   const [query, setQuery] = React.useState("");
@@ -196,7 +198,7 @@ const ThirdPartyRegistryList = () => {
                           className={i !== 0 ? "border-t border-gray-200" : ""}
                           key={i}
                         >
-                          <Link href="/x/[...rest]" as={link}>
+                          <Link href="/x/[...rest]" as={link} replace>
                             <a className="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
                               <div className="flex items-center px-4 sm:px-6 py-2">
                                 <div className="min-w-0 flex-1 flex items-center">
