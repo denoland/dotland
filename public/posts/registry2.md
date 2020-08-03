@@ -1,7 +1,8 @@
-Since the beginning the goal for deno.land/x is to give all modules in the Deno
-ecosystem a reliable, easy to use, and free host. With the increased adoption of
-Deno in the recent month there have been more and more requests to add features
-like download counts, immutable versions, and a self service module upload.
+Since the beginning the goal for deno.land/x has been to give all modules in the
+Deno ecosystem a reliable, easy to use, and free host. With the increased
+adoption of Deno in the recent month there have been more and more requests to
+add features like download counts, immutable versions, and a self service module
+upload.
 
 We also have some long standing issues like rate limits on the GitHub API that
 we use, and `https://deno.land/std` being an alias to
@@ -23,12 +24,13 @@ notified of this by a GitHub Webhook you add to your repository.
 
 ## What has changed?
 
-- Source code is now not stored on raw.githubusercontent.com, rather on our own
-  servers.
+- Source code is no longer stored on raw.githubusercontent.com but rather on our
+  own servers.
 - Publishing modules works through a GitHub Webhook now, rather than by opening
   a PR on the deno_website2 repository.
 - You can not import from arbitrary commits or branches anymore, only tags /
-  releases. No more `https://deno.land/std@master`.
+  releases. Example: `https://deno.land/std@master` will not work anymore, only
+  versioned URLs like `https://deno.land/std@0.63.0`.
 - All files served from the registry are immutable. They can not be changed or
   removed by the package author.
 
@@ -57,9 +59,9 @@ Here are a few that we have planned:
 
 1. Display download counts for all modules
 2. Give all modules a score based on how well their module is maintained
-   - do `deno lint`, `deno fmt`, `deno doc`, and the TypeScript compiler report
-     any issues
-   - are imports version locked
+   - verify that `deno lint`, `deno fmt`, `deno doc` and type checking produce
+     no errors
+   - are dependencies pinned to specific version
    - does the module have a LICENCE, README.md
 3. Display dependencies of modules on the site
 4. Serve a JS (type stripped) version of all TypeScript files in a module, to be
