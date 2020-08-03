@@ -1,24 +1,29 @@
 The goal of deno.land/x has been to provide a central location for third party
-Deno modules consistant with how Deno operates. We want people to be able to
+Deno modules consistent with how Deno operates. We want people to be able to
 copy and paste source code URLs like https://deno.land/x/oak/mod.ts directly
 into the browser and be able to view marked up source code and have links to
 auto-generated documentation.
 
-Today we are releasing a major rewrite of the deno.land/x service that solves
-some long standing issues like rate limits on the GitHub API and providing
-immutable source code downloads (like on crates.io).
+Today we are releasing a rewrite of the deno.land/x service that solves many
+long standing issues like rate limits on the GitHub API and providing immutable
+source code downloads (like on crates.io).
 
 ## Goals
 
-- make all source code links immutable
-- remove the GitHub API rate limits on the website
-- remove non versioned imports
-- remove the need to manually update database.json to add modules
+- Make source code immutable.
+- Remove the GitHub API rate limits on the website.
+- Remove the need to manually update database.json to add modules.
 
-To do this we settled on a design where we provide a webhook, which when
-integrated into your repository, will save an immutable version of any git tags.
+The way the website currently works is by querying github in the background to
+receive source code. This worked okay, but we would hit API limits, and the code
+could change out from under users. The change we settled on would be to keep a
+copy of any published code ourselves, so we could ensure content availability
+and integrity.
 
-## What has changed?
+## Changes
+
+We settled on a design where we provide a webhook, which when integrated into
+your repository, will save an immutable version of any git tagged code.
 
 - Source code is no longer fetched from raw.githubusercontent.com but rather
   from our S3 bucket, where we can preserve it forever.
@@ -61,6 +66,6 @@ Here are a few that we have planned:
 4. Serve a JS (type stripped) version of all TypeScript files in a module, to be
    imported directly from a web browser
 
-If you have any comments or feedback, please let open an issue on the
+If you have any comments or feedback, please open an issue on the
 [deno_registry2](https://github.com/denoland/deno_registry2) repository or come
 chat on the Deno [Discord](https://discord.gg/deno).
