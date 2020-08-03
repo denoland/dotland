@@ -14,13 +14,14 @@ export interface TableOfContents {
 }
 
 export async function getTableOfContents(
-  version: string,
+  version: string
 ): Promise<TableOfContents> {
   const res = await fetch(`${basepath}${version}/docs/toc.json`);
   if (res.status !== 200) {
     throw Error(
-      `Got an error (${res.status}) while getting the manual table of contents:\n${await res
-        .text()}`,
+      `Got an error (${
+        res.status
+      }) while getting the manual table of contents:\n${await res.text()}`
     );
   }
   return await res.json();

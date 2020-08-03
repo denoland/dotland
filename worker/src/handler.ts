@@ -18,12 +18,12 @@ export async function handleRequest(event: FetchEvent) {
   if (url.pathname.startsWith("/typedoc")) {
     return Response.redirect(
       "https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts",
-      301,
+      301
     );
   }
 
-  const isRegistryRequest = url.pathname.startsWith("/std") ||
-    url.pathname.startsWith("/x");
+  const isRegistryRequest =
+    url.pathname.startsWith("/std") || url.pathname.startsWith("/x");
 
   if (isRegistryRequest && !isHtml) {
     return handleRegistryRequest(url);
