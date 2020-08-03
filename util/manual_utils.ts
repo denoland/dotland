@@ -1,5 +1,8 @@
 const basepath = "https://raw.githubusercontent.com/denoland/deno/";
 const docpath = "https://github.com/denoland/deno/blob/";
+import VERSIONS from "../versions.json";
+
+export const versions = VERSIONS.cli;
 
 export interface TableOfContents {
   [slug: string]: {

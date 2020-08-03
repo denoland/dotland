@@ -8,163 +8,203 @@ import {
   parseNameVersion,
   denoDocAvailableForURL,
   isReadme,
-  findEntry,
-  findDatabaseEntry,
+  getSourceURL,
+  getRepositoryURL,
+  DirEntry,
+  getVersionMeta,
+  getVersionList,
+  VersionInfo,
+  VersionMetaInfo,
 } from "../util/registry_utils";
 import Header from "./Header";
 import Footer from "./Footer";
 import FileDisplay from "./FileDisplay";
-import { DirEntry } from "../util/registries";
-
-class RegistryError {
-  constructor(public message: string) {}
-}
 
 const Registry = () => {
+  // State
+  const [versions, setVersions] = useState<VersionInfo | null | undefined>();
+  const [versionMeta, setVersionMeta] = useState<
+    VersionMetaInfo | null | undefined
+  >();
+  const [raw, setRaw] = useState<string | null | undefined>();
+  const [readme, setReadme] = useState<string | null | undefined>();
+
+  // Name, version and path
   const { query, asPath, push } = useRouter();
   const isStd = asPath.startsWith("/std");
   const { name, version, path } = useMemo(() => {
-    const path =
-      (Array.isArray(query.path) ? query.path.join("/") : query.path) ?? "";
-    const [name, version] = parseNameVersion(
-      (Array.isArray(query.identifier)
-        ? query.identifier[0]
-        : query.identifier) ?? ""
-    );
-    return { name, version, path: path ? `/${path}` : "" };
+    const [identifier, ...pathParts] = (query.rest as string[]) ?? [];
+    const path = pathParts.length === 0 ? "" : `/${pathParts.join("/")}`;
+    const [name, version] = parseNameVersion(identifier ?? "");
+    return { name, version, path };
   }, [query]);
-
-  const canonicalPath = useMemo(
-    () => `${isStd ? "" : "/x"}/${name}${version ? `@${version}` : ""}${path}`,
-    [name, version, path]
-  );
-  const entry = useMemo(() => findEntry(name), [name]);
-  const sourceURL = useMemo(() => entry?.getSourceURL(path, version), [
-    entry,
-    path,
-    version,
-  ]);
-  const repositoryURL = useMemo(() => entry?.getRepositoryURL(path, version), [
-    entry,
-    path,
-    version,
-  ]);
-  const defaultVersion = useMemo(() => entry?.getDefaultVersion(), [entry]);
-
-  const documentationURL = useMemo(() => {
-    const doc = `https://doc.deno.land/https/deno.land/${canonicalPath}`;
-    return denoDocAvailableForURL(canonicalPath) ? doc : null;
-  }, [canonicalPath]);
-
-  const [dirEntries, setDirEntries] = useState<
-    DirEntry[] | RegistryError | null | undefined
-  >();
-  const [raw, setRaw] = useState<string | RegistryError | null | undefined>();
-  const [versions, setVersions] = useState<string[] | null | undefined>();
-
-  const [readmeCanonicalPath, setReadmeCanonicalPath] = useState<
-    string | null | undefined
-  >();
-  const [readmeURL, setReadmeURL] = useState<string | null | undefined>();
-  const [readmeRepositoryURL, setReadmeRepositoryURL] = useState<
-    string | null | undefined
-  >();
-  const [readme, setReadme] = useState<string | null | undefined>();
-
-  // Fetch raw source
-  useEffect(() => {
-    setRaw(undefined);
-    if (sourceURL) {
-      fetch(sourceURL, { method: "GET" })
-        .then((resp) => {
-          if (!resp.ok) {
-            if (resp.status === 400 || resp.status === 404) return null;
-            throw new Error(`${resp.status}: ${resp.statusText}`);
-          }
-          return resp.text();
-        })
-        .then(setRaw)
-        .catch((e) => {
-          console.error("Failed to fetch raw source:", e);
-          setRaw(new RegistryError(e?.message ?? e.toString()));
-        });
-    } else {
-      setRaw(null);
-    }
-  }, [sourceURL]);
-
-  // TODO(lucacasonato): only try to load if raw failed or if no file extension
-  // Fetch directory listing
-  useEffect(() => {
-    setDirEntries(undefined);
-    entry
-      ?.getDirectoryListing(path, version)
-      .then(setDirEntries)
-      .catch((e) => {
-        console.error("Failed to fetch dir entry:", e);
-        setDirEntries(new RegistryError(e?.message ?? e.toString()));
-      });
-  }, [entry, path, version]);
-
-  // Fetch versions
-  useEffect(() => {
-    setVersions(undefined);
-    entry
-      ?.getVersionList()
-      .then(setVersions)
-      .catch((e) => {
-        console.error("Failed to fetch versions:", e);
-        setVersions(null);
-      });
-  }, [entry]);
-
-  // Check if readme is available in directory listing
-  useEffect(() => {
-    if (!(dirEntries instanceof RegistryError)) {
-      const readmeEntry = dirEntries?.find((d) => isReadme(d.name));
-      if (readmeEntry) {
-        setReadmeCanonicalPath(canonicalPath + "/" + readmeEntry.name);
-        setReadmeURL(
-          entry?.getSourceURL(path + "/" + readmeEntry.name, version)
-        );
-        setReadmeRepositoryURL(
-          entry?.getRepositoryURL(path + "/" + readmeEntry.name, version)
-        );
-        return;
-      }
-    }
-    setReadmeCanonicalPath(null);
-    setReadmeURL(null);
-    setReadmeRepositoryURL(null);
-  }, [name, path, version, dirEntries, canonicalPath]);
-
-  // Fetch readme
-  useEffect(() => {
-    if (readmeURL) {
-      setReadme(undefined);
-      fetch(readmeURL)
-        .then((resp) => {
-          if (!resp.ok) throw new Error("README fetch failed.");
-          return resp.text();
-        })
-        .then(setReadme)
-        .catch((e) => {
-          console.error("Failed to fetch README:", e);
-          setReadme(null);
-        });
-    } else {
-      setReadme(null);
-    }
-  }, [readmeURL]);
-
   function gotoVersion(newVersion: string) {
     push(
-      `${!isStd ? "/x" : ""}/[identifier]${path ? "/[...path]" : ""}`,
+      `${!isStd ? "/x" : ""}/[...rest]`,
       `${!isStd ? "/x" : ""}/${
         name + (newVersion !== "" ? `@${newVersion}` : "")
       }${path}`
     );
   }
+
+  // File paths
+  const canonicalPath = useMemo(
+    () => `${isStd ? "" : "/x"}/${name}${version ? `@${version}` : ""}${path}`,
+    [name, version, path]
+  );
+  const sourceURL = useMemo(() => getSourceURL(name, version, path), [
+    name,
+    version,
+    path,
+  ]);
+  const repositoryURL = useMemo(
+    () => (versionMeta ? getRepositoryURL(versionMeta, path) : undefined),
+    [versionMeta, path]
+  );
+  const documentationURL = useMemo(() => {
+    const doc = `https://doc.deno.land/https/deno.land/${canonicalPath}`;
+    return denoDocAvailableForURL(canonicalPath) ? doc : null;
+  }, [canonicalPath]);
+
+  // Fetch versions
+  useEffect(() => {
+    setVersions(undefined);
+    if (name) {
+      getVersionList(name)
+        .then(setVersions)
+        .catch((e) => {
+          console.error("Failed to fetch versions:", e);
+          setVersions(null);
+        });
+    }
+  }, [name]);
+
+  // If no version is specified, redirect to latest version
+  useEffect(() => {
+    if (!version && versions && versions.latest !== null) {
+      gotoVersion(versions.latest ?? "");
+    }
+  }, [versions?.latest, version]);
+
+  // Fetch version meta data
+  useEffect(() => {
+    setVersionMeta(undefined);
+    if (version) {
+      if (name) {
+        getVersionMeta(name, version)
+          .then(setVersionMeta)
+          .catch((e) => {
+            console.error("Failed to fetch dir entry:", e);
+            setVersionMeta(null);
+          });
+      } else {
+        setVersionMeta(null);
+      }
+    }
+  }, [name, version]);
+
+  // Get directory entries for path
+  const dirEntries = useMemo(() => {
+    if (versionMeta) {
+      const files = versionMeta.directoryListing
+        .filter(
+          (f) =>
+            f.path.startsWith(path) &&
+            f.path.split("/").length - 2 === path.split("/").length - 1
+        )
+        .map<DirEntry>((f) => {
+          const [name] = f.path.slice(path.length + 1).split("/");
+          return {
+            name,
+            size: f.size,
+            type: f.type,
+          };
+        });
+      files.sort((a, b) => a.name.codePointAt(0)! - b.name.codePointAt(0)!);
+      return files.length === 0 ? null : files;
+    }
+    return versionMeta;
+  }, [versionMeta, path]);
+
+  const {
+    readmeCanonicalPath,
+    readmeURL,
+    readmeRepositoryURL,
+  } = useMemo(() => {
+    const readmeEntry = dirEntries?.find((d) => isReadme(d.name));
+    if (readmeEntry) {
+      return {
+        readmeCanonicalPath: canonicalPath + "/" + readmeEntry.name,
+        readmeURL: getSourceURL(name, version, path + "/" + readmeEntry.name),
+        readmeRepositoryURL: versionMeta
+          ? getRepositoryURL(versionMeta, path + "/" + readmeEntry.name)
+          : null,
+      };
+    }
+    return {
+      readmeCanonicalPath: null,
+      readmeURL: null,
+      readmeRepositoryURL: null,
+    };
+  }, [dirEntries, name, version, path, versionMeta]);
+
+  // Fetch raw file
+  useEffect(() => {
+    setRaw(undefined);
+    if (version) {
+      if (
+        sourceURL &&
+        versionMeta &&
+        versionMeta.directoryListing.filter(
+          (d) => d.path === path && d.type == "file"
+        ).length !== 0
+      ) {
+        fetch(sourceURL, { method: "GET" })
+          .then((resp) => {
+            if (!resp.ok) {
+              if (
+                resp.status === 400 ||
+                resp.status === 403 ||
+                resp.status === 404
+              )
+                return null;
+              throw new Error(`${resp.status}: ${resp.statusText}`);
+            }
+            return resp.text();
+          })
+          .then(setRaw)
+          .catch(() => setRaw(null));
+      } else {
+        setRaw(null);
+      }
+    }
+  }, [sourceURL, versionMeta, version, path]);
+
+  // Fetch readme file
+  useEffect(() => {
+    setReadme(undefined);
+    if (version) {
+      if (readmeURL) {
+        fetch(readmeURL, { method: "GET" })
+          .then((resp) => {
+            if (!resp.ok) {
+              if (
+                resp.status === 400 ||
+                resp.status === 403 ||
+                resp.status === 404
+              )
+                return null;
+              throw new Error(`${resp.status}: ${resp.statusText}`);
+            }
+            return resp.text();
+          })
+          .then(setReadme)
+          .catch(() => setReadme(null));
+      } else {
+        setReadme(null);
+      }
+    }
+  }, [readmeURL, versionMeta, version, path]);
 
   return (
     <>
@@ -179,154 +219,125 @@ const Registry = () => {
         <Header
           subtitle={name === "std" ? "Standard Library" : "Third Party Modules"}
         />
-        <div className="">
-          <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8">
-            {name.startsWith("gh:") && (
-              <WarningMessage
-                title="deno.land/x/gh:owner:repo redirect deprecation notice"
-                body={`The https://deno.land/x/gh:owner:repo style redirects are deprecated and will be removed on August 1st 2020. Instead of importing via deno.land you can import this module directly from GitHub${
-                  raw ? ` via the URL ${sourceURL}` : ""
-                }.`}
-              />
-            )}
-            {name.startsWith("npm:") && (
-              <WarningMessage
-                title="deno.land/x/npm:project redirect deprecation notice"
-                body={`The https://deno.land/x/npm:project style redirects are deprecated and will be removed on August 1st 2020. Instead of importing via deno.land you can import this module directly from unpkg.com${
-                  raw ? ` via the URL ${sourceURL}` : ""
-                }.`}
-              />
-            )}
-            {findDatabaseEntry(name)?.type === "npm" &&
-              !name.startsWith("npm:") && (
-                <WarningMessage
-                  title="NPM entries deprecation notice"
-                  body={`NPM backed deno.land/x entries like ${name} are deprecated will be removed on August 1st 2020. Instead of importing via deno.land you can import this module directly from unpkg.com${
-                    raw ? ` via the URL ${sourceURL}` : ""
-                  }.`}
+        <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8">
+          <Breadcrumbs
+            name={name}
+            version={version}
+            path={path}
+            isStd={isStd}
+          />
+          <VersionSelector
+            versions={versions?.versions}
+            selectedVersion={version}
+            onChange={gotoVersion}
+          />
+          {(() => {
+            if (versions === null) {
+              return (
+                <ErrorMessage
+                  title="404 - Not Found"
+                  body="This module does not exist."
                 />
-              )}
-            <Breadcrumbs
-              name={name}
-              version={version}
-              path={path}
-              isStd={isStd}
-            />
-            <VersionSelector
-              versions={versions}
-              defaultVersion={defaultVersion}
-              selectedVersion={version}
-              onChange={gotoVersion}
-            />
-            {(() => {
-              if (
-                (dirEntries === undefined || dirEntries === null) &&
-                (raw === undefined || raw === null)
-              ) {
-                if (dirEntries === null && raw === null) {
-                  return (
-                    <ErrorMessage
-                      title="404 - Not Found"
-                      body="This file or directory could not be found."
+              );
+            } else if (
+              versions?.latest === null &&
+              versions.versions.length === 0
+            ) {
+              return (
+                <ErrorMessage
+                  title="No uploaded versions"
+                  body={`This module name has been reserved for a repository, but no versions have been uploaded yet. Modules that do not upload a version within 30 days of registration will be removed. ${
+                    versions.isLegacy
+                      ? "If you are the owner of this module, please re-link the GitHub repository with deno.land/x, and publish a new version."
+                      : ""
+                  }`}
+                />
+              );
+            } else if (
+              version &&
+              versions &&
+              !versions?.versions.includes(version)
+            ) {
+              return (
+                <ErrorMessage
+                  title="404 - Not Found"
+                  body="This version does not exist for this module."
+                />
+              );
+            } else if (
+              versionMeta &&
+              versionMeta.directoryListing.filter((d) => d.path === path)
+                .length === 0
+            ) {
+              return (
+                <ErrorMessage
+                  title="404 - Not Found"
+                  body="This file or directory could not be found."
+                />
+              );
+            } else if (!dirEntries && typeof raw !== "string") {
+              // loading
+              return (
+                <div className="mt-4 rounded-lg overflow-hidden border border-gray-200 bg-white">
+                  <div className="bg-gray-100 h-10 w-full border-b border-gray-200 px-4 py-3">
+                    <div className="w-3/5 sm:w-1/5 bg-gray-200 h-4"></div>
+                  </div>
+                  <div className="w-full p-4">
+                    <div className="w-4/5 sm:w-1/3 bg-gray-100 h-8"></div>
+                    <div className="sm:w-2/3 bg-gray-100 h-3 mt-6"></div>
+                    <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
+                    <div className="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                    <div className="w-3/4 bg-gray-100 h-3 mt-4"></div>
+                    <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
+                    <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                  </div>
+                </div>
+              );
+            } else {
+              return (
+                <>
+                  {dirEntries && (
+                    <DirectoryListing
+                      name={name}
+                      version={version}
+                      path={path}
+                      dirEntries={dirEntries}
+                      repositoryURL={repositoryURL}
                     />
-                  );
-                } else {
-                  // loading
-                  return (
-                    <div className="mt-4 rounded-lg overflow-hidden border border-gray-200 bg-white">
-                      <div className="bg-gray-100 h-10 w-full border-b border-gray-200 px-4 py-3">
-                        <div className="w-3/5 sm:w-1/5 bg-gray-200 h-4"></div>
-                      </div>
-                      <div className="w-full p-4">
-                        <div className="w-4/5 sm:w-1/3 bg-gray-100 h-8"></div>
-                        <div className="sm:w-2/3 bg-gray-100 h-3 mt-6"></div>
-                        <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
-                        <div className="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                        <div className="w-3/4 bg-gray-100 h-3 mt-4"></div>
-                        <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
-                        <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                      </div>
+                  )}
+                  {typeof raw === "string" ? (
+                    <div className="mt-4">
+                      <FileDisplay
+                        raw={raw}
+                        canonicalPath={canonicalPath}
+                        sourceURL={sourceURL}
+                        repositoryURL={repositoryURL}
+                        documentationURL={documentationURL}
+                      />
                     </div>
-                  );
-                }
-              }
-            })()}
-            {dirEntries instanceof RegistryError ? (
-              <ErrorMessage
-                title="Failed to get directory listing"
-                body={dirEntries.message}
-              />
-            ) : dirEntries !== undefined && dirEntries !== null ? (
-              <DirectoryListing
-                dirEntries={dirEntries}
-                repositoryURL={repositoryURL}
-                name={name}
-                version={version}
-                path={path}
-              />
-            ) : null}
-            {raw instanceof RegistryError ? (
-              <ErrorMessage title="Failed to get raw file" body={raw.message} />
-            ) : typeof raw === "string" ? (
-              <div className="mt-4">
-                <FileDisplay
-                  raw={raw}
-                  canonicalPath={canonicalPath}
-                  sourceURL={sourceURL!}
-                  repositoryURL={repositoryURL}
-                  documentationURL={documentationURL}
-                />
-              </div>
-            ) : null}
-            {typeof readme === "string" ? (
-              <div className="mt-4">
-                <FileDisplay
-                  raw={readme}
-                  canonicalPath={readmeCanonicalPath!}
-                  sourceURL={readmeURL!}
-                  repositoryURL={readmeRepositoryURL}
-                />
-              </div>
-            ) : null}
-          </div>
+                  ) : null}
+                  {typeof readme === "string" ? (
+                    <div className="mt-4">
+                      <FileDisplay
+                        raw={readme}
+                        canonicalPath={readmeCanonicalPath!}
+                        sourceURL={readmeURL!}
+                        repositoryURL={readmeRepositoryURL}
+                      />
+                    </div>
+                  ) : null}
+                </>
+              );
+            }
+          })()}
         </div>
-        <Footer simple />
       </div>
+      <Footer simple />
     </>
   );
 };
 
-function WarningMessage(props: { title: string; body: string }) {
-  return (
-    <div className="rounded-md bg-yellow-50 border border-yellow-200 p-4 my-4">
-      <div className="flex">
-        <div className="flex-shrink-0">
-          <svg
-            className="h-5 w-5 text-yellow-400"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
-            <path
-              fillRule="evenodd"
-              d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-              clipRule="evenodd"
-            ></path>
-          </svg>
-        </div>
-        <div className="ml-3">
-          <h3 className="text-sm leading-5 font-medium text-yellow-800">
-            {props.title}
-          </h3>
-          <div className="mt-2 text-sm leading-5 text-yellow-700">
-            {props.body}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ErrorMessage(props: { title: string; body: string }) {
+export function ErrorMessage(props: { title: string; body: string }) {
   return (
     <div className="rounded-md bg-red-50 border border-red-200 p-4 my-4">
       <div className="flex">
@@ -383,7 +394,7 @@ function Breadcrumbs({
         </>
       )}
       <Link
-        href={(!isStd ? "/x" : "") + "/[identifier]"}
+        href={(!isStd ? "/x" : "") + "/[...rest]"}
         as={`${!isStd ? "/x" : ""}/${name}${version ? `@${version}` : ""}`}
       >
         <a className="link">
@@ -400,7 +411,7 @@ function Breadcrumbs({
               {" "}
               /{" "}
               <Link
-                href={(!isStd ? "/x" : "") + "/[identifier]/[...path]"}
+                href={(!isStd ? "/x" : "") + "/[...rest]"}
                 as={`${!isStd ? "/x" : ""}/${name}${
                   version ? `@${version}` : ""
                 }${link ? `/${link}` : ""}`}
@@ -417,12 +428,10 @@ function Breadcrumbs({
 function VersionSelector({
   versions,
   selectedVersion,
-  defaultVersion,
   onChange,
 }: {
   versions: string[] | null | undefined;
   selectedVersion: string | undefined;
-  defaultVersion: string | undefined;
   onChange: (newVersion: string) => void;
 }) {
   return (
@@ -430,34 +439,33 @@ function VersionSelector({
       <label htmlFor="version" className="sr-only">
         Version
       </label>
-      {versions && (
-        <div className="mt-1 sm:mt-0 sm:col-span-2">
-          <div className="max-w-xs rounded-md shadow-sm">
-            <select
-              id="version"
-              className="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-              value={selectedVersion}
-              onChange={({ target: { value: newVersion } }) =>
-                onChange(newVersion)
-              }
-            >
-              {selectedVersion && !versions.includes(selectedVersion) && (
-                <option key={selectedVersion} value={selectedVersion}>
-                  {selectedVersion}
-                </option>
-              )}
-              <option key="" value="">
-                {defaultVersion}
-              </option>
-              {versions.map((v) => (
-                <option key={v} value={v}>
-                  {v}
-                </option>
-              ))}
-            </select>
-          </div>
+      <div className="mt-1 sm:mt-0 sm:col-span-2">
+        <div className="max-w-xs rounded-md shadow-sm">
+          <select
+            id="version"
+            className="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+            value={selectedVersion}
+            onChange={({ target: { value: newVersion } }) =>
+              onChange(newVersion)
+            }
+          >
+            {versions && (
+              <>
+                {selectedVersion && !versions.includes(selectedVersion) && (
+                  <option key={selectedVersion} value={selectedVersion}>
+                    {selectedVersion}
+                  </option>
+                )}
+                {versions.map((v) => (
+                  <option key={v} value={v}>
+                    {v}
+                  </option>
+                ))}
+              </>
+            )}
+          </select>
         </div>
-      )}
+      </div>
     </div>
   );
 }
@@ -498,10 +506,12 @@ function DirectoryListing(props: {
                 {props.dirEntries
                   .sort((a, b) => a.type.localeCompare(b.type))
                   .map((entry, i) => {
-                    const href = `${isStd ? "" : "/x"}/[identifier]/[...path]`;
-                    const as = `${isStd ? "" : "/x"}/${props.name}${
-                      props.version ? `@${props.version}` : ""
-                    }${props.path}/${entry.name}`;
+                    const href = `${isStd ? "" : "/x"}/[...rest]`;
+                    const as = encodeURI(
+                      `${isStd ? "" : "/x"}/${props.name}${
+                        props.version ? `@${props.version}` : ""
+                      }${props.path}/${entry.name}`
+                    );
                     return (
                       <tr
                         key={i}
@@ -514,7 +524,11 @@ function DirectoryListing(props: {
                         <td className="whitespace-no-wrap text-sm leading-5 text-gray-400 w-6">
                           <Link href={href} as={as}>
                             <a
-                              className="px-2 sm:pl-3 md:pl-4 py-1 w-full block"
+                              className={`px-2 sm:pl-3 md:pl-4 py-1 w-full block ${
+                                entry.type === "dir"
+                                  ? "text-blue-300"
+                                  : "text-gray-300"
+                              }`}
                               tabIndex={-1}
                             >
                               <svg
@@ -573,7 +587,7 @@ function DirectoryListing(props: {
                               className="px-4 py-1 w-full h-full block"
                               tabIndex={-1}
                             >
-                              {entry.type !== "dir" && entry.size ? (
+                              {entry.size ? (
                                 bytesToSize(entry.size)
                               ) : (
                                 <>&nbsp;</>

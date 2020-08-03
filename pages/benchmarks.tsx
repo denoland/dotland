@@ -478,18 +478,12 @@ const Benchmarks = () => {
                 <p className="mt-1">Size of different bundled scripts.</p>
                 <ul className="ml-8 list-disc my-2">
                   <li>
-                    <Link
-                      href="/[identifier]/[...path]"
-                      as="/std/http/file_server.ts"
-                    >
+                    <Link href="/[...rest]" as="/std/http/file_server.ts">
                       <a className="link">file_server</a>
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      href="/[identifier]/[...path]"
-                      as="/std/examples/gist.ts"
-                    >
+                    <Link href="/[...rest]" as="/std/examples/gist.ts">
                       <a className="link">gist</a>
                     </Link>
                   </li>

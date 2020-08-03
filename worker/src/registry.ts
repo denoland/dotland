@@ -1,89 +1,54 @@
-import {
-  parseNameVersion,
-  findEntry,
-  findDatabaseEntry,
-} from "../../util/registry_utils";
+import { parseNameVersion } from "../../util/registry_utils";
+
+const S3_BUCKET =
+  "http://deno-registry-prod-storagebucket-d7uq3yal946u.s3-website-us-east-1.amazonaws.com/";
 
 export async function handleRegistryRequest(url: URL): Promise<Response> {
   console.log("registry request", url.pathname);
-  const entry = getRegistrySourceURL(url.pathname);
+  const entry = parsePathname(url.pathname);
   if (!entry) {
-    return new Response("Not in database.json: " + url.pathname, {
-      status: 404,
-      statusText: "Not Found",
+    return new Response("This module entry is invalid: " + url.pathname, {
+      status: 400,
       headers: { "content-type": "text/plain" },
     });
   }
-
-  let response = await fetch(entry.url);
-  response = new Response(response.body, response);
-  if (needsMasterBranchWarning(entry)) {
-    response.headers.set(
-      "X-Deno-Warning",
-      `Implicitly using master branch ${url}`
-    );
-  } else if (needsGHDeprecationWarning(entry)) {
-    response.headers.set(
-      "X-Deno-Warning",
-      `The https://deno.land/x/gh:owner:repo redirects are deprecated will be removed on August 1st 2020. Import ${entry.url} instead of ${url}`
-    );
-  } else if (needsNPMDeprecationWarning(entry)) {
-    response.headers.set(
-      "X-Deno-Warning",
-      `The https://deno.land/x/npm:project redirects are deprecated will be removed on August 1st 2020. Import ${entry.url} instead of ${url}`
-    );
-  } else if (needsNPMTypeDeprecationWarning(entry)) {
-    response.headers.set(
-      "X-Deno-Warning",
-      `NPM backed deno.land/x entries like ${entry.name} are deprecated will be removed on August 1st 2020. Import ${entry.url} instead of ${url}`
-    );
-  }
-  const originContentType = response.headers.get("content-type");
-  if (
-    response.ok &&
-    (!originContentType || originContentType?.includes("text/plain"))
-  ) {
-    const charset = originContentType?.includes("charset=utf-8")
-      ? "; charset=utf-8"
-      : "";
-    if (url.pathname.endsWith(".js")) {
-      response.headers.set("content-type", `application/javascript${charset}`);
-    } else if (url.pathname.endsWith(".ts")) {
-      response.headers.set("content-type", `application/typescript${charset}`);
+  const { module, version, path } = entry;
+  if (!version) {
+    const latest = await getLatestVersion(module);
+    if (!latest) {
+      return new Response(
+        "This module has no latest version: " + url.pathname,
+        {
+          status: 404,
+          headers: { "content-type": "text/plain" },
+        }
+      );
     }
+    console.log("registry redirect", module, latest);
+    const resp = new Response(undefined, {
+      headers: {
+        Location: `${module === "std" ? "" : "/x"}/${module}@${latest}/${path}`,
+        "x-deno-warning": `Implicitly using latest version (${latest}) for ${
+          url.origin
+        }${module === "std" ? "" : "/x"}/${module}/${path}`,
+      },
+      status: 302,
+    });
+    return resp;
   }
-
-  response.headers.set("Access-Control-Allow-Origin", "*");
-
-  return response;
+  const remoteUrl = getBackingURL(module, version, path);
+  // @ts-ignore
+  const resp = await fetch(remoteUrl, { cf: { cacheEverything: true } });
+  const resp2 = new Response(resp.body, resp);
+  resp2.headers.set("Access-Control-Allow-Origin", "*");
+  return resp2;
 }
 
-export function needsMasterBranchWarning(entry: Entry): boolean {
-  return entry.name === "std" && entry.version === undefined;
-}
-
-export function needsGHDeprecationWarning(entry: Entry): boolean {
-  return entry.name.startsWith("gh:");
-}
-
-export function needsNPMDeprecationWarning(entry: Entry): boolean {
-  return entry.name.startsWith("npm:");
-}
-
-export function needsNPMTypeDeprecationWarning(entry: Entry): boolean {
-  const e = findDatabaseEntry(entry.name);
-  return e?.type === "npm";
-}
-
-export interface Entry {
-  name: string;
-  version: string | undefined;
-  url: string;
-}
-
-export function getRegistrySourceURL(pathname: string): Entry | undefined {
+export function parsePathname(
+  pathname: string
+): { module: string; version: string | undefined; path: string } | undefined {
   if (pathname.startsWith("/std")) {
-    return getRegistrySourceURL("/x" + pathname);
+    return parsePathname("/x" + pathname);
   }
   if (!pathname.startsWith("/x/")) {
     return undefined;
@@ -92,11 +57,18 @@ export function getRegistrySourceURL(pathname: string): Entry | undefined {
   const [nameBranch, ...rest] = nameBranchRest.split("/");
   const [name, version] = parseNameVersion(nameBranch);
   const path = rest.join("/");
-  const entry = findEntry(name);
-  if (!entry) return undefined;
-  return {
-    name,
-    version,
-    url: entry.getSourceURL("/" + path, version),
-  };
+  return { module: name, version, path };
+}
+
+export function getBackingURL(module: string, version: string, path: string) {
+  return `${S3_BUCKET}${module}/versions/${version}/raw/${path}`;
+}
+
+export async function getLatestVersion(
+  module: string
+): Promise<string | undefined> {
+  const res = await fetch(`${S3_BUCKET}${module}/meta/versions.json`);
+  if (!res.ok) return undefined;
+  const versions = await res.json();
+  return versions?.latest;
 }

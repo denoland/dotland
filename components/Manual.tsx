@@ -3,38 +3,29 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter, Router } from "next/router";
 import versionMeta from "../versions.json";
-import { parseNameVersion, findEntry } from "../util/registry_utils";
+import { parseNameVersion } from "../util/registry_utils";
 import {
   TableOfContents,
   getTableOfContents,
   getFileURL,
   getDocURL,
+  versions,
 } from "../util/manual_utils";
 import Markdown from "./Markdown";
 import Transition from "./Transition";
 
-const denoEntry = findEntry("deno");
-
 function Manual() {
   const { query, push, replace } = useRouter();
   const { version, path } = useMemo(() => {
-    const path =
-      (Array.isArray(query.path) ? query.path.join("/") : query.path) ?? "";
-    const [name, version] = parseNameVersion(
-      (Array.isArray(query.identifier)
-        ? query.identifier[0]
-        : query.identifier) ?? ""
-    );
-    return {
-      name,
-      version,
-      path: path ? `/${path}` : "/introduction",
-    };
+    const [identifier, ...pathParts] = (query.rest as string[]) ?? [];
+    const path = pathParts.length === 0 ? "" : `/${pathParts.join("/")}`;
+    const [_, version] = parseNameVersion(identifier ?? "");
+    return { version, path };
   }, [query]);
 
   if (path.endsWith(".md")) {
     replace(
-      `/[identifier]${path ? "/[...path]" : ""}`,
+      `/[...rest]`,
       `/manual${version && version !== "" ? `@${version}` : ""}${path.replace(
         /\.md$/,
         ""
@@ -79,7 +70,6 @@ function Manual() {
   ] = useState<TableOfContents | null>(null);
 
   const [content, setContent] = useState<string | null>(null);
-  const [versions, setVersions] = useState<string[] | null | undefined>();
 
   useEffect(() => {
     getTableOfContents(version ?? "master")
@@ -142,23 +132,9 @@ function Manual() {
       });
   }, [sourceURL]);
 
-  useEffect(() => {
-    setVersions(undefined);
-    denoEntry
-      ?.getVersionList()
-      .then((v) =>
-        // do not show old versions that do not have the new manual yet
-        setVersions(v?.filter((v) => v.startsWith("v1") && v !== "v1.0.0-rc1"))
-      )
-      .catch((e) => {
-        console.error("Failed to fetch versions:", e);
-        setVersions(null);
-      });
-  }, []);
-
   function gotoVersion(newVersion: string) {
     push(
-      `/[identifier]${path ? "/[...path]" : ""}`,
+      `/[...rest]`,
       `/manual${newVersion !== "" ? `@${newVersion}` : ""}${path}`
     );
   }
@@ -374,25 +350,19 @@ function Manual() {
                   </a>
                   <Markdown
                     source={content.replace(/\$STD_VERSION/g, stdVersion)}
-                    displayURL={location.origin + "/manual" + path}
+                    displayURL={"https://deno.land/manual" + path}
                     sourceURL={sourceURL}
                   />
                   <div className="pt-4 border-t border-gray-200">
                     {pageIndex !== 0 && (
-                      <Link
-                        href="/[identifier]/[...path]"
-                        as={pageList[pageIndex - 1].path}
-                      >
+                      <Link href="/[...rest]" as={pageList[pageIndex - 1].path}>
                         <a className="text-gray-900 hover:text-gray-600 font-normal">
                           ← {pageList[pageIndex - 1].name}
                         </a>
                       </Link>
                     )}
                     {pageIndex !== pageList.length - 1 && (
-                      <Link
-                        href="/[identifier]/[...path]"
-                        as={pageList[pageIndex + 1].path}
-                      >
+                      <Link href="/[...rest]" as={pageList[pageIndex + 1].path}>
                         <a className="text-gray-900 hover:text-gray-600 font-normal float-right">
                           {pageList[pageIndex + 1].name} →
                         </a>
@@ -494,7 +464,7 @@ function ToC({
               return (
                 <li key={slug} className="my-2">
                   <Link
-                    href="/[identifier]/[...path]"
+                    href="/[...rest]"
                     as={`/manual${version ? `@${version}` : ""}/${slug}`}
                   >
                     <a
@@ -513,7 +483,7 @@ function ToC({
                         ([childSlug, name]) => (
                           <li key={`${slug}/${childSlug}`} className="my-0.5">
                             <Link
-                              href="/[identifier]/[...path]"
+                              href="/[...rest]"
                               as={`/manual${
                                 version ? `@${version}` : ""
                               }/${slug}/${childSlug}`}

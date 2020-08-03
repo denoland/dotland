@@ -1,73 +1,204 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import DATABASE from "../database.json";
-import { GithubEntry, GithubDatabaseEntry } from "./registries/github";
-import { DenoStdEntry, DenoStdDatabaseEntry } from "./registries/deno_std";
-import { URLEntry, URLDatabaseEntry } from "./registries/url";
-import { NPMEntry, NPMDatabaseEntry } from "./registries/npm";
-import { Entry, DatabaseEntry } from "./registries";
+const CDN_ENDPOINT = "https://cdn.deno.land/";
+const API_ENDPOINT = "https://api.deno.land/";
 
-export function findDatabaseEntry(
-  name: string
-):
-  | GithubDatabaseEntry
-  | DenoStdDatabaseEntry
-  | URLDatabaseEntry
-  | NPMDatabaseEntry
-  | undefined {
-  if (name.startsWith("npm:")) {
-    const [_, packageName] = name.split(":");
-    const entry: NPMDatabaseEntry = {
-      desc: packageName,
-      package: packageName,
-      type: "npm",
-    };
-    return entry;
-  }
-
-  if (name.startsWith("gh:")) {
-    const [_, owner, repo] = name.split(":");
-    const entry: GithubDatabaseEntry = {
-      desc: `${owner}/${repo}`,
-      owner,
-      repo,
-      type: "github",
-      // eslint-disable-next-line @typescript-eslint/camelcase
-      default_version: "master",
-    };
-    return entry;
-  }
-
-  // @ts-ignore
-  return DATABASE[name];
+export interface DirEntry {
+  name: string;
+  type: "file" | "dir" | "symlink";
+  size?: number;
+  target?: string;
 }
 
-export function findEntry(name: string): Entry | null {
-  const dbEntry = findDatabaseEntry(name);
-  switch (dbEntry?.type) {
+export function getSourceURL(
+  module: string,
+  version: string,
+  path: string
+): string {
+  return encodeURI(`${CDN_ENDPOINT}${module}/versions/${version}/raw${path}`);
+}
+
+function pathJoin(...parts: string[]) {
+  const replace = new RegExp("/{1,}", "g");
+  return parts.join("/").replace(replace, "/");
+}
+
+export function getRepositoryURL(
+  meta: VersionMetaInfo,
+  path: string
+): string | undefined {
+  switch (meta.uploadOptions.type) {
     case "github":
-      return new GithubEntry(dbEntry);
-    case "deno_std":
-      return new DenoStdEntry(dbEntry);
-    case "url":
-      return new URLEntry(dbEntry);
-    case "npm":
-      return new NPMEntry(dbEntry);
+      return `https://github.com/${pathJoin(
+        meta.uploadOptions.repository,
+        "tree",
+        meta.uploadOptions.ref,
+        meta.uploadOptions.subdir ?? "",
+        path
+      )}`;
     default:
-      return null;
+      return undefined;
   }
 }
 
-export function parseNameVersion(
-  nameVersion: string
-): [string, string | undefined] {
+export interface VersionMetaInfo {
+  uploadedAt: Date;
+  directoryListing: DirListing[];
+  uploadOptions: UploadOptions;
+}
+
+export interface UploadOptions {
+  type: "github";
+  repository: string;
+  subdir: string | null;
+  ref: string;
+}
+
+export interface DirListing {
+  path: string;
+  type: "dir" | "file";
+  size?: number;
+}
+
+export async function getVersionMeta(
+  module: string,
+  version: string
+): Promise<VersionMetaInfo | null> {
+  const url = `${CDN_ENDPOINT}${module}/versions/${version}/meta/meta.json`;
+  const res = await fetch(url, {
+    headers: {
+      accept: "application/json",
+    },
+  });
+  if (res.status === 403 || res.status === 404) return null;
+  if (res.status !== 200) {
+    throw Error(
+      `Got an error (${
+        res.status
+      }) while getting the directory listing:\n${await res.text()}`
+    );
+  }
+
+  const meta = await res.json();
+  if (!meta) return null;
+
+  return {
+    uploadedAt: new Date(meta.uploaded_at),
+    directoryListing: meta.directory_listing,
+    uploadOptions: meta.upload_options,
+  };
+}
+
+export interface VersionInfo {
+  latest: string;
+  versions: string[];
+  isLegacy: true;
+}
+
+export async function getVersionList(
+  module: string
+): Promise<VersionInfo | null> {
+  const url = `${CDN_ENDPOINT}${module}/meta/versions.json`;
+  const res = await fetch(url, {
+    headers: {
+      accept: "application/json",
+    },
+  });
+  if (res.status === 403 || res.status === 404) return null;
+  if (res.status !== 200) {
+    throw Error(
+      `Got an error (${
+        res.status
+      }) while getting the version list:\n${await res.text()}`
+    );
+  }
+  return res.json();
+}
+
+export interface SearchResult {
+  name: string;
+  description: string;
+  type: "github";
+  owner: string;
+  repository: string;
+  star_count: string;
+  search_score: string;
+}
+
+export async function getModules(
+  page: number,
+  limit: number,
+  query: string
+): Promise<{ results: SearchResult[]; totalCount: number } | null> {
+  const url = `${API_ENDPOINT}modules?page=${page}&limit=${limit}&query=${encodeURIComponent(
+    query
+  )}`;
+  const res = await fetch(url, {
+    headers: {
+      accept: "application/json",
+    },
+  });
+  if (res.status !== 200) {
+    throw Error(
+      `Got an error (${
+        res.status
+      }) while getting the module list:\n${await res.text()}`
+    );
+  }
+  const data = await res.json();
+  if (!data.success) {
+    throw Error(
+      `Got an error (${
+        data.info
+      }) while getting the module list:\n${await res.text()}`
+    );
+  }
+
+  return { totalCount: data.data.total_count, results: data.data.results };
+}
+
+export interface Build {
+  id: string;
+  options: {
+    moduleName: string;
+    type: string;
+    repository: string;
+    ref: string;
+    version: string;
+    subdir?: string;
+  };
+  status: string;
+  message?: string;
+}
+
+export async function getBuild(id: string): Promise<Build> {
+  const url = `${API_ENDPOINT}builds/${id}`;
+  const res = await fetch(url, { headers: { accept: "application/json" } });
+  if (res.status !== 200) {
+    throw Error(
+      `Got an error (${
+        res.status
+      }) while getting the build info:\n${await res.text()}`
+    );
+  }
+  const data = await res.json();
+  if (!data.success) {
+    throw Error(
+      `Got an error (${
+        data.info
+      }) while getting the build info:\n${await res.text()}`
+    );
+  }
+  return data.data.build;
+}
+
+export function parseNameVersion(nameVersion: string): [string, string] {
   const [name, version] = nameVersion.split("@", 2);
   return [name, version];
 }
 
 export function fileTypeFromURL(filename: string) {
   const f = filename.toLowerCase();
-
   if (f.endsWith(".ts")) {
     return "typescript";
   } else if (f.endsWith(".js")) {
@@ -122,5 +253,3 @@ export function isReadme(filename: string) {
     filename.toLowerCase() === "readme"
   );
 }
-
-export const entries = DATABASE as { [name: string]: DatabaseEntry };

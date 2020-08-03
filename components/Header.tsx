@@ -9,9 +9,9 @@ const Header = ({ subtitle }: { subtitle?: string }) => {
 
   return (
     <div className="relative py-6">
-      <nav className="max-w-screen-lg mx-auto flex items-center justify-between px-3 px-4 sm:px-6 md:px-8 lg:px-0">
+      <nav className="max-w-screen-lg mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-0">
         <Link href="/">
-          <a className="block flex items-center">
+          <a className="flex items-center">
             <img className="h-10 w-auto sm:h-12 my-2" src="/logo.svg" alt="" />
             <div className="ml-5 flex flex-col justify-center">
               <div className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
@@ -53,7 +53,7 @@ const Header = ({ subtitle }: { subtitle?: string }) => {
               Install
             </a>
           </Link>
-          <Link href="/[identifier]" as="/manual">
+          <Link href="/[...rest]" as="/manual">
             <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
               Manual
             </a>
@@ -64,7 +64,7 @@ const Header = ({ subtitle }: { subtitle?: string }) => {
           >
             Runtime API
           </a>
-          <Link href="/[identifier]" as="/std">
+          <Link href="/[...rest]" as="/std">
             <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
               Standard Library
             </a>
@@ -109,7 +109,7 @@ const Header = ({ subtitle }: { subtitle?: string }) => {
             <div className="rounded-lg bg-white shadow-xs overflow-hidden">
               <div className="px-5 pt-4 flex items-center justify-between">
                 <Link href="/">
-                  <a className="block flex items-center">
+                  <a className="flex items-center">
                     <img
                       className="h-10 w-auto sm:h-12 my-2"
                       src="/logo.svg"
@@ -155,7 +155,7 @@ const Header = ({ subtitle }: { subtitle?: string }) => {
                     Install
                   </a>
                 </Link>
-                <Link href="/[identifier]" as="/manual">
+                <Link href="/[...rest]" as="/manual">
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
                     Manual
                   </a>
@@ -166,7 +166,7 @@ const Header = ({ subtitle }: { subtitle?: string }) => {
                 >
                   Runtime API
                 </a>
-                <Link href="/[identifier]" as="/std">
+                <Link href="/[...rest]" as="/std">
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
                     Standard Library
                   </a>
