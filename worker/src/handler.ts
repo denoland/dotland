@@ -4,8 +4,7 @@ import { handleRegistryRequest } from "./registry";
 
 const REMOTE_URL = "https://deno-website2.now.sh";
 
-export async function handleRequest(event: FetchEvent) {
-  const request = event.request;
+export async function handleRequest(request: Request) {
   const accept = request.headers.get("accept");
   const isHtml = accept && accept.indexOf("html") >= 0;
 

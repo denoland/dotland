@@ -37,6 +37,7 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
     return resp;
   }
   const remoteUrl = getBackingURL(module, version, path);
+  // @ts-ignore
   const resp = await fetch(remoteUrl, { cf: { cacheEverything: true } });
   const resp2 = new Response(resp.body, resp);
   resp2.headers.set("Access-Control-Allow-Origin", "*");
