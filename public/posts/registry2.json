@@ -3,5 +3,5 @@
   "author": "Luca Casonato",
   "publish_date": "2020-08-03T13:00:00.000Z",
   "images": [],
-  "snippet": "Goals and design considerations for the new deno.land/x service."
+  "snippet": "Design considerations and changes for the new code hosting service."
 }
