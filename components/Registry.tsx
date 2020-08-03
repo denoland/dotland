@@ -30,7 +30,7 @@ const Registry = () => {
   const [readme, setReadme] = useState<string | null | undefined>();
 
   // Name, version and path
-  const { query, asPath, push } = useRouter();
+  const { query, asPath, push, replace } = useRouter();
   const isStd = asPath.startsWith("/std");
   const { name, version, path } = useMemo(() => {
     const [identifier, ...pathParts] = (query.rest as string[]) ?? [];
@@ -38,13 +38,16 @@ const Registry = () => {
     const [name, version] = parseNameVersion(identifier ?? "");
     return { name, version, path };
   }, [query]);
-  function gotoVersion(newVersion: string) {
-    push(
-      `${!isStd ? "/x" : ""}/[...rest]`,
-      `${!isStd ? "/x" : ""}/${
-        name + (newVersion !== "" ? `@${newVersion}` : "")
-      }${path}`
-    );
+  function gotoVersion(newVersion: string, doReplace?: boolean) {
+    const href = `${!isStd ? "/x" : ""}/[...rest]`;
+    const asPath = `${!isStd ? "/x" : ""}/${
+      name + (newVersion !== "" ? `@${newVersion}` : "")
+    }${path}`;
+    if (doReplace) {
+      replace(href, asPath);
+    } else {
+      push(href, asPath);
+    }
   }
 
   // File paths
@@ -82,9 +85,16 @@ const Registry = () => {
   // If no version is specified, redirect to latest version
   useEffect(() => {
     if (!version && versions && versions.latest !== null) {
-      gotoVersion(versions.latest ?? "");
+      gotoVersion(versions.latest ?? "", true);
     }
   }, [versions?.latest, version]);
+
+  // If std version starts with v, redirect to version without v
+  useEffect(() => {
+    if (version.startsWith("v") && name === "std") {
+      gotoVersion(version.substring(1), true);
+    }
+  }, [name, version]);
 
   // Fetch version meta data
   useEffect(() => {

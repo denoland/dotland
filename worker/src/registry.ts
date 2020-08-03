@@ -25,7 +25,7 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
       );
     }
     console.log("registry redirect", module, latest);
-    const resp = new Response(undefined, {
+    return new Response(undefined, {
       headers: {
         Location: `${module === "std" ? "" : "/x"}/${module}@${latest}/${path}`,
         "x-deno-warning": `Implicitly using latest version (${latest}) for ${
@@ -34,7 +34,19 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
       },
       status: 302,
     });
-    return resp;
+  }
+  if (version.startsWith("v") && module === "std") {
+    console.log("std version prefix", module, version);
+    return new Response(undefined, {
+      headers: {
+        Location: `/std@${version.substring(1)}/${path}`,
+        // "x-deno-warning":
+        //   `Implicitly using latest version (${latest}) for ${url.origin}${
+        //     module === "std" ? "" : "/x"
+        //   }/${module}/${path}`,
+      },
+      status: 302,
+    });
   }
   const remoteUrl = getBackingURL(module, version, path);
   // @ts-ignore
