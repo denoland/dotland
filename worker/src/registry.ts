@@ -55,6 +55,20 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
     resp.status === 403 || resp.status === 404
       ? new Response("404 Not Found", { status: 404 })
       : new Response(resp.body, resp);
+
+  // JSX and TSX content type fix
+  if (
+    remoteUrl.endsWith(".jsx") &&
+    !resp2.headers.get("content-type")?.includes("javascript")
+  ) {
+    resp2.headers.set("content-type", "application/javascript");
+  } else if (
+    remoteUrl.endsWith(".tsx") &&
+    !resp2.headers.get("content-type")?.includes("typescript")
+  ) {
+    resp2.headers.set("content-type", "application/typescript");
+  }
+
   resp2.headers.set("Access-Control-Allow-Origin", "*");
   return resp2;
 }
