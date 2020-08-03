@@ -119,7 +119,7 @@ const Registry = () => {
       const files = versionMeta.directoryListing
         .filter(
           (f) =>
-            f.path.startsWith(path) &&
+            f.path.startsWith(path + "/") &&
             f.path.split("/").length - 2 === path.split("/").length - 1
         )
         .map<DirEntry>((f) => {
