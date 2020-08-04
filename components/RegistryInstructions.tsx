@@ -228,8 +228,9 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                           />
                           {isSubdirectoryValid === false ? (
                             <p className="text-red-400 mb-2">
-                              Provided sub directory is not valid it should not
-                              start with a / and should end with a /
+                              The provided subdirectory is not valid. It must
+                              end with a <InlineCode>/</InlineCode>, but may not
+                              start with one. (e.g. <InlineCode>src/</InlineCode>)
                             </p>
                           ) : null}
                           <span className="text-gray-500">
