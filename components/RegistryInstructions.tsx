@@ -230,7 +230,8 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                             <p className="text-red-400 mb-2">
                               The provided subdirectory is not valid. It must
                               end with a <InlineCode>/</InlineCode>, but may not
-                              start with one. (e.g. <InlineCode>src/</InlineCode>)
+                              start with one. (e.g.{" "}
+                              <InlineCode>src/</InlineCode>)
                             </p>
                           ) : null}
                           <span className="text-gray-500">
