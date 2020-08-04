@@ -326,12 +326,14 @@ const Registry = () => {
                       />
                     </div>
                   ) : null}
-                  {typeof readme === "string" ? (
+                  {typeof readme === "string" &&
+                  typeof readmeURL === "string" &&
+                  typeof readmeCanonicalPath === "string" ? (
                     <div className="mt-4">
                       <FileDisplay
                         raw={readme}
-                        canonicalPath={readmeCanonicalPath!}
-                        sourceURL={readmeURL!}
+                        canonicalPath={readmeCanonicalPath}
+                        sourceURL={readmeURL}
                         repositoryURL={readmeRepositoryURL}
                       />
                     </div>

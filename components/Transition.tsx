@@ -71,14 +71,14 @@ function CSSTransition({
       addEndListener={(node, done) => {
         node.addEventListener("transitionend", done, false);
       }}
-      onEnter={(node) => {
+      onEnter={(node: HTMLElement) => {
         addClasses(node, [...enterClasses, ...enterFromClasses]);
       }}
-      onEntering={(node) => {
+      onEntering={(node: HTMLElement) => {
         removeClasses(node, enterFromClasses);
         addClasses(node, enterToClasses);
       }}
-      onEntered={(node) => {
+      onEntered={(node: HTMLElement) => {
         removeClasses(node, [...enterToClasses, ...enterClasses]);
       }}
       onExit={(node) => {
