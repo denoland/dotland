@@ -4,7 +4,8 @@ import Transition from "./Transition";
 import InlineCode from "./InlineCode";
 import { getVersionList } from "../util/registry_utils";
 
-const VALID_NAME = /^[a-z0-9_]{3,40}$/;
+const VALID_NAME = /^[a-z0-9_]{3,40}$/,
+  VALID_SUBDIRECTORY = /^([^(/)])(.*\/$)/;
 
 function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
   // Stage of the instructions
@@ -27,6 +28,12 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
         .then((e) => !e)
         .catch(() => false),
     { refreshInterval: 2000 }
+  );
+
+  // Validity of the subdirectory
+  const isSubdirectoryValid = useMemo(
+    () => !subdirectory || VALID_SUBDIRECTORY.test(subdirectory),
+    [subdirectory]
   );
 
   // No page scroll when sidebar is open
@@ -207,12 +214,26 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                           </label>
                           <input
                             id="subdirectory"
-                            className={`block w-full px-4 py-2 my-1 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1`}
+                            className={`block w-full px-4 py-2 my-1 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1 ${
+                              isSubdirectoryValid === true
+                                ? "border-green-300 hover:border-green-300 focus:border-green-300"
+                                : isSubdirectoryValid === false
+                                ? "border-red-300 hover:border-red-300 focus:border-red-300"
+                                : ""
+                            }`}
                             type="text"
                             placeholder="Subdirectory"
                             value={subdirectory}
                             onChange={(e) => setSubdirectory(e.target.value)}
                           />
+                          {isSubdirectoryValid === false ? (
+                            <p className="text-red-400 mb-2">
+                              The provided subdirectory is not valid. It must
+                              end with a <InlineCode>/</InlineCode>, but may not
+                              start with one. (e.g.{" "}
+                              <InlineCode>src/</InlineCode>)
+                            </p>
+                          ) : null}
                           <span className="text-gray-500">
                             Optional. A subdirectory in your repository that the
                             module to be published is located in.
@@ -221,7 +242,14 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                         <span className="block w-full rounded-md shadow-sm mt-2">
                           <button
                             type="submit"
-                            className="w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
+                            disabled={!isSubdirectoryValid ? true : undefined}
+                            className={`w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md 
+                              ${
+                                isSubdirectoryValid
+                                  ? "text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50"
+                                  : "text-gray-400 bg-gray-50 cursor-default"
+                              }  
+                            text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out`}
                             onClick={() => setStage(3)}
                           >
                             Next
