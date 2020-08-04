@@ -175,7 +175,9 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                             </p>
                           ) : isModuleNameAvailable === false ? (
                             <p className="text-red-400 mb-2">
-                              This module name is not available.
+                              This module name is not available for a new
+                              author. If this module is already registered to
+                              your name, press Next.
                             </p>
                           ) : null}
                           {!isModuleNameValid ? (
