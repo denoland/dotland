@@ -30,7 +30,7 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
     { refreshInterval: 2000 }
   );
 
-  // Subdirectory of the module name
+  // Validity of the subdirectory
   const isSubdirectoryValid = useMemo(
     () => !subdirectory || VALID_SUBDIRECTORY.test(subdirectory),
     [subdirectory]
