@@ -57,17 +57,19 @@ export const RawCodeBlock = ({
     }, []);
 
     useLayoutEffect(() => {
-      const hash = hashValue
-        .split("-")
-        .map((e) => /([\d]+)/.exec(e)![0])
-        .map((e) => parseInt(e, 10))
-        .sort((a, b) => a - b)
-        .map((e) => `L${e}`);
-      if (hash.length) {
-        const idEl = document.getElementById(hash[0]);
-        if (idEl) {
-          idEl.scrollIntoView({ block: "center", behavior: "smooth" });
-          return;
+      const parts = hashValue.split("-");
+      if (parts.length > 1) {
+        const hash = parts
+          .map((e) => /([\d]+)/.exec(e)![0])
+          .map((e) => parseInt(e, 10))
+          .sort((a, b) => a - b)
+          .map((e) => `L${e}`);
+        if (hash.length) {
+          const idEl = document.getElementById(hash[0]);
+          if (idEl) {
+            idEl.scrollIntoView({ block: "center", behavior: "smooth" });
+            return;
+          }
         }
       }
     });
