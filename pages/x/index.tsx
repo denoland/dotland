@@ -125,8 +125,7 @@ const ThirdPartyRegistryList = () => {
                       <a href="" className="link">
                         be unsafe to not tag dependencies
                       </a>
-                      . To get rid of the warning, explicitly specify or
-                      version.
+                      . To get rid of the warning, explicitly specify a version.
                     </p>
                   </dd>
                 </div>
