@@ -58,7 +58,9 @@ const PostsIndexPage = (props: Props) => {
               return (
                 <div key={post.id}>
                   <p className="text-sm leading-5 text-gray-500">
-                    <time dateTime={post.publish_date}>{format.format(date)}</time>
+                    <time dateTime={post.publish_date}>
+                      {format.format(date)}
+                    </time>
                   </p>
                   <Link href="/posts/[post]" as={`/posts/${post.id}`}>
                     <a className="block">
