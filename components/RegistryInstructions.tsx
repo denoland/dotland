@@ -5,7 +5,7 @@ import InlineCode from "./InlineCode";
 import { getVersionList } from "../util/registry_utils";
 
 const VALID_NAME = /^[a-z0-9_]{3,40}$/,
-  VALID_SUBDIRECTORY = /(.*\/$)/;
+  VALID_SUBDIRECTORY = /^([^(\/)])(.*\/$)/;
 
 function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
   // Stage of the instructions
@@ -228,8 +228,8 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                           />
                           {isSubdirectoryValid === false ? (
                             <p className="text-red-400 mb-2">
-                              Provided sub directory is not valid as it does not
-                              end with a /
+                              Provided sub directory is not valid it should not
+                              start with a / and should end with a /
                             </p>
                           ) : null}
                           <span className="text-gray-500">
