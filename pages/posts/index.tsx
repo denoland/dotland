@@ -58,9 +58,11 @@ const PostsIndexPage = (props: Props) => {
               return (
                 <div key={post.id}>
                   <p className="text-sm leading-5 text-gray-500">
-                    <time dateTime="2020-03-16">{format.format(date)}</time>
+                    <time dateTime={post.publish_date}>
+                      {format.format(date)}
+                    </time>
                   </p>
-                  <Link href="/posts/[article]" as={`/posts/${post.id}`}>
+                  <Link href="/posts/[post]" as={`/posts/${post.id}`}>
                     <a className="block">
                       <h3 className="mt-2 text-xl leading-7 font-semibold text-gray-900">
                         {post.title}
@@ -71,7 +73,7 @@ const PostsIndexPage = (props: Props) => {
                     </a>
                   </Link>
                   <div className="mt-3">
-                    <Link href="/posts/[article]" as={`/posts/${post.id}`}>
+                    <Link href="/posts/[post]" as={`/posts/${post.id}`}>
                       <a className="text-base leading-6 font-semibold text-blue-600 hover:text-blue-500 transition ease-in-out duration-150">
                         Read post
                       </a>
