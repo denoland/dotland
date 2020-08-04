@@ -258,7 +258,7 @@ const Registry = () => {
                   title="No uploaded versions"
                   body={`This module name has been reserved for a repository, but no versions have been uploaded yet. Modules that do not upload a version within 30 days of registration will be removed. ${
                     versions.isLegacy
-                      ? "If you are the owner of this module, please re-link the GitHub repository with deno.land/x, and publish a new version."
+                      ? "If you are the owner of this module, please re-add the GitHub repository with deno.land/x (by following the instructions at https://deno.land/x#add), and publish a new version."
                       : ""
                   }`}
                 />
