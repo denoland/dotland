@@ -183,7 +183,8 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                           {!isModuleNameValid ? (
                             <span className="text-red-400">
                               The module name must be between 3 and 40
-                              characters and contain only the characters a-z, 0-9 and _.
+                              characters and contain only the characters a-z,
+                              0-9 and _.
                             </span>
                           ) : null}
                         </div>
