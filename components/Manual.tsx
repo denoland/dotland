@@ -105,7 +105,7 @@ function Manual() {
         tempList.findIndex((page) => page.path === `/manual${path}`)
       );
     }
-  }, [tableOfContents]);
+  }, [tableOfContents, path]);
 
   const sourceURL = useMemo(() => getFileURL(version ?? "master", path), [
     version,
@@ -354,24 +354,20 @@ function Manual() {
                     sourceURL={sourceURL}
                   />
                   <div className="pt-4 border-t border-gray-200">
-                    {pageIndex !== 0 && pageList[pageIndex - 1] !== undefined && (
+                    {pageList[pageIndex - 1] !== undefined && (
                       <Link href="/[...rest]" as={pageList[pageIndex - 1].path}>
                         <a className="text-gray-900 hover:text-gray-600 font-normal">
                           ← {pageList[pageIndex - 1].name}
                         </a>
                       </Link>
                     )}
-                    {pageIndex !== pageList.length - 1 &&
-                      pageList[pageIndex + 1] !== undefined && (
-                        <Link
-                          href="/[...rest]"
-                          as={pageList[pageIndex + 1].path}
-                        >
-                          <a className="text-gray-900 hover:text-gray-600 font-normal float-right">
-                            {pageList[pageIndex + 1].name} →
-                          </a>
-                        </Link>
-                      )}
+                    {pageList[pageIndex + 1] !== undefined && (
+                      <Link href="/[...rest]" as={pageList[pageIndex + 1].path}>
+                        <a className="text-gray-900 hover:text-gray-600 font-normal float-right">
+                          {pageList[pageIndex + 1].name} →
+                        </a>
+                      </Link>
+                    )}
                   </div>
                 </>
               ) : (
