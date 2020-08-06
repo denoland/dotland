@@ -122,7 +122,10 @@ const ThirdPartyRegistryList = () => {
                       deno.land/x warns you when you are implicitly importing
                       the latest version of a module (when you do not explicitly
                       specify a version). This is because it can{" "}
-                      <a href="" className="link">
+                      <a
+                        href="https://github.com/denoland/deno_website2/issues/997"
+                        className="link"
+                      >
                         be unsafe to not tag dependencies
                       </a>
                       . To get rid of the warning, explicitly specify a version.
