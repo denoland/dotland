@@ -162,6 +162,10 @@ function createSyscallCountColumns(data: BenchmarkRun[]): Column[] {
   }));
 }
 
+export function formatFloat(n: number): string {
+  return n.toFixed(3);
+}
+
 export function formatKB(bytes: number): string {
   return (bytes / 1024).toFixed(2);
 }

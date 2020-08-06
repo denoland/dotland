@@ -15,6 +15,7 @@ import {
   formatPercentage,
   formatReqSec,
   formatKB,
+  formatFloat,
 } from "../util/benchmark_utils";
 import BenchmarkChart, { BenchmarkLoading } from "../components/BenchmarkChart";
 import { CookieBanner } from "../components/CookieBanner";
@@ -168,9 +169,11 @@ const Benchmarks = () => {
                 </li>
               </ul>
               <div className="mt-8">
-                <h5 className="text-lg font-medium tracking-tight">
-                  Execution time
-                </h5>
+                <a href="#execution-time" id="execution-time">
+                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                    Execution time
+                  </h5>
+                </a>
                 <BenchmarkOrLoading
                   data={data}
                   columns={data?.execTime.filter(
@@ -189,9 +192,11 @@ const Benchmarks = () => {
                 </p>
               </div>
               <div className="mt-8">
-                <h5 className="text-lg font-medium tracking-tight">
-                  Thread count
-                </h5>
+                <a href="#thread-count" id="thread-count">
+                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                    Thread count
+                  </h5>
+                </a>
                 <BenchmarkOrLoading
                   data={data}
                   columns={data?.threadCount.filter(
@@ -203,9 +208,11 @@ const Benchmarks = () => {
                 </p>
               </div>
               <div className="mt-8">
-                <h5 className="text-lg font-medium tracking-tight">
-                  Syscall count
-                </h5>
+                <a href="#syscall-count" id="syscall-count">
+                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                    Syscall count
+                  </h5>
+                </a>{" "}
                 <BenchmarkOrLoading
                   data={data}
                   columns={data?.syscallCount.filter(
@@ -218,9 +225,11 @@ const Benchmarks = () => {
                 </p>
               </div>
               <div className="mt-8">
-                <h5 className="text-lg font-medium tracking-tight">
-                  Max memory usage
-                </h5>
+                <a href="#max-memory-usage" id="max-memory-usage">
+                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                    Max memory usage
+                  </h5>
+                </a>{" "}
                 <BenchmarkOrLoading
                   data={data}
                   columns={data?.maxMemory.filter(
@@ -239,9 +248,11 @@ const Benchmarks = () => {
                 TypeScript Performance
               </h4>
               <div className="mt-8">
-                <h5 className="text-lg font-medium tracking-tight">
-                  Type Checking
-                </h5>
+                <a href="#type-checking" id="type-checking">
+                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                    Type Checking
+                  </h5>
+                </a>
                 <BenchmarkOrLoading
                   data={data}
                   columns={data?.execTime.filter(({ name }) => {
@@ -249,6 +260,7 @@ const Benchmarks = () => {
                     return ["check", "no_check"].includes(name);
                   })}
                   yLabel="seconds"
+                  yTickFormat={formatFloat}
                 />
                 <p className="mt-1">
                   In both cases, <code>std/examples/chat/server_test.ts</code>{" "}
@@ -285,9 +297,11 @@ const Benchmarks = () => {
                 </span>
               </p>
               <div className="mt-8">
-                <h5 className="text-lg font-medium tracking-tight">
-                  HTTP Server Throughput
-                </h5>
+                <a href="#http-server-throughput" id="http-server-throughput">
+                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                    HTTP Server Throughput
+                  </h5>
+                </a>
                 <BenchmarkOrLoading
                   data={data}
                   columns={
@@ -364,9 +378,11 @@ const Benchmarks = () => {
                 </ul>
               </div>
               <div className="mt-8">
-                <h5 className="text-lg font-medium tracking-tight">
-                  HTTP Latency
-                </h5>
+                <a href="#http-latency" id="http-latency">
+                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                    HTTP Latency
+                  </h5>
+                </a>{" "}
                 <BenchmarkOrLoading
                   data={data}
                   columns={data?.maxLatency}
@@ -379,9 +395,11 @@ const Benchmarks = () => {
                 </p>
               </div>
               <div className="mt-8">
-                <h5 className="text-lg font-medium tracking-tight">
-                  HTTP Proxy Throughput
-                </h5>
+                <a href="#http-proxy-throughput" id="http-proxy-throughput">
+                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                    HTTP Proxy Throughput
+                  </h5>
+                </a>
                 <BenchmarkOrLoading
                   data={data}
                   columns={showNormalized ? data?.normalizedProxy : data?.proxy}
@@ -430,9 +448,11 @@ const Benchmarks = () => {
                 </ul>
               </div>
               <div className="mt-8">
-                <h5 className="text-lg font-medium tracking-tight">
-                  Throughput
-                </h5>
+                <a href="#throughput" id="throughput">
+                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                    Throughput
+                  </h5>
+                </a>
                 <BenchmarkOrLoading
                   data={data}
                   columns={data?.throughput}
@@ -454,9 +474,11 @@ const Benchmarks = () => {
             <div className="mt-20">
               <h4 className="text-2xl font-bold tracking-tight">Size</h4>
               <div className="mt-8">
-                <h5 className="text-lg font-medium tracking-tight">
-                  Executable size
-                </h5>
+                <a href="#executable-size" id="executable-size">
+                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                    Executable size
+                  </h5>
+                </a>
                 <BenchmarkOrLoading
                   data={data}
                   columns={data?.binarySize}
@@ -468,9 +490,11 @@ const Benchmarks = () => {
                 </p>
               </div>
               <div className="mt-8">
-                <h5 className="text-lg font-medium tracking-tight">
-                  Bundle size
-                </h5>
+                <a href="#bundle-size" id="bundle-size">
+                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                    Bundle size
+                  </h5>
+                </a>{" "}
                 <BenchmarkOrLoading
                   data={data}
                   columns={data?.bundleSize}
