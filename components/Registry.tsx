@@ -19,6 +19,7 @@ import {
 import Header from "./Header";
 import Footer from "./Footer";
 import FileDisplay from "./FileDisplay";
+import { CookieBanner } from "./CookieBanner";
 
 const Registry = () => {
   // State
@@ -225,6 +226,7 @@ const Registry = () => {
           {" | Deno"}
         </title>
       </Head>
+      <CookieBanner />
       <div className="bg-gray-50 min-h-full">
         <Header
           subtitle={name === "std" ? "Standard Library" : "Third Party Modules"}

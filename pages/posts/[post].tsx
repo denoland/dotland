@@ -10,6 +10,7 @@ import { GetStaticProps, GetStaticPaths } from "next";
 import { promises as fs } from "fs";
 import { join } from "path";
 import Link from "next/link";
+import { CookieBanner } from "../../components/CookieBanner";
 
 interface Props {
   markdown: string;
@@ -41,6 +42,7 @@ const NewsPostPage = (props: Props) => {
       <Head>
         <title>{props.meta.title} | Deno</title>
       </Head>
+      <CookieBanner />
       <Header />
       <div className="w-full" style={{ backgroundColor: "#2f2e2c" }}>
         <div className="max-w-screen-lg mx-auto">

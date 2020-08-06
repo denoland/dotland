@@ -9,6 +9,7 @@ import versions from "../versions.json";
 import { NextPage, GetStaticProps } from "next";
 import InlineCode from "../components/InlineCode";
 import Header from "../components/Header";
+import { CookieBanner } from "../components/CookieBanner";
 
 interface HomeProps {
   latestStd: string;
@@ -27,6 +28,7 @@ for await (const req of s) {
       <Head>
         <title>Deno</title>
       </Head>
+      <CookieBanner />
       <div className="bg-white">
         <div className="bg-gray-50 border-b border-gray-200">
           <Header />

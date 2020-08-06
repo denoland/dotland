@@ -17,6 +17,7 @@ import {
   formatKB,
 } from "../util/benchmark_utils";
 import BenchmarkChart, { BenchmarkLoading } from "../components/BenchmarkChart";
+import { CookieBanner } from "../components/CookieBanner";
 
 // TODO(lucacasonato): add anchor points to headers
 const Benchmarks = () => {
@@ -92,6 +93,7 @@ const Benchmarks = () => {
           Benchmarks {dataRangeTitle ? `(${dataRangeTitle})` : `| Deno`}
         </title>
       </Head>
+      <CookieBanner />
       <div className="bg-gray-50 min-h-full">
         <Header subtitle="Continuous Benchmarks" />
         <div className="mb-12">

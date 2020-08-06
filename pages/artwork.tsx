@@ -6,6 +6,7 @@ import Head from "next/head";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { ARTWORKS, Artwork } from "../util/artwork_utils";
+import { CookieBanner } from "../components/CookieBanner";
 
 const ArtworkPage = () => {
   return (
@@ -13,6 +14,7 @@ const ArtworkPage = () => {
       <Head>
         <title>Artwork | Deno</title>
       </Head>
+      <CookieBanner />
       <Header />
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 mt-8 mb-24">
         <div className="max-w-screen-lg mx-auto">

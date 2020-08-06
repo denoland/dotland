@@ -5,6 +5,7 @@ import Head from "next/head";
 
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
+import { CookieBanner } from "../../components/CookieBanner";
 
 const V1Hoodie = () => {
   return (
@@ -12,6 +13,7 @@ const V1Hoodie = () => {
       <Head>
         <title>1.0 Hoodie | Deno</title>
       </Head>
+      <CookieBanner />
       <Header />
       <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 py-8 mb-16">
         <h1 className="text-3xl tracking-tight font-bold text-5xl leading-10">
