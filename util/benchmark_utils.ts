@@ -44,7 +44,7 @@ export interface Column {
 
 function getBenchmarkVarieties(
   data: BenchmarkRun[],
-  benchmarkName: BenchmarkName
+  benchmarkName: BenchmarkName,
 ): string[] {
   // Look at last sha hash.
   const last = data[data.length - 1];
@@ -53,7 +53,7 @@ function getBenchmarkVarieties(
 
 function createColumns(
   data: BenchmarkRun[],
-  benchmarkName: BenchmarkName
+  benchmarkName: BenchmarkName,
 ): Column[] {
   const varieties = getBenchmarkVarieties(data, benchmarkName);
   return varieties.map((variety) => ({
@@ -82,7 +82,7 @@ export function createNormalizedColumns(
   data: BenchmarkRun[],
   benchmarkName: BenchmarkName,
   baselineBenchmark: BenchmarkName,
-  baselineVariety: string
+  baselineVariety: string,
 ): Column[] {
   const varieties = getBenchmarkVarieties(data, benchmarkName);
   return varieties.map((variety) => ({
@@ -162,6 +162,10 @@ function createSyscallCountColumns(data: BenchmarkRun[]): Column[] {
   }));
 }
 
+export function formatFloat(n: number): string {
+  return n.toFixed(3);
+}
+
 export function formatKB(bytes: number): string {
   return (bytes / 1024).toFixed(2);
 }
@@ -238,13 +242,13 @@ export function reshape(data: BenchmarkRun[]): BenchmarkData {
     data,
     "req_per_sec",
     "req_per_sec",
-    "hyper"
+    "hyper",
   );
   const normalizedProxy = createNormalizedColumns(
     data,
     "req_per_sec_proxy",
     "req_per_sec",
-    "hyper"
+    "hyper",
   );
 
   return {
