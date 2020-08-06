@@ -8,6 +8,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { getBuild } from "../../util/registry_utils";
 import { ErrorMessage } from "../../components/Registry";
+import { CookieBanner } from "../../components/CookieBanner";
 
 const RestPage = () => {
   const { query } = useRouter();
@@ -20,6 +21,7 @@ const RestPage = () => {
       <Head>
         <title>Publish Status | Deno</title>
       </Head>
+      <CookieBanner />
       <div className="bg-gray-50 min-h-full">
         <Header />
         <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 mt-8 pb-8 mb-16">

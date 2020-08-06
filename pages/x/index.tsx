@@ -12,6 +12,7 @@ import { debounce } from "../../util/debounce";
 import { SearchResult, getModules } from "../../util/registry_utils";
 import * as pageutils from "../../util/pagination_utils";
 import RegistryInstructions from "../../components/RegistryInstructions";
+import { CookieBanner } from "../../components/CookieBanner";
 
 const PER_PAGE = 20;
 
@@ -50,6 +51,7 @@ const ThirdPartyRegistryList = () => {
       <Head>
         <title>Third Party Modules | Deno</title>
       </Head>
+      <CookieBanner />
       <div className="bg-gray">
         <Header subtitle="Third Party Modules" />
         <RegistryInstructions
