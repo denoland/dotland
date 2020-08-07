@@ -120,10 +120,7 @@ for await (const req of s) {
           </Link>
           <p className="my-4 text-gray-700">
             The basic runtime documentation for Deno can be found on{" "}
-            <a
-              href="https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts"
-              className="link"
-            >
+            <a href="https://doc.deno.land/builtin/stable" className="link">
               doc.deno.land
             </a>
             .
