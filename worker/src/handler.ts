@@ -15,10 +15,7 @@ export async function handleRequest(request: Request) {
   }
 
   if (url.pathname.startsWith("/typedoc")) {
-    return Response.redirect(
-      "https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts",
-      301
-    );
+    return Response.redirect("https://doc.deno.land/builtin/stable", 301);
   }
 
   const isRegistryRequest =
