@@ -318,10 +318,9 @@ const Benchmarks = () => {
                 </p>
                 <ul className="ml-8 list-disc my-2">
                   <li>
-                    <SourceLink path="tools/deno_tcp.ts" name="deno_tcp" />
-                    is a fake http server that doesn't parse HTTP. It is
-                    comparable to{" "}
-                    <SourceLink path="tools/node_tcp.js" name="node_tcp" />
+                    <SourceLink path="tools/deno_tcp.ts" name="deno_tcp" /> is a
+                    fake http server that doesn't parse HTTP. It is comparable
+                    to <SourceLink path="tools/node_tcp.js" name="node_tcp" />
                   </li>
                   <li>
                     <SourceLink
