@@ -15,14 +15,11 @@ export async function handleRequest(request: Request) {
   }
 
   if (url.pathname.startsWith("/typedoc")) {
-    return Response.redirect(
-      "https://doc.deno.land/builtin/stable",
-      301,
-    );
+    return Response.redirect("https://doc.deno.land/builtin/stable", 301);
   }
 
-  const isRegistryRequest = url.pathname.startsWith("/std") ||
-    url.pathname.startsWith("/x");
+  const isRegistryRequest =
+    url.pathname.startsWith("/std") || url.pathname.startsWith("/x");
 
   if (isRegistryRequest && !isHtml) {
     return handleRegistryRequest(url);
