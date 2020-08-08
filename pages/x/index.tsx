@@ -1,15 +1,15 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import React, { ChangeEvent, useState, useEffect } from "react";
+import React, { ChangeEvent } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import useSWR from "swr";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import InlineCode from "../../components/InlineCode";
-import { debounce } from "../../util/debounce";
-import { SearchResult, getModules } from "../../util/registry_utils";
+import { getModules } from "../../util/registry_utils";
 import * as pageutils from "../../util/pagination_utils";
 import RegistryInstructions from "../../components/RegistryInstructions";
 import { CookieBanner } from "../../components/CookieBanner";
@@ -17,25 +17,30 @@ import { CookieBanner } from "../../components/CookieBanner";
 const PER_PAGE = 20;
 
 const ThirdPartyRegistryList = () => {
-  const { asPath } = useRouter();
+  const { asPath, query: routerQuery, replace } = useRouter();
   const [overlayOpen, setOverlayOpen] = React.useState(asPath.endsWith("#add"));
 
   const [page, setPage] = React.useState(1);
-  const [query, setQuery] = React.useState("");
+  const query =
+    (Array.isArray(routerQuery.query)
+      ? routerQuery.query[0]
+      : routerQuery.query) || "";
 
   function handleSearchInput(event: ChangeEvent<HTMLInputElement>) {
     setPage(1);
-    setQuery(event.target.value);
+    const query = event.target.value
+      ? { query: event.target.value }
+      : undefined;
+    replace({
+      pathname: "/x",
+      query,
+    });
   }
 
-  const [resp, setResp] = useState<{
-    results: SearchResult[];
-    totalCount: number;
-  } | null>(null);
-
-  useEffect(() => {
-    getModules(page, PER_PAGE, query).then((resp) => {
-      setResp(
+  const { data: resp } = useSWR(
+    [query, page],
+    async (query, page) => {
+      return getModules(page, PER_PAGE, query).then((resp) =>
         resp
           ? {
               results: resp.results,
@@ -43,8 +48,9 @@ const ThirdPartyRegistryList = () => {
             }
           : null
       );
-    });
-  }, [page, query]);
+    },
+    { dedupingInterval: 300, refreshInterval: 0, initialData: undefined }
+  );
 
   return (
     <>
@@ -179,13 +185,17 @@ const ThirdPartyRegistryList = () => {
               type="text"
               placeholder="Search"
               value={query}
-              onChange={debounce(handleSearchInput)}
+              onChange={handleSearchInput}
             />
           </div>
           <div className="sm:max-w-screen-lg sm:mx-auto sm:px-6 md:px-8 pb-4 sm:pb-12">
-            {resp === null ? (
+            {resp === undefined ? (
               <div className="px-4 sm:px-0 py-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
                 Loading...
+              </div>
+            ) : resp === null ? (
+              <div className="px-4 sm:px-0 py-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
+                Failed to load modules
               </div>
             ) : (
               <div className="bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4">
