@@ -1,4 +1,5 @@
-const basepath = "https://raw.githubusercontent.com/denoland/deno/";
+const xBasepath = "https://deno.land/x/deno@";
+const githubBasepath = "https://raw.githubusercontent.com/denoland/deno/";
 const docpath = "https://github.com/denoland/deno/blob/";
 import VERSIONS from "../versions.json";
 
@@ -13,10 +14,16 @@ export interface TableOfContents {
   };
 }
 
+function basepath(version: string) {
+  return VERSIONS.cli.find((v) => v === version) === undefined
+    ? githubBasepath
+    : xBasepath;
+}
+
 export async function getTableOfContents(
   version: string
 ): Promise<TableOfContents> {
-  const res = await fetch(`${basepath}${version}/docs/toc.json`);
+  const res = await fetch(`${basepath(version)}${version}/docs/toc.json`);
   if (res.status !== 200) {
     throw Error(
       `Got an error (${
@@ -28,7 +35,7 @@ export async function getTableOfContents(
 }
 
 export function getFileURL(version: string, path: string) {
-  return `${basepath}${version}/docs${path}.md`;
+  return `${basepath(version)}${version}/docs${path}.md`;
 }
 
 export function getDocURL(version: string, path: string) {

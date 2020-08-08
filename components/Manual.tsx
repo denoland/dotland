@@ -73,7 +73,7 @@ function Manual() {
   const [content, setContent] = useState<string | null>(null);
 
   useEffect(() => {
-    getTableOfContents(version ?? "master")
+    getTableOfContents(version ?? versions[0])
       .then(setTableOfContents)
       .then(scrollTOCIntoView)
       .catch((e) => {
@@ -108,7 +108,7 @@ function Manual() {
     }
   }, [tableOfContents, path]);
 
-  const sourceURL = useMemo(() => getFileURL(version ?? "master", path), [
+  const sourceURL = useMemo(() => getFileURL(version ?? versions[0], path), [
     version,
     path,
   ]);
@@ -333,7 +333,7 @@ function Manual() {
               {content ? (
                 <>
                   <a
-                    href={getDocURL(version ?? "master", path)}
+                    href={getDocURL(version ?? versions[0], path)}
                     className="text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right mt-1"
                   >
                     <span className="sr-only">GitHub</span>
@@ -409,7 +409,7 @@ function Version({
   gotoVersion,
 }: {
   version: string | undefined;
-  versions: string[] | null | undefined;
+  versions: string[];
   gotoVersion: (version: string) => void;
 }) {
   return (
@@ -422,25 +422,24 @@ function Version({
           <select
             id="version"
             className="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-            value={version}
+            value={version ?? versions[0]}
             onChange={({ target: { value: newVersion } }) =>
               gotoVersion(newVersion)
             }
           >
-            {versions && version && !versions.includes(version) && (
+            {version && version !== "master" && !versions.includes(version) && (
               <option key={version} value={version}>
                 {version}
               </option>
             )}
-            <option key="" value="">
+            <option key="master" value="master">
               master
             </option>
-            {versions &&
-              versions.map((v) => (
-                <option key={v} value={v}>
-                  {v}
-                </option>
-              ))}
+            {versions.map((v) => (
+              <option key={v} value={v}>
+                {v}
+              </option>
+            ))}
           </select>
         </div>
       </div>
