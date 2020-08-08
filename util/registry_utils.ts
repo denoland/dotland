@@ -247,6 +247,34 @@ export function denoDocAvailableForURL(filename: string) {
   }
 }
 
+export function findRootReadme(
+  directoryListing: DirListing[] | undefined
+): DirEntry | undefined {
+  const listing =
+    directoryListing?.find(
+      (d) =>
+        d.path.toLowerCase() === "/readme.md" ||
+        d.path.toLowerCase() === "/readme"
+    ) ??
+    directoryListing?.find(
+      (d) =>
+        d.path.toLowerCase() === "/docs/readme.md" ||
+        d.path.toLowerCase() === "/docs/readme"
+    ) ??
+    directoryListing?.find(
+      (d) =>
+        d.path.toLowerCase() === "/.github/readme.md" ||
+        d.path.toLowerCase() === "/.github/readme"
+    );
+  return listing
+    ? {
+        name: listing.path.substring(1),
+        type: listing.type,
+        size: listing.size,
+      }
+    : undefined;
+}
+
 export function isReadme(filename: string) {
   return (
     filename.toLowerCase() === "readme.md" ||

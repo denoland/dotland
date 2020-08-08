@@ -15,6 +15,7 @@ import {
   getVersionList,
   VersionInfo,
   VersionMetaInfo,
+  findRootReadme,
 } from "../util/registry_utils";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -142,7 +143,10 @@ const Registry = () => {
     readmeURL,
     readmeRepositoryURL,
   } = useMemo(() => {
-    const readmeEntry = dirEntries?.find((d) => isReadme(d.name));
+    const readmeEntry =
+      path === ""
+        ? findRootReadme(versionMeta?.directoryListing)
+        : dirEntries?.find((d) => isReadme(d.name));
     if (readmeEntry) {
       return {
         readmeCanonicalPath: canonicalPath + "/" + readmeEntry.name,
@@ -345,8 +349,8 @@ const Registry = () => {
             }
           })()}
         </div>
+        <Footer simple />
       </div>
-      <Footer simple />
     </>
   );
 };
