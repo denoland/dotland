@@ -453,37 +453,51 @@ function VersionSelector({
   onChange: (newVersion: string) => void;
 }) {
   return (
-    <div>
-      <label htmlFor="version" className="sr-only">
-        Version
-      </label>
-      <div className="mt-1 sm:mt-0 sm:col-span-2">
-        <div className="max-w-xs rounded-md shadow-sm">
-          <select
-            id="version"
-            className="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-            value={selectedVersion}
-            onChange={({ target: { value: newVersion } }) =>
-              onChange(newVersion)
-            }
-          >
-            {versions && (
-              <>
-                {selectedVersion && !versions.includes(selectedVersion) && (
-                  <option key={selectedVersion} value={selectedVersion}>
-                    {selectedVersion}
-                  </option>
-                )}
-                {versions.map((v) => (
-                  <option key={v} value={v}>
-                    {v}
-                  </option>
-                ))}
-              </>
-            )}
-          </select>
+    <div className="flex gap-2 flex-wrap">
+      <div>
+        <label htmlFor="version" className="sr-only">
+          Version
+        </label>
+        <div className="mt-1 sm:mt-0 sm:col-span-2">
+          <div className="max-w-xs rounded-md shadow-sm">
+            <select
+              id="version"
+              className="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+              value={selectedVersion}
+              onChange={({ target: { value: newVersion } }) =>
+                onChange(newVersion)
+              }
+            >
+              {versions && (
+                <>
+                  {selectedVersion && !versions.includes(selectedVersion) && (
+                    <option key={selectedVersion} value={selectedVersion}>
+                      {selectedVersion}
+                    </option>
+                  )}
+                  {versions.map((v) => (
+                    <option key={v} value={v}>
+                      {v}
+                    </option>
+                  ))}
+                </>
+              )}
+            </select>
+          </div>
         </div>
       </div>
+      {versions && versions[0] !== selectedVersion ? (
+        <div>
+          <button
+            type="button"
+            className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition duration-150 ease-in-out"
+            aria-label="Go to latest version"
+            onClick={() => onChange(versions[0])}
+          >
+            Go to latest
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 }
