@@ -19,13 +19,33 @@ export async function handleRequest(request: Request) {
   }
 
   const isRegistryRequest =
-    url.pathname.startsWith("/std") || url.pathname.startsWith("/x");
+    url.pathname.startsWith("/std") || url.pathname.startsWith("/x/");
 
-  if (isRegistryRequest && !isHtml) {
-    return handleRegistryRequest(url);
+  if (isRegistryRequest) {
+    if (isHtml) {
+      const ln = extractAltLineNumberReference(url.toString());
+      if (ln) {
+        return Response.redirect(ln.rest + "#L" + ln.line, 302);
+      }
+    } else {
+      return handleRegistryRequest(url);
+    }
   }
 
   return proxyFile(url, REMOTE_URL, request);
+}
+
+const ALT_LINENUMBER_MATCHER = /(.*):(\d+):\d+$/;
+
+export function extractAltLineNumberReference(
+  url: string
+): { rest: string; line: number } | null {
+  const matches = ALT_LINENUMBER_MATCHER.exec(url);
+  if (matches === null) return null;
+  return {
+    rest: matches[1],
+    line: parseInt(matches[2]),
+  };
 }
 
 function proxyFile(url: URL, remoteUrl: string, request: Request) {
