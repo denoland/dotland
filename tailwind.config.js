@@ -12,6 +12,9 @@ module.exports = {
         '"Courier New"',
         "monospace",
       ],
+      body: [
+        "Noto Sans JP"
+      ]
     },
     extend: {
       fontFamily: {

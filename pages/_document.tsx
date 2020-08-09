@@ -19,7 +19,8 @@ export default class DenoDocDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <link rel="stylesheet" href="/fonts/inter/inter.css" />
+          {/*<link rel="stylesheet" href="/fonts/inter/inter.css" />*/}
+          <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet" />
           <link
             rel="apple-touch-icon"
             sizes="180x180"
@@ -27,7 +28,7 @@ export default class DenoDocDocument extends Document {
           />
           <link rel="manifest" href="/site.webmanifest" />
         </Head>
-        <body>
+        <body className="font-body">
           <Main />
           <NextScript />
         </body>
