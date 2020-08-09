@@ -62,7 +62,7 @@ for await (const req of s) {
               Secure by default. No file, network, or environment access, unless
               explicitly enabled.
               */}
-              デフォルトで安全。ファイルやネットワークなど環境へのアクセスは明示的に指定しない限りアクセスされません。
+              デフォルトで安全。ファイルやネットワークなど環境へのアクセスは明示的に有効にしない限り起こりません。
             </li>
             <li>
               {/* Supports TypeScript out of the box. */}
