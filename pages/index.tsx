@@ -210,6 +210,7 @@ for await (const req of s) {
             </a>
           </Link>
           <p className="my-4 text-gray-700">
+            {/*
             Next to the Deno runtime, Deno also provides a list of audited
             standard modules that are reviewed by the core Deno team and are
             guaranteed to work with a specific Deno version. These live
@@ -218,14 +219,28 @@ for await (const req of s) {
               denoland/deno
             </a>{" "}
             repository.
+            */}
+            core DenoチームによりDenoので動くことが保証された標準モジュールを提供します。
+            これらはDenoのソースコードと一緒に{" "}
+            <a href="https://github.com/denoland/deno" className="link">
+              denoland/deno
+            </a>{" "}
+            にあります。
           </p>
           <p className="my-4 text-gray-700">
+            {/*
             These standard modules are hosted at{" "}
             <Link href="/[...rest]" as="/std">
               <a className="link">deno.land/std</a>
             </Link>{" "}
             and are distributed via URLs like all other ES modules that are
             compatible with Deno.
+            */}
+            これらの標準モジュールは{" "}
+            <Link href="/[...rest]" as="/std">
+              <a className="link">deno.land/std</a>
+            </Link>{" "}
+            でホストされており、Denoで動く他のESモジュール同様URLで配布されています。
           </p>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
