@@ -10,12 +10,6 @@ https://deno-ja.vercel.app/ のレポジトリです。
 
 `.tsx`の英文はJSXのコメント(`{/* */}`)でコメントアウトし、その下に日本語訳を書いてください。
 
-## Issue, Pull Request
-
-Issue, Pull Requestは英語か日本語でしてください。
-
-コミットメッセージも英語か日本語でしてください。
-
 ## History
 
 This is a rewrite of the Deno website it will combine the code in
