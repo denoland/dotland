@@ -37,9 +37,14 @@ for await (const req of s) {
               Deno
             </h1>
             <h2 className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900">
+              {/*
               A <strong className="font-semibold">secure</strong> runtime for{" "}
               <strong className="font-semibold">JavaScript</strong> and{" "}
               <strong className="font-semibold">TypeScript</strong>.
+              */}
+              <strong className="font-semibold">JavaScript</strong>と
+              <strong className="font-semibold">TypeScript</strong>のための
+              <strong className="font-semibold">安全な</strong>ランタイム
             </h2>
           </div>
         </div>
