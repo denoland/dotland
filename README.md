@@ -1,24 +1,20 @@
-# deno_website2
+# deno 日本語サイト
 
-[![Build Status](https://github.com/denoland/deno_website2/workflows/ci/badge.svg?branch=master&event=push)](https://github.com/denoland/deno_website2/actions)
+![ci](https://github.com/tokiedokie/deno_website2_japanese/workflows/ci/badge.svg)
 
-This is the code for https://deno.land/
+このレポジトリは https://deno-ja.vercel.app/ のコードです
 
-This website consists of two parts
+## 翻訳のやり方
 
-1. A Cloudflare Worker
-2. A Next.js app hosted on Vercel
+`docs`下の`.md`ファイルは英文をHTMLコメント(`<!-- -->`)でコメントアウトし、その下に日本語訳を書いてください。英文が複数行に渡る場合、すべてをコメントアウトして日本語にしてください。英文が一行空いている場合はそれぞれ分けて日本語にしてください。
 
-We want to provide pretty and semantic URLs for modules that will be used within
-Deno. For example: https://deno.land/std/http/server.ts
+`.tsx`の英文はJSXのコメント(`{/* */}`)でコメントアウトし、その下に日本語訳を書いてください。
 
-When we request this file inside of Deno, we need to receive back the raw
-content of the file. However, when we visit that URL in the browser we want to
-see a pretty HTML file with syntax highlighting.
+## Issue, Pull Request
 
-To accomplish this the Cloudflare Worker looks at the "Accept:" HTTP header to
-see if the client wants HTML or not. If it does want HTML, we simply proxy the
-request to Vercel. (We use Vercel because of their nice GitHub integration.)
+Issue, Pull Requestは英語か日本語でしてください。
+
+コミットメッセージも英語か日本語でしてください。
 
 ## History
 
