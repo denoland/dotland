@@ -273,7 +273,7 @@ for await (const req of s) {
             <a href="https://jspm.io" className="link">
               jspm.io
             </a>{" "}
-            などのCDNなどWebのあらゆる場所からインポートすることが出来ます。
+            などのCDNなどWebのあらゆる場所からモジュールをインポートすることが出来ます。
           </p>
           <p className="my-4 text-gray-700">
             {/*
