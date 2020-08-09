@@ -333,7 +333,7 @@ const InstallSection = () => {
         <a href="https://github.com/denoland/deno/releases" className="link">
           リリースページ
         </a>
-        よりリリースバイナリーをダウンロードしてください{" "}。
+        よりリリースバイナリーをダウンロードしてください 。
       </p>
       {shell}
       {powershell}
