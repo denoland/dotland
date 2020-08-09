@@ -78,7 +78,7 @@ for await (const req of s) {
               a code formatter (deno fmt).
               */}
               依存関係インスペクター(deno info)やコードフォーマッター(deno
-              fmt)などのユーティリティーを内蔵。
+              fmt)などのユーティリティーを内蔵しています。
             </li>
             <li>
               {/*
@@ -88,10 +88,11 @@ for await (const req of s) {
                 deno.land/std
               </a>
               */}
-              Denoで動く審査済み(監査済み)の標準モジュール:{" "}
+              Denoで動作する審査済み(監査済み)の標準モジュール:{" "}
               <a href="https://deno.land/std" className="link">
                 deno.land/std
-              </a>
+              </a>{" "}
+              を持っています。
             </li>
           </ol>
         </div>

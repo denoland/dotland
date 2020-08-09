@@ -30,7 +30,7 @@ V8, Rust, Tokioを使って作られています。
 - 最初からTypeScriptをサポート。
 - 必要なのは1つの実行ファイル(`deno`)だけ。
 - 依存関係インスペクター(`deno info`)やコードフォーマッター(`deno fmt`)などのユーティリティーを内蔵しています。
-- Denoで動作する[審査済み(監査済み)の標準モジュール](https://github.com/denoland/deno/tree/master/std)がある。
+- Denoで動作する[審査済み(監査済み)の標準モジュール](https://github.com/denoland/deno/tree/master/std)を持っています。
 - 複数のスクリプトを1つのJavaScriptファイルにバンドルすることが出来ます。
 
 ## Philosophy
