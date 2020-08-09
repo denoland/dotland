@@ -138,15 +138,20 @@ for await (const req of s) {
             {/*
             You can find a more in depth introduction, examples, and environment
             setup guides in{" "}
+            <Link href="/[...rest]" as="/manual">
+              <a className="link">
+              the manual
+              </a>
+            </Link>
+            .
             */}
             より深いイントロダクション, 例, 環境構築のガイドは
             <Link href="/[...rest]" as="/manual">
               <a className="link">
-                {/* the manual */}
                 マニュアルへ
               </a>
             </Link>
-            .
+            。
           </p>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
@@ -158,13 +163,21 @@ for await (const req of s) {
             </a>
           </Link>
           <p className="my-4 text-gray-700">
+            {/*
             The basic runtime documentation for Deno can be found on{" "}
             <a href="https://doc.deno.land/builtin/stable" className="link">
               doc.deno.land
             </a>
             .
+            */}
+            基本的なDenoランタイムのドキュメントは{" "}
+            <a href="https://doc.deno.land/builtin/stable" className="link">
+              doc.deno.land
+            </a>{" "}
+            を参照してください。
           </p>
           <p className="my-4 text-gray-700">
+            {/*
             Deno comes with{" "}
             <Link href="/[...rest]" as="/manual">
               <a className="link">a manual</a>
@@ -173,10 +186,21 @@ for await (const req of s) {
             functions of the runtime, an introduction to the concepts that Deno
             is built on, details about the internals of Deno, how to embed Deno
             in your own application and how to extend Deno using Rust plugins.
+            */}
+            ランタイムのより複雑な機能, Denoのコンセプトの紹介,{" "}
+            Denoの内部の詳細, アプリケーションへどうやって組み込むかや
+            Rustプラグインでの拡張は{" "}
+            <Link href="/[...rest]" as="/manual">
+              <a className="link">マニュアル</a>
+            </Link>{" "}
+            を参照してください。
           </p>
           <p className="my-4 text-gray-700">
+            {/*
             The manual also contains information about the built in tools that
             Deno provides.
+            */}
+            マニュアルにはDenoが提供する標準ツールの情報も含まれています。
           </p>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
