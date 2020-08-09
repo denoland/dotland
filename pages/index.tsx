@@ -110,12 +110,18 @@ for await (const req of s) {
               </h3>
             </a>
           </Link>
-          <p className="my-4 text-gray-700">Try running a simple program:</p>
+          <p className="my-4 text-gray-700">
+            {/*Try running a simple program:*/}
+            サンプルプログラムを試す:
+          </p>
           <CodeBlock
             code="deno run https://deno.land/std/examples/welcome.ts"
             language="bash"
           />
-          <p className="my-4 text-gray-700">Or a more complex one:</p>
+          <p className="my-4 text-gray-700">
+            {/* Or a more complex one: */}
+            より複雑なプログラム:
+          </p>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8">
           <CodeBlock
@@ -126,10 +132,16 @@ for await (const req of s) {
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8">
           <p className="my-4 text-gray-700">
+            {/*
             You can find a more in depth introduction, examples, and environment
             setup guides in{" "}
+            */}
+            より深いイントロダクション, 例, 環境構築のガイドは
             <Link href="/[...rest]" as="/manual">
-              <a className="link">the manual</a>
+              <a className="link">
+                {/* the manual */}
+                マニュアルへ
+              </a>
             </Link>
             .
           </p>
