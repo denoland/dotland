@@ -147,9 +147,7 @@ for await (const req of s) {
             */}
             より深いイントロダクション, 例, 環境構築のガイドは
             <Link href="/[...rest]" as="/manual">
-              <a className="link">
-                マニュアル
-              </a>
+              <a className="link">マニュアル</a>
             </Link>
             へ。
           </p>
