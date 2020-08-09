@@ -31,7 +31,7 @@ export default class DenoDocDocument extends Document {
           />
           <link rel="manifest" href="/site.webmanifest" />
         </Head>
-        <body className="font-body">
+        <body>
           <Main />
           <NextScript />
         </body>

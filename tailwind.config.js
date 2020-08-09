@@ -12,13 +12,10 @@ module.exports = {
         '"Courier New"',
         "monospace",
       ],
-      body: [
-        "Noto Sans JP"
-      ]
     },
     extend: {
       fontFamily: {
-        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+        sans: ["Noto Sans JP", "Inter var", ...defaultTheme.fontFamily.sans],
       },
       width: {
         "72": "18rem",
