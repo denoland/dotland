@@ -65,7 +65,7 @@ for await (const req of s) {
               デフォルトで安全。ファイルやネットワークなど環境へのアクセスは明示的に指定しない限りアクセスされません。
             </li>
             <li>
-              {/*Supports TypeScript out of the box.*/}
+              {/* Supports TypeScript out of the box. */}
               最初からTypeScriptをサポート。
             </li>
             <li>
@@ -114,7 +114,7 @@ for await (const req of s) {
             </a>
           </Link>
           <p className="my-4 text-gray-700">
-            {/*Try running a simple program:*/}
+            {/* Try running a simple program: */}
             サンプルプログラムを試す:
           </p>
           <CodeBlock
