@@ -220,7 +220,8 @@ for await (const req of s) {
             </a>{" "}
             repository.
             */}
-            core DenoチームによりDenoので動くことが保証された標準モジュールを提供します。
+            core
+            DenoチームによりDenoので動くことが保証された標準モジュールを提供します。
             これらはDenoのソースコードと一緒に{" "}
             <a href="https://github.com/denoland/deno" className="link">
               denoland/deno
@@ -252,6 +253,7 @@ for await (const req of s) {
             </a>
           </Link>
           <p className="my-4 text-gray-700">
+            {/*
             Deno can import modules from any location on the web, like GitHub, a
             personal webserver, or a CDN like{" "}
             <a href="https://pika.dev" className="link">
@@ -262,8 +264,19 @@ for await (const req of s) {
               jspm.io
             </a>
             .
+            */}
+            DenoはGitHub, 個人のWebサーバー,{" "}
+            <a href="https://pika.dev" className="link">
+              pika.dev
+            </a>{" "}
+            や{" "}
+            <a href="https://jspm.io" className="link">
+              jspm.io
+            </a>{" "}
+            などのCDNなどWebのあらゆる場所からインポートすることが出来ます。
           </p>
           <p className="my-4 text-gray-700">
+            {/*
             To make it easier to consume third party modules Deno provides some
             built in tooling like <InlineCode>deno info</InlineCode> and{" "}
             <InlineCode>deno doc</InlineCode>. deno.land also provides a web UI
@@ -272,14 +285,32 @@ for await (const req of s) {
               doc.deno.land
             </a>
             .
+            */}
+            サードパーティモジュールを簡単に使用するためDenoは
+            <InlineCode>deno info</InlineCode> や{" "}
+            <InlineCode>deno doc</InlineCode>などのツールを内蔵しています。
+            deno.landはモジュールのドキュメントを見るためのWeb
+            UIを提供しています。{" "}
+            <a href="https://doc.deno.land" className="link">
+              doc.deno.land
+            </a>{" "}
+            を参照してください。
           </p>
           <p className="my-4 text-gray-700">
+            {/*
             deno.land also provides a simple public hosting service for ES
             modules that work with Deno. It can be found at{" "}
             <Link href="/x">
               <a className="link">deno.land/x</a>
             </Link>
             .
+            */}
+            またdeno.landはDenoで動作するESモジュールのための
+            シンプルなホスティングサービスも提供しています。{" "}
+            <Link href="/x">
+              <a className="link">deno.land/x</a>
+            </Link>{" "}
+            を参照してください。
           </p>
         </div>
         <div className="mt-20">
