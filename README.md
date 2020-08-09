@@ -2,7 +2,7 @@
 
 ![ci](https://github.com/tokiedokie/deno_website2_japanese/workflows/ci/badge.svg)
 
-このレポジトリは https://deno-ja.vercel.app/ のコードです
+https://deno-ja.vercel.app/ のレポジトリです。
 
 ## 翻訳のやり方
 
