@@ -1,5 +1,6 @@
 const xBasepath = "https://deno.land/x/deno@";
-const githubBasepath = "https://raw.githubusercontent.com/tokiedokie/deno_website2_japanese/";
+const githubBasepath =
+  "https://raw.githubusercontent.com/tokiedokie/deno_website2_japanese/";
 const docpath = "https://github.com/tokiedokie/deno_website2_japanese/blob/";
 import VERSIONS from "../versions.json";
 
