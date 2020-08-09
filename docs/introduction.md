@@ -13,6 +13,7 @@ V8, Rust, Tokioを使って作られています。
 
 ## Feature Highlights
 
+<!--
 - Secure by default. No file, network, or environment access (unless explicitly
   enabled).
 - Supports TypeScript out of the box.
@@ -24,6 +25,13 @@ V8, Rust, Tokioを使って作られています。
   modules](https://github.com/denoland/deno/tree/master/std) that are guaranteed
   to work with Deno.
 - Scripts can be bundled into a single JavaScript file.
+-->
+- デフォルトで安全。ファイル, ネットワーク, 環境へのアクセスなし(明示的にあり有効にしない限り)。
+- 最初からTypeScriptをサポート。
+- 必要なのは1つの実行ファイル(`deno`)だけ。
+- 依存関係インスペクター(`deno info`)やコードフォーマッター(`deno fmt`)などのユーティリティーを内蔵。
+- Denoで動作する[審査済み(監査済み)の標準モジュール](https://github.com/denoland/deno/tree/master/std)。
+- 複数のスクリプトを1つのJavaScriptファイルにバンドルすることが出来ます。
 
 ## Philosophy
 
