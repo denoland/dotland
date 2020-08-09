@@ -73,7 +73,7 @@ function Manual() {
   const [content, setContent] = useState<string | null>(null);
 
   useEffect(() => {
-    getTableOfContents(version ?? versions[0])
+    getTableOfContents(version ?? "master")
       .then(setTableOfContents)
       .then(scrollTOCIntoView)
       .catch((e) => {
@@ -108,7 +108,7 @@ function Manual() {
     }
   }, [tableOfContents, path]);
 
-  const sourceURL = useMemo(() => getFileURL(version ?? versions[0], path), [
+  const sourceURL = useMemo(() => getFileURL(version ?? "master", path), [
     version,
     path,
   ]);
@@ -333,7 +333,7 @@ function Manual() {
               {content ? (
                 <>
                   <a
-                    href={getDocURL(version ?? versions[0], path)}
+                    href={getDocURL(version ?? "master", path)}
                     className="text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right mt-1"
                   >
                     <span className="sr-only">GitHub</span>
@@ -422,7 +422,7 @@ function Version({
           <select
             id="version"
             className="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-            value={version ?? versions[0]}
+            value={version ?? "master"}
             onChange={({ target: { value: newVersion } }) =>
               gotoVersion(newVersion)
             }
