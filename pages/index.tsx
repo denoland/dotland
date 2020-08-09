@@ -84,8 +84,11 @@ for await (const req of s) {
               {/*
               Has a set of reviewed (audited) standard modules that are
               guaranteed to work with Deno:{" "}
+              <a href="https://deno.land/std" className="link">
+                deno.land/std
+              </a>
               */}
-              Denoで動く審査済み(監査済み)の標準モジュール。:{" "}
+              Denoで動く審査済み(監査済み)の標準モジュール:{" "}
               <a href="https://deno.land/std" className="link">
                 deno.land/std
               </a>
