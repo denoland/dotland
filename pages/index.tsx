@@ -300,10 +300,16 @@ const InstallSection = () => {
   const cargo = (
     <div key="cargo" className="my-4 text-gray-700">
       <p className="py-2">
+        {/*
         Build and install from source using{" "}
         <a href="https://crates.io/crates/deno" className="link">
           Cargo
         </a>
+        */}
+        <a href="https://crates.io/crates/deno" className="link">
+          Cargo
+        </a>
+        を使ってソースからビルドしてインストール
       </p>
       <CodeBlock language="bash" code={`cargo install deno`} />
     </div>
@@ -312,12 +318,19 @@ const InstallSection = () => {
   return (
     <>
       <p className="my-4 text-gray-700">
+        {/*
         Deno ships as a single executable with no dependencies. You can install
         it using the installers below, or download a release binary from the{" "}
         <a href="https://github.com/denoland/deno/releases" className="link">
           releases page
         </a>
         .
+        */}
+        Denoは1つの実行ファイルのみ必要で他の依存関係はありません。下記のインストーラーを使ってインストールするか、
+        <a href="https://github.com/denoland/deno/releases" className="link">
+          リリースページ
+        </a>
+        よりリリースバイナリーをダウンロードしてください{" "}。
       </p>
       {shell}
       {powershell}
@@ -326,11 +339,18 @@ const InstallSection = () => {
       {scoop}
       {cargo}
       <p className="my-4 text-gray-700">
+        {/*
         See{" "}
         <a className="link" href="https://github.com/denoland/deno_install">
           deno_install
         </a>{" "}
         for more installation options.
+        */}
+        他のインストール方法については{" "}
+        <a className="link" href="https://github.com/denoland/deno_install">
+          deno_install
+        </a>{" "}
+        を参照してください。
       </p>
     </>
   );
