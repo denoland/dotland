@@ -4,13 +4,11 @@
 Deno is a JavaScript/TypeScript runtime with secure defaults and a great
 developer experience.
 -->
-
-Denoはデフォルトで安全なJavascript/Typescriptのランタイムで素晴らしいデベロッパーエクスペリエンスを提供します。
+Denoはデフォルトで安全なJavaScript/TypeScriptのランタイムで素晴らしいデベロッパーエクスペリエンスを提供します。
 
 <!--
 It's built on V8, Rust, and Tokio.
 -->
-
 V8, Rust, Tokioを使って作られています。
 
 ## Feature Highlights
