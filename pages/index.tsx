@@ -50,23 +50,42 @@ for await (const req of s) {
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <p className="my-4 text-gray-700">
+            {/* 
             Deno is a simple, modern and secure runtime for JavaScript and
             TypeScript that uses V8 and is built in Rust.
+            */}
+            DenoはV8を使いRustで作られたJavaScriptとTypeScriptのためのシンプルでモダンで安全なランタイムです。
           </p>
           <ol className="ml-8 list-disc text-gray-700">
             <li>
+              {/*
               Secure by default. No file, network, or environment access, unless
               explicitly enabled.
+              */}
+              デフォルトで安全。ファイルやネットワークなど環境へのアクセスは明示的に指定しない限りアクセスされません。
             </li>
-            <li>Supports TypeScript out of the box.</li>
-            <li>Ships only a single executable file.</li>
             <li>
+              {/*Supports TypeScript out of the box.*/}
+              最初からTypeScriptをサポート。
+            </li>
+            <li>
+              {/*Ships only a single executable file.*/}
+              必要なのは1つの実行ファイルだけ。
+            </li>
+            <li>
+              {/*
               Has built-in utilities like a dependency inspector (deno info) and
               a code formatter (deno fmt).
+              */}
+              依存関係インスペクター(deno info)やコードフォーマッター(deno
+              fmt)などのユーティリティーを内蔵。
             </li>
             <li>
+              {/*
               Has a set of reviewed (audited) standard modules that are
               guaranteed to work with Deno:{" "}
+              */}
+              Denoで動く審査済み(監査済み)の標準モジュール。:{" "}
               <a href="https://deno.land/std" className="link">
                 deno.land/std
               </a>
