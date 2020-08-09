@@ -148,10 +148,10 @@ for await (const req of s) {
             より深いイントロダクション, 例, 環境構築のガイドは
             <Link href="/[...rest]" as="/manual">
               <a className="link">
-                マニュアルへ
+                マニュアル
               </a>
             </Link>
-            。
+            へ。
           </p>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
