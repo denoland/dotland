@@ -33,7 +33,8 @@ V8, Rust, Tokioを使って作られています。
 - Denoで動作する[審査済み(監査済み)の標準モジュール](https://github.com/denoland/deno/tree/master/std)を持っています。
 - 複数のスクリプトを1つのJavaScriptファイルにバンドルすることが出来ます。
 
-## Philosophy
+<!-- ## Philosophy -->
+## 哲学
 
 <!--
 Deno aims to be a productive and secure scripting environment for the modern
@@ -57,7 +58,7 @@ have been historically written with bash or python.
 -->
 とりわけ、Denoはbashやpythonで書かれた過去のユーティリティースクリプトの優れた代替です。
 
-## Goals
+## Goals 
 
 <!--
 - Only ship a single executable (`deno`).
@@ -80,7 +81,8 @@ have been historically written with bash or python.
 - V8のコンセプトをユーザーランドに漏らさないこと。
 - 効率的にHTTPを提供できること。
 
-## Comparison to Node.js
+<!-- ## Comparison to Node.js -->
+## Node.jsとの比較
 
 <!--
 - Deno does not use `npm`
@@ -105,7 +107,8 @@ have been historically written with bash or python.
   import * as log from "https://deno.land/std@$STD_VERSION/log/mod.ts";
   ```
 
-## Other key behaviors
+<!-- ## Other key behaviors -->
+## その他の重要な振る舞い
 
 <!--
 - Remote code is fetched and cached on first execution, and never updated until
