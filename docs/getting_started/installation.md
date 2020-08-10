@@ -62,7 +62,7 @@ Deno binaries can also be installed manually, by downloading a zip file at
 These packages contain just a single executable file. You will have to set the
 executable bit on macOS and Linux.
 -->
-Deno実行ファイルは [github.com/denoland/deno/releases](https://github.com/denoland/deno/releases) のzipファイルをダウンロードして手動でインストールすることも可能です。これらのパッケージは1つの実行ファイルのみを含んでいます。
+Deno実行ファイルは [github.com/denoland/deno/releases](https://github.com/denoland/deno/releases) のzipファイルをダウンロードして手動でインストールすることも可能です。これらのパッケージは1つの実行ファイルのみを含んでいます。macOSとLinuxでは実行可能ビットを設定する必要があります。
 
 ### Testing your installation
 
