@@ -82,6 +82,7 @@ have been historically written with bash or python.
 
 ## Comparison to Node.js
 
+<!--
 - Deno does not use `npm`
   - It uses modules referenced as URLs or file paths
 - Deno does not use `package.json` in its module resolution algorithm.
@@ -91,6 +92,14 @@ have been historically written with bash or python.
 - Deno always dies on uncaught errors.
 - Uses "ES Modules" and does not support `require()`. Third party modules are
   imported via URLs:
+-->
+- Denoは`npm`を使いません
+  - モジュールの参照にはURLやファイルパスを使います
+- Denoはモジュールの解決のために`package.json`を使いません。
+- Denoのすべての非同期の動作はプロミスを返します。よって、DenoはNodeと違うAPIを提供します。
+- Denoはファイル, ネットワーク, 環境へのアクセスには明示的な権限を要求します。
+- Denoは捕獲できないエラーの場合かならず停止します。
+- "ESモジュール"を使い`require()`をサポートしません。サードパーティモジュールはURLによってインポートされます: 
 
   ```javascript
   import * as log from "https://deno.land/std@$STD_VERSION/log/mod.ts";
