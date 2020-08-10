@@ -80,17 +80,22 @@ detailed guide on the CLI [here](./command_line_interface.md).
 
 ### Updating
 
-To update a previously installed version of Deno, you can run:
+<!-- To update a previously installed version of Deno, you can run: -->
+前回インストールしたDenoのバージョンからアップデートするには、次を実行してください:
 
 ```shell
 deno upgrade
 ```
 
+<!--
 This will fetch the latest release from
 [github.com/denoland/deno/releases](https://github.com/denoland/deno/releases),
 unzip it, and replace your current executable with it.
+-->
+これは[github.com/denoland/deno/releases](https://github.com/denoland/deno/releases)から最新のリリースを取得、解凍し現在のバージョンの実行ファイルと置き換えます。
 
-You can also use this utility to install a specific version of Deno:
+<!-- You can also use this utility to install a specific version of Deno: -->
+次のユーティリティを使うことでDenoの特定のバージョンをインストールすることも出来ます:
 
 ```shell
 deno upgrade --version 1.0.1
