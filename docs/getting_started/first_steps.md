@@ -39,12 +39,18 @@ deno run https://deno.land/std@$STD_VERSION/examples/welcome.ts
 
 ### Making an HTTP request
 
+<!--
 Many programs use HTTP requests to fetch data from a webserver. Let's write a
 small program that fetches a file and prints its contents out to the terminal.
+-->
+多くのプログラムはwebサーバーからデータを取得するためHTTPリクエストを利用しています。ファイルを取得しコネクションをターミナルに出力する小さなプログラムを書いてみましょう。
 
+<!--
 Just like in the browser you can use the web standard
 [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) API to
 make HTTP calls:
+-->
+ブラウザと同じようにweb標準の [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) APIを使いHTTPコールが作れます:
 
 ```ts
 const url = Deno.args[0];
@@ -54,8 +60,10 @@ const body = new Uint8Array(await res.arrayBuffer());
 await Deno.stdout.write(body);
 ```
 
-Let's walk through what this application does:
+<!-- Let's walk through what this application does: -->
+アプリケーションが何をしているのかを見ていきましょう:
 
+<!--
 1. We get the first argument passed to the application, and store it in the
    `url` constant.
 2. We make a request to the url specified, await the response, and store it in
@@ -66,19 +74,29 @@ Let's walk through what this application does:
    [`Uint8Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array)
    to store in the `body` constant.
 4. We write the contents of the `body` constant to `stdout`.
+-->
+1. アプリケーションに入ってきた最初の引数を取得し、`url` 定数に保存します。
+2. 指定されたurlにリクエストを送り、レスポンスを await し、`res` 定数に保存します。
+3. レスポンスボディを [`ArrayBuffer`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) にパースし、レスポンスを await し、 [`Uint8Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array) に変換し、 `body` 定数に保存します。
+4. `body` 定数の中身を `stdout` に書き込みます。
 
-Try it out:
+<!-- Try it out: -->
+こちらを試しください:
 
 ```shell
 deno run https://deno.land/std@$STD_VERSION/examples/curl.ts https://example.com
 ```
 
+<!--
 You will see this program returns an error regarding network access, so what did
 we do wrong? You might remember from the introduction that Deno is a runtime
 which is secure by default. This means you need to explicitly give programs the
 permission to do certain 'privileged' actions, such as access the network.
+-->
+ネットワークのアクセスでエラーが表示されるでしょう、何を間違えました？イントロダクションでDenoのランタイムは標準で安全だということを覚えていますか。ネットワークアクセスなどの'特権'の必要な動作にはプログラムに明示的に権限を与える必要があるということです。
 
-Try it out again with the correct permission flag:
+<!-- Try it out again with the correct permission flag: -->
+正しい権限を与えて再度試してみてください:
 
 ```shell
 deno run --allow-net=example.com https://deno.land/std@$STD_VERSION/examples/curl.ts https://example.com
