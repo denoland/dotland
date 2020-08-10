@@ -104,15 +104,24 @@ deno run --allow-net=example.com https://deno.land/std@$STD_VERSION/examples/cur
 
 ### Reading a file
 
+<!--
 Deno also provides APIs which do not come from the web. These are all contained
 in the `Deno` global. You can find documentation for these APIs on
 [doc.deno.land](https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts).
+-->
+Denoはweb由来でないAPIも提供しています。これらはすべて `Deno` グローバルに含まれています。これらのAPIのドキュメントは [doc.deno.land](https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts) にあります。
 
+<!--
 Filesystem APIs for example do not have a web standard form, so Deno provides
 its own API.
+-->
+例えばファイルシステムAPIはweb標準のものでは有りません、よってDenoは独自のAPIを提供します。
 
+<!--
 In this program each command-line argument is assumed to be a filename, the file
 is opened, and printed to stdout.
+-->
+このプログラムではすべての引数はファイル名とし、ファイルを開き、標準出力に表示します。
 
 ```ts
 const filenames = Deno.args;
@@ -123,12 +132,16 @@ for (const filename of filenames) {
 }
 ```
 
+<!--
 The `copy()` function here actually makes no more than the necessary
 kernel→userspace→kernel copies. That is, the same memory from which data is read
 from the file, is written to stdout. This illustrates a general design goal for
 I/O streams in Deno.
+-->
+`copy()` 関数はカーネル→ユーザースペース→カーネル以上にコピーを作りません。つまり、データを読み込んだメモリと同じメモリを標準出力に書き込みます。これはDenoのI/Oストリームの設計目標を表しています。
 
-Try the program:
+<!-- Try the program: -->
+こちらを試しください:
 
 ```shell
 deno run --allow-read https://deno.land/std@$STD_VERSION/examples/cat.ts /etc/passwd
