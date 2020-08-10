@@ -66,11 +66,17 @@ Deno実行ファイルは [github.com/denoland/deno/releases](https://github.com
 
 ### Testing your installation
 
+<!--
 To test your installation, run `deno --version`. If this prints the Deno version
 to the console the installation was successful.
+-->
+インストールが出来たか確認するために `deno --version` を実行してください。コンソールにDenoのバージョンが表示されればインストールは成功しています。
 
+<!--
 Use `deno help` to see help text documenting Deno's flags and usage. Get a
 detailed guide on the CLI [here](./command_line_interface.md).
+-->
+`deno help` を使うことでDenoのフラグや使い方を見ることが出来ます。CLIの詳しい使い方は[こちら](./command_line_interface.md)。
 
 ### Updating
 
