@@ -5,13 +5,13 @@
   "getting_started": {
     "name": "Getting Started",
     "children": {
-      "installation": "Installation",
-      "setup_your_environment": "Setup your environment",
-      "first_steps": "First steps",
-      "command_line_interface": "Command line interface",
-      "permissions": "Permissions",
-      "typescript": "Using TypeScript",
-      "webassembly": "Using WebAssembly"
+      "installation": "インストール",
+      "setup_your_environment": "環境構築",
+      "first_steps": "最初の一歩",
+      "command_line_interface": "コマンドラインインターフェース",
+      "permissions": "パーミッション",
+      "typescript": "TypeScriptの使用",
+      "webassembly": "WebAssemblyの使用"
     }
   },
   "runtime": {
