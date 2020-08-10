@@ -7,12 +7,17 @@ IDE of choice.
 -->
 Denoの開発で生産性を上げるために環境構築すべきです。つまり。シェル自動補完や環境変数、好きなエディターやIDEの設定をすることです。
 
-### Environmental variables
+<!-- ### Environmental variables -->
+### 環境変数
 
-There are several env vars that control how Deno behaves:
+<!-- There are several env vars that control how Deno behaves: -->
+Denoがどのように動作するか決める環境変数がいくつかあります。
 
+<!--
 `DENO_DIR` defaults to `$HOME/.cache/deno` but can be set to any path to control
 where generated and cached source code is written and read to.
+-->
+`DENO_DIR` のデフォルトは `$HOME/.cache/deno` ですが、生成されキャッシュされたソースコードがどこに書き込まれどこから読まれるかは任意のパスに設定することが出来ます。
 
 `NO_COLOR` will turn off color output if set. See https://no-color.org/. User
 code can test if `NO_COLOR` was set without having `--allow-env` by using the
