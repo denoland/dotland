@@ -74,8 +74,9 @@ for await (const req of s) {
             </li>
             <li>
               {/*
-              Has built-in utilities like a dependency inspector (deno info) and
-              a code formatter (deno fmt).
+              Has built-in utilities like a dependency inspector (
+              <InlineCode>deno info</InlineCode>) and a code formatter (
+              <InlineCode>deno fmt</InlineCode>).
               */}
               依存関係インスペクター(<InlineCode>deno info</InlineCode>
               )やコードフォーマッター(<InlineCode>deno fmt</InlineCode>
