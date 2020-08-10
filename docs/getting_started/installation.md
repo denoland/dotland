@@ -1,4 +1,5 @@
-## Installation
+<!-- ## Installation -->
+## インストール
 
 <!--
 Deno works on macOS, Linux, and Windows. Deno is a single binary executable. It
@@ -6,7 +7,8 @@ has no external dependencies.
 -->
 DenoはmacOS、Linux、Windowsで動作します。Denoは1つの実行ファイルで実行可能です。外部依存はありません。
 
-### Download and install
+<!-- ### Download and install -->
+### ダウンロードとインストール
 
 <!--
 [deno_install](https://github.com/denoland/deno_install) provides convenience
@@ -16,7 +18,7 @@ scripts to download and install the binary.
 
 <!-- Using Shell (macOS and Linux): -->
 Shell (macOS、Linux) を使う: 
-
+ 
 ```shell
 curl -fsSL https://deno.land/x/install/install.sh | sh
 ```
@@ -64,7 +66,8 @@ executable bit on macOS and Linux.
 -->
 Deno実行ファイルは [github.com/denoland/deno/releases](https://github.com/denoland/deno/releases) のzipファイルをダウンロードして手動でインストールすることも可能です。これらのパッケージは1つの実行ファイルのみを含んでいます。macOSとLinuxでは実行可能ビットを設定する必要があります。
 
-### Testing your installation
+<!-- ### Testing your installation -->
+### インストールの確認
 
 <!--
 To test your installation, run `deno --version`. If this prints the Deno version
@@ -78,7 +81,8 @@ detailed guide on the CLI [here](./command_line_interface.md).
 -->
 `deno help` を使うことでDenoのフラグや使い方を見ることが出来ます。CLIの詳しい使い方は[こちら](./command_line_interface.md)。
 
-### Updating
+<!-- ### Updating -->
+### アップデート
 
 <!-- To update a previously installed version of Deno, you can run: -->
 前回インストールしたDenoのバージョンからアップデートするには、次を実行してください:
@@ -101,7 +105,8 @@ unzip it, and replace your current executable with it.
 deno upgrade --version 1.0.1
 ```
 
-### Building from source
+<!-- ### Building from source -->
+### ソースからのビルド
 
 <!--
 Information about how to build from source can be found in the `Contributing`
