@@ -334,7 +334,9 @@ function Manual() {
                 <>
                   <a
                     href={getDocURL(version ?? versions[0], path)}
-                    className="text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right mt-1"
+                    className={`text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right ${
+                      path.split("/").length === 2 ? "mt-11" : "mt-9"
+                    } mr-4`}
                   >
                     <span className="sr-only">GitHub</span>
                     <svg
@@ -355,7 +357,7 @@ function Manual() {
                     displayURL={"https://deno.land/manual" + path}
                     sourceURL={sourceURL}
                   />
-                  <div className="pt-4 border-t border-gray-200">
+                  <div className="mt-4 pt-4 border-t border-gray-200">
                     {pageList[pageIndex - 1] !== undefined && (
                       <Link href="/[...rest]" as={pageList[pageIndex - 1].path}>
                         <a className="text-gray-900 hover:text-gray-600 font-normal">
