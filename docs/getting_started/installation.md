@@ -8,49 +8,61 @@ DenoはmacOS、Linux、Windowsで動作します。Denoは1つの実行ファイ
 
 ### Download and install
 
+<!--
 [deno_install](https://github.com/denoland/deno_install) provides convenience
 scripts to download and install the binary.
+-->
+[deno_install](https://github.com/denoland/deno_install)は実行ファイルをダウンロードしてインストールするのに便利なスクリプトを提供します。
 
-Using Shell (macOS and Linux):
+<!-- Using Shell (macOS and Linux): -->
+Shell (macOS、Linux) を使う: 
 
 ```shell
 curl -fsSL https://deno.land/x/install/install.sh | sh
 ```
 
-Using PowerShell (Windows):
+<!-- Using PowerShell (Windows): -->
+PowerShell (Windows) を使う:
 
 ```shell
 iwr https://deno.land/x/install/install.ps1 -useb | iex
 ```
 
-Using [Scoop](https://scoop.sh/) (Windows):
+<!-- Using [Scoop](https://scoop.sh/) (Windows): -->
+[Scoop](https://scoop.sh/) (Windows) を使う: 
 
 ```shell
 scoop install deno
 ```
 
-Using [Chocolatey](https://chocolatey.org/packages/deno) (Windows):
+<!-- Using [Chocolatey](https://chocolatey.org/packages/deno) (Windows): -->
+[Chocolatey](https://chocolatey.org/packages/deno) (Windows) を使う: 
 
 ```shell
 choco install deno
 ```
 
-Using [Homebrew](https://formulae.brew.sh/formula/deno) (macOS):
+<!-- Using [Homebrew](https://formulae.brew.sh/formula/deno) (macOS): -->
+[Homebrew](https://formulae.brew.sh/formula/deno) (macOS)を使う:
 
 ```shell
 brew install deno
 ```
 
-Using [Cargo](https://crates.io/crates/deno) (Windows, macOS, Linux):
+<!-- Using [Cargo](https://crates.io/crates/deno) (Windows, macOS, Linux): -->
+[Cargo](https://crates.io/crates/deno) (Windows、macOS、Linux) を使う:
 
 ```shell
 cargo install deno
 ```
 
+<!--
 Deno binaries can also be installed manually, by downloading a zip file at
 [github.com/denoland/deno/releases](https://github.com/denoland/deno/releases).
 These packages contain just a single executable file. You will have to set the
 executable bit on macOS and Linux.
+-->
+Deno実行ファイルは [github.com/denoland/deno/releases](https://github.com/denoland/deno/releases) のzipファイルをダウンロードして手動でインストールすることも可能です。これらのパッケージは1つの実行ファイルのみを含んでいます。
 
 ### Testing your installation
 
