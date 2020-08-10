@@ -103,5 +103,8 @@ deno upgrade --version 1.0.1
 
 ### Building from source
 
+<!--
 Information about how to build from source can be found in the `Contributing`
 chapter.
+-->
+ソースからビルドする方法については `Contributing` を参照してください。
