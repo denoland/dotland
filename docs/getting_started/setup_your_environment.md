@@ -1,8 +1,11 @@
 ## Set up your environment
 
+<!--
 To productively get going with Deno you should set up your environment. This
 means setting up shell autocomplete, environmental variables and your editor or
 IDE of choice.
+-->
+Denoの開発で生産性を上げるために環境構築すべきです。つまり。シェル自動補完や環境変数、好きなエディターやIDEの設定をすることです。
 
 ### Environmental variables
 
