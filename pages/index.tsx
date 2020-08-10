@@ -56,8 +56,9 @@ for await (const req of s) {
             <li>Supports TypeScript out of the box.</li>
             <li>Ships only a single executable file.</li>
             <li>
-              Has built-in utilities like a dependency inspector (deno info) and
-              a code formatter (deno fmt).
+              Has built-in utilities like a dependency inspector (
+              <InlineCode>deno info</InlineCode>) and a code formatter (
+              <InlineCode>deno fmt</InlineCode>).
             </li>
             <li>
               Has a set of reviewed (audited) standard modules that are
