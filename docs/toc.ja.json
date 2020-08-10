@@ -15,42 +15,42 @@
     }
   },
   "runtime": {
-    "name": "The Runtime",
+    "name": "ランタイム",
     "children": {
-      "stability": "Stability",
-      "program_lifecycle": "Program lifecycle",
-      "compiler_apis": "Compiler APIs",
-      "workers": "Workers"
+      "stability": "安定性",
+      "program_lifecycle": "プログラムライフサイクル",
+      "compiler_apis": "コンパイラAPI",
+      "workers": "ワーカー"
     }
   },
   "linking_to_external_code": {
-    "name": "Linking to external code",
+    "name": "外部のコードとのリンク",
     "children": {
-      "reloading_modules": "Reloading modules",
+      "reloading_modules": "モジュールの再ロード",
       "integrity_checking": "Integrity checking",
-      "proxies": "Proxies",
+      "proxies": "プロキシ",
       "import_maps": "Import maps"
     }
   },
   "standard_library": {
-    "name": "Standard library"
+    "name": "標準ライブラリ"
   },
   "testing": {
-    "name": "Testing",
+    "name": "テスト",
     "children": {
       "assertions": "Assertions"
     }
   },
   "tools": {
-    "name": "Tools",
+    "name": "ツール",
     "children": {
-      "debugger": "Debugger",
-      "script_installer": "Script installer",
-      "formatter": "Formatter",
-      "bundler": "Bundler",
-      "documentation_generator": "Documentation generator",
-      "dependency_inspector": "Dependency inspector",
-      "linter": "Linter"
+      "debugger": "デバッガー",
+      "script_installer": "スクリプトインストーラー",
+      "formatter": "フォーマッター",
+      "bundler": "バンドラー",
+      "documentation_generator": "ドキュメンテーションジェネレータ",
+      "dependency_inspector": "依存関係インスペクター",
+      "linter": "リンター"
     }
   },
   "embedding_deno": {
@@ -60,25 +60,25 @@
     "name": "Contributing",
     "children": {
       "building_from_source": "Building from source",
-      "development_tools": "Development tools",
-      "style_guide": "Style guide",
-      "architecture": "Architecture"
+      "development_tools": "開発ツール",
+      "style_guide": "スタイルガイド",
+      "architecture": "アーキテクチャ"
     }
   },
   "examples": {
-    "name": "Examples",
+    "name": "例",
     "children": {
       "hello_world": "Hello World",
-      "import_export": "Import and Export Modules",
+      "import_export": "モジュールのインポートとエクスポート",
       "manage_dependencies": "Manage Dependencies",
-      "unix_cat": "Unix cat program",
-      "file_server": "File server",
-      "tcp_echo": "TCP echo server",
-      "subprocess": "Creating a subprocess",
+      "unix_cat": "Unix cat プログラム",
+      "file_server": "ファイルサーバー",
+      "tcp_echo": "TCP エコーサーバー",
+      "subprocess": "サブプロセスの作成",
       "permissions": "Inspecting and revoking permissions",
-      "os_signals": "OS Signals",
-      "file_system_events": "File system events",
-      "testing_if_main": "Checking if file is main"
+      "os_signals": "OS シグナル",
+      "file_system_events": "ファイルシステムイベント",
+      "testing_if_main": "ファイルがメインか確認"
     }
   }
 }
