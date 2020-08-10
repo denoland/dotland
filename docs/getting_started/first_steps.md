@@ -1,4 +1,5 @@
-## First steps
+<!-- ## First steps -->
+## 最初の一歩
 
 <!-- This page contains some examples to teach you about the fundamentals of Deno. -->
 このページにはDenoの基礎を理解するためのサンプルが書かれています。
@@ -37,7 +38,8 @@ console.log("Welcome to Deno 🦕");
 deno run https://deno.land/std@$STD_VERSION/examples/welcome.ts
 ```
 
-### Making an HTTP request
+<!-- ### Making an HTTP request -->
+### HTTPリクエストを作る
 
 <!--
 Many programs use HTTP requests to fetch data from a webserver. Let's write a
@@ -102,7 +104,8 @@ permission to do certain 'privileged' actions, such as access the network.
 deno run --allow-net=example.com https://deno.land/std@$STD_VERSION/examples/curl.ts https://example.com
 ```
 
-### Reading a file
+<!-- ### Reading a file -->
+### ファイルの読み込み
 
 <!--
 Deno also provides APIs which do not come from the web. These are all contained
@@ -147,7 +150,8 @@ I/O streams in Deno.
 deno run --allow-read https://deno.land/std@$STD_VERSION/examples/cat.ts /etc/passwd
 ```
 
-### TCP server
+<!-- ### TCP server -->
+### TCPサーバー
 
 <!--
 This is an example of a server which accepts connections on port 8080, and
@@ -191,7 +195,8 @@ back, without further complexity.
 -->
 `cat.ts` の例と同じように、`copy()` 関数は不必要なメモリコピーを作りません。カーネルからパケットを受け取り、複雑なことをしないで送り返します。
 
-### More examples
+<!-- ### More examples -->
+### その他の例
 
 <!-- You can find more examples, like an HTTP file server, in the `Examples` chapter. -->
 HTTPファイルサーバーなどもっと多くの例を見たい場合は `Examples` の章を参照してください。
