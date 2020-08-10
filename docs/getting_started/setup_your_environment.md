@@ -23,13 +23,18 @@ where generated and cached source code is written and read to.
 code can test if `NO_COLOR` was set without having `--allow-env` by using the
 boolean constant `Deno.noColor`.
 
-### Shell autocomplete
+<!-- ### Shell autocomplete -->
+### シェル自動補完
 
+<!--
 You can generate completion script for your shell using the
 `deno completions <shell>` command. The command outputs to stdout so you should
 redirect it to an appropriate file.
+-->
+`deno completions <shell>` コマンドを使うことでシェルの補完スクリプトを生成することが出来ます。このコマンドは標準出力に出力するので適切なファイルにリダイレクトしてください。
 
-The supported shells are:
+<!-- The supported shells are: -->
+サポートされているシェルは:
 
 - zsh
 - bash
@@ -37,46 +42,63 @@ The supported shells are:
 - powershell
 - elvish
 
-Example (bash):
+<!-- Example (bash): -->
+例 (bash)
 
 ```shell
 deno completions bash > /usr/local/etc/bash_completion.d/deno.bash
 source /usr/local/etc/bash_completion.d/deno.bash
 ```
 
-Example (zsh):
+<!-- Example (zsh): -->
+例 (zsh)
 
 ```shell
 mkdir ~/.oh-my-zsh/custom/plugins/deno
 deno completions zsh > ~/.oh-my-zsh/custom/plugins/deno/_deno
 ```
 
-After this add `deno` plugin under plugins tag in `~/.zshrc` file.
+<!-- After this add `deno` plugin under plugins tag in `~/.zshrc` file. -->
+これは `deno` プラグインを `~/.zshrc` のプタグインタグに追加します。
 
-### Editors and IDEs
+<!-- ### Editors and IDEs -->
+### エディターとIDE
 
+<!--
 Because Deno requires the use of file extensions for module imports and allows
 http imports, and most editors and language servers do not natively support this
 at the moment, many editors will throw errors about being unable to find files
 or imports having unnecessary file extensions.
+-->
+Denoはモジュールのインポートに拡張子を使用する必要があり、HTTPインポートを許可していますが、ほとんどののエディターやランゲージサーバーは現段階でネイティブにこれらをサポートしていません。多くのエディターはファイルが見つからないやインポート時の不執拗な拡張子などでエラーを出すでしょう。
 
-The community has developed extensions for some editors to solve these issues:
+<!-- The community has developed extensions for some editors to solve these issues: -->
+コミュニティはこれらの問題を解決するためにいくつかのエディターには拡張機能を開発しました:
 
 #### VS Code
 
+<!--
 The beta version of [vscode_deno](https://github.com/denoland/vscode_deno) is
 published on the
 [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno).
 Please report any issues.
+-->
+ベータ版の [vscode_deno](https://github.com/denoland/vscode_deno) は [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno) で公開されています。問題が発生したらレポートを送ってください。
 
 #### JetBrains IDEs
 
+<!--
 Support for JetBrains IDEs is available through
 [the Deno plugin](https://plugins.jetbrains.com/plugin/14382-deno).
+-->
+JetBrains IDEへのサポートは [the Deno plugin](https://plugins.jetbrains.com/plugin/14382-deno) にあります。
 
+<!--
 For more information on how to set-up your JetBrains IDE for Deno, read
 [this comment](https://youtrack.jetbrains.com/issue/WEB-41607#focus=streamItem-27-4160152.0-0)
 on YouTrack.
+-->
+DenoのためのJetBrains IDEの設定のその他の情報はYouTrackの [this comment](https://youtrack.jetbrains.com/issue/WEB-41607#focus=streamItem-27-4160152.0-0) を読んでください。
 
 #### Vim and NeoVim
 
