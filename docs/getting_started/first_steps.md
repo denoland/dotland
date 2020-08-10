@@ -149,8 +149,11 @@ deno run --allow-read https://deno.land/std@$STD_VERSION/examples/cat.ts /etc/pa
 
 ### TCP server
 
+<!--
 This is an example of a server which accepts connections on port 8080, and
 returns to the client anything it sends.
+-->
+これはポート8080でコネクションを受け、クライアントから送信されたものをそのまま返すサーバーの例です。
 
 ```ts
 const hostname = "0.0.0.0";
@@ -162,14 +165,18 @@ for await (const conn of listener) {
 }
 ```
 
+<!--
 For security reasons, Deno does not allow programs to access the network without
 explicit permission. To allow accessing the network, use a command-line flag:
+-->
+セキュリティ上の理由から、Denoは明示的な権限なしにプログラムがネットワークにアクセスすることが出来ません。ネットワークへのアクセスを許可するにはコマンドラインフラッグを使ってください:
 
 ```shell
 deno run --allow-net https://deno.land/std@$STD_VERSION/examples/echo_server.ts
 ```
 
-To test it, try sending data to it with netcat:
+<!-- To test it, try sending data to it with netcat: -->
+テストするために、netcatをつかってサーバーにデータを送信してください:
 
 ```shell
 $ nc localhost 8080
@@ -177,9 +184,12 @@ hello world
 hello world
 ```
 
+<!--
 Like the `cat.ts` example, the `copy()` function here also does not make
 unnecessary memory copies. It receives a packet from the kernel and sends it
 back, without further complexity.
+-->
+`cat.ts` の例と同じように、`copy()` 関数は不必要なメモリコピーを作りません。カーネルからパケットを受け取り、複雑なことをしないで送り返します。
 
 ### More examples
 
