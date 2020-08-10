@@ -14,17 +14,24 @@ before attempting to start with Deno.
 
 ### Hello World
 
+<!--
 Deno is a runtime for JavaScript/TypeScript which tries to be web compatible and
 use modern features wherever possible.
+-->
+Denoはweb互換の最新の機能を可能な限り取り入れるJavaScript/TypeScriptのランタイムです。
 
+<!--
 Browser compatibility means a `Hello World` program in Deno is the same as the
 one you can run in the browser:
+-->
+ブラウザ互換はという意味は、Denoによる `Hello World` プログラムがブラウザで実行するものと同じということです:
 
 ```ts
 console.log("Welcome to Deno 🦕");
 ```
 
-Try the program:
+<!-- Try the program: -->
+こちらを試しください:
 
 ```shell
 deno run https://deno.land/std@$STD_VERSION/examples/welcome.ts
