@@ -19,9 +19,12 @@ where generated and cached source code is written and read to.
 -->
 `DENO_DIR` のデフォルトは `$HOME/.cache/deno` ですが、生成されキャッシュされたソースコードがどこに書き込まれどこから読まれるかは任意のパスに設定することが出来ます。
 
+<!--
 `NO_COLOR` will turn off color output if set. See https://no-color.org/. User
 code can test if `NO_COLOR` was set without having `--allow-env` by using the
 boolean constant `Deno.noColor`.
+-->
+`NO_COLOR` がセットされていればは出力の色付けを切ります。https://no-color.org/ を参照してください。ユーザーコードはブール定数 `Deno.noColor` を使うことで `--allow-env` を用いなくても `NO_COLOR` がセットされているかどうか調べることが出来ます。
 
 <!-- ### Shell autocomplete -->
 ### シェル自動補完
