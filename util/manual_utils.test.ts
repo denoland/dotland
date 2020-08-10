@@ -5,14 +5,14 @@ import "isomorphic-unfetch";
 
 test("get table of contents", async () => {
   expect(
-    await getTableOfContents("e325962d9cd386086cf67a65bb5421034c440a67")
+    await getTableOfContents("72da0b1b5e33af2f50ba5c527096622fa980075b")
   ).toBeTruthy();
 });
 
 test("get introduction file", async () => {
   expect(
-    getFileURL("e325962d9cd386086cf67a65bb5421034c440a67", "/introduction")
+    getFileURL("72da0b1b5e33af2f50ba5c527096622fa980075b", "/introduction")
   ).toEqual(
-    "https://raw.githubusercontent.com/tokiedokie/deno_website2_japanese/e325962d9cd386086cf67a65bb5421034c440a67/docs/introduction.md"
+    "https://raw.githubusercontent.com/tokiedokie/deno_website2_japanese/72da0b1b5e33af2f50ba5c527096622fa980075b/docs/introduction.md"
   );
 });
