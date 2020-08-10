@@ -59,6 +59,7 @@ have been historically written with bash or python.
 
 ## Goals
 
+<!--
 - Only ship a single executable (`deno`).
 - Provide Secure Defaults
   - Unless specifically allowed, scripts can't access files, the environment, or
@@ -70,6 +71,14 @@ have been historically written with bash or python.
   improve developer experience.
 - Does not leak V8 concepts into user land.
 - Be able to serve HTTP efficiently
+-->
+- 1つの実行ファイル(`deno`)で実行可能。
+- 安全な初期設定の提供
+  - 明確に許可しない限りスクリプトはファイル, 環境, ネットワークにアクセスできません。
+- ブラウザ互換: JavaScriptだけで書かれグローバル名前空間 `Deno` を使わないDenoのサブセットのプログラム(またはこれのための機能テスト)は、モダンなwebブラウザで変更なしに実行できるようにすべきです。
+- デベロッパーエクスペリエンスを向上させるためにユニットテストやコードフォーマット, リンティングなどの内蔵ツールを提供。
+- V8のコンセプトをユーザーランドに漏らさないこと。
+- 効率的にHTTPを提供できること。
 
 ## Comparison to Node.js
 
