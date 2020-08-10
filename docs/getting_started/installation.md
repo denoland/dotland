@@ -1,7 +1,10 @@
 ## Installation
 
+<!--
 Deno works on macOS, Linux, and Windows. Deno is a single binary executable. It
 has no external dependencies.
+-->
+DenoはmacOS、Linux、Windowsで動作します。Denoは1つの実行ファイルで実行可能です。外部依存はありません。
 
 ### Download and install
 
