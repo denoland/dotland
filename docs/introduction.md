@@ -35,17 +35,27 @@ V8, Rust, Tokioを使って作られています。
 
 ## Philosophy
 
+<!--
 Deno aims to be a productive and secure scripting environment for the modern
 programmer.
+-->
+Denoはモダンなプログラマーのための生産的で安全なスクリプトが実行できる環境を目指しています。
 
+<!--
 Deno will always be distributed as a single executable. Given a URL to a Deno
 program, it is runnable with nothing more than
 [the ~15 megabyte zipped executable](https://github.com/denoland/deno/releases).
 Deno explicitly takes on the role of both runtime and package manager. It uses a
 standard browser-compatible protocol for loading modules: URLs.
+-->
+Denoは常に1つの実行ファイルで配布されます。[~15メガバイトのzip圧縮された実行ファイル](https://github.com/denoland/deno/releases)だけでDenoは実行可能です。
+Denoはランタイムとパッケージマネージャの両方の機能を持っています。モジュールの読み込みにはURLなどの標準ブラウザ互換プロトコルを利用します。
 
+<!--
 Among other things, Deno is a great replacement for utility scripts that may
 have been historically written with bash or python.
+-->
+とりわけ、Denoはbashやpythonで書かれた過去のユーティリティースクリプトの優れた代替です。
 
 ## Goals
 
