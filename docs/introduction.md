@@ -107,8 +107,12 @@ have been historically written with bash or python.
 
 ## Other key behaviors
 
+<!--
 - Remote code is fetched and cached on first execution, and never updated until
   the code is run with the `--reload` flag. (So, this will still work on an
   airplane.)
 - Modules/files loaded from remote URLs are intended to be immutable and
   cacheable.
+-->
+- リモートにあるコードは最初の実行のときに取得、キャッシュされ、`--reload`フラッグ付きで実行されるまでアップデートされません。(だから、飛行機の中でも動きます。)
+- リモートのURLからロードされたモジュール/ファイルはイミュータブルでキャッシュ可能になるよう意図しています。
