@@ -24,7 +24,8 @@ function basepath(version: string) {
 export async function getTableOfContents(
   version: string
 ): Promise<TableOfContents> {
-  const res = await fetch(`${basepath(version)}${version}/docs/toc.json`);
+  // const res = await fetch(`${basepath(version)}${version}/docs/toc.json`);
+  const res = await fetch(`${basepath(version)}${version}/docs/toc.ja.json`);
   if (res.status !== 200) {
     throw Error(
       `Got an error (${
