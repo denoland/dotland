@@ -70,7 +70,7 @@ for await (const req of s) {
             </li>
             <li>
               {/*Ships only a single executable file.*/}
-              1つの実行ファイルを提供します。
+              1つの実行ファイルで実行可能。
             </li>
             <li>
               {/*
