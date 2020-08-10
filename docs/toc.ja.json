@@ -66,11 +66,11 @@
     }
   },
   "examples": {
-    "name": "例",
+    "name": "サンプル",
     "children": {
       "hello_world": "Hello World",
       "import_export": "モジュールのインポートとエクスポート",
-      "manage_dependencies": "Manage Dependencies",
+      "manage_dependencies": "依存関係管理",
       "unix_cat": "Unix cat プログラム",
       "file_server": "ファイルサーバー",
       "tcp_echo": "TCP エコーサーバー",
@@ -78,7 +78,7 @@
       "permissions": "Inspecting and revoking permissions",
       "os_signals": "OS シグナル",
       "file_system_events": "ファイルシステムイベント",
-      "testing_if_main": "ファイルがメインか確認"
+      "testing_if_main": "ファイルがメインか判断"
     }
   }
 }

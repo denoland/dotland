@@ -17,7 +17,7 @@ more about the runtime.
 -->
 - [Hello World](./examples/hello_world)
 - [モジュールのインポートとエクスポート](./examples/import_export)
-- [どうやって依存を管理するか](./examples/manage_dependencies)
+- [どうやって依存関係を管理するか](./examples/manage_dependencies)
 
 <!-- ## Advanced -->
 ## 応用
