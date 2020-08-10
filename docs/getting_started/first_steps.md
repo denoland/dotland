@@ -1,12 +1,16 @@
 ## First steps
 
-This page contains some examples to teach you about the fundamentals of Deno.
+<!-- This page contains some examples to teach you about the fundamentals of Deno. -->
+このページにはDenoの基礎を理解するためのサンプルが書かれています。
 
+<!--
 This document assumes that you have some prior knowledge of JavaScript,
 especially about `async`/`await`. If you have no prior knowledge of JavaScript,
 you might want to follow a guide
 [on the basics of JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript)
 before attempting to start with Deno.
+-->
+このドキュメントはJavaScript、特に`async`/`await`の予備知識が必要です。もしJavaScriptに関する予備知識がない場合Denoを始める前に [on the basics of JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript) を読むことをおすすめします。
 
 ### Hello World
 
