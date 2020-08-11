@@ -90,7 +90,8 @@ deno run --allow-read=/etc https://deno.land/std@$STD_VERSION/examples/cat.ts /e
 <!-- `--allow-write` works the same as `--allow-read`. -->
 `--allow-write` は `--allow-read` と同様に動きます。
 
-### Network access:
+<!-- ### Network access: -->
+### ネットワークアクセス:
 
 _fetch.ts_:
 
@@ -98,16 +99,21 @@ _fetch.ts_:
 const result = await fetch("https://deno.land/");
 ```
 
-This is an example of how to allow-list hosts/urls:
+<!-- This is an example of how to allow-list hosts/urls: -->
+これはホスト/urlの許可リストの例です:
 
 ```shell
 deno run --allow-net=github.com,deno.land fetch.ts
 ```
 
+<!--
 If `fetch.ts` tries to establish network connections to any other domain, the
 process will fail.
+-->
+もし `fetch.ts` が他のドメインにネットワークコネクションを確立しようとしたらプロセスは失敗します。
 
-Allow net calls to any host/url:
+<!-- Allow net calls to any host/url: -->
+すべてのホスト/urlを許可:
 
 ```shell
 deno run --allow-net fetch.ts
