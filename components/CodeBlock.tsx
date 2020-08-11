@@ -1,7 +1,6 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import Router from "next/router";
 import Highlight, { Prism } from "prism-react-renderer";
 import light from "prism-react-renderer/themes/github";
@@ -105,11 +104,9 @@ export const RawCodeBlock = ({
                 line[0]?.empty && i === tokens.length - 1 ? null : (
                   <div key={i + "l"} className={codeDivClassNames}>
                     {enableLineRef ? (
-                      <Link href={`#L${i + 1}`}>
-                        <a id={`L${i + 1}`} href={`#L${i + 1}`}>
-                          {i + 1}{" "}
-                        </a>
-                      </Link>
+                      <a id={`L${i + 1}`} href={`#L${i + 1}`}>
+                        {i + 1}{" "}
+                      </a>
                     ) : (
                       i + 1
                     )}
