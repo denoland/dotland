@@ -106,7 +106,6 @@ DenoのためのJetBrains IDEの設定のその他の情報はYouTrackの [this 
 <!-- #### Vim and NeoVim -->
 #### VimとNeoVim
 
-
 <!--
 Vim works fairly well for Deno/TypeScript if you install
 [CoC](https://github.com/neoclide/coc.nvim) (intellisense engine and language
