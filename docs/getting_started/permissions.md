@@ -20,10 +20,13 @@ functions.
 deno run --allow-read mod.ts
 ```
 
-### Permissions list
+<!-- ### Permissions list -->
+### パーミッションリスト
 
-The following permissions are available:
+<!-- The following permissions are available: -->
+次のパーミッションが利用可能です:
 
+<!--
 - **-A, --allow-all** Allow all permissions. This disables all security.
 - **--allow-env** Allow environment access for things like getting and setting
   of environment variables.
@@ -43,6 +46,15 @@ The following permissions are available:
 - **--allow-write=\<allow-write\>** Allow file system write access. You can
   specify an optional, comma-separated list of directories or files to provide a
   allow-list of allowed file system access.
+-->
+- **-A, --allow-all** すべてのパーミッションを許可。すべてのセキュリティを無効化。
+- **--allow-env** 環境変数を取得したり設定したりするためのアクセスを許可。
+- **--allow-hrtime** 高分解能時間計測を許可。高分解時間はタイミング攻撃やフィンガープリントに使われます。
+- **--allow-net=\<allow-net\>** ネットワークアクセスを許可。任意で、カンマで区切られたリストを指定して、許可されたドメインの許可リストを提供することが出来ます。
+- **--allow-plugin** プラグインのロードを許可。--allow-plugin は不安定な機能であることに注意してください。
+- **--allow-read=\<allow-read\>** ファイルシステムの読み込みを許可。任意でディレクトリまたはファイルのカンマ区切りのリストを指定することで、ファイルシステムへの許可をするリストを提供する事ができます。
+- **--allow-run** サブプロセスの実行を許可。サブプロセスはサンドボックスで実行されるわけではないことに注意してください、そのため、denoのプロセスと同じセキュリティ制限を持ちません。そのため注意してください。
+- **--allow-write=\<allow-write\>** ファイルシステムへの書き込みを許可。任意でディレクトリまたはファイルのカンマ区切りのリストを指定することで、ファイルシステムへの許可をするリストを提供する事ができます。
 
 ### Permissions allow-list
 
