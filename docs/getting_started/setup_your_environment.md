@@ -112,7 +112,7 @@ Vim works fairly well for Deno/TypeScript if you install
 [CoC](https://github.com/neoclide/coc.nvim) (intellisense engine and language
 server protocol).
 -->
-[CoC](https://github.com/neoclide/coc.nvim)(インテリセンスエンジンと言語サーバープロトコル)をインストールすれば、Deno/TypeScript上でvimを使うことができます。
+[CoC](https://github.com/neoclide/coc.nvim) (インテリセンスエンジンと言語サーバープロトコル)をインストールすれば、Deno/TypeScript上でvimを使うことができます。
 
 <!--
 After CoC is installed, from inside Vim, run`:CocInstall coc-tsserver` and
