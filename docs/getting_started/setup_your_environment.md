@@ -103,17 +103,25 @@ on YouTrack.
 -->
 DenoのためのJetBrains IDEの設定のその他の情報はYouTrackの [this comment](https://youtrack.jetbrains.com/issue/WEB-41607#focus=streamItem-27-4160152.0-0) を読んでください。
 
-#### Vim and NeoVim
+<!-- #### Vim and NeoVim -->
+#### VimとNeoVim
 
+
+<!--
 Vim works fairly well for Deno/TypeScript if you install
 [CoC](https://github.com/neoclide/coc.nvim) (intellisense engine and language
 server protocol).
+-->
+[CoC](https://github.com/neoclide/coc.nvim) (インテリセンスエンジンと言語サーバープロトコル)をインストールすれば、Deno/TypeScript上でvimを使うことができます。
 
+<!--
 After CoC is installed, from inside Vim, run`:CocInstall coc-tsserver` and
 `:CocInstall coc-deno`. To get autocompletion working for Deno type definitions
 run `:CocCommand deno.types`. Optionally restart the CoC server `:CocRestart`.
 From now on, things like `gd` (go to definition) and `gr` (goto/find references)
 should work.
+-->
+CoCをインストールした後は、vim側から`:CocInstall coc-tsserver`と`:CocInstall coc-deno`を実行させてみましょう。Denoの型定義のために自動補完機能を実装させるためには`:CocCommand deno.types`の実行が必要です。必要に応じて、`:CocRestart`でCoCのサーバーのリスタートを行いましょう。この動作以降、`gd` (go to definition)や`gr` (goto/find references)といったものが動くようになります。
 
 #### Emacs
 
