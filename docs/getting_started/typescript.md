@@ -31,6 +31,7 @@ with a file watcher).
 -->
 `deno run`、`deno test`、`deno cache`、`deno info` もしくは `deno bundle` を使う時 `--no-check` を使うことでTypeScriptの型チェックを無効にすることが出来ます。これはプログラムのスタートアップ処理の時間をかなり減らすことが出来ます。エディターが型チェックを提供していたり可能化限りスタートアップの時間を早くしたいとき(例えばファイル監視システムと連動してプログラムを自動再起動する時)にかなり便利です。
 
+<!--
 Because `--no-check` does not do TypeScript type checking we can not
 automatically remove type only imports and exports as this would require type
 information. For this purpose TypeScript provides the
@@ -42,10 +43,16 @@ To export a type in a different file use
 `importsNotUsedAsValues` TypeScript compiler option to `"error"`. You can see an
 example `tsconfig.json` with this option
 [in the standard library](https://github.com/denoland/deno/blob/master/std/tsconfig_test.json).
+-->
+`--no-check` はTypeScriptの型チェックをしないため、自動的に型情報のために必要な型のみのインポートとエクスポートの削除しません。このため、TypeScriptは [`import type` and `export type` syntax](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-exports) を提供しています。
+別ファイルの型情報をエクスポートするには `export type { AnInterface } from "./mod.ts";` 使ってください。インポートするには `import type { AnInterface } from "./mod.ts";` を使ってください。`importsNotUsedAsValues` TypeScriptのコンパイラオプションを `"error"` にセットすることで `import type` と `export type` を使っているかを確認することが出来ます。このオプションを有効にした `tsconfig.json` の例は [in the standard library](https://github.com/denoland/deno/blob/master/std/tsconfig_test.json) にあります。
 
+<!--
 Because there is no type information when using `--no-check`, `const enum` is
 not supported because it is type-directed. `--no-check` also does not support
 the legacy `import =` and `export =` syntax.
+-->
+`--no-check` を使っている時、型情報がないため、 `const enum` は型であるためサポートされません。`--no-check` はかつての `import =` と `export =` もサポートしません。
 
 ### Using external type definitions
 
