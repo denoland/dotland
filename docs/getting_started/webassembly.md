@@ -1,6 +1,8 @@
-## WebAssembly support
+<!-- ## WebAssembly support -->
+## WebAssembly サポート
 
-Deno can execute [WebAssembly](https://webassembly.org/) binaries.
+<!-- Deno can execute [WebAssembly](https://webassembly.org/) binaries. -->
+Denoは [WebAssembly](https://webassembly.org/) バイナリを実行することが出来ます。
 
 <!-- dprint-ignore -->
 
