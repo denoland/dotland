@@ -54,14 +54,21 @@ the legacy `import =` and `export =` syntax.
 -->
 `--no-check` を使っている時、型情報がないため、 `const enum` は型であるためサポートされません。`--no-check` はかつての `import =` と `export =` もサポートしません。
 
-### Using external type definitions
+<!-- ### Using external type definitions -->
+### 外部の型定義の使用
 
+<!--
 The out of the box TypeScript compiler though relies on both extension-less
 modules and the Node.js module resolution logic to apply types to JavaScript
 modules.
+-->
+初期設定のTypeScriptコンパイラはJavaScriptモジュールの型に合わせるため拡張子なしのモジュールとNode.jsモジュール解決ロジックの両方を頼ります。
 
+<!--
 In order to bridge this gap, Deno supports three ways of referencing type
 definition files without having to resort to "magic" resolution.
+-->
+このモジュールの差を埋めるため、Denoは"魔法"解決を使わずに3つの参照型定義をサポートしています。
 
 #### Compiler hint
 
