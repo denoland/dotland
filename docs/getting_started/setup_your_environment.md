@@ -112,7 +112,7 @@ Vim works fairly well for Deno/TypeScript if you install
 [CoC](https://github.com/neoclide/coc.nvim) (intellisense engine and language
 server protocol).
 -->
-[CoC](https://github.com/neoclide/coc.nvim)(知的なエンジンと言語サーバープロトコル)をインストールすれば、Deno/TypeScript上でvimを使うことができます。
+[CoC](https://github.com/neoclide/coc.nvim)(インテリセンスエンジンと言語サーバープロトコル)をインストールすれば、Deno/TypeScript上でvimを使うことができます。
 
 <!--
 After CoC is installed, from inside Vim, run`:CocInstall coc-tsserver` and
@@ -121,7 +121,7 @@ run `:CocCommand deno.types`. Optionally restart the CoC server `:CocRestart`.
 From now on, things like `gd` (go to definition) and `gr` (goto/find references)
 should work.
 -->
-CoCをインストールした後は、vim側から`:CocInstall coc-tsserver`と`:CocInstall coc-deno`を実行させてみましょう。denoの型定義のために自動補完機能を実装させるためには`:CocCommand deno.types`の実行が必要です。必要に応じて、`:CocRestart`でCoCのサーバーのリスタートを行いましょう。この動作以降、`gd` (go to definition)や`gr` (goto/find references)といったものが動くようになります。
+CoCをインストールした後は、vim側から`:CocInstall coc-tsserver`と`:CocInstall coc-deno`を実行させてみましょう。Denoの型定義のために自動補完機能を実装させるためには`:CocCommand deno.types`の実行が必要です。必要に応じて、`:CocRestart`でCoCのサーバーのリスタートを行いましょう。この動作以降、`gd` (go to definition)や`gr` (goto/find references)といったものが動くようになります。
 
 #### Emacs
 
