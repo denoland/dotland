@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import marked, { Renderer } from "marked";
 import dompurify from "dompurify";
-import CodeBlock, { RawCodeBlock } from "./CodeBlock";
+import { RawCodeBlock } from "./CodeBlock";
 
 function slugify(text: string): string {
   text = text.toLowerCase();
@@ -124,19 +124,6 @@ function Markdown(props: MarkdownProps) {
       className="markdown-body py-8 px-4"
     />
   );
-
-  // return (
-  //   <ReactMarkdown
-  //     source={props.source}
-  //     skipHtml={false}
-  //     escapeHtml={false}
-  //     renderers={renderers()}
-  //     transformLinkUri={transformLinkUri(props.displayURL)}
-  //     transformImageUri={transformImageUri(props.sourceURL)}
-  //     parserOptions={{ gfm: true }}
-  //     className="markdown-body py-8 px-4"
-  //   />
-  // );
 }
 
 function transformLinkUri(displayURL: string) {
