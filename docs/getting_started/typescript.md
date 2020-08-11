@@ -1,13 +1,17 @@
-## Using TypeScript
+<!-- ## Using TypeScript -->
+## TypeScriptの使用
 
 <!-- TODO(lucacasonato): text on 'just import .ts' -->
 
+<!--
 Deno supports both JavaScript and TypeScript as first class languages at
 runtime. This means it requires fully qualified module names, including the
 extension (or a server providing the correct media type). In addition, Deno has
 no "magical" module resolution. Instead, imported modules are specified as files
 (including extensions) or fully qualified URL imports. Typescript modules can be
 directly imported. E.g.
+-->
+DenoはJavaScriptとTypeScriptの両方をランタイムの主要言語としてサポートしています。つまり、完全なモジュール名と拡張子(もしくはサーバーが正しいメディアタイプを提供)を要求します。加えて、Denoは"魔法の"モジュール解決をしません。代わりに指定されたファイル(拡張子込み)か完全なURLでモジュールをインポートします。TypeScriptモジュールは直接インポートすることが出来ます。例えば、
 
 ```
 import { Response } from "https://deno.land/std@$STD_VERSION/http/server.ts";
