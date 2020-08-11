@@ -258,7 +258,12 @@ const InstallSection = () => {
   );
   const scoop = (
     <div key="scoop" className="my-4 text-gray-700">
-      <p className="mb-2">Scoop (Windows):</p>
+      <p className="mb-2">
+        <a href="https://scoop.sh/" className="link">
+          Scoop
+        </a>{" "}
+        (Windows):
+      </p>
       <CodeBlock language="bash" code={`scoop install deno`} />
     </div>
   );
