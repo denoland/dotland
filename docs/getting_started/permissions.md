@@ -56,14 +56,21 @@ deno run --allow-read mod.ts
 - **--allow-run** サブプロセスの実行を許可。サブプロセスはサンドボックスで実行されるわけではないことに注意してください、そのため、denoのプロセスと同じセキュリティ制限を持ちません。そのため注意してください。
 - **--allow-write=\<allow-write\>** ファイルシステムへの書き込みを許可。任意でディレクトリまたはファイルのカンマ区切りのリストを指定することで、ファイルシステムへの許可をするリストを提供する事ができます。
 
-### Permissions allow-list
+<!-- ### Permissions allow-list -->
+### パーミッション許可リスト
 
+<!--
 Deno also allows you to control the granularity of some permissions with
 allow-lists.
+-->
+Denoは許可リストを用いてパーミッションの粒度を制御することが出来ます。
 
+<!--
 This example restricts file system access by allow-listing only the `/usr`
 directory, however the execution fails as the process was attempting to access a
 file in the `/etc` directory:
+-->
+この例では `/usr` ディレクトリのみを含む許可リストでファイルシステムを制限しますが、プロセスが `/etc` ディレクトリの中のファイルにアクセスしようとしているため実行に失敗します:
 
 ```shell
 $ deno run --allow-read=/usr https://deno.land/std@$STD_VERSION/examples/cat.ts /etc/passwd
@@ -73,13 +80,15 @@ error: Uncaught PermissionDenied: read access to "/etc/passwd", run again with t
     ...
 ```
 
-Try it out again with the correct permissions by allow-listing `/etc` instead:
+<!-- Try it out again with the correct permissions by allow-listing `/etc` instead: -->
+許可リストに `/etc` を指定し正しいパーミッションでもう一度試してみてください:
 
 ```shell
 deno run --allow-read=/etc https://deno.land/std@$STD_VERSION/examples/cat.ts /etc/passwd
 ```
 
-`--allow-write` works the same as `--allow-read`.
+<!-- `--allow-write` works the same as `--allow-read`. -->
+`--allow-write` は `--allow-read` と同様に動きます。
 
 ### Network access:
 
