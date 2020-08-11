@@ -103,7 +103,9 @@ on YouTrack.
 -->
 DenoのためのJetBrains IDEの設定のその他の情報はYouTrackの [this comment](https://youtrack.jetbrains.com/issue/WEB-41607#focus=streamItem-27-4160152.0-0) を読んでください。
 
-#### Vim and NeoVim
+<!-- #### Vim and NeoVim -->
+#### VimとNeoVim
+
 
 <!--
 Vim works fairly well for Deno/TypeScript if you install
