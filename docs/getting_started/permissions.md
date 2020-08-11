@@ -1,13 +1,20 @@
-## Permissions
+<!-- ## Permissions -->
+## パーミッション
 
+<!--
 Deno is secure by default. Therefore, unless you specifically enable it, a deno
 module has no file, network, or environment access for example. Access to
 security-sensitive areas or functions requires the use of permissions to be
 granted to a deno process on the command line.
+-->
+Denoはデフォルトで安全です。そのため、明確に有効にしない限り、Denoモジュールはファイル、ネットワーク、環境などへのアクセスが有りません。セキュリティに関わるエリアや機能へのアクセスはコマンドラインでdenoのプロセスを生成するときにパーミッションの使用を要求します。
 
+<!--
 For the following example, `mod.ts` has been granted read-only access to the
 file system. It cannot write to it, or perform any other security-sensitive
 functions.
+-->
+次の例では、`mod.ts` がファイルシステムへ読み込みのみのアクセスを得ます。書き込みや他のセキュリティに関わる機能はできません。
 
 ```shell
 deno run --allow-read mod.ts
