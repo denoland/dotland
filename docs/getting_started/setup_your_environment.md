@@ -105,9 +105,12 @@ DenoのためのJetBrains IDEの設定のその他の情報はYouTrackの [this 
 
 #### Vim and NeoVim
 
+<!--
 Vim works fairly well for Deno/TypeScript if you install
 [CoC](https://github.com/neoclide/coc.nvim) (intellisense engine and language
 server protocol).
+-->
+[CoC](https://github.com/neoclide/coc.nvim)(知的なエンジンと言語サーバープロトコル)をインストールすれば、Deno/TypeScript上でvimを使うことができます。
 
 After CoC is installed, from inside Vim, run`:CocInstall coc-tsserver` and
 `:CocInstall coc-deno`. To get autocompletion working for Deno type definitions
