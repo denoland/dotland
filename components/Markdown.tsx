@@ -45,14 +45,17 @@ interface MarkdownProps {
 
 function Markdown(props: MarkdownProps) {
   useEffect(() => {
-    let { hash } = location;
-    hash = hash && hash.substring(1);
-    if (!hash) return;
+    const id = setTimeout(() => {
+      let { hash } = location;
+      hash = hash && hash.substring(1);
+      if (!hash) return;
 
-    const el = document.getElementById(hash);
-    if (!el) return;
+      const el = document.getElementsByName(hash)[0];
+      if (!el) return;
 
-    setTimeout(() => el.scrollIntoView(), 0);
+      setTimeout(() => el.scrollIntoView(), 0);
+    }, 50);
+    return () => clearTimeout(id);
   }, []);
 
   if (!props.source) {
