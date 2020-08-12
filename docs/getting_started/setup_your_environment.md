@@ -124,19 +124,25 @@ CoCをインストールした後は、vim側から`:CocInstall coc-tsserver`と
 
 #### Emacs
 
+<!--
 Emacs works pretty well for a TypeScript project targeted to Deno by using a
 combination of [tide](https://github.com/ananthakumaran/tide) which is the
 canonical way of using TypeScript within Emacs and
 [typescript-deno-plugin](https://github.com/justjavac/typescript-deno-plugin)
 which is what is used by the
 [official VSCode extension for Deno](https://github.com/denoland/vscode_deno).
+-->
+EmacsはEmacsでのTypeScriptの標準的な使い方である [tide](https://github.com/ananthakumaran/tide) と [official VSCode extension for Deno](https://github.com/denoland/vscode_deno) で使われている [typescript-deno-plugin](https://github.com/justjavac/typescript-deno-plugin) の組み合わせを使うことでDenoでのTypeScriptプロジェクトでうまく動作します。
 
+<!--
 To use it, first make sure that `tide` is setup for your instance of Emacs.
 Next, as instructed on the
 [typescript-deno-plugin](https://github.com/justjavac/typescript-deno-plugin)
 page, first `npm install --save-dev typescript-deno-plugin typescript` in your
 project (`npm init -y` as necessary), then add the following block to your
 `tsconfig.json` and you are off to the races!
+-->
+これを使うためにまずEmacsのインスタンスに `tide` が設定されていることを確認してください。次に、[typescript-deno-plugin](https://github.com/justjavac/typescript-deno-plugin) のページにあるように、まず `npm install --save-dev typescript-deno-plugin typescript` をプロジェクト内で実行してください(`npm init -y` を必要です)、そして次のコードを `tsconfig.json` に追加してください、これですぐに始めることが出来ます!
 
 ```json
 {
@@ -152,6 +158,9 @@ project (`npm init -y` as necessary), then add the following block to your
 }
 ```
 
+<!--
 If you don't see your favorite IDE on this list, maybe you can develop an
 extension. Our [community Discord group](https://discord.gg/deno) can give you
 some pointers on where to get started.
+-->
+もしお気に入りのIDEがこのページにない場合、拡張機能を作ることが出来ます。[community Discord group](https://discord.gg/deno) でどこから始めればよいかを学ぶことが出来ます
