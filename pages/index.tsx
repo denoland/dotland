@@ -291,7 +291,8 @@ for await (const req of s) {
             */}
             サードパーティモジュールを簡単に使用するためDenoは
             <InlineCode>deno info</InlineCode> や{" "}
-            <InlineCode>deno doc</InlineCode>などのビルトインツールを持っています。
+            <InlineCode>deno doc</InlineCode>
+            などのビルトインツールを持っています。
             deno.landはモジュールのドキュメントを見るためのWeb
             UIを提供しています。{" "}
             <a href="https://doc.deno.land" className="link">
