@@ -5,6 +5,7 @@ import App from "next/app";
 import Head from "next/head";
 import "../components/app.css";
 import "../components/markdown.css";
+import "../components/docsearch.css";
 
 export default class DenoWebsiteApp extends App {
   render() {
