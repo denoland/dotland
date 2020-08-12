@@ -170,9 +170,11 @@ help:
 deno help test
 ```
 
-## Filtering
+<!-- ## Filtering -->
+## フィルタリング
 
-There are a number of options to filter the tests you are running.
+<!-- There are a number of options to filter the tests you are running. -->
+実行しているテストをフィルタリングするためのいくつか選択肢があります。
 
 ### Command line filtering
 
