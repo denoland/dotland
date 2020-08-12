@@ -1,11 +1,17 @@
-## Command line interface
+<!-- ## Command line interface -->
+## コマンドラインインターフェース
 
+<!--
 Deno is a command line program. You should be familiar with some simple commands
 having followed the examples thus far and already understand the basics of shell
 usage.
+-->
+Denoはコマンドラインプログラムです。これまでの例を見てきてシンプルなコマンドに慣れてるはずで、シェルの基本的な使いは理解してるはずです。
 
-There are multiple ways of viewing the main help text:
+<!-- There are multiple ways of viewing the main help text: -->
+メインのヘルプページを見るのに様々な方法があります:
 
+<!--
 ```shell
 # Using the subcommand.
 deno help
@@ -16,10 +22,24 @@ deno -h
 # Using the long flag -- outputs more detailed help text where available.
 deno --help
 ```
+-->
+```shell
+# サブコマンドを使う。
+deno help
 
+# ショートフラグを使う -- 出力結果は上記と同じです。
+deno -h
+
+# ロングフラグを使う -- 利用可能な場合、より詳しいヘルプテキストを出力します。
+deno --help
+```
+
+<!--
 Deno's CLI is subcommand-based. The above commands should show you a list of
 those supported, such as `deno bundle`. To see subcommand-specific help for
 `bundle`, you can similarly run one of:
+-->
+DenoのCLIはサブコマンドベースです。上記のコマンドは `deno bundle` などサポートされているサブコマンドを表示するはずです。`bundle` サブコマンド限定のヘルプを表示するには以下のどれかを実行してください:
 
 ```shell
 deno help bundle
@@ -27,7 +47,8 @@ deno bundle -h
 deno bundle --help
 ```
 
-Detailed guides to each subcommand can be found [here](../tools.md).
+<!-- Detailed guides to each subcommand can be found [here](../tools.md). -->
+それぞれのサブコマンドの詳しいガイドは[こちら](../tools.md)で見つかります。
 
 ### Script source
 
