@@ -1,9 +1,14 @@
-# Standard library
+<!-- # Standard library -->
+# 標準ライブラリ
 
+<!--
 Deno provides a set of standard modules that are audited by the core team and
 are guaranteed to work with Deno.
+-->
+Denoはコアチームによって監査されDenoで動くことが保証された標準モジュールセットを提供しています。
 
-Standard library is available at: https://deno.land/std/
+<!-- Standard library is available at: https://deno.land/std/ -->
+標準ライブラリはここにあります: https://deno.land/std/
 
 ## Versioning and stability
 
