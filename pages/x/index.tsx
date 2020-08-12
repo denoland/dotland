@@ -80,17 +80,17 @@ const ThirdPartyRegistryList = () => {
           </div>
           <div className="sm:max-w-screen-lg sm:mx-auto sm:px-6 md:px-8 pb-4 sm:pb-12">
             {resp === undefined ? (
-              <div className="px-4 sm:px-0 py-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
+              <div className="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
                 Loading...
               </div>
             ) : resp === null ? (
-              <div className="px-4 sm:px-0 py-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
+              <div className="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
                 Failed to load modules
               </div>
             ) : (
               <div className="bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4">
                 {resp.results.length == 0 ? (
-                  <div className="px-4 sm:px-0 py-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
+                  <div className="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
                     No modules found
                   </div>
                 ) : (

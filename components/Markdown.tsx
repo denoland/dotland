@@ -1,21 +1,10 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
 import React, { useEffect } from "react";
-import ReactMarkdown from "react-markdown";
-import CodeBlock from "./CodeBlock";
-import InlineCode from "./InlineCode";
-
-interface HeadingRendererProps {
-  source: string;
-  children?: any;
-  level?: any;
-}
-
-function flatten(text: any, child: any): any {
-  return typeof child === "string"
-    ? text + child
-    : React.Children.toArray(child.props.children).reduce(flatten, text);
-}
+import { renderToStaticMarkup } from "react-dom/server";
+import marked, { Renderer } from "marked";
+import dompurify from "dompurify";
+import { RawCodeBlock } from "./CodeBlock";
 
 function slugify(text: string): string {
   text = text.toLowerCase();
@@ -27,25 +16,6 @@ function slugify(text: string): string {
     .join("");
 
   return text;
-}
-
-function HeadingRenderer(props: HeadingRendererProps) {
-  const children = React.Children.toArray(props.children);
-  const text = children.reduce(flatten, "");
-  const id = slugify(text);
-  return React.createElement(
-    "h" + props.level,
-    { id },
-    <a href={"#" + id} className="hover:underline">
-      {props.children}
-    </a>
-  );
-}
-
-interface LinkRendererProps {
-  children?: any;
-  href?: string;
-  displayURL: string;
 }
 
 function isRelative(path: string): boolean {
@@ -66,81 +36,6 @@ function relativeToAbsolute(base: string, relative: string): string {
   baseURL.pathname = parts.join("/");
   return baseURL.href;
 }
-
-function LinkRenderer(props: LinkRendererProps) {
-  let href = props.href;
-
-  // If the URL is relative, it should be relative to the canonical URL of the file.
-  if (href !== undefined && isRelative(href)) {
-    // https://github.com/denoland/deno_website2/issues/1047
-    href = decodeURIComponent(relativeToAbsolute(props.displayURL, href));
-  }
-
-  const hrefURL = href ? new URL(href) : undefined;
-
-  // Manual links should not have trailing .md
-  if (
-    hrefURL?.pathname?.startsWith("/manual") &&
-    hrefURL?.origin === "https://deno.land"
-  ) {
-    hrefURL.pathname = hrefURL.pathname.replace(/\.md$/, "");
-    href = hrefURL.href;
-  }
-
-  // TODO(lucacasonato): Use next.js Link
-  return (
-    <a href={href} className="link">
-      {props.children}
-    </a>
-  );
-}
-
-function CodeRenderer(props: any) {
-  return <CodeBlock {...{ ...props, code: props.value, value: undefined }} />;
-}
-
-function ImageRenderer(props: {
-  src: string;
-  sourceURL: string;
-  displayURL: string;
-}) {
-  let src = props.src;
-  const className = "max-w-full inline-block";
-  const isManual = new URL(props.displayURL).pathname.startsWith("/manual");
-
-  if (isRelative(src)) {
-    src = relativeToAbsolute(props.sourceURL, src);
-  }
-
-  return isManual ? (
-    <a href={src} className={className}>
-      <img src={src} />
-    </a>
-  ) : (
-    <img className={className} src={src} />
-  );
-}
-
-const renderers = (displayURL: string, sourceURL: string) => ({
-  inlineCode: InlineCode,
-  code: CodeRenderer,
-  heading: HeadingRenderer,
-  link: function LinkRendererWrapper(props: any) {
-    return <LinkRenderer {...props} displayURL={displayURL} />;
-  },
-  image: function ImageRendererWrapper(props: any) {
-    return (
-      <ImageRenderer {...props} sourceURL={sourceURL} displayURL={displayURL} />
-    );
-  },
-  table: function TableRenderer(props: any) {
-    return (
-      <div className="overflow-x-auto">
-        <table {...props} />
-      </div>
-    );
-  },
-});
 
 interface MarkdownProps {
   source: string;
@@ -163,14 +58,106 @@ function Markdown(props: MarkdownProps) {
   if (!props.source) {
     return null;
   }
+
+  marked.use({
+    renderer: ({
+      heading(text: string, level: number) {
+        const slug = slugify(text);
+        return `
+          <h${level}>
+            <a name="${slug}" class="anchor" href="#${slug}">
+              <span class="octicon-link"></span>
+            </a>
+            ${text}
+          </h${level}>`;
+      },
+      link(href, title, text) {
+        const url = href ? transformLinkUri(props.displayURL)(href) : "";
+        return `<a ${url ? `href="${url}"` : ""} ${
+          title ? `title="${title}"` : ""
+        }>${text}</a>`;
+      },
+      image(href, title, text) {
+        const url = href ? transformImageUri(props.sourceURL)(href) : "";
+        return `<img ${url ? `src="${url}"` : ""} ${
+          text ? `alt="${text}"` : ""
+        } ${title ? `title="${title}"` : ""} style="max-width:100%;">`;
+      },
+      html(html: string) {
+        const images: RegExpMatchArray[] = [...html.matchAll(/src="([^"]*)"/g)];
+        images.forEach((a) => {
+          const original = a[1];
+          const final = transformImageUri(props.sourceURL)(original);
+          console.log(original, final);
+          html = html.replace(`src="${original}"`, `src="${final}"`);
+        });
+        const links: RegExpMatchArray[] = [...html.matchAll(/href="([^"]*)"/g)];
+        links.forEach((a) => {
+          const original = a[1];
+          const final = transformLinkUri(props.displayURL)(original);
+          console.log(original, final);
+          html = html.replace(`href="${original}"`, `href="${final}"`);
+        });
+        return html;
+      },
+    } as Partial<Renderer>) as any,
+  });
+
+  const raw = marked(props.source, {
+    gfm: true,
+    headerIds: true,
+    sanitizer: dompurify.sanitize,
+    highlight: (code, language) =>
+      renderToStaticMarkup(
+        <RawCodeBlock
+          code={code}
+          language={language as any}
+          disablePrefixes={true}
+          enableLineRef={false}
+        />
+      ),
+  });
+
   return (
-    <ReactMarkdown
-      source={props.source}
-      renderers={renderers(props.displayURL, props.sourceURL)}
-      skipHtml={true}
-      className="markdown"
+    <div
+      dangerouslySetInnerHTML={{ __html: raw }}
+      className="markdown-body py-8 px-4"
     />
   );
+}
+
+function transformLinkUri(displayURL: string) {
+  return (uri: string) => {
+    let href = uri;
+
+    // If the URL is relative, it should be relative to the canonical URL of the file.
+    if (href !== undefined && isRelative(href)) {
+      // https://github.com/denoland/deno_website2/issues/1047
+      href = decodeURIComponent(relativeToAbsolute(displayURL, href));
+    }
+
+    const hrefURL = href ? new URL(href) : undefined;
+
+    // Manual links should not have trailing .md
+    if (
+      hrefURL?.pathname?.startsWith("/manual") &&
+      hrefURL?.origin === "https://deno.land"
+    ) {
+      hrefURL.pathname = hrefURL.pathname.replace(/\.md$/, "");
+      href = hrefURL.href;
+    }
+
+    return href;
+  };
+}
+
+function transformImageUri(sourceURL: string) {
+  return (uri: string) => {
+    if (isRelative(uri)) {
+      return relativeToAbsolute(sourceURL, uri);
+    }
+    return uri;
+  };
 }
 
 export default Markdown;
