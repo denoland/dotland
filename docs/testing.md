@@ -51,10 +51,14 @@ Deno.test({
 });
 ```
 
-## Assertions
+<!-- ## Assertions -->
+## アサーション
 
+<!--
 There are some useful assertion utilities at
 https://deno.land/std@$STD_VERSION/testing#usage to make testing easier:
+-->
+テストを簡単にするアサーションユーティリティは https://deno.land/std@$STD_VERSION/testing#usage にあります:
 
 ```ts
 import {
