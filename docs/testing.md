@@ -73,11 +73,16 @@ Deno.test("hello world", () => {
 });
 ```
 
-### Async functions
+<!-- ### Async functions -->
+### Async 関数
 
+<!--
 You can also test asynchronous code by passing a test function that returns a
 promise. For this you can use the `async` keyword when defining a function:
+-->
+promise を返すテスト関数を渡すことで非同期のコードテストできます。これをするために関数を定義するときに `async` キーワードを使うことが出来ます:
 
+<!--
 ```ts
 import { delay } from "https://deno.land/std@$STD_VERSION/async/delay.ts";
 
@@ -89,6 +94,21 @@ Deno.test("async hello world", async () => {
 
   if (x !== 3) {
     throw Error("x should be equal to 3");
+  }
+});
+```
+-->
+```ts
+import { delay } from "https://deno.land/std@$STD_VERSION/async/delay.ts";
+
+Deno.test("async hello world", async () => {
+  const x = 1 + 2;
+
+  // 非同期タスクをまつ
+  await delay(100);
+
+  if (x !== 3) {
+    throw Error("x は 3 になるはずです");
   }
 });
 ```
