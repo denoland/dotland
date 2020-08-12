@@ -248,8 +248,11 @@ Deno.test({
 
 ## Failing fast
 
+<!--
 If you have a long running test suite and wish for it to stop on the first
 failure, you can specify the `--failfast` flag when running the suite.
+-->
+もしテストスイートの実行時間が長く最初のエラーでやめたい場合、スイートを実行の際 `--failfast` フラグを指定する事ができます。
 
 ```shell
 deno test --failfast
