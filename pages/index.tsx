@@ -80,7 +80,7 @@ for await (const req of s) {
               */}
               依存関係インスペクター(<InlineCode>deno info</InlineCode>
               )やコードフォーマッター(<InlineCode>deno fmt</InlineCode>
-              )などのユーティリティーを内蔵しています。
+              )などのビルトインユーティリティーを持っています。
             </li>
             <li>
               {/*
@@ -291,7 +291,7 @@ for await (const req of s) {
             */}
             サードパーティモジュールを簡単に使用するためDenoは
             <InlineCode>deno info</InlineCode> や{" "}
-            <InlineCode>deno doc</InlineCode>などのツールを内蔵しています。
+            <InlineCode>deno doc</InlineCode>などのビルトインツールを持っています。
             deno.landはモジュールのドキュメントを見るためのWeb
             UIを提供しています。{" "}
             <a href="https://doc.deno.land" className="link">

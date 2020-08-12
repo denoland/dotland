@@ -5,7 +5,7 @@
 Deno has a built-in test runner that you can use for testing JavaScript or
 TypeScript code.
 -->
-DenoはJavaScriptやTypeScriptのコードをテストするために内蔵のテストランナーを持っています。
+DenoはJavaScriptやTypeScriptのコードをテストするためにビルトインテストランナーを持っています。
 
 <!-- ## Writing tests -->
 ## テストを書く
