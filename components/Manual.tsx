@@ -189,6 +189,19 @@ function Manual() {
     searchButtonRef,
   });
 
+  useEffect(() => {
+    function onPress(e: KeyboardEvent) {
+      if (!isOpen) {
+        if (e.key === "/" || e.key === "s") {
+          e.preventDefault();
+          onOpen();
+        }
+      }
+    }
+    window.addEventListener("keypress", onPress);
+    return () => window.removeEventListener("keypress", onPress);
+  }, [onOpen]);
+
   function gotoVersion(newVersion: string) {
     push(
       `/[...rest]`,
