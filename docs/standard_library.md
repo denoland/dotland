@@ -57,13 +57,18 @@ import { copy } from "https://deno.land/std@$STD_VERSION/fs/copy.ts";
 import { copy } from "https://deno.land/std@$STD_VERSION/fs/copy.ts";
 ```
 
-## Troubleshooting
+<!-- ## Troubleshooting -->
+## トラブルシューティング
 
-Some of the modules provided in standard library use unstable Deno APIs.
+<!-- Some of the modules provided in standard library use unstable Deno APIs. -->
+標準ライブラリで提供されているモジュールの中には不安定なDeno APIを使用しているものがあります。
 
+<!--
 Trying to run such modules without `--unstable` CLI flag ends up with a lot of
 TypeScript errors suggesting that some APIs in the `Deno` namespace do not
 exist:
+-->
+これらのモジュールを `--unstable` フラグなしで実行しようとすると `Deno` 名前空間にあるいくつかのAPIが存在しないことを示唆する多くのTypeScriptはエラーが発生します。
 
 ```typescript
 // main.ts
@@ -89,15 +94,22 @@ TS2339 [ERROR]: Property 'utimeSync' does not exist on type 'typeof Deno'.
     at https://deno.land/std@$STD_VERSION/fs/copy.ts:101:10
 ```
 
-Solution to that problem requires adding `--unstable` flag:
+<!-- Solution to that problem requires adding `--unstable` flag: -->
+これらのプログラムへの解決策は `--unstable` フラグを利用することです:
 
 ```shell
 deno run --allow-read --allow-write --unstable main.ts
 ```
 
+<!--
 To make sure that API producing error is unstable check
 [`lib.deno.unstable.d.ts`](https://github.com/denoland/deno/blob/master/cli/dts/lib.deno.unstable.d.ts)
 declaration.
+-->
+APIが不安定なエラーを生成していることを確認するには [`lib.deno.unstable.d.ts`](https://github.com/denoland/deno/blob/master/cli/dts/lib.deno.unstable.d.ts) を確認してください。
 
+<!--
 This problem should be fixed in the near future. Feel free to omit the flag if
 the particular modules you depend on compile successfully without it.
+-->
+この問題は近いうちに解決されるはずです。依存している特定のモジュールがこのフラグなしで正常にコンパイルされている場合は、このフラグを省略しても構いません。
