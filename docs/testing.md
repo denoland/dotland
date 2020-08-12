@@ -223,9 +223,11 @@ forward-slashes like the JavaScript syntactic sugar for a REGEX._
 -->
 _パターンを使いたいことをDenoに知らせるには、JavaScriptのREGEX構文のようにフィルターをフォーワードスラッシュで囲んでください。_
 
-### Test definition filtering
+<!-- ### Test definition filtering -->
+### 定義フィルタリングのテスト
 
-Within the tests themselves, you have two options for filtering.
+<!-- Within the tests themselves, you have two options for filtering. -->
+テスト自体にはフィルタリングのための2つのオプションがあります。
 
 #### Filtering out (Ignoring these tests)
 
