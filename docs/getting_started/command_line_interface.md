@@ -50,11 +50,15 @@ deno bundle --help
 <!-- Detailed guides to each subcommand can be found [here](../tools.md). -->
 それぞれのサブコマンドの詳しいガイドは[こちら](../tools.md)で見つかります。
 
-### Script source
+<!-- ### Script source -->
+### スクリプトソース
 
+<!--
 Deno can grab the scripts from multiple sources, a filename, a url, and '-' to
 read the file from stdin. The last is useful for integration with other
 applications.
+-->
+Denoはファイル、url、標準入力から '-' を用いるなど様々なソースからスクリプトを取得することが出来ます。標準入力は他のアプリケーションとの統合に便利です。
 
 ```shell
 deno run main.ts
@@ -62,10 +66,14 @@ deno run https://mydomain.com/main.ts
 cat main.ts | deno run -
 ```
 
-### Script arguments
+<!-- ### Script arguments -->
+### スクリプト引数
 
+<!--
 Separately from the Deno runtime flags, you can pass user-space arguments to the
 script you are running by specifying them after the script name:
+-->
+Denoランタイムフラグとは別に、スクリプト名のあとにユーザー空間引数を指定することで、実行中のスクリプトにユーザー空間引数を渡すことが出来ます:
 
 ```shell
 deno run main.ts a b -c --quiet
@@ -76,15 +84,27 @@ deno run main.ts a b -c --quiet
 console.log(Deno.args); // [ "a", "b", "-c", "--quiet" ]
 ```
 
+<!--
 **Note that anything passed after the script name will be passed as a script
 argument and not consumed as a Deno runtime flag.** This leads to the following
 pitfall:
+-->
+**スクリプト名のあとに渡されたものはすべてスクリプト引数として渡され、Denoランタイムフラグとはみなされません。** これは次のような落とし穴につながります。
 
+<!--
 ```shell
 # Good. We grant net permission to net_client.ts.
 deno run --allow-net net_client.ts
 
 # Bad! --allow-net was passed to Deno.args, throws a net permission error.
+deno run net_client.ts --allow-net
+```
+-->
+```shell
+# 良い例。net_client.ts にパーミッションを許可。
+deno run --allow-net net_client.ts
+
+# 悪い例! --allow-net はDeno.argsに渡され、ネットパーミッションエラーが投げられます。
 deno run net_client.ts --allow-net
 ```
 
