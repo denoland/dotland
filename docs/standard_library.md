@@ -10,28 +10,50 @@ Denoはコアチームによって監査されDenoで動くことが保証され
 <!-- Standard library is available at: https://deno.land/std/ -->
 標準ライブラリはここにあります: https://deno.land/std/
 
-## Versioning and stability
+<!-- ## Versioning and stability -->
+## バージョニングと安定性
 
+<!--
 Standard library is not yet stable and therefore it is versioned differently
 than Deno. For latest release consult https://deno.land/std/ or
 https://deno.land/std/version.ts. The standard library is released each time
 Deno is released.
+-->
+標準ライブラリはまだ安定版でなくそのためDenoのバージョンと違います。最新のリリースは https://deno.land/std/ もしくは https://deno.land/std/version.ts にあります。標準ライブラリはDenoリリースと同時期にリリースされます。
 
+<!--
 We strongly suggest to always use imports with pinned version of standard
 library to avoid unintended changes. For example, rather than linking to the
 master branch of code, which may change at any time, potentially causing
 compilation errors or unexpected behavior:
+-->
+意図しない変更を回避するために標準ライブラリは固定されたバージョンをつねにインポートすることを強くおすすめします。例えば、いつでも変更される可能性があり、コンパイルエラーや予期できない動作を起こす可能性があるマスターブランチのコードにリンクするより:
 
+<!--
 ```typescript
 // imports from master, this should be avoided
 import { copy } from "https://deno.land/std/fs/copy.ts";
 ```
+-->
+```typescript
+// マスターからインポート、これは避けるべきです
+import { copy } from "https://deno.land/std/fs/copy.ts";
+```
 
+<!--
 instead, used a version of the std library which is immutable and will not
 change:
+-->
+それより、変更されないイミュータブルの std ライブラリのバージョンを使ってください:
 
+<!--
 ```typescript
 // imports from v0.50.0 of std, never changes
+import { copy } from "https://deno.land/std@$STD_VERSION/fs/copy.ts";
+```
+--->
+```typescript
+// 変更されない、v0.50.0 の std をインポート
 import { copy } from "https://deno.land/std@$STD_VERSION/fs/copy.ts";
 ```
 
