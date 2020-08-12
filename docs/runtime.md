@@ -42,15 +42,26 @@ file.
 -->
 ワーカー特有の定義は [`lib.deno.worker.d.ts`](https://github.com/denoland/deno/blob/master/cli/dts/lib.deno.worker.d.ts) にあります。
 
-## `Deno` global
+<!-- ## `Deno` global -->
+## `Deno` グローバル
 
+<!--
 All APIs that are not web standard are contained in the global `Deno` namespace.
 It has the APIs for reading from files, opening TCP sockets, and executing
 subprocesses, etc.
+-->
+Web標準でないすべてのAPIはグローバルである `Deno` 名前空間に含まれています。
+これらにはファイルの読み込み、TCPソケットの開放、サブプロセスの実行などのAPIが含まれています。
 
+<!--
 The TypeScript definitions for the Deno namespaces can be found in the
 [`lib.deno.ns.d.ts`](https://github.com/denoland/deno/blob/master/cli/dts/lib.deno.ns.d.ts)
 file.
+-->
+Deno名前空間のTypeScriptの定義は [`lib.deno.ns.d.ts`](https://github.com/denoland/deno/blob/master/cli/dts/lib.deno.ns.d.ts) ファイルにあります。
 
+<!--
 The documentation for all of the Deno specific APIs can be found on
 [doc.deno.land](https://doc.deno.land/https/raw.githubusercontent.com/denoland/deno/master/cli/dts/lib.deno.ns.d.ts).
+-->
+Deno特有のAPIのドキュメントは [doc.deno.land](https://doc.deno.land/https/raw.githubusercontent.com/denoland/deno/master/cli/dts/lib.deno.ns.d.ts) にあります。
