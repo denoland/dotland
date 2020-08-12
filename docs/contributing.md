@@ -1,17 +1,27 @@
-# Contributing
+<!-- # Contributing -->
+# コントリビューティング
 
-- Read the [style guide](./contributing/style_guide.md).
+<!-- - Read the [style guide](./contributing/style_guide.md). -->
+- [style guide](./contributing/style_guide.md) を読んでください。
 
-- Please don't make [the benchmarks](https://deno.land/benchmarks) worse.
+<!-- - Please don't make [the benchmarks](https://deno.land/benchmarks) worse. -->
+- [the benchmarks](https://deno.land/benchmarks) を悪くしないでください。
 
-- Ask for help in the [community chat room](https://discord.gg/deno).
+<!-- - Ask for help in the [community chat room](https://discord.gg/deno). -->
+- [community chat room](https://discord.gg/deno) で助けを求めてください。
 
+<!--
 - If you are going to work on an issue, mention so in the issue comments
   _before_ you start working on the issue.
+-->
+- issue で協力したい場合は、_前に_ issue でメンションしてください。
 
+<!--
 - Please be professional in the forums. We follow
   [Rust's code of conduct](https://www.rust-lang.org/policies/code-of-conduct)
   (CoC) Have a problem? Email ry@tinyclouds.org.
+-->
+- フォーラムではプロフェッショナルでいてください。[Rust's code of conduct](https://www.rust-lang.org/policies/code-of-conduct) (CoC) に従っています。問題がある場合は、ry@tinyclouds.org にメールを送ってください。
 
 ## Development
 
