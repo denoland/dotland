@@ -200,7 +200,7 @@ function Manual() {
     }
     window.addEventListener("keypress", onPress);
     return () => window.removeEventListener("keypress", onPress);
-  }, [onOpen]);
+  }, [isOpen, onOpen]);
 
   function gotoVersion(newVersion: string) {
     push(
