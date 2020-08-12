@@ -14,7 +14,7 @@
 - If you are going to work on an issue, mention so in the issue comments
   _before_ you start working on the issue.
 -->
-- issue で協力したい場合は、_前に_ issue でメンションしてください。
+- issue で協力したい場合は、協力する前に _前に_ issue でメンションしてください。
 
 <!--
 - Please be professional in the forums. We follow
