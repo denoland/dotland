@@ -9,6 +9,7 @@ import { createPortal } from "react-dom";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter, Router } from "next/router";
+// @ts-expect-error
 import { DocSearchModal, useDocSearchKeyboardEvents } from "@docsearch/react";
 import versionMeta from "../versions.json";
 import { parseNameVersion } from "../util/registry_utils";
