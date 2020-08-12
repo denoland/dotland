@@ -1,13 +1,22 @@
-# Testing
+<!-- # Testing -->
+# テスト
 
+<!--
 Deno has a built-in test runner that you can use for testing JavaScript or
 TypeScript code.
+-->
+DenoはJavaScriptやTypeScriptのコードをテストするために内蔵のテストランナーを持っています。
 
-## Writing tests
+<!-- ## Writing tests -->
+## テストを書く
 
+<!--
 To define a test you need to call `Deno.test` with a name and function to be
 tested. There are two styles you can use.
+-->
+テストを定義するにはテストする名前と関数をつけて `Deno.test` を呼び出してください。
 
+<!--
 ```ts
 // Simple name and function, compact form, but not configurable
 Deno.test("hello world #1", () => {
@@ -16,6 +25,23 @@ Deno.test("hello world #1", () => {
 });
 
 // Fully fledged test definition, longer form, but configurable (see below)
+Deno.test({
+  name: "hello world #2",
+  fn: () => {
+    const x = 1 + 2;
+    assertEquals(x, 3);
+  },
+});
+```
+-->
+```ts
+// シンプルな名前と関数コンパクトですが、設定可能ではないです。
+Deno.test("hello world #1", () => {
+  const x = 1 + 2;
+  assertEquals(x, 3);
+});
+
+// 完全で本格的なテスト定義で長いですが、設定可能です(下記参照)
 Deno.test({
   name: "hello world #2",
   fn: () => {
