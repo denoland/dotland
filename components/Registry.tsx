@@ -47,7 +47,7 @@ const Registry = () => {
       name + (newVersion !== "" ? `@${newVersion}` : "")
     }${path}`;
     if (doReplace) {
-      replace(href, asPath);
+      replace(href, asPath + location.hash);
     } else {
       push(href, asPath);
     }

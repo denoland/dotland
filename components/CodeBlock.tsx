@@ -155,7 +155,7 @@ const CodeBlock = ({ code, language, disablePrefixes }: CodeBlockProps) => {
       code={code}
       language={language}
       disablePrefixes={disablePrefixes}
-      className="rounded border border-gray-200 p-1 px-2 sm:px-3"
+      className="p-4"
     />
   );
 };
