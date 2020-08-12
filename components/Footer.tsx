@@ -108,11 +108,11 @@ const Footer = (props: { simple?: boolean }) => (
             src="https://img.shields.io/github/workflow/status/denoland/rusty_v8/ci/master?label=rusty_v8&logo=github"
           />
         </a>
-        <a href="https://github.com/denoland/deno_website2">
+        <a href="https://github.com/tokiedokie/deno_website2_japanese">
           <img
             className="m-2 opacity-75"
-            alt="denoland/deno_website2 CI"
-            src="https://img.shields.io/github/workflow/status/denoland/deno_website2/ci/master?label=deno_website2&logo=github"
+            alt="denoland/deno_website2_japanese CI"
+            src="https://img.shields.io/github/workflow/status/tokiedokie/deno_website2_japanese/ci/master?label=deno_website2_japanese&logo=github"
           />
         </a>
         <a href="https://github.com/denoland/doc_website">
