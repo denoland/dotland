@@ -57,9 +57,9 @@
     "name": "Denoの埋め込み"
   },
   "contributing": {
-    "name": "Contributing",
+    "name": "コントリビューティング",
     "children": {
-      "building_from_source": "Building from source",
+      "building_from_source": "ソースからのビルド",
       "development_tools": "開発ツール",
       "style_guide": "スタイルガイド",
       "architecture": "アーキテクチャ"
