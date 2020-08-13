@@ -367,40 +367,58 @@ const ThirdPartyRegistryList = () => {
               <div>
                 <div>
                   <dt className="text-lg leading-6 font-medium text-gray-900">
-                    What is deno.land/x?
+                    {/* What is deno.land/x? */}
+                    deno.land/x とは?
                   </dt>
                   <dd className="mt-2">
                     <p className="text-base leading-6 text-gray-500">
+                      {/*
                       <span className="font-semibold">deno.land/x</span> is a
                       hosting service for Deno scripts. It caches releases of
                       open source modules stored on GitHub and serves them at
                       one easy to remember domain.
+                      */}
+                      <span className="font-semibold">deno.land/x</span>{" "}
+                      とはDenoスクリプトのためのホスティングサービスです。GitHub
+                      にあるオープンソースモジュールのリリースをキャッシュし覚えやすいドメインで提供します。
                     </p>
                   </dd>
                 </div>
                 <div className="mt-12">
                   <dt className="text-lg leading-6 font-medium text-gray-900">
-                    How do I use modules on deno.land/x?
+                    {/* How do I use modules on deno.land/x? */}
+                    deno.land/x にあるモジュールをどうやって利用しますか？
                   </dt>
                   <dd className="mt-2">
                     <p className="text-base leading-6 text-gray-500 break-words">
+                      {/*
                       The basic format of code URLs is
                       <InlineCode>
                         https://deno.land/x/IDENTIFIER@VERSION/FILE_PATH
                       </InlineCode>
                       . If you leave out the version it will be defaulted to the
                       most recent version released for the module.
+                      */}
+                      コードのURLの基本的なフォーマットは
+                      <InlineCode>
+                        https://deno.land/x/IDENTIFIER@VERSION/FILE_PATH
+                      </InlineCode>
+                      です。もし、バージョンを指定しなかった場合最新バージョンのリリースがデフォルトになります。
                     </p>
                   </dd>
                 </div>
                 <div className="mt-12">
                   <dt className="text-lg leading-6 font-medium text-gray-900">
-                    How do I add a module to deno.land/x?
+                    {/* How do I add a module to deno.land/x? */}
+                    deno.land/x にどうやってモジュールを追加しますか？
                   </dt>
                   <dd className="mt-2">
                     <p className="text-base leading-6 text-gray-500 break-words">
+                      {/*
                       Press the button below and follow the presented
                       instructions:
+                      */}
+                      下のボタンを押して指示に従ってください:
                     </p>
                     <span className="block w-full rounded-md shadow-sm mt-4">
                       <button
@@ -408,7 +426,8 @@ const ThirdPartyRegistryList = () => {
                         className="w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
                         onClick={() => setOverlayOpen(true)}
                       >
-                        Add a module
+                        {/* Add a module */}
+                        モジュールを追加する
                       </button>
                     </span>
                   </dd>
@@ -420,10 +439,13 @@ const ThirdPartyRegistryList = () => {
                     className="text-lg leading-6 font-medium text-gray-900"
                     id="warning"
                   >
-                    I am getting a warning when importing from deno.land/x!
+                    {/* I am getting a warning when importing from deno.land/x! */}
+                    deno.land/x
+                    からモジュールをインポートするときに警告が出ます！
                   </dt>
                   <dd className="mt-2">
                     <p className="text-base leading-6 text-gray-500">
+                      {/*
                       deno.land/x warns you when you are implicitly importing
                       the latest version of a module (when you do not explicitly
                       specify a version). This is because it can{" "}
@@ -434,15 +456,27 @@ const ThirdPartyRegistryList = () => {
                         be unsafe to not tag dependencies
                       </a>
                       . To get rid of the warning, explicitly specify a version.
+                      */}
+                      deno.land/x
+                      は暗黙的に最新バージョンをインポートしようとする(特定のバージョンを指定しなかった)と警告を出します。
+                      <a
+                        href="https://github.com/denoland/deno_website2/issues/997"
+                        className="link"
+                      >
+                        依存関係にタグを付けないのは安全ではい
+                      </a>
+                      可能性があるからです。警告を取り除くには、バージョンを明示的に指定してください。
                     </p>
                   </dd>
                 </div>
                 <div className="mt-12">
                   <dt className="text-lg leading-6 font-medium text-gray-900">
-                    Can I find functionality built-in to Deno here?
+                    {/* Can I find functionality built-in to Deno here? */}
+                    Denoのビルトイン機能はここにありますか？
                   </dt>
                   <dd className="mt-2">
                     <p className="text-base leading-6 text-gray-500">
+                      {/*
                       No, the built-in runtime is documented on{" "}
                       <a className="link" href="https://doc.deno.land/">
                         deno doc
@@ -452,20 +486,37 @@ const ThirdPartyRegistryList = () => {
                         <a className="link">/std</a>
                       </Link>{" "}
                       for the standard modules.
+                      */}
+                      いいえ、ビルトインランタイムは{" "}
+                      <a className="link" href="https://doc.deno.land/">
+                        deno doc
+                      </a>{" "}
+                      とマニュアルに記されています。標準モジュールについては{" "}
+                      <Link href="/[identifier]" as="/std">
+                        <a className="link">/std</a>
+                      </Link>{" "}
+                      を参照してください。
                     </p>
                   </dd>
                 </div>
                 <div className="mt-12">
                   <dt className="text-lg leading-6 font-medium text-gray-900">
-                    Can I edit or remove a module on deno.land/x?
+                    {/* Can I edit or remove a module on deno.land/x? */}
+                    deno.land/x のモジュールを編集したり削除したり出来ますか？
                   </dt>
                   <dd className="mt-2">
                     <p className="text-base leading-6 text-gray-500">
+                      {/*
                       Module versions are persistent and immutable. It is thus
                       not possible to edit or delete a module (or version), to
                       prevent breaking programs that rely on this module.
                       Modules may be removed if there is a legal reason to do
                       (for example copyright infringement).
+                      */}
+                      モジュールバージョンは永続的で変更不可です。
+                      このモジュールを使用しているプログラムを壊すことを防ぐために、
+                      モジュール(もしくはバージョン)を編集したり削除したり出来ません。
+                      もし法的な理由(例えば著作権侵害)があれば削除される可能性があります。
                     </p>
                   </dd>
                 </div>
