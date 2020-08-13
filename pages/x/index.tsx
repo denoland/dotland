@@ -73,7 +73,9 @@ const ThirdPartyRegistryList = () => {
               id="query"
               className="block w-full px-4 py-2 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1"
               type="text"
-              placeholder="Search"
+              placeholder={
+                !resp ? "Search" : `Search through ${resp.totalCount} modules`
+              }
               value={query}
               onChange={handleSearchInput}
             />
@@ -172,7 +174,7 @@ const ThirdPartyRegistryList = () => {
 
                       return (
                         <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-                          <div className="flex-1 flex justify-between sm:hidden">
+                          <div className="flex-1 flex justify-between items-center sm:hidden">
                             <button
                               disabled={!hasPrevious}
                               onClick={() => setPage(page - 1)}
@@ -184,10 +186,13 @@ const ThirdPartyRegistryList = () => {
                             >
                               Previous
                             </button>
+                            <div className="text-base leading-6 text-gray-500">
+                              {page}/{pageCount}
+                            </div>
                             <button
                               disabled={!hasNext}
                               onClick={() => setPage(page + 1)}
-                              className={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md bg-white ${
+                              className={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md bg-white ml-4 ${
                                 hasNext
                                   ? "text-gray-700 hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700"
                                   : "text-gray-500 cursor-default"
