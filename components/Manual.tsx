@@ -603,7 +603,7 @@ function ToC({
   return (
     <div className="pt-2 pb-8 h-0 flex-1 flex flex-col overflow-y-auto">
       <nav className="flex-1 px-4">
-        <ol className="pl-2 list-decimal list-inside font-semibold nested">
+        <ol className="list-decimal list-inside font-semibold nested">
           {tableOfContents &&
             Object.entries(tableOfContents).map(([slug, entry]) => {
               return (
