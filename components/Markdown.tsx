@@ -124,7 +124,7 @@ function Markdown(props: MarkdownProps) {
   return (
     <div
       dangerouslySetInnerHTML={{ __html: raw }}
-      className="markdown-body py-8 px-4"
+      className="markdown py-8 px-4"
     />
   );
 }

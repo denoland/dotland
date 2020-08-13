@@ -1,7 +1,16 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useMemo,
+  useRef,
+  useCallback,
+} from "react";
+import { createPortal } from "react-dom";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter, Router } from "next/router";
+// @ts-expect-error
+import { DocSearchModal, useDocSearchKeyboardEvents } from "@docsearch/react";
 import versionMeta from "../versions.json";
 import { parseNameVersion } from "../util/registry_utils";
 import {
@@ -14,6 +23,21 @@ import {
 import Markdown from "./Markdown";
 import Transition from "./Transition";
 import { CookieBanner } from "./CookieBanner";
+import InlineCode from "./InlineCode";
+
+function Hit({
+  hit,
+  children,
+}: {
+  hit: { url: string };
+  children: React.ReactElement;
+}) {
+  return (
+    <Link href="/[...rest]" as={hit.url}>
+      <a className="link">{children}</a>
+    </Link>
+  );
+}
 
 function Manual() {
   const { query, push, replace } = useRouter();
@@ -133,6 +157,52 @@ function Manual() {
       });
   }, [sourceURL]);
 
+  // SEARCH
+
+  const [isOpen, setIsOpen] = useState(false);
+  const searchButtonRef = useRef<HTMLButtonElement>();
+  const [initialQuery, setInitialQuery] = useState(null);
+
+  const onOpen = useCallback(() => {
+    setIsOpen(true);
+    setTimeout(() => {
+      document.getElementById("docsearch-input")?.focus();
+    }, 0);
+  }, [setIsOpen]);
+
+  const onClose = useCallback(() => {
+    setIsOpen(false);
+  }, [setIsOpen]);
+
+  const onInput = useCallback(
+    (e) => {
+      setIsOpen(true);
+      setInitialQuery(e.key);
+    },
+    [setIsOpen, setInitialQuery]
+  );
+
+  useDocSearchKeyboardEvents({
+    isOpen,
+    onOpen,
+    onClose,
+    onInput,
+    searchButtonRef,
+  });
+
+  useEffect(() => {
+    function onPress(e: KeyboardEvent) {
+      if (!isOpen) {
+        if (e.key === "/" || e.key === "s") {
+          e.preventDefault();
+          onOpen();
+        }
+      }
+    }
+    window.addEventListener("keypress", onPress);
+    return () => window.removeEventListener("keypress", onPress);
+  }, [isOpen, onOpen]);
+
   function gotoVersion(newVersion: string) {
     push(
       `/[...rest]`,
@@ -149,7 +219,46 @@ function Manual() {
     <div>
       <Head>
         <title>Manual | Deno</title>
+        <link
+          rel="preconnect"
+          href="https://BH4D9OD16A-dsn.algolia.net"
+          crossOrigin="true"
+        />
       </Head>
+      {isOpen &&
+        createPortal(
+          <DocSearchModal
+            initialQuery={initialQuery}
+            initialScrollY={window.scrollY}
+            searchParameters={{
+              distinct: 1,
+            }}
+            onClose={onClose}
+            indexName="deno_manual"
+            apiKey="a05e65bb082b87ff0ae75506f1b29fce"
+            navigator={{
+              navigate({ suggestionUrl }: any) {
+                push("/[...rest]", suggestionUrl);
+              },
+            }}
+            hitComponent={Hit}
+            transformItems={(items: Array<{ url: string }>) => {
+              return items.map((item) => {
+                // We transform the absolute URL into a relative URL to
+                // leverage Next's preloading.
+                const a = document.createElement("a");
+                a.href = item.url;
+
+                return {
+                  ...item,
+                  url: `${a.pathname}${a.hash}`,
+                };
+              });
+            }}
+          />,
+          document.body
+        )}
+
       <div className="h-screen flex overflow-hidden">
         <Transition show={showSidebar}>
           <div className="md:hidden">
@@ -266,20 +375,23 @@ function Manual() {
           </div>
         </div>
         <div className="flex flex-col w-0 flex-1 overflow-hidden">
-          <div className="relative z-10 flex-shrink-0 flex h-16 bg-white shadow md:hidden">
+          <div className="z-10 flex-shrink-0 flex h-16 bg-white shadow md:hidden">
             <Link href="/">
               <a className="px-4 flex items-center justify-center md:hidden">
                 <img src="/logo.svg" alt="logo" className="w-auto h-10" />
               </a>
             </Link>
-            <div className="flex-1 px-4 flex justify-between">
+            <div className="border-l border-r border-gray-200 flex-1 px-4 flex justify-between">
               <div className="flex-1 flex">
-                {/* <div className="w-full flex md:ml-0">
+                <div className="w-full flex justify-between h-full">
                   <label htmlFor="search_field" className="sr-only">
                     Search
                   </label>
-                  <div className="relative w-full text-gray-400 focus-within:text-gray-600">
-                    <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none">
+                  <button
+                    className="w-full text-gray-400 focus-within:text-gray-600 flex items-center"
+                    onClick={onOpen}
+                  >
+                    <div className="flex items-center pointer-events-none">
                       <svg
                         className="h-5 w-5"
                         fill="currentColor"
@@ -292,14 +404,15 @@ function Manual() {
                         />
                       </svg>
                     </div>
-                    <input
-                      id="search_field"
-                      className="block w-full h-full pl-8 pr-3 py-2 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 sm:text-sm"
-                      placeholder="Search"
-                      type="search"
-                    />
-                  </div>
-                </div> */}
+                    <div className="pl-6">
+                      <span className="inline sm:hidden">Search docs</span>
+                      <span className="hidden sm:inline">
+                        Search the docs (press <InlineCode>/</InlineCode> to
+                        focus)
+                      </span>
+                    </div>
+                  </button>
+                </div>
               </div>
             </div>
             <button
@@ -328,6 +441,35 @@ function Manual() {
             tabIndex={0}
             ref={manualEl}
           >
+            <div className="h-16 bg-white shadow hidden md:block">
+              <div className="max-w-screen-md mx-auto px-12 w-full flex justify-between h-full">
+                <label htmlFor="search_field" className="sr-only">
+                  Search
+                </label>
+                <button
+                  className="w-full text-gray-400 focus-within:text-gray-600 flex items-center"
+                  onClick={onOpen}
+                  ref={searchButtonRef as any}
+                >
+                  <div className="flex items-center pointer-events-none">
+                    <svg
+                      className="h-5 w-5"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                      />
+                    </svg>
+                  </div>
+                  <div className="pl-6">
+                    Search the docs (press <InlineCode>/</InlineCode> to focus)
+                  </div>
+                </button>
+              </div>
+            </div>
             <CookieBanner />
             <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20">
               {content ? (
