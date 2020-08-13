@@ -66,6 +66,25 @@ const ThirdPartyRegistryList = () => {
         />
         <div>
           <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8">
+            <dt className="text-lg leading-6 font-medium text-gray-900">
+              What is deno.land/x?
+            </dt>
+            <dd className="mt-2">
+              <p className="text-base leading-6 text-gray-500">
+                <span className="font-semibold">deno.land/x</span> is a hosting
+                service for Deno scripts. It caches releases of open source
+                modules stored on GitHub and serves them at one easy to remember
+                domain.
+              </p>
+            </dd>
+
+            <div className="mt-2">
+              <a href="#info" className="link">
+                Learn more
+              </a>
+            </div>
+          </div>
+          <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8">
             <label htmlFor="query" className="font-medium sr-only">
               Search
             </label>
@@ -367,23 +386,13 @@ const ThirdPartyRegistryList = () => {
               </div>
             )}
           </div>
-          <div className="max-w-screen-xl mx-auto pt-4 pb-8 sm:pt-8 sm:pb-12 px-4 sm:px-6 lg:pt-12 lg:pb-16 lg:px-8">
+          <div
+            id="info"
+            className="max-w-screen-xl mx-auto pt-4 pb-8 sm:pt-8 sm:pb-12 px-4 sm:px-6 lg:pt-12 lg:pb-16 lg:px-8"
+          >
             <dl className="md:grid md:grid-cols-2 md:gap-8">
               <div>
                 <div>
-                  <dt className="text-lg leading-6 font-medium text-gray-900">
-                    What is deno.land/x?
-                  </dt>
-                  <dd className="mt-2">
-                    <p className="text-base leading-6 text-gray-500">
-                      <span className="font-semibold">deno.land/x</span> is a
-                      hosting service for Deno scripts. It caches releases of
-                      open source modules stored on GitHub and serves them at
-                      one easy to remember domain.
-                    </p>
-                  </dd>
-                </div>
-                <div className="mt-12">
                   <dt className="text-lg leading-6 font-medium text-gray-900">
                     How do I use modules on deno.land/x?
                   </dt>
