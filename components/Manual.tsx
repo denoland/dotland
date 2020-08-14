@@ -234,8 +234,8 @@ function Manual() {
               distinct: 1,
             }}
             onClose={onClose}
-            indexName="deno_manual"
-            apiKey="a05e65bb082b87ff0ae75506f1b29fce"
+            indexName="deno_manual-jp"
+            apiKey="b13927f42ebd3cf696ffa6fd01cfefaa"
             navigator={{
               navigate({ suggestionUrl }: any) {
                 push("/[...rest]", suggestionUrl);
