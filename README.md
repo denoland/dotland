@@ -12,6 +12,8 @@ https://deno-ja.vercel.app/ のレポジトリです。
 
 `docs/toc.json`は元のファイルです。日本語は`docs/toc.ja.json`に書いてください。
 
+日本語訳に改行を入れないでください。改行されたとこで半角が入るのを嫌うためです。
+
 ## History
 
 This is a rewrite of the Deno website it will combine the code in
