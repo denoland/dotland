@@ -70,8 +70,10 @@ definition files without having to resort to "magic" resolution.
 -->
 このモジュールの差を埋めるため、Denoは"魔法"解決を使わずに3つの参照型定義をサポートしています。
 
-#### Compiler hint
+<!-- #### Compiler hint -->
+#### コンパイラヒント
 
+<!--
 If you are importing a JavaScript module, and you know where the type definition
 for that module is located, you can specify the type definition at import. This
 takes the form of a compiler hint. Compiler hints inform Deno the location of
@@ -80,21 +82,29 @@ hint is `@deno-types` and when specified the value will be used in the compiler
 instead of the JavaScript module. For example, if you had `foo.js`, but you know
 that alongside of it was `foo.d.ts` which was the types for the file, the code
 would look like this:
+-->
+もしJavaScriptモジュールをインポートしていてそのモジュールの型定義がどこにあるか知っているなら、インポートの際に型定義を指定することが出来ます。これはコンパイラのヒントの形をとっています。コンパイラヒントは `.d.ts` ファイルの場所とそれに関連してインポートされたJavaScriptコードをDenoに通知します。ヒントは `@deno-types` で指定された値はJavaScriptモジュールの代わりにコンパイラで使われます。例えば、`foo.js` があったとして、そのファイルの型である `foo.d.ts` がそれと一緒にあったとすると、以下のようなコードになります:
 
 ```ts
 // @deno-types="./foo.d.ts"
 import * as foo from "./foo.js";
 ```
 
+<!--
 The value follows the same resolution logic as importing a module, meaning the
 file needs to have an extension and is relative to the current module. Remote
 specifiers are also allowed.
+-->
+この値はモジュールのインポートと同じ解決ロジックに従います。つまり、ファイルには拡張子が必要で、現在のモジュールから相対的であるということです。リモート指定も許可されています。
 
+<!--
 The hint affects the next `import` statement (or `export ... from` statement)
 where the value of the `@deno-types` will be substituted at compile time instead
 of the specified module. Like in the above example, the Deno compiler will load
 `./foo.d.ts` instead of `./foo.js`. Deno will still load `./foo.js` when it runs
 the program.
+-->
+ヒントは次の `import` 文(もしくは `export ... from` 文)に影響を与え、コンパイル時に指定されたモジュールの代わりに `@deno-types` の値が代入されます。上記の例のようにDenoコンパイラは `./foo.js` の代わりに `./foo.d.ts` をロードします。Denoはプログラムを実行しても `./foo.js` を読み込みます。
 
 #### Triple-slash reference directive in JavaScript files
 
