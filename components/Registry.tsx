@@ -18,12 +18,15 @@ import {
   findRootReadme,
   Module,
   getModule,
+  VersionDeps,
+  getVersionDeps,
 } from "../util/registry_utils";
 import Header from "./Header";
 import Footer from "./Footer";
 import FileDisplay from "./FileDisplay";
 import DirectoryListing from "./DirectoryListing";
 import { CookieBanner } from "./CookieBanner";
+import DependencyGraph from "./DependencyGraph";
 
 const Registry = () => {
   // State
@@ -32,6 +35,9 @@ const Registry = () => {
     VersionMetaInfo | null | undefined
   >();
   const [moduleMeta, setModuleMeta] = useState<Module | null | undefined>();
+  const [versionDeps, setVersionDeps] = useState<
+    VersionDeps | null | undefined
+  >();
   const [raw, setRaw] = useState<string | null | undefined>();
   const [readme, setReadme] = useState<string | null | undefined>();
 
@@ -128,6 +134,23 @@ const Registry = () => {
           });
       } else {
         setVersionMeta(null);
+      }
+    }
+  }, [name, version]);
+
+  // Fetch version dependency information
+  useEffect(() => {
+    setVersionDeps(undefined);
+    if (version) {
+      if (name) {
+        getVersionDeps(name, version)
+          .then(setVersionDeps)
+          .catch((e) => {
+            console.error("Failed to fetch dependency information:", e);
+            setVersionDeps(null);
+          });
+      } else {
+        setVersionDeps(null);
       }
     }
   }, [name, version]);
@@ -348,6 +371,15 @@ const Registry = () => {
                                 repositoryURL={repositoryURL}
                                 documentationURL={documentationURL}
                               />
+                            ) : null}
+                            {typeof raw === "string" && versionDeps ? (
+                              <div className="mt-4">
+                                <DependencyGraph
+                                  graph={versionDeps.graph}
+                                  entrypoint={`https://deno.land/x/${name}@${version}${path}`}
+                                  currentModule={`https://deno.land/x/${name}@${version}/`}
+                                />
+                              </div>
                             ) : null}
                             {typeof readme === "string" &&
                             typeof readmeURL === "string" &&
