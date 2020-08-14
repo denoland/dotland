@@ -1,18 +1,31 @@
-## Workers
+<!-- ## Workers -->
+## ワーカー
 
+<!--
 Deno supports
 [`Web Worker API`](https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker).
+-->
+Denoは [`Web Worker API`](https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker) をサポートします。
 
+<!--
 Workers can be used to run code on multiple threads. Each instance of `Worker`
 is run on a separate thread, dedicated only to that worker.
+-->
+ワーカーは複数スレッドでコードを実行する時に使われます。それぞれの `Worker` インスタンスはワーカーそれぞれのワーカー専有の別々のスレッドで実行されます。
 
+<!--
 Currently Deno supports only `module` type workers; thus it's essential to pass
 the `type: "module"` option when creating a new worker.
+-->
+現在、Denoは `module` タイプのワーカーのみサポートしています; そのため、新しいワーカーを作成するときに `type: "module"` オプションを指定します。
 
+<!--
 Relative module specifiers are
 [not supported](https://github.com/denoland/deno/issues/5216) at the moment. You
 can instead use the `URL` contructor and `import.meta.url` to easily create a
 specifier for some nearby script.
+-->
+相対的なモジュールは現在 [サポートされていません](https://github.com/denoland/deno/issues/5216)。代わりに `URL` コンストラクタと `import.meta.url` を使って簡単にスクリプトの指定子を作ることが出来ます。
 
 ```ts
 // Good
