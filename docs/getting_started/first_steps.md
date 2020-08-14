@@ -11,7 +11,7 @@ you might want to follow a guide
 [on the basics of JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript)
 before attempting to start with Deno.
 -->
-このドキュメントはJavaScript、特に`async`/`await`の予備知識が必要です。もしJavaScriptに関する予備知識がない場合Denoを始める前に [on the basics of JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript) を読むことをおすすめします。
+このドキュメントはJavaScript、特に`async`/`await`の予備知識が必要です。もしJavaScriptに関する予備知識がない場合Denoを始める前に [JavaScriptの基礎](https://developer.mozilla.org/ja/docs/Learn/JavaScript) を読むことをおすすめします。
 
 ### Hello World
 
