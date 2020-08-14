@@ -405,10 +405,16 @@ function Manual() {
                       </svg>
                     </div>
                     <div className="pl-6">
-                      <span className="inline sm:hidden">Search docs</span>
+                      <span className="inline sm:hidden">
+                        {/* Search docs */}
+                        ドキュメントを検索
+                      </span>
                       <span className="hidden sm:inline">
+                        {/*
                         Search the docs (press <InlineCode>/</InlineCode> to
                         focus)
+                        */}
+                        ドキュメントを検索(<InlineCode>/</InlineCode> を押して選択)
                       </span>
                     </div>
                   </button>
