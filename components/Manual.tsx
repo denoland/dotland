@@ -414,7 +414,8 @@ function Manual() {
                         Search the docs (press <InlineCode>/</InlineCode> to
                         focus)
                         */}
-                        ドキュメントを検索(<InlineCode>/</InlineCode> を押して選択)
+                        ドキュメントを検索(<InlineCode>/</InlineCode>{" "}
+                        を押して選択)
                       </span>
                     </div>
                   </button>
