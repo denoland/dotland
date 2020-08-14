@@ -1,13 +1,21 @@
-## Compiler API
+<!-- ## Compiler API -->
+## コンパイラAPI
 
+<!--
 > This is an unstable Deno feature. Learn more about
 > [unstable features](./stability.md).
+-->
+> これはDenoの不安定版の機能です。詳しくは [unstable features](./stability.md) を参照してください。
 
+<!--
 Deno supports runtime access to the built-in TypeScript compiler. There are
 three methods in the `Deno` namespace that provide this access.
+-->
+DenoはビルトインTypeScriptコンパイラへのランタイムアクセスをサポートします。このアクセスを提供するために `Deno` 名前空間に3つのメソッドがあります。
 
 ### `Deno.compile()`
 
+<!--
 This works similar to `deno cache` in that it can fetch and cache the code,
 compile it, but not run it. It takes up to three arguments, the `rootName`,
 optionally `sources`, and optionally `options`. The `rootName` is the root
@@ -23,12 +31,18 @@ as dynamic imports and require read or net permissions depending on if they're
 local or remote. The `options` argument is a set of options of type
 `Deno.CompilerOptions`, which is a subset of the TypeScript compiler options
 containing the ones supported by Deno.
+-->
+これは `deno cache` と同じように動きます、コードを取得、キャッシュして、コンパイルしますが実行はしません。`rootName`, 任意で `sources`, 任意で `options` の3つの引数を取ります。`rootName` はランタイムプログラムを生成するときに使われるルートモジュールです。これは `deno run --reload example.ts` でコマンドラインで渡すのモジュール名と同じです。`sources` はハッシュであり、キーは完全なモジュール名で値はモジュールのテキストソースです。`sources` が渡されたら、Denoはハッシュとすべてのモジュールを解決し、Denoの外部では解決しません。`source` が提供されない場合、Denoはルートモジュールが渡されたかのようにすべてのモジュールを解決します。Dehaリソースのすべてをキャッシュします。すべての解決済みのリソースはダイナミックインポートとして扱われローカルかリモートかによって読み込みまたはネットのパーミッションを要求します。`options` 引数は `Deno.CompilerOptions` 型のオプションのセットで、DenoがサポートするTypeScriptコンパイラオプションのサブセットです。
 
+<!--
 The method resolves with a tuple. The first argument contains any diagnostics
 (syntax or type errors) related to the code. The second argument is a map where
 the keys are the output filenames and the values are the content.
+-->
+メソッドはタプルと一緒に解決されます。最初の引数はコードに関する診断(構文や型エラー)が含まれます。2つめの引数はキーが出力ファイル名で値がコンテントのマップです。
 
-An example of providing sources:
+<!-- An example of providing sources: -->
+sources を提供する例です:
 
 ```ts
 const [diagnostics, emitMap] = await Deno.compile("/foo.ts", {
@@ -40,11 +54,17 @@ assert(diagnostics == null); // ensuring no diagnostics are returned
 console.log(emitMap);
 ```
 
+<!--
 We would expect map to contain 4 "files", named `/foo.js.map`, `/foo.js`,
 `/bar.js.map`, and `/bar.js`.
+-->
+マップには `/foo.js.map`、`/foo.js`、`/bar.js.map` そして `/bar.js` の4つの"ファイル"が含まれているはずです。
 
+<!--
 When not supplying resources, you can use local or remote modules, just like you
 could do on the command line. So you could do something like this:
+-->
+リソースが供給されない場合、コマンドラインで行ったようにローカルもしくはリモートのモジュールを使うことが出来ます。これは次のようになります:
 
 ```ts
 const [diagnostics, emitMap] = await Deno.compile(
@@ -52,7 +72,8 @@ const [diagnostics, emitMap] = await Deno.compile(
 );
 ```
 
-In this case `emitMap` will contain a `console.log()` statement.
+<!-- In this case `emitMap` will contain a `console.log()` statement. -->
+この例では `emitMap` は `console.log()` 文を含んでいます。
 
 ### `Deno.bundle()`
 
