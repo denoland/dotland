@@ -37,12 +37,17 @@ new Worker(new URL("worker.js", import.meta.url).href, { type: "classic" });
 new Worker("./worker.js", { type: "module" });
 ```
 
-### Permissions
+<!-- ### Permissions -->
+### パーミッション
 
+<!--
 Creating a new `Worker` instance is similar to a dynamic import; therefore Deno
 requires appropriate permission for this action.
+-->
+新しい `Worker` インスタンスの作成はダイナミックインポートと似ています; そのためDenoはこのアクションに適切なパーミッションを要求します。
 
-For workers using local modules; `--allow-read` permission is required:
+<!-- For workers using local modules; `--allow-read` permission is required: -->
+ローカルモジュールを使うワーカーには `--allow-read` パーミッションが必要です:
 
 **main.ts**
 
@@ -65,7 +70,8 @@ $ deno run --allow-read main.ts
 hello world
 ```
 
-For workers using remote modules; `--allow-net` permission is required:
+<!-- For workers using remote modules; `--allow-net` permission is required: -->
+リモートモジュールを使うワーカーには `--allow-net` パーミッションが必要です:
 
 **main.ts**
 
