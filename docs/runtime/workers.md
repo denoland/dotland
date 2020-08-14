@@ -94,14 +94,20 @@ $ deno run --allow-net main.ts
 hello world
 ```
 
-### Using Deno in worker
+<!-- ### Using Deno in worker -->
+### ワーカー内でのDenoの使用
 
+<!--
 > This is an unstable Deno feature. Learn more about
 > [unstable features](./stability.md).
+-->
+> これは不安定版のDenoの機能です。詳しくは [不安定版の機能](./stability.md) を見てください。
 
-By default the `Deno` namespace is not available in worker scope.
+<!-- By default the `Deno` namespace is not available in worker scope. -->
+デフォルトでは `Deno` 名前空間はワーカースコープ内で有効ではありません。
 
-To add the `Deno` namespace pass `deno: true` option when creating new worker:
+<!-- To add the `Deno` namespace pass `deno: true` option when creating new worker: -->
+`Deno` 名前空間を追加するには新しいワーカーを作成するときに `deno: true` オプションを渡してください:
 
 **main.js**
 
@@ -135,7 +141,11 @@ $ deno run --allow-read --unstable main.js
 hello world
 ```
 
+<!--
 When the `Deno` namespace is available in worker scope, the worker inherits its
 parent process' permissions (the ones specified using `--allow-*` flags).
+-->
+`Deno` 名前空間がワーカースコープ内で有効のとき、ワーカーは親プロセスのパーミッションを継承します(`--allow-*` フラグで指定したものです)。
 
-We intend to make permissions configurable for workers.
+<!-- We intend to make permissions configurable for workers. -->
+ワーカーのパーミッションを設定可能にする予定です。
