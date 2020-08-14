@@ -472,7 +472,8 @@ function Manual() {
                     </svg>
                   </div>
                   <div className="pl-6">
-                    Search the docs (press <InlineCode>/</InlineCode> to focus)
+                    {/* Search the docs (press <InlineCode>/</InlineCode> to focus) */}
+                    ドキュメントを検索(<InlineCode>/</InlineCode> を押して選択)
                   </div>
                 </button>
               </div>
