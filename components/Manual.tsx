@@ -497,7 +497,8 @@ function Manual() {
                   </a>
                   <Markdown
                     source={content.replace(/\$STD_VERSION/g, stdVersion)}
-                    displayURL={"https://deno.land/manual" + path}
+                    // displayURL={"https://deno.land/manual" + path}
+                    displayURL={"https://deno-ja.vercel.app/manual" + path}
                     sourceURL={sourceURL}
                   />
                   <div className="mt-4 pt-4 border-t border-gray-200">
