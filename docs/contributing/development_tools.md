@@ -1,9 +1,13 @@
-## Testing and Tools
+<!-- ## Testing and Tools -->
+## テストとツール
 
-### Tests
+<!-- ### Tests -->
+###テスト
 
-Test `deno`:
+<!-- Test `deno`: -->
+`deno` をテスト:
 
+<!--
 ```shell
 # Run the whole suite:
 cargo test
@@ -11,22 +15,34 @@ cargo test
 # Only test cli/js/:
 cargo test js_unit_tests
 ```
+-->
+```shell
+# スイートすべてをテスト:
+cargo test
 
-Test `std/`:
+# cli/jsのみをテスト:
+cargo test js_unit_tests
+```
+
+<!-- Test `std/`: -->
+`std/` をテスト:
 
 ```shell
 cargo test std_tests
 ```
 
-### Lint and format
+<!-- ### Lint and format -->
+### リントとフォーマット
 
-Lint the code:
+<!-- Lint the code: -->
+コードのリント:
 
 ```shell
 ./tools/lint.py
 ```
 
-Format the code:
+<!-- Format the code: -->
+コードのフォーマット:
 
 ```shell
 ./tools/format.py
