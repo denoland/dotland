@@ -9,7 +9,7 @@ import useSWR from "swr";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import InlineCode from "../../components/InlineCode";
-import { getModules } from "../../util/registry_utils";
+import { listModules } from "../../util/registry_utils";
 import * as pageutils from "../../util/pagination_utils";
 import RegistryInstructions from "../../components/RegistryInstructions";
 import { CookieBanner } from "../../components/CookieBanner";
@@ -40,7 +40,7 @@ const ThirdPartyRegistryList = () => {
   const { data: resp } = useSWR(
     [query, page],
     async (query, page) => {
-      return getModules(page, PER_PAGE, query).then((resp) =>
+      return listModules(page, PER_PAGE, query).then((resp) =>
         resp
           ? {
               results: resp.results,
