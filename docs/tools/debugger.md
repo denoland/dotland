@@ -1,16 +1,28 @@
-## Debugger
+<!-- ## Debugger -->
+## デバッガー
 
-Deno supports the [V8 Inspector Protocol](https://v8.dev/docs/inspector).
+<!-- Deno supports the [V8 Inspector Protocol](https://v8.dev/docs/inspector). -->
+Denoは [V8 Inspector Protocol](https://v8.dev/docs/inspector) をサポートしています。
 
+<!--
 It's possible to debug Deno programs using Chrome Devtools or other clients that
 support the protocol (eg. VSCode).
+-->
+DenoプログラムをChrome Devtoolsやプロトコルをサポートしている他のクライアント(VSCodeなど)を使ってデバッグすることが可能です。
 
+<!--
 To activate debugging capabilities run Deno with the `--inspect` or
 `--inspect-brk` flags.
+-->
+デバッグ機能を有効にするには `--inspect` もしくは
+`--inspect-brk` フラグを指定してDenoを実行してください。
 
+<!--
 The `--inspect` flag allows attaching the debugger at any point in time, while
 `--inspect-brk` will wait for the debugger to attach and will pause execution on
 the first line of code.
+-->
+`--inspect` フラグは任意の時点でデバッガをつけることを可能にし、`--inspect-brk` はデバッガが付くのを待ち個ーd－の最初の行で実行を一時停止します。
 
 ### Chrome Devtools
 
