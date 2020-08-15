@@ -15,6 +15,14 @@ export default class DenoDocDocument extends Document {
     return { ...initialProps };
   }
 
+  gtag_header = `(function(w,d,s,l,i){w[l] = w[l] || []{'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-P9DQ4WJ');`;
+  gtag_body = `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P9DQ4WJ"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>`;
+
   render() {
     return (
       <Html lang="en">
@@ -30,8 +38,14 @@ export default class DenoDocDocument extends Document {
             href="/images/icons/apple-touch-icon-180x180.png"
           />
           <link rel="manifest" href="/site.webmanifest" />
+          {/* <!-- Google Tag Manager --> */}
+          <script dangerouslySetInnerHTML={{ __html: this.gtag_header }} />
+          {/* <!-- End Google Tag Manager --> */}
         </Head>
         <body>
+          {/* <!-- Google Tag Manager (noscript) --> */}
+          <noscript dangerouslySetInnerHTML={{ __html: this.gtag_body }} />
+          {/* <!-- End Google Tag Manager (noscript) --> */}
           <Main />
           <NextScript />
         </body>
