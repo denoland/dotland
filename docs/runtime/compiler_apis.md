@@ -77,6 +77,7 @@ const [diagnostics, emitMap] = await Deno.compile(
 
 ### `Deno.bundle()`
 
+<!--
 This works a lot like `deno bundle` does on the command line. It is also like
 `Deno.compile()`, except instead of returning a map of files, it returns a
 single string, which is a self-contained JavaScript ES module which will include
@@ -95,8 +96,11 @@ they're local or remote. Deno will also cache any of these resources. The
 `options` argument is a set of options of type `Deno.CompilerOptions`, which is
 a subset of the TypeScript compiler options containing the ones supported by
 Deno.
+-->
+これはコマンドラインでの `deno bundle` の動作と似ています。ファイルのマップを返す代わりに、self-containedのJavaScript ESモジュールで提供されたり解決されたすべてのコードと提供されたルートモジュールのすべてのエクスポートを含む1つの文字列を返すことを除いて `Deno.compile()` と似ています。`rootName`、任意で `sources`、任意で `options` の最大3つの引数を取ります。`rootName` は最終的なプログラムを作成するのに使われるルートモジュールです。これは `deno bundle example.ts` でコマンドラインに渡すモジュール名のようなものです。`source` はキーが完全なモジュール名、値がモジュールのテキストソースのハッシュです。`source` が渡されたら、Denoそのハッシュの中のすべてのモジュールを解決し、Deno外部では解決しようとしません。`source` が提供されない場合コマンドラインでルートモジュールが渡されたかのようにモジュールを解決します。すべての解決されたモジュールはそれがローカル化リモートであるかに関わらずダイナミックインポートとして扱われ、読み込みやネットのパーミッションを要求します。Dehaこれらすべてのリソースをキャッシュします。`options` 引数はDenoがサポートしているものを含むTypeScriptコンパイラオプションのサブセットである `Deno.CompilerOptions` 型のオプションのセットです。
 
-An example of providing sources:
+<!-- An example of providing sources: -->
+ソースを提供する例:
 
 ```ts
 const [diagnostics, emit] = await Deno.bundle("/foo.ts", {
@@ -108,11 +112,17 @@ assert(diagnostics == null); // ensuring no diagnostics are returned
 console.log(emit);
 ```
 
+<!--
 We would expect `emit` to be the text for an ES module, which would contain the
 output sources for both modules.
+-->
+`emit` はESモジュールのテキストであり両方のモジュールの出力ソースが含まれています。
 
+<!--
 When not supplying resources, you can use local or remote modules, just like you
 could do on the command line. So you could do something like this:
+-->
+リソースを供給しない場合は、コマンドラインで出来るのと同じようにローカルやリモートのモジュールを使うことが出来ます。次のように出来ます:
 
 ```ts
 const [diagnostics, emit] = await Deno.bundle(
@@ -120,8 +130,11 @@ const [diagnostics, emit] = await Deno.bundle(
 );
 ```
 
+<!--
 In this case `emit` will be a self contained JavaScript ES module with all of
 its dependencies resolved and exporting the same exports as the source module.
+-->
+この場合、`emit` はすべての依存関係を解決しソースモジュールと同じエクスポートをエクスポートするself contained JavaScript ESモジュールになります。
 
 ### `Deno.transpileOnly()`
 
