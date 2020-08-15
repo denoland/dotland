@@ -16,7 +16,7 @@ for await (const event of watcher) {
 Note that the exact ordering of the events can vary between operating systems.
 This feature uses different syscalls depending on the platform:
 -->
-イベントの順番はオペレーションシステムによって変わる可能性があります。この機能はプロットフォームによって別のシステムコールを使います:
+イベントの順番はオペレーションシステムによって変わる可能性があります。この機能はプロットフォームによって別々のシステムコールを使います:
 
 - Linux: inotify
 - macOS: FSEvents
