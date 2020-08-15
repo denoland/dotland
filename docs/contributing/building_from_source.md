@@ -77,7 +77,7 @@ cargo build -vv
 ```
 
 <!-- However if you want to build Deno and V8 from source code: -->
-しかし、DenoとV8をそーすからビルドしたい場合は:
+しかし、DenoとV8をソースからビルドしたい場合は:
 
 ```
 V8_FROM_SOURCE=1 cargo build -vv
