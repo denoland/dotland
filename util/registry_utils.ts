@@ -115,17 +115,17 @@ export async function getVersionList(
   return res.json();
 }
 
-export interface SearchResult {
+export interface Module {
   name: string;
   description: string;
-  type: "github";
-  owner: string;
-  repository: string;
   star_count: string;
+}
+
+export interface SearchResult extends Module {
   search_score: string;
 }
 
-export async function getModules(
+export async function listModules(
   page: number,
   limit: number,
   query: string
@@ -155,6 +155,32 @@ export async function getModules(
   }
 
   return { totalCount: data.data.total_count, results: data.data.results };
+}
+
+export async function getModule(name: string): Promise<Module | null> {
+  const url = `${API_ENDPOINT}modules/${encodeURIComponent(name)}`;
+  const res = await fetch(url, {
+    headers: {
+      accept: "application/json",
+    },
+  });
+  if (res.status === 404) return null;
+  if (res.status !== 200) {
+    throw Error(
+      `Got an error (${
+        res.status
+      }) while getting the module ${name}:\n${await res.text()}`
+    );
+  }
+  const data = await res.json();
+  if (!data.success) {
+    throw Error(
+      `Got an error (${
+        data.info
+      }) while getting the module ${name}:\n${await res.text()}`
+    );
+  }
+  return data.data;
 }
 
 export interface Build {
