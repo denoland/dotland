@@ -1,8 +1,10 @@
-## Run subprocess
+<!-- ## Run subprocess -->
+## サブプロセスの実行
 
 [API Reference](https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts#Deno.run)
 
-Example:
+<!-- Example: -->
+例:
 
 ```ts
 // create subprocess
@@ -14,21 +16,28 @@ const p = Deno.run({
 await p.status();
 ```
 
-Run it:
+<!-- Run it: -->
+実行:
 
 ```shell
 $ deno run --allow-run ./subprocess_simple.ts
 hello
 ```
 
+<!--
 Here a function is assigned to `window.onload`. This function is called after
 the main script is loaded. This is the same as
 [onload](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onload)
 of the browsers, and it can be used as the main entrypoint.
+-->
+関数は `window.onload` に代入されます。この関数はmainスクリプトがロードされたあとに呼ばれます。これはブラウザの [onload](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onload) と同じで、mainエントリーポイントとして使うことが出来ます。
 
+<!--
 By default when you use `Deno.run()` subprocess inherits `stdin`, `stdout` and
 `stderr` of parent process. If you want to communicate with started subprocess
 you can use `"piped"` option.
+-->
+デフォルトでは `Deno.run()` サブプロセスを使うとき親プロセスの `stdin`、`stdout` そして `stderr` を継承します。もし開始されたサブプロセスと通信したいときは `"piped"` オプションを使うことが出来ます。
 
 ```ts
 const fileNames = Deno.args;
@@ -59,7 +68,8 @@ if (code === 0) {
 Deno.exit(code);
 ```
 
-When you run it:
+<!-- When you run it: -->
+実行時:
 
 ```shell
 $ deno run --allow-run ./subprocess.ts <somefile>
