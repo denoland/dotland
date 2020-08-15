@@ -73,7 +73,7 @@
       "manage_dependencies": "依存関係管理",
       "unix_cat": "Unix cat プログラム",
       "file_server": "ファイルサーバー",
-      "tcp_echo": "TCP エコーサーバー",
+      "tcp_echo": "TCP echo サーバー",
       "subprocess": "サブプロセスの作成",
       "permissions": "Inspecting and revoking permissions",
       "os_signals": "OS シグナル",
