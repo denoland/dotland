@@ -142,16 +142,22 @@ We discuss these below.
 
 ### Integrity flags
 
+<!--
 Affect commands which can download resources to the cache: `deno cache`,
 `deno run` and `deno test`.
+-->
+リソースをキャッシュする `deno cache`、`deno run`、`deno test` コマンドにに影響を与えます。
 
 ```
 --lock <FILE>    Check the specified lock file
 --lock-write     Write lock file. Use with --lock.
 ```
 
+<!--
 Find out more about these
 [here](../linking_to_external_code/integrity_checking.md).
+-->
+これらについてより詳しくは [こちら](../linking_to_external_code/integrity_checking.md) を参照してください。
 
 ### Cache and compilation flags
 
