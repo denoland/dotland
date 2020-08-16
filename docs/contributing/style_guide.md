@@ -62,10 +62,14 @@ the vast majority of cases it does not.
 -->
 メタプログラミングのようなテクニックを使うことに意味がある場合もありますが、ほとんどの場合はそうではありません。
 
-## Inclusive code
+<!-- ## Inclusive code -->
+## インクルーシブコード
 
+<!--
 Please follow the guidelines for inclusive code outlined at
 https://chromium.googlesource.com/chromium/src/+/master/styleguide/inclusive_code.md.
+-->
+https://chromium.googlesource.com/chromium/src/+/master/styleguide/inclusive_code.md にあるガイドラインに従ってください。
 
 ## Rust
 
