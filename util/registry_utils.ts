@@ -13,7 +13,7 @@ export interface DirEntry {
 export function getSourceURL(
   module: string,
   version: string,
-  path: string,
+  path: string
 ): string {
   return encodeURI(`${CDN_ENDPOINT}${module}/versions/${version}/raw${path}`);
 }
@@ -25,19 +25,17 @@ function pathJoin(...parts: string[]) {
 
 export function getRepositoryURL(
   meta: VersionMetaInfo,
-  path: string,
+  path: string
 ): string | undefined {
   switch (meta.uploadOptions.type) {
     case "github":
-      return `https://github.com/${
-        pathJoin(
-          meta.uploadOptions.repository,
-          "tree",
-          meta.uploadOptions.ref,
-          meta.uploadOptions.subdir ?? "",
-          path,
-        )
-      }`;
+      return `https://github.com/${pathJoin(
+        meta.uploadOptions.repository,
+        "tree",
+        meta.uploadOptions.ref,
+        meta.uploadOptions.subdir ?? "",
+        path
+      )}`;
     default:
       return undefined;
   }
@@ -64,7 +62,7 @@ export interface DirListing {
 
 export async function getVersionMeta(
   module: string,
-  version: string,
+  version: string
 ): Promise<VersionMetaInfo | null> {
   const url = `${CDN_ENDPOINT}${module}/versions/${version}/meta/meta.json`;
   const res = await fetch(url, {
@@ -75,8 +73,9 @@ export async function getVersionMeta(
   if (res.status === 403 || res.status === 404) return null;
   if (res.status !== 200) {
     throw Error(
-      `Got an error (${res.status}) while getting the directory listing:\n${await res
-        .text()}`,
+      `Got an error (${
+        res.status
+      }) while getting the directory listing:\n${await res.text()}`
     );
   }
 
@@ -104,7 +103,7 @@ export interface DependencyGraph {
 
 export async function getVersionDeps(
   module: string,
-  version: string,
+  version: string
 ): Promise<VersionDeps | null> {
   const url = `${CDN_ENDPOINT}${module}/versions/${version}/meta/deps.json`;
   const res = await fetch(url, {
@@ -115,8 +114,9 @@ export async function getVersionDeps(
   if (res.status === 403 || res.status === 404) return null;
   if (res.status !== 200) {
     throw Error(
-      `Got an error (${res.status}) while getting the dependency information:\n${await res
-        .text()}`,
+      `Got an error (${
+        res.status
+      }) while getting the dependency information:\n${await res.text()}`
     );
   }
   const meta = await res.json();
@@ -133,7 +133,7 @@ export interface VersionInfo {
 }
 
 export async function getVersionList(
-  module: string,
+  module: string
 ): Promise<VersionInfo | null> {
   const url = `${CDN_ENDPOINT}${module}/meta/versions.json`;
   const res = await fetch(url, {
@@ -144,8 +144,9 @@ export async function getVersionList(
   if (res.status === 403 || res.status === 404) return null;
   if (res.status !== 200) {
     throw Error(
-      `Got an error (${res.status}) while getting the version list:\n${await res
-        .text()}`,
+      `Got an error (${
+        res.status
+      }) while getting the version list:\n${await res.text()}`
     );
   }
   return res.json();
@@ -164,13 +165,11 @@ export interface SearchResult extends Module {
 export async function listModules(
   page: number,
   limit: number,
-  query: string,
+  query: string
 ): Promise<{ results: SearchResult[]; totalCount: number } | null> {
-  const url = `${API_ENDPOINT}modules?page=${page}&limit=${limit}&query=${
-    encodeURIComponent(
-      query,
-    )
-  }`;
+  const url = `${API_ENDPOINT}modules?page=${page}&limit=${limit}&query=${encodeURIComponent(
+    query
+  )}`;
   const res = await fetch(url, {
     headers: {
       accept: "application/json",
@@ -178,15 +177,17 @@ export async function listModules(
   });
   if (res.status !== 200) {
     throw Error(
-      `Got an error (${res.status}) while getting the module list:\n${await res
-        .text()}`,
+      `Got an error (${
+        res.status
+      }) while getting the module list:\n${await res.text()}`
     );
   }
   const data = await res.json();
   if (!data.success) {
     throw Error(
-      `Got an error (${data.info}) while getting the module list:\n${await res
-        .text()}`,
+      `Got an error (${
+        data.info
+      }) while getting the module list:\n${await res.text()}`
     );
   }
 
@@ -203,15 +204,17 @@ export async function getModule(name: string): Promise<Module | null> {
   if (res.status === 404) return null;
   if (res.status !== 200) {
     throw Error(
-      `Got an error (${res.status}) while getting the module ${name}:\n${await res
-        .text()}`,
+      `Got an error (${
+        res.status
+      }) while getting the module ${name}:\n${await res.text()}`
     );
   }
   const data = await res.json();
   if (!data.success) {
     throw Error(
-      `Got an error (${data.info}) while getting the module ${name}:\n${await res
-        .text()}`,
+      `Got an error (${
+        data.info
+      }) while getting the module ${name}:\n${await res.text()}`
     );
   }
   return data.data;
@@ -236,15 +239,17 @@ export async function getBuild(id: string): Promise<Build> {
   const res = await fetch(url, { headers: { accept: "application/json" } });
   if (res.status !== 200) {
     throw Error(
-      `Got an error (${res.status}) while getting the build info:\n${await res
-        .text()}`,
+      `Got an error (${
+        res.status
+      }) while getting the build info:\n${await res.text()}`
     );
   }
   const data = await res.json();
   if (!data.success) {
     throw Error(
-      `Got an error (${data.info}) while getting the build info:\n${await res
-        .text()}`,
+      `Got an error (${
+        data.info
+      }) while getting the build info:\n${await res.text()}`
     );
   }
   return data.data.build;
@@ -306,29 +311,30 @@ export function denoDocAvailableForURL(filename: string) {
 }
 
 export function findRootReadme(
-  directoryListing: DirListing[] | undefined,
+  directoryListing: DirListing[] | undefined
 ): DirEntry | undefined {
-  const listing = directoryListing?.find(
-    (d) =>
-      d.path.toLowerCase() === "/readme.md" ||
-      d.path.toLowerCase() === "/readme",
-  ) ??
+  const listing =
+    directoryListing?.find(
+      (d) =>
+        d.path.toLowerCase() === "/readme.md" ||
+        d.path.toLowerCase() === "/readme"
+    ) ??
     directoryListing?.find(
       (d) =>
         d.path.toLowerCase() === "/docs/readme.md" ||
-        d.path.toLowerCase() === "/docs/readme",
+        d.path.toLowerCase() === "/docs/readme"
     ) ??
     directoryListing?.find(
       (d) =>
         d.path.toLowerCase() === "/.github/readme.md" ||
-        d.path.toLowerCase() === "/.github/readme",
+        d.path.toLowerCase() === "/.github/readme"
     );
   return listing
     ? {
-      name: listing.path.substring(1),
-      type: listing.type,
-      size: listing.size,
-    }
+        name: listing.path.substring(1),
+        type: listing.type,
+        size: listing.size,
+      }
     : undefined;
 }
 
@@ -344,7 +350,7 @@ export type Dep = { name: string; children: Dep[] };
 export function graphToTree(
   graph: DependencyGraph,
   name: string,
-  visited: string[] = [],
+  visited: string[] = []
 ): Dep | undefined {
   const dep = graph.nodes[name];
   if (dep === undefined) return undefined;
@@ -360,7 +366,7 @@ export function graphToTree(
 export function flattenGraph(
   graph: DependencyGraph,
   name: string,
-  visited: string[] = [],
+  visited: string[] = []
 ): string[] | undefined {
   const dep = graph.nodes[name];
   if (dep === undefined) return undefined;
@@ -381,9 +387,7 @@ function matchX(url: string) {
 }
 
 function matchStd(url: string) {
-  const match = url.match(
-    /^https:\/\/deno\.land\/(x\/)?std(@([^/]+))?(.+)?$/,
-  );
+  const match = url.match(/^https:\/\/deno\.land\/(x\/)?std(@([^/]+))?(.+)?$/);
   if (!match) return undefined;
   return {
     version: match[2],
@@ -394,7 +398,7 @@ function matchStd(url: string) {
 
 export function listExternalDependencies(
   graph: DependencyGraph,
-  name: string,
+  name: string
 ): string[] | undefined {
   const visited = flattenGraph(graph, name);
   const denolandDeps = new Set<string>();
