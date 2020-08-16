@@ -38,7 +38,7 @@
   "testing": {
     "name": "テスト",
     "children": {
-      "assertions": "Assertions"
+      "assertions": "アサーション"
     }
   },
   "tools": {
