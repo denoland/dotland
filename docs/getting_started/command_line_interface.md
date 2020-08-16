@@ -108,12 +108,16 @@ deno run --allow-net net_client.ts
 deno run net_client.ts --allow-net
 ```
 
-Some see it as unconventional that:
+<!-- Some see it as unconventional that: -->
+以下のことは慣習に従っていないと見る人もいます「:
 
-> a non-positional flag is parsed differently depending on its position.
+<!-- a non-positional flag is parsed differently depending on its position. -->
+位置が決まってないフラグは位置によって別の意味にパースされます。
 
-However:
+<!-- However: -->
+しかし:
 
+<!--
 1. This is the most logical way of distinguishing between runtime flags and
    script arguments.
 2. This is the most ergonomic way of distinguishing between runtime flags and
@@ -122,11 +126,19 @@ However:
    - Try `node -c index.js` and `node index.js -c`. The first will only do a
      syntax check on `index.js` as per Node's `-c` flag. The second will
      _execute_ `index.js` with `-c` passed to `require("process").argv`.
+-->
+1. これはランタイムフラグとスクリプト引数を区別する最も論理的な方法です。
+2. これはランタイムフラグとスクリプト引数を区別する最も人間工学的な方法です。
+3. これは実際に他の人気のランタイムと同じ動作をします。
+   - `node -c index.js` と `node inde.js -c` を試してくてください最初の方はNodeの `-c` フラグに従った `index.js` の構文チェックしかしないです。2番目は `-c` を `require("process").argv` に渡して `index.js` を _実行します_。
 
 ---
 
+<!--
 There exist logical groups of flags that are shared between related subcommands.
 We discuss these below.
+-->
+関連するサブコマンド間で共有されるフラグの論理グループが存在します。これについて説明します。
 
 ### Integrity flags
 
