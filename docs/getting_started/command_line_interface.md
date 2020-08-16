@@ -194,9 +194,11 @@ These are listed [here](./permissions.md#permissions-list).
 -->
 これらは [こちら](./permissions.md#permissions-list) にリストがあります。
 
-#### Other runtime flags
+<!-- #### Other runtime flags -->
+#### 他のランタイムフラグ
 
-More flags which affect the execution environment.
+<!-- More flags which affect the execution environment. -->
+実行環境に影響を与えるその他のフラグ。
 
 ```
 --cached-only                Require that remote dependencies are already cached
