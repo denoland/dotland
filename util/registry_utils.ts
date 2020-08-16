@@ -203,17 +203,15 @@ export async function getModule(name: string): Promise<Module | null> {
   if (res.status === 404) return null;
   if (res.status !== 200) {
     throw Error(
-      `Got an error (${
-        res.status
-      }) while getting the module ${name}:\n${await res.text()}`
+      `Got an error (${res.status}) while getting the module ${name}:\n${await res
+        .text()}`,
     );
   }
   const data = await res.json();
   if (!data.success) {
     throw Error(
-      `Got an error (${
-        data.info
-      }) while getting the module ${name}:\n${await res.text()}`
+      `Got an error (${data.info}) while getting the module ${name}:\n${await res
+        .text()}`,
     );
   }
   return data.data;
@@ -339,4 +337,107 @@ export function isReadme(filename: string) {
     filename.toLowerCase() === "readme.md" ||
     filename.toLowerCase() === "readme"
   );
+}
+
+export type Dep = { name: string; children: Dep[] };
+
+export function graphToTree(
+  graph: DependencyGraph,
+  name: string,
+  visited: string[] = [],
+): Dep | undefined {
+  const dep = graph.nodes[name];
+  if (dep === undefined) return undefined;
+  visited.push(name);
+  return {
+    name,
+    children: dep.imports
+      .filter((n) => !visited.includes(n))
+      .map((n) => graphToTree(graph, n, visited)!),
+  };
+}
+
+export function flattenGraph(
+  graph: DependencyGraph,
+  name: string,
+  visited: string[] = [],
+): string[] | undefined {
+  const dep = graph.nodes[name];
+  if (dep === undefined) return undefined;
+  visited.push(name);
+  dep.imports
+    .filter((n) => !visited.includes(n))
+    .forEach((n) => flattenGraph(graph, n, visited)!);
+  return visited;
+}
+
+function matchX(url: string) {
+  const match = url.match(/^https:\/\/deno\.land\/x\/([^/]+)(.+)$/);
+  if (!match) return undefined;
+  return {
+    identifier: match[1],
+    path: match[2],
+  };
+}
+
+function matchStd(url: string) {
+  const match = url.match(
+    /^https:\/\/deno\.land\/(x\/)?std(@([^/]+))?(.+)?$/,
+  );
+  if (!match) return undefined;
+  return {
+    version: match[2],
+    submodule: match[4],
+    path: match[5],
+  };
+}
+
+export function listExternalDependencies(
+  graph: DependencyGraph,
+  name: string,
+): string[] | undefined {
+  const visited = flattenGraph(graph, name);
+  const denolandDeps = new Set<string>();
+  const nestlandDeps = new Set<string>();
+  const other = new Set<string>();
+  if (visited) {
+    visited.forEach((dep) => {
+      // Count /std only once
+      const std = matchStd(dep);
+      if (std) {
+        denolandDeps.add("https://deno.land/std" + std.version);
+        return;
+      }
+
+      // Count each module on /x only once.
+      const x = matchX(dep);
+      if (x) {
+        denolandDeps.add("https://deno.land/x/" + x.identifier);
+        return;
+      }
+
+      // Count each module on nest only once.
+      const nest = dep.match(/^https:\/\/x\.nest\.land\/([^/]+)(.+)$/);
+      if (nest) {
+        nestlandDeps.add(`https://nest.land/packages/${nest[1]}`);
+        return;
+      }
+
+      // Ignore pika internal imports
+      if (dep.startsWith("https://cdn.pika.dev/-/")) return;
+
+      other.add(dep);
+    });
+    const thisStd = matchStd(name);
+    if (thisStd) {
+      denolandDeps.delete("https://deno.land/std" + thisStd.version);
+    }
+    const thisX = matchX(name);
+    if (thisX) {
+      denolandDeps.delete("https://deno.land/x/" + thisX.identifier);
+    }
+    return [...denolandDeps, ...nestlandDeps, ...other].map((url) =>
+      url.replace("https://deno.land/x/std", "https://deno.land/std")
+    );
+  } else return undefined;
 }

@@ -68,7 +68,6 @@ ul.tree ul {
 
 ul.tree ul {
   margin-left: 12px;
-  
 }
 
 ul.tree li {
@@ -84,14 +83,14 @@ ul.tree li:last-child {
 
 ul.tree li:before {
   position: relative;
-  top: -0.3em;
-  height: 1em;
+  top: -4px;
+  height: 12px;
   width: 12px;
   color: white;
   border-bottom: 1px solid rgb(100, 100, 100);
   content: "";
   display: inline-block;
-  left: -8px;
+  left: -4px;
 }
 
 ul.tree li:last-child:before {

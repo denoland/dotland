@@ -2,7 +2,12 @@
 
 import React, { useMemo } from "react";
 // import Link from "next/link";
-import { DependencyGraph as DependencyGraphType } from "../util/registry_utils";
+import {
+  DependencyGraph as DependencyGraphType,
+  graphToTree,
+  Dep,
+} from "../util/registry_utils";
+import Link from "next/link";
 
 function DependencyGraph({
   graph,
@@ -21,7 +26,7 @@ function DependencyGraph({
   if (tree === undefined) return null;
 
   return (
-    <div>
+    <div className="whitespace-no-wrap overflow-x-auto">
       <ul>
         <Node node={tree} currentModule={currentModule} />
       </ul>
@@ -33,11 +38,30 @@ function Node({ node, currentModule }: { node: Dep; currentModule: string }) {
   const name = node.name.startsWith(currentModule)
     ? "~/" + node.name.substring(currentModule.length)
     : node.name;
+  const url = node.name.startsWith("https://deno.land/x/std")
+    ? node.name.replace("https://deno.land/x/std", "https://deno.land/std")
+    : node.name;
   return (
     <li>
-      <a href={node.name} className="link">
-        {name}
-      </a>
+      <p className="overflow-hidden inline">
+        {url.startsWith("https://deno.land/std") ? (
+          <Link href="/[...rest]" as={url.replace("https://deno.land", "")}>
+            <a href={url} className="link text-sm truncate">
+              {name}
+            </a>
+          </Link>
+        ) : url.startsWith("https://deno.land/x/") ? (
+          <Link href="/x/[...rest]" as={url.replace("https://deno.land", "")}>
+            <a href={url} className="link text-sm truncate">
+              {name}
+            </a>
+          </Link>
+        ) : (
+          <a href={url} className="link text-sm truncate">
+            {name}
+          </a>
+        )}
+      </p>
       <ul className="tree">
         {node.children.map((node) => (
           <Node key={node.name} node={node} currentModule={currentModule} />
@@ -45,24 +69,6 @@ function Node({ node, currentModule }: { node: Dep; currentModule: string }) {
       </ul>
     </li>
   );
-}
-
-type Dep = { name: string; children: Dep[] };
-
-function graphToTree(
-  graph: DependencyGraphType,
-  name: string,
-  visited: string[] = []
-): Dep | undefined {
-  const dep = graph.nodes[name];
-  if (dep === undefined) return undefined;
-  visited.push(name);
-  return {
-    name,
-    children: dep.imports
-      .filter((n) => !visited.includes(n))
-      .map((n) => graphToTree(graph, n, visited)!),
-  };
 }
 
 export default DependencyGraph;
