@@ -68,8 +68,8 @@ function Markdown(props: MarkdownProps) {
 
   marked.use({
     renderer: ({
-      heading(text: string, level: number) {
-        const slug = slugify(text);
+      heading(text: string, level: number, raw: string) {
+        const slug = slugify(raw);
         return `
           <h${level}>
             <a name="${slug}" class="anchor" href="#${slug}">
