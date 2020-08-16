@@ -18,7 +18,7 @@
 If the code originates elsewhere, ensure that the file has the proper copyright
 headers. We only allow MIT, BSD, and Apache licensed code.
 -->
-コードが他の場所に由来する場合は、ファイルに適切なコピーライトヘッダーがあるか確認してください。MIT、BSDそしてApacheLicenceのコードのみ許可しています。
+コードが他の場所に由来する場合は、ファイルに適切なコピーライトヘッダーがあるか確認してください。MIT、BSDそしてApacheライセンスのコードのみ許可しています。
 
 <!-- ## Use underscores, not dashes in filenames. -->
 ## ファイル名にはダッシュではなくアンダースコアを使ってください。
