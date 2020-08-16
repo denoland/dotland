@@ -320,11 +320,15 @@ export interface PWrite {
 export function pwrite(options: PWrite) {}
 ```
 
-### Minimize dependencies; do not make circular imports.
+<!-- ### Minimize dependencies; do not make circular imports. -->
+### 依存関係の最小化; 循環インポートは作らないでください。
 
+<!--
 Although `cli/js` and `std` have no external dependencies, we must still be
 careful to keep internal dependencies simple and manageable. In particular, be
 careful not to introduce circular imports.
+-->
+`cli/js` と `std` は外部依存関係を持っていませんが、内部依存関係をシンプルで管理できるものに保つことに注意を払う必要があります。特に、循環インポートをしないように気をつけてください。
 
 ### If a filename starts with an underscore: `_foo.ts`, do not link to it.
 
