@@ -46,13 +46,20 @@ Deno.test("Test Assert", () => {
 });
 ```
 
-### Equality
+<!-- ### Equality -->
+### 同等性
 
+<!--
 There are three equality assertions available, `assertEquals()`,
 `assertNotEquals()` and `assertStrictEquals()`.
+-->
+`assertEquals()`、`assertNotEquals()`、`assertStrictEquals()` の3つのアサーションが利用可能です。
 
+<!--
 The `assertEquals()` and `assertNotEquals()` methods provide a general equality
 check and are capable of asserting equality between primitive types and objects.
+-->
+`assertEquals()` と `assertNotEquals()` メソッドは一般的な同等性チェックを提供し、プリミティブ型とオブジェクト間の同等性を保証します。
 
 ```js
 Deno.test("Test Assert Equals", () => {
@@ -81,9 +88,12 @@ Deno.test("Test Assert Not Equals", () => {
 });
 ```
 
+<!--
 By contrast `assertStrictEquals()` provides a simpler, stricter equality check
 based on the `===` operator. As a result it will not assert two instances of
 identical objects as they won't be referentially the same.
+-->
+対して、`assertStrictEquals()` は `===` 演算子に基づいたよりシンプルで厳密な同等性チェックを提供します。その結果、同一のオブジェクトのインスタンスが2つある場合、それらは参照的に同じではないためアサートしません。
 
 ```js
 Deno.test("Test Assert Strict Equals", () => {
@@ -94,8 +104,11 @@ Deno.test("Test Assert Strict Equals", () => {
 });
 ```
 
+<!--
 The `assertStrictEquals()` assertion is best used when you wish to make a
 precise check against two primitive types.
+-->
+`assertStrictEquals()` アサーションは2つのプリミティブ型に対して正確なチェックを行いたい場合に最適です。
 
 ### Contains
 
