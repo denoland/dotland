@@ -20,9 +20,11 @@ headers. We only allow MIT, BSD, and Apache licensed code.
 -->
 コードが他の場所に由来する場合は、ファイルに適切なコピーライトヘッダーがあるか確認してください。MIT、BSDそしてApacheLicenceのコードのみ許可しています。
 
-## Use underscores, not dashes in filenames.
+<!-- ## Use underscores, not dashes in filenames. -->
+## ファイル名にはダッシュではなくアンダースコアを使ってください。
 
-Example: Use `file_server.ts` instead of `file-server.ts`.
+<!-- Example: Use `file_server.ts` instead of `file-server.ts`. -->
+例: `file-server.ts` ではなく `file_server.ts` を使ってください。
 
 ## Add tests for new features.
 
