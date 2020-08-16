@@ -330,11 +330,15 @@ careful not to introduce circular imports.
 -->
 `cli/js` と `std` は外部依存関係を持っていませんが、内部依存関係をシンプルで管理できるものに保つことに注意を払う必要があります。特に、循環インポートをしないように気をつけてください。
 
-### If a filename starts with an underscore: `_foo.ts`, do not link to it.
+<!-- ### If a filename starts with an underscore: `_foo.ts`, do not link to it. -->
+### `_foo.ts` のようにファイル名がアンダースコアから始まる場合、それにリンクしないでください。
 
+<!--
 Sometimes there may be situations where an internal module is necessary but its
 API is not meant to be stable or linked to. In this case prefix it with an
 underscore. By convention, only files in its own directory should import it.
+-->
+場合によっては、内部モジュールが必要であるのにそのAPIが安定版でない、あるいはリンクされていないという状況があるかおしれません。このときはアンダースコアでプレフィックスしてください。規則では、独自のディレクトリ内のファイルのみがインポートされます。
 
 ### Use JSDoc for exported symbols.
 
