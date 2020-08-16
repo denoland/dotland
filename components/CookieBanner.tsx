@@ -17,11 +17,15 @@ export function CookieBanner() {
               <div className="w-0 flex-1 flex items-center">
                 <p className="ml-3 font-medium text-white">
                   <span className="md:hidden">
-                    We make use of functional cookies.
+                    {/* We make use of functional cookies. */}
+                    機能性cookieを使用します。
                   </span>
                   <span className="hidden md:inline">
+                    {/*
                     To ensure a good user experience, we make use of functional
                     cookies.
+                    */}
+                    ユーザーエクスペリエンスを良くするため機能性cookieを使用します。
                   </span>
                 </p>
               </div>
