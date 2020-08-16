@@ -1,6 +1,8 @@
-## Dependency Inspector
+<!-- ## Dependency Inspector -->
+## 依存インスペクター
 
-`deno info [URL]` will inspect ES module and all of its dependencies.
+<!-- `deno info [URL]` will inspect ES module and all of its dependencies. -->
+`deno info [URL]` はESモジュールとその依存関係を調査します。
 
 ```shell
 deno info https://deno.land/std@0.52.0/http/file_server.ts
@@ -61,11 +63,14 @@ https://deno.land/std@0.52.0/http/file_server.ts
   └── https://deno.land/std@0.52.0/testing/asserts.ts
 ```
 
-Dependency inspector works with any local or remote ES modules.
+<!-- Dependency inspector works with any local or remote ES modules. -->
+依存インスペクターはローカルのESモジュールでもリモートのESモジュールでも動きます。
 
-## Cache location
+<!-- ## Cache location -->
+## キャッシュ場所
 
-`deno info` can be used to display information about cache location:
+<!-- `deno info` can be used to display information about cache location: -->
+`deno info` はキャッシュ場所の情報を表示するのに使われます:
 
 ```shell
 deno info
