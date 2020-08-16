@@ -130,7 +130,7 @@ deno run net_client.ts --allow-net
 1. これはランタイムフラグとスクリプト引数を区別する最も論理的な方法です。
 2. これはランタイムフラグとスクリプト引数を区別する最も人間工学的な方法です。
 3. これは実際に他の人気のランタイムと同じ動作をします。
-   - `node -c index.js` と `node inde.js -c` を試してくてください最初の方はNodeの `-c` フラグに従った `index.js` の構文チェックしかしないです。2番目は `-c` を `require("process").argv` に渡して `index.js` を _実行します_。
+   - `node -c index.js` と `node inde.js -c` を試してくてください最初の方はNodeの `-c` フラグに従った `index.js` の構文チェックしかしないです。2番目は `-c` を `require("process").argv` に渡して `index.js` を _実行します_ 。
 
 ---
 
