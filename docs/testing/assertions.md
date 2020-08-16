@@ -203,11 +203,15 @@ Deno.test("Test Assert Throws Async", () => {
 });
 ```
 
-### Custom Messages
+<!-- ### Custom Messages -->
+### カスタムメッセージ
 
+<!--
 Each of Deno's built in assertions allow you to overwrite the standard CLI error
 message if you wish. For instance this example will output "Values Don't Match!"
 rather than the standard CLI error message.
+-->
+それぞれのDenoビルトインのアサーションはCLIエラーメッセージを好きなものに上書き可能です。例えば、この例では標準CLIエラーメッセージの代わりに"Values Don't Match!"を出力します。
 
 ```js
 Deno.test("Test Assert Equal Fail Custom Message", () => {
