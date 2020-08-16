@@ -133,19 +133,28 @@ specifiers are also allowed.
 -->
 Denoはこれを見てコンパイラはファイルを型チェックする際 `foo.d.ts` を使いますが、`foo.js` がランタイムにロードされます。ディレクティブの値の解決はモジュールのインポートと同じ解決ロジックに板がいます。つまり、ファイルには拡張子が必要で現在のファイルから相対的でないといけません。リモート指定子も許可されています。
 
-#### X-TypeScript-Types custom header
+<!-- #### X-TypeScript-Types custom header -->
+#### X-TypeScript-Types カスタムヘッダー
 
+<!--
 If you are hosting modules which you want to be consumed by Deno, and you want
 to inform Deno the location of the type definitions, you can use a custom HTTP
 header of `X-TypeScript-Types` to inform Deno of the location of that file.
+-->
+Denoに使用してほしいモジュールをホスティングていてDenoに型定義の場所を教えたい場合は、カスタムHTTPヘッダー `X-TypeScript-Types` を使ってDenoにファイルの場所を教えることが出来ます。
 
+<!--
 The header works in the same way as the triple-slash reference mentioned above,
 it just means that the content of the JavaScript file itself does not need to be
 modified, and the location of the type definitions can be determined by the
 server itself.
+-->
+ヘッダーは上記のトリプルスラッシュリファレンスと同じように動き、JavaScriptファイルの内容を変更する必要がなく、型定義の場所はサーバー自身で決定できるということを意味しています。
 
-**Not all type definitions are supported.**
+<!-- **Not all type definitions are supported.** -->
+**すべての型定義がサポートされているわけではありません**
 
+<!--
 Deno will use the compiler hint to load the indicated `.d.ts` files, but some
 `.d.ts` files contain unsupported features. Specifically, some `.d.ts` files
 expect to be able to load or reference type definitions from other packages
@@ -153,13 +162,19 @@ using the module resolution logic. For example a type reference directive to
 include `node`, expecting to resolve to some path like
 `./node_modules/@types/node/index.d.ts`. Since this depends on non-relative
 "magical" resolution, Deno cannot resolve this.
+-->
+Denoはコンパイラヒントを使って指定された `.d.ts` ファイルを読み込みますが、一部の `.d.ts` ファイルはサポートされていない機能を含んでいます。具体的には一部の `.d.ts` ファイルはモジュール解決ロジックを使用して他のパッケージから型定義をロードしたり参照したり出来ると期待しています。例えば、`node` を含むための型リファレンスディレクティブは `./node_modules/@types/node/index.d.ts` のようなパスを解決できると期待しています。これは非相対的で"魔法"の解決に依存していて、Denoはこれを解決できません。
 
-**Why not use the triple-slash type reference in TypeScript files?**
+<!-- **Why not use the triple-slash type reference in TypeScript files?** -->
+**なぜTypeScriptファイル中でトリプルスラッシュ型リファレンスを使わないのですか？**
 
+<!--
 The TypeScript compiler supports triple-slash directives, including a type
 reference directive. If Deno used this, it would interfere with the behavior of
 the TypeScript compiler. Deno only looks for the directive in JavaScript (and
 JSX) files.
+-->
+TypeScriptコンパイラは型リファレンスディレクティブを含むトリプルスラッシュディレクティブをサポートしています。もしDenoがこれを使えば、TypeScriptコンパイラの動作を妨げることになります。DenoはJavaScript(とJSX)ファイル内のディレクティブのみ探します。
 
 ### Custom TypeScript Compiler Options
 
