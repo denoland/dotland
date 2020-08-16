@@ -472,12 +472,17 @@ Deno.test("myTestFunction", function () {
 });
 ```
 
-### Top level functions should not use arrow syntax.
+<!-- ### Top level functions should not use arrow syntax. -->
+### トップレベル関数はアロー構文を使わないでください。
 
+<!--
 Top level functions should use the `function` keyword. Arrow syntax should be
 limited to closures.
+-->
+トップレベル関数は `function` キーワードを使うべきです。アロー構文はクロージャに限定すべきです。
 
-Bad
+<!-- Bad -->
+悪い例
 
 ```ts
 export const foo = (): string => {
@@ -485,7 +490,8 @@ export const foo = (): string => {
 };
 ```
 
-Good
+<!-- Good -->
+良い例
 
 ```ts
 export function foo(): string {
