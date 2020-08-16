@@ -159,11 +159,15 @@ Find out more about these
 -->
 これらについてより詳しくは [こちら](../linking_to_external_code/integrity_checking.md) を参照してください。
 
-### Cache and compilation flags
+<!-- ### Cache and compilation flags -->
+### キャッシュとコンパイルプラグ
 
+<!--
 Affect commands which can populate the cache: `deno cache`, `deno run` and
 `deno test`. As well as the flags above this includes those which affect module
 resolution, compilation configuration etc.
+-->
+`deno cache`、`deno run`、`deno test` などのキャッシュを生成できるコマンドに影響を与えます。上記のフラグの他にモジュール解決、コンパイル設定などにも影響を与えるフラグも含まれています。
 
 ```
 --config <FILE>               Load tsconfig.json configuration file
