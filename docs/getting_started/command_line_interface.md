@@ -177,10 +177,14 @@ resolution, compilation configuration etc.
 --unstable                    Enable unstable APIs
 ```
 
-### Runtime flags
+<!-- ### Runtime flags -->
+### ランタイムフラグ
 
+<!--
 Affect commands which execute user code: `deno run` and `deno test`. These
 include all of the above as well as the following.
+-->
+`deno run` と `deno test` のユーザーコードを実行できるコマンドに影響を与えます。これらは上記のほかに以下のものも含まれます。
 
 #### Permission flags
 
