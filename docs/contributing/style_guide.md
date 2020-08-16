@@ -447,16 +447,21 @@ module.
 -->
 公開機能をもつすべてのモジュール `foo.ts` はテストモジュール `foo_test.ts` と一緒である必要があります。状況が違うため`cli/js` のためのテストモジュールは `cli/js/tests` にあるべきでありますが、それ以外の場合はテストモジュールと同じ階層にあるべきです。
 
-### Unit Tests should be explicit.
+<!-- ### Unit Tests should be explicit. -->
+### ユニットテストは明示的であるべきです。
 
+<!--
 For a better understanding of the tests, function should be correctly named as
 its prompted throughout the test command. Like:
+-->
+テストをより良く理解するために、関数はテストコマンドを通して表示されるため正しく名付けられるべきです。例えば:
 
 ```
 test myTestFunction ... ok
 ```
 
-Example of test:
+<!-- Example of test: -->
+テストの例:
 
 ```ts
 import { assertEquals } from "https://deno.land/std@$STD_VERSION/testing/asserts.ts";
