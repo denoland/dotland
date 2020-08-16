@@ -176,21 +176,29 @@ JSX) files.
 -->
 TypeScriptコンパイラは型リファレンスディレクティブを含むトリプルスラッシュディレクティブをサポートしています。もしDenoがこれを使えば、TypeScriptコンパイラの動作を妨げることになります。DenoはJavaScript(とJSX)ファイル内のディレクティブのみ探します。
 
-### Custom TypeScript Compiler Options
+<!-- ### Custom TypeScript Compiler Options -->
+### カスタムTypeScriptコンパイラオプション
 
+<!--
 In the Deno ecosystem, all strict flags are enabled in order to comply with
 TypeScript's ideal of being `strict` by default. However, in order to provide a
 way to support customization a configuration file such as `tsconfig.json` might
 be provided to Deno on program execution.
+-->
+Denoエコシステムでは、TypeScriptの理想である `strict` をデフォルトを満たすため全てのstrictフラグが有効になっています。しかし、カスタマイズをサポートする方法を提供するためにプログラム実行時に `tsconfig.json` のような設定ファイルをDenoに提供することがあります。
 
+<!--
 You need to explicitly tell Deno where to look for this configuration by setting
 the `-c` (or `--config`) argument when executing your application.
+-->
+アプリケーションの実行時に `-c` (もしくは `--config`)引数を設定することでDenoにどこにこの設定ファイルがあるかを明示的に伝える必要があります。
 
 ```shell
 deno run -c tsconfig.json mod.ts
 ```
 
-Following are the currently allowed settings and their default values in Deno:
+<!-- Following are the currently allowed settings and their default values in Deno: -->
+Denoで現在許可されている設定とそのデフォルト値は次のとおりです:
 
 ```json
 {
@@ -230,8 +238,14 @@ Following are the currently allowed settings and their default values in Deno:
 }
 ```
 
+<!--
 For documentation on allowed values and use cases please visit the
 [typescript docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html).
+-->
+許可された値とその使いみちについてのドキュメントは [typescript docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html) を参照してください。
 
+<!--
 **Note**: Any options not listed above are either not supported by Deno or are
 listed as deprecated/experimental in the TypeScript documentation.
+-->
+**注意**: 上記でリストされていないどのオプションもDenoでサポートされていないかTypeScriptドキュメントで非推奨/実験的として記載されています。
