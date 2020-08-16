@@ -2,7 +2,7 @@
 ## テストとツール
 
 <!-- ### Tests -->
-###テスト
+### テスト
 
 <!-- Test `deno`: -->
 `deno` をテスト:
@@ -48,9 +48,11 @@ cargo test std_tests
 ./tools/format.py
 ```
 
-### Profiling
+<!-- ### Profiling -->
+### プロファイリング
 
-To start profiling,
+<!-- To start profiling, -->
+プロファイリングを始めるには,
 
 ```sh
 # Make sure we're only building release.
@@ -65,8 +67,11 @@ third_party/wrk/linux/wrk http://localhost:4500/
 kill `pgrep deno`
 ```
 
+<!--
 V8 will write a file in the current directory that looks like this:
 `isolate-0x7fad98242400-v8.log`. To examine this file:
+-->
+V8は現在のディレクトリの `isolate-0x7fad98242400-v8.log` のようなファイルに書き込みます。このファイルを調べるには:
 
 ```sh
 D8_PATH=target/release/ ./third_party/v8/tools/linux-tick-processor
@@ -74,19 +79,25 @@ isolate-0x7fad98242400-v8.log > prof.log
 # on macOS, use ./third_party/v8/tools/mac-tick-processor instead
 ```
 
-`prof.log` will contain information about tick distribution of different calls.
+<!-- `prof.log` will contain information about tick distribution of different calls. -->
+`prof.log` は異なるコールの分布に関する情報を含みます。
 
-To view the log with Web UI, generate JSON file of the log:
+<!-- To view the log with Web UI, generate JSON file of the log: -->
+Web UIでログを見るには、ログのJSONファイルを作ってください:
 
 ```sh
 D8_PATH=target/release/ ./third_party/v8/tools/linux-tick-processor
 isolate-0x7fad98242400-v8.log --preprocess > prof.json
 ```
 
+<!--
 Open `third_party/v8/tools/profview/index.html` in your browser, and select
 `prof.json` to view the distribution graphically.
+-->
+`third_party/v8/tools/profview/index.html` をブラウザで開いて、分布をグラフィカルに表示するには `prof.json` を選択してください。
 
-Useful V8 flags during profiling:
+<!-- Useful V8 flags during profiling: -->
+プロファイリング中の便利なV8フラグ:
 
 - --prof
 - --log-internal-timer-events
@@ -95,7 +106,8 @@ Useful V8 flags during profiling:
 - --log-source-code
 - --track-gc-object-stats
 
-To learn more about `d8` and profiling, check out the following links:
+<!-- To learn more about `d8` and profiling, check out the following links: -->
+`d8` とプロファイリングについてもっと知りたい場合は、次のリンクを調べてください:
 
 - [https://v8.dev/docs/d8](https://v8.dev/docs/d8)
 - [https://v8.dev/docs/profile](https://v8.dev/docs/profile)
