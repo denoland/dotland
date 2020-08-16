@@ -137,7 +137,8 @@ Deno.test("Test Assert Array Contains", () => {
 
 ### Regex
 
-You can assert regular expressions via the `assertMatch()` assertion.
+<!-- You can assert regular expressions via the `assertMatch()` assertion. -->
+`assertMatch()` アサーションを通して正規表現でアサートできます。
 
 ```js
 Deno.test("Test Assert Match", () => {
