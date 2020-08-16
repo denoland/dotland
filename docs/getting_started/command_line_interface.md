@@ -186,9 +186,13 @@ include all of the above as well as the following.
 -->
 `deno run` と `deno test` のユーザーコードを実行できるコマンドに影響を与えます。これらは上記のほかに以下のものも含まれます。
 
-#### Permission flags
+<!-- #### Permission flags -->
+#### パーミッションフラグ
 
+<!--
 These are listed [here](./permissions.md#permissions-list).
+-->
+これらは [こちら](./permissions.md#permissions-list) にリストがあります。
 
 #### Other runtime flags
 
