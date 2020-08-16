@@ -84,7 +84,8 @@ the standard library `std`.
 -->
 コードベースのTypeScriptの部分にはビルトインのための `cli/js` と標準ライブラリの `std` が含まれています。
 
-### Use TypeScript instead of JavaScript.
+<!-- ### Use TypeScript instead of JavaScript. -->
+### JavaScriptの代わりにTypeScriptを使ってください。
 
 ### Use the term "module" instead of "library" or "package".
 
