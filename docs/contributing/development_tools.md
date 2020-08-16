@@ -112,10 +112,14 @@ Open `third_party/v8/tools/profview/index.html` in your browser, and select
 - [https://v8.dev/docs/d8](https://v8.dev/docs/d8)
 - [https://v8.dev/docs/profile](https://v8.dev/docs/profile)
 
-### Debugging with LLDB
+<!-- ### Debugging with LLDB -->
+### LLDBでデバッグ
 
+<!--
 To debug the deno binary, we can use `rust-lldb`. It should come with `rustc`
 and is a wrapper around LLDB.
+-->
+denoバイナリをデバッグするときに、`rust-lldb` を使うことが出来ます。これは `rustc` とともにくるものでLLDBのラッパーです。
 
 ```shell
 $ rust-lldb -- ./target/debug/deno run --allow-net tests/http_bench.ts
