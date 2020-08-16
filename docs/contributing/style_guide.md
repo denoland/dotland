@@ -87,11 +87,15 @@ the standard library `std`.
 <!-- ### Use TypeScript instead of JavaScript. -->
 ### JavaScriptの代わりにTypeScriptを使ってください。
 
-### Use the term "module" instead of "library" or "package".
+<!-- ### Use the term "module" instead of "library" or "package". -->
+### "library" や "package" の用語の代わりに "module" を使ってください
 
+<!--
 For clarity and consistency avoid the terms "library" and "package". Instead use
 "module" to refer to a single JS or TS file and also to refer to a directory of
 TS/JS code.
+-->
+明快さと一貫性のために"library"や"package"という用語を避けてください。代わりに1つのJSやTSファイルやTS/JSコードのディレクトリを指す場合"module"を使ってください。
 
 ### Do not use the filename `index.ts`/`index.js`.
 
