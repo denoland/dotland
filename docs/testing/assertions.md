@@ -29,10 +29,14 @@ Deno.test("Hello Test", () => {
 - `assertThrows(fn: () => void, ErrorClass?: Constructor, msgIncludes = "", msg?: string): Error`
 - `assertThrowsAsync(fn: () => Promise<void>, ErrorClass?: Constructor, msgIncludes = "", msg?: string): Promise<Error>`
 
-### Assert
+<!-- ### Assert -->
+### アサート
 
+<!--
 The assert method is a simple 'truthy' assertion and can be used to assert any
 value which can be inferred as true.
+-->
+アサートメソッドはシンプルな 'truthy' アサーションであり、trueに推測されるどんな値でもアサートできます。
 
 ```js
 Deno.test("Test Assert", () => {
