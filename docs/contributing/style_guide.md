@@ -97,15 +97,22 @@ TS/JS code.
 -->
 明快さと一貫性のために"library"や"package"という用語を避けてください。代わりに1つのJSやTSファイルやTS/JSコードのディレクトリを指す場合"module"を使ってください。
 
-### Do not use the filename `index.ts`/`index.js`.
+<!-- ### Do not use the filename `index.ts`/`index.js`. -->
+### ファイル名に `index.ts`/`index.js` を使わないでください。
 
+<!--
 Deno does not treat "index.js" or "index.ts" in a special way. By using these
 filenames, it suggests that they can be left out of the module specifier when
 they cannot. This is confusing.
+-->
+Denoは"index.js"や"index.ts"を特別なものとして扱いません。これらのファイル名を使用することで、モジュール指定子を残せない場合これが残せるように示唆しています。これは混乱を招きます。
 
+<!--
 If a directory of code needs a default entry point, use the filename `mod.ts`.
 The filename `mod.ts` follows Rust’s convention, is shorter than `index.ts`, and
 doesn’t come with any preconceived notions about how it might work.
+-->
+コードのディレクトリがデフォルトエントリーポイントが必要なら `mod.ts` を使用してください。ファイル名 `mod.ts` はRustの監修に従っていて、`inde.ts` より短いです。そして、それがどのように動作するか先入観を持っていません。
 
 ### Exported functions: max 2 args, put the rest into an options object.
 
