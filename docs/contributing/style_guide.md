@@ -114,10 +114,13 @@ doesn’t come with any preconceived notions about how it might work.
 -->
 コードのディレクトリがデフォルトエントリーポイントが必要なら `mod.ts` を使用してください。ファイル名 `mod.ts` はRustの監修に従っていて、`inde.ts` より短いです。そして、それがどのように動作するか先入観を持っていません。
 
-### Exported functions: max 2 args, put the rest into an options object.
+<!-- ### Exported functions: max 2 args, put the rest into an options object. -->
+### エクスポートされた関数: 最大で2つの引数、残りはオプションオブジェクトに入れてください。
 
-When designing function interfaces, stick to the following rules.
+<!-- When designing function interfaces, stick to the following rules. -->
+関数インターフェースを設計するときは以下のルールに従ってください。
 
+<!--
 1. A function that is part of the public API takes 0-2 required arguments, plus
    (if necessary) an options object (so max 3 total).
 
@@ -137,7 +140,24 @@ When designing function interfaces, stick to the following rules.
 
    This allows the API to evolve in a backwards compatible way, even when the
    position of the options object changes.
+-->
+1. 公開APIの関数は0-2個の必須引数と(必要なら)オプションオブジェクト(つまり、最大3つです)をとってください。
 
+2. オプションパラメータは一般的にはオプションオブジェクトの中に入ってるはずです。
+
+   オプションオブジェクトでないオプションパラメーターは1つだけなら許容できるかもしれませんし、将来的にオプションパラメーターを増やすことは考えていないように思います。
+   
+
+3. '任意'の引数は普通の'オブジェクトである唯一の引数です。
+
+   ほかの引数はオブジェクトに出来ますが、次のどちらかを持つことで'通常'のオブジェクトランタイムと区別出来る必要があります:
+
+   - 特徴的なプロトタイプ(例、`Array`、`Map`、`Date`、`class MyThing`)
+   - よく知られたシンボルプロパティ(例、`Symbol.iterator` でイレテータブルなもの)。
+
+   これによりオプションオブジェクトの位置が変わっても、APIに後方互換をもたせることが出来ます。
+
+<!--
 ```ts
 // BAD: optional parameters not part of options object. (#2)
 export function resolve(
@@ -156,7 +176,27 @@ export function resolve(
   options: ResolveOptions = {},
 ): IPAddress[] {}
 ```
+-->
+```ts
+// 悪い例: オプションパラメーターがオプションオブジェクトの一部ではありません。(#2)
+export function resolve(
+  hostname: string,
+  family?: "ipv4" | "ipv6",
+  timeout?: number,
+): IPAddress[] {}
 
+// 良い例。
+export interface ResolveOptions {
+  family?: "ipv4" | "ipv6";
+  timeout?: number;
+}
+export function resolve(
+  hostname: string,
+  options: ResolveOptions = {},
+): IPAddress[] {}
+```
+
+<!--
 ```ts
 export interface Environment {
   [key: string]: string;
@@ -175,7 +215,26 @@ export function runShellWithEnv(
   options: RunShellOptions,
 ): string {}
 ```
+-->
+```ts
+export interface Environment {
+  [key: string]: string;
+}
 
+// 悪い例: `env` は通常のオブジェクトであるためオプションオブジェクトと見分けが付きません。(#3)
+export function runShellWithEnv(cmdline: string, env: Environment): string {}
+
+// 良い例。
+export interface RunShellOptions {
+  env: Environment;
+}
+export function runShellWithEnv(
+  cmdline: string,
+  options: RunShellOptions,
+): string {}
+```
+
+<!--
 ```ts
 // BAD: more than 3 arguments (#1), multiple optional parameters (#2).
 export function renameSync(
@@ -196,7 +255,29 @@ export function renameSync(
   options: RenameOptions = {},
 ) {}
 ```
+-->
+```ts
+// 悪い例: 3つより多い引数(#1)で、複数のオプションパラメーターがあります(#2)。
+export function renameSync(
+  oldname: string,
+  newname: string,
+  replaceExisting?: boolean,
+  followLinks?: boolean,
+) {}
 
+// 良い例。
+interface RenameOptions {
+  replaceExisting?: boolean;
+  followLinks?: boolean;
+}
+export function renameSync(
+  oldname: string,
+  newname: string,
+  options: RenameOptions = {},
+) {}
+```
+
+<!--
 ```ts
 // BAD: too many arguments. (#1)
 export function pwrite(
@@ -208,6 +289,27 @@ export function pwrite(
 ) {}
 
 // BETTER.
+export interface PWrite {
+  fd: number;
+  buffer: TypedArray;
+  offset: number;
+  length: number;
+  position: number;
+}
+export function pwrite(options: PWrite) {}
+```
+-->
+```ts
+// 悪い例: 引数が多すぎです。(#1)
+export function pwrite(
+  fd: number,
+  buffer: TypedArray,
+  offset: number,
+  length: number,
+  position: number,
+) {}
+
+// より良い例。
 export interface PWrite {
   fd: number;
   buffer: TypedArray;
