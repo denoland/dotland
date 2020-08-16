@@ -78,8 +78,11 @@ Rust規約に従い、既存のコードと一致させてください。
 
 ## Typescript
 
+<!--
 The TypeScript portions of the codebase include `cli/js` for the built-ins and
 the standard library `std`.
+-->
+コードベースのTypeScriptの部分にはビルトインのための `cli/js` と標準ライブラリの `std` が含まれています。
 
 ### Use TypeScript instead of JavaScript.
 
