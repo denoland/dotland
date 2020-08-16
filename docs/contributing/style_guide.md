@@ -436,12 +436,16 @@ comment. If it needs further comments it is not a good example.
 -->
 個ーどれは追加のコメントを含めるべきではありません。すでにコメントの中です。もし更にコメントが必要ならそれは良い例ではありません。
 
-### Each module should come with a test module.
+<!-- ### Each module should come with a test module. -->
+### それぞれのモジュールにはテストモジュールを付属させてください。
 
+<!--
 Every module with public functionality `foo.ts` should come with a test module
 `foo_test.ts`. A test for a `cli/js` module should go in `cli/js/tests` due to
 their different contexts, otherwise it should just be a sibling to the tested
 module.
+-->
+公開機能をもつすべてのモジュール `foo.ts` はテストモジュール `foo_test.ts` と一緒である必要があります。状況が違うため`cli/js` のためのテストモジュールは `cli/js/tests` にあるべきでありますが、それ以外の場合はテストモジュールと同じ階層にあるべきです。
 
 ### Unit Tests should be explicit.
 
