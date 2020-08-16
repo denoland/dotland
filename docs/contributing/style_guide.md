@@ -501,11 +501,15 @@ export function foo(): string {
 
 ### `std`
 
-#### Do not depend on external code.
+<!-- #### Do not depend on external code. -->
+#### 外部のコードに依存しないでください。
 
+<!--
 `https://deno.land/std/` is intended to be baseline functionality that all Deno
 programs can rely on. We want to guarantee to users that this code does not
 include potentially unreviewed third party code.
+-->
+`https://deno.land/std/` はすべてのDenoプログラムが使う基本機能であるように意図されています。私達はこのコードにはユーザーにレビューされていない可能性があるサードパーティコードを含んでないことを保証したいです。
 
 #### Document and maintain browser compatiblity.
 
