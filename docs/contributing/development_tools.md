@@ -1129,13 +1129,18 @@ Options:
 --async-stack-trace
 ```
 
-### Continuous Benchmarks
+<!-- ### Continuous Benchmarks -->
+### 継続的ベンチマーク
 
-See our benchmarks [over here](https://deno.land/benchmarks)
+<!-- See our benchmarks [over here](https://deno.land/benchmarks) -->
+私達のベンチマークは [こちら](https://deno.land/benchmarks) で見てください。
 
+<!--
 The benchmark chart supposes
 https://github.com/denoland/benchmark_data/blob/gh-pages/data.json has the type
 `BenchmarkData[]` where `BenchmarkData` is defined like the below:
+-->
+ベンチマークチャートは https://github.com/denoland/benchmark_data/blob/gh-pages/data.json が下記で定義されるような `BenchmarkData` の `BenchmarkData[]` を持っていると想定します:
 
 ```ts
 interface ExecTimeData {
