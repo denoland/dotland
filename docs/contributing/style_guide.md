@@ -50,12 +50,17 @@ TODOコメントはissueや書き込んだ人のgithubユーザー名をカッ�
 // FIXME(#349): Sometimes panics.
 ```
 
-## Meta-programming is discouraged. Including the use of Proxy.
+<!-- ## Meta-programming is discouraged. Including the use of Proxy. -->
+## プロ棋士の使用を含み、メタプログラミングはおすすめしません。
 
-Be explicit even when it means more code.
+<!-- Be explicit even when it means more code. -->
+より多くのコードを意味する場合でも明示的にしてください。
 
+<!--
 There are some situations where it may make sense to use such techniques, but in
 the vast majority of cases it does not.
+-->
+メタプログラミングのようなテクニックを使うことに意味がある場合もありますが、ほとんどの場合はそうではありません。
 
 ## Inclusive code
 
