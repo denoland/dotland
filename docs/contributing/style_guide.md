@@ -340,12 +340,17 @@ underscore. By convention, only files in its own directory should import it.
 -->
 場合によっては、内部モジュールが必要であるのにそのAPIが安定版でない、あるいはリンクされていないという状況があるかおしれません。このときはアンダースコアでプレフィックスしてください。規則では、独自のディレクトリ内のファイルのみがインポートされます。
 
-### Use JSDoc for exported symbols.
+<!-- ### Use JSDoc for exported symbols. -->
+### エクスポートされたシンボルにはJSDocを使ってください。
 
+<!--
 We strive for complete documentation. Every exported symbol ideally should have
 a documentation line.
+-->
+私達は完全なドキュメント化を目指しています、すべてのエクスポートされたシンボルは理想的にはドキュメントラインを持っているべきです。
 
-If possible, use a single line for the JS Doc. Example:
+<!-- If possible, use a single line for the JS Doc. Example: -->
+可能ならJS Docに1行を使ってください。例:
 
 ```ts
 /** foo does bar. */
@@ -354,24 +359,34 @@ export function foo() {
 }
 ```
 
+<!--
 It is important that documentation is easily human readable, but there is also a
 need to provide additional styling information to ensure generated documentation
 is more rich text. Therefore JSDoc should generally follow markdown markup to
 enrich the text.
+-->
+ドキュメントが人に読みやすいことは重要ですが、生成されたドキュメントがより立地なテキストであることを保証するために追加のスタイリング情報を提供する必要もあります。そのためJSDocはテキストを立地にするためmarkdownマークアップに従います。
 
-While markdown supports HTML tags, it is forbidden in JSDoc blocks.
+<!-- While markdown supports HTML tags, it is forbidden in JSDoc blocks. -->
+markdownではHTMLタグをサポートしていますが、JSDocでは禁止です。
 
+<!--
 Code string literals should be braced with the back-tick (\`) instead of quotes.
 For example:
+-->
+コード文字リテラルはクオートの代わりにグレイヴアクセント(\`)を使ってください。例えば:
 
 ```ts
 /** Import something from the `deno` module. */
 ```
 
+<!--
 Do not document function arguments unless they are non-obvious of their intent
 (though if they are non-obvious intent, the API should be considered anyways).
 Therefore `@param` should generally not be used. If `@param` is used, it should
 not include the `type` as TypeScript is already strongly typed.
+-->
+関数の引数がその意図が明らかでない場合を除いてドキュメントにしてはいけません(意図が明らかでない場合いずれにしてもAPIを考え直す必要がありますが)。そのため `@param` は一般的には使われません。もし、`@param` が使われている場合、TypeScriptは強力な片付けを持っているため `type` を含めるべきではありません。
 
 ```ts
 /**
@@ -380,14 +395,18 @@ not include the `type` as TypeScript is already strongly typed.
  */
 ```
 
+<!--
 Vertical spacing should be minimized whenever possible. Therefore single line
 comments should be written as:
+-->
+縦方向のスペースは出来る限り最小化すべきです。そのため、一行コメントは次のように書かれるべきです:
 
 ```ts
 /** This is a good single line JSDoc. */
 ```
 
-And not
+<!-- And not -->
+このようにではなく
 
 ```ts
 /**
@@ -395,10 +414,13 @@ And not
  */
 ```
 
+<!--
 Code examples should not utilise the triple-back tick (\`\`\`) notation or tags.
 They should just be marked by indentation, which requires a break before the
 block and 6 additional spaces for each line of the example. This is 4 more than
 the first column of the comment. For example:
+-->
+コード例はトリプルグレイヴアクセント(\`\`\`)の表記法やタグを使うべきではありません。インデントで記されるべきであり、ブロックの前に改行よ、各行に6つの追加スペースを必要とします。これはコメントの最初の列より4つ多いです。例えば:
 
 ```ts
 /** A straight forward comment and an example:
@@ -408,8 +430,11 @@ the first column of the comment. For example:
  */
 ```
 
+<!--
 Code examples should not contain additional comments. It is already inside a
 comment. If it needs further comments it is not a good example.
+-->
+個ーどれは追加のコメントを含めるべきではありません。すでにコメントの中です。もし更にコメントが必要ならそれは良い例ではありません。
 
 ### Each module should come with a test module.
 
