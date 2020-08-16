@@ -106,25 +106,32 @@ the program.
 -->
 ヒントは次の `import` 文(もしくは `export ... from` 文)に影響を与え、コンパイル時に指定されたモジュールの代わりに `@deno-types` の値が代入されます。上記の例のようにDenoコンパイラは `./foo.js` の代わりに `./foo.d.ts` をロードします。Denoはプログラムを実行しても `./foo.js` を読み込みます。
 
-#### Triple-slash reference directive in JavaScript files
+<!-- #### Triple-slash reference directive in JavaScript files -->
+#### JavaScriptファイル中のトリプルスラッシュリファレンスディレクティブ
 
+<!--
 If you are hosting modules which you want to be consumed by Deno, and you want
 to inform Deno about the location of the type definitions, you can utilize a
 triple-slash directive in the actual code. For example, if you have a JavaScript
 module and you would like to provide Deno with the location of the type
 definition which happens to be alongside that file, your JavaScript module named
 `foo.js` might look like this:
+-->
+Denoに使用してほしいモジュールをホスティングていてDenoに型定義の場所を教えたい場合は、コード中にトリプルスラッシュディレクティブを利用することが出来ます。例えば、JavaScriptモジュールを持っていてDenoにそのファイルと一緒に型定義の場所を提供したい場合 `foo.js` という名前のJavaScriptモジュールは下記のようになります:
 
 ```js
 /// <reference types="./foo.d.ts" />
 export const foo = "foo";
 ```
 
+<!--
 Deno will see this, and the compiler will use `foo.d.ts` when type checking the
 file, though `foo.js` will be loaded at runtime. The resolution of the value of
 the directive follows the same resolution logic as importing a module, meaning
 the file needs to have an extension and is relative to the current file. Remote
 specifiers are also allowed.
+-->
+Denoはこれを見てコンパイラはファイルを型チェックする際 `foo.d.ts` を使いますが、`foo.js` がランタイムにロードされます。ディレクティブの値の解決はモジュールのインポートと同じ解決ロジックに板がいます。つまり、ファイルには拡張子が必要で現在のファイルから相対的でないといけません。リモート指定子も許可されています。
 
 #### X-TypeScript-Types custom header
 
