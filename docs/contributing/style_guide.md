@@ -1,17 +1,24 @@
-# Deno Style Guide
+<!-- # Deno Style Guide -->
+# Denoスタイルガイド
 
-## Table of Contents
+<!-- ## Table of Contents -->
+## 目次
 
-## Copyright Headers
+<!-- ## Copyright Headers -->
+## コピーライトヘッダー
 
-Most modules in the repository should have the following copyright header:
+<!-- Most modules in the repository should have the following copyright header: -->
+リポジトリ内のほとんどのモジュールはルギのコピーライトヘッダーを持つべきです:
 
 ```ts
 // Copyright 2018-2020 the Deno authors. All rights reserved. MIT license.
 ```
 
+<!--
 If the code originates elsewhere, ensure that the file has the proper copyright
 headers. We only allow MIT, BSD, and Apache licensed code.
+-->
+コードが他の場所に由来する場合は、ファイルに適切なコピーライトヘッダーがあるか確認してください。MIT、BSDそしてApacheLicenceのコードのみ許可しています。
 
 ## Use underscores, not dashes in filenames.
 
