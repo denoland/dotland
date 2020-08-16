@@ -1,4 +1,5 @@
-## Set up your environment
+<!-- ## Set up your environment -->
+## 環境構築
 
 <!--
 To productively get going with Deno you should set up your environment. This
