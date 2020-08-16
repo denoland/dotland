@@ -32,7 +32,11 @@ function relativeToAbsolute(base: string, relative: string): string {
   baseURL.search = "";
   baseURL.hash = "";
   const parts = baseURL.pathname.split("/");
-  parts[parts.length - 1] = relative;
+  if (relative.charAt(0) === "#") {
+    parts[parts.length] = relative;
+  } else {
+    parts[parts.length - 1] = relative;
+  }
   baseURL.pathname = parts.join("/");
   return baseURL.href;
 }
