@@ -73,7 +73,8 @@ https://chromium.googlesource.com/chromium/src/+/master/styleguide/inclusive_cod
 
 ## Rust
 
-Follow Rust conventions and be consistent with existing code.
+<!-- Follow Rust conventions and be consistent with existing code. -->
+Rust規約に従い、既存のコードと一致させてください。
 
 ## Typescript
 
