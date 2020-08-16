@@ -35,10 +35,14 @@ functionality.
 -->
 角モジュールはその公開機能のテストを含んでいるか、テストを伴っていなければいけません。
 
-## TODO Comments
+<!-- ## TODO Comments -->
+## TODOコメント
 
+<!--
 TODO comments should usually include an issue or the author's github username in
 parentheses. Example:
+-->
+TODOコメントはissueや書き込んだ人のgithubユーザー名をカッコ内に含んでください。例:
 
 ```ts
 // TODO(ry): Add tests.
