@@ -51,7 +51,7 @@ TODOコメントはissueや書き込んだ人のgithubユーザー名をカッ�
 ```
 
 <!-- ## Meta-programming is discouraged. Including the use of Proxy. -->
-## プロ棋士の使用を含み、メタプログラミングはおすすめしません。
+## プロキシの使用を含み、メタプログラミングはおすすめしません。
 
 <!-- Be explicit even when it means more code. -->
 より多くのコードを意味する場合でも明示的にしてください。
