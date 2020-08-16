@@ -511,15 +511,22 @@ include potentially unreviewed third party code.
 -->
 `https://deno.land/std/` はすべてのDenoプログラムが使う基本機能であるように意図されています。私達はこのコードにはユーザーにレビューされていない可能性があるサードパーティコードを含んでないことを保証したいです。
 
-#### Document and maintain browser compatiblity.
+<!-- #### Document and maintain browser compatiblity. -->
+#### ブラウザ互換のドキュメントにし維持する。
 
+<!--
 If a module is browser compatible, include the following in the JSDoc at the top
 of the module:
+-->
+モジュールがブラウザ互換であれば、次のJSDocをモジュールの最初に含めてください。
 
 ```ts
 /** This module is browser compatible. */
 ```
 
+<!--
 Maintain browser compatibility for such a module by either not using the global
 `Deno` namespace or feature-testing for it. Make sure any new dependencies are
 also browser compatible.
+-->
+グローバル `Deno` 名前空間を使用しないか機能テストを行うことでこのようなモジュールのブラウザ互換を維持してください。新しい依存関係もブラウザ互換であることを確認してください。
