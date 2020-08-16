@@ -26,10 +26,14 @@ headers. We only allow MIT, BSD, and Apache licensed code.
 <!-- Example: Use `file_server.ts` instead of `file-server.ts`. -->
 例: `file-server.ts` ではなく `file_server.ts` を使ってください。
 
-## Add tests for new features.
+<!-- ## Add tests for new features. -->
+## 新しい機能へのテストの追加。
 
+<!--
 Each module should contain or be accompanied by tests for its public
 functionality.
+-->
+角モジュールはその公開機能のテストを含んでいるか、テストを伴っていなければいけません。
 
 ## TODO Comments
 
