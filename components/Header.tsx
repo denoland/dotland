@@ -9,7 +9,7 @@ const Header = ({
   widerContent,
 }: {
   subtitle?: string;
-  widerContent?: bool;
+  widerContent?: boolean;
 }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
