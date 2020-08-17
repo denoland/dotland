@@ -165,11 +165,14 @@ Then we can set a breakpoint, and run the created configuration:
 
 ### JetBrains IDEs
 
+<!--
 You can debug Deno using your JetBrains IDE by right-clicking the file you want
 to debug and selecting the `Debug 'Deno: <file name>'` option. This will create
 a run/debug configuration with no permission flags set. To configure these flags
 edit the run/debug configuration and modify the `Arguments` field with the
 required flags.
+-->
+JetBrains IDEを使ってDenoをデバッグすることが出来ます。デバッグしたいファイルを右クリックして`Debug 'Deno: <file name>'` オプションを選択してください。パーミッションフラグの設定なしに実行/デバッグのコンフィグレーションを作ります。これらのフラグを設定するにはrun/debug configurationを編集し `Arguments` フィールドを必要なフラグで変更してください。
 
 <!-- ### Other -->
 ### その他
