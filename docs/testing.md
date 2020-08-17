@@ -229,11 +229,15 @@ _パターンを使いたいことをDenoに知らせるには、JavaScriptのRE
 <!-- Within the tests themselves, you have two options for filtering. -->
 テスト自体にはフィルタリングのための2つのオプションがあります。
 
-#### Filtering out (Ignoring these tests)
+<!-- #### Filtering out (Ignoring these tests) -->
+#### フィルタリングで省く(特定のテストを無視)
 
+<!--
 Sometimes you want to ignore tests based on some sort of condition (for example
 you only want a test to run on Windows). For this you can use the `ignore`
 boolean in the test definition. If it is set to true the test will be skipped.
+-->
+状況よって(例えばWindowsだけでテストしたいなど)テストを無視した場合があります。これにはテスト定義の中で `ignore` ブーリアンを使うことが出来ます。これがtrueであればテストはスキップされます。
 
 ```ts
 Deno.test({
