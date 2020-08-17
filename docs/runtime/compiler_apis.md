@@ -171,18 +171,25 @@ enumerable, and the map to be defined.
 -->
 `enum` 列挙可能なものを構築するIIFEに書き換えられ、マップが定義されることを期待します。
 
-### Referencing TypeScript library files
+<!-- ### Referencing TypeScript library files -->
+### TypeScriptライブラリファイルの参照
 
+<!--
 When you use `deno run`, or other Deno commands which type check TypeScript,
 that code is evaluated against custom libraries which describe the environment
 that Deno supports. By default, the compiler runtime APIs which type check
 TypeScript also use these libraries (`Deno.compile()` and `Deno.bundle()`).
+-->
+`deno run` やTypeScriptの型チェックを行う他のDenoコマンドを使うときを使うとき、そのコードはDenoがサポートする環境を記述したカスタムライブラリと比較して評価されます。デフォルトでは、TypeScript型チェックを行うコンパイラランタイムAPIでもこれらのライブラリ(`Deno.compile()` と `Deno.bundle()`)を使います。
 
+<!--
 But if you want to compile or bundle TypeScript for some other runtime, you may
 want to override the default libraries. To do this, the runtime APIs support the
 `lib` property in the compiler options. For example, if you had TypeScript code
 that is destined for the browser, you would want to use the TypeScript `"dom"`
 library:
+-->
+他のランタイムのためにTypeScriptをコンパイル化バンドルしたい場合は、デフォルトライブラリを上書きしたいかもしれません。これをするためにランタイムAPIはコンパイラオプションの `lib` プロパティでサポートしています。例えば、ブラウザ向けのTypeScriptコードを持っている場合、TypeScript `"dom"` ライブラリを使いたいと思うでしょう:
 
 ```ts
 const [errors, emitted] = await Deno.compile(
@@ -196,16 +203,23 @@ const [errors, emitted] = await Deno.compile(
 );
 ```
 
+<!--
 For a list of all the libraries that TypeScript supports, see the
 [`lib` compiler option](https://www.typescriptlang.org/docs/handbook/compiler-options.html)
 documentation.
+-->
+TypeScriptがサポートしている全てのライブラリのリストは [`lib` コンパイラオプション](https://www.typescriptlang.org/docs/handbook/compiler-options.html) ドキュメントを見てください。
 
-**Don't forget to include the JavaScript library**
+<!-- **Don't forget to include the JavaScript library** -->
+**JavaScriptライブラリをインクルードすることを忘れないでください**
 
+<!--
 Just like `tsc`, when you supply a `lib` compiler option, it overrides the
 default ones, which means that the basic JavaScript library won't be included
 and you should include the one that best represents your target runtime (e.g.
 `es5`, `es2015`, `es2016`, `es2017`, `es2018`, `es2019`, `es2020` or `esnext`).
+-->
+`tsc` と同じように `lib` コンパイラオプションを供給するときそれはデフォルトのものを上書きします。つまり、基本的なJavaScriptライブラリはインクルードされないのでターゲットランタイム(例、`es5`、`es2015`、`es2016`、`es2017`、`es2018`、`es2019`、`es2020`、`esnext`)をインクルードする必要があります。
 
 <!-- #### Including the `Deno` namespace -->
 #### `Deno` 名前空間のインクルード
