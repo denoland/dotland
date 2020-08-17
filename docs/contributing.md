@@ -63,14 +63,21 @@ labor and private scripts. It's likely you will need help from @ry or
 -->
 [`deno_third_party`](https://github.com/denoland/deno_third_party) はDenoが依存しているほとんどの外部のコードを含んで、いつでも何を実行しているかを正確に把握することが出来ます。努力とプライベートスクリプトで丁寧にメンテナンスされています。変更するには @ry や @piscisaureus の助けが必要になるでしょう。
 
-## Adding Ops (aka bindings)
+<!-- ## Adding Ops (aka bindings) -->
+## Ops(別名、バインディング)を追加
 
+<!--
 We are very concerned about making mistakes when adding new APIs. When adding an
 Op to Deno, the counterpart interfaces on other platforms should be researched.
 Please list how this functionality is done in Go, Node, Rust, and Python.
+-->
+新しいAPIを追加するときにミスをしないかとても心配しています。OpをDenoに追加するとき、他のプラットフォームでの対応するインターフェースを調べておく必要があります。この機能がGo、Node、Rust、Pythonでどのように行われているかリストアップしてください。
 
+<!--
 As an example, see how `Deno.rename()` was proposed and added in
 [PR #671](https://github.com/denoland/deno/pull/671).
+-->
+例として、`Deno.rename()` がどのように提案され追加されたか [PR #671](https://github.com/denoland/deno/pull/671) で見てください。
 
 <!-- ## Releases -->
 ## リリース
