@@ -200,11 +200,16 @@ default ones, which means that the basic JavaScript library won't be included
 and you should include the one that best represents your target runtime (e.g.
 `es5`, `es2015`, `es2016`, `es2017`, `es2018`, `es2019`, `es2020` or `esnext`).
 
-#### Including the `Deno` namespace
+<!-- #### Including the `Deno` namespace -->
+#### `Deno` 名前空間のインクルード
 
+<!--
 In addition to the libraries that are provided by TypeScript, there are four
 libraries that are built into Deno that can be referenced:
+-->
+TypeScriptで提供されいるライブラリに加えて、Denoに組み込まれているライブラリで参照できるものが4つあります:
 
+<!--
 - `deno.ns` - Provides the `Deno` namespace.
 - `deno.shared_globals` - Provides global interfaces and variables which Deno
   supports at runtime that are then exposed by the final runtime library.
@@ -213,9 +218,17 @@ libraries that are built into Deno that can be referenced:
   APIs.
 - `deno.worker` - Exposes the global variables that are available in workers
   under Deno.
+-->
+- `deno.ns` - `Deno` 名前空間を提供します。
+- `deno.shared_globals` - Denoが最終的なランタイムライブラリで公開されるランタイムでサポートするグローバルインターフェースと変数を提供します。
+- `deno.window` - グローバル変数とDenoメインワーカーで利用可能なDeno名前空間を公開し、ランタイムコンパイラAPIのデフォルトとなります。
+- `deno.worker` - Denoのもとのワーカーで利用可能なグローバル変数を公開します。
 
+<!--
 So to add the Deno namespace to a compilation, you would include the `deno.ns`
 lib in the array. For example:
+-->
+そのためDeno名前空間をコンパイルに追加するには `deno.ns` libを配列でインクルードしてください。例えば:
 
 ```ts
 const [errors, emitted] = await Deno.compile(
@@ -229,9 +242,12 @@ const [errors, emitted] = await Deno.compile(
 );
 ```
 
+<!--
 **Note** that the Deno namespace expects a runtime environment that is at least
 ES2018 or later. This means if you use a lib "lower" than ES2018 you will get
 errors logged as part of the compilation.
+-->
+Deno名前空間はランタイム環境がES2018以降であると期待することに**注意**してください。つまり、ES2018より"低い"libを使うとコンパイルの一部としてエラーが記録されます。
 
 <!-- #### Using the triple slash reference -->
 #### トリプルスラッシュリファレンス
