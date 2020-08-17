@@ -26,11 +26,15 @@ the first line of code.
 
 ### Chrome Devtools
 
+<!--
 Let's try debugging a program using Chrome Devtools. For this, we'll use
 [file_server.ts](https://deno.land/std@$STD_VERSION/http/file_server.ts) from
 `std`, a static file server.
+-->
+Chrome Devtoolsを使ってプログラムをデバッグしてみましょう。静的ファイルサーバーである `std` の [file_server.ts](https://deno.land/std@$STD_VERSION/http/file_server.ts) を使います。
 
-Use the `--inspect-brk` flag to break execution on the first line:
+<!-- Use the `--inspect-brk` flag to break execution on the first line: -->
+最初の行に実行を中断するための `--inspect-brk` フラグを使ってください。
 
 ```shell
 $ deno run --inspect-brk --allow-read --allow-net https://deno.land/std@$STD_VERSION/http/file_server.ts
@@ -40,44 +44,65 @@ Compile https://deno.land/std@$STD_VERSION/http/file_server.ts
 ...
 ```
 
-Open `chrome://inspect` and click `Inspect` next to target:
+<!-- Open `chrome://inspect` and click `Inspect` next to target: -->
+`chrome://inspect` を開きターゲットの次の `Inspect` をクリックしてください
 
 ![chrome://inspect](../images/debugger1.jpg)
 
-It might take a few seconds after opening the devtools to load all modules.
+<!-- It might take a few seconds after opening the devtools to load all modules. -->
+devtoolsを開いて全てのモジュールを読み込むのには数秒かかるかもしれません。
 
 ![Devtools opened](../images/debugger2.jpg)
 
+<!--
 You might notice that Devtools paused execution on the first line of
 `_constants.ts` instead of `file_server.ts`. This is expected behavior and is
 caused by the way ES modules are evaluated by V8 (`_constants.ts` is left-most,
 bottom-most dependency of `file_server.ts` so it is evaluated first).
+-->
+Devtoolsが `file_server.ts` の代わりに `_constants.ts` の最初の行で実行を一時停止したことに気づくかもしれません。これは期待される動作であり、ESモジュールがV8によって評価される方法に起因しています(`_constants.ts` は `file_server.ts` の最左、最下の依存関係なので最初に評価されます)。
 
+<!--
 At this point all source code is available in the Devtools, so let's open up
 `file_server.ts` and add a breakpoint there; go to "Sources" pane and expand the
 tree:
+-->
+Devtoolsでソースコードが利用可能になったら、`file_server.ts` を開いてブレークポイントを加えましょう; `Sources` ペインに行ってツリーを展開してください:
 
 ![Open file_server.ts](../images/debugger3.jpg)
 
+<!--
 _Looking closely you'll find duplicate entries for each file; one written
 regularly and one in italics. The former is compiled source file (so in the case
 of `.ts` files it will be emitted JavaScript source), while the latter is a
 source map for the file._
+-->
+_詳しく見てみると、それぞれのファイルの重複したエントリを見つけることが出来るでしょう; 一つはレギュラーで書かれていて一つはイタリックで書かれています。前者はコンパイルされたソースファイルです(だから、`.ts` ファイルの場合エミットされたJavaScriptソースです)、後者はこのファイルのソースマップです。_
 
-Next, add a breakpoint in the `listenAndServe` method:
+<!-- Next, add a breakpoint in the `listenAndServe` method: -->
+次に、`listenAndServe` メソッドにブレークポイントを追加してください:
 
 ![Break in file_server.ts](../images/debugger4.jpg)
 
+<!--
 As soon as we've added the breakpoint Devtools automatically opened up the
 source map file, which allows us step through the actual source code that
 includes types.
+-->
+ブレークポイントを追加した瞬間Devtoolsは自動的に型を含む本当のソースコードに踏み込ましてくれるソースマップファイルを開きます。
 
+<!--
 Now that we have our breakpoints set, we can resume the execution of our script
 so that we might inspect an incoming request. Hit the Resume script execution
 button to do so. You might even need to hit it twice!
+-->
+ブレークポイントがセットされたので、入ってくるリクエストを解析するためにスクリプトの実行を再開できます。Resume script executionbuttonを押してください。2回押す必要があるでしょう。
 
+<!--
 Once our script is running again, let's send a request and inspect it in
 Devtools:
+-->
+スクリプトの実行が再開したら、リクエストを送ってDevtoolsで解析してみましょう:
 
 ```
 $ curl http://0.0.0.0:4500/
@@ -85,8 +110,11 @@ $ curl http://0.0.0.0:4500/
 
 ![Break in request handling](../images/debugger5.jpg)
 
+<!--
 At this point we can introspect the contents of the request and go step-by-step
 to debug the code.
+-->
+この時点でリクエストの内容を見ることが出来、ステップバイステップでコードをデバッグすることが出来ます。
 
 ### VSCode
 
