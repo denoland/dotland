@@ -1,7 +1,10 @@
-## Integrity checking & lock files
+<!-- ## Integrity checking & lock files -->
+## 整合性チェック & ロックファイル
 
-### Introduction
+<!-- ### Introduction -->
+### イントロダクション
 
+<!--
 Let's say your module depends on remote module `https://some.url/a.ts`. When you
 compile your module for the first time `a.ts` is retrieved, compiled and cached.
 It will remain this way until you run your module on a new machine (say in
@@ -10,6 +13,8 @@ what happens if the content in the remote url `https://some.url/a.ts` is
 changed? This could lead to your production module running with different
 dependency code than your local module. Deno's solution to avoid this is to use
 integrity checking and lock files.
+-->
+あるモジュールがリモートモジュール `https://some.url/a.ts` に依存しているとしましょう。そのモジュールを初めてコンパイルするとき `a.ts` が取得され、コンパイルされ、キャッシュされます。新しいマシン(プロダクションとしましょう)でモジュールを実行するまで、あるいはキャッシュを再ロードする(例えば、`deno cache --reload` を使って)までこの状態のままになります。しかし、リモートURLの `https://some.url/a.ts` の内容が変更された場合はどうなるでしょう？これはローカルモジュールとは異なる依存関係のコードでプロダクションが運用されている可能性があります。Denoはこの問題を避けるため整合性チェックとロックファイルを使います。
 
 ### Caching and lock files
 
