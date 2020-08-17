@@ -176,10 +176,18 @@ required flags.
 Any client that implements the Devtools protocol should be able to connect to a
 Deno process.
 
-### Limitations
+<!-- ### Limitations -->
+### 制限
 
+<!--
 Devtools support is still immature. There is some functionality that is known to
 be missing or buggy:
+-->
+Devtoolsサポートはまだ未熟です。一部の機能はなかったりバグが多いです。
 
+<!--
 - autocomplete in Devtools' console causes the Deno process to exit
 - profiling and memory dumps might not work correctly
+-->
+- Devtoolsでの自動補完はDenoプロセスの終了を引き起こします
+- プロファイリングとメモリダンプは正しく動かない可能性があります
