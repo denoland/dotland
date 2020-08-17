@@ -249,8 +249,10 @@ Deno.test({
 });
 ```
 
-#### Filtering in (Only run these tests)
+<!-- #### Filtering in (Only run these tests) -->
+#### フィルタリングで実施(特定のテストのみ実施)
 
+<!--
 Sometimes you may be in the middle of a problem within a large test class and
 you would like to focus on just that test and ignore the rest for now. For this
 you can use the `only` option to tell the test framework to only run tests with
@@ -258,6 +260,8 @@ this set to true. Multiple tests can set this option. While the test run will
 report on the success or failure of each test, the overall test run will always
 fail if any test is flagged with `only`, as this is a temporary measure only
 which disables nearly all of your tests.
+-->
+巨大なテストクラスの中で問題の真っ只中にいてそのテストにだけ集中して残りのテストは無視したい場合があるでしょう。これには `only` オプションを使って、テストフレームワークにこれをtrueにしたもののみテストすることを伝えることが出来ます。オプションには複数のテストを設定できます。テスト実行はそれぞれのテストの成功もしくは失敗を報告しますが、もしどのテストも `only` フラグである場合全体的なテストは常に失敗します。これは一時的な措置であるため、ほぼすべてのテストを無効にするためです。
 
 ```ts
 Deno.test({
