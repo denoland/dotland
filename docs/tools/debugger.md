@@ -118,14 +118,21 @@ to debug the code.
 
 ### VSCode
 
-Deno can be debugged using VSCode.
+<!-- Deno can be debugged using VSCode. -->
+DenoはVSCodeを使ってもデバッグできます。
 
+<!--
 Official support via the plugin is being worked on -
 https://github.com/denoland/vscode_deno/issues/12
+-->
+プラグインでの公式サポートは https://github.com/denoland/vscode_deno/issues/12 で動いています。
 
+<!--
 We can still attach the debugger by manually providing a
 [`launch.json`](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations)
 config:
+-->
+[`launch.json`](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations) を提供することでデバッガーを手動でつけることも出来ます。config:
 
 ```json
 {
@@ -144,10 +151,14 @@ config:
 }
 ```
 
+<!--
 **NOTE**: This uses the file you have open as the entry point; replace `${file}`
 with a script name if you want a fixed entry point.
+-->
+**注意**: 開いているファイルをエントリーポイントとして使用します; 固定されたエントリーポイントがほしいなら、`${file}` スクリプト名で置き換えてください。
 
-Let's try out debugging a local source file. Create `server.ts`:
+<!-- Let's try out debugging a local source file. Create `server.ts`: -->
+論理ソースファイルをデバッグしてみましょう。`server.ts` を作ってください:
 
 ```ts
 import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
@@ -159,7 +170,8 @@ for await (const req of server) {
 }
 ```
 
-Then we can set a breakpoint, and run the created configuration:
+<!-- Then we can set a breakpoint, and run the created configuration: -->
+そして、ブレークポイントをセットし作成されたコンフィグレーションを実行してください:
 
 ![VSCode debugger](../images/debugger7.jpg)
 
