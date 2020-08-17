@@ -171,10 +171,14 @@ a run/debug configuration with no permission flags set. To configure these flags
 edit the run/debug configuration and modify the `Arguments` field with the
 required flags.
 
-### Other
+<!-- ### Other -->
+### その他
 
+<!--
 Any client that implements the Devtools protocol should be able to connect to a
 Deno process.
+-->
+Devtoolsプロトコルを実装している全てのクライアントはDenoプロセスと通信できるはずです。
 
 <!-- ### Limitations -->
 ### 制限
