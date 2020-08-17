@@ -233,12 +233,16 @@ const [errors, emitted] = await Deno.compile(
 ES2018 or later. This means if you use a lib "lower" than ES2018 you will get
 errors logged as part of the compilation.
 
-#### Using the triple slash reference
+<!-- #### Using the triple slash reference -->
+#### トリプルスラッシュリファレンス
 
+<!--
 You do not have to specify the `lib` in the compiler options. Deno also supports
 [the triple-slash reference to a lib](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html#-reference-lib-).
 which can be embedded in the contents of the file. For example, if you have a
 `main.ts` like:
+-->
+コンパイラオプションで `lib` を指定する必要はありません。Denoはファイルの中に埋め込むことが出来る [libへのトリプルスラッシュリファレンス](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html#-reference-lib-) もサポートします。例えば、`main.ts` では:
 
 ```ts
 /// <reference lib="dom" />
@@ -246,7 +250,8 @@ which can be embedded in the contents of the file. For example, if you have a
 document.getElementById("foo");
 ```
 
-It would compile without errors like this:
+<!-- It would compile without errors like this: -->
+これは以下のようなエラーがなくコンパイルします:
 
 ```ts
 const [errors, emitted] = await Deno.compile("./main.ts", undefined, {
@@ -254,6 +259,9 @@ const [errors, emitted] = await Deno.compile("./main.ts", undefined, {
 });
 ```
 
+<!--
 **Note** that the `dom` library conflicts with some of the default globals that
 are defined in the default type library for Deno. To avoid this, you need to
 specify a `lib` option in the compiler options to the runtime compiler APIs.
+-->
+`dom` ライブラリはDenoのデフォルト型ライブラリで定義されているデフォルトグローバルと競合することに**注意**してください。これを避けるにはランタイムコンパイラAPIのコンパイラオプションで `lib` オプションを指定する必要があります。
