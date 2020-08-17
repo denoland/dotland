@@ -138,6 +138,7 @@ its dependencies resolved and exporting the same exports as the source module.
 
 ### `Deno.transpileOnly()`
 
+<!--
 This is based off of the TypeScript function `transpileModule()`. All this does
 is "erase" any types from the modules and emit JavaScript. There is no type
 checking and no resolution of dependencies. It accepts up to two arguments, the
@@ -149,8 +150,11 @@ where the key is the source module name supplied, and the value is an object
 with a property of `source` and optionally `map`. The first is the output
 contents of the module. The `map` property is the source map. Source maps are
 provided by default, but can be turned off via the `options` argument.
+-->
+TypeScript関数 `transpileModule()` をベースにしています。この関数が行うことは モジュールの全ての型を"消去"しJavaScriptを出力します。型チェックや依存解決はありません。2つの引数を受け付けます。1つめはキーがモジュール名で値が内容のハッシュです。モジュール名はソースファイル名が何であったかの情報をソースマップに入れるときに使います。2つめの引数は型 `Deno.CompilerOptions` の任意の `options` です。関数はキーがソースモジュールで値が `source` と任意で `map` のプロパティのオブジェクトのマップで解決します。最初の出力はモジュールの内容です。`map` プロパティはソースマップです。ソースマップはデフォルトで提供されますが、`options` 引数を使って無効にすることが出来ます。
 
-An example:
+<!-- An example: -->
+例:
 
 ```ts
 const result = await Deno.transpileOnly({
@@ -161,8 +165,11 @@ console.log(result["/foo.ts"].source);
 console.log(result["/foo.ts"].map);
 ```
 
+<!--
 We would expect the `enum` would be rewritten to an IIFE which constructs the
 enumerable, and the map to be defined.
+-->
+`enum` 列挙可能なものを構築するIIFEに書き換えられ、マップが定義されることを期待します。
 
 ### Referencing TypeScript library files
 
