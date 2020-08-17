@@ -16,17 +16,24 @@ integrity checking and lock files.
 -->
 あるモジュールがリモートモジュール `https://some.url/a.ts` に依存しているとしましょう。そのモジュールを初めてコンパイルするとき `a.ts` が取得され、コンパイルされ、キャッシュされます。新しいマシン(プロダクションとしましょう)でモジュールを実行するまで、あるいはキャッシュを再ロードする(例えば、`deno cache --reload` を使って)までこの状態のままになります。しかし、リモートURLの `https://some.url/a.ts` の内容が変更された場合はどうなるでしょう？これはローカルモジュールとは異なる依存関係のコードでプロダクションが運用されている可能性があります。Denoはこの問題を避けるため整合性チェックとロックファイルを使います。
 
-### Caching and lock files
+<!-- ### Caching and lock files -->
+### キャッシングとロックファイル
 
+<!--
 Deno can store and check subresource integrity for modules using a small JSON
 file. Use the `--lock=lock.json` to enable and specify lock file checking. To
 update or create a lock use `--lock=lock.json --lock-write`. The
 `--lock=lock.json` tells Deno what the lock file to use is, while the
 `--lock-write` is used to output dependency hashes to the lock file
 (`--lock-write` must be used in conjunction with `--lock`).
+-->
+Denoは小さなJSONファイルを使ってモジュールのサブリソースの整合性を保存、チェックすることが出来ます。ロックファイルのチェックを有効にし指定するには、`--lock=lock.json` を使ってください。ロックファイルを更新したり作成したりするには `--lock=lock.json --lock-write` を使ってください。`--lock=lock.json` はDenoにどのロックファイルが使われるかを指定し、`--lock-write` は依存関係ハッシュをロックファイルに出力するのに使われます(`--lock-write` は `--lock` と併用しなければなりません)。
 
+<!--
 A `lock.json` might look like this, storing a hash of the file against the
 dependency:
+-->
+`lock.json` は次のようになり、依存関係に応じたファイルのハッシュを格納します:
 
 ```json
 {
