@@ -149,7 +149,7 @@ for await (const req of s) {
             </Link>
             .
             */}
-            より深いイントロダクション, 例, 環境構築のガイドは
+            より深いイントロダクション、例、環境構築のガイドは
             <Link href="/[...rest]" as="/manual">
               <a className="link">マニュアル</a>
             </Link>
@@ -190,8 +190,8 @@ for await (const req of s) {
             is built on, details about the internals of Deno, how to embed Deno
             in your own application and how to extend Deno using Rust plugins.
             */}
-            ランタイムのより複雑な機能, Denoのコンセプトの紹介,{" "}
-            Denoの内部の詳細, アプリケーションへどうやって組み込むかや
+            ランタイムのより複雑な機能、Denoのコンセプトの紹介、
+            Denoの内部の詳細、アプリケーションへどうやって組み込むかや
             Rustプラグインでの拡張は{" "}
             <Link href="/[...rest]" as="/manual">
               <a className="link">マニュアル</a>
@@ -272,7 +272,7 @@ for await (const req of s) {
             </a>
             .
             */}
-            DenoはGitHub, 個人のWebサーバー,{" "}
+            DenoはGitHub、個人のWebサーバー,{" "}
             <a href="https://pika.dev" className="link">
               pika.dev
             </a>{" "}
