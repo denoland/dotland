@@ -1,0 +1,13 @@
+import emojis from "./emojis.json";
+
+export function replaceEmojis(src: string): string {
+  const candidates = src.matchAll(/:([a-z0-9_]+):/g);
+  console.log(candidates);
+  for (const candidate of candidates) {
+    const emoji = candidate[1];
+    if ((emojis as any)[emoji]) {
+      src = src.replaceAll(`:${emoji}:`, (emojis as any)[emoji]);
+    }
+  }
+  return src;
+}
