@@ -13,6 +13,7 @@ import { listModules } from "../../util/registry_utils";
 import * as pageutils from "../../util/pagination_utils";
 import RegistryInstructions from "../../components/RegistryInstructions";
 import { CookieBanner } from "../../components/CookieBanner";
+import { replaceEmojis } from "../../util/emoji_util";
 
 const PER_PAGE = 20;
 
@@ -248,7 +249,9 @@ const ThirdPartyRegistryList = () => {
                                     {meta.name && (
                                       <div className="mt-1 flex items-center text-sm leading-5 text-gray-500">
                                         <span className="truncate">
-                                          {meta.description ?? ""}
+                                          {replaceEmojis(
+                                            meta.description ?? ""
+                                          )}
                                         </span>
                                       </div>
                                     )}
