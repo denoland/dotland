@@ -27,7 +27,7 @@
     "name": "外部のコードとのリンク",
     "children": {
       "reloading_modules": "モジュールの再ロード",
-      "integrity_checking": "Integrity checking",
+      "integrity_checking": "整合性チェック",
       "proxies": "プロキシ",
       "import_maps": "Import maps"
     }
