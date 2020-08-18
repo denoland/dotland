@@ -409,14 +409,14 @@ export function listExternalDependencies(
       // Count /std only once
       const std = matchStd(dep);
       if (std) {
-        denolandDeps.add("https://deno.land/std" + std.version);
+        denolandDeps.add(`https://deno.land/std${std.version ?? ""}`);
         return;
       }
 
       // Count each module on /x only once.
       const x = matchX(dep);
       if (x) {
-        denolandDeps.add("https://deno.land/x/" + x.identifier);
+        denolandDeps.add(`https://deno.land/x/${x.identifier}`);
         return;
       }
 
@@ -434,11 +434,11 @@ export function listExternalDependencies(
     });
     const thisStd = matchStd(name);
     if (thisStd) {
-      denolandDeps.delete("https://deno.land/std" + thisStd.version);
+      denolandDeps.delete(`https://deno.land/std${thisStd.version ?? ""}`);
     }
     const thisX = matchX(name);
     if (thisX) {
-      denolandDeps.delete("https://deno.land/x/" + thisX.identifier);
+      denolandDeps.delete(`https://deno.land/x/${thisX.identifier}`);
     }
     return [...denolandDeps, ...nestlandDeps, ...other].map((url) =>
       url.replace("https://deno.land/x/std", "https://deno.land/std")

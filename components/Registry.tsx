@@ -544,11 +544,6 @@ const Registry = () => {
                             </div>
                           </>
                         )}
-                        {/* <DependencyGraph
-                          graph={versionDeps.graph}
-                          entrypoint={dependencyEntrypoint}
-                          currentModule={`https://deno.land/x/${name}@${version}/`}
-                        /> */}
                       </div>
                     ) : null}
                   </div>
