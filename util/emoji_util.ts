@@ -5,7 +5,7 @@ export function replaceEmojis(src: string): string {
   for (const candidate of candidates) {
     const emoji = candidate[1];
     if ((emojis as any)[emoji]) {
-      src = src.replaceAll(`:${emoji}:`, (emojis as any)[emoji]);
+      src = src.replace(`:${emoji}:`, (emojis as any)[emoji]);
     }
   }
   return src;
