@@ -102,7 +102,8 @@ for await (const req of s) {
           <Link href="#installation">
             <a className="hover:underline">
               <h3 className="font-bold text-xl" id="installation">
-                Installation
+                {/* Installation */}
+                インストール
               </h3>
             </a>
           </Link>
@@ -159,7 +160,8 @@ for await (const req of s) {
           <Link href="#runtime-documentation">
             <a className="hover:underline">
               <h3 className="font-bold text-xl" id="runtime-documentation">
-                Runtime Documentation
+                {/* Runtime Documentation */}
+                ランタイムドキュメント
               </h3>
             </a>
           </Link>
@@ -208,7 +210,8 @@ for await (const req of s) {
           <Link href="#standard-modules">
             <a className="hover:underline">
               <h3 className="font-bold text-xl" id="standard-modules">
-                Standard Modules
+                {/* Standard Modules */}
+                標準モジュール
               </h3>
             </a>
           </Link>
@@ -251,7 +254,8 @@ for await (const req of s) {
           <Link href="#third-party-modules">
             <a className="hover:underline">
               <h3 className="font-bold text-xl" id="third-party-modules">
-                Third Party Modules
+                {/* Third Party Modules */}
+                サードパーティモジュール
               </h3>
             </a>
           </Link>
