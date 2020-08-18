@@ -21,8 +21,12 @@ const ArtworkPage = () => {
       <Header />
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 mt-8 mb-24">
         <div className="max-w-screen-lg mx-auto">
-          <h4 className="text-4xl font-bold tracking-tight">Artwork</h4>
+          <h4 className="text-4xl font-bold tracking-tight">
+            {/* Artwork */}
+            アートワーク
+          </h4>
           <p className="mt-4 text-lg">
+            {/*
             A lot of artwork related to Deno has been created in the last few
             years. This page serves as place the art is collected and displayed.
             Do you have a piece to display here?{" "}
@@ -31,6 +35,15 @@ const ArtworkPage = () => {
               className="link"
             >
               Add it!
+            </a>
+            */}
+            Denoのたくさんのアートワークが過去数年で作られました。このページはそれらのアートを集めて展示します。
+            展示する作品を持っていますか？{" "}
+            <a
+              href="https://github.com/denoland/deno_website2/blob/master/artwork.json"
+              className="link"
+            >
+              追加してください！
             </a>
           </p>
         </div>
