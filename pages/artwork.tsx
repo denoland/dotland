@@ -12,7 +12,10 @@ const ArtworkPage = () => {
   return (
     <>
       <Head>
-        <title>Artwork | Deno</title>
+        <title>
+          {/* Artwork | Deno */}
+          アートワーク | Deno
+        </title>
       </Head>
       <CookieBanner />
       <Header />

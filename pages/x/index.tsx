@@ -55,7 +55,10 @@ const ThirdPartyRegistryList = () => {
   return (
     <>
       <Head>
-        <title>Third Party Modules | Deno</title>
+        <title>
+          {/* Third Party Modules | Deno */}
+          サードパーティモジュール | Deno
+        </title>
       </Head>
       <CookieBanner />
       <div className="bg-gray">

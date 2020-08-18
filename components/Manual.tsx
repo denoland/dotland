@@ -218,7 +218,10 @@ function Manual() {
   return (
     <div>
       <Head>
-        <title>Manual | Deno</title>
+        <title>
+          {/* Manual | Deno */}
+          マニュアル | Deno
+        </title>
         <link
           rel="preconnect"
           href="https://BH4D9OD16A-dsn.algolia.net"

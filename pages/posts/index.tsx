@@ -34,7 +34,10 @@ const PostsIndexPage = (props: Props) => {
   return (
     <>
       <Head>
-        <title>News | Deno</title>
+        <title>
+          {/* News | Deno */}
+          ニュース | Deno
+        </title>
       </Head>
       <Header />
       <div className="bg-white pt-8 pb-20 px-4 sm:px-6 lg:pt-8 lg:pb-28 lg:px-8">
