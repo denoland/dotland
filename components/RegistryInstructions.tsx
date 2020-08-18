@@ -19,7 +19,7 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
 
   // Validity of the module name
   const isModuleNameValid = useMemo(() => VALID_NAME.test(moduleName), [
-    moduleName
+    moduleName,
   ]);
   const { data: isModuleNameAvailable } = useSWR(
     () => (isModuleNameValid ? moduleName : null),
@@ -104,8 +104,7 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                     </button>
                   </div>
                 </Transition>
-                <div
-                  className="h-full flex flex-col space-y-4 my-auto px-4 md:px-16 lg:px-24 xl:px-32 bg-white shadow-xl overflow-y-auto">
+                <div className="h-full flex flex-col space-y-4 my-auto px-4 md:px-16 lg:px-24 xl:px-32 bg-white shadow-xl overflow-y-auto">
                   <div className="my-auto py-10">
                     <header>
                       <h2 className="text-xl leading-7 font-medium text-gray-900">
@@ -124,25 +123,25 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                             be hosted as public repositories on GitHub.com.
                           </p>
                           <p className="text-base">
-                            <b className="font-semibold">deno.land/x</b> downloads
-                            and stores your repository contents every time you
-                            create a git tag. We only do this once for every tag.
-                            This ensures that the contents we serve for a specific
-                            version can never change.
+                            <b className="font-semibold">deno.land/x</b>{" "}
+                            downloads and stores your repository contents every
+                            time you create a git tag. We only do this once for
+                            every tag. This ensures that the contents we serve
+                            for a specific version can never change.
                           </p>
                           <p className="text-base">
                             Our service needs to get informed whenever a new tag
                             is created. For this purpose we use GitHub webhooks.
                           </p>
                           <span className="block w-full rounded-md shadow-sm mt-4">
-                          <button
-                            type="submit"
-                            className="w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
-                            onClick={() => setStage(1)}
-                          >
-                            Next
-                          </button>
-                        </span>
+                            <button
+                              type="submit"
+                              className="w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
+                              onClick={() => setStage(1)}
+                            >
+                              Next
+                            </button>
+                          </span>
                         </>
                       )}
                       {stage === 1 && (
@@ -162,7 +161,7 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                                 isModuleNameAvailable === true
                                   ? "border-green-300 hover:border-green-300 focus:border-green-300"
                                   : !isModuleNameValid ||
-                                  isModuleNameAvailable === false
+                                    isModuleNameAvailable === false
                                   ? "border-red-300 hover:border-red-300 focus:border-red-300"
                                   : ""
                               }`}
@@ -184,26 +183,26 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                             ) : null}
                             {!isModuleNameValid ? (
                               <span className="text-red-400">
-                              The module name must be between 3 and 40
-                              characters and contain only the characters a-z,
-                              0-9 and _.
-                            </span>
+                                The module name must be between 3 and 40
+                                characters and contain only the characters a-z,
+                                0-9 and _.
+                              </span>
                             ) : null}
                           </div>
                           <span className="block w-full rounded-md shadow-sm">
-                          <button
-                            type="submit"
-                            disabled={!isModuleNameValid ? true : undefined}
-                            className={`w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md ${
-                              isModuleNameValid
-                                ? "text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50"
-                                : "text-gray-400 bg-gray-50 cursor-default"
-                            } focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out`}
-                            onClick={() => setStage(2)}
-                          >
-                            Next
-                          </button>
-                        </span>
+                            <button
+                              type="submit"
+                              disabled={!isModuleNameValid ? true : undefined}
+                              className={`w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md ${
+                                isModuleNameValid
+                                  ? "text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50"
+                                  : "text-gray-400 bg-gray-50 cursor-default"
+                              } focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out`}
+                              onClick={() => setStage(2)}
+                            >
+                              Next
+                            </button>
+                          </span>
                           <button className="link" onClick={() => setStage(0)}>
                             Previous
                           </button>
@@ -211,9 +210,14 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                       )}
                       {stage === 2 && (
                         <>
-                          <p>There are some more optional settings to set up:</p>
+                          <p>
+                            There are some more optional settings to set up:
+                          </p>
                           <div className="mt-2">
-                            <label htmlFor="subdirectory" className="font-medium">
+                            <label
+                              htmlFor="subdirectory"
+                              className="font-medium"
+                            >
                               Subdirectory
                             </label>
                             <input
@@ -233,32 +237,32 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                             {!isSubdirectoryValid ? (
                               <p className="text-red-400 mb-2">
                                 The provided subdirectory is not valid. It must
-                                end with a <InlineCode>/</InlineCode>, but may not
-                                start with one. (e.g.{" "}
+                                end with a <InlineCode>/</InlineCode>, but may
+                                not start with one. (e.g.{" "}
                                 <InlineCode>src/</InlineCode>)
                               </p>
                             ) : null}
                             <span className="text-gray-500">
-                            Optional. A subdirectory in your repository that the
-                            module to be published is located in.
-                          </span>
+                              Optional. A subdirectory in your repository that
+                              the module to be published is located in.
+                            </span>
                           </div>
                           <span className="block w-full rounded-md shadow-sm mt-2">
-                          <button
-                            type="submit"
-                            disabled={!isSubdirectoryValid ? true : undefined}
-                            className={`w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md 
+                            <button
+                              type="submit"
+                              disabled={!isSubdirectoryValid ? true : undefined}
+                              className={`w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md 
                               ${
-                              isSubdirectoryValid
-                                ? "text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50"
-                                : "text-gray-400 bg-gray-50 cursor-default"
-                            }  
+                                isSubdirectoryValid
+                                  ? "text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50"
+                                  : "text-gray-400 bg-gray-50 cursor-default"
+                              }  
                             text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out`}
-                            onClick={() => setStage(3)}
-                          >
-                            Next
-                          </button>
-                        </span>
+                              onClick={() => setStage(3)}
+                            >
+                              Next
+                            </button>
+                          </span>
                           <button className="link" onClick={() => setStage(1)}>
                             Previous
                           </button>
@@ -273,7 +277,8 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                               Go to the <InlineCode>Settings</InlineCode> tab.
                             </li>
                             <li>
-                              Click on the <InlineCode>Webhooks</InlineCode> tab.
+                              Click on the <InlineCode>Webhooks</InlineCode>{" "}
+                              tab.
                             </li>
                             <li>
                               Click on the <InlineCode>Add webhook</InlineCode>{" "}
@@ -284,14 +289,16 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                               <InlineCode>
                                 https://api.deno.land/webhook/gh/{moduleName}
                                 {subdirectory
-                                  ? `?subdir=${encodeURIComponent(subdirectory)}`
+                                  ? `?subdir=${encodeURIComponent(
+                                      subdirectory
+                                    )}`
                                   : ""}
                               </InlineCode>{" "}
                               in the payload URL field.
                             </li>
                             <li>
-                              Select <InlineCode>application/json</InlineCode> as
-                              the content type.
+                              Select <InlineCode>application/json</InlineCode>{" "}
+                              as the content type.
                             </li>
                             <li>
                               Select{" "}
