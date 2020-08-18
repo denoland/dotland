@@ -12,7 +12,8 @@ const Footer = (props: { simple?: boolean }) => (
         <div className="px-5 py-2">
           <Link href="/[...rest]" as="/manual">
             <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-              Manual
+              {/* Manual */}
+              マニュアル
             </a>
           </Link>
         </div>
@@ -21,41 +22,47 @@ const Footer = (props: { simple?: boolean }) => (
             href="https://doc.deno.land/builtin/stable"
             className="text-base leading-6 text-gray-500 hover:text-gray-900"
           >
-            Runtime API
+            {/* Runtime API */}
+            ランタイムAPI
           </a>
         </div>
         <div className="px-5 py-2">
           <Link href="/[...rest]" as="/std">
             <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-              Standard Library
+              {/* Standard Library */}
+              標準ライブラリ
             </a>
           </Link>
         </div>
         <div className="px-5 py-2">
           <Link href="/x">
             <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-              Third Party Modules
+              {/* Third Party Modules */}
+              サードパーティモジュール
             </a>
           </Link>
         </div>
         <div className="px-5 py-2">
           <Link href="/benchmarks">
             <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-              Benchmarks
+              {/* Benchmarks */}
+              ベンチマーク
             </a>
           </Link>
         </div>
         <div className="px-5 py-2">
           <Link href="/artwork">
             <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-              Artwork
+              {/* Artwork */}
+              アートワーク
             </a>
           </Link>
         </div>
         <div className="px-5 py-2">
           <Link href="/posts">
             <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-              News
+              {/* News */}
+              ニュース
             </a>
           </Link>
         </div>
