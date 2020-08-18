@@ -75,7 +75,7 @@
       "file_server": "ファイルサーバー",
       "tcp_echo": "TCP echo サーバー",
       "subprocess": "サブプロセスの作成",
-      "permissions": "Inspecting and revoking permissions",
+      "permissions": "パーミッションの検査と取り消し",
       "os_signals": "OS シグナル",
       "file_system_events": "ファイルシステムイベント",
       "testing_if_main": "ファイルがメインか判断"
