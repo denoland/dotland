@@ -12,7 +12,8 @@ It's built on V8, Rust, and Tokio.
 -->
 V8, Rust, Tokioを使って作られています。
 
-## Feature Highlights
+<!-- ## Feature Highlights -->
+## 機能のハイライト
 
 <!--
 - Secure by default. No file, network, or environment access (unless explicitly
