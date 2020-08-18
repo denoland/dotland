@@ -496,8 +496,13 @@ function Manual() {
                   </a>
                   <Markdown
                     source={content.replace(/\$STD_VERSION/g, stdVersion)}
-                    displayURL={"https://deno.land/manual" + path}
+                    displayURL={`https://deno.land/manual${
+                      version ? `@${version}` : ""
+                    }${path}`}
                     sourceURL={sourceURL}
+                    baseURL={`https://deno.land/manual${
+                      version ? `@${version}` : ""
+                    }`}
                   />
                   <div className="mt-4 pt-4 border-t border-gray-200">
                     {pageList[pageIndex - 1] !== undefined && (
