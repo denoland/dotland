@@ -60,7 +60,8 @@ have been historically written with bash or python.
 -->
 とりわけ、Denoはbashやpythonで書かれた過去のユーティリティースクリプトの優れた代替です。
 
-## Goals 
+<!-- ## Goals -->
+## ゴール
 
 <!--
 - Only ship a single executable (`deno`).
