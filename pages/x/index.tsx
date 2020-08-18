@@ -70,26 +70,34 @@ const ThirdPartyRegistryList = () => {
         <div>
           <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8">
             <dt className="text-lg leading-6 font-medium text-gray-900">
-              What is deno.land/x?
+              {/* What is deno.land/x? */}
+              deno.land/xとはなんですか？
             </dt>
             <dd className="mt-2">
               <p className="text-base leading-6 text-gray-500">
+                {/*
                 <span className="font-semibold">deno.land/x</span> is a hosting
                 service for Deno scripts. It caches releases of open source
                 modules stored on GitHub and serves them at one easy to remember
                 domain.
+                */}
+                <span className="font-semibold">deno.land/x</span>{" "}
+                はDenoスクリプトのためのホスティングサービスです。GitHub上の
+                オープンソースモジュールのリソースをキャッシュし覚えやすいドメインで提供します。
               </p>
             </dd>
 
             <div className="mt-2">
               <a href="#info" className="link">
-                Learn more
+                {/* Learn more */}
+                詳しく知る
               </a>
             </div>
           </div>
           <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8">
             <label htmlFor="query" className="font-medium sr-only">
-              Search
+              {/* Search */}
+              検索
             </label>
             <input
               id="query"
@@ -223,13 +231,15 @@ const ThirdPartyRegistryList = () => {
               </div>
             ) : resp === null ? (
               <div className="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
-                Failed to load modules
+                {/* Failed to load modules */}
+                モジュールのロードに失敗しました
               </div>
             ) : (
               <div className="bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4">
                 {resp.results.length == 0 ? (
                   <div className="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
-                    No modules found
+                    {/* No modules found */}
+                    モジュールが見つかりません
                   </div>
                 ) : (
                   <ul>
@@ -511,7 +521,8 @@ const ThirdPartyRegistryList = () => {
               <div>
                 <div>
                   <dt className="text-lg leading-6 font-medium text-gray-900">
-                    How do I use modules on deno.land/x?
+                    {/* How do I use modules on deno.land/x? */}
+                    deno.land/x のモジュールをどのようにして使いますか？
                   </dt>
                   <dd className="mt-2">
                     <p className="text-base leading-6 text-gray-500 break-words">
@@ -533,10 +544,12 @@ const ThirdPartyRegistryList = () => {
                 </div>
                 <div className="mt-12">
                   <dt className="text-lg leading-6 font-medium text-gray-900">
-                    Can I find functionality built-in to Deno here?
+                    {/* Can I find functionality built-in to Deno here? */}
+                    Denoのビルトイン機能はここで見つかりますか？
                   </dt>
                   <dd className="mt-2">
                     <p className="text-base leading-6 text-gray-500">
+                      {/*
                       No, the built-in runtime is documented on{" "}
                       <a className="link" href="https://doc.deno.land/">
                         deno doc
@@ -546,12 +559,23 @@ const ThirdPartyRegistryList = () => {
                         <a className="link">/std</a>
                       </Link>{" "}
                       for the standard modules.
+                      */}
+                      いいえ、ビルトインランタイムは{" "}
+                      <a className="link" href="https://doc.deno.land/">
+                        deno doc
+                      </a>{" "}
+                      とマニュアルにあります。標準モジュールは{" "}
+                      <Link href="/[identifier]" as="/std">
+                        <a className="link">/std</a>
+                      </Link>{" "}
+                      を見てください。
                     </p>
                   </dd>
                 </div>
                 <div className="mt-12">
                   <dt className="text-lg leading-6 font-medium text-gray-900">
-                    How do I add a module to deno.land/x?
+                    {/* How do I add a module to deno.land/x? */}
+                    どのようにしてdeno.land/xにモジュールを追加できますか？
                   </dt>
                   <dd className="mt-2">
                     <p className="text-base leading-6 text-gray-500 break-words">
@@ -612,7 +636,8 @@ const ThirdPartyRegistryList = () => {
                 </div>
                 <div className="mt-12">
                   <dt className="text-lg leading-6 font-medium text-gray-900">
-                    Can I edit or remove a module on deno.land/x?
+                    {/* Can I edit or remove a module on deno.land/x? */}
+                    deno.land/x上のモジュールを編集したり削除したり出来ますか？
                   </dt>
                   <dd className="mt-2">
                     <p className="text-base leading-6 text-gray-500">
