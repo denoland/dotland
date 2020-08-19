@@ -21,17 +21,28 @@ const ThirdPartyRegistryList = () => {
   const { asPath, query: routerQuery, replace } = useRouter();
   const [overlayOpen, setOverlayOpen] = React.useState(asPath.endsWith("#add"));
 
-  const [page, setPage] = React.useState(1);
+  const page = parseInt(
+    (Array.isArray(routerQuery.page)
+      ? routerQuery.page[0]
+      : routerQuery.page) || "1"
+  );
   const query =
     (Array.isArray(routerQuery.query)
       ? routerQuery.query[0]
       : routerQuery.query) || "";
 
   function handleSearchInput(event: ChangeEvent<HTMLInputElement>) {
-    setPage(1);
     const query = event.target.value
       ? { query: event.target.value }
       : undefined;
+    replace({
+      pathname: "/x",
+      query,
+    });
+  }
+
+  function setPage(page: number) {
+    const query = page !== 1 ? { page: page.toFixed(0) } : undefined;
     replace({
       pathname: "/x",
       query,
