@@ -15,5 +15,10 @@
     "jsx": "preserve"
   },
   "exclude": ["node_modules", "worker"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "tools/generate_emojis.js"
+  ]
 }
