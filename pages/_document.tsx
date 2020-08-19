@@ -27,7 +27,7 @@ export default class DenoDocDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          {/*<link rel="stylesheet" href="/fonts/inter/inter.css" />*/}
+          <link rel="stylesheet" href="/fonts/inter/inter.css" />
           <link
             href="https://fonts.googleapis.com/css?family=Noto+Sans+JP"
             rel="stylesheet"
