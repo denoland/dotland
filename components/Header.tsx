@@ -4,12 +4,22 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Transition from "./Transition";
 
-const Header = ({ subtitle }: { subtitle?: string }) => {
+const Header = ({
+  subtitle,
+  widerContent,
+}: {
+  subtitle?: string;
+  widerContent?: boolean;
+}) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <div className="relative py-6">
-      <nav className="max-w-screen-lg mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-0">
+      <nav
+        className={`mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 ${
+          widerContent ? "max-w-screen-xl" : "max-w-screen-lg lg:p-0"
+        }`}
+      >
         <Link href="/">
           <a className="flex items-center">
             <img className="h-10 w-auto sm:h-12 my-2" src="/logo.svg" alt="" />

@@ -40,10 +40,13 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
     return new Response(undefined, {
       headers: {
         Location: `/std@${version.substring(1)}/${path}`,
-        // "x-deno-warning":
-        //   `Implicitly using latest version (${latest}) for ${url.origin}${
-        //     module === "std" ? "" : "/x"
-        //   }/${module}/${path}`,
+        "x-deno-warning": `std versions prefixed with 'v' will be deprecated on October 1st 2020. Please change your import to ${
+          url.origin
+        }${module === "std" ? "" : "/x"}/${module}@${version.substring(
+          1
+        )}/${path} (at ${url.origin}${
+          module === "std" ? "" : "/x"
+        }/${module}@${version}/${path})`,
       },
       status: 302,
     });

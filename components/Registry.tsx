@@ -27,7 +27,7 @@ import Footer from "./Footer";
 import FileDisplay from "./FileDisplay";
 import DirectoryListing from "./DirectoryListing";
 import { CookieBanner } from "./CookieBanner";
-// import DependencyGraph from "./DependencyGraph";
+import { replaceEmojis } from "../util/emoji_util";
 
 const Registry = () => {
   // State
@@ -63,11 +63,13 @@ const Registry = () => {
     }
   }
 
-  // File paths
-  const canonicalPath = useMemo(
-    () => `${isStd ? "" : "/x"}/${name}${version ? `@${version}` : ""}${path}`,
-    [name, version, path]
+  // Base paths
+  const basePath = useMemo(
+    () => `${isStd ? "" : "/x"}/${name}${version ? `@${version}` : ""}`,
+    [name, version]
   );
+  // File paths
+  const canonicalPath = useMemo(() => `${basePath}${path}`, [basePath, path]);
   const sourceURL = useMemo(() => getSourceURL(name, version, path), [
     name,
     version,
@@ -286,6 +288,7 @@ const Registry = () => {
       <div className="bg-gray-50 min-h-full">
         <Header
           subtitle={name === "std" ? "Standard Library" : "Third Party Modules"}
+          widerContent={true}
         />
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8 pt-4">
           <Breadcrumbs
@@ -382,6 +385,7 @@ const Registry = () => {
                                 sourceURL={sourceURL}
                                 repositoryURL={repositoryURL}
                                 documentationURL={documentationURL}
+                                baseURL={basePath}
                               />
                             ) : null}
                             {typeof readme === "string" &&
@@ -392,6 +396,7 @@ const Registry = () => {
                                 canonicalPath={readmeCanonicalPath}
                                 sourceURL={readmeURL}
                                 repositoryURL={readmeRepositoryURL}
+                                baseURL={basePath}
                               />
                             ) : null}
                           </div>
@@ -439,7 +444,7 @@ const Registry = () => {
                           moduleMeta === null ? null : (
                           <>
                             <div className="text-sm">
-                              {moduleMeta.description}
+                              {replaceEmojis(moduleMeta.description ?? "")}
                             </div>
                             <div className="mt-3 flex items-center">
                               <svg

@@ -50,7 +50,7 @@ export interface VersionMetaInfo {
 export interface UploadOptions {
   type: "github";
   repository: string;
-  subdir: string | null;
+  subdir?: string;
   ref: string;
 }
 
