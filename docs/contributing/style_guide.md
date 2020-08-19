@@ -388,10 +388,18 @@ not include the `type` as TypeScript is already strongly typed.
 -->
 関数の引数がその意図が明らかでない場合を除いてドキュメントにしてはいけません(意図が明らかでない場合いずれにしてもAPIを考え直す必要がありますが)。そのため `@param` は一般的には使われません。もし、`@param` が使われている場合、TypeScriptは強力な片付けを持っているため `type` を含めるべきではありません。
 
+<!--
 ```ts
 /**
  * Function with non obvious param.
  * @param foo Description of non obvious parameter.
+ */
+```
+-->
+```ts
+/**
+ * 明らかなparamでないものを持っている関数
+ * @param foo 明らかでないパラメーターの説明。
  */
 ```
 
@@ -401,16 +409,28 @@ comments should be written as:
 -->
 縦方向のスペースは出来る限り最小化すべきです。そのため、一行コメントは次のように書かれるべきです:
 
+<!--
 ```ts
 /** This is a good single line JSDoc. */
+```
+-->
+```ts
+/** これは良い一行のJSDocです。 */
 ```
 
 <!-- And not -->
 このようにではなく
 
+<!--
 ```ts
 /**
  * This is a bad single line JSDoc.
+ */
+```
+-->
+```ts
+/**
+ * これは悪い一行のJSDocです。
  */
 ```
 
@@ -422,8 +442,17 @@ the first column of the comment. For example:
 -->
 コード例はトリプルグレイヴアクセント(\`\`\`)の表記法やタグを使うべきではありません。インデントで記されるべきであり、ブロックの前に改行よ、各行に6つの追加スペースを必要とします。これはコメントの最初の列より4つ多いです。例えば:
 
+<!--
 ```ts
 /** A straight forward comment and an example:
+ *
+ *       import { foo } from "deno";
+ *       foo("bar");
+ */
+```
+-->
+```ts
+/** わかりやすいコメントと一例:
  *
  *       import { foo } from "deno";
  *       foo("bar");
