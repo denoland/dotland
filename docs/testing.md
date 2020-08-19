@@ -113,21 +113,31 @@ Deno.test("async hello world", async () => {
 });
 ```
 
-### Resource and async op sanitizers
+<!-- ### Resource and async op sanitizers -->
+### リソースと非同期opサニタイザー
 
+<!--
 Certain actions in Deno create resources in the resource table
 ([learn more here](./contributing/architecture.md)). These resources should be
 closed after you are done using them.
+-->
+Denoの特定のアクションは、リソーステーブル([詳しくはこちら](./contributing/architecture.md))にリソースを作成します。これらのリソースは使い終わったら閉じられるべきです。
 
+<!--
 For each test definition, the test runner checks that all resources created in
 this test have been closed. This is to prevent resource 'leaks'. This is enabled
 by default for all tests, but can be disabled by setting the `sanitizeResources`
 boolean to false in the test definition.
+-->
+それぞれのテスト定義に対してテストランナーはこのテストで作られたすべてのリソースが閉じられるかチェックします。これはリソースの'漏れ'を防ぐためです。これは全てのテストに対しデフォルトで有効ですが、テスト定義で `sanitizeResources` ブーリアンをfalseに設定することで無効にできます。
 
+<!--
 The same is true for async operation like interacting with the filesystem. The
 test runner checks that each operation you start in the test is completed before
 the end of the test. This is enabled by default for all tests, but can be
 disabled by setting the `sanitizeOps` boolean to false in the test definition.
+-->
+ファイルシステムとのやり取りのような非同期の操作も同様です。テストランナーはテストで開始した各操作がテスト終了前に完了しているかどうかチェックします。これは全てのテストに対してデフォルトで有効ですが、テスト定義の `sanitizeOps` ブーリアンをfalseに設定することで無効にできます。
 
 ```ts
 Deno.test({
