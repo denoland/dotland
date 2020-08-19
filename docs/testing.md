@@ -140,14 +140,19 @@ Deno.test({
 });
 ```
 
-## Running tests
+<!-- ## Running tests -->
+## テストの実行
 
+<!--
 To run the test, call `deno test` with the file that contains your test
 function. You can also omit the file name, in which case all tests in the
 current directory (recursively) that match the glob
 `{*_,*.,}test.{js,mjs,ts,jsx,tsx}` will be run. If you pass a directory, all
 files in the directory that match this glob will be run.
+-->
+テストを実行するには、テスト関数を含んでいるファイルで `deno test` を呼び出してください。ファイル名を省略することも出来ます。その場合、現在のディレクトリ内(再帰的)のグロブ `{*_,*.,}test.{js,mjs,ts,jsx,tsx}` に一致するすべてのテストが実行されます。ディレクトリを渡すとこのグロブに一致する全てのファイルが実行さてます。
 
+<!--
 ```shell
 # Run all tests in the current directly and all sub-directories
 deno test
@@ -158,13 +163,30 @@ deno test util/
 # Run just my_test.ts
 deno test my_test.ts
 ```
+-->
+```shell
+# 現在のディレクトリとそのサブディレクトリ内のすべてのテストを実行
+deno test
 
+# utilディレクトリ内のすべてのテストを実行
+deno test util/
+
+# my_test.tsのみをテストを実行
+deno test my_test.ts
+```
+
+<!--
 `deno test` uses the same permission model as `deno run` and therefore will
 require, for example, `--allow-write` to write to the file system during
 testing.
+-->
+`deno test` は `deno run` と同じパーミッションモデルを使います。そのため例えばテスト中にファイルシステムに書き込む場合`--allow-write` が要求されます。
 
+<!--
 To see all runtime options with `deno test`, you can reference the command line
 help:
+-->
+`deno test` の全てのランタイムオプションを見るには、コマンドラインhelpを参照することが出来ます:
 
 ```shell
 deno help test
