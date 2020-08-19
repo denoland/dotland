@@ -19,7 +19,7 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
 
   // Validity of the module name
   const isModuleNameValid = useMemo(() => VALID_NAME.test(moduleName), [
-    moduleName
+    moduleName,
   ]);
   const { data: isModuleNameAvailable } = useSWR(
     () => (isModuleNameValid ? moduleName : null),
@@ -104,8 +104,7 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                     </button>
                   </div>
                 </Transition>
-                <div
-                  className="h-full flex flex-col space-y-4 my-auto px-4 md:px-16 lg:px-24 xl:px-32 bg-white shadow-xl overflow-y-auto">
+                <div className="h-full flex flex-col space-y-4 my-auto px-4 md:px-16 lg:px-24 xl:px-32 bg-white shadow-xl overflow-y-auto">
                   <div className="my-auto py-10">
                     <header>
                       <h2 className="text-xl leading-7 font-medium text-gray-900">
@@ -162,7 +161,7 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                                 isModuleNameAvailable === true
                                   ? "border-green-300 hover:border-green-300 focus:border-green-300"
                                   : !isModuleNameValid ||
-                                  isModuleNameAvailable === false
+                                    isModuleNameAvailable === false
                                   ? "border-red-300 hover:border-red-300 focus:border-red-300"
                                   : ""
                               }`}
@@ -291,8 +290,8 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                                 https://api.deno.land/webhook/gh/{moduleName}
                                 {subdirectory
                                   ? `?subdir=${encodeURIComponent(
-                                    subdirectory
-                                  )}`
+                                      subdirectory
+                                    )}`
                                   : ""}
                               </InlineCode>{" "}
                               in the payload URL field.
