@@ -12,12 +12,25 @@ supported.
 <!-- For example, given a file `add.ts` with the contents: -->
 例えば、以下の内容の `add.ts` が与えられたとき:
 
+<!--
 ```ts
 /**
  * Adds x and y.
  * @param {number} x
  * @param {number} y
  * @returns {number} Sum of x and y
+ */
+export function add(x: number, y: number): number {
+  return x + y;
+}
+```
+-->
+```ts
+/**
+ * Adds x and y.
+ * @param {number} x
+ * @param {number} y
+ * @returns {number} x と y の加算
  */
 export function add(x: number, y: number): number {
   return x + y;
