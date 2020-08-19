@@ -10,7 +10,7 @@
     "start": "next start",
     "test": "jest",
     "format": "yarn format:check --write",
-    "format:check": "prettier --check \"**/*.md\" \"*.js\" \"{util,public,pages,components}/**/*.{js,ts,jsx,tsx}\" \"{util,public,pages,components}/*.{js,ts,jsx,tsx}\"",
+    "format:check": "prettier --check \"**/*.md\" \"*.js\" \"*.json\" \"{util,public,pages,components}/**/*.{js,ts,jsx,tsx}\" \"{util,public,pages,components}/*.{js,ts,jsx,tsx}\"",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx util/ pages/ components/"
   },
   "dependencies": {

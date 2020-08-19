@@ -24,6 +24,7 @@ import Footer from "./Footer";
 import FileDisplay from "./FileDisplay";
 import DirectoryListing from "./DirectoryListing";
 import { CookieBanner } from "./CookieBanner";
+import { replaceEmojis } from "../util/emoji_util";
 
 const Registry = () => {
   // State
@@ -403,7 +404,7 @@ const Registry = () => {
                           moduleMeta === null ? null : (
                           <>
                             <div className="text-sm">
-                              {moduleMeta.description}
+                              {replaceEmojis(moduleMeta.description ?? "")}
                             </div>
                             <div className="mt-3 flex items-center">
                               <svg

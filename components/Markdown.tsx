@@ -5,6 +5,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import marked, { Renderer } from "marked";
 import dompurify from "dompurify";
 import { RawCodeBlock } from "./CodeBlock";
+import { replaceEmojis } from "../util/emoji_util";
 
 function slugify(text: string): string {
   text = text.toLowerCase();
@@ -106,6 +107,9 @@ function Markdown(props: MarkdownProps) {
           html = html.replace(`href="${original}"`, `href="${final}"`);
         });
         return html;
+      },
+      text(text) {
+        return replaceEmojis(text);
       },
     } as Partial<Renderer>) as any,
   });
