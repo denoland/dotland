@@ -82,22 +82,32 @@ deno cache --reload --lock=lock.json src/deps.ts
 deno test --allow-read src
 ```
 
-### Runtime verification
+<!-- ### Runtime verification -->
+### ランタイム検証
 
+<!--
 Like caching above, you can also use the `--lock=lock.json` option during use of
 the `deno run` sub command, validating the integrity of any locked modules
 during the run. Remember that this only validates against dependencies
 previously added to the `lock.json` file. New dependencies will be cached but
 not validated.
+-->
+上記のキャッシュのように、`deno run` サブコマンドを使用中に `--lock=lock.json` オプションを使って、実行中にロックされたモジュールの整合性を検証することが出来ます。これは以前に `lock.json` ファイルに追加された依存関係に対してのみ有効であることを覚えておいてください。新しい依存関係はキャッシュされますが、検証されません。
 
+<!--
 You can take this a step further as well by using the `--cached-only` flag to
 require that remote dependencies are already cached.
+-->
+リモートの依存関係がすでにキャッシュされていることを要求するために `--cached-only` フラグを使うことで、更に一歩すすめることも出来ます。
 
 ```shell
 deno run --lock=lock.json --cached-only mod.ts
 ```
 
+<!--
 This will fail if there are any dependencies in the dependency tree for mod.ts
 which are not yet cached.
+-->
+mod.tsの依存関係ツリーがまだキャッシュされいない依存関係がある場合、これは失敗します。
 
 <!-- TODO - Add detail on dynamic imports -->
