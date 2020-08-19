@@ -32,7 +32,7 @@ local or remote. The `options` argument is a set of options of type
 `Deno.CompilerOptions`, which is a subset of the TypeScript compiler options
 containing the ones supported by Deno.
 -->
-これは `deno cache` と同じように動きます、コードを取得、キャッシュして、コンパイルしますが実行はしません。`rootName`, 任意で `sources`, 任意で `options` の3つの引数を取ります。`rootName` はランタイムプログラムを生成するときに使われるルートモジュールです。これは `deno run --reload example.ts` でコマンドラインで渡すのモジュール名と同じです。`sources` はハッシュであり、キーは完全なモジュール名で値はモジュールのテキストソースです。`sources` が渡されたら、Denoはハッシュとすべてのモジュールを解決し、Denoの外部では解決しません。`source` が提供されない場合、Denoはルートモジュールが渡されたかのようにすべてのモジュールを解決します。Dehaリソースのすべてをキャッシュします。すべての解決済みのリソースはダイナミックインポートとして扱われローカルかリモートかによって読み込みまたはネットのパーミッションを要求します。`options` 引数は `Deno.CompilerOptions` 型のオプションのセットで、DenoがサポートするTypeScriptコンパイラオプションのサブセットです。
+これは `deno cache` と同じように動きます、コードを取得、キャッシュして、コンパイルしますが実行はしません。`rootName`、任意で `sources`、任意で `options` の3つの引数を取ります。`rootName` はランタイムプログラムを生成するときに使われるルートモジュールです。これは `deno run --reload example.ts` でコマンドラインで渡すのモジュール名と同じです。`sources` はハッシュであり、キーは完全なモジュール名で値はモジュールのテキストソースです。`sources` が渡されたら、Denoはハッシュとすべてのモジュールを解決し、Denoの外部では解決しません。`source` が提供されない場合、Denoはルートモジュールが渡されたかのようにすべてのモジュールを解決します。Dehaリソースのすべてをキャッシュします。すべての解決済みのリソースはダイナミックインポートとして扱われローカルかリモートかによって読み込みまたはネットのパーミッションを要求します。`options` 引数は `Deno.CompilerOptions` 型のオプションのセットで、DenoがサポートするTypeScriptコンパイラオプションのサブセットです。
 
 <!--
 The method resolves with a tuple. The first argument contains any diagnostics
