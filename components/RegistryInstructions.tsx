@@ -19,7 +19,7 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
 
   // Validity of the module name
   const isModuleNameValid = useMemo(() => VALID_NAME.test(moduleName), [
-    moduleName,
+    moduleName
   ]);
   const { data: isModuleNameAvailable } = useSWR(
     () => (isModuleNameValid ? moduleName : null),
@@ -104,7 +104,8 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                     </button>
                   </div>
                 </Transition>
-                <div className="h-full flex flex-col space-y-4 my-auto px-4 md:px-16 lg:px-24 xl:px-32 bg-white shadow-xl overflow-y-auto">
+                <div
+                  className="h-full flex flex-col space-y-4 my-auto px-4 md:px-16 lg:px-24 xl:px-32 bg-white shadow-xl overflow-y-auto">
                   <div className="my-auto py-10">
                     <header>
                       <h2 className="text-xl leading-7 font-medium text-gray-900">
@@ -136,7 +137,7 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                           <span className="block w-full rounded-md shadow-sm mt-4">
                             <button
                               type="submit"
-                              className="w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
+                              className="w-full flex justify-center py-2 px-4 mt-12 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
                               onClick={() => setStage(1)}
                             >
                               Next
@@ -161,7 +162,7 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                                 isModuleNameAvailable === true
                                   ? "border-green-300 hover:border-green-300 focus:border-green-300"
                                   : !isModuleNameValid ||
-                                    isModuleNameAvailable === false
+                                  isModuleNameAvailable === false
                                   ? "border-red-300 hover:border-red-300 focus:border-red-300"
                                   : ""
                               }`}
@@ -193,7 +194,7 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                             <button
                               type="submit"
                               disabled={!isModuleNameValid ? true : undefined}
-                              className={`w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md ${
+                              className={`w-full flex justify-center py-2 px-4 mt-12 border border-gray-300 text-md font-medium rounded-md ${
                                 isModuleNameValid
                                   ? "text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50"
                                   : "text-gray-400 bg-gray-50 cursor-default"
@@ -251,7 +252,7 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                             <button
                               type="submit"
                               disabled={!isSubdirectoryValid ? true : undefined}
-                              className={`w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md 
+                              className={`w-full flex justify-center py-2 px-4 mt-12 border border-gray-300 text-md font-medium rounded-md 
                               ${
                                 isSubdirectoryValid
                                   ? "text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50"
@@ -290,8 +291,8 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                                 https://api.deno.land/webhook/gh/{moduleName}
                                 {subdirectory
                                   ? `?subdir=${encodeURIComponent(
-                                      subdirectory
-                                    )}`
+                                    subdirectory
+                                  )}`
                                   : ""}
                               </InlineCode>{" "}
                               in the payload URL field.
@@ -337,7 +338,7 @@ function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
                                 </div>
                                 <div className="mt-4 rounded-md shadow-sm">
                                   <button
-                                    className="w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
+                                    className="w-full flex justify-center py-2 px-4 mt-12 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
                                     onClick={props.close}
                                   >
                                     Done
