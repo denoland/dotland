@@ -15,7 +15,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ["Inter var", ...defaultTheme.fontFamily.sans, "Noto Sans JP"],
+        sans: ["Inter var", "Noto Sans JP", ...defaultTheme.fontFamily.sans],
       },
       width: {
         "72": "18rem",
