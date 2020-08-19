@@ -261,11 +261,22 @@ report on the success or failure of each test, the overall test run will always
 fail if any test is flagged with `only`, as this is a temporary measure only
 which disables nearly all of your tests.
 -->
-巨大なテストクラスの中で問題の真っ只中にいてそのテストにだけ集中して残りのテストは無視したい場合があるでしょう。これには `only` オプションを使って、テストフレームワークにこれをtrueにしたもののみテストすることを伝えることが出来ます。オプションには複数のテストを設定できます。テスト実行はそれぞれのテストの成功もしくは失敗を報告しますが、もしどのテストも `only` フラグである場合全体的なテストは常に失敗します。これは一時的な措置であるため、ほぼすべてのテストを無効にするためです。
+巨大なテストクラスの中で問題の真っ只中にいてそのテストにだけ注目して残りのテストは無視したい場合があるでしょう。これには `only` オプションを使って、テストフレームワークにこれをtrueにしたもののみテストすることを伝えることが出来ます。オプションには複数のテストを設定できます。テスト実行はそれぞれのテストの成功もしくは失敗を報告しますが、もしどのテストも `only` フラグである場合全体的なテストは常に失敗します。これは一時的な措置であるため、ほぼすべてのテストを無効にするためです。
 
+<!--
 ```ts
 Deno.test({
   name: "Focus on this test only",
+  only: true,
+  fn() {
+    testComplicatedStuff();
+  },
+});
+```
+-->
+```ts
+Deno.test({
+  name: "このテストだけに注目する",
   only: true,
   fn() {
     testComplicatedStuff();
