@@ -1,10 +1,10 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import { handleRegistryRequest } from "./registry";
+import { handleRegistryRequest } from "./registry.ts";
 
 const REMOTE_URL = "https://deno-website2.now.sh";
 
-export async function handleRequest(request: Request) {
+export async function handleRequest(request: Request): Promise<Response> {
   const accept = request.headers.get("accept");
   const isHtml = accept && accept.indexOf("html") >= 0;
 
@@ -18,8 +18,8 @@ export async function handleRequest(request: Request) {
     return Response.redirect("https://doc.deno.land/builtin/stable", 301);
   }
 
-  const isRegistryRequest =
-    url.pathname.startsWith("/std") || url.pathname.startsWith("/x/");
+  const isRegistryRequest = url.pathname.startsWith("/std") ||
+    url.pathname.startsWith("/x/");
 
   if (isRegistryRequest) {
     if (isHtml) {
@@ -38,7 +38,7 @@ export async function handleRequest(request: Request) {
 const ALT_LINENUMBER_MATCHER = /(.*):(\d+):\d+$/;
 
 export function extractAltLineNumberReference(
-  url: string
+  url: string,
 ): { rest: string; line: number } | null {
   const matches = ALT_LINENUMBER_MATCHER.exec(url);
   if (matches === null) return null;

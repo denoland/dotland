@@ -1,4 +1,4 @@
-import { parseNameVersion } from "../../util/registry_utils";
+import { parseNameVersion } from "./registry_utils.ts";
 
 const S3_BUCKET =
   "http://deno-registry-prod-storagebucket-d7uq3yal946u.s3-website-us-east-1.amazonaws.com/";
@@ -21,16 +21,17 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
         {
           status: 404,
           headers: { "content-type": "text/plain" },
-        }
+        },
       );
     }
     console.log("registry redirect", module, latest);
     return new Response(undefined, {
       headers: {
         Location: `${module === "std" ? "" : "/x"}/${module}@${latest}/${path}`,
-        "x-deno-warning": `Implicitly using latest version (${latest}) for ${
-          url.origin
-        }${module === "std" ? "" : "/x"}/${module}/${path}`,
+        "x-deno-warning":
+          `Implicitly using latest version (${latest}) for ${url.origin}${
+            module === "std" ? "" : "/x"
+          }/${module}/${path}`,
       },
       status: 302,
     });
@@ -40,13 +41,16 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
     return new Response(undefined, {
       headers: {
         Location: `/std@${version.substring(1)}/${path}`,
-        "x-deno-warning": `std versions prefixed with 'v' will be deprecated on October 1st 2020. Please change your import to ${
-          url.origin
-        }${module === "std" ? "" : "/x"}/${module}@${version.substring(
-          1
-        )}/${path} (at ${url.origin}${
-          module === "std" ? "" : "/x"
-        }/${module}@${version}/${path})`,
+        "x-deno-warning":
+          `std versions prefixed with 'v' will be deprecated on October 1st 2020. Please change your import to ${url.origin}${
+            module === "std" ? "" : "/x"
+          }/${module}@${
+            version.substring(
+              1,
+            )
+          }/${path} (at ${url.origin}${
+            module === "std" ? "" : "/x"
+          }/${module}@${version}/${path})`,
       },
       status: 302,
     });
@@ -54,10 +58,9 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
   const remoteUrl = getBackingURL(module, version, path);
   // @ts-ignore
   const resp = await fetch(remoteUrl, { cf: { cacheEverything: true } });
-  const resp2 =
-    resp.status === 403 || resp.status === 404
-      ? new Response("404 Not Found", { status: 404 })
-      : new Response(resp.body, resp);
+  const resp2 = resp.status === 403 || resp.status === 404
+    ? new Response("404 Not Found", { status: 404 })
+    : new Response(resp.body, resp);
 
   // JSX and TSX content type fix
   if (
@@ -77,7 +80,7 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
 }
 
 export function parsePathname(
-  pathname: string
+  pathname: string,
 ): { module: string; version: string | undefined; path: string } | undefined {
   if (pathname.startsWith("/std")) {
     return parsePathname("/x" + pathname);
@@ -97,7 +100,7 @@ export function getBackingURL(module: string, version: string, path: string) {
 }
 
 export async function getLatestVersion(
-  module: string
+  module: string,
 ): Promise<string | undefined> {
   const res = await fetch(`${S3_BUCKET}${module}/meta/versions.json`);
   if (!res.ok) return undefined;

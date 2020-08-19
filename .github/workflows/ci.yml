@@ -27,36 +27,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - run: "curl -fsSL https://deno.land/x/install/install.sh | sh"
+        name: Install Deno
+      - run: "curl -L https://fly.io/install.sh | sh -s prerel"
+        name: "Install flyctl"
+      - run: "/home/runner/.deno/bin/deno fmt --check"
         working-directory: worker
-      - uses: actions/cache@v1
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: worker-${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            worker-${{ runner.os }}-yarn-
-      - run: yarn --frozen-lockfile
-        working-directory: worker
-      - run: yarn format:check
-        working-directory: worker
-      - run: CI=true yarn test
+      - run: "/home/runner/.deno/bin/deno test --allow-net"
         working-directory: worker
       - name: Publish Production
         if: github.ref == 'refs/heads/master' && github.event_name == 'push' && github.repository == 'denoland/deno_website2'
-        uses: cloudflare/wrangler-action@1.1.0
-        with:
-          environment: "production"
-          apiToken: ${{ secrets.cloudflareToken }}
-          workingDirectory: worker
+        run: "/home/runner/.fly/bin/flyctl deploy -a deno-website"
+        working-directory: worker
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
       - name: Publish Staging
-        if: github.event_name == 'push' && github.repository == 'denoland/deno_website2'
-        uses: cloudflare/wrangler-action@1.1.0
-        with:
-          environment: "staging"
-          apiToken: ${{ secrets.cloudflareToken }}
-          workingDirectory: worker
+        if: github.event_name == 'push' && github.repository == 'mrkurt/deno_website2'
+        run: "/home/runner/.fly/bin/flyctl deploy -a deno-website-staging"
+        working-directory: worker
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
