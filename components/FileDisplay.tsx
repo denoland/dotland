@@ -11,6 +11,7 @@ function FileDisplay(props: {
   raw?: string;
   canonicalPath: string;
   sourceURL: string;
+  baseURL: string;
   repositoryURL?: string | null;
   documentationURL?: string | null;
 }) {
@@ -110,6 +111,7 @@ function FileDisplay(props: {
                   source={props.raw!}
                   displayURL={"https://deno.land" + props.canonicalPath}
                   sourceURL={props.sourceURL}
+                  baseURL={"https://deno.land" + props.baseURL}
                 />
               </div>
             );

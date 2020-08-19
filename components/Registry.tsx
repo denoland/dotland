@@ -57,11 +57,13 @@ const Registry = () => {
     }
   }
 
-  // File paths
-  const canonicalPath = useMemo(
-    () => `${isStd ? "" : "/x"}/${name}${version ? `@${version}` : ""}${path}`,
-    [name, version, path]
+  // Base paths
+  const basePath = useMemo(
+    () => `${isStd ? "" : "/x"}/${name}${version ? `@${version}` : ""}`,
+    [name, version]
   );
+  // File paths
+  const canonicalPath = useMemo(() => `${basePath}${path}`, [basePath, path]);
   const sourceURL = useMemo(() => getSourceURL(name, version, path), [
     name,
     version,
@@ -349,6 +351,7 @@ const Registry = () => {
                                 sourceURL={sourceURL}
                                 repositoryURL={repositoryURL}
                                 documentationURL={documentationURL}
+                                baseURL={basePath}
                               />
                             ) : null}
                             {typeof readme === "string" &&
@@ -359,6 +362,7 @@ const Registry = () => {
                                 canonicalPath={readmeCanonicalPath}
                                 sourceURL={readmeURL}
                                 repositoryURL={readmeRepositoryURL}
+                                baseURL={basePath}
                               />
                             ) : null}
                           </div>

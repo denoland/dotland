@@ -42,6 +42,7 @@ interface MarkdownProps {
   source: string;
   displayURL: string;
   sourceURL: string;
+  baseURL: string;
 }
 
 function Markdown(props: MarkdownProps) {
@@ -63,87 +64,103 @@ function Markdown(props: MarkdownProps) {
     return null;
   }
 
-  marked.use({
-    renderer: ({
-      heading(text: string, level: number) {
-        const slug = slugify(text);
-        return `
+  try {
+    marked.use({
+      renderer: ({
+        heading(text: string, level: number) {
+          const slug = slugify(text);
+          return `
           <h${level}>
             <a name="${slug}" class="anchor" href="#${slug}">
               <span class="octicon-link"></span>
             </a>
             ${text}
           </h${level}>`;
-      },
-      link(href, title, text) {
-        const url = href ? transformLinkUri(props.displayURL)(href) : "";
-        return `<a ${url ? `href="${url}"` : ""} ${
-          title ? `title="${title}"` : ""
-        }>${text}</a>`;
-      },
-      image(href, title, text) {
-        const url = href ? transformImageUri(props.sourceURL)(href) : "";
-        return `<img ${url ? `src="${url}"` : ""} ${
-          text ? `alt="${text}"` : ""
-        } ${title ? `title="${title}"` : ""} style="max-width:100%;">`;
-      },
-      html(html: string) {
-        const images: RegExpMatchArray[] = [...html.matchAll(/src="([^"]*)"/g)];
-        images.forEach((a) => {
-          const original = a[1];
-          const final = transformImageUri(props.sourceURL)(original);
-          console.log(original, final);
-          html = html.replace(`src="${original}"`, `src="${final}"`);
-        });
-        const links: RegExpMatchArray[] = [...html.matchAll(/href="([^"]*)"/g)];
-        links.forEach((a) => {
-          const original = a[1];
-          const final = transformLinkUri(props.displayURL)(original);
-          console.log(original, final);
-          html = html.replace(`href="${original}"`, `href="${final}"`);
-        });
-        return html;
-      },
-      text(text) {
-        return replaceEmojis(text);
-      },
-    } as Partial<Renderer>) as any,
-  });
+        },
+        link(href, title, text) {
+          const url = href
+            ? transformLinkUri(props.displayURL, props.baseURL)(href)
+            : "";
+          return `<a ${url ? `href="${url}"` : ""} ${
+            title ? `title="${title}"` : ""
+          }>${text}</a>`;
+        },
+        image(href, title, text) {
+          const url = href ? transformImageUri(props.sourceURL)(href) : "";
+          return `<img ${url ? `src="${url}"` : ""} ${
+            text ? `alt="${text}"` : ""
+          } ${title ? `title="${title}"` : ""} style="max-width:100%;">`;
+        },
+        html(html: string) {
+          const images: RegExpMatchArray[] = [
+            ...html.matchAll(/src="([^"]*)"/g),
+          ];
+          images.forEach((a) => {
+            const original = a[1];
+            const final = transformImageUri(props.sourceURL)(original);
+            console.log(original, final);
+            html = html.replace(`src="${original}"`, `src="${final}"`);
+          });
+          const links: RegExpMatchArray[] = [
+            ...html.matchAll(/href="([^"]*)"/g),
+          ];
+          links.forEach((a) => {
+            const original = a[1];
+            const final = transformLinkUri(
+              props.displayURL,
+              props.baseURL
+            )(original);
+            console.log(original, final);
+            html = html.replace(`href="${original}"`, `href="${final}"`);
+          });
+          return html;
+        },
+        text(text) {
+          return replaceEmojis(text);
+        },
+      } as Partial<Renderer>) as any,
+    });
 
-  const raw = marked(props.source, {
-    gfm: true,
-    headerIds: true,
-    sanitizer: dompurify.sanitize,
-    highlight: (code, language) =>
-      renderToStaticMarkup(
-        <RawCodeBlock
-          code={code}
-          language={language as any}
-          disablePrefixes={true}
-          enableLineRef={false}
-        />
-      ),
-  });
-
-  return (
-    <div
-      dangerouslySetInnerHTML={{ __html: raw }}
-      className="markdown py-8 px-4"
-    />
-  );
+    const raw = marked(props.source, {
+      gfm: true,
+      headerIds: true,
+      sanitizer: dompurify.sanitize,
+      highlight: (code, language) =>
+        renderToStaticMarkup(
+          <RawCodeBlock
+            code={code}
+            language={language as any}
+            disablePrefixes={true}
+            enableLineRef={false}
+          />
+        ),
+    });
+    return (
+      <div
+        dangerouslySetInnerHTML={{ __html: raw }}
+        className="markdown py-8 px-4"
+      />
+    );
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
 }
 
-function transformLinkUri(displayURL: string) {
+function transformLinkUri(displayURL: string, baseURL: string) {
   return (uri: string) => {
     let href = uri;
 
     // If the URL is relative, it should be relative to the canonical URL of the file.
-    if (href !== undefined && isRelative(href)) {
+    if (isRelative(href)) {
       // https://github.com/denoland/deno_website2/issues/1047
       href = decodeURIComponent(relativeToAbsolute(displayURL, href));
     }
+    if (href.startsWith("/") && !href.startsWith("//")) {
+      href = `${baseURL}${href}`;
+    }
 
-    const hrefURL = href ? new URL(href) : undefined;
+    const hrefURL = new URL(href);
 
     // Manual links should not have trailing .md
     if (
