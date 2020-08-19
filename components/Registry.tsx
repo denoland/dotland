@@ -18,6 +18,9 @@ import {
   findRootReadme,
   Module,
   getModule,
+  VersionDeps,
+  getVersionDeps,
+  listExternalDependencies,
 } from "../util/registry_utils";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -33,6 +36,9 @@ const Registry = () => {
     VersionMetaInfo | null | undefined
   >();
   const [moduleMeta, setModuleMeta] = useState<Module | null | undefined>();
+  const [versionDeps, setVersionDeps] = useState<
+    VersionDeps | null | undefined
+  >();
   const [raw, setRaw] = useState<string | null | undefined>();
   const [readme, setReadme] = useState<string | null | undefined>();
 
@@ -131,6 +137,23 @@ const Registry = () => {
           });
       } else {
         setVersionMeta(null);
+      }
+    }
+  }, [name, version]);
+
+  // Fetch version dependency information
+  useEffect(() => {
+    setVersionDeps(undefined);
+    if (version) {
+      if (name) {
+        getVersionDeps(name, version)
+          .then(setVersionDeps)
+          .catch((e) => {
+            console.error("Failed to fetch dependency information:", e);
+            setVersionDeps(null);
+          });
+      } else {
+        setVersionDeps(null);
       }
     }
   }, [name, version]);
@@ -240,6 +263,17 @@ const Registry = () => {
       }
     }
   }, [readmeURL, versionMeta, version, path]);
+
+  const { /*dependencyEntrypoint, */ externalDependencies } = useMemo(() => {
+    const dependencyEntrypoint = `https://deno.land/x/${name}@${version}${path}`;
+    const externalDependencies =
+      versionDeps === undefined
+        ? undefined
+        : versionDeps === null
+        ? null
+        : listExternalDependencies(versionDeps.graph, dependencyEntrypoint);
+    return { dependencyEntrypoint, externalDependencies };
+  }, [versionDeps, name, version, path]);
 
   return (
     <>
@@ -370,7 +404,7 @@ const Registry = () => {
                       }
                     })()}
                   </div>
-                  <div className="col-span-1 row-start-1 md:row-start-auto">
+                  <div className="col-span-1 row-start-1 md:row-start-auto flex flex-col sm:flex-row md:flex-col gap-4">
                     <div className="max-w-sm w-full shadow-sm rounded-lg border border-gray-200 overflow-hidden">
                       <div className="bg-gray-50 border-b border-gray-200 p-4">
                         <div className="text-xl font-bold">{name}</div>
@@ -385,6 +419,7 @@ const Registry = () => {
                                 fill="currentColor"
                                 viewBox="0 0 24 24"
                               >
+                                <title>GitHub Repository</title>
                                 <path
                                   fillRule="evenodd"
                                   d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
@@ -399,6 +434,7 @@ const Registry = () => {
                                 fill="currentColor"
                                 viewBox="0 0 20 20"
                               >
+                                <title>GitHub Stars</title>
                                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                               </svg>
                               <div className="w-1/6 sm:w-1/5 bg-gray-100 h-4"></div>
@@ -416,6 +452,7 @@ const Registry = () => {
                                 fill="currentColor"
                                 viewBox="0 0 24 24"
                               >
+                                <title>GitHub Repository</title>
                                 <path
                                   fillRule="evenodd"
                                   d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
@@ -435,6 +472,7 @@ const Registry = () => {
                                 fill="currentColor"
                                 viewBox="0 0 20 20"
                               >
+                                <title>GitHub Stars</title>
                                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                               </svg>
                               <div>{moduleMeta.star_count}</div>
@@ -450,6 +488,69 @@ const Registry = () => {
                         </div>
                       </div>
                     </div>
+                    {documentationURL && externalDependencies !== null ? (
+                      <div className="max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4">
+                        <p className="text-md font-semibold mb-2">
+                          External Dependencies
+                        </p>
+                        {externalDependencies === undefined ? (
+                          <>
+                            <div className="w-3/4 sm:w-2/3 bg-gray-100 h-3 mt-1"></div>
+                            <div className="w-5/6 sm:w-4/5 bg-gray-100 h-3 mt-1"></div>
+                            <div className="w-5/6 sm:w-4/5 bg-gray-100 h-3 mt-1"></div>
+                          </>
+                        ) : externalDependencies === null ? null : (
+                          <>
+                            <div className="mt-2">
+                              {externalDependencies.map((url) => (
+                                <p key={url}>
+                                  {url.startsWith("https://deno.land/std") ? (
+                                    <Link
+                                      href="/[...rest]"
+                                      as={url.replace("https://deno.land", "")}
+                                    >
+                                      <a
+                                        href={url}
+                                        className="link text-sm truncate"
+                                      >
+                                        {url}
+                                      </a>
+                                    </Link>
+                                  ) : url.startsWith("https://deno.land/x/") ? (
+                                    <Link
+                                      href="/x/[...rest]"
+                                      as={url.replace("https://deno.land", "")}
+                                    >
+                                      <a
+                                        href={url}
+                                        className="link text-sm truncate"
+                                      >
+                                        {url}
+                                      </a>
+                                    </Link>
+                                  ) : (
+                                    <a
+                                      href={url}
+                                      className="link text-sm truncate"
+                                    >
+                                      {url}
+                                    </a>
+                                  )}
+                                </p>
+                              ))}
+                            </div>
+                            <div className="text-sm mt-2 italic">
+                              {externalDependencies.length === 0
+                                ? "No external dependencies 🎉"
+                                : externalDependencies.length +
+                                  (externalDependencies.length === 1
+                                    ? " external dependency"
+                                    : " external dependencies")}
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               );
