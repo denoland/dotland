@@ -33,11 +33,7 @@ function relativeToAbsolute(base: string, relative: string): string {
   baseURL.search = "";
   baseURL.hash = "";
   const parts = baseURL.pathname.split("/");
-  if (relative.charAt(0) === "#") {
-    baseURL.hash = relative;
-  } else {
-    parts[parts.length - 1] = relative;
-  }
+  parts[parts.length - 1] = relative;
   baseURL.pathname = parts.join("/");
   return baseURL.href;
 }
@@ -69,8 +65,8 @@ function Markdown(props: MarkdownProps) {
 
   marked.use({
     renderer: ({
-      heading(text: string, level: number, raw: string) {
-        const slug = slugify(raw);
+      heading(text: string, level: number) {
+        const slug = slugify(text);
         return `
           <h${level}>
             <a name="${slug}" class="anchor" href="#${slug}">
