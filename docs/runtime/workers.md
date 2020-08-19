@@ -27,11 +27,22 @@ specifier for some nearby script.
 -->
 相対的なモジュールは現在 [サポートされていません](https://github.com/denoland/deno/issues/5216)。代わりに `URL` コンストラクタと `import.meta.url` を使って簡単にスクリプトの指定子を作ることが出来ます。
 
+<!--
 ```ts
 // Good
 new Worker(new URL("worker.js", import.meta.url).href, { type: "module" });
 
 // Bad
+new Worker(new URL("worker.js", import.meta.url).href);
+new Worker(new URL("worker.js", import.meta.url).href, { type: "classic" });
+new Worker("./worker.js", { type: "module" });
+```
+-->
+```ts
+// 良い例
+new Worker(new URL("worker.js", import.meta.url).href, { type: "module" });
+
+// 悪い例
 new Worker(new URL("worker.js", import.meta.url).href);
 new Worker(new URL("worker.js", import.meta.url).href, { type: "classic" });
 new Worker("./worker.js", { type: "module" });
