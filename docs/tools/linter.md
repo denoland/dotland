@@ -93,11 +93,28 @@ function foo(): any {
 <!-- Ignore directive must be placed before first stament or declaration: -->
 Ignore directiveは文や宣言の前に置く必要があります:
 
+<!--
 ```ts
 // Copyright 2020 the Deno authors. All rights reserved. MIT license.
 
 /**
  * Some JS doc
+ **/
+
+// deno-lint-ignore-file
+
+import { bar } from "./bar.js";
+
+function foo(): any {
+  // ...
+}
+```
+-->
+```ts
+// Copyright 2020 the Deno authors. All rights reserved. MIT license.
+
+/**
+ * なにかJSDoc
  **/
 
 // deno-lint-ignore-file
