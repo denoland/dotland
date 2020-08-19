@@ -68,10 +68,22 @@ Example:
 
 <!-- dprint-ignore -->
 
+<!--
 ```ts
 // https://example.com/awesome/cli.ts
 async function myAwesomeCli(): Promise<void> {
   -- snip --
+}
+
+if (import.meta.main) {
+  myAwesomeCli();
+}
+```
+-->
+```ts
+// https://example.com/awesome/cli.ts
+async function myAwesomeCli(): Promise<void> {
+  -- 省略 --
 }
 
 if (import.meta.main) {
