@@ -6,6 +6,7 @@
 <!-- Example: -->
 例:
 
+<!--
 ```ts
 // create subprocess
 const p = Deno.run({
@@ -13,6 +14,16 @@ const p = Deno.run({
 });
 
 // await its completion
+await p.status();
+```
+-->
+```ts
+// サブプロセスの作成
+const p = Deno.run({
+  cmd: ["echo", "hello"],
+});
+
+// 完了を待つ
 await p.status();
 ```
 
