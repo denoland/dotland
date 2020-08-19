@@ -34,6 +34,7 @@ In this example the `add` and `multiply` functions are imported from a local
 
 **Command:** `deno run local.ts`
 
+<!--
 ```ts
 import { add, multiply } from "./arithmetic.ts";
 
@@ -46,6 +47,24 @@ console.log(totalCost(45, 27, 1.15));
 
 /**
  * Output
+ *
+ * 60
+ * 82.8
+ */
+```
+-->
+```ts
+import { add, multiply } from "./arithmetic.ts";
+
+function totalCost(outbound: number, inbound: number, tax: number): number {
+  return multiply(add(outbound, inbound), tax);
+}
+
+console.log(totalCost(19, 31, 1.2));
+console.log(totalCost(45, 27, 1.15));
+
+/**
+ * 出力
  *
  * 60
  * 82.8
@@ -111,6 +130,7 @@ no problem handling this.
 
 **Command:** `deno run ./remote.ts`
 
+<!--
 ```ts
 import {
   add,
@@ -126,6 +146,27 @@ console.log(totalCost(45, 27, 1.15));
 
 /**
  * Output
+ *
+ * 60
+ * 82.8
+ */
+```
+-->
+```ts
+import {
+  add,
+  multiply,
+} from "https://x.nest.land/ramda@0.27.0/source/index.js";
+
+function totalCost(outbound: number, inbound: number, tax: number): number {
+  return multiply(add(outbound, inbound), tax);
+}
+
+console.log(totalCost(19, 31, 1.2));
+console.log(totalCost(45, 27, 1.15));
+
+/**
+ * 出力
  *
  * 60
  * 82.8
