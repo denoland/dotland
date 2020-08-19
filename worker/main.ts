@@ -13,8 +13,17 @@ async function proxyRequest(sreq: ServerRequest): Promise<void> {
     hostname = "deno.land";
   }
   const url = `https://${hostname}${sreq.url}`;
-  const req = new Request(url, { method: sreq.method, headers: sreq.headers });
-  const resp = await handleRequest(req);
+  let resp: Response;
+
+  if (sreq.headers.get("X-Forwarded-Proto") === "http") {
+    resp = Response.redirect(url, 301);
+  } else {
+    const req = new Request(
+      url,
+      { method: sreq.method, headers: sreq.headers },
+    );
+    resp = await handleRequest(req);
+  }
   const headers = resp.headers;
   let body = await resp.arrayBuffer(); // TODO: make streaming body work
 
