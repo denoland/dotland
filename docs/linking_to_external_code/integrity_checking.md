@@ -48,8 +48,14 @@ A typical workflow will look like this:
 
 **src/deps.ts**
 
+<!--
 ```ts
 // Add a new dependency to "src/deps.ts", used somewhere else.
+export { xyz } from "https://unpkg.com/xyz-lib@v0.9.0/lib.ts";
+```
+-->
+```ts
+// "src/deps.ts" から新しい依存関係を追加し、他で使用します。
 export { xyz } from "https://unpkg.com/xyz-lib@v0.9.0/lib.ts";
 ```
 
