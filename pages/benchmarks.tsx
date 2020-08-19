@@ -91,7 +91,8 @@ const Benchmarks = () => {
     <>
       <Head>
         <title>
-          Benchmarks {dataRangeTitle ? `(${dataRangeTitle})` : `| Deno`}
+          {/* Benchmarks {dataRangeTitle ? `(${dataRangeTitle})` : `| Deno`} */}
+          ベンチマーク {dataRangeTitle ? `(${dataRangeTitle})` : `| Deno`}
         </title>
       </Head>
       <CookieBanner />
@@ -102,11 +103,17 @@ const Benchmarks = () => {
             <img src="/images/deno_logo_4.gif" className="mb-12 w-32 h-32" />
             <h4 className="text-2xl font-bold tracking-tight">About</h4>
             <p className="mt-4">
+              {/*
               As part of Deno's continuous integration and testing pipeline we
               measure the performance of certain key metrics of the runtime. You
               can view these benchmarks here.
+              */}
+              Denoの継続的インテグレーションとパイプラインのテストの一環として、
+              ランタイムの特定の主要なメトリクスのパフォーマンスを測定しています。
+              これらのベンチマークはここで見ることができます。
             </p>
             <p className="mt-4">
+              {/*
               You are currently viewing data for{" "}
               {showAll ? "all" : "the most recent"} commits to the{" "}
               <a href="https://github.com/denoland/deno">master</a>
@@ -118,14 +125,30 @@ const Benchmarks = () => {
                 <a className="link">{!showAll ? "all" : "the most recent"}</a>
               </Link>{" "}
               commits.
+              */}
+              現在
+              <a href="https://github.com/denoland/deno">master</a>
+              ブランチの{showAll ? "全て" : "最近"}のコミットを見ています。
+              また、
+              <Link
+                href="/benchmarks"
+                as={!showAll ? "/benchmarks?all" : "/benchmarks"}
+              >
+                <a className="link">{!showAll ? "全て" : "最近"}</a>
+              </Link>
+              のコミットを見ることが出来ます。
             </p>
             <div className="mt-12 pt-4">
               <h4 className="text-2xl font-bold tracking-tight">
-                Runtime Metrics
+                {/* Runtime Metrics */}
+                ランタイムメトリクス
               </h4>
               <p className="mt-2">
+                {/*
                 In this section we measure various metrics of the following
                 scripts:
+                */}
+                このセクションでは次のスクリプトの様々なメトリクスを測定しています:
               </p>
               <ul className="ml-8 list-disc my-2">
                 <li>
@@ -171,7 +194,8 @@ const Benchmarks = () => {
               <div className="mt-8">
                 <a href="#execution-time" id="execution-time">
                   <h5 className="text-lg font-medium tracking-tight hover:underline">
-                    Execution time
+                    {/* Execution time */}
+                    実行時間
                   </h5>
                 </a>
                 <BenchmarkOrLoading
@@ -183,18 +207,26 @@ const Benchmarks = () => {
                   yTickFormat={formatLogScale}
                 />
                 <p className="mt-1">
+                  {/*
                   Log scale. This shows how much time total it takes to run a
                   script. For deno to execute typescript, it must first compile
                   it to JS. A warm startup is when deno has a cached JS output
                   already, so it should be fast because it bypasses the TS
                   compiler. A cold startup is when deno must compile from
                   scratch.
+                  */}
+                  ログスケール。スクリプトの実行時間にどのくらいかかったを表しています。
+                  TypeScriptを実行するDenoは、必ずはじめにJSにコンパイルします。
+                  フォームスタートアップとはdenoがJS出力のキャッシュをすでに持っているので
+                  TSコンパイラをバイパスすることで高速に動作する場合です。
+                  コールドスタートアップとは、スクラッチからコンパイルしないといけない場合です。
                 </p>
               </div>
               <div className="mt-8">
                 <a href="#thread-count" id="thread-count">
                   <h5 className="text-lg font-medium tracking-tight hover:underline">
-                    Thread count
+                    {/* Thread count */}
+                    スレッドカウント
                   </h5>
                 </a>
                 <BenchmarkOrLoading
@@ -204,13 +236,15 @@ const Benchmarks = () => {
                   )}
                 />
                 <p className="mt-1">
-                  How many threads various programs use. Smaller is better.
+                  {/* How many threads various programs use. Smaller is better. */}
+                  様々なプログラムが使うスレッドの数。小さい方が良いです。
                 </p>
               </div>
               <div className="mt-8">
                 <a href="#syscall-count" id="syscall-count">
                   <h5 className="text-lg font-medium tracking-tight hover:underline">
-                    Syscall count
+                    {/* Syscall count */}
+                    Syscallカウント
                   </h5>
                 </a>{" "}
                 <BenchmarkOrLoading
@@ -220,14 +254,18 @@ const Benchmarks = () => {
                   )}
                 />
                 <p className="mt-1">
+                  {/*
                   How many total syscalls are performed when executing a given
                   script. Smaller is better.
+                  */}
+                  与えられたスクリプトを実行するときに実行される全てのsyscallの数。小さい方が良いです。
                 </p>
               </div>
               <div className="mt-8">
                 <a href="#max-memory-usage" id="max-memory-usage">
                   <h5 className="text-lg font-medium tracking-tight hover:underline">
-                    Max memory usage
+                    {/* Max memory usage */}
+                    最大メモリ使用量
                   </h5>
                 </a>{" "}
                 <BenchmarkOrLoading
@@ -239,18 +277,21 @@ const Benchmarks = () => {
                   yTickFormat={formatMB}
                 />
                 <p className="mt-1">
-                  Max memory usage during execution. Smaller is better.
+                  {/* Max memory usage during execution. Smaller is better. */}
+                  実行中の最大メモリ使用量。小さい方が良いです。
                 </p>
               </div>
             </div>
             <div className="mt-20">
               <h4 className="text-2xl font-bold tracking-tight">
-                TypeScript Performance
+                {/* TypeScript Performance */}
+                TypeScriptパフォーマンス
               </h4>
               <div className="mt-8">
                 <a href="#type-checking" id="type-checking">
                   <h5 className="text-lg font-medium tracking-tight hover:underline">
-                    Type Checking
+                    {/* Type Checking */}
+                    型チェック
                   </h5>
                 </a>
                 <BenchmarkOrLoading
@@ -263,11 +304,19 @@ const Benchmarks = () => {
                   yTickFormat={formatFloat}
                 />
                 <p className="mt-1">
+                  {/*
                   In both cases, <code>std/examples/chat/server_test.ts</code>{" "}
                   is cached by Deno. The workload contains 20 unique TypeScript
                   modules. With <em>check</em> a full TypeScript type check is
                   performed, while <em>no_check</em> uses the{" "}
                   <code>--no-check</code> flag to skip a full type check.
+                  */}
+                  どちらの場合も、<code>std/examples/chat/server_test.ts</code>{" "}
+                  はDenoによってキャッシュされています。ワークロードには20個のユニークな
+                  TypeScriptモジュールが含まれています。<em>check</em>では完全な
+                  TypeScriptの型チェックが行われ、<em>no_check</em>
+                  では完全な形チェックをスキップするため<code>--no-check</code>
+                  フラグが使われます。
                 </p>
               </div>
             </div>
@@ -293,13 +342,15 @@ const Benchmarks = () => {
                   ></span>
                 </span>
                 <span className="ml-2 text-gray-900">
-                  Show normalized benchmarks
+                  {/* Show normalized benchmarks */}
+                  正規化されたベンチマークを表示
                 </span>
               </p>
               <div className="mt-8">
                 <a href="#http-server-throughput" id="http-server-throughput">
                   <h5 className="text-lg font-medium tracking-tight hover:underline">
-                    HTTP Server Throughput
+                    {/* HTTP Server Throughput */}
+                    HTTPサーバースループット
                   </h5>
                 </a>
                 <BenchmarkOrLoading
@@ -313,24 +364,43 @@ const Benchmarks = () => {
                   yTickFormat={showNormalized ? formatPercentage : formatReqSec}
                 />
                 <p className="mt-1">
+                  {/*
                   Tests HTTP server performance. 10 keep-alive connections do as
                   many hello-world requests as possible. Bigger is better.
+                  */}
+                  HTTPサーバーのパフォーマンスのテスト。10個のkeep-aliveコネクションが最大数のhello-worldリクエストを送ります。大きいほうが良いです。
                 </p>
                 <ul className="ml-8 list-disc my-2">
                   <li>
+                    {/*
                     <SourceLink path="tools/deno_tcp.ts" name="deno_tcp" /> is a
                     fake http server that doesn't parse HTTP. It is comparable
                     to <SourceLink path="tools/node_tcp.js" name="node_tcp" />
+                    */}
+                    <SourceLink path="tools/deno_tcp.ts" name="deno_tcp" />{" "}
+                    はHTTPをパースしないフェイクhttpサーバーです。これは{" "}
+                    <SourceLink path="tools/node_tcp.js" name="node_tcp" />{" "}
+                    にあたります。
                   </li>
                   <li>
+                    {/*
                     <SourceLink
                       path="std/http/http_bench.ts"
                       name="deno_http"
                     />{" "}
                     is a web server written in TypeScript. It is comparable to{" "}
                     <SourceLink path="tools/node_http.js" name="node_http" />
+                    */}
+                    <SourceLink
+                      path="std/http/http_bench.ts"
+                      name="deno_http"
+                    />{" "}
+                    はTypeScriptで書かれたwebサーバーです。これは{" "}
+                    <SourceLink path="tools/node_http.js" name="node_http" />{" "}
+                    にあたります。
                   </li>
                   <li className="break-words">
+                    {/*
                     deno_core_single and deno_core_multi are two versions of a
                     minimal fake HTTP server. It blindly reads and writes fixed
                     HTTP packets. It is comparable to deno_tcp and node_tcp.
@@ -366,20 +436,64 @@ const Benchmarks = () => {
                       tokio::runtime::Builder::threaded_scheduler
                     </a>
                     .
+                    */}
+                    deno_core_singleとdeno_core_multiは
+                    最小のフェイクHTTPサーバーの2つのバージョンです。
+                    固有のHTTPパケットをむやみに読み込み書き込みます。
+                    deno_tcpとnode_tcpにあたります。これは{" "}
+                    <a
+                      className="link"
+                      href="https://crates.io/crates/deno_core"
+                    >
+                      denoのrustクレート
+                    </a>{" "}
+                    を使っていてスタンドアローンで実行可能です。 コードは{" "}
+                    <SourceLink
+                      path="core/examples/http_bench.rs"
+                      name="http_bench.rs"
+                    />{" "}
+                    と{" "}
+                    <SourceLink
+                      path="core/examples/http_bench.js"
+                      name="http_bench.js"
+                    />{" "}
+                    にあります。シングルは{" "}
+                    <a
+                      className="link"
+                      href="https://docs.rs/tokio/latest/tokio/runtime/struct.Builder.html#method.basic_scheduler"
+                    >
+                      tokio::runtime::Builder::basic_scheduler
+                    </a>{" "}
+                    を使い、マルチでは{" "}
+                    <a
+                      className="link"
+                      href="https://docs.rs/tokio/latest/tokio/runtime/struct.Builder.html#method.threaded_scheduler"
+                    >
+                      tokio::runtime::Builder::threaded_scheduler
+                    </a>{" "}
+                    を使います
                   </li>
                   <li>
+                    {/*
                     <SourceLink
                       path="tools/hyper_hello/hyper_hello.rs"
                       name="hyper"
                     />{" "}
                     is a Rust HTTP server and represents an upper bound.
+                    */}
+                    <SourceLink
+                      path="tools/hyper_hello/hyper_hello.rs"
+                      name="hyper"
+                    />{" "}
+                    はRust HTTPサーバーであり、上限を示しています。
                   </li>
                 </ul>
               </div>
               <div className="mt-8">
                 <a href="#http-latency" id="http-latency">
                   <h5 className="text-lg font-medium tracking-tight hover:underline">
-                    HTTP Latency
+                    {/* HTTP Latency */}
+                    HTTPレイテンシー
                   </h5>
                 </a>{" "}
                 <BenchmarkOrLoading
@@ -389,14 +503,20 @@ const Benchmarks = () => {
                   yTickFormat={formatLogScale}
                 />
                 <p className="mt-1">
+                  {/*
                   Max latency during the same test used above for
                   requests/second. Smaller is better. Log scale.
+                  */}
+                  上記の リクエスト/秒
+                  と同じテストを使ったときの最大レイテンシー。
+                  小さい方が良いです。ログスケール。
                 </p>
               </div>
               <div className="mt-8">
                 <a href="#http-proxy-throughput" id="http-proxy-throughput">
                   <h5 className="text-lg font-medium tracking-tight hover:underline">
-                    HTTP Proxy Throughput
+                    {/* HTTP Proxy Throughput */}
+                    HTTPプロキシスループット
                   </h5>
                 </a>
                 <BenchmarkOrLoading
@@ -408,11 +528,15 @@ const Benchmarks = () => {
                   yTickFormat={showNormalized ? formatPercentage : formatReqSec}
                 />
                 <p className="mt-1">
+                  {/*
                   Tests proxy performance. 10 keep-alive connections do as many
                   hello-world requests as possible. Bigger is better.
+                  */}
+                  プロキシパフォーマンスのテスト。10個のkeep-aliveコネクションが最大数のhello-worldリクエストを送ります。大きいほうが良いです。
                 </p>
                 <ul className="ml-8 list-disc my-2">
                   <li>
+                    {/*
                     <SourceLink
                       path="tools/deno_tcp_proxy.ts"
                       name="deno_proxy_tcp"
@@ -423,8 +547,20 @@ const Benchmarks = () => {
                       path="tools/node_tcp_proxy.js"
                       name="node_proxy_tcp"
                     />
+                    */}
+                    <SourceLink
+                      path="tools/deno_tcp_proxy.ts"
+                      name="deno_proxy_tcp"
+                    />{" "}
+                    はHTTPをパースしないフェイクtcpプロキシサーバーです。これは{" "}
+                    <SourceLink
+                      path="tools/node_tcp_proxy.js"
+                      name="node_proxy_tcp"
+                    />{" "}
+                    にあたります。
                   </li>
                   <li>
+                    {/*
                     <SourceLink
                       path="tools/deno_http_proxy.ts"
                       name="deno_proxy"
@@ -435,21 +571,41 @@ const Benchmarks = () => {
                       path="tools/node_http_proxy.js"
                       name="node_proxy"
                     />
+                    */}
+                    <SourceLink
+                      path="tools/deno_http_proxy.ts"
+                      name="deno_proxy"
+                    />{" "}
+                    はTypeScriptで書かれたHTTPサーバーです。これは{" "}
+                    <SourceLink
+                      path="tools/node_http_proxy.js"
+                      name="node_proxy"
+                    />{" "}
+                    にあたります。
                   </li>
                   <li>
+                    {/*
                     <SourceLink
                       path="tools/hyper_hello/hyper_hello.rs"
                       name="hyper"
                     />{" "}
                     is a Rust HTTP server used as the origin for the proxy
                     tests.
+                    */}
+                    <SourceLink
+                      path="tools/hyper_hello/hyper_hello.rs"
+                      name="hyper"
+                    />{" "}
+                    はプロキシテストのオリジンとして使われるRust
+                    HTTPサーバーです。
                   </li>
                 </ul>
               </div>
               <div className="mt-8">
                 <a href="#throughput" id="throughput">
                   <h5 className="text-lg font-medium tracking-tight hover:underline">
-                    Throughput
+                    {/* Throughput */}
+                    スループット
                   </h5>
                 </a>
                 <BenchmarkOrLoading
@@ -459,6 +615,7 @@ const Benchmarks = () => {
                   yTickFormat={formatLogScale}
                 />
                 <p className="mt-1">
+                  {/*
                   Log scale. Time it takes to pipe a certain amount of data
                   through Deno.{" "}
                   <SourceLink
@@ -467,6 +624,14 @@ const Benchmarks = () => {
                   />{" "}
                   and <SourceLink path="cli/tests/cat.ts" name="cat.ts" />.
                   Smaller is better.
+                  */}
+                  ログスケール。一定量のデータをDenoにパイプするのにかかる時間{" "}
+                  <SourceLink
+                    path="cli/tests/echo_server.ts"
+                    name="echo_server.ts"
+                  />{" "}
+                  と <SourceLink path="cli/tests/cat.ts" name="cat.ts" /> です。
+                  小さい方が良いです。
                 </p>
               </div>
             </div>
@@ -475,7 +640,8 @@ const Benchmarks = () => {
               <div className="mt-8">
                 <a href="#executable-size" id="executable-size">
                   <h5 className="text-lg font-medium tracking-tight hover:underline">
-                    Executable size
+                    {/* Executable size */}
+                    実行可能ファイルサイズ
                   </h5>
                 </a>
                 <BenchmarkOrLoading
@@ -485,13 +651,15 @@ const Benchmarks = () => {
                   yTickFormat={formatMB}
                 />
                 <p className="mt-1">
-                  Deno ships only a single binary. We track its size here.
+                  {/* Deno ships only a single binary. We track its size here. */}
+                  Denoは一つのバイナリで実行可能です。そのサイズを追跡します。
                 </p>
               </div>
               <div className="mt-8">
                 <a href="#bundle-size" id="bundle-size">
                   <h5 className="text-lg font-medium tracking-tight hover:underline">
-                    Bundle size
+                    {/* Bundle size */}
+                    バンドルサイズ
                   </h5>
                 </a>{" "}
                 <BenchmarkOrLoading
@@ -500,7 +668,10 @@ const Benchmarks = () => {
                   yLabel={"kilobytes"}
                   yTickFormat={formatKB}
                 />
-                <p className="mt-1">Size of different bundled scripts.</p>
+                <p className="mt-1">
+                  {/* Size of different bundled scripts. */}
+                  異なるバンドルされたスクリプトのサイズ。
+                </p>
                 <ul className="ml-8 list-disc my-2">
                   <li>
                     <Link href="/[...rest]" as="/std/http/file_server.ts">
