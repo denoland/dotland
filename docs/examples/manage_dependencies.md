@@ -27,9 +27,20 @@ managed in a separate `dev_deps.ts` file.
 
 **deps.ts example**
 
+<!--
 ```ts
 /**
  * deps.ts re-exports the required methods from the remote Ramda module.
+ **/
+export {
+  add,
+  multiply,
+} from "https://x.nest.land/ramda@0.27.0/source/index.js";
+```
+-->
+```ts
+/**
+ * deps.ts Ramdaモジュールから必要なメソッドを再エクスポートします。
  **/
 export {
   add,
@@ -47,6 +58,7 @@ local `deps.ts` module.
 
 **Command:** `deno run dependencies.ts`
 
+<!--
 ```ts
 import {
   add,
@@ -62,6 +74,27 @@ console.log(totalCost(45, 27, 1.15));
 
 /**
  * Output
+ *
+ * 60
+ * 82.8
+ */
+```
+-->
+```ts
+import {
+  add,
+  multiply,
+} from "./deps.ts";
+
+function totalCost(outbound: number, inbound: number, tax: number): number {
+  return multiply(add(outbound, inbound), tax);
+}
+
+console.log(totalCost(19, 31, 1.2));
+console.log(totalCost(45, 27, 1.15));
+
+/**
+ * 出力
  *
  * 60
  * 82.8
