@@ -52,6 +52,7 @@ console.log(Deno.resources());
 └──────────────────┴────────┘
 ```
 
-### Schematic diagram
+<!-- ### Schematic diagram -->
+### 概要図
 
 ![architectural schematic](https://deno.land/images/schematic_v0.2.png)
