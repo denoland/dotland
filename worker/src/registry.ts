@@ -1,4 +1,5 @@
 import { parseNameVersion } from "./registry_utils.ts";
+import { responseCache } from "./response_cache.ts";
 
 const S3_BUCKET =
   "http://deno-registry-prod-storagebucket-d7uq3yal946u.s3-website-us-east-1.amazonaws.com/";
@@ -57,7 +58,7 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
   }
   const remoteUrl = getBackingURL(module, version, path);
   // @ts-ignore
-  const resp = await fetch(remoteUrl, { cf: { cacheEverything: true } });
+  const resp = await responseCache(remoteUrl);
   const resp2 = resp.status === 403 || resp.status === 404
     ? new Response("404 Not Found", { status: 404 })
     : new Response(resp.body, resp);
@@ -102,7 +103,7 @@ export function getBackingURL(module: string, version: string, path: string) {
 export async function getLatestVersion(
   module: string,
 ): Promise<string | undefined> {
-  const res = await fetch(`${S3_BUCKET}${module}/meta/versions.json`);
+  const res = await responseCache(`${S3_BUCKET}${module}/meta/versions.json`);
   if (!res.ok) return undefined;
   const versions = await res.json();
   return versions?.latest;
