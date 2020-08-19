@@ -227,7 +227,7 @@ for await (const req of s) {
             repository.
             */}
             core
-            DenoチームによりDenoので動くことが保証された標準モジュールを提供します。
+            DenoチームによりDenoで動くことが保証された標準モジュールを提供します。
             これらはDenoのソースコードと一緒に{" "}
             <a href="https://github.com/denoland/deno" className="link">
               denoland/deno
