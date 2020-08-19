@@ -21,17 +21,28 @@ const ThirdPartyRegistryList = () => {
   const { asPath, query: routerQuery, replace } = useRouter();
   const [overlayOpen, setOverlayOpen] = React.useState(asPath.endsWith("#add"));
 
-  const [page, setPage] = React.useState(1);
+  const page = parseInt(
+    (Array.isArray(routerQuery.page)
+      ? routerQuery.page[0]
+      : routerQuery.page) || "1"
+  );
   const query =
     (Array.isArray(routerQuery.query)
       ? routerQuery.query[0]
       : routerQuery.query) || "";
 
   function handleSearchInput(event: ChangeEvent<HTMLInputElement>) {
-    setPage(1);
     const query = event.target.value
       ? { query: event.target.value }
       : undefined;
+    replace({
+      pathname: "/x",
+      query,
+    });
+  }
+
+  function setPage(page: number) {
+    const query = page !== 1 ? { page: page.toFixed(0) } : undefined;
     replace({
       pathname: "/x",
       query,
@@ -163,14 +174,14 @@ const ThirdPartyRegistryList = () => {
                 </ul>
                 <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
                   <div className="flex-1 flex justify-between items-center sm:hidden">
-                    <button className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-gray-100 rounded-md bg-white">
+                    <button className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-gray-100 text-sm leading-5 font-medium rounded-md bg-white">
                       Previous
                     </button>
                     <div className="text-base leading-6 text-gray-500">
-                      <div className="h-3 w-4 bg-gray-100" />/
-                      <div className="h-3 w-4 bg-gray-100" />
+                      <div className="h-3 w-4 bg-gray-100 inline-block mr-1" />/
+                      <div className="h-3 w-4 bg-gray-100 inline-block ml-1" />
                     </div>
-                    <button className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-gray-100 rounded-md bg-white">
+                    <button className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-gray-100 text-sm leading-5 font-medium rounded-md bg-white ml-4">
                       Next
                     </button>
                   </div>

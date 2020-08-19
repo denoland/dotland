@@ -75,6 +75,7 @@ const NewsPostPage = (props: Props) => {
             source={props.markdown}
             displayURL={`https://deno.land/posts/${props.meta.id}`}
             sourceURL={`https://deno.land/posts/${props.meta.id}.md`}
+            baseURL={`https://deno.land`}
           />
         </div>
       </div>
