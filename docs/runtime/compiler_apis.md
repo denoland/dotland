@@ -44,6 +44,7 @@ the keys are the output filenames and the values are the content.
 <!-- An example of providing sources: -->
 sources を提供する例です:
 
+<!--
 ```ts
 const [diagnostics, emitMap] = await Deno.compile("/foo.ts", {
   "/foo.ts": `import * as bar from "./bar.ts";\nconsole.log(bar);\n`,
@@ -51,6 +52,16 @@ const [diagnostics, emitMap] = await Deno.compile("/foo.ts", {
 });
 
 assert(diagnostics == null); // ensuring no diagnostics are returned
+console.log(emitMap);
+```
+-->
+```ts
+const [diagnostics, emitMap] = await Deno.compile("/foo.ts", {
+  "/foo.ts": `import * as bar from "./bar.ts";\nconsole.log(bar);\n`,
+  "/bar.ts": `export const bar = "bar";\n`,
+});
+
+assert(diagnostics == null); // diagnosticsが返って来ないことを確認
 console.log(emitMap);
 ```
 
@@ -102,6 +113,7 @@ Deno.
 <!-- An example of providing sources: -->
 ソースを提供する例:
 
+<!--
 ```ts
 const [diagnostics, emit] = await Deno.bundle("/foo.ts", {
   "/foo.ts": `import * as bar from "./bar.ts";\nconsole.log(bar);\n`,
@@ -109,6 +121,16 @@ const [diagnostics, emit] = await Deno.bundle("/foo.ts", {
 });
 
 assert(diagnostics == null); // ensuring no diagnostics are returned
+console.log(emit);
+```
+-->
+```ts
+const [diagnostics, emit] = await Deno.bundle("/foo.ts", {
+  "/foo.ts": `import * as bar from "./bar.ts";\nconsole.log(bar);\n`,
+  "/bar.ts": `export const bar = "bar";\n`,
+});
+
+assert(diagnostics == null); // diagnosticsが返って来ないことを確認
 console.log(emit);
 ```
 
