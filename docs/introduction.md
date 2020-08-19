@@ -10,7 +10,7 @@ Denoはデフォルトで安全なJavaScript/TypeScriptのランタイムで素�
 <!--
 It's built on V8, Rust, and Tokio.
 -->
-V8, Rust, Tokioを使って作られています。
+V8、Rust、Tokioを使って作られています。
 
 <!-- ## Feature Highlights -->
 ## 機能のハイライト
@@ -28,7 +28,7 @@ V8, Rust, Tokioを使って作られています。
   to work with Deno.
 - Scripts can be bundled into a single JavaScript file.
 -->
-- デフォルトで安全。ファイル, ネットワーク, 環境へのアクセスなし(明示的にあり有効にしない限り)。
+- デフォルトで安全。ファイル, ネットワーク, 環境へのアクセスなし(明示的に有効にしない限り)。
 - 最初からTypeScriptをサポート。
 - 1つの実行ファイル(`deno`)で実行可能。
 - 依存関係インスペクター(`deno info`)やコードフォーマッター(`deno fmt`)などのビルトインユーティリティーを持っています。
