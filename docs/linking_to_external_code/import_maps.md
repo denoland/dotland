@@ -15,10 +15,16 @@ Denoは [import maps](https://github.com/WICG/import-maps) をサポートして
 <!-- Current limitations: -->
 現在の制約:
 
+<!--
 - single import map
 - no fallback URLs
 - Deno does not support `std:` namespace
 - supports only `file:`, `http:` and `https:` schemes
+-->
+- 一つのimport map
+- フォールバックURLなし
+- Denoは `std:` 名前空間をサポートしません
+- `file:`、`http:`、`https` スキーマのみをサポートします
 
 <!-- Example: -->
 例:
