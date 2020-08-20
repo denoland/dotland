@@ -16,6 +16,8 @@ https://deno-ja.vercel.app/ のレポジトリです。
 
 markdown中のコードとリンクの前後が句読点やカッコでない場合、空白を開けてください。
 
+句読点は `。` と `、` を使ってください。
+
 ## History
 
 This is a rewrite of the Deno website it will combine the code in
