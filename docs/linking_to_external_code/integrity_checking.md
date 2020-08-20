@@ -59,7 +59,8 @@ export { xyz } from "https://unpkg.com/xyz-lib@v0.9.0/lib.ts";
 export { xyz } from "https://unpkg.com/xyz-lib@v0.9.0/lib.ts";
 ```
 
-Then:
+<!-- Then: -->
+そして:
 
 ```shell
 # Create/update the lock file "lock.json".
