@@ -501,7 +501,7 @@ const Registry = () => {
                           </>
                         ) : externalDependencies === null ? null : (
                           <>
-                            <div className="mt-2">
+                            <div className="mt-2 overflow-x-auto">
                               {externalDependencies.map((url) => (
                                 <p key={url}>
                                   {url.startsWith("https://deno.land/std") ? (
