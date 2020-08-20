@@ -47,7 +47,7 @@ redirect it to an appropriate file.
 - elvish
 
 <!-- Example (bash): -->
-例 (bash)
+例 (bash):
 
 ```shell
 deno completions bash > /usr/local/etc/bash_completion.d/deno.bash
