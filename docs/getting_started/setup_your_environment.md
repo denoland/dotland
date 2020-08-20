@@ -79,7 +79,7 @@ and then `compinit` to generate them again.
 そしてターミナルをリスタートしてください。もしまだ補完がロードされない場合は、以前に作成された補完を削除するために `rm ~/.zcompdump/` を実行し、もう一度 `compinit` で作成してください。
 
 <!-- Example (zsh + oh-my-zsh) [recommended for zsh users] : -->
-例 (zsh + oh-my-zsh) [zshユーザーにおすすめ]
+例 (zsh + oh-my-zsh) [zshユーザーにおすすめ]:
 
 ```shell
 mkdir ~/.oh-my-zsh/custom/plugins/deno
