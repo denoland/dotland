@@ -11,7 +11,7 @@ Denoはブラウザ互換のライフサイクルイベントをサポートし�
 Listeners for `load` events can be asynchronous and will be awaited. Listeners
 for `unload` events need to be synchronous. Both events cannot be cancelled.
 -->
-`load` イベントのリスナーは async や await になることが出来ますになることが出来ます。`unload` イベントのリスナーは同期的である必要があります。この両方のイベントは中断できません。
+`load` イベントのリスナーは async や await になることが出来ます。`unload` イベントのリスナーは同期的である必要があります。この両方のイベントは中断できません。
 
 <!-- Example: -->
 例:
