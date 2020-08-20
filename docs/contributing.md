@@ -2,13 +2,13 @@
 # コントリビューティング
 
 <!-- - Read the [style guide](./contributing/style_guide.md). -->
-- [style guide](./contributing/style_guide.md) を読んでください。
+- [スタイルガイド](./contributing/style_guide.md) を読んでください。
 
 <!-- - Please don't make [the benchmarks](https://deno.land/benchmarks) worse. -->
-- [the benchmarks](https://deno.land/benchmarks) を悪くしないでください。
+- [ベンチマーク](https://deno-ja.vercel.app/benchmarks) を悪くしないでください。
 
 <!-- - Ask for help in the [community chat room](https://discord.gg/deno). -->
-- [community chat room](https://discord.gg/deno) で助けを求めてください。
+- [コミュニティチャットルーム](https://discord.gg/deno) で助けを求めてください。
 
 <!--
 - If you are going to work on an issue, mention so in the issue comments
