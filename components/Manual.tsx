@@ -486,8 +486,7 @@ function Manual() {
               {content ? (
                 <>
                   <a
-                    // href={getDocURL(version ?? versions[0], path)}
-                    href={getDocURL(version ?? "master", path)}
+                    href={getDocURL(version ?? versions[0], path)}
                     className={`text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right ${
                       path.split("/").length === 2 ? "mt-11" : "mt-9"
                     } mr-4`}
@@ -593,8 +592,7 @@ function Version({
           <select
             id="version"
             className="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-            // value={version ?? varsions[0]}
-            value={version ?? "master"}
+            value={version ?? versions[0]}
             onChange={({ target: { value: newVersion } }) =>
               gotoVersion(newVersion)
             }
