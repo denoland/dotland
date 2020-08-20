@@ -103,7 +103,8 @@ export function getBackingURL(module: string, version: string, path: string) {
 export async function getLatestVersion(
   module: string,
 ): Promise<string | undefined> {
-  const res = await responseCache(`${S3_BUCKET}${module}/meta/versions.json`);
+  const res = await fetch(`${S3_BUCKET}${module}/meta/versions.json`);
+  console.log("Latest version headers", res.headers);
   if (!res.ok) return undefined;
   const versions = await res.json();
   return versions?.latest;

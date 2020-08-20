@@ -1,19 +1,18 @@
-import { LFU } from "../deps.ts";
+import { LFUCache } from "./lfu_cache.ts";
 
 interface CachedResponse {
   headers: Headers;
   body: ArrayBuffer;
   status: number;
 }
-const cache = new LFU<CachedResponse>({
-  capacity: 100000,
-});
+// 100mb cache
+const cache = new LFUCache<CachedResponse>(100 * 1024 * 1024);
 export async function responseCache(
   input: RequestInfo,
   init?: RequestInit,
 ): Promise<Response> {
   const req = toRequest(input, init);
-  req.headers.delete("Accept-Encoding");
+  req.headers.delete("Accept-Encoding"); // want raw body
   const key = cacheKey(req);
 
   const cached = cache.get(key);
@@ -34,14 +33,11 @@ export async function responseCache(
     body: body,
     headers: resp.headers,
     status: resp.status,
+    size: body.byteLength,
   };
   resp.headers.set("Fly-Cache-Status", "MISS");
-  console.log(
-    "Body length:",
-    body.constructor.name,
-    resp.headers.get("content-length"),
-  );
-  cache.set(key, cacheEntry, 3600 * 24); // cache for 24 hours by default
+
+  cache.set(key, cacheEntry); // cache for 24 hours by default
   return resp;
 }
 

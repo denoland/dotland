@@ -37,13 +37,13 @@ jobs:
         working-directory: worker
       - name: Publish Production
         if: github.ref == 'refs/heads/master' && github.event_name == 'push' && github.repository == 'denoland/deno_website2'
-        run: "/home/runner/.fly/bin/flyctl deploy -a deno-website"
+        run: "/home/runner/.fly/bin/flyctl deploy -a deno-website --strategy rolling"
         working-directory: worker
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
       - name: Publish Staging
         if: github.event_name == 'push' && github.repository == 'mrkurt/deno_website2'
-        run: "/home/runner/.fly/bin/flyctl deploy -a deno-website-staging"
+        run: "/home/runner/.fly/bin/flyctl deploy -a deno-website-staging --strategy rolling"
         working-directory: worker
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
