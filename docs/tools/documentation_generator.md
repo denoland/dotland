@@ -4,7 +4,7 @@
 <!--
 `deno doc` followed by a list of one or more source files will print the JSDoc
 documentation for each of the module's **exported** members. Currently, only
-exports in the style `export <declaration>` and `export ... from ...` are
+exports in the stwyle `export <declaration>` and `export ... from ...` are
 supported.
 -->
 `deno doc` のあとに1つ以上のソースファイルのリストをつけると、モジュールの**エクスポート**メンバーそれぞれのJSDocドキュメントが表示されます。現在は `export <declaration>` と `export ... from ...` の形式のエクスポートのみサポートします。
