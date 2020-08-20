@@ -115,8 +115,13 @@ const ThirdPartyRegistryList = () => {
               id="query"
               className="block w-full px-4 py-2 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1"
               type="text"
+              /*
               placeholder={
                 !resp ? "Search" : `Search through ${resp.totalCount} modules`
+              }
+              */
+              placeholder={
+                !resp ? "検索" : `${resp.totalCount}個のモジュールを検索`
               }
               value={query}
               onChange={handleSearchInput}
