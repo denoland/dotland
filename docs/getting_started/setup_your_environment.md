@@ -54,16 +54,44 @@ deno completions bash > /usr/local/etc/bash_completion.d/deno.bash
 source /usr/local/etc/bash_completion.d/deno.bash
 ```
 
-<!-- Example (zsh): -->
-例 (zsh)
+<!-- Example (zsh without framework): -->
+例 (zsh フレームワークなし):
+
+```shell
+mkdir ~/.zsh # create a folder to save your completions. it can be anywhere
+deno completions zsh > .zsh/_deno
+```
+
+<!-- then add this to your `.zshrc` -->
+`.zshrc` に加えてください
+
+```shell
+fpath=(~/.zsh $fpath)
+autoload -Uz compinit
+compinit -u
+```
+
+<!--
+and restart your terminal. note that if completions are still not loading, you
+may need to run `rm ~/.zcompdump/` to remove previously generated completions
+and then `compinit` to generate them again.
+-->
+そしてターミナルをリスタートしてください。もしまだ補完がロードされない場合は、以前に作成された補完を削除するために `rm ~/.zcompdump/` を実行し、もう一度 `compinit` で作成してください。
+
+<!-- Example (zsh + oh-my-zsh) [recommended for zsh users] : -->
+例 (zsh + oh-my-zsh) [zshユーザーにおすすめ]
 
 ```shell
 mkdir ~/.oh-my-zsh/custom/plugins/deno
 deno completions zsh > ~/.oh-my-zsh/custom/plugins/deno/_deno
 ```
 
-<!-- After this add `deno` plugin under plugins tag in `~/.zshrc` file. -->
-これは `deno` プラグインを `~/.zshrc` のプタグインタグに追加します。
+<!--
+After this add deno plugin under plugins tag in `~/.zshrc` file. for tools like
+`antigen` path will be `~/.antigen/bundles/robbyrussell/oh-my-zsh/plugins` and
+command will be `antigen bundle deno` and so on.
+-->
+これは `deno` プラグインを `~/.zshrc` のプラグインタグに追加します。`antigen` のようなツールのパスは `~/.antigen/bundles/robbyrussell/oh-my-zsh/plugins` になりコマンドは `antigen bundle deno` になります。
 
 <!-- ### Editors and IDEs -->
 ### エディターとIDE
