@@ -72,7 +72,8 @@ git commit -m "feat: Add support for xyz using xyz-lib"
 git push
 ```
 
-Collaborator on another machine -- in a freshly cloned project tree:
+<!-- Collaborator on another machine -- in a freshly cloned project tree: -->
+他のマシンのコラボレーター -- clone下ばかりのプロジェクトツリーで:
 
 ```shell
 # Download the project's dependencies into the machine's cache, integrity
