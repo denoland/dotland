@@ -62,6 +62,7 @@ export { xyz } from "https://unpkg.com/xyz-lib@v0.9.0/lib.ts";
 <!-- Then: -->
 そして:
 
+<!--
 ```shell
 # Create/update the lock file "lock.json".
 deno cache --lock=lock.json --lock-write src/deps.ts
@@ -71,16 +72,35 @@ git add -u lock.json
 git commit -m "feat: Add support for xyz using xyz-lib"
 git push
 ```
+-->
+```shell
+# ロックファイル"lock.json"を作成/更新。
+deno cache --lock=lock.json --lock-write src/deps.ts
+
+# ソースコントロールにコミットするときに含める。
+git add -u lock.json
+git commit -m "feat: Add support for xyz using xyz-lib"
+git push
+```
 
 <!-- Collaborator on another machine -- in a freshly cloned project tree: -->
 他のマシンのコラボレーター -- clone下ばかりのプロジェクトツリーで:
 
+<!--
 ```shell
 # Download the project's dependencies into the machine's cache, integrity
 # checking each resource.
 deno cache --reload --lock=lock.json src/deps.ts
 
 # Done! You can proceed safely.
+deno test --allow-read src
+```
+-->
+```shell
+# プロジェクトの依存関係をキャッシュにダウンロードし、各リソースに整合性チェックをします。
+deno cache --reload --lock=lock.json src/deps.ts
+
+# 完了！安全に実行できます。
 deno test --allow-read src
 ```
 
