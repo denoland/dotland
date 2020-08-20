@@ -160,7 +160,7 @@ current directory (recursively) that match the glob
 `{*_,*.,}test.{js,mjs,ts,jsx,tsx}` will be run. If you pass a directory, all
 files in the directory that match this glob will be run.
 -->
-テストを実行するには、テスト関数を含んでいるファイルで `deno test` を呼び出してください。ファイル名を省略することも出来ます。その場合、現在のディレクトリ内(再帰的)のグロブ `{*_,*.,}test.{js,mjs,ts,jsx,tsx}` に一致するすべてのテストが実行されます。ディレクトリを渡すとこのグロブに一致する全てのファイルが実行さてます。
+テストを実行するには、テスト関数を含んでいるファイルで `deno test` を呼び出してください。ファイル名を省略することも出来ます。その場合、現在のディレクトリ内(再帰的)のグロブ `{*_,*.,}test.{js,mjs,ts,jsx,tsx}` に一致するすべてのテストが実行されます。ディレクトリを渡すとこのグロブに一致する全てのファイルが実行されます。
 
 <!--
 ```shell
