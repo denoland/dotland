@@ -11,7 +11,7 @@
 Sometimes a program may want to revoke previously granted permissions. When a
 program, at a later stage, needs those permissions, it will fail.
 -->
-プログラムは以前に許可された権限を取り携帯場合があります。プログラムが後の段階でこれらのパーミッションを必要とする場合、それは失敗します。
+プログラムは以前に許可されたパーミッションを取り携帯場合があります。プログラムが後の段階でこれらのパーミッションを必要とする場合、それは失敗します。
 
 <!--
 ```ts

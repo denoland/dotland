@@ -95,10 +95,10 @@ we do wrong? You might remember from the introduction that Deno is a runtime
 which is secure by default. This means you need to explicitly give programs the
 permission to do certain 'privileged' actions, such as access the network.
 -->
-ネットワークのアクセスでエラーが表示されるでしょう、何を間違えました？イントロダクションでDenoのランタイムは標準で安全だということを覚えていますか。ネットワークアクセスなどの'特権'の必要な動作にはプログラムに明示的に権限を与える必要があるということです。
+ネットワークのアクセスでエラーが表示されるでしょう、何を間違えました？イントロダクションでDenoのランタイムは標準で安全だということを覚えていますか。ネットワークアクセスなどの'特権'の必要な動作にはプログラムに明示的にパーミッションを与える必要があるということです。
 
 <!-- Try it out again with the correct permission flag: -->
-正しい権限を与えて再度試してみてください:
+正しいパーミッションフラグを与えて再度試してみてください:
 
 ```shell
 deno run --allow-net=example.com https://deno.land/std@$STD_VERSION/examples/curl.ts https://example.com
@@ -173,7 +173,7 @@ for await (const conn of listener) {
 For security reasons, Deno does not allow programs to access the network without
 explicit permission. To allow accessing the network, use a command-line flag:
 -->
-セキュリティ上の理由から、Denoは明示的な権限なしにプログラムがネットワークにアクセスすることが出来ません。ネットワークへのアクセスを許可するにはコマンドラインフラッグを使ってください:
+セキュリティ上の理由から、Denoは明示的なパーミッションなしにプログラムがネットワークにアクセスすることが出来ません。ネットワークへのアクセスを許可するにはコマンドラインフラッグを使ってください:
 
 ```shell
 deno run --allow-net https://deno.land/std@$STD_VERSION/examples/echo_server.ts
