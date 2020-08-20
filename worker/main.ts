@@ -28,6 +28,7 @@ async function proxyRequest(sreq: ServerRequest): Promise<void> {
   let body = await resp.arrayBuffer(); // TODO: make streaming body work
 
   sreq.respond({
+    status: resp.status,
     headers,
     body: new Uint8Array(body),
   }); // TODO: gross, need to fixup Deno response mismatch
