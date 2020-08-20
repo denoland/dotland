@@ -1,5 +1,5 @@
 <!-- ## Script installer -->
-##スクリプトインストーラー
+## スクリプトインストーラー
 
 <!-- Deno provides `deno install` to easily install and distribute executable code. -->
 Denoは `deno install` で配布されている実行コードを簡単にインストールすることができます。
