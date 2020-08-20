@@ -17,7 +17,8 @@ the specified CLI flags and main module. It is placed in the installation root's
 -->
 このコマンドは、指定されたCLIフラッグとメインモジュールを使った `deno` を呼び出す薄い実行可能シェルスクリプトを作ります。それはインストールルートの `bin` ディレクトリの中に置かれます。
 
-Example:
+<!-- Example: -->
+例:
 
 ```shell
 $ deno install --allow-net --allow-read https://deno.land/std@$STD_VERSION/http/file_server.ts
