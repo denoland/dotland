@@ -18,10 +18,7 @@ export async function responseCache(
   const cached = cache.get(key);
   if (cached) {
     const { status, headers, body } = cached;
-
-    // required workaround for Deno bug
-    const stream = arrayBufferToStream(body);
-    const resp = new Response(stream, { status, headers });
+    const resp = new Response(body, { status, headers });
     resp.headers.set("Fly-Cache-Status", "HIT");
     return resp;
   }
@@ -50,14 +47,4 @@ function toRequest(input: RequestInfo, init?: RequestInit): Request {
     return new Request(input, init);
   }
   return input;
-}
-
-// TODO: hack to get around deno bug: https://github.com/denoland/deno/issues/6752
-function arrayBufferToStream(buf: ArrayBuffer): ReadableStream {
-  return new ReadableStream({
-    start(controller: any) {
-      controller.enqueue(buf);
-      controller.close();
-    },
-  });
 }

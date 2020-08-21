@@ -1,9 +1,4 @@
 # fly.toml file generated for deno-website on 2020-08-19T11:33:59-04:00
-
-[build]
-  builtin = "deno"
-
-
 [[services]]
   internal_port = 8080
   protocol = "tcp"
