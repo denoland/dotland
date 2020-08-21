@@ -44,7 +44,7 @@ export interface Column {
 
 function getBenchmarkVarieties(
   data: BenchmarkRun[],
-  benchmarkName: BenchmarkName,
+  benchmarkName: BenchmarkName
 ): string[] {
   // Look at last sha hash.
   const last = data[data.length - 1];
@@ -53,7 +53,7 @@ function getBenchmarkVarieties(
 
 function createColumns(
   data: BenchmarkRun[],
-  benchmarkName: BenchmarkName,
+  benchmarkName: BenchmarkName
 ): Column[] {
   const varieties = getBenchmarkVarieties(data, benchmarkName);
   return varieties.map((variety) => ({
@@ -82,7 +82,7 @@ export function createNormalizedColumns(
   data: BenchmarkRun[],
   benchmarkName: BenchmarkName,
   baselineBenchmark: BenchmarkName,
-  baselineVariety: string,
+  baselineVariety: string
 ): Column[] {
   const varieties = getBenchmarkVarieties(data, benchmarkName);
   return varieties.map((variety) => ({
@@ -197,6 +197,30 @@ export function logScale(columns: Column[]): void {
   }
 }
 
+function renameReqPerSecFields(data: BenchmarkRun[]): void {
+  /* eslint-disable @typescript-eslint/camelcase */
+  for (const row of data) {
+    if (row.req_per_sec === undefined) continue;
+    const {
+      core_http_bin_ops,
+      deno_core_http_bench,
+      deno_core_single,
+      deno_tcp,
+      deno,
+      node_http,
+      node,
+      ...rest
+    } = row.req_per_sec;
+    row.req_per_sec = {
+      core_http_bin_ops:
+        core_http_bin_ops ?? deno_core_http_bench ?? deno_core_single,
+      deno_tcp: deno_tcp ?? deno,
+      node_http: node_http ?? node,
+      ...rest,
+    };
+  }
+}
+
 const proxyFields: BenchmarkName[] = ["req_per_sec"];
 function extractProxyFields(data: BenchmarkRun[]): void {
   for (const row of data) {
@@ -235,6 +259,8 @@ export interface BenchmarkData {
 }
 
 export function reshape(data: BenchmarkRun[]): BenchmarkData {
+  // Rename req/s fields that had a different name in the past.
+  renameReqPerSecFields(data);
   // Hack to extract proxy fields from req/s fields.
   extractProxyFields(data);
 
@@ -242,13 +268,13 @@ export function reshape(data: BenchmarkRun[]): BenchmarkData {
     data,
     "req_per_sec",
     "req_per_sec",
-    "hyper",
+    "hyper"
   );
   const normalizedProxy = createNormalizedColumns(
     data,
     "req_per_sec_proxy",
     "req_per_sec",
-    "hyper",
+    "hyper"
   );
 
   return {
