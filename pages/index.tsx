@@ -26,7 +26,10 @@ for await (const req of s) {
   return (
     <>
       <Head>
-        <title>Deno - A secure runtime for JavaScript and TypeScript</title>
+        <title>
+          {/* Deno - A secure runtime for JavaScript and TypeScript */}
+          Deno - JavaScriptとTypeScriptのための安全なランタイム
+        </title>
       </Head>
       <CookieBanner />
       <div className="bg-white">
