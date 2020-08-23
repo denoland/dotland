@@ -97,7 +97,7 @@ function Manual() {
   const [content, setContent] = useState<string | null>(null);
 
   useEffect(() => {
-    getTableOfContents(version ?? "master")
+    getTableOfContents(version ?? versions[0])
       .then(setTableOfContents)
       .then(scrollTOCIntoView)
       .catch((e) => {
@@ -132,7 +132,7 @@ function Manual() {
     }
   }, [tableOfContents, path]);
 
-  const sourceURL = useMemo(() => getFileURL(version ?? "master", path), [
+  const sourceURL = useMemo(() => getFileURL(version ?? versions[0], path), [
     version,
     path,
   ]);
