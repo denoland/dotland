@@ -2,7 +2,7 @@
 ## ファイルサーバー
 
 <!-- This one serves a local directory in HTTP. -->
-これはローカルディレクトリをHTTPでサーブします
+これはローカルディレクトリをHTTPでサーブします。
 
 ```shell
 deno install --allow-net --allow-read https://deno.land/std@$STD_VERSION/http/file_server.ts
