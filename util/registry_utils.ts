@@ -403,6 +403,9 @@ export function listExternalDependencies(
   const visited = flattenGraph(graph, name);
   const denolandDeps = new Set<string>();
   const nestlandDeps = new Set<string>();
+  const rawGithubDeps = new Set<string>();
+  const jspmDeps = new Set<string>();
+  const depJsDeps = new Set<string>();
   const other = new Set<string>();
   if (visited) {
     visited.forEach((dep) => {
@@ -427,6 +430,34 @@ export function listExternalDependencies(
         return;
       }
 
+      // Count each module on raw.githubusercontent.com only once.
+      const rawGithub = dep.match(
+        /^https:\/\/raw\.githubusercontent\.com\/([^/]+)\/([^/]+)\/([^/]+)(.+)$/
+      );
+      if (rawGithub) {
+        rawGithubDeps.add(
+          `https://github.com/${rawGithub[1]}/${rawGithub[2]}/tree/${rawGithub[3]}`
+        );
+        return;
+      }
+
+      // Count each module on raw.githubusercontent.com only once.
+      const jspm = dep.match(
+        /^https:\/\/dev\.jspm\.io\/(npm:)?(@([^/@]+)\/([^/@]+)|([^/@]+))@(\d\.\d\.\d)(.+)$/
+      );
+      if (jspm) {
+        jspmDeps.add(`https://dev.jspm.io/${jspm[2]}@${jspm[6]}`);
+        return;
+      }
+      if (dep.startsWith("https://dev.jspm.io")) return;
+
+      // Count each module on cdn.depjs.com only once.
+      const depJs = dep.match(/^https:\/\/cdn\.depjs\.com\/([^/]+)(.+)$/);
+      if (depJs) {
+        depJsDeps.add(`https://cdn.depjs.com/${depJs[1]}`);
+        return;
+      }
+
       // Ignore pika internal imports
       if (dep.startsWith("https://cdn.pika.dev/-/")) return;
 
@@ -440,7 +471,14 @@ export function listExternalDependencies(
     if (thisX) {
       denolandDeps.delete(`https://deno.land/x/${thisX.identifier}`);
     }
-    return [...denolandDeps, ...nestlandDeps, ...other].map((url) =>
+    return [
+      ...denolandDeps,
+      ...nestlandDeps,
+      ...rawGithubDeps,
+      ...jspmDeps,
+      ...depJsDeps,
+      ...other,
+    ].map((url) =>
       url.replace("https://deno.land/x/std", "https://deno.land/std")
     );
   } else return undefined;
