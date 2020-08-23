@@ -1,14 +1,24 @@
-## Permission APIs
+<!-- ## Permission APIs -->
+## パーミッションAPI
 
+<!--
 > This API is unstable. Learn more about
 > [unstable features](../runtime/stability.md).
+-->
+> このAPIは不安定です。詳しくは [不安定版の機能](../runtime/stability.md) を参照してください。
 
+<!--
 Permissions are granted from the CLI when running the `deno` command. User code
 will often assume its own set of required permissions, but there is no guarantee
 during execution that the set of _granted_ permissions will align with this.
+-->
+パーミッションは `deno` コマンドを実行するときCLIから許可されます。ユーザーコードは多くの場合、必要なパーミッションのセットを想定していますが、実行中に _許可された_ パーミッションのセットがこれと一致することは保証されていません。
 
+<!--
 In some cases, ensuring a fault-tolerant program requires a way to interact with
 the permission system at runtime.
+-->
+いくつかのケースで、フォールトトレラントなプログラムを確保するため実行時にパーミッションシステムと通信する方法が必要です。
 
 ### Permission descriptors
 
