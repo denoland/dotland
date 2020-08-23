@@ -1,5 +1,5 @@
 <!-- ### File system events -->
-### ファイルシステムイベント
+## ファイルシステムイベント
 
 <!-- To poll for file system events: -->
 ファイルシステムイベントをポーリングするには:

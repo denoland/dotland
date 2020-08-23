@@ -9,8 +9,8 @@
 
 [API Reference](https://doc.deno.land/https/raw.githubusercontent.com/denoland/deno/master/cli/dts/lib.deno.unstable.d.ts#Deno.signal)
 
-<!-- You can use `Deno.signal()` function for handling OS signals. -->
-OSシグナルを取り扱うために `Deno.signal()` を使うことが出来ます。
+<!-- You can use `Deno.signal()` function for handling OS signals: -->
+OSシグナルを取り扱うために `Deno.signal()` を使うことが出来ます:
 
 ```ts
 for await (const _ of Deno.signal(Deno.Signal.SIGINT)) {
@@ -28,9 +28,9 @@ console.log("interrupted!");
 
 <!--
 If you want to stop watching the signal, you can use `dispose()` method of the
-signal object.
+signal object:
 -->
-シグナルの監視をやめたくなったら、シグナルオブジェクトの `dispose()` メソッドを使うことが出来ます。
+シグナルの監視をやめたくなったら、シグナルオブジェクトの `dispose()` メソッドを使うことが出来ます:
 
 ```ts
 const sig = Deno.signal(Deno.Signal.SIGINT);
@@ -43,5 +43,5 @@ for await (const _ of sig) {
 }
 ```
 
-<!-- The above for-await loop exits after 5 seconds when sig.dispose() is called. -->
-上記のfor-awaitループはsig.dispose()が呼ばれたあと5秒語に停止します。
+<!-- The above for-await loop exits after 5 seconds when `sig.dispose()` is called. -->
+上記のfor-awaitループは `sig.dispose()` が呼ばれたあと5秒語に停止します。

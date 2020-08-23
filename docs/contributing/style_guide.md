@@ -1,9 +1,6 @@
 <!-- # Deno Style Guide -->
 # Denoスタイルガイド
 
-<!-- ## Table of Contents -->
-## 目次
-
 <!-- ## Copyright Headers -->
 ## コピーライトヘッダー
 
@@ -76,7 +73,7 @@ https://chromium.googlesource.com/chromium/src/+/master/styleguide/inclusive_cod
 <!-- Follow Rust conventions and be consistent with existing code. -->
 Rust規約に従い、既存のコードと一致させてください。
 
-## Typescript
+## TypeScript
 
 <!--
 The TypeScript portions of the codebase include `cli/js` for the built-ins and
@@ -135,7 +132,7 @@ doesn’t come with any preconceived notions about how it might work.
    Other arguments can be objects, but they must be distinguishable from a
    'plain' Object runtime, by having either:
 
-   - a distinguishing prototype (e.g. `Array`, `Map`, `Date`, `class MyThing`)
+   - a distinguishing prototype (e.g. `Array`, `Map`, `Date`, `class MyThing`).
    - a well-known symbol property (e.g. an iterable with `Symbol.iterator`).
 
    This allows the API to evolve in a backwards compatible way, even when the
@@ -152,7 +149,7 @@ doesn’t come with any preconceived notions about how it might work.
 
    ほかの引数はオブジェクトに出来ますが、次のどちらかを持つことで'通常'のオブジェクトランタイムと区別出来る必要があります:
 
-   - 特徴的なプロトタイプ(例、`Array`、`Map`、`Date`、`class MyThing`)
+   - 特徴的なプロトタイプ(例、`Array`、`Map`、`Date`、`class MyThing`)。
    - よく知られたシンボルプロパティ(例、`Symbol.iterator` でイレテータブルなもの)。
 
    これによりオプションオブジェクトの位置が変わっても、APIに後方互換をもたせることが出来ます。
@@ -349,8 +346,8 @@ a documentation line.
 -->
 私達は完全なドキュメント化を目指しています、すべてのエクスポートされたシンボルは理想的にはドキュメントラインを持っているべきです。
 
-<!-- If possible, use a single line for the JS Doc. Example: -->
-可能ならJS Docに1行を使ってください。例:
+<!-- If possible, use a single line for the JSDoc. Example: -->
+可能ならJSDocに1行を使ってください。例:
 
 ```ts
 /** foo does bar. */
@@ -418,8 +415,8 @@ comments should be written as:
 /** これは良い一行のJSDocです。 */
 ```
 
-<!-- And not -->
-このようにではなく
+<!-- And not: -->
+このようにではなく:
 
 <!--
 ```ts
@@ -510,8 +507,8 @@ limited to closures.
 -->
 トップレベル関数は `function` キーワードを使うべきです。アロー構文はクロージャに限定すべきです。
 
-<!-- Bad -->
-悪い例
+<!-- Bad: -->
+悪い例:
 
 ```ts
 export const foo = (): string => {
@@ -519,8 +516,8 @@ export const foo = (): string => {
 };
 ```
 
-<!-- Good -->
-良い例
+<!-- Good: -->
+良い例:
 
 ```ts
 export function foo(): string {

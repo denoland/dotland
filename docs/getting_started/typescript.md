@@ -22,7 +22,7 @@ import { queue } from "./collections.ts";
 ### `--no-check` オプション
 
 <!--
-When using `deno run`, `deno test`, `deno cache`,`deno info`, or `deno bundle`
+When using `deno run`, `deno test`, `deno cache`, `deno info`, or `deno bundle`
 you can specify the `--no-check` flag to disable TypeScript type checking. This
 can significantly reduce the time that program startup takes. This can be very
 useful when type checking is provided by your editor and you want startup time

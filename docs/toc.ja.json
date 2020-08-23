@@ -19,6 +19,7 @@
     "children": {
       "stability": "安定性",
       "program_lifecycle": "プログラムライフサイクル",
+      "permission_apis": "パーミッションAPI",
       "compiler_apis": "コンパイラAPI",
       "workers": "ワーカー"
     }
@@ -75,7 +76,6 @@
       "file_server": "ファイルサーバー",
       "tcp_echo": "TCP echo サーバー",
       "subprocess": "サブプロセスの作成",
-      "permissions": "パーミッションの検査と取り消し",
       "os_signals": "OS シグナル",
       "file_system_events": "ファイルシステムイベント",
       "testing_if_main": "ファイルがメインか判断"

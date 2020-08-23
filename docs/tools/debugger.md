@@ -49,7 +49,7 @@ Compile https://deno.land/std@$STD_VERSION/http/file_server.ts
 
 ![chrome://inspect](../images/debugger1.jpg)
 
-<!-- It might take a few seconds after opening the devtools to load all modules. -->
+<!-- It might take a few seconds after opening the Devtools to load all modules. -->
 devtoolsを開いて全てのモジュールを読み込むのには数秒かかるかもしれません。
 
 ![Devtools opened](../images/debugger2.jpg)
@@ -140,12 +140,12 @@ config:
   "configurations": [
     {
       "name": "Deno",
-      "type": "node",
+      "type": "pwa-node",
       "request": "launch",
       "cwd": "${workspaceFolder}",
       "runtimeExecutable": "deno",
       "runtimeArgs": ["run", "--inspect-brk", "-A", "${file}"],
-      "port": 9229
+      "attachSimplePort": 9229
     }
   ]
 }

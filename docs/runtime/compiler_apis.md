@@ -1,11 +1,11 @@
-<!-- ## Compiler API -->
+<!-- ## Compiler APIs -->
 ## コンパイラAPI
 
 <!--
-> This is an unstable Deno feature. Learn more about
+> This API is unstable. Learn more about
 > [unstable features](./stability.md).
 -->
-> これはDenoの不安定版の機能です。詳しくは [unstable features](./stability.md) を参照してください。
+> このAPIは不安定です。詳しくは [unstable features](./stability.md) を参照してください。
 
 <!--
 Deno supports runtime access to the built-in TypeScript compiler. There are
@@ -297,7 +297,7 @@ Deno名前空間はランタイム環境がES2018以降であると期待する�
 
 <!--
 You do not have to specify the `lib` in the compiler options. Deno also supports
-[the triple-slash reference to a lib](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html#-reference-lib-).
+[the triple-slash reference to a lib](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html#-reference-lib-)
 which can be embedded in the contents of the file. For example, if you have a
 `main.ts` like:
 -->

@@ -78,9 +78,9 @@ deno lint --unstable myfile1.ts myfile2.ts
 
 <!--
 To ignore whole file `// deno-lint-ignore-file` directive should placed at the
-top of the file.
+top of the file:
 -->
-ファイルをすべて無視するには `// deno-lint-ignore-file` ディレクティブをファイルの一番初めに置いてください。
+ファイルをすべて無視するには `// deno-lint-ignore-file` ディレクティブをファイルの一番初めに置いてください:
 
 ```ts
 // deno-lint-ignore-file
@@ -131,7 +131,7 @@ function foo(): any {
 
 <!--
 To ignore certain diagnostic `// deno-lint-ignore <codes...>` directive should
-be placed before offending line. Specifying ignored rule name is required.
+be placed before offending line. Specifying ignored rule name is required:
 -->
 特定の診断を無視するには `// deno-lint-ignore <codes...>` ディレクティブを違反行の前においてください。無視するルールを指定する必要があります:
 
@@ -150,9 +150,9 @@ function bar(a: any) {
 <!--
 To provide some compatibility with ESLint `deno lint` also supports
 `// eslint-ignore-next-line` directive. Just like with `// deno-lint-ignore`,
-it's required to specify the ignored rule name.
+it's required to specify the ignored rule name:
 -->
-ESLintとの互換性を確保するために `deno lint` は `// eslint-ignore-next-line` ディレクティブをサポートします。`// deno-lint-ignore` と同様に無視するルールを指定する必要があります。
+ESLintとの互換性を確保するために `deno lint` は `// eslint-ignore-next-line` ディレクティブをサポートします。`// deno-lint-ignore` と同様に無視するルールを指定する必要があります:
 
 ```ts
 // eslint-ignore-next-line no-empty
