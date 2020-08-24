@@ -152,7 +152,8 @@ function Manual() {
       .catch((e) => {
         console.error("Failed to fetch content:", e);
         setContent(
-          "# 404 - Not Found\nWhoops, the page does not seem to exist."
+          // "# 404 - Not Found\nWhoops, the page does not seem to exist."
+          "# 404 - Not Found\nページが見つかりません。"
         );
       });
   }, [sourceURL]);
