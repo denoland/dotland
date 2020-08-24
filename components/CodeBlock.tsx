@@ -1,7 +1,6 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
 import React, { useEffect, useState } from "react";
-import Router from "next/router";
 import Highlight, { Prism } from "prism-react-renderer";
 import light from "prism-react-renderer/themes/github";
 import { useLayoutEffect } from "react";
@@ -43,15 +42,25 @@ export const RawCodeBlock = ({
   const [hashValue, setHashValue] = useState("");
   const codeDivClassNames =
     "text-gray-300 token-line text-right select-none text-xs";
+  const onClick = (e: React.MouseEvent) => {
+    if (e.shiftKey) {
+      e.preventDefault();
+      const { hash } = location;
+      const target = (e.target as HTMLAnchorElement).hash;
+      location.hash = hash
+        ? hash.replace(/(-.+)?$/, target.replace("#", "-"))
+        : target;
+    }
+  };
   if (enableLineRef) {
     useEffect(() => {
-      Router.events.on("hashChangeComplete", (url: any) => {
-        setHashValue(url.slice(url.indexOf("#")));
-      });
-      const { hash } = location;
-      setHashValue(hash);
+      const onHashChange = () => {
+        setHashValue(location.hash);
+      };
+      window.addEventListener("hashchange", onHashChange);
+      onHashChange();
       return () => {
-        Router.events.off("hashChangeComplete", () => {});
+        window.removeEventListener("hashchange", onHashChange);
       };
     }, []);
 
@@ -104,7 +113,11 @@ export const RawCodeBlock = ({
                 line[0]?.empty && i === tokens.length - 1 ? null : (
                   <div key={i + "l"} className={codeDivClassNames}>
                     {enableLineRef ? (
-                      <a id={`L${i + 1}`} href={`#L${i + 1}`}>
+                      <a
+                        id={`L${i + 1}`}
+                        href={`#L${i + 1}`}
+                        onClick={enableLineRef && onClick}
+                      >
                         {i + 1}{" "}
                       </a>
                     ) : (
