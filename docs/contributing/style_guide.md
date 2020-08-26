@@ -109,7 +109,7 @@ If a directory of code needs a default entry point, use the filename `mod.ts`.
 The filename `mod.ts` follows Rust’s convention, is shorter than `index.ts`, and
 doesn’t come with any preconceived notions about how it might work.
 -->
-コードのディレクトリがデフォルトエントリーポイントが必要なら `mod.ts` を使用してください。ファイル名 `mod.ts` はRustの監修に従っていて、`inde.ts` より短いです。そして、それがどのように動作するか先入観を持っていません。
+コードのディレクトリがデフォルトエントリーポイントが必要なら `mod.ts` を使用してください。ファイル名 `mod.ts` はRustの慣習に従っていて、`index.ts` より短いです。そして、それがどのように動作するか先入観を持っていません。
 
 <!-- ### Exported functions: max 2 args, put the rest into an options object. -->
 ### エクスポートされた関数: 最大で2つの引数、残りはオプションオブジェクトに入れてください。
