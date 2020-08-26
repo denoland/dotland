@@ -260,7 +260,7 @@ const Benchmarks = () => {
                     return ["check", "no_check"].includes(name);
                   })}
                   yLabel="seconds"
-                  yTickFormat={formatFloat}
+                  yTickFormat={formatLogScale}
                 />
                 <p className="mt-1">
                   In both cases, <code>std/examples/chat/server_test.ts</code>{" "}
