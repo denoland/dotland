@@ -15,7 +15,6 @@ import {
   formatPercentage,
   formatReqSec,
   formatKB,
-  formatFloat,
 } from "../util/benchmark_utils";
 import BenchmarkChart, { BenchmarkLoading } from "../components/BenchmarkChart";
 import { CookieBanner } from "../components/CookieBanner";
