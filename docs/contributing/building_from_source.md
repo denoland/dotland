@@ -177,8 +177,7 @@ cargo clean && cargo build -vv
 # ビルド:
 cargo build -vv
 
-# ビルドエラー？最新のmasterを取得しているか確かめて、もう一度ビルドしてください、
-もしくは動かない場合はこれを試してください:
+# ビルドエラー？最新のmasterを取得しているか確かめて、もう一度ビルドしてください、もしくは動かない場合はこれを試してください:
 cargo clean && cargo build -vv
 
 # 実行:
