@@ -192,9 +192,11 @@ requests.
 -->
 現在のパーミッションステータスがすでに"granted"か"denied"である場合、リクエストはクエリのように振る舞い現在のステータスを返します。これはすでに許可されたいるパーミッションとすでに拒否されているリクエストからプロンプトを防ぎます。
 
-### Revoke permissions
+<!-- ### Revoke permissions -->
+### パーミッションの取り消し
 
-Downgrade a permission from "granted" to "prompt".
+<!-- Downgrade a permission from "granted" to "prompt". -->
+"granted"から"prompt"へのダウングレード。
 
 ```ts
 // deno run --unstable --allow-read=/foo main.ts
@@ -204,8 +206,11 @@ console.log(await Deno.permissions.revoke(desc));
 // PermissionStatus { state: "prompt" }
 ```
 
+<!--
 However, what happens when you try to revoke a permission which is _partial_ to
 one granted on the CLI?
+-->
+しかし、CLIで許可された _部分的な_ パーミッションを取り消したい場合はどうなるでしょうか？
 
 ```ts
 // deno run --unstable --allow-read=/foo main.ts
@@ -215,11 +220,15 @@ console.log(await Deno.permissions.revoke(desc));
 // PermissionStatus { state: "granted" }
 ```
 
-It was not revoked.
+<!-- It was not revoked. -->
+取り消されません。
 
+<!--
 To understand this behaviour, imagine that Deno stores an internal set of
 _explicitly granted permission descriptors_. Specifying `--allow-read=/foo,/bar`
 on the CLI initializes this set to:
+-->
+この振る舞いを理解するために、Denoは内部の _明示的に許可されたパーミッションディスクリプタ_ セットを保存することを想像してください。CLIで `--allow-read=/foo,/bar` を指定するとこのセットは:
 
 ```ts
 [
@@ -228,8 +237,11 @@ on the CLI initializes this set to:
 ];
 ```
 
+<!--
 Granting a runtime request for `{ name: "write", path: "/foo" }` updates the set
 to:
+-->
+`{ name: "write", path: "/foo" }` のためのランタイムリクエストを許可すると、セットは:
 
 ```ts
 [
@@ -239,10 +251,13 @@ to:
 ];
 ```
 
+<!--
 Deno's permission revocation algorithm works by removing every element from this
 set which the argument permission descriptor is _stronger than_. So to ensure
 `desc` is not longer granted, pass an argument descriptor _stronger than_
 whichever _explicitly granted permission descriptor_ is _stronger than_ `desc`.
+-->
+Denoのパーミッション取り消しアルゴリズムは引数パーミッションディスクリプタのセットの全ての _より強い_ 要素を削除することで動作します。したがって `desc` が許可されなくなったことを確実にするために  `desc` _より強い_ すべての _明示的に許可されたパーミッションディスクリプタ_ _より強い_ ディクリプタに引数を渡してください。
 
 ```ts
 // deno run --unstable --allow-read=/foo main.ts
