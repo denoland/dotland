@@ -20,17 +20,23 @@ the permission system at runtime.
 -->
 いくつかのケースで、フォールトトレラントなプログラムを確保するため実行時にパーミッションシステムと通信する方法が必要です。
 
-### Permission descriptors
+<!-- ### Permission descriptors -->
+### パーミッションディスクリプタ
 
+<!--
 On the CLI, read permission for `/foo/bar` is represented as
 `--allow-read=/foo/bar`. In runtime JS, it is represented as the following:
+-->
+CLIでは `/foo/bar` の読み込みパーミッションは `--allow-read=/foo/bar` で表され。ランタイムJSでは次のように表されます。
 
 ```ts
 const desc = { name: "read", path: "/foo/bar" };
 ```
 
-Other examples:
+<!-- Other examples: -->
+別の例:
 
+<!--
 ```ts
 // Global write permission.
 const desc1 = { name: "write" };
@@ -45,6 +51,23 @@ const desc3 = { name: "net" };
 const desc4 = { name: "net", url: "127.0.0.1:8000" };
 
 // High-resolution time permission.
+const desc5 = { name: "hrtime" };
+```
+-->
+```ts
+// グローバル書き込みパーミッション。
+const desc1 = { name: "write" };
+
+// `$PWD/foo/bar` への書き込みパーミッション。
+const desc2 = { name: "write", path: "foo/bar" };
+
+// グローバルネットパーミッション。
+const desc3 = { name: "net" };
+
+// 127.0.0.1:8000へのネットパーミッション。
+const desc4 = { name: "net", url: "127.0.0.1:8000" };
+
+// 高分解能時間パーミッション。
 const desc5 = { name: "hrtime" };
 ```
 

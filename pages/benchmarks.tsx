@@ -15,7 +15,6 @@ import {
   formatPercentage,
   formatReqSec,
   formatKB,
-  formatFloat,
 } from "../util/benchmark_utils";
 import BenchmarkChart, { BenchmarkLoading } from "../components/BenchmarkChart";
 import { CookieBanner } from "../components/CookieBanner";
@@ -301,7 +300,7 @@ const Benchmarks = () => {
                     return ["check", "no_check"].includes(name);
                   })}
                   yLabel="seconds"
-                  yTickFormat={formatFloat}
+                  yTickFormat={formatLogScale}
                 />
                 <p className="mt-1">
                   {/*
