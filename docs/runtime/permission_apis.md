@@ -71,9 +71,11 @@ const desc4 = { name: "net", url: "127.0.0.1:8000" };
 const desc5 = { name: "hrtime" };
 ```
 
-### Query permissions
+<!-- ### Query permissions -->
+### パーミッションの問い合わせ
 
-Check, by descriptor, if a permission is granted or not.
+<!-- Check, by descriptor, if a permission is granted or not. -->
+ディスクリプタによってパーミッションが許可されているかどうかをチェックする。
 
 ```ts
 // deno run --unstable --allow-read=/foo main.ts
@@ -91,13 +93,17 @@ console.log(await Deno.permissions.query(desc3));
 // PermissionStatus { state: "prompt" }
 ```
 
-### Permission states
+<!-- ### Permission states -->
+### パーミッションステータス
 
+<!--
 A permission state can be either "granted", "prompt" or "denied". Permissions
 which have been granted from the CLI will query to `{ state: "granted" }`. Those
 which have not been granted query to `{ state: "prompt" }` by default, while
 `{ state: "denied" }` reserved for those which have been explicitly refused.
 This will come up in [Request permissions](#request-permissions).
+-->
+パーミッションステータスは"granted"、"prompt"、"denied"のいずれかになることが出来ます。CLIで許可されたパーミッションは `{ state: "granted" }` に問い合わせます。これらが許可されていない場合、デフォルトで `{ state: "prompt" }` に問い合わせを行い、`{ state: "denied" }` は明示的に拒否されたもののために予約されています。これは [パーミッションのリクエスト](#request-permissions) に記述されています。
 
 ### Permission strength
 
