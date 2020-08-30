@@ -153,9 +153,11 @@ const desc3 = { name: "net" };
 const desc4 = { name: "net", url: "127.0.0.1:8000" };
 ```
 
-### Request permissions
+<!-- ### Request permissions -->
+### パーミッションのリクエスト
 
-Request an ungranted permission from the user via CLI prompt.
+<!-- Request an ungranted permission from the user via CLI prompt. -->
+ユーザーからCLIプロンプトを通して未許可のパーミッションのリクエストをします。
 
 ```ts
 // deno run --unstable main.ts
@@ -173,16 +175,22 @@ console.log(status2);
 // PermissionStatus { state: "denied" }
 ```
 
+<!--
 If the current permission state is "prompt", a prompt will appear on the user's
 terminal asking them if they would like to grant the request. The request for
 `desc1` was granted so its new status is returned and execution will continue as
 if `--allow-read=/foo` was specified on the CLI. The request for `desc2` was
 denied so its permission state is downgraded from "prompt" to "denied".
+-->
+現在のパーミッションステータスが"prompt"の場合、プロンプトがユーザーのターミナルに現れ、リクエストを許可したいかどうか聞きます。`desc1` へのリクエストが許可されていたので、新しいステータスが返され `--allow-read=/foo` がCLIで指定された場合と同様に実行されます。`desc2` へのリクエストが拒否されたので、パーミッションステータスが"prompt"から"denied"に下げられます。
 
+<!--
 If the current permission state is already either "granted" or "denied", the
 request will behave like a query and just return the current status. This
 prevents prompts both for already granted permissions and previously denied
 requests.
+-->
+現在のパーミッションステータスがすでに"granted"か"denied"である場合、リクエストはクエリのように振る舞い現在のステータスを返します。これはすでに許可されたいるパーミッションとすでに拒否されているリクエストからプロンプトを防ぎます。
 
 ### Revoke permissions
 
