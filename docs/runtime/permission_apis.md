@@ -105,21 +105,34 @@ This will come up in [Request permissions](#request-permissions).
 -->
 パーミッションステータスは"granted"、"prompt"、"denied"のいずれかになることが出来ます。CLIで許可されたパーミッションは `{ state: "granted" }` に問い合わせます。これらが許可されていない場合、デフォルトで `{ state: "prompt" }` に問い合わせを行い、`{ state: "denied" }` は明示的に拒否されたもののために予約されています。これは [パーミッションのリクエスト](#request-permissions) に記述されています。
 
-### Permission strength
+<!-- ### Permission strength -->
+### パーミッションの強さ
 
+<!--
 The intuitive understanding behind the result of the second query in
 [Query permissions](#query-permissions) is that read access was granted to
 `/foo` and `/foo/bar` is within `/foo` so `/foo/bar` is allowed to be read.
+-->
+[パーミッションの問い合わせ](#query-permissions) の2番目の問い合わせの結果を直感的に理解するには `/foo` の中で `foo` と `/foo/bar` への読み込みアクセスを許可しているので、`/foo/bar` の読み込みは許可しています。
 
+<!--
 We can also say that `desc1` is
 _[stronger than](https://www.w3.org/TR/permissions/#ref-for-permissiondescriptor-stronger-than)_
 `desc2`. This means that for any set of CLI-granted permissions:
+-->
+`desc1` は `desc2` _[より強力](https://www.w3.org/TR/permissions/#ref-for-permissiondescriptor-stronger-than)_ です。次のものはすべてのCLIが許可したパーミッションセットに対してです:
 
+<!--
 1. If `desc1` queries to `{ state: "granted" }` then so must `desc2`.
 2. If `desc2` queries to `{ state: "denied" }` then so must `desc1`.
+-->
+1. もし `desc1` が `{ state: "granted" }` に問い合わせる場合、`desc2` も同様です。
+1. もし `desc2` が `{ state: "granted" }` に問い合わせる場合、`desc1` も同様です。
 
-More examples:
+<!-- More examples: -->
+他の例:
 
+<!--
 ```ts
 const desc1 = { name: "write" };
 // is stronger than
@@ -127,6 +140,16 @@ const desc2 = { name: "write", path: "/foo" };
 
 const desc3 = { name: "net" };
 // is stronger than
+const desc4 = { name: "net", url: "127.0.0.1:8000" };
+```
+-->
+```ts
+const desc1 = { name: "write" };
+// 上記は以下より強いです
+const desc2 = { name: "write", path: "/foo" };
+
+const desc3 = { name: "net" };
+// 上記は以下より強いです
 const desc4 = { name: "net", url: "127.0.0.1:8000" };
 ```
 
