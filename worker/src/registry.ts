@@ -1,7 +1,7 @@
 import { parseNameVersion } from "../../util/registry_utils";
 
 const S3_BUCKET =
-  "http://deno-registry-prod-storagebucket-d7uq3yal946u.s3-website-us-east-1.amazonaws.com/";
+  "http://deno-registry2-prod-storagebucket-b3a31d16.s3-website-us-east-1.amazonaws.com/";
 
 export async function handleRegistryRequest(url: URL): Promise<Response> {
   console.log("registry request", url.pathname);
