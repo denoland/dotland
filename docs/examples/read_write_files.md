@@ -18,11 +18,16 @@ filesystem the `--allow-read` and `--allow-write` flags must be used with the
 -->
 [データ取得の例](./fetch_data) で強調されていたようにDenoはセキュリティ上の理由からデフォルトでInput/Outputのアクセスを制限しています。そのためファイルシステムを操作する場合 `deno run` コマンドで `--allow-read` と `--allow-write` フラグを使用しなければいけません。
 
-## Read
+<!-- ## Read -->
+## 読み込み
 
+<!--
 The Deno runtime API makes it possible to read text files via the
 `readTextFile()` method, it just requires a path string or URL object. The
 method returns a promise which provides access to the file's text data.
+-->
+DenoランタイムAPIは `readTextFile()` メソッドを通してテキストファイルを読み込むことを可能にしています。このメソッドはパスかURLオブジェクトを要求します。
+このメソッドはファイルのテキストデータへのアクセスを提供するプロミスを返します。
 
 **Command:** `deno run --allow-read read.ts`
 
@@ -46,17 +51,26 @@ text.then((response) => console.log(response));
  */
 ```
 
+<!--
 The Deno standard library enables more advanced interaction with the filesystem
 and provides methods to read and parse files. The `readJson()` and
 `readJsonSync()` methods allow developers to read and parse files containing
 JSON. All these methods require is a valid file path string which can be
 generated using the `fromFileUrl()` method.
+-->
+Deno標準ライブラリはより高度なファイルシステムの操作を可能にし、読み事ファイルのパースのメソッドを提供します。`readJson()` と `readJsonSync()` メソッドは開発者に読み込みとJSONを含んでいるファイルのパースを可能にします。これら全てのメソッドは `fromFileUrl()` メソッドを使って生成された有効なファイルパスが必要です。
 
+<!--
 In the example below the `readJsonSync()` method is used, for asynchronus
 execution use the `readJson()` method.
+-->
+下記の例では `readJsonSync()` メソッドが使われていて、非同期実行では `readJson()` が使われています。
 
+<!--
 Currently some of this functionality is marked as unstable so the `--unstable`
 flag is required along with the `deno run` command.
+-->
+現在いくつかの機能は不安定版のため、`deno run` コマンドで `--unstable` フラグが必要です。
 
 **Command:** `deno run --unstable --allow-read read.ts`
 
