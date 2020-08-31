@@ -58,7 +58,7 @@ and provides methods to read and parse files. The `readJson()` and
 JSON. All these methods require is a valid file path string which can be
 generated using the `fromFileUrl()` method.
 -->
-Deno標準ライブラリはより高度なファイルシステムの操作を可能にし、読み事ファイルのパースのメソッドを提供します。`readJson()` と `readJsonSync()` メソッドは開発者に読み込みとJSONを含んでいるファイルのパースを可能にします。これら全てのメソッドは `fromFileUrl()` メソッドを使って生成された有効なファイルパスが必要です。
+Deno標準ライブラリはより高度なファイルシステムの操作を可能にし、読み込むファイルのパースのメソッドを提供します。`readJson()` と `readJsonSync()` メソッドは開発者に読み込みとJSONを含んでいるファイルのパースを可能にします。これら全てのメソッドは `fromFileUrl()` メソッドを使って生成された有効なファイルパスが必要です。
 
 <!--
 In the example below the `readJsonSync()` method is used, for asynchronus
@@ -96,14 +96,21 @@ console.log(readJson("./people.json"));
  */
 ```
 
-## Write
+<!-- ## Write -->
+## 書き込み
 
+<!--
 The Deno runtime API allows developers to write text to files via the
 `writeTextFile()` method. It just requires a file path and text string. The
 method returns a promise which resolves when the file was successfully written.
+-->
+DenoランタイムAPIは `writeTextFile()` メソッドを通してテキストファイルを読み込むことを可能にしています。このメソッドはパスかURLオブジェクトを要求します。このメソッドはファイルが正常に書き込まれたときに解決するプロミスを返します。
 
+<!--
 To run the command the `--allow-write` flag must be supplied to the `deno run`
 command.
+-->
+コマンドを実行するためには、`deno run` コマンドに `--allow-write` フラグが必要です。
 
 **Command:** `deno run --allow-write write.ts`
 
@@ -121,19 +128,28 @@ write.then(() => console.log("File written to."));
  */
 ```
 
+<!--
 The Deno standard library makes available more advanced features to write to the
 filesystem. For instance it is possible to write an object literal to a JSON
 file.
+-->
+Deno標準ライブラリはファイルシステムに書き込むための高度な機能を提供します。例えば、オブジェクトリテラルをJSONファイルに書き込むことが出来ます。
 
+<!--
 This requires a combination of the `ensureFile()`, `ensureFileSync()`,
 `writeJson()` and `writeJsonSync()` methods. In the example below the
 `ensureFileSync()` and the `writeJsonSync()` methods are used. The former checks
 for the existence of a file, and if it doesn't exist creates it. The latter
 method then writes the object to the file as JSON. If asynchronus execution is
 required use the `ensureFile()` and `writeJson()` methods.
+-->
+これには、`ensureFile()`、`ensureFileSync()`、`writeJson()`、`writeJsonSync()` メソッドの組み合わせが必要です。下記の例では、`ensureFileSync()` と `writeJsonSync()` メソッドが使われています。前者はファイルが存在するかどうかチェックし、存在しなければ作成します。後者はオブジェクトをJSONとしてファイルに書き込みます。非同期での実行が必要な時は `ensureFile()` と `writeJson()` を用いてください。
 
+<!--
 To execute the code the `deno run` command needs the unstable flag and both the
 write and read flags.
+-->
+コードを実行するには `deno run` コマンドで不安定フラグと読み書きフラグが必要です。
 
 **Command:** `deno run --allow-write --allow-read --unstable write.ts`
 
