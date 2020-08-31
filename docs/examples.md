@@ -14,10 +14,14 @@ more about the runtime.
 - [Hello World](./examples/hello_world)
 - [Import and Export Modules](./examples/import_export)
 - [How to Manage Dependencies](./examples/manage_dependencies)
+- [Fetch Data](./examples/fetch_data)
+- [Read and Write Files](./examples/read_write_files)
 -->
 - [Hello World](./examples/hello_world)
 - [モジュールのインポートとエクスポート](./examples/import_export)
 - [どうやって依存関係を管理するか](./examples/manage_dependencies)
+- [データの取得](./examples/fetch_data)
+- [ファイルの読み書き](./examples/read_write_files)
 
 <!-- ## Advanced -->
 ## 応用

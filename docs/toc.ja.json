@@ -72,6 +72,8 @@
       "hello_world": "Hello World",
       "import_export": "モジュールのインポートとエクスポート",
       "manage_dependencies": "依存関係管理",
+      "fetch_data": "データの取得",
+      "read_write_files": "ファイルの読み書き",
       "unix_cat": "Unix cat プログラム",
       "file_server": "ファイルサーバー",
       "tcp_echo": "TCP echo サーバー",

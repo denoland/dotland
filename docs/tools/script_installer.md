@@ -48,9 +48,11 @@ The executable name is inferred by default:
 - If the file stem is something generic like 'main', 'mod', 'index' or 'cli',
   and the path has no parent, take the file name of the parent path. Otherwise
   settle with the generic name.
+- If the resulting name has an '@...' suffix, strip it.
 -->
 - URLパスのファイルステムを取得しようとしました。上記の例では'file_server'となります。
 - もしファイルステムが'main'、'mod'、'index'、'cli'のようなジェネリックで親のないパスであった場合、親のパスのファイルネームを取得します。そうでなければ、ジェネリック名を用います。
+- 結果の名前に'@...'接尾辞がある場合、取り除いてください
 
 <!--
 To change the installation root, use `--root`:

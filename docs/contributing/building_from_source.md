@@ -45,13 +45,15 @@ Windowsユーザーのための追加の手順:
 ### 前提条件
 
 <!--
-You will need to [install Rust](https://www.rust-lang.org/tools/install). Make
-sure to fetch the latest stable release as Deno does not support nightly builds.
-Check that you have the required tools:
+> Deno requires the progressively latest stable release of Rust. Deno does not
+> support the Rust nightlies.
+
+[Update or Install Rust](https://www.rust-lang.org/tools/install). Check that
+Rust installed/updated correctly:
 -->
-[Rustのインストール](https://www.rust-lang.org/tools/install) が必要です。
-Denoはナイトリービルドをサポートしていないので最新の安定版リリースを取得してください。
-必要なツールを持っていることを確認してください:
+> DenoにはRustの最新安定版が必要です。Rustナイトリーはサポートしていません。
+
+[Rustのインストールやアップデート](https://www.rust-lang.org/tools/install)。Rustがインストール/アップデート正しくされているか確認:
 
 ```
 rustc -V
