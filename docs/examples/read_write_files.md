@@ -1,14 +1,22 @@
-# Read and Write Files
+<!-- # Read and Write Files -->
+# ファイルの読み書き
 
+<!--
 Interacting with the filesystem to read and write files is a basic requirement
 of most development projects. Deno provides a number of ways to do this via the
 [standard library](https://deno.land/std) and the
 [Deno runtime API](https://doc.deno.land/builtin/stable).
+-->
+ファイルシステムを操作してファイルの読み書きを行うことはほとんどの開発プロジェクトで基本的な要件です。Denoは [標準ライブラリ](https://deno.land/std) や
+[DenoランタイムAPI](https://doc.deno.land/builtin/stable) を利用してファイルの読み書きを行う方法を提供しています。
 
+<!--
 As highlighted in the [Fetch Data example](./fetch_data) Deno restricts access
 to Input / Output by default for security reasons. So when interacting with the
 filesystem the `--allow-read` and `--allow-write` flags must be used with the
 `deno run` command.
+-->
+[データ取得の例](./fetch_data) で強調されていたようにDenoはセキュリティ上の理由からデフォルトでInput/Outputのアクセスを制限しています。そのためファイルシステムを操作する場合 `deno run` コマンドで `--allow-read` と `--allow-write` フラグを使用しなければいけません。
 
 ## Read
 
