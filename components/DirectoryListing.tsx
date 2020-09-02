@@ -82,7 +82,12 @@ function DirectoryListing(props: {
           )}
         </div>
         <div>
-          <table className="min-w-full table-fixed">
+          <table className="min-w-full table-fixed w-full">
+            <colgroup>
+              <col className="w-9 md:w-12" />
+              <col className="w-max-content" />
+              <col style={{ width: "5.5rem" }} />
+            </colgroup>
             <thead>
               <tr className="table-row border-b-2 border-gray-200">
                 <td colSpan={3} className="">
@@ -133,7 +138,7 @@ function DirectoryListing(props: {
                           : ""
                       }`}
                     >
-                      <td className="whitespace-no-wrap text-sm leading-5 text-gray-400 w-6">
+                      <td className="whitespace-no-wrap text-sm leading-5 text-gray-400">
                         <Link href={href} as={as}>
                           <a
                             className={`px-2 sm:pl-3 md:pl-4 py-1 w-full block ${
@@ -183,7 +188,7 @@ function DirectoryListing(props: {
                       </td>
                       <td className="whitespace-no-wrap text-sm text-blue-500 leading-5">
                         <Link href={href} as={as}>
-                          <a className="px-2 py-1 w-full block">
+                          <a className="pl-2 py-1 w-full block truncate">
                             {entry.path ? (
                               <span className="font-light">{entry.path}/</span>
                             ) : (
@@ -204,7 +209,7 @@ function DirectoryListing(props: {
                       <td className="whitespace-no-wrap text-sm leading-5 text-gray-500 text-right">
                         <Link href={href} as={as}>
                           <a
-                            className="px-4 py-1 w-full h-full block"
+                            className="px-4 py-1 pl-1 w-full h-full block"
                             tabIndex={-1}
                           >
                             {entry.size ? bytesToSize(entry.size) : <>&nbsp;</>}
