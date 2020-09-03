@@ -52,10 +52,13 @@ export const RawCodeBlock = ({
         : target;
     }
   };
+
   if (enableLineRef) {
     useEffect(() => {
       const onHashChange = () => {
         setHashValue(location.hash);
+        const id = location.hash.substring(1);
+        document.getElementById(id)?.scrollIntoView();
       };
       window.addEventListener("hashchange", onHashChange);
       onHashChange();
