@@ -43,7 +43,7 @@ export const RawCodeBlock = ({
   const codeDivClassNames =
     "text-gray-300 token-line text-right select-none text-xs";
   const onClick = (e: React.MouseEvent) => {
-    if (e.shiftKey) { 
+    if (e.shiftKey) {
       e.preventDefault();
       const { hash } = location;
       const target = (e.target as HTMLAnchorElement).hash;
@@ -58,9 +58,9 @@ export const RawCodeBlock = ({
       const onHashChange = () => {
         setHashValue(location.hash);
         const id = location.hash.substring(1);
-        document.getElementById(id)?.scrollIntoView()
+        document.getElementById(id)?.scrollIntoView();
       };
-      window.addEventListener("hashchange", onHashChange);  
+      window.addEventListener("hashchange", onHashChange);
       onHashChange();
       return () => {
         window.removeEventListener("hashchange", onHashChange);
