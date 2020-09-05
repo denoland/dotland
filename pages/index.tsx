@@ -179,8 +179,8 @@ for await (const req of s) {
           <p className="my-4 text-gray-700">
             Deno can import modules from any location on the web, like GitHub, a
             personal webserver, or a CDN like{" "}
-            <a href="https://pika.dev" className="link">
-              pika.dev
+            <a href="https://www.skypack.dev" className="link">
+              Skypack
             </a>{" "}
             or{" "}
             <a href="https://jspm.io" className="link">
