@@ -16,6 +16,10 @@ flag**
 deno lint --unstable
 # lint specific files
 deno lint --unstable myfile1.ts myfile2.ts
+# print result as JSON
+deno lint --unstable --json
+# read from stdin
+cat file.ts | deno lint --unstable -
 ```
 -->
 ```shell
@@ -23,7 +27,14 @@ deno lint --unstable myfile1.ts myfile2.ts
 deno lint --unstable
 # 特定のファイルをリント
 deno lint --unstable myfile1.ts myfile2.ts
+# JSONで結果を表示
+deno lint --unstable --json
+# 標準入力から読み込み
+cat file.ts | deno lint --unstable -
 ```
+
+<!-- For more detail, run `deno lint --help`. -->
+詳細は、`deno lint --help` を実行してください。
 
 <!-- ### Available rules -->
 ### 利用可能なルール
@@ -166,16 +177,16 @@ function bar(a: any) {
 
 <!--
 To provide some compatibility with ESLint `deno lint` also supports
-`// eslint-ignore-next-line` directive. Just like with `// deno-lint-ignore`,
+`// eslint-disable-next-line` directive. Just like with `// deno-lint-ignore`,
 it's required to specify the ignored rule name:
 -->
-ESLintとの互換性を確保するために `deno lint` は `// eslint-ignore-next-line` ディレクティブをサポートします。`// deno-lint-ignore` と同様に無視するルールを指定する必要があります:
+ESLintとの互換性を確保するために `deno lint` は `// eslint-disable-next-line` ディレクティブをサポートします。`// deno-lint-ignore` と同様に無視するルールを指定する必要があります:
 
 ```ts
-// eslint-ignore-next-line no-empty
+// eslint-disable-next-line no-empty
 while (true) {}
 
-// eslint-ignore-next-line @typescript-eslint/no-explicit-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function bar(a: any) {
   // ...
 }

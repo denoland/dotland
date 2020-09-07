@@ -59,7 +59,7 @@ source /usr/local/etc/bash_completion.d/deno.bash
 
 ```shell
 mkdir ~/.zsh # create a folder to save your completions. it can be anywhere
-deno completions zsh > .zsh/_deno
+deno completions zsh > ~/.zsh/_deno
 ```
 
 <!-- then add this to your `.zshrc` -->

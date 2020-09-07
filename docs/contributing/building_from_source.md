@@ -127,7 +127,7 @@ Windowsユーザー:
 
 2. Enable "Debugging Tools for Windows". Go to "Control Panel" → "Programs" →
    "Programs and Features" → Select "Windows Software Development Kit - Windows
-   10" → "Change" → "Change" → Check "Debugging Tools For Windows" → "Change" ->
+   10" → "Change" → "Change" → Check "Debugging Tools For Windows" → "Change" →
    "Finish". Or use:
    [Debugging Tools for Windows](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/)
    (Notice: it will download the files, you should install
@@ -145,7 +145,7 @@ Windowsユーザー:
 
 2. "Debugging Tools for Windows" を有効にしてください。"Control Panel" → "Programs" →
    "Programs and Features" → Select "Windows Software Development Kit - Windows
-   10" → "Change" → "Change" → Check "Debugging Tools For Windows" → "Change" ->
+   10" → "Change" → "Change" → Check "Debugging Tools For Windows" → "Change" →
    "Finish"。もしくは以下を使用してください:
    [Debugging Tools for Windows](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/)
    (注意: これはファイルをダウンロードします、
