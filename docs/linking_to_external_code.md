@@ -45,7 +45,7 @@ is not specified. The next time you run the program, no downloads will be made.
 If the program hasn't changed, it won't be recompiled either. The default
 directory is:
 -->
-Deno `DENO_DIR` 環境変数で指定されたディレクトリにリポートインポートをキャッシュします。`DENO_DIR` が指定されなかった場合システムのキャッシュディレクトリがデフォルトになります。次にプログラムを実行したときはダウンロードされません。もしプログラムに変更がない場合再コンパイルもしません。デフォルトディレクトリは:
+Deno `DENO_DIR` 環境変数で指定されたディレクトリにリモートインポートをキャッシュします。`DENO_DIR` が指定されなかった場合システムのキャッシュディレクトリがデフォルトになります。次にプログラムを実行したときはダウンロードされません。もしプログラムに変更がない場合再コンパイルもしません。デフォルトディレクトリは:
 
 - On Linux/Redox: `$XDG_CACHE_HOME/deno` or `$HOME/.cache/deno`
 - On Windows: `%LOCALAPPDATA%/deno` (`%LOCALAPPDATA%` = `FOLDERID_LocalAppData`)
