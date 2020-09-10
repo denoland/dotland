@@ -62,7 +62,6 @@ const NewsPostPage = (props: Props) => {
         <Link href="/posts">
           <a className="link">&lt;- Back to overview</a>
         </Link>
-
         <h1 className="tracking-tight font-bold text-5xl leading-10 mt-4 py-8">
           {props.meta.title}
         </h1>
@@ -70,7 +69,7 @@ const NewsPostPage = (props: Props) => {
           {format.format(date)}
         </p>
         <p className="text-gray-500 mt-3 leading-tight">{props.meta.author}</p>
-        <div className="mt-8">
+        <div className="mt-8 -mx-4">
           <Markdown
             source={props.markdown}
             displayURL={`https://deno.land/posts/${props.meta.id}`}

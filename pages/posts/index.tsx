@@ -48,40 +48,46 @@ const PostsIndexPage = (props: Props) => {
             </div>
           </div>
           <div className="mt-6 grid gap-16 lg:grid-cols-2 lg:col-gap-5 lg:row-gap-12">
-            {props.posts.map((post) => {
-              const date = new Date(post.publish_date);
-              const format = new Intl.DateTimeFormat(undefined, {
-                month: "long",
-                day: "numeric",
-                year: "numeric",
-              });
-              return (
-                <div key={post.id}>
-                  <p className="text-sm leading-5 text-gray-500">
-                    <time dateTime={post.publish_date}>
-                      {format.format(date)}
-                    </time>
-                  </p>
-                  <Link href="/posts/[post]" as={`/posts/${post.id}`}>
-                    <a className="block">
-                      <h3 className="mt-2 text-xl leading-7 font-semibold text-gray-900">
-                        {post.title}
-                      </h3>
-                      <p className="mt-3 text-base leading-6 text-gray-500">
-                        {post.snippet}
-                      </p>
-                    </a>
-                  </Link>
-                  <div className="mt-3">
+            {props.posts
+              .sort((a, b) => {
+                const publishDateA = new Date(a.publish_date);
+                const publishDateB = new Date(b.publish_date);
+                return publishDateA < publishDateB ? 1 : -1;
+              })
+              .map((post) => {
+                const date = new Date(post.publish_date);
+                const format = new Intl.DateTimeFormat(undefined, {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                });
+                return (
+                  <div key={post.id}>
+                    <p className="text-sm leading-5 text-gray-500">
+                      <time dateTime={post.publish_date}>
+                        {format.format(date)}
+                      </time>
+                    </p>
                     <Link href="/posts/[post]" as={`/posts/${post.id}`}>
-                      <a className="text-base leading-6 font-semibold text-blue-600 hover:text-blue-500 transition ease-in-out duration-150">
-                        Read post
+                      <a className="block">
+                        <h3 className="mt-2 text-xl leading-7 font-semibold text-gray-900">
+                          {post.title}
+                        </h3>
+                        <p className="mt-3 text-base leading-6 text-gray-500">
+                          {post.snippet}
+                        </p>
                       </a>
                     </Link>
+                    <div className="mt-3">
+                      <Link href="/posts/[post]" as={`/posts/${post.id}`}>
+                        <a className="text-base leading-6 font-semibold text-blue-600 hover:text-blue-500 transition ease-in-out duration-150">
+                          Read post
+                        </a>
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
         </div>
       </div>
