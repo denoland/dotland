@@ -485,7 +485,12 @@ export function listExternalDependencies(
 }
 
 export async function getStats(): Promise<{
-  recentlyAddedModules: Array<Module & { created_at: string }>;
+  recently_added_modules: Array<Module & { created_at: string }>;
+  recently_uploaded_versions: Array<{
+    name: string;
+    version: string;
+    created_at: string;
+  }>;
 } | null> {
   const url = `${API_ENDPOINT}stats`;
   const res = await fetch(url, {

@@ -9,11 +9,7 @@ import useSWR from "swr";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import InlineCode from "../../components/InlineCode";
-import {
-  listModules,
-  getStats,
-  SearchResult as Module,
-} from "../../util/registry_utils";
+import { listModules, getStats } from "../../util/registry_utils";
 import * as pageutils from "../../util/pagination_utils";
 import RegistryInstructions from "../../components/RegistryInstructions";
 import { CookieBanner } from "../../components/CookieBanner";
@@ -570,13 +566,19 @@ const ThirdPartyRegistryList = () => {
                 <div>
                   <h5 className="font-medium text-lg">New modules</h5>
                   <div className="bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2">
-                    <ModuleList modules={stats.recentlyAddedModules} />
+                    <ModuleList modules={stats.recently_added_modules} />
                   </div>
                 </div>
                 <div>
                   <h5 className="font-medium text-lg">Recently updated</h5>
                   <div className="bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2">
-                    <ModuleList modules={stats.recentlyAddedModules} />
+                    <ModuleList
+                      modules={stats.recently_uploaded_versions.map((v) => ({
+                        name: v.name,
+                        description: v.version,
+                        starCount: undefined,
+                      }))}
+                    />
                   </div>
                 </div>
               </div>
@@ -589,7 +591,11 @@ const ThirdPartyRegistryList = () => {
   );
 };
 
-function ModuleList({ modules }: { modules: Module[] }) {
+function ModuleList({
+  modules,
+}: {
+  modules: Array<{ name: string; description: string; star_count?: string }>;
+}) {
   return (
     <ul>
       {modules.map((meta, i) => {
@@ -607,23 +613,31 @@ function ModuleList({ modules }: { modules: Module[] }) {
                       {meta.name && (
                         <div className="mt-1 flex items-center text-sm leading-5 text-gray-500">
                           <span className="truncate">
-                            {replaceEmojis(meta.description ?? "")}
+                            {meta.description ? (
+                              replaceEmojis(meta.description)
+                            ) : (
+                              <span className="italic text-gray-400">
+                                No description
+                              </span>
+                            )}
                           </span>
                         </div>
                       )}
                     </div>
                   </div>
-                  <div className="ml-6 mr-4 flex items-center">
-                    <div className="text-gray-400">{meta.star_count}</div>
-                    <svg
-                      className="ml-1 text-gray-400 w-5 h-5"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <title>star</title>
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                    </svg>
-                  </div>
+                  {meta.star_count !== undefined ? (
+                    <div className="ml-6 mr-4 flex items-center">
+                      <div className="text-gray-400">{meta.star_count}</div>
+                      <svg
+                        className="ml-1 text-gray-400 w-5 h-5"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <title>star</title>
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                      </svg>
+                    </div>
+                  ) : null}
                   <div>
                     <svg
                       className="h-5 w-5 text-gray-400"
