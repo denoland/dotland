@@ -1,0 +1,267 @@
+Today we are releasing Deno 1.4.0. It is the largest feature release yet, with
+great additions like the web standard `WebSocket API`, `deno run --watch`, and
+integrated test coverage.
+
+If you already have Deno installed you can upgrade to 1.4 by running
+`deno upgrade`. If you are installing Deno for the first time, you can use one
+of the methods listed below:
+
+```shell
+# Using Shell (macOS and Linux):
+curl -fsSL https://deno.land/x/install/install.sh | sh
+
+# Using PowerShell (Windows):
+iwr https://deno.land/x/install/install.ps1 -useb | iex
+
+# Using Homebrew (macOS):
+brew install deno
+
+# Using Scoop (Windows):
+scoop install deno
+
+# Using Chocolatey (Windows):
+choco install deno
+```
+
+You can find more installation methods at
+https://deno.land/manual/getting_started/installation.
+
+The full release notes, including bug fixes, can be found at
+https://github.com/denoland/deno/releases/tag/v1.4.0.
+
+# New features and changes
+
+## Stricter type checks in `--unstable`
+
+For all users using `--unstable` the `isolatedModules` and
+`importsNotUsedAsValues` TypeScript compiler options will be switched on by
+default now. We will enable these flags by default for everyone in `v1.5`. These
+flags enable some stricter checks in the TypeScript compiler that will likely
+lead to some new errors you have not seen before:
+
+```
+ERROR TS1205: Re-exporting a type when the '--isolatedModules' flag is provided requires using 'export type'.
+
+ERROR TS1371: This import is never used as a value and must use 'import type' because the 'importsNotUsedAsValues' is set to 'error'.
+```
+
+These errors occur when types are imported or re-exported using
+`import { MyType } from "./types.ts"` or `export { MyType } from "./types.ts"`
+instead of `import type` or `export type`. To fix this error, change your type
+imports and re-exports to use `export type { MyType } from "./types.ts"` and
+`export type { MyType } from "./types.ts"`. Example:
+
+```ts
+// Bad
+import { MyType } from "./file.ts";
+export { MyType } from "./file.ts";
+
+// Good
+import type { MyType } from "./types.ts";
+export type { MyType } from "./types.ts";
+```
+
+These flags also disallow the use of `const enum`.
+
+## WebSocket API
+
+This release adds support for the web standard
+[`WebSocket API`](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API),
+available in all modern browsers. It can be used to communicate with remote
+servers over the WebSocket protocol.
+
+Here is a short example of how it works:
+
+```js
+// Start the connection to the WebSocket server at echo.websocket.org
+const ws = new WebSocket("ws://echo.websocket.org/");
+
+// Register event listeners for the open, close, and message events
+ws.onopen = () => {
+  console.log("WebSocket ready!");
+
+  // Send a message over the WebSocket to the server
+  ws.send("Hello World!");
+};
+ws.onmessage = (message) => {
+  // Log the message we recieve:
+  console.log("Received data:", message.data);
+
+  // Close the websocket after receiving the message
+  ws.close();
+};
+ws.onclose = () => console.log("WebSocket closed!");
+ws.onerror = (err) => console.log("WebSocket error:", err.error);
+
+// When running this the following is logged to the console:
+//
+// WebSocket ready!
+// Received data: Hello World!
+// WebSocket closed!
+```
+
+You can try it out locally:
+`deno run --allow-net echo.websocket.org https://deno.land/posts/whats-new-in-deno-1-4/websocket.js`
+
+This release also removes the websocket connect methods from `std/ws`. Use the
+`WebSocket API` instead.
+
+## `deno run --watch`
+
+Deno now has an integrated file watcher that can be used to restart a script
+when any of its dependencies change.
+
+To use it run your script like you usually would, but add the `--watch` flag.
+You additionally have to add the `--unstable` flag because this feature is not
+stable yet.
+
+```shell
+$ echo "console.log('Hello World!')" > ./mod.ts
+$ deno run --watch ./mod.ts
+Check file:///home/deno/mod.ts
+Hello World
+Watcher Process terminated! Restarting on file change...
+# now run `echo "console.log('File watching works!')" > ./mod.ts` in a different terminal
+Watcher File change detected! Restarting!
+Check file:///home/deno/mod.ts
+File watching works!
+Watcher Process terminated! Restarting on file change...
+```
+
+The watch flag takes no arguments for directories or files to watch. Instead it
+automatically determines all of the local imports of your script, and watches
+those.
+
+Currently file watching is only supported for `deno run`, but in the future it
+will also be added to `deno test`, `deno lint`, and other subcommands.
+
+## `deno test --coverage`
+
+You can now find code that is not covered by your tests using the `--coverage`
+flag for `deno test`. When enabled this will print a summary of your code
+coverage per file after all tests are run. You additionally have to add the
+`--unstable` flag because this feature is not stable yet.
+
+```
+$ git clone git@github.com:denosaurs/deno_brotli.git && cd deno_brotli
+$ deno test --coverage --unstable
+Debugger listening on ws://127.0.0.1:9229/ws/5a593019-d185-478b-a928-ebc33e5834be
+Check file:///home/deno/deno_brotli/.deno.test.ts
+running 2 tests
+test compress ... ok (26ms)
+test decompress ... ok (13ms)
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (40ms)
+
+test coverage:
+file:///home/deno/deno_brotli/mod.ts 100.000%
+file:///home/deno/deno_brotli/wasm.js 100.000%
+```
+
+Currently the only available output format is the text summary. Other output
+formats like `lcov` and `json` will be added in the future.
+
+## `deno info` improvements
+
+The `deno info` tool for doing dependency analysis has gotten a major overhaul
+this update. It is now faster, more accurate, and it does not crash on type or
+runtime errors anymore.
+
+Additionally the file size of dependencies is now displayed making it very easy
+to figure out what dependencies are adding a lot of code to your project.
+
+![a screenshot of running `deno info https://deno.land/x/brotli/mod.ts`, which prints the a module graph for the `https://deno.land/x/brotli/mod.ts` module](/posts/whats-new-in-deno-1-4/info.png)
+
+## CSS styling in console.log
+
+Most modern browsers support styling `console.log` messages with CSS. In our
+ongoing effor to be as web compatible as possible, Deno now also supports CSS
+styling for `console.log`.
+
+To style a message, add a `%c` format parameter to your message, and specify the
+styles to apply as an argument to `console.log`:
+
+```js
+console.log("%cStop!", "color:red;font-weight:bold");
+// This will print a bold red `Stop!` to the console.
+```
+
+Deno supports the CSS properties `color`, `background-color`, `font-weight`,
+`font-style`, `text-decoration-color`, and `text-decoration-line`. Support for
+these properties, and custom rgb, hex, and hsl colors depdend on if your
+terminal's support for ANSI.
+
+![a screenshot of running `deno run https://deno.land/posts/whats-new-in-deno-1-4/rainbow.js`, which prints a rainbow with Deno 1.4 written on it to the console](/posts/whats-new-in-deno-1-4/rainbow.png)
+_View the source code at
+https://deno.land/posts/whats-new-in-deno-1-4/rainbow.js_
+
+## Updates to `deno lint`
+
+In this release the adds the final 5 rules required to get `deno lint` rules on
+par with recommended `eslint` and `typescript-eslint` ruleset. This means that
+`deno lint` should be able to catch all errors that `@eslint/recommended` and
+`@typescript-eslint/recommended` can (at an order of magnitude better
+performance). This is a major step towards stabilizing `deno lint`.
+
+## Updates to `deno doc`
+
+`deno doc` and https://doc.deno.land has also gotten a round of new featuers and
+fixes this release. Support for the `export { foo };` syntax has been added
+(exporting a statement after declartaion), and re-exports of multiple symbols
+with the same name are now supported.
+
+To try out these new features, just browse any module on https://doc.deno.land.
+It has been updated with the new release already.
+
+# Changes in deno.land/std
+
+In this release the `writeJson`, `writeJsonSync`, `readJson`, and `readJsonSync`
+functions have been removed from the https://deno.land/std/fs. You can easially
+switch them out with these functions:
+
+```diff
+- const accounting = await readJson("accounting.json");
++ const accounting = JSON.parse(await Deno.readTextFile("accounting.json"));
+
+- const accounting = writeJsonSync("accounting.json");
++ const accounting = JSON.parse(Deno.readTextFileSync("accounting.json"));
+
+- await writeJson("hello_world.json", { "hello": "world" });
++ await Deno.writeTextFile("hello_world.json", JSON.stringify({ "hello": "world" }));
+
+- writeJsonSync("hello_world.json", { "hello": "world" });
++ Deno.writeTextFileSync("hello_world.json", JSON.stringify({ "hello": "world" }));
+```
+
+# Changes to `deno_core`
+
+<!--
+TODO(bartlomieju): write this section
+
+refactor(core): rename CoreIsolate to JsRuntime (#7373)
+refactor(core): merge CoreIsolate and EsIsolate (#7370)
+-->
+
+# Updates to the VS Code extension
+
+The official
+[VS Code extension for Deno](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno)
+has had some major feature releases recently. Here is a quick summary:
+
+## Remote URL IntelliSense
+
+A great new feature of the extension is IntelliSense for deno.land imports. It
+gives you autocomplete suggestions for module names on deno.land/x, all of their
+versions, and their full directory listing. All of this is done without actually
+downloading the module source code, instead it is all powered by
+[the recent updates to deno.land/x](http://localhost:3000/posts/registry2).
+
+<video src="/posts/whats-new-in-deno-1-4/remote_intellisense.mp4" autoplay muted loop></video>
+
+## Inline `deno lint` diagnostics
+
+`deno lint` is now fully integrated with the extension. To enable it, just set
+the `deno.unstable` and `deno.lint` settings in the extension to `true`. After
+doing this you will get inline real-time diagnostics for your code:
+
+<video src="/posts/whats-new-in-deno-1-4/deno_lint_demo.mp4" autoplay muted loop></video>

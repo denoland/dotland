@@ -1,3 +1,6 @@
+// How to run:
+// deno run --allow-net echo.websocket.org https://deno.land/posts/whats-new-in-deno-1-4/websocket.js
+
 // Start the connection to the WebSocket server at echo.websocket.org
 const ws = new WebSocket("ws://echo.websocket.org/");
 
