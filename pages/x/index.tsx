@@ -9,7 +9,7 @@ import useSWR from "swr";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import InlineCode from "../../components/InlineCode";
-import { listModules } from "../../util/registry_utils";
+import { listModules, getStats } from "../../util/registry_utils";
 import * as pageutils from "../../util/pagination_utils";
 import RegistryInstructions from "../../components/RegistryInstructions";
 import { CookieBanner } from "../../components/CookieBanner";
@@ -63,6 +63,8 @@ const ThirdPartyRegistryList = () => {
     },
     { dedupingInterval: 300, refreshInterval: 0, initialData: undefined }
   );
+
+  const { data: stats } = useSWR("dummy", () => getStats());
 
   return (
     <>
@@ -241,66 +243,7 @@ const ThirdPartyRegistryList = () => {
                     No modules found
                   </div>
                 ) : (
-                  <ul>
-                    {resp.results.map((meta, i) => {
-                      const link = `/x/${meta.name}`;
-                      return (
-                        <li
-                          className={i !== 0 ? "border-t border-gray-200" : ""}
-                          key={i}
-                        >
-                          <Link href="/x/[...rest]" as={link}>
-                            <a className="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
-                              <div className="flex items-center px-4 sm:px-6 py-2">
-                                <div className="min-w-0 flex-1 flex items-center">
-                                  <div className="min-w-0 flex-1">
-                                    <div className="text-sm leading-5 font-medium text-blue-500 truncate">
-                                      {meta.name}
-                                    </div>
-                                    {meta.name && (
-                                      <div className="mt-1 flex items-center text-sm leading-5 text-gray-500">
-                                        <span className="truncate">
-                                          {replaceEmojis(
-                                            meta.description ?? ""
-                                          )}
-                                        </span>
-                                      </div>
-                                    )}
-                                  </div>
-                                </div>
-                                <div className="ml-6 mr-4 flex items-center">
-                                  <div className="text-gray-400">
-                                    {meta.star_count}
-                                  </div>
-                                  <svg
-                                    className="ml-1 text-gray-400 w-5 h-5"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                  >
-                                    <title>star</title>
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                  </svg>
-                                </div>
-                                <div>
-                                  <svg
-                                    className="h-5 w-5 text-gray-400"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                  >
-                                    <path
-                                      fillRule="evenodd"
-                                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                      clipRule="evenodd"
-                                    />
-                                  </svg>
-                                </div>
-                              </div>
-                            </a>
-                          </Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
+                  <ModuleList modules={resp.results} />
                 )}
                 {!query
                   ? (() => {
@@ -516,7 +459,7 @@ const ThirdPartyRegistryList = () => {
           </div>
           <div
             id="info"
-            className="max-w-screen-xl mx-auto pt-4 pb-8 sm:pt-8 sm:pb-12 px-4 sm:px-6 lg:pt-12 lg:pb-16 lg:px-8"
+            className="max-w-screen-xl mx-auto pt-4 pb-8 sm:pt-8 px-4 sm:px-6 lg:pt-12 lg:px-8"
           >
             <dl className="md:grid md:grid-cols-2 md:gap-8">
               <div>
@@ -614,11 +557,108 @@ const ThirdPartyRegistryList = () => {
               </div>
             </dl>
           </div>
+          <div className="max-w-screen-lg mx-auto pt-4 pb-8 sm:pt-8 sm:pb-12 px-4 sm:px-6 lg:pt-12 lg:pb-16 lg:px-8">
+            <h4 className="font-semibold text-2xl" id="stats">
+              Stats
+            </h4>
+            {stats ? (
+              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-8">
+                <div>
+                  <h5 className="font-medium text-lg">New modules</h5>
+                  <div className="bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2">
+                    <ModuleList modules={stats.recently_added_modules} />
+                  </div>
+                </div>
+                <div>
+                  <h5 className="font-medium text-lg">Recently updated</h5>
+                  <div className="bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2">
+                    <ModuleList
+                      modules={stats.recently_uploaded_versions.map((v) => ({
+                        name: v.name,
+                        description: v.version,
+                        starCount: undefined,
+                      }))}
+                    />
+                  </div>
+                </div>
+              </div>
+            ) : null}
+          </div>
         </div>
         <Footer simple />
       </div>
     </>
   );
 };
+
+function ModuleList({
+  modules,
+}: {
+  modules: Array<{ name: string; description: string; star_count?: string }>;
+}) {
+  return (
+    <ul>
+      {modules.map((meta, i) => {
+        const link = `/x/${meta.name}`;
+        return (
+          <li className={i !== 0 ? "border-t border-gray-200" : ""} key={i}>
+            <Link href="/x/[...rest]" as={link}>
+              <a className="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
+                <div className="flex items-center px-4 sm:px-6 py-2">
+                  <div className="min-w-0 flex-1 flex items-center">
+                    <div className="min-w-0 flex-1">
+                      <div className="text-sm leading-5 font-medium text-blue-500 truncate">
+                        {meta.name}
+                      </div>
+                      {meta.name && (
+                        <div className="mt-1 flex items-center text-sm leading-5 text-gray-500">
+                          <span className="truncate">
+                            {meta.description ? (
+                              replaceEmojis(meta.description)
+                            ) : (
+                              <span className="italic text-gray-400">
+                                No description
+                              </span>
+                            )}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  {meta.star_count !== undefined ? (
+                    <div className="ml-6 mr-4 flex items-center">
+                      <div className="text-gray-400">{meta.star_count}</div>
+                      <svg
+                        className="ml-1 text-gray-400 w-5 h-5"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <title>star</title>
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                      </svg>
+                    </div>
+                  ) : null}
+                  <div>
+                    <svg
+                      className="h-5 w-5 text-gray-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            </Link>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
 
 export default ThirdPartyRegistryList;
