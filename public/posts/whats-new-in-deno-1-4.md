@@ -31,38 +31,6 @@ https://github.com/denoland/deno/releases/tag/v1.4.0.
 
 # New features and changes
 
-## Stricter type checks in `--unstable`
-
-For all users using `--unstable` the `isolatedModules` and
-`importsNotUsedAsValues` TypeScript compiler options will be switched on by
-default now. We will enable these flags by default for everyone in `v1.5`. These
-flags enable some stricter checks in the TypeScript compiler that will likely
-lead to some new errors you have not seen before:
-
-```
-ERROR TS1205: Re-exporting a type when the '--isolatedModules' flag is provided requires using 'export type'.
-
-ERROR TS1371: This import is never used as a value and must use 'import type' because the 'importsNotUsedAsValues' is set to 'error'.
-```
-
-These errors occur when types are imported or re-exported using
-`import { MyType } from "./types.ts"` or `export { MyType } from "./types.ts"`
-instead of `import type` or `export type`. To fix this error, change your type
-imports and re-exports to use `export type { MyType } from "./types.ts"` and
-`export type { MyType } from "./types.ts"`. Example:
-
-```ts
-// Bad
-import { MyType } from "./file.ts";
-export { MyType } from "./file.ts";
-
-// Good
-import type { MyType } from "./types.ts";
-export type { MyType } from "./types.ts";
-```
-
-These flags also disallow the use of `const enum`.
-
 ## WebSocket API
 
 This release adds support for the web standard
@@ -111,13 +79,13 @@ This release also removes the websocket connect methods from `std/ws`. Use the
 Deno now has an integrated file watcher that can be used to restart a script
 when any of its dependencies change.
 
-To use it run your script like you usually would, but add the `--watch` flag.
+To use it, run your script like you usually would, but add the `--watch` flag.
 You additionally have to add the `--unstable` flag because this feature is not
 stable yet.
 
 ```shell
-$ echo "console.log('Hello World!')" > ./mod.ts
-$ deno run --watch ./mod.ts
+$ echo "console.log('Hello World!')" > mod.ts
+$ deno run --watch mod.ts
 Check file:///home/deno/mod.ts
 Hello World
 Watcher Process terminated! Restarting on file change...
@@ -133,7 +101,7 @@ automatically determines all of the local imports of your script, and watches
 those.
 
 Currently file watching is only supported for `deno run`, but in the future it
-will also be added to `deno test`, `deno lint`, and other subcommands.
+will also be added to `deno test` and possibly other subcommands.
 
 ## `deno test --coverage`
 
@@ -161,14 +129,42 @@ file:///home/deno/deno_brotli/wasm.js 100.000%
 Currently the only available output format is the text summary. Other output
 formats like `lcov` and `json` will be added in the future.
 
+## Stricter type checks in `--unstable`
+
+For all users using `--unstable` the `isolatedModules` and
+`importsNotUsedAsValues` TypeScript compiler options will be switched on by
+default now. We will enable these flags by default for everyone in the future.
+These flags enable some stricter checks in the TypeScript compiler that will
+likely lead to some new errors you have not seen before:
+
+```
+ERROR TS1205: Re-exporting a type when the '--isolatedModules' flag is provided requires using 'export type'.
+
+ERROR TS1371: This import is never used as a value and must use 'import type' because the 'importsNotUsedAsValues' is set to 'error'.
+```
+
+These errors occur when enums, interfaces, or type aliases are imported or
+re-exported. To fix the error, change your imports and re-exports to use
+`import type` and `export type`. Example:
+
+```ts
+// Bad
+import { MyType } from "./mod.ts";
+export { MyType } from "./mod.ts";
+
+// Good
+import type { MyType } from "./mod.ts";
+export type { MyType } from "./mod.ts";
+```
+
+These flags also disallow the use of `const enum`.
+
 ## `deno info` improvements
 
 The `deno info` tool for doing dependency analysis has gotten a major overhaul
-this update. It is now faster, more accurate, and it does not crash on type or
-runtime errors anymore.
-
-Additionally the file size of dependencies is now displayed making it very easy
-to figure out what dependencies are adding a lot of code to your project.
+this update. It is now faster and less buggy. Additionally the file size of
+dependencies is now displayed making it very easy to figure out what
+dependencies are adding a lot of code to your project.
 
 ![a screenshot of running `deno info https://deno.land/x/brotli/mod.ts`, which prints the a module graph for the `https://deno.land/x/brotli/mod.ts` module](/posts/whats-new-in-deno-1-4/info.png)
 
@@ -195,13 +191,14 @@ terminal's support for ANSI.
 _View the source code at
 https://deno.land/posts/whats-new-in-deno-1-4/rainbow.js_
 
-## Updates to `deno lint`
+## Lint supports complete eslint and typescript-eslint recommended rules
 
-In this release the adds the final 5 rules required to get `deno lint` rules on
-par with recommended `eslint` and `typescript-eslint` ruleset. This means that
-`deno lint` should be able to catch all errors that `@eslint/recommended` and
-`@typescript-eslint/recommended` can (at an order of magnitude better
-performance). This is a major step towards stabilizing `deno lint`.
+In this release we've added support for the final rules required to get
+`deno lint` rules on par with recommended `eslint` and `typescript-eslint`
+ruleset. This means that `deno lint` should be able to catch all errors that
+`@eslint/recommended` and `@typescript-eslint/recommended` can. (At an order of
+magnitude better performance.) This is a major step towards stabilizing
+`deno lint`.
 
 ## Updates to `deno doc`
 
@@ -233,18 +230,18 @@ switch them out with these functions:
 + Deno.writeTextFileSync("hello_world.json", JSON.stringify({ "hello": "world" }));
 ```
 
-# Changes to `deno_core`
+# Changes to `deno_core` Rust API
 
-<!--
-TODO(bartlomieju): write this section
-
-refactor(core): rename CoreIsolate to JsRuntime (#7373)
-refactor(core): merge CoreIsolate and EsIsolate (#7370)
--->
+The base subsystem for Deno, `deno_core`, continues to evolve as we improve the
+CLI. In 0.57.0, we've merged `CoreIsoate` and `EsIsolate` into a single struct
+called `JsRuntime`. Also an easier facility for creating ops has been exposed.
+Have a look at the
+[example](https://github.com/denoland/deno/blob/v1.4.0/core/examples/http_bench_json_ops.rs).
+to see how these APIs fit together.
 
 # Updates to the VS Code extension
 
-The official
+The
 [VS Code extension for Deno](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno)
 has had some major feature releases recently. Here is a quick summary:
 
