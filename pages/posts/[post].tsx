@@ -40,7 +40,37 @@ const NewsPostPage = (props: Props) => {
   return (
     <>
       <Head>
-        <title>{props.meta.title} | Deno</title>
+        <title>{props.meta.title}</title>
+        <meta name="title" content={props.meta.title} />
+        <meta name="description" content={props.meta.snippet} />
+
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content={`https://deno.land/posts/${props.meta.id}`}
+        />
+        <meta property="og:title" content={props.meta.title} />
+        <meta property="og:description" content={props.meta.snippet} />
+        {props.meta.images.length > 0 ? (
+          <meta
+            property="og:image"
+            content={`https://deno.land${props.meta.images[0].image}`}
+          />
+        ) : null}
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta
+          property="twitter:url"
+          content={`https://deno.land/posts/${props.meta.id}`}
+        />
+        <meta property="twitter:title" content={props.meta.title} />
+        <meta property="twitter:description" content={props.meta.snippet} />
+        {props.meta.images.length > 0 ? (
+          <meta
+            property="twitter:image"
+            content={`https://deno.land${props.meta.images[0].image}`}
+          />
+        ) : null}
       </Head>
       <CookieBanner />
       <Header />
@@ -62,7 +92,6 @@ const NewsPostPage = (props: Props) => {
         <Link href="/posts">
           <a className="link">&lt;- Back to overview</a>
         </Link>
-
         <h1 className="tracking-tight font-bold text-5xl leading-10 mt-4 py-8">
           {props.meta.title}
         </h1>
@@ -70,12 +99,13 @@ const NewsPostPage = (props: Props) => {
           {format.format(date)}
         </p>
         <p className="text-gray-500 mt-3 leading-tight">{props.meta.author}</p>
-        <div className="mt-8">
+        <div className="mt-8 -mx-4">
           <Markdown
             source={props.markdown}
             displayURL={`https://deno.land/posts/${props.meta.id}`}
             sourceURL={`https://deno.land/posts/${props.meta.id}.md`}
             baseURL={`https://deno.land`}
+            className="markdown-posts"
           />
         </div>
       </div>
