@@ -43,6 +43,7 @@ interface MarkdownProps {
   displayURL: string;
   sourceURL: string;
   baseURL: string;
+  className?: string;
 }
 
 function Markdown(props: MarkdownProps) {
@@ -98,7 +99,6 @@ function Markdown(props: MarkdownProps) {
           images.forEach((a) => {
             const original = a[1];
             const final = transformImageUri(props.sourceURL)(original);
-            console.log(original, final);
             html = html.replace(`src="${original}"`, `src="${final}"`);
           });
           const links: RegExpMatchArray[] = [
@@ -110,7 +110,6 @@ function Markdown(props: MarkdownProps) {
               props.displayURL,
               props.baseURL
             )(original);
-            console.log(original, final);
             html = html.replace(`href="${original}"`, `href="${final}"`);
           });
           return html;
@@ -138,7 +137,7 @@ function Markdown(props: MarkdownProps) {
     return (
       <div
         dangerouslySetInnerHTML={{ __html: raw }}
-        className="markdown py-8 px-4"
+        className={`markdown py-8 px-4 ${props.className ?? ""}`}
       />
     );
   } catch (err) {
@@ -150,6 +149,8 @@ function Markdown(props: MarkdownProps) {
 function transformLinkUri(displayURL: string, baseURL: string) {
   return (uri: string) => {
     let href = uri;
+
+    if (uri.startsWith("#")) return uri;
 
     // If the URL is relative, it should be relative to the canonical URL of the file.
     if (isRelative(href)) {
