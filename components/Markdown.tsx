@@ -150,6 +150,8 @@ function transformLinkUri(displayURL: string, baseURL: string) {
   return (uri: string) => {
     let href = uri;
 
+    if (uri.startsWith("#")) return uri;
+
     // If the URL is relative, it should be relative to the canonical URL of the file.
     if (isRelative(href)) {
       // https://github.com/denoland/deno_website2/issues/1047
