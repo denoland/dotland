@@ -40,7 +40,37 @@ const NewsPostPage = (props: Props) => {
   return (
     <>
       <Head>
-        <title>{props.meta.title} | Deno</title>
+        <title>{props.meta.title}</title>
+        <meta name="title" content={props.meta.title} />
+        <meta name="description" content={props.meta.snippet} />
+
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content={`https://deno.land/posts/${props.meta.id}`}
+        />
+        <meta property="og:title" content={props.meta.title} />
+        <meta property="og:description" content={props.meta.snippet} />
+        {props.meta.images.length > 0 ? (
+          <meta
+            property="og:image"
+            content={`https://deno.land${props.meta.images[0].image}`}
+          />
+        ) : null}
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta
+          property="twitter:url"
+          content={`https://deno.land/posts/${props.meta.id}`}
+        />
+        <meta property="twitter:title" content={props.meta.title} />
+        <meta property="twitter:description" content={props.meta.snippet} />
+        {props.meta.images.length > 0 ? (
+          <meta
+            property="twitter:image"
+            content={`https://deno.land${props.meta.images[0].image}`}
+          />
+        ) : null}
       </Head>
       <CookieBanner />
       <Header />

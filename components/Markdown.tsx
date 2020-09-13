@@ -99,7 +99,6 @@ function Markdown(props: MarkdownProps) {
           images.forEach((a) => {
             const original = a[1];
             const final = transformImageUri(props.sourceURL)(original);
-            console.log(original, final);
             html = html.replace(`src="${original}"`, `src="${final}"`);
           });
           const links: RegExpMatchArray[] = [
@@ -111,7 +110,6 @@ function Markdown(props: MarkdownProps) {
               props.displayURL,
               props.baseURL
             )(original);
-            console.log(original, final);
             html = html.replace(`href="${original}"`, `href="${final}"`);
           });
           return html;
