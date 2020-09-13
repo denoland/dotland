@@ -82,7 +82,7 @@ const RestPage = () => {
                     <a
                       href={`https://github.com/${
                         data.options.repository
-                      }/blob/${data.options.ref}/${data.options.subdir ?? ""}`}
+                      }/tree/${data.options.ref}/${data.options.subdir ?? ""}`}
                       className="link"
                     >
                       View on GitHub
