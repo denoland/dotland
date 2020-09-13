@@ -1,6 +1,6 @@
 {
   "title": "Deno 1.4 Release Notes",
-  "author": "Bartek Iwańczuk and Luca Casonato",
+  "author": "Bartek Iwańczuk, Ryan Dahl, and Luca Casonato",
   "publish_date": "2020-09-13T00:00:00.000Z",
   "images": [],
   "snippet": "Today we are releasing Deno 1.4.0. It is the largest feature release yet, with great additions like the web standard `WebSocket API`, `deno run --watch`, and integrated test coverage."

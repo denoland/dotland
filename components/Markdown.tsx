@@ -43,6 +43,7 @@ interface MarkdownProps {
   displayURL: string;
   sourceURL: string;
   baseURL: string;
+  className?: string;
 }
 
 function Markdown(props: MarkdownProps) {
@@ -138,7 +139,7 @@ function Markdown(props: MarkdownProps) {
     return (
       <div
         dangerouslySetInnerHTML={{ __html: raw }}
-        className="markdown py-8 px-4"
+        className={`markdown py-8 px-4 ${props.className ?? ""}`}
       />
     );
   } catch (err) {

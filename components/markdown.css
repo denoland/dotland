@@ -564,3 +564,13 @@ object {
   background-color: initial;
   border: 0;
 }
+
+.markdown-posts h1,
+.markdown-posts h2,
+.markdown-posts h3,
+.markdown-posts h4,
+.markdown-posts h5,
+.markdown-posts h6 {
+  line-height: 1;
+  margin-top: 40px;
+}
