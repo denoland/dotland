@@ -1,8 +1,10 @@
 <!-- # Read and Write Files -->
 # ファイルの読み書き
 
-## Concepts
+<!-- ## Concepts -->
+## 概念
 
+<!--
 - Deno's runtime API provides the
   [Deno.readTextFile](https://doc.deno.land/builtin/stable#Deno.readTextFile)
   and
@@ -16,8 +18,14 @@
   access, for example reading and writing JSON
 - Use `--allow-read` and `--allow-write` permissions to gain access to the file
   system
+-->
+- テキストファイルの読み書きのために、DenoのランタイムAPIは [Deno.readTextFile](https://doc.deno.land/builtin/stable#Deno.readTextFile) と [Deno.writeTextFile](https://doc.deno.land/builtin/stable#Deno.writeTextFile) 非同期関数を提供します
+- 多くのDENOのAPIと同じように、同等の同期関数も利用可能です。[Deno.readTextFileSync](https://doc.deno.land/builtin/stable#Deno.readTextFileSync) と [Deno.writeTextFileSync](https://doc.deno.land/builtin/stable#Deno.writeTextFileSync) を見てください
+- Denoの [標準ライブラリ]() はJSONの読み書きなどのファイルシステムアクセスへの追加の関数を提供しています
+- ファイルシステムへのアクセスには `--allow-read` と `--allow-write` パーミッションが必要です
 
-## Overview
+<!-- ## Overview -->
+## 概要
 
 Interacting with the filesystem to read and write files is a common requirement.
 Deno provides a number of ways to do this via the

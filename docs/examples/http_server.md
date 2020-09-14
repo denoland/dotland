@@ -1,11 +1,16 @@
 # Simple HTTP web server
 
-## Concepts
+<!-- ## Concepts -->
+## 概念
 
+<!--
 - Use the std library [http module](https://deno.land/std@$STD_VERSION/http) to
   run your own web server
+-->
+- stdライブラリ [http module](https://deno.land/std@$STD_VERSION/http) を使用し、webサーバーを実行します
 
-## Overview
+<!-- ## Overview -->
+## 概要
 
 With just a few lines of code you can run your own http web server with control
 over the response status, request headers and more.

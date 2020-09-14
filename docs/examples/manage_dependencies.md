@@ -1,16 +1,24 @@
 <!-- # Managing Dependencies -->
 # 依存関係の管理
 
-## Concepts
+<!-- ## Concepts -->
+## 概念
 
+<!--
 - Deno uses URLs for dependency management
 - One convention places all these dependent URLs into a local `deps.ts` file.
   Functionality is then exported out of `deps.ts` for use by local modules.
 - Continuing this convention, dev only dependencies can be kept in a
   `dev_deps.ts` file.
 - See also [Linking to external code](../linking_to_external_code.md)
+-->
+- Denoは依存関係管理にURLを使用します
+- 慣習ではこれらの依存するURLをローカルの `deps.ts` に置きます。定数、関数などは `deps.ts` からエクスポートされ、ローカルモジュールで使用されます。
+- この慣習に習い、開発で使う依存関係は `dev_deps.ts` ファイルに保存することができます
+- [外部のコードとのリンク](../linking_to_external_code.md) も参照してください
 
-## Overview
+<!-- ## Overview -->
+## 概要
 
 <!--
 In Deno there is no concept of a package manager as external modules are

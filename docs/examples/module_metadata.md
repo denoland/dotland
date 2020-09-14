@@ -1,7 +1,9 @@
 # Module metadata
 
-## Concepts
+<!-- ## Concepts -->
+## 概念
 
+<!--
 - [import.meta](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import.meta)
   can provide information on the context of the module
 - The boolean
@@ -13,6 +15,11 @@
   [Deno.mainModule](https://doc.deno.land/builtin/stable#Deno.mainModule) will
   give you the URL of the main module entry point, i.e. the module invoked by
   the deno runtime
+-->
+- [import.meta](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import.meta) はモジュールのコンテクストの情報を提供します
+- ブーリアン [import.meta.main](https://doc.deno.land/builtin/stable#ImportMeta) じゃ現在のモジュールがエントリーポイントかどうか教えてくれます
+- 文字列 [import.meta.url](https://doc.deno.land/builtin/stable#ImportMeta) は現在のモジュールのURLを教えてくれます
+- 文字列 [Deno.mainModule](https://doc.deno.land/builtin/stable#Deno.mainModule) はメインモジュールのエントリーポイントのURLを教えてくれます。すなわち、denoランタイムによって呼び出されるモジュールのURLです
 
 ## Example
 

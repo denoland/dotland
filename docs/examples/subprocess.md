@@ -1,8 +1,10 @@
 <!-- # Creating a subprocess -->
 # サブプロセスの作成
 
-## Concepts
+<!-- ## Concepts -->
+## 概念
 
+<!--
 - Deno is capable of spawning a subprocess via
   [Deno.run](https://doc.deno.land/builtin/stable#Deno.run)
 - `--allow-run` permission is required to spawn a subprocess
@@ -11,6 +13,11 @@
   [stdin](https://doc.deno.land/builtin/stable#Deno.stdin),
   [stdout](https://doc.deno.land/builtin/stable#Deno.stdout) and
   [stderr](https://doc.deno.land/builtin/stable#Deno.stderr) streams
+-->
+- Deno [Deno.run](https://doc.deno.land/builtin/stable#Deno.run) を通してサブプロセスを生成することができます
+- `--allow-run` パーミッションはサブプロセスの生成に必要です
+- 生成されたサブプロセスはセキュリティサンドボックス内で実行されません。
+- サブプロセスとの通信は [stdin](https://doc.deno.land/builtin/stable#Deno.stdin)、[stdout](https://doc.deno.land/builtin/stable#Deno.stdout)、[stderr](https://doc.deno.land/builtin/stable#Deno.stderr) ストリームを通して行います
 
 ## Simple example
 

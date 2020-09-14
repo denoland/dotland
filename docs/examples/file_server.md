@@ -1,13 +1,18 @@
 <!-- # File server -->
 # ファイルサーバー
 
-## Concepts
+<!-- ## Concepts -->
+## 概念
 
+<!--
 - Use the Deno standard library
   [file_server.ts](https://deno.land/std@$STD_VERSION/http/file_server.ts) to
   run your own file server and access your files from your web browser
 - Run [Deno install](../tools/script_installer.md) to install the file server
   locally
+-->
+- Deno標準ライブラリの [file_server.ts](https://deno.land/std@$STD_VERSION/http/file_server.ts) を使用し、ファイルサーバーを実行しwebブラウザからファイルにアクセスします。
+- [Deno install](../tools/script_installer.md) を実行しファイルサーバーをローカルに保存します。
 
 ## Example
 

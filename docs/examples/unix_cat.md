@@ -1,8 +1,10 @@
 <!-- # An implementation of the unix "cat" program -->
 # unix "cat" プログラムの実装
 
-## Concepts
+<!-- ## Concepts -->
+## 概念
 
+<!--
 - Use the Deno runtime API to output the contents of a file to the console
 - [Deno.args](https://doc.deno.land/builtin/stable#Deno.args) accesses the
   command line arguments
@@ -12,6 +14,13 @@
   transfer data from the file to the output stream
 - Files should be closed when you are finished with them
 - Modules can be run directly from remote URLs
+-->
+- DenoランタイムAPIを使用し、ファイルの内容をコンソールに出力します
+- [Deno.args](https://doc.deno.land/builtin/stable#Deno.args) はコマンドライン引数にアクセスします
+- [Deno.open](https://doc.deno.land/builtin/stable#Deno.open) はファイルの取得に使用します
+- [Deno.copy](https://doc.deno.land/builtin/stable#Deno.copy) はファイルから出力ストリームにデータを転送します
+- ファイルは終了したあとに閉じられるべきです
+- モジュールはリモートURLから直接実行できます
 
 ## Example
 
