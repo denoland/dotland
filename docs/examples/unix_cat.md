@@ -22,7 +22,8 @@
 - ファイルは終了したあとに閉じられるべきです
 - モジュールはリモートURLから直接実行できます
 
-## Example
+<!-- ## Example -->
+## 例
 
 <!--
 In this program each command-line argument is assumed to be a filename, the file

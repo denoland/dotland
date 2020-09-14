@@ -14,7 +14,8 @@
 - Deno標準ライブラリの [file_server.ts](https://deno.land/std@$STD_VERSION/http/file_server.ts) を使用し、ファイルサーバーを実行しwebブラウザからファイルにアクセスします。
 - [Deno install](../tools/script_installer.md) を実行しファイルサーバーをローカルに保存します。
 
-## Example
+<!-- ## Example -->
+## 例
 
 Serve a local directory via HTTP. First install the remote script to your local
 file system. This will install the script to the Deno installation root's bin

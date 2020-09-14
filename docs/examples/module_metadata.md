@@ -21,11 +21,15 @@
 - 文字列 [import.meta.url](https://doc.deno.land/builtin/stable#ImportMeta) は現在のモジュールのURLを教えてくれます
 - 文字列 [Deno.mainModule](https://doc.deno.land/builtin/stable#Deno.mainModule) はメインモジュールのエントリーポイントのURLを教えてくれます。すなわち、denoランタイムによって呼び出されるモジュールのURLです
 
-## Example
+<!-- ## Example -->
+## 例
 
+<!--
 The example below uses two modules to show the difference between
 `import.meta.url`, `import.meta.main` and `Deno.mainModule`. In this example,
 `module_a.ts` is the main module entry point
+-->
+下記の例は `import.meta.url`、`import.meta.main`、`Deno.mainModule` の違いを示すために2つのモジュールを使用します。この例では `module_a.ts` がメインモジュールエントリーポイントです
 
 ```ts
 /**
@@ -61,8 +65,11 @@ console.log("");
 outputB();
 ```
 
+<!--
 If `module_a.ts` is located in `/home/alice/deno` then the output of
 `deno run --allow-read module_a.ts` is:
+-->
+もし `module_a.ts` が `/home/alice/deno` にあったら `deno run --allow-read module_a.ts` の出力は:
 
 ```
 Module A's import.meta.url file:///home/alice/deno/module_a.ts

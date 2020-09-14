@@ -12,9 +12,11 @@
 - [Deno.watchFs](https://doc.deno.land/builtin/stable#Deno.watchFs) を使用し、ファイルシステムイベントを監視します
 - 結果はオペレーティングシステムによって異なる場合があります
 
-## Example
+<!-- ## Example -->
+## 例
 
-To poll for file system events in the current directory:
+<!-- To poll for file system events in the current directory: -->
+現在のディレクトリでファイルシステムイベントをポーリングするには:
 
 ```ts
 /**
@@ -27,14 +29,18 @@ for await (const event of watcher) {
 }
 ```
 
-Run with:
+<!-- Run with: -->
+実行してください:
 
 ```shell
 deno run --allow-read watcher.ts
 ```
 
+<!--
 Now try adding, removing and modifying files in the same directory as
 `watcher.ts`.
+-->
+さらに、`watcher.ts`と同じディレクトリにあるファイルを追加、削除、修正してみてください。
 
 <!--
 Note that the exact ordering of the events can vary between operating systems.

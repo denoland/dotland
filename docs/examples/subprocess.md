@@ -19,9 +19,11 @@
 - 生成されたサブプロセスはセキュリティサンドボックス内で実行されません。
 - サブプロセスとの通信は [stdin](https://doc.deno.land/builtin/stable#Deno.stdin)、[stdout](https://doc.deno.land/builtin/stable#Deno.stdout)、[stderr](https://doc.deno.land/builtin/stable#Deno.stderr) ストリームを通して行います
 
-## Simple example
+<!-- ## Simple example -->
+## 簡単な例
 
-This example is the equivalent of running `'echo hello'` from the command line.
+<!-- This example is the equivalent of running `'echo hello'` from the command line. -->
+この例はコマンドラインから `'echo hello'` を実行しているのと同等です。
 
 <!--
 ```ts
@@ -59,13 +61,19 @@ await p.status();
 $ deno run --allow-run ./subprocess_simple.ts
 hello
 ```
-## Security
 
+<!-- ## Security -->
+## セキュリティ
+
+<!--
 The `--allow-run` permission is required for creation of a subprocess. Be aware
 that subprocesses are not run in a Deno sandbox and therefore have the same
 permissions as if you were to run the command from the command line yourself.
+-->
+サブプロセスの作成には `--allow-run` パーミッションが必要です。サブプロセスはDenoサンドボックスで実行されないためコマンドラインからコマンドを実行するのと同じ権限を持っていることに注意してください。
 
-## Communicating with subprocesses
+<!-- ## Communicating with subprocesses -->
+## サブプロセスとの通信
 
 <!--
 By default when you use `Deno.run()` the subprocess inherits `stdin`, `stdout`

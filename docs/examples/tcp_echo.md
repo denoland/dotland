@@ -13,7 +13,8 @@
 - [Deno.listen](https://doc.deno.land/builtin/stable#Deno.listen) でTCPポートへのコネクションをリッスンする
 - [Deno.copy](https://doc.deno.land/builtin/stable#Deno.copy) を使用し、受信したデータを送信するデータにリダイレクトします
 
-## Example
+<!-- ## Example -->
+## 例
 
 <!--
 This is an example of a server which accepts connections on port 8080, and
@@ -32,16 +33,20 @@ for await (const conn of listener) {
 }
 ```
 
-Run with:
+<!-- Run with: -->
+実行してください:
 
 ```shell
 deno run --allow-net echo_server.ts
 ```
 
+<!--
 To test it, try sending data to it with
 [netcat](https://en.wikipedia.org/wiki/Netcat) (Linux/MacOS only). Below
 `'hello world'` is sent over the connection, which is then echoed back to the
 user:
+-->
+テストするには [netcat](https://en.wikipedia.org/wiki/Netcat) (Linux/MacOSのみ)を使用してデータを送信してみてください。下記では `'hello world'` が送信されユーザーにエコーバックされています:
 
 ```shell
 $ nc localhost 8080

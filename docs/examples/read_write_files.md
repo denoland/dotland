@@ -27,10 +27,13 @@
 <!-- ## Overview -->
 ## 概要
 
+<!--
 Interacting with the filesystem to read and write files is a common requirement.
 Deno provides a number of ways to do this via the
 [standard library](https://deno.land/std) and the
 [Deno runtime API](https://doc.deno.land/builtin/stable).
+-->
+ファイルシステムの読み書きは基本的な要件です。Denoはこれを行うための方法を [標準ライブラリ](https://deno.land/std) と [DenoランタイムAPI](https://doc.deno.land/builtin/stable) を通して提供しています。
 
 <!--
 As highlighted in the [Fetch Data example](./fetch_data) Deno restricts access

@@ -36,7 +36,8 @@ command.
 -->
 Denoの例外は、webで呼び出しを行うスクリプトを実行時に発生します。Denoはデフォルトで安全であり、IO(Input/Output)にアクセスすることは禁止されています。webで呼び出しを行うためにはDenoに明示的に伝えなければいけません。`deno run` コマンド時に　`--allow-net` フラグを追加することで実現します。
 
-## Example
+<!-- ## Example -->
+## 例
 
 **Command:** `deno run --allow-net fetch.ts`
 

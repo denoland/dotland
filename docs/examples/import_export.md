@@ -20,12 +20,18 @@
 <!-- ## Overview -->
 ## 概要
 
+<!--
 Deno by default standardizes the way modules are imported in both JavaScript and
 TypeScript using the ECMAScript 6 `import/export` standard.
+-->
+DenoはデフォルトではECMAScript 6の `import/export` 標準を使用してJavaScriptとTypeScriptの療法でモジュールのインポート方法を標準化しています。
 
+<!--
 It adopts browser-like module resolution, meaning that file names must be
-+specified in full. You may not omit the file extension and there is no special
+specified in full. You may not omit the file extension and there is no special
 handling of `index.js`.
+-->
+ブラウザライクなモジュール解決を採用しており、ファイル名は完全に指定しなければいけません。拡張子を省略することはできませんし、`index.js` の特別な扱いもありません。
 
 ```js
 import {
@@ -203,4 +209,3 @@ To find out more on ECMAScript Export functionality please read the
 [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export).
 -->
 ECMAScriptのエクスポート機能のより詳しい情報は [MDN ドキュメント](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/export) を読んでください。
-

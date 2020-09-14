@@ -22,7 +22,8 @@
 - [Deno.signal](https://doc.deno.land/builtin/unstable#Deno.signal) はOSシグナルを取得したり監視したりするのに使用されます
 - シグナルの監視を停止するにはDeno.signal [SignalStream](https://doc.deno.land/builtin/unstable#Deno.SignalStream) の `dispose()` を使用してください
 
-## Async iterator example
+<!-- ## Async iterator example -->
+## 非同期イテレーターの例
 
 <!-- You can use `Deno.signal()` function for handling OS signals: -->
 OSシグナルを取り扱うために `Deno.signal()` を使うことが出来ます:
@@ -38,13 +39,15 @@ for await (const _ of Deno.signal(Deno.Signal.SIGINT)) {
 }
 ```
 
-Run with:
+<!-- Run with: -->
+実行してください:
 
 ```shell
 deno run --unstable async-iterator-signal.ts
 ```
 
-## Promise based example
+<!-- ## Promise based example -->
+## プロミスの例
 
 <!-- `Deno.signal()` also works as a promise. -->
 `Deno.signal()` はpromiseとしても動作します。
@@ -59,13 +62,15 @@ console.log("interrupted!");
 Deno.exit();
 ```
 
-Run with:
+<!-- Run with: -->
+実行してください:
 
 ```shell
 deno run --unstable promise-signal.ts
 ```
 
-## Stop watching signals
+<!-- ## Stop watching signals -->
+## シグナルの監視の停止
 
 <!--
 If you want to stop watching the signal, you can use `dispose()` method of the
@@ -89,7 +94,8 @@ for await (const _ of sig) {
 }
 ```
 
-Run with:
+<!-- Run with: -->
+実行してください:
 
 ```shell
 deno run --unstable dispose-signal.ts

@@ -41,7 +41,8 @@ With all dependencies centralized in `deps.ts`, managing these becomes easier.
 Dev dependencies can also be managed in a separate `dev_deps.ts` file, allowing
 clean separation between dev only and production dependencies.
 
-## Example
+<!-- ## Example -->
+## 例
 
 ```ts
 /**
