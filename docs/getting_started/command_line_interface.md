@@ -140,6 +140,13 @@ We discuss these below.
 -->
 関連するサブコマンド間で共有されるフラグの論理グループが存在します。これについて説明します。
 
+### Watch mode
+
+You can supply the `--watch` flag to `deno run` to enable the built in file
+watcher. When Deno starts up with this flag it watches the entrypoint, and all
+local files the entrypoint statically imports. Whenever one of these files is
+changed on disk, the program will automatically be restarted.
+
 ### Integrity flags
 
 <!--

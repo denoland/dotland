@@ -1,5 +1,12 @@
 # Hello World
 
+## Concepts
+
+- Deno can run JavaScript or TypeScript out of the box with no additional tools
+  or config required
+
+## Overview
+
 <!--
 Deno is a secure runtime for both JavaScript and TypeScript. As the hello world
 examples below highlight the same functionality can be created in JavaScript or
@@ -18,6 +25,9 @@ JavaScriptの例では `Hello [name]` がコンソールに表示され、コー
 **Command:** `deno run hello-world.js`
 
 ```js
+/**
+ * hello-world.js
+ */
 function capitalize(word) {
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
@@ -57,6 +67,9 @@ rather than a `*.js` file.
 
 <!--
 ```ts
+/**
+ * hello-world.ts
+ */
 function capitalize(word: string): string {
   return word.charAt(0).toUpperCase() + word.slice(1);
 }

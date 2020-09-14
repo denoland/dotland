@@ -11,7 +11,8 @@
       "command_line_interface": "コマンドラインインターフェース",
       "permissions": "パーミッション",
       "typescript": "TypeScriptの使用",
-      "webassembly": "WebAssemblyの使用"
+      "webassembly": "WebAssemblyの使用",
+      "debugging_your_code": "コードのデバッグ"
     }
   },
   "runtime": {
@@ -42,10 +43,27 @@
       "assertions": "アサーション"
     }
   },
+  "examples": {
+    "name": "サンプル",
+    "children": {
+      "hello_world": "Hello World",
+      "import_export": "モジュールのインポートとエクスポート",
+      "manage_dependencies": "依存関係管理",
+      "fetch_data": "データの取得",
+      "read_write_files": "ファイルの読み書き",
+      "unix_cat": "Unix cat プログラム",
+      "http_server": "HTTP web server",
+      "file_server": "ファイルサーバー",
+      "tcp_echo": "TCP echo サーバー",
+      "subprocess": "サブプロセスの作成",
+      "os_signals": "OS シグナル",
+      "file_system_events": "ファイルシステムイベント",
+      "module_metadata": "Module metadata"
+    }
+  },
   "tools": {
     "name": "ツール",
     "children": {
-      "debugger": "デバッガー",
       "script_installer": "スクリプトインストーラー",
       "formatter": "フォーマッター",
       "bundler": "バンドラー",
@@ -64,23 +82,6 @@
       "development_tools": "開発ツール",
       "style_guide": "スタイルガイド",
       "architecture": "アーキテクチャ"
-    }
-  },
-  "examples": {
-    "name": "サンプル",
-    "children": {
-      "hello_world": "Hello World",
-      "import_export": "モジュールのインポートとエクスポート",
-      "manage_dependencies": "依存関係管理",
-      "fetch_data": "データの取得",
-      "read_write_files": "ファイルの読み書き",
-      "unix_cat": "Unix cat プログラム",
-      "file_server": "ファイルサーバー",
-      "tcp_echo": "TCP echo サーバー",
-      "subprocess": "サブプロセスの作成",
-      "os_signals": "OS シグナル",
-      "file_system_events": "ファイルシステムイベント",
-      "testing_if_main": "ファイルがメインか判断"
     }
   }
 }

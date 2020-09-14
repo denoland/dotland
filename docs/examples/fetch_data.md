@@ -1,6 +1,16 @@
 <!-- # Fetch Data -->
 # データの取得
 
+## Concepts
+
+- Like browsers, Deno implements web standard APIs such as
+  [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
+- Deno is secure by default, meaning explicit permission must be granted to
+  access the network
+- See also: Deno's [permissions](../getting_started/permissions.md) model
+
+## Overview
+
 <!--
 When building any sort of web application developers will usually need to
 retrieve data from somewhere else on the web. This works no differently in Deno
@@ -18,6 +28,8 @@ do so. This is achieved by adding the `--allow-net` flag to the `deno run`
 command.
 -->
 Denoの例外は、webで呼び出しを行うスクリプトを実行時に発生します。Denoはデフォルトで安全であり、IO(Input/Output)にアクセスすることは禁止されています。webで呼び出しを行うためにはDenoに明示的に伝えなければいけません。`deno run` コマンド時に　`--allow-net` フラグを追加することで実現します。
+
+## Example
 
 **Command:** `deno run --allow-net fetch.ts`
 

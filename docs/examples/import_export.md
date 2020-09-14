@@ -1,12 +1,24 @@
 <!-- # Import and Export Modules -->
 # モジュールのインポートとエクスポート
 
-<!--
+## Concepts
+
+- [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
+  allows you to include and use modules held elsewhere, on your local file
+  system or remotely.
+- Imports are URLs or file system paths
+- [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
+  allows you to specify which parts of your module are accessible to users who
+  import your module
+
+## Overview
+
 Deno by default standardizes the way modules are imported in both JavaScript and
-TypeScript. It follows the ECMAScript 6 `import/export` standard with one
-caveat, the file type must be included at the end of import statement.
--->
-DenoはデフォルトでJavaScriptとTypeScriptのモジュールのインポートを方法を照準化しています。これはECMAScript 6の `import/export` 標準に従っていますが、1つ注意点があります。
+TypeScript using the ECMAScript 6 `import/export` standard.
+
+It adopts browser-like module resolution, meaning that file names must be
++specified in full. You may not omit the file extension and there is no special
+handling of `index.js`.
 
 ```js
 import {
@@ -36,6 +48,9 @@ In this example the `add` and `multiply` functions are imported from a local
 
 <!--
 ```ts
+/**
+ * local.ts
+ */
 import { add, multiply } from "./arithmetic.ts";
 
 function totalCost(outbound: number, inbound: number, tax: number): number {
@@ -55,6 +70,74 @@ console.log(totalCost(45, 27, 1.15));
 -->
 ```ts
 import { add, multiply } from "./arithmetic.ts";
+
+function totalCost(outbound: number, inbound: number, tax: number): number {
+  return multiply(add(outbound, inbound), tax);
+}
+
+console.log(totalCost(19, 31, 1.2));
+console.log(totalCost(45, 27, 1.15));
+
+/**
+ * 出力
+ *
+ * 60
+ * 82.8
+ */
+```
+
+<!-- ## Remote Import -->
+## リモートインポート
+
+<!--
+In the local import example above an `add` and `multiply` method are imported
+from a locally stored arithmetic module. The same functionality can be created
+by importing `add` and `multiply` methods from a remote module too.
+-->
+上記の `add` と `multiply` メソッドのインポートの例はローカルに本尊されたarithmeticモジュールからインポートされました。リモートモジュールから `add` と `multiply` メソッドをインポートしても同じ機能を作ることが出来ます。
+
+<!--
+In this case the Ramda module is referenced, including the version number. Also
+note a JavaScript module is imported directly into a TypeSript module, Deno has
+no problem handling this.
+-->
+この例ではRamdaモジュールがバージョン付きで参照されています。また、JavaScriptモジュールがTypeScriptモジュールに直接インポートされていることに注意してください。Denoはこれを問題なく扱います。
+
+**Command:** `deno run ./remote.ts`
+
+<!--
+```ts
+/**
+ * remote.ts
+ */
+import {
+  add,
+  multiply,
+} from "https://x.nest.land/ramda@0.27.0/source/index.js";
+
+function totalCost(outbound: number, inbound: number, tax: number): number {
+  return multiply(add(outbound, inbound), tax);
+}
+
+console.log(totalCost(19, 31, 1.2));
+console.log(totalCost(45, 27, 1.15));
+
+/**
+ * Output
+ *
+ * 60
+ * 82.8
+ */
+```
+-->
+```ts
+/**
+ * remote.ts
+ */
+import {
+  add,
+  multiply,
+} from "https://x.nest.land/ramda@0.27.0/source/index.js";
 
 function totalCost(outbound: number, inbound: number, tax: number): number {
   return multiply(add(outbound, inbound), tax);
@@ -88,6 +171,9 @@ signature as is shown below.
 このためには下記の例のように関数のシグニチャのはじめに `export` を追加するだけです。
 
 ```ts
+/**
+ * arithmetic.ts
+ */
 export function add(a: number, b: number): number {
   return a + b;
 }
@@ -111,64 +197,3 @@ To find out more on ECMAScript Export functionality please read the
 -->
 ECMAScriptのエクスポート機能のより詳しい情報は [MDN ドキュメント](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/export) を読んでください。
 
-<!-- ## Remote Import -->
-## リモートインポート
-
-<!--
-In the local import example above an `add` and `multiply` method are imported
-from a locally stored arithmetic module. The same functionality can be created
-by importing `add` and `multiply` methods from a remote module too.
--->
-上記の `add` と `multiply` メソッドのインポートの例はローカルに本尊されたarithmeticモジュールからインポートされました。リモートモジュールから `add` と `multiply` メソッドをインポートしても同じ機能を作ることが出来ます。
-
-<!--
-In this case the Ramda module is referenced, including the version number. Also
-note a JavaScript module is imported directly into a TypeSript module, Deno has
-no problem handling this.
--->
-この例ではRamdaモジュールがバージョン付きで参照されています。また、JavaScriptモジュールがTypeScriptモジュールに直接インポートされていることに注意してください。Denoはこれを問題なく扱います。
-
-**Command:** `deno run ./remote.ts`
-
-<!--
-```ts
-import {
-  add,
-  multiply,
-} from "https://x.nest.land/ramda@0.27.0/source/index.js";
-
-function totalCost(outbound: number, inbound: number, tax: number): number {
-  return multiply(add(outbound, inbound), tax);
-}
-
-console.log(totalCost(19, 31, 1.2));
-console.log(totalCost(45, 27, 1.15));
-
-/**
- * Output
- *
- * 60
- * 82.8
- */
-```
--->
-```ts
-import {
-  add,
-  multiply,
-} from "https://x.nest.land/ramda@0.27.0/source/index.js";
-
-function totalCost(outbound: number, inbound: number, tax: number): number {
-  return multiply(add(outbound, inbound), tax);
-}
-
-console.log(totalCost(19, 31, 1.2));
-console.log(totalCost(45, 27, 1.15));
-
-/**
- * 出力
- *
- * 60
- * 82.8
- */
-```

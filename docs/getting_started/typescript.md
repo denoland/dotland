@@ -22,14 +22,14 @@ import { queue } from "./collections.ts";
 ### `--no-check` オプション
 
 <!--
-When using `deno run`, `deno test`, `deno cache`, `deno info`, or `deno bundle`
-you can specify the `--no-check` flag to disable TypeScript type checking. This
-can significantly reduce the time that program startup takes. This can be very
+When using `deno run`, `deno test`, `deno cache`, or `deno bundle` you can
+specify the `--no-check` flag to disable TypeScript type checking. This can
+significantly reduce the time that program startup takes. This can be very
 useful when type checking is provided by your editor and you want startup time
 to be as fast as possible (for example when restarting the program automatically
 with a file watcher).
 -->
-`deno run`、`deno test`、`deno cache`、`deno info` もしくは `deno bundle` を使う時 `--no-check` を使うことでTypeScriptの型チェックを無効にすることが出来ます。これはプログラムのスタートアップ処理の時間をかなり減らすことが出来ます。エディターが型チェックを提供していたり可能化限りスタートアップの時間を早くしたいとき(例えばファイル監視システムと連動してプログラムを自動再起動する時)にかなり便利です。
+`deno run`、`deno test`、`deno cache` もしくは `deno bundle` を使う時 `--no-check` を使うことでTypeScriptの型チェックを無効にすることが出来ます。これはプログラムのスタートアップ処理の時間をかなり減らすことが出来ます。エディターが型チェックを提供していたり可能化限りスタートアップの時間を早くしたいとき(例えばファイル監視システムと連動してプログラムを自動再起動する時)にかなり便利です。
 
 <!--
 Because `--no-check` does not do TypeScript type checking we can not
@@ -40,12 +40,14 @@ To export a type in a different file use
 `export type { AnInterface } from "./mod.ts";`. To import a type use
 `import type { AnInterface } from "./mod.ts";`. You can check that you are using
 `import type` and `export type` where necessary by setting the `isolatedModules`
-TypeScript compiler option to `true`. You can see an example `tsconfig.json`
-with this option
+TypeScript compiler option to `true`, and the `importsNotUsedAsValues` to
+`error`. You can see an example `tsconfig.json` with this option
 [in the standard library](https://github.com/denoland/deno/blob/master/std/tsconfig_test.json).
+These settings will be enabled by default in the future. They are already the
+default in Deno 1.4 or above when using `--unstable`.
 -->
 `--no-check` はTypeScriptの型チェックをしないため、自動的に型情報のために必要な型のみのインポートとエクスポートの削除しません。このため、TypeScriptは [`import type` and `export type` syntax](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-exports) を提供しています。
-別ファイルの型情報をエクスポートするには `export type { AnInterface } from "./mod.ts";` 使ってください。インポートするには `import type { AnInterface } from "./mod.ts";` を使ってください。`isolatedModules` TypeScriptのコンパイラオプションを `true` にセットすることで `import type` と `export type` を使っているかを確認することが出来ます。このオプションを有効にした `tsconfig.json` の例は [in the standard library](https://github.com/denoland/deno/blob/master/std/tsconfig_test.json) にあります。
+別ファイルの型情報をエクスポートするには `export type { AnInterface } from "./mod.ts";` 使ってください。インポートするには `import type { AnInterface } from "./mod.ts";` を使ってください。`isolatedModules` TypeScriptコンパイラオプションを `true`、`importsNotUsedAsValues` を `error` にセットすることで `import type` と `export type` を使っているかを確認することが出来ます。このオプションを有効にした `tsconfig.json` の例は [in the standard library](https://github.com/denoland/deno/blob/master/std/tsconfig_test.json) にあります。これらの設定は将来デフォルトで有効になる予定です。Deno 1.4以降で `--unstable` を使う場合デフォルトで有効になります。
 
 <!--
 Because there is no type information when using `--no-check`, `const enum` is

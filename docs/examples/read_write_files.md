@@ -1,25 +1,39 @@
 <!-- # Read and Write Files -->
 # ファイルの読み書き
 
-<!--
-Interacting with the filesystem to read and write files is a basic requirement
-of most development projects. Deno provides a number of ways to do this via the
+## Concepts
+
+- Deno's runtime API provides the
+  [Deno.readTextFile](https://doc.deno.land/builtin/stable#Deno.readTextFile)
+  and
+  [Deno.writeTextFile](https://doc.deno.land/builtin/stable#Deno.writeTextFile)
+  asynchronous functions for reading and writing entire text files
+- Like many of Deno's APIs, synchronous alternatives are also available. See
+  [Deno.readTextFileSync](https://doc.deno.land/builtin/stable#Deno.readTextFileSync)
+  and
+  [Deno.writeTextFileSync](https://doc.deno.land/builtin/stable#Deno.writeTextFileSync)
+- Deno's [standard library]() provides additional functionality for file system
+  access, for example reading and writing JSON
+- Use `--allow-read` and `--allow-write` permissions to gain access to the file
+  system
+
+## Overview
+
+Interacting with the filesystem to read and write files is a common requirement.
+Deno provides a number of ways to do this via the
 [standard library](https://deno.land/std) and the
 [Deno runtime API](https://doc.deno.land/builtin/stable).
--->
-ファイルシステムを操作してファイルの読み書きを行うことはほとんどの開発プロジェクトで基本的な要件です。Denoは [標準ライブラリ](https://deno.land/std) や
-[DenoランタイムAPI](https://doc.deno.land/builtin/stable) を利用してファイルの読み書きを行う方法を提供しています。
 
 <!--
 As highlighted in the [Fetch Data example](./fetch_data) Deno restricts access
-to Input / Output by default for security reasons. So when interacting with the
-filesystem the `--allow-read` and `--allow-write` flags must be used with the
-`deno run` command.
+to Input / Output by default for security reasons. Therefore when interacting
+with the filesystem the `--allow-read` and `--allow-write` flags must be used
+with the `deno run` command.
 -->
 [データ取得の例](./fetch_data) で強調されていたようにDenoはセキュリティ上の理由からデフォルトでInput/Outputのアクセスを制限しています。そのためファイルシステムを操作する場合 `deno run` コマンドで `--allow-read` と `--allow-write` フラグを使用しなければいけません。
 
-<!-- ## Read -->
-## 読み込み
+<!-- ## Reading a text file -->
+## テキストファイルの読み込み
 
 <!--
 The Deno runtime API makes it possible to read text files via the
@@ -31,7 +45,10 @@ DenoランタイムAPIは `readTextFile()` メソッドを通してテキスト�
 
 **Command:** `deno run --allow-read read.ts`
 
-```js
+```typescript
+/**
+ * read.ts
+ */
 async function readFile(path: string): Promise<string> {
   return await Deno.readTextFile(new URL(path, import.meta.url));
 }
@@ -61,10 +78,10 @@ generated using the `fromFileUrl()` method.
 Deno標準ライブラリはより高度なファイルシステムの操作を可能にし、読み込むファイルのパースのメソッドを提供します。`readJson()` と `readJsonSync()` メソッドは開発者に読み込みとJSONを含んでいるファイルのパースを可能にします。これら全てのメソッドは `fromFileUrl()` メソッドを使って生成された有効なファイルパスが必要です。
 
 <!--
-In the example below the `readJsonSync()` method is used, for asynchronus
+In the example below the `readJsonSync()` method is used. For asynchronous
 execution use the `readJson()` method.
 -->
-下記の例では `readJsonSync()` メソッドが使われていて、非同期実行では `readJson()` が使われています。
+下記の例では `readJsonSync()` メソッドが使われています。非同期実行では `readJson()` が使われています。
 
 <!--
 Currently some of this functionality is marked as unstable so the `--unstable`
@@ -74,7 +91,10 @@ flag is required along with the `deno run` command.
 
 **Command:** `deno run --unstable --allow-read read.ts`
 
-```js
+```typescript
+/**
+ * read.ts
+ */
 import { readJsonSync } from "https://deno.land/std@$STD_VERSION/fs/mod.ts";
 import { fromFileUrl } from "https://deno.land/std@$STD_VERSION/path/mod.ts";
 
@@ -96,8 +116,8 @@ console.log(readJson("./people.json"));
  */
 ```
 
-<!-- ## Write -->
-## 書き込み
+<!-- ## Writing a text file -->
+## テキストファイルの書き込み
 
 <!--
 The Deno runtime API allows developers to write text to files via the
@@ -114,17 +134,20 @@ command.
 
 **Command:** `deno run --allow-write write.ts`
 
-```js
+```typescript
+/**
+ * write.ts
+ */
 async function writeFile(path: string, text: string): Promise<void> {
   return await Deno.writeTextFile(path, text);
 }
 
 const write = writeFile("./hello.txt", "Hello World!");
 
-write.then(() => console.log("File written to."));
+write.then(() => console.log("File written to ./hello.txt"));
 
 /**
- * Output: File written to.
+ * Output: File written to ./hello.txt
  */
 ```
 
@@ -140,7 +163,7 @@ This requires a combination of the `ensureFile()`, `ensureFileSync()`,
 `writeJson()` and `writeJsonSync()` methods. In the example below the
 `ensureFileSync()` and the `writeJsonSync()` methods are used. The former checks
 for the existence of a file, and if it doesn't exist creates it. The latter
-method then writes the object to the file as JSON. If asynchronus execution is
+method then writes the object to the file as JSON. If asynchronous execution is
 required use the `ensureFile()` and `writeJson()` methods.
 -->
 これには、`ensureFile()`、`ensureFileSync()`、`writeJson()`、`writeJsonSync()` メソッドの組み合わせが必要です。下記の例では、`ensureFileSync()` と `writeJsonSync()` メソッドが使われています。前者はファイルが存在するかどうかチェックし、存在しなければ作成します。後者はオブジェクトをJSONとしてファイルに書き込みます。非同期での実行が必要な時は `ensureFile()` と `writeJson()` を用いてください。
@@ -153,7 +176,10 @@ write and read flags.
 
 **Command:** `deno run --allow-write --allow-read --unstable write.ts`
 
-```js
+```typescript
+/**
+ * write.ts
+ */
 import {
   ensureFileSync,
   writeJsonSync,

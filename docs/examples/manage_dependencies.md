@@ -1,6 +1,17 @@
 <!-- # Managing Dependencies -->
 # 依存関係の管理
 
+## Concepts
+
+- Deno uses URLs for dependency management
+- One convention places all these dependent URLs into a local `deps.ts` file.
+  Functionality is then exported out of `deps.ts` for use by local modules.
+- Continuing this convention, dev only dependencies can be kept in a
+  `dev_deps.ts` file.
+- See also [Linking to external code](../linking_to_external_code.md)
+
+## Overview
+
 <!--
 In Deno there is no concept of a package manager as external modules are
 imported directly into local modules. This raises the question of how to manage
@@ -18,29 +29,17 @@ reference the `deps.ts` rather than the remote dependencies.
 -->
 Denoでこの問題を解決する標準的な方法は `deps.ts` を作ることです。すべての要求されるリモート依存関係はこのファイルで参照され、要求されるメソッドとクラスは最エクスポートされます。依存するローカルモジュールはリモートの依存関係ではなく `deps.ts` を参照します。
 
-<!--
-This enables easy updates to modules across a large codebase and solves the
-'package manager problem', if it ever existed. Dev dependencies can also be
-managed in a separate `dev_deps.ts` file.
--->
-巨大なコードベース中のモジュールの更新が簡単になり、もし存在したとしても'パッケージマネージャ問題'を解決することが出来ます。開発依存関係は `dev_deps.ts` ファイルにに分けることで管理できます。
+With all dependencies centralized in `deps.ts`, managing these becomes easier.
+Dev dependencies can also be managed in a separate `dev_deps.ts` file, allowing
+clean separation between dev only and production dependencies.
 
-**deps.ts example**
+## Example
 
-<!--
 ```ts
 /**
- * deps.ts re-exports the required methods from the remote Ramda module.
- **/
-export {
-  add,
-  multiply,
-} from "https://x.nest.land/ramda@0.27.0/source/index.js";
-```
--->
-```ts
-/**
- * deps.ts Ramdaモジュールから必要なメソッドを再エクスポートします。
+* deps.ts
+ *
+ * This module re-exports the required methods from the dependant remote Ramda module.
  **/
 export {
   add,
@@ -56,9 +55,13 @@ local `deps.ts` module.
 -->
 この例では [local and remote import examples](./import_export.md) 同じ機能が作成されています。ただし、Ramdaモジュールを直接参照する代わりにローカルの `deps.ts` モジュールをプロキシで参照されています。
 
-**Command:** `deno run dependencies.ts`
+**Command:** `deno run example.ts`
 
 <!--
+/**
+ * example.ts
+ */
+
 ```ts
 import {
   add,

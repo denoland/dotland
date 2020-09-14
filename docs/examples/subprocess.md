@@ -1,13 +1,27 @@
-<!-- ## Run subprocess -->
-## サブプロセスの実行
+<!-- # Creating a subprocess -->
+# サブプロセスの作成
 
-[API Reference](https://doc.deno.land/https/github.com/denoland/deno/releases/latest/download/lib.deno.d.ts#Deno.run)
+## Concepts
 
-<!-- Example: -->
-例:
+- Deno is capable of spawning a subprocess via
+  [Deno.run](https://doc.deno.land/builtin/stable#Deno.run)
+- `--allow-run` permission is required to spawn a subprocess
+- Spawned subprocesses do not run in a security sandbox
+- Communicate with the subprocess via the
+  [stdin](https://doc.deno.land/builtin/stable#Deno.stdin),
+  [stdout](https://doc.deno.land/builtin/stable#Deno.stdout) and
+  [stderr](https://doc.deno.land/builtin/stable#Deno.stderr) streams
+
+## Simple example
+
+This example is the equivalent of running `'echo hello'` from the command line.
 
 <!--
 ```ts
+/**
+ * subprocess_simple.ts
+ */
+
 // create subprocess
 const p = Deno.run({
   cmd: ["echo", "hello"],
@@ -18,6 +32,10 @@ await p.status();
 ```
 -->
 ```ts
+/**
+ * subprocess_simple.ts
+ */
+
 // サブプロセスの作成
 const p = Deno.run({
   cmd: ["echo", "hello"],
@@ -34,23 +52,25 @@ await p.status();
 $ deno run --allow-run ./subprocess_simple.ts
 hello
 ```
+## Security
+
+The `--allow-run` permission is required for creation of a subprocess. Be aware
+that subprocesses are not run in a Deno sandbox and therefore have the same
+permissions as if you were to run the command from the command line yourself.
+
+## Communicating with subprocesses
 
 <!--
-Here a function is assigned to `window.onload`. This function is called after
-the main script is loaded. This is the same as
-[onload](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onload)
-of the browsers, and it can be used as the main entrypoint.
--->
-関数は `window.onload` に代入されます。この関数はmainスクリプトがロードされたあとに呼ばれます。これはブラウザの [onload](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onload) と同じで、mainエントリーポイントとして使うことが出来ます。
-
-<!--
-By default when you use `Deno.run()` subprocess inherits `stdin`, `stdout` and
-`stderr` of parent process. If you want to communicate with started subprocess
-you can use `"piped"` option.
+By default when you use `Deno.run()` the subprocess inherits `stdin`, `stdout`
+and `stderr` of the parent process. If you want to communicate with started
+subprocess you can use `"piped"` option.
 -->
 デフォルトでは `Deno.run()` サブプロセスを使うとき親プロセスの `stdin`、`stdout` そして `stderr` を継承します。もし開始されたサブプロセスと通信したいときは `"piped"` オプションを使うことが出来ます。
 
 ```ts
+/**
+ * subprocess.ts
+ */
 const fileNames = Deno.args;
 
 const p = Deno.run({

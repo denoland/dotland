@@ -1,5 +1,5 @@
-<!-- ## Debugger -->
-## デバッガー
+<!-- ## Debugging your code -->
+## コードのデバッグ
 
 <!-- Deno supports the [V8 Inspector Protocol](https://v8.dev/docs/inspector). -->
 Denoは [V8 Inspector Protocol](https://v8.dev/docs/inspector) をサポートしています。

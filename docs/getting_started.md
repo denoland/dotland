@@ -12,6 +12,7 @@
 - [Understanding permissions](./getting_started/permissions.md)
 - [Using Deno with TypeScript](./getting_started/typescript.md)
 - [Using WebAssembly](./getting_started/webassembly.md)
+- [Debugging your code](./getting_started/debugging_your_code.md)
 -->
 - [Denoのインストール](./getting_started/installation.md)
 - [環境の構築](./getting_started/setup_your_environment.md)
@@ -21,3 +22,5 @@
 - [パーミッションの理解](./getting_started/permissions.md)
 - [TypeScriptでのDenoの使用](./getting_started/typescript.md)
 - [WebAssemblyの使用](./getting_started/webassembly.md)
+- [コードのデバッグ](./getting_started/debugging_your_code.md)
+  
