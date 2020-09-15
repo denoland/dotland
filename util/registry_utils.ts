@@ -96,7 +96,8 @@ export interface VersionDeps {
 export interface DependencyGraph {
   nodes: {
     [url: string]: {
-      imports: string[];
+      deps: string[];
+      size: number;
     };
   };
 }
@@ -105,7 +106,7 @@ export async function getVersionDeps(
   module: string,
   version: string
 ): Promise<VersionDeps | null> {
-  const url = `${CDN_ENDPOINT}${module}/versions/${version}/meta/deps.json`;
+  const url = `${CDN_ENDPOINT}${module}/versions/${version}/meta/deps_v2.json`;
   const res = await fetch(url, {
     headers: {
       accept: "application/json",
@@ -357,7 +358,7 @@ export function graphToTree(
   visited.push(name);
   return {
     name,
-    children: dep.imports
+    children: dep.deps
       .filter((n) => !visited.includes(n))
       .map((n) => graphToTree(graph, n, visited)!),
   };
@@ -371,7 +372,7 @@ export function flattenGraph(
   const dep = graph.nodes[name];
   if (dep === undefined) return undefined;
   visited.push(name);
-  dep.imports
+  dep.deps
     .filter((n) => !visited.includes(n))
     .forEach((n) => flattenGraph(graph, n, visited)!);
   return visited;
