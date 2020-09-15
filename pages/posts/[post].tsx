@@ -105,7 +105,7 @@ const NewsPostPage = (props: Props) => {
         </h1>
         <a
           href={`${postPath}${path}.md`}
-          className={`text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right "mt-9" mr-4`}
+          className={`text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right mt-2 mr-4`}
         >
           <span className="sr-only">GitHub</span>
           <svg
