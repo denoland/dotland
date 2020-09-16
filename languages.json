@@ -1,0 +1,14 @@
+[
+  {
+    "language": "English",
+    "english": "English",
+    "link": "https://deno.land/",
+    "repository": "https://github.com/denoland/deno_website2"
+  },
+  {
+    "language": "日本語",
+    "english": "Japanese",
+    "link": "https://deno-ja.vercel.app/",
+    "repository": "https://github.com/tokiedokie/deno_website2_japanese"
+  }
+]
