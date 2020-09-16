@@ -5,7 +5,7 @@ import Head from "next/head";
 
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import { LANGUAGES, Language } from "../util/languages_utils"
+import { LANGUAGES, Language } from "../util/languages_utils";
 import { CookieBanner } from "../components/CookieBanner";
 
 const LanguagesPage = () => {
@@ -20,8 +20,8 @@ const LanguagesPage = () => {
         <div className="max-w-screen-lg mx-auto">
           <h4 className="text-4xl font-bold tracking-tight">Languages</h4>
           <p className="mt-4 text-lg">
-            Dono docs is available in the following languages.
-            Do you have a piece to display here?{" "}
+            Dono docs is available in the following languages. Do you have a
+            piece to display here?{" "}
             <a
               href="https://github.com/denoland/deno_website2/blob/master/languages.json"
               className="link"
@@ -48,10 +48,7 @@ function Item({ language }: { language: Language }) {
         {language.english}
       </span>
       <div className="mt-3 text-xl font-semibold text-center">
-        <a
-          href={language.link}
-          className="hover:text-gray-700 hover:underline"
-        >
+        <a href={language.link} className="hover:text-gray-700 hover:underline">
           {language.language}
         </a>
       </div>
