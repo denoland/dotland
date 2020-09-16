@@ -39,6 +39,13 @@ const Footer = (props: { simple?: boolean }) => (
           </Link>
         </div>
         <div className="px-5 py-2">
+          <Link href="/languages">
+            <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
+              Launguages
+            </a>
+          </Link>
+        </div>
+        <div className="px-5 py-2">
           <Link href="/benchmarks">
             <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
               Benchmarks
