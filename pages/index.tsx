@@ -151,7 +151,7 @@ for await (const req of s) {
           </Link>
           <p className="my-4 text-gray-700">
             Next to the Deno runtime, Deno also provides a list of audited
-            standard modules that are reviewed by the core Deno team and are
+            standard modules that are reviewed by the Deno maintainers and are
             guaranteed to work with a specific Deno version. These live
             alongside the Deno source code in the{" "}
             <a href="https://github.com/denoland/deno" className="link">
