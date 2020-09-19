@@ -26,7 +26,7 @@ export async function handleVSCRequest(url: URL): Promise<Response> {
     const json = await resp.json();
     return new Response(JSON.stringify(json.versions), {
       status: 200,
-      headers: { "content-type": "json", "cache-control": "max-age=86400" },
+      headers: { "content-type": "application/json", "cache-control": "max-age=86400" },
     });
   }
 
@@ -62,7 +62,7 @@ async function getPaths(module: string, version: string): Promise<Response> {
   if (!resp.ok) return new Response("internal server error 2", { status: 500 });
   const json = await resp.json();
   const list = (json.directory_listing as Array<Record<string, string>>)
-    .filter((f) => f.type === "file")
+    .filter((f) => f.type === "file" && !f.path.includes("/_"))
     .map((f) => f.path.substring(1))
     .filter(
       (f) =>
@@ -74,6 +74,6 @@ async function getPaths(module: string, version: string): Promise<Response> {
     );
   return new Response(JSON.stringify(list), {
     status: 200,
-    headers: { "content-type": "json", "cache-control": "max-age=86400" },
+    headers: { "content-type": "application/json", "cache-control": "max-age=86400" },
   });
 }
