@@ -26,7 +26,10 @@ export async function handleVSCRequest(url: URL): Promise<Response> {
     const json = await resp.json();
     return new Response(JSON.stringify(json.versions), {
       status: 200,
-      headers: { "content-type": "application/json", "cache-control": "max-age=86400" },
+      headers: {
+        "content-type": "application/json",
+        "cache-control": "max-age=86400",
+      },
     });
   }
 
@@ -74,6 +77,9 @@ async function getPaths(module: string, version: string): Promise<Response> {
     );
   return new Response(JSON.stringify(list), {
     status: 200,
-    headers: { "content-type": "application/json", "cache-control": "max-age=86400" },
+    headers: {
+      "content-type": "application/json",
+      "cache-control": "max-age=86400",
+    },
   });
 }
