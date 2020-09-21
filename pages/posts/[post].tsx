@@ -98,7 +98,7 @@ const NewsPostPage = (props: Props) => {
       </div>
       <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 py-8 mb-16">
         <Link href="/posts">
-          <a className="link">&lt;- Back to overview</a>
+          <a className="link">&lt;- Other News</a>
         </Link>
         <h1 className="tracking-tight font-bold text-5xl leading-10 mt-4 py-8">
           {props.meta.title}

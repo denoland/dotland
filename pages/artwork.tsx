@@ -27,8 +27,6 @@ const ArtworkPage = () => {
           </h4>
           <p className="mt-4 text-lg">
             {/*
-            A lot of artwork related to Deno has been created in the last few
-            years. This page serves as place the art is collected and displayed.
             Do you have a piece to display here?{" "}
             <a
               href="https://github.com/denoland/deno_website2/blob/master/artwork.json"
@@ -37,7 +35,6 @@ const ArtworkPage = () => {
               Add it!
             </a>
             */}
-            Denoのたくさんのアートワークが過去数年で作られました。このページはそれらのアートを集めて展示します。
             展示する作品を持っていますか？{" "}
             <a
               href="https://github.com/denoland/deno_website2/blob/master/artwork.json"

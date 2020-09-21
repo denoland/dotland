@@ -1,6 +1,7 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
 import { handleRegistryRequest } from "./registry";
+import { handleVSCRequest } from "./vscode";
 
 const REMOTE_URL = "https://deno-website2.now.sh";
 
@@ -16,6 +17,10 @@ export async function handleRequest(request: Request) {
 
   if (url.pathname.startsWith("/typedoc")) {
     return Response.redirect("https://doc.deno.land/builtin/stable", 301);
+  }
+
+  if (url.pathname.startsWith("/_vsc")) {
+    return handleVSCRequest(url);
   }
 
   const isRegistryRequest =

@@ -32,7 +32,8 @@
     "react-transition-group": "^4.4.1",
     "swr": "^0.2.3",
     "tailwindcss": "^1.5.2",
-    "tailwindcss-hyphens": "^0.1.0"
+    "tailwindcss-hyphens": "^0.1.0",
+    "timeago-react": "^3.0.0"
   },
   "devDependencies": {
     "@types/dompurify": "^2.0.3",
