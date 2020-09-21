@@ -5,6 +5,7 @@ import Link from "next/link";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import TimeAgo from "timeago-react";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -243,7 +244,12 @@ const ThirdPartyRegistryList = () => {
                     No modules found
                   </div>
                 ) : (
-                  <ModuleList modules={resp.results} />
+                  <ModuleList
+                    modules={resp.results.map((v) => ({
+                      ...v,
+                      starCount: v.star_count,
+                    }))}
+                  />
                 )}
                 {!query
                   ? (() => {
@@ -566,7 +572,14 @@ const ThirdPartyRegistryList = () => {
                 <div>
                   <h5 className="font-medium text-lg">New modules</h5>
                   <div className="bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2">
-                    <ModuleList modules={stats.recently_added_modules} />
+                    <ModuleList
+                      modules={stats.recently_added_modules.map((v) => ({
+                        name: v.name,
+                        description: v.description,
+                        date: v.created_at,
+                        starCount: v.star_count,
+                      }))}
+                    />
                   </div>
                 </div>
                 <div>
@@ -576,6 +589,7 @@ const ThirdPartyRegistryList = () => {
                       modules={stats.recently_uploaded_versions.map((v) => ({
                         name: v.name,
                         description: v.version,
+                        date: v.created_at,
                         starCount: undefined,
                       }))}
                     />
@@ -594,7 +608,12 @@ const ThirdPartyRegistryList = () => {
 function ModuleList({
   modules,
 }: {
-  modules: Array<{ name: string; description: string; star_count?: string }>;
+  modules: Array<{
+    name: string;
+    description: string;
+    date?: string;
+    starCount?: string;
+  }>;
 }) {
   return (
     <ul>
@@ -610,24 +629,36 @@ function ModuleList({
                       <div className="text-sm leading-5 font-medium text-blue-500 truncate">
                         {meta.name}
                       </div>
-                      {meta.name && (
-                        <div className="mt-1 flex items-center text-sm leading-5 text-gray-500">
-                          <span className="truncate">
-                            {meta.description ? (
-                              replaceEmojis(meta.description)
-                            ) : (
-                              <span className="italic text-gray-400">
-                                No description
-                              </span>
-                            )}
+                      <div className="mt-1 flex items-center text-sm leading-5 text-gray-500">
+                        <span className="truncate">
+                          {meta.description ? (
+                            replaceEmojis(meta.description)
+                          ) : (
+                            <span className="italic text-gray-400">
+                              No description
+                            </span>
+                          )}
+                        </span>
+                      </div>
+                      {meta.date ? (
+                        <div className="mt-1 flex items-center text-sm leading-5 text-gray-400">
+                          <span
+                            className="truncate"
+                            title={new Date(meta.date).toLocaleString()}
+                          >
+                            <TimeAgo
+                              live={true}
+                              datetime={meta.date}
+                              locale="en"
+                            />
                           </span>
                         </div>
-                      )}
+                      ) : null}
                     </div>
                   </div>
-                  {meta.star_count !== undefined ? (
+                  {meta.starCount !== undefined ? (
                     <div className="ml-6 mr-4 flex items-center">
-                      <div className="text-gray-400">{meta.star_count}</div>
+                      <div className="text-gray-400">{meta.starCount}</div>
                       <svg
                         className="ml-1 text-gray-400 w-5 h-5"
                         fill="currentColor"
