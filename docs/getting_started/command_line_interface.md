@@ -142,10 +142,13 @@ We discuss these below.
 
 ### Watch mode
 
+<!--
 You can supply the `--watch` flag to `deno run` to enable the built in file
 watcher. When Deno starts up with this flag it watches the entrypoint, and all
 local files the entrypoint statically imports. Whenever one of these files is
 changed on disk, the program will automatically be restarted.
+-->
+`--watch` フラグを `deno run` につけることでビルトインファイルウォッチャーを有効にすることができます。Denoがこのフラグとともに起動したらエントリーポイントを、エントリーポイントからの全てのローカルファイルを監視します。これらのファイルがディスク上で変更されたらプログラムは自動で再起動します。
 
 ### Integrity flags
 
