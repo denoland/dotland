@@ -334,10 +334,16 @@ deno test --failfast
 <!--
 Deno will automatically determine test coverage for your code if you specify the
 `--coverage` flag when starting `deno test`. Coverage is determined on a line by
-line basis, and is acquired directly from the JavaScript runtime (V8). Because
-of this, this coverage is very accurate.
+line basis for modules that share the parent directory with at-least one test
+module that is being executed.
 -->
-`deno test` を起動するときに `--coverage` フラグを指定するとDenoは自動でそのコードのテストカバレッジを決定します。カバレッジは一行ごとに決定され、JavaScript runtime (V8)から直接取得されます。このためカバレッジは非常に正確です。
+`deno test` を起動するときに `--coverage` フラグを指定するとDenoは自動でそのコードのテストカバレッジを決定します。カバレッジは、実行中のテストモジュールと親ディレクトリを共有しているモジュールについては、一行ごとに決定されます。
+
+<!--
+This coverage information is acquired directly from the JavaScript runtime (V8).
+Because of this, the coverage reports are very accurate.
+-->
+このカバレッジ情報はJavaScriptランタイム(V8)から直接取得しています。このため、カバレッジレポートは非常に正確です。
 
 <!--
 When all tests are done running a summary of coverage per file is printed to

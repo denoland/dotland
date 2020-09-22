@@ -160,6 +160,19 @@ function foo(): any {
 }
 ```
 
+<!--
+You can also ignore certain diagnostics in the whole file
+-->
+また、ファイル全体の特定の診断を無視することもできます
+
+```ts
+// deno-lint-ignore-file no-explicit-any no-empty
+
+function foo(): any {
+  // ...
+}
+```
+
 <!-- #### Diagnostics -->
 #### 診断
 

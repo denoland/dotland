@@ -14,14 +14,11 @@
   [Deno.readTextFileSync](https://doc.deno.land/builtin/stable#Deno.readTextFileSync)
   and
   [Deno.writeTextFileSync](https://doc.deno.land/builtin/stable#Deno.writeTextFileSync)
-- Deno's [standard library]() provides additional functionality for file system
-  access, for example reading and writing JSON
 - Use `--allow-read` and `--allow-write` permissions to gain access to the file
   system
 -->
 - テキストファイルの読み書きのために、DenoのランタイムAPIは [Deno.readTextFile](https://doc.deno.land/builtin/stable#Deno.readTextFile) と [Deno.writeTextFile](https://doc.deno.land/builtin/stable#Deno.writeTextFile) 非同期関数を提供します
 - 多くのDENOのAPIと同じように、同等の同期関数も利用可能です。[Deno.readTextFileSync](https://doc.deno.land/builtin/stable#Deno.readTextFileSync) と [Deno.writeTextFileSync](https://doc.deno.land/builtin/stable#Deno.writeTextFileSync) を見てください
-- Denoの [標準ライブラリ]() はJSONの読み書きなどのファイルシステムアクセスへの追加の関数を提供しています
 - ファイルシステムへのアクセスには `--allow-read` と `--allow-write` パーミッションが必要です
 
 <!-- ## Overview -->
@@ -48,10 +45,10 @@ with the `deno run` command.
 
 <!--
 The Deno runtime API makes it possible to read text files via the
-`readTextFile()` method, it just requires a path string or URL object. The
+`Deno.readTextFile()` method, it just requires a path string or URL object. The
 method returns a promise which provides access to the file's text data.
 -->
-DenoランタイムAPIは `readTextFile()` メソッドを通してテキストファイルを読み込むことを可能にしています。このメソッドはパスかURLオブジェクトを要求します。
+DenoランタイムAPIは `Deno.readTextFile()` メソッドを通してテキストファイルを読み込むことを可能にしています。このメソッドはパスかURLオブジェクトを要求します。
 このメソッドはファイルのテキストデータへのアクセスを提供するプロミスを返します。
 
 **Command:** `deno run --allow-read read.ts`
@@ -60,61 +57,9 @@ DenoランタイムAPIは `readTextFile()` メソッドを通してテキスト�
 /**
  * read.ts
  */
-async function readFile(path: string): Promise<string> {
-  return await Deno.readTextFile(new URL(path, import.meta.url));
-}
-
-const text = readFile("./people.json");
+const text = Deno.readTextFile("./people.json");
 
 text.then((response) => console.log(response));
-
-/**
- * Output:
- *
- * [
- *   {"id": 1, "name": "John", "age": 23},
- *   {"id": 2, "name": "Sandra", "age": 51},
- *   {"id": 5, "name": "Devika", "age": 11}
- * ]
- */
-```
-
-<!--
-The Deno standard library enables more advanced interaction with the filesystem
-and provides methods to read and parse files. The `readJson()` and
-`readJsonSync()` methods allow developers to read and parse files containing
-JSON. All these methods require is a valid file path string which can be
-generated using the `fromFileUrl()` method.
--->
-Deno標準ライブラリはより高度なファイルシステムの操作を可能にし、読み込むファイルのパースのメソッドを提供します。`readJson()` と `readJsonSync()` メソッドは開発者に読み込みとJSONを含んでいるファイルのパースを可能にします。これら全てのメソッドは `fromFileUrl()` メソッドを使って生成された有効なファイルパスが必要です。
-
-<!--
-In the example below the `readJsonSync()` method is used. For asynchronous
-execution use the `readJson()` method.
--->
-下記の例では `readJsonSync()` メソッドが使われています。非同期実行では `readJson()` が使われています。
-
-<!--
-Currently some of this functionality is marked as unstable so the `--unstable`
-flag is required along with the `deno run` command.
--->
-現在いくつかの機能は不安定版のため、`deno run` コマンドで `--unstable` フラグが必要です。
-
-**Command:** `deno run --unstable --allow-read read.ts`
-
-```typescript
-/**
- * read.ts
- */
-import { readJsonSync } from "https://deno.land/std@$STD_VERSION/fs/mod.ts";
-import { fromFileUrl } from "https://deno.land/std@$STD_VERSION/path/mod.ts";
-
-function readJson(path: string): object {
-  const file = fromFileUrl(new URL(path, import.meta.url));
-  return readJsonSync(file) as object;
-}
-
-console.log(readJson("./people.json"));
 
 /**
  * Output:
@@ -132,10 +77,10 @@ console.log(readJson("./people.json"));
 
 <!--
 The Deno runtime API allows developers to write text to files via the
-`writeTextFile()` method. It just requires a file path and text string. The
+`Deno.writeTextFile()` method. It just requires a file path and text string. The
 method returns a promise which resolves when the file was successfully written.
 -->
-DenoランタイムAPIは `writeTextFile()` メソッドを通してテキストファイルを読み込むことを可能にしています。このメソッドはパスかURLオブジェクトを要求します。このメソッドはファイルが正常に書き込まれたときに解決するプロミスを返します。
+DenoランタイムAPIは `Deno.writeTextFile()` メソッドを通してテキストファイルを読み込むことを可能にしています。このメソッドはパスかURLオブジェクトを要求します。このメソッドはファイルが正常に書き込まれたときに解決するプロミスを返します。
 
 <!--
 To run the command the `--allow-write` flag must be supplied to the `deno run`
@@ -149,11 +94,7 @@ command.
 /**
  * write.ts
  */
-async function writeFile(path: string, text: string): Promise<void> {
-  return await Deno.writeTextFile(path, text);
-}
-
-const write = writeFile("./hello.txt", "Hello World!");
+const write = await Deno.writeTextFile("./hello.txt", "Hello World!");
 
 write.then(() => console.log("File written to ./hello.txt"));
 
@@ -162,44 +103,22 @@ write.then(() => console.log("File written to ./hello.txt"));
  */
 ```
 
-<!--
-The Deno standard library makes available more advanced features to write to the
-filesystem. For instance it is possible to write an object literal to a JSON
-file.
--->
-Deno標準ライブラリはファイルシステムに書き込むための高度な機能を提供します。例えば、オブジェクトリテラルをJSONファイルに書き込むことが出来ます。
+By combining `Deno.writeTextFile` and `JSON.stringify` you can easially write
+serialized JSON objects to a file. This example uses synchronous
+`Deno.writeTextFileSync`, but this can also be done asynchronously using
+`await Deno.writeTextFile`.
 
-<!--
-This requires a combination of the `ensureFile()`, `ensureFileSync()`,
-`writeJson()` and `writeJsonSync()` methods. In the example below the
-`ensureFileSync()` and the `writeJsonSync()` methods are used. The former checks
-for the existence of a file, and if it doesn't exist creates it. The latter
-method then writes the object to the file as JSON. If asynchronous execution is
-required use the `ensureFile()` and `writeJson()` methods.
--->
-これには、`ensureFile()`、`ensureFileSync()`、`writeJson()`、`writeJsonSync()` メソッドの組み合わせが必要です。下記の例では、`ensureFileSync()` と `writeJsonSync()` メソッドが使われています。前者はファイルが存在するかどうかチェックし、存在しなければ作成します。後者はオブジェクトをJSONとしてファイルに書き込みます。非同期での実行が必要な時は `ensureFile()` と `writeJson()` を用いてください。
+To execute the code the `deno run` command needs the write flag.
 
-<!--
-To execute the code the `deno run` command needs the unstable flag and both the
-write and read flags.
--->
-コードを実行するには `deno run` コマンドで不安定フラグと読み書きフラグが必要です。
-
-**Command:** `deno run --allow-write --allow-read --unstable write.ts`
+**Command:** `deno run --allow-write write.ts`
 
 ```typescript
 /**
  * write.ts
  */
-import {
-  ensureFileSync,
-  writeJsonSync,
-} from "https://deno.land/std@$STD_VERSION/fs/mod.ts";
-
 function writeJson(path: string, data: object): string {
   try {
-    ensureFileSync(path);
-    writeJsonSync(path, data);
+    Deno.writeTextFileSync(path, JSON.stringify(data));
 
     return "Written to " + path;
   } catch (e) {

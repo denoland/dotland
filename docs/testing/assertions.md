@@ -16,8 +16,8 @@ Deno.test("Hello Test", () => {
 });
 ```
 
-<!-- The assertions module provides nine assertions: -->
-アサーションモジュールは9個のアサーションを提供します:
+<!-- The assertions module provides 10 assertions: -->
+アサーションモジュールは10個のアサーションを提供します:
 
 - `assert(expr: unknown, msg = ""): asserts expr`
 - `assertEquals(actual: unknown, expected: unknown, msg?: string): void`
@@ -26,6 +26,7 @@ Deno.test("Hello Test", () => {
 - `assertStringContains(actual: string, expected: string, msg?: string): void`
 - `assertArrayContains(actual: unknown[], expected: unknown[], msg?: string): void`
 - `assertMatch(actual: string, expected: RegExp, msg?: string): void`
+- `assertNotMatch(actual: string, expected: RegExp, msg?: string): void`
 - `assertThrows(fn: () => void, ErrorClass?: Constructor, msgIncludes = "", msg?: string): Error`
 - `assertThrowsAsync(fn: () => Promise<void>, ErrorClass?: Constructor, msgIncludes = "", msg?: string): Promise<Error>`
 
@@ -147,8 +148,11 @@ Deno.test("Test Assert Array Contains", () => {
 
 ### Regex
 
-<!-- You can assert regular expressions via the `assertMatch()` assertion. -->
-`assertMatch()` アサーションを通して正規表現でアサートできます。
+<!--
+You can assert regular expressions via `assertMatch()` and `assertNotMatch()`
+assertions.
+-->
+`assertMatch()`、`assertNotMatch()` アサーションを通して正規表現でアサートできます。
 
 ```js
 Deno.test("Test Assert Match", () => {
@@ -158,25 +162,32 @@ Deno.test("Test Assert Match", () => {
   assertMatch("https://www.google.com", basicUrl);
   assertMatch("http://facebook.com", basicUrl);
 });
+
+Deno.test("Test Assert Not Match", () => {
+  assertNotMatch("abcdefghi", new RegExp("jkl"));
+
+  const basicUrl = new RegExp("^https?://[a-z.]+.com$");
+  assertNotMatch("https://deno.land/", basicUrl);
+});
 ```
 
 ### Throws
 
 <!--
 There are two ways to assert whether something throws an error in Deno,
-`assertThrows()` and `assertAsyncThrows()`. Both assertions allow you to check
+`assertThrows()` and `assertThrowsAsync()`. Both assertions allow you to check
 an
 [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
 has been thrown, the type of error thrown and what the message was.
 -->
-Denoにエラーを投げる際のアサートは `assertThrows()` と `assertAsyncThrows()` の二つの方法があります。どちらのアサーションもエラーの型とメッセージの内容が投げられた時は [Error](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Error) をチェックすることができます。
+Denoにエラーを投げる際のアサートは `assertThrows()` と `assertThrowsAsync()` の二つの方法があります。どちらのアサーションもエラーの型とメッセージの内容が投げられた時は [Error](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Error) をチェックすることができます。
 
 <!--
 The difference between the two assertions is `assertThrows()` accepts a standard
-function and `assertAsyncThrows()` accepts a function which returns a
+function and `assertThrowsAsync()` accepts a function which returns a
 [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
 -->
-二つのアサーションの違いは、`assertThrows()` は標準的な機能を備え持っていて、`assertAsyncThrows()` は [Promise](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Promise) を返す機能を備え持っているところです。
+二つのアサーションの違いは、`assertThrows()` は標準的な機能を備え持っていて、`assertThrowsAsync()` は [Promise](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Promise) を返す機能を備え持っているところです。
 
 <!--
 The `assertThrows()` assertion will check an error has been thrown, and
@@ -198,11 +209,11 @@ Deno.test("Test Assert Throws", () => {
 ```
 
 <!--
-The `assertAsyncThrows()` assertion is a little more complicated, mainly because
+The `assertThrowsAsync()` assertion is a little more complicated, mainly because
 it deals with Promises. But basically it will catch thrown errors or rejections
 in Promises. You can also optionally check for the error type and error message.
 -->
-`assertAsyncThrows()` アサーションは少し複雑で、主にPromiseを伴って処理をします。しかし、基本的には投げられたエラーかPromiseの中のリジェクションをキャッチします。必要に応じて、エラーの方やエラーメッセージのチェックができます。
+`assertThrowsAsync()` アサーションは少し複雑で、主にPromiseを伴って処理をします。しかし、基本的には投げられたエラーかPromiseの中のリジェクションをキャッチします。必要に応じて、エラーの方やエラーメッセージのチェックができます。
 
 ```js
 Deno.test("Test Assert Throws Async", () => {
