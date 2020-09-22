@@ -328,15 +328,22 @@ failure, you can specify the `--failfast` flag when running the suite.
 deno test --failfast
 ```
 
-## Test coverage
+<!-- ## Test coverage -->
+## テストカバレッジ
 
+<!--
 Deno will automatically determine test coverage for your code if you specify the
 `--coverage` flag when starting `deno test`. Coverage is determined on a line by
 line basis, and is acquired directly from the JavaScript runtime (V8). Because
 of this, this coverage is very accurate.
+-->
+`deno test` を起動するときに `--coverage` フラグを指定するとDenoは自動でそのコードのテストカバレッジを決定します。カバレッジは一行ごとに決定され、JavaScript runtime (V8)から直接取得されます。このためカバレッジは非常に正確です。
 
+<!--
 When all tests are done running a summary of coverage per file is printed to
 stdout. In the future there will be support for `lcov` output too.
+-->
+全てのテストが終わるとファイルごとのカバレッジの結果ががstdoutに出力されます。将来的には `lconv` 出力もサポートされます。
 
 ```
 $ git clone git@github.com:denosaurs/deno_brotli.git && cd deno_brotli
