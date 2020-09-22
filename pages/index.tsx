@@ -57,7 +57,7 @@ for await (const req of s) {
             Deno is a simple, modern and secure runtime for JavaScript and
             TypeScript that uses V8 and is built in Rust.
             */}
-            DenoはV8を使いRustで作られたJavaScriptとTypeScriptのためのシンプルでモダンで安全なランタイムです。
+            DenoはJavaScriptとTypeScriptのためのシンプルでモダンで安全なランタイムです。V8を使用し、Rustで書かれています。
           </p>
           <ol className="ml-8 list-disc text-gray-700">
             <li>
@@ -83,7 +83,7 @@ for await (const req of s) {
               */}
               依存関係インスペクター(<InlineCode>deno info</InlineCode>
               )やコードフォーマッター(<InlineCode>deno fmt</InlineCode>
-              )などのビルトインユーティリティーを持っています。
+              )などのビルトインユーティリティーがあります。
             </li>
             <li>
               {/*
@@ -97,7 +97,7 @@ for await (const req of s) {
               <a href="https://deno.land/std" className="link">
                 deno.land/std
               </a>{" "}
-              を持っています。
+              があります。
             </li>
           </ol>
         </div>
@@ -152,11 +152,11 @@ for await (const req of s) {
             </Link>
             .
             */}
-            より深いイントロダクション、例、環境構築のガイドは
+            より詳細な説明、サンプル、環境構築の方法については
             <Link href="/[...rest]" as="/manual">
               <a className="link">マニュアル</a>
             </Link>
-            へ。
+            を参照してください。
           </p>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
@@ -194,7 +194,7 @@ for await (const req of s) {
             in your own application and how to extend Deno using Rust plugins.
             */}
             ランタイムのより複雑な機能、Denoのコンセプトの紹介、
-            Denoの内部の詳細、アプリケーションへどうやって組み込むかや
+            Denoの内部の詳細、アプリケーションへの組み込み方法や
             Rustプラグインでの拡張は{" "}
             <Link href="/[...rest]" as="/manual">
               <a className="link">マニュアル</a>
@@ -229,9 +229,8 @@ for await (const req of s) {
             </a>{" "}
             repository.
             */}
-            core
-            DenoチームによりDenoで動くことが保証された標準モジュールを提供します。
-            これらはDenoのソースコードと一緒に{" "}
+            Denoコアチームによる、Deno動作保証済みの標準モジュールです。
+            これらはDenoのソースコードとともに{" "}
             <a href="https://github.com/denoland/deno" className="link">
               denoland/deno
             </a>{" "}
@@ -246,7 +245,7 @@ for await (const req of s) {
             and are distributed via URLs like all other ES modules that are
             compatible with Deno.
             */}
-            これらの標準モジュールは{" "}
+            これら標準モジュールは{" "}
             <Link href="/[...rest]" as="/std">
               <a className="link">deno.land/std</a>
             </Link>{" "}
@@ -275,7 +274,7 @@ for await (const req of s) {
             </a>
             .
             */}
-            DenoはGitHub、個人のWebサーバー,{" "}
+            DenoはGitHub、個人のWebサーバー、{" "}
             <a href="https://pika.dev" className="link">
               pika.dev
             </a>{" "}
@@ -296,7 +295,7 @@ for await (const req of s) {
             </a>
             .
             */}
-            サードパーティモジュールを簡単に使用するためDenoは
+            サードパーティモジュールを簡単に使用するため、Denoは
             <InlineCode>deno info</InlineCode> や{" "}
             <InlineCode>deno doc</InlineCode>
             などのビルトインツールを持っています。
@@ -413,11 +412,11 @@ const InstallSection = () => {
         </a>
         .
         */}
-        Denoは1つの実行ファイルのみ必要で他の依存関係はありません。下記のインストーラーを使ってインストールするか、
+        Denoは実行ファイル単独で動作します。下記のインストーラーを使ってインストールするか、
         <a href="https://github.com/denoland/deno/releases" className="link">
           リリースページ
         </a>
-        よりリリースバイナリーをダウンロードしてください。
+        よりリリースバイナリをダウンロードしてください。
       </p>
       {shell}
       {powershell}
