@@ -93,16 +93,20 @@ command will be `antigen bundle deno` and so on.
 -->
 これは `deno` プラグインを `~/.zshrc` のプラグインタグに追加します。`antigen` のようなツールのパスは `~/.antigen/bundles/robbyrussell/oh-my-zsh/plugins` になりコマンドは `antigen bundle deno` になります。
 
-Example (Powershell):
+<!-- Example (Powershell): -->
+例 (Powershell):
 
 ```shel
 deno completions powershell > $profile
 .$profile
 ```
 
+<!--
 This will be create a Powershell profile at
 `$HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1` by default,
 and it will be run whenever you launch the PowerShell.
+-->
+これはデフォルトで `$HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1` にPowershellプロフィールを作り、Powershellを実行するときに自動で実行されます。
 
 <!-- ### Editors and IDEs -->
 ### エディターとIDE
