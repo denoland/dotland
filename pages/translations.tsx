@@ -23,7 +23,7 @@ const TranslationsPage = () => {
             Dono docs is available in the following languages. Do you have a
             piece to display here?{" "}
             <a
-              href="https://github.com/denoland/deno_website2/blob/master/languages.json"
+              href="https://github.com/denoland/deno_website2/blob/master/translations.json"
               className="link"
             >
               Add it!
