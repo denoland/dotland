@@ -5,20 +5,20 @@ import Head from "next/head";
 
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import { LANGUAGES, Language } from "../util/languages_utils";
+import { TRANSLATIONS, Translation } from "../util/translations_utils";
 import { CookieBanner } from "../components/CookieBanner";
 
-const LanguagesPage = () => {
+const TranslationsPage = () => {
   return (
     <>
       <Head>
-        <title>Languages | Deno</title>
+        <title>Translations | Deno</title>
       </Head>
       <CookieBanner />
       <Header />
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 mt-8 mb-24">
         <div className="max-w-screen-lg mx-auto">
-          <h4 className="text-4xl font-bold tracking-tight">Languages</h4>
+          <h4 className="text-4xl font-bold tracking-tight">Translations</h4>
           <p className="mt-4 text-lg">
             Dono docs is available in the following languages. Do you have a
             piece to display here?{" "}
@@ -31,7 +31,7 @@ const LanguagesPage = () => {
           </p>
         </div>
         <div className="my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end">
-          {LANGUAGES.map((language, i) => (
+          {TRANSLATIONS.map((language, i) => (
             <Item key={i} language={language} />
           ))}
         </div>
@@ -41,7 +41,7 @@ const LanguagesPage = () => {
   );
 };
 
-function Item({ language }: { language: Language }) {
+function Item({ language }: { language: Translation }) {
   return (
     <div className="p-2 mx-20 mb-5">
       <span className="text-gray-600 leading-tight flex justify-center">
@@ -71,4 +71,4 @@ function Item({ language }: { language: Language }) {
   );
 }
 
-export default LanguagesPage;
+export default TranslationsPage;
