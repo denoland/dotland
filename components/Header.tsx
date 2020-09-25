@@ -57,41 +57,36 @@ const Header = ({
             </svg>
           </button>
         </div>
-        <div className="hidden lg:flex md-10 items-end">
+        <div className="hidden lg:flex md:ml-10 items-end">
           <Link href="/" as="/#installation">
-            <a className="ml-7 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
+            <a className="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
               Install
             </a>
           </Link>
           <Link href="/[...rest]" as="/manual">
-            <a className="ml-7 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
+            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
               Manual
             </a>
           </Link>
           <a
             href="https://doc.deno.land/builtin/stable"
-            className="ml-7 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+            className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
           >
             Runtime API
           </a>
           <Link href="/[...rest]" as="/std">
-            <a className="ml-7 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
+            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
               Standard Library
             </a>
           </Link>
           <Link href="/x">
-            <a className="ml-7 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
+            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
               Third Party Modules
-            </a>
-          </Link>
-          <Link href="/languages">
-            <a className="ml-7 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              Languages
             </a>
           </Link>
           <a
             href="https://github.com/denoland"
-            className="ml-7 text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+            className="ml-10 text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
           >
             <span className="sr-only">GitHub</span>
             <svg
