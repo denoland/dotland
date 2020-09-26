@@ -495,11 +495,9 @@ function Manual() {
                     </svg>
                   </a>
                   <Markdown
-                    source={
-                      content
-                        .replace(/\$STD_VERSION/g, stdVersion)
-                        .replace(/deno\/blob\/master/g, `deno/blob/v${version}`)
-                    }
+                    source={content
+                      .replace(/\$STD_VERSION/g, stdVersion)
+                      .replace(/deno\/blob\/master/g, `deno/blob/v${version}`)}
                     displayURL={`https://deno.land/manual${
                       version ? `@${version}` : ""
                     }${path}`}
