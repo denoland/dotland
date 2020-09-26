@@ -497,7 +497,7 @@ function Manual() {
                   <Markdown
                     source={content
                       .replace(/\$STD_VERSION/g, stdVersion)
-                      .replace(/deno\/blob\/master/g, `deno/blob/v${version}`)}
+                      .replace(/\$CLI_VERSION/g, version)}
                     displayURL={`https://deno.land/manual${
                       version ? `@${version}` : ""
                     }${path}`}
