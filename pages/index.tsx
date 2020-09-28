@@ -181,10 +181,13 @@ for await (const req of s) {
             personal webserver, or a CDN like{" "}
             <a href="https://www.skypack.dev" className="link">
               Skypack
-            </a>{" "}
-            or{" "}
+            </a>,{" "}
             <a href="https://jspm.io" className="link">
               jspm.io
+            </a>{" "}
+            or{" "}
+            <a href="https://esm.sh" className="link">
+              esm.sh
             </a>
             .
           </p>
