@@ -1,4 +1,4 @@
-# deno_website2
+# Best deno_website2
 
 [![Build Status](https://github.com/denoland/deno_website2/workflows/ci/badge.svg?branch=master&event=push)](https://github.com/denoland/deno_website2/actions)
 
@@ -9,7 +9,7 @@ This website consists of two parts
 1. A Cloudflare Worker
 2. A Next.js app hosted on Vercel
 
-We want to provide pretty and semantic URLs for modules that will be used within
+We are provide pretty and semantic URLs for modules that will be used within
 Deno. For example: https://deno.land/std/http/server.ts
 
 When we request this file inside of Deno, we need to receive back the raw
