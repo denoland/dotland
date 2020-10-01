@@ -1,4 +1,4 @@
-# deno_website2
+# Deno_website2
 
 [![Build Status](https://github.com/denoland/deno_website2/workflows/ci/badge.svg?branch=master&event=push)](https://github.com/denoland/deno_website2/actions)
 
