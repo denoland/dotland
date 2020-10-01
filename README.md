@@ -4,7 +4,7 @@
 
 This is the code for https://deno.land/
 
-This website consists of two parts :
+This website consists of two parts:
 
 1. A Cloudflare Worker
 2. A Next.js app hosted on Vercel
@@ -29,7 +29,7 @@ and https://github.com/denoland/registry and have faster deployment.
 This is written in React / TailwindCSS / Vercel / CloudFlare Workers. Not in
 Deno. Ideally this could be ported to Deno at some point but we are in need of a
 new website and dogfooding takes too long. We hope to see this code ported to
-Deno with minimal inerruption in developer flow  (in particular, we need the ability
+Deno with minimal interruption in developer flow  (in particular, we need the ability
 to listen for FS events and reload the web server).
 
 ## Image License
