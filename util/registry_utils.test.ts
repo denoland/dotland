@@ -7,6 +7,7 @@ import {
   getVersionMeta,
   getVersionList,
   getModule,
+  fileNameFromURL,
 } from "./registry_utils";
 import "isomorphic-unfetch";
 
@@ -113,4 +114,9 @@ test("getModule", async () => {
     // eslint-disable-next-line @typescript-eslint/camelcase
     star_count: 2,
   });
+});
+
+test("fileNameFromURL", () => {
+  expect(fileNameFromURL("a/path/to/%5Bfile%5D.txt")).toBe("[file].txt");
+  expect(fileNameFromURL("a/path/to/file.tsx")).toBe("file.tsx");
 });
