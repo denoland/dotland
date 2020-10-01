@@ -12,7 +12,8 @@ This website consists of two parts
 We want to provide pretty and semantic URLs for modules that will be used within
 Deno. For example: https://deno.land/std/http/server.ts
 
-When we request this file inside of Deno, we need to receive back the raw
+When we request this file inside of Deno, we need to r/d
+back the raw
 content of the file. However, when we visit that URL in the browser we want to
 see a pretty HTML file with syntax highlighting.
 
