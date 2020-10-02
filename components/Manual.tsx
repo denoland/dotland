@@ -508,7 +508,9 @@ function Manual() {
                   </a>
                   <Markdown
                     /*
-                    source={content.replace(/\$STD_VERSION/g, stdVersion)}
+                    source={content
+                      .replace(/\$STD_VERSION/g, stdVersion)
+                      .replace(/\$CLI_VERSION/g, version)}
                     displayURL={`https://deno.land/manual${
                       version ? `@${version}` : ""
                     }${path}`}
@@ -517,7 +519,9 @@ function Manual() {
                       version ? `@${version}` : ""
                     }`}
                     */
-                    source={content.replace(/\$STD_VERSION/g, stdVersion)}
+                    source={content
+                      .replace(/\$STD_VERSION/g, stdVersion)
+                      .replace(/\$CLI_VERSION/g, version)}
                     displayURL={`https://deno-ja.vercel.app/manual${
                       version ? `@${version}` : ""
                     }${path}`}

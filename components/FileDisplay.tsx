@@ -4,7 +4,11 @@ import React from "react";
 import { RawCodeBlock } from "./CodeBlock";
 import Markdown from "./Markdown";
 import Link from "next/link";
-import { fileTypeFromURL, isReadme } from "../util/registry_utils";
+import {
+  fileTypeFromURL,
+  isReadme,
+  fileNameFromURL,
+} from "../util/registry_utils";
 import { useRouter } from "next/router";
 
 function FileDisplay(props: {
@@ -17,8 +21,7 @@ function FileDisplay(props: {
 }) {
   const { pathname } = useRouter();
   const filetype = fileTypeFromURL(props.sourceURL);
-  const segments = props.sourceURL.split("/");
-  const filename = segments[segments.length - 1];
+  const filename = fileNameFromURL(props.sourceURL);
 
   return (
     <div className="shadow-sm rounded-lg border border-gray-200 overflow-hidden bg-white">

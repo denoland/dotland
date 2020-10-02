@@ -298,6 +298,11 @@ export function fileTypeFromURL(filename: string) {
   }
 }
 
+export function fileNameFromURL(url: string) {
+  const segments = decodeURI(url).split("/");
+  return segments[segments.length - 1];
+}
+
 export function denoDocAvailableForURL(filename: string) {
   const filetype = fileTypeFromURL(filename);
   switch (filetype) {
