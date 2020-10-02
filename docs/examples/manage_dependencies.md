@@ -1,4 +1,4 @@
-<!-- # Managing Dependencies -->
+<!-- # Managing dependencies -->
 # 依存関係の管理
 
 <!-- ## Concepts -->
@@ -33,9 +33,12 @@ Denoでは外部モジュールはローカルに直接インポートされる�
 The standard practice for solving this problem in Deno is to create a `deps.ts`
 file. All required remote dependencies are referenced in this file and the
 required methods and classes are re-exported. The dependent local modules then
-reference the `deps.ts` rather than the remote dependencies.
+reference the `deps.ts` rather than the remote dependencies. If now for example
+one remote dependency is used in several files, upgrading to a new version of
+this remote dependency is much simpler as this can be done just within
+`deps.ts`.
 -->
-Denoでこの問題を解決する標準的な方法は `deps.ts` を作ることです。すべての要求されるリモート依存関係はこのファイルで参照され、要求されるメソッドとクラスは最エクスポートされます。依存するローカルモジュールはリモートの依存関係ではなく `deps.ts` を参照します。
+Denoでこの問題を解決する標準的な方法は `deps.ts` を作ることです。すべての要求されるリモート依存関係はこのファイルで参照され、要求されるメソッドとクラスは最エクスポートされます。依存するローカルモジュールはリモートの依存関係ではなく `deps.ts` を参照します。例えば一つのリモートの依存が複数のファイルに使用されていたら、このリモート依存のアップグレードが `deps.ts` 内よりで簡単にできます
 
 With all dependencies centralized in `deps.ts`, managing these becomes easier.
 Dev dependencies can also be managed in a separate `dev_deps.ts` file, allowing
@@ -46,7 +49,7 @@ clean separation between dev only and production dependencies.
 
 ```ts
 /**
-* deps.ts
+ * deps.ts
  *
  * This module re-exports the required methods from the dependant remote Ramda module.
  **/
