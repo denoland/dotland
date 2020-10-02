@@ -1,4 +1,4 @@
-# deno_website2
+# deno_website2 
 
 [![Build Status](https://github.com/denoland/deno_website2/workflows/ci/badge.svg?branch=master&event=push)](https://github.com/denoland/deno_website2/actions)
 
@@ -20,7 +20,7 @@ To accomplish this the Cloudflare Worker looks at the "Accept:" HTTP header to
 see if the client wants HTML or not. If it does want HTML, we simply proxy the
 request to Vercel. (We use Vercel because of their nice GitHub integration.)
 
-## History
+## History and others informations
 
 This is a rewrite of the Deno website it will combine the code in
 https://github.com/denoland/deno/tree/f96aaa802b245c8b3aeb5d57b031f8a55bb07de2/website
