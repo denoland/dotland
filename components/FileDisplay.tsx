@@ -113,7 +113,7 @@ function FileDisplay(props: {
               <div className="px-4">
                 <Markdown
                   source={
-                    props.stdVersion
+                    props.stdVersion === undefined
                       ? props.raw!
                       : props.raw!.replace(
                           /\$STD_VERSION/g,
