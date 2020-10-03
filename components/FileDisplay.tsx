@@ -18,6 +18,7 @@ function FileDisplay(props: {
   baseURL: string;
   repositoryURL?: string | null;
   documentationURL?: string | null;
+  stdVersion?: string;
 }) {
   const { pathname } = useRouter();
   const filetype = fileTypeFromURL(props.sourceURL);
@@ -111,7 +112,14 @@ function FileDisplay(props: {
             return (
               <div className="px-4">
                 <Markdown
-                  source={props.raw!}
+                  source={
+                    props.stdVersion === undefined
+                      ? props.raw!
+                      : props.raw!.replace(
+                          /\$STD_VERSION/g,
+                          props.stdVersion ?? ""
+                        )
+                  }
                   displayURL={"https://deno.land" + props.canonicalPath}
                   sourceURL={props.sourceURL}
                   baseURL={"https://deno.land" + props.baseURL}

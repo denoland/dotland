@@ -397,6 +397,9 @@ const Registry = () => {
                                 sourceURL={readmeURL}
                                 repositoryURL={readmeRepositoryURL}
                                 baseURL={basePath}
+                                stdVersion={
+                                  isStd ? versions?.latest : undefined
+                                }
                               />
                             ) : null}
                           </div>
