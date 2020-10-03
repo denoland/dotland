@@ -3,15 +3,27 @@
 import React from "react";
 import Link from "next/link";
 
-const Footer = (props: { simple?: boolean }) => (
+const Footer = (props: { simple?: boolean; showDark?: boolean }) => (
   <div
-    className={props.simple ? undefined : "bg-gray-50 border-t border-gray-200"}
+    className={
+      props.simple
+        ? undefined
+        : `bg-gray-50 border-t border-gray-200 ${
+            props.showDark ? "dark:bg-grey-900 dark:border-grey-900" : undefined
+          }`
+    }
   >
     <div className="max-w-screen-xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
       <nav className="-mx-5 -my-2 flex flex-wrap justify-center">
         <div className="px-5 py-2">
           <Link href="/[...rest]" as="/manual">
-            <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
+            <a
+              className={`text-base leading-6 text-gray-500 hover:text-gray-900 ${
+                props.showDark
+                  ? "dark:text-grey-300 dark:hover:text-grey-100"
+                  : undefined
+              }`}
+            >
               Manual
             </a>
           </Link>
@@ -19,49 +31,89 @@ const Footer = (props: { simple?: boolean }) => (
         <div className="px-5 py-2">
           <a
             href="https://doc.deno.land/builtin/stable"
-            className="text-base leading-6 text-gray-500 hover:text-gray-900"
+            className={`text-base leading-6 text-gray-500 hover:text-gray-900 ${
+              props.showDark
+                ? "dark:text-grey-300 dark:hover:text-grey-100"
+                : undefined
+            }`}
           >
             Runtime API
           </a>
         </div>
         <div className="px-5 py-2">
           <Link href="/[...rest]" as="/std">
-            <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
+            <a
+              className={`text-base leading-6 text-gray-500 hover:text-gray-900 ${
+                props.showDark
+                  ? "dark:text-grey-300 dark:hover:text-grey-100"
+                  : undefined
+              }`}
+            >
               Standard Library
             </a>
           </Link>
         </div>
         <div className="px-5 py-2">
           <Link href="/x">
-            <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
+            <a
+              className={`text-base leading-6 text-gray-500 hover:text-gray-900 ${
+                props.showDark
+                  ? " dark:text-grey-300 dark:hover:text-grey-100"
+                  : undefined
+              }`}
+            >
               Third Party Modules
             </a>
           </Link>
         </div>
         <div className="px-5 py-2">
           <Link href="/benchmarks">
-            <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
+            <a
+              className={`text-base leading-6 text-gray-500 hover:text-gray-900  ${
+                props.showDark
+                  ? "dark:text-grey-300 dark:hover:text-grey-100"
+                  : undefined
+              }`}
+            >
               Benchmarks
             </a>
           </Link>
         </div>
         <div className="px-5 py-2">
           <Link href="/artwork">
-            <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
+            <a
+              className={`text-base leading-6 text-gray-500 hover:text-gray-900 ${
+                props.showDark
+                  ? "dark:text-grey-300 dark:hover:text-grey-100"
+                  : undefined
+              }`}
+            >
               Artwork
             </a>
           </Link>
         </div>
         <div className="px-5 py-2">
           <Link href="/posts">
-            <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
+            <a
+              className={`text-base leading-6 text-gray-500 hover:text-gray-900 ${
+                props.showDark
+                  ? "dark:text-grey-300 dark:hover:text-grey-100"
+                  : undefined
+              }`}
+            >
               News
             </a>
           </Link>
         </div>
         <div className="px-5 py-2">
           <Link href="/translations">
-            <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
+            <a
+              className={`text-base leading-6 text-gray-500 hover:text-gray-900 ${
+                props.showDark
+                  ? "dark:text-grey-300 dark:hover:text-grey-100"
+                  : undefined
+              }`}
+            >
               Translations
             </a>
           </Link>
@@ -70,7 +122,11 @@ const Footer = (props: { simple?: boolean }) => (
       <div className="mt-9 flex justify-center">
         <a
           href="https://github.com/denoland"
-          className="text-gray-400 hover:text-gray-500"
+          className={`text-gray-400 hover:text-gray-500 ${
+            props.showDark
+              ? "dark:text-grey-300 dark:hover:text-grey-100"
+              : undefined
+          }`}
         >
           <span className="sr-only">GitHub</span>
           <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -83,7 +139,11 @@ const Footer = (props: { simple?: boolean }) => (
         </a>
         <a
           href="https://discord.gg/deno"
-          className="ml-6 text-gray-400 hover:text-gray-500"
+          className={`ml-6 text-gray-400 hover:text-gray-500 ${
+            props.showDark
+              ? "dark:text-grey-300 dark:hover:text-grey-100"
+              : undefined
+          }`}
         >
           <span className="sr-only">Discord</span>
           <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -92,7 +152,11 @@ const Footer = (props: { simple?: boolean }) => (
         </a>
         <a
           href="https://twitter.com/deno_land"
-          className="ml-6 text-gray-400 hover:text-gray-500"
+          className={`ml-6 text-gray-400 hover:text-gray-500 ${
+            props.showDark
+              ? "dark:text-grey-300 dark:hover:text-grey-100"
+              : undefined
+          }`}
         >
           <span className="sr-only">Twitter</span>
           <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">

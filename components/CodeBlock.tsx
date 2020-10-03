@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Highlight, { Prism } from "prism-react-renderer";
 import light from "prism-react-renderer/themes/github";
+import dark from "prism-react-renderer/themes/vsDark";
 import { useLayoutEffect } from "react";
 
 (typeof global !== "undefined" ? global : (window as any)).Prism = Prism;
@@ -30,6 +31,7 @@ export interface CodeBlockProps {
     | "wasm"
     | "makefile"
     | "dockerfile";
+  showDark?: boolean;
 }
 
 export const RawCodeBlock = ({
@@ -38,8 +40,11 @@ export const RawCodeBlock = ({
   className: extraClassName,
   disablePrefixes,
   enableLineRef = false,
+  showDark = false,
 }: CodeBlockProps & { className?: string; enableLineRef?: boolean }) => {
   const [hashValue, setHashValue] = useState("");
+  const [theme, setTheme] = useState(light);
+
   const codeDivClassNames =
     "text-gray-300 token-line text-right select-none text-xs";
   const onClick = (e: React.MouseEvent) => {
@@ -86,10 +91,22 @@ export const RawCodeBlock = ({
     });
   }
 
+  if (typeof window !== "undefined") {
+    setTheme(
+      window.matchMedia("(prefers-color-scheme: dark)").matches ? dark : light
+    );
+
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", ({ matches }) => {
+        setTheme(matches ? dark : light);
+      });
+  }
+
   return (
     <Highlight
       Prism={Prism}
-      theme={light}
+      theme={showDark ? theme : light}
       code={code}
       // @ts-ignore
       language={
@@ -165,13 +182,19 @@ export const RawCodeBlock = ({
   );
 };
 
-const CodeBlock = ({ code, language, disablePrefixes }: CodeBlockProps) => {
+const CodeBlock = ({
+  code,
+  language,
+  disablePrefixes,
+  showDark,
+}: CodeBlockProps) => {
   return (
     <RawCodeBlock
       code={code}
       language={language}
       disablePrefixes={disablePrefixes}
       className="p-4"
+      showDark={showDark}
     />
   );
 };

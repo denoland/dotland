@@ -15,27 +15,31 @@ const ArtworkPage = () => {
         <title>Artwork | Deno</title>
       </Head>
       <CookieBanner />
-      <Header />
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 mt-8 mb-24">
-        <div className="max-w-screen-lg mx-auto">
-          <h4 className="text-4xl font-bold tracking-tight">Artwork</h4>
-          <p className="mt-4 text-lg">
-            Do you have a piece to display here?{" "}
-            <a
-              href="https://github.com/denoland/deno_website2/blob/master/artwork.json"
-              className="link"
-            >
-              Add it!
-            </a>
-          </p>
+      <div className="dark:bg-grey-800">
+        <Header showDark />
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 pt-8 pb-24">
+          <div className="max-w-screen-lg mx-auto">
+            <h4 className="text-4xl font-bold tracking-tight dark:text-grey-100">
+              Artwork
+            </h4>
+            <p className="mt-4 text-lg dark:text-grey-200">
+              Do you have a piece to display here?{" "}
+              <a
+                href="https://github.com/denoland/deno_website2/blob/master/artwork.json"
+                className="link"
+              >
+                Add it!
+              </a>
+            </p>
+          </div>
+          <div className="mt-16 flex flex-row flex-wrap gap-16 justify-evenly items-end">
+            {ARTWORKS.map((artwork, i) => (
+              <Item key={i} artwork={artwork} />
+            ))}
+          </div>
         </div>
-        <div className="my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end">
-          {ARTWORKS.map((artwork, i) => (
-            <Item key={i} artwork={artwork} />
-          ))}
-        </div>
+        <Footer showDark />
       </div>
-      <Footer />
     </>
   );
 };
@@ -50,11 +54,11 @@ function Item({ artwork }: { artwork: Artwork }) {
           className="rounded-md max-h-56"
         />
       </div>
-      <div className="mt-3 text-xl font-semibold text-center">
+      <div className="mt-3 text-xl font-semibold text-center dark:text-grey-100">
         {artwork.link ? (
           <a
             href={artwork.link}
-            className="hover:text-gray-700 hover:underline"
+            className="hover:text-gray-700 hover:underline dark:hover:text-white"
           >
             {artwork.title}
           </a>
@@ -74,8 +78,10 @@ function Item({ artwork }: { artwork: Artwork }) {
             <div className="rounded-full w-12 h-12 bg-gray-200" />
           )}
           <div className="ml-4 flex flex-col justify-center">
-            <div className="text-xl leading-tight">{artwork.artist.name}</div>
-            <span className="text-gray-600 leading-tight">
+            <div className="text-xl leading-tight dark:text-grey-200">
+              {artwork.artist.name}
+            </div>
+            <span className="text-gray-600 leading-tight dark:text-grey-400">
               {artwork.license}
             </span>
           </div>
@@ -84,7 +90,7 @@ function Item({ artwork }: { artwork: Artwork }) {
           {artwork.artist.web && (
             <a
               href={artwork.artist.web}
-              className="ml-2 text-gray-500 hover:text-gray-700"
+              className="ml-2 text-gray-500 hover:text-gray-700 dark:text-grey-300 dark:hover:text-grey-100"
             >
               <span className="sr-only">Website</span>
               <svg
@@ -103,7 +109,7 @@ function Item({ artwork }: { artwork: Artwork }) {
           {artwork.artist.twitter && (
             <a
               href={`https://twitter.com/${artwork.artist.twitter}`}
-              className="ml-2 text-gray-500 hover:text-gray-700"
+              className="ml-2 text-gray-500 hover:text-gray-700 dark:text-grey-300 dark:hover:text-grey-100"
             >
               <span className="sr-only">Twitter</span>
               <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -114,7 +120,7 @@ function Item({ artwork }: { artwork: Artwork }) {
           {artwork.artist.github && (
             <a
               href={`https://github.com/${artwork.artist.github}`}
-              className="ml-2 text-gray-500 hover:text-gray-700"
+              className="ml-2 text-gray-500 hover:text-gray-700 dark:text-grey-300 dark:hover:text-grey-100"
             >
               <span className="sr-only">GitHub</span>
               <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -129,7 +135,7 @@ function Item({ artwork }: { artwork: Artwork }) {
           {artwork.artist.instagram && (
             <a
               href={`https://www.instagram.com/${artwork.artist.instagram}`}
-              className="ml-2 text-gray-500 hover:text-gray-700"
+              className="ml-2 text-gray-500 hover:text-gray-700 dark:text-grey-300 dark:hover:text-grey-100"
             >
               <span className="sr-only">Instagram</span>
               <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">

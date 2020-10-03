@@ -1,6 +1,9 @@
 const defaultTheme = require("tailwindcss/defaultTheme"); // eslint-disable-line
 
 module.exports = {
+  experimental: {
+    darkModeVariant: true,
+  },
   theme: {
     fontFamily: {
       mono: [
@@ -19,6 +22,22 @@ module.exports = {
       },
       width: {
         "72": "18rem",
+      },
+      screens: {
+        dark: { raw: "(prefers-color-scheme: dark)" },
+      },
+      colors: {
+        grey: {
+          "100": "#F7F7F7",
+          "200": "#E1E1E1",
+          "300": "#CFCFCF",
+          "400": "#B1B1B1",
+          "500": "#626262",
+          "600": "#515151",
+          "700": "#3B3B3B",
+          "800": "#222222",
+          "900": "#1e1e1e",
+        },
       },
     },
   },

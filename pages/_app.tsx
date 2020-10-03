@@ -11,7 +11,7 @@ export default class DenoWebsiteApp extends App {
   render() {
     const { Component, pageProps } = this.props;
     return (
-      <div className="h-screen">
+      <div className="min-h-screen">
         <Head>
           <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         </Head>

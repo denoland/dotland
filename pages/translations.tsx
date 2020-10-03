@@ -15,28 +15,32 @@ const TranslationsPage = () => {
         <title>Translations | Deno</title>
       </Head>
       <CookieBanner />
-      <Header />
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 mt-8 mb-24">
-        <div className="max-w-screen-lg mx-auto">
-          <h4 className="text-4xl font-bold tracking-tight">Translations</h4>
-          <p className="mt-4 text-lg">
-            Dono docs is available in the following languages. Do you have a
-            piece to display here?{" "}
-            <a
-              href="https://github.com/denoland/deno_website2/blob/master/translations.json"
-              className="link"
-            >
-              Add it!
-            </a>
-          </p>
+      <div className="dark:bg-grey-800 min-h-screen flex flex-col">
+        <Header showDark />
+        <div className="max-w-screen-xl w-full mx-auto px-4 sm:px-6 md:px-8 pt-8 pb-24 flex-1">
+          <div className="max-w-screen-lg mx-auto">
+            <h4 className="text-4xl font-bold tracking-tight dark:text-grey-100">
+              Translations
+            </h4>
+            <p className="mt-4 text-lg dark:text-grey-200">
+              Dono docs is available in the following languages. Do you have a
+              piece to display here?{" "}
+              <a
+                href="https://github.com/denoland/deno_website2/blob/master/translations.json"
+                className="link"
+              >
+                Add it!
+              </a>
+            </p>
+          </div>
+          <div className="mt-16 flex flex-row flex-wrap gap-16 justify-evenly items-end">
+            {TRANSLATIONS.map((language, i) => (
+              <Item key={i} language={language} />
+            ))}
+          </div>
         </div>
-        <div className="my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end">
-          {TRANSLATIONS.map((language, i) => (
-            <Item key={i} language={language} />
-          ))}
-        </div>
+        <Footer showDark />
       </div>
-      <Footer />
     </>
   );
 };
@@ -44,18 +48,21 @@ const TranslationsPage = () => {
 function Item({ language }: { language: Translation }) {
   return (
     <div className="p-2 mx-20 mb-5">
-      <span className="text-gray-600 leading-tight flex justify-center">
+      <span className="text-gray-600 leading-tight flex justify-center dark:text-grey-300">
         {language.english}
       </span>
       <div className="mt-3 text-xl font-semibold text-center">
-        <a href={language.link} className="hover:text-gray-700 hover:underline">
+        <a
+          href={language.link}
+          className="hover:text-gray-700 hover:underline dark:text-grey-100 dark:hover:text-white"
+        >
           {language.language}
         </a>
       </div>
       <div className="flex justify-center mt-3">
         <a
           href={language.repository}
-          className="text-gray-500 hover:text-gray-700"
+          className="text-gray-500 hover:text-gray-700 dark:text-grey-300 dark:hover:text-grey-100"
         >
           <span className="sr-only">GitHub</span>
           <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">

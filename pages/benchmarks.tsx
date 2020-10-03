@@ -94,18 +94,20 @@ const Benchmarks = () => {
         </title>
       </Head>
       <CookieBanner />
-      <div className="bg-gray-50 min-h-full">
-        <Header subtitle="Continuous Benchmarks" />
+      <div className="bg-gray-50 min-h-full dark:bg-grey-900">
+        <Header subtitle="Continuous Benchmarks" showDark />
         <div className="mb-12">
           <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 mt-8 pb-8">
             <img src="/images/deno_logo_4.gif" className="mb-12 w-32 h-32" />
-            <h4 className="text-2xl font-bold tracking-tight">About</h4>
-            <p className="mt-4">
+            <h4 className="text-2xl font-bold tracking-tight dark:text-grey-100">
+              About
+            </h4>
+            <p className="mt-4 dark:text-grey-200">
               As part of Deno's continuous integration and testing pipeline we
               measure the performance of certain key metrics of the runtime. You
               can view these benchmarks here.
             </p>
-            <p className="mt-4">
+            <p className="mt-4 dark:text-grey-200">
               You are currently viewing data for{" "}
               {showAll ? "all" : "the most recent"} commits to the{" "}
               <a href="https://github.com/denoland/deno">master</a>
@@ -119,14 +121,14 @@ const Benchmarks = () => {
               commits.
             </p>
             <div className="mt-12 pt-4">
-              <h4 className="text-2xl font-bold tracking-tight">
+              <h4 className="text-2xl font-bold tracking-tight dark:text-grey-100">
                 Runtime Metrics
               </h4>
-              <p className="mt-2">
+              <p className="mt-2 dark:text-grey-200">
                 In this section we measure various metrics of the following
                 scripts:
               </p>
-              <ul className="ml-8 list-disc my-2">
+              <ul className="ml-8 list-disc my-2 dark:text-grey-200">
                 <li>
                   <SourceLink
                     path="cli/tests/003_relative_import.ts"
@@ -169,7 +171,7 @@ const Benchmarks = () => {
               </ul>
               <div className="mt-8">
                 <a href="#execution-time" id="execution-time">
-                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                  <h5 className="text-lg font-medium tracking-tight hover:underline dark:text-grey-200">
                     Execution time
                   </h5>
                 </a>
@@ -181,7 +183,7 @@ const Benchmarks = () => {
                   yLabel="seconds"
                   yTickFormat={formatLogScale}
                 />
-                <p className="mt-1">
+                <p className="mt-1 dark:text-grey-300">
                   Log scale. This shows how much time total it takes to run a
                   script. For deno to execute typescript, it must first compile
                   it to JS. A warm startup is when deno has a cached JS output
@@ -192,7 +194,7 @@ const Benchmarks = () => {
               </div>
               <div className="mt-8">
                 <a href="#thread-count" id="thread-count">
-                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                  <h5 className="text-lg font-medium tracking-tight hover:underline dark:text-grey-200">
                     Thread count
                   </h5>
                 </a>
@@ -202,13 +204,13 @@ const Benchmarks = () => {
                     ({ name }) => !["check", "no_check"].includes(name)
                   )}
                 />
-                <p className="mt-1">
+                <p className="mt-1 dark:text-grey-300">
                   How many threads various programs use. Smaller is better.
                 </p>
               </div>
               <div className="mt-8">
                 <a href="#syscall-count" id="syscall-count">
-                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                  <h5 className="text-lg font-medium tracking-tight hover:underline dark:text-grey-200">
                     Syscall count
                   </h5>
                 </a>{" "}
@@ -218,14 +220,14 @@ const Benchmarks = () => {
                     ({ name }) => !["check", "no_check"].includes(name)
                   )}
                 />
-                <p className="mt-1">
+                <p className="mt-1 dark:text-grey-300">
                   How many total syscalls are performed when executing a given
                   script. Smaller is better.
                 </p>
               </div>
               <div className="mt-8">
                 <a href="#max-memory-usage" id="max-memory-usage">
-                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                  <h5 className="text-lg font-medium tracking-tight hover:underline dark:text-grey-200">
                     Max memory usage
                   </h5>
                 </a>{" "}
@@ -237,18 +239,18 @@ const Benchmarks = () => {
                   yLabel="megabytes"
                   yTickFormat={formatMB}
                 />
-                <p className="mt-1">
+                <p className="mt-1 dark:text-grey-300">
                   Max memory usage during execution. Smaller is better.
                 </p>
               </div>
             </div>
             <div className="mt-20">
-              <h4 className="text-2xl font-bold tracking-tight">
+              <h4 className="text-2xl font-bold tracking-tight dark:text-grey-100">
                 TypeScript Performance
               </h4>
               <div className="mt-8">
                 <a href="#type-checking" id="type-checking">
-                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                  <h5 className="text-lg font-medium tracking-tight hover:underline dark:text-grey-200">
                     Type Checking
                   </h5>
                 </a>
@@ -261,7 +263,7 @@ const Benchmarks = () => {
                   yLabel="seconds"
                   yTickFormat={formatLogScale}
                 />
-                <p className="mt-1">
+                <p className="mt-1 dark:text-grey-300">
                   In both cases, <code>std/examples/chat/server_test.ts</code>{" "}
                   is cached by Deno. The workload contains 20 unique TypeScript
                   modules. With <em>check</em> a full TypeScript type check is
@@ -271,7 +273,9 @@ const Benchmarks = () => {
               </div>
             </div>
             <div className="mt-20">
-              <h4 className="text-2xl font-bold tracking-tight">I/O</h4>
+              <h4 className="text-2xl font-bold tracking-tight dark:text-grey-100">
+                I/O
+              </h4>
               <p
                 className="mt-4 flex cursor-pointer"
                 onClick={() => setShowNormalized(!showNormalized)}
@@ -281,7 +285,9 @@ const Benchmarks = () => {
                   tabIndex={0}
                   aria-checked={showNormalized ? "true" : "false"}
                   className={`${
-                    showNormalized ? "bg-gray-900" : "bg-gray-200"
+                    showNormalized
+                      ? "bg-gray-900 dark:bg-grey-500"
+                      : "bg-gray-200 dark:bg-grey-700"
                   } relative inline-block flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full transition-colors ease-in-out duration-200 focus:outline-none focus:shadow-outline`}
                 >
                   <span
@@ -291,13 +297,13 @@ const Benchmarks = () => {
                     } inline-block h-5 w-5 rounded-full bg-white shadow transform transition ease-in-out duration-200`}
                   ></span>
                 </span>
-                <span className="ml-2 text-gray-900">
+                <span className="ml-2 text-gray-900 dark:text-grey-200">
                   Show normalized benchmarks
                 </span>
               </p>
               <div className="mt-8">
                 <a href="#http-server-throughput" id="http-server-throughput">
-                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                  <h5 className="text-lg font-medium tracking-tight hover:underline dark:text-grey-200">
                     HTTP Server Throughput
                   </h5>
                 </a>
@@ -311,11 +317,11 @@ const Benchmarks = () => {
                   }
                   yTickFormat={showNormalized ? formatPercentage : formatReqSec}
                 />
-                <p className="mt-1">
+                <p className="mt-1 dark:text-grey-300">
                   Tests HTTP server performance. 10 keep-alive connections do as
                   many hello-world requests as possible. Bigger is better.
                 </p>
-                <ul className="ml-8 list-disc my-2">
+                <ul className="ml-8 list-disc my-2 dark:text-grey-300">
                   <li>
                     <SourceLink path="tools/deno_tcp.ts" name="deno_tcp" /> is a
                     fake http server that doesn't parse HTTP. It is comparable
@@ -329,7 +335,7 @@ const Benchmarks = () => {
                     is a web server written in TypeScript. It is comparable to{" "}
                     <SourceLink path="tools/node_http.js" name="node_http" />
                   </li>
-                  <li className="break-words">
+                  <li className="break-words dark:text-grey-300">
                     deno_core_single and deno_core_multi are two versions of a
                     minimal fake HTTP server. It blindly reads and writes fixed
                     HTTP packets. It is comparable to deno_tcp and node_tcp.
@@ -377,7 +383,7 @@ const Benchmarks = () => {
               </div>
               <div className="mt-8">
                 <a href="#http-latency" id="http-latency">
-                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                  <h5 className="text-lg font-medium tracking-tight hover:underline dark:text-grey-200">
                     HTTP Latency
                   </h5>
                 </a>{" "}
@@ -387,14 +393,14 @@ const Benchmarks = () => {
                   yLabel={"milliseconds"}
                   yTickFormat={formatLogScale}
                 />
-                <p className="mt-1">
+                <p className="mt-1 dark:text-grey-300">
                   Max latency during the same test used above for
                   requests/second. Smaller is better. Log scale.
                 </p>
               </div>
               <div className="mt-8">
                 <a href="#http-proxy-throughput" id="http-proxy-throughput">
-                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                  <h5 className="text-lg font-medium tracking-tight hover:underline dark:text-grey-200">
                     HTTP Proxy Throughput
                   </h5>
                 </a>
@@ -406,11 +412,11 @@ const Benchmarks = () => {
                   }
                   yTickFormat={showNormalized ? formatPercentage : formatReqSec}
                 />
-                <p className="mt-1">
+                <p className="mt-1 dark:text-grey-300">
                   Tests proxy performance. 10 keep-alive connections do as many
                   hello-world requests as possible. Bigger is better.
                 </p>
-                <ul className="ml-8 list-disc my-2">
+                <ul className="ml-8 list-disc my-2 dark:text-grey-300">
                   <li>
                     <SourceLink
                       path="tools/deno_tcp_proxy.ts"
@@ -447,7 +453,7 @@ const Benchmarks = () => {
               </div>
               <div className="mt-8">
                 <a href="#throughput" id="throughput">
-                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                  <h5 className="text-lg font-medium tracking-tight hover:underline dark:text-grey-200">
                     Throughput
                   </h5>
                 </a>
@@ -457,7 +463,7 @@ const Benchmarks = () => {
                   yLabel={"seconds"}
                   yTickFormat={formatLogScale}
                 />
-                <p className="mt-1">
+                <p className="mt-1 dark:text-grey-300">
                   Log scale. Time it takes to pipe a certain amount of data
                   through Deno.{" "}
                   <SourceLink
@@ -470,10 +476,12 @@ const Benchmarks = () => {
               </div>
             </div>
             <div className="mt-20">
-              <h4 className="text-2xl font-bold tracking-tight">Size</h4>
+              <h4 className="text-2xl font-bold tracking-tight dark:text-grey-100">
+                Size
+              </h4>
               <div className="mt-8">
                 <a href="#executable-size" id="executable-size">
-                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                  <h5 className="text-lg font-medium tracking-tight hover:underline dark:text-grey-200">
                     Executable size
                   </h5>
                 </a>
@@ -483,13 +491,13 @@ const Benchmarks = () => {
                   yLabel={"megabytes"}
                   yTickFormat={formatMB}
                 />
-                <p className="mt-1">
+                <p className="mt-1 dark:text-grey-300">
                   Deno ships only a single binary. We track its size here.
                 </p>
               </div>
               <div className="mt-8">
                 <a href="#bundle-size" id="bundle-size">
-                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                  <h5 className="text-lg font-medium tracking-tight hover:underline dark:text-grey-200">
                     Bundle size
                   </h5>
                 </a>{" "}
@@ -499,8 +507,10 @@ const Benchmarks = () => {
                   yLabel={"kilobytes"}
                   yTickFormat={formatKB}
                 />
-                <p className="mt-1">Size of different bundled scripts.</p>
-                <ul className="ml-8 list-disc my-2">
+                <p className="mt-1 dark:text-grey-300">
+                  Size of different bundled scripts.
+                </p>
+                <ul className="ml-8 list-disc my-2 dark:text-grey-300">
                   <li>
                     <Link href="/[...rest]" as="/std/http/file_server.ts">
                       <a className="link">file_server</a>
@@ -516,7 +526,7 @@ const Benchmarks = () => {
             </div>
           </div>
         </div>
-        <Footer simple />
+        <Footer simple showDark />
       </div>
     </>
   );

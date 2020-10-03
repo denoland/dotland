@@ -18,6 +18,7 @@ export interface BenchmarkChartProps {
 
 function BenchmarkChart(props: BenchmarkChartProps) {
   const [id] = useState(Math.random().toString());
+  const [theme, setTheme] = useState("light");
 
   const shortSha1List = props.sha1List.map((s) => s.slice(0, 6));
 
@@ -33,8 +34,26 @@ function BenchmarkChart(props: BenchmarkChartProps) {
     logScale(cols);
   }
 
+  if (typeof window !== "undefined") {
+    setTheme(
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light"
+    );
+
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", ({ matches }) => {
+        setTheme(matches ? "dark" : "light");
+      });
+  }
+
   const options = {
+    theme: {
+      mode: theme,
+    },
     chart: {
+      background: "transparent",
       toolbar: {
         show: true,
       },
@@ -94,7 +113,7 @@ function BenchmarkChart(props: BenchmarkChartProps) {
 export function BenchmarkLoading() {
   return (
     <div style={{ height: 335 }} className="flex items-center justify-center">
-      <span className="text-gray-500">Loading...</span>
+      <span className="text-gray-500 dark:text-grey-200">Loading...</span>
     </div>
   );
 }
