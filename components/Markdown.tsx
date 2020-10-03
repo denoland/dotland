@@ -138,12 +138,21 @@ function Markdown(props: MarkdownProps) {
       <div
         dangerouslySetInnerHTML={{ __html: raw }}
         className={`markdown py-8 px-4 ${props.className ?? ""}`}
+        onClick={handleClick}
       />
     );
   } catch (err) {
     console.log(err);
     return null;
   }
+}
+
+function handleClick(e: React.MouseEvent<HTMLElement>) {
+  const el = e.target as HTMLElement;
+  if (el.className !== "octicon-link") return;
+
+  const anchor = el.parentNode as HTMLAnchorElement;
+  navigator.clipboard.writeText(anchor.href);
 }
 
 function transformLinkUri(displayURL: string, baseURL: string) {
