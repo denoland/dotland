@@ -1,3 +1,5 @@
+/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+
 import emojis from "./emojis.json";
 
 export function replaceEmojis(src: string): string {

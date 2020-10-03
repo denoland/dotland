@@ -1,3 +1,5 @@
+/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+
 import { fetch, URL, Request, Response } from "@dollarshaveclub/cloudworker";
 import { handleRequest, extractAltLineNumberReference } from "../src/handler";
 

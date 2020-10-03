@@ -1,3 +1,5 @@
+/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+
 const xBasepath = "https://deno.land/x/deno@";
 const githubBasepath = "https://raw.githubusercontent.com/denoland/deno/";
 const docpath = "https://github.com/denoland/deno/blob/";

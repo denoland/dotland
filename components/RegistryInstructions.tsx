@@ -1,3 +1,5 @@
+/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+
 import React, { useState, useEffect, useMemo } from "react";
 import useSWR from "swr";
 import Transition from "./Transition";

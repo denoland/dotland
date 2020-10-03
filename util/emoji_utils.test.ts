@@ -1,5 +1,7 @@
 /* eslint-env jest */
 
+/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+
 import { replaceEmojis } from "./emoji_util";
 
 test("emoji replacement", () => {

@@ -1,3 +1,5 @@
+/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+
 import React, { useMemo, useState, createRef, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";

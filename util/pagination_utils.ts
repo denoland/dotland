@@ -1,3 +1,5 @@
+/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+
 export function hasPrevious({ page }: { page: number }): boolean {
   return page > 1;
 }
