@@ -112,10 +112,14 @@ function FileDisplay(props: {
             return (
               <div className="px-4">
                 <Markdown
-                  source={props.raw!.replace(
-                    /\$STD_VERSION/g,
-                    props.stdVersion ?? ""
-                  )}
+                  source={
+                    props.stdVersion
+                      ? props.raw!
+                      : props.raw!.replace(
+                          /\$STD_VERSION/g,
+                          props.stdVersion ?? ""
+                        )
+                  }
                   displayURL={"https://deno.land" + props.canonicalPath}
                   sourceURL={props.sourceURL}
                   baseURL={"https://deno.land" + props.baseURL}
