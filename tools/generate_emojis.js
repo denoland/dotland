@@ -1,3 +1,5 @@
+/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+
 const req = await fetch(
   "https://raw.githubusercontent.com/github/gemoji/master/db/emoji.json"
 );

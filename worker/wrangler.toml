@@ -1,3 +1,5 @@
+# Copyright 2020 the Deno authors. All rights reserved. MIT license.
+
 # Cloudflare Worker configuration
 account_id = "895762025d37fc687ecd72d7cc80204a"
 zone_id = "c192cf8ac042c681023493c52edd44c8"

@@ -1,5 +1,7 @@
 /* eslint-env jest */
 
+/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+
 import { hasPrevious, hasNext, pageCount } from "./pagination_utils";
 
 test("hasPrevious", () => {

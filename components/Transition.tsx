@@ -1,5 +1,6 @@
 // From https://gist.githubusercontent.com/stevecastaneda/e71a8465c3f290b98982e5d160260de2/raw/68a48d6b5e0ef60ec5894a0cf6b171bb48681f23/Transition.tsx
 // JSX Version by Adam Wathan: https://gist.github.com/adamwathan/e0a791aa0419098a7ece70028b2e641e
+/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
 import React, { ReactNode } from "react";
 import { CSSTransition as ReactCSSTransition } from "react-transition-group";
