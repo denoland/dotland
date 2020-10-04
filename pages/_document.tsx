@@ -26,6 +26,18 @@ export default class DenoDocDocument extends Document {
             href="/images/icons/apple-touch-icon-180x180.png"
           />
           <link rel="manifest" href="/site.webmanifest" />
+          <meta property="og:type" content="website" />
+          <meta property="og:site_name" content="Deno" />
+          <meta property="og:url" content="https://deno.land" />
+          <meta
+            property="og:title"
+            content="Deno - A secure runtime for JavaScript and TypeScript"
+          />
+          <meta
+            property="og:description"
+            content="Deno is a simple, modern and secure runtime for JavaScript and TypeScript that uses V8 and is built in Rust."
+          />
+          <meta property="og:image" content="https://deno.land/v1.png" />
         </Head>
         <body>
           <Main />
