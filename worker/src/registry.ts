@@ -37,10 +37,9 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
   }
   if (version.startsWith("v") && module === "std") {
     console.log("std version prefix", module, version);
-    return new Response(undefined, {
+    return new Response("404 Not Found", {
       headers: {
-        Location: `/std@${version.substring(1)}/${path}`,
-        "x-deno-warning": `std versions prefixed with 'v' will be deprecated on October 1st 2020. Please change your import to ${
+        "x-deno-warning": `std versions prefixed with 'v' were deprecated on October 1st 2020. Please change your import to ${
           url.origin
         }${module === "std" ? "" : "/x"}/${module}@${version.substring(
           1
@@ -48,7 +47,7 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
           module === "std" ? "" : "/x"
         }/${module}@${version}/${path})`,
       },
-      status: 302,
+      status: 404,
     });
   }
   const remoteUrl = getBackingURL(module, version, path);
