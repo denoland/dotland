@@ -17,7 +17,7 @@ function DependencyGraph({
   graph: DependencyGraphType;
   entrypoint: string;
   currentModule: string;
-}) {
+}): React.ReactElement | null {
   const tree = useMemo(() => {
     const tree = graphToTree(graph, entrypoint);
     return tree;

@@ -9,7 +9,10 @@ import { getVersionList } from "../util/registry_utils";
 const VALID_NAME = /^[a-z0-9_]{3,40}$/,
   VALID_SUBDIRECTORY = /^([^(/)])(.*\/$)/;
 
-function RegistryInstructions(props: { isOpen: boolean; close: () => void }) {
+function RegistryInstructions(props: {
+  isOpen: boolean;
+  close: () => void;
+}): React.ReactElement {
   // Stage of the instructions
   const [stage, setStage] = useState(0);
 

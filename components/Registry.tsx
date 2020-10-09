@@ -29,7 +29,7 @@ import DirectoryListing from "./DirectoryListing";
 import { CookieBanner } from "./CookieBanner";
 import { replaceEmojis } from "../util/emoji_util";
 
-const Registry = () => {
+function Registry(): React.ReactElement {
   // State
   const [versions, setVersions] = useState<VersionInfo | null | undefined>();
   const [versionMeta, setVersionMeta] = useState<
@@ -564,9 +564,12 @@ const Registry = () => {
       </div>
     </>
   );
-};
+}
 
-export function ErrorMessage(props: { title: string; body: string }) {
+export function ErrorMessage(props: {
+  title: string;
+  body: string;
+}): React.ReactElement {
   return (
     <div className="rounded-md bg-red-50 border border-red-200 p-4">
       <div className="flex">

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-export function CookieBanner() {
+export function CookieBanner(): React.ReactElement {
   const [cookieBanner, setCookieBanner] = useState(
     typeof window === "undefined" ||
       window.localStorage.getItem("cookiebanner") === "closed"

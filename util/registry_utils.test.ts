@@ -113,7 +113,6 @@ test("getModule", async () => {
   expect(await getModule("ltest2")).toEqual({
     name: "ltest2",
     description: "Move along, just for testing",
-    // eslint-disable-next-line @typescript-eslint/camelcase
     star_count: 2,
   });
 });

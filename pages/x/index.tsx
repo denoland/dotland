@@ -18,7 +18,7 @@ import { replaceEmojis } from "../../util/emoji_util";
 
 const PER_PAGE = 20;
 
-const ThirdPartyRegistryList = () => {
+function ThirdPartyRegistryList(): React.ReactElement {
   const { asPath, query: routerQuery, replace } = useRouter();
   const [overlayOpen, setOverlayOpen] = React.useState(asPath.endsWith("#add"));
 
@@ -603,7 +603,7 @@ const ThirdPartyRegistryList = () => {
       </div>
     </>
   );
-};
+}
 
 function ModuleList({
   modules,

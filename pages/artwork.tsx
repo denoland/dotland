@@ -8,7 +8,7 @@ import Header from "../components/Header";
 import { ARTWORKS, Artwork } from "../util/artwork_utils";
 import { CookieBanner } from "../components/CookieBanner";
 
-const ArtworkPage = () => {
+function ArtworkPage(): React.ReactElement {
   return (
     <>
       <Head>
@@ -38,7 +38,7 @@ const ArtworkPage = () => {
       <Footer />
     </>
   );
-};
+}
 
 function Item({ artwork }: { artwork: Artwork }) {
   return (

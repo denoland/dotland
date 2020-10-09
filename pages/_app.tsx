@@ -8,7 +8,7 @@ import "../components/markdown.css";
 import "../components/docsearch.css";
 
 export default class DenoWebsiteApp extends App {
-  render() {
+  render(): React.ReactElement {
     const { Component, pageProps } = this.props;
     return (
       <div className="h-screen">

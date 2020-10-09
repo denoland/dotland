@@ -198,7 +198,6 @@ export function logScale(columns: Column[]): void {
 }
 
 function renameReqPerSecFields(data: BenchmarkRun[]): void {
-  /* eslint-disable @typescript-eslint/camelcase */
   for (const row of data) {
     if (row.req_per_sec === undefined) continue;
     const {

@@ -261,7 +261,7 @@ export function parseNameVersion(nameVersion: string): [string, string] {
   return [name, version];
 }
 
-export function fileTypeFromURL(filename: string) {
+export function fileTypeFromURL(filename: string): string | undefined {
   const f = filename.toLowerCase();
   if (f.endsWith(".ts")) {
     return "typescript";
@@ -298,12 +298,12 @@ export function fileTypeFromURL(filename: string) {
   }
 }
 
-export function fileNameFromURL(url: string) {
+export function fileNameFromURL(url: string): string {
   const segments = decodeURI(url).split("/");
   return segments[segments.length - 1];
 }
 
-export function denoDocAvailableForURL(filename: string) {
+export function denoDocAvailableForURL(filename: string): boolean {
   const filetype = fileTypeFromURL(filename);
   switch (filetype) {
     case "javascript":
@@ -344,7 +344,7 @@ export function findRootReadme(
     : undefined;
 }
 
-export function isReadme(filename: string) {
+export function isReadme(filename: string): boolean {
   return (
     filename.toLowerCase() === "readme.md" ||
     filename.toLowerCase() === "readme"
