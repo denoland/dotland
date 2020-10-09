@@ -20,7 +20,7 @@ import BenchmarkChart, { BenchmarkLoading } from "../components/BenchmarkChart";
 import { CookieBanner } from "../components/CookieBanner";
 
 // TODO(lucacasonato): add anchor points to headers
-const Benchmarks = () => {
+function Benchmarks(): React.ReactElement {
   const _ = useRouter();
   const location = typeof window !== "undefined" ? window.location : null;
   const typescriptBenches = ["check", "no_check", "bundle"];
@@ -523,7 +523,7 @@ const Benchmarks = () => {
       </div>
     </>
   );
-};
+}
 
 function BenchmarkOrLoading(props: {
   data: BenchmarkData | null;

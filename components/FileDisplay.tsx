@@ -19,7 +19,7 @@ function FileDisplay(props: {
   repositoryURL?: string | null;
   documentationURL?: string | null;
   stdVersion?: string;
-}) {
+}): React.ReactElement {
   const { pathname } = useRouter();
   const filetype = fileTypeFromURL(props.sourceURL);
   const filename = fileNameFromURL(props.sourceURL);

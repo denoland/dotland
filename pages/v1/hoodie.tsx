@@ -7,7 +7,7 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { CookieBanner } from "../../components/CookieBanner";
 
-const V1Hoodie = () => {
+function V1Hoodie(): React.ReactElement {
   return (
     <>
       <Head>
@@ -54,6 +54,6 @@ const V1Hoodie = () => {
       <Footer />
     </>
   );
-};
+}
 
 export default V1Hoodie;

@@ -32,13 +32,16 @@ export interface CodeBlockProps {
     | "dockerfile";
 }
 
-export const RawCodeBlock = ({
+export function RawCodeBlock({
   code,
   language,
   className: extraClassName,
   disablePrefixes,
   enableLineRef = false,
-}: CodeBlockProps & { className?: string; enableLineRef?: boolean }) => {
+}: CodeBlockProps & {
+  className?: string;
+  enableLineRef?: boolean;
+}): React.ReactElement {
   const [hashValue, setHashValue] = useState("");
   const codeDivClassNames =
     "text-gray-300 token-line text-right select-none text-xs";
@@ -91,7 +94,7 @@ export const RawCodeBlock = ({
       Prism={Prism}
       theme={light}
       code={code}
-      // @ts-ignore
+      // @ts-expect-error because typings are bad
       language={
         language === "shell" ? "bash" : language === "text" ? "diff" : language
       }
@@ -163,9 +166,13 @@ export const RawCodeBlock = ({
       )}
     </Highlight>
   );
-};
+}
 
-const CodeBlock = ({ code, language, disablePrefixes }: CodeBlockProps) => {
+function CodeBlock({
+  code,
+  language,
+  disablePrefixes,
+}: CodeBlockProps): React.ReactElement {
   return (
     <RawCodeBlock
       code={code}
@@ -174,6 +181,6 @@ const CodeBlock = ({ code, language, disablePrefixes }: CodeBlockProps) => {
       className="p-4"
     />
   );
-};
+}
 
 export default CodeBlock;

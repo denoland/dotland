@@ -30,7 +30,7 @@ interface Props {
   posts: PostMeta[];
 }
 
-const PostsIndexPage = (props: Props) => {
+function PostsIndexPage(props: Props): React.ReactElement | null {
   return (
     <>
       <Head>
@@ -89,7 +89,7 @@ const PostsIndexPage = (props: Props) => {
       <Footer />
     </>
   );
-};
+}
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const dir = await promises.readdir("./public/posts");

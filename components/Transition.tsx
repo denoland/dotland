@@ -98,7 +98,7 @@ function CSSTransition({
   );
 }
 
-function Transition({ show, appear, ...rest }: TransitionProps) {
+function Transition({ show, appear, ...rest }: TransitionProps): React.ReactElement {
   const { parent } = useContext(TransitionContext);
   const isInitialRender = useIsInitialRender();
   const isChild = show === undefined;

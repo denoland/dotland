@@ -10,7 +10,7 @@ import { getBuild } from "../../util/registry_utils";
 import { ErrorMessage } from "../../components/Registry";
 import { CookieBanner } from "../../components/CookieBanner";
 
-const RestPage = () => {
+function StatusPage(): React.ReactElement {
   const { query } = useRouter();
   const id = (query.id as string) ?? "";
 
@@ -190,6 +190,6 @@ const RestPage = () => {
       </div>
     </>
   );
-};
+}
 
-export default RestPage;
+export default StatusPage;

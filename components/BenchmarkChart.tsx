@@ -16,7 +16,7 @@ export interface BenchmarkChartProps {
   sha1List: string[];
 }
 
-function BenchmarkChart(props: BenchmarkChartProps) {
+function BenchmarkChart(props: BenchmarkChartProps): React.ReactElement {
   const [id] = useState(Math.random().toString());
 
   const shortSha1List = props.sha1List.map((s) => s.slice(0, 6));
@@ -91,7 +91,7 @@ function BenchmarkChart(props: BenchmarkChartProps) {
   );
 }
 
-export function BenchmarkLoading() {
+export function BenchmarkLoading(): React.ReactElement {
   return (
     <div style={{ height: 335 }} className="flex items-center justify-center">
       <span className="text-gray-500">Loading...</span>

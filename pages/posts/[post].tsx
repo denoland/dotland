@@ -34,7 +34,7 @@ interface Props {
   };
 }
 
-const NewsPostPage = (props: Props) => {
+function NewsPostPage(props: Props): React.ReactElement {
   const { query } = useRouter();
   const path = useMemo(() => {
     return query.post;
@@ -138,7 +138,7 @@ const NewsPostPage = (props: Props) => {
       <Footer />
     </>
   );
-};
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const dir = await fs.readdir("./public/posts");

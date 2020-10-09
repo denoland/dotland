@@ -36,10 +36,10 @@ export async function getTableOfContents(
   return await res.json();
 }
 
-export function getFileURL(version: string, path: string) {
+export function getFileURL(version: string, path: string): string {
   return `${basepath(version)}${version}/docs${path}.md`;
 }
 
-export function getDocURL(version: string, path: string) {
+export function getDocURL(version: string, path: string): string {
   return `${docpath}${version}/docs${path}.md`;
 }

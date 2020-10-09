@@ -4,13 +4,13 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Transition from "./Transition";
 
-const Header = ({
+function Header({
   subtitle,
   widerContent,
 }: {
   subtitle?: string;
   widerContent?: boolean;
-}) => {
+}): React.ReactElement {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -193,6 +193,6 @@ const Header = ({
       </Transition>
     </div>
   );
-};
+}
 
 export default Header;

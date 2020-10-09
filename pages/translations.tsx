@@ -8,7 +8,7 @@ import Header from "../components/Header";
 import { TRANSLATIONS, Translation } from "../util/translations_utils";
 import { CookieBanner } from "../components/CookieBanner";
 
-const TranslationsPage = () => {
+function TranslationsPage(): React.ReactElement {
   return (
     <>
       <Head>
@@ -39,7 +39,7 @@ const TranslationsPage = () => {
       <Footer />
     </>
   );
-};
+}
 
 function Item({ language }: { language: Translation }) {
   return (

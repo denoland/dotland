@@ -11,7 +11,7 @@ function DirectoryListing(props: {
   version: string | undefined;
   path: string;
   repositoryURL?: string | null;
-}) {
+}): React.ReactElement {
   const { asPath } = useRouter();
   const isStd = asPath.startsWith("/std");
   const children = useMemo(() => {
