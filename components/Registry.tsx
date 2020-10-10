@@ -63,6 +63,18 @@ function Registry(): React.ReactElement {
     }
   }
 
+  function getFormattedDateTime(date: Date) {
+    const format = new Intl.DateTimeFormat(undefined, {
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+      month: "numeric",
+      day: "numeric",
+      year: "numeric",
+    });
+    return format.format(date);
+  }
+
   // Base paths
   const basePath = useMemo(
     () => `${isStd ? "" : "/x"}/${name}${version ? `@${version}` : ""}`,
@@ -479,6 +491,17 @@ function Registry(): React.ReactElement {
                                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                               </svg>
                               <div>{moduleMeta.star_count}</div>
+                            </div>
+                            <div className="mt-2 flex items-center">
+                              <svg
+                                  className="h-5 w-5 mr-2 inline text-gray-700"
+                                  fill="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                <title>Tagged at</title>
+                                <path fill="currentColor" d="M5.5,7A1.5,1.5 0 0,1 4,5.5A1.5,1.5 0 0,1 5.5,4A1.5,1.5 0 0,1 7,5.5A1.5,1.5 0 0,1 5.5,7M21.41,11.58L12.41,2.58C12.05,2.22 11.55,2 11,2H4C2.89,2 2,2.89 2,4V11C2,11.55 2.22,12.05 2.59,12.41L11.58,21.41C11.95,21.77 12.45,22 13,22C13.55,22 14.05,21.77 14.41,21.41L21.41,14.41C21.78,14.05 22,13.55 22,13C22,12.44 21.77,11.94 21.41,11.58Z" />
+                              </svg>
+                              <div className="text-sm">{getFormattedDateTime(versionMeta.uploadedAt)}</div>
                             </div>
                           </>
                         )}
