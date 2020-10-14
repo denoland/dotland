@@ -87,6 +87,7 @@ function Header({
           <a
             href="https://github.com/denoland"
             className="ml-10 text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+            style={{ lineHeight: 0 }}
           >
             <span className="sr-only">GitHub</span>
             <svg
