@@ -37,16 +37,42 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
       status: 302,
     });
   }
-  if (version.startsWith("v") && module === "std") {
+  if (version.startsWith("v0.") && module === "std") {
     console.log("std version prefix", module, version);
+    const correctVersion = version.substring(1);
+    const versionNumber = parseFloat(correctVersion);
+    // For now only block std versions >= 0.70.0
+    // Timeline for deprecation:
+    // Oct 14 2020: >= 0.70.0
+    // Oct 21 2020: >= 0.68.0
+    // Oct 28 2020: >= 0.65.0
+    // Nov 04 2020: >= 0.61.0
+    // Nov 11 2020: >= 0.56.0
+    // Nov 18 2020: >= 0.50.0
+    // Nov 25 2020: >= 0.43.0
+    // Dec 02 2020: >= 0.34.0 (oldest available std release)
+    if (versionNumber >= 0.7) {
+      return new Response("404 Not Found", {
+        headers: {
+          "x-deno-warning": `std versions prefixed with 'v' were deprecated recently. Please change your import to ${
+            url.origin
+          }${
+            module === "std" ? "" : "/x"
+          }/${module}@${correctVersion}/${path} (at ${url.origin}${
+            module === "std" ? "" : "/x"
+          }/${module}@${version}/${path})`,
+        },
+        status: 404,
+      });
+    }
     return new Response(undefined, {
       headers: {
-        Location: `/std@${version.substring(1)}/${path}`,
-        "x-deno-warning": `std versions prefixed with 'v' will be deprecated on October 1st 2020. Please change your import to ${
+        Location: `/std@${correctVersion}/${path}`,
+        "x-deno-warning": `std versions prefixed with 'v' will be deprecated soon. Please change your import to ${
           url.origin
-        }${module === "std" ? "" : "/x"}/${module}@${version.substring(
-          1
-        )}/${path} (at ${url.origin}${
+        }${
+          module === "std" ? "" : "/x"
+        }/${module}@${correctVersion}/${path} (at ${url.origin}${
           module === "std" ? "" : "/x"
         }/${module}@${version}/${path})`,
       },
