@@ -102,7 +102,6 @@ ul.tree li:last-child:before {
 .NotFoundPage {
   height: 100vh;
   width: 100%;
-  overflow: hidden;
   position: relative;
 }
 
@@ -116,10 +115,9 @@ ul.tree li:last-child:before {
 .NotFoundPage .animation {
   width: 100%;
   height: 100%;
-  position: fixed;
+  position: absolute;
   left: 0;
   bottom: 0;
-  overflow: hidden;
   z-index: -1;
 }
 

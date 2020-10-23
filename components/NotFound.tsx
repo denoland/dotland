@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "./Footer";
 import Header from "./Header";
 
 function NotFoundPage(): React.ReactElement {
@@ -10,9 +11,7 @@ function NotFoundPage(): React.ReactElement {
           404
         </h1>
         <h2 className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900">
-          <strong className="font-semibold">Deno</strong> and{" "}
-          <strong className="font-semibold">Ferris</strong> couldn't find what
-          you're looking for.
+          Couldn't find what you're looking for.
         </h2>
       </header>
 
@@ -20,7 +19,9 @@ function NotFoundPage(): React.ReactElement {
         <img src="images/ferris.gif" alt="Ferris" id="ferris404" />
         <img src="images/deno404.gif" alt="Deno not found ):" id="deno404" />
 
-        <div className="land bg-gray-300"></div>
+        <div className="land bg-gray-300">
+          <Footer />
+        </div>
       </div>
     </div>
   );
