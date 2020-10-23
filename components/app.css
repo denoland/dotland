@@ -96,3 +96,63 @@ ul.tree li:before {
 ul.tree li:last-child:before {
   border-left: 1px solid rgb(100, 100, 100);
 }
+
+/* 404 Page */
+
+.NotFoundPage {
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.NotFoundPage header {
+  text-align: center;
+  padding: 0 2rem;
+  padding-top: 10vh;
+  z-index: 3;
+}
+
+.NotFoundPage .animation {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.NotFoundPage .animation .land {
+  position: absolute;
+  width: 100%;
+  height: 11.5rem;
+  bottom: 0rem;
+  left: 0;
+  z-index: 0;
+}
+
+.NotFoundPage .animation #ferris404 {
+  width: 100px;
+  position: absolute;
+  left: 60%;
+  bottom: 10.1rem;
+  z-index: 1;
+}
+
+.NotFoundPage .animation #deno404 {
+  width: 200px;
+  position: absolute;
+  left: 10%;
+  bottom: 10rem;
+  z-index: 1;
+  animation: move 6s linear infinite;
+}
+
+@keyframes move {
+  from {
+    left: -10%;
+  }
+  to {
+    left: 100%;
+  }
+}
