@@ -421,7 +421,7 @@ function Registry(): React.ReactElement {
                   </div>
                   <div className="col-span-1 row-start-1 md:row-start-auto flex flex-col sm:flex-row md:flex-col gap-4">
                     <div className="max-w-sm w-full shadow-sm rounded-lg border border-gray-200 overflow-hidden">
-                      <div className="bg-gray-50 border-b border-gray-200 p-4">
+                      <div className="bg-gray-50 p-4">
                         <div className="text-xl font-bold">{name}</div>
                         {versionMeta === undefined ||
                         moduleMeta === undefined ? (
@@ -510,23 +510,31 @@ function Registry(): React.ReactElement {
                         <div className="mt-2 flex items-center py-0.5">
                           <svg
                             className="h-5 w-5 mr-2 inline text-gray-200"
+                            viewBox="0 0 20 20"
                             fill="currentColor"
-                            viewBox="0 0 24 24"
                           >
                             <title>Tagged at</title>
-                            <path d="M5.5,7A1.5,1.5 0 0,1 4,5.5A1.5,1.5 0 0,1 5.5,4A1.5,1.5 0 0,1 7,5.5A1.5,1.5 0 0,1 5.5,7M21.41,11.58L12.41,2.58C12.05,2.22 11.55,2 11,2H4C2.89,2 2,2.89 2,4V11C2,11.55 2.22,12.05 2.59,12.41L11.58,21.41C11.95,21.77 12.45,22 13,22C13.55,22 14.05,21.77 14.41,21.41L21.41,14.41C21.78,14.05 22,13.55 22,13C22,12.44 21.77,11.94 21.41,11.58Z" />
+                            <path
+                              fillRule="evenodd"
+                              d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                              clipRule="evenodd"
+                            />
                           </svg>
                           <div className="w-4/5 sm:w-2/3 bg-gray-100 h-4"></div>
                         </div>
                       ) : versionMeta === null ? null : (
-                        <div className="mt-2 flex items-center">
+                        <div className="mt-2 flex text-sm items-center">
                           <svg
                             className="h-5 w-5 mr-2 inline text-gray-700"
+                            viewBox="0 0 20 20"
                             fill="currentColor"
-                            viewBox="0 0 24 24"
                           >
                             <title>Tagged at</title>
-                            <path d="M5.5,7A1.5,1.5 0 0,1 4,5.5A1.5,1.5 0 0,1 5.5,4A1.5,1.5 0 0,1 7,5.5A1.5,1.5 0 0,1 5.5,7M21.41,11.58L12.41,2.58C12.05,2.22 11.55,2 11,2H4C2.89,2 2,2.89 2,4V11C2,11.55 2.22,12.05 2.59,12.41L11.58,21.41C11.95,21.77 12.45,22 13,22C13.55,22 14.05,21.77 14.41,21.41L21.41,14.41C21.78,14.05 22,13.55 22,13C22,12.44 21.77,11.94 21.41,11.58Z" />
+                            <path
+                              fillRule="evenodd"
+                              d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                              clipRule="evenodd"
+                            />
                           </svg>
                           <div>
                             {getFormattedDateTime(versionMeta.uploadedAt)}
