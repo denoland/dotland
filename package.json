@@ -20,7 +20,7 @@
     "apexcharts": "^3.22.0",
     "dompurify": "^2.1.1",
     "marked": "^1.2.0",
-    "next": "^9.5.4",
+    "next": "9.5.3",
     "preact": "^10.5.4",
     "preact-render-to-string": "^5.1.10",
     "prism-react-renderer": "^1.1.1",
