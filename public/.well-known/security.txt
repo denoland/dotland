@@ -1,0 +1,4 @@
+Contact: mailto:ry@tinyclouds.org
+Acknowledgments: https://github.com/denoland/deno/graphs/contributors
+Preferred-Languages: en
+Canonical: https://deno.land/.well-known/security.txt
