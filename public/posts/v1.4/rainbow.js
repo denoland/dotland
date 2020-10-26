@@ -2,7 +2,7 @@
 // support in console.log that was introduced in Deno 1.4.
 //
 // How to run:
-// deno run https://deno.land/posts/whats-new-in-deno-1-4/rainbow.js
+// deno run https://deno.land/posts/v1.4/rainbow.js
 
 const colors = [
   "red",
