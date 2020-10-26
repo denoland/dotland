@@ -10,5 +10,11 @@
     "english": "Japanese",
     "link": "https://deno-ja.vercel.app/",
     "repository": "https://github.com/tokiedokie/deno_website2_japanese"
+  },
+  {
+    "language": "العربية",
+    "english": "Arabic",
+    "link": "https://deno-ar.vercel.app/",
+    "repository": "https://github.com/moncefplastin07/deno_website2"
   }
 ]
