@@ -10,5 +10,5 @@
       "className": "hidden"
     }
   ],
-  "snippet": "Deno 1.5 greatly improves `deno bundle` with support for tree shaking, and a up to 20x performance improvement. This release also adds the `alert`, `confirm`, and `prompt` APIs and improves the REPL experience."
+  "snippet": "Deno 1.5 greatly improves `deno bundle` with support for tree shaking, and a up to 15x performance improvement. This release also adds the `alert`, `confirm`, and `prompt` APIs and improves the REPL experience."
 }
