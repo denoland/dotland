@@ -23,7 +23,7 @@ import { CookieBanner } from "../components/CookieBanner";
 function Benchmarks(): React.ReactElement {
   const _ = useRouter();
   const location = typeof window !== "undefined" ? window.location : null;
-  const typescriptBenches = ["check", "no_check", "bundle"];
+  const typescriptBenches = ["check", "no_check", "bundle", "bundle_no_check"];
 
   let show!: { dataFile: string; range: number[]; search: string };
   // Default (recent).
@@ -268,8 +268,9 @@ function Benchmarks(): React.ReactElement {
                   modules. With <em>check</em> a full TypeScript type check is
                   performed, while <em>no_check</em> uses the{" "}
                   <code>--no-check</code> flag to skip a full type check.{" "}
-                  <em>bundle</em>
-                  does a full type check and generates a single file output.
+                  <em>bundle</em> does a full type check and generates a single
+                  file output, while <em>bundle_no_check</em> uses the{" "}
+                  <code>--no-check</code> flag to skip a full type check.
                 </p>
               </div>
             </div>
