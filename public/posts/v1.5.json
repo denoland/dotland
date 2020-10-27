@@ -1,0 +1,14 @@
+{
+  "title": "Deno 1.5 Release Notes",
+  "author": "Bartek Iwańczuk, Luca Casonato, Ryan Dahl",
+  "publish_date": "2020-10-27T15:00:00.000Z",
+  "images": [
+    {
+      "image": "/posts/v1.5/header.png",
+      "width": 1200,
+      "height": 1200,
+      "className": "hidden"
+    }
+  ],
+  "snippet": "Deno 1.5 improves `deno bundle` with support for tree shaking and a 15x speed improvement. This release also adds the `alert`, `confirm`, and `prompt` APIs and enhances the REPL."
+}
