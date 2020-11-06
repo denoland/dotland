@@ -19,8 +19,8 @@ function NotFoundPage(): React.ReactElement {
 
       <div id="flex-bottom">
         <div id="animation">
-          <img src="images/ferris.gif" alt="Ferris" id="ferris404" />
-          <img src="images/deno404.gif" alt="Deno" id="deno404" />
+          <img src="/images/ferris.gif" alt="Ferris" id="ferris404" />
+          <img src="/images/deno404.gif" alt="Deno" id="deno404" />
         </div>
 
         <Footer />
