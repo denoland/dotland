@@ -41,7 +41,7 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
     console.log("std version prefix", module, version);
     const correctVersion = version.substring(1);
     const versionNumber = parseFloat(correctVersion);
-    // For now only block std versions >= 0.65.0
+    // For now only block std versions >= 0.61.0
     // Timeline for deprecation:
     // Oct 14 2020: >= 0.70.0
     // Oct 21 2020: >= 0.68.0
@@ -51,7 +51,7 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
     // Nov 18 2020: >= 0.50.0
     // Nov 25 2020: >= 0.43.0
     // Dec 02 2020: >= 0.34.0 (oldest available std release)
-    if (versionNumber >= 0.65) {
+    if (versionNumber >= 0.61) {
       return new Response("404 Not Found", {
         headers: {
           "x-deno-warning": `std versions prefixed with 'v' were deprecated recently. Please change your import to ${
