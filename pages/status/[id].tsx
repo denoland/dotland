@@ -7,7 +7,7 @@ import useSWR from "swr";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { getBuild } from "../../util/registry_utils";
-import { ErrorMessage } from "../../components/Registry";
+import { ErrorMessage } from "../../components/ErrorMessage";
 import { CookieBanner } from "../../components/CookieBanner";
 
 function StatusPage(): React.ReactElement {
