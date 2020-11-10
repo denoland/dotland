@@ -15,6 +15,7 @@ import * as pageutils from "../../util/pagination_utils";
 import RegistryInstructions from "../../components/RegistryInstructions";
 import { CookieBanner } from "../../components/CookieBanner";
 import { replaceEmojis } from "../../util/emoji_util";
+import { ErrorMessage } from "../../components/ErrorMessage";
 
 const PER_PAGE = 20;
 
@@ -97,6 +98,12 @@ function ThirdPartyRegistryList(): React.ReactElement {
               <a href="#info" className="link">
                 Learn more
               </a>
+            </div>
+            <div className="mt-8">
+              <ErrorMessage
+                title="Ongoing incident"
+                body="We are currently seeing delays and timeouts during module publishing and search. Serving of already published modules and `std` is not affected. We are working on resolving the problem."
+              />
             </div>
           </div>
           <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8">
