@@ -251,7 +251,15 @@ function ThirdPartyRegistryList(): React.ReactElement {
                   </div>
                 ) : (
                   <ModuleList
-                    modules={resp.results.map((v) => ({
+                    modules={resp.results.sort((a,b) => {
+                      if (!query) return -1;
+                      if (a.name === query) return -1;
+                      if (b.name === query) return 1;
+                      if (a.name.startsWith(query) && !b.name.startsWith(query)) return -1;
+                      if (b.name.startsWith(query) && !a.name.startsWith(query)) return 1;
+
+                      return Number(b.star_count || 0) - Number(a.star_count || 0)
+                    }).map((v) => ({
                       ...v,
                       starCount: v.star_count,
                     }))}
