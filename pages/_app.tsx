@@ -6,6 +6,7 @@ import Head from "next/head";
 import "../components/app.css";
 import "../components/markdown.css";
 import "../components/docsearch.css";
+import "preact/debug";
 
 export default class DenoWebsiteApp extends App {
   render(): React.ReactElement {

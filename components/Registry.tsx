@@ -559,27 +559,14 @@ function Registry(): React.ReactElement {
                             <div className="mt-2 overflow-x-auto">
                               {externalDependencies.map((url) => (
                                 <p key={url}>
-                                  {url.startsWith("https://deno.land/std") ? (
+                                  {url.startsWith("https://deno.land/") ? (
                                     <Link
-                                      href="/[...rest]"
-                                      as={url.replace("https://deno.land", "")}
+                                      href={url.replace(
+                                        "https://deno.land",
+                                        ""
+                                      )}
                                     >
-                                      <a
-                                        href={url}
-                                        className="link text-sm truncate"
-                                      >
-                                        {url}
-                                      </a>
-                                    </Link>
-                                  ) : url.startsWith("https://deno.land/x/") ? (
-                                    <Link
-                                      href="/x/[...rest]"
-                                      as={url.replace("https://deno.land", "")}
-                                    >
-                                      <a
-                                        href={url}
-                                        className="link text-sm truncate"
-                                      >
+                                      <a className="link text-sm truncate">
                                         {url}
                                       </a>
                                     </Link>
@@ -645,8 +632,7 @@ function Breadcrumbs({
         </>
       )}
       <Link
-        href={(!isStd ? "/x" : "") + "/[...rest]"}
-        as={`${!isStd ? "/x" : ""}/${name}${version ? `@${version}` : ""}`}
+        href={`${!isStd ? "/x" : ""}/${name}${version ? `@${version}` : ""}`}
       >
         <a className="link">
           {name}
@@ -662,8 +648,7 @@ function Breadcrumbs({
               {" "}
               /{" "}
               <Link
-                href={(!isStd ? "/x" : "") + "/[...rest]"}
-                as={`${!isStd ? "/x" : ""}/${name}${
+                href={`${!isStd ? "/x" : ""}/${name}${
                   version ? `@${version}` : ""
                 }${link ? `/${link}` : ""}`}
               >

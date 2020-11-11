@@ -111,10 +111,7 @@ function Benchmarks(): React.ReactElement {
               {showAll ? "all" : "the most recent"} commits to the{" "}
               <a href="https://github.com/denoland/deno">master</a>
               branch. You can also view{" "}
-              <Link
-                href="/benchmarks"
-                as={!showAll ? "/benchmarks?all" : "/benchmarks"}
-              >
+              <Link href={!showAll ? "/benchmarks?all" : "/benchmarks"}>
                 <a className="link">{!showAll ? "all" : "the most recent"}</a>
               </Link>{" "}
               commits.
@@ -506,12 +503,12 @@ function Benchmarks(): React.ReactElement {
                 <p className="mt-1">Size of different bundled scripts.</p>
                 <ul className="ml-8 list-disc my-2">
                   <li>
-                    <Link href="/[...rest]" as="/std/http/file_server.ts">
+                    <Link href="/std/http/file_server.ts">
                       <a className="link">file_server</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="/[...rest]" as="/std/examples/gist.ts">
+                    <Link href="/std/examples/gist.ts">
                       <a className="link">gist</a>
                     </Link>
                   </li>
