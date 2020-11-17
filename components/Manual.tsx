@@ -35,7 +35,7 @@ function Hit({
   children: React.ReactElement;
 }) {
   return (
-    <Link href="/[...rest]" as={hit.url}>
+    <Link href={hit.url}>
       <a className="link">{children}</a>
     </Link>
   );
@@ -510,14 +510,14 @@ function Manual(): React.ReactElement {
                   />
                   <div className="mt-4 pt-4 border-t border-gray-200">
                     {pageList[pageIndex - 1] !== undefined && (
-                      <Link href="/[...rest]" as={pageList[pageIndex - 1].path}>
+                      <Link href={pageList[pageIndex - 1].path}>
                         <a className="text-gray-900 hover:text-gray-600 font-normal">
                           ← {pageList[pageIndex - 1].name}
                         </a>
                       </Link>
                     )}
                     {pageList[pageIndex + 1] !== undefined && (
-                      <Link href="/[...rest]" as={pageList[pageIndex + 1].path}>
+                      <Link href={pageList[pageIndex + 1].path}>
                         <a className="text-gray-900 hover:text-gray-600 font-normal float-right">
                           {pageList[pageIndex + 1].name} →
                         </a>
@@ -617,10 +617,7 @@ function ToC({
             Object.entries(tableOfContents).map(([slug, entry]) => {
               return (
                 <li key={slug} className="my-2">
-                  <Link
-                    href="/[...rest]"
-                    as={`/manual${version ? `@${version}` : ""}/${slug}`}
-                  >
+                  <Link href={`/manual${version ? `@${version}` : ""}/${slug}`}>
                     <a
                       className={`${
                         path === `/${slug}`
@@ -637,8 +634,7 @@ function ToC({
                         ([childSlug, name]) => (
                           <li key={`${slug}/${childSlug}`} className="my-0.5">
                             <Link
-                              href="/[...rest]"
-                              as={`/manual${
+                              href={`/manual${
                                 version ? `@${version}` : ""
                               }/${slug}/${childSlug}`}
                             >

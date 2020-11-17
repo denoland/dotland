@@ -44,17 +44,9 @@ function Node({ node, currentModule }: { node: Dep; currentModule: string }) {
   return (
     <li>
       <p className="overflow-hidden inline">
-        {url.startsWith("https://deno.land/std") ? (
-          <Link href="/[...rest]" as={url.replace("https://deno.land", "")}>
-            <a href={url} className="link text-sm truncate">
-              {name}
-            </a>
-          </Link>
-        ) : url.startsWith("https://deno.land/x/") ? (
-          <Link href="/x/[...rest]" as={url.replace("https://deno.land", "")}>
-            <a href={url} className="link text-sm truncate">
-              {name}
-            </a>
+        {url.startsWith("https://deno.land/") ? (
+          <Link href={url.replace("https://deno.land", "")}>
+            <a className="link text-sm truncate">{name}</a>
           </Link>
         ) : (
           <a href={url} className="link text-sm truncate">
