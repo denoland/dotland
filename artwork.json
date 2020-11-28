@@ -207,5 +207,18 @@
       "web": "https://samip.ml/"
     },
     "license": "Restricted use"
+  },
+  {
+    "date": "2020-11-28",
+    "image": "https://github.com/DenoFarm/brand/blob/main/logo/deno-farmer-logo.png",
+    "title": "Farmer Deno",
+    "alt": "farmer deno in green with a farmer hat and mustache",
+    "artist": {
+      "name": "Shyngys Shynbolatov",
+      "profile_image": "https://avatars0.githubusercontent.com/u/42411937",
+      "github": "salemalem",
+      "LinkedIn": "https://www.linkedin.com/in/shyngys-shynbolatov/"
+    },
+    "license": "MIT"
   }
 ]
