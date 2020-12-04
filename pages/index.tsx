@@ -247,6 +247,17 @@ const InstallSection = () => {
       <CodeBlock language="bash" code={`brew install deno`} />
     </div>
   );
+  const webi = (
+    <div key="webi" className="my-4 text-gray-700">
+      <p className="mb-2">
+        <a href="https://webinstall.dev/deno" className="link">
+          Webi
+        </a>{" "}
+        (Mac, Linux, Windows):
+      </p>
+      <CodeBlock language="bash" code={`webi deno`} />
+    </div>
+  );
   const powershell = (
     <div key="powershell" className="my-4 text-gray-700">
       <p className="mb-2">PowerShell (Windows):</p>
@@ -303,6 +314,7 @@ const InstallSection = () => {
       {shell}
       {powershell}
       {homebrew}
+      {webi}
       {chocolatey}
       {scoop}
       {cargo}
