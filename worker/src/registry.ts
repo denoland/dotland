@@ -64,7 +64,7 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
       status: 404,
     });
   }
-}
+
   const remoteUrl = getBackingURL(module, version, path);
   // @ts-ignore
   const resp = await fetch(remoteUrl, { cf: { cacheEverything: true } });
@@ -106,7 +106,7 @@ export function parsePathname(
   return { module: name, version, path };
 }
 
-export function getBackingURL(module: string, version: string, path: string) {
+export function getBackingURL(module: string, version: string, path: string): string {
   return `${S3_BUCKET}${module}/versions/${version}/raw/${path}`;
 }
 
