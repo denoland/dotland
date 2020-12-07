@@ -10,5 +10,5 @@
       "className": "hidden"
     }
   ],
-  "snippet": "Deno 1.6 is super awesome!"
+  "snippet": "Deno 1.6 adds the abilty to build your Deno projects into fully standalone, self-contained executables with `deno compile`. The release also introduces a built-in LSP for editor integrations, and experimental Apple Silicon support."
 }
