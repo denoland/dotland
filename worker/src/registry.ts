@@ -40,8 +40,7 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
   if (version.startsWith("v0.") && module === "std") {
     console.log("std version prefix", module, version);
     const correctVersion = version.substring(1);
-    const versionNumber = parseFloat(correctVersion);
-    // For now only block std versions >= 0.43.0
+    // All versions have been deprecated.
     // Timeline for deprecation:
     // Oct 14 2020: >= 0.70.0
     // Oct 21 2020: >= 0.68.0
@@ -51,24 +50,10 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
     // Nov 18 2020: >= 0.50.0
     // Nov 25 2020: >= 0.43.0
     // Dec 02 2020: >= 0.34.0 (oldest available std release)
-    if (versionNumber >= 0.43) {
-      return new Response("404 Not Found", {
-        headers: {
-          "x-deno-warning": `std versions prefixed with 'v' were deprecated recently. Please change your import to ${
-            url.origin
-          }${
-            module === "std" ? "" : "/x"
-          }/${module}@${correctVersion}/${path} (at ${url.origin}${
-            module === "std" ? "" : "/x"
-          }/${module}@${version}/${path})`,
-        },
-        status: 404,
-      });
-    }
-    return new Response(undefined, {
+    // Jan 01 2021: Remove the warning
+    return new Response("404 Not Found", {
       headers: {
-        Location: `/std@${correctVersion}/${path}`,
-        "x-deno-warning": `std versions prefixed with 'v' will be deprecated soon. Please change your import to ${
+        "x-deno-warning": `std versions prefixed with 'v' have been deprecated. Please change your import to ${
           url.origin
         }${
           module === "std" ? "" : "/x"
@@ -76,9 +61,10 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
           module === "std" ? "" : "/x"
         }/${module}@${version}/${path})`,
       },
-      status: 302,
+      status: 404,
     });
   }
+}
   const remoteUrl = getBackingURL(module, version, path);
   // @ts-ignore
   const resp = await fetch(remoteUrl, { cf: { cacheEverything: true } });
