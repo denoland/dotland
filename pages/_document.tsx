@@ -33,6 +33,11 @@ export default class DenoDocDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <script
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "1b59386cd9134d5e81c9b0d5b9cb9686"}'
+          ></script>
         </body>
       </Html>
     );
