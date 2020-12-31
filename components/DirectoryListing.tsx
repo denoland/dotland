@@ -79,7 +79,7 @@ function DirectoryListing(props: {
           </div>
           {props.repositoryURL && (
             <a href={props.repositoryURL} className="link ml-4">
-              Repository
+              GitHub 地址
             </a>
           )}
         </div>
@@ -112,7 +112,7 @@ function DirectoryListing(props: {
                       className="w-full pl-3 text-gray-900 text-sm outline-none bg-gray-50"
                       onChange={(e) => setQuery(e.target.value)}
                       value={query}
-                      placeholder="Search files..."
+                      placeholder="搜索文件..."
                       ref={searchInput}
                     />
                   </div>

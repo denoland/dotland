@@ -50,12 +50,12 @@ function FileDisplay(props: {
         <div>
           {props.sourceURL && (
             <a href={props.sourceURL} className="link ml-4">
-              Raw
+              原始文件
             </a>
           )}
           {props.repositoryURL && (
             <a href={props.repositoryURL} className="link ml-4">
-              Repository
+              在 GitHub 上查看
             </a>
           )}
         </div>

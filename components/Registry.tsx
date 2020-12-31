@@ -325,10 +325,10 @@ function Registry(): React.ReactElement {
               ) {
                 return (
                   <ErrorMessage
-                    title="No uploaded versions"
-                    body={`This module name has been reserved for a repository, but no versions have been uploaded yet. Modules that do not upload a version within 30 days of registration will be removed. ${
+                    title="没有上传版本"
+                    body={`此模块名称已保留给某个存储库，但尚未上传任何版本。在注册后 30 天内未上传版本的模块将被删除。${
                       versions.isLegacy
-                        ? "If you are the owner of this module, please re-add the GitHub repository with deno.land/x (by following the instructions at https://deno.land/x#add), and publish a new version."
+                        ? "如果你是此模块的拥有者，请重新将 GitHub 仓库发布到 deno.land/x (访问 https://deno.land/x#add 查看如何发布说明)，并发布新版本。"
                         : ""
                     }`}
                   />
@@ -346,7 +346,7 @@ function Registry(): React.ReactElement {
                         return (
                           <ErrorMessage
                             title="404 - Not Found"
-                            body="This version does not exist for this module."
+                            body="当前模块不存在此版本。"
                           />
                         );
                       } else if (
@@ -358,7 +358,7 @@ function Registry(): React.ReactElement {
                         return (
                           <ErrorMessage
                             title="404 - Not Found"
-                            body="This file or directory could not be found."
+                            body="找不到此文件或目录。"
                           />
                         );
                       } else if (!dirEntries && typeof raw !== "string") {
@@ -468,7 +468,7 @@ function Registry(): React.ReactElement {
                                 fill="currentColor"
                                 viewBox="0 0 24 24"
                               >
-                                <title>GitHub Repository</title>
+                                <title>GitHub 仓库</title>
                                 <path
                                   fillRule="evenodd"
                                   d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
@@ -506,7 +506,7 @@ function Registry(): React.ReactElement {
                     </div>
 
                     <div className="max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4">
-                      <p className="text-md font-semibold mb-2">Version Info</p>
+                      <p className="text-md font-semibold mb-2">版本信息</p>
                       {versionMeta === undefined ? (
                         <div className="mt-2 flex items-center py-0.5">
                           <svg
@@ -514,7 +514,7 @@ function Registry(): React.ReactElement {
                             viewBox="0 0 20 20"
                             fill="currentColor"
                           >
-                            <title>Tagged at</title>
+                            <title>版本发布于</title>
                             <path
                               fillRule="evenodd"
                               d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
@@ -530,7 +530,7 @@ function Registry(): React.ReactElement {
                             viewBox="0 0 20 20"
                             fill="currentColor"
                           >
-                            <title>Tagged at</title>
+                            <title>版本发布于</title>
                             <path
                               fillRule="evenodd"
                               d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
@@ -545,9 +545,7 @@ function Registry(): React.ReactElement {
                     </div>
                     {documentationURL && externalDependencies !== null ? (
                       <div className="max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4">
-                        <p className="text-md font-semibold mb-2">
-                          External Dependencies
-                        </p>
+                        <p className="text-md font-semibold mb-2">外部依赖</p>
                         {externalDependencies === undefined ? (
                           <>
                             <div className="w-3/4 sm:w-2/3 bg-gray-100 h-3 mt-1"></div>
@@ -583,11 +581,8 @@ function Registry(): React.ReactElement {
                             </div>
                             <div className="text-sm mt-2 italic">
                               {externalDependencies.length === 0
-                                ? "No external dependencies 🎉"
-                                : externalDependencies.length +
-                                  (externalDependencies.length === 1
-                                    ? " external dependency"
-                                    : " external dependencies")}
+                                ? "没有外部依赖 🎉"
+                                : externalDependencies.length + " 个外部依赖"}
                             </div>
                           </>
                         )}
@@ -673,7 +668,7 @@ function VersionSelector({
   return (
     <div className="gap-2 w-full">
       <label htmlFor="version" className="sr-only">
-        Version
+        版本
       </label>
       <div className="max-w-xs rounded-md shadow-sm w-full">
         {versions ? (
@@ -706,10 +701,10 @@ function VersionSelector({
         <button
           type="button"
           className="mt-2 w-full inline-flex justify-center py-1 px-2 border border-gray-300 rounded-md bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition duration-150 ease-in-out"
-          aria-label="Go to latest version"
+          aria-label="跳转到最新版"
           onClick={() => onChange(versions[0])}
         >
-          Go to latest
+          跳转到最新版
         </button>
       ) : null}
     </div>
