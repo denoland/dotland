@@ -70,11 +70,11 @@ function ThirdPartyRegistryList(): React.ReactElement {
   return (
     <>
       <Head>
-        <title>Third Party Modules | Deno</title>
+        <title>第三方模块 | Deno</title>
       </Head>
       <CookieBanner />
       <div className="bg-gray">
-        <Header subtitle="Third Party Modules" />
+        <Header subtitle="第三方模块" />
         <RegistryInstructions
           isOpen={overlayOpen}
           close={() => setOverlayOpen(false)}

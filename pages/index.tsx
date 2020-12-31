@@ -26,7 +26,7 @@ for await (const req of s) {
   return (
     <>
       <Head>
-        <title>Deno - A secure runtime for JavaScript and TypeScript</title>
+        <title>Deno - 安全的 JavaScript 和 TypeScript 运行时</title>
       </Head>
       <CookieBanner />
       <div className="bg-white">
@@ -37,9 +37,9 @@ for await (const req of s) {
               Deno
             </h1>
             <h2 className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900">
-              A <strong className="font-semibold">secure</strong> runtime for{" "}
-              <strong className="font-semibold">JavaScript</strong> and{" "}
-              <strong className="font-semibold">TypeScript</strong>.
+              <strong className="font-semibold">安全的</strong>{" "}
+              <strong className="font-semibold">JavaScript</strong>{" "}和{" "}
+              <strong className="font-semibold">TypeScript</strong>{" "}运行时.
             </h2>
 
             <a
@@ -52,24 +52,21 @@ for await (const req of s) {
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <p className="my-4 text-gray-700">
-            Deno is a simple, modern and secure runtime for JavaScript and
-            TypeScript that uses V8 and is built in Rust.
+            Deno 是一个简单、现代且安全的 JavaScript 和 TypeScript 运行时，基于 V8 引擎并采用 Rust 编程语言构建。
           </p>
           <ol className="ml-8 list-disc text-gray-700">
             <li>
-              Secure by default. No file, network, or environment access, unless
-              explicitly enabled.
+              默认安全。除非显示开启，否则没有文件、网络、环境变量的访问权限。
             </li>
-            <li>Supports TypeScript out of the box.</li>
-            <li>Ships only a single executable file.</li>
+            <li>开箱即用的 TypeScript 支持。</li>
+            <li>只发布单一的可执行程序。</li>
             <li>
-              Has built-in utilities like a dependency inspector (
-              <InlineCode>deno info</InlineCode>) and a code formatter (
-              <InlineCode>deno fmt</InlineCode>).
+              内置了实用工具，例如依赖检查 (
+              <InlineCode>deno info</InlineCode>) 和代码格式化 (
+              <InlineCode>deno fmt</InlineCode>)。
             </li>
             <li>
-              Has a set of reviewed (audited) standard modules that are
-              guaranteed to work with Deno:{" "}
+              自带一套经过审查 (安全审计) 的标准模块，并保证了代码与 Deno 完全兼容：{" "}
               <a href="https://deno.land/std" className="link">
                 deno.land/std
               </a>
@@ -80,7 +77,7 @@ for await (const req of s) {
           <Link href="#installation">
             <a className="hover:underline">
               <h3 className="font-bold text-xl" id="installation">
-                Installation
+                安装
               </h3>
             </a>
           </Link>
@@ -90,16 +87,16 @@ for await (const req of s) {
           <Link href="#getting-started">
             <a className="hover:underline">
               <h3 className="font-bold text-xl" id="getting-started">
-                Getting Started
+                起步
               </h3>
             </a>
           </Link>
-          <p className="my-4 text-gray-700">Try running a simple program:</p>
+          <p className="my-4 text-gray-700">试着运行下面的简单程序：</p>
           <CodeBlock
             code="deno run https://deno.land/std/examples/welcome.ts"
             language="bash"
           />
-          <p className="my-4 text-gray-700">Or a more complex one:</p>
+          <p className="my-4 text-gray-700">或者再运行一个复杂点的：</p>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8">
           <CodeBlock
@@ -110,28 +107,27 @@ for await (const req of s) {
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8">
           <p className="my-4 text-gray-700">
-            You can find a more in depth introduction, examples, and environment
-            setup guides in{" "}
+            你可以在 {" "}
             <Link href="/manual">
-              <a className="link">the manual</a>
+              <a className="link">参考手册</a>
             </Link>
-            .
+            {" "} 中找到“深入介绍”、“环境搭建”、“代码示例”等内容。
           </p>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <Link href="#runtime-documentation">
             <a className="hover:underline">
               <h3 className="font-bold text-xl" id="runtime-documentation">
-                Runtime Documentation
+                运行时文档
               </h3>
             </a>
           </Link>
           <p className="my-4 text-gray-700">
-            The basic runtime documentation for Deno can be found on{" "}
+            Deno 的基本运行时文档可以在 {" "}
             <a href="https://doc.deno.land/builtin/stable" className="link">
               doc.deno.land
             </a>
-            .
+            {" "} 网站找到。
           </p>
           <p className="my-4 text-gray-700">
             Deno comes with{" "}
@@ -179,7 +175,7 @@ for await (const req of s) {
           <Link href="#third-party-modules">
             <a className="hover:underline">
               <h3 className="font-bold text-xl" id="third-party-modules">
-                Third Party Modules
+                第三方模块
               </h3>
             </a>
           </Link>
@@ -229,7 +225,7 @@ for await (const req of s) {
 const InstallSection = () => {
   const shell = (
     <div key="shell" className="my-4 text-gray-700">
-      <p className="py-2">Shell (Mac, Linux):</p>
+      <p className="py-2">Shell (Mac, Linux)：</p>
       <CodeBlock
         language="bash"
         code={`curl -fsSL https://deno.land/x/install/install.sh | sh`}
@@ -242,14 +238,14 @@ const InstallSection = () => {
         <a href="https://formulae.brew.sh/formula/deno" className="link">
           Homebrew
         </a>{" "}
-        (Mac):
+        (Mac)：
       </p>
       <CodeBlock language="bash" code={`brew install deno`} />
     </div>
   );
   const powershell = (
     <div key="powershell" className="my-4 text-gray-700">
-      <p className="mb-2">PowerShell (Windows):</p>
+      <p className="mb-2">PowerShell (Windows)：</p>
       <CodeBlock
         language="bash"
         code={`iwr https://deno.land/x/install/install.ps1 -useb | iex`}
@@ -262,7 +258,7 @@ const InstallSection = () => {
         <a href="https://chocolatey.org/packages/deno" className="link">
           Chocolatey
         </a>{" "}
-        (Windows):
+        (Windows)：
       </p>
       <CodeBlock language="bash" code={`choco install deno`} />
     </div>
@@ -273,7 +269,7 @@ const InstallSection = () => {
         <a href="https://scoop.sh/" className="link">
           Scoop
         </a>{" "}
-        (Windows):
+        (Windows)：
       </p>
       <CodeBlock language="bash" code={`scoop install deno`} />
     </div>
@@ -281,10 +277,11 @@ const InstallSection = () => {
   const cargo = (
     <div key="cargo" className="my-4 text-gray-700">
       <p className="py-2">
-        Build and install from source using{" "}
+        使用{" "}
         <a href="https://crates.io/crates/deno" className="link">
           Cargo
         </a>
+        {" "} 从源码构建并安装：
       </p>
       <CodeBlock language="bash" code={`cargo install deno`} />
     </div>
@@ -293,12 +290,11 @@ const InstallSection = () => {
   return (
     <>
       <p className="my-4 text-gray-700">
-        Deno ships as a single executable with no dependencies. You can install
-        it using the installers below, or download a release binary from the{" "}
+        Deno 没有外部依赖，只有一个单独的可执行文件。你可以使用下面的安装器来安装，也可以从 {" "}
         <a href="https://github.com/denoland/deno/releases" className="link">
-          releases page
+          GitHub Releases 页面
         </a>
-        .
+        下载已经编译好的二进制可执行程序。
       </p>
       {shell}
       {powershell}
@@ -307,11 +303,11 @@ const InstallSection = () => {
       {scoop}
       {cargo}
       <p className="my-4 text-gray-700">
-        See{" "}
-        <a className="link" href="https://github.com/denoland/deno_install">
-          deno_install
+        查看 {" "}
+        <a className="link" href="https://github.com/denocn/deno_install">
+        denocn/deno_install
         </a>{" "}
-        for more installation options.
+        以了解更多的安装选项。
       </p>
     </>
   );

@@ -300,7 +300,7 @@ function Registry(): React.ReactElement {
       <CookieBanner />
       <div className="bg-gray-50 min-h-full">
         <Header
-          subtitle={name === "std" ? "Standard Library" : "Third Party Modules"}
+          subtitle={name === "std" ? "标准库" : "第三方模块"}
           widerContent={true}
         />
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8 pt-4">

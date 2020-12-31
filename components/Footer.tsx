@@ -15,7 +15,7 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
           <div className="px-5 py-2">
             <Link href="/[...rest]" as="/manual">
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Manual
+                参考手册
               </a>
             </Link>
           </div>
@@ -24,48 +24,48 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
               href="https://doc.deno.land/builtin/stable"
               className="text-base leading-6 text-gray-500 hover:text-gray-900"
             >
-              Runtime API
+              运行时 API
             </a>
           </div>
           <div className="px-5 py-2">
             <Link href="/[...rest]" as="/std">
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Standard Library
+                标准库
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/x">
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Third Party Modules
+                第三方模块
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/benchmarks">
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Benchmarks
+                性能
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/artwork">
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Artwork
+                艺术作品
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/posts">
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                News
+                新闻
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/translations">
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Translations
+                翻译
               </a>
             </Link>
           </div>

@@ -20,7 +20,7 @@ export default class DenoDocDocument extends Document {
 
   render(): React.ReactElement {
     return (
-      <Html lang="en">
+      <Html lang="zh_CN">
         <Head>
           <link rel="stylesheet" href="/fonts/inter/inter.css" />
           <link

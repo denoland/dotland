@@ -14,7 +14,7 @@ import Link from "next/link";
 import { CookieBanner } from "../../components/CookieBanner";
 
 const postPath =
-  "https://github.com/denoland/deno_website2/blob/master/public/posts/";
+  "https://github.com/justjavac/deno_website2/blob/master/public/posts/";
 
 interface Props {
   markdown: string;
