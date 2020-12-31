@@ -38,8 +38,8 @@ for await (const req of s) {
             </h1>
             <h2 className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900">
               <strong className="font-semibold">安全的</strong>{" "}
-              <strong className="font-semibold">JavaScript</strong>{" "}和{" "}
-              <strong className="font-semibold">TypeScript</strong>{" "}运行时.
+              <strong className="font-semibold">JavaScript</strong> 和{" "}
+              <strong className="font-semibold">TypeScript</strong> 运行时.
             </h2>
 
             <a
@@ -52,7 +52,8 @@ for await (const req of s) {
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <p className="my-4 text-gray-700">
-            Deno 是一个简单、现代且安全的 JavaScript 和 TypeScript 运行时，基于 V8 引擎并采用 Rust 编程语言构建。
+            Deno 是一个简单、现代且安全的 JavaScript 和 TypeScript 运行时，基于
+            V8 引擎并采用 Rust 编程语言构建。
           </p>
           <ol className="ml-8 list-disc text-gray-700">
             <li>
@@ -61,12 +62,12 @@ for await (const req of s) {
             <li>开箱即用的 TypeScript 支持。</li>
             <li>只发布单一的可执行程序。</li>
             <li>
-              内置了实用工具，例如依赖检查 (
-              <InlineCode>deno info</InlineCode>) 和代码格式化 (
-              <InlineCode>deno fmt</InlineCode>)。
+              内置了实用工具，例如依赖检查 (<InlineCode>deno info</InlineCode>)
+              和代码格式化 (<InlineCode>deno fmt</InlineCode>)。
             </li>
             <li>
-              自带一套经过审查 (安全审计) 的标准模块，并保证了代码与 Deno 完全兼容：{" "}
+              自带一套经过审查 (安全审计) 的标准模块，并保证了代码与 Deno
+              完全兼容：{" "}
               <a href="https://deno.land/std" className="link">
                 deno.land/std
               </a>
@@ -107,11 +108,11 @@ for await (const req of s) {
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8">
           <p className="my-4 text-gray-700">
-            你可以在 {" "}
+            你可以在{" "}
             <Link href="/manual">
               <a className="link">参考手册</a>
-            </Link>
-            {" "} 中找到“深入介绍”、“环境搭建”、“代码示例”等内容。
+            </Link>{" "}
+            中找到“深入介绍”、“环境搭建”、“代码示例”等内容。
           </p>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
@@ -123,11 +124,11 @@ for await (const req of s) {
             </a>
           </Link>
           <p className="my-4 text-gray-700">
-            Deno 的基本运行时文档可以在 {" "}
+            Deno 的基本运行时文档可以在{" "}
             <a href="https://doc.deno.land/builtin/stable" className="link">
               doc.deno.land
-            </a>
-            {" "} 网站找到。
+            </a>{" "}
+            网站找到。
           </p>
           <p className="my-4 text-gray-700">
             Deno comes with{" "}
@@ -280,8 +281,8 @@ const InstallSection = () => {
         使用{" "}
         <a href="https://crates.io/crates/deno" className="link">
           Cargo
-        </a>
-        {" "} 从源码构建并安装：
+        </a>{" "}
+        从源码构建并安装：
       </p>
       <CodeBlock language="bash" code={`cargo install deno`} />
     </div>
@@ -290,7 +291,8 @@ const InstallSection = () => {
   return (
     <>
       <p className="my-4 text-gray-700">
-        Deno 没有外部依赖，只有一个单独的可执行文件。你可以使用下面的安装器来安装，也可以从 {" "}
+        Deno
+        没有外部依赖，只有一个单独的可执行文件。你可以使用下面的安装器来安装，也可以从{" "}
         <a href="https://github.com/denoland/deno/releases" className="link">
           GitHub Releases 页面
         </a>
@@ -303,9 +305,9 @@ const InstallSection = () => {
       {scoop}
       {cargo}
       <p className="my-4 text-gray-700">
-        查看 {" "}
+        查看{" "}
         <a className="link" href="https://github.com/denocn/deno_install">
-        denocn/deno_install
+          denocn/deno_install
         </a>{" "}
         以了解更多的安装选项。
       </p>

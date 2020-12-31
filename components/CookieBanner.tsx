@@ -18,9 +18,7 @@ export function CookieBanner(): React.ReactElement {
             <div className="flex items-center justify-between flex-wrap">
               <div className="w-0 flex-1 flex items-center">
                 <p className="ml-3 font-medium text-white">
-                  <span className="md:hidden">
-                  我们需要使用您的 cookies。
-                  </span>
+                  <span className="md:hidden">我们需要使用您的 cookies。</span>
                   <span className="hidden md:inline">
                     为了更好的用户体验，我们需要使用您的 cookies。
                   </span>
