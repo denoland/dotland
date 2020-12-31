@@ -59,7 +59,7 @@ for await (const req of s) {
             <li>
               默认安全。除非显示开启，否则没有文件、网络、环境变量的访问权限。
             </li>
-            <li>开箱即用的 TypeScript 支持。</li>
+            <li>支持开箱即用的 TypeScript。</li>
             <li>只发布单一的可执行程序。</li>
             <li>
               内置了实用工具，例如依赖检查 (<InlineCode>deno info</InlineCode>)
@@ -131,45 +131,41 @@ for await (const req of s) {
             网站找到。
           </p>
           <p className="my-4 text-gray-700">
-            Deno comes with{" "}
+            Deno 自带的
             <Link href="/manual">
-              <a className="link">a manual</a>
+              <a className="link">参考手册</a>
             </Link>{" "}
-            which contains more in depth explanations about the more complex
-            functions of the runtime, an introduction to the concepts that Deno
-            is built on, details about the internals of Deno, how to embed Deno
-            in your own application and how to extend Deno using Rust plugins.
+            包含了关于 Deno 运行时更复杂功能的深入解析, Deno
+            内部功能的详细信息，如何在您自己的应用程序中嵌入 Deno 以及如何使用
+            Rust 编写 Deno 插件。
           </p>
           <p className="my-4 text-gray-700">
-            The manual also contains information about the built in tools that
-            Deno provides.
+            该手册还包含有关 Deno 提供的内置工具的信息。
           </p>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <Link href="#standard-modules">
             <a className="hover:underline">
               <h3 className="font-bold text-xl" id="standard-modules">
-                Standard Modules
+                标准模块
               </h3>
             </a>
           </Link>
           <p className="my-4 text-gray-700">
-            Next to the Deno runtime, Deno also provides a list of audited
-            standard modules that are reviewed by the Deno maintainers and are
-            guaranteed to work with a specific Deno version. These live
-            alongside the Deno source code in the{" "}
+            除了提供 Deno 运行时之外，Deno 还提供了标准模块，这些模块由 Deno
+            核心团队维护和审核以保证可使用特定的 Deno 版本。这些模块和 Deno
+            的源码一起放在{" "}
             <a href="https://github.com/denoland/deno" className="link">
               denoland/deno
             </a>{" "}
-            repository.
+            仓库。
           </p>
           <p className="my-4 text-gray-700">
-            These standard modules are hosted at{" "}
+            这些标准模块托管在{" "}
             <Link href="/std">
               <a className="link">deno.land/std</a>
             </Link>{" "}
-            and are distributed via URLs like all other ES modules that are
-            compatible with Deno.
+            上，并且同所有其他的兼容 Deno 的 ES 模块一样通过 URL 进行分发。
           </p>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
@@ -181,38 +177,37 @@ for await (const req of s) {
             </a>
           </Link>
           <p className="my-4 text-gray-700">
-            Deno can import modules from any location on the web, like GitHub, a
-            personal webserver, or a CDN like{" "}
+            Deno 可以从网络上的任何位置导入模块，例如 GitHub、个人网站或
+            CDN，例如{" "}
             <a href="https://www.skypack.dev" className="link">
               Skypack
             </a>
-            ,{" "}
+            、
             <a href="https://jspm.io" className="link">
               jspm.io
             </a>{" "}
-            or{" "}
+            或{" "}
             <a href="https://www.jsdelivr.com/" className="link">
               jsDelivr
             </a>
-            .
+            。
           </p>
           <p className="my-4 text-gray-700">
-            To make it easier to consume third party modules Deno provides some
-            built in tooling like <InlineCode>deno info</InlineCode> and{" "}
-            <InlineCode>deno doc</InlineCode>. deno.land also provides a web UI
-            for viewing module documentation. It is available at{" "}
+            为了更方便地使用第三方模块，Deno 提供了一些内置的工具，如{" "}
+            <InlineCode>deno info</InlineCode> 和{" "}
+            <InlineCode>deno doc</InlineCode>。 deno.land
+            还提供用于查看模块文档的 Web UI。位于{" "}
             <a href="https://doc.deno.land" className="link">
               doc.deno.land
             </a>
-            .
+            。
           </p>
           <p className="my-4 text-gray-700">
-            deno.land also provides a simple public hosting service for ES
-            modules that work with Deno. It can be found at{" "}
+            deno.land 还为用于 Deno 的 ES 模块提供简单的公共托管服务。 位于{" "}
             <Link href="/x">
               <a className="link">deno.land/x</a>
             </Link>
-            .
+            。
           </p>
         </div>
         <div className="mt-20">

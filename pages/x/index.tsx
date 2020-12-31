@@ -82,20 +82,19 @@ function ThirdPartyRegistryList(): React.ReactElement {
         <div>
           <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8">
             <dt className="text-lg leading-6 font-medium text-gray-900">
-              What is deno.land/x?
+              deno.land/x 是什么？
             </dt>
             <dd className="mt-2">
               <p className="text-base leading-6 text-gray-500">
-                <span className="font-semibold">deno.land/x</span> is a hosting
-                service for Deno scripts. It caches releases of open source
-                modules stored on GitHub and serves them at one easy to remember
-                domain.
+                <span className="font-semibold">deno.land/x</span>是 Deno
+                模块的托管服务。它缓存 GitHub 上的开源模块的 Release
+                代码，并在一个易于记忆的域名中提供它们。
               </p>
             </dd>
 
             <div className="mt-2">
               <a href="#info" className="link">
-                Learn more
+                了解更多
               </a>
             </div>
             {/* <div className="mt-8">
@@ -107,14 +106,14 @@ function ThirdPartyRegistryList(): React.ReactElement {
           </div>
           <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8">
             <label htmlFor="query" className="font-medium sr-only">
-              Search
+              搜索
             </label>
             <input
               id="query"
               className="block w-full px-4 py-2 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1"
               type="text"
               placeholder={
-                !resp ? "Search" : `Search through ${resp.totalCount} modules`
+                !resp ? "搜索" : `在 ${resp.totalCount} 个模块中搜索`
               }
               value={query}
               onChange={handleSearchInput}
@@ -173,14 +172,14 @@ function ThirdPartyRegistryList(): React.ReactElement {
                 <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
                   <div className="flex-1 flex justify-between items-center sm:hidden">
                     <button className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-gray-100 text-sm leading-5 font-medium rounded-md bg-white">
-                      Previous
+                      上一页
                     </button>
                     <div className="text-base leading-6 text-gray-500">
                       <div className="h-3 w-4 bg-gray-100 inline-block mr-1" />/
                       <div className="h-3 w-4 bg-gray-100 inline-block ml-1" />
                     </div>
                     <button className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-gray-100 text-sm leading-5 font-medium rounded-md bg-white ml-4">
-                      Next
+                      下一页
                     </button>
                   </div>
                   <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
@@ -241,13 +240,13 @@ function ThirdPartyRegistryList(): React.ReactElement {
               </div>
             ) : resp === null ? (
               <div className="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
-                Failed to load modules
+                加载模块失败
               </div>
             ) : (
               <div className="bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4">
                 {resp.results.length == 0 ? (
                   <div className="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
-                    No modules found
+                    没有找到模块
                   </div>
                 ) : (
                   <ModuleList
@@ -286,7 +285,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
                                   : "text-gray-500 cursor-default"
                               } transition ease-in-out duration-150`}
                             >
-                              Previous
+                              上一页
                             </button>
                             <div className="text-base leading-6 text-gray-500">
                               {page}/{pageCount}
@@ -300,25 +299,25 @@ function ThirdPartyRegistryList(): React.ReactElement {
                                   : "text-gray-500 cursor-default"
                               } transition ease-in-out duration-150`}
                             >
-                              Next
+                              下一页
                             </button>
                           </div>
                           <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
                             <div>
                               <p className="text-sm leading-5 text-gray-700">
-                                Showing{" "}
+                                显示第{" "}
                                 <span className="font-medium">
                                   {(page - 1) * PER_PAGE + 1}
                                 </span>{" "}
-                                to{" "}
+                                到{" "}
                                 <span className="font-medium">
                                   {(page - 1) * PER_PAGE + resp.results.length}
-                                </span>{" "}
-                                of{" "}
+                                </span>
+                                ，共{" "}
                                 <span className="font-medium">
                                   {resp.totalCount}
                                 </span>{" "}
-                                results
+                                个模块
                               </p>
                             </div>
                             <div>
