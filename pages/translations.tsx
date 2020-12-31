@@ -20,13 +20,12 @@ function TranslationsPage(): React.ReactElement {
         <div className="max-w-screen-lg mx-auto">
           <h4 className="text-4xl font-bold tracking-tight">翻译</h4>
           <p className="mt-4 text-lg">
-            Deno docs is available in the following languages. Do you have a
-            piece to display here?{" "}
+          Deno 文档提供以下语言版本。是否漏掉了你的语言呢？
             <a
               href="https://github.com/denoland/deno_website2/blob/master/translations.json"
               className="link"
             >
-              Add it!
+              马上添加！
             </a>
           </p>
         </div>
