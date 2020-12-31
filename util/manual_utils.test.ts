@@ -15,6 +15,6 @@ test("get introduction file", async () => {
   expect(
     getFileURL("f184332c09c851faac50f598d29ebe4426e05464", "/introduction")
   ).toEqual(
-    "https://raw.githubusercontent.com/denoland/deno/f184332c09c851faac50f598d29ebe4426e05464/docs/introduction.md"
+    "https://cdn.jsdelivr.net/gh/denoland/deno@f184332c09c851faac50f598d29ebe4426e05464/docs/introduction.md"
   );
 });
