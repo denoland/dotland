@@ -24,48 +24,48 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
               href="https://doc.deno.land/builtin/stable"
               className="text-base leading-6 text-gray-500 hover:text-gray-900"
             >
-              Runtime API
+              API
             </a>
           </div>
           <div className="px-5 py-2">
             <Link href="/[...rest]" as="/std">
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Standard Library
+                Libreria estándar
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/x">
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Third Party Modules
+               Módulos de terceros 
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/benchmarks">
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Benchmarks
+                Referencias
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/artwork">
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Artwork
+                Obras de Arte
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/posts">
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                News
+                Noticias
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/translations">
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Translations
+                Traducciones
               </a>
             </Link>
           </div>

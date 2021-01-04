@@ -60,7 +60,7 @@ function Header({
         <div className="hidden lg:flex md:ml-10 items-end">
           <Link href="/#installation">
             <a className="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              Install
+              Instalar
             </a>
           </Link>
           <Link href="/manual">
@@ -72,16 +72,16 @@ function Header({
             href="https://doc.deno.land/builtin/stable"
             className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
           >
-            Runtime API
+            API
           </a>
           <Link href="/std">
             <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              Standard Library
+              Libreria estándar
             </a>
           </Link>
           <Link href="/x">
             <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              Third Party Modules
+              Módulos de terceros
             </a>
           </Link>
           <a
@@ -163,7 +163,7 @@ function Header({
               <div className="px-2 pt-4 pb-3">
                 <Link href="/#installation">
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Install
+                    Instalar
                   </a>
                 </Link>
                 <Link href="/manual">
@@ -175,16 +175,16 @@ function Header({
                   href="https://doc.deno.land/builtin/stable"
                   className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
                 >
-                  Runtime API
+                  API
                 </a>
                 <Link href="/std">
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Standard Library
+                    Libreria estándar
                   </a>
                 </Link>
                 <Link href="/x">
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Third Party Modules
+                    Módulos de terceros
                   </a>
                 </Link>
               </div>

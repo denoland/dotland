@@ -12,21 +12,21 @@ function TranslationsPage(): React.ReactElement {
   return (
     <>
       <Head>
-        <title>Translations | Deno</title>
+        <title>Traducciones | Deno</title>
       </Head>
       <CookieBanner />
       <Header />
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 mt-8 mb-24">
         <div className="max-w-screen-lg mx-auto">
-          <h4 className="text-4xl font-bold tracking-tight">Translations</h4>
+          <h4 className="text-4xl font-bold tracking-tight">Traducciones</h4>
           <p className="mt-4 text-lg">
-            Deno docs is available in the following languages. Do you have a
-            piece to display here?{" "}
+            Deno docs está disponible en los siguientes idiomas. ¿Tienes una
+            pieza para mostrar aquí?{" "}
             <a
               href="https://github.com/denoland/deno_website2/blob/master/translations.json"
               className="link"
             >
-              Add it!
+              ¡Añádelo!
             </a>
           </p>
         </div>
