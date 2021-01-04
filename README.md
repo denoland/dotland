@@ -1,6 +1,6 @@
-# deno_website2
+# Deno 中文网站
 
-[![Build Status](https://github.com/denoland/deno_website2/workflows/ci/badge.svg?branch=master&event=push)](https://github.com/denoland/deno_website2/actions)
+[![Build Status](https://github.com/justjavac/deno_website2/workflows/ci/badge.svg?branch=master&event=push)](https://github.com/justjavac/deno_website2/actions)
 
 This is the code for https://deno.land/
 
