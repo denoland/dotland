@@ -187,7 +187,7 @@ for await (const req of s) {
           <Link href="#third-party-modules">
             <a className="hover:underline">
               <h3 className="font-bold text-xl" id="third-party-modules">
-               Módulos de terceros 
+                Módulos de terceros
               </h3>
             </a>
           </Link>

@@ -37,7 +37,7 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
           <div className="px-5 py-2">
             <Link href="/x">
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-               Módulos de terceros 
+                Módulos de terceros
               </a>
             </Link>
           </div>
