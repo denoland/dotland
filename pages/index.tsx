@@ -39,7 +39,7 @@ for await (const req of s) {
               Deno
             </h1>
             <h2 className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900">
-              Un entorno de ejecucion{" "}
+              Un entorno de ejecución{" "}
               <strong className="font-semibold">seguro</strong> para{" "}
               <strong className="font-semibold">JavaScript</strong> y{" "}
               <strong className="font-semibold">TypeScript</strong>.
@@ -63,7 +63,7 @@ for await (const req of s) {
               Seguro por defecto. Sin acceso a archivos, redes o entornos, a
               menos que se habilite explícitamente.
             </li>
-            <li>Soporta TypeScript listo para usar.</li>
+            <li>Soporte para TypeScript, listo para usar.</li>
             <li>Envía solo un archivo ejecutable.</li>
             <li>
               Tiene utilidades integradas como un inspector de dependencias (
@@ -93,7 +93,7 @@ for await (const req of s) {
           <Link href="#getting-started">
             <a className="hover:underline">
               <h3 className="font-bold text-xl" id="getting-started">
-                Empezando
+                Comenzando
               </h3>
             </a>
           </Link>
@@ -104,7 +104,7 @@ for await (const req of s) {
             code="deno run https://deno.land/std/examples/welcome.ts"
             language="bash"
           />
-          <p className="my-4 text-gray-700">O uno mas complejo:</p>
+          <p className="my-4 text-gray-700">O uno más complejo:</p>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8">
           <CodeBlock
@@ -116,9 +116,9 @@ for await (const req of s) {
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8">
           <p className="my-4 text-gray-700">
             Puede encontrar una introducción más detallada, ejemplos y guías de
-            configuración del entorno en el manual.{" "}
+            configuración del entorno en{" "}
             <Link href="/manual">
-              <a className="link">el manual</a>
+              <a className="link">el manual.</a>
             </Link>
             .
           </p>
@@ -159,27 +159,26 @@ for await (const req of s) {
           <Link href="#standard-modules">
             <a className="hover:underline">
               <h3 className="font-bold text-xl" id="standard-modules">
-                Módulos estándar
+                Librería estándar
               </h3>
             </a>
           </Link>
           <p className="my-4 text-gray-700">
             Además del entorno de ejecución de Deno, Deno también proporciona
             una lista de módulos estándar auditados que son revisados por los
-            encargados de mantenimiento de Deno y están garantizados para
+            encargados del mantenimiento de Deno y están garantizados para
             funcionar con una versión específica de Deno. Estos conviven con el
             código fuente de Deno en el repositorio{" "}
             <a href="https://github.com/denoland/deno" className="link">
               denoland/deno
-            </a>{" "}
-            repositorio.
+            </a>.{" "}
           </p>
           <p className="my-4 text-gray-700">
             Estos módulos estándar están alojados en{" "}
             <Link href="/std">
               <a className="link">deno.land/std</a>
             </Link>{" "}
-            y se distribuyen a través de URL como todos los demás módulos ES que
+            y se distribuyen a través de enlaces como todos los demás módulos que
             son compatibles con Deno.
           </p>
         </div>
