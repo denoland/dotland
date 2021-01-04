@@ -164,7 +164,7 @@ for await (const req of s) {
             </a>
           </Link>
           <p className="my-4 text-gray-700">
-            Además del entorno de ejecución de Deno, Deno también proporciona
+            Además del entorno de ejecución de Deno, este también proporciona
             una lista de módulos estándar auditados que son revisados por los
             encargados del mantenimiento de Deno y están garantizados para
             funcionar con una versión específica de Deno. Estos conviven con el
@@ -210,7 +210,7 @@ for await (const req of s) {
             Para facilitar el consumo de módulos de terceros, Deno proporciona
             algunas herramientas integradas como{" "}
             <InlineCode>deno info</InlineCode> y{" "}
-            <InlineCode>deno doc</InlineCode>. deno.land también proporciona una
+            <InlineCode>deno doc</InlineCode>. El sitio web de Deno también proporciona una
             interfaz de usuario web para ver la documentación del módulo. Está
             disponible en{" "}
             <a href="https://doc.deno.land" className="link">
@@ -219,8 +219,8 @@ for await (const req of s) {
             .
           </p>
           <p className="my-4 text-gray-700">
-            deno.land también proporciona un servicio de alojamiento público
-            simple para módulos ES que funcionan con Deno. Se puede encontrar en{" "}
+            El sitio web de deno también proporciona un servicio de alojamiento público
+            simple para módulos que funcionan con Deno. Se puede encontrar en{" "}
             <Link href="/x">
               <a className="link">deno.land/x</a>
             </Link>

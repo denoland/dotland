@@ -300,7 +300,7 @@ function Registry(): React.ReactElement {
       <CookieBanner />
       <div className="bg-gray-50 min-h-full">
         <Header
-          subtitle={name === "std" ? "Standard Library" : "Third Party Modules"}
+          subtitle={name === "std" ? "Librería estándar" : "Módulos de terceros"}
           widerContent={true}
         />
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8 pt-4">
@@ -315,8 +315,8 @@ function Registry(): React.ReactElement {
               if (versions === null) {
                 return (
                   <ErrorMessage
-                    title="404 - Not Found"
-                    body="This module does not exist."
+                    title="404 - Módulo no econtrado"
+                    body="Este módulo no existe."
                   />
                 );
               } else if (
@@ -325,7 +325,7 @@ function Registry(): React.ReactElement {
               ) {
                 return (
                   <ErrorMessage
-                    title="No uploaded versions"
+                    title="Este módulo no contiene versiones"
                     body={`This module name has been reserved for a repository, but no versions have been uploaded yet. Modules that do not upload a version within 30 days of registration will be removed. ${
                       versions.isLegacy
                         ? "If you are the owner of this module, please re-add the GitHub repository with deno.land/x (by following the instructions at https://deno.land/x#add), and publish a new version."

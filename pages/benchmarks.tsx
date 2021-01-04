@@ -264,7 +264,7 @@ function Benchmarks(): React.ReactElement {
                 />
                 <p className="mt-1">
                   En ambos casos, <code>std/examples/chat/server_test.ts</code>{" "}
-                  es almacenado en cache por deno.La carga de trabajo contiene
+                  es almacenado en cache por deno. La carga de trabajo contiene
                   20 TypeScript únicos modulos. Con <em>check</em> se realiza
                   una verificación completa del tipo de TypeScript, mientras{" "}
                   <em>no_check</em> usa el argumento <code>--no-check</code>{" "}
@@ -319,7 +319,7 @@ function Benchmarks(): React.ReactElement {
                   yTickFormat={showNormalized ? formatPercentage : formatReqSec}
                 />
                 <p className="mt-1">
-                  Prueba el rendimiento del servidor HTTP. 10 conexiones para
+                  Prueba el rendimiento del servidor HTTP. Diez conexiones para
                   mantener vivo hacen tantas solicitudes de saludo como sea
                   posible. Mas grande es mejor.
                 </p>
@@ -397,7 +397,7 @@ function Benchmarks(): React.ReactElement {
                 />
                 <p className="mt-1">
                   Latencia máxima durante la misma prueba utilizada
-                  anteriormente para solicitudes / segundo. Cuanto más pequeño,
+                  anteriormente para solicitudes por segundo. Cuanto más pequeño,
                   mejor. Escala logarítmica.
                 </p>
               </div>
@@ -416,8 +416,8 @@ function Benchmarks(): React.ReactElement {
                   yTickFormat={showNormalized ? formatPercentage : formatReqSec}
                 />
                 <p className="mt-1">
-                  Prueba el rendimiento del proxy. 10 conexiones para mantener
-                  vivo hacen tantas solicitudes de saludo como sea posible. Mas
+                  Prueba el rendimiento del proxy. diez conexiones para mantener
+                  vivo hacen tantas solicitudes de saludo como sea posible. Más
                   grande es mejor.
                 </p>
                 <ul className="ml-8 list-disc my-2">

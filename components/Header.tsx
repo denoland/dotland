@@ -76,7 +76,7 @@ function Header({
           </a>
           <Link href="/std">
             <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              Libreria estándar
+              Librería estándar
             </a>
           </Link>
           <Link href="/x">
