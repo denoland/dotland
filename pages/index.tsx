@@ -56,7 +56,7 @@ for await (const req of s) {
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <p className="my-4 text-gray-700">
             Deno es un entorno de ejecución simple, moderno y seguro para
-            JavaScript y TypeScript que usa V8 y está construido en Rust.
+            JavaScript y TypeScript que usa V8 y hecho en Rust.
           </p>
           <ol className="ml-8 list-disc text-gray-700">
             <li>
@@ -118,7 +118,7 @@ for await (const req of s) {
             Puede encontrar una introducción más detallada, ejemplos y guías de
             configuración del entorno en{" "}
             <Link href="/manual">
-              <a className="link">el manual.</a>
+              <a className="link">el manual</a>
             </Link>
             .
           </p>
@@ -319,7 +319,7 @@ const InstallSection = () => {
       {scoop}
       {cargo}
       <p className="my-4 text-gray-700">
-        Ver{" "}
+        Consultar{" "}
         <a className="link" href="https://github.com/denoland/deno_install">
           deno_install
         </a>{" "}
