@@ -264,9 +264,9 @@ function Benchmarks(): React.ReactElement {
                 />
                 <p className="mt-1">
                   En ambos casos, <code>std/examples/chat/server_test.ts</code>{" "}
-                  es almacenado en cache por deno. La carga de trabajo contiene
-                  20 TypeScript únicos modulos. Con <em>check</em> se realiza
-                  una verificación completa del tipo de TypeScript, mientras{" "}
+                  es almacenado en caché por Deno. La carga de trabajo contiene
+                  20 únicos modulos de TypeScript. Con <em>check</em> se realiza
+                  una verificación completa del tipado de TypeScript, mientras{" "}
                   <em>no_check</em> usa el argumento <code>--no-check</code>{" "}
                   para omitir una verificación completa del tipado.{" "}
                   <em>bundle</em> realiza una verificación de tipo completa y
@@ -321,7 +321,7 @@ function Benchmarks(): React.ReactElement {
                 <p className="mt-1">
                   Prueba el rendimiento del servidor HTTP. Diez conexiones para
                   mantener vivo hacen tantas solicitudes de saludo como sea
-                  posible. Mas grande es mejor.
+                  posible. Más grande es mejor.
                 </p>
                 <ul className="ml-8 list-disc my-2">
                   <li>
@@ -358,14 +358,14 @@ function Benchmarks(): React.ReactElement {
                       path="core/examples/http_bench.js"
                       name="http_bench.js"
                     />
-                    . usos unicos{" "}
+                    . usos únicos{" "}
                     <a
                       className="link"
                       href="https://docs.rs/tokio/latest/tokio/runtime/struct.Builder.html#method.basic_scheduler"
                     >
                       tokio::runtime::Builder::basic_scheduler
                     </a>{" "}
-                    y multiple usos{" "}
+                    y múltiple usos{" "}
                     <a
                       className="link"
                       href="https://docs.rs/tokio/latest/tokio/runtime/struct.Builder.html#method.threaded_scheduler"
@@ -397,8 +397,8 @@ function Benchmarks(): React.ReactElement {
                 />
                 <p className="mt-1">
                   Latencia máxima durante la misma prueba utilizada
-                  anteriormente para solicitudes por segundo. Cuanto más pequeño,
-                  mejor. Escala logarítmica.
+                  anteriormente para solicitudes por segundo. Cuanto más
+                  pequeño, mejor. Escala logarítmica.
                 </p>
               </div>
               <div className="mt-8">
@@ -450,8 +450,8 @@ function Benchmarks(): React.ReactElement {
                       path="tools/hyper_hello/hyper_hello.rs"
                       name="hyper"
                     />{" "}
-                    is a Rust HTTP server used as the origin for the proxy
-                    tests.
+                    es un servidor HTTP de Rust que se utiliza como origen para
+                    las pruebas de un proxy.
                   </li>
                 </ul>
               </div>
@@ -494,7 +494,7 @@ function Benchmarks(): React.ReactElement {
                   yTickFormat={formatMB}
                 />
                 <p className="mt-1">
-                  Deno envía solo un único binario. Seguimos su tamaño aquí.
+                  Deno envía un único binario. Seguimos su tamaño aquí.
                 </p>
               </div>
               <div className="mt-8">

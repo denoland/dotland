@@ -171,15 +171,16 @@ for await (const req of s) {
             código fuente de Deno en el repositorio{" "}
             <a href="https://github.com/denoland/deno" className="link">
               denoland/deno
-            </a>.{" "}
+            </a>
+            .{" "}
           </p>
           <p className="my-4 text-gray-700">
             Estos módulos estándar están alojados en{" "}
             <Link href="/std">
               <a className="link">deno.land/std</a>
             </Link>{" "}
-            y se distribuyen a través de enlaces como todos los demás módulos que
-            son compatibles con Deno.
+            y se distribuyen a través de enlaces como todos los demás módulos
+            que son compatibles con Deno.
           </p>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
@@ -210,17 +211,18 @@ for await (const req of s) {
             Para facilitar el consumo de módulos de terceros, Deno proporciona
             algunas herramientas integradas como{" "}
             <InlineCode>deno info</InlineCode> y{" "}
-            <InlineCode>deno doc</InlineCode>. El sitio web de Deno también proporciona una
-            interfaz de usuario web para ver la documentación del módulo. Está
-            disponible en{" "}
+            <InlineCode>deno doc</InlineCode>. El sitio web de Deno también
+            proporciona una interfaz de usuario web para ver la documentación
+            del módulo. Está disponible en{" "}
             <a href="https://doc.deno.land" className="link">
               doc.deno.land
             </a>
             .
           </p>
           <p className="my-4 text-gray-700">
-            El sitio web de deno también proporciona un servicio de alojamiento público
-            simple para módulos que funcionan con Deno. Se puede encontrar en{" "}
+            El sitio web de deno también proporciona un servicio de alojamiento
+            público simple para módulos que funcionan con Deno. Se puede
+            encontrar en{" "}
             <Link href="/x">
               <a className="link">deno.land/x</a>
             </Link>
