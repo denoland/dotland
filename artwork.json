@@ -207,5 +207,17 @@
       "web": "https://samip.ml/"
     },
     "license": "Restricted use"
+  },
+  {
+    "date": "2021-01-06",
+    "image": "/images/deno_rick.png",
+    "title": "Rick Deno",
+    "alt": "deno in the eyes of Rick from Rick&Morty",
+    "artist": {
+      "name": "Loockeeer",
+      "profile_image": "WIP",
+      "github": "loockeeer"
+    },
+    "license": "MIT"
   }
 ]
