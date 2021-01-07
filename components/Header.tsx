@@ -22,13 +22,13 @@ function Header({
       >
         <Link href="/">
           <a className="flex items-center">
-            <img className="h-10 w-auto sm:h-12 my-2" src="/logo.svg" alt="" />
+            <img className="h-10 w-auto sm:h-12 my-2" src="/logo.svg" alt="Deno Logo" />
             <div className="ml-5 flex flex-col justify-center">
-              <div className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
+              <div className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight dark:text-gray-200">
                 Deno
               </div>
               {subtitle && (
-                <div className="font-normal text-sm sm:text-lg leading-tight tracking-tight">
+                <div className="font-normal text-sm sm:text-lg leading-tight tracking-tight dark:text-gray-200">
                   {subtitle}
                 </div>
               )}
@@ -38,7 +38,7 @@ function Header({
         <div className="-mr-2 flex items-center lg:hidden">
           <button
             type="button"
-            className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
+            className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out dark:text-gray-500 dark:hover:text-gray-300 dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:focus:text-gray-300"
             onClick={() => setMenuOpen(true)}
           >
             <svg
@@ -59,34 +59,34 @@ function Header({
         </div>
         <div className="hidden lg:flex md:ml-10 items-end">
           <Link href="/#installation">
-            <a className="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
+            <a className="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out dark:text-gray-400 dark:hover:text-gray-300">
               Install
             </a>
           </Link>
           <Link href="/manual">
-            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
+            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out dark:text-gray-400 dark:hover:text-gray-300">
               Manual
             </a>
           </Link>
           <a
             href="https://doc.deno.land/builtin/stable"
-            className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+            className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out dark:text-gray-400 dark:hover:text-gray-300"
           >
             Runtime API
           </a>
           <Link href="/std">
-            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
+            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out dark:text-gray-400 dark:hover:text-gray-300">
               Standard Library
             </a>
           </Link>
           <Link href="/x">
-            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
+            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out dark:text-gray-400 dark:hover:text-gray-300">
               Third Party Modules
             </a>
           </Link>
           <a
             href="https://github.com/denoland"
-            className="ml-10 text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+            className="ml-10 text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out dark:text-gray-400 dark:hover:text-gray-300"
             style={{ lineHeight: 0 }}
           >
             <span className="sr-only">GitHub</span>
@@ -117,7 +117,7 @@ function Header({
       >
         <div className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right lg:hidden">
           <div className="rounded-lg shadow-md">
-            <div className="rounded-lg bg-white shadow-xs overflow-hidden">
+            <div className="rounded-lg bg-white shadow-xs overflow-hidden dark:bg-gray-800">
               <div className="px-5 pt-4 flex items-center justify-between">
                 <Link href="/">
                   <a className="flex items-center">
@@ -127,7 +127,7 @@ function Header({
                       alt=""
                     />
                     <div className="ml-5 flex flex-col justify-center">
-                      <div className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
+                      <div className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight dark:text-gray-100">
                         Deno
                       </div>
                       {subtitle && (
@@ -141,7 +141,7 @@ function Header({
                 <div className="-mr-2">
                   <button
                     type="button"
-                    className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
+                    className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out dark:text-gray-500dark:hover:text-gray-300 dark:hover:bg-gray-900"
                     onClick={() => setMenuOpen(false)}
                   >
                     <svg
@@ -162,28 +162,28 @@ function Header({
               </div>
               <div className="px-2 pt-4 pb-3">
                 <Link href="/#installation">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
+                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out dark:text-gray-500 dark:hover:text-gray-300 dark:hover:bg-gray-900 dark:focus:text-gray-300 dark:focus:bg-gray-900">
                     Install
                   </a>
                 </Link>
                 <Link href="/manual">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
+                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out dark:text-gray-500 dark:hover:text-gray-300 dark:hover:bg-gray-900 dark:focus:text-gray-300 dark:focus:bg-gray-900">
                     Manual
                   </a>
                 </Link>
                 <a
                   href="https://doc.deno.land/builtin/stable"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
+                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out dark:text-gray-500 dark:hover:text-gray-300 dark:hover:bg-gray-900 dark:focus:text-gray-300 dark:focus:bg-gray-900"
                 >
                   Runtime API
                 </a>
                 <Link href="/std">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
+                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out dark:text-gray-500 dark:hover:text-gray-300 dark:hover:bg-gray-900 dark:focus:text-gray-300 dark:focus:bg-gray-900">
                     Standard Library
                   </a>
                 </Link>
                 <Link href="/x">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
+                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out dark:text-gray-500 dark:hover:text-gray-300 dark:hover:bg-gray-900 dark:focus:text-gray-300 dark:focus:bg-gray-900">
                     Third Party Modules
                   </a>
                 </Link>

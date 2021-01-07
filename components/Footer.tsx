@@ -7,14 +7,14 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
   return (
     <div
       className={
-        props.simple ? undefined : "bg-gray-50 border-t border-gray-200"
+        props.simple ? undefined : "bg-gray-50 border-t border-gray-200 dark:bg-black-700"
       }
     >
       <div className="max-w-screen-xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
         <nav className="-mx-5 -my-2 flex flex-wrap justify-center">
           <div className="px-5 py-2">
             <Link href="/[...rest]" as="/manual">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
+              <a className="text-base leading-6 text-gray-500 hover:text-gray-900 dark:text-color-black-400 dark:hover:text-gray-300">
                 Manual
               </a>
             </Link>
@@ -22,49 +22,49 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
           <div className="px-5 py-2">
             <a
               href="https://doc.deno.land/builtin/stable"
-              className="text-base leading-6 text-gray-500 hover:text-gray-900"
+              className="text-base leading-6 text-gray-500 hover:text-gray-900 dark:text-color-black-400 dark:hover:text-gray-300"
             >
               Runtime API
             </a>
           </div>
           <div className="px-5 py-2">
             <Link href="/[...rest]" as="/std">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
+              <a className="text-base leading-6 text-gray-500 hover:text-gray-900 dark:text-color-black-400 dark:hover:text-gray-300">
                 Standard Library
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/x">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
+              <a className="text-base leading-6 text-gray-500 hover:text-gray-900 dark:text-color-black-400 dark:hover:text-gray-300">
                 Third Party Modules
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/benchmarks">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
+              <a className="text-base leading-6 text-gray-500 hover:text-gray-900 dark:text-color-black-400 dark:hover:text-gray-300">
                 Benchmarks
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/artwork">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
+              <a className="text-base leading-6 text-gray-500 hover:text-gray-900 dark:text-color-black-400 dark:hover:text-gray-300">
                 Artwork
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/posts">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
+              <a className="text-base leading-6 text-gray-500 hover:text-gray-900 dark:text-color-black-400 dark:hover:text-gray-300">
                 News
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/translations">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
+              <a className="text-base leading-6 text-gray-500 hover:text-gray-900 dark:text-color-black-400 dark:hover:text-gray-300">
                 Translations
               </a>
             </Link>

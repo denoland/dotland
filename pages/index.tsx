@@ -29,14 +29,14 @@ for await (const req of s) {
         <title>Deno - A secure runtime for JavaScript and TypeScript</title>
       </Head>
       <CookieBanner />
-      <div className="bg-white">
-        <div className="bg-gray-50 border-b border-gray-200">
+      <div className="bg-white dark:bg-black-800 dark:text-gray-100">
+        <div className="bg-gray-50 border-b border-gray-200 dark:bg-black-900 dark:border-gray-800">
           <Header />
           <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
-            <h1 className="font-extrabold text-5xl leading-10 tracking-tight text-gray-900">
+            <h1 className="font-extrabold text-5xl leading-10 tracking-tight text-gray-900 dark:text-gray-100">
               Deno
             </h1>
-            <h2 className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900">
+            <h2 className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900 dark:text-gray-100">
               A <strong className="font-semibold">secure</strong> runtime for{" "}
               <strong className="font-semibold">JavaScript</strong> and{" "}
               <strong className="font-semibold">TypeScript</strong>.
@@ -51,11 +51,11 @@ for await (const req of s) {
           </div>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
-          <p className="my-4 text-gray-700">
+          <p className="my-4 text-gray-700 dark:text-gray-200">
             Deno is a simple, modern and secure runtime for JavaScript and
             TypeScript that uses V8 and is built in Rust.
           </p>
-          <ol className="ml-8 list-disc text-gray-700">
+          <ol className="ml-8 list-disc text-gray-700 dark:text-gray-200">
             <li>
               Secure by default. No file, network, or environment access, unless
               explicitly enabled.
@@ -94,12 +94,12 @@ for await (const req of s) {
               </h3>
             </a>
           </Link>
-          <p className="my-4 text-gray-700">Try running a simple program:</p>
+          <p className="my-4 text-gray-700 dark:text-gray-200">Try running a simple program:</p>
           <CodeBlock
             code="deno run https://deno.land/std/examples/welcome.ts"
             language="bash"
           />
-          <p className="my-4 text-gray-700">Or a more complex one:</p>
+          <p className="my-4 text-gray-700 dark:text-gray-200">Or a more complex one:</p>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8">
           <CodeBlock
@@ -109,7 +109,7 @@ for await (const req of s) {
           />
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8">
-          <p className="my-4 text-gray-700">
+          <p className="my-4 text-gray-700 dark:text-gray-200">
             You can find a more in depth introduction, examples, and environment
             setup guides in{" "}
             <Link href="/manual">
@@ -126,14 +126,14 @@ for await (const req of s) {
               </h3>
             </a>
           </Link>
-          <p className="my-4 text-gray-700">
+          <p className="my-4 text-gray-700 dark:text-gray-200">
             The basic runtime documentation for Deno can be found on{" "}
             <a href="https://doc.deno.land/builtin/stable" className="link">
               doc.deno.land
             </a>
             .
           </p>
-          <p className="my-4 text-gray-700">
+          <p className="my-4 text-gray-700 dark:text-gray-200">
             Deno comes with{" "}
             <Link href="/manual">
               <a className="link">a manual</a>
@@ -143,7 +143,7 @@ for await (const req of s) {
             is built on, details about the internals of Deno, how to embed Deno
             in your own application and how to extend Deno using Rust plugins.
           </p>
-          <p className="my-4 text-gray-700">
+          <p className="my-4 text-gray-700 dark:text-gray-200">
             The manual also contains information about the built in tools that
             Deno provides.
           </p>
@@ -156,7 +156,7 @@ for await (const req of s) {
               </h3>
             </a>
           </Link>
-          <p className="my-4 text-gray-700">
+          <p className="my-4 text-gray-700 dark:text-gray-200">
             Next to the Deno runtime, Deno also provides a list of audited
             standard modules that are reviewed by the Deno maintainers and are
             guaranteed to work with a specific Deno version. These live
@@ -166,7 +166,7 @@ for await (const req of s) {
             </a>{" "}
             repository.
           </p>
-          <p className="my-4 text-gray-700">
+          <p className="my-4 text-gray-700 dark:text-gray-200">
             These standard modules are hosted at{" "}
             <Link href="/std">
               <a className="link">deno.land/std</a>
@@ -183,7 +183,7 @@ for await (const req of s) {
               </h3>
             </a>
           </Link>
-          <p className="my-4 text-gray-700">
+          <p className="my-4 text-gray-700 dark:text-gray-200">
             Deno can import modules from any location on the web, like GitHub, a
             personal webserver, or a CDN like{" "}
             <a href="https://www.skypack.dev" className="link">
@@ -199,7 +199,7 @@ for await (const req of s) {
             </a>
             .
           </p>
-          <p className="my-4 text-gray-700">
+          <p className="my-4 text-gray-700 dark:text-gray-200">
             To make it easier to consume third party modules Deno provides some
             built in tooling like <InlineCode>deno info</InlineCode> and{" "}
             <InlineCode>deno doc</InlineCode>. deno.land also provides a web UI
@@ -209,7 +209,7 @@ for await (const req of s) {
             </a>
             .
           </p>
-          <p className="my-4 text-gray-700">
+          <p className="my-4 text-gray-700 dark:text-gray-200">
             deno.land also provides a simple public hosting service for ES
             modules that work with Deno. It can be found at{" "}
             <Link href="/x">
@@ -228,7 +228,7 @@ for await (const req of s) {
 
 const InstallSection = () => {
   const shell = (
-    <div key="shell" className="my-4 text-gray-700">
+    <div key="shell" className="my-4 text-gray-700 dark:text-gray-200">
       <p className="py-2">Shell (Mac, Linux):</p>
       <CodeBlock
         language="bash"
@@ -237,7 +237,7 @@ const InstallSection = () => {
     </div>
   );
   const homebrew = (
-    <div key="homebrew" className="my-4 text-gray-700">
+    <div key="homebrew" className="my-4 text-gray-700 dark:text-gray-200">
       <p className="mb-2">
         <a href="https://formulae.brew.sh/formula/deno" className="link">
           Homebrew
@@ -248,7 +248,7 @@ const InstallSection = () => {
     </div>
   );
   const powershell = (
-    <div key="powershell" className="my-4 text-gray-700">
+    <div key="powershell" className="my-4 text-gray-700 dark:text-gray-200">
       <p className="mb-2">PowerShell (Windows):</p>
       <CodeBlock
         language="bash"
@@ -257,7 +257,7 @@ const InstallSection = () => {
     </div>
   );
   const chocolatey = (
-    <div key="chocolatey" className="my-4 text-gray-700">
+    <div key="chocolatey" className="my-4 text-gray-700 dark:text-gray-200">
       <p className="mb-2">
         <a href="https://chocolatey.org/packages/deno" className="link">
           Chocolatey
@@ -268,7 +268,7 @@ const InstallSection = () => {
     </div>
   );
   const scoop = (
-    <div key="scoop" className="my-4 text-gray-700">
+    <div key="scoop" className="my-4 text-gray-700 dark:text-gray-200">
       <p className="mb-2">
         <a href="https://scoop.sh/" className="link">
           Scoop
@@ -279,7 +279,7 @@ const InstallSection = () => {
     </div>
   );
   const cargo = (
-    <div key="cargo" className="my-4 text-gray-700">
+    <div key="cargo" className="my-4 text-gray-700 dark:text-gray-200">
       <p className="py-2">
         Build and install from source using{" "}
         <a href="https://crates.io/crates/deno" className="link">
@@ -292,7 +292,7 @@ const InstallSection = () => {
 
   return (
     <>
-      <p className="my-4 text-gray-700">
+      <p className="my-4 text-gray-700 dark:text-gray-200">
         Deno ships as a single executable with no dependencies. You can install
         it using the installers below, or download a release binary from the{" "}
         <a href="https://github.com/denoland/deno/releases" className="link">
@@ -306,7 +306,7 @@ const InstallSection = () => {
       {chocolatey}
       {scoop}
       {cargo}
-      <p className="my-4 text-gray-700">
+      <p className="my-4 text-gray-700 dark:text-gray-200">
         See{" "}
         <a className="link" href="https://github.com/denoland/deno_install">
           deno_install

@@ -73,19 +73,21 @@ function ThirdPartyRegistryList(): React.ReactElement {
         <title>Third Party Modules | Deno</title>
       </Head>
       <CookieBanner />
-      <div className="bg-gray">
-        <Header subtitle="Third Party Modules" />
+      <div className="bg-gray dark:bg-black-700">
+        <div className="dark:bg-black-700">
+          <Header subtitle="Third Party Modules" />
+        </div>
         <RegistryInstructions
           isOpen={overlayOpen}
           close={() => setOverlayOpen(false)}
         />
         <div>
           <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8">
-            <dt className="text-lg leading-6 font-medium text-gray-900">
+            <dt className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
               What is deno.land/x?
             </dt>
             <dd className="mt-2">
-              <p className="text-base leading-6 text-gray-500">
+              <p className="text-base leading-6 text-gray-500 dark:text-gray-200">
                 <span className="font-semibold">deno.land/x</span> is a hosting
                 service for Deno scripts. It caches releases of open source
                 modules stored on GitHub and serves them at one easy to remember
@@ -111,7 +113,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
             </label>
             <input
               id="query"
-              className="block w-full px-4 py-2 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1"
+              className="block w-full px-4 py-2 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1 dark:bg-black-800 dark:border-black-900 dark:focus:border-black-950 dark:hover:border-black-950 dark:hover-black-950 dark:text-gray-100"
               type="text"
               placeholder={
                 !resp ? "Search" : `Search through ${resp.totalCount} modules`
@@ -122,13 +124,13 @@ function ThirdPartyRegistryList(): React.ReactElement {
           </div>
           <div className="sm:max-w-screen-lg sm:mx-auto sm:px-6 md:px-8 pb-4 sm:pb-12">
             {resp === undefined ? (
-              <div className="bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4">
+              <div className="bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4 dark:bg-black-800 dark:border-black-900">
                 <ul>
                   {Array(20)
                     .fill(null)
                     .map((_, i) => (
                       <li
-                        className={i !== 0 ? "border-t border-gray-200" : ""}
+                        className={i !== 0 ? "border-t border-black-950" : ""}
                         key={i}
                       >
                         <div className="flex items-center px-4 sm:px-6 py-4">
@@ -138,14 +140,14 @@ function ThirdPartyRegistryList(): React.ReactElement {
                                 <div className="h-3 bg-blue-100 w-1/3 sm:w-1/5 md:w-1/6"></div>
                               </div>
                               <div className="mt-1 flex items-center">
-                                <div className="h-3 bg-gray-100 w-5/6 sm:w-4/5 md:w-3/4"></div>
+                                <div className="h-3 bg-gray-100 w-5/6 sm:w-4/5 md:w-3/4 dark:bg-black-800"></div>
                               </div>
                             </div>
                           </div>
                           <div className="ml-6 mr-4 flex items-center">
-                            <div className="h-3 bg-gray-100 w-4"></div>
+                            <div className="h-3 bg-gray-100 w-4 dark:bg-black-800"></div>
                             <svg
-                              className="ml-1 text-gray-100 w-5 h-5"
+                              className="ml-1 text-gray-100 w-5 h-5 dark:text-black-600"
                               fill="currentColor"
                               viewBox="0 0 20 20"
                             >
@@ -170,9 +172,9 @@ function ThirdPartyRegistryList(): React.ReactElement {
                       </li>
                     ))}
                 </ul>
-                <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+                <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6 dark:bg-black-800 dark:border-black-600">
                   <div className="flex-1 flex justify-between items-center sm:hidden">
-                    <button className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-gray-100 text-sm leading-5 font-medium rounded-md bg-white">
+                    <button className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-gray-100 text-sm leading-5 font-medium rounded-md bg-white dark:bg-black-800">
                       Previous
                     </button>
                     <div className="text-base leading-6 text-gray-500">

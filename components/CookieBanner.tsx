@@ -13,11 +13,11 @@ export function CookieBanner(): React.ReactElement {
       {cookieBanner ? (
         <></>
       ) : (
-        <div className="bg-black">
+        <div className="bg-black dark:bg-black-950">
           <div className="max-w-screen-xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between flex-wrap">
               <div className="w-0 flex-1 flex items-center">
-                <p className="ml-3 font-medium text-white">
+                <p className="ml-3 font-medium text-white dark:text-gray-100">
                   <span className="md:hidden">
                     We make use of functional cookies.
                   </span>
