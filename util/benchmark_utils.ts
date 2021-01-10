@@ -27,6 +27,7 @@ export interface BenchmarkRun {
   binary_size?: BenchmarkVariantsResultSet | number;
   max_memory?: BenchmarkVariantsResultSet | number;
   bundle_size?: BenchmarkVariantsResultSet;
+  cargo_deps?: BenchmarkVariantsResultSet;
   max_latency?: BenchmarkVariantsResultSet;
   req_per_sec?: BenchmarkVariantsResultSet;
   req_per_sec_proxy?: BenchmarkVariantsResultSet;
@@ -254,6 +255,7 @@ export interface BenchmarkData {
   threadCount: Column[];
   syscallCount: Column[];
   bundleSize: Column[];
+  cargoDeps: Column[];
   sha1List: string[];
 }
 
@@ -289,6 +291,7 @@ export function reshape(data: BenchmarkRun[]): BenchmarkData {
     threadCount: createThreadCountColumns(data),
     syscallCount: createSyscallCountColumns(data),
     bundleSize: createColumns(data, "bundle_size"),
+    cargoDeps: createColumns(data, "cargo_deps"),
     sha1List: data.map((d) => d.sha1),
   };
 }
