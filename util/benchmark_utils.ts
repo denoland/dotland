@@ -87,7 +87,7 @@ function createColumns1(
   return [
     {
       name: benchmarkName,
-      data: data.map((d) => d[benchmarkName]),
+      data: data.map((d) => d[benchmarkName] as number),
     },
   ];
 }
