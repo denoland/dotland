@@ -485,7 +485,8 @@ function Benchmarks(): React.ReactElement {
                   yTickFormat={formatMB}
                 />
                 <p className="mt-1">
-                  We track the size of various files here. "deno" is the release binary.
+                  We track the size of various files here. "deno" is the release
+                  binary.
                 </p>
               </div>
               <div className="mt-8">
