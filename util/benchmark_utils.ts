@@ -87,13 +87,9 @@ function createColumns1(
   return [
     {
       name: benchmarkName,
-      data: data.map((d) => {
-        d = d as any;
-        if (d[benchmarkName] != null) {
-          return d[benchmarkName] as any;
-        }
-        return null;
-      }),
+      data: data.map((d) =>
+        d[benchmarkName] ? (d[benchmarkName] as number) : null
+      ),
     },
   ];
 }
