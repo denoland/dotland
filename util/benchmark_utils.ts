@@ -27,6 +27,7 @@ export interface BenchmarkRun {
   binary_size?: BenchmarkVariantsResultSet | number;
   max_memory?: BenchmarkVariantsResultSet | number;
   bundle_size?: BenchmarkVariantsResultSet;
+  cargo_deps?: BenchmarkVariantsResultSet;
   max_latency?: BenchmarkVariantsResultSet;
   req_per_sec?: BenchmarkVariantsResultSet;
   req_per_sec_proxy?: BenchmarkVariantsResultSet;
@@ -76,6 +77,21 @@ function createColumns(
       return null;
     }),
   }));
+}
+
+// For columns that have just a single variety
+function createColumns1(
+  data: BenchmarkRun[],
+  benchmarkName: BenchmarkName
+): Column[] {
+  return [
+    {
+      name: benchmarkName,
+      data: data.map((d) =>
+        d[benchmarkName] ? (d[benchmarkName] as number) : null
+      ),
+    },
+  ];
 }
 
 export function createNormalizedColumns(
@@ -254,6 +270,7 @@ export interface BenchmarkData {
   threadCount: Column[];
   syscallCount: Column[];
   bundleSize: Column[];
+  cargoDeps: Column[];
   sha1List: string[];
 }
 
@@ -289,6 +306,7 @@ export function reshape(data: BenchmarkRun[]): BenchmarkData {
     threadCount: createThreadCountColumns(data),
     syscallCount: createSyscallCountColumns(data),
     bundleSize: createColumns(data, "bundle_size"),
+    cargoDeps: createColumns1(data, "cargo_deps"),
     sha1List: data.map((d) => d.sha1),
   };
 }
