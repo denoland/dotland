@@ -79,6 +79,19 @@ function createColumns(
   }));
 }
 
+// For columns that have just a single variety
+function createColumns1(
+  data: BenchmarkRun[],
+  benchmarkName: BenchmarkName
+): Column[] {
+  return [
+    {
+      name: benchmarkName,
+      data: data.map((d) => d[benchmarkName]),
+    },
+  ];
+}
+
 export function createNormalizedColumns(
   data: BenchmarkRun[],
   benchmarkName: BenchmarkName,
@@ -291,7 +304,7 @@ export function reshape(data: BenchmarkRun[]): BenchmarkData {
     threadCount: createThreadCountColumns(data),
     syscallCount: createSyscallCountColumns(data),
     bundleSize: createColumns(data, "bundle_size"),
-    cargoDeps: createColumns(data, "cargo_deps"),
+    cargoDeps: createColumns1(data, "cargo_deps"),
     sha1List: data.map((d) => d.sha1),
   };
 }
