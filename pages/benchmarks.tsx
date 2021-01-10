@@ -524,7 +524,6 @@ function Benchmarks(): React.ReactElement {
                 <BenchmarkOrLoading
                   data={data}
                   columns={data?.cargoDeps}
-                  yLabel={"total dependencies"}
                 />
               </div>
             </div>
