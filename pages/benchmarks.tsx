@@ -521,10 +521,7 @@ function Benchmarks(): React.ReactElement {
                     Cargo Dependencies
                   </h5>
                 </a>{" "}
-                <BenchmarkOrLoading
-                  data={data}
-                  columns={data?.cargoDeps}
-                />
+                <BenchmarkOrLoading data={data} columns={data?.cargoDeps} />
               </div>
             </div>
           </div>
