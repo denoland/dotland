@@ -169,7 +169,7 @@ of the SWC JavaScript parser.
 
 This month we made a hard decision to
 [convert our internal runtime code from TypeScript to JavaScript](https://github.com/denoland/deno/pull/6793).
-There were several factors that leads us to this decision: Complicated and slow
+There were several factors that led us to this decision: Complicated and slow
 build process on each build of the deno internal runtime code was typechecked
 and bundled before being
 [snapshotted](https://v8.dev/blog/custom-startup-snapshots). We had two separate
@@ -196,14 +196,14 @@ Original post: https://deno.land/posts/registry2
 
 August 3, we released a new [deno.land/x](https://deno.land/x) registry that
 uses webhooks to integrate with GitHub. When a module is updated our system
-downloads and forever presevers the source code, so that we have can rely on
+downloads and forever preserves the source code, so that we have can rely on
 immutable source code links.
 
 Due to some non-public work happening to use the Deno infrastrucutre, we began
 the effort to break the Deno system up into smaller "op crate" which could be
 mixed and matched to produce custom V8 runtimes. First steps were taken towards
 this in August, and the [deno_web crate](https://crates.io/crates/deno_web) was
-released providing some basic web APIs like Event, TextEncoder, TextDecoder.
+released providing some basic web APIs like `Event`, `TextEncoder`, `TextDecoder`.
 
 This month the benchmark system was rewritten in Rust; which marked the start of
 tedious efforts of reducing the number of build dependencies for the Deno
@@ -263,8 +263,6 @@ compilation pipeline. It improved the speed of TypeScript transpilation even
 more, but most importantly paid off a lot of technical debt.
 
 The [deno_crypto op crate](https://crates.io/crates/deno_crypto) was added.
-
-Simplify tooling in the repo
 
 **Releases that month:** 1.5.2, 1.5.3, 1.5.4
 
