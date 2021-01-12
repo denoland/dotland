@@ -4,7 +4,7 @@
 of low level infrastructure, through API stabilizations, 1.0 release, more
 overhauls of major parts of the system, wrapping up the year by shipping the
 single most requested feature. Read on for the 2020 year review in the Deno
-project0.
+project.
 
 ### January: Goodbye libdeno, hello rusty_v8
 
@@ -60,7 +60,7 @@ and `deno test` CLI subcommand which made testing in Deno first class citizen.
 
 Missing Chrome Devtools support was a major blocker for the 1.0 release. A lot
 of effort was spent adding support for V8 debugger and ability to connect to
-Deno process using Chrome Devtools…
+Deno process using Chrome Devtool
 
 Two new subcommands were added to the CLI:
 
@@ -232,7 +232,7 @@ release every six weeks, matching the Rust and Chrome projects.
 - [1.4.1](https://github.com/denoland/deno/releases/tag/v1.4.1)
 - [1.4.2](https://github.com/denoland/deno/releases/tag/v1.4.2)
 
-### October: REPL revamp, improved(\*) bundling, isolatedModules by default
+### October: REPL revamp, improved bundling, isolatedModules by default
 
 [1.5.0 blog post](https://deno.land/posts/v1.5)
 
