@@ -237,12 +237,12 @@ release every six weeks, matching the Rust and Chrome projects.
 [1.5.0 blog post](https://deno.land/posts/v1.5)
 
 The biggest changed that happened in this month was enabling `isolateModules`
-option in TypeScript compiler host by default. This setting changes the
-behavior of TypeScript in such a way that ensures that each file can be
-transpiled in isolation (without knowledge of types and/or other modules) by
-tools other than TSC like SWC and Babel. This change had a significant impact on
-the module ecosystem, making some popular modules unusable until maintainers
-adjusted the code to work with `isolatedModules`.
+option in TypeScript compiler host by default. This setting changes the behavior
+of TypeScript in such a way that ensures that each file can be transpiled in
+isolation (without knowledge of types and/or other modules) by tools other than
+TSC like SWC and Babel. This change had a significant impact on the module
+ecosystem, making some popular modules unusable until maintainers adjusted the
+code to work with `isolatedModules`.
 
 This month we also adopted the new bundle feature in SWC, yet another step in
 the direction of using Rust over the original TypeScript compiler.
