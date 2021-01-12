@@ -244,6 +244,9 @@ maintainers adjusted the code to work with `isolatedModules`. We still firmly
 believe that it way the right step to take to ensure a certain "Deno" flavor of
 TypeScript that works out of the box.
 
+Other major change was switching bundling system to use `swc` instead of `TypeScript`.
+(add)
+
 **Releases that month:**
 
 - [1.4.3](https://github.com/denoland/deno/releases/tag/v1.4.3)
@@ -255,6 +258,8 @@ TypeScript that works out of the box.
 
 ### November: Grand rewrite of TSC compiler infrastructure
 
+This month we saw a conclusion to a multi month project of rewrite compilation 
+pipeline. It had severe impacts on the speed of TypeScript transpilation. 
 In November we wrapped up multi-month rewrite of TypeScript compiler host; which
 resulted in even more work being done in Rust instead of JavaScript.
 
