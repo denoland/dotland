@@ -1,9 +1,10 @@
 # Deno in 2020
 
-2020 brought a lot of action to the Deno project. Starting with major refactor
-of low level infrastructure, through API stabilizations, 1.0 release, overhauls
-of major parts of the system, wrapping up the year by shipping the single most
-requested feature. Buckle up for 2020 rewind in Deno!
+2020 brought a lot of action to the Deno project. Starting with a major refactor
+of low level infrastructure, through API stabilizations, 1.0 release, more
+overhauls of major parts of the system, wrapping up the year by shipping the
+single most requested feature. Read on for the 2020 year review in the Deno
+project0.
 
 ### January: Goodbye libdeno, hello rusty_v8
 
@@ -13,10 +14,11 @@ functionality. The situation led to the birth of `rusty_v8` in fall of 2019.
 [`rusty_v8`](https://github.com/denoland/rusty_v8) is a Rust crate that provides
 Rust API for V8 engine. By December `rusty_v8` had all required bindings to
 replace `libdeno`. The effort started at the end of 2019, where the first parts
-of `libdeno` were rewritten using `rusty_v8`. Thanks to a lot of tests in the
-Deno codebase we were confident moving forward and wrapped up the effort in a
-fortnight. `libdeno` was completely removed in release 0.29.0 and since then
-`rusty_v8` has undergone major refactors to type safety of the bindings.
+of `libdeno` were rewritten using `rusty_v8`. Thanks to the growing test
+coverage in the Deno codebase we were confident moving forward and wrapped up
+the effort in a fortnight. `libdeno` was completely removed in release 0.29.0
+and since then `rusty_v8` has undergone major refactors to type safety of the
+bindings.
 
 **Releases that month:**
 
@@ -29,17 +31,19 @@ fortnight. `libdeno` was completely removed in release 0.29.0 and since then
 ### February: deno fmt now uses dprint, deno test subcommand
 
 This month we changed `deno fmt` drastically. Up to this point `deno fmt` was a
-simple subcommand that under the hood was only an alias to "den" run” that
-pointed to `prettier` module in the standard library. It meant that on the first
-run of `deno fmt` after each upgrade; users had to download the latest version
-of the `prettier` module. This situation didn’t feel right as the promised to
-have those tools out of the box. `prettier` module was also pretty slow and the
-performance left a lot to be asked.
+simple subcommand that under the hood was only an alias to "deno run" that
+pointed to `prettier`. It meant that on the first run of `deno fmt` and after
+each upgrade, users had to download the latest version of the `prettier` module.
+This situation didn’t feel right as Deno promised to provide these tools out of
+the box. `prettier` was also pretty slow and the performance left a lot to be
+asked.
 
-We got introduced to [`dprint`](https://dprint.dev/) by David Sherret, a code
-formatter written in Rust. `dprint` could format the code the same way the
-"prettier" module did but it was orders of magnitude faster. After some
-preliminary testing we decided to `dprint` in `deno fmt`.
+We got introduced to [`dprint`](https://dprint.dev/) by
+[David Sherret](https://github.com/dsherret), a code formatter written in Rust
+and based on the SWC JavaScript parser by
+[Kang Dong Yun](https://github.com/kdy1). `dprint` could format the code the
+same way the "prettier" module did but it was orders of magnitude faster. After
+some preliminary testing we decided to use `dprint` in `deno fmt`.
 
 `deno test` had the same requirement of downloading modules from the standard
 library on the first run. That led to the addition of a new `Deno.test()` API
@@ -52,9 +56,7 @@ and `deno test` CLI subcommand which made testing in Deno first class citizen.
 - [0.34.0](https://github.com/denoland/deno/releases/tag/v0.34.0)
 - [0.35.0](https://github.com/denoland/deno/releases/tag/v0.35.0)
 
-### March: v8 debugger, deno doc, deno upgrade
-
-Set 1.0 release date (or was it in Feb?)
+### March: V8 debugger, deno doc, deno upgrade
 
 Missing Chrome Devtools support was a major blocker for the 1.0 release. A lot
 of effort was spent adding support for V8 debugger and ability to connect to
@@ -65,11 +67,14 @@ Two new subcommands were added to the CLI:
 - `deno doc`
 - `deno upgrade`
 
-We also saw a huge improvement to the build process. Up to this point, each
-build of the `deno`, V8 engine was built from source. V8 is a huge C++ project
-that can easily take 30 minutes to build. Thanks to the changes in `rusty_v8`
-and the deno build process we were able to cut compile times to a couple
-minutes, speeding up the development cycle significantly.
+We also saw a huge improvement to the build process. Up to this point, V8 was
+built from source for each and every build of Deno. V8 is a massive C++ project
+that can easily take over 30 minutes to build. Despite lots of build caches and
+other tricks, it was continuously a difficulty for us to contend with. We added
+the ability for `rusty_v8` to produce and download a pre-built static lib on
+Github releases, allowing Deno builds to bypass the V8 build completely. This
+simplified and sped up the build in CI, but most importantly allowed
+contributors to build Deno more easily.
 
 **Releases that month:**
 
@@ -78,14 +83,14 @@ minutes, speeding up the development cycle significantly.
 - [0.37.1](https://github.com/denoland/deno/releases/tag/v0.37.1)
 - [0.38.0](https://github.com/denoland/deno/releases/tag/v0.38.0)
 
-### April: Break all the APIs or the grand stabilization
+### April: Break all the APIs for the grand stabilization
 
-This month was spent on reviewing APIs in `Deno` global which lead to breaking
-changes in many APIs. We leaned on the "safe" side so any API that didn’t "feel"
-right at that moment was made unstable or completely removed.
+This month was spent on reviewing APIs in `Deno` global in preperation for the
+1.0 release. This lead to many breaking changes. We were conservative, so any
+APIs that we were unsure of were moved behind the unstable flag.
 
-This was the major commitment for 1.0 release; `Deno` APIs marked as stable
-won’t have breaking changes until 2.0 release.
+This was the major commitment for the 1.0 release; the Deno APIs marked as
+stable won’t have breaking changes until 2.0 release.
 
 This month marked the last 0.x.y release of Deno.
 
@@ -111,22 +116,17 @@ imports, import assertion are now at Stage 3 and we plan to bring back those
 imports into Deno soon) or would place additional maintenance burden (Rust API
 for `deno` crate).
 
-And then May, 13th came. We prepared the release as always. Reviewd, merged,
-tagged. Thirty minutes waiting for CI pipeline to pass. It passed, binaries were
-ready to ship. So we shipped. Exactly two years after
-[Ryan's original presentation](https://www.youtube.com/watch?v=M3BM9TB-8yA) that
-introduced Deno to the world, Deno 1.0 was released.
+Finally on May 13, exactly two years after
+[Ryan's original Deno presentation](https://www.youtube.com/watch?v=M3BM9TB-8yA),
+we cut the 1.0.
 
-Link to original post: https://deno.land/v1
+https://deno.land/v1 our blog post was shared widely, we garnered many new users
+and contributors.
 
-And then it all exploded... There was a massive interest coming the community,
-with almost a hundred issues opened in a 48 hour window post-release. The
-development did not slow down, releasing `1.0.1` just a week after.
-
-The release dust hasn't yet settled and we were back to work on another major
-component of the runtime; the dependency analysis in TypeScript host was
-rewritten using [`swc`](https://swc.rs/). This changed marked the beginning of
-efforts to rewrite TypeScript compiler host (or some parts of it) in Rust.
+The release dust had barely settled before we were back to work on another major
+component of the runtime: the dependency analysis in TypeScript host was
+rewritten using [SWC](https://swc.rs/). This changed marked the beginning of
+efforts to rewrite parts of our TypeScript infrastructure in Rust.
 
 **Releases that month:**
 
@@ -244,8 +244,8 @@ maintainers adjusted the code to work with `isolatedModules`. We still firmly
 believe that it way the right step to take to ensure a certain "Deno" flavor of
 TypeScript that works out of the box.
 
-Other major change was switching bundling system to use `swc` instead of `TypeScript`.
-(add)
+Other major change was switching bundling system to use `swc` instead of
+`TypeScript`. (add)
 
 **Releases that month:**
 
@@ -258,9 +258,9 @@ Other major change was switching bundling system to use `swc` instead of `TypeSc
 
 ### November: Grand rewrite of TSC compiler infrastructure
 
-This month we saw a conclusion to a multi month project of rewrite compilation 
-pipeline. It had severe impacts on the speed of TypeScript transpilation. 
-In November we wrapped up multi-month rewrite of TypeScript compiler host; which
+This month we saw a conclusion to a multi month project of rewrite compilation
+pipeline. It had severe impacts on the speed of TypeScript transpilation. In
+November we wrapped up multi-month rewrite of TypeScript compiler host; which
 resulted in even more work being done in Rust instead of JavaScript.
 
 `deno_crypto` op crate
