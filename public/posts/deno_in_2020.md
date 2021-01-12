@@ -120,10 +120,11 @@ Finally on May 13, exactly two years after
 [Ryan's original Deno presentation](https://www.youtube.com/watch?v=M3BM9TB-8yA),
 we cut the 1.0.
 
-https://deno.land/v1 our blog post was shared widely, we garnered many new users
+On social media, the release was very well received. Our
+[blog post](https://deno.land/v1) was shared widely, we gained many new users
 and contributors.
 
-The release dust had barely settled before we were back to work on another major
+But the dust had barely settled before we were back to work on another major
 component of the runtime: the dependency analysis in TypeScript host was
 rewritten using [SWC](https://swc.rs/). This changed marked the beginning of
 efforts to rewrite parts of our TypeScript infrastructure in Rust.
@@ -142,17 +143,19 @@ efforts to rewrite parts of our TypeScript infrastructure in Rust.
 
 One of major complaints received from community after 1.0 release was that
 TypeScript compliation and type-checking are extremely slow. There we set our
-eyes on upgrading out TS compiler host to support incremental typechecking.
-After a few trial and error PRs we were able to get functionality working and
+eyes on improving out TSC integration to support incremental typechecking. After
+a few trial and error PRs we were able to get functionality working and
 significantly improvement development loop time. Even though we managed to
-improvement type checking speed by leveraging TS compiler's incremental APIs we
-were still relying on it to emit transpiled sources. The transpilation step
-contributed a significant time slice to the overall compilation pipeline.
-(reword)
+improvement type checking speed by leveraging TSC's incremental APIs we were
+still relying on it to emit transpiled sources. One of the great design
+principles of TypeScript is that it's just JavaScript with additional syntax, so
+stripping out the type information (transpiling to JavaScript) is a relatively
+easy operation. So we set the goal of being able to use SWC in Rust to do
+transpilation, while continuing to use TSC for type checking.
 
 After a few months of development out of sight, in a separate repository, a new
 `deno lint` subcommand was added. It's yet another project that is built on top
-of `swc`.
+of the SWC JavaScript parser.
 
 **Releases that month:**
 
@@ -164,23 +167,21 @@ of `swc`.
 
 ### July: Converting internal runtime code from TypeScript to JavaScript
 
-This month we made a hard decision to convert internal runtime code from
-TypeScript to JavaScript. There were several factors that leads us to this
-decision: Complicated and slow build process On each build of deno internal
-runtime code was typechecked and bundled before being "snapshotted" (link to v8
-snapshot article). We had two separate implementations of TypeScript compiler
-host. One just for the build step, which was a `deno_typescript` crate. The
-other one included in the `deno` binary. Additionally the whole process had a
-significant impact on the build times leading to 2 minute incremental rebuild.
-Reducing the size and of runtime and taking control of what goes there All
-runtime code was written as ES modules in TypeScript. Because the actual
-JavaScript code was produced by TypeScript compiler as a single file bundle, we
-had very little control of what the output code would look like. ES modules were
-transformed to use SystemJS loader in the bundle which added significant amount
-of code to the final bundle.
-
-Next steps towards rewriting TypeScript compiler host in Rust by using `swc` to
-transpile TS source into JS source when `--no-check` flag was present.
+This month we made a hard decision to
+[convert our internal runtime code from TypeScript to JavaScript](https://github.com/denoland/deno/pull/6793).
+There were several factors that leads us to this decision: Complicated and slow
+build process on each build of the deno internal runtime code was typechecked
+and bundled before being
+[snapshotted](https://v8.dev/blog/custom-startup-snapshots). We had two separate
+implementations of TypeScript compiler host. One just for the build step, which
+was called the `deno_typescript` crate. The other one included in the `deno`
+binary. Additionally the whole process had a significant impact on the build
+times: 2 minutes incremental rebuilds! By using plain old JavaScript we were
+able to vastly simplify the internal build dependencies and overall complexity.
+Because the actual JavaScript code was produced by TypeScript compiler as a
+single file bundle, we had very little control of what the output code would
+look like. ES modules were transformed to use SystemJS loader in the bundle
+which added significant amount of code to the final bundle.
 
 **Releases that month:**
 
@@ -193,17 +194,20 @@ transpile TS source into JS source when `--no-check` flag was present.
 
 Original post: https://deno.land/posts/registry2
 
-August 3, we released a new registry that uses webhooks. you can probably copy
-some text from
+August 3, we released a new [deno.land/x](https://deno.land/x) registry that
+uses webhooks to integrate with GitHub. When a module is updated our system
+downloads and forever presevers the source code, so that we have can rely on
+immutable source code links.
 
-First steps towards "op crates" were taken and `deno_web` was born. The whole
-idea of op crates is to modularize parts of the Deno runtime into separate Rust
-crates. This approach allows to build custom runtimes based on Deno code, but
-using only those APIs that are of interest.
+Due to some non-public work happening to use the Deno infrastrucutre, we began
+the effort to break the Deno system up into smaller "op crate" which could be
+mixed and matched to produce custom V8 runtimes. First steps were taken towards
+this in August, and the [deno_web crate](https://crates.io/crates/deno_web) was
+released providing some basic web APIs like Event, TextEncoder, TextDecoder.
 
 This month the benchmark system was rewritten in Rust; which marked the start of
 tedious efforts of reducing the number of build dependencies for the Deno
-project. Deno depended on Python 2, node.js...
+project.
 
 **Releases that month:**
 
@@ -214,12 +218,12 @@ project. Deno depended on Python 2, node.js...
 
 ### September: WebSocket API, CSS styling in console, file watcher, test coverage
 
-This month we shipped our biggest feature release to date, with detailed
-description in 1.4.0 blog post: https://deno.land/posts/v1.4
+This month we shipped our biggest feature release since 1.0. More details in
+[the 1.4.0 blog post](https://deno.land/posts/v1.4).
 
 There was another imporant change on the maintaince part of the project. The
 release schedule was changed, from monthly minor release, to shipping new minor
-release every six weeks, similarly to Rust or Chrome projects.
+release every six weeks, matching the Rust and Chrome projects.
 
 **Releases that month:**
 
@@ -230,22 +234,18 @@ release every six weeks, similarly to Rust or Chrome projects.
 
 ### October: REPL revamp, improved(\*) bundling, isolatedModules by default
 
-Not really, everything broke, but oh well
+[1.5.0 blog post](https://deno.land/posts/v1.5)
 
-1.5.0 blog post: https://deno.land/posts/v1.5
-
-The biggest changed that happened in this months was enabling `isolateModules`
+The biggest changed that happened in this month was enabling `isolateModules`
 option in TypeScript compiler host by default. This settings changes the
 behavior of TypeScript in such a way that ensures that each file can be
 transpiled in isolation (without knowledge of types and/or other modules) by
-tools other than TypeScript, eg. `babel`, `swc`. This change had a significant
-impact on the module ecosystem, making some popular modules unusable until
-maintainers adjusted the code to work with `isolatedModules`. We still firmly
-believe that it way the right step to take to ensure a certain "Deno" flavor of
-TypeScript that works out of the box.
+tools other than TSC like SWC and Babel. This change had a significant impact on
+the module ecosystem, making some popular modules unusable until maintainers
+adjusted the code to work with `isolatedModules`.
 
-Other major change was switching bundling system to use `swc` instead of
-`TypeScript`. (add)
+This month we also adopted the new bundle feature in SWC, yet another step in
+the direction of using Rust over the original TypeScript compiler.
 
 **Releases that month:**
 
@@ -258,12 +258,11 @@ Other major change was switching bundling system to use `swc` instead of
 
 ### November: Grand rewrite of TSC compiler infrastructure
 
-This month we saw a conclusion to a multi month project of rewrite compilation
-pipeline. It had severe impacts on the speed of TypeScript transpilation. In
-November we wrapped up multi-month rewrite of TypeScript compiler host; which
-resulted in even more work being done in Rust instead of JavaScript.
+This month we saw a conclusion to Kitson Kelly's weeks-long project of rewrite
+compilation pipeline. It improved the speed of TypeScript transpilation even
+more, but most importantly paid off a lot of technical debt.
 
-`deno_crypto` op crate
+The [deno_crypto op crate](https://crates.io/crates/deno_crypto) was added.
 
 Simplify tooling in the repo
 
@@ -271,7 +270,7 @@ Simplify tooling in the repo
 
 ### December: Self-contained binaries and LSP
 
-1.6.0 blog post: https://deno.land/posts/v1.6
+[1.6.0 blog post](https://deno.land/posts/v1.6)
 
 In December we released version 1.6 containing two milestone features:
 self-contained binaries and the language server. `deno compile` was single most
