@@ -203,7 +203,8 @@ Due to some non-public work happening to use the Deno infrastrucutre, we began
 the effort to break the Deno system up into smaller "op crate" which could be
 mixed and matched to produce custom V8 runtimes. First steps were taken towards
 this in August, and the [deno_web crate](https://crates.io/crates/deno_web) was
-released providing some basic web APIs like `Event`, `TextEncoder`, `TextDecoder`.
+released providing some basic web APIs like `Event`, `TextEncoder`,
+`TextDecoder`.
 
 This month the benchmark system was rewritten in Rust; which marked the start of
 tedious efforts of reducing the number of build dependencies for the Deno
@@ -278,9 +279,6 @@ Providing built-in language server allows to provide great development
 experience to all editors that can talk LSP protocol. It leads to third revamp
 of vscode_code that is still work-in-progress.
 
-TypeScript 4.1 (add to previous months when TS was bumped) Canary builds
-Deno_runtime crate - build your own deno
-
 **Releases that month:**
 
 - [1.6.0](https://github.com/denoland/deno/releases/tag/v1.6.0)
@@ -291,6 +289,17 @@ Deno_runtime crate - build your own deno
 ### 2021
 
 We've seen a lot of growth in the project and community in 2020 and going into
-2021 we feel strongly about momentum behind Deno.
+2021 we feel strongly about momentum behind Deno; to keep track progress in Q1
+make sure to [see our roadmap](https://github.com/denoland/deno/issues/8824).
+
+All contributions are greatly appreciated! If you're interested in contributing
+to Deno there are two major areas that would greatly benefit from the community
+effort in this quarter:
+
+- expanding multi editor support by adding
+  [new language server capabilities](https://github.com/denoland/deno/issues/8643)
+
+- ensuring Web compatibility by using
+  [Web Platform Test suite](https://github.com/denoland/deno/issues/9001)
 
 Stay tuned for some exciting announcements coming soon!
