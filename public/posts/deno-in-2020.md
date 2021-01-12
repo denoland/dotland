@@ -110,11 +110,10 @@ Beginning of the month marked removal of various features:
 - `window.location` API
 - Rust API for `deno` crate
 
-The reason for that was we didn't want to commit to supporting those APIs in the
-current form either because of lacking underlying specification (JSON/WASM
-imports, import assertion are now at Stage 3 and we plan to bring back those
-imports into Deno soon) or would place additional maintenance burden (Rust API
-for `deno` crate).
+The reason for removal was we that didn't want to commit to supporting APIs in
+the current form either because of: lacking underlying specification in case of
+JSON/WASM imports; or additional maintenance burden in case of Rust API for
+`deno` crate.
 
 Finally on May 13, exactly two years after
 [Ryan's original Deno presentation](https://www.youtube.com/watch?v=M3BM9TB-8yA),
@@ -290,8 +289,9 @@ of vscode_code that is still work-in-progress.
 ### 2021
 
 We've seen a lot of growth in the project and community in 2020 and going into
-2021 we feel strongly about momentum behind Deno; to keep track progress in Q1
-make sure to [see our roadmap](https://github.com/denoland/deno/issues/8824).
+2021 we feel strongly about momentum behind Deno; to keep track of progress in
+Q1 make sure to
+[follow our roadmap](https://github.com/denoland/deno/issues/8824).
 
 All contributions are greatly appreciated! If you're interested in contributing
 to Deno there are two major areas that would greatly benefit from the community
