@@ -259,9 +259,10 @@ the direction of using Rust over the original TypeScript compiler.
 
 ### November: Grand rewrite of TSC compiler infrastructure
 
-This month we saw a conclusion to Kitson Kelly's weeks-long project of rewrite
-compilation pipeline. It improved the speed of TypeScript transpilation even
-more, but most importantly paid off a lot of technical debt.
+This month we saw a conclusion to [Kitson Kelly's](https://github.com/kitsonk)
+weeks-long project of rewrite compilation pipeline. It improved the speed of
+TypeScript transpilation even more, but most importantly paid off a lot of
+technical debt.
 
 The [deno_crypto op crate](https://crates.io/crates/deno_crypto) was added.
 
