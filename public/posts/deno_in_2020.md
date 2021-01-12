@@ -221,7 +221,7 @@ project.
 This month we shipped our biggest feature release since 1.0. More details in
 [the 1.4.0 blog post](https://deno.land/posts/v1.4).
 
-There was another imporant change on the maintaince part of the project. The
+There was another important change on the maintenance part of the project. The
 release schedule was changed, from monthly minor release, to shipping new minor
 release every six weeks, matching the Rust and Chrome projects.
 
