@@ -237,7 +237,7 @@ release every six weeks, matching the Rust and Chrome projects.
 [1.5.0 blog post](https://deno.land/posts/v1.5)
 
 The biggest changed that happened in this month was enabling `isolateModules`
-option in TypeScript compiler host by default. This settings changes the
+option in TypeScript compiler host by default. This setting changes the
 behavior of TypeScript in such a way that ensures that each file can be
 transpiled in isolation (without knowledge of types and/or other modules) by
 tools other than TSC like SWC and Babel. This change had a significant impact on
@@ -295,4 +295,4 @@ Deno_runtime crate - build your own deno
 We've seen a lot of growth in the project and community in 2020 and going into
 2021 we feel strongly about momentum behind Deno.
 
-Stay tuned for some exciting annoucements coming soon!
+Stay tuned for some exciting announcements coming soon!
