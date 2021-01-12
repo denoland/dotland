@@ -1,5 +1,10 @@
 # Deno in 2020
 
+2020 brought a lot of action to the Deno project. Starting with major refactor
+of low level infrastructure, through API stabilizations, 1.0 release, overhauls
+of major parts of the system, wrapping up the year by shipping the single most
+requested feature. Buckle up for 2020 rewind in Deno!
+
 ### January: Goodbye libdeno, hello rusty_v8
 
 `libdeno` was a C++ library that facilitated an interface between V8 engine and
@@ -93,23 +98,35 @@ This month marked the last 0.x.y release of Deno.
 
 ### May: Deno 1.0 released
 
-Before 1.0 release removed some features:
+Beginning of the month marked removal of various features:
 
 - JSON imports
-- WASM imports,
-- window.location Drop "den" script.ts” shortcut
-- Remove Rust API for `deno` crate - only binary
+- WASM imports
+- `window.location` API
+- Rust API for `deno` crate
 
-  1.0 release exactly 2 years after Ryan’s
-  [initial presentation](https://www.youtube.com/watch?v=M3BM9TB-8yA).
+The reason for that was we didn't want to commit to supporting those APIs in the
+current form either because of lacking underlying specification (JSON/WASM
+imports, import assertion are now at Stage 3 and we plan to bring back those
+imports into Deno soon) or would place additional maintenance burden (Rust API
+for `deno` crate).
+
+And then May, 13th came. We prepared the release as always. Reviewd, merged,
+tagged. Thirty minutes waiting for CI pipeline to pass. It passed, binaries were
+ready to ship. So we shipped. Exactly two years after
+[Ryan's original presentation](https://www.youtube.com/watch?v=M3BM9TB-8yA) that
+introduced Deno to the world, Deno 1.0 was released.
 
 Link to original post: https://deno.land/v1
 
-Did not slow down and kept to a weekly patch release cycle; and monthly minor
-releases.
+And then it all exploded... There was a massive interest coming the community,
+with almost a hundred issues opened in a 48 hour window post-release. The
+development did not slow down, releasing `1.0.1` just a week after.
 
-Dependency analysis in TypeScript host was rewritten using `swc`. This marks the
-beginning rewriting TypeScript compiler host in Rust.
+The release dust hasn't yet settled and we were back to work on another major
+component of the runtime; the dependency analysis in TypeScript host was
+rewritten using [`swc`](https://swc.rs/). This changed marked the beginning of
+efforts to rewrite TypeScript compiler host (or some parts of it) in Rust.
 
 **Releases that month:**
 
@@ -121,10 +138,21 @@ beginning rewriting TypeScript compiler host in Rust.
 - [1.0.2](https://github.com/denoland/deno/releases/tag/v1.0.2)
 - [1.0.3](https://github.com/denoland/deno/releases/tag/v1.0.3)
 
-### June: deno lint released and incremental TS compilation
+### June: Incremental type checking and `deno lint`
 
-Incremental compilation of TypeScript significantly cut down time needed to
-recheck projects...
+One of major complaints received from community after 1.0 release was that
+TypeScript compliation and type-checking are extremely slow. There we set our
+eyes on upgrading out TS compiler host to support incremental typechecking.
+After a few trial and error PRs we were able to get functionality working and
+significantly improvement development loop time. Even though we managed to
+improvement type checking speed by leveraging TS compiler's incremental APIs we
+were still relying on it to emit transpiled sources. The transpilation step
+contributed a significant time slice to the overall compilation pipeline.
+(reword)
+
+After a few months of development out of sight, in a separate repository, a new
+`deno lint` subcommand was added. It's yet another project that is built on top
+of `swc`.
 
 **Releases that month:**
 
@@ -168,7 +196,10 @@ Original post: https://deno.land/posts/registry2
 August 3, we released a new registry that uses webhooks. you can probably copy
 some text from
 
-First op crate (deno_web) FIXME
+First steps towards "op crates" were taken and `deno_web` was born. The whole
+idea of op crates is to modularize parts of the Deno runtime into separate Rust
+crates. This approach allows to build custom runtimes based on Deno code, but
+using only those APIs that are of interest.
 
 This month the benchmark system was rewritten in Rust; which marked the start of
 tedious efforts of reducing the number of build dependencies for the Deno
@@ -183,12 +214,12 @@ project. Deno depended on Python 2, node.js...
 
 ### September: WebSocket API, CSS styling in console, file watcher, test coverage
 
-1.4.0 blog post: https://deno.land/posts/v1.4
+This month we shipped our biggest feature release to date, with detailed
+description in 1.4.0 blog post: https://deno.land/posts/v1.4
 
-Enable isolated modules by default
-
-Change release schedule to 6-week cadence for minor releases and weekly patch
-releases
+There was another imporant change on the maintaince part of the project. The
+release schedule was changed, from monthly minor release, to shipping new minor
+release every six weeks, similarly to Rust or Chrome projects.
 
 **Releases that month:**
 
@@ -203,8 +234,15 @@ Not really, everything broke, but oh well
 
 1.5.0 blog post: https://deno.land/posts/v1.5
 
-Big step towards moving TS compilation to Rust was enabling `isolateModules` by
-default...
+The biggest changed that happened in this months was enabling `isolateModules`
+option in TypeScript compiler host by default. This settings changes the
+behavior of TypeScript in such a way that ensures that each file can be
+transpiled in isolation (without knowledge of types and/or other modules) by
+tools other than TypeScript, eg. `babel`, `swc`. This change had a significant
+impact on the module ecosystem, making some popular modules unusable until
+maintainers adjusted the code to work with `isolatedModules`. We still firmly
+believe that it way the right step to take to ensure a certain "Deno" flavor of
+TypeScript that works out of the box.
 
 **Releases that month:**
 
@@ -247,3 +285,10 @@ Deno_runtime crate - build your own deno
 - [1.6.1](https://github.com/denoland/deno/releases/tag/v1.6.1)
 - [1.6.2](https://github.com/denoland/deno/releases/tag/v1.6.2)
 - [1.6.3](https://github.com/denoland/deno/releases/tag/v1.6.3)
+
+### 2021
+
+We've seen a lot of growth in the project and community in 2020 and going into
+2021 we feel strongly about momentum behind Deno.
+
+Stay tuned for some exciting annoucements coming soon!
