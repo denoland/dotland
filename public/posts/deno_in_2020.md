@@ -126,7 +126,7 @@ and contributors.
 
 But the dust had barely settled before we were back to work on another major
 component of the runtime: the dependency analysis in TypeScript host was
-rewritten using [SWC](https://swc.rs/). This changed marked the beginning of
+rewritten using [SWC](https://swc.rs/). This change marked the beginning of
 efforts to rewrite parts of our TypeScript infrastructure in Rust.
 
 **Releases that month:**
@@ -236,7 +236,7 @@ release every six weeks, matching the Rust and Chrome projects.
 
 [1.5.0 blog post](https://deno.land/posts/v1.5)
 
-The biggest changed that happened in this month was enabling `isolateModules`
+The biggest change that happened in this month was enabling `isolatedModules`
 option in TypeScript compiler host by default. This setting changes the behavior
 of TypeScript in such a way that ensures that each file can be transpiled in
 isolation (without knowledge of types and/or other modules) by tools other than
