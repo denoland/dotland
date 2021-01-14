@@ -1,10 +1,12 @@
 # Deno in 2020
 
-2020 brought a lot of action to the Deno project. Starting with a major refactor
-of low level infrastructure, through API stabilizations, 1.0 release, more
-overhauls of major parts of the system, wrapping up the year by shipping the
-single most requested feature. Read on for the 2020 year review in the Deno
-project.
+With API stabilizations, several large infrastructure refactors, the 1.0
+release, and shipping the single most requested feature, 2020 brought a lot of
+action to the Deno project.
+
+Please fill out [the Deno survey](TODO) to help guide our development in 2021.
+
+Read on for Deno's review of the year.
 
 ### January: Goodbye libdeno, hello rusty_v8
 
@@ -288,19 +290,19 @@ of vscode_code that is still work-in-progress.
 
 ### 2021
 
-We've seen a lot of growth in the project and community in 2020 and going into
-2021 we feel strongly about momentum behind Deno; to keep track of progress in
-Q1 make sure to
-[follow our roadmap](https://github.com/denoland/deno/issues/8824).
+We've seen a lot of growth in the project and community in 2020. Going into 2021
+we feel strongly about momentum behind Deno. Stay tuned for some exciting
+announcements coming soon!
 
-All contributions are greatly appreciated! If you're interested in contributing
-to Deno there are two major areas that would greatly benefit from the community
-effort in this quarter:
+If you're interested in contributing to Deno or just want to follow our progress
+please look into the following:
 
-- expanding multi editor support by adding
+- Answer [the Deno survey](TODO).
+
+- [Reivew the Q1 roadmap](https://github.com/denoland/deno/issues/8824).
+
+- Improving IDE support by adding
   [new language server capabilities](https://github.com/denoland/deno/issues/8643)
 
-- ensuring Web compatibility by using
+- Ensuring Web compatibility by using
   [Web Platform Test suite](https://github.com/denoland/deno/issues/9001)
-
-Stay tuned for some exciting announcements coming soon!
