@@ -85,7 +85,7 @@ contributors to build Deno more easily.
 
 ### April: Break all the APIs for the grand stabilization
 
-This month was spent on reviewing APIs in `Deno` global in preperation for the
+This month was spent on reviewing APIs in `Deno` global in preparation for the
 1.0 release. This led to many breaking changes. We were conservative, so any
 APIs that we were unsure of were moved behind the `--unstable` flag.
 
@@ -141,7 +141,7 @@ efforts to rewrite parts of our TypeScript infrastructure in Rust.
 ### June: Incremental type checking and `deno lint`
 
 One of major complaints received from community after 1.0 release was that
-TypeScript compliation and type-checking are extremely slow. There we set our
+TypeScript compilation and type-checking are extremely slow. There we set our
 eyes on improving out TSC integration to support incremental typechecking. After
 a few trial and error PRs we were able to get functionality working and
 significantly improvement development loop time. Even though we managed to
@@ -198,7 +198,7 @@ uses webhooks to integrate with GitHub. When a module is updated our system
 downloads and forever preserves the source code, so that we can rely on
 immutable source code links.
 
-Due to some non-public work happening to use the Deno infrastrucutre, we began
+Due to some non-public work happening to use the Deno infrastructure, we began
 the effort to break the Deno system up into smaller "op crates" which could be
 mixed and matched to produce custom V8 runtimes. First steps were taken towards
 this in August, and the [deno_web crate](https://crates.io/crates/deno_web) was
