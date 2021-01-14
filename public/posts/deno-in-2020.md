@@ -195,7 +195,7 @@ Original post: https://deno.land/posts/registry2
 
 August 3, we released a new [deno.land/x](https://deno.land/x) registry that
 uses webhooks to integrate with GitHub. When a module is updated our system
-downloads and forever preserves the source code, so that we have can rely on
+downloads and forever preserves the source code, so that we can rely on
 immutable source code links.
 
 Due to some non-public work happening to use the Deno infrastrucutre, we began
