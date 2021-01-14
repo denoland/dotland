@@ -12,7 +12,7 @@ project.
 Rust code in Deno. The library was hard to reason about and develop additional
 functionality. The situation led to the birth of `rusty_v8` in fall of 2019.
 [`rusty_v8`](https://github.com/denoland/rusty_v8) is a Rust crate that provides
-Rust API for V8 engine. By December `rusty_v8` had all required bindings to
+API for the V8 engine. By December `rusty_v8` had all required bindings to
 replace `libdeno`. The effort started at the end of 2019, where the first parts
 of `libdeno` were rewritten using `rusty_v8`. Thanks to the growing test
 coverage in the Deno codebase we were confident moving forward and wrapped up
@@ -42,7 +42,7 @@ We got introduced to [`dprint`](https://dprint.dev/) by
 [David Sherret](https://github.com/dsherret), a code formatter written in Rust
 and based on the SWC JavaScript parser by
 [Kang Dong Yun](https://github.com/kdy1). `dprint` could format the code the
-same way the "prettier" module did but it was orders of magnitude faster. After
+same way the `prettier` module did but it was orders of magnitude faster. After
 some preliminary testing we decided to use `dprint` in `deno fmt`.
 
 `deno test` had the same requirement of downloading modules from the standard
@@ -60,7 +60,7 @@ and `deno test` CLI subcommand which made testing in Deno first class citizen.
 
 Missing Chrome Devtools support was a major blocker for the 1.0 release. A lot
 of effort was spent adding support for V8 debugger and ability to connect to
-Deno process using Chrome Devtool
+Deno process using Chrome Devtools.
 
 Two new subcommands were added to the CLI:
 
@@ -86,8 +86,8 @@ contributors to build Deno more easily.
 ### April: Break all the APIs for the grand stabilization
 
 This month was spent on reviewing APIs in `Deno` global in preperation for the
-1.0 release. This lead to many breaking changes. We were conservative, so any
-APIs that we were unsure of were moved behind the unstable flag.
+1.0 release. This led to many breaking changes. We were conservative, so any
+APIs that we were unsure of were moved behind the `--unstable` flag.
 
 This was the major commitment for the 1.0 release; the Deno APIs marked as
 stable won’t have breaking changes until 2.0 release.
@@ -110,7 +110,7 @@ Beginning of the month marked removal of various features:
 - `window.location` API
 - Rust API for `deno` crate
 
-The reason for removal was we that didn't want to commit to supporting APIs in
+The reason for removal was that we didn't want to commit to supporting APIs in
 the current form either because of: lacking underlying specification in case of
 JSON/WASM imports; or additional maintenance burden in case of Rust API for
 `deno` crate.
@@ -199,7 +199,7 @@ downloads and forever preserves the source code, so that we have can rely on
 immutable source code links.
 
 Due to some non-public work happening to use the Deno infrastrucutre, we began
-the effort to break the Deno system up into smaller "op crate" which could be
+the effort to break the Deno system up into smaller "op crates" which could be
 mixed and matched to produce custom V8 runtimes. First steps were taken towards
 this in August, and the [deno_web crate](https://crates.io/crates/deno_web) was
 released providing some basic web APIs like `Event`, `TextEncoder`,
