@@ -170,7 +170,7 @@ of the SWC JavaScript parser.
 This month we made a hard decision to
 [convert our internal runtime code from TypeScript to JavaScript](https://github.com/denoland/deno/pull/6793).
 There were several factors that led us to this decision: Complicated and slow
-build process on each build of the deno internal runtime code was typechecked
+build process on each build of the Deno internal runtime code was typechecked
 and bundled before being
 [snapshotted](https://v8.dev/blog/custom-startup-snapshots). We had two separate
 implementations of TypeScript compiler host. One just for the build step, which
@@ -298,7 +298,7 @@ please look into the following:
 
 - Answer [the Deno survey](https://forms.gle/hbhP46LUAfVFMggU6).
 
-- [Reivew the Q1 roadmap](https://github.com/denoland/deno/issues/8824).
+- [Review the Q1 roadmap](https://github.com/denoland/deno/issues/8824).
 
 - Improving IDE support by adding
   [new language server capabilities](https://github.com/denoland/deno/issues/8643)
