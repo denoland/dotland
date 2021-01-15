@@ -1,5 +1,3 @@
-# Deno in 2020
-
 With API stabilizations, several large infrastructure refactors, the 1.0
 release, and shipping the single most requested feature, 2020 brought a lot of
 action to the Deno project.
@@ -9,7 +7,7 @@ guide our development in 2021.
 
 Read on for Deno's review of the year.
 
-### January: Goodbye libdeno, hello rusty_v8
+## January: Goodbye libdeno, hello rusty_v8
 
 `libdeno` was a C++ library that facilitated an interface between V8 engine and
 Rust code in Deno. The library was hard to reason about and develop additional
@@ -31,7 +29,7 @@ bindings.
 - [0.30.0](https://github.com/denoland/deno/releases/tag/v0.30.0)
 - [0.31.0](https://github.com/denoland/deno/releases/tag/v0.31.0)
 
-### February: deno fmt now uses dprint, deno test subcommand
+## February: deno fmt now uses dprint, deno test subcommand
 
 This month we changed `deno fmt` drastically. Up to this point `deno fmt` was a
 simple subcommand that under the hood was only an alias to "deno run" that
@@ -59,7 +57,7 @@ and `deno test` CLI subcommand which made testing in Deno first class citizen.
 - [0.34.0](https://github.com/denoland/deno/releases/tag/v0.34.0)
 - [0.35.0](https://github.com/denoland/deno/releases/tag/v0.35.0)
 
-### March: V8 debugger, deno doc, deno upgrade
+## March: V8 debugger, deno doc, deno upgrade
 
 Missing Chrome Devtools support was a major blocker for the 1.0 release. A lot
 of effort was spent adding support for V8 debugger and ability to connect to
@@ -86,7 +84,7 @@ contributors to build Deno more easily.
 - [0.37.1](https://github.com/denoland/deno/releases/tag/v0.37.1)
 - [0.38.0](https://github.com/denoland/deno/releases/tag/v0.38.0)
 
-### April: Break all the APIs for the grand stabilization
+## April: Break all the APIs for the grand stabilization
 
 This month was spent on reviewing APIs in `Deno` global in preparation for the
 1.0 release. This led to many breaking changes. We were conservative, so any
@@ -104,7 +102,7 @@ This month marked the last 0.x.y release of Deno.
 - [0.41.0](https://github.com/denoland/deno/releases/tag/v0.41.0)
 - [0.42.0](https://github.com/denoland/deno/releases/tag/v0.42.0)
 
-### May: Deno 1.0 released
+## May: Deno 1.0 released
 
 Beginning of the month marked removal of various features:
 
@@ -141,7 +139,7 @@ efforts to rewrite parts of our TypeScript infrastructure in Rust.
 - [1.0.2](https://github.com/denoland/deno/releases/tag/v1.0.2)
 - [1.0.3](https://github.com/denoland/deno/releases/tag/v1.0.3)
 
-### June: Incremental type checking and `deno lint`
+## June: Incremental type checking and `deno lint`
 
 One of major complaints received from community after 1.0 release was that
 TypeScript compilation and type-checking are extremely slow. There we set our
@@ -167,12 +165,12 @@ of the SWC JavaScript parser.
 - [1.1.0](https://github.com/denoland/deno/releases/tag/v1.1.0)
 - [1.1.2](https://github.com/denoland/deno/releases/tag/v1.1.2)
 
-### July: Converting internal runtime code from TypeScript to JavaScript
+## July: Converting internal runtime code from TypeScript to JavaScript
 
 This month we made a hard decision to
 [convert our internal runtime code from TypeScript to JavaScript](https://github.com/denoland/deno/pull/6793).
 There were several factors that led us to this decision: Complicated and slow
-build process on each build of the deno internal runtime code was typechecked
+build process on each build of the Deno internal runtime code was typechecked
 and bundled before being
 [snapshotted](https://v8.dev/blog/custom-startup-snapshots). We had two separate
 implementations of TypeScript compiler host. One just for the build step, which
@@ -192,7 +190,7 @@ which added significant amount of code to the final bundle.
 - [1.2.1](https://github.com/denoland/deno/releases/tag/v1.2.1)
 - [1.2.2](https://github.com/denoland/deno/releases/tag/v1.2.2)
 
-### August: New registry released
+## August: New registry released
 
 Original post: https://deno.land/posts/registry2
 
@@ -219,7 +217,7 @@ project.
 - [1.3.1](https://github.com/denoland/deno/releases/tag/v1.3.1)
 - [1.3.2](https://github.com/denoland/deno/releases/tag/v1.3.2)
 
-### September: WebSocket API, CSS styling in console, file watcher, test coverage
+## September: WebSocket API, CSS styling in console, file watcher, test coverage
 
 This month we shipped our biggest feature release since 1.0. More details in
 [the 1.4.0 blog post](https://deno.land/posts/v1.4).
@@ -235,7 +233,7 @@ release every six weeks, matching the Rust and Chrome projects.
 - [1.4.1](https://github.com/denoland/deno/releases/tag/v1.4.1)
 - [1.4.2](https://github.com/denoland/deno/releases/tag/v1.4.2)
 
-### October: REPL revamp, improved bundling, isolatedModules by default
+## October: REPL revamp, improved bundling, isolatedModules by default
 
 [1.5.0 blog post](https://deno.land/posts/v1.5)
 
@@ -259,7 +257,7 @@ the direction of using Rust over the original TypeScript compiler.
 - [1.5.0](https://github.com/denoland/deno/releases/tag/v1.5.0)
 - [1.5.1](https://github.com/denoland/deno/releases/tag/v1.5.1)
 
-### November: Grand rewrite of TSC compiler infrastructure
+## November: Grand rewrite of TSC compiler infrastructure
 
 This month we saw a conclusion to [Kitson Kelly's](https://github.com/kitsonk)
 weeks-long project of rewrite compilation pipeline. It improved the speed of
@@ -270,7 +268,7 @@ The [deno_crypto op crate](https://crates.io/crates/deno_crypto) was added.
 
 **Releases that month:** 1.5.2, 1.5.3, 1.5.4
 
-### December: Self-contained binaries and LSP
+## December: Self-contained binaries and LSP
 
 [1.6.0 blog post](https://deno.land/posts/v1.6)
 
@@ -289,7 +287,7 @@ of vscode_code that is still work-in-progress.
 - [1.6.2](https://github.com/denoland/deno/releases/tag/v1.6.2)
 - [1.6.3](https://github.com/denoland/deno/releases/tag/v1.6.3)
 
-### 2021
+# 2021
 
 We've seen a lot of growth in the project and community in 2020. Going into 2021
 we feel strongly about momentum behind Deno. Stay tuned for some exciting
@@ -300,7 +298,7 @@ please look into the following:
 
 - Answer [the Deno survey](https://forms.gle/hbhP46LUAfVFMggU6).
 
-- [Reivew the Q1 roadmap](https://github.com/denoland/deno/issues/8824).
+- [Review the Q1 roadmap](https://github.com/denoland/deno/issues/8824).
 
 - Improving IDE support by adding
   [new language server capabilities](https://github.com/denoland/deno/issues/8643)
