@@ -4,9 +4,8 @@ With API stabilizations, several large infrastructure refactors, the 1.0
 release, and shipping the single most requested feature, 2020 brought a lot of
 action to the Deno project.
 
-Please fill out
-[the Deno survey](https://docs.google.com/forms/d/1P3zKcr6R11FPi66W5OqNPDFfWxHknGsD-ffflorO3Fs)
-to help guide our development in 2021.
+Please fill out [the Deno survey](https://forms.gle/hbhP46LUAfVFMggU6) to help
+guide our development in 2021.
 
 Read on for Deno's review of the year.
 
@@ -299,8 +298,7 @@ announcements coming soon!
 If you're interested in contributing to Deno or just want to follow our progress
 please look into the following:
 
-- Answer
-  [the Deno survey](https://docs.google.com/forms/d/1P3zKcr6R11FPi66W5OqNPDFfWxHknGsD-ffflorO3Fs).
+- Answer [the Deno survey](https://forms.gle/hbhP46LUAfVFMggU6).
 
 - [Reivew the Q1 roadmap](https://github.com/denoland/deno/issues/8824).
 
