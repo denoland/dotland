@@ -318,9 +318,10 @@ function Benchmarks(): React.ReactElement {
                 </p>
                 <ul className="ml-8 list-disc my-2">
                   <li>
-                    <SourceLink path="cli/bench/deno_tcp.ts" name="deno_tcp" /> is a
-                    fake http server that doesn't parse HTTP. It is comparable
-                    to <SourceLink path="cli/bench/node_tcp.js" name="node_tcp" />
+                    <SourceLink path="cli/bench/deno_tcp.ts" name="deno_tcp" />{" "}
+                    is a fake http server that doesn't parse HTTP. It is
+                    comparable to{" "}
+                    <SourceLink path="cli/bench/node_tcp.js" name="node_tcp" />
                   </li>
                   <li>
                     <SourceLink
@@ -328,13 +329,16 @@ function Benchmarks(): React.ReactElement {
                       name="deno_http"
                     />{" "}
                     is a web server written in TypeScript. It is comparable to{" "}
-                    <SourceLink path="cli/bench/node_http.js" name="node_http" />
+                    <SourceLink
+                      path="cli/bench/node_http.js"
+                      name="node_http"
+                    />
                   </li>
                   <li className="break-words">
-                    core_http_bin_ops and core_http_json_ops are two versions of a
-                    minimal fake HTTP server. It blindly reads and writes fixed
-                    HTTP packets. It is comparable to deno_tcp and node_tcp.
-                    This is a standalone executable that uses{" "}
+                    core_http_bin_ops and core_http_json_ops are two versions of
+                    a minimal fake HTTP server. It blindly reads and writes
+                    fixed HTTP packets. It is comparable to deno_tcp and
+                    node_tcp. This is a standalone executable that uses{" "}
                     <a
                       className="link"
                       href="https://crates.io/crates/deno_core"
