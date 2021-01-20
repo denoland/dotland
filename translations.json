@@ -16,5 +16,17 @@
     "english": "Arabic",
     "link": "https://deno-ar.vercel.app/",
     "repository": "https://github.com/moncefplastin07/deno_website2"
+  },
+  {
+    "language": "简体中文",
+    "english": "Simplified Chinese",
+    "link": "https://deno-cn.vercel.app/",
+    "repository": "https://github.com/justjavac/deno_website2"
+  },
+  {
+    "language": "Español",
+    "english": "Spanish",
+    "link": "https://deno-es.vercel.app/",
+    "repository": "https://github.com/JheysonDev/deno_website2"
   }
 ]
