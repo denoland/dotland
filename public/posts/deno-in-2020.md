@@ -1,27 +1,23 @@
-With API stabilizations, several large infrastructure refactors, the 1.0
-release, and shipping the single most requested feature, 2020 brought a lot of
-action to the Deno project.
+随着 API 的稳定化改造、若干大型基础架构的重构，以及诸多备受关注的功能开放，Deno
+1.0 版本正式发布。2020 年，Deno 迎来了众多的挑战和变化。
 
-Please fill out [the Deno survey](https://forms.gle/hbhP46LUAfVFMggU6) to help
-guide our development in 2021.
+请填写[这份 Deno 调查问卷](https://forms.gle/hbhP46LUAfVFMggU6)来向我们反馈以让
+Deno 在 2021 年变得更好。
 
-Read on for Deno's review of the year.
+下文是 Deno 的 2020 年度回顾。
 
-## January: Goodbye libdeno, hello rusty_v8
+## 一月：再见 libdeno，你好 rusty_v8
 
-`libdeno` was a C++ library that facilitated an interface between V8 engine and
-Rust code in Deno. The library was hard to reason about and develop additional
-functionality. The situation led to the birth of `rusty_v8` in fall of 2019.
-[`rusty_v8`](https://github.com/denoland/rusty_v8) is a Rust crate that provides
-API for the V8 engine. By December `rusty_v8` had all required bindings to
-replace `libdeno`. The effort started at the end of 2019, where the first parts
-of `libdeno` were rewritten using `rusty_v8`. Thanks to the growing test
-coverage in the Deno codebase we were confident moving forward and wrapped up
-the effort in a fortnight. `libdeno` was completely removed in release 0.29.0
-and since then `rusty_v8` has undergone major refactors to type safety of the
-bindings.
+`libdeno` 是一个 C++ 库，可以方便地桥接 Deno 中的 V8 引擎和 Rust 代码。此库难以
+理解，也难以在其上开发额外的功能。基于这种情况，最终导致了 `rusty_v8` 于 2019 年
+秋季诞生。[`rusty_v8`](https://github.com/denoland/rusty_v8) 是一个为 V8 引擎提
+供相关 API 的 Rust crate。同年 12 月，`rusty_v8` 已具备所有必需的 binding 条件来
+替换 `libdeno`。这项工作始于 2019 年年底，当时先使用 `rusty_v8` 重写了 `libdeno`
+的一部分。由于 Deno 代码库中测试覆盖率的不断提高，我们很有信心地继续推进，并在两
+周内完成了这项工作。`libdeno` 最终在 0.29.0 版本中被完全替换删除，此后 rusty_v8
+也经历了绑定类型安全性相关的重要重构。
 
-**Releases that month:**
+**本月发布的版本：**
 
 - [0.28.0](https://github.com/denoland/deno/releases/tag/v0.28.0)
 - [0.28.1](https://github.com/denoland/deno/releases/tag/v0.28.1)
@@ -29,107 +25,94 @@ bindings.
 - [0.30.0](https://github.com/denoland/deno/releases/tag/v0.30.0)
 - [0.31.0](https://github.com/denoland/deno/releases/tag/v0.31.0)
 
-## February: deno fmt now uses dprint, deno test subcommand
+## 二月：deno fmt 现由 dprint 构建、deno test 子命令
 
-This month we changed `deno fmt` drastically. Up to this point `deno fmt` was a
-simple subcommand that under the hood was only an alias to "deno run" that
-pointed to `prettier`. It meant that on the first run of `deno fmt` and after
-each upgrade, users had to download the latest version of the `prettier` module.
-This situation didn’t feel right as Deno promised to provide these tools out of
-the box. `prettier` was also pretty slow and the performance left a lot to be
-asked.
+本月我们彻底地重构了 `deno fmt`。与此之前，`deno fmt` 是一个简单的子命令，其在背
+后只是最终指向 `prettier` 的“deno run”的一个别名。这意味着在首次运行 `deno fmt`
+以及每次 `prettier` 升级后，用户都必须下载 `prettier` 的最新版本。这和 Deno 承诺
+的内置工具开箱即用的原则很不契合。同时，`prettier` 真的很慢，其性能也有很多问题
+。
 
-We got introduced to [`dprint`](https://dprint.dev/) by
-[David Sherret](https://github.com/dsherret), a code formatter written in Rust
-and based on the SWC JavaScript parser by
-[Kang Dong Yun](https://github.com/kdy1). `dprint` could format the code the
-same way the `prettier` module did but it was orders of magnitude faster. After
-some preliminary testing we decided to use `dprint` in `deno fmt`.
+我们被推荐了 [David Sherret](https://github.com/dsherret) 的
+[dprint](https://dprint.dev/) 库——一个基于
+[Kang Dong Yun](https://github.com/kdy1) 的 SWC JavaScript 解析器、并由 Rust 编
+写的代码格式化工具。`dprint` 可以和 `prettier` 库一样的工作，但速度却要快上好几
+个数量级。经过了一些初步测算后，我们决定在 `deno fmt` 中使用 `dprint`。
 
-`deno test` had the same requirement of downloading modules from the standard
-library on the first run. That led to the addition of a new `Deno.test()` API
-and `deno test` CLI subcommand which made testing in Deno first class citizen.
+`deno test` 也有在首次运行该命令时从标准库中下载模块的问题。这导致添加了新的
+`Deno.test()` API，并且 `deno test` CLI 子命令也让测试成为了 Deno 的一等公民。
 
-**Releases that month:**
+**本月发布的版本：**
 
 - [0.32.0](https://github.com/denoland/deno/releases/tag/v0.32.0)
 - [0.33.0](https://github.com/denoland/deno/releases/tag/v0.33.0)
 - [0.34.0](https://github.com/denoland/deno/releases/tag/v0.34.0)
 - [0.35.0](https://github.com/denoland/deno/releases/tag/v0.35.0)
 
-## March: V8 debugger, deno doc, deno upgrade
+## 三月：V8 调试器、deno doc、deno upgrade
 
-Missing Chrome Devtools support was a major blocker for the 1.0 release. A lot
-of effort was spent adding support for V8 debugger and ability to connect to
-Deno process using Chrome Devtools.
+阻碍 Deno 1.0 发布正式版的主要原因是缺少 Chrome Devtools 的支持。因此，我们花了
+很多精力来增加对 V8 调试器的支持以及提高使用 Chrome Devtools 连接到 Deno 进程的
+能力。
 
-Two new subcommands were added to the CLI:
+CLI 中也添加了两个新的命令：`deno doc` 和 `deno upgrade`。
 
-- `deno doc`
-- `deno upgrade`
+我们同时经历了构建过程的巨大改进。与此之前，Deno 中的每一次构建都会导致 V8 从源
+码级别进行重新构建。V8 是一个庞大的 C++ 项目，常常需要花费 30 多分钟来对其进行构
+建。尽管有大量的构建缓存和更多技巧，我们也一直难以克服得更好。现在，我们增加了
+rusty_v8 在 Github 发行版上生成和下载预构建过的静态库的能力，从而允许 Deno 构建
+过程完全绕过 V8 的构建。这简化并加快了 CI 的构建，同时更重要的是，这让贡献者变得
+可以更轻松地构建 Deno。
 
-We also saw a huge improvement to the build process. Up to this point, V8 was
-built from source for each and every build of Deno. V8 is a massive C++ project
-that can easily take over 30 minutes to build. Despite lots of build caches and
-other tricks, it was continuously a difficulty for us to contend with. We added
-the ability for `rusty_v8` to produce and download a pre-built static lib on
-Github releases, allowing Deno builds to bypass the V8 build completely. This
-simplified and sped up the build in CI, but most importantly allowed
-contributors to build Deno more easily.
-
-**Releases that month:**
+**本月发布的版本：**
 
 - [0.36.0](https://github.com/denoland/deno/releases/tag/v0.36.0)
 - [0.37.0](https://github.com/denoland/deno/releases/tag/v0.37.0)
 - [0.37.1](https://github.com/denoland/deno/releases/tag/v0.37.1)
 - [0.38.0](https://github.com/denoland/deno/releases/tag/v0.38.0)
 
-## April: Break all the APIs for the grand stabilization
+## 四月：破坏所有的 API 来构造重要的稳定性
 
-This month was spent on reviewing APIs in `Deno` global in preparation for the
-1.0 release. This led to many breaking changes. We were conservative, so any
-APIs that we were unsure of were moved behind the `--unstable` flag.
+本月为 1.0 的正式发布做准备，重点关注在审阅 `Deno` global 全局中的 API。这导致了
+诸多破坏性地改动。对此我们很谨慎：我们将不确定的所有 API 都需要被移到
+`--unstable` 标志之后。
 
-This was the major commitment for the 1.0 release; the Deno APIs marked as
-stable won’t have breaking changes until 2.0 release.
+这也是 1.0 版本的重要承诺；在 2.0 发布之前，标记为稳定的 Deno API 将不会有破坏性
+的更改。
 
-This month marked the last 0.x.y release of Deno.
+本月是 Deno 版本以 0.x.y 命名的最后阶段。
 
-**Releases that month:**
+**本月发布的版本：**
 
 - [0.39.0](https://github.com/denoland/deno/releases/tag/v0.39.0)
 - [0.40.0](https://github.com/denoland/deno/releases/tag/v0.40.0)
 - [0.41.0](https://github.com/denoland/deno/releases/tag/v0.41.0)
 - [0.42.0](https://github.com/denoland/deno/releases/tag/v0.42.0)
 
-## May: Deno 1.0 released
+## 五月：Deno 1.0 正式发布
 
-Beginning of the month marked removal of various features:
+本月初标记删除了如下功能：
 
 - JSON imports
 - WASM imports
-- `window.location` API
-- Rust API for `deno` crate
+- `window.location`  API
+- Rust API for deno crate
 
-The reason for removal was that we didn't want to commit to supporting APIs in
-the current form either because of: lacking underlying specification in case of
-JSON/WASM imports; or additional maintenance burden in case of Rust API for
-`deno` crate.
+删除的原因是，我们不想因为 JSON/WASM imports 缺少底层规范支持、或者 deno crate
+下有 Rust API 额外维护负担的情况下提供相关 API。
 
-Finally on May 13, exactly two years after
-[Ryan's original Deno presentation](https://www.youtube.com/watch?v=M3BM9TB-8yA),
-we cut the 1.0.
+终于在 5 月 13 日
+——[Ryan 最初发表 Deno 演讲](https://www.youtube.com/watch?v=M3BM9TB-8yA)的整整两
+年后，我们正式发布了 1.0。
 
-On social media, the release was very well received. Our
-[blog post](https://deno.land/v1) was shared widely, we gained many new users
-and contributors.
+在社交媒体上，这个版本非常受欢迎。我们的[相关博客](https://deno.land/v1)被广为传
+播。我们也收获了大量的新用户和新贡献者。
 
-But the dust had barely settled before we were back to work on another major
-component of the runtime: the dependency analysis in TypeScript host was
-rewritten using [SWC](https://swc.rs/). This change marked the beginning of
-efforts to rewrite parts of our TypeScript infrastructure in Rust.
+发布后我们紧张地回到了有关运行时重要组件的工作中：TypeScript 宿主中的依赖关系分
+析是使用 [SWC](https://swc.rs/) 重写的。这次的改动标志着我们开始着手用 Rust 来重
+写 TypeScript 基础架构的一些部分。
 
-**Releases that month:**
+**本月发布的版本：**
 
 - [1.0.0-rc1](https://github.com/denoland/deno/releases/tag/v1.0.0-rc1)
 - [1.0.0-rc2](https://github.com/denoland/deno/releases/tag/v1.0.0-rc2)
@@ -139,116 +122,100 @@ efforts to rewrite parts of our TypeScript infrastructure in Rust.
 - [1.0.2](https://github.com/denoland/deno/releases/tag/v1.0.2)
 - [1.0.3](https://github.com/denoland/deno/releases/tag/v1.0.3)
 
-## June: Incremental type checking and `deno lint`
+## 六月：增量类型检查以及 deno lint
 
-One of major complaints received from community after 1.0 release was that
-TypeScript compilation and type-checking are extremely slow. There we set our
-eyes on improving out TSC integration to support incremental typechecking. After
-a few trial and error PRs we were able to get functionality working and
-significantly improvement development loop time. Even though we managed to
-improvement type checking speed by leveraging TSC's incremental APIs we were
-still relying on it to emit transpiled sources. One of the great design
-principles of TypeScript is that it's just JavaScript with additional syntax, so
-stripping out the type information (transpiling to JavaScript) is a relatively
-easy operation. So we set the goal of being able to use SWC in Rust to do
-transpilation, while continuing to use TSC for type checking.
+1.0 发布后，从社区中收到最多的反馈之一就是 TypeScript 的编译和类型检查非常得慢。
+此后我们着眼于改进 TSC 集成来支持增量类型检查。经过几次反复试验的 PR，我们能够使
+功能正常工作，并且显著地改进了开发效率。尽管我们通过利用 TSC 的增量 API 设法提高
+了类型检查的速度，但我们仍然需要依靠它来 emit 已转义的源。TypeScript 的伟大设计
+原则之一是它只是一个具有附加语法的 JavaScript，因此剥离类型信息（转换为
+JavaScript）是相对容易的操作。所以我们设定了能够在 Rust 中使用 SWC 进行转移的同
+时，继续使用 TSC 进行类型检查的目标。
 
-After a few months of development out of sight, in a separate repository, a new
-`deno lint` subcommand was added. It's yet another project that is built on top
-of the SWC JavaScript parser.
+经过几个月的开发，在一个单独的仓库中，我们添加了新的 `deno lint` 子命令。这是另
+一个建立在 SWC JavaScript 解析器之上的项目。
 
-**Releases that month:**
+**本月发布的版本：**
 
 - [1.0.4](https://github.com/denoland/deno/releases/tag/v1.0.4)
 - [1.0.5](https://github.com/denoland/deno/releases/tag/v1.0.5)
 - [1.1.0](https://github.com/denoland/deno/releases/tag/v1.1.0)
 - [1.1.0](https://github.com/denoland/deno/releases/tag/v1.1.0)
-- [1.1.2](https://github.com/denoland/deno/releases/tag/v1.1.2)
+- [1.1.2](https://github.com/denoland/deno/releases/tag/v1.1.2)。
 
-## July: Converting internal runtime code from TypeScript to JavaScript
+## 七月：将内部运行时代码从 TypeScript 转换为 JavaScript
 
-This month we made a hard decision to
-[convert our internal runtime code from TypeScript to JavaScript](https://github.com/denoland/deno/pull/6793).
-There were several factors that led us to this decision: Complicated and slow
-build process on each build of the Deno internal runtime code was typechecked
-and bundled before being
-[snapshotted](https://v8.dev/blog/custom-startup-snapshots). We had two separate
-implementations of TypeScript compiler host. One just for the build step, which
-was called the `deno_typescript` crate. The other one included in the `deno`
-binary. Additionally the whole process had a significant impact on the build
-times: 2 minutes incremental rebuilds! By using plain old JavaScript we were
-able to vastly simplify the internal build dependencies and overall complexity.
-Because the actual JavaScript code was produced by TypeScript compiler as a
-single file bundle, we had very little control of what the output code would
-look like. ES modules were transformed to use SystemJS loader in the bundle
-which added significant amount of code to the final bundle.
+这个月，我们做出了一个艰难的决定
+：[将内部运行时代码从 TypeScript 转换为 JavaScript](https://github.com/denoland/deno/pull/6793)。
+有几个因素导致了我们做出这个决定：Deno 内部运行时代码的每个构建过程中，类型检查
+、[快照](https://v8.dev/blog/custom-startup-snapshots)前绑定，都是复杂而缓慢的构
+建步骤。我们有两个独立的 TypeScript 编译器宿主。一个是 `deno_typescript` crate
+只用于构建过程，另一个被包含在 `Deno` 二进制文件中。此外，整个过程对构建时间有显
+著影响：2 分钟的增量重建！通过使用普通的 JavaScript，我们能够极大地简化内部构建
+依赖关系和总体复杂性。因为实际的 JavaScript 代码是由 TypeScript 编译器作为单个文
+件包生成的，所以我们几乎无法控制输出代码的类型。ES 模块被转换为使用 bundle 的
+SystemJS 加载程序，这为最终 bundle 添加了大量代码。
 
-**Releases that month:**
+**本月发布的版本：**
 
 - [1.1.3](https://github.com/denoland/deno/releases/tag/v1.1.3)
 - [1.2.0](https://github.com/denoland/deno/releases/tag/v1.2.0)
 - [1.2.1](https://github.com/denoland/deno/releases/tag/v1.2.1)
 - [1.2.2](https://github.com/denoland/deno/releases/tag/v1.2.2)
 
-## August: New registry released
+## 八月：新的镜像源网站发布
 
-Original post: https://deno.land/posts/registry2
+原始文章：
+[https://deno.land/posts/registry2](https://deno.land/posts/registry2)
 
-August 3, we released a new [deno.land/x](https://deno.land/x) registry that
-uses webhooks to integrate with GitHub. When a module is updated our system
-downloads and forever preserves the source code, so that we can rely on
-immutable source code links.
+八月三日，我们发布了一个全新的 [deno.land/x](https://deno.land/x) 镜像源，可以用
+来通过使用 WebHooks 与 Github 集成。每当一个模块被更新，我们的系统会下载并永远保
+存其源代码，这样我们就可以依赖不可变的源代码链接。
 
-Due to some non-public work happening to use the Deno infrastructure, we began
-the effort to break the Deno system up into smaller "op crates" which could be
-mixed and matched to produce custom V8 runtimes. First steps were taken towards
-this in August, and the [deno_web crate](https://crates.io/crates/deno_web) was
-released providing some basic web APIs like `Event`, `TextEncoder`,
-`TextDecoder`.
+由于在使用 Deno 基础设施时进行了一些非公开工作，我们开始努力将 Deno 系统分解成更
+小的“op crates”，可以混合和匹配以生成定制的 V8 运行时。8 月份，我们朝着这个目标
+迈出了第一步，发布了 [deno_web](https://crates.io/crates/deno_web) crate，它提供
+了一些基本的 Web API，比如 `Event`、`TextUncoder` 和 `TextDecoder`。
 
-This month the benchmark system was rewritten in Rust; which marked the start of
-tedious efforts of reducing the number of build dependencies for the Deno
-project.
+这个月，基准系统使用 Rust 重写，这标志着减少 Deno 项目的构建依赖性的单调工作的开
+始。
 
-**Releases that month:**
+**本月发布的版本：**
 
 - [1.2.3](https://github.com/denoland/deno/releases/tag/v1.2.3)
 - [1.3.0](https://github.com/denoland/deno/releases/tag/v1.3.0)
 - [1.3.1](https://github.com/denoland/deno/releases/tag/v1.3.1)
 - [1.3.2](https://github.com/denoland/deno/releases/tag/v1.3.2)
 
-## September: WebSocket API, CSS styling in console, file watcher, test coverage
+## 九月：WebSocket API、终端下的 CSS 样式、文件监听、测试覆盖
 
-This month we shipped our biggest feature release since 1.0. More details in
-[the 1.4.0 blog post](https://deno.land/posts/v1.4).
+本月，我们发布了自 1.0 以来最大的功能版本。更多细节请参见
+[1.4.0 发布说明](https://deno.land/posts/v1.4)文档。
 
-There was another important change on the maintenance part of the project. The
-release schedule was changed, from monthly minor release, to shipping new minor
-release every six weeks, matching the Rust and Chrome projects.
+另一个重要变化是关于项目的版本维护部分。发布时间表正式改变：从每月发布一次改为每
+六周发布一次新的版本，以与 Rust 和 Chrome 项目相匹配。
 
-**Releases that month:**
+**本月发布的版本：**
 
 - [1.3.3](https://github.com/denoland/deno/releases/tag/v1.3.3)
 - [1.4.0](https://github.com/denoland/deno/releases/tag/v1.4.0)
 - [1.4.1](https://github.com/denoland/deno/releases/tag/v1.4.1)
 - [1.4.2](https://github.com/denoland/deno/releases/tag/v1.4.2)
 
-## October: REPL revamp, improved bundling, isolatedModules by default
+## 十月：REPL 翻新、捆绑改进、默认 isolatedModules
 
-[1.5.0 blog post](https://deno.land/posts/v1.5)
+[1.5.0 发布说明](https://deno.land/posts/v1.5)。
 
-The biggest change that happened in this month was enabling `isolatedModules`
-option in TypeScript compiler host by default. This setting changes the behavior
-of TypeScript in such a way that ensures that each file can be transpiled in
-isolation (without knowledge of types and/or other modules) by tools other than
-TSC like SWC and Babel. This change had a significant impact on the module
-ecosystem, making some popular modules unusable until maintainers adjusted the
-code to work with `isolatedModules`.
+本月发生的最大变化是在 TypeScript 编译器宿主中默认启用 `isolatedModules` 选项。
+此设置更改了 TypeScript 的行为，以确保每个文件都可以由 TSC 以外的工具（如 SWC 和
+Babel）隔离编译（而无需知道其类型或其它模块）。这一变化对模块生态系统产生了重大
+影响，一度使得一些流行的模块无法使用，直到维护人员调整代码以支持
+`isolatedModules`。
 
-This month we also adopted the new bundle feature in SWC, yet another step in
-the direction of using Rust over the original TypeScript compiler.
+这个月我们还在 SWC 中采用了新的 bundle 特性，这是对原始 TypeScript 编译器转向使
+用 Rust 方向的又一步迈进。
 
-**Releases that month:**
+**本月发布的版本：**
 
 - [1.4.3](https://github.com/denoland/deno/releases/tag/v1.4.3)
 - [1.4.4](https://github.com/denoland/deno/releases/tag/v1.4.4)
@@ -257,51 +224,43 @@ the direction of using Rust over the original TypeScript compiler.
 - [1.5.0](https://github.com/denoland/deno/releases/tag/v1.5.0)
 - [1.5.1](https://github.com/denoland/deno/releases/tag/v1.5.1)
 
-## November: Grand rewrite of TSC compiler infrastructure
+## 十一月：大改 TSC 编译器基础架构
 
-This month we saw a conclusion to [Kitson Kelly's](https://github.com/kitsonk)
-weeks-long project of rewrite compilation pipeline. It improved the speed of
-TypeScript transpilation even more, but most importantly paid off a lot of
-technical debt.
+本月我们看到了 [Kitson Kelly](https://github.com/kitsonk) 长达数周重写编译管道
+（compilation pipeline）的总结。它进一步地提高了 TypeScript 的编译速度，更最重要
+的是减轻了大量的技术债务。
 
-The [deno_crypto op crate](https://crates.io/crates/deno_crypto) was added.
+[deno_crypto op crate](https://crates.io/crates/deno_crypto) 也被添加。
 
-**Releases that month:** 1.5.2, 1.5.3, 1.5.4
+**本月发布的版本：** 1.5.2、1.5.3、1.5.4。
 
-## December: Self-contained binaries and LSP
+## 十二月：自包含的二进制文件以及 LSP
 
-[1.6.0 blog post](https://deno.land/posts/v1.6)
+[1.6.0 发布说明](https://deno.land/posts/v1.6)。
 
-In December we released version 1.6 containing two milestone features:
-self-contained binaries and the language server. `deno compile` was single most
-requested feature in Deno’s bug tracker.
+在 12 月，我们发布了 1.6 版本，包含了两个里程碑特性：自包含的二进制文件和语言服
+务器。`deno compile` 是 deno 的 bug 追踪器中受期待的特色之一。
 
-Providing built-in language server allows to provide great development
-experience to all editors that can talk LSP protocol. It leads to third revamp
-of vscode_code that is still work-in-progress.
+通过提供的内置语言服务器提高了所有能够使用 LSP 协议的编辑器的良好开发体验。它导
+致了对 vscode_deno 的第三次翻新，此项工作目前还在进行中。
 
-**Releases that month:**
+**本月发布的版本：**
 
 - [1.6.0](https://github.com/denoland/deno/releases/tag/v1.6.0)
 - [1.6.1](https://github.com/denoland/deno/releases/tag/v1.6.1)
 - [1.6.2](https://github.com/denoland/deno/releases/tag/v1.6.2)
 - [1.6.3](https://github.com/denoland/deno/releases/tag/v1.6.3)
 
-# 2021
+## 2021 展望
 
-We've seen a lot of growth in the project and community in 2020. Going into 2021
-we feel strongly about momentum behind Deno. Stay tuned for some exciting
-announcements coming soon!
+到 2020 年，我们在项目和社区中看到了许多的增长。这让我们对 Deno 进入 2021 年背后
+的支持倍感信心。请继续关注即将推出的激动人心的公告！
 
-If you're interested in contributing to Deno or just want to follow our progress
-please look into the following:
+如果你有兴趣为 Deno 做贡献，或者只是想了解我们的进展，请查看以下内容：
 
-- Answer [the Deno survey](https://forms.gle/hbhP46LUAfVFMggU6).
-
-- [Review the Q1 roadmap](https://github.com/denoland/deno/issues/8824).
-
-- Improving IDE support by adding
-  [new language server capabilities](https://github.com/denoland/deno/issues/8643)
-
-- Ensuring Web compatibility by using
-  [Web Platform Test suite](https://github.com/denoland/deno/issues/9001)
+- 回答这份 [Deno 问卷调查](https://forms.gle/hbhP46LUAfVFMggU6)；
+- [查看 Q1 路线图](https://github.com/denoland/deno/issues/8824)；
+- 通过添加[新的语言服务器](https://github.com/denoland/deno/issues/8643)的功能来
+  提高对 IDE 的支持；
+- 通过使用 [Web 平台测试套件](https://github.com/denoland/deno/issues/9001)来确
+  保对 Web 的兼容性。
