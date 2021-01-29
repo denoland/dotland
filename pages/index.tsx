@@ -30,7 +30,7 @@ for await (const req of s) {
       </Head>
       <CookieBanner />
       <div className="bg-white">
-        <div className="bg-gray-50 border-b border-gray-200">
+        <div className="bg-gray-50 border border-b border-gray-200">
           <Header />
           <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
             <h1 className="font-extrabold text-5xl leading-10 tracking-tight text-gray-900">
@@ -157,7 +157,7 @@ for await (const req of s) {
             </a>
           </Link>
           <p className="my-4 text-gray-700">
-            Next to the Deno runtime, Deno also provides a list of audited
+            Alongwith the Deno runtime, Deno also provides a list of tested and audited
             standard modules that are reviewed by the Deno maintainers and are
             guaranteed to work with a specific Deno version. These live
             alongside the Deno source code in the{" "}
