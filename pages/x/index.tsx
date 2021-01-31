@@ -58,6 +58,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
           ? {
               results: resp.results,
               totalCount: query ? PER_PAGE : resp.totalCount,
+              processingTimeMs: resp.processingTimeMs,
             }
           : null
       );
@@ -106,6 +107,13 @@ function ThirdPartyRegistryList(): React.ReactElement {
             </div> */}
           </div>
           <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8">
+            <div className="mb-2 -mt-7 flex justify-end">
+              <img
+                src="/images/algolia.svg"
+                alt="Search by Algolia"
+                className="h-5"
+              />
+            </div>
             <label htmlFor="query" className="font-medium sr-only">
               Search
             </label>
@@ -250,222 +258,226 @@ function ThirdPartyRegistryList(): React.ReactElement {
                     No modules found
                   </div>
                 ) : (
-                  <ModuleList
-                    modules={resp.results.map((v) => ({
-                      ...v,
-                      starCount: v.star_count,
-                    }))}
-                  />
+                  <ModuleList modules={resp.results} />
                 )}
-                {!query
-                  ? (() => {
-                      const pageCount = pageutils.pageCount({
-                        totalCount: resp.totalCount,
-                        perPage: PER_PAGE,
-                      });
-                      const hasPrevious = pageutils.hasPrevious({ page });
-                      const hasNext = pageutils.hasNext({
-                        page,
-                        totalCount: resp.totalCount,
-                        perPage: PER_PAGE,
-                      });
-                      const centerPage = Math.max(
-                        4,
-                        Math.min(page, pageCount - 3)
-                      );
+                {!query ? (
+                  (() => {
+                    const pageCount = pageutils.pageCount({
+                      totalCount: resp.totalCount,
+                      perPage: PER_PAGE,
+                    });
+                    const hasPrevious = pageutils.hasPrevious({ page });
+                    const hasNext = pageutils.hasNext({
+                      page,
+                      totalCount: resp.totalCount,
+                      perPage: PER_PAGE,
+                    });
+                    const centerPage = Math.max(
+                      4,
+                      Math.min(page, pageCount - 3)
+                    );
 
-                      return (
-                        <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-                          <div className="flex-1 flex justify-between items-center sm:hidden">
-                            <button
-                              disabled={!hasPrevious}
-                              onClick={() => setPage(page - 1)}
-                              className={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md bg-white ${
-                                hasPrevious
-                                  ? "text-gray-700 hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700"
-                                  : "text-gray-500 cursor-default"
-                              } transition ease-in-out duration-150`}
-                            >
-                              Previous
-                            </button>
-                            <div className="text-base leading-6 text-gray-500">
-                              {page}/{pageCount}
-                            </div>
-                            <button
-                              disabled={!hasNext}
-                              onClick={() => setPage(page + 1)}
-                              className={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md bg-white ml-4 ${
-                                hasNext
-                                  ? "text-gray-700 hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700"
-                                  : "text-gray-500 cursor-default"
-                              } transition ease-in-out duration-150`}
-                            >
-                              Next
-                            </button>
+                    return (
+                      <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+                        <div className="flex-1 flex justify-between items-center sm:hidden">
+                          <button
+                            disabled={!hasPrevious}
+                            onClick={() => setPage(page - 1)}
+                            className={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md bg-white ${
+                              hasPrevious
+                                ? "text-gray-700 hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700"
+                                : "text-gray-500 cursor-default"
+                            } transition ease-in-out duration-150`}
+                          >
+                            Previous
+                          </button>
+                          <div className="text-base leading-6 text-gray-500">
+                            {page}/{pageCount}
                           </div>
-                          <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-                            <div>
-                              <p className="text-sm leading-5 text-gray-700">
-                                Showing{" "}
-                                <span className="font-medium">
-                                  {(page - 1) * PER_PAGE + 1}
-                                </span>{" "}
-                                to{" "}
-                                <span className="font-medium">
-                                  {(page - 1) * PER_PAGE + resp.results.length}
-                                </span>{" "}
-                                of{" "}
-                                <span className="font-medium">
-                                  {resp.totalCount}
-                                </span>{" "}
-                                results
-                              </p>
-                            </div>
-                            <div>
-                              <nav className="relative z-0 inline-flex shadow-sm">
-                                <button
-                                  disabled={!hasPrevious}
-                                  onClick={() => setPage(page - 1)}
-                                  className={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium ${
-                                    hasPrevious
-                                      ? "text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500"
-                                      : "text-gray-300 cursor-default"
-                                  } transition ease-in-out duration-150`}
-                                  aria-label="Previous"
+                          <button
+                            disabled={!hasNext}
+                            onClick={() => setPage(page + 1)}
+                            className={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md bg-white ml-4 ${
+                              hasNext
+                                ? "text-gray-700 hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700"
+                                : "text-gray-500 cursor-default"
+                            } transition ease-in-out duration-150`}
+                          >
+                            Next
+                          </button>
+                        </div>
+                        <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                          <div>
+                            <p className="text-sm leading-5 text-gray-700">
+                              Showing{" "}
+                              <span className="font-medium">
+                                {(page - 1) * PER_PAGE + 1}
+                              </span>{" "}
+                              to{" "}
+                              <span className="font-medium">
+                                {(page - 1) * PER_PAGE + resp.results.length}
+                              </span>{" "}
+                              of{" "}
+                              <span className="font-medium">
+                                {resp.totalCount}
+                              </span>{" "}
+                              results
+                            </p>
+                          </div>
+                          <div>
+                            <nav className="relative z-0 inline-flex shadow-sm">
+                              <button
+                                disabled={!hasPrevious}
+                                onClick={() => setPage(page - 1)}
+                                className={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium ${
+                                  hasPrevious
+                                    ? "text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500"
+                                    : "text-gray-300 cursor-default"
+                                } transition ease-in-out duration-150`}
+                                aria-label="Previous"
+                              >
+                                <svg
+                                  className="h-5 w-5"
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
                                 >
-                                  <svg
-                                    className="h-5 w-5"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                    clipRule="evenodd"
+                                  />
+                                </svg>
+                              </button>
+                              <button
+                                onClick={() => setPage(1)}
+                                className={`inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
+                                  page === 1
+                                    ? "bg-gray-100 font-semibold text-gray-800"
+                                    : "bg-white font-medium text-gray-700"
+                                } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
+                              >
+                                1
+                              </button>
+                              {centerPage === 4 ? (
+                                <>
+                                  <button
+                                    onClick={() => setPage(2)}
+                                    className={`hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
+                                      page === 2
+                                        ? "bg-gray-100 font-semibold text-gray-800"
+                                        : "bg-white font-medium text-gray-700"
+                                    } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
                                   >
-                                    <path
-                                      fillRule="evenodd"
-                                      d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                      clipRule="evenodd"
-                                    />
-                                  </svg>
-                                </button>
-                                <button
-                                  onClick={() => setPage(1)}
-                                  className={`inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
-                                    page === 1
-                                      ? "bg-gray-100 font-semibold text-gray-800"
-                                      : "bg-white font-medium text-gray-700"
-                                  } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
-                                >
-                                  1
-                                </button>
-                                {centerPage === 4 ? (
-                                  <>
-                                    <button
-                                      onClick={() => setPage(2)}
-                                      className={`hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
-                                        page === 2
-                                          ? "bg-gray-100 font-semibold text-gray-800"
-                                          : "bg-white font-medium text-gray-700"
-                                      } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
-                                    >
-                                      2
-                                    </button>
-                                    <span className="inline-flex md:hidden -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
-                                      ...
-                                    </span>
-                                  </>
-                                ) : (
-                                  <span className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
+                                    2
+                                  </button>
+                                  <span className="inline-flex md:hidden -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
                                     ...
                                   </span>
-                                )}
-                                <button
-                                  onClick={() => setPage(centerPage - 1)}
-                                  className={`hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
-                                    page === centerPage - 1
-                                      ? "bg-gray-100 font-semibold text-gray-800"
-                                      : "bg-white font-medium text-gray-700"
-                                  } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
-                                >
-                                  {centerPage - 1}
-                                </button>
-                                <button
-                                  onClick={() => setPage(centerPage)}
-                                  className={`inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
-                                    page === centerPage
-                                      ? "bg-gray-100 font-semibold text-gray-800"
-                                      : "bg-white font-medium text-gray-700"
-                                  } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
-                                >
-                                  {centerPage}
-                                </button>
-                                <button
-                                  onClick={() => setPage(centerPage + 1)}
-                                  className={`hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
-                                    page === centerPage + 1
-                                      ? "bg-gray-100 font-semibold text-gray-800"
-                                      : "bg-white font-medium text-gray-700"
-                                  } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
-                                >
-                                  {centerPage + 1}
-                                </button>
-                                {centerPage === pageCount - 3 ? (
-                                  <>
-                                    <button
-                                      onClick={() => setPage(pageCount - 1)}
-                                      className={`hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
-                                        page === pageCount - 1
-                                          ? "bg-gray-100 font-semibold text-gray-800"
-                                          : "bg-white font-medium text-gray-700"
-                                      } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
-                                    >
-                                      {pageCount - 1}
-                                    </button>
-                                    <span className="inline-flex md:hidden -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
-                                      ...
-                                    </span>
-                                  </>
-                                ) : (
-                                  <span className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
+                                </>
+                              ) : (
+                                <span className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
+                                  ...
+                                </span>
+                              )}
+                              <button
+                                onClick={() => setPage(centerPage - 1)}
+                                className={`hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
+                                  page === centerPage - 1
+                                    ? "bg-gray-100 font-semibold text-gray-800"
+                                    : "bg-white font-medium text-gray-700"
+                                } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
+                              >
+                                {centerPage - 1}
+                              </button>
+                              <button
+                                onClick={() => setPage(centerPage)}
+                                className={`inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
+                                  page === centerPage
+                                    ? "bg-gray-100 font-semibold text-gray-800"
+                                    : "bg-white font-medium text-gray-700"
+                                } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
+                              >
+                                {centerPage}
+                              </button>
+                              <button
+                                onClick={() => setPage(centerPage + 1)}
+                                className={`hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
+                                  page === centerPage + 1
+                                    ? "bg-gray-100 font-semibold text-gray-800"
+                                    : "bg-white font-medium text-gray-700"
+                                } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
+                              >
+                                {centerPage + 1}
+                              </button>
+                              {centerPage === pageCount - 3 ? (
+                                <>
+                                  <button
+                                    onClick={() => setPage(pageCount - 1)}
+                                    className={`hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
+                                      page === pageCount - 1
+                                        ? "bg-gray-100 font-semibold text-gray-800"
+                                        : "bg-white font-medium text-gray-700"
+                                    } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
+                                  >
+                                    {pageCount - 1}
+                                  </button>
+                                  <span className="inline-flex md:hidden -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
                                     ...
                                   </span>
-                                )}
-                                <button
-                                  onClick={() => setPage(pageCount)}
-                                  className={`inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
-                                    page === pageCount
-                                      ? "bg-gray-100 font-semibold text-gray-800"
-                                      : "bg-white font-medium text-gray-700"
-                                  } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
+                                </>
+                              ) : (
+                                <span className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
+                                  ...
+                                </span>
+                              )}
+                              <button
+                                onClick={() => setPage(pageCount)}
+                                className={`inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
+                                  page === pageCount
+                                    ? "bg-gray-100 font-semibold text-gray-800"
+                                    : "bg-white font-medium text-gray-700"
+                                } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
+                              >
+                                {pageCount}
+                              </button>
+                              <button
+                                disabled={!hasNext}
+                                onClick={() => setPage(page + 1)}
+                                className={`-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium ${
+                                  hasNext
+                                    ? "text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500"
+                                    : "text-gray-300 cursor-default"
+                                } transition ease-in-out duration-150`}
+                                aria-label="Previous"
+                              >
+                                <svg
+                                  className="h-5 w-5"
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
                                 >
-                                  {pageCount}
-                                </button>
-                                <button
-                                  disabled={!hasNext}
-                                  onClick={() => setPage(page + 1)}
-                                  className={`-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium ${
-                                    hasNext
-                                      ? "text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500"
-                                      : "text-gray-300 cursor-default"
-                                  } transition ease-in-out duration-150`}
-                                  aria-label="Previous"
-                                >
-                                  <svg
-                                    className="h-5 w-5"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                  >
-                                    <path
-                                      fillRule="evenodd"
-                                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                      clipRule="evenodd"
-                                    />
-                                  </svg>
-                                </button>
-                              </nav>
-                            </div>
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                    clipRule="evenodd"
+                                  />
+                                </svg>
+                              </button>
+                            </nav>
                           </div>
                         </div>
-                      );
-                    })()
-                  : null}
+                      </div>
+                    );
+                  })()
+                ) : (
+                  <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+                    <p className="text-sm leading-5 text-gray-700">
+                      Found{" "}
+                      <span className="font-medium">{resp.results.length}</span>{" "}
+                      {resp.results.length === 1 ? "module" : "modules"} in{" "}
+                      {resp.processingTimeMs} ms
+                    </p>
+                  </div>
+                )}
               </div>
             )}
           </div>

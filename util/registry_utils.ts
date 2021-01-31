@@ -1,7 +1,14 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
+import algoliasearch from "algoliasearch/lite";
+
 const CDN_ENDPOINT = "https://cdn.deno.land/";
 const API_ENDPOINT = "https://api.deno.land/";
+const ALGOLIA_CLIENT = algoliasearch(
+  "R4L5ZOZ659",
+  "2728353beb377fb5554cc23ee56079b3"
+);
+const MODULE_INDEX = ALGOLIA_CLIENT.initIndex("modules");
 
 export interface DirEntry {
   name: string;
@@ -159,40 +166,33 @@ export interface Module {
   star_count: string;
 }
 
-export interface SearchResult extends Module {
-  search_score: string;
+export interface SearchResult {
+  name: string;
+  description: string;
+  owner: string;
+  repo: string;
+  starCount: string;
+  createdAt: string;
 }
 
 export async function listModules(
   page: number,
   limit: number,
   query: string
-): Promise<{ results: SearchResult[]; totalCount: number } | null> {
-  const url = `${API_ENDPOINT}modules?page=${page}&limit=${limit}&query=${encodeURIComponent(
-    query
-  )}`;
-  const res = await fetch(url, {
-    headers: {
-      accept: "application/json",
-    },
+): Promise<{
+  results: SearchResult[];
+  totalCount: number;
+  processingTimeMs: number;
+} | null> {
+  const results = await MODULE_INDEX.search<SearchResult>(query, {
+    hitsPerPage: limit,
+    page: page - 1,
   });
-  if (res.status !== 200) {
-    throw Error(
-      `Got an error (${
-        res.status
-      }) while getting the module list:\n${await res.text()}`
-    );
-  }
-  const data = await res.json();
-  if (!data.success) {
-    throw Error(
-      `Got an error (${
-        data.info
-      }) while getting the module list:\n${await res.text()}`
-    );
-  }
-
-  return { totalCount: data.data.total_count, results: data.data.results };
+  return {
+    totalCount: results.nbHits,
+    processingTimeMs: results.processingTimeMS,
+    results: results.hits,
+  };
 }
 
 export async function getModule(name: string): Promise<Module | null> {
