@@ -27,7 +27,7 @@ function StatusPage(): React.ReactElement {
         <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 mt-8 pb-8 mb-16">
           <div>
             <h3 className="text-lg leading-6 font-medium text-gray-900">
-              Module publishing status
+              模块发布状态
             </h3>
             <p className="max-w-2xl text-sm leading-5 text-gray-500">
               deno.land/x{data ? "/" + data.options.moduleName : ""}
@@ -44,7 +44,7 @@ function StatusPage(): React.ReactElement {
               <dl>
                 <div className="sm:grid sm:grid-cols-3 sm:gap-4">
                   <dt className="text-sm leading-5 font-medium text-gray-500">
-                    Repository
+                    仓库
                   </dt>
                   <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                     <a
@@ -68,7 +68,7 @@ function StatusPage(): React.ReactElement {
                 </div>
                 <div className="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                   <dt className="text-sm leading-5 font-medium text-gray-500">
-                    Version
+                    版本
                   </dt>
                   <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                     {data.options.version}
@@ -76,7 +76,7 @@ function StatusPage(): React.ReactElement {
                 </div>
                 <div className="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                   <dt className="text-sm leading-5 font-medium text-gray-500">
-                    Source
+                    源码
                   </dt>
                   <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                     <a
@@ -85,13 +85,13 @@ function StatusPage(): React.ReactElement {
                       }/tree/${data.options.ref}/${data.options.subdir ?? ""}`}
                       className="link"
                     >
-                      View on GitHub
+                      在 GitHub 上查看
                     </a>
                   </dd>
                 </div>
                 <div className="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                   <dt className="text-sm leading-5 font-medium text-gray-500">
-                    Status
+                    状态
                   </dt>
                   <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                     <div className="flex">
