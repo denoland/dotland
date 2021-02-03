@@ -322,7 +322,7 @@ function RegistryInstructions(props: {
                           </ol>
                           <video
                             className="rounded-md border border-gray-200 w-full"
-                            src={"/images/add_webhook.mp4"}
+                            src={"https://deno.land/images/add_webhook.mp4"}
                             autoPlay
                             muted
                             loop

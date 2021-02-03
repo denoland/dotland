@@ -121,7 +121,7 @@
   },
   {
     "date": "2020-03-23",
-    "image": "/images/duri4n.png",
+    "image": "https://deno.land/images/duri4n.png",
     "title": "Tattoo design",
     "alt": "a deno logo as a tattoo design",
     "artist": {
@@ -144,7 +144,7 @@
   },
   {
     "date": "2020-06-17",
-    "image": "/images/DenoLogo3D-Anim.gif",
+    "image": "https://deno.land/images/DenoLogo3D-Anim.gif",
     "title": "Deno Logo in 3D",
     "alt": "a animated, green 3d deno mascot standing in the rain",
     "link": "https://github.com/MasterJames/high-res-deno-logo",
