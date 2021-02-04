@@ -2,39 +2,20 @@
 
 [![Build Status](https://github.com/justjavac/deno_website2/workflows/ci/badge.svg?branch=master&event=push)](https://github.com/justjavac/deno_website2/actions)
 
-This is the code for https://deno.land/
+Deno 中文网站的源码。
 
-This website consists of two parts
+基于 Next.js 开发并部署在了 Vercel 上。
 
-1. A Cloudflare Worker
-2. A Next.js app hosted on Vercel
+和英文站相比缺少了 Cloudflare Worker。由于 Cloudflare 并没有在中国大陆提供加速服
+务，因此没有使用 Cloudflare（PS：Cloudflare 对中国大陆提供了加速服务，但是只很对
+企业，而且架构昂贵）。
 
-We want to provide pretty and semantic URLs for modules that will be used within
-Deno. For example: https://deno.land/std/http/server.ts
+## 其他翻译
 
-When we request this file inside of Deno, we need to receive back the raw
-content of the file. However, when we visit that URL in the browser we want to
-see a pretty HTML file with syntax highlighting.
+- 中文手册 [denocn/deno_docs](https://github.com/denocn/deno_docs)
 
-To accomplish this the Cloudflare Worker looks at the "Accept:" HTTP header to
-see if the client wants HTML or not. If it does want HTML, we simply proxy the
-request to Vercel. (We use Vercel because of their nice GitHub integration.)
+## 图片的许可协议
 
-## History
+Deno 的图片基于 MIT 许可协议发布（发布到公共领域，可免费使用）。
 
-This is a rewrite of the Deno website it will combine the code in
-https://github.com/denoland/deno/tree/f96aaa802b245c8b3aeb5d57b031f8a55bb07de2/website
-and https://github.com/denoland/registry and have faster deployment.
-
-This is written in React / TailwindCSS / Vercel / CloudFlare Workers. Not in
-Deno. Ideally this could be ported to Deno at some point but we are in need of a
-new website and dogfooding takes too long. We hope to see this code ported to
-Deno with minimal developer flow interrupted (in particular, we need the ability
-to listen for FS events and reload the web server).
-
-## Image License
-
-These Deno images are distributed under the MIT license (public domain and free
-for use).
-
-- [A graphic for the v1 blog post by @hashrock](https://deno.land/v1.jpg)
+- [在 V1 Blog 中用到的图片，由 @hashrock 创作](https://deno.land/v1.jpg)
