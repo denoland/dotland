@@ -7,7 +7,7 @@ import dompurify from "dompurify";
 import { RawCodeBlock } from "./CodeBlock";
 import { replaceEmojis } from "../util/emoji_util";
 
-const REG_ID = /\{\s*(#[-\w]+)\s*\}/;
+const REG_ID = /\{\s*#([-\w]+)\s*\}/;
 
 function slugify(text: string): string {
   let matchs: RegExpMatchArray | null;
