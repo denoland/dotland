@@ -153,9 +153,7 @@ function Manual(): React.ReactElement {
       .then(setContent)
       .catch((e) => {
         console.error("Failed to fetch content:", e);
-        setContent(
-          "# 404 - Not Found\n糟糕，当前页面不存在或已经删除。"
-        );
+        setContent("# 404 - Not Found\n糟糕，当前页面不存在或已经删除。");
       });
   }, [sourceURL]);
 
