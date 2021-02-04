@@ -103,7 +103,7 @@ function Manual(): React.ReactElement {
       .then(setTableOfContents)
       .then(scrollTOCIntoView)
       .catch((e) => {
-        console.error("Failed to fetch table of contents:", e);
+        console.error("加载目录失败:", e);
         setTableOfContents(null);
       });
   }, [version]);
@@ -154,7 +154,7 @@ function Manual(): React.ReactElement {
       .catch((e) => {
         console.error("Failed to fetch content:", e);
         setContent(
-          "# 404 - Not Found\nWhoops, the page does not seem to exist."
+          "# 404 - Not Found\n糟糕，当前页面不存在或已经删除。"
         );
       });
   }, [sourceURL]);
@@ -322,7 +322,7 @@ function Manual(): React.ReactElement {
                         />
                         <div className="mx-4 flex flex-col justify-center">
                           <div className="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
-                            Deno Manual
+                            Deno 手册
                           </div>
                         </div>
                       </a>
@@ -357,7 +357,7 @@ function Manual(): React.ReactElement {
                   <img src="/logo.svg" alt="logo" className="w-auto h-12" />
                   <div className="mx-4 flex flex-col justify-center">
                     <div className="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
-                      Deno Manual
+                      Deno 手册
                     </div>
                   </div>
                 </a>
@@ -388,7 +388,7 @@ function Manual(): React.ReactElement {
               <div className="flex-1 flex">
                 <div className="w-full flex justify-between h-full">
                   <label htmlFor="search_field" className="sr-only">
-                    Search
+                    搜索
                   </label>
                   <button
                     className="w-full text-gray-400 focus-within:text-gray-600 flex items-center"
@@ -408,10 +408,9 @@ function Manual(): React.ReactElement {
                       </svg>
                     </div>
                     <div className="pl-6">
-                      <span className="inline sm:hidden">Search docs</span>
+                      <span className="inline sm:hidden">搜索</span>
                       <span className="hidden sm:inline">
-                        Search the docs (press <InlineCode>/</InlineCode> to
-                        focus)
+                        搜索文档 (按下 <InlineCode>/</InlineCode> 快速搜索)
                       </span>
                     </div>
                   </button>
@@ -447,7 +446,7 @@ function Manual(): React.ReactElement {
             <div className="h-16 bg-white shadow hidden md:block">
               <div className="max-w-screen-md mx-auto px-12 w-full flex justify-between h-full">
                 <label htmlFor="search_field" className="sr-only">
-                  Search
+                  搜索
                 </label>
                 <button
                   className="w-full text-gray-400 focus-within:text-gray-600 flex items-center"
@@ -468,7 +467,7 @@ function Manual(): React.ReactElement {
                     </svg>
                   </div>
                   <div className="pl-6">
-                    Search the docs (press <InlineCode>/</InlineCode> to focus)
+                    搜索文档 (按下 <InlineCode>/</InlineCode> 快速搜索)
                   </div>
                 </button>
               </div>
@@ -569,7 +568,7 @@ function Version({
   return (
     <div className="mt-5 px-4">
       <label htmlFor="version" className="sr-only">
-        Version
+        版本
       </label>
       <div className="mt-1 sm:mt-0 sm:col-span-2">
         <div className="max-w-xs rounded-md shadow-sm">
