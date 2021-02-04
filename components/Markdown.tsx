@@ -7,7 +7,14 @@ import dompurify from "dompurify";
 import { RawCodeBlock } from "./CodeBlock";
 import { replaceEmojis } from "../util/emoji_util";
 
+const REG_ID = /\{\s*(#[-\w]+)\s*\}/;
+
 function slugify(text: string): string {
+  let matchs: RegExpMatchArray | null;
+  if ((matchs = text.match(REG_ID)) !== null) {
+    return matchs[1];
+  }
+
   text = text.toLowerCase();
   text = text.split(" ").join("-");
   text = text.split(/\t/).join("--");
@@ -75,7 +82,7 @@ function Markdown(props: MarkdownProps): React.ReactElement | null {
             <a name="${slug}" class="anchor" href="#${slug}">
               <span class="octicon-link"></span>
             </a>
-            ${text}
+            ${text.replace(REG_ID, "")}
           </h${level}>`;
         },
         link(href, title, text) {

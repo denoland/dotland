@@ -1,8 +1,7 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-const xBasepath = "https://deno.land/x/deno@";
-const githubBasepath = "https://cdn.jsdelivr.net/gh/denoland/deno@";
-const docpath = "https://github.com/denoland/deno/blob/";
+const githubBasepath = "https://cdn.jsdelivr.net/gh/denocn/deno_docs@";
+const docpath = "https://github.com/denocn/deno_docs/blob/";
 import VERSIONS from "../versions.json";
 
 export const versions = VERSIONS.cli;
@@ -16,16 +15,12 @@ export interface TableOfContents {
   };
 }
 
-function basepath(version: string) {
-  return VERSIONS.cli.find((v) => v === version) === undefined
-    ? githubBasepath
-    : xBasepath;
-}
-
 export async function getTableOfContents(
   version: string
 ): Promise<TableOfContents> {
-  const res = await fetch(`${basepath(version)}${version}/docs/toc.json`);
+  console.log("目前中文文档只有最新版");
+  version = "master";
+  const res = await fetch(`${githubBasepath}${version}/toc.json`);
   if (res.status !== 200) {
     throw Error(
       `Got an error (${
@@ -37,9 +32,11 @@ export async function getTableOfContents(
 }
 
 export function getFileURL(version: string, path: string): string {
-  return `${basepath(version)}${version}/docs${path}.md`;
+  version = "master";
+  return `${githubBasepath}${version}${path}.md`;
 }
 
 export function getDocURL(version: string, path: string): string {
-  return `${docpath}${version}/docs${path}.md`;
+  version = "master";
+  return `${docpath}${version}${path}.md`;
 }

@@ -223,7 +223,7 @@ function Manual(): React.ReactElement {
         <title>Manual | Deno</title>
         <link
           rel="preconnect"
-          href="https://BH4D9OD16A-dsn.algolia.net"
+          href="https://w2n54pbnc9-dsn.algolia.net"
           crossOrigin="true"
         />
       </Head>
@@ -237,7 +237,8 @@ function Manual(): React.ReactElement {
             }}
             onClose={onClose}
             indexName="deno_manual"
-            apiKey="a05e65bb082b87ff0ae75506f1b29fce"
+            appId="W2N54PBNC9"
+            apiKey="aedf8ec92c7e58c869255da0b7b4dd3c"
             navigator={{
               navigate({ suggestionUrl }: any) {
                 push("/[...rest]", suggestionUrl);
@@ -500,11 +501,11 @@ function Manual(): React.ReactElement {
                     source={content
                       .replace(/\$STD_VERSION/g, stdVersion)
                       .replace(/\$CLI_VERSION/g, version)}
-                    displayURL={`https://deno.land/manual${
+                    displayURL={`https://deno-cn.vercel.app/manual${
                       version ? `@${version}` : ""
                     }${path}`}
                     sourceURL={sourceURL}
-                    baseURL={`https://deno.land/manual${
+                    baseURL={`https://deno-cn.vercel.app/manual${
                       version ? `@${version}` : ""
                     }`}
                   />
