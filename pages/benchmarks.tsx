@@ -96,7 +96,7 @@ function Benchmarks(): React.ReactElement {
       </Head>
       <CookieBanner />
       <div className="bg-gray-50 min-h-full">
-        <Header subtitle="Continuous Benchmarks" />
+        <Header subtitle="Continuous Benchmarks" widerContent={true} />
         <div className="mb-12">
           <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 mt-8 pb-8">
             <img src="/images/deno_logo_4.gif" className="mb-12 w-32 h-32" />
