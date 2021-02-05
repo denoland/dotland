@@ -7,7 +7,7 @@ Deno 中文网站的源码。
 基于 Next.js 开发并部署在了 Vercel 上。
 
 和英文站相比缺少了 Cloudflare Worker。由于 Cloudflare 并没有在中国大陆提供加速服
-务，因此没有使用 Cloudflare（PS：Cloudflare 对中国大陆提供了加速服务，但是只很对
+务，因此没有使用 Cloudflare（PS：Cloudflare 对中国大陆提供了加速服务，但是只针对
 企业，而且架构昂贵）。
 
 ## 其他翻译
