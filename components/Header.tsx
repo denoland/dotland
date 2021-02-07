@@ -60,33 +60,39 @@ function Header({
         <div className="hidden lg:flex md:ml-10 items-end">
           <Link href="/#installation">
             <a className="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              Install
+              {/*Install*/}
+              설치방법
             </a>
           </Link>
           <Link href="/manual">
             <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              Manual
+              {/*Manual*/}
+              가이드 문서
             </a>
           </Link>
           <Link href="/posts">
             <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              News
+              {/*News*/}
+              새 소식
             </a>
           </Link>
           <a
             href="https://doc.deno.land/builtin/stable"
             className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
           >
-            Runtime API
+            {/*Runtime API*/}
+            실행환경 API
           </a>
           <Link href="/std">
             <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              Standard Library
+              {/*Standard Library*/}
+              표준 라이브러리
             </a>
           </Link>
           <Link href="/x">
             <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              Third Party Modules
+              {/*Third Party Modules*/}
+              서드 파티 모듈
             </a>
           </Link>
           <a
@@ -168,33 +174,39 @@ function Header({
               <div className="px-2 pt-4 pb-3">
                 <Link href="/#installation">
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Install
+                    {/*Install*/}
+                    설치방법
                   </a>
                 </Link>
                 <Link href="/manual">
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Manual
+                    {/*Manual*/}
+                    가이드 분서
                   </a>
                 </Link>
                 <Link href="/posts">
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    News
+                    {/*News*/}
+                    새 소식
                   </a>
                 </Link>
                 <a
                   href="https://doc.deno.land/builtin/stable"
                   className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
                 >
-                  Runtime API
+                  {/*Runtime API*/}
+                  실행환경 API
                 </a>
                 <Link href="/std">
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Standard Library
+                    {/*Standard Library*/}
+                    표준 라이브러리
                   </a>
                 </Link>
                 <Link href="/x">
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Third Party Modules
+                    {/*Third Party Modules*/}
+                    서드 파티 모듈
                   </a>
                 </Link>
               </div>

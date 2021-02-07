@@ -70,7 +70,8 @@ function ThirdPartyRegistryList(): React.ReactElement {
   return (
     <>
       <Head>
-        <title>Third Party Modules | Deno</title>
+        {/*<title>Third Party Modules | Deno</title>*/}
+        <title>서드 파티 모듈 | Deno</title>
       </Head>
       <CookieBanner />
       <div className="bg-gray">
@@ -82,20 +83,24 @@ function ThirdPartyRegistryList(): React.ReactElement {
         <div>
           <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8">
             <dt className="text-lg leading-6 font-medium text-gray-900">
-              What is deno.land/x?
+              {/*What is deno.land/x?*/}
+              deno.land/x란?
             </dt>
             <dd className="mt-2">
               <p className="text-base leading-6 text-gray-500">
-                <span className="font-semibold">deno.land/x</span> is a hosting
-                service for Deno scripts. It caches releases of open source
-                modules stored on GitHub and serves them at one easy to remember
-                domain.
+                {/*<span className="font-semibold">deno.land/x</span> is a hosting*/}
+                {/*service for Deno scripts. It caches releases of open source*/}
+                {/*modules stored on GitHub and serves them at one easy to remember*/}
+                {/*domain.*/}
+                <span className="font-semibold">deno.land/x</span>는 Deno 스크립트를 호스팅하는 서비스입니다.
+                이 서비스는 GitHub에 있는 오픈소스 모듈을 캐싱하며 기억하기 쉬운 주소로 제공합니다.
               </p>
             </dd>
 
             <div className="mt-2">
               <a href="#info" className="link">
-                Learn more
+                {/*Learn more*/}
+                더 알아보기
               </a>
             </div>
             {/* <div className="mt-8">
@@ -107,14 +112,16 @@ function ThirdPartyRegistryList(): React.ReactElement {
           </div>
           <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8">
             <label htmlFor="query" className="font-medium sr-only">
-              Search
+              {/*Search*/}
+              검색
             </label>
             <input
               id="query"
               className="block w-full px-4 py-2 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1"
               type="text"
               placeholder={
-                !resp ? "Search" : `Search through ${resp.totalCount} modules`
+                // !resp ? "Search" : `Search through ${resp.totalCount} modules`
+                !resp ? "검색" : `${resp.totalCount}개 모듈 중에서 원하는 모듈을 찾아보세요`
               }
               value={query}
               onChange={handleSearchInput}
@@ -306,19 +313,25 @@ function ThirdPartyRegistryList(): React.ReactElement {
                           <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
                             <div>
                               <p className="text-sm leading-5 text-gray-700">
-                                Showing{" "}
-                                <span className="font-medium">
-                                  {(page - 1) * PER_PAGE + 1}
-                                </span>{" "}
-                                to{" "}
-                                <span className="font-medium">
-                                  {(page - 1) * PER_PAGE + resp.results.length}
-                                </span>{" "}
-                                of{" "}
-                                <span className="font-medium">
-                                  {resp.totalCount}
-                                </span>{" "}
-                                results
+                                {/*Showing{" "}*/}
+                                {/*<span className="font-medium">*/}
+                                {/*  {(page - 1) * PER_PAGE + 1}*/}
+                                {/*</span>{" "}*/}
+                                {/*to{" "}*/}
+                                {/*<span className="font-medium">*/}
+                                {/*  {(page - 1) * PER_PAGE + resp.results.length}*/}
+                                {/*</span>{" "}*/}
+                                {/*of{" "}*/}
+                                {/*<span className="font-medium">*/}
+                                {/*  {resp.totalCount}*/}
+                                {/*</span>{" "}*/}
+                                {/*results*/}
+                                전체{" "}
+                                <span className="font-medium">{resp.totalCount}</span>
+                                건 중{" "}
+                                <span className="font-medium">{(page - 1) * PER_PAGE + 1}</span>
+                                부터{" "}
+                                <span className="font-medium">{(page - 1) * PER_PAGE + resp.results.length}</span>
                               </p>
                             </div>
                             <div>
@@ -477,45 +490,74 @@ function ThirdPartyRegistryList(): React.ReactElement {
               <div>
                 <div>
                   <dt className="text-lg leading-6 font-medium text-gray-900">
-                    How do I use modules on deno.land/x?
+                    {/*How do I use modules on deno.land/x?*/}
+                    deno.land/x에 있는 모듈을 어떻게 사용할 수 있나요?
                   </dt>
                   <dd className="mt-2">
                     <p className="text-base leading-6 text-gray-500 break-words">
-                      The basic format of code URLs is
+                      {/*The basic format of code URLs is*/}
+                      {/*<InlineCode>*/}
+                      {/*  https://deno.land/x/IDENTIFIER@VERSION/FILE_PATH*/}
+                      {/*</InlineCode>*/}
+                      {/*. If you leave out the version it will be defaulted to the*/}
+                      {/*most recent version released for the module.*/}
+                      모듈을 사용하는 기본 형식은
                       <InlineCode>
                         https://deno.land/x/IDENTIFIER@VERSION/FILE_PATH
                       </InlineCode>
-                      . If you leave out the version it will be defaulted to the
-                      most recent version released for the module.
+                      입니다. 지정한 버전이 존재하지 않으면 가장 최근에 릴리즈된 버전이 사용됩니다.
                     </p>
                   </dd>
                 </div>
                 <div className="mt-12">
                   <dt className="text-lg leading-6 font-medium text-gray-900">
-                    Can I find functionality built-in to Deno here?
+                    {/*Can I find functionality built-in to Deno here?*/}
+                    Deno가 제공하는 기능도 여기에서 찾을 수 있나요??
                   </dt>
                   <dd className="mt-2">
                     <p className="text-base leading-6 text-gray-500">
-                      No, the built-in runtime is documented on{" "}
+                      {/*No, the built-in runtime is documented on{" "}*/}
+                      {/*<a className="link" href="https://doc.deno.land/">*/}
+                      {/*  deno doc*/}
+                      {/*</a>{" "}*/}
+                      {/*and in the manual. See{" "}*/}
+                      {/*<Link href="/std">*/}
+                      {/*  <a className="link">/std</a>*/}
+                      {/*</Link>{" "}*/}
+                      {/*for the standard modules.*/}
+                      아닙니다. 실행환경이 제공하는 기능은{" "}
                       <a className="link" href="https://doc.deno.land/">
                         deno doc
-                      </a>{" "}
-                      and in the manual. See{" "}
+                      </a>
+                      이나 가이드 문서에서 확인할 수 있습니다. 표준 모듈을 찾는다면{" "}
                       <Link href="/std">
                         <a className="link">/std</a>
-                      </Link>{" "}
-                      for the standard modules.
+                      </Link>
+                      를 참고하세요.
                     </p>
                   </dd>
                 </div>
                 <div className="mt-12">
                   <dt className="text-lg leading-6 font-medium text-gray-900">
-                    How do I add a module to deno.land/x?
+                    {/*How do I add a module to deno.land/x?*/}
+                    직접 개발한 모듈을 deno.land/x에 추가할 수 있나요?
                   </dt>
                   <dd className="mt-2">
+                    {/*<p className="text-base leading-6 text-gray-500 break-words">*/}
+                    {/*  Press the button below and follow the presented*/}
+                    {/*  instructions:*/}
+                    {/*</p>*/}
+                    {/*<span className="block w-full rounded-md shadow-sm mt-4">*/}
+                    {/*  <button*/}
+                    {/*    type="submit"*/}
+                    {/*    className="w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"*/}
+                    {/*    onClick={() => setOverlayOpen(true)}*/}
+                    {/*  >*/}
+                    {/*    Add a module*/}
+                    {/*  </button>*/}
+                    {/*</span>*/}
                     <p className="text-base leading-6 text-gray-500 break-words">
-                      Press the button below and follow the presented
-                      instructions:
+                      아래 버튼을 누르고 안내하는 대로 진행하세요:
                     </p>
                     <span className="block w-full rounded-md shadow-sm mt-4">
                       <button
@@ -523,7 +565,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
                         className="w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
                         onClick={() => setOverlayOpen(true)}
                       >
-                        Add a module
+                        모듈 추가하기
                       </button>
                     </span>
                   </dd>
@@ -535,34 +577,48 @@ function ThirdPartyRegistryList(): React.ReactElement {
                     className="text-lg leading-6 font-medium text-gray-900"
                     id="warning"
                   >
-                    I am getting a warning when importing from deno.land/x!
+                    {/*I am getting a warning when importing from deno.land/x!*/}
+                    deno.land/x에서 모듈을 로드하면 경고 메시지가 표시됩니다!
                   </dt>
                   <dd className="mt-2">
                     <p className="text-base leading-6 text-gray-500">
-                      deno.land/x warns you when you are implicitly importing
-                      the latest version of a module (when you do not explicitly
-                      specify a version). This is because it can{" "}
+                      {/*deno.land/x warns you when you are implicitly importing*/}
+                      {/*the latest version of a module (when you do not explicitly*/}
+                      {/*specify a version). This is because it can{" "}*/}
+                      {/*<a*/}
+                      {/*  href="https://github.com/denoland/deno_website2/issues/997"*/}
+                      {/*  className="link"*/}
+                      {/*>*/}
+                      {/*  be unsafe to not tag dependencies*/}
+                      {/*</a>*/}
+                      {/*. To get rid of the warning, explicitly specify a version.*/}
+                      deno.land/x에서 모듈을 로드할 때 버전을 지정하지 않으면 경고 메시지가 표시됩니다.
+                      이 메시지가 표시되는 이유는{" "}
                       <a
                         href="https://github.com/denoland/deno_website2/issues/997"
                         className="link"
                       >
-                        be unsafe to not tag dependencies
+                        의존성 측면에서 안전하지 않을 수 있기 때문
                       </a>
-                      . To get rid of the warning, explicitly specify a version.
+                      입니다. 경고 메시지를 없애려면 특정 버전을 지정하면 됩니다.
                     </p>
                   </dd>
                 </div>
                 <div className="mt-12">
                   <dt className="text-lg leading-6 font-medium text-gray-900">
-                    Can I edit or remove a module on deno.land/x?
+                    {/*Can I edit or remove a module on deno.land/x?*/}
+                    deno.land/x에 있는 모듈을 수정하거나 삭제할 수 있나요?
                   </dt>
                   <dd className="mt-2">
                     <p className="text-base leading-6 text-gray-500">
-                      Module versions are persistent and immutable. It is thus
-                      not possible to edit or delete a module (or version), to
-                      prevent breaking programs that rely on this module.
-                      Modules may be removed if there is a legal reason to do
-                      (for example copyright infringement).
+                      {/*Module versions are persistent and immutable. It is thus*/}
+                      {/*not possible to edit or delete a module (or version), to*/}
+                      {/*prevent breaking programs that rely on this module.*/}
+                      {/*Modules may be removed if there is a legal reason to do*/}
+                      {/*(for example copyright infringement).*/}
+                      모듈 버전은 수정할 수 없습니다.
+                      모듈 코드나 버전이 변경되면 해당 모듈을 사용하는 프로그램이 제대로 동작할 수 없기 때문입니다.
+                      모듈은 저작권 문제와 같은 법적인 사유가 있을 때만 제거됩니다.
                     </p>
                   </dd>
                 </div>
@@ -571,12 +627,14 @@ function ThirdPartyRegistryList(): React.ReactElement {
           </div>
           <div className="max-w-screen-lg mx-auto pt-4 pb-8 sm:pt-8 sm:pb-12 px-4 sm:px-6 lg:pt-12 lg:pb-16 lg:px-8">
             <h4 className="font-semibold text-2xl" id="stats">
-              Stats
+              {/*Stats*/}
+              최근 업데이트
             </h4>
             {stats ? (
               <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-8">
                 <div>
-                  <h5 className="font-medium text-lg">New modules</h5>
+                  {/*<h5 className="font-medium text-lg">New modules</h5>*/}
+                  <h5 className="font-medium text-lg">새로 등록된 모듈</h5>
                   <div className="bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2">
                     <ModuleList
                       modules={stats.recently_added_modules.map((v) => ({
@@ -589,7 +647,8 @@ function ThirdPartyRegistryList(): React.ReactElement {
                   </div>
                 </div>
                 <div>
-                  <h5 className="font-medium text-lg">Recently updated</h5>
+                  {/*<h5 className="font-medium text-lg">Recently updated</h5>*/}
+                  <h5 className="font-medium text-lg">최근 업데이트</h5>
                   <div className="bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2">
                     <ModuleList
                       modules={stats.recently_uploaded_versions.map((v) => ({

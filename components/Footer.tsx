@@ -15,7 +15,8 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
           <div className="px-5 py-2">
             <Link href="/[...rest]" as="/manual">
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Manual
+                {/*Manual*/}
+                가이드 문서
               </a>
             </Link>
           </div>
@@ -24,48 +25,55 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
               href="https://doc.deno.land/builtin/stable"
               className="text-base leading-6 text-gray-500 hover:text-gray-900"
             >
-              Runtime API
+              {/*Runtime API*/}
+              실행환경 API
             </a>
           </div>
           <div className="px-5 py-2">
             <Link href="/[...rest]" as="/std">
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Standard Library
+                {/*Standard Library*/}
+                표준 라이브러리
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/x">
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Third Party Modules
+                {/*Third Party Modules*/}
+                서드 파티 모듈
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/benchmarks">
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Benchmarks
+                {/*Benchmarks*/}
+                벤치마크
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/artwork">
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Artwork
+                {/*Artwork*/}
+                아트워크
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/posts">
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                News
+                {/*News*/}
+                새 소식
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/translations">
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Translations
+                {/*Translations*/}
+                번역
               </a>
             </Link>
           </div>
