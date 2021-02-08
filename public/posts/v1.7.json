@@ -1,5 +1,6 @@
 {
-  "title": "Deno 1.7 Release Notes",
+  "!title": "Deno 1.7 Release Notes",
+  "title": "Deno 1.7 릴리즈 노트",
   "author": "Bartek Iwańczuk, Luca Casonato",
   "publish_date": "2021-01-19T15:00:00.000Z",
   "images": [
@@ -10,5 +11,6 @@
       "className": "hidden"
     }
   ],
-  "snippet": "Deno 1.7, one of our largest releases to date, adds cross compilation and 60% smaller binaries for deno compile, a DNS resolver API, support for data URLs in import statements and web workers, and much more."
+  "!snippet": "Deno 1.7, one of our largest releases to date, adds cross compilation and 60% smaller binaries for deno compile, a DNS resolver API, support for data URLs in import statements and web workers, and much more.",
+  "snippet": "Deno 1.7 릴리즈는 지금까지 있었던 릴리즈 중 가장 규모가 큰 릴리즈입니다. 크로스 컴파일 기능이 추가되었으며 deno 바이너리 용량이 60% 줄었습니다. DNS 리졸버 API가 추가되었고 import 구문과 웹 워커에 데이터 URL을 사용할 수 있습니다. 이 외에도 수많은 기능이 추가되었습니다."
 }
