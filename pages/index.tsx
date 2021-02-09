@@ -27,6 +27,9 @@ for await (const req of s) {
     <>
       <Head>
         <title>Deno - 안전한 JavaScript & TypeScript 실행환경</title>
+        <meta property="og:title" content="Deno"/>
+        <meta property="og:description" content="안전한 JavaScript & TypeScript 실행환경"/>
+        <meta property="og:image" content="https://deno-ko.vercel.app/images/icons/apple-touch-icon-180x180.png"/>
       </Head>
       <CookieBanner />
       <div className="bg-white">
