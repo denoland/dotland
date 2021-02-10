@@ -1,5 +1,6 @@
 {
-  "title": "Deno 1.4 Release Notes",
+  "/title": "Deno 1.4 Release Notes",
+  "title": "Deno 1.4 릴리즈 노트",
   "author": "Bartek Iwańczuk, Ryan Dahl, and Luca Casonato",
   "publish_date": "2020-09-13T15:00:00.000Z",
   "images": [
@@ -10,5 +11,6 @@
       "className": "hidden"
     }
   ],
-  "snippet": "Deno 1.4 adds support for the web standard WebSocket API, deno run --watch, and integrated test coverage. This is the largest feature release yet."
+  "/snippet": "Deno 1.4 adds support for the web standard WebSocket API, deno run --watch, and integrated test coverage. This is the largest feature release yet.",
+  "snippet": "Deno 1.4에는 웹 표준 WebSocket API, deno run --watch, 통합 테스트 커버리지 기능이 추가되었습니다. 지금까지 있었던 릴리즈 중 가장 큰 릴리즈입니다."
 }
