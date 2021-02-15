@@ -15,6 +15,8 @@ interface HomeProps {
   latestStd: string;
 }
 
+const GA_TRACKING_ID = 'G-8LXMPFT36Q';
+
 const Home: NextPage<HomeProps> = ({ latestStd }) => {
   const complexExampleProgram = `import { serve } from "https://deno.land/std@${latestStd}/http/server.ts";
 const s = serve({ port: 8000 });
@@ -30,6 +32,29 @@ for await (const req of s) {
         <meta property="og:title" content="Deno"/>
         <meta property="og:description" content="안전한 JavaScript & TypeScript 실행환경"/>
         <meta property="og:image" content="https://deno-ko.vercel.app/images/icons/apple-touch-icon-180x180.png"/>
+
+        {process.env.NODE_ENV === "production" && (
+          // Global site tag (gtag.js) - Google Analytics
+          <>
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+            />
+            <script
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${GA_TRACKING_ID}', {
+                    page_path: window.location.pathname,
+                  });
+                `,
+              }}
+            />
+          </>
+        )}
       </Head>
       <CookieBanner />
       <div className="bg-white">
