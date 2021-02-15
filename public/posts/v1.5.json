@@ -1,5 +1,6 @@
 {
-  "title": "Deno 1.5 Release Notes",
+  "/title": "Deno 1.5 Release Notes",
+  "title": "Deno 1.5 릴리즈 노트",
   "author": "Bartek Iwańczuk, Luca Casonato, Ryan Dahl",
   "publish_date": "2020-10-27T15:00:00.000Z",
   "images": [
@@ -10,5 +11,6 @@
       "className": "hidden"
     }
   ],
-  "snippet": "Deno 1.5 improves `deno bundle` with support for tree shaking and a 15x speed improvement. This release also adds the `alert`, `confirm`, and `prompt` APIs and enhances the REPL."
+  "/snippet": "Deno 1.5 improves `deno bundle` with support for tree shaking and a 15x speed improvement. This release also adds the `alert`, `confirm`, and `prompt` APIs and enhances the REPL.",
+  "snippet": "Deno 1.5는 `deno bundle` 명령을 개선하면서 트리 셰이킹을 도입했고 번들링 속도를 15배 향상시켰습니다. 이번 릴리즈에는 `alert`, `confirm`, `prompt` API가 추가되었으며 REPL도 개선되었습니다."
 }
