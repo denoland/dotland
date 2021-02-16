@@ -1,5 +1,6 @@
 {
-  "title": "Deno 1.6 Release Notes",
+  "/title": "Deno 1.6 Release Notes",
+  "title": "Deno 1.6 릴리즈 노트",
   "author": "Bartek Iwańczuk, Luca Casonato, Ryan Dahl",
   "publish_date": "2020-12-08T15:00:00.000Z",
   "images": [
@@ -10,5 +11,6 @@
       "className": "hidden"
     }
   ],
-  "snippet": "Deno 1.6 adds the abilty to build your Deno projects into fully standalone, self-contained executables with `deno compile`. The release also introduces a built-in LSP for editor integrations, and experimental Apple Silicon support."
+  "/snippet": "Deno 1.6 adds the abilty to build your Deno projects into fully standalone, self-contained executables with `deno compile`. The release also introduces a built-in LSP for editor integrations, and experimental Apple Silicon support.",
+  "snippet": "Deno 1.6에는 Deno 프로젝트를 완전히 독립적으로 실행할 수 있는 형태로 빌드하는 `deno compile` 명령이 추가되었습니다. 이번 릴리즈에는 코드 에디터 통합을 위한 LSP 기능, Apple Silicon 지원 기능도 실험적으로 추가되었습니다."
 }
