@@ -109,7 +109,7 @@ function Benchmarks(): React.ReactElement {
             <p className="mt-4">
               You are currently viewing data for{" "}
               {showAll ? "all" : "the most recent"} commits to the{" "}
-              <a href="https://github.com/denoland/deno">master</a>
+              <a href="https://github.com/denoland/deno">main</a>
               branch. You can also view{" "}
               <Link href={!showAll ? "/benchmarks?all" : "/benchmarks"}>
                 <a className="link">{!showAll ? "all" : "the most recent"}</a>
@@ -553,7 +553,7 @@ function BenchmarkOrLoading(props: {
 function SourceLink({ name, path }: { name: string; path: string }) {
   return (
     <a
-      href={`https://github.com/denoland/deno/blob/master/${path}`}
+      href={`https://github.com/denoland/deno/blob/main/${path}`}
       className="link"
     >
       {name}
