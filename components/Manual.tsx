@@ -580,13 +580,13 @@ function Version({
               gotoVersion(newVersion)
             }
           >
-            {version && version !== "master" && !versions.includes(version) && (
+            {version && version !== "main" && !versions.includes(version) && (
               <option key={version} value={version}>
                 {version}
               </option>
             )}
-            <option key="master" value="master">
-              master
+            <option key="main" value="main">
+              main
             </option>
             {versions.map((v) => (
               <option key={v} value={v}>
