@@ -121,7 +121,7 @@ test("getModule", async () => {
 });
 
 test("fileTypeFromURL", () => {
-  const tests: [string, string | undefined][] = [
+  const tests: Array<[string, string | undefined]> = [
     ["main.ts", "typescript"],
     ["lib.js", "javascript"],
     ["Component.tsx", "tsx"],
@@ -161,7 +161,7 @@ test("fileNameFromURL", () => {
 });
 
 test("findRootReadme", () => {
-  const tests: [string, boolean][] = [
+  const tests: Array<[string, boolean]> = [
     ["/README", true],
     ["/README.md", true],
     ["/readme.markdown", true],
@@ -187,7 +187,7 @@ test("findRootReadme", () => {
 });
 
 test("isReadme", () => {
-  const tests: [string, boolean][] = [
+  const tests: Array<[string, boolean]> = [
     ["README", true],
     ["README.md", true],
     ["readme.markdown", true],
