@@ -177,11 +177,11 @@ test("findRootReadme", () => {
   ];
 
   for (const [path, expectedToBeRootReadme] of tests) {
-    const rootReadme = findRootReadme([{ path, type: "file", size: 100 }])
+    const rootReadme = findRootReadme([{ path, type: "file", size: 100 }]);
     if (expectedToBeRootReadme) {
-      expect(rootReadme).not.toBe(undefined)
+      expect(rootReadme).not.toBe(undefined);
     } else {
-      expect(rootReadme).toBe(undefined)
+      expect(rootReadme).toBe(undefined);
     }
   }
 });
@@ -197,9 +197,9 @@ test("isReadme", () => {
     ["README.mkd", true],
     ["README.mkdown", false],
     ["README.markdn", false],
-    ["READTHIS.md", false]
-  ]
+    ["READTHIS.md", false],
+  ];
   for (const [path, expectedToBeReadme] of tests) {
-    expect(isReadme(path)).toBe(expectedToBeReadme)
+    expect(isReadme(path)).toBe(expectedToBeReadme);
   }
 });
