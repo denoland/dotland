@@ -10,6 +10,9 @@ import {
   getVersionList,
   getModule,
   fileNameFromURL,
+  findRootReadme,
+  isReadme,
+  fileTypeFromURL,
 } from "./registry_utils";
 import "isomorphic-unfetch";
 
@@ -117,7 +120,86 @@ test("getModule", async () => {
   });
 });
 
+test("fileTypeFromURL", () => {
+  const tests: Array<[string, string | undefined]> = [
+    ["main.ts", "typescript"],
+    ["lib.js", "javascript"],
+    ["Component.tsx", "tsx"],
+    ["Component.jsx", "jsx"],
+    ["data.json", "json"],
+    ["Cargo.toml", "toml"],
+    ["Cargo.lock", "toml"],
+    ["mod.rs", "rust"],
+    ["main.py", "python"],
+    ["lib.wasm", "wasm"],
+    ["Makefile", "makefile"],
+    ["Dockerfile", "dockerfile"],
+    ["build.Dockerfile", "dockerfile"],
+    ["config.yml", "yaml"],
+    ["config.yaml", "yaml"],
+    ["index.html", "html"],
+    ["index.htm", "html"],
+    ["readme.md", "markdown"],
+    ["readme.markdown", "markdown"],
+    ["readme.mdown", "markdown"],
+    ["readme.mkdn", "markdown"],
+    ["readme.mdwn", "markdown"],
+    ["readme.mkd", "markdown"],
+    ["image.png", "image"],
+    ["image.jpg", "image"],
+    ["image.jpeg", "image"],
+    ["file.unknown", undefined],
+  ];
+  for (const [name, expectedType] of tests) {
+    expect(fileTypeFromURL(name)).toBe(expectedType);
+  }
+});
+
 test("fileNameFromURL", () => {
   expect(fileNameFromURL("a/path/to/%5Bfile%5D.txt")).toBe("[file].txt");
   expect(fileNameFromURL("a/path/to/file.tsx")).toBe("file.tsx");
+});
+
+test("findRootReadme", () => {
+  const tests: Array<[string, boolean]> = [
+    ["/README", true],
+    ["/README.md", true],
+    ["/readme.markdown", true],
+    ["/README.mdown", true],
+    ["/readme.mkdn", true],
+    ["/readme.mdwn", true],
+    ["/README.mkd", true],
+    ["/README.mkdown", false],
+    ["/README.markdn", false],
+    ["/READTHIS.md", false],
+    ["/docs/README.md", true],
+    ["/.github/README.md", true],
+  ];
+
+  for (const [path, expectedToBeRootReadme] of tests) {
+    const rootReadme = findRootReadme([{ path, type: "file", size: 100 }]);
+    if (expectedToBeRootReadme) {
+      expect(rootReadme).not.toBe(undefined);
+    } else {
+      expect(rootReadme).toBe(undefined);
+    }
+  }
+});
+
+test("isReadme", () => {
+  const tests: Array<[string, boolean]> = [
+    ["README", true],
+    ["README.md", true],
+    ["readme.markdown", true],
+    ["README.mdown", true],
+    ["readme.mkdn", true],
+    ["readme.mdwn", true],
+    ["README.mkd", true],
+    ["README.mkdown", false],
+    ["README.markdn", false],
+    ["READTHIS.md", false],
+  ];
+  for (const [path, expectedToBeReadme] of tests) {
+    expect(isReadme(path)).toBe(expectedToBeReadme);
+  }
 });
