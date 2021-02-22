@@ -30,6 +30,12 @@
     "repository": "https://github.com/JheysonDev/deno_website2"
   },
   {
+    "language": "Português",
+    "english": "Portuguese",
+    "link": "https://deno-pt.vercel.app/",
+    "repository": "https://github.com/mumumilk/deno_website2_portuguese"
+  },
+  {
     "language": "Français",
     "english": "French",
     "link": "https://deno-fr.vercel.app/",
