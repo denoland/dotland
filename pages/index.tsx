@@ -44,7 +44,7 @@ for await (const req of s) {
 
             <a
               href="https://github.com/denoland/deno/releases/latest"
-              className="rounded-full mt-4 px-8 py-2 bg-blue-500 text-white shadow-lg"
+              className="rounded-full mt-4 px-8 py-2 transition-colors duration-75 ease-in-out bg-blue-500 hover:bg-blue-400 text-white shadow-lg"
             >
               {versions.cli[0]}
             </a>
@@ -112,7 +112,7 @@ for await (const req of s) {
           <p className="my-4 text-gray-700">
             You can find a more in depth introduction, examples, and environment
             setup guides in{" "}
-            <Link href="/[...rest]" as="/manual">
+            <Link href="/manual">
               <a className="link">the manual</a>
             </Link>
             .
@@ -135,7 +135,7 @@ for await (const req of s) {
           </p>
           <p className="my-4 text-gray-700">
             Deno comes with{" "}
-            <Link href="/[...rest]" as="/manual">
+            <Link href="/manual">
               <a className="link">a manual</a>
             </Link>{" "}
             which contains more in depth explanations about the more complex
@@ -168,7 +168,7 @@ for await (const req of s) {
           </p>
           <p className="my-4 text-gray-700">
             These standard modules are hosted at{" "}
-            <Link href="/[...rest]" as="/std">
+            <Link href="/std">
               <a className="link">deno.land/std</a>
             </Link>{" "}
             and are distributed via URLs like all other ES modules that are
@@ -192,10 +192,14 @@ for await (const req of s) {
             ,{" "}
             <a href="https://jspm.io" className="link">
               jspm.io
-            </a>{" "}
-            or{" "}
+            </a>
+            ,{" "}
             <a href="https://www.jsdelivr.com/" className="link">
               jsDelivr
+            </a>{" "}
+            or{" "}
+            <a href="https://esm.sh/" className="link">
+              esm.sh
             </a>
             .
           </p>

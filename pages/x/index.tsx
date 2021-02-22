@@ -74,7 +74,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
       </Head>
       <CookieBanner />
       <div className="bg-gray">
-        <Header subtitle="Third Party Modules" />
+        <Header subtitle="Third Party Modules" widerContent={true} />
         <RegistryInstructions
           isOpen={overlayOpen}
           close={() => setOverlayOpen(false)}
@@ -98,6 +98,12 @@ function ThirdPartyRegistryList(): React.ReactElement {
                 Learn more
               </a>
             </div>
+            {/* <div className="mt-8">
+              <ErrorMessage
+                title="Ongoing incident"
+                body="We are currently seeing delays and timeouts during module publishing and search. Serving of already published modules and `std` is not affected. We are working on resolving the problem."
+              />
+            </div> */}
           </div>
           <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8">
             <label htmlFor="query" className="font-medium sr-only">
@@ -495,7 +501,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
                         deno doc
                       </a>{" "}
                       and in the manual. See{" "}
-                      <Link href="/[identifier]" as="/std">
+                      <Link href="/std">
                         <a className="link">/std</a>
                       </Link>{" "}
                       for the standard modules.
@@ -621,7 +627,7 @@ function ModuleList({
         const link = `/x/${meta.name}`;
         return (
           <li className={i !== 0 ? "border-t border-gray-200" : ""} key={i}>
-            <Link href="/x/[...rest]" as={link}>
+            <Link href={link}>
               <a className="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
                 <div className="flex items-center px-4 sm:px-6 py-2">
                   <div className="min-w-0 flex-1 flex items-center">

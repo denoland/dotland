@@ -28,6 +28,7 @@ import FileDisplay from "./FileDisplay";
 import DirectoryListing from "./DirectoryListing";
 import { CookieBanner } from "./CookieBanner";
 import { replaceEmojis } from "../util/emoji_util";
+import { ErrorMessage } from "./ErrorMessage";
 
 function Registry(): React.ReactElement {
   // State
@@ -558,27 +559,14 @@ function Registry(): React.ReactElement {
                             <div className="mt-2 overflow-x-auto">
                               {externalDependencies.map((url) => (
                                 <p key={url}>
-                                  {url.startsWith("https://deno.land/std") ? (
+                                  {url.startsWith("https://deno.land/") ? (
                                     <Link
-                                      href="/[...rest]"
-                                      as={url.replace("https://deno.land", "")}
+                                      href={url.replace(
+                                        "https://deno.land",
+                                        ""
+                                      )}
                                     >
-                                      <a
-                                        href={url}
-                                        className="link text-sm truncate"
-                                      >
-                                        {url}
-                                      </a>
-                                    </Link>
-                                  ) : url.startsWith("https://deno.land/x/") ? (
-                                    <Link
-                                      href="/x/[...rest]"
-                                      as={url.replace("https://deno.land", "")}
-                                    >
-                                      <a
-                                        href={url}
-                                        className="link text-sm truncate"
-                                      >
+                                      <a className="link text-sm truncate">
                                         {url}
                                       </a>
                                     </Link>
@@ -617,39 +605,6 @@ function Registry(): React.ReactElement {
   );
 }
 
-export function ErrorMessage(props: {
-  title: string;
-  body: string;
-}): React.ReactElement {
-  return (
-    <div className="rounded-md bg-red-50 border border-red-200 p-4">
-      <div className="flex">
-        <div className="flex-shrink-0">
-          <svg
-            className="h-5 w-5 text-red-400"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
-            <path
-              fillRule="evenodd"
-              d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </div>
-        <div className="ml-3">
-          <h3 className="text-sm leading-5 font-medium text-red-800">
-            {props.title}
-          </h3>
-          <div className="mt-2 text-sm leading-5 text-red-700">
-            {props.body}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function Breadcrumbs({
   name,
   version,
@@ -677,8 +632,7 @@ function Breadcrumbs({
         </>
       )}
       <Link
-        href={(!isStd ? "/x" : "") + "/[...rest]"}
-        as={`${!isStd ? "/x" : ""}/${name}${version ? `@${version}` : ""}`}
+        href={`${!isStd ? "/x" : ""}/${name}${version ? `@${version}` : ""}`}
       >
         <a className="link">
           {name}
@@ -694,8 +648,7 @@ function Breadcrumbs({
               {" "}
               /{" "}
               <Link
-                href={(!isStd ? "/x" : "") + "/[...rest]"}
-                as={`${!isStd ? "/x" : ""}/${name}${
+                href={`${!isStd ? "/x" : ""}/${name}${
                   version ? `@${version}` : ""
                 }${link ? `/${link}` : ""}`}
               >
