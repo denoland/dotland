@@ -28,5 +28,11 @@
     "english": "Spanish",
     "link": "https://deno-es.vercel.app/",
     "repository": "https://github.com/JheysonDev/deno_website2"
+  },
+  {
+    "language": "Français",
+    "english": "French",
+    "link": "https://deno-fr.vercel.app/",
+    "repository": "https://github.com/Ayfri/deno_website2_fr"
   }
 ]
