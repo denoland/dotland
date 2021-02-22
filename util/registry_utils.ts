@@ -285,13 +285,20 @@ export function fileTypeFromURL(filename: string): string | undefined {
     return "wasm";
   } else if (f.toLocaleLowerCase().endsWith("makefile")) {
     return "makefile";
-  } else if (f.endsWith(".dockerfile") || f.endsWith("Dockerfile")) {
+  } else if (f.endsWith(".dockerfile") || f.endsWith("dockerfile")) {
     return "dockerfile";
   } else if (f.endsWith(".yml") || f.endsWith(".yaml")) {
     return "yaml";
   } else if (f.endsWith(".htm") || f.endsWith(".html")) {
     return "html";
-  } else if (f.endsWith(".md")) {
+  } else if (
+    f.endsWith(".md") ||
+    f.endsWith(".markdown") ||
+    f.endsWith(".mdown") ||
+    f.endsWith(".mkdn") ||
+    f.endsWith(".mdwn") ||
+    f.endsWith(".mkd")
+  ) {
     return "markdown";
   } else if (f.endsWith(".png") || f.endsWith(".jpg") || f.endsWith(".jpeg")) {
     return "image";
@@ -319,22 +326,11 @@ export function denoDocAvailableForURL(filename: string): boolean {
 export function findRootReadme(
   directoryListing: DirListing[] | undefined
 ): DirEntry | undefined {
-  const listing =
-    directoryListing?.find(
-      (d) =>
-        d.path.toLowerCase() === "/readme.md" ||
-        d.path.toLowerCase() === "/readme"
-    ) ??
-    directoryListing?.find(
-      (d) =>
-        d.path.toLowerCase() === "/docs/readme.md" ||
-        d.path.toLowerCase() === "/docs/readme"
-    ) ??
-    directoryListing?.find(
-      (d) =>
-        d.path.toLowerCase() === "/.github/readme.md" ||
-        d.path.toLowerCase() === "/.github/readme"
-    );
+  const listing = directoryListing?.find((d) =>
+    /^\/(docs\/|\.github\/)?readme(\.markdown|\.mdown|\.mkdn|\.mdwn|\.mkd|\.md)?$/i.test(
+      d.path
+    )
+  );
   return listing
     ? {
         name: listing.path.substring(1),
@@ -345,9 +341,8 @@ export function findRootReadme(
 }
 
 export function isReadme(filename: string): boolean {
-  return (
-    filename.toLowerCase() === "readme.md" ||
-    filename.toLowerCase() === "readme"
+  return /^readme(\.markdown|\.mdown|\.mkdn|\.mdwn|\.mkd|\.md)?$/i.test(
+    filename
   );
 }
 

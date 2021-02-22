@@ -22,7 +22,7 @@ function TranslationsPage(): React.ReactElement {
           <p className="mt-4 text-lg">
             Deno 文档提供以下语言版本。是否漏掉了你的语言呢？
             <a
-              href="https://github.com/denoland/deno_website2/blob/master/translations.json"
+              href="https://github.com/denoland/deno_website2/blob/main/translations.json"
               className="link"
             >
               马上添加！
