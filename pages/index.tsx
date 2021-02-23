@@ -29,8 +29,8 @@ for await (const req of s) {
         <title>Deno - A secure runtime for JavaScript and TypeScript</title>
       </Head>
       <CookieBanner />
-      <div className="bg-white dark:bg-black-800 dark:text-gray-100">
-        <div className="bg-gray-50 border-b border-gray-200 dark:bg-black-900 dark:border-gray-800">
+      <div className="bg-white dark:bg-black-700 dark:text-gray-100">
+        <div className="bg-gray-50 border-b border-gray-200 dark:bg-black-800 dark:border-gray-800">
           <Header />
           <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
             <h1 className="font-extrabold text-5xl leading-10 tracking-tight text-gray-900 dark:text-gray-100">

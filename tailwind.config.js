@@ -9,17 +9,17 @@ module.exports = {
     colors: {
       transparent: "transparent",
       current: "currentColor",
-      black: colors.black,
       white: colors.white,
       gray: colors.gray,
       red: colors.red,
       blue: colors.blue,
       yellow: colors.yellow,
-      "black-950": "#141414",
-      "black-900": "#1a1a1a",
-      "black-800": "#202020",
-      "black-700": "#2a2a2a",
-      "black-600": "#323232",
+      "black-950": colors.black,
+      "black-900": "#141414",
+      "black-800": "#1a1a1a",
+      "black-700": "#202020",
+      "black-600": "#2a2a2a",
+      "black-500": "#323232",
     },
     fontFamily: {
       mono: [

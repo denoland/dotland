@@ -13,7 +13,7 @@ export function CookieBanner(): React.ReactElement {
       {cookieBanner ? (
         <></>
       ) : (
-        <div className="bg-black dark:bg-black-950">
+        <div className="bg-black dark:bg-black-900">
           <div className="max-w-screen-xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between flex-wrap">
               <div className="w-0 flex-1 flex items-center">
