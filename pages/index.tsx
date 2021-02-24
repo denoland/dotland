@@ -185,12 +185,12 @@ for await (const req of s) {
             、
             <a href="https://jspm.io" className="link">
               jspm.io
-            </a>{" "}
-            或{" "}
+            </a>
+            、
             <a href="https://www.jsdelivr.com/" className="link">
               jsDelivr
             </a>{" "}
-            or{" "}
+            或{" "}
             <a href="https://esm.sh/" className="link">
               esm.sh
             </a>
