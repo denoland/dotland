@@ -31,13 +31,13 @@
   },
   {
     "language": "Português",
-    "english": "Portuguese",
+    "english": "葡萄牙语",
     "link": "https://deno-pt.vercel.app/",
     "repository": "https://github.com/mumumilk/deno_website2_portuguese"
   },
   {
     "language": "Français",
-    "english": "French",
+    "english": "法语",
     "link": "https://deno-fr.vercel.app/",
     "repository": "https://github.com/Ayfri/deno_website2_fr"
   }
