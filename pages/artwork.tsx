@@ -22,7 +22,7 @@ function ArtworkPage(): React.ReactElement {
           <p className="mt-4 text-lg">
             Do you have a piece to display here?{" "}
             <a
-              href="https://github.com/denoland/deno_website2/blob/master/artwork.json"
+              href="https://github.com/denoland/deno_website2/blob/main/artwork.json"
               className="link"
             >
               Add it!

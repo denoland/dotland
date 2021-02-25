@@ -192,10 +192,14 @@ for await (const req of s) {
             ,{" "}
             <a href="https://jspm.io" className="link">
               jspm.io
-            </a>{" "}
-            or{" "}
+            </a>
+            ,{" "}
             <a href="https://www.jsdelivr.com/" className="link">
               jsDelivr
+            </a>{" "}
+            or{" "}
+            <a href="https://esm.sh/" className="link">
+              esm.sh
             </a>
             .
           </p>

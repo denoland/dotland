@@ -74,9 +74,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
       </Head>
       <CookieBanner />
       <div className="bg-gray dark:bg-black-700">
-        <div className="dark:bg-black-700">
-          <Header subtitle="Third Party Modules" />
-        </div>
+        <Header subtitle="Third Party Modules" widerContent={true} />
         <RegistryInstructions
           isOpen={overlayOpen}
           close={() => setOverlayOpen(false)}
@@ -246,7 +244,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
                 Failed to load modules
               </div>
             ) : (
-              <div className="bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4">
+              <div className="bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4 dark:bg-black-800 dark:border-black-900">
                 {resp.results.length == 0 ? (
                   <div className="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
                     No modules found
@@ -478,7 +476,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
             <dl className="md:grid md:grid-cols-2 md:gap-8">
               <div>
                 <div>
-                  <dt className="text-lg leading-6 font-medium text-gray-900">
+                  <dt className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
                     How do I use modules on deno.land/x?
                   </dt>
                   <dd className="mt-2">
@@ -493,7 +491,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
                   </dd>
                 </div>
                 <div className="mt-12">
-                  <dt className="text-lg leading-6 font-medium text-gray-900">
+                  <dt className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
                     Can I find functionality built-in to Deno here?
                   </dt>
                   <dd className="mt-2">
@@ -511,7 +509,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
                   </dd>
                 </div>
                 <div className="mt-12">
-                  <dt className="text-lg leading-6 font-medium text-gray-900">
+                  <dt className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
                     How do I add a module to deno.land/x?
                   </dt>
                   <dd className="mt-2">
@@ -534,7 +532,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
               <div className="mt-12 md:mt-0">
                 <div>
                   <dt
-                    className="text-lg leading-6 font-medium text-gray-900"
+                    className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100"
                     id="warning"
                   >
                     I am getting a warning when importing from deno.land/x!
@@ -555,7 +553,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
                   </dd>
                 </div>
                 <div className="mt-12">
-                  <dt className="text-lg leading-6 font-medium text-gray-900">
+                  <dt className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
                     Can I edit or remove a module on deno.land/x?
                   </dt>
                   <dd className="mt-2">
@@ -572,14 +570,19 @@ function ThirdPartyRegistryList(): React.ReactElement {
             </dl>
           </div>
           <div className="max-w-screen-lg mx-auto pt-4 pb-8 sm:pt-8 sm:pb-12 px-4 sm:px-6 lg:pt-12 lg:pb-16 lg:px-8">
-            <h4 className="font-semibold text-2xl" id="stats">
+            <h4
+              className="font-semibold text-2xl dark:text-gray-100"
+              id="stats"
+            >
               Stats
             </h4>
             {stats ? (
               <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-8">
                 <div>
-                  <h5 className="font-medium text-lg">New modules</h5>
-                  <div className="bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2">
+                  <h5 className="font-medium text-lg dark:text-gray-100">
+                    New modules
+                  </h5>
+                  <div className="bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2 dark:bg-black-800 dark:border-black-900">
                     <ModuleList
                       modules={stats.recently_added_modules.map((v) => ({
                         name: v.name,
@@ -591,8 +594,10 @@ function ThirdPartyRegistryList(): React.ReactElement {
                   </div>
                 </div>
                 <div>
-                  <h5 className="font-medium text-lg">Recently updated</h5>
-                  <div className="bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2">
+                  <h5 className="font-medium text-lg dark:text-gray-100">
+                    Recently updated
+                  </h5>
+                  <div className="bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2 dark:bg-black-800 dark:border-black-900">
                     <ModuleList
                       modules={stats.recently_uploaded_versions.map((v) => ({
                         name: v.name,
@@ -628,9 +633,14 @@ function ModuleList({
       {modules.map((meta, i) => {
         const link = `/x/${meta.name}`;
         return (
-          <li className={i !== 0 ? "border-t border-gray-200" : ""} key={i}>
+          <li
+            className={
+              i !== 0 ? "border-t border-gray-200 dark:border-black-900" : ""
+            }
+            key={i}
+          >
             <Link href={link}>
-              <a className="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
+              <a className="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out dark:hover:bg-black-700 dark:focus:bg-black-700">
                 <div className="flex items-center px-4 sm:px-6 py-2">
                   <div className="min-w-0 flex-1 flex items-center">
                     <div className="min-w-0 flex-1">

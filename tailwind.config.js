@@ -41,9 +41,7 @@ module.exports = {
       },
     },
   },
-  variants: {
-    backgroundColor: ["responsive", "hover", "focus", "active", "dark"],
-  },
+  variants: {},
   plugins: [require("tailwindcss-hyphens")],
   purge: {
     enabled: process.env.NODE_ENV === "production",
