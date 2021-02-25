@@ -34,6 +34,7 @@ export interface BenchmarkRun {
   syscall_count?: BenchmarkVariantsResultSet;
   thread_count?: BenchmarkVariantsResultSet;
   throughput?: BenchmarkVariantsResultSet;
+  lsp_exec_time?: BenchmarkVariantsResultSet;
 }
 
 export type BenchmarkName = Exclude<keyof BenchmarkRun, "created_at" | "sha1">;
@@ -272,6 +273,7 @@ export interface BenchmarkData {
   bundleSize: Column[];
   cargoDeps: Column[];
   sha1List: string[];
+  lspExecTime: Column[];
 }
 
 export function reshape(data: BenchmarkRun[]): BenchmarkData {
@@ -308,5 +310,6 @@ export function reshape(data: BenchmarkRun[]): BenchmarkData {
     bundleSize: createColumns(data, "bundle_size"),
     cargoDeps: createColumns1(data, "cargo_deps"),
     sha1List: data.map((d) => d.sha1),
+    lspExecTime: createColumns(data, "lsp_exec_time"),
   };
 }
