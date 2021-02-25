@@ -533,12 +533,11 @@ function Benchmarks(): React.ReactElement {
                   data={data}
                   columns={data?.lspExecTime}
                   yLabel={"milliseconds"}
-                  yTickFormat={formatLogScale}
                 />
                 <p className="mt-1">
-                  Log scale. We track the performance of the Deno language
-                  server under different scenarios to help gauge the overall
-                  performance of the language server.
+                  We track the performance of the Deno language server under
+                  different scenarios to help gauge the overall performance of
+                  the language server.
                 </p>
               </div>
             </div>
