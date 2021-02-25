@@ -525,7 +525,9 @@ function Benchmarks(): React.ReactElement {
               </div>
             </div>
             <div className="mt-20">
-              <h4 className="text-2xl font-bold tracking-tight">Language Server</h4>
+              <h4 className="text-2xl font-bold tracking-tight">
+                Language Server
+              </h4>
               <div className="mt-8">
                 <BenchmarkOrLoading
                   data={data}
