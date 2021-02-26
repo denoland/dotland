@@ -94,12 +94,16 @@ for await (const req of s) {
               </h3>
             </a>
           </Link>
-          <p className="my-4 text-gray-700 dark:text-gray-200">Try running a simple program:</p>
+          <p className="my-4 text-gray-700 dark:text-gray-200">
+            Try running a simple program:
+          </p>
           <CodeBlock
             code="deno run https://deno.land/std/examples/welcome.ts"
             language="bash"
           />
-          <p className="my-4 text-gray-700 dark:text-gray-200">Or a more complex one:</p>
+          <p className="my-4 text-gray-700 dark:text-gray-200">
+            Or a more complex one:
+          </p>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8">
           <CodeBlock
