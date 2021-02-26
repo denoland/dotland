@@ -19,14 +19,14 @@ function Header({
     if (toggleThemeCount < 1) {
       const themeUser =
         localStorage.getItem("theme") ||
-        (window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
+        window.matchMedia("(prefers-color-scheme: dark)").matches
           ? "dark"
           : "light";
       setTheme(themeUser);
       setToggleThemeCount(toggleThemeCount + 1);
     } else {
       localStorage.setItem("theme", theme);
+      console.log(localStorage.getItem("theme"));
     }
 
     const htmlTag = document.getElementsByTagName("html")[0];
@@ -38,7 +38,7 @@ function Header({
   }, [theme]);
 
   return (
-    <div className="relative py-6 z-10 dark:bg-black-800">
+    <div className="relative py-6 z-10">
       <nav
         className={`mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 ${
           widerContent ? "max-w-screen-xl" : "max-w-screen-lg lg:p-0"

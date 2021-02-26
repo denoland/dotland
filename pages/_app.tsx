@@ -12,7 +12,7 @@ export default class DenoWebsiteApp extends App {
   render(): React.ReactElement {
     const { Component, pageProps } = this.props;
     return (
-      <div className="h-screen dark:bg-black-600">
+      <div className="h-screen dark:bg-black-700">
         <Head>
           <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         </Head>
