@@ -33,6 +33,7 @@ export default class DenoDocDocument extends Document {
             content="Deno is a simple, modern and secure runtime for JavaScript and
             TypeScript that uses V8 and is built in Rust."
           />
+          <meta name="color-scheme" content="dark light" />
           <meta name="twitter:card" content="summary_large_image" />
           <meta property="og:locale" content="en_US" />
           <meta property="og:site_name" content="DenoLand" />

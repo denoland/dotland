@@ -16,7 +16,7 @@ function TranslationsPage(): React.ReactElement {
       </Head>
       <CookieBanner />
       <Header />
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 mt-8 mb-24">
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 pt-8 pb-24 dark:bg-black-700 dark:text-gray-200">
         <div className="max-w-screen-lg mx-auto">
           <h4 className="text-4xl font-bold tracking-tight">Translations</h4>
           <p className="mt-4 text-lg">

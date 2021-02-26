@@ -13,16 +13,32 @@ function Header({
 }): React.ReactElement {
   const [menuOpen, setMenuOpen] = useState(false);
   const [theme, setTheme] = useState("light");
+  const [toggleThemeCount, setToggleThemeCount] = useState(0);
 
   useEffect(() => {
-    localStorage.setItem("theme", theme);
+    if (toggleThemeCount < 1) {
+      let themeUser =
+        localStorage.getItem("theme") ||
+        (window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+          ? "dark"
+          : "light";
+      setTheme(themeUser);
+      setToggleThemeCount(toggleThemeCount + 1);
+    } else {
+      localStorage.setItem("theme", theme);
+    }
 
     const htmlTag = document.getElementsByTagName("html")[0];
     htmlTag.className = theme;
+    htmlTag.style.setProperty("color-scheme", theme);
+    htmlTag.setAttribute("data-color-mode", theme);
+    htmlTag.setAttribute("data-dark-theme", "dark");
+    htmlTag.setAttribute("data-light-theme", "light");
   }, [theme]);
 
   return (
-    <div className="relative py-6 z-10">
+    <div className="relative py-6 z-10 dark:bg-black-800">
       <nav
         className={`mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 ${
           widerContent ? "max-w-screen-xl" : "max-w-screen-lg lg:p-0"
@@ -123,7 +139,7 @@ function Header({
             </a>
           </Link>
           <Link href="/posts">
-            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
+            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out dark:text-gray-400 dark:hover:text-gray-300">
               News
             </a>
           </Link>
@@ -144,7 +160,7 @@ function Header({
             </a>
           </Link>
           <button
-            className="ml-10 text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out dark:text-gray-400 dark:hover:text-gray-300"
+            className="ml-10 text-gray-500 hover:text-gray-900 focus:outline-none transition duration-150 ease-in-out dark:text-gray-400 dark:hover:text-gray-300"
             style={{ lineHeight: 0 }}
             onClick={() => {
               theme == "light" ? setTheme("dark") : null;
@@ -265,7 +281,7 @@ function Header({
                   </a>
                 </Link>
                 <Link href="/posts">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
+                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out dark:text-gray-500 dark:hover:text-gray-300 dark:hover:bg-gray-900 dark:focus:text-gray-300 dark:focus:bg-gray-900">
                     News
                   </a>
                 </Link>

@@ -7,7 +7,9 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
   return (
     <div
       className={
-        props.simple ? undefined : "bg-gray-50 border-t border-gray-200 dark:bg-black-700"
+        props.simple
+          ? undefined
+          : "bg-gray-50 border-t border-gray-200 dark:bg-black-700 dark:border-black-900"
       }
     >
       <div className="max-w-screen-xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
