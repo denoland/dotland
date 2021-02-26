@@ -15,6 +15,15 @@ function Header({
   const [theme, setTheme] = useState("light");
   const [toggleThemeCount, setToggleThemeCount] = useState(0);
 
+  // Nav items object
+  const navItems = [
+    { name: "Install", path: "/#installation" },
+    { name: "Manual", path: "/manual" },
+    { name: "News", path: "/posts" },
+    { name: "Standard Library", path: "/std" },
+    { name: "Third Party Modules", path: "/x" },
+  ];
+
   useEffect(() => {
     if (toggleThemeCount < 1) {
       let themeUser =
