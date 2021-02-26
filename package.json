@@ -11,7 +11,8 @@
     "test": "jest",
     "format": "yarn format:check --write",
     "format:check": "prettier --check \"**/*.md\" \"*.js\" \"*.json\" \"{util,public,pages,components}/**/*.{js,ts,jsx,tsx}\" \"{util,public,pages,components}/*.{js,ts,jsx,tsx}\"",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx util/ pages/ components/"
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx util/ pages/ components/",
+    "postinstall": "husky install"
   },
   "dependencies": {
     "@docsearch/react": "^1.0.0-alpha.14",
@@ -51,6 +52,7 @@
     "eslint": "^7.13.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-react": "^7.21.5",
+    "husky": "^5.1.1",
     "isomorphic-unfetch": "^3.1.0",
     "jest": "^26.6.3",
     "postcss-import": "^13.0.0",
