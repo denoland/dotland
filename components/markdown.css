@@ -1,3 +1,10 @@
+/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
+
 .markdown .octicon {
   display: inline-block;
   fill: currentColor;
@@ -60,12 +67,13 @@
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   line-height: 1.5;
-  color: #24292e;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
-    sans-serif, Apple Color Emoji, Segoe UI Emoji;
+  sans-serif, Apple Color Emoji, Segoe UI Emoji;
   font-size: 16px;
   line-height: 1.5;
   word-wrap: break-word;
+  @apply text-gray-900;
+  @apply dark:text-gray-300;
 }
 
 .markdown img,
@@ -407,6 +415,11 @@ object {
 .markdown h2 {
   padding-bottom: 0.3em;
   border-bottom: 1px solid #eaecef;
+}
+
+html.dark > .markdown h1, .markdown h2 {
+  @apply border-b-2;
+  @apply border-black-600;
 }
 
 .markdown h2 {
