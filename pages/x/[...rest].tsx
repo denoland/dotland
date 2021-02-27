@@ -1,7 +1,7 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import React, { useEffect } from "react";
-import {useRouter} from "next/router"
+import React from "react";
+import { useRouter } from "next/router";
 import Registry from "../../components/Registry";
 
 function RegistryPage(): React.ReactElement {
