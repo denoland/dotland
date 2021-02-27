@@ -10,7 +10,7 @@ import { CookieBanner } from "../components/CookieBanner";
 
 function ArtworkPage(): React.ReactElement {
   return (
-    <>
+    <div className="dark:bg-black-700">
       <Head>
         <title>Artwork | Deno</title>
       </Head>
@@ -36,7 +36,7 @@ function ArtworkPage(): React.ReactElement {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 
