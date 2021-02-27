@@ -48,7 +48,10 @@ function Item({ language }: { language: Translation }) {
         {language.english}
       </span>
       <div className="mt-3 text-xl font-semibold text-center">
-        <a href={language.link} className="hover:text-gray-700 hover:underline dark:hover:text-gray-200 dark:text-gray-300">
+        <a
+          href={language.link}
+          className="hover:text-gray-700 hover:underline dark:hover:text-gray-200 dark:text-gray-300"
+        >
           {language.language}
         </a>
       </div>
