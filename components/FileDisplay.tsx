@@ -25,8 +25,8 @@ function FileDisplay(props: {
   const filename = fileNameFromURL(props.sourceURL);
 
   return (
-    <div className="shadow-sm rounded-lg border border-gray-200 overflow-hidden bg-white">
-      <div className="bg-gray-100 border-b border-gray-200 py-2 px-4 flex justify-between">
+    <div className="shadow-sm rounded-lg border border-gray-200 overflow-hidden bg-white dark:bg-black-800 dark:border-black-900">
+      <div className="bg-gray-100 border-b border-gray-200 py-2 px-4 flex justify-between dark:bg-black-600 dark:border-black-900">
         <div className="flex items-center">
           {isReadme(filename) && (
             <svg
