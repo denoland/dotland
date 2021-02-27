@@ -54,7 +54,7 @@ function RegistryInstructions(props: {
 
   return (
     <Transition show={props.isOpen}>
-      <div className="fixed z-10 inset-0 overflow-hidden">
+      <div className="fixed z-10 inset-0 overflow-hidden dark:bg-black-700">
         <div className="absolute inset-0 overflow-hidden">
           <Transition
             enter="ease-in-out duration-500"
@@ -109,10 +109,10 @@ function RegistryInstructions(props: {
                     </button>
                   </div>
                 </Transition>
-                <div className="h-full flex flex-col space-y-4 my-auto px-4 md:px-16 lg:px-24 xl:px-32 bg-white shadow-xl overflow-y-auto">
+                <div className="h-full flex flex-col space-y-4 my-auto px-4 md:px-16 lg:px-24 xl:px-32 bg-white shadow-xl overflow-y-auto dark:bg-black-700">
                   <div className="my-auto py-10">
                     <header>
-                      <h2 className="text-xl leading-7 font-medium text-gray-900">
+                      <h2 className="text-xl leading-7 font-medium text-gray-900 dark:text-gray-200">
                         {stage === 0 && "Adding a module"}
                         {stage === 1 && "Select a module name"}
                         {stage === 2 && "Advanced options"}
@@ -141,7 +141,7 @@ function RegistryInstructions(props: {
                           <span className="block w-full rounded-md shadow-sm mt-4">
                             <button
                               type="submit"
-                              className="w-full flex justify-center py-2 px-4 mt-12 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
+                              className="w-full flex justify-center py-2 px-4 mt-12 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out dark:bg-black-800 dark:border-black-900 dark:text-gray-500 dark:hover:text-gray-400"
                               onClick={() => setStage(1)}
                             >
                               Next
@@ -161,7 +161,7 @@ function RegistryInstructions(props: {
                             </label>
                             <input
                               id="modulename"
-                              className={`block w-full px-4 py-2 my-1 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1 ${
+                              className={`block w-full px-4 py-2 my-1 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1 dark:bg-black-800 dark:border-black-900 ${
                                 isModuleNameValid &&
                                 isModuleNameAvailable === true
                                   ? "border-green-300 hover:border-green-300 focus:border-green-300"
@@ -198,11 +198,11 @@ function RegistryInstructions(props: {
                             <button
                               type="submit"
                               disabled={!isModuleNameValid ? true : undefined}
-                              className={`w-full flex justify-center py-2 px-4 mt-12 border border-gray-300 text-md font-medium rounded-md ${
+                              className={`w-full flex justify-center py-2 px-4 mt-12 border border-gray-300 text-md font-medium rounded-md dark:border-black-900 ${
                                 isModuleNameValid
-                                  ? "text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50"
-                                  : "text-gray-400 bg-gray-50 cursor-default"
-                              } focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out`}
+                                  ? "text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 dark:bg-black-800 dark:hover:text-gray-300 dark:text-gray-400"
+                                  : "text-gray-400 bg-gray-50 cursor-default dark:bg-black-600 dark:border-black-800"
+                              } focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out dark:bg-black-800 dark:border-black-900 dark:text-gray-500 dark:hover:text-gray-400`}
                               onClick={() => setStage(2)}
                             >
                               Next
@@ -227,7 +227,7 @@ function RegistryInstructions(props: {
                             </label>
                             <input
                               id="subdirectory"
-                              className={`block w-full px-4 py-2 my-1 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1 ${
+                              className={`block w-full px-4 py-2 my-1 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1 dark:bg-black-800 dark:border-black-900 ${
                                 isSubdirectoryValid
                                   ? "border-green-300 hover:border-green-300 focus:border-green-300"
                                   : !isSubdirectoryValid
@@ -262,7 +262,7 @@ function RegistryInstructions(props: {
                                   ? "text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50"
                                   : "text-gray-400 bg-gray-50 cursor-default"
                               }  
-                            text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out`}
+                            text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out dark:bg-black-800 dark:border-black-900 dark:text-gray-500 dark:hover:text-gray-400`}
                               onClick={() => setStage(3)}
                             >
                               Next
@@ -329,20 +329,20 @@ function RegistryInstructions(props: {
                           />
                           <div className="mt-2">
                             {isModuleNameAvailable ? (
-                              <div className="text-gray-800 p-2 bg-gray-50 rounded-md border border-gray-200">
+                              <div className="text-gray-800 p-2 bg-gray-50 rounded-md border border-gray-200 dark:bg-black-800 dark:border-black-900">
                                 Waiting to receive initial WebHook event from
                                 GitHub...
                               </div>
                             ) : (
                               <>
-                                <div className="text-green-800 p-2 bg-gray-50 rounded-md border border-green-200">
+                                <div className="text-green-800 p-2 bg-gray-50 rounded-md border border-green-200 dark:bg-black-800">
                                   Module successfully registered! To upload a
                                   version, create a new tag / release in the
                                   repository.
                                 </div>
                                 <div className="mt-4 rounded-md shadow-sm">
                                   <button
-                                    className="w-full flex justify-center py-2 px-4 mt-12 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
+                                    className="w-full flex justify-center py-2 px-4 mt-12 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out dark:bg-black-800 dark:border-black-900 dark:text-gray-500 dark:hover:text-gray-400"
                                     onClick={props.close}
                                   >
                                     Done

@@ -298,7 +298,7 @@ function Registry(): React.ReactElement {
         </title>
       </Head>
       <CookieBanner />
-      <div className="bg-gray-50 min-h-full">
+      <div className="bg-gray-50 min-h-full dark:bg-black-700">
         <Header
           subtitle={name === "std" ? "Standard Library" : "Third Party Modules"}
           widerContent={true}
@@ -364,18 +364,18 @@ function Registry(): React.ReactElement {
                       } else if (!dirEntries && typeof raw !== "string") {
                         // loading
                         return (
-                          <div className="rounded-lg overflow-hidden border border-gray-200 bg-white">
-                            <div className="bg-gray-100 h-10 w-full border-b border-gray-200 px-4 py-3">
-                              <div className="w-3/5 sm:w-1/5 bg-gray-200 h-4"></div>
+                          <div className="rounded-lg overflow-hidden border border-gray-200 bg-white dark:bg-black-800 dark:border-black-900">
+                            <div className="bg-gray-100 h-10 w-full border-b border-gray-200 px-4 py-3 dark:bg-black-600 dark:border-black-900">
+                              <div className="w-3/5 sm:w-1/5 bg-gray-200 h-4 dark:bg-black-500"></div>
                             </div>
                             <div className="w-full p-4">
-                              <div className="w-4/5 sm:w-1/3 bg-gray-100 h-8"></div>
-                              <div className="sm:w-2/3 bg-gray-100 h-3 mt-6"></div>
-                              <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
-                              <div className="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                              <div className="w-3/4 bg-gray-100 h-3 mt-4"></div>
-                              <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
-                              <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                              <div className="w-4/5 sm:w-1/3 bg-gray-100 h-8 dark:bg-black-500"></div>
+                              <div className="sm:w-2/3 bg-gray-100 h-3 mt-6 dark:bg-black-500"></div>
+                              <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4 dark:bg-black-500"></div>
+                              <div className="sm:w-3/5 bg-gray-100 h-3 mt-4 dark:bg-black-500"></div>
+                              <div className="w-3/4 bg-gray-100 h-3 mt-4 dark:bg-black-500"></div>
+                              <div className="sm:w-2/3 bg-gray-100 h-3 mt-4 dark:bg-black-500"></div>
+                              <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4 dark:bg-black-500"></div>
                             </div>
                           </div>
                         );
@@ -421,8 +421,8 @@ function Registry(): React.ReactElement {
                     })()}
                   </div>
                   <div className="col-span-1 row-start-1 md:row-start-auto flex flex-col sm:flex-row md:flex-col gap-4">
-                    <div className="max-w-sm w-full shadow-sm rounded-lg border border-gray-200 overflow-hidden">
-                      <div className="bg-gray-50 p-4">
+                    <div className="max-w-sm w-full shadow-sm rounded-lg border border-gray-200 overflow-hidden dark:border-black-900">
+                      <div className="bg-gray-50 p-4 dark:bg-black-800">
                         <div className="text-xl font-bold">{name}</div>
                         {versionMeta === undefined ||
                         moduleMeta === undefined ? (
@@ -505,7 +505,7 @@ function Registry(): React.ReactElement {
                       </div>
                     </div>
 
-                    <div className="max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4">
+                    <div className="max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4 dark:bg-black-800 dark:border-black-900">
                       <p className="text-md font-semibold mb-2">Version Info</p>
                       {versionMeta === undefined ? (
                         <div className="mt-2 flex items-center py-0.5">
@@ -705,7 +705,7 @@ function VersionSelector({
       {versions && versions[0] !== selectedVersion ? (
         <button
           type="button"
-          className="mt-2 w-full inline-flex justify-center py-1 px-2 border border-gray-300 rounded-md bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition duration-150 ease-in-out"
+          className="mt-2 w-full inline-flex justify-center py-1 px-2 border border-gray-300 rounded-md bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition duration-150 ease-in-out dark:bg-black-600 dark:border-black-700 dark:text-gray-400 dark:hover:text-gray-300"
           aria-label="Go to latest version"
           onClick={() => onChange(versions[0])}
         >
