@@ -65,8 +65,8 @@ function DirectoryListing(props: {
 
   return (
     <div className="flex flex-col overflow-x-auto">
-      <div className="inline-block min-w-full shadow-sm rounded-lg border border-gray-200 overflow-hidden">
-        <div className="bg-gray-100 border-b border-gray-200 py-2 px-4 flex justify-between">
+      <div className="inline-block min-w-full shadow-sm rounded-lg border border-gray-200 overflow-hidden dark:border-black-900">
+        <div className="bg-gray-100 border-b border-gray-200 py-2 px-4 flex justify-between dark:bg-black-600 dark:border-black-800">
           <div className="flex items-center">
             <svg
               fill="currentColor"
@@ -91,7 +91,7 @@ function DirectoryListing(props: {
               <col style={{ width: "5.5rem" }} />
             </colgroup>
             <thead>
-              <tr className="table-row border-b-2 border-gray-200">
+              <tr className="table-row border-b-2 border-gray-200 dark:border-black-900 dark:bg-black-800">
                 <td colSpan={3} className="">
                   <div className="flex w-full">
                     <div className="px-2 sm:pl-3 md:pl-4 py-1 text-gray-400">
@@ -109,7 +109,7 @@ function DirectoryListing(props: {
                     </div>
                     <input
                       type="text"
-                      className="w-full pl-3 text-gray-900 text-sm outline-none bg-gray-50"
+                      className="w-full pl-3 text-gray-900 text-sm outline-none bg-gray-50 dark:bg-black-800 dark:text-gray-300"
                       onChange={(e) => setQuery(e.target.value)}
                       value={query}
                       placeholder="Search files..."
@@ -119,7 +119,7 @@ function DirectoryListing(props: {
                 </td>
               </tr>
             </thead>
-            <tbody className="bg-white">
+            <tbody className="bg-white dark:bg-black-800">
               {display
                 .sort((a, b) => a.type.localeCompare(b.type))
                 .map((entry, i) => {
@@ -133,9 +133,9 @@ function DirectoryListing(props: {
                   return (
                     <tr
                       key={i}
-                      className={`table-row hover:bg-gray-100${
+                      className={`table-row hover:bg-gray-100 dark:hover:bg-black-700${
                         i !== display.length - 1
-                          ? " border-b border-gray-200"
+                          ? " border-b border-gray-200 dark:border-black-900"
                           : ""
                       }`}
                     >
