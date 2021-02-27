@@ -10,7 +10,7 @@ import { CookieBanner } from "../components/CookieBanner";
 
 function TranslationsPage(): React.ReactElement {
   return (
-    <>
+    <div className="dark:bg-black-700">
       <Head>
         <title>Translations | Deno</title>
       </Head>
@@ -37,25 +37,25 @@ function TranslationsPage(): React.ReactElement {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 
 function Item({ language }: { language: Translation }) {
   return (
     <div className="p-2 mx-20 mb-5">
-      <span className="text-gray-600 leading-tight flex justify-center">
+      <span className="text-gray-600 leading-tight flex justify-center dark:text-gray-500">
         {language.english}
       </span>
       <div className="mt-3 text-xl font-semibold text-center">
-        <a href={language.link} className="hover:text-gray-700 hover:underline">
+        <a href={language.link} className="hover:text-gray-700 hover:underline dark:hover:text-gray-200 dark:text-gray-300">
           {language.language}
         </a>
       </div>
       <div className="flex justify-center mt-3">
         <a
           href={language.repository}
-          className="text-gray-500 hover:text-gray-700"
+          className="text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-400"
         >
           <span className="sr-only">GitHub</span>
           <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
