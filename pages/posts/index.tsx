@@ -37,9 +37,9 @@ function PostsIndexPage(props: Props): React.ReactElement | null {
         <title>News | Deno</title>
       </Head>
       <Header />
-      <div className="bg-white pt-8 pb-20 px-4 sm:px-6 lg:pt-8 lg:pb-28 lg:px-8">
+      <div className="bg-white pt-8 pb-20 px-4 sm:px-6 lg:pt-8 lg:pb-28 lg:px-8 dark:bg-black-700">
         <div className="relative max-w-screen-lg mx-auto">
-          <div className="border-b-2 border-gray-100 pb-10">
+          <div className="border-b-2 border-gray-100 pb-10 dark:border-black-600">
             <h2 className="text-4xl font-bold tracking-tight">News</h2>
           </div>
           <div className="mt-6 grid gap-16 lg:grid-cols-2 lg:col-gap-5 lg:row-gap-12">
@@ -58,17 +58,17 @@ function PostsIndexPage(props: Props): React.ReactElement | null {
                 });
                 return (
                   <div key={post.id}>
-                    <p className="text-sm leading-5 text-gray-500">
+                    <p className="text-sm leading-5 text-gray-500 dark:text-gray-400">
                       <time dateTime={post.publish_date}>
                         {format.format(date)}
                       </time>
                     </p>
                     <Link href={`/posts/${post.id}`}>
                       <a className="block">
-                        <h3 className="mt-2 text-xl leading-7 font-semibold text-gray-900">
+                        <h3 className="mt-2 text-xl leading-7 font-semibold text-gray-900 dark:text-gray-200">
                           {post.title}
                         </h3>
-                        <p className="mt-3 text-base leading-6 text-gray-500">
+                        <p className="mt-3 text-base leading-6 text-gray-500 dark:text-gray-400">
                           {post.snippet}
                         </p>
                       </a>

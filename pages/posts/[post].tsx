@@ -96,16 +96,17 @@ function NewsPostPage(props: Props): React.ReactElement {
           ))}
         </div>
       </div>
-      <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 py-8 mb-16">
+      <div className="dark:bg-black-700">
+        <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 py-8 pb-16">
         <Link href="/posts">
           <a className="link">&lt;- Other News</a>
         </Link>
-        <h1 className="tracking-tight font-bold text-5xl leading-10 mt-4 py-8">
+        <h1 className="tracking-tight font-bold text-5xl leading-10 mt-4 py-8 dark:text-gray-200">
           {props.meta.title}
         </h1>
         <a
           href={`${postPath}${path}.md`}
-          className={`text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right mt-2`}
+          className={`text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right mt-2 dark:text-gray-400 dark:hover:text-gray-300`}
         >
           <span className="sr-only">GitHub</span>
           <svg
@@ -121,19 +122,20 @@ function NewsPostPage(props: Props): React.ReactElement {
             />
           </svg>
         </a>
-        <p className="text-gray-500 mt-3 leading-tight">
+        <p className="text-gray-500 mt-3 leading-tight dark:text-gray-400">
           {format.format(date)}
         </p>
-        <p className="text-gray-500 mt-3 leading-tight">{props.meta.author}</p>
-        <div className="mt-8 -mx-4">
+        <p className="text-gray-500 mt-3 leading-tight dark:text-gray-400">{props.meta.author}</p>
+        <div className="mt-8 -mx-4 dark:bg-black-700">
           <Markdown
             source={props.markdown}
             displayURL={`https://deno.land/posts/${props.meta.id}`}
             sourceURL={`https://deno.land/posts/${props.meta.id}.md`}
             baseURL={`https://deno.land`}
-            className="markdown-posts"
+            className="markdown-posts dark:text-gray-300"
           />
         </div>
+      </div>
       </div>
       <Footer />
     </>
