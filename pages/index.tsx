@@ -35,7 +35,7 @@ for await (const req of s) {
           <span className="block sm:ml-2 sm:inline-block font-semibold">
             <Link href="/posts/v1.8">
               <a>
-                Read the release notes <span aria-hidden="true">&rarr;</span>
+                Read the notes <span aria-hidden="true">&rarr;</span>
               </a>
             </Link>
           </span>
