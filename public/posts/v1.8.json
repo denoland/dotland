@@ -1,6 +1,6 @@
 {
   "title": "Deno 1.8 Release Notes",
-  "author": "Bartek Iwańczuk, Luca Casonato",
+  "author": "Bartek Iwańczuk, Luca Casonato, Ryan Dahl",
   "publish_date": "2021-03-02T15:00:00.000Z",
   "images": [
     {
@@ -10,5 +10,5 @@
       "className": "hidden"
     }
   ],
-  "snippet": ""
+  "snippet": "Deno 1.8 adds experimental support for the WebGPU API, adds support for importing private modules, stabilizes import maps, revamps coverage tooling, adds ICU to provide internationalization out of the box, and a whole lot more."
 }
