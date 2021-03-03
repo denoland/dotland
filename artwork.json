@@ -1,5 +1,17 @@
 [
   {
+    "date": "2020-12-02",
+    "image": "/images/discodeno.gif",
+    "title": "Disco Deno",
+    "alt": "Disco Deno",
+    "artist": {
+      "name": "Sujan Chhetri",
+      "profile_image": "https://avatars1.githubusercontent.com/u/44917558",
+      "github": "sujanchhetri"
+    },
+    "license": "MIT"
+  },
+  {
     "date": "2020-10-11",
     "image": "/images/deno_sun.png",
     "title": "Deno Sun",

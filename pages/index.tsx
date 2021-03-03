@@ -30,10 +30,6 @@ for await (const req of s) {
       <Head>
         {/*<title>Deno - A secure runtime for JavaScript and TypeScript</title>*/}
         <title>Deno - 안전한 JavaScript & TypeScript 실행환경</title>
-        <meta property="og:title" content="Deno"/>
-        <meta property="og:description" content="안전한 JavaScript & TypeScript 실행환경"/>
-        <meta property="og:image" content="https://deno-ko.vercel.app/images/icons/apple-touch-icon-180x180.png"/>
-
         {process.env.NODE_ENV === "production" && (
           // Global site tag (gtag.js) - Google Analytics
           <>
@@ -85,13 +81,6 @@ for await (const req of s) {
               <strong className="font-semibold">JavaScript</strong> &{" "}
               <strong className="font-semibold">TypeScript</strong> 실행환경.
             </h2>
-
-            <a
-              href="https://github.com/denoland/deno/releases/latest"
-              className="rounded-full mt-4 px-8 py-2 transition-colors duration-75 ease-in-out bg-blue-500 hover:bg-blue-400 text-white shadow-lg"
-            >
-              {versions.cli[0]}
-            </a>
           </div>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
@@ -268,21 +257,27 @@ for await (const req of s) {
               </h3>
             </a>
           </Link>
+          {/*<p className="my-4 text-gray-700">*/}
+          {/*  Deno can import modules from any location on the web, like GitHub, a*/}
+          {/*  personal webserver, or a CDN like{" "}*/}
+          {/*  <a href="https://www.skypack.dev" className="link">*/}
+          {/*    Skypack*/}
+          {/*  </a>*/}
+          {/*  ,{" "}*/}
+          {/*  <a href="https://jspm.io" className="link">*/}
+          {/*    jspm.io*/}
+          {/*  </a>*/}
+          {/*  ,{" "}*/}
+          {/*  <a href="https://www.jsdelivr.com/" className="link">*/}
+          {/*    jsDelivr*/}
+          {/*  </a>{" "}*/}
+          {/*  or{" "}*/}
+          {/*  <a href="https://esm.sh/" className="link">*/}
+          {/*    esm.sh*/}
+          {/*  </a>*/}
+          {/*  .*/}
+          {/*</p>*/}
           <p className="my-4 text-gray-700">
-            {/*Deno can import modules from any location on the web, like GitHub, a*/}
-            {/*personal webserver, or a CDN like{" "}*/}
-            {/*<a href="https://www.skypack.dev" className="link">*/}
-            {/*  Skypack*/}
-            {/*</a>*/}
-            {/*,{" "}*/}
-            {/*<a href="https://jspm.io" className="link">*/}
-            {/*  jspm.io*/}
-            {/*</a>{" "}*/}
-            {/*or{" "}*/}
-            {/*<a href="https://www.jsdelivr.com/" className="link">*/}
-            {/*  jsDelivr*/}
-            {/*</a>*/}
-            {/*.*/}
             Deno는 GitHub이나, 개인 웹서버,{" "}
             <a href="https://www.skypack.dev" className="link">
               Skypack
@@ -290,10 +285,10 @@ for await (const req of s) {
             이나{" "}
             <a href="https://jspm.io" className="link">
               jspm.io
-            </a>{" "}
+            </a>
             ,{" "}
-            <a href="https://www.jsdelivr.com/" className="link">
-              jsDelivr
+            <a href="https://esm.sh/" className="link">
+              esm.sh
             </a>
             과 같은 CDN 등 웹 주소로 참조할 수 있는 모듈을 모두 로드할 수 있습니다.
           </p>
