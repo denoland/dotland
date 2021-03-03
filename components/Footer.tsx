@@ -116,35 +116,35 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
             <img
               className="m-2 opacity-75"
               alt="denoland/deno CI"
-              src="https://img.shields.io/github/workflow/status/denoland/deno/ci/master?label=deno&logo=github"
+              src="https://img.shields.io/github/workflow/status/denoland/deno/ci/main?label=deno&logo=github"
             />
           </a>
           <a href="https://github.com/denoland/rusty_v8">
             <img
               className="m-2 opacity-75"
               alt="denoland/rusty_v8 CI"
-              src="https://img.shields.io/github/workflow/status/denoland/rusty_v8/ci/master?label=rusty_v8&logo=github"
+              src="https://img.shields.io/github/workflow/status/denoland/rusty_v8/ci/main?label=rusty_v8&logo=github"
+            />
+          </a>
+          <a href="https://github.com/denoland/deno_lint">
+            <img
+              className="m-2 opacity-75"
+              alt="denoland/deno_lint CI"
+              src="https://img.shields.io/github/workflow/status/denoland/deno_lint/ci/main?label=deno_lint&logo=github"
+            />
+          </a>
+          <a href="https://github.com/denoland/deno_doc">
+            <img
+              className="m-2 opacity-75"
+              alt="denoland/deno_doc CI"
+              src="https://img.shields.io/github/workflow/status/denoland/deno_doc/ci/main?label=deno_doc&logo=github"
             />
           </a>
           <a href="https://github.com/denoland/deno_website2">
             <img
               className="m-2 opacity-75"
               alt="denoland/deno_website2 CI"
-              src="https://img.shields.io/github/workflow/status/denoland/deno_website2/ci/master?label=deno_website2&logo=github"
-            />
-          </a>
-          <a href="https://github.com/denoland/doc_website">
-            <img
-              className="m-2 opacity-75"
-              alt="denoland/doc_website CI"
-              src="https://img.shields.io/github/workflow/status/denoland/doc_website/ci/master?label=doc_website&logo=github"
-            />
-          </a>
-          <a href="https://github.com/denoland/deno_install">
-            <img
-              className="m-2 opacity-75"
-              alt="denoland/deno_install CI"
-              src="https://img.shields.io/github/workflow/status/denoland/deno_install/ci/master?label=deno_install&logo=github"
+              src="https://img.shields.io/github/workflow/status/denoland/deno_website2/ci/main?label=deno_website2&logo=github"
             />
           </a>
         </div>
