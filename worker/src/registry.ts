@@ -7,7 +7,7 @@ export const S3_BUCKET =
 
 export async function handleRegistryRequest(url: URL): Promise<Response> {
   console.log("registry request", url.pathname);
-  const entry = parsePathname(url.pathname);
+  const entry = parsePathname(decodeURIComponent(url.pathname));
   if (!entry) {
     return new Response("This module entry is invalid: " + url.pathname, {
       status: 400,
