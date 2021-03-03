@@ -29,6 +29,18 @@ for await (const req of s) {
         <title>Deno - A secure runtime for JavaScript and TypeScript</title>
       </Head>
       <CookieBanner />
+      <div className="bg-blue-500 p-4 text-white flex justify-center text-center">
+        <div className="max-w-screen-xl">
+          <span className="inline">Deno 1.8 has been released.</span>
+          <span className="block sm:ml-2 sm:inline-block font-semibold">
+            <Link href="/posts/v1.8">
+              <a>
+                Read the notes <span aria-hidden="true">&rarr;</span>
+              </a>
+            </Link>
+          </span>
+        </div>
+      </div>
       <div className="bg-white">
         <div className="bg-gray-50 border-b border-gray-200">
           <Header />
@@ -41,13 +53,6 @@ for await (const req of s) {
               <strong className="font-semibold">JavaScript</strong> and{" "}
               <strong className="font-semibold">TypeScript</strong>.
             </h2>
-
-            <a
-              href="https://github.com/denoland/deno/releases/latest"
-              className="rounded-full mt-4 px-8 py-2 transition-colors duration-75 ease-in-out bg-blue-500 hover:bg-blue-400 text-white shadow-lg"
-            >
-              {versions.cli[0]}
-            </a>
           </div>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
@@ -290,7 +295,7 @@ const InstallSection = () => {
           Cargo
         </a>
       </p>
-      <CodeBlock language="bash" code={`cargo install deno`} />
+      <CodeBlock language="bash" code={`cargo install deno --locked`} />
     </div>
   );
 
