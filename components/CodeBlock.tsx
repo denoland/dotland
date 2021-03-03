@@ -29,6 +29,7 @@ export interface CodeBlockProps {
     | "toml"
     | "wasm"
     | "makefile"
+    | "powershell"
     | "dockerfile";
 }
 
