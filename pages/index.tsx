@@ -260,7 +260,7 @@ const InstallSection = () => {
     <div key="powershell" className="my-4 text-gray-700">
       <p className="mb-2">PowerShell (Windows):</p>
       <CodeBlock
-        language="bash"
+        language="powershell"
         code={`iwr https://deno.land/x/install/install.ps1 -useb | iex`}
       />
     </div>
@@ -273,7 +273,7 @@ const InstallSection = () => {
         </a>{" "}
         (Windows):
       </p>
-      <CodeBlock language="bash" code={`choco install deno`} />
+      <CodeBlock language="powershell" code={`choco install deno`} />
     </div>
   );
   const scoop = (
@@ -284,7 +284,7 @@ const InstallSection = () => {
         </a>{" "}
         (Windows):
       </p>
-      <CodeBlock language="bash" code={`scoop install deno`} />
+      <CodeBlock language="powershell" code={`scoop install deno`} />
     </div>
   );
   const cargo = (
@@ -293,7 +293,7 @@ const InstallSection = () => {
         Build and install from source using{" "}
         <a href="https://crates.io/crates/deno" className="link">
           Cargo
-        </a>
+        </a>:
       </p>
       <CodeBlock language="bash" code={`cargo install deno --locked`} />
     </div>
