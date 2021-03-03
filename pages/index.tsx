@@ -28,6 +28,7 @@ for await (const req of s) {
   return (
     <>
       <Head>
+        {/*<title>Deno - A secure runtime for JavaScript and TypeScript</title>*/}
         <title>Deno - 안전한 JavaScript & TypeScript 실행환경</title>
         <meta property="og:title" content="Deno"/>
         <meta property="og:description" content="안전한 JavaScript & TypeScript 실행환경"/>
@@ -57,6 +58,18 @@ for await (const req of s) {
         )}
       </Head>
       <CookieBanner />
+      <div className="bg-blue-500 p-4 text-white flex justify-center text-center">
+        <div className="max-w-screen-xl">
+          <span className="inline">Deno 1.8 has been released.</span>
+          <span className="block sm:ml-2 sm:inline-block font-semibold">
+            <Link href="/posts/v1.8">
+              <a>
+                Read the notes <span aria-hidden="true">&rarr;</span>
+              </a>
+            </Link>
+          </span>
+        </div>
+      </div>
       <div className="bg-white">
         <div className="bg-gray-50 border-b border-gray-200">
           <Header />
@@ -94,14 +107,10 @@ for await (const req of s) {
               {/*explicitly enabled.*/}
               안전성이 기본입니다. 파일 시스템, 네트워크, 환경변수에 접근하려면 명시적으로 권한을 받아야 합니다.
             </li>
-            <li>
-              {/*Supports TypeScript out of the box.*/}
-              TypeScript를 바로 사용할 수 있습니다.
-            </li>
-            <li>
-              {/*Ships only a single executable file.*/}
-              실행 파일 하나로 배포됩니다.
-            </li>
+            {/*<li>Supports TypeScript out of the box.</li>*/}
+            <li>TypeScript를 바로 사용할 수 있습니다.</li>
+            {/*<li>Ships only a single executable file.</li>*/}
+            <li>실행 파일 하나로 배포됩니다.</li>
             <li>
               {/*Has built-in utilities like a dependency inspector (*/}
               {/*<InlineCode>deno info</InlineCode>) and a code formatter (*/}
@@ -166,6 +175,7 @@ for await (const req of s) {
             {/*</Link>*/}
             심도있는 소개 문서, 예제, 환경설정 방법을 확인하려면{" "}
             <Link href="/manual">
+              {/*<a className="link">the manual</a>*/}
               <a className="link">가이드 문서</a>
             </Link>
             를 참고하세요.
@@ -392,7 +402,7 @@ const InstallSection = () => {
         </a>
         로 소스파일 빌드하고 설치하기
       </p>
-      <CodeBlock language="bash" code={`cargo install deno`} />
+      <CodeBlock language="bash" code={`cargo install deno --locked`} />
     </div>
   );
 
