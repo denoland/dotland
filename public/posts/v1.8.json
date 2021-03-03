@@ -10,5 +10,5 @@
       "className": "hidden"
     }
   ],
-  "snippet": "Deno 1.8 adds experimental support for the WebGPU API, adds support for importing private modules, stabilizes import maps, revamps coverage tooling, adds ICU to provide internationalization out of the box, and a whole lot more."
+  "snippet": "Deno 1.8 增加了对 WebGPU API 的实验性支持，增加了对导入私有模块的支持，import maps 更加符合规范了，改进了测试覆盖率的工具，增加了 ICU 以提供国际化功能，等等。"
 }
