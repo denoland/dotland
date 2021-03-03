@@ -1,5 +1,5 @@
 // This script demonstrates the runtime permission API.
-// Run like this: `deno run https://deno.land/posts/v1.8/permission_api.ts`
+// Run like this: `deno run --unstable https://deno.land/posts/v1.8/permission_api.ts`
 
 function homedir() {
   try {
