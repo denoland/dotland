@@ -293,7 +293,8 @@ const InstallSection = () => {
         Build and install from source using{" "}
         <a href="https://crates.io/crates/deno" className="link">
           Cargo
-        </a>:
+        </a>
+        :
       </p>
       <CodeBlock language="bash" code={`cargo install deno --locked`} />
     </div>
