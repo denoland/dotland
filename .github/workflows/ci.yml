@@ -25,7 +25,7 @@ jobs:
       - run: yarn test
   proxy:
     runs-on: ubuntu-latest
-    working-directory: proxy
+
     steps:
       - uses: actions/checkout@v1
 
@@ -38,12 +38,15 @@ jobs:
 
       - name: Format
         run: deno fmt --check
+        working-directory: proxy
 
       - name: Lint
         run: deno lint --unstable
+        working-directory: proxy
 
       - name: Test
         run: deno test --allow-net
+        working-directory: proxy
 
       - name: Install flyctl
         if:
@@ -56,3 +59,4 @@ jobs:
           github.ref == 'refs/heads/main' && github.event_name == 'push' &&
           github.repository == 'denoland/deno_website2'
         run: flyctl deploy
+        working-directory: proxy
