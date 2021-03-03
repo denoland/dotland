@@ -524,6 +524,23 @@ function Benchmarks(): React.ReactElement {
                 <BenchmarkOrLoading data={data} columns={data?.cargoDeps} />
               </div>
             </div>
+            <div className="mt-20">
+              <h4 className="text-2xl font-bold tracking-tight">
+                Language Server
+              </h4>
+              <div className="mt-8">
+                <BenchmarkOrLoading
+                  data={data}
+                  columns={data?.lspExecTime}
+                  yLabel={"milliseconds"}
+                />
+                <p className="mt-1">
+                  We track the performance of the Deno language server under
+                  different scenarios to help gauge the overall performance of
+                  the language server.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
         <Footer simple />

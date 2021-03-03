@@ -124,6 +124,17 @@ function Markdown(props: MarkdownProps): React.ReactElement | null {
         text(text) {
           return replaceEmojis(text);
         },
+        code(code, language) {
+          const markup = renderToStaticMarkup(
+            <RawCodeBlock
+              code={code}
+              language={language as any}
+              disablePrefixes={true}
+              enableLineRef={false}
+            />
+          );
+          return `<pre>${markup}</pre>`;
+        },
       } as Partial<Renderer>) as any,
     });
 
@@ -131,15 +142,6 @@ function Markdown(props: MarkdownProps): React.ReactElement | null {
       gfm: true,
       headerIds: true,
       sanitizer: dompurify.sanitize,
-      highlight: (code, language) =>
-        renderToStaticMarkup(
-          <RawCodeBlock
-            code={code}
-            language={language as any}
-            disablePrefixes={true}
-            enableLineRef={false}
-          />
-        ),
     });
     return (
       <div
