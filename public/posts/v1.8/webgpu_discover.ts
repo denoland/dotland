@@ -1,4 +1,4 @@
-// Run with `deno run https://deno.land/posts/v1.8/webgpu_discover.ts`
+// Run with `deno run --unstable https://deno.land/posts/v1.8/webgpu_discover.ts`
 
 // Try to get an adapter from the user agent.
 const adapter = await navigator.gpu.requestAdapter();
