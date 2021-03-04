@@ -103,6 +103,6 @@ $ deno run --allow-net https://gist.githubusercontent.com/lucacasonato/1a30a4fa6
 Listening on http://0.0.0.0:8080
 ```
 
-As a result of this incident we have set up a status page. This page shows the
-current status of deno.land/x, deno.land/std, cdn.deno.land, and api.deno.land.
-You can view it at https://status.deno.land/.
+As a result of this incident we have set up a public status page. This page
+shows the current status of deno.land/x, deno.land/std, cdn.deno.land, and
+api.deno.land. You can view it at https://status.deno.land/.
