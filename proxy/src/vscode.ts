@@ -1,9 +1,13 @@
 import { Context, RouterContext } from "../deps.ts";
 import { S3_BUCKET } from "./registry.ts";
+import { cachedFetch, State } from "./utils.ts";
 
-export async function vscModule(ctx: RouterContext) {
-  const module = ctx.params.module as string;
-  const resp = await fetch(`${S3_BUCKET}${module}/meta/versions.json`);
+export async function vscModule(ctx: RouterContext<{ module: string }, State>) {
+  const module = ctx.params.module;
+  const resp = await cachedFetch(
+    ctx,
+    `${S3_BUCKET}${module}/meta/versions.json`,
+  );
   if (resp.status === 403 || resp.status === 404) {
     resp.body?.cancel();
     ctx.response.status = 404;
@@ -23,13 +27,20 @@ export async function vscModule(ctx: RouterContext) {
   ctx.response.headers.set("cache-control", "max-age=86400");
 }
 
-export async function vscPaths(ctx: RouterContext) {
-  await getPaths(ctx, ctx.params.module!, ctx.params.version!);
+export async function vscPaths(
+  ctx: RouterContext<{ module: string; version: string }, State>,
+) {
+  await getPaths(ctx, ctx.params.module, ctx.params.version);
 }
 
-export async function vscPathsLatest(ctx: RouterContext) {
+export async function vscPathsLatest(
+  ctx: RouterContext<{ module: string }, State>,
+) {
   const module = ctx.params.module;
-  const resp = await fetch(`${S3_BUCKET}${module}/meta/versions.json`);
+  const resp = await cachedFetch(
+    ctx,
+    `${S3_BUCKET}${module}/meta/versions.json`,
+  );
   if (resp.status === 403 || resp.status === 404) {
     resp.body?.cancel();
     ctx.response.status = 404;
@@ -53,11 +64,12 @@ export async function vscPathsLatest(ctx: RouterContext) {
 }
 
 async function getPaths(
-  ctx: Context,
+  ctx: Context<State>,
   module: string,
   version: string,
 ) {
-  const resp = await fetch(
+  const resp = await cachedFetch(
+    ctx,
     `${S3_BUCKET}${module}/versions/${version}/meta/meta.json`,
   );
   if (resp.status === 403 || resp.status === 404) {
