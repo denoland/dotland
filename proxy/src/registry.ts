@@ -84,6 +84,7 @@ export async function proxy(ctx: Context<State>, url: string) {
     url,
   );
   if ([403, 404].includes(resp.status)) {
+    await resp.arrayBuffer();
     ctx.response.status = 404;
     ctx.response.body = "Resource Not Found";
     return;

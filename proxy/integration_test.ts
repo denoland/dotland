@@ -167,15 +167,10 @@ Deno.test("redirects :123:2 line numbers to #L123 in html", async () => {
     .expect("");
 });
 
-Deno.test({
-  name: "dont redirect :123:2 line numbers to #L123 in plain",
-  async fn() {
-    const request = await superoak(app());
-    await request.get("/std@0.89.0/version.ts:5:1")
-      .accept("application/typescript")
-      .expect(404)
-      .expect("Resource Not Found");
-  },
-  // TODO: this is bad
-  sanitizeResources: false,
+Deno.test("dont redirect :123:2 line numbers to #L123 in plain", async () => {
+  const request = await superoak(app());
+  await request.get("/std@0.89.0/version.ts:5:1")
+    .accept("application/typescript")
+    .expect(404)
+    .expect("Resource Not Found");
 });
