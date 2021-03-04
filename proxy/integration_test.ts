@@ -174,3 +174,17 @@ Deno.test("dont redirect :123:2 line numbers to #L123 in plain", async () => {
     .expect(404)
     .expect("Resource Not Found");
 });
+
+Deno.test("caching", async () => {
+  const a = app();
+  let request = await superoak(a);
+  await request.get("/std@0.89.0/version.ts")
+    .accept("application/typescript")
+    .expect(200)
+    .expect("x-deno-cache", "MISS");
+  request = await superoak(a);
+  await request.get("/std@0.89.0/version.ts")
+    .accept("application/typescript")
+    .expect(200)
+    .expect("x-deno-cache", "HIT");
+});
