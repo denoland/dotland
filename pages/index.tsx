@@ -294,6 +294,7 @@ const InstallSection = () => {
         <a href="https://crates.io/crates/deno" className="link">
           Cargo
         </a>
+        :
       </p>
       <CodeBlock language="bash" code={`cargo install deno --locked`} />
     </div>
