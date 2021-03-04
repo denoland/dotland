@@ -7,6 +7,8 @@ kill_timeout = 5
 
 [build]
   builtin = "deno"
+  [build.args]
+    perms='"--allow-net","--allow-env"'
 
 [[services]]
   internal_port = 8080
