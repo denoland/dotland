@@ -90,9 +90,9 @@ for them.
 
 This experience has solidified our belief that building the Deno runtime on
 standardized, open web APIs like `fetch` was the right move. Because Cloudflare
-Workers builds these standard web APIs too, we were able to migrate our primary
-Cloudflare Worker to a Deno script running on Fly.io in under 20 minutes. We
-only had to polyfill the "fetch" event to get our workers running.
+Workers builds on these standard web APIs too, we were able to migrate our
+primary Cloudflare Worker to a Deno script running on Fly.io in under 20
+minutes. We only had to polyfill the "fetch" event to get our workers running.
 
 If you are interested, this is the code we used to polyfill the "fetch" event:
 https://gist.github.com/lucacasonato/1a30a4fa6ef6c053a93f271675ef93fc. Try run
