@@ -52,7 +52,9 @@ jobs:
         if:
           github.ref == 'refs/heads/main' && github.event_name == 'push' &&
           github.repository == 'denoland/deno_website2'
-        run: curl -L https://fly.io/install.sh | FLYCTL_INSTALL=/usr/local sh
+        run: |
+          curl -L https://fly.io/install.sh | sh
+          echo "$HOME/.fly/bin" >> $GITHUB_PATH
 
       - name: Deploy
         if:
@@ -60,3 +62,5 @@ jobs:
           github.repository == 'denoland/deno_website2'
         run: flyctl deploy
         working-directory: proxy
+        env:
+          FLY_ACCESS_TOKEN: ${{ secrets.FLY_ACCESS_TOKEN }}
