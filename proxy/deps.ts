@@ -4,8 +4,5 @@ export type {
   Context,
   RouterContext,
 } from "https://deno.land/x/oak@v6.5.0/mod.ts";
-export {
-  Cache,
-  redisCache,
-} from "https://deno.land/x/httpcache@0.1.0/redis.ts";
+export { Cache } from "https://deno.land/x/httpcache@0.1.0/redis.ts";
 export { inMemoryCache } from "https://deno.land/x/httpcache@0.1.0/in_memory.ts";
