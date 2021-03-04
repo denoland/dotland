@@ -7,7 +7,7 @@ result of a rouge abuse prevention filter at an upstream service provider,
 Cloudflare. This post details what exactly happened, how we recovered the
 systems, and what we are doing to prevent this in the future.
 
-All services are now operating norally again. The registry api at api.deno.land
+All services are now operating normally again. The registry API at api.deno.land
 was not impacted by this incident. No data was lost. We take outages like these
 seriously and sincerely apologize for the disruption.
 
@@ -20,12 +20,12 @@ to the site.
 ## Timeline of events
 
 At 02:00 AM UTC we received an email from an automated system at Cloudflare
-notifying us that serving media deno.land had been blocked due to a suspected
+notifying us that all media on deno.land had been blocked due to a suspected
 violation of section 2.8 or their TOS. This section of the TOS details that
 Cloudflare may not be used to serve primarially media files. Upon receival of
-this email we decided to remove the screen captures and media files from the 1.8
-blog post as a temporary mitigation. This was done at 02:09 AM UTC. At 02:22 AM
-UTC we opened a support ticket with Cloudflare.
+this email we decided to remove the screen captures and images from the 1.8 blog
+post as a temporary mitigation. This was done at 02:09 AM UTC. This did not
+resolve the issue. At 02:22 AM UTC we opened a support ticket with Cloudflare.
 
 At 03:00 AM UTC we decided we would move our infrastrucutre to an alternative
 infrastructure provider (https://fly.io) to mitigate the outage. Huge thanks to
@@ -34,23 +34,26 @@ effort and providing us with infrastructure right away. We switched over the DNS
 records for the affected services at 03:24 AM UTC. This resolved the outage for
 the majority of users worldwide at 03:41 AM UTC.
 
-Cloudflare resolved the issue false positive block at 18:40 PM UTC - 16.5 hours
-after the incident started, and 16 hours after we reached out.
+Cloudflare resolved the block they had put on our site at 18:40 PM UTC - 16.5
+hours after the incident started, and 16 hours after we reached out. This was
+the first non-standardized response we got from them after opening the ticket.
 
 ## Root cause
 
-Our initial anlysis of the incident yesterday evening concluded that Cloudflare
-had blocked all media files for the deno.land zone. This alone should have not
-taken down deno.land/x or deno.land/std - these do not serve media, but source
-code. The issue was that Cloudflare was seemingly interpreting all .ts files,
-regardless of content or content-type header, as MPEG transport streams (which
-fall under the media block). In our case this is invalid because .ts files can
-be both MPEG transport streams, or TypeScript files.
+Our initial anlysis of the incident concluded that Cloudflare had blocked all
+media files for the deno.land zone - likely due to the steep increase of traffic
+due to Hacker News. This alone should have not taken down deno.land/x or
+deno.land/std as these do not serve media, but source code. This was caused by
+Cloudflare seemingly interpreting all .ts files, regardless of content or
+content-type header, as MPEG transport streams (which fall under the media
+block). In our case this was not correct because .ts files can be both MPEG
+transport streams, or TypeScript files (as is the case for us). All of our
+typescript files are served with `application/typescript`.
 
 ## Whats next?
 
-Cloudflare reached out to us yesterday to discuss what happened. After an
-initital investigation they have concluded that this was an error in their abuse
+Cloudflare reached out to us Tuesday evening to discuss what happened. After an
+initital investigation they concluded that this was an error in their abuse
 monitoring system. Cloudflare has assured us this issue will not occur again,
 and that they will implement changes in their systems to make sure this will not
 happen to any other Cloudflare customers.
