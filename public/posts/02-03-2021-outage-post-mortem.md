@@ -50,6 +50,32 @@ block). In our case this was not correct because .ts files can be both MPEG
 transport streams, or TypeScript files (as is the case for us). All of our
 typescript files are served with `application/typescript`.
 
+## Impact
+
+As you might know, Deno imports remote code using URLs. This means that if the
+host of the module you want to import experiences an outage, you will not be
+able to download this module from that host anymore. This is the same problem
+all package managers have - for example when npmjs.org experiences an outage,
+you can not `npm install` anymore.
+
+Does this mean that you are not able to run your project when the module host
+goes down? No. Deno caches all remote imports in a global cache directory on
+your system. This means that when you import the a bit of code for the first
+time it will be downloaded and cached, and then on subsequent runs you will be
+able to use that code offline without needing network access - just like with
+node_modules.
+
+We expect the impact of this outage to be relatively minimal to most developers
+who use Deno on active projects, as they would have likely had their
+dependencies cached already. This outage overwhelmingly impacted new Deno users,
+and CI pipelines.
+
+It is also important to note that the Deno CLI does not depend on the deno.land
+domain to be online to function. It is completly registry agnostic. If your
+project is only made up of modules from other registries, like esm.sh,
+skypack.dev, jspm.dev, or nest.land, you would have seen no impact from this
+outage.
+
 ## Whats next?
 
 Cloudflare reached out to us Tuesday evening to discuss what happened. After an
@@ -76,3 +102,6 @@ this example locally, then visit http://0.0.0.0:8080.
 $ deno run --allow-net https://gist.githubusercontent.com/lucacasonato/1a30a4fa6ef6c053a93f271675ef93fc/raw/efcdc8e798604e194831830fcb962b50261384b3/example-worker.js
 Listening on http://0.0.0.0:8080
 ```
+
+We will set up a status page in the coming days to be able to better communicate
+the rare cases where we experience an outage.
