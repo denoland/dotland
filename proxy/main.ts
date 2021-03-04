@@ -2,11 +2,12 @@ import { app as createApp } from "./mod.ts";
 import { Application, redisCache } from "./deps.ts";
 import { State } from "./src/utils.ts";
 
+const GIT_SHA = Deno.env.get("GIT_SHA") ?? "dev";
 const REDIS_CACHE_URL = Deno.env.get("FLY_REDIS_CACHE_URL");
 
 let state: State | undefined = undefined;
 if (typeof REDIS_CACHE_URL === "string") {
-  const cache = await redisCache(REDIS_CACHE_URL, "v0-");
+  const cache = await redisCache(REDIS_CACHE_URL, `${GIT_SHA}-`);
   state = { cache };
 }
 
@@ -27,14 +28,12 @@ app.use(async (ctx, next) => {
   ctx.response.headers.set("Server-Timing", `total;dur=${ms}`);
 });
 
-const GIT_SHA = Deno.env.get("GIT_SHA");
-
 // Server
 app.use(async (ctx, next) => {
   await next();
   ctx.response.headers.set(
     "Server",
-    `Deno/${Deno.version.deno} @ ${GIT_SHA ?? "dev"}`,
+    `Deno/${Deno.version.deno} @ ${GIT_SHA}`,
   );
 });
 
