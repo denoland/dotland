@@ -19,6 +19,9 @@ export async function registryMiddleware(ctx: RouterContext) {
   const version = ctx.params.version;
   const path = ctx.params.path ?? "";
 
+  ctx.response.headers.set("Access-Control-Allow-Origin", "*");
+  ctx.response.headers.set("Access-Control-Max-Age", "86400");
+
   // If no version is specified, redirect to the latest
   if (version === undefined) {
     const latest = await getLatestVersion(module);
