@@ -1,9 +1,10 @@
-import { Application, Router } from "./deps.ts";
+import { Application, inMemoryCache, Router } from "./deps.ts";
 import { registryMiddleware } from "./src/registry.ts";
+import { State } from "./src/utils.ts";
 import { vscModule, vscPaths, vscPathsLatest } from "./src/vscode.ts";
 import { websiteMiddleware } from "./src/website.ts";
 
-export function app(app = new Application()) {
+export function app(app = new Application<State>()) {
   const router = new Router();
 
   router.get("/std{@:version}?/:path+", registryMiddleware);
@@ -27,6 +28,10 @@ export function app(app = new Application()) {
 
   app.use(router.routes());
   app.use(router.allowedMethods());
+
+  if (app.state?.cache === undefined) {
+    app.state = { cache: inMemoryCache(100) };
+  }
 
   return app;
 }

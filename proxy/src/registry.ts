@@ -1,10 +1,23 @@
 import { Context, readerFromStreamReader, RouterContext } from "../deps.ts";
+import { cachedFetch, State } from "./utils.ts";
 
 export const S3_BUCKET =
   "http://deno-registry2-prod-storagebucket-b3a31d16.s3-website-us-east-1.amazonaws.com/";
-const PROXY_HEADERS = ["date", "cache-control", "last-modified", "etag"];
+const PROXY_HEADERS = [
+  "date",
+  "cache-control",
+  "last-modified",
+  "etag",
+  "x-deno-cache",
+];
 
-export async function registryMiddleware(ctx: RouterContext) {
+export async function registryMiddleware(
+  ctx: RouterContext<{
+    module?: string;
+    version: string | undefined;
+    path: string;
+  }, State>,
+) {
   const accepts = ctx.request.accepts();
   const acceptsHtml = accepts?.includes("text/html");
   if (acceptsHtml) {
@@ -17,14 +30,14 @@ export async function registryMiddleware(ctx: RouterContext) {
 
   const module = ctx.params.module ?? "std";
   const version = ctx.params.version;
-  const path = ctx.params.path ?? "";
+  const path = ctx.params.path;
 
   ctx.response.headers.set("Access-Control-Allow-Origin", "*");
   ctx.response.headers.set("Access-Control-Max-Age", "86400");
 
   // If no version is specified, redirect to the latest
   if (version === undefined) {
-    const latest = await getLatestVersion(module);
+    const latest = await getLatestVersion(ctx, module);
     if (latest !== undefined) {
       ctx.response.headers.set(
         "x-deno-warning",
@@ -53,9 +66,13 @@ export function getBackingURL(module: string, version: string, path: string) {
 }
 
 export async function getLatestVersion(
+  ctx: Context<State>,
   module: string,
 ): Promise<string | undefined> {
-  const res = await fetch(`${S3_BUCKET}${module}/meta/versions.json`);
+  const res = await cachedFetch(
+    ctx,
+    `${S3_BUCKET}${module}/meta/versions.json`,
+  );
   if (!res.ok) {
     if (res.body) await res.body.cancel();
     return undefined;
@@ -64,9 +81,13 @@ export async function getLatestVersion(
   return versions?.latest;
 }
 
-export async function proxy(ctx: Context, url: string) {
-  const resp = await fetch(url);
+export async function proxy(ctx: Context<State>, url: string) {
+  const resp = await cachedFetch(
+    ctx,
+    url,
+  );
   if ([403, 404].includes(resp.status)) {
+    await resp.arrayBuffer();
     ctx.response.status = 404;
     ctx.response.body = "Resource Not Found";
     return;

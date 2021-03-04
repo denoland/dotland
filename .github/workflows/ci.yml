@@ -60,7 +60,7 @@ jobs:
         if:
           github.ref == 'refs/heads/main' && github.event_name == 'push' &&
           github.repository == 'denoland/deno_website2'
-        run: flyctl deploy
+        run: flyctl deploy --env GIT_SHA=$(git rev-parse --short "$GITHUB_SHA")
         working-directory: proxy
         env:
           FLY_ACCESS_TOKEN: ${{ secrets.FLY_ACCESS_TOKEN }}
