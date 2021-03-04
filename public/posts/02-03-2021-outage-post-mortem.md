@@ -76,7 +76,7 @@ project is only made up of modules from other registries, like esm.sh,
 skypack.dev, jspm.dev, or nest.land, you would have seen no impact from this
 outage.
 
-## Whats next?
+## What's next?
 
 Cloudflare reached out to us Tuesday evening to discuss what happened. After an
 initital investigation they concluded that this was an error in their abuse
