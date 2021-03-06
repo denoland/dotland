@@ -7,8 +7,9 @@ kill_timeout = 5
 
 [build]
   builtin = "deno"
-  [build.args]
-    perms='"--allow-net","--allow-env"'
+
+[build.settings]
+  perms = ["--allow-net", "--allow-env"]
 
 [[services]]
   internal_port = 8080
@@ -26,9 +27,11 @@ kill_timeout = 5
     handlers = ["tls", "http"]
     port = "443"
 
-  [[services.tcp_checks]]
-    grace_period = "1s"
-    interval = "10s"
-    port = "8080"
-    restart_limit = 5
-    timeout = "2s"
+  [[services.http_checks]]
+    interval = 10000
+    grace_period = "5s"
+    method = "get"
+    path = "/"
+    protocol = "http"
+    timeout = 5000
+      

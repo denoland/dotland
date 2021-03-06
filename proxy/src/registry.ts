@@ -74,7 +74,7 @@ export async function getLatestVersion(
     `${S3_BUCKET}${module}/meta/versions.json`,
   );
   if (!res.ok) {
-    if (res.body) await res.body.cancel();
+    if (res.body) await res.arrayBuffer();
     return undefined;
   }
   const versions = await res.json();
