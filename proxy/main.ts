@@ -10,7 +10,16 @@ const app = new Application<State>();
 app.use(async (ctx, next) => {
   await next();
   const st = ctx.response.headers.get("Server-Timing");
-  console.log(`${ctx.request.method} ${ctx.request.url} - ${st}`);
+  const status = ctx.response.status;
+  if (status >= 200 && status < 400) {
+    console.log(
+      `[ok]   ${status} - ${ctx.request.method} ${ctx.request.url} - ${st}`,
+    );
+  } else {
+    console.log(
+      `[fail] ${status} - ${ctx.request.method} ${ctx.request.url} - ${st}`,
+    );
+  }
 });
 
 // Timing
@@ -37,7 +46,15 @@ app.addEventListener("listen", (event) => {
 });
 
 app.addEventListener("error", (evt) => {
-  console.log("error", evt.error);
+  const ctx = evt.context;
+  if (ctx) {
+    const status = ctx.response.status;
+    console.error(
+      `[err]  ${status} - ${ctx.request.method} ${ctx.request.url} - ${evt.error}`,
+    );
+  } else {
+    console.error(`[err]  - ${evt.error}`);
+  }
 });
 
 await createApp(app).listen({ port: 8080 });
