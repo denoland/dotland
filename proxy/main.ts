@@ -50,11 +50,10 @@ app.addEventListener("error", (evt) => {
   if (ctx) {
     const status = ctx.response.status;
     console.error(
-      `[err]  ${status} - ${ctx.request.method} ${ctx.request.url}`,
-      evt.error,
+      `[err]  ${status} - ${ctx.request.method} ${ctx.request.url} - ${evt.error}`,
     );
   } else {
-    console.error("[err]  ", evt.error);
+    console.error(`[err]  - ${evt.error}`);
   }
 });
 
