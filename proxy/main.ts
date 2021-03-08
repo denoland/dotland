@@ -49,12 +49,12 @@ app.addEventListener("error", (evt) => {
   const ctx = evt.context;
   if (ctx) {
     const status = ctx.response.status;
-    console.log(
+    console.error(
       `[err]  ${status} - ${ctx.request.method} ${ctx.request.url}`,
       evt.error,
     );
   } else {
-    console.log("[error] ", evt.error);
+    console.error("[err]  ", evt.error);
   }
 });
 
