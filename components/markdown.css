@@ -567,3 +567,26 @@ object {
 .markdown-posts h2 {
   line-height: 1.3;
 }
+
+@media only screen and (max-width: 768px) {
+  .markdown h1 {
+    font-size: 28px;
+  }
+  .markdown h2 {
+    font-size: 22px;
+  }
+  .markdown h3 {
+    font-size: 19px;
+  }
+}
+@media only screen and (max-width: 640px) {
+  .markdown h1 {
+    font-size: 24px;
+  }
+  .markdown h2 {
+    font-size: 20px;
+  }
+  .markdown h3 {
+    font-size: 18px;
+  }
+}
