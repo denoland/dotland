@@ -100,7 +100,7 @@ function NewsPostPage(props: Props): React.ReactElement {
         <Link href="/posts">
           <a className="link">&lt;- Other News</a>
         </Link>
-        <h1 className="tracking-tight font-bold text-5xl leading-10 mt-4 py-8">
+        <h1 className="tracking-tight font-bold text-3xl leading-8 sm:text-4xl md:text-5xl mt-4 py-4 sm:py-6">
           {props.meta.title}
         </h1>
         <a
@@ -125,7 +125,7 @@ function NewsPostPage(props: Props): React.ReactElement {
           {format.format(date)}
         </p>
         <p className="text-gray-500 mt-3 leading-tight">{props.meta.author}</p>
-        <div className="mt-8 -mx-4">
+        <div className="-mx-4 sm:mt-2">
           <Markdown
             source={props.markdown}
             displayURL={`https://deno.land/posts/${props.meta.id}`}
