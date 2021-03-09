@@ -40,7 +40,7 @@ function PostsIndexPage(props: Props): React.ReactElement | null {
       <div className="bg-white pt-2 pb-20 px-4 sm:px-6 lg:pt-8 lg:pb-28 lg:px-8">
         <div className="relative max-w-screen-lg mx-auto">
           <div className="border-b-2 border-gray-100 pb-8">
-            <h2 className="text-5xl font-bold tracking-tight">News</h2>
+            <h2 className="text-4xl font-bold tracking-tight">News</h2>
           </div>
           <div className="mt-6 grid gap-16 lg:grid-cols-2 lg:col-gap-5 lg:row-gap-12">
             {props.posts
