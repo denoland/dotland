@@ -25,13 +25,14 @@ function pathJoin(...parts: string[]) {
 
 export function getRepositoryURL(
   meta: VersionMetaInfo,
-  path: string
+  path: string,
+  type = "blob"
 ): string | undefined {
   switch (meta.uploadOptions.type) {
     case "github":
       return `https://github.com/${pathJoin(
         meta.uploadOptions.repository,
-        "tree",
+        type,
         meta.uploadOptions.ref,
         meta.uploadOptions.subdir ?? "",
         path

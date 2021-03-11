@@ -91,10 +91,6 @@ function Registry(): React.ReactElement {
     version,
     path,
   ]);
-  const repositoryURL = useMemo(
-    () => (versionMeta ? getRepositoryURL(versionMeta, path) : undefined),
-    [versionMeta, path]
-  );
   const documentationURL = useMemo(() => {
     const doc = `https://doc.deno.land/https/deno.land${canonicalPath}`;
     return denoDocAvailableForURL(canonicalPath) ? doc : null;
@@ -196,6 +192,16 @@ function Registry(): React.ReactElement {
     }
     return versionMeta;
   }, [versionMeta, path]);
+
+  const repositoryURL = useMemo(
+    () =>
+      versionMeta
+        ? dirEntries
+          ? getRepositoryURL(versionMeta, path, "tree")
+          : getRepositoryURL(versionMeta, path)
+        : undefined,
+    [versionMeta, path, dirEntries]
+  );
 
   const {
     readmeCanonicalPath,
