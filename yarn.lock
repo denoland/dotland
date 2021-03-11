@@ -7051,6 +7051,11 @@ tunnel-agent@^0.6.0:
   dependencies:
     safe-buffer "^5.0.1"
 
+twas@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/twas/-/twas-2.1.2.tgz#bb1d0b40f028500f077b90efba4ddd8b4b633d6a"
+  integrity sha512-B2O+mT0OdBgnXeKEUlvwq/Al5KRLvTcR8Q/tS7kiHWG7T+dq1OOdN7FtWyQlT95eMW7k1raqz8RfUBelceNtfw==
+
 tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"

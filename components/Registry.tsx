@@ -4,6 +4,7 @@ import React, { useMemo, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
+import twas from "twas";
 import {
   parseNameVersion,
   denoDocAvailableForURL,
@@ -62,18 +63,6 @@ function Registry(): React.ReactElement {
     } else {
       push(href, asPath);
     }
-  }
-
-  function getFormattedDateTime(date: Date) {
-    const format = new Intl.DateTimeFormat(undefined, {
-      hour: "numeric",
-      minute: "numeric",
-      second: "numeric",
-      month: "numeric",
-      day: "numeric",
-      year: "numeric",
-    });
-    return format.format(date);
   }
 
   // Base paths
@@ -537,8 +526,8 @@ function Registry(): React.ReactElement {
                               clipRule="evenodd"
                             />
                           </svg>
-                          <div>
-                            {getFormattedDateTime(versionMeta.uploadedAt)}
+                          <div title={versionMeta.uploadedAt.toLocaleString()}>
+                            {twas(versionMeta.uploadedAt.getTime())}
                           </div>
                         </div>
                       )}
