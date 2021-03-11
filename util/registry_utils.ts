@@ -257,8 +257,8 @@ export async function getBuild(id: string): Promise<Build> {
 }
 
 export function parseNameVersion(nameVersion: string): [string, string] {
-  const [name, version] = nameVersion.split("@", 2);
-  return [name, version];
+  const [name, ...version] = nameVersion.split("@");
+  return [name, version.join("@")];
 }
 
 export function fileTypeFromURL(filename: string): string | undefined {
@@ -516,4 +516,12 @@ export async function getStats(): Promise<{
   }
 
   return data.data;
+}
+
+export function getBasePath({ isStd, name, version }: {
+  isStd: Boolean,
+  name: string,
+  version?: string
+}) {
+  return `${isStd ? "" : "/x"}/${name}${version ? `@${encodeURIComponent(version)}` : ""}`
 }
