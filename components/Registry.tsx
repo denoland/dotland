@@ -55,7 +55,11 @@ function Registry(): React.ReactElement {
   }, [query]);
   function gotoVersion(newVersion: string, doReplace?: boolean) {
     const href = `${!isStd ? "/x" : ""}/[...rest]`;
-    const asPath = `${getBasePath({ isStd, name, version: newVersion })}${path}`;
+    const asPath = `${getBasePath({
+      isStd,
+      name,
+      version: newVersion,
+    })}${path}`;
     if (doReplace) {
       replace(href, asPath + location.hash);
     } else {
@@ -76,10 +80,10 @@ function Registry(): React.ReactElement {
   }
 
   // Base paths
-  const basePath = useMemo(
-    () => getBasePath({ isStd, name, version }),
-    [name, version]
-  );
+  const basePath = useMemo(() => getBasePath({ isStd, name, version }), [
+    name,
+    version,
+  ]);
   // File paths
   const canonicalPath = useMemo(() => `${basePath}${path}`, [basePath, path]);
   const sourceURL = useMemo(() => getSourceURL(name, version, path), [
@@ -630,9 +634,7 @@ function Breadcrumbs({
           /{" "}
         </>
       )}
-      <Link
-        href={getBasePath({ isStd, name, version })}
-      >
+      <Link href={getBasePath({ isStd, name, version })}>
         <a className="link">
           {name}
           {version ? `@${version}` : ""}
@@ -647,7 +649,9 @@ function Breadcrumbs({
               {" "}
               /{" "}
               <Link
-                href={`${getBasePath({ isStd, name, version })}${link ? `/${link}` : ""}`}
+                href={`${getBasePath({ isStd, name, version })}${
+                  link ? `/${link}` : ""
+                }`}
               >
                 <a className="link">{p}</a>
               </Link>

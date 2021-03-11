@@ -123,11 +123,13 @@ function DirectoryListing(props: {
               {display
                 .sort((a, b) => a.type.localeCompare(b.type))
                 .map((entry, i) => {
-                  const href =
-                    `${getBasePath({ isStd, name: props.name, version: props.version })}${props.path}/${entry.path ? entry.path + "/" : ""}${
-                      entry.name
-                    }`
-                  ;
+                  const href = `${getBasePath({
+                    isStd,
+                    name: props.name,
+                    version: props.version,
+                  })}${props.path}/${entry.path ? entry.path + "/" : ""}${
+                    entry.name
+                  }`;
                   return (
                     <tr
                       key={i}

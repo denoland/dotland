@@ -518,10 +518,16 @@ export async function getStats(): Promise<{
   return data.data;
 }
 
-export function getBasePath({ isStd, name, version }: {
-  isStd: Boolean,
-  name: string,
-  version?: string
+export function getBasePath({
+  isStd,
+  name,
+  version,
+}: {
+  isStd: Boolean;
+  name: string;
+  version?: string;
 }) {
-  return `${isStd ? "" : "/x"}/${name}${version ? `@${encodeURIComponent(version)}` : ""}`
+  return `${isStd ? "" : "/x"}/${name}${
+    version ? `@${encodeURIComponent(version)}` : ""
+  }`;
 }
