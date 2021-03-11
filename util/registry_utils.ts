@@ -523,10 +523,10 @@ export function getBasePath({
   name,
   version,
 }: {
-  isStd: Boolean;
+  isStd: boolean;
   name: string;
   version?: string;
-}) {
+}): string {
   return `${isStd ? "" : "/x"}/${name}${
     version ? `@${encodeURIComponent(version)}` : ""
   }`;
