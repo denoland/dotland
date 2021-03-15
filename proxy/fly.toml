@@ -1,0 +1,37 @@
+# fly.toml file generated for deno-website2 on 2021-03-03T04:22:36+01:00
+
+app = "deno-website2"
+
+kill_signal = "SIGINT"
+kill_timeout = 5
+
+[build]
+  builtin = "deno"
+
+[build.settings]
+  perms = ["--allow-net", "--allow-env"]
+
+[[services]]
+  internal_port = 8080
+  protocol = "tcp"
+
+  [services.concurrency]
+    hard_limit = 1000
+    soft_limit = 950
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = "80"
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = "443"
+
+  [[services.http_checks]]
+    interval = 10000
+    grace_period = "5s"
+    method = "get"
+    path = "/"
+    protocol = "http"
+    timeout = 5000
+      

@@ -14,7 +14,7 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "exclude": ["node_modules", "worker", "public"],
+  "exclude": ["node_modules", "proxy", "public"],
   "include": [
     "next-env.d.ts",
     "**/*.ts",

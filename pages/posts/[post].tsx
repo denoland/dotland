@@ -100,7 +100,7 @@ function NewsPostPage(props: Props): React.ReactElement {
         <Link href="/posts">
           <a className="link">&lt;- 其他新闻</a>
         </Link>
-        <h1 className="tracking-tight font-bold text-5xl leading-10 mt-4 py-8">
+        <h1 className="tracking-tight font-bold text-4xl mt-4 py-8">
           {props.meta.title}
         </h1>
         <a
