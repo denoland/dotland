@@ -51,7 +51,7 @@ for await (const req of s) {
             <h2 className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900">
               <strong className="font-semibold">安全的</strong>{" "}
               <strong className="font-semibold">JavaScript</strong> 和{" "}
-              <strong className="font-semibold">TypeScript</strong> 运行时.
+              <strong className="font-semibold">TypeScript</strong> 运行时。
             </h2>
           </div>
         </div>
