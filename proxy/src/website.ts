@@ -1,7 +1,7 @@
 import { Context, readerFromStreamReader } from "../deps.ts";
 import { cachedFetch, State } from "./utils.ts";
 
-const REMOTE_URL = "https://deno-website2.now.sh";
+const REMOTE_URL = "https://deno-cn.vercel.app";
 
 export async function websiteMiddleware(
   ctx: Context<State>,
