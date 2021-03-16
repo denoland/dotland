@@ -496,7 +496,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
                   <dd className="mt-2">
                     <p className="text-base leading-6 text-gray-500">
                       No, the built-in runtime is documented on{" "}
-                      <a className="link" href="https://doc.deno.land/">
+                      <a className="link" href="https://doc.deno.js.cn/">
                         deno doc
                       </a>{" "}
                       and in the manual. See{" "}

@@ -130,8 +130,8 @@ for await (const req of s) {
           </Link>
           <p className="my-4 text-gray-700">
             Deno 的基本运行时文档可以在{" "}
-            <a href="https://doc.deno.land/builtin/stable" className="link">
-              doc.deno.land
+            <a href="https://doc.deno.js.cn/builtin/stable" className="link">
+              doc.deno.js.cn
             </a>{" "}
             网站找到。
           </p>
@@ -206,8 +206,8 @@ for await (const req of s) {
             <InlineCode>deno info</InlineCode> 和{" "}
             <InlineCode>deno doc</InlineCode>。 deno.land
             还提供用于查看模块文档的 Web UI。位于{" "}
-            <a href="https://doc.deno.land" className="link">
-              doc.deno.land
+            <a href="https://doc.deno.js.cn" className="link">
+              doc.deno.js.cn
             </a>
             。
           </p>

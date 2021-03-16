@@ -19,7 +19,7 @@ export function app(app = new Application<State>()) {
     "/typedoc",
     (ctx) => {
       ctx.response.status = 301;
-      ctx.response.redirect("https://doc.deno.land/builtin/stable");
+      ctx.response.redirect("https://doc.deno.js.cn/builtin/stable");
     },
   );
 
