@@ -31,7 +31,9 @@ kill_timeout = 5
     interval = 10000
     grace_period = "5s"
     method = "get"
-    path = "/"
+    path = "/_health"
     protocol = "http"
     timeout = 5000
+    [services.http_checks.headers]
+      Host = "healthcheck.internal"
       

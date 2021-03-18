@@ -14,6 +14,11 @@ export function app(app = new Application<State>()) {
   router.get("/_vsc1/modules/:module([a-z0-9_]*)/v/:version", vscPaths);
   router.get("/_vsc1/modules/:module([a-z0-9_]*)/v_latest", vscPathsLatest);
 
+  router.get("/_health", (ctx) => {
+    ctx.response.status = 200;
+    ctx.response.body = "healthy";
+  });
+
   router.redirect("/v1", "/posts/v1", 301);
   router.get(
     "/typedoc",
