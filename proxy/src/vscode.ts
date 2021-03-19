@@ -90,7 +90,7 @@ async function getPaths(
     .map((f) => f.path.substring(1))
     .filter(
       (f) =>
-        f.endsWith(".jsx") ||
+        f.endsWith(".js") ||
         f.endsWith(".jsx") ||
         f.endsWith(".ts") ||
         f.endsWith(".tsx") ||
