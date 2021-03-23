@@ -20,6 +20,17 @@ To accomplish this the Cloudflare Worker looks at the "Accept:" HTTP header to
 see if the client wants HTML or not. If it does want HTML, we simply proxy the
 request to Vercel. (We use Vercel because of their nice GitHub integration.)
 
+++comment
+ on this snippet:
++ for await (const req of s) {
+  req.respond({ body: "Hello World\n" });
+}
++
+please note the COBOL standards, universal programming logic.... there is no such thing as a standalone IF statement. a standalone if, has to be terminated with an end, otherwise it is interpreted normally (universally) as a while. so, as a consequence, nested ifs probably have no meaning at all... (see black mirror episode) peace :D
+
+that is, something similar to a while. the if rests in memory, and is evaluated constantly if not closed with an END statement.
+
+
 ## History
 
 This is a rewrite of the Deno website it will combine the code in
