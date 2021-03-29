@@ -16,6 +16,16 @@ module.exports = withPreact({
           destination: "/benchmarks",
           permanent: true,
         },
+        {
+          source: "/posts",
+          destination: "https://deno.com/blog",
+          permanent: true,
+        },
+        {
+          source: "/posts/:id",
+          destination: "https://deno.com/blog/:id",
+          permanent: true,
+        },
       ];
     },
   },

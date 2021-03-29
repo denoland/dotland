@@ -68,11 +68,12 @@ function Header({
               Manual
             </a>
           </Link>
-          <Link href="/posts">
-            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              News
-            </a>
-          </Link>
+          <a
+            href="https://deno.com/blog"
+            className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+          >
+            Blog
+          </a>
           <a
             href="https://doc.deno.land/builtin/stable"
             className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
