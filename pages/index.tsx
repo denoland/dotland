@@ -29,8 +29,9 @@ for await (const req of s) {
         <title>Deno - 安全的 JavaScript 和 TypeScript 运行时</title>
       </Head>
       <CookieBanner />
-      {/* <div className="bg-blue-500 p-4 text-white flex justify-center text-center">
+      <div className="bg-blue-500 p-4 text-white flex justify-center text-center">
         <div className="max-w-screen-xl">
+<<<<<<< HEAD
           <span className="inline">Deno 1.8 已经发布。</span>
           <span className="block sm:ml-2 sm:inline-block font-semibold">
             <Link href="/posts/v1.8">
@@ -38,9 +39,16 @@ for await (const req of s) {
                 阅读发布公告 <span aria-hidden="true">&rarr;</span>
               </a>
             </Link>
+=======
+          <span className="inline">Announcing the Deno Company.</span>
+          <span className="block sm:ml-2 sm:inline-block font-semibold">
+            <a href="https://deno.com/blog/the-deno-company">
+              Read the blog post <span aria-hidden="true">&rarr;</span>
+            </a>
+>>>>>>> 904709688db45c812f7c9889bb66e7e44ab33c9a
           </span>
         </div>
-      </div> */}
+      </div>
       <div className="bg-white">
         <div className="bg-gray-50 border-b border-gray-200">
           <Header />
