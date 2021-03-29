@@ -29,18 +29,16 @@ for await (const req of s) {
         <title>Deno - A secure runtime for JavaScript and TypeScript</title>
       </Head>
       <CookieBanner />
-      {/* <div className="bg-blue-500 p-4 text-white flex justify-center text-center">
+      <div className="bg-blue-500 p-4 text-white flex justify-center text-center">
         <div className="max-w-screen-xl">
-          <span className="inline">Deno 1.8 has been released.</span>
+          <span className="inline">Announcing the Deno Company.</span>
           <span className="block sm:ml-2 sm:inline-block font-semibold">
-            <Link href="/posts/v1.8">
-              <a>
-                Read the notes <span aria-hidden="true">&rarr;</span>
-              </a>
-            </Link>
+            <a href="https://deno.com/blog/the-deno-company">
+              Read the blog post <span aria-hidden="true">&rarr;</span>
+            </a>
           </span>
         </div>
-      </div> */}
+      </div>
       <div className="bg-white">
         <div className="bg-gray-50 border-b border-gray-200">
           <Header />
