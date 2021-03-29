@@ -55,7 +55,7 @@ function Registry(): React.ReactElement {
   function gotoVersion(newVersion: string, doReplace?: boolean) {
     const href = `${!isStd ? "/x" : ""}/[...rest]`;
     const asPath = `${!isStd ? "/x" : ""}/${
-      name + (newVersion !== "" ? `@${newVersion}` : "")
+      name + (newVersion !== "" ? `@${encodeURIComponent(newVersion)}` : "")
     }${path}`;
     if (doReplace) {
       replace(href, asPath + location.hash);
@@ -361,7 +361,10 @@ function Registry(): React.ReactElement {
                             body="This file or directory could not be found."
                           />
                         );
-                      } else if (!dirEntries && typeof raw !== "string") {
+                      } else if (
+                        typeof dirEntries === "undefined" &&
+                        typeof raw !== "string"
+                      ) {
                         // loading
                         return (
                           <div className="rounded-lg overflow-hidden border border-gray-200 bg-white">
@@ -376,6 +379,27 @@ function Registry(): React.ReactElement {
                               <div className="w-3/4 bg-gray-100 h-3 mt-4"></div>
                               <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
                               <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                            </div>
+                          </div>
+                        );
+                      } else if (
+                        dirEntries === null &&
+                        typeof raw !== "string"
+                      ) {
+                        // No files
+                        return (
+                          <div className="rounded-lg overflow-hidden border border-gray-200 bg-white">
+                            {versionMeta && (
+                              <DirectoryListing
+                                name={name}
+                                version={version}
+                                path={path}
+                                dirListing={versionMeta.directoryListing}
+                                repositoryURL={repositoryURL}
+                              />
+                            )}
+                            <div className="w-full p-4 text-gray-400 italic">
+                              No files.
                             </div>
                           </div>
                         );
