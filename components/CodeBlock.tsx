@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Highlight, { Prism } from "prism-react-renderer";
 import light from "prism-react-renderer/themes/github";
+import dark from "prism-react-renderer/themes/vsDark";
 import { useLayoutEffect } from "react";
 
 (typeof global !== "undefined" ? global : (window as any)).Prism = Prism;
@@ -43,6 +44,7 @@ export function RawCodeBlock({
   enableLineRef?: boolean;
 }): React.ReactElement {
   const [hashValue, setHashValue] = useState("");
+  const [isDark, setIsDark] = useState(true);
   const codeDivClassNames =
     "text-gray-300 token-line text-right select-none text-xs";
   const onClick = (e: React.MouseEvent) => {
@@ -68,6 +70,8 @@ export function RawCodeBlock({
       return () => {
         window.removeEventListener("hashchange", onHashChange);
       };
+
+      setIsDark(window.matchMedia("(prefers-color-scheme: dark)").matches);
     }, []);
 
     useLayoutEffect(() => {
@@ -92,7 +96,7 @@ export function RawCodeBlock({
   return (
     <Highlight
       Prism={Prism}
-      theme={light}
+      theme={isDark ? dark : light}
       code={code}
       // @ts-expect-error because typings are bad
       language={

@@ -4,7 +4,7 @@ const defaultTheme = require("tailwindcss/defaultTheme"); // eslint-disable-line
 const colors = require("tailwindcss/colors");
 
 module.exports = {
-  darkMode: "class",
+  darkMode: "media",
   theme: {
     colors: {
       transparent: "transparent",
