@@ -56,20 +56,12 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
             </Link>
           </div>
           <div className="px-5 py-2">
-<<<<<<< HEAD
-            <Link href="/posts">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                新闻
-              </a>
-            </Link>
-=======
             <a
               href="https://deno.com/blog"
               className="text-base leading-6 text-gray-500 hover:text-gray-900"
             >
-              Blog
+              博客
             </a>
->>>>>>> 904709688db45c812f7c9889bb66e7e44ab33c9a
           </div>
           <div className="px-5 py-2">
             <Link href="/translations">
