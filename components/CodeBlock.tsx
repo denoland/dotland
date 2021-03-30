@@ -161,7 +161,6 @@ export function RawCodeBlock({
                   {line.map((token, key) => (
                     <span key={key} {...getTokenProps({ token, key })} />
                   ))}
-                  {line[0]?.empty ? "\n" : ""}
                 </div>
               );
             })}

@@ -23,44 +23,44 @@ jobs:
       - run: yarn format:check
       - run: yarn lint
       - run: yarn test
-  worker:
+  proxy:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-        working-directory: worker
-      - uses: actions/cache@v1
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: worker-${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            worker-${{ runner.os }}-yarn-
-      - run: yarn --frozen-lockfile
-        working-directory: worker
-      - run: yarn format:check
-        working-directory: worker
-      - run: CI=true yarn test
-        working-directory: worker
-      - name: Publish Production
+
+      - name: Install Deno (Unix)
+        if: |
+          !startsWith(matrix.os, 'windows')
+        run: |-
+          curl -fsSL https://deno.land/x/install/install.sh | sh
+          echo "$HOME/.deno/bin" >> $GITHUB_PATH
+
+      - name: Format
+        run: deno fmt --check
+        working-directory: proxy
+
+      - name: Lint
+        run: deno lint --unstable
+        working-directory: proxy
+
+      - name: Test
+        run: deno test --allow-net
+        working-directory: proxy
+
+      - name: Install flyctl
         if:
           github.ref == 'refs/heads/main' && github.event_name == 'push' &&
           github.repository == 'denoland/deno_website2'
-        uses: cloudflare/wrangler-action@1.1.0
-        with:
-          environment: "production"
-          apiToken: ${{ secrets.cloudflareToken }}
-          workingDirectory: worker
-      - name: Publish Staging
+        run: |
+          curl -L https://fly.io/install.sh | sh
+          echo "$HOME/.fly/bin" >> $GITHUB_PATH
+
+      - name: Deploy
         if:
-          github.event_name == 'push' && github.repository ==
-          'denoland/deno_website2'
-        uses: cloudflare/wrangler-action@1.1.0
-        with:
-          environment: "staging"
-          apiToken: ${{ secrets.cloudflareToken }}
-          workingDirectory: worker
+          github.ref == 'refs/heads/main' && github.event_name == 'push' &&
+          github.repository == 'denoland/deno_website2'
+        run: flyctl deploy --env GIT_SHA=$(git rev-parse --short "$GITHUB_SHA")
+        working-directory: proxy
+        env:
+          FLY_ACCESS_TOKEN: ${{ secrets.FLY_ACCESS_TOKEN }}

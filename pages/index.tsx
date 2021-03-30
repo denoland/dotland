@@ -29,8 +29,18 @@ for await (const req of s) {
         <title>Deno - A secure runtime for JavaScript and TypeScript</title>
       </Head>
       <CookieBanner />
-      <div className="bg-white dark:bg-black-700 dark:text-gray-100">
-        <div className="bg-gray-50 border-b border-gray-200 dark:bg-black-800 dark:border-gray-800">
+      <div className="bg-blue-500 p-4 text-white flex justify-center text-center">
+        <div className="max-w-screen-xl">
+          <span className="inline">Announcing the Deno Company.</span>
+          <span className="block sm:ml-2 sm:inline-block font-semibold">
+            <a href="https://deno.com/blog/the-deno-company">
+              Read the blog post <span aria-hidden="true">&rarr;</span>
+            </a>
+          </span>
+        </div>
+      </div>
+      <div className="bg-white">
+        <div className="bg-gray-50 border-b border-gray-200">
           <Header />
           <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
             <h1 className="font-extrabold text-5xl leading-10 tracking-tight text-gray-900 dark:text-gray-100">
@@ -41,7 +51,6 @@ for await (const req of s) {
               <strong className="font-semibold">JavaScript</strong> and{" "}
               <strong className="font-semibold">TypeScript</strong>.
             </h2>
-
             <a
               href="https://github.com/denoland/deno/releases/latest"
               className="rounded-full mt-4 px-8 py-2 transition-colors duration-75 ease-in-out bg-blue-500 hover:bg-blue-400 text-white shadow-lg"
@@ -293,8 +302,9 @@ const InstallSection = () => {
         <a href="https://crates.io/crates/deno" className="link">
           Cargo
         </a>
+        :
       </p>
-      <CodeBlock language="bash" code={`cargo install deno`} />
+      <CodeBlock language="bash" code={`cargo install deno --locked`} />
     </div>
   );
 

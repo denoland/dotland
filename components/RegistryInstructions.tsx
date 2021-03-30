@@ -326,6 +326,7 @@ function RegistryInstructions(props: {
                             autoPlay
                             muted
                             loop
+                            playsInline
                           />
                           <div className="mt-2">
                             {isModuleNameAvailable ? (
