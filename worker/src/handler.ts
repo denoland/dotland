@@ -15,6 +15,17 @@ export async function handleRequest(request: Request) {
     return Response.redirect("https://deno.land/posts/v1", 301);
   }
 
+  if (url.pathname === "/posts") {
+    return Response.redirect("https://deno.com/blog", 307);
+  }
+
+  if (url.pathname.startsWith("/posts/")) {
+    return Response.redirect(
+      `https://deno.com/blog/${url.pathname.substring("/posts/".length)}`,
+      307
+    );
+  }
+
   if (url.pathname.startsWith("/typedoc")) {
     return Response.redirect("https://doc.deno.land/builtin/stable", 301);
   }
