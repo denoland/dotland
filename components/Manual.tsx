@@ -215,7 +215,7 @@ function Manual(): React.ReactElement {
   const stdVersion =
     version === undefined
       ? versionMeta.std[0]
-      : ((versionMeta.cli_to_std as any)[version ?? ""] as string) ?? version;
+      : ((versionMeta.cli_to_std as any)[version ?? ""] as string) ?? versionMeta.std[0];
 
   return (
     <div>
