@@ -21,6 +21,7 @@ import {
   VersionDeps,
   getVersionDeps,
   listExternalDependencies,
+  getBasePath,
 } from "../util/registry_utils";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -54,9 +55,11 @@ function Registry(): React.ReactElement {
   }, [query]);
   function gotoVersion(newVersion: string, doReplace?: boolean) {
     const href = `${!isStd ? "/x" : ""}/[...rest]`;
-    const asPath = `${!isStd ? "/x" : ""}/${
-      name + (newVersion !== "" ? `@${newVersion}` : "")
-    }${path}`;
+    const asPath = `${getBasePath({
+      isStd,
+      name,
+      version: newVersion,
+    })}${path}`;
     if (doReplace) {
       replace(href, asPath + location.hash);
     } else {
@@ -77,10 +80,10 @@ function Registry(): React.ReactElement {
   }
 
   // Base paths
-  const basePath = useMemo(
-    () => `${isStd ? "" : "/x"}/${name}${version ? `@${version}` : ""}`,
-    [name, version]
-  );
+  const basePath = useMemo(() => getBasePath({ isStd, name, version }), [
+    name,
+    version,
+  ]);
   // File paths
   const canonicalPath = useMemo(() => `${basePath}${path}`, [basePath, path]);
   const sourceURL = useMemo(() => getSourceURL(name, version, path), [
@@ -88,12 +91,8 @@ function Registry(): React.ReactElement {
     version,
     path,
   ]);
-  const repositoryURL = useMemo(
-    () => (versionMeta ? getRepositoryURL(versionMeta, path) : undefined),
-    [versionMeta, path]
-  );
   const documentationURL = useMemo(() => {
-    const doc = `https://doc.deno.land/https/deno.land/${canonicalPath}`;
+    const doc = `https://doc.deno.land/https/deno.land${canonicalPath}`;
     return denoDocAvailableForURL(canonicalPath) ? doc : null;
   }, [canonicalPath]);
 
@@ -193,6 +192,16 @@ function Registry(): React.ReactElement {
     }
     return versionMeta;
   }, [versionMeta, path]);
+
+  const repositoryURL = useMemo(
+    () =>
+      versionMeta
+        ? dirEntries
+          ? getRepositoryURL(versionMeta, path, "tree")
+          : getRepositoryURL(versionMeta, path)
+        : undefined,
+    [versionMeta, path, dirEntries]
+  );
 
   const {
     readmeCanonicalPath,
@@ -631,9 +640,7 @@ function Breadcrumbs({
           /{" "}
         </>
       )}
-      <Link
-        href={`${!isStd ? "/x" : ""}/${name}${version ? `@${version}` : ""}`}
-      >
+      <Link href={getBasePath({ isStd, name, version })}>
         <a className="link">
           {name}
           {version ? `@${version}` : ""}
@@ -648,9 +655,9 @@ function Breadcrumbs({
               {" "}
               /{" "}
               <Link
-                href={`${!isStd ? "/x" : ""}/${name}${
-                  version ? `@${version}` : ""
-                }${link ? `/${link}` : ""}`}
+                href={`${getBasePath({ isStd, name, version })}${
+                  link ? `/${link}` : ""
+                }`}
               >
                 <a className="link">{p}</a>
               </Link>

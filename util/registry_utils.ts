@@ -25,13 +25,14 @@ function pathJoin(...parts: string[]) {
 
 export function getRepositoryURL(
   meta: VersionMetaInfo,
-  path: string
+  path: string,
+  type = "blob"
 ): string | undefined {
   switch (meta.uploadOptions.type) {
     case "github":
       return `https://github.com/${pathJoin(
         meta.uploadOptions.repository,
-        "tree",
+        type,
         meta.uploadOptions.ref,
         meta.uploadOptions.subdir ?? "",
         path
@@ -257,8 +258,8 @@ export async function getBuild(id: string): Promise<Build> {
 }
 
 export function parseNameVersion(nameVersion: string): [string, string] {
-  const [name, version] = nameVersion.split("@", 2);
-  return [name, version];
+  const [name, ...version] = nameVersion.split("@");
+  return [name, version.join("@")];
 }
 
 export function fileTypeFromURL(filename: string): string | undefined {
@@ -516,4 +517,18 @@ export async function getStats(): Promise<{
   }
 
   return data.data;
+}
+
+export function getBasePath({
+  isStd,
+  name,
+  version,
+}: {
+  isStd: boolean;
+  name: string;
+  version?: string;
+}): string {
+  return `${isStd ? "" : "/x"}/${name}${
+    version ? `@${encodeURIComponent(version)}` : ""
+  }`;
 }
