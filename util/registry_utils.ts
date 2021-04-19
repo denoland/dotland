@@ -65,7 +65,9 @@ export async function getVersionMeta(
   module: string,
   version: string
 ): Promise<VersionMetaInfo | null> {
-  const url = `${CDN_ENDPOINT}${module}/versions/${version}/meta/meta.json`;
+  const url = `${CDN_ENDPOINT}${module}/versions/${encodeURIComponent(
+    version
+  )}/meta/meta.json`;
   const res = await fetch(url, {
     headers: {
       accept: "application/json",
@@ -107,7 +109,9 @@ export async function getVersionDeps(
   module: string,
   version: string
 ): Promise<VersionDeps | null> {
-  const url = `${CDN_ENDPOINT}${module}/versions/${version}/meta/deps_v2.json`;
+  const url = `${CDN_ENDPOINT}${module}/versions/${encodeURIComponent(
+    version
+  )}/meta/deps_v2.json`;
   const res = await fetch(url, {
     headers: {
       accept: "application/json",
