@@ -52,6 +52,7 @@ ol.nested li:before {
 }
 
 .prism-code {
+  border-radius: .25rem;
   tab-size: 2;
   -moz-tab-size: 2;
 }

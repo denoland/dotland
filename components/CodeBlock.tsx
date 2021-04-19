@@ -5,6 +5,16 @@ import Highlight, { Prism } from "prism-react-renderer";
 import light from "prism-react-renderer/themes/github";
 import { useLayoutEffect } from "react";
 
+// Modifies the color of 'variable' token
+// to avoid poor contrast
+// ref: https://github.com/denoland/deno_website2/issues/1724
+for (const style of light.styles) {
+  if (style.types.includes("variable")) {
+    // Chrome suggests this color instead of rgb(156, 220, 254);
+    style.style.color = "rgb(61, 88, 101)";
+  }
+}
+
 (typeof global !== "undefined" ? global : (window as any)).Prism = Prism;
 
 require("prismjs/components/prism-rust");

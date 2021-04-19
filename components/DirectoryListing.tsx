@@ -3,7 +3,7 @@
 import React, { useMemo, useState, createRef, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { isReadme, DirListing } from "../util/registry_utils";
+import { isReadme, DirListing, getBasePath } from "../util/registry_utils";
 
 function DirectoryListing(props: {
   dirListing: DirListing[];
@@ -123,13 +123,13 @@ function DirectoryListing(props: {
               {display
                 .sort((a, b) => a.type.localeCompare(b.type))
                 .map((entry, i) => {
-                  const href = encodeURI(
-                    `${isStd ? "" : "/x"}/${props.name}${
-                      props.version ? `@${props.version}` : ""
-                    }${props.path}/${entry.path ? entry.path + "/" : ""}${
-                      entry.name
-                    }`
-                  );
+                  const href = `${getBasePath({
+                    isStd,
+                    name: props.name,
+                    version: props.version,
+                  })}${props.path}/${entry.path ? entry.path + "/" : ""}${
+                    entry.name
+                  }`;
                   return (
                     <tr
                       key={i}
