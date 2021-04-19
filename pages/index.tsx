@@ -31,9 +31,9 @@ for await (const req of s) {
       <CookieBanner />
       <div className="bg-blue-500 p-4 text-white flex justify-center text-center">
         <div className="max-w-screen-xl">
-          <span className="inline">介绍 Deno 公司</span>
+          <span className="inline">Deno 1.9 发布了</span>
           <span className="block sm:ml-2 sm:inline-block font-semibold">
-            <a href="https://deno.js.cn/t/topic/735">
+            <a href="https://deno.com/blog/v1.9">
               阅读文章 <span aria-hidden="true">&rarr;</span>
             </a>
           </span>

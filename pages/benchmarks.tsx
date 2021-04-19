@@ -347,16 +347,6 @@ function Benchmarks(): React.ReactElement {
                     </a>
                     . The code is in{" "}
                     <SourceLink
-                      path="core/examples/http_bench_bin_ops.rs"
-                      name="http_bench_bin_ops.rs"
-                    />{" "}
-                    and{" "}
-                    <SourceLink
-                      path="core/examples/http_bench_bin_ops.js"
-                      name="http_bench_bin_ops.js"
-                    />
-                    for http_bench_bin_ops and{" "}
-                    <SourceLink
                       path="core/examples/http_bench_json_ops.rs"
                       name="http_bench_json_ops.rs"
                     />{" "}
@@ -364,7 +354,7 @@ function Benchmarks(): React.ReactElement {
                     <SourceLink
                       path="core/examples/http_bench_json_ops.js"
                       name="http_bench_json_ops.js"
-                    />
+                    />{" "}
                     for http_bench_json_ops.
                   </li>
                   <li>
