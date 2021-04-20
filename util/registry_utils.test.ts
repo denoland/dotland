@@ -95,7 +95,7 @@ const versionMeta: VersionMetaInfo = {
 
 test("getRepositoryURL", () => {
   expect(getRepositoryURL(versionMeta, "/README.md")).toEqual(
-    "https://github.com/luca-rand/testing/tree/0.0.8/README.md"
+    "https://github.com/luca-rand/testing/blob/0.0.8/README.md"
   );
 });
 
