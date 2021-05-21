@@ -1,7 +1,7 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import { handleRegistryRequest } from "./registry";
-import { handleVSCRequest } from "./vscode";
+import { handleRegistryRequest } from "./registry.ts";
+import { handleVSCRequest } from "./vscode.ts";
 
 const REMOTE_URL = "https://deno-website2.now.sh";
 
