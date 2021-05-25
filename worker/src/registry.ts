@@ -80,12 +80,12 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
     });
   }
   const remoteUrl = getBackingURL(module, version, path);
-  // @ts-ignore
-  const resp = await fetch(remoteUrl, { cf: { cacheEverything: true } });
+  const resp = await fetch(remoteUrl);
   const resp2 =
     resp.status === 403 || resp.status === 404
       ? new Response("404 Not Found", { status: 404 })
-      : new Response(resp.body, resp);
+      // workaround for https://github.com/denoland/deno/issues/10367
+      : new Response(resp.body, { headers: resp.headers, status: resp.status });
 
   // JSX and TSX content type fix
   if (
