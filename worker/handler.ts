@@ -1,11 +1,11 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import { handleRegistryRequest } from "./registry";
-import { handleVSCRequest } from "./vscode";
+import { handleRegistryRequest } from "./registry.ts";
+import { handleVSCRequest } from "./vscode.ts";
 
 const REMOTE_URL = "https://deno-website2.now.sh";
 
-export async function handleRequest(request: Request) {
+export function handleRequest(request: Request) {
   const accept = request.headers.get("accept");
   const isHtml = accept && accept.indexOf("html") >= 0;
 
@@ -22,7 +22,7 @@ export async function handleRequest(request: Request) {
   if (url.pathname.startsWith("/posts/")) {
     return Response.redirect(
       `https://deno.com/blog/${url.pathname.substring("/posts/".length)}`,
-      307
+      307,
     );
   }
 
@@ -34,8 +34,8 @@ export async function handleRequest(request: Request) {
     return handleVSCRequest(url);
   }
 
-  const isRegistryRequest =
-    url.pathname.startsWith("/std") || url.pathname.startsWith("/x/");
+  const isRegistryRequest = url.pathname.startsWith("/std") ||
+    url.pathname.startsWith("/x/");
 
   if (isRegistryRequest) {
     if (isHtml) {
@@ -54,7 +54,7 @@ export async function handleRequest(request: Request) {
 const ALT_LINENUMBER_MATCHER = /(.*):(\d+):\d+$/;
 
 export function extractAltLineNumberReference(
-  url: string
+  url: string,
 ): { rest: string; line: number } | null {
   const matches = ALT_LINENUMBER_MATCHER.exec(url);
   if (matches === null) return null;

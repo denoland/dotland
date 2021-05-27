@@ -1,6 +1,6 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import { parseNameVersion } from "../../util/registry_utils";
+import { parseNameVersion } from "../util/registry_utils.ts";
 
 export const S3_BUCKET =
   "http://deno-registry2-prod-storagebucket-b3a31d16.s3-website-us-east-1.amazonaws.com/";
@@ -80,12 +80,12 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
     });
   }
   const remoteUrl = getBackingURL(module, version, path);
-  // @ts-ignore
-  const resp = await fetch(remoteUrl, { cf: { cacheEverything: true } });
+  const resp = await fetch(remoteUrl);
   const resp2 =
     resp.status === 403 || resp.status === 404
       ? new Response("404 Not Found", { status: 404 })
-      : new Response(resp.body, resp);
+      // workaround for https://github.com/denoland/deno/issues/10367
+      : new Response(resp.body, { headers: resp.headers, status: resp.status });
 
   // JSX and TSX content type fix
   if (
