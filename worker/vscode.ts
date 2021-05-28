@@ -1,7 +1,7 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import { match } from "path-to-regexp";
-import { S3_BUCKET } from "./registry";
+import { match } from "https://deno.land/x/path_to_regexp@v6.2.0/index.ts";
+import { S3_BUCKET } from "./registry.ts";
 
 const VERSIONS = match("/_vsc1/modules/:module([a-z0-9_]*)");
 const PATHS = match("/_vsc1/modules/:module([a-z0-9_]*)/v/:version");
@@ -21,10 +21,12 @@ export async function handleVSCRequest(url: URL): Promise<Response> {
   if (versions) {
     const module = (versions.params as Record<string, string>)["module"];
     const resp = await fetch(`${S3_BUCKET}${module}/meta/versions.json`);
-    if (resp.status === 403 || resp.status === 404)
+    if (resp.status === 403 || resp.status === 404) {
       return new Response("module not found", { status: 404 });
-    if (!resp.ok)
+    }
+    if (!resp.ok) {
       return new Response("internal server error 1", { status: 500 });
+    }
     const json = await resp.json();
     return new Response(JSON.stringify(json.versions), {
       status: 200,
@@ -46,10 +48,12 @@ export async function handleVSCRequest(url: URL): Promise<Response> {
   if (pathsLatest) {
     const module = (pathsLatest.params as Record<string, string>)["module"];
     const resp = await fetch(`${S3_BUCKET}${module}/meta/versions.json`);
-    if (resp.status === 403 || resp.status === 404)
+    if (resp.status === 403 || resp.status === 404) {
       return new Response("module not found", { status: 404 });
-    if (!resp.ok)
+    }
+    if (!resp.ok) {
       return new Response("internal server error 3", { status: 500 });
+    }
     const json = await resp.json();
     if (!json.latest) return new Response("no latest version", { status: 404 });
     return getPaths(module, json.latest);
@@ -60,10 +64,11 @@ export async function handleVSCRequest(url: URL): Promise<Response> {
 
 async function getPaths(module: string, version: string): Promise<Response> {
   const resp = await fetch(
-    `${S3_BUCKET}${module}/versions/${version}/meta/meta.json`
+    `${S3_BUCKET}${module}/versions/${version}/meta/meta.json`,
   );
-  if (resp.status === 403 || resp.status === 404)
+  if (resp.status === 403 || resp.status === 404) {
     return new Response("module or version not found", { status: 404 });
+  }
   if (!resp.ok) return new Response("internal server error 2", { status: 500 });
   const json = await resp.json();
   const list = (json.directory_listing as Array<Record<string, string>>)
@@ -75,7 +80,7 @@ async function getPaths(module: string, version: string): Promise<Response> {
         f.endsWith(".jsx") ||
         f.endsWith(".ts") ||
         f.endsWith(".tsx") ||
-        f.endsWith(".mjs")
+        f.endsWith(".mjs"),
     );
   return new Response(JSON.stringify(list), {
     status: 200,
