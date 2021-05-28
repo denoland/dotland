@@ -80,7 +80,6 @@ Deno.test({
     const result = await handleRequest(
       new Request("https://deno.land/std@0.50.0/version.ts"),
     );
-    console.log(result.headers.get("Content-Type"));
     assert(result.headers.get("Content-Type")?.includes(
       "application/typescript",
     ));
