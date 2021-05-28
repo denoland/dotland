@@ -23,8 +23,6 @@ jobs:
       - run: yarn format:check
       - run: yarn lint
       - run: yarn test
-<<<<<<< HEAD
-=======
   worker:
     runs-on: ubuntu-latest
     steps:
@@ -34,4 +32,3 @@ jobs:
           deno-version: v1.x
       - name: Test Worker
         run: deno test --allow-net worker/
->>>>>>> 6f93169354f9dda89748ba38d389625466b0d2e9
