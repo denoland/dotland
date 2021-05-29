@@ -6,7 +6,6 @@ export const S3_BUCKET =
   "http://deno-registry2-prod-storagebucket-b3a31d16.s3-website-us-east-1.amazonaws.com/";
 
 export async function handleRegistryRequest(url: URL): Promise<Response> {
-  console.log("registry request", url.pathname);
   const entry = parsePathname(url.pathname);
   if (!entry) {
     return new Response("This module entry is invalid: " + url.pathname, {
@@ -26,7 +25,6 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
         }
       );
     }
-    console.log("registry redirect", module, latest);
     return new Response(undefined, {
       headers: {
         Location: `${module === "std" ? "" : "/x"}/${module}@${latest}/${path}`,
@@ -38,7 +36,6 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
     });
   }
   if (version.startsWith("v0.") && module === "std") {
-    console.log("std version prefix", module, version);
     const correctVersion = version.substring(1);
     const versionNumber = parseFloat(correctVersion);
     // For now only block std versions >= 0.43.0
