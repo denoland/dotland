@@ -219,5 +219,18 @@
       "web": "https://samip.ml/"
     },
     "license": "Restricted use"
+  },
+  {
+    "date": "2021-06-08",
+    "image": "/images/Deno_Web_Sockets.svg",
+    "title": "Deno Web Sock(pupp)ets",
+    "alt": "A silly logo for Web Socket purposes",
+    "artist": {
+      "name": "Pablo Barría Urenda",
+      "profile_image": "https://avatars.githubusercontent.com/u/26347195",
+      "github": "differentsmoke",
+      "web": "https://pbu.cl/"
+    },
+    "license": "MIT"
   }
 ]
