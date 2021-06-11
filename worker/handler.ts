@@ -104,6 +104,7 @@ async function proxyFile(
     try {
       return await fetch(modifiedRequest);
     } catch (err) {
+      // TODO(lucacasonato): only retry on known retryable errors
       console.warn("retrying on proxy error", err);
       lastErr = err;
     }
