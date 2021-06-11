@@ -88,12 +88,26 @@ export function extractAltLineNumberReference(
   };
 }
 
-function proxyFile(url: URL, remoteUrl: string, request: Request) {
+async function proxyFile(
+  url: URL,
+  remoteUrl: string,
+  request: Request,
+): Promise<Response> {
   const init = {
     method: request.method,
     headers: request.headers,
   };
   const urlR = remoteUrl + url.pathname;
   const modifiedRequest = new Request(urlR, init);
-  return fetch(modifiedRequest);
+  let lastErr;
+  for (let i = 0; i < 3; i++) {
+    try {
+      return await fetch(modifiedRequest);
+    } catch (err) {
+      // TODO(lucacasonato): only retry on known retryable errors
+      console.warn("retrying on proxy error", err);
+      lastErr = err;
+    }
+  }
+  throw lastErr;
 }
