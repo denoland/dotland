@@ -145,6 +145,7 @@ test("fileTypeFromURL", () => {
     ["readme.mkdn", "markdown"],
     ["readme.mdwn", "markdown"],
     ["readme.mkd", "markdown"],
+    ["readme.org", "org"],
     ["image.png", "image"],
     ["image.jpg", "image"],
     ["image.jpeg", "image"],
@@ -164,7 +165,9 @@ test("findRootReadme", () => {
   const tests: Array<[string, boolean]> = [
     ["/README", true],
     ["/README.md", true],
+    ["/README.org", true],
     ["/readme.markdown", true],
+    ["/readme.org", true],
     ["/README.mdown", true],
     ["/readme.mkdn", true],
     ["/readme.mdwn", true],
@@ -172,8 +175,11 @@ test("findRootReadme", () => {
     ["/README.mkdown", false],
     ["/README.markdn", false],
     ["/READTHIS.md", false],
+    ["/READTHIS.org", false],
     ["/docs/README.md", true],
+    ["/docs/README.org", true],
     ["/.github/README.md", true],
+    ["/.github/README.org", true],
   ];
 
   for (const [path, expectedToBeRootReadme] of tests) {
@@ -190,7 +196,9 @@ test("isReadme", () => {
   const tests: Array<[string, boolean]> = [
     ["README", true],
     ["README.md", true],
+    ["README.org", true],
     ["readme.markdown", true],
+    ["readme.org", true],
     ["README.mdown", true],
     ["readme.mkdn", true],
     ["readme.mdwn", true],
@@ -198,8 +206,9 @@ test("isReadme", () => {
     ["README.mkdown", false],
     ["README.markdn", false],
     ["READTHIS.md", false],
+    ["READTHIS.org", false],
   ];
   for (const [path, expectedToBeReadme] of tests) {
-    expect(isReadme(path)).toBe(expectedToBeReadme);
+    expect([path, isReadme(path)]).toEqual([path, expectedToBeReadme]);
   }
 });
