@@ -4,7 +4,9 @@ import React, { useState } from "react";
 import { getItem, setItem } from "../util/local_storage_utils";
 
 export function CookieBanner(): React.ReactElement {
-  const [cookieBanner, setCookieBanner] = useState(getItem("cookiebanner") === "closed");
+  const [cookieBanner, setCookieBanner] = useState(
+    getItem("cookiebanner") === "closed"
+  );
 
   return (
     <div>
