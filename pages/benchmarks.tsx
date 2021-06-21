@@ -325,7 +325,8 @@ function Benchmarks(): React.ReactElement {
                   </li>
                   <li>
                     <SourceLink
-                      path="std/http/http_bench.ts"
+                      repo="deno_std"
+                      path="http/bench.ts"
                       name="deno_http"
                     />{" "}
                     is a web server written in TypeScript. It is comparable to{" "}
@@ -557,10 +558,18 @@ function BenchmarkOrLoading(props: {
   );
 }
 
-function SourceLink({ name, path }: { name: string; path: string }) {
+function SourceLink({
+  name,
+  path,
+  repo = "deno",
+}: {
+  name: string;
+  path: string;
+  repo?: string;
+}) {
   return (
     <a
-      href={`https://github.com/denoland/deno/blob/main/${path}`}
+      href={`https://github.com/denoland/${repo}/blob/main/${path}`}
       className="link"
     >
       {name}
