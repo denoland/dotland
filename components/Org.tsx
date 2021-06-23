@@ -191,11 +191,13 @@ function Org(props: OrgProps): React.ReactElement | null {
 
   try {
     const raw = orgToHTML(parseSource(props.source));
-    return React.createElement("div", {
-      dangerouslySetInnerHTML: { __html: raw },
-      className: `markup py-8 px-4 ${props.className ?? ""}`,
-      onClick: { handleClick },
-    });
+    return (
+      <div
+        dangerouslySetInnerHTML={{ __html: raw }}
+        className={`markup py-8 px-4 ${props.className ?? ""}`}
+        onClick={handleClick}
+      />
+    );
   } catch (err) {
     console.log(err);
     return null;
