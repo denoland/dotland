@@ -81,7 +81,6 @@ function orgToHTML(node: Document): string {
       [
         "keyword",
         "todo",
-        "newline",
         "hr",
         "stars",
         "priority",
@@ -123,8 +122,8 @@ function orgToHTML(node: Document): string {
   }
 
   function tokenToHTML(node: Token): string {
-    if (isStyledText(node)) {
-      return styledTextToHTML(node);
+    if (isPhrasingContent(node)) {
+      return phrasingContentToHTML(node);
     }
     return `TODO: token: ${node.type}`;
   }
@@ -142,6 +141,8 @@ function orgToHTML(node: Document): string {
           title ? ` title="${title}"` : ""
         }>${text}</a>`;
       }
+      case "newline":
+        return "";
     }
     return `TODO: phrasingContent: ${node.type}`;
   }

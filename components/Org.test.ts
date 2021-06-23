@@ -185,6 +185,32 @@ testHeading("heading with markup", "* Test *title* /italic/", {
 });
 
 testOrgToHTML(
+  "nested headings with content",
+  `* First heading
+
+Some content.
+
+** Nested heading
+
+More content.
+
+* Outer heading again.`,
+  `${mkHeaderHTML(
+    1,
+    "First heading",
+    "first-heading"
+  )}<p>Some content.</p>${mkHeaderHTML(
+    2,
+    "Nested heading",
+    "nested-heading"
+  )}<p>More content.</p>${mkHeaderHTML(
+    1,
+    "Outer heading again.",
+    "outer-heading-again"
+  )}`
+);
+
+testOrgToHTML(
   "link (to external resource)",
   "[[https://duckduckgo.com][DuckDuckGo!]]",
   '<p><a href="https://duckduckgo.com">DuckDuckGo!</a></p>'
