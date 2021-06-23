@@ -110,9 +110,11 @@ function FileDisplay(props: {
               />
             );
           case "markdown":
+          case "org": {
+            const Markup = filetype === "org" ? Org : Markdown;
             return (
               <div className="px-4">
-                <Markdown
+                <Markup
                   source={
                     props.stdVersion === undefined
                       ? props.raw!
@@ -127,24 +129,7 @@ function FileDisplay(props: {
                 />
               </div>
             );
-          case "org":
-            return (
-              <div className="px-4">
-                <Org
-                  source={
-                    props.stdVersion === undefined
-                      ? props.raw!
-                      : props.raw!.replace(
-                          /\$STD_VERSION/g,
-                          props.stdVersion ?? ""
-                        )
-                  }
-                  displayURL={"https://deno.land" + props.canonicalPath}
-                  sourceURL={props.sourceURL}
-                  baseURL={"https://deno.land" + props.baseURL}
-                />
-              </div>
-            );
+          }
           case "image":
             return <img className="w-full" src={props.sourceURL} />;
           default:
