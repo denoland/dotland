@@ -170,6 +170,15 @@ function orgToHTML(node: Document): string {
     return contentToHTML(node);
   }
 
+  function mkHeaderHTML(level: number, text: string, slug: string): string {
+    return `<h${level}>
+  <a name="${slug}" class="anchor" href="#${slug}">
+    <span class="octicon-link"></span>
+  </a>
+  ${text}
+</h${level}>`;
+  }
+
   function contentToHTML(node: Content): string {
     switch (node.type) {
       case "section": {
@@ -189,12 +198,7 @@ function orgToHTML(node: Document): string {
         const headingContent: string = contentChildren
           .map((c) => tokenToHTML(c as Token))
           .join("");
-        return `<h${level}>
-  <a name="${slug}" class="anchor" href="#${slug}">
-    <span class="octicon-link"></span>
-  </a>
-  ${headingContent}
-</h${level}>`;
+        return mkHeaderHTML(level, headingContent, slug);
       }
       case "hr": {
         return "<hr>";
@@ -218,7 +222,13 @@ function orgToHTML(node: Document): string {
     return `TODO: content: ${node.type}`;
   }
 
-  return node.children.map(topLevelContentToHTML).join("");
+  const body = node.children.map(topLevelContentToHTML).join("");
+
+  if ("title" in node.properties) {
+    const title = node.properties.title;
+    return mkHeaderHTML(1, title, slugify(title)) + body;
+  }
+  return body;
 }
 
 function Org(props: MarkupProps): React.ReactElement | null {

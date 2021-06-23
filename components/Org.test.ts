@@ -79,6 +79,12 @@ testOrgToHTML(
   "<ul><li>this</li><li>is</li><li>a</li><li><strong>bullet</strong></li><li>list</li></ul>"
 );
 
+testOrgToHTML(
+  "title",
+  "#+TITLE: Document Title",
+  mkHeaderHTML(1, "Document Title", "document-title")
+);
+
 testOrgToHTML("comment, one line", "# a comment", "");
 
 testOrgToHTML(
