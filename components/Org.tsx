@@ -6,6 +6,8 @@ import dompurify from "dompurify";
 import unified from "unified";
 import parse from "reorg-parse";
 
+import { markup, MarkupProps, slugify } from "./Markup";
+
 import {
   Block,
   Document,
@@ -24,26 +26,6 @@ import {
   Table,
   Token,
 } from "orga/dist/types";
-
-function slugify(text: string): string {
-  text = text.toLowerCase();
-  text = text.split(" ").join("-");
-  text = text.split(/\t/).join("--");
-  text = text.split(/[|$&`~=\\/@+*!?({[\]})<>=.,;:'"^]/).join("");
-  text = text
-    .split(/[。？！，、；：“”【】（）〔〕［］﹃﹄“ ”‘’﹁﹂—…－～《》〈〉「」]/)
-    .join("");
-
-  return text;
-}
-
-interface OrgProps {
-  source: string;
-  displayURL: string;
-  sourceURL: string;
-  baseURL: string;
-  className?: string;
-}
 
 function parseSource(source: string): Document {
   return unified().use(parse).parse(source) as Document;
@@ -184,32 +166,18 @@ function orgToHTML(node: Document): string {
   return node.children.map(topLevelContentToHTML).join("");
 }
 
-function Org(props: OrgProps): React.ReactElement | null {
+function Org(props: MarkupProps): React.ReactElement | null {
   if (!props.source) {
     return null;
   }
 
   try {
     const raw = orgToHTML(parseSource(props.source));
-    return (
-      <div
-        dangerouslySetInnerHTML={{ __html: raw }}
-        className={`markup py-8 px-4 ${props.className ?? ""}`}
-        onClick={handleClick}
-      />
-    );
+    return markup(props, raw);
   } catch (err) {
     console.log(err);
     return null;
   }
-}
-
-function handleClick(e: React.MouseEvent<HTMLElement>) {
-  const el = e.target as HTMLElement;
-  if (el.className !== "octicon-link") return;
-
-  const anchor = el.parentNode as HTMLAnchorElement;
-  navigator.clipboard.writeText(anchor.href);
 }
 
 export default Org;

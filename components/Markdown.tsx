@@ -6,18 +6,7 @@ import marked, { Renderer } from "marked";
 import dompurify from "dompurify";
 import { RawCodeBlock } from "./CodeBlock";
 import { replaceEmojis } from "../util/emoji_util";
-
-function slugify(text: string): string {
-  text = text.toLowerCase();
-  text = text.split(" ").join("-");
-  text = text.split(/\t/).join("--");
-  text = text.split(/[|$&`~=\\/@+*!?({[\]})<>=.,;:'"^]/).join("");
-  text = text
-    .split(/[。？！，、；：“”【】（）〔〕［］﹃﹄“ ”‘’﹁﹂—…－～《》〈〉「」]/)
-    .join("");
-
-  return text;
-}
+import { markup, MarkupProps, slugify } from "./Markup";
 
 function isRelative(path: string): boolean {
   return (
@@ -38,15 +27,7 @@ function relativeToAbsolute(base: string, relative: string): string {
   return baseURL.href;
 }
 
-interface MarkdownProps {
-  source: string;
-  displayURL: string;
-  sourceURL: string;
-  baseURL: string;
-  className?: string;
-}
-
-function Markdown(props: MarkdownProps): React.ReactElement | null {
+function Markdown(props: MarkupProps): React.ReactElement | null {
   useEffect(() => {
     const id = setTimeout(() => {
       let { hash } = location;
@@ -136,25 +117,11 @@ function Markdown(props: MarkdownProps): React.ReactElement | null {
       headerIds: true,
       sanitizer: dompurify.sanitize,
     });
-    return (
-      <div
-        dangerouslySetInnerHTML={{ __html: raw }}
-        className={`markdown py-8 px-4 ${props.className ?? ""}`}
-        onClick={handleClick}
-      />
-    );
+    return markup(props, raw);
   } catch (err) {
     console.log(err);
     return null;
   }
-}
-
-function handleClick(e: React.MouseEvent<HTMLElement>) {
-  const el = e.target as HTMLElement;
-  if (el.className !== "octicon-link") return;
-
-  const anchor = el.parentNode as HTMLAnchorElement;
-  navigator.clipboard.writeText(anchor.href);
 }
 
 function transformLinkUri(displayURL: string, baseURL: string) {

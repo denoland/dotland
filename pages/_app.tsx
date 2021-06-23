@@ -4,7 +4,7 @@ import React from "react";
 import App from "next/app";
 import Head from "next/head";
 import "../components/app.css";
-import "../components/markdown.css";
+import "../components/markup.css";
 import "../components/docsearch.css";
 import "preact/debug";
 
