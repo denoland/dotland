@@ -18,6 +18,7 @@ import {
   HorizontalRule,
   Keyword,
   List,
+  ListItem,
   Paragraph,
   PhrasingContent,
   Planning,
@@ -56,7 +57,7 @@ function orgToHTML(node: Document): string {
     return `<${tag}>${nonHTML(text)}</${tag}>`;
   }
 
-  function isStyledText(node: Token): node is StyledText {
+  function isStyledText(node: { type: string }): node is StyledText {
     return [
       "text.plain",
       "text.bold",
@@ -66,6 +67,39 @@ function orgToHTML(node: Document): string {
       "text.strikeThrough",
       "text.underline",
     ].includes(node.type);
+  }
+
+  function isPhrasingContent(node: { type: string }): node is PhrasingContent {
+    return (
+      ["link", "footnote.reference", "newline"].includes(node.type) ||
+      isStyledText(node)
+    );
+  }
+
+  function isToken(node: { type: string }): node is Token {
+    return (
+      [
+        "keyword",
+        "todo",
+        "newline",
+        "hr",
+        "stars",
+        "priority",
+        "tags",
+        "planning.keyword",
+        "planning.timestamp",
+        "list.item.tag",
+        "list.item.checkbox",
+        "list.item.bullet",
+        "table.hr",
+        "table.columnSeparator",
+        "footnote.label",
+        "block.begin",
+        "block.end",
+        "drawer.begin",
+        "drawer.end",
+      ].includes(node.type) || isPhrasingContent(node)
+    );
   }
 
   function styledTextToHTML(node: StyledText): string {
@@ -110,6 +144,20 @@ function orgToHTML(node: Document): string {
       }
     }
     return `TODO: phrasingContent: ${node.type}`;
+  }
+
+  function anyToHTML(node: Content | Token): string {
+    if (isToken(node)) {
+      return tokenToHTML(node);
+    }
+    return contentToHTML(node);
+  }
+
+  function listItemToHTML(node: ListItem): string {
+    const content = node.children.slice(1);
+    return `<li>${content
+      .map((c) => anyToHTML(c as Content | Token))
+      .join("")}</li>`;
   }
 
   function topLevelContentToHTML(node: TopLevelContent): string {
@@ -158,6 +206,12 @@ function orgToHTML(node: Document): string {
           return dompurify.sanitize(node.value);
         }
         return `TODO: content: block { name = ${node.name}; params = ${node.params}`;
+      }
+      case "list": {
+        if (!node.ordered) {
+          const items: string[] = node.children.map(listItemToHTML);
+          return `<ul>${items.join("")}</ul>`;
+        }
       }
     }
     return `TODO: content: ${node.type}`;

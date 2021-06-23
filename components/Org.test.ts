@@ -69,6 +69,16 @@ testOrgToHTML(
 
 testOrgToHTML("horizontal rule", "-----", "<hr>");
 
+testOrgToHTML(
+  "flat bullet list",
+  `- this
+- is
+- a
+- *bullet*
+- list`,
+  "<ul><li>this</li><li>is</li><li>a</li><li><strong>bullet</strong></li><li>list</li></ul>"
+);
+
 testOrgToHTML("comment, one line", "# a comment", "");
 
 testOrgToHTML(
