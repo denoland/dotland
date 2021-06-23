@@ -3,6 +3,7 @@
 import React from "react";
 import { RawCodeBlock } from "./CodeBlock";
 import Markdown from "./Markdown";
+import Org from "./Org";
 import Link from "next/link";
 import {
   fileTypeFromURL,
@@ -112,6 +113,24 @@ function FileDisplay(props: {
             return (
               <div className="px-4">
                 <Markdown
+                  source={
+                    props.stdVersion === undefined
+                      ? props.raw!
+                      : props.raw!.replace(
+                          /\$STD_VERSION/g,
+                          props.stdVersion ?? ""
+                        )
+                  }
+                  displayURL={"https://deno.land" + props.canonicalPath}
+                  sourceURL={props.sourceURL}
+                  baseURL={"https://deno.land" + props.baseURL}
+                />
+              </div>
+            );
+          case "org":
+            return (
+              <div className="px-4">
+                <Org
                   source={
                     props.stdVersion === undefined
                       ? props.raw!
