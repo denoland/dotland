@@ -73,15 +73,27 @@ describe("text styling", () => {
 
 testOrgToHTML("horizontal rule", "-----", "<hr>");
 
-testOrgToHTML(
-  "flat bullet list",
-  `- this
+describe("lists", () => {
+  testOrgToHTML(
+    "flat bullet list",
+    `- this
 - is
 - a
 - *bullet*
 - list`,
-  "<ul><li>this</li><li>is</li><li>a</li><li><strong>bullet</strong></li><li>list</li></ul>"
-);
+    "<ul><li>this</li><li>is</li><li>a</li><li><strong>bullet</strong></li><li>list</li></ul>"
+  );
+
+  testOrgToHTML(
+    "flat numbered list",
+    `1. this
+2. is
+3. a
+4. *numbered*
+5. list`,
+    "<ol><li>this</li><li>is</li><li>a</li><li><strong>numbered</strong></li><li>list</li></ol>"
+  );
+});
 
 testOrgToHTML(
   "title",

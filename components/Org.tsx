@@ -257,8 +257,10 @@ function orgToHTML(props: MarkupProps, node: Document): string {
         return `TODO: content: block { name = ${node.name}; params = ${node.params} }`;
       }
       case "list": {
-        if (!node.ordered) {
-          const items: string[] = node.children.map(listItemToHTML);
+        const items: string[] = node.children.map(listItemToHTML);
+        if (node.ordered) {
+          return `<ol>${items.join("")}</ol>`;
+        } else {
           return `<ul>${items.join("")}</ul>`;
         }
       }
