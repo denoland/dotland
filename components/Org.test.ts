@@ -40,32 +40,34 @@ Fourth (after gap)`,
 Second line</p><p>Fourth (after gap)</p>`
 );
 
-for (const [testName, markupSym, htmlTag] of [
-  ["bold", "*", "strong"],
-  ["strikethrough", "+", "del"],
-  ["italic", "/", "em"],
-  ["verbatim", "=", "code"],
-  ["code (inline)", "~", "code"],
-]) {
+describe("text styling", () => {
+  for (const [testName, markupSym, htmlTag] of [
+    ["bold", "*", "strong"],
+    ["strikethrough", "+", "del"],
+    ["italic", "/", "em"],
+    ["verbatim", "=", "code"],
+    ["code (inline)", "~", "code"],
+  ]) {
+    testOrgToHTML(
+      testName,
+      `${markupSym}Test${markupSym}`,
+      `<p><${htmlTag}>Test</${htmlTag}></p>`
+    );
+  }
+
   testOrgToHTML(
-    testName,
-    `${markupSym}Test${markupSym}`,
-    `<p><${htmlTag}>Test</${htmlTag}></p>`
+    "underline",
+    "_Test_",
+    '<p><span style="text-decoration: underline;">Test</span></p>'
   );
-}
 
-testOrgToHTML(
-  "underline",
-  "_Test_",
-  '<p><span style="text-decoration: underline;">Test</span></p>'
-);
-
-// NOTE: this currently is not supported by the parser. Expected result is '<p><del>Te <strong>st</strong> ing</del></p>' (2021-06-23)
-testOrgToHTML(
-  "strikethrough and bold",
-  "+Te *st* ing+",
-  "<p><del>Te *st* ing</del></p>"
-);
+  // NOTE: this currently is not supported by the parser. Expected result is '<p><del>Te <strong>st</strong> ing</del></p>' (2021-06-23)
+  testOrgToHTML(
+    "strikethrough and bold",
+    "+Te *st* ing+",
+    "<p><del>Te *st* ing</del></p>"
+  );
+});
 
 testOrgToHTML("horizontal rule", "-----", "<hr>");
 
@@ -85,64 +87,68 @@ testOrgToHTML(
   mkHeaderHTML(1, "Document Title", "document-title")
 );
 
-testOrgToHTML("comment, one line", "# a comment", "");
+describe("comments", () => {
+  testOrgToHTML("comment, one line", "# a comment", "");
 
-testOrgToHTML(
-  "paragraph with comment character inside",
-  "this is not # a comment",
-  "<p>this is not # a comment</p>"
-);
-
-testOrgToHTML(
-  "comment, multi-line",
-  `# first line of comment
+  testOrgToHTML(
+    "comment, multi-line",
+    `# first line of comment
 # second line`,
-  ""
-);
+    ""
+  );
 
-testOrgToHTML(
-  "HTML in regular text",
-  "<p>&Test</p>",
-  "<p>&lt;p&gt;&amp;Test&lt;/p&gt;</p>"
-);
+  testOrgToHTML(
+    "paragraph with comment character inside",
+    "this is not # a comment",
+    "<p>this is not # a comment</p>"
+  );
+});
 
-testOrgToHTML(
-  "HTML in HTML export",
-  "#+HTML: <div><p>Test</p></div>",
-  "<div><p>Test</p></div>"
-);
+describe("embedding HTML", () => {
+  testOrgToHTML(
+    "HTML in regular text",
+    "<p>&Test</p>",
+    "<p>&lt;p&gt;&amp;Test&lt;/p&gt;</p>"
+  );
 
-testOrgToHTML(
-  "HTML in HTML export with XSS",
-  "#+HTML: <img src=x onerror=alert(1) //>",
-  '<img src="x">'
-);
+  testOrgToHTML(
+    "HTML in HTML export",
+    "#+HTML: <div><p>Test</p></div>",
+    "<div><p>Test</p></div>"
+  );
 
-testOrgToHTML(
-  "HTML in HTML export block",
-  `
+  testOrgToHTML(
+    "HTML in HTML export with XSS",
+    "#+HTML: <img src=x onerror=alert(1) //>",
+    '<img src="x">'
+  );
+
+  testOrgToHTML(
+    "HTML in HTML export block",
+    `
 #+BEGIN_EXPORT html
 <div>
     <p>Content</p>
 </div>
 #+END_EXPORT`,
-  `<div>
+    `<div>
     <p>Content</p>
 </div>`
-);
+  );
 
-testOrgToHTML(
-  "HTML in HTML export block with XSS",
-  `
+  testOrgToHTML(
+    "HTML in HTML export block with XSS",
+    `
 #+BEGIN_EXPORT html
 <div>
     <img src=x onerror=alert(1) />
 </div>
 #+END_EXPORT`,
-  `<div>
+    `<div>
     <img src="x">
 </div>`
-);
+  );
+});
 
 function mkHeaderHTML(level: number, headerText: string, anchorText: string) {
   return `<h${level}>
@@ -165,34 +171,37 @@ function testHeading(
   );
 }
 
-// up to heading level 6
-for (let level = 1; level <= 6; level++) {
-  testHeading(
-    `heading ${level}`,
-    `${new Array(level).fill("*").join("")} Test`,
-    {
-      level: level,
-      text: "Test",
-      anchor: "test",
+describe("headings", () => {
+  // up to heading level 6
+  describe("heading levels", () => {
+    for (let level = 1; level <= 6; level++) {
+      testHeading(
+        `heading ${level}`,
+        `${new Array(level).fill("*").join("")} Test`,
+        {
+          level: level,
+          text: "Test",
+          anchor: "test",
+        }
+      );
     }
-  );
-}
+  });
 
-testHeading("heading 1 multiword", "* Test title", {
-  level: 1,
-  text: "Test title",
-  anchor: "test-title",
-});
+  testHeading("heading 1 multiword", "* Test title", {
+    level: 1,
+    text: "Test title",
+    anchor: "test-title",
+  });
 
-testHeading("heading with markup", "* Test *title* /italic/", {
-  level: 1,
-  text: "Test <strong>title</strong> <em>italic</em>",
-  anchor: "test-title-italic",
-});
+  testHeading("heading with markup", "* Test *title* /italic/", {
+    level: 1,
+    text: "Test <strong>title</strong> <em>italic</em>",
+    anchor: "test-title-italic",
+  });
 
-testOrgToHTML(
-  "nested headings with content",
-  `* First heading
+  testOrgToHTML(
+    "nested headings with content",
+    `* First heading
 
 Some content.
 
@@ -201,27 +210,28 @@ Some content.
 More content.
 
 * Outer heading again.`,
-  `${mkHeaderHTML(
-    1,
-    "First heading",
-    "first-heading"
-  )}<p>Some content.</p>${mkHeaderHTML(
-    2,
-    "Nested heading",
-    "nested-heading"
-  )}<p>More content.</p>${mkHeaderHTML(
-    1,
-    "Outer heading again.",
-    "outer-heading-again"
-  )}`
-);
+    `${mkHeaderHTML(
+      1,
+      "First heading",
+      "first-heading"
+    )}<p>Some content.</p>${mkHeaderHTML(
+      2,
+      "Nested heading",
+      "nested-heading"
+    )}<p>More content.</p>${mkHeaderHTML(
+      1,
+      "Outer heading again.",
+      "outer-heading-again"
+    )}`
+  );
+});
 
-testOrgToHTML(
-  "link (to external resource)",
-  "[[https://duckduckgo.com][DuckDuckGo!]]",
-  '<p><a href="https://duckduckgo.com">DuckDuckGo!</a></p>'
-);
+describe("links", () => {
+  testOrgToHTML(
+    "link (to external resource)",
+    "[[https://duckduckgo.com][DuckDuckGo!]]",
+    '<p><a href="https://duckduckgo.com">DuckDuckGo!</a></p>'
+  );
 
-testOrgToHTML("comment", "# a comment", "");
-
-testOrgToHTML("unclosed link", "[[", "<p>[[</p>");
+  testOrgToHTML("unclosed link", "[[", "<p>[[</p>");
+});
