@@ -233,6 +233,15 @@ describe("links", () => {
     '<p><a href="https://duckduckgo.com">DuckDuckGo!</a></p>'
   );
 
+  testOrgToHTML(
+    "[BUG IN ORGAJS] link with markup in description",
+    "[[https://duckduckgo.com][Duck *Duck* _Duck_ /Duck/ ~Go~ =Go= +Go+ Go!]]",
+    // NOTE: bug in orgajs gives the below result.
+    //
+    // Expected result is: '<p><a href="https://duckduckgo.com">Duck *Duck* _Duck_ /Duck/ <code>Go</code> <code>Go</code> <del>Go</del> Go!</a></p>' (2021-06-24)
+    '<p><a href="https://duckduckgo.com">Duck *Duck* _Duck_ /Duck/ ~Go~ =Go= +Go+ Go!</a></p>'
+  );
+
   testOrgToHTML("unclosed link", "[[", "<p>[[</p>");
 });
 
