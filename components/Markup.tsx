@@ -55,3 +55,61 @@ export function scrollEffect() {
     return () => clearTimeout(id);
   }, []);
 }
+
+function isRelative(path: string): boolean {
+  return (
+    !path.startsWith("/") &&
+    !path.startsWith("https://") &&
+    !path.startsWith("http://") &&
+    !path.startsWith("//")
+  );
+}
+
+function relativeToAbsolute(base: string, relative: string): string {
+  const baseURL = new URL(base);
+  baseURL.search = "";
+  baseURL.hash = "";
+  const parts = baseURL.pathname.split("/");
+  parts[parts.length - 1] = relative;
+  baseURL.pathname = parts.join("/");
+  return baseURL.href;
+}
+
+export function transformLinkUri(displayURL: string, baseURL: string) {
+  return (uri: string) => {
+    let href = uri;
+
+    if (uri.startsWith("#")) return uri;
+
+    // If the URL is relative, it should be relative to the canonical URL of the file.
+    if (isRelative(href)) {
+      // https://github.com/denoland/deno_website2/issues/1047
+      href = decodeURIComponent(relativeToAbsolute(displayURL, href));
+    }
+    if (href.startsWith("/") && !href.startsWith("//")) {
+      href = `${baseURL}${href}`;
+    }
+
+    const hrefURL = new URL(href);
+
+    // Manual links should not have trailing .md
+    if (
+      hrefURL?.pathname?.startsWith("/manual") &&
+      hrefURL?.origin === "https://deno.land"
+    ) {
+      hrefURL.pathname = hrefURL.pathname.replace(/\.md$/, "");
+      href = hrefURL.href;
+    }
+
+    return href;
+  };
+}
+
+export function transformImageUri(sourceURL: string) {
+  return (uri: string) => {
+    if (isRelative(uri)) {
+      return relativeToAbsolute(sourceURL, uri);
+    }
+    return uri;
+  };
+}

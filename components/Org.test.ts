@@ -9,12 +9,14 @@ function getHTML(elt: React.ReactElement | null) {
   }
 }
 
+const sampleURL = "https://deno.land/x/orgreadmetest";
+
 function sampleOrg(orgText: string) {
   return {
     source: orgText,
-    displayURL: "displayURL",
+    displayURL: `${sampleURL}/README.org`,
     sourceURL: "sourceURL",
-    baseURL: "baseURL",
+    baseURL: sampleURL,
   };
 }
 
@@ -242,6 +244,18 @@ describe("links", () => {
   test("link (internal - to heading)", () => {
     expect(htmlFromOrg("[[Heading Link]]")).toEqual(
       '<p><a href="#heading-link">Heading Link</a></p>'
+    );
+  });
+
+  test("link (relative, file)", () => {
+    expect(htmlFromOrg("[[./CHANGELOG.org]]")).toEqual(
+      `<p><a href="${sampleURL}/CHANGELOG.org">./CHANGELOG.org</a></p>`
+    );
+  });
+
+  test("link (absolute, file)", () => {
+    expect(htmlFromOrg("[[/CHANGELOG.org]]")).toEqual(
+      `<p><a href="${sampleURL}/CHANGELOG.org">/CHANGELOG.org</a></p>`
     );
   });
 

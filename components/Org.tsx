@@ -7,7 +7,13 @@ import dompurify from "dompurify";
 import unified from "unified";
 import parse from "reorg-parse";
 
-import { markup, MarkupProps, scrollEffect, slugify } from "./Markup";
+import {
+  markup,
+  MarkupProps,
+  scrollEffect,
+  slugify,
+  transformLinkUri,
+} from "./Markup";
 import { RawCodeBlock } from "./CodeBlock";
 
 import {
@@ -47,7 +53,7 @@ type Content =
   | Headline
   | HTML;
 
-function orgToHTML(node: Document): string {
+function orgToHTML(props: MarkupProps, node: Document): string {
   function nonHTML(text: string) {
     return text
       .replaceAll("&", "&amp;")
@@ -139,7 +145,9 @@ function orgToHTML(node: Document): string {
         // for links like [[https://duckduckgo.com]]
         const text = nonHTML(node.description ?? node.value);
         const url =
-          node.protocol === "internal" ? "#" + slugify(node.value) : node.value;
+          node.protocol === "internal"
+            ? "#" + slugify(node.value)
+            : transformLinkUri(props.displayURL, props.baseURL)(node.value);
         const title = node.text;
         return `<a${url ? ` href="${url}"` : ""}${
           title ? ` title="${title}"` : ""
@@ -257,7 +265,7 @@ function Org(props: MarkupProps, testing = false): React.ReactElement | null {
   }
 
   try {
-    const raw = orgToHTML(parseSource(props.source));
+    const raw = orgToHTML(props, parseSource(props.source));
     return markup(props, raw);
   } catch (err) {
     console.log(err);
