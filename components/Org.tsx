@@ -145,6 +145,8 @@ function orgToHTML(props: MarkupProps, node: Document): string {
             return `<span class="heading-kw-unknown">${kw}</span>`;
         }
       }
+      case "tags":
+        return `<span class="tags">${node.tags.join(" ")}</span>`;
     }
     return `TODO: token: ${node.type}`;
   }

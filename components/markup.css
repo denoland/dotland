@@ -121,6 +121,14 @@ object {
   color: grey;
 }
 
+.markup .tags {
+  background-color: #eee;
+  font-family: monospace;
+  padding: 2px;
+  font-size: 80%;
+  font-weight: normal;
+}
+
 .markup img {
   border-style: none;
 }

@@ -244,6 +244,27 @@ More content.
       mkHeaderHTML(1, "OTHER Test", "other-test")
     );
   });
+  describe("with tags", () => {
+    testOrgToHTML(
+      "single tag",
+      "* Test :a_tag:",
+      mkHeaderHTML(1, 'Test<span class="tags">a_tag</span>', "test")
+    );
+    testOrgToHTML(
+      "multiple tags",
+      "* Test :a_tag:another_tag:",
+      mkHeaderHTML(1, 'Test<span class="tags">a_tag another_tag</span>', "test")
+    );
+    testOrgToHTML(
+      "multiple tags with a heading keyword",
+      "* TODO Test :a_tag:another_tag:",
+      mkHeaderHTML(
+        1,
+        '<span class="heading-kw-todo">TODO</span>Test<span class="tags">a_tag another_tag</span>',
+        "test"
+      )
+    );
+  });
 });
 
 describe("links", () => {
