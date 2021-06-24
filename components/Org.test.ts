@@ -235,3 +235,18 @@ describe("links", () => {
 
   testOrgToHTML("unclosed link", "[[", "<p>[[</p>");
 });
+
+describe("code", () => {
+  testOrgToHTML(
+    "simple typescript",
+    `#+BEGIN_SRC typescript
+function foo() {}
+#+END_SRC`,
+    '<pre><pre style="color: rgb(36, 41, 46); background-color: #f6f8fa;" class="prism-code language-typescript flex overflow-y-auto ">' +
+      '<code><div style="color: rgb(36, 41, 46);" class="token-line text-xs"><span style="color: #e3116c;" class="token keyword">' +
+      'function</span><span class="token plain"> </span><span style="color: rgb(111, 66, 193);" class="token function">foo</span>' +
+      '<span style="color: rgb(36, 41, 46);" class="token punctuation">(</span><span style="color: rgb(36, 41, 46);" class="token punctuation">)' +
+      '</span><span class="token plain"> </span><span style="color: rgb(36, 41, 46);" class="token punctuation">' +
+      '{</span><span style="color: rgb(36, 41, 46);" class="token punctuation">}</span></div></code></pre></pre>'
+  );
+});

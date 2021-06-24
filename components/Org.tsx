@@ -1,12 +1,14 @@
 /* Copyright 2021 the Deno authors. All rights reserved. MIT license. */
 
 import React from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 import dompurify from "dompurify";
 
 import unified from "unified";
 import parse from "reorg-parse";
 
 import { markup, MarkupProps, slugify } from "./Markup";
+import { RawCodeBlock } from "./CodeBlock";
 
 import {
   Block,
@@ -210,7 +212,19 @@ function orgToHTML(node: Document): string {
         if (node.name === "EXPORT" && node.params.includes("html")) {
           return dompurify.sanitize(node.value);
         }
-        return `TODO: content: block { name = ${node.name}; params = ${node.params}`;
+        if (node.name === "SRC" && node.params.length > 0) {
+          const language = node.params[0];
+          const markup = renderToStaticMarkup(
+            <RawCodeBlock
+              code={node.value}
+              language={language as any}
+              disablePrefixes={true}
+              enableLineRef={false}
+            />
+          );
+          return `<pre>${markup}</pre>`;
+        }
+        return `TODO: content: block { name = ${node.name}; params = ${node.params} }`;
       }
       case "list": {
         if (!node.ordered) {
