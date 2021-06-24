@@ -250,3 +250,19 @@ function foo() {}
       '{</span><span style="color: rgb(36, 41, 46);" class="token punctuation">}</span></div></code></pre></pre>'
   );
 });
+
+describe("injection safety", () => {
+  const testIn = "<p>&Test</p>";
+  const testOut = "&lt;p&gt;&amp;Test&lt;/p&gt;";
+
+  testOrgToHTML(
+    "HTML in heading",
+    `* ${testIn}`,
+    mkHeaderHTML(1, testOut, "ptestp")
+  );
+  testOrgToHTML(
+    "HTML in list item",
+    `- ${testIn}`,
+    `<ul><li>${testOut}</li></ul>`
+  );
+});
