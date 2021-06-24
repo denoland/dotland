@@ -223,7 +223,12 @@ function orgToHTML(props: MarkupProps, node: Document): string {
         const contentChildren = node.children.slice(1);
         const slug = slugify(contentChildren.map((c) => c.value).join(""));
         const headingContent: string = contentChildren
-          .map((c) => tokenToHTML(c as Token))
+          .map(
+            (c) =>
+              (c.type === "tags" ? " " : "") +
+              tokenToHTML(c as Token) +
+              (c.type === "todo" ? " " : "")
+          )
           .join("");
         return mkHeaderHTML(level, headingContent, slug);
       }
