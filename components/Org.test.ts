@@ -239,6 +239,12 @@ describe("links", () => {
     );
   });
 
+  test("link (internal - to heading)", () => {
+    expect(htmlFromOrg("[[Heading Link]]")).toEqual(
+      '<p><a href="#heading-link">Heading Link</a></p>'
+    );
+  });
+
   testOrgToHTML(
     "[BUG IN ORGAJS] link with markup in description",
     "[[https://duckduckgo.com][Duck *Duck* _Duck_ /Duck/ ~Go~ =Go= +Go+ Go!]]",

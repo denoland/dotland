@@ -138,7 +138,8 @@ function orgToHTML(node: Document): string {
       case "link": {
         // for links like [[https://duckduckgo.com]]
         const text = nonHTML(node.description ?? node.value);
-        const url = node.value;
+        const url =
+          node.protocol === "internal" ? "#" + slugify(node.value) : node.value;
         const title = node.text;
         return `<a${url ? ` href="${url}"` : ""}${
           title ? ` title="${title}"` : ""
