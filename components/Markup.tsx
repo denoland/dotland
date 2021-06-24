@@ -1,6 +1,6 @@
 /* Copyright 2021 the Deno authors. All rights reserved. MIT license. */
 
-import React from "react";
+import React, { useEffect } from "react";
 
 export function slugify(text: string): string {
   text = text.toLowerCase();
@@ -38,4 +38,20 @@ function handleClick(e: React.MouseEvent<HTMLElement>) {
 
   const anchor = el.parentNode as HTMLAnchorElement;
   navigator.clipboard.writeText(anchor.href);
+}
+
+export function scrollEffect() {
+  useEffect(() => {
+    const id = setTimeout(() => {
+      let { hash } = location;
+      hash = hash && hash.substring(1);
+      if (!hash) return;
+
+      const el = document.getElementsByName(hash)[0];
+      if (!el) return;
+
+      setTimeout(() => el.scrollIntoView(), 0);
+    }, 50);
+    return () => clearTimeout(id);
+  }, []);
 }

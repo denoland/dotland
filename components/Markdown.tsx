@@ -1,12 +1,12 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import React, { useEffect } from "react";
+import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import marked, { Renderer } from "marked";
 import dompurify from "dompurify";
 import { RawCodeBlock } from "./CodeBlock";
 import { replaceEmojis } from "../util/emoji_util";
-import { markup, MarkupProps, slugify } from "./Markup";
+import { markup, MarkupProps, scrollEffect, slugify } from "./Markup";
 
 function isRelative(path: string): boolean {
   return (
@@ -28,19 +28,7 @@ function relativeToAbsolute(base: string, relative: string): string {
 }
 
 function Markdown(props: MarkupProps): React.ReactElement | null {
-  useEffect(() => {
-    const id = setTimeout(() => {
-      let { hash } = location;
-      hash = hash && hash.substring(1);
-      if (!hash) return;
-
-      const el = document.getElementsByName(hash)[0];
-      if (!el) return;
-
-      setTimeout(() => el.scrollIntoView(), 0);
-    }, 50);
-    return () => clearTimeout(id);
-  }, []);
+  scrollEffect();
 
   if (!props.source) {
     return null;

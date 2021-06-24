@@ -7,7 +7,7 @@ import dompurify from "dompurify";
 import unified from "unified";
 import parse from "reorg-parse";
 
-import { markup, MarkupProps, slugify } from "./Markup";
+import { markup, MarkupProps, scrollEffect, slugify } from "./Markup";
 import { RawCodeBlock } from "./CodeBlock";
 
 import {
@@ -245,7 +245,11 @@ function orgToHTML(node: Document): string {
   return body;
 }
 
-function Org(props: MarkupProps): React.ReactElement | null {
+function Org(props: MarkupProps, testing = false): React.ReactElement | null {
+  if (!testing) {
+    scrollEffect();
+  }
+
   if (!props.source) {
     return null;
   }

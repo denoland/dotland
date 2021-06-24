@@ -19,7 +19,7 @@ function sampleOrg(orgText: string) {
 }
 
 function htmlFromOrg(orgText: string) {
-  return getHTML(Org(sampleOrg(orgText)));
+  return getHTML(Org(sampleOrg(orgText), true));
 }
 
 function testOrgToHTML(testName: string, orgText: string, expected: string) {
