@@ -265,4 +265,9 @@ describe("injection safety", () => {
     `- ${testIn}`,
     `<ul><li>${testOut}</li></ul>`
   );
+  testOrgToHTML(
+    "HTML in link description",
+    `[[https://duckduckgo.com][${testIn}]]`,
+    `<p><a href="https://duckduckgo.com">${testOut}</a></p>`
+  );
 });
