@@ -226,6 +226,24 @@ More content.
       "outer-heading-again"
     )}`
   );
+
+  describe("with keywords", () => {
+    testOrgToHTML(
+      "TODO",
+      "* TODO Test",
+      mkHeaderHTML(1, '<span class="heading-kw-todo">TODO</span>Test', "test")
+    );
+    testOrgToHTML(
+      "DONE",
+      "* DONE Test",
+      mkHeaderHTML(1, '<span class="heading-kw-done">DONE</span>Test', "test")
+    );
+    testOrgToHTML(
+      "OTHER",
+      "* OTHER Test",
+      mkHeaderHTML(1, "OTHER Test", "other-test")
+    );
+  });
 });
 
 describe("links", () => {

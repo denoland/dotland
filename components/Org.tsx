@@ -133,6 +133,19 @@ function orgToHTML(props: MarkupProps, node: Document): string {
     if (isPhrasingContent(node)) {
       return phrasingContentToHTML(node);
     }
+    switch (node.type) {
+      case "todo": {
+        const kw = node.keyword;
+        switch (kw) {
+          case "TODO":
+            return '<span class="heading-kw-todo">TODO</span>';
+          case "DONE":
+            return '<span class="heading-kw-done">DONE</span>';
+          default:
+            return `<span class="heading-kw-unknown">${kw}</span>`;
+        }
+      }
+    }
     return `TODO: token: ${node.type}`;
   }
 

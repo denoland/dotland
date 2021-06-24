@@ -106,6 +106,21 @@ object {
   margin: 0.67em 0;
 }
 
+.markup .heading-kw-todo {
+  font-family: monospace;
+  color: red;
+}
+
+.markup .heading-kw-done {
+  font-family: monospace;
+  color: green;
+}
+
+.markup .heading-kw-unknown {
+  font-family: monospace;
+  color: grey;
+}
+
 .markup img {
   border-style: none;
 }
