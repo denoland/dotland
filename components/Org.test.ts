@@ -233,6 +233,12 @@ describe("links", () => {
     '<p><a href="https://duckduckgo.com">DuckDuckGo!</a></p>'
   );
 
+  test("link (no description)", () => {
+    expect(htmlFromOrg("[[https://duckduckgo.com]]")).toEqual(
+      '<p><a href="https://duckduckgo.com">https://duckduckgo.com</a></p>'
+    );
+  });
+
   testOrgToHTML(
     "[BUG IN ORGAJS] link with markup in description",
     "[[https://duckduckgo.com][Duck *Duck* _Duck_ /Duck/ ~Go~ =Go= +Go+ Go!]]",

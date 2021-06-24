@@ -136,7 +136,8 @@ function orgToHTML(node: Document): string {
     }
     switch (node.type) {
       case "link": {
-        const text = nonHTML(node.description);
+        // for links like [[https://duckduckgo.com]]
+        const text = nonHTML(node.description ?? node.value);
         const url = node.value;
         const title = node.text;
         return `<a${url ? ` href="${url}"` : ""}${
