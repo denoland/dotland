@@ -63,7 +63,7 @@ describe("text styling", () => {
 
   // NOTE: this currently is not supported by the parser. Expected result is '<p><del>Te <strong>st</strong> ing</del></p>' (2021-06-23)
   testOrgToHTML(
-    "strikethrough and bold",
+    "[BUG IN ORGAJS] strikethrough and bold",
     "+Te *st* ing+",
     "<p><del>Te *st* ing</del></p>"
   );
