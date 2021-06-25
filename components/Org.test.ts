@@ -341,6 +341,7 @@ function foo() {}
   );
 });
 
+// NOTE: orgajs currently doesn't support inline footnotes (anonymous or named) (see https://github.com/orgapp/orgajs/issues/94) (2021-06-25)
 describe("footnotes", () => {
   function mkFootnoteRef(fnum: number) {
     return `<sup><a href="#fn.${fnum}">${fnum}</a></sup>`;
