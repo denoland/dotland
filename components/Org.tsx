@@ -294,7 +294,7 @@ function orgToHTML(props: MarkupProps, node: Document): string {
         const lines: string[] = node.children.map((c) =>
           phrasingContentToHTML(c)
         );
-        return `<p>${lines.filter((l) => l !== " ").join("\n")}</p>`;
+        return `<p>${lines.map((c) => (c === " " ? "\n" : c)).join("")}</p>`;
       }
       case "headline": {
         const level = node.level;

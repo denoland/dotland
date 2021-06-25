@@ -355,8 +355,7 @@ describe("footnotes", () => {
   testOrgToHTML(
     "reference to unknown footnote",
     "Reference to a footnote[fn:1]",
-    `<p>Reference to a footnote
-${unknownFootnoteRef}</p>`
+    `<p>Reference to a footnote${unknownFootnoteRef}</p>`
   );
 
   testOrgToHTML(
@@ -368,16 +367,14 @@ ${unknownFootnoteRef}</p>`
   testOrgToHTML(
     "numbered footnote with reference",
     "Reference to a footnote[fn:1]\n\n[fn:1] A numbered footnote.",
-    `<p>Reference to a footnote
-${mkFootnoteRef(1)}</p><hr>
+    `<p>Reference to a footnote${mkFootnoteRef(1)}</p><hr>
 ${mkFootnoteDef(1, "A numbered footnote.")}`
   );
 
   testOrgToHTML(
     "named footnote with reference",
     "Reference to a footnote[fn:fname]\n\n[fn:fname] A named footnote.",
-    `<p>Reference to a footnote
-${mkFootnoteRef(1)}</p><hr>
+    `<p>Reference to a footnote${mkFootnoteRef(1)}</p><hr>
 ${mkFootnoteDef(1, "A named footnote.")}`
   );
 
@@ -388,13 +385,9 @@ ${mkFootnoteDef(1, "A named footnote.")}`
 [fn:named] Used as third footnote.
 [fn:1] Used as second footnote.
 [fn:2] Used as first footnote.`,
-    `<p>Footnote 2
-${mkFootnoteRef(1)}
-. Footnote 1
-${mkFootnoteRef(2)}
-. Footnote named
-${mkFootnoteRef(3)}
-.</p><hr>
+    `<p>Footnote 2${mkFootnoteRef(1)}. Footnote 1${mkFootnoteRef(
+      2
+    )}. Footnote named${mkFootnoteRef(3)}.</p><hr>
 ${mkFootnoteDef(1, "Used as first footnote.")}
 ${mkFootnoteDef(2, "Used as second footnote.")}
 ${mkFootnoteDef(3, "Used as third footnote.")}`
@@ -417,15 +410,23 @@ Ref to footnote[fn:1].
 [fn:1] Second footnote (though it is used as 1).
 
 * Heading 4`,
-    `${mkHeaderHTML(1, "Heading 1", "heading-1")}<p>With reference to
-${mkFootnoteRef(1)}
-.</p>${mkHeaderHTML(1, "Heading 2", "heading-2")}${mkHeaderHTML(
+    `${mkHeaderHTML(
+      1,
+      "Heading 1",
+      "heading-1"
+    )}<p>With reference to${mkFootnoteRef(1)}.</p>${mkHeaderHTML(
+      1,
+      "Heading 2",
+      "heading-2"
+    )}${mkHeaderHTML(
       1,
       "Heading 3",
       "heading-3"
-    )}<p>Ref to footnote
-${mkFootnoteRef(2)}
-.</p>${mkHeaderHTML(1, "Heading 4", "heading-4")}<hr>
+    )}<p>Ref to footnote${mkFootnoteRef(2)}.</p>${mkHeaderHTML(
+      1,
+      "Heading 4",
+      "heading-4"
+    )}<hr>
 ${mkFootnoteDef(1, "Actually first footnote.")}
 ${mkFootnoteDef(2, "Second footnote (though it is used as 1).")}`
   );
