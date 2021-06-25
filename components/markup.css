@@ -121,6 +121,14 @@ object {
   color: grey;
 }
 
+.markup .footpara {
+  display: inline;
+}
+
+.markup .footdef {
+  margin-bottom: 1em;
+}
+
 .markup .tags {
   background-color: #eee;
   font-family: monospace;

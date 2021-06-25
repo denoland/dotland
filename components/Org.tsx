@@ -21,6 +21,7 @@ import {
   Document,
   Drawer,
   Footnote,
+  FootnoteReference,
   HTML,
   Headline,
   HorizontalRule,
@@ -35,6 +36,15 @@ import {
   Table,
   Token,
 } from "orga/dist/types";
+
+import { Node, Parent } from "unist";
+
+function foreachTree(tree: Node, iteratee: (node: Node) => void) {
+  iteratee(tree);
+  if ("children" in tree) {
+    (tree as Parent).children.forEach((c) => foreachTree(c, iteratee));
+  }
+}
 
 function parseSource(source: string): Document {
   return unified().use(parse).parse(source) as Document;
@@ -59,6 +69,62 @@ function orgToHTML(props: MarkupProps, node: Document): string {
       .replaceAll("&", "&amp;")
       .replaceAll("<", "&lt;")
       .replaceAll(">", "&gt;");
+  }
+
+  // Footnote handling: footnotes are grouped at end of document and numbered according to initial usage.
+
+  function extractFootnotes(node: Document): [FootnoteReference[], Footnote[]] {
+    const refs: FootnoteReference[] = [];
+    const defs: Footnote[] = [];
+    foreachTree(node, (n) => {
+      if (n.type === "footnote") {
+        defs.push(n as Footnote);
+      } else if (n.type === "footnote.reference") {
+        refs.push(n as FootnoteReference);
+      }
+    });
+    return [refs, defs];
+  }
+
+  function buildFootnoteMap(
+    refs: FootnoteReference[],
+    defs: Footnote[]
+  ): Map<string, number> {
+    const res = new Map();
+    let curr = 1;
+    const definedLabels = defs.map((c) => c.label);
+    refs.forEach((ref) => {
+      const label = ref.label;
+      if (res.has(label) || !definedLabels.includes(label)) {
+        return;
+      }
+      res.set(label, curr);
+      curr++;
+    });
+    return res;
+  }
+
+  const [footnoteUses, footnotes] = extractFootnotes(node);
+
+  const fnmap = buildFootnoteMap(footnoteUses, footnotes);
+
+  function orderFootnotes(
+    fmap: Map<string, number>,
+    defs: Footnote[]
+  ): Footnote[] {
+    const res: Footnote[] = [];
+    const invMap = new Map(
+      Array.from(fmap.entries()).map((kv) => [kv[1], kv[0]])
+    );
+    const defsMap = new Map(defs.map((v) => [v.label, v]));
+    for (let fnum = 1; fnum < fmap.size + 1; fnum++) {
+      res.push(defsMap.get(invMap.get(fnum)!)!);
+    }
+    return res;
+  }
+
+  function footnoteId(fnum: number): string {
+    return `fn.${fnum}`;
   }
 
   function wrapped(tag: string, text: string) {
@@ -170,8 +236,17 @@ function orgToHTML(props: MarkupProps, node: Document): string {
       }
       case "newline":
         return "";
+      case "footnote.reference": {
+        const resolvedLabel = fnmap.get(node.label);
+        if (resolvedLabel === undefined) {
+          // no definition for footnote
+          return "<sup><strong>?</strong></sup>";
+        }
+        return `<sup><a href="#${footnoteId(
+          resolvedLabel
+        )}">${resolvedLabel}</a></sup>`;
+      }
     }
-    return `TODO: phrasingContent: ${node.type}`;
   }
 
   function anyToHTML(node: Content | Token): string {
@@ -191,8 +266,11 @@ function orgToHTML(props: MarkupProps, node: Document): string {
   function topLevelContentToHTML(node: TopLevelContent): string {
     switch (node.type) {
       case "keyword":
-      case "footnote":
-        return `TODO: topLevelContent: ${node.type}`;
+        return `TODO: topLevelContent: keyword`;
+      case "footnote": {
+        // footnotes handled elsewhere
+        return "";
+      }
     }
     return contentToHTML(node);
   }
@@ -268,13 +346,33 @@ function orgToHTML(props: MarkupProps, node: Document): string {
     return `TODO: content: ${node.type}`;
   }
 
-  const body = node.children.map(topLevelContentToHTML).join("");
+  const res: string[] = [];
 
   if ("title" in node.properties) {
     const title = node.properties.title;
-    return mkHeaderHTML(1, title, slugify(title)) + body;
+    res.push(mkHeaderHTML(1, title, slugify(title)));
   }
-  return body;
+
+  res.push(node.children.map(topLevelContentToHTML).join(""));
+
+  const orderedFootnotes = orderFootnotes(fnmap, footnotes);
+
+  if (orderedFootnotes.length > 0) {
+    const fnHTML = ["<hr>"];
+    for (let fnum = 1; fnum <= orderedFootnotes.length; fnum++) {
+      const description = orderedFootnotes[fnum - 1].children
+        .map((c) => contentToHTML(c as Content))
+        .join("");
+      fnHTML.push(
+        `<div class="footdef"><sup><a id="${footnoteId(
+          fnum
+        )}" href="#fnr.${fnum}">${fnum}</a></sup> <div class="footpara">${description}</div></div>`
+      );
+    }
+    res.push(fnHTML.join("\n"));
+  }
+
+  return res.join("");
 }
 
 function Org(props: MarkupProps, testing = false): React.ReactElement | null {
