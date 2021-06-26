@@ -12,9 +12,11 @@ import {
   MarkupProps,
   scrollEffect,
   slugify,
+  transformImageUri,
   transformLinkUri,
 } from "./Markup";
 import { RawCodeBlock } from "./CodeBlock";
+import { fileTypeFromURL } from "../util/registry_utils";
 
 import {
   Block,
@@ -225,14 +227,22 @@ function orgToHTML(props: MarkupProps, node: Document): string {
       case "link": {
         // for links like [[https://duckduckgo.com]]
         const text = nonHTML(node.description ?? node.value);
+        const urlRaw = node.value;
+        const isImage = fileTypeFromURL(urlRaw) === "image";
         const url =
           node.protocol === "internal"
-            ? "#" + slugify(node.value)
-            : transformLinkUri(props.displayURL, props.baseURL)(node.value);
+            ? "#" + slugify(urlRaw)
+            : isImage
+            ? transformImageUri(props.sourceURL)(urlRaw)
+            : transformLinkUri(props.displayURL, props.baseURL)(urlRaw);
         const title = node.text;
-        return `<a${url ? ` href="${url}"` : ""}${
-          title ? ` title="${title}"` : ""
-        }>${text}</a>`;
+        return isImage
+          ? `<img${url ? ` src="${url}"` : ""}${text ? ` alt="${text}"` : ""}${
+              title ? ` title="${title}"` : ""
+            } style="max-width:100%;">`
+          : `<a${url ? ` href="${url}"` : ""}${
+              title ? ` title="${title}"` : ""
+            }>${text}</a>`;
       }
       case "newline":
         return "";

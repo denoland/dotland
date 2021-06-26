@@ -15,7 +15,7 @@ function sampleOrg(orgText: string) {
   return {
     source: orgText,
     displayURL: `${sampleURL}/README.org`,
-    sourceURL: "sourceURL",
+    sourceURL: `${sampleURL}/README.org`,
     baseURL: sampleURL,
   };
 }
@@ -433,6 +433,38 @@ ${mkFootnoteDef(2, "Second footnote (though it is used as 1).")}`
   );
 });
 
+describe("images", () => {
+  const extImgURL =
+    "https://duckduckgo.com/assets/logo_homepage.normal.v108.svg";
+  const intImgRelPath = "assets/icon.svg";
+  const intImgURL = `./${intImgRelPath}`;
+  const intImgFull = `${sampleURL}/${intImgRelPath}`;
+
+  testOrgToHTML(
+    "External image (in brackets)",
+    `[[${extImgURL}]]`,
+    `<p><img src="${extImgURL}" alt="${extImgURL}" style="max-width:100%;"></p>`
+  );
+
+  testOrgToHTML(
+    "External image with alt text",
+    `[[${extImgURL}][The image]]`,
+    `<p><img src="${extImgURL}" alt="The image" style="max-width:100%;"></p>`
+  );
+
+  testOrgToHTML(
+    "Internal image (in brackets)",
+    `[[${intImgURL}]]`,
+    `<p><img src="${intImgFull}" alt="${intImgURL}" style="max-width:100%;"></p>`
+  );
+
+  testOrgToHTML(
+    "Internal image with alt text",
+    `[[${intImgURL}][The image]]`,
+    `<p><img src="${intImgFull}" alt="The image" style="max-width:100%;"></p>`
+  );
+});
+
 describe("injection safety", () => {
   const testIn = "<p>&Test</p>";
   const testOut = "&lt;p&gt;&amp;Test&lt;/p&gt;";
@@ -456,5 +488,10 @@ describe("injection safety", () => {
     "HTML in link URL",
     `[[${testIn}]]`,
     `<p><a href="#ptestp">${testOut}</a></p>`
+  );
+  testOrgToHTML(
+    "HTML in image URL",
+    `[[${testIn}.png]]`,
+    `<p><img src="#ptestppng" alt="${testOut}.png" style="max-width:100%;"></p>`
   );
 });
