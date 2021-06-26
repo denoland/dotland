@@ -452,4 +452,9 @@ describe("injection safety", () => {
     `[[https://duckduckgo.com][${testIn}]]`,
     `<p><a href="https://duckduckgo.com">${testOut}</a></p>`
   );
+  testOrgToHTML(
+    "HTML in link URL",
+    `[[${testIn}]]`,
+    `<p><a href="#ptestp">${testOut}</a></p>`
+  );
 });
