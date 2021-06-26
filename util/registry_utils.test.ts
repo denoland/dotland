@@ -149,6 +149,7 @@ test("fileTypeFromURL", () => {
     ["image.png", "image"],
     ["image.jpg", "image"],
     ["image.jpeg", "image"],
+    ["image.svg", "image"],
     ["file.unknown", undefined],
   ];
   for (const [name, expectedType] of tests) {
