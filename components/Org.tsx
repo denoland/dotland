@@ -36,6 +36,8 @@ import {
   Section,
   StyledText,
   Table,
+  TableCell,
+  TableRow,
   Token,
 } from "orga/dist/types";
 
@@ -285,6 +287,20 @@ function orgToHTML(props: MarkupProps, node: Document): string {
     return contentToHTML(node);
   }
 
+  function tableCellToHTML(col: TableCell, isHead = false) {
+    const tag = isHead ? "th" : "td";
+    return `<${tag}>${col.children
+      .map(phrasingContentToHTML)
+      .join("")
+      .trim()}</${tag}>`;
+  }
+
+  function tableRowToHTML(row: TableRow, isHead = false) {
+    return `<tr>${row.children
+      .map((c) => tableCellToHTML(c, isHead))
+      .join("")}</tr>`;
+  }
+
   function mkHeaderHTML(level: number, text: string, slug: string): string {
     return `<h${level}>
   <a name="${slug}" class="anchor" href="#${slug}">
@@ -351,6 +367,19 @@ function orgToHTML(props: MarkupProps, node: Document): string {
         } else {
           return `<ul>${items.join("")}</ul>`;
         }
+      }
+      case "table": {
+        const nonRules = node.children.filter(
+          (v) => v.type !== "table.hr"
+        ) as TableRow[];
+        if (nonRules.length === 0) {
+          return "";
+        }
+        const [hrow, ...rows] = nonRules;
+        const body = rows.map((c) => tableRowToHTML(c)).join("");
+        return `<table><thead>${tableRowToHTML(hrow, true)}</thead>${
+          body ? `<tbody>${body}</tbody>` : ""
+        }</table>`;
       }
     }
     return `TODO: content: ${node.type}`;

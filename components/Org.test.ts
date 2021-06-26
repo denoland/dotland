@@ -465,6 +465,48 @@ describe("images", () => {
   );
 });
 
+// NOTE: table rules are currently just ignored (2021-06-26)
+describe("tables", () => {
+  testOrgToHTML("table with only rules", "|---|---|", "");
+
+  testOrgToHTML(
+    "single row table",
+    "| Header 1 | Header 2 |",
+    "<table><thead><tr><th>Header 1</th><th>Header 2</th></tr></thead></table>"
+  );
+
+  testOrgToHTML(
+    "table with rule at start",
+    `|---|---|
+| Header 1 | Header 2 |`,
+    "<table><thead><tr><th>Header 1</th><th>Header 2</th></tr></thead></table>"
+  );
+
+  testOrgToHTML(
+    "table with rule surrounding first row",
+    `|---|---|
+| Header 1 | Header 2 |
+|---|---|`,
+    "<table><thead><tr><th>Header 1</th><th>Header 2</th></tr></thead></table>"
+  );
+
+  testOrgToHTML(
+    "table with data rows and rules",
+    `|---|---|
+| Header 1 | Header 2 |
+|---|---|
+| Data 1 | Data 2 |
+| Data 3 | Data 4 |`,
+    "<table><thead><tr><th>Header 1</th><th>Header 2</th></tr></thead><tbody><tr><td>Data 1</td><td>Data 2</td></tr><tr><td>Data 3</td><td>Data 4</td></tr></tbody></table>"
+  );
+
+  testOrgToHTML(
+    "table with markup",
+    `| Header *1* | +Header+ 2 |`,
+    "<table><thead><tr><th>Header <strong>1</strong></th><th><del>Header</del> 2</th></tr></thead></table>"
+  );
+});
+
 describe("injection safety", () => {
   const testIn = "<p>&Test</p>";
   const testOut = "&lt;p&gt;&amp;Test&lt;/p&gt;";
