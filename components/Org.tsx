@@ -221,7 +221,9 @@ function orgToHTML(props: MarkupProps, node: Document): string {
       case "tags":
         return `<span class="tags">${node.tags.join(" ")}</span>`;
     }
-    return `TODO: token: ${node.type}`;
+    // we shouldn't encounter any other tokens.
+    console.log("Not rendering unexpected token of type: ${node.type}");
+    return "";
   }
 
   function phrasingContentToHTML(node: PhrasingContent): string {
