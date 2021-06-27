@@ -359,15 +359,11 @@ function orgToHTML(props: MarkupProps, node: Document): string {
           return `<pre>${markup}</pre>`;
         }
         const contents = nonHTML(node.value);
-        switch (node.name) {
-          case "EXAMPLE":
-            return `<pre>${contents}</pre>`;
-          case "QUOTE":
-            return `<blockquote><p>${contents}</p></blockquote>`;
-          case "VERSE":
-            return `<pre>${contents}</pre>`;
+        if (node.name === "QUOTE") {
+          return `<blockquote><p>${contents}</p></blockquote>`;
         }
-        return `TODO: content: block { name = ${node.name}; params = ${node.params} }`;
+        // if a block is unknown, just give it some reasonable formatting
+        return `<pre>${contents}</pre>`;
       }
       case "list": {
         const items: string[] = node.children.map(listItemToHTML);

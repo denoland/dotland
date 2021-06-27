@@ -552,21 +552,12 @@ A quote with *markup*.
   );
 
   testOrgToHTML(
-    "example block",
-    `#+BEGIN_EXAMPLE
+    "other block",
+    `#+BEGIN_FOO
 This is
-An example.
-#+END_EXAMPLE`,
-    "<pre>This is\nAn example.</pre>"
-  );
-
-  testOrgToHTML(
-    "verse block",
-    `#+BEGIN_VERSE
-This is
-A verse block.
-#+END_VERSE`,
-    "<pre>This is\nA verse block.</pre>"
+A foo block.
+#+END_FOO`,
+    "<pre>This is\nA foo block.</pre>"
   );
 });
 
@@ -607,17 +598,10 @@ ${testIn}
     `<blockquote><p>${testOut}</p></blockquote>`
   );
   testOrgToHTML(
-    "HTML in example block",
-    `#+BEGIN_EXAMPLE
+    "HTML in other blocks",
+    `#+BEGIN_FOO
 ${testIn}
-#+END_EXAMPLE`,
-    `<pre>${testOut}</pre>`
-  );
-  testOrgToHTML(
-    "HTML in verse block",
-    `#+BEGIN_VERSE
-${testIn}
-#+END_VERSE`,
+#+END_FOO`,
     `<pre>${testOut}</pre>`
   );
 });
