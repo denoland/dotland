@@ -277,8 +277,9 @@ function orgToHTML(props: MarkupProps, node: Document): string {
 
   function topLevelContentToHTML(node: TopLevelContent): string {
     switch (node.type) {
+      // NOTE: orgajs never actually yields Keyword at the top level (yet), so ignored here (2021-06-27)
       case "keyword":
-        return `TODO: topLevelContent: keyword`;
+        return "";
       case "footnote": {
         // footnotes handled elsewhere
         return "";
