@@ -359,8 +359,12 @@ function orgToHTML(props: MarkupProps, node: Document): string {
           return `<pre>${markup}</pre>`;
         }
         const contents = nonHTML(node.value);
-        if (node.name === "QUOTE") {
-          return `<blockquote><p>${contents}</p></blockquote>`;
+        switch (node.name) {
+          case "QUOTE":
+            return `<blockquote><p>${contents}</p></blockquote>`;
+          // comments aren't exported
+          case "COMMENT":
+            return "";
         }
         // if a block is unknown, just give it some reasonable formatting
         return `<pre>${contents}</pre>`;

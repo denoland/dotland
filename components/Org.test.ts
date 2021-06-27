@@ -538,6 +538,16 @@ A quote.
     "<blockquote><p>This is\nA quote.</p></blockquote>"
   );
 
+  testOrgToHTML(
+    "comment block",
+    `#+BEGIN_COMMENT
+This is a comment block,
+and as thus,
+should not be exported.
+#+END_COMMENT`,
+    ""
+  );
+
   // TODO: orga currently does not support markup in quote blocks,
   // update this when it does (expected is "<blockquote><p>This is\nA
   // quote with <strong>markup</strong>.</p></blockquote>")
