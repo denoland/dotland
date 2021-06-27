@@ -94,6 +94,26 @@ describe("lists", () => {
 5. list`,
     "<ol><li>this</li><li>is</li><li>a</li><li><strong>numbered</strong></li><li>list</li></ol>"
   );
+
+  testOrgToHTML(
+    "nested, unordered list",
+    `- you can (1)
+  - nest (1.1)
+    - lists (1.1.1)
+  - too (1.2)
+- ! (2)`,
+    "<ul><li>you can (1)</li><ul><li>nest (1.1)</li><ul><li>lists (1.1.1)</li></ul><li>too (1.2)</li></ul><li>! (2)</li></ul>"
+  );
+
+  testOrgToHTML(
+    "nested, ordered list",
+    `1. you can (1)
+  1. order (1.1)
+     1. lists (1.1.1)
+  2. if you want (1.2)
+2. ! (2)`,
+    "<ol><li>you can (1)</li><ol><li>order (1.1)</li><ol><li>lists (1.1.1)</li></ol><li>if you want (1.2)</li></ol><li>! (2)</li></ol>"
+  );
 });
 
 testOrgToHTML(

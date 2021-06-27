@@ -268,7 +268,10 @@ function orgToHTML(props: MarkupProps, node: Document): string {
     return contentToHTML(node);
   }
 
-  function listItemToHTML(node: ListItem): string {
+  function listItemToHTML(node: ListItem | List): string {
+    if (node.type === "list") {
+      return contentToHTML(node);
+    }
     const content = node.children.slice(1);
     return `<li>${content
       .map((c) => anyToHTML(c as Content | Token))
