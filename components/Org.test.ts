@@ -550,6 +550,15 @@ A quote with *markup*.
 #+END_QUOTE`,
     "<blockquote><p>This is\nA quote with *markup*.</p></blockquote>"
   );
+
+  testOrgToHTML(
+    "example block",
+    `#+BEGIN_EXAMPLE
+This is
+An example.
+#+END_EXAMPLE`,
+    "<pre>This is\nAn example.</pre>"
+  );
 });
 
 describe("injection safety", () => {
@@ -587,5 +596,12 @@ describe("injection safety", () => {
 ${testIn}
 #+END_QUOTE`,
     `<blockquote><p>${testOut}</p></blockquote>`
+  );
+  testOrgToHTML(
+    "HTML in example block",
+    `#+BEGIN_EXAMPLE
+${testIn}
+#+END_EXAMPLE`,
+    `<pre>${testOut}</pre>`
   );
 });
