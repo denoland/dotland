@@ -362,16 +362,19 @@ function orgToHTML(props: MarkupProps, node: Document): string {
           );
           return `<pre>${markup}</pre>`;
         }
-        const contents = nonHTML(node.value);
         switch (node.name) {
           case "QUOTE":
-            return `<blockquote><p>${contents}</p></blockquote>`;
+            const contents = nonHTML(node.value)
+              .split("\n")
+              .map((c) => `<p>${c}</p>`)
+              .join("");
+            return `<blockquote>${contents}</blockquote>`;
           // comments aren't exported
           case "COMMENT":
             return "";
         }
         // if a block is unknown, just give it some reasonable formatting
-        return `<pre>${contents}</pre>`;
+        return `<pre>${nonHTML(node.value)}</pre>`;
       }
       case "list": {
         const items: string[] = node.children.map(listItemToHTML);

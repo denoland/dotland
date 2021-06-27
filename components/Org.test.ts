@@ -568,7 +568,7 @@ describe("other blocks", () => {
 This is
 A quote.
 #+END_QUOTE`,
-    "<blockquote><p>This is\nA quote.</p></blockquote>"
+    "<blockquote><p>This is</p><p>A quote.</p></blockquote>"
   );
 
   testOrgToHTML(
@@ -582,8 +582,8 @@ should not be exported.
   );
 
   // TODO: orga currently does not support markup in quote blocks,
-  // update this when it does (expected is "<blockquote><p>This is\nA
-  // quote with <strong>markup</strong>.</p></blockquote>")
+  // update this when it does (expected is "<blockquote><p>This
+  // is</p><p>A quote with <strong>markup</strong>.</p></blockquote>")
   // (2021-06-27)
   testOrgToHTML(
     "quote block with markup",
@@ -591,7 +591,7 @@ should not be exported.
 This is
 A quote with *markup*.
 #+END_QUOTE`,
-    "<blockquote><p>This is\nA quote with *markup*.</p></blockquote>"
+    "<blockquote><p>This is</p><p>A quote with *markup*.</p></blockquote>"
   );
 
   testOrgToHTML(
