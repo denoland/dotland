@@ -320,6 +320,13 @@ More content.
       )
     );
   });
+  describe("with priority", () => {
+    testOrgToHTML(
+      "priorities aren't rendered",
+      "* [#A] Test",
+      mkHeaderHTML(1, "Test", "test")
+    );
+  });
 });
 
 describe("drawers", () => {

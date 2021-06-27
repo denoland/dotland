@@ -215,6 +215,9 @@ function orgToHTML(props: MarkupProps, node: Document): string {
             return `<span class="heading-kw-unknown">${kw}</span>`;
         }
       }
+      // we don't render heading priorities
+      case "priority":
+        return "";
       case "tags":
         return `<span class="tags">${node.tags.join(" ")}</span>`;
     }
@@ -337,7 +340,12 @@ function orgToHTML(props: MarkupProps, node: Document): string {
       case "headline": {
         const level = node.level;
         const contentChildren = node.children.slice(1);
-        const slug = slugify(contentChildren.map((c) => c.value).join(""));
+        const slug = slugify(
+          contentChildren
+            .filter((c) => c.type !== "priority")
+            .map((c) => c.value)
+            .join("")
+        );
         const headingContent: string = contentChildren
           .map(
             (c) =>
