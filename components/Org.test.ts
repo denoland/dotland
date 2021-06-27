@@ -528,6 +528,30 @@ describe("tables", () => {
   );
 });
 
+describe("other blocks", () => {
+  testOrgToHTML(
+    "quote block",
+    `#+BEGIN_QUOTE
+This is
+A quote.
+#+END_QUOTE`,
+    "<blockquote><p>This is\nA quote.</p></blockquote>"
+  );
+
+  // TODO: orga currently does not support markup in quote blocks,
+  // update this when it does (expected is "<blockquote><p>This is\nA
+  // quote with <strong>markup</strong>.</p></blockquote>")
+  // (2021-06-27)
+  testOrgToHTML(
+    "quote block with markup",
+    `#+BEGIN_QUOTE
+This is
+A quote with *markup*.
+#+END_QUOTE`,
+    "<blockquote><p>This is\nA quote with *markup*.</p></blockquote>"
+  );
+});
+
 describe("injection safety", () => {
   const testIn = "<p>&Test</p>";
   const testOut = "&lt;p&gt;&amp;Test&lt;/p&gt;";
@@ -556,5 +580,12 @@ describe("injection safety", () => {
     "HTML in image URL",
     `[[${testIn}.png]]`,
     `<p><img src="#ptestppng" alt="${testOut}.png" style="max-width:100%;"></p>`
+  );
+  testOrgToHTML(
+    "HTML in quote block",
+    `#+BEGIN_QUOTE
+${testIn}
+#+END_QUOTE`,
+    `<blockquote><p>${testOut}</p></blockquote>`
   );
 });

@@ -358,6 +358,9 @@ function orgToHTML(props: MarkupProps, node: Document): string {
           );
           return `<pre>${markup}</pre>`;
         }
+        if (node.name === "QUOTE") {
+          return `<blockquote><p>${nonHTML(node.value)}</p></blockquote>`;
+        }
         return `TODO: content: block { name = ${node.name}; params = ${node.params} }`;
       }
       case "list": {
