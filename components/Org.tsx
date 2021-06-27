@@ -371,12 +371,13 @@ function orgToHTML(props: MarkupProps, node: Document): string {
           return `<pre>${markup}</pre>`;
         }
         switch (node.name) {
-          case "QUOTE":
+          case "QUOTE": {
             const contents = nonHTML(node.value)
               .split("\n")
               .map((c) => `<p>${c}</p>`)
               .join("");
             return `<blockquote>${contents}</blockquote>`;
+          }
           // comments aren't exported
           case "COMMENT":
             return "";
