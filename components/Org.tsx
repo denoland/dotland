@@ -381,6 +381,9 @@ function orgToHTML(props: MarkupProps, node: Document): string {
           body ? `<tbody>${body}</tbody>` : ""
         }</table>`;
       }
+      // we currently ignore drawers (2021-06-27)
+      case "drawer":
+        return "";
     }
     return `TODO: content: ${node.type}`;
   }

@@ -284,6 +284,17 @@ More content.
   });
 });
 
+describe("drawers", () => {
+  testOrgToHTML(
+    "drawers are ignored",
+    `* Heading
+:PROPERTIES:
+:SOME_PROP: true
+:END:`,
+    mkHeaderHTML(1, "Heading", "heading")
+  );
+});
+
 describe("links", () => {
   testOrgToHTML(
     "link (to external resource)",
