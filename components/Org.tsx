@@ -273,6 +273,14 @@ function orgToHTML(props: MarkupProps, node: Document): string {
       return contentToHTML(node);
     }
     const content = node.children.slice(1);
+    if (content.length > 0 && content[0].type === "list.item.checkbox") {
+      return `<li><input${
+        content[0].checked ? ' checked=""' : ""
+      } disabled="" type="checkbox">${content.length > 1 ? " " : ""}${content
+        .slice(1)
+        .map((c) => anyToHTML(c as Content | Token))
+        .join("")}</li>`;
+    }
     return `<li>${content
       .map((c) => anyToHTML(c as Content | Token))
       .join("")}</li>`;

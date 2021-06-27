@@ -96,6 +96,24 @@ describe("lists", () => {
   );
 
   testOrgToHTML(
+    "checklist item unchecked",
+    "- [ ] not done",
+    `<ul><li><input disabled="" type="checkbox"> not done</li></ul>`
+  );
+
+  testOrgToHTML(
+    "checklist item checked",
+    "- [X] done",
+    `<ul><li><input checked="" disabled="" type="checkbox"> done</li></ul>`
+  );
+
+  testOrgToHTML(
+    "checklist item no content",
+    "- [X] ",
+    `<ul><li><input checked="" disabled="" type="checkbox"></li></ul>`
+  );
+
+  testOrgToHTML(
     "nested, unordered list",
     `- you can (1)
   - nest (1.1)
