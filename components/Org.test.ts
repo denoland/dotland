@@ -295,6 +295,15 @@ describe("drawers", () => {
   );
 });
 
+describe("planning", () => {
+  testOrgToHTML(
+    "planning is ignored",
+    `* Heading
+DEADLINE: [2021-06-27 Sun] `,
+    mkHeaderHTML(1, "Heading", "heading")
+  );
+});
+
 describe("links", () => {
   testOrgToHTML(
     "link (to external resource)",

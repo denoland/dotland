@@ -384,8 +384,10 @@ function orgToHTML(props: MarkupProps, node: Document): string {
       // we currently ignore drawers (2021-06-27)
       case "drawer":
         return "";
+      // we currently ignore planning (e.g., SCHEDULED, DEADLINE) (2021-06-27)
+      case "planning":
+        return "";
     }
-    return `TODO: content: ${node.type}`;
   }
 
   const res: string[] = [];
