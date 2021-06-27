@@ -73,6 +73,7 @@ describe("text styling", () => {
 
 testOrgToHTML("horizontal rule", "-----", "<hr>");
 
+// TODO: when orga supports it, allow specifying the start number for a list (2021-06-26)
 describe("lists", () => {
   testOrgToHTML(
     "flat bullet list",
