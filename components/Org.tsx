@@ -358,11 +358,14 @@ function orgToHTML(props: MarkupProps, node: Document): string {
           );
           return `<pre>${markup}</pre>`;
         }
-        if (node.name === "QUOTE") {
-          return `<blockquote><p>${nonHTML(node.value)}</p></blockquote>`;
-        }
-        if (node.name === "EXAMPLE") {
-          return `<pre>${nonHTML(node.value)}</pre>`;
+        const contents = nonHTML(node.value);
+        switch (node.name) {
+          case "EXAMPLE":
+            return `<pre>${contents}</pre>`;
+          case "QUOTE":
+            return `<blockquote><p>${contents}</p></blockquote>`;
+          case "VERSE":
+            return `<pre>${contents}</pre>`;
         }
         return `TODO: content: block { name = ${node.name}; params = ${node.params} }`;
       }

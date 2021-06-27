@@ -559,6 +559,15 @@ An example.
 #+END_EXAMPLE`,
     "<pre>This is\nAn example.</pre>"
   );
+
+  testOrgToHTML(
+    "verse block",
+    `#+BEGIN_VERSE
+This is
+A verse block.
+#+END_VERSE`,
+    "<pre>This is\nA verse block.</pre>"
+  );
 });
 
 describe("injection safety", () => {
@@ -602,6 +611,13 @@ ${testIn}
     `#+BEGIN_EXAMPLE
 ${testIn}
 #+END_EXAMPLE`,
+    `<pre>${testOut}</pre>`
+  );
+  testOrgToHTML(
+    "HTML in verse block",
+    `#+BEGIN_VERSE
+${testIn}
+#+END_VERSE`,
     `<pre>${testOut}</pre>`
   );
 });
