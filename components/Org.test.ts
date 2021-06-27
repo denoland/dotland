@@ -304,6 +304,19 @@ DEADLINE: [2021-06-27 Sun] `,
   );
 });
 
+describe("affiliated keywords", () => {
+  testOrgToHTML(
+    "affiliated keywords are ignored",
+    `#+NAME: test
+#+BEGIN_FOO
+Name is ignored.
+#+END_FOO`,
+    "<pre>Name is ignored.</pre>"
+  );
+
+  testOrgToHTML("keywords are ignored", "#+KEY: test", "");
+});
+
 describe("links", () => {
   testOrgToHTML(
     "link (to external resource)",
