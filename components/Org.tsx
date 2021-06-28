@@ -65,13 +65,13 @@ type Content =
 function orgToHTML(props: MarkupProps, node: Document): string {
   function nonHTML(text: string) {
     return text
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;");
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
   }
 
   function forAttr(text: string) {
-    return text.replaceAll("&", "&amp;").replaceAll('"', "&quot;");
+    return text.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
   }
 
   // Footnote handling: footnotes are grouped at end of document and numbered according to initial usage.

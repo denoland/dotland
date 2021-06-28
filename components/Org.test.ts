@@ -675,8 +675,8 @@ describe("injection safety", () => {
   );
   testOrgToHTML(
     "Ampersand in image URL (URL should be encoded)",
-    `[[https://foo.com/x.png?q=1&p=7]]`,
-    `<p><img src="https://foo.com/x.png?q=1&p=7" alt="https://foo.com/x.png?q=1&amp;p=7" style="max-width:100%;"></p>`
+    `[[https://foo.com/x.png?q=1&p=7&r=8]]`,
+    `<p><img src="https://foo.com/x.png?q=1&p=7&r=8" alt="https://foo.com/x.png?q=1&amp;p=7&amp;r=8" style="max-width:100%;"></p>`
   );
   testOrgToHTML(
     "HTML in image text",
