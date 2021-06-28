@@ -4,9 +4,6 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import dompurify from "dompurify";
 
-import unified from "unified";
-import parse from "reorg-parse";
-
 import {
   markup,
   MarkupProps,
@@ -50,9 +47,7 @@ function foreachTree(tree: Node, iteratee: (node: Node) => void) {
   }
 }
 
-function parseSource(source: string): Document {
-  return unified().use(parse).parse(source) as Document;
-}
+import { parse as parseSource } from "orga";
 
 type TopLevelContent = Content | Keyword | Footnote;
 type Content =
