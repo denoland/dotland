@@ -3,7 +3,7 @@
 import React from "react";
 import { RawCodeBlock } from "./CodeBlock";
 import Markdown from "./Markdown";
-import Org from "./Org";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import {
   fileTypeFromURL,
@@ -111,7 +111,10 @@ function FileDisplay(props: {
             );
           case "markdown":
           case "org": {
-            const Markup = filetype === "org" ? Org : Markdown;
+            const Markup =
+              // most projects won't be using Org files, so we load
+              // this component lazily to save space
+              filetype === "org" ? dynamic(() => import("./Org")) : Markdown;
             return (
               <div className="px-4">
                 <Markup
