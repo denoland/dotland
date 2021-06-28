@@ -57,10 +57,10 @@ function RegistryInstructions(props: {
       <div className="fixed z-10 inset-0 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <Transition
-            enter="ease-in-out duration-500"
+            enter="ease-in-out duration-300"
             enterFrom="opacity-0"
             enterTo="opacity-100"
-            leave="ease-in-out duration-500"
+            leave="ease-in-out duration-300"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
@@ -71,19 +71,19 @@ function RegistryInstructions(props: {
           </Transition>
           <section className="absolute inset-y-0 right-0 pl-10 max-w-full flex">
             <Transition
-              enter="transform transition ease-in-out duration-500 sm:duration-700"
+              enter="transform transition ease-in-out duration-300 sm:duration-700"
               enterFrom="translate-x-full"
               enterTo="translate-x-0"
-              leave="transform transition ease-in-out duration-500 sm:duration-700"
+              leave="transform transition ease-in-out duration-300 sm:duration-700"
               leaveFrom="translate-x-0"
               leaveTo="translate-x-full"
             >
               <div className="relative w-screen max-w-md md:max-w-lg lg:max-w-xl xl:max-w-4xl">
                 <Transition
-                  enter="ease-in-out duration-500"
+                  enter="ease-in-out duration-300"
                   enterFrom="opacity-0"
                   enterTo="opacity-100"
-                  leave="ease-in-out duration-500"
+                  leave="ease-in-out duration-300"
                   leaveFrom="opacity-100"
                   leaveTo="opacity-0"
                 >
