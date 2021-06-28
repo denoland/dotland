@@ -84,7 +84,7 @@ function Item({ artwork }: { artwork: Artwork }) {
           {artwork.artist.web && (
             <a
               href={artwork.artist.web}
-              className="ml-2 text-gray-500 hover:text-gray-700"
+              className="ml-2 text-gray-500 hover:text-gray-700 ease-in-out duration-500"
             >
               <span className="sr-only">Website</span>
               <svg
@@ -103,7 +103,7 @@ function Item({ artwork }: { artwork: Artwork }) {
           {artwork.artist.twitter && (
             <a
               href={`https://twitter.com/${artwork.artist.twitter}`}
-              className="ml-2 text-gray-500 hover:text-gray-700"
+              className="ml-2 text-gray-500 hover:text-gray-700 ease-in-out duration-500"
             >
               <span className="sr-only">Twitter</span>
               <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -114,7 +114,7 @@ function Item({ artwork }: { artwork: Artwork }) {
           {artwork.artist.github && (
             <a
               href={`https://github.com/${artwork.artist.github}`}
-              className="ml-2 text-gray-500 hover:text-gray-700"
+              className="ml-2 text-gray-500 hover:text-gray-700 ease-in-out duration-500"
             >
               <span className="sr-only">GitHub</span>
               <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -129,7 +129,7 @@ function Item({ artwork }: { artwork: Artwork }) {
           {artwork.artist.instagram && (
             <a
               href={`https://www.instagram.com/${artwork.artist.instagram}`}
-              className="ml-2 text-gray-500 hover:text-gray-700"
+              className="ml-2 text-gray-500 hover:text-gray-700 ease-in-out duration-500"
             >
               <span className="sr-only">Instagram</span>
               <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
