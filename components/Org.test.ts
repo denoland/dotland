@@ -654,9 +654,44 @@ describe("injection safety", () => {
     `<p><a href="#ptestp">${testOut}</a></p>`
   );
   testOrgToHTML(
+    "Ampersand in link URL",
+    `[[https://foo.com?p=7&q=8]]`,
+    `<p><a href="https://foo.com?p=7&q=8">https://foo.com?p=7&amp;q=8</a></p>`
+  );
+  testOrgToHTML(
+    "Quotes in link URL (URL should be encoded)",
+    `[[https://"f'oo.com]]`,
+    `<p><a href="https://%22f'oo.com">https://"f'oo.com</a></p>`
+  );
+  testOrgToHTML(
     "HTML in image URL",
     `[[${testIn}.png]]`,
-    `<p><img src="#ptestppng" alt="${testOut}.png" style="max-width:100%;"></p>`
+    `<p><img src="#ptestppng" alt="<p>&amp;Test</p>.png" style="max-width:100%;"></p>`
+  );
+  testOrgToHTML(
+    "Quotes in image URL (URL should be encoded)",
+    `[[https://f"o'o.png]]`,
+    `<p><img src="https://f%22o'o.png" alt="https://f&quot;o'o.png" style="max-width:100%;"></p>`
+  );
+  testOrgToHTML(
+    "Ampersand in image URL (URL should be encoded)",
+    `[[https://foo.com/x.png?q=1&p=7]]`,
+    `<p><img src="https://foo.com/x.png?q=1&p=7" alt="https://foo.com/x.png?q=1&amp;p=7" style="max-width:100%;"></p>`
+  );
+  testOrgToHTML(
+    "HTML in image text",
+    `[[./img.png][<p>&Test&quot;</p>]]`,
+    `<p><img src="${sampleURL}/img.png" alt="<p>&amp;Test&amp;quot;</p>" style="max-width:100%;"></p>`
+  );
+  testOrgToHTML(
+    "Encoding image text",
+    `[[https://foo.com/img.png]["an image&quot;]]`,
+    `<p><img src="https://foo.com/img.png" alt="&quot;an image&amp;quot;" style="max-width:100%;"></p>`
+  );
+  testOrgToHTML(
+    "Encoding relative image URL (URL should be encoded)",
+    `[[./f"o'o.png?p=7&q=8]]`,
+    `<p><img src="${sampleURL}/f%22o'o.png?p=7&q=8" alt="./f&quot;o'o.png?p=7&amp;q=8" style="max-width:100%;"></p>`
   );
   testOrgToHTML(
     "HTML in quote block",

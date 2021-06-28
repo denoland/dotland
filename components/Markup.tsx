@@ -67,12 +67,9 @@ function isRelative(path: string): boolean {
 
 function relativeToAbsolute(base: string, relative: string): string {
   const baseURL = new URL(base);
-  baseURL.search = "";
-  baseURL.hash = "";
   const parts = baseURL.pathname.split("/");
   parts[parts.length - 1] = relative;
-  baseURL.pathname = parts.join("/");
-  return baseURL.href;
+  return new URL(baseURL.origin + parts.join("/")).href;
 }
 
 export function transformLinkUri(displayURL: string, baseURL: string) {
@@ -101,7 +98,7 @@ export function transformLinkUri(displayURL: string, baseURL: string) {
       href = hrefURL.href;
     }
 
-    return href;
+    return encodeURI(href);
   };
 }
 
@@ -110,6 +107,6 @@ export function transformImageUri(sourceURL: string) {
     if (isRelative(uri)) {
       return relativeToAbsolute(sourceURL, uri);
     }
-    return uri;
+    return encodeURI(uri);
   };
 }

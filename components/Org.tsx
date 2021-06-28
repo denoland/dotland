@@ -75,6 +75,10 @@ function orgToHTML(props: MarkupProps, node: Document): string {
       .replaceAll(">", "&gt;");
   }
 
+  function forAttr(text: string) {
+    return text.replaceAll("&", "&amp;").replaceAll('"', "&quot;");
+  }
+
   // Footnote handling: footnotes are grouped at end of document and numbered according to initial usage.
 
   function extractFootnotes(node: Document): [FootnoteReference[], Footnote[]] {
@@ -233,8 +237,9 @@ function orgToHTML(props: MarkupProps, node: Document): string {
     switch (node.type) {
       case "link": {
         // for links like [[https://duckduckgo.com]]
-        const text = nonHTML(node.description ?? node.value);
         const urlRaw = node.value;
+        const text = nonHTML(node.description ?? urlRaw);
+        const attrText = forAttr(node.description ?? urlRaw);
         const isImage = fileTypeFromURL(urlRaw) === "image";
         const url =
           node.protocol === "internal"
@@ -244,9 +249,9 @@ function orgToHTML(props: MarkupProps, node: Document): string {
             : transformLinkUri(props.displayURL, props.baseURL)(urlRaw);
         const title = node.text;
         return isImage
-          ? `<img${url ? ` src="${url}"` : ""}${text ? ` alt="${text}"` : ""}${
-              title ? ` title="${title}"` : ""
-            } style="max-width:100%;">`
+          ? `<img${url ? ` src="${url}"` : ""}${
+              attrText ? ` alt="${attrText}"` : ""
+            }${title ? ` title="${title}"` : ""} style="max-width:100%;">`
           : `<a${url ? ` href="${url}"` : ""}${
               title ? ` title="${title}"` : ""
             }>${text}</a>`;
@@ -412,9 +417,8 @@ function orgToHTML(props: MarkupProps, node: Document): string {
         }
         const [hrow, ...rows] = nonRules;
         const body = rows.map((c) => tableRowToHTML(c)).join("");
-        return `<table><thead>${tableRowToHTML(hrow, true)}</thead>${
-          body ? `<tbody>${body}</tbody>` : ""
-        }</table>`;
+        return `<table><thead>${tableRowToHTML(hrow, true)}</thead>${body ? `<tbody>${body}</tbody>` : ""
+          }</table>`;
       }
       // we currently ignore drawers (2021-06-27)
       case "drawer":
