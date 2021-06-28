@@ -417,8 +417,9 @@ function orgToHTML(props: MarkupProps, node: Document): string {
         }
         const [hrow, ...rows] = nonRules;
         const body = rows.map((c) => tableRowToHTML(c)).join("");
-        return `<table><thead>${tableRowToHTML(hrow, true)}</thead>${body ? `<tbody>${body}</tbody>` : ""
-          }</table>`;
+        return `<table><thead>${tableRowToHTML(hrow, true)}</thead>${
+          body ? `<tbody>${body}</tbody>` : ""
+        }</table>`;
       }
       // we currently ignore drawers (2021-06-27)
       case "drawer":
