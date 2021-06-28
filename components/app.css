@@ -29,7 +29,7 @@ html {
 }
 
 .link:hover {
-  @apply text-blue-400;
+  @apply text-blue-400 ease-in-out duration-500;
 }
 
 span.token.plain:empty:before {

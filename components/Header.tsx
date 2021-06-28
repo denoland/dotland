@@ -59,6 +59,7 @@ function Header({
         </div>
         <div className="hidden lg:flex md:ml-10 items-end">
           <Link href="/#installation">
+<<<<<<< HEAD
             <a className="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
               安装
             </a>
@@ -66,17 +67,31 @@ function Header({
           <Link href="/manual">
             <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
               参考手册
+=======
+            <a className="font-medium text-gray-500 hover:text-gray-900 transition duration-500 ease-in-out">
+              Install
+            </a>
+          </Link>
+          <Link href="/manual">
+            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-500 ease-in-out">
+              Manual
+>>>>>>> 9bd0f0ca9cf7bf452bff085859f216a3c32413be
             </a>
           </Link>
           <a
             href="https://deno.com/blog"
-            className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+            className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-500 ease-in-out"
           >
             博客
           </a>
           <a
+<<<<<<< HEAD
             href="https://doc.deno.js.cn/builtin/stable"
             className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+=======
+            href="https://doc.deno.land/builtin/stable"
+            className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-500 ease-in-out"
+>>>>>>> 9bd0f0ca9cf7bf452bff085859f216a3c32413be
           >
             运行时 API
           </a>
@@ -92,7 +107,7 @@ function Header({
           </Link>
           <a
             href="https://github.com/denoland"
-            className="ml-10 text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+            className="ml-10 text-gray-500 hover:text-gray-900 transition duration-500 ease-in-out"
             style={{ lineHeight: 0 }}
           >
             <span className="sr-only">GitHub</span>
@@ -168,6 +183,7 @@ function Header({
               </div>
               <div className="px-2 pt-4 pb-3">
                 <Link href="/#installation">
+<<<<<<< HEAD
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
                     安装
                   </a>
@@ -185,10 +201,30 @@ function Header({
                 <a
                   href="https://doc.deno.js.cn/builtin/stable"
                   className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
+=======
+                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-500 ease-in-out">
+                    Install
+                  </a>
+                </Link>
+                <Link href="/manual">
+                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-500 ease-in-out">
+                    Manual
+                  </a>
+                </Link>
+                <Link href="https://deno.com/blog">
+                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-500 ease-in-out">
+                    Blog
+                  </a>
+                </Link>
+                <a
+                  href="https://doc.deno.land/builtin/stable"
+                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-500 ease-in-out"
+>>>>>>> 9bd0f0ca9cf7bf452bff085859f216a3c32413be
                 >
                   运行时 API
                 </a>
                 <Link href="/std">
+<<<<<<< HEAD
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
                     标准库
                   </a>
@@ -196,6 +232,15 @@ function Header({
                 <Link href="/x">
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
                     第三方模块
+=======
+                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-500 ease-in-out">
+                    Standard Library
+                  </a>
+                </Link>
+                <Link href="/x">
+                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-500 ease-in-out">
+                    Third Party Modules
+>>>>>>> 9bd0f0ca9cf7bf452bff085859f216a3c32413be
                   </a>
                 </Link>
               </div>
