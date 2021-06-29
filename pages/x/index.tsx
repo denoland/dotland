@@ -94,6 +94,12 @@ function ThirdPartyRegistryList(): React.ReactElement {
             </dd>
 
             <div className="mt-2">
+              <a href="#info" className="link">
+                Learn more
+              </a>
+            </div>
+
+            <div className="mt-2">
               <button
                 className="
                   py-2 px-8 border border-gray-300 text-md font-medium rounded-md
@@ -107,11 +113,6 @@ function ThirdPartyRegistryList(): React.ReactElement {
               </button>
             </div>
 
-            <div className="mt-2">
-              <a href="#info" className="link">
-                Learn more
-              </a>
-            </div>
             {/* <div className="mt-8">
               <ErrorMessage
                 title="Ongoing incident"
