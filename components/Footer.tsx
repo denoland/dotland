@@ -14,74 +14,44 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
         <nav className="-mx-5 -my-2 flex flex-wrap justify-center">
           <div className="px-5 py-2">
             <Link href="/[...rest]" as="/manual">
-<<<<<<< HEAD
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                参考手册
-=======
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500">
-                Manual
->>>>>>> 9bd0f0ca9cf7bf452bff085859f216a3c32413be
+                参考手册
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <a
-<<<<<<< HEAD
               href="https://doc.deno.js.cn/builtin/stable"
-              className="text-base leading-6 text-gray-500 hover:text-gray-900"
-=======
-              href="https://doc.deno.land/builtin/stable"
               className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500"
->>>>>>> 9bd0f0ca9cf7bf452bff085859f216a3c32413be
             >
               运行时 API
             </a>
           </div>
           <div className="px-5 py-2">
             <Link href="/[...rest]" as="/std">
-<<<<<<< HEAD
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                标准库
-=======
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500">
-                Standard Library
->>>>>>> 9bd0f0ca9cf7bf452bff085859f216a3c32413be
+                标准库
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/x">
-<<<<<<< HEAD
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                第三方模块
-=======
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500">
-                Third Party Modules
->>>>>>> 9bd0f0ca9cf7bf452bff085859f216a3c32413be
+                第三方模块
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/benchmarks">
-<<<<<<< HEAD
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                性能
-=======
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500">
-                Benchmarks
->>>>>>> 9bd0f0ca9cf7bf452bff085859f216a3c32413be
+                性能
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/artwork">
-<<<<<<< HEAD
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                艺术作品
-=======
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500">
-                Artwork
->>>>>>> 9bd0f0ca9cf7bf452bff085859f216a3c32413be
+                艺术作品
               </a>
             </Link>
           </div>
@@ -95,27 +65,11 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
           </div>
           <div className="px-5 py-2">
             <Link href="/translations">
-<<<<<<< HEAD
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
+              <a className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500">
                 翻译
               </a>
             </Link>
           </div>
-=======
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500">
-                Translations
-              </a>
-            </Link>
-          </div>
-          <div className="px-5 py-2">
-            <a
-              href="https://status.deno.land/"
-              className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500"
-            >
-              System Status
-            </a>
-          </div>
->>>>>>> 9bd0f0ca9cf7bf452bff085859f216a3c32413be
         </nav>
         <div className="mt-9 flex justify-center">
           <a
