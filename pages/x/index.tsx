@@ -99,7 +99,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
               </a>
             </div>
 
-            <div className="mt-2">
+            <div className="mt-6">
               <button
                 className="
                   py-2 px-8 border border-gray-300 text-md font-medium rounded-md
