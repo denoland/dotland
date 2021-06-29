@@ -94,20 +94,6 @@ function ThirdPartyRegistryList(): React.ReactElement {
             </dd>
 
             <div className="mt-2">
-              <button
-                className="
-                  py-2 px-8 border border-gray-300 text-md font-medium rounded-md
-                  text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50
-                  focus:outline-none focus:shadow-outline-blue focus:border-blue-300
-                  active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out
-                "
-                onClick={() => setOverlayOpen(true)}
-              >
-                Publish a module
-              </button>
-            </div>
-
-            <div className="mt-2">
               <a href="#info" className="link">
                 Learn more
               </a>
@@ -119,13 +105,13 @@ function ThirdPartyRegistryList(): React.ReactElement {
               />
             </div> */}
           </div>
-          <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8">
+          <div className="max-w-screen-lg mx-auto grid grid-cols-5 gap-2 px-4 sm:px-6 md:px-8 mt-8">
             <label htmlFor="query" className="font-medium sr-only">
               Search
             </label>
             <input
               id="query"
-              className="block w-full px-4 py-2 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1"
+              className="block col-span-3 px-4 py-2 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1"
               type="text"
               placeholder={
                 !resp ? "Search" : `Search through ${resp.totalCount} modules`
@@ -133,6 +119,12 @@ function ThirdPartyRegistryList(): React.ReactElement {
               value={query}
               onChange={handleSearchInput}
             />
+            <button
+              className="block col-span-2 px-4 py-2 border border-gray-300 rounded-md font-medium text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out mt-1"
+              onClick={() => setOverlayOpen(true)}
+            >
+              Publish a module
+            </button>
           </div>
           <div className="sm:max-w-screen-lg sm:mx-auto sm:px-6 md:px-8 pb-4 sm:pb-12">
             {resp === undefined ? (
