@@ -1,11 +1,12 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import React, { useEffect } from "react";
+import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import marked, { Renderer } from "marked";
 import dompurify from "dompurify";
 import { RawCodeBlock } from "./CodeBlock";
 import { replaceEmojis } from "../util/emoji_util";
+<<<<<<< HEAD
 
 const REG_ID = /\{\s*#([-\w]+)\s*\}/;
 
@@ -67,6 +68,19 @@ function Markdown(props: MarkdownProps): React.ReactElement | null {
     }, 50);
     return () => clearTimeout(id);
   }, []);
+=======
+import {
+  markup,
+  MarkupProps,
+  scrollEffect,
+  slugify,
+  transformImageUri,
+  transformLinkUri,
+} from "./Markup";
+
+function Markdown(props: MarkupProps): React.ReactElement | null {
+  scrollEffect();
+>>>>>>> a4c372917018bb93fc7e8b86ba09321adfcdb1d1
 
   if (!props.source) {
     return null;
@@ -143,64 +157,11 @@ function Markdown(props: MarkdownProps): React.ReactElement | null {
       headerIds: true,
       sanitizer: dompurify.sanitize,
     });
-    return (
-      <div
-        dangerouslySetInnerHTML={{ __html: raw }}
-        className={`markdown py-8 px-4 ${props.className ?? ""}`}
-        onClick={handleClick}
-      />
-    );
+    return markup(props, raw);
   } catch (err) {
     console.log(err);
     return null;
   }
-}
-
-function handleClick(e: React.MouseEvent<HTMLElement>) {
-  const el = e.target as HTMLElement;
-  if (el.className !== "octicon-link") return;
-
-  const anchor = el.parentNode as HTMLAnchorElement;
-  navigator.clipboard.writeText(anchor.href);
-}
-
-function transformLinkUri(displayURL: string, baseURL: string) {
-  return (uri: string) => {
-    let href = uri;
-
-    if (uri.startsWith("#")) return uri;
-
-    // If the URL is relative, it should be relative to the canonical URL of the file.
-    if (isRelative(href)) {
-      // https://github.com/denoland/deno_website2/issues/1047
-      href = decodeURIComponent(relativeToAbsolute(displayURL, href));
-    }
-    if (href.startsWith("/") && !href.startsWith("//")) {
-      href = `${baseURL}${href}`;
-    }
-
-    const hrefURL = new URL(href);
-
-    // Manual links should not have trailing .md
-    if (
-      hrefURL?.pathname?.startsWith("/manual") &&
-      hrefURL?.origin === "https://deno.land"
-    ) {
-      hrefURL.pathname = hrefURL.pathname.replace(/\.md$/, "");
-      href = hrefURL.href;
-    }
-
-    return href;
-  };
-}
-
-function transformImageUri(sourceURL: string) {
-  return (uri: string) => {
-    if (isRelative(uri)) {
-      return relativeToAbsolute(sourceURL, uri);
-    }
-    return uri;
-  };
 }
 
 export default Markdown;
