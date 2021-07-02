@@ -3,6 +3,7 @@
 import React from "react";
 import { RawCodeBlock } from "./CodeBlock";
 import Markdown from "./Markdown";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import {
   fileTypeFromURL,
@@ -109,9 +110,14 @@ function FileDisplay(props: {
               />
             );
           case "markdown":
+          case "org": {
+            const Markup =
+              // most projects won't be using Org files, so we load
+              // this component lazily to save space
+              filetype === "org" ? dynamic(() => import("./Org")) : Markdown;
             return (
               <div className="px-4">
-                <Markdown
+                <Markup
                   source={
                     props.stdVersion === undefined
                       ? props.raw!
@@ -126,6 +132,7 @@ function FileDisplay(props: {
                 />
               </div>
             );
+          }
           case "image":
             return <img className="w-full" src={props.sourceURL} />;
           default:

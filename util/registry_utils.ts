@@ -266,6 +266,10 @@ export function parseNameVersion(nameVersion: string): [string, string] {
   return [name, version.join("@")];
 }
 
+const markdownExtension = "(?:markdown|mdown|mkdn|mdwn|mkd|md)";
+const orgExtension = "org";
+const readmeBaseRegex = `readme(?:\\.(${markdownExtension}|${orgExtension}))?`;
+
 export function fileTypeFromURL(filename: string): string | undefined {
   const f = filename.toLowerCase();
   if (f.endsWith(".ts")) {
@@ -296,16 +300,11 @@ export function fileTypeFromURL(filename: string): string | undefined {
     return "yaml";
   } else if (f.endsWith(".htm") || f.endsWith(".html")) {
     return "html";
-  } else if (
-    f.endsWith(".md") ||
-    f.endsWith(".markdown") ||
-    f.endsWith(".mdown") ||
-    f.endsWith(".mkdn") ||
-    f.endsWith(".mdwn") ||
-    f.endsWith(".mkd")
-  ) {
+  } else if (f.match(`\\.${markdownExtension}$`)) {
     return "markdown";
-  } else if (f.endsWith(".png") || f.endsWith(".jpg") || f.endsWith(".jpeg")) {
+  } else if (f.match(`\\.${orgExtension}$`)) {
+    return "org";
+  } else if (f.match(/\.(png|jpe?g|svg)/)) {
     return "image";
   }
 }
@@ -332,7 +331,7 @@ export function findRootReadme(
   directoryListing: DirListing[] | undefined
 ): DirEntry | undefined {
   const listing = directoryListing?.find((d) =>
-    /^\/(docs\/|\.github\/)?readme(\.markdown|\.mdown|\.mkdn|\.mdwn|\.mkd|\.md)?$/i.test(
+    new RegExp(`^\\/(docs\\/|\\.github\\/)?${readmeBaseRegex}$`, "i").test(
       d.path
     )
   );
@@ -346,9 +345,7 @@ export function findRootReadme(
 }
 
 export function isReadme(filename: string): boolean {
-  return /^readme(\.markdown|\.mdown|\.mkdn|\.mdwn|\.mkd|\.md)?$/i.test(
-    filename
-  );
+  return new RegExp(`^${readmeBaseRegex}$`, "i").test(filename);
 }
 
 export type Dep = { name: string; children: Dep[] };
