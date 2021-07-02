@@ -6,69 +6,6 @@ import marked, { Renderer } from "marked";
 import dompurify from "dompurify";
 import { RawCodeBlock } from "./CodeBlock";
 import { replaceEmojis } from "../util/emoji_util";
-<<<<<<< HEAD
-
-const REG_ID = /\{\s*#([-\w]+)\s*\}/;
-
-function slugify(text: string): string {
-  let matchs: RegExpMatchArray | null;
-  if ((matchs = text.match(REG_ID)) !== null) {
-    return matchs[1];
-  }
-
-  text = text.toLowerCase();
-  text = text.split(" ").join("-");
-  text = text.split(/\t/).join("--");
-  text = text.split(/[|$&`~=\\/@+*!?({[\]})<>=.,;:'"^]/).join("");
-  text = text
-    .split(/[。？！，、；：“”【】（）〔〕［］﹃﹄“ ”‘’﹁﹂—…－～《》〈〉「」]/)
-    .join("");
-
-  return text;
-}
-
-function isRelative(path: string): boolean {
-  return (
-    !path.startsWith("/") &&
-    !path.startsWith("https://") &&
-    !path.startsWith("http://") &&
-    !path.startsWith("//")
-  );
-}
-
-function relativeToAbsolute(base: string, relative: string): string {
-  const baseURL = new URL(base);
-  baseURL.search = "";
-  baseURL.hash = "";
-  const parts = baseURL.pathname.split("/");
-  parts[parts.length - 1] = relative;
-  baseURL.pathname = parts.join("/");
-  return baseURL.href;
-}
-
-interface MarkdownProps {
-  source: string;
-  displayURL: string;
-  sourceURL: string;
-  baseURL: string;
-  className?: string;
-}
-
-function Markdown(props: MarkdownProps): React.ReactElement | null {
-  useEffect(() => {
-    const id = setTimeout(() => {
-      let { hash } = location;
-      hash = hash && hash.substring(1);
-      if (!hash) return;
-
-      const el = document.getElementsByName(hash)[0];
-      if (!el) return;
-
-      setTimeout(() => el.scrollIntoView(), 0);
-    }, 50);
-    return () => clearTimeout(id);
-  }, []);
-=======
 import {
   markup,
   MarkupProps,
@@ -80,7 +17,6 @@ import {
 
 function Markdown(props: MarkupProps): React.ReactElement | null {
   scrollEffect();
->>>>>>> a4c372917018bb93fc7e8b86ba09321adfcdb1d1
 
   if (!props.source) {
     return null;
@@ -96,7 +32,7 @@ function Markdown(props: MarkupProps): React.ReactElement | null {
             <a name="${slug}" class="anchor" href="#${slug}">
               <span class="octicon-link"></span>
             </a>
-            ${text.replace(REG_ID, "")}
+            ${text}
           </h${level}>`;
         },
         link(href, title, text) {
