@@ -53,7 +53,7 @@ for await (const req of s) {
             </h2>
             <a
               href="https://github.com/denoland/deno/releases/latest"
-              className="rounded-full mt-4 px-8 py-2 transition-colors duration-500 ease-in-out bg-blue-500 hover:bg-blue-400 text-white shadow-lg"
+              className="rounded-full mt-4 px-8 py-2 transition-colors duration-75 ease-in-out bg-blue-500 hover:bg-blue-400 text-white shadow-lg"
             >
               {versions.cli[0]}
             </a>
