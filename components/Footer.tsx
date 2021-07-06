@@ -14,67 +14,113 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
         <nav className="-mx-5 -my-2 flex flex-wrap justify-center">
           <div className="px-5 py-2">
             <Link href="/[...rest]" as="/manual">
+<<<<<<< HEAD
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500">
                 参考手册
+=======
+              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                Manual
+>>>>>>> 81389e41a0f898983f3102e7b395db1bec1e8668
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <a
+<<<<<<< HEAD
               href="https://doc.deno.js.cn/builtin/stable"
               className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500"
+=======
+              href="https://doc.deno.land/builtin/stable"
+              className="text-base leading-6 text-gray-500 hover:text-gray-900"
+>>>>>>> 81389e41a0f898983f3102e7b395db1bec1e8668
             >
               运行时 API
             </a>
           </div>
           <div className="px-5 py-2">
             <Link href="/[...rest]" as="/std">
+<<<<<<< HEAD
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500">
                 标准库
+=======
+              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                Standard Library
+>>>>>>> 81389e41a0f898983f3102e7b395db1bec1e8668
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/x">
+<<<<<<< HEAD
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500">
                 第三方模块
+=======
+              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                Third Party Modules
+>>>>>>> 81389e41a0f898983f3102e7b395db1bec1e8668
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/benchmarks">
+<<<<<<< HEAD
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500">
                 性能
+=======
+              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                Benchmarks
+>>>>>>> 81389e41a0f898983f3102e7b395db1bec1e8668
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/artwork">
+<<<<<<< HEAD
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500">
                 艺术作品
+=======
+              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                Artwork
+>>>>>>> 81389e41a0f898983f3102e7b395db1bec1e8668
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <a
               href="https://deno.com/blog"
-              className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500"
+              className="text-base leading-6 text-gray-500 hover:text-gray-900"
             >
               博客
             </a>
           </div>
           <div className="px-5 py-2">
             <Link href="/translations">
+<<<<<<< HEAD
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500">
                 翻译
               </a>
             </Link>
           </div>
+=======
+              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                Translations
+              </a>
+            </Link>
+          </div>
+          <div className="px-5 py-2">
+            <a
+              href="https://status.deno.land/"
+              className="text-base leading-6 text-gray-500 hover:text-gray-900"
+            >
+              System Status
+            </a>
+          </div>
+>>>>>>> 81389e41a0f898983f3102e7b395db1bec1e8668
         </nav>
         <div className="mt-9 flex justify-center">
           <a
             href="https://github.com/denoland"
-            className="text-gray-400 hover:text-gray-500 ease-in-out duration-500"
+            className="text-gray-400 hover:text-gray-500"
           >
             <span className="sr-only">GitHub</span>
             <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -87,7 +133,7 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
           </a>
           <a
             href="https://discord.gg/deno"
-            className="ml-6 text-gray-400 hover:text-gray-500 ease-in-out duration-500"
+            className="ml-6 text-gray-400 hover:text-gray-500"
           >
             <span className="sr-only">Discord</span>
             <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -96,7 +142,7 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
           </a>
           <a
             href="https://twitter.com/deno_land"
-            className="ml-6 text-gray-400 hover:text-gray-500 ease-in-out duration-500"
+            className="ml-6 text-gray-400 hover:text-gray-500"
           >
             <span className="sr-only">Twitter</span>
             <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
