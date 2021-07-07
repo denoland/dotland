@@ -9,9 +9,6 @@ export function getItem(key: string) {
 }
 
 export function setItem(key: string, value: string) {
-  if (typeof window === "undefined") {
-    return;
-  }
   try {
     window.localStorage.setItem(key, value);
   } catch (_e) {
