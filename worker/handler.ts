@@ -9,7 +9,6 @@ export function withLog(
   handler: (request: Request) => Promise<Response>,
 ): (request: Request) => Promise<Response> {
   return async (req) => {
-    const start = new Date();
     let res: Response;
     try {
       res = await handler(req);
@@ -19,12 +18,6 @@ export function withLog(
         status: 500,
       });
     }
-    const duration = new Date().getTime() - start.getTime();
-    console.log(
-      `%c${res.status} %c${duration}ms ${new URL(req.url).pathname}`,
-      `color: ${res.status >= 200 && res.status <= 499 ? "green" : "red"}`,
-      "color: inherit",
-    );
     return res;
   };
 }

@@ -14,7 +14,7 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
         <nav className="-mx-5 -my-2 flex flex-wrap justify-center">
           <div className="px-5 py-2">
             <Link href="/[...rest]" as="/manual">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500">
+              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
                 参考手册
               </a>
             </Link>
@@ -22,35 +22,35 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
           <div className="px-5 py-2">
             <a
               href="https://doc.deno.js.cn/builtin/stable"
-              className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500"
+              className="text-base leading-6 text-gray-500 hover:text-gray-900"
             >
               运行时 API
             </a>
           </div>
           <div className="px-5 py-2">
             <Link href="/[...rest]" as="/std">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500">
+              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
                 标准库
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/x">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500">
+              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
                 第三方模块
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/benchmarks">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500">
+              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
                 性能
               </a>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/artwork">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500">
+              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
                 艺术作品
               </a>
             </Link>
@@ -58,14 +58,14 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
           <div className="px-5 py-2">
             <a
               href="https://deno.com/blog"
-              className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500"
+              className="text-base leading-6 text-gray-500 hover:text-gray-900"
             >
               博客
             </a>
           </div>
           <div className="px-5 py-2">
             <Link href="/translations">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900 ease-in-out duration-500">
+              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
                 翻译
               </a>
             </Link>
@@ -74,7 +74,7 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
         <div className="mt-9 flex justify-center">
           <a
             href="https://github.com/denoland"
-            className="text-gray-400 hover:text-gray-500 ease-in-out duration-500"
+            className="text-gray-400 hover:text-gray-500"
           >
             <span className="sr-only">GitHub</span>
             <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -87,7 +87,7 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
           </a>
           <a
             href="https://discord.gg/deno"
-            className="ml-6 text-gray-400 hover:text-gray-500 ease-in-out duration-500"
+            className="ml-6 text-gray-400 hover:text-gray-500"
           >
             <span className="sr-only">Discord</span>
             <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -96,7 +96,7 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
           </a>
           <a
             href="https://twitter.com/deno_land"
-            className="ml-6 text-gray-400 hover:text-gray-500 ease-in-out duration-500"
+            className="ml-6 text-gray-400 hover:text-gray-500"
           >
             <span className="sr-only">Twitter</span>
             <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
