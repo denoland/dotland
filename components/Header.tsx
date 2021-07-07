@@ -59,23 +59,13 @@ function Header({
         </div>
         <div className="hidden lg:flex md:ml-10 items-end">
           <Link href="/#installation">
-<<<<<<< HEAD
-            <a className="font-medium text-gray-500 hover:text-gray-900 transition duration-500 ease-in-out">
+            <a className="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
               安装
             </a>
           </Link>
           <Link href="/manual">
-            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-500 ease-in-out">
-              参考手册
-=======
-            <a className="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              Install
-            </a>
-          </Link>
-          <Link href="/manual">
             <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              Manual
->>>>>>> 81389e41a0f898983f3102e7b395db1bec1e8668
+              参考手册
             </a>
           </Link>
           <a
@@ -85,13 +75,8 @@ function Header({
             博客
           </a>
           <a
-<<<<<<< HEAD
             href="https://doc.deno.js.cn/builtin/stable"
-            className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-500 ease-in-out"
-=======
-            href="https://doc.deno.land/builtin/stable"
             className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
->>>>>>> 81389e41a0f898983f3102e7b395db1bec1e8668
           >
             运行时 API
           </a>
@@ -183,64 +168,34 @@ function Header({
               </div>
               <div className="px-2 pt-4 pb-3">
                 <Link href="/#installation">
-<<<<<<< HEAD
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-500 ease-in-out">
+                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
                     安装
                   </a>
                 </Link>
                 <Link href="/manual">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-500 ease-in-out">
+                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
                     参考手册
                   </a>
                 </Link>
                 <Link href="https://deno.com/blog">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-500 ease-in-out">
+                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
                     博客
                   </a>
                 </Link>
                 <a
                   href="https://doc.deno.js.cn/builtin/stable"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-500 ease-in-out"
-=======
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Install
-                  </a>
-                </Link>
-                <Link href="/manual">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Manual
-                  </a>
-                </Link>
-                <Link href="https://deno.com/blog">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Blog
-                  </a>
-                </Link>
-                <a
-                  href="https://doc.deno.land/builtin/stable"
                   className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
->>>>>>> 81389e41a0f898983f3102e7b395db1bec1e8668
                 >
                   运行时 API
                 </a>
                 <Link href="/std">
-<<<<<<< HEAD
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-500 ease-in-out">
+                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
                     标准库
                   </a>
                 </Link>
                 <Link href="/x">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-500 ease-in-out">
+                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
                     第三方模块
-=======
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Standard Library
-                  </a>
-                </Link>
-                <Link href="/x">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Third Party Modules
->>>>>>> 81389e41a0f898983f3102e7b395db1bec1e8668
                   </a>
                 </Link>
               </div>
