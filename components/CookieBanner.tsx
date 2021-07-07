@@ -1,11 +1,11 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
 import React, { useState } from "react";
+import { getItem, setItem } from "../util/local_storage_utils";
 
 export function CookieBanner(): React.ReactElement {
   const [cookieBanner, setCookieBanner] = useState(
-    typeof window === "undefined" ||
-      window.localStorage.getItem("cookiebanner") === "closed"
+    getItem("cookiebanner") === "closed"
   );
 
   return (
@@ -27,7 +27,7 @@ export function CookieBanner(): React.ReactElement {
               <div className="rounded-md shadow-sm">
                 <button
                   onClick={() => {
-                    window.localStorage.setItem("cookiebanner", "closed");
+                    setItem("cookiebanner", "closed");
                     setCookieBanner(true);
                   }}
                   className="flex items-center justify-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-gray-600 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline transition ease-in-out duration-150"
