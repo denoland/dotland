@@ -28,9 +28,7 @@ function isOldVersion(version: string) {
   return (
     matches[1] === "0" ||
     (matches[1] === "1" && parseInt(matches[2]) < 12) ||
-    (matches[1] === "1" &&
-      matches[2] === "12" &&
-      matches[3] === "0")
+    (matches[1] === "1" && matches[2] === "12" && matches[3] === "0")
   );
 }
 
@@ -45,13 +43,14 @@ function basepath(version: string) {
 }
 
 export async function getTableOfContents(
-  version: string,
+  version: string
 ): Promise<TableOfContents> {
   const res = await fetch(`${basepath(version)}/toc.json`);
   if (res.status !== 200) {
     throw Error(
-      `Got an error (${res.status}) while getting the manual table of contents:\n${await res
-        .text()}`,
+      `Got an error (${
+        res.status
+      }) while getting the manual table of contents:\n${await res.text()}`
     );
   }
   return await res.json();
