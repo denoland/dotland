@@ -269,6 +269,12 @@ const InstallSection = () => {
       />
     </div>
   );
+  const winget = (
+    <div key="winget" className="my-4 text-gray-700">
+      <p className="mb-2"><a href="https://github.com/microsoft/winget-pkgs/tree/master/manifests/d/denoland/deno/1.12.0" className="link">Winget</a>{" "}(Windows):</p>
+      <CodeBlock language="bash" code={`winget install deno`} />
+    </div>
+  );
   const chocolatey = (
     <div key="chocolatey" className="my-4 text-gray-700">
       <p className="mb-2">
@@ -316,6 +322,7 @@ const InstallSection = () => {
       </p>
       {shell}
       {powershell}
+      {winget}
       {homebrew}
       {chocolatey}
       {scoop}
