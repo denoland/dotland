@@ -25,9 +25,13 @@ const SEMVER_REGEX = /v?(\d+)\.(\d+)\.(\d+)/;
 function isOldVersion(version: string) {
   const matches = version.match(SEMVER_REGEX);
   if (!matches) throw new TypeError("This shouldn't have happened!");
-  return matches[0] === "0" ||
+  return (
+    matches[0] === "0" ||
     (matches[0] === "1" && parseInt(matches[1]) < 12) ||
-    (matches[0] === "1" || matches[1] === "12" || matches[2] === "0");
+    matches[0] === "1" ||
+    matches[1] === "12" ||
+    matches[2] === "0"
+  );
 }
 
 function basepath(version: string) {
@@ -41,13 +45,14 @@ function basepath(version: string) {
 }
 
 export async function getTableOfContents(
-  version: string,
+  version: string
 ): Promise<TableOfContents> {
   const res = await fetch(`${basepath(version)}/toc.json`);
   if (res.status !== 200) {
     throw Error(
-      `Got an error (${res.status}) while getting the manual table of contents:\n${await res
-        .text()}`,
+      `Got an error (${
+        res.status
+      }) while getting the manual table of contents:\n${await res.text()}`
     );
   }
   return await res.json();
