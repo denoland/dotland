@@ -1,25 +1,26 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
 import React, {
-  useState,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
-  useCallback,
+  useState,
 } from "react";
 import { createPortal } from "react-dom";
 import Head from "next/head";
 import Link from "next/link";
-import { useRouter, Router } from "next/router";
+import { Router, useRouter } from "next/router";
 // @ts-expect-error because @docsearch/react does not have types
 import { DocSearchModal, useDocSearchKeyboardEvents } from "@docsearch/react";
 import versionMeta from "../versions.json";
 import { parseNameVersion } from "../util/registry_utils";
 import {
-  TableOfContents,
-  getTableOfContents,
-  getFileURL,
   getDocURL,
+  getFileURL,
+  getTableOfContents,
+  isPreviewVersion,
+  TableOfContents,
   versions,
 } from "../util/manual_utils";
 import Markdown from "./Markdown";
@@ -215,6 +216,8 @@ function Manual(): React.ReactElement {
       ? versionMeta.std[0]
       : ((versionMeta.cli_to_std as any)[version ?? ""] as string) ??
         versionMeta.std[0];
+
+  const isPreview = isPreviewVersion(version);
 
   return (
     <div>
@@ -472,6 +475,12 @@ function Manual(): React.ReactElement {
               </div>
             </div>
             <CookieBanner />
+            {isPreview ? (
+              <UserContributionBanner
+                gotoVersion={gotoVersion}
+                versions={versions}
+              />
+            ) : null}
             <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20">
               {content ? (
                 <>
@@ -567,6 +576,41 @@ function Manual(): React.ReactElement {
               )}
             </div>
           </main>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function UserContributionBanner({
+  versions,
+  gotoVersion,
+}: {
+  versions: string[];
+  gotoVersion: (version: string) => void;
+}) {
+  return (
+    <div className="bg-yellow-300 sticky top-0">
+      <div className="max-w-screen-xl mx-auto py-4 px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between flex-wrap">
+          <div className="w-0 flex-1 flex items-center">
+            <p className="ml-3 font-medium text-gray-900">
+              <span>
+                You are viewing documentation generated from a{"  "}
+                <b className="font-bold">user contribution</b>
+                {"  "}
+                or an upcoming or past release. The contents of this document
+                may not have been reviewed by the Deno team.{" "}
+              </span>
+
+              <span
+                className="underline cursor-pointer text-gray-900"
+                onClick={() => gotoVersion(versions[0])}
+              >
+                Click here to view the documentation for the latest release.
+              </span>
+            </p>
+          </div>
         </div>
       </div>
     </div>
