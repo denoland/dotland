@@ -155,7 +155,7 @@ function Manual(): React.ReactElement {
       .then((text: string) => {
         setContent(text);
         const result = text.match(/^#+ (.*)$/m);
-        setPageTitle(result ? result[1] : "Manual");
+        setPageTitle(result ? result[1] : "");
       })
       .catch((e) => {
         console.error("Failed to fetch content:", e);
@@ -229,7 +229,9 @@ function Manual(): React.ReactElement {
   return (
     <div>
       <Head>
-        <title>{`${pageTitle} | Deno`}</title>
+        <title>
+          {pageTitle === "" ? "Manual | Deno" : `${pageTitle} | Manual | Deno`}
+        </title>
         <link
           rel="preconnect"
           href="https://BH4D9OD16A-dsn.algolia.net"
