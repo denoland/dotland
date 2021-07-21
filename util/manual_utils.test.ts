@@ -33,9 +33,15 @@ test("get introduction file new repo", async () => {
 
 test("get page title", async () => {
   expect(
-    await getPageTitle("95b75e204ab3c0966e344a52c7bc9b9011ac345f", "/getting_started")
+    await getPageTitle(
+      "95b75e204ab3c0966e344a52c7bc9b9011ac345f",
+      "/getting_started"
+    )
   ).toEqual("Getting Started");
   expect(
-    await getPageTitle("95b75e204ab3c0966e344a52c7bc9b9011ac345f", "/getting_started/installation")
+    await getPageTitle(
+      "95b75e204ab3c0966e344a52c7bc9b9011ac345f",
+      "/getting_started/installation"
+    )
   ).toEqual("Installation");
 });

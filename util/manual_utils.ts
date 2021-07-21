@@ -57,16 +57,17 @@ export async function getTableOfContents(
 }
 
 export async function getPageTitle(
-  version: string, path: string
+  version: string,
+  path: string
 ): Promise<string> {
   const tableOfContents = await getTableOfContents(version);
   const map = new Map<string, string>();
 
   Object.entries(tableOfContents).forEach(([slug, entry]) => {
     if (entry.children) {
-      Object.entries(entry.children).forEach(([childSlug , name ]) => {
+      Object.entries(entry.children).forEach(([childSlug, name]) => {
         map.set(`/${slug}/${childSlug}`, name);
-      })
+      });
     }
     map.set(`/${slug}`, entry.name);
   });

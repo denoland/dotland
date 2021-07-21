@@ -160,7 +160,7 @@ function Manual(): React.ReactElement {
           "# 404 - Not Found\nWhoops, the page does not seem to exist."
         );
       });
-      getPageTitle(version, path).then(setPageTitle);
+    getPageTitle(version, path).then(setPageTitle);
   }, [sourceURL]);
 
   // SEARCH
