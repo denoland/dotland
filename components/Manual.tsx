@@ -140,6 +140,7 @@ function Manual(): React.ReactElement {
     path,
   ]);
 
+  const [pageTitle, setPageTitle] = useState<string>("");
   useEffect(() => {
     setContent(null);
     fetch(sourceURL)
@@ -151,7 +152,11 @@ function Manual(): React.ReactElement {
         }
         return res.text();
       })
-      .then(setContent)
+      .then((text: string) => {
+        setContent(text);
+        const result = text.match(/^#+ (.*)$/m);
+        setPageTitle(result ? result[1] : "Manual");
+      })
       .catch((e) => {
         console.error("Failed to fetch content:", e);
         setContent(
@@ -224,7 +229,7 @@ function Manual(): React.ReactElement {
   return (
     <div>
       <Head>
-        <title>Manual | Deno</title>
+        <title>{`${pageTitle} | Deno`}</title>
         <link
           rel="preconnect"
           href="https://BH4D9OD16A-dsn.algolia.net"
