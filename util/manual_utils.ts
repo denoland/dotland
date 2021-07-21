@@ -56,6 +56,24 @@ export async function getTableOfContents(
   return await res.json();
 }
 
+export async function getPageTitle(
+  version: string, path: string
+): Promise<string> {
+  const tableOfContents = await getTableOfContents(version);
+  const map = new Map<string, string>();
+
+  Object.entries(tableOfContents).forEach(([slug, entry]) => {
+    if (entry.children) {
+      Object.entries(entry.children).forEach(([childSlug , name ]) => {
+        map.set(`/${slug}/${childSlug}`, name);
+      })
+    }
+    map.set(`/${slug}`, entry.name);
+  });
+
+  return map.get(path) || "";
+}
+
 export function getFileURL(version: string, path: string): string {
   return `${basepath(version)}${path}.md`;
 }

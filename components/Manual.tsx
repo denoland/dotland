@@ -18,6 +18,7 @@ import { parseNameVersion } from "../util/registry_utils";
 import {
   getDocURL,
   getFileURL,
+  getPageTitle,
   getTableOfContents,
   isPreviewVersion,
   TableOfContents,
@@ -152,17 +153,14 @@ function Manual(): React.ReactElement {
         }
         return res.text();
       })
-      .then((text: string) => {
-        setContent(text);
-        const result = text.match(/^#+ (.*)$/m);
-        setPageTitle(result ? result[1] : "");
-      })
+      .then(setContent)
       .catch((e) => {
         console.error("Failed to fetch content:", e);
         setContent(
           "# 404 - Not Found\nWhoops, the page does not seem to exist."
         );
       });
+      getPageTitle(version, path).then(setPageTitle);
   }, [sourceURL]);
 
   // SEARCH
