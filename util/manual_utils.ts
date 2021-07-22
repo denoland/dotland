@@ -31,13 +31,34 @@ export async function getTableOfContents(
   return await res.json();
 }
 
+export async function getTableOfContentsMap(
+  version: string
+): Promise<Map<string, string>> {
+  const map = new Map<string, string>();
+  const tableOfContents = await getTableOfContents(version);
+
+  Object.entries(tableOfContents).forEach(([slug, entry]) => {
+    if (entry.children) {
+      Object.entries(entry.children).forEach(([childSlug, name]) => {
+        map.set(`/${slug}/${childSlug}`, name);
+      });
+    }
+    map.set(`/${slug}`, entry.name);
+  });
+
+  return map;
+}
+
 export function getFileURL(version: string, path: string): string {
   version = "master";
   return `${githubBasepath}${version}${path}.md`;
 }
 
 export function getDocURL(version: string, path: string): string {
+<<<<<<< HEAD
   version = "master";
+=======
+>>>>>>> fff7353f6ea824b9fc81703b3c333b6eae8dcd48
   return `${docpath}${version}${path}.md`;
 }
 
