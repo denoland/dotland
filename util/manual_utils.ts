@@ -40,3 +40,7 @@ export function getDocURL(version: string, path: string): string {
   version = "master";
   return `${docpath}${version}${path}.md`;
 }
+
+export function isPreviewVersion(version: string): boolean {
+  return VERSIONS.cli.find((v) => v === version) === undefined;
+}
