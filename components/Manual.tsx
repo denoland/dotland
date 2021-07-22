@@ -19,6 +19,7 @@ import {
   getDocURL,
   getFileURL,
   getTableOfContents,
+  getTableOfContentsMap,
   isPreviewVersion,
   TableOfContents,
   versions,
@@ -140,6 +141,11 @@ function Manual(): React.ReactElement {
     path,
   ]);
 
+  const [pageTitle, setPageTitle] = useState<string>("");
+  const tableOfContentsMap = useMemo(
+    async () => await getTableOfContentsMap(version),
+    [version]
+  );
   useEffect(() => {
     setContent(null);
     fetch(sourceURL)
@@ -158,6 +164,9 @@ function Manual(): React.ReactElement {
           "# 404 - Not Found\nWhoops, the page does not seem to exist."
         );
       });
+    tableOfContentsMap.then((map: Map<string, string>): void =>
+      setPageTitle(map.get(path) || "")
+    );
   }, [sourceURL]);
 
   // SEARCH
@@ -224,7 +233,9 @@ function Manual(): React.ReactElement {
   return (
     <div>
       <Head>
-        <title>Manual | Deno</title>
+        <title>
+          {pageTitle === "" ? "Manual | Deno" : `${pageTitle} | Manual | Deno`}
+        </title>
         <link
           rel="preconnect"
           href="https://BH4D9OD16A-dsn.algolia.net"

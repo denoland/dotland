@@ -1,6 +1,10 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import { getFileURL, getTableOfContents } from "./manual_utils";
+import {
+  getFileURL,
+  getTableOfContents,
+  getTableOfContentsMap,
+} from "./manual_utils";
 import "isomorphic-unfetch";
 
 /* eslint-env jest */
@@ -29,4 +33,20 @@ test("get introduction file new repo", async () => {
   expect(getFileURL("v1.12.1", "/introduction")).toEqual(
     "https://deno.land/x/manual@v1.12.1/introduction.md"
   );
+});
+
+test("get page title", async () => {
+  expect(
+    await getTableOfContentsMap(
+      "95b75e204ab3c0966e344a52c7bc9b9011ac345f"
+    ).then((tableOfContentsMap) => tableOfContentsMap.get("/getting_started"))
+  ).toEqual("Getting Started");
+
+  expect(
+    await getTableOfContentsMap(
+      "95b75e204ab3c0966e344a52c7bc9b9011ac345f"
+    ).then((tableOfContentsMap) =>
+      tableOfContentsMap.get("/getting_started/installation")
+    )
+  ).toEqual("Installation");
 });
