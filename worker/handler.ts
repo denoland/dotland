@@ -3,7 +3,7 @@
 import { handleRegistryRequest } from "./registry.ts";
 import { handleVSCRequest } from "./vscode.ts";
 
-const REMOTE_URL = "https://deno-website2.now.sh";
+const REMOTE_URL = "https://deno-cn.vercel.app";
 
 export function withLog(
   handler: (request: Request) => Promise<Response>,
