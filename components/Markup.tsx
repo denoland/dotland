@@ -40,7 +40,7 @@ function handleClick(e: React.MouseEvent<HTMLElement>) {
   navigator.clipboard.writeText(anchor.href);
 }
 
-export function scrollEffect() {
+export function scrollEffect(): void {
   useEffect(() => {
     const id = setTimeout(() => {
       let { hash } = location;
@@ -73,7 +73,7 @@ function relativeToAbsolute(base: string, relative: string): string {
 }
 
 export function transformLinkUri(displayURL: string, baseURL: string) {
-  return (uri: string) => {
+  return (uri: string): string => {
     let href = uri;
 
     if (uri.startsWith("#")) return uri;
@@ -103,7 +103,7 @@ export function transformLinkUri(displayURL: string, baseURL: string) {
 }
 
 export function transformImageUri(sourceURL: string) {
-  return (uri: string) => {
+  return (uri: string): string => {
     if (isRelative(uri)) {
       return relativeToAbsolute(sourceURL, uri);
     }
