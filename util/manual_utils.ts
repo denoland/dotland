@@ -79,7 +79,7 @@ export function getFileURL(version: string, path: string): string {
 }
 
 export function getDocURL(version: string, path: string): string {
-  return `${docpath}${version}/docs${path}.md`;
+  return `${docpath}${version}${path}.md`;
 }
 
 export function isPreviewVersion(version: string): boolean {
