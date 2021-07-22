@@ -56,12 +56,11 @@ export async function getTableOfContents(
   return await res.json();
 }
 
-export async function getPageTitle(
-  version: string,
-  path: string
-): Promise<string> {
-  const tableOfContents = await getTableOfContents(version);
+export async function getTableOfContentsMap(
+  version: string
+): Promise<Map<string, string>> {
   const map = new Map<string, string>();
+  const tableOfContents = await getTableOfContents(version);
 
   Object.entries(tableOfContents).forEach(([slug, entry]) => {
     if (entry.children) {
@@ -72,7 +71,7 @@ export async function getPageTitle(
     map.set(`/${slug}`, entry.name);
   });
 
-  return map.get(path) || "";
+  return map;
 }
 
 export function getFileURL(version: string, path: string): string {

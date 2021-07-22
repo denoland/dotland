@@ -18,8 +18,8 @@ import { parseNameVersion } from "../util/registry_utils";
 import {
   getDocURL,
   getFileURL,
-  getPageTitle,
   getTableOfContents,
+  getTableOfContentsMap,
   isPreviewVersion,
   TableOfContents,
   versions,
@@ -142,6 +142,10 @@ function Manual(): React.ReactElement {
   ]);
 
   const [pageTitle, setPageTitle] = useState<string>("");
+  const tableOfContentsMap = useMemo(
+    async () => await getTableOfContentsMap(version),
+    [version]
+  );
   useEffect(() => {
     setContent(null);
     fetch(sourceURL)
@@ -160,7 +164,9 @@ function Manual(): React.ReactElement {
           "# 404 - Not Found\nWhoops, the page does not seem to exist."
         );
       });
-    getPageTitle(version, path).then(setPageTitle);
+    tableOfContentsMap.then((map: Map<string, string>): void =>
+      setPageTitle(map.get(path) || "")
+    );
   }, [sourceURL]);
 
   // SEARCH
