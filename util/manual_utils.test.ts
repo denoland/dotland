@@ -29,7 +29,7 @@ test("get page title", async () => {
     await getTableOfContentsMap(
       "95b75e204ab3c0966e344a52c7bc9b9011ac345f"
     ).then((tableOfContentsMap) => tableOfContentsMap.get("/getting_started"))
-  ).toEqual("Getting Started");
+  ).toEqual("快速入门");
 
   expect(
     await getTableOfContentsMap(
@@ -37,5 +37,5 @@ test("get page title", async () => {
     ).then((tableOfContentsMap) =>
       tableOfContentsMap.get("/getting_started/installation")
     )
-  ).toEqual("Installation");
+  ).toEqual("安装");
 });
