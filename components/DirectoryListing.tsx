@@ -3,7 +3,12 @@
 import React, { useMemo, useState, createRef, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { isReadme, DirListing, getBasePath } from "../util/registry_utils";
+import {
+  isReadme,
+  DirListing,
+  Entry,
+  getBasePath,
+} from "../util/registry_utils";
 
 function DirectoryListing(props: {
   dirListing: DirListing[];
