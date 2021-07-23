@@ -177,8 +177,12 @@ function DirectoryListing(props: DirectoryListingProps): React.ReactElement {
                       <td colSpan={3}>
                         <div className="w-full text-center text-sm px-2 sm:pl-3 md:pl-4 py-1 text-blue-500">
                           {showHiddenItem
-                            ? `Close hidden ${hiddenItems.length === 1 ? "item" : "items"}`
-                            : `Show hidden ${hiddenItems.length} ${hiddenItems.length === 1 ? "item" : "items"}`}
+                            ? `Close hidden ${
+                                hiddenItems.length === 1 ? "item" : "items"
+                              }`
+                            : `Show hidden ${hiddenItems.length} ${
+                                hiddenItems.length === 1 ? "item" : "items"
+                              }`}
                         </div>
                       </td>
                     </tr>
