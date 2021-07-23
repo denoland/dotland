@@ -55,10 +55,7 @@ export function getFileURL(version: string, path: string): string {
 }
 
 export function getDocURL(version: string, path: string): string {
-<<<<<<< HEAD
   version = "master";
-=======
->>>>>>> fff7353f6ea824b9fc81703b3c333b6eae8dcd48
   return `${docpath}${version}${path}.md`;
 }
 
