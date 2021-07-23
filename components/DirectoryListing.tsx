@@ -10,13 +10,15 @@ import {
   getBasePath,
 } from "../util/registry_utils";
 
-function DirectoryListing(props: {
+interface DirectoryListingProps {
   dirListing: DirListing[];
   name: string;
   version: string | undefined;
   path: string;
   repositoryURL?: string | null;
-}): React.ReactElement {
+}
+
+function DirectoryListing(props: DirectoryListingProps): React.ReactElement {
   const { asPath } = useRouter();
   const isStd = asPath.startsWith("/std");
   const children = useMemo(() => {
