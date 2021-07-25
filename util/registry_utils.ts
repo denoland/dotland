@@ -10,6 +10,10 @@ export interface DirEntry {
   target?: string;
 }
 
+export interface Entry extends DirEntry {
+  path?: string;
+}
+
 export function getSourceURL(
   module: string,
   version: string,

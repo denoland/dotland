@@ -3,18 +3,25 @@
 import React, { useMemo, useState, createRef, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { isReadme, DirListing, getBasePath } from "../util/registry_utils";
+import {
+  isReadme,
+  DirListing,
+  Entry,
+  getBasePath,
+} from "../util/registry_utils";
 
-function DirectoryListing(props: {
+interface DirectoryListingProps {
   dirListing: DirListing[];
   name: string;
   version: string | undefined;
   path: string;
   repositoryURL?: string | null;
-}): React.ReactElement {
+}
+
+function DirectoryListing(props: DirectoryListingProps): React.ReactElement {
   const { asPath } = useRouter();
   const isStd = asPath.startsWith("/std");
-  const children = useMemo(() => {
+  const children = useMemo((): Entry[] => {
     const children = props.dirListing
       .filter((d) => d.path.startsWith(props.path + "/"))
       .sort((a, b) => a.path.localeCompare(b.path));
@@ -37,12 +44,34 @@ function DirectoryListing(props: {
   const display =
     query.length > 1
       ? children.filter(
-          (d) =>
+          (d: Entry) =>
             (d.path?.toLowerCase().includes(query.toLowerCase()) ||
               d.name.toLowerCase().includes(query.toLowerCase())) &&
             d.type === "file"
         )
-      : children.filter((d) => d.path === undefined);
+      : children.filter((d: Entry) => d.path === undefined);
+  const displayItems =
+    query.length > 0
+      ? display
+      : display
+          .filter((d: Entry): boolean => !d.name.match(/^\..*$/))
+          .sort((a: Entry, b: Entry) => a.type.localeCompare(b.type));
+  const hiddenItems =
+    query.length > 0
+      ? []
+      : display
+          .filter((d: Entry) => !!d.name.match(/^\..*$/))
+          .sort((a: Entry, b: Entry) => a.type.localeCompare(b.type));
+  const baseURL = getBasePath({
+    isStd: isStd,
+    name: props.name,
+    version: props.version,
+  });
+  const buildEntryURL = (path: string, entry: Entry): string => {
+    return `${baseURL}${path}/${entry.path ? entry.path + "/" : ""}${
+      entry.name
+    }`;
+  };
 
   const searchInput = createRef<HTMLInputElement>();
 
@@ -62,6 +91,8 @@ function DirectoryListing(props: {
     window.addEventListener("keypress", onPress);
     return () => window.removeEventListener("keypress", onPress);
   }, [searchInput]);
+
+  const [showHiddenItem, setShowHiddenItem] = useState<boolean>(false);
 
   return (
     <div className="flex flex-col overflow-x-auto">
@@ -120,106 +151,57 @@ function DirectoryListing(props: {
               </tr>
             </thead>
             <tbody className="bg-white">
-              {display
-                .sort((a, b) => a.type.localeCompare(b.type))
-                .map((entry, i) => {
-                  const href = `${getBasePath({
-                    isStd,
-                    name: props.name,
-                    version: props.version,
-                  })}${props.path}/${entry.path ? entry.path + "/" : ""}${
-                    entry.name
-                  }`;
+              {displayItems.map((entry: Entry, i: number) => {
+                const isLastItem = displayItems.length - 1 === i;
+                return (
+                  <TableRow
+                    key={i}
+                    entry={entry}
+                    href={buildEntryURL(props.path, entry)}
+                    isLastItem={isLastItem}
+                    isHiddenItem={false}
+                    showHiddenItem={showHiddenItem}
+                  />
+                );
+              })}
+              {(() => {
+                if (hiddenItems.length > 0) {
                   return (
                     <tr
-                      key={i}
-                      className={`table-row hover:bg-gray-100${
-                        i !== display.length - 1
-                          ? " border-b border-gray-200"
-                          : ""
-                      }`}
+                      className={`
+                        bg-gray-50 cursor-pointer hover:bg-gray-100 border-t border-gray-200
+                        ${showHiddenItem ? " border-b" : ""}
+                      `}
+                      onClick={() => setShowHiddenItem(!showHiddenItem)}
                     >
-                      <td className="whitespace-no-wrap text-sm leading-5 text-gray-400">
-                        <Link href={href}>
-                          <a
-                            className={`px-2 sm:pl-3 md:pl-4 py-1 w-full block ${
-                              entry.type === "dir"
-                                ? "text-blue-300"
-                                : "text-gray-300"
-                            }`}
-                            tabIndex={-1}
-                          >
-                            <svg
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                              className="w-5 h-5"
-                            >
-                              {(() => {
-                                switch (entry.type) {
-                                  case "file":
-                                    if (isReadme(entry.name)) {
-                                      return (
-                                        <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
-                                      );
-                                    }
-                                    return (
-                                      <path
-                                        fillRule="evenodd"
-                                        d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
-                                        clipRule="evenodd"
-                                      ></path>
-                                    );
-                                  case "dir":
-                                    return (
-                                      <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path>
-                                    );
-                                  // case "symlink":
-                                  //   return (
-                                  //     <path
-                                  //       fillRule="evenodd"
-                                  //       d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z"
-                                  //       clipRule="evenodd"
-                                  //     ></path>
-                                  //   );
-                                }
-                              })()}
-                            </svg>
-                          </a>
-                        </Link>
-                      </td>
-                      <td className="whitespace-no-wrap text-sm text-blue-500 leading-5">
-                        <Link href={href}>
-                          <a className="pl-2 py-1 w-full block truncate">
-                            {entry.path ? (
-                              <span className="font-light">{entry.path}/</span>
-                            ) : (
-                              ""
-                            )}
-                            <span
-                              className={
-                                isReadme(entry.name) || entry.path
-                                  ? "font-medium"
-                                  : ""
-                              }
-                            >
-                              {entry.name}
-                            </span>
-                          </a>
-                        </Link>
-                      </td>
-                      <td className="whitespace-no-wrap text-sm leading-5 text-gray-500 text-right">
-                        <Link href={href}>
-                          <a
-                            className="px-4 py-1 pl-1 w-full h-full block"
-                            tabIndex={-1}
-                          >
-                            {entry.size ? bytesToSize(entry.size) : <>&nbsp;</>}
-                          </a>
-                        </Link>
+                      <td colSpan={3}>
+                        <div className="w-full text-center text-sm px-2 sm:pl-3 md:pl-4 py-1 text-blue-500">
+                          {showHiddenItem
+                            ? `Close hidden ${
+                                hiddenItems.length === 1 ? "item" : "items"
+                              }`
+                            : `Show hidden ${hiddenItems.length} ${
+                                hiddenItems.length === 1 ? "item" : "items"
+                              }`}
+                        </div>
                       </td>
                     </tr>
                   );
-                })}
+                }
+              })()}
+              {hiddenItems.map((entry: Entry, i: number) => {
+                const isLastItem = hiddenItems.length - 1 === i;
+                return (
+                  <TableRow
+                    key={i}
+                    entry={entry}
+                    href={buildEntryURL(props.path, entry)}
+                    isLastItem={isLastItem}
+                    isHiddenItem={true}
+                    showHiddenItem={showHiddenItem}
+                  />
+                );
+              })}
             </tbody>
           </table>
         </div>
@@ -235,4 +217,88 @@ function bytesToSize(bytes: number) {
   return (bytes / Math.pow(1024, i)).toFixed(0) + " " + sizes[i];
 }
 
+interface TableRowProps {
+  key: number;
+  entry: Entry;
+  href: string;
+  isLastItem: boolean;
+  isHiddenItem: boolean;
+  showHiddenItem: boolean;
+}
+
+function TableRow({
+  entry,
+  href,
+  isLastItem,
+  isHiddenItem,
+  showHiddenItem,
+}: TableRowProps): React.ReactElement {
+  return (
+    <tr
+      className={`table-row hover:bg-gray-100${
+        !isLastItem ? " border-b border-gray-200" : ""
+      } ${isHiddenItem && !showHiddenItem ? "hidden" : ""}`}
+    >
+      <td className="whitespace-no-wrap text-sm leading-5 text-gray-400">
+        <Link href={href}>
+          <a
+            className={`px-2 sm:pl-3 md:pl-4 py-1 w-full block ${
+              entry.type === "dir" ? "text-blue-300" : "text-gray-300"
+            }`}
+            tabIndex={-1}
+          >
+            <svg fill="currentColor" viewBox="0 0 20 20" className="w-5 h-5">
+              {(() => {
+                switch (entry.type) {
+                  case "file":
+                    if (isReadme(entry.name)) {
+                      return (
+                        <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
+                      );
+                    }
+                    return (
+                      <path
+                        fillRule="evenodd"
+                        d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
+                        clipRule="evenodd"
+                      ></path>
+                    );
+                  case "dir":
+                    return (
+                      <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path>
+                    );
+                }
+              })()}
+            </svg>
+          </a>
+        </Link>
+      </td>
+      <td className="whitespace-no-wrap text-sm text-blue-500 leading-5">
+        <Link href={href}>
+          <a className="pl-2 py-1 w-full block truncate">
+            {entry.path ? (
+              <span className="font-light">{entry.path}/</span>
+            ) : (
+              ""
+            )}
+            <span
+              className={
+                isReadme(entry.name) || entry.path ? "font-medium" : ""
+              }
+            >
+              {entry.name}
+            </span>
+          </a>
+        </Link>
+      </td>
+      <td className="whitespace-no-wrap text-sm leading-5 text-gray-500 text-right">
+        <Link href={href}>
+          <a className="px-4 py-1 pl-1 w-full h-full block" tabIndex={-1}>
+            {entry.size ? bytesToSize(entry.size) : <>&nbsp;</>}
+          </a>
+        </Link>
+      </td>
+    </tr>
+  );
+}
 export default DirectoryListing;
