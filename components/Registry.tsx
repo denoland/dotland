@@ -68,11 +68,11 @@ function Registry(): React.ReactElement {
   }
 
   function getFormattedDateTime(date: Date) {
-    const format = new Intl.DateTimeFormat(undefined, {
+    const format = new Intl.DateTimeFormat("en", {
       hour: "numeric",
       minute: "numeric",
       second: "numeric",
-      month: "numeric",
+      month: "short",
       day: "numeric",
       year: "numeric",
     });
