@@ -11,7 +11,7 @@ import InlineCode from "../components/InlineCode";
 import Header from "../components/Header";
 import { CookieBanner } from "../components/CookieBanner";
 
-const Home: NextPage<{}> = () => {
+const Home: NextPage = () => {
   const complexExampleProgram = `const listener = Deno.listen({ port: 8000 });
 console.log("http://localhost:8000/");
 for await (const conn of listener) {
@@ -331,7 +331,7 @@ const InstallSection = () => {
   );
 };
 
-export const getStaticProps: GetStaticProps<{}> = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {},
   };
