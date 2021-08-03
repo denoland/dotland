@@ -11,16 +11,16 @@ import InlineCode from "../components/InlineCode";
 import Header from "../components/Header";
 import { CookieBanner } from "../components/CookieBanner";
 
-interface HomeProps {
-  latestStd: string;
-}
-
-const Home: NextPage<HomeProps> = ({ latestStd }) => {
-  const complexExampleProgram = `import { serve } from "https://deno.land/std@${latestStd}/http/server.ts";
-const s = serve({ port: 8000 });
+const Home: NextPage = () => {
+  const complexExampleProgram = `const listener = Deno.listen({ port: 8000 });
 console.log("http://localhost:8000/");
-for await (const req of s) {
-  req.respond({ body: "Hello World\\n" });
+for await (const conn of listener) {
+  (async () => {
+    const requests = Deno.serveHttp(conn);
+    for await (const { respondWith } of requests) {
+      respondWith(new Response("Hello world"));
+    }
+  })();
 }`;
 
   return (
@@ -323,11 +323,9 @@ const InstallSection = () => {
   );
 };
 
-export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   return {
-    props: {
-      latestStd: versions.std[0],
-    },
+    props: {},
   };
 };
 
