@@ -641,6 +641,14 @@ function Version({
 }) {
   return (
     <div className="mt-5 px-4">
+      <Head>
+        <meta
+          name="docsearch:version"
+          content={
+            (version ?? versions[0]) === versions[0] ? "latest" : version
+          }
+        />
+      </Head>
       <label htmlFor="version" className="sr-only">
         Version
       </label>
