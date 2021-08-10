@@ -29,8 +29,7 @@ for await (const conn of listener) {
         <title>Deno - A secure runtime for JavaScript and TypeScript</title>
       </Head>
       <CookieBanner />
-      {
-        /* <div className="bg-blue-500 p-4 text-white flex justify-center text-center">
+      {/* <div className="bg-blue-500 p-4 text-white flex justify-center text-center">
         <div className="max-w-screen-xl">
           <span className="inline">Deno 1.9 is out.</span>
           <span className="block sm:ml-2 sm:inline-block font-semibold">
@@ -39,24 +38,16 @@ for await (const conn of listener) {
             </a>
           </span>
         </div>
-      </div> */
-      }
+      </div> */}
       <div className="bg-white">
         <div className="bg-gray-50 border-b border-gray-200">
           <Header />
-          <div
-            className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center"
-          >
-            <h1
-              className="font-extrabold text-5xl leading-10 tracking-tight text-gray-900"
-            >
+          <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
+            <h1 className="font-extrabold text-5xl leading-10 tracking-tight text-gray-900">
               Deno
             </h1>
-            <h2
-              className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900"
-            >
-              A <strong className="font-semibold">secure</strong> runtime for
-              {" "}
+            <h2 className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900">
+              A <strong className="font-semibold">secure</strong> runtime for{" "}
               <strong className="font-semibold">JavaScript</strong> and{" "}
               <strong className="font-semibold">TypeScript</strong>.
             </h2>
@@ -317,8 +308,7 @@ const InstallSection = () => {
     <>
       <p className="my-4 text-gray-700">
         Deno ships as a single executable with no dependencies. You can install
-        it using the installers below, or download a release binary from the
-        {" "}
+        it using the installers below, or download a release binary from the{" "}
         <a href="https://github.com/denoland/deno/releases" className="link">
           releases page
         </a>
