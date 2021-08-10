@@ -331,10 +331,4 @@ const InstallSection = () => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-  return {
-    props: {},
-  };
-};
-
 export default Home;
