@@ -83,6 +83,11 @@ for await (const conn of listener) {
                 deno.land/std
               </a>
             </li>
+            <li>
+              Has a number of{" "}
+              <a href="https://github.com/denoland/deno/wiki#companies-interested-in-deno" className="link">companies
+                interested in using and exploring Deno</a>
+            </li>
           </ol>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
