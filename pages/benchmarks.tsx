@@ -456,7 +456,8 @@ function Benchmarks(): React.ReactElement {
                     path="cli/tests/testdata/echo_server.ts"
                     name="echo_server.ts"
                   />{" "}
-                  and <SourceLink path="cli/tests/testdata/cat.ts" name="cat.ts" />.
+                  and{" "}
+                  <SourceLink path="cli/tests/testdata/cat.ts" name="cat.ts" />.
                   Smaller is better.
                 </p>
               </div>
