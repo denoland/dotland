@@ -96,7 +96,7 @@ function Benchmarks(): React.ReactElement {
       </Head>
       <CookieBanner />
       <div className="bg-gray-50 min-h-full">
-        <Header subtitle="Continuous Benchmarks" />
+        <Header subtitle="Continuous Benchmarks" widerContent={true} />
         <div className="mb-12">
           <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 mt-8 pb-8">
             <img src="/images/deno_logo_4.gif" className="mb-12 w-32 h-32" />
@@ -109,7 +109,7 @@ function Benchmarks(): React.ReactElement {
             <p className="mt-4">
               You are currently viewing data for{" "}
               {showAll ? "all" : "the most recent"} commits to the{" "}
-              <a href="https://github.com/denoland/deno">master</a>
+              <a href="https://github.com/denoland/deno">main</a>
               branch. You can also view{" "}
               <Link href={!showAll ? "/benchmarks?all" : "/benchmarks"}>
                 <a className="link">{!showAll ? "all" : "the most recent"}</a>
@@ -145,7 +145,7 @@ function Benchmarks(): React.ReactElement {
                 </li>
                 <li>
                   <SourceLink
-                    path="cli/tests/workers_round_robin_bench.ts"
+                    path="cli/tests/workers/bench_round_robin.ts"
                     name="workers_round_robin"
                   />
                 </li>
@@ -318,23 +318,28 @@ function Benchmarks(): React.ReactElement {
                 </p>
                 <ul className="ml-8 list-disc my-2">
                   <li>
-                    <SourceLink path="tools/deno_tcp.ts" name="deno_tcp" /> is a
-                    fake http server that doesn't parse HTTP. It is comparable
-                    to <SourceLink path="tools/node_tcp.js" name="node_tcp" />
+                    <SourceLink path="cli/bench/deno_tcp.ts" name="deno_tcp" />{" "}
+                    is a fake http server that doesn't parse HTTP. It is
+                    comparable to{" "}
+                    <SourceLink path="cli/bench/node_tcp.js" name="node_tcp" />
                   </li>
                   <li>
                     <SourceLink
-                      path="std/http/http_bench.ts"
+                      repo="deno_std"
+                      path="http/bench.ts"
                       name="deno_http"
                     />{" "}
                     is a web server written in TypeScript. It is comparable to{" "}
-                    <SourceLink path="tools/node_http.js" name="node_http" />
+                    <SourceLink
+                      path="cli/bench/node_http.js"
+                      name="node_http"
+                    />
                   </li>
                   <li className="break-words">
-                    deno_core_single and deno_core_multi are two versions of a
-                    minimal fake HTTP server. It blindly reads and writes fixed
-                    HTTP packets. It is comparable to deno_tcp and node_tcp.
-                    This is a standalone executable that uses{" "}
+                    core_http_bin_ops and core_http_json_ops are two versions of
+                    a minimal fake HTTP server. It blindly reads and writes
+                    fixed HTTP packets. It is comparable to deno_tcp and
+                    node_tcp. This is a standalone executable that uses{" "}
                     <a
                       className="link"
                       href="https://crates.io/crates/deno_core"
@@ -343,33 +348,19 @@ function Benchmarks(): React.ReactElement {
                     </a>
                     . The code is in{" "}
                     <SourceLink
-                      path="core/examples/http_bench.rs"
-                      name="http_bench.rs"
+                      path="core/examples/http_bench_json_ops.rs"
+                      name="http_bench_json_ops.rs"
                     />{" "}
                     and{" "}
                     <SourceLink
-                      path="core/examples/http_bench.js"
-                      name="http_bench.js"
-                    />
-                    . single uses{" "}
-                    <a
-                      className="link"
-                      href="https://docs.rs/tokio/latest/tokio/runtime/struct.Builder.html#method.basic_scheduler"
-                    >
-                      tokio::runtime::Builder::basic_scheduler
-                    </a>{" "}
-                    and multi uses{" "}
-                    <a
-                      className="link"
-                      href="https://docs.rs/tokio/latest/tokio/runtime/struct.Builder.html#method.threaded_scheduler"
-                    >
-                      tokio::runtime::Builder::threaded_scheduler
-                    </a>
-                    .
+                      path="core/examples/http_bench_json_ops.js"
+                      name="http_bench_json_ops.js"
+                    />{" "}
+                    for http_bench_json_ops.
                   </li>
                   <li>
                     <SourceLink
-                      path="tools/hyper_hello/hyper_hello.rs"
+                      path="test_util/src/test_server.rs"
                       name="hyper"
                     />{" "}
                     is a Rust HTTP server and represents an upper bound.
@@ -414,31 +405,31 @@ function Benchmarks(): React.ReactElement {
                 <ul className="ml-8 list-disc my-2">
                   <li>
                     <SourceLink
-                      path="tools/deno_tcp_proxy.ts"
+                      path="cli/bench/deno_tcp_proxy.ts"
                       name="deno_proxy_tcp"
                     />{" "}
                     is a fake tcp proxy server that doesn't parse HTTP. It is
                     comparable to{" "}
                     <SourceLink
-                      path="tools/node_tcp_proxy.js"
+                      path="cli/bench/node_tcp_proxy.js"
                       name="node_proxy_tcp"
                     />
                   </li>
                   <li>
                     <SourceLink
-                      path="tools/deno_http_proxy.ts"
+                      path="cli/bench/deno_http_proxy.ts"
                       name="deno_proxy"
                     />{" "}
                     is an HTTP proxy server written in TypeScript. It is
                     comparable to{" "}
                     <SourceLink
-                      path="tools/node_http_proxy.js"
+                      path="cli/bench/node_http_proxy.js"
                       name="node_proxy"
                     />
                   </li>
                   <li>
                     <SourceLink
-                      path="tools/hyper_hello/hyper_hello.rs"
+                      path="test_util/src/test_server.rs"
                       name="hyper"
                     />{" "}
                     is a Rust HTTP server used as the origin for the proxy
@@ -475,7 +466,7 @@ function Benchmarks(): React.ReactElement {
               <div className="mt-8">
                 <a href="#executable-size" id="executable-size">
                   <h5 className="text-lg font-medium tracking-tight hover:underline">
-                    Executable size
+                    File sizes
                   </h5>
                 </a>
                 <BenchmarkOrLoading
@@ -485,7 +476,8 @@ function Benchmarks(): React.ReactElement {
                   yTickFormat={formatMB}
                 />
                 <p className="mt-1">
-                  Deno ships only a single binary. We track its size here.
+                  We track the size of various files here. "deno" is the release
+                  binary.
                 </p>
               </div>
               <div className="mt-8">
@@ -514,6 +506,31 @@ function Benchmarks(): React.ReactElement {
                   </li>
                 </ul>
               </div>
+              <div className="mt-8">
+                <a href="#cargo-deps" id="cargo-deps">
+                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                    Cargo Dependencies
+                  </h5>
+                </a>{" "}
+                <BenchmarkOrLoading data={data} columns={data?.cargoDeps} />
+              </div>
+            </div>
+            <div className="mt-20">
+              <h4 className="text-2xl font-bold tracking-tight">
+                Language Server
+              </h4>
+              <div className="mt-8">
+                <BenchmarkOrLoading
+                  data={data}
+                  columns={data?.lspExecTime}
+                  yLabel={"milliseconds"}
+                />
+                <p className="mt-1">
+                  We track the performance of the Deno language server under
+                  different scenarios to help gauge the overall performance of
+                  the language server.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -541,10 +558,18 @@ function BenchmarkOrLoading(props: {
   );
 }
 
-function SourceLink({ name, path }: { name: string; path: string }) {
+function SourceLink({
+  name,
+  path,
+  repo = "deno",
+}: {
+  name: string;
+  path: string;
+  repo?: string;
+}) {
   return (
     <a
-      href={`https://github.com/denoland/deno/blob/master/${path}`}
+      href={`https://github.com/denoland/${repo}/blob/main/${path}`}
       className="link"
     >
       {name}

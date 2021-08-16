@@ -6,21 +6,21 @@ import Link from "next/link";
 import CodeBlock from "../components/CodeBlock";
 import Footer from "../components/Footer";
 import versions from "../versions.json";
-import { NextPage, GetStaticProps } from "next";
+import { NextPage } from "next";
 import InlineCode from "../components/InlineCode";
 import Header from "../components/Header";
 import { CookieBanner } from "../components/CookieBanner";
 
-interface HomeProps {
-  latestStd: string;
-}
-
-const Home: NextPage<HomeProps> = ({ latestStd }) => {
-  const complexExampleProgram = `import { serve } from "https://deno.land/std@${latestStd}/http/server.ts";
-const s = serve({ port: 8000 });
+const Home: NextPage = () => {
+  const complexExampleProgram = `const listener = Deno.listen({ port: 8000 });
 console.log("http://localhost:8000/");
-for await (const req of s) {
-  req.respond({ body: "Hello World\\n" });
+for await (const conn of listener) {
+  (async () => {
+    const requests = Deno.serveHttp(conn);
+    for await (const { respondWith } of requests) {
+      respondWith(new Response("Hello world"));
+    }
+  })();
 }`;
 
   return (
@@ -29,6 +29,16 @@ for await (const req of s) {
         <title>Deno - A secure runtime for JavaScript and TypeScript</title>
       </Head>
       <CookieBanner />
+      {/* <div className="bg-blue-500 p-4 text-white flex justify-center text-center">
+        <div className="max-w-screen-xl">
+          <span className="inline">Deno 1.9 is out.</span>
+          <span className="block sm:ml-2 sm:inline-block font-semibold">
+            <a href="https://deno.com/blog/v1.9">
+              Read the release notes <span aria-hidden="true">&rarr;</span>
+            </a>
+          </span>
+        </div>
+      </div> */}
       <div className="bg-white">
         <div className="bg-gray-50 border-b border-gray-200">
           <Header />
@@ -41,7 +51,6 @@ for await (const req of s) {
               <strong className="font-semibold">JavaScript</strong> and{" "}
               <strong className="font-semibold">TypeScript</strong>.
             </h2>
-
             <a
               href="https://github.com/denoland/deno/releases/latest"
               className="rounded-full mt-4 px-8 py-2 transition-colors duration-75 ease-in-out bg-blue-500 hover:bg-blue-400 text-white shadow-lg"
@@ -192,10 +201,14 @@ for await (const req of s) {
             ,{" "}
             <a href="https://jspm.io" className="link">
               jspm.io
-            </a>{" "}
-            or{" "}
+            </a>
+            ,{" "}
             <a href="https://www.jsdelivr.com/" className="link">
               jsDelivr
+            </a>{" "}
+            or{" "}
+            <a href="https://esm.sh/" className="link">
+              esm.sh
             </a>
             .
           </p>
@@ -285,8 +298,9 @@ const InstallSection = () => {
         <a href="https://crates.io/crates/deno" className="link">
           Cargo
         </a>
+        :
       </p>
-      <CodeBlock language="bash" code={`cargo install deno`} />
+      <CodeBlock language="bash" code={`cargo install deno --locked`} />
     </div>
   );
 
@@ -315,14 +329,6 @@ const InstallSection = () => {
       </p>
     </>
   );
-};
-
-export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-  return {
-    props: {
-      latestStd: versions.std[0],
-    },
-  };
 };
 
 export default Home;

@@ -1,12 +1,11 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import { parseNameVersion } from "../../util/registry_utils";
+import { parseNameVersion } from "../util/registry_utils.ts";
 
 export const S3_BUCKET =
   "http://deno-registry2-prod-storagebucket-b3a31d16.s3-website-us-east-1.amazonaws.com/";
 
 export async function handleRegistryRequest(url: URL): Promise<Response> {
-  console.log("registry request", url.pathname);
   const entry = parsePathname(url.pathname);
   if (!entry) {
     return new Response("This module entry is invalid: " + url.pathname, {
@@ -26,7 +25,6 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
         }
       );
     }
-    console.log("registry redirect", module, latest);
     return new Response(undefined, {
       headers: {
         Location: `${module === "std" ? "" : "/x"}/${module}@${latest}/${path}`,
@@ -38,7 +36,6 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
     });
   }
   if (version.startsWith("v0.") && module === "std") {
-    console.log("std version prefix", module, version);
     const correctVersion = version.substring(1);
     const versionNumber = parseFloat(correctVersion);
     // For now only block std versions >= 0.43.0
@@ -80,12 +77,7 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
     });
   }
   const remoteUrl = getBackingURL(module, version, path);
-  // @ts-ignore
-  const resp = await fetch(remoteUrl, { cf: { cacheEverything: true } });
-  const resp2 =
-    resp.status === 403 || resp.status === 404
-      ? new Response("404 Not Found", { status: 404 })
-      : new Response(resp.body, resp);
+  const resp2 = await fetchSource(remoteUrl);
 
   // JSX and TSX content type fix
   if (
@@ -124,11 +116,44 @@ export function getBackingURL(module: string, version: string, path: string) {
   return `${S3_BUCKET}${module}/versions/${version}/raw/${path}`;
 }
 
+export async function fetchSource(remoteUrl: string) {
+  let lastErr;
+  for (let i = 0; i < 3; i++) {
+    try {
+      const resp = await fetch(remoteUrl);
+      if (resp.status === 403 || resp.status === 404) {
+        return new Response("404 Not Found", { status: 404 });
+      }
+      if (!resp.ok) throw new TypeError("non 2xx status code returned");
+      return new Response(resp.body, {
+        headers: resp.headers,
+        status: resp.status,
+      });
+    } catch (err) {
+      // TODO(lucacasonato): only retry on known retryable errors
+      console.warn("retrying on proxy error", err);
+      lastErr = err;
+    }
+  }
+  throw lastErr;
+}
+
 export async function getLatestVersion(
   module: string
 ): Promise<string | undefined> {
-  const res = await fetch(`${S3_BUCKET}${module}/meta/versions.json`);
-  if (!res.ok) return undefined;
-  const versions = await res.json();
-  return versions?.latest;
+  let lastErr;
+  for (let i = 0; i < 3; i++) {
+    try {
+      const res = await fetch(`${S3_BUCKET}${module}/meta/versions.json`);
+      if (res.status === 404 || res.status === 403) return undefined;
+      if (!res.ok) throw new TypeError("non 2xx status code returned");
+      const versions = await res.json();
+      return versions?.latest;
+    } catch (err) {
+      // TODO(lucacasonato): only retry on known retryable errors
+      console.warn("retrying on proxy error", err);
+      lastErr = err;
+    }
+  }
+  throw lastErr;
 }

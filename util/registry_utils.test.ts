@@ -10,6 +10,9 @@ import {
   getVersionList,
   getModule,
   fileNameFromURL,
+  findRootReadme,
+  isReadme,
+  fileTypeFromURL,
 } from "./registry_utils";
 import "isomorphic-unfetch";
 
@@ -92,7 +95,7 @@ const versionMeta: VersionMetaInfo = {
 
 test("getRepositoryURL", () => {
   expect(getRepositoryURL(versionMeta, "/README.md")).toEqual(
-    "https://github.com/luca-rand/testing/tree/0.0.8/README.md"
+    "https://github.com/luca-rand/testing/blob/0.0.8/README.md"
   );
 });
 
@@ -117,7 +120,96 @@ test("getModule", async () => {
   });
 });
 
+test("fileTypeFromURL", () => {
+  const tests: Array<[string, string | undefined]> = [
+    ["main.ts", "typescript"],
+    ["lib.js", "javascript"],
+    ["Component.tsx", "tsx"],
+    ["Component.jsx", "jsx"],
+    ["data.json", "json"],
+    ["Cargo.toml", "toml"],
+    ["Cargo.lock", "toml"],
+    ["mod.rs", "rust"],
+    ["main.py", "python"],
+    ["lib.wasm", "wasm"],
+    ["Makefile", "makefile"],
+    ["Dockerfile", "dockerfile"],
+    ["build.Dockerfile", "dockerfile"],
+    ["config.yml", "yaml"],
+    ["config.yaml", "yaml"],
+    ["index.html", "html"],
+    ["index.htm", "html"],
+    ["readme.md", "markdown"],
+    ["readme.markdown", "markdown"],
+    ["readme.mdown", "markdown"],
+    ["readme.mkdn", "markdown"],
+    ["readme.mdwn", "markdown"],
+    ["readme.mkd", "markdown"],
+    ["readme.org", "org"],
+    ["image.png", "image"],
+    ["image.jpg", "image"],
+    ["image.jpeg", "image"],
+    ["image.svg", "image"],
+    ["file.unknown", undefined],
+  ];
+  for (const [name, expectedType] of tests) {
+    expect(fileTypeFromURL(name)).toBe(expectedType);
+  }
+});
+
 test("fileNameFromURL", () => {
   expect(fileNameFromURL("a/path/to/%5Bfile%5D.txt")).toBe("[file].txt");
   expect(fileNameFromURL("a/path/to/file.tsx")).toBe("file.tsx");
+});
+
+test("findRootReadme", () => {
+  const tests: Array<[string, boolean]> = [
+    ["/README", true],
+    ["/README.md", true],
+    ["/README.org", true],
+    ["/readme.markdown", true],
+    ["/readme.org", true],
+    ["/README.mdown", true],
+    ["/readme.mkdn", true],
+    ["/readme.mdwn", true],
+    ["/README.mkd", true],
+    ["/README.mkdown", false],
+    ["/README.markdn", false],
+    ["/READTHIS.md", false],
+    ["/READTHIS.org", false],
+    ["/docs/README.md", true],
+    ["/docs/README.org", true],
+    ["/.github/README.md", true],
+    ["/.github/README.org", true],
+  ];
+
+  for (const [path, expectedToBeRootReadme] of tests) {
+    const rootReadme = findRootReadme([{ path, type: "file", size: 100 }]);
+    if (expectedToBeRootReadme) {
+      expect(rootReadme).not.toBe(undefined);
+    } else {
+      expect(rootReadme).toBe(undefined);
+    }
+  }
+});
+
+test("isReadme", () => {
+  const tests: Array<[string, boolean]> = [
+    ["README", true],
+    ["README.md", true],
+    ["README.org", true],
+    ["readme.markdown", true],
+    ["readme.org", true],
+    ["README.mdown", true],
+    ["readme.mkdn", true],
+    ["readme.mdwn", true],
+    ["README.mkd", true],
+    ["README.mkdown", false],
+    ["README.markdn", false],
+    ["READTHIS.md", false],
+    ["READTHIS.org", false],
+  ];
+  for (const [path, expectedToBeReadme] of tests) {
+    expect([path, isReadme(path)]).toEqual([path, expectedToBeReadme]);
+  }
 });

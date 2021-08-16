@@ -1,11 +1,28 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import { handleRegistryRequest } from "./registry";
-import { handleVSCRequest } from "./vscode";
+import { handleRegistryRequest } from "./registry.ts";
+import { handleVSCRequest } from "./vscode.ts";
 
 const REMOTE_URL = "https://deno-website2.now.sh";
 
-export async function handleRequest(request: Request) {
+export function withLog(
+  handler: (request: Request) => Promise<Response>,
+): (request: Request) => Promise<Response> {
+  return async (req) => {
+    let res: Response;
+    try {
+      res = await handler(req);
+    } catch (err) {
+      console.error(err);
+      res = new Response("500 Internal Server Error\nPlease try again later.", {
+        status: 500,
+      });
+    }
+    return res;
+  };
+}
+
+export function handleRequest(request: Request) {
   const accept = request.headers.get("accept");
   const isHtml = accept && accept.indexOf("html") >= 0;
 
@@ -13,6 +30,17 @@ export async function handleRequest(request: Request) {
 
   if (url.pathname === "/v1") {
     return Response.redirect("https://deno.land/posts/v1", 301);
+  }
+
+  if (url.pathname === "/posts") {
+    return Response.redirect("https://deno.com/blog", 307);
+  }
+
+  if (url.pathname.startsWith("/posts/")) {
+    return Response.redirect(
+      `https://deno.com/blog/${url.pathname.substring("/posts/".length)}`,
+      307,
+    );
   }
 
   if (url.pathname.startsWith("/typedoc")) {
@@ -23,8 +51,8 @@ export async function handleRequest(request: Request) {
     return handleVSCRequest(url);
   }
 
-  const isRegistryRequest =
-    url.pathname.startsWith("/std") || url.pathname.startsWith("/x/");
+  const isRegistryRequest = url.pathname.startsWith("/std") ||
+    url.pathname.startsWith("/x/");
 
   if (isRegistryRequest) {
     if (isHtml) {
@@ -43,7 +71,7 @@ export async function handleRequest(request: Request) {
 const ALT_LINENUMBER_MATCHER = /(.*):(\d+):\d+$/;
 
 export function extractAltLineNumberReference(
-  url: string
+  url: string,
 ): { rest: string; line: number } | null {
   const matches = ALT_LINENUMBER_MATCHER.exec(url);
   if (matches === null) return null;
@@ -53,14 +81,26 @@ export function extractAltLineNumberReference(
   };
 }
 
-function proxyFile(url: URL, remoteUrl: string, request: Request) {
+async function proxyFile(
+  url: URL,
+  remoteUrl: string,
+  request: Request,
+): Promise<Response> {
   const init = {
     method: request.method,
     headers: request.headers,
   };
   const urlR = remoteUrl + url.pathname;
-  console.log(`Proxy ${url} to ${urlR}`);
   const modifiedRequest = new Request(urlR, init);
-  console.log("modifiedRequest", modifiedRequest.url);
-  return fetch(modifiedRequest);
+  let lastErr;
+  for (let i = 0; i < 3; i++) {
+    try {
+      return await fetch(modifiedRequest);
+    } catch (err) {
+      // TODO(lucacasonato): only retry on known retryable errors
+      console.warn("retrying on proxy error", err);
+      lastErr = err;
+    }
+  }
+  throw lastErr;
 }

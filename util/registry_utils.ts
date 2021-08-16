@@ -10,6 +10,10 @@ export interface DirEntry {
   target?: string;
 }
 
+export interface Entry extends DirEntry {
+  path?: string;
+}
+
 export function getSourceURL(
   module: string,
   version: string,
@@ -25,13 +29,14 @@ function pathJoin(...parts: string[]) {
 
 export function getRepositoryURL(
   meta: VersionMetaInfo,
-  path: string
+  path: string,
+  type = "blob"
 ): string | undefined {
   switch (meta.uploadOptions.type) {
     case "github":
       return `https://github.com/${pathJoin(
         meta.uploadOptions.repository,
-        "tree",
+        type,
         meta.uploadOptions.ref,
         meta.uploadOptions.subdir ?? "",
         path
@@ -64,7 +69,9 @@ export async function getVersionMeta(
   module: string,
   version: string
 ): Promise<VersionMetaInfo | null> {
-  const url = `${CDN_ENDPOINT}${module}/versions/${version}/meta/meta.json`;
+  const url = `${CDN_ENDPOINT}${module}/versions/${encodeURIComponent(
+    version
+  )}/meta/meta.json`;
   const res = await fetch(url, {
     headers: {
       accept: "application/json",
@@ -106,7 +113,9 @@ export async function getVersionDeps(
   module: string,
   version: string
 ): Promise<VersionDeps | null> {
-  const url = `${CDN_ENDPOINT}${module}/versions/${version}/meta/deps_v2.json`;
+  const url = `${CDN_ENDPOINT}${module}/versions/${encodeURIComponent(
+    version
+  )}/meta/deps_v2.json`;
   const res = await fetch(url, {
     headers: {
       accept: "application/json",
@@ -257,9 +266,13 @@ export async function getBuild(id: string): Promise<Build> {
 }
 
 export function parseNameVersion(nameVersion: string): [string, string] {
-  const [name, version] = nameVersion.split("@", 2);
-  return [name, version];
+  const [name, ...version] = nameVersion.split("@");
+  return [name, version.join("@")];
 }
+
+const markdownExtension = "(?:markdown|mdown|mkdn|mdwn|mkd|md)";
+const orgExtension = "org";
+const readmeBaseRegex = `readme(?:\\.(${markdownExtension}|${orgExtension}))?`;
 
 export function fileTypeFromURL(filename: string): string | undefined {
   const f = filename.toLowerCase();
@@ -285,15 +298,17 @@ export function fileTypeFromURL(filename: string): string | undefined {
     return "wasm";
   } else if (f.toLocaleLowerCase().endsWith("makefile")) {
     return "makefile";
-  } else if (f.endsWith(".dockerfile") || f.endsWith("Dockerfile")) {
+  } else if (f.endsWith(".dockerfile") || f.endsWith("dockerfile")) {
     return "dockerfile";
   } else if (f.endsWith(".yml") || f.endsWith(".yaml")) {
     return "yaml";
   } else if (f.endsWith(".htm") || f.endsWith(".html")) {
     return "html";
-  } else if (f.endsWith(".md")) {
+  } else if (f.match(`\\.${markdownExtension}$`)) {
     return "markdown";
-  } else if (f.endsWith(".png") || f.endsWith(".jpg") || f.endsWith(".jpeg")) {
+  } else if (f.match(`\\.${orgExtension}$`)) {
+    return "org";
+  } else if (f.match(/\.(png|jpe?g|svg)/)) {
     return "image";
   }
 }
@@ -319,22 +334,11 @@ export function denoDocAvailableForURL(filename: string): boolean {
 export function findRootReadme(
   directoryListing: DirListing[] | undefined
 ): DirEntry | undefined {
-  const listing =
-    directoryListing?.find(
-      (d) =>
-        d.path.toLowerCase() === "/readme.md" ||
-        d.path.toLowerCase() === "/readme"
-    ) ??
-    directoryListing?.find(
-      (d) =>
-        d.path.toLowerCase() === "/docs/readme.md" ||
-        d.path.toLowerCase() === "/docs/readme"
-    ) ??
-    directoryListing?.find(
-      (d) =>
-        d.path.toLowerCase() === "/.github/readme.md" ||
-        d.path.toLowerCase() === "/.github/readme"
-    );
+  const listing = directoryListing?.find((d) =>
+    new RegExp(`^\\/(docs\\/|\\.github\\/)?${readmeBaseRegex}$`, "i").test(
+      d.path
+    )
+  );
   return listing
     ? {
         name: listing.path.substring(1),
@@ -345,10 +349,7 @@ export function findRootReadme(
 }
 
 export function isReadme(filename: string): boolean {
-  return (
-    filename.toLowerCase() === "readme.md" ||
-    filename.toLowerCase() === "readme"
-  );
+  return new RegExp(`^${readmeBaseRegex}$`, "i").test(filename);
 }
 
 export type Dep = { name: string; children: Dep[] };
@@ -521,4 +522,18 @@ export async function getStats(): Promise<{
   }
 
   return data.data;
+}
+
+export function getBasePath({
+  isStd,
+  name,
+  version,
+}: {
+  isStd: boolean;
+  name: string;
+  version?: string;
+}): string {
+  return `${isStd ? "" : "/x"}/${name}${
+    version ? `@${encodeURIComponent(version)}` : ""
+  }`;
 }
