@@ -221,6 +221,18 @@
     "license": "Restricted use"
   },
   {
+    "date": "2021-01-06",
+    "image": "/images/deno_rick.png",
+    "title": "Rick Deno",
+    "alt": "deno in the eyes of Rick from Rick&Morty",
+    "artist": {
+      "name": "Loockeeer",
+      "profile_image": "https://avatars2.githubusercontent.com/u/34001773",
+      "github": "loockeeer"
+    },
+    "license": "MIT"
+  },
+  {
     "date": "2021-06-08",
     "image": "/images/Deno_Web_Sockets.svg",
     "title": "Deno Web Sock(pupp)ets",
