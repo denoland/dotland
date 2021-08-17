@@ -40,5 +40,11 @@
     "english": "法语",
     "link": "https://deno-fr.vercel.app/",
     "repository": "https://github.com/Ayfri/deno_website2_fr"
+  },
+  {
+    "language": "فارسی",
+    "english": "Persian",
+    "link": "https://deno-fa.vercel.app/",
+    "repository": "https://github.com/ahgilak/deno_website2"
   }
 ]
