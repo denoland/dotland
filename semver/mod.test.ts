@@ -2,7 +2,10 @@
 // Copyright 2021 the Deno authors. All rights reserved. MIT license
 /// <reference path="./test.d.ts" />
 import { re_pathname, redirect } from "./mod.ts";
-import { assert, equal, assertEquals } from "https://deno.land/std/testing/asserts.ts";
+import {
+  assertStrictEquals,
+  assertNotStrictEquals
+} from "https://deno.land/std/testing/asserts.ts";
 
 Deno.test("Regular Expression", () => {
   const xs = ["", "x/"];
@@ -38,35 +41,35 @@ Deno.test("Regular Expression", () => {
               // Valid
               //// Single
               let s = `/${x}${n}@${o}${v}${r}${p}`;
-              assert(re_pathname.exec(s) !== null);
+              assertNotStrictEquals(re_pathname.exec(s), null);
               //// Range
               s = `/${x}${n}@${v}${r}-${v}${r}${p}`;
-              assert(re_pathname.exec(s) !== null);
+              assertNotStrictEquals(re_pathname.exec(s), null);
               //// And
               s = `/${x}${n}@${o}${v}${r} ${o}${v}${r}${p}`;
-              assert(re_pathname.exec(s) !== null);
+              assertNotStrictEquals(re_pathname.exec(s), null);
               //// Or
               s = `/${x}${n}@${o}${v}${r} || ${o}${v}${r}${p}`;
-              assert(re_pathname.exec(s) !== null);
+              assertNotStrictEquals(re_pathname.exec(s), null);
 
               // Invalid
               //// Double version specifiers
               s = `/${x}${n}@${o}${v}${r}@${o}${v}${r}${p}`;
-              assert(re_pathname.exec(s) === null);
+              assertStrictEquals(re_pathname.exec(s), null);
 
               //// No package name
               s = `/${x}@${o}${v}${r}${p}`;
-              assert(re_pathname.exec(s) === null);
+              assertStrictEquals(re_pathname.exec(s), null);
 
               //// No version specifier
               s = `/${x}${n}@${p}`;
-              assert(re_pathname.exec(s) === null);
+              assertStrictEquals(re_pathname.exec(s), null);
               s = `/${x}${n}${p}`;
-              assert(re_pathname.exec(s) === null);
+              assertStrictEquals(re_pathname.exec(s), null);
 
               //// No package and no name version specifier
               s = `/${x}${p}`;
-              assert(re_pathname.exec(s) === null);
+              assertStrictEquals(re_pathname.exec(s), null);
             }
           }
         }
@@ -89,25 +92,25 @@ Deno.test("Redirect", async () => {
       "0.1.0",
       "0.1.0-beta.1",
       "0.1.0-beta.0",
-      "0.1.0-alpha"
-    ]
+      "0.1.0-alpha",
+    ];
   }
   const name = "abc";
-  const version = "v1.2.3"
-  const path = "/mod.ts"
+  const version = "v1.2.3";
+  const path = "/mod.ts";
   let ranges = [
     "1.2.x",
     ">=1 <2",
     "^1.2",
     "^1.2.2",
     ">3 || <= 2.0.x",
-  ]
+  ];
   for (const range of ranges) {
-    const encoded = encodeURIComponent(range)
-    const input = `https://example.com/x/${name}@${encoded}${path}`
-    const output = await redirect(input, fetchTags)
-    const expected = `https://deno.land/x/${name}@${version}${path}`
-    assertEquals(output, expected)
+    const encoded = encodeURIComponent(range);
+    const input = `https://example.com/x/${name}@${encoded}${path}`;
+    const output = await redirect(input, fetchTags);
+    const expected = `https://deno.land/x/${name}@${version}${path}`;
+    assertStrictEquals(output, expected);
   }
   ranges = [
     "abc",
@@ -115,14 +118,13 @@ Deno.test("Redirect", async () => {
     "~0.0.1",
     ">=100",
     "~~",
-    ">"
-  ]
+    ">",
+  ];
   for (const range of ranges) {
-    const encoded = encodeURIComponent(range)
-    const input = `https://example.com/x/${name}@${encoded}${path}`
-    const output = await redirect(input, fetchTags)
-    const expected = `https://deno.land/x/${name}@${encoded}${path}`
-    assertEquals(output, expected)
+    const encoded = encodeURIComponent(range);
+    const input = `https://example.com/x/${name}@${encoded}${path}`;
+    const output = await redirect(input, fetchTags);
+    const expected = `https://deno.land/x/${name}@${encoded}${path}`;
+    assertStrictEquals(output, expected);
   }
-})
-
+});
