@@ -52,8 +52,14 @@ for await (const conn of listener) {
               <strong className="font-semibold">TypeScript</strong>.
             </h2>
             <a
+              href="/#installation"
+              className="rounded-full mt-8 px-8 py-2 transition-colors duration-75 ease-in-out bg-blue-500 hover:bg-blue-400 text-white text-lg shadow-lg"
+            >
+              Install
+            </a>
+            <a
               href="https://github.com/denoland/deno/releases/latest"
-              className="rounded-full mt-4 px-8 py-2 transition-colors duration-75 ease-in-out bg-blue-500 hover:bg-blue-400 text-white shadow-lg"
+              className="mt-4"
             >
               {versions.cli[0]}
             </a>
