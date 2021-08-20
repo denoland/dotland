@@ -1,8 +1,24 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Transition from "./Transition";
+
+/**
+ * Indicates if the "Deploy" link in the header
+ * should be displayed to the user.
+ */
+function displayDeploy() {
+  const showDeploy = localStorage.getItem("showDeploy");
+  if (showDeploy !== null) {
+    return showDeploy === "true";
+  } else {
+    // 1% probability
+    const showDeploy = Math.random() < 1 / 100;
+    localStorage.setItem("showDeploy", String(showDeploy));
+    return showDeploy;
+  }
+}
 
 function Header({
   subtitle,
@@ -12,6 +28,8 @@ function Header({
   widerContent?: boolean;
 }): React.ReactElement {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showDeploy, setShowDeploy] = useState(false);
+  useEffect(() => setShowDeploy(displayDeploy()), []);
 
   return (
     <div className="relative py-6 z-10">
@@ -58,9 +76,19 @@ function Header({
           </button>
         </div>
         <div className="hidden lg:flex md:ml-10 items-end">
+<<<<<<< HEAD
           <Link href="/#installation">
             <a className="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
               安装
+=======
+          <Link href="https://deno.com/deploy">
+            <a
+              className={`font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out ${
+                showDeploy ? "" : "hidden"
+              }`}
+            >
+              Deploy
+>>>>>>> 4457c4b774371c148790cb51f03cb33d40cd2a38
             </a>
           </Link>
           <Link href="/manual">
@@ -167,9 +195,19 @@ function Header({
                 </div>
               </div>
               <div className="px-2 pt-4 pb-3">
+<<<<<<< HEAD
                 <Link href="/#installation">
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
                     安装
+=======
+                <Link href="https://deno.com/deploy">
+                  <a
+                    className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out ${
+                      showDeploy ? "" : "hidden"
+                    }`}
+                  >
+                    Deploy
+>>>>>>> 4457c4b774371c148790cb51f03cb33d40cd2a38
                   </a>
                 </Link>
                 <Link href="/manual">
