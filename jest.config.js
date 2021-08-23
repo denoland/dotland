@@ -6,6 +6,13 @@ module.exports = {
     "**/__tests__/**/*.+(ts|tsx|js)",
     "**/?(*.)+(spec|test).+(ts|tsx|js)",
   ],
+  globals: {
+    "ts-jest": {
+      tsconfig: {
+        jsx: "react",
+      },
+    },
+  },
   transform: {
     "^.+\\.(ts|tsx)$": "ts-jest",
   },
