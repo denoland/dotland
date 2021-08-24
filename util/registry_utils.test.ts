@@ -13,6 +13,8 @@ import {
   findRootReadme,
   isReadme,
   fileTypeFromURL,
+  VersionInfo,
+  resolveSemver
 } from "./registry_utils";
 import "isomorphic-unfetch";
 
@@ -213,3 +215,52 @@ test("isReadme", () => {
     expect([path, isReadme(path)]).toEqual([path, expectedToBeReadme]);
   }
 });
+
+test("resolveSemver", async () => {
+  async function getVersionList(_: string): Promise<VersionInfo> {
+    return {
+      isLegacy: true,
+      latest: "2.1.1",
+      versions:[
+        "2.1.1",
+        "2",
+        "v1.2.3",
+        "v1",
+        "v0.2.0",
+        "v0.2.0-beta.1",
+        "v0.2.0-beta.0",
+        "v0.2.0-alpha",
+        "0.1.0",
+        "0.1.0-beta.1",
+        "0.1.0-beta.0",
+        "0.1.0-alpha",
+      ]
+    };
+  }
+  const module = "abc";
+  let ranges = [
+    "1.2.x",
+    ">=1 <2",
+    "^1.2",
+    "^1.2.2",
+    ">3 || <= 2.0.x",
+  ];
+  for (const range of ranges) {
+    const expected = "v1.2.3";
+    const actual = await resolveSemver(module, range, getVersionList);
+    expect(actual).toBe(expected)
+  }
+  ranges = [
+    "abc",
+    ">>1",
+    "~0.0.1",
+    ">=100",
+    "~~",
+    ">",
+  ];
+  for (const range of ranges) {
+    const expected = range
+    const actual = await resolveSemver(module, range, getVersionList);
+    expect(actual).toBe(expected)
+  }
+})

@@ -1,4 +1,5 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+import semver from "semver";
 
 const CDN_ENDPOINT = "https://cdn.deno.land/";
 const API_ENDPOINT = "https://api.deno.land/";
@@ -536,4 +537,20 @@ export function getBasePath({
   return `${isStd ? "" : "/x"}/${name}${
     version ? `@${encodeURIComponent(version)}` : ""
   }`;
+}
+
+export async function resolveSemver(module: string, version: string, _getVersionList = getVersionList): Promise<string> {
+  const loose = true
+  const tags = (await _getVersionList(module))
+    ?.versions
+    .filter((tag: string) => {
+      return semver.valid(tag, loose) && semver.satisfies(tag, version, loose);
+    }).sort((l, r) => {
+      return semver.compare(l, r, loose);
+    });
+  if (tags && tags.length > 0) {
+    return tags[tags.length - 1];
+  } else {
+    return version
+  }
 }
