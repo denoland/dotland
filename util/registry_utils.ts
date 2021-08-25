@@ -1,5 +1,5 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
-import semver from "semver";
+import semver from "https://deno.land/x/semver@v1.4.0/mod.ts";
 
 const CDN_ENDPOINT = "https://cdn.deno.land/";
 const API_ENDPOINT = "https://api.deno.land/";
