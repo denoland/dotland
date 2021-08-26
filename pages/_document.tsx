@@ -53,11 +53,6 @@ export default class DenoDocDocument extends Document {
             content="Deno, DenoLand, Development, Javascript, TypeScript"
           />
           <link rel="stylesheet" href="/fonts/inter/inter.css" />
-          <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="/images/icons/apple-touch-icon-180x180.png"
-          />
           <link rel="manifest" href="/site.webmanifest" />
         </Head>
         <body>
