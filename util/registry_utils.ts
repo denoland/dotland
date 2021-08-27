@@ -278,7 +278,7 @@ export function fileTypeFromURL(filename: string): string | undefined {
   const f = filename.toLowerCase();
   if (f.endsWith(".ts")) {
     return "typescript";
-  } else if (f.endsWith(".js")) {
+  } else if (f.endsWith(".js") || f.endsWith(".mjs") || f.endsWith(".cjs")) {
     return "javascript";
   } else if (f.endsWith(".tsx")) {
     return "tsx";
