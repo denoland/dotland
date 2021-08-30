@@ -167,19 +167,10 @@ for await (const conn of listener) {
             </a>
           </Link>
           <p className="my-4 text-gray-700">
-<<<<<<< HEAD
             除了提供 Deno 运行时之外，Deno 还提供了标准模块，这些模块由 Deno
-            核心团队维护和审核以保证可使用特定的 Deno 版本。这些模块和 Deno
-            的源码一起放在{" "}
-            <a href="https://github.com/denoland/deno" className="link">
-              denoland/deno
-=======
-            Next to the Deno runtime, Deno also provides a list of audited
-            standard modules that are reviewed by the Deno maintainers and are
-            guaranteed to work with a specific Deno version. These live in the{" "}
+            核心团队维护和审核以保证可使用特定的 Deno 版本。这些模块在{" "}
             <a href="https://github.com/denoland/deno_std" className="link">
               denoland/deno_std
->>>>>>> 331847999efa066a94655c349f0ed6185e320be5
             </a>{" "}
             仓库。
           </p>
