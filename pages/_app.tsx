@@ -4,7 +4,7 @@ import React from "react";
 import App from "next/app";
 import Head from "next/head";
 import "../components/app.css";
-import "../components/markdown.css";
+import "../components/markup.css";
 import "../components/docsearch.css";
 import "preact/debug";
 
@@ -14,7 +14,8 @@ export default class DenoWebsiteApp extends App {
     return (
       <div className="h-screen">
         <Head>
-          <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+          <link rel="icon" href="/favicon.ico" sizes="32x32" />
+          <link rel="icon" href="/logo.svg" type="image/svg+xml" />
         </Head>
         <Component {...pageProps} />
       </div>

@@ -6,41 +6,39 @@ import Link from "next/link";
 import CodeBlock from "../components/CodeBlock";
 import Footer from "../components/Footer";
 import versions from "../versions.json";
-import { NextPage, GetStaticProps } from "next";
+import { NextPage } from "next";
 import InlineCode from "../components/InlineCode";
 import Header from "../components/Header";
 import { CookieBanner } from "../components/CookieBanner";
 
-interface HomeProps {
-  latestStd: string;
-}
-
-const Home: NextPage<HomeProps> = ({ latestStd }) => {
-  const complexExampleProgram = `import { serve } from "https://deno.land/std@${latestStd}/http/server.ts";
-const s = serve({ port: 8000 });
+const Home: NextPage = () => {
+  const complexExampleProgram = `const listener = Deno.listen({ port: 8000 });
 console.log("http://localhost:8000/");
-for await (const req of s) {
-  req.respond({ body: "Hello World\\n" });
+for await (const conn of listener) {
+  (async () => {
+    const requests = Deno.serveHttp(conn);
+    for await (const { respondWith } of requests) {
+      respondWith(new Response("Hello world"));
+    }
+  })();
 }`;
 
   return (
     <>
       <Head>
-        <title>Deno - A secure runtime for JavaScript and TypeScript</title>
+        <title>Deno - A modern runtime for JavaScript and TypeScript</title>
       </Head>
       <CookieBanner />
-      <div className="bg-blue-500 p-4 text-white flex justify-center text-center">
+      {/* <div className="bg-blue-500 p-4 text-white flex justify-center text-center">
         <div className="max-w-screen-xl">
-          <span className="inline">Deno 1.8 has been released.</span>
+          <span className="inline">Deno 1.9 is out.</span>
           <span className="block sm:ml-2 sm:inline-block font-semibold">
-            <Link href="/posts/v1.8">
-              <a>
-                Read the notes <span aria-hidden="true">&rarr;</span>
-              </a>
-            </Link>
+            <a href="https://deno.com/blog/v1.9">
+              Read the release notes <span aria-hidden="true">&rarr;</span>
+            </a>
           </span>
         </div>
-      </div>
+      </div> */}
       <div className="bg-white">
         <div className="bg-gray-50 border-b border-gray-200">
           <Header />
@@ -49,10 +47,22 @@ for await (const req of s) {
               Deno
             </h1>
             <h2 className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900">
-              A <strong className="font-semibold">secure</strong> runtime for{" "}
+              A <strong className="font-semibold">modern</strong> runtime for{" "}
               <strong className="font-semibold">JavaScript</strong> and{" "}
               <strong className="font-semibold">TypeScript</strong>.
             </h2>
+            <a
+              href="/#installation"
+              className="rounded-full mt-8 px-8 py-2 transition-colors duration-75 ease-in-out bg-blue-500 hover:bg-blue-400 text-white text-lg shadow-lg"
+            >
+              Install
+            </a>
+            <a
+              href="https://github.com/denoland/deno/releases/latest"
+              className="mt-4"
+            >
+              {versions.cli[0]}
+            </a>
           </div>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
@@ -164,10 +174,9 @@ for await (const req of s) {
           <p className="my-4 text-gray-700">
             Next to the Deno runtime, Deno also provides a list of audited
             standard modules that are reviewed by the Deno maintainers and are
-            guaranteed to work with a specific Deno version. These live
-            alongside the Deno source code in the{" "}
-            <a href="https://github.com/denoland/deno" className="link">
-              denoland/deno
+            guaranteed to work with a specific Deno version. These live in the{" "}
+            <a href="https://github.com/denoland/deno_std" className="link">
+              denoland/deno_std
             </a>{" "}
             repository.
           </p>
@@ -325,14 +334,6 @@ const InstallSection = () => {
       </p>
     </>
   );
-};
-
-export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-  return {
-    props: {
-      latestStd: versions.std[0],
-    },
-  };
 };
 
 export default Home;

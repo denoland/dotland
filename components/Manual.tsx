@@ -1,25 +1,27 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
 import React, {
-  useState,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
-  useCallback,
+  useState,
 } from "react";
 import { createPortal } from "react-dom";
 import Head from "next/head";
 import Link from "next/link";
-import { useRouter, Router } from "next/router";
+import { Router, useRouter } from "next/router";
 // @ts-expect-error because @docsearch/react does not have types
 import { DocSearchModal, useDocSearchKeyboardEvents } from "@docsearch/react";
 import versionMeta from "../versions.json";
 import { parseNameVersion } from "../util/registry_utils";
 import {
-  TableOfContents,
-  getTableOfContents,
-  getFileURL,
   getDocURL,
+  getFileURL,
+  getTableOfContents,
+  getTableOfContentsMap,
+  isPreviewVersion,
+  TableOfContents,
   versions,
 } from "../util/manual_utils";
 import Markdown from "./Markdown";
@@ -46,7 +48,7 @@ function Manual(): React.ReactElement {
   const { version, path } = useMemo(() => {
     const [identifier, ...pathParts] = (query.rest as string[]) ?? [];
     const path = pathParts.length === 0 ? "" : `/${pathParts.join("/")}`;
-    const version = parseNameVersion(identifier ?? "")[1] ?? versionMeta.cli[0];
+    const version = parseNameVersion(identifier ?? "")[1] || versionMeta.cli[0];
     return { version, path: path || "/introduction" };
   }, [query]);
 
@@ -139,6 +141,11 @@ function Manual(): React.ReactElement {
     path,
   ]);
 
+  const [pageTitle, setPageTitle] = useState<string>("");
+  const tableOfContentsMap = useMemo(
+    async () => await getTableOfContentsMap(version),
+    [version]
+  );
   useEffect(() => {
     setContent(null);
     fetch(sourceURL)
@@ -157,6 +164,9 @@ function Manual(): React.ReactElement {
           "# 404 - Not Found\nWhoops, the page does not seem to exist."
         );
       });
+    tableOfContentsMap.then((map: Map<string, string>): void =>
+      setPageTitle(map.get(path) || "")
+    );
   }, [sourceURL]);
 
   // SEARCH
@@ -215,12 +225,17 @@ function Manual(): React.ReactElement {
   const stdVersion =
     version === undefined
       ? versionMeta.std[0]
-      : ((versionMeta.cli_to_std as any)[version ?? ""] as string) ?? version;
+      : ((versionMeta.cli_to_std as any)[version ?? ""] as string) ??
+        versionMeta.std[0];
+
+  const isPreview = isPreviewVersion(version);
 
   return (
     <div>
       <Head>
-        <title>Manual | Deno</title>
+        <title>
+          {pageTitle === "" ? "Manual | Deno" : `${pageTitle} | Manual | Deno`}
+        </title>
         <link
           rel="preconnect"
           href="https://BH4D9OD16A-dsn.algolia.net"
@@ -473,6 +488,12 @@ function Manual(): React.ReactElement {
               </div>
             </div>
             <CookieBanner />
+            {isPreview ? (
+              <UserContributionBanner
+                gotoVersion={gotoVersion}
+                versions={versions}
+              />
+            ) : null}
             <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20">
               {content ? (
                 <>
@@ -510,14 +531,32 @@ function Manual(): React.ReactElement {
                   />
                   <div className="mt-4 pt-4 border-t border-gray-200">
                     {pageList[pageIndex - 1] !== undefined && (
-                      <Link href={pageList[pageIndex - 1].path}>
+                      <Link
+                        href={
+                          version
+                            ? pageList[pageIndex - 1].path.replace(
+                                "manual",
+                                `manual@${version}`
+                              )
+                            : pageList[pageIndex - 1].path
+                        }
+                      >
                         <a className="text-gray-900 hover:text-gray-600 font-normal">
                           ← {pageList[pageIndex - 1].name}
                         </a>
                       </Link>
                     )}
                     {pageList[pageIndex + 1] !== undefined && (
-                      <Link href={pageList[pageIndex + 1].path}>
+                      <Link
+                        href={
+                          version
+                            ? pageList[pageIndex + 1].path.replace(
+                                "manual",
+                                `manual@${version}`
+                              )
+                            : pageList[pageIndex + 1].path
+                        }
+                      >
                         <a className="text-gray-900 hover:text-gray-600 font-normal float-right">
                           {pageList[pageIndex + 1].name} →
                         </a>
@@ -550,6 +589,41 @@ function Manual(): React.ReactElement {
               )}
             </div>
           </main>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function UserContributionBanner({
+  versions,
+  gotoVersion,
+}: {
+  versions: string[];
+  gotoVersion: (version: string) => void;
+}) {
+  return (
+    <div className="bg-yellow-300 sticky top-0">
+      <div className="max-w-screen-xl mx-auto py-4 px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between flex-wrap">
+          <div className="w-0 flex-1 flex items-center">
+            <p className="ml-3 font-medium text-gray-900">
+              <span>
+                You are viewing documentation generated from a{"  "}
+                <b className="font-bold">user contribution</b>
+                {"  "}
+                or an upcoming or past release. The contents of this document
+                may not have been reviewed by the Deno team.{" "}
+              </span>
+
+              <span
+                className="underline cursor-pointer text-gray-900"
+                onClick={() => gotoVersion(versions[0])}
+              >
+                Click here to view the documentation for the latest release.
+              </span>
+            </p>
+          </div>
         </div>
       </div>
     </div>

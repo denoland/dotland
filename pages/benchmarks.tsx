@@ -145,7 +145,7 @@ function Benchmarks(): React.ReactElement {
                 </li>
                 <li>
                   <SourceLink
-                    path="cli/tests/workers_round_robin_bench.ts"
+                    path="cli/tests/workers/bench_round_robin.ts"
                     name="workers_round_robin"
                   />
                 </li>
@@ -325,7 +325,8 @@ function Benchmarks(): React.ReactElement {
                   </li>
                   <li>
                     <SourceLink
-                      path="std/http/http_bench.ts"
+                      repo="deno_std"
+                      path="http/bench.ts"
                       name="deno_http"
                     />{" "}
                     is a web server written in TypeScript. It is comparable to{" "}
@@ -347,16 +348,6 @@ function Benchmarks(): React.ReactElement {
                     </a>
                     . The code is in{" "}
                     <SourceLink
-                      path="core/examples/http_bench_bin_ops.rs"
-                      name="http_bench_bin_ops.rs"
-                    />{" "}
-                    and{" "}
-                    <SourceLink
-                      path="core/examples/http_bench_bin_ops.js"
-                      name="http_bench_bin_ops.js"
-                    />
-                    for http_bench_bin_ops and{" "}
-                    <SourceLink
                       path="core/examples/http_bench_json_ops.rs"
                       name="http_bench_json_ops.rs"
                     />{" "}
@@ -364,7 +355,7 @@ function Benchmarks(): React.ReactElement {
                     <SourceLink
                       path="core/examples/http_bench_json_ops.js"
                       name="http_bench_json_ops.js"
-                    />
+                    />{" "}
                     for http_bench_json_ops.
                   </li>
                   <li>
@@ -462,10 +453,11 @@ function Benchmarks(): React.ReactElement {
                   Log scale. Time it takes to pipe a certain amount of data
                   through Deno.{" "}
                   <SourceLink
-                    path="cli/tests/echo_server.ts"
+                    path="cli/tests/testdata/echo_server.ts"
                     name="echo_server.ts"
                   />{" "}
-                  and <SourceLink path="cli/tests/cat.ts" name="cat.ts" />.
+                  and{" "}
+                  <SourceLink path="cli/tests/testdata/cat.ts" name="cat.ts" />.
                   Smaller is better.
                 </p>
               </div>
@@ -567,10 +559,18 @@ function BenchmarkOrLoading(props: {
   );
 }
 
-function SourceLink({ name, path }: { name: string; path: string }) {
+function SourceLink({
+  name,
+  path,
+  repo = "deno",
+}: {
+  name: string;
+  path: string;
+  repo?: string;
+}) {
   return (
     <a
-      href={`https://github.com/denoland/deno/blob/main/${path}`}
+      href={`https://github.com/denoland/${repo}/blob/main/${path}`}
       className="link"
     >
       {name}
