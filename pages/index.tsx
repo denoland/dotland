@@ -26,7 +26,7 @@ for await (const conn of listener) {
   return (
     <>
       <Head>
-        <title>Deno - A secure runtime for JavaScript and TypeScript</title>
+        <title>Deno - A modern runtime for JavaScript and TypeScript</title>
       </Head>
       <CookieBanner />
       {/* <div className="bg-blue-500 p-4 text-white flex justify-center text-center">
@@ -47,7 +47,7 @@ for await (const conn of listener) {
               Deno
             </h1>
             <h2 className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900">
-              A <strong className="font-semibold">secure</strong> runtime for{" "}
+              A <strong className="font-semibold">modern</strong> runtime for{" "}
               <strong className="font-semibold">JavaScript</strong> and{" "}
               <strong className="font-semibold">TypeScript</strong>.
             </h2>
