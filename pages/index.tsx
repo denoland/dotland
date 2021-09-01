@@ -26,7 +26,11 @@ for await (const conn of listener) {
   return (
     <>
       <Head>
+<<<<<<< HEAD
         <title>Deno - 安全的 JavaScript 和 TypeScript 运行时</title>
+=======
+        <title>Deno - A modern runtime for JavaScript and TypeScript</title>
+>>>>>>> d5f6942e902cd4c7df4400000881ce0d7ddec52a
       </Head>
       <CookieBanner />
       {/* <div className="bg-blue-500 p-4 text-white flex justify-center text-center">
@@ -47,9 +51,15 @@ for await (const conn of listener) {
               Deno
             </h1>
             <h2 className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900">
+<<<<<<< HEAD
               <strong className="font-semibold">安全的</strong>{" "}
               <strong className="font-semibold">JavaScript</strong> 和{" "}
               <strong className="font-semibold">TypeScript</strong> 运行时。
+=======
+              A <strong className="font-semibold">modern</strong> runtime for{" "}
+              <strong className="font-semibold">JavaScript</strong> and{" "}
+              <strong className="font-semibold">TypeScript</strong>.
+>>>>>>> d5f6942e902cd4c7df4400000881ce0d7ddec52a
             </h2>
             <a
               href="/#installation"
