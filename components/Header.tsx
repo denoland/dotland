@@ -1,24 +1,8 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Transition from "./Transition";
-
-/**
- * Indicates if the "Deploy" link in the header
- * should be displayed to the user.
- */
-function displayDeploy() {
-  const showDeploy = localStorage.getItem("showDeploy");
-  if (showDeploy !== null) {
-    return showDeploy === "true";
-  } else {
-    // 1% probability
-    const showDeploy = Math.random() < 1 / 100;
-    localStorage.setItem("showDeploy", String(showDeploy));
-    return showDeploy;
-  }
-}
 
 function Header({
   subtitle,
@@ -28,8 +12,6 @@ function Header({
   widerContent?: boolean;
 }): React.ReactElement {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [showDeploy, setShowDeploy] = useState(false);
-  useEffect(() => setShowDeploy(displayDeploy()), []);
 
   return (
     <div className="relative py-6 z-10">
@@ -78,9 +60,7 @@ function Header({
         <div className="hidden lg:flex md:ml-10 items-end">
           <Link href="https://deno.com/deploy">
             <a
-              className={`font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out ${
-                showDeploy ? "" : "hidden"
-              }`}
+              className={`font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out`}
             >
               Deploy
             </a>
@@ -100,7 +80,7 @@ function Header({
             href="https://doc.deno.js.cn/builtin/stable"
             className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
           >
-            运行时 API
+            API
           </a>
           <Link href="/std">
             <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
@@ -191,9 +171,7 @@ function Header({
               <div className="px-2 pt-4 pb-3">
                 <Link href="https://deno.com/deploy">
                   <a
-                    className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out ${
-                      showDeploy ? "" : "hidden"
-                    }`}
+                    className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out`}
                   >
                     Deploy
                   </a>
@@ -212,7 +190,7 @@ function Header({
                   href="https://doc.deno.js.cn/builtin/stable"
                   className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
                 >
-                  运行时 API
+                  API
                 </a>
                 <Link href="/std">
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">

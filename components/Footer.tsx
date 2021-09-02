@@ -24,7 +24,7 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
               href="https://doc.deno.js.cn/builtin/stable"
               className="text-base leading-6 text-gray-500 hover:text-gray-900"
             >
-              运行时 API
+              API
             </a>
           </div>
           <div className="px-5 py-2">
