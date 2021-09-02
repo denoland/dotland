@@ -85,7 +85,10 @@ for await (const conn of listener) {
             </li>
             <li>
               Has a number of{" "}
-              <a href="https://github.com/denoland/deno/wiki#companies-interested-in-deno" className="link">
+              <a
+                href="https://github.com/denoland/deno/wiki#companies-interested-in-deno"
+                className="link"
+              >
                 companies interested in using and exploring Deno
               </a>
             </li>
