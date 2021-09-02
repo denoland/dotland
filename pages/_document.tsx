@@ -26,11 +26,11 @@ export default class DenoDocDocument extends Document {
           <meta name="twitter:creator" content="@deno_land" />
           <meta
             name="twitter:title"
-            content="Deno - A secure runtime for JavaScript and TypeScript"
+            content="Deno - A modern runtime for JavaScript and TypeScript"
           />
           <meta
             name="twitter:description"
-            content="Deno is a simple, modern and secure runtime for JavaScript and
+            content="Deno is a simple, modern runtime for JavaScript and
             TypeScript that uses V8 and is built in Rust."
           />
           <meta name="twitter:card" content="summary_large_image" />
@@ -38,11 +38,11 @@ export default class DenoDocDocument extends Document {
           <meta property="og:site_name" content="DenoLand" />
           <meta
             property="og:title"
-            content="Deno - A secure runtime for JavaScript and TypeScript"
+            content="Deno - A modern runtime for JavaScript and TypeScript"
           />
           <meta
             property="og:description"
-            content="Deno is a simple, modern and secure runtime for JavaScript and
+            content="Deno is a simple, modern runtime for JavaScript and
             TypeScript that uses V8 and is built in Rust."
           />
           <meta property="og:image" content="/images/icons/icon-512x512.png" />
@@ -53,11 +53,6 @@ export default class DenoDocDocument extends Document {
             content="Deno, DenoLand, Development, Javascript, TypeScript"
           />
           <link rel="stylesheet" href="/fonts/inter/inter.css" />
-          <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="/images/icons/apple-touch-icon-180x180.png"
-          />
           <link rel="manifest" href="/site.webmanifest" />
         </Head>
         <body>

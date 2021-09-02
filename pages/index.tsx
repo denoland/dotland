@@ -26,7 +26,7 @@ for await (const conn of listener) {
   return (
     <>
       <Head>
-        <title>Deno - A secure runtime for JavaScript and TypeScript</title>
+        <title>Deno - A modern runtime for JavaScript and TypeScript</title>
       </Head>
       <CookieBanner />
       {/* <div className="bg-blue-500 p-4 text-white flex justify-center text-center">
@@ -47,13 +47,19 @@ for await (const conn of listener) {
               Deno
             </h1>
             <h2 className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900">
-              A <strong className="font-semibold">secure</strong> runtime for{" "}
+              A <strong className="font-semibold">modern</strong> runtime for{" "}
               <strong className="font-semibold">JavaScript</strong> and{" "}
               <strong className="font-semibold">TypeScript</strong>.
             </h2>
             <a
+              href="/#installation"
+              className="rounded-full mt-8 px-8 py-2 transition-colors duration-75 ease-in-out bg-blue-500 hover:bg-blue-400 text-white text-lg shadow-lg"
+            >
+              Install
+            </a>
+            <a
               href="https://github.com/denoland/deno/releases/latest"
-              className="rounded-full mt-4 px-8 py-2 transition-colors duration-75 ease-in-out bg-blue-500 hover:bg-blue-400 text-white shadow-lg"
+              className="mt-4"
             >
               {versions.cli[0]}
             </a>
@@ -168,10 +174,9 @@ for await (const conn of listener) {
           <p className="my-4 text-gray-700">
             Next to the Deno runtime, Deno also provides a list of audited
             standard modules that are reviewed by the Deno maintainers and are
-            guaranteed to work with a specific Deno version. These live
-            alongside the Deno source code in the{" "}
-            <a href="https://github.com/denoland/deno" className="link">
-              denoland/deno
+            guaranteed to work with a specific Deno version. These live in the{" "}
+            <a href="https://github.com/denoland/deno_std" className="link">
+              denoland/deno_std
             </a>{" "}
             repository.
           </p>

@@ -36,7 +36,7 @@
     "swr": "^0.4.2",
     "tailwindcss": "^1.9.6",
     "tailwindcss-hyphens": "^0.1.0",
-    "timeago-react": "^3.0.2",
+    "twas": "^2.1.2",
     "webpack": "^4.46.0"
   },
   "devDependencies": {

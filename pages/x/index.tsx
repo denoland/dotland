@@ -5,7 +5,7 @@ import Link from "next/link";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import TimeAgo from "timeago-react";
+import twas from "twas";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -667,11 +667,9 @@ function ModuleList({
                             className="truncate"
                             title={new Date(meta.date).toLocaleString()}
                           >
-                            <TimeAgo
-                              live={true}
-                              datetime={meta.date}
-                              locale="en"
-                            />
+                            <time dateTime={meta.date}>
+                              {twas(new Date(meta.date).getTime())}
+                            </time>
                           </span>
                         </div>
                       ) : null}

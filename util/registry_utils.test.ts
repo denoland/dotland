@@ -124,6 +124,8 @@ test("fileTypeFromURL", () => {
   const tests: Array<[string, string | undefined]> = [
     ["main.ts", "typescript"],
     ["lib.js", "javascript"],
+    ["lib.mjs", "javascript"],
+    ["lib.cjs", "javascript"],
     ["Component.tsx", "tsx"],
     ["Component.jsx", "jsx"],
     ["data.json", "json"],
