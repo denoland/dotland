@@ -20,21 +20,6 @@ function Header({
           widerContent ? "max-w-screen-xl" : "max-w-screen-lg lg:p-0"
         }`}
       >
-        <Link href="/">
-          <a className="flex items-center">
-            <img className="h-10 w-auto sm:h-12 my-2" src="/logo.svg" alt="" />
-            <div className="ml-5 flex flex-col justify-center">
-              <div className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
-                Deno
-              </div>
-              {subtitle && (
-                <div className="font-normal text-sm sm:text-lg leading-tight tracking-tight">
-                  {subtitle}
-                </div>
-              )}
-            </div>
-          </a>
-        </Link>
         <div className="-mr-2 flex items-center lg:hidden">
           <button
             type="button"
@@ -57,7 +42,16 @@ function Header({
             </svg>
           </button>
         </div>
-        <div className="hidden lg:flex md:ml-10 items-end">
+        <div className="hidden lg:flex md:ml-10 items-center">
+          <Link href="/">
+            <a className="flex items-center pr-4">
+              <img
+                className="h-10 w-auto sm:h-12 my-2"
+                src="/logo.svg"
+                alt=""
+              />
+            </a>
+          </Link>
           <Link href="/#installation">
             <a className="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
               Install
