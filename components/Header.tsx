@@ -7,9 +7,11 @@ import Transition from "./Transition";
 function Header({
   subtitle,
   widerContent,
+  main,
 }: {
   subtitle?: string;
   widerContent?: boolean;
+  main?: boolean;
 }): React.ReactElement {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -24,9 +26,11 @@ function Header({
           <a className="flex items-center">
             <img className="h-10 w-auto sm:h-12 my-2" src="/logo.svg" alt="" />
             <div className="ml-5 flex flex-col justify-center">
-              <div className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
-                Deno
-              </div>
+              {!main && (
+                <div className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
+                  Deno
+                </div>
+              )}
               {subtitle && (
                 <div className="font-normal text-sm sm:text-lg leading-tight tracking-tight">
                   {subtitle}
