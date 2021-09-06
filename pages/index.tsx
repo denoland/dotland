@@ -14,13 +14,16 @@ import { CookieBanner } from "../components/CookieBanner";
 const Home: NextPage = () => {
   const complexExampleProgram = `const listener = Deno.listen({ port: 8000 });
 console.log("http://localhost:8000/");
+
+async function handle(conn) {
+  const requests = Deno.serveHttp(conn);
+  for await (const { respondWith } of requests) {
+    respondWith(new Response("Hello world"));
+  }
+}
+
 for await (const conn of listener) {
-  (async () => {
-    const requests = Deno.serveHttp(conn);
-    for await (const { respondWith } of requests) {
-      respondWith(new Response("Hello world"));
-    }
-  })();
+  handle(conn);
 }`;
 
   return (
@@ -41,7 +44,7 @@ for await (const conn of listener) {
       </div> */}
       <div className="bg-white">
         <div className="bg-gray-50 border-b border-gray-200">
-          <Header />
+          <Header main />
           <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
             <h1 className="font-extrabold text-5xl leading-10 tracking-tight text-gray-900">
               Deno
