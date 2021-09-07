@@ -77,6 +77,7 @@ export function transformLinkUri(displayURL: string, baseURL: string) {
     let href = uri;
 
     if (uri.startsWith("#")) return uri;
+    if (uri.startsWith("mailto:")) return uri;
 
     // If the URL is relative, it should be relative to the canonical URL of the file.
     if (isRelative(href)) {
