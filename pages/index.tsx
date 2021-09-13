@@ -12,18 +12,12 @@ import Header from "../components/Header";
 import { CookieBanner } from "../components/CookieBanner";
 
 const Home: NextPage = () => {
-  const complexExampleProgram = `const listener = Deno.listen({ port: 8000 });
+  const complexExampleProgram = `import { serve } from "https://deno.land/std@0.106.0/http/server.ts";
+const body = "Hello World";
+const server = serve({ port: 8000 });
 console.log("http://localhost:8000/");
-
-async function handle(conn) {
-  const requests = Deno.serveHttp(conn);
-  for await (const { respondWith } of requests) {
-    respondWith(new Response("Hello world"));
-  }
-}
-
-for await (const conn of listener) {
-  handle(conn);
+for await (const req of server) {
+  req.respond({ body });
 }`;
 
   return (
