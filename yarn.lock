@@ -6900,6 +6900,11 @@ timers-browserify@^2.0.4:
   dependencies:
     setimmediate "^1.0.4"
 
+tiny-version-compare@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/tiny-version-compare/-/tiny-version-compare-3.0.1.tgz#b1d2da60595d905ac86eeedaab52f2157e5d91a0"
+  integrity sha512-xatSPA/CQtM2fPxuhhookcVlxoLPpb3q4VXYkI85owwvAnTGvD3ItKZp4wn4o5Apc8YxM1GjQ0QqjAXqE4ZJoQ==
+
 tmpl@1.0.x:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/tmpl/-/tmpl-1.0.4.tgz#23640dd7b42d00433911140820e5cf440e521dd1"
