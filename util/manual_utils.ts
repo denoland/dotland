@@ -23,7 +23,7 @@ export interface TableOfContents {
 // 1.12.0 inclusive. During this time the manual was part of the main repo. It
 // is now a seperate repo.
 function isOldVersion(version: string) {
-  return compareVersions(version, 'v1.12.0') !== 1
+  return compareVersions(version, "v1.12.0") !== 1;
 }
 
 function basepath(version: string) {
@@ -74,7 +74,7 @@ export function getFileURL(version: string, path: string): string {
 
 export function getDocURL(version: string, path: string): string {
   if (isOldVersion(version)) {
-      return `${oldDocpath}${version}/docs${path}.md`;
+    return `${oldDocpath}${version}/docs${path}.md`;
   }
 
   return `${docpath}${version}${path}.md`;
