@@ -34,6 +34,7 @@
     "swr": "^0.4.2",
     "tailwindcss": "^1.9.6",
     "tailwindcss-hyphens": "^0.1.0",
+    "tiny-version-compare": "^3.0.1",
     "twas": "^2.1.2",
     "webpack": "^4.46.0"
   },
