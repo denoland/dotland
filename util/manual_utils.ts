@@ -3,8 +3,10 @@
 const oldXBasepath = "https://deno.land/x/deno@";
 const xBasepath = "https://deno.land/x/manual@";
 const githubBasepath = "https://raw.githubusercontent.com/denoland/manual/";
+const oldDocpath = "https://github.com/denoland/deno/blob/";
 const docpath = "https://github.com/denoland/manual/blob/";
 import VERSIONS from "../versions.json";
+import compareVersions from "tiny-version-compare";
 
 export const versions = VERSIONS.cli;
 
@@ -17,19 +19,11 @@ export interface TableOfContents {
   };
 }
 
-const SEMVER_REGEX = /v?(\d+)\.(\d+)\.(\d+)/;
-
 // Returns true if the version is of the 0.x release line, or betwen 1.0.0 and
 // 1.12.0 inclusive. During this time the manual was part of the main repo. It
 // is now a seperate repo.
 function isOldVersion(version: string) {
-  const matches = version.match(SEMVER_REGEX);
-  if (!matches) throw new TypeError("This shouldn't have happened!");
-  return (
-    matches[1] === "0" ||
-    (matches[1] === "1" && parseInt(matches[2]) < 12) ||
-    (matches[1] === "1" && matches[2] === "12" && matches[3] === "0")
-  );
+  return compareVersions(version, "v1.12.0") !== 1;
 }
 
 function basepath(version: string) {
@@ -79,6 +73,10 @@ export function getFileURL(version: string, path: string): string {
 }
 
 export function getDocURL(version: string, path: string): string {
+  if (isOldVersion(version)) {
+    return `${oldDocpath}${version}/docs${path}.md`;
+  }
+
   return `${docpath}${version}${path}.md`;
 }
 

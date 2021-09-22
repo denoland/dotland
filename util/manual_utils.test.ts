@@ -2,6 +2,7 @@
 
 import {
   getFileURL,
+  getDocURL,
   getTableOfContents,
   getTableOfContentsMap,
 } from "./manual_utils";
@@ -32,6 +33,18 @@ test("get introduction file old repo", async () => {
 test("get introduction file new repo", async () => {
   expect(getFileURL("v1.12.1", "/introduction")).toEqual(
     "https://deno.land/x/manual@v1.12.1/introduction.md"
+  );
+});
+
+test("get edit link old repo", async () => {
+  expect(getDocURL("v1.12.0", "/introduction")).toEqual(
+    "https://github.com/denoland/deno/blob/v1.12.0/docs/introduction.md"
+  );
+});
+
+test("get edit link new repo", async () => {
+  expect(getDocURL("v1.12.1", "/introduction")).toEqual(
+    "https://github.com/denoland/manual/blob/v1.12.1/introduction.md"
   );
 });
 
