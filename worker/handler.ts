@@ -6,7 +6,7 @@ import { handleVSCRequest } from "./vscode.ts";
 const REMOTE_URL = "https://deno-cn.vercel.app";
 
 export function withLog(
-  handler: (request: Request) => Promise<Response>,
+  handler: (request: Request) => Response | Promise<Response>,
 ): (request: Request) => Promise<Response> {
   return async (req) => {
     let res: Response;
