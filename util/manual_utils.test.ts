@@ -25,15 +25,9 @@ test("get introduction file", async () => {
   );
 });
 
-test("get edit link old repo", async () => {
-  expect(getDocURL("v1.12.0", "/introduction")).toEqual(
-    "https://github.com/denoland/deno/blob/v1.12.0/docs/introduction.md"
-  );
-});
-
 test("get edit link new repo", async () => {
   expect(getDocURL("v1.12.1", "/introduction")).toEqual(
-    "https://github.com/denoland/manual/blob/v1.12.1/introduction.md"
+    "https://github.com/denocn/deno_docs/blob/master/introduction.md"
   );
 });
 
