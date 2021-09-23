@@ -18,7 +18,6 @@ export interface TableOfContents {
 export async function getTableOfContents(
   version: string
 ): Promise<TableOfContents> {
-  console.log("目前中文文档只有最新版");
   version = "master";
   const res = await fetch(`${githubBasepath}${version}/toc.json`);
   if (res.status !== 200) {
