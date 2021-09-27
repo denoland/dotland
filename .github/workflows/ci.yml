@@ -20,7 +20,7 @@ jobs:
           restore-keys: |
             web-${{ runner.os }}-yarn-
       - run: yarn --frozen-lockfile
-      - run: yarn format:check
+      - run: yarn fmt-check
       - run: yarn lint
       - run: yarn test
   worker:

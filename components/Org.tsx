@@ -21,9 +21,9 @@ import {
   Drawer,
   Footnote,
   FootnoteReference,
-  HTML,
   Headline,
   HorizontalRule,
+  HTML,
   Keyword,
   List,
   ListItem,
@@ -91,7 +91,7 @@ function orgToHTML(props: MarkupProps, node: Document): string {
 
   function buildFootnoteMap(
     refs: FootnoteReference[],
-    defs: Footnote[]
+    defs: Footnote[],
   ): Map<string, number> {
     const res = new Map();
     let curr = 1;
@@ -113,11 +113,11 @@ function orgToHTML(props: MarkupProps, node: Document): string {
 
   function orderFootnotes(
     fmap: Map<string, number>,
-    defs: Footnote[]
+    defs: Footnote[],
   ): Footnote[] {
     const res: Footnote[] = [];
     const invMap = new Map(
-      Array.from(fmap.entries()).map((kv) => [kv[1], kv[0]])
+      Array.from(fmap.entries()).map((kv) => [kv[1], kv[0]]),
     );
     const defsMap = new Map(defs.map((v) => [v.label, v]));
     for (let fnum = 1; fnum < fmap.size + 1; fnum++) {
@@ -192,9 +192,11 @@ function orgToHTML(props: MarkupProps, node: Document): string {
       case "text.strikeThrough":
         return wrapped("del", node.value);
       case "text.underline":
-        return `<span style="text-decoration: underline;">${nonHTML(
-          node.value
-        )}</span>`;
+        return `<span style="text-decoration: underline;">${
+          nonHTML(
+            node.value,
+          )
+        }</span>`;
     }
   }
 
@@ -236,20 +238,19 @@ function orgToHTML(props: MarkupProps, node: Document): string {
         const text = nonHTML(node.description ?? urlRaw);
         const attrText = forAttr(node.description ?? urlRaw);
         const isImage = fileTypeFromURL(urlRaw) === "image";
-        const url =
-          node.protocol === "internal"
-            ? "#" + slugify(urlRaw)
-            : isImage
-            ? transformImageUri(props.sourceURL)(urlRaw)
-            : transformLinkUri(props.displayURL, props.baseURL)(urlRaw);
+        const url = node.protocol === "internal"
+          ? "#" + slugify(urlRaw)
+          : isImage
+          ? transformImageUri(props.sourceURL)(urlRaw)
+          : transformLinkUri(props.displayURL, props.baseURL)(urlRaw);
         const title = node.text;
         return isImage
           ? `<img${url ? ` src="${url}"` : ""}${
-              attrText ? ` alt="${attrText}"` : ""
-            }${title ? ` title="${title}"` : ""} style="max-width:100%;">`
+            attrText ? ` alt="${attrText}"` : ""
+          }${title ? ` title="${title}"` : ""} style="max-width:100%;">`
           : `<a${url ? ` href="${url}"` : ""}${
-              title ? ` title="${title}"` : ""
-            }>${text}</a>`;
+            title ? ` title="${title}"` : ""
+          }>${text}</a>`;
       }
       case "newline":
         return "";
@@ -259,9 +260,11 @@ function orgToHTML(props: MarkupProps, node: Document): string {
           // no definition for footnote
           return "<sup><strong>?</strong></sup>";
         }
-        return `<sup><a href="#${footnoteId(
-          resolvedLabel
-        )}">${resolvedLabel}</a></sup>`;
+        return `<sup><a href="#${
+          footnoteId(
+            resolvedLabel,
+          )
+        }">${resolvedLabel}</a></sup>`;
       }
     }
   }
@@ -281,14 +284,18 @@ function orgToHTML(props: MarkupProps, node: Document): string {
     if (content.length > 0 && content[0].type === "list.item.checkbox") {
       return `<li><input${
         content[0].checked ? ' checked=""' : ""
-      } disabled="" type="checkbox">${content.length > 1 ? " " : ""}${content
-        .slice(1)
-        .map((c) => anyToHTML(c as Content | Token))
-        .join("")}</li>`;
+      } disabled="" type="checkbox">${content.length > 1 ? " " : ""}${
+        content
+          .slice(1)
+          .map((c) => anyToHTML(c as Content | Token))
+          .join("")
+      }</li>`;
     }
-    return `<li>${content
-      .map((c) => anyToHTML(c as Content | Token))
-      .join("")}</li>`;
+    return `<li>${
+      content
+        .map((c) => anyToHTML(c as Content | Token))
+        .join("")
+    }</li>`;
   }
 
   function topLevelContentToHTML(node: TopLevelContent): string {
@@ -306,16 +313,20 @@ function orgToHTML(props: MarkupProps, node: Document): string {
 
   function tableCellToHTML(col: TableCell, isHead = false) {
     const tag = isHead ? "th" : "td";
-    return `<${tag}>${col.children
-      .map(phrasingContentToHTML)
-      .join("")
-      .trim()}</${tag}>`;
+    return `<${tag}>${
+      col.children
+        .map(phrasingContentToHTML)
+        .join("")
+        .trim()
+    }</${tag}>`;
   }
 
   function tableRowToHTML(row: TableRow, isHead = false) {
-    return `<tr>${row.children
-      .map((c) => tableCellToHTML(c, isHead))
-      .join("")}</tr>`;
+    return `<tr>${
+      row.children
+        .map((c) => tableCellToHTML(c, isHead))
+        .join("")
+    }</tr>`;
   }
 
   function mkHeaderHTML(level: number, text: string, slug: string): string {
@@ -346,14 +357,14 @@ function orgToHTML(props: MarkupProps, node: Document): string {
           contentChildren
             .filter((c) => c.type !== "priority")
             .map((c) => c.value)
-            .join("")
+            .join(""),
         );
         const headingContent: string = contentChildren
           .map(
             (c) =>
               (c.type === "tags" ? " " : "") +
               tokenToHTML(c as Token) +
-              (c.type === "todo" ? " " : "")
+              (c.type === "todo" ? " " : ""),
           )
           .join("");
         return mkHeaderHTML(level, headingContent, slug);
@@ -376,7 +387,7 @@ function orgToHTML(props: MarkupProps, node: Document): string {
               language={language as any}
               disablePrefixes={true}
               enableLineRef={false}
-            />
+            />,
           );
           return `<pre>${markup}</pre>`;
         }
@@ -405,7 +416,7 @@ function orgToHTML(props: MarkupProps, node: Document): string {
       }
       case "table": {
         const nonRules = node.children.filter(
-          (v) => v.type !== "table.hr"
+          (v) => v.type !== "table.hr",
         ) as TableRow[];
         if (nonRules.length === 0) {
           return "";
@@ -443,9 +454,11 @@ function orgToHTML(props: MarkupProps, node: Document): string {
         .map((c) => contentToHTML(c as Content))
         .join("");
       fnHTML.push(
-        `<div class="footdef"><sup><a id="${footnoteId(
-          fnum
-        )}" href="#fnr.${fnum}">${fnum}</a></sup> <div class="footpara">${description}</div></div>`
+        `<div class="footdef"><sup><a id="${
+          footnoteId(
+            fnum,
+          )
+        }" href="#fnr.${fnum}">${fnum}</a></sup> <div class="footpara">${description}</div></div>`,
       );
     }
     res.push(fnHTML.join("\n"));

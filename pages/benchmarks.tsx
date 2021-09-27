@@ -9,12 +9,12 @@ import Link from "next/link";
 import {
   BenchmarkData,
   Column,
-  reshape,
+  formatKB,
   formatLogScale,
   formatMB,
   formatPercentage,
   formatReqSec,
-  formatKB,
+  reshape,
 } from "../util/benchmark_utils";
 import BenchmarkChart, { BenchmarkLoading } from "../components/BenchmarkChart";
 import { CookieBanner } from "../components/CookieBanner";
@@ -78,10 +78,10 @@ function Benchmarks(): React.ReactElement {
         setDataRangeTitle(
           showAll
             ? [(ks: number[]) => ks[0], (ks: number[]) => ks.pop()]
-                .map((f) => f([...rawData.keys()].slice(...show.range)))
-                .filter((k) => k != null)
-                .join("...")
-            : ""
+              .map((f) => f([...rawData.keys()].slice(...show.range)))
+              .filter((k) => k != null)
+              .join("...")
+            : "",
         );
       }
     });
@@ -98,7 +98,9 @@ function Benchmarks(): React.ReactElement {
       <div className="bg-gray-50 min-h-full">
         <Header subtitle="Continuous Benchmarks" widerContent={true} />
         <div className="mb-12">
-          <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 mt-8 pb-8">
+          <div
+            className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 mt-8 pb-8"
+          >
             <img src="/images/deno_logo_4.gif" className="mb-12 w-32 h-32" />
             <h4 className="text-2xl font-bold tracking-tight">About</h4>
             <p className="mt-4">
@@ -167,14 +169,16 @@ function Benchmarks(): React.ReactElement {
               </ul>
               <div className="mt-8">
                 <a href="#execution-time" id="execution-time">
-                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                  <h5
+                    className="text-lg font-medium tracking-tight hover:underline"
+                  >
                     Execution time
                   </h5>
                 </a>
                 <BenchmarkOrLoading
                   data={data}
                   columns={data?.execTime.filter(
-                    ({ name }) => !typescriptBenches.includes(name)
+                    ({ name }) => !typescriptBenches.includes(name),
                   )}
                   yLabel="seconds"
                   yTickFormat={formatLogScale}
@@ -190,14 +194,16 @@ function Benchmarks(): React.ReactElement {
               </div>
               <div className="mt-8">
                 <a href="#thread-count" id="thread-count">
-                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                  <h5
+                    className="text-lg font-medium tracking-tight hover:underline"
+                  >
                     Thread count
                   </h5>
                 </a>
                 <BenchmarkOrLoading
                   data={data}
                   columns={data?.threadCount.filter(
-                    ({ name }) => !typescriptBenches.includes(name)
+                    ({ name }) => !typescriptBenches.includes(name),
                   )}
                 />
                 <p className="mt-1">
@@ -206,14 +212,16 @@ function Benchmarks(): React.ReactElement {
               </div>
               <div className="mt-8">
                 <a href="#syscall-count" id="syscall-count">
-                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                  <h5
+                    className="text-lg font-medium tracking-tight hover:underline"
+                  >
                     Syscall count
                   </h5>
                 </a>{" "}
                 <BenchmarkOrLoading
                   data={data}
                   columns={data?.syscallCount.filter(
-                    ({ name }) => !typescriptBenches.includes(name)
+                    ({ name }) => !typescriptBenches.includes(name),
                   )}
                 />
                 <p className="mt-1">
@@ -223,14 +231,16 @@ function Benchmarks(): React.ReactElement {
               </div>
               <div className="mt-8">
                 <a href="#max-memory-usage" id="max-memory-usage">
-                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                  <h5
+                    className="text-lg font-medium tracking-tight hover:underline"
+                  >
                     Max memory usage
                   </h5>
                 </a>{" "}
                 <BenchmarkOrLoading
                   data={data}
                   columns={data?.maxMemory.filter(
-                    ({ name }) => !typescriptBenches.includes(name)
+                    ({ name }) => !typescriptBenches.includes(name),
                   )}
                   yLabel="megabytes"
                   yTickFormat={formatMB}
@@ -246,7 +256,9 @@ function Benchmarks(): React.ReactElement {
               </h4>
               <div className="mt-8">
                 <a href="#type-checking" id="type-checking">
-                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                  <h5
+                    className="text-lg font-medium tracking-tight hover:underline"
+                  >
                     Type Checking
                   </h5>
                 </a>
@@ -260,13 +272,15 @@ function Benchmarks(): React.ReactElement {
                   yTickFormat={formatLogScale}
                 />
                 <p className="mt-1">
-                  In both cases, <code>std/examples/chat/server_test.ts</code>{" "}
+                  In both cases, <code>std/examples/chat/server_test.ts</code>
+                  {" "}
                   is cached by Deno. The workload contains 20 unique TypeScript
-                  modules. With <em>check</em> a full TypeScript type check is
-                  performed, while <em>no_check</em> uses the{" "}
-                  <code>--no-check</code> flag to skip a full type check.{" "}
-                  <em>bundle</em> does a full type check and generates a single
-                  file output, while <em>bundle_no_check</em> uses the{" "}
+                  modules. With <em>check</em>{" "}
+                  a full TypeScript type check is performed, while{" "}
+                  <em>no_check</em> uses the <code>--no-check</code>{" "}
+                  flag to skip a full type check. <em>bundle</em>{" "}
+                  does a full type check and generates a single file output,
+                  while <em>bundle_no_check</em> uses the{" "}
                   <code>--no-check</code> flag to skip a full type check.
                 </p>
               </div>
@@ -290,7 +304,8 @@ function Benchmarks(): React.ReactElement {
                     className={`${
                       showNormalized ? "translate-x-5" : "translate-x-0"
                     } inline-block h-5 w-5 rounded-full bg-white shadow transform transition ease-in-out duration-200`}
-                  ></span>
+                  >
+                  </span>
                 </span>
                 <span className="ml-2 text-gray-900">
                   Show normalized benchmarks
@@ -298,18 +313,19 @@ function Benchmarks(): React.ReactElement {
               </p>
               <div className="mt-8">
                 <a href="#http-server-throughput" id="http-server-throughput">
-                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                  <h5
+                    className="text-lg font-medium tracking-tight hover:underline"
+                  >
                     HTTP Server Throughput
                   </h5>
                 </a>
                 <BenchmarkOrLoading
                   data={data}
-                  columns={
-                    showNormalized ? data?.normalizedReqPerSec : data?.reqPerSec
-                  }
-                  yLabel={
-                    showNormalized ? "% of hyper througput" : "1k req/sec"
-                  }
+                  columns={showNormalized
+                    ? data?.normalizedReqPerSec
+                    : data?.reqPerSec}
+                  yLabel={showNormalized ? "% of hyper througput"
+                  : "1k req/sec"}
                   yTickFormat={showNormalized ? formatPercentage : formatReqSec}
                 />
                 <p className="mt-1">
@@ -318,7 +334,8 @@ function Benchmarks(): React.ReactElement {
                 </p>
                 <ul className="ml-8 list-disc my-2">
                   <li>
-                    <SourceLink path="cli/bench/deno_tcp.ts" name="deno_tcp" />{" "}
+                    <SourceLink path="cli/bench/deno_tcp.ts" name="deno_tcp" />
+                    {" "}
                     is a fake http server that doesn't parse HTTP. It is
                     comparable to{" "}
                     <SourceLink path="cli/bench/node_tcp.js" name="node_tcp" />
@@ -329,7 +346,8 @@ function Benchmarks(): React.ReactElement {
                       path="http/bench.ts"
                       name="deno_http"
                     />{" "}
-                    is a web server written in TypeScript. It is comparable to{" "}
+                    is a web server written in TypeScript. It is comparable to
+                    {" "}
                     <SourceLink
                       path="cli/bench/node_http.js"
                       name="node_http"
@@ -369,7 +387,9 @@ function Benchmarks(): React.ReactElement {
               </div>
               <div className="mt-8">
                 <a href="#http-latency" id="http-latency">
-                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                  <h5
+                    className="text-lg font-medium tracking-tight hover:underline"
+                  >
                     HTTP Latency
                   </h5>
                 </a>{" "}
@@ -386,16 +406,17 @@ function Benchmarks(): React.ReactElement {
               </div>
               <div className="mt-8">
                 <a href="#http-proxy-throughput" id="http-proxy-throughput">
-                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                  <h5
+                    className="text-lg font-medium tracking-tight hover:underline"
+                  >
                     HTTP Proxy Throughput
                   </h5>
                 </a>
                 <BenchmarkOrLoading
                   data={data}
                   columns={showNormalized ? data?.normalizedProxy : data?.proxy}
-                  yLabel={
-                    showNormalized ? "% of hyper througput" : "1k req/sec"
-                  }
+                  yLabel={showNormalized ? "% of hyper througput"
+                  : "1k req/sec"}
                   yTickFormat={showNormalized ? formatPercentage : formatReqSec}
                 />
                 <p className="mt-1">
@@ -439,7 +460,9 @@ function Benchmarks(): React.ReactElement {
               </div>
               <div className="mt-8">
                 <a href="#throughput" id="throughput">
-                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                  <h5
+                    className="text-lg font-medium tracking-tight hover:underline"
+                  >
                     Throughput
                   </h5>
                 </a>
@@ -466,7 +489,9 @@ function Benchmarks(): React.ReactElement {
               <h4 className="text-2xl font-bold tracking-tight">Size</h4>
               <div className="mt-8">
                 <a href="#executable-size" id="executable-size">
-                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                  <h5
+                    className="text-lg font-medium tracking-tight hover:underline"
+                  >
                     File sizes
                   </h5>
                 </a>
@@ -483,7 +508,9 @@ function Benchmarks(): React.ReactElement {
               </div>
               <div className="mt-8">
                 <a href="#bundle-size" id="bundle-size">
-                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                  <h5
+                    className="text-lg font-medium tracking-tight hover:underline"
+                  >
                     Bundle size
                   </h5>
                 </a>{" "}
@@ -509,7 +536,9 @@ function Benchmarks(): React.ReactElement {
               </div>
               <div className="mt-8">
                 <a href="#cargo-deps" id="cargo-deps">
-                  <h5 className="text-lg font-medium tracking-tight hover:underline">
+                  <h5
+                    className="text-lg font-medium tracking-tight hover:underline"
+                  >
                     Cargo Dependencies
                   </h5>
                 </a>{" "}
@@ -547,16 +576,16 @@ function BenchmarkOrLoading(props: {
   yLabel?: string;
   yTickFormat?: (n: number) => string;
 }) {
-  return props.data && props.columns ? (
-    <BenchmarkChart
-      columns={props.columns}
-      sha1List={props.data.sha1List}
-      yLabel={props.yLabel}
-      yTickFormat={props.yTickFormat}
-    />
-  ) : (
-    <BenchmarkLoading />
-  );
+  return props.data && props.columns
+    ? (
+      <BenchmarkChart
+        columns={props.columns}
+        sha1List={props.data.sha1List}
+        yLabel={props.yLabel}
+        yTickFormat={props.yTickFormat}
+      />
+    )
+    : <BenchmarkLoading />;
 }
 
 function SourceLink({

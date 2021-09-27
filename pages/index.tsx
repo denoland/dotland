@@ -12,7 +12,8 @@ import Header from "../components/Header";
 import { CookieBanner } from "../components/CookieBanner";
 
 const Home: NextPage = () => {
-  const complexExampleProgram = `import { serve } from "https://deno.land/std@0.106.0/http/server.ts";
+  const complexExampleProgram =
+    `import { serve } from "https://deno.land/std@0.106.0/http/server.ts";
 const server = serve({ port: 8000 });
 console.log("http://localhost:8000/");
 for await (const req of server) {
@@ -25,7 +26,8 @@ for await (const req of server) {
         <title>Deno - A modern runtime for JavaScript and TypeScript</title>
       </Head>
       <CookieBanner />
-      {/* <div className="bg-blue-500 p-4 text-white flex justify-center text-center">
+      {
+        /* <div className="bg-blue-500 p-4 text-white flex justify-center text-center">
         <div className="max-w-screen-xl">
           <span className="inline">Deno 1.9 is out.</span>
           <span className="block sm:ml-2 sm:inline-block font-semibold">
@@ -34,16 +36,24 @@ for await (const req of server) {
             </a>
           </span>
         </div>
-      </div> */}
+      </div> */
+      }
       <div className="bg-white">
         <div className="bg-gray-50 border-b border-gray-200">
           <Header main />
-          <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
-            <h1 className="font-extrabold text-5xl leading-10 tracking-tight text-gray-900">
+          <div
+            className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center"
+          >
+            <h1
+              className="font-extrabold text-5xl leading-10 tracking-tight text-gray-900"
+            >
               Deno
             </h1>
-            <h2 className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900">
-              A <strong className="font-semibold">modern</strong> runtime for{" "}
+            <h2
+              className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900"
+            >
+              A <strong className="font-semibold">modern</strong> runtime for
+              {" "}
               <strong className="font-semibold">JavaScript</strong> and{" "}
               <strong className="font-semibold">TypeScript</strong>.
             </h2>
@@ -179,7 +189,8 @@ for await (const req of server) {
           <p className="my-4 text-gray-700">
             Next to the Deno runtime, Deno also provides a list of audited
             standard modules that are reviewed by the Deno maintainers and are
-            guaranteed to work with a specific Deno version. These live in the{" "}
+            guaranteed to work with a specific Deno version. These live in the
+            {" "}
             <a href="https://github.com/denoland/deno_std" className="link">
               denoland/deno_std
             </a>{" "}
@@ -318,7 +329,8 @@ const InstallSection = () => {
     <>
       <p className="my-4 text-gray-700">
         Deno ships as a single executable with no dependencies. You can install
-        it using the installers below, or download a release binary from the{" "}
+        it using the installers below, or download a release binary from the
+        {" "}
         <a href="https://github.com/denoland/deno/releases" className="link">
           releases page
         </a>

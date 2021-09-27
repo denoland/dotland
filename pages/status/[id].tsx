@@ -24,7 +24,9 @@ function StatusPage(): React.ReactElement {
       <CookieBanner />
       <div className="bg-gray-50 min-h-full">
         <Header />
-        <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 mt-8 pb-8 mb-16">
+        <div
+          className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 mt-8 pb-8 mb-16"
+        >
           <div>
             <h3 className="text-lg leading-6 font-medium text-gray-900">
               Module publishing status
@@ -46,7 +48,9 @@ function StatusPage(): React.ReactElement {
                   <dt className="text-sm leading-5 font-medium text-gray-500">
                     Repository
                   </dt>
-                  <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                  <dd
+                    className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
+                  >
                     <a
                       href={`https://github.com/${data.options.repository}`}
                       className="link"
@@ -66,34 +70,45 @@ function StatusPage(): React.ReactElement {
                     </a>
                   </dd>
                 </div>
-                <div className="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                <div
+                  className="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5"
+                >
                   <dt className="text-sm leading-5 font-medium text-gray-500">
                     Version
                   </dt>
-                  <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                  <dd
+                    className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
+                  >
                     {data.options.version}
                   </dd>
                 </div>
-                <div className="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                <div
+                  className="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5"
+                >
                   <dt className="text-sm leading-5 font-medium text-gray-500">
                     Source
                   </dt>
-                  <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                  <dd
+                    className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
+                  >
                     <a
-                      href={`https://github.com/${
-                        data.options.repository
-                      }/tree/${data.options.ref}/${data.options.subdir ?? ""}`}
+                      href={`https://github.com/${data.options.repository}/tree/${data.options.ref}/${data
+                        .options.subdir ?? ""}`}
                       className="link"
                     >
                       View on GitHub
                     </a>
                   </dd>
                 </div>
-                <div className="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                <div
+                  className="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5"
+                >
                   <dt className="text-sm leading-5 font-medium text-gray-500">
                     Status
                   </dt>
-                  <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                  <dd
+                    className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
+                  >
                     <div className="flex">
                       <div className="mr-2">
                         {(() => {
@@ -109,7 +124,10 @@ function StatusPage(): React.ReactElement {
                                   viewBox="0 0 24 24"
                                   stroke="currentColor"
                                 >
-                                  <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                  <path
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                                  >
+                                  </path>
                                 </svg>
                               );
                             case "publishing":
@@ -123,7 +141,10 @@ function StatusPage(): React.ReactElement {
                                   viewBox="0 0 24 24"
                                   stroke="currentColor"
                                 >
-                                  <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                  <path
+                                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                                  >
+                                  </path>
                                 </svg>
                               );
                             case "success":
@@ -137,7 +158,10 @@ function StatusPage(): React.ReactElement {
                                   viewBox="0 0 24 24"
                                   stroke="currentColor"
                                 >
-                                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                  <path
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                  >
+                                  </path>
                                 </svg>
                               );
                             case "failure":
@@ -151,7 +175,10 @@ function StatusPage(): React.ReactElement {
                                   viewBox="0 0 24 24"
                                   stroke="currentColor"
                                 >
-                                  <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                                  <path
+                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                                  >
+                                  </path>
                                 </svg>
                               );
                           }
