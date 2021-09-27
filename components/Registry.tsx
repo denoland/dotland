@@ -6,7 +6,6 @@ import Link from "next/link";
 import Head from "next/head";
 import twas from "twas";
 import {
-  parseNameVersion,
   denoDocAvailableForURL,
   isReadme,
   getSourceURL,
