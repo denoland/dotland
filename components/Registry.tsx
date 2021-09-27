@@ -6,7 +6,6 @@ import Link from "next/link";
 import Head from "next/head";
 import twas from "twas";
 import {
-  parseNameVersion,
   denoDocAvailableForURL,
   isReadme,
   getSourceURL,
@@ -23,6 +22,7 @@ import {
   getVersionDeps,
   listExternalDependencies,
   getBasePath,
+  parseQuery,
 } from "../util/registry_utils";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -46,14 +46,12 @@ function Registry(): React.ReactElement {
   const [readme, setReadme] = useState<string | null | undefined>();
 
   // Name, version and path
-  const { query, asPath, push, replace } = useRouter();
-  const isStd = asPath.startsWith("/std");
+  const { query, push, replace } = useRouter();
   const { name, version, path } = useMemo(() => {
-    const [identifier, ...pathParts] = (query.rest as string[]) ?? [];
-    const path = pathParts.length === 0 ? "" : `/${pathParts.join("/")}`;
-    const [name, version] = parseNameVersion(identifier ?? "");
-    return { name, version, path };
+    return parseQuery(query.rest as string[]);
   }, [query]);
+  const isStd = name === "std";
+  const stdVersion = isStd ? version || versions?.latest : undefined;
   function gotoVersion(newVersion: string, doReplace?: boolean) {
     const href = `${!isStd ? "/x" : ""}/[...rest]`;
     const asPath = `${getBasePath({
@@ -432,9 +430,7 @@ function Registry(): React.ReactElement {
                                 sourceURL={readmeURL}
                                 repositoryURL={readmeRepositoryURL}
                                 baseURL={basePath}
-                                stdVersion={
-                                  isStd ? versions?.latest : undefined
-                                }
+                                stdVersion={stdVersion}
                               />
                             ) : null}
                           </div>
