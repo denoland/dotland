@@ -10,7 +10,7 @@
     "start": "next start",
     "test": "jest",
     "fmt": "deno fmt --ignore=node_modules,.next",
-    "fmt-check": "deno fmt --check ignore=node_modules",
+    "fmt-check": "deno fmt --check --ignore=node_modules,.next",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx util/ pages/ components/"
   },
   "dependencies": {
