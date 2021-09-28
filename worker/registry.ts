@@ -22,15 +22,16 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
         {
           status: 404,
           headers: { "content-type": "text/plain" },
-        }
+        },
       );
     }
     return new Response(undefined, {
       headers: {
         Location: `${module === "std" ? "" : "/x"}/${module}@${latest}/${path}`,
-        "x-deno-warning": `Implicitly using latest version (${latest}) for ${
-          url.origin
-        }${module === "std" ? "" : "/x"}/${module}/${path}`,
+        "x-deno-warning":
+          `Implicitly using latest version (${latest}) for ${url.origin}${
+            module === "std" ? "" : "/x"
+          }/${module}/${path}`,
       },
       status: 302,
     });
@@ -51,13 +52,12 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
     if (versionNumber >= 0.43) {
       return new Response("404 Not Found", {
         headers: {
-          "x-deno-warning": `std versions prefixed with 'v' were deprecated recently. Please change your import to ${
-            url.origin
-          }${
-            module === "std" ? "" : "/x"
-          }/${module}@${correctVersion}/${path} (at ${url.origin}${
-            module === "std" ? "" : "/x"
-          }/${module}@${version}/${path})`,
+          "x-deno-warning":
+            `std versions prefixed with 'v' were deprecated recently. Please change your import to ${url.origin}${
+              module === "std" ? "" : "/x"
+            }/${module}@${correctVersion}/${path} (at ${url.origin}${
+              module === "std" ? "" : "/x"
+            }/${module}@${version}/${path})`,
         },
         status: 404,
       });
@@ -65,13 +65,12 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
     return new Response(undefined, {
       headers: {
         Location: `/std@${correctVersion}/${path}`,
-        "x-deno-warning": `std versions prefixed with 'v' will be deprecated soon. Please change your import to ${
-          url.origin
-        }${
-          module === "std" ? "" : "/x"
-        }/${module}@${correctVersion}/${path} (at ${url.origin}${
-          module === "std" ? "" : "/x"
-        }/${module}@${version}/${path})`,
+        "x-deno-warning":
+          `std versions prefixed with 'v' will be deprecated soon. Please change your import to ${url.origin}${
+            module === "std" ? "" : "/x"
+          }/${module}@${correctVersion}/${path} (at ${url.origin}${
+            module === "std" ? "" : "/x"
+          }/${module}@${version}/${path})`,
       },
       status: 302,
     });
@@ -97,7 +96,7 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
 }
 
 export function parsePathname(
-  pathname: string
+  pathname: string,
 ): { module: string; version: string | undefined; path: string } | undefined {
   if (pathname.startsWith("/std")) {
     return parsePathname("/x" + pathname);
@@ -139,7 +138,7 @@ export async function fetchSource(remoteUrl: string) {
 }
 
 export async function getLatestVersion(
-  module: string
+  module: string,
 ): Promise<string | undefined> {
   let lastErr;
   for (let i = 0; i < 3; i++) {

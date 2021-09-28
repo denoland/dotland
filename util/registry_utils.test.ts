@@ -3,24 +3,24 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
 import {
-  getSourceURL,
-  VersionMetaInfo,
-  getRepositoryURL,
-  getVersionMeta,
-  getVersionList,
-  getModule,
   fileNameFromURL,
-  findRootReadme,
-  isReadme,
   fileTypeFromURL,
+  findRootReadme,
+  getModule,
+  getRepositoryURL,
+  getSourceURL,
+  getVersionList,
+  getVersionMeta,
+  isReadme,
   parseNameVersion,
   parseQuery,
+  VersionMetaInfo,
 } from "./registry_utils";
 import "isomorphic-unfetch";
 
 test("source url", () => {
   expect(getSourceURL("ltest2", "0.0.8", "/README.md")).toEqual(
-    "https://cdn.deno.land/ltest2/versions/0.0.8/raw/README.md"
+    "https://cdn.deno.land/ltest2/versions/0.0.8/raw/README.md",
   );
 });
 
@@ -97,7 +97,7 @@ const versionMeta: VersionMetaInfo = {
 
 test("getRepositoryURL", () => {
   expect(getRepositoryURL(versionMeta, "/README.md")).toEqual(
-    "https://github.com/luca-rand/testing/blob/0.0.8/README.md"
+    "https://github.com/luca-rand/testing/blob/0.0.8/README.md",
   );
 });
 

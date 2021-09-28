@@ -1,6 +1,6 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import useSWR from "swr";
 import Transition from "./Transition";
 import InlineCode from "./InlineCode";
@@ -32,13 +32,13 @@ function RegistryInstructions(props: {
       getVersionList(moduleName)
         .then((e) => !e)
         .catch(() => false),
-    { refreshInterval: 2000 }
+    { refreshInterval: 2000 },
   );
 
   // Validity of the subdirectory
   const isSubdirectoryValid = useMemo(
     () => !subdirectory || VALID_SUBDIRECTORY.test(subdirectory),
-    [subdirectory]
+    [subdirectory],
   );
 
   // No page scroll when sidebar is open
@@ -78,7 +78,9 @@ function RegistryInstructions(props: {
               leaveFrom="translate-x-0"
               leaveTo="translate-x-full"
             >
-              <div className="relative w-screen max-w-md md:max-w-lg lg:max-w-xl xl:max-w-4xl">
+              <div
+                className="relative w-screen max-w-md md:max-w-lg lg:max-w-xl xl:max-w-4xl"
+              >
                 <Transition
                   enter="ease-in-out duration-500"
                   enterFrom="opacity-0"
@@ -87,7 +89,9 @@ function RegistryInstructions(props: {
                   leaveFrom="opacity-100"
                   leaveTo="opacity-0"
                 >
-                  <div className="absolute top-0 left-0 -ml-8 pt-4 pr-2 flex sm:-ml-10 sm:pr-4">
+                  <div
+                    className="absolute top-0 left-0 -ml-8 pt-4 pr-2 flex sm:-ml-10 sm:pr-4"
+                  >
                     <button
                       aria-label="Close panel"
                       className="text-gray-300 hover:text-white transition ease-in-out duration-150"
@@ -109,10 +113,14 @@ function RegistryInstructions(props: {
                     </button>
                   </div>
                 </Transition>
-                <div className="h-full flex flex-col space-y-4 my-auto px-4 md:px-16 lg:px-24 xl:px-32 bg-white shadow-xl overflow-y-auto">
+                <div
+                  className="h-full flex flex-col space-y-4 my-auto px-4 md:px-16 lg:px-24 xl:px-32 bg-white shadow-xl overflow-y-auto"
+                >
                   <div className="my-auto py-10">
                     <header>
-                      <h2 className="text-xl leading-7 font-medium text-gray-900">
+                      <h2
+                        className="text-xl leading-7 font-medium text-gray-900"
+                      >
                         {stage === 0 && "Adding a module"}
                         {stage === 1 && "Select a module name"}
                         {stage === 2 && "Advanced options"}
@@ -124,8 +132,9 @@ function RegistryInstructions(props: {
                         <>
                           <p className="text-base">
                             All modules on{" "}
-                            <b className="font-semibold">deno.land/x</b> need to
-                            be hosted as public repositories on GitHub.com.
+                            <b className="font-semibold">deno.land/x</b>{" "}
+                            need to be hosted as public repositories on
+                            GitHub.com.
                           </p>
                           <p className="text-base">
                             <b className="font-semibold">deno.land/x</b>{" "}
@@ -138,7 +147,9 @@ function RegistryInstructions(props: {
                             Our service needs to get informed whenever a new tag
                             is created. For this purpose we use GitHub webhooks.
                           </p>
-                          <span className="block w-full rounded-md shadow-sm mt-4">
+                          <span
+                            className="block w-full rounded-md shadow-sm mt-4"
+                          >
                             <button
                               type="submit"
                               className="w-full flex justify-center py-2 px-4 mt-12 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
@@ -163,10 +174,10 @@ function RegistryInstructions(props: {
                               id="modulename"
                               className={`block w-full px-4 py-2 my-1 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1 ${
                                 isModuleNameValid &&
-                                isModuleNameAvailable === true
+                                  isModuleNameAvailable === true
                                   ? "border-green-300 hover:border-green-300 focus:border-green-300"
                                   : !isModuleNameValid ||
-                                    isModuleNameAvailable === false
+                                      isModuleNameAvailable === false
                                   ? "border-red-300 hover:border-red-300 focus:border-red-300"
                                   : ""
                               }`}
@@ -175,24 +186,30 @@ function RegistryInstructions(props: {
                               value={moduleName}
                               onChange={(e) => setModuleName(e.target.value)}
                             />
-                            {isModuleNameAvailable === true ? (
-                              <p className="text-green-500 mb-2">
-                                This module name is available.
-                              </p>
-                            ) : isModuleNameAvailable === false ? (
-                              <p className="text-red-400 mb-2">
-                                This module name is not available for a new
-                                author. If this module is already registered to
-                                your name, press Next.
-                              </p>
-                            ) : null}
-                            {!isModuleNameValid ? (
-                              <span className="text-red-400">
-                                The module name must be between 3 and 40
-                                characters and contain only the characters a-z,
-                                0-9 and _.
-                              </span>
-                            ) : null}
+                            {isModuleNameAvailable === true
+                              ? (
+                                <p className="text-green-500 mb-2">
+                                  This module name is available.
+                                </p>
+                              )
+                              : isModuleNameAvailable === false
+                              ? (
+                                <p className="text-red-400 mb-2">
+                                  This module name is not available for a new
+                                  author. If this module is already registered
+                                  to your name, press Next.
+                                </p>
+                              )
+                              : null}
+                            {!isModuleNameValid
+                              ? (
+                                <span className="text-red-400">
+                                  The module name must be between 3 and 40
+                                  characters and contain only the characters
+                                  a-z, 0-9 and _.
+                                </span>
+                              )
+                              : null}
                           </div>
                           <span className="block w-full rounded-md shadow-sm">
                             <button
@@ -239,20 +256,24 @@ function RegistryInstructions(props: {
                               value={subdirectory}
                               onChange={(e) => setSubdirectory(e.target.value)}
                             />
-                            {!isSubdirectoryValid ? (
-                              <p className="text-red-400 mb-2">
-                                The provided subdirectory is not valid. It must
-                                end with a <InlineCode>/</InlineCode>, but may
-                                not start with one. (e.g.{" "}
-                                <InlineCode>src/</InlineCode>)
-                              </p>
-                            ) : null}
+                            {!isSubdirectoryValid
+                              ? (
+                                <p className="text-red-400 mb-2">
+                                  The provided subdirectory is not valid. It
+                                  must end with a{" "}
+                                  <InlineCode>/</InlineCode>, but may not start
+                                  with one. (e.g. <InlineCode>src/</InlineCode>)
+                                </p>
+                              )
+                              : null}
                             <span className="text-gray-500">
                               Optional. A subdirectory in your repository that
                               the module to be published is located in.
                             </span>
                           </div>
-                          <span className="block w-full rounded-md shadow-sm mt-2">
+                          <span
+                            className="block w-full rounded-md shadow-sm mt-2"
+                          >
                             <button
                               type="submit"
                               disabled={!isSubdirectoryValid ? true : undefined}
@@ -282,11 +303,13 @@ function RegistryInstructions(props: {
                               Go to the <InlineCode>Settings</InlineCode> tab.
                             </li>
                             <li>
-                              Click on the <InlineCode>Webhooks</InlineCode>{" "}
+                              Click on the <InlineCode>Webhooks</InlineCode>
+                              {" "}
                               tab.
                             </li>
                             <li>
-                              Click on the <InlineCode>Add webhook</InlineCode>{" "}
+                              Click on the <InlineCode>Add webhook</InlineCode>
+                              {" "}
                               button.
                             </li>
                             <li>
@@ -294,15 +317,18 @@ function RegistryInstructions(props: {
                               <InlineCode>
                                 https://api.deno.land/webhook/gh/{moduleName}
                                 {subdirectory
-                                  ? `?subdir=${encodeURIComponent(
-                                      subdirectory
-                                    )}`
+                                  ? `?subdir=${
+                                    encodeURIComponent(
+                                      subdirectory,
+                                    )
+                                  }`
                                   : ""}
                               </InlineCode>{" "}
                               in the payload URL field.
                             </li>
                             <li>
-                              Select <InlineCode>application/json</InlineCode>{" "}
+                              Select <InlineCode>application/json</InlineCode>
+                              {" "}
                               as the content type.
                             </li>
                             <li>
@@ -313,7 +339,8 @@ function RegistryInstructions(props: {
                             </li>
                             <li>
                               Select only the{" "}
-                              <InlineCode>Branch or tag creation</InlineCode>{" "}
+                              <InlineCode>Branch or tag creation</InlineCode>
+                              {" "}
                               event.
                             </li>
                             <li>
@@ -329,28 +356,34 @@ function RegistryInstructions(props: {
                             playsInline
                           />
                           <div className="mt-2">
-                            {isModuleNameAvailable ? (
-                              <div className="text-gray-800 p-2 bg-gray-50 rounded-md border border-gray-200">
-                                Waiting to receive initial WebHook event from
-                                GitHub...
-                              </div>
-                            ) : (
-                              <>
-                                <div className="text-green-800 p-2 bg-gray-50 rounded-md border border-green-200">
-                                  Module successfully registered! To upload a
-                                  version, create a new tag / release in the
-                                  repository.
+                            {isModuleNameAvailable
+                              ? (
+                                <div
+                                  className="text-gray-800 p-2 bg-gray-50 rounded-md border border-gray-200"
+                                >
+                                  Waiting to receive initial WebHook event from
+                                  GitHub...
                                 </div>
-                                <div className="mt-4 rounded-md shadow-sm">
-                                  <button
-                                    className="w-full flex justify-center py-2 px-4 mt-12 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
-                                    onClick={props.close}
+                              )
+                              : (
+                                <>
+                                  <div
+                                    className="text-green-800 p-2 bg-gray-50 rounded-md border border-green-200"
                                   >
-                                    Done
-                                  </button>
-                                </div>
-                              </>
-                            )}
+                                    Module successfully registered! To upload a
+                                    version, create a new tag / release in the
+                                    repository.
+                                  </div>
+                                  <div className="mt-4 rounded-md shadow-sm">
+                                    <button
+                                      className="w-full flex justify-center py-2 px-4 mt-12 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
+                                      onClick={props.close}
+                                    >
+                                      Done
+                                    </button>
+                                  </div>
+                                </>
+                              )}
                           </div>
                           <button className="link" onClick={() => setStage(2)}>
                             Previous

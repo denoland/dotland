@@ -30,7 +30,8 @@ function V1Hoodie(): React.ReactElement {
             <p className="text-gray-900">
               Help support the Deno project by pre-ordering a limited time,
               special edition Deno v1.0 hoodie. This black zip-up hoodie
-              features the v1.0 artwork by the famed Tokyo-based hacker/artist{" "}
+              features the v1.0 artwork by the famed Tokyo-based hacker/artist
+              {" "}
               <a className="link" href="https://github.com/hashrock">
                 hashrock
               </a>
