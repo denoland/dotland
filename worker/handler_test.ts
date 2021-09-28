@@ -3,7 +3,7 @@
 import {
   assert,
   assertEquals,
-} from "https://deno.land/std@0.97.0/testing/asserts.ts";
+} from "./test_deps.ts";
 import { extractAltLineNumberReference, handleRequest } from "./handler.ts";
 
 Deno.test({
