@@ -444,6 +444,7 @@ function Registry(): React.ReactElement {
                                   repositoryURL={repositoryURL}
                                   documentationURL={documentationURL}
                                   baseURL={basePath}
+                                  stdVersion={stdVersion}
                                 />
                               )
                               : null}
