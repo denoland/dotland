@@ -108,6 +108,6 @@ export function transformImageUri(sourceURL: string) {
     if (isRelative(uri)) {
       return relativeToAbsolute(sourceURL, uri);
     }
-    return encodeURI(uri);
+    return encodeURI(decodeURI(uri));
   };
 }
