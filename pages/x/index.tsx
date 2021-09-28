@@ -645,7 +645,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
                       the latest version of a module (when you do not explicitly
                       specify a version). This is because it can{" "}
                       <a
-                        href="https://github.com/denoland/deno_website2/issues/997"
+                        href="https://github.com/denoland/dotland/issues/997"
                         className="link"
                       >
                         be unsafe to not tag dependencies

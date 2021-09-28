@@ -23,7 +23,7 @@ function TranslationsPage(): React.ReactElement {
             Deno docs is available in the following languages. Do you have a
             piece to display here?{" "}
             <a
-              href="https://github.com/denoland/deno_website2/blob/main/translations.json"
+              href="https://github.com/denoland/dotland/blob/main/translations.json"
               className="link"
             >
               Add it!
