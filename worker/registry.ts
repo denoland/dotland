@@ -104,6 +104,7 @@ export function parsePathname(
   if (!pathname.startsWith("/x/")) {
     return undefined;
   }
+  pathname = decodeURIComponent(pathname);
   const nameBranchRest = pathname.replace(/^\/x\//, "");
   const [nameBranch, ...rest] = nameBranchRest.split("/");
   const [name, version] = parseNameVersion(nameBranch);
