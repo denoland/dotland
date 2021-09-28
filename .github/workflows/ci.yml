@@ -10,6 +10,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
+      - uses: denoland/setup-deno@v1
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -20,7 +21,7 @@ jobs:
           restore-keys: |
             web-${{ runner.os }}-yarn-
       - run: yarn --frozen-lockfile
-      - run: yarn format:check
+      - run: yarn fmt-check
       - run: yarn lint
       - run: yarn test
   worker:

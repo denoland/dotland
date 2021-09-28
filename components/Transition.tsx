@@ -4,7 +4,7 @@
 
 import React, { ReactNode } from "react";
 import { CSSTransition as ReactCSSTransition } from "react-transition-group";
-import { useRef, useEffect, useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 
 interface TransitionProps {
   show?: boolean;

@@ -3,9 +3,9 @@
 import React, { useMemo } from "react";
 // import Link from "next/link";
 import {
+  Dep,
   DependencyGraph as DependencyGraphType,
   graphToTree,
-  Dep,
 } from "../util/registry_utils";
 import Link from "next/link";
 
@@ -44,18 +44,22 @@ function Node({ node, currentModule }: { node: Dep; currentModule: string }) {
   return (
     <li>
       <p className="overflow-hidden inline">
-        {url.startsWith("https://deno.land/") ? (
-          <Link href={url.replace("https://deno.land", "")}>
-            <a className="link text-sm truncate">{name}</a>
-          </Link>
-        ) : (
-          <a href={url} className="link text-sm truncate">
-            {name}
-          </a>
-        )}
+        {url.startsWith("https://deno.land/")
+          ? (
+            <Link href={url.replace("https://deno.land", "")}>
+              <a className="link text-sm truncate">{name}</a>
+            </Link>
+          )
+          : (
+            <a href={url} className="link text-sm truncate">
+              {name}
+            </a>
+          )}
       </p>
       <ul className="tree">
-        {node.children.map((node) => (
+        {node.children.map((
+          node,
+        ) => (
           <Node key={node.name} node={node} currentModule={currentModule} />
         ))}
       </ul>

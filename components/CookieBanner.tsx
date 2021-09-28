@@ -5,14 +5,12 @@ import { getItem, setItem } from "../util/local_storage_utils";
 
 export function CookieBanner(): React.ReactElement {
   const [cookieBanner, setCookieBanner] = useState(
-    getItem("cookiebanner") === "closed"
+    getItem("cookiebanner") === "closed",
   );
 
   return (
     <div>
-      {cookieBanner ? (
-        <></>
-      ) : (
+      {cookieBanner ? <></> : (
         <div className="bg-black">
           <div className="max-w-screen-xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between flex-wrap">

@@ -5,7 +5,7 @@ import Head from "next/head";
 
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import { TRANSLATIONS, Translation } from "../util/translations_utils";
+import { Translation, TRANSLATIONS } from "../util/translations_utils";
 import { CookieBanner } from "../components/CookieBanner";
 
 function TranslationsPage(): React.ReactElement {
@@ -30,10 +30,13 @@ function TranslationsPage(): React.ReactElement {
             </a>
           </p>
         </div>
-        <div className="my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end">
-          {TRANSLATIONS.map((language, i) => (
-            <Item key={i} language={language} />
-          ))}
+        <div
+          className="my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end"
+        >
+          {TRANSLATIONS.map((
+            language,
+            i,
+          ) => <Item key={i} language={language} />)}
         </div>
       </div>
       <Footer />
