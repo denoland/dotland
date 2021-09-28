@@ -7,7 +7,7 @@ Deno.test("parsePathname", () => {
     module: "std",
     version: "0.108.0",
     path: "testing/asserts.ts",
-  })
+  });
   assertEquals(parsePathname("/std%400.108.0/testing/asserts.ts"), {
     module: "std",
     version: "0.108.0",
