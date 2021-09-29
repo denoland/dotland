@@ -6,19 +6,22 @@ import Link from "next/link";
 import CodeBlock from "../components/CodeBlock";
 import Footer from "../components/Footer";
 import versions from "../versions.json";
-import { NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import InlineCode from "../components/InlineCode";
 import Header from "../components/Header";
 import { CookieBanner } from "../components/CookieBanner";
 
-const Home: NextPage = () => {
+interface HomeProps {
+  latestStd: string;
+}
+
+const Home: NextPage<HomeProps> = ({ latestStd }) => {
   const complexExampleProgram =
-    `import { serve } from "https://deno.land/std@0.106.0/http/server.ts";
-const server = serve({ port: 8000 });
+    `import { listenAndServe } from "https://deno.land/std@${latestStd}/http/server.ts";
+
 console.log("http://localhost:8000/");
-for await (const req of server) {
-  req.respond({ body: "Hello World" });
-}`;
+listenAndServe(":8000", (req) => new Response("Hello World\\n"));
+`;
 
   return (
     <>
@@ -351,6 +354,14 @@ const InstallSection = () => {
       </p>
     </>
   );
+};
+
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  return {
+    props: {
+      latestStd: versions.std[0],
+    },
+  };
 };
 
 export default Home;
