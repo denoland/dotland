@@ -168,11 +168,11 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
               src="https://img.shields.io/github/workflow/status/denoland/deno_doc/ci/main?label=deno_doc&logo=github"
             />
           </a>
-          <a href="https://github.com/denoland/deno_website2">
+          <a href="https://github.com/denoland/dotland">
             <img
               className="m-2 opacity-75"
-              alt="denoland/deno_website2 CI"
-              src="https://img.shields.io/github/workflow/status/denoland/deno_website2/ci/main?label=deno_website2&logo=github"
+              alt="denoland/dotland CI"
+              src="https://img.shields.io/github/workflow/status/denoland/dotland/ci/main?label=dotland&logo=github"
             />
           </a>
         </div>

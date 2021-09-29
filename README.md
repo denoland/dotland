@@ -1,6 +1,6 @@
-# deno_website2
+# dotland
 
-[![Build Status](https://github.com/denoland/deno_website2/workflows/ci/badge.svg?branch=main&event=push)](https://github.com/denoland/deno_website2/actions)
+[![Build Status](https://github.com/denoland/dotland/workflows/ci/badge.svg?branch=main&event=push)](https://github.com/denoland/dotland/actions)
 
 This is the code for https://deno.land/
 
