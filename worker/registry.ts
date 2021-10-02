@@ -112,7 +112,6 @@ export async function handleRegistryRequest(
     resp2.headers.set("content-type", "application/javascript");
     resp2.headers.set("content-length", respText.length.toString());
   }
-  
 
   resp2.headers.set("Access-Control-Allow-Origin", "*");
 
