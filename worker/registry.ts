@@ -82,9 +82,8 @@ export async function handleRegistryRequest(
   const remoteUrl = getBackingURL(module, version, path);
   const resp2 = await fetchSource(remoteUrl);
   let respText = await resp2.text();
-
   if (
-    headers.get("Accept")?.includes("application/typescript") ||
+    headers.get("accept")?.includes("application/typescript") ||
     headers.get("user-agent")?.includes("Deno/")
   ) {
     // JSX and TSX content type fix
@@ -99,7 +98,7 @@ export async function handleRegistryRequest(
     ) {
       resp2.headers.set("content-type", "application/typescript");
     }
-  } else {
+  } else if (headers.get("accept")?.includes("javascript")) {
     respText = transform(respText, {
       // @ts-ignore The types are taking from node-swc (upstream) they are usually not in sync with the wasm api
       // @littledivy
@@ -113,6 +112,7 @@ export async function handleRegistryRequest(
     resp2.headers.set("content-type", "application/javascript");
     resp2.headers.set("content-length", respText.length.toString());
   }
+  
 
   resp2.headers.set("Access-Control-Allow-Origin", "*");
 
