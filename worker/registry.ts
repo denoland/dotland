@@ -1,11 +1,15 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
 import { parseNameVersion } from "../util/registry_utils.ts";
+import { parse, print, transform } from "https://deno.land/x/swc@0.1.4/mod.ts";
 
 export const S3_BUCKET =
   "http://deno-registry2-prod-storagebucket-b3a31d16.s3-website-us-east-1.amazonaws.com/";
 
-export async function handleRegistryRequest(url: URL): Promise<Response> {
+export async function handleRegistryRequest(
+  url: URL,
+  headers: Headers,
+): Promise<Response> {
   const entry = parsePathname(url.pathname);
   if (!entry) {
     return new Response("This module entry is invalid: " + url.pathname, {
@@ -77,22 +81,46 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
   }
   const remoteUrl = getBackingURL(module, version, path);
   const resp2 = await fetchSource(remoteUrl);
+  let respText = await resp2.text();
 
-  // JSX and TSX content type fix
   if (
-    remoteUrl.endsWith(".jsx") &&
-    !resp2.headers.get("content-type")?.includes("javascript")
+    headers.get("Accept")?.includes("application/typescript") ||
+    headers.get("user-agent")?.includes("Deno/")
   ) {
+    // JSX and TSX content type fix
+    if (
+      remoteUrl.endsWith(".jsx") &&
+      !resp2.headers.get("content-type")?.includes("javascript")
+    ) {
+      resp2.headers.set("content-type", "application/javascript");
+    } else if (
+      remoteUrl.endsWith(".tsx") &&
+      !resp2.headers.get("content-type")?.includes("typescript")
+    ) {
+      resp2.headers.set("content-type", "application/typescript");
+    }
+  } else {
+    respText = transform(respText, {
+      // @ts-ignore The types are taking from node-swc (upstream) they are usually not in sync with the wasm api
+      // @littledivy
+      jsc: {
+        target: "es2016",
+        parser: {
+          syntax: "typescript",
+        },
+      },
+    }).code;
     resp2.headers.set("content-type", "application/javascript");
-  } else if (
-    remoteUrl.endsWith(".tsx") &&
-    !resp2.headers.get("content-type")?.includes("typescript")
-  ) {
-    resp2.headers.set("content-type", "application/typescript");
+    resp2.headers.set("content-length", respText.length.toString());
   }
 
   resp2.headers.set("Access-Control-Allow-Origin", "*");
-  return resp2;
+
+  return new Response(respText, {
+    headers: resp2.headers,
+    status: resp2.status,
+    statusText: resp2.statusText,
+  });
 }
 
 export function parsePathname(

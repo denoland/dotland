@@ -61,7 +61,7 @@ export function handleRequest(request: Request) {
         return Response.redirect(ln.rest + "#L" + ln.line, 302);
       }
     } else {
-      return handleRegistryRequest(url);
+      return handleRegistryRequest(url, request.headers);
     }
   }
 
