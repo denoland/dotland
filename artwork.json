@@ -244,5 +244,17 @@
       "web": "https://pbu.cl/"
     },
     "license": "MIT"
+  },
+  {
+    "date": "2021-10-04",
+    "image": "/images/space_deno.png",
+    "title": "Space Deno",
+    "alt": "Space Deno",
+    "artist": {
+      "name": "pultzlucas",
+      "profile_image": "https://avatars.githubusercontent.com/u/70097798",
+      "github": "pultzlucas"
+    },
+    "license": "MIT"
   }
 ]
