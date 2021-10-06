@@ -16,7 +16,7 @@ html {
   outline: none;
 }
 
-/* https://github.com/denoland/deno_website2/issues/1163 */
+/* https://github.com/denoland/dotland/issues/1163 */
 .language-toml > code > .token-line > .table {
   display: inline;
 }

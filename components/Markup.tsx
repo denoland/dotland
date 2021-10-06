@@ -81,7 +81,7 @@ export function transformLinkUri(displayURL: string, baseURL: string) {
 
     // If the URL is relative, it should be relative to the canonical URL of the file.
     if (isRelative(href)) {
-      // https://github.com/denoland/deno_website2/issues/1047
+      // https://github.com/denoland/dotland/issues/1047
       href = decodeURIComponent(relativeToAbsolute(displayURL, href));
     }
     if (href.startsWith("/") && !href.startsWith("//")) {

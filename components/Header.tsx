@@ -26,16 +26,22 @@ function Header({
           <a className="flex items-center">
             <img className="h-10 w-auto sm:h-12 my-2" src="/logo.svg" alt="" />
             <div className="ml-5 flex flex-col justify-center">
-              {!main && (
-                <div className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
-                  Deno
-                </div>
-              )}
-              {subtitle && (
-                <div className="font-normal text-sm sm:text-lg leading-tight tracking-tight">
-                  {subtitle}
-                </div>
-              )}
+              {!main &&
+                (
+                  <div
+                    className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight"
+                  >
+                    Deno
+                  </div>
+                )}
+              {subtitle &&
+                (
+                  <div
+                    className="font-normal text-sm sm:text-lg leading-tight tracking-tight"
+                  >
+                    {subtitle}
+                  </div>
+                )}
             </div>
           </a>
         </Link>
@@ -70,8 +76,15 @@ function Header({
             </a>
           </Link>
           <Link href="/manual">
+<<<<<<< HEAD
             <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
               参考手册
+=======
+            <a
+              className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+            >
+              Manual
+>>>>>>> aa611c5e9dfbf7d90d524d4c0c5645094b5fcf0c
             </a>
           </Link>
           <a
@@ -87,6 +100,7 @@ function Header({
             API
           </a>
           <Link href="/std">
+<<<<<<< HEAD
             <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
               标准库
             </a>
@@ -94,6 +108,19 @@ function Header({
           <Link href="/x">
             <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
               第三方模块
+=======
+            <a
+              className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+            >
+              Standard Library
+            </a>
+          </Link>
+          <Link href="/x">
+            <a
+              className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+            >
+              Third Party Modules
+>>>>>>> aa611c5e9dfbf7d90d524d4c0c5645094b5fcf0c
             </a>
           </Link>
           <a
@@ -127,7 +154,9 @@ function Header({
         leaveFrom="opacity-100 scale-100"
         leaveTo="opacity-0 scale-95"
       >
-        <div className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right lg:hidden">
+        <div
+          className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right lg:hidden"
+        >
           <div className="rounded-lg shadow-md">
             <div className="rounded-lg bg-white shadow-xs overflow-hidden">
               <div className="px-5 pt-4 flex items-center justify-between">
@@ -139,14 +168,19 @@ function Header({
                       alt=""
                     />
                     <div className="ml-5 flex flex-col justify-center">
-                      <div className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
+                      <div
+                        className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight"
+                      >
                         Deno
                       </div>
-                      {subtitle && (
-                        <div className="font-normal text-sm sm:text-lg leading-tight tracking-tight">
-                          {subtitle}
-                        </div>
-                      )}
+                      {subtitle &&
+                        (
+                          <div
+                            className="font-normal text-sm sm:text-lg leading-tight tracking-tight"
+                          >
+                            {subtitle}
+                          </div>
+                        )}
                     </div>
                   </a>
                 </Link>{" "}
@@ -181,6 +215,7 @@ function Header({
                   </a>
                 </Link>
                 <Link href="/manual">
+<<<<<<< HEAD
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
                     参考手册
                   </a>
@@ -188,6 +223,19 @@ function Header({
                 <Link href="https://deno.com/blog">
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
                     博客
+=======
+                  <a
+                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
+                  >
+                    Manual
+                  </a>
+                </Link>
+                <Link href="https://deno.com/blog">
+                  <a
+                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
+                  >
+                    Blog
+>>>>>>> aa611c5e9dfbf7d90d524d4c0c5645094b5fcf0c
                   </a>
                 </Link>
                 <a
@@ -197,6 +245,7 @@ function Header({
                   API
                 </a>
                 <Link href="/std">
+<<<<<<< HEAD
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
                     标准库
                   </a>
@@ -204,6 +253,19 @@ function Header({
                 <Link href="/x">
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
                     第三方模块
+=======
+                  <a
+                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
+                  >
+                    Standard Library
+                  </a>
+                </Link>
+                <Link href="/x">
+                  <a
+                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
+                  >
+                    Third Party Modules
+>>>>>>> aa611c5e9dfbf7d90d524d4c0c5645094b5fcf0c
                   </a>
                 </Link>
               </div>

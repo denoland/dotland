@@ -6,18 +6,22 @@ import Link from "next/link";
 import CodeBlock from "../components/CodeBlock";
 import Footer from "../components/Footer";
 import versions from "../versions.json";
-import { NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import InlineCode from "../components/InlineCode";
 import Header from "../components/Header";
 import { CookieBanner } from "../components/CookieBanner";
 
-const Home: NextPage = () => {
-  const complexExampleProgram = `import { serve } from "https://deno.land/std@0.106.0/http/server.ts";
-const server = serve({ port: 8000 });
+interface HomeProps {
+  latestStd: string;
+}
+
+const Home: NextPage<HomeProps> = ({ latestStd }) => {
+  const complexExampleProgram =
+    `import { listenAndServe } from "https://deno.land/std@${latestStd}/http/server.ts";
+
 console.log("http://localhost:8000/");
-for await (const req of server) {
-  req.respond({ body: "Hello World" });
-}`;
+listenAndServe(":8000", (req) => new Response("Hello World\\n"));
+`;
 
   return (
     <>
@@ -25,7 +29,8 @@ for await (const req of server) {
         <title>Deno - 现代的 JavaScript 和 TypeScript 运行时</title>
       </Head>
       <CookieBanner />
-      {/* <div className="bg-blue-500 p-4 text-white flex justify-center text-center">
+      {
+        /* <div className="bg-blue-500 p-4 text-white flex justify-center text-center">
         <div className="max-w-screen-xl">
           <span className="inline">Deno 1.9 发布了</span>
           <span className="block sm:ml-2 sm:inline-block font-semibold">
@@ -34,18 +39,33 @@ for await (const req of server) {
             </a>
           </span>
         </div>
-      </div> */}
+      </div> */
+      }
       <div className="bg-white">
         <div className="bg-gray-50 border-b border-gray-200">
           <Header main />
-          <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
-            <h1 className="font-extrabold text-5xl leading-10 tracking-tight text-gray-900">
+          <div
+            className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center"
+          >
+            <h1
+              className="font-extrabold text-5xl leading-10 tracking-tight text-gray-900"
+            >
               Deno
             </h1>
+<<<<<<< HEAD
             <h2 className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900">
               <strong className="font-semibold">现代的</strong>{" "}
               <strong className="font-semibold">JavaScript</strong> 和{" "}
               <strong className="font-semibold">TypeScript</strong> 运行时。
+=======
+            <h2
+              className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900"
+            >
+              A <strong className="font-semibold">modern</strong> runtime for
+              {" "}
+              <strong className="font-semibold">JavaScript</strong> and{" "}
+              <strong className="font-semibold">TypeScript</strong>.
+>>>>>>> aa611c5e9dfbf7d90d524d4c0c5645094b5fcf0c
             </h2>
             <a
               href="/#installation"
@@ -81,6 +101,15 @@ for await (const req of server) {
               完全兼容：{" "}
               <a href="https://deno.land/std" className="link">
                 deno.land/std
+              </a>
+            </li>
+            <li>
+              Has a number of{" "}
+              <a
+                href="https://github.com/denoland/deno/wiki#companies-interested-in-deno"
+                className="link"
+              >
+                companies interested in using and exploring Deno
               </a>
             </li>
           </ol>
@@ -163,8 +192,15 @@ for await (const req of server) {
             </a>
           </Link>
           <p className="my-4 text-gray-700">
+<<<<<<< HEAD
             除了提供 Deno 运行时之外，Deno 还提供了标准模块，这些模块由 Deno
             核心团队维护和审核以保证可使用特定的 Deno 版本。这些模块在{" "}
+=======
+            Next to the Deno runtime, Deno also provides a list of audited
+            standard modules that are reviewed by the Deno maintainers and are
+            guaranteed to work with a specific Deno version. These live in the
+            {" "}
+>>>>>>> aa611c5e9dfbf7d90d524d4c0c5645094b5fcf0c
             <a href="https://github.com/denoland/deno_std" className="link">
               denoland/deno_std
             </a>{" "}
@@ -300,8 +336,14 @@ const InstallSection = () => {
   return (
     <>
       <p className="my-4 text-gray-700">
+<<<<<<< HEAD
         Deno
         没有外部依赖，只有一个单独的可执行文件。你可以使用下面的安装器来安装，也可以从{" "}
+=======
+        Deno ships as a single executable with no dependencies. You can install
+        it using the installers below, or download a release binary from the
+        {" "}
+>>>>>>> aa611c5e9dfbf7d90d524d4c0c5645094b5fcf0c
         <a href="https://github.com/denoland/deno/releases" className="link">
           GitHub Releases 页面
         </a>
@@ -322,6 +364,14 @@ const InstallSection = () => {
       </p>
     </>
   );
+};
+
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  return {
+    props: {
+      latestStd: versions.std[0],
+    },
+  };
 };
 
 export default Home;

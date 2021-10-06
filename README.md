@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 # Deno 中文网站
 
 [![ci](https://github.com/justjavac/deno_website2/actions/workflows/ci.yml/badge.svg)](https://github.com/justjavac/deno_website2/actions/workflows/ci.yml)
+=======
+# dotland
+
+[![Build Status](https://github.com/denoland/dotland/workflows/ci/badge.svg?branch=main&event=push)](https://github.com/denoland/dotland/actions)
+>>>>>>> aa611c5e9dfbf7d90d524d4c0c5645094b5fcf0c
 
 Deno 中文网站的源码。
 

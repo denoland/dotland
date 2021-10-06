@@ -5,7 +5,7 @@ import Head from "next/head";
 
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import { TRANSLATIONS, Translation } from "../util/translations_utils";
+import { Translation, TRANSLATIONS } from "../util/translations_utils";
 import { CookieBanner } from "../components/CookieBanner";
 
 function TranslationsPage(): React.ReactElement {
@@ -22,17 +22,20 @@ function TranslationsPage(): React.ReactElement {
           <p className="mt-4 text-lg">
             Deno 文档提供以下语言版本。是否漏掉了你的语言呢？
             <a
-              href="https://github.com/denoland/deno_website2/blob/main/translations.json"
+              href="https://github.com/denoland/dotland/blob/main/translations.json"
               className="link"
             >
               马上添加！
             </a>
           </p>
         </div>
-        <div className="my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end">
-          {TRANSLATIONS.map((language, i) => (
-            <Item key={i} language={language} />
-          ))}
+        <div
+          className="my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end"
+        >
+          {TRANSLATIONS.map((
+            language,
+            i,
+          ) => <Item key={i} language={language} />)}
         </div>
       </div>
       <Footer />

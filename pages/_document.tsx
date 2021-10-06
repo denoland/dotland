@@ -2,17 +2,17 @@
 
 import React from "react";
 import Document, {
-  Html,
-  Head,
-  Main,
-  NextScript,
   DocumentContext,
   DocumentInitialProps,
+  Head,
+  Html,
+  Main,
+  NextScript,
 } from "next/document";
 
 export default class DenoDocDocument extends Document {
   static async getInitialProps(
-    ctx: DocumentContext
+    ctx: DocumentContext,
   ): Promise<DocumentInitialProps> {
     const initialProps = await Document.getInitialProps(ctx);
     return { ...initialProps };
@@ -58,6 +58,15 @@ export default class DenoDocDocument extends Document {
         <body>
           <Main />
           <NextScript />
+<<<<<<< HEAD
+=======
+          <script
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "1b59386cd9134d5e81c9b0d5b9cb9686"}'
+          >
+          </script>
+>>>>>>> aa611c5e9dfbf7d90d524d4c0c5645094b5fcf0c
         </body>
       </Html>
     );

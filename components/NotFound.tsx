@@ -8,11 +8,20 @@ function NotFoundPage(): React.ReactElement {
       <div id="flex-top">
         <Header />
         <header>
-          <h1 className="font-extrabold text-5xl leading-10 tracking-tight text-gray-900">
+          <h1
+            className="font-extrabold text-5xl leading-10 tracking-tight text-gray-900"
+          >
             404
           </h1>
+<<<<<<< HEAD
           <h2 className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900">
             没有找到你想要访问的页面。
+=======
+          <h2
+            className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900"
+          >
+            Couldn't find what you're looking for.
+>>>>>>> aa611c5e9dfbf7d90d524d4c0c5645094b5fcf0c
           </h2>
         </header>
       </div>
