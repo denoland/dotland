@@ -98,7 +98,10 @@ export async function handleRegistryRequest(
     ) {
       resp2.headers.set("content-type", "application/typescript");
     }
-  } else if (headers.get("accept")?.includes("javascript")) {
+  } else if (
+    headers.get("accept")?.includes("javascript") ||
+    headers.get("accept") === "*/*"
+  ) {
     respText = transform(respText, {
       // @ts-ignore The types are taking from node-swc (upstream) they are usually not in sync with the wasm api
       // @littledivy
