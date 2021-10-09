@@ -3,22 +3,24 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
 import {
-  getSourceURL,
-  VersionMetaInfo,
-  getRepositoryURL,
-  getVersionMeta,
-  getVersionList,
-  getModule,
   fileNameFromURL,
-  findRootReadme,
-  isReadme,
   fileTypeFromURL,
+  findRootReadme,
+  getModule,
+  getRepositoryURL,
+  getSourceURL,
+  getVersionList,
+  getVersionMeta,
+  isReadme,
+  parseNameVersion,
+  parseQuery,
+  VersionMetaInfo,
 } from "./registry_utils";
 import "isomorphic-unfetch";
 
 test("source url", () => {
   expect(getSourceURL("ltest2", "0.0.8", "/README.md")).toEqual(
-    "https://cdn.deno.land/ltest2/versions/0.0.8/raw/README.md"
+    "https://cdn.deno.land/ltest2/versions/0.0.8/raw/README.md",
   );
 });
 
@@ -95,7 +97,7 @@ const versionMeta: VersionMetaInfo = {
 
 test("getRepositoryURL", () => {
   expect(getRepositoryURL(versionMeta, "/README.md")).toEqual(
-    "https://github.com/luca-rand/testing/blob/0.0.8/README.md"
+    "https://github.com/luca-rand/testing/blob/0.0.8/README.md",
   );
 });
 
@@ -214,4 +216,25 @@ test("isReadme", () => {
   for (const [path, expectedToBeReadme] of tests) {
     expect([path, isReadme(path)]).toEqual([path, expectedToBeReadme]);
   }
+});
+
+test("parseNameVersion", () => {
+  expect(parseNameVersion("ms@v0.1.0")).toEqual(["ms", "v0.1.0"]);
+  expect(parseNameVersion("xstate@xstate@4.25.0")).toEqual([
+    "xstate",
+    "xstate@4.25.0",
+  ]);
+});
+
+test("parseQuery", () => {
+  expect(parseQuery(["std@0.101.0", "http", "server.ts"])).toEqual({
+    name: "std",
+    version: "0.101.0",
+    path: "/http/server.ts",
+  });
+  expect(parseQuery(["oak@v9.0.1", "mod.ts"])).toEqual({
+    name: "oak",
+    version: "v9.0.1",
+    path: "/mod.ts",
+  });
 });

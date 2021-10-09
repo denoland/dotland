@@ -1,6 +1,6 @@
 # Deno 中文网站
 
-[![ci](https://github.com/justjavac/deno_website2/actions/workflows/ci.yml/badge.svg)](https://github.com/justjavac/deno_website2/actions/workflows/ci.yml)
+[![ci](https://github.com/justjavac/deno_website2/actions/workflows/ci.yml/badge.svg)](https://github.com/justjavac/deno_website2/actions)
 
 Deno 中文网站的源码。
 

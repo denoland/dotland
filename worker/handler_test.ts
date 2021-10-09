@@ -1,9 +1,6 @@
 /* Copyright 2021 the Deno authors. All rights reserved. MIT license. */
 
-import {
-  assert,
-  assertEquals,
-} from "https://deno.land/std@0.97.0/testing/asserts.ts";
+import { assert, assertEquals } from "./test_deps.ts";
 import { extractAltLineNumberReference, handleRequest } from "./handler.ts";
 
 Deno.test({

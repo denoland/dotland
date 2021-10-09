@@ -65,7 +65,7 @@ function Markdown(props: MarkupProps): React.ReactElement | null {
             const original = a[1];
             const final = transformLinkUri(
               props.displayURL,
-              props.baseURL
+              props.baseURL,
             )(original);
             html = html.replace(`href="${original}"`, `href="${final}"`);
           });
@@ -81,7 +81,7 @@ function Markdown(props: MarkupProps): React.ReactElement | null {
               language={language as any}
               disablePrefixes={true}
               enableLineRef={false}
-            />
+            />,
           );
           return `<pre>${markup}</pre>`;
         },

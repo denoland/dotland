@@ -23,7 +23,9 @@ function BenchmarkChart(props: BenchmarkChartProps): React.ReactElement {
 
   function viewCommitOnClick(c1: any, c2: any, { dataPointIndex }: any): void {
     window.open(
-      `https://github.com/denoland/deno/commit/${props.sha1List[dataPointIndex]}`
+      `https://github.com/denoland/deno/commit/${
+        props.sha1List[dataPointIndex]
+      }`,
     );
   }
 
@@ -94,7 +96,9 @@ function BenchmarkChart(props: BenchmarkChartProps): React.ReactElement {
 export function BenchmarkLoading(): React.ReactElement {
   return (
     <div style={{ height: 335 }} className="flex items-center justify-center">
-      <span className="text-gray-500">Loading...</span>
+      <span className="text-gray-500">
+        Loading...
+      </span>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
 const req = await fetch(
-  "https://cdn.jsdelivr.net/gh/github/gemoji/db/emoji.json"
+  "https://cdn.jsdelivr.net/gh/github/gemoji/db/emoji.json",
 );
 const emojis = await req.json();
 

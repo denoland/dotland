@@ -55,10 +55,12 @@ function Manual(): React.ReactElement {
   if (path.endsWith(".md")) {
     replace(
       `/[...rest]`,
-      `/manual${version && version !== "" ? `@${version}` : ""}${path.replace(
-        /\.md$/,
-        ""
-      )}`
+      `/manual${version && version !== "" ? `@${version}` : ""}${
+        path.replace(
+          /\.md$/,
+          "",
+        )
+      }`,
     );
     return <></>;
   }
@@ -131,7 +133,7 @@ function Manual(): React.ReactElement {
 
       setPageList(tempList);
       setPageIndex(
-        tempList.findIndex((page) => page.path === `/manual${path}`)
+        tempList.findIndex((page) => page.path === `/manual${path}`),
       );
     }
   }, [tableOfContents, path]);
@@ -144,7 +146,7 @@ function Manual(): React.ReactElement {
   const [pageTitle, setPageTitle] = useState<string>("");
   const tableOfContentsMap = useMemo(
     async () => await getTableOfContentsMap(version),
-    [version]
+    [version],
   );
   useEffect(() => {
     setContent(null);
@@ -152,7 +154,7 @@ function Manual(): React.ReactElement {
       .then((res) => {
         if (res.status !== 200) {
           throw Error(
-            `Got an error (${res.status}) while getting the documentation file.`
+            `Got an error (${res.status}) while getting the documentation file.`,
           );
         }
         return res.text();
@@ -189,7 +191,7 @@ function Manual(): React.ReactElement {
       setIsOpen(true);
       setInitialQuery(e.key);
     },
-    [setIsOpen, setInitialQuery]
+    [setIsOpen, setInitialQuery],
   );
 
   useDocSearchKeyboardEvents({
@@ -216,15 +218,14 @@ function Manual(): React.ReactElement {
   function gotoVersion(newVersion: string) {
     push(
       `/[...rest]`,
-      `/manual${newVersion !== "" ? `@${newVersion}` : ""}${path}`
+      `/manual${newVersion !== "" ? `@${newVersion}` : ""}${path}`,
     );
   }
 
-  const stdVersion =
-    version === undefined
-      ? versionMeta.std[0]
-      : ((versionMeta.cli_to_std as any)[version ?? ""] as string) ??
-        versionMeta.std[0];
+  const stdVersion = version === undefined
+    ? versionMeta.std[0]
+    : ((versionMeta.cli_to_std as any)[version ?? ""] as string) ??
+      versionMeta.std[0];
 
   const isPreview = isPreviewVersion(version);
 
@@ -272,7 +273,7 @@ function Manual(): React.ReactElement {
               });
             }}
           />,
-          document.body
+          document.body,
         )}
 
       <div className="h-screen flex overflow-hidden">
@@ -291,7 +292,8 @@ function Manual(): React.ReactElement {
                   <div
                     className="absolute inset-0 bg-gray-600 opacity-75"
                     onClick={hideSidebar}
-                  ></div>
+                  >
+                  </div>
                 </div>
               </Transition>
               <Transition
@@ -302,7 +304,9 @@ function Manual(): React.ReactElement {
                 leaveFrom="translate-x-0"
                 leaveTo="-translate-x-full"
               >
-                <div className="relative flex-1 flex flex-col max-w-xs w-full bg-white">
+                <div
+                  className="relative flex-1 flex flex-col max-w-xs w-full bg-white"
+                >
                   <div className="absolute top-0 right-0 -mr-14 p-1">
                     <button
                       role="button"
@@ -325,7 +329,9 @@ function Manual(): React.ReactElement {
                       </svg>
                     </button>
                   </div>
-                  <div className="bg-gray-100 pb-4 pt-4 border-b border-gray-200">
+                  <div
+                    className="bg-gray-100 pb-4 pt-4 border-b border-gray-200"
+                  >
                     <Link href="/">
                       <a className="flex items-center flex-shrink-0 px-4">
                         <img
@@ -334,7 +340,9 @@ function Manual(): React.ReactElement {
                           className="w-auto h-12"
                         />
                         <div className="mx-4 flex flex-col justify-center">
-                          <div className="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
+                          <div
+                            className="font-bold text-gray-900 leading-6 text-2xl tracking-tight"
+                          >
                             Deno 手册
                           </div>
                         </div>
@@ -363,13 +371,17 @@ function Manual(): React.ReactElement {
         </Transition>
 
         <div className="hidden md:flex md:flex-shrink-0">
-          <div className="flex flex-col w-72 border-r border-gray-200 bg-gray-50">
+          <div
+            className="flex flex-col w-72 border-r border-gray-200 bg-gray-50"
+          >
             <div className="bg-gray-100 pb-4 pt-4 border-b border-gray-200">
               <Link href="/">
                 <a className="flex items-center flex-shrink-0 px-4">
                   <img src="/logo.svg" alt="logo" className="w-auto h-12" />
                   <div className="mx-4 flex flex-col justify-center">
-                    <div className="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
+                    <div
+                      className="font-bold text-gray-900 leading-6 text-2xl tracking-tight"
+                    >
                       Deno 手册
                     </div>
                   </div>
@@ -391,13 +403,17 @@ function Manual(): React.ReactElement {
           </div>
         </div>
         <div className="flex flex-col w-0 flex-1 overflow-hidden">
-          <div className="z-10 flex-shrink-0 flex h-16 bg-white shadow md:hidden">
+          <div
+            className="z-10 flex-shrink-0 flex h-16 bg-white shadow md:hidden"
+          >
             <Link href="/">
               <a className="px-4 flex items-center justify-center md:hidden">
                 <img src="/logo.svg" alt="logo" className="w-auto h-10" />
               </a>
             </Link>
-            <div className="border-l border-r border-gray-200 flex-1 px-4 flex justify-between">
+            <div
+              className="border-l border-r border-gray-200 flex-1 px-4 flex justify-between"
+            >
               <div className="flex-1 flex">
                 <div className="w-full flex justify-between h-full">
                   <label htmlFor="search_field" className="sr-only">
@@ -457,7 +473,9 @@ function Manual(): React.ReactElement {
             ref={manualEl}
           >
             <div className="h-16 bg-white shadow hidden md:block">
-              <div className="max-w-screen-md mx-auto px-12 w-full flex justify-between h-full">
+              <div
+                className="max-w-screen-md mx-auto px-12 w-full flex justify-between h-full"
+              >
                 <label htmlFor="search_field" className="sr-only">
                   搜索
                 </label>
@@ -486,105 +504,111 @@ function Manual(): React.ReactElement {
               </div>
             </div>
             <CookieBanner />
-            {isPreview ? (
-              <UserContributionBanner
-                gotoVersion={gotoVersion}
-                versions={versions}
-              />
-            ) : null}
-            <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20">
-              {content ? (
-                <>
-                  <a
-                    href={getDocURL(version ?? versions[0], path)}
-                    className={`text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right ${
-                      path.split("/").length === 2 ? "mt-11" : "mt-9"
-                    } mr-4`}
-                  >
-                    <span className="sr-only">GitHub</span>
-                    <svg
-                      className="h-6 w-6 inline"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
+            {isPreview
+              ? (
+                <UserContributionBanner
+                  gotoVersion={gotoVersion}
+                  versions={versions}
+                />
+              )
+              : null}
+            <div
+              className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20"
+            >
+              {content
+                ? (
+                  <>
+                    <a
+                      href={getDocURL(version ?? versions[0], path)}
+                      className={`text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right ${
+                        path.split("/").length === 2 ? "mt-11" : "mt-9"
+                      } mr-4`}
                     >
-                      <title>Edit on GitHub</title>
-                      <path
-                        fillRule="evenodd"
-                        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </a>
-                  <Markdown
-                    source={content
-                      .replace(/\$STD_VERSION/g, stdVersion)
-                      .replace(/\$CLI_VERSION/g, version)}
-                    displayURL={`https://deno-cn.vercel.app/manual${
-                      version ? `@${version}` : ""
-                    }${path}`}
-                    sourceURL={sourceURL}
-                    baseURL={`https://deno-cn.vercel.app/manual${
-                      version ? `@${version}` : ""
-                    }`}
-                  />
-                  <div className="mt-4 pt-4 border-t border-gray-200">
-                    {pageList[pageIndex - 1] !== undefined && (
-                      <Link
-                        href={
-                          version
+                      <span className="sr-only">GitHub</span>
+                      <svg
+                        className="h-6 w-6 inline"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <title>在 GitHub 上编辑</title>
+                        <path
+                          fillRule="evenodd"
+                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </a>
+                    <Markdown
+                      source={content
+                        .replace(/\$STD_VERSION/g, stdVersion)
+                        .replace(/\$CLI_VERSION/g, version)}
+                      displayURL={`https://deno.land/manual${
+                        version ? `@${version}` : ""
+                      }${path}`}
+                      sourceURL={sourceURL}
+                      baseURL={`https://deno.land/manual${
+                        version ? `@${version}` : ""
+                      }`}
+                    />
+                    <div className="mt-4 pt-4 border-t border-gray-200">
+                      {pageList[pageIndex - 1] !== undefined && (
+                        <Link
+                          href={version
                             ? pageList[pageIndex - 1].path.replace(
-                                "manual",
-                                `manual@${version}`
-                              )
-                            : pageList[pageIndex - 1].path
-                        }
-                      >
-                        <a className="text-gray-900 hover:text-gray-600 font-normal">
-                          ← {pageList[pageIndex - 1].name}
-                        </a>
-                      </Link>
-                    )}
-                    {pageList[pageIndex + 1] !== undefined && (
-                      <Link
-                        href={
-                          version
+                              "manual",
+                              `manual@${version}`,
+                            )
+                            : pageList[pageIndex - 1].path}
+                        >
+                          <a
+                            className="text-gray-900 hover:text-gray-600 font-normal"
+                          >
+                            ← {pageList[pageIndex - 1].name}
+                          </a>
+                        </Link>
+                      )}
+                      {pageList[pageIndex + 1] !== undefined && (
+                        <Link
+                          href={version
                             ? pageList[pageIndex + 1].path.replace(
-                                "manual",
-                                `manual@${version}`
-                              )
-                            : pageList[pageIndex + 1].path
-                        }
-                      >
-                        <a className="text-gray-900 hover:text-gray-600 font-normal float-right">
-                          {pageList[pageIndex + 1].name} →
-                        </a>
-                      </Link>
-                    )}
+                              "manual",
+                              `manual@${version}`,
+                            )
+                            : pageList[pageIndex + 1].path}
+                        >
+                          <a
+                            className="text-gray-900 hover:text-gray-600 font-normal float-right"
+                          >
+                            {pageList[pageIndex + 1].name} →
+                          </a>
+                        </Link>
+                      )}
+                    </div>
+                  </>
+                )
+                : (
+                  <div className="w-full my-8">
+                    <div className="w-4/5 sm:w-1/3 bg-gray-100 h-8"></div>
+                    <div className="sm:w-2/3 bg-gray-100 h-3 mt-10"></div>
+                    <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
+                    <div className="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                    <div className="w-3/4 bg-gray-100 h-3 mt-4"></div>
+                    <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
+                    <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                    <div className="sm:w-2/3 bg-gray-100 h-3 mt-10"></div>
+                    <div className="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                    <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
+                    <div className="w-3/4 bg-gray-100 h-3 mt-4"></div>
+                    <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                    <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
+                    <div className="w-3/4 bg-gray-100 h-3 mt-10"></div>
+                    <div className="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                    <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
+                    <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
+                    <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                    <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
                   </div>
-                </>
-              ) : (
-                <div className="w-full my-8">
-                  <div className="w-4/5 sm:w-1/3 bg-gray-100 h-8"></div>
-                  <div className="sm:w-2/3 bg-gray-100 h-3 mt-10"></div>
-                  <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
-                  <div className="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                  <div className="w-3/4 bg-gray-100 h-3 mt-4"></div>
-                  <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
-                  <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                  <div className="sm:w-2/3 bg-gray-100 h-3 mt-10"></div>
-                  <div className="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                  <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
-                  <div className="w-3/4 bg-gray-100 h-3 mt-4"></div>
-                  <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                  <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
-                  <div className="w-3/4 bg-gray-100 h-3 mt-10"></div>
-                  <div className="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                  <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
-                  <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
-                  <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                  <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
-                </div>
-              )}
+                )}
             </div>
           </main>
         </div>
@@ -608,8 +632,7 @@ function UserContributionBanner({
             <p className="ml-3 font-medium text-gray-900">
               <span>
                 You are viewing documentation generated from a{"  "}
-                <b className="font-bold">user contribution</b>
-                {"  "}
+                <b className="font-bold">user contribution</b>{"  "}
                 or an upcoming or past release. The contents of this document
                 may not have been reviewed by the Deno team.{" "}
               </span>
@@ -649,14 +672,14 @@ function Version({
             className="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
             value={version ?? versions[0]}
             onChange={({ target: { value: newVersion } }) =>
-              gotoVersion(newVersion)
-            }
+              gotoVersion(newVersion)}
           >
-            {version && version !== "main" && !versions.includes(version) && (
-              <option key={version} value={version}>
-                {version}
-              </option>
-            )}
+            {version && version !== "main" && !versions.includes(version) &&
+              (
+                <option key={version} value={version}>
+                  {version}
+                </option>
+              )}
             <option key="main" value="main">
               main
             </option>
@@ -703,11 +726,15 @@ function ToC({
                   {entry.children && (
                     <ol className="pl-4 list-decimal nested">
                       {Object.entries(entry.children).map(
-                        ([childSlug, name]) => (
+                        (
+                          [childSlug, name],
+                        ) => (
                           <li key={`${slug}/${childSlug}`} className="my-0.5">
                             <Link
                               href={`/manual${
-                                version ? `@${version}` : ""
+                                version
+                                  ? `@${version}`
+                                  : ""
                               }/${slug}/${childSlug}`}
                             >
                               <a
@@ -721,7 +748,7 @@ function ToC({
                               </a>
                             </Link>
                           </li>
-                        )
+                        ),
                       )}
                     </ol>
                   )}

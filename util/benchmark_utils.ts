@@ -46,7 +46,7 @@ export interface Column {
 
 function getBenchmarkVarieties(
   data: BenchmarkRun[],
-  benchmarkName: BenchmarkName
+  benchmarkName: BenchmarkName,
 ): string[] {
   // Look at last sha hash.
   const last = data[data.length - 1];
@@ -55,7 +55,7 @@ function getBenchmarkVarieties(
 
 function createColumns(
   data: BenchmarkRun[],
-  benchmarkName: BenchmarkName
+  benchmarkName: BenchmarkName,
 ): Column[] {
   const varieties = getBenchmarkVarieties(data, benchmarkName);
   return varieties.map((variety) => ({
@@ -83,7 +83,7 @@ function createColumns(
 // For columns that have just a single variety
 function createColumns1(
   data: BenchmarkRun[],
-  benchmarkName: BenchmarkName
+  benchmarkName: BenchmarkName,
 ): Column[] {
   return [
     {
@@ -99,7 +99,7 @@ export function createNormalizedColumns(
   data: BenchmarkRun[],
   benchmarkName: BenchmarkName,
   baselineBenchmark: BenchmarkName,
-  baselineVariety: string
+  baselineVariety: string,
 ): Column[] {
   const varieties = getBenchmarkVarieties(data, benchmarkName);
   return varieties.map((variety) => ({
@@ -228,8 +228,8 @@ function renameReqPerSecFields(data: BenchmarkRun[]): void {
       ...rest
     } = row.req_per_sec;
     row.req_per_sec = {
-      core_http_bin_ops:
-        core_http_bin_ops ?? deno_core_http_bench ?? deno_core_single,
+      core_http_bin_ops: core_http_bin_ops ?? deno_core_http_bench ??
+        deno_core_single,
       deno_tcp: deno_tcp ?? deno,
       node_http: node_http ?? node,
       ...rest,
@@ -286,13 +286,13 @@ export function reshape(data: BenchmarkRun[]): BenchmarkData {
     data,
     "req_per_sec",
     "req_per_sec",
-    "hyper"
+    "hyper",
   );
   const normalizedProxy = createNormalizedColumns(
     data,
     "req_per_sec_proxy",
     "req_per_sec",
-    "hyper"
+    "hyper",
   );
 
   return {
