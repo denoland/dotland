@@ -482,31 +482,9 @@ function Registry(): React.ReactElement {
                               <div
                                 className="w-4/5 sm:w-full bg-gray-100 h-3 my-2"
                               >
-<<<<<<< HEAD
-                                <title>GitHub 仓库</title>
-                                <path
-                                  fillRule="evenodd"
-                                  d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                                  clipRule="evenodd"
-                                />
-                              </svg>
-                              <a
-                                className="link"
-                                href={`https://github.com/${versionMeta.uploadOptions.repository}`}
-                              >
-                                {versionMeta.uploadOptions.repository}
-                              </a>
-                            </div>
-                            <div className="mt-2 flex items-center">
-                              <svg
-                                className="h-5 w-5 mr-2 inline text-gray-700"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-=======
                               </div>
                               <div
                                 className="w-4/5 sm:w-2/3 bg-gray-100 h-3 my-2 block sm:hidden md:block"
->>>>>>> aa611c5e9dfbf7d90d524d4c0c5645094b5fcf0c
                               >
                               </div>
                               <div className="mt-3 flex items-center py-0.5">
@@ -515,7 +493,7 @@ function Registry(): React.ReactElement {
                                   fill="currentColor"
                                   viewBox="0 0 24 24"
                                 >
-                                  <title>GitHub Repository</title>
+                                  <title>GitHub 仓库</title>
                                   <path
                                     fillRule="evenodd"
                                     d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
@@ -556,7 +534,7 @@ function Registry(): React.ReactElement {
                                   fill="currentColor"
                                   viewBox="0 0 24 24"
                                 >
-                                  <title>GitHub Repository</title>
+                                  <title>GitHub 仓库</title>
                                   <path
                                     fillRule="evenodd"
                                     d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
@@ -596,90 +574,10 @@ function Registry(): React.ReactElement {
                       </div>
                     </div>
 
-<<<<<<< HEAD
-                    <div className="max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4">
-                      <p className="text-md font-semibold mb-2">版本信息</p>
-                      {versionMeta === undefined ? (
-                        <div className="mt-2 flex items-center py-0.5">
-                          <svg
-                            className="h-5 w-5 mr-2 inline text-gray-200"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <title>版本发布于</title>
-                            <path
-                              fillRule="evenodd"
-                              d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                          <div className="w-4/5 sm:w-2/3 bg-gray-100 h-4"></div>
-                        </div>
-                      ) : versionMeta === null ? null : (
-                        <div className="mt-2 flex text-sm items-center">
-                          <svg
-                            className="h-5 w-5 mr-2 inline text-gray-700"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <title>版本发布于</title>
-                            <path
-                              fillRule="evenodd"
-                              d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                          <div title={versionMeta.uploadedAt.toLocaleString()}>
-                            {twas(versionMeta.uploadedAt.getTime())}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                    {documentationURL && externalDependencies !== null ? (
-                      <div className="max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4">
-                        <p className="text-md font-semibold mb-2">外部依赖</p>
-                        {externalDependencies === undefined ? (
-                          <>
-                            <div className="w-3/4 sm:w-2/3 bg-gray-100 h-3 mt-1"></div>
-                            <div className="w-5/6 sm:w-4/5 bg-gray-100 h-3 mt-1"></div>
-                            <div className="w-5/6 sm:w-4/5 bg-gray-100 h-3 mt-1"></div>
-                          </>
-                        ) : externalDependencies === null ? null : (
-                          <>
-                            <div className="mt-2 overflow-x-auto">
-                              {externalDependencies.map((url) => (
-                                <p key={url}>
-                                  {url.startsWith("https://deno.land/") ? (
-                                    <Link
-                                      href={url.replace(
-                                        "https://deno.land",
-                                        ""
-                                      )}
-                                    >
-                                      <a className="link text-sm truncate">
-                                        {url}
-                                      </a>
-                                    </Link>
-                                  ) : (
-                                    <a
-                                      href={url}
-                                      className="link text-sm truncate"
-                                    >
-                                      {url}
-                                    </a>
-                                  )}
-                                </p>
-                              ))}
-                            </div>
-                            <div className="text-sm mt-2 italic">
-                              {externalDependencies.length === 0
-                                ? "没有外部依赖 🎉"
-                                : externalDependencies.length + " 个外部依赖"}
-=======
                     <div
                       className="max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4"
                     >
-                      <p className="text-md font-semibold mb-2">Version Info</p>
+                      <p className="text-md font-semibold mb-2">版本信息</p>
                       {versionMeta === undefined
                         ? (
                           <div className="mt-2 flex items-center py-0.5">
@@ -719,7 +617,6 @@ function Registry(): React.ReactElement {
                               title={versionMeta.uploadedAt.toLocaleString()}
                             >
                               {twas(versionMeta.uploadedAt.getTime())}
->>>>>>> aa611c5e9dfbf7d90d524d4c0c5645094b5fcf0c
                             </div>
                           </div>
                         )}
@@ -730,7 +627,7 @@ function Registry(): React.ReactElement {
                           className="max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4"
                         >
                           <p className="text-md font-semibold mb-2">
-                            External Dependencies
+                            外部依赖
                           </p>
                           {externalDependencies === undefined
                             ? (
@@ -908,31 +805,18 @@ function VersionSelector({
             </div>
           )}
       </div>
-<<<<<<< HEAD
-      {versions && versions[0] !== selectedVersion ? (
-        <button
-          type="button"
-          className="mt-2 w-full inline-flex justify-center py-1 px-2 border border-gray-300 rounded-md bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition duration-150 ease-in-out"
-          aria-label="跳转到最新版"
-          onClick={() => onChange(versions[0])}
-        >
-          跳转到最新版
-        </button>
-      ) : null}
-=======
       {versions && versions[0] !== selectedVersion
         ? (
           <button
             type="button"
             className="mt-2 w-full inline-flex justify-center py-1 px-2 border border-gray-300 rounded-md bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition duration-150 ease-in-out"
-            aria-label="Go to latest version"
+            aria-label="跳转到最新版"
             onClick={() => onChange(versions[0])}
           >
-            Go to latest
+            跳转到最新版
           </button>
         )
         : null}
->>>>>>> aa611c5e9dfbf7d90d524d4c0c5645094b5fcf0c
     </div>
   );
 }

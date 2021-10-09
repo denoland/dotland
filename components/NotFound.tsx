@@ -13,15 +13,10 @@ function NotFoundPage(): React.ReactElement {
           >
             404
           </h1>
-<<<<<<< HEAD
-          <h2 className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900">
-            没有找到你想要访问的页面。
-=======
           <h2
             className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900"
           >
-            Couldn't find what you're looking for.
->>>>>>> aa611c5e9dfbf7d90d524d4c0c5645094b5fcf0c
+            没有找到你想要访问的页面。
           </h2>
         </header>
       </div>

@@ -107,20 +107,12 @@ function DirectoryListing(props: DirectoryListingProps): React.ReactElement {
             </svg>
             <span className="ml-2 font-medium">{props.path || "/"}</span>
           </div>
-<<<<<<< HEAD
-          {props.repositoryURL && (
-            <a href={props.repositoryURL} className="link ml-4">
-              GitHub 地址
-            </a>
-          )}
-=======
           {props.repositoryURL &&
             (
               <a href={props.repositoryURL} className="link ml-4">
-                Repository
+                GitHub 地址
               </a>
             )}
->>>>>>> aa611c5e9dfbf7d90d524d4c0c5645094b5fcf0c
         </div>
         <div>
           <table className="min-w-full table-fixed w-full">

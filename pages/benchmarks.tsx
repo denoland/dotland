@@ -60,7 +60,8 @@ function Benchmarks(): React.ReactElement {
   }
 
   const showAll = show.dataFile !== "recent.json";
-  const dataUrl = `https://cdn.jsdelivr.net/gh/denoland/benchmark_data/${show.dataFile}`;
+  const dataUrl =
+    `https://cdn.jsdelivr.net/gh/denoland/benchmark_data/${show.dataFile}`;
 
   const [data, setData] = React.useState<BenchmarkData | null>(null);
   const [dataRangeTitle, setDataRangeTitle] = React.useState<string>("");

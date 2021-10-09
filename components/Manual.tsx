@@ -162,13 +162,7 @@ function Manual(): React.ReactElement {
       .then(setContent)
       .catch((e) => {
         console.error("Failed to fetch content:", e);
-<<<<<<< HEAD
         setContent("# 404 - Not Found\n糟糕，当前页面不存在或已经删除。");
-=======
-        setContent(
-          "# 404 - Not Found\nWhoops, the page does not seem to exist.",
-        );
->>>>>>> aa611c5e9dfbf7d90d524d4c0c5645094b5fcf0c
       });
     tableOfContentsMap.then((map: Map<string, string>): void =>
       setPageTitle(map.get(path) || "")
@@ -346,15 +340,10 @@ function Manual(): React.ReactElement {
                           className="w-auto h-12"
                         />
                         <div className="mx-4 flex flex-col justify-center">
-<<<<<<< HEAD
-                          <div className="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
-                            Deno 手册
-=======
                           <div
                             className="font-bold text-gray-900 leading-6 text-2xl tracking-tight"
                           >
-                            Deno Manual
->>>>>>> aa611c5e9dfbf7d90d524d4c0c5645094b5fcf0c
+                            Deno 手册
                           </div>
                         </div>
                       </a>
@@ -390,15 +379,10 @@ function Manual(): React.ReactElement {
                 <a className="flex items-center flex-shrink-0 px-4">
                   <img src="/logo.svg" alt="logo" className="w-auto h-12" />
                   <div className="mx-4 flex flex-col justify-center">
-<<<<<<< HEAD
-                    <div className="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
-                      Deno 手册
-=======
                     <div
                       className="font-bold text-gray-900 leading-6 text-2xl tracking-tight"
                     >
-                      Deno Manual
->>>>>>> aa611c5e9dfbf7d90d524d4c0c5645094b5fcf0c
+                      Deno 手册
                     </div>
                   </div>
                 </a>
@@ -455,12 +439,7 @@ function Manual(): React.ReactElement {
                     <div className="pl-6">
                       <span className="inline sm:hidden">搜索</span>
                       <span className="hidden sm:inline">
-<<<<<<< HEAD
                         搜索文档 (按下 <InlineCode>/</InlineCode> 快速搜索)
-=======
-                        Search the docs (press <InlineCode>/</InlineCode>{" "}
-                        to focus)
->>>>>>> aa611c5e9dfbf7d90d524d4c0c5645094b5fcf0c
                       </span>
                     </div>
                   </button>
@@ -545,47 +524,13 @@ function Manual(): React.ReactElement {
                         path.split("/").length === 2 ? "mt-11" : "mt-9"
                       } mr-4`}
                     >
-<<<<<<< HEAD
-                      <title>Edit on GitHub</title>
-                      <path
-                        fillRule="evenodd"
-                        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </a>
-                  <Markdown
-                    source={content
-                      .replace(/\$STD_VERSION/g, stdVersion)
-                      .replace(/\$CLI_VERSION/g, version)}
-                    displayURL={`https://deno-cn.vercel.app/manual${
-                      version ? `@${version}` : ""
-                    }${path}`}
-                    sourceURL={sourceURL}
-                    baseURL={`https://deno-cn.vercel.app/manual${
-                      version ? `@${version}` : ""
-                    }`}
-                  />
-                  <div className="mt-4 pt-4 border-t border-gray-200">
-                    {pageList[pageIndex - 1] !== undefined && (
-                      <Link
-                        href={
-                          version
-                            ? pageList[pageIndex - 1].path.replace(
-                                "manual",
-                                `manual@${version}`
-                              )
-                            : pageList[pageIndex - 1].path
-                        }
-=======
                       <span className="sr-only">GitHub</span>
                       <svg
                         className="h-6 w-6 inline"
                         fill="currentColor"
                         viewBox="0 0 24 24"
->>>>>>> aa611c5e9dfbf7d90d524d4c0c5645094b5fcf0c
                       >
-                        <title>Edit on GitHub</title>
+                        <title>在 GitHub 上编辑</title>
                         <path
                           fillRule="evenodd"
                           d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"

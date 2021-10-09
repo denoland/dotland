@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Markdown from "../../components/Markdown";
-import { GetStaticProps, GetStaticPaths } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import { promises as fs } from "fs";
 import { join } from "path";
 import Link from "next/link";
@@ -59,12 +59,14 @@ function NewsPostPage(props: Props): React.ReactElement {
         />
         <meta property="og:title" content={props.meta.title} />
         <meta property="og:description" content={props.meta.snippet} />
-        {props.meta.images.length > 0 ? (
-          <meta
-            property="og:image"
-            content={`https://deno.land${props.meta.images[0].image}`}
-          />
-        ) : null}
+        {props.meta.images.length > 0
+          ? (
+            <meta
+              property="og:image"
+              content={`https://deno.land${props.meta.images[0].image}`}
+            />
+          )
+          : null}
 
         <meta property="twitter:card" content="summary_large_image" />
         <meta
@@ -73,12 +75,14 @@ function NewsPostPage(props: Props): React.ReactElement {
         />
         <meta property="twitter:title" content={props.meta.title} />
         <meta property="twitter:description" content={props.meta.snippet} />
-        {props.meta.images.length > 0 ? (
-          <meta
-            property="twitter:image"
-            content={`https://deno.land${props.meta.images[0].image}`}
-          />
-        ) : null}
+        {props.meta.images.length > 0
+          ? (
+            <meta
+              property="twitter:image"
+              content={`https://deno.land${props.meta.images[0].image}`}
+            />
+          )
+          : null}
       </Head>
       <CookieBanner />
       <Header />

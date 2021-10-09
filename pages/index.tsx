@@ -52,20 +52,12 @@ listenAndServe(":8000", (req) => new Response("Hello World\\n"));
             >
               Deno
             </h1>
-<<<<<<< HEAD
-            <h2 className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900">
-              <strong className="font-semibold">现代的</strong>{" "}
-              <strong className="font-semibold">JavaScript</strong> 和{" "}
-              <strong className="font-semibold">TypeScript</strong> 运行时。
-=======
             <h2
               className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900"
             >
-              A <strong className="font-semibold">modern</strong> runtime for
-              {" "}
-              <strong className="font-semibold">JavaScript</strong> and{" "}
-              <strong className="font-semibold">TypeScript</strong>.
->>>>>>> aa611c5e9dfbf7d90d524d4c0c5645094b5fcf0c
+              <strong className="font-semibold">现代的</strong>{" "}
+              <strong className="font-semibold">JavaScript</strong> 和{" "}
+              <strong className="font-semibold">TypeScript</strong> 运行时。
             </h2>
             <a
               href="/#installation"
@@ -83,8 +75,8 @@ listenAndServe(":8000", (req) => new Response("Hello World\\n"));
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <p className="my-4 text-gray-700">
-            Deno 是一个简单、现代且安全的 JavaScript 和 TypeScript 运行时，基于
-            V8 引擎并采用 Rust 编程语言构建。
+            Deno 是一个简单、现代且安全的 JavaScript 和 TypeScript 运行时，基于 V8 引擎并采用 Rust
+            编程语言构建。
           </p>
           <ol className="ml-8 list-disc text-gray-700">
             <li>
@@ -93,12 +85,11 @@ listenAndServe(":8000", (req) => new Response("Hello World\\n"));
             <li>支持开箱即用的 TypeScript。</li>
             <li>只发布单一的可执行程序。</li>
             <li>
-              内置了实用工具，例如依赖检查 (<InlineCode>deno info</InlineCode>)
-              和代码格式化 (<InlineCode>deno fmt</InlineCode>)。
+              内置了实用工具，例如依赖检查 (<InlineCode>deno info</InlineCode>) 和代码格式化
+              (<InlineCode>deno fmt</InlineCode>)。
             </li>
             <li>
-              自带一套经过审查 (安全审计) 的标准模块，并保证了代码与 Deno
-              完全兼容：{" "}
+              自带一套经过审查 (安全审计) 的标准模块，并保证了代码与 Deno 完全兼容：{" "}
               <a href="https://deno.land/std" className="link">
                 deno.land/std
               </a>
@@ -175,8 +166,7 @@ listenAndServe(":8000", (req) => new Response("Hello World\\n"));
             <Link href="/manual">
               <a className="link">参考手册</a>
             </Link>{" "}
-            包含了关于 Deno 运行时更复杂功能的深入解析, Deno
-            内部功能的详细信息，如何在您自己的应用程序中嵌入 Deno 以及如何使用
+            包含了关于 Deno 运行时更复杂功能的深入解析, Deno 内部功能的详细信息，如何在您自己的应用程序中嵌入 Deno 以及如何使用
             Rust 编写 Deno 插件。
           </p>
           <p className="my-4 text-gray-700">
@@ -192,15 +182,8 @@ listenAndServe(":8000", (req) => new Response("Hello World\\n"));
             </a>
           </Link>
           <p className="my-4 text-gray-700">
-<<<<<<< HEAD
-            除了提供 Deno 运行时之外，Deno 还提供了标准模块，这些模块由 Deno
-            核心团队维护和审核以保证可使用特定的 Deno 版本。这些模块在{" "}
-=======
-            Next to the Deno runtime, Deno also provides a list of audited
-            standard modules that are reviewed by the Deno maintainers and are
-            guaranteed to work with a specific Deno version. These live in the
-            {" "}
->>>>>>> aa611c5e9dfbf7d90d524d4c0c5645094b5fcf0c
+            除了提供 Deno 运行时之外，Deno 还提供了标准模块，这些模块由 Deno 核心团队维护和审核以保证可使用特定的 Deno
+            版本。这些模块在{" "}
             <a href="https://github.com/denoland/deno_std" className="link">
               denoland/deno_std
             </a>{" "}
@@ -223,8 +206,7 @@ listenAndServe(":8000", (req) => new Response("Hello World\\n"));
             </a>
           </Link>
           <p className="my-4 text-gray-700">
-            Deno 可以从网络上的任何位置导入模块，例如 GitHub、个人网站或
-            CDN，例如{" "}
+            Deno 可以从网络上的任何位置导入模块，例如 GitHub、个人网站或 CDN，例如{" "}
             <a href="https://www.skypack.dev" className="link">
               Skypack
             </a>
@@ -243,10 +225,10 @@ listenAndServe(":8000", (req) => new Response("Hello World\\n"));
             。
           </p>
           <p className="my-4 text-gray-700">
-            为了更方便地使用第三方模块，Deno 提供了一些内置的工具，如{" "}
-            <InlineCode>deno info</InlineCode> 和{" "}
-            <InlineCode>deno doc</InlineCode>。 deno.land
-            还提供用于查看模块文档的 Web UI。位于{" "}
+            为了更方便地使用第三方模块，Deno 提供了一些内置的工具，如 <InlineCode>deno info</InlineCode> 和
+            {" "}
+            <InlineCode>deno doc</InlineCode>。 deno.land 还提供用于查看模块文档的 Web UI。位于
+            {" "}
             <a href="https://doc.deno.js.cn" className="link">
               doc.deno.js.cn
             </a>
@@ -336,14 +318,7 @@ const InstallSection = () => {
   return (
     <>
       <p className="my-4 text-gray-700">
-<<<<<<< HEAD
-        Deno
-        没有外部依赖，只有一个单独的可执行文件。你可以使用下面的安装器来安装，也可以从{" "}
-=======
-        Deno ships as a single executable with no dependencies. You can install
-        it using the installers below, or download a release binary from the
-        {" "}
->>>>>>> aa611c5e9dfbf7d90d524d4c0c5645094b5fcf0c
+        Deno 没有外部依赖，只有一个单独的可执行文件。你可以使用下面的安装器来安装，也可以从{" "}
         <a href="https://github.com/denoland/deno/releases" className="link">
           GitHub Releases 页面
         </a>
