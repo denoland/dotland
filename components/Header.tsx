@@ -28,17 +28,13 @@ function Header({
             <div className="ml-5 flex flex-col justify-center">
               {!main &&
                 (
-                  <div
-                    className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight"
-                  >
+                  <div className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
                     Deno
                   </div>
                 )}
               {subtitle &&
                 (
-                  <div
-                    className="font-normal text-sm sm:text-lg leading-tight tracking-tight"
-                  >
+                  <div className="font-normal text-sm sm:text-lg leading-tight tracking-tight">
                     {subtitle}
                   </div>
                 )}
@@ -76,9 +72,7 @@ function Header({
             </a>
           </Link>
           <Link href="/manual">
-            <a
-              className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
-            >
+            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
               Manual
             </a>
           </Link>
@@ -95,16 +89,12 @@ function Header({
             API
           </a>
           <Link href="/std">
-            <a
-              className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
-            >
+            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
               Standard Library
             </a>
           </Link>
           <Link href="/x">
-            <a
-              className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
-            >
+            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
               Third Party Modules
             </a>
           </Link>
@@ -139,9 +129,7 @@ function Header({
         leaveFrom="opacity-100 scale-100"
         leaveTo="opacity-0 scale-95"
       >
-        <div
-          className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right lg:hidden"
-        >
+        <div className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right lg:hidden">
           <div className="rounded-lg shadow-md">
             <div className="rounded-lg bg-white shadow-xs overflow-hidden">
               <div className="px-5 pt-4 flex items-center justify-between">
@@ -153,16 +141,12 @@ function Header({
                       alt=""
                     />
                     <div className="ml-5 flex flex-col justify-center">
-                      <div
-                        className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight"
-                      >
+                      <div className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
                         Deno
                       </div>
                       {subtitle &&
                         (
-                          <div
-                            className="font-normal text-sm sm:text-lg leading-tight tracking-tight"
-                          >
+                          <div className="font-normal text-sm sm:text-lg leading-tight tracking-tight">
                             {subtitle}
                           </div>
                         )}
@@ -200,16 +184,12 @@ function Header({
                   </a>
                 </Link>
                 <Link href="/manual">
-                  <a
-                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
-                  >
+                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
                     Manual
                   </a>
                 </Link>
                 <Link href="https://deno.com/blog">
-                  <a
-                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
-                  >
+                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
                     Blog
                   </a>
                 </Link>
@@ -220,16 +200,12 @@ function Header({
                   API
                 </a>
                 <Link href="/std">
-                  <a
-                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
-                  >
+                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
                     Standard Library
                   </a>
                 </Link>
                 <Link href="/x">
-                  <a
-                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
-                  >
+                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
                     Third Party Modules
                   </a>
                 </Link>
