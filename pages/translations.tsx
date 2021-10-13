@@ -29,9 +29,7 @@ function TranslationsPage(): React.ReactElement {
             </a>
           </p>
         </div>
-        <div
-          className="my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end"
-        >
+        <div className="my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end">
           {TRANSLATIONS.map((
             language,
             i,

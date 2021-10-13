@@ -304,9 +304,7 @@ function Manual(): React.ReactElement {
                 leaveFrom="translate-x-0"
                 leaveTo="-translate-x-full"
               >
-                <div
-                  className="relative flex-1 flex flex-col max-w-xs w-full bg-white"
-                >
+                <div className="relative flex-1 flex flex-col max-w-xs w-full bg-white">
                   <div className="absolute top-0 right-0 -mr-14 p-1">
                     <button
                       role="button"
@@ -329,9 +327,7 @@ function Manual(): React.ReactElement {
                       </svg>
                     </button>
                   </div>
-                  <div
-                    className="bg-gray-100 pb-4 pt-4 border-b border-gray-200"
-                  >
+                  <div className="bg-gray-100 pb-4 pt-4 border-b border-gray-200">
                     <Link href="/">
                       <a className="flex items-center flex-shrink-0 px-4">
                         <img
@@ -340,10 +336,15 @@ function Manual(): React.ReactElement {
                           className="w-auto h-12"
                         />
                         <div className="mx-4 flex flex-col justify-center">
+<<<<<<< HEAD
                           <div
                             className="font-bold text-gray-900 leading-6 text-2xl tracking-tight"
                           >
                             Deno 手册
+=======
+                          <div className="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
+                            Deno Manual
+>>>>>>> ae6d69484ef3a99b6974486bd7bf854953c32894
                           </div>
                         </div>
                       </a>
@@ -371,18 +372,21 @@ function Manual(): React.ReactElement {
         </Transition>
 
         <div className="hidden md:flex md:flex-shrink-0">
-          <div
-            className="flex flex-col w-72 border-r border-gray-200 bg-gray-50"
-          >
+          <div className="flex flex-col w-72 border-r border-gray-200 bg-gray-50">
             <div className="bg-gray-100 pb-4 pt-4 border-b border-gray-200">
               <Link href="/">
                 <a className="flex items-center flex-shrink-0 px-4">
                   <img src="/logo.svg" alt="logo" className="w-auto h-12" />
                   <div className="mx-4 flex flex-col justify-center">
+<<<<<<< HEAD
                     <div
                       className="font-bold text-gray-900 leading-6 text-2xl tracking-tight"
                     >
                       Deno 手册
+=======
+                    <div className="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
+                      Deno Manual
+>>>>>>> ae6d69484ef3a99b6974486bd7bf854953c32894
                     </div>
                   </div>
                 </a>
@@ -403,17 +407,13 @@ function Manual(): React.ReactElement {
           </div>
         </div>
         <div className="flex flex-col w-0 flex-1 overflow-hidden">
-          <div
-            className="z-10 flex-shrink-0 flex h-16 bg-white shadow md:hidden"
-          >
+          <div className="z-10 flex-shrink-0 flex h-16 bg-white shadow md:hidden">
             <Link href="/">
               <a className="px-4 flex items-center justify-center md:hidden">
                 <img src="/logo.svg" alt="logo" className="w-auto h-10" />
               </a>
             </Link>
-            <div
-              className="border-l border-r border-gray-200 flex-1 px-4 flex justify-between"
-            >
+            <div className="border-l border-r border-gray-200 flex-1 px-4 flex justify-between">
               <div className="flex-1 flex">
                 <div className="w-full flex justify-between h-full">
                   <label htmlFor="search_field" className="sr-only">
@@ -473,9 +473,7 @@ function Manual(): React.ReactElement {
             ref={manualEl}
           >
             <div className="h-16 bg-white shadow hidden md:block">
-              <div
-                className="max-w-screen-md mx-auto px-12 w-full flex justify-between h-full"
-              >
+              <div className="max-w-screen-md mx-auto px-12 w-full flex justify-between h-full">
                 <label htmlFor="search_field" className="sr-only">
                   搜索
                 </label>
@@ -512,9 +510,7 @@ function Manual(): React.ReactElement {
                 />
               )
               : null}
-            <div
-              className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20"
-            >
+            <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20">
               {content
                 ? (
                   <>
@@ -560,9 +556,7 @@ function Manual(): React.ReactElement {
                             )
                             : pageList[pageIndex - 1].path}
                         >
-                          <a
-                            className="text-gray-900 hover:text-gray-600 font-normal"
-                          >
+                          <a className="text-gray-900 hover:text-gray-600 font-normal">
                             ← {pageList[pageIndex - 1].name}
                           </a>
                         </Link>
@@ -576,9 +570,7 @@ function Manual(): React.ReactElement {
                             )
                             : pageList[pageIndex + 1].path}
                         >
-                          <a
-                            className="text-gray-900 hover:text-gray-600 font-normal float-right"
-                          >
+                          <a className="text-gray-900 hover:text-gray-600 font-normal float-right">
                             {pageList[pageIndex + 1].name} →
                           </a>
                         </Link>

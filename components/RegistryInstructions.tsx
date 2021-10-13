@@ -78,9 +78,7 @@ function RegistryInstructions(props: {
               leaveFrom="translate-x-0"
               leaveTo="translate-x-full"
             >
-              <div
-                className="relative w-screen max-w-md md:max-w-lg lg:max-w-xl xl:max-w-4xl"
-              >
+              <div className="relative w-screen max-w-md md:max-w-lg lg:max-w-xl xl:max-w-4xl">
                 <Transition
                   enter="ease-in-out duration-500"
                   enterFrom="opacity-0"
@@ -89,9 +87,7 @@ function RegistryInstructions(props: {
                   leaveFrom="opacity-100"
                   leaveTo="opacity-0"
                 >
-                  <div
-                    className="absolute top-0 left-0 -ml-8 pt-4 pr-2 flex sm:-ml-10 sm:pr-4"
-                  >
+                  <div className="absolute top-0 left-0 -ml-8 pt-4 pr-2 flex sm:-ml-10 sm:pr-4">
                     <button
                       aria-label="Close panel"
                       className="text-gray-300 hover:text-white transition ease-in-out duration-150"
@@ -113,14 +109,10 @@ function RegistryInstructions(props: {
                     </button>
                   </div>
                 </Transition>
-                <div
-                  className="h-full flex flex-col space-y-4 my-auto px-4 md:px-16 lg:px-24 xl:px-32 bg-white shadow-xl overflow-y-auto"
-                >
+                <div className="h-full flex flex-col space-y-4 my-auto px-4 md:px-16 lg:px-24 xl:px-32 bg-white shadow-xl overflow-y-auto">
                   <div className="my-auto py-10">
                     <header>
-                      <h2
-                        className="text-xl leading-7 font-medium text-gray-900"
-                      >
+                      <h2 className="text-xl leading-7 font-medium text-gray-900">
                         {stage === 0 && "Adding a module"}
                         {stage === 1 && "Select a module name"}
                         {stage === 2 && "Advanced options"}
@@ -147,9 +139,7 @@ function RegistryInstructions(props: {
                             Our service needs to get informed whenever a new tag
                             is created. For this purpose we use GitHub webhooks.
                           </p>
-                          <span
-                            className="block w-full rounded-md shadow-sm mt-4"
-                          >
+                          <span className="block w-full rounded-md shadow-sm mt-4">
                             <button
                               type="submit"
                               className="w-full flex justify-center py-2 px-4 mt-12 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
@@ -271,9 +261,7 @@ function RegistryInstructions(props: {
                               the module to be published is located in.
                             </span>
                           </div>
-                          <span
-                            className="block w-full rounded-md shadow-sm mt-2"
-                          >
+                          <span className="block w-full rounded-md shadow-sm mt-2">
                             <button
                               type="submit"
                               disabled={!isSubdirectoryValid ? true : undefined}
@@ -358,18 +346,14 @@ function RegistryInstructions(props: {
                           <div className="mt-2">
                             {isModuleNameAvailable
                               ? (
-                                <div
-                                  className="text-gray-800 p-2 bg-gray-50 rounded-md border border-gray-200"
-                                >
+                                <div className="text-gray-800 p-2 bg-gray-50 rounded-md border border-gray-200">
                                   Waiting to receive initial WebHook event from
                                   GitHub...
                                 </div>
                               )
                               : (
                                 <>
-                                  <div
-                                    className="text-green-800 p-2 bg-gray-50 rounded-md border border-green-200"
-                                  >
+                                  <div className="text-green-800 p-2 bg-gray-50 rounded-md border border-green-200">
                                     Module successfully registered! To upload a
                                     version, create a new tag / release in the
                                     repository.
