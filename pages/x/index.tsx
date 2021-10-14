@@ -142,7 +142,9 @@ function ThirdPartyRegistryList(): React.ReactElement {
                       .fill(null)
                       .map((_, i) => (
                         <li
-                          className={i !== 0 ? "border-t border-gray-200" : ""}
+                          className={i !== 0
+                            ? "border-t border-gray-200"
+                            : ""}
                           key={i}
                         >
                           <div className="flex items-center px-4 sm:px-6 py-4">
@@ -259,30 +261,16 @@ function ThirdPartyRegistryList(): React.ReactElement {
               )
               : resp === null
               ? (
-<<<<<<< HEAD
-                <div
-                  className="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate"
-                >
-                  加载模块失败
-=======
                 <div className="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
-                  Failed to load modules
->>>>>>> ae6d69484ef3a99b6974486bd7bf854953c32894
+                  加载模块失败
                 </div>
               )
               : (
                 <div className="bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4">
                   {resp.results.length == 0
                     ? (
-<<<<<<< HEAD
-                      <div
-                        className="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate"
-                      >
-                        没有找到模块
-=======
                       <div className="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
-                        No modules found
->>>>>>> ae6d69484ef3a99b6974486bd7bf854953c32894
+                        没有找到模块
                       </div>
                     )
                     : (

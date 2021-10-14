@@ -48,20 +48,10 @@ listenAndServe(":8000", (req) => new Response("Hello World\\n"));
             <h1 className="font-extrabold text-5xl leading-10 tracking-tight text-gray-900">
               Deno
             </h1>
-<<<<<<< HEAD
-            <h2
-              className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900"
-            >
+            <h2 className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900">
               <strong className="font-semibold">现代的</strong>{" "}
               <strong className="font-semibold">JavaScript</strong> 和{" "}
               <strong className="font-semibold">TypeScript</strong> 运行时。
-=======
-            <h2 className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900">
-              A <strong className="font-semibold">modern</strong> runtime for
-              {" "}
-              <strong className="font-semibold">JavaScript</strong> and{" "}
-              <strong className="font-semibold">TypeScript</strong>.
->>>>>>> ae6d69484ef3a99b6974486bd7bf854953c32894
             </h2>
             <a
               href="/#installation"

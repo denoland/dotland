@@ -336,15 +336,8 @@ function Manual(): React.ReactElement {
                           className="w-auto h-12"
                         />
                         <div className="mx-4 flex flex-col justify-center">
-<<<<<<< HEAD
-                          <div
-                            className="font-bold text-gray-900 leading-6 text-2xl tracking-tight"
-                          >
-                            Deno 手册
-=======
                           <div className="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
-                            Deno Manual
->>>>>>> ae6d69484ef3a99b6974486bd7bf854953c32894
+                            Deno 手册
                           </div>
                         </div>
                       </a>
@@ -378,15 +371,8 @@ function Manual(): React.ReactElement {
                 <a className="flex items-center flex-shrink-0 px-4">
                   <img src="/logo.svg" alt="logo" className="w-auto h-12" />
                   <div className="mx-4 flex flex-col justify-center">
-<<<<<<< HEAD
-                    <div
-                      className="font-bold text-gray-900 leading-6 text-2xl tracking-tight"
-                    >
-                      Deno 手册
-=======
                     <div className="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
-                      Deno Manual
->>>>>>> ae6d69484ef3a99b6974486bd7bf854953c32894
+                      Deno 手册
                     </div>
                   </div>
                 </a>

@@ -72,15 +72,8 @@ function Header({
             </a>
           </Link>
           <Link href="/manual">
-<<<<<<< HEAD
-            <a
-              className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
-            >
-              参考手册
-=======
             <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              Manual
->>>>>>> ae6d69484ef3a99b6974486bd7bf854953c32894
+              参考手册
             </a>
           </Link>
           <a
@@ -96,27 +89,13 @@ function Header({
             API
           </a>
           <Link href="/std">
-<<<<<<< HEAD
-            <a
-              className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
-            >
+            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
               标准库
             </a>
           </Link>
           <Link href="/x">
-            <a
-              className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
-            >
+            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
               第三方模块
-=======
-            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              Standard Library
-            </a>
-          </Link>
-          <Link href="/x">
-            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              Third Party Modules
->>>>>>> ae6d69484ef3a99b6974486bd7bf854953c32894
             </a>
           </Link>
           <a
@@ -205,27 +184,13 @@ function Header({
                   </a>
                 </Link>
                 <Link href="/manual">
-<<<<<<< HEAD
-                  <a
-                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
-                  >
+                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
                     参考手册
                   </a>
                 </Link>
                 <Link href="https://deno.com/blog">
-                  <a
-                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
-                  >
+                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
                     博客
-=======
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Manual
-                  </a>
-                </Link>
-                <Link href="https://deno.com/blog">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Blog
->>>>>>> ae6d69484ef3a99b6974486bd7bf854953c32894
                   </a>
                 </Link>
                 <a
@@ -235,27 +200,13 @@ function Header({
                   API
                 </a>
                 <Link href="/std">
-<<<<<<< HEAD
-                  <a
-                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
-                  >
+                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
                     标准库
                   </a>
                 </Link>
                 <Link href="/x">
-                  <a
-                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
-                  >
+                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
                     第三方模块
-=======
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Standard Library
-                  </a>
-                </Link>
-                <Link href="/x">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Third Party Modules
->>>>>>> ae6d69484ef3a99b6974486bd7bf854953c32894
                   </a>
                 </Link>
               </div>

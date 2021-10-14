@@ -14,15 +14,8 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
         <nav className="-mx-5 -my-2 flex flex-wrap justify-center">
           <div className="px-2 py-2">
             <Link href="/[...rest]" as="/manual">
-<<<<<<< HEAD
-              <a
-                className="text-base leading-6 text-gray-500 hover:text-gray-900"
-              >
-                参考手册
-=======
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Manual
->>>>>>> ae6d69484ef3a99b6974486bd7bf854953c32894
+                参考手册
               </a>
             </Link>
           </div>
@@ -36,57 +29,29 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
           </div>
           <div className="px-2 py-2">
             <Link href="/[...rest]" as="/std">
-<<<<<<< HEAD
-              <a
-                className="text-base leading-6 text-gray-500 hover:text-gray-900"
-              >
-                标准库
-=======
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Standard Library
->>>>>>> ae6d69484ef3a99b6974486bd7bf854953c32894
+                标准库
               </a>
             </Link>
           </div>
           <div className="px-2 py-2">
             <Link href="/x">
-<<<<<<< HEAD
-              <a
-                className="text-base leading-6 text-gray-500 hover:text-gray-900"
-              >
-                第三方模块
-=======
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Third Party Modules
->>>>>>> ae6d69484ef3a99b6974486bd7bf854953c32894
+                第三方模块
               </a>
             </Link>
           </div>
           <div className="px-2 py-2">
             <Link href="/benchmarks">
-<<<<<<< HEAD
-              <a
-                className="text-base leading-6 text-gray-500 hover:text-gray-900"
-              >
-                性能
-=======
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Benchmarks
->>>>>>> ae6d69484ef3a99b6974486bd7bf854953c32894
+                性能
               </a>
             </Link>
           </div>
           <div className="px-2 py-2">
             <Link href="/artwork">
-<<<<<<< HEAD
-              <a
-                className="text-base leading-6 text-gray-500 hover:text-gray-900"
-              >
-                艺术作品
-=======
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Artwork
->>>>>>> ae6d69484ef3a99b6974486bd7bf854953c32894
+                艺术作品
               </a>
             </Link>
           </div>
@@ -100,15 +65,8 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
           </div>
           <div className="px-2 py-2">
             <Link href="/translations">
-<<<<<<< HEAD
-              <a
-                className="text-base leading-6 text-gray-500 hover:text-gray-900"
-              >
-                翻译
-=======
               <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Translations
->>>>>>> ae6d69484ef3a99b6974486bd7bf854953c32894
+                翻译
               </a>
             </Link>
           </div>
