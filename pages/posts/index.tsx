@@ -37,16 +37,12 @@ function PostsIndexPage(props: Props): React.ReactElement | null {
         <title>新闻 | Deno</title>
       </Head>
       <Header />
-      <div
-        className="bg-white pt-8 pb-20 px-4 sm:px-6 lg:pt-8 lg:pb-28 lg:px-8"
-      >
+      <div className="bg-white pt-8 pb-20 px-4 sm:px-6 lg:pt-8 lg:pb-28 lg:px-8">
         <div className="relative max-w-screen-lg mx-auto">
           <div className="border-b-2 border-gray-100 pb-10">
             <h2 className="text-4xl font-bold tracking-tight">新闻</h2>
           </div>
-          <div
-            className="mt-6 grid gap-16 lg:grid-cols-2 lg:col-gap-5 lg:row-gap-12"
-          >
+          <div className="mt-6 grid gap-16 lg:grid-cols-2 lg:col-gap-5 lg:row-gap-12">
             {props.posts
               .sort((a, b) => {
                 const publishDateA = new Date(a.publish_date);
@@ -69,9 +65,7 @@ function PostsIndexPage(props: Props): React.ReactElement | null {
                     </p>
                     <Link href={`/posts/${post.id}`}>
                       <a className="block">
-                        <h3
-                          className="mt-2 text-xl leading-7 font-semibold text-gray-900"
-                        >
+                        <h3 className="mt-2 text-xl leading-7 font-semibold text-gray-900">
                           {post.title}
                         </h3>
                         <p className="mt-3 text-base leading-6 text-gray-500">
@@ -81,9 +75,7 @@ function PostsIndexPage(props: Props): React.ReactElement | null {
                     </Link>
                     <div className="mt-3">
                       <Link href={`/posts/${post.id}`}>
-                        <a
-                          className="text-base leading-6 font-semibold text-blue-600 hover:text-blue-500 transition ease-in-out duration-150"
-                        >
+                        <a className="text-base leading-6 font-semibold text-blue-600 hover:text-blue-500 transition ease-in-out duration-150">
                           阅读原文
                         </a>
                       </Link>

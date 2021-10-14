@@ -133,35 +133,29 @@ function ThirdPartyRegistryList(): React.ReactElement {
               onChange={handleSearchInput}
             />
           </div>
-          <div
-            className="sm:max-w-screen-lg sm:mx-auto sm:px-6 md:px-8 pb-4 sm:pb-12"
-          >
+          <div className="sm:max-w-screen-lg sm:mx-auto sm:px-6 md:px-8 pb-4 sm:pb-12">
             {resp === undefined
               ? (
-                <div
-                  className="bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4"
-                >
+                <div className="bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4">
                   <ul>
                     {Array(20)
                       .fill(null)
                       .map((_, i) => (
                         <li
-                          className={i !== 0 ? "border-t border-gray-200" : ""}
+                          className={i !== 0
+                            ? "border-t border-gray-200"
+                            : ""}
                           key={i}
                         >
                           <div className="flex items-center px-4 sm:px-6 py-4">
                             <div className="min-w-0 flex-1 flex items-center">
                               <div className="min-w-0 flex-1">
                                 <div className="text-sm leading-5">
-                                  <div
-                                    className="h-3 bg-blue-100 w-1/3 sm:w-1/5 md:w-1/6"
-                                  >
+                                  <div className="h-3 bg-blue-100 w-1/3 sm:w-1/5 md:w-1/6">
                                   </div>
                                 </div>
                                 <div className="mt-1 flex items-center">
-                                  <div
-                                    className="h-3 bg-gray-100 w-5/6 sm:w-4/5 md:w-3/4"
-                                  >
+                                  <div className="h-3 bg-gray-100 w-5/6 sm:w-4/5 md:w-3/4">
                                   </div>
                                 </div>
                               </div>
@@ -174,9 +168,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
                                 viewBox="0 0 20 20"
                               >
                                 <title>star</title>
-                                <path
-                                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                                >
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
                                 </path>
                               </svg>
                             </div>
@@ -197,42 +189,24 @@ function ThirdPartyRegistryList(): React.ReactElement {
                         </li>
                       ))}
                   </ul>
-                  <div
-                    className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
-                  >
-                    <div
-                      className="flex-1 flex justify-between items-center sm:hidden"
-                    >
-                      <button
-                        className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-gray-100 text-sm leading-5 font-medium rounded-md bg-white"
-                      >
+                  <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+                    <div className="flex-1 flex justify-between items-center sm:hidden">
+                      <button className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-gray-100 text-sm leading-5 font-medium rounded-md bg-white">
                         Previous
                       </button>
                       <div className="text-base leading-6 text-gray-500">
-                        <div
-                          className="h-3 w-4 bg-gray-100 inline-block mr-1"
-                        />/
-                        <div
-                          className="h-3 w-4 bg-gray-100 inline-block ml-1"
-                        />
+                        <div className="h-3 w-4 bg-gray-100 inline-block mr-1" />/
+                        <div className="h-3 w-4 bg-gray-100 inline-block ml-1" />
                       </div>
-                      <button
-                        className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-gray-100 text-sm leading-5 font-medium rounded-md bg-white ml-4"
-                      >
+                      <button className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-gray-100 text-sm leading-5 font-medium rounded-md bg-white ml-4">
                         Next
                       </button>
                     </div>
-                    <div
-                      className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between"
-                    >
+                    <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
                       <div className="h-3 w-32 bg-gray-100" />
                       <div>
-                        <nav
-                          className="relative z-0 inline-flex shadow-sm text-gray-200 leading-5"
-                        >
-                          <div
-                            className="-ml-px relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white rounded-l-md"
-                          >
+                        <nav className="relative z-0 inline-flex shadow-sm text-gray-200 leading-5">
+                          <div className="-ml-px relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white rounded-l-md">
                             <svg
                               className="h-5 w-5"
                               viewBox="0 0 20 20"
@@ -245,44 +219,28 @@ function ThirdPartyRegistryList(): React.ReactElement {
                               />
                             </svg>
                           </div>
-                          <div
-                            className="-ml-px relative items-center px-4 py-2 border border-gray-300 bg-white hidden md:inline-flex"
-                          >
+                          <div className="-ml-px relative items-center px-4 py-2 border border-gray-300 bg-white hidden md:inline-flex">
                             &nbsp;&nbsp;
                           </div>
-                          <div
-                            className="-ml-px relative items-center px-4 py-2 border border-gray-300 bg-white hidden md:inline-flex"
-                          >
+                          <div className="-ml-px relative items-center px-4 py-2 border border-gray-300 bg-white hidden md:inline-flex">
                             &nbsp;&nbsp;
                           </div>
-                          <div
-                            className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white"
-                          >
+                          <div className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white">
                             &nbsp;&nbsp;
                           </div>
-                          <div
-                            className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white"
-                          >
+                          <div className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white">
                             &nbsp;&nbsp;
                           </div>
-                          <div
-                            className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white"
-                          >
+                          <div className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white">
                             &nbsp;&nbsp;
                           </div>
-                          <div
-                            className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white"
-                          >
+                          <div className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white">
                             &nbsp;&nbsp;
                           </div>
-                          <div
-                            className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white"
-                          >
+                          <div className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white">
                             &nbsp;&nbsp;
                           </div>
-                          <div
-                            className="-ml-px relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white rounded-r-md"
-                          >
+                          <div className="-ml-px relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white rounded-r-md">
                             <svg
                               className="h-5 w-5 text-gray-200"
                               viewBox="0 0 20 20"
@@ -303,21 +261,15 @@ function ThirdPartyRegistryList(): React.ReactElement {
               )
               : resp === null
               ? (
-                <div
-                  className="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate"
-                >
+                <div className="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
                   加载模块失败
                 </div>
               )
               : (
-                <div
-                  className="bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4"
-                >
+                <div className="bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4">
                   {resp.results.length == 0
                     ? (
-                      <div
-                        className="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate"
-                      >
+                      <div className="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
                         没有找到模块
                       </div>
                     )
@@ -347,12 +299,8 @@ function ThirdPartyRegistryList(): React.ReactElement {
                       );
 
                       return (
-                        <div
-                          className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
-                        >
-                          <div
-                            className="flex-1 flex justify-between items-center sm:hidden"
-                          >
+                        <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+                          <div className="flex-1 flex justify-between items-center sm:hidden">
                             <button
                               disabled={!hasPrevious}
                               onClick={() => setPage(page - 1)}
@@ -379,9 +327,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
                               下一页
                             </button>
                           </div>
-                          <div
-                            className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between"
-                          >
+                          <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
                             <div>
                               <p className="text-sm leading-5 text-gray-700">
                                 显示第{" "}
@@ -400,9 +346,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
                               </p>
                             </div>
                             <div>
-                              <nav
-                                className="relative z-0 inline-flex shadow-sm"
-                              >
+                              <nav className="relative z-0 inline-flex shadow-sm">
                                 <button
                                   disabled={!hasPrevious}
                                   onClick={() => setPage(page - 1)}
@@ -448,17 +392,13 @@ function ThirdPartyRegistryList(): React.ReactElement {
                                       >
                                         2
                                       </button>
-                                      <span
-                                        className="inline-flex md:hidden -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700"
-                                      >
+                                      <span className="inline-flex md:hidden -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
                                         ...
                                       </span>
                                     </>
                                   )
                                   : (
-                                    <span
-                                      className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700"
-                                    >
+                                    <span className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
                                       ...
                                     </span>
                                   )}
@@ -505,17 +445,13 @@ function ThirdPartyRegistryList(): React.ReactElement {
                                       >
                                         {pageCount - 1}
                                       </button>
-                                      <span
-                                        className="inline-flex md:hidden -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700"
-                                      >
+                                      <span className="inline-flex md:hidden -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
                                         ...
                                       </span>
                                     </>
                                   )
                                   : (
-                                    <span
-                                      className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700"
-                                    >
+                                    <span className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
                                       ...
                                     </span>
                                   )}
@@ -572,9 +508,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
                     How do I use modules on deno.land/x?
                   </dt>
                   <dd className="mt-2">
-                    <p
-                      className="text-base leading-6 text-gray-500 break-words"
-                    >
+                    <p className="text-base leading-6 text-gray-500 break-words">
                       The basic format of code URLs is
                       <InlineCode>
                         https://deno.land/x/IDENTIFIER@VERSION/FILE_PATH
@@ -607,9 +541,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
                     How do I add a module to deno.land/x?
                   </dt>
                   <dd className="mt-2">
-                    <p
-                      className="text-base leading-6 text-gray-500 break-words"
-                    >
+                    <p className="text-base leading-6 text-gray-500 break-words">
                       Press the button below and follow the presented
                       instructions:
                     </p>
@@ -665,9 +597,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
               </div>
             </dl>
           </div>
-          <div
-            className="max-w-screen-lg mx-auto pt-4 pb-8 sm:pt-8 sm:pb-12 px-4 sm:px-6 lg:pt-12 lg:pb-16 lg:px-8"
-          >
+          <div className="max-w-screen-lg mx-auto pt-4 pb-8 sm:pt-8 sm:pb-12 px-4 sm:px-6 lg:pt-12 lg:pb-16 lg:px-8">
             <h4 className="font-semibold text-2xl" id="stats">
               Stats
             </h4>
@@ -676,9 +606,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
                 <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-8">
                   <div>
                     <h5 className="font-medium text-lg">New modules</h5>
-                    <div
-                      className="bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2"
-                    >
+                    <div className="bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2">
                       <ModuleList
                         modules={stats.recently_added_modules.map((v) => ({
                           name: v.name,
@@ -691,9 +619,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
                   </div>
                   <div>
                     <h5 className="font-medium text-lg">Recently updated</h5>
-                    <div
-                      className="bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2"
-                    >
+                    <div className="bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2">
                       <ModuleList
                         modules={stats.recently_uploaded_versions.map((v) => ({
                           name: v.name,
@@ -732,20 +658,14 @@ function ModuleList({
         return (
           <li className={i !== 0 ? "border-t border-gray-200" : ""} key={i}>
             <Link href={link}>
-              <a
-                className="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out"
-              >
+              <a className="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
                 <div className="flex items-center px-4 sm:px-6 py-2">
                   <div className="min-w-0 flex-1 flex items-center">
                     <div className="min-w-0 flex-1">
-                      <div
-                        className="text-sm leading-5 font-medium text-blue-500 truncate"
-                      >
+                      <div className="text-sm leading-5 font-medium text-blue-500 truncate">
                         {meta.name}
                       </div>
-                      <div
-                        className="mt-1 flex items-center text-sm leading-5 text-gray-500"
-                      >
+                      <div className="mt-1 flex items-center text-sm leading-5 text-gray-500">
                         <span className="truncate">
                           {meta.description
                             ? (
@@ -760,9 +680,7 @@ function ModuleList({
                       </div>
                       {meta.date
                         ? (
-                          <div
-                            className="mt-1 flex items-center text-sm leading-5 text-gray-400"
-                          >
+                          <div className="mt-1 flex items-center text-sm leading-5 text-gray-400">
                             <span
                               className="truncate"
                               title={new Date(meta.date).toLocaleString()}
@@ -790,9 +708,7 @@ function ModuleList({
                           <title>
                             star
                           </title>
-                          <path
-                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                          >
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
                           </path>
                         </svg>
                       </div>

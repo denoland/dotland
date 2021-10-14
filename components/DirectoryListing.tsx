@@ -88,21 +88,15 @@ function DirectoryListing(props: DirectoryListingProps): React.ReactElement {
 
   return (
     <div className="flex flex-col overflow-x-auto">
-      <div
-        className="inline-block min-w-full shadow-sm rounded-lg border border-gray-200 overflow-hidden"
-      >
-        <div
-          className="bg-gray-100 border-b border-gray-200 py-2 px-4 flex justify-between"
-        >
+      <div className="inline-block min-w-full shadow-sm rounded-lg border border-gray-200 overflow-hidden">
+        <div className="bg-gray-100 border-b border-gray-200 py-2 px-4 flex justify-between">
           <div className="flex items-center">
             <svg
               fill="currentColor"
               viewBox="0 0 20 20"
               className="w-6 h-6 text-gray-400 inline-block mr-2"
             >
-              <path
-                d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-              >
+              <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z">
               </path>
             </svg>
             <span className="ml-2 font-medium">{props.path || "/"}</span>
@@ -176,9 +170,7 @@ function DirectoryListing(props: DirectoryListingProps): React.ReactElement {
                       onClick={() => setShowHiddenItem(!showHiddenItem)}
                     >
                       <td colSpan={3}>
-                        <div
-                          className="w-full text-center text-sm px-2 sm:pl-3 md:pl-4 py-1 text-blue-500"
-                        >
+                        <div className="w-full text-center text-sm px-2 sm:pl-3 md:pl-4 py-1 text-blue-500">
                           {showHiddenItem
                             ? `Close hidden ${
                               hiddenItems.length === 1 ? "item" : "items"
@@ -256,9 +248,7 @@ function TableRow({
                   case "file":
                     if (isReadme(entry.name)) {
                       return (
-                        <path
-                          d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"
-                        >
+                        <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z">
                         </path>
                       );
                     }
@@ -272,9 +262,7 @@ function TableRow({
                     );
                   case "dir":
                     return (
-                      <path
-                        d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                      >
+                      <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z">
                       </path>
                     );
                 }
@@ -299,9 +287,7 @@ function TableRow({
           </a>
         </Link>
       </td>
-      <td
-        className="whitespace-no-wrap text-sm leading-5 text-gray-500 text-right"
-      >
+      <td className="whitespace-no-wrap text-sm leading-5 text-gray-500 text-right">
         <Link href={href}>
           <a className="px-4 py-1 pl-1 w-full h-full block" tabIndex={-1}>
             {entry.size ? bytesToSize(entry.size) : <>&nbsp;</>}
