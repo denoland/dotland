@@ -57,7 +57,7 @@ listenAndServe(":8000", (req) => new Response("Hello World\\n"));
               href="/#installation"
               className="rounded-full mt-8 px-8 py-2 transition-colors duration-75 ease-in-out bg-blue-500 hover:bg-blue-400 text-white text-lg shadow-lg"
             >
-              دامەزراندن
+              دایمەزرێنە
             </a>
             <a
               href="https://github.com/denoland/deno/releases/latest"
