@@ -12,29 +12,27 @@ function TranslationsPage(): React.ReactElement {
   return (
     <>
       <Head>
-        <title>Translations | Deno</title>
+        <title>وەرگێڕانەکان | دێنۆ</title>
       </Head>
       <CookieBanner />
       <Header />
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 mt-8 mb-24">
-        <div className="max-w-screen-lg mx-auto">
-          <h4 className="text-4xl font-bold tracking-tight">Translations</h4>
+        <div className="max-w-screen-lg mx-auto" dir="rtl">
+          <h4 className="text-4xl font-bold tracking-tight">وەرگێڕانەکان</h4>
           <p className="mt-4 text-lg">
-            Deno docs is available in the following languages. Do you have a
-            piece to display here?{" "}
+            ئەم ماڵپەڕە بە چەند زمانێک بەردەستە. دەتەوێت زمانێکی دیکە زۆر بکەیت؟{" "}
             <a
               href="https://github.com/denoland/dotland/blob/main/translations.json"
               className="link"
             >
-              Add it!
+              زۆری بکە!
             </a>
           </p>
         </div>
         <div className="my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end">
-          {TRANSLATIONS.map((
-            language,
-            i,
-          ) => <Item key={i} language={language} />)}
+          {TRANSLATIONS.map((language, i) => (
+            <Item key={i} language={language} />
+          ))}
         </div>
       </div>
       <Footer />
@@ -58,7 +56,7 @@ function Item({ language }: { language: Translation }) {
           href={language.repository}
           className="text-gray-500 hover:text-gray-700"
         >
-          <span className="sr-only">GitHub</span>
+          <span className="sr-only">گیتهەب</span>
           <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
             <path
               fillRule="evenodd"

@@ -29,9 +29,10 @@ function DirectoryListing(props: DirectoryListingProps): React.ReactElement {
       const parts = d.path.substring(props.path.length + 1).split("/");
       return {
         name: parts[parts.length - 1],
-        path: parts.length === 1
-          ? undefined
-          : parts.slice(0, parts.length - 1).join("/"),
+        path:
+          parts.length === 1
+            ? undefined
+            : parts.slice(0, parts.length - 1).join("/"),
         size: d.size,
         type: d.type,
       };
@@ -40,29 +41,36 @@ function DirectoryListing(props: DirectoryListingProps): React.ReactElement {
 
   const [query, setQuery] = useState("");
 
-  const display = query.length > 1
-    ? children.filter(
-      (d: Entry) =>
-        (d.path?.toLowerCase().includes(query.toLowerCase()) ||
-          d.name.toLowerCase().includes(query.toLowerCase())) &&
-        d.type === "file",
-    )
-    : children.filter((d: Entry) => d.path === undefined);
-  const displayItems = query.length > 0 ? display : display
-    .filter((d: Entry): boolean => !d.name.match(/^\..*$/))
-    .sort((a: Entry, b: Entry) => a.type.localeCompare(b.type));
-  const hiddenItems = query.length > 0 ? [] : display
-    .filter((d: Entry) => !!d.name.match(/^\..*$/))
-    .sort((a: Entry, b: Entry) => a.type.localeCompare(b.type));
+  const display =
+    query.length > 1
+      ? children.filter(
+          (d: Entry) =>
+            (d.path?.toLowerCase().includes(query.toLowerCase()) ||
+              d.name.toLowerCase().includes(query.toLowerCase())) &&
+            d.type === "file"
+        )
+      : children.filter((d: Entry) => d.path === undefined);
+  const displayItems =
+    query.length > 0
+      ? display
+      : display
+          .filter((d: Entry): boolean => !d.name.match(/^\..*$/))
+          .sort((a: Entry, b: Entry) => a.type.localeCompare(b.type));
+  const hiddenItems =
+    query.length > 0
+      ? []
+      : display
+          .filter((d: Entry) => !!d.name.match(/^\..*$/))
+          .sort((a: Entry, b: Entry) => a.type.localeCompare(b.type));
   const baseURL = getBasePath({
     isStd: isStd,
     name: props.name,
     version: props.version,
   });
   const buildEntryURL = (path: string, entry: Entry): string => {
-    return `${baseURL}${path}/${
-      entry.path ? entry.path + "/" : ""
-    }${entry.name}`;
+    return `${baseURL}${path}/${entry.path ? entry.path + "/" : ""}${
+      entry.name
+    }`;
   };
 
   const searchInput = createRef<HTMLInputElement>();
@@ -96,17 +104,15 @@ function DirectoryListing(props: DirectoryListingProps): React.ReactElement {
               viewBox="0 0 20 20"
               className="w-6 h-6 text-gray-400 inline-block mr-2"
             >
-              <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z">
-              </path>
+              <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path>
             </svg>
             <span className="ml-2 font-medium">{props.path || "/"}</span>
           </div>
-          {props.repositoryURL &&
-            (
-              <a href={props.repositoryURL} className="link ml-4">
-                Repository
-              </a>
-            )}
+          {props.repositoryURL && (
+            <a href={props.repositoryURL} className="link ml-4">
+              سەرچاوە
+            </a>
+          )}
         </div>
         <div>
           <table className="min-w-full table-fixed w-full">
@@ -129,8 +135,7 @@ function DirectoryListing(props: DirectoryListingProps): React.ReactElement {
                           fillRule="evenodd"
                           d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
                           clipRule="evenodd"
-                        >
-                        </path>
+                        ></path>
                       </svg>
                     </div>
                     <input
@@ -171,13 +176,7 @@ function DirectoryListing(props: DirectoryListingProps): React.ReactElement {
                     >
                       <td colSpan={3}>
                         <div className="w-full text-center text-sm px-2 sm:pl-3 md:pl-4 py-1 text-blue-500">
-                          {showHiddenItem
-                            ? `Close hidden ${
-                              hiddenItems.length === 1 ? "item" : "items"
-                            }`
-                            : `Show hidden ${hiddenItems.length} ${
-                              hiddenItems.length === 1 ? "item" : "items"
-                            }`}
+                          {showHiddenItem ? `دایخە` : `ئەوانی تر نیشان بدە`}
                         </div>
                       </td>
                     </tr>
@@ -248,8 +247,7 @@ function TableRow({
                   case "file":
                     if (isReadme(entry.name)) {
                       return (
-                        <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z">
-                        </path>
+                        <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
                       );
                     }
                     return (
@@ -257,13 +255,11 @@ function TableRow({
                         fillRule="evenodd"
                         d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
                         clipRule="evenodd"
-                      >
-                      </path>
+                      ></path>
                     );
                   case "dir":
                     return (
-                      <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z">
-                      </path>
+                      <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path>
                     );
                 }
               })()}
@@ -274,13 +270,15 @@ function TableRow({
       <td className="whitespace-no-wrap text-sm text-blue-500 leading-5">
         <Link href={href}>
           <a className="pl-2 py-1 w-full block truncate">
-            {entry.path ? <span className="font-light">{entry.path}/</span> : (
+            {entry.path ? (
+              <span className="font-light">{entry.path}/</span>
+            ) : (
               ""
             )}
             <span
-              className={isReadme(entry.name) || entry.path
-                ? "font-medium"
-                : ""}
+              className={
+                isReadme(entry.name) || entry.path ? "font-medium" : ""
+              }
             >
               {entry.name}
             </span>
