@@ -14,6 +14,10 @@ body {
   font-family: 'Inter', 'Vazir';
 }
 
+pre {
+  direction: ltr;
+}
+
 /* removes focus outlines on mouse clicks */
 *:focus:not(:focus-visible),
 *::before:focus:not(:focus-visible),
