@@ -80,7 +80,10 @@ function ThirdPartyRegistryList(): React.ReactElement {
           close={() => setOverlayOpen(false)}
         />
         <div>
-          <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8">
+          <div
+            className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8"
+            dir="rtl"
+          >
             <dt className="text-lg leading-6 font-medium text-gray-900">
               deno.land/x چییە؟
             </dt>
@@ -109,7 +112,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
                 "
                 onClick={() => setOverlayOpen(true)}
               >
-                مۆدیوڵێک بڵاوبکەرەوە
+                مۆدیوڵێک بڵاو بکەرەوە
               </button>
             </div>
 
@@ -120,7 +123,10 @@ function ThirdPartyRegistryList(): React.ReactElement {
               />
             </div> */}
           </div>
-          <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8">
+          <div
+            className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8"
+            dir="rtl"
+          >
             <label htmlFor="query" className="font-medium sr-only">
               بگەڕێ
             </label>
@@ -318,21 +324,24 @@ function ThirdPartyRegistryList(): React.ReactElement {
                               دواتر
                             </button>
                           </div>
-                          <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                          <div
+                            className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between"
+                            dir="rtl"
+                          >
                             <div>
                               <p className="text-sm leading-5 text-gray-700">
                                 <span className="font-medium">
                                   {(page - 1) * PER_PAGE + 1}
-                                </span>{" "}
-                                بۆ{" "}
+                                </span>
+                                -
                                 <span className="font-medium">
                                   {(page - 1) * PER_PAGE + resp.results.length}
                                 </span>{" "}
-                                ئەنجام لە{" "}
+                                لە{" "}
                                 <span className="font-medium">
                                   {resp.totalCount}
                                 </span>{" "}
-                                دانە نیشان دەدرێن
+                                ئەنجام نیشان دەدرێن
                               </p>
                             </div>
                             <div>
@@ -486,6 +495,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
           <div
             id="info"
             className="max-w-screen-xl mx-auto pt-4 pb-8 sm:pt-8 px-4 sm:px-6 lg:pt-12 lg:px-8"
+            dir="rtl"
           >
             <dl className="md:grid md:grid-cols-2 md:gap-8">
               <div>
@@ -495,7 +505,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
                   </dt>
                   <dd className="mt-2">
                     <p className="text-base leading-6 text-gray-500 break-words">
-                      دەتوانیت مۆدیوڵەکان هاوردەبکەیت لە ڕێی بەستەرێکی لەم
+                      دەتوانیت مۆدیوڵەکان هاوردە بکەیت لە ڕێی بەستەرێکی لەم
                       شێوەیە:{" "}
                       <InlineCode>
                         https://deno.land/x/IDENTIFIER@VERSION/FILE_PATH
@@ -537,7 +547,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
                         className="w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
                         onClick={() => setOverlayOpen(true)}
                       >
-                        مۆدیوڵێک بڵاوبکەرەوە
+                        مۆدیوڵێک بڵاو بکەرەوە
                       </button>
                     </span>
                   </dd>
@@ -549,14 +559,15 @@ function ThirdPartyRegistryList(): React.ReactElement {
                     className="text-lg leading-6 font-medium text-gray-900"
                     id="warning"
                   >
-                    کە مۆدیوڵ لە deno.land/xـەوە هاوردەدەکەم ئاگادار دەکرێمەوە!
+                    کاتێک مۆدیوڵ لە deno.land/xـەوە هاوردە دەکەم ئاگادار
+                    دەکرێمەوە!
                   </dt>
                   <dd className="mt-2">
                     <p className="text-base leading-6 text-gray-500">
                       deno.land/x ئاگادارت دەکاتەوە کاتێک خۆی نوێترین وەشانی
-                      مۆدیوڵێکت بۆ هەڵدەبژێرێت کاتێک لە کاتی هاوردەکردنی
-                      مۆدیوڵێک وەشانەکەی دیاریناکەیت. بۆ لابردنی ئەم
-                      ئاگادارکردنەوەیە، تەنها وەشانی مۆدیوڵەکە دیاریبکە.
+                      مۆدیوڵێکت بۆ هەڵدەبژێرێت کاتێک لە کاتی هاوردە کردنی
+                      مۆدیوڵێک وەشانەکەی دیاری ناکەیت. بۆ لابردنی ئەم
+                      ئاگادارکردنەوەیە، تەنها وەشانی مۆدیوڵەکە دیاری بکە.
                     </p>
                   </dd>
                 </div>
@@ -567,16 +578,19 @@ function ThirdPartyRegistryList(): React.ReactElement {
                   </dt>
                   <dd className="mt-2">
                     <p className="text-base leading-6 text-gray-500">
-                      وەشانی مۆدیوڵەکان نەگۆڕن و ناتوانرێ دەستکاریبکرێن. بەڵام
-                      لەوانەیە مۆدیوڵێک لاببرێت ئەگەر هۆکارێکی یاسایی هەبێت، بۆ
-                      نموونە مافی لەبەرگرتنەوە.
+                      وەشانی مۆدیوڵەکان نەگۆڕن و ناتوانرێ دەستکاری بکرێن. بەڵام
+                      لەوانەیە مۆدیوڵێک لاببرێت ئەگەر لەبەر هۆکارێکی یاسایی بێت،
+                      بۆ نموونە مافی لەبەرگرتنەوە.
                     </p>
                   </dd>
                 </div>
               </div>
             </dl>
           </div>
-          <div className="max-w-screen-lg mx-auto pt-4 pb-8 sm:pt-8 sm:pb-12 px-4 sm:px-6 lg:pt-12 lg:pb-16 lg:px-8">
+          <div
+            className="max-w-screen-lg mx-auto pt-4 pb-8 sm:pt-8 sm:pb-12 px-4 sm:px-6 lg:pt-12 lg:pb-16 lg:px-8"
+            dir="rtl"
+          >
             <h4 className="font-semibold text-2xl" id="stats">
               ئامارەکان
             </h4>
@@ -584,7 +598,10 @@ function ThirdPartyRegistryList(): React.ReactElement {
               <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-8">
                 <div>
                   <h5 className="font-medium text-lg">مۆدیوڵە نوێکان</h5>
-                  <div className="bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2">
+                  <div
+                    className="bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2"
+                    dir="ltr"
+                  >
                     <ModuleList
                       modules={stats.recently_added_modules.map((v) => ({
                         name: v.name,
@@ -597,7 +614,10 @@ function ThirdPartyRegistryList(): React.ReactElement {
                 </div>
                 <div>
                   <h5 className="font-medium text-lg">دوایین نوێکردنەوە</h5>
-                  <div className="bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2">
+                  <div
+                    className="bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2"
+                    dir="ltr"
+                  >
                     <ModuleList
                       modules={stats.recently_uploaded_versions.map((v) => ({
                         name: v.name,
