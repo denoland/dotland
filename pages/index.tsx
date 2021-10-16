@@ -50,8 +50,8 @@ listenAndServe(":8000", (req) => new Response("Hello World\\n"));
             </h1>
             <h2 className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900">
               ژینگەیەکی <strong className="font-semibold">مۆدێرن</strong> بۆ{" "}
-              <strong className="font-semibold">جاڤاسکریپت</strong> و{" "}
-              <strong className="font-semibold">تایپسکریپت</strong>.
+              <strong className="font-semibold">تایپسکریپت</strong> و{" "}
+              <strong className="font-semibold">جاڤاسکریپت</strong>.
             </h2>
             <a
               href="/#installation"
