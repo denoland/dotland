@@ -517,19 +517,19 @@ function ThirdPartyRegistryList(): React.ReactElement {
                 </div>
                 <div className="mt-12">
                   <dt className="text-lg leading-6 font-medium text-gray-900">
-                    Can I find functionality built-in to Deno here?
+                    دەتوانم لە ڕێی مۆدیوڵەکانی ئێرە ئەرکی دێنۆ بگۆڕم؟
                   </dt>
                   <dd className="mt-2">
                     <p className="text-base leading-6 text-gray-500">
-                      No, the built-in runtime is documented on{" "}
+                      نا، نووسراو دەربارەی ژینگەی دێنۆ خۆی لە{" "}
                       <a className="link" href="https://doc.deno.land/">
-                        deno doc
+                        ئێرە
                       </a>{" "}
-                      and in the manual. See{" "}
+                      و ناو مانواڵەکەیە.{" "}
                       <Link href="/std">
                         <a className="link">/std</a>
                       </Link>{" "}
-                      for the standard modules.
+                      ببینە بۆ مۆدیوڵە ستانداردەکان.
                     </p>
                   </dd>
                 </div>

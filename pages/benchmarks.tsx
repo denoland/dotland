@@ -78,10 +78,10 @@ function Benchmarks(): React.ReactElement {
         setDataRangeTitle(
           showAll
             ? [(ks: number[]) => ks[0], (ks: number[]) => ks.pop()]
-              .map((f) => f([...rawData.keys()].slice(...show.range)))
-              .filter((k) => k != null)
-              .join("...")
-            : "",
+                .map((f) => f([...rawData.keys()].slice(...show.range)))
+                .filter((k) => k != null)
+                .join("...")
+            : ""
         );
       }
     });
@@ -91,7 +91,7 @@ function Benchmarks(): React.ReactElement {
     <>
       <Head>
         <title>
-          Benchmarks {dataRangeTitle ? `(${dataRangeTitle})` : `| Deno`}
+          بێنچمارکەکان {dataRangeTitle ? `(${dataRangeTitle})` : `| دێنۆ`}
         </title>
       </Head>
       <CookieBanner />
@@ -174,7 +174,7 @@ function Benchmarks(): React.ReactElement {
                 <BenchmarkOrLoading
                   data={data}
                   columns={data?.execTime.filter(
-                    ({ name }) => !typescriptBenches.includes(name),
+                    ({ name }) => !typescriptBenches.includes(name)
                   )}
                   yLabel="seconds"
                   yTickFormat={formatLogScale}
@@ -197,7 +197,7 @@ function Benchmarks(): React.ReactElement {
                 <BenchmarkOrLoading
                   data={data}
                   columns={data?.threadCount.filter(
-                    ({ name }) => !typescriptBenches.includes(name),
+                    ({ name }) => !typescriptBenches.includes(name)
                   )}
                 />
                 <p className="mt-1">
@@ -213,7 +213,7 @@ function Benchmarks(): React.ReactElement {
                 <BenchmarkOrLoading
                   data={data}
                   columns={data?.syscallCount.filter(
-                    ({ name }) => !typescriptBenches.includes(name),
+                    ({ name }) => !typescriptBenches.includes(name)
                   )}
                 />
                 <p className="mt-1">
@@ -230,7 +230,7 @@ function Benchmarks(): React.ReactElement {
                 <BenchmarkOrLoading
                   data={data}
                   columns={data?.maxMemory.filter(
-                    ({ name }) => !typescriptBenches.includes(name),
+                    ({ name }) => !typescriptBenches.includes(name)
                   )}
                   yLabel="megabytes"
                   yTickFormat={formatMB}
@@ -260,15 +260,13 @@ function Benchmarks(): React.ReactElement {
                   yTickFormat={formatLogScale}
                 />
                 <p className="mt-1">
-                  In both cases, <code>std/examples/chat/server_test.ts</code>
-                  {" "}
+                  In both cases, <code>std/examples/chat/server_test.ts</code>{" "}
                   is cached by Deno. The workload contains 20 unique TypeScript
-                  modules. With <em>check</em>{" "}
-                  a full TypeScript type check is performed, while{" "}
-                  <em>no_check</em> uses the <code>--no-check</code>{" "}
-                  flag to skip a full type check. <em>bundle</em>{" "}
-                  does a full type check and generates a single file output,
-                  while <em>bundle_no_check</em> uses the{" "}
+                  modules. With <em>check</em> a full TypeScript type check is
+                  performed, while <em>no_check</em> uses the{" "}
+                  <code>--no-check</code> flag to skip a full type check.{" "}
+                  <em>bundle</em> does a full type check and generates a single
+                  file output, while <em>bundle_no_check</em> uses the{" "}
                   <code>--no-check</code> flag to skip a full type check.
                 </p>
               </div>
@@ -292,8 +290,7 @@ function Benchmarks(): React.ReactElement {
                     className={`${
                       showNormalized ? "translate-x-5" : "translate-x-0"
                     } inline-block h-5 w-5 rounded-full bg-white shadow transform transition ease-in-out duration-200`}
-                  >
-                  </span>
+                  ></span>
                 </span>
                 <span className="ml-2 text-gray-900">
                   Show normalized benchmarks
@@ -307,11 +304,12 @@ function Benchmarks(): React.ReactElement {
                 </a>
                 <BenchmarkOrLoading
                   data={data}
-                  columns={showNormalized
-                    ? data?.normalizedReqPerSec
-                    : data?.reqPerSec}
-                  yLabel={showNormalized ? "% of hyper througput"
-                  : "1k req/sec"}
+                  columns={
+                    showNormalized ? data?.normalizedReqPerSec : data?.reqPerSec
+                  }
+                  yLabel={
+                    showNormalized ? "% of hyper througput" : "1k req/sec"
+                  }
                   yTickFormat={showNormalized ? formatPercentage : formatReqSec}
                 />
                 <p className="mt-1">
@@ -320,8 +318,7 @@ function Benchmarks(): React.ReactElement {
                 </p>
                 <ul className="ml-8 list-disc my-2">
                   <li>
-                    <SourceLink path="cli/bench/deno_tcp.ts" name="deno_tcp" />
-                    {" "}
+                    <SourceLink path="cli/bench/deno_tcp.ts" name="deno_tcp" />{" "}
                     is a fake http server that doesn't parse HTTP. It is
                     comparable to{" "}
                     <SourceLink path="cli/bench/node_tcp.js" name="node_tcp" />
@@ -332,8 +329,7 @@ function Benchmarks(): React.ReactElement {
                       path="http/bench.ts"
                       name="deno_http"
                     />{" "}
-                    is a web server written in TypeScript. It is comparable to
-                    {" "}
+                    is a web server written in TypeScript. It is comparable to{" "}
                     <SourceLink
                       path="cli/bench/node_http.js"
                       name="node_http"
@@ -474,16 +470,16 @@ function BenchmarkOrLoading(props: {
   yLabel?: string;
   yTickFormat?: (n: number) => string;
 }) {
-  return props.data && props.columns
-    ? (
-      <BenchmarkChart
-        columns={props.columns}
-        sha1List={props.data.sha1List}
-        yLabel={props.yLabel}
-        yTickFormat={props.yTickFormat}
-      />
-    )
-    : <BenchmarkLoading />;
+  return props.data && props.columns ? (
+    <BenchmarkChart
+      columns={props.columns}
+      sha1List={props.data.sha1List}
+      yLabel={props.yLabel}
+      yTickFormat={props.yTickFormat}
+    />
+  ) : (
+    <BenchmarkLoading />
+  );
 }
 
 function SourceLink({
