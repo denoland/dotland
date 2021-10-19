@@ -16,6 +16,7 @@ setInterval(async () => {
 
 interface PageView {
   page_location: string;
+  page_referrer: string;
   region: string;
 }
 
@@ -29,11 +30,13 @@ export async function gatherRequestData(req: Request, connInfo: ConnInfo) {
   const { pathname } = new URL(req.url);
   // @ts-ignore Property hostname doesn't exist type error
   const ip = connInfo.remoteAddr.hostname as string;
+  const referer = req.headers.get("Referer") ?? "Direct";
   const userId = await getHash(ip);
   const event = {
     name: "page_view",
     params: {
       page_location: pathname,
+      page_referrer: referer,
       region: REGION,
     },
   };
