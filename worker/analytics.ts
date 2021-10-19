@@ -9,7 +9,7 @@ let DATA_BEING_SENT = false;
 
 // Send data every 20 seconds.
 setInterval(async () => {
-  if (!DATA_BEING_SENT) {
+  if (GA_SECRET && !DATA_BEING_SENT) {
     await sendData();
   }
 }, INTERVAL);
