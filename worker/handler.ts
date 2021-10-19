@@ -2,16 +2,22 @@
 
 import { handleRegistryRequest } from "./registry.ts";
 import { handleVSCRequest } from "./vscode.ts";
+import { gatherRequestData } from "./analytics.ts";
+import { ConnInfo } from "https://deno.land/std@0.112.0/http/server.ts";
 
 const REMOTE_URL = "https://deno-website2.now.sh";
 
 export function withLog(
-  handler: (request: Request) => Response | Promise<Response>,
-): (request: Request) => Promise<Response> {
-  return async (req) => {
+  handler: (
+    request: Request,
+    connInfo: ConnInfo,
+  ) => Response | Promise<Response>,
+): (request: Request, connInfo: ConnInfo) => Promise<Response> {
+  return async (req, con) => {
     let res: Response;
     try {
-      res = await handler(req);
+      await gatherRequestData(req, con);
+      res = await handler(req, con);
     } catch (err) {
       console.error(err);
       res = new Response("500 Internal Server Error\nPlease try again later.", {
