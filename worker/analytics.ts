@@ -35,6 +35,9 @@ export function reportAnalytics(req: Request, res: Response, err: unknown) {
     aip: 1, // Anonymize the visitor's IP address.
     dr: req.headers.get("referer"),
     exd: exception,
+    // The time delta (in ms) between when the hit being reported occurred
+    // and the time the hit was sent.
+    qt: 1000,
   };
   // Build GA request payload.
   const entries = Object.entries(info)
