@@ -1,101 +1,108 @@
 import { ConnInfo } from "https://deno.land/std@0.112.0/http/server.ts";
+import { delay } from "https://deno.land/std@0.112.0/async/mod.ts";
+import { crypto } from "https://deno.land/std@0.112.0/crypto/mod.ts";
 
-const INTERVAL = 20_000; // 20 seconds.
-const DB = new Map<string, Event[]>();
-const REGION = Deno.env.get("DENO_REGION")!;
-const GA_SECRET = Deno.env.get("GA_API_SECRET")!;
-const GA_ID = Deno.env.get("GA_MEASUREMENT_ID")!;
-let DATA_BEING_SENT = false;
+const GA_BATCH_ENDPOINT = "https://www.google-analytics.com/batch";
 
-// Send data every 20 seconds.
-setInterval(async () => {
-  if (GA_SECRET && !DATA_BEING_SENT) {
-    await sendData();
-  }
-}, INTERVAL);
+const GA_API_SECRET = Deno.env.get("GA_API_SECRET")!;
+const GA_MEASUREMENT_ID = Deno.env.get("GA_MEASUREMENT_ID")!;
+const GA_TRACKING_ID = Deno.env.get("GA_TRACKING_ID")!;
 
-interface PageView {
-  page_location: string;
-  page_referrer: string;
-  region: string;
-}
+const GA_MAX_PARAM_LENGTH = 2048; // 2kb;
+const GA_MAX_PAYLOAD_LENGTH = 8092; // 8kb
+const GA_MAX_BATCH_PAYLOAD_COUNT = 20;
+const GA_MAX_BATCH_BODY_LENGTH = 16386; // 16kb.
 
-interface Event {
-  name: string;
-  params: PageView;
-}
+const encoder = new TextEncoder();
+const uploadQueue: Uint8Array[] = [];
+let uploading = false;
 
 /** Construct and store the page_view event in memory. */
-export async function gatherRequestData(req: Request, connInfo: ConnInfo) {
-  const { pathname } = new URL(req.url);
-  // @ts-ignore Property hostname doesn't exist type error
-  const ip = connInfo.remoteAddr.hostname as string;
-  const referer = req.headers.get("Referer") ?? "Direct";
-  const userId = await getHash(ip);
-  const event = {
-    name: "page_view",
-    params: {
-      page_location: pathname,
-      page_referrer: referer,
-      region: REGION,
-    },
+export function reportAnalytics(req: Request, res: Response, err: unknown) {
+  let exception;
+  if (res.status >= 400) {
+    exception = `${res.status} ${res.statusText}`;
+    if (err != null) {
+      exception = `${exception} (${String(err)})`;
+    }
+  }
+  const ip = req.headers.get("x-forwarded-for");
+  // TODO: add timing info.
+  const info = {
+    v: 1, // Version, should be 1.
+    tid: GA_TRACKING_ID,
+    t: "pageview", // Event type.
+    dl: req.url,
+    ua: req.headers.get("user-agent"),
+    cid: getHash(ip), // GA requires `cid` to be set.
+    uip: ip,
+    aip: 1, // Anonymize the visitor's IP address.
+    dr: req.headers.get("referer"),
+    exd: exception,
   };
-  if (DB.has(userId)) {
-    const events = DB.get(userId)!;
-    events.push(event);
-    DB.set(userId, events);
-  } else {
-    DB.set(userId, [event]);
+  // Build GA request payload.
+  const entries = Object.entries(info)
+    .filter(([k, v]) => v != null)
+    .map(([k, v]) => [k, String(v).slice(0, GA_MAX_PARAM_LENGTH)]);
+  const params = new URLSearchParams(entries);
+  const line = params.toString() + "\n";
+  const payload = encoder.encode(line);
+  if (payload.length > GA_MAX_PAYLOAD_LENGTH) {
+    console.error("GA: payload exceeds maximimum size: " + payload);
+    return;
+  }
+  // Add to upload queue.
+  uploadQueue.push(payload);
+  // Schedule upload if it isn't already running.
+  if (!uploading) {
+    uploading = true;
+    setTimeout(upload, 1000);
   }
 }
 
 /** Returns sha-1 hash of an IP address. */
-export async function getHash(ip: string): Promise<string> {
-  const hashBuffer = await crypto.subtle.digest(
+function getHash(ip: string): string {
+  const hashBuffer = crypto.subtle.digestSync(
     "SHA-1",
     new TextEncoder().encode(ip),
   );
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  const hashHex = hashArray.map((b) => b.toString(16).padStart(2, "0")).join(
-    "",
-  );
+  const hashHex = Array.from(hashBuffer)
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
   return hashHex;
 }
 
-/** Send in memory page_view events to Google Analytics. */
-export async function sendData() {
-  const requests = [];
-  const url =
-    `https://www.google-analytics.com/mp/collect?&measurement_id=${GA_ID}&api_secret=${GA_SECRET}`;
+const batchBuffer = new Uint8Array(GA_MAX_BATCH_BODY_LENGTH);
 
-  const uniqueUsers = DB.size;
-  for (const userId of DB.keys()) {
-    DATA_BEING_SENT = true;
-    const pageViewEvents = DB.get(userId);
-    requests.push(fetch(url, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        "client_id": "deno.land",
-        "user_id": userId,
-        "events": pageViewEvents,
-      }),
-    }));
-    DB.delete(userId);
-  }
-  try {
-    if (requests.length > 0) {
-      const start = performance.now();
-      await Promise.all(requests);
-      const timeTaken = performance.now() - start;
-      console.log(
-        `Took ${timeTaken}ms to upload data for ${uniqueUsers} users`,
-      );
-      DATA_BEING_SENT = false;
+async function upload() {
+  while (uploadQueue.length > 0) {
+    // Build batch upload body.
+    let payloadCount = 0;
+    let bodyLength = 0;
+    while (
+      payloadCount < Math.min(uploadQueue.length, GA_MAX_BATCH_PAYLOAD_COUNT)
+    ) {
+      const payload = uploadQueue[payloadCount];
+      if (bodyLength + payload.length > GA_MAX_BATCH_BODY_LENGTH) break;
+      batchBuffer.set(payload, bodyLength);
+      payloadCount += 1;
+      bodyLength += payload.length;
     }
-  } catch (err) {
-    console.error("Failed to upload data to GA:", err);
+    const body = batchBuffer.subarray(0, bodyLength);
+
+    try {
+      const start = performance.now();
+      const response = await fetch(GA_BATCH_ENDPOINT, { method: "POST", body });
+      const elapsed = performance.now() - start;
+      console.log(
+        `GA: batch uploaded ${payloadCount} items in ${elapsed}ms. Response: ${response.status} ${response.statusText}`,
+      );
+      // Google says not to retry when it reports a non-200 status code.
+      uploadQueue.splice(0, payloadCount);
+    } catch (err) {
+      console.error(`GA: batch upload failed: ${err}`);
+      await delay(1000);
+    }
   }
+  uploading = false;
 }

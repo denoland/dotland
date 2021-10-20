@@ -2,7 +2,7 @@
 
 import { handleRegistryRequest } from "./registry.ts";
 import { handleVSCRequest } from "./vscode.ts";
-import { gatherRequestData } from "./analytics.ts";
+import { reportAnalytics } from "./analytics.ts";
 import { ConnInfo } from "https://deno.land/std@0.112.0/http/server.ts";
 
 const REMOTE_URL = "https://deno-website2.now.sh";
@@ -15,15 +15,17 @@ export function withLog(
 ): (request: Request, connInfo: ConnInfo) => Promise<Response> {
   return async (req, con) => {
     let res: Response;
+    let err: unknown;
     try {
-      await gatherRequestData(req, con);
       res = await handler(req, con);
-    } catch (err) {
+    } catch (e) {
+      err = e;
       console.error(err);
       res = new Response("500 Internal Server Error\nPlease try again later.", {
         status: 500,
       });
     }
+    reportAnalytics(req, res, err);
     return res;
   };
 }
