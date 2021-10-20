@@ -1,11 +1,7 @@
-import { ConnInfo } from "https://deno.land/std@0.112.0/http/server.ts";
 import { delay } from "https://deno.land/std@0.112.0/async/mod.ts";
 import { crypto } from "https://deno.land/std@0.112.0/crypto/mod.ts";
 
 const GA_BATCH_ENDPOINT = "https://www.google-analytics.com/batch";
-
-const GA_API_SECRET = Deno.env.get("GA_API_SECRET")!;
-const GA_MEASUREMENT_ID = Deno.env.get("GA_MEASUREMENT_ID")!;
 const GA_TRACKING_ID = Deno.env.get("GA_TRACKING_ID")!;
 
 const GA_MAX_PARAM_LENGTH = 2048; // 2kb;
@@ -26,7 +22,7 @@ export function reportAnalytics(req: Request, res: Response, err: unknown) {
       exception = `${exception} (${String(err)})`;
     }
   }
-  const ip = req.headers.get("x-forwarded-for");
+  const ip = req.headers.get("x-forwarded-for")!;
   // TODO: add timing info.
   const info = {
     v: 1, // Version, should be 1.
@@ -66,7 +62,7 @@ function getHash(ip: string): string {
     "SHA-1",
     new TextEncoder().encode(ip),
   );
-  const hashHex = Array.from(hashBuffer)
+  const hashHex = Array.from(new Uint8Array(hashBuffer))
     .map((b) => b.toString(16).padStart(2, "0"))
     .join("");
   return hashHex;
