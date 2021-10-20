@@ -1,101 +1,164 @@
 import { ConnInfo } from "https://deno.land/std@0.112.0/http/server.ts";
+import { crypto } from "https://deno.land/std@0.112.0/crypto/mod.ts";
 
-const INTERVAL = 20_000; // 20 seconds.
-const DB = new Map<string, Event[]>();
-const REGION = Deno.env.get("DENO_REGION")!;
-const GA_SECRET = Deno.env.get("GA_API_SECRET")!;
-const GA_ID = Deno.env.get("GA_MEASUREMENT_ID")!;
-let DATA_BEING_SENT = false;
-
-// Send data every 20 seconds.
-setInterval(async () => {
-  if (GA_SECRET && !DATA_BEING_SENT) {
-    await sendData();
-  }
-}, INTERVAL);
-
-interface PageView {
-  page_location: string;
-  page_referrer: string;
-  region: string;
+interface Visitor {
+  ip: string;
+  ua: string;
+  events: Event[];
 }
 
-interface Event {
-  name: string;
-  params: PageView;
+type Event = PageViewEvent | ExceptionEvent;
+interface PageViewEvent {
+  name: "page_view";
+  params: {
+    page_location: string;
+    page_referrer: string | undefined;
+    page_title: string;
+  };
 }
+interface ExceptionEvent {
+  name: "exception";
+  params: {
+    description: string;
+    fatal: boolean;
+  };
+}
+
+const GA_API_SECRET = Deno.env.get("GA_API_SECRET")!;
+const GA_MEASUREMENT_ID = Deno.env.get("GA_MEASUREMENT_ID")!;
+const GA_MAX_EVENTS = 32;
+
+if (GA_API_SECRET == null) {
+  console.error("GA_API_SECRET not set");
+}
+if (GA_MEASUREMENT_ID == null) {
+  console.error("GA_MEASUREMENT_ID not set");
+}
+
+const uploadQueue = new Map<string, Visitor>();
+let uploading = false;
 
 /** Construct and store the page_view event in memory. */
-export async function gatherRequestData(req: Request, connInfo: ConnInfo) {
-  const { pathname } = new URL(req.url);
-  // @ts-ignore Property hostname doesn't exist type error
-  const ip = connInfo.remoteAddr.hostname as string;
-  const referer = req.headers.get("Referer") ?? "Direct";
-  const userId = await getHash(ip);
-  const event = {
-    name: "page_view",
-    params: {
-      page_location: pathname,
-      page_referrer: referer,
-      region: REGION,
-    },
-  };
-  if (DB.has(userId)) {
-    const events = DB.get(userId)!;
-    events.push(event);
-    DB.set(userId, events);
-  } else {
-    DB.set(userId, [event]);
+export function reportAnalytics(
+  req: Request,
+  connInfo: ConnInfo,
+  response: Response,
+  error: unknown,
+) {
+  if (GA_MEASUREMENT_ID == null || GA_API_SECRET == null) {
+    return;
   }
+
+  const ip = (connInfo.remoteAddr as Deno.NetAddr).hostname;
+  const ua = req.headers.get("user-agent") ?? "";
+
+  let event: PageViewEvent | ExceptionEvent;
+
+  if (response.status >= 400 || error !== undefined) {
+    let description = `HTTP ${response.status} ${response.statusText}`;
+    if (error) {
+      description = `${description} (${String(error)})`;
+    }
+    event = {
+      name: "exception",
+      params: { description, fatal: true },
+    };
+  } else {
+    const referer = req.headers.get("referer") ?? undefined;
+    event = {
+      name: "page_view",
+      params: {
+        page_location: req.url,
+        page_referrer: referer,
+        page_title: new URL(req.url).pathname,
+      },
+    };
+  }
+
+  const key = `${ip}+${ua}`;
+  let visitor = uploadQueue.get(key);
+  if (visitor == null) {
+    visitor = { ip, ua, events: [] };
+    uploadQueue.set(key, visitor);
+  }
+  visitor.events.push(event);
+
+  scheduleUpload();
 }
 
-/** Returns sha-1 hash of an IP address. */
-export async function getHash(ip: string): Promise<string> {
-  const hashBuffer = await crypto.subtle.digest(
-    "SHA-1",
-    new TextEncoder().encode(ip),
-  );
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  const hashHex = hashArray.map((b) => b.toString(16).padStart(2, "0")).join(
-    "",
-  );
-  return hashHex;
+function scheduleUpload() {
+  if (!uploading) {
+    uploading = true;
+    setTimeout(upload, 1000);
+  }
 }
 
 /** Send in memory page_view events to Google Analytics. */
-export async function sendData() {
-  const requests = [];
-  const url =
-    `https://www.google-analytics.com/mp/collect?&measurement_id=${GA_ID}&api_secret=${GA_SECRET}`;
+export async function upload() {
+  while (uploadQueue.size > 0) {
+    const requests = [];
+    let eventCount = 0;
 
-  const uniqueUsers = DB.size;
-  for (const userId of DB.keys()) {
-    DATA_BEING_SENT = true;
-    const pageViewEvents = DB.get(userId);
-    requests.push(fetch(url, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        "client_id": "deno.land",
-        "user_id": userId,
-        "events": pageViewEvents,
-      }),
-    }));
-    DB.delete(userId);
-  }
-  try {
-    if (requests.length > 0) {
-      const start = performance.now();
-      await Promise.all(requests);
-      const timeTaken = performance.now() - start;
-      console.log(
-        `Took ${timeTaken}ms to upload data for ${uniqueUsers} users`,
-      );
-      DATA_BEING_SENT = false;
+    for (const { ip, ua, events } of uploadQueue.values()) {
+      eventCount += events.length;
+
+      const urlParams = new URLSearchParams({
+        measurement_id: GA_MEASUREMENT_ID,
+        api_secret: GA_API_SECRET,
+      });
+      const url = `https://www.google-analytics.com/mp/collect?${urlParams}`;
+
+      while (events.length > 0) {
+        const body = {
+          client_id: "deno.land",
+          user_id: hash(ip),
+          events: events.splice(0, GA_MAX_EVENTS),
+        };
+        const init = {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            "x-forwarded-for": ip,
+          },
+          body: JSON.stringify(body),
+        };
+        const fetchPromise = fetch(url, init);
+        fetchPromise.then(async (r) =>
+          console.log(url, init, r.status, await r.text())
+        );
+        requests.push(fetchPromise);
+      }
     }
-  } catch (err) {
-    console.error("Failed to upload data to GA:", err);
+
+    uploadQueue.clear();
+
+    const start = performance.now();
+    const results = await Promise.allSettled(requests);
+    const elapsed = performance.now() - start;
+
+    console.log(`GA: uploaded ${eventCount} events in ${elapsed} ms.`);
+
+    for (const result of results) {
+      if (result.status === "rejected") {
+        console.error(result.reason);
+      } else if (![200, 204].includes(result.value.status)) {
+        console.error(`HTTP ${result.value.status} ${result.value.statusText}`);
+      }
+    }
   }
+
+  uploading = false;
+}
+
+const encoder = new TextEncoder();
+
+/** Returns the SHA-1 hash of a string. */
+function hash(text: string): string {
+  const textBuf = encoder.encode(text);
+  const hashBuf = crypto.subtle.digestSync("SHA-1", textBuf);
+  const hashArr = Array.from(new Uint8Array(hashBuf));
+  const hashStr = hashArr
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+  return hashStr;
 }
