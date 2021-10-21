@@ -31,15 +31,12 @@ export async function reportAnalytics(
     }
   }
   const { pathname } = new URL(req.url);
-  const contentType = res.headers.get("content-type");
-  if (!contentType) {
-    console.log(res);
-  }
+  const contentType = res.headers.get("content-type") ?? "";
   if (
     !(
-      contentType == null || /html/i.test(contentType) ||
+      pathname === "/" ||
       pathname.startsWith("/std") || pathname.startsWith("/x") ||
-      exception != null
+      /html/i.test(contentType) || exception != null
     )
   ) {
     return;
