@@ -1,5 +1,4 @@
 import { delay } from "https://deno.land/std@0.112.0/async/mod.ts";
-import { crypto } from "https://deno.land/std@0.112.0/crypto/mod.ts";
 
 const GA_BATCH_ENDPOINT = "https://www.google-analytics.com/batch";
 const GA_TRACKING_ID = Deno.env.get("GA_TRACKING_ID")!;
@@ -13,8 +12,22 @@ const encoder = new TextEncoder();
 const uploadQueue: Uint8Array[] = [];
 let uploading = false;
 
+const ignoredPaths = [
+  "/_next",
+];
+
 /** Construct and store the page_view event in memory. */
-export function reportAnalytics(req: Request, res: Response, err: unknown) {
+export async function reportAnalytics(
+  req: Request,
+  res: Response,
+  err: unknown,
+) {
+  const { pathname } = new URL(req.url);
+  const ignorePath = ignoredPaths.find((path) => pathname.startsWith(path));
+  if (ignorePath) {
+    return;
+  }
+
   let exception;
   if (res.status >= 400) {
     exception = `${res.status} ${res.statusText}`;
@@ -30,7 +43,7 @@ export function reportAnalytics(req: Request, res: Response, err: unknown) {
     t: "pageview", // Event type.
     dl: req.url,
     ua: req.headers.get("user-agent"),
-    cid: getHash(ip), // GA requires `cid` to be set.
+    cid: await getHash(ip), // GA requires `cid` to be set.
     uip: ip,
     aip: 1, // Anonymize the visitor's IP address.
     dr: req.headers.get("referer"),
@@ -60,8 +73,8 @@ export function reportAnalytics(req: Request, res: Response, err: unknown) {
 }
 
 /** Returns sha-1 hash of an IP address. */
-function getHash(ip: string): string {
-  const hashBuffer = crypto.subtle.digestSync(
+async function getHash(ip: string): Promise<string> {
+  const hashBuffer = await crypto.subtle.digest(
     "SHA-1",
     new TextEncoder().encode(ip),
   );

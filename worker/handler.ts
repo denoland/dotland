@@ -25,7 +25,11 @@ export function withLog(
         status: 500,
       });
     }
-    reportAnalytics(req, res, err);
+    try {
+      await reportAnalytics(req, res, err);
+    } catch (error) {
+      console.error("reportAnalytics() failed:", error);
+    }
     return res;
   };
 }
