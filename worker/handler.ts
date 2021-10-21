@@ -14,23 +14,25 @@ export function withLog(
   ) => Response | Promise<Response>,
 ): (request: Request, connInfo: ConnInfo) => Promise<Response> {
   return async (req, con) => {
-    let res: Response;
     let err: unknown;
+    let res!: Response;
+    const start = performance.now();
     try {
       res = await handler(req, con);
     } catch (e) {
       err = e;
       console.error(err);
-      res = new Response("500 Internal Server Error\nPlease try again later.", {
-        status: 500,
-      });
+      res = new Response(
+        "500 Internal Server Error\nPlease try again later.",
+        { status: 500 },
+      );
+    } finally {
+      const srt = performance.now() - start;
+      reportAnalytics(req, con, res, srt, err).catch((e) =>
+        console.error("reportAnalytics() failed:", e)
+      );
+      return res;
     }
-    try {
-      await reportAnalytics(req, res, err);
-    } catch (error) {
-      console.error("reportAnalytics() failed:", error);
-    }
-    return res;
   };
 }
 

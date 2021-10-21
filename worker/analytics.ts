@@ -1,4 +1,5 @@
 import { delay } from "https://deno.land/std@0.112.0/async/mod.ts";
+import { ConnInfo } from "https://deno.land/std@0.112.0/http/server.ts";
 
 const GA_BATCH_ENDPOINT = "https://www.google-analytics.com/batch";
 const GA_TRACKING_ID = Deno.env.get("GA_TRACKING_ID")!;
@@ -19,7 +20,9 @@ const ignoredPaths = [
 /** Construct and store the page_view event in memory. */
 export async function reportAnalytics(
   req: Request,
+  con: ConnInfo,
   res: Response,
+  srt: number,
   err: unknown,
 ) {
   const { pathname } = new URL(req.url);
@@ -27,7 +30,6 @@ export async function reportAnalytics(
   if (ignorePath) {
     return;
   }
-
   let exception;
   if (res.status >= 400) {
     exception = `${res.status} ${res.statusText}`;
@@ -35,8 +37,9 @@ export async function reportAnalytics(
       exception = `${exception} (${String(err)})`;
     }
   }
-  const ip = req.headers.get("x-forwarded-for")!;
-  // TODO: add timing info.
+  const { hostname: ip } = con.remoteAddr as Deno.NetAddr;
+  // TODO: track how long it takes to generate the response
+  // and send that info to GA.
   const info = {
     v: 1, // Version, should be 1.
     tid: GA_TRACKING_ID,
@@ -47,10 +50,11 @@ export async function reportAnalytics(
     uip: ip,
     aip: 1, // Anonymize the visitor's IP address.
     dr: req.headers.get("referer"),
+    srt, // Server response time.
     exd: exception,
     // The time delta (in ms) between when the hit being reported occurred
     // and the time the hit was sent.
-    qt: 1000,
+    qt: uploading ? 0 : 1000,
   };
   // Build GA request payload.
   const entries = Object.entries(info)
