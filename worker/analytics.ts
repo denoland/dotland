@@ -32,7 +32,7 @@ export async function reportAnalytics(
   }
   const { pathname } = new URL(req.url);
   const contentType = res.headers.get("content-type");
-  console.log({ contentType, pathname, exception });
+  console.log({ contentType, pathname, exception, headers: res.headers });
   if (
     !(
       contentType == null || /html/i.test(contentType) ||
