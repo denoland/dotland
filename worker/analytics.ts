@@ -13,10 +13,6 @@ const encoder = new TextEncoder();
 const uploadQueue: Uint8Array[] = [];
 let uploading = false;
 
-const ignoredPaths = [
-  "/_next",
-];
-
 /** Construct and store the page_view event in memory. */
 export async function reportAnalytics(
   req: Request,
@@ -26,8 +22,10 @@ export async function reportAnalytics(
   err: unknown,
 ) {
   const { pathname } = new URL(req.url);
-  const ignorePath = ignoredPaths.find((path) => pathname.startsWith(path));
-  if (ignorePath) {
+  const contentType = res.headers.get("content-type");
+  const reportRequest = contentType && contentType.includes("text/html") ||
+    (pathname.startsWith("/x") || pathname.startsWith("/std"));
+  if (!reportRequest) {
     return;
   }
   let exception;
