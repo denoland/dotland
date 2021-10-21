@@ -31,7 +31,7 @@ export async function reportAnalytics(
     }
   }
   const { pathname } = new URL(req.url);
-  const contentType = res.headers.get("content-type");
+  const contentType = req.headers.get("content-type");
   if (
     !(
       contentType == null || /html/i.test(contentType) ||
