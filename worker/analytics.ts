@@ -13,10 +13,6 @@ const encoder = new TextEncoder();
 const uploadQueue: Uint8Array[] = [];
 let uploading = false;
 
-const ignoredPaths = [
-  "/_next",
-];
-
 /** Construct and store the page_view event in memory. */
 export async function reportAnalytics(
   req: Request,
@@ -25,11 +21,6 @@ export async function reportAnalytics(
   srt: number,
   err: unknown,
 ) {
-  const { pathname } = new URL(req.url);
-  const ignorePath = ignoredPaths.find((path) => pathname.startsWith(path));
-  if (ignorePath) {
-    return;
-  }
   let exception;
   if (res.status >= 400) {
     exception = `${res.status} ${res.statusText}`;
@@ -37,9 +28,18 @@ export async function reportAnalytics(
       exception = `${exception} (${String(err)})`;
     }
   }
+  const { pathname } = new URL(req.url);
+  const contentType = res.headers.get("content-type");
+  if (
+    !(
+      contentType == null || /html/i.test(contentType) ||
+      pathname.startsWith("/std") || pathname.startsWith("/x") ||
+      exception != null
+    )
+  ) {
+    return;
+  }
   const { hostname: ip } = con.remoteAddr as Deno.NetAddr;
-  // TODO: track how long it takes to generate the response
-  // and send that info to GA.
   const info = {
     v: 1, // Version, should be 1.
     tid: GA_TRACKING_ID,
