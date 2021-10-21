@@ -36,7 +36,8 @@ export async function reportAnalytics(
     }
   }
   const ip = req.headers.get("x-forwarded-for")!;
-  // TODO: add timing info.
+  // TODO: track how long it takes to generate the response
+  // and send that info to GA.
   const info = {
     v: 1, // Version, should be 1.
     tid: GA_TRACKING_ID,
