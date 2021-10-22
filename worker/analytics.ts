@@ -38,17 +38,40 @@ export async function reportAnalytics(
     }
   }
 
-  // Don't track css, images etc.
+  // Request headers.
   const { pathname } = new URL(req.url);
-  const contentType = res.headers.get("content-type") ?? "";
+  const accept = req.headers.get("accept");
+  const referer = req.headers.get("referer");
+  const userAgent = req.headers.get("user-agent");
+
+  // Response headers.
+  const contentType = res.headers.get("content-type");
+  const isHtml = /html/i.test(contentType ?? "");
+
+  // Don't track css, images etc.
   if (
     !(
-      pathname === "/" ||
-      pathname.startsWith("/std") || pathname.startsWith("/x") ||
-      /html/i.test(contentType) || exception != null
+      pathname === "/" || pathname.startsWith("/std") ||
+      pathname.startsWith("/x") || isHtml || exception != null
     )
   ) {
     return;
+  }
+
+  // Set the page title to "website" or "javascript" or "typescript" or wasm".
+  let pageTitle;
+  if (isHtml) {
+    pageTitle = "website";
+  } else if (contentType != null) {
+    pageTitle = /^application\/(.*?)(?:;|$)/i.exec(contentType)?.[1];
+  }
+
+  // Files downloaded by a bot (deno, curl) get a special medium/source tag.
+  let campaignMedium;
+  let campaignSource;
+  if (referer == null && (accept == null || accept === "*/*")) {
+    campaignMedium = "Bot";
+    campaignSource = userAgent?.replace(/[^\w\-].*$/, "");
   }
 
   const { hostname: ip } = con.remoteAddr as Deno.NetAddr;
@@ -56,17 +79,18 @@ export async function reportAnalytics(
     v: 1, // Version, should be 1.
     tid: GA_TRACKING_ID,
     t: "pageview", // Event type.
-    dl: req.url,
-    ua: req.headers.get("user-agent"),
     cid: await getHash(ip), // GA requires `cid` to be set.
     uip: ip,
-    aip: 1, // Anonymize the visitor's IP address.
-    dr: req.headers.get("referer"),
-    srt, // Server response time.
+    dl: req.url,
+    dt: pageTitle,
+    dr: referer,
+    cm: campaignMedium,
+    cs: campaignSource,
+    ua: userAgent,
     exd: exception,
-    // The time delta (in ms) between when the hit being reported occurred
-    // and the time the hit was sent.
-    qt: uploading ? 0 : UPLOAD_DELAY,
+    exf: exception != null,
+    srt, // Server response time (in ms).
+    qt: uploading ? 0 : UPLOAD_DELAY, // Delay before uploading event (in ms).
   };
 
   // Build GA request payload.
