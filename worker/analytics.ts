@@ -82,7 +82,11 @@ export async function reportAnalytics(
   // Files downloaded by a bot (deno, curl) get a special medium/source tag.
   let campaignMedium;
   let campaignSource;
-  if (referer == null && (accept == null || accept === "*/*")) {
+  if (
+    referer == null &&
+    (userAgent == null || !userAgent.startsWith("Mozilla/")) &&
+    (accept == null || accept === "*/*")
+  ) {
     campaignMedium = "Bot";
     campaignSource = userAgent?.replace(/[^\w\-].*$/, "");
   }
