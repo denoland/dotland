@@ -1,9 +1,12 @@
 import { delay } from "https://deno.land/std@0.112.0/async/mod.ts";
 import { ConnInfo } from "https://deno.land/std@0.112.0/http/server.ts";
 
-const GA_BATCH_ENDPOINT = "https://www.google-analytics.com/batch";
 const GA_TRACKING_ID = Deno.env.get("GA_TRACKING_ID")!;
+if (!GA_TRACKING_ID) {
+  console.log("GA_TRACKING_ID not set, Google Analytics reporting disabled.");
+}
 
+const GA_BATCH_ENDPOINT = "https://www.google-analytics.com/batch";
 const GA_MAX_PARAM_LENGTH = 2048; // 2kb
 const GA_MAX_PAYLOAD_LENGTH = 8092; // 8kb
 const GA_MAX_BATCH_PAYLOAD_COUNT = 20;
@@ -23,6 +26,10 @@ export async function reportAnalytics(
   srt: number,
   err: unknown,
 ) {
+  if (GA_TRACKING_ID == null) {
+    return; // Google analytics tracking disabled.
+  }
+
   let exception;
   if (res.status >= 400) {
     exception = `${res.status} ${res.statusText}`;
@@ -30,6 +37,8 @@ export async function reportAnalytics(
       exception = `${exception} (${String(err)})`;
     }
   }
+
+  // Don't track css, images etc.
   const { pathname } = new URL(req.url);
   const contentType = res.headers.get("content-type") ?? "";
   if (
@@ -41,6 +50,7 @@ export async function reportAnalytics(
   ) {
     return;
   }
+
   const { hostname: ip } = con.remoteAddr as Deno.NetAddr;
   const info = {
     v: 1, // Version, should be 1.
@@ -58,6 +68,7 @@ export async function reportAnalytics(
     // and the time the hit was sent.
     qt: uploading ? 0 : UPLOAD_DELAY,
   };
+
   // Build GA request payload.
   const entries = Object.entries(info)
     .filter(([k, v]) => v != null)
@@ -69,6 +80,7 @@ export async function reportAnalytics(
     console.error("GA: payload exceeds maximimum size: " + payload);
     return;
   }
+
   // Add to upload queue.
   uploadQueue.push(payload);
   // Schedule upload if it isn't already running.
