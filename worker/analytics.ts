@@ -1,5 +1,8 @@
 import { delay } from "https://deno.land/std@0.112.0/async/mod.ts";
-import { ConnInfo } from "https://deno.land/std@0.112.0/http/server.ts";
+import {
+  ConnInfo,
+  STATUS_TEXT,
+} from "https://deno.land/std@0.112.0/http/mod.ts";
 
 const GA_TRACKING_ID = Deno.env.get("GA_TRACKING_ID")!;
 if (!GA_TRACKING_ID) {
@@ -37,7 +40,8 @@ export async function reportAnalytics(
   const userAgent = req.headers.get("user-agent");
 
   // Response headers.
-  const { ok, status, statusText } = res;
+  const { ok, status } = res;
+  const statusText = res.statusText || STATUS_TEXT.get(status) || `${status}`;
   const contentType = res.headers.get("content-type");
   const isHtml = /html/i.test(contentType ?? "");
 
