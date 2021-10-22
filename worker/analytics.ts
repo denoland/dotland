@@ -30,14 +30,6 @@ export async function reportAnalytics(
     return; // Google analytics tracking disabled.
   }
 
-  let exception;
-  if (res.status >= 400) {
-    exception = `${res.status} ${res.statusText}`;
-    if (err != null) {
-      exception = `${exception} (${String(err)})`;
-    }
-  }
-
   // Request headers.
   const { pathname } = new URL(req.url);
   const accept = req.headers.get("accept");
@@ -45,8 +37,23 @@ export async function reportAnalytics(
   const userAgent = req.headers.get("user-agent");
 
   // Response headers.
+  const { ok, status, statusText } = res;
   const contentType = res.headers.get("content-type");
   const isHtml = /html/i.test(contentType ?? "");
+
+  // Don't report anything to GA if response has 1xx/3xx status.
+  if (!(ok || status >= 400)) {
+    return;
+  }
+
+  // Report errors, including error message in case of a thrown exception.
+  let exception;
+  if (status >= 400) {
+    exception = `${status} ${statusText}`;
+    if (err != null) {
+      exception = `${exception} (${String(err)})`;
+    }
+  }
 
   // Don't track css, images etc.
   if (
@@ -60,7 +67,9 @@ export async function reportAnalytics(
 
   // Set the page title to "website" or "javascript" or "typescript" or wasm".
   let pageTitle;
-  if (isHtml) {
+  if (!ok) {
+    pageTitle = statusText.toLowerCase();
+  } else if (isHtml) {
     pageTitle = "website";
   } else if (contentType != null) {
     pageTitle = /^application\/(.*?)(?:;|$)/i.exec(contentType)?.[1];
