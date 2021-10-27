@@ -12,6 +12,7 @@ import {
   formatKB,
   formatLogScale,
   formatMB,
+  formatMsec,
   formatReqSec,
   reshape,
 } from "../util/benchmark_utils";
@@ -379,11 +380,11 @@ function Benchmarks(): React.ReactElement {
                   columns={showNormalized ? data?.normalizedMaxLatency
                   : data?.maxLatency}
                   yLabel={"milliseconds"}
-                  yTickFormat={formatLogScale}
+                  yTickFormat={formatMsec}
                 />
                 <p className="mt-1">
                   Max latency during the same test used above for
-                  requests/second. Smaller is better. Log scale.
+                  requests/second. Smaller is better.
                 </p>
               </div>
             </div>

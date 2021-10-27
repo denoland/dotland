@@ -229,6 +229,10 @@ export function formatReqSec(reqPerSec: number): string {
   return (reqPerSec / 1000).toFixed(3);
 }
 
+export function formatMsec(n: number): string {
+  return Math.round(n * 1000).toFixed(0);
+}
+
 export function formatPercentage(decimal: number): string {
   return (decimal * 100).toFixed(2);
 }
