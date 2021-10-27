@@ -52,7 +52,6 @@ export default class DenoDocDocument extends Document {
             name="keywords"
             content="Deno, DenoLand, Development, Javascript, TypeScript"
           />
-          <link rel="stylesheet" href="/fonts/inter/inter.css" />
           <link rel="manifest" href="/site.webmanifest" />
         </Head>
         <body>
