@@ -95,6 +95,13 @@ export async function reportAnalytics(
   // actually set by cloudflare. See https://www.cloudflare.com/en-gb/ips/.
   const ip = req.headers.get("cf-connecting-ip") ||
     (con.remoteAddr as Deno.NetAddr).hostname;
+  console.log(
+    "IPs",
+    req.headers.get("cf-connecting-ip"),
+    (con.remoteAddr as Deno.NetAddr).hostname,
+    "=",
+    ip,
+  );
 
   const info = {
     v: 1, // Version, should be 1.
