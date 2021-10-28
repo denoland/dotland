@@ -91,7 +91,11 @@ export async function reportAnalytics(
     campaignSource = userAgent?.replace(/[^\w\-].*$/, "");
   }
 
-  const { hostname: ip } = con.remoteAddr as Deno.NetAddr;
+  // TODO(piscisaureus): validate that the 'cf-connecting-ip' header was
+  // actually set by cloudflare. See https://www.cloudflare.com/en-gb/ips/.
+  const ip = req.headers.get("cf-connecting-ip") ||
+    (con.remoteAddr as Deno.NetAddr).hostname;
+
   const info = {
     v: 1, // Version, should be 1.
     tid: GA_TRACKING_ID,
