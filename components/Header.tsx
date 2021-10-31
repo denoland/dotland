@@ -68,19 +68,19 @@ function Header({
             <a
               className={`font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out`}
             >
-              Deploy
+              Развертывание
             </a>
           </Link>
           <Link href="/manual">
             <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              Manual
+              Руководство
             </a>
           </Link>
           <a
             href="https://deno.com/blog"
             className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
           >
-            Blog
+            Блог
           </a>
           <a
             href="https://doc.deno.land/builtin/stable"
@@ -90,12 +90,12 @@ function Header({
           </a>
           <Link href="/std">
             <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              Standard Library
+              Стандартная библиотека
             </a>
           </Link>
           <Link href="/x">
             <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              Third Party Modules
+              Сторонние модули
             </a>
           </Link>
           <a
@@ -180,17 +180,17 @@ function Header({
                   <a
                     className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out`}
                   >
-                    Deploy
+                    Развертывание
                   </a>
                 </Link>
                 <Link href="/manual">
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Manual
+                    Руководство
                   </a>
                 </Link>
                 <Link href="https://deno.com/blog">
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Blog
+                    Блог
                   </a>
                 </Link>
                 <a
@@ -201,12 +201,12 @@ function Header({
                 </a>
                 <Link href="/std">
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Standard Library
+                    Стандартная библиотека
                   </a>
                 </Link>
                 <Link href="/x">
                   <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Third Party Modules
+                    Сторонние модули
                   </a>
                 </Link>
               </div>
