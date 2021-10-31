@@ -26,16 +26,16 @@ listenAndServe(":8000", (req) => new Response("Hello World\\n"));
   return (
     <>
       <Head>
-        <title>Deno - A modern runtime for JavaScript and TypeScript</title>
+        <title>Deno - это современная среда выполнения для JavaScript и TypeScript</title>
       </Head>
       <CookieBanner />
       {
         /* <div className="bg-blue-500 p-4 text-white flex justify-center text-center">
         <div className="max-w-screen-xl">
-          <span className="inline">Deno 1.9 is out.</span>
+          <span className="inline">вышел Deno 1.9.</span>
           <span className="block sm:ml-2 sm:inline-block font-semibold">
             <a href="https://deno.com/blog/v1.9">
-              Read the release notes <span aria-hidden="true">&rarr;</span>
+              Прочтите примечания к выпуску <span aria-hidden="true">&rarr;</span>
             </a>
           </span>
         </div>
@@ -58,7 +58,7 @@ listenAndServe(":8000", (req) => new Response("Hello World\\n"));
               href="/#installation"
               className="rounded-full mt-8 px-8 py-2 transition-colors duration-75 ease-in-out bg-blue-500 hover:bg-blue-400 text-white text-lg shadow-lg"
             >
-              Install
+              Установка
             </a>
             <a
               href="https://github.com/denoland/deno/releases/latest"
@@ -70,35 +70,34 @@ listenAndServe(":8000", (req) => new Response("Hello World\\n"));
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <p className="my-4 text-gray-700">
-            Deno is a simple, modern and secure runtime for JavaScript and
-            TypeScript that uses V8 and is built in Rust.
+            Deno это простая, современная и безопасная среда выполнения для JavaScript и
+            TypeScript которая использует V8 и построена на Rust.
           </p>
           <ol className="ml-8 list-disc text-gray-700">
             <li>
-              Secure by default. No file, network, or environment access, unless
-              explicitly enabled.
+              Безопасность по умолчанию. Нет доступа к файлам, сети или окружению, только при явном разрешении.
             </li>
-            <li>Supports TypeScript out of the box.</li>
-            <li>Ships only a single executable file.</li>
+            <li>Поддержка TypeScript из коробки.</li>
+            <li>В поставке только один файл.</li>
             <li>
-              Has built-in utilities like a dependency inspector (
-              <InlineCode>deno info</InlineCode>) and a code formatter (
+              Имеет встроенные утилиты, такие как инспектор зависимостей (
+              <InlineCode>deno info</InlineCode>) и форматер кода (
               <InlineCode>deno fmt</InlineCode>).
             </li>
             <li>
-              Has a set of reviewed (audited) standard modules that are
-              guaranteed to work with Deno:{" "}
+              Имеет набор проверенных (аудируемых) стандартных модулей
+              гарантированно работающих с Deno:{" "}
               <a href="https://deno.land/std" className="link">
                 deno.land/std
               </a>
             </li>
             <li>
-              Has a number of{" "}
+              Имеет ряд{" "}
               <a
                 href="https://github.com/denoland/deno/wiki#companies-interested-in-deno"
                 className="link"
               >
-                companies interested in using and exploring Deno
+                компании, заинтересованных в использовании и изучении Deno
               </a>
             </li>
           </ol>
@@ -107,7 +106,7 @@ listenAndServe(":8000", (req) => new Response("Hello World\\n"));
           <Link href="#installation">
             <a className="hover:underline">
               <h3 className="font-bold text-xl" id="installation">
-                Installation
+                Установка
               </h3>
             </a>
           </Link>
@@ -117,7 +116,7 @@ listenAndServe(":8000", (req) => new Response("Hello World\\n"));
           <Link href="#getting-started">
             <a className="hover:underline">
               <h3 className="font-bold text-xl" id="getting-started">
-                Getting Started
+                Первое знакомство
               </h3>
             </a>
           </Link>
@@ -137,8 +136,7 @@ listenAndServe(":8000", (req) => new Response("Hello World\\n"));
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8">
           <p className="my-4 text-gray-700">
-            You can find a more in depth introduction, examples, and environment
-            setup guides in{" "}
+            Вы можете найти более подробное введение, примеры и руководства по настройке среды в {" "}
             <Link href="/manual">
               <a className="link">the manual</a>
             </Link>
@@ -149,70 +147,71 @@ listenAndServe(":8000", (req) => new Response("Hello World\\n"));
           <Link href="#runtime-documentation">
             <a className="hover:underline">
               <h3 className="font-bold text-xl" id="runtime-documentation">
-                Runtime Documentation
+                Документация во время выполнения
               </h3>
             </a>
           </Link>
           <p className="my-4 text-gray-700">
-            The basic runtime documentation for Deno can be found on{" "}
+            Базовую документацию по времени исполнения для Deno можно найти на{" "}
             <a href="https://doc.deno.land/builtin/stable" className="link">
               doc.deno.land
             </a>
             .
           </p>
           <p className="my-4 text-gray-700">
-            Deno comes with{" "}
+            Deno поставляется с{" "}
             <Link href="/manual">
-              <a className="link">a manual</a>
+              <a className="link">руководством</a>
             </Link>{" "}
-            which contains more in depth explanations about the more complex
-            functions of the runtime, an introduction to the concepts that Deno
-            is built on, details about the internals of Deno, how to embed Deno
-            in your own application and how to extend Deno using Rust plugins.
+            который содержит более подробные объяснения более сложных
+            функций рантайма, введение в концепции, на которых Deno
+            построен, подробности о внутреннем устройстве Deno, как встроить Deno
+            в ваше приложение и как расширить Deno используя плагины Rust.
           </p>
           <p className="my-4 text-gray-700">
-            The manual also contains information about the built in tools that
-            Deno provides.
+            В руководстве также содержится информация о встроенных инструментах, 
+            которые предоставляет Deno.
           </p>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <Link href="#standard-modules">
             <a className="hover:underline">
               <h3 className="font-bold text-xl" id="standard-modules">
-                Standard Modules
+                Стандартные модули
               </h3>
             </a>
           </Link>
           <p className="my-4 text-gray-700">
-            Next to the Deno runtime, Deno also provides a list of audited
-            standard modules that are reviewed by the Deno maintainers and are
-            guaranteed to work with a specific Deno version. These live in the
+            Помимо среды исполнения Deno, 
+            Deno также предоставляет список проверенных стандартных модулей,
+            которые проверяются специалистами по сопровождению Deno и
+            гарантированно работают с конкретной версией Deno. 
+            Они находятся в
             {" "}
             <a href="https://github.com/denoland/deno_std" className="link">
               denoland/deno_std
             </a>{" "}
-            repository.
+            реппозитории.
           </p>
           <p className="my-4 text-gray-700">
-            These standard modules are hosted at{" "}
+            Эти стандартные модули размещены на{" "}
             <Link href="/std">
               <a className="link">deno.land/std</a>
             </Link>{" "}
-            and are distributed via URLs like all other ES modules that are
-            compatible with Deno.
+            и распространяются через URL-адреса, как и все другие модули ES,
+            совместимые с Deno.
           </p>
         </div>
         <div className="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <Link href="#third-party-modules">
             <a className="hover:underline">
               <h3 className="font-bold text-xl" id="third-party-modules">
-                Third Party Modules
+                Сторонние модули
               </h3>
             </a>
           </Link>
           <p className="my-4 text-gray-700">
-            Deno can import modules from any location on the web, like GitHub, a
-            personal webserver, or a CDN like{" "}
+            Deno может импортировать модули из любого места в Интернете, например, GitHub, личного веб-сервера или CDN, например{" "}
             <a href="https://www.skypack.dev" className="link">
               Skypack
             </a>
@@ -231,18 +230,20 @@ listenAndServe(":8000", (req) => new Response("Hello World\\n"));
             .
           </p>
           <p className="my-4 text-gray-700">
-            To make it easier to consume third party modules Deno provides some
-            built in tooling like <InlineCode>deno info</InlineCode> and{" "}
-            <InlineCode>deno doc</InlineCode>. deno.land also provides a web UI
-            for viewing module documentation. It is available at{" "}
+            Чтобы упростить использование сторонних модулей, 
+            Deno предоставляет некоторые встроенные инструменты, 
+            такие как <InlineCode>deno info</InlineCode> and{" "}
+            <InlineCode>deno doc</InlineCode>. deno.land также предоставляет веб-интерфейс
+            для просмотра документации модуля. Она доступна на{" "}
             <a href="https://doc.deno.land" className="link">
               doc.deno.land
             </a>
             .
           </p>
           <p className="my-4 text-gray-700">
-            deno.land also provides a simple public hosting service for ES
-            modules that work with Deno. It can be found at{" "}
+            deno.land также предоставляет простой общедоступный хостинг
+            для модулей ES, которые работают с Deno. 
+            Его можно найти на{" "}
             <Link href="/x">
               <a className="link">deno.land/x</a>
             </Link>
@@ -325,11 +326,11 @@ const InstallSection = () => {
   return (
     <>
       <p className="my-4 text-gray-700">
-        Deno ships as a single executable with no dependencies. You can install
-        it using the installers below, or download a release binary from the
+        Deno поставляется как единый исполняемый файл без зависимостей. Вы можете установить его
+        с помощью установщиков, указанных ниже, или загрузить двоичный файл релиза с
         {" "}
         <a href="https://github.com/denoland/deno/releases" className="link">
-          releases page
+          страница релизов
         </a>
         .
       </p>
@@ -344,7 +345,7 @@ const InstallSection = () => {
         <a className="link" href="https://github.com/denoland/deno_install">
           deno_install
         </a>{" "}
-        for more installation options.
+        для дополнительных вариантов установки.
       </p>
     </>
   );
