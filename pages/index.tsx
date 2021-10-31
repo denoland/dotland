@@ -49,9 +49,9 @@ listenAndServe(":8000", (req) => new Response("Hello World\\n"));
               Deno
             </h1>
             <h2 className="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900">
-              A <strong className="font-semibold">modern</strong> runtime for
+              Это <strong className="font-semibold">modern</strong> среда исполнения для
               {" "}
-              <strong className="font-semibold">JavaScript</strong> and{" "}
+              <strong className="font-semibold">JavaScript</strong> и{" "}
               <strong className="font-semibold">TypeScript</strong>.
             </h2>
             <a
