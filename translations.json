@@ -52,5 +52,11 @@
     "english": "Central Kurdish",
     "link": "https://deno-ckb.vercel.app/",
     "repository": "https://github.com/rojserbest/dotland"
-  }
+  },
+  {
+    "language": "Русский",
+    "english": "Russian",
+    "link": "https://deno-ru.vercel.app",
+    "repository": "https://github.com/tvortsa/dotland"
+  },
 ]
