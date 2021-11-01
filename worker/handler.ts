@@ -2,23 +2,37 @@
 
 import { handleRegistryRequest } from "./registry.ts";
 import { handleVSCRequest } from "./vscode.ts";
+import { reportAnalytics } from "./analytics.ts";
+import { ConnInfo } from "https://deno.land/std@0.112.0/http/server.ts";
 
 const REMOTE_URL = "https://deno-cn.vercel.app";
 
 export function withLog(
-  handler: (request: Request) => Response | Promise<Response>,
-): (request: Request) => Promise<Response> {
-  return async (req) => {
-    let res: Response;
+  handler: (
+    request: Request,
+    connInfo: ConnInfo,
+  ) => Response | Promise<Response>,
+): (request: Request, connInfo: ConnInfo) => Promise<Response> {
+  return async (req, con) => {
+    let err: unknown;
+    let res!: Response;
+    const start = performance.now();
     try {
-      res = await handler(req);
-    } catch (err) {
+      res = await handler(req, con);
+    } catch (e) {
+      err = e;
       console.error(err);
-      res = new Response("500 Internal Server Error\nPlease try again later.", {
-        status: 500,
-      });
+      res = new Response(
+        "500 Internal Server Error\nPlease try again later.",
+        { status: 500 },
+      );
+    } finally {
+      const srt = performance.now() - start;
+      reportAnalytics(req, con, res, srt, err).catch((e) =>
+        console.error("reportAnalytics() failed:", e)
+      );
+      return res;
     }
-    return res;
   };
 }
 

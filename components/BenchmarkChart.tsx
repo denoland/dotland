@@ -23,7 +23,7 @@ function BenchmarkChart(props: BenchmarkChartProps): React.ReactElement {
 
   function viewCommitOnClick(c1: any, c2: any, { dataPointIndex }: any): void {
     window.open(
-      `https://github.com/denoland/deno/commit/${
+      `https://github.com/denoland/deno/commits/${
         props.sha1List[dataPointIndex]
       }`,
     );

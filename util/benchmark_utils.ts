@@ -53,6 +53,72 @@ function getBenchmarkVarieties(
   return Object.keys(last[benchmarkName] ?? {});
 }
 
+function createNormalizedColumns(
+  data: BenchmarkRun[],
+  benchmarkName: BenchmarkName,
+): Column[] {
+  const columns = createColumns(data, benchmarkName);
+  normalize(columns);
+  lowpassFilter(columns);
+  return columns;
+}
+
+function normalize(columns: Column[]) {
+  const series = columns.map((s) => s.data);
+  const regressions = columns.map((s) => linearRegression(s.data));
+  const xRange = series.map((data) => data.length)
+    .reduce((max, length) => Math.max(max, length), 0);
+  for (let x = 0; x < xRange; x++) {
+    const [ySum, regSum] = series
+      .map((_, k) => [series[k][x], regressions[k][x]])
+      .filter(([y, _]) => y != null)
+      .map(([y, reg]) => [y, reg] as [number, number])
+      .reduce(([ySum, regSum], [y, reg]) => [ySum + y, regSum + reg], [0, 0]);
+    const f = regSum / ySum;
+    for (let k = 0; k < series.length; k++) {
+      if (series[k][x] == null) continue;
+      series[k][x]! *= f;
+    }
+  }
+}
+
+function lowpassFilter(columns: Column[]) {
+  const series = columns.map((s) => s.data);
+  const xRange = series.map((d) => d.length)
+    .reduce((max, y) => Math.max(max, y), 0);
+  const f = 1 / Math.sqrt(xRange);
+  for (let k = 0; k < series.length; k++) {
+    for (let x = 1; x < xRange; x++) {
+      if (series[k][x] == null) continue;
+      if (series[k][x - 1] == null) continue;
+      series[k][x] = (1 - f) * series[k][x - 1]! + f * series[k][x]!;
+    }
+  }
+}
+
+function linearRegression(data: Array<number | null>): number[] {
+  const [xRange, xSum, ySum, xxSum, xySum, count] = data.map((y, x) => [x, y])
+    .filter(([_x, y]) => y != null)
+    .map(([x, y]) => [x, y] as [number, number])
+    .reduce(
+      (
+        [xRange, xSum, ySum, xxSum, xySum, count],
+        [x, y],
+      ) => [
+        Math.max(xRange, x + 1),
+        xSum + x,
+        ySum + y,
+        xxSum + x * x,
+        xySum + x * y,
+        count + 1,
+      ],
+      [0, 0, 0, 0, 0, 0],
+    );
+  const slope = (count * xySum - xSum * ySum) / (count * xxSum - xSum * xSum);
+  const base = (ySum / count) - (slope * xSum) / count;
+  return new Array(xRange).fill(null).map((_, x) => x * slope + base);
+}
+
 function createColumns(
   data: BenchmarkRun[],
   benchmarkName: BenchmarkName,
@@ -77,7 +143,7 @@ function createColumns(
       }
       return null;
     }),
-  }));
+  })).filter(({ data }) => data.some((y) => y != null));
 }
 
 // For columns that have just a single variety
@@ -95,38 +161,6 @@ function createColumns1(
   ];
 }
 
-export function createNormalizedColumns(
-  data: BenchmarkRun[],
-  benchmarkName: BenchmarkName,
-  baselineBenchmark: BenchmarkName,
-  baselineVariety: string,
-): Column[] {
-  const varieties = getBenchmarkVarieties(data, benchmarkName);
-  return varieties.map((variety) => ({
-    name: variety,
-    data: data.map((d) => {
-      if (d[baselineBenchmark] != null) {
-        const bb = d[baselineBenchmark] as any;
-        if (bb[baselineVariety] != null) {
-          const baseline = bb[baselineVariety];
-          if (d[benchmarkName] != null) {
-            const b = d[benchmarkName] as any;
-            if (b[variety] != null && baseline !== 0) {
-              const v = b[variety];
-              if (benchmarkName === "benchmark") {
-                const meanValue = v ? v.mean : 0;
-                return meanValue || null;
-              } else {
-                return v / baseline;
-              }
-            }
-          }
-        }
-      }
-      return null;
-    }),
-  }));
-}
 function createBinarySizeColumns(data: BenchmarkRun[]): Column[] {
   const propName = "binary_size";
   const last = data[data.length - 1]!;
@@ -193,6 +227,10 @@ export function formatMB(bytes: number): string {
 
 export function formatReqSec(reqPerSec: number): string {
   return (reqPerSec / 1000).toFixed(3);
+}
+
+export function formatMsec(n: number): string {
+  return Math.round(n * 1000).toFixed(0);
 }
 
 export function formatPercentage(decimal: number): string {
@@ -264,8 +302,8 @@ export interface BenchmarkData {
   reqPerSec: Column[];
   normalizedReqPerSec: Column[];
   proxy: Column[];
-  normalizedProxy: Column[];
   maxLatency: Column[];
+  normalizedMaxLatency: Column[];
   maxMemory: Column[];
   binarySize: Column[];
   threadCount: Column[];
@@ -282,18 +320,8 @@ export function reshape(data: BenchmarkRun[]): BenchmarkData {
   // Hack to extract proxy fields from req/s fields.
   extractProxyFields(data);
 
-  const normalizedReqPerSec = createNormalizedColumns(
-    data,
-    "req_per_sec",
-    "req_per_sec",
-    "hyper",
-  );
-  const normalizedProxy = createNormalizedColumns(
-    data,
-    "req_per_sec_proxy",
-    "req_per_sec",
-    "hyper",
-  );
+  const normalizedReqPerSec = createNormalizedColumns(data, "req_per_sec");
+  const normalizedMaxLatency = createNormalizedColumns(data, "max_latency");
 
   return {
     execTime: createColumns(data, "benchmark"),
@@ -301,8 +329,8 @@ export function reshape(data: BenchmarkRun[]): BenchmarkData {
     reqPerSec: createColumns(data, "req_per_sec"),
     normalizedReqPerSec,
     proxy: createColumns(data, "req_per_sec_proxy"),
-    normalizedProxy,
     maxLatency: createColumns(data, "max_latency"),
+    normalizedMaxLatency,
     maxMemory: createColumns(data, "max_memory"),
     binarySize: createBinarySizeColumns(data),
     threadCount: createThreadCountColumns(data),
