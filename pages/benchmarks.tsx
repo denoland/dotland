@@ -163,7 +163,7 @@ function Benchmarks(): React.ReactElement {
                 </li>
                 <li>
                   <SourceLink
-                    path="cli/tests/testdata/workers_startup_bench.ts"
+                    path="cli/tests/testdata/workers/bench_startup.ts"
                     name="workers_startup"
                   />
                 </li>
