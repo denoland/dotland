@@ -3,8 +3,6 @@ name: ci
 on: [push, pull_request]
 
 jobs:
-  web:
-    runs-on: ubuntu-latest
   check:
     runs-on: ubuntu-latest
     steps:
@@ -34,4 +32,5 @@ jobs:
           deno-version: v1.x
 
       - name: Run Tests
-        run: deno test --allow-net --allow-env --allow-hrtime
+        # TODO(kt3k): Enable type checking
+        run: deno test --allow-net --allow-env --allow-hrtime --no-check

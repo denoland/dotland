@@ -34,12 +34,20 @@ import { FileDisplay } from "../../components/FileDisplay.tsx";
 import { DirectoryListing } from "../../components/DirectoryListing.tsx";
 import { ErrorMessage } from "../../components/ErrorMessage.tsx";
 
+// 100kb
+const MAX_SYNTAX_HIGHLIGHT_FILE_SIZE = 100 * 1024;
+// 500kb
+const MAX_FILE_SIZE = 500 * 1024;
+
 export default function Registry({ params, url }: PageProps) {
-  const { name, version, path: xPath } = params as {
+  let { name, version, path: xPath } = params as {
     name: string;
     version?: string;
     path: string;
   };
+  if (version !== undefined) {
+    version = decodeURIComponent(version);
+  }
   const path = xPath ? "/" + xPath : "";
   const versions = useData(name, () => {
     return getVersionList(name)
@@ -130,26 +138,24 @@ function ModuleView({
   isStd: boolean;
   url: URL;
 }) {
-  const versionMeta = useData(`versionMeta/${name}@${version}`, () => {
-    return getVersionMeta(name, version)
-      .catch((e) => {
-        console.error("Failed to fetch dir entry:", e);
-        return null;
-      });
-  });
-  const moduleMeta = useData(`moduleMeta/${name}`, () => {
-    return getModule(name)
-      .catch((e) => {
-        console.error("Failed to fetch module meta:", e);
-        return null;
-      });
-  });
-  const versionDeps = useData(`deps/${name}@${version}`, () => {
-    return getVersionDeps(name, version)
-      .catch((e) => {
-        console.error("Failed to fetch dependency information:", e);
-        return null;
-      });
+  const [versionMeta, moduleMeta, versionDeps] = useData("moduleview", () => {
+    return Promise.all([
+      getVersionMeta(name, version)
+        .catch((e) => {
+          console.error("Failed to fetch dir entry:", e);
+          return null;
+        }),
+      getModule(name)
+        .catch((e) => {
+          console.error("Failed to fetch module meta:", e);
+          return null;
+        }),
+      getVersionDeps(name, version)
+        .catch((e) => {
+          console.error("Failed to fetch dependency information:", e);
+          return null;
+        }),
+    ]);
   });
 
   const stdVersion = isStd ? version : undefined;
@@ -162,30 +168,12 @@ function ModuleView({
     ? `https://doc.deno.land/https://deno.land${canonicalPath}`
     : null;
 
-  const raw = useData(sourceURL, async () => {
-    if (
-      sourceURL &&
-      versionMeta &&
-      versionMeta.directoryListing.filter(
-          (d) => d.path === path && d.type == "file",
-        ).length !== 0
-    ) {
-      const res = await fetch(sourceURL, { method: "GET" });
-      if (!res.ok) {
-        if (
-          res.status !== 400 &&
-          res.status !== 403 &&
-          res.status !== 404
-        ) {
-          console.error(new Error(`${res.status}: ${res.statusText}`));
-        }
-        return null;
-      }
-      return await res.text();
-    } else {
-      return null;
-    }
-  });
+  const hasStandardModulEntryPoint = versionMeta?.directoryListing.some(
+    (entry) => entry.path === "/mod.ts",
+  );
+  const moduleDocumentationURL = hasStandardModulEntryPoint
+    ? `https://doc.deno.land/https://deno.land${basePath}/mod.ts`
+    : null;
 
   // Get directory entries for path
   const dirEntries = (() => {
@@ -217,6 +205,7 @@ function ModuleView({
       : getRepositoryURL(versionMeta, path)
     : undefined;
   const {
+    readmeSize,
     readmeCanonicalPath,
     readmeURL,
     readmeRepositoryURL,
@@ -226,6 +215,7 @@ function ModuleView({
       : dirEntries?.find((d) => isReadme(d.name));
     if (readmeEntry) {
       return {
+        readmeSize: readmeEntry.size,
         readmeCanonicalPath: canonicalPath + "/" + readmeEntry.name,
         readmeURL: getSourceURL(name, version, path + "/" + readmeEntry.name),
         readmeRepositoryURL: versionMeta
@@ -234,29 +224,80 @@ function ModuleView({
       };
     }
     return {
+      readmeSize: null,
       readmeCanonicalPath: null,
       readmeURL: null,
       readmeRepositoryURL: null,
     };
   })();
 
-  const readme = useData(`readme/${sourceURL}`, async () => {
-    if (readmeURL) {
-      const res = await fetch(readmeURL);
-      if (!res.ok) {
+  const [raw, readme] = useData(sourceURL, () => {
+    return Promise.all([
+      (async () => {
         if (
-          res.status !== 400 &&
-          res.status !== 403 &&
-          res.status !== 404
+          sourceURL &&
+          versionMeta &&
+          versionMeta.directoryListing.filter(
+              (d) => d.path === path && d.type == "file",
+            ).length !== 0
         ) {
-          console.error(new Error(`${res.status}: ${res.statusText}`));
+          const res = await fetch(sourceURL, { method: "GET" });
+          if (!res.ok) {
+            if (
+              res.status !== 400 &&
+              res.status !== 403 &&
+              res.status !== 404
+            ) {
+              console.error(new Error(`${res.status}: ${res.statusText}`));
+            }
+            return null;
+          }
+
+          const size = versionMeta.directoryListing.find((entry) =>
+            entry.path === path
+          )!.size!;
+          if (size < MAX_SYNTAX_HIGHLIGHT_FILE_SIZE) {
+            return {
+              content: await res.text(),
+              highlight: true,
+            };
+          } else if (size < MAX_FILE_SIZE) {
+            return {
+              content: await res.text(),
+              highlight: false,
+            };
+          } else {
+            await res.body!.cancel();
+            return new Error("Max display filesize exceeded");
+          }
+        } else {
+          return null;
         }
-        return null;
-      }
-      return res.text();
-    } else {
-      return null;
-    }
+      })(),
+      (async () => {
+        if (readmeURL) {
+          const res = await fetch(readmeURL);
+          if (!res.ok) {
+            if (
+              res.status !== 400 &&
+              res.status !== 403 &&
+              res.status !== 404
+            ) {
+              console.error(new Error(`${res.status}: ${res.statusText}`));
+            }
+            return null;
+          }
+          if (readmeSize! < MAX_SYNTAX_HIGHLIGHT_FILE_SIZE) {
+            return await res.text();
+          } else {
+            await res.body!.cancel();
+            return null;
+          }
+        } else {
+          return null;
+        }
+      })(),
+    ]);
   });
 
   const externalDependencies = versionDeps === null
@@ -322,6 +363,29 @@ function ModuleView({
                   <div class="text-sm">
                     {emojify(moduleMeta.description ?? "")}
                   </div>
+                  {moduleDocumentationURL
+                    ? (
+                      <div class="mt-3 flex items-center">
+                        <svg
+                          class="h-5 w-5 mr-2 inline text-gray-700"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <title>
+                            Documentation
+                          </title>
+                          <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z">
+                          </path>
+                        </svg>
+                        <a
+                          class="link"
+                          href={moduleDocumentationURL}
+                        >
+                          Documentation
+                        </a>
+                      </div>
+                    )
+                    : null}
                   <div class="mt-3 flex items-center">
                     <svg
                       class="h-5 w-5 mr-2 inline text-gray-700"
@@ -462,7 +526,7 @@ function ModuleView({
                 This file or directory could not be found.
               </ErrorMessage>
             );
-          } else if (dirEntries === null && typeof raw !== "string") {
+          } else if (dirEntries === null && raw === null) {
             // No files
             return (
               <div class="rounded-lg overflow-hidden border border-gray-200 bg-white">
@@ -481,6 +545,24 @@ function ModuleView({
                 </div>
               </div>
             );
+          } else if (raw instanceof Error) {
+            return (
+              <div class="rounded-lg overflow-hidden border border-gray-200 bg-white">
+                {versionMeta && (
+                  <DirectoryListing
+                    name={name}
+                    version={version}
+                    path={path}
+                    dirListing={versionMeta.directoryListing}
+                    repositoryURL={repositoryURL}
+                    url={url}
+                  />
+                )}
+                <div class="w-full p-4 text-gray-400 italic">
+                  {raw.message}
+                </div>
+              </div>
+            );
           } else {
             return (
               <div class="flex flex-col gap-4">
@@ -494,9 +576,10 @@ function ModuleView({
                     url={url}
                   />
                 )}
-                {typeof raw === "string" && (
+                {raw !== null && (
                   <FileDisplay
-                    raw={raw}
+                    raw={raw.content}
+                    filetypeOverride={raw.highlight ? undefined : "text"}
                     canonicalPath={canonicalPath}
                     sourceURL={sourceURL}
                     repositoryURL={repositoryURL}
@@ -633,7 +716,7 @@ export const handler: Handlers = {
   async GET({ req, match, render }) {
     if (!match.version) {
       const version = await getVersionList(match.name);
-      if (version?.latest === null) {
+      if (!version?.latest) {
         return render!();
       }
       const url = new URL(req.url);

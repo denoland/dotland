@@ -129,7 +129,7 @@ export default function Manual({ params, url }: PageProps) {
           autoComplete="off"
         />
 
-        <div class="md:hidden hidden" id="manualSideBar">
+        <div class="md:hidden hidden" id="manualSidebar">
           <div class="fixed inset-0 flex z-40">
             <div class="fixed inset-0">
               <label
@@ -142,7 +142,7 @@ export default function Manual({ params, url }: PageProps) {
                 <label
                   class="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600"
                   aria-label="Close sidebar"
-                  htmlFor="manualSideBarToggle"
+                  htmlFor="manualSidebarToggle"
                 >
                   <svg
                     class="h-6 w-6 text-white"
@@ -260,22 +260,24 @@ export default function Manual({ params, url }: PageProps) {
               </div>
             </div>
             <label
-              class="px-4 my-auto text-gray-500 focus:outline-none focus:bg-gray-100 focus:text-gray-600 md:hidden"
+              class="focus:outline-none focus:bg-gray-100 md:hidden flex items-center"
               htmlFor="manualSidebarToggle"
             >
-              <svg
-                class="h-6 w-6"
-                stroke="currentColor"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h7"
-                />
-              </svg>
+              <div class="px-4 text-gray-500 focus:text-gray-600">
+                <svg
+                  className="h-6 w-6"
+                  stroke="currentColor"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16M4 18h7"
+                  />
+                </svg>
+              </div>
             </label>
           </div>
 
@@ -349,7 +351,7 @@ export default function Manual({ params, url }: PageProps) {
                   source={content
                     .replace(/\$STD_VERSION/g, stdVersion)
                     .replace(/\$CLI_VERSION/g, params.version)}
-                  baseUrl={basepath(params.version) + "/placeholder/"}
+                  baseUrl={sourceURL}
                 />
               </div>
               <div class="mt-4 pt-4 border-t border-gray-200">

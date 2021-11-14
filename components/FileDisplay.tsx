@@ -15,12 +15,13 @@ export function FileDisplay(props: {
   canonicalPath: string;
   sourceURL: string;
   baseURL: string;
+  filetypeOverride?: string;
   repositoryURL?: string | null;
   documentationURL?: string | null;
   stdVersion?: string;
   pathname: string;
 }) {
-  const filetype = fileTypeFromURL(props.sourceURL);
+  const filetype = props.filetypeOverride ?? fileTypeFromURL(props.sourceURL);
   const filename = fileNameFromURL(props.sourceURL);
 
   return (

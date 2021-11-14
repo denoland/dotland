@@ -11,7 +11,7 @@ export function Footer({ simple }: { simple?: boolean }) {
           <FooterItem href="/manual">
             مانواڵ
           </FooterItem>
-          <FooterItem href="https://doc.deno.land/builtin/stable">
+          <FooterItem href="https://doc.deno.land/deno/stable">
             API
           </FooterItem>
           <FooterItem href="/std">
