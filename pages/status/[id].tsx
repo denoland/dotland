@@ -19,7 +19,7 @@ function StatusPage(): React.ReactElement {
   return (
     <>
       <Head>
-        <title>دۆخی بڵاو کردنەوە | دێنۆ</title>
+        <title>دۆخی بڵاوکردنەوە | دێنۆ</title>
       </Head>
       <CookieBanner />
       <div className="bg-gray-50 min-h-full">
