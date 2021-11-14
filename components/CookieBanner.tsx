@@ -20,10 +20,10 @@ export function CookieBanner(): React.ReactElement {
               dir="rtl"
             >
               <div className="w-0 flex-1 flex items-center">
-                <p className="ml-3 font-medium text-white">
+                <p className="mr-3 font-medium text-white">
                   <span className="md:hidden">کووکی بەکاردەهێنین.</span>
                   <span className="hidden md:inline">
-                    بۆ خزمەتکردنێکی باشتر، کووکی بەکاردێنین.
+                    بۆ خزمەتکردنێکی باشتر، کووکی بەکاردەهێنین.
                   </span>
                 </p>
               </div>
