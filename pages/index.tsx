@@ -75,7 +75,7 @@ listenAndServe(":8000", (req) => new Response("Hello World\\n"));
             دێنۆ ژینگەیەکی مۆدێرن و پارێزراوە بۆ تایپسکریپت و جاڤاسکریپت کە V8
             بەکاردەهێنێت و بە زمانی ڕەست نووسراوە.
           </p>
-          <ol className="ml-8 list-disc text-gray-700">
+          <ol className="mr-8 list-disc text-gray-700">
             <li>
               لە بنەڕەتەوە پارێزراوە. ناتوانێت دەستی بگات بە فایلەکان، نێتوۆرک و
               هتد مەگەر خۆت بهێڵیت.
