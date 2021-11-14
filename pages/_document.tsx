@@ -12,7 +12,7 @@ import Document, {
 
 export default class DenoDocDocument extends Document {
   static async getInitialProps(
-    ctx: DocumentContext,
+    ctx: DocumentContext
   ): Promise<DocumentInitialProps> {
     const initialProps = await Document.getInitialProps(ctx);
     return { ...initialProps };
@@ -50,7 +50,7 @@ export default class DenoDocDocument extends Document {
           <meta name="robots" content="index, follow" />
           <meta
             name="keywords"
-            content="Deno, DenoLand, Development, Javascript, TypeScript"
+            content="Deno, DenoLand, Development, JavaScript, TypeScript"
           />
           <link rel="stylesheet" href="/fonts/inter/inter.css" />
           <link rel="manifest" href="/site.webmanifest" />
@@ -62,8 +62,7 @@ export default class DenoDocDocument extends Document {
             defer
             src="https://static.cloudflareinsights.com/beacon.min.js"
             data-cf-beacon='{"token": "1b59386cd9134d5e81c9b0d5b9cb9686"}'
-          >
-          </script>
+          ></script>
         </body>
       </Html>
     );
