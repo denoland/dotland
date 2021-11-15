@@ -169,10 +169,15 @@ async function upload() {
       const start = performance.now();
       const response = await fetch(GA_BATCH_ENDPOINT, { method: "POST", body });
       const elapsed = performance.now() - start;
-      console.log(
-        `GA: batch uploaded ${payloadCount} items in ${elapsed}ms. ` +
-          `Response: ${response.status} ${response.statusText}`,
-      );
+
+      // Log slow and failed uploads.
+      if (response.status !== 200 || elapsed >= 1000) {
+        console.log(
+          `GA: batch uploaded ${payloadCount} items in ${elapsed}ms. ` +
+            `Response: ${response.status} ${response.statusText}`,
+        );
+      }
+
       // Google says not to retry when it reports a non-200 status code.
       uploadQueue.splice(0, payloadCount);
     } catch (err) {
