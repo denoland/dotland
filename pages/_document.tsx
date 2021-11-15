@@ -50,7 +50,7 @@ export default class DenoDocDocument extends Document {
           <meta name="robots" content="index, follow" />
           <meta
             name="keywords"
-            content="Deno, DenoLand, Development, Javascript, TypeScript"
+            content="Deno, DenoLand, Development, JavaScript, TypeScript"
           />
           <link rel="stylesheet" href="/fonts/inter/inter.css" />
           <link rel="manifest" href="/site.webmanifest" />
