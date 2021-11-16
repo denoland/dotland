@@ -21,11 +21,11 @@
     "date-fns": "^2.22.1",
     "dompurify": "^2.2.6",
     "marked": "^2.0.1",
-    "next": "^10.0.7",
-    "next-plugin-preact": "^3.0.3",
+    "next": "11",
+    "next-plugin-preact": "^3.0.6",
     "orga": "^2.4.8",
-    "preact": "^10.5.12",
-    "preact-render-to-string": "^5.1.12",
+    "preact": "^10.5.15",
+    "preact-render-to-string": "^5.1.19",
     "prism-react-renderer": "^1.2.0",
     "prismjs": "^1.25.0",
     "react": "npm:@preact/compat",
@@ -38,7 +38,7 @@
     "tailwindcss-hyphens": "^0.1.0",
     "tiny-version-compare": "^3.0.1",
     "twas": "^2.1.2",
-    "webpack": "^4.46.0"
+    "webpack": "^5.64.1"
   },
   "devDependencies": {
     "@types/dompurify": "^2.2.1",
@@ -59,6 +59,6 @@
     "jest": "^26.6.3",
     "postcss-import": "^14.0.0",
     "ts-jest": "^26.5.2",
-    "typescript": "^4.2.2"
+    "typescript": "^4.4.4"
   }
 }
