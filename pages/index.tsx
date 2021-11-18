@@ -17,10 +17,10 @@ interface HomeProps {
 
 const Home: NextPage<HomeProps> = ({ latestStd }) => {
   const complexExampleProgram =
-    `import { listenAndServe } from "https://deno.land/std@${latestStd}/http/server.ts";
+    `import { serve } from "https://deno.land/std@${latestStd}/http/server.ts";
 
 console.log("http://localhost:8000/");
-listenAndServe(":8000", (req) => new Response("Hello World\\n"));
+serve((req) => new Response("Hello World\\n"), { addr: ":8000" });
 `;
 
   return (
