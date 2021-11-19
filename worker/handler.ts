@@ -79,7 +79,14 @@ export function handleRequest(request: Request) {
     }
   }
 
-  return proxyFile(url, REMOTE_URL, request);
+  // Create a separate HTTP agent every time we make a request to Vercel, to see
+  // if that helps with deno.land instability.
+  const client = Deno.createHttpClient({});
+  try {
+    return proxyFile(url, REMOTE_URL, request, client);
+  } finally {
+    client.close();
+  }
 }
 
 const ALT_LINENUMBER_MATCHER = /(.*):(\d+):\d+$/;
@@ -99,10 +106,12 @@ async function proxyFile(
   url: URL,
   remoteUrl: string,
   request: Request,
+  client?: Deno.HttpClient,
 ): Promise<Response> {
   const init = {
     method: request.method,
     headers: request.headers,
+    client,
   };
   const urlR = remoteUrl + url.pathname;
   const modifiedRequest = new Request(urlR, init);
