@@ -174,7 +174,7 @@ async function upload() {
       if (response.status !== 200 || elapsed >= 1000) {
         console.log(
           `GA: batch uploaded ${payloadCount} items in ${elapsed}ms. ` +
-          `Response: ${response.status} ${response.statusText}`,
+            `Response: ${response.status} ${response.statusText}`,
         );
       }
 
