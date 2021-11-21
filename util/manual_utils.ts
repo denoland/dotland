@@ -15,6 +15,26 @@ export interface TableOfContents {
   };
 }
 
+<<<<<<< HEAD
+=======
+// Returns true if the version is of the 0.x release line, or between 1.0.0 and
+// 1.12.0 inclusive. During this time the manual was part of the main repo. It
+// is now a separate repo.
+function isOldVersion(version: string) {
+  return compareVersions(version, "v1.12.0") !== 1;
+}
+
+function basepath(version: string) {
+  if (isPreviewVersion(version)) {
+    return githubBasepath + version;
+  }
+  if (isOldVersion(version)) {
+    return oldXBasepath + version + "/docs";
+  }
+  return xBasepath + version;
+}
+
+>>>>>>> f1ba74327b401b47de678f30d768ff9bf54494b6
 export async function getTableOfContents(
   version: string,
 ): Promise<TableOfContents> {

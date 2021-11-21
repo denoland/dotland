@@ -122,7 +122,7 @@ export async function reportAnalytics(
   const line = params.toString() + "\n";
   const payload = encoder.encode(line);
   if (payload.length > GA_MAX_PAYLOAD_LENGTH) {
-    console.error("GA: payload exceeds maximimum size: " + payload);
+    console.error("GA: payload exceeds maximum size: " + payload);
     return;
   }
 
