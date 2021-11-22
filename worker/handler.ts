@@ -95,26 +95,45 @@ export function extractAltLineNumberReference(
   };
 }
 
+const cache = new Map<string, { response: Response; body: ArrayBuffer }>();
+
 async function proxyFile(
   url: URL,
   remoteUrl: string,
   request: Request,
 ): Promise<Response> {
-  const init = {
-    method: request.method,
-    headers: request.headers,
-  };
-  const urlR = remoteUrl + url.pathname;
-  const modifiedRequest = new Request(urlR, init);
-  let lastErr;
+  const proxyUrl = new URL(remoteUrl + url.pathname).href;
+
+  const cacheKey = [request.method, proxyUrl].join(",");
+  let cacheData = cache.get(cacheKey);
+
+  if (cacheData === undefined) {
+    const proxyRequest = new Request(proxyUrl, { method: request.method });
+    const proxyResponse = await fetchWithRetry(proxyRequest);
+    if (!(proxyResponse.ok || proxyResponse.redirected)) {
+      return proxyResponse;
+    }
+
+    cacheData = {
+      body: await proxyResponse.arrayBuffer(),
+      response: proxyResponse,
+    };
+    cache.set(cacheKey, cacheData);
+  }
+
+  return new Response(cacheData.body, cacheData.response);
+}
+
+async function fetchWithRetry(request: Request): Promise<Response> {
+  let promise: Promise<Response>;
   for (let i = 0; i < 3; i++) {
+    promise = fetch(request);
     try {
-      return await fetch(modifiedRequest);
+      return await promise;
     } catch (err) {
       // TODO(lucacasonato): only retry on known retryable errors
       console.warn("retrying on proxy error", err);
-      lastErr = err;
     }
   }
-  throw lastErr;
+  return promise!;
 }
