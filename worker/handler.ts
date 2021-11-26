@@ -5,7 +5,7 @@ import { handleVSCRequest } from "./vscode.ts";
 import { reportAnalytics } from "./analytics.ts";
 import { ConnInfo } from "https://deno.land/std@0.112.0/http/server.ts";
 
-const REMOTE_URL = "https://dotland.pages.dev";
+const REMOTE_URL = "https://deno-website2.now.sh";
 
 export function withLog(
   handler: (
