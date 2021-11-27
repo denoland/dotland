@@ -16,9 +16,7 @@
   "dependencies": {
     "@docsearch/react": "^1.0.0-alpha.14",
     "@tailwindcss/ui": "^0.7.2",
-    "@types/unist": "^2.0.3",
     "apexcharts": "^3.25.0",
-    "date-fns": "^2.22.1",
     "dompurify": "^2.2.6",
     "marked": "^2.0.1",
     "next": "^12.0.4",
@@ -48,6 +46,7 @@
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
     "@types/react-transition-group": "^4.4.1",
+    "@types/unist": "^2.0.3",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
     "@typescript-eslint/parser": "^4.16.1",
     "autoprefixer": "^10.2.4",
