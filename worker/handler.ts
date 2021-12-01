@@ -5,11 +5,7 @@ import { handleVSCRequest } from "./vscode.ts";
 import { reportAnalytics } from "./analytics.ts";
 import { ConnInfo } from "https://deno.land/std@0.112.0/http/server.ts";
 
-<<<<<<< HEAD
-const REMOTE_URL = "https://deno-cn.vercel.app";
-=======
-const REMOTE_URL = "https://cf-proxy.deno.land";
->>>>>>> 7c6ba8be2326cd4bd17db08fb856c8d252a2aad7
+const REMOTE_URL = "https://cn-proxy.deno.land";
 
 export function withLog(
   handler: (
