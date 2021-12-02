@@ -1,7 +1,7 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
 import React from "react";
-import { renderToStaticMarkup } from "react-dom/server";
+import { renderToStaticMarkup } from "preact/compat/server";
 import marked, { Renderer } from "marked";
 import dompurify from "dompurify";
 import { RawCodeBlock } from "./CodeBlock";
