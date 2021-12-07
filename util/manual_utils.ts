@@ -19,9 +19,9 @@ export interface TableOfContents {
   };
 }
 
-// Returns true if the version is of the 0.x release line, or betwen 1.0.0 and
+// Returns true if the version is of the 0.x release line, or between 1.0.0 and
 // 1.12.0 inclusive. During this time the manual was part of the main repo. It
-// is now a seperate repo.
+// is now a separate repo.
 function isOldVersion(version: string) {
   return compareVersions(version, "v1.12.0") !== 1;
 }

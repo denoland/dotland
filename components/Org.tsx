@@ -1,7 +1,7 @@
 /* Copyright 2021 the Deno authors. All rights reserved. MIT license. */
 
 import React from "react";
-import { renderToStaticMarkup } from "react-dom/server";
+import { renderToStaticMarkup } from "preact/compat/server";
 import dompurify from "dompurify";
 
 import {

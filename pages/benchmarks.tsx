@@ -12,7 +12,7 @@ import {
   formatKB,
   formatLogScale,
   formatMB,
-  formatPercentage,
+  formatMsec,
   formatReqSec,
   reshape,
 } from "../util/benchmark_utils";
@@ -127,42 +127,51 @@ function Benchmarks(): React.ReactElement {
               <ul className="ml-8 list-disc my-2">
                 <li>
                   <SourceLink
-                    path="cli/tests/003_relative_import.ts"
+                    path="cli/tests/testdata/003_relative_import.ts"
                     name="cold_relative_import"
                   />
                 </li>
                 <li>
                   <SourceLink
-                    path="cli/tests/text_decoder_perf.js"
+                    path="cli/tests/testdata/text_decoder_perf.js"
                     name="text_decoder"
                   />
                 </li>
                 <li>
-                  <SourceLink path="cli/tests/error_001.ts" name="error_001" />
-                </li>
-                <li>
-                  <SourceLink path="cli/tests/002_hello.ts" name="cold_hello" />
+                  <SourceLink
+                    path="cli/tests/testdata/error_001.ts"
+                    name="error_001"
+                  />
                 </li>
                 <li>
                   <SourceLink
-                    path="cli/tests/workers/bench_round_robin.ts"
+                    path="cli/tests/testdata/002_hello.ts"
+                    name="cold_hello"
+                  />
+                </li>
+                <li>
+                  <SourceLink
+                    path="cli/tests/testdata/workers/bench_round_robin.ts"
                     name="workers_round_robin"
                   />
                 </li>
                 <li>
                   <SourceLink
-                    path="cli/tests/003_relative_import.ts"
+                    path="cli/tests/testdata/003_relative_import.ts"
                     name="relative_import"
                   />
                 </li>
                 <li>
                   <SourceLink
-                    path="cli/tests/workers_startup_bench.ts"
+                    path="cli/tests/testdata/workers/bench_startup.ts"
                     name="workers_startup"
                   />
                 </li>
                 <li>
-                  <SourceLink path="cli/tests/002_hello.ts" name="hello" />
+                  <SourceLink
+                    path="cli/tests/testdata/002_hello.ts"
+                    name="hello"
+                  />
                 </li>
               </ul>
               <div className="mt-8">
@@ -253,7 +262,6 @@ function Benchmarks(): React.ReactElement {
                 <BenchmarkOrLoading
                   data={data}
                   columns={data?.execTime.filter(({ name }) => {
-                    console.log(name);
                     return typescriptBenches.includes(name);
                   })}
                   yLabel="seconds"
@@ -307,10 +315,8 @@ function Benchmarks(): React.ReactElement {
                   columns={
                     showNormalized ? data?.normalizedReqPerSec : data?.reqPerSec
                   }
-                  yLabel={
-                    showNormalized ? "% of hyper througput" : "1k req/sec"
-                  }
-                  yTickFormat={showNormalized ? formatPercentage : formatReqSec}
+                  yLabel="1k req/sec"
+                  yTickFormat={formatReqSec}
                 />
                 <p className="mt-1">
                   Tests HTTP server performance. 10 keep-alive connections do as
@@ -375,13 +381,17 @@ function Benchmarks(): React.ReactElement {
                 </a>{" "}
                 <BenchmarkOrLoading
                   data={data}
-                  columns={data?.maxLatency}
+                  columns={
+                    showNormalized
+                      ? data?.normalizedMaxLatency
+                      : data?.maxLatency
+                  }
                   yLabel={"milliseconds"}
-                  yTickFormat={formatLogScale}
+                  yTickFormat={formatMsec}
                 />
                 <p className="mt-1">
                   Max latency during the same test used above for
-                  requests/second. Smaller is better. Log scale.
+                  requests/second. Smaller is better.
                 </p>
               </div>
             </div>
