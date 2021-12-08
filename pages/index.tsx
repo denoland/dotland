@@ -131,7 +131,7 @@ serve((req) => new Response("Hello World\\n"), { addr: ":8000" });
               </h3>
             </a>
           </Link>
-          <p className="my-4 text-gray-700">پڕۆگرامێکی ساکار کارپێکە:</p>
+          <p className="my-4 text-gray-700">پڕۆگرامێکی ساکار کار پێ بکە:</p>
           <CodeBlock
             code="deno run https://deno.land/std/examples/welcome.ts"
             language="bash"
