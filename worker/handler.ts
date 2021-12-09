@@ -79,6 +79,10 @@ export async function handleRequest(request: Request): Promise<Response> {
     }
   }
 
+  if (!["HEAD", "GET"].includes(request.method)) {
+    return new Response(null, { status: 405 }); // Method not allowed.
+  }
+
   return proxyFile(url, REMOTE_URL, request);
 }
 
@@ -110,12 +114,10 @@ async function proxyFile(
   request: Request,
 ): Promise<Response> {
   const proxyUrl = new URL(remoteUrl + url.pathname).href;
-
-  const cacheKey = [request.method, proxyUrl].join(",");
-  let cacheEntry = cache.get(cacheKey);
+  let cacheEntry = cache.get(proxyUrl);
 
   if (cacheEntry === undefined) {
-    const proxyRequest = new Request(proxyUrl, { method: request.method });
+    const proxyRequest = new Request(proxyUrl);
     const proxyResponse = await fetchWithRetry(proxyRequest);
 
     if (!(proxyResponse.ok || proxyResponse.redirected)) {
@@ -139,11 +141,22 @@ async function proxyFile(
       etag,
       immutable,
     };
-    cache.set(cacheKey, cacheEntry);
+    cache.set(proxyUrl, cacheEntry);
   }
 
   if (request.headers.get("if-none-match") !== cacheEntry.etag) {
-    return new Response(cacheEntry.body, {
+    let body;
+    switch (request.method) {
+      case "HEAD":
+        body = null;
+        break;
+      case "GET":
+        body = cacheEntry.body;
+        break;
+      default:
+        throw new Error(`Unsupported request method: ${request.method}`);
+    }
+    return new Response(body, {
       headers: {
         "content-type": cacheEntry.contentType,
         "cache-control": cacheEntry.immutable ? "public,immutable" : "private",
