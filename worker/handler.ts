@@ -31,12 +31,12 @@ export function withLog(
       reportAnalytics(req, con, res, srt, err).catch((e) =>
         console.error("reportAnalytics() failed:", e)
       );
-      return res;
     }
+    return res;
   };
 }
 
-export function handleRequest(request: Request) {
+export async function handleRequest(request: Request): Promise<Response> {
   const accept = request.headers.get("accept");
   const isHtml = accept && accept.indexOf("html") >= 0;
 
@@ -95,7 +95,14 @@ export function extractAltLineNumberReference(
   };
 }
 
-const cache = new Map<string, { response: Response; body: ArrayBuffer }>();
+interface CacheEntry {
+  body: ArrayBuffer;
+  contentType: string;
+  etag: string;
+  immutable: boolean;
+}
+
+const cache = new Map<string, CacheEntry>();
 
 async function proxyFile(
   url: URL,
@@ -105,23 +112,47 @@ async function proxyFile(
   const proxyUrl = new URL(remoteUrl + url.pathname).href;
 
   const cacheKey = [request.method, proxyUrl].join(",");
-  let cacheData = cache.get(cacheKey);
+  let cacheEntry = cache.get(cacheKey);
 
-  if (cacheData === undefined) {
+  if (cacheEntry === undefined) {
     const proxyRequest = new Request(proxyUrl, { method: request.method });
     const proxyResponse = await fetchWithRetry(proxyRequest);
+
     if (!(proxyResponse.ok || proxyResponse.redirected)) {
       return proxyResponse;
     }
 
-    cacheData = {
-      body: await proxyResponse.arrayBuffer(),
-      response: proxyResponse,
+    const body = await proxyResponse.arrayBuffer();
+    const contentType = proxyResponse.headers.get("content-type") ??
+      "application/binary";
+    const etag = await crypto.subtle.digest("SHA-1", body).then((hash) =>
+      Array.from(new Uint8Array(hash))
+        .map((byte) => byte.toString(16).padStart(2, "0"))
+        .join("")
+    );
+    const immutable = /\bimmutable\b/i
+      .test(proxyResponse.headers.get("cache-control") ?? "");
+
+    cacheEntry = {
+      body,
+      contentType,
+      etag,
+      immutable,
     };
-    cache.set(cacheKey, cacheData);
+    cache.set(cacheKey, cacheEntry);
   }
 
-  return new Response(cacheData.body, cacheData.response);
+  if (request.headers.get("if-none-match") !== cacheEntry.etag) {
+    return new Response(cacheEntry.body, {
+      headers: {
+        "content-type": cacheEntry.contentType,
+        "cache-control": cacheEntry.immutable ? "public,immutable" : "private",
+        "etag": cacheEntry.etag,
+      },
+    });
+  } else {
+    return new Response(null, { status: 304 }); // Not modified.
+  }
 }
 
 async function fetchWithRetry(request: Request): Promise<Response> {
