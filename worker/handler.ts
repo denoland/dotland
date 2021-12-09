@@ -108,6 +108,12 @@ interface CacheEntry {
 
 const cache = new Map<string, CacheEntry>();
 
+// When deploying a new version, the worker will be updated before the static
+// website hosted by Vercel gets updated. Therefore we clear the cache 2 minutes
+// after startup up to ensure that there is no stale static content in the
+// in-memory cache.
+setTimeout(() => cache.clear(), 2 * 60 * 1000);
+
 async function proxyFile(
   url: URL,
   remoteUrl: string,
