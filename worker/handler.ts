@@ -165,7 +165,7 @@ async function proxyFile(
     return new Response(body, {
       headers: {
         "content-type": cacheEntry.contentType,
-        "cache-control": cacheEntry.immutable ? "public,immutable" : "private",
+        "cache-control": cacheEntry.immutable ? "public,max-age=31536000,immutable" : "public,max-age=0,must-revalidate",
         "etag": cacheEntry.etag,
       },
     });
