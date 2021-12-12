@@ -274,10 +274,6 @@ function Registry(): React.ReactElement {
             }
             return resp.text();
           })
-          .then((t) =>
-            "<!-- @deprecated Use something else instead. This is a very long text looks like it never ends. Lorem Ipsum. -->\n\n" +
-            t
-          )
           .then(setReadme)
           .catch(() => setReadme(null));
       } else {
