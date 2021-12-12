@@ -13,7 +13,6 @@ import InlineCode from "../../components/InlineCode";
 import { getStats, listModules } from "../../util/registry_utils";
 import * as pageutils from "../../util/pagination_utils";
 import RegistryInstructions from "../../components/RegistryInstructions";
-import { CookieBanner } from "../../components/CookieBanner";
 import { replaceEmojis } from "../../util/emoji_util";
 
 const PER_PAGE = 20;
@@ -72,7 +71,6 @@ function ThirdPartyRegistryList(): React.ReactElement {
       <Head>
         <title>Third Party Modules | Deno</title>
       </Head>
-      <CookieBanner />
       <div className="bg-gray">
         <Header subtitle="Third Party Modules" widerContent={true} />
         <RegistryInstructions
