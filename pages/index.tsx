@@ -9,7 +9,6 @@ import versions from "../versions.json";
 import { GetStaticProps, NextPage } from "next";
 import InlineCode from "../components/InlineCode";
 import Header from "../components/Header";
-import { CookieBanner } from "../components/CookieBanner";
 
 interface HomeProps {
   latestStd: string;
@@ -28,7 +27,6 @@ serve((req) => new Response("Hello World\\n"), { addr: ":8000" });
       <Head>
         <title>Deno - A modern runtime for JavaScript and TypeScript</title>
       </Head>
-      <CookieBanner />
       {
         /* <div className="bg-blue-500 p-4 text-white flex justify-center text-center">
         <div className="max-w-screen-xl">

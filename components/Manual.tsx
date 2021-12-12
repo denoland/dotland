@@ -26,7 +26,6 @@ import {
 } from "../util/manual_utils";
 import Markdown from "./Markdown";
 import Transition from "./Transition";
-import { CookieBanner } from "./CookieBanner";
 import InlineCode from "./InlineCode";
 
 function Hit({
@@ -489,7 +488,6 @@ function Manual(): React.ReactElement {
                 </button>
               </div>
             </div>
-            <CookieBanner />
             {isPreview
               ? (
                 <UserContributionBanner
