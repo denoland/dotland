@@ -1,4 +1,4 @@
-/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+/* Copyright 2021 the Deno authors. All rights reserved. MIT license. */
 
 import React, { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
@@ -19,6 +19,7 @@ import {
   isReadme,
   listExternalDependencies,
   Module,
+  parseDeprecatedDirective,
   parseQuery,
   VersionDeps,
   VersionInfo,
@@ -31,6 +32,7 @@ import DirectoryListing from "./DirectoryListing";
 import { CookieBanner } from "./CookieBanner";
 import { replaceEmojis } from "../util/emoji_util";
 import { ErrorMessage } from "./ErrorMessage";
+import { DeprecationWarning } from "./DeprecationWarning";
 
 function Registry(): React.ReactElement {
   // State
@@ -44,6 +46,10 @@ function Registry(): React.ReactElement {
   >();
   const [raw, setRaw] = useState<string | null | undefined>();
   const [readme, setReadme] = useState<string | null | undefined>();
+
+  const deprecationDetails = useMemo<string | null>(() => {
+    return parseDeprecatedDirective(readme);
+  }, [readme]);
 
   // Name, version and path
   const { query, push, replace } = useRouter();
@@ -268,6 +274,10 @@ function Registry(): React.ReactElement {
             }
             return resp.text();
           })
+          .then((t) =>
+            "<!-- @deprecated Use something else instead. This is a very long text looks like it never ends. Lorem Ipsum. -->\n\n" +
+            t
+          )
           .then(setReadme)
           .catch(() => setReadme(null));
       } else {
@@ -412,6 +422,12 @@ function Registry(): React.ReactElement {
                       } else {
                         return (
                           <div className="flex flex-col gap-4">
+                            {deprecationDetails !== null &&
+                              (
+                                <DeprecationWarning
+                                  message={deprecationDetails}
+                                />
+                              )}
                             {versionMeta && dirEntries && (
                               <DirectoryListing
                                 name={name}

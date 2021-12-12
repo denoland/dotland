@@ -547,3 +547,16 @@ export function getBasePath({
     version ? `@${encodeURIComponent(version)}` : ""
   }`;
 }
+
+export function parseDeprecatedDirective(
+  raw: string | null | undefined,
+): string | null {
+  if (!raw) return null;
+  const re = /<!--\s*@deprecated\s*(.*)\s*-->/im;
+  const comment = raw.match(re);
+  if (!comment) return null;
+
+  const [, message] = comment;
+
+  return message.trim();
+}

@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+/* Copyright 2021 the Deno authors. All rights reserved. MIT license. */
 
 import {
   fileNameFromURL,
@@ -12,6 +12,7 @@ import {
   getVersionList,
   getVersionMeta,
   isReadme,
+  parseDeprecatedDirective,
   parseNameVersion,
   parseQuery,
   VersionMetaInfo,
@@ -237,4 +238,16 @@ test("parseQuery", () => {
     version: "v9.0.1",
     path: "/mod.ts",
   });
+});
+
+test("parseDeprecatedDirective", () => {
+  const single = `<!-- @deprecated Use other module instead. -->`;
+  const multiline = `<!--
+@deprecated Use another module instead.
+-->`;
+
+  expect(parseDeprecatedDirective(single)).toEqual("Use other module instead.");
+  expect(parseDeprecatedDirective(multiline)).toEqual(
+    "Use another module instead.",
+  );
 });
