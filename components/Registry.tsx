@@ -28,7 +28,6 @@ import Header from "./Header";
 import Footer from "./Footer";
 import FileDisplay from "./FileDisplay";
 import DirectoryListing from "./DirectoryListing";
-import { CookieBanner } from "./CookieBanner";
 import { replaceEmojis } from "../util/emoji_util";
 import { ErrorMessage } from "./ErrorMessage";
 
@@ -296,7 +295,6 @@ function Registry(): React.ReactElement {
           {" | Deno"}
         </title>
       </Head>
-      <CookieBanner />
       <div className="bg-gray-50 min-h-full">
         <Header
           subtitle={name === "std" ? "标准库" : "第三方模块"}
