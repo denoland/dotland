@@ -97,7 +97,7 @@ export function BenchmarkLoading(): React.ReactElement {
   return (
     <div style={{ height: 335 }} className="flex items-center justify-center">
       <span className="text-gray-500">
-        Loading...
+        加载中...
       </span>
     </div>
   );
