@@ -116,6 +116,7 @@ test("getVersionList", async () => {
 
 test("getModule", async () => {
   const mod = await getModule("ltest2");
+  expect(mod).toBeTruthy();
   expect(mod.name).toEqual("ltest2");
   expect(mod.description).toEqual("Move along, just for testing");
   expect(mod.star_count).toBeGreaterThan(0);
