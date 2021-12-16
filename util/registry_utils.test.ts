@@ -118,7 +118,7 @@ test("getModule", async () => {
   expect(await getModule("ltest2")).toEqual({
     name: "ltest2",
     description: "Move along, just for testing",
-    star_count: 2,
+    star_count: 1,
   });
 });
 
