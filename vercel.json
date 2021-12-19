@@ -1,0 +1,12 @@
+{
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/install",
+      "destination": "/x/install/install.sh"
+    }
+  ],
+  "github": {
+    "silent": true
+  }
+}
