@@ -501,7 +501,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
               <div>
                 <div>
                   <dt className="text-lg leading-6 font-medium text-gray-900">
-                    چۆن مۆدیوڵەکانی ناو deno.land/x بە کار دێن؟
+                    چۆن مۆدیوڵەکانی ناو deno.land/x بەکار دێن؟
                   </dt>
                   <dd className="mt-2">
                     <p className="text-base leading-6 text-gray-500 break-words">

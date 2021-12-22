@@ -21,9 +21,9 @@ export function CookieBanner(): React.ReactElement {
             >
               <div className="w-0 flex-1 flex items-center">
                 <p className="mr-3 font-medium text-white">
-                  <span className="md:hidden">کووکی بە کار دەهێنین.</span>
+                  <span className="md:hidden">کووکی بەکار دەهێنین.</span>
                   <span className="hidden md:inline">
-                    بۆ خزمەتکردنێکی باشتر، کووکی بە کار دەهێنین.
+                    بۆ خزمەتکردنێکی باشتر، کووکی بەکار دەهێنین.
                   </span>
                 </p>
               </div>
