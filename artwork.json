@@ -256,5 +256,17 @@
       "github": "pultzlucas"
     },
     "license": "MIT"
+  },
+  {
+    "date": "2021-12-23",
+    "image": "/images/pride_deno.gif",
+    "title": "Pride Deno",
+    "alt": "Deno, but with queer pride~!",
+    "artist": {
+      "name": "Ishat Gupta",
+      "profile_image": "https://avatars.githubusercontent.com/u/62379502",
+      "github": "LePichu"
+    },
+    "license": "MIT"
   }
 ]
