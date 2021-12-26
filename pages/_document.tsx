@@ -26,24 +26,22 @@ export default class DenoDocDocument extends Document {
           <meta name="twitter:creator" content="@deno_land" />
           <meta
             name="twitter:title"
-            content="Deno - A modern runtime for JavaScript and TypeScript"
+            content="دێنۆ - ژینگەیەکی مۆدێرن بۆ تایپسکریپت و جاڤاسکریپت"
           />
           <meta
             name="twitter:description"
-            content="Deno is a simple, modern runtime for JavaScript and
-            TypeScript that uses V8 and is built in Rust."
+            content="دێنۆ ژینگەیەکی مۆدێرن و پارێزراوە بۆ تایپسکریپت و جاڤاسکریپت کە V8 بەکار دەهێنێت و بە زمانی ڕەست نووسراوە."
           />
           <meta name="twitter:card" content="summary_large_image" />
           <meta property="og:locale" content="en_US" />
           <meta property="og:site_name" content="DenoLand" />
           <meta
             property="og:title"
-            content="Deno - A modern runtime for JavaScript and TypeScript"
+            content="دێنۆ - ژینگەیەکی مۆدێرن بۆ تایپسکریپت و جاڤاسکریپت"
           />
           <meta
             property="og:description"
-            content="Deno is a simple, modern runtime for JavaScript and
-            TypeScript that uses V8 and is built in Rust."
+            content="دێنۆ ژینگەیەکی مۆدێرن و پارێزراوە بۆ تایپسکریپت و جاڤاسکریپت کە V8 بەکار دەهێنێت و بە زمانی ڕەست نووسراوە."
           />
           <meta property="og:image" content="/images/icons/icon-512x512.png" />
           <meta property="og:type" content="website" />
