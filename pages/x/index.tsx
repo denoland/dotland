@@ -135,7 +135,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
               className="block w-full px-4 py-2 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1"
               type="text"
               placeholder={
-                !resp ? "بگەڕێ" : `لە ناو ${resp.totalCount} مۆدیوڵ بگەڕێ`
+                !resp ? "بگەڕێ" : `لەناو ${resp.totalCount} مۆدیوڵ بگەڕێ`
               }
               value={query}
               onChange={handleSearchInput}
@@ -567,7 +567,7 @@ function ThirdPartyRegistryList(): React.ReactElement {
                       deno.land/x ئاگادارت دەکاتەوە کاتێک خۆی نوێترین وەشانی
                       مۆدیوڵێکت بۆ هەڵدەبژێرێت کاتێک لە کاتی هاوردەکردنی
                       مۆدیوڵێک وەشانەکەی دیاری ناکەیت. بۆ لابردنی ئەم
-                      ئاگادارکردنەوەیە، تەنها وەشانی مۆدیوڵەکە دیاری بکە.
+                      ئاگادارکردنەوەیە، تەنیا وەشانی مۆدیوڵەکە دیاری بکە.
                     </p>
                   </dd>
                 </div>

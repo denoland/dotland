@@ -57,7 +57,7 @@ serve((req) => new Response("Hello World\\n"), { addr: ":8000" });
               href="/#installation"
               className="rounded-full mt-8 px-8 py-2 transition-colors duration-75 ease-in-out bg-blue-500 hover:bg-blue-400 text-white text-lg shadow-lg"
             >
-              دایمەزرێنە
+              دای بمەزرێنە
             </a>
             <a
               href="https://github.com/denoland/deno/releases/latest"
@@ -82,11 +82,11 @@ serve((req) => new Response("Hello World\\n"), { addr: ":8000" });
             </li>
             <li>
               بەبێ ئەنجامدانی هیچ کارێکی پێشوەختە دەتوانیت تایپسکریپت بەکار
-              بێنیت.
+              بهێنیت.
             </li>
             <li>هەموو دێنۆ یەک فایلە.</li>
             <li>
-              لە ناو خۆیدا چەند کەرەستەیەکی تێدایە بۆ نموونە ڕازێنەرەوەی کۆد (
+              لەناو خۆیدا چەند کەرەستەیەکی تێدایە، بۆ نموونە ڕازێنەرەوەی کۆد (
               <InlineCode>deno fmt</InlineCode>).
             </li>
             <li>
@@ -178,7 +178,7 @@ serve((req) => new Response("Hello World\\n"), { addr: ":8000" });
               <a className="link">مانواڵێکی</a>
             </Link>{" "}
             هەیە کە بە قووڵی باس لە دێنۆ دەکات و پێشەکییەکت دەربارەی چەمکەکان
-            دەداتێ.
+            پێ دەدات.
           </p>
           <p className="my-4 text-gray-700" dir="rtl">
             مانواڵەکە باس لە ئەو شتانەش دەکات کە دێنۆ دابینینیان دەکات.
@@ -327,7 +327,7 @@ const InstallSection = () => {
         <a href="https://crates.io/crates/deno" className="link">
           کارگۆ
         </a>{" "}
-        بیڵدی بکە و دایمەزرێنە:
+        بیڵدی بکە و دای بمەزرێنە:
       </p>
       <CodeBlock language="bash" code={`cargo install deno --locked`} />
     </div>
@@ -336,7 +336,7 @@ const InstallSection = () => {
   return (
     <>
       <p className="my-4 text-gray-700">
-        دێنۆ تەنها یەک فایلە و لەسەر هیچ بەند نییە. دەتوانیت لە ڕێی
+        دێنۆ تەنیا یەک فایلە و لەسەر هیچ بەند نییە. دەتوانیت لە ڕێی
         دامەزرێنەرەکان دایگریت وەک لە خوارەوە باسکراوە، یان وەشانێک لە{" "}
         <a href="https://github.com/denoland/deno/releases" className="link">
           ئێرە
