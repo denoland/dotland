@@ -43,13 +43,13 @@
   },
   {
     "language": "فارسی",
-    "english": "Persian",
+    "english": "波斯语",
     "link": "https://deno-fa.vercel.app/",
     "repository": "https://github.com/ahgilak/deno_website2"
   },
   {
     "language": "کوردیی ناوەندی",
-    "english": "Central Kurdish",
+    "english": "中库尔德语",
     "link": "https://deno-ckb.vercel.app/",
     "repository": "https://github.com/rojserbest/dotland"
   }
