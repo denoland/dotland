@@ -1,6 +1,7 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
 const defaultTheme = require("tailwindcss/defaultTheme"); // eslint-disable-line
+const process = require("process"); // eslint-disable-line
 
 module.exports = {
   theme: {
