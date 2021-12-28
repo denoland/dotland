@@ -1,0 +1,16 @@
+{
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/install.sh",
+      "destination": "/x/install/install.sh"
+    },
+    {
+      "source": "/install.ps1",
+      "destination": "/x/install/install.ps1"
+    }
+  ],
+  "github": {
+    "silent": true
+  }
+}
