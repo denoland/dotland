@@ -66,7 +66,7 @@ export async function handleRequest(request: Request): Promise<Response> {
   }
 
   if (["/install.sh", "/install.ps1"].includes(url.pathname)) {
-    return Response.redirect(`/x/install${url.pathname}`, 307);
+    return Response.redirect(`https://deno.land/x/install${url.pathname}`, 307);
   }
 
   const isRegistryRequest = url.pathname.startsWith("/std") ||
