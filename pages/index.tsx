@@ -261,7 +261,7 @@ const InstallSection = () => {
       <p className="py-2">Shell (Mac, Linux):</p>
       <CodeBlock
         language="bash"
-        code={`curl -fsSL https://deno.land/install.sh | sh`}
+        code={`curl -fsSL https://deno.land/x/install/install.sh | sh`}
       />
     </div>
   );
@@ -281,7 +281,7 @@ const InstallSection = () => {
       <p className="mb-2">PowerShell (Windows):</p>
       <CodeBlock
         language="bash"
-        code={`iwr https://deno.land/install.ps1 -useb | iex`}
+        code={`iwr https://deno.land/x/install/install.ps1 -useb | iex`}
       />
     </div>
   );
