@@ -248,7 +248,11 @@ const InstallSection = () => {
       <p className="py-2">Shell (Mac, Linux)：</p>
       <CodeBlock
         language="bash"
+<<<<<<< HEAD
         code={`curl -fsSL https://x.deno.js.cn/install.sh | sh`}
+=======
+        code={`curl -fsSL https://deno.land/install.sh | sh`}
+>>>>>>> 1e2ece90af7905259b48c7cb89d584d6150f095b
       />
     </div>
   );
@@ -268,7 +272,11 @@ const InstallSection = () => {
       <p className="mb-2">PowerShell (Windows)：</p>
       <CodeBlock
         language="bash"
+<<<<<<< HEAD
         code={`iwr https://x.deno.js.cn/install.ps1 -useb | iex`}
+=======
+        code={`iwr https://deno.land/install.ps1 -useb | iex`}
+>>>>>>> 1e2ece90af7905259b48c7cb89d584d6150f095b
       />
     </div>
   );
