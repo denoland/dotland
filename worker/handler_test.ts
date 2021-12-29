@@ -175,6 +175,19 @@ Deno.test({
 });
 
 Deno.test({
+  name: "/install.sh responds with /x/install/install.sh redirect",
+  async fn() {
+    const result = await handleRequest(
+      new Request("https://deno.land/install.sh"),
+    );
+    assertEquals(result.status, 307);
+    assert(result.headers.get("Location")?.includes(
+      "/x/install/install.sh",
+    ));
+  },
+});
+
+Deno.test({
   name: "extractAltLineNumberReference",
   fn() {
     type TestCase = {
