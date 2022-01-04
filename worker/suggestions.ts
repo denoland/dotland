@@ -55,6 +55,9 @@ const MAX_AGE_1_DAY = "max-age=86400";
 const IMMUTABLE = "max-age=2628000, immutable";
 
 let fuse = new Fuse([], { includeScore: true, distance: 10 });
+/** If the index searching hasn't been updated in > 120 seconds, it will be
+ * refreshed before processing the next request, meaning the index of packages
+ * will be kept fresh. */
 let fuseUpdated = 0;
 
 /** A cache of all the package data retrieved from api.deno.land.
@@ -72,6 +75,9 @@ let initialList: string[];
 const packageMeta = new Map<string, Map<string, MetaJson>>();
 /** A cache of a modules version data retrieved from the S3 bucket. */
 const versions = new Map<string, MetaVersionJson>();
+/** We will cache versions of packages/modules for up to 5 minutes before
+ * considering them state, and clearing them out. */
+let versionsInvalidated = Date.now();
 
 /** Descriptions of the packages/modules that are in `std`.
  *
@@ -112,6 +118,15 @@ const stdDescriptions: Record<string, string> = {
 function cacheResponse({ data: { results } }: ApiModuleSearchResponse) {
   for (const { name, description, star_count } of results) {
     packages.set(name, { name, description, stars: star_count });
+  }
+}
+
+/** Invalidates the cache of version information if it older than 5 minutes. */
+function checkVersionsFreshness(): void {
+  const now = Date.now();
+  if (versionsInvalidated + 300_000 < now) {
+    versionsInvalidated = now;
+    versions.clear();
   }
 }
 
@@ -198,6 +213,7 @@ async function getInitialPackageList() {
 
 /** Given a package, return its latest version. */
 async function getLatestVersion(pkg: string): Promise<string> {
+  checkVersionsFreshness();
   const data = versions.get(pkg) ?? await fetchVersions(pkg);
   return data.latest;
 }
@@ -418,6 +434,7 @@ async function handlePaths(match: URLPatternResult): Promise<Response> {
 // /_api/x/:pkg/:ver
 async function handleVersions(match: URLPatternResult): Promise<Response> {
   const { pkg, ver } = match.pathname.groups;
+  checkVersionsFreshness();
   const versionInfo = versions.get(pkg) ?? await fetchVersions(pkg);
   const items = ver
     ? versionInfo.versions.filter((v) => v.startsWith(ver))
