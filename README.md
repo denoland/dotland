@@ -6,7 +6,7 @@ This is the code for https://deno.land/
 
 This website consists of two parts
 
-1. A Cloudflare Worker
+1. A Deploy worker
 2. A Next.js app hosted on Vercel
 
 We want to provide pretty and semantic URLs for modules that will be used within
