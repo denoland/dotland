@@ -1,9 +1,9 @@
-/* Copyright 2021 the Deno authors. All rights reserved. MIT license. */
+/* Copyright 2021-2022 the Deno authors. All rights reserved. MIT license. */
 
 // @deno-types https://deno.land/x/fuse@v6.4.1/dist/fuse.d.ts
 import { default as Fuse } from "https://deno.land/x/fuse@v6.4.1/dist/fuse.esm.js";
 import { prettyBytes } from "https://deno.land/x/pretty_bytes@v1.0.5/mod.ts";
-import twas from "https://esm.sh/twas";
+import twas from "https://esm.sh/twas@2.1.2";
 
 import { S3_BUCKET } from "./registry.ts";
 
@@ -57,7 +57,12 @@ const IMMUTABLE = "max-age=2628000, immutable";
 let fuse = new Fuse([], { includeScore: true, distance: 10 });
 let fuseUpdated = 0;
 
-/** A cache of all the package data retrieved from api.deno.land. */
+/** A cache of all the package data retrieved from api.deno.land.
+ *
+ * Since this data only contains the description and the star count, which
+ * are likely to change slowly, and don't materially impact the responses, the
+ * cached values will be reset when the worker is restarted, which is likely
+ * sufficient invalidation. */
 const packages = new Map<string, PackageData>();
 /** The initial list of packages displayed when there is no specific package
  * being searched for.  Currently this will be the top 50 packages/modules in
@@ -79,7 +84,7 @@ const stdDescriptions: Record<string, string> = {
     "Pure functions for handling common tasks around collection types",
   crypto: "Extensions to the web crypto APIs",
   datetime:
-    "A hepler function to parse date strings into `Date` objects and additional functions",
+    "A helper function to parse date strings into `Date` objects and additional functions",
   encoding: "Helper modules for dealing with encoded data structures",
   examples:
     "Small scripts that demonstrate use of Deno and its standard modules",
@@ -176,7 +181,7 @@ async function getFuse(): Promise<Fuse> {
   return fuse;
 }
 
-/** Git the initial package list to send to the client when no specific module
+/** Get the initial package list to send to the client when no specific module
  * is being searched for. */
 async function getInitialPackageList() {
   if (!initialList) {
@@ -208,6 +213,8 @@ function getPreselectPath(items: string[]): string | undefined {
   const preselect = [
     "mod.ts",
     "mod.js",
+    "main.ts",
+    "main.js",
     "lib.ts",
     "lib.js",
     "index.ts",
@@ -224,6 +231,8 @@ function getPreselectPath(items: string[]): string | undefined {
     [
       "/mod.ts",
       "/mod.js",
+      "/main.ts",
+      "/main.js",
       "/lib.ts",
       "/lib.js",
       "/index.ts",
