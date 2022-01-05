@@ -1,8 +1,8 @@
 /* Copyright 2021-2022 the Deno authors. All rights reserved. MIT license. */
 
 // @deno-types https://deno.land/x/fuse@v6.4.1/dist/fuse.d.ts
-import { default as Fuse } from "https://deno.land/x/fuse@v6.4.1/dist/fuse.esm.js";
-import { prettyBytes } from "https://deno.land/x/pretty_bytes@v1.0.5/mod.ts";
+import { default as Fuse } from "https://dotland-xkvnj8800ahg.deno.dev/x/fuse@v6.4.1/dist/fuse.esm.js";
+import { prettyBytes } from "https://dotland-xkvnj8800ahg.deno.dev/x/pretty_bytes@v1.0.5/mod.ts";
 import twas from "https://esm.sh/twas@2.1.2";
 
 import { S3_BUCKET } from "./registry.ts";

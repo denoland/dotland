@@ -1,6 +1,6 @@
 /* Copyright 2021 the Deno authors. All rights reserved. MIT license. */
 
-import { accepts } from "https://deno.land/x/oak_commons@0.1.1/negotiation.ts";
+import { accepts } from "https://dotland-xkvnj8800ahg.deno.dev/x/oak_commons@0.1.1/negotiation.ts";
 
 interface RegistryDefVariable {
   key: string;
