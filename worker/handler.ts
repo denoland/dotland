@@ -7,7 +7,6 @@ import { handleApiRequest } from "./suggestions.ts";
 import { handleVSCRequest } from "./vscode.ts";
 
 import type { ConnInfo } from "https://deno.land/std@0.112.0/http/server.ts";
-import { accepts } from "https://deno.land/x/oak_commons@0.1.1/negotiation.ts";
 
 const REMOTE_URL = "https://deno-website2.now.sh";
 
@@ -41,7 +40,8 @@ export function withLog(
 }
 
 export function handleRequest(request: Request): Promise<Response> {
-  const isHtml = request.headers.has("accept") && accepts(request, "text/html");
+  const accept = request.headers.get("accept");
+  const isHtml = accept && accept.indexOf("html") >= 0;
 
   const url = new URL(request.url);
 
