@@ -7,6 +7,7 @@ import { handleVSCRequest } from "./vscode.ts";
 
 import type { ConnInfo } from "https://dotland-xkvnj8800ahg.deno.dev/std@0.112.0/http/server.ts";
 import { createReporter } from "https://deno.land/x/g_a@0.1.2/mod.ts";
+import { accepts } from "https://deno.land/x/oak_commons@0.1.1/negotiation.ts";
 
 const REMOTE_URL = "https://deno-website2.now.sh";
 
@@ -80,8 +81,10 @@ export function withLog(
 }
 
 export function handleRequest(request: Request): Promise<Response> {
-  const accept = request.headers.get("accept");
-  const isHtml = accept && accept.indexOf("html") >= 0;
+  // this checks to see if the requestor prefers "application" code over "html"
+  // which would be run-time clients who either omit an accept header (which
+  // implies any content type) or provides a `*/*` header
+  const isHtml = accepts(request, "application/*", "text/html") === "text/html";
 
   const url = new URL(request.url);
 
