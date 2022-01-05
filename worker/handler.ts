@@ -6,7 +6,7 @@ import { handleConfigRequest } from "./registry_config.ts";
 import { handleApiRequest } from "./suggestions.ts";
 import { handleVSCRequest } from "./vscode.ts";
 
-import type { ConnInfo } from "https://deno.land/std@0.112.0/http/server.ts";
+import type { ConnInfo } from "https://dotland-xkvnj8800ahg.deno.dev/std@0.112.0/http/server.ts";
 
 const REMOTE_URL = "https://deno-website2.now.sh";
 
