@@ -1,9 +1,12 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import { handleRegistryRequest } from "./registry.ts";
-import { handleVSCRequest } from "./vscode.ts";
 import { reportAnalytics } from "./analytics.ts";
-import { ConnInfo } from "https://deno.land/std@0.112.0/http/server.ts";
+import { handleRegistryRequest } from "./registry.ts";
+import { handleConfigRequest } from "./registry_config.ts";
+import { handleApiRequest } from "./suggestions.ts";
+import { handleVSCRequest } from "./vscode.ts";
+
+import type { ConnInfo } from "https://dotland-xkvnj8800ahg.deno.dev/std@0.112.0/http/server.ts";
 
 const REMOTE_URL = "https://deno-website2.now.sh";
 
@@ -36,37 +39,51 @@ export function withLog(
   };
 }
 
-export async function handleRequest(request: Request): Promise<Response> {
+export function handleRequest(request: Request): Promise<Response> {
   const accept = request.headers.get("accept");
   const isHtml = accept && accept.indexOf("html") >= 0;
 
   const url = new URL(request.url);
 
   if (url.pathname === "/v1") {
-    return Response.redirect("https://deno.land/posts/v1", 301);
-  }
-
-  if (url.pathname === "/posts") {
-    return Response.redirect("https://deno.com/blog", 307);
-  }
-
-  if (url.pathname.startsWith("/posts/")) {
-    return Response.redirect(
-      `https://deno.com/blog/${url.pathname.substring("/posts/".length)}`,
-      307,
+    return Promise.resolve(
+      Response.redirect("https://deno.land/posts/v1", 301),
     );
   }
 
+  if (url.pathname === "/posts") {
+    return Promise.resolve(Response.redirect("https://deno.com/blog", 307));
+  }
+
+  if (url.pathname.startsWith("/posts/")) {
+    return Promise.resolve(Response.redirect(
+      `https://deno.com/blog/${url.pathname.substring("/posts/".length)}`,
+      307,
+    ));
+  }
+
   if (url.pathname.startsWith("/typedoc")) {
-    return Response.redirect("https://doc.deno.land/builtin/stable", 301);
+    return Promise.resolve(
+      Response.redirect("https://doc.deno.land/deno/stable", 301),
+    );
   }
 
   if (url.pathname.startsWith("/_vsc")) {
     return handleVSCRequest(url);
   }
 
+  if (url.pathname.startsWith("/_api/")) {
+    return handleApiRequest(url);
+  }
+
   if (["/install.sh", "/install.ps1"].includes(url.pathname)) {
-    return Response.redirect(`https://deno.land/x/install${url.pathname}`, 307);
+    return Promise.resolve(
+      Response.redirect(`https://deno.land/x/install${url.pathname}`, 307),
+    );
+  }
+
+  if (url.pathname === "/.well-known/deno-import-intellisense.json") {
+    return handleConfigRequest(request);
   }
 
   const isRegistryRequest = url.pathname.startsWith("/std") ||
@@ -76,7 +93,9 @@ export async function handleRequest(request: Request): Promise<Response> {
     if (isHtml) {
       const ln = extractAltLineNumberReference(url.toString());
       if (ln) {
-        return Response.redirect(ln.rest + "#L" + ln.line, 302);
+        return Promise.resolve(
+          Response.redirect(`${ln.rest}#L${ln.line}`, 302),
+        );
       }
     } else {
       return handleRegistryRequest(url);
@@ -84,7 +103,7 @@ export async function handleRequest(request: Request): Promise<Response> {
   }
 
   if (!["HEAD", "GET"].includes(request.method)) {
-    return new Response(null, { status: 405 }); // Method not allowed.
+    return Promise.resolve(new Response(null, { status: 405 })); // Method not allowed.
   }
 
   return proxyFile(url, REMOTE_URL, request);

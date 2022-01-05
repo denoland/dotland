@@ -80,7 +80,11 @@ function Registry(): React.ReactElement {
     path,
   ]);
   const documentationURL = useMemo(() => {
+<<<<<<< HEAD
     const doc = `https://doc.deno.js.cn/https/deno.land/${canonicalPath}`;
+=======
+    const doc = `https://doc.deno.land/https://deno.land${canonicalPath}`;
+>>>>>>> 8e71a4432111f7b938f1060b1f276d893b0bb15d
     return denoDocAvailableForURL(canonicalPath) ? doc : null;
   }, [canonicalPath]);
 
