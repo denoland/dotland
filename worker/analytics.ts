@@ -1,8 +1,8 @@
-import { delay } from "https://deno.land/std@0.112.0/async/mod.ts";
+import { delay } from "https://dotland-xkvnj8800ahg.deno.dev/std@0.112.0/async/mod.ts";
 import {
   ConnInfo,
   STATUS_TEXT,
-} from "https://deno.land/std@0.112.0/http/mod.ts";
+} from "https://dotland-xkvnj8800ahg.deno.dev/std@0.112.0/http/mod.ts";
 
 const GA_TRACKING_ID = Deno.env.get("GA_TRACKING_ID")!;
 if (!GA_TRACKING_ID) {

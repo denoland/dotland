@@ -1,6 +1,6 @@
 /* Copyright 2021-2022 the Deno authors. All rights reserved. MIT license. */
 
-import { assertEquals } from "https://deno.land/std@0.119.0/testing/asserts.ts";
+import { assertEquals } from "https://dotland-xkvnj8800ahg.deno.dev/std@0.119.0/testing/asserts.ts";
 
 import { handleConfigRequest } from "./registry_config.ts";
 

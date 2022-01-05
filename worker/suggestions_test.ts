@@ -5,7 +5,7 @@ import {
   assertArrayIncludes,
   assertEquals,
   assertStringIncludes,
-} from "https://deno.land/std@0.119.0/testing/asserts.ts";
+} from "https://dotland-xkvnj8800ahg.deno.dev/std@0.119.0/testing/asserts.ts";
 
 import { handleApiRequest } from "./suggestions.ts";
 
