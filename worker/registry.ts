@@ -5,6 +5,8 @@ import { parseNameVersion } from "../util/registry_utils.ts";
 export const S3_BUCKET =
   "http://deno-registry2-prod-storagebucket-b3a31d16.s3-website-us-east-1.amazonaws.com/";
 
+/** Handle _legacy_ v1 registry requests.  v2 is handled by `./suggestions.ts`.
+ */
 export async function handleRegistryRequest(url: URL): Promise<Response> {
   const entry = parsePathname(url.pathname);
   if (!entry) {

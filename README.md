@@ -4,9 +4,10 @@
 
 Deno 中文网站的源码。
 
-基于 Next.js 开发并部署在了 Vercel 上。
+网站包含 2 部分：
 
-注：proxy 目前还没有部署，将来会部署到国内 serverless 平台。
+1. 部署在 Deno Deploy 上的 worker
+2. 部署在 Vercel 上的 Next.js
 
 ## 其他翻译
 
