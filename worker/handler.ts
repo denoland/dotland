@@ -6,7 +6,7 @@ import { handleApiRequest } from "./suggestions.ts";
 import { handleVSCRequest } from "./vscode.ts";
 
 import type { ConnInfo } from "https://dotland-xkvnj8800ahg.deno.dev/std@0.112.0/http/server.ts";
-import { createReporter } from "https://deno.land/x/g_a@0.1.0/mod.ts";
+import { createReporter } from "https://deno.land/x/g_a@0.1.2/mod.ts";
 
 const REMOTE_URL = "https://deno-website2.now.sh";
 
