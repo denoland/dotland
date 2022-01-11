@@ -32,4 +32,4 @@ jobs:
         with:
           deno-version: v1.x
       - name: Test Worker
-        run: deno test --allow-net --allow-env worker/
+        run: deno test --allow-net --allow-env --allow-hrtime worker/

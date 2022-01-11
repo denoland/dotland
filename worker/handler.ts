@@ -1,14 +1,57 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import { reportAnalytics } from "./analytics.ts";
 import { handleRegistryRequest } from "./registry.ts";
 import { handleConfigRequest } from "./registry_config.ts";
 import { handleApiRequest } from "./suggestions.ts";
 import { handleVSCRequest } from "./vscode.ts";
 
 import type { ConnInfo } from "https://dotland-xkvnj8800ahg.deno.dev/std@0.112.0/http/server.ts";
+import { createReporter } from "https://deno.land/x/g_a@0.1.2/mod.ts";
 
 const REMOTE_URL = "https://deno-website2.now.sh";
+
+const ga = createReporter({
+  filter(req, res) {
+    const { pathname } = new URL(req.url);
+    const contentType = res.headers.get("content-type");
+    const isHtml = /html/i.test(contentType ?? "");
+    return pathname === "/" || pathname.startsWith("/std") ||
+      pathname.startsWith("/x") || isHtml || res.status >= 400;
+  },
+  metaData(req, res) {
+    const accept = req.headers.get("accept");
+    const referer = req.headers.get("referer");
+    const userAgent = req.headers.get("user-agent");
+
+    const { ok, statusText } = res;
+    const contentType = res.headers.get("content-type");
+    const isHtml = /html/i.test(contentType ?? "");
+
+    // Set the page title to "website" or "javascript" or "typescript" or "wasm"
+    let documentTitle;
+    if (!ok) {
+      documentTitle = statusText.toLowerCase();
+    } else if (isHtml) {
+      documentTitle = "website";
+    } else if (contentType != null) {
+      documentTitle = /^application\/(.*?)(?:;|$)/i.exec(contentType)?.[1];
+    }
+
+    // Files downloaded by a bot (deno, curl) get a special medium/source tag.
+    let campaignMedium;
+    let campaignSource;
+    if (
+      referer == null &&
+      (userAgent == null || !userAgent.startsWith("Mozilla/")) &&
+      (accept == null || accept === "*/*")
+    ) {
+      campaignMedium = "Bot";
+      campaignSource = userAgent?.replace(/[^\w\-].*$/, "");
+    }
+
+    return { campaignMedium, campaignSource, documentTitle };
+  },
+});
 
 export function withLog(
   handler: (
@@ -30,10 +73,7 @@ export function withLog(
         { status: 500 },
       );
     } finally {
-      const srt = performance.now() - start;
-      reportAnalytics(req, con, res, srt, err).catch((e) =>
-        console.error("reportAnalytics() failed:", e)
-      );
+      await ga(req, con, res, start, err);
     }
     return res;
   };
