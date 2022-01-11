@@ -27,7 +27,7 @@ const ga = createReporter({
     const contentType = res.headers.get("content-type");
     const isHtml = /html/i.test(contentType ?? "");
 
-    // Set the page title to "website" or "javascript" or "typescript" or wasm".
+    // Set the page title to "website" or "javascript" or "typescript" or "wasm"
     let documentTitle;
     if (!ok) {
       documentTitle = statusText.toLowerCase();
