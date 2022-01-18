@@ -155,8 +155,9 @@ const configV2: RegistryConfig = {
 export function handleConfigRequest(request: Request): Promise<Response> {
   let body: unknown;
   let contentType = "application/json";
+  const accept = request.headers.get("accept");
   if (
-    request.headers.has("accept") &&
+    accept !== null && accept !== "*/*" &&
     accepts(request, "application/vnd.deno.reg.v2+json")
   ) {
     contentType = "application/vnd.deno.reg.v2+json";

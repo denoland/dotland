@@ -8,7 +8,8 @@ Deno.test({
   name: "handleConfigRequest - v1 version of manifest",
   async fn() {
     const req = new Request(
-      "https://deno.land//.well-known/deno-import-intellisense.json",
+      "https://deno.land/.well-known/deno-import-intellisense.json",
+      { headers: { "accept": "*/*" } },
     );
     const res = await handleConfigRequest(req);
     assertEquals(res.status, 200);
@@ -21,7 +22,7 @@ Deno.test({
   name: "handleConfigRequest - browser",
   async fn() {
     const req = new Request(
-      "https://deno.land//.well-known/deno-import-intellisense.json",
+      "https://deno.land/.well-known/deno-import-intellisense.json",
       {
         headers: {
           "accept":
@@ -40,7 +41,7 @@ Deno.test({
   name: "handleConfigRequest - v2 version of manifest",
   async fn() {
     const req = new Request(
-      "https://deno.land//.well-known/deno-import-intellisense.json",
+      "https://deno.land/.well-known/deno-import-intellisense.json",
       {
         headers: {
           // this is the accept header Deno v 1.17.1 and later sends in the request
