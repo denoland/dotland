@@ -5,16 +5,16 @@ import { handleConfigRequest } from "./registry_config.ts";
 import { handleApiRequest } from "./suggestions.ts";
 import { handleVSCRequest } from "./vscode.ts";
 
-import type { ConnInfo } from "https://dotland-xkvnj8800ahg.deno.dev/std@0.112.0/http/server.ts";
+import type { ConnInfo } from "https://deno.land/std@0.112.0/http/server.ts";
 import { createReporter } from "https://deno.land/x/g_a@0.1.2/mod.ts";
+import { accepts } from "https://deno.land/x/oak_commons@0.1.1/negotiation.ts";
 
 const REMOTE_URL = "https://deno-website2.now.sh";
 
 const ga = createReporter({
   filter(req, res) {
     const { pathname } = new URL(req.url);
-    const contentType = res.headers.get("content-type");
-    const isHtml = /html/i.test(contentType ?? "");
+    const isHtml = accepts(req, "application/*", "text/html") === "text/html";
     return pathname === "/" || pathname.startsWith("/std") ||
       pathname.startsWith("/x") || isHtml || res.status >= 400;
   },
@@ -24,10 +24,10 @@ const ga = createReporter({
     const userAgent = req.headers.get("user-agent");
 
     const { ok, statusText } = res;
-    const contentType = res.headers.get("content-type");
-    const isHtml = /html/i.test(contentType ?? "");
+    const isHtml = accepts(req, "application/*", "text/html") === "text/html";
 
     // Set the page title to "website" or "javascript" or "typescript" or "wasm"
+    const contentType = res.headers.get("content-type");
     let documentTitle;
     if (!ok) {
       documentTitle = statusText.toLowerCase();
@@ -80,8 +80,10 @@ export function withLog(
 }
 
 export function handleRequest(request: Request): Promise<Response> {
-  const accept = request.headers.get("accept");
-  const isHtml = accept && accept.indexOf("html") >= 0;
+  // this checks to see if the requestor prefers "application" code over "html"
+  // which would be run-time clients who either omit an accept header (which
+  // implies any content type) or provides a `*/*` header
+  const isHtml = accepts(request, "application/*", "text/html") === "text/html";
 
   const url = new URL(request.url);
 

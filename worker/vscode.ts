@@ -1,6 +1,6 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import { match } from "https://dotland-xkvnj8800ahg.deno.dev/x/path_to_regexp@v6.2.0/index.ts";
+import { match } from "https://deno.land/x/path_to_regexp@v6.2.0/index.ts";
 import { S3_BUCKET } from "./registry.ts";
 
 const VERSIONS = match("/_vsc1/modules/:module([a-z0-9_]*)");
