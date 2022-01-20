@@ -14,8 +14,7 @@ const REMOTE_URL = "https://deno-website2.now.sh";
 const ga = createReporter({
   filter(req, res) {
     const { pathname } = new URL(req.url);
-    const contentType = res.headers.get("content-type");
-    const isHtml = /html/i.test(contentType ?? "");
+    const isHtml = accepts(req, "application/*", "text/html") === "text/html";
     return pathname === "/" || pathname.startsWith("/std") ||
       pathname.startsWith("/x") || isHtml || res.status >= 400;
   },
@@ -25,10 +24,10 @@ const ga = createReporter({
     const userAgent = req.headers.get("user-agent");
 
     const { ok, statusText } = res;
-    const contentType = res.headers.get("content-type");
-    const isHtml = /html/i.test(contentType ?? "");
+    const isHtml = accepts(req, "application/*", "text/html") === "text/html";
 
     // Set the page title to "website" or "javascript" or "typescript" or "wasm"
+    const contentType = res.headers.get("content-type");
     let documentTitle;
     if (!ok) {
       documentTitle = statusText.toLowerCase();
