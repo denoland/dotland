@@ -3,6 +3,11 @@
 import { assert, assertEquals } from "./test_deps.ts";
 import { extractAltLineNumberReference, handleRequest } from "./handler.ts";
 
+/** This is taken directly from a recent version of Chromium */
+const BROWSER_ACCEPT =
+  "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9";
+const DENO_CLI_ACCEPT = "*/*";
+
 Deno.test({
   name: "/ responds with React html",
   async fn() {
@@ -20,7 +25,7 @@ Deno.test({
   async fn() {
     const result = await handleRequest(
       new Request("https://deno.land/std/version.ts", {
-        headers: { Accept: "text/html" },
+        headers: { Accept: BROWSER_ACCEPT },
       }),
     );
     assert(result.headers.get("Content-Type")?.includes("text/html"));
@@ -34,7 +39,7 @@ Deno.test({
   async fn() {
     const result = await handleRequest(
       new Request("https://deno.land/x/std/version.ts", {
-        headers: { Accept: "text/html" },
+        headers: { Accept: BROWSER_ACCEPT },
       }),
     );
     assert(result.headers.get("Content-Type")?.includes("text/html"));
@@ -44,10 +49,12 @@ Deno.test({
 });
 
 Deno.test({
-  name: "/x/std/version.ts with no Accept responds with redirect",
+  name: "/x/std/version.ts with Deno CLI Accept responds with redirect",
   async fn() {
     const result = await handleRequest(
-      new Request("https://deno.land/x/std/version.ts"),
+      new Request("https://deno.land/x/std/version.ts", {
+        headers: { Accept: DENO_CLI_ACCEPT },
+      }),
     );
     assertEquals(result.status, 302);
     assert(result.headers.get("Location")?.includes("@"));
@@ -62,7 +69,7 @@ Deno.test({
   async fn() {
     const result = await handleRequest(
       new Request("https://deno.land/std@0.50.0/version.ts", {
-        headers: { Accept: "text/html" },
+        headers: { Accept: BROWSER_ACCEPT },
       }),
     );
     assert(result.headers.get("Content-Type")?.includes("text/html"));
@@ -72,10 +79,13 @@ Deno.test({
 });
 
 Deno.test({
-  name: "/std@v0.50.0/version.ts with no Accept responds with raw typescript",
+  name:
+    "/std@v0.50.0/version.ts with Deno CLI Accept responds with raw typescript",
   async fn() {
     const result = await handleRequest(
-      new Request("https://deno.land/std@0.50.0/version.ts"),
+      new Request("https://deno.land/std@0.50.0/version.ts", {
+        headers: { Accept: DENO_CLI_ACCEPT },
+      }),
     );
     assert(result.headers.get("Content-Type")?.includes(
       "application/typescript",
@@ -91,7 +101,7 @@ Deno.test({
   async fn() {
     const result = await handleRequest(
       new Request("https://deno.land/x/std@0.50.0/version.ts", {
-        headers: { Accept: "text/html" },
+        headers: { Accept: BROWSER_ACCEPT },
       }),
     );
     assert(result.headers.get("Content-Type")?.includes("text/html"));
@@ -101,10 +111,13 @@ Deno.test({
 });
 
 Deno.test({
-  name: "/x/std@v0.50.0/version.ts with no Accept responds with raw typescript",
+  name:
+    "/x/std@v0.50.0/version.ts with Deno CLI Accept responds with raw typescript",
   async fn() {
     const result = await handleRequest(
-      new Request("https://deno.land/x/std@0.50.0/version.ts"),
+      new Request("https://deno.land/x/std@0.50.0/version.ts", {
+        headers: { Accept: DENO_CLI_ACCEPT },
+      }),
     );
     assert(result.headers.get("Content-Type")?.includes(
       "application/typescript",
@@ -120,7 +133,7 @@ Deno.test({
   async fn() {
     const result = await handleRequest(
       new Request("https://deno.land/std/fs/mod.ts:5:3", {
-        headers: { Accept: "text/html" },
+        headers: { Accept: BROWSER_ACCEPT },
       }),
     );
     assertEquals(result.status, 302);
@@ -134,7 +147,7 @@ Deno.test({
   async fn() {
     const result = await handleRequest(
       new Request("https://deno.land/std@0.50.0/fs/mod.ts:5:3", {
-        headers: { Accept: "text/html" },
+        headers: { Accept: BROWSER_ACCEPT },
       }),
     );
     assertEquals(result.status, 302);
@@ -150,7 +163,7 @@ Deno.test({
   async fn() {
     const result = await handleRequest(
       new Request("https://deno.land/x/std/fs/mod.ts:5:3", {
-        headers: { Accept: "text/html" },
+        headers: { Accept: BROWSER_ACCEPT },
       }),
     );
     assertEquals(result.status, 302);
@@ -164,7 +177,7 @@ Deno.test({
   async fn() {
     const result = await handleRequest(
       new Request("https://deno.land/x/std@0.50.0/fs/mod.ts:5:3", {
-        headers: { Accept: "text/html" },
+        headers: { Accept: BROWSER_ACCEPT },
       }),
     );
     assertEquals(result.status, 302);
