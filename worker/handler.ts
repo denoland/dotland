@@ -5,7 +5,7 @@ import { handleConfigRequest } from "./registry_config.ts";
 import { handleApiRequest } from "./suggestions.ts";
 import { handleVSCRequest } from "./vscode.ts";
 
-import type { ConnInfo } from "https://dotland-xkvnj8800ahg.deno.dev/std@0.112.0/http/server.ts";
+import type { ConnInfo } from "https://deno.land/std@0.112.0/http/server.ts";
 import { createReporter } from "https://deno.land/x/g_a@0.1.2/mod.ts";
 import { accepts } from "https://deno.land/x/oak_commons@0.1.1/negotiation.ts";
 
