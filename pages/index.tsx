@@ -26,8 +26,7 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });
       <Head>
         <title>دێنۆ - ژینگەیەکی مۆدێرن بۆ تایپسکریپت و جاڤاسکریپت</title>
       </Head>
-      {
-        /* <div className="bg-blue-500 p-4 text-white flex justify-center text-center">
+      {/* <div className="bg-blue-500 p-4 text-white flex justify-center text-center">
         <div className="max-w-screen-xl">
           <span className="inline">Deno 1.9 is out.</span>
           <span className="block sm:ml-2 sm:inline-block font-semibold">
@@ -56,7 +55,7 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });
               href="/#installation"
               className="rounded-full mt-8 px-8 py-2 transition-colors duration-75 ease-in-out bg-blue-500 hover:bg-blue-400 text-white text-lg shadow-lg"
             >
-              دای بمەزرێنە
+              دایبمەزرێنە
             </a>
             <a
               href="https://github.com/denoland/deno/releases/latest"
@@ -176,8 +175,8 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });
             <Link href="/manual">
               <a className="link">مانواڵێکی</a>
             </Link>{" "}
-            هەیە کە بە قووڵی باس لە دێنۆ دەکات و پێشەکییەکت دەربارەی چەمکەکان
-            پێ دەدات.
+            هەیە کە بە قووڵی باس لە دێنۆ دەکات و پێشەکییەکت دەربارەی چەمکەکان پێ
+            دەدات.
           </p>
           <p className="my-4 text-gray-700" dir="rtl">
             مانواڵەکە باس لە ئەو شتانەش دەکات کە دێنۆ دابینینیان دەکات.
@@ -326,7 +325,7 @@ const InstallSection = () => {
         <a href="https://crates.io/crates/deno" className="link">
           کارگۆ
         </a>{" "}
-        بیڵدی بکە و دای بمەزرێنە:
+        بیڵدی بکە و دایبمەزرێنە:
       </p>
       <CodeBlock language="bash" code={`cargo install deno --locked`} />
     </div>
