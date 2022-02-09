@@ -781,8 +781,13 @@ function VersionSelector({
         ? (
           <button
             type="button"
+<<<<<<< HEAD
             className="mt-2 w-full inline-flex justify-center py-1 px-2 border border-gray-300 rounded-md bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition duration-150 ease-in-out"
             aria-label="跳转到最新版"
+=======
+            className="mt-2 w-full inline-flex justify-center py-1 px-2 border border-red-300 rounded-md bg-white text-sm leading-5 font-medium text-red-500 hover:text-red-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-red transition duration-150 ease-in-out"
+            aria-label="Go to latest version"
+>>>>>>> 061dcb5abe7b079a8bb7fa7d92a5c39f7fe2c3e4
             onClick={() => onChange(versions[0])}
           >
             跳转到最新版
