@@ -2,7 +2,7 @@
 
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import { hasNext, hasPrevious, pageCount } from "./pagination_utils";
+import { hasNext, hasPrevious, pageCount } from "./pagination_utils.ts";
 
 test("hasPrevious", () => {
   expect(hasPrevious({ page: 0 })).toEqual(false);

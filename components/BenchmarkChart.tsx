@@ -1,13 +1,13 @@
-/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+/* Copyright 2022 the Deno authors. All rights reserved. MIT license. */
 
-import React, { useState } from "react";
-import dynamic from "next/dynamic";
-const ApexChart = dynamic(() => import("react-apexcharts"), {
+/** @jsx h */
+import { h, useState } from "../deps.ts";
+const ApexChart = dynamic(() => import("react-apexcharts"), { // TODO
   ssr: false,
   loading: BenchmarkLoading,
 });
 
-import { Column, formatLogScale, logScale } from "../util/benchmark_utils";
+import { Column, formatLogScale, logScale } from "../util/benchmark_utils.ts";
 
 export interface BenchmarkChartProps {
   yTickFormat?: (n: number) => string;
@@ -16,7 +16,7 @@ export interface BenchmarkChartProps {
   sha1List: string[];
 }
 
-function BenchmarkChart(props: BenchmarkChartProps): React.ReactElement {
+export function BenchmarkChart(props: BenchmarkChartProps) {
   const [id] = useState(Math.random().toString());
 
   const shortSha1List = props.sha1List.map((s) => s.slice(0, 6));
@@ -93,7 +93,7 @@ function BenchmarkChart(props: BenchmarkChartProps): React.ReactElement {
   );
 }
 
-export function BenchmarkLoading(): React.ReactElement {
+export function BenchmarkLoading() {
   return (
     <div style={{ height: 335 }} className="flex items-center justify-center">
       <span className="text-gray-500">
@@ -102,5 +102,3 @@ export function BenchmarkLoading(): React.ReactElement {
     </div>
   );
 }
-
-export default BenchmarkChart;

@@ -5,7 +5,7 @@ import {
   getFileURL,
   getTableOfContents,
   getTableOfContentsMap,
-} from "./manual_utils";
+} from "./manual_utils.ts";
 import "isomorphic-unfetch";
 
 /* eslint-env jest */

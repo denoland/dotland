@@ -1,6 +1,6 @@
-/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+/* Copyright 2022 the Deno authors. All rights reserved. MIT license. */
 
-import json from "../translations.json";
+import json from "../translations.json" assert { type: "json" };
 
 export const TRANSLATIONS: Translation[] = json.sort((a, b) =>
   a.language < b.language ? -1 : 1

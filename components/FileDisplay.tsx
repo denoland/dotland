@@ -1,18 +1,16 @@
-/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+/* Copyright 2022 the Deno authors. All rights reserved. MIT license. */
 
-import React from "react";
-import { RawCodeBlock } from "./CodeBlock";
-import Markdown from "./Markdown";
-import dynamic from "next/dynamic";
-import Link from "next/link";
+/** @jsx h */
+import { h } from "../deps.ts";
+import { RawCodeBlock } from "./CodeBlock.tsx";
+import { Markdown } from "./Markdown.tsx";
 import {
   fileNameFromURL,
   fileTypeFromURL,
   isReadme,
-} from "../util/registry_utils";
-import { useRouter } from "next/router";
+} from "../util/registry_utils.ts";
 
-function FileDisplay(props: {
+export function FileDisplay(props: {
   raw?: string;
   canonicalPath: string;
   sourceURL: string;
@@ -20,8 +18,8 @@ function FileDisplay(props: {
   repositoryURL?: string | null;
   documentationURL?: string | null;
   stdVersion?: string;
-}): React.ReactElement {
-  const { pathname } = useRouter();
+  pathname: string;
+}) {
   const filetype = fileTypeFromURL(props.sourceURL);
   const filename = fileNameFromURL(props.sourceURL);
 
@@ -40,16 +38,12 @@ function FileDisplay(props: {
             </svg>
           )}
           <span className="font-medium">
-            {props.canonicalPath === pathname
-              ? (
-                filename
-              )
+            {props.canonicalPath === props.pathname
+              ? filename
               : (
-                <Link href={props.canonicalPath}>
-                  <a className="link">
-                    {filename}
-                  </a>
-                </Link>
+                <a href={props.canonicalPath} className="link">
+                  {filename}
+                </a>
               )}
           </span>
         </div>
@@ -121,7 +115,7 @@ function FileDisplay(props: {
             const Markup =
               // most projects won't be using Org files, so we load
               // this component lazily to save space
-              filetype === "org" ? dynamic(() => import("./Org")) : Markdown;
+              filetype === "org" ? dynamic(() => import("./Org.tsx")) : Markdown;
             return (
               <div className="px-4">
                 <Markup
@@ -154,5 +148,3 @@ function FileDisplay(props: {
     </div>
   );
 }
-
-export default FileDisplay;

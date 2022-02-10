@@ -1,11 +1,12 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import React from "react";
+/** @jsx h */
+import { h, useEffect } from "../deps.ts";
 import { renderToStaticMarkup } from "preact/compat/server";
 import marked, { Renderer } from "marked";
 import dompurify from "dompurify";
-import { RawCodeBlock } from "./CodeBlock";
-import { replaceEmojis } from "../util/emoji_util";
+import { RawCodeBlock } from "./CodeBlock.tsx";
+import { replaceEmojis } from "../util/emoji_util.ts";
 import {
   markup,
   MarkupProps,
@@ -13,9 +14,9 @@ import {
   slugify,
   transformImageUri,
   transformLinkUri,
-} from "./Markup";
+} from "./Markup.tsx";
 
-function Markdown(props: MarkupProps): React.ReactElement | null {
+export function Markdown(props: MarkupProps): any {
   scrollEffect();
 
   if (!props.source) {
@@ -99,5 +100,3 @@ function Markdown(props: MarkupProps): React.ReactElement | null {
     return null;
   }
 }
-
-export default Markdown;

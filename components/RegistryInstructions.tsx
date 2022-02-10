@@ -1,10 +1,11 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import React, { useEffect, useMemo, useState } from "react";
-import useSWR from "swr";
-import Transition from "./Transition";
-import InlineCode from "./InlineCode";
-import { getVersionList } from "../util/registry_utils";
+/** @jsx h */
+/** @jsxFrag Fragment */
+import { h, Fragment, useEffect, useMemo, useState, useData } from "../deps.ts";
+import { Transition } from "../Transition.tsx";
+import { InlineCode } from "./InlineCode.tsx";
+import { getVersionList } from "../util/registry_utils.ts";
 
 const VALID_NAME = /^[a-z0-9_]{3,40}$/,
   VALID_SUBDIRECTORY = /^([^(/)])(.*\/$)/;
@@ -12,7 +13,7 @@ const VALID_NAME = /^[a-z0-9_]{3,40}$/,
 function RegistryInstructions(props: {
   isOpen: boolean;
   close: () => void;
-}): React.ReactElement {
+}) {
   // Stage of the instructions
   const [stage, setStage] = useState(0);
 
@@ -26,14 +27,10 @@ function RegistryInstructions(props: {
   const isModuleNameValid = useMemo(() => VALID_NAME.test(moduleName), [
     moduleName,
   ]);
-  const { data: isModuleNameAvailable } = useSWR(
-    () => (isModuleNameValid ? moduleName : null),
-    (moduleName) =>
-      getVersionList(moduleName)
-        .then((e) => !e)
-        .catch(() => false),
-    { refreshInterval: 2000 },
-  );
+  const isModuleNameAvailable = useData(moduleName, (moduleName) =>
+    getVersionList(moduleName)
+      .then((e) => !e)
+      .catch(() => false));
 
   // Validity of the subdirectory
   const isSubdirectoryValid = useMemo(
@@ -174,7 +171,7 @@ function RegistryInstructions(props: {
                               type="text"
                               placeholder="Module Name"
                               value={moduleName}
-                              onChange={(e) => setModuleName(e.target.value)}
+                              onChange={(e) => setModuleName(e.target!.value)}
                             />
                             {isModuleNameAvailable === true
                               ? (
@@ -244,7 +241,7 @@ function RegistryInstructions(props: {
                               type="text"
                               placeholder="Subdirectory"
                               value={subdirectory}
-                              onChange={(e) => setSubdirectory(e.target.value)}
+                              onChange={(e) => setSubdirectory(e.target!.value)}
                             />
                             {!isSubdirectoryValid
                               ? (

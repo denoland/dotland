@@ -1,5 +1,3 @@
-/* eslint-env jest */
-
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
 import {
@@ -15,7 +13,7 @@ import {
   parseNameVersion,
   parseQuery,
   VersionMetaInfo,
-} from "./registry_utils";
+} from "./registry_utils.ts";
 import "isomorphic-unfetch";
 
 test("source url", () => {

@@ -1,10 +1,10 @@
-/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+/* Copyright 2022 the Deno authors. All rights reserved. MIT license. */
 
-import React, { useState } from "react";
-import Link from "next/link";
-import Transition from "./Transition";
+/** @jsx h */
+import { h, useState } from "../deps.ts";
+import Transition from "./Transition.tsx";
 
-function Header({
+export function Header({
   subtitle,
   widerContent,
   main,
@@ -12,7 +12,7 @@ function Header({
   subtitle?: string;
   widerContent?: boolean;
   main?: boolean;
-}): React.ReactElement {
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -22,25 +22,23 @@ function Header({
           widerContent ? "max-w-screen-xl" : "max-w-screen-lg lg:p-0"
         }`}
       >
-        <Link href="/">
-          <a className="flex items-center">
-            <img className="h-10 w-auto sm:h-12 my-2" src="/logo.svg" alt="" />
-            <div className="ml-5 flex flex-col justify-center">
-              {!main &&
-                (
-                  <div className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
-                    Deno
-                  </div>
-                )}
-              {subtitle &&
-                (
-                  <div className="font-normal text-sm sm:text-lg leading-tight tracking-tight">
-                    {subtitle}
-                  </div>
-                )}
-            </div>
-          </a>
-        </Link>
+        <a className="flex items-center" href="/">
+          <img className="h-10 w-auto sm:h-12 my-2" src="/logo.svg" alt="" />
+          <div className="ml-5 flex flex-col justify-center">
+            {!main &&
+              (
+                <div className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
+                  Deno
+                </div>
+              )}
+            {subtitle &&
+              (
+                <div className="font-normal text-sm sm:text-lg leading-tight tracking-tight">
+                  {subtitle}
+                </div>
+              )}
+          </div>
+        </a>
         <div className="-mr-2 flex items-center lg:hidden">
           <button
             type="button"
@@ -64,18 +62,15 @@ function Header({
           </button>
         </div>
         <div className="hidden lg:flex md:ml-10 items-end">
-          <Link href="https://deno.com/deploy">
             <a
+              href="https://deno.com/deploy"
               className={`font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out`}
             >
               Deploy
             </a>
-          </Link>
-          <Link href="/manual">
-            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              Manual
-            </a>
-          </Link>
+          <a href="/manual" className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
+            Manual
+          </a>
           <a
             href="https://deno.com/blog"
             className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
@@ -88,16 +83,12 @@ function Header({
           >
             API
           </a>
-          <Link href="/std">
-            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              Standard Library
-            </a>
-          </Link>
-          <Link href="/x">
-            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              Third Party Modules
-            </a>
-          </Link>
+          <a href="/std" className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
+            Standard Library
+          </a>
+          <a href="/x" className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
+            Third Party Modules
+          </a>
           <a
             href="https://github.com/denoland"
             className="ml-10 text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
@@ -133,26 +124,24 @@ function Header({
           <div className="rounded-lg shadow-md">
             <div className="rounded-lg bg-white shadow-xs overflow-hidden">
               <div className="px-5 pt-4 flex items-center justify-between">
-                <Link href="/">
-                  <a className="flex items-center">
-                    <img
-                      className="h-10 w-auto sm:h-12 my-2"
-                      src="/logo.svg"
-                      alt=""
-                    />
-                    <div className="ml-5 flex flex-col justify-center">
-                      <div className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
-                        Deno
-                      </div>
-                      {subtitle &&
-                        (
-                          <div className="font-normal text-sm sm:text-lg leading-tight tracking-tight">
-                            {subtitle}
-                          </div>
-                        )}
+                <a href="/" className="flex items-center">
+                  <img
+                    className="h-10 w-auto sm:h-12 my-2"
+                    src="/logo.svg"
+                    alt=""
+                  />
+                  <div className="ml-5 flex flex-col justify-center">
+                    <div className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
+                      Deno
                     </div>
-                  </a>
-                </Link>{" "}
+                    {subtitle &&
+                      (
+                        <div className="font-normal text-sm sm:text-lg leading-tight tracking-tight">
+                          {subtitle}
+                        </div>
+                      )}
+                  </div>
+                </a>{" "}
                 <div className="-mr-2">
                   <button
                     type="button"
@@ -176,39 +165,30 @@ function Header({
                 </div>
               </div>
               <div className="px-2 pt-4 pb-3">
-                <Link href="https://deno.com/deploy">
-                  <a
-                    className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out`}
-                  >
-                    Deploy
-                  </a>
-                </Link>
-                <Link href="/manual">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Manual
-                  </a>
-                </Link>
-                <Link href="https://deno.com/blog">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Blog
-                  </a>
-                </Link>
+                <a
+                  href="https://deno.com/deploy"
+                  className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out`}
+                >
+                  Deploy
+                </a>
+                <a href="/manual" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
+                  Manual
+                </a>
+                <a href="https://deno.com/blog" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
+                  Blog
+                </a>
                 <a
                   href="https://doc.deno.land/builtin/stable"
                   className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
                 >
                   API
                 </a>
-                <Link href="/std">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Standard Library
-                  </a>
-                </Link>
-                <Link href="/x">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Third Party Modules
-                  </a>
-                </Link>
+                <a href="/std" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
+                  Standard Library
+                </a>
+                <a href="/x" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
+                  Third Party Modules
+                </a>
               </div>
             </div>
           </div>
@@ -217,5 +197,3 @@ function Header({
     </div>
   );
 }
-
-export default Header;

@@ -2,7 +2,7 @@
 
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import { replaceEmojis } from "./emoji_util";
+import { replaceEmojis } from "./emoji_util.ts";
 
 test("emoji replacement", () => {
   expect(replaceEmojis(":ram:")).toEqual("🐏");

@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import React from "react";
 
-import Org from "./Org";
+import Org from "./Org.tsx";
 
 function getHTML(elt: React.ReactElement | null) {
   if (elt) {

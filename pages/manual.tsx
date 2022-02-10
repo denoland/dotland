@@ -1,20 +1,20 @@
-/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+/* Copyright 2022 the Deno authors. All rights reserved. MIT license. */
 
-import React, {
+/** @jsx h */
+/** @jsxFrag Fragment */
+import {
+  h,
+  Fragment,
   useCallback,
   useEffect,
   useMemo,
   useRef,
   useState,
-} from "react";
-import { createPortal } from "react-dom";
-import Head from "next/head";
-import Link from "next/link";
-import { Router, useRouter } from "next/router";
-// @ts-expect-error because @docsearch/react does not have types
-import { DocSearchModal, useDocSearchKeyboardEvents } from "@docsearch/react";
-import versionMeta from "../versions.json";
-import { parseNameVersion } from "../util/registry_utils";
+  PageProps,
+  PageConfig,
+} from "../deps.ts";
+import versionMeta from "../versions.json" assert { type: "json" };
+import { parseNameVersion } from "../util/registry_utils.ts";
 import {
   getDocURL,
   getFileURL,
@@ -23,10 +23,13 @@ import {
   isPreviewVersion,
   TableOfContents,
   versions,
-} from "../util/manual_utils";
-import Markdown from "./Markdown";
-import Transition from "./Transition";
-import InlineCode from "./InlineCode";
+} from "../util/manual_utils.ts";
+import { Markdown } from "../components/Markdown.tsx";
+import { Transition } from "../components/Transition.tsx";
+import { InlineCode } from "../components/InlineCode.tsx";
+import { createPortal } from "react-dom";
+// @ts-expect-error because @docsearch/react does not have types
+import { DocSearchModal, useDocSearchKeyboardEvents } from "@docsearch/react";
 
 function Hit({
   hit,
@@ -36,20 +39,17 @@ function Hit({
   children: React.ReactElement;
 }) {
   return (
-    <Link href={hit.url}>
-      <a className="link">{children}</a>
-    </Link>
+    <a href={hit.url} className="link">{children}</a>
   );
 }
 
-function Manual(): React.ReactElement {
-  const { query, push, replace } = useRouter();
+export default function Manual({ params }: PageProps) {
   const { version, path } = useMemo(() => {
-    const [identifier, ...pathParts] = (query.rest as string[]) ?? [];
+    const [identifier, ...pathParts] = (params.rest as string[]) ?? [];
     const path = pathParts.length === 0 ? "" : `/${pathParts.join("/")}`;
     const version = parseNameVersion(identifier ?? "")[1] || versionMeta.cli[0];
     return { version, path: path || "/introduction" };
-  }, [query]);
+  }, [params]);
 
   if (path.endsWith(".md")) {
     replace(
@@ -114,7 +114,7 @@ function Manual(): React.ReactElement {
   const [pageIndex, setPageIndex] = useState(0);
   const [pageList, setPageList] = useState<
     Array<{ path: string; name: string }>
-  >([]);
+    >([]);
 
   useEffect(() => {
     if (tableOfContents) {
@@ -226,13 +226,13 @@ function Manual(): React.ReactElement {
   const stdVersion = version === undefined
     ? versionMeta.std[0]
     : ((versionMeta.cli_to_std as any)[version ?? ""] as string) ??
-      versionMeta.std[0];
+    versionMeta.std[0];
 
   const isPreview = isPreviewVersion(version);
 
   return (
     <div>
-      <Head>
+      <head>
         <title>
           {pageTitle === "" ? "Manual | Deno" : `${pageTitle} | Manual | Deno`}
         </title>
@@ -241,7 +241,7 @@ function Manual(): React.ReactElement {
           href="https://BH4D9OD16A-dsn.algolia.net"
           crossOrigin="true"
         />
-      </Head>
+      </head>
       {isOpen &&
         createPortal(
           <DocSearchModal
@@ -328,20 +328,18 @@ function Manual(): React.ReactElement {
                     </button>
                   </div>
                   <div className="bg-gray-100 pb-4 pt-4 border-b border-gray-200">
-                    <Link href="/">
-                      <a className="flex items-center flex-shrink-0 px-4">
-                        <img
-                          src="/logo.svg"
-                          alt="logo"
-                          className="w-auto h-12"
-                        />
-                        <div className="mx-4 flex flex-col justify-center">
-                          <div className="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
-                            Deno Manual
-                          </div>
+                    <a href="/" className="flex items-center flex-shrink-0 px-4">
+                      <img
+                        src="/logo.svg"
+                        alt="logo"
+                        className="w-auto h-12"
+                      />
+                      <div className="mx-4 flex flex-col justify-center">
+                        <div className="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
+                          Deno Manual
                         </div>
-                      </a>
-                    </Link>
+                      </div>
+                    </a>
                     <Version
                       version={version}
                       versions={versions}
@@ -367,16 +365,14 @@ function Manual(): React.ReactElement {
         <div className="hidden md:flex md:flex-shrink-0">
           <div className="flex flex-col w-72 border-r border-gray-200 bg-gray-50">
             <div className="bg-gray-100 pb-4 pt-4 border-b border-gray-200">
-              <Link href="/">
-                <a className="flex items-center flex-shrink-0 px-4">
-                  <img src="/logo.svg" alt="logo" className="w-auto h-12" />
-                  <div className="mx-4 flex flex-col justify-center">
-                    <div className="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
-                      Deno Manual
-                    </div>
+              <a href="/" className="flex items-center flex-shrink-0 px-4">
+                <img src="/logo.svg" alt="logo" className="w-auto h-12" />
+                <div className="mx-4 flex flex-col justify-center">
+                  <div className="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
+                    Deno Manual
                   </div>
-                </a>
-              </Link>
+                </div>
+              </a>
               <Version
                 version={version}
                 versions={versions}
@@ -394,11 +390,9 @@ function Manual(): React.ReactElement {
         </div>
         <div className="flex flex-col w-0 flex-1 overflow-hidden">
           <div className="z-10 flex-shrink-0 flex h-16 bg-white shadow md:hidden">
-            <Link href="/">
-              <a className="px-4 flex items-center justify-center md:hidden">
-                <img src="/logo.svg" alt="logo" className="w-auto h-10" />
-              </a>
-            </Link>
+            <a href="/" className="px-4 flex items-center justify-center md:hidden">
+              <img src="/logo.svg" alt="logo" className="w-auto h-10" />
+            </a>
             <div className="border-l border-r border-gray-200 flex-1 px-4 flex justify-between">
               <div className="flex-1 flex">
                 <div className="w-full flex justify-between h-full">
@@ -534,32 +528,17 @@ function Manual(): React.ReactElement {
                     />
                     <div className="mt-4 pt-4 border-t border-gray-200">
                       {pageList[pageIndex - 1] !== undefined && (
-                        <Link
-                          href={version
-                            ? pageList[pageIndex - 1].path.replace(
-                              "manual",
-                              `manual@${version}`,
-                            )
-                            : pageList[pageIndex - 1].path}
-                        >
-                          <a className="text-gray-900 hover:text-gray-600 font-normal">
-                            ← {pageList[pageIndex - 1].name}
-                          </a>
-                        </Link>
+                        <a href={version ? pageList[pageIndex - 1].path.replace("manual", `manual@${version}`)
+                          : pageList[pageIndex - 1].path} className="text-gray-900 hover:text-gray-600 font-normal">
+                          ← {pageList[pageIndex - 1].name}
+                        </a>
                       )}
                       {pageList[pageIndex + 1] !== undefined && (
-                        <Link
-                          href={version
-                            ? pageList[pageIndex + 1].path.replace(
-                              "manual",
-                              `manual@${version}`,
-                            )
-                            : pageList[pageIndex + 1].path}
-                        >
-                          <a className="text-gray-900 hover:text-gray-600 font-normal float-right">
-                            {pageList[pageIndex + 1].name} →
-                          </a>
-                        </Link>
+                        <a href={version ? pageList[pageIndex + 1].path.replace("manual", `manual@${version}`)
+                          : pageList[pageIndex + 1].path}
+                          className="text-gray-900 hover:text-gray-600 font-normal float-right">
+                          {pageList[pageIndex + 1].name} →
+                        </a>
                       )}
                     </div>
                   </>
@@ -690,17 +669,16 @@ function ToC({
             Object.entries(tableOfContents).map(([slug, entry]) => {
               return (
                 <li key={slug} className="my-2">
-                  <Link href={`/manual${version ? `@${version}` : ""}/${slug}`}>
-                    <a
-                      className={`${
-                        path === `/${slug}`
-                          ? "text-blue-600 hover:text-blue-500 toc-active"
-                          : "text-gray-900 hover:text-gray-600"
-                      } font-bold`}
-                    >
-                      {entry.name}
-                    </a>
-                  </Link>
+                  <a
+                    href={`/manual${version ? `@${version}` : ""}/${slug}`}
+                    className={`${
+                      path === `/${slug}`
+                        ? "text-blue-600 hover:text-blue-500 toc-active"
+                        : "text-gray-900 hover:text-gray-600"
+                    } font-bold`}
+                  >
+                    {entry.name}
+                  </a>
                   {entry.children && (
                     <ol className="pl-4 list-decimal nested">
                       {Object.entries(entry.children).map(
@@ -708,23 +686,20 @@ function ToC({
                           [childSlug, name],
                         ) => (
                           <li key={`${slug}/${childSlug}`} className="my-0.5">
-                            <Link
+                            <a
                               href={`/manual${
                                 version
                                   ? `@${version}`
                                   : ""
                               }/${slug}/${childSlug}`}
+                              className={`${
+                                path === `/${slug}/${childSlug}`
+                                  ? "text-blue-600 hover:text-blue-500 toc-active"
+                                  : "text-gray-900 hover:text-gray-600"
+                              } font-normal`}
                             >
-                              <a
-                                className={`${
-                                  path === `/${slug}/${childSlug}`
-                                    ? "text-blue-600 hover:text-blue-500 toc-active"
-                                    : "text-gray-900 hover:text-gray-600"
-                                } font-normal`}
-                              >
-                                {name}
-                              </a>
-                            </Link>
+                              {name}
+                            </a>
                           </li>
                         ),
                       )}
@@ -739,4 +714,6 @@ function ToC({
   );
 }
 
-export default Manual;
+export const config: PageConfig = {
+  routeOverride: "manual{@:ver}?/*"
+};

@@ -1,14 +1,14 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import React, { createRef, useEffect, useMemo, useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
+/** @jsx h */
+/** @jsxFrag Fragment */
+import { h, Fragment, createRef, useEffect, useMemo, useState } from "../deps.ts";
 import {
   DirListing,
   Entry,
   getBasePath,
   isReadme,
-} from "../util/registry_utils";
+} from "../util/registry_utils.ts";
 
 interface DirectoryListingProps {
   dirListing: DirListing[];
@@ -16,11 +16,11 @@ interface DirectoryListingProps {
   version: string | undefined;
   path: string;
   repositoryURL?: string | null;
+  pathname: string;
 }
 
-function DirectoryListing(props: DirectoryListingProps): React.ReactElement {
-  const { asPath } = useRouter();
-  const isStd = asPath.startsWith("/std");
+export function DirectoryListing(props: DirectoryListingProps) {
+  const isStd = props.pathname.startsWith("/std");
   const children = useMemo((): Entry[] => {
     const children = props.dirListing
       .filter((d) => d.path.startsWith(props.path + "/"))
@@ -227,7 +227,7 @@ function TableRow({
   isLastItem,
   isHiddenItem,
   showHiddenItem,
-}: TableRowProps): React.ReactElement {
+}: TableRowProps) {
   return (
     <tr
       className={`table-row hover:bg-gray-100${
@@ -235,66 +235,54 @@ function TableRow({
       } ${isHiddenItem && !showHiddenItem ? "hidden" : ""}`}
     >
       <td className="whitespace-no-wrap text-sm leading-5 text-gray-400">
-        <Link href={href}>
-          <a
-            className={`px-2 sm:pl-3 md:pl-4 py-1 w-full block ${
-              entry.type === "dir" ? "text-blue-300" : "text-gray-300"
-            }`}
-            tabIndex={-1}
-          >
-            <svg fill="currentColor" viewBox="0 0 20 20" className="w-5 h-5">
-              {(() => {
-                switch (entry.type) {
-                  case "file":
-                    if (isReadme(entry.name)) {
-                      return (
-                        <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z">
-                        </path>
-                      );
-                    }
+        <a
+          href={href}
+          className={`px-2 sm:pl-3 md:pl-4 py-1 w-full block ${
+            entry.type === "dir" ? "text-blue-300" : "text-gray-300"
+          }`}
+          tabIndex={-1}
+        >
+          <svg fill="currentColor" viewBox="0 0 20 20" className="w-5 h-5">
+            {(() => {
+              switch (entry.type) {
+                case "file":
+                  if (isReadme(entry.name)) {
                     return (
-                      <path
-                        fillRule="evenodd"
-                        d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
-                        clipRule="evenodd"
-                      >
+                      <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z">
                       </path>
                     );
-                  case "dir":
-                    return (
-                      <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z">
-                      </path>
-                    );
-                }
-              })()}
-            </svg>
-          </a>
-        </Link>
+                  }
+                  return (
+                    <path
+                      fillRule="evenodd"
+                      d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
+                      clipRule="evenodd"
+                    >
+                    </path>
+                  );
+                case "dir":
+                  return (
+                    <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z">
+                    </path>
+                  );
+              }
+            })()}
+          </svg>
+        </a>
       </td>
       <td className="whitespace-no-wrap text-sm text-blue-500 leading-5">
-        <Link href={href}>
-          <a className="pl-2 py-1 w-full block truncate">
-            {entry.path ? <span className="font-light">{entry.path}/</span> : (
-              ""
-            )}
-            <span
-              className={isReadme(entry.name) || entry.path
-                ? "font-medium"
-                : ""}
-            >
+        <a href={href} className="pl-2 py-1 w-full block truncate">
+          {entry.path && <span className="font-light">{entry.path}/</span>}
+          <span className={isReadme(entry.name) || entry.path ? "font-medium" : ""}>
               {entry.name}
             </span>
-          </a>
-        </Link>
+        </a>
       </td>
       <td className="whitespace-no-wrap text-sm leading-5 text-gray-500 text-right">
-        <Link href={href}>
-          <a className="px-4 py-1 pl-1 w-full h-full block" tabIndex={-1}>
-            {entry.size ? bytesToSize(entry.size) : <>&nbsp;</>}
-          </a>
-        </Link>
+        <a href={href} className="px-4 py-1 pl-1 w-full h-full block" tabIndex={-1}>
+          {entry.size ? bytesToSize(entry.size) : <>&nbsp;</>}
+        </a>
       </td>
     </tr>
   );
 }
-export default DirectoryListing;

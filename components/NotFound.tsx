@@ -1,8 +1,11 @@
-import React from "react";
-import Footer from "./Footer";
-import Header from "./Header";
+/* Copyright 2022 the Deno authors. All rights reserved. MIT license. */
 
-function NotFoundPage(): React.ReactElement {
+/** @jsx h */
+import { h } from "../deps.ts";
+import { Footer } from "./Footer.tsx";
+import { Header } from "./Header.tsx";
+
+export default function NotFoundPage() {
   return (
     <div className="NotFoundPage">
       <div id="flex-top">
@@ -28,5 +31,3 @@ function NotFoundPage(): React.ReactElement {
     </div>
   );
 }
-
-export default NotFoundPage;

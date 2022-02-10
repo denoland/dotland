@@ -1,9 +1,9 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import React, { useEffect, useState } from "react";
+/** @jsx h */
+import { h, useEffect, useState, useLayoutEffect } from "../deps.ts";
 import Highlight, { Prism } from "prism-react-renderer";
 import light from "prism-react-renderer/themes/github";
-import { useLayoutEffect } from "react";
 
 // Modifies the color of 'variable' token
 // to avoid poor contrast

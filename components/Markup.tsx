@@ -1,6 +1,7 @@
-/* Copyright 2021 the Deno authors. All rights reserved. MIT license. */
+/* Copyright 2022 the Deno authors. All rights reserved. MIT license. */
 
-import React, { useEffect } from "react";
+/** @jsx h */
+import { h, useEffect } from "../deps.ts";
 
 export function slugify(text: string): string {
   text = text.toLowerCase();
@@ -22,7 +23,7 @@ export interface MarkupProps {
   className?: string;
 }
 
-export function markup(props: MarkupProps, raw: string): React.ReactElement {
+export function markup(props: MarkupProps, raw: string) {
   return (
     <div
       dangerouslySetInnerHTML={{ __html: raw }}
@@ -32,7 +33,7 @@ export function markup(props: MarkupProps, raw: string): React.ReactElement {
   );
 }
 
-function handleClick(e: React.MouseEvent<HTMLElement>) {
+function handleClick(e: any) {
   const el = e.target as HTMLElement;
   if (el.className !== "octicon-link") return;
 

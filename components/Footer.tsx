@@ -1,23 +1,17 @@
-/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+/* Copyright 2022 the Deno authors. All rights reserved. MIT license. */
 
-import React from "react";
-import Link from "next/link";
+/** @jsx h */
+import { h } from "../deps.ts";
 
-function Footer(props: { simple?: boolean }): React.ReactElement {
+export function Footer({ simple }: { simple?: boolean }) {
   return (
-    <div
-      className={props.simple
-        ? undefined
-        : "bg-gray-50 border-t border-gray-200"}
-    >
+    <div className={simple ? undefined : "bg-gray-50 border-t border-gray-200"}>
       <div className="max-w-screen-xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
         <nav className="-mx-5 -my-2 flex flex-wrap justify-center">
           <div className="px-2 py-2">
-            <Link href="/[...rest]" as="/manual">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Manual
-              </a>
-            </Link>
+            <a href="/manual" className="text-base leading-6 text-gray-500 hover:text-gray-900">
+              Manual
+            </a>
           </div>
           <div className="px-2 py-2">
             <a
@@ -28,32 +22,24 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
             </a>
           </div>
           <div className="px-2 py-2">
-            <Link href="/[...rest]" as="/std">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Standard Library
-              </a>
-            </Link>
+            <a href="/std" className="text-base leading-6 text-gray-500 hover:text-gray-900">
+              Standard Library
+            </a>
           </div>
           <div className="px-2 py-2">
-            <Link href="/x">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Third Party Modules
-              </a>
-            </Link>
+            <a href="/x" className="text-base leading-6 text-gray-500 hover:text-gray-900">
+              Third Party Modules
+            </a>
           </div>
           <div className="px-2 py-2">
-            <Link href="/benchmarks">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Benchmarks
-              </a>
-            </Link>
+            <a href="/benchmarks" className="text-base leading-6 text-gray-500 hover:text-gray-900">
+              Benchmarks
+            </a>
           </div>
           <div className="px-2 py-2">
-            <Link href="/artwork">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Artwork
-              </a>
-            </Link>
+            <a href="/artwork" className="text-base leading-6 text-gray-500 hover:text-gray-900">
+              Artwork
+            </a>
           </div>
           <div className="px-2 py-2">
             <a
@@ -64,11 +50,9 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
             </a>
           </div>
           <div className="px-2 py-2">
-            <Link href="/translations">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Translations
-              </a>
-            </Link>
+            <a href="/translations" className="text-base leading-6 text-gray-500 hover:text-gray-900">
+              Translations
+            </a>
           </div>
           <div className="px-2 py-2">
             <a
@@ -162,5 +146,3 @@ function Footer(props: { simple?: boolean }): React.ReactElement {
     </div>
   );
 }
-
-export default Footer;

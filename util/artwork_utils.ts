@@ -1,6 +1,6 @@
-/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+/* Copyright 2022 the Deno authors. All rights reserved. MIT license. */
 
-import json from "../artwork.json";
+import json from "../artwork.json" assert { type: "json" };
 
 export const ARTWORKS: Artwork[] = json.sort((a, b) =>
   a.date > b.date ? -1 : 1

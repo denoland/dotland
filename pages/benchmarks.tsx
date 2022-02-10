@@ -1,11 +1,9 @@
-/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+/* Copyright 2022 the Deno authors. All rights reserved. MIT license. */
 
-import React from "react";
-import Head from "next/head";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import { useRouter } from "next/router";
-import Link from "next/link";
+/** @jsx h */
+import { h, useState, useEffect } from "../deps.ts";
+import { Header } from "../components/Header.tsx";
+import { Footer } from "../components/Footer.tsx";
 import {
   BenchmarkData,
   Column,
@@ -15,12 +13,11 @@ import {
   formatMsec,
   formatReqSec,
   reshape,
-} from "../util/benchmark_utils";
-import BenchmarkChart, { BenchmarkLoading } from "../components/BenchmarkChart";
+} from "../util/benchmark_utils.ts";
+import { BenchmarkChart, BenchmarkLoading } from "../components/BenchmarkChart.tsx";
 
 // TODO(lucacasonato): add anchor points to headers
-function Benchmarks(): React.ReactElement {
-  const _ = useRouter();
+export default function Benchmarks() {
   const location = typeof window !== "undefined" ? window.location : null;
   const typescriptBenches = ["check", "no_check", "bundle", "bundle_no_check"];
 
@@ -61,11 +58,13 @@ function Benchmarks(): React.ReactElement {
   const showAll = show.dataFile !== "recent.json";
   const dataUrl = `https://denoland.github.io/benchmark_data/${show.dataFile}`;
 
-  const [data, setData] = React.useState<BenchmarkData | null>(null);
-  const [dataRangeTitle, setDataRangeTitle] = React.useState<string>("");
-  const [showNormalized, setShowNormalized] = React.useState(false);
+  const [data, setData] = useState<BenchmarkData | null>(null);
+  const [dataRangeTitle, setDataRangeTitle] = useState<string>("");
+  const [showNormalized, setShowNormalized] = useState(false);
 
-  React.useEffect(() => {
+  useData()
+
+  useEffect(() => {
     setData(null);
     fetch(dataUrl).then(async (response) => {
       const rawData = await response.json();
@@ -385,7 +384,7 @@ function Benchmarks(): React.ReactElement {
                 <BenchmarkOrLoading
                   data={data}
                   columns={showNormalized ? data?.normalizedMaxLatency
-                  : data?.maxLatency}
+                    : data?.maxLatency}
                   yLabel={"milliseconds"}
                   yTickFormat={formatMsec}
                 />
@@ -510,5 +509,3 @@ function SourceLink({
     </a>
   );
 }
-
-export default Benchmarks;

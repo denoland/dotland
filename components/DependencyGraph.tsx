@@ -1,15 +1,14 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import React, { useMemo } from "react";
-// import Link from "next/link";
+/** @jsx h */
+import { h, useMemo } from "../deps.ts";
 import {
   Dep,
   DependencyGraph as DependencyGraphType,
   graphToTree,
-} from "../util/registry_utils";
-import Link from "next/link";
+} from "../util/registry_utils.ts";
 
-function DependencyGraph({
+export function DependencyGraph({
   graph,
   entrypoint,
   currentModule,
@@ -17,7 +16,7 @@ function DependencyGraph({
   graph: DependencyGraphType;
   entrypoint: string;
   currentModule: string;
-}): React.ReactElement | null {
+}): any | null {
   const tree = useMemo(() => {
     const tree = graphToTree(graph, entrypoint);
     return tree;
@@ -46,9 +45,7 @@ function Node({ node, currentModule }: { node: Dep; currentModule: string }) {
       <p className="overflow-hidden inline">
         {url.startsWith("https://deno.land/")
           ? (
-            <Link href={url.replace("https://deno.land", "")}>
-              <a className="link text-sm truncate">{name}</a>
-            </Link>
+            <a href={url.replace("https://deno.land", "")} className="link text-sm truncate">{name}</a>
           )
           : (
             <a href={url} className="link text-sm truncate">
@@ -66,5 +63,3 @@ function Node({ node, currentModule }: { node: Dep; currentModule: string }) {
     </li>
   );
 }
-
-export default DependencyGraph;

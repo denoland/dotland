@@ -1,25 +1,21 @@
-/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+/* Copyright 2022 the Deno authors. All rights reserved. MIT license. */
 
-import React from "react";
-import Head from "next/head";
-import { useRouter } from "next/router";
-import useSWR from "swr";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import { getBuild } from "../../util/registry_utils";
-import { ErrorMessage } from "../../components/ErrorMessage";
+/** @jsx h */
+/** @jsxFrag Fragment */
+import { h, Fragment, PageConfig, PageProps, useData } from "../deps.ts";
+import { Header } from "../components/Header.tsx";
+import { Footer } from "../components/Footer.tsx";
+import { getBuild } from "../util/registry_utils.ts";
+import { ErrorMessage } from "../components/ErrorMessage.tsx";
 
-function StatusPage(): React.ReactElement {
-  const { query } = useRouter();
-  const id = (query.id as string) ?? "";
-
-  const { data, error } = useSWR(id, getBuild, { refreshInterval: 5 });
+export default function StatusPage({ params }: PageProps) {
+  const data = useData((params.id as string) ?? "", getBuild);
 
   return (
     <>
-      <Head>
+      <head>
         <title>Publish Status | Deno</title>
-      </Head>
+      </head>
       <div className="bg-gray-50 min-h-full">
         <Header />
         <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 mt-8 pb-8 mb-16">
@@ -27,17 +23,15 @@ function StatusPage(): React.ReactElement {
             <h3 className="text-lg leading-6 font-medium text-gray-900">
               Module publishing status
             </h3>
-            <p className="max-w-2xl text-sm leading-5 text-gray-500">
-              deno.land/x{data ? "/" + data.options.moduleName : ""}
-            </p>
+            {!(data instanceof Error) &&
+              <p className="max-w-2xl text-sm leading-5 text-gray-500">
+                deno.land/x{data ? "/" + data.options.moduleName : ""}
+              </p>
+            }
           </div>
-          {error && (
-            <ErrorMessage
-              title="Failed to load build ID"
-              body={error.message}
-            />
-          )}
-          {data && (
+          {(data instanceof Error) ?
+            (<ErrorMessage title="Failed to load build ID" body={data.message} />)
+            : (
             <div className="mt-5 border-t border-gray-200 pt-5">
               <dl>
                 <div className="sm:grid sm:grid-cols-3 sm:gap-4">
@@ -195,4 +189,6 @@ function StatusPage(): React.ReactElement {
   );
 }
 
-export default StatusPage;
+export const config: PageConfig = {
+  routeOverride: "status/:id",
+};

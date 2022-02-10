@@ -1,18 +1,18 @@
-/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+/* Copyright 2022 the Deno authors. All rights reserved. MIT license. */
 
-import React from "react";
-import Head from "next/head";
+/** @jsx h */
+/** @jsxFrag Fragment */
+import { h, Fragment } from "../deps.ts";
+import { Footer } from "../components/Footer.tsx";
+import { Header } from "../components/Header.tsx";
+import { Translation, TRANSLATIONS } from "../util/translations_utils.ts";
 
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import { Translation, TRANSLATIONS } from "../util/translations_utils";
-
-function TranslationsPage(): React.ReactElement {
+export default function TranslationsPage() {
   return (
     <>
-      <Head>
+      <head>
         <title>Translations | Deno</title>
-      </Head>
+      </head>
       <Header />
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 mt-8 mb-24">
         <div className="max-w-screen-lg mx-auto">
@@ -69,5 +69,3 @@ function Item({ language }: { language: Translation }) {
     </div>
   );
 }
-
-export default TranslationsPage;

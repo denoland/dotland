@@ -1,6 +1,7 @@
 /* Copyright 2021 the Deno authors. All rights reserved. MIT license. */
 
-import React from "react";
+/** @jsx h */
+import { h } from "../deps.ts";
 import { renderToStaticMarkup } from "preact/compat/server";
 import dompurify from "dompurify";
 
@@ -11,9 +12,9 @@ import {
   slugify,
   transformImageUri,
   transformLinkUri,
-} from "./Markup";
-import { RawCodeBlock } from "./CodeBlock";
-import { fileTypeFromURL } from "../util/registry_utils";
+} from "./Markup.tsx";
+import { RawCodeBlock } from "./CodeBlock.tsx";
+import { fileTypeFromURL } from "../util/registry_utils.ts";
 
 import {
   Block,
@@ -467,7 +468,7 @@ function orgToHTML(props: MarkupProps, node: Document): string {
   return res.join("");
 }
 
-function Org(props: MarkupProps, testing = false): React.ReactElement | null {
+export function Org(props: MarkupProps, testing = false): React.ReactElement | null {
   if (!testing) {
     scrollEffect();
   }
@@ -484,5 +485,3 @@ function Org(props: MarkupProps, testing = false): React.ReactElement | null {
     return null;
   }
 }
-
-export default Org;

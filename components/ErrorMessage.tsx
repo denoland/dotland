@@ -1,9 +1,10 @@
-import React from "react";
+/** @jsx h */
+import { h } from "../deps.ts";
 
 export function ErrorMessage(props: {
   title: string;
   body: string;
-}): React.ReactElement {
+}) {
   return (
     <div className="rounded-md bg-red-50 border border-red-200 p-4">
       <div className="flex">

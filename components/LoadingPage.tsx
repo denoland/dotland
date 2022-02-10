@@ -1,17 +1,15 @@
-/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+/* Copyright 2022 the Deno authors. All rights reserved. MIT license. */
 
-import React from "react";
-import Head from "next/head";
+/** @jsx h */
+import { h } from "../deps.ts";
 
-function LoadingPage(): React.ReactElement {
+export default function LoadingPage() {
   return (
     <div>
-      <Head>
+      <head>
         <title>Deno</title>
-      </Head>
+      </head>
       <div className="bg-gray-50 min-h-full"></div>
     </div>
   );
 }
-
-export default LoadingPage;
