@@ -36,7 +36,11 @@ export function Header({
               )}
           </div>
         </a>
-        <input type="checkbox" class="hidden checked:siblings:even:hidden" id="menuToggle" />
+        <input
+          type="checkbox"
+          class="hidden checked:siblings:even:hidden"
+          id="menuToggle"
+        />
         <label class="-mr-2 flex items-center lg:hidden" for="menuToggle">
           <div class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
             <svg
@@ -103,12 +107,16 @@ export function Header({
                   >
                     Deploy
                   </a>
-                  <a href="/manual"
-                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
+                  <a
+                    href="/manual"
+                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
+                  >
                     Manual
                   </a>
-                  <a href="https://deno.com/blog"
-                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
+                  <a
+                    href="https://deno.com/blog"
+                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
+                  >
                     Blog
                   </a>
                   <a
@@ -117,12 +125,16 @@ export function Header({
                   >
                     API
                   </a>
-                  <a href="/std"
-                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
+                  <a
+                    href="/std"
+                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
+                  >
                     Standard Library
                   </a>
-                  <a href="/x"
-                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
+                  <a
+                    href="/x"
+                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
+                  >
                     Third Party Modules
                   </a>
                 </div>
@@ -131,13 +143,16 @@ export function Header({
           </div>
         </div>
         <div class="hidden lg:flex md:ml-10 items-end">
-            <a
-              href="https://deno.com/deploy"
-              class={`font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out`}
-            >
-              Deploy
-            </a>
-          <a href="/manual" class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
+          <a
+            href="https://deno.com/deploy"
+            class={`font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out`}
+          >
+            Deploy
+          </a>
+          <a
+            href="/manual"
+            class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+          >
             Manual
           </a>
           <a
@@ -152,10 +167,16 @@ export function Header({
           >
             API
           </a>
-          <a href="/std" class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
+          <a
+            href="/std"
+            class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+          >
             Standard Library
           </a>
-          <a href="/x" class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
+          <a
+            href="/x"
+            class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+          >
             Third Party Modules
           </a>
           <a

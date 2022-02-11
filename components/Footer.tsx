@@ -9,7 +9,10 @@ export function Footer({ simple }: { simple?: boolean }) {
       <div class="max-w-screen-xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
         <nav class="-mx-5 -my-2 flex flex-wrap justify-center">
           <div class="px-2 py-2">
-            <a href="/manual" class="text-base leading-6 text-gray-500 hover:text-gray-900">
+            <a
+              href="/manual"
+              class="text-base leading-6 text-gray-500 hover:text-gray-900"
+            >
               Manual
             </a>
           </div>
@@ -22,22 +25,34 @@ export function Footer({ simple }: { simple?: boolean }) {
             </a>
           </div>
           <div class="px-2 py-2">
-            <a href="/std" class="text-base leading-6 text-gray-500 hover:text-gray-900">
+            <a
+              href="/std"
+              class="text-base leading-6 text-gray-500 hover:text-gray-900"
+            >
               Standard Library
             </a>
           </div>
           <div class="px-2 py-2">
-            <a href="/x" class="text-base leading-6 text-gray-500 hover:text-gray-900">
+            <a
+              href="/x"
+              class="text-base leading-6 text-gray-500 hover:text-gray-900"
+            >
               Third Party Modules
             </a>
           </div>
           <div class="px-2 py-2">
-            <a href="/benchmarks" class="text-base leading-6 text-gray-500 hover:text-gray-900">
+            <a
+              href="/benchmarks"
+              class="text-base leading-6 text-gray-500 hover:text-gray-900"
+            >
               Benchmarks
             </a>
           </div>
           <div class="px-2 py-2">
-            <a href="/artwork" class="text-base leading-6 text-gray-500 hover:text-gray-900">
+            <a
+              href="/artwork"
+              class="text-base leading-6 text-gray-500 hover:text-gray-900"
+            >
               Artwork
             </a>
           </div>
@@ -50,7 +65,10 @@ export function Footer({ simple }: { simple?: boolean }) {
             </a>
           </div>
           <div class="px-2 py-2">
-            <a href="/translations" class="text-base leading-6 text-gray-500 hover:text-gray-900">
+            <a
+              href="/translations"
+              class="text-base leading-6 text-gray-500 hover:text-gray-900"
+            >
               Translations
             </a>
           </div>
