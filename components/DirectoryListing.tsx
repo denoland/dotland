@@ -2,7 +2,14 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { h, Fragment, createRef, useEffect, useMemo, useState } from "../deps.ts";
+import {
+  createRef,
+  Fragment,
+  h,
+  useEffect,
+  useMemo,
+  useState,
+} from "../deps.ts";
 import {
   DirListing,
   Entry,
@@ -273,13 +280,19 @@ function TableRow({
       <td className="whitespace-no-wrap text-sm text-blue-500 leading-5">
         <a href={href} className="pl-2 py-1 w-full block truncate">
           {entry.path && <span className="font-light">{entry.path}/</span>}
-          <span className={isReadme(entry.name) || entry.path ? "font-medium" : ""}>
-              {entry.name}
-            </span>
+          <span
+            className={isReadme(entry.name) || entry.path ? "font-medium" : ""}
+          >
+            {entry.name}
+          </span>
         </a>
       </td>
       <td className="whitespace-no-wrap text-sm leading-5 text-gray-500 text-right">
-        <a href={href} className="px-4 py-1 pl-1 w-full h-full block" tabIndex={-1}>
+        <a
+          href={href}
+          className="px-4 py-1 pl-1 w-full h-full block"
+          tabIndex={-1}
+        >
           {entry.size ? bytesToSize(entry.size) : <>&nbsp;</>}
         </a>
       </td>

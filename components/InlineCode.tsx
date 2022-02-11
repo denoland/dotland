@@ -1,9 +1,9 @@
 /* Copyright 2022 the Deno authors. All rights reserved. MIT license. */
 
 /** @jsx h */
-import { h } from "../deps.ts";
+import { ComponentChildren, h } from "../deps.ts";
 
-export function InlineCode(props: { children: React.ReactNode }) { // TODO
+export function InlineCode(props: { children: ComponentChildren }) {
   return (
     <code className="py-1 px-2 font-mono bg-gray-100 text-sm break-all">
       {props.children}

@@ -1,7 +1,7 @@
 [
   {
     "date": "2020-12-02",
-    "image": "/images/discodeno.gif",
+    "image": "/images/artwork/discodeno.gif",
     "title": "Disco Deno",
     "alt": "Disco Deno",
     "artist": {
@@ -13,7 +13,7 @@
   },
   {
     "date": "2020-10-11",
-    "image": "/images/deno_sun.png",
+    "image": "/images/artwork/deno_sun.png",
     "title": "Deno Sun",
     "alt": "Deno Sun",
     "artist": {
@@ -25,7 +25,7 @@
   },
   {
     "date": "2020-06-21",
-    "image": "/images/deno_matrix.png",
+    "image": "/images/artwork/deno_matrix.png",
     "title": "Deno Matrix",
     "alt": "a deno logo with The Matrix theme",
     "artist": {
@@ -51,7 +51,7 @@
   },
   {
     "date": "2020-05-14",
-    "image": "/images/deno_v1_congrats.jpeg",
+    "image": "/images/artwork/deno_v1_congrats.jpeg",
     "title": "Congrats on Deno 1.0",
     "alt": "a drawing with two large deno mascots in the front and smaller ones behind, standing on brown ground in front of a blue sky. above them text reads: deno 1.0 congrats!",
     "artist": {
@@ -79,7 +79,7 @@
   },
   {
     "date": "2020-06-01",
-    "image": "/images/hashrock_simple.png",
+    "image": "/images/artwork/hashrock_simple.png",
     "title": "Colorful Deno logo",
     "alt": "light blue, light green simple logo",
     "artist": {
@@ -93,7 +93,7 @@
   },
   {
     "date": "2020-05-14",
-    "image": "/images/deno_city.jpeg",
+    "image": "/images/artwork/deno_city.jpeg",
     "title": "Deno in the City",
     "alt": "the deno mascot standing between a some tall lit up buildings at night",
     "artist": {
@@ -107,7 +107,7 @@
   },
   {
     "date": "2018-11-01",
-    "image": "/images/deno_logo.png",
+    "image": "/images/artwork/deno_logo.png",
     "title": "The Original",
     "alt": "a hand drawn deno logo",
     "artist": {
@@ -133,7 +133,7 @@
   },
   {
     "date": "2020-03-23",
-    "image": "/images/duri4n.png",
+    "image": "/images/artwork/duri4n.png",
     "title": "Tattoo design",
     "alt": "a deno logo as a tattoo design",
     "artist": {
@@ -144,7 +144,7 @@
   },
   {
     "date": "2020-06-16",
-    "image": "/images/stone.jpeg",
+    "image": "/images/artwork/stone.jpeg",
     "title": "Stone Deno",
     "alt": "the classic deno logo, hand painted onto a circular gray rock",
     "artist": {
@@ -156,7 +156,7 @@
   },
   {
     "date": "2020-06-17",
-    "image": "/images/DenoLogo3D-Anim.gif",
+    "image": "/images/artwork/DenoLogo3D-Anim.gif",
     "title": "Deno Logo in 3D",
     "alt": "a animated, green 3d deno mascot standing in the rain",
     "link": "https://github.com/MasterJames/high-res-deno-logo",
@@ -182,7 +182,7 @@
   },
   {
     "date": "2020-06-23",
-    "image": "/images/glitchy-deno.jpg",
+    "image": "/images/artwork/glitchy-deno.jpg",
     "title": "Glitchy Deno",
     "alt": "Deno logo glitching while trying to access Multi-verse",
     "link": "https://twitter.com/SamipPoudel3",
@@ -197,7 +197,7 @@
   },
   {
     "date": "2020-06-28",
-    "image": "/images/deno_paper.png",
+    "image": "/images/artwork/deno_paper.png",
     "title": "Paper Deno",
     "alt": "a Deno logo made out of paper",
     "artist": {
@@ -210,7 +210,7 @@
   },
   {
     "date": "2020-10-02",
-    "image": "/images/jurassicDeno.jpg",
+    "image": "/images/artwork/jurassicDeno.jpg",
     "title": "Jurassic Deno",
     "alt": "jurassic park themed deno logo in red, yellow, and black",
     "artist": {
@@ -224,7 +224,7 @@
   },
   {
     "date": "2021-01-06",
-    "image": "/images/deno_rick.png",
+    "image": "/images/artwork/deno_rick.png",
     "title": "Rick Deno",
     "alt": "deno in the eyes of Rick from Rick&Morty",
     "artist": {
@@ -236,7 +236,7 @@
   },
   {
     "date": "2021-06-08",
-    "image": "/images/Deno_Web_Sockets.svg",
+    "image": "/images/artwork/Deno_Web_Sockets.svg",
     "title": "Deno Web Sock(pupp)ets",
     "alt": "A silly logo for Web Socket purposes",
     "artist": {
@@ -249,7 +249,7 @@
   },
   {
     "date": "2021-10-04",
-    "image": "/images/space_deno.png",
+    "image": "/images/artwork/space_deno.png",
     "title": "Space Deno",
     "alt": "Space Deno",
     "artist": {
@@ -261,7 +261,7 @@
   },
   {
     "date": "2021-12-23",
-    "image": "/images/pride_deno.gif",
+    "image": "/images/artwork/pride_deno.gif",
     "title": "Pride Deno",
     "alt": "A GIF of the Deno seen on the Documentation Page except it cycles through LGBTQ+ Flags.",
     "artist": {
@@ -273,7 +273,7 @@
   },
   {
     "date": "2022-01-09",
-    "image": "/images/deno_simpson.png",
+    "image": "/images/artwork/deno_simpson.png",
     "title": "Deno Simpson",
     "alt": "Deno Simpson",
     "artist": {

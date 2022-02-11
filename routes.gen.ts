@@ -2,29 +2,23 @@
 // This file SHOULD be checked into source version control.
 // To update this file, run `fresh routes`.
 
-import * as $0 from "./pages/index.tsx";
-import * as $1 from "./pages/std.tsx";
-import * as $2 from "./pages/benchmarks.tsx";
-import * as $3 from "./pages/manual.tsx";
-import * as $4 from "./pages/translations.tsx";
-import * as $5 from "./pages/status.tsx";
-import * as $6 from "./pages/_app.tsx";
-import * as $7 from "./pages/x/index.tsx";
-import * as $8 from "./pages/x/[...rest].tsx";
-import * as $9 from "./pages/artwork.tsx";
+import * as $2 from "./pages/_render.ts";
+import * as $5 from "./pages/translations.tsx";
+import * as $10 from "./pages/artwork.tsx";
 
 const routes = {
   pages: {
-    "./pages/index.tsx": $0,
-    "./pages/std.tsx": $1,
-    "./pages/benchmarks.tsx": $2,
-    "./pages/manual.tsx": $3,
-    "./pages/translations.tsx": $4,
-    "./pages/status.tsx": $5,
-    "./pages/_app.tsx": $6,
-    "./pages/x/index.tsx": $7,
-    "./pages/x/[...rest].tsx": $8,
-    "./pages/artwork.tsx": $9,
+    //"./pages/index.tsx": $0,
+    //"./pages/std.tsx": $1,
+    "./pages/_render.ts": $2,
+    //"./pages/benchmarks.tsx": $3,
+    //"./pages/manual.tsx": $4,
+    "./pages/translations.tsx": $5,
+    //"./pages/status.tsx": $6,
+    //"./pages/_app.tsx": $7,
+    //"./pages/x/index.tsx": $8,
+    //"./pages/x/[...rest].tsx": $9,
+    "./pages/artwork.tsx": $10,
   },
   baseUrl: import.meta.url,
 };

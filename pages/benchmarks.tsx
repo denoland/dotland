@@ -1,7 +1,7 @@
 /* Copyright 2022 the Deno authors. All rights reserved. MIT license. */
 
 /** @jsx h */
-import { h, useState, useEffect } from "../deps.ts";
+import { h, useEffect, useState } from "../deps.ts";
 import { Header } from "../components/Header.tsx";
 import { Footer } from "../components/Footer.tsx";
 import {
@@ -14,7 +14,10 @@ import {
   formatReqSec,
   reshape,
 } from "../util/benchmark_utils.ts";
-import { BenchmarkChart, BenchmarkLoading } from "../components/BenchmarkChart.tsx";
+import {
+  BenchmarkChart,
+  BenchmarkLoading,
+} from "../components/BenchmarkChart.tsx";
 
 // TODO(lucacasonato): add anchor points to headers
 export default function Benchmarks() {
@@ -62,7 +65,7 @@ export default function Benchmarks() {
   const [dataRangeTitle, setDataRangeTitle] = useState<string>("");
   const [showNormalized, setShowNormalized] = useState(false);
 
-  useData()
+  useData();
 
   useEffect(() => {
     setData(null);
@@ -384,7 +387,7 @@ export default function Benchmarks() {
                 <BenchmarkOrLoading
                   data={data}
                   columns={showNormalized ? data?.normalizedMaxLatency
-                    : data?.maxLatency}
+                  : data?.maxLatency}
                   yLabel={"milliseconds"}
                   yTickFormat={formatMsec}
                 />

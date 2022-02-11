@@ -1,7 +1,7 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
 /** @jsx h */
-import { h, useEffect, useState, useLayoutEffect } from "../deps.ts";
+import { h, useEffect, useLayoutEffect, useState } from "../deps.ts";
 import Highlight, { Prism } from "prism-react-renderer";
 import light from "prism-react-renderer/themes/github";
 

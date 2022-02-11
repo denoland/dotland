@@ -3,13 +3,13 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import {
-  h,
   Fragment,
+  h,
   PageProps,
   since,
   useEffect,
   useMemo,
-  useState
+  useState,
 } from "../../deps.ts";
 import {
   denoDocAvailableForURL,
@@ -42,15 +42,18 @@ export default function Registry({ params, url }: PageProps) {
   const [versions, setVersions] = useState<VersionInfo | null | undefined>();
   const [versionMeta, setVersionMeta] = useState<
     VersionMetaInfo | null | undefined
-    >();
+  >();
   const [moduleMeta, setModuleMeta] = useState<Module | null | undefined>();
   const [versionDeps, setVersionDeps] = useState<
     VersionDeps | null | undefined
-    >();
+  >();
   const [raw, setRaw] = useState<string | null | undefined>();
   const [readme, setReadme] = useState<string | null | undefined>();
 
-  const { name, version, path } = useMemo(() => parseQuery(params.rest as string[]), [params]);
+  const { name, version, path } = useMemo(
+    () => parseQuery(params.rest as string[]),
+    [params],
+  );
   const isStd = name === "std";
   const stdVersion = isStd ? version || versions?.latest : undefined;
   function gotoVersion(newVersion: string, doReplace?: boolean) {
@@ -225,8 +228,8 @@ export default function Registry({ params, url }: PageProps) {
         sourceURL &&
         versionMeta &&
         versionMeta.directoryListing.filter(
-          (d) => d.path === path && d.type == "file",
-        ).length !== 0
+            (d) => d.path === path && d.type == "file",
+          ).length !== 0
       ) {
         fetch(sourceURL, { method: "GET" })
           .then((resp) => {
@@ -283,8 +286,8 @@ export default function Registry({ params, url }: PageProps) {
     const externalDependencies = versionDeps === undefined
       ? undefined
       : versionDeps === null
-        ? null
-        : listExternalDependencies(versionDeps.graph, dependencyEntrypoint);
+      ? null
+      : listExternalDependencies(versionDeps.graph, dependencyEntrypoint);
     return { dependencyEntrypoint, externalDependencies };
   }, [versionDeps, name, version, path]);
 
@@ -351,8 +354,8 @@ export default function Registry({ params, url }: PageProps) {
                       } else if (
                         versionMeta &&
                         versionMeta.directoryListing.filter(
-                          (d) => d.path === path,
-                        ).length === 0
+                            (d) => d.path === path,
+                          ).length === 0
                       ) {
                         return (
                           <ErrorMessage
@@ -436,8 +439,8 @@ export default function Registry({ params, url }: PageProps) {
                               )
                               : null}
                             {typeof readme === "string" &&
-                            typeof readmeURL === "string" &&
-                            typeof readmeCanonicalPath === "string"
+                                typeof readmeURL === "string" &&
+                                typeof readmeCanonicalPath === "string"
                               ? (
                                 <FileDisplay
                                   raw={readme}
@@ -460,7 +463,7 @@ export default function Registry({ params, url }: PageProps) {
                       <div className="bg-gray-50 p-4">
                         <div className="text-xl font-bold">{name}</div>
                         {versionMeta === undefined ||
-                        moduleMeta === undefined
+                            moduleMeta === undefined
                           ? (
                             <>
                               <div className="w-4/5 sm:w-full bg-gray-100 h-3 my-2">
@@ -503,53 +506,53 @@ export default function Registry({ params, url }: PageProps) {
                             </>
                           )
                           : versionMeta === null ||
-                          moduleMeta === null
-                            ? null
-                            : (
-                              <>
-                                <div className="text-sm">
-                                  {replaceEmojis(moduleMeta.description ?? "")}
+                              moduleMeta === null
+                          ? null
+                          : (
+                            <>
+                              <div className="text-sm">
+                                {replaceEmojis(moduleMeta.description ?? "")}
+                              </div>
+                              <div className="mt-3 flex items-center">
+                                <svg
+                                  className="h-5 w-5 mr-2 inline text-gray-700"
+                                  fill="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <title>
+                                    GitHub Repository
+                                  </title>
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                    clipRule="evenodd"
+                                  />
+                                </svg>
+                                <a
+                                  className="link"
+                                  href={`https://github.com/${versionMeta.uploadOptions.repository}`}
+                                >
+                                  {versionMeta.uploadOptions.repository}
+                                </a>
+                              </div>
+                              <div className="mt-2 flex items-center">
+                                <svg
+                                  className="h-5 w-5 mr-2 inline text-gray-700"
+                                  fill="currentColor"
+                                  viewBox="0 0 20 20"
+                                >
+                                  <title>
+                                    GitHub Stars
+                                  </title>
+                                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                  </path>
+                                </svg>
+                                <div>
+                                  {moduleMeta.star_count}
                                 </div>
-                                <div className="mt-3 flex items-center">
-                                  <svg
-                                    className="h-5 w-5 mr-2 inline text-gray-700"
-                                    fill="currentColor"
-                                    viewBox="0 0 24 24"
-                                  >
-                                    <title>
-                                      GitHub Repository
-                                    </title>
-                                    <path
-                                      fillRule="evenodd"
-                                      d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                                      clipRule="evenodd"
-                                    />
-                                  </svg>
-                                  <a
-                                    className="link"
-                                    href={`https://github.com/${versionMeta.uploadOptions.repository}`}
-                                  >
-                                    {versionMeta.uploadOptions.repository}
-                                  </a>
-                                </div>
-                                <div className="mt-2 flex items-center">
-                                  <svg
-                                    className="h-5 w-5 mr-2 inline text-gray-700"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                  >
-                                    <title>
-                                      GitHub Stars
-                                    </title>
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                    </path>
-                                  </svg>
-                                  <div>
-                                    {moduleMeta.star_count}
-                                  </div>
-                                </div>
-                              </>
-                            )}
+                              </div>
+                            </>
+                          )}
                         <div className="mt-3 w-full">
                           <VersionSelector
                             versions={versions?.versions}
@@ -584,30 +587,30 @@ export default function Registry({ params, url }: PageProps) {
                           </div>
                         )
                         : versionMeta === null
-                          ? null
-                          : (
-                            <div className="mt-2 flex text-sm items-center">
-                              <svg
-                                className="h-5 w-5 mr-2 inline text-gray-700"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                              >
-                                <title>
-                                  Tagged at
-                                </title>
-                                <path
-                                  fillRule="evenodd"
-                                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                  clipRule="evenodd"
-                                />
-                              </svg>
-                              <div
-                                title={versionMeta.uploadedAt.toLocaleString()}
-                              >
-                                {since(versionMeta.uploadedAt.getTime())}
-                              </div>
+                        ? null
+                        : (
+                          <div className="mt-2 flex text-sm items-center">
+                            <svg
+                              className="h-5 w-5 mr-2 inline text-gray-700"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              <title>
+                                Tagged at
+                              </title>
+                              <path
+                                fillRule="evenodd"
+                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                            <div
+                              title={versionMeta.uploadedAt.toLocaleString()}
+                            >
+                              {since(versionMeta.uploadedAt.getTime())}
                             </div>
-                          )}
+                          </div>
+                        )}
                     </div>
                     {documentationURL && externalDependencies !== null
                       ? (
@@ -627,48 +630,48 @@ export default function Registry({ params, url }: PageProps) {
                               </>
                             )
                             : externalDependencies === null
-                              ? null
-                              : (
-                                <>
-                                  <div className="mt-2 overflow-x-auto">
-                                    {externalDependencies.map((
-                                      url,
-                                    ) => (
-                                      <p key={url}>
-                                        {url.startsWith("https://deno.land/")
-                                          ? (
-                                            <Link
-                                              href={url.replace(
-                                                "https://deno.land",
-                                                "",
-                                              )}
-                                            >
-                                              <a className="link text-sm truncate">
-                                                {url}
-                                              </a>
-                                            </Link>
-                                          )
-                                          : (
-                                            <a
-                                              href={url}
-                                              className="link text-sm truncate"
-                                            >
+                            ? null
+                            : (
+                              <>
+                                <div className="mt-2 overflow-x-auto">
+                                  {externalDependencies.map((
+                                    url,
+                                  ) => (
+                                    <p key={url}>
+                                      {url.startsWith("https://deno.land/")
+                                        ? (
+                                          <Link
+                                            href={url.replace(
+                                              "https://deno.land",
+                                              "",
+                                            )}
+                                          >
+                                            <a className="link text-sm truncate">
                                               {url}
                                             </a>
-                                          )}
-                                      </p>
-                                    ))}
-                                  </div>
-                                  <div className="text-sm mt-2 italic">
-                                    {externalDependencies.length === 0
-                                      ? "No external dependencies 🎉"
-                                      : externalDependencies.length +
+                                          </Link>
+                                        )
+                                        : (
+                                          <a
+                                            href={url}
+                                            className="link text-sm truncate"
+                                          >
+                                            {url}
+                                          </a>
+                                        )}
+                                    </p>
+                                  ))}
+                                </div>
+                                <div className="text-sm mt-2 italic">
+                                  {externalDependencies.length === 0
+                                    ? "No external dependencies 🎉"
+                                    : externalDependencies.length +
                                       (externalDependencies.length === 1
                                         ? " external dependency"
                                         : " external dependencies")}
-                                  </div>
-                                </>
-                              )}
+                                </div>
+                              </>
+                            )}
                         </div>
                       )
                       : null}
@@ -702,13 +705,13 @@ function Breadcrumbs({
         <a className="link">deno.land</a>
       </Link>{" "}
       / {!isStd && (
-      <>
-        <Link href="/x">
-          <a className="link">x</a>
-        </Link>{" "}
-        /{" "}
-      </>
-    )}
+        <>
+          <Link href="/x">
+            <a className="link">x</a>
+          </Link>{" "}
+          /{" "}
+        </>
+      )}
       <Link href={getBasePath({ isStd, name, version })}>
         <a className="link">
           {name}

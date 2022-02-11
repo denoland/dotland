@@ -115,7 +115,7 @@ export function FileDisplay(props: {
             const Markup =
               // most projects won't be using Org files, so we load
               // this component lazily to save space
-              filetype === "org" ? dynamic(() => import("./Org.tsx")) : Markdown;
+              filetype = Markdown;
             return (
               <div className="px-4">
                 <Markup

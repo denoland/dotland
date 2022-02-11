@@ -2,7 +2,7 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { h, Fragment } from "../deps.ts";
+import { Fragment, h } from "../deps.ts";
 
 export default function App({ Component }) {
   return (
@@ -47,5 +47,4 @@ export default function App({ Component }) {
       <Component />
     </div>
   );
-
 }

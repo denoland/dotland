@@ -45,7 +45,12 @@ function Node({ node, currentModule }: { node: Dep; currentModule: string }) {
       <p className="overflow-hidden inline">
         {url.startsWith("https://deno.land/")
           ? (
-            <a href={url.replace("https://deno.land", "")} className="link text-sm truncate">{name}</a>
+            <a
+              href={url.replace("https://deno.land", "")}
+              className="link text-sm truncate"
+            >
+              {name}
+            </a>
           )
           : (
             <a href={url} className="link text-sm truncate">

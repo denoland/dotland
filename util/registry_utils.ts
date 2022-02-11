@@ -204,7 +204,10 @@ export async function listModules(
     );
   }
 
-  return { totalCount: (query ? limit : data.data.total_count), results: data.data.results };
+  return {
+    totalCount: (query ? limit : data.data.total_count),
+    results: data.data.results,
+  };
 }
 
 export async function getModule(name: string): Promise<Module | null> {

@@ -3,15 +3,15 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import {
-  h,
   Fragment,
+  h,
+  PageConfig,
+  PageProps,
   useCallback,
   useEffect,
   useMemo,
   useRef,
   useState,
-  PageProps,
-  PageConfig,
 } from "../deps.ts";
 import versionMeta from "../versions.json" assert { type: "json" };
 import { parseNameVersion } from "../util/registry_utils.ts";
@@ -38,9 +38,7 @@ function Hit({
   hit: { url: string };
   children: React.ReactElement;
 }) {
-  return (
-    <a href={hit.url} className="link">{children}</a>
-  );
+  return <a href={hit.url} className="link">{children}</a>;
 }
 
 export default function Manual({ params }: PageProps) {
@@ -114,7 +112,7 @@ export default function Manual({ params }: PageProps) {
   const [pageIndex, setPageIndex] = useState(0);
   const [pageList, setPageList] = useState<
     Array<{ path: string; name: string }>
-    >([]);
+  >([]);
 
   useEffect(() => {
     if (tableOfContents) {
@@ -226,7 +224,7 @@ export default function Manual({ params }: PageProps) {
   const stdVersion = version === undefined
     ? versionMeta.std[0]
     : ((versionMeta.cli_to_std as any)[version ?? ""] as string) ??
-    versionMeta.std[0];
+      versionMeta.std[0];
 
   const isPreview = isPreviewVersion(version);
 
@@ -328,7 +326,10 @@ export default function Manual({ params }: PageProps) {
                     </button>
                   </div>
                   <div className="bg-gray-100 pb-4 pt-4 border-b border-gray-200">
-                    <a href="/" className="flex items-center flex-shrink-0 px-4">
+                    <a
+                      href="/"
+                      className="flex items-center flex-shrink-0 px-4"
+                    >
                       <img
                         src="/logo.svg"
                         alt="logo"
@@ -390,7 +391,10 @@ export default function Manual({ params }: PageProps) {
         </div>
         <div className="flex flex-col w-0 flex-1 overflow-hidden">
           <div className="z-10 flex-shrink-0 flex h-16 bg-white shadow md:hidden">
-            <a href="/" className="px-4 flex items-center justify-center md:hidden">
+            <a
+              href="/"
+              className="px-4 flex items-center justify-center md:hidden"
+            >
               <img src="/logo.svg" alt="logo" className="w-auto h-10" />
             </a>
             <div className="border-l border-r border-gray-200 flex-1 px-4 flex justify-between">
@@ -528,15 +532,28 @@ export default function Manual({ params }: PageProps) {
                     />
                     <div className="mt-4 pt-4 border-t border-gray-200">
                       {pageList[pageIndex - 1] !== undefined && (
-                        <a href={version ? pageList[pageIndex - 1].path.replace("manual", `manual@${version}`)
-                          : pageList[pageIndex - 1].path} className="text-gray-900 hover:text-gray-600 font-normal">
+                        <a
+                          href={version
+                            ? pageList[pageIndex - 1].path.replace(
+                              "manual",
+                              `manual@${version}`,
+                            )
+                            : pageList[pageIndex - 1].path}
+                          className="text-gray-900 hover:text-gray-600 font-normal"
+                        >
                           ← {pageList[pageIndex - 1].name}
                         </a>
                       )}
                       {pageList[pageIndex + 1] !== undefined && (
-                        <a href={version ? pageList[pageIndex + 1].path.replace("manual", `manual@${version}`)
-                          : pageList[pageIndex + 1].path}
-                          className="text-gray-900 hover:text-gray-600 font-normal float-right">
+                        <a
+                          href={version
+                            ? pageList[pageIndex + 1].path.replace(
+                              "manual",
+                              `manual@${version}`,
+                            )
+                            : pageList[pageIndex + 1].path}
+                          className="text-gray-900 hover:text-gray-600 font-normal float-right"
+                        >
                           {pageList[pageIndex + 1].name} →
                         </a>
                       )}
@@ -715,5 +732,5 @@ function ToC({
 }
 
 export const config: PageConfig = {
-  routeOverride: "manual{@:ver}?/*"
+  routeOverride: "manual{@:ver}?/*",
 };

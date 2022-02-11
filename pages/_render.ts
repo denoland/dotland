@@ -8,10 +8,27 @@ sheet.reset();
 const { tw } = create({
   sheet,
   theme: {
+    fontFamily: {
+      mono: [
+        "Menlo",
+        "Monaco",
+        '"Lucida Console"',
+        "Consolas",
+        '"Liberation Mono"',
+        '"Courier New"',
+        "monospace",
+      ],
+    },
     extend: {
       lineHeight: {
-        "0": "0",
-      }
+        0: "0",
+      },
+      /*fontFamily: {
+        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+      },*/
+      width: {
+        72: "18rem",
+      },
     }
   }
 });
