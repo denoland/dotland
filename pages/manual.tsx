@@ -25,7 +25,6 @@ import {
   versions,
 } from "../util/manual_utils.ts";
 import { Markdown } from "../components/Markdown.tsx";
-import { Transition } from "../components/Transition.tsx";
 import { InlineCode } from "../components/InlineCode.tsx";
 import { createPortal } from "react-dom";
 // @ts-expect-error because @docsearch/react does not have types
@@ -38,7 +37,7 @@ function Hit({
   hit: { url: string };
   children: React.ReactElement;
 }) {
-  return <a href={hit.url} className="link">{children}</a>;
+  return <a href={hit.url} class="link">{children}</a>;
 }
 
 export default function Manual({ params }: PageProps) {
@@ -84,7 +83,7 @@ export default function Manual({ params }: PageProps) {
   }, []);
 
   const scrollTOCIntoView = () =>
-    document.getElementsByClassName("toc-active")[0]?.scrollIntoView();
+    document.getElementsByclass("toc-active")[0]?.scrollIntoView();
 
   useEffect(() => {
     if (showSidebar) {
@@ -274,102 +273,82 @@ export default function Manual({ params }: PageProps) {
           document.body,
         )}
 
-      <div className="h-screen flex overflow-hidden">
-        <Transition show={showSidebar}>
-          <div className="md:hidden">
-            <div className="fixed inset-0 flex z-40">
-              <Transition
-                enter="transition-opacity ease-linear duration-300"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-                leave="transition-opacity ease-linear duration-300"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
+      <div class="h-screen flex overflow-hidden">
+        <div class="md:hidden">
+          <div class="fixed inset-0 flex z-40">
+            <div class="fixed inset-0">
+              <div
+                class="absolute inset-0 bg-gray-600 opacity-75"
+                onClick={hideSidebar}
               >
-                <div className="fixed inset-0">
-                  <div
-                    className="absolute inset-0 bg-gray-600 opacity-75"
-                    onClick={hideSidebar}
-                  >
-                  </div>
-                </div>
-              </Transition>
-              <Transition
-                enter="transition ease-in-out duration-300 transform"
-                enterFrom="-translate-x-full"
-                enterTo="translate-x-0"
-                leave="transition ease-in-out duration-300 transform"
-                leaveFrom="translate-x-0"
-                leaveTo="-translate-x-full"
-              >
-                <div className="relative flex-1 flex flex-col max-w-xs w-full bg-white">
-                  <div className="absolute top-0 right-0 -mr-14 p-1">
-                    <button
-                      role="button"
-                      className="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600"
-                      aria-label="Close sidebar"
-                      onClick={hideSidebar}
-                    >
-                      <svg
-                        className="h-6 w-6 text-white"
-                        stroke="currentColor"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                  <div className="bg-gray-100 pb-4 pt-4 border-b border-gray-200">
-                    <a
-                      href="/"
-                      className="flex items-center flex-shrink-0 px-4"
-                    >
-                      <img
-                        src="/logo.svg"
-                        alt="logo"
-                        className="w-auto h-12"
-                      />
-                      <div className="mx-4 flex flex-col justify-center">
-                        <div className="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
-                          Deno Manual
-                        </div>
-                      </div>
-                    </a>
-                    <Version
-                      version={version}
-                      versions={versions}
-                      gotoVersion={gotoVersion}
-                    />
-                  </div>
-                  {tableOfContents && (
-                    <ToC
-                      tableOfContents={tableOfContents}
-                      version={version}
-                      path={path}
-                    />
-                  )}
-                </div>
-              </Transition>
-              <div className="flex-shrink-0 w-14">
-                {/*<!-- Dummy element to force sidebar to shrink to fit close icon -->*/}
               </div>
             </div>
+            <div class="relative flex-1 flex flex-col max-w-xs w-full bg-white">
+              <div class="absolute top-0 right-0 -mr-14 p-1">
+                <button
+                  role="button"
+                  class="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600"
+                  aria-label="Close sidebar"
+                  onClick={hideSidebar}
+                >
+                  <svg
+                    class="h-6 w-6 text-white"
+                    stroke="currentColor"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div class="bg-gray-100 pb-4 pt-4 border-b border-gray-200">
+                <a
+                  href="/"
+                  class="flex items-center flex-shrink-0 px-4"
+                >
+                  <img
+                    src="/logo.svg"
+                    alt="logo"
+                    class="w-auto h-12"
+                  />
+                  <div class="mx-4 flex flex-col justify-center">
+                    <div class="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
+                      Deno Manual
+                    </div>
+                  </div>
+                </a>
+                <Version
+                  version={version}
+                  versions={versions}
+                  gotoVersion={gotoVersion}
+                />
+              </div>
+              {tableOfContents && (
+                <ToC
+                  tableOfContents={tableOfContents}
+                  version={version}
+                  path={path}
+                />
+              )}
+            </div>
+            <div class="flex-shrink-0 w-14">
+              {/*<!-- Dummy element to force sidebar to shrink to fit close icon -->*/}
+            </div>
           </div>
-        </Transition>
+        </div>
 
-        <div className="hidden md:flex md:flex-shrink-0">
-          <div className="flex flex-col w-72 border-r border-gray-200 bg-gray-50">
-            <div className="bg-gray-100 pb-4 pt-4 border-b border-gray-200">
-              <a href="/" className="flex items-center flex-shrink-0 px-4">
-                <img src="/logo.svg" alt="logo" className="w-auto h-12" />
-                <div className="mx-4 flex flex-col justify-center">
-                  <div className="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
+        <div class="hidden md:flex md:flex-shrink-0">
+          <div class="flex flex-col w-72 border-r border-gray-200 bg-gray-50">
+            <div class="bg-gray-100 pb-4 pt-4 border-b border-gray-200">
+              <a href="/" class="flex items-center flex-shrink-0 px-4">
+                <img src="/logo.svg" alt="logo" class="w-auto h-12" />
+                <div class="mx-4 flex flex-col justify-center">
+                  <div class="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
                     Deno Manual
                   </div>
                 </div>
@@ -389,27 +368,27 @@ export default function Manual({ params }: PageProps) {
             )}
           </div>
         </div>
-        <div className="flex flex-col w-0 flex-1 overflow-hidden">
-          <div className="z-10 flex-shrink-0 flex h-16 bg-white shadow md:hidden">
+        <div class="flex flex-col w-0 flex-1 overflow-hidden">
+          <div class="z-10 flex-shrink-0 flex h-16 bg-white shadow md:hidden">
             <a
               href="/"
-              className="px-4 flex items-center justify-center md:hidden"
+              class="px-4 flex items-center justify-center md:hidden"
             >
-              <img src="/logo.svg" alt="logo" className="w-auto h-10" />
+              <img src="/logo.svg" alt="logo" class="w-auto h-10" />
             </a>
-            <div className="border-l border-r border-gray-200 flex-1 px-4 flex justify-between">
-              <div className="flex-1 flex">
-                <div className="w-full flex justify-between h-full">
-                  <label htmlFor="search_field" className="sr-only">
+            <div class="border-l border-r border-gray-200 flex-1 px-4 flex justify-between">
+              <div class="flex-1 flex">
+                <div class="w-full flex justify-between h-full">
+                  <label htmlFor="search_field" class="sr-only">
                     Search
                   </label>
                   <button
-                    className="w-full text-gray-400 focus-within:text-gray-600 flex items-center"
+                    class="w-full text-gray-400 focus-within:text-gray-600 flex items-center"
                     onClick={onOpen}
                   >
-                    <div className="flex items-center pointer-events-none">
+                    <div class="flex items-center pointer-events-none">
                       <svg
-                        className="h-5 w-5"
+                        class="h-5 w-5"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
@@ -420,9 +399,9 @@ export default function Manual({ params }: PageProps) {
                         />
                       </svg>
                     </div>
-                    <div className="pl-6">
-                      <span className="inline sm:hidden">Search docs</span>
-                      <span className="hidden sm:inline">
+                    <div class="pl-6">
+                      <span class="inline sm:hidden">Search docs</span>
+                      <span class="hidden sm:inline">
                         Search the docs (press <InlineCode>/</InlineCode>{" "}
                         to focus)
                       </span>
@@ -432,12 +411,12 @@ export default function Manual({ params }: PageProps) {
               </div>
             </div>
             <button
-              className="px-4 text-gray-500 focus:outline-none focus:bg-gray-100 focus:text-gray-600 md:hidden"
+              class="px-4 text-gray-500 focus:outline-none focus:bg-gray-100 focus:text-gray-600 md:hidden"
               aria-label="Open sidebar"
               onClick={() => setShowSidebar(true)}
             >
               <svg
-                className="h-6 w-6"
+                class="h-6 w-6"
                 stroke="currentColor"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -453,23 +432,23 @@ export default function Manual({ params }: PageProps) {
           </div>
 
           <main
-            className="flex-1 relative z-0 overflow-y-auto focus:outline-none"
+            class="flex-1 relative z-0 overflow-y-auto focus:outline-none"
             tabIndex={0}
             ref={manualEl}
           >
-            <div className="h-16 bg-white shadow hidden md:block">
-              <div className="max-w-screen-md mx-auto px-12 w-full flex justify-between h-full">
-                <label htmlFor="search_field" className="sr-only">
+            <div class="h-16 bg-white shadow hidden md:block">
+              <div class="max-w-screen-md mx-auto px-12 w-full flex justify-between h-full">
+                <label htmlFor="search_field" class="sr-only">
                   Search
                 </label>
                 <button
-                  className="w-full text-gray-400 focus-within:text-gray-600 flex items-center"
+                  class="w-full text-gray-400 focus-within:text-gray-600 flex items-center"
                   onClick={onOpen}
                   ref={searchButtonRef as any}
                 >
-                  <div className="flex items-center pointer-events-none">
+                  <div class="flex items-center pointer-events-none">
                     <svg
-                      className="h-5 w-5"
+                      class="h-5 w-5"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -480,7 +459,7 @@ export default function Manual({ params }: PageProps) {
                       />
                     </svg>
                   </div>
-                  <div className="pl-6">
+                  <div class="pl-6">
                     Search the docs (press <InlineCode>/</InlineCode> to focus)
                   </div>
                 </button>
@@ -494,19 +473,19 @@ export default function Manual({ params }: PageProps) {
                 />
               )
               : null}
-            <div className="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20">
+            <div class="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20">
               {content
                 ? (
                   <>
                     <a
                       href={getDocURL(version ?? versions[0], path)}
-                      className={`text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right ${
+                      class={`text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right ${
                         path.split("/").length === 2 ? "mt-11" : "mt-9"
                       } mr-4`}
                     >
-                      <span className="sr-only">GitHub</span>
+                      <span class="sr-only">GitHub</span>
                       <svg
-                        className="h-6 w-6 inline"
+                        class="h-6 w-6 inline"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                       >
@@ -530,7 +509,7 @@ export default function Manual({ params }: PageProps) {
                         version ? `@${version}` : ""
                       }`}
                     />
-                    <div className="mt-4 pt-4 border-t border-gray-200">
+                    <div class="mt-4 pt-4 border-t border-gray-200">
                       {pageList[pageIndex - 1] !== undefined && (
                         <a
                           href={version
@@ -539,7 +518,7 @@ export default function Manual({ params }: PageProps) {
                               `manual@${version}`,
                             )
                             : pageList[pageIndex - 1].path}
-                          className="text-gray-900 hover:text-gray-600 font-normal"
+                          class="text-gray-900 hover:text-gray-600 font-normal"
                         >
                           ← {pageList[pageIndex - 1].name}
                         </a>
@@ -552,7 +531,7 @@ export default function Manual({ params }: PageProps) {
                               `manual@${version}`,
                             )
                             : pageList[pageIndex + 1].path}
-                          className="text-gray-900 hover:text-gray-600 font-normal float-right"
+                          class="text-gray-900 hover:text-gray-600 font-normal float-right"
                         >
                           {pageList[pageIndex + 1].name} →
                         </a>
@@ -561,26 +540,26 @@ export default function Manual({ params }: PageProps) {
                   </>
                 )
                 : (
-                  <div className="w-full my-8">
-                    <div className="w-4/5 sm:w-1/3 bg-gray-100 h-8"></div>
-                    <div className="sm:w-2/3 bg-gray-100 h-3 mt-10"></div>
-                    <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
-                    <div className="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                    <div className="w-3/4 bg-gray-100 h-3 mt-4"></div>
-                    <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
-                    <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                    <div className="sm:w-2/3 bg-gray-100 h-3 mt-10"></div>
-                    <div className="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                    <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
-                    <div className="w-3/4 bg-gray-100 h-3 mt-4"></div>
-                    <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                    <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
-                    <div className="w-3/4 bg-gray-100 h-3 mt-10"></div>
-                    <div className="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                    <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
-                    <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
-                    <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                    <div className="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
+                  <div class="w-full my-8">
+                    <div class="w-4/5 sm:w-1/3 bg-gray-100 h-8"></div>
+                    <div class="sm:w-2/3 bg-gray-100 h-3 mt-10"></div>
+                    <div class="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
+                    <div class="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                    <div class="w-3/4 bg-gray-100 h-3 mt-4"></div>
+                    <div class="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
+                    <div class="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                    <div class="sm:w-2/3 bg-gray-100 h-3 mt-10"></div>
+                    <div class="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                    <div class="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
+                    <div class="w-3/4 bg-gray-100 h-3 mt-4"></div>
+                    <div class="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                    <div class="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
+                    <div class="w-3/4 bg-gray-100 h-3 mt-10"></div>
+                    <div class="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                    <div class="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
+                    <div class="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
+                    <div class="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
+                    <div class="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
                   </div>
                 )}
             </div>
@@ -599,20 +578,20 @@ function UserContributionBanner({
   gotoVersion: (version: string) => void;
 }) {
   return (
-    <div className="bg-yellow-300 sticky top-0">
-      <div className="max-w-screen-xl mx-auto py-4 px-3 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between flex-wrap">
-          <div className="w-0 flex-1 flex items-center">
-            <p className="ml-3 font-medium text-gray-900">
+    <div class="bg-yellow-300 sticky top-0">
+      <div class="max-w-screen-xl mx-auto py-4 px-3 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between flex-wrap">
+          <div class="w-0 flex-1 flex items-center">
+            <p class="ml-3 font-medium text-gray-900">
               <span>
                 You are viewing documentation generated from a{"  "}
-                <b className="font-bold">user contribution</b>{"  "}
+                <b class="font-bold">user contribution</b>{"  "}
                 or an upcoming or past release. The contents of this document
                 may not have been reviewed by the Deno team.{" "}
               </span>
 
               <span
-                className="underline cursor-pointer text-gray-900"
+                class="underline cursor-pointer text-gray-900"
                 onClick={() => gotoVersion(versions[0])}
               >
                 Click here to view the documentation for the latest release.
@@ -635,15 +614,15 @@ function Version({
   gotoVersion: (version: string) => void;
 }) {
   return (
-    <div className="mt-5 px-4">
-      <label htmlFor="version" className="sr-only">
+    <div class="mt-5 px-4">
+      <label htmlFor="version" class="sr-only">
         Version
       </label>
-      <div className="mt-1 sm:mt-0 sm:col-span-2">
-        <div className="max-w-xs rounded-md shadow-sm">
+      <div class="mt-1 sm:mt-0 sm:col-span-2">
+        <div class="max-w-xs rounded-md shadow-sm">
           <select
             id="version"
-            className="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+            class="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
             value={version ?? versions[0]}
             onChange={({ target: { value: newVersion } }) =>
               gotoVersion(newVersion)}
@@ -679,16 +658,16 @@ function ToC({
   path: string;
 }) {
   return (
-    <div className="pt-2 pb-8 h-0 flex-1 flex flex-col overflow-y-auto">
-      <nav className="flex-1 px-4">
-        <ol className="list-decimal list-inside font-semibold nested">
+    <div class="pt-2 pb-8 h-0 flex-1 flex flex-col overflow-y-auto">
+      <nav class="flex-1 px-4">
+        <ol class="list-decimal list-inside font-semibold nested">
           {tableOfContents &&
             Object.entries(tableOfContents).map(([slug, entry]) => {
               return (
-                <li key={slug} className="my-2">
+                <li key={slug} class="my-2">
                   <a
                     href={`/manual${version ? `@${version}` : ""}/${slug}`}
-                    className={`${
+                    class={`${
                       path === `/${slug}`
                         ? "text-blue-600 hover:text-blue-500 toc-active"
                         : "text-gray-900 hover:text-gray-600"
@@ -697,19 +676,19 @@ function ToC({
                     {entry.name}
                   </a>
                   {entry.children && (
-                    <ol className="pl-4 list-decimal nested">
+                    <ol class="pl-4 list-decimal nested">
                       {Object.entries(entry.children).map(
                         (
                           [childSlug, name],
                         ) => (
-                          <li key={`${slug}/${childSlug}`} className="my-0.5">
+                          <li key={`${slug}/${childSlug}`} class="my-0.5">
                             <a
                               href={`/manual${
                                 version
                                   ? `@${version}`
                                   : ""
                               }/${slug}/${childSlug}`}
-                              className={`${
+                              class={`${
                                 path === `/${slug}/${childSlug}`
                                   ? "text-blue-600 hover:text-blue-500 toc-active"
                                   : "text-gray-900 hover:text-gray-600"
