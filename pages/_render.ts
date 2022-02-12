@@ -29,8 +29,8 @@ const { tw } = create({
       width: {
         72: "18rem",
       },
-    }
-  }
+    },
+  },
 });
 
 export function render(ctx: RenderContext, render: RenderFn) {

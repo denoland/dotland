@@ -2,92 +2,43 @@
 
 /** @jsx h */
 import { h } from "../deps.ts";
+import { ComponentChildren } from "https://x.lcas.dev/preact@10.5.12/mod.d.ts";
 
 export function Footer({ simple }: { simple?: boolean }) {
   return (
     <div class={simple ? undefined : "bg-gray-50 border-t border-gray-200"}>
       <div class="max-w-screen-xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
         <nav class="-mx-5 -my-2 flex flex-wrap justify-center">
-          <div class="px-2 py-2">
-            <a
-              href="/manual"
-              class="text-base leading-6 text-gray-500 hover:text-gray-900"
-            >
-              Manual
-            </a>
-          </div>
-          <div class="px-2 py-2">
-            <a
-              href="https://doc.deno.land/builtin/stable"
-              class="text-base leading-6 text-gray-500 hover:text-gray-900"
-            >
-              API
-            </a>
-          </div>
-          <div class="px-2 py-2">
-            <a
-              href="/std"
-              class="text-base leading-6 text-gray-500 hover:text-gray-900"
-            >
-              Standard Library
-            </a>
-          </div>
-          <div class="px-2 py-2">
-            <a
-              href="/x"
-              class="text-base leading-6 text-gray-500 hover:text-gray-900"
-            >
-              Third Party Modules
-            </a>
-          </div>
-          <div class="px-2 py-2">
-            <a
-              href="/benchmarks"
-              class="text-base leading-6 text-gray-500 hover:text-gray-900"
-            >
-              Benchmarks
-            </a>
-          </div>
-          <div class="px-2 py-2">
-            <a
-              href="/artwork"
-              class="text-base leading-6 text-gray-500 hover:text-gray-900"
-            >
-              Artwork
-            </a>
-          </div>
-          <div class="px-2 py-2">
-            <a
-              href="https://deno.com/blog"
-              class="text-base leading-6 text-gray-500 hover:text-gray-900"
-            >
-              Blog
-            </a>
-          </div>
-          <div class="px-2 py-2">
-            <a
-              href="/translations"
-              class="text-base leading-6 text-gray-500 hover:text-gray-900"
-            >
-              Translations
-            </a>
-          </div>
-          <div class="px-2 py-2">
-            <a
-              href="https://status.deno.land/"
-              class="text-base leading-6 text-gray-500 hover:text-gray-900"
-            >
-              System Status
-            </a>
-          </div>
-          <div class="px-2 py-2">
-            <a
-              href="https://github.com/denoland/deno/wiki#companies-interested-in-deno"
-              class="text-base leading-6 text-gray-500 hover:text-gray-900"
-            >
-              Companies interested in Deno
-            </a>
-          </div>
+          <FooterItem href="/manual">
+            Manual
+          </FooterItem>
+          <FooterItem href="https://doc.deno.land/builtin/stable">
+            API
+          </FooterItem>
+          <FooterItem href="/std">
+            Standard Library
+          </FooterItem>
+          <FooterItem href="/x">
+            Third Party Modules
+          </FooterItem>
+          <FooterItem href="/benchmarks">
+            Benchmarks
+          </FooterItem>
+          <FooterItem href="/artwork">
+            Artwork
+          </FooterItem>
+          <FooterItem href="https://deno.com/blog">
+            Blog
+          </FooterItem>
+          <FooterItem href="/translations">
+            Translations
+          </FooterItem>
+          <FooterItem href="https://status.deno.land/">
+            System Status
+          </FooterItem>
+          <FooterItem href="https://github.com/denoland/deno/wiki#companies-interested-in-deno">
+            Companies interested in Deno
+          </FooterItem>
         </nav>
         <div class="mt-9 flex justify-center">
           <a
@@ -161,6 +112,21 @@ export function Footer({ simple }: { simple?: boolean }) {
           </a>
         </div>
       </div>
+    </div>
+  );
+}
+
+function FooterItem(
+  { href, children }: { href: string; children: ComponentChildren },
+) {
+  return (
+    <div class="px-2 py-2">
+      <a
+        href={href}
+        class="text-base leading-6 text-gray-500 hover:text-gray-900"
+      >
+        {children}
+      </a>
     </div>
   );
 }

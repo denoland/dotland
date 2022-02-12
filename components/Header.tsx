@@ -42,7 +42,7 @@ export function Header({
           id="menuToggle"
         />
         <label class="-mr-2 flex items-center lg:hidden" for="menuToggle">
-          <div class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+          <div class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:(text-gray-500 bg-gray-100) focus:(outline-none bg-gray-100 text-gray-500) transition duration-150 ease-in-out">
             <svg
               class="h-6 w-6"
               stroke="currentColor"
@@ -82,8 +82,8 @@ export function Header({
                         )}
                     </div>
                   </a>{" "}
-                  <label className="-mr-2" htmlFor="menuToggle">
-                    <div className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+                  <label className="-mr-2" for="menuToggle">
+                    <div className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:(text-gray-500 bg-gray-100) focus:(outline-none bg-gray-100 text-gray-500) transition duration-150 ease-in-out">
                       <svg
                         className="h-6 w-6"
                         stroke="currentColor"
@@ -100,41 +100,23 @@ export function Header({
                     </div>
                   </label>
                 </div>
-                <div className="px-2 pt-4 pb-3">
-                  <a
-                    href="https://deno.com/deploy"
-                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
-                  >
+                <div className="px-2 pt-4 pb-3 children:(block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out)">
+                  <a href="https://deno.com/deploy">
                     Deploy
                   </a>
-                  <a
-                    href="/manual"
-                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
-                  >
+                  <a href="/manual">
                     Manual
                   </a>
-                  <a
-                    href="https://deno.com/blog"
-                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
-                  >
+                  <a href="https://deno.com/blog">
                     Blog
                   </a>
-                  <a
-                    href="https://doc.deno.land/builtin/stable"
-                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
-                  >
+                  <a href="https://doc.deno.land/builtin/stable">
                     API
                   </a>
-                  <a
-                    href="/std"
-                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
-                  >
+                  <a href="/std">
                     Standard Library
                   </a>
-                  <a
-                    href="/x"
-                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
-                  >
+                  <a href="/x">
                     Third Party Modules
                   </a>
                 </div>
