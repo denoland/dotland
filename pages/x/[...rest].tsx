@@ -5,12 +5,12 @@
 import {
   Fragment,
   h,
+  PageConfig,
   PageProps,
   since,
-  useEffect,
-  useMemo,
-  useState,
+  useData,
 } from "../../deps.ts";
+import { HandlerContext, Handlers } from "../../server_deps.ts";
 import {
   denoDocAvailableForURL,
   DirEntry,
@@ -24,11 +24,6 @@ import {
   getVersionMeta,
   isReadme,
   listExternalDependencies,
-  Module,
-  parseQuery,
-  VersionDeps,
-  VersionInfo,
-  VersionMetaInfo,
 } from "../../util/registry_utils.ts";
 import { replaceEmojis } from "../../util/emoji_util.ts";
 import { Header } from "../../components/Header.tsx";
@@ -38,133 +33,93 @@ import { DirectoryListing } from "../../components/DirectoryListing.tsx";
 import { ErrorMessage } from "../../components/ErrorMessage.tsx";
 
 export default function Registry({ params, url }: PageProps) {
-  // State
-  const [versions, setVersions] = useState<VersionInfo | null | undefined>();
-  const [versionMeta, setVersionMeta] = useState<
-    VersionMetaInfo | null | undefined
-  >();
-  const [moduleMeta, setModuleMeta] = useState<Module | null | undefined>();
-  const [versionDeps, setVersionDeps] = useState<
-    VersionDeps | null | undefined
-  >();
-  const [raw, setRaw] = useState<string | null | undefined>();
-  const [readme, setReadme] = useState<string | null | undefined>();
-
-  const { name, version, path } = useMemo(
-    () => parseQuery(params.rest as string[]),
-    [params],
-  );
-  const isStd = name === "std";
-  const stdVersion = isStd ? version || versions?.latest : undefined;
-  function gotoVersion(newVersion: string, doReplace?: boolean) {
-    const href = `${!isStd ? "/x" : ""}/[...rest]`;
-    const asPath = `${
-      getBasePath({
-        isStd,
-        name,
-        version: newVersion,
-      })
-    }${path}`;
-    if (doReplace) {
-      replace(href, asPath + location.hash);
-    } else {
-      push(href, asPath);
-    }
-  }
-
-  // Base paths
-  const basePath = useMemo(() => getBasePath({ isStd, name, version }), [
-    name,
-    version,
-  ]);
-  // File paths
-  const canonicalPath = useMemo(() => `${basePath}${path}`, [basePath, path]);
-  const sourceURL = useMemo(() => getSourceURL(name, version, path), [
-    name,
-    version,
-    path,
-  ]);
-  const documentationURL = useMemo(() => {
-    const doc = `https://doc.deno.land/https://deno.land${canonicalPath}`;
-    return denoDocAvailableForURL(canonicalPath) ? doc : null;
-  }, [canonicalPath]);
-
-  // Fetch module meta
-  useEffect(() => {
-    setModuleMeta(undefined);
+  const { name, version, path } = params;
+  const versions = useData(name, () => {
     if (name) {
-      getModule(name)
-        .then(setModuleMeta)
-        .catch((e) => {
-          console.error("Failed to fetch module meta:", e);
-          setModuleMeta(null);
-        });
-    }
-  }, [name]);
-
-  // Fetch versions
-  useEffect(() => {
-    setVersions(undefined);
-    if (name) {
-      getVersionList(name)
-        .then(setVersions)
+      return getVersionList(name)
         .catch((e) => {
           console.error("Failed to fetch versions:", e);
-          setVersions(null);
+          return null;
         });
+    } else {
+      return Promise.resolve(null);
     }
-  }, [name]);
-
-  // If no version is specified, redirect to latest version
-  useEffect(() => {
-    if (!version && versions && versions.latest !== null) {
-      gotoVersion(versions.latest ?? "", true);
-    }
-  }, [versions?.latest, version]);
-
-  // If std version starts with v, redirect to version without v
-  useEffect(() => {
-    if (version && version.startsWith("v") && name === "std") {
-      gotoVersion(version.substring(1), true);
-    }
-  }, [name, version]);
-
-  // Fetch version meta data
-  useEffect(() => {
-    setVersionMeta(undefined);
+  });
+  const versionMeta = useData(`versionMeta/${name}@${version}`, () => {
     if (version) {
       if (name) {
-        getVersionMeta(name, version)
-          .then(setVersionMeta)
+        return getVersionMeta(name, version)
           .catch((e) => {
             console.error("Failed to fetch dir entry:", e);
-            setVersionMeta(null);
+            return null;
           });
       } else {
-        setVersionMeta(null);
+        return Promise.resolve(null);
       }
     }
-  }, [name, version]);
-
-  // Fetch version dependency information
-  useEffect(() => {
-    setVersionDeps(undefined);
+  });
+  const moduleMeta = useData(`moduleMeta/${name}`, () => {
+    if (name) {
+      return getModule(name)
+        .catch((e) => {
+          console.f("Failed to fetch module meta:", e);
+          return null;
+        });
+    }
+  });
+  const versionDeps = useData(`deps/${name}@${version}`, () => {
     if (version) {
       if (name) {
         getVersionDeps(name, version)
-          .then(setVersionDeps)
           .catch((e) => {
             console.error("Failed to fetch dependency information:", e);
-            setVersionDeps(null);
+            return null;
           });
       } else {
-        setVersionDeps(null);
+        return null;
       }
     }
-  }, [name, version]);
+  });
+
+  const isStd = name === "std";
+  const stdVersion = isStd ? version || versions?.latest : undefined;
+
+  const basePath = getBasePath({ isStd, name, version });
+  const canonicalPath = `${basePath}${path}`;
+  const sourceURL = getSourceURL(name, version, path);
+  const documentationURL = denoDocAvailableForURL(canonicalPath)
+    ? `https://doc.deno.land/https://deno.land${canonicalPath}`
+    : null;
+
+  const raw = useData(sourceURL, async () => {
+    if (version) {
+      if (
+        sourceURL &&
+        versionMeta &&
+        versionMeta.directoryListing.filter(
+            (d) => d.path === path && d.type == "file",
+          ).length !== 0
+      ) {
+        const res = await fetch(sourceURL, { method: "GET" });
+        if (!res.ok) {
+          if (
+            res.status !== 400 &&
+            res.status !== 403 &&
+            res.status !== 404
+          ) {
+            console.error(new Error(`${res.status}: ${res.statusText}`));
+          }
+          return null;
+        }
+        return await res.text();
+      } else {
+        return null;
+      }
+    }
+  });
 
   // Get directory entries for path
-  const dirEntries = useMemo(() => {
+  const dirEntries = (() => {
     if (versionMeta) {
       const files = versionMeta.directoryListing
         .filter(
@@ -184,23 +139,18 @@ export default function Registry({ params, url }: PageProps) {
       return files.length === 0 ? null : files;
     }
     return versionMeta;
-  }, [versionMeta, path]);
+  })();
 
-  const repositoryURL = useMemo(
-    () =>
-      versionMeta
-        ? dirEntries
-          ? getRepositoryURL(versionMeta, path, "tree")
-          : getRepositoryURL(versionMeta, path)
-        : undefined,
-    [versionMeta, path, dirEntries],
-  );
-
+  const repositoryURL = versionMeta
+    ? dirEntries
+      ? getRepositoryURL(versionMeta, path, "tree")
+      : getRepositoryURL(versionMeta, path)
+    : undefined;
   const {
     readmeCanonicalPath,
     readmeURL,
     readmeRepositoryURL,
-  } = useMemo(() => {
+  } = (() => {
     const readmeEntry = path === ""
       ? findRootReadme(versionMeta?.directoryListing)
       : dirEntries?.find((d) => isReadme(d.name));
@@ -218,88 +168,47 @@ export default function Registry({ params, url }: PageProps) {
       readmeURL: null,
       readmeRepositoryURL: null,
     };
-  }, [dirEntries, name, version, path, versionMeta]);
+  })();
 
-  // Fetch raw file
-  useEffect(() => {
-    setRaw(undefined);
-    if (version) {
-      if (
-        sourceURL &&
-        versionMeta &&
-        versionMeta.directoryListing.filter(
-            (d) => d.path === path && d.type == "file",
-          ).length !== 0
-      ) {
-        fetch(sourceURL, { method: "GET" })
-          .then((resp) => {
-            if (!resp.ok) {
-              if (
-                resp.status === 400 ||
-                resp.status === 403 ||
-                resp.status === 404
-              ) {
-                return null;
-              }
-              throw new Error(`${resp.status}: ${resp.statusText}`);
-            }
-            return resp.text();
-          })
-          .then(setRaw)
-          .catch(() => setRaw(null));
-      } else {
-        setRaw(null);
-      }
-    }
-  }, [sourceURL, versionMeta, version, path]);
-
-  // Fetch readme file
-  useEffect(() => {
-    setReadme(undefined);
+  const readme = useData(sourceURL, async () => {
     if (version) {
       if (readmeURL) {
-        fetch(readmeURL, { method: "GET" })
-          .then((resp) => {
-            if (!resp.ok) {
-              if (
-                resp.status === 400 ||
-                resp.status === 403 ||
-                resp.status === 404
-              ) {
-                return null;
-              }
-              throw new Error(`${resp.status}: ${resp.statusText}`);
-            }
-            return resp.text();
-          })
-          .then(setReadme)
-          .catch(() => setReadme(null));
+        const res = await fetch(readmeURL, { method: "GET" });
+        if (!res.ok) {
+          if (
+            res.status !== 400 &&
+            res.status !== 403 &&
+            res.status !== 404
+          ) {
+            console.error(new Error(`${resp.status}: ${resp.statusText}`));
+          }
+          return null;
+        }
+        return res.text();
       } else {
-        setReadme(null);
+        return null;
       }
     }
-  }, [readmeURL, versionMeta, version, path]);
+  });
 
-  const { /*dependencyEntrypoint, */ externalDependencies } = useMemo(() => {
-    const dependencyEntrypoint =
-      `https://deno.land/x/${name}@${version}${path}`;
-    const externalDependencies = versionDeps === undefined
-      ? undefined
-      : versionDeps === null
-      ? null
-      : listExternalDependencies(versionDeps.graph, dependencyEntrypoint);
-    return { dependencyEntrypoint, externalDependencies };
-  }, [versionDeps, name, version, path]);
+  // TODO: If std version starts with v, redirect to version without v
+
+  const externalDependencies = versionDeps === undefined
+    ? undefined
+    : versionDeps === null
+    ? null
+    : listExternalDependencies(
+      versionDeps.graph,
+      `https://deno.land/x/${name}@${version}${path}`,
+    );
 
   return (
     <>
-      <Head>
+      <head>
         <title>
-          {name}
-          {version ? `@${version}` : ""}
-          {" | Deno"}
+          {name + (version ? `@${version}` : "") + " | Deno"}
         </title>
-      </Head>
+      </head>
       <div className="bg-gray-50 min-h-full">
         <Header
           subtitle={name === "std" ? "Standard Library" : "Third Party Modules"}
@@ -367,30 +276,7 @@ export default function Registry({ params, url }: PageProps) {
                         typeof dirEntries === "undefined" &&
                         typeof raw !== "string"
                       ) {
-                        // loading
-                        return (
-                          <div className="rounded-lg overflow-hidden border border-gray-200 bg-white">
-                            <div className="bg-gray-100 h-10 w-full border-b border-gray-200 px-4 py-3">
-                              <div className="w-3/5 sm:w-1/5 bg-gray-200 h-4">
-                              </div>
-                            </div>
-                            <div className="w-full p-4">
-                              <div className="w-4/5 sm:w-1/3 bg-gray-100 h-8">
-                              </div>
-                              <div className="sm:w-2/3 bg-gray-100 h-3 mt-6">
-                              </div>
-                              <div className="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4">
-                              </div>
-                              <div className="sm:w-3/5 bg-gray-100 h-3 mt-4">
-                              </div>
-                              <div className="w-3/4 bg-gray-100 h-3 mt-4"></div>
-                              <div className="sm:w-2/3 bg-gray-100 h-3 mt-4">
-                              </div>
-                              <div className="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4">
-                              </div>
-                            </div>
-                          </div>
-                        );
+                        throw Error("unreachable");
                       } else if (
                         dirEntries === null &&
                         typeof raw !== "string"
@@ -405,6 +291,7 @@ export default function Registry({ params, url }: PageProps) {
                                 path={path}
                                 dirListing={versionMeta.directoryListing}
                                 repositoryURL={repositoryURL}
+                                pathname={url.pathname}
                               />
                             )}
                             <div className="w-full p-4 text-gray-400 italic">
@@ -422,6 +309,7 @@ export default function Registry({ params, url }: PageProps) {
                                 path={path}
                                 dirListing={versionMeta.directoryListing}
                                 repositoryURL={repositoryURL}
+                                pathname={url.pathname}
                               />
                             )}
                             {typeof raw === "string"
@@ -554,11 +442,13 @@ export default function Registry({ params, url }: PageProps) {
                             </>
                           )}
                         <div className="mt-3 w-full">
-                          <VersionSelector
+                          {
+                            /* TODO <VersionSelector
                             versions={versions?.versions}
                             selectedVersion={version}
                             onChange={gotoVersion}
-                          />
+                          />*/
+                          }
                         </div>
                       </div>
                     </div>
@@ -640,16 +530,15 @@ export default function Registry({ params, url }: PageProps) {
                                     <p key={url}>
                                       {url.startsWith("https://deno.land/")
                                         ? (
-                                          <Link
+                                          <a
                                             href={url.replace(
                                               "https://deno.land",
                                               "",
                                             )}
+                                            className="link text-sm truncate"
                                           >
-                                            <a className="link text-sm truncate">
-                                              {url}
-                                            </a>
-                                          </Link>
+                                            {url}
+                                          </a>
                                         )
                                         : (
                                           <a
@@ -701,39 +590,32 @@ function Breadcrumbs({
   const segments = path.split("/").splice(1);
   return (
     <p className="text-gray-500">
-      <Link href="/">
-        <a className="link">deno.land</a>
-      </Link>{" "}
-      / {!isStd && (
+      <a href="/" className="link">deno.land</a> / {!isStd && (
         <>
-          <Link href="/x">
-            <a className="link">x</a>
-          </Link>{" "}
-          /{" "}
+          <a href="/x" className="link">x</a> /{" "}
         </>
       )}
-      <Link href={getBasePath({ isStd, name, version })}>
-        <a className="link">
-          {name}
-          {version ? `@${version}` : ""}
-        </a>
-      </Link>
+      <a className="link" href={getBasePath({ isStd, name, version })}>
+        {name}
+        {version ? `@${version}` : ""}
+      </a>
       {path &&
         path.length > 0 &&
         segments.map((p, i) => {
           const link = segments.slice(0, i + 1).join("/");
           return (
-            <React.Fragment key={i}>
+            <Fragment key={i}>
               {" "}
               /{" "}
-              <Link
+              <a
                 href={`${getBasePath({ isStd, name, version })}${
                   link ? `/${link}` : ""
                 }`}
+                className="link"
               >
-                <a className="link">{p}</a>
-              </Link>
-            </React.Fragment>
+                {p}
+              </a>
+            </Fragment>
           );
         })}
     </p>
@@ -799,3 +681,23 @@ function VersionSelector({
     </div>
   );
 }
+
+export const handler: Handlers = {
+  async GET({ req, match, render }) {
+    console.log(match);
+    if (!match.version) {
+      const version = await getVersionList(match.name);
+      if (version === null) {
+        render();
+        return;
+      }
+      const url = new URL(req.url);
+      url.pathname = `/x/${match.name}@${version.latest}/${match.path}`;
+      return Response.redirect(url);
+    }
+    render();
+  },
+};
+export const config: PageConfig = {
+  routeOverride: "/x/:name{@:version}?/:path*",
+};

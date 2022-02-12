@@ -107,18 +107,14 @@ export function FileDisplay(props: {
                 code={props.raw!}
                 language="markdown"
                 enableLineRef={true}
-                className="p-2 sm:px-3 md:px-4"
+                class="p-2 sm:px-3 md:px-4"
               />
             );
           case "markdown":
           case "org": {
-            const Markup =
-              // most projects won't be using Org files, so we load
-              // this component lazily to save space
-              filetype = Markdown;
             return (
               <div className="px-4">
-                <Markup
+                <Markdown
                   source={props.stdVersion === undefined
                     ? props.raw!
                     : props.raw!.replace(

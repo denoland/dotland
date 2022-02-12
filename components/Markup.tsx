@@ -33,30 +33,6 @@ export function markup(props: MarkupProps, raw: string) {
   );
 }
 
-function handleClick(e: any) {
-  const el = e.target as HTMLElement;
-  if (el.className !== "octicon-link") return;
-
-  const anchor = el.parentNode as HTMLAnchorElement;
-  navigator.clipboard.writeText(anchor.href);
-}
-
-export function scrollEffect(): void {
-  useEffect(() => {
-    const id = setTimeout(() => {
-      let { hash } = location;
-      hash = hash && hash.substring(1);
-      if (!hash) return;
-
-      const el = document.getElementsByName(hash)[0];
-      if (!el) return;
-
-      setTimeout(() => el.scrollIntoView(), 0);
-    }, 50);
-    return () => clearTimeout(id);
-  }, []);
-}
-
 function isRelative(path: string): boolean {
   return (
     !path.startsWith("/") &&

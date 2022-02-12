@@ -7,6 +7,7 @@ const sheet = virtualSheet();
 sheet.reset();
 const { tw } = create({
   sheet,
+  mode: "silent",
   theme: {
     fontFamily: {
       mono: [

@@ -26,7 +26,10 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
   const stats = useData("stats", getStats);
 
   function toPage(n: number): string {
-    const params = new URLSearchParams(url.search);
+    const params = new URLSearchParams();
+    if (query) {
+      params.set("query", query);
+    }
     params.set("page", n.toString());
     return "/x?" + params.toString();
   }
@@ -65,8 +68,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                   text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50
                   focus:outline-none focus:shadow-outline-blue focus:border-blue-300
                   active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out
-                "/* TODO: onClick={() => setOverlayOpen(true)}*/
-              >
+                " /* TODO: onClick={() => setOverlayOpen(true)}*/>
                 Publish a module
               </button>
             </div>
@@ -80,7 +82,10 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
             </div> */
             }
           </div>
-          <div class="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8">
+          <form
+            method="get"
+            class="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8"
+          >
             <label htmlFor="query" class="font-medium sr-only">
               Search
             </label>
@@ -92,134 +97,9 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                 ? "Search"
                 : `Search through ${resp.totalCount} modules`}
             />
-          </div>
+          </form>
           <div class="sm:max-w-screen-lg sm:mx-auto sm:px-6 md:px-8 pb-4 sm:pb-12">
-            {resp === undefined
-              ? (
-                <div class="bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4">
-                  <ul>
-                    {Array(20)
-                      .fill(null)
-                      .map((_, i) => (
-                        <li
-                          class={i !== 0
-                            ? "border-t border-gray-200"
-                            : ""}
-                          key={i}
-                        >
-                          <div class="flex items-center px-4 sm:px-6 py-4">
-                            <div class="min-w-0 flex-1 flex items-center">
-                              <div class="min-w-0 flex-1">
-                                <div class="text-sm leading-5">
-                                  <div class="h-3 bg-blue-100 w-1/3 sm:w-1/5 md:w-1/6">
-                                  </div>
-                                </div>
-                                <div class="mt-1 flex items-center">
-                                  <div class="h-3 bg-gray-100 w-5/6 sm:w-4/5 md:w-3/4">
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="ml-6 mr-4 flex items-center">
-                              <div class="h-3 bg-gray-100 w-4"></div>
-                              <svg
-                                class="ml-1 text-gray-100 w-5 h-5"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                              >
-                                <title>star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                </path>
-                              </svg>
-                            </div>
-                            <div>
-                              <svg
-                                class="h-5 w-5 text-gray-100"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                  clipRule="evenodd"
-                                />
-                              </svg>
-                            </div>
-                          </div>
-                        </li>
-                      ))}
-                  </ul>
-                  <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-                    <div class="flex-1 flex justify-between items-center sm:hidden">
-                      <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-gray-100 text-sm leading-5 font-medium rounded-md bg-white">
-                        Previous
-                      </button>
-                      <div class="text-base leading-6 text-gray-500">
-                        <div class="h-3 w-4 bg-gray-100 inline-block mr-1" />/
-                        <div class="h-3 w-4 bg-gray-100 inline-block ml-1" />
-                      </div>
-                      <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-gray-100 text-sm leading-5 font-medium rounded-md bg-white ml-4">
-                        Next
-                      </button>
-                    </div>
-                    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-                      <div class="h-3 w-32 bg-gray-100" />
-                      <div>
-                        <nav class="relative z-0 inline-flex shadow-sm text-gray-200 leading-5">
-                          <div class="-ml-px relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white rounded-l-md">
-                            <svg
-                              class="h-5 w-5"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                          </div>
-                          <div class="-ml-px relative items-center px-4 py-2 border border-gray-300 bg-white hidden md:inline-flex">
-                            &nbsp;&nbsp;
-                          </div>
-                          <div class="-ml-px relative items-center px-4 py-2 border border-gray-300 bg-white hidden md:inline-flex">
-                            &nbsp;&nbsp;
-                          </div>
-                          <div class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white">
-                            &nbsp;&nbsp;
-                          </div>
-                          <div class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white">
-                            &nbsp;&nbsp;
-                          </div>
-                          <div class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white">
-                            &nbsp;&nbsp;
-                          </div>
-                          <div class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white">
-                            &nbsp;&nbsp;
-                          </div>
-                          <div class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white">
-                            &nbsp;&nbsp;
-                          </div>
-                          <div class="-ml-px relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white rounded-r-md">
-                            <svg
-                              class="h-5 w-5 text-gray-200"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                          </div>
-                        </nav>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )
-              : resp === null
+            {resp === null
               ? (
                 <div class="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
                   Failed to load modules
@@ -261,33 +141,31 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                       return (
                         <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
                           <div class="flex-1 flex justify-between items-center sm:hidden">
-                            <button
+                            <a
                               disabled={!hasPrevious}
+                              href={toPage(page - 1)}
                               class={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md bg-white ${
                                 hasPrevious
                                   ? "text-gray-700 hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700"
                                   : "text-gray-500 cursor-default"
                               } transition ease-in-out duration-150`}
                             >
-                              <a href={toPage(page - 1)}>
-                                Previous
-                              </a>
-                            </button>
+                              Previous
+                            </a>
                             <div class="text-base leading-6 text-gray-500">
                               {page}/{pageCount}
                             </div>
-                            <button
+                            <a
                               disabled={!hasNext}
+                              href={toPage(page + 1)}
                               class={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md bg-white ml-4 ${
                                 hasNext
                                   ? "text-gray-700 hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700"
                                   : "text-gray-500 cursor-default"
                               } transition ease-in-out duration-150`}
                             >
-                              <a href={toPage(page + 1)}>
-                                Next
-                              </a>
-                            </button>
+                              Next
+                            </a>
                           </div>
                           <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
                             <div>
@@ -309,8 +187,9 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                             </div>
                             <div>
                               <nav class="relative z-0 inline-flex shadow-sm">
-                                <button
+                                <a
                                   disabled={!hasPrevious}
+                                  href={toPage(page - 1)}
                                   class={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium ${
                                     hasPrevious
                                       ? "text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500"
@@ -318,45 +197,41 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                                   } transition ease-in-out duration-150`}
                                   aria-label="Previous"
                                 >
-                                  <a href={toPage(page - 1)}>
-                                    <svg
-                                      className="h-5 w-5"
-                                      viewBox="0 0 20 20"
-                                      fill="currentColor"
-                                    >
-                                      <path
-                                        fillRule="evenodd"
-                                        d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                        clipRule="evenodd"
-                                      />
-                                    </svg>
-                                  </a>
-                                </button>
-                                <button
+                                  <svg
+                                    className="h-5 w-5"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                  >
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                      clipRule="evenodd"
+                                    />
+                                  </svg>
+                                </a>
+                                <a
+                                  href={toPage(1)}
                                   class={`inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
                                     page === 1
                                       ? "bg-gray-100 font-semibold text-gray-800"
                                       : "bg-white font-medium text-gray-700"
                                   } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
                                 >
-                                  <a href={toPage(1)}>
-                                    1
-                                  </a>
-                                </button>
+                                  1
+                                </a>
                                 {centerPage === 4
                                   ? (
                                     <>
-                                      <button
+                                      <a
+                                        href={toPage(2)}
                                         class={`hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
                                           page === 2
                                             ? "bg-gray-100 font-semibold text-gray-800"
                                             : "bg-white font-medium text-gray-700"
                                         } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
                                       >
-                                        <a href={toPage(2)}>
-                                          2
-                                        </a>
-                                      </button>
+                                        2
+                                      </a>
                                       <span class="inline-flex md:hidden -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
                                         ...
                                       </span>
@@ -367,53 +242,49 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                                       ...
                                     </span>
                                   )}
-                                <button
+                                <a
+                                  href={toPage(centerPage - 1)}
                                   class={`hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
                                     page === centerPage - 1
                                       ? "bg-gray-100 font-semibold text-gray-800"
                                       : "bg-white font-medium text-gray-700"
                                   } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
                                 >
-                                  <a href={toPage(centerPage - 1)}>
-                                    {centerPage - 1}
-                                  </a>
-                                </button>
-                                <button
+                                  {centerPage - 1}
+                                </a>
+                                <a
+                                  href={toPage(centerPage)}
                                   class={`inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
                                     page === centerPage
                                       ? "bg-gray-100 font-semibold text-gray-800"
                                       : "bg-white font-medium text-gray-700"
                                   } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
                                 >
-                                  <a href={toPage(centerPage)}>
-                                    {centerPage}
-                                  </a>
-                                </button>
-                                <button
+                                  {centerPage}
+                                </a>
+                                <a
+                                  href={toPage(centerPage + 1)}
                                   class={`hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
                                     page === centerPage + 1
                                       ? "bg-gray-100 font-semibold text-gray-800"
                                       : "bg-white font-medium text-gray-700"
                                   } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
                                 >
-                                  <a href={toPage(centerPage + 1)}>
-                                    {centerPage + 1}
-                                  </a>
-                                </button>
+                                  {centerPage + 1}
+                                </a>
                                 {centerPage === pageCount - 3
                                   ? (
                                     <>
-                                      <button
+                                      <a
+                                        href={toPage(pageCount - 1)}
                                         class={`hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
                                           page === pageCount - 1
                                             ? "bg-gray-100 font-semibold text-gray-800"
                                             : "bg-white font-medium text-gray-700"
                                         } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
                                       >
-                                        <a href={toPage(pageCount - 1)}>
-                                          {pageCount - 1}
-                                        </a>
-                                      </button>
+                                        {pageCount - 1}
+                                      </a>
                                       <span class="inline-flex md:hidden -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
                                         ...
                                       </span>
@@ -424,18 +295,18 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                                       ...
                                     </span>
                                   )}
-                                <button
+                                <a
+                                  href={toPage(pageCount)}
                                   class={`inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
                                     page === pageCount
                                       ? "bg-gray-100 font-semibold text-gray-800"
                                       : "bg-white font-medium text-gray-700"
                                   } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
                                 >
-                                  <a href={toPage(pageCount)}>
-                                    {pageCount}
-                                  </a>
-                                </button>
-                                <button
+                                  {pageCount}
+                                </a>
+                                <a
+                                  href={toPage(page + 1)}
                                   disabled={!hasNext}
                                   class={`-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium ${
                                     hasNext
@@ -444,20 +315,18 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                                   } transition ease-in-out duration-150`}
                                   aria-label="Previous"
                                 >
-                                  <a href={toPage(page + 1)}>
-                                    <svg
-                                      className="h-5 w-5"
-                                      viewBox="0 0 20 20"
-                                      fill="currentColor"
-                                    >
-                                      <path
-                                        fillRule="evenodd"
-                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                        clipRule="evenodd"
-                                      />
-                                    </svg>
-                                  </a>
-                                </button>
+                                  <svg
+                                    className="h-5 w-5"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                  >
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                      clipRule="evenodd"
+                                    />
+                                  </svg>
+                                </a>
                               </nav>
                             </div>
                           </div>
