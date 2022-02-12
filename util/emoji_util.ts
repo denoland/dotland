@@ -1,6 +1,6 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import emojis from "./emojis.json";
+import emojis from "./emojis.json" assert { type: "json" };
 
 export function replaceEmojis(src: string): string {
   const candidates = src.matchAll(/:([a-z0-9_]+):/g);

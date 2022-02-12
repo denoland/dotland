@@ -9,5 +9,5 @@ export default function RegistryPage(props: PageProps) {
 }
 
 export const config: PageConfig = {
-  routeOverride: "/std{@:ver}?/*",
+  routeOverride: "/std{@:ver}?/:path*",
 };

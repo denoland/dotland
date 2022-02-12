@@ -102,22 +102,40 @@ export function Header({
                   </label>
                 </div>
                 <div class="px-2 pt-4 pb-3">
-                  <a href="https://deno.com/deploy" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out">
+                  <a
+                    href="https://deno.com/deploy"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
+                  >
                     Deploy
                   </a>
-                  <a href="/manual"  class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out">
+                  <a
+                    href="/manual"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
+                  >
                     Manual
                   </a>
-                  <a href="https://deno.com/blog"  class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out">
+                  <a
+                    href="https://deno.com/blog"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
+                  >
                     Blog
                   </a>
-                  <a href="https://doc.deno.land/builtin/stable"  class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out">
+                  <a
+                    href="https://doc.deno.land/builtin/stable"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
+                  >
                     API
                   </a>
-                  <a href="/std"  class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out">
+                  <a
+                    href="/std"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
+                  >
                     Standard Library
                   </a>
-                  <a href="/x"  class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out">
+                  <a
+                    href="/x"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
+                  >
                     Third Party Modules
                   </a>
                 </div>

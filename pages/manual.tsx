@@ -684,9 +684,7 @@ function ToC({
                           <li key={`${slug}/${childSlug}`} class="my-0.5">
                             <a
                               href={`/manual${
-                                version
-                                  ? `@${version}`
-                                  : ""
+                                version ? `@${version}` : ""
                               }/${slug}/${childSlug}`}
                               class={`${
                                 path === `/${slug}/${childSlug}`

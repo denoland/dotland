@@ -1,9 +1,9 @@
-/* Copyright 2022 the Deno authors. All rights reserved. MIT license. */
+// Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { Fragment, h } from "../deps.ts";
-import CodeBlock from "../components/CodeBlock.tsx";
+import { CodeBlock } from "../components/CodeBlock.tsx";
 import { Footer } from "../components/Footer.tsx";
 import { InlineCode } from "../components/InlineCode.tsx";
 import { Header } from "../components/Header.tsx";
@@ -21,6 +21,7 @@ export default function Home() {
   return (
     <div>
       <head>
+        <link rel="stylesheet" href="/gfm.css" />
         <title>Deno - A modern runtime for JavaScript and TypeScript</title>
       </head>
       <div class="bg-white">
@@ -56,8 +57,8 @@ export default function Home() {
           </p>
           <ol class="ml-8 list-disc text-gray-700">
             <li>
-              Secure by default. No file, network, or environment access,
-              unless explicitly enabled.
+              Secure by default. No file, network, or environment access, unless
+              explicitly enabled.
             </li>
             <li>Supports TypeScript out of the box.</li>
             <li>Ships only a single executable file.</li>
@@ -114,9 +115,8 @@ export default function Home() {
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8">
           <p class="my-4 text-gray-700">
-            You can find a more in depth introduction, examples, and
-            environment setup guides in{" "}
-            <a class="link" href="/manual">the manual</a>.
+            You can find a more in depth introduction, examples, and environment
+            setup guides in <a class="link" href="/manual">the manual</a>.
           </p>
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
@@ -135,10 +135,9 @@ export default function Home() {
           <p class="my-4 text-gray-700">
             Deno comes with <a class="link" href="/manual">a manual</a>{" "}
             which contains more in depth explanations about the more complex
-            functions of the runtime, an introduction to the concepts that
-            Deno is built on, details about the internals of Deno, how to
-            embed Deno in your own application and how to extend Deno using
-            Rust plugins.
+            functions of the runtime, an introduction to the concepts that Deno
+            is built on, details about the internals of Deno, how to embed Deno
+            in your own application and how to extend Deno using Rust plugins.
           </p>
           <p class="my-4 text-gray-700">
             The manual also contains information about the built in tools that
@@ -175,8 +174,8 @@ export default function Home() {
             </h3>
           </a>
           <p class="my-4 text-gray-700">
-            Deno can import modules from any location on the web, like GitHub,
-            a personal webserver, or a CDN like{" "}
+            Deno can import modules from any location on the web, like GitHub, a
+            personal webserver, or a CDN like{" "}
             <a href="https://www.skypack.dev" class="link">
               Skypack
             </a>
@@ -195,11 +194,10 @@ export default function Home() {
             .
           </p>
           <p class="my-4 text-gray-700">
-            To make it easier to consume third party modules Deno provides
-            some built in tooling like <InlineCode>deno info</InlineCode> and
-            {" "}
-            <InlineCode>deno doc</InlineCode>. deno.land also provides a web
-            UI for viewing module documentation. It is available at{" "}
+            To make it easier to consume third party modules Deno provides some
+            built in tooling like <InlineCode>deno info</InlineCode> and{" "}
+            <InlineCode>deno doc</InlineCode>. deno.land also provides a web UI
+            for viewing module documentation. It is available at{" "}
             <a href="https://doc.deno.land" class="link">
               doc.deno.land
             </a>

@@ -7,4 +7,8 @@ export {
   theme,
   virtualSheet,
 } from "https://esm.sh/twind@0.16.16/shim/server";
-export {} from "https://deno.land/x/gfm@0.1.18/mod.ts";
+
+export { default as Prism } from "https://esm.sh/prismjs@1.25.0";
+export { default as sanitizeHtml } from "https://esm.sh/sanitize-html@2.6.1";
+export { escape as htmlEscape } from "https://esm.sh/he@1.2.0";
+export { CSS as PrismTheme } from "https://deno.land/x/gfm@0.1.18/mod.ts";
