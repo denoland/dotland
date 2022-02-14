@@ -151,7 +151,7 @@ export function DirectoryListing(props: DirectoryListingProps) {
                       <label for="hiddenItemsToggle">
                         <div
                           id="hiddenItemsButton"
-                          class="w-full text-center text-sm px-2 sm:pl-3 md:pl-4 py-1 text-blue-500"
+                          class="select-none w-full text-center text-sm px-2 sm:pl-3 md:pl-4 py-1 text-blue-500"
                         >
                           <span>
                             {`Close hidden ${
