@@ -11,7 +11,7 @@ import * as $5 from "./pages/translations.tsx";
 import * as $6 from "./pages/status.tsx";
 // import * as $7 from "./pages/_app.tsx";
 import * as $8 from "./pages/x/index.tsx";
-import * as $9 from "./pages/x/[...rest].tsx";
+import * as $9 from "./pages/x/module.tsx";
 import * as $10 from "./pages/artwork.tsx";
 
 const routes = {
@@ -25,7 +25,7 @@ const routes = {
     "./pages/status.tsx": $6,
     //    "./pages/_app.tsx": $7,
     "./pages/x/index.tsx": $8,
-    "./pages/x/[...rest].tsx": $9,
+    "./pages/x/module.tsx": $9,
     "./pages/artwork.tsx": $10,
   },
   baseUrl: import.meta.url,

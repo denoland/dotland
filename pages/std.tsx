@@ -3,7 +3,7 @@
 /** @jsx h */
 import { h, PageConfig, PageProps } from "../deps.ts";
 import { Handlers } from "../server_deps.ts";
-import Registry, { handler as xHandler } from "./x/[...rest].tsx";
+import Registry, { handler as xHandler } from "./x/module.tsx";
 
 export default function RegistryPage(props: PageProps) {
   props.params.name = "std";
