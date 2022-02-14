@@ -2,7 +2,7 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h } from "../deps.ts";
+import { Fragment, h, Head } from "../deps.ts";
 import { CodeBlock } from "../components/CodeBlock.tsx";
 import { Footer } from "../components/Footer.tsx";
 import { InlineCode } from "../components/InlineCode.tsx";
@@ -20,10 +20,10 @@ export default function Home() {
 
   return (
     <div>
-      <head>
+      <Head>
         <link rel="stylesheet" href="/gfm.css" />
         <title>Deno - A modern runtime for JavaScript and TypeScript</title>
-      </head>
+      </Head>
       <div class="bg-white">
         <div class="bg-gray-50 border-b border-gray-200">
           <Header main />

@@ -2,7 +2,7 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, PageConfig, PageProps, useData } from "../deps.ts";
+import { Fragment, h, Head, PageConfig, PageProps, useData } from "../deps.ts";
 import { Header } from "../components/Header.tsx";
 import { Footer } from "../components/Footer.tsx";
 import { getBuild } from "../util/registry_utils.ts";
@@ -13,9 +13,9 @@ export default function StatusPage({ params }: PageProps) {
 
   return (
     <>
-      <head>
+      <Head>
         <title>Publish Status | Deno</title>
-      </head>
+      </Head>
       <div class="bg-gray-50 min-h-full">
         <Header />
         <div class="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 mt-8 pb-8 mb-16">

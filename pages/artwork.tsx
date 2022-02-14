@@ -2,17 +2,39 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h } from "../deps.ts";
+import { Fragment, h, Head } from "../deps.ts";
 import { Footer } from "../components/Footer.tsx";
 import { Header } from "../components/Header.tsx";
-import { Artwork, ARTWORKS } from "../util/artwork_utils.ts";
+
+import artworks from "../artwork.json" assert { type: "json" };
+
+const ARTWORKS: Artwork[] = artworks.sort((a, b) => a.date > b.date ? -1 : 1);
+
+interface Artwork {
+  date: string;
+  image: string;
+  title: string;
+  link?: string;
+  alt: string;
+  artist: Artist;
+  license: string;
+}
+
+interface Artist {
+  name: string;
+  profile_image?: string;
+  twitter?: string;
+  github?: string;
+  instagram?: string;
+  web?: string;
+}
 
 export default function ArtworkPage() {
   return (
     <>
-      <head>
+      <Head>
         <title>Artwork | Deno</title>
-      </head>
+      </Head>
       <Header />
       <div class="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 mt-8 mb-24">
         <div class="max-w-screen-lg mx-auto">

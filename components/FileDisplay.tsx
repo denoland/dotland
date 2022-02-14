@@ -98,7 +98,7 @@ export function FileDisplay(props: {
                 code={props.raw!}
                 language={filetype}
                 enableLineRef={true}
-                className="p-2 sm:px-3 md:px-4"
+                class="p-2 sm:px-3 md:px-4"
               />
             );
           case "html":
@@ -110,8 +110,7 @@ export function FileDisplay(props: {
                 class="p-2 sm:px-3 md:px-4"
               />
             );
-          case "markdown":
-          case "org": {
+          case "markdown": {
             return (
               <div className="px-4">
                 <Markdown
@@ -136,7 +135,7 @@ export function FileDisplay(props: {
                 code={props.raw!}
                 language="text"
                 enableLineRef={true}
-                className="p-2 sm:px-3 md:px-4"
+                class="p-2 sm:px-3 md:px-4"
               />
             );
         }

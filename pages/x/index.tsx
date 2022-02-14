@@ -2,7 +2,15 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, PageProps, since, useData } from "../../deps.ts";
+import {
+  emojify,
+  Fragment,
+  h,
+  Head,
+  PageProps,
+  since,
+  useData,
+} from "../../deps.ts";
 
 import { Header } from "../../components/Header.tsx";
 import { Footer } from "../../components/Footer.tsx";
@@ -11,7 +19,6 @@ import { InlineCode } from "../../components/InlineCode.tsx";
 
 import { getStats, listModules } from "../../util/registry_utils.ts";
 import * as pageutils from "../../util/pagination_utils.ts";
-import { replaceEmojis } from "../../util/emoji_util.ts";
 
 const PER_PAGE = 20;
 
@@ -36,9 +43,9 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
 
   return (
     <>
-      <head>
+      <Head>
         <title>Third Party Modules | Deno</title>
-      </head>
+      </Head>
       <div class="bg-gray">
         <Header subtitle="Third Party Modules" widerContent={true} />
         {/* TODO: <RegistryInstructions />*/}
@@ -508,7 +515,7 @@ function ModuleList({
                     <div class="mt-1 flex items-center text-sm leading-5 text-gray-500">
                       <span class="truncate">
                         {meta.description
-                          ? replaceEmojis(meta.description)
+                          ? emojify(meta.description)
                           : (
                             <span class="italic text-gray-400">
                               No description

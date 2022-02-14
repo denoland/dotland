@@ -2,17 +2,29 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h } from "../deps.ts";
+import { Fragment, h, Head } from "../deps.ts";
 import { Footer } from "../components/Footer.tsx";
 import { Header } from "../components/Header.tsx";
-import { Translation, TRANSLATIONS } from "../util/translations_utils.ts";
+
+import translations from "../translations.json" assert { type: "json" };
+
+const TRANSLATIONS: Translation[] = translations.sort((a, b) =>
+  a.language < b.language ? -1 : 1
+);
+
+interface Translation {
+  language: string;
+  english: string;
+  link: string;
+  repository: string;
+}
 
 export default function TranslationsPage() {
   return (
     <>
-      <head>
+      <Head>
         <title>Translations | Deno</title>
-      </head>
+      </Head>
       <Header />
       <div class="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 mt-8 mb-24">
         <div class="max-w-screen-lg mx-auto">

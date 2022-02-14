@@ -1,8 +1,7 @@
 /* Copyright 2022 the Deno authors. All rights reserved. MIT license. */
 
 /** @jsx h */
-import { h } from "../deps.ts";
-import { ComponentChildren } from "https://x.lcas.dev/preact@10.5.12/mod.d.ts";
+import { ComponentChildren, h } from "../deps.ts";
 
 export function Footer({ simple }: { simple?: boolean }) {
   return (

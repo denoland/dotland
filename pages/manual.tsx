@@ -3,243 +3,115 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import {
+  ComponentChildren,
   Fragment,
   h,
+  Head,
   PageConfig,
   PageProps,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
+  useData,
 } from "../deps.ts";
-import versionMeta from "../versions.json" assert { type: "json" };
-import { parseNameVersion } from "../util/registry_utils.ts";
+import { Handlers } from "../server_deps.ts";
+import { Markdown } from "../components/Markdown.tsx";
+import { InlineCode } from "../components/InlineCode.tsx";
 import {
   getDocURL,
   getFileURL,
   getTableOfContents,
-  getTableOfContentsMap,
   isPreviewVersion,
   TableOfContents,
   versions,
 } from "../util/manual_utils.ts";
-import { Markdown } from "../components/Markdown.tsx";
-import { InlineCode } from "../components/InlineCode.tsx";
-import { createPortal } from "react-dom";
-// @ts-expect-error because @docsearch/react does not have types
-import { DocSearchModal, useDocSearchKeyboardEvents } from "@docsearch/react";
+
+import versionMeta from "../versions.json" assert { type: "json" };
 
 function Hit({
   hit,
   children,
 }: {
   hit: { url: string };
-  children: React.ReactElement;
+  children: ComponentChildren;
 }) {
   return <a href={hit.url} class="link">{children}</a>;
 }
 
-export default function Manual({ params }: PageProps) {
-  const { version, path } = useMemo(() => {
-    const [identifier, ...pathParts] = (params.rest as string[]) ?? [];
-    const path = pathParts.length === 0 ? "" : `/${pathParts.join("/")}`;
-    const version = parseNameVersion(identifier ?? "")[1] || versionMeta.cli[0];
-    return { version, path: path || "/introduction" };
-  }, [params]);
+export default function Manual({ params, url }: PageProps) {
+  const path = params.path ? `/${params.path}` : "/introduction";
 
-  if (path.endsWith(".md")) {
-    replace(
-      `/[...rest]`,
-      `/manual${version && version !== "" ? `@${version}` : ""}${
-        path.replace(
-          /\.md$/,
-          "",
-        )
-      }`,
-    );
-    return <></>;
-  }
+  const tableOfContents = useData(params.version as string, getTableOfContents);
+  const pageList = (() => {
+    const tempList: { path: string; name: string }[] = [];
 
-  const [showSidebar, setShowSidebar] = useState<boolean>(false);
+    Object.entries(tableOfContents).forEach(([slug, entry]) => {
+      tempList.push({ path: `/manual/${slug}`, name: entry.name });
 
-  const hideSidebar = () => setShowSidebar(false);
+      if (entry.children) {
+        Object.entries(entry.children).map(([childSlug, name]) =>
+          tempList.push({ path: `/manual/${slug}/${childSlug}`, name })
+        );
+      }
+    });
 
-  const manualEl = useRef<HTMLElement>(null);
-
-  const handleRouteChange = (url: string) => {
-    manualEl.current?.scrollTo(0, 0);
-    setPageIndex(pageList.findIndex((page) => page.path === url));
-  };
-
-  useEffect(() => {
-    Router.events.on("routeChangeStart", hideSidebar);
-    Router.events.on("routeChangeComplete", handleRouteChange);
-
-    return () => {
-      Router.events.off("routeChangeStart", hideSidebar);
-      Router.events.off("routeChangeComplete", handleRouteChange);
-    };
-  }, []);
-
-  const scrollTOCIntoView = () =>
-    document.getElementsByclass("toc-active")[0]?.scrollIntoView();
-
-  useEffect(() => {
-    if (showSidebar) {
-      scrollTOCIntoView();
-    }
-  }, [showSidebar]);
-
-  const [
-    tableOfContents,
-    setTableOfContents,
-  ] = useState<TableOfContents | null>(null);
-
-  const [content, setContent] = useState<string | null>(null);
-
-  useEffect(() => {
-    getTableOfContents(version ?? versions[0])
-      .then(setTableOfContents)
-      .then(scrollTOCIntoView)
-      .catch((e) => {
-        console.error("Failed to fetch table of contents:", e);
-        setTableOfContents(null);
-      });
-  }, [version]);
-
-  const [pageIndex, setPageIndex] = useState(0);
-  const [pageList, setPageList] = useState<
-    Array<{ path: string; name: string }>
-  >([]);
-
-  useEffect(() => {
-    if (tableOfContents) {
-      const tempList: Array<{ path: string; name: string }> = [];
-
-      Object.entries(tableOfContents).forEach(([slug, entry]) => {
-        tempList.push({ path: `/manual/${slug}`, name: entry.name });
-
-        if (entry.children) {
-          Object.entries(entry.children).map(([childSlug, name]) =>
-            tempList.push({ path: `/manual/${slug}/${childSlug}`, name })
-          );
-        }
-      });
-
-      setPageList(tempList);
-      setPageIndex(
-        tempList.findIndex((page) => page.path === `/manual${path}`),
-      );
-    }
-  }, [tableOfContents, path]);
-
-  const sourceURL = useMemo(() => getFileURL(version ?? versions[0], path), [
-    version,
-    path,
-  ]);
-
-  const [pageTitle, setPageTitle] = useState<string>("");
-  const tableOfContentsMap = useMemo(
-    async () => await getTableOfContentsMap(version),
-    [version],
+    return tempList;
+  })();
+  const pageIndex = pageList.findIndex((page) =>
+    page.path === `/manual${path}`
   );
-  useEffect(() => {
-    setContent(null);
-    fetch(sourceURL)
+  const sourceURL = getFileURL(params.version as string, path);
+
+  const tableOfContentsMap = (() => {
+    const map = new Map<string, string>();
+    Object.entries(tableOfContents).forEach(([slug, entry]) => {
+      if (entry.children) {
+        Object.entries(entry.children).forEach(([childSlug, name]) => {
+          map.set(`/${slug}/${childSlug}`, name);
+        });
+      }
+      map.set(`/${slug}`, entry.name);
+    });
+
+    return map;
+  })();
+  const pageTitle = tableOfContentsMap.get(path) || "";
+
+  const content = useData(sourceURL, () => {
+    return fetch(sourceURL)
       .then((res) => {
         if (res.status !== 200) {
           throw Error(
-            `Got an error (${res.status}) while getting the documentation file.`,
+            `Got an error (${res.status}) while getting the documentation file (${sourceURL}).`,
           );
         }
         return res.text();
       })
-      .then(setContent)
       .catch((e) => {
         console.error("Failed to fetch content:", e);
-        setContent(
-          "# 404 - Not Found\nWhoops, the page does not seem to exist.",
-        );
+        return "# 404 - Not Found\nWhoops, the page does not seem to exist.";
       });
-    tableOfContentsMap.then((map: Map<string, string>): void =>
-      setPageTitle(map.get(path) || "")
-    );
-  }, [sourceURL]);
-
-  // SEARCH
-
-  const [isOpen, setIsOpen] = useState(false);
-  const searchButtonRef = useRef<HTMLButtonElement>();
-  const [initialQuery, setInitialQuery] = useState(null);
-
-  const onOpen = useCallback(() => {
-    setIsOpen(true);
-    setTimeout(() => {
-      document.getElementById("docsearch-input")?.focus();
-    }, 0);
-  }, [setIsOpen]);
-
-  const onClose = useCallback(() => {
-    setIsOpen(false);
-  }, [setIsOpen]);
-
-  const onInput = useCallback(
-    (e) => {
-      setIsOpen(true);
-      setInitialQuery(e.key);
-    },
-    [setIsOpen, setInitialQuery],
-  );
-
-  useDocSearchKeyboardEvents({
-    isOpen,
-    onOpen,
-    onClose,
-    onInput,
-    searchButtonRef,
   });
 
-  useEffect(() => {
-    function onPress(e: KeyboardEvent) {
-      if (!isOpen) {
-        if (e.key === "/" || e.key === "s") {
-          e.preventDefault();
-          onOpen();
-        }
-      }
-    }
-    window.addEventListener("keypress", onPress);
-    return () => window.removeEventListener("keypress", onPress);
-  }, [isOpen, onOpen]);
+  const stdVersion = ((versionMeta.cli_to_std as Record<string, string>)[
+    params.version as string
+  ]) ?? versionMeta.std[0];
 
-  function gotoVersion(newVersion: string) {
-    push(
-      `/[...rest]`,
-      `/manual${newVersion !== "" ? `@${newVersion}` : ""}${path}`,
-    );
-  }
-
-  const stdVersion = version === undefined
-    ? versionMeta.std[0]
-    : ((versionMeta.cli_to_std as any)[version ?? ""] as string) ??
-      versionMeta.std[0];
-
-  const isPreview = isPreviewVersion(version);
+  const isPreview = isPreviewVersion(params.version as string);
 
   return (
     <div>
-      <head>
+      <Head>
         <title>
           {pageTitle === "" ? "Manual | Deno" : `${pageTitle} | Manual | Deno`}
         </title>
+        <link rel="stylesheet" href="/gfm.css" />
+        <link rel="stylesheet" href="/app.css" />
         <link
           rel="preconnect"
           href="https://BH4D9OD16A-dsn.algolia.net"
           crossOrigin="true"
         />
-      </head>
-      {isOpen &&
+      </Head>
+      {
+        /*{isOpen &&
         createPortal(
           <DocSearchModal
             initialQuery={initialQuery}
@@ -271,15 +143,14 @@ export default function Manual({ params }: PageProps) {
             }}
           />,
           document.body,
-        )}
+        )}*/
+      }
 
       <div class="h-screen flex overflow-hidden">
         <div class="md:hidden">
           <div class="fixed inset-0 flex z-40">
             <div class="fixed inset-0">
-              <div
-                class="absolute inset-0 bg-gray-600 opacity-75"
-                onClick={hideSidebar}
+              <div class="absolute inset-0 bg-gray-600 opacity-75" // TODO: checkbox based onClick={hideSidebar}
               >
               </div>
             </div>
@@ -289,7 +160,7 @@ export default function Manual({ params }: PageProps) {
                   role="button"
                   class="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600"
                   aria-label="Close sidebar"
-                  onClick={hideSidebar}
+                  // TODO: checkbox based onClick={hideSidebar}
                 >
                   <svg
                     class="h-6 w-6 text-white"
@@ -323,18 +194,15 @@ export default function Manual({ params }: PageProps) {
                   </div>
                 </a>
                 <Version
-                  version={version}
+                  version={params.version as string}
                   versions={versions}
-                  gotoVersion={gotoVersion}
                 />
               </div>
-              {tableOfContents && (
-                <ToC
-                  tableOfContents={tableOfContents}
-                  version={version}
-                  path={path}
-                />
-              )}
+              <ToC
+                tableOfContents={tableOfContents}
+                version={params.version as string}
+                path={path}
+              />
             </div>
             <div class="flex-shrink-0 w-14">
               {/*<!-- Dummy element to force sidebar to shrink to fit close icon -->*/}
@@ -354,18 +222,15 @@ export default function Manual({ params }: PageProps) {
                 </div>
               </a>
               <Version
-                version={version}
+                version={params.version as string}
                 versions={versions}
-                gotoVersion={gotoVersion}
               />
             </div>
-            {tableOfContents && (
-              <ToC
-                tableOfContents={tableOfContents}
-                version={version}
-                path={path}
-              />
-            )}
+            <ToC
+              tableOfContents={tableOfContents}
+              version={params.version as string}
+              path={path}
+            />
           </div>
         </div>
         <div class="flex flex-col w-0 flex-1 overflow-hidden">
@@ -382,9 +247,7 @@ export default function Manual({ params }: PageProps) {
                   <label htmlFor="search_field" class="sr-only">
                     Search
                   </label>
-                  <button
-                    class="w-full text-gray-400 focus-within:text-gray-600 flex items-center"
-                    onClick={onOpen}
+                  <button class="w-full text-gray-400 focus-within:text-gray-600 flex items-center" // onClick={onOpen}
                   >
                     <div class="flex items-center pointer-events-none">
                       <svg
@@ -413,7 +276,7 @@ export default function Manual({ params }: PageProps) {
             <button
               class="px-4 text-gray-500 focus:outline-none focus:bg-gray-100 focus:text-gray-600 md:hidden"
               aria-label="Open sidebar"
-              onClick={() => setShowSidebar(true)}
+              // TODO checkbox based onClick={() => setShowSidebar(true)}
             >
               <svg
                 class="h-6 w-6"
@@ -434,17 +297,16 @@ export default function Manual({ params }: PageProps) {
           <main
             class="flex-1 relative z-0 overflow-y-auto focus:outline-none"
             tabIndex={0}
-            ref={manualEl}
           >
             <div class="h-16 bg-white shadow hidden md:block">
-              <div class="max-w-screen-md mx-auto px-12 w-full flex justify-between h-full">
+              {
+                /*<div class="max-w-screen-md mx-auto px-12 w-full flex justify-between h-full">
                 <label htmlFor="search_field" class="sr-only">
                   Search
                 </label>
                 <button
                   class="w-full text-gray-400 focus-within:text-gray-600 flex items-center"
-                  onClick={onOpen}
-                  ref={searchButtonRef as any}
+                  // onClick={onOpen}
                 >
                   <div class="flex items-center pointer-events-none">
                     <svg
@@ -463,22 +325,29 @@ export default function Manual({ params }: PageProps) {
                     Search the docs (press <InlineCode>/</InlineCode> to focus)
                   </div>
                 </button>
-              </div>
+              </div>*/
+              }
             </div>
-            {isPreview
-              ? (
-                <UserContributionBanner
-                  gotoVersion={gotoVersion}
-                  versions={versions}
-                />
-              )
-              : null}
+            {isPreview && (
+              <UserContributionBanner
+                href={(() => {
+                  const newUrl = new URL(
+                    `/manual@${versions[0]}/${params.path}`,
+                    url,
+                  );
+                  return newUrl.href;
+                })()}
+              />
+            )}
             <div class="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20">
               {content
                 ? (
                   <>
                     <a
-                      href={getDocURL(version ?? versions[0], path)}
+                      href={getDocURL(
+                        params.version as string,
+                        path,
+                      )}
                       class={`text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right ${
                         path.split("/").length === 2 ? "mt-11" : "mt-9"
                       } mr-4`}
@@ -500,22 +369,26 @@ export default function Manual({ params }: PageProps) {
                     <Markdown
                       source={content
                         .replace(/\$STD_VERSION/g, stdVersion)
-                        .replace(/\$CLI_VERSION/g, version)}
+                        .replace(/\$CLI_VERSION/g, params.version as string)}
                       displayURL={`https://deno.land/manual${
-                        version ? `@${version}` : ""
+                        params.version as string
+                          ? `@${params.version as string}`
+                          : ""
                       }${path}`}
                       sourceURL={sourceURL}
                       baseURL={`https://deno.land/manual${
-                        version ? `@${version}` : ""
+                        params.version as string
+                          ? `@${params.version as string}`
+                          : ""
                       }`}
                     />
                     <div class="mt-4 pt-4 border-t border-gray-200">
                       {pageList[pageIndex - 1] !== undefined && (
                         <a
-                          href={version
+                          href={params.version as string
                             ? pageList[pageIndex - 1].path.replace(
                               "manual",
-                              `manual@${version}`,
+                              `manual@${params.version as string}`,
                             )
                             : pageList[pageIndex - 1].path}
                           class="text-gray-900 hover:text-gray-600 font-normal"
@@ -525,10 +398,10 @@ export default function Manual({ params }: PageProps) {
                       )}
                       {pageList[pageIndex + 1] !== undefined && (
                         <a
-                          href={version
+                          href={params.version as string
                             ? pageList[pageIndex + 1].path.replace(
                               "manual",
-                              `manual@${version}`,
+                              `manual@${params.version as string}`,
                             )
                             : pageList[pageIndex + 1].path}
                           class="text-gray-900 hover:text-gray-600 font-normal float-right"
@@ -571,11 +444,9 @@ export default function Manual({ params }: PageProps) {
 }
 
 function UserContributionBanner({
-  versions,
-  gotoVersion,
+  href,
 }: {
-  versions: string[];
-  gotoVersion: (version: string) => void;
+  href: string;
 }) {
   return (
     <div class="bg-yellow-300 sticky top-0">
@@ -590,12 +461,12 @@ function UserContributionBanner({
                 may not have been reviewed by the Deno team.{" "}
               </span>
 
-              <span
+              <a
                 class="underline cursor-pointer text-gray-900"
-                onClick={() => gotoVersion(versions[0])}
+                href={href}
               >
                 Click here to view the documentation for the latest release.
-              </span>
+              </a>
             </p>
           </div>
         </div>
@@ -607,11 +478,9 @@ function UserContributionBanner({
 function Version({
   version,
   versions,
-  gotoVersion,
 }: {
-  version: string | undefined;
+  version: string;
   versions: string[];
-  gotoVersion: (version: string) => void;
 }) {
   return (
     <div class="mt-5 px-4">
@@ -622,12 +491,12 @@ function Version({
         <div class="max-w-xs rounded-md shadow-sm">
           <select
             id="version"
-            class="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-            value={version ?? versions[0]}
-            onChange={({ target: { value: newVersion } }) =>
-              gotoVersion(newVersion)}
+            class="block form-select w-full transition duration-150 ease-in-out sm:text-sm! sm:leading-5!"
+            value={version}
+            /*onChange={({ target: { value: newVersion } }) =>
+              gotoVersion(newVersion)}*/
           >
-            {version && version !== "main" && !versions.includes(version) &&
+            {version !== "main" && !versions.includes(version) &&
               (
                 <option key={version} value={version}>
                   {version}
@@ -661,53 +530,67 @@ function ToC({
     <div class="pt-2 pb-8 h-0 flex-1 flex flex-col overflow-y-auto">
       <nav class="flex-1 px-4">
         <ol class="list-decimal list-inside font-semibold nested">
-          {tableOfContents &&
-            Object.entries(tableOfContents).map(([slug, entry]) => {
-              return (
-                <li key={slug} class="my-2">
-                  <a
-                    href={`/manual${version ? `@${version}` : ""}/${slug}`}
-                    class={`${
-                      path === `/${slug}`
-                        ? "text-blue-600 hover:text-blue-500 toc-active"
-                        : "text-gray-900 hover:text-gray-600"
-                    } font-bold`}
-                  >
-                    {entry.name}
-                  </a>
-                  {entry.children && (
-                    <ol class="pl-4 list-decimal nested">
-                      {Object.entries(entry.children).map(
-                        (
-                          [childSlug, name],
-                        ) => (
-                          <li key={`${slug}/${childSlug}`} class="my-0.5">
-                            <a
-                              href={`/manual${
-                                version ? `@${version}` : ""
-                              }/${slug}/${childSlug}`}
-                              class={`${
-                                path === `/${slug}/${childSlug}`
-                                  ? "text-blue-600 hover:text-blue-500 toc-active"
-                                  : "text-gray-900 hover:text-gray-600"
-                              } font-normal`}
-                            >
-                              {name}
-                            </a>
-                          </li>
-                        ),
-                      )}
-                    </ol>
-                  )}
-                </li>
-              );
-            })}
+          {Object.entries(tableOfContents).map(([slug, entry]) => {
+            return (
+              <li key={slug} class="my-2">
+                <a
+                  href={`/manual${version ? `@${version}` : ""}/${slug}`}
+                  class={`${
+                    path === `/${slug}`
+                      ? "text-blue-600 hover:text-blue-500 toc-active"
+                      : "text-gray-900 hover:text-gray-600"
+                  } font-bold`}
+                >
+                  {entry.name}
+                </a>
+                {entry.children && (
+                  <ol class="pl-4 list-decimal nested">
+                    {Object.entries(entry.children).map(
+                      (
+                        [childSlug, name],
+                      ) => (
+                        <li key={`${slug}/${childSlug}`} class="my-0.5">
+                          <a
+                            href={`/manual${
+                              version ? `@${version}` : ""
+                            }/${slug}/${childSlug}`}
+                            class={`${
+                              path === `/${slug}/${childSlug}`
+                                ? "text-blue-600 hover:text-blue-500 toc-active"
+                                : "text-gray-900 hover:text-gray-600"
+                            } font-normal`}
+                          >
+                            {name}
+                          </a>
+                        </li>
+                      ),
+                    )}
+                  </ol>
+                )}
+              </li>
+            );
+          })}
         </ol>
       </nav>
     </div>
   );
 }
 
+export const handler: Handlers = {
+  GET({ req, match, render }) {
+    const url = new URL(req.url);
+    if (!match.version) {
+      url.pathname = `/manual@${versions[0]}/${match.path ?? ""}`;
+      return Response.redirect(url);
+    }
+    if (url.pathname.endsWith(".md")) {
+      url.pathname = url.pathname.slice(0, -3);
+      return Response.redirect(url);
+    }
+    return render();
+  },
+};
+
 export const config: PageConfig = {
-  routeOverride: "manual{@:ver}?/*",
+  routeOverride: "/manual{@:version}?/:path*",
 };

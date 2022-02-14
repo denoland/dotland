@@ -1,6 +1,6 @@
 // This module adds twind support.
 
-import { create, shim, virtualSheet } from "../deps.ts";
+import { apply, create, css, shim, virtualSheet } from "../deps.ts";
 import { RenderContext, RenderFn } from "../server_deps.ts";
 
 const sheet = virtualSheet();
@@ -31,6 +31,10 @@ const { tw } = create({
         72: "18rem",
       },
     },
+  },
+  plugins: {
+    link: apply
+      `text-blue-500 transition duration-75 ease-in-out hover:text-blue-400`,
   },
 });
 

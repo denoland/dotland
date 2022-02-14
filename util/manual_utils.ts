@@ -5,8 +5,8 @@ const xBasepath = "https://deno.land/x/manual@";
 const githubBasepath = "https://raw.githubusercontent.com/denoland/manual/";
 const oldDocpath = "https://github.com/denoland/deno/blob/";
 const docpath = "https://github.com/denoland/manual/blob/";
-import VERSIONS from "../versions.json";
-import compareVersions from "tiny-version-compare";
+import VERSIONS from "../versions.json" assert { type: "json" };
+import compareVersions from "https://esm.sh/tiny-version-compare@3.0.1";
 
 export const versions = VERSIONS.cli;
 
@@ -47,24 +47,6 @@ export async function getTableOfContents(
     );
   }
   return await res.json();
-}
-
-export async function getTableOfContentsMap(
-  version: string,
-): Promise<Map<string, string>> {
-  const map = new Map<string, string>();
-  const tableOfContents = await getTableOfContents(version);
-
-  Object.entries(tableOfContents).forEach(([slug, entry]) => {
-    if (entry.children) {
-      Object.entries(entry.children).forEach(([childSlug, name]) => {
-        map.set(`/${slug}/${childSlug}`, name);
-      });
-    }
-    map.set(`/${slug}`, entry.name);
-  });
-
-  return map;
 }
 
 export function getFileURL(version: string, path: string): string {

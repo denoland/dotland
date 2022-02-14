@@ -6,11 +6,11 @@ export function ErrorMessage(props: {
   body: string;
 }) {
   return (
-    <div className="rounded-md bg-red-50 border border-red-200 p-4">
-      <div className="flex">
-        <div className="flex-shrink-0">
+    <div class="rounded-md bg-red-50 border border-red-200 p-4">
+      <div class="flex">
+        <div class="flex-shrink-0">
           <svg
-            className="h-5 w-5 text-red-400"
+            class="h-5 w-5 text-red-400"
             fill="currentColor"
             viewBox="0 0 20 20"
           >
@@ -21,11 +21,11 @@ export function ErrorMessage(props: {
             />
           </svg>
         </div>
-        <div className="ml-3">
-          <h3 className="text-sm leading-5 font-medium text-red-800">
+        <div class="ml-3">
+          <h3 class="text-sm leading-5 font-medium text-red-800">
             {props.title}
           </h3>
-          <div className="mt-2 text-sm leading-5 text-red-700">
+          <div class="mt-2 text-sm leading-5 text-red-700">
             {props.body}
           </div>
         </div>
