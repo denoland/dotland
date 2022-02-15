@@ -38,7 +38,7 @@ function Hit({
 export default function Manual({ params, url }: PageProps) {
   const path = params.path ? `/${params.path}` : "/introduction";
 
-  const tableOfContents = useData(params.version as string, getTableOfContents);
+  const tableOfContents = useData(params.version, getTableOfContents);
   const pageList = (() => {
     const tempList: { path: string; name: string }[] = [];
 
@@ -57,7 +57,7 @@ export default function Manual({ params, url }: PageProps) {
   const pageIndex = pageList.findIndex((page) =>
     page.path === `/manual${path}`
   );
-  const sourceURL = getFileURL(params.version as string, path);
+  const sourceURL = getFileURL(params.version, path);
 
   const tableOfContentsMap = (() => {
     const map = new Map<string, string>();
@@ -91,10 +91,10 @@ export default function Manual({ params, url }: PageProps) {
   });
 
   const stdVersion = ((versionMeta.cli_to_std as Record<string, string>)[
-    params.version as string
+    params.version
   ]) ?? versionMeta.std[0];
 
-  const isPreview = isPreviewVersion(params.version as string);
+  const isPreview = isPreviewVersion(params.version);
 
   return (
     <div>
@@ -193,14 +193,11 @@ export default function Manual({ params, url }: PageProps) {
                     </div>
                   </div>
                 </a>
-                <Version
-                  version={params.version as string}
-                  versions={versions}
-                />
+                <Version version={params.version} versions={versions} />
               </div>
               <ToC
                 tableOfContents={tableOfContents}
-                version={params.version as string}
+                version={params.version}
                 path={path}
               />
             </div>
@@ -221,14 +218,11 @@ export default function Manual({ params, url }: PageProps) {
                   </div>
                 </div>
               </a>
-              <Version
-                version={params.version as string}
-                versions={versions}
-              />
+              <Version version={params.version} versions={versions} />
             </div>
             <ToC
               tableOfContents={tableOfContents}
-              version={params.version as string}
+              version={params.version}
               path={path}
             />
           </div>
@@ -340,101 +334,66 @@ export default function Manual({ params, url }: PageProps) {
               />
             )}
             <div class="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20">
-              {content
-                ? (
-                  <>
-                    <a
-                      href={getDocURL(
-                        params.version as string,
-                        path,
-                      )}
-                      class={`text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right ${
-                        path.split("/").length === 2 ? "mt-11" : "mt-9"
-                      } mr-4`}
-                    >
-                      <span class="sr-only">GitHub</span>
-                      <svg
-                        class="h-6 w-6 inline"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <title>Edit on GitHub</title>
-                        <path
-                          fillRule="evenodd"
-                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                    <Markdown
-                      source={content
-                        .replace(/\$STD_VERSION/g, stdVersion)
-                        .replace(/\$CLI_VERSION/g, params.version as string)}
-                      displayURL={`https://deno.land/manual${
-                        params.version as string
-                          ? `@${params.version as string}`
-                          : ""
-                      }${path}`}
-                      sourceURL={sourceURL}
-                      baseURL={`https://deno.land/manual${
-                        params.version as string
-                          ? `@${params.version as string}`
-                          : ""
-                      }`}
-                    />
-                    <div class="mt-4 pt-4 border-t border-gray-200">
-                      {pageList[pageIndex - 1] !== undefined && (
-                        <a
-                          href={params.version as string
-                            ? pageList[pageIndex - 1].path.replace(
-                              "manual",
-                              `manual@${params.version as string}`,
-                            )
-                            : pageList[pageIndex - 1].path}
-                          class="text-gray-900 hover:text-gray-600 font-normal"
-                        >
-                          ← {pageList[pageIndex - 1].name}
-                        </a>
-                      )}
-                      {pageList[pageIndex + 1] !== undefined && (
-                        <a
-                          href={params.version as string
-                            ? pageList[pageIndex + 1].path.replace(
-                              "manual",
-                              `manual@${params.version as string}`,
-                            )
-                            : pageList[pageIndex + 1].path}
-                          class="text-gray-900 hover:text-gray-600 font-normal float-right"
-                        >
-                          {pageList[pageIndex + 1].name} →
-                        </a>
-                      )}
-                    </div>
-                  </>
-                )
-                : (
-                  <div class="w-full my-8">
-                    <div class="w-4/5 sm:w-1/3 bg-gray-100 h-8"></div>
-                    <div class="sm:w-2/3 bg-gray-100 h-3 mt-10"></div>
-                    <div class="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
-                    <div class="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                    <div class="w-3/4 bg-gray-100 h-3 mt-4"></div>
-                    <div class="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
-                    <div class="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                    <div class="sm:w-2/3 bg-gray-100 h-3 mt-10"></div>
-                    <div class="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                    <div class="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
-                    <div class="w-3/4 bg-gray-100 h-3 mt-4"></div>
-                    <div class="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                    <div class="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
-                    <div class="w-3/4 bg-gray-100 h-3 mt-10"></div>
-                    <div class="sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                    <div class="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
-                    <div class="w-5/6 sm:w-3/4 bg-gray-100 h-3 mt-4"></div>
-                    <div class="w-2/4 sm:w-3/5 bg-gray-100 h-3 mt-4"></div>
-                    <div class="sm:w-2/3 bg-gray-100 h-3 mt-4"></div>
-                  </div>
+              <a
+                href={getDocURL(params.version, path)}
+                className={`text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right ${
+                  path.split("/").length === 2 ? "mt-11" : "mt-9"
+                } mr-4`}
+              >
+                <span className="sr-only">GitHub</span>
+                <svg
+                  className="h-6 w-6 inline"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <title>Edit on GitHub</title>
+                  <path
+                    fillRule="evenodd"
+                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </a>
+              <Markdown
+                source={content
+                  .replace(/\$STD_VERSION/g, stdVersion)
+                  .replace(/\$CLI_VERSION/g, params.version)}
+                displayURL={`https://deno.land/manual${
+                  params.version ? `@${params.version}` : ""
+                }${path}`}
+                sourceURL={sourceURL}
+                baseURL={`https://deno.land/manual${
+                  params.version ? `@${params.version}` : ""
+                }`}
+              />
+              <div className="mt-4 pt-4 border-t border-gray-200">
+                {pageList[pageIndex - 1] !== undefined && (
+                  <a
+                    href={params.version
+                      ? pageList[pageIndex - 1].path.replace(
+                        "manual",
+                        `manual@${params.version}`,
+                      )
+                      : pageList[pageIndex - 1].path}
+                    className="text-gray-900 hover:text-gray-600 font-normal"
+                  >
+                    ← {pageList[pageIndex - 1].name}
+                  </a>
                 )}
+                {pageList[pageIndex + 1] !== undefined && (
+                  <a
+                    href={params.version
+                      ? pageList[pageIndex + 1].path.replace(
+                        "manual",
+                        `manual@${params.version}`,
+                      )
+                      : pageList[pageIndex + 1].path}
+                    className="text-gray-900 hover:text-gray-600 font-normal float-right"
+                  >
+                    {pageList[pageIndex + 1].name} →
+                  </a>
+                )}
+              </div>
             </div>
           </main>
         </div>

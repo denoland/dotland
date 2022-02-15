@@ -1,9 +1,9 @@
 /** @jsx h */
-import { h } from "../deps.ts";
+import { ComponentChildren, h } from "../deps.ts";
 
 export function ErrorMessage(props: {
   title: string;
-  body: string;
+  children: ComponentChildren;
 }) {
   return (
     <div class="rounded-md bg-red-50 border border-red-200 p-4">
@@ -26,7 +26,7 @@ export function ErrorMessage(props: {
             {props.title}
           </h3>
           <div class="mt-2 text-sm leading-5 text-red-700">
-            {props.body}
+            {props.children}
           </div>
         </div>
       </div>

@@ -4,7 +4,7 @@
 /// <reference lib="deno.ns" />
 /// <reference lib="deno.unstable" />
 
-import { start } from "https://raw.githubusercontent.com/lucacasonato/fresh/6abf62c832ced41ae9365b48939221adfbe74e5d/server.ts";
+import { start } from "https://raw.githubusercontent.com/lucacasonato/fresh/2ec980ca454073f4b3895763a693f7cbd73761c6/server.ts";
 import routes from "./routes.gen.ts";
 
 await start(routes);

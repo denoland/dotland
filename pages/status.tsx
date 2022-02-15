@@ -32,10 +32,9 @@ export default function StatusPage({ params }: PageProps) {
           </div>
           {(data instanceof Error)
             ? (
-              <ErrorMessage
-                title="Failed to load build ID"
-                body={data.message}
-              />
+              <ErrorMessage title="Failed to load build ID">
+                {data.message}
+              </ErrorMessage>
             )
             : (
               <div class="mt-5 border-t border-gray-200 pt-5">
