@@ -67,38 +67,3 @@ ul.tree li:before {
 ul.tree li:last-child:before {
   border-left: 1px solid rgb(100, 100, 100);
 }
-
-/* 404 Page */
-
-.NotFoundPage {
-  width: 100%;
-  min-height: 100vh;
-  overflow-x: hidden;
-  position: relative;
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: space-between;
-}
-
-.NotFoundPage header {
-  text-align: center;
-  padding: 10vh 2rem;
-  z-index: 3;
-}
-
-.NotFoundPage #animation {
-  margin-top: auto;
-  width: 100%;
-  pointer-events: none;
-  height: 200px;
-  position: relative;
-  overflow: hidden;
-}
-
-.NotFoundPage #animation #ferris404 {
-  transform: translateY(22px);
-  width: 100px;
-  position: absolute;
-  left: 60%;
-  bottom: 0;
-}

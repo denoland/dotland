@@ -30,6 +30,9 @@ const { tw } = create({
       width: {
         72: "18rem",
       },
+      animation: {
+        move: "move 6s linear infinite",
+      },
     },
   },
   plugins: {

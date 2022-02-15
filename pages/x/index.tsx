@@ -82,10 +82,9 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
 
             {
               /* <div class="mt-8">
-              <ErrorMessage
-                title="Ongoing incident"
-                body="We are currently seeing delays and timeouts during module publishing and search. Serving of already published modules and `std` is not affected. We are working on resolving the problem."
-              />
+              <ErrorMessage title="Ongoing incident">
+                We are currently seeing delays and timeouts during module publishing and search. Serving of already published modules and `std` is not affected. We are working on resolving the problem.
+              <ErrorMessage />
             </div> */
             }
           </div>

@@ -9,7 +9,7 @@ import { getBuild } from "../util/registry_utils.ts";
 import { ErrorMessage } from "../components/ErrorMessage.tsx";
 
 export default function StatusPage({ params }: PageProps) {
-  const data = useData(params.id as string, getBuild);
+  const data = useData(params.id, getBuild);
 
   return (
     <>

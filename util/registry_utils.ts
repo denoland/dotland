@@ -272,15 +272,6 @@ export function parseNameVersion(nameVersion: string): [string, string] {
   return [name, version.join("@")];
 }
 
-export function parseQuery(
-  queryRest: string[],
-): { name: string; version: string; path: string } {
-  const [identifier, ...pathParts] = (queryRest as string[]) ?? [];
-  const path = pathParts.length === 0 ? "" : `/${pathParts.join("/")}`;
-  const [name, version] = parseNameVersion(identifier ?? "");
-  return { name, version, path };
-}
-
 const markdownExtension = "(?:markdown|mdown|mkdn|mdwn|mkd|md)";
 const orgExtension = "org";
 const readmeBaseRegex = `readme(?:\\.(${markdownExtension}|${orgExtension}))?`;
