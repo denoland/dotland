@@ -69,6 +69,10 @@ ol.nested li:before {
 	display: none;
 }
 
+#hiddenItemsToggle:checked ~ table #hiddenItemsTr {
+	border-bottom-width: 1px;
+}
+
 /* 404 Page */
 
 @keyframes move {

@@ -120,9 +120,6 @@ export function FileDisplay(props: {
                       /\$STD_VERSION/g,
                       props.stdVersion ?? "",
                     )}
-                  displayURL={"https://deno.land" + props.canonicalPath}
-                  sourceURL={props.sourceURL}
-                  baseURL={"https://deno.land" + props.baseURL}
                 />
               </div>
             );

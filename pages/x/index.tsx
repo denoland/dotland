@@ -8,7 +8,7 @@ import {
   h,
   Head,
   PageProps,
-  since,
+  twas,
   useData,
 } from "../../deps.ts";
 
@@ -96,6 +96,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
               Search
             </label>
             <input
+              name="query"
               id="query"
               class="block w-full px-4 py-2 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1"
               type="text"
@@ -530,7 +531,7 @@ function ModuleList({
                             title={new Date(meta.date).toLocaleString()}
                           >
                             <time dateTime={meta.date}>
-                              {since(new Date(meta.date))}
+                              {twas(new Date(meta.date))}
                             </time>
                           </span>
                         </div>

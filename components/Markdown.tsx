@@ -2,13 +2,12 @@
 
 /** @jsx h */
 import { gfm, h } from "../deps.ts";
-import { MarkupProps } from "./Markup.tsx";
 
-export function Markdown(props: MarkupProps) {
+export function Markdown(props: { source: string }) {
   const html = gfm(props.source, { allowIframes: true });
   return (
     <div
-      class="mt-1 py-8 px-4 markdown-body"
+      class="py-8 px-4 markdown-body"
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );

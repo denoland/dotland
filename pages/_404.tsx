@@ -24,9 +24,7 @@ export default function NotFoundPage() {
         </header>
       </div>
       <div class="flex-bottom">
-        <div
-          class="mt-auto w-full pointer-events-none h-[200px] relative overflow-hidden"
-        >
+        <div class="mt-auto w-full pointer-events-none h-[200px] relative overflow-hidden">
           <img
             src="/images/ferris.gif"
             alt="Ferris"

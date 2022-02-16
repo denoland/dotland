@@ -354,18 +354,13 @@ export default function Manual({ params, url }: PageProps) {
                   />
                 </svg>
               </a>
-              <Markdown
-                source={content
-                  .replace(/\$STD_VERSION/g, stdVersion)
-                  .replace(/\$CLI_VERSION/g, params.version)}
-                displayURL={`https://deno.land/manual${
-                  params.version ? `@${params.version}` : ""
-                }${path}`}
-                sourceURL={sourceURL}
-                baseURL={`https://deno.land/manual${
-                  params.version ? `@${params.version}` : ""
-                }`}
-              />
+              <div class="pt-1">
+                <Markdown
+                  source={content
+                    .replace(/\$STD_VERSION/g, stdVersion)
+                    .replace(/\$CLI_VERSION/g, params.version)}
+                />
+              </div>
               <div className="mt-4 pt-4 border-t border-gray-200">
                 {pageList[pageIndex - 1] !== undefined && (
                   <a

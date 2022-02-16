@@ -9,7 +9,7 @@ import {
   Head,
   PageConfig,
   PageProps,
-  since,
+  twas,
   useData,
 } from "../../deps.ts";
 import { Handlers } from "../../server_deps.ts";
@@ -57,6 +57,7 @@ export default function Registry({ params, url }: PageProps) {
         <title>
           {name + (version ? `@${version}` : "") + " | Deno"}
         </title>
+        <link rel="stylesheet" href="/gfm.css" />
         <link rel="stylesheet" href="/app.css" />
       </Head>
       <div class="bg-gray-50 min-h-full">
@@ -396,7 +397,7 @@ function ModuleView({
                 <div
                   title={versionMeta.uploadedAt.toLocaleString()}
                 >
-                  {since(versionMeta.uploadedAt.getTime())}
+                  {twas(versionMeta.uploadedAt.getTime())}
                 </div>
               </div>
             )}

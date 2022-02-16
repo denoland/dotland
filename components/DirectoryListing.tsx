@@ -142,13 +142,11 @@ export function DirectoryListing(props: DirectoryListingProps) {
               {hiddenItems.length > 0 &&
                 (
                   <tr
-                    class={`
-                        bg-gray-50 cursor-pointer hover:bg-gray-100 border-t border-gray-200
-                        ${true ? " border-b" : ""}
-                      `}
+                    id="hiddenItemsTr"
+                    class="bg-gray-50 cursor-pointer hover:bg-gray-100 border-t border-gray-200"
                   >
                     <td colSpan={3}>
-                      <label for="hiddenItemsToggle">
+                      <label htmlFor="hiddenItemsToggle">
                         <div
                           id="hiddenItemsButton"
                           class="select-none w-full text-center text-sm px-2 sm:pl-3 md:pl-4 py-1 text-blue-500"
