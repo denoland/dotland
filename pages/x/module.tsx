@@ -595,7 +595,7 @@ function VersionSelector({
       <div class="max-w-xs rounded-md shadow-sm w-full">
         <select
           id="version"
-          className="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+          class="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           value={selectedVersion}
           onChange={`((e) => { window.location = "/${
             isStd ? "" : "x/"
@@ -617,7 +617,7 @@ function VersionSelector({
       {versions[0] !== selectedVersion && (
         <button
           type="button"
-          className="mt-2 w-full inline-flex justify-center py-1 px-2 border border-red-300 rounded-md bg-white text-sm leading-5 font-medium text-red-500 hover:text-red-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-red transition duration-150 ease-in-out"
+          class="mt-2 w-full inline-flex justify-center py-1 px-2 border border-red-300 rounded-md bg-white text-sm leading-5 font-medium text-red-500 hover:text-red-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-red transition duration-150 ease-in-out"
           aria-label="Go to latest version"
           onClick={`window.location = "/${isStd ? "" : "x/"}${name}@${
             versions[0]

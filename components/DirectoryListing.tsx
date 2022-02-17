@@ -64,9 +64,9 @@ export function DirectoryListing(props: DirectoryListingProps) {
   };
 
   return (
-    <div className="flex flex-col overflow-x-auto">
-      <div className="inline-block min-w-full shadow-sm rounded-lg border border-gray-200 overflow-hidden">
-        <div className="bg-gray-100 border-b border-gray-200 py-2 px-4 flex justify-between">
+    <div class="flex flex-col overflow-x-auto">
+      <div class="inline-block min-w-full shadow-sm rounded-lg border border-gray-200 overflow-hidden">
+        <div class="bg-gray-100 border-b border-gray-200 py-2 px-4 flex justify-between">
           <div class="flex items-center">
             <svg
               fill="currentColor"

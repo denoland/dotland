@@ -336,13 +336,13 @@ export default function Manual({ params, url }: PageProps) {
             <div class="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20">
               <a
                 href={getDocURL(params.version, path)}
-                className={`text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right ${
+                class={`text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right ${
                   path.split("/").length === 2 ? "mt-11" : "mt-9"
                 } mr-4`}
               >
-                <span className="sr-only">GitHub</span>
+                <span class="sr-only">GitHub</span>
                 <svg
-                  className="h-6 w-6 inline"
+                  class="h-6 w-6 inline"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -361,7 +361,7 @@ export default function Manual({ params, url }: PageProps) {
                     .replace(/\$CLI_VERSION/g, params.version)}
                 />
               </div>
-              <div className="mt-4 pt-4 border-t border-gray-200">
+              <div class="mt-4 pt-4 border-t border-gray-200">
                 {pageList[pageIndex - 1] !== undefined && (
                   <a
                     href={params.version
@@ -370,7 +370,7 @@ export default function Manual({ params, url }: PageProps) {
                         `manual@${params.version}`,
                       )
                       : pageList[pageIndex - 1].path}
-                    className="text-gray-900 hover:text-gray-600 font-normal"
+                    class="text-gray-900 hover:text-gray-600 font-normal"
                   >
                     ← {pageList[pageIndex - 1].name}
                   </a>
@@ -383,7 +383,7 @@ export default function Manual({ params, url }: PageProps) {
                         `manual@${params.version}`,
                       )
                       : pageList[pageIndex + 1].path}
-                    className="text-gray-900 hover:text-gray-600 font-normal float-right"
+                    class="text-gray-900 hover:text-gray-600 font-normal float-right"
                   >
                     {pageList[pageIndex + 1].name} →
                   </a>

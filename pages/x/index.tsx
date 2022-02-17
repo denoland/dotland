@@ -205,7 +205,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                                   aria-label="Previous"
                                 >
                                   <svg
-                                    className="h-5 w-5"
+                                    class="h-5 w-5"
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
                                   >
@@ -323,7 +323,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                                   aria-label="Previous"
                                 >
                                   <svg
-                                    className="h-5 w-5"
+                                    class="h-5 w-5"
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
                                   >
