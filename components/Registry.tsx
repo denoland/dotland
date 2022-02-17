@@ -691,14 +691,42 @@ function VersionSelector({
         Version
       </label>
       <div className="max-w-xs rounded-md shadow-sm w-full">
-        {versions ? (
-          <select
-            id="version"
-            className="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-            value={selectedVersion}
-            onChange={({ target: { value: newVersion } }) =>
-              onChange(newVersion)
-            }
+        {versions
+          ? (
+            <select
+              id="version"
+              className="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+              value={selectedVersion}
+              onChange={({ target: { value: newVersion } }) =>
+                onChange(newVersion)}
+            >
+              <>
+                {selectedVersion && !versions.includes(selectedVersion) &&
+                  (
+                    <option key={selectedVersion} value={selectedVersion}>
+                      {selectedVersion}
+                    </option>
+                  )}
+                {versions.map((v) => (
+                  <option key={v} value={v}>
+                    {v}
+                  </option>
+                ))}
+              </>
+            </select>
+          )
+          : (
+            <div className="block form-select w-full bg-gray-50 h-9 pb-0.5 sm:text-sm">
+            </div>
+          )}
+      </div>
+      {versions && versions[0] !== selectedVersion
+        ? (
+          <button
+            type="button"
+            className="mt-2 w-full inline-flex justify-center py-1 px-2 border border-red-300 rounded-md bg-white text-sm leading-5 font-medium text-red-500 hover:text-red-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-red transition duration-150 ease-in-out"
+            aria-label="Go to latest version"
+            onClick={() => onChange(versions[0])}
           >
             <>
               {selectedVersion && !versions.includes(selectedVersion) && (

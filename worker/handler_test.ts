@@ -60,6 +60,7 @@ Deno.test({
     assert(result.headers.get("Location")?.includes("@"));
     assert(result.headers.get("X-Deno-Warning")?.includes("latest"));
     assert(result.headers.get("X-Deno-Warning")?.includes("/std/version.ts"));
+    assertEquals(result.headers.get("Access-Control-Allow-Origin"), "*");
   },
 });
 
@@ -90,6 +91,7 @@ Deno.test({
     assert(result.headers.get("Content-Type")?.includes(
       "application/typescript",
     ));
+    assertEquals(result.headers.get("Access-Control-Allow-Origin"), "*");
     const text = await result.text();
     assert(text.includes("/** Version of the Deno standard modules"));
   },
@@ -122,6 +124,7 @@ Deno.test({
     assert(result.headers.get("Content-Type")?.includes(
       "application/typescript",
     ));
+    assertEquals(result.headers.get("Access-Control-Allow-Origin"), "*");
     const text = await result.text();
     assert(text.includes("/** Version of the Deno standard modules"));
   },
