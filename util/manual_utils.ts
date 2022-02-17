@@ -1,4 +1,4 @@
-/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+// Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 const oldXBasepath = "https://deno.land/x/deno@";
 const xBasepath = "https://deno.land/x/manual@";

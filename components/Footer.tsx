@@ -1,4 +1,4 @@
-/* Copyright 2022 the Deno authors. All rights reserved. MIT license. */
+// Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
 import { ComponentChildren, h } from "../deps.ts";

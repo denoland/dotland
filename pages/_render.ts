@@ -1,6 +1,6 @@
-// This module adds twind support.
+// Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-import { apply, create, css, shim, virtualSheet } from "../deps.ts";
+import { apply, create, shim, virtualSheet } from "../deps.ts";
 import { RenderContext, RenderFn } from "../server_deps.ts";
 
 const sheet = virtualSheet();
