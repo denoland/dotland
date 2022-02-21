@@ -1,5 +1,4 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
-// noinspection HtmlUnknownAnchorTarget
 
 /** @jsx h */
 /** @jsxFrag Fragment */
@@ -273,8 +272,7 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
                     class={`${
                       showNormalized ? "translate-x-5" : "translate-x-0"
                     } inline-block h-5 w-5 rounded-full bg-white shadow transform transition ease-in-out duration-200`}
-                  >
-                  </span>
+                  />
                 </span>
                 <span class="ml-2 text-gray-900">
                   Show normalized benchmarks
