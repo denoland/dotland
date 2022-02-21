@@ -5,7 +5,7 @@
 import * as $0 from "./pages/index.tsx";
 import * as $1 from "./pages/std.tsx";
 import * as $2 from "./pages/_render.ts";
-//import * as $3 from "./pages/benchmarks.tsx";
+import * as $3 from "./pages/benchmarks.tsx";
 import * as $4 from "./pages/add_module.tsx";
 import * as $5 from "./pages/manual.tsx";
 import * as $6 from "./pages/translations.tsx";
@@ -21,7 +21,7 @@ const routes = {
     "./pages/index.tsx": $0,
     "./pages/std.tsx": $1,
     "./pages/_render.ts": $2,
-    //"./pages/benchmarks.tsx": $3,
+    "./pages/benchmarks.tsx": $3,
     "./pages/add_module.tsx": $4,
     "./pages/manual.tsx": $5,
     "./pages/translations.tsx": $6,

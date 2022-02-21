@@ -1,11 +1,8 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-import { h, useState } from "../deps.ts";
-const ApexChart = dynamic(() => import("react-apexcharts"), { // TODO
-  ssr: false,
-  loading: BenchmarkLoading,
-});
+/** @jsxFrag Fragment */
+import { Fragment, h } from "../deps.ts";
 
 import { Column, formatLogScale, logScale } from "../util/benchmark_utils.ts";
 
@@ -13,67 +10,15 @@ export interface BenchmarkChartProps {
   yTickFormat?: (n: number) => string;
   columns: Column[];
   yLabel?: string;
-  sha1List: string[];
 }
 
 export function BenchmarkChart(props: BenchmarkChartProps) {
-  const [id] = useState(Math.random().toString());
-
-  const shortSha1List = props.sha1List.map((s) => s.slice(0, 6));
-
-  function viewCommitOnClick(c1: any, c2: any, { dataPointIndex }: any): void {
-    window.open(
-      `https://github.com/denoland/deno/commits/${
-        props.sha1List[dataPointIndex]
-      }`,
-    );
-  }
-
+  const id = Math.random().toString();
   const cols = props.columns.map((d) => ({ name: d.name, data: [...d.data] }));
 
   if (props.yTickFormat && props.yTickFormat === formatLogScale) {
     logScale(cols);
   }
-
-  const options = {
-    chart: {
-      toolbar: {
-        show: true,
-      },
-      animations: {
-        enabled: false,
-      },
-      events: {
-        markerClick: viewCommitOnClick,
-      },
-    },
-    stroke: {
-      width: 1,
-      curve: "straight",
-    },
-    legend: {
-      show: true,
-      showForSingleSeries: true,
-      position: "bottom",
-    },
-    yaxis: {
-      labels: {
-        formatter: props.yTickFormat,
-      },
-      title: {
-        text: props.yLabel,
-      },
-    },
-    xaxis: {
-      labels: {
-        show: false,
-      },
-      categories: shortSha1List,
-      tooltip: {
-        enabled: false,
-      },
-    },
-  };
 
   const series = cols.sort((a, b) => {
     // Sort by last benchmark.
@@ -83,22 +28,65 @@ export function BenchmarkChart(props: BenchmarkChartProps) {
   });
 
   return (
-    <ApexChart
-      key={id}
-      type="line"
-      options={options}
-      series={series}
-      height="320"
-    />
-  );
-}
-
-export function BenchmarkLoading() {
-  return (
-    <div style={{ height: 335 }} className="flex items-center justify-center">
-      <span className="text-gray-500">
-        Loading...
-      </span>
-    </div>
+    <>
+      <div id={id} />
+      <script
+        id={id + "Data"}
+        type="application/json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(series) }}
+      />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+        new ApexCharts(document.getElementById("${id}"), {
+          chart: {
+            height: 320,
+            type: "line",
+            toolbar: {
+              show: true,
+            },
+            animations: {
+              enabled: false,
+            },
+            events: {
+              markerClick: (c1, c2, { dataPointIndex }) => {
+                window.open(
+                  "https://github.com/denoland/deno/commits/" + data.sha1List[dataPointIndex],
+                );
+              },
+            },
+          },
+          series: JSON.parse(document.getElementById("${id}Data").text),
+          stroke: {
+            width: 1,
+            curve: "straight",
+          },
+          legend: {
+            show: true,
+            showForSingleSeries: true,
+            position: "bottom",
+          },
+          yaxis: {
+            labels: {
+              formatter: ${props.yTickFormat?.toString()},
+            },
+            title: {
+              text: "${props.yLabel}",
+            },
+          },
+          xaxis: {
+            labels: {
+              show: false,
+            },
+            categories: shortSha1List,
+            tooltip: {
+              enabled: false,
+            },
+          },
+        }).render();
+      `,
+        }}
+      />
+    </>
   );
 }

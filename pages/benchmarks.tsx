@@ -1,4 +1,5 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
+// noinspection HtmlUnknownAnchorTarget
 
 /** @jsx h */
 /** @jsxFrag Fragment */
@@ -6,10 +7,10 @@ import { Fragment, h, Head, PageProps, useData, useState } from "../deps.ts";
 import { Handlers } from "../server_deps.ts";
 import { Header } from "../components/Header.tsx";
 import { Footer } from "../components/Footer.tsx";
+import { InlineCode } from "../components/InlineCode.tsx";
+
 import {
-  BenchmarkData,
   BenchmarkRun,
-  Column,
   formatKB,
   formatLogScale,
   formatMB,
@@ -17,10 +18,7 @@ import {
   formatReqSec,
   reshape,
 } from "../util/benchmark_utils.ts";
-import {
-  BenchmarkChart,
-  BenchmarkLoading,
-} from "../components/BenchmarkChart.tsx";
+import { BenchmarkChart } from "../components/BenchmarkChart.tsx";
 
 type ShowData = { dataFile: string; range: number[]; search: string };
 
@@ -55,6 +53,21 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
           Benchmarks {dataRangeTitle ? `(${dataRangeTitle}) ` : " "}| Deno
         </title>
       </Head>
+      <script src="https://cdn.jsdelivr.net/npm/apexcharts" />
+      <script
+        id="data"
+        type="application/json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+        const TimeScaleFactor = 10000;
+        const data = JSON.parse(document.getElementById("data").text);
+        const shortSha1List = data.sha1List.map((s) => s.slice(0, 6));
+      `,
+        }}
+      />
       <div class="bg-gray-50 min-h-full">
         <Header subtitle="Continuous Benchmarks" widerContent={true} />
         <div class="mb-12">
@@ -143,10 +156,9 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
                     Execution time
                   </h5>
                 </a>
-                <BenchmarkOrLoading
-                  data={data}
-                  columns={data?.execTime.filter(
-                    ({ name }) => !typescriptBenches.includes(name),
+                <BenchmarkChart
+                  columns={data.execTime.filter(({ name }) =>
+                    !typescriptBenches.includes(name)
                   )}
                   yLabel="seconds"
                   yTickFormat={formatLogScale}
@@ -166,10 +178,9 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
                     Thread count
                   </h5>
                 </a>
-                <BenchmarkOrLoading
-                  data={data}
-                  columns={data?.threadCount.filter(
-                    ({ name }) => !typescriptBenches.includes(name),
+                <BenchmarkChart
+                  columns={data.threadCount.filter(({ name }) =>
+                    !typescriptBenches.includes(name)
                   )}
                 />
                 <p class="mt-1">
@@ -182,10 +193,9 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
                     Syscall count
                   </h5>
                 </a>{" "}
-                <BenchmarkOrLoading
-                  data={data}
-                  columns={data?.syscallCount.filter(
-                    ({ name }) => !typescriptBenches.includes(name),
+                <BenchmarkChart
+                  columns={data.syscallCount.filter(({ name }) =>
+                    !typescriptBenches.includes(name)
                   )}
                 />
                 <p class="mt-1">
@@ -199,10 +209,9 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
                     Max memory usage
                   </h5>
                 </a>{" "}
-                <BenchmarkOrLoading
-                  data={data}
-                  columns={data?.maxMemory.filter(
-                    ({ name }) => !typescriptBenches.includes(name),
+                <BenchmarkChart
+                  columns={data.maxMemory.filter(({ name }) =>
+                    !typescriptBenches.includes(name)
                   )}
                   yLabel="megabytes"
                   yTickFormat={formatMB}
@@ -222,25 +231,26 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
                     Type Checking
                   </h5>
                 </a>
-                <BenchmarkOrLoading
-                  data={data}
-                  columns={data?.execTime.filter(({ name }) => {
-                    return typescriptBenches.includes(name);
-                  })}
+                <BenchmarkChart
+                  columns={data.execTime.filter(({ name }) =>
+                    typescriptBenches.includes(name)
+                  )}
                   yLabel="seconds"
                   yTickFormat={formatLogScale}
                 />
                 <p class="mt-1">
-                  In both cases, <code>std/examples/chat/server_test.ts</code>
-                  {" "}
+                  In both cases,{" "}
+                  <InlineCode>std/examples/chat/server_test.ts</InlineCode>{" "}
                   is cached by Deno. The workload contains 20 unique TypeScript
                   modules. With <em>check</em>{" "}
                   a full TypeScript type check is performed, while{" "}
-                  <em>no_check</em> uses the <code>--no-check</code>{" "}
+                  <em>no_check</em> uses the <InlineCode>--no-check</InlineCode>
+                  {" "}
                   flag to skip a full type check. <em>bundle</em>{" "}
                   does a full type check and generates a single file output,
                   while <em>bundle_no_check</em> uses the{" "}
-                  <code>--no-check</code> flag to skip a full type check.
+                  <InlineCode>--no-check</InlineCode>{" "}
+                  flag to skip a full type check.
                 </p>
               </div>
             </div>
@@ -276,11 +286,10 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
                     HTTP Server Throughput
                   </h5>
                 </a>
-                <BenchmarkOrLoading
-                  data={data}
+                <BenchmarkChart
                   columns={showNormalized
-                    ? data?.normalizedReqPerSec
-                    : data?.reqPerSec}
+                    ? data.normalizedReqPerSec
+                    : data.reqPerSec}
                   yLabel="1k req/sec"
                   yTickFormat={formatReqSec}
                 />
@@ -347,11 +356,10 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
                     HTTP Latency
                   </h5>
                 </a>{" "}
-                <BenchmarkOrLoading
-                  data={data}
-                  columns={showNormalized ? data?.normalizedMaxLatency
-                  : data?.maxLatency}
-                  yLabel={"milliseconds"}
+                <BenchmarkChart
+                  columns={showNormalized ? data.normalizedMaxLatency
+                  : data.maxLatency}
+                  yLabel="milliseconds"
                   yTickFormat={formatMsec}
                 />
                 <p class="mt-1">
@@ -368,9 +376,8 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
                     File sizes
                   </h5>
                 </a>
-                <BenchmarkOrLoading
-                  data={data}
-                  columns={data?.binarySize}
+                <BenchmarkChart
+                  columns={data.binarySize}
                   yLabel={"megabytes"}
                   yTickFormat={formatMB}
                 />
@@ -385,10 +392,9 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
                     Bundle size
                   </h5>
                 </a>{" "}
-                <BenchmarkOrLoading
-                  data={data}
-                  columns={data?.bundleSize}
-                  yLabel={"kilobytes"}
+                <BenchmarkChart
+                  columns={data.bundleSize}
+                  yLabel="kilobytes"
                   yTickFormat={formatKB}
                 />
                 <p class="mt-1">Size of different bundled scripts.</p>
@@ -409,7 +415,7 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
                     Cargo Dependencies
                   </h5>
                 </a>{" "}
-                <BenchmarkOrLoading data={data} columns={data?.cargoDeps} />
+                <BenchmarkChart columns={data.cargoDeps} />
               </div>
             </div>
             <div class="mt-20">
@@ -417,10 +423,9 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
                 Language Server
               </h4>
               <div class="mt-8">
-                <BenchmarkOrLoading
-                  data={data}
-                  columns={data?.lspExecTime}
-                  yLabel={"milliseconds"}
+                <BenchmarkChart
+                  columns={data.lspExecTime}
+                  yLabel="milliseconds"
                 />
                 <p class="mt-1">
                   We track the performance of the Deno language server under
@@ -435,24 +440,6 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
       </div>
     </>
   );
-}
-
-function BenchmarkOrLoading(props: {
-  data: BenchmarkData | null;
-  columns?: Column[];
-  yLabel?: string;
-  yTickFormat?: (n: number) => string;
-}) {
-  return props.data && props.columns
-    ? (
-      <BenchmarkChart
-        columns={props.columns}
-        sha1List={props.data.sha1List}
-        yLabel={props.yLabel}
-        yTickFormat={props.yTickFormat}
-      />
-    )
-    : <BenchmarkLoading />;
 }
 
 function SourceLink({
@@ -504,7 +491,7 @@ export const handler: Handlers = {
       }
     }
 
-    if (url.search !== "?" + show.search) {
+    if (url.search && url.search !== "?" + show.search) {
       url.search = "?" + show.search;
       return Response.redirect(url);
     }
