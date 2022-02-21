@@ -236,6 +236,7 @@ function Manual(): React.ReactElement {
         <title>
           {pageTitle === "" ? "Manual | Deno" : `${pageTitle} | Manual | Deno`}
         </title>
+        <link rel="canonical" href={`https://deno.land/manual${path}`} />
         <link
           rel="preconnect"
           href="https://BH4D9OD16A-dsn.algolia.net"
