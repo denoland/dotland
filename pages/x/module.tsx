@@ -57,8 +57,6 @@ export default function Registry({ params, url }: PageProps) {
         <title>
           {name + (version ? `@${version}` : "") + " | Deno"}
         </title>
-        <link rel="stylesheet" href="/gfm.css" />
-        <link rel="stylesheet" href="/app.css" />
       </Head>
       <div class="bg-gray-50 min-h-full">
         <Header

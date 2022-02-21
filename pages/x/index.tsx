@@ -3,6 +3,7 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import {
+  ClassAttributes,
   emojify,
   Fragment,
   h,
@@ -15,10 +16,10 @@ import {
 import { Header } from "../../components/Header.tsx";
 import { Footer } from "../../components/Footer.tsx";
 import { InlineCode } from "../../components/InlineCode.tsx";
-//import { RegistryInstructions } from "../../components/RegistryInstructions.tsx";
 
 import { getStats, listModules } from "../../util/registry_utils.ts";
 import * as pageutils from "../../util/pagination_utils.ts";
+import { ComponentChildren } from "https://x.lcas.dev/preact@10.5.12/mod.d.ts";
 
 const PER_PAGE = 20;
 
@@ -48,7 +49,6 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
       </Head>
       <div class="bg-gray">
         <Header subtitle="Third Party Modules" widerContent={true} />
-        {/* TODO: <RegistryInstructions />*/}
         <div>
           <div class="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8">
             <dt class="text-lg leading-6 font-medium text-gray-900">
@@ -70,16 +70,18 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
             </div>
 
             <div class="mt-6">
-              <button class="
+              <a
+                href="/add_module"
+                class="
                   py-2 px-8 border border-gray-300 text-md font-medium rounded-md
                   text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50
                   focus:outline-none focus:shadow-outline-blue focus:border-blue-300
                   active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out
-                " /* TODO: onClick={() => setOverlayOpen(true)}*/>
+                "
+              >
                 Publish a module
-              </button>
+              </a>
             </div>
-
             {
               /* <div class="mt-8">
               <ErrorMessage title="Ongoing incident">
@@ -148,7 +150,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                       return (
                         <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
                           <div class="flex-1 flex justify-between items-center sm:hidden">
-                            <a
+                            <MaybeA
                               disabled={!hasPrevious}
                               href={toPage(page - 1)}
                               class={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md bg-white ${
@@ -158,11 +160,11 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                               } transition ease-in-out duration-150`}
                             >
                               Previous
-                            </a>
+                            </MaybeA>
                             <div class="text-base leading-6 text-gray-500">
                               {page}/{pageCount}
                             </div>
-                            <a
+                            <MaybeA
                               disabled={!hasNext}
                               href={toPage(page + 1)}
                               class={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md bg-white ml-4 ${
@@ -172,7 +174,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                               } transition ease-in-out duration-150`}
                             >
                               Next
-                            </a>
+                            </MaybeA>
                           </div>
                           <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
                             <div>
@@ -194,7 +196,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                             </div>
                             <div>
                               <nav class="relative z-0 inline-flex shadow-sm">
-                                <a
+                                <MaybeA
                                   disabled={!hasPrevious}
                                   href={toPage(page - 1)}
                                   class={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium ${
@@ -215,7 +217,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                                       clipRule="evenodd"
                                     />
                                   </svg>
-                                </a>
+                                </MaybeA>
                                 <a
                                   href={toPage(1)}
                                   class={`inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
@@ -312,7 +314,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                                 >
                                   {pageCount}
                                 </a>
-                                <a
+                                <MaybeA
                                   href={toPage(page + 1)}
                                   disabled={!hasNext}
                                   class={`-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium ${
@@ -333,7 +335,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                                       clipRule="evenodd"
                                     />
                                   </svg>
-                                </a>
+                                </MaybeA>
                               </nav>
                             </div>
                           </div>
@@ -391,13 +393,12 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                       instructions:
                     </p>
                     <span class="block w-full rounded-md shadow-sm mt-4">
-                      <button
-                        type="submit"
+                      <a
+                        href="/add_module"
                         class="w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
-                        /* TODO: onClick={() => setOverlayOpen(true)}*/
                       >
-                        Add a module
-                      </button>
+                        Publish a module
+                      </a>
                     </span>
                   </dd>
                 </div>
@@ -523,42 +524,38 @@ function ModuleList({
                           )}
                       </span>
                     </div>
-                    {meta.date
-                      ? (
-                        <div class="mt-1 flex items-center text-sm leading-5 text-gray-400">
-                          <span
-                            class="truncate"
-                            title={new Date(meta.date).toLocaleString()}
-                          >
-                            <time dateTime={meta.date}>
-                              {twas(new Date(meta.date))}
-                            </time>
-                          </span>
-                        </div>
-                      )
-                      : null}
+                    {meta.date && (
+                      <div class="mt-1 flex items-center text-sm leading-5 text-gray-400">
+                        <span
+                          class="truncate"
+                          title={new Date(meta.date).toLocaleString()}
+                        >
+                          <time dateTime={meta.date}>
+                            {twas(new Date(meta.date))}
+                          </time>
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </div>
-                {meta.starCount !== undefined
-                  ? (
-                    <div class="ml-6 mr-4 flex items-center">
-                      <div class="text-gray-400">
-                        {meta.starCount}
-                      </div>
-                      <svg
-                        class="ml-1 text-gray-400 w-5 h-5"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <title>
-                          star
-                        </title>
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                        </path>
-                      </svg>
+                {meta.starCount !== undefined && (
+                  <div class="ml-6 mr-4 flex items-center">
+                    <div class="text-gray-400">
+                      {meta.starCount}
                     </div>
-                  )
-                  : null}
+                    <svg
+                      class="ml-1 text-gray-400 w-5 h-5"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <title>
+                        star
+                      </title>
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                      </path>
+                    </svg>
+                  </div>
+                )}
                 <div>
                   <svg
                     class="h-5 w-5 text-gray-400"
@@ -579,4 +576,14 @@ function ModuleList({
       })}
     </ul>
   );
+}
+
+//  find proper typings
+// deno-lint-ignore no-explicit-any
+function MaybeA({ disabled, children, ...props }: any & {
+  disabled?: boolean;
+  children: ComponentChildren;
+}) {
+  const Tag = disabled ? "div" : "a";
+  return <Tag {...props}>{children}</Tag>;
 }

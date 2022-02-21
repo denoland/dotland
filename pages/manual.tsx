@@ -102,8 +102,6 @@ export default function Manual({ params, url }: PageProps) {
         <title>
           {pageTitle === "" ? "Manual | Deno" : `${pageTitle} | Manual | Deno`}
         </title>
-        <link rel="stylesheet" href="/gfm.css" />
-        <link rel="stylesheet" href="/app.css" />
         <link
           rel="preconnect"
           href="https://BH4D9OD16A-dsn.algolia.net"

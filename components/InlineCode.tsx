@@ -3,9 +3,14 @@
 /** @jsx h */
 import { ComponentChildren, h } from "../deps.ts";
 
-export function InlineCode(props: { children: ComponentChildren }) {
+export function InlineCode(
+  props: { children: ComponentChildren; id?: string },
+) {
   return (
-    <code class="py-1 px-2 font-mono bg-gray-100 text-sm break-all">
+    <code
+      class="py-1 px-2 font-mono bg-gray-100 text-sm break-all"
+      id={props.id}
+    >
       {props.children}
     </code>
   );

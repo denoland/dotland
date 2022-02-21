@@ -10,7 +10,6 @@ export default function NotFoundPage() {
     <div class="width-full min-h-screen overflow-x-hidden relative flex justify-between flex-col flex-wrap">
       <Head>
         <title>Not Found | Deno</title>
-        <link rel="stylesheet" href="/app.css" />
       </Head>
       <div class="flex-top">
         <Header />

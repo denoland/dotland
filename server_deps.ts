@@ -1,1 +1,1 @@
-export * from "https://raw.githubusercontent.com/lucacasonato/fresh/2ec980ca454073f4b3895763a693f7cbd73761c6/server.ts";
+export * from "https://raw.githubusercontent.com/lucacasonato/fresh/04a32f34987fbd59ce646967f216b2cca072a58f/server.ts";

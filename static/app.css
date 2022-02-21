@@ -57,6 +57,15 @@ ol.nested li:before {
 	counter-increment: item;
 }
 
+/* Add Module */
+
+#modulename:valid ~ span {
+	display: none;
+}
+
+#subdirectory:invalid + span {
+	display: block;
+}
 
 /* Module */
 
@@ -84,4 +93,67 @@ ol.nested li:before {
 	to {
 		left: 100%;
 	}
+}
+
+/* removes focus outlines on mouse clicks */
+*:focus:not(:focus-visible),
+*::before:focus:not(:focus-visible),
+*::after:focus:not(:focus-visible) {
+	outline: none;
+}
+
+/* https://github.com/denoland/dotland/issues/1163 */
+.language-toml > code > .token-line > .table {
+	display: inline;
+}
+
+span.token.plain:empty:before {
+	content: "\200b";
+}
+
+.prism-code {
+	border-radius: .25rem;
+	tab-size: 2;
+	-moz-tab-size: 2;
+}
+.highlight-line {
+	background-color: #fffbdd;
+}
+
+ul.tree,
+ul.tree ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul.tree ul {
+	margin-left: 12px;
+}
+
+ul.tree li {
+	margin: 0;
+	padding: 0 8px;
+	line-height: 20px;
+	border-left: 1px solid rgb(100, 100, 100);
+}
+
+ul.tree li:last-child {
+	border-left: none;
+}
+
+ul.tree li:before {
+	position: relative;
+	top: -4px;
+	height: 12px;
+	width: 12px;
+	color: white;
+	border-bottom: 1px solid rgb(100, 100, 100);
+	content: "";
+	display: inline-block;
+	left: -4px;
+}
+
+ul.tree li:last-child:before {
+	border-left: 1px solid rgb(100, 100, 100);
 }

@@ -43,6 +43,9 @@ export default function App({ Component }) {
         />
         <link rel="stylesheet" href="/fonts/inter/inter.css" />
         <link rel="manifest" href="/site.webmanifest" />
+
+        <link rel="stylesheet" href="/app.css" />
+        <link rel="stylesheet" href="/gfm.css" />
       </Head>
       <Component />
     </div>

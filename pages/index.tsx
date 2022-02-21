@@ -21,7 +21,6 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <link rel="stylesheet" href="/gfm.css" />
         <title>Deno - A modern runtime for JavaScript and TypeScript</title>
       </Head>
       <div class="bg-white">

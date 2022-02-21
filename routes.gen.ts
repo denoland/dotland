@@ -6,14 +6,15 @@ import * as $0 from "./pages/index.tsx";
 import * as $1 from "./pages/std.tsx";
 import * as $2 from "./pages/_render.ts";
 //import * as $3 from "./pages/benchmarks.tsx";
-import * as $4 from "./pages/manual.tsx";
-import * as $5 from "./pages/translations.tsx";
-import * as $6 from "./pages/status.tsx";
-import * as $7 from "./pages/_404.tsx";
-//import * as $8 from "./pages/_app.tsx";
-import * as $9 from "./pages/x/index.tsx";
-import * as $10 from "./pages/x/module.tsx";
-import * as $11 from "./pages/artwork.tsx";
+import * as $4 from "./pages/add_module.tsx";
+import * as $5 from "./pages/manual.tsx";
+import * as $6 from "./pages/translations.tsx";
+import * as $7 from "./pages/status.tsx";
+import * as $8 from "./pages/_404.tsx";
+import * as $9 from "./pages/_app.tsx";
+import * as $10 from "./pages/x/index.tsx";
+import * as $11 from "./pages/x/module.tsx";
+import * as $12 from "./pages/artwork.tsx";
 
 const routes = {
   pages: {
@@ -21,14 +22,15 @@ const routes = {
     "./pages/std.tsx": $1,
     "./pages/_render.ts": $2,
     //"./pages/benchmarks.tsx": $3,
-    "./pages/manual.tsx": $4,
-    "./pages/translations.tsx": $5,
-    "./pages/status.tsx": $6,
-    "./pages/_404.tsx": $7,
-    //"./pages/_app.tsx": $8,
-    "./pages/x/index.tsx": $9,
-    "./pages/x/module.tsx": $10,
-    "./pages/artwork.tsx": $11,
+    "./pages/add_module.tsx": $4,
+    "./pages/manual.tsx": $5,
+    "./pages/translations.tsx": $6,
+    "./pages/status.tsx": $7,
+    "./pages/_404.tsx": $8,
+    "./pages/_app.tsx": $9,
+    "./pages/x/index.tsx": $10,
+    "./pages/x/module.tsx": $11,
+    "./pages/artwork.tsx": $12,
   },
   baseUrl: import.meta.url,
 };
