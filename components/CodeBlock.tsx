@@ -69,8 +69,7 @@ export function RawCodeBlock({
   class?: string;
   enableLineRef?: boolean;
 }) {
-  const codeDivClassNames =
-    "text-gray-300 token-line text-right select-none text-xs";
+  const codeDivClassNames = "text-gray-300 token-line text-right select-none";
   const newLang = language === "shell"
     ? "bash"
     : language === "text"
@@ -88,8 +87,12 @@ export function RawCodeBlock({
     );
   }
 
-  Prism.hooks.add("wrap", (x) => {});
-  const html = Prism.highlight(code, grammar, language);
+  //Prism.hooks.add("wrap", (x) => {});
+  let html = Prism.highlight(code, grammar, language);
+  if (!disablePrefixes && (language === "bash" || language === "shell")) {
+    html = `<code class="pr-2 sm:pr-3"><div class="${codeDivClassNames}">$</div></code>` + html;
+  }
+
   const __html = sanitizeHtml(html, {
     allowedTags: sanitizeHtml.defaults.allowedTags.concat([
       "img",
@@ -121,7 +124,8 @@ export function RawCodeBlock({
       h6: ["id"],
     },
     allowedClasses: {
-      div: ["highlight"],
+      code: ["pr-2", "sm:pr-3"],
+      div: ["highlight", ...codeDivClassNames.split(" ")],
       span: [
         "token",
         "keyword",
