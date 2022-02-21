@@ -1,7 +1,7 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-import { h, htmlEscape, Prism, PrismTheme } from "../deps.ts";
+import { h, htmlEscape, Prism, PrismTheme, sanitizeHtml } from "../deps.ts";
 
 import "https://esm.sh/prismjs@1.25.0/components/prism-bash?no-check";
 //import "https://esm.sh/prismjs@1.25.0/components/prism-batch?no-check";
@@ -83,16 +83,70 @@ export function RawCodeBlock({
   if (grammar === undefined) {
     return (
       <div>
-        <code dangerouslySetInnerHTML={{ __html: code }} />
+        <code dangerouslySetInnerHTML={{ __html: htmlEscape(code) }} />
       </div>
     );
   }
 
-  let tokensI = 0;
-  Prism.hooks.add("wrap", (x) => {
-    x.classes.push("text-xs");
-  });
+  Prism.hooks.add("wrap", (x) => {});
   const html = Prism.highlight(code, grammar, language);
+  const __html = sanitizeHtml(html, {
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat([
+      "img",
+      "video",
+      "svg",
+      "path",
+    ]),
+    allowedAttributes: {
+      ...sanitizeHtml.defaults.allowedAttributes,
+      img: ["src", "alt", "height", "width", "align"],
+      video: [
+        "src",
+        "alt",
+        "height",
+        "width",
+        "autoplay",
+        "muted",
+        "loop",
+        "playsinline",
+      ],
+      a: ["id", "aria-hidden", "href", "tabindex", "rel"],
+      svg: ["viewbox", "width", "height", "aria-hidden"],
+      path: ["fill-rule", "d"],
+      h1: ["id"],
+      h2: ["id"],
+      h3: ["id"],
+      h4: ["id"],
+      h5: ["id"],
+      h6: ["id"],
+    },
+    allowedClasses: {
+      div: ["highlight"],
+      span: [
+        "token",
+        "keyword",
+        "operator",
+        "number",
+        "boolean",
+        "function",
+        "string",
+        "comment",
+        "class-name",
+        "regex",
+        "regex-delimiter",
+        "tag",
+        "attr-name",
+        "punctuation",
+        "script-punctuation",
+        "script",
+        "plain-text",
+        "property",
+      ],
+      a: ["anchor"],
+      svg: ["octicon", "octicon-link"],
+    },
+    allowProtocolRelative: false,
+  });
   return (
     <div
       data-color-mode="light"
@@ -100,7 +154,7 @@ export function RawCodeBlock({
       class="markdown-body"
     >
       <pre
-        dangerouslySetInnerHTML={{ __html: html }}
+        dangerouslySetInnerHTML={{ __html }}
         class={`flex overflow-y-auto highlight highlight-source-${newLang} ${
           extraClassName ?? ""
         }`}

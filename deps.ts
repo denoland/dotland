@@ -16,3 +16,4 @@ export {
   render as gfm,
 } from "https://deno.land/x/gfm@0.1.18/mod.ts";
 export { emojify } from "https://deno.land/x/emoji@0.1.2/mod.ts";
+export { default as sanitizeHtml } from "https://esm.sh/sanitize-html@2.6.1";
