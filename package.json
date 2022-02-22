@@ -18,7 +18,7 @@
     "date-fns": "^2.22.1",
     "dompurify": "^2.2.6",
     "marked": "^2.0.1",
-    "next": "^12.0.9",
+    "next": "^12.1.0",
     "next-plugin-preact": "^3.0.6",
     "orga": "^2.4.8",
     "preact": "^10.5.15",
