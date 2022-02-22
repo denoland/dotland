@@ -21,7 +21,8 @@ jobs:
 
       - name: Lint
         run: deno lint
-  worker:
+
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Clone repository
@@ -32,5 +33,5 @@ jobs:
         with:
           deno-version: v1.x
 
-      - name: Test Worker
-        run: deno test --allow-net --allow-env --allow-hrtime worker/
+      - name: Run Tests
+        run: deno test --allow-net --allow-env --allow-hrtime

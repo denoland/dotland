@@ -1,11 +1,6 @@
 /* Copyright 2021-2022 the Deno authors. All rights reserved. MIT license. */
 
-import {
-  assert,
-  assertArrayIncludes,
-  assertEquals,
-  assertStringIncludes,
-} from "https://deno.land/std@0.119.0/testing/asserts.ts";
+import { assert, assertArrayIncludes, assertEquals, assertStringIncludes } from "../test_deps.ts";
 
 import { handleApiRequest } from "./suggestions.ts";
 

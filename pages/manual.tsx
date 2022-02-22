@@ -108,38 +108,41 @@ export default function Manual({ params, url }: PageProps) {
           href="https://BH4D9OD16A-dsn.algolia.net"
           crossOrigin="true"
         />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"
+        />
       </Head>
+      <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3" />
+      <div id="manualSearch" />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+        docsearch({
+          container: "#manualSearch",
+          appId: "APP_ID",
+          indexName: "deno_manual",
+          apiKey: "a05e65bb082b87ff0ae75506f1b29fce",
+          searchParameters: {
+            distinct: 1,
+          },
+          /*navigator: {
+            navigate({ suggestionUrl }) {
+              push("/[...rest]", suggestionUrl);
+            },
+          },*/
+        });
+      `,
+        }}
+      />
       {
         /*{isOpen &&
         createPortal(
           <DocSearchModal
             initialQuery={initialQuery}
             initialScrollY={window.scrollY}
-            searchParameters={{
-              distinct: 1,
-            }}
             onClose={onClose}
-            indexName="deno_manual"
-            apiKey="a05e65bb082b87ff0ae75506f1b29fce"
-            navigator={{
-              navigate({ suggestionUrl }: any) {
-                push("/[...rest]", suggestionUrl);
-              },
-            }}
             hitComponent={Hit}
-            transformItems={(items: Array<{ url: string }>) => {
-              return items.map((item) => {
-                // We transform the absolute URL into a relative URL to
-                // leverage Next's preloading.
-                const a = document.createElement("a");
-                a.href = item.url;
-
-                return {
-                  ...item,
-                  url: `${a.pathname}${a.hash}`,
-                };
-              });
-            }}
           />,
           document.body,
         )}*/
@@ -300,14 +303,11 @@ export default function Manual({ params, url }: PageProps) {
             tabIndex={0}
           >
             <div class="h-16 bg-white shadow hidden md:block">
-              {
-                /*<div class="max-w-screen-md mx-auto px-12 w-full flex justify-between h-full">
+              <div class="max-w-screen-md mx-auto px-12 w-full flex justify-between h-full">
                 <label htmlFor="search_field" class="sr-only">
                   Search
                 </label>
-                <button
-                  class="w-full text-gray-400 focus-within:text-gray-600 flex items-center"
-                  // onClick={onOpen}
+                <button class="w-full text-gray-400 focus-within:text-gray-600 flex items-center" // onClick={onOpen}
                 >
                   <div class="flex items-center pointer-events-none">
                     <svg
@@ -326,8 +326,7 @@ export default function Manual({ params, url }: PageProps) {
                     Search the docs (press <InlineCode>/</InlineCode> to focus)
                   </div>
                 </button>
-              </div>*/
-              }
+              </div>
             </div>
             {isPreview && (
               <UserContributionBanner

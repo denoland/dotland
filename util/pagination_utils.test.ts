@@ -1,30 +1,29 @@
-/* eslint-env jest */
-
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 import { hasNext, hasPrevious, pageCount } from "./pagination_utils.ts";
+import { assert, assertEquals } from "../test_deps.ts";
 
-test("hasPrevious", () => {
-  expect(hasPrevious({ page: 0 })).toEqual(false);
-  expect(hasPrevious({ page: 1 })).toEqual(false);
-  expect(hasPrevious({ page: 2 })).toEqual(true);
-  expect(hasPrevious({ page: 5 })).toEqual(true);
+Deno.test("hasPrevious", () => {
+  assert(!hasPrevious({ page: 0 }));
+  assert(!hasPrevious({ page: 1 }));
+  assert(hasPrevious({ page: 2 }));
+  assert(hasPrevious({ page: 5 }));
 });
 
-test("hasNext", () => {
-  expect(hasNext({ page: 1, totalCount: 30, perPage: 5 })).toEqual(true);
-  expect(hasNext({ page: 5, totalCount: 30, perPage: 5 })).toEqual(true);
-  expect(hasNext({ page: 6, totalCount: 30, perPage: 5 })).toEqual(false);
-  expect(hasNext({ page: 1, totalCount: 29, perPage: 5 })).toEqual(true);
-  expect(hasNext({ page: 5, totalCount: 29, perPage: 5 })).toEqual(true);
-  expect(hasNext({ page: 6, totalCount: 29, perPage: 5 })).toEqual(false);
-  expect(hasNext({ page: 1, totalCount: 31, perPage: 5 })).toEqual(true);
-  expect(hasNext({ page: 5, totalCount: 31, perPage: 5 })).toEqual(true);
-  expect(hasNext({ page: 6, totalCount: 31, perPage: 5 })).toEqual(true);
-  expect(hasNext({ page: 7, totalCount: 31, perPage: 5 })).toEqual(false);
+Deno.test("hasNext", () => {
+  assert(hasNext({ page: 1, totalCount: 30, perPage: 5 }));
+  assert(hasNext({ page: 5, totalCount: 30, perPage: 5 }));
+  assert(!hasNext({ page: 6, totalCount: 30, perPage: 5 }));
+  assert(hasNext({ page: 1, totalCount: 29, perPage: 5 }));
+  assert(hasNext({ page: 5, totalCount: 29, perPage: 5 }));
+  assert(!hasNext({ page: 6, totalCount: 29, perPage: 5 }));
+  assert(hasNext({ page: 1, totalCount: 31, perPage: 5 }));
+  assert(hasNext({ page: 5, totalCount: 31, perPage: 5 }));
+  assert(hasNext({ page: 6, totalCount: 31, perPage: 5 }));
+  assert(!hasNext({ page: 7, totalCount: 31, perPage: 5 }));
 });
 
-test("pageCount", () => {
-  expect(pageCount({ totalCount: 30, perPage: 5 })).toEqual(6);
-  expect(pageCount({ totalCount: 31, perPage: 5 })).toEqual(7);
+Deno.test("pageCount", () => {
+  assertEquals(pageCount({ totalCount: 30, perPage: 5 }), 6);
+  assertEquals(pageCount({ totalCount: 31, perPage: 5 }), 7);
 });

@@ -1,6 +1,6 @@
 /* Copyright 2021 the Deno authors. All rights reserved. MIT license. */
 
-import { assert, assertEquals } from "./test_deps.ts";
+import { assert, assertEquals } from "../test_deps.ts";
 import { extractAltLineNumberReference, handleRequest } from "./handler.ts";
 
 /** This is taken directly from a recent version of Chromium */
