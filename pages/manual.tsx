@@ -191,7 +191,11 @@ export default function Manual({ params, url }: PageProps) {
                     </div>
                   </div>
                 </a>
-                <Version version={params.version} versions={versions} />
+                <Version
+                  version={params.version}
+                  versions={versions}
+                  path={path}
+                />
               </div>
               <ToC
                 tableOfContents={tableOfContents}
@@ -216,7 +220,11 @@ export default function Manual({ params, url }: PageProps) {
                   </div>
                 </div>
               </a>
-              <Version version={params.version} versions={versions} />
+              <Version
+                version={params.version}
+                versions={versions}
+                path={path}
+              />
             </div>
             <ToC
               tableOfContents={tableOfContents}
@@ -430,9 +438,11 @@ function UserContributionBanner({
 function Version({
   version,
   versions,
+  path,
 }: {
   version: string;
   versions: string[];
+  path: string;
 }) {
   return (
     <div class="mt-5 px-4">
@@ -444,9 +454,9 @@ function Version({
           <select
             id="version"
             class="block form-select w-full transition duration-150 ease-in-out sm:text-sm! sm:leading-5!"
+            autoComplete="off"
             value={version}
-            /*onChange={({ target: { value: newVersion } }) =>
-              gotoVersion(newVersion)}*/
+            onChange={`((e) => { window.location = "/manual@" + e.target.value + "${path}"; })(event)`}
           >
             {version !== "main" && !versions.includes(version) &&
               (
@@ -539,7 +549,7 @@ export const handler: Handlers = {
       url.pathname = url.pathname.slice(0, -3);
       return Response.redirect(url);
     }
-    return render();
+    return render!();
   },
 };
 

@@ -101,7 +101,8 @@ export default function Registry({ params, url }: PageProps) {
               } else {
                 return (
                   <ModuleView
-                    {...{ name, version: version!, path, versions, isStd, url }}
+                    version={version!}
+                    {...{ name, path, versions, isStd, url }}
                   />
                 );
               }
