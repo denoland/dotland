@@ -95,6 +95,17 @@ ol.nested li:before {
 	}
 }
 
+/* Benchmark */
+#normalizedToggle:checked + label > span:first-of-type {
+	background-color: rgb(229 231 235);
+}
+#normalizedToggle:checked + label > span:first-of-type > span {
+	transform: translateX(1.25rem);
+}
+
+#normalizedToggle:checked ~ div:first-of-type {
+	display: none;
+}
 /* removes focus outlines on mouse clicks */
 *:focus:not(:focus-visible),
 *::before:focus:not(:focus-visible),

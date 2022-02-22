@@ -27,8 +27,6 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
   const typescriptBenches = ["check", "no_check", "bundle", "bundle_no_check"];
   const show: ShowData = props.renderData!.show;
 
-  const [showNormalized, setShowNormalized] = useState(false);
-
   const rawData: BenchmarkRun[] = useData(
     `https://denoland.github.io/benchmark_data/${show.dataFile}`,
     async (url) => {
@@ -44,6 +42,95 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
       .filter((k) => k != null)
       .join("...")
     : "";
+
+  function IOMaybeNormalized({ normalized }: { normalized: boolean }) {
+    return (
+      <div>
+        <div class="mt-8">
+          <a href="#http-server-throughput" id="http-server-throughput">
+            <h5 class="text-lg font-medium tracking-tight hover:underline">
+              HTTP Server Throughput
+            </h5>
+          </a>
+          <BenchmarkChart
+            columns={normalized ? data.normalizedReqPerSec : data.reqPerSec}
+            yLabel="1k req/sec"
+            yTickFormat={formatReqSec}
+          />
+          <p class="mt-1">
+            Tests HTTP server performance. 10 keep-alive connections do as many
+            hello-world requests as possible. Bigger is better.
+          </p>
+          <ul class="ml-8 list-disc my-2">
+            <li>
+              <SourceLink path="cli/bench/deno_tcp.ts" name="deno_tcp" />{" "}
+              is a fake http server that doesn't parse HTTP. It is comparable to
+              {" "}
+              <SourceLink path="cli/bench/node_tcp.js" name="node_tcp" />
+            </li>
+            <li>
+              <SourceLink
+                repo="deno_std"
+                path="http/bench.ts"
+                name="deno_http"
+              />{" "}
+              is a web server written in TypeScript. It is comparable to{" "}
+              <SourceLink
+                path="cli/bench/node_http.js"
+                name="node_http"
+              />
+            </li>
+            <li class="break-words">
+              core_http_bin_ops and core_http_json_ops are two versions of a
+              minimal fake HTTP server. It blindly reads and writes fixed HTTP
+              packets. It is comparable to deno_tcp and node_tcp. This is a
+              standalone executable that uses{" "}
+              <a
+                class="link"
+                href="https://crates.io/crates/deno_core"
+              >
+                the deno rust crate
+              </a>
+              . The code is in{" "}
+              <SourceLink
+                path="core/examples/http_bench_json_ops.rs"
+                name="http_bench_json_ops.rs"
+              />{" "}
+              and{" "}
+              <SourceLink
+                path="core/examples/http_bench_json_ops.js"
+                name="http_bench_json_ops.js"
+              />{" "}
+              for http_bench_json_ops.
+            </li>
+            <li>
+              <SourceLink
+                path="test_util/src/test_server.rs"
+                name="hyper"
+              />{" "}
+              is a Rust HTTP server and represents an upper bound.
+            </li>
+          </ul>
+        </div>
+        <div class="mt-8">
+          <a href="#http-latency" id="http-latency">
+            <h5 class="text-lg font-medium tracking-tight hover:underline">
+              HTTP Latency
+            </h5>
+          </a>{" "}
+          <BenchmarkChart
+            columns={normalized ? data.normalizedMaxLatency : data.maxLatency}
+            yLabel="milliseconds"
+            yTickFormat={formatMsec}
+          />
+          <p class="mt-1">
+            Max latency during the same test used above for requests/second.
+            Smaller is better.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -255,116 +342,32 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
             </div>
             <div class="mt-20">
               <h4 class="text-2xl font-bold tracking-tight">I/O</h4>
-              <p
+              <input
+                type="checkbox"
+                class="hidden"
+                id="normalizedToggle"
+                autoComplete="off"
+              />
+              <label
                 class="mt-4 flex cursor-pointer"
-                onClick={() => setShowNormalized(!showNormalized)}
+                htmlFor="normalizedToggle"
               >
                 <span
                   role="checkbox"
                   tabIndex={0}
-                  aria-checked={showNormalized ? "true" : "false"}
-                  class={`${
-                    showNormalized ? "bg-gray-900" : "bg-gray-200"
-                  } relative inline-block flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full transition-colors ease-in-out duration-200 focus:outline-none focus:shadow-outline`}
+                  class="bg-gray-900 relative inline-block flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full transition-colors ease-in-out duration-200 focus:outline-none focus:shadow-outline"
                 >
                   <span
                     aria-hidden="true"
-                    class={`${
-                      showNormalized ? "translate-x-5" : "translate-x-0"
-                    } inline-block h-5 w-5 rounded-full bg-white shadow transform transition ease-in-out duration-200`}
+                    class="inline-block h-5 w-5 rounded-full bg-white shadow transform transition ease-in-out duration-200"
                   />
                 </span>
                 <span class="ml-2 text-gray-900">
                   Show normalized benchmarks
                 </span>
-              </p>
-              <div class="mt-8">
-                <a href="#http-server-throughput" id="http-server-throughput">
-                  <h5 class="text-lg font-medium tracking-tight hover:underline">
-                    HTTP Server Throughput
-                  </h5>
-                </a>
-                <BenchmarkChart
-                  columns={showNormalized
-                    ? data.normalizedReqPerSec
-                    : data.reqPerSec}
-                  yLabel="1k req/sec"
-                  yTickFormat={formatReqSec}
-                />
-                <p class="mt-1">
-                  Tests HTTP server performance. 10 keep-alive connections do as
-                  many hello-world requests as possible. Bigger is better.
-                </p>
-                <ul class="ml-8 list-disc my-2">
-                  <li>
-                    <SourceLink path="cli/bench/deno_tcp.ts" name="deno_tcp" />
-                    {" "}
-                    is a fake http server that doesn't parse HTTP. It is
-                    comparable to{" "}
-                    <SourceLink path="cli/bench/node_tcp.js" name="node_tcp" />
-                  </li>
-                  <li>
-                    <SourceLink
-                      repo="deno_std"
-                      path="http/bench.ts"
-                      name="deno_http"
-                    />{" "}
-                    is a web server written in TypeScript. It is comparable to
-                    {" "}
-                    <SourceLink
-                      path="cli/bench/node_http.js"
-                      name="node_http"
-                    />
-                  </li>
-                  <li class="break-words">
-                    core_http_bin_ops and core_http_json_ops are two versions of
-                    a minimal fake HTTP server. It blindly reads and writes
-                    fixed HTTP packets. It is comparable to deno_tcp and
-                    node_tcp. This is a standalone executable that uses{" "}
-                    <a
-                      class="link"
-                      href="https://crates.io/crates/deno_core"
-                    >
-                      the deno rust crate
-                    </a>
-                    . The code is in{" "}
-                    <SourceLink
-                      path="core/examples/http_bench_json_ops.rs"
-                      name="http_bench_json_ops.rs"
-                    />{" "}
-                    and{" "}
-                    <SourceLink
-                      path="core/examples/http_bench_json_ops.js"
-                      name="http_bench_json_ops.js"
-                    />{" "}
-                    for http_bench_json_ops.
-                  </li>
-                  <li>
-                    <SourceLink
-                      path="test_util/src/test_server.rs"
-                      name="hyper"
-                    />{" "}
-                    is a Rust HTTP server and represents an upper bound.
-                  </li>
-                </ul>
-              </div>
-              <div class="mt-8">
-                <a href="#http-latency" id="http-latency">
-                  <h5 class="text-lg font-medium tracking-tight hover:underline">
-                    HTTP Latency
-                  </h5>
-                </a>{" "}
-                <BenchmarkChart
-                  columns={showNormalized ? data.normalizedMaxLatency
-                  : data.maxLatency}
-                  yLabel="milliseconds"
-                  yTickFormat={formatMsec}
-                />
-                <p class="mt-1">
-                  Max latency during the same test used above for
-                  requests/second. Smaller is better.
-                </p>
-              </div>
+              </label>
+              <IOMaybeNormalized normalized={false} />
+              <IOMaybeNormalized normalized={true} />
             </div>
             <div class="mt-20">
               <h4 class="text-2xl font-bold tracking-tight">Size</h4>

@@ -90,7 +90,9 @@ export function RawCodeBlock({
   //Prism.hooks.add("wrap", (x) => {});
   let html = Prism.highlight(code, grammar, language);
   if (!disablePrefixes && (language === "bash" || language === "shell")) {
-    html = `<code class="pr-2 sm:pr-3"><div class="${codeDivClassNames}">$</div></code>` + html;
+    html =
+      `<code class="pr-2 sm:pr-3"><div class="${codeDivClassNames}">$</div></code>` +
+      html;
   }
 
   const __html = sanitizeHtml(html, {
