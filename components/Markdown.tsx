@@ -3,8 +3,10 @@
 /** @jsx h */
 import { gfm, h } from "../deps.ts";
 
-export function Markdown(props: { source: string }) {
-  const html = gfm(props.source, { allowIframes: true });
+export function Markdown(
+  { source, baseUrl }: { source: string; baseUrl?: string },
+) {
+  const html = gfm(source, { allowIframes: true, baseUrl });
   return (
     <div
       class="py-8 px-4 markdown-body"

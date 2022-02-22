@@ -26,7 +26,7 @@ function isOldVersion(version: string) {
   return compareVersions(version, "v1.12.0") !== 1;
 }
 
-function basepath(version: string) {
+export function basepath(version: string) {
   if (isPreviewVersion(version)) {
     return githubBasepath + version;
   }

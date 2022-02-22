@@ -15,6 +15,7 @@ import { Handlers } from "../server_deps.ts";
 import { Markdown } from "../components/Markdown.tsx";
 import { InlineCode } from "../components/InlineCode.tsx";
 import {
+  basepath,
   getDocURL,
   getFileURL,
   getTableOfContents,
@@ -365,6 +366,7 @@ export default function Manual({ params, url }: PageProps) {
                   source={content
                     .replace(/\$STD_VERSION/g, stdVersion)
                     .replace(/\$CLI_VERSION/g, params.version)}
+                  baseUrl={basepath(params.version) + "/placeholder/"}
                 />
               </div>
               <div class="mt-4 pt-4 border-t border-gray-200">
