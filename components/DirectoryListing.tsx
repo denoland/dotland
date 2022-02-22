@@ -98,34 +98,6 @@ export function DirectoryListing(props: DirectoryListingProps) {
               <col class="w-max-content" />
               <col style={{ width: "5.5rem" }} />
             </colgroup>
-            <thead>
-              <tr class="table-row border-b-2 border-gray-200">
-                <td colSpan={3} class="">
-                  <div class="flex w-full">
-                    <div class="px-2 sm:pl-3 md:pl-4 py-1 text-gray-400">
-                      <svg
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        class="w-5 h-5"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                          clipRule="evenodd"
-                        >
-                        </path>
-                      </svg>
-                    </div>
-                    {/* TODO: form */}
-                    <input
-                      type="text"
-                      class="w-full pl-3 text-gray-900 text-sm outline-none bg-gray-50"
-                      placeholder="Search files..."
-                    />
-                  </div>
-                </td>
-              </tr>
-            </thead>
             <tbody class="bg-white">
               {displayItems.map((entry: Entry, i: number) => {
                 const isLastItem = displayItems.length - 1 === i;
