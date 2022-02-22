@@ -5,31 +5,32 @@ on: [push, pull_request]
 jobs:
   web:
     runs-on: ubuntu-latest
+  check:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - name: Clone repository
+        uses: actions/checkout@v2
+
+      - name: Install Deno
+        uses: denoland/setup-deno@v1
         with:
-          node-version: 12
-      - uses: denoland/setup-deno@v1
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v1
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: web-${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            web-${{ runner.os }}-yarn-
-      - run: yarn --frozen-lockfile
-      - run: yarn fmt-check
-      - run: yarn lint
-      - run: yarn test
+          deno-version: v1.x
+
+      - name: Check formatting
+        run: deno fmt --check
+
+      - name: Lint
+        run: deno lint
   worker:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: denoland/setup-deno@v1
+      - name: Clone repository
+        uses: actions/checkout@v2
+
+      - name: Install Deno
+        uses: denoland/setup-deno@v1
         with:
           deno-version: v1.x
+
       - name: Test Worker
         run: deno test --allow-net --allow-env --allow-hrtime worker/
