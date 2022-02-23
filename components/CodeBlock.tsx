@@ -93,59 +93,54 @@ export function RawCodeBlock({
   const tokens = normalizeTokens(Prism.tokenize(code, grammar));
 
   return (
-    <div>
-      <div
-        data-color-mode="light"
-        data-light-theme="light"
-        class="markdown-body text-xs"
+    <div
+      data-color-mode="light"
+      data-light-theme="light"
+      class="markdown-body "
+    >
+      <pre
+        class={`overflow-y-auto highlight highlight-source-${newLang} flex ${
+          extraClassName ?? ""
+        }`}
       >
-        <pre
-          class={`overflow-y-auto highlight highlight-source-${newLang} ${
-            extraClassName ?? ""
-          }`}
-        >
-          {enableLineRef &&
-            (
-              <div class={codeDivClasses}>
-                {tokens.map((_, i) => (
-                  <div
-                    class="token text-right"
-                    onClick={`location.hash = "#L${i}"`}
-                  >
-                    {i}
-                  </div>
-                ))}
-              </div>
-            )}
-          {!disablePrefixes && (newLang === "bash") &&
-            (
-              <code>
-                <div class={codeDivClasses}>$</div>
-              </code>
-            )}
-          <div class="inline-block">
-            {tokens.map((line, i) => {
-              return (
-                <>
-                  <span id={"L" + i}>
-                    {line.map((token) => {
-                      if (token.empty) {
-                        return <></>;
-                      }
-                      return (
-                        <span class={"token " + token.types.join(" ")}>
-                          {token.content}
-                        </span>
-                      );
-                    })}
-                  </span>
-                  <br />
-                </>
-              );
-            })}
-          </div>
-        </pre>
-      </div>
+        {enableLineRef &&
+          (
+            <div class={codeDivClasses}>
+              {tokens.map((_, i) => (
+                <div
+                  class="token text-right"
+                  onClick={`location.hash = "#L${i}"`}
+                >
+                  {i}
+                </div>
+              ))}
+            </div>
+          )}
+        {!disablePrefixes && (newLang === "bash") &&
+          (
+            <code>
+              <div class={codeDivClasses}>$</div>
+            </code>
+          )}
+        <div class="block w-full">
+          {tokens.map((line, i) => {
+            return (
+              <span id={"L" + i} class="block">
+                {line.map((token) => {
+                  if (token.empty) {
+                    return <br />;
+                  }
+                  return (
+                    <span class={"token " + token.types.join(" ")}>
+                      {token.content}
+                    </span>
+                  );
+                })}
+              </span>
+            );
+          })}
+        </div>
+      </pre>
     </div>
   );
 }

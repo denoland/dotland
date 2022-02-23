@@ -93,6 +93,10 @@ span:target {
 	background-color: #fffbdd;
 }
 
+span[data-highlight] {
+	background-color: #fffbdd;
+}
+
 /* 404 Page */
 
 @keyframes move {
