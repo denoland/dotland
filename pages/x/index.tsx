@@ -105,6 +105,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
               placeholder={!resp
                 ? "Search"
                 : `Search through ${resp.totalCount} modules`}
+              value={query}
             />
           </form>
           <div class="sm:max-w-screen-lg sm:mx-auto sm:px-6 md:px-8 pb-4 sm:pb-12">
