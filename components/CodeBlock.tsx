@@ -69,7 +69,8 @@ export function RawCodeBlock({
   class?: string;
   enableLineRef?: boolean;
 }) {
-  const codeDivClassNames = "text-gray-300 token-line text-right select-none";
+  const codeDivClassNames =
+    "text-gray-300 token-line text-right select-none inline-block";
   const newLang = language === "shell"
     ? "bash"
     : language === "text"
@@ -161,7 +162,7 @@ export function RawCodeBlock({
     >
       <pre
         dangerouslySetInnerHTML={{ __html }}
-        class={`flex overflow-y-auto highlight highlight-source-${newLang} ${
+        class={`overflow-y-auto highlight highlight-source-${newLang} ${
           extraClassName ?? ""
         }`}
       />

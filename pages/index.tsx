@@ -14,9 +14,8 @@ export default function Home() {
     versions.std[0]
   }/http/server.ts";
 
-  console.log("http://localhost:8000/");
-  serve((req) => new Response("Hello World\\n"), { port: 8000 });
-  `;
+console.log("http://localhost:8000/");
+serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
 
   return (
     <div>
