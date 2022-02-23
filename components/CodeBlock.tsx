@@ -109,9 +109,9 @@ export function RawCodeBlock({
               {tokens.map((_, i) => (
                 <div
                   class="token text-right"
-                  onClick={`location.hash = "#L${i}"`}
+                  onClick={`location.hash = "#L${i + 1}"`}
                 >
-                  {i}
+                  {i + 1}
                 </div>
               ))}
             </div>
@@ -125,7 +125,7 @@ export function RawCodeBlock({
         <div class="block w-full">
           {tokens.map((line, i) => {
             return (
-              <span id={"L" + i} class="block">
+              <span id={"L" + (i + 1)} class="block">
                 {line.map((token) => {
                   if (token.empty) {
                     return <br />;
