@@ -26,16 +26,6 @@ import {
 
 import versionMeta from "../versions.json" assert { type: "json" };
 
-function Hit({
-  hit,
-  children,
-}: {
-  hit: { url: string };
-  children: ComponentChildren;
-}) {
-  return <a href={hit.url} class="link">{children}</a>;
-}
-
 export default function Manual({ params, url }: PageProps) {
   const path = params.path ? `/${params.path}` : "/introduction";
 
@@ -114,40 +104,22 @@ export default function Manual({ params, url }: PageProps) {
         />
       </Head>
       <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3" />
-      <div id="manualSearch" />
+      <div id="manualSearch" class="hidden" />
       <script
         dangerouslySetInnerHTML={{
           __html: `
         docsearch({
           container: "#manualSearch",
-          appId: "APP_ID",
+          appId: "DMFING7U5D",
           indexName: "deno_manual",
-          apiKey: "a05e65bb082b87ff0ae75506f1b29fce",
+          apiKey: "577997f9f7a4b0100d359afde8065583",
           searchParameters: {
             distinct: 1,
           },
-          /*navigator: {
-            navigate({ suggestionUrl }) {
-              push("/[...rest]", suggestionUrl);
-            },
-          },*/
         });
       `,
         }}
       />
-      {
-        /*{isOpen &&
-        createPortal(
-          <DocSearchModal
-            initialQuery={initialQuery}
-            initialScrollY={window.scrollY}
-            onClose={onClose}
-            hitComponent={Hit}
-          />,
-          document.body,
-        )}*/
-      }
-
       <div class="h-screen flex overflow-hidden">
         <div class="md:hidden">
           <div class="fixed inset-0 flex z-40">
@@ -251,7 +223,9 @@ export default function Manual({ params, url }: PageProps) {
                   <label htmlFor="search_field" class="sr-only">
                     Search
                   </label>
-                  <button class="w-full text-gray-400 focus-within:text-gray-600 flex items-center" // onClick={onOpen}
+                  <button
+                    class="w-full text-gray-400 focus-within:text-gray-600 flex items-center"
+                    onClick="document.querySelector('#manualSearch button').click()"
                   >
                     <div class="flex items-center pointer-events-none">
                       <svg
@@ -307,7 +281,9 @@ export default function Manual({ params, url }: PageProps) {
                 <label htmlFor="search_field" class="sr-only">
                   Search
                 </label>
-                <button class="w-full text-gray-400 focus-within:text-gray-600 flex items-center" // onClick={onOpen}
+                <button
+                  class="w-full text-gray-400 focus-within:text-gray-600 flex items-center"
+                  onClick="document.querySelector('#manualSearch button').click()"
                 >
                   <div class="flex items-center pointer-events-none">
                     <svg
