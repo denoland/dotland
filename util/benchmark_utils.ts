@@ -127,9 +127,8 @@ function createColumns(
   return varieties.map((variety) => ({
     name: variety,
     data: data.map((d) => {
-      // TODO fix typescript madness.
-      d = d as any;
       if (d[benchmarkName] != null) {
+        // deno-lint-ignore no-explicit-any
         const b = d[benchmarkName] as any;
         if (b[variety] != null) {
           const v = b[variety];
@@ -283,12 +282,15 @@ function extractProxyFields(data: BenchmarkRun[]): void {
       if (!d) continue;
       const name = field + "_proxy";
       const newField = {};
+      // deno-lint-ignore no-explicit-any
       (row as any)[name] = newField;
       for (const k of Object.getOwnPropertyNames(d)) {
         if (k.includes("_proxy")) {
+          // deno-lint-ignore no-explicit-any
           const d2 = d as any;
           const v = d2[k];
           delete d2[k];
+          // deno-lint-ignore no-explicit-any
           (newField as any)[k] = v;
         }
       }
