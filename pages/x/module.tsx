@@ -637,7 +637,9 @@ export const handler: Handlers = {
         return render!();
       }
       const url = new URL(req.url);
-      url.pathname = `/x/${match.name}@${version!.latest}/${match.path}`;
+      url.pathname = `/${
+        match.name === "std" ? match.name : "x/" + match.name
+      }@${version!.latest}/${match.path}`;
       return Response.redirect(url);
     }
     return render!();
