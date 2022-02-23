@@ -123,7 +123,7 @@ export default function Manual({ params, url }: PageProps) {
       <div class="h-screen flex overflow-hidden">
         <input
           type="checkbox"
-          className="hidden"
+          class="hidden"
           id="manualSidebarToggle"
           autoComplete="off"
         />

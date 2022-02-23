@@ -6,7 +6,7 @@ import { Fragment, h, Head } from "../deps.ts";
 
 export default function App({ Component }) {
   return (
-    <div className="h-screen">
+    <div class="h-screen">
       <Head>
         <link rel="icon" href="/favicon.ico" sizes="32x32" />
         <link rel="icon" href="/logo.svg" type="image/svg+xml" />

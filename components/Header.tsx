@@ -38,11 +38,95 @@ export function Header({
         </a>
         <input
           type="checkbox"
-          class="hidden checked:siblings:even:hidden"
+          class="hidden checked:sibling:block"
           id="menuToggle"
           autoComplete="off"
         />
-        <label class="-mr-2 flex items-center lg:hidden" htmlFor="menuToggle">
+        <div class="hidden absolute top-0 inset-x-0 p-2 transition transform origin-top-right lg:hidden">
+          <div class="rounded-lg shadow-md">
+            <div class="rounded-lg bg-white shadow-xs overflow-hidden">
+              <div class="px-5 pt-4 flex items-center justify-between">
+                <a href="/" class="flex items-center">
+                  <img
+                    class="h-10 w-auto sm:h-12 my-2"
+                    src="/logo.svg"
+                    alt=""
+                  />
+                  <div class="ml-5 flex flex-col justify-center">
+                    <div class="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
+                      Deno
+                    </div>
+                    {subtitle &&
+                      (
+                        <div class="font-normal text-sm sm:text-lg leading-tight tracking-tight">
+                          {subtitle}
+                        </div>
+                      )}
+                  </div>
+                </a>{" "}
+                <label class="-mr-2" htmlFor="menuToggle">
+                  <div class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:(text-gray-500 bg-gray-100) focus:(outline-none bg-gray-100 text-gray-500) transition duration-150 ease-in-out">
+                    <svg
+                      class="h-6 w-6"
+                      stroke="currentColor"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </div>
+                </label>
+              </div>
+              <div class="px-2 pt-4 pb-3">
+                <a
+                  href="https://deno.com/deploy"
+                  class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
+                >
+                  Deploy
+                </a>
+                <a
+                  href="/manual"
+                  class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
+                >
+                  Manual
+                </a>
+                <a
+                  href="https://deno.com/blog"
+                  class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
+                >
+                  Blog
+                </a>
+                <a
+                  href="https://doc.deno.land/builtin/stable"
+                  class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
+                >
+                  API
+                </a>
+                <a
+                  href="/std"
+                  class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
+                >
+                  Standard Library
+                </a>
+                <a
+                  href="/x"
+                  class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
+                >
+                  Third Party Modules
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <label
+          class="-mr-2 flex items-center lg:hidden"
+          htmlFor="menuToggle"
+        >
           <div class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:(text-gray-500 bg-gray-100) focus:(outline-none bg-gray-100 text-gray-500) transition duration-150 ease-in-out">
             <svg
               class="h-6 w-6"
@@ -60,89 +144,6 @@ export function Header({
             </svg>
           </div>
         </label>
-        <div>
-          <div class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right lg:hidden">
-            <div class="rounded-lg shadow-md">
-              <div class="rounded-lg bg-white shadow-xs overflow-hidden">
-                <div class="px-5 pt-4 flex items-center justify-between">
-                  <a href="/" class="flex items-center">
-                    <img
-                      class="h-10 w-auto sm:h-12 my-2"
-                      src="/logo.svg"
-                      alt=""
-                    />
-                    <div class="ml-5 flex flex-col justify-center">
-                      <div class="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
-                        Deno
-                      </div>
-                      {subtitle &&
-                        (
-                          <div class="font-normal text-sm sm:text-lg leading-tight tracking-tight">
-                            {subtitle}
-                          </div>
-                        )}
-                    </div>
-                  </a>{" "}
-                  <label class="-mr-2" htmlFor="menuToggle">
-                    <div class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:(text-gray-500 bg-gray-100) focus:(outline-none bg-gray-100 text-gray-500) transition duration-150 ease-in-out">
-                      <svg
-                        class="h-6 w-6"
-                        stroke="currentColor"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
-                    </div>
-                  </label>
-                </div>
-                <div class="px-2 pt-4 pb-3">
-                  <a
-                    href="https://deno.com/deploy"
-                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
-                  >
-                    Deploy
-                  </a>
-                  <a
-                    href="/manual"
-                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
-                  >
-                    Manual
-                  </a>
-                  <a
-                    href="https://deno.com/blog"
-                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
-                  >
-                    Blog
-                  </a>
-                  <a
-                    href="https://doc.deno.land/builtin/stable"
-                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
-                  >
-                    API
-                  </a>
-                  <a
-                    href="/std"
-                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
-                  >
-                    Standard Library
-                  </a>
-                  <a
-                    href="/x"
-                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
-                  >
-                    Third Party Modules
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="hidden lg:flex md:ml-10 items-end">
           <a
             href="https://deno.com/deploy"

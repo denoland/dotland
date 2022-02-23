@@ -24,24 +24,24 @@ export function FileDisplay(props: {
   const filename = fileNameFromURL(props.sourceURL);
 
   return (
-    <div className="shadow-sm rounded-lg border border-gray-200 overflow-hidden bg-white">
-      <div className="bg-gray-100 border-b border-gray-200 py-2 px-4 flex justify-between">
-        <div className="flex items-center">
+    <div class="shadow-sm rounded-lg border border-gray-200 overflow-hidden bg-white">
+      <div class="bg-gray-100 border-b border-gray-200 py-2 px-4 flex justify-between">
+        <div class="flex items-center">
           {isReadme(filename) && (
             <svg
               fill="currentColor"
               viewBox="0 0 20 20"
-              className="w-6 h-6 text-gray-400 inline-block mr-2"
+              class="w-6 h-6 text-gray-400 inline-block mr-2"
             >
               <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z">
               </path>
             </svg>
           )}
-          <span className="font-medium">
+          <span class="font-medium">
             {props.canonicalPath === props.pathname
               ? filename
               : (
-                <a href={props.canonicalPath} className="link">
+                <a href={props.canonicalPath} class="link">
                   {filename}
                 </a>
               )}
@@ -49,13 +49,13 @@ export function FileDisplay(props: {
         </div>
         <div>
           {props.sourceURL && (
-            <a href={props.sourceURL} className="link ml-4">
+            <a href={props.sourceURL} class="link ml-4">
               Raw
             </a>
           )}
           {props.repositoryURL &&
             (
-              <a href={props.repositoryURL} className="link ml-4">
+              <a href={props.repositoryURL} class="link ml-4">
                 Repository
               </a>
             )}
@@ -64,13 +64,13 @@ export function FileDisplay(props: {
       {props.documentationURL && (
         <a
           href={props.documentationURL}
-          className="bg-gray-100 border-b border-gray-200 py-1 px-4 flex align-middle justify-between link group"
+          class="bg-gray-100 border-b border-gray-200 py-1 px-4 flex align-middle justify-between link group"
         >
           <span>
             <svg
               fill="currentColor"
               viewBox="0 0 20 20"
-              className="w-6 h-6 text-gray-400 inline-block mr-2 group-hover:text-blue-300 transition duration-100 ease-in-out"
+              class="w-6 h-6 text-gray-400 inline-block mr-2 group-hover:text-blue-300 transition duration-100 ease-in-out"
             >
               <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z">
               </path>
@@ -112,7 +112,7 @@ export function FileDisplay(props: {
             );
           case "markdown": {
             return (
-              <div className="px-4">
+              <div class="px-4">
                 <Markdown
                   source={props.stdVersion === undefined
                     ? props.raw!
@@ -125,7 +125,7 @@ export function FileDisplay(props: {
             );
           }
           case "image":
-            return <img className="w-full" src={props.sourceURL} />;
+            return <img class="w-full" src={props.sourceURL} />;
           default:
             return (
               <RawCodeBlock
