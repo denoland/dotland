@@ -121,20 +121,27 @@ export default function Manual({ params, url }: PageProps) {
         }}
       />
       <div class="h-screen flex overflow-hidden">
-        <div class="md:hidden">
+        <input
+          type="checkbox"
+          className="hidden"
+          id="manualSidebarToggle"
+          autoComplete="off"
+        />
+
+        <div class="md:hidden hidden" id="manualSideBar">
           <div class="fixed inset-0 flex z-40">
             <div class="fixed inset-0">
-              <div class="absolute inset-0 bg-gray-600 opacity-75" // TODO: checkbox based onClick={hideSidebar}
-              >
-              </div>
+              <label
+                class="absolute inset-0 bg-gray-600 opacity-75"
+                htmlFor="manualSidebarToggle"
+              />
             </div>
             <div class="relative flex-1 flex flex-col max-w-xs w-full bg-white">
               <div class="absolute top-0 right-0 -mr-14 p-1">
-                <button
-                  role="button"
+                <label
                   class="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600"
                   aria-label="Close sidebar"
-                  // TODO: checkbox based onClick={hideSidebar}
+                  htmlFor="manualSideBarToggle"
                 >
                   <svg
                     class="h-6 w-6 text-white"
@@ -149,7 +156,7 @@ export default function Manual({ params, url }: PageProps) {
                       d="M6 18L18 6M6 6l12 12"
                     />
                   </svg>
-                </button>
+                </label>
               </div>
               <div class="bg-gray-100 pb-4 pt-4 border-b border-gray-200">
                 <a
@@ -251,10 +258,9 @@ export default function Manual({ params, url }: PageProps) {
                 </div>
               </div>
             </div>
-            <button
-              class="px-4 text-gray-500 focus:outline-none focus:bg-gray-100 focus:text-gray-600 md:hidden"
-              aria-label="Open sidebar"
-              // TODO checkbox based onClick={() => setShowSidebar(true)}
+            <label
+              class="px-4 my-auto text-gray-500 focus:outline-none focus:bg-gray-100 focus:text-gray-600 md:hidden"
+              htmlFor="manualSidebarToggle"
             >
               <svg
                 class="h-6 w-6"
@@ -269,7 +275,7 @@ export default function Manual({ params, url }: PageProps) {
                   d="M4 6h16M4 12h16M4 18h7"
                 />
               </svg>
-            </button>
+            </label>
           </div>
 
           <main
@@ -304,6 +310,7 @@ export default function Manual({ params, url }: PageProps) {
                 </button>
               </div>
             </div>
+
             {isPreview && (
               <UserContributionBanner
                 href={(() => {

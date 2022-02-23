@@ -42,6 +42,11 @@ html {
 }
 
 /* Manual */
+
+#manualSideBarToggle:checked + #manualSideBar {
+	display: block;
+}
+
 ol.nested {
 	counter-reset: item;
 }
@@ -96,6 +101,7 @@ ol.nested li:before {
 }
 
 /* Benchmark */
+
 #normalizedToggle:checked + label > span:first-of-type {
 	background-color: rgb(229 231 235);
 }
@@ -106,6 +112,7 @@ ol.nested li:before {
 #normalizedToggle:checked ~ div:first-of-type {
 	display: none;
 }
+
 /* removes focus outlines on mouse clicks */
 *:focus:not(:focus-visible),
 *::before:focus:not(:focus-visible),

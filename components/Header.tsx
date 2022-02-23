@@ -40,7 +40,7 @@ export function Header({
           type="checkbox"
           class="hidden checked:siblings:even:hidden"
           id="menuToggle"
-          autocomplete="off"
+          autoComplete="off"
         />
         <label class="-mr-2 flex items-center lg:hidden" htmlFor="menuToggle">
           <div class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:(text-gray-500 bg-gray-100) focus:(outline-none bg-gray-100 text-gray-500) transition duration-150 ease-in-out">
