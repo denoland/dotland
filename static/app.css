@@ -89,6 +89,10 @@ ol.nested li:before {
 	border-bottom-width: 1px;
 }
 
+span:target {
+	background-color: #fffbdd;
+}
+
 /* 404 Page */
 
 @keyframes move {

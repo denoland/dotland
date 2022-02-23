@@ -1,7 +1,9 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-import { h, htmlEscape, Prism, PrismTheme, sanitizeHtml } from "../deps.ts";
+/** @jsxFrag Fragment */
+import { Fragment, h, htmlEscape, Prism } from "../deps.ts";
+import { normalizeTokens } from "../util/prism_utils.ts";
 
 import "https://esm.sh/prismjs@1.25.0/components/prism-bash?no-check";
 //import "https://esm.sh/prismjs@1.25.0/components/prism-batch?no-check";
@@ -69,8 +71,8 @@ export function RawCodeBlock({
   class?: string;
   enableLineRef?: boolean;
 }) {
-  const codeDivClassNames =
-    "text-gray-300 token-line text-right select-none inline-block";
+  const codeDivClasses =
+    "text-gray-300 text-right select-none inline-block mr-2 sm:mr-3";
   const newLang = language === "shell"
     ? "bash"
     : language === "text"
@@ -88,170 +90,64 @@ export function RawCodeBlock({
     );
   }
 
-  //Prism.hooks.add("wrap", (x) => {});
-  let html = Prism.highlight(code, grammar, language);
-  if (!disablePrefixes && (language === "bash" || language === "shell")) {
-    html =
-      `<code class="pr-2 sm:pr-3"><div class="${codeDivClassNames}">$</div></code>` +
-      html;
-  }
+  const tokens = normalizeTokens(Prism.tokenize(code, grammar));
 
-  const __html = sanitizeHtml(html, {
-    allowedTags: sanitizeHtml.defaults.allowedTags.concat([
-      "img",
-      "video",
-      "svg",
-      "path",
-    ]),
-    allowedAttributes: {
-      ...sanitizeHtml.defaults.allowedAttributes,
-      img: ["src", "alt", "height", "width", "align"],
-      video: [
-        "src",
-        "alt",
-        "height",
-        "width",
-        "autoplay",
-        "muted",
-        "loop",
-        "playsinline",
-      ],
-      a: ["id", "aria-hidden", "href", "tabindex", "rel"],
-      svg: ["viewbox", "width", "height", "aria-hidden"],
-      path: ["fill-rule", "d"],
-      h1: ["id"],
-      h2: ["id"],
-      h3: ["id"],
-      h4: ["id"],
-      h5: ["id"],
-      h6: ["id"],
-    },
-    allowedClasses: {
-      code: ["pr-2", "sm:pr-3"],
-      div: ["highlight", ...codeDivClassNames.split(" ")],
-      span: [
-        "token",
-        "keyword",
-        "operator",
-        "number",
-        "boolean",
-        "function",
-        "string",
-        "comment",
-        "class-name",
-        "regex",
-        "regex-delimiter",
-        "tag",
-        "attr-name",
-        "punctuation",
-        "script-punctuation",
-        "script",
-        "plain-text",
-        "property",
-      ],
-      a: ["anchor"],
-      svg: ["octicon", "octicon-link"],
-    },
-    allowProtocolRelative: false,
-  });
   return (
-    <div
-      data-color-mode="light"
-      data-light-theme="light"
-      class="markdown-body"
-    >
-      <pre
-        dangerouslySetInnerHTML={{ __html }}
-        class={`overflow-y-auto highlight highlight-source-${newLang} ${
-          extraClassName ?? ""
-        }`}
-      />
+    <div>
+      <div
+        data-color-mode="light"
+        data-light-theme="light"
+        class="markdown-body text-xs"
+      >
+        <pre
+          class={`overflow-y-auto highlight highlight-source-${newLang} ${
+            extraClassName ?? ""
+          }`}
+        >
+          {enableLineRef &&
+            (
+              <div class={codeDivClasses}>
+                {tokens.map((_, i) => (
+                  <div
+                    class="token text-right"
+                    onClick={`location.hash = "#L${i}"`}
+                  >
+                    {i}
+                  </div>
+                ))}
+              </div>
+            )}
+          {!disablePrefixes && (newLang === "bash") &&
+            (
+              <code>
+                <div class={codeDivClasses}>$</div>
+              </code>
+            )}
+          <div class="inline-block">
+            {tokens.map((line, i) => {
+              return (
+                <>
+                  <span id={"L" + i}>
+                    {line.map((token) => {
+                      if (token.empty) {
+                        return <></>;
+                      }
+                      return (
+                        <span class={"token " + token.types.join(" ")}>
+                          {token.content}
+                        </span>
+                      );
+                    })}
+                  </span>
+                  <br />
+                </>
+              );
+            })}
+          </div>
+        </pre>
+      </div>
     </div>
   );
-  /*return (
-    <Highlight
-      Prism={Prism}
-      theme={PrismTheme}
-      code={code}
-      language={language === "shell"
-        ? "bash"
-        : language === "text"
-        ? "diff"
-        : language}
-    >
-      {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <pre
-          class={className + " flex overflow-y-auto " +
-            (extraClassName ?? "")}
-          style={{ ...style }}
-        >
-          {!disablePrefixes &&
-            tokens.length === 1 &&
-            (language === "bash" || language === "shell") &&
-            (
-              <code class="pr-2 sm:pr-3">
-                <div class={codeDivClassNames}>
-                  $
-                </div>
-              </code>
-            )}
-          {tokens.length > 1 && !disablePrefixes &&
-            (
-              <code class="pr-2 sm:pr-3">
-                {tokens.map((line, i) =>
-                  line[0]?.empty && i === tokens.length - 1
-                    ? null
-                    : (
-                      <div key={i + "l"} class={codeDivClassNames}>
-                        {enableLineRef
-                          ? (
-                            <a id={`L${i + 1}`} href={`#L${i + 1}`}>
-                              {i + 1}
-                              {" "}
-                            </a>
-                          )
-                          : (
-                            i + 1
-                          )}
-                      </div>
-                    )
-                )}
-              </code>
-            )}
-          <code>
-            {tokens.map((line, i) => {
-              const lineProps = getLineProps({ line, key: i });
-              lineProps.className += " text-xs";
-              if (
-                enableLineRef &&
-                hashValue &&
-                ((arr, index) =>
-                  Math.min(...arr) <= index && index <= Math.max(...arr))(
-                    hashValue
-                      .split("-")
-                      .map((e) => /([\d]+)/.exec(e)![1])
-                      .map((n) => parseInt(n, 10)),
-                    i + 1,
-                  )
-              ) {
-                lineProps.className = `${lineProps.className} highlight-line`;
-              }
-              return line[0]?.empty && i === tokens.length - 1
-                ? null
-                : (
-                  <div key={i} {...lineProps}>
-                    {line.map((
-                      token,
-                      key,
-                    ) => <span key={key} {...getTokenProps({ token, key })} />)}
-                  </div>
-                );
-            })}
-          </code>
-        </pre>
-      )}
-    </Highlight>
-  );*/
 }
 
 export function CodeBlock({ code, language, disablePrefixes }: CodeBlockProps) {
