@@ -99,7 +99,7 @@ export function RawCodeBlock({
       class="markdown-body "
     >
       <pre
-        class={`overflow-y-auto highlight highlight-source-${newLang} flex ${
+        class={`highlight highlight-source-${newLang} flex ${
           extraClassName ?? ""
         }`}
       >
@@ -122,7 +122,7 @@ export function RawCodeBlock({
               <div class={codeDivClasses}>$</div>
             </code>
           )}
-        <div class="block w-full">
+        <div class="block w-full overflow-y-auto">
           {tokens.map((line, i) => {
             return (
               <span id={"L" + (i + 1)} class="block">
