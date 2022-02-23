@@ -1,7 +1,8 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 // Taken from https://github.com/FormidableLabs/prism-react-renderer/blob/master/src/utils/normalizeTokens.js
 
-// Empty lines need to contain a single empty token, denoted with { empty: true }
+/** Empty lines need to contain a single empty token, denoted with { empty: true } */
+// deno-lint-ignore no-explicit-any
 function normalizeEmptyLines(line: any[]) {
   if (line.length === 0) {
     line.push({
@@ -26,12 +27,15 @@ function appendTypes(types: string[], add: string[] | string): string[] {
 
 const newlineRe = /\r\n|\r|\n/;
 
-// Takes an array of Prism's tokens and groups them by line, turning plain
-// strings into tokens as well. Tokens can become recursive in some cases,
-// which means that their types are concatenated. Plain-string tokens however
-// are always of type "plain".
-// This is not recursive to avoid exceeding the call-stack limit, since it's unclear
-// how nested Prism's tokens can become
+/**
+ * Takes an array of Prism's tokens and groups them by line, turning plain
+ * strings into tokens as well. Tokens can become recursive in some cases,
+ * which means that their types are concatenated. Plain-string tokens however
+ * are always of type "plain".
+ * This is not recursive to avoid exceeding the call-stack limit, since it's unclear
+ * how nested Prism's tokens can become
+ */
+// deno-lint-ignore no-explicit-any
 export function normalizeTokens(tokens: Array<any | string>): any[][] {
   const typeArrStack: string[][] = [[]];
   const tokenArrStack = [tokens];
@@ -40,6 +44,7 @@ export function normalizeTokens(tokens: Array<any | string>): any[][] {
 
   let i = 0;
   let stackIndex = 0;
+  // deno-lint-ignore no-explicit-any
   let currentLine: any[] = [];
 
   const acc = [currentLine];

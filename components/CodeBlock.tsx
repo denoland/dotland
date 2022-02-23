@@ -82,7 +82,7 @@ export function RawCodeBlock({
     ? Prism.languages[newLang]
     : undefined;
 
-  if (grammar === undefined) {
+  if (!grammar) {
     return (
       <div>
         <code dangerouslySetInnerHTML={{ __html: htmlEscape(code) }} />
