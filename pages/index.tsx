@@ -264,7 +264,7 @@ function InstallSection() {
   const cargo = (
     <div key="cargo" class="my-4 text-gray-700">
       <p class="py-2">
-        دروستکردن و دامەزراندن ڕێی{" "}
+        دروستکردن و دامەزراندن لە ڕێی{" "}
         <a href="https://crates.io/crates/deno" class="link">
           کارگۆ
         </a>
