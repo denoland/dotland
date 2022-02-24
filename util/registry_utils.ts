@@ -1,6 +1,6 @@
-/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+// Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-const CDN_ENDPOINT = "https://cdn.deno.land/";
+export const CDN_ENDPOINT = "https://cdn.deno.land/";
 const API_ENDPOINT = "https://api.deno.land/";
 
 export interface DirEntry {
@@ -204,7 +204,10 @@ export async function listModules(
     );
   }
 
-  return { totalCount: data.data.total_count, results: data.data.results };
+  return {
+    totalCount: (query ? limit : data.data.total_count),
+    results: data.data.results,
+  };
 }
 
 export async function getModule(name: string): Promise<Module | null> {
@@ -245,18 +248,18 @@ export interface Build {
   message?: string;
 }
 
-export async function getBuild(id: string): Promise<Build> {
+export async function getBuild(id: string): Promise<Build | Error> {
   const url = `${API_ENDPOINT}builds/${id}`;
   const res = await fetch(url, { headers: { accept: "application/json" } });
   if (res.status !== 200) {
-    throw Error(
+    return Error(
       `Got an error (${res.status}) while getting the build info:\n${await res
         .text()}`,
     );
   }
   const data = await res.json();
   if (!data.success) {
-    throw Error(
+    return Error(
       `Got an error (${data.info}) while getting the build info:\n${await res
         .text()}`,
     );
@@ -267,15 +270,6 @@ export async function getBuild(id: string): Promise<Build> {
 export function parseNameVersion(nameVersion: string): [string, string] {
   const [name, ...version] = nameVersion.split("@");
   return [name, version.join("@")];
-}
-
-export function parseQuery(
-  queryRest: string[],
-): { name: string; version: string; path: string } {
-  const [identifier, ...pathParts] = (queryRest as string[]) ?? [];
-  const path = pathParts.length === 0 ? "" : `/${pathParts.join("/")}`;
-  const [name, version] = parseNameVersion(identifier ?? "");
-  return { name, version, path };
 }
 
 const markdownExtension = "(?:markdown|mdown|mkdn|mdwn|mkd|md)";

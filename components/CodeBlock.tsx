@@ -1,24 +1,43 @@
-/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+// Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-import React, { useEffect, useState } from "react";
-import Highlight, { Prism } from "prism-react-renderer";
-import light from "prism-react-renderer/themes/github";
-import { useLayoutEffect } from "react";
+/** @jsx h */
+/** @jsxFrag Fragment */
+import { Fragment, h, htmlEscape, Prism } from "../deps.ts";
+import { normalizeTokens } from "../util/prism_utils.ts";
+
+import "https://esm.sh/prismjs@1.25.0/components/prism-bash?no-check";
+//import "https://esm.sh/prismjs@1.25.0/components/prism-batch?no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-css?no-check";
+//import "https://esm.sh/prismjs@1.25.0/components/prism-css-extras?no-check";
+//import "https://esm.sh/prismjs@1.25.0/components/prism-editorconfig?no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-diff?no-check";
+//import "https://esm.sh/prismjs@1.25.0/components/prism-docker?no-check";
+//import "https://esm.sh/prismjs@1.25.0/components/prism-git?no-check";
+//import "https://esm.sh/prismjs@1.25.0/components/prism-ignore?no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-javascript?no-check";
+//import "https://esm.sh/prismjs@1.25.0/components/prism-js-extras?no-check";
+//import "https://esm.sh/prismjs@1.25.0/components/prism-js-templates?no-check";
+//import "https://esm.sh/prismjs@1.25.0/components/prism-jsdoc?no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-json?no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-jsx?no-check";
+//import "https://esm.sh/prismjs@1.25.0/components/prism-markdown?no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-rust?no-check";
+//import "https://esm.sh/prismjs@1.25.0/components/prism-toml?no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-tsx?no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-typescript?no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-yaml?no-check";
 
 // Modifies the color of 'variable' token
 // to avoid poor contrast
 // ref: https://github.com/denoland/dotland/issues/1724
+/*
 for (const style of light.styles) {
   if (style.types.includes("variable")) {
     // Chrome suggests this color instead of rgb(156, 220, 254);
     style.style.color = "rgb(61, 88, 101)";
   }
 }
-
-(typeof global !== "undefined" ? global : (window as any)).Prism = Prism;
-
-require("prismjs/components/prism-rust");
-require("prismjs/components/prism-toml");
+*/
 
 export interface CodeBlockProps {
   code: string;
@@ -45,164 +64,94 @@ export interface CodeBlockProps {
 export function RawCodeBlock({
   code,
   language,
-  className: extraClassName,
+  class: extraClassName,
   disablePrefixes,
   enableLineRef = false,
 }: CodeBlockProps & {
-  className?: string;
+  class?: string;
   enableLineRef?: boolean;
-}): React.ReactElement {
-  const [hashValue, setHashValue] = useState("");
-  const codeDivClassNames =
-    "text-gray-300 token-line text-right select-none text-xs";
-  const onClick = (e: React.MouseEvent) => {
-    if (e.shiftKey) {
-      e.preventDefault();
-      const { hash } = location;
-      const target = (e.target as HTMLAnchorElement).hash;
-      location.hash = hash
-        ? hash.replace(/(-.+)?$/, target.replace("#", "-"))
-        : target;
-    }
-  };
+}) {
+  const codeDivClasses =
+    "text-gray-300 text-right select-none inline-block mr-2 sm:mr-3";
+  const newLang = language === "shell"
+    ? "bash"
+    : language === "text"
+    ? "diff"
+    : language;
+  const grammar = Object.hasOwnProperty.call(Prism.languages, newLang)
+    ? Prism.languages[newLang]
+    : undefined;
 
-  if (enableLineRef) {
-    useEffect(() => {
-      const onHashChange = () => {
-        setHashValue(location.hash);
-        const id = location.hash.substring(1);
-        document.getElementById(id)?.scrollIntoView();
-      };
-      window.addEventListener("hashchange", onHashChange);
-      onHashChange();
-      return () => {
-        window.removeEventListener("hashchange", onHashChange);
-      };
-    }, []);
-
-    useLayoutEffect(() => {
-      const parts = hashValue.split("-");
-      if (parts.length > 1) {
-        const hash = parts
-          .map((e) => /([\d]+)/.exec(e)![0])
-          .map((e) => parseInt(e, 10))
-          .sort((a, b) => a - b)
-          .map((e) => `L${e}`);
-        if (hash.length) {
-          const idEl = document.getElementById(hash[0]);
-          if (idEl) {
-            idEl.scrollIntoView({ block: "center", behavior: "smooth" });
-            return;
-          }
-        }
-      }
-    });
+  if (!grammar) {
+    return (
+      <div>
+        <code dangerouslySetInnerHTML={{ __html: htmlEscape(code) }} />
+      </div>
+    );
   }
 
+  const tokens = normalizeTokens(Prism.tokenize(code, grammar));
+
   return (
-    <Highlight
-      Prism={Prism}
-      theme={light}
-      code={code}
-      // @ts-expect-error because typings are bad
-      language={language === "shell"
-        ? "bash"
-        : language === "text"
-        ? "diff"
-        : language}
+    <div
+      data-color-mode="light"
+      data-light-theme="light"
+      class="markdown-body "
     >
-      {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <pre
-          className={className + " flex overflow-y-auto " +
-            (extraClassName ?? "")}
-          style={{ ...style }}
-        >
-          {!disablePrefixes &&
-            tokens.length === 1 &&
-            (language === "bash" || language === "shell") &&
-            (
-              <code className="pr-2 sm:pr-3">
-                <div className={codeDivClassNames}>
-                  $
+      <pre
+        class={`highlight highlight-source-${newLang} flex ${
+          extraClassName ?? ""
+        }`}
+      >
+        {enableLineRef &&
+          (
+            <div class={codeDivClasses}>
+              {tokens.map((_, i) => (
+                <div
+                  class="token text-right"
+                  onClick={`location.hash = "#L${i + 1}"`}
+                >
+                  {i + 1}
                 </div>
-              </code>
-            )}
-          {tokens.length > 1 && !disablePrefixes &&
-            (
-              <code className="pr-2 sm:pr-3">
-                {tokens.map((line, i) =>
-                  line[0]?.empty && i === tokens.length - 1
-                    ? null
-                    : (
-                      <div key={i + "l"} className={codeDivClassNames}>
-                        {enableLineRef
-                          ? (
-                            <a
-                              id={`L${i + 1}`}
-                              href={`#L${i + 1}`}
-                              onClick={enableLineRef && onClick}
-                            >
-                              {i + 1}
-                              {" "}
-                            </a>
-                          )
-                          : (
-                            i + 1
-                          )}
-                      </div>
-                    )
-                )}
-              </code>
-            )}
-          <code>
-            {tokens.map((line, i) => {
-              const lineProps = getLineProps({ line, key: i });
-              lineProps.className += " text-xs";
-              if (
-                enableLineRef &&
-                hashValue &&
-                ((arr, index) =>
-                  Math.min(...arr) <= index && index <= Math.max(...arr))(
-                    hashValue
-                      .split("-")
-                      .map((e) => /([\d]+)/.exec(e)![1])
-                      .map((n) => parseInt(n, 10)),
-                    i + 1,
-                  )
-              ) {
-                lineProps.className = `${lineProps.className} highlight-line`;
-              }
-              return line[0]?.empty && i === tokens.length - 1
-                ? null
-                : (
-                  <div key={i} {...lineProps}>
-                    {line.map((
-                      token,
-                      key,
-                    ) => <span key={key} {...getTokenProps({ token, key })} />)}
-                  </div>
-                );
-            })}
-          </code>
-        </pre>
-      )}
-    </Highlight>
+              ))}
+            </div>
+          )}
+        {!disablePrefixes && (newLang === "bash") &&
+          (
+            <code>
+              <div class={codeDivClasses}>$</div>
+            </code>
+          )}
+        <div class="block w-full overflow-y-auto">
+          {tokens.map((line, i) => {
+            return (
+              <span id={"L" + (i + 1)} class="block">
+                {line.map((token) => {
+                  if (token.empty) {
+                    return <br />;
+                  }
+                  return (
+                    <span class={"token " + token.types.join(" ")}>
+                      {token.content}
+                    </span>
+                  );
+                })}
+              </span>
+            );
+          })}
+        </div>
+      </pre>
+    </div>
   );
 }
 
-function CodeBlock({
-  code,
-  language,
-  disablePrefixes,
-}: CodeBlockProps): React.ReactElement {
+export function CodeBlock({ code, language, disablePrefixes }: CodeBlockProps) {
   return (
     <RawCodeBlock
       code={code}
       language={language}
       disablePrefixes={disablePrefixes}
-      className="p-4"
+      class="p-4"
     />
   );
 }
-
-export default CodeBlock;
