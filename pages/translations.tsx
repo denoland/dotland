@@ -30,7 +30,8 @@ export default function TranslationsPage() {
         <div class="max-w-screen-lg mx-auto">
           <h4 class="text-4xl font-bold tracking-tight">وەرگێڕانەکان</h4>
           <p class="mt-4 text-lg">
-          ئەم ماڵپەڕە بە چەند زمانێک بەردەستە. دەتەوێت زمانێکی دیکە زۆر بکەیت؟{" "}
+            ئەم ماڵپەڕە بە چەند زمانێک بەردەستە. دەتەوێت زمانێکی دیکە زۆر بکەیت؟
+            {" "}
             <a
               href="https://github.com/denoland/dotland/blob/main/translations.json"
               class="link"

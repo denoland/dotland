@@ -40,7 +40,7 @@ export default function ArtworkPage() {
         <div class="max-w-screen-lg mx-auto">
           <h4 class="text-4xl font-bold tracking-tight">کارە هونەرییەکان</h4>
           <p class="mt-4 text-lg">
-          دەتەوێت کارێکی خۆت لێرە نمایش بکەیت؟{" "}
+            دەتەوێت کارێکی خۆت لێرە نمایش بکەیت؟{" "}
             <a
               href="https://github.com/denoland/dotland/blob/main/artwork.json"
               class="link"

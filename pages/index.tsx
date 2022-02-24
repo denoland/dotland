@@ -50,7 +50,8 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <p class="my-4 text-gray-700">
-          دێنۆ ژینگەیەکی مۆدێرن و پارێزراوە بۆ تایپسکریپت و جاڤاسکریپت کە V8 بەکار دەهێنێت و بە زمانی ڕەست نووسراوە.
+            دێنۆ ژینگەیەکی مۆدێرن و پارێزراوە بۆ تایپسکریپت و جاڤاسکریپت کە V8
+            بەکار دەهێنێت و بە زمانی ڕەست نووسراوە.
           </p>
           <ol class="ml-8 list-disc text-gray-700">
             <li>
@@ -67,7 +68,7 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
               <InlineCode>deno fmt</InlineCode>).
             </li>
             <li>
-            چەندین مۆدیوڵی ستانداردی هەیە کە لە گەرەنتیی کارکردنیان هەیە:{" "}
+              چەندین مۆدیوڵی ستانداردی هەیە کە لە گەرەنتیی کارکردنیان هەیە:{" "}
               <a href="https://deno.land/std" class="link">
                 deno.land/std
               </a>
@@ -114,28 +115,31 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8">
           <p class="my-4 text-gray-700">
-          دەتوانیت بە بەکارهێنانی <a class="link" href="/manual">مانواڵەکە</a> پێشەکییەکی قوڵتر بخوێنیتەوە و نموونەی زۆرتر ببینیت.
+            دەتوانیت بە بەکارهێنانی <a class="link" href="/manual">مانواڵەکە</a>
+            {" "}
+            پێشەکییەکی قوڵتر بخوێنیتەوە و نموونەی زۆرتر ببینیت.
           </p>
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <a class="hover:underline" href="#runtime-documentation">
             <h3 class="font-bold text-xl" id="runtime-documentation">
-            نووسراوی ژینگە
+              نووسراوی ژینگە
             </h3>
           </a>
           <p class="my-4 text-gray-700">
-          نووسراوێکی سادە دەربارەی ژینگەکە بەردەستە لە{" "}
+            نووسراوێکی سادە دەربارەی ژینگەکە بەردەستە لە{" "}
             <a href="https://doc.deno.land/builtin/stable" class="link">
               doc.deno.land
             </a>
             .
           </p>
           <p class="my-4 text-gray-700">
-          دێنۆ <a class="link" href="/manual">مانواڵێکی</a>{" "}
-          هەیە کە بە قووڵی باس لە دێنۆ دەکات و پێشەکییەکت دەربارەی چەمکەکان پێ دەدات.
+            دێنۆ <a class="link" href="/manual">مانواڵێکی</a>{" "}
+            هەیە کە بە قووڵی باس لە دێنۆ دەکات و پێشەکییەکت دەربارەی چەمکەکان پێ
+            دەدات.
           </p>
           <p class="my-4 text-gray-700">
-          مانواڵەکە باس لە ئەو شتانەش دەکات کە دێنۆ دابینینیان دەکات.
+            مانواڵەکە باس لە ئەو شتانەش دەکات کە دێنۆ دابینینیان دەکات.
           </p>
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
@@ -145,15 +149,14 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
             </h3>
           </a>
           <p class="my-4 text-gray-700">
-          پەرەپێدەرەکانی دێنۆ کار لەسەر مۆدیوڵە ستانداردەکان دەکەن کە گەرەنتیی کارکردنیان هەیە بە دێنۆ. سەرچاوەی مۆدیوڵە ستانداردەکان
-            {" "}
+            پەرەپێدەرەکانی دێنۆ کار لەسەر مۆدیوڵە ستانداردەکان دەکەن کە گەرەنتیی
+            کارکردنیان هەیە بە دێنۆ. سەرچاوەی مۆدیوڵە ستانداردەکان{" "}
             <a href="https://github.com/denoland/deno_std" class="link">
               لێرەیە
             </a>.
           </p>
           <p class="my-4 text-gray-700">
-            هەروەها لە{" "}
-            <a class="link" href="/std">deno.land/std</a>{" "}
+            هەروەها لە <a class="link" href="/std">deno.land/std</a>{" "}
             بڵاو کراونەتەوە وەک هەر مۆدیوڵێکی دیکە.
           </p>
         </div>
@@ -164,7 +167,8 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
             </h3>
           </a>
           <p class="my-4 text-gray-700">
-          دێنۆ دەتوانێت مۆدیوڵ لە هەر شوێنێکی ئینتەرنێتەوە هاوردە بکات، بۆ نموونە گیتهەب، ڕاژەیەکی کەسی یان CDNـەکان وەک{" "}
+            دێنۆ دەتوانێت مۆدیوڵ لە هەر شوێنێکی ئینتەرنێتەوە هاوردە بکات، بۆ
+            نموونە گیتهەب، ڕاژەیەکی کەسی یان CDNـەکان وەک{" "}
             <a href="https://www.skypack.dev" class="link">
               Skypack
             </a>
@@ -183,15 +187,17 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
             .
           </p>
           <p class="my-4 text-gray-700">
-          بۆ ئاسانکردنی بەکارهێنانی مۆدیوڵەکان، دێنۆ چەند کەرەستەیەکی لەگەڵدایە وەک <InlineCode>deno info</InlineCode> و{" "}
-            <InlineCode>deno doc</InlineCode>. هەروەها deno.land ڕووکارێکی تێدایە بۆ بینینی نووسراوی مۆدیوڵەکان. کە لە{" "}
+            بۆ ئاسانکردنی بەکارهێنانی مۆدیوڵەکان، دێنۆ چەند کەرەستەیەکی
+            لەگەڵدایە وەک <InlineCode>deno info</InlineCode> و{" "}
+            <InlineCode>deno doc</InlineCode>. هەروەها deno.land ڕووکارێکی
+            تێدایە بۆ بینینی نووسراوی مۆدیوڵەکان. کە لە{" "}
             <a href="https://doc.deno.land" class="link">
               doc.deno.land
             </a>{" "}
             بەردەستە.
           </p>
           <p class="my-4 text-gray-700">
-            deno.land  خزمەتگوزارییەکی بڵاوکردنەوەی گشتیشی تێدایە:{" "}
+            deno.land خزمەتگوزارییەکی بڵاوکردنەوەی گشتیشی تێدایە:{" "}
             <a class="link" href="/x">deno.land/x</a>.
           </p>
         </div>
@@ -271,13 +277,12 @@ function InstallSection() {
   return (
     <>
       <p class="my-4 text-gray-700">
-      دێنۆ تەنیا یەک فایلە و لەسەر هیچ بەند نییە. دەتوانیت لە ڕێی
+        دێنۆ تەنیا یەک فایلە و لەسەر هیچ بەند نییە. دەتوانیت لە ڕێی
         دامەزرێنەرەکان دایگریت وەک لە خوارەوە باسکراوە، یان وەشانێک لە{" "}
         <a href="https://github.com/denoland/deno/releases" class="link">
           ئێرە
         </a>{" "}
-        داگریت.
-        .
+        داگریت. .
       </p>
       {shell}
       {powershell}

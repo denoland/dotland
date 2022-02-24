@@ -102,7 +102,7 @@ export default function Manual({ params, url }: PageProps) {
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"
         />
-	<link rel="canonical" href={`https://deno.land/manual${path}`} />
+        <link rel="canonical" href={`https://deno.land/manual${path}`} />
       </Head>
       <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3" />
       <div id="manualSearch" class="hidden" />
