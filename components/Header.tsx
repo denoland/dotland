@@ -1,10 +1,9 @@
-/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+// Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-import React, { useState } from "react";
-import Link from "next/link";
-import Transition from "./Transition";
+/** @jsx h */
+import { h } from "../deps.ts";
 
-function Header({
+export function Header({
   subtitle,
   widerContent,
   main,
@@ -12,43 +11,107 @@ function Header({
   subtitle?: string;
   widerContent?: boolean;
   main?: boolean;
-}): React.ReactElement {
-  const [menuOpen, setMenuOpen] = useState(false);
-
+}) {
   return (
-    <div className="relative py-6 z-10">
+    <div class="relative py-6 z-10">
       <nav
-        className={`mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 ${
+        class={`mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 ${
           widerContent ? "max-w-screen-xl" : "max-w-screen-lg lg:p-0"
         }`}
       >
-        <Link href="/">
-          <a className="flex items-center">
-            <img className="h-10 w-auto sm:h-12 my-2" src="/logo.svg" alt="" />
-            <div className="ml-5 flex flex-col justify-center">
-              {!main &&
-                (
-                  <div className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
-                    Deno
+        <a class="flex items-center" href="/">
+          <img class="h-10 w-auto sm:h-12 my-2" src="/logo.svg" alt="" />
+          <div class="ml-5 flex flex-col justify-center">
+            {!main &&
+              (
+                <div class="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
+                  Deno
+                </div>
+              )}
+            {subtitle &&
+              (
+                <div class="font-normal text-sm sm:text-lg leading-tight tracking-tight">
+                  {subtitle}
+                </div>
+              )}
+          </div>
+        </a>
+        <input
+          type="checkbox"
+          class="hidden checked:sibling:block"
+          id="menuToggle"
+          autoComplete="off"
+        />
+        <div class="hidden absolute top-0 inset-x-0 p-2 transition transform origin-top-right lg:hidden">
+          <div class="rounded-lg shadow-md">
+            <div class="rounded-lg bg-white shadow-xs overflow-hidden">
+              <div class="px-5 pt-4 flex items-center justify-between">
+                <a href="/" class="flex items-center">
+                  <img
+                    class="h-10 w-auto sm:h-12 my-2"
+                    src="/logo.svg"
+                    alt=""
+                  />
+                  <div class="ml-5 flex flex-col justify-center">
+                    <div class="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
+                      Deno
+                    </div>
+                    {subtitle &&
+                      (
+                        <div class="font-normal text-sm sm:text-lg leading-tight tracking-tight">
+                          {subtitle}
+                        </div>
+                      )}
                   </div>
-                )}
-              {subtitle &&
-                (
-                  <div className="font-normal text-sm sm:text-lg leading-tight tracking-tight">
-                    {subtitle}
+                </a>{" "}
+                <label class="-mr-2" htmlFor="menuToggle">
+                  <div class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:(text-gray-500 bg-gray-100) focus:(outline-none bg-gray-100 text-gray-500) transition duration-150 ease-in-out">
+                    <svg
+                      class="h-6 w-6"
+                      stroke="currentColor"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
                   </div>
-                )}
+                </label>
+              </div>
+              <div class="px-2 pt-4 pb-3">
+                {[
+                  { href: "https://deno.com/deploy", content: "Deploy" },
+                  { href: "/manual", content: "Manual" },
+                  { href: "https://deno.com/blog", content: "Blog" },
+                  {
+                    href: "https://doc.deno.land/builtin/stable",
+                    content: "API",
+                  },
+                  { href: "/std", content: "Standard Library" },
+                  { href: "/x", content: "Third Party Modules" },
+                ].map(({ href, content }) => (
+                  <a
+                    href={href}
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
+                  >
+                    {content}
+                  </a>
+                ))}
+              </div>
             </div>
-          </a>
-        </Link>
-        <div className="-mr-2 flex items-center lg:hidden">
-          <button
-            type="button"
-            className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
-            onClick={() => setMenuOpen(true)}
-          >
+          </div>
+        </div>
+        <label
+          class="-mr-2 flex items-center lg:hidden"
+          htmlFor="menuToggle"
+        >
+          <div class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:(text-gray-500 bg-gray-100) focus:(outline-none bg-gray-100 text-gray-500) transition duration-150 ease-in-out">
             <svg
-              className="h-6 w-6"
+              class="h-6 w-6"
               stroke="currentColor"
               fill="none"
               viewBox="0 0 24 24"
@@ -61,51 +124,52 @@ function Header({
                 d="M4 6h16M4 12h16M4 18h7"
               />
             </svg>
-          </button>
-        </div>
-        <div className="hidden lg:flex md:ml-10 items-end">
-          <Link href="https://deno.com/deploy">
-            <a
-              className={`font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out`}
-            >
-              Deploy
-            </a>
-          </Link>
-          <Link href="/manual">
-            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              Manual
-            </a>
-          </Link>
+          </div>
+        </label>
+        <div class="hidden lg:flex md:ml-10 items-end">
+          <a
+            href="https://deno.com/deploy"
+            class="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+          >
+            Deploy
+          </a>
+          <a
+            href="/manual"
+            class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+          >
+            Manual
+          </a>
           <a
             href="https://deno.com/blog"
-            className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+            class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
           >
             Blog
           </a>
           <a
             href="https://doc.deno.land/builtin/stable"
-            className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+            class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
           >
             API
           </a>
-          <Link href="/std">
-            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              Standard Library
-            </a>
-          </Link>
-          <Link href="/x">
-            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              Third Party Modules
-            </a>
-          </Link>
+          <a
+            href="/std"
+            class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+          >
+            Standard Library
+          </a>
+          <a
+            href="/x"
+            class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+          >
+            Third Party Modules
+          </a>
           <a
             href="https://github.com/denoland"
-            className="ml-10 text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
-            style={{ lineHeight: 0 }}
+            class="ml-10 text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out leading-0"
           >
-            <span className="sr-only">GitHub</span>
+            <span class="sr-only">GitHub</span>
             <svg
-              className="h-6 w-6 inline"
+              class="h-6 w-6 inline"
               fill="currentColor"
               viewBox="0 0 24 24"
             >
@@ -119,103 +183,6 @@ function Header({
           </a>
         </div>
       </nav>
-
-      <Transition
-        show={menuOpen}
-        enter="duration-150 ease-out"
-        enterFrom="opacity-0 scale-95"
-        enterTo="opacity-100 scale-100"
-        leave="duration-100 ease-in"
-        leaveFrom="opacity-100 scale-100"
-        leaveTo="opacity-0 scale-95"
-      >
-        <div className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right lg:hidden">
-          <div className="rounded-lg shadow-md">
-            <div className="rounded-lg bg-white shadow-xs overflow-hidden">
-              <div className="px-5 pt-4 flex items-center justify-between">
-                <Link href="/">
-                  <a className="flex items-center">
-                    <img
-                      className="h-10 w-auto sm:h-12 my-2"
-                      src="/logo.svg"
-                      alt=""
-                    />
-                    <div className="ml-5 flex flex-col justify-center">
-                      <div className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
-                        Deno
-                      </div>
-                      {subtitle &&
-                        (
-                          <div className="font-normal text-sm sm:text-lg leading-tight tracking-tight">
-                            {subtitle}
-                          </div>
-                        )}
-                    </div>
-                  </a>
-                </Link>{" "}
-                <div className="-mr-2">
-                  <button
-                    type="button"
-                    className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    <svg
-                      className="h-6 w-6"
-                      stroke="currentColor"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div className="px-2 pt-4 pb-3">
-                <Link href="https://deno.com/deploy">
-                  <a
-                    className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out`}
-                  >
-                    Deploy
-                  </a>
-                </Link>
-                <Link href="/manual">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Manual
-                  </a>
-                </Link>
-                <Link href="https://deno.com/blog">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Blog
-                  </a>
-                </Link>
-                <a
-                  href="https://doc.deno.land/builtin/stable"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
-                >
-                  API
-                </a>
-                <Link href="/std">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Standard Library
-                  </a>
-                </Link>
-                <Link href="/x">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    Third Party Modules
-                  </a>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Transition>
     </div>
   );
 }
-
-export default Header;
