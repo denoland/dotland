@@ -28,9 +28,10 @@ export function DirectoryListing(props: DirectoryListingProps) {
       const parts = d.path.substring(props.path.length + 1).split("/");
       return {
         name: parts[parts.length - 1],
-        path: parts.length === 1
-          ? undefined
-          : parts.slice(0, parts.length - 1).join("/"),
+        path:
+          parts.length === 1
+            ? undefined
+            : parts.slice(0, parts.length - 1).join("/"),
         size: d.size,
         type: d.type,
       };
@@ -38,29 +39,36 @@ export function DirectoryListing(props: DirectoryListingProps) {
 
   const query = props.url.searchParams.get("query") ?? "";
 
-  const display = query.length > 1
-    ? children.filter(
-      (d: Entry) =>
-        (d.path?.toLowerCase().includes(query.toLowerCase()) ||
-          d.name.toLowerCase().includes(query.toLowerCase())) &&
-        d.type === "file",
-    )
-    : children.filter((d: Entry) => d.path === undefined);
-  const displayItems = query.length > 0 ? display : display
-    .filter((d: Entry): boolean => !d.name.match(/^\..*$/))
-    .sort((a: Entry, b: Entry) => a.type.localeCompare(b.type));
-  const hiddenItems = query.length > 0 ? [] : display
-    .filter((d: Entry) => !!d.name.match(/^\..*$/))
-    .sort((a: Entry, b: Entry) => a.type.localeCompare(b.type));
+  const display =
+    query.length > 1
+      ? children.filter(
+          (d: Entry) =>
+            (d.path?.toLowerCase().includes(query.toLowerCase()) ||
+              d.name.toLowerCase().includes(query.toLowerCase())) &&
+            d.type === "file"
+        )
+      : children.filter((d: Entry) => d.path === undefined);
+  const displayItems =
+    query.length > 0
+      ? display
+      : display
+          .filter((d: Entry): boolean => !d.name.match(/^\..*$/))
+          .sort((a: Entry, b: Entry) => a.type.localeCompare(b.type));
+  const hiddenItems =
+    query.length > 0
+      ? []
+      : display
+          .filter((d: Entry) => !!d.name.match(/^\..*$/))
+          .sort((a: Entry, b: Entry) => a.type.localeCompare(b.type));
   const baseURL = getBasePath({
     isStd: isStd,
     name: props.name,
     version: props.version,
   });
   const buildEntryURL = (path: string, entry: Entry): string => {
-    return `${baseURL}${path}/${
-      entry.path ? entry.path + "/" : ""
-    }${entry.name}`;
+    return `${baseURL}${path}/${entry.path ? entry.path + "/" : ""}${
+      entry.name
+    }`;
   };
 
   return (
@@ -73,15 +81,14 @@ export function DirectoryListing(props: DirectoryListingProps) {
               viewBox="0 0 20 20"
               class="w-6 h-6 text-gray-400 inline-block mr-2"
             >
-              <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z">
-              </path>
+              <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path>
             </svg>
             <span class="ml-2 font-medium">{props.path || "/"}</span>
           </div>
           {props.repositoryURL &&
             (
               <a href={props.repositoryURL} class="link ml-4">
-                Repository
+                سەرچاوە
               </a>
             )}
         </div>
@@ -124,12 +131,12 @@ export function DirectoryListing(props: DirectoryListingProps) {
                           class="select-none w-full text-center text-sm px-2 sm:pl-3 md:pl-4 py-1 text-blue-500"
                         >
                           <span>
-                            {`Close hidden ${
+                            {`شاراوەکان لابە ${
                               hiddenItems.length === 1 ? "item" : "items"
                             }`}
                           </span>
                           <span>
-                            {`Show hidden ${hiddenItems.length} ${
+                            {`شاراوەکان ببینە ${hiddenItems.length} ${
                               hiddenItems.length === 1 ? "item" : "items"
                             }`}
                           </span>

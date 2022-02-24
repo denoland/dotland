@@ -20,7 +20,7 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
   return (
     <div>
       <Head>
-        <title>Deno - A modern runtime for JavaScript and TypeScript</title>
+        <title>دێنۆ - ژینگەیەکی مۆدێرن بۆ تایپسکریپت و جاڤاسکریپت</title>
       </Head>
       <div class="bg-white">
         <div class="bg-gray-50 border-b border-gray-200">
@@ -38,7 +38,7 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
               href="/#installation"
               class="rounded-full mt-8 px-8 py-2 transition-colors duration-75 ease-in-out bg-blue-500 hover:bg-blue-400 text-white text-lg shadow-lg"
             >
-              Install
+              دایبمەزرێنە
             </a>
             <a
               href="https://github.com/denoland/deno/releases/latest"
@@ -50,43 +50,44 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <p class="my-4 text-gray-700">
-            Deno is a simple, modern and secure runtime for JavaScript and
-            TypeScript that uses V8 and is built in Rust.
+          دێنۆ ژینگەیەکی مۆدێرن و پارێزراوە بۆ تایپسکریپت و جاڤاسکریپت کە V8 بەکار دەهێنێت و بە زمانی ڕەست نووسراوە.
           </p>
           <ol class="ml-8 list-disc text-gray-700">
             <li>
-              Secure by default. No file, network, or environment access, unless
-              explicitly enabled.
+              لە بنەڕەتەوە پارێزراوە. ناتوانێت دەستی بگات بە فایلەکان، نێتوۆرک و
+              هتد مەگەر خۆت بهێڵیت.
             </li>
-            <li>Supports TypeScript out of the box.</li>
-            <li>Ships only a single executable file.</li>
             <li>
-              Has built-in utilities like a dependency inspector (
-              <InlineCode>deno info</InlineCode>) and a code formatter (
+              بەبێ ئەنجامدانی هیچ کارێکی پێشوەختە دەتوانیت تایپسکریپت بەکار
+              بهێنیت.
+            </li>
+            <li>هەموو دێنۆ یەک فایلە.</li>
+            <li>
+              لەناو خۆیدا چەند کەرەستەیەکی تێدایە، بۆ نموونە ڕازێنەرەوەی کۆد (
               <InlineCode>deno fmt</InlineCode>).
             </li>
             <li>
-              Has a set of reviewed (audited) standard modules that are
-              guaranteed to work with Deno:{" "}
+            چەندین مۆدیوڵی ستانداردی هەیە کە لە گەرەنتیی کارکردنیان هەیە:{" "}
               <a href="https://deno.land/std" class="link">
                 deno.land/std
               </a>
+              .
             </li>
             <li>
-              Has a number of{" "}
               <a
                 href="https://github.com/denoland/deno/wiki#companies-interested-in-deno"
                 class="link"
               >
-                companies interested in using and exploring Deno
+                ژمارەیەک کۆمپانیا هەن کە کار بە دێنۆ دەکەن
               </a>
+              .
             </li>
           </ol>
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <a class="hover:underline" href="#installation">
             <h3 class="font-bold text-xl" id="installation">
-              Installation
+              دامەزراندن
             </h3>
           </a>
           <InstallSection />
@@ -94,15 +95,15 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <a class="hover:underline" href="#getting-started">
             <h3 class="font-bold text-xl" id="getting-started">
-              Getting Started
+              دەستپێکردن
             </h3>
           </a>
-          <p class="my-4 text-gray-700">Try running a simple program:</p>
+          <p class="my-4 text-gray-700">پڕۆگرامێکی ساکار کار پێ بکە:</p>
           <CodeBlock
             code="deno run https://deno.land/std/examples/welcome.ts"
             language="bash"
           />
-          <p class="my-4 text-gray-700">Or a more complex one:</p>
+          <p class="my-4 text-gray-700">یان دانەیەکی چڕتر:</p>
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8">
           <CodeBlock
@@ -113,67 +114,57 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8">
           <p class="my-4 text-gray-700">
-            You can find a more in depth introduction, examples, and environment
-            setup guides in <a class="link" href="/manual">the manual</a>.
+          دەتوانیت بە بەکارهێنانی <a class="link" href="/manual">مانواڵەکە</a> پێشەکییەکی قوڵتر بخوێنیتەوە و نموونەی زۆرتر ببینیت.
           </p>
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <a class="hover:underline" href="#runtime-documentation">
             <h3 class="font-bold text-xl" id="runtime-documentation">
-              Runtime Documentation
+            نووسراوی ژینگە
             </h3>
           </a>
           <p class="my-4 text-gray-700">
-            The basic runtime documentation for Deno can be found on{" "}
+          نووسراوێکی سادە دەربارەی ژینگەکە بەردەستە لە{" "}
             <a href="https://doc.deno.land/builtin/stable" class="link">
               doc.deno.land
             </a>
             .
           </p>
           <p class="my-4 text-gray-700">
-            Deno comes with <a class="link" href="/manual">a manual</a>{" "}
-            which contains more in depth explanations about the more complex
-            functions of the runtime, an introduction to the concepts that Deno
-            is built on, details about the internals of Deno, how to embed Deno
-            in your own application and how to extend Deno using Rust plugins.
+          دێنۆ <a class="link" href="/manual">مانواڵێکی</a>{" "}
+          هەیە کە بە قووڵی باس لە دێنۆ دەکات و پێشەکییەکت دەربارەی چەمکەکان پێ دەدات.
           </p>
           <p class="my-4 text-gray-700">
-            The manual also contains information about the built in tools that
-            Deno provides.
+          مانواڵەکە باس لە ئەو شتانەش دەکات کە دێنۆ دابینینیان دەکات.
           </p>
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <a class="hover:underline" href="#standard-modules">
             <h3 class="font-bold text-xl" id="standard-modules">
-              Standard Modules
+              کتێبخانەی ستاندارد
             </h3>
           </a>
           <p class="my-4 text-gray-700">
-            Next to the Deno runtime, Deno also provides a list of audited
-            standard modules that are reviewed by the Deno maintainers and are
-            guaranteed to work with a specific Deno version. These live in the
+          پەرەپێدەرەکانی دێنۆ کار لەسەر مۆدیوڵە ستانداردەکان دەکەن کە گەرەنتیی کارکردنیان هەیە بە دێنۆ. سەرچاوەی مۆدیوڵە ستانداردەکان
             {" "}
             <a href="https://github.com/denoland/deno_std" class="link">
-              denoland/deno_std
-            </a>{" "}
-            repository.
+              لێرەیە
+            </a>.
           </p>
           <p class="my-4 text-gray-700">
-            These standard modules are hosted at{" "}
+            هەروەها لە{" "}
             <a class="link" href="/std">deno.land/std</a>{" "}
-            and are distributed via URLs like all other ES modules that are
-            compatible with Deno.
+            بڵاو کراونەتەوە وەک هەر مۆدیوڵێکی دیکە.
           </p>
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <a class="hover:underline" href="#third-party-modules">
             <h3 class="font-bold text-xl" id="third-party-modules">
-              Third Party Modules
+              مۆدیوڵەکان
             </h3>
           </a>
           <p class="my-4 text-gray-700">
-            Deno can import modules from any location on the web, like GitHub, a
-            personal webserver, or a CDN like{" "}
+          دێنۆ دەتوانێت مۆدیوڵ لە هەر شوێنێکی ئینتەرنێتەوە هاوردە بکات، بۆ نموونە گیتهەب، ڕاژەیەکی کەسی یان CDNـەکان وەک{" "}
             <a href="https://www.skypack.dev" class="link">
               Skypack
             </a>
@@ -185,25 +176,22 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
             <a href="https://www.jsdelivr.com/" class="link">
               jsDelivr
             </a>{" "}
-            or{" "}
+            یان{" "}
             <a href="https://esm.sh/" class="link">
               esm.sh
             </a>
             .
           </p>
           <p class="my-4 text-gray-700">
-            To make it easier to consume third party modules Deno provides some
-            built in tooling like <InlineCode>deno info</InlineCode> and{" "}
-            <InlineCode>deno doc</InlineCode>. deno.land also provides a web UI
-            for viewing module documentation. It is available at{" "}
+          بۆ ئاسانکردنی بەکارهێنانی مۆدیوڵەکان، دێنۆ چەند کەرەستەیەکی لەگەڵدایە وەک <InlineCode>deno info</InlineCode> و{" "}
+            <InlineCode>deno doc</InlineCode>. هەروەها deno.land ڕووکارێکی تێدایە بۆ بینینی نووسراوی مۆدیوڵەکان. کە لە{" "}
             <a href="https://doc.deno.land" class="link">
               doc.deno.land
-            </a>
-            .
+            </a>{" "}
+            بەردەستە.
           </p>
           <p class="my-4 text-gray-700">
-            deno.land also provides a simple public hosting service for ES
-            modules that work with Deno. It can be found at{" "}
+            deno.land  خزمەتگوزارییەکی بڵاوکردنەوەی گشتیشی تێدایە:{" "}
             <a class="link" href="/x">deno.land/x</a>.
           </p>
         </div>
@@ -218,7 +206,7 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
 function InstallSection() {
   const shell = (
     <div key="shell" class="my-4 text-gray-700">
-      <p class="py-2">Shell (Mac, Linux):</p>
+      <p class="py-2">شێڵ (ماک، لینوکس):</p>
       <CodeBlock
         language="bash"
         code="curl -fsSL https://deno.land/install.sh | sh"
@@ -229,16 +217,16 @@ function InstallSection() {
     <div key="homebrew" class="my-4 text-gray-700">
       <p class="mb-2">
         <a href="https://formulae.brew.sh/formula/deno" class="link">
-          Homebrew
+          هۆمبرو
         </a>{" "}
-        (Mac):
+        (ماک):
       </p>
       <CodeBlock language="bash" code="brew install deno" />
     </div>
   );
   const powershell = (
     <div key="powershell" class="my-4 text-gray-700">
-      <p class="mb-2">PowerShell (Windows):</p>
+      <p class="mb-2">پاوەڕشێڵ (ویندۆز):</p>
       <CodeBlock
         language="bash"
         code="iwr https://deno.land/install.ps1 -useb | iex"
@@ -249,9 +237,9 @@ function InstallSection() {
     <div key="chocolatey" class="my-4 text-gray-700">
       <p class="mb-2">
         <a href="https://chocolatey.org/packages/deno" class="link">
-          Chocolatey
+          چۆکۆڵاتی
         </a>{" "}
-        (Windows):
+        (ویندۆز):
       </p>
       <CodeBlock language="bash" code="choco install deno" />
     </div>
@@ -260,9 +248,9 @@ function InstallSection() {
     <div key="scoop" class="my-4 text-gray-700">
       <p class="mb-2">
         <a href="https://scoop.sh/" class="link">
-          Scoop
+          سکووپ
         </a>{" "}
-        (Windows):
+        (ویندۆز):
       </p>
       <CodeBlock language="bash" code="scoop install deno" />
     </div>
@@ -270,9 +258,9 @@ function InstallSection() {
   const cargo = (
     <div key="cargo" class="my-4 text-gray-700">
       <p class="py-2">
-        Build and install from source using{" "}
+        دروستکردن و دامەزراندن ڕێی{" "}
         <a href="https://crates.io/crates/deno" class="link">
-          Cargo
+          کارگۆ
         </a>
         :
       </p>
@@ -283,12 +271,12 @@ function InstallSection() {
   return (
     <>
       <p class="my-4 text-gray-700">
-        Deno ships as a single executable with no dependencies. You can install
-        it using the installers below, or download a release binary from the
-        {" "}
+      دێنۆ تەنیا یەک فایلە و لەسەر هیچ بەند نییە. دەتوانیت لە ڕێی
+        دامەزرێنەرەکان دایگریت وەک لە خوارەوە باسکراوە، یان وەشانێک لە{" "}
         <a href="https://github.com/denoland/deno/releases" class="link">
-          releases page
-        </a>
+          ئێرە
+        </a>{" "}
+        داگریت.
         .
       </p>
       {shell}
@@ -298,11 +286,10 @@ function InstallSection() {
       {scoop}
       {cargo}
       <p class="my-4 text-gray-700">
-        See{" "}
         <a class="link" href="https://github.com/denoland/deno_install">
           deno_install
         </a>{" "}
-        for more installation options.
+        ببینە بۆ ڕێگەی دیکەی دامەزراندن.
       </p>
     </>
   );

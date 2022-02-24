@@ -136,7 +136,7 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
     <>
       <Head>
         <title>
-          Benchmarks {dataRangeTitle ? `(${dataRangeTitle}) ` : " "}| Deno
+          بێچمارکەکان {dataRangeTitle ? `(${dataRangeTitle}) ` : " "}| دێنۆ
         </title>
       </Head>
       <script src="https://cdn.jsdelivr.net/npm/apexcharts" />

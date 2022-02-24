@@ -45,21 +45,18 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
   return (
     <>
       <Head>
-        <title>Third Party Modules | Deno</title>
+        <title>مۆدیوڵەکان | دێنۆ</title>
       </Head>
       <div class="bg-gray">
         <Header subtitle="Third Party Modules" widerContent={true} />
         <div>
           <div class="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8">
             <dt class="text-lg leading-6 font-medium text-gray-900">
-              What is deno.land/x?
+            deno.land/x چییە؟
             </dt>
             <dd class="mt-2">
               <p class="text-base leading-6 text-gray-500">
-                <span class="font-semibold">deno.land/x</span>{" "}
-                is a hosting service for Deno scripts. It caches releases of
-                open source modules stored on GitHub and serves them at one easy
-                to remember domain.
+                <span class="font-semibold">deno.land/x</span>{" "}خزمەتگوزارییەکی بڵاوکردنەوەی گشتییە بۆ مۆدیوڵی دێنۆ. وەشانی مۆدیوڵەکان لە گیتهەبەوە دەهێنێت و لە شوێنێک دایان دەنێت کە ناوەکەی ئاسان بێت بۆ بیرهاتنەوە.
               </p>
             </dd>
 
@@ -79,7 +76,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                   active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out
                 "
               >
-                Publish a module
+                مۆدیوڵێک بڵاو بکەرەوە
               </a>
             </div>
             {
@@ -102,9 +99,9 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
               id="query"
               class="block w-full px-4 py-2 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1"
               type="text"
-              placeholder={!resp
-                ? "Search"
-                : `Search through ${resp.totalCount} modules`}
+              placeholder={
+                !resp ? "بگەڕێ" : `لەناو ${resp.totalCount} مۆدیوڵ بگەڕێ`
+              }
               value={query}
             />
           </form>
@@ -112,7 +109,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
             {resp === null
               ? (
                 <div class="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
-                  Failed to load modules
+                  نەتوانرا مۆدیوڵەکان بار بکرێن
                 </div>
               )
               : (
@@ -120,7 +117,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                   {resp.results.length == 0
                     ? (
                       <div class="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
-                        No modules found
+                        هیچ مۆدیوڵێک نەدۆزرایەوە
                       </div>
                     )
                     : (
@@ -145,7 +142,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                       });
                       const centerPage = Math.max(
                         4,
-                        Math.min(page, pageCount - 3),
+                        Math.min(page, pageCount - 3)
                       );
 
                       return (
@@ -160,7 +157,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                                   : "text-gray-500 cursor-default"
                               } transition ease-in-out duration-150`}
                             >
-                              Previous
+                              پێشتر
                             </MaybeA>
                             <div class="text-base leading-6 text-gray-500">
                               {page}/{pageCount}
@@ -174,7 +171,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                                   : "text-gray-500 cursor-default"
                               } transition ease-in-out duration-150`}
                             >
-                              Next
+                              دواتر
                             </MaybeA>
                           </div>
                           <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
@@ -192,7 +189,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                                 <span class="font-medium">
                                   {resp.totalCount}
                                 </span>{" "}
-                                results
+                                ئەنجام نیشان دەدرێن
                               </p>
                             </div>
                             <div>
@@ -343,9 +340,9 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                         </div>
                       );
                     })()
-                    : null}
-                </div>
-              )}
+                  : null}
+              </div>
+            )}
           </div>
           <div
             id="info"
@@ -363,42 +360,41 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                       <InlineCode>
                         https://deno.land/x/IDENTIFIER@VERSION/FILE_PATH
                       </InlineCode>
-                      . If you leave out the version it will be defaulted to the
-                      most recent version released for the module.
+                      . ئەگەر ژمارەی وەشانەکە نەنووسیت، نوێترین وەشان
+                      هەڵدەبژێردرێت.
                     </p>
                   </dd>
                 </div>
                 <div class="mt-12">
                   <dt class="text-lg leading-6 font-medium text-gray-900">
-                    Can I find functionality built-in to Deno here?
+                  دەتوانم لە ڕێی مۆدیوڵەکانی ئێرە ئەرکی دێنۆ بگۆڕم؟
                   </dt>
                   <dd class="mt-2">
                     <p class="text-base leading-6 text-gray-500">
-                      No, the built-in runtime is documented on{" "}
+                    نا، نووسراو دەربارەی ژینگەی دێنۆ خۆی لە{" "}
                       <a class="link" href="https://doc.deno.land/">
-                        deno doc
+                        ئێرە
                       </a>{" "}
-                      and in the manual. See{" "}
+                      و ناو مانواڵەکەیە.{" "}
                       <a href="/std" class="link">/std</a>{" "}
-                      for the standard modules.
+                      ببینە بۆ مۆدیوڵە ستانداردەکان.
                     </p>
                   </dd>
                 </div>
                 <div class="mt-12">
                   <dt class="text-lg leading-6 font-medium text-gray-900">
-                    How do I add a module to deno.land/x?
+                  چۆن دەتوانم مۆدیوڵێکی خۆم لە deno.land/x دابنێم؟
                   </dt>
                   <dd class="mt-2">
                     <p class="text-base leading-6 text-gray-500 break-words">
-                      Press the button below and follow the presented
-                      instructions:
+                    ئەو دوگمەیەی خوارەوە بکە و ڕێنماییەکان بخوێنەوە:
                     </p>
                     <span class="block w-full rounded-md shadow-sm mt-4">
                       <a
                         href="/add_module"
                         class="w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
                       >
-                        Publish a module
+                        مۆدیوڵێک بڵاو بکەرەوە
                       </a>
                     </span>
                   </dd>
@@ -410,34 +406,22 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                     class="text-lg leading-6 font-medium text-gray-900"
                     id="warning"
                   >
-                    I am getting a warning when importing from deno.land/x!
+                    کاتێک مۆدیوڵ لە deno.land/xـەوە هاوردە دەکەم ئاگادار
+                    دەکرێمەوە!
                   </dt>
                   <dd class="mt-2">
                     <p class="text-base leading-6 text-gray-500">
-                      deno.land/x warns you when you are implicitly importing
-                      the latest version of a module (when you do not explicitly
-                      specify a version). This is because it can{" "}
-                      <a
-                        href="https://github.com/denoland/dotland/issues/997"
-                        class="link"
-                      >
-                        be unsafe to not tag dependencies
-                      </a>
-                      . To get rid of the warning, explicitly specify a version.
+                    deno.land/x ئاگادارت دەکاتەوە کاتێک خۆی نوێترین وەشانی مۆدیوڵێکت بۆ هەڵدەبژێرێت کاتێک لە کاتی هاوردەکردنی مۆدیوڵێک وەشانەکەی دیاری ناکەیت. بۆ لابردنی ئەم ئاگادارکردنەوەیە، تەنیا وەشانی مۆدیوڵەکە دیاری بکە.
                     </p>
                   </dd>
                 </div>
                 <div class="mt-12">
                   <dt class="text-lg leading-6 font-medium text-gray-900">
-                    Can I edit or remove a module on deno.land/x?
+                  دەتوانم دەستکاریی مۆدیوڵەکانی ناو deno.land/x بکەم یان بیانسڕمەوە؟
                   </dt>
                   <dd class="mt-2">
                     <p class="text-base leading-6 text-gray-500">
-                      Module versions are persistent and immutable. It is thus
-                      not possible to edit or delete a module (or version), to
-                      prevent breaking programs that rely on this module.
-                      Modules may be removed if there is a legal reason to do
-                      (for example copyright infringement).
+                    وەشانی مۆدیوڵەکان نەگۆڕن و ناتوانرێ دەستکاری بکرێن. بەڵام لەوانەیە مۆدیوڵێک لاببرێت ئەگەر لەبەر هۆکارێکی یاسایی بێت، بۆ نموونە مافی لەبەرگرتنەوە.
                     </p>
                   </dd>
                 </div>
@@ -452,7 +436,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
               ? (
                 <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-8">
                   <div>
-                    <h5 class="font-medium text-lg">New modules</h5>
+                    <h5 class="font-medium text-lg">مۆدیوڵە نوێکان</h5>
                     <div class="bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2">
                       <ModuleList
                         modules={stats.recently_added_modules.map((v) => ({
@@ -465,7 +449,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                     </div>
                   </div>
                   <div>
-                    <h5 class="font-medium text-lg">Recently updated</h5>
+                    <h5 class="font-medium text-lg">دوایین نوێکردنەوە</h5>
                     <div class="bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2">
                       <ModuleList
                         modules={stats.recently_uploaded_versions.map((v) => ({
@@ -478,8 +462,8 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                     </div>
                   </div>
                 </div>
-              )
-              : null}
+              </div>
+            ) : null}
           </div>
         </div>
         <Footer simple />
