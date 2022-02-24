@@ -55,7 +55,7 @@ export function Footer({ simple }: { simple?: boolean }) {
           </a>
           <a
             href="https://discord.gg/deno"
-            class="ml-6 text-gray-400 hover:text-gray-500"
+            class="mr-6 text-gray-400 hover:text-gray-500"
           >
             <span class="sr-only">دیسکۆڕد</span>
             <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -65,7 +65,7 @@ export function Footer({ simple }: { simple?: boolean }) {
           </a>
           <a
             href="https://twitter.com/deno_land"
-            class="ml-6 text-gray-400 hover:text-gray-500"
+            class="mr-6 text-gray-400 hover:text-gray-500"
           >
             <span class="sr-only">تویتەر</span>
             <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">

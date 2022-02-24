@@ -88,18 +88,18 @@ function Item({ artwork }: { artwork: Artwork }) {
               />
             )
             : <div class="rounded-full w-12 h-12 bg-gray-200" />}
-          <div class="ml-4 flex flex-col justify-center">
+          <div class="mr-4 flex flex-col justify-center">
             <div class="text-xl leading-tight">{artwork.artist.name}</div>
             <span class="text-gray-600 leading-tight">
               {artwork.license}
             </span>
           </div>
         </div>
-        <div class="flex justify-start items-center ml-4">
+        <div class="flex justify-start items-center mr-4">
           {artwork.artist.web && (
             <a
               href={artwork.artist.web}
-              class="ml-2 text-gray-500 hover:text-gray-700"
+              class="mr-2 text-gray-500 hover:text-gray-700"
             >
               <span class="sr-only">ماڵپەڕ</span>
               <svg
@@ -119,7 +119,7 @@ function Item({ artwork }: { artwork: Artwork }) {
           {artwork.artist.twitter && (
             <a
               href={`https://twitter.com/${artwork.artist.twitter}`}
-              class="ml-2 text-gray-500 hover:text-gray-700"
+              class="mr-2 text-gray-500 hover:text-gray-700"
             >
               <span class="sr-only">تویتەر</span>
               <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -130,7 +130,7 @@ function Item({ artwork }: { artwork: Artwork }) {
           {artwork.artist.github && (
             <a
               href={`https://github.com/${artwork.artist.github}`}
-              class="ml-2 text-gray-500 hover:text-gray-700"
+              class="mr-2 text-gray-500 hover:text-gray-700"
             >
               <span class="sr-only">گیتهەب</span>
               <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -145,7 +145,7 @@ function Item({ artwork }: { artwork: Artwork }) {
           {artwork.artist.instagram && (
             <a
               href={`https://www.instagram.com/${artwork.artist.instagram}`}
-              class="ml-2 text-gray-500 hover:text-gray-700"
+              class="mr-2 text-gray-500 hover:text-gray-700"
             >
               <span class="sr-only">ئینستاگرام</span>
               <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">

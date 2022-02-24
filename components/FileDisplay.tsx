@@ -49,13 +49,13 @@ export function FileDisplay(props: {
         </div>
         <div>
           {props.sourceURL && (
-            <a href={props.sourceURL} class="link ml-4">
+            <a href={props.sourceURL} class="link mr-4">
               ڕاو
             </a>
           )}
           {props.repositoryURL &&
             (
-              <a href={props.repositoryURL} class="link ml-4">
+              <a href={props.repositoryURL} class="link mr-4">
                 سەرچاوە
               </a>
             )}

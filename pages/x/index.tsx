@@ -168,7 +168,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                             <MaybeA
                               disabled={!hasNext}
                               href={toPage(page + 1)}
-                              class={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md bg-white ml-4 ${
+                              class={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md bg-white mr-4 ${
                                 hasNext
                                   ? "text-gray-700 hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700"
                                   : "text-gray-500 cursor-default"
@@ -531,12 +531,12 @@ function ModuleList({
                   </div>
                 </div>
                 {meta.starCount !== undefined && (
-                  <div class="ml-6 mr-4 flex items-center">
+                  <div class="mr-6 mr-4 flex items-center">
                     <div class="text-gray-400">
                       {meta.starCount}
                     </div>
                     <svg
-                      class="ml-1 text-gray-400 w-5 h-5"
+                      class="mr-1 text-gray-400 w-5 h-5"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >

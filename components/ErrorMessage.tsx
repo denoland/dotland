@@ -23,7 +23,7 @@ export function ErrorMessage(props: {
             />
           </svg>
         </div>
-        <div class="ml-3">
+        <div class="mr-3">
           <h3 class="text-sm leading-5 font-medium text-red-800">
             {props.title}
           </h3>

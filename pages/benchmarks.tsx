@@ -61,7 +61,7 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
             Tests HTTP server performance. 10 keep-alive connections do as many
             hello-world requests as possible. Bigger is better.
           </p>
-          <ul class="ml-8 list-disc my-2">
+          <ul class="mr-8 list-disc my-2">
             <li>
               <SourceLink path="cli/bench/deno_tcp.ts" name="deno_tcp" />{" "}
               is a fake http server that doesn't parse HTTP. It is comparable to
@@ -186,7 +186,7 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
                 In this section we measure various metrics of the following
                 scripts:
               </p>
-              <ul class="ml-8 list-disc my-2">
+              <ul class="mr-8 list-disc my-2">
                 <li>
                   <SourceLink
                     path="cli/tests/testdata/003_relative_import.ts"
@@ -362,7 +362,7 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
                     class="inline-block h-5 w-5 rounded-full bg-white shadow transform transition ease-in-out duration-200"
                   />
                 </span>
-                <span class="ml-2 text-gray-900">
+                <span class="mr-2 text-gray-900">
                   Show normalized benchmarks
                 </span>
               </label>
@@ -399,7 +399,7 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
                   yTickFormat={formatKB}
                 />
                 <p class="mt-1">Size of different bundled scripts.</p>
-                <ul class="ml-8 list-disc my-2">
+                <ul class="mr-8 list-disc my-2">
                   <li>
                     <a class="link" href="/std/http/file_server.ts">
                       file_server

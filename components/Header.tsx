@@ -21,7 +21,7 @@ export function Header({
       >
         <a class="flex items-center" href="/">
           <img class="h-10 w-auto sm:h-12 my-2" src="/logo.svg" alt="" />
-          <div class="ml-5 flex flex-col justify-center">
+          <div class="mr-5 flex flex-col justify-center">
             {!main &&
               (
                 <div class="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
@@ -52,9 +52,9 @@ export function Header({
                     src="/logo.svg"
                     alt=""
                   />
-                  <div class="ml-5 flex flex-col justify-center">
+                  <div class="mr-5 flex flex-col justify-center">
                     <div class="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
-                      Deno
+                      دێنۆ
                     </div>
                     {subtitle &&
                       (
@@ -126,7 +126,7 @@ export function Header({
             </svg>
           </div>
         </label>
-        <div class="hidden lg:flex md:ml-10 items-end">
+        <div class="hidden lg:flex md:mr-10 items-end">
           <a
             href="https://deno.com/deploy"
             class="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
@@ -135,37 +135,37 @@ export function Header({
           </a>
           <a
             href="/manual"
-            class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+            class="mr-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
           >
             مانواڵ
           </a>
           <a
             href="https://deno.com/blog"
-            class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+            class="mr-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
           >
             بڵۆگ
           </a>
           <a
             href="https://doc.deno.land/builtin/stable"
-            class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+            class="mr-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
           >
             API
           </a>
           <a
             href="/std"
-            class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+            class="mr-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
           >
             کتێبخانەی ستاندارد
           </a>
           <a
             href="/x"
-            class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+            class="mr-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
           >
             مۆدیوڵەکان
           </a>
           <a
             href="https://github.com/denoland"
-            class="ml-10 text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out leading-0"
+            class="mr-10 text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out leading-0"
           >
             <span class="sr-only">گیتهەب</span>
             <svg
