@@ -12,10 +12,12 @@ import {
   twas,
   useData,
 } from "../../deps.ts";
-import { Handlers, accepts } from "../../server_deps.ts";
+import { accepts, Handlers } from "../../server_deps.ts";
 import {
   denoDocAvailableForURL,
   DirEntry,
+  extractAltLineNumberReference,
+  fetchSource,
   findRootReadme,
   getBasePath,
   getModule,
@@ -26,10 +28,8 @@ import {
   getVersionMeta,
   isReadme,
   listExternalDependencies,
-  VersionInfo,
-  fetchSource,
   S3_BUCKET,
-  extractAltLineNumberReference,
+  VersionInfo,
 } from "../../util/registry_utils.ts";
 import { Header } from "../../components/Header.tsx";
 import { Footer } from "../../components/Footer.tsx";
@@ -667,7 +667,8 @@ export const handler: Handlers = {
 
         return render!();
       } else {
-        const remoteUrl = `${S3_BUCKET}${match.name}/versions/${match.version}/raw/${match.path}`;
+        const remoteUrl =
+          `${S3_BUCKET}${match.name}/versions/${match.version}/raw/${match.path}`;
         const resp = await fetchSource(remoteUrl);
 
         if (

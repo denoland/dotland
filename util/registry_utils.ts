@@ -562,7 +562,6 @@ export async function fetchSource(remoteUrl: string): Promise<Response> {
   throw lastErr;
 }
 
-
 const ALT_LINENUMBER_MATCHER = /(.*):(\d+):\d+$/;
 
 export function extractAltLineNumberReference(

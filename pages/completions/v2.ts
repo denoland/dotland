@@ -297,7 +297,7 @@ function toPathDocs(
   const matchPath = `/${path}`;
   const listing =
     meta.directory_listing.find(({ path }) => path === matchPath) ??
-    { size: 0, type: "file", path: "" };
+      { size: 0, type: "file", path: "" };
   const { size, type } = listing;
   return type === "file"
     ? `[docs](https://doc.deno.land/https://deno.land/x/${pkg}@${ver}/${path}) | [code](https://deno.land/x/${pkg}@${ver}/${path}) | size: ${
@@ -321,7 +321,7 @@ function toStdPathDocs(ver: string, path: string, meta: MetaJson): string {
   const matchPath = `/${path}`;
   const listing =
     meta.directory_listing.find(({ path }) => path === matchPath) ??
-    { size: 0, type: "file", path: "" };
+      { size: 0, type: "file", path: "" };
   const { size, type } = listing;
   const [mod] = path && path.includes("/") ? path.split("/") : [path];
   const leading = mod in stdDescriptions
@@ -560,7 +560,6 @@ export function handler({ req }: HandlerContext) {
       statusText: "NotFound",
     }),
   );
-
 }
 
 export const config: PageConfig = {

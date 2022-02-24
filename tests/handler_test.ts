@@ -1,7 +1,11 @@
-/* Copyright 2021 the Deno authors. All rights reserved. MIT license. */
+// Copyright 2021-2022 the Deno authors. All rights reserved. MIT license.
 
 import { assert, assertEquals } from "../test_deps.ts";
-import { extractAltLineNumberReference, handleRequest } from "./handler.ts";
+import { extractAltLineNumberReference } from "../util/registry_utils.ts";
+
+import { ServerContext } from "../server_deps.ts";
+import routes from "../routes.gen.ts";
+const handleRequest = (await ServerContext.fromRoutes(routes)).handler();
 
 /** This is taken directly from a recent version of Chromium */
 const BROWSER_ACCEPT =

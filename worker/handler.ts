@@ -1,9 +1,3 @@
-
-export function handleRequest(request: Request): Promise<Response> {
-  const url = new URL(request.url);
-  return proxyFile(url, REMOTE_URL, request);
-}
-
 interface CacheEntry {
   body: ArrayBuffer;
   contentType: string;

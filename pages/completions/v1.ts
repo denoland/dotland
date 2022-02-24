@@ -1,7 +1,7 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 import { PageConfig } from "../../deps.ts";
-import { match, HandlerContext } from "../../server_deps.ts";
+import { HandlerContext, match } from "../../server_deps.ts";
 import { S3_BUCKET } from "../../util/registry_utils.ts";
 
 const VERSIONS = match("/_vsc1/modules/:module([a-z0-9_]*)");
@@ -90,7 +90,6 @@ export async function handler({ req }: HandlerContext) {
   }
 
   return new Response("not found", { status: 404 });
-
 }
 
 export const config: PageConfig = {
