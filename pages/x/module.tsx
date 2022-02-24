@@ -162,8 +162,12 @@ function ModuleView({
     ? `https://doc.deno.land/https://deno.land${canonicalPath}`
     : null;
 
-  const hasStandardModulEntryPoint = versionMeta?.directoryListing.some(entry => entry.path === "/mod.ts");
-  const moduleDocumentationURL = hasStandardModulEntryPoint ? `https://doc.deno.land/https://deno.land${basePath}/mod.ts` : null;
+  const hasStandardModulEntryPoint = versionMeta?.directoryListing.some(
+    (entry) => entry.path === "/mod.ts",
+  );
+  const moduleDocumentationURL = hasStandardModulEntryPoint
+    ? `https://doc.deno.land/https://deno.land${basePath}/mod.ts`
+    : null;
 
   const raw = useData(sourceURL, async () => {
     if (
@@ -325,7 +329,7 @@ function ModuleView({
                   <div class="text-sm">
                     {emojify(moduleMeta.description ?? "")}
                   </div>
-                  { moduleDocumentationURL
+                  {moduleDocumentationURL
                     ? (
                       <div class="mt-3 flex items-center">
                         <svg
@@ -336,17 +340,18 @@ function ModuleView({
                           <title>
                             Documentation
                           </title>
-                          <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
+                          <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z">
+                          </path>
                         </svg>
-                          <a
-                            class="link"
-                            href={moduleDocumentationURL}
-                          >
-                            Documentation
-                          </a>
+                        <a
+                          class="link"
+                          href={moduleDocumentationURL}
+                        >
+                          Documentation
+                        </a>
                       </div>
-                    ) : null
-                  }
+                    )
+                    : null}
                   <div class="mt-3 flex items-center">
                     <svg
                       class="h-5 w-5 mr-2 inline text-gray-700"
