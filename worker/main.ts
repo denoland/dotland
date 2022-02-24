@@ -1,1 +1,1 @@
-main.ts
+../main.ts
