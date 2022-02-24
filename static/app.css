@@ -1,8 +1,14 @@
 /* Copyright 2022 the Deno authors. All rights reserved. MIT license. */
 
+@import "https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css";
+
 html {
 	direction: rtl;
 	scroll-behavior: smooth;
+}
+
+body {
+	font-family: Vazir;
 }
 
 .markdown-body {

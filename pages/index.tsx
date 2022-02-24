@@ -31,7 +31,7 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
             </h1>
             <h2 class="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900">
               ژینگەیەکی <strong class="font-semibold">مۆدێرن</strong> بۆ{" "}
-              <strong class="font-semibold">تایپسکریپت</strong> and{" "}
+              <strong class="font-semibold">تایپسکریپت</strong> و{" "}
               <strong class="font-semibold">جاڤاسکریپت</strong>.
             </h2>
             <a
