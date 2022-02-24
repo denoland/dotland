@@ -1,11 +1,8 @@
-/* Copyright 2021-2022 the Deno authors. All rights reserved. MIT license. */
+// Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-// @deno-types https://deno.land/x/fuse@v6.4.1/dist/fuse.d.ts
-import { default as Fuse } from "https://deno.land/x/fuse@v6.4.1/dist/fuse.esm.js";
-import { prettyBytes } from "https://deno.land/x/pretty_bytes@v1.0.5/mod.ts";
-import twas from "https://esm.sh/twas@2.1.2";
-
-import { S3_BUCKET } from "./registry.ts";
+import { PageConfig, twas } from "../../deps.ts";
+import { Fuse, HandlerContext, prettyBytes } from "../../server_deps.ts";
+import { S3_BUCKET } from "../../util/registry_utils.ts";
 
 interface ApiModuleData {
   name: string;
@@ -300,7 +297,7 @@ function toPathDocs(
   const matchPath = `/${path}`;
   const listing =
     meta.directory_listing.find(({ path }) => path === matchPath) ??
-      { size: 0, type: "file", path: "" };
+    { size: 0, type: "file", path: "" };
   const { size, type } = listing;
   return type === "file"
     ? `[docs](https://doc.deno.land/https://deno.land/x/${pkg}@${ver}/${path}) | [code](https://deno.land/x/${pkg}@${ver}/${path}) | size: ${
@@ -324,7 +321,7 @@ function toStdPathDocs(ver: string, path: string, meta: MetaJson): string {
   const matchPath = `/${path}`;
   const listing =
     meta.directory_listing.find(({ path }) => path === matchPath) ??
-      { size: 0, type: "file", path: "" };
+    { size: 0, type: "file", path: "" };
   const { size, type } = listing;
   const [mod] = path && path.includes("/") ? path.split("/") : [path];
   const leading = mod in stdDescriptions
@@ -543,9 +540,9 @@ const patterns: [string, (match: URLPatternResult) => Promise<Response>][] = [
 ];
 
 /** Handle registry v2 API requests. */
-export function handleApiRequest(url: URL): Promise<Response> {
+export function handler({ req }: HandlerContext) {
   for (const [pattern, handler] of patterns) {
-    const result = new URLPattern(pattern, url.toString()).exec(url);
+    const result = new URLPattern(pattern, req.url).exec(req.url);
     if (result) {
       try {
         return handler(result);
@@ -563,4 +560,9 @@ export function handleApiRequest(url: URL): Promise<Response> {
       statusText: "NotFound",
     }),
   );
+
 }
+
+export const config: PageConfig = {
+  routeOverride: "/_api/",
+};

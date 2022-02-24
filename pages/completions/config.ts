@@ -1,6 +1,7 @@
-/* Copyright 2021 the Deno authors. All rights reserved. MIT license. */
+// Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-import { accepts } from "https://deno.land/x/oak_commons@0.1.1/negotiation.ts";
+import { PageConfig } from "../../deps.ts";
+import { accepts, HandlerContext } from "../../server_deps.ts";
 
 interface RegistryDefVariable {
   key: string;
@@ -152,25 +153,27 @@ const configV2: RegistryConfig = {
 /** Provide the v1 or v2 registry configuration based on the accepts header
  * provided by the client.  Deno 1.17.1 and later indicates it accepts a
  * configuration of v2. */
-export function handleConfigRequest(request: Request): Promise<Response> {
+export function handler({ req }: HandlerContext) {
   let body: unknown;
   let contentType = "application/json";
-  const accept = request.headers.get("accept");
+  const accept = req.headers.get("accept");
   if (
     accept !== null && accept !== "*/*" &&
-    accepts(request, "application/vnd.deno.reg.v2+json")
+    accepts(req, "application/vnd.deno.reg.v2+json")
   ) {
     contentType = "application/vnd.deno.reg.v2+json";
     body = configV2;
   } else {
     body = configV1;
   }
-  return Promise.resolve(
-    new Response(JSON.stringify(body), {
-      headers: {
-        "cache-control": MAX_AGE_1_DAY,
-        "content-type": contentType,
-      },
-    }),
-  );
+  return new Response(JSON.stringify(body), {
+    headers: {
+      "cache-control": MAX_AGE_1_DAY,
+      "content-type": contentType,
+    },
+  });
 }
+
+export const config: PageConfig = {
+  routeOverride: "/.well-known/deno-import-intellisense.json",
+};

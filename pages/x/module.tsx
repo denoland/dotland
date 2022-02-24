@@ -12,7 +12,7 @@ import {
   twas,
   useData,
 } from "../../deps.ts";
-import { Handlers } from "../../server_deps.ts";
+import { Handlers, accepts } from "../../server_deps.ts";
 import {
   denoDocAvailableForURL,
   DirEntry,
@@ -27,6 +27,9 @@ import {
   isReadme,
   listExternalDependencies,
   VersionInfo,
+  fetchSource,
+  S3_BUCKET,
+  extractAltLineNumberReference,
 } from "../../util/registry_utils.ts";
 import { Header } from "../../components/Header.tsx";
 import { Footer } from "../../components/Footer.tsx";
@@ -631,18 +634,58 @@ function VersionSelector({
 
 export const handler: Handlers = {
   async GET({ req, match, render }) {
+    const url = new URL(req.url);
+    const isHTML = accepts(req, "application/*", "text/html") === "text/html";
     if (!match.version) {
       const version = await getVersionList(match.name);
       if (version?.latest === null) {
-        return render!();
+        if (isHTML) {
+          return render!();
+        } else {
+          return new Response(
+            `The module '${match.name}' has no latest version`,
+            {
+              status: 404,
+              headers: {
+                "content-type": "text/plain",
+                "Access-Control-Allow-Origin": "*",
+              },
+            },
+          );
+        }
       }
-      const url = new URL(req.url);
       url.pathname = `/${
         match.name === "std" ? match.name : "x/" + match.name
       }@${version!.latest}/${match.path}`;
       return Response.redirect(url);
+    } else {
+      if (isHTML) {
+        const ln = extractAltLineNumberReference(url.toString());
+        if (ln) {
+          return Response.redirect(`${ln.rest}#L${ln.line}`, 302);
+        }
+
+        return render!();
+      } else {
+        const remoteUrl = `${S3_BUCKET}${match.name}/versions/${match.version}/raw/${match.path}`;
+        const resp = await fetchSource(remoteUrl);
+
+        if (
+          remoteUrl.endsWith(".jsx") &&
+          !resp.headers.get("content-type")?.includes("javascript")
+        ) {
+          resp.headers.set("content-type", "application/javascript");
+        } else if (
+          remoteUrl.endsWith(".tsx") &&
+          !resp.headers.get("content-type")?.includes("typescript")
+        ) {
+          resp.headers.set("content-type", "application/typescript");
+        }
+
+        resp.headers.set("Access-Control-Allow-Origin", "*");
+        return resp;
+      }
     }
-    return render!();
   },
 };
 
