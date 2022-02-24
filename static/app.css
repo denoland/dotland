@@ -43,7 +43,7 @@ html {
 
 /* Manual */
 
-#manualSideBarToggle:checked + #manualSideBar {
+#manualSidebarToggle:checked + #manualSidebar {
 	display: block;
 }
 
