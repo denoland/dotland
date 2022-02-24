@@ -1,7 +1,10 @@
 /* Copyright 2021-2022 the Deno authors. All rights reserved. MIT license. */
 
 import { assertEquals } from "../test_deps.ts";
-import { handleConfigRequest } from "./registry_config.ts";
+
+import { ServerContext } from "../server_deps.ts";
+import routes from "../routes.gen.ts";
+const handleRequest = (await ServerContext.fromRoutes(routes)).handler();
 
 Deno.test({
   name: "handleConfigRequest - v1 version of manifest",
@@ -10,7 +13,7 @@ Deno.test({
       "https://deno.land/.well-known/deno-import-intellisense.json",
       { headers: { "accept": "*/*" } },
     );
-    const res = await handleConfigRequest(req);
+    const res = await handleRequest(req);
     assertEquals(res.status, 200);
     const json = await res.json();
     assertEquals(json.version, 1);
@@ -29,7 +32,7 @@ Deno.test({
         },
       },
     );
-    const res = await handleConfigRequest(req);
+    const res = await handleRequest(req);
     assertEquals(res.status, 200);
     const json = await res.json();
     assertEquals(json.version, 2);
@@ -49,7 +52,7 @@ Deno.test({
         },
       },
     );
-    const res = await handleConfigRequest(req);
+    const res = await handleRequest(req);
     assertEquals(res.status, 200);
     const json = await res.json();
     assertEquals(json.version, 2);
