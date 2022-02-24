@@ -163,7 +163,7 @@ function ModuleView({
     : null;
 
   const hasStandardModulEntryPoint = versionMeta?.directoryListing.some(entry => entry.path === "/mod.ts");
-  const moduleDocumentationURL = hasStandardModulEntryPoint ? `https://doc.deno.land/https://deno.land${canonicalPath}/mod.ts` : null;
+  const moduleDocumentationURL = hasStandardModulEntryPoint ? `https://doc.deno.land/https://deno.land${basePath}/mod.ts` : null;
 
   const raw = useData(sourceURL, async () => {
     if (
