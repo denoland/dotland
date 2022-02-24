@@ -9,7 +9,7 @@ import type { ConnInfo } from "https://deno.land/std@0.112.0/http/server.ts";
 import { createReporter } from "https://deno.land/x/g_a@0.1.2/mod.ts";
 import { accepts } from "https://deno.land/x/oak_commons@0.1.1/negotiation.ts";
 
-const REMOTE_URL = "https://deno-website2.now.sh";
+const REMOTE_URL = "https://dotland-fresh.deno.dev";
 
 const ga = createReporter({
   filter(req, res) {
@@ -184,7 +184,7 @@ async function proxyFile(
   remoteUrl: string,
   request: Request,
 ): Promise<Response> {
-  const proxyUrl = new URL(remoteUrl + url.pathname).href;
+  const proxyUrl = new URL(remoteUrl + url.pathname + url.search).href;
   let cacheEntry = cache.get(proxyUrl);
 
   if (cacheEntry === undefined) {
