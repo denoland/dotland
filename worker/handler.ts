@@ -184,7 +184,7 @@ async function proxyFile(
   remoteUrl: string,
   request: Request,
 ): Promise<Response> {
-  const proxyUrl = new URL(remoteUrl + url.pathname).href;
+  const proxyUrl = new URL(remoteUrl + url.pathname + url.search).href;
   let cacheEntry = cache.get(proxyUrl);
 
   if (cacheEntry === undefined) {
