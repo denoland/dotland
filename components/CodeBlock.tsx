@@ -96,7 +96,7 @@ export function RawCodeBlock({
     <div
       data-color-mode="light"
       data-light-theme="light"
-      class="markdown-body "
+      class="markdown-body"
     >
       <pre
         class={`highlight highlight-source-${newLang} flex ${
