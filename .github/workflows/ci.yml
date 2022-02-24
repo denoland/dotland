@@ -3,8 +3,6 @@ name: ci
 on: [push, pull_request]
 
 jobs:
-  web:
-    runs-on: ubuntu-latest
   check:
     runs-on: ubuntu-latest
     steps:
