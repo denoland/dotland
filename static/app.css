@@ -1,6 +1,7 @@
 /* Copyright 2022 the Deno authors. All rights reserved. MIT license. */
 
 html {
+	direction: rtl;
 	scroll-behavior: smooth;
 }
 
@@ -154,7 +155,7 @@ ul.tree ul {
 }
 
 ul.tree ul {
-	margin-left: 12px;
+	margin-right: 12px;
 }
 
 ul.tree li {

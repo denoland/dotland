@@ -27,12 +27,12 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
           <Header main />
           <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
             <h1 class="font-extrabold text-5xl leading-10 tracking-tight text-gray-900">
-              Deno
+              دێنۆ
             </h1>
             <h2 class="mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900">
-              A <strong class="font-semibold">modern</strong> runtime for{" "}
-              <strong class="font-semibold">JavaScript</strong> and{" "}
-              <strong class="font-semibold">TypeScript</strong>.
+              ژینگەیەکی <strong class="font-semibold">مۆدێرن</strong> بۆ{" "}
+              <strong class="font-semibold">تایپسکریپت</strong> and{" "}
+              <strong class="font-semibold">جاڤاسکریپت</strong>.
             </h2>
             <a
               href="/#installation"
@@ -53,7 +53,7 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
             دێنۆ ژینگەیەکی مۆدێرن و پارێزراوە بۆ تایپسکریپت و جاڤاسکریپت کە V8
             بەکار دەهێنێت و بە زمانی ڕەست نووسراوە.
           </p>
-          <ol class="ml-8 list-disc text-gray-700">
+          <ol class="mr-8 list-disc text-gray-700">
             <li>
               لە بنەڕەتەوە پارێزراوە. ناتوانێت دەستی بگات بە فایلەکان، نێتوۆرک و
               هتد مەگەر خۆت بهێڵیت.
