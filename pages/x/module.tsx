@@ -633,7 +633,7 @@ export const handler: Handlers = {
   async GET({ req, match, render }) {
     if (!match.version) {
       const version = await getVersionList(match.name);
-      if (version?.latest === null) {
+      if (!version?.latest) {
         return render!();
       }
       const url = new URL(req.url);
