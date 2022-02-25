@@ -34,4 +34,4 @@ jobs:
           deno-version: v1.x
 
       - name: Run Tests
-        run: deno test --allow-net --allow-env --allow-hrtime
+        run: deno test --allow-net --allow-env --allow-hrtime --no-check

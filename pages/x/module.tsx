@@ -654,10 +654,18 @@ export const handler: Handlers = {
           );
         }
       }
-      url.pathname = `/${
-        match.name === "std" ? match.name : "x/" + match.name
-      }@${version!.latest}/${match.path}`;
-      return Response.redirect(url);
+      return new Response(undefined, {
+        headers: {
+          Location: `/${
+            match.name === "std" ? match.name : "x/" + match.name
+          }@${version!.latest}/${match.path}`,
+          "x-deno-warning": `Implicitly using latest version (${
+            version!.latest
+          }) for ${url.href}`,
+          "Access-Control-Allow-Origin": "*",
+        },
+        status: 302,
+      });
     } else {
       if (isHTML) {
         const ln = extractAltLineNumberReference(url.toString());
