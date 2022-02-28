@@ -70,43 +70,6 @@ export function Footer({ simple }: { simple?: boolean }) {
             </svg>
           </a>
         </div>
-        <div class="mt-6 flex justify-center flex-wrap">
-          <a href="https://github.com/denoland/deno">
-            <img
-              class="m-2 opacity-75"
-              alt="denoland/deno CI"
-              src="https://img.shields.io/github/workflow/status/denoland/deno/ci/main?label=deno&logo=github"
-            />
-          </a>
-          <a href="https://github.com/denoland/rusty_v8">
-            <img
-              class="m-2 opacity-75"
-              alt="denoland/rusty_v8 CI"
-              src="https://img.shields.io/github/workflow/status/denoland/rusty_v8/ci/main?label=rusty_v8&logo=github"
-            />
-          </a>
-          <a href="https://github.com/denoland/deno_lint">
-            <img
-              class="m-2 opacity-75"
-              alt="denoland/deno_lint CI"
-              src="https://img.shields.io/github/workflow/status/denoland/deno_lint/ci/main?label=deno_lint&logo=github"
-            />
-          </a>
-          <a href="https://github.com/denoland/deno_doc">
-            <img
-              class="m-2 opacity-75"
-              alt="denoland/deno_doc CI"
-              src="https://img.shields.io/github/workflow/status/denoland/deno_doc/ci/main?label=deno_doc&logo=github"
-            />
-          </a>
-          <a href="https://github.com/denoland/dotland">
-            <img
-              class="m-2 opacity-75"
-              alt="denoland/dotland CI"
-              src="https://img.shields.io/github/workflow/status/denoland/dotland/ci/main?label=dotland&logo=github"
-            />
-          </a>
-        </div>
       </div>
     </div>
   );
