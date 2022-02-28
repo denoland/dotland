@@ -1,6 +1,4 @@
-/* eslint-env jest */
-
-/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+// Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 import {
   fileNameFromURL,
@@ -13,13 +11,13 @@ import {
   getVersionMeta,
   isReadme,
   parseNameVersion,
-  parseQuery,
   VersionMetaInfo,
-} from "./registry_utils";
-import "isomorphic-unfetch";
+} from "./registry_utils.ts";
+import { assert, assertEquals, assertNotEquals } from "../test_deps.ts";
 
-test("source url", () => {
-  expect(getSourceURL("ltest2", "0.0.8", "/README.md")).toEqual(
+Deno.test("source url", () => {
+  assertEquals(
+    getSourceURL("ltest2", "0.0.8", "/README.md"),
     "https://cdn.deno.land/ltest2/versions/0.0.8/raw/README.md",
   );
 });
@@ -95,34 +93,37 @@ const versionMeta: VersionMetaInfo = {
   },
 };
 
-test("getRepositoryURL", () => {
-  expect(getRepositoryURL(versionMeta, "/README.md")).toEqual(
+Deno.test("getRepositoryURL", () => {
+  assertEquals(
+    getRepositoryURL(versionMeta, "/README.md"),
     "https://github.com/luca-rand/testing/blob/0.0.8/README.md",
   );
 });
 
-test("getVersionMeta", async () => {
-  expect(await getVersionMeta("ltest2", "0.0.7")).toEqual(null);
-  expect(await getVersionMeta("ltest2", "0.0.8")).toEqual(versionMeta);
+Deno.test("getVersionMeta", {
+  sanitizeResources: false,
+}, async () => {
+  assertEquals(await getVersionMeta("ltest2", "0.0.7"), null);
+  assertEquals(await getVersionMeta("ltest2", "0.0.8"), versionMeta);
 });
 
-test("getVersionList", async () => {
+Deno.test("getVersionList", async () => {
   const versionList = await getVersionList("ltest2");
-  expect(versionList).toBeTruthy();
-  expect(versionList?.isLegacy).toEqual(undefined);
-  expect(versionList?.latest).toEqual(versionList?.versions[0]);
-  expect(versionList?.versions.length).toBeGreaterThanOrEqual(2);
+  assert(versionList);
+  assertEquals(versionList?.isLegacy, undefined);
+  assertEquals(versionList?.latest, versionList?.versions[0]);
+  assert(versionList?.versions.length >= 2);
 });
 
-test("getModule", async () => {
+Deno.test("getModule", async () => {
   const mod = await getModule("ltest2");
-  expect(mod).toBeDefined();
-  expect(mod!.name).toEqual("ltest2");
-  expect(mod!.description).toEqual("Move along, just for testing");
-  expect(mod!.star_count).toBeGreaterThan(0);
+  assert(mod);
+  assertEquals(mod!.name, "ltest2");
+  assertEquals(mod!.description, "Move along, just for testing");
+  assert((+mod!.star_count) > 0);
 });
 
-test("fileTypeFromURL", () => {
+Deno.test("fileTypeFromURL", () => {
   const tests: Array<[string, string | undefined]> = [
     ["main.ts", "typescript"],
     ["lib.js", "javascript"],
@@ -157,16 +158,16 @@ test("fileTypeFromURL", () => {
     ["file.unknown", undefined],
   ];
   for (const [name, expectedType] of tests) {
-    expect(fileTypeFromURL(name)).toBe(expectedType);
+    assertEquals(fileTypeFromURL(name), expectedType);
   }
 });
 
-test("fileNameFromURL", () => {
-  expect(fileNameFromURL("a/path/to/%5Bfile%5D.txt")).toBe("[file].txt");
-  expect(fileNameFromURL("a/path/to/file.tsx")).toBe("file.tsx");
+Deno.test("fileNameFromURL", () => {
+  assertEquals(fileNameFromURL("a/path/to/%5Bfile%5D.txt"), "[file].txt");
+  assertEquals(fileNameFromURL("a/path/to/file.tsx"), "file.tsx");
 });
 
-test("findRootReadme", () => {
+Deno.test("findRootReadme", () => {
   const tests: Array<[string, boolean]> = [
     ["/README", true],
     ["/README.md", true],
@@ -190,14 +191,14 @@ test("findRootReadme", () => {
   for (const [path, expectedToBeRootReadme] of tests) {
     const rootReadme = findRootReadme([{ path, type: "file", size: 100 }]);
     if (expectedToBeRootReadme) {
-      expect(rootReadme).not.toBe(undefined);
+      assertNotEquals(rootReadme, undefined);
     } else {
-      expect(rootReadme).toBe(undefined);
+      assertEquals(rootReadme, undefined);
     }
   }
 });
 
-test("isReadme", () => {
+Deno.test("isReadme", () => {
   const tests: Array<[string, boolean]> = [
     ["README", true],
     ["README.md", true],
@@ -214,27 +215,14 @@ test("isReadme", () => {
     ["READTHIS.org", false],
   ];
   for (const [path, expectedToBeReadme] of tests) {
-    expect([path, isReadme(path)]).toEqual([path, expectedToBeReadme]);
+    assertEquals([path, isReadme(path)], [path, expectedToBeReadme]);
   }
 });
 
-test("parseNameVersion", () => {
-  expect(parseNameVersion("ms@v0.1.0")).toEqual(["ms", "v0.1.0"]);
-  expect(parseNameVersion("xstate@xstate@4.25.0")).toEqual([
+Deno.test("parseNameVersion", () => {
+  assertEquals(parseNameVersion("ms@v0.1.0"), ["ms", "v0.1.0"]);
+  assertEquals(parseNameVersion("xstate@xstate@4.25.0"), [
     "xstate",
     "xstate@4.25.0",
   ]);
-});
-
-test("parseQuery", () => {
-  expect(parseQuery(["std@0.101.0", "http", "server.ts"])).toEqual({
-    name: "std",
-    version: "0.101.0",
-    path: "/http/server.ts",
-  });
-  expect(parseQuery(["oak@v9.0.1", "mod.ts"])).toEqual({
-    name: "oak",
-    version: "v9.0.1",
-    path: "/mod.ts",
-  });
 });
