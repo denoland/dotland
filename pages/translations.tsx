@@ -26,20 +26,11 @@ export default function TranslationsPage() {
         <title>翻译 | Deno</title>
       </Head>
       <Header />
-<<<<<<< HEAD
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 mt-8 mb-24">
-        <div className="max-w-screen-lg mx-auto">
-          <h4 className="text-4xl font-bold tracking-tight">翻译</h4>
-          <p className="mt-4 text-lg">
-            Deno 文档提供以下语言版本。是否漏掉了你的语言呢？
-=======
       <div class="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 mt-8 mb-24">
         <div class="max-w-screen-lg mx-auto">
-          <h4 class="text-4xl font-bold tracking-tight">Translations</h4>
+          <h4 class="text-4xl font-bold tracking-tight">翻译</h4>
           <p class="mt-4 text-lg">
-            Deno docs is available in the following languages. Do you have a
-            piece to display here?{" "}
->>>>>>> 536026728193c65673465483c3006267099de405
+            Deno 文档提供以下语言版本。是否漏掉了你的语言呢？{" "}
             <a
               href="https://github.com/denoland/dotland/blob/main/translations.json"
               class="link"

@@ -47,49 +47,23 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
       <Head>
         <title>第三方模块 | Deno</title>
       </Head>
-<<<<<<< HEAD
-      <div className="bg-gray">
-        <Header subtitle="第三方模块" widerContent={true} />
-        <RegistryInstructions
-          isOpen={overlayOpen}
-          close={() => setOverlayOpen(false)}
-        />
-        <div>
-          <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8">
-            <dt className="text-lg leading-6 font-medium text-gray-900">
-              deno.land/x 是什么？
-            </dt>
-            <dd className="mt-2">
-              <p className="text-base leading-6 text-gray-500">
-                <span className="font-semibold">deno.land/x</span>是 Deno
-                模块的托管服务。它缓存 GitHub 上的开源模块的 Release 代码，并在一个易于记忆的域名中提供它们。
-              </p>
-            </dd>
-
-            <div className="mt-2">
-              <a href="#info" className="link">
-                了解更多
-=======
       <div class="bg-gray">
-        <Header subtitle="Third Party Modules" widerContent={true} />
+        <Header subtitle="第三方模块" widerContent={true} />
         <div>
           <div class="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8">
             <dt class="text-lg leading-6 font-medium text-gray-900">
-              What is deno.land/x?
+              deno.ls.cn/x 是什么？
             </dt>
             <dd class="mt-2">
               <p class="text-base leading-6 text-gray-500">
-                <span class="font-semibold">deno.land/x</span>{" "}
-                is a hosting service for Deno scripts. It caches releases of
-                open source modules stored on GitHub and serves them at one easy
-                to remember domain.
+                <span class="font-semibold">deno.js.cn/x</span>{" "}
+                是 Deno 模块的托管服务。它缓存 GitHub 上的开源模块的 Release 代码，并在一个易于记忆的域名中提供它们。
               </p>
             </dd>
 
             <div class="mt-2">
               <a href="#info" class="link">
-                Learn more
->>>>>>> 536026728193c65673465483c3006267099de405
+                了解更多
               </a>
             </div>
 
@@ -103,7 +77,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                   active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out
                 "
               >
-                Publish a module
+                发布模块
               </a>
             </div>
             {
@@ -114,18 +88,12 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
             </div> */
             }
           </div>
-<<<<<<< HEAD
-          <div className="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8">
-            <label htmlFor="query" className="font-medium sr-only">
-              搜索
-=======
           <form
             method="get"
             class="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8"
           >
             <label htmlFor="query" class="font-medium sr-only">
-              Search
->>>>>>> 536026728193c65673465483c3006267099de405
+              搜索
             </label>
             <input
               name="query"
@@ -139,151 +107,16 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
           <div class="sm:max-w-screen-lg sm:mx-auto sm:px-6 md:px-8 pb-4 sm:pb-12">
             {resp === null
               ? (
-<<<<<<< HEAD
-                <div className="bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4">
-                  <ul>
-                    {Array(20)
-                      .fill(null)
-                      .map((_, i) => (
-                        <li
-                          className={i !== 0
-                            ? "border-t border-gray-200"
-                            : ""}
-                          key={i}
-                        >
-                          <div className="flex items-center px-4 sm:px-6 py-4">
-                            <div className="min-w-0 flex-1 flex items-center">
-                              <div className="min-w-0 flex-1">
-                                <div className="text-sm leading-5">
-                                  <div className="h-3 bg-blue-100 w-1/3 sm:w-1/5 md:w-1/6">
-                                  </div>
-                                </div>
-                                <div className="mt-1 flex items-center">
-                                  <div className="h-3 bg-gray-100 w-5/6 sm:w-4/5 md:w-3/4">
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="ml-6 mr-4 flex items-center">
-                              <div className="h-3 bg-gray-100 w-4"></div>
-                              <svg
-                                className="ml-1 text-gray-100 w-5 h-5"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                              >
-                                <title>star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                </path>
-                              </svg>
-                            </div>
-                            <div>
-                              <svg
-                                className="h-5 w-5 text-gray-100"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                  clipRule="evenodd"
-                                />
-                              </svg>
-                            </div>
-                          </div>
-                        </li>
-                      ))}
-                  </ul>
-                  <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-                    <div className="flex-1 flex justify-between items-center sm:hidden">
-                      <button className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-gray-100 text-sm leading-5 font-medium rounded-md bg-white">
-                        Previous
-                      </button>
-                      <div className="text-base leading-6 text-gray-500">
-                        <div className="h-3 w-4 bg-gray-100 inline-block mr-1" />/
-                        <div className="h-3 w-4 bg-gray-100 inline-block ml-1" />
-                      </div>
-                      <button className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-gray-100 text-sm leading-5 font-medium rounded-md bg-white ml-4">
-                        Next
-                      </button>
-                    </div>
-                    <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-                      <div className="h-3 w-32 bg-gray-100" />
-                      <div>
-                        <nav className="relative z-0 inline-flex shadow-sm text-gray-200 leading-5">
-                          <div className="-ml-px relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white rounded-l-md">
-                            <svg
-                              className="h-5 w-5"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                          </div>
-                          <div className="-ml-px relative items-center px-4 py-2 border border-gray-300 bg-white hidden md:inline-flex">
-                            &nbsp;&nbsp;
-                          </div>
-                          <div className="-ml-px relative items-center px-4 py-2 border border-gray-300 bg-white hidden md:inline-flex">
-                            &nbsp;&nbsp;
-                          </div>
-                          <div className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white">
-                            &nbsp;&nbsp;
-                          </div>
-                          <div className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white">
-                            &nbsp;&nbsp;
-                          </div>
-                          <div className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white">
-                            &nbsp;&nbsp;
-                          </div>
-                          <div className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white">
-                            &nbsp;&nbsp;
-                          </div>
-                          <div className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white">
-                            &nbsp;&nbsp;
-                          </div>
-                          <div className="-ml-px relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white rounded-r-md">
-                            <svg
-                              className="h-5 w-5 text-gray-200"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                          </div>
-                        </nav>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )
-              : resp === null
-              ? (
-                <div className="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
-                  加载模块失败
-=======
                 <div class="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
-                  Failed to load modules
->>>>>>> 536026728193c65673465483c3006267099de405
+                  加载模块失败
                 </div>
               )
               : (
                 <div class="bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4">
                   {resp.results.length == 0
                     ? (
-<<<<<<< HEAD
-                      <div className="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
-                        没有找到模块
-=======
                       <div class="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
-                        No modules found
->>>>>>> 536026728193c65673465483c3006267099de405
+                        没有找到模块
                       </div>
                     )
                     : (
@@ -323,15 +156,9 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                                   : "text-gray-500 cursor-default"
                               } transition ease-in-out duration-150`}
                             >
-<<<<<<< HEAD
                               上一页
-                            </button>
-                            <div className="text-base leading-6 text-gray-500">
-=======
-                              Previous
                             </MaybeA>
                             <div class="text-base leading-6 text-gray-500">
->>>>>>> 536026728193c65673465483c3006267099de405
                               {page}/{pageCount}
                             </div>
                             <MaybeA
@@ -343,41 +170,22 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                                   : "text-gray-500 cursor-default"
                               } transition ease-in-out duration-150`}
                             >
-<<<<<<< HEAD
                               下一页
-                            </button>
-=======
-                              Next
                             </MaybeA>
->>>>>>> 536026728193c65673465483c3006267099de405
                           </div>
                           <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
                             <div>
-<<<<<<< HEAD
-                              <p className="text-sm leading-5 text-gray-700">
+                              <p class="text-sm leading-5 text-gray-700">
                                 显示第{" "}
-                                <span className="font-medium">
+                                <span class="font-medium">
                                   {(page - 1) * PER_PAGE + 1}
                                 </span>{" "}
                                 到{" "}
-                                <span className="font-medium">
+                                <span class="font-medium">
                                   {(page - 1) * PER_PAGE + resp.results.length}
-                                </span>
+                                </span>{" "}
                                 ，共{" "}
-                                <span className="font-medium">
-=======
-                              <p class="text-sm leading-5 text-gray-700">
-                                Showing{" "}
                                 <span class="font-medium">
-                                  {(page - 1) * PER_PAGE + 1}
-                                </span>{" "}
-                                to{" "}
-                                <span class="font-medium">
-                                  {(page - 1) * PER_PAGE + resp.results.length}
-                                </span>{" "}
-                                of{" "}
-                                <span class="font-medium">
->>>>>>> 536026728193c65673465483c3006267099de405
                                   {resp.totalCount}
                                 </span>{" "}
                                 个模块
@@ -563,11 +371,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                   <dd class="mt-2">
                     <p class="text-base leading-6 text-gray-500">
                       No, the built-in runtime is documented on{" "}
-<<<<<<< HEAD
-                      <a className="link" href="https://doc.deno.js.cn/">
-=======
-                      <a class="link" href="https://doc.deno.land/">
->>>>>>> 536026728193c65673465483c3006267099de405
+                      <a class="link" href="https://doc.deno.js.cn/">
                         deno doc
                       </a>{" "}
                       and in the manual. See{" "}

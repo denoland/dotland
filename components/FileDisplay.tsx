@@ -49,24 +49,14 @@ export function FileDisplay(props: {
         </div>
         <div>
           {props.sourceURL && (
-<<<<<<< HEAD
-            <a href={props.sourceURL} className="link ml-4">
-              原始文件
-=======
             <a href={props.sourceURL} class="link ml-4">
               Raw
->>>>>>> 536026728193c65673465483c3006267099de405
             </a>
           )}
           {props.repositoryURL &&
             (
-<<<<<<< HEAD
-              <a href={props.repositoryURL} className="link ml-4">
-                在 GitHub 上查看
-=======
               <a href={props.repositoryURL} class="link ml-4">
                 Repository
->>>>>>> 536026728193c65673465483c3006267099de405
               </a>
             )}
         </div>

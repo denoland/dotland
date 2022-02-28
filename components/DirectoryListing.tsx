@@ -80,13 +80,8 @@ export function DirectoryListing(props: DirectoryListingProps) {
           </div>
           {props.repositoryURL &&
             (
-<<<<<<< HEAD
-              <a href={props.repositoryURL} className="link ml-4">
-                GitHub 地址
-=======
               <a href={props.repositoryURL} class="link ml-4">
                 Repository
->>>>>>> 536026728193c65673465483c3006267099de405
               </a>
             )}
         </div>
@@ -103,41 +98,7 @@ export function DirectoryListing(props: DirectoryListingProps) {
               <col class="w-max-content" />
               <col style={{ width: "5.5rem" }} />
             </colgroup>
-<<<<<<< HEAD
-            <thead>
-              <tr className="table-row border-b-2 border-gray-200">
-                <td colSpan={3} className="">
-                  <div className="flex w-full">
-                    <div className="px-2 sm:pl-3 md:pl-4 py-1 text-gray-400">
-                      <svg
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        className="w-5 h-5"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                          clipRule="evenodd"
-                        >
-                        </path>
-                      </svg>
-                    </div>
-                    <input
-                      type="text"
-                      className="w-full pl-3 text-gray-900 text-sm outline-none bg-gray-50"
-                      onChange={(e) => setQuery(e.target.value)}
-                      value={query}
-                      placeholder="搜索文件..."
-                      ref={searchInput}
-                    />
-                  </div>
-                </td>
-              </tr>
-            </thead>
-            <tbody className="bg-white">
-=======
             <tbody class="bg-white">
->>>>>>> 536026728193c65673465483c3006267099de405
               {displayItems.map((entry: Entry, i: number) => {
                 const isLastItem = displayItems.length - 1 === i;
                 return (

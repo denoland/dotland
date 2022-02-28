@@ -131,45 +131,6 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
       </div>
     );
   }
-<<<<<<< HEAD
-  if (
-    location != null &&
-    location.search !== show.search &&
-    location.search !== `?${show.search}`
-  ) {
-    location.replace(location.toString().replace(/\?.*$/, `?${show.search}`));
-  }
-
-  const showAll = show.dataFile !== "recent.json";
-  const dataUrl =
-    `https://cdn.jsdelivr.net/gh/denoland/benchmark_data/${show.dataFile}`;
-
-  const [data, setData] = React.useState<BenchmarkData | null>(null);
-  const [dataRangeTitle, setDataRangeTitle] = React.useState<string>("");
-  const [showNormalized, setShowNormalized] = React.useState(false);
-
-  React.useEffect(() => {
-    setData(null);
-    fetch(dataUrl).then(async (response) => {
-      const rawData = await response.json();
-      const data = reshape(rawData.slice(...show.range));
-      setData(data);
-
-      // Show actual range in title bar (except when showing 'recent' only).
-      if (typeof window !== "undefined") {
-        setDataRangeTitle(
-          showAll
-            ? [(ks: number[]) => ks[0], (ks: number[]) => ks.pop()]
-              .map((f) => f([...rawData.keys()].slice(...show.range)))
-              .filter((k) => k != null)
-              .join("...")
-            : "",
-        );
-      }
-    });
-  }, [show.search]);
-=======
->>>>>>> 536026728193c65673465483c3006267099de405
 
   return (
     <>

@@ -49,13 +49,8 @@
   },
   {
     "language": "کوردیی ناوەندی",
-<<<<<<< HEAD
     "english": "中库尔德语",
-    "link": "https://deno-ckb.vercel.app/",
-=======
-    "english": "Central Kurdish",
     "link": "https://denoland-ckb.deno.dev",
->>>>>>> 536026728193c65673465483c3006267099de405
     "repository": "https://github.com/roj1512/dotland"
   }
 ]

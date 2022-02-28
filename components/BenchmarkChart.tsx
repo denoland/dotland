@@ -90,18 +90,3 @@ export function BenchmarkChart(props: BenchmarkChartProps) {
     </>
   );
 }
-<<<<<<< HEAD
-
-export function BenchmarkLoading(): React.ReactElement {
-  return (
-    <div style={{ height: 335 }} className="flex items-center justify-center">
-      <span className="text-gray-500">
-        加载中...
-      </span>
-    </div>
-  );
-}
-
-export default BenchmarkChart;
-=======
->>>>>>> 536026728193c65673465483c3006267099de405

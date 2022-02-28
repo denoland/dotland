@@ -124,23 +124,6 @@ export function Header({
                 d="M4 6h16M4 12h16M4 18h7"
               />
             </svg>
-<<<<<<< HEAD
-          </button>
-        </div>
-        <div className="hidden lg:flex md:ml-10 items-end">
-          <Link href="https://deno.com/deploy">
-            <a
-              className={`font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out`}
-            >
-              Deploy
-            </a>
-          </Link>
-          <Link href="/manual">
-            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              参考手册
-            </a>
-          </Link>
-=======
           </div>
         </label>
         <div class="hidden lg:flex md:ml-10 items-end">
@@ -154,9 +137,8 @@ export function Header({
             href="/manual"
             class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
           >
-            Manual
+            参考手册
           </a>
->>>>>>> 536026728193c65673465483c3006267099de405
           <a
             href="https://deno.com/blog"
             class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
@@ -164,23 +146,6 @@ export function Header({
             博客
           </a>
           <a
-<<<<<<< HEAD
-            href="https://doc.deno.js.cn/builtin/stable"
-            className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
-          >
-            API
-          </a>
-          <Link href="/std">
-            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              标准库
-            </a>
-          </Link>
-          <Link href="/x">
-            <a className="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-              第三方模块
-            </a>
-          </Link>
-=======
             href="https://doc.deno.land/builtin/stable"
             class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
           >
@@ -190,15 +155,14 @@ export function Header({
             href="/std"
             class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
           >
-            Standard Library
+            标准库
           </a>
           <a
             href="/x"
             class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
           >
-            Third Party Modules
+            第三方模块
           </a>
->>>>>>> 536026728193c65673465483c3006267099de405
           <a
             href="https://github.com/denoland"
             class="ml-10 text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out leading-0"
@@ -219,104 +183,6 @@ export function Header({
           </a>
         </div>
       </nav>
-<<<<<<< HEAD
-
-      <Transition
-        show={menuOpen}
-        enter="duration-150 ease-out"
-        enterFrom="opacity-0 scale-95"
-        enterTo="opacity-100 scale-100"
-        leave="duration-100 ease-in"
-        leaveFrom="opacity-100 scale-100"
-        leaveTo="opacity-0 scale-95"
-      >
-        <div className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right lg:hidden">
-          <div className="rounded-lg shadow-md">
-            <div className="rounded-lg bg-white shadow-xs overflow-hidden">
-              <div className="px-5 pt-4 flex items-center justify-between">
-                <Link href="/">
-                  <a className="flex items-center">
-                    <img
-                      className="h-10 w-auto sm:h-12 my-2"
-                      src="/logo.svg"
-                      alt=""
-                    />
-                    <div className="ml-5 flex flex-col justify-center">
-                      <div className="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
-                        Deno
-                      </div>
-                      {subtitle &&
-                        (
-                          <div className="font-normal text-sm sm:text-lg leading-tight tracking-tight">
-                            {subtitle}
-                          </div>
-                        )}
-                    </div>
-                  </a>
-                </Link>{" "}
-                <div className="-mr-2">
-                  <button
-                    type="button"
-                    className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    <svg
-                      className="h-6 w-6"
-                      stroke="currentColor"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div className="px-2 pt-4 pb-3">
-                <Link href="https://deno.com/deploy">
-                  <a
-                    className={`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out`}
-                  >
-                    Deploy
-                  </a>
-                </Link>
-                <Link href="/manual">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    参考手册
-                  </a>
-                </Link>
-                <Link href="https://deno.com/blog">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    博客
-                  </a>
-                </Link>
-                <a
-                  href="https://doc.deno.js.cn/builtin/stable"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
-                >
-                  API
-                </a>
-                <Link href="/std">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    标准库
-                  </a>
-                </Link>
-                <Link href="/x">
-                  <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out">
-                    第三方模块
-                  </a>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Transition>
-=======
->>>>>>> 536026728193c65673465483c3006267099de405
     </div>
   );
 }

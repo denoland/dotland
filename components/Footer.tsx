@@ -5,107 +5,36 @@ import { ComponentChildren, h } from "../deps.ts";
 
 export function Footer({ simple }: { simple?: boolean }) {
   return (
-<<<<<<< HEAD
-    <div
-      className={props.simple
-        ? undefined
-        : "bg-gray-50 border-t border-gray-200"}
-    >
-      <div className="max-w-screen-xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
-        <nav className="-mx-5 -my-2 flex flex-wrap justify-center">
-          <div className="px-2 py-2">
-            <Link href="/[...rest]" as="/manual">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                参考手册
-              </a>
-            </Link>
-          </div>
-          <div className="px-2 py-2">
-            <a
-              href="https://doc.deno.js.cn/builtin/stable"
-              className="text-base leading-6 text-gray-500 hover:text-gray-900"
-            >
-              API
-            </a>
-          </div>
-          <div className="px-2 py-2">
-            <Link href="/[...rest]" as="/std">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                标准库
-              </a>
-            </Link>
-          </div>
-          <div className="px-2 py-2">
-            <Link href="/x">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                第三方模块
-              </a>
-            </Link>
-          </div>
-          <div className="px-2 py-2">
-            <Link href="/benchmarks">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                性能
-              </a>
-            </Link>
-          </div>
-          <div className="px-2 py-2">
-            <Link href="/artwork">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                艺术作品
-              </a>
-            </Link>
-          </div>
-          <div className="px-2 py-2">
-            <a
-              href="https://deno.com/blog"
-              className="text-base leading-6 text-gray-500 hover:text-gray-900"
-            >
-              博客
-            </a>
-          </div>
-          <div className="px-2 py-2">
-            <Link href="/translations">
-              <a className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                翻译
-              </a>
-            </Link>
-          </div>
-=======
     <div class={simple ? undefined : "bg-gray-50 border-t border-gray-200"}>
       <div class="max-w-screen-xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
         <nav class="-mx-5 -my-2 flex flex-wrap justify-center">
           <FooterItem href="/manual">
-            Manual
+            参考手册
           </FooterItem>
           <FooterItem href="https://doc.deno.land/builtin/stable">
             API
           </FooterItem>
           <FooterItem href="/std">
-            Standard Library
+            标准库
           </FooterItem>
           <FooterItem href="/x">
-            Third Party Modules
+            第三方模块
           </FooterItem>
           <FooterItem href="/benchmarks">
-            Benchmarks
+            性能
           </FooterItem>
           <FooterItem href="/artwork">
-            Artwork
+            艺术作品
           </FooterItem>
           <FooterItem href="https://deno.com/blog">
-            Blog
+            博客
           </FooterItem>
           <FooterItem href="/translations">
-            Translations
-          </FooterItem>
-          <FooterItem href="https://status.deno.land/">
-            System Status
+            翻译
           </FooterItem>
           <FooterItem href="https://github.com/denoland/deno/wiki#companies-interested-in-deno">
-            Companies interested in Deno
+            对 Deno 感兴趣的公司
           </FooterItem>
->>>>>>> 536026728193c65673465483c3006267099de405
         </nav>
         <div class="mt-9 flex justify-center">
           <a
