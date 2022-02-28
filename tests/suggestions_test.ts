@@ -7,14 +7,19 @@ import {
   assertStringIncludes,
 } from "../test_deps.ts";
 
-import { ServerContext } from "../server_deps.ts";
+import { router, ServerContext } from "../server_deps.ts";
 import routes from "../routes.gen.ts";
-const handleRequest = (await ServerContext.fromRoutes(routes)).handler();
+import { routes as completionsV2Routes } from "../completions_v2.ts";
+
+const handleRequest = router(
+  completionsV2Routes,
+  (await ServerContext.fromRoutes(routes)).handler(),
+);
 
 Deno.test({
   name: "/_api/x/ - get package list",
   async fn() {
-    const res = await handleRequest(new Request("https://deno.land/_api/x"));
+    const res = await handleRequest(new Request("https://deno.land/_api/x/"));
     assertEquals(res.status, 200);
     const json = await res.json();
     assertEquals(json.items.length, 50);

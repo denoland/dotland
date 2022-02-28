@@ -6,11 +6,17 @@
 /// <reference lib="deno.ns" />
 /// <reference lib="deno.unstable" />
 
-import { ServerContext } from "./server_deps.ts";
+import {
+  accepts,
+  ConnInfo,
+  createReporter,
+  router,
+  serve,
+  ServerContext,
+} from "./server_deps.ts";
 import routes from "./routes.gen.ts";
 
-import { accepts, createReporter, serve } from "./server_deps.ts";
-import { ConnInfo } from "https://deno.land/std@0.112.0/http/server.ts";
+import { routes as completionsV2Routes } from "./completions_v2.ts";
 
 const ga = createReporter({
   filter(req, res) {
@@ -79,4 +85,10 @@ export function withLog(
 
 const ctx = await ServerContext.fromRoutes(routes);
 console.log("Server listening on http://localhost:8000");
-serve(withLog(ctx.handler()));
+serve((req, conn) => {
+  return router(
+    completionsV2Routes,
+    (req) => withLog(ctx.handler())(req, conn),
+    // TODO: add 500 handler
+  )(req);
+});

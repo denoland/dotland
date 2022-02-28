@@ -27,6 +27,7 @@ Deno.test({
 
 Deno.test({
   name: "/std@0.127.0/version.ts with Accept: 'text/html' responds with html",
+  sanitizeResources: false, // TODO(@crowlKats): this shouldnt be required, something wrong with fetch resource consumption
   async fn() {
     const res = await handleRequest(
       new Request("https://deno.land/std@0.127.0/version.ts", {
