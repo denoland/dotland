@@ -19,15 +19,9 @@
   },
   {
     "language": "简体中文",
-<<<<<<< HEAD
     "english": "简体中文",
-    "link": "https://deno-cn.vercel.app/",
-    "repository": "https://github.com/justjavac/deno_website2"
-=======
-    "english": "Simplified Chinese",
     "link": "https://denoland-cn.deno.dev",
     "repository": "https://github.com/justjavac/denoland-cn"
->>>>>>> 3ceac70cc1b3848f09f3dccbf78a830ab8881f71
   },
   {
     "language": "Español",
