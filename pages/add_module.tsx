@@ -234,7 +234,7 @@ export default function AddModulePage() {
                   <div class="rounded-md shadow-sm mt-12">
                     <button
                       role="submit"
-                      class="w-full flex justify-center py-3 text-md font-medium rounded-lg text-white bg-gray-700 border border-gray-700 hover:bg-gray-800 focus:bg-gray-800 focus:shadow-outline-blue focus:border-blue-600 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
+                      class="w-full flex justify-center py-3 border border-gray-300 text-md font-medium rounded-lg text-gray-700 bg-gray-100 hover:text-gray-800 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
                     >
                       Submit
                     </button>
