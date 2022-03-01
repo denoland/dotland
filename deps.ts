@@ -9,8 +9,10 @@ export {
   virtualSheet,
 } from "https://esm.sh/twind@0.16.16/shim/server?pin=v66";
 
+
 export { default as Prism } from "https://esm.sh/prismjs@1.25.0?pin=v66";
 export { escape as htmlEscape } from "https://esm.sh/he@1.2.0?pin=v66";
-export { render as gfm } from "https://deno.land/x/gfm@0.1.18/mod.ts";
+export { render as gfm } from "https://raw.githubusercontent.com/crowlKats/deno-gfm/e1003cd3bb92f04bce8228eadb4a974ceb6fe260/mod.ts";
+
 export { emojify } from "https://deno.land/x/emoji@0.1.2/mod.ts";
 export { default as compareVersions } from "https://esm.sh/tiny-version-compare@3.0.1?pin=v66";
