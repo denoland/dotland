@@ -56,7 +56,7 @@ Deno.test({
         },
       ),
     );
-    assertEquals(res.status, 201);
+    assertEquals(res.status, 200);
     const json = await res.json();
     assertEquals(json.version, 2);
   },
