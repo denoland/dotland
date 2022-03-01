@@ -97,7 +97,7 @@ export default function AddModulePage() {
                     <input
                       id="modulename"
                       pattern="^[a-z0-9_]{3,40}$"
-                      class="block w-full px-4 py-2 my-1 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1 invalid:(border-red-300 hover:border-red-300 focus:border-red-300)"
+                      class="block w-full px-4 py-2 mt-4 my-1 leading-normal bg-white border border-gray-300 rounded-lg outline-none shadow-sm appearance-none focus:border-gray-500 hover:border-gray-400 invalid:(border-red-300 hover:border-red-300 focus:border-red-300)"
                       type="text"
                       placeholder="Module Name"
                       autoComplete="off"
@@ -161,13 +161,13 @@ export default function AddModulePage() {
                   <p>
                     There are some more optional settings to set up:
                   </p>
-                  <div class="mt-2">
+                  <div class="mt-4">
                     <label htmlFor="subdirectory" class="font-medium">
                       Subdirectory
                     </label>
                     <input
                       id="subdirectory"
-                      class="block w-full px-4 py-2 my-1 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1 valid:(border-green-300 hover:border-green-300 focus:border-green-300) invalid:(border-red-300 hover:border-red-300 focus:border-red-300)"
+                      class="block w-full px-4 py-2 my-1 leading-normal bg-white border border-gray-300 rounded-lg outline-none shadow-sm appearance-none focus:border-gray-500 hover:border-gray-400 mt-1 valid:(border-green-300 hover:border-green-300 focus:border-green-300) invalid:(border-red-300 hover:border-red-300 focus:border-red-300)"
                       type="text"
                       placeholder="Subdirectory"
                       pattern="^([^(/)])(.*\/$)"
@@ -224,17 +224,17 @@ export default function AddModulePage() {
                     </li>
                   </ol>
                   <video
-                    class="rounded-md border border-gray-200 w-full mt-1"
+                    class="rounded-md border border-gray-200 w-full mt-6"
                     src={"/images/add_webhook.mp4"}
                     autoPlay
                     muted
                     loop
                     playsInline
                   />
-                  <div class="rounded-md shadow-sm mt-2">
+                  <div class="rounded-md shadow-sm mt-12">
                     <button
                       role="submit"
-                      class="w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
+                      class="w-full flex justify-center py-3 text-md font-medium rounded-lg text-white bg-gray-700 border border-gray-700 hover:bg-gray-800 focus:bg-gray-800 focus:shadow-outline-blue focus:border-blue-600 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out"
                     >
                       Submit
                     </button>
@@ -268,12 +268,11 @@ function ModuleStep(
   { title, children }: { title: string; children: ComponentChildren },
 ) {
   return (
-    <div class="mt-6">
-      <header class="mb-1">
+    <div class="mt-12">
+      <header>
         <h2 class="text-2xl leading-7 font-medium text-gray-900">{title}</h2>
       </header>
-      <hr class="mx-1" />
-      <div class="mt-2">
+      <div class="mt-4">
         {children}
       </div>
     </div>
