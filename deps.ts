@@ -11,5 +11,5 @@ export {
 
 export { default as Prism } from "https://esm.sh/prismjs@1.25.0";
 export { escape as htmlEscape } from "https://esm.sh/he@1.2.0";
-export { render as gfm } from "https://deno.land/x/gfm@0.1.18/mod.ts";
+export { render as gfm } from "https://raw.githubusercontent.com/crowlKats/deno-gfm/e1003cd3bb92f04bce8228eadb4a974ceb6fe260/mod.ts";
 export { emojify } from "https://deno.land/x/emoji@0.1.2/mod.ts";
