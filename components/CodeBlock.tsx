@@ -17,7 +17,7 @@ import "https://esm.sh/prismjs@1.25.0/components/prism-ignore?no-check";
 import "https://esm.sh/prismjs@1.25.0/components/prism-javascript?no-check";
 import "https://esm.sh/prismjs@1.25.0/components/prism-js-extras?no-check";
 import "https://esm.sh/prismjs@1.25.0/components/prism-js-templates?no-check";
-import "https://esm.sh/prismjs@1.25.0/components/prism-jsdoc?no-check";
+//import "https://esm.sh/prismjs@1.25.0/components/prism-jsdoc?no-check";
 import "https://esm.sh/prismjs@1.25.0/components/prism-json?no-check";
 import "https://esm.sh/prismjs@1.25.0/components/prism-jsx?no-check";
 import "https://esm.sh/prismjs@1.25.0/components/prism-markdown?no-check";
