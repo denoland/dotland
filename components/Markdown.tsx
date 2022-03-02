@@ -4,7 +4,7 @@
 import { gfm, h } from "../deps.ts";
 
 export function Markdown(
-  { source, baseUrl }: { source: string; baseUrl?: string },
+  { source, baseUrl }: { source: string; baseUrl: string },
 ) {
   const html = gfm(source, { allowIframes: true, baseUrl });
   return (

@@ -120,6 +120,7 @@ export function FileDisplay(props: {
                       /\$STD_VERSION/g,
                       props.stdVersion ?? "",
                     )}
+                  baseUrl={`${props.pathname}/`}
                 />
               </div>
             );
