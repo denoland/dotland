@@ -1,11 +1,14 @@
 [
   {
+<<<<<<< HEAD
     "language": "English",
     "english": "英语",
     "link": "https://deno.land/",
     "repository": "https://github.com/denoland/deno_website2"
   },
   {
+=======
+>>>>>>> 987b3e13c8e9736bfbac5ba72447b8e43d2ee751
     "language": "日本語",
     "english": "日语",
     "link": "https://deno-ja.vercel.app/",
