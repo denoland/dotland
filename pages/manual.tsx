@@ -351,7 +351,7 @@ export default function Manual({ params, url }: PageProps) {
                   source={content
                     .replace(/\$STD_VERSION/g, stdVersion)
                     .replace(/\$CLI_VERSION/g, params.version)}
-                  baseUrl={basepath(params.version) + "/placeholder/"}
+                  baseUrl={sourceURL}
                 />
               </div>
               <div class="mt-4 pt-4 border-t border-gray-200">
