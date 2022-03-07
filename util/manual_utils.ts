@@ -2,8 +2,6 @@
 
 import { compareVersions } from "../deps.ts";
 
-const oldXBasepath = "https://deno.land/x/deno@";
-const xBasepath = "https://deno.land/x/manual@";
 const githubBasepath = "https://raw.githubusercontent.com/denoland/manual/";
 const oldDocpath = "https://github.com/denoland/deno/blob/";
 const docpath = "https://github.com/denoland/manual/blob/";
