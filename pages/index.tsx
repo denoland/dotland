@@ -125,7 +125,7 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
           </a>
           <p class="my-4 text-gray-700">
             The basic runtime documentation for Deno can be found on{" "}
-            <a href="https://doc.deno.land/builtin/stable" class="link">
+            <a href="https://doc.deno.land/deno/stable" class="link">
               doc.deno.land
             </a>
             .
