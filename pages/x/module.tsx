@@ -133,26 +133,24 @@ function ModuleView({
   isStd: boolean;
   url: URL;
 }) {
-  const versionMeta = useData(`versionMeta/${name}@${version}`, () => {
-    return getVersionMeta(name, version)
-      .catch((e) => {
-        console.error("Failed to fetch dir entry:", e);
-        return null;
-      });
-  });
-  const moduleMeta = useData(`moduleMeta/${name}`, () => {
-    return getModule(name)
-      .catch((e) => {
-        console.error("Failed to fetch module meta:", e);
-        return null;
-      });
-  });
-  const versionDeps = useData(`deps/${name}@${version}`, () => {
-    return getVersionDeps(name, version)
-      .catch((e) => {
-        console.error("Failed to fetch dependency information:", e);
-        return null;
-      });
+  const [versionMeta, moduleMeta, versionDeps] = useData("moduleview", () => {
+    return Promise.all([
+      getVersionMeta(name, version)
+        .catch((e) => {
+          console.error("Failed to fetch dir entry:", e);
+          return null;
+        }),
+      getModule(name)
+        .catch((e) => {
+          console.error("Failed to fetch module meta:", e);
+          return null;
+        }),
+      getVersionDeps(name, version)
+        .catch((e) => {
+          console.error("Failed to fetch dependency information:", e);
+          return null;
+        }),
+    ]);
   });
 
   const stdVersion = isStd ? version : undefined;
@@ -171,31 +169,6 @@ function ModuleView({
   const moduleDocumentationURL = hasStandardModulEntryPoint
     ? `https://doc.deno.land/https://deno.land${basePath}/mod.ts`
     : null;
-
-  const raw = useData(sourceURL, async () => {
-    if (
-      sourceURL &&
-      versionMeta &&
-      versionMeta.directoryListing.filter(
-          (d) => d.path === path && d.type == "file",
-        ).length !== 0
-    ) {
-      const res = await fetch(sourceURL, { method: "GET" });
-      if (!res.ok) {
-        if (
-          res.status !== 400 &&
-          res.status !== 403 &&
-          res.status !== 404
-        ) {
-          console.error(new Error(`${res.status}: ${res.statusText}`));
-        }
-        return null;
-      }
-      return await res.text();
-    } else {
-      return null;
-    }
-  });
 
   // Get directory entries for path
   const dirEntries = (() => {
@@ -250,23 +223,51 @@ function ModuleView({
     };
   })();
 
-  const readme = useData(`readme/${sourceURL}`, async () => {
-    if (readmeURL) {
-      const res = await fetch(readmeURL);
-      if (!res.ok) {
+  const [raw, readme] = useData(sourceURL, () => {
+    return Promise.all([
+      (async () => {
         if (
-          res.status !== 400 &&
-          res.status !== 403 &&
-          res.status !== 404
+          sourceURL &&
+          versionMeta &&
+          versionMeta.directoryListing.filter(
+              (d) => d.path === path && d.type == "file",
+            ).length !== 0
         ) {
-          console.error(new Error(`${res.status}: ${res.statusText}`));
+          const res = await fetch(sourceURL, { method: "GET" });
+          if (!res.ok) {
+            if (
+              res.status !== 400 &&
+              res.status !== 403 &&
+              res.status !== 404
+            ) {
+              console.error(new Error(`${res.status}: ${res.statusText}`));
+            }
+            return null;
+          }
+          return await res.text();
+        } else {
+          return null;
         }
-        return null;
-      }
-      return res.text();
-    } else {
-      return null;
-    }
+      })(),
+      (async () => {
+        if (readmeURL) {
+          const res = await fetch(readmeURL);
+          if (!res.ok) {
+            if (
+              res.status !== 400 &&
+              res.status !== 403 &&
+              res.status !== 404
+            ) {
+              console.error(new Error(`${res.status}: ${res.statusText}`));
+            }
+            return null;
+          }
+          return res.text();
+        } else {
+          return null;
+        }
+      })(),
+    ]);
   });
 
   const externalDependencies = versionDeps === null
