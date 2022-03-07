@@ -8,6 +8,7 @@ const githubBasepath = "https://raw.githubusercontent.com/denoland/manual/";
 const oldDocpath = "https://github.com/denoland/deno/blob/";
 const docpath = "https://github.com/denoland/manual/blob/";
 import VERSIONS from "../versions.json" assert { type: "json" };
+import { getSourceURL } from "./registry_utils.ts";
 
 export const versions = VERSIONS.cli;
 
@@ -32,9 +33,9 @@ export function basepath(version: string) {
     return githubBasepath + version;
   }
   if (isOldVersion(version)) {
-    return oldXBasepath + version + "/docs";
+    return getSourceURL("deno", version, "/docs");
   }
-  return xBasepath + version;
+  return getSourceURL("manual", version, "");
 }
 
 export async function getTableOfContents(
