@@ -120,11 +120,19 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
             </h3>
           </a>
           <p class="my-4 text-gray-700">
+<<<<<<< HEAD
             Deno 的基本运行时文档可以在{" "}
             <a href="https://doc.deno.js.cn/builtin/stable" class="link">
               doc.deno.js.cn
             </a>{" "}
             网站找到。
+=======
+            The basic runtime documentation for Deno can be found on{" "}
+            <a href="https://doc.deno.land/deno/stable" class="link">
+              doc.deno.land
+            </a>
+            .
+>>>>>>> 8767f4d3c10c8182328321baf8b64813fe4e5289
           </p>
           <p class="my-4 text-gray-700">
             Deno 自带的 <a class="link" href="/manual">参考手册</a>{" "}
