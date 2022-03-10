@@ -11,7 +11,7 @@ export function Footer({ simple }: { simple?: boolean }) {
           <FooterItem href="/manual">
             参考手册
           </FooterItem>
-          <FooterItem href="https://doc.deno.land/builtin/stable">
+          <FooterItem href="https://doc.deno.js.cn/deno/stable">
             API
           </FooterItem>
           <FooterItem href="/std">

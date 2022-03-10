@@ -88,7 +88,7 @@ export function Header({
                   { href: "/manual", content: "Manual" },
                   { href: "https://deno.com/blog", content: "Blog" },
                   {
-                    href: "https://doc.deno.land/builtin/stable",
+                    href: "https://doc.deno.js.cn/deno/stable",
                     content: "API",
                   },
                   { href: "/std", content: "Standard Library" },
@@ -146,7 +146,7 @@ export function Header({
             博客
           </a>
           <a
-            href="https://doc.deno.land/builtin/stable"
+            href="https://doc.deno.js.cn/deno/stable"
             class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
           >
             API

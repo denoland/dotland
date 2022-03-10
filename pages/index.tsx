@@ -121,7 +121,7 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
           </a>
           <p class="my-4 text-gray-700">
             Deno 的基本运行时文档可以在{" "}
-            <a href="https://doc.deno.js.cn/builtin/stable" class="link">
+            <a href="https://doc.deno.js.cn/deno/stable" class="link">
               doc.deno.js.cn
             </a>{" "}
             网站找到。
