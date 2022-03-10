@@ -218,34 +218,39 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
           </p>
           <ol class="ml-8 list-disc text-gray-700">
             <li>
-              <a href="https://examples.deno.land/hello-world/" class="link">
+              <a href="https://examples.deno.land/hello-world" class="link">
                 Hello World
               </a>
             </li>
             <li>
-              <a href="https://examples.deno.land/import-export/" class="link">
+              <a href="https://examples.deno.land/import-export" class="link">
                 Importing & Exporting
               </a>
             </li>
             <li>
-              <a href="https://examples.deno.land/dependency-management/" class="link">
+              <a
+                href="https://examples.deno.land/dependency-management"
+                class="link"
+              >
                 Dependency Management
               </a>
             </li>
             <li>
-              <a href="https://examples.deno.land/http-requests/" class="link">
+              <a href="https://examples.deno.land/http-requests" class="link">
                 HTTP Requests
               </a>
             </li>
             <li>
-              <a href="https://examples.deno.land/http-server/" class="link">
+              <a href="https://examples.deno.land/http-server" class="link">
                 HTTP Server: Hello World
               </a>
             </li>
           </ol>
           <p class="my-4 text-gray-700">
             For more examples, check out{" "}
-            <a class="link" href="https://examples.deno.land">examples.deno.land</a>.
+            <a class="link" href="https://examples.deno.land">
+              examples.deno.land
+            </a>.
           </p>
         </div>
         <div class="mt-20">
