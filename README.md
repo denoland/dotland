@@ -6,7 +6,7 @@ This is the code for https://deno.land/
 
 This website consists of two parts
 
-1. A Cloudflare Worker
+1. A Deploy worker
 2. A Next.js app hosted on Vercel
 
 We want to provide pretty and semantic URLs for modules that will be used within
@@ -22,7 +22,7 @@ request to Vercel. (We use Vercel because of their nice GitHub integration.)
 
 ## History
 
-This is a rewrite of the Deno website it will combine the code in
+This is a rewrite of the Deno website. It will combine the code in
 https://github.com/denoland/deno/tree/f96aaa802b245c8b3aeb5d57b031f8a55bb07de2/website
 and https://github.com/denoland/registry and have faster deployment.
 

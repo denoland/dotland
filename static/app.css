@@ -1,0 +1,189 @@
+/* Copyright 2022 the Deno authors. All rights reserved. MIT license. */
+
+html {
+	scroll-behavior: smooth;
+}
+
+.form-select {
+	background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3e%3cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke='%239fa6b2' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
+	-webkit-appearance:none;
+	-moz-appearance:none;
+	appearance:none;
+	-webkit-print-color-adjust:exact;
+	color-adjust:exact;
+	background-repeat:no-repeat;
+	background-color:#fff;
+	border-color:#d2d6dc;
+	border-width:1px;
+	border-radius:.375rem;
+	padding:.5rem 2.5rem .5rem .75rem;
+	line-height:1.5;
+	background-position:right .5rem center;
+	background-size:1.5em 1.5em
+}
+.form-select::-ms-expand {
+	color:#9fa6b2;
+	border:none
+}
+@media not print {
+	.form-select::-ms-expand {
+		display:none
+	}
+}
+@media print and (-ms-high-contrast:active),print and (-ms-high-contrast:none) {
+	.form-select {
+		padding-right:.75rem
+	}
+}
+.form-select:focus {
+	outline:none;
+	box-shadow:0 0 0 3px rgba(164,202,254,.45);
+	border-color:#a4cafe
+}
+
+/* Manual */
+
+#manualSidebarToggle:checked + #manualSidebar {
+	display: block;
+}
+
+ol.nested {
+	counter-reset: item;
+}
+ol.nested li {
+	display: block;
+}
+ol.nested li:before {
+	font-feature-settings: "kern" 1, "tnum" 1;
+	-webkit-font-feature-settings: "kern" 1, "tnum" 1;
+	-ms-font-feature-settings: "kern" 1, "tnum" 1;
+	-moz-font-feature-settings: "kern" 1, "tnum" 1;
+	content: counters(item, ".") ". ";
+	counter-increment: item;
+}
+
+/* Add Module */
+
+#modulename:valid ~ span {
+	display: none;
+}
+
+#subdirectory:invalid + span {
+	display: block;
+}
+
+/* Module */
+
+#hiddenItemsToggle:not(:checked) ~ table #hiddenItemsButton span:first-child {
+	display: none;
+}
+#hiddenItemsToggle:checked ~ table #hiddenItemsButton span:last-child {
+	display: none;
+}
+
+#hiddenItemsToggle:not(:checked) ~ table tr[name="hidden"] {
+	display: none;
+}
+
+#hiddenItemsToggle:checked ~ table #hiddenItemsTr {
+	border-bottom-width: 1px;
+}
+
+span:target {
+	background-color: #fffbdd;
+}
+
+span[data-highlight] {
+	background-color: #fffbdd;
+}
+
+/* 404 Page */
+
+@keyframes move {
+	from {
+		left: -200px;
+	}
+	to {
+		left: 100%;
+	}
+}
+
+/* Benchmark */
+
+#normalizedToggle:checked + label > span:first-of-type {
+	background-color: rgb(229 231 235);
+}
+#normalizedToggle:checked + label > span:first-of-type > span {
+	transform: translateX(1.25rem);
+}
+
+#normalizedToggle:checked ~ div:first-of-type {
+	display: none;
+}
+
+/* removes focus outlines on mouse clicks */
+*:focus:not(:focus-visible),
+*::before:focus:not(:focus-visible),
+*::after:focus:not(:focus-visible) {
+	outline: none;
+}
+
+/* https://github.com/denoland/dotland/issues/1163 */
+.language-toml > code > .token-line > .table {
+	display: inline;
+}
+
+span.token.plain:empty:before {
+	content: "\200b";
+}
+
+.prism-code {
+	border-radius: .25rem;
+	tab-size: 2;
+	-moz-tab-size: 2;
+}
+.highlight-line {
+	background-color: #fffbdd;
+}
+
+ul.tree,
+ul.tree ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul.tree ul {
+	margin-left: 12px;
+}
+
+ul.tree li {
+	margin: 0;
+	padding: 0 8px;
+	line-height: 20px;
+	border-left: 1px solid rgb(100, 100, 100);
+}
+
+ul.tree li:last-child {
+	border-left: none;
+}
+
+ul.tree li:before {
+	position: relative;
+	top: -4px;
+	height: 12px;
+	width: 12px;
+	color: white;
+	border-bottom: 1px solid rgb(100, 100, 100);
+	content: "";
+	display: inline-block;
+	left: -4px;
+}
+
+ul.tree li:last-child:before {
+	border-left: 1px solid rgb(100, 100, 100);
+}
+
+.markdown-body img {
+    display: inline;
+}

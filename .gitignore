@@ -36,8 +36,6 @@ worker/script.js
 .now
 .vercel
 
-# vscode settings
-.vscode
 
 # IDEA settings
 .idea/

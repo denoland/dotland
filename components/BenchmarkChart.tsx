@@ -1,79 +1,24 @@
-/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+// Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-import React, { useState } from "react";
-import dynamic from "next/dynamic";
-const ApexChart = dynamic(() => import("react-apexcharts"), {
-  ssr: false,
-  loading: BenchmarkLoading,
-});
+/** @jsx h */
+/** @jsxFrag Fragment */
+import { Fragment, h } from "../deps.ts";
 
-import { Column, formatLogScale, logScale } from "../util/benchmark_utils";
+import { Column, formatLogScale, logScale } from "../util/benchmark_utils.ts";
 
 export interface BenchmarkChartProps {
   yTickFormat?: (n: number) => string;
   columns: Column[];
   yLabel?: string;
-  sha1List: string[];
 }
 
-function BenchmarkChart(props: BenchmarkChartProps): React.ReactElement {
-  const [id] = useState(Math.random().toString());
-
-  const shortSha1List = props.sha1List.map((s) => s.slice(0, 6));
-
-  function viewCommitOnClick(c1: any, c2: any, { dataPointIndex }: any): void {
-    window.open(
-      `https://github.com/denoland/deno/commit/${
-        props.sha1List[dataPointIndex]
-      }`,
-    );
-  }
-
+export function BenchmarkChart(props: BenchmarkChartProps) {
+  const id = Math.random().toString();
   const cols = props.columns.map((d) => ({ name: d.name, data: [...d.data] }));
 
   if (props.yTickFormat && props.yTickFormat === formatLogScale) {
     logScale(cols);
   }
-
-  const options = {
-    chart: {
-      toolbar: {
-        show: true,
-      },
-      animations: {
-        enabled: false,
-      },
-      events: {
-        markerClick: viewCommitOnClick,
-      },
-    },
-    stroke: {
-      width: 1,
-      curve: "straight",
-    },
-    legend: {
-      show: true,
-      showForSingleSeries: true,
-      position: "bottom",
-    },
-    yaxis: {
-      labels: {
-        formatter: props.yTickFormat,
-      },
-      title: {
-        text: props.yLabel,
-      },
-    },
-    xaxis: {
-      labels: {
-        show: false,
-      },
-      categories: shortSha1List,
-      tooltip: {
-        enabled: false,
-      },
-    },
-  };
 
   const series = cols.sort((a, b) => {
     // Sort by last benchmark.
@@ -83,24 +28,65 @@ function BenchmarkChart(props: BenchmarkChartProps): React.ReactElement {
   });
 
   return (
-    <ApexChart
-      key={id}
-      type="line"
-      options={options}
-      series={series}
-      height="320"
-    />
+    <>
+      <div id={id} />
+      <script
+        id={id + "Data"}
+        type="application/json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(series) }}
+      />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+        new ApexCharts(document.getElementById("${id}"), {
+          chart: {
+            height: 320,
+            type: "line",
+            toolbar: {
+              show: true,
+            },
+            animations: {
+              enabled: false,
+            },
+            events: {
+              markerClick: (c1, c2, { dataPointIndex }) => {
+                window.open(
+                  "https://github.com/denoland/deno/commits/" + data.sha1List[dataPointIndex],
+                );
+              },
+            },
+          },
+          series: JSON.parse(document.getElementById("${id}Data").text),
+          stroke: {
+            width: 1,
+            curve: "straight",
+          },
+          legend: {
+            show: true,
+            showForSingleSeries: true,
+            position: "bottom",
+          },
+          yaxis: {
+            labels: {
+              formatter: ${props.yTickFormat?.toString()},
+            },
+            title: {
+              text: "${props.yLabel}",
+            },
+          },
+          xaxis: {
+            labels: {
+              show: false,
+            },
+            categories: shortSha1List,
+            tooltip: {
+              enabled: false,
+            },
+          },
+        }).render();
+      `,
+        }}
+      />
+    </>
   );
 }
-
-export function BenchmarkLoading(): React.ReactElement {
-  return (
-    <div style={{ height: 335 }} className="flex items-center justify-center">
-      <span className="text-gray-500">
-        Loading...
-      </span>
-    </div>
-  );
-}
-
-export default BenchmarkChart;

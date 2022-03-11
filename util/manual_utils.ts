@@ -1,12 +1,12 @@
-/* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+// Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 const oldXBasepath = "https://deno.land/x/deno@";
 const xBasepath = "https://deno.land/x/manual@";
 const githubBasepath = "https://raw.githubusercontent.com/denoland/manual/";
 const oldDocpath = "https://github.com/denoland/deno/blob/";
 const docpath = "https://github.com/denoland/manual/blob/";
-import VERSIONS from "../versions.json";
-import compareVersions from "tiny-version-compare";
+import VERSIONS from "../versions.json" assert { type: "json" };
+import compareVersions from "https://esm.sh/tiny-version-compare@3.0.1";
 
 export const versions = VERSIONS.cli;
 
@@ -19,14 +19,14 @@ export interface TableOfContents {
   };
 }
 
-// Returns true if the version is of the 0.x release line, or betwen 1.0.0 and
+// Returns true if the version is of the 0.x release line, or between 1.0.0 and
 // 1.12.0 inclusive. During this time the manual was part of the main repo. It
-// is now a seperate repo.
+// is now a separate repo.
 function isOldVersion(version: string) {
   return compareVersions(version, "v1.12.0") !== 1;
 }
 
-function basepath(version: string) {
+export function basepath(version: string) {
   if (isPreviewVersion(version)) {
     return githubBasepath + version;
   }
@@ -47,24 +47,6 @@ export async function getTableOfContents(
     );
   }
   return await res.json();
-}
-
-export async function getTableOfContentsMap(
-  version: string,
-): Promise<Map<string, string>> {
-  const map = new Map<string, string>();
-  const tableOfContents = await getTableOfContents(version);
-
-  Object.entries(tableOfContents).forEach(([slug, entry]) => {
-    if (entry.children) {
-      Object.entries(entry.children).forEach(([childSlug, name]) => {
-        map.set(`/${slug}/${childSlug}`, name);
-      });
-    }
-    map.set(`/${slug}`, entry.name);
-  });
-
-  return map;
 }
 
 export function getFileURL(version: string, path: string): string {

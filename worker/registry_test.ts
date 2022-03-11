@@ -1,6 +1,6 @@
 // Copyright 2020 the Deno authors. All rights reserved. MIT license.
 import { parsePathname } from "./registry.ts";
-import { assertEquals } from "./test_deps.ts";
+import { assertEquals } from "../test_deps.ts";
 
 Deno.test("parsePathname", () => {
   assertEquals(parsePathname("/std@0.108.0/testing/asserts.ts"), {
