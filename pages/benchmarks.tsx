@@ -168,7 +168,7 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
             <p class="mt-4">
               You are currently viewing data for{" "}
               {showAll ? "all" : "the most recent"} commits to the{" "}
-              <a href="https://github.com/denoland/deno">main</a>
+              <a href="https://github.com/denoland/deno">main</a>{" "}
               branch. You can also view{" "}
               <a
                 class="link"
