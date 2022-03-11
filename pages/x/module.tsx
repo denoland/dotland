@@ -34,6 +34,11 @@ import { FileDisplay } from "../../components/FileDisplay.tsx";
 import { DirectoryListing } from "../../components/DirectoryListing.tsx";
 import { ErrorMessage } from "../../components/ErrorMessage.tsx";
 
+// 100kb
+const MAX_SYNTAX_HIGHLIGHT_FILE_SIZE = 100 * 1024;
+// 500kb
+const MAX_FILE_SIZE = 500 * 1024;
+
 export default function Registry({ params, url }: PageProps) {
   const { name, version, path: xPath } = params as {
     name: string;
@@ -241,7 +246,24 @@ function ModuleView({
             }
             return null;
           }
-          return await res.text();
+
+          const size = versionMeta.directoryListing.find((entry) =>
+            entry.path === path
+          )!.size!;
+          if (size < MAX_SYNTAX_HIGHLIGHT_FILE_SIZE) {
+            return {
+              content: await res.text(),
+              highlight: true,
+            };
+          } else if (size < MAX_FILE_SIZE) {
+            return {
+              content: await res.text(),
+              highlight: false,
+            };
+          } else {
+            await res.body!.cancel();
+            return new Error("Max display filesize exceeded");
+          }
         } else {
           return null;
         }
@@ -259,7 +281,15 @@ function ModuleView({
             }
             return null;
           }
-          return res.text();
+          const size = versionMeta!.directoryListing.find((entry) =>
+            entry.path === path
+          )!.size!;
+          if (size < MAX_SYNTAX_HIGHLIGHT_FILE_SIZE) {
+            return await res.text();
+          } else {
+            await res.body!.cancel();
+            return null;
+          }
         } else {
           return null;
         }
@@ -493,7 +523,7 @@ function ModuleView({
                 This file or directory could not be found.
               </ErrorMessage>
             );
-          } else if (dirEntries === null && typeof raw !== "string") {
+          } else if (dirEntries === null && raw === null) {
             // No files
             return (
               <div class="rounded-lg overflow-hidden border border-gray-200 bg-white">
@@ -512,6 +542,24 @@ function ModuleView({
                 </div>
               </div>
             );
+          } else if (raw instanceof Error) {
+            return (
+              <div class="rounded-lg overflow-hidden border border-gray-200 bg-white">
+                {versionMeta && (
+                  <DirectoryListing
+                    name={name}
+                    version={version}
+                    path={path}
+                    dirListing={versionMeta.directoryListing}
+                    repositoryURL={repositoryURL}
+                    url={url}
+                  />
+                )}
+                <div class="w-full p-4 text-gray-400 italic">
+                  {raw.message}
+                </div>
+              </div>
+            );
           } else {
             return (
               <div class="flex flex-col gap-4">
@@ -525,9 +573,10 @@ function ModuleView({
                     url={url}
                   />
                 )}
-                {typeof raw === "string" && (
+                {raw !== null && (
                   <FileDisplay
-                    raw={raw}
+                    raw={raw.content}
+                    filetypeOverride={raw.highlight ? undefined : "text"}
                     canonicalPath={canonicalPath}
                     sourceURL={sourceURL}
                     repositoryURL={repositoryURL}
