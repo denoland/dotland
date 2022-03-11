@@ -366,6 +366,10 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
                   Show normalized benchmarks
                 </span>
               </label>
+              {
+                /* The below 2 charts are controlled by :checked pseudo selector
+                  and general sibling combinator in app.css */
+              }
               <IOMaybeNormalized normalized={false} />
               <IOMaybeNormalized normalized={true} />
             </div>
