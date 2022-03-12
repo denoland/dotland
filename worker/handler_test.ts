@@ -23,8 +23,16 @@ Deno.test({
 Deno.test({
   name: "/std/version.ts with Accept: 'text/html' responds with React html",
   async fn() {
-    const result = await handleRequest(
+    const redirection = await handleRequest(
       new Request("https://deno.land/std/version.ts", {
+        headers: { Accept: BROWSER_ACCEPT },
+      }),
+    );
+    const location = redirection.headers.get("location");
+    assert(location);
+
+    const result = await handleRequest(
+      new Request(location, {
         headers: { Accept: BROWSER_ACCEPT },
       }),
     );
@@ -37,8 +45,16 @@ Deno.test({
 Deno.test({
   name: "/x/std/version.ts with Accept: 'text/html' responds with React html",
   async fn() {
-    const result = await handleRequest(
+    const redirection = await handleRequest(
       new Request("https://deno.land/x/std/version.ts", {
+        headers: { Accept: BROWSER_ACCEPT },
+      }),
+    );
+    const location = redirection.headers.get("location");
+    assert(location);
+
+    const result = await handleRequest(
+      new Request(location, {
         headers: { Accept: BROWSER_ACCEPT },
       }),
     );

@@ -188,10 +188,17 @@ async function proxyFile(
   let cacheEntry = cache.get(proxyUrl);
 
   if (cacheEntry === undefined) {
-    const proxyRequest = new Request(proxyUrl);
+    const proxyRequest = new Request(proxyUrl, { redirect: "manual" });
     const proxyResponse = await fetchWithRetry(proxyRequest);
 
-    if (!(proxyResponse.ok || proxyResponse.redirected)) {
+    const locationHeader = proxyResponse.headers.get("location");
+    if (locationHeader) {
+      const { pathname } = new URL(locationHeader);
+      await proxyResponse.body?.cancel();
+      return Response.redirect(url.origin + pathname);
+    }
+
+    if (!proxyResponse.ok) {
       return proxyResponse;
     }
 
