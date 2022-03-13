@@ -35,11 +35,14 @@ import { DirectoryListing } from "../../components/DirectoryListing.tsx";
 import { ErrorMessage } from "../../components/ErrorMessage.tsx";
 
 export default function Registry({ params, url }: PageProps) {
-  const { name, version, path: xPath } = params as {
+  let { name, version, path: xPath } = params as {
     name: string;
     version?: string;
     path: string;
   };
+  if (version !== undefined) {
+    version = decodeURIComponent(version);
+  }
   const path = xPath ? "/" + xPath : "";
   const versions = useData(name, () => {
     return getVersionList(name)
