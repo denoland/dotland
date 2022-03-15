@@ -1,6 +1,6 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
-import { parseNameVersion } from "../util/registry_utils.ts";
+import { parseNameVersion, resolveSemver } from "../util/registry_utils.ts";
 
 export const S3_BUCKET =
   "http://deno-registry2-prod-storagebucket-b3a31d16.s3-website-us-east-1.amazonaws.com/";
@@ -18,7 +18,8 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
       },
     });
   }
-  const { module, version, path } = entry;
+  const { module, path } = entry;
+  let { version } = entry;
   if (!version) {
     const latest = await getLatestVersion(module);
     if (!latest) {
@@ -44,6 +45,9 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
       },
       status: 302,
     });
+  }
+  if (url.searchParams.has('semver')) {
+    version = await resolveSemver(module, decodeURIComponent(version))
   }
   if (version.startsWith("v0.") && module === "std") {
     const correctVersion = version.substring(1);
