@@ -544,8 +544,12 @@ export function getBasePath({
   }`;
 }
 
-export async function resolveSemver(module: string, version: string, _getVersionList = getVersionList): Promise<string> {
-  const loose = true
+export async function resolveSemver(
+  module: string,
+  version: string,
+  _getVersionList = getVersionList,
+): Promise<string> {
+  const loose = true;
   const tags = (await _getVersionList(module))
     ?.versions
     .filter((tag: string) => {
@@ -556,6 +560,6 @@ export async function resolveSemver(module: string, version: string, _getVersion
   if (tags && tags.length > 0) {
     return tags[tags.length - 1];
   } else {
-    return version
+    return version;
   }
 }

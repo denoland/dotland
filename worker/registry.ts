@@ -46,8 +46,8 @@ export async function handleRegistryRequest(url: URL): Promise<Response> {
       status: 302,
     });
   }
-  if (url.searchParams.has('semver')) {
-    version = await resolveSemver(module, decodeURIComponent(version))
+  if (url.searchParams.has("semver")) {
+    version = await resolveSemver(module, decodeURIComponent(version));
   }
   if (version.startsWith("v0.") && module === "std") {
     const correctVersion = version.substring(1);

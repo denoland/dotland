@@ -11,9 +11,9 @@ import {
   getVersionMeta,
   isReadme,
   parseNameVersion,
-  VersionMetaInfo,
-  VersionInfo,
   resolveSemver,
+  VersionInfo,
+  VersionMetaInfo,
 } from "./registry_utils.ts";
 import { assert, assertEquals, assertNotEquals } from "../test_deps.ts";
 
@@ -229,13 +229,12 @@ Deno.test("parseNameVersion", () => {
   ]);
 });
 
-
 Deno.test("resolveSemver", async () => {
   function getVersionList(_: string): Promise<VersionInfo> {
     return Promise.resolve({
       isLegacy: true,
       latest: "2.1.1",
-      versions:[
+      versions: [
         "2.1.1",
         "2",
         "v1.2.3",
@@ -248,7 +247,7 @@ Deno.test("resolveSemver", async () => {
         "0.1.0-beta.1",
         "0.1.0-beta.0",
         "0.1.0-alpha",
-      ]
+      ],
     });
   }
   const module = "abc";
@@ -262,7 +261,7 @@ Deno.test("resolveSemver", async () => {
   for (const range of ranges) {
     const expected = "v1.2.3";
     const actual = await resolveSemver(module, range, getVersionList);
-    assertEquals(actual, expected)
+    assertEquals(actual, expected);
   }
   ranges = [
     "abc",
@@ -273,8 +272,8 @@ Deno.test("resolveSemver", async () => {
     ">",
   ];
   for (const range of ranges) {
-    const expected = range
+    const expected = range;
     const actual = await resolveSemver(module, range, getVersionList);
-    assertEquals(actual, expected)
+    assertEquals(actual, expected);
   }
-})
+});
