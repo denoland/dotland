@@ -3,7 +3,7 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { ComponentChildren, Fragment, h, Head } from "../deps.ts";
-import { CDN_ENDPOINT, getVersionList } from "../util/registry_utils.ts";
+import { CDN_ENDPOINT } from "../util/registry_utils.ts";
 import { Header } from "../components/Header.tsx";
 import { InlineCode } from "../components/InlineCode.tsx";
 import { Footer } from "../components/Footer.tsx";
@@ -72,18 +72,18 @@ export default function AddModulePage() {
             <div class="flex flex-col space-y-4 my-auto px-4 md:px-16 lg:px-24 xl:px-32">
               <div class="my-auto py-10">
                 <ModuleStep title="Adding a module">
-                  <p class="text-base">
+                  <p class="text-base mt-2">
                     All modules on <b class="font-semibold">deno.land/x</b>{" "}
                     need to be hosted as public repositories on GitHub.com.
                   </p>
-                  <p class="text-base">
+                  <p class="text-base mt-2">
                     <b class="font-semibold">deno.land/x</b>{" "}
                     downloads and stores your repository contents every time you
                     create a git tag. We only do this once for every tag. This
                     ensures that the contents we serve for a specific version
                     can never change.
                   </p>
-                  <p class="text-base">
+                  <p class="text-base mt-2">
                     Our service needs to get informed whenever a new tag is
                     created. For this purpose we use GitHub webhooks.
                   </p>
@@ -97,7 +97,7 @@ export default function AddModulePage() {
                     <input
                       id="modulename"
                       pattern="^[a-z0-9_]{3,40}$"
-                      class="block w-full px-4 py-2 mt-4 my-1 leading-normal bg-white border border-gray-300 rounded-lg outline-none shadow-sm appearance-none focus:border-gray-500 hover:border-gray-400 invalid:(border-red-300 hover:border-red-300 focus:border-red-300)"
+                      class="block w-full px-4 py-2 mt-3 my-1 leading-normal bg-white border border-gray-300 rounded-lg outline-none shadow-sm appearance-none focus:border-gray-500 hover:border-gray-400 invalid:(border-red-300 hover:border-red-300 focus:border-red-300)"
                       type="text"
                       placeholder="Module Name"
                       autoComplete="off"
@@ -161,13 +161,13 @@ export default function AddModulePage() {
                   <p>
                     There are some more optional settings to set up:
                   </p>
-                  <div class="mt-4">
+                  <div class="mt-3">
                     <label htmlFor="subdirectory" class="font-medium">
                       Subdirectory
                     </label>
                     <input
                       id="subdirectory"
-                      class="block w-full px-4 py-2 my-1 leading-normal bg-white border border-gray-300 rounded-lg outline-none shadow-sm appearance-none focus:border-gray-500 hover:border-gray-400 mt-1 valid:(border-green-300 hover:border-green-300 focus:border-green-300) invalid:(border-red-300 hover:border-red-300 focus:border-red-300)"
+                      class="block w-full px-4 py-2 my-2 leading-normal bg-white border border-gray-300 rounded-lg outline-none shadow-sm appearance-none focus:border-gray-500 hover:border-gray-400 mt-1 valid:(border-green-300 hover:border-green-300 focus:border-green-300) invalid:(border-red-300 hover:border-red-300 focus:border-red-300)"
                       type="text"
                       placeholder="Subdirectory"
                       pattern="^([^(/)])(.*\/$)"
@@ -188,38 +188,38 @@ export default function AddModulePage() {
                 <ModuleStep title="Add the webhook">
                   <p>You can now add the webhook to your repository.</p>
                   <ol class="list-decimal list-outside ml-4 pl-2 ">
-                    <li>Navigate to the repository you want to add.</li>
-                    <li>
+                    <li class="mt-1">Navigate to the repository you want to add.</li>
+                    <li class="mt-1">
                       Go to the <InlineCode>Settings</InlineCode> tab.
                     </li>
-                    <li>
+                    <li class="mt-1">
                       Click on the <InlineCode>Webhooks</InlineCode> tab.
                     </li>
-                    <li>
+                    <li class="mt-1">
                       Click on the <InlineCode>Add webhook</InlineCode> button.
                     </li>
-                    <li>
+                    <li class="mt-1">
                       Enter the URL{" "}
                       <InlineCode id="webhookURL">
                         https://api.deno.land/webhook/gh/
                       </InlineCode>{" "}
                       in the payload URL field.
                     </li>
-                    <li>
+                    <li class="mt-1">
                       Select <InlineCode>application/json</InlineCode>{" "}
                       as the content type.
                     </li>
-                    <li>
+                    <li class="mt-1">
                       Select{" "}
                       <InlineCode>
                         Let me select individual events.
                       </InlineCode>
                     </li>
-                    <li>
+                    <li class="mt-1">
                       Select only the{" "}
                       <InlineCode>Branch or tag creation</InlineCode> event.
                     </li>
-                    <li>
+                    <li class="mt-1">
                       Press <InlineCode>Add webhook</InlineCode>.
                     </li>
                   </ol>
@@ -270,7 +270,7 @@ function ModuleStep(
   return (
     <div class="mt-12">
       <header>
-        <h2 class="text-2xl leading-7 font-medium text-gray-900">{title}</h2>
+        <h2 class="text-2xl leading-8 font-semibold text-gray-900">{title}</h2>
       </header>
       <div class="mt-4">
         {children}
