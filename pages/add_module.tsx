@@ -97,7 +97,7 @@ export default function AddModulePage() {
                     <input
                       id="modulename"
                       pattern="^[a-z0-9_]{3,40}$"
-                      class="block w-full px-4 py-2 mt-3 my-1 leading-normal bg-white border border-gray-300 rounded-lg outline-none shadow-sm appearance-none focus:border-gray-500 hover:border-gray-400 invalid:(border-red-300 hover:border-red-300 focus:border-red-300)"
+                      class="block w-full px-4 py-2 mt-3 mb-1 leading-normal bg-white border border-gray-300 rounded-lg outline-none shadow-sm appearance-none focus:border-gray-500 hover:border-gray-400 invalid:(border-red-300 hover:border-red-300 focus:border-red-300)"
                       type="text"
                       placeholder="Module Name"
                       autoComplete="off"
@@ -167,7 +167,7 @@ export default function AddModulePage() {
                     </label>
                     <input
                       id="subdirectory"
-                      class="block w-full px-4 py-2 my-2 leading-normal bg-white border border-gray-300 rounded-lg outline-none shadow-sm appearance-none focus:border-gray-500 hover:border-gray-400 mt-1 valid:(border-green-300 hover:border-green-300 focus:border-green-300) invalid:(border-red-300 hover:border-red-300 focus:border-red-300)"
+                      class="block w-full px-4 py-2 mt-2 mb-1 leading-normal bg-white border border-gray-300 rounded-lg outline-none shadow-sm appearance-none focus:border-gray-500 hover:border-gray-400 valid:(border-green-300 hover:border-green-300 focus:border-green-300) invalid:(border-red-300 hover:border-red-300 focus:border-red-300)"
                       type="text"
                       placeholder="Subdirectory"
                       pattern="^([^(/)])(.*\/$)"
@@ -188,40 +188,40 @@ export default function AddModulePage() {
                 <ModuleStep title="Add the webhook">
                   <p>You can now add the webhook to your repository.</p>
                   <ol class="list-decimal list-outside ml-4 pl-2 ">
-                    <li class="mt-1">
+                    <li class="mt-1.5">
                       Navigate to the repository you want to add.
                     </li>
-                    <li class="mt-1">
+                    <li class="mt-1.5">
                       Go to the <InlineCode>Settings</InlineCode> tab.
                     </li>
-                    <li class="mt-1">
+                    <li class="mt-1.5">
                       Click on the <InlineCode>Webhooks</InlineCode> tab.
                     </li>
-                    <li class="mt-1">
+                    <li class="mt-1.5">
                       Click on the <InlineCode>Add webhook</InlineCode> button.
                     </li>
-                    <li class="mt-1">
+                    <li class="mt-1.5">
                       Enter the URL{" "}
                       <InlineCode id="webhookURL">
                         https://api.deno.land/webhook/gh/
                       </InlineCode>{" "}
                       in the payload URL field.
                     </li>
-                    <li class="mt-1">
+                    <li class="mt-1.5">
                       Select <InlineCode>application/json</InlineCode>{" "}
                       as the content type.
                     </li>
-                    <li class="mt-1">
+                    <li class="mt-1.5">
                       Select{" "}
                       <InlineCode>
                         Let me select individual events.
                       </InlineCode>
                     </li>
-                    <li class="mt-1">
+                    <li class="mt-1.5">
                       Select only the{" "}
                       <InlineCode>Branch or tag creation</InlineCode> event.
                     </li>
-                    <li class="mt-1">
+                    <li class="mt-1.5">
                       Press <InlineCode>Add webhook</InlineCode>.
                     </li>
                   </ol>
@@ -272,7 +272,7 @@ function ModuleStep(
   return (
     <div class="mt-12">
       <header>
-        <h2 class="text-2xl leading-8 font-semibold text-gray-900">{title}</h2>
+        <h2 class="text-2xl leading-7 font-semibold text-gray-900">{title}</h2>
       </header>
       <div class="mt-4">
         {children}
