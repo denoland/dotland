@@ -188,7 +188,9 @@ export default function AddModulePage() {
                 <ModuleStep title="Add the webhook">
                   <p>You can now add the webhook to your repository.</p>
                   <ol class="list-decimal list-outside ml-4 pl-2 ">
-                    <li class="mt-1">Navigate to the repository you want to add.</li>
+                    <li class="mt-1">
+                      Navigate to the repository you want to add.
+                    </li>
                     <li class="mt-1">
                       Go to the <InlineCode>Settings</InlineCode> tab.
                     </li>
