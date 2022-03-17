@@ -205,6 +205,7 @@ function ModuleView({
       : getRepositoryURL(versionMeta, path)
     : undefined;
   const {
+    readmeSize,
     readmeCanonicalPath,
     readmeURL,
     readmeRepositoryURL,
@@ -214,6 +215,7 @@ function ModuleView({
       : dirEntries?.find((d) => isReadme(d.name));
     if (readmeEntry) {
       return {
+        readmeSize: readmeEntry.size,
         readmeCanonicalPath: canonicalPath + "/" + readmeEntry.name,
         readmeURL: getSourceURL(name, version, path + "/" + readmeEntry.name),
         readmeRepositoryURL: versionMeta
@@ -222,6 +224,7 @@ function ModuleView({
       };
     }
     return {
+      readmeSize: null,
       readmeCanonicalPath: null,
       readmeURL: null,
       readmeRepositoryURL: null,
@@ -284,10 +287,7 @@ function ModuleView({
             }
             return null;
           }
-          const size = versionMeta!.directoryListing.find((entry) =>
-            entry.path === path
-          )!.size!;
-          if (size < MAX_SYNTAX_HIGHLIGHT_FILE_SIZE) {
+          if (readmeSize! < MAX_SYNTAX_HIGHLIGHT_FILE_SIZE) {
             return await res.text();
           } else {
             await res.body!.cancel();
