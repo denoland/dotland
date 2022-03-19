@@ -95,8 +95,7 @@ export default function Registry({ params, url }: PageProps) {
                   <ErrorMessage title="No uploaded versions">
                     This module name has been reserved for a repository, but no
                     versions have been uploaded yet. Modules that do not upload
-                    a version within 30 days of registration will be removed.
-                    {" "}
+                    a version within 30 days of registration will be removed.{" "}
                     {versions.isLegacy &&
                       "If you are the owner of this module, please re-add the GitHub repository with deno.land/x (by following the instructions at https://deno.land/x#add), and publish a new version."}
                   </ErrorMessage>
@@ -167,7 +166,7 @@ function ModuleView({
     : null;
 
   const hasStandardModulEntryPoint = versionMeta?.directoryListing.some(
-    (entry) => entry.path === "/mod.ts",
+    (entry) => entry.path === "/mod.ts"
   );
   const moduleDocumentationURL = hasStandardModulEntryPoint
     ? `https://doc.deno.land/https://deno.land${basePath}/mod.ts`
@@ -180,7 +179,7 @@ function ModuleView({
         .filter(
           (f) =>
             f.path.startsWith(path + "/") &&
-            f.path.split("/").length - 2 === path.split("/").length - 1,
+            f.path.split("/").length - 2 === path.split("/").length - 1
         )
         .map<DirEntry>((f) => {
           const [name] = f.path.slice(path.length + 1).split("/");
@@ -204,9 +203,10 @@ function ModuleView({
     : undefined;
   const { readmeSize, readmeCanonicalPath, readmeURL, readmeRepositoryURL } =
     (() => {
-      const readmeEntry = path === ""
-        ? findRootReadme(versionMeta?.directoryListing)
-        : dirEntries?.find((d) => isReadme(d.name));
+      const readmeEntry =
+        path === ""
+          ? findRootReadme(versionMeta?.directoryListing)
+          : dirEntries?.find((d) => isReadme(d.name));
       if (readmeEntry) {
         return {
           readmeSize: readmeEntry.size,
@@ -232,8 +232,8 @@ function ModuleView({
           sourceURL &&
           versionMeta &&
           versionMeta.directoryListing.filter(
-              (d) => d.path === path && d.type == "file",
-            ).length !== 0
+            (d) => d.path === path && d.type == "file"
+          ).length !== 0
         ) {
           const res = await fetch(sourceURL, { method: "GET" });
           if (!res.ok) {
@@ -248,7 +248,7 @@ function ModuleView({
           }
 
           const size = versionMeta.directoryListing.find(
-            (entry) => entry.path === path,
+            (entry) => entry.path === path
           )!.size!;
           if (size < MAX_SYNTAX_HIGHLIGHT_FILE_SIZE) {
             return {
@@ -294,114 +294,105 @@ function ModuleView({
     ]);
   });
 
-  const externalDependencies = versionDeps === null
-    ? null
-    : listExternalDependencies(
-      versionDeps.graph,
-      `https://deno.land/x/${name}@${version}${path}`,
-    );
+  const externalDependencies =
+    versionDeps === null
+      ? null
+      : listExternalDependencies(
+          versionDeps.graph,
+          `https://deno.land/x/${name}@${version}${path}`
+        );
 
   function SidePanel() {
     return (
-      <div class="relative">
-        <div class="sm:static sm:top-0 sticky top-4 col-span-1 row-start-1 md:row-start-auto flex flex-col sm:flex-row md:flex-col gap-4">
+      <div class="relative sm:static row-start-1 md:row-start-auto">
+        <div class="sticky top-4 col-span-1 flex flex-col sm:flex-row md:flex-col gap-4">
           <div class="max-w-sm w-full shadow-sm rounded-lg border border-gray-200 overflow-hidden">
             <div class="bg-gray-50 p-4">
               <div class="text-xl font-bold">{name}</div>
-              {versionMeta === undefined
-                ? (
-                  <>
-                    <div class="w-4/5 sm:w-full bg-gray-100 h-3 my-2"></div>
-                    <div class="w-4/5 sm:w-2/3 bg-gray-100 h-3 my-2 block sm:hidden md:block">
-                    </div>
-                    <div class="mt-3 flex items-center py-0.5">
-                      <svg
-                        class="h-5 w-5 mr-2 inline text-gray-200"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <title>GitHub Repository</title>
-                        <path
-                          fillRule="evenodd"
-                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      <div class="w-4/5 sm:w-2/3 bg-gray-100 h-4"></div>
-                    </div>
-                    <div class="mt-2 flex items-center py-0.5">
-                      <svg
-                        class="h-5 w-5 mr-2 inline text-gray-200"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <title>GitHub Stars</title>
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                        </path>
-                      </svg>
-                      <div class="w-1/6 sm:w-1/5 bg-gray-100 h-4"></div>
-                    </div>
-                  </>
-                )
-                : versionMeta === null || moduleMeta === null
-                ? null
-                : (
-                  <>
-                    <div class="text-sm">
-                      {emojify(moduleMeta.description ?? "")}
-                    </div>
-                    {moduleDocumentationURL
-                      ? (
-                        <div class="mt-3 flex items-center">
-                          <svg
-                            class="h-5 w-5 mr-2 inline text-gray-700"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <title>Documentation</title>
-                            <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z">
-                            </path>
-                          </svg>
-                          <a class="link" href={moduleDocumentationURL}>
-                            Documentation
-                          </a>
-                        </div>
-                      )
-                      : null}
+              {versionMeta === undefined ? (
+                <>
+                  <div class="w-4/5 sm:w-full bg-gray-100 h-3 my-2"></div>
+                  <div class="w-4/5 sm:w-2/3 bg-gray-100 h-3 my-2 block sm:hidden md:block"></div>
+                  <div class="mt-3 flex items-center py-0.5">
+                    <svg
+                      class="h-5 w-5 mr-2 inline text-gray-200"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <title>GitHub Repository</title>
+                      <path
+                        fillRule="evenodd"
+                        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <div class="w-4/5 sm:w-2/3 bg-gray-100 h-4"></div>
+                  </div>
+                  <div class="mt-2 flex items-center py-0.5">
+                    <svg
+                      class="h-5 w-5 mr-2 inline text-gray-200"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <title>GitHub Stars</title>
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                    <div class="w-1/6 sm:w-1/5 bg-gray-100 h-4"></div>
+                  </div>
+                </>
+              ) : versionMeta === null || moduleMeta === null ? null : (
+                <>
+                  <div class="text-sm">
+                    {emojify(moduleMeta.description ?? "")}
+                  </div>
+                  {moduleDocumentationURL ? (
                     <div class="mt-3 flex items-center">
                       <svg
                         class="h-5 w-5 mr-2 inline text-gray-700"
                         fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <title>GitHub Repository</title>
-                        <path
-                          fillRule="evenodd"
-                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      <a
-                        class="link"
-                        href={`https://github.com/${versionMeta.uploadOptions.repository}`}
-                      >
-                        {versionMeta.uploadOptions.repository}
-                      </a>
-                    </div>
-                    <div class="mt-2 flex items-center">
-                      <svg
-                        class="h-5 w-5 mr-2 inline text-gray-700"
-                        fill="currentColor"
                         viewBox="0 0 20 20"
                       >
-                        <title>GitHub Stars</title>
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                        </path>
+                        <title>Documentation</title>
+                        <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
                       </svg>
-                      <div>{moduleMeta.star_count}</div>
+                      <a class="link" href={moduleDocumentationURL}>
+                        Documentation
+                      </a>
                     </div>
-                  </>
-                )}
+                  ) : null}
+                  <div class="mt-3 flex items-center">
+                    <svg
+                      class="h-5 w-5 mr-2 inline text-gray-700"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <title>GitHub Repository</title>
+                      <path
+                        fillRule="evenodd"
+                        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <a
+                      class="link"
+                      href={`https://github.com/${versionMeta.uploadOptions.repository}`}
+                    >
+                      {versionMeta.uploadOptions.repository}
+                    </a>
+                  </div>
+                  <div class="mt-2 flex items-center">
+                    <svg
+                      class="h-5 w-5 mr-2 inline text-gray-700"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <title>GitHub Stars</title>
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                    <div>{moduleMeta.star_count}</div>
+                  </div>
+                </>
+              )}
               <div class="mt-3 w-full">
                 <VersionSelector
                   versions={versions.versions}
@@ -415,27 +406,25 @@ function ModuleView({
 
           <div class="max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4">
             <p class="text-md font-semibold mb-2">Version Info</p>
-            {versionMeta === null
-              ? null
-              : (
-                <div class="mt-2 flex text-sm items-center">
-                  <svg
-                    class="h-5 w-5 mr-2 inline text-gray-700"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <title>Tagged at</title>
-                    <path
-                      fillRule="evenodd"
-                      d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <div title={versionMeta.uploadedAt.toLocaleString()}>
-                    {twas(versionMeta.uploadedAt.getTime())}
-                  </div>
+            {versionMeta === null ? null : (
+              <div class="mt-2 flex text-sm items-center">
+                <svg
+                  class="h-5 w-5 mr-2 inline text-gray-700"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <title>Tagged at</title>
+                  <path
+                    fillRule="evenodd"
+                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <div title={versionMeta.uploadedAt.toLocaleString()}>
+                  {twas(versionMeta.uploadedAt.getTime())}
                 </div>
-              )}
+              </div>
+            )}
           </div>
           {documentationURL && externalDependencies !== null && (
             <div class="max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4">
@@ -445,20 +434,18 @@ function ModuleView({
                   <div class="mt-2 overflow-x-auto">
                     {externalDependencies.map((url) => (
                       <p key={url}>
-                        {url.startsWith("https://deno.land/")
-                          ? (
-                            <a
-                              href={url.replace("https://deno.land", "")}
-                              class="link text-sm truncate"
-                            >
-                              {url}
-                            </a>
-                          )
-                          : (
-                            <a href={url} class="link text-sm truncate">
-                              {url}
-                            </a>
-                          )}
+                        {url.startsWith("https://deno.land/") ? (
+                          <a
+                            href={url.replace("https://deno.land", "")}
+                            class="link text-sm truncate"
+                          >
+                            {url}
+                          </a>
+                        ) : (
+                          <a href={url} class="link text-sm truncate">
+                            {url}
+                          </a>
+                        )}
                       </p>
                     ))}
                   </div>
@@ -551,16 +538,16 @@ function ModuleView({
                 {typeof readme === "string" &&
                   typeof readmeURL === "string" &&
                   typeof readmeCanonicalPath === "string" && (
-                  <FileDisplay
-                    raw={readme}
-                    canonicalPath={readmeCanonicalPath}
-                    sourceURL={readmeURL}
-                    repositoryURL={readmeRepositoryURL}
-                    baseURL={basePath}
-                    stdVersion={stdVersion}
-                    pathname={url.pathname}
-                  />
-                )}
+                    <FileDisplay
+                      raw={readme}
+                      canonicalPath={readmeCanonicalPath}
+                      sourceURL={readmeURL}
+                      repositoryURL={readmeRepositoryURL}
+                      baseURL={basePath}
+                      stdVersion={stdVersion}
+                      pathname={url.pathname}
+                    />
+                  )}
               </div>
             );
           }
@@ -588,7 +575,8 @@ function Breadcrumbs({
       <a href="/" class="link">
         deno.land
       </a>{" "}
-      / {!isStd && (
+      /{" "}
+      {!isStd && (
         <>
           <a href="/x" class="link">
             x
