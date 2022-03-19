@@ -96,7 +96,7 @@ export function Header({
               <div class="px-2 pt-4 pb-3">
                 <a
                   href="https://deno.com/deploy"
-                  class="block px-3 py-2 rounded-md text-base font-medium rounded-lg border-2 border-gray-500 bg-transparent text-gray-500 hover:border-gray-900 hover:bg-gray-900 hover:text-gray-50 focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
+                  class="block px-3 py-2 rounded-md text-base font-medium rounded-lg border-2 border-gray-500 bg-transparent text-gray-700 hover:border-gray-900 hover:bg-gray-900 hover:text-gray-50 focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
                 >
                   Deploy
                 </a>
