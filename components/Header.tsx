@@ -94,6 +94,12 @@ export function Header({
                 </label>
               </div>
               <div class="px-2 pt-4 pb-3">
+                <a
+                  href="https://deno.com/deploy"
+                  class="block px-3 py-2 rounded-md text-base font-medium rounded-lg border-2 border-gray-700 bg-transparent text-gray-700 hover:border-gray-900 hover:bg-gray-900 hover:text-gray-50 focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
+                >
+                  Deploy
+                </a>
                 {entries.map(({ href, content }) => (
                   <a
                     href={href}
@@ -102,12 +108,6 @@ export function Header({
                     {content}
                   </a>
                 ))}
-                <a
-                  href="https://deno.com/deploy"
-                  class="block px-3 py-2 rounded-md text-base font-medium rounded-lg border-2 border-gray-700 bg-transparent text-gray-700 hover:border-gray-900 hover:bg-gray-900 hover:text-gray-50 focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
-                >
-                  Deploy
-                </a>
               </div>
             </div>
           </div>
@@ -134,6 +134,12 @@ export function Header({
           </div>
         </label>
         <div class="hidden lg:flex md:ml-10 items-end">
+          <a
+            href="https://deno.com/deploy"
+            class="font-medium py-2 px-3 rounded-lg border-2 border-gray-700 bg-transparent text-gray-700 hover:border-gray-900 hover:bg-gray-900 hover:text-gray-50 transition duration-150 ease-in-out"
+          >
+            Deploy
+          </a>
           {entries.map(({ href, content }) => (
             <a
               href={href}
@@ -142,12 +148,6 @@ export function Header({
               {content}
             </a>
           ))}
-          <a
-            href="https://deno.com/deploy"
-            class="font-medium py-2 px-3 rounded-lg border-2 border-gray-700 bg-transparent text-gray-700 hover:border-gray-900 hover:bg-gray-900 hover:text-gray-50 transition duration-150 ease-in-out"
-          >
-            Deploy
-          </a>
           <a
             href="https://github.com/denoland"
             class="ml-10 my-auto text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out leading-0"
