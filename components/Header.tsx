@@ -136,7 +136,7 @@ export function Header({
         <div class="hidden lg:flex md:ml-10 items-end">
           <a
             href="https://deno.com/deploy"
-            class="font-medium py-2 px-3 rounded-lg border-2 border-gray-500 bg-transparent text-gray-500 hover:border-gray-900 hover:bg-gray-900 hover:text-gray-50 transition duration-150 ease-in-out"
+            class="font-medium py-2 px-3 rounded-lg border-2 border-gray-500 bg-transparent text-gray-700 hover:border-gray-900 hover:bg-gray-900 hover:text-gray-50 transition duration-150 ease-in-out"
           >
             Deploy
           </a>
