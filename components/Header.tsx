@@ -140,36 +140,14 @@ export function Header({
           >
             Deploy
           </a>
-          <a
-            href="/manual"
-            class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
-          >
-            参考手册
-          </a>
-          <a
-            href="https://deno.com/blog"
-            class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
-          >
-            博客
-          </a>
-          <a
-            href="https://doc.deno.js.cn/deno/stable"
-            class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
-          >
-            API
-          </a>
-          <a
-            href="/std"
-            class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
-          >
-            标准库
-          </a>
-          <a
-            href="/x"
-            class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
-          >
-            第三方模块
-          </a>
+          {entries.map(({ href, content }) => (
+            <a
+              href={href}
+              class="ml-10 my-auto font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+            >
+              {content}
+            </a>
+          ))}
           <a
             href="https://github.com/denoland"
             class="ml-10 my-auto text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out leading-0"
