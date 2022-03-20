@@ -22,10 +22,10 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
       <Head>
         <title>Deno - A modern runtime for JavaScript and TypeScript</title>
       </Head>
-      <div class="bg-white">
-        <div class="bg-gray-50 border-b border-gray-200">
+      <div class="bg-white" >
+        <div class="bg-gray-50 border-b border-gray-200" style="background-image: url('/background.jpeg');">
           <Header main />
-          <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
+          <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center" >
             <h1 class="font-extrabold text-5xl leading-10 tracking-tight text-gray-900">
               Deno
             </h1>
