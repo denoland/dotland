@@ -3,6 +3,17 @@
 /** @jsx h */
 import { h } from "../deps.ts";
 
+const entries = [
+  { href: "/manual", content: "Manual" },
+  { href: "https://deno.com/blog", content: "Blog" },
+  {
+    href: "https://doc.deno.land/deno/stable",
+    content: "API",
+  },
+  { href: "/std", content: "Standard Library" },
+  { href: "/x", content: "Third Party Modules" },
+] as const;
+
 export function Header({
   subtitle,
   widerContent,
@@ -83,17 +94,13 @@ export function Header({
                 </label>
               </div>
               <div class="px-2 pt-4 pb-3">
-                {[
-                  { href: "https://deno.com/deploy", content: "Deploy" },
-                  { href: "/manual", content: "Manual" },
-                  { href: "https://deno.com/blog", content: "Blog" },
-                  {
-                    href: "https://doc.deno.land/deno/stable",
-                    content: "API",
-                  },
-                  { href: "/std", content: "Standard Library" },
-                  { href: "/x", content: "Third Party Modules" },
-                ].map(({ href, content }) => (
+                <a
+                  href="https://deno.com/deploy"
+                  class="block px-3 py-2 rounded-md text-base font-medium rounded-lg border-2 border-gray-700 bg-transparent text-gray-700 hover:border-gray-900 hover:bg-gray-900 hover:text-gray-50 focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
+                >
+                  Deploy
+                </a>
+                {entries.map(({ href, content }) => (
                   <a
                     href={href}
                     class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
@@ -129,43 +136,21 @@ export function Header({
         <div class="hidden lg:flex md:ml-10 items-end">
           <a
             href="https://deno.com/deploy"
-            class="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+            class="font-medium py-2 px-3 rounded-lg border-2 border-gray-700 bg-transparent text-gray-700 hover:border-gray-900 hover:bg-gray-900 hover:text-gray-50 transition duration-150 ease-in-out"
           >
             Deploy
           </a>
-          <a
-            href="/manual"
-            class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
-          >
-            Manual
-          </a>
-          <a
-            href="https://deno.com/blog"
-            class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
-          >
-            Blog
-          </a>
-          <a
-            href="https://doc.deno.land/deno/stable"
-            class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
-          >
-            API
-          </a>
-          <a
-            href="/std"
-            class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
-          >
-            Standard Library
-          </a>
-          <a
-            href="/x"
-            class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
-          >
-            Third Party Modules
-          </a>
+          {entries.map(({ href, content }) => (
+            <a
+              href={href}
+              class="ml-10 my-auto font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+            >
+              {content}
+            </a>
+          ))}
           <a
             href="https://github.com/denoland"
-            class="ml-10 text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out leading-0"
+            class="ml-10 my-auto text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out leading-0"
           >
             <span class="sr-only">GitHub</span>
             <svg
