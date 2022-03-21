@@ -6,7 +6,7 @@ const githubBasepath = "https://raw.githubusercontent.com/denoland/manual/";
 const oldDocpath = "https://github.com/denoland/deno/blob/";
 const docpath = "https://github.com/denoland/manual/blob/";
 import VERSIONS from "../versions.json" assert { type: "json" };
-import compareVersions from "https://esm.sh/tiny-version-compare@3.0.1?pin=v71";
+import compareVersions from "https://esm.sh/tiny-version-compare@3.0.0?pin=v71";
 
 export const versions = VERSIONS.cli;
 
