@@ -271,6 +271,15 @@ function InstallSection() {
       />
     </div>
   );
+  const pacman = (
+    <div key="pacman" class="my-4 text-gray-700"> 
+      <p class="mb-2">Pacman (Arch Linux and Arch Based distros):</p> 
+      <CodeBlock
+        language="bash"
+        code="sudo pacman -S deno"
+      />
+      </div>
+  );
   const homebrew = (
     <div key="homebrew" class="my-4 text-gray-700">
       <p class="mb-2">
@@ -338,6 +347,7 @@ function InstallSection() {
         .
       </p>
       {shell}
+      {pacman}
       {powershell}
       {homebrew}
       {chocolatey}
