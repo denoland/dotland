@@ -276,7 +276,7 @@ function InstallSection() {
       <p class="mb-2">Pacman (Arch Linux and Arch Based distros):</p>
       <CodeBlock
         language="bash"
-        code="sudo pacman -S deno"
+        code="pacman -S deno"
       />
     </div>
   );
