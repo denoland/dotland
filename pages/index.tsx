@@ -273,7 +273,7 @@ function InstallSection() {
   );
   const pacman = (
     <div key="pacman" class="my-4 text-gray-700">
-      <p class="mb-2">Pacman (Arch Linux and Arch Based distros):</p>
+      <p class="mb-2">Pacman (Arch):</p>
       <CodeBlock
         language="bash"
         code="pacman -S deno"
