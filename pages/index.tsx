@@ -68,9 +68,17 @@ Emit "colors.bundle.js" (9.83KB)`;
             <li>Supports TypeScript out of the box.</li>
             <li>Ships only a single executable file.</li>
             <li>
-              Has built-in utilities like a dependency inspector (
-              <InlineCode>deno info</InlineCode>) and a code formatter (
-              <InlineCode>deno fmt</InlineCode>).
+              Has{" "}
+              <a class="link" href="/manual@v1.20.3/tools">
+                built-in utilities
+              </a>{" "}
+              like a dependency inspector (
+              <a class="link" href="/manual@v1.20.3/tools/dependency_inspector">
+                <InlineCode>deno info</InlineCode>
+              </a>) and a code formatter (
+              <a class="link" href="/manual@v1.20.3/tools/formatter">
+                <InlineCode>deno fmt</InlineCode>
+              </a>).
             </li>
             <li>
               Has a set of reviewed (audited) standard modules that are
@@ -200,9 +208,18 @@ Emit "colors.bundle.js" (9.83KB)`;
           </p>
           <p class="my-4 text-gray-700">
             To make it easier to consume third party modules Deno provides some
-            built in tooling like <InlineCode>deno info</InlineCode> and{" "}
-            <InlineCode>deno doc</InlineCode>. deno.land also provides a web UI
-            for viewing module documentation. It is available at{" "}
+            built in tooling like{" "}
+            <a class="link" href="/manual@v1.20.3/tools/dependency_inspector">
+              <InlineCode>deno info</InlineCode>
+            </a>{" "}
+            and{" "}
+            <a
+              class="link"
+              href="/manual@v1.20.3/tools/documentation_generator"
+            >
+              <InlineCode>deno doc</InlineCode>
+            </a>. deno.land also provides a web UI for viewing module
+            documentation. It is available at{" "}
             <a href="https://doc.deno.land" class="link">
               doc.deno.land
             </a>
