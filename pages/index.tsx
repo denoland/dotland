@@ -17,6 +17,13 @@ export default function Home() {
 console.log("http://localhost:8000/");
 serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
 
+  const denoBundleExample =
+    `deno bundle https://deno.land/std@0.132.0/examples/colors.ts colors.bundle.js
+Bundle https://deno.land/std@0.132.0/examples/colors.ts
+Download https://deno.land/std@0.132.0/examples/colors.ts
+Download https://deno.land/std@0.132.0/fmt/colors.ts
+Emit "colors.bundle.js" (9.83KB)`;
+
   return (
     <div>
       <Head>
@@ -205,6 +212,55 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
             deno.land also provides a simple public hosting service for ES
             modules that work with Deno. It can be found at{" "}
             <a class="link" href="/x">deno.land/x</a>.
+          </p>
+        </div>
+        <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
+          <a class="hover:underline" href="#toolchain">
+            <h3 class="font-bold text-xl" id="toolchain">
+              Built-in Toolchain
+            </h3>
+          </a>
+          <p class="my-4 text-gray-700">
+            Deno comes with a robust{" "}
+            <a class="link" href="/manual@v1.20.3/tools">set of tools</a>, so
+            you can spend less time searching and evaluating third party
+            modules, and more time writing code and being productive. Here are a
+            few examples.
+          </p>
+          <p class="my-4 text-gray-700">
+            <a class="link" href="/manual@v1.20.3/tools/linter">Lint</a>{" "}
+            all JS/TS files in the current directory and subdirectories:
+          </p>
+          <p>
+            <CodeBlock
+              code={"deno lint\nChecked `n` files"}
+              language="bash"
+            />
+          </p>
+          <p class="my-4 text-gray-700">
+            <a class="link" href="/manual@1.20.3/tools/formatter">Format</a>
+            {" "}
+            all supported files in the current directory and subdirectories:
+          </p>
+          <p>
+            <CodeBlock
+              code={"deno fmt\nChecked `n` files"}
+              language="bash"
+            />
+          </p>
+          <p class="my-4 text-gray-700">
+            <a class="link" href="/manual@v1.20.3/tools/bundler">Bundle</a>{" "}
+            your project into a single JS file, including all dependencies:
+          </p>
+          <p>
+            <CodeBlock
+              code={denoBundleExample}
+              language="bash"
+            />
+          </p>
+          <p class="my-4 text-gray-700">
+            For the full list of tools and their options, see{" "}
+            <a href="/manual@v1.20.3/tools" class="link">here</a>.
           </p>
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
