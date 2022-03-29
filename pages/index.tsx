@@ -17,12 +17,14 @@ export default function Home() {
 console.log("http://localhost:8000/");
 serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
 
-  const denoBundleExample =
-    `deno bundle https://deno.land/std@0.132.0/examples/colors.ts colors.bundle.js
-Bundle https://deno.land/std@0.132.0/examples/colors.ts
-Download https://deno.land/std@0.132.0/examples/colors.ts
-Download https://deno.land/std@0.132.0/fmt/colors.ts
-Emit "colors.bundle.js" (9.83KB)`;
+  const denoTestExample =
+    `deno test https://deno.land/std@0.132.0/testing/chai_example.ts
+running 3 tests from https://deno.land/std@0.132.0/testing/chai_example.ts
+test we can make chai assertions ... ok (8ms)
+test we can make chai expectations ... ok (2ms)
+test we can use chai should style ... ok (4ms)
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms)`;
 
   return (
     <div>
@@ -250,7 +252,7 @@ Emit "colors.bundle.js" (9.83KB)`;
           </p>
           <p>
             <CodeBlock
-              code={"deno lint\nChecked `n` files"}
+              code={"deno lint\nChecked 54 files"}
               language="bash"
             />
           </p>
@@ -260,17 +262,16 @@ Emit "colors.bundle.js" (9.83KB)`;
           </p>
           <p>
             <CodeBlock
-              code={"deno fmt\nChecked `n` files"}
+              code={"deno fmt\nChecked 46 files"}
               language="bash"
             />
           </p>
           <p class="my-4 text-gray-700">
-            <a class="link" href="/manual/tools/bundler">Bundle</a>{" "}
-            your project into a single JS file, including all dependencies:
+            Run a <a class="link" href="/manual/tools/testing">test</a>:
           </p>
           <p>
             <CodeBlock
-              code={denoBundleExample}
+              code={denoTestExample}
               language="bash"
             />
           </p>
