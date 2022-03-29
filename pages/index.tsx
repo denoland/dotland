@@ -69,14 +69,14 @@ Emit "colors.bundle.js" (9.83KB)`;
             <li>Ships only a single executable file.</li>
             <li>
               Has{" "}
-              <a class="link" href="/manual@v1.20.3/tools">
+              <a class="link" href="/manual/tools">
                 built-in utilities
               </a>{" "}
               like a dependency inspector (
-              <a class="link" href="/manual@v1.20.3/tools/dependency_inspector">
+              <a class="link" href="/manual/tools/dependency_inspector">
                 <InlineCode>deno info</InlineCode>
               </a>) and a code formatter (
-              <a class="link" href="/manual@v1.20.3/tools/formatter">
+              <a class="link" href="/manual/tools/formatter">
                 <InlineCode>deno fmt</InlineCode>
               </a>).
             </li>
@@ -209,13 +209,13 @@ Emit "colors.bundle.js" (9.83KB)`;
           <p class="my-4 text-gray-700">
             To make it easier to consume third party modules Deno provides some
             built in tooling like{" "}
-            <a class="link" href="/manual@v1.20.3/tools/dependency_inspector">
+            <a class="link" href="/manual/tools/dependency_inspector">
               <InlineCode>deno info</InlineCode>
             </a>{" "}
             and{" "}
             <a
               class="link"
-              href="/manual@v1.20.3/tools/documentation_generator"
+              href="/manual/tools/documentation_generator"
             >
               <InlineCode>deno doc</InlineCode>
             </a>. deno.land also provides a web UI for viewing module
@@ -239,13 +239,13 @@ Emit "colors.bundle.js" (9.83KB)`;
           </a>
           <p class="my-4 text-gray-700">
             Deno comes with a robust{" "}
-            <a class="link" href="/manual@v1.20.3/tools">set of tools</a>, so
+            <a class="link" href="/manual/tools">set of tools</a>, so
             you can spend less time searching and evaluating third party
             modules, and more time writing code and being productive. Here are a
             few examples.
           </p>
           <p class="my-4 text-gray-700">
-            <a class="link" href="/manual@v1.20.3/tools/linter">Lint</a>{" "}
+            <a class="link" href="/manual/tools/linter">Lint</a>{" "}
             all JS/TS files in the current directory and subdirectories:
           </p>
           <p>
@@ -255,7 +255,7 @@ Emit "colors.bundle.js" (9.83KB)`;
             />
           </p>
           <p class="my-4 text-gray-700">
-            <a class="link" href="/manual@1.20.3/tools/formatter">Format</a>
+            <a class="link" href="/manual/tools/formatter">Format</a>
             {" "}
             all supported files in the current directory and subdirectories:
           </p>
@@ -266,7 +266,7 @@ Emit "colors.bundle.js" (9.83KB)`;
             />
           </p>
           <p class="my-4 text-gray-700">
-            <a class="link" href="/manual@v1.20.3/tools/bundler">Bundle</a>{" "}
+            <a class="link" href="/manual/tools/bundler">Bundle</a>{" "}
             your project into a single JS file, including all dependencies:
           </p>
           <p>
@@ -277,7 +277,7 @@ Emit "colors.bundle.js" (9.83KB)`;
           </p>
           <p class="my-4 text-gray-700">
             For the full list of tools and their options, see{" "}
-            <a href="/manual@v1.20.3/tools" class="link">here</a>.
+            <a href="/manual/tools" class="link">here</a>.
           </p>
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
