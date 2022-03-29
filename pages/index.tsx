@@ -239,10 +239,10 @@ Emit "colors.bundle.js" (9.83KB)`;
           </a>
           <p class="my-4 text-gray-700">
             Deno comes with a robust{" "}
-            <a class="link" href="/manual/tools">set of tools</a>, so
-            you can spend less time searching and evaluating third party
-            modules, and more time writing code and being productive. Here are a
-            few examples.
+            <a class="link" href="/manual/tools">set of tools</a>, so you can
+            spend less time searching and evaluating third party modules, and
+            more time writing code and being productive. Here are a few
+            examples.
           </p>
           <p class="my-4 text-gray-700">
             <a class="link" href="/manual/tools/linter">Lint</a>{" "}
@@ -255,8 +255,7 @@ Emit "colors.bundle.js" (9.83KB)`;
             />
           </p>
           <p class="my-4 text-gray-700">
-            <a class="link" href="/manual/tools/formatter">Format</a>
-            {" "}
+            <a class="link" href="/manual/tools/formatter">Format</a>{" "}
             all supported files in the current directory and subdirectories:
           </p>
           <p>
