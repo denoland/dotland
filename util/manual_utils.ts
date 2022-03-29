@@ -4,10 +4,6 @@ const xBasepath = "https://deno.land/x/manual@";
 const githubBasepath = "https://cdn.jsdelivr.net/gh/denocn/deno_docs@";
 const docpath = "https://github.com/denocn/deno_docs/blob/";
 import VERSIONS from "../versions.json" assert { type: "json" };
-<<<<<<< HEAD
-=======
-import compareVersions from "https://esm.sh/tiny-version-compare@3.0.1?pin=v73";
->>>>>>> 45c9b2f33a8a3b037c0a55d18f637f51059caa33
 
 export const versions = VERSIONS.cli;
 
