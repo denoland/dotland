@@ -19,7 +19,6 @@ import routes from "./routes.gen.ts";
 
 import { routes as completionsV2Routes } from "./completions_v2.ts";
 
-
 function isHtmlRequest(req: Request) {
   return accepts(req, "application/*", "text/html") === "text/html";
 }
