@@ -17,6 +17,15 @@ export default function Home() {
 console.log("http://localhost:8000/");
 serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
 
+  const denoTestExample =
+    `deno test https://deno.land/std@0.132.0/testing/chai_example.ts
+running 3 tests from https://deno.land/std@0.132.0/testing/chai_example.ts
+test we can make chai assertions ... ok (8ms)
+test we can make chai expectations ... ok (2ms)
+test we can use chai should style ... ok (4ms)
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms)`;
+
   return (
     <div>
       <Head>
@@ -59,8 +68,22 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
             <li>支持开箱即用的 TypeScript。</li>
             <li>只发布单一的可执行程序。</li>
             <li>
+<<<<<<< HEAD
               内置实用工具，例如依赖检查 (<InlineCode>deno info</InlineCode>) 和代码格式化
               (<InlineCode>deno fmt</InlineCode>)。
+=======
+              Has{" "}
+              <a class="link" href="/manual/tools">
+                built-in utilities
+              </a>{" "}
+              like a dependency inspector (
+              <a class="link" href="/manual/tools/dependency_inspector">
+                <InlineCode>deno info</InlineCode>
+              </a>) and a code formatter (
+              <a class="link" href="/manual/tools/formatter">
+                <InlineCode>deno fmt</InlineCode>
+              </a>).
+>>>>>>> fc0be5e69c21b0f9d8534bf6afe4f86072d17179
             </li>
             <li>
               自带一套经过审查 (安全审计) 的标准模块，并保证了代码与 Deno 完全兼容：{" "}
@@ -180,6 +203,7 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
             。
           </p>
           <p class="my-4 text-gray-700">
+<<<<<<< HEAD
             为了更方便地使用第三方模块，Deno 提供了一些内置的工具，如 <InlineCode>deno info</InlineCode> 和
             {" "}
             <InlineCode>deno doc</InlineCode>。deno.js.cn 还提供了一个 web UI
@@ -188,10 +212,76 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
               doc.deno.js.cn
             </a>{" "}
             访问。
+=======
+            To make it easier to consume third party modules Deno provides some
+            built in tooling like{" "}
+            <a class="link" href="/manual/tools/dependency_inspector">
+              <InlineCode>deno info</InlineCode>
+            </a>{" "}
+            and{" "}
+            <a
+              class="link"
+              href="/manual/tools/documentation_generator"
+            >
+              <InlineCode>deno doc</InlineCode>
+            </a>. deno.land also provides a web UI for viewing module
+            documentation. It is available at{" "}
+            <a href="https://doc.deno.land" class="link">
+              doc.deno.land
+            </a>
+            .
+>>>>>>> fc0be5e69c21b0f9d8534bf6afe4f86072d17179
           </p>
           <p class="my-4 text-gray-700">
             deno.land 还为用于 Deno 的 ES 模块提供简单的公共托管服务。 位于{" "}
             <a class="link" href="/x">deno.js.cn/x</a>。
+          </p>
+        </div>
+        <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
+          <a class="hover:underline" href="#toolchain">
+            <h3 class="font-bold text-xl" id="toolchain">
+              Built-in Toolchain
+            </h3>
+          </a>
+          <p class="my-4 text-gray-700">
+            Deno comes with a robust{" "}
+            <a class="link" href="/manual/tools">set of tools</a>, so you can
+            spend less time searching and evaluating third party modules, and
+            more time writing code and being productive. Here are a few
+            examples.
+          </p>
+          <p class="my-4 text-gray-700">
+            <a class="link" href="/manual/tools/linter">Lint</a>{" "}
+            all JS/TS files in the current directory and subdirectories:
+          </p>
+          <p>
+            <CodeBlock
+              code={"deno lint\nChecked 54 files"}
+              language="bash"
+            />
+          </p>
+          <p class="my-4 text-gray-700">
+            <a class="link" href="/manual/tools/formatter">Format</a>{" "}
+            all supported files in the current directory and subdirectories:
+          </p>
+          <p>
+            <CodeBlock
+              code={"deno fmt\nChecked 46 files"}
+              language="bash"
+            />
+          </p>
+          <p class="my-4 text-gray-700">
+            Run a <a class="link" href="/manual/tools/testing">test</a>:
+          </p>
+          <p>
+            <CodeBlock
+              code={denoTestExample}
+              language="bash"
+            />
+          </p>
+          <p class="my-4 text-gray-700">
+            For the full list of tools and their options, see{" "}
+            <a href="/manual/tools" class="link">here</a>.
           </p>
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
