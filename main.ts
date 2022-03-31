@@ -10,6 +10,7 @@ import {
   accepts,
   ConnInfo,
   createReporter,
+  Reporter,
   router,
   serve,
   ServerContext,
@@ -18,47 +19,73 @@ import routes from "./routes.gen.ts";
 
 import { routes as completionsV2Routes } from "./completions_v2.ts";
 
-const ga = createReporter({
-  filter(req, res) {
-    const { pathname } = new URL(req.url);
-    const isHtml = accepts(req, "application/*", "text/html") === "text/html";
-    return pathname === "/" || pathname.startsWith("/std") ||
-      pathname.startsWith("/x") || isHtml || res.status >= 400;
+
+function isHtmlRequest(req: Request) {
+  return accepts(req, "application/*", "text/html") === "text/html";
+}
+
+function isNonAssetRequest(req: Request, res: Response) {
+  const { pathname } = new URL(req.url);
+  return pathname === "/" ||
+    pathname.startsWith("/std") ||
+    pathname.startsWith("/x") || isHtmlRequest(req) || res.status >= 400;
+}
+
+function isBot(req: Request) {
+  const accept = req.headers.get("accept");
+  const referer = req.headers.get("referer");
+  const userAgent = req.headers.get("user-agent");
+  return referer == null &&
+    (userAgent == null || !userAgent.startsWith("Mozilla/")) &&
+    (accept == null || accept === "*/*");
+}
+
+function getBotName(req: Request) {
+  const userAgent = req.headers.get("user-agent");
+  return userAgent?.replace(/[^\w\-].*$/, "");
+}
+
+// Makes up a document title based on the returned content type, and whether or
+// not an error happened. Example of document titles it can return are "html",
+// "javascript", "typescript", "wasm", and "not found".
+function getDocumentTitle(req: Request, res: Response) {
+  if (!res.ok) {
+    return res.statusText.toLowerCase();
+  } else if (isHtmlRequest(req)) {
+    return "html";
+  } else {
+    const contentType = res.headers.get("content-type") ?? "";
+    return /^application\/(.*?)(?:;|$)/i.exec(contentType)?.[1];
+  }
+}
+
+const gaForBots = createReporter({
+  id: Deno.env.get("GA_TRACKING_ID_FOR_BOTS"),
+  filter(req, _res) {
+    return isBot(req);
   },
   metaData(req, res) {
-    const accept = req.headers.get("accept");
-    const referer = req.headers.get("referer");
-    const userAgent = req.headers.get("user-agent");
-
-    const { ok, statusText } = res;
-    const isHtml = accepts(req, "application/*", "text/html") === "text/html";
-
-    // Set the page title to "website" or "javascript" or "typescript" or "wasm"
-    const contentType = res.headers.get("content-type");
-    let documentTitle;
-    if (!ok) {
-      documentTitle = statusText.toLowerCase();
-    } else if (isHtml) {
-      documentTitle = "website";
-    } else if (contentType != null) {
-      documentTitle = /^application\/(.*?)(?:;|$)/i.exec(contentType)?.[1];
-    }
-
-    // Files downloaded by a bot (deno, curl) get a special medium/source tag.
-    let campaignMedium;
-    let campaignSource;
-    if (
-      referer == null &&
-      (userAgent == null || !userAgent.startsWith("Mozilla/")) &&
-      (accept == null || accept === "*/*")
-    ) {
-      campaignMedium = "Bot";
-      campaignSource = userAgent?.replace(/[^\w\-].*$/, "");
-    }
-
-    return { campaignMedium, campaignSource, documentTitle };
+    return {
+      campaignMedium: "Bot",
+      campaignSource: getBotName(req),
+      documentTitle: getDocumentTitle(req, res),
+    };
   },
 });
+
+const gaForHumans = createReporter({
+  id: Deno.env.get("GA_TRACKING_ID_FOR_HUMANS"),
+  filter(req, res) {
+    return !isBot(req) && isNonAssetRequest(req, res);
+  },
+  metaData(req, res) {
+    return { documentTitle: getDocumentTitle(req, res) };
+  },
+});
+
+const ga: Reporter = async (...args) => {
+  await Promise.all([gaForBots(...args), gaForHumans(...args)]);
+};
 
 export function withLog(
   handler: (request: Request) => Response | Promise<Response>,
