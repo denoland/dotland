@@ -68,22 +68,13 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             <li>支持开箱即用的 TypeScript。</li>
             <li>只发布单一的可执行程序。</li>
             <li>
-<<<<<<< HEAD
-              内置实用工具，例如依赖检查 (<InlineCode>deno info</InlineCode>) 和代码格式化
-              (<InlineCode>deno fmt</InlineCode>)。
-=======
-              Has{" "}
-              <a class="link" href="/manual/tools">
-                built-in utilities
-              </a>{" "}
-              like a dependency inspector (
+              内置
+              <a class="link" href="/manual/tools">实用工具</a>，例如依赖检查 (
               <a class="link" href="/manual/tools/dependency_inspector">
                 <InlineCode>deno info</InlineCode>
-              </a>) and a code formatter (
-              <a class="link" href="/manual/tools/formatter">
+              </a>) 和代码格式化 (<a class="link" href="/manual/tools/formatter">
                 <InlineCode>deno fmt</InlineCode>
-              </a>).
->>>>>>> fc0be5e69c21b0f9d8534bf6afe4f86072d17179
+              </a>)。
             </li>
             <li>
               自带一套经过审查 (安全审计) 的标准模块，并保证了代码与 Deno 完全兼容：{" "}
@@ -203,34 +194,21 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             。
           </p>
           <p class="my-4 text-gray-700">
-<<<<<<< HEAD
-            为了更方便地使用第三方模块，Deno 提供了一些内置的工具，如 <InlineCode>deno info</InlineCode> 和
-            {" "}
-            <InlineCode>deno doc</InlineCode>。deno.js.cn 还提供了一个 web UI
-            用来在线查看模块文档。可以通过{" "}
-            <a href="https://doc.deno.js.cn" class="link">
-              doc.deno.js.cn
-            </a>{" "}
-            访问。
-=======
-            To make it easier to consume third party modules Deno provides some
-            built in tooling like{" "}
+            为了更方便地使用第三方模块，Deno 提供了一些内置的工具，如
             <a class="link" href="/manual/tools/dependency_inspector">
               <InlineCode>deno info</InlineCode>
             </a>{" "}
-            and{" "}
+            和{" "}
             <a
               class="link"
               href="/manual/tools/documentation_generator"
             >
               <InlineCode>deno doc</InlineCode>
-            </a>. deno.land also provides a web UI for viewing module
-            documentation. It is available at{" "}
-            <a href="https://doc.deno.land" class="link">
-              doc.deno.land
-            </a>
-            .
->>>>>>> fc0be5e69c21b0f9d8534bf6afe4f86072d17179
+            </a>。deno.js.cn 还提供了一个 web UI 用来在线查看模块文档。可以通过{" "}
+            <a href="https://doc.deno.js.cn" class="link">
+              doc.deno.js.cn
+            </a>{" "}
+            访问。
           </p>
           <p class="my-4 text-gray-700">
             deno.land 还为用于 Deno 的 ES 模块提供简单的公共托管服务。 位于{" "}

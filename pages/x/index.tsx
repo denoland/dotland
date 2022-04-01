@@ -115,20 +115,14 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                 <div class="bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4">
                   {resp.results.length == 0
                     ? (
-<<<<<<< HEAD
-                      <div class="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
-                        没有找到模块
-=======
                       <div class="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500">
-                        No modules found. Please let us know what you're looking
-                        for by{" "}
+                        没有找到模块。如果想要我们知道您正在寻找哪个模块，可以在这个
                         <a
                           class="link"
                           href="https://github.com/denoland/wanted_modules/issues"
                         >
-                          opening an issue here
-                        </a>.
->>>>>>> fc0be5e69c21b0f9d8534bf6afe4f86072d17179
+                          新建一个 issue
+                        </a>。
                       </div>
                     )
                     : (
