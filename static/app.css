@@ -187,3 +187,11 @@ ul.tree li:last-child:before {
 .markdown-body img {
     display: inline;
 }
+
+.markdown-body ol {
+	list-style: decimal;
+}
+
+.markdown-body ul {
+    list-style: disc;
+}

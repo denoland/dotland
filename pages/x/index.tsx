@@ -115,8 +115,14 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                 <div class="bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4">
                   {resp.results.length == 0
                     ? (
-                      <div class="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
-                        没有找到模块
+                      <div class="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500">
+                        没有找到模块。如果想要我们知道您正在寻找哪个模块，可以在这个
+                        <a
+                          class="link"
+                          href="https://github.com/denoland/wanted_modules/issues"
+                        >
+                          新建一个 issue
+                        </a>。
                       </div>
                     )
                     : (
@@ -434,6 +440,22 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                       prevent breaking programs that rely on this module.
                       Modules may be removed if there is a legal reason to do
                       (for example copyright infringement).
+                    </p>
+                  </dd>
+                </div>
+                <div class="mt-12">
+                  <dt class="text-lg leading-6 font-medium text-gray-900">
+                    I can't find a specific module. Help!
+                  </dt>
+                  <dd class="mt-2">
+                    <p class="text-base leading-6 text-gray-500">
+                      Please let us know which one by{" "}
+                      <a
+                        class="link"
+                        href="https://github.com/denoland/wanted_modules/issues"
+                      >
+                        opening an issue here
+                      </a>.
                     </p>
                   </dd>
                 </div>
