@@ -1,4 +1,4 @@
-// Copyright 2021-2022 the Deno authors. All rights reserved. MIT license.
+/* Copyright 2021-2022 the Deno authors. All rights reserved. MIT license. */
 
 import {
   assert,
@@ -7,19 +7,12 @@ import {
   assertStringIncludes,
 } from "../test_deps.ts";
 
-import { router, ServerContext } from "../server_deps.ts";
-import routes from "../routes.gen.ts";
-import { routes as completionsV2Routes } from "../completions_v2.ts";
-
-const handleRequest = router(
-  completionsV2Routes,
-  (await ServerContext.fromRoutes(routes)).handler(),
-);
+import { handleApiRequest } from "./suggestions.ts";
 
 Deno.test({
   name: "/_api/x/ - get package list",
   async fn() {
-    const res = await handleRequest(new Request("https://deno.land/_api/x/"));
+    const res = await handleApiRequest(new URL("https://deno.land/_api/x/"));
     assertEquals(res.status, 200);
     const json = await res.json();
     assertEquals(json.items.length, 50);
@@ -30,9 +23,7 @@ Deno.test({
 Deno.test({
   name: "/_api/x/oak - package searching",
   async fn() {
-    const res = await handleRequest(
-      new Request("https://deno.land/_api/x/oak"),
-    );
+    const res = await handleApiRequest(new URL("https://deno.land/_api/x/oak"));
     assertEquals(res.status, 200);
     const json = await res.json();
     assertEquals(json.items.length, 100);
@@ -45,8 +36,8 @@ Deno.test({
 Deno.test({
   name: "/_api/details/x/oak - package details",
   async fn() {
-    const res = await handleRequest(
-      new Request("https://deno.land/_api/details/x/oak"),
+    const res = await handleApiRequest(
+      new URL("https://deno.land/_api/details/x/oak"),
     );
     assertEquals(res.status, 200);
     const json = await res.json();
@@ -59,8 +50,8 @@ Deno.test({
 Deno.test({
   name: "/_api/x/oak/ - versions, non-filtered",
   async fn() {
-    const res = await handleRequest(
-      new Request("https://deno.land/_api/x/oak/"),
+    const res = await handleApiRequest(
+      new URL("https://deno.land/_api/x/oak/"),
     );
     assertEquals(res.status, 200);
     const json = await res.json();
@@ -72,8 +63,8 @@ Deno.test({
 Deno.test({
   name: "/_api/x/oak/v9. - versions, filtered",
   async fn() {
-    const res = await handleRequest(
-      new Request("https://deno.land/_api/x/oak/v9."),
+    const res = await handleApiRequest(
+      new URL("https://deno.land/_api/x/oak/v9."),
     );
     assertEquals(res.status, 200);
     const json = await res.json();
@@ -85,8 +76,8 @@ Deno.test({
 Deno.test({
   name: "/_api/details/x/oak/v10.0.0 - version details",
   async fn() {
-    const res = await handleRequest(
-      new Request("https://deno.land/_api/details/x/oak/v10.0.0"),
+    const res = await handleApiRequest(
+      new URL("https://deno.land/_api/details/x/oak/v10.0.0"),
     );
     assertEquals(res.status, 200);
     const json = await res.json();
@@ -99,8 +90,8 @@ Deno.test({
 Deno.test({
   name: "/_api/x/oak/_latest/ - latest paths",
   async fn() {
-    const res = await handleRequest(
-      new Request("https://deno.land/_api/x/oak/_latest/"),
+    const res = await handleApiRequest(
+      new URL("https://deno.land/_api/x/oak/_latest/"),
     );
     assertEquals(res.status, 200);
     const json = await res.json();
@@ -113,8 +104,8 @@ Deno.test({
 Deno.test({
   name: "/_api/x/oak/_latest/examples/ - latest paths filtered",
   async fn() {
-    const res = await handleRequest(
-      new Request("https://deno.land/_api/x/oak/_latest/examples/"),
+    const res = await handleApiRequest(
+      new URL("https://deno.land/_api/x/oak/_latest/examples/"),
     );
     assertEquals(res.status, 200);
     const json = await res.json();
@@ -127,8 +118,8 @@ Deno.test({
 Deno.test({
   name: "/_api/details/x/oak/v10.0.0/mod.ts - details for path",
   async fn() {
-    const res = await handleRequest(
-      new Request("https://deno.land/_api/details/x/oak/v10.0.0/mod.ts"),
+    const res = await handleApiRequest(
+      new URL("https://deno.land/_api/details/x/oak/v10.0.0/mod.ts"),
     );
     assertEquals(res.status, 200);
     const json = await res.json();
@@ -142,8 +133,8 @@ Deno.test({
 Deno.test({
   name: "/_api/details/std/0.119.0 - std version details",
   async fn() {
-    const res = await handleRequest(
-      new Request("https://deno.land/_api/details/std/0.119.0"),
+    const res = await handleApiRequest(
+      new URL("https://deno.land/_api/details/std/0.119.0"),
     );
     assertEquals(res.status, 200);
     const json = await res.json();
@@ -156,8 +147,8 @@ Deno.test({
 Deno.test({
   name: "/_api/details/std/0.119.0/testing/ - std path details",
   async fn() {
-    const res = await handleRequest(
-      new Request("https://deno.land/_api/details/std/0.119.0/testing/"),
+    const res = await handleApiRequest(
+      new URL("https://deno.land/_api/details/std/0.119.0/testing/"),
     );
     assertEquals(res.status, 200);
     const json = await res.json();
