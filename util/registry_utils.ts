@@ -336,11 +336,15 @@ export function denoDocAvailableForURL(filename: string): boolean {
 export function findRootReadme(
   directoryListing: DirListing[] | undefined,
 ): DirEntry | undefined {
-  const listing = directoryListing?.find((d) =>
-    new RegExp(`^\\/(docs\\/|\\.github\\/)?${readmeBaseRegex}$`, "i").test(
-      d.path,
-    )
-  );
+  const listing =
+    directoryListing?.filter((d) =>
+      new RegExp(`^\\/(docs\\/|\\.github\\/)?${readmeBaseRegex}$`, "i").test(
+        d.path,
+      )
+    ).sort((a, b) => {
+      return a.path.length - b.path.length;
+    })[0];
+
   return listing
     ? {
       name: listing.path.substring(1),
