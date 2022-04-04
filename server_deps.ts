@@ -1,4 +1,4 @@
-export * from "https://raw.githubusercontent.com/lucacasonato/fresh/d441bf2489a51f67522ae2f932ae52e70f9ad131/server.ts";
+export * from "https://raw.githubusercontent.com/lucacasonato/fresh/b969a07c9d1267889efff7ab1b573cb4f4207664/server.ts";
 export { accepts } from "https://deno.land/x/oak_commons@0.1.1/negotiation.ts";
 export { match } from "https://deno.land/x/path_to_regexp@v6.2.0/index.ts";
 // @deno-types https://deno.land/x/fuse@v6.4.1/dist/fuse.d.ts
