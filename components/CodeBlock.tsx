@@ -5,27 +5,27 @@
 import { Fragment, h, htmlEscape, Prism } from "../deps.ts";
 import { normalizeTokens } from "../util/prism_utils.ts";
 
-import "https://esm.sh/prismjs@1.25.0/components/prism-bash?no-check";
-//import "https://esm.sh/prismjs@1.25.0/components/prism-batch?no-check";
-import "https://esm.sh/prismjs@1.25.0/components/prism-css?no-check";
-//import "https://esm.sh/prismjs@1.25.0/components/prism-css-extras?no-check";
-//import "https://esm.sh/prismjs@1.25.0/components/prism-editorconfig?no-check";
-import "https://esm.sh/prismjs@1.25.0/components/prism-diff?no-check";
-//import "https://esm.sh/prismjs@1.25.0/components/prism-docker?no-check";
-//import "https://esm.sh/prismjs@1.25.0/components/prism-git?no-check";
-//import "https://esm.sh/prismjs@1.25.0/components/prism-ignore?no-check";
-import "https://esm.sh/prismjs@1.25.0/components/prism-javascript?no-check";
-//import "https://esm.sh/prismjs@1.25.0/components/prism-js-extras?no-check";
-//import "https://esm.sh/prismjs@1.25.0/components/prism-js-templates?no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-bash?pin=v76&no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-batch?pin=v76&no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-css?pin=v76&no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-css-extras?pin=v76&no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-editorconfig?pin=v76&no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-diff?pin=v76&no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-docker?pin=v76&no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-git?pin=v76&no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-ignore?pin=v76&no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-javascript?pin=v76&no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-js-extras?pin=v76&no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-js-templates?pin=v76&no-check";
 //import "https://esm.sh/prismjs@1.25.0/components/prism-jsdoc?no-check";
-import "https://esm.sh/prismjs@1.25.0/components/prism-json?no-check";
-import "https://esm.sh/prismjs@1.25.0/components/prism-jsx?no-check";
-//import "https://esm.sh/prismjs@1.25.0/components/prism-markdown?no-check";
-import "https://esm.sh/prismjs@1.25.0/components/prism-rust?no-check";
-//import "https://esm.sh/prismjs@1.25.0/components/prism-toml?no-check";
-import "https://esm.sh/prismjs@1.25.0/components/prism-tsx?no-check";
-import "https://esm.sh/prismjs@1.25.0/components/prism-typescript?no-check";
-import "https://esm.sh/prismjs@1.25.0/components/prism-yaml?no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-json?pin=v76&no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-jsx?pin=v76&no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-markdown?pin=v76&no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-rust?pin=v76&no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-toml?pin=v76&no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-tsx?pin=v76&no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-typescript?pin=v76&no-check";
+import "https://esm.sh/prismjs@1.25.0/components/prism-yaml?pin=v76&no-check";
 
 // Modifies the color of 'variable' token
 // to avoid poor contrast
