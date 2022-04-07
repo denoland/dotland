@@ -8,6 +8,7 @@ import { Footer } from "../components/Footer.tsx";
 import { InlineCode } from "../components/InlineCode.tsx";
 import { Header } from "../components/Header.tsx";
 import versions from "../versions.json" assert { type: "json" };
+import { Background } from "../components/HeroBackground.tsx";
 
 export default function Home() {
   const complexExampleProgram = `import { serve } from "https://deno.land/std@${
@@ -32,12 +33,10 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
         <title>Deno - A modern runtime for JavaScript and TypeScript</title>
       </Head>
       <div class="bg-white">
-        <div
-          style="background-image: url('/hero.svg')"
-          class="bg-gray-50 border-b border-gray-200 relative bg-cover bg-center"
-        >
+        <div class="bg-gray-50 overflow-x-hidden border-b border-gray-200 relative">
+          <Background />
           <Header main />
-          <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
+          <div class="z-10 relative max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
             <h1 class="font-extrabold text-5xl leading-10 tracking-tight text-gray-900">
               Deno
             </h1>
