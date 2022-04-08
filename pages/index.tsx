@@ -8,6 +8,7 @@ import { Footer } from "../components/Footer.tsx";
 import { InlineCode } from "../components/InlineCode.tsx";
 import { Header } from "../components/Header.tsx";
 import versions from "../versions.json" assert { type: "json" };
+import { Background } from "../components/HeroBackground.tsx";
 
 export default function Home() {
   const complexExampleProgram = `import { serve } from "https://deno.land/std@${
@@ -32,9 +33,10 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
         <title>Deno - 现代的 JavaScript 和 TypeScript 运行时</title>
       </Head>
       <div class="bg-white">
-        <div class="bg-gray-50 border-b border-gray-200">
+        <div class="bg-gray-50 overflow-x-hidden border-b border-gray-200 relative">
+          <Background />
           <Header main />
-          <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
+          <div class="relative max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
             <h1 class="font-extrabold text-5xl leading-10 tracking-tight text-gray-900">
               Deno
             </h1>
@@ -72,9 +74,18 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
               <a class="link" href="/manual/tools">实用工具</a>，例如依赖检查 (
               <a class="link" href="/manual/tools/dependency_inspector">
                 <InlineCode>deno info</InlineCode>
+<<<<<<< HEAD
               </a>) 和代码格式化 (<a class="link" href="/manual/tools/formatter">
                 <InlineCode>deno fmt</InlineCode>
               </a>)。
+=======
+              </a>
+              ) and a code formatter (
+              <a class="link" href="/manual/tools/formatter">
+                <InlineCode>deno fmt</InlineCode>
+              </a>
+              ).
+>>>>>>> cca039e845e81a08d9148500b7a11fdeb2f869b8
             </li>
             <li>
               自带一套经过审查 (安全审计) 的标准模块，并保证了代码与 Deno 完全兼容：{" "}
@@ -123,8 +134,17 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8">
           <p class="my-4 text-gray-700">
+<<<<<<< HEAD
             你可以在 <a class="link" href="/manual">参考手册</a>{" "}
             中找到“深入介绍”、“环境搭建”、“代码示例”等内容。
+=======
+            You can find a more in depth introduction, examples, and environment
+            setup guides in{" "}
+            <a class="link" href="/manual">
+              the manual
+            </a>
+            .
+>>>>>>> cca039e845e81a08d9148500b7a11fdeb2f869b8
           </p>
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
@@ -141,9 +161,20 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             网站找到。
           </p>
           <p class="my-4 text-gray-700">
+<<<<<<< HEAD
             Deno 自带的 <a class="link" href="/manual">参考手册</a>{" "}
             包含了关于 Deno Runtime 更复杂功能的深入解析,、Deno 内部功能的详细信息、如何在您自己的应用程序中嵌入 Deno
             以及如何使用 Rust 编写 Deno 插件。
+=======
+            Deno comes with{" "}
+            <a class="link" href="/manual">
+              a manual
+            </a>{" "}
+            which contains more in depth explanations about the more complex
+            functions of the runtime, an introduction to the concepts that Deno
+            is built on, details about the internals of Deno, how to embed Deno
+            in your own application and how to extend Deno using Rust plugins.
+>>>>>>> cca039e845e81a08d9148500b7a11fdeb2f869b8
           </p>
           <p class="my-4 text-gray-700">
             该手册还包含有关 Deno 提供的内置工具的信息。
@@ -164,8 +195,17 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             仓库。
           </p>
           <p class="my-4 text-gray-700">
+<<<<<<< HEAD
             这些标准模块托管在 <a class="link" href="/std">deno.js.cn/std</a>{" "}
             上，并且同所有其他的兼容 Deno 的 ES 模块一样通过 URL 进行分发。
+=======
+            These standard modules are hosted at{" "}
+            <a class="link" href="/std">
+              deno.land/std
+            </a>{" "}
+            and are distributed via URLs like all other ES modules that are
+            compatible with Deno.
+>>>>>>> cca039e845e81a08d9148500b7a11fdeb2f869b8
           </p>
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
@@ -198,6 +238,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             <a class="link" href="/manual/tools/dependency_inspector">
               <InlineCode>deno info</InlineCode>
             </a>{" "}
+<<<<<<< HEAD
             和{" "}
             <a
               class="link"
@@ -213,6 +254,26 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           <p class="my-4 text-gray-700">
             deno.land 还为用于 Deno 的 ES 模块提供简单的公共托管服务。 位于{" "}
             <a class="link" href="/x">deno.js.cn/x</a>。
+=======
+            and{" "}
+            <a class="link" href="/manual/tools/documentation_generator">
+              <InlineCode>deno doc</InlineCode>
+            </a>
+            . deno.land also provides a web UI for viewing module documentation.
+            It is available at{" "}
+            <a href="https://doc.deno.land" class="link">
+              doc.deno.land
+            </a>
+            .
+          </p>
+          <p class="my-4 text-gray-700">
+            deno.land also provides a simple public hosting service for ES
+            modules that work with Deno. It can be found at{" "}
+            <a class="link" href="/x">
+              deno.land/x
+            </a>
+            .
+>>>>>>> cca039e845e81a08d9148500b7a11fdeb2f869b8
           </p>
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
@@ -223,43 +284,47 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           </a>
           <p class="my-4 text-gray-700">
             Deno comes with a robust{" "}
-            <a class="link" href="/manual/tools">set of tools</a>, so you can
-            spend less time searching and evaluating third party modules, and
-            more time writing code and being productive. Here are a few
-            examples.
+            <a class="link" href="/manual/tools">
+              set of tools
+            </a>
+            , so you can spend less time searching and evaluating third party
+            modules, and more time writing code and being productive. Here are a
+            few examples.
           </p>
           <p class="my-4 text-gray-700">
-            <a class="link" href="/manual/tools/linter">Lint</a>{" "}
+            <a class="link" href="/manual/tools/linter">
+              Lint
+            </a>{" "}
             all JS/TS files in the current directory and subdirectories:
           </p>
           <p>
-            <CodeBlock
-              code={"deno lint\nChecked 54 files"}
-              language="bash"
-            />
+            <CodeBlock code={"deno lint\nChecked 54 files"} language="bash" />
           </p>
           <p class="my-4 text-gray-700">
-            <a class="link" href="/manual/tools/formatter">Format</a>{" "}
+            <a class="link" href="/manual/tools/formatter">
+              Format
+            </a>{" "}
             all supported files in the current directory and subdirectories:
           </p>
           <p>
-            <CodeBlock
-              code={"deno fmt\nChecked 46 files"}
-              language="bash"
-            />
+            <CodeBlock code={"deno fmt\nChecked 46 files"} language="bash" />
           </p>
           <p class="my-4 text-gray-700">
-            Run a <a class="link" href="/manual/tools/testing">test</a>:
+            Run a{" "}
+            <a class="link" href="/manual/tools/testing">
+              test
+            </a>
+            :
           </p>
           <p>
-            <CodeBlock
-              code={denoTestExample}
-              language="bash"
-            />
+            <CodeBlock code={denoTestExample} language="bash" />
           </p>
           <p class="my-4 text-gray-700">
             For the full list of tools and their options, see{" "}
-            <a href="/manual/tools" class="link">here</a>.
+            <a href="/manual/tools" class="link">
+              here
+            </a>
+            .
           </p>
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
@@ -305,7 +370,8 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             For more examples, check out{" "}
             <a class="link" href="https://examples.deno.land">
               examples.deno.land
-            </a>.
+            </a>
+            .
           </p>
         </div>
         <div class="mt-20">
