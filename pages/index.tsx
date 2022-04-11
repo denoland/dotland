@@ -74,18 +74,9 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
               <a class="link" href="/manual/tools">实用工具</a>，例如依赖检查 (
               <a class="link" href="/manual/tools/dependency_inspector">
                 <InlineCode>deno info</InlineCode>
-<<<<<<< HEAD
               </a>) 和代码格式化 (<a class="link" href="/manual/tools/formatter">
                 <InlineCode>deno fmt</InlineCode>
               </a>)。
-=======
-              </a>
-              ) and a code formatter (
-              <a class="link" href="/manual/tools/formatter">
-                <InlineCode>deno fmt</InlineCode>
-              </a>
-              ).
->>>>>>> cca039e845e81a08d9148500b7a11fdeb2f869b8
             </li>
             <li>
               自带一套经过审查 (安全审计) 的标准模块，并保证了代码与 Deno 完全兼容：{" "}
@@ -134,17 +125,8 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8">
           <p class="my-4 text-gray-700">
-<<<<<<< HEAD
             你可以在 <a class="link" href="/manual">参考手册</a>{" "}
             中找到“深入介绍”、“环境搭建”、“代码示例”等内容。
-=======
-            You can find a more in depth introduction, examples, and environment
-            setup guides in{" "}
-            <a class="link" href="/manual">
-              the manual
-            </a>
-            .
->>>>>>> cca039e845e81a08d9148500b7a11fdeb2f869b8
           </p>
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
@@ -161,20 +143,9 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             网站找到。
           </p>
           <p class="my-4 text-gray-700">
-<<<<<<< HEAD
             Deno 自带的 <a class="link" href="/manual">参考手册</a>{" "}
             包含了关于 Deno Runtime 更复杂功能的深入解析,、Deno 内部功能的详细信息、如何在您自己的应用程序中嵌入 Deno
             以及如何使用 Rust 编写 Deno 插件。
-=======
-            Deno comes with{" "}
-            <a class="link" href="/manual">
-              a manual
-            </a>{" "}
-            which contains more in depth explanations about the more complex
-            functions of the runtime, an introduction to the concepts that Deno
-            is built on, details about the internals of Deno, how to embed Deno
-            in your own application and how to extend Deno using Rust plugins.
->>>>>>> cca039e845e81a08d9148500b7a11fdeb2f869b8
           </p>
           <p class="my-4 text-gray-700">
             该手册还包含有关 Deno 提供的内置工具的信息。
@@ -195,17 +166,8 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             仓库。
           </p>
           <p class="my-4 text-gray-700">
-<<<<<<< HEAD
             这些标准模块托管在 <a class="link" href="/std">deno.js.cn/std</a>{" "}
             上，并且同所有其他的兼容 Deno 的 ES 模块一样通过 URL 进行分发。
-=======
-            These standard modules are hosted at{" "}
-            <a class="link" href="/std">
-              deno.land/std
-            </a>{" "}
-            and are distributed via URLs like all other ES modules that are
-            compatible with Deno.
->>>>>>> cca039e845e81a08d9148500b7a11fdeb2f869b8
           </p>
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
@@ -238,7 +200,6 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             <a class="link" href="/manual/tools/dependency_inspector">
               <InlineCode>deno info</InlineCode>
             </a>{" "}
-<<<<<<< HEAD
             和{" "}
             <a
               class="link"
@@ -254,26 +215,6 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           <p class="my-4 text-gray-700">
             deno.land 还为用于 Deno 的 ES 模块提供简单的公共托管服务。 位于{" "}
             <a class="link" href="/x">deno.js.cn/x</a>。
-=======
-            and{" "}
-            <a class="link" href="/manual/tools/documentation_generator">
-              <InlineCode>deno doc</InlineCode>
-            </a>
-            . deno.land also provides a web UI for viewing module documentation.
-            It is available at{" "}
-            <a href="https://doc.deno.land" class="link">
-              doc.deno.land
-            </a>
-            .
-          </p>
-          <p class="my-4 text-gray-700">
-            deno.land also provides a simple public hosting service for ES
-            modules that work with Deno. It can be found at{" "}
-            <a class="link" href="/x">
-              deno.land/x
-            </a>
-            .
->>>>>>> cca039e845e81a08d9148500b7a11fdeb2f869b8
           </p>
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
