@@ -8,6 +8,7 @@ import { Footer } from "../components/Footer.tsx";
 import { InlineCode } from "../components/InlineCode.tsx";
 import { Header } from "../components/Header.tsx";
 import versions from "../versions.json" assert { type: "json" };
+import { Background } from "../components/HeroBackground.tsx";
 
 export default function Home() {
   const complexExampleProgram = `import { serve } from "https://deno.land/std@${
@@ -32,9 +33,10 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
         <title>Deno - 现代的 JavaScript 和 TypeScript 运行时</title>
       </Head>
       <div class="bg-white">
-        <div class="bg-gray-50 border-b border-gray-200">
+        <div class="bg-gray-50 overflow-x-hidden border-b border-gray-200 relative">
+          <Background />
           <Header main />
-          <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
+          <div class="relative max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
             <h1 class="font-extrabold text-5xl leading-10 tracking-tight text-gray-900">
               Deno
             </h1>
@@ -223,43 +225,47 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           </a>
           <p class="my-4 text-gray-700">
             Deno comes with a robust{" "}
-            <a class="link" href="/manual/tools">set of tools</a>, so you can
-            spend less time searching and evaluating third party modules, and
-            more time writing code and being productive. Here are a few
-            examples.
+            <a class="link" href="/manual/tools">
+              set of tools
+            </a>
+            , so you can spend less time searching and evaluating third party
+            modules, and more time writing code and being productive. Here are a
+            few examples.
           </p>
           <p class="my-4 text-gray-700">
-            <a class="link" href="/manual/tools/linter">Lint</a>{" "}
+            <a class="link" href="/manual/tools/linter">
+              Lint
+            </a>{" "}
             all JS/TS files in the current directory and subdirectories:
           </p>
           <p>
-            <CodeBlock
-              code={"deno lint\nChecked 54 files"}
-              language="bash"
-            />
+            <CodeBlock code={"deno lint\nChecked 54 files"} language="bash" />
           </p>
           <p class="my-4 text-gray-700">
-            <a class="link" href="/manual/tools/formatter">Format</a>{" "}
+            <a class="link" href="/manual/tools/formatter">
+              Format
+            </a>{" "}
             all supported files in the current directory and subdirectories:
           </p>
           <p>
-            <CodeBlock
-              code={"deno fmt\nChecked 46 files"}
-              language="bash"
-            />
+            <CodeBlock code={"deno fmt\nChecked 46 files"} language="bash" />
           </p>
           <p class="my-4 text-gray-700">
-            Run a <a class="link" href="/manual/tools/testing">test</a>:
+            Run a{" "}
+            <a class="link" href="/manual/tools/testing">
+              test
+            </a>
+            :
           </p>
           <p>
-            <CodeBlock
-              code={denoTestExample}
-              language="bash"
-            />
+            <CodeBlock code={denoTestExample} language="bash" />
           </p>
           <p class="my-4 text-gray-700">
             For the full list of tools and their options, see{" "}
-            <a href="/manual/tools" class="link">here</a>.
+            <a href="/manual/tools" class="link">
+              here
+            </a>
+            .
           </p>
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
@@ -305,7 +311,8 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             For more examples, check out{" "}
             <a class="link" href="https://examples.deno.land">
               examples.deno.land
-            </a>.
+            </a>
+            .
           </p>
         </div>
         <div class="mt-20">
