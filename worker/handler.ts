@@ -192,7 +192,7 @@ export function extractAltLineNumberReference(
 async function proxyFile(url: URL, remoteUrl: string): Promise<Response> {
   const proxyUrl = new URL(remoteUrl + url.pathname + url.search).href;
 
-  const proxyRequest = new Request(proxyUrl);
+  const proxyRequest = new Request(proxyUrl, { redirect: "manual" });
   const proxyResponse = await fetchWithRetry(proxyRequest);
 
   return proxyResponse;
