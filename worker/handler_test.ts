@@ -21,30 +21,28 @@ Deno.test({
 });
 
 Deno.test({
-  name: "/std/version.ts with Accept: 'text/html' responds with React html",
+  name: "/std/version.ts with Accept: 'text/html' responds with redirect",
   async fn() {
     const result = await handleRequest(
       new Request("https://deno.land/std/version.ts", {
         headers: { Accept: BROWSER_ACCEPT },
       }),
     );
-    assert(result.headers.get("Content-Type")?.includes("text/html"));
-    const text = await result.text();
-    assert(text.includes("Deno"));
+    assertEquals(result.status, 302);
+    assert(result.headers.get("Location")?.includes("@"));
   },
 });
 
 Deno.test({
-  name: "/x/std/version.ts with Accept: 'text/html' responds with React html",
+  name: "/x/std/version.ts with Accept: 'text/html' responds with redirect",
   async fn() {
     const result = await handleRequest(
       new Request("https://deno.land/x/std/version.ts", {
         headers: { Accept: BROWSER_ACCEPT },
       }),
     );
-    assert(result.headers.get("Content-Type")?.includes("text/html"));
-    const text = await result.text();
-    assert(text.includes("Deno"));
+    assertEquals(result.status, 302);
+    assert(result.headers.get("Location")?.includes("@"));
   },
 });
 
