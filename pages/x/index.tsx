@@ -3,7 +3,6 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import {
-  ClassAttributes,
   emojify,
   Fragment,
   h,
@@ -19,7 +18,7 @@ import { InlineCode } from "../../components/InlineCode.tsx";
 
 import { getStats, listModules } from "../../util/registry_utils.ts";
 import * as pageutils from "../../util/pagination_utils.ts";
-import { ComponentChildren } from "https://x.lcas.dev/preact@10.5.12/mod.d.ts";
+import { Pagination } from "../../components/Pagination.tsx";
 
 const PER_PAGE = 20;
 
@@ -32,15 +31,6 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
     () => listModules(page, PER_PAGE, query),
   );
   const stats = useData("stats", getStats);
-
-  function toPage(n: number): string {
-    const params = new URLSearchParams();
-    if (query) {
-      params.set("query", query);
-    }
-    params.set("page", n.toString());
-    return "/x?" + params.toString();
-  }
 
   return (
     <>
@@ -133,7 +123,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                         }))}
                       />
                     )}
-                  {!query
+                  {!query && resp.results.length
                     ? (() => {
                       const pageCount = pageutils.pageCount({
                         totalCount: resp.totalCount,
@@ -145,12 +135,9 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                         totalCount: resp.totalCount,
                         perPage: PER_PAGE,
                       });
-                      const centerPage = Math.max(
-                        4,
-                        Math.min(page, pageCount - 3),
-                      );
 
                       return (
+<<<<<<< HEAD
                         <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
                           <div class="flex-1 flex justify-between items-center sm:hidden">
                             <MaybeA
@@ -343,6 +330,18 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                             </div>
                           </div>
                         </div>
+=======
+                        <Pagination
+                          {...{
+                            currentPage: page,
+                            hasNext,
+                            hasPrevious,
+                            pageCount,
+                            perPage: PER_PAGE,
+                            response: resp,
+                          }}
+                        />
+>>>>>>> d633a47c74b8b6543d9061386793a55988e43bad
                       );
                     })()
                     : null}
@@ -595,14 +594,4 @@ function ModuleList({
       })}
     </ul>
   );
-}
-
-//  find proper typings
-// deno-lint-ignore no-explicit-any
-function MaybeA({ disabled, children, ...props }: any & {
-  disabled?: boolean;
-  children: ComponentChildren;
-}) {
-  const Tag = disabled ? "div" : "a";
-  return <Tag {...props}>{children}</Tag>;
 }
