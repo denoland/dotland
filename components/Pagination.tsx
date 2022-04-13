@@ -45,7 +45,7 @@ export function Pagination(
               : "text-gray-500 cursor-default"
           } transition ease-in-out duration-150`}
         >
-          Previous
+          上一页
         </MaybeA>
         <div class="text-base leading-6 text-gray-500">
           {currentPage}/{pageCount}
@@ -59,25 +59,25 @@ export function Pagination(
               : "text-gray-500 cursor-default"
           } transition ease-in-out duration-150`}
         >
-          Next
+          下一页
         </MaybeA>
       </div>
       <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
         <div>
           <p class="text-sm leading-5 text-gray-700">
-            Showing{" "}
+            显示第{" "}
             <span class="font-medium">
               {(currentPage - 1) * perPage + 1}
             </span>{" "}
-            to{" "}
+            到{" "}
             <span class="font-medium">
               {(currentPage - 1) * perPage + response.results.length}
             </span>{" "}
-            of{" "}
+            ，共{" "}
             <span class="font-medium">
               {response.totalCount}
             </span>{" "}
-            results
+            个模块
           </p>
         </div>
         <div>
