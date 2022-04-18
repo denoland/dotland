@@ -43,69 +43,6 @@ export function Pagination(
 
   return (
     <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-<<<<<<< HEAD
-      <div class="flex-1 flex justify-between items-center sm:hidden">
-        <MaybeA
-          disabled={!hasPrevious}
-          href={toPage(currentPage - 1)}
-          class={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md bg-white ${
-            hasPrevious
-              ? "text-gray-700 hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700"
-              : "text-gray-500 cursor-default"
-          } transition ease-in-out duration-150`}
-        >
-          上一页
-        </MaybeA>
-        <div class="text-base leading-6 text-gray-500">
-          {currentPage}/{pageCount}
-        </div>
-        <MaybeA
-          disabled={!hasNext}
-          href={toPage(currentPage + 1)}
-          class={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md bg-white ml-4 ${
-            hasNext
-              ? "text-gray-700 hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700"
-              : "text-gray-500 cursor-default"
-          } transition ease-in-out duration-150`}
-        >
-          下一页
-        </MaybeA>
-      </div>
-      <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-        <div>
-          <p class="text-sm leading-5 text-gray-700">
-            显示第{" "}
-            <span class="font-medium">
-              {(currentPage - 1) * perPage + 1}
-            </span>{" "}
-            到{" "}
-            <span class="font-medium">
-              {(currentPage - 1) * perPage + response.results.length}
-            </span>{" "}
-            ，共{" "}
-            <span class="font-medium">
-              {response.totalCount}
-            </span>{" "}
-            个模块
-          </p>
-        </div>
-        <div>
-          <nav class="relative z-0 inline-flex shadow-sm">
-            <MaybeA
-              disabled={!hasPrevious}
-              href={toPage(currentPage - 1)}
-              class={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium ${
-                hasPrevious
-                  ? "text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500"
-                  : "text-gray-300 cursor-default"
-              } transition ease-in-out duration-150`}
-              aria-label="Previous"
-            >
-              <svg
-                class="h-5 w-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-=======
       {!query
         ? (
           <>
@@ -114,9 +51,8 @@ export function Pagination(
                 disabled={!hasPrevious}
                 href={toPage(currentPage - 1)}
                 class={getNavButtonStyles(!hasPrevious)}
->>>>>>> 46462c8a3c3ca830d49dfa110f26d3231231d334
               >
-                Previous
+                上一页
               </MaybeA>
               <div class="text-base leading-6 text-gray-500">
                 {currentPage}/{pageCount}
@@ -126,25 +62,25 @@ export function Pagination(
                 href={toPage(currentPage + 1)}
                 class={`${getNavButtonStyles(!hasNext)} ml-4`}
               >
-                Next
+                下一页
               </MaybeA>
             </div>
             <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
               <div>
                 <p class="text-sm leading-5 text-gray-700">
-                  Showing{" "}
+                  显示第{" "}
                   <span class="font-medium">
                     {(currentPage - 1) * perPage + 1}
                   </span>{" "}
-                  to{" "}
+                  到{" "}
                   <span class="font-medium">
                     {(currentPage - 1) * perPage + response.results.length}
                   </span>{" "}
-                  of{" "}
+                  共{" "}
                   <span class="font-medium">
                     {response.totalCount}
                   </span>{" "}
-                  results
+                  条结果
                 </p>
               </div>
               <div>
@@ -301,7 +237,7 @@ export function Pagination(
               href={toPage(currentPage + 1)}
               class={getNavButtonStyles(false)}
             >
-              Next
+              下一页
             </MaybeA>
           </div>
         )}
