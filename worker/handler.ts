@@ -9,6 +9,7 @@ import type { ConnInfo } from "https://deno.land/std@0.112.0/http/server.ts";
 import { createReporter, Reporter } from "https://deno.land/x/g_a@0.1.2/mod.ts";
 import { accepts } from "https://deno.land/x/oak_commons@0.1.1/negotiation.ts";
 import type { Event } from "./ga4.ts";
+import { isDocument } from "./ga4.ts";
 import { formatStatus, GA4Report, isRedirect, isServerError } from "./ga4.ts";
 
 const REMOTE_URL = "https://dotland-fresh.deno.dev";
@@ -99,7 +100,7 @@ function ga4(
 
     // If the visitor is using a web browser, only create events when we serve
     // a top level documents or download; skip assets like css, images, fonts.
-    if (!bot && !isNonAssetRequest(request, response) && error == null) {
+    if (!bot && !isDocument(request, response) && error == null) {
       return;
     }
 

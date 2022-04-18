@@ -390,3 +390,60 @@ async function toDigest(msg: string): Promise<string> {
     b.toString(16).padStart(2, "0")
   ).join("");
 }
+
+/* Heuristically attempts to determine whether a given request-response
+ * transaction was fetching a top level document (=> its url goes in the
+ * browser's url bar), or whether it was accessing a subresource. Typically HTML
+ * files are documents, and images/fonts/javascript/css are all subresources.
+ * There's a number of edge cases:
+ *   - A PDF file rendered by the browser    : document
+ *   - A binary file that gets downloaded    : document
+ *   - Image or video opened in new tab      : document
+ *   - HTML form submitted with POST request : document
+ *   - HTML loaded into IFrame               : subresource
+ *   - Use of `fetch()` or `XMLHttpRequest`  : subresource
+ */
+export function isDocument(request: Request, response: Response): boolean {
+  // If the client supports fetch metadata request headers (all web browsers
+  // except Safari do), this is easy and precise.
+  const fetchMode = request.headers.get("sec-fetch-mode");
+  if (fetchMode != null) {
+    return fetchMode === "navigate";
+  }
+
+  // A downloaded file is a document.
+  const disposition = response.headers.get("content-disposition");
+  if (disposition != null && /^attachment\b/i.test(disposition)) {
+    return true;
+  }
+
+  // If the client prefers text/html over anything, it is probably attempting to
+  // load a top level document. There might be false positives though, e.g. when
+  // the browser is loading an iframe, but we have no choice.
+  const accept = request.headers.get("accept");
+  if (accept != null && /^text\/html\b/i.test(accept)) {
+    return true;
+  }
+
+  // If the client asked for "*/*" or didn't include an `accept` header at all,
+  // a number of things could be going on:
+  //   - The client doesn't support HTML (e.g. curl) : document
+  //   - The user clicked "save link as..."          : document
+  //   - fetch("...") was called                     : subresource
+  //   - A <link href="..."> element in the document : subresource
+  // We try to detect dumb clients that don't understand HTML.
+  const { method } = request;
+  const referer = request.headers.get("referer");
+  const userAgent = request.headers.get("user-agent");
+  if (
+    method === "GET" &&
+    referer == null &&
+    (userAgent == null || !userAgent.startsWith("Mozilla/")) &&
+    (accept == null || accept === "*/*")
+  ) {
+    return true;
+  }
+
+  // Give up.
+  return false;
+}
