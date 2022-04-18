@@ -123,7 +123,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                         }))}
                       />
                     )}
-                  {!query && resp.results.length
+                  {resp.results.length
                     ? (() => {
                       const pageCount = pageutils.pageCount({
                         totalCount: resp.totalCount,
@@ -145,6 +145,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                             pageCount,
                             perPage: PER_PAGE,
                             response: resp,
+                            query,
                           }}
                         />
                       );
