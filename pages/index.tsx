@@ -8,6 +8,7 @@ import { Footer } from "../components/Footer.tsx";
 import { InlineCode } from "../components/InlineCode.tsx";
 import { Header } from "../components/Header.tsx";
 import versions from "../versions.json" assert { type: "json" };
+import { Background } from "../components/HeroBackground.tsx";
 
 export default function Home() {
   const complexExampleProgram = `import { serve } from "https://deno.land/std@${
@@ -17,15 +18,25 @@ export default function Home() {
 console.log("http://localhost:8000/");
 serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
 
+  const denoTestExample =
+    `deno test https://deno.land/std@0.132.0/testing/chai_example.ts
+running 3 tests from https://deno.land/std@0.132.0/testing/chai_example.ts
+test we can make chai assertions ... ok (8ms)
+test we can make chai expectations ... ok (2ms)
+test we can use chai should style ... ok (4ms)
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms)`;
+
   return (
     <div>
       <Head>
         <title>Deno - A modern runtime for JavaScript and TypeScript</title>
       </Head>
       <div class="bg-white">
-        <div class="bg-gray-50 border-b border-gray-200">
+        <div class="bg-gray-50 overflow-x-hidden border-b border-gray-200 relative">
+          <Background />
           <Header main />
-          <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
+          <div class="relative max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
             <h1 class="font-extrabold text-5xl leading-10 tracking-tight text-gray-900">
               Deno
             </h1>
@@ -61,9 +72,19 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
             <li>Supports TypeScript out of the box.</li>
             <li>Ships only a single executable file.</li>
             <li>
-              Has built-in utilities like a dependency inspector (
-              <InlineCode>deno info</InlineCode>) and a code formatter (
-              <InlineCode>deno fmt</InlineCode>).
+              Has{" "}
+              <a class="link" href="/manual/tools">
+                built-in utilities
+              </a>{" "}
+              like a dependency inspector (
+              <a class="link" href="/manual/tools/dependency_inspector">
+                <InlineCode>deno info</InlineCode>
+              </a>
+              ) and a code formatter (
+              <a class="link" href="/manual/tools/formatter">
+                <InlineCode>deno fmt</InlineCode>
+              </a>
+              ).
             </li>
             <li>
               Has a set of reviewed (audited) standard modules that are
@@ -114,7 +135,11 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8">
           <p class="my-4 text-gray-700">
             You can find a more in depth introduction, examples, and environment
-            setup guides in <a class="link" href="/manual">the manual</a>.
+            setup guides in{" "}
+            <a class="link" href="/manual">
+              the manual
+            </a>
+            .
           </p>
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
@@ -131,7 +156,10 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
             .
           </p>
           <p class="my-4 text-gray-700">
-            Deno comes with <a class="link" href="/manual">a manual</a>{" "}
+            Deno comes with{" "}
+            <a class="link" href="/manual">
+              a manual
+            </a>{" "}
             which contains more in depth explanations about the more complex
             functions of the runtime, an introduction to the concepts that Deno
             is built on, details about the internals of Deno, how to embed Deno
@@ -160,7 +188,9 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
           </p>
           <p class="my-4 text-gray-700">
             These standard modules are hosted at{" "}
-            <a class="link" href="/std">deno.land/std</a>{" "}
+            <a class="link" href="/std">
+              deno.land/std
+            </a>{" "}
             and are distributed via URLs like all other ES modules that are
             compatible with Deno.
           </p>
@@ -193,9 +223,16 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
           </p>
           <p class="my-4 text-gray-700">
             To make it easier to consume third party modules Deno provides some
-            built in tooling like <InlineCode>deno info</InlineCode> and{" "}
-            <InlineCode>deno doc</InlineCode>. deno.land also provides a web UI
-            for viewing module documentation. It is available at{" "}
+            built in tooling like{" "}
+            <a class="link" href="/manual/tools/dependency_inspector">
+              <InlineCode>deno info</InlineCode>
+            </a>{" "}
+            and{" "}
+            <a class="link" href="/manual/tools/documentation_generator">
+              <InlineCode>deno doc</InlineCode>
+            </a>
+            . deno.land also provides a web UI for viewing module documentation.
+            It is available at{" "}
             <a href="https://doc.deno.land" class="link">
               doc.deno.land
             </a>
@@ -204,7 +241,61 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
           <p class="my-4 text-gray-700">
             deno.land also provides a simple public hosting service for ES
             modules that work with Deno. It can be found at{" "}
-            <a class="link" href="/x">deno.land/x</a>.
+            <a class="link" href="/x">
+              deno.land/x
+            </a>
+            .
+          </p>
+        </div>
+        <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
+          <a class="hover:underline" href="#toolchain">
+            <h3 class="font-bold text-xl" id="toolchain">
+              Built-in Toolchain
+            </h3>
+          </a>
+          <p class="my-4 text-gray-700">
+            Deno comes with a robust{" "}
+            <a class="link" href="/manual/tools">
+              set of tools
+            </a>
+            , so you can spend less time searching and evaluating third party
+            modules, and more time writing code and being productive. Here are a
+            few examples.
+          </p>
+          <p class="my-4 text-gray-700">
+            <a class="link" href="/manual/tools/linter">
+              Lint
+            </a>{" "}
+            all JS/TS files in the current directory and subdirectories:
+          </p>
+          <p>
+            <CodeBlock code={"deno lint\nChecked 54 files"} language="bash" />
+          </p>
+          <p class="my-4 text-gray-700">
+            <a class="link" href="/manual/tools/formatter">
+              Format
+            </a>{" "}
+            all supported files in the current directory and subdirectories:
+          </p>
+          <p>
+            <CodeBlock code={"deno fmt\nChecked 46 files"} language="bash" />
+          </p>
+          <p class="my-4 text-gray-700">
+            Run a{" "}
+            <a class="link" href="/manual/tools/testing">
+              test
+            </a>
+            :
+          </p>
+          <p>
+            <CodeBlock code={denoTestExample} language="bash" />
+          </p>
+          <p class="my-4 text-gray-700">
+            For the full list of tools and their options, see{" "}
+            <a href="/manual/tools" class="link">
+              here
+            </a>
+            .
           </p>
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
@@ -250,7 +341,8 @@ serve((req) => new Response("Hello World\\n"), { port: 8000 });`;
             For more examples, check out{" "}
             <a class="link" href="https://examples.deno.land">
               examples.deno.land
-            </a>.
+            </a>
+            .
           </p>
         </div>
         <div class="mt-20">

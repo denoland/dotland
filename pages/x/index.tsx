@@ -3,7 +3,6 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import {
-  ClassAttributes,
   emojify,
   Fragment,
   h,
@@ -19,7 +18,7 @@ import { InlineCode } from "../../components/InlineCode.tsx";
 
 import { getStats, listModules } from "../../util/registry_utils.ts";
 import * as pageutils from "../../util/pagination_utils.ts";
-import { ComponentChildren } from "https://x.lcas.dev/preact@10.5.12/mod.d.ts";
+import { Pagination } from "../../components/Pagination.tsx";
 
 const PER_PAGE = 20;
 
@@ -32,15 +31,6 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
     () => listModules(page, PER_PAGE, query),
   );
   const stats = useData("stats", getStats);
-
-  function toPage(n: number): string {
-    const params = new URLSearchParams();
-    if (query) {
-      params.set("query", query);
-    }
-    params.set("page", n.toString());
-    return "/x?" + params.toString();
-  }
 
   return (
     <>
@@ -119,8 +109,15 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                 <div class="bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4">
                   {resp.results.length == 0
                     ? (
-                      <div class="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
-                        No modules found
+                      <div class="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500">
+                        No modules found. Please let us know what you're looking
+                        for by{" "}
+                        <a
+                          class="link"
+                          href="https://github.com/denoland/wanted_modules/issues"
+                        >
+                          opening an issue here
+                        </a>.
                       </div>
                     )
                     : (
@@ -131,7 +128,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                         }))}
                       />
                     )}
-                  {!query
+                  {resp.results.length
                     ? (() => {
                       const pageCount = pageutils.pageCount({
                         totalCount: resp.totalCount,
@@ -143,204 +140,19 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                         totalCount: resp.totalCount,
                         perPage: PER_PAGE,
                       });
-                      const centerPage = Math.max(
-                        4,
-                        Math.min(page, pageCount - 3),
-                      );
 
                       return (
-                        <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-                          <div class="flex-1 flex justify-between items-center sm:hidden">
-                            <MaybeA
-                              disabled={!hasPrevious}
-                              href={toPage(page - 1)}
-                              class={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md bg-white ${
-                                hasPrevious
-                                  ? "text-gray-700 hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700"
-                                  : "text-gray-500 cursor-default"
-                              } transition ease-in-out duration-150`}
-                            >
-                              Previous
-                            </MaybeA>
-                            <div class="text-base leading-6 text-gray-500">
-                              {page}/{pageCount}
-                            </div>
-                            <MaybeA
-                              disabled={!hasNext}
-                              href={toPage(page + 1)}
-                              class={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md bg-white ml-4 ${
-                                hasNext
-                                  ? "text-gray-700 hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700"
-                                  : "text-gray-500 cursor-default"
-                              } transition ease-in-out duration-150`}
-                            >
-                              Next
-                            </MaybeA>
-                          </div>
-                          <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-                            <div>
-                              <p class="text-sm leading-5 text-gray-700">
-                                Showing{" "}
-                                <span class="font-medium">
-                                  {(page - 1) * PER_PAGE + 1}
-                                </span>{" "}
-                                to{" "}
-                                <span class="font-medium">
-                                  {(page - 1) * PER_PAGE + resp.results.length}
-                                </span>{" "}
-                                of{" "}
-                                <span class="font-medium">
-                                  {resp.totalCount}
-                                </span>{" "}
-                                results
-                              </p>
-                            </div>
-                            <div>
-                              <nav class="relative z-0 inline-flex shadow-sm">
-                                <MaybeA
-                                  disabled={!hasPrevious}
-                                  href={toPage(page - 1)}
-                                  class={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium ${
-                                    hasPrevious
-                                      ? "text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500"
-                                      : "text-gray-300 cursor-default"
-                                  } transition ease-in-out duration-150`}
-                                  aria-label="Previous"
-                                >
-                                  <svg
-                                    class="h-5 w-5"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                  >
-                                    <path
-                                      fillRule="evenodd"
-                                      d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                      clipRule="evenodd"
-                                    />
-                                  </svg>
-                                </MaybeA>
-                                <a
-                                  href={toPage(1)}
-                                  class={`inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
-                                    page === 1
-                                      ? "bg-gray-100 font-semibold text-gray-800"
-                                      : "bg-white font-medium text-gray-700"
-                                  } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
-                                >
-                                  1
-                                </a>
-                                {centerPage === 4
-                                  ? (
-                                    <>
-                                      <a
-                                        href={toPage(2)}
-                                        class={`hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
-                                          page === 2
-                                            ? "bg-gray-100 font-semibold text-gray-800"
-                                            : "bg-white font-medium text-gray-700"
-                                        } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
-                                      >
-                                        2
-                                      </a>
-                                      <span class="inline-flex md:hidden -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
-                                        ...
-                                      </span>
-                                    </>
-                                  )
-                                  : (
-                                    <span class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
-                                      ...
-                                    </span>
-                                  )}
-                                <a
-                                  href={toPage(centerPage - 1)}
-                                  class={`hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
-                                    page === centerPage - 1
-                                      ? "bg-gray-100 font-semibold text-gray-800"
-                                      : "bg-white font-medium text-gray-700"
-                                  } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
-                                >
-                                  {centerPage - 1}
-                                </a>
-                                <a
-                                  href={toPage(centerPage)}
-                                  class={`inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
-                                    page === centerPage
-                                      ? "bg-gray-100 font-semibold text-gray-800"
-                                      : "bg-white font-medium text-gray-700"
-                                  } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
-                                >
-                                  {centerPage}
-                                </a>
-                                <a
-                                  href={toPage(centerPage + 1)}
-                                  class={`hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
-                                    page === centerPage + 1
-                                      ? "bg-gray-100 font-semibold text-gray-800"
-                                      : "bg-white font-medium text-gray-700"
-                                  } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
-                                >
-                                  {centerPage + 1}
-                                </a>
-                                {centerPage === pageCount - 3
-                                  ? (
-                                    <>
-                                      <a
-                                        href={toPage(pageCount - 1)}
-                                        class={`hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
-                                          page === pageCount - 1
-                                            ? "bg-gray-100 font-semibold text-gray-800"
-                                            : "bg-white font-medium text-gray-700"
-                                        } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
-                                      >
-                                        {pageCount - 1}
-                                      </a>
-                                      <span class="inline-flex md:hidden -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
-                                        ...
-                                      </span>
-                                    </>
-                                  )
-                                  : (
-                                    <span class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
-                                      ...
-                                    </span>
-                                  )}
-                                <a
-                                  href={toPage(pageCount)}
-                                  class={`inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
-                                    page === pageCount
-                                      ? "bg-gray-100 font-semibold text-gray-800"
-                                      : "bg-white font-medium text-gray-700"
-                                  } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
-                                >
-                                  {pageCount}
-                                </a>
-                                <MaybeA
-                                  href={toPage(page + 1)}
-                                  disabled={!hasNext}
-                                  class={`-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium ${
-                                    hasNext
-                                      ? "text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500"
-                                      : "text-gray-300 cursor-default"
-                                  } transition ease-in-out duration-150`}
-                                  aria-label="Previous"
-                                >
-                                  <svg
-                                    class="h-5 w-5"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                  >
-                                    <path
-                                      fillRule="evenodd"
-                                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                      clipRule="evenodd"
-                                    />
-                                  </svg>
-                                </MaybeA>
-                              </nav>
-                            </div>
-                          </div>
-                        </div>
+                        <Pagination
+                          {...{
+                            currentPage: page,
+                            hasNext,
+                            hasPrevious,
+                            pageCount,
+                            perPage: PER_PAGE,
+                            response: resp,
+                            query,
+                          }}
+                        />
                       );
                     })()
                     : null}
@@ -438,6 +250,22 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                       prevent breaking programs that rely on this module.
                       Modules may be removed if there is a legal reason to do
                       (for example copyright infringement).
+                    </p>
+                  </dd>
+                </div>
+                <div class="mt-12">
+                  <dt class="text-lg leading-6 font-medium text-gray-900">
+                    I can't find a specific module. Help!
+                  </dt>
+                  <dd class="mt-2">
+                    <p class="text-base leading-6 text-gray-500">
+                      Please let us know which one by{" "}
+                      <a
+                        class="link"
+                        href="https://github.com/denoland/wanted_modules/issues"
+                      >
+                        opening an issue here
+                      </a>.
                     </p>
                   </dd>
                 </div>
@@ -577,14 +405,4 @@ function ModuleList({
       })}
     </ul>
   );
-}
-
-//  find proper typings
-// deno-lint-ignore no-explicit-any
-function MaybeA({ disabled, children, ...props }: any & {
-  disabled?: boolean;
-  children: ComponentChildren;
-}) {
-  const Tag = disabled ? "div" : "a";
-  return <Tag {...props}>{children}</Tag>;
 }
