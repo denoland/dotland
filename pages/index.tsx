@@ -11,7 +11,8 @@ import versions from "../versions.json" assert { type: "json" };
 import { Background } from "../components/HeroBackground.tsx";
 
 export default function Home() {
-  const complexExampleProgram = `import { serve } from "https://deno.land/std/http/server.ts";
+  const complexExampleProgram =
+    `import { serve } from "https://deno.land/std/http/server.ts";
 serve(req => new Response("Hello World\\n"));`;
 
   const denoTestExample =
