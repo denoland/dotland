@@ -1,0 +1,21 @@
+[
+  {
+    "image": "/images/showcase/netlify.png",
+    "title": "Netlify Edge Functions",
+    "link": "https://www.netlify.com/products/#netlify-edge-functions",
+    "logo": "https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/netlify.svg",
+    "github": "lambtron"
+  },
+  {
+    "image": "/images/showcase/supabase.png",
+    "title": "Supabase Edge Functions",
+    "link": "https://www.supabase.com/edge-functions",
+    "logo": "https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/supabase.svg"
+  },
+  {
+    "image": "/images/showcase/slack.png",
+    "title": "Run On Slack",
+    "link": "https://api.slack.com/future",
+    "logo": "https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/slack.svg"
+  }
+]
