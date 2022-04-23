@@ -315,6 +315,59 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             .
           </p>
         </div>
+        <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
+          <a class="hover:underline" href="#examples">
+            <h3 class="font-bold text-xl" id="examples">
+              Deno in Production
+            </h3>
+          </a>
+          <ol class="mt-5 ml-8 list-disc text-gray-700">
+            <li>
+              <a href="https://slack.com/" target="_blank">
+                <img
+                  class="h-4 inline-block"
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/slack.svg"
+                  alt="Slack"
+                  title="Slack"
+                />{" "}
+                <span class="link">Slack</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/" target="_blank">
+                <img
+                  class="h-4 inline-block"
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/github.svg"
+                  alt="GitHub"
+                  title="GitHub"
+                />{" "}
+                <span class="link">GitHub</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://netlify.com" target="_blank">
+                <img
+                  class="h-4 inline-block"
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/netlify.svg"
+                  alt="Netlify"
+                  title="Netlify"
+                />{" "}
+                <span class="link">Netlify</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://supabase.com" target="_blank">
+                <img
+                  class="h-4 inline-block"
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/supabase.svg"
+                  alt="Supabase"
+                  title="Supabase"
+                />{" "}
+                <span class="link">Supabase</span>
+              </a>
+            </li>
+          </ol>
+        </div>
         <div class="mt-20">
           <Footer simple />
         </div>
