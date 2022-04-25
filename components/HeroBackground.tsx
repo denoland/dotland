@@ -7,8 +7,8 @@ import { h } from "../deps.ts";
 export function Background() {
   return (
     <div class="pointer-events-none">
-      <BlueGradient class="absolute inset-0 hidden lg:block" />
-      <RedGradient class="absolute inset-0 left-10 hidden lg:block" />
+      <BlueGradient class="absolute inset-0" />
+      <RedGradient class="absolute inset-0 left-10" />
     </div>
   );
 }
