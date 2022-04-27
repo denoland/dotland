@@ -32,8 +32,13 @@ export function Footer({ simple }: { simple?: boolean }) {
           <FooterItem href="/translations">
             翻译
           </FooterItem>
+<<<<<<< HEAD
           <FooterItem href="https://github.com/denoland/deno/wiki#companies-interested-in-deno">
             对 Deno 感兴趣的公司
+=======
+          <FooterItem href="/showcase">
+            Showcase
+>>>>>>> f55f7c6844b4f719abfd2babc12eb892bf5b27f0
           </FooterItem>
         </nav>
         <div class="mt-9 flex justify-center">
