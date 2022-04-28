@@ -21,12 +21,12 @@ export default function ShowcasePage() {
   return (
     <>
       <Head>
-        <title>Showcase | Deno</title>
+        <title>案例展示 | Deno</title>
       </Head>
       <Header />
       <div class="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 mt-8 mb-24">
         <div class="max-w-screen-lg mx-auto">
-          <h4 class="text-4xl font-bold tracking-tight">Showcase</h4>
+          <h4 class="text-4xl font-bold tracking-tight">案例展示</h4>
           <p class="mt-4 text-lg">
             Check out some websites, apps, and other products built with Deno.
           </p>
