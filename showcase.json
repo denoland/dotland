@@ -1,0 +1,35 @@
+[
+  {
+    "image": "/images/showcase/netlify.png",
+    "title": "Netlify Edge Functions",
+    "link": "https://www.netlify.com/products/#netlify-edge-functions"
+  },
+  {
+    "image": "/images/showcase/supabase.png",
+    "title": "Supabase Edge Functions",
+    "link": "https://www.supabase.com/edge-functions"
+  },
+  {
+    "image": "/images/showcase/slack.png",
+    "title": "Run On Slack",
+    "link": "https://api.slack.com/future"
+  },
+  {
+    "image": "/images/showcase/fresh.png",
+    "title": "Fresh",
+    "link": "https://fresh.deno.dev/",
+    "github": "lucacasonato/fresh"
+  },
+  {
+    "image": "/images/showcase/ultra.png",
+    "title": "Ultra",
+    "link": "https://ultrajs.dev/",
+    "github": "exhibitionist-digital/ultra"
+  },
+  {
+    "image": "/images/showcase/lume.png",
+    "title": "Lume",
+    "link": "https://lume.land/",
+    "github": "lumeland/lume"
+  }
+]
