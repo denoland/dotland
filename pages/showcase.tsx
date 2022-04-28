@@ -61,7 +61,7 @@ function Item({ project }: { project: Project }) {
       </a>
       <div class="mt-4">
         <span class="text-lg">
-          <a href={project.title} class="">{project.title}</a>
+          <a href={project.link} class="">{project.title}</a>
         </span>
         {project.github && (
           <a
