@@ -56,7 +56,7 @@ function Item({ project }: { project: Project }) {
         <img
           src={project.image}
           alt={project.title}
-          class="object-cover shadow-lg rounded-lg h-40 w-72"
+          class="object-contain shadow-lg rounded-lg w-72"
         />
       </a>
       <div class="mt-4">
