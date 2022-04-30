@@ -28,7 +28,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
     const date = new Date(versions.next);
     const millis = date.getTime() - Date.now();
     const days = Math.ceil(millis / 1000 / 60 / 60 / 24);
-    return days;
+    return `${days} day${days > 1 ? "s" : ""}`;
   };
 
   return (
@@ -63,7 +63,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
               />
               <ReleaseNote
                 link="https://deno.land/manual/contributing/release_schedule"
-                value={`${daysUntilNextRelease()} days`}
+                value={daysUntilNextRelease()}
                 title="Until next release"
               />
             </div>
