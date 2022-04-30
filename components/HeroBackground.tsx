@@ -46,7 +46,7 @@ function BlueGradient(props: { class?: string }) {
             in2="BackgroundImageFix"
             result="shape"
           />
-          <feGaussianBlur stdDeviation="135" result="effect1_foregroundBlur" />
+          <feGaussianBlur stdDeviation="133" result="effect1_foregroundBlur" />
         </filter>
         <linearGradient
           id="paint0_linear"
@@ -98,7 +98,7 @@ function RedGradient(props: { class?: string }) {
             in2="BackgroundImageFix"
             result="shape"
           />
-          <feGaussianBlur stdDeviation="135" result="effect1_foregroundBlur" />
+          <feGaussianBlur stdDeviation="133" result="effect1_foregroundBlur" />
         </filter>
         <linearGradient
           id="paint1_linear"

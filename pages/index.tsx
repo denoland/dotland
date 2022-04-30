@@ -24,6 +24,13 @@ test we can use chai should style ... ok (4ms)
 
 test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms)`;
 
+  const daysUntilNextRelease = () => {
+    const date = new Date(versions.next);
+    const millis = date.getTime() - Date.now();
+    const days = Math.ceil(millis / 1000 / 60 / 60 / 24);
+    return days;
+  };
+
   return (
     <div>
       <Head>
@@ -33,7 +40,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
         <div class="bg-gray-50 overflow-x-hidden border-b border-gray-200 relative">
           <Background />
           <Header main />
-          <div class="relative max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
+          <div class="relative max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-10 flex flex-col items-center">
             <h1 class="font-extrabold text-5xl leading-10 tracking-tight text-gray-900">
               Deno
             </h1>
@@ -48,12 +55,18 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             >
               Install
             </a>
-            <a
-              href="https://github.com/denoland/deno/releases/latest"
-              class="mt-4"
-            >
-              {versions.cli[0]}
-            </a>
+            <div className="flex gap-12 justify-center flex-wrap mt-12">
+              <ReleaseNote
+                link="https://github.com/denoland/deno/releases/latest"
+                value={versions.cli[0].substring(1)}
+                title="Current version"
+              />
+              <ReleaseNote
+                link="https://deno.land/manual/contributing/release_schedule"
+                value={`${daysUntilNextRelease()} days`}
+                title="Until next release"
+              />
+            </div>
           </div>
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
@@ -397,6 +410,23 @@ function DenoInProductionSection() {
         ))}
       </ol>
     </div>
+  );
+}
+
+function ReleaseNote(
+  { value, title, link }: { value: string; title: string; link: string },
+) {
+  return (
+    <a target="_blank" href={link}>
+      <div class="text-center cursor-pointer hover:text-gray-700">
+        <h5 class="font-bold text-lg mb-0 leading-3">
+          {value}
+        </h5>
+        <span class="text-xs">
+          {title}
+        </span>
+      </div>
+    </a>
   );
 }
 
