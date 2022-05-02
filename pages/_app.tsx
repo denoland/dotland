@@ -34,7 +34,7 @@ export default function App({ Component }) {
           content="Deno is a simple, modern runtime for JavaScript and
             TypeScript that uses V8 and is built in Rust."
         />
-        <meta property="og:image" content="/og-image.png" />
+        <meta property="og:image" content="https://deno.land/og-image.png" />
         <meta property="og:type" content="website" />
         <meta name="robots" content="index, follow" />
         <meta
