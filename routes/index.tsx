@@ -82,7 +82,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             <li>
               Has{" "}
               <a class="link" href="/manual/tools">
-                built-in utilities
+                built-in development tooling
               </a>{" "}
               like a dependency inspector (
               <a class="link" href="/manual/tools/dependency_inspector">
