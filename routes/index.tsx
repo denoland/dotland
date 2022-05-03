@@ -58,15 +58,26 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <p class="my-4 text-gray-700">
-            Deno is a simple, modern and secure runtime for JavaScript and
-            TypeScript that uses V8 and is built in Rust.
+            Deno is a simple, modern and secure runtime for JavaScript,
+            TypeScript, and WebAssembly that uses V8 and is built in Rust.
           </p>
           <ol class="ml-8 list-disc text-gray-700">
+            <li>
+              Provides{" "}
+              <a class="link" href="/manual/runtime/web_platform_apis.md">
+                web platform functionality
+              </a>{" "}
+              and adopts web platform standards.
+            </li>
             <li>
               Secure by default. No file, network, or environment access, unless
               explicitly enabled.
             </li>
-            <li>Supports TypeScript out of the box.</li>
+            <li>
+              Supports <a class="link" href="/manual/typescript">TypeScript</a>
+              {" "}
+              out of the box.
+            </li>
             <li>Ships only a single executable file.</li>
             <li>
               Has{" "}
@@ -86,9 +97,12 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             <li>
               Has a set of reviewed (audited) standard modules that are
               guaranteed to work with Deno:{" "}
-              <a href="https://deno.land/std" class="link">
+              <a
+                href="https://doc.deno.land/https://deno.land/std"
+                class="link"
+              >
                 deno.land/std
-              </a>
+              </a>.
             </li>
             <li>
               Has a number of{" "}
@@ -96,7 +110,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
                 href="https://github.com/denoland/deno/wiki#companies-interested-in-deno"
                 class="link"
               >
-                companies interested in using and exploring Deno
+                companies interested in using and exploring Deno.
               </a>
             </li>
           </ol>
