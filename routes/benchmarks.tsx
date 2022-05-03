@@ -2,7 +2,7 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, Head, PageProps, useData, useState } from "../deps.ts";
+import { Fragment, h, Head, PageProps } from "../deps.ts";
 import { Handlers } from "../server_deps.ts";
 import { Header } from "../components/Header.tsx";
 import { Footer } from "../components/Footer.tsx";
@@ -21,24 +21,21 @@ import { BenchmarkChart } from "../components/BenchmarkChart.tsx";
 
 type ShowData = { dataFile: string; range: number[]; search: string };
 
-// TODO(lucacasonato): add anchor points to headers
-export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
-  const showAll = props.url.searchParams.has("all");
-  const typescriptBenches = ["check", "no_check", "bundle", "bundle_no_check"];
-  const show: ShowData = props.renderData!.show;
+interface Data {
+  show: ShowData;
+  rawData: BenchmarkRun[];
+}
 
-  const rawData: BenchmarkRun[] = useData(
-    `https://denoland.github.io/benchmark_data/${show.dataFile}`,
-    async (url) => {
-      const res = await fetch(url);
-      return await res.json();
-    },
-  );
-  const data = reshape(rawData.slice(...show.range));
+// TODO(lucacasonato): add anchor points to headers
+export default function Benchmarks({ url, data }: PageProps<Data>) {
+  const showAll = url.searchParams.has("all");
+  const typescriptBenches = ["check", "no_check", "bundle", "bundle_no_check"];
+
+  const benchData = reshape(data.rawData.slice(...data.show.range));
 
   const dataRangeTitle = showAll
     ? [(ks: number[]) => ks[0], (ks: number[]) => ks.pop()]
-      .map((f) => f([...rawData.keys()].slice(...show.range)))
+      .map((f) => f([...data.rawData.keys()].slice(...data.show.range)))
       .filter((k) => k != null)
       .join("...")
     : "";
@@ -53,7 +50,9 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
             </h5>
           </a>
           <BenchmarkChart
-            columns={normalized ? data.normalizedReqPerSec : data.reqPerSec}
+            columns={normalized
+              ? benchData.normalizedReqPerSec
+              : benchData.reqPerSec}
             yLabel="1k req/sec"
             yTickFormat={formatReqSec}
           />
@@ -119,7 +118,9 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
             </h5>
           </a>{" "}
           <BenchmarkChart
-            columns={normalized ? data.normalizedMaxLatency : data.maxLatency}
+            columns={normalized
+              ? benchData.normalizedMaxLatency
+              : benchData.maxLatency}
             yLabel="milliseconds"
             yTickFormat={formatMsec}
           />
@@ -143,7 +144,7 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
       <script
         id="data"
         type="application/json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(benchData) }}
       />
       <script
         dangerouslySetInnerHTML={{
@@ -243,7 +244,7 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
                   </h5>
                 </a>
                 <BenchmarkChart
-                  columns={data.execTime.filter(({ name }) =>
+                  columns={benchData.execTime.filter(({ name }) =>
                     !typescriptBenches.includes(name)
                   )}
                   yLabel="seconds"
@@ -265,7 +266,7 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
                   </h5>
                 </a>
                 <BenchmarkChart
-                  columns={data.threadCount.filter(({ name }) =>
+                  columns={benchData.threadCount.filter(({ name }) =>
                     !typescriptBenches.includes(name)
                   )}
                 />
@@ -280,7 +281,7 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
                   </h5>
                 </a>{" "}
                 <BenchmarkChart
-                  columns={data.syscallCount.filter(({ name }) =>
+                  columns={benchData.syscallCount.filter(({ name }) =>
                     !typescriptBenches.includes(name)
                   )}
                 />
@@ -296,7 +297,7 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
                   </h5>
                 </a>{" "}
                 <BenchmarkChart
-                  columns={data.maxMemory.filter(({ name }) =>
+                  columns={benchData.maxMemory.filter(({ name }) =>
                     !typescriptBenches.includes(name)
                   )}
                   yLabel="megabytes"
@@ -318,7 +319,7 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
                   </h5>
                 </a>
                 <BenchmarkChart
-                  columns={data.execTime.filter(({ name }) =>
+                  columns={benchData.execTime.filter(({ name }) =>
                     typescriptBenches.includes(name)
                   )}
                   yLabel="seconds"
@@ -378,7 +379,7 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
                   </h5>
                 </a>
                 <BenchmarkChart
-                  columns={data.binarySize}
+                  columns={benchData.binarySize}
                   yLabel={"megabytes"}
                   yTickFormat={formatMB}
                 />
@@ -394,7 +395,7 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
                   </h5>
                 </a>{" "}
                 <BenchmarkChart
-                  columns={data.bundleSize}
+                  columns={benchData.bundleSize}
                   yLabel="kilobytes"
                   yTickFormat={formatKB}
                 />
@@ -416,7 +417,7 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
                     Cargo Dependencies
                   </h5>
                 </a>{" "}
-                <BenchmarkChart columns={data.cargoDeps} />
+                <BenchmarkChart columns={benchData.cargoDeps} />
               </div>
             </div>
             <div class="mt-20">
@@ -425,7 +426,7 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
               </h4>
               <div class="mt-8">
                 <BenchmarkChart
-                  columns={data.lspExecTime}
+                  columns={benchData.lspExecTime}
                   yLabel="milliseconds"
                 />
                 <p class="mt-1">
@@ -462,8 +463,8 @@ function SourceLink({
   );
 }
 
-export const handler: Handlers = {
-  GET({ req, render }) {
+export const handler: Handlers<Data> = {
+  async GET(req, { render }) {
     const url = new URL(req.url);
     const showAll = url.searchParams.has("all");
     let show: ShowData = {
@@ -497,6 +498,10 @@ export const handler: Handlers = {
       return Response.redirect(url);
     }
 
-    return render!({ show });
+    const res = await fetch(
+      `https://denoland.github.io/benchmark_data/${show.dataFile}`,
+    );
+
+    return render!({ show, rawData: await res.json() });
   },
 };
