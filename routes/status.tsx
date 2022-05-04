@@ -2,15 +2,14 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, Head, PageConfig, PageProps, useData } from "../deps.ts";
+import { Fragment, h, Head, PageConfig, PageProps } from "../deps.ts";
+import { Handlers } from "../server_deps.ts";
 import { Header } from "../components/Header.tsx";
 import { Footer } from "../components/Footer.tsx";
-import { getBuild } from "../util/registry_utils.ts";
+import { Build, getBuild } from "../util/registry_utils.ts";
 import { ErrorMessage } from "../components/ErrorMessage.tsx";
 
-export default function StatusPage({ params }: PageProps) {
-  const data = useData(params.id, getBuild);
-
+export default function StatusPage({ data }: PageProps<Build | Error>) {
   return (
     <>
       <Head>
@@ -188,6 +187,12 @@ export default function StatusPage({ params }: PageProps) {
     </>
   );
 }
+
+export const handler: Handlers<Build | Error> = {
+  async GET(req, { params, render }) {
+    return render!(await getBuild(params.id));
+  },
+};
 
 export const config: PageConfig = {
   routeOverride: "/status/:id",

@@ -1,4 +1,4 @@
-export * from "https://raw.githubusercontent.com/lucacasonato/fresh/04a32f34987fbd59ce646967f216b2cca072a58f/runtime.ts";
+export * from "https://raw.githubusercontent.com/lucacasonato/fresh/59e6398d7724f4990aa3ace12dce36e11b20e1ba/runtime.ts";
 export { default as twas } from "https://esm.sh/twas@2.1.2";
 export { create } from "https://esm.sh/twind@0.16.16";
 export { css } from "https://esm.sh/twind@0.16.16/css";
