@@ -2,35 +2,32 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import {
-  emojify,
-  Fragment,
-  h,
-  Head,
-  PageProps,
-  twas,
-  useData,
-} from "../../deps.ts";
+import { emojify, Fragment, h, Head, PageProps, twas } from "../../deps.ts";
+import { Handlers } from "../../server_deps.ts";
 
 import { Header } from "../../components/Header.tsx";
 import { Footer } from "../../components/Footer.tsx";
 import { InlineCode } from "../../components/InlineCode.tsx";
 
-import { getStats, listModules } from "../../util/registry_utils.ts";
+import {
+  getStats,
+  listModules,
+  ModulesList,
+  Stats,
+} from "../../util/registry_utils.ts";
 import * as pageutils from "../../util/pagination_utils.ts";
 import { Pagination } from "../../components/Pagination.tsx";
 
 const PER_PAGE = 20;
 
-export default function ThirdPartyRegistryList({ url }: PageProps) {
+interface Data {
+  resp: ModulesList | null;
+  stats: Stats | null;
+}
+
+export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
   const page = parseInt(url.searchParams.get("page") || "1");
   const query = url.searchParams.get("query") || "";
-
-  const resp = useData(
-    `${page} ${PER_PAGE} ${query}`,
-    () => listModules(page, PER_PAGE, query),
-  );
-  const stats = useData("stats", getStats);
 
   return (
     <>
@@ -92,14 +89,14 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
               id="query"
               class="block w-full px-4 py-2 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1"
               type="text"
-              placeholder={!resp
+              placeholder={!data.resp
                 ? "Search"
-                : `Search through ${resp.totalCount} modules`}
+                : `Search through ${data.resp.totalCount} modules`}
               value={query}
             />
           </form>
           <div class="sm:max-w-screen-lg sm:mx-auto sm:px-6 md:px-8 pb-4 sm:pb-12">
-            {resp === null
+            {data.resp === null
               ? (
                 <div class="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
                   Failed to load modules
@@ -107,7 +104,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
               )
               : (
                 <div class="bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4">
-                  {resp.results.length == 0
+                  {data.resp.results.length == 0
                     ? (
                       <div class="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500">
                         No modules found. Please let us know what you're looking
@@ -122,22 +119,22 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                     )
                     : (
                       <ModuleList
-                        modules={resp.results.map((v) => ({
+                        modules={data.resp.results.map((v) => ({
                           ...v,
                           starCount: v.star_count,
                         }))}
                       />
                     )}
-                  {resp.results.length
+                  {data.resp.results.length
                     ? (() => {
                       const pageCount = pageutils.pageCount({
-                        totalCount: resp.totalCount,
+                        totalCount: data.resp.totalCount,
                         perPage: PER_PAGE,
                       });
                       const hasPrevious = pageutils.hasPrevious({ page });
                       const hasNext = pageutils.hasNext({
                         page,
-                        totalCount: resp.totalCount,
+                        totalCount: data.resp.totalCount,
                         perPage: PER_PAGE,
                       });
 
@@ -149,7 +146,7 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                             hasPrevious,
                             pageCount,
                             perPage: PER_PAGE,
-                            response: resp,
+                            response: data.resp,
                             query,
                           }}
                         />
@@ -276,14 +273,14 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
             <h4 class="font-semibold text-2xl" id="stats">
               Stats
             </h4>
-            {stats
+            {data.stats
               ? (
                 <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-8">
                   <div>
                     <h5 class="font-medium text-lg">New modules</h5>
                     <div class="bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2">
                       <ModuleList
-                        modules={stats.recently_added_modules.map((v) => ({
+                        modules={data.stats.recently_added_modules.map((v) => ({
                           name: v.name,
                           description: v.description,
                           date: v.created_at,
@@ -296,7 +293,9 @@ export default function ThirdPartyRegistryList({ url }: PageProps) {
                     <h5 class="font-medium text-lg">Recently updated</h5>
                     <div class="bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2">
                       <ModuleList
-                        modules={stats.recently_uploaded_versions.map((v) => ({
+                        modules={data.stats.recently_uploaded_versions.map((
+                          v,
+                        ) => ({
                           name: v.name,
                           description: v.version,
                           date: v.created_at,
@@ -406,3 +405,18 @@ function ModuleList({
     </ul>
   );
 }
+
+export const handler: Handlers<Data> = {
+  async GET(req, { params, render }) {
+    const url = new URL(req.url);
+    const page = parseInt(url.searchParams.get("page") || "1");
+    const query = url.searchParams.get("query") || "";
+
+    const [resp, stats] = await Promise.all([
+      listModules(page, PER_PAGE, query),
+      getStats(),
+    ]);
+
+    return render!({ resp, stats });
+  },
+};
