@@ -31,5 +31,11 @@
     "title": "Lume",
     "link": "https://lume.land/",
     "github": "lumeland/lume"
+  },
+  {
+    "image": "/images/showcase/shield.png",
+    "title": "Deno Shield",
+    "link": "https://shield.deno.dev/",
+    "github": "ydcjeff/shield.deno.dev"
   }
 ]
