@@ -31,5 +31,10 @@
     "title": "Lume",
     "link": "https://lume.land/",
     "github": "lumeland/lume"
+  },
+  {
+    "image": "/images/showcase/zencron.png",
+    "title": "Zen Cron",
+    "link": "https://zencron.com/"
   }
 ]
