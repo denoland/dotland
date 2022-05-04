@@ -37,5 +37,10 @@
     "title": "Deno Shield",
     "link": "https://shield.deno.dev/",
     "github": "ydcjeff/shield.deno.dev"
+  },
+  {
+    "image": "/images/showcase/zencron.png",
+    "title": "Zen Cron",
+    "link": "https://zencron.com/"
   }
 ]
