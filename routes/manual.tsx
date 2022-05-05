@@ -530,8 +530,9 @@ export const handler: Handlers<Data> = {
     const [tableOfContents, content] = await Promise.all([
       getTableOfContents(params.version),
       fetch(sourceURL)
-        .then((res) => {
+        .then(async (res) => {
           if (res.status !== 200) {
+            await res.body?.cancel();
             throw Error(
               `Got an error (${res.status}) while getting the documentation file (${sourceURL}).`,
             );

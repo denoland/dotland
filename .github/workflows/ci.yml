@@ -33,4 +33,4 @@ jobs:
 
       - name: Run Tests
         # TODO(kt3k): Enable type checking
-        run: deno test --allow-net --allow-env --allow-hrtime --no-check
+        run: deno test --allow-net --allow-read --allow-env --allow-hrtime --no-check

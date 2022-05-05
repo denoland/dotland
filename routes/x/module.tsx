@@ -11,10 +11,12 @@ import {
   PageProps,
   twas,
 } from "../../deps.ts";
-import { Handlers } from "../../server_deps.ts";
+import { accepts, Handlers } from "../../server_deps.ts";
 import {
   denoDocAvailableForURL,
   DirEntry,
+  extractAltLineNumberReference,
+  fetchSource,
   findRootReadme,
   getBasePath,
   getModule,
@@ -26,6 +28,7 @@ import {
   isReadme,
   listExternalDependencies,
   Module,
+  S3_BUCKET,
   VersionDeps,
   VersionInfo,
   VersionMetaInfo,
@@ -568,20 +571,68 @@ export const handler: Handlers<Data> = {
       version,
       path: xPath,
     } = params as Params;
+    const url = new URL(req.url);
+    const isHTML = accepts(req, "application/*", "text/html") === "text/html";
+
     const path = xPath ? "/" + xPath : "";
     const isStd = name === "std";
 
     if (!version) {
       const versions = await getVersionList(name);
       if (!versions?.latest) {
-        // @ts-ignore will take care of this on a later date
-        return render!({ versions });
+        if (isHTML) {
+          // @ts-ignore will take care of this on a later date
+          return render!({ versions });
+        } else {
+          return new Response(
+            `The module '${params.name}' has no latest version`,
+            {
+              status: 404,
+              headers: {
+                "content-type": "text/plain",
+                "Access-Control-Allow-Origin": "*",
+              },
+            },
+          );
+        }
       }
-      const url = new URL(req.url);
-      url.pathname = `/${isStd ? name : "x/" + name}@${
-        versions!.latest
-      }${path}`;
-      return Response.redirect(url);
+
+      return new Response(undefined, {
+        headers: {
+          Location: `/${isStd ? name : "x/" + name}@${versions!.latest}${path}`,
+          "x-deno-warning": `Implicitly using latest version (${
+            version!.latest
+          }) for ${url.href}`,
+          "Access-Control-Allow-Origin": "*",
+        },
+        status: 302,
+      });
+    }
+
+    if (!isHTML) {
+      const remoteUrl =
+        `${S3_BUCKET}${params.name}/versions/${params.version}/raw/${params.path}`;
+      const resp = await fetchSource(remoteUrl);
+
+      if (
+        remoteUrl.endsWith(".jsx") &&
+        !resp.headers.get("content-type")?.includes("javascript")
+      ) {
+        resp.headers.set("content-type", "application/javascript");
+      } else if (
+        remoteUrl.endsWith(".tsx") &&
+        !resp.headers.get("content-type")?.includes("typescript")
+      ) {
+        resp.headers.set("content-type", "application/typescript");
+      }
+
+      resp.headers.set("Access-Control-Allow-Origin", "*");
+      return resp;
+    }
+
+    const ln = extractAltLineNumberReference(url.toString());
+    if (ln) {
+      return Response.redirect(`${ln.rest}#L${ln.line}`, 302);
     }
 
     version = decodeURIComponent(params.version);
@@ -685,6 +736,7 @@ export const handler: Handlers<Data> = {
           ) {
             const res = await fetch(sourceURL, { method: "GET" });
             if (!res.ok) {
+              await res.body?.cancel();
               if (
                 res.status !== 400 &&
                 res.status !== 403 &&
@@ -720,6 +772,7 @@ export const handler: Handlers<Data> = {
           if (readmeURL) {
             const res = await fetch(readmeURL);
             if (!res.ok) {
+              await res.body?.cancel();
               if (
                 res.status !== 400 &&
                 res.status !== 403 &&
