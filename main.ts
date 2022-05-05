@@ -90,14 +90,14 @@ const ga: Reporter = async (...args) => {
 };
 
 export function withLog(
-  handler: (request: Request) => Response | Promise<Response>,
+  handler: (request: Request, conn: ConnInfo) => Response | Promise<Response>,
 ): (request: Request, connInfo: ConnInfo) => Promise<Response> {
-  return async (req, con) => {
+  return async (req, conn) => {
     let err: unknown;
     let res!: Response;
     const start = performance.now();
     try {
-      res = await handler(req);
+      res = await handler(req, conn);
     } catch (e) {
       err = e;
       console.error(err);
@@ -106,7 +106,7 @@ export function withLog(
         { status: 500 },
       );
     } finally {
-      await ga(req, con, res, start, err);
+      await ga(req, conn, res, start, err);
     }
     return res;
   };
@@ -114,10 +114,8 @@ export function withLog(
 
 const ctx = await ServerContext.fromManifest(manifest);
 console.log("Server listening on http://localhost:8000");
-serve((req, conn) => {
-  return router(
-    completionsV2Routes,
-    (req) => withLog(ctx.handler())(req, conn),
-    // TODO: add 500 handler
-  )(req);
-});
+
+const innerHandler = withLog(ctx.handler());
+const handler = router(completionsV2Routes, innerHandler);
+
+serve(handler);
