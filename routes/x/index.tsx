@@ -87,13 +87,9 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
               id="query"
               class="block w-full px-4 py-2 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1"
               type="text"
-<<<<<<< HEAD:pages/x/index.tsx
-              placeholder={!resp ? "搜索" : `在 ${resp.totalCount} 个模块中搜索`}
-=======
               placeholder={!data.resp
-                ? "Search"
-                : `Search through ${data.resp.totalCount} modules`}
->>>>>>> be096b287178994705e1b8b68de043be60db5cfe:routes/x/index.tsx
+                ? "搜索"
+                : `在 ${data.resp.totalCount} 个模块中搜索`}
               value={query}
             />
           </form>
