@@ -13,9 +13,13 @@ async function getPaths(module: string, version: string): Promise<Response> {
     `${S3_BUCKET}${module}/versions/${version}/meta/meta.json`,
   );
   if (resp.status === 403 || resp.status === 404) {
+    await resp.body?.cancel();
     return new Response("module or version not found", { status: 404 });
   }
-  if (!resp.ok) return new Response("internal server error 2", { status: 500 });
+  if (!resp.ok) {
+    await resp.body?.cancel();
+    return new Response("internal server error 2", { status: 500 });
+  }
   const json = await resp.json();
   const list = (json.directory_listing as Array<Record<string, string>>)
     .filter((f) => f.type === "file" && !f.path.includes("/_"))
@@ -52,9 +56,11 @@ export async function handler({ req }: HandlerContext) {
     const module = (versions.params as Record<string, string>)["module"];
     const resp = await fetch(`${S3_BUCKET}${module}/meta/versions.json`);
     if (resp.status === 403 || resp.status === 404) {
+      await resp.body?.cancel();
       return new Response("module not found", { status: 404 });
     }
     if (!resp.ok) {
+      await resp.body?.cancel();
       return new Response("internal server error 1", { status: 500 });
     }
     const json = await resp.json();
@@ -79,9 +85,11 @@ export async function handler({ req }: HandlerContext) {
     const module = (pathsLatest.params as Record<string, string>)["module"];
     const resp = await fetch(`${S3_BUCKET}${module}/meta/versions.json`);
     if (resp.status === 403 || resp.status === 404) {
+      await resp.body?.cancel();
       return new Response("module not found", { status: 404 });
     }
     if (!resp.ok) {
+      await resp.body?.cancel();
       return new Response("internal server error 3", { status: 500 });
     }
     const json = await resp.json();

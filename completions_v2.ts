@@ -21,8 +21,13 @@ import {
   toVersionDocs,
   versions,
 } from "./util/completions_utils.ts";
+import type { HandlerContext } from "./server_deps.ts";
 
-async function detailsStdVer(_req: Request, match: Record<string, string>) {
+async function detailsStdVer(
+  _req: Request,
+  _ctx: HandlerContext,
+  match: Record<string, string>,
+) {
   const { ver } = match;
   const meta = getMeta("std", ver) ?? await fetchMeta("std", ver);
   const body = {
@@ -37,7 +42,11 @@ async function detailsStdVer(_req: Request, match: Record<string, string>) {
   });
 }
 
-async function detailsStdVerPath(_req: Request, match: Record<string, string>) {
+async function detailsStdVerPath(
+  _req: Request,
+  _ctx: HandlerContext,
+  match: Record<string, string>,
+) {
   let { ver, path } = match;
   if (ver === "_latest") {
     ver = await getLatestVersion("std");
@@ -55,7 +64,11 @@ async function detailsStdVerPath(_req: Request, match: Record<string, string>) {
   });
 }
 
-async function detailsXPkg(_req: Request, match: Record<string, string>) {
+async function detailsXPkg(
+  _req: Request,
+  _ctx: HandlerContext,
+  match: Record<string, string>,
+) {
   const { pkg } = match;
   const pkgData = packages.get(pkg) ?? await fetchPackageData(pkg);
   const body = {
@@ -73,7 +86,11 @@ async function detailsXPkg(_req: Request, match: Record<string, string>) {
   });
 }
 
-async function detailsXPkgVer(_req: Request, match: Record<string, string>) {
+async function detailsXPkgVer(
+  _req: Request,
+  _ctx: HandlerContext,
+  match: Record<string, string>,
+) {
   const { pkg, ver } = match;
   const pkgData = packages.get(pkg) ?? await fetchPackageData(pkg);
   const meta = getMeta(pkg, ver) ?? await fetchMeta(pkg, ver);
@@ -91,6 +108,7 @@ async function detailsXPkgVer(_req: Request, match: Record<string, string>) {
 
 async function detailsXPkgVerPath(
   _req: Request,
+  _ctx: HandlerContext,
   match: Record<string, string>,
 ) {
   let { pkg, ver, path } = match;
@@ -110,7 +128,11 @@ async function detailsXPkgVerPath(
   });
 }
 
-async function xPkg(_req: Request, match: Record<string, string>) {
+async function xPkg(
+  _req: Request,
+  _ctx: HandlerContext,
+  match: Record<string, string>,
+) {
   const { pkg } = match;
   if (!pkg) {
     return new Response(
@@ -146,7 +168,11 @@ async function xPkg(_req: Request, match: Record<string, string>) {
   }
 }
 
-async function xPkgVer(_req: Request, match: Record<string, string>) {
+async function xPkgVer(
+  _req: Request,
+  _ctx: HandlerContext,
+  match: Record<string, string>,
+) {
   const { pkg, ver } = match;
   checkVersionsFreshness();
   const versionInfo = versions.get(pkg) ?? await fetchVersions(pkg);
@@ -166,7 +192,11 @@ async function xPkgVer(_req: Request, match: Record<string, string>) {
   });
 }
 
-async function xPkgVerPath(_req: Request, match: Record<string, string>) {
+async function xPkgVerPath(
+  _req: Request,
+  _ctx: HandlerContext,
+  match: Record<string, string>,
+) {
   let { pkg, ver, path } = match;
   if (ver === "_latest") {
     ver = await getLatestVersion(pkg);

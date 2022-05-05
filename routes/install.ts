@@ -3,7 +3,7 @@
 import { PageConfig } from "../deps.ts";
 import { HandlerContext } from "../server_deps.ts";
 
-export function handler({ req }: HandlerContext) {
+export function handler(req: Request) {
   return Response.redirect(
     `https://deno.land/x/install${new URL(req.url).pathname}`,
     307,

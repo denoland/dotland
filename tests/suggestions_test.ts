@@ -8,13 +8,25 @@ import {
 } from "../test_deps.ts";
 
 import { router, ServerContext } from "../server_deps.ts";
-import routes from "../routes.gen.ts";
+import manifest from "../fresh.gen.ts";
 import { routes as completionsV2Routes } from "../completions_v2.ts";
 
-const handleRequest = router(
-  completionsV2Routes,
-  (await ServerContext.fromRoutes(routes)).handler(),
-);
+const handleRequest = async (req: Request) =>
+  router(
+    completionsV2Routes,
+    (await ServerContext.fromManifest(manifest)).handler(),
+  )(req, {
+    localAddr: {
+      transport: "tcp",
+      hostname: "127.0.0.1",
+      port: 80,
+    },
+    remoteAddr: {
+      transport: "tcp",
+      hostname: "127.0.0.1",
+      port: 80,
+    },
+  });
 
 Deno.test({
   name: "/_api/x/ - get package list",

@@ -153,7 +153,7 @@ const configV2: RegistryConfig = {
 /** Provide the v1 or v2 registry configuration based on the accepts header
  * provided by the client.  Deno 1.17.1 and later indicates it accepts a
  * configuration of v2. */
-export function handler({ req }: HandlerContext) {
+export function handler(req: Request) {
   let body: unknown;
   let contentType = "application/json";
   const accept = req.headers.get("accept");

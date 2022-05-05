@@ -3,8 +3,20 @@
 import { assertEquals } from "../test_deps.ts";
 
 import { ServerContext } from "../server_deps.ts";
-import routes from "../routes.gen.ts";
-const handleRequest = (await ServerContext.fromRoutes(routes)).handler();
+import manifest from "../fresh.gen.ts";
+const handleRequest = async (req: Request) =>
+  (await ServerContext.fromManifest(manifest)).handler()(req, {
+    localAddr: {
+      transport: "tcp",
+      hostname: "127.0.0.1",
+      port: 80,
+    },
+    remoteAddr: {
+      transport: "tcp",
+      hostname: "127.0.0.1",
+      port: 80,
+    },
+  });
 
 Deno.test({
   name: "handleConfigRequest - v1 version of manifest",

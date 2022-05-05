@@ -4,8 +4,20 @@ import { assert, assertEquals, assertStringIncludes } from "../test_deps.ts";
 import { extractAltLineNumberReference } from "../util/registry_utils.ts";
 
 import { ServerContext } from "../server_deps.ts";
-import routes from "../routes.gen.ts";
-const handleRequest = (await ServerContext.fromRoutes(routes)).handler();
+import manifest from "../fresh.gen.ts";
+const handleRequest = async (req: Request) =>
+  (await ServerContext.fromManifest(manifest)).handler()(req, {
+    localAddr: {
+      transport: "tcp",
+      hostname: "127.0.0.1",
+      port: 80,
+    },
+    remoteAddr: {
+      transport: "tcp",
+      hostname: "127.0.0.1",
+      port: 80,
+    },
+  });
 
 /** This is taken directly from a recent version of Chromium */
 const BROWSER_ACCEPT =
@@ -53,6 +65,7 @@ Deno.test({
     assert(res.headers.get("X-Deno-Warning")?.includes("latest"));
     assert(res.headers.get("X-Deno-Warning")?.includes("/std/version.ts"));
     assertEquals(res.headers.get("Access-Control-Allow-Origin"), "*");
+    await res.text();
   },
 });
 
@@ -83,6 +96,7 @@ Deno.test({
     );
     assertEquals(res.status, 302);
     assert(res.headers.get("Location")?.includes("/std@0.127.0/fs/mod.ts#L5"));
+    await res.text();
   },
 });
 
@@ -94,6 +108,7 @@ Deno.test({
     );
     assertEquals(res.status, 307);
     assert(res.headers.get("Location")?.includes("/x/install/install.sh"));
+    await res.text();
   },
 });
 

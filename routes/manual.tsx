@@ -9,13 +9,11 @@ import {
   Head,
   PageConfig,
   PageProps,
-  useData,
 } from "../deps.ts";
 import { Handlers } from "../server_deps.ts";
 import { Markdown } from "../components/Markdown.tsx";
 import { InlineCode } from "../components/InlineCode.tsx";
 import {
-  basepath,
   getDocURL,
   getFileURL,
   getTableOfContents,
@@ -26,14 +24,18 @@ import {
 
 import versionMeta from "../versions.json" assert { type: "json" };
 
-export default function Manual({ params, url }: PageProps) {
+interface Data {
+  tableOfContents: TableOfContents;
+  content: string;
+}
+
+export default function Manual({ params, url, data }: PageProps<Data>) {
   const path = params.path ? `/${params.path}` : "/introduction";
 
-  const tableOfContents = useData(params.version, getTableOfContents);
   const pageList = (() => {
     const tempList: { path: string; name: string }[] = [];
 
-    Object.entries(tableOfContents).forEach(([slug, entry]) => {
+    Object.entries(data.tableOfContents).forEach(([slug, entry]) => {
       tempList.push({ path: `/manual/${slug}`, name: entry.name });
 
       if (entry.children) {
@@ -52,7 +54,7 @@ export default function Manual({ params, url }: PageProps) {
 
   const tableOfContentsMap = (() => {
     const map = new Map<string, string>();
-    Object.entries(tableOfContents).forEach(([slug, entry]) => {
+    Object.entries(data.tableOfContents).forEach(([slug, entry]) => {
       if (entry.children) {
         Object.entries(entry.children).forEach(([childSlug, name]) => {
           map.set(`/${slug}/${childSlug}`, name);
@@ -64,22 +66,6 @@ export default function Manual({ params, url }: PageProps) {
     return map;
   })();
   const pageTitle = tableOfContentsMap.get(path) || "";
-
-  const content = useData(sourceURL, () => {
-    return fetch(sourceURL)
-      .then((res) => {
-        if (res.status !== 200) {
-          throw Error(
-            `Got an error (${res.status}) while getting the documentation file (${sourceURL}).`,
-          );
-        }
-        return res.text();
-      })
-      .catch((e) => {
-        console.error("Failed to fetch content:", e);
-        return "# 404 - Not Found\nWhoops, the page does not seem to exist.";
-      });
-  });
 
   const stdVersion = ((versionMeta.cli_to_std as Record<string, string>)[
     params.version
@@ -182,7 +168,7 @@ export default function Manual({ params, url }: PageProps) {
                 />
               </div>
               <ToC
-                tableOfContents={tableOfContents}
+                tableOfContents={data.tableOfContents}
                 version={params.version}
                 path={path}
               />
@@ -211,7 +197,7 @@ export default function Manual({ params, url }: PageProps) {
               />
             </div>
             <ToC
-              tableOfContents={tableOfContents}
+              tableOfContents={data.tableOfContents}
               version={params.version}
               path={path}
             />
@@ -348,7 +334,7 @@ export default function Manual({ params, url }: PageProps) {
               </a>
               <div class="pt-1">
                 <Markdown
-                  source={content
+                  source={data.content
                     .replace(/\$STD_VERSION/g, stdVersion)
                     .replace(/\$CLI_VERSION/g, params.version)}
                   baseUrl={sourceURL}
@@ -525,18 +511,41 @@ function ToC({
   );
 }
 
-export const handler: Handlers = {
-  GET({ req, match, render }) {
+export const handler: Handlers<Data> = {
+  async GET(req, { params, render }) {
     const url = new URL(req.url);
-    if (!match.version) {
-      url.pathname = `/manual@${versions[0]}/${match.path ?? ""}`;
+    if (!params.version) {
+      url.pathname = `/manual@${versions[0]}/${params.path ?? ""}`;
       return Response.redirect(url);
     }
     if (url.pathname.endsWith(".md")) {
       url.pathname = url.pathname.slice(0, -3);
       return Response.redirect(url);
     }
-    return render!();
+
+    const sourceURL = getFileURL(
+      params.version,
+      params.path ? `/${params.path}` : "/introduction",
+    );
+    const [tableOfContents, content] = await Promise.all([
+      getTableOfContents(params.version),
+      fetch(sourceURL)
+        .then(async (res) => {
+          if (res.status !== 200) {
+            await res.body?.cancel();
+            throw Error(
+              `Got an error (${res.status}) while getting the documentation file (${sourceURL}).`,
+            );
+          }
+          return res.text();
+        })
+        .catch((e) => {
+          console.error("Failed to fetch content:", e);
+          return "# 404 - Not Found\nWhoops, the page does not seem to exist.";
+        }),
+    ]);
+
+    return render!({ tableOfContents, content });
   },
 };
 

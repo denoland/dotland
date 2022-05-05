@@ -1,3 +1,5 @@
+#!/usr/bin/env -S deno run --allow-read --allow-net --allow-env --allow-run --allow-hrtime --no-check --watch
+
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /// <reference no-default-lib="true" />
@@ -15,7 +17,8 @@ import {
   serve,
   ServerContext,
 } from "./server_deps.ts";
-import routes from "./routes.gen.ts";
+
+import manifest from "./fresh.gen.ts";
 
 import { routes as completionsV2Routes } from "./completions_v2.ts";
 
@@ -109,7 +112,7 @@ export function withLog(
   };
 }
 
-const ctx = await ServerContext.fromRoutes(routes);
+const ctx = await ServerContext.fromManifest(manifest);
 console.log("Server listening on http://localhost:8000");
 serve((req, conn) => {
   return router(

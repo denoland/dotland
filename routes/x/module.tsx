@@ -10,7 +10,6 @@ import {
   PageConfig,
   PageProps,
   twas,
-  useData,
 } from "../../deps.ts";
 import { accepts, Handlers } from "../../server_deps.ts";
 import {
@@ -28,8 +27,11 @@ import {
   getVersionMeta,
   isReadme,
   listExternalDependencies,
+  Module,
   S3_BUCKET,
+  VersionDeps,
   VersionInfo,
+  VersionMetaInfo,
 } from "../../util/registry_utils.ts";
 import { Header } from "../../components/Header.tsx";
 import { Footer } from "../../components/Footer.tsx";
@@ -42,27 +44,37 @@ const MAX_SYNTAX_HIGHLIGHT_FILE_SIZE = 100 * 1024;
 // 500kb
 const MAX_FILE_SIZE = 500 * 1024;
 
-export default function Registry({ params, url }: PageProps) {
+interface Data {
+  versions: VersionInfo | null;
+  versionMeta: VersionMetaInfo | null;
+  moduleMeta: Module | null;
+  versionDeps: VersionDeps | null;
+  rawFile: Error | { content: string; highlight: boolean } | null;
+  readmeFile: string | null;
+  dirEntries: DirEntry[] | null;
+  repositoryURL: string | undefined;
+  sourceURL: string;
+  readmeCanonicalPath: string | null;
+  readmeURL: string | null;
+  readmeRepositoryURL: string | undefined | null;
+}
+
+type Params = {
+  name: string;
+  version?: string;
+  path: string;
+};
+
+export default function Registry({ params, url, data }: PageProps<Data>) {
   let {
     name,
     version,
     path: xPath,
-  } = params as {
-    name: string;
-    version?: string;
-    path: string;
-  };
+  } = params as Params;
   if (version !== undefined) {
     version = decodeURIComponent(version);
   }
   const path = xPath ? "/" + xPath : "";
-  const versions = useData(name, () => {
-    return getVersionList(name).catch((e) => {
-      console.error("Failed to fetch versions:", e);
-      return null;
-    });
-  });
-
   const isStd = name === "std";
 
   return (
@@ -84,15 +96,15 @@ export default function Registry({ params, url }: PageProps) {
           />
           <div class="mt-8">
             {(() => {
-              if (versions === null) {
+              if (data.versions === null) {
                 return (
                   <ErrorMessage title="404 - Not Found">
                     This module does not exist.
                   </ErrorMessage>
                 );
               } else if (
-                versions.latest === null &&
-                versions.versions.length === 0
+                data.versions.latest === null &&
+                data.versions.versions.length === 0
               ) {
                 return (
                   <ErrorMessage title="No uploaded versions">
@@ -100,11 +112,11 @@ export default function Registry({ params, url }: PageProps) {
                     versions have been uploaded yet. Modules that do not upload
                     a version within 30 days of registration will be removed.
                     {" "}
-                    {versions.isLegacy &&
+                    {data.versions.isLegacy &&
                       "If you are the owner of this module, please re-add the GitHub repository with deno.land/x (by following the instructions at https://deno.land/x#add), and publish a new version."}
                   </ErrorMessage>
                 );
-              } else if (!versions.versions.includes(version!)) {
+              } else if (!data.versions.versions.includes(version!)) {
                 return (
                   <ErrorMessage title="404 - Not Found">
                     This version does not exist for this module.
@@ -114,7 +126,7 @@ export default function Registry({ params, url }: PageProps) {
                 return (
                   <ModuleView
                     version={version!}
-                    {...{ name, path, versions, isStd, url }}
+                    {...{ name, path, isStd, url, ...data }}
                   />
                 );
               }
@@ -131,39 +143,32 @@ function ModuleView({
   name,
   version,
   path,
-  versions,
   isStd,
   url,
+
+  versions,
+  versionMeta,
+  moduleMeta,
+  versionDeps,
+  rawFile,
+  readmeFile,
+  dirEntries,
+  repositoryURL,
+  sourceURL,
+  readmeCanonicalPath,
+  readmeURL,
+  readmeRepositoryURL,
 }: {
   name: string;
   version: string;
   path: string;
-  versions: VersionInfo;
   isStd: boolean;
   url: URL;
-}) {
-  const [versionMeta, moduleMeta, versionDeps] = useData("moduleview", () => {
-    return Promise.all([
-      getVersionMeta(name, version).catch((e) => {
-        console.error("Failed to fetch dir entry:", e);
-        return null;
-      }),
-      getModule(name).catch((e) => {
-        console.error("Failed to fetch module meta:", e);
-        return null;
-      }),
-      getVersionDeps(name, version).catch((e) => {
-        console.error("Failed to fetch dependency information:", e);
-        return null;
-      }),
-    ]);
-  });
-
+} & Data) {
   const stdVersion = isStd ? version : undefined;
 
   const basePath = getBasePath({ isStd, name, version });
   const canonicalPath = `${basePath}${path}`;
-  const sourceURL = getSourceURL(name, version, path);
 
   const documentationURL = denoDocAvailableForURL(canonicalPath)
     ? `https://doc.deno.land/https://deno.land${canonicalPath}`
@@ -175,127 +180,6 @@ function ModuleView({
   const moduleDocumentationURL = hasStandardModulEntryPoint
     ? `https://doc.deno.land/https://deno.land${basePath}/mod.ts`
     : null;
-
-  // Get directory entries for path
-  const dirEntries = (() => {
-    if (versionMeta) {
-      const files = versionMeta.directoryListing
-        .filter(
-          (f) =>
-            f.path.startsWith(path + "/") &&
-            f.path.split("/").length - 2 === path.split("/").length - 1,
-        )
-        .map<DirEntry>((f) => {
-          const [name] = f.path.slice(path.length + 1).split("/");
-          return {
-            name,
-            size: f.size,
-            type: f.type,
-          };
-        });
-      files.sort((a, b) => a.name.codePointAt(0)! - b.name.codePointAt(0)!);
-      return files.length === 0 ? null : files;
-    } else {
-      return null;
-    }
-  })();
-
-  const repositoryURL = versionMeta
-    ? dirEntries
-      ? getRepositoryURL(versionMeta, path, "tree")
-      : getRepositoryURL(versionMeta, path)
-    : undefined;
-  const { readmeSize, readmeCanonicalPath, readmeURL, readmeRepositoryURL } =
-    (() => {
-      const readmeEntry = path === ""
-        ? findRootReadme(versionMeta?.directoryListing)
-        : dirEntries?.find((d) => isReadme(d.name));
-      if (readmeEntry) {
-        return {
-          readmeSize: readmeEntry.size,
-          readmeCanonicalPath: canonicalPath + "/" + readmeEntry.name,
-          readmeURL: getSourceURL(name, version, path + "/" + readmeEntry.name),
-          readmeRepositoryURL: versionMeta
-            ? getRepositoryURL(versionMeta, path + "/" + readmeEntry.name)
-            : null,
-        };
-      }
-      return {
-        readmeSize: null,
-        readmeCanonicalPath: null,
-        readmeURL: null,
-        readmeRepositoryURL: null,
-      };
-    })();
-
-  const [raw, readme] = useData(sourceURL, () => {
-    return Promise.all([
-      (async () => {
-        if (
-          sourceURL &&
-          versionMeta &&
-          versionMeta.directoryListing.filter(
-              (d) => d.path === path && d.type == "file",
-            ).length !== 0
-        ) {
-          const res = await fetch(sourceURL, { method: "GET" });
-          if (!res.ok) {
-            if (
-              res.status !== 400 &&
-              res.status !== 403 &&
-              res.status !== 404
-            ) {
-              console.error(new Error(`${res.status}: ${res.statusText}`));
-            }
-            return null;
-          }
-
-          const size = versionMeta.directoryListing.find(
-            (entry) => entry.path === path,
-          )!.size!;
-          if (size < MAX_SYNTAX_HIGHLIGHT_FILE_SIZE) {
-            return {
-              content: await res.text(),
-              highlight: true,
-            };
-          } else if (size < MAX_FILE_SIZE) {
-            return {
-              content: await res.text(),
-              highlight: false,
-            };
-          } else {
-            await res.body!.cancel();
-            return new Error("Max display filesize exceeded");
-          }
-        } else {
-          return null;
-        }
-      })(),
-      (async () => {
-        if (readmeURL) {
-          const res = await fetch(readmeURL);
-          if (!res.ok) {
-            if (
-              res.status !== 400 &&
-              res.status !== 403 &&
-              res.status !== 404
-            ) {
-              console.error(new Error(`${res.status}: ${res.statusText}`));
-            }
-            return null;
-          }
-          if (readmeSize! < MAX_SYNTAX_HIGHLIGHT_FILE_SIZE) {
-            return await res.text();
-          } else {
-            await res.body!.cancel();
-            return null;
-          }
-        } else {
-          return null;
-        }
-      })(),
-    ]);
-  });
 
   const externalDependencies = versionDeps === null
     ? null
@@ -407,7 +291,7 @@ function ModuleView({
                 )}
               <div class="mt-3 w-full">
                 <VersionSelector
-                  versions={versions.versions}
+                  versions={versions!.versions}
                   selectedVersion={version}
                   name={name}
                   isStd={isStd}
@@ -492,7 +376,7 @@ function ModuleView({
                 This file or directory could not be found.
               </ErrorMessage>
             );
-          } else if (dirEntries === null && raw === null) {
+          } else if (dirEntries === null && rawFile === null) {
             // No files
             return (
               <div class="rounded-lg overflow-hidden border border-gray-200 bg-white">
@@ -509,7 +393,7 @@ function ModuleView({
                 <div class="w-full p-4 text-gray-400 italic">No files.</div>
               </div>
             );
-          } else if (raw instanceof Error) {
+          } else if (rawFile instanceof Error) {
             return (
               <div class="rounded-lg overflow-hidden border border-gray-200 bg-white">
                 {versionMeta && (
@@ -522,7 +406,9 @@ function ModuleView({
                     url={url}
                   />
                 )}
-                <div class="w-full p-4 text-gray-400 italic">{raw.message}</div>
+                <div class="w-full p-4 text-gray-400 italic">
+                  {rawFile.message}
+                </div>
               </div>
             );
           } else {
@@ -538,10 +424,10 @@ function ModuleView({
                     url={url}
                   />
                 )}
-                {raw !== null && (
+                {rawFile !== null && (
                   <FileDisplay
-                    raw={raw.content}
-                    filetypeOverride={raw.highlight ? undefined : "text"}
+                    raw={rawFile.content}
+                    filetypeOverride={rawFile.highlight ? undefined : "text"}
                     canonicalPath={canonicalPath}
                     sourceURL={sourceURL}
                     repositoryURL={repositoryURL}
@@ -551,11 +437,11 @@ function ModuleView({
                     pathname={url.pathname}
                   />
                 )}
-                {typeof readme === "string" &&
+                {typeof readmeFile === "string" &&
                   typeof readmeURL === "string" &&
                   typeof readmeCanonicalPath === "string" && (
                   <FileDisplay
-                    raw={readme}
+                    raw={readmeFile}
                     canonicalPath={readmeCanonicalPath}
                     sourceURL={readmeURL}
                     repositoryURL={readmeRepositoryURL}
@@ -678,18 +564,28 @@ function VersionSelector({
   );
 }
 
-export const handler: Handlers = {
-  async GET({ req, match, render }) {
+export const handler: Handlers<Data> = {
+  async GET(req, { params, render }) {
+    let {
+      name,
+      version,
+      path: xPath,
+    } = params as Params;
     const url = new URL(req.url);
     const isHTML = accepts(req, "application/*", "text/html") === "text/html";
-    if (!match.version) {
-      const version = await getVersionList(match.name);
-      if (!version?.latest) {
+
+    const path = xPath ? "/" + xPath : "";
+    const isStd = name === "std";
+
+    if (!version) {
+      const versions = await getVersionList(name);
+      if (!versions?.latest) {
         if (isHTML) {
-          return render!();
+          // @ts-ignore will take care of this on a later date
+          return render!({ versions });
         } else {
           return new Response(
-            `The module '${match.name}' has no latest version`,
+            `The module '${params.name}' has no latest version`,
             {
               status: 404,
               headers: {
@@ -700,11 +596,10 @@ export const handler: Handlers = {
           );
         }
       }
+
       return new Response(undefined, {
         headers: {
-          Location: `/${
-            match.name === "std" ? match.name : "x/" + match.name
-          }@${version!.latest}/${match.path}`,
+          Location: `/${isStd ? name : "x/" + name}@${versions!.latest}${path}`,
           "x-deno-warning": `Implicitly using latest version (${
             version!.latest
           }) for ${url.href}`,
@@ -712,34 +607,210 @@ export const handler: Handlers = {
         },
         status: 302,
       });
-    } else {
-      if (isHTML) {
-        const ln = extractAltLineNumberReference(url.toString());
-        if (ln) {
-          return Response.redirect(`${ln.rest}#L${ln.line}`, 302);
-        }
+    }
 
-        return render!();
-      } else {
-        const remoteUrl =
-          `${S3_BUCKET}${match.name}/versions/${match.version}/raw/${match.path}`;
-        const resp = await fetchSource(remoteUrl);
+    if (!isHTML) {
+      const remoteUrl =
+        `${S3_BUCKET}${params.name}/versions/${params.version}/raw/${params.path}`;
+      const resp = await fetchSource(remoteUrl);
 
-        if (
-          remoteUrl.endsWith(".jsx") &&
-          !resp.headers.get("content-type")?.includes("javascript")
-        ) {
-          resp.headers.set("content-type", "application/javascript");
-        } else if (
-          remoteUrl.endsWith(".tsx") &&
-          !resp.headers.get("content-type")?.includes("typescript")
-        ) {
-          resp.headers.set("content-type", "application/typescript");
-        }
-
-        resp.headers.set("Access-Control-Allow-Origin", "*");
-        return resp;
+      if (
+        remoteUrl.endsWith(".jsx") &&
+        !resp.headers.get("content-type")?.includes("javascript")
+      ) {
+        resp.headers.set("content-type", "application/javascript");
+      } else if (
+        remoteUrl.endsWith(".tsx") &&
+        !resp.headers.get("content-type")?.includes("typescript")
+      ) {
+        resp.headers.set("content-type", "application/typescript");
       }
+
+      resp.headers.set("Access-Control-Allow-Origin", "*");
+      return resp;
+    }
+
+    const ln = extractAltLineNumberReference(url.toString());
+    if (ln) {
+      return Response.redirect(`${ln.rest}#L${ln.line}`, 302);
+    }
+
+    version = decodeURIComponent(params.version);
+    const versions = await getVersionList(params.name).catch((e) => {
+      console.error("Failed to fetch versions:", e);
+      return null;
+    });
+
+    const canRenderView = !(versions === null) &&
+      !(versions.latest === null && versions.versions.length === 0) &&
+      !(!versions.versions.includes(version!));
+
+    if (canRenderView) {
+      const [versionMeta, moduleMeta, versionDeps] = await Promise.all([
+        getVersionMeta(params.name, version).catch((e) => {
+          console.error("Failed to fetch dir entry:", e);
+          return null;
+        }),
+        getModule(params.name).catch((e) => {
+          console.error("Failed to fetch module meta:", e);
+          return null;
+        }),
+        getVersionDeps(params.name, version).catch((e) => {
+          console.error("Failed to fetch dependency information:", e);
+          return null;
+        }),
+      ]);
+
+      const sourceURL = getSourceURL(params.name, version, path);
+      const basePath = getBasePath({ isStd, name, version });
+      const canonicalPath = `${basePath}${path}`;
+
+      // Get directory entries for path
+      const dirEntries = (() => {
+        if (versionMeta) {
+          const files = versionMeta.directoryListing
+            .filter(
+              (f) =>
+                f.path.startsWith(path + "/") &&
+                f.path.split("/").length - 2 === path.split("/").length - 1,
+            )
+            .map<DirEntry>((f) => {
+              const [name] = f.path.slice(path.length + 1).split("/");
+              return {
+                name,
+                size: f.size,
+                type: f.type,
+              };
+            });
+          files.sort((a, b) => a.name.codePointAt(0)! - b.name.codePointAt(0)!);
+          return files.length === 0 ? null : files;
+        } else {
+          return null;
+        }
+      })();
+
+      const repositoryURL = versionMeta
+        ? dirEntries
+          ? getRepositoryURL(versionMeta, path, "tree")
+          : getRepositoryURL(versionMeta, path)
+        : undefined;
+      const {
+        readmeSize,
+        readmeCanonicalPath,
+        readmeURL,
+        readmeRepositoryURL,
+      } = (() => {
+        const readmeEntry = path === ""
+          ? findRootReadme(versionMeta?.directoryListing)
+          : dirEntries?.find((d) => isReadme(d.name));
+        if (readmeEntry) {
+          return {
+            readmeSize: readmeEntry.size,
+            readmeCanonicalPath: canonicalPath + "/" + readmeEntry.name,
+            readmeURL: getSourceURL(
+              name,
+              version,
+              path + "/" + readmeEntry.name,
+            ),
+            readmeRepositoryURL: versionMeta
+              ? getRepositoryURL(versionMeta, path + "/" + readmeEntry.name)
+              : null,
+          };
+        }
+        return {
+          readmeSize: null,
+          readmeCanonicalPath: null,
+          readmeURL: null,
+          readmeRepositoryURL: null,
+        };
+      })();
+
+      const [rawFile, readmeFile] = await Promise.all([
+        (async () => {
+          if (
+            sourceURL &&
+            versionMeta &&
+            versionMeta.directoryListing.filter(
+                (d) => d.path === path && d.type == "file",
+              ).length !== 0
+          ) {
+            const res = await fetch(sourceURL, { method: "GET" });
+            if (!res.ok) {
+              await res.body?.cancel();
+              if (
+                res.status !== 400 &&
+                res.status !== 403 &&
+                res.status !== 404
+              ) {
+                console.error(new Error(`${res.status}: ${res.statusText}`));
+              }
+              return null;
+            }
+
+            const size = versionMeta.directoryListing.find(
+              (entry) => entry.path === path,
+            )!.size!;
+            if (size < MAX_SYNTAX_HIGHLIGHT_FILE_SIZE) {
+              return {
+                content: await res.text(),
+                highlight: true,
+              };
+            } else if (size < MAX_FILE_SIZE) {
+              return {
+                content: await res.text(),
+                highlight: false,
+              };
+            } else {
+              await res.body!.cancel();
+              return new Error("Max display filesize exceeded");
+            }
+          } else {
+            return null;
+          }
+        })(),
+        (async () => {
+          if (readmeURL) {
+            const res = await fetch(readmeURL);
+            if (!res.ok) {
+              await res.body?.cancel();
+              if (
+                res.status !== 400 &&
+                res.status !== 403 &&
+                res.status !== 404
+              ) {
+                console.error(new Error(`${res.status}: ${res.statusText}`));
+              }
+              return null;
+            }
+            if (readmeSize! < MAX_SYNTAX_HIGHLIGHT_FILE_SIZE) {
+              return await res.text();
+            } else {
+              await res.body!.cancel();
+              return null;
+            }
+          } else {
+            return null;
+          }
+        })(),
+      ]);
+
+      return render!({
+        versions,
+        versionMeta,
+        moduleMeta,
+        versionDeps,
+        rawFile,
+        readmeFile,
+        dirEntries,
+        repositoryURL,
+        sourceURL,
+        readmeCanonicalPath,
+        readmeURL,
+        readmeRepositoryURL,
+      });
+    } else {
+      // @ts-ignore will take care of this on a later date
+      return render!({ versions });
     }
   },
 };

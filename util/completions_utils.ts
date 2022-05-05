@@ -136,6 +136,7 @@ export async function fetchMeta(pkg: string, ver: string): Promise<MetaJson> {
   if (res.status === 200) {
     versionsMeta.set(ver, await res.json());
   } else {
+    await res.body?.cancel();
     versionsMeta.set(ver, {
       uploaded_at: "",
       directory_listing: [],
@@ -151,6 +152,7 @@ export async function fetchVersions(pkg: string): Promise<MetaVersionJson> {
   if (res.status === 200) {
     versions.set(pkg, await res.json());
   } else {
+    await res.body?.cancel();
     versions.set(pkg, { latest: "", versions: [] });
   }
   return versions.get(pkg)!;
@@ -168,6 +170,7 @@ export async function fetchPackageData(pkg: string): Promise<PackageData> {
       stars,
     });
   } else {
+    await res.body?.cancel();
     packages.set(pkg, {
       name: pkg,
       description: "",
@@ -186,8 +189,11 @@ export async function getFuse(): Promise<Fuse> {
     const res = await fetch(MODULE_LIST);
     if (res.status === 200) {
       fuse = new Fuse(await res.json(), { includeScore: true, distance: 10 });
+    } else {
+      await res.body?.cancel();
     }
   }
+
   return fuse;
 }
 
@@ -197,6 +203,7 @@ export async function getInitialPackageList() {
   if (!initialList) {
     const res = await fetch(INITIAL_LIST);
     if (res.status !== 200) {
+      await res.body?.cancel();
       throw new Error("bad api response");
     }
     const json: ApiModuleSearchResponse = await res.json();
