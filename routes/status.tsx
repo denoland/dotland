@@ -13,14 +13,14 @@ export default function StatusPage({ data }: PageProps<Build | Error>) {
   return (
     <>
       <Head>
-        <title>Publish Status | Deno</title>
+        <title>发布状态 | Deno</title>
       </Head>
       <div class="bg-gray-50 min-h-full">
         <Header />
         <div class="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 mt-8 pb-8 mb-16">
           <div>
             <h3 class="text-lg leading-6 font-medium text-gray-900">
-              Module publishing status
+              模块发布状态
             </h3>
             {!(data instanceof Error) &&
               (
@@ -40,7 +40,7 @@ export default function StatusPage({ data }: PageProps<Build | Error>) {
                 <dl>
                   <div class="sm:grid sm:grid-cols-3 sm:gap-4">
                     <dt class="text-sm leading-5 font-medium text-gray-500">
-                      Repository
+                      仓库
                     </dt>
                     <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                       <a
@@ -64,7 +64,7 @@ export default function StatusPage({ data }: PageProps<Build | Error>) {
                   </div>
                   <div class="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                     <dt class="text-sm leading-5 font-medium text-gray-500">
-                      Version
+                      版本
                     </dt>
                     <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                       {data.options.version}
@@ -72,7 +72,7 @@ export default function StatusPage({ data }: PageProps<Build | Error>) {
                   </div>
                   <div class="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                     <dt class="text-sm leading-5 font-medium text-gray-500">
-                      Source
+                      源码
                     </dt>
                     <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                       <a
@@ -81,13 +81,13 @@ export default function StatusPage({ data }: PageProps<Build | Error>) {
                         }`}
                         class="link"
                       >
-                        View on GitHub
+                        在 GitHub 查看
                       </a>
                     </dd>
                   </div>
                   <div class="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                     <dt class="text-sm leading-5 font-medium text-gray-500">
-                      Status
+                      状态
                     </dt>
                     <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                       <div class="flex">
