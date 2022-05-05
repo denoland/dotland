@@ -1,7 +1,7 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 import { PageConfig } from "../../deps.ts";
-import { accepts, HandlerContext } from "../../server_deps.ts";
+import { accepts } from "../../server_deps.ts";
 
 interface RegistryDefVariable {
   key: string;

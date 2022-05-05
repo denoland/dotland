@@ -1,7 +1,6 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 import { PageConfig } from "../deps.ts";
-import { HandlerContext } from "../server_deps.ts";
 
 export function handler(req: Request) {
   return Response.redirect(
