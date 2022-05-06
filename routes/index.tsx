@@ -265,7 +265,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           </p>
           <p class="my-4 text-gray-700">
             Run a{" "}
-            <a class="link" href="/manual/tools/testing">
+            <a class="link" href="/manual/testing">
               test
             </a>
             :
