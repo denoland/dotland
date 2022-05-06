@@ -27,12 +27,12 @@ const DENO_CLI_ACCEPT = "*/*";
 Deno.test({
   name: "/ responds with html",
   async fn() {
-    const res = await handleRequest(new Request("https://deno.land/"));
+    const res = await handleRequest(new Request("https://deno.js.cn/"));
     assert(res.headers.get("Content-Type")?.includes("text/html"));
     const text = await res.text();
     assertStringIncludes(
       text,
-      "<title>Deno - A modern runtime for JavaScript and TypeScript</title>",
+      "<title>Deno - 现代的 JavaScript 和 TypeScript 运行时</title>",
     );
   },
 });
