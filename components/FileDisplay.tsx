@@ -11,6 +11,7 @@ import {
 } from "../util/registry_utils.ts";
 
 export function FileDisplay(props: {
+  showCode: boolean;
   raw?: string;
   canonicalPath: string;
   sourceURL: string;
@@ -23,10 +24,13 @@ export function FileDisplay(props: {
 }) {
   const filetype = props.filetypeOverride ?? fileTypeFromURL(props.sourceURL);
   const filename = fileNameFromURL(props.sourceURL);
-
+  console.log(props.showCode);
   return (
     <div class="shadow-sm rounded-lg border border-gray-200 overflow-hidden bg-white">
-      <div class="bg-gray-100 border-b border-gray-200 py-2 px-4 flex justify-between">
+      <div
+        class={"bg-gray-100 border-b border-gray-200 py-2 flex justify-between " +
+          (filetype === "markdown" ? "pl-4 pr-2" : "px-4")}
+      >
         <div class="flex items-center">
           {isReadme(filename) && (
             <svg
@@ -48,18 +52,62 @@ export function FileDisplay(props: {
               )}
           </span>
         </div>
-        <div>
-          {props.sourceURL && (
-            <a href={props.sourceURL} class="link ml-4">
-              Raw
-            </a>
-          )}
-          {props.repositoryURL &&
-            (
-              <a href={props.repositoryURL} class="link ml-4">
-                Repository
+        <div class="inline-flex items-center">
+          <div>
+            {props.sourceURL && (
+              <a href={props.sourceURL} class="link ml-4">
+                Raw
               </a>
             )}
+            {props.repositoryURL &&
+              (
+                <a href={props.repositoryURL} class="link ml-4">
+                  Repository
+                </a>
+              )}
+          </div>
+          {filetype === "markdown" && (
+            <div class="inline-block ml-4 inline-flex shadow-sm rounded-md">
+              <a
+                href={props.pathname}
+                class={"relative inline-flex items-center px-1.5 py-1.5 rounded-l-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50 " +
+                  (props.showCode ? "bg-white" : "bg-gray-100")}
+              >
+                <span class="sr-only">Preview</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </a>
+              <a
+                href={props.pathname + "?showCode"}
+                class={"-ml-px relative inline-flex items-center px-1.5 py-1.5 rounded-r-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50 " +
+                  (!props.showCode ? "bg-white" : "bg-gray-100")}
+              >
+                <span class="sr-only">Code</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </a>
+            </div>
+          )}
         </div>
       </div>
       {props.documentationURL && (
@@ -112,18 +160,29 @@ export function FileDisplay(props: {
               />
             );
           case "markdown": {
-            return (
-              <div class="px-4">
-                <Markdown
-                  source={props.stdVersion === undefined
-                    ? props.raw!
-                    : props.raw!.replace(
-                      /\$STD_VERSION/g,
-                      props.stdVersion ?? "",
-                    )}
+            if (props.showCode) {
+              return (
+                <RawCodeBlock
+                  code={props.raw!}
+                  language="markdown"
+                  enableLineRef={true}
+                  class="p-2 sm:px-3 md:px-4"
                 />
-              </div>
-            );
+              );
+            } else {
+              return (
+                <div class="px-4">
+                  <Markdown
+                    source={props.stdVersion === undefined
+                      ? props.raw!
+                      : props.raw!.replace(
+                        /\$STD_VERSION/g,
+                        props.stdVersion ?? "",
+                      )}
+                  />
+                </div>
+              );
+            }
           }
           case "image":
             return <img class="w-full" src={props.sourceURL} />;

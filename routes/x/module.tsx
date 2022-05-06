@@ -165,6 +165,7 @@ function ModuleView({
   isStd: boolean;
   url: URL;
 } & Data) {
+  const showCode = url.searchParams.has("showCode");
   const stdVersion = isStd ? version : undefined;
 
   const basePath = getBasePath({ isStd, name, version });
@@ -426,6 +427,7 @@ function ModuleView({
                 )}
                 {rawFile !== null && (
                   <FileDisplay
+                    showCode={showCode}
                     raw={rawFile.content}
                     filetypeOverride={rawFile.highlight ? undefined : "text"}
                     canonicalPath={canonicalPath}
@@ -441,6 +443,7 @@ function ModuleView({
                   typeof readmeURL === "string" &&
                   typeof readmeCanonicalPath === "string" && (
                   <FileDisplay
+                    showCode={showCode}
                     raw={readmeFile}
                     canonicalPath={readmeCanonicalPath}
                     sourceURL={readmeURL}
