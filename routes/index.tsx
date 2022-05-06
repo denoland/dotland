@@ -58,47 +58,30 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <p class="my-4 text-gray-700">
-<<<<<<< HEAD
-            Deno 是一个简单的、现代的、安全的 JavaScript 和 TypeScript 运行时，基于 V8 引擎并采用 Rust 构建。
+            Deno 是一个简单的、现代的、安全的 JavaScript、TypeScript 和 WebAssembly 运行时，基于 V8
+            引擎并采用 Rust 构建。
           </p>
           <ol class="ml-8 list-disc text-gray-700">
             <li>
-              默认安全。除非显式开启，否则没有文件、网络、环境变量的访问权限。
-            </li>
-            <li>支持开箱即用的 TypeScript。</li>
-            <li>只发布单一的可执行程序。</li>
-            <li>
-              内置
-              <a class="link" href="/manual/tools">实用工具</a>，例如依赖检查 (
-=======
-            Deno is a simple, modern and secure runtime for JavaScript,
-            TypeScript, and WebAssembly that uses V8 and is built in Rust.
-          </p>
-          <ol class="ml-8 list-disc text-gray-700">
-            <li>
-              Provides{" "}
+              提供符合 Web 平台标准的{" "}
               <a class="link" href="/manual/runtime/web_platform_apis.md">
                 web platform functionality
               </a>{" "}
-              and adopts web platform standards.
+              。
             </li>
             <li>
-              Secure by default. No file, network, or environment access, unless
-              explicitly enabled.
+              默认安全。除非显式开启，否则没有文件、网络、环境变量的访问权限。
             </li>
             <li>
-              Supports <a class="link" href="/manual/typescript">TypeScript</a>
-              {" "}
-              out of the box.
+              开箱即用的 <a class="link" href="/manual/typescript">TypeScript</a> 支持。
             </li>
-            <li>Ships only a single executable file.</li>
+            <li>单一的可执行文件</li>
             <li>
-              Has{" "}
+              拥有一些列{" "}
               <a class="link" href="/manual/tools">
-                built-in development tooling
+                内置开发工具
               </a>{" "}
-              like a dependency inspector (
->>>>>>> 4e87b753e583a55580c8b2559e0657f4cd85af1f
+              例如依赖检查器 (
               <a class="link" href="/manual/tools/dependency_inspector">
                 <InlineCode>deno info</InlineCode>
               </a>) 和代码格式化 (<a class="link" href="/manual/tools/formatter">
@@ -106,17 +89,11 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
               </a>)。
             </li>
             <li>
-<<<<<<< HEAD
               自带一套经过审查 (安全审计) 的标准模块，并保证了代码与 Deno 完全兼容：{" "}
-              <a href="https://deno.land/std" class="link">
-=======
-              Has a set of reviewed (audited) standard modules that are
-              guaranteed to work with Deno:{" "}
               <a
-                href="https://doc.deno.land/https://deno.land/std"
+                href="https://doc.deno.js.cn/https://deno.land/std"
                 class="link"
               >
->>>>>>> 4e87b753e583a55580c8b2559e0657f4cd85af1f
                 deno.land/std
               </a>.
             </li>
@@ -126,11 +103,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
                 href="https://github.com/denoland/deno/wiki#companies-interested-in-deno"
                 class="link"
               >
-<<<<<<< HEAD
                 公司对 Deno 感兴趣
-=======
-                companies interested in using and exploring Deno.
->>>>>>> 4e87b753e583a55580c8b2559e0657f4cd85af1f
               </a>
             </li>
           </ol>
