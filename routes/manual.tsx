@@ -27,9 +27,11 @@ import versionMeta from "../versions.json" assert { type: "json" };
 interface Data {
   tableOfContents: TableOfContents;
   content: string;
+  version: string;
 }
 
 export default function Manual({ params, url, data }: PageProps<Data>) {
+  const { version } = data;
   const path = params.path ? `/${params.path}` : "/introduction";
 
   const pageList = (() => {
@@ -50,7 +52,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
   const pageIndex = pageList.findIndex((page) =>
     page.path === `/manual${path}`
   );
-  const sourceURL = getFileURL(params.version, path);
+  const sourceURL = getFileURL(version, path);
 
   const tableOfContentsMap = (() => {
     const map = new Map<string, string>();
@@ -68,10 +70,10 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
   const pageTitle = tableOfContentsMap.get(path) || "";
 
   const stdVersion = ((versionMeta.cli_to_std as Record<string, string>)[
-    params.version
+    version
   ]) ?? versionMeta.std[0];
 
-  const isPreview = isPreviewVersion(params.version);
+  const isPreview = isPreviewVersion(version);
 
   return (
     <div>
@@ -162,7 +164,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                   </div>
                 </a>
                 <Version
-                  version={params.version}
+                  version={version}
                   versions={versions}
                   path={path}
                 />
@@ -191,7 +193,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                 </div>
               </a>
               <Version
-                version={params.version}
+                version={version}
                 versions={versions}
                 path={path}
               />
@@ -303,17 +305,13 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             {isPreview && (
               <UserContributionBanner
                 href={(() => {
-                  const newUrl = new URL(
-                    `/manual@${versions[0]}/${params.path}`,
-                    url,
-                  );
-                  return newUrl.href;
+                  return new URL(`/manual/${params.path}`, url).href;
                 })()}
               />
             )}
             <div class="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20">
               <a
-                href={getDocURL(params.version, path)}
+                href={getDocURL(version, path)}
                 class={`text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right ${
                   path.split("/").length === 2 ? "mt-11" : "mt-9"
                 } mr-4`}
@@ -336,7 +334,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                 <Markdown
                   source={data.content
                     .replace(/\$STD_VERSION/g, stdVersion)
-                    .replace(/\$CLI_VERSION/g, params.version)}
+                    .replace(/\$CLI_VERSION/g, version)}
                   baseUrl={sourceURL}
                 />
               </div>
@@ -346,7 +344,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                     href={params.version
                       ? pageList[pageIndex - 1].path.replace(
                         "manual",
-                        `manual@${params.version}`,
+                        `manual@${version}`,
                       )
                       : pageList[pageIndex - 1].path}
                     class="text-gray-900 hover:text-gray-600 font-normal"
@@ -359,7 +357,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                     href={params.version
                       ? pageList[pageIndex + 1].path.replace(
                         "manual",
-                        `manual@${params.version}`,
+                        `manual@${version}`,
                       )
                       : pageList[pageIndex + 1].path}
                     class="text-gray-900 hover:text-gray-600 font-normal float-right"
@@ -514,21 +512,18 @@ function ToC({
 export const handler: Handlers<Data> = {
   async GET(req, { params, render }) {
     const url = new URL(req.url);
-    if (!params.version) {
-      url.pathname = `/manual@${versions[0]}/${params.path ?? ""}`;
-      return Response.redirect(url);
-    }
     if (url.pathname.endsWith(".md")) {
       url.pathname = url.pathname.slice(0, -3);
       return Response.redirect(url);
     }
 
+    const version = params.version || versions[0];
     const sourceURL = getFileURL(
-      params.version,
+      version,
       params.path ? `/${params.path}` : "/introduction",
     );
     const [tableOfContents, content] = await Promise.all([
-      getTableOfContents(params.version),
+      getTableOfContents(version),
       fetch(sourceURL)
         .then(async (res) => {
           if (res.status !== 200) {
@@ -545,7 +540,7 @@ export const handler: Handlers<Data> = {
         }),
     ]);
 
-    return render!({ tableOfContents, content });
+    return render!({ tableOfContents, content, version });
   },
 };
 
