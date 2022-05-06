@@ -1,9 +1,9 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-const xBasepath = "https://deno.land/x/manual@";
 const githubBasepath = "https://cdn.jsdelivr.net/gh/denocn/deno_docs@";
 const docpath = "https://github.com/denocn/deno_docs/blob/";
 import VERSIONS from "../versions.json" assert { type: "json" };
+import { getSourceURL } from "./registry_utils.ts";
 
 export const versions = VERSIONS.cli;
 
@@ -20,7 +20,7 @@ export function basepath(version: string) {
   if (isPreviewVersion(version)) {
     return githubBasepath + version;
   }
-  return xBasepath + version;
+  return getSourceURL("manual", version, "");
 }
 
 export async function getTableOfContents(

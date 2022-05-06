@@ -58,17 +58,30 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
         </div>
         <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20">
           <p class="my-4 text-gray-700">
-            Deno 是一个简单的、现代的、安全的 JavaScript 和 TypeScript 运行时，基于 V8 引擎并采用 Rust 构建。
+            Deno 是一个简单的、现代的、安全的 JavaScript、TypeScript 和 WebAssembly 运行时，基于 V8
+            引擎并采用 Rust 构建。
           </p>
           <ol class="ml-8 list-disc text-gray-700">
             <li>
+              提供符合 Web 平台标准的{" "}
+              <a class="link" href="/manual/runtime/web_platform_apis.md">
+                web platform functionality
+              </a>{" "}
+              。
+            </li>
+            <li>
               默认安全。除非显式开启，否则没有文件、网络、环境变量的访问权限。
             </li>
-            <li>支持开箱即用的 TypeScript。</li>
-            <li>只发布单一的可执行程序。</li>
             <li>
-              内置
-              <a class="link" href="/manual/tools">实用工具</a>，例如依赖检查 (
+              开箱即用的 <a class="link" href="/manual/typescript">TypeScript</a> 支持。
+            </li>
+            <li>单一的可执行文件</li>
+            <li>
+              拥有一些列{" "}
+              <a class="link" href="/manual/tools">
+                内置开发工具
+              </a>{" "}
+              例如依赖检查器 (
               <a class="link" href="/manual/tools/dependency_inspector">
                 <InlineCode>deno info</InlineCode>
               </a>) 和代码格式化 (<a class="link" href="/manual/tools/formatter">
@@ -77,9 +90,12 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             </li>
             <li>
               自带一套经过审查 (安全审计) 的标准模块，并保证了代码与 Deno 完全兼容：{" "}
-              <a href="https://deno.land/std" class="link">
+              <a
+                href="https://doc.deno.js.cn/https://deno.land/std"
+                class="link"
+              >
                 deno.land/std
-              </a>
+              </a>.
             </li>
             <li>
               已有很多{" "}
