@@ -42,5 +42,10 @@
     "image": "/images/showcase/zencron.png",
     "title": "Zen Cron",
     "link": "https://zencron.com/"
+  },
+  {
+    "image": "/images/showcase/bloginmail.png",
+    "title": "BlogInMail",
+    "link": "https://bloginmail.com/"
   }
 ]
