@@ -24,7 +24,7 @@ export function FileDisplay(props: {
 }) {
   const filetype = props.filetypeOverride ?? fileTypeFromURL(props.sourceURL);
   const filename = fileNameFromURL(props.sourceURL);
-  console.log(props.showCode);
+
   return (
     <div class="shadow-sm rounded-lg border border-gray-200 overflow-hidden bg-white">
       <div
