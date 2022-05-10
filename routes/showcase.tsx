@@ -30,7 +30,10 @@ export default function ShowcasePage() {
           <p class={tw`mt-4 text-lg`}>
             Check out some websites, apps, and other products built with Deno.
           </p>
-          <div class={tw`my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end`}>
+          <div
+            class={tw
+              `my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end`}
+          >
             {PROJECTS.map((project, i) => <Item key={i} project={project} />)}
           </div>
           <p class={tw`mt-4 text-lg`}>

@@ -6,7 +6,10 @@ import { ComponentChildren, h, tw } from "../deps.ts";
 export function Footer({ simple }: { simple?: boolean }) {
   return (
     <div class={simple ? undefined : "bg-gray-50 border-t border-gray-200"}>
-      <div class={tw`max-w-screen-xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8`}>
+      <div
+        class={tw
+          `max-w-screen-xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8`}
+      >
         <nav class={tw`-mx-5 -my-2 flex flex-wrap justify-center`}>
           <FooterItem href="/manual">
             Manual

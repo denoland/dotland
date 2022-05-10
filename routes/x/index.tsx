@@ -2,7 +2,7 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { emojify, Fragment, h, Head, PageProps, twas, tw } from "../../deps.ts";
+import { emojify, Fragment, h, Head, PageProps, tw, twas } from "../../deps.ts";
 import { Handlers } from "../../server_deps.ts";
 
 import { Header } from "../../components/Header.tsx";
@@ -87,7 +87,8 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
             <input
               name="query"
               id="query"
-              class={tw`block w-full px-4 py-2 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1`}
+              class={tw
+                `block w-full px-4 py-2 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1`}
               type="text"
               placeholder={!data.resp
                 ? "Search"
@@ -95,18 +96,30 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
               value={query}
             />
           </form>
-          <div class={tw`sm:max-w-screen-lg sm:mx-auto sm:px-6 md:px-8 pb-4 sm:pb-12`}>
+          <div
+            class={tw
+              `sm:max-w-screen-lg sm:mx-auto sm:px-6 md:px-8 pb-4 sm:pb-12`}
+          >
             {data.resp === null
               ? (
-                <div class={tw`p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate`}>
+                <div
+                  class={tw
+                    `p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate`}
+                >
                   Failed to load modules
                 </div>
               )
               : (
-                <div class={tw`bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4`}>
+                <div
+                  class={tw
+                    `bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4`}
+                >
                   {data.resp.results.length == 0
                     ? (
-                      <div class={tw`p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500`}>
+                      <div
+                        class={tw
+                          `p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500`}
+                      >
                         No modules found. Please let us know what you're looking
                         for by{" "}
                         <a
@@ -158,7 +171,8 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
           </div>
           <div
             id="info"
-            class={tw`max-w-screen-xl mx-auto pt-4 pb-8 sm:pt-8 px-4 sm:px-6 lg:pt-12 lg:px-8`}
+            class={tw
+              `max-w-screen-xl mx-auto pt-4 pb-8 sm:pt-8 px-4 sm:px-6 lg:pt-12 lg:px-8`}
           >
             <dl class={tw`md:grid md:grid-cols-2 md:gap-8`}>
               <div>
@@ -167,7 +181,9 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
                     How do I use modules on deno.land/x?
                   </dt>
                   <dd class={tw`mt-2`}>
-                    <p class={tw`text-base leading-6 text-gray-500 break-words`}>
+                    <p
+                      class={tw`text-base leading-6 text-gray-500 break-words`}
+                    >
                       The basic format of code URLs is
                       <InlineCode>
                         https://deno.land/x/IDENTIFIER@VERSION/FILE_PATH
@@ -198,14 +214,17 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
                     How do I add a module to deno.land/x?
                   </dt>
                   <dd class={tw`mt-2`}>
-                    <p class={tw`text-base leading-6 text-gray-500 break-words`}>
+                    <p
+                      class={tw`text-base leading-6 text-gray-500 break-words`}
+                    >
                       Press the button below and follow the presented
                       instructions:
                     </p>
                     <span class={tw`block w-full rounded-md shadow-sm mt-4`}>
                       <a
                         href="/add_module"
-                        class={tw`w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out`}
+                        class={tw
+                          `w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out`}
                       >
                         Publish a module
                       </a>
@@ -269,7 +288,10 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
               </div>
             </dl>
           </div>
-          <div class={tw`max-w-screen-lg mx-auto pt-4 pb-8 sm:pt-8 sm:pb-12 px-4 sm:px-6 lg:pt-12 lg:pb-16 lg:px-8`}>
+          <div
+            class={tw
+              `max-w-screen-lg mx-auto pt-4 pb-8 sm:pt-8 sm:pb-12 px-4 sm:px-6 lg:pt-12 lg:pb-16 lg:px-8`}
+          >
             <h4 class={tw`font-semibold text-2xl`} id="stats">
               Stats
             </h4>
@@ -278,7 +300,10 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
                 <div class={tw`mt-4 grid grid-cols-1 sm:grid-cols-2 gap-8`}>
                   <div>
                     <h5 class={tw`font-medium text-lg`}>New modules</h5>
-                    <div class={tw`bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2`}>
+                    <div
+                      class={tw
+                        `bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2`}
+                    >
                       <ModuleList
                         modules={data.stats.recently_added_modules.map((v) => ({
                           name: v.name,
@@ -291,7 +316,10 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
                   </div>
                   <div>
                     <h5 class={tw`font-medium text-lg`}>Recently updated</h5>
-                    <div class={tw`bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2`}>
+                    <div
+                      class={tw
+                        `bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2`}
+                    >
                       <ModuleList
                         modules={data.stats.recently_uploaded_versions.map((
                           v,
@@ -333,15 +361,22 @@ function ModuleList({
           <li class={i !== 0 ? "border-t border-gray-200" : ""} key={i}>
             <a
               href={link}
-              class={tw`block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out`}
+              class={tw
+                `block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out`}
             >
               <div class={tw`flex items-center px-4 sm:px-6 py-2`}>
                 <div class={tw`min-w-0 flex-1 flex items-center`}>
                   <div class={tw`min-w-0 flex-1`}>
-                    <div class={tw`text-sm leading-5 font-medium text-blue-500 truncate`}>
+                    <div
+                      class={tw
+                        `text-sm leading-5 font-medium text-blue-500 truncate`}
+                    >
                       {meta.name}
                     </div>
-                    <div class={tw`mt-1 flex items-center text-sm leading-5 text-gray-500`}>
+                    <div
+                      class={tw
+                        `mt-1 flex items-center text-sm leading-5 text-gray-500`}
+                    >
                       <span class={tw`truncate`}>
                         {meta.description
                           ? emojify(meta.description)
@@ -353,7 +388,10 @@ function ModuleList({
                       </span>
                     </div>
                     {meta.date && (
-                      <div class={tw`mt-1 flex items-center text-sm leading-5 text-gray-400`}>
+                      <div
+                        class={tw
+                          `mt-1 flex items-center text-sm leading-5 text-gray-400`}
+                      >
                         <span
                           class={tw`truncate`}
                           title={new Date(meta.date).toLocaleString()}

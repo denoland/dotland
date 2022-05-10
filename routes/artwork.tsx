@@ -49,7 +49,10 @@ export default function ArtworkPage() {
             </a>
           </p>
         </div>
-        <div class={tw`my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end`}>
+        <div
+          class={tw
+            `my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end`}
+        >
           {ARTWORKS.map((artwork, i) => <Item key={i} artwork={artwork} />)}
         </div>
       </div>
@@ -71,7 +74,10 @@ function Item({ artwork }: { artwork: Artwork }) {
       <div class={tw`mt-3 text-xl font-semibold text-center`}>
         {artwork.link
           ? (
-            <a href={artwork.link} class={tw`hover:text-gray-700 hover:underline`}>
+            <a
+              href={artwork.link}
+              class={tw`hover:text-gray-700 hover:underline`}
+            >
               {artwork.title}
             </a>
           )

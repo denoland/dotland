@@ -40,7 +40,10 @@ export default function TranslationsPage() {
             </a>
           </p>
         </div>
-        <div class={tw`my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end`}>
+        <div
+          class={tw
+            `my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end`}
+        >
           {TRANSLATIONS.map((language, i) => (
             <LanguageItem key={i} language={language} />
           ))}
@@ -63,7 +66,10 @@ function LanguageItem({ language }: { language: Translation }) {
         </a>
       </div>
       <div class={tw`flex justify-center mt-3`}>
-        <a href={language.repository} class={tw`text-gray-500 hover:text-gray-700`}>
+        <a
+          href={language.repository}
+          class={tw`text-gray-500 hover:text-gray-700`}
+        >
           <span class={tw`sr-only`}>GitHub</span>
           <svg class={tw`h-6 w-6`} fill="currentColor" viewBox="0 0 24 24">
             <path

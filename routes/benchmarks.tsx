@@ -158,7 +158,9 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
       <div class={tw`bg-gray-50 min-h-full`}>
         <Header subtitle="Continuous Benchmarks" widerContent={true} />
         <div class={tw`mb-12`}>
-          <div class={tw`max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 mt-8 pb-8`}>
+          <div
+            class={tw`max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 mt-8 pb-8`}
+          >
             <img src="/images/deno_logo_4.gif" class={tw`mb-12 w-32 h-32`} />
             <h4 class={tw`text-2xl font-bold tracking-tight`}>About</h4>
             <p class={tw`mt-4`}>
@@ -239,7 +241,10 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
               </ul>
               <div class={tw`mt-8`}>
                 <a href="#execution-time" id="execution-time">
-                  <h5 class={tw`text-lg font-medium tracking-tight hover:underline`}>
+                  <h5
+                    class={tw
+                      `text-lg font-medium tracking-tight hover:underline`}
+                  >
                     Execution time
                   </h5>
                 </a>
@@ -261,7 +266,10 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
               </div>
               <div class={tw`mt-8`}>
                 <a href="#thread-count" id="thread-count">
-                  <h5 class={tw`text-lg font-medium tracking-tight hover:underline`}>
+                  <h5
+                    class={tw
+                      `text-lg font-medium tracking-tight hover:underline`}
+                  >
                     Thread count
                   </h5>
                 </a>
@@ -276,7 +284,10 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
               </div>
               <div class={tw`mt-8`}>
                 <a href="#syscall-count" id="syscall-count">
-                  <h5 class={tw`text-lg font-medium tracking-tight hover:underline`}>
+                  <h5
+                    class={tw
+                      `text-lg font-medium tracking-tight hover:underline`}
+                  >
                     Syscall count
                   </h5>
                 </a>{" "}
@@ -292,7 +303,10 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
               </div>
               <div class={tw`mt-8`}>
                 <a href="#max-memory-usage" id="max-memory-usage">
-                  <h5 class={tw`text-lg font-medium tracking-tight hover:underline`}>
+                  <h5
+                    class={tw
+                      `text-lg font-medium tracking-tight hover:underline`}
+                  >
                     Max memory usage
                   </h5>
                 </a>{" "}
@@ -314,7 +328,10 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
               </h4>
               <div class={tw`mt-8`}>
                 <a href="#type-checking" id="type-checking">
-                  <h5 class={tw`text-lg font-medium tracking-tight hover:underline`}>
+                  <h5
+                    class={tw
+                      `text-lg font-medium tracking-tight hover:underline`}
+                  >
                     Type Checking
                   </h5>
                 </a>
@@ -356,11 +373,13 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                 <span
                   role="checkbox"
                   tabIndex={0}
-                  class={tw`bg-gray-900 relative inline-block flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full transition-colors ease-in-out duration-200 focus:outline-none focus:shadow-outline`}
+                  class={tw
+                    `bg-gray-900 relative inline-block flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full transition-colors ease-in-out duration-200 focus:outline-none focus:shadow-outline`}
                 >
                   <span
                     aria-hidden="true"
-                    class={tw`inline-block h-5 w-5 rounded-full bg-white shadow transform transition ease-in-out duration-200`}
+                    class={tw
+                      `inline-block h-5 w-5 rounded-full bg-white shadow transform transition ease-in-out duration-200`}
                   />
                 </span>
                 <span class={tw`ml-2 text-gray-900`}>
@@ -374,7 +393,10 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
               <h4 class={tw`text-2xl font-bold tracking-tight`}>Size</h4>
               <div class={tw`mt-8`}>
                 <a href="#executable-size" id="executable-size">
-                  <h5 class={tw`text-lg font-medium tracking-tight hover:underline`}>
+                  <h5
+                    class={tw
+                      `text-lg font-medium tracking-tight hover:underline`}
+                  >
                     File sizes
                   </h5>
                 </a>
@@ -390,7 +412,10 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
               </div>
               <div class={tw`mt-8`}>
                 <a href="#bundle-size" id="bundle-size">
-                  <h5 class={tw`text-lg font-medium tracking-tight hover:underline`}>
+                  <h5
+                    class={tw
+                      `text-lg font-medium tracking-tight hover:underline`}
+                  >
                     Bundle size
                   </h5>
                 </a>{" "}
@@ -413,7 +438,10 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
               </div>
               <div class={tw`mt-8`}>
                 <a href="#cargo-deps" id="cargo-deps">
-                  <h5 class={tw`text-lg font-medium tracking-tight hover:underline`}>
+                  <h5
+                    class={tw
+                      `text-lg font-medium tracking-tight hover:underline`}
+                  >
                     Cargo Dependencies
                   </h5>
                 </a>{" "}

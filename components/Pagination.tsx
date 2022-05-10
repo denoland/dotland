@@ -42,7 +42,10 @@ export function Pagination(
   }
 
   return (
-    <div class={tw`bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6`}>
+    <div
+      class={tw
+        `bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6`}
+    >
       {!query
         ? (
           <>
@@ -65,7 +68,10 @@ export function Pagination(
                 Next
               </MaybeA>
             </div>
-            <div class={tw`hidden sm:flex-1 sm:flex sm:items-center sm:justify-between`}>
+            <div
+              class={tw
+                `hidden sm:flex-1 sm:flex sm:items-center sm:justify-between`}
+            >
               <div>
                 <p class={tw`text-sm leading-5 text-gray-700`}>
                   Showing{" "}
@@ -130,13 +136,19 @@ export function Pagination(
                         >
                           2
                         </a>
-                        <span class={tw`inline-flex md:hidden -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700`}>
+                        <span
+                          class={tw
+                            `inline-flex md:hidden -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700`}
+                        >
                           ...
                         </span>
                       </>
                     )
                     : (
-                      <span class={tw`-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700`}>
+                      <span
+                        class={tw
+                          `-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700`}
+                      >
                         ...
                       </span>
                     )}
@@ -183,13 +195,19 @@ export function Pagination(
                         >
                           {pageCount - 1}
                         </a>
-                        <span class={tw`inline-flex md:hidden -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700`}>
+                        <span
+                          class={tw
+                            `inline-flex md:hidden -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700`}
+                        >
                           ...
                         </span>
                       </>
                     )
                     : (
-                      <span class={tw`-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700`}>
+                      <span
+                        class={tw
+                          `-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700`}
+                      >
                         ...
                       </span>
                     )}

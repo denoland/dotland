@@ -30,21 +30,35 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
         <title>Deno - A modern runtime for JavaScript and TypeScript</title>
       </Head>
       <div class={tw`bg-white`}>
-        <div class={tw`bg-gray-50 overflow-x-hidden border-b border-gray-200 relative`}>
+        <div
+          class={tw
+            `bg-gray-50 overflow-x-hidden border-b border-gray-200 relative`}
+        >
           <Background />
           <Header main />
-          <div class={tw`relative max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center`}>
-            <h1 class={tw`font-extrabold text-5xl leading-10 tracking-tight text-gray-900`}>
+          <div
+            class={tw
+              `relative max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center`}
+          >
+            <h1
+              class={tw
+                `font-extrabold text-5xl leading-10 tracking-tight text-gray-900`}
+            >
               Deno
             </h1>
-            <h2 class={tw`mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900`}>
-              A <strong class={tw`font-semibold`}>modern</strong> runtime for{" "}
+            <h2
+              class={tw
+                `mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900`}
+            >
+              A <strong class={tw`font-semibold`}>modern</strong> runtime for
+              {" "}
               <strong class={tw`font-semibold`}>JavaScript</strong> and{" "}
               <strong class={tw`font-semibold`}>TypeScript</strong>.
             </h2>
             <a
               href="/#installation"
-              class={tw`rounded-full mt-8 px-8 py-2 transition-colors duration-75 ease-in-out bg-blue-500 hover:bg-blue-400 text-white text-lg shadow-lg`}
+              class={tw
+                `rounded-full mt-8 px-8 py-2 transition-colors duration-75 ease-in-out bg-blue-500 hover:bg-blue-400 text-white text-lg shadow-lg`}
             >
               Install
             </a>
@@ -74,8 +88,8 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
               explicitly enabled.
             </li>
             <li>
-              Supports <a class={tw`link`} href="/manual/typescript">TypeScript</a>
-              {" "}
+              Supports{" "}
+              <a class={tw`link`} href="/manual/typescript">TypeScript</a>{" "}
               out of the box.
             </li>
             <li>Ships only a single executable file.</li>
@@ -325,7 +339,10 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
               </a>
             </li>
             <li>
-              <a href="https://examples.deno.land/import-export" class={tw`link`}>
+              <a
+                href="https://examples.deno.land/import-export"
+                class={tw`link`}
+              >
                 Importing & Exporting
               </a>
             </li>
@@ -338,7 +355,10 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
               </a>
             </li>
             <li>
-              <a href="https://examples.deno.land/http-requests" class={tw`link`}>
+              <a
+                href="https://examples.deno.land/http-requests"
+                class={tw`link`}
+              >
                 HTTP Requests
               </a>
             </li>
@@ -395,7 +415,8 @@ function DenoInProductionSection() {
         {companies.map(({ name, logo, url }) => (
           <li class={tw`mb-2 md:mb-0`} key={url}>
             <a
-              class={tw`flex items-center gap-2 flex-nowrap opacity-70 hover:opacity-100`}
+              class={tw
+                `flex items-center gap-2 flex-nowrap opacity-70 hover:opacity-100`}
               href={url}
               target="_blank"
             >

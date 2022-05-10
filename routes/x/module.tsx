@@ -9,8 +9,8 @@ import {
   Head,
   PageConfig,
   PageProps,
-  twas,
   tw,
+  twas,
 } from "../../deps.ts";
 import { accepts, Handlers } from "../../server_deps.ts";
 import {
@@ -88,7 +88,10 @@ export default function Registry({ params, url, data }: PageProps<Data>) {
           subtitle={name === "std" ? "Standard Library" : "Third Party Modules"}
           widerContent
         />
-        <div class={tw`max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8 pt-4`}>
+        <div
+          class={tw
+            `max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8 pt-4`}
+        >
           <Breadcrumbs
             name={name}
             version={version}
@@ -193,15 +196,24 @@ function ModuleView({
   function SidePanel() {
     return (
       <div class={tw`relative sm:static row-start-1 md:row-start-auto`}>
-        <div class={tw`sticky top-4 col-span-1 flex flex-col sm:flex-row md:flex-col gap-4`}>
-          <div class={tw`max-w-sm w-full shadow-sm rounded-lg border border-gray-200 overflow-hidden`}>
+        <div
+          class={tw
+            `sticky top-4 col-span-1 flex flex-col sm:flex-row md:flex-col gap-4`}
+        >
+          <div
+            class={tw
+              `max-w-sm w-full shadow-sm rounded-lg border border-gray-200 overflow-hidden`}
+          >
             <div class={tw`bg-gray-50 p-4`}>
               <div class={tw`text-xl font-bold`}>{name}</div>
               {versionMeta === undefined
                 ? (
                   <>
                     <div class={tw`w-4/5 sm:w-full bg-gray-100 h-3 my-2`}></div>
-                    <div class={tw`w-4/5 sm:w-2/3 bg-gray-100 h-3 my-2 block sm:hidden md:block`}>
+                    <div
+                      class={tw
+                        `w-4/5 sm:w-2/3 bg-gray-100 h-3 my-2 block sm:hidden md:block`}
+                    >
                     </div>
                     <div class={tw`mt-3 flex items-center py-0.5`}>
                       <svg
@@ -303,7 +315,10 @@ function ModuleView({
             </div>
           </div>
 
-          <div class={tw`max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4`}>
+          <div
+            class={tw
+              `max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4`}
+          >
             <p class={tw`text-md font-semibold mb-2`}>Version Info</p>
             {versionMeta === null
               ? null
@@ -328,8 +343,13 @@ function ModuleView({
               )}
           </div>
           {documentationURL && externalDependencies !== null && (
-            <div class={tw`max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4`}>
-              <p class={tw`text-md font-semibold mb-2`}>External Dependencies</p>
+            <div
+              class={tw
+                `max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4`}
+            >
+              <p class={tw`text-md font-semibold mb-2`}>
+                External Dependencies
+              </p>
               {externalDependencies && (
                 <>
                   <div class={tw`mt-2 overflow-x-auto`}>
@@ -382,7 +402,10 @@ function ModuleView({
           } else if (dirEntries === null && rawFile === null) {
             // No files
             return (
-              <div class={tw`rounded-lg overflow-hidden border border-gray-200 bg-white`}>
+              <div
+                class={tw
+                  `rounded-lg overflow-hidden border border-gray-200 bg-white`}
+              >
                 {versionMeta && (
                   <DirectoryListing
                     name={name}
@@ -398,7 +421,10 @@ function ModuleView({
             );
           } else if (rawFile instanceof Error) {
             return (
-              <div class={tw`rounded-lg overflow-hidden border border-gray-200 bg-white`}>
+              <div
+                class={tw
+                  `rounded-lg overflow-hidden border border-gray-200 bg-white`}
+              >
                 {versionMeta && (
                   <DirectoryListing
                     name={name}
@@ -537,7 +563,8 @@ function VersionSelector({
       <div class={tw`max-w-xs rounded-md shadow-sm w-full`}>
         <select
           id="version"
-          class={tw`block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5`}
+          class={tw
+            `block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5`}
           value={selectedVersion}
           onChange={`((e) => { window.location = "/${
             isStd ? "" : "x/"
@@ -558,7 +585,8 @@ function VersionSelector({
       {versions[0] !== selectedVersion && (
         <button
           type="button"
-          class={tw`mt-2 w-full inline-flex justify-center py-1 px-2 border border-red-300 rounded-md bg-white text-sm leading-5 font-medium text-red-500 hover:text-red-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-red transition duration-150 ease-in-out`}
+          class={tw
+            `mt-2 w-full inline-flex justify-center py-1 px-2 border border-red-300 rounded-md bg-white text-sm leading-5 font-medium text-red-500 hover:text-red-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-red transition duration-150 ease-in-out`}
           aria-label="Go to latest version"
           onClick={`window.location = "/${isStd ? "" : "x/"}${name}@${
             versions[0]
