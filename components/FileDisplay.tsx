@@ -1,7 +1,7 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-import { h } from "../deps.ts";
+import { h, tw } from "../deps.ts";
 import { RawCodeBlock } from "./CodeBlock.tsx";
 import { Markdown } from "./Markdown.tsx";
 import {
@@ -26,54 +26,54 @@ export function FileDisplay(props: {
   const filename = fileNameFromURL(props.sourceURL);
 
   return (
-    <div class="shadow-sm rounded-lg border border-gray-200 overflow-hidden bg-white">
+    <div class={tw`shadow-sm rounded-lg border border-gray-200 overflow-hidden bg-white`}>
       <div
         class={"bg-gray-100 border-b border-gray-200 py-2 flex justify-between " +
           (filetype === "markdown" ? "pl-4 pr-2" : "px-4")}
       >
-        <div class="flex items-center">
+        <div class={tw`flex items-center`}>
           {isReadme(filename) && (
             <svg
               fill="currentColor"
               viewBox="0 0 20 20"
-              class="w-6 h-6 text-gray-400 inline-block mr-2"
+              class={tw`w-6 h-6 text-gray-400 inline-block mr-2`}
             >
               <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z">
               </path>
             </svg>
           )}
-          <span class="font-medium">
+          <span class={tw`font-medium`}>
             {props.canonicalPath === props.pathname
               ? filename
               : (
-                <a href={props.canonicalPath} class="link">
+                <a href={props.canonicalPath} class={tw`link`}>
                   {filename}
                 </a>
               )}
           </span>
         </div>
-        <div class="inline-flex items-center">
+        <div class={tw`inline-flex items-center`}>
           <div>
             {props.sourceURL && (
-              <a href={props.sourceURL} class="link ml-4">
+              <a href={props.sourceURL} class={tw`link ml-4`}>
                 Raw
               </a>
             )}
             {props.repositoryURL &&
               (
-                <a href={props.repositoryURL} class="link ml-4">
+                <a href={props.repositoryURL} class={tw`link ml-4`}>
                   Repository
                 </a>
               )}
           </div>
           {filetype === "markdown" && (
-            <div class="inline-block ml-4 inline-flex shadow-sm rounded-md">
+            <div class={tw`inline-block ml-4 inline-flex shadow-sm rounded-md`}>
               <a
                 href={props.pathname}
                 class={"relative inline-flex items-center px-1.5 py-1.5 rounded-l-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50 " +
                   (props.showCode ? "bg-white" : "bg-gray-100")}
               >
-                <span class="sr-only">Preview</span>
+                <span class={tw`sr-only`}>Preview</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -92,7 +92,7 @@ export function FileDisplay(props: {
                 class={"-ml-px relative inline-flex items-center px-1.5 py-1.5 rounded-r-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50 " +
                   (!props.showCode ? "bg-white" : "bg-gray-100")}
               >
-                <span class="sr-only">Code</span>
+                <span class={tw`sr-only`}>Code</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -113,13 +113,13 @@ export function FileDisplay(props: {
       {props.documentationURL && (
         <a
           href={props.documentationURL}
-          class="bg-gray-100 border-b border-gray-200 py-1 px-4 flex align-middle justify-between link group"
+          class={tw`bg-gray-100 border-b border-gray-200 py-1 px-4 flex align-middle justify-between link group`}
         >
           <span>
             <svg
               fill="currentColor"
               viewBox="0 0 20 20"
-              class="w-6 h-6 text-gray-400 inline-block mr-2 group-hover:text-blue-300 transition duration-100 ease-in-out"
+              class={tw`w-6 h-6 text-gray-400 inline-block mr-2 group-hover:text-blue-300 transition duration-100 ease-in-out`}
             >
               <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z">
               </path>
@@ -147,7 +147,7 @@ export function FileDisplay(props: {
                 code={props.raw!}
                 language={filetype}
                 enableLineRef={true}
-                class="p-2 sm:px-3 md:px-4"
+                class={tw`p-2 sm:px-3 md:px-4`}
               />
             );
           case "html":
@@ -156,7 +156,7 @@ export function FileDisplay(props: {
                 code={props.raw!}
                 language="markdown"
                 enableLineRef={true}
-                class="p-2 sm:px-3 md:px-4"
+                class={tw`p-2 sm:px-3 md:px-4`}
               />
             );
           case "markdown": {
@@ -166,12 +166,12 @@ export function FileDisplay(props: {
                   code={props.raw!}
                   language="markdown"
                   enableLineRef={true}
-                  class="p-2 sm:px-3 md:px-4"
+                  class={tw`p-2 sm:px-3 md:px-4`}
                 />
               );
             } else {
               return (
-                <div class="px-4">
+                <div class={tw`px-4`}>
                   <Markdown
                     source={props.stdVersion === undefined
                       ? props.raw!
@@ -185,14 +185,14 @@ export function FileDisplay(props: {
             }
           }
           case "image":
-            return <img class="w-full" src={props.sourceURL} />;
+            return <img class={tw`w-full`} src={props.sourceURL} />;
           default:
             return (
               <RawCodeBlock
                 code={props.raw!}
                 language="text"
                 enableLineRef={true}
-                class="p-2 sm:px-3 md:px-4"
+                class={tw`p-2 sm:px-3 md:px-4`}
               />
             );
         }

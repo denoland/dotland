@@ -3,7 +3,7 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 
-import { ComponentProps, Fragment, h } from "../deps.ts";
+import { ComponentProps, Fragment, h, tw } from "../deps.ts";
 import { PaginationProps } from "../util/pagination_utils.ts";
 import { SearchResult } from "../util/registry_utils.ts";
 
@@ -42,11 +42,11 @@ export function Pagination(
   }
 
   return (
-    <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+    <div class={tw`bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6`}>
       {!query
         ? (
           <>
-            <div class="flex-1 flex justify-between items-center sm:hidden">
+            <div class={tw`flex-1 flex justify-between items-center sm:hidden`}>
               <MaybeA
                 disabled={!hasPrevious}
                 href={toPage(currentPage - 1)}
@@ -54,7 +54,7 @@ export function Pagination(
               >
                 Previous
               </MaybeA>
-              <div class="text-base leading-6 text-gray-500">
+              <div class={tw`text-base leading-6 text-gray-500`}>
                 {currentPage}/{pageCount}
               </div>
               <MaybeA
@@ -65,26 +65,26 @@ export function Pagination(
                 Next
               </MaybeA>
             </div>
-            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+            <div class={tw`hidden sm:flex-1 sm:flex sm:items-center sm:justify-between`}>
               <div>
-                <p class="text-sm leading-5 text-gray-700">
+                <p class={tw`text-sm leading-5 text-gray-700`}>
                   Showing{" "}
-                  <span class="font-medium">
+                  <span class={tw`font-medium`}>
                     {(currentPage - 1) * perPage + 1}
                   </span>{" "}
                   to{" "}
-                  <span class="font-medium">
+                  <span class={tw`font-medium`}>
                     {(currentPage - 1) * perPage + response.results.length}
                   </span>{" "}
                   of{" "}
-                  <span class="font-medium">
+                  <span class={tw`font-medium`}>
                     {response.totalCount}
                   </span>{" "}
                   results
                 </p>
               </div>
               <div>
-                <nav class="relative z-0 inline-flex shadow-sm">
+                <nav class={tw`relative z-0 inline-flex shadow-sm`}>
                   <MaybeA
                     disabled={!hasPrevious}
                     href={toPage(currentPage - 1)}
@@ -96,7 +96,7 @@ export function Pagination(
                     aria-label="Previous"
                   >
                     <svg
-                      class="h-5 w-5"
+                      class={tw`h-5 w-5`}
                       viewBox="0 0 20 20"
                       fill="currentColor"
                     >
@@ -130,13 +130,13 @@ export function Pagination(
                         >
                           2
                         </a>
-                        <span class="inline-flex md:hidden -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
+                        <span class={tw`inline-flex md:hidden -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700`}>
                           ...
                         </span>
                       </>
                     )
                     : (
-                      <span class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
+                      <span class={tw`-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700`}>
                         ...
                       </span>
                     )}
@@ -183,13 +183,13 @@ export function Pagination(
                         >
                           {pageCount - 1}
                         </a>
-                        <span class="inline-flex md:hidden -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
+                        <span class={tw`inline-flex md:hidden -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700`}>
                           ...
                         </span>
                       </>
                     )
                     : (
-                      <span class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
+                      <span class={tw`-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700`}>
                         ...
                       </span>
                     )}
@@ -214,7 +214,7 @@ export function Pagination(
                     aria-label="Previous"
                   >
                     <svg
-                      class="h-5 w-5"
+                      class={tw`h-5 w-5`}
                       viewBox="0 0 20 20"
                       fill="currentColor"
                     >

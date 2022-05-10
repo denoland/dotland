@@ -2,7 +2,7 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, Head } from "../deps.ts";
+import { Fragment, h, Head, tw } from "../deps.ts";
 import { Footer } from "../components/Footer.tsx";
 import { Header } from "../components/Header.tsx";
 
@@ -24,20 +24,20 @@ export default function ShowcasePage() {
         <title>Showcase | Deno</title>
       </Head>
       <Header />
-      <div class="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 mt-8 mb-24">
-        <div class="max-w-screen-lg mx-auto">
-          <h4 class="text-4xl font-bold tracking-tight">Showcase</h4>
-          <p class="mt-4 text-lg">
+      <div class={tw`max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 mt-8 mb-24`}>
+        <div class={tw`max-w-screen-lg mx-auto`}>
+          <h4 class={tw`text-4xl font-bold tracking-tight`}>Showcase</h4>
+          <p class={tw`mt-4 text-lg`}>
             Check out some websites, apps, and other products built with Deno.
           </p>
-          <div class="my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end">
+          <div class={tw`my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end`}>
             {PROJECTS.map((project, i) => <Item key={i} project={project} />)}
           </div>
-          <p class="mt-4 text-lg">
+          <p class={tw`mt-4 text-lg`}>
             Do you have a project using Deno?{" "}
             <a
               href="https://github.com/denoland/dotland/blob/main/showcase.json"
-              class="link"
+              class={tw`link`}
             >
               Add it!
             </a>
@@ -56,21 +56,21 @@ function Item({ project }: { project: Project }) {
         <img
           src={project.image}
           alt={project.title}
-          class="object-contain shadow-lg rounded-lg w-72"
+          class={tw`object-contain shadow-lg rounded-lg w-72`}
         />
       </a>
-      <div class="mt-4">
-        <span class="text-lg">
+      <div class={tw`mt-4`}>
+        <span class={tw`text-lg`}>
           <a href={project.link} class="">{project.title}</a>
         </span>
         {project.github && (
           <a
             href={`https://github.com/${project.github}`}
-            class="ml-2 text-gray-500 hover:text-gray-700"
+            class={tw`ml-2 text-gray-500 hover:text-gray-700`}
           >
-            <span class="sr-only">GitHub</span>
+            <span class={tw`sr-only`}>GitHub</span>
             <svg
-              class="h-6 w-6 inline float-right"
+              class={tw`h-6 w-6 inline float-right`}
               fill="currentColor"
               viewBox="0 0 24 24"
             >

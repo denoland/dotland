@@ -2,7 +2,7 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h } from "../deps.ts";
+import { Fragment, h, tw } from "../deps.ts";
 import {
   DirListing,
   Entry,
@@ -64,23 +64,23 @@ export function DirectoryListing(props: DirectoryListingProps) {
   };
 
   return (
-    <div class="flex flex-col overflow-x-auto">
-      <div class="inline-block min-w-full shadow-sm rounded-lg border border-gray-200 overflow-hidden">
-        <div class="bg-gray-100 border-b border-gray-200 py-2 px-4 flex justify-between">
-          <div class="flex items-center">
+    <div class={tw`flex flex-col overflow-x-auto`}>
+      <div class={tw`inline-block min-w-full shadow-sm rounded-lg border border-gray-200 overflow-hidden`}>
+        <div class={tw`bg-gray-100 border-b border-gray-200 py-2 px-4 flex justify-between`}>
+          <div class={tw`flex items-center`}>
             <svg
               fill="currentColor"
               viewBox="0 0 20 20"
-              class="w-6 h-6 text-gray-400 inline-block mr-2"
+              class={tw`w-6 h-6 text-gray-400 inline-block mr-2`}
             >
               <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z">
               </path>
             </svg>
-            <span class="ml-2 font-medium">{props.path || "/"}</span>
+            <span class={tw`ml-2 font-medium`}>{props.path || "/"}</span>
           </div>
           {props.repositoryURL &&
             (
-              <a href={props.repositoryURL} class="link ml-4">
+              <a href={props.repositoryURL} class={tw`link ml-4`}>
                 Repository
               </a>
             )}
@@ -88,17 +88,17 @@ export function DirectoryListing(props: DirectoryListingProps) {
         <div>
           <input
             type="checkbox"
-            class="hidden"
+            class={tw`hidden`}
             id="hiddenItemsToggle"
             autoComplete="off"
           />
-          <table class="min-w-full table-fixed w-full">
+          <table class={tw`min-w-full table-fixed w-full`}>
             <colgroup>
-              <col class="w-9 md:w-12" />
-              <col class="w-max-content" />
+              <col class={tw`w-9 md:w-12`} />
+              <col class={tw`w-max-content`} />
               <col style={{ width: "5.5rem" }} />
             </colgroup>
-            <tbody class="bg-white">
+            <tbody class={tw`bg-white`}>
               {displayItems.map((entry: Entry, i: number) => {
                 const isLastItem = displayItems.length - 1 === i;
                 return (
@@ -115,13 +115,13 @@ export function DirectoryListing(props: DirectoryListingProps) {
                 (
                   <tr
                     id="hiddenItemsTr"
-                    class="bg-gray-50 cursor-pointer hover:bg-gray-100 border-t border-gray-200"
+                    class={tw`bg-gray-50 cursor-pointer hover:bg-gray-100 border-t border-gray-200`}
                   >
                     <td colSpan={3}>
                       <label htmlFor="hiddenItemsToggle">
                         <div
                           id="hiddenItemsButton"
-                          class="select-none w-full text-center text-sm px-2 sm:pl-3 md:pl-4 py-1 text-blue-500"
+                          class={tw`select-none w-full text-center text-sm px-2 sm:pl-3 md:pl-4 py-1 text-blue-500`}
                         >
                           <span>
                             {`Close hidden ${
@@ -186,7 +186,7 @@ function TableRow({
       }`}
       name={isHiddenItem ? "hidden" : ""}
     >
-      <td class="whitespace-no-wrap text-sm leading-5 text-gray-400">
+      <td class={tw`whitespace-no-wrap text-sm leading-5 text-gray-400`}>
         <a
           href={href}
           class={`px-2 sm:pl-3 md:pl-4 py-1 w-full block ${
@@ -194,7 +194,7 @@ function TableRow({
           }`}
           tabIndex={-1}
         >
-          <svg fill="currentColor" viewBox="0 0 20 20" class="w-5 h-5">
+          <svg fill="currentColor" viewBox="0 0 20 20" class={tw`w-5 h-5`}>
             {(() => {
               switch (entry.type) {
                 case "file":
@@ -222,9 +222,9 @@ function TableRow({
           </svg>
         </a>
       </td>
-      <td class="whitespace-no-wrap text-sm text-blue-500 leading-5">
-        <a href={href} class="pl-2 py-1 w-full block truncate">
-          {entry.path && <span class="font-light">{entry.path}/</span>}
+      <td class={tw`whitespace-no-wrap text-sm text-blue-500 leading-5`}>
+        <a href={href} class={tw`pl-2 py-1 w-full block truncate`}>
+          {entry.path && <span class={tw`font-light`}>{entry.path}/</span>}
           <span
             class={isReadme(entry.name) || entry.path ? "font-medium" : ""}
           >
@@ -232,10 +232,10 @@ function TableRow({
           </span>
         </a>
       </td>
-      <td class="whitespace-no-wrap text-sm leading-5 text-gray-500 text-right">
+      <td class={tw`whitespace-no-wrap text-sm leading-5 text-gray-500 text-right`}>
         <a
           href={href}
-          class="px-4 py-1 pl-1 w-full h-full block"
+          class={tw`px-4 py-1 pl-1 w-full h-full block`}
           tabIndex={-1}
         >
           {entry.size && bytesToSize(entry.size)}
