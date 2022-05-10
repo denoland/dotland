@@ -30,12 +30,6 @@
     "repository": "https://github.com/mumumilk/deno_website2_portuguese"
   },
   {
-    "language": "Français",
-    "english": "French",
-    "link": "https://deno-fr.vercel.app/",
-    "repository": "https://github.com/Ayfri/deno_website2_fr"
-  },
-  {
     "language": "فارسی",
     "english": "Persian",
     "link": "https://deno-fa.vercel.app/",
