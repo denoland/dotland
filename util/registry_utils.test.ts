@@ -10,7 +10,6 @@ import {
   getVersionList,
   getVersionMeta,
   isReadme,
-  parseNameVersion,
   VersionMetaInfo,
 } from "./registry_utils.ts";
 import { assert, assertEquals, assertNotEquals } from "../test_deps.ts";
@@ -198,6 +197,26 @@ Deno.test("findRootReadme", () => {
   }
 });
 
+Deno.test("findRootReadme selection", () => {
+  {
+    const rootReadme = findRootReadme([
+      { path: "/.github/README.md", type: "file", size: 100 },
+      { path: "/docs/README.md", type: "file", size: 100 },
+      { path: "/README.md", type: "file", size: 100 },
+    ]);
+
+    assertEquals(rootReadme?.name, "README.md");
+  }
+  {
+    const rootReadme = findRootReadme([
+      { path: "/.github/README.md", type: "file", size: 100 },
+      { path: "/docs/README.md", type: "file", size: 100 },
+    ]);
+
+    assertEquals(rootReadme?.name, "docs/README.md");
+  }
+});
+
 Deno.test("isReadme", () => {
   const tests: Array<[string, boolean]> = [
     ["README", true],
@@ -217,12 +236,4 @@ Deno.test("isReadme", () => {
   for (const [path, expectedToBeReadme] of tests) {
     assertEquals([path, isReadme(path)], [path, expectedToBeReadme]);
   }
-});
-
-Deno.test("parseNameVersion", () => {
-  assertEquals(parseNameVersion("ms@v0.1.0"), ["ms", "v0.1.0"]);
-  assertEquals(parseNameVersion("xstate@xstate@4.25.0"), [
-    "xstate",
-    "xstate@4.25.0",
-  ]);
 });

@@ -14,12 +14,12 @@ export default function RegistryPage(props: PageProps) {
 }
 
 export const handler: Handlers = {
-  GET(ctx) {
-    ctx.match.name = "std";
-    if (ctx.match.version?.startsWith("v")) {
-      ctx.match.version = ctx.match.version.slice(1);
+  GET(req, ctx) {
+    ctx.params.name = "std";
+    if (ctx.params.version?.startsWith("v")) {
+      ctx.params.version = ctx.params.version.slice(1);
     }
-    return xHandler.GET!(ctx);
+    return xHandler.GET!(req, ctx);
   },
 };
 
