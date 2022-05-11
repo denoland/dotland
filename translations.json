@@ -52,5 +52,11 @@
     "english": "中库尔德语",
     "link": "https://denoland-ckb.deno.dev",
     "repository": "https://github.com/roj1512/dotland"
+  },
+  {
+    "language": "हिंदी",
+    "english": "Hindi",
+    "link": "https://hindi.deno.dev/",
+    "repository": "https://github.com/slectgit/dotland-hi"
   }
 ]
