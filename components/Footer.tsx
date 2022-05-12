@@ -35,6 +35,9 @@ export function Footer({ simple }: { simple?: boolean }) {
           <FooterItem href="/showcase">
             案例展示
           </FooterItem>
+          <FooterItem href="https://deno.news/">
+            Deno News
+          </FooterItem>
         </nav>
         <div class="mt-9 flex justify-center">
           <a

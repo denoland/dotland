@@ -30,6 +30,7 @@ export default function TranslationsPage() {
         <div class="max-w-screen-lg mx-auto">
           <h4 class="text-4xl font-bold tracking-tight">翻译</h4>
           <p class="mt-4 text-lg">
+<<<<<<< HEAD
             Deno 文档提供以下语言版本。是否漏掉了你的语言呢？{" "}
             <a
               href="https://github.com/denoland/dotland/blob/main/translations.json"
@@ -37,6 +38,16 @@ export default function TranslationsPage() {
             >
               马上添加！
             </a>
+=======
+            Deno docs is available in the following languages.
+          </p>
+          <p class="mt-4 text-lg">
+            Disclaimer: these pages are maintained by third party contributors
+            and not by Deno. They may contain out-of-date information.
+          </p>
+          <p class="mt-4 text-lg">
+            Deprecation Notice: we are not accepting new translations.
+>>>>>>> d6cf768ee8f381fd280f855ef0e56e8d4d488232
           </p>
         </div>
         <div class="my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end">
