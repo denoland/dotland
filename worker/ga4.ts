@@ -39,15 +39,18 @@ export interface Session {
   hitCount: number;
 }
 
+type TrafficType = "direct" | "organic" | "referral" | "internal" | "custom";
+
 export interface Page {
   location: string;
   title: string;
   referrer?: string;
   ignoreReferrer?: boolean;
-  trafficType?: "direct" | "organic" | "referral" | "internal" | "custom";
+  trafficType?: TrafficType;
   firstVisit?: boolean;
   newToSite?: boolean;
 }
+
 export interface Campaign {
   source: string;
   medium: string;
@@ -88,10 +91,9 @@ export class GA4Report {
       location: request.url,
       title: getPageTitle(request, response),
       referrer: getPageReferrer(request),
+      trafficType: getPageTrafficType(request),
+      firstVisit: getFirstVisit(request, response),
     };
-    if (this.page.referrer != null) {
-      this.page.trafficType = "referral";
-    }
     this.campaign = undefined;
     this.events = [{ name: "page_view", params: {} }];
   }
@@ -135,73 +137,53 @@ export class GA4Report {
     const queryParams: Record<string, string> = {};
 
     // Version; must be set to "2" to send events to GA4.
-    maybeAddShortParam(queryParams, "v", 2);
-    maybeAddShortParam(queryParams, "tid", this.measurementId);
+    addShortParam(queryParams, "v", 2);
+    addShortParam(queryParams, "tid", this.measurementId);
 
-    maybeAddShortParam(queryParams, "cid", this.client.id);
-    maybeAddShortParam(queryParams, "ul", this.client.language);
-    maybeAddShortParam(queryParams, "_uip", this.client.ip);
+    addShortParam(queryParams, "cid", this.client.id);
+    addShortParam(queryParams, "ul", this.client.language);
+    addShortParam(queryParams, "_uip", this.client.ip);
 
-    maybeAddShortParam(queryParams, "uid", this.user.id);
-
-    maybeAddShortParam(queryParams, "cs", this.campaign?.source);
-    maybeAddShortParam(queryParams, "cm", this.campaign?.medium);
-    maybeAddShortParam(queryParams, "ci", this.campaign?.id);
-    maybeAddShortParam(queryParams, "cn", this.campaign?.name);
-    maybeAddShortParam(queryParams, "cc", this.campaign?.content);
-    maybeAddShortParam(queryParams, "ck", this.campaign?.term);
-
-    maybeAddShortParam(queryParams, "sid", this.session?.id);
-    maybeAddShortParam(queryParams, "sct", this.session?.number);
-    maybeAddShortParam(queryParams, "seg", this.session?.engaged);
-    maybeAddShortParam(queryParams, "_s", this.session?.hitCount);
-
-    maybeAddShortParam(queryParams, "dl", this.page.location);
-    maybeAddShortParam(queryParams, "dr", this.page.referrer);
-    maybeAddShortParam(queryParams, "dt", this.page.title);
-    maybeAddShortParam(queryParams, "ir", this.page.ignoreReferrer);
-    maybeAddShortParam(queryParams, "tt", this.page.trafficType);
-
-    if (this.event != null) {
-      for (const prop of ["category", "label"] as const) {
-        maybeAddCustomEventParam(
-          queryParams,
-          "ep",
-          `event_${prop}`,
-          this.event[prop],
-        );
-      }
-      for (const [name, value] of Object.entries(this.event.params)) {
-        maybeAddCustomEventParam(queryParams, "ep", name, value);
-      }
-
-      maybeAddShortParam(queryParams, "en", this.event.name);
-
-      maybeAddShortParam(queryParams, "_fv", this.page.firstVisit);
-      maybeAddShortParam(queryParams, "_nsi", this.page.newToSite);
-      maybeAddShortParam(queryParams, "_ss", this.session?.start);
+    addShortParam(queryParams, "uid", this.user.id);
+    for (const [name, value] of Object.entries(this.user.properties)) {
+      addCustomParam(queryParams, "up", name, value);
     }
 
-    for (const [name, value] of Object.entries(this.user.properties)) {
-      maybeAddCustomEventParam(queryParams, "up", name, value);
+    addShortParam(queryParams, "cs", this.campaign?.source);
+    addShortParam(queryParams, "cm", this.campaign?.medium);
+    addShortParam(queryParams, "ci", this.campaign?.id);
+    addShortParam(queryParams, "cn", this.campaign?.name);
+    addShortParam(queryParams, "cc", this.campaign?.content);
+    addShortParam(queryParams, "ck", this.campaign?.term);
+
+    addShortParam(queryParams, "sid", this.session?.id);
+    addShortParam(queryParams, "sct", this.session?.number);
+    addShortParam(queryParams, "seg", this.session?.engaged);
+    addShortParam(queryParams, "_s", this.session?.hitCount);
+
+    addShortParam(queryParams, "dl", this.page.location);
+    addShortParam(queryParams, "dr", this.page.referrer);
+    addShortParam(queryParams, "dt", this.page.title);
+    addShortParam(queryParams, "ir", this.page.ignoreReferrer, false);
+    addShortParam(queryParams, "tt", this.page.trafficType, "internal");
+
+    if (this.event != null) {
+      addEventParams(queryParams, this.event);
+      // When part of the URL query, the event name must be placed *after* the
+      // parameters.
+      addShortParam(queryParams, "en", this.event.name);
+      // Automatically collected events.
+      addShortParam(queryParams, "_fv", this.page.firstVisit, false);
+      addShortParam(queryParams, "_nts", this.page.newToSite, false);
+      addShortParam(queryParams, "_ss", this.session?.start, false);
     }
 
     const extraEvents = this.events.slice(1) as Event[];
     const eventParamsList = extraEvents.map((event) => {
       const eventParams: Record<string, string> = {};
       // Inside the body, the event name must be placed *before* the parameters.
-      maybeAddShortParam(eventParams, "en", event.name);
-      for (const prop of ["category", "label"] as const) {
-        maybeAddCustomEventParam(
-          eventParams,
-          "ep",
-          `event_${prop}`,
-          event[prop],
-        );
-      }
-      for (const [name, value] of Object.entries(event.params)) {
-        maybeAddCustomEventParam(eventParams, "ep", name, value);
-      }
+      addShortParam(eventParams, "en", event.name);
+      addEventParams(eventParams, event);
       return eventParams;
     });
 
@@ -299,15 +281,6 @@ function getSession(conn: ConnInfo): Session {
   return session;
 }
 
-function getPageReferrer(request: Request): string | undefined {
-  const referrer = request.headers.get("referer");
-  if (
-    referrer !== null && new URL(referrer).host !== new URL(request.url).host
-  ) {
-    return referrer;
-  }
-}
-
 function getPageTitle(request: Request, response: Response): string {
   if (
     (request.method === "GET" || request.method === "HEAD") &&
@@ -327,6 +300,50 @@ function getPageTitle(request: Request, response: Response): string {
   } else {
     return formatStatus(response).toLowerCase();
   }
+}
+
+function getPageReferrer(request: Request): string | undefined {
+  const referrer = request.headers.get("referer");
+  if (
+    referrer !== null && new URL(referrer).host !== new URL(request.url).host
+  ) {
+    return referrer;
+  }
+}
+
+function getFirstVisit(
+  request: Request,
+  response: Response,
+): boolean | undefined {
+  if (!/^(HEAD|GET)$/.test(request.method)) {
+    return false;
+  }
+  if (request.headers.get("cookie")) {
+    return false;
+  }
+  if (/immutable/i.test(response.headers.get("cache-control") ?? "")) {
+    return false;
+  }
+  if (response.headers.get("last-modified")) {
+    return request.headers.get("if-modified-since") ? true : false;
+  }
+  if (response.headers.get("etag")) {
+    return request.headers.get("if-none-match") ? true : false;
+  }
+  return undefined; // Undetermined.
+}
+
+function getPageTrafficType(
+  request: Request,
+): TrafficType | undefined {
+  const referrer = request.headers.get("referer");
+  if (referrer == null) {
+    return;
+  }
+  if (new URL(request.url).host === new URL(referrer).host) {
+    return "internal";
+  }
+  return "referral";
 }
 
 export function formatStatus(response: Response): string {
@@ -350,12 +367,13 @@ export function isServerError(response: Response): boolean {
   return status >= 500 && status <= 599;
 }
 
-function maybeAddShortParam(
+function addShortParam(
   params: Record<string, string>,
   name: string,
   value?: Primitive,
+  implicitDefault?: Primitive,
 ) {
-  if (value == null) {
+  if (value === undefined || value === implicitDefault) {
     // Do nothing.
   } else if (typeof value === "boolean") {
     params[name] = value ? "1" : "0";
@@ -364,7 +382,7 @@ function maybeAddShortParam(
   }
 }
 
-function maybeAddCustomEventParam(
+function addCustomParam(
   params: Record<string, string>,
   prefix: string,
   name: string,
@@ -378,6 +396,23 @@ function maybeAddCustomEventParam(
     params[`${prefix}n.${name}`] = String(value);
   } else {
     params[`${prefix}.${name}`] = String(value);
+  }
+}
+
+/** Adds the event's category, label, and custom parameters to the parameter set
+ * `params`. Note that the event name is *not* added.
+ */
+function addEventParams(params: Record<string, string>, event: Event) {
+  for (const prop of ["category", "label"] as const) {
+    addCustomParam(
+      params,
+      "ep",
+      `event_${prop}`,
+      event[prop],
+    );
+  }
+  for (const [name, value] of Object.entries(event.params)) {
+    addCustomParam(params, "ep", name, value);
   }
 }
 
