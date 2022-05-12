@@ -47,5 +47,11 @@
     "image": "/images/showcase/bloginmail.png",
     "title": "BlogInMail",
     "link": "https://bloginmail.com/"
+  },
+  {
+    "image": "/images/showcase/peko.png",
+    "title": "Peko",
+    "link": "https://peko.deno.dev/",
+    "github": "sebringrose/peko"
   }
 ]
