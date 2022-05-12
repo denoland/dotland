@@ -53,5 +53,11 @@
     "title": "Denoflow",
     "link": "https://playground.owenyoung.com/",
     "github": "denoflow/denoflow"
+  },
+  {
+    "image": "/images/showcase/peko.png",
+    "title": "Peko",
+    "link": "https://peko.deno.dev/",
+    "github": "sebringrose/peko"
   }
 ]

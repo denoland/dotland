@@ -296,6 +296,7 @@ function ModuleView({
                   selectedVersion={version}
                   name={name}
                   isStd={isStd}
+                  path={path}
                 />
               </div>
             </div>
@@ -519,11 +520,13 @@ function VersionSelector({
   selectedVersion,
   name,
   isStd,
+  path,
 }: {
   versions: string[];
   selectedVersion: string;
   name: string;
   isStd: boolean;
+  path: string;
 }) {
   return (
     <div class="gap-2 w-full">
@@ -537,7 +540,7 @@ function VersionSelector({
           value={selectedVersion}
           onChange={`((e) => { window.location = "/${
             isStd ? "" : "x/"
-          }${name}@" + e.target.value; })(event)`}
+          }${name}@" + e.target.value + "${path}"; })(event)`}
         >
           {!versions.includes(selectedVersion) && (
             <option key={selectedVersion} value={selectedVersion}>
@@ -558,7 +561,7 @@ function VersionSelector({
           aria-label="Go to latest version"
           onClick={`window.location = "/${isStd ? "" : "x/"}${name}@${
             versions[0]
-          }";`}
+          }${path}";`}
         >
           Go to latest
         </button>
@@ -604,7 +607,7 @@ export const handler: Handlers<Data> = {
         headers: {
           Location: `/${isStd ? name : "x/" + name}@${versions!.latest}${path}`,
           "x-deno-warning": `Implicitly using latest version (${
-            version!.latest
+            versions!.latest
           }) for ${url.href}`,
           "Access-Control-Allow-Origin": "*",
         },
