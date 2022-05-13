@@ -10,4 +10,3 @@ export type { ConnInfo } from "https://deno.land/std@0.126.0/http/server.ts";
 export { createReporter } from "https://deno.land/x/g_a@0.1.2/mod.ts";
 export type { Reporter } from "https://deno.land/x/g_a@0.1.2/mod.ts";
 export { router } from "https://crux.land/router@0.0.12";
-export type { HandlerContext } from "https://crux.land/router@0.0.12";

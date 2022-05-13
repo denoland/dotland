@@ -3,10 +3,8 @@
 import { PageConfig } from "../../deps.ts";
 import { HandlerContext } from "../../server_deps.ts";
 
-export function handler({ match }: HandlerContext) {
-  return Response.redirect(`https://deno.com/blog/${match.path}`, 307);
+export function handler(_, { params }: HandlerContext) {
+  return Response.redirect(`https://deno.com/blog/${params.path}`, 307);
 }
 
-export const config: PageConfig = {
-  routeOverride: "/posts/:path*",
-};
+export const config: PageConfig = { routeOverride: "/posts/:path*" };
