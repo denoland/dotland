@@ -59,5 +59,11 @@
     "title": "Peko",
     "link": "https://peko.deno.dev/",
     "github": "sebringrose/peko"
+  },
+  {
+    "image": "/images/showcase/grammy.png",
+    "title": "grammY",
+    "link": "https://grammy.dev/",
+    "github": "grammyjs/grammy"
   }
 ]

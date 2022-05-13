@@ -113,6 +113,30 @@ Deno.test({
 });
 
 Deno.test({
+  name: "/v1 responds with /posts/v1 redirect",
+  async fn() {
+    const res = await handleRequest(
+      new Request("https://deno.land/v1"),
+    );
+    assertEquals(res.status, 307);
+    assert(res.headers.get("Location")?.includes("/posts/v1"));
+    await res.text();
+  },
+});
+
+Deno.test({
+  name: "/posts/v1 responds with https://deno.com/blog/v1 redirect",
+  async fn() {
+    const res = await handleRequest(
+      new Request("https://deno.land/posts/v1"),
+    );
+    assertEquals(res.status, 307);
+    assert(res.headers.get("Location")?.includes("https://deno.com/blog/v1"));
+    await res.text();
+  },
+});
+
+Deno.test({
   name: "extractAltLineNumberReference",
   fn() {
     type TestCase = {

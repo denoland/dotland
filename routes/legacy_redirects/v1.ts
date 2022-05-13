@@ -3,9 +3,7 @@
 import { PageConfig } from "../../deps.ts";
 
 export function handler() {
-  return Response.redirect("https://deno.land/posts/v1", 301);
+  return Response.redirect("https://deno.land/posts/v1", 307);
 }
 
-export const config: PageConfig = {
-  routeOverride: "/v1",
-};
+export const config: PageConfig = { routeOverride: "/v1" };
