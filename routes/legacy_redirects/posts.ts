@@ -3,7 +3,7 @@
 import { PageConfig } from "../../deps.ts";
 import { HandlerContext } from "../../server_deps.ts";
 
-export function handler(_, { params }: HandlerContext) {
+export function handler(_: Request, { params }: HandlerContext) {
   return Response.redirect(`https://deno.com/blog/${params.path}`, 307);
 }
 

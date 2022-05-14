@@ -87,6 +87,7 @@ export function RawCodeBlock({
               {tokens.map((_, i) => (
                 <div
                   class="token text-right"
+                  // @ts-ignore onClick does support strings
                   onClick={`location.hash = "#L${i + 1}"`}
                 >
                   {i + 1}

@@ -48,6 +48,7 @@ export default function AddModulePage() {
         <Header subtitle="Third Party Modules" widerContent={true} />
         <form
           class="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8"
+          // @ts-ignore onSubmit does support strings
           onSubmit="(async (e) => {
           e.preventDefault();
           const name = document.getElementById('modulename').value;
@@ -101,12 +102,14 @@ export default function AddModulePage() {
                       type="text"
                       placeholder="Module Name"
                       autoComplete="off"
+                      // @ts-ignore inInvalid does support strings
                       onInvalid="((e) => {
                         document.getElementById('moduleNameNotAvailable').style.display = 'none';
                         document.getElementById('moduleNameAvailable').style.display = 'none';
                         e.target.classList.add(...MODULENAME_INVALID_CLASSES);
                         e.target.classList.remove(...MODULENAME_VALID_CLASSES);
                       })(event)"
+                      // @ts-ignore onInput does support strings
                       onInput={`(async (e) => {
                         updateWebhookUrl();
                         if (!e.target.checkValidity()) {
@@ -171,6 +174,7 @@ export default function AddModulePage() {
                       type="text"
                       placeholder="Subdirectory"
                       pattern="^([^(/)])(.*\/$)"
+                      // @ts-ignore onInput does support strings
                       onInput="updateWebhookUrl()"
                     />
                     <span class="text-red-400 hidden">
