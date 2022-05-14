@@ -23,7 +23,6 @@ jobs:
       - name: Type Check
         run: deno check --remote main.ts
 
-
   test:
     runs-on: ubuntu-latest
     steps:
@@ -36,4 +35,4 @@ jobs:
           deno-version: v1.x
 
       - name: Run Tests
-        run: deno test --allow-net --allow-read --allow-env --allow-hrtime --check
+        run: deno test --allow-net --allow-read --allow-env --allow-hrtime
