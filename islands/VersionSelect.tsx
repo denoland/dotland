@@ -12,8 +12,8 @@ export default function VersionSelect({ versions, selectedVersion }: {
           `block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5`}
         value={selectedVersion}
         onChange={(e) => {
-          if (e.target!.value !== selectedVersion) {
-            location.href = versions[e.target!.value];
+          if (e.currentTarget.value !== selectedVersion) {
+            location.href = versions[e.currentTarget.value];
           }
         }}
       >
