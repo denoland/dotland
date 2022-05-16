@@ -1,10 +1,10 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-import { apply, create, shim, virtualSheet, RenderContext, RenderFn } from "../server_deps.ts";
+import { apply, setup, virtualSheet, RenderContext, RenderFn } from "../server_deps.ts";
 
 const sheet = virtualSheet();
 sheet.reset();
-const { tw } = create({
+setup({
   sheet,
   mode: "silent",
   theme: {
@@ -40,19 +40,20 @@ const { tw } = create({
   },
 });
 
-export function render(ctx: RenderContext, render: RenderFn) {
-  const snapshot = ctx.state.get("twindSnapshot") as unknown[] | null;
-  sheet.reset(snapshot || undefined);
-  tw`
+/*  tw`
   text-green-500 text-red-400 mb-2
   border-green-300
   hover:border-green-300
   focus:border-green-300
   border-red-300
   hover:border-red-300
-  focus:border-red-300`;
-  shim(render(), { tw });
-  ctx.styles.splice(0, ctx.styles.length, ...sheet.target);
+  focus:border-red-300`;*/
+
+export function render(ctx: RenderContext, render: RenderFn) {
+  const snapshot = ctx.state.get("twindSnapshot") as unknown[] | null;
+  sheet.reset(snapshot || undefined);
+  render();
+  ctx.styles.splice(0, ctx.styles.length, ...(sheet).target);
   const newSnapshot = sheet.reset();
   ctx.state.set("twindSnapshot", newSnapshot);
 }
