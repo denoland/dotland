@@ -340,9 +340,10 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             >
               <a
                 href={getDocURL(version, path)}
-                class={tw`text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right ${
-                  path.split("/").length === 2 ? "mt-11" : "mt-9"
-                } mr-4`}
+                class={tw
+                  `text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right ${
+                    path.split("/").length === 2 ? "mt-11" : "mt-9"
+                  } mr-4`}
               >
                 <span class={tw`sr-only`}>GitHub</span>
                 <svg
