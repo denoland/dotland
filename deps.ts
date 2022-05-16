@@ -1,8 +1,14 @@
 import { IS_BROWSER } from "https://raw.githubusercontent.com/lucacasonato/fresh/ec388f87fb19cf5c247ad62c9a0beb771170da07/runtime.ts";
 export * from "https://raw.githubusercontent.com/lucacasonato/fresh/ec388f87fb19cf5c247ad62c9a0beb771170da07/runtime.ts";
 
-import { apply, setup, theme, tw, Configuration } from "https://esm.sh/twind@0.16.16?pin=v76";
-export {apply, setup, theme, tw};
+import {
+  apply,
+  Configuration,
+  setup,
+  theme,
+  tw,
+} from "https://esm.sh/twind@0.16.16?pin=v76";
+export { apply, setup, theme, tw };
 export { css } from "https://esm.sh/twind@0.16.16/css?pin=v76";
 
 export const config: Configuration = {

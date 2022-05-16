@@ -8,7 +8,8 @@ export default function VersionSelect({ versions, selectedVersion }: {
   return (
     <div class={tw`max-w-xs rounded-md shadow-sm w-full`}>
       <select
-        class={tw`block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5`}
+        class={tw
+          `block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5`}
         value={selectedVersion}
         onChange={(e) => {
           if (e.target!.value !== selectedVersion) {

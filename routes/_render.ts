@@ -1,7 +1,7 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 import { config, setup } from "../deps.ts";
-import { virtualSheet, RenderContext, RenderFn } from "../server_deps.ts";
+import { RenderContext, RenderFn, virtualSheet } from "../server_deps.ts";
 
 const sheet = virtualSheet();
 sheet.reset();

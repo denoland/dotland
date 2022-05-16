@@ -452,7 +452,12 @@ function Version({
         Version
       </label>
       <div class="mt-1 sm:mt-0 sm:col-span-2">
-        <VersionSelect versions={Object.fromEntries(versions.map((ver) => [ver, `/manual@${ver}${path}`]))} selectedVersion={version} />
+        <VersionSelect
+          versions={Object.fromEntries(
+            versions.map((ver) => [ver, `/manual@${ver}${path}`]),
+          )}
+          selectedVersion={version}
+        />
       </div>
     </div>
   );

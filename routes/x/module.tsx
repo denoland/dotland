@@ -2,15 +2,8 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import {
-  Fragment,
-  h,
-  Head,
-  PageConfig,
-  PageProps,
-  tw,
-} from "../../deps.ts";
-import { accepts, Handlers, twas, emojify } from "../../server_deps.ts";
+import { Fragment, h, Head, PageConfig, PageProps, tw } from "../../deps.ts";
+import { accepts, emojify, Handlers, twas } from "../../server_deps.ts";
 import {
   denoDocAvailableForURL,
   DirEntry,
@@ -559,9 +552,14 @@ function VersionSelector({
       <label htmlFor="version" class={tw`sr-only`}>
         Version
       </label>
-      <VersionSelect versions={Object.fromEntries(versions.map((ver) => [ver, `/${
-        isStd ? "" : "x/"
-      }${name}@${ver}${path}`]))} selectedVersion={selectedVersion} />
+      <VersionSelect
+        versions={Object.fromEntries(
+          versions.map((
+            ver,
+          ) => [ver, `/${isStd ? "" : "x/"}${name}@${ver}${path}`]),
+        )}
+        selectedVersion={selectedVersion}
+      />
       {versions[0] !== selectedVersion && (
         <button
           type="button"
