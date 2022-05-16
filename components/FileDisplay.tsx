@@ -31,8 +31,7 @@ export function FileDisplay(props: {
         `shadow-sm rounded-lg border border-gray-200 overflow-hidden bg-white`}
     >
       <div
-        class={"bg-gray-100 border-b border-gray-200 py-2 flex justify-between " +
-          (filetype === "markdown" ? "pl-4 pr-2" : "px-4")}
+        class={tw`bg-gray-100 border-b border-gray-200 py-2 flex justify-between ${filetype === "markdown" ? "pl-4 pr-2" : "px-4"}`}
       >
         <div class={tw`flex items-center`}>
           {isReadme(filename) && (
@@ -73,8 +72,7 @@ export function FileDisplay(props: {
             <div class={tw`inline-block ml-4 inline-flex shadow-sm rounded-md`}>
               <a
                 href={props.pathname}
-                class={"relative inline-flex items-center px-1.5 py-1.5 rounded-l-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50 " +
-                  (props.showCode ? "bg-white" : "bg-gray-100")}
+                class={tw`relative inline-flex items-center px-1.5 py-1.5 rounded-l-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50 ${props.showCode ? "bg-white" : "bg-gray-100"}`}
               >
                 <span class={tw`sr-only`}>Preview</span>
                 <svg
@@ -92,8 +90,7 @@ export function FileDisplay(props: {
               </a>
               <a
                 href={props.pathname + "?showCode"}
-                class={"-ml-px relative inline-flex items-center px-1.5 py-1.5 rounded-r-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50 " +
-                  (!props.showCode ? "bg-white" : "bg-gray-100")}
+                class={tw`-ml-px relative inline-flex items-center px-1.5 py-1.5 rounded-r-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50 ${!props.showCode ? "bg-white" : "bg-gray-100"}`}
               >
                 <span class={tw`sr-only`}>Code</span>
                 <svg
