@@ -1,15 +1,14 @@
 /** @jsx h */
-import { h } from "../deps.ts";
+import { h, tw } from "../deps.ts";
 
 export default function VersionSelect({ versions, selectedVersion }: {
   versions: Record<string, string>;
   selectedVersion: string;
 }) {
   return (
-    <div className="max-w-xs rounded-md shadow-sm w-full">
+    <div class={tw`max-w-xs rounded-md shadow-sm w-full`}>
       <select
-        id="version"
-        className="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+        class={tw`block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5`}
         value={selectedVersion}
         onChange={(e) => {
           if (e.target!.value !== selectedVersion) {

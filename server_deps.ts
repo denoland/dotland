@@ -22,14 +22,7 @@ export { emojify } from "https://deno.land/x/emoji@0.1.2/mod.ts";
 export { default as compareVersions } from "https://esm.sh/tiny-version-compare@3.0.1?pin=v76";
 
 export { default as twas } from "https://esm.sh/twas@2.1.2?pin=v76";
-export { create } from "https://esm.sh/twind@0.16.16?pin=v76";
-export { css } from "https://esm.sh/twind@0.16.16/css?pin=v76";
-export {
-  apply,
-  shim,
-  theme,
-  virtualSheet,
-} from "https://esm.sh/twind@0.16.16/shim/server?pin=v76";
+export { virtualSheet } from "https://esm.sh/twind@0.16.16/shim/server?pin=v76";
 
 
 import "https://esm.sh/prismjs@1.27.0/components/prism-bash?no-check";
