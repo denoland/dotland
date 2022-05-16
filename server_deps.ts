@@ -16,7 +16,7 @@ export {
 
 export { default as Prism } from "https://esm.sh/prismjs@1.27.0";
 export { escape as htmlEscape } from "https://esm.sh/he@1.2.0?pin=v76";
-export { render as gfm } from "https://deno.land/x/gfm@0.1.20/mod.ts";
+export { render as gfm, CSS as gfmCSS } from "https://deno.land/x/gfm@0.1.20/mod.ts";
 
 export { emojify } from "https://deno.land/x/emoji@0.1.2/mod.ts";
 export { default as compareVersions } from "https://esm.sh/tiny-version-compare@3.0.1?pin=v76";
