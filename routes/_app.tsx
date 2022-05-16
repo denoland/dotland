@@ -2,11 +2,11 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { AppProps, Fragment, h, Head } from "../deps.ts";
+import { AppProps, Fragment, h, Head, tw } from "../deps.ts";
 
 export default function App({ Component }: AppProps) {
   return (
-    <div class="h-screen">
+    <div class={tw`h-screen`}>
       <Head>
         <link rel="icon" href="/favicon.ico" sizes="32x32" />
         <link rel="icon" href="/logo.svg" type="image/svg+xml" />

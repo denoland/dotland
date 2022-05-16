@@ -9,6 +9,7 @@ import {
   Head,
   PageConfig,
   PageProps,
+  tw,
   twas,
 } from "../../deps.ts";
 import { accepts, Handlers } from "../../server_deps.ts";
@@ -82,19 +83,22 @@ export default function Registry({ params, url, data }: PageProps<Data>) {
       <Head>
         <title>{name + (version ? `@${version}` : "") + " | Deno"}</title>
       </Head>
-      <div class="bg-gray-50 min-h-full">
+      <div class={tw`bg-gray-50 min-h-full`}>
         <Header
           subtitle={name === "std" ? "Standard Library" : "Third Party Modules"}
           widerContent
         />
-        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8 pt-4">
+        <div
+          class={tw
+            `max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8 pt-4`}
+        >
           <Breadcrumbs
             name={name}
             version={version}
             path={path}
             isStd={isStd}
           />
-          <div class="mt-8">
+          <div class={tw`mt-8`}>
             {(() => {
               if (data.versions === null) {
                 return (
@@ -191,20 +195,29 @@ function ModuleView({
 
   function SidePanel() {
     return (
-      <div class="relative sm:static row-start-1 md:row-start-auto">
-        <div class="sticky top-4 col-span-1 flex flex-col sm:flex-row md:flex-col gap-4">
-          <div class="max-w-sm w-full shadow-sm rounded-lg border border-gray-200 overflow-hidden">
-            <div class="bg-gray-50 p-4">
-              <div class="text-xl font-bold">{name}</div>
+      <div class={tw`relative sm:static row-start-1 md:row-start-auto`}>
+        <div
+          class={tw
+            `sticky top-4 col-span-1 flex flex-col sm:flex-row md:flex-col gap-4`}
+        >
+          <div
+            class={tw
+              `max-w-sm w-full shadow-sm rounded-lg border border-gray-200 overflow-hidden`}
+          >
+            <div class={tw`bg-gray-50 p-4`}>
+              <div class={tw`text-xl font-bold`}>{name}</div>
               {versionMeta === undefined
                 ? (
                   <>
-                    <div class="w-4/5 sm:w-full bg-gray-100 h-3 my-2"></div>
-                    <div class="w-4/5 sm:w-2/3 bg-gray-100 h-3 my-2 block sm:hidden md:block">
+                    <div class={tw`w-4/5 sm:w-full bg-gray-100 h-3 my-2`}></div>
+                    <div
+                      class={tw
+                        `w-4/5 sm:w-2/3 bg-gray-100 h-3 my-2 block sm:hidden md:block`}
+                    >
                     </div>
-                    <div class="mt-3 flex items-center py-0.5">
+                    <div class={tw`mt-3 flex items-center py-0.5`}>
                       <svg
-                        class="h-5 w-5 mr-2 inline text-gray-200"
+                        class={tw`h-5 w-5 mr-2 inline text-gray-200`}
                         fill="currentColor"
                         viewBox="0 0 24 24"
                       >
@@ -215,11 +228,11 @@ function ModuleView({
                           clipRule="evenodd"
                         />
                       </svg>
-                      <div class="w-4/5 sm:w-2/3 bg-gray-100 h-4"></div>
+                      <div class={tw`w-4/5 sm:w-2/3 bg-gray-100 h-4`}></div>
                     </div>
-                    <div class="mt-2 flex items-center py-0.5">
+                    <div class={tw`mt-2 flex items-center py-0.5`}>
                       <svg
-                        class="h-5 w-5 mr-2 inline text-gray-200"
+                        class={tw`h-5 w-5 mr-2 inline text-gray-200`}
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
@@ -227,7 +240,7 @@ function ModuleView({
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
                         </path>
                       </svg>
-                      <div class="w-1/6 sm:w-1/5 bg-gray-100 h-4"></div>
+                      <div class={tw`w-1/6 sm:w-1/5 bg-gray-100 h-4`}></div>
                     </div>
                   </>
                 )
@@ -235,14 +248,14 @@ function ModuleView({
                 ? null
                 : (
                   <>
-                    <div class="text-sm">
+                    <div class={tw`text-sm`}>
                       {emojify(moduleMeta.description ?? "")}
                     </div>
                     {moduleDocumentationURL
                       ? (
-                        <div class="mt-3 flex items-center">
+                        <div class={tw`mt-3 flex items-center`}>
                           <svg
-                            class="h-5 w-5 mr-2 inline text-gray-700"
+                            class={tw`h-5 w-5 mr-2 inline text-gray-700`}
                             fill="currentColor"
                             viewBox="0 0 20 20"
                           >
@@ -250,15 +263,15 @@ function ModuleView({
                             <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z">
                             </path>
                           </svg>
-                          <a class="link" href={moduleDocumentationURL}>
+                          <a class={tw`link`} href={moduleDocumentationURL}>
                             Documentation
                           </a>
                         </div>
                       )
                       : null}
-                    <div class="mt-3 flex items-center">
+                    <div class={tw`mt-3 flex items-center`}>
                       <svg
-                        class="h-5 w-5 mr-2 inline text-gray-700"
+                        class={tw`h-5 w-5 mr-2 inline text-gray-700`}
                         fill="currentColor"
                         viewBox="0 0 24 24"
                       >
@@ -270,15 +283,15 @@ function ModuleView({
                         />
                       </svg>
                       <a
-                        class="link"
+                        class={tw`link`}
                         href={`https://github.com/${versionMeta.uploadOptions.repository}`}
                       >
                         {versionMeta.uploadOptions.repository}
                       </a>
                     </div>
-                    <div class="mt-2 flex items-center">
+                    <div class={tw`mt-2 flex items-center`}>
                       <svg
-                        class="h-5 w-5 mr-2 inline text-gray-700"
+                        class={tw`h-5 w-5 mr-2 inline text-gray-700`}
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
@@ -290,7 +303,7 @@ function ModuleView({
                     </div>
                   </>
                 )}
-              <div class="mt-3 w-full">
+              <div class={tw`mt-3 w-full`}>
                 <VersionSelector
                   versions={versions!.versions}
                   selectedVersion={version}
@@ -302,14 +315,17 @@ function ModuleView({
             </div>
           </div>
 
-          <div class="max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4">
-            <p class="text-md font-semibold mb-2">Version Info</p>
+          <div
+            class={tw
+              `max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4`}
+          >
+            <p class={tw`text-md font-semibold mb-2`}>Version Info</p>
             {versionMeta === null
               ? null
               : (
-                <div class="mt-2 flex text-sm items-center">
+                <div class={tw`mt-2 flex text-sm items-center`}>
                   <svg
-                    class="h-5 w-5 mr-2 inline text-gray-700"
+                    class={tw`h-5 w-5 mr-2 inline text-gray-700`}
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -327,31 +343,36 @@ function ModuleView({
               )}
           </div>
           {documentationURL && externalDependencies !== null && (
-            <div class="max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4">
-              <p class="text-md font-semibold mb-2">External Dependencies</p>
+            <div
+              class={tw
+                `max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4`}
+            >
+              <p class={tw`text-md font-semibold mb-2`}>
+                External Dependencies
+              </p>
               {externalDependencies && (
                 <>
-                  <div class="mt-2 overflow-x-auto">
+                  <div class={tw`mt-2 overflow-x-auto`}>
                     {externalDependencies.map((url) => (
                       <p key={url}>
                         {url.startsWith("https://deno.land/")
                           ? (
                             <a
                               href={url.replace("https://deno.land", "")}
-                              class="link text-sm truncate"
+                              class={tw`link text-sm truncate`}
                             >
                               {url}
                             </a>
                           )
                           : (
-                            <a href={url} class="link text-sm truncate">
+                            <a href={url} class={tw`link text-sm truncate`}>
                               {url}
                             </a>
                           )}
                       </p>
                     ))}
                   </div>
-                  <div class="text-sm mt-2 italic">
+                  <div class={tw`text-sm mt-2 italic`}>
                     {externalDependencies.length === 0
                       ? "No external dependencies 🎉"
                       : externalDependencies.length +
@@ -369,8 +390,8 @@ function ModuleView({
   }
 
   return (
-    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      <div class="col-span-1 md:col-span-2 lg:col-span-3">
+    <div class={tw`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4`}>
+      <div class={tw`col-span-1 md:col-span-2 lg:col-span-3`}>
         {(() => {
           if (!versionMeta?.directoryListing.find((d) => d.path === path)) {
             return (
@@ -381,7 +402,10 @@ function ModuleView({
           } else if (dirEntries === null && rawFile === null) {
             // No files
             return (
-              <div class="rounded-lg overflow-hidden border border-gray-200 bg-white">
+              <div
+                class={tw
+                  `rounded-lg overflow-hidden border border-gray-200 bg-white`}
+              >
                 {versionMeta && (
                   <DirectoryListing
                     name={name}
@@ -392,12 +416,15 @@ function ModuleView({
                     url={url}
                   />
                 )}
-                <div class="w-full p-4 text-gray-400 italic">No files.</div>
+                <div class={tw`w-full p-4 text-gray-400 italic`}>No files.</div>
               </div>
             );
           } else if (rawFile instanceof Error) {
             return (
-              <div class="rounded-lg overflow-hidden border border-gray-200 bg-white">
+              <div
+                class={tw
+                  `rounded-lg overflow-hidden border border-gray-200 bg-white`}
+              >
                 {versionMeta && (
                   <DirectoryListing
                     name={name}
@@ -408,14 +435,14 @@ function ModuleView({
                     url={url}
                   />
                 )}
-                <div class="w-full p-4 text-gray-400 italic">
+                <div class={tw`w-full p-4 text-gray-400 italic`}>
                   {rawFile.message}
                 </div>
               </div>
             );
           } else {
             return (
-              <div class="flex flex-col gap-4">
+              <div class={tw`flex flex-col gap-4`}>
                 {versionMeta && dirEntries && (
                   <DirectoryListing
                     name={name}
@@ -477,19 +504,19 @@ function Breadcrumbs({
 }) {
   const segments = path.split("/").splice(1);
   return (
-    <p class="text-gray-500">
-      <a href="/" class="link">
+    <p class={tw`text-gray-500`}>
+      <a href="/" class={tw`link`}>
         deno.land
       </a>{" "}
       / {!isStd && (
         <>
-          <a href="/x" class="link">
+          <a href="/x" class={tw`link`}>
             x
           </a>{" "}
           /{" "}
         </>
       )}
-      <a class="link" href={getBasePath({ isStd, name, version })}>
+      <a class={tw`link`} href={getBasePath({ isStd, name, version })}>
         {name}
         {version ? `@${version}` : ""}
       </a>
@@ -504,7 +531,7 @@ function Breadcrumbs({
                 href={`${getBasePath({ isStd, name, version })}${
                   link ? `/${link}` : ""
                 }`}
-                class="link"
+                class={tw`link`}
               >
                 {p}
               </a>
@@ -529,14 +556,15 @@ function VersionSelector({
   path: string;
 }) {
   return (
-    <div class="gap-2 w-full">
-      <label htmlFor="version" class="sr-only">
+    <div class={tw`gap-2 w-full`}>
+      <label htmlFor="version" class={tw`sr-only`}>
         Version
       </label>
-      <div class="max-w-xs rounded-md shadow-sm w-full">
+      <div class={tw`max-w-xs rounded-md shadow-sm w-full`}>
         <select
           id="version"
-          class="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+          class={tw
+            `block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5`}
           value={selectedVersion}
           // @ts-ignore onChange does support strings
           onChange={`((e) => { window.location = "/${
@@ -558,7 +586,8 @@ function VersionSelector({
       {versions[0] !== selectedVersion && (
         <button
           type="button"
-          class="mt-2 w-full inline-flex justify-center py-1 px-2 border border-red-300 rounded-md bg-white text-sm leading-5 font-medium text-red-500 hover:text-red-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-red transition duration-150 ease-in-out"
+          class={tw
+            `mt-2 w-full inline-flex justify-center py-1 px-2 border border-red-300 rounded-md bg-white text-sm leading-5 font-medium text-red-500 hover:text-red-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-red transition duration-150 ease-in-out`}
           aria-label="Go to latest version"
           // @ts-ignore onClick does support strings
           onClick={`window.location = "/${isStd ? "" : "x/"}${name}@${

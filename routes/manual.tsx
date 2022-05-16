@@ -9,6 +9,7 @@ import {
   Head,
   PageConfig,
   PageProps,
+  tw,
 } from "../deps.ts";
 import { Handlers } from "../server_deps.ts";
 import { Markdown } from "../components/Markdown.tsx";
@@ -93,7 +94,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
         <link rel="canonical" href={`https://deno.land/manual${path}`} />
       </Head>
       <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3" />
-      <div id="manualSearch" class="hidden" />
+      <div id="manualSearch" class={tw`hidden`} />
       <script
         dangerouslySetInnerHTML={{
           __html: `
@@ -109,31 +110,34 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
       `,
         }}
       />
-      <div class="h-screen flex overflow-hidden">
+      <div class={tw`h-screen flex overflow-hidden`}>
         <input
           type="checkbox"
-          class="hidden"
+          class={tw`hidden`}
           id="manualSidebarToggle"
           autoComplete="off"
         />
 
-        <div class="md:hidden hidden" id="manualSidebar">
-          <div class="fixed inset-0 flex z-40">
-            <div class="fixed inset-0">
+        <div class={tw`md:hidden hidden`} id="manualSidebar">
+          <div class={tw`fixed inset-0 flex z-40`}>
+            <div class={tw`fixed inset-0`}>
               <label
-                class="absolute inset-0 bg-gray-600 opacity-75"
+                class={tw`absolute inset-0 bg-gray-600 opacity-75`}
                 htmlFor="manualSidebarToggle"
               />
             </div>
-            <div class="relative flex-1 flex flex-col max-w-xs w-full bg-white">
-              <div class="absolute top-0 right-0 -mr-14 p-1">
+            <div
+              class={tw`relative flex-1 flex flex-col max-w-xs w-full bg-white`}
+            >
+              <div class={tw`absolute top-0 right-0 -mr-14 p-1`}>
                 <label
-                  class="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600"
+                  class={tw
+                    `flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600`}
                   aria-label="Close sidebar"
                   htmlFor="manualSidebarToggle"
                 >
                   <svg
-                    class="h-6 w-6 text-white"
+                    class={tw`h-6 w-6 text-white`}
                     stroke="currentColor"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -147,18 +151,21 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                   </svg>
                 </label>
               </div>
-              <div class="bg-gray-100 pb-4 pt-4 border-b border-gray-200">
+              <div class={tw`bg-gray-100 pb-4 pt-4 border-b border-gray-200`}>
                 <a
                   href="/"
-                  class="flex items-center flex-shrink-0 px-4"
+                  class={tw`flex items-center flex-shrink-0 px-4`}
                 >
                   <img
                     src="/logo.svg"
                     alt="logo"
-                    class="w-auto h-12"
+                    class={tw`w-auto h-12`}
                   />
-                  <div class="mx-4 flex flex-col justify-center">
-                    <div class="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
+                  <div class={tw`mx-4 flex flex-col justify-center`}>
+                    <div
+                      class={tw
+                        `font-bold text-gray-900 leading-6 text-2xl tracking-tight`}
+                    >
                       Deno Manual
                     </div>
                   </div>
@@ -175,19 +182,24 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                 path={path}
               />
             </div>
-            <div class="flex-shrink-0 w-14">
+            <div class={tw`flex-shrink-0 w-14`}>
               {/*<!-- Dummy element to force sidebar to shrink to fit close icon -->*/}
             </div>
           </div>
         </div>
 
-        <div class="hidden md:flex md:flex-shrink-0">
-          <div class="flex flex-col w-72 border-r border-gray-200 bg-gray-50">
-            <div class="bg-gray-100 pb-4 pt-4 border-b border-gray-200">
-              <a href="/" class="flex items-center flex-shrink-0 px-4">
-                <img src="/logo.svg" alt="logo" class="w-auto h-12" />
-                <div class="mx-4 flex flex-col justify-center">
-                  <div class="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
+        <div class={tw`hidden md:flex md:flex-shrink-0`}>
+          <div
+            class={tw`flex flex-col w-72 border-r border-gray-200 bg-gray-50`}
+          >
+            <div class={tw`bg-gray-100 pb-4 pt-4 border-b border-gray-200`}>
+              <a href="/" class={tw`flex items-center flex-shrink-0 px-4`}>
+                <img src="/logo.svg" alt="logo" class={tw`w-auto h-12`} />
+                <div class={tw`mx-4 flex flex-col justify-center`}>
+                  <div
+                    class={tw
+                      `font-bold text-gray-900 leading-6 text-2xl tracking-tight`}
+                  >
                     Deno Manual
                   </div>
                 </div>
@@ -205,28 +217,34 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             />
           </div>
         </div>
-        <div class="flex flex-col w-0 flex-1 overflow-hidden">
-          <div class="z-10 flex-shrink-0 flex h-16 bg-white shadow md:hidden">
+        <div class={tw`flex flex-col w-0 flex-1 overflow-hidden`}>
+          <div
+            class={tw`z-10 flex-shrink-0 flex h-16 bg-white shadow md:hidden`}
+          >
             <a
               href="/"
-              class="px-4 flex items-center justify-center md:hidden"
+              class={tw`px-4 flex items-center justify-center md:hidden`}
             >
-              <img src="/logo.svg" alt="logo" class="w-auto h-10" />
+              <img src="/logo.svg" alt="logo" class={tw`w-auto h-10`} />
             </a>
-            <div class="border-l border-r border-gray-200 flex-1 px-4 flex justify-between">
-              <div class="flex-1 flex">
-                <div class="w-full flex justify-between h-full">
-                  <label htmlFor="search_field" class="sr-only">
+            <div
+              class={tw
+                `border-l border-r border-gray-200 flex-1 px-4 flex justify-between`}
+            >
+              <div class={tw`flex-1 flex`}>
+                <div class={tw`w-full flex justify-between h-full`}>
+                  <label htmlFor="search_field" class={tw`sr-only`}>
                     Search
                   </label>
                   <button
-                    class="w-full text-gray-400 focus-within:text-gray-600 flex items-center"
+                    class={tw
+                      `w-full text-gray-400 focus-within:text-gray-600 flex items-center`}
                     // @ts-ignore onClick does support strings
                     onClick="document.querySelector('#manualSearch button').click()"
                   >
-                    <div class="flex items-center pointer-events-none">
+                    <div class={tw`flex items-center pointer-events-none`}>
                       <svg
-                        class="h-5 w-5"
+                        class={tw`h-5 w-5`}
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
@@ -237,9 +255,9 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                         />
                       </svg>
                     </div>
-                    <div class="pl-6">
-                      <span class="inline sm:hidden">Search docs</span>
-                      <span class="hidden sm:inline">
+                    <div class={tw`pl-6`}>
+                      <span class={tw`inline sm:hidden`}>Search docs</span>
+                      <span class={tw`hidden sm:inline`}>
                         Search the docs (press <InlineCode>/</InlineCode>{" "}
                         to focus)
                       </span>
@@ -249,10 +267,11 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
               </div>
             </div>
             <label
-              class="focus:outline-none focus:bg-gray-100 md:hidden flex items-center"
+              class={tw
+                `focus:outline-none focus:bg-gray-100 md:hidden flex items-center`}
               htmlFor="manualSidebarToggle"
             >
-              <div class="px-4 text-gray-500 focus:text-gray-600">
+              <div class={tw`px-4 text-gray-500 focus:text-gray-600`}>
                 <svg
                   className="h-6 w-6"
                   stroke="currentColor"
@@ -271,22 +290,26 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
           </div>
 
           <main
-            class="flex-1 relative z-0 overflow-y-auto focus:outline-none"
+            class={tw`flex-1 relative z-0 overflow-y-auto focus:outline-none`}
             tabIndex={0}
           >
-            <div class="h-16 bg-white shadow hidden md:block">
-              <div class="max-w-screen-md mx-auto px-12 w-full flex justify-between h-full">
-                <label htmlFor="search_field" class="sr-only">
+            <div class={tw`h-16 bg-white shadow hidden md:block`}>
+              <div
+                class={tw
+                  `max-w-screen-md mx-auto px-12 w-full flex justify-between h-full`}
+              >
+                <label htmlFor="search_field" class={tw`sr-only`}>
                   Search
                 </label>
                 <button
-                  class="w-full text-gray-400 focus-within:text-gray-600 flex items-center"
+                  class={tw
+                    `w-full text-gray-400 focus-within:text-gray-600 flex items-center`}
                   // @ts-ignore onClick does support strings
                   onClick="document.querySelector('#manualSearch button').click()"
                 >
-                  <div class="flex items-center pointer-events-none">
+                  <div class={tw`flex items-center pointer-events-none`}>
                     <svg
-                      class="h-5 w-5"
+                      class={tw`h-5 w-5`}
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -297,7 +320,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                       />
                     </svg>
                   </div>
-                  <div class="pl-6">
+                  <div class={tw`pl-6`}>
                     Search the docs (press <InlineCode>/</InlineCode> to focus)
                   </div>
                 </button>
@@ -311,16 +334,20 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                 })()}
               />
             )}
-            <div class="max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20">
+            <div
+              class={tw
+                `max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20`}
+            >
               <a
                 href={getDocURL(version, path)}
-                class={`text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right ${
-                  path.split("/").length === 2 ? "mt-11" : "mt-9"
-                } mr-4`}
+                class={tw
+                  `text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right ${
+                    path.split("/").length === 2 ? "mt-11" : "mt-9"
+                  } mr-4`}
               >
-                <span class="sr-only">GitHub</span>
+                <span class={tw`sr-only`}>GitHub</span>
                 <svg
-                  class="h-6 w-6 inline"
+                  class={tw`h-6 w-6 inline`}
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -332,7 +359,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                   />
                 </svg>
               </a>
-              <div class="pt-1">
+              <div class={tw`pt-1`}>
                 <Markdown
                   source={data.content
                     .replace(/\$STD_VERSION/g, stdVersion)
@@ -340,7 +367,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                   baseUrl={sourceURL}
                 />
               </div>
-              <div class="mt-4 pt-4 border-t border-gray-200">
+              <div class={tw`mt-4 pt-4 border-t border-gray-200`}>
                 {pageList[pageIndex - 1] !== undefined && (
                   <a
                     href={params.version
@@ -349,7 +376,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                         `manual@${version}`,
                       )
                       : pageList[pageIndex - 1].path}
-                    class="text-gray-900 hover:text-gray-600 font-normal"
+                    class={tw`text-gray-900 hover:text-gray-600 font-normal`}
                   >
                     ← {pageList[pageIndex - 1].name}
                   </a>
@@ -362,7 +389,8 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                         `manual@${version}`,
                       )
                       : pageList[pageIndex + 1].path}
-                    class="text-gray-900 hover:text-gray-600 font-normal float-right"
+                    class={tw
+                      `text-gray-900 hover:text-gray-600 font-normal float-right`}
                   >
                     {pageList[pageIndex + 1].name} →
                   </a>
@@ -382,20 +410,20 @@ function UserContributionBanner({
   href: string;
 }) {
   return (
-    <div class="bg-yellow-300 sticky top-0">
-      <div class="max-w-screen-xl mx-auto py-4 px-3 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between flex-wrap">
-          <div class="w-0 flex-1 flex items-center">
-            <p class="ml-3 font-medium text-gray-900">
+    <div class={tw`bg-yellow-300 sticky top-0`}>
+      <div class={tw`max-w-screen-xl mx-auto py-4 px-3 sm:px-6 lg:px-8`}>
+        <div class={tw`flex items-center justify-between flex-wrap`}>
+          <div class={tw`w-0 flex-1 flex items-center`}>
+            <p class={tw`ml-3 font-medium text-gray-900`}>
               <span>
                 You are viewing documentation generated from a{"  "}
-                <b class="font-bold">user contribution</b>{"  "}
+                <b class={tw`font-bold`}>user contribution</b>{"  "}
                 or an upcoming or past release. The contents of this document
                 may not have been reviewed by the Deno team.{" "}
               </span>
 
               <a
-                class="underline cursor-pointer text-gray-900"
+                class={tw`underline cursor-pointer text-gray-900`}
                 href={href}
               >
                 Click here to view the documentation for the latest release.
@@ -418,15 +446,16 @@ function Version({
   path: string;
 }) {
   return (
-    <div class="mt-5 px-4">
-      <label htmlFor="version" class="sr-only">
+    <div class={tw`mt-5 px-4`}>
+      <label htmlFor="version" class={tw`sr-only`}>
         Version
       </label>
-      <div class="mt-1 sm:mt-0 sm:col-span-2">
-        <div class="max-w-xs rounded-md shadow-sm">
+      <div class={tw`mt-1 sm:mt-0 sm:col-span-2`}>
+        <div class={tw`max-w-xs rounded-md shadow-sm`}>
           <select
             id="version"
-            class="block form-select w-full transition duration-150 ease-in-out sm:text-sm! sm:leading-5!"
+            class={tw
+              `block form-select w-full transition duration-150 ease-in-out sm:text-sm! sm:leading-5!`}
             autoComplete="off"
             value={version}
             // @ts-ignore onChange does support strings
@@ -463,15 +492,15 @@ function ToC({
   path: string;
 }) {
   return (
-    <div class="pt-2 pb-8 h-0 flex-1 flex flex-col overflow-y-auto">
-      <nav class="flex-1 px-4">
-        <ol class="list-decimal list-inside font-semibold nested">
+    <div class={tw`pt-2 pb-8 h-0 flex-1 flex flex-col overflow-y-auto`}>
+      <nav class={tw`flex-1 px-4`}>
+        <ol class={tw`list-decimal list-inside font-semibold nested`}>
           {Object.entries(tableOfContents).map(([slug, entry]) => {
             return (
-              <li key={slug} class="my-2">
+              <li key={slug} class={tw`my-2`}>
                 <a
                   href={`/manual${version ? `@${version}` : ""}/${slug}`}
-                  class={`${
+                  class={tw`${
                     path === `/${slug}`
                       ? "text-blue-600 hover:text-blue-500 toc-active"
                       : "text-gray-900 hover:text-gray-600"
@@ -480,17 +509,17 @@ function ToC({
                   {entry.name}
                 </a>
                 {entry.children && (
-                  <ol class="pl-4 list-decimal nested">
+                  <ol class={tw`pl-4 list-decimal nested`}>
                     {Object.entries(entry.children).map(
                       (
                         [childSlug, name],
                       ) => (
-                        <li key={`${slug}/${childSlug}`} class="my-0.5">
+                        <li key={`${slug}/${childSlug}`} class={tw`my-0.5`}>
                           <a
                             href={`/manual${
                               version ? `@${version}` : ""
                             }/${slug}/${childSlug}`}
-                            class={`${
+                            class={tw`${
                               path === `/${slug}/${childSlug}`
                                 ? "text-blue-600 hover:text-blue-500 toc-active"
                                 : "text-gray-900 hover:text-gray-600"
