@@ -1,8 +1,8 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h, htmlEscape, Prism } from "../deps.ts";
+import { h } from "../deps.ts";
+import { htmlEscape, Prism } from "../server_deps.ts";
 import { normalizeTokens } from "../util/prism_utils.ts";
 
 // Modifies the color of 'variable' token

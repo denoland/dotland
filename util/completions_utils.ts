@@ -1,6 +1,5 @@
-import { Fuse, prettyBytes } from "../server_deps.ts";
+import { Fuse, prettyBytes, twas } from "../server_deps.ts";
 import { S3_BUCKET } from "./registry_utils.ts";
-import { twas } from "../deps.ts";
 
 interface ApiModuleData {
   name: string;

@@ -3,15 +3,13 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import {
-  emojify,
   Fragment,
   h,
   Head,
   PageConfig,
   PageProps,
-  twas,
 } from "../../deps.ts";
-import { accepts, Handlers } from "../../server_deps.ts";
+import { accepts, Handlers, twas, emojify } from "../../server_deps.ts";
 import {
   denoDocAvailableForURL,
   DirEntry,
@@ -38,6 +36,7 @@ import { Footer } from "../../components/Footer.tsx";
 import { FileDisplay } from "../../components/FileDisplay.tsx";
 import { DirectoryListing } from "../../components/DirectoryListing.tsx";
 import { ErrorMessage } from "../../components/ErrorMessage.tsx";
+import VersionSelect from "../../islands/VersionSelect.tsx";
 
 // 100kb
 const MAX_SYNTAX_HIGHLIGHT_FILE_SIZE = 100 * 1024;
@@ -533,28 +532,9 @@ function VersionSelector({
       <label htmlFor="version" class="sr-only">
         Version
       </label>
-      <div class="max-w-xs rounded-md shadow-sm w-full">
-        <select
-          id="version"
-          class="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-          value={selectedVersion}
-          // @ts-ignore onChange does support strings
-          onChange={`((e) => { window.location = "/${
-            isStd ? "" : "x/"
-          }${name}@" + e.target.value + "${path}"; })(event)`}
-        >
-          {!versions.includes(selectedVersion) && (
-            <option key={selectedVersion} value={selectedVersion}>
-              {selectedVersion}
-            </option>
-          )}
-          {versions.map((v) => (
-            <option key={v} value={v}>
-              {v}
-            </option>
-          ))}
-        </select>
-      </div>
+      <VersionSelect versions={Object.fromEntries(versions.map((ver) => [ver, `/${
+        isStd ? "" : "x/"
+      }${name}@${ver}${path}`]))} selectedVersion={selectedVersion} />
       {versions[0] !== selectedVersion && (
         <button
           type="button"
