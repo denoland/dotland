@@ -110,7 +110,7 @@ span[data-highlight] {
 
 /* Benchmark */
 
-#normalizedToggle:checked + label > span:first-of-type {
+#normalizedToggle:not(:checked) + label > span:first-of-type {
 	background-color: rgb(229 231 235);
 }
 #normalizedToggle:checked + label > span:first-of-type > span {
@@ -118,6 +118,9 @@ span[data-highlight] {
 }
 
 #normalizedToggle:checked ~ div:first-of-type {
+	display: none;
+}
+#normalizedToggle:not(:checked) ~ div:last-of-type {
 	display: none;
 }
 

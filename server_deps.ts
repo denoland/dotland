@@ -1,4 +1,4 @@
-export * from "https://raw.githubusercontent.com/lucacasonato/fresh/59e6398d7724f4990aa3ace12dce36e11b20e1ba/server.ts";
+export * from "https://raw.githubusercontent.com/lucacasonato/fresh/ec388f87fb19cf5c247ad62c9a0beb771170da07/server.ts";
 
 export { accepts } from "https://deno.land/x/oak_commons@0.1.1/negotiation.ts";
 export { match } from "https://deno.land/x/path_to_regexp@v6.2.0/index.ts";
@@ -9,5 +9,7 @@ export { serve } from "https://deno.land/std@0.126.0/http/server.ts";
 export type { ConnInfo } from "https://deno.land/std@0.126.0/http/server.ts";
 export { createReporter } from "https://deno.land/x/g_a@0.1.2/mod.ts";
 export type { Reporter } from "https://deno.land/x/g_a@0.1.2/mod.ts";
-export { router } from "https://crux.land/router@0.0.12";
-export type { HandlerContext } from "https://crux.land/router@0.0.12";
+export {
+  type HandlerContext as RouterHandlerContext,
+  router,
+} from "https://crux.land/router@0.0.12";

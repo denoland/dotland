@@ -2,9 +2,9 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, Head, tw } from "../deps.ts";
+import { AppProps, Fragment, h, Head, tw } from "../deps.ts";
 
-export default function App({ Component }) {
+export default function App({ Component }: AppProps) {
   return (
     <div class={tw`h-screen`}>
       <Head>

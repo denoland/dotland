@@ -1,7 +1,7 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 import { PageConfig } from "../../deps.ts";
-import { HandlerContext, match } from "../../server_deps.ts";
+import { match } from "../../server_deps.ts";
 import { S3_BUCKET } from "../../util/registry_utils.ts";
 
 const VERSIONS = match("/_vsc1/modules/:module([a-z0-9_]*)");
@@ -48,7 +48,7 @@ async function getPaths(module: string, version: string): Promise<Response> {
  *
  * /_vsc1/modules/:module/v_latest returns a list of all code files for the latest version of module
  */
-export async function handler({ req }: HandlerContext) {
+export async function handler(req: Request) {
   const pathname = new URL(req.url).pathname;
 
   const versions = VERSIONS(pathname);

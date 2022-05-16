@@ -30,14 +30,14 @@ export default function TranslationsPage() {
         <div class={tw`max-w-screen-lg mx-auto`}>
           <h4 class={tw`text-4xl font-bold tracking-tight`}>Translations</h4>
           <p class={tw`mt-4 text-lg`}>
-            Deno docs is available in the following languages. Do you have a
-            piece to display here?{" "}
-            <a
-              href="https://github.com/denoland/dotland/blob/main/translations.json"
-              class={tw`link`}
-            >
-              Add it!
-            </a>
+            Deno docs is available in the following languages.
+          </p>
+          <p class={tw`mt-4 text-lg`}>
+            Disclaimer: these pages are maintained by third party contributors
+            and not by Deno. They may contain out-of-date information.
+          </p>
+          <p class={tw`mt-4 text-lg`}>
+            Deprecation Notice: we are not accepting new translations.
           </p>
         </div>
         <div

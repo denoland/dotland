@@ -239,6 +239,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                   <button
                     class={tw
                       `w-full text-gray-400 focus-within:text-gray-600 flex items-center`}
+                    // @ts-ignore onClick does support strings
                     onClick="document.querySelector('#manualSearch button').click()"
                   >
                     <div class={tw`flex items-center pointer-events-none`}>
@@ -303,6 +304,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                 <button
                   class={tw
                     `w-full text-gray-400 focus-within:text-gray-600 flex items-center`}
+                  // @ts-ignore onClick does support strings
                   onClick="document.querySelector('#manualSearch button').click()"
                 >
                   <div class={tw`flex items-center pointer-events-none`}>
@@ -455,6 +457,7 @@ function Version({
               `block form-select w-full transition duration-150 ease-in-out sm:text-sm! sm:leading-5!`}
             autoComplete="off"
             value={version}
+            // @ts-ignore onChange does support strings
             onChange={`((e) => { window.location = "/manual@" + e.target.value + "${path}"; })(event)`}
           >
             {version !== "main" && !versions.includes(version) &&
