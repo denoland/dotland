@@ -338,7 +338,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             >
               <a
                 href={getDocURL(version, path)}
-                class={`text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right ${
+                class={tw`text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right ${
                   path.split("/").length === 2 ? "mt-11" : "mt-9"
                 } mr-4`}
               >
@@ -496,7 +496,7 @@ function ToC({
               <li key={slug} class={tw`my-2`}>
                 <a
                   href={`/manual${version ? `@${version}` : ""}/${slug}`}
-                  class={`${
+                  class={tw`${
                     path === `/${slug}`
                       ? "text-blue-600 hover:text-blue-500 toc-active"
                       : "text-gray-900 hover:text-gray-600"
@@ -515,7 +515,7 @@ function ToC({
                             href={`/manual${
                               version ? `@${version}` : ""
                             }/${slug}/${childSlug}`}
-                            class={`${
+                            class={tw`${
                               path === `/${slug}/${childSlug}`
                                 ? "text-blue-600 hover:text-blue-500 toc-active"
                                 : "text-gray-900 hover:text-gray-600"

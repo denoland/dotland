@@ -189,7 +189,7 @@ function TableRow({
 }: TableRowProps) {
   return (
     <tr
-      class={`table-row hover:bg-gray-100${
+      class={tw`table-row hover:bg-gray-100${
         !isLastItem ? " border-b border-gray-200" : ""
       }`}
       name={isHiddenItem ? "hidden" : ""}
@@ -197,7 +197,7 @@ function TableRow({
       <td class={tw`whitespace-no-wrap text-sm leading-5 text-gray-400`}>
         <a
           href={href}
-          class={`px-2 sm:pl-3 md:pl-4 py-1 w-full block ${
+          class={tw`px-2 sm:pl-3 md:pl-4 py-1 w-full block ${
             entry.type === "dir" ? "text-blue-300" : "text-gray-300"
           }`}
           tabIndex={-1}

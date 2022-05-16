@@ -77,7 +77,7 @@ export function RawCodeBlock({
       class={tw`markdown-body `}
     >
       <pre
-        class={`highlight highlight-source-${newLang} flex ${
+        class={tw`highlight highlight-source-${newLang} flex ${
           extraClassName ?? ""
         }`}
       >

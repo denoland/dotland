@@ -26,7 +26,7 @@ export function Header({
   return (
     <div class={tw`relative py-6 z-10`}>
       <nav
-        class={`mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 ${
+        class={tw`mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 ${
           widerContent ? "max-w-screen-xl" : "max-w-screen-lg lg:p-0"
         }`}
       >

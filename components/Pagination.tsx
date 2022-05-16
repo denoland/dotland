@@ -63,7 +63,7 @@ export function Pagination(
               <MaybeA
                 disabled={!hasNext}
                 href={toPage(currentPage + 1)}
-                class={`${getNavButtonStyles(!hasNext)} ml-4`}
+                class={tw`${getNavButtonStyles(!hasNext)} ml-4`}
               >
                 Next
               </MaybeA>
@@ -94,7 +94,7 @@ export function Pagination(
                   <MaybeA
                     disabled={!hasPrevious}
                     href={toPage(currentPage - 1)}
-                    class={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium ${
+                    class={tw`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium ${
                       hasPrevious
                         ? "text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500"
                         : "text-gray-300 cursor-default"
@@ -115,7 +115,7 @@ export function Pagination(
                   </MaybeA>
                   <a
                     href={toPage(1)}
-                    class={`inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
+                    class={tw`inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
                       currentPage === 1
                         ? "bg-gray-100 font-semibold text-gray-800"
                         : "bg-white font-medium text-gray-700"
@@ -128,7 +128,7 @@ export function Pagination(
                       <>
                         <a
                           href={toPage(2)}
-                          class={`hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
+                          class={tw`hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
                             currentPage === 2
                               ? "bg-gray-100 font-semibold text-gray-800"
                               : "bg-white font-medium text-gray-700"
@@ -154,7 +154,7 @@ export function Pagination(
                     )}
                   <a
                     href={toPage(centerPage - 1)}
-                    class={`hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
+                    class={tw`hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
                       currentPage === centerPage - 1
                         ? "bg-gray-100 font-semibold text-gray-800"
                         : "bg-white font-medium text-gray-700"
@@ -164,7 +164,7 @@ export function Pagination(
                   </a>
                   <a
                     href={toPage(centerPage)}
-                    class={`inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
+                    class={tw`inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
                       currentPage === centerPage
                         ? "bg-gray-100 font-semibold text-gray-800"
                         : "bg-white font-medium text-gray-700"
@@ -174,7 +174,7 @@ export function Pagination(
                   </a>
                   <a
                     href={toPage(centerPage + 1)}
-                    class={`hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
+                    class={tw`hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
                       currentPage === centerPage + 1
                         ? "bg-gray-100 font-semibold text-gray-800"
                         : "bg-white font-medium text-gray-700"
@@ -187,7 +187,7 @@ export function Pagination(
                       <>
                         <a
                           href={toPage(pageCount - 1)}
-                          class={`hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
+                          class={tw`hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
                             currentPage === pageCount - 1
                               ? "bg-gray-100 font-semibold text-gray-800"
                               : "bg-white font-medium text-gray-700"
@@ -213,7 +213,7 @@ export function Pagination(
                     )}
                   <a
                     href={toPage(pageCount)}
-                    class={`inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
+                    class={tw`inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 text-sm leading-5 ${
                       currentPage === pageCount
                         ? "bg-gray-100 font-semibold text-gray-800"
                         : "bg-white font-medium text-gray-700"
@@ -224,7 +224,7 @@ export function Pagination(
                   <MaybeA
                     href={toPage(currentPage + 1)}
                     disabled={!hasNext}
-                    class={`-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium ${
+                    class={tw`-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium ${
                       hasNext
                         ? "text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500"
                         : "text-gray-300 cursor-default"
