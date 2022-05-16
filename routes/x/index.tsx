@@ -59,12 +59,12 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
             <div class={tw`mt-6`}>
               <a
                 href="/add_module"
-                class="
+                class={tw`
                   py-2 px-8 border border-gray-300 text-md font-medium rounded-md
                   text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50
                   focus:outline-none focus:shadow-outline-blue focus:border-blue-300
                   active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out
-                "
+                  `}
               >
                 Publish a module
               </a>
