@@ -1,7 +1,7 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-import { h } from "../deps.ts";
+import { h, tw } from "../deps.ts";
 
 const entries = [
   { href: "/manual", content: "参考手册" },
@@ -24,24 +24,31 @@ export function Header({
   main?: boolean;
 }) {
   return (
-    <div class="relative py-6 z-10">
+    <div class={tw`relative py-6 z-10`}>
       <nav
-        class={`mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 ${
-          widerContent ? "max-w-screen-xl" : "max-w-screen-lg lg:p-0"
-        }`}
+        class={tw
+          `mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 ${
+            widerContent ? "max-w-screen-xl" : "max-w-screen-lg lg:p-0"
+          }`}
       >
-        <a class="flex items-center" href="/">
-          <img class="h-10 w-auto sm:h-12 my-2" src="/logo.svg" alt="" />
-          <div class="ml-5 flex flex-col justify-center">
+        <a class={tw`flex items-center`} href="/">
+          <img class={tw`h-10 w-auto sm:h-12 my-2`} src="/logo.svg" alt="" />
+          <div class={tw`ml-5 flex flex-col justify-center`}>
             {!main &&
               (
-                <div class="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
+                <div
+                  class={tw
+                    `font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight`}
+                >
                   Deno
                 </div>
               )}
             {subtitle &&
               (
-                <div class="font-normal text-sm sm:text-lg leading-tight tracking-tight">
+                <div
+                  class={tw
+                    `font-normal text-sm sm:text-lg leading-tight tracking-tight`}
+                >
                   {subtitle}
                 </div>
               )}
@@ -49,36 +56,48 @@ export function Header({
         </a>
         <input
           type="checkbox"
-          class="hidden checked:sibling:block"
+          class={tw`hidden checked:sibling:block`}
           id="menuToggle"
           autoComplete="off"
         />
-        <div class="hidden absolute top-0 inset-x-0 p-2 transition transform origin-top-right lg:hidden">
-          <div class="rounded-lg shadow-md">
-            <div class="rounded-lg bg-white shadow-xs overflow-hidden">
-              <div class="px-5 pt-4 flex items-center justify-between">
-                <a href="/" class="flex items-center">
+        <div
+          class={tw
+            `hidden absolute top-0 inset-x-0 p-2 transition transform origin-top-right lg:hidden`}
+        >
+          <div class={tw`rounded-lg shadow-md`}>
+            <div class={tw`rounded-lg bg-white shadow-xs overflow-hidden`}>
+              <div class={tw`px-5 pt-4 flex items-center justify-between`}>
+                <a href="/" class={tw`flex items-center`}>
                   <img
-                    class="h-10 w-auto sm:h-12 my-2"
+                    class={tw`h-10 w-auto sm:h-12 my-2`}
                     src="/logo.svg"
                     alt=""
                   />
-                  <div class="ml-5 flex flex-col justify-center">
-                    <div class="font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight">
+                  <div class={tw`ml-5 flex flex-col justify-center`}>
+                    <div
+                      class={tw
+                        `font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight`}
+                    >
                       Deno
                     </div>
                     {subtitle &&
                       (
-                        <div class="font-normal text-sm sm:text-lg leading-tight tracking-tight">
+                        <div
+                          class={tw
+                            `font-normal text-sm sm:text-lg leading-tight tracking-tight`}
+                        >
                           {subtitle}
                         </div>
                       )}
                   </div>
                 </a>{" "}
-                <label class="-mr-2" htmlFor="menuToggle">
-                  <div class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:(text-gray-500 bg-gray-100) focus:(outline-none bg-gray-100 text-gray-500) transition duration-150 ease-in-out">
+                <label class={tw`-mr-2`} htmlFor="menuToggle">
+                  <div
+                    class={tw
+                      `inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:(text-gray-500 bg-gray-100) focus:(outline-none bg-gray-100 text-gray-500) transition duration-150 ease-in-out`}
+                  >
                     <svg
-                      class="h-6 w-6"
+                      class={tw`h-6 w-6`}
                       stroke="currentColor"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -93,17 +112,19 @@ export function Header({
                   </div>
                 </label>
               </div>
-              <div class="px-2 pt-4 pb-3">
+              <div class={tw`px-2 pt-4 pb-3`}>
                 <a
                   href="https://deno.com/deploy"
-                  class="block px-3 py-2 rounded-md text-base font-medium rounded-lg border-2 border-gray-700 bg-transparent text-gray-700 hover:border-gray-900 hover:bg-gray-900 hover:text-gray-50 focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
+                  class={tw
+                    `block px-3 py-2 rounded-md text-base font-medium rounded-lg border-2 border-gray-700 bg-transparent text-gray-700 hover:border-gray-900 hover:bg-gray-900 hover:text-gray-50 focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out`}
                 >
                   Deploy
                 </a>
                 {entries.map(({ href, content }) => (
                   <a
                     href={href}
-                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out"
+                    class={tw
+                      `block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out`}
                   >
                     {content}
                   </a>
@@ -113,12 +134,15 @@ export function Header({
           </div>
         </div>
         <label
-          class="-mr-2 flex items-center lg:hidden"
+          class={tw`-mr-2 flex items-center lg:hidden`}
           htmlFor="menuToggle"
         >
-          <div class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:(text-gray-500 bg-gray-100) focus:(outline-none bg-gray-100 text-gray-500) transition duration-150 ease-in-out">
+          <div
+            class={tw
+              `inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:(text-gray-500 bg-gray-100) focus:(outline-none bg-gray-100 text-gray-500) transition duration-150 ease-in-out`}
+          >
             <svg
-              class="h-6 w-6"
+              class={tw`h-6 w-6`}
               stroke="currentColor"
               fill="none"
               viewBox="0 0 24 24"
@@ -133,28 +157,31 @@ export function Header({
             </svg>
           </div>
         </label>
-        <div class="hidden lg:flex md:ml-10 items-end">
+        <div class={tw`hidden lg:flex md:ml-10 items-end`}>
           <a
             href="https://deno.com/deploy"
-            class="font-medium py-2 px-3 rounded-lg border-2 border-gray-700 bg-transparent text-gray-700 hover:border-gray-900 hover:bg-gray-900 hover:text-gray-50 transition duration-150 ease-in-out"
+            class={tw
+              `font-medium py-2 px-3 rounded-lg border-2 border-gray-700 bg-transparent text-gray-700 hover:border-gray-900 hover:bg-gray-900 hover:text-gray-50 transition duration-150 ease-in-out`}
           >
             Deploy
           </a>
           {entries.map(({ href, content }) => (
             <a
               href={href}
-              class="ml-10 my-auto font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out"
+              class={tw
+                `ml-10 my-auto font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out`}
             >
               {content}
             </a>
           ))}
           <a
             href="https://github.com/denoland"
-            class="ml-10 my-auto text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out leading-0"
+            class={tw
+              `ml-10 my-auto text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out leading-0`}
           >
-            <span class="sr-only">GitHub</span>
+            <span class={tw`sr-only`}>GitHub</span>
             <svg
-              class="h-6 w-6 inline"
+              class={tw`h-6 w-6 inline`}
               fill="currentColor"
               viewBox="0 0 24 24"
             >

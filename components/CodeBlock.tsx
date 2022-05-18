@@ -2,7 +2,7 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, htmlEscape, Prism } from "../deps.ts";
+import { Fragment, h, htmlEscape, Prism, tw } from "../deps.ts";
 import { normalizeTokens } from "../util/prism_utils.ts";
 
 // Modifies the color of 'variable' token
@@ -74,10 +74,10 @@ export function RawCodeBlock({
     <div
       data-color-mode="light"
       data-light-theme="light"
-      class="markdown-body "
+      class={tw`markdown-body `}
     >
       <pre
-        class={`highlight highlight-source-${newLang} flex ${
+        class={tw`highlight highlight-source-${newLang} flex ${
           extraClassName ?? ""
         }`}
       >
@@ -86,7 +86,8 @@ export function RawCodeBlock({
             <div class={codeDivClasses}>
               {tokens.map((_, i) => (
                 <div
-                  class="token text-right"
+                  class={tw`token text-right`}
+                  // @ts-ignore onClick does support strings
                   onClick={`location.hash = "#L${i + 1}"`}
                 >
                   {i + 1}
@@ -100,10 +101,10 @@ export function RawCodeBlock({
               <div class={codeDivClasses}>$</div>
             </code>
           )}
-        <div class="block w-full overflow-y-auto">
+        <div class={tw`block w-full overflow-y-auto`}>
           {tokens.map((line, i) => {
             return (
-              <span id={"L" + (i + 1)} class="block">
+              <span id={"L" + (i + 1)} class={tw`block`}>
                 {line.map((token) => {
                   if (token.empty) {
                     return <br />;
@@ -129,7 +130,7 @@ export function CodeBlock({ code, language, disablePrefixes }: CodeBlockProps) {
       code={code}
       language={language}
       disablePrefixes={disablePrefixes}
-      class="p-4"
+      class={tw`p-4`}
     />
   );
 }
