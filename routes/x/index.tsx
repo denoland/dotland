@@ -34,45 +34,23 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
       <Head>
         <title>第三方模块 | Deno</title>
       </Head>
-<<<<<<< HEAD
-      <div class="bg-gray">
-        <Header subtitle="第三方模块" widerContent={true} />
-        <div>
-          <div class="max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8">
-            <dt class="text-lg leading-6 font-medium text-gray-900">
-              deno.ls.cn/x 是什么？
-            </dt>
-            <dd class="mt-2">
-              <p class="text-base leading-6 text-gray-500">
-                <span class="font-semibold">deno.js.cn/x</span>{" "}
-                是 Deno 模块的托管服务。它缓存 GitHub 上的开源模块的 Release 代码，并在一个易于记忆的域名中提供它们。
-              </p>
-            </dd>
-
-            <div class="mt-2">
-              <a href="#info" class="link">
-                了解更多
-=======
       <div class={tw`bg-gray`}>
-        <Header subtitle="Third Party Modules" widerContent={true} />
+        <Header subtitle="第三方模块" widerContent={true} />
         <div>
           <div class={tw`max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8`}>
             <dt class={tw`text-lg leading-6 font-medium text-gray-900`}>
-              What is deno.land/x?
+              deno.js.cn/x 是什么？
             </dt>
             <dd class={tw`mt-2`}>
               <p class={tw`text-base leading-6 text-gray-500`}>
-                <span class={tw`font-semibold`}>deno.land/x</span>{" "}
-                is a hosting service for Deno scripts. It caches releases of
-                open source modules stored on GitHub and serves them at one easy
-                to remember domain.
+                <span class={tw`font-semibold`}>deno.js.cn/x</span>{" "}
+                是 Deno 模块的托管服务。它缓存 GitHub 上的开源模块的 Release 代码，并在一个易于记忆的域名中提供它们。
               </p>
             </dd>
 
             <div class={tw`mt-2`}>
               <a href="#info" class={tw`link`}>
-                Learn more
->>>>>>> 8202fd5aad54ae3cbda998ebc7dfcef594bc546a
+                了解更多
               </a>
             </div>
 
@@ -101,13 +79,8 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
             method="get"
             class={tw`max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8`}
           >
-<<<<<<< HEAD
-            <label htmlFor="query" class="font-medium sr-only">
-              搜索
-=======
             <label htmlFor="query" class={tw`font-medium sr-only`}>
-              Search
->>>>>>> 8202fd5aad54ae3cbda998ebc7dfcef594bc546a
+              搜索
             </label>
             <input
               name="query"
@@ -127,16 +100,11 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
           >
             {data.resp === null
               ? (
-<<<<<<< HEAD
-                <div class="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate">
-                  加载模块失败
-=======
                 <div
                   class={tw
                     `p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate`}
                 >
-                  Failed to load modules
->>>>>>> 8202fd5aad54ae3cbda998ebc7dfcef594bc546a
+                  加载模块失败
                 </div>
               )
               : (
@@ -146,17 +114,11 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
                 >
                   {data.resp.results.length == 0
                     ? (
-<<<<<<< HEAD
-                      <div class="p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500">
-                        没有找到模块。如果想要我们知道您正在寻找哪个模块，可以在这个
-=======
                       <div
                         class={tw
                           `p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500`}
                       >
-                        No modules found. Please let us know what you're looking
-                        for by{" "}
->>>>>>> 8202fd5aad54ae3cbda998ebc7dfcef594bc546a
+                        没有找到模块。如果想要我们知道您正在寻找哪个模块，可以在这个
                         <a
                           class={tw`link`}
                           href="https://github.com/denoland/wanted_modules/issues"
@@ -235,11 +197,7 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
                   <dd class={tw`mt-2`}>
                     <p class={tw`text-base leading-6 text-gray-500`}>
                       No, the built-in runtime is documented on{" "}
-<<<<<<< HEAD
-                      <a class="link" href="https://doc.deno.js.cn/">
-=======
-                      <a class={tw`link`} href="https://doc.deno.land/">
->>>>>>> 8202fd5aad54ae3cbda998ebc7dfcef594bc546a
+                      <a class={tw`link`} href="https://doc.deno.js.cn/">
                         deno doc
                       </a>{" "}
                       and in the manual. See{" "}

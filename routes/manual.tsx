@@ -161,18 +161,12 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                     alt="logo"
                     class={tw`w-auto h-12`}
                   />
-<<<<<<< HEAD
-                  <div class="mx-4 flex flex-col justify-center">
-                    <div class="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
-                      Deno 手册
-=======
                   <div class={tw`mx-4 flex flex-col justify-center`}>
                     <div
                       class={tw
                         `font-bold text-gray-900 leading-6 text-2xl tracking-tight`}
                     >
-                      Deno Manual
->>>>>>> 8202fd5aad54ae3cbda998ebc7dfcef594bc546a
+                      Deno 手册
                     </div>
                   </div>
                 </a>
@@ -194,16 +188,6 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
           </div>
         </div>
 
-<<<<<<< HEAD
-        <div class="hidden md:flex md:flex-shrink-0">
-          <div class="flex flex-col w-72 border-r border-gray-200 bg-gray-50">
-            <div class="bg-gray-100 pb-4 pt-4 border-b border-gray-200">
-              <a href="/" class="flex items-center flex-shrink-0 px-4">
-                <img src="/logo.svg" alt="logo" class="w-auto h-12" />
-                <div class="mx-4 flex flex-col justify-center">
-                  <div class="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
-                    Deno 手册
-=======
         <div class={tw`hidden md:flex md:flex-shrink-0`}>
           <div
             class={tw`flex flex-col w-72 border-r border-gray-200 bg-gray-50`}
@@ -216,8 +200,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                     class={tw
                       `font-bold text-gray-900 leading-6 text-2xl tracking-tight`}
                   >
-                    Deno Manual
->>>>>>> 8202fd5aad54ae3cbda998ebc7dfcef594bc546a
+                    Deno 手册
                   </div>
                 </div>
               </a>
@@ -244,13 +227,6 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             >
               <img src="/logo.svg" alt="logo" class={tw`w-auto h-10`} />
             </a>
-<<<<<<< HEAD
-            <div class="border-l border-r border-gray-200 flex-1 px-4 flex justify-between">
-              <div class="flex-1 flex">
-                <div class="w-full flex justify-between h-full">
-                  <label htmlFor="search_field" class="sr-only">
-                    搜索
-=======
             <div
               class={tw
                 `border-l border-r border-gray-200 flex-1 px-4 flex justify-between`}
@@ -258,8 +234,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
               <div class={tw`flex-1 flex`}>
                 <div class={tw`w-full flex justify-between h-full`}>
                   <label htmlFor="search_field" class={tw`sr-only`}>
-                    Search
->>>>>>> 8202fd5aad54ae3cbda998ebc7dfcef594bc546a
+                    搜索
                   </label>
                   <button
                     class={tw
@@ -280,18 +255,10 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                         />
                       </svg>
                     </div>
-<<<<<<< HEAD
-                    <div class="pl-6">
-                      <span class="inline sm:hidden">搜索文章</span>
-                      <span class="hidden sm:inline">
-                        搜索文章 (按 <InlineCode>/</InlineCode>{"  "}搜索)
-=======
                     <div class={tw`pl-6`}>
-                      <span class={tw`inline sm:hidden`}>Search docs</span>
+                      <span class={tw`inline sm:hidden`}>搜索文章</span>
                       <span class={tw`hidden sm:inline`}>
-                        Search the docs (press <InlineCode>/</InlineCode>{" "}
-                        to focus)
->>>>>>> 8202fd5aad54ae3cbda998ebc7dfcef594bc546a
+                        搜索文章 (按 <InlineCode>/</InlineCode>{"  "}搜索)
                       </span>
                     </div>
                   </button>
@@ -325,20 +292,13 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             class={tw`flex-1 relative z-0 overflow-y-auto focus:outline-none`}
             tabIndex={0}
           >
-<<<<<<< HEAD
-            <div class="h-16 bg-white shadow hidden md:block">
-              <div class="max-w-screen-md mx-auto px-12 w-full flex justify-between h-full">
-                <label htmlFor="search_field" class="sr-only">
-                  搜索
-=======
             <div class={tw`h-16 bg-white shadow hidden md:block`}>
               <div
                 class={tw
                   `max-w-screen-md mx-auto px-12 w-full flex justify-between h-full`}
               >
                 <label htmlFor="search_field" class={tw`sr-only`}>
-                  Search
->>>>>>> 8202fd5aad54ae3cbda998ebc7dfcef594bc546a
+                  搜索
                 </label>
                 <button
                   class={tw
@@ -359,13 +319,8 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                       />
                     </svg>
                   </div>
-<<<<<<< HEAD
-                  <div class="pl-6">
-                    搜索文章 (按 <InlineCode>/</InlineCode> 搜索)
-=======
                   <div class={tw`pl-6`}>
-                    Search the docs (press <InlineCode>/</InlineCode> to focus)
->>>>>>> 8202fd5aad54ae3cbda998ebc7dfcef594bc546a
+                    搜索文章 (按 <InlineCode>/</InlineCode> 搜索)
                   </div>
                 </button>
               </div>

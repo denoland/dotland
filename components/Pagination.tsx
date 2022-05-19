@@ -73,31 +73,17 @@ export function Pagination(
                 `hidden sm:flex-1 sm:flex sm:items-center sm:justify-between`}
             >
               <div>
-<<<<<<< HEAD
-                <p class="text-sm leading-5 text-gray-700">
+                <p class={tw`text-sm leading-5 text-gray-700`}>
                   显示第{" "}
-                  <span class="font-medium">
+                  <span class={tw`font-medium`}>
                     {(currentPage - 1) * perPage + 1}
                   </span>{" "}
                   到{" "}
-                  <span class="font-medium">
+                  <span class={tw`font-medium`}>
                     {(currentPage - 1) * perPage + response.results.length}
                   </span>{" "}
                   共{" "}
-                  <span class="font-medium">
-=======
-                <p class={tw`text-sm leading-5 text-gray-700`}>
-                  Showing{" "}
                   <span class={tw`font-medium`}>
-                    {(currentPage - 1) * perPage + 1}
-                  </span>{" "}
-                  to{" "}
-                  <span class={tw`font-medium`}>
-                    {(currentPage - 1) * perPage + response.results.length}
-                  </span>{" "}
-                  of{" "}
-                  <span class={tw`font-medium`}>
->>>>>>> 8202fd5aad54ae3cbda998ebc7dfcef594bc546a
                     {response.totalCount}
                   </span>{" "}
                   条结果

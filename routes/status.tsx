@@ -22,13 +22,8 @@ export default function StatusPage({ data }: PageProps<Build | Error>) {
             `max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 mt-8 pb-8 mb-16`}
         >
           <div>
-<<<<<<< HEAD
-            <h3 class="text-lg leading-6 font-medium text-gray-900">
-              模块发布状态
-=======
             <h3 class={tw`text-lg leading-6 font-medium text-gray-900`}>
-              Module publishing status
->>>>>>> 8202fd5aad54ae3cbda998ebc7dfcef594bc546a
+              模块发布状态
             </h3>
             {!(data instanceof Error) &&
               (
@@ -46,15 +41,9 @@ export default function StatusPage({ data }: PageProps<Build | Error>) {
             : (
               <div class={tw`mt-5 border-t border-gray-200 pt-5`}>
                 <dl>
-<<<<<<< HEAD
-                  <div class="sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt class="text-sm leading-5 font-medium text-gray-500">
-                      仓库
-=======
                   <div class={tw`sm:grid sm:grid-cols-3 sm:gap-4`}>
                     <dt class={tw`text-sm leading-5 font-medium text-gray-500`}>
-                      Repository
->>>>>>> 8202fd5aad54ae3cbda998ebc7dfcef594bc546a
+                      仓库
                     </dt>
                     <dd
                       class={tw
@@ -79,18 +68,12 @@ export default function StatusPage({ data }: PageProps<Build | Error>) {
                       </a>
                     </dd>
                   </div>
-<<<<<<< HEAD
-                  <div class="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                    <dt class="text-sm leading-5 font-medium text-gray-500">
-                      版本
-=======
                   <div
                     class={tw
                       `mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5`}
                   >
                     <dt class={tw`text-sm leading-5 font-medium text-gray-500`}>
-                      Version
->>>>>>> 8202fd5aad54ae3cbda998ebc7dfcef594bc546a
+                      版本
                     </dt>
                     <dd
                       class={tw
@@ -99,18 +82,12 @@ export default function StatusPage({ data }: PageProps<Build | Error>) {
                       {data.options.version}
                     </dd>
                   </div>
-<<<<<<< HEAD
-                  <div class="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                    <dt class="text-sm leading-5 font-medium text-gray-500">
-                      源码
-=======
                   <div
                     class={tw
                       `mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5`}
                   >
                     <dt class={tw`text-sm leading-5 font-medium text-gray-500`}>
-                      Source
->>>>>>> 8202fd5aad54ae3cbda998ebc7dfcef594bc546a
+                      源码
                     </dt>
                     <dd
                       class={tw
@@ -126,18 +103,12 @@ export default function StatusPage({ data }: PageProps<Build | Error>) {
                       </a>
                     </dd>
                   </div>
-<<<<<<< HEAD
-                  <div class="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                    <dt class="text-sm leading-5 font-medium text-gray-500">
-                      状态
-=======
                   <div
                     class={tw
                       `mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5`}
                   >
                     <dt class={tw`text-sm leading-5 font-medium text-gray-500`}>
-                      Status
->>>>>>> 8202fd5aad54ae3cbda998ebc7dfcef594bc546a
+                      状态
                     </dt>
                     <dd
                       class={tw

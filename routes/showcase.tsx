@@ -24,17 +24,10 @@ export default function ShowcasePage() {
         <title>案例展示 | Deno</title>
       </Head>
       <Header />
-<<<<<<< HEAD
-      <div class="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 mt-8 mb-24">
-        <div class="max-w-screen-lg mx-auto">
-          <h4 class="text-4xl font-bold tracking-tight">案例展示</h4>
-          <p class="mt-4 text-lg">
-=======
       <div class={tw`max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 mt-8 mb-24`}>
         <div class={tw`max-w-screen-lg mx-auto`}>
-          <h4 class={tw`text-4xl font-bold tracking-tight`}>Showcase</h4>
+          <h4 class={tw`text-4xl font-bold tracking-tight`}>案例展示</h4>
           <p class={tw`mt-4 text-lg`}>
->>>>>>> 8202fd5aad54ae3cbda998ebc7dfcef594bc546a
             Check out some websites, apps, and other products built with Deno.
           </p>
           <div

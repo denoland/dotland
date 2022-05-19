@@ -26,32 +26,17 @@ export default function TranslationsPage() {
         <title>翻译 | Deno</title>
       </Head>
       <Header />
-<<<<<<< HEAD
-      <div class="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 mt-8 mb-24">
-        <div class="max-w-screen-lg mx-auto">
-          <h4 class="text-4xl font-bold tracking-tight">翻译</h4>
-          <p class="mt-4 text-lg">
-            Deno 文档提供以下语言版本。
-          </p>
-          <p class="mt-4 text-lg">
-            免责声明：这些页面由第三方贡献者维护，而不是由 Deno 维护。它们可能包含过时的信息。
-          </p>
-          <p class="mt-4 text-lg">
-            弃用通知：我们不再接受新的翻译。
-=======
       <div class={tw`max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 mt-8 mb-24`}>
         <div class={tw`max-w-screen-lg mx-auto`}>
-          <h4 class={tw`text-4xl font-bold tracking-tight`}>Translations</h4>
+          <h4 class={tw`text-4xl font-bold tracking-tight`}>翻译</h4>
           <p class={tw`mt-4 text-lg`}>
-            Deno docs is available in the following languages.
+            Deno 文档提供以下语言版本。
           </p>
           <p class={tw`mt-4 text-lg`}>
-            Disclaimer: these pages are maintained by third party contributors
-            and not by Deno. They may contain out-of-date information.
+            免责声明：这些页面由第三方贡献者维护，而不是由 Deno 维护。它们可能包含过时的信息。
           </p>
           <p class={tw`mt-4 text-lg`}>
-            Deprecation Notice: we are not accepting new translations.
->>>>>>> 8202fd5aad54ae3cbda998ebc7dfcef594bc546a
+            弃用通知：我们不再接受新的翻译。
           </p>
         </div>
         <div
