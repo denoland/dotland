@@ -1,18 +1,18 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-import { ComponentChildren, h } from "../deps.ts";
+import { ComponentChildren, h, tw } from "../deps.ts";
 
 export function ErrorMessage(props: {
   title: string;
   children: ComponentChildren;
 }) {
   return (
-    <div class="rounded-md bg-red-50 border border-red-200 p-4">
-      <div class="flex">
-        <div class="flex-shrink-0">
+    <div class={tw`rounded-md bg-red-50 border border-red-200 p-4`}>
+      <div class={tw`flex`}>
+        <div class={tw`flex-shrink-0`}>
           <svg
-            class="h-5 w-5 text-red-400"
+            class={tw`h-5 w-5 text-red-400`}
             fill="currentColor"
             viewBox="0 0 20 20"
           >
@@ -23,11 +23,11 @@ export function ErrorMessage(props: {
             />
           </svg>
         </div>
-        <div class="ml-3">
-          <h3 class="text-sm leading-5 font-medium text-red-800">
+        <div class={tw`ml-3`}>
+          <h3 class={tw`text-sm leading-5 font-medium text-red-800`}>
             {props.title}
           </h3>
-          <div class="mt-2 text-sm leading-5 text-red-700">
+          <div class={tw`mt-2 text-sm leading-5 text-red-700`}>
             {props.children}
           </div>
         </div>
