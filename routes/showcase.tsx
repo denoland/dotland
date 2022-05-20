@@ -57,6 +57,7 @@ function Item({ project }: { project: Project }) {
     <div>
       <a href={project.link}>
         <img
+          loading="lazy"
           src={project.image}
           alt={project.title}
           class={tw`object-contain shadow-lg rounded-lg w-72`}
