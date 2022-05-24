@@ -1,5 +1,4 @@
 export * from "https://raw.githubusercontent.com/lucacasonato/fresh/ec388f87fb19cf5c247ad62c9a0beb771170da07/runtime.ts";
-import { Fragment, h } from "https://raw.githubusercontent.com/lucacasonato/fresh/ec388f87fb19cf5c247ad62c9a0beb771170da07/runtime.ts";
 export { default as twas } from "https://esm.sh/twas@2.1.2?pin=v76";
 export { apply, setup, theme, tw } from "https://esm.sh/twind@0.16.16?pin=v78";
 export { css } from "https://esm.sh/twind@0.16.16/css?pin=v78";
@@ -11,9 +10,6 @@ export { render as gfm } from "https://deno.land/x/gfm@0.1.20/mod.ts";
 
 export { emojify } from "https://deno.land/x/emoji@0.1.2/mod.ts";
 export { default as compareVersions } from "https://esm.sh/tiny-version-compare@3.0.1?pin=v76";
-
-import { runtime, setup } from "../doc_components/services.ts";
-await setup({ runtime: { Fragment, h } });
 
 import "https://esm.sh/prismjs@1.27.0/components/prism-bash?no-check";
 import "https://esm.sh/prismjs@1.27.0/components/prism-batch?no-check";

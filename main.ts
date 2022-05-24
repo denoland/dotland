@@ -8,6 +8,7 @@
 /// <reference lib="deno.ns" />
 /// <reference lib="deno.unstable" />
 
+/** @jsx runtime.h */
 import {
   accepts,
   ConnInfo,
@@ -21,6 +22,11 @@ import {
 import manifest from "./fresh.gen.ts";
 
 import { routes as completionsV2Routes } from "./completions_v2.ts";
+
+import { Fragment, h } from "./deps.ts";
+import { runtime, setup } from "../doc_components/services.ts";
+await setup({ runtime: { Fragment, h } });
+
 
 function isHtmlRequest(req: Request) {
   return accepts(req, "application/*", "text/html") === "text/html";

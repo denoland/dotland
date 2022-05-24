@@ -1,14 +1,19 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h, tw } from "../deps.ts";
+/** @jsx runtime.h */
+/** @jsxFrag runtime.Fragment */
+import { runtime } from "../../doc_components/services.ts";
 import {
   DirListing,
   Entry,
   getBasePath,
   isReadme,
 } from "../util/registry_utils.ts";
+
+import { apply, css, tw } from "../deps.ts";
+import { getIndexStructure } from "../../doc_components/_showcase/util.ts";
+
+import { ModuleIndex } from "../../doc_components/module_index.tsx";
 
 interface DirectoryListingProps {
   dirListing: DirListing[];
@@ -18,6 +23,7 @@ interface DirectoryListingProps {
   repositoryURL?: string | null;
   url: URL;
 }
+const indexStructure = await getIndexStructure();
 
 export function DirectoryListing(props: DirectoryListingProps) {
   const isStd = props.url.pathname.startsWith("/std");
@@ -63,6 +69,8 @@ export function DirectoryListing(props: DirectoryListingProps) {
     }${entry.name}`;
   };
 
+  const showDir = props.url.searchParams.has("showDir");
+
   return (
     <div class={tw`flex flex-col overflow-x-auto`}>
       <div
@@ -71,7 +79,7 @@ export function DirectoryListing(props: DirectoryListingProps) {
       >
         <div
           class={tw
-            `bg-gray-100 border-b border-gray-200 py-2 px-4 flex justify-between`}
+            `bg-gray-100 border-b border-gray-200 py-2 flex justify-between pl-4 pr-2`}
         >
           <div class={tw`flex items-center`}>
             <svg
@@ -84,27 +92,74 @@ export function DirectoryListing(props: DirectoryListingProps) {
             </svg>
             <span class={tw`ml-2 font-medium`}>{props.path || "/"}</span>
           </div>
-          {props.repositoryURL &&
-            (
-              <a href={props.repositoryURL} class={tw`link ml-4`}>
-                Repository
+          <div className={tw`inline-flex items-center`}>
+            <div>
+              {props.repositoryURL &&
+                (
+                  <a href={props.repositoryURL} class={tw`link ml-4`}>
+                    Repository
+                  </a>
+                )}
+            </div>
+            <div className={tw`inline-block ml-4 inline-flex shadow-sm rounded-md`}>
+              <a
+                href={props.url.pathname}
+                className={tw
+                  `relative inline-flex items-center px-1.5 py-1.5 rounded-l-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50 ${
+                    showDir ? "bg-white" : "bg-gray-100"
+                  }`}
+              >
+                <span className={tw`sr-only`}>Documentation</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+                </svg>
               </a>
-            )}
+              <a
+                href={props.url.pathname + "?showDir"}
+                className={tw
+                  `-ml-px relative inline-flex items-center px-1.5 py-1.5 rounded-r-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50 ${
+                    !showDir ? "bg-white" : "bg-gray-100"
+                  }`}
+              >
+                <span className={tw`sr-only`}>Directory Listing</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
         </div>
-        <div>
+
+        {!showDir ? <div class={tw`bg-white dark:(bg-gray-900 text-white)`}>
+          <ModuleIndex>{indexStructure}</ModuleIndex>
+        </div> : <div>
           <input
             type="checkbox"
-            class={tw`hidden`}
+            className={tw`hidden`}
             id="hiddenItemsToggle"
             autoComplete="off"
           />
-          <table class={tw`min-w-full table-fixed w-full`}>
+          <table className={tw`min-w-full table-fixed w-full`}>
             <colgroup>
-              <col class={tw`w-9 md:w-12`} />
-              <col class={tw`w-max-content`} />
+              <col className={tw`w-9 md:w-12`} />
+              <col className={tw`w-max-content`} />
               <col style={{ width: "5.5rem" }} />
             </colgroup>
-            <tbody class={tw`bg-white`}>
+            <tbody className={tw`bg-white`}>
               {displayItems.map((entry: Entry, i: number) => {
                 const isLastItem = displayItems.length - 1 === i;
                 return (
@@ -121,14 +176,14 @@ export function DirectoryListing(props: DirectoryListingProps) {
                 (
                   <tr
                     id="hiddenItemsTr"
-                    class={tw
+                    className={tw
                       `bg-gray-50 cursor-pointer hover:bg-gray-100 border-t border-gray-200`}
                   >
                     <td colSpan={3}>
                       <label htmlFor="hiddenItemsToggle">
                         <div
                           id="hiddenItemsButton"
-                          class={tw
+                          className={tw
                             `select-none w-full text-center text-sm px-2 sm:pl-3 md:pl-4 py-1 text-blue-500`}
                         >
                           <span>
@@ -160,7 +215,7 @@ export function DirectoryListing(props: DirectoryListingProps) {
               })}
             </tbody>
           </table>
-        </div>
+        </div>}
       </div>
     </div>
   );
