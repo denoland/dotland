@@ -7,10 +7,9 @@ import {
   DirListing,
   Entry,
   getBasePath,
-  isReadme,
 } from "../util/registry_utils.ts";
 
-import { apply, css, tw } from "../deps.ts";
+import { tw } from "../deps.ts";
 import { getIndexStructure } from "../../doc_components/_showcase/util.ts";
 
 import { ModuleIndex } from "../../doc_components/module_index.tsx";
@@ -145,7 +144,7 @@ export function DirectoryListing(props: DirectoryListingProps) {
         </div>
 
         {!showDir ? <div class={tw`bg-white dark:(bg-gray-900 text-white)`}>
-          <ModuleIndex>{indexStructure}</ModuleIndex>
+          <ModuleIndex base={"https://deno.land" + baseURL} path={props.path>{indexStructure}</ModuleIndex>
         </div> : <div>
           <input
             type="checkbox"

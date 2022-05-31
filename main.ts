@@ -23,9 +23,20 @@ import manifest from "./fresh.gen.ts";
 
 import { routes as completionsV2Routes } from "./completions_v2.ts";
 
-import { Fragment, h } from "./deps.ts";
+import { Fragment, h, virtualSheet } from "./deps.ts";
+const sheet = virtualSheet();
 import { runtime, setup } from "../doc_components/services.ts";
-await setup({ runtime: { Fragment, h } });
+await setup({
+  runtime: { Fragment, h },
+  tw: {
+    sheet,
+    theme: {
+      colors: {
+        transparent: "transparent",
+      },
+    },
+  },
+});
 
 
 function isHtmlRequest(req: Request) {

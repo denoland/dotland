@@ -2,6 +2,12 @@
   "tasks": {
     "dev": "deno run --watch --no-check --allow-read --allow-env --allow-net main.ts"
   },
+  "compilerOptions": {
+    "types": [
+      "../doc_components/jsx.d.ts"
+    ]
+  },
+  "importMap": "./import_map.json",
   "fmt": {
     "files": {
       "exclude": [".git"]

@@ -1,8 +1,9 @@
 export * from "https://raw.githubusercontent.com/lucacasonato/fresh/ec388f87fb19cf5c247ad62c9a0beb771170da07/runtime.ts";
 export { default as twas } from "https://esm.sh/twas@2.1.2?pin=v76";
-export { apply, setup, theme, tw } from "https://esm.sh/twind@0.16.16?pin=v78";
-export { css } from "https://esm.sh/twind@0.16.16/css?pin=v78";
-export { virtualSheet } from "https://esm.sh/twind@0.16.16/shim/server?pin=v78";
+export { setup, theme } from "../doc_components/services.ts";
+export { apply, tw } from "twind";
+export { css } from "twind/css";
+export { virtualSheet } from "twind/sheets";
 
 export { default as Prism } from "https://esm.sh/prismjs@1.27.0";
 export { escape as htmlEscape } from "https://esm.sh/he@1.2.0?pin=v76";

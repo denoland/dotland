@@ -44,11 +44,11 @@ export default function DocPreview() {
       <h2 className={tw`text-2xl py-2`}>Component Showcase</h2>
       <hr />
       <ComponentTitle module="/markdown.tsx">MarkdownSummary</ComponentTitle>
-      <MarkdownSummary path="/">
-        {`Some _markdown_ with [links](https://deno.land/)`}
+      <MarkdownSummary url="https://deno.land/x/oak@v10.5.1/mod.ts">
+        {`Some _markdown_ with [links](https://deno.land/) and symbol links, like: {@linkcode Router}`}
       </MarkdownSummary>
       <ComponentTitle module="/module_index.tsx">ModuleIndex</ComponentTitle>
-      <ModuleIndex>{indexStructure}</ModuleIndex>
+      <ModuleIndex base="https://deno.land/std@0.138.0" path="/">{indexStructure}</ModuleIndex>
       <ComponentTitle module="/jsdoc.tsx">Tag</ComponentTitle>
       <Tag color="yellow">abstract</Tag>
       <Tag color="gray">deprecated</Tag>
