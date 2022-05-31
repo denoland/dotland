@@ -78,20 +78,20 @@ export function RawCodeBlock({
       data-color-mode="light"
       data-light-theme="light"
     >
-        {enableLineRef &&
-          (
-            <div className={codeDivClasses}>
-              {tokens.map((_, i) => (
-                <a
-                  className={tw`text-gray-500 token text-right block`}
-                  tab-index={-1}
-                  href={`#L${i + 1}`}
-                >
-                  {i + 1}
-                </a>
-              ))}
-            </div>
-          )}
+      {enableLineRef &&
+        (
+          <div className={codeDivClasses}>
+            {tokens.map((_, i) => (
+              <a
+                className={tw`text-gray-500 token text-right block`}
+                tab-index={-1}
+                href={`#L${i + 1}`}
+              >
+                {i + 1}
+              </a>
+            ))}
+          </div>
+        )}
       {!disablePrefixes && (newLang === "bash") &&
         (
           <code>
@@ -99,24 +99,24 @@ export function RawCodeBlock({
           </code>
         )}
       <div className={tw`block w-full overflow-y-auto`}>
-          {tokens.map((line, i) => {
-            return (
-              <span id={"L" + (i + 1)} className={tw`block`}>
-                {line.map((token) => {
-                  if (token.empty) {
-                    return <br />;
-                  }
-                  return (
-                    <span className={"token " + token.types.join(" ")}>
-                      {token.content}
-                    </span>
-                  );
-                })}
-              </span>
-            );
-          })}
-        </div>
-      </pre>
+        {tokens.map((line, i) => {
+          return (
+            <span id={"L" + (i + 1)} className={tw`block`}>
+              {line.map((token) => {
+                if (token.empty) {
+                  return <br />;
+                }
+                return (
+                  <span className={"token " + token.types.join(" ")}>
+                    {token.content}
+                  </span>
+                );
+              })}
+            </span>
+          );
+        })}
+      </div>
+    </pre>
   );
 }
 
