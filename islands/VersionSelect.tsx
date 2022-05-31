@@ -1,5 +1,5 @@
 /** @jsx h */
-import { h, tw } from "../deps.ts";
+import { h, IS_BROWSER, tw } from "../deps.ts";
 
 export default function VersionSelect({ versions, selectedVersion }: {
   versions: Record<string, string>;
@@ -16,6 +16,7 @@ export default function VersionSelect({ versions, selectedVersion }: {
             location.href = versions[e.currentTarget.value];
           }
         }}
+        disabled={!IS_BROWSER}
       >
         {!Object.hasOwn(versions, selectedVersion) && (
           <option key={selectedVersion} value={selectedVersion}>
