@@ -54,9 +54,10 @@ export default function ShowcasePage() {
 
 function Item({ project }: { project: Project }) {
   return (
-    <div class="">
-      <a href={project.link} class="">
+    <div>
+      <a href={project.link}>
         <img
+          loading="lazy"
           src={project.image}
           alt={project.title}
           class={tw`object-contain shadow-lg rounded-lg w-72`}
@@ -64,7 +65,7 @@ function Item({ project }: { project: Project }) {
       </a>
       <div class={tw`mt-4`}>
         <span class={tw`text-lg`}>
-          <a href={project.link} class="">{project.title}</a>
+          <a href={project.link}>{project.title}</a>
         </span>
         {project.github && (
           <a
