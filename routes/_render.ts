@@ -9,6 +9,9 @@ setup({
   sheet,
   mode: "silent",
   theme: {
+    colors: {
+      transparent: "transparent",
+    },
     fontFamily: {
       mono: [
         "Menlo",
