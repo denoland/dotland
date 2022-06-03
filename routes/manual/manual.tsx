@@ -10,10 +10,10 @@ import {
   PageConfig,
   PageProps,
   tw,
-} from "../deps.ts";
-import { Handlers } from "../server_deps.ts";
-import { Markdown } from "../components/Markdown.tsx";
-import { InlineCode } from "../components/InlineCode.tsx";
+} from "../../deps.ts";
+import { Handlers } from "../../server_deps.ts";
+import { Markdown } from "../../components/Markdown.tsx";
+import { InlineCode } from "../../components/InlineCode.tsx";
 import {
   getDocURL,
   getFileURL,
@@ -21,9 +21,9 @@ import {
   isPreviewVersion,
   TableOfContents,
   versions,
-} from "../util/manual_utils.ts";
+} from "../../util/manual_utils.ts";
 
-import versionMeta from "../versions.json" assert { type: "json" };
+import versionMeta from "../../versions.json" assert { type: "json" };
 
 interface Data {
   tableOfContents: TableOfContents;

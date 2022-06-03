@@ -161,7 +161,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           <p class={tw`my-4 text-gray-700`}>
             You can find a more in depth introduction, examples, and environment
             setup guides in{" "}
-            <a class={tw`link`} href="/manual">
+            <a class={tw`link`} href="/manual/manual">
               the manual
             </a>
             .
@@ -182,7 +182,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           </p>
           <p class={tw`my-4 text-gray-700`}>
             Deno comes with{" "}
-            <a class={tw`link`} href="/manual">
+            <a class={tw`link`} href="/manual/manual">
               a manual
             </a>{" "}
             which contains more in depth explanations about the more complex
