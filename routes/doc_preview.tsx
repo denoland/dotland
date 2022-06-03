@@ -3,9 +3,9 @@
 /** @jsx runtime.h */
 import { apply, css, runtime, tw } from "../deps.ts";
 
-import { Tag } from "https://raw.githubusercontent.com/denoland/doc_components/59572f532b67ee61631a7921becc49c67433fa20/jsdoc.tsx";
-import { MarkdownSummary } from "https://raw.githubusercontent.com/denoland/doc_components/59572f532b67ee61631a7921becc49c67433fa20/markdown.tsx";
-import { ModuleIndex } from "https://raw.githubusercontent.com/denoland/doc_components/59572f532b67ee61631a7921becc49c67433fa20/module_index.tsx";
+import { Tag } from "doc_components/jsdoc.tsx";
+import { MarkdownSummary } from "doc_components/markdown.tsx";
+import { ModuleIndex } from "doc_components/module_index.tsx";
 import { getIndexStructure } from "../util/doc.ts";
 
 const app = css({

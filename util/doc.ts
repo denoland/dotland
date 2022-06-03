@@ -1,7 +1,4 @@
-import {
-  IndexStructure,
-  SerializeMap,
-} from "https://raw.githubusercontent.com/denoland/doc_components/59572f532b67ee61631a7921becc49c67433fa20/doc.ts";
+import { IndexStructure, SerializeMap } from "doc_components/doc.ts";
 
 let innerIndexStructure: IndexStructure;
 
@@ -10,7 +7,7 @@ export async function getIndexStructure(): Promise<IndexStructure> {
     return innerIndexStructure;
   }
   const data = await fetch(
-    "https://raw.githubusercontent.com/denoland/doc_components/59572f532b67ee61631a7921becc49c67433fa20/_showcase/data/index_structure.json",
+    "https://raw.githubusercontent.com/denoland/doc_components/b838d8f3b47fccd33dfd725a5e831616cf0c0092/_showcase/data/index_structure.json",
   ).then((res) => res.text());
   return innerIndexStructure = JSON.parse(
     data,

@@ -5,7 +5,7 @@ export {
   services,
   setup,
   theme,
-} from "https://raw.githubusercontent.com/denoland/doc_components/59572f532b67ee61631a7921becc49c67433fa20/services.ts";
+} from "doc_components/services.ts";
 export { apply, setup as twSetup, tw } from "twind";
 export { css } from "twind/css";
 export { virtualSheet } from "twind/sheets";

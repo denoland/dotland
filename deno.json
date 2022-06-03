@@ -4,7 +4,7 @@
   },
   "compilerOptions": {
     "types": [
-      "https://raw.githubusercontent.com/denoland/doc_components/59572f532b67ee61631a7921becc49c67433fa20/jsx.d.ts"
+      "https://raw.githubusercontent.com/denoland/doc_components/b838d8f3b47fccd33dfd725a5e831616cf0c0092/jsx.d.ts"
     ]
   },
   "importMap": "./import_map.json",
