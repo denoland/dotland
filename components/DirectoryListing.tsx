@@ -2,17 +2,11 @@
 
 /** @jsx runtime.h */
 /** @jsxFrag runtime.Fragment */
-import { runtime } from "../../doc_components/services.ts";
-import {
-  DirListing,
-  Entry,
-  getBasePath,
-} from "../util/registry_utils.ts";
+import { runtime, tw } from "../deps.ts";
+import { DirListing, Entry, getBasePath } from "../util/registry_utils.ts";
 
-import { tw } from "../deps.ts";
-import { getIndexStructure } from "../../doc_components/_showcase/util.ts";
-
-import { ModuleIndex } from "../../doc_components/module_index.tsx";
+import { ModuleIndex } from "https://raw.githubusercontent.com/denoland/doc_components/59572f532b67ee61631a7921becc49c67433fa20/module_index.tsx";
+import { getIndexStructure } from "../util/doc.ts";
 
 interface DirectoryListingProps {
   dirListing: DirListing[];
@@ -100,7 +94,9 @@ export function DirectoryListing(props: DirectoryListingProps) {
                   </a>
                 )}
             </div>
-            <div className={tw`inline-block ml-4 inline-flex shadow-sm rounded-md`}>
+            <div
+              className={tw`inline-block ml-4 inline-flex shadow-sm rounded-md`}
+            >
               <a
                 href={props.url.pathname}
                 className={tw
@@ -143,78 +139,89 @@ export function DirectoryListing(props: DirectoryListingProps) {
           </div>
         </div>
 
-        {!showDir ? <div class={tw`bg-white dark:(bg-gray-900 text-white)`}>
-          <ModuleIndex base={"https://deno.land" + baseURL} path={props.path}>{indexStructure}</ModuleIndex>
-        </div> : <div>
-          <input
-            type="checkbox"
-            className={tw`hidden`}
-            id="hiddenItemsToggle"
-            autoComplete="off"
-          />
-          <table className={tw`min-w-full table-fixed w-full`}>
-            <colgroup>
-              <col className={tw`w-9 md:w-12`} />
-              <col className={tw`w-max-content`} />
-              <col style={{ width: "5.5rem" }} />
-            </colgroup>
-            <tbody className={tw`bg-white`}>
-              {displayItems.map((entry: Entry, i: number) => {
-                const isLastItem = displayItems.length - 1 === i;
-                return (
-                  <TableRow
-                    key={i}
-                    entry={entry}
-                    href={buildEntryURL(props.path, entry)}
-                    isLastItem={isLastItem}
-                    isHiddenItem={false}
-                  />
-                );
-              })}
-              {hiddenItems.length > 0 &&
-                (
-                  <tr
-                    id="hiddenItemsTr"
-                    className={tw
-                      `bg-gray-50 cursor-pointer hover:bg-gray-100 border-t border-gray-200`}
-                  >
-                    <td colSpan={3}>
-                      <label htmlFor="hiddenItemsToggle">
-                        <div
-                          id="hiddenItemsButton"
-                          className={tw
-                            `select-none w-full text-center text-sm px-2 sm:pl-3 md:pl-4 py-1 text-blue-500`}
-                        >
-                          <span>
-                            {`Close hidden ${
-                              hiddenItems.length === 1 ? "item" : "items"
-                            }`}
-                          </span>
-                          <span>
-                            {`Show hidden ${hiddenItems.length} ${
-                              hiddenItems.length === 1 ? "item" : "items"
-                            }`}
-                          </span>
-                        </div>
-                      </label>
-                    </td>
-                  </tr>
-                )}
-              {hiddenItems.map((entry: Entry, i: number) => {
-                const isLastItem = hiddenItems.length - 1 === i;
-                return (
-                  <TableRow
-                    key={i}
-                    entry={entry}
-                    href={buildEntryURL(props.path, entry)}
-                    isLastItem={isLastItem}
-                    isHiddenItem={true}
-                  />
-                );
-              })}
-            </tbody>
-          </table>
-        </div>}
+        {!showDir
+          ? (
+            <div class={tw`bg-white dark:(bg-gray-900 text-white)`}>
+              <ModuleIndex
+                base={"https://deno.land" + baseURL}
+                path={props.path}
+              >
+                {indexStructure}
+              </ModuleIndex>
+            </div>
+          )
+          : (
+            <div>
+              <input
+                type="checkbox"
+                className={tw`hidden`}
+                id="hiddenItemsToggle"
+                autoComplete="off"
+              />
+              <table className={tw`min-w-full table-fixed w-full`}>
+                <colgroup>
+                  <col className={tw`w-9 md:w-12`} />
+                  <col className={tw`w-max-content`} />
+                  <col style={{ width: "5.5rem" }} />
+                </colgroup>
+                <tbody className={tw`bg-white`}>
+                  {displayItems.map((entry: Entry, i: number) => {
+                    const isLastItem = displayItems.length - 1 === i;
+                    return (
+                      <TableRow
+                        key={i}
+                        entry={entry}
+                        href={buildEntryURL(props.path, entry)}
+                        isLastItem={isLastItem}
+                        isHiddenItem={false}
+                      />
+                    );
+                  })}
+                  {hiddenItems.length > 0 &&
+                    (
+                      <tr
+                        id="hiddenItemsTr"
+                        className={tw
+                          `bg-gray-50 cursor-pointer hover:bg-gray-100 border-t border-gray-200`}
+                      >
+                        <td colSpan={3}>
+                          <label htmlFor="hiddenItemsToggle">
+                            <div
+                              id="hiddenItemsButton"
+                              className={tw
+                                `select-none w-full text-center text-sm px-2 sm:pl-3 md:pl-4 py-1 text-blue-500`}
+                            >
+                              <span>
+                                {`Close hidden ${
+                                  hiddenItems.length === 1 ? "item" : "items"
+                                }`}
+                              </span>
+                              <span>
+                                {`Show hidden ${hiddenItems.length} ${
+                                  hiddenItems.length === 1 ? "item" : "items"
+                                }`}
+                              </span>
+                            </div>
+                          </label>
+                        </td>
+                      </tr>
+                    )}
+                  {hiddenItems.map((entry: Entry, i: number) => {
+                    const isLastItem = hiddenItems.length - 1 === i;
+                    return (
+                      <TableRow
+                        key={i}
+                        entry={entry}
+                        href={buildEntryURL(props.path, entry)}
+                        isLastItem={isLastItem}
+                        isHiddenItem={true}
+                      />
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          )}
       </div>
     </div>
   );

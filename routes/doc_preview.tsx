@@ -1,13 +1,12 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx runtime.h */
-import { apply, css, tw } from "../deps.ts";
-import { runtime } from "../../doc_components/services.ts";
-import { getIndexStructure } from "../../doc_components/_showcase/util.ts";
+import { apply, css, runtime, tw } from "../deps.ts";
 
-import { Tag } from "../../doc_components/jsdoc.tsx";
-import { MarkdownSummary } from "../../doc_components/markdown.tsx";
-import { ModuleIndex } from "../../doc_components/module_index.tsx";
+import { Tag } from "https://raw.githubusercontent.com/denoland/doc_components/59572f532b67ee61631a7921becc49c67433fa20/jsdoc.tsx";
+import { MarkdownSummary } from "https://raw.githubusercontent.com/denoland/doc_components/59572f532b67ee61631a7921becc49c67433fa20/markdown.tsx";
+import { ModuleIndex } from "https://raw.githubusercontent.com/denoland/doc_components/59572f532b67ee61631a7921becc49c67433fa20/module_index.tsx";
+import { getIndexStructure } from "../util/doc.ts";
 
 const app = css({
   ":global": {
@@ -48,7 +47,9 @@ export default function DocPreview() {
         {`Some _markdown_ with [links](https://deno.land/) and symbol links, like: {@linkcode Router}`}
       </MarkdownSummary>
       <ComponentTitle module="/module_index.tsx">ModuleIndex</ComponentTitle>
-      <ModuleIndex base="https://deno.land/std@0.138.0" path="/">{indexStructure}</ModuleIndex>
+      <ModuleIndex base="https://deno.land/std@0.138.0" path="/">
+        {indexStructure}
+      </ModuleIndex>
       <ComponentTitle module="/jsdoc.tsx">Tag</ComponentTitle>
       <Tag color="yellow">abstract</Tag>
       <Tag color="gray">deprecated</Tag>

@@ -23,12 +23,10 @@ import manifest from "./fresh.gen.ts";
 
 import { routes as completionsV2Routes } from "./completions_v2.ts";
 
-import { Fragment, h } from "./deps.ts";
-import { setup } from "../doc_components/services.ts";
+import { Fragment, h, setup } from "./deps.ts";
 await setup({
   runtime: { Fragment, h },
 });
-
 
 function isHtmlRequest(req: Request) {
   return accepts(req, "application/*", "text/html") === "text/html";

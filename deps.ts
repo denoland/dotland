@@ -1,7 +1,12 @@
 export * from "https://raw.githubusercontent.com/lucacasonato/fresh/ec388f87fb19cf5c247ad62c9a0beb771170da07/runtime.ts";
 export { default as twas } from "https://esm.sh/twas@2.1.2?pin=v76";
-export { setup, theme } from "../doc_components/services.ts";
-export { apply, tw, setup as twSetup } from "twind";
+export {
+  runtime,
+  services,
+  setup,
+  theme,
+} from "https://raw.githubusercontent.com/denoland/doc_components/59572f532b67ee61631a7921becc49c67433fa20/services.ts";
+export { apply, setup as twSetup, tw } from "twind";
 export { css } from "twind/css";
 export { virtualSheet } from "twind/sheets";
 

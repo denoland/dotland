@@ -7,6 +7,7 @@ const sheet = virtualSheet();
 sheet.reset();
 twSetup({
   sheet,
+  darkMode: "class",
   mode: "silent",
   theme: {
     fontFamily: {
