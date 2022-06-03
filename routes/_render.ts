@@ -1,17 +1,14 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-import { apply, setup, virtualSheet } from "../deps.ts";
+import { apply, twSetup, virtualSheet } from "../deps.ts";
 import { RenderContext, RenderFn } from "../server_deps.ts";
 
 const sheet = virtualSheet();
 sheet.reset();
-setup({
+twSetup({
   sheet,
   mode: "silent",
   theme: {
-    colors: {
-      transparent: "transparent",
-    },
     fontFamily: {
       mono: [
         "Menlo",
