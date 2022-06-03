@@ -3,7 +3,7 @@
 /** @jsx runtime.h */
 /** @jsxFrag runtime.Fragment */
 import { runtime, tw } from "../deps.ts";
-import { DirListing, Entry, getBasePath } from "../util/registry_utils.ts";
+import { DirListing, Entry, getBasePath, isReadme } from "../util/registry_utils.ts";
 
 import { ModuleIndex } from "https://raw.githubusercontent.com/denoland/doc_components/59572f532b67ee61631a7921becc49c67433fa20/module_index.tsx";
 import { getIndexStructure } from "../util/doc.ts";
