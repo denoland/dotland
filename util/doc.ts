@@ -3,7 +3,7 @@ import {
   SerializeMap,
 } from "https://raw.githubusercontent.com/denoland/doc_components/59572f532b67ee61631a7921becc49c67433fa20/doc.ts";
 
-let innerIndexStructure: any;
+let innerIndexStructure: IndexStructure;
 
 export async function getIndexStructure(): Promise<IndexStructure> {
   if (innerIndexStructure) {
