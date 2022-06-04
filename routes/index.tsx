@@ -53,7 +53,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
               A <strong class={tw`font-semibold`}>modern</strong> runtime for
               {" "}
               <strong class={tw`font-semibold`}>JavaScript</strong> and{" "}
-              <strong class={tw`font-semibold`}>TypeScript</strong>.
+              <strong class={tw`font-semibold`}>TypeScript</strong>
             </h2>
             <a
               href="/#installation"
