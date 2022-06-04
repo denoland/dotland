@@ -14,7 +14,6 @@ import {
 } from "../../deps.ts";
 import { accepts, Handlers } from "../../server_deps.ts";
 import {
-  denoDocAvailableForURL,
   DirEntry,
   extractAltLineNumberReference,
   fetchSource,
@@ -175,14 +174,10 @@ function ModuleView({
   const basePath = getBasePath({ isStd, name, version });
   const canonicalPath = `${basePath}${path}`;
 
-  const documentationURL = denoDocAvailableForURL(canonicalPath)
-    ? `https://doc.deno.land/https://deno.land${canonicalPath}`
-    : null;
-
-  const hasStandardModulEntryPoint = versionMeta?.directoryListing.some(
+  const hasStandardModuleEntryPoint = versionMeta?.directoryListing.some(
     (entry) => entry.path === "/mod.ts",
   );
-  const moduleDocumentationURL = hasStandardModulEntryPoint
+  const moduleDocumentationURL = hasStandardModuleEntryPoint
     ? `https://doc.deno.land/https://deno.land${basePath}/mod.ts`
     : null;
 
@@ -342,7 +337,7 @@ function ModuleView({
                 </div>
               )}
           </div>
-          {documentationURL && externalDependencies !== null && (
+          {externalDependencies !== null && (
             <div
               class={tw
                 `max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4`}
@@ -455,30 +450,27 @@ function ModuleView({
                 )}
                 {rawFile !== null && (
                   <FileDisplay
-                    showCode={showCode}
                     raw={rawFile.content}
                     filetypeOverride={rawFile.highlight ? undefined : "text"}
                     canonicalPath={canonicalPath}
                     sourceURL={sourceURL}
                     repositoryURL={repositoryURL}
-                    documentationURL={documentationURL}
                     baseURL={basePath}
                     stdVersion={stdVersion}
-                    pathname={url.pathname}
+                    url={url}
                   />
                 )}
                 {typeof readmeFile === "string" &&
                   typeof readmeURL === "string" &&
                   typeof readmeCanonicalPath === "string" && (
                   <FileDisplay
-                    showCode={showCode}
                     raw={readmeFile}
                     canonicalPath={readmeCanonicalPath}
                     sourceURL={readmeURL}
                     repositoryURL={readmeRepositoryURL}
                     baseURL={basePath}
                     stdVersion={stdVersion}
-                    pathname={url.pathname}
+                    url={url}
                   />
                 )}
               </div>

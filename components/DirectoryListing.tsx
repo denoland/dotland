@@ -3,22 +3,26 @@
 /** @jsx runtime.h */
 /** @jsxFrag runtime.Fragment */
 import { runtime, tw } from "../deps.ts";
-import { DirListing, Entry, getBasePath, isReadme } from "../util/registry_utils.ts";
+import {
+  DirListing,
+  Entry,
+  getBasePath,
+  isReadme,
+} from "../util/registry_utils.ts";
 
 import { ModuleIndex } from "doc_components/module_index.tsx";
 import { getIndexStructure } from "../util/doc.ts";
 
-interface DirectoryListingProps {
+const indexStructure = await getIndexStructure();
+
+export function DirectoryListing(props: {
   dirListing: DirListing[];
   name: string;
   version: string | undefined;
   path: string;
   repositoryURL?: string | null;
   url: URL;
-}
-const indexStructure = await getIndexStructure();
-
-export function DirectoryListing(props: DirectoryListingProps) {
+}) {
   const isStd = props.url.pathname.startsWith("/std");
   const children = props.dirListing
     .filter((d) => d.path.startsWith(props.path + "/"))
@@ -62,7 +66,11 @@ export function DirectoryListing(props: DirectoryListingProps) {
     }${entry.name}`;
   };
 
-  const showDir = props.url.searchParams.has("showDir");
+  const dirview = props.url.searchParams.has("dirview");
+  const searchDoc = new URL(props.url);
+  searchDoc.searchParams.delete("dirview");
+  const searchDir = new URL(props.url);
+  searchDir.searchParams.set("dirview", "");
 
   return (
     <div class={tw`flex flex-col overflow-x-auto`}>
@@ -85,7 +93,7 @@ export function DirectoryListing(props: DirectoryListingProps) {
             </svg>
             <span class={tw`ml-2 font-medium`}>{props.path || "/"}</span>
           </div>
-          <div className={tw`inline-flex items-center`}>
+          <div class={tw`inline-flex items-center`}>
             <div>
               {props.repositoryURL &&
                 (
@@ -95,19 +103,19 @@ export function DirectoryListing(props: DirectoryListingProps) {
                 )}
             </div>
             <div
-              className={tw`inline-block ml-4 inline-flex shadow-sm rounded-md`}
+              class={tw`inline-block ml-4 inline-flex shadow-sm rounded-md`}
             >
               <a
-                href={props.url.pathname}
-                className={tw
+                href={searchDoc.href}
+                class={tw
                   `relative inline-flex items-center px-1.5 py-1.5 rounded-l-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50 ${
-                    showDir ? "bg-white" : "bg-gray-100"
+                    !dirview ? "bg-white" : "bg-gray-100"
                   }`}
               >
-                <span className={tw`sr-only`}>Documentation</span>
+                <span class={tw`sr-only`}>Documentation</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
+                  class="h-5 w-5"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -115,16 +123,16 @@ export function DirectoryListing(props: DirectoryListingProps) {
                 </svg>
               </a>
               <a
-                href={props.url.pathname + "?showDir"}
-                className={tw
+                href={searchDir.href}
+                class={tw
                   `-ml-px relative inline-flex items-center px-1.5 py-1.5 rounded-r-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50 ${
-                    !showDir ? "bg-white" : "bg-gray-100"
+                    dirview ? "bg-white" : "bg-gray-100"
                   }`}
               >
-                <span className={tw`sr-only`}>Directory Listing</span>
+                <span class={tw`sr-only`}>Directory Listing</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
+                  class="h-5 w-5"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -139,32 +147,22 @@ export function DirectoryListing(props: DirectoryListingProps) {
           </div>
         </div>
 
-        {!showDir
+        {dirview
           ? (
-            <div class={tw`bg-white dark:(bg-gray-900 text-white)`}>
-              <ModuleIndex
-                base={"https://deno.land" + baseURL}
-                path={props.path}
-              >
-                {indexStructure}
-              </ModuleIndex>
-            </div>
-          )
-          : (
             <div>
               <input
                 type="checkbox"
-                className={tw`hidden`}
+                class={tw`hidden`}
                 id="hiddenItemsToggle"
                 autoComplete="off"
               />
-              <table className={tw`min-w-full table-fixed w-full`}>
+              <table class={tw`min-w-full table-fixed w-full`}>
                 <colgroup>
-                  <col className={tw`w-9 md:w-12`} />
-                  <col className={tw`w-max-content`} />
+                  <col class={tw`w-9 md:w-12`} />
+                  <col class={tw`w-max-content`} />
                   <col style={{ width: "5.5rem" }} />
                 </colgroup>
-                <tbody className={tw`bg-white`}>
+                <tbody class={tw`bg-white`}>
                   {displayItems.map((entry: Entry, i: number) => {
                     const isLastItem = displayItems.length - 1 === i;
                     return (
@@ -181,14 +179,14 @@ export function DirectoryListing(props: DirectoryListingProps) {
                     (
                       <tr
                         id="hiddenItemsTr"
-                        className={tw
+                        class={tw
                           `bg-gray-50 cursor-pointer hover:bg-gray-100 border-t border-gray-200`}
                       >
                         <td colSpan={3}>
                           <label htmlFor="hiddenItemsToggle">
                             <div
                               id="hiddenItemsButton"
-                              className={tw
+                              class={tw
                                 `select-none w-full text-center text-sm px-2 sm:pl-3 md:pl-4 py-1 text-blue-500`}
                             >
                               <span>
@@ -220,6 +218,16 @@ export function DirectoryListing(props: DirectoryListingProps) {
                   })}
                 </tbody>
               </table>
+            </div>
+          )
+          : (
+            <div class={tw`bg-white dark:(bg-gray-900 text-white)`}>
+              <ModuleIndex
+                base={"https://deno.land" + baseURL}
+                path={props.path}
+              >
+                {indexStructure}
+              </ModuleIndex>
             </div>
           )}
       </div>

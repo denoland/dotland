@@ -273,7 +273,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             >
               <div class={tw`px-4 text-gray-500 focus:text-gray-600`}>
                 <svg
-                  className="h-6 w-6"
+                  class="h-6 w-6"
                   stroke="currentColor"
                   fill="none"
                   viewBox="0 0 24 24"

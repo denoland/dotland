@@ -36,11 +36,11 @@ function ComponentTitle(
 export default function DocPreview() {
   return (
     <div
-      className={tw
+      class={tw
         `h-screen bg-white dark:(bg-gray-900 text-white) ${app} max-w-screen-xl mx-auto my-4 px-4`}
     >
-      <h1 className={tw`text-3xl py-3`}>Deno Doc Components</h1>
-      <h2 className={tw`text-2xl py-2`}>Component Showcase</h2>
+      <h1 class={tw`text-3xl py-3`}>Deno Doc Components</h1>
+      <h2 class={tw`text-2xl py-2`}>Component Showcase</h2>
       <hr />
       <ComponentTitle module="/markdown.tsx">MarkdownSummary</ComponentTitle>
       <MarkdownSummary url="https://deno.land/x/oak@v10.5.1/mod.ts">

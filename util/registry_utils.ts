@@ -332,19 +332,6 @@ export function fileNameFromURL(url: string): string {
   return segments[segments.length - 1];
 }
 
-export function denoDocAvailableForURL(filename: string): boolean {
-  const filetype = fileTypeFromURL(filename);
-  switch (filetype) {
-    case "javascript":
-    case "typescript":
-    case "jsx":
-    case "tsx":
-      return true;
-    default:
-      return false;
-  }
-}
-
 export function findRootReadme(
   directoryListing: DirListing[] | undefined,
 ): DirEntry | undefined {

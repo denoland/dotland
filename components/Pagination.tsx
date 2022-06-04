@@ -258,7 +258,7 @@ export function Pagination(
           </>
         )
         : (
-          <div className="flex flex-1 justify-center">
+          <div class="flex flex-1 justify-center">
             <MaybeA
               disabled={false}
               href={toPage(currentPage + 1)}

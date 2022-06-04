@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "dev": "deno run --watch --no-check --allow-read --allow-env --allow-net main.ts"
+    "dev": "deno run --watch --allow-read --allow-env --allow-net main.ts"
   },
   "compilerOptions": {
     "types": [
