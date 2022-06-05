@@ -284,5 +284,18 @@
       "web": "https://samippoudel.com.np/"
     },
     "license": "MIT"
+  },
+  {
+    "date": "2022-06-06",
+    "image": "/images/artwork/deno_news.png",
+    "title": "Deno reading deno.news",
+    "alt": "Deno reading deno.news",
+    "artist": {
+      "name": "Dunkan",
+      "profile_image": "https://avatars.githubusercontent.com/u/70066170",
+      "github": "dcdunkan",
+      "twitter": "dcdunkan"
+    },
+    "license": "MIT"
   }
 ]
