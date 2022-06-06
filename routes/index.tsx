@@ -50,9 +50,16 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
               class={tw
                 `mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900`}
             >
+<<<<<<< HEAD
               A <strong class={tw`font-semibold`}>现代</strong>的{" "}
               <strong class={tw`font-semibold`}>JavaScript</strong> 和{" "}
               <strong class={tw`font-semibold`}>TypeScript</strong> 运行时。
+=======
+              A <strong class={tw`font-semibold`}>modern</strong> runtime for
+              {" "}
+              <strong class={tw`font-semibold`}>JavaScript</strong> and{" "}
+              <strong class={tw`font-semibold`}>TypeScript</strong>
+>>>>>>> 95709ba600b57391f5c604f734b93e9e90c10dc0
             </h2>
             <a
               href="/#installation"
