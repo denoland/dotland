@@ -8,7 +8,7 @@ export async function getIndexStructure(): Promise<IndexStructure> {
     return innerIndexStructure;
   }
   const data = await fetch(
-    "https://raw.githubusercontent.com/denoland/doc_components/ed266da4a086e8a2b57c3298ebef67830005954f/_showcase/data/index_structure.json",
+    "https://raw.githubusercontent.com/denoland/doc_components/3736d1be4ba344e0b70385cc0ae1d5d225e28989/_showcase/data/index_structure.json",
   ).then((res) => res.text());
   return innerIndexStructure = JSON.parse(
     data,

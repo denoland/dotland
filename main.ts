@@ -24,7 +24,20 @@ import manifest from "./fresh.gen.ts";
 import { routes as completionsV2Routes } from "./completions_v2.ts";
 
 import { Fragment, h, setup } from "./deps.ts";
+const docland = "https://doc.deno.land/";
 await setup({
+  resolveHref(current, symbol) {
+    return symbol ? (docland + current) : `${docland}${current}/~/${symbol}`;
+  },
+  lookupHref(
+    current: string,
+    namespace: string | undefined,
+    symbol: string,
+  ): string | undefined {
+    return namespace
+      ? `${docland}${current}/~/${namespace}.${symbol}`
+      : `${docland}${current}/~/${symbol}`;
+  },
   runtime: { Fragment, h },
 });
 
