@@ -38,6 +38,7 @@ import { Footer } from "../../components/Footer.tsx";
 import { FileDisplay } from "../../components/FileDisplay.tsx";
 import { DirectoryListing } from "../../components/DirectoryListing.tsx";
 import { ErrorMessage } from "../../components/ErrorMessage.tsx";
+import { type DocNode, getDocNodes } from "../../util/doc.ts";
 
 // 100kb
 const MAX_SYNTAX_HIGHLIGHT_FILE_SIZE = 100 * 1024;
@@ -57,6 +58,7 @@ interface Data {
   readmeCanonicalPath: string | null;
   readmeURL: string | null;
   readmeRepositoryURL: string | undefined | null;
+  docNodes: DocNode[] | null;
 }
 
 type Params = {
@@ -161,6 +163,7 @@ function ModuleView({
   readmeCanonicalPath,
   readmeURL,
   readmeRepositoryURL,
+  docNodes,
 }: {
   name: string;
   version: string;
@@ -168,18 +171,10 @@ function ModuleView({
   isStd: boolean;
   url: URL;
 } & Data) {
-  const showCode = url.searchParams.has("showCode");
   const stdVersion = isStd ? version : undefined;
 
   const basePath = getBasePath({ isStd, name, version });
   const canonicalPath = `${basePath}${path}`;
-
-  const hasStandardModuleEntryPoint = versionMeta?.directoryListing.some(
-    (entry) => entry.path === "/mod.ts",
-  );
-  const moduleDocumentationURL = hasStandardModuleEntryPoint
-    ? `https://doc.deno.land/https://deno.land${basePath}/mod.ts`
-    : null;
 
   const externalDependencies = versionDeps === null
     ? null
@@ -246,24 +241,6 @@ function ModuleView({
                     <div class={tw`text-sm`}>
                       {emojify(moduleMeta.description ?? "")}
                     </div>
-                    {moduleDocumentationURL
-                      ? (
-                        <div class={tw`mt-3 flex items-center`}>
-                          <svg
-                            class={tw`h-5 w-5 mr-2 inline text-gray-700`}
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <title>Documentation</title>
-                            <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z">
-                            </path>
-                          </svg>
-                          <a class={tw`link`} href={moduleDocumentationURL}>
-                            Documentation
-                          </a>
-                        </div>
-                      )
-                      : null}
                     <div class={tw`mt-3 flex items-center`}>
                       <svg
                         class={tw`h-5 w-5 mr-2 inline text-gray-700`}
@@ -458,6 +435,7 @@ function ModuleView({
                     baseURL={basePath}
                     stdVersion={stdVersion}
                     url={url}
+                    docNodes={docNodes}
                   />
                 )}
                 {typeof readmeFile === "string" &&
@@ -471,6 +449,7 @@ function ModuleView({
                     baseURL={basePath}
                     stdVersion={stdVersion}
                     url={url}
+                    docNodes={docNodes}
                   />
                 )}
               </div>
@@ -675,20 +654,25 @@ export const handler: Handlers<Data> = {
       !(!versions.versions.includes(version!));
 
     if (canRenderView) {
-      const [versionMeta, moduleMeta, versionDeps] = await Promise.all([
-        getVersionMeta(params.name, version).catch((e) => {
-          console.error("Failed to fetch dir entry:", e);
-          return null;
-        }),
-        getModule(params.name).catch((e) => {
-          console.error("Failed to fetch module meta:", e);
-          return null;
-        }),
-        getVersionDeps(params.name, version).catch((e) => {
-          console.error("Failed to fetch dependency information:", e);
-          return null;
-        }),
-      ]);
+      const [versionMeta, moduleMeta, versionDeps, docNodes] = await Promise
+        .all([
+          getVersionMeta(params.name, version).catch((e) => {
+            console.error("Failed to fetch dir entry:", e);
+            return null;
+          }),
+          getModule(params.name).catch((e) => {
+            console.error("Failed to fetch module meta:", e);
+            return null;
+          }),
+          getVersionDeps(params.name, version).catch((e) => {
+            console.error("Failed to fetch dependency information:", e);
+            return null;
+          }),
+          getDocNodes(params.name, version, path).catch((e) => {
+            console.error("Failed to fetch documentation:", e);
+            return null;
+          }),
+        ]);
 
       const sourceURL = getSourceURL(params.name, version, path);
       const basePath = getBasePath({ isStd, name, version });
@@ -836,6 +820,7 @@ export const handler: Handlers<Data> = {
         readmeCanonicalPath,
         readmeURL,
         readmeRepositoryURL,
+        docNodes,
       });
     } else {
       // @ts-ignore will take care of this on a later date

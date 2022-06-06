@@ -4,6 +4,6 @@
     "twind/colors": "https://esm.sh/twind@0.16.16/colors?pin=v78",
     "twind/css": "https://esm.sh/twind@0.16.16/css?pin=v78",
     "twind/sheets": "https://esm.sh/twind@0.16.16/sheets?pin=v78",
-    "doc_components/": "https://raw.githubusercontent.com/denoland/doc_components/b838d8f3b47fccd33dfd725a5e831616cf0c0092/"
+    "doc_components/": "https://raw.githubusercontent.com/denoland/doc_components/ed266da4a086e8a2b57c3298ebef67830005954f/"
   }
 }

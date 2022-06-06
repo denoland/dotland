@@ -1,8 +1,8 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h, tw } from "../deps.ts";
+/** @jsx runtime.h */
+/** @jsxFrag runtime.Fragment */
+import { runtime, tw } from "../deps.ts";
 import { RawCodeBlock } from "./CodeBlock.tsx";
 import { Markdown } from "./Markdown.tsx";
 import {
@@ -10,18 +10,8 @@ import {
   fileTypeFromURL,
   isReadme,
 } from "../util/registry_utils.ts";
-
-export function docAvailableForFileType(filetype?: string): boolean {
-  switch (filetype) {
-    case "javascript":
-    case "typescript":
-    case "jsx":
-    case "tsx":
-      return true;
-    default:
-      return false;
-  }
-}
+import { ModuleDoc } from "doc_components/module_doc.tsx";
+import type { DocNode } from "../util/doc.ts";
 
 export function FileDisplay(props: {
   raw?: string;
@@ -32,11 +22,11 @@ export function FileDisplay(props: {
   repositoryURL?: string | null;
   stdVersion?: string;
   url: URL;
+  docNodes: DocNode[] | null;
 }) {
   const filetype = props.filetypeOverride ?? fileTypeFromURL(props.sourceURL);
   const filename = fileNameFromURL(props.sourceURL);
-  const hasToggle =
-    (filetype === "markdown" || docAvailableForFileType(filetype));
+  const hasToggle = (filetype === "markdown" || (props.docNodes !== null));
 
   const codeview = props.url.searchParams.has("codeview");
   const searchDoc = new URL(props.url);
@@ -162,6 +152,14 @@ export function FileDisplay(props: {
           case "typescript":
           case "tsx":
           case "jsx":
+            if (!codeview && props.docNodes) {
+              return (
+                <ModuleDoc url={props.url.href}>
+                  {props.docNodes}
+                </ModuleDoc>
+              );
+            }
+          /* falls through */
           case "json":
           case "yaml":
           case "rust":
@@ -169,7 +167,7 @@ export function FileDisplay(props: {
           case "python":
           case "wasm":
           case "makefile":
-          case "dockerfile": // TODO: render doc
+          case "dockerfile":
             return (
               <RawCodeBlock
                 code={props.raw!}
