@@ -222,10 +222,7 @@ export function DirectoryListing(props: {
           )
           : (
             <div class={tw`bg-white dark:(bg-gray-900 text-white)`}>
-              <ModuleIndex
-                base={"https://deno.land" + baseURL}
-                path={props.path}
-              >
+              <ModuleIndex base={baseURL} path={props.path}>
                 {indexStructure}
               </ModuleIndex>
             </div>

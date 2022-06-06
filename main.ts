@@ -27,7 +27,7 @@ import { Fragment, h, setup } from "./deps.ts";
 const docland = "https://doc.deno.land/";
 await setup({
   resolveHref(current, symbol) {
-    return symbol ? `${docland}${current}/~/${symbol}` : (docland + current);
+    return symbol ? `${docland}${current}/~/${symbol}` : current;
   },
   lookupHref(
     current: string,
