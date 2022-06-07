@@ -50,7 +50,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
               class={tw
                 `mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900`}
             >
-              A <strong class={tw`font-semibold`}>现代</strong>的{" "}
+              <strong class={tw`font-semibold`}>现代</strong>的{" "}
               <strong class={tw`font-semibold`}>JavaScript</strong> 和{" "}
               <strong class={tw`font-semibold`}>TypeScript</strong> 运行时。
             </h2>
