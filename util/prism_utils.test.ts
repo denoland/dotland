@@ -2,7 +2,7 @@
 // Taken from https://github.com/FormidableLabs/prism-react-renderer/blob/master/src/utils/normalizeTokens.js
 
 import { assertEquals } from "../test_deps.ts";
-import { Prism } from "../deps.ts";
+import { Prism } from "../server_deps.ts";
 import { normalizeTokens } from "./prism_utils.ts";
 
 Deno.test("prism", () => {

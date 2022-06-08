@@ -1,7 +1,8 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-import { gfm, h, tw } from "../deps.ts";
+import { h, tw } from "../deps.ts";
+import { gfm } from "../server_deps.ts";
 
 export function Markdown(
   { source, baseUrl }: { source: string; baseUrl?: string },
