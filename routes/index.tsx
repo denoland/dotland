@@ -7,6 +7,7 @@ import { CodeBlock } from "../components/CodeBlock.tsx";
 import { Footer } from "../components/Footer.tsx";
 import { InlineCode } from "../components/InlineCode.tsx";
 import { Header } from "../components/Header.tsx";
+import { HelloBar } from "../components/HelloBar.tsx";
 import versions from "../versions.json" assert { type: "json" };
 import { Background } from "../components/HeroBackground.tsx";
 
@@ -26,6 +27,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
 
   return (
     <div>
+      <HelloBar><a href="https://deno.news/archive/43-deno-turns-4-new-deploy-pricing-and-v122" target="_blank">Check out Deno News issue #43 for recent articles, tools, and other resources!</a></HelloBar>
       <Head>
         <title>Deno - A modern runtime for JavaScript and TypeScript</title>
       </Head>
