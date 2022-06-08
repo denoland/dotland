@@ -2,8 +2,8 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { emojify, Fragment, h, Head, PageProps, tw, twas } from "../../deps.ts";
-import { Handlers } from "../../server_deps.ts";
+import { Fragment, h, Head, PageProps, tw } from "../../deps.ts";
+import { emojify, Handlers, twas } from "../../server_deps.ts";
 
 import { Header } from "../../components/Header.tsx";
 import { Footer } from "../../components/Footer.tsx";

@@ -2,17 +2,8 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import {
-  emojify,
-  Fragment,
-  h,
-  Head,
-  PageConfig,
-  PageProps,
-  tw,
-  twas,
-} from "../../deps.ts";
-import { accepts, Handlers } from "../../server_deps.ts";
+import { Fragment, h, Head, PageConfig, PageProps, tw } from "../../deps.ts";
+import { accepts, emojify, Handlers, twas } from "../../server_deps.ts";
 import {
   denoDocAvailableForURL,
   DirEntry,
@@ -39,6 +30,7 @@ import { Footer } from "../../components/Footer.tsx";
 import { FileDisplay } from "../../components/FileDisplay.tsx";
 import { DirectoryListing } from "../../components/DirectoryListing.tsx";
 import { ErrorMessage } from "../../components/ErrorMessage.tsx";
+import VersionSelect from "../../islands/VersionSelect.tsx";
 
 // 100kb
 const MAX_SYNTAX_HIGHLIGHT_FILE_SIZE = 100 * 1024;
@@ -560,42 +552,23 @@ function VersionSelector({
       <label htmlFor="version" class={tw`sr-only`}>
         Version
       </label>
-      <div class={tw`max-w-xs rounded-md shadow-sm w-full`}>
-        <select
-          id="version"
-          class={tw
-            `block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5`}
-          value={selectedVersion}
-          // @ts-ignore onChange does support strings
-          onChange={`((e) => { window.location = "/${
-            isStd ? "" : "x/"
-          }${name}@" + e.target.value + "${path}"; })(event)`}
-        >
-          {!versions.includes(selectedVersion) && (
-            <option key={selectedVersion} value={selectedVersion}>
-              {selectedVersion}
-            </option>
-          )}
-          {versions.map((v) => (
-            <option key={v} value={v}>
-              {v}
-            </option>
-          ))}
-        </select>
-      </div>
+      <VersionSelect
+        versions={Object.fromEntries(
+          versions.map((
+            ver,
+          ) => [ver, `/${isStd ? "" : "x/"}${name}@${ver}${path}`]),
+        )}
+        selectedVersion={selectedVersion}
+      />
       {versions[0] !== selectedVersion && (
-        <button
-          type="button"
+        <a
           class={tw
             `mt-2 w-full inline-flex justify-center py-1 px-2 border border-red-300 rounded-md bg-white text-sm leading-5 font-medium text-red-500 hover:text-red-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-red transition duration-150 ease-in-out`}
           aria-label="Go to latest version"
-          // @ts-ignore onClick does support strings
-          onClick={`window.location = "/${isStd ? "" : "x/"}${name}@${
-            versions[0]
-          }${path}";`}
+          href={`/${isStd ? "" : "x/"}${name}@${versions[0]}${path}`}
         >
           Go to latest
-        </button>
+        </a>
       )}
     </div>
   );
