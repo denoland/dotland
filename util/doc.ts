@@ -1,22 +1,19 @@
-import { IndexStructure, SerializeMap } from "doc_components/doc.ts";
+import type { ModuleIndexWithDoc } from "doc_components/module_index.tsx";
 import type { DocNode } from "https://deno.land/x/deno_doc@v0.34.0/lib/types.d.ts";
 export type { DocNode };
-let innerIndexStructure: IndexStructure;
 
-export async function getIndexStructure(): Promise<IndexStructure> {
-  if (innerIndexStructure) {
-    return innerIndexStructure;
-  }
-  const data = await fetch(
-    "https://raw.githubusercontent.com/denoland/doc_components/3736d1be4ba344e0b70385cc0ae1d5d225e28989/_showcase/data/index_structure.json",
-  ).then((res) => res.text());
-  return innerIndexStructure = JSON.parse(
-    data,
-    (key, value) =>
-      typeof value === "object" && (key === "structure" || key === "entries")
-        ? new SerializeMap(Object.entries(value))
-        : value,
+export async function getModuleIndex(
+  module: string,
+  version: string,
+): Promise<ModuleIndexWithDoc> {
+  const response = await fetch(
+    `https://apiland.deno.dev/v2/modules/${module}/${version}/index/`,
   );
+  if (response.status !== 200) {
+    console.error(response);
+    throw new Error(`Unexpected result fetching module index.`);
+  }
+  return await response.json();
 }
 
 export async function getDocNodes(
@@ -32,3 +29,4 @@ export async function getDocNodes(
   }
   return await response.json();
 }
+

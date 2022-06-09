@@ -16,7 +16,7 @@ import { accepts, Handlers } from "../../server_deps.ts";
 import {
   DirEntry,
   extractAltLineNumberReference,
-  fetchSource,
+  fetchSource, fileTypeFromURL,
   findRootReadme,
   getBasePath,
   getModule,
@@ -31,14 +31,15 @@ import {
   S3_BUCKET,
   VersionDeps,
   VersionInfo,
-  VersionMetaInfo,
+  VersionMetaInfo
 } from "../../util/registry_utils.ts";
 import { Header } from "../../components/Header.tsx";
 import { Footer } from "../../components/Footer.tsx";
 import { FileDisplay } from "../../components/FileDisplay.tsx";
 import { DirectoryListing } from "../../components/DirectoryListing.tsx";
 import { ErrorMessage } from "../../components/ErrorMessage.tsx";
-import { type DocNode, getDocNodes } from "../../util/doc.ts";
+import { type DocNode, getDocNodes, getModuleIndex } from "../../util/doc.ts";
+import { type ModuleIndexWithDoc } from "doc_components/module_index.tsx";
 
 // 100kb
 const MAX_SYNTAX_HIGHLIGHT_FILE_SIZE = 100 * 1024;
@@ -58,7 +59,7 @@ interface Data {
   readmeCanonicalPath: string | null;
   readmeURL: string | null;
   readmeRepositoryURL: string | undefined | null;
-  docNodes: DocNode[] | null;
+  doc: DocNode[] | ModuleIndexWithDoc | null;
 }
 
 type Params = {
@@ -163,7 +164,7 @@ function ModuleView({
   readmeCanonicalPath,
   readmeURL,
   readmeRepositoryURL,
-  docNodes,
+  doc,
 }: {
   name: string;
   version: string;
@@ -386,6 +387,7 @@ function ModuleView({
                     dirListing={versionMeta.directoryListing}
                     repositoryURL={repositoryURL}
                     url={url}
+                    index={doc as ModuleIndexWithDoc}
                   />
                 )}
                 <div class={tw`w-full p-4 text-gray-400 italic`}>No files.</div>
@@ -405,6 +407,7 @@ function ModuleView({
                     dirListing={versionMeta.directoryListing}
                     repositoryURL={repositoryURL}
                     url={url}
+                    index={doc as ModuleIndexWithDoc}
                   />
                 )}
                 <div class={tw`w-full p-4 text-gray-400 italic`}>
@@ -423,6 +426,7 @@ function ModuleView({
                     dirListing={versionMeta.directoryListing}
                     repositoryURL={repositoryURL}
                     url={url}
+                    index={doc as ModuleIndexWithDoc}
                   />
                 )}
                 {rawFile !== null && (
@@ -435,7 +439,7 @@ function ModuleView({
                     baseURL={basePath}
                     stdVersion={stdVersion}
                     url={url}
-                    docNodes={docNodes}
+                    docNodes={doc as DocNode[]}
                   />
                 )}
                 {typeof readmeFile === "string" &&
@@ -449,7 +453,7 @@ function ModuleView({
                     baseURL={basePath}
                     stdVersion={stdVersion}
                     url={url}
-                    docNodes={docNodes}
+                    docNodes={doc as DocNode[]}
                   />
                 )}
               </div>
@@ -654,7 +658,7 @@ export const handler: Handlers<Data> = {
       !(!versions.versions.includes(version!));
 
     if (canRenderView) {
-      const [versionMeta, moduleMeta, versionDeps, docNodes] = await Promise
+      const [versionMeta, moduleMeta, versionDeps, doc] = await Promise
         .all([
           getVersionMeta(params.name, version).catch((e) => {
             console.error("Failed to fetch dir entry:", e);
@@ -668,10 +672,20 @@ export const handler: Handlers<Data> = {
             console.error("Failed to fetch dependency information:", e);
             return null;
           }),
-          getDocNodes(params.name, version, path).catch((e) => {
-            console.error("Failed to fetch documentation:", e);
-            return null;
-          }),
+          (() => {
+            const type = fileTypeFromURL(path);
+            if (type === "javascript" || type === "typescript" || type === "tsx" || type === "jsx") {
+              return getDocNodes(params.name, version, path).catch((e) => {
+                console.error("Failed to fetch documentation:", e);
+                return null;
+              });
+            } else { // TODO: check if it is a directory
+              return getModuleIndex(params.name, version).catch((e) => {
+                console.error("Failed to fetch module index:", e);
+                return null;
+              });
+            }
+          })(),
         ]);
 
       const sourceURL = getSourceURL(params.name, version, path);
@@ -820,7 +834,7 @@ export const handler: Handlers<Data> = {
         readmeCanonicalPath,
         readmeURL,
         readmeRepositoryURL,
-        docNodes,
+        doc,
       });
     } else {
       // @ts-ignore will take care of this on a later date
