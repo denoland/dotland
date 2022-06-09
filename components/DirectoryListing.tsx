@@ -10,7 +10,10 @@ import {
   isReadme,
 } from "../util/registry_utils.ts";
 
-import { type ModuleIndexWithDoc, ModuleIndex } from "doc_components/module_index.tsx";
+import {
+  ModuleIndex,
+  type ModuleIndexWithDoc,
+} from "doc_components/module_index.tsx";
 
 export function DirectoryListing(props: {
   dirListing: DirListing[];
@@ -220,7 +223,7 @@ export function DirectoryListing(props: {
           )
           : (
             <div class={tw`bg-white dark:(bg-gray-900 text-white)`}>
-              <ModuleIndex base={baseURL} path={props.path}>
+              <ModuleIndex base={baseURL} path={props.path || "/"}>
                 {props.index}
               </ModuleIndex>
             </div>

@@ -10,7 +10,6 @@ export async function getModuleIndex(
     `https://apiland.deno.dev/v2/modules/${module}/${version}/index/`,
   );
   if (response.status !== 200) {
-    console.error(response);
     throw new Error(`Unexpected result fetching module index.`);
   }
   return await response.json();
@@ -29,4 +28,3 @@ export async function getDocNodes(
   }
   return await response.json();
 }
-

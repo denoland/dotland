@@ -16,7 +16,8 @@ import { accepts, Handlers } from "../../server_deps.ts";
 import {
   DirEntry,
   extractAltLineNumberReference,
-  fetchSource, fileTypeFromURL,
+  fetchSource,
+  fileTypeFromURL,
   findRootReadme,
   getBasePath,
   getModule,
@@ -31,7 +32,7 @@ import {
   S3_BUCKET,
   VersionDeps,
   VersionInfo,
-  VersionMetaInfo
+  VersionMetaInfo,
 } from "../../util/registry_utils.ts";
 import { Header } from "../../components/Header.tsx";
 import { Footer } from "../../components/Footer.tsx";
@@ -674,7 +675,10 @@ export const handler: Handlers<Data> = {
           }),
           (() => {
             const type = fileTypeFromURL(path);
-            if (type === "javascript" || type === "typescript" || type === "tsx" || type === "jsx") {
+            if (
+              type === "javascript" || type === "typescript" ||
+              type === "tsx" || type === "jsx"
+            ) {
               return getDocNodes(params.name, version, path).catch((e) => {
                 console.error("Failed to fetch documentation:", e);
                 return null;
