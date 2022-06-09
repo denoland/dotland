@@ -4,11 +4,6 @@ const githubBasepath = "https://cdn.jsdelivr.net/gh/denocn/deno_docs@";
 const docpath = "https://github.com/denocn/deno_docs/blob/";
 import VERSIONS from "../versions.json" assert { type: "json" };
 import { getSourceURL } from "./registry_utils.ts";
-<<<<<<< HEAD
-
-=======
-import { compareVersions } from "../server_deps.ts";
->>>>>>> e1de11740dbe31ee48d77443fa57b3aee7f0a9db
 export const versions = VERSIONS.cli;
 
 export interface TableOfContents {
