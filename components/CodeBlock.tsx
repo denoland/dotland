@@ -1,8 +1,8 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h, htmlEscape, Prism, tw } from "../deps.ts";
+import { h, tw } from "../deps.ts";
+import { htmlEscape, Prism } from "../server_deps.ts";
 import { normalizeTokens } from "../util/prism_utils.ts";
 
 // Modifies the color of 'variable' token
@@ -71,56 +71,52 @@ export function RawCodeBlock({
   const tokens = normalizeTokens(Prism.tokenize(code, grammar));
 
   return (
-    <div
+    <pre
+      className={tw`text-sm gfm-highlight highlight-source-${newLang} flex ${
+        extraClassName ?? ""
+      }`}
       data-color-mode="light"
       data-light-theme="light"
-      class={tw`markdown-body `}
     >
-      <pre
-        class={tw`highlight highlight-source-${newLang} flex ${
-          extraClassName ?? ""
-        }`}
-      >
-        {enableLineRef &&
-          (
-            <div class={codeDivClasses}>
-              {tokens.map((_, i) => (
-                <div
-                  class={tw`token text-right`}
-                  // @ts-ignore onClick does support strings
-                  onClick={`location.hash = "#L${i + 1}"`}
-                >
-                  {i + 1}
-                </div>
-              ))}
-            </div>
-          )}
-        {!disablePrefixes && (newLang === "bash") &&
-          (
-            <code>
-              <div class={codeDivClasses}>$</div>
-            </code>
-          )}
-        <div class={tw`block w-full overflow-y-auto`}>
-          {tokens.map((line, i) => {
-            return (
-              <span id={"L" + (i + 1)} class={tw`block`}>
-                {line.map((token) => {
-                  if (token.empty) {
-                    return <br />;
-                  }
-                  return (
-                    <span class={"token " + token.types.join(" ")}>
-                      {token.content}
-                    </span>
-                  );
-                })}
-              </span>
-            );
-          })}
-        </div>
-      </pre>
-    </div>
+      {enableLineRef &&
+        (
+          <div className={codeDivClasses}>
+            {tokens.map((_, i) => (
+              <a
+                className={tw`text-gray-500 token text-right block`}
+                tab-index={-1}
+                href={`#L${i + 1}`}
+              >
+                {i + 1}
+              </a>
+            ))}
+          </div>
+        )}
+      {!disablePrefixes && (newLang === "bash") &&
+        (
+          <code>
+            <div className={codeDivClasses}>$</div>
+          </code>
+        )}
+      <div className={tw`block w-full overflow-y-auto`}>
+        {tokens.map((line, i) => {
+          return (
+            <span id={"L" + (i + 1)} className={tw`block`}>
+              {line.map((token) => {
+                if (token.empty) {
+                  return <br />;
+                }
+                return (
+                  <span className={"token " + token.types.join(" ")}>
+                    {token.content}
+                  </span>
+                );
+              })}
+            </span>
+          );
+        })}
+      </div>
+    </pre>
   );
 }
 
