@@ -1,0 +1,2 @@
+/* esm.sh - esbuild bundle(entities@2.2.0/lib/maps/xml.json) deno production */
+var d=Object.defineProperty;var $=(u,e)=>{for(var p in e)d(u,p,{get:e[p],enumerable:!0})};var o={};$(o,{amp:()=>m,apos:()=>r,default:()=>a,gt:()=>f,lt:()=>l,quot:()=>s});var m="&",r="'",f=">",l="<",s='"',a={amp:m,apos:r,gt:f,lt:l,quot:s};var{amp:q,apos:x,gt:b,lt:h,quot:j}=o,{default:c,...g}=o,k=a??c??g;export{q as amp,x as apos,k as default,b as gt,h as lt,j as quot};
