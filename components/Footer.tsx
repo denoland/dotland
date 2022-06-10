@@ -1,7 +1,7 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-import { h, ComponentChildren } from "$fresh/runtime.ts";
+import { ComponentChildren, h } from "$fresh/runtime.ts";
 import { tw } from "twind";
 
 export function Footer({ simple }: { simple?: boolean }) {
