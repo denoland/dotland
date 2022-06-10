@@ -3,5 +3,15 @@
     "dev": "deno run --no-remote --watch --no-check --allow-read --allow-write --allow-run --allow-env --allow-net main.ts",
     "vendor": "deno vendor --import-map=import_map.json --force main.ts"
   },
-  "importMap": "./vendor/import_map.json"
+  "importMap": "./vendor/import_map.json",
+  "fmt": {
+    "files": {
+      "exclude": ["vendor/"]
+    }
+  },
+  "lint": {
+    "files": {
+      "exclude": ["vendor/"]
+    }
+  }
 }
