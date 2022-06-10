@@ -5,7 +5,7 @@ const oldDocpath = "https://github.com/denoland/deno/blob/";
 const docpath = "https://github.com/denoland/manual/blob/";
 import VERSIONS from "../versions.json" assert { type: "json" };
 import { getSourceURL } from "./registry_utils.ts";
-import { compareVersions } from "../server_deps.ts";
+import compareVersions from "$tiny-version-compare";
 export const versions = VERSIONS.cli;
 
 export interface TableOfContents {

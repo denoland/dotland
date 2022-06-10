@@ -2,21 +2,24 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, Head, PageProps, tw } from "../../deps.ts";
-import { emojify, Handlers, twas } from "../../server_deps.ts";
+import { Fragment, h, Head, PageProps } from "$fresh/runtime.ts";
+import { tw } from "twind";
+import { Handlers } from "$fresh/server.ts";
+import twas from "$twas";
+import { emojify } from "$emoji";
 
-import { Header } from "../../components/Header.tsx";
-import { Footer } from "../../components/Footer.tsx";
-import { InlineCode } from "../../components/InlineCode.tsx";
+import { Header } from "@/components/Header.tsx";
+import { Footer } from "@/components/Footer.tsx";
+import { InlineCode } from "@/components/InlineCode.tsx";
 
 import {
   getStats,
   listModules,
   ModulesList,
   Stats,
-} from "../../util/registry_utils.ts";
-import * as pageutils from "../../util/pagination_utils.ts";
-import { Pagination } from "../../components/Pagination.tsx";
+} from "@/util/registry_utils.ts";
+import * as pageutils from "@/util/pagination_utils.ts";
+import { Pagination } from "@/components/Pagination.tsx";
 
 const PER_PAGE = 20;
 

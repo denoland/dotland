@@ -8,15 +8,11 @@
 /// <reference lib="deno.ns" />
 /// <reference lib="deno.unstable" />
 
-import {
-  accepts,
-  ConnInfo,
-  createReporter,
-  Reporter,
-  router,
-  serve,
-  ServerContext,
-} from "./server_deps.ts";
+import { ServerContext } from "$fresh/server.ts";
+import { ConnInfo, serve } from "$std/http/server.ts";
+import { router } from "$router";
+import { createReporter, Reporter } from "$ga";
+import { accepts } from "$oak_commons";
 
 import manifest from "./fresh.gen.ts";
 
@@ -113,7 +109,6 @@ export function withLog(
 }
 
 const ctx = await ServerContext.fromManifest(manifest);
-console.log("Server listening on http://localhost:8000");
 
 const innerHandler = withLog(ctx.handler());
 const handler = router(completionsV2Routes, innerHandler);

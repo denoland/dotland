@@ -1,21 +1,11 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-import { h, tw } from "../deps.ts";
-import { htmlEscape, Prism } from "../server_deps.ts";
-import { normalizeTokens } from "../util/prism_utils.ts";
-
-// Modifies the color of 'variable' token
-// to avoid poor contrast
-// ref: https://github.com/denoland/dotland/issues/1724
-/*
-for (const style of light.styles) {
-  if (style.types.includes("variable")) {
-    // Chrome suggests this color instead of rgb(156, 220, 254);
-    style.style.color = "rgb(61, 88, 101)";
-  }
-}
-*/
+import { h } from "$fresh/runtime.ts";
+import { tw } from "twind";
+import { Prism } from "@/util/prism_utils.ts";
+import { escape as htmlEscape } from "$he";
+import { normalizeTokens } from "@/util/prism_utils.ts";
 
 export interface CodeBlockProps {
   code: string;

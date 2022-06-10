@@ -1,5 +1,6 @@
 /** @jsx h */
-import { h, IS_BROWSER, tw } from "../deps.ts";
+import { h, IS_BROWSER } from "$fresh/runtime.ts";
+import { tw } from "twind";
 
 export default function VersionSelect({ versions, selectedVersion }: {
   versions: Record<string, string>;

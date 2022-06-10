@@ -2,18 +2,11 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import {
-  ComponentChildren,
-  Fragment,
-  h,
-  Head,
-  PageConfig,
-  PageProps,
-  tw,
-} from "../deps.ts";
-import { Handlers } from "../server_deps.ts";
-import { Markdown } from "../components/Markdown.tsx";
-import { InlineCode } from "../components/InlineCode.tsx";
+import { h, Head, PageProps, RouteConfig } from "$fresh/runtime.ts";
+import { tw } from "twind";
+import { Handlers } from "$fresh/server.ts";
+import { Markdown } from "@/components/Markdown.tsx";
+import { InlineCode } from "@/components/InlineCode.tsx";
 import {
   getDocURL,
   getFileURL,
@@ -21,10 +14,10 @@ import {
   isPreviewVersion,
   TableOfContents,
   versions,
-} from "../util/manual_utils.ts";
+} from "@/util/manual_utils.ts";
 
 import versionMeta from "../versions.json" assert { type: "json" };
-import VersionSelect from "../islands/VersionSelect.tsx";
+import VersionSelect from "@/islands/VersionSelect.tsx";
 
 interface Data {
   tableOfContents: TableOfContents;
@@ -557,6 +550,6 @@ export const handler: Handlers<Data> = {
   },
 };
 
-export const config: PageConfig = {
+export const config: RouteConfig = {
   routeOverride: "/manual{@:version}?/:path*",
 };

@@ -2,14 +2,15 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, Head, tw } from "../deps.ts";
-import { CodeBlock } from "../components/CodeBlock.tsx";
-import { Footer } from "../components/Footer.tsx";
-import { InlineCode } from "../components/InlineCode.tsx";
-import { Header } from "../components/Header.tsx";
-import { HelloBar } from "../components/HelloBar.tsx";
-import versions from "../versions.json" assert { type: "json" };
-import { Background } from "../components/HeroBackground.tsx";
+import { Fragment, h, Head } from "$fresh/runtime.ts";
+import { tw } from "twind";
+import { CodeBlock } from "@/components/CodeBlock.tsx";
+import { Footer } from "@/components/Footer.tsx";
+import { InlineCode } from "@/components/InlineCode.tsx";
+import { Header } from "@/components/Header.tsx";
+import { HelloBar } from "@/components/HelloBar.tsx";
+import { Background } from "@/components/HeroBackground.tsx";
+import versions from "@/versions.json" assert { type: "json" };
 
 export default function Home() {
   const complexExampleProgram =

@@ -1,7 +1,7 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-import { PageConfig } from "../../deps.ts";
-import { accepts } from "../../server_deps.ts";
+import { RouteConfig } from "$fresh/runtime.ts";
+import { accepts } from "$oak_commons";
 
 interface RegistryDefVariable {
   key: string;
@@ -20,67 +20,6 @@ interface RegistryConfig {
 }
 
 const MAX_AGE_1_DAY = "max-age=86400";
-
-/** The _legacy_ v1 configuration file. This will be provided to any client
- * which does not indicate it is capable of understanding the v2 registry
- * (earlier than Deno 1.17.1) */
-const configV1: RegistryConfig = {
-  version: 1,
-  registries: [
-    {
-      schema: "/x/:module([a-z0-9_]*)@:version?/:path*",
-      variables: [
-        {
-          key: "module",
-          url: "https://api.deno.land/modules?simple=1",
-        },
-        {
-          key: "version",
-          url: "https://deno.land/_vsc1/modules/${module}",
-        },
-        {
-          key: "path",
-          url: "https://deno.land/_vsc1/modules/${module}/v/${{version}}",
-        },
-      ],
-    },
-    {
-      schema: "/x/:module([a-z0-9_]*)/:path*",
-      variables: [
-        {
-          key: "module",
-          url: "https://api.deno.land/modules?simple=1",
-        },
-        {
-          key: "path",
-          url: "https://deno.land/_vsc1/modules/${module}/v_latest",
-        },
-      ],
-    },
-    {
-      schema: "/std@:version?/:path*",
-      variables: [
-        {
-          key: "version",
-          url: "https://deno.land/_vsc1/modules/std",
-        },
-        {
-          key: "path",
-          url: "https://deno.land/_vsc1/modules/std/v/${{version}}",
-        },
-      ],
-    },
-    {
-      schema: "/std/:path*",
-      variables: [
-        {
-          key: "path",
-          url: "https://deno.land/_vsc1/modules/std/v_latest",
-        },
-      ],
-    },
-  ],
-};
 
 /** This is the v2 registry configuration which provides documentation
  * endpoints and allows incremental completion/search of variables. */
@@ -154,26 +93,23 @@ const configV2: RegistryConfig = {
  * provided by the client.  Deno 1.17.1 and later indicates it accepts a
  * configuration of v2. */
 export function handler(req: Request) {
-  let body: unknown;
-  let contentType = "application/json";
   const accept = req.headers.get("accept");
-  if (
-    accept !== null && accept !== "*/*" &&
-    accepts(req, "application/vnd.deno.reg.v2+json")
-  ) {
-    contentType = "application/vnd.deno.reg.v2+json";
-    body = configV2;
-  } else {
-    body = configV1;
+  const acceptsV2 = accept !== null && accept !== "*/*" &&
+    accepts(req, "application/vnd.deno.reg.v2+json");
+  if (!acceptsV2) {
+    return new Response(
+      "The v1 registry completions API is not supported anymore. Please upgrade to Deno v1.17.1 or later.",
+      { status: 404 },
+    );
   }
-  return new Response(JSON.stringify(body), {
+  return Response.json(configV2, {
     headers: {
       "cache-control": MAX_AGE_1_DAY,
-      "content-type": contentType,
+      "content-type": "application/vnd.deno.reg.v2+json",
     },
   });
 }
 
-export const config: PageConfig = {
+export const config: RouteConfig = {
   routeOverride: "/.well-known/deno-import-intellisense.json",
 };
