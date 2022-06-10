@@ -2,7 +2,7 @@
 
 /** @jsx h */
 import { ComponentChildren, h } from "$fresh/runtime.ts";
-import { tw } from "_twind";
+import { tw } from "@twind";
 
 export function InlineCode(
   props: { children: ComponentChildren; id?: string },

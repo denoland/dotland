@@ -2,7 +2,7 @@
 
 /** @jsx h */
 import { h } from "$fresh/runtime.ts";
-import { tw } from "_twind";
+import { tw } from "@twind";
 import { Prism } from "@/util/prism_utils.ts";
 import { escape as htmlEscape } from "$he";
 import { normalizeTokens } from "@/util/prism_utils.ts";

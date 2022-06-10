@@ -2,7 +2,7 @@
 
 /** @jsx runtime.h */
 import { runtime } from "$doc_components/services.ts";
-import { tw } from "_twind";
+import { tw } from "@twind";
 import {
   DirListing,
   Entry,

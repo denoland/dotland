@@ -3,7 +3,7 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { Fragment, h, Head } from "$fresh/runtime.ts";
-import { tw } from "_twind";
+import { tw } from "@twind";
 import { CodeBlock } from "@/components/CodeBlock.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";

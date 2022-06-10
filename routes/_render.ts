@@ -1,6 +1,6 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-import { config, setup } from "_twind";
+import { config, setup } from "@twind";
 import { RenderContext, RenderFn } from "$fresh/server.ts";
 import { virtualSheet } from "twind/sheets";
 

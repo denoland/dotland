@@ -2,7 +2,7 @@
 
 /** @jsx h */
 import { h } from "$fresh/runtime.ts";
-import { tw } from "_twind";
+import { tw } from "@twind";
 
 const entries = [
   { href: "/manual", content: "Manual" },

@@ -1,7 +1,7 @@
 {
   "imports": {
     "@/": "./",
-    "_twind": "./util/twind.ts",
+    "@twind": "./util/twind.ts",
 
     "$fresh/": "https://raw.githubusercontent.com/lucacasonato/fresh/4bb07f4bcebfc205692e53bb61a1e2447d589c8e/",
     "twind": "https://esm.sh/twind@0.16.16",

@@ -3,7 +3,7 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { ComponentProps, Fragment, h } from "$fresh/runtime.ts";
-import { tw } from "_twind";
+import { tw } from "@twind";
 import { PaginationProps } from "@/util/pagination_utils.ts";
 import { SearchResult } from "@/util/registry_utils.ts";
 

@@ -3,7 +3,7 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { Fragment, h, Head, PageProps } from "$fresh/runtime.ts";
-import { tw } from "_twind";
+import { tw } from "@twind";
 import { Handlers } from "$fresh/server.ts";
 import twas from "$twas";
 import { emojify } from "$emoji";

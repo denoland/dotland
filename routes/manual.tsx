@@ -3,7 +3,7 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { h, Head, PageProps, RouteConfig } from "$fresh/runtime.ts";
-import { tw } from "_twind";
+import { tw } from "@twind";
 import { Handlers } from "$fresh/server.ts";
 import { Markdown } from "@/components/Markdown.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
