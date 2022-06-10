@@ -1,7 +1,8 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-import { ComponentChildren, h, tw } from "../deps.ts";
+import { ComponentChildren, h } from "$fresh/runtime.ts";
+import { tw } from "_twind";
 
 export function InlineCode(
   props: { children: ComponentChildren; id?: string },

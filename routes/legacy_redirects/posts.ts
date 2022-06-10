@@ -1,10 +1,12 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-import { PageConfig } from "../../deps.ts";
-import { HandlerContext } from "../../server_deps.ts";
+import { RouteConfig } from "$fresh/runtime.ts";
+import { Handlers } from "$fresh/server.ts";
 
-export function handler(_: Request, { params }: HandlerContext) {
-  return Response.redirect(`https://deno.com/blog/${params.path}`, 307);
-}
+export const handler: Handlers = {
+  GET(_, { params }) {
+    return Response.redirect(`https://deno.com/blog/${params.path}`, 307);
+  },
+};
 
-export const config: PageConfig = { routeOverride: "/posts/:path*" };
+export const config: RouteConfig = { routeOverride: "/posts/:path*" };

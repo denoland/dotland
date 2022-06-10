@@ -2,11 +2,12 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, Head, PageProps, tw } from "../deps.ts";
-import { Handlers } from "../server_deps.ts";
-import { Header } from "../components/Header.tsx";
-import { Footer } from "../components/Footer.tsx";
-import { InlineCode } from "../components/InlineCode.tsx";
+import { Fragment, h, Head, PageProps } from "$fresh/runtime.ts";
+import { tw } from "_twind";
+import { Handlers } from "$fresh/server.ts";
+import { Header } from "@/components/Header.tsx";
+import { Footer } from "@/components/Footer.tsx";
+import { InlineCode } from "@/components/InlineCode.tsx";
 
 import {
   BenchmarkRun,
@@ -16,8 +17,8 @@ import {
   formatMsec,
   formatReqSec,
   reshape,
-} from "../util/benchmark_utils.ts";
-import { BenchmarkChart } from "../components/BenchmarkChart.tsx";
+} from "@/util/benchmark_utils.ts";
+import { BenchmarkChart } from "@/components/BenchmarkChart.tsx";
 
 type ShowData = { dataFile: string; range: number[]; search: string };
 

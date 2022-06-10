@@ -1,4 +1,4 @@
-import type { ModuleIndexWithDoc } from "doc_components/module_index.tsx";
+import type { ModuleIndexWithDoc } from "$doc_components/module_index.tsx";
 import type { DocNode } from "https://deno.land/x/deno_doc@v0.34.0/lib/types.d.ts";
 export type { DocNode };
 

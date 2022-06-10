@@ -2,13 +2,15 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, Head, tw } from "../deps.ts";
-import { CodeBlock } from "../components/CodeBlock.tsx";
-import { Footer } from "../components/Footer.tsx";
-import { InlineCode } from "../components/InlineCode.tsx";
-import { Header } from "../components/Header.tsx";
-import versions from "../versions.json" assert { type: "json" };
-import { Background } from "../components/HeroBackground.tsx";
+import { Fragment, h, Head } from "$fresh/runtime.ts";
+import { tw } from "_twind";
+import { CodeBlock } from "@/components/CodeBlock.tsx";
+import { Footer } from "@/components/Footer.tsx";
+import { InlineCode } from "@/components/InlineCode.tsx";
+import { Header } from "@/components/Header.tsx";
+import { HelloBar } from "@/components/HelloBar.tsx";
+import { Background } from "@/components/HeroBackground.tsx";
+import versions from "@/versions.json" assert { type: "json" };
 
 export default function Home() {
   const complexExampleProgram =
@@ -26,6 +28,9 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
 
   return (
     <div>
+      <HelloBar to="https://deno.news/archive/44-ryans-dream-stack-kitson-deploys-to-the-edge">
+        Check out Deno News issue #44!
+      </HelloBar>
       <Head>
         <title>Deno - A modern runtime for JavaScript and TypeScript</title>
       </Head>
@@ -53,7 +58,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
               A <strong class={tw`font-semibold`}>modern</strong> runtime for
               {" "}
               <strong class={tw`font-semibold`}>JavaScript</strong> and{" "}
-              <strong class={tw`font-semibold`}>TypeScript</strong>.
+              <strong class={tw`font-semibold`}>TypeScript</strong>
             </h2>
             <a
               href="/#installation"

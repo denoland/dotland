@@ -2,12 +2,13 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, Head, PageConfig, PageProps, tw } from "../deps.ts";
-import { Handlers } from "../server_deps.ts";
-import { Header } from "../components/Header.tsx";
-import { Footer } from "../components/Footer.tsx";
-import { Build, getBuild } from "../util/registry_utils.ts";
-import { ErrorMessage } from "../components/ErrorMessage.tsx";
+import { Fragment, h, Head, PageProps, RouteConfig } from "$fresh/runtime.ts";
+import { tw } from "_twind";
+import { Handlers } from "$fresh/server.ts";
+import { Header } from "@/components/Header.tsx";
+import { Footer } from "@/components/Footer.tsx";
+import { Build, getBuild } from "@/util/registry_utils.ts";
+import { ErrorMessage } from "@/components/ErrorMessage.tsx";
 
 export default function StatusPage({ data }: PageProps<Build | Error>) {
   return (
@@ -218,6 +219,4 @@ export const handler: Handlers<Build | Error> = {
   },
 };
 
-export const config: PageConfig = {
-  routeOverride: "/status/:id",
-};
+export const config: RouteConfig = { routeOverride: "/status/:id" };

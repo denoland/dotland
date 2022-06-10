@@ -1,19 +1,19 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx runtime.h */
-/** @jsxFrag runtime.Fragment */
-import { runtime, tw } from "../deps.ts";
+import { runtime } from "$doc_components/services.ts";
+import { tw } from "_twind";
 import {
   DirListing,
   Entry,
   getBasePath,
   isReadme,
-} from "../util/registry_utils.ts";
+} from "@/util/registry_utils.ts";
 
 import {
   ModuleIndex,
   type ModuleIndexWithDoc,
-} from "doc_components/module_index.tsx";
+} from "$doc_components/module_index.tsx";
 
 export function DirectoryListing(props: {
   dirListing: DirListing[];

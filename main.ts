@@ -8,22 +8,18 @@
 /// <reference lib="deno.ns" />
 /// <reference lib="deno.unstable" />
 
-/** @jsx runtime.h */
-import {
-  accepts,
-  ConnInfo,
-  createReporter,
-  Reporter,
-  router,
-  serve,
-  ServerContext,
-} from "./server_deps.ts";
+import { ServerContext } from "$fresh/server.ts";
+import { Fragment, h } from "$fresh/runtime.ts";
+import { ConnInfo, serve } from "$std/http/server.ts";
+import { router } from "$router";
+import { createReporter, Reporter } from "$ga";
+import { accepts } from "$oak_commons";
+import { setup } from "$doc_components/services.ts";
 
 import manifest from "./fresh.gen.ts";
 
 import { routes as completionsV2Routes } from "./completions_v2.ts";
 
-import { Fragment, h, setup } from "./deps.ts";
 const docland = "https://doc.deno.land/";
 await setup({
   resolveHref(current, symbol) {
@@ -134,7 +130,6 @@ export function withLog(
 }
 
 const ctx = await ServerContext.fromManifest(manifest);
-console.log("Server listening on http://localhost:8000");
 
 const innerHandler = withLog(ctx.handler());
 const handler = router(completionsV2Routes, innerHandler);

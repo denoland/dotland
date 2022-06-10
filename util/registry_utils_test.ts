@@ -12,7 +12,7 @@ import {
   isReadme,
   VersionMetaInfo,
 } from "./registry_utils.ts";
-import { assert, assertEquals, assertNotEquals } from "../test_deps.ts";
+import { assert, assertEquals, assertNotEquals } from "$std/testing/asserts.ts";
 
 Deno.test("source url", () => {
   assertEquals(

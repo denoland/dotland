@@ -2,16 +2,17 @@
 
 /** @jsx runtime.h */
 /** @jsxFrag runtime.Fragment */
-import { runtime, tw } from "../deps.ts";
+import { runtime } from "$doc_components/services.ts";
+import { tw } from "_twind";
 import { RawCodeBlock } from "./CodeBlock.tsx";
 import { Markdown } from "./Markdown.tsx";
 import {
   fileNameFromURL,
   fileTypeFromURL,
   isReadme,
-} from "../util/registry_utils.ts";
-import { ModuleDoc } from "doc_components/module_doc.tsx";
-import type { DocNode } from "../util/doc.ts";
+} from "@/util/registry_utils.ts";
+import { ModuleDoc } from "$doc_components/module_doc.tsx";
+import type { DocNode } from "@/util/doc.ts";
 
 export function FileDisplay(props: {
   raw?: string;

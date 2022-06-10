@@ -2,18 +2,11 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import {
-  ComponentChildren,
-  Fragment,
-  h,
-  Head,
-  PageConfig,
-  PageProps,
-  tw,
-} from "../deps.ts";
-import { Handlers } from "../server_deps.ts";
-import { Markdown } from "../components/Markdown.tsx";
-import { InlineCode } from "../components/InlineCode.tsx";
+import { h, Head, PageProps, RouteConfig } from "$fresh/runtime.ts";
+import { tw } from "_twind";
+import { Handlers } from "$fresh/server.ts";
+import { Markdown } from "@/components/Markdown.tsx";
+import { InlineCode } from "@/components/InlineCode.tsx";
 import {
   getDocURL,
   getFileURL,
@@ -21,9 +14,10 @@ import {
   isPreviewVersion,
   TableOfContents,
   versions,
-} from "../util/manual_utils.ts";
+} from "@/util/manual_utils.ts";
 
 import versionMeta from "../versions.json" assert { type: "json" };
+import VersionSelect from "@/islands/VersionSelect.tsx";
 
 interface Data {
   tableOfContents: TableOfContents;
@@ -450,33 +444,13 @@ function Version({
       <label htmlFor="version" class={tw`sr-only`}>
         Version
       </label>
-      <div class={tw`mt-1 sm:mt-0 sm:col-span-2`}>
-        <div class={tw`max-w-xs rounded-md shadow-sm`}>
-          <select
-            id="version"
-            class={tw
-              `block form-select w-full transition duration-150 ease-in-out sm:text-sm! sm:leading-5!`}
-            autoComplete="off"
-            value={version}
-            // @ts-ignore onChange does support strings
-            onChange={`((e) => { window.location = "/manual@" + e.target.value + "${path}"; })(event)`}
-          >
-            {version !== "main" && !versions.includes(version) &&
-              (
-                <option key={version} value={version}>
-                  {version}
-                </option>
-              )}
-            <option key="main" value="main">
-              main
-            </option>
-            {versions.map((v) => (
-              <option key={v} value={v}>
-                {v}
-              </option>
-            ))}
-          </select>
-        </div>
+      <div class="mt-1 sm:mt-0 sm:col-span-2">
+        <VersionSelect
+          versions={Object.fromEntries(
+            versions.map((ver) => [ver, `/manual@${ver}${path}`]),
+          )}
+          selectedVersion={version}
+        />
       </div>
     </div>
   );
@@ -576,6 +550,6 @@ export const handler: Handlers<Data> = {
   },
 };
 
-export const config: PageConfig = {
+export const config: RouteConfig = {
   routeOverride: "/manual{@:version}?/:path*",
 };

@@ -1,12 +1,16 @@
 // Copyright 2021-2022 the Deno authors. All rights reserved. MIT license.
 
-import { assert, assertEquals, assertStringIncludes } from "../test_deps.ts";
-import { extractAltLineNumberReference } from "../util/registry_utils.ts";
+import {
+  assert,
+  assertEquals,
+  assertStringIncludes,
+} from "$std/testing/asserts.ts";
+import { extractAltLineNumberReference } from "@/util/registry_utils.ts";
+import { ServerContext } from "$fresh/server.ts";
+import { Fragment, h } from "$fresh/runtime.ts";
+import { setup } from "$doc_components/services.ts";
 
-import { ServerContext } from "../server_deps.ts";
 import manifest from "../fresh.gen.ts";
-import { setup } from "doc_components/services.ts";
-import { Fragment, h } from "../deps.ts";
 
 const docland = "https://doc.deno.land/";
 await setup({

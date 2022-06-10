@@ -21,7 +21,7 @@ import {
   toVersionDocs,
   versions,
 } from "./util/completions_utils.ts";
-import type { RouterHandlerContext as HandlerContext } from "./server_deps.ts";
+import { HandlerContext } from "$router";
 
 async function detailsStdVer(
   _req: Request,

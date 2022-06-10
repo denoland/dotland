@@ -2,21 +2,24 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { emojify, Fragment, h, Head, PageProps, tw, twas } from "../../deps.ts";
-import { Handlers } from "../../server_deps.ts";
+import { Fragment, h, Head, PageProps } from "$fresh/runtime.ts";
+import { tw } from "_twind";
+import { Handlers } from "$fresh/server.ts";
+import twas from "$twas";
+import { emojify } from "$emoji";
 
-import { Header } from "../../components/Header.tsx";
-import { Footer } from "../../components/Footer.tsx";
-import { InlineCode } from "../../components/InlineCode.tsx";
+import { Header } from "@/components/Header.tsx";
+import { Footer } from "@/components/Footer.tsx";
+import { InlineCode } from "@/components/InlineCode.tsx";
 
 import {
   getStats,
   listModules,
   ModulesList,
   Stats,
-} from "../../util/registry_utils.ts";
-import * as pageutils from "../../util/pagination_utils.ts";
-import { Pagination } from "../../components/Pagination.tsx";
+} from "@/util/registry_utils.ts";
+import * as pageutils from "@/util/pagination_utils.ts";
+import { Pagination } from "@/components/Pagination.tsx";
 
 const PER_PAGE = 20;
 
@@ -59,12 +62,12 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
             <div class={tw`mt-6`}>
               <a
                 href="/add_module"
-                class="
+                class={tw`
                   py-2 px-8 border border-gray-300 text-md font-medium rounded-md
                   text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50
                   focus:outline-none focus:shadow-outline-blue focus:border-blue-300
                   active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out
-                "
+                  `}
               >
                 Publish a module
               </a>

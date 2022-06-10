@@ -1,7 +1,8 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-import { h, tw } from "../deps.ts";
+import { h } from "$fresh/runtime.ts";
+import { tw } from "_twind";
 
 const entries = [
   { href: "/manual", content: "Manual" },

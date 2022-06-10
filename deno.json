@@ -1,16 +1,11 @@
 {
   "tasks": {
-    "dev": "deno run --watch --allow-read --allow-env --allow-net main.ts"
+    "dev": "deno run --watch --allow-read --allow-write --allow-run --allow-env --allow-net main.ts"
   },
   "compilerOptions": {
     "types": [
       "https://raw.githubusercontent.com/denoland/doc_components/40a84bdb0487c03422950be8dafbef2001ed7a3e/jsx.d.ts"
     ]
   },
-  "importMap": "./import_map.json",
-  "fmt": {
-    "files": {
-      "exclude": [".git"]
-    }
-  }
+  "importMap": "./import_map.json"
 }

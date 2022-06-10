@@ -2,9 +2,10 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, Head, tw } from "../deps.ts";
-import { Footer } from "../components/Footer.tsx";
-import { Header } from "../components/Header.tsx";
+import { Fragment, h, Head } from "$fresh/runtime.ts";
+import { tw } from "_twind";
+import { Footer } from "@/components/Footer.tsx";
+import { Header } from "@/components/Header.tsx";
 
 import artworks from "../artwork.json" assert { type: "json" };
 

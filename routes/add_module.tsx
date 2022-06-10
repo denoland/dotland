@@ -2,11 +2,12 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { ComponentChildren, Fragment, h, Head, tw } from "../deps.ts";
-import { CDN_ENDPOINT } from "../util/registry_utils.ts";
-import { Header } from "../components/Header.tsx";
-import { InlineCode } from "../components/InlineCode.tsx";
-import { Footer } from "../components/Footer.tsx";
+import { ComponentChildren, Fragment, h, Head } from "$fresh/runtime.ts";
+import { tw } from "_twind";
+import { CDN_ENDPOINT } from "@/util/registry_utils.ts";
+import { Header } from "@/components/Header.tsx";
+import { InlineCode } from "@/components/InlineCode.tsx";
+import { Footer } from "@/components/Footer.tsx";
 
 export default function AddModulePage() {
   return (
