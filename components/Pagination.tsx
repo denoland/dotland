@@ -2,10 +2,10 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-
-import { ComponentProps, Fragment, h, tw } from "../deps.ts";
-import { PaginationProps } from "../util/pagination_utils.ts";
-import { SearchResult } from "../util/registry_utils.ts";
+import { ComponentProps, Fragment, h } from "$fresh/runtime.ts";
+import { tw } from "twind";
+import { PaginationProps } from "@/util/pagination_utils.ts";
+import { SearchResult } from "@/util/registry_utils.ts";
 
 interface Props extends PaginationProps {
   query?: string;

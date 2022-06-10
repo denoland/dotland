@@ -1,14 +1,14 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h, tw } from "../deps.ts";
+import { h } from "$fresh/runtime.ts";
+import { tw } from "twind";
 import {
   DirListing,
   Entry,
   getBasePath,
   isReadme,
-} from "../util/registry_utils.ts";
+} from "@/util/registry_utils.ts";
 
 interface DirectoryListingProps {
   dirListing: DirListing[];

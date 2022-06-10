@@ -1,14 +1,15 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-import { h, tw } from "../deps.ts";
+import { h } from "$fresh/runtime.ts";
+import { tw } from "twind";
 import { RawCodeBlock } from "./CodeBlock.tsx";
 import { Markdown } from "./Markdown.tsx";
 import {
   fileNameFromURL,
   fileTypeFromURL,
   isReadme,
-} from "../util/registry_utils.ts";
+} from "@/util/registry_utils.ts";
 
 export function FileDisplay(props: {
   showCode: boolean;

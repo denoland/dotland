@@ -2,8 +2,12 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, Head, PageConfig, PageProps, tw } from "../../deps.ts";
-import { accepts, emojify, Handlers, twas } from "../../server_deps.ts";
+import { Fragment, h, Head, PageProps, RouteConfig } from "$fresh/runtime.ts";
+import { tw } from "twind";
+import { Handlers } from "$fresh/server.ts";
+import twas from "$twas";
+import { emojify } from "$emoji";
+import { accepts } from "$oak_commons";
 import {
   denoDocAvailableForURL,
   DirEntry,
@@ -24,13 +28,13 @@ import {
   VersionDeps,
   VersionInfo,
   VersionMetaInfo,
-} from "../../util/registry_utils.ts";
-import { Header } from "../../components/Header.tsx";
-import { Footer } from "../../components/Footer.tsx";
-import { FileDisplay } from "../../components/FileDisplay.tsx";
-import { DirectoryListing } from "../../components/DirectoryListing.tsx";
-import { ErrorMessage } from "../../components/ErrorMessage.tsx";
-import VersionSelect from "../../islands/VersionSelect.tsx";
+} from "@/util/registry_utils.ts";
+import { Header } from "@/components/Header.tsx";
+import { Footer } from "@/components/Footer.tsx";
+import { FileDisplay } from "@/components/FileDisplay.tsx";
+import { DirectoryListing } from "@/components/DirectoryListing.tsx";
+import { ErrorMessage } from "@/components/ErrorMessage.tsx";
+import VersionSelect from "@/islands/VersionSelect.tsx";
 
 // 100kb
 const MAX_SYNTAX_HIGHLIGHT_FILE_SIZE = 100 * 1024;
@@ -825,6 +829,6 @@ export const handler: Handlers<Data> = {
   },
 };
 
-export const config: PageConfig = {
+export const config: RouteConfig = {
   routeOverride: "/x/:name{@:version}?/:path*",
 };

@@ -1,16 +1,8 @@
-import { IS_BROWSER } from "https://raw.githubusercontent.com/lucacasonato/fresh/ec388f87fb19cf5c247ad62c9a0beb771170da07/runtime.ts";
-export * from "https://raw.githubusercontent.com/lucacasonato/fresh/ec388f87fb19cf5c247ad62c9a0beb771170da07/runtime.ts";
+import { IS_BROWSER } from "$fresh/runtime.ts";
+import { apply, Configuration, setup, tw } from "$twind";
+export { css } from "$twind/css";
 
-import {
-  apply,
-  Configuration,
-  setup,
-  theme,
-  tw,
-} from "https://esm.sh/twind@0.16.16?pin=v76";
-export { apply, setup, theme, tw };
-export { css } from "https://esm.sh/twind@0.16.16/css?pin=v76";
-
+export { apply, setup, tw };
 export const config: Configuration = {
   mode: "silent",
   theme: {
@@ -46,6 +38,4 @@ export const config: Configuration = {
   },
 };
 
-if (IS_BROWSER) {
-  setup(config);
-}
+if (IS_BROWSER) setup(config);

@@ -2,11 +2,12 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, Head, tw } from "../deps.ts";
-import { Footer } from "../components/Footer.tsx";
-import { Header } from "../components/Header.tsx";
+import { Fragment, h, Head } from "$fresh/runtime.ts";
+import { tw } from "twind";
+import { Footer } from "@/components/Footer.tsx";
+import { Header } from "@/components/Header.tsx";
 
-import projects from "../showcase.json" assert { type: "json" };
+import projects from "@/showcase.json" assert { type: "json" };
 
 const PROJECTS: Project[] = projects;
 

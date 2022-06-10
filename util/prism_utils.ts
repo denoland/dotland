@@ -1,4 +1,27 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
+
+export { default as Prism } from "$prism";
+import "$prism/components/prism-bash?no-check";
+import "$prism/components/prism-batch?no-check";
+import "$prism/components/prism-css?no-check";
+import "$prism/components/prism-css-extras?no-check";
+import "$prism/components/prism-editorconfig?no-check";
+import "$prism/components/prism-diff?no-check";
+import "$prism/components/prism-docker?no-check";
+import "$prism/components/prism-git?no-check";
+import "$prism/components/prism-ignore?no-check";
+import "$prism/components/prism-javascript?no-check";
+import "$prism/components/prism-js-extras?no-check";
+import "$prism/components/prism-js-templates?no-check";
+import "$prism/components/prism-json?no-check";
+import "$prism/components/prism-jsx?no-check";
+import "$prism/components/prism-markdown?no-check";
+import "$prism/components/prism-rust?no-check";
+import "$prism/components/prism-toml?no-check";
+import "$prism/components/prism-tsx?no-check";
+import "$prism/components/prism-typescript?no-check";
+import "$prism/components/prism-yaml?no-check";
+
 // Taken from https://github.com/FormidableLabs/prism-react-renderer/blob/master/src/utils/normalizeTokens.js
 
 /** Empty lines need to contain a single empty token, denoted with { empty: true } */
