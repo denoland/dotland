@@ -28,8 +28,8 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
 
   return (
     <div>
-      <HelloBar to="https://deno.news/archive/43-deno-turns-4-new-deploy-pricing-and-v122">
-        Check out Deno News issue #43!
+      <HelloBar to="https://deno.news/archive/44-ryans-dream-stack-kitson-deploys-to-the-edge">
+        Check out Deno News issue #44!
       </HelloBar>
       <Head>
         <title>Deno - A modern runtime for JavaScript and TypeScript</title>
