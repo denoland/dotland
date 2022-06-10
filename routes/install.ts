@@ -1,6 +1,6 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-import { PageConfig } from "../deps.ts";
+import { RouteConfig } from "$fresh/runtime.ts";
 
 export function handler(req: Request) {
   return Response.redirect(
@@ -9,6 +9,4 @@ export function handler(req: Request) {
   );
 }
 
-export const config: PageConfig = {
-  routeOverride: "/install(\\.sh|\\.ps1)",
-};
+export const config: RouteConfig = { routeOverride: "/install(\\.sh|\\.ps1)" };

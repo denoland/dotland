@@ -1,4 +1,7 @@
-import { Fuse, prettyBytes, twas } from "../server_deps.ts";
+import twas from "$twas";
+// @deno-types="$fuse/fuse.d.ts"
+import Fuse from "$fuse/fuse.esm.js";
+import { prettyBytes } from "$pretty_bytes";
 import { S3_BUCKET } from "./registry_utils.ts";
 
 interface ApiModuleData {
@@ -48,7 +51,7 @@ export const MAX_AGE_1_HOUR = "max-age=3600";
 export const MAX_AGE_1_DAY = "max-age=86400";
 export const IMMUTABLE = "max-age=2628000, immutable";
 
-let fuse = new Fuse([], { includeScore: true, distance: 10 });
+let fuse = new Fuse<string>([], { includeScore: true, distance: 10 });
 /** If the index searching hasn't been updated in > 120 seconds, it will be
  * refreshed before processing the next request, meaning the index of packages
  * will be kept fresh. */
@@ -181,7 +184,7 @@ export async function fetchPackageData(pkg: string): Promise<PackageData> {
 
 /** Lazily update the module list for searching with fuse every 2 minutes and
  * return a reference. */
-export async function getFuse(): Promise<Fuse> {
+export async function getFuse(): Promise<Fuse<string>> {
   const now = Date.now();
   if (fuseUpdated + 120_000 < now) {
     fuseUpdated = now;

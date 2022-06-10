@@ -5,9 +5,9 @@ import {
   assertArrayIncludes,
   assertEquals,
   assertStringIncludes,
-} from "../test_deps.ts";
-
-import { router, ServerContext } from "../server_deps.ts";
+} from "$std/testing/asserts.ts";
+import { ServerContext } from "$fresh/server.ts";
+import { router } from "$router";
 import manifest from "../fresh.gen.ts";
 import { routes as completionsV2Routes } from "../completions_v2.ts";
 

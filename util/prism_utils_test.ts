@@ -1,9 +1,8 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 // Taken from https://github.com/FormidableLabs/prism-react-renderer/blob/master/src/utils/normalizeTokens.js
 
-import { assertEquals } from "../test_deps.ts";
-import { Prism } from "../server_deps.ts";
-import { normalizeTokens } from "./prism_utils.ts";
+import { assertEquals } from "$std/testing/asserts.ts";
+import { normalizeTokens, Prism } from "./prism_utils.ts";
 
 Deno.test("prism", () => {
   assertEquals(

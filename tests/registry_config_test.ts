@@ -1,8 +1,7 @@
 // Copyright 2021-2022 the Deno authors. All rights reserved. MIT license.
 
-import { assertEquals } from "../test_deps.ts";
-
-import { ServerContext } from "../server_deps.ts";
+import { assertEquals } from "$std/testing/asserts.ts";
+import { ServerContext } from "$fresh/server.ts";
 import manifest from "../fresh.gen.ts";
 const handleRequest = async (req: Request) =>
   (await ServerContext.fromManifest(manifest)).handler()(req, {
@@ -27,9 +26,9 @@ Deno.test({
         { headers: { "accept": "*/*" } },
       ),
     );
-    assertEquals(res.status, 200);
-    const json = await res.json();
-    assertEquals(json.version, 1);
+    // NOTE: The v1 manifest has been disabled.
+    assertEquals(res.status, 404);
+    await res.text();
   },
 });
 

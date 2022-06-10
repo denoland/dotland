@@ -1,7 +1,7 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 import { getDocURL, getFileURL, getTableOfContents } from "./manual_utils.ts";
-import { assert, assertEquals } from "../test_deps.ts";
+import { assert, assertEquals } from "$std/testing/asserts.ts";
 
 Deno.test("get table of contents", async () => {
   assert(await getTableOfContents("95b75e204ab3c0966e344a52c7bc9b9011ac345f"));
