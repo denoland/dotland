@@ -10,10 +10,8 @@ import {
   isReadme,
 } from "@/util/registry_utils.ts";
 
-import {
-  ModuleIndex,
-  type ModuleIndexWithDoc,
-} from "$doc_components/module_index.tsx";
+import { type Index } from "@/util/doc.ts";
+import { ModuleSymbolIndex } from "$doc_components/module_symbol_index.tsx";
 
 export function DirectoryListing(props: {
   dirListing: DirListing[];
@@ -22,7 +20,7 @@ export function DirectoryListing(props: {
   path: string;
   repositoryURL?: string | null;
   url: URL;
-  index: ModuleIndexWithDoc;
+  index: Index;
 }) {
   const isStd = props.url.pathname.startsWith("/std");
   const children = props.dirListing
@@ -223,9 +221,13 @@ export function DirectoryListing(props: {
           )
           : (
             <div class={tw`bg-white dark:(bg-gray-900 text-white)`}>
-              <ModuleIndex base={baseURL} path={props.path || "/"}>
-                {props.index}
-              </ModuleIndex>
+              <ModuleSymbolIndex
+                base={baseURL}
+                path={props.path || "/"}
+                entries={props.index.entries}
+              >
+                {props.index.index}
+              </ModuleSymbolIndex>
             </div>
           )}
       </div>

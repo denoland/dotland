@@ -34,8 +34,13 @@ import { Footer } from "@/components/Footer.tsx";
 import { FileDisplay } from "@/components/FileDisplay.tsx";
 import { DirectoryListing } from "@/components/DirectoryListing.tsx";
 import { ErrorMessage } from "@/components/ErrorMessage.tsx";
-import { type DocNode, getDocNodes, getModuleIndex } from "@/util/doc.ts";
-import { type ModuleIndexWithDoc } from "$doc_components/module_index.tsx";
+import {
+  type DocNode,
+  getDocNodes,
+  getEntries,
+  getModuleIndex,
+  type Index,
+} from "@/util/doc.ts";
 import VersionSelect from "@/islands/VersionSelect.tsx";
 
 // 100kb
@@ -56,7 +61,7 @@ interface Data {
   readmeCanonicalPath: string | null;
   readmeURL: string | null;
   readmeRepositoryURL: string | undefined | null;
-  doc: DocNode[] | ModuleIndexWithDoc | null;
+  doc: DocNode[] | Index | null;
 }
 
 type Params = {
@@ -384,7 +389,7 @@ function ModuleView({
                     dirListing={versionMeta.directoryListing}
                     repositoryURL={repositoryURL}
                     url={url}
-                    index={doc as ModuleIndexWithDoc}
+                    index={doc as Index}
                   />
                 )}
                 <div class={tw`w-full p-4 text-gray-400 italic`}>No files.</div>
@@ -404,7 +409,7 @@ function ModuleView({
                     dirListing={versionMeta.directoryListing}
                     repositoryURL={repositoryURL}
                     url={url}
-                    index={doc as ModuleIndexWithDoc}
+                    index={doc as Index}
                   />
                 )}
                 <div class={tw`w-full p-4 text-gray-400 italic`}>
@@ -423,7 +428,7 @@ function ModuleView({
                     dirListing={versionMeta.directoryListing}
                     repositoryURL={repositoryURL}
                     url={url}
-                    index={doc as ModuleIndexWithDoc}
+                    index={doc as Index}
                   />
                 )}
                 {rawFile !== null && (
@@ -661,7 +666,20 @@ export const handler: Handlers<Data> = {
                 return null;
               });
             } else { // TODO: check if it is a directory
-              return getModuleIndex(params.name, version).catch((e) => {
+              return getModuleIndex(params.name, version, path).then(
+                async (res) => {
+                  const modules = res.index[path || "/"];
+                  const entries = await getEntries(
+                    params.name,
+                    version!,
+                    modules,
+                  );
+                  return {
+                    index: res,
+                    entries,
+                  };
+                },
+              ).catch((e) => {
                 console.error("Failed to fetch module index:", e);
                 return null;
               });
