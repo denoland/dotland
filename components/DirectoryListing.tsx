@@ -11,7 +11,8 @@ import {
 } from "@/util/registry_utils.ts";
 
 import { type Index } from "@/util/doc.ts";
-import { ModuleSymbolIndex } from "$doc_components/module_symbol_index.tsx";
+import { ModulePathIndex } from "$doc_components/module_path_index.tsx";
+import { ModuleDoc } from "$doc_components/module_doc.tsx";
 
 export function DirectoryListing(props: {
   dirListing: DirListing[];
@@ -221,13 +222,20 @@ export function DirectoryListing(props: {
           )
           : (
             <div class={tw`bg-white dark:(bg-gray-900 text-white)`}>
-              <ModuleSymbolIndex
-                base={baseURL}
-                path={props.path || "/"}
-                entries={props.index.entries}
-              >
-                {props.index.index}
-              </ModuleSymbolIndex>
+              {props.index.index && (
+                <ModulePathIndex
+                  base={baseURL}
+                  path={props.path || "/"}
+                  skipMods={!!props.index.indexModule}
+                >
+                  {props.index.index}
+                </ModulePathIndex>
+              )}
+              {props.index.indexModule && (
+                <ModuleDoc url={`${baseURL}${props.index.indexModule}`}>
+                  {props.index.nodes}
+                </ModuleDoc>
+              )}
             </div>
           )}
       </div>

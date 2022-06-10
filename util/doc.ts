@@ -4,7 +4,8 @@ export type { DocNode };
 
 export interface Index {
   index: ModuleIndexWithDoc;
-  entries: Record<string, DocNode[]>;
+  indexModule: string | undefined;
+  nodes: DocNode[];
 }
 
 export async function getModuleIndex(

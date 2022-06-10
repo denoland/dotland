@@ -42,6 +42,7 @@ import {
   type Index,
 } from "@/util/doc.ts";
 import VersionSelect from "@/islands/VersionSelect.tsx";
+import { getIndex } from "$doc_components/doc.ts";
 
 // 100kb
 const MAX_SYNTAX_HIGHLIGHT_FILE_SIZE = 100 * 1024;
@@ -669,15 +670,24 @@ export const handler: Handlers<Data> = {
               return getModuleIndex(params.name, version, path).then(
                 async (res) => {
                   const modules = res.index[path || "/"];
-                  const entries = await getEntries(
-                    params.name,
-                    version!,
-                    modules,
-                  );
-                  return {
-                    index: res,
-                    entries,
-                  };
+                  const indexModule = getIndex(modules);
+                  if (indexModule) {
+                    return {
+                      index: res,
+                      indexModule,
+                      nodes: await getDocNodes(
+                        params.name,
+                        version!,
+                        indexModule,
+                      ),
+                    };
+                  } else {
+                    return {
+                      index: res,
+                      indexModule: undefined,
+                      nodes: [],
+                    };
+                  }
                 },
               ).catch((e) => {
                 console.error("Failed to fetch module index:", e);
