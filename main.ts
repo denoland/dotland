@@ -24,7 +24,7 @@ const docland = "https://doc.deno.land/";
 await setup({
   resolveHref(current, symbol) {
     return symbol
-      ? `${docland}https://deno.land${current}/~/${symbol}`
+      ? `${docland}${current}/~/${symbol}`
       : current;
   },
   lookupHref(
