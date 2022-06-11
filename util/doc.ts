@@ -29,8 +29,8 @@ export async function getDocs(
         index,
         indexModule,
         nodes: await getDocNodes(
-          params.name,
-          version!,
+          name,
+          version,
           indexModule,
         ),
       };
