@@ -20,6 +20,7 @@ import {
 } from "@/util/registry_utils.ts";
 import * as pageutils from "@/util/pagination_utils.ts";
 import { Pagination } from "@/components/Pagination.tsx";
+import * as Icons from "@/components/Icons.tsx";
 
 const PER_PAGE = 20;
 
@@ -425,18 +426,8 @@ function ModuleList({
                     </svg>
                   </div>
                 )}
-                <div>
-                  <svg
-                    class={tw`h-5 w-5 text-gray-400`}
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
+                <div class={tw`text-gray-400`}>
+                  <Icons.ArrowRight />
                 </div>
               </div>
             </a>

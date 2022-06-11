@@ -7,6 +7,7 @@ import { tw } from "@twind";
 import { Handlers } from "$fresh/server.ts";
 import { Markdown } from "@/components/Markdown.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
+import * as Icons from "@/components/Icons.tsx";
 import {
   getDocURL,
   getFileURL,
@@ -18,6 +19,7 @@ import {
 
 import versionMeta from "../versions.json" assert { type: "json" };
 import VersionSelect from "@/islands/VersionSelect.tsx";
+import { MagnifyingGlass } from "../components/Icons.tsx";
 
 interface Data {
   tableOfContents: TableOfContents;
@@ -130,19 +132,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                   aria-label="Close sidebar"
                   htmlFor="manualSidebarToggle"
                 >
-                  <svg
-                    class={tw`h-6 w-6 text-white`}
-                    stroke="currentColor"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
+                  <Icons.Cross />
                 </label>
               </div>
               <div class={tw`bg-gray-100 pb-4 pt-4 border-b border-gray-200`}>
@@ -237,17 +227,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                     onClick="document.querySelector('#manualSearch button').click()"
                   >
                     <div class={tw`flex items-center pointer-events-none`}>
-                      <svg
-                        class={tw`h-5 w-5`}
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                          d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                        />
-                      </svg>
+                      <Icons.MagnifyingGlass />
                     </div>
                     <div class={tw`pl-6`}>
                       <span class={tw`inline sm:hidden`}>Search docs</span>
@@ -302,17 +282,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                   onClick="document.querySelector('#manualSearch button').click()"
                 >
                   <div class={tw`flex items-center pointer-events-none`}>
-                    <svg
-                      class={tw`h-5 w-5`}
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                      />
-                    </svg>
+                    <Icons.MagnifyingGlass />
                   </div>
                   <div class={tw`pl-6`}>
                     Search the docs (press <InlineCode>/</InlineCode> to focus)

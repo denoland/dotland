@@ -3,6 +3,7 @@
 /** @jsx h */
 import { h } from "$fresh/runtime.ts";
 import { tw } from "@twind";
+import * as Icons from "./Icons.tsx";
 
 const entries = [
   { href: "/manual", content: "Manual" },
@@ -97,19 +98,7 @@ export function Header({
                     class={tw
                       `inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:(text-gray-500 bg-gray-100) focus:(outline-none bg-gray-100 text-gray-500) transition duration-150 ease-in-out`}
                   >
-                    <svg
-                      class={tw`h-6 w-6`}
-                      stroke="currentColor"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
+                    <Icons.Cross />
                   </div>
                 </label>
               </div>
