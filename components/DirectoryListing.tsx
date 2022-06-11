@@ -41,7 +41,9 @@ export function DirectoryListing(props: {
       >
         <div
           class={tw
-            `bg-gray-100 border-b border-gray-200 py-2 flex justify-between pl-4 pr-2`}
+            `bg-gray-100 border-b border-gray-200 py-2 flex justify-between pl-4 ${
+              props.index ? "pr-2" : "pr-4"
+            }`}
         >
           <div class={tw`flex items-center`}>
             <Icons.Folder />
@@ -56,34 +58,36 @@ export function DirectoryListing(props: {
                   </a>
                 )}
             </div>
-            <div
-              class={tw`inline-block ml-4 inline-flex shadow-sm rounded-md`}
-            >
-              <a
-                href={searchDoc.href}
-                class={tw
-                  `relative inline-flex items-center px-1.5 py-1.5 rounded-l-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50 ${
-                    !dirview ? "bg-white" : "bg-gray-100"
-                  }`}
+            {props.index && (
+              <div
+                class={tw`inline-block ml-4 inline-flex shadow-sm rounded-md`}
               >
-                <span class={tw`sr-only`}>Documentation</span>
-                <Icons.OpenBook />
-              </a>
-              <a
-                href={searchDir.href}
-                class={tw
-                  `-ml-px relative inline-flex items-center px-1.5 py-1.5 rounded-r-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50 ${
-                    dirview ? "bg-white" : "bg-gray-100"
-                  }`}
-              >
-                <span class={tw`sr-only`}>Directory Listing</span>
-                <Icons.Code />
-              </a>
-            </div>
+                <a
+                  href={searchDoc.href}
+                  class={tw
+                    `relative inline-flex items-center px-1.5 py-1.5 rounded-l-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50 ${
+                      !dirview ? "bg-white" : "bg-gray-100"
+                    }`}
+                >
+                  <span class={tw`sr-only`}>Documentation</span>
+                  <Icons.OpenBook />
+                </a>
+                <a
+                  href={searchDir.href}
+                  class={tw
+                    `-ml-px relative inline-flex items-center px-1.5 py-1.5 rounded-r-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50 ${
+                      dirview ? "bg-white" : "bg-gray-100"
+                    }`}
+                >
+                  <span class={tw`sr-only`}>Directory Listing</span>
+                  <Icons.Code />
+                </a>
+              </div>
+            )}
           </div>
         </div>
 
-        {dirview
+        {dirview || (props.index === null)
           ? (
             <DirectoryView
               dirListing={props.dirListing}
