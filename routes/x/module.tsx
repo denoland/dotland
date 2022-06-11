@@ -12,7 +12,6 @@ import {
   DirEntry,
   extractAltLineNumberReference,
   fetchSource,
-  fileTypeFromURL,
   findRootReadme,
   getBasePath,
   getModule,
@@ -34,15 +33,8 @@ import { Footer } from "@/components/Footer.tsx";
 import { FileDisplay } from "@/components/FileDisplay.tsx";
 import { DirectoryListing } from "@/components/DirectoryListing.tsx";
 import { ErrorMessage } from "@/components/ErrorMessage.tsx";
-import {
-  type DocNode,
-  getDocNodes,
-  getEntries,
-  getModuleIndex,
-  type Index,
-} from "@/util/doc.ts";
+import { type DocNode, getDocs, type Index } from "@/util/doc.ts";
 import VersionSelect from "@/islands/VersionSelect.tsx";
-import { getIndex } from "$doc_components/doc.ts";
 
 // 100kb
 const MAX_SYNTAX_HIGHLIGHT_FILE_SIZE = 100 * 1024;
@@ -656,45 +648,10 @@ export const handler: Handlers<Data> = {
             console.error("Failed to fetch dependency information:", e);
             return null;
           }),
-          (() => {
-            const type = fileTypeFromURL(path);
-            if (
-              type === "javascript" || type === "typescript" ||
-              type === "tsx" || type === "jsx"
-            ) {
-              return getDocNodes(params.name, version, path).catch((e) => {
-                console.error("Failed to fetch documentation:", e);
-                return null;
-              });
-            } else { // TODO: check if it is a directory
-              return getModuleIndex(params.name, version, path).then(
-                async (res) => {
-                  const modules = res.index[path || "/"];
-                  const indexModule = getIndex(modules);
-                  if (indexModule) {
-                    return {
-                      index: res,
-                      indexModule,
-                      nodes: await getDocNodes(
-                        params.name,
-                        version!,
-                        indexModule,
-                      ),
-                    };
-                  } else {
-                    return {
-                      index: res,
-                      indexModule: undefined,
-                      nodes: [],
-                    };
-                  }
-                },
-              ).catch((e) => {
-                console.error("Failed to fetch module index:", e);
-                return null;
-              });
-            }
-          })(),
+          getDocs(params.name, version!, path).catch((e) => {
+            console.error("Failed to fetch documentation:", e);
+            return null;
+          }),
         ]);
 
       const sourceURL = getSourceURL(params.name, version, path);

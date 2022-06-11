@@ -1,11 +1,47 @@
 import type { ModuleIndexWithDoc } from "$doc_components/module_index.tsx";
 import type { DocNode } from "https://deno.land/x/deno_doc@v0.34.0/lib/types.d.ts";
+import { getIndex } from "$doc_components/doc.ts";
+import { fileTypeFromURL } from "./registry_utils.ts";
 export type { DocNode };
 
 export interface Index {
   index: ModuleIndexWithDoc;
   indexModule: string | undefined;
   nodes: DocNode[];
+}
+
+export async function getDocs(
+  name: string,
+  version: string,
+  path: string,
+): Promise<DocNode[] | Index> {
+  const type = fileTypeFromURL(path);
+  if (
+    type === "javascript" || type === "typescript" ||
+    type === "tsx" || type === "jsx"
+  ) {
+    return getDocNodes(name, version, path);
+  } else { // TODO: check if it is a directory
+    const index = await getModuleIndex(name, version, path);
+    const indexModule = getIndex(index.index[path || "/"]);
+    if (indexModule) {
+      return {
+        index,
+        indexModule,
+        nodes: await getDocNodes(
+          params.name,
+          version!,
+          indexModule,
+        ),
+      };
+    } else {
+      return {
+        index,
+        indexModule: undefined,
+        nodes: [],
+      };
+    }
+  }
 }
 
 export async function getModuleIndex(
