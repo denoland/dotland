@@ -23,9 +23,7 @@ import { routes as completionsV2Routes } from "./completions_v2.ts";
 const docland = "https://doc.deno.land/";
 await setup({
   resolveHref(current, symbol) {
-    return symbol
-      ? `${docland}${current}/~/${symbol}`
-      : current;
+    return symbol ? `${docland}${current}/~/${symbol}` : current;
   },
   lookupHref(
     current: string,
