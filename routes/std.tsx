@@ -1,8 +1,8 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-import { h, PageConfig, PageProps } from "../deps.ts";
-import { Handlers } from "../server_deps.ts";
+import { h, PageProps, RouteConfig } from "$fresh/runtime.ts";
+import { Handlers } from "$fresh/server.ts";
 import Registry, { handler as xHandler } from "./x/module.tsx";
 
 export default function RegistryPage(props: PageProps) {
@@ -23,6 +23,4 @@ export const handler: Handlers = {
   },
 };
 
-export const config: PageConfig = {
-  routeOverride: "/std{@:version}?/:path*",
-};
+export const config: RouteConfig = { routeOverride: "/std{@:version}?/:path*" };

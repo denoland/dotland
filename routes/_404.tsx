@@ -1,9 +1,10 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-import { h, Head, tw } from "../deps.ts";
-import { Header } from "../components/Header.tsx";
-import { Footer } from "../components/Footer.tsx";
+import { h, Head } from "$fresh/runtime.ts";
+import { tw } from "twind";
+import { Header } from "@/components/Header.tsx";
+import { Footer } from "@/components/Footer.tsx";
 
 export default function NotFoundPage() {
   return (

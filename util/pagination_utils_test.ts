@@ -1,7 +1,7 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 import { hasNext, hasPrevious, pageCount } from "./pagination_utils.ts";
-import { assert, assertEquals } from "../test_deps.ts";
+import { assert, assertEquals } from "$std/testing/asserts.ts";
 
 Deno.test("hasPrevious", () => {
   assert(!hasPrevious({ page: 0 }));

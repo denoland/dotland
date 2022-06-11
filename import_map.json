@@ -1,0 +1,23 @@
+{
+  "imports": {
+    "@/": "./",
+    "twind": "./util/twind.ts",
+
+    "$fresh/": "https://raw.githubusercontent.com/lucacasonato/fresh/4bb07f4bcebfc205692e53bb61a1e2447d589c8e/",
+    "$twind": "https://esm.sh/twind@0.16.16",
+    "$twind/": "https://esm.sh/twind@0.16.16/",
+    "$prism": "https://esm.sh/prismjs@1.27.0",
+    "$prism/": "https://esm.sh/prismjs@1.27.0/",
+    "$twas": "https://esm.sh/twas@2.1.2",
+    "$emoji": "https://deno.land/x/emoji@0.1.2/mod.ts",
+    "$std/": "https://deno.land/std@0.143.0/",
+    "$gfm": "https://deno.land/x/gfm@0.1.20/mod.ts",
+    "$tiny-version-compare": "https://esm.sh/tiny-version-compare@3.0.1",
+    "$fuse/": "https://deno.land/x/fuse@v6.4.1/dist/",
+    "$he": "https://esm.sh/he@1.2.0",
+    "$pretty_bytes": "https://deno.land/x/pretty_bytes@v1.0.5/mod.ts",
+    "$router": "https://crux.land/router@0.0.12",
+    "$ga": "https://deno.land/x/g_a@0.1.2/mod.ts",
+    "$oak_commons": "https://deno.land/x/oak_commons@0.1.1/negotiation.ts"
+  }
+}

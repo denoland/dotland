@@ -1,10 +1,15 @@
 // Copyright 2021-2022 the Deno authors. All rights reserved. MIT license.
 
-import { assert, assertEquals, assertStringIncludes } from "../test_deps.ts";
-import { extractAltLineNumberReference } from "../util/registry_utils.ts";
+import {
+  assert,
+  assertEquals,
+  assertStringIncludes,
+} from "$std/testing/asserts.ts";
+import { extractAltLineNumberReference } from "@/util/registry_utils.ts";
+import { ServerContext } from "$fresh/server.ts";
 
-import { ServerContext } from "../server_deps.ts";
 import manifest from "../fresh.gen.ts";
+
 const handleRequest = async (req: Request) =>
   (await ServerContext.fromManifest(manifest)).handler()(req, {
     localAddr: {
