@@ -40,7 +40,7 @@ export function RawCodeBlock({
   enableLineRef?: boolean;
 }) {
   const codeDivClasses =
-    "text-gray-300 text-right select-none inline-block mr-2 sm:mr-3";
+    tw`text-gray-300 text-right select-none inline-block mr-2 sm:mr-3`;
   const newLang = language === "shell"
     ? "bash"
     : language === "text"
