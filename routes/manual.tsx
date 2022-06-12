@@ -27,7 +27,7 @@ interface Data {
 
 export default function Manual({ params, url, data }: PageProps<Data>) {
   const { version } = data;
-  const path = params.path ? `/${params.path}` : "/introduction";
+  const path = `/${params.path}`;
 
   const pageList = (() => {
     const tempList: { path: string; name: string }[] = [];
@@ -356,6 +356,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
               <div class={tw`pt-1`}>
                 <Markdown
                   source={data.content
+                    .replace(/\.md/g, "")
                     .replace(/\$STD_VERSION/g, stdVersion)
                     .replace(/\$CLI_VERSION/g, version)}
                   baseUrl={sourceURL}
@@ -518,6 +519,10 @@ function ToC({
 export const handler: Handlers<Data> = {
   async GET(req, { params, render }) {
     const url = new URL(req.url);
+    if (url.pathname === "/manual") {
+      url.pathname += "/introduction";
+      return Response.redirect(url);
+    }
     if (url.pathname.endsWith(".md")) {
       url.pathname = url.pathname.slice(0, -3);
       return Response.redirect(url);
@@ -526,7 +531,7 @@ export const handler: Handlers<Data> = {
     const version = params.version || versions[0];
     const sourceURL = getFileURL(
       version,
-      params.path ? `/${params.path}` : "/introduction",
+      `/${params.path}`,
     );
     const [tableOfContents, content] = await Promise.all([
       getTableOfContents(version),
