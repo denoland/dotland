@@ -55,7 +55,7 @@ export default function StatusPage({ data }: PageProps<Build | Error>) {
                         href={`https://github.com/${data.options.repository}`}
                         class={tw`link`}
                       >
-                        <Icons.GitHub />
+                        <Icons.GitHub class="mr-2 inline" />
                         {data.options.repository}
                       </a>
                     </dd>

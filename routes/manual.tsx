@@ -131,7 +131,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                   aria-label="Close sidebar"
                   htmlFor="manualSidebarToggle"
                 >
-                  <Icons.Cross />
+                  <Icons.Cross class="text-white" />
                 </label>
               </div>
               <div class={tw`bg-gray-100 pb-4 pt-4 border-b border-gray-200`}>

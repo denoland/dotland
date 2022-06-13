@@ -97,7 +97,7 @@ export function FileDisplay(props: {
             `bg-gray-100 border-b border-gray-200 py-1 px-4 flex align-middle justify-between link group`}
         >
           <span>
-            <Icons.OpenBook />
+            <Icons.OpenBook class="w-6 h-6 text-gray-400 inline-block mr-2 group-hover:text-blue-300 transition duration-100 ease-in-out" />
           </span>
           View Documentation
         </a>
