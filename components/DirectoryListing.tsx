@@ -33,13 +33,6 @@ export function DirectoryListing(props: {
   const searchDir = new URL(props.url);
   searchDir.searchParams.set("dirview", "");
 
-  console.log(
-    baseURL,
-    dirview,
-    props.index === null,
-    baseURL,
-    props.index.indexModule,
-  );
   return (
     <div class={tw`flex flex-col overflow-x-auto`}>
       <div
@@ -100,14 +93,14 @@ export function DirectoryListing(props: {
               dirListing={props.dirListing}
               path={props.path}
               url={props.url}
-              baseURL={baseURL}
+              baseURL={basePath}
             />
           )
           : (
             <div class={tw`bg-white dark:(bg-gray-900 text-white)`}>
               {props.index.index && (
                 <ModulePathIndex
-                  base={baseURL}
+                  base={basePath}
                   path={props.path || "/"}
                   skipMods={!!props.index.indexModule}
                 >
