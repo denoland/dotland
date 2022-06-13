@@ -74,7 +74,7 @@ export function FileDisplay(props: {
                   }`}
               >
                 <span class={tw`sr-only`}>Preview</span>
-                <icons.Page />
+                <Icons.Page />
               </a>
               <a
                 href={props.pathname + "?showCode"}

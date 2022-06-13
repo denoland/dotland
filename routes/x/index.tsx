@@ -11,6 +11,7 @@ import { emojify } from "$emoji";
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
+import * as Icons from "@/components/Icons.tsx";
 
 import {
   getStats,

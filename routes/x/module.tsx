@@ -213,7 +213,7 @@ function ModuleView({
                     >
                     </div>
                     <div class={tw`mt-3 flex items-center py-0.5`}>
-                      <Icons.Github class="mr-2 inline text-gray-200" />
+                      <Icons.GitHub class="mr-2 inline text-gray-200" />
                       <div class={tw`w-4/5 sm:w-2/3 bg-gray-100 h-4`}></div>
                     </div>
                     <div class={tw`mt-2 flex items-center py-0.5`}>

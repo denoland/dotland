@@ -1,5 +1,3 @@
-// Copyright 2022 the Deno authors. All rights reserved. MIT license.
-
 /** @jsx h */
 import { h } from "$fresh/runtime.ts";
 import { tw } from "twind";
@@ -66,11 +64,11 @@ export function Folder() {
   );
 }
 
-export function OpenBook() {
+export function OpenBook(props: { class?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      class="h-5 w-5"
+      class={tw`h-5 w-5 ${props.class ?? ""}`}
       viewBox="0 0 20 20"
       fill="currentColor"
     >
@@ -126,10 +124,10 @@ export function Page() {
   );
 }
 
-export function Cross() {
+export function Cross(props: { class?: string }) {
   return (
     <svg
-      class={tw`h-6 w-6`}
+      class={tw`h-6 w-6 ${props.class ?? ""}`}
       stroke="currentColor"
       fill="none"
       viewBox="0 0 24 24"
