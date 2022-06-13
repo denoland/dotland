@@ -15,6 +15,7 @@ import {
   TableOfContents,
   versions,
 } from "@/util/manual_utils.ts";
+import * as Icons from "@/components/Icons.tsx";
 
 import versionMeta from "../versions.json" assert { type: "json" };
 import VersionSelect from "@/islands/VersionSelect.tsx";
@@ -130,19 +131,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                   aria-label="Close sidebar"
                   htmlFor="manualSidebarToggle"
                 >
-                  <svg
-                    class={tw`h-6 w-6 text-white`}
-                    stroke="currentColor"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
+                  <Icons.Cross class="text-white" />
                 </label>
               </div>
               <div class={tw`bg-gray-100 pb-4 pt-4 border-b border-gray-200`}>
@@ -237,17 +226,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                     onClick="document.querySelector('#manualSearch button').click()"
                   >
                     <div class={tw`flex items-center pointer-events-none`}>
-                      <svg
-                        class={tw`h-5 w-5`}
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                          d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                        />
-                      </svg>
+                      <Icons.MagnifyingGlass />
                     </div>
                     <div class={tw`pl-6`}>
                       <span class={tw`inline sm:hidden`}>搜索文章</span>
@@ -265,19 +244,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
               htmlFor="manualSidebarToggle"
             >
               <div class={tw`px-4 text-gray-500 focus:text-gray-600`}>
-                <svg
-                  className="h-6 w-6"
-                  stroke="currentColor"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16M4 18h7"
-                  />
-                </svg>
+                <Icons.Menu />
               </div>
             </label>
           </div>
@@ -301,17 +268,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                   onClick="document.querySelector('#manualSearch button').click()"
                 >
                   <div class={tw`flex items-center pointer-events-none`}>
-                    <svg
-                      class={tw`h-5 w-5`}
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                      />
-                    </svg>
+                    <Icons.MagnifyingGlass />
                   </div>
                   <div class={tw`pl-6`}>
                     搜索文章 (按 <InlineCode>/</InlineCode> 搜索)
@@ -339,6 +296,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                   } mr-4`}
               >
                 <span class={tw`sr-only`}>GitHub</span>
+<<<<<<< HEAD
                 <svg
                   class={tw`h-6 w-6 inline`}
                   fill="currentColor"
@@ -351,6 +309,9 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                     clipRule="evenodd"
                   />
                 </svg>
+=======
+                <Icons.GitHub class="inline" />
+>>>>>>> a77f83eb82635b34d5cd9b12f1ed9699ace28278
               </a>
               <div class={tw`pt-1`}>
                 <Markdown
