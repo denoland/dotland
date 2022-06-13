@@ -10,6 +10,7 @@ export function HelloBar(props: {
 }) {
   return (
     <div class={tw`text-center bg-black text-white`}>
+      <span class={tw`float-left cursor-pointer py-2 pl-4`} onclick="this.closest('div').remove();">✕</span>
       <a href={props.to} target="_blank" class={tw`h-full w-full block p-2`}>
         {props.children}
       </a>
