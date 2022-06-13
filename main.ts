@@ -24,7 +24,7 @@ const docland = "https://doc.deno.land/";
 await setup({
   resolveHref(current, symbol) {
     // FIXME(bartlomieju): special casing for std here is not ideal
-    if (current.startsWith("/std")) {
+    if (symbol && current.startsWith("/std")) {
       current = `https://deno.land${current}`;
     }
     return symbol ? `${docland}${current}/~/${symbol}` : current;
