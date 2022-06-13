@@ -25,7 +25,7 @@ await setup({
   resolveHref(current, symbol) {
     // FIXME(bartlomieju): special casing for std here is not ideal
     if (current.startsWith("/std")) {
-      current = `https://deno.land${current};`;
+      current = `https://deno.land${current}`;
     }
     return symbol ? `${docland}${current}/~/${symbol}` : current;
   },
@@ -36,7 +36,7 @@ await setup({
   ): string | undefined {
     // FIXME(bartlomieju): special casing for std here is not ideal
     if (current.startsWith("/std")) {
-      current = `https://deno.land${current};`;
+      current = `https://deno.land${current}`;
     }
     return namespace
       ? `${docland}${current}/~/${namespace}.${symbol}`
