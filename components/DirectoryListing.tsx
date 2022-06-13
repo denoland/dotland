@@ -21,18 +21,25 @@ export function DirectoryListing(props: {
   index: Index;
 }) {
   const isStd = props.url.pathname.startsWith("/std");
-  const baseURL = getBasePath({
+  const basePath = getBasePath({
     isStd: isStd,
     name: props.name,
     version: props.version,
   });
-
+  const baseURL = `https://deno.land${basePath}`;
   const dirview = props.url.searchParams.has("dirview");
   const searchDoc = new URL(props.url);
   searchDoc.searchParams.delete("dirview");
   const searchDir = new URL(props.url);
   searchDir.searchParams.set("dirview", "");
 
+  console.log(
+    baseURL,
+    dirview,
+    props.index === null,
+    baseURL,
+    props.index.indexModule,
+  );
   return (
     <div class={tw`flex flex-col overflow-x-auto`}>
       <div
