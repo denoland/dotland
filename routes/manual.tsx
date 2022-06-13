@@ -245,19 +245,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
               htmlFor="manualSidebarToggle"
             >
               <div class={tw`px-4 text-gray-500 focus:text-gray-600`}>
-                <svg
-                  className="h-6 w-6"
-                  stroke="currentColor"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16M4 18h7"
-                  />
-                </svg>
+                <Icons.Menu />
               </div>
             </label>
           </div>

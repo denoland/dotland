@@ -131,20 +131,7 @@ export function Header({
             class={tw
               `inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:(text-gray-500 bg-gray-100) focus:(outline-none bg-gray-100 text-gray-500) transition duration-150 ease-in-out`}
           >
-            <svg
-              class={tw`h-6 w-6`}
-              stroke="currentColor"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <title>Menu | Deno</title>
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h7"
-              />
-            </svg>
+            <Icons.Menu title="Menu | Deno" />
           </div>
         </label>
         <div class={tw`hidden lg:flex md:ml-10 items-end`}>
