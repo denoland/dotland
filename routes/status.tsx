@@ -10,12 +10,6 @@ import { Footer } from "@/components/Footer.tsx";
 import { Build, getBuild } from "@/util/registry_utils.ts";
 import { ErrorMessage } from "@/components/ErrorMessage.tsx";
 import * as Icons from "@/components/Icons.tsx";
-import {
-  Checkmark,
-  Clock,
-  ThinArrowRight,
-  WarningTriangle,
-} from "../components/Icons.tsx";
 
 export default function StatusPage({ data }: PageProps<Build | Error>) {
   return (

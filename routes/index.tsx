@@ -10,6 +10,8 @@ import { InlineCode } from "@/components/InlineCode.tsx";
 import { Header } from "@/components/Header.tsx";
 import { HelloBar } from "@/components/HelloBar.tsx";
 import { Background } from "@/components/HeroBackground.tsx";
+import * as Icons from "@/components/Icons.tsx";
+
 import versions from "@/versions.json" assert { type: "json" };
 
 export default function Home() {

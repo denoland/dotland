@@ -64,11 +64,11 @@ export function Folder() {
   );
 }
 
-export function OpenBook() {
+export function OpenBook(props: { class?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      class="h-5 w-5"
+      class={tw`h-5 w-5 ${props.class ?? ""}`}
       viewBox="0 0 20 20"
       fill="currentColor"
     >
@@ -124,10 +124,10 @@ export function Page() {
   );
 }
 
-export function Cross() {
+export function Cross(props: { class?: string }) {
   return (
     <svg
-      class={tw`h-6 w-6`}
+      class={tw`h-6 w-6 ${props.class ?? ""}`}
       stroke="currentColor"
       fill="none"
       viewBox="0 0 24 24"
@@ -291,6 +291,56 @@ export function ThinArrowRight() {
       stroke="currentColor"
     >
       <path d="M9 5l7 7-7 7" />
+    </svg>
+  );
+}
+
+export function Menu(props: { title?: string }) {
+  return (
+    <svg
+      class={tw`h-6 w-6`}
+      stroke="currentColor"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      {props.title && <title>{props.title}</title>}
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="M4 6h16M4 12h16M4 18h7"
+      />
+    </svg>
+  );
+}
+
+export function Star(props: { title?: string }) {
+  return (
+    <svg
+      class={tw`ml-1 text-gray-400 w-5 h-5`}
+      fill="currentColor"
+      viewBox="0 0 20 20"
+    >
+      {props.title && <title>{props.title}</title>}
+      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+      </path>
+    </svg>
+  );
+}
+
+export function Tag(props: { title?: string }) {
+  return (
+    <svg
+      class={tw`h-5 w-5 mr-2 inline text-gray-700`}
+      viewBox="0 0 20 20"
+      fill="currentColor"
+    >
+      {props.title && <title>{props.title}</title>}
+      <path
+        fillRule="evenodd"
+        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+        clipRule="evenodd"
+      />
     </svg>
   );
 }
