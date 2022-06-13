@@ -4,6 +4,7 @@ import { getIndex } from "$doc_components/doc.ts";
 import { fileTypeFromURL } from "./registry_utils.ts";
 export type { DocNode };
 
+const API_URL = "https://apiland.deno.dev/v2/modules/";
 export interface Index {
   index: ModuleIndexWithDoc;
   indexModule: string | undefined;
@@ -50,7 +51,7 @@ export async function getModuleIndex(
   path: string,
 ): Promise<ModuleIndexWithDoc> {
   const response = await fetch(
-    `https://apiland.deno.dev/v2/modules/${module}/${version}/index${path}`,
+    `${API_URL}${module}/${version}/index${path}`,
   );
   if (response.status !== 200) {
     throw new Error(`Unexpected result fetching module index.`);
@@ -64,7 +65,7 @@ export async function getEntries(
   modules: string[],
 ): Promise<Record<string, DocNode[]>> {
   const response = await fetch(
-    `https://apiland.deno.dev/v2/modules/${module}/${version}/doc`,
+    `${API_URL}${module}/${version}/doc`,
     {
       method: "POST",
       body: JSON.stringify(modules),
@@ -85,7 +86,7 @@ export async function getDocNodes(
   path: string,
 ): Promise<DocNode[]> {
   const response = await fetch(
-    `https://apiland.deno.dev/v2/modules/${module}/${version}/doc${path}`,
+    `${API_URL}${module}/${version}/doc${path}`,
   );
   if (response.status !== 200) {
     throw new Error(`Unexpected result fetching doc nodes.`);
