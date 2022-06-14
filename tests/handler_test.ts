@@ -7,8 +7,29 @@ import {
 } from "$std/testing/asserts.ts";
 import { extractAltLineNumberReference } from "@/util/registry_utils.ts";
 import { ServerContext } from "$fresh/server.ts";
+import { Fragment, h } from "$fresh/runtime.ts";
+import { setup } from "$doc_components/services.ts";
 
 import manifest from "../fresh.gen.ts";
+
+const docland = "https://doc.deno.land/";
+await setup({
+  resolveHref(current, symbol) {
+    return symbol
+      ? `${docland}https://deno.land${current}/~/${symbol}`
+      : current;
+  },
+  lookupHref(
+    current: string,
+    namespace: string | undefined,
+    symbol: string,
+  ): string | undefined {
+    return namespace
+      ? `${docland}${current}/~/${namespace}.${symbol}`
+      : `${docland}${current}/~/${symbol}`;
+  },
+  runtime: { Fragment, h },
+});
 
 const handleRequest = async (req: Request) =>
   (await ServerContext.fromManifest(manifest)).handler()(req, {
@@ -47,7 +68,7 @@ Deno.test({
   sanitizeResources: false, // TODO(@crowlKats): this shouldnt be required, something wrong with fetch resource consumption
   async fn() {
     const res = await handleRequest(
-      new Request("https://deno.land/std@0.127.0/version.ts", {
+      new Request("https://deno.land/std@0.127.0/version.ts?codeview", {
         headers: { Accept: BROWSER_ACCEPT },
       }),
     );

@@ -1,6 +1,6 @@
 /** @jsx h */
 import { h } from "$fresh/runtime.ts";
-import { tw } from "twind";
+import { tw } from "@twind";
 
 export function GitHub(props: { class?: string }) {
   return (

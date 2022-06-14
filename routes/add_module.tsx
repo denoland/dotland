@@ -3,7 +3,7 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { ComponentChildren, Fragment, h, Head } from "$fresh/runtime.ts";
-import { tw } from "twind";
+import { tw } from "@twind";
 import { CDN_ENDPOINT } from "@/util/registry_utils.ts";
 import { Header } from "@/components/Header.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";

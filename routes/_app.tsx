@@ -3,7 +3,7 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { AppProps, h, Head } from "$fresh/runtime.ts";
-import { tw } from "twind";
+import { tw } from "@twind";
 
 export default function App({ Component }: AppProps) {
   return (

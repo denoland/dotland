@@ -2,7 +2,7 @@
 
 /** @jsx h */
 import { h } from "$fresh/runtime.ts";
-import { tw } from "twind";
+import { tw } from "@twind";
 
 export function Background() {
   return (
