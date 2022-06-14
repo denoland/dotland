@@ -3,7 +3,7 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { Fragment, h, Head } from "$fresh/runtime.ts";
-import { tw } from "twind";
+import { tw } from "@twind";
 import { Footer } from "@/components/Footer.tsx";
 import { Header } from "@/components/Header.tsx";
 import * as Icons from "@/components/Icons.tsx";

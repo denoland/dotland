@@ -3,7 +3,7 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { ComponentProps, Fragment, h } from "$fresh/runtime.ts";
-import { tw } from "twind";
+import { tw } from "@twind";
 import { PaginationProps } from "@/util/pagination_utils.ts";
 import { SearchResult } from "@/util/registry_utils.ts";
 import * as Icons from "./Icons.tsx";
@@ -239,7 +239,7 @@ export function Pagination(
           </>
         )
         : (
-          <div className="flex flex-1 justify-center">
+          <div class="flex flex-1 justify-center">
             <MaybeA
               disabled={false}
               href={toPage(currentPage + 1)}

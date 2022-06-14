@@ -3,10 +3,11 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { h, Head, PageProps, RouteConfig } from "$fresh/runtime.ts";
-import { tw } from "twind";
+import { tw } from "@twind";
 import { Handlers } from "$fresh/server.ts";
 import { Markdown } from "@/components/Markdown.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
+import * as Icons from "@/components/Icons.tsx";
 import {
   getDocURL,
   getFileURL,
@@ -15,10 +16,10 @@ import {
   TableOfContents,
   versions,
 } from "@/util/manual_utils.ts";
-import * as Icons from "@/components/Icons.tsx";
 
 import versionMeta from "../versions.json" assert { type: "json" };
 import VersionSelect from "@/islands/VersionSelect.tsx";
+import { MagnifyingGlass } from "../components/Icons.tsx";
 
 interface Data {
   tableOfContents: TableOfContents;
@@ -131,7 +132,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                   aria-label="Close sidebar"
                   htmlFor="manualSidebarToggle"
                 >
-                  <Icons.Cross class="text-white" />
+                  <Icons.Cross />
                 </label>
               </div>
               <div class={tw`bg-gray-100 pb-4 pt-4 border-b border-gray-200`}>

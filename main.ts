@@ -9,14 +9,41 @@
 /// <reference lib="deno.unstable" />
 
 import { ServerContext } from "$fresh/server.ts";
+import { Fragment, h } from "$fresh/runtime.ts";
 import { ConnInfo, serve } from "$std/http/server.ts";
 import { router } from "$router";
 import { createReporter, Reporter } from "$ga";
 import { accepts } from "$oak_commons";
+import { setup } from "$doc_components/services.ts";
 
 import manifest from "./fresh.gen.ts";
 
 import { routes as completionsV2Routes } from "./completions_v2.ts";
+
+const docland = "https://doc.deno.land/";
+await setup({
+  resolveHref(current, symbol) {
+    // FIXME(bartlomieju): special casing for std here is not ideal
+    if (symbol && current.startsWith("/std")) {
+      current = `https://deno.land${current}`;
+    }
+    return symbol ? `${docland}${current}/~/${symbol}` : current;
+  },
+  lookupHref(
+    current: string,
+    namespace: string | undefined,
+    symbol: string,
+  ): string | undefined {
+    // FIXME(bartlomieju): special casing for std here is not ideal
+    if (current.startsWith("/std")) {
+      current = `https://deno.land${current}`;
+    }
+    return namespace
+      ? `${docland}${current}/~/${namespace}.${symbol}`
+      : `${docland}${current}/~/${symbol}`;
+  },
+  runtime: { Fragment, h },
+});
 
 function isHtmlRequest(req: Request) {
   return accepts(req, "application/*", "text/html") === "text/html";

@@ -3,7 +3,7 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { Fragment, h, Head } from "$fresh/runtime.ts";
-import { tw } from "twind";
+import { tw } from "@twind";
 import { Footer } from "@/components/Footer.tsx";
 import { Header } from "@/components/Header.tsx";
 import * as Icons from "@/components/Icons.tsx";
@@ -41,6 +41,7 @@ export default function ArtworkPage() {
       <div class={tw`max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 mt-8 mb-24`}>
         <div class={tw`max-w-screen-lg mx-auto`}>
           <h4 class={tw`text-4xl font-bold tracking-tight`}>Artwork</h4>
+
           <p class={tw`mt-4 text-lg`}>
             Do you have a piece to display here?{" "}
             <a

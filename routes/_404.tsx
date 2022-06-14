@@ -2,7 +2,7 @@
 
 /** @jsx h */
 import { h, Head } from "$fresh/runtime.ts";
-import { tw } from "twind";
+import { tw } from "@twind";
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
 

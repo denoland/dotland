@@ -3,7 +3,7 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { Fragment, h, Head, PageProps, RouteConfig } from "$fresh/runtime.ts";
-import { tw } from "twind";
+import { tw } from "@twind";
 import { Handlers } from "$fresh/server.ts";
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
@@ -55,7 +55,7 @@ export default function StatusPage({ data }: PageProps<Build | Error>) {
                         href={`https://github.com/${data.options.repository}`}
                         class={tw`link`}
                       >
-                        <Icons.GitHub class="mr-2 inline" />
+                        <Icons.GitHub />
                         {data.options.repository}
                       </a>
                     </dd>

@@ -1,8 +1,9 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-import { h } from "$fresh/runtime.ts";
-import { tw } from "twind";
+/** @jsx runtime.h */
+/** @jsxFrag runtime.Fragment */
+import { runtime } from "$doc_components/services.ts";
+import { tw } from "@twind";
 import { RawCodeBlock } from "./CodeBlock.tsx";
 import { Markdown } from "./Markdown.tsx";
 import {
@@ -11,21 +12,29 @@ import {
   isReadme,
 } from "@/util/registry_utils.ts";
 import * as Icons from "./Icons.tsx";
+import { ModuleDoc } from "$doc_components/module_doc.tsx";
+import type { DocNode } from "@/util/doc.ts";
 
 export function FileDisplay(props: {
-  showCode: boolean;
   raw?: string;
   canonicalPath: string;
   sourceURL: string;
   baseURL: string;
   filetypeOverride?: string;
   repositoryURL?: string | null;
-  documentationURL?: string | null;
   stdVersion?: string;
-  pathname: string;
+  url: URL;
+  docNodes: DocNode[] | null;
 }) {
   const filetype = props.filetypeOverride ?? fileTypeFromURL(props.sourceURL);
   const filename = fileNameFromURL(props.sourceURL);
+  const hasToggle = (filetype === "markdown" || (props.docNodes !== null));
+
+  const codeview = props.url.searchParams.has("codeview");
+  const searchDoc = new URL(props.url);
+  searchDoc.searchParams.delete("codeview");
+  const searchCode = new URL(props.url);
+  searchCode.searchParams.set("codeview", "");
 
   return (
     <div
@@ -35,13 +44,13 @@ export function FileDisplay(props: {
       <div
         class={tw
           `bg-gray-100 border-b border-gray-200 py-2 flex justify-between ${
-            filetype === "markdown" ? "pl-4 pr-2" : "px-4"
+            hasToggle ? "pl-4 pr-2" : "px-4"
           }`}
       >
         <div class={tw`flex items-center`}>
           {isReadme(filename) && <Icons.LightOpenBook />}
           <span class={tw`font-medium`}>
-            {props.canonicalPath === props.pathname
+            {props.canonicalPath === props.url.pathname
               ? filename
               : (
                 <a href={props.canonicalPath} class={tw`link`}>
@@ -64,23 +73,34 @@ export function FileDisplay(props: {
                 </a>
               )}
           </div>
-          {filetype === "markdown" && (
+          {hasToggle && (
             <div class={tw`inline-block ml-4 inline-flex shadow-sm rounded-md`}>
               <a
-                href={props.pathname}
+                href={searchDoc.href}
                 class={tw
                   `relative inline-flex items-center px-1.5 py-1.5 rounded-l-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50 ${
-                    props.showCode ? "bg-white" : "bg-gray-100"
+                    !codeview ? "bg-white" : "bg-gray-100"
                   }`}
               >
-                <span class={tw`sr-only`}>Preview</span>
-                <Icons.Page />
+                {filetype === "markdown"
+                  ? (
+                    <>
+                      <span class={tw`sr-only`}>Preview</span>
+                      <Icons.Page />
+                    </>
+                  )
+                  : (
+                    <>
+                      <span class={tw`sr-only`}>Documentation</span>
+                      <Icons.OpenBook />
+                    </>
+                  )}
               </a>
               <a
-                href={props.pathname + "?showCode"}
+                href={searchCode.href}
                 class={tw
                   `-ml-px relative inline-flex items-center px-1.5 py-1.5 rounded-r-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50 ${
-                    !props.showCode ? "bg-white" : "bg-gray-100"
+                    codeview ? "bg-white" : "bg-gray-100"
                   }`}
               >
                 <span class={tw`sr-only`}>Code</span>
@@ -90,24 +110,20 @@ export function FileDisplay(props: {
           )}
         </div>
       </div>
-      {props.documentationURL && (
-        <a
-          href={props.documentationURL}
-          class={tw
-            `bg-gray-100 border-b border-gray-200 py-1 px-4 flex align-middle justify-between link group`}
-        >
-          <span>
-            <Icons.OpenBook class="w-6 h-6 text-gray-400 inline-block mr-2 group-hover:text-blue-300 transition duration-100 ease-in-out" />
-          </span>
-          View Documentation
-        </a>
-      )}
       {(() => {
         switch (filetype) {
           case "javascript":
           case "typescript":
           case "tsx":
           case "jsx":
+            if (!codeview && props.docNodes) {
+              return (
+                <ModuleDoc url={props.url.href}>
+                  {props.docNodes}
+                </ModuleDoc>
+              );
+            }
+          /* falls through */
           case "json":
           case "yaml":
           case "rust":
@@ -134,7 +150,7 @@ export function FileDisplay(props: {
               />
             );
           case "markdown": {
-            if (props.showCode) {
+            if (codeview) {
               return (
                 <RawCodeBlock
                   code={props.raw!}
