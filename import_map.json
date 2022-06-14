@@ -19,6 +19,6 @@
     "$router": "https://crux.land/router@0.0.12",
     "$ga": "https://deno.land/x/g_a@0.1.2/mod.ts",
     "$oak_commons": "https://deno.land/x/oak_commons@0.1.1/negotiation.ts",
-    "$doc_components/": "https://deno.land/x/deno_doc_components@0.1.0/"
+    "$doc_components/": "https://deno.land/x/deno_doc_components@0.1.1/"
   }
 }
