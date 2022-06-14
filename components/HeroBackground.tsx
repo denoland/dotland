@@ -1,14 +1,14 @@
 // Copyright Deno Land Inc. All Rights Reserved. Proprietary and confidential.
 
 /** @jsx h */
-
-import { h } from "../deps.ts";
+import { h } from "$fresh/runtime.ts";
+import { tw } from "@twind";
 
 export function Background() {
   return (
-    <div class="pointer-events-none">
-      <BlueGradient class="absolute inset-0" />
-      <RedGradient class="absolute inset-0 left-10" />
+    <div class={tw`pointer-events-none`}>
+      <BlueGradient class={tw`absolute inset-0`} />
+      <RedGradient class={tw`absolute inset-0 left-10`} />
     </div>
   );
 }

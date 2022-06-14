@@ -20,6 +20,9 @@ jobs:
       - name: Lint
         run: deno lint
 
+      - name: Type Check
+        run: deno check --remote main.ts
+
   test:
     runs-on: ubuntu-latest
     steps:
@@ -32,5 +35,4 @@ jobs:
           deno-version: v1.x
 
       - name: Run Tests
-        # TODO(kt3k): Enable type checking
-        run: deno test --allow-net --allow-env --allow-hrtime --no-check
+        run: deno test --allow-net --allow-read --allow-env --allow-hrtime

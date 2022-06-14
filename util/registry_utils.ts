@@ -81,7 +81,10 @@ export async function getVersionMeta(
       accept: "application/json",
     },
   });
-  if (res.status === 403 || res.status === 404) return null;
+  if (res.status === 403 || res.status === 404) {
+    await res.body?.cancel();
+    return null;
+  }
   if (res.status !== 200) {
     throw Error(
       `Got an error (${res.status}) while getting the directory listing:\n${await res
@@ -126,7 +129,10 @@ export async function getVersionDeps(
       accept: "application/json",
     },
   });
-  if (res.status === 403 || res.status === 404) return null;
+  if (res.status === 403 || res.status === 404) {
+    await res.body?.cancel();
+    return null;
+  }
   if (res.status !== 200) {
     throw Error(
       `Got an error (${res.status}) while getting the dependency information:\n${await res
@@ -155,7 +161,10 @@ export async function getVersionList(
       accept: "application/json",
     },
   });
-  if (res.status === 403 || res.status === 404) return null;
+  if (res.status === 403 || res.status === 404) {
+    await res.body?.cancel();
+    return null;
+  }
   if (res.status !== 200) {
     throw Error(
       `Got an error (${res.status}) while getting the version list:\n${await res
@@ -175,11 +184,16 @@ export interface SearchResult extends Module {
   search_score: string;
 }
 
+export interface ModulesList {
+  results: SearchResult[];
+  totalCount: number;
+}
+
 export async function listModules(
   page: number,
   limit: number,
   query: string,
-): Promise<{ results: SearchResult[]; totalCount: number } | null> {
+): Promise<ModulesList | null> {
   const url = `${API_ENDPOINT}modules?page=${page}&limit=${limit}&query=${
     encodeURIComponent(
       query,
@@ -217,7 +231,10 @@ export async function getModule(name: string): Promise<Module | null> {
       accept: "application/json",
     },
   });
-  if (res.status === 404) return null;
+  if (res.status === 404) {
+    await res.body?.cancel();
+    return null;
+  }
   if (res.status !== 200) {
     throw Error(
       `Got an error (${res.status}) while getting the module ${name}:\n${await res
@@ -267,11 +284,6 @@ export async function getBuild(id: string): Promise<Build | Error> {
   return data.data.build;
 }
 
-export function parseNameVersion(nameVersion: string): [string, string] {
-  const [name, ...version] = nameVersion.split("@");
-  return [name, version.join("@")];
-}
-
 const markdownExtension = "(?:markdown|mdown|mkdn|mdwn|mkd|md)";
 const orgExtension = "org";
 const readmeBaseRegex = `readme(?:\\.(${markdownExtension}|${orgExtension}))?`;
@@ -318,19 +330,6 @@ export function fileTypeFromURL(filename: string): string | undefined {
 export function fileNameFromURL(url: string): string {
   const segments = decodeURI(url).split("/");
   return segments[segments.length - 1];
-}
-
-export function denoDocAvailableForURL(filename: string): boolean {
-  const filetype = fileTypeFromURL(filename);
-  switch (filetype) {
-    case "javascript":
-    case "typescript":
-    case "jsx":
-    case "tsx":
-      return true;
-    default:
-      return false;
-  }
 }
 
 export function findRootReadme(
@@ -499,16 +498,16 @@ export function listExternalDependencies(
   } else return undefined;
 }
 
-export async function getStats(): Promise<
-  {
-    recently_added_modules: Array<Module & { created_at: string }>;
-    recently_uploaded_versions: Array<{
-      name: string;
-      version: string;
-      created_at: string;
-    }>;
-  } | null
-> {
+export interface Stats {
+  recently_added_modules: Array<Module & { created_at: string }>;
+  recently_uploaded_versions: Array<{
+    name: string;
+    version: string;
+    created_at: string;
+  }>;
+}
+
+export async function getStats(): Promise<Stats | null> {
   const url = `${API_ENDPOINT}stats`;
   const res = await fetch(url, {
     headers: {
@@ -544,4 +543,46 @@ export function getBasePath({
   return `${isStd ? "" : "/x"}/${name}${
     version ? `@${encodeURIComponent(version)}` : ""
   }`;
+}
+
+export const S3_BUCKET =
+  "http://deno-registry2-prod-storagebucket-b3a31d16.s3-website-us-east-1.amazonaws.com/";
+
+export async function fetchSource(remoteUrl: string): Promise<Response> {
+  let lastErr;
+  for (let i = 0; i < 3; i++) {
+    try {
+      const resp = await fetch(remoteUrl);
+      if (resp.status === 403 || resp.status === 404) {
+        await resp.body?.cancel();
+        return new Response("404 Not Found", { status: 404 });
+      }
+      if (!resp.ok) {
+        await resp.body?.cancel();
+        throw new TypeError("non 2xx status code returned");
+      }
+      return new Response(resp.body, {
+        headers: resp.headers,
+        status: resp.status,
+      });
+    } catch (err) {
+      // TODO(lucacasonato): only retry on known retryable errors
+      console.warn("retrying on proxy error", err);
+      lastErr = err;
+    }
+  }
+  throw lastErr;
+}
+
+const ALT_LINENUMBER_MATCHER = /(.*):(\d+):\d+$/;
+
+export function extractAltLineNumberReference(
+  url: string,
+): { rest: string; line: number } | null {
+  const matches = ALT_LINENUMBER_MATCHER.exec(url);
+  if (matches === null) return null;
+  return {
+    rest: matches[1],
+    line: parseInt(matches[2]),
+  };
 }

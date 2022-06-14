@@ -1,9 +1,9 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
 
 import { handleRegistryRequest } from "./registry.ts";
-import { handleConfigRequest } from "./registry_config.ts";
-import { handleApiRequest } from "./suggestions.ts";
-import { handleVSCRequest } from "./vscode.ts";
+import { handler as handleConfigRequest } from "../routes/completions/config.ts";
+import { handleApiRequest } from "../completions_v2.ts";
+// import { handleVSCRequest } from "./vscode.ts";
 
 import type { ConnInfo } from "https://deno.land/std@0.112.0/http/server.ts";
 import { createReporter, Reporter } from "https://deno.land/x/g_a@0.1.2/mod.ts";
@@ -244,9 +244,9 @@ export function handleRequest(request: Request): Promise<Response> {
     );
   }
 
-  if (url.pathname.startsWith("/_vsc")) {
-    return handleVSCRequest(url);
-  }
+  // if (url.pathname.startsWith("/_vsc")) {
+  //   return handleVSCRequest(url);
+  // }
 
   if (url.pathname.startsWith("/_api/")) {
     return handleApiRequest(url);

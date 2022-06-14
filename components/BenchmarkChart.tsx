@@ -2,9 +2,9 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h } from "../deps.ts";
+import { Fragment, h } from "$fresh/runtime.ts";
 
-import { Column, formatLogScale, logScale } from "../util/benchmark_utils.ts";
+import { Column, formatLogScale, logScale } from "@/util/benchmark_utils.ts";
 
 export interface BenchmarkChartProps {
   yTickFormat?: (n: number) => string;
