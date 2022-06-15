@@ -3,7 +3,13 @@ import { accepts } from "$oak_commons";
 import type { ConnInfo } from "https://deno.land/std@0.112.0/http/server.ts";
 import { createReporter, Reporter } from "$ga";
 import type { Event } from "$ga4";
-import { formatStatus, GA4Report, isDocument, isRedirect, isServerError } from "$ga4";
+import {
+  formatStatus,
+  GA4Report,
+  isDocument,
+  isRedirect,
+  isServerError,
+} from "$ga4";
 
 /**
  * Helper functions.
