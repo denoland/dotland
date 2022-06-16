@@ -21,7 +21,7 @@ jobs:
         run: deno lint
 
       - name: Type Check
-        run: deno check --remote main.ts
+        run: deno check main.ts
 
   test:
     runs-on: ubuntu-latest
