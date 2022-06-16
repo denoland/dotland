@@ -226,26 +226,3 @@ export const routes = {
   "/_api/x/:pkg/{:ver}?": xPkgVer,
   "/_api/x/:pkg/:ver/:path*{/}?": xPkgVerPath,
 };
-
-/** Handle registry v2 API requests. */
-export function handleApiRequest(url: URL): Promise<Response> {
-  for (const [pattern, handler] of routes) {
-    const result = new URLPattern(pattern, url.toString()).exec(url);
-    if (result) {
-      try {
-        return handler(result);
-      } catch (e) {
-        const msg = e instanceof Error ? e.message : "internal error";
-        return Promise.resolve(
-          new Response(msg, { status: 500, statusText: "InternalError" }),
-        );
-      }
-    }
-  }
-  return Promise.resolve(
-    new Response(null, {
-      status: 404,
-      statusText: "NotFound",
-    }),
-  );
-}

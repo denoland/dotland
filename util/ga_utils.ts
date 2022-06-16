@@ -115,7 +115,7 @@ function ga4(
       const redirectLocation = response.headers.get("location");
       event = { name: "redirect", params: { redirectLocation } };
     } else if (bot) {
-      event = { name: "download", params: {} };
+      event = { name: "file_download", params: {} };
     } else {
       const fetchDest = request.headers.get("sec-fetch-dest");
       if (fetchDest) {
@@ -129,7 +129,7 @@ function ga4(
         if (contentType != null && /text\/html/.test(contentType)) {
           event = { name: "page_view", params: {} }; // Probably an old browser.
         } else {
-          event = { name: "download", params: {} };
+          event = { name: "file_download", params: {} };
         }
       }
     }
