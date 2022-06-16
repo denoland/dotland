@@ -278,6 +278,7 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                   columns={benchData.threadCount.filter(({ name }) =>
                     !typescriptBenches.includes(name)
                   )}
+                  yLabel="threads"
                 />
                 <p class={tw`mt-1`}>
                   How many threads various programs use. Smaller is better.
@@ -296,6 +297,7 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                   columns={benchData.syscallCount.filter(({ name }) =>
                     !typescriptBenches.includes(name)
                   )}
+                  yLabel="syscalls"
                 />
                 <p class={tw`mt-1`}>
                   How many total syscalls are performed when executing a given
@@ -450,7 +452,10 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                     Cargo Dependencies
                   </h5>
                 </a>{" "}
-                <BenchmarkChart columns={benchData.cargoDeps} />
+                <BenchmarkChart
+                  columns={benchData.cargoDeps}
+                  yLabel="dependencies"
+                />
               </div>
             </div>
             <div class={tw`mt-20`}>
