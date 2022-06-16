@@ -314,10 +314,10 @@ export function Menu(props: { title?: string }) {
   );
 }
 
-export function Star(props: { class?: string, title?: string }) {
+export function Star(props: { class?: string; title?: string }) {
   return (
     <svg
-      class={tw`text-gray-400 w-5 h-5 ${props.class ?? ""}`}
+      class={tw`w-5 h-5 ${props.class ?? ""}`}
       fill="currentColor"
       viewBox="0 0 20 20"
     >
