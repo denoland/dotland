@@ -203,11 +203,11 @@ function ModuleView({
                     >
                     </div>
                     <div class={tw`mt-3 flex items-center py-0.5`}>
-                      <Icons.GitHub class="mr-2 inline text-gray-200" />
+                      <Icons.GitHub class="mr-2 w-5 h-5 inline text-gray-200" />
                       <div class={tw`w-4/5 sm:w-2/3 bg-gray-100 h-4`}></div>
                     </div>
                     <div class={tw`mt-2 flex items-center py-0.5`}>
-                      <Icons.Star title="GitHub Stars" />
+                      <Icons.Star class="mr-2" title="GitHub Stars" />
                       <div class={tw`w-1/6 sm:w-1/5 bg-gray-100 h-4`}></div>
                     </div>
                   </>
@@ -220,7 +220,7 @@ function ModuleView({
                       {emojify(moduleMeta.description ?? "")}
                     </div>
                     <div class={tw`mt-3 flex items-center`}>
-                      <Icons.GitHub class="mr-2 inline text-gray-700" />
+                      <Icons.GitHub class="mr-2 w-5 h-5 inline text-gray-700" />
                       <a
                         class={tw`link`}
                         href={`https://github.com/${versionMeta.uploadOptions.repository}`}
@@ -229,7 +229,7 @@ function ModuleView({
                       </a>
                     </div>
                     <div class={tw`mt-2 flex items-center`}>
-                      <Icons.Star title="GitHub stars" />
+                      <Icons.Star class="mr-2" title="GitHub Stars" />
                       <div>{moduleMeta.star_count}</div>
                     </div>
                   </>
