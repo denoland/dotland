@@ -410,7 +410,7 @@ function ModuleList({
                     <div class={tw`text-gray-400`}>
                       {meta.starCount}
                     </div>
-                    <Icons.Star title="star" />
+                    <Icons.Star class="ml-1 text-gray-400" title="star" />
                   </div>
                 )}
                 <div>
