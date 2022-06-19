@@ -572,7 +572,7 @@ export const handler: Handlers<Data> = {
 
     const ln = extractAltLineNumberReference(url.toString());
     if (ln) {
-      return Response.redirect(`${ln.rest}#L${ln.line}`, 302);
+      return Response.redirect(`${ln.rest}?codeview=#L${ln.line}`, 302);
     }
 
     version = decodeURIComponent(params.version);
