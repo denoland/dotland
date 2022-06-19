@@ -121,7 +121,7 @@ Deno.test({
       }),
     );
     assertEquals(res.status, 302);
-    assert(res.headers.get("Location")?.includes("/std@0.127.0/fs/mod.ts#L5"));
+    assert(res.headers.get("Location")?.includes("/std@0.127.0/fs/mod.ts?codeview=#L5"));
     await res.text();
   },
 });
