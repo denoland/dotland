@@ -113,7 +113,7 @@ Deno.test({
 
 Deno.test({
   name:
-    "/std@0.127.0/fs/mod.ts:5:3 with Accept: 'text/html' responds with line number redirect",
+    "/std@0.127.0/fs/mod.ts:5:3 with Accept: 'text/html' responds with codeview and line number redirect",
   async fn() {
     const res = await handleRequest(
       new Request("https://deno.land/std@0.127.0/fs/mod.ts:5:3", {
@@ -121,7 +121,11 @@ Deno.test({
       }),
     );
     assertEquals(res.status, 302);
-    assert(res.headers.get("Location")?.includes("/std@0.127.0/fs/mod.ts#L5"));
+    assert(
+      res.headers.get("Location")?.includes(
+        "/std@0.127.0/fs/mod.ts?codeview=#L5",
+      ),
+    );
     await res.text();
   },
 });
