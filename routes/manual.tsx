@@ -19,7 +19,6 @@ import {
 
 import versionMeta from "../versions.json" assert { type: "json" };
 import VersionSelect from "@/islands/VersionSelect.tsx";
-import { MagnifyingGlass } from "../components/Icons.tsx";
 
 interface Data {
   tableOfContents: TableOfContents;

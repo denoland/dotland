@@ -8,6 +8,9 @@ export const config: Configuration = {
   mode: "silent",
   theme: {
     fontFamily: {
+      sans: [
+        "Inter",
+      ],
       mono: [
         "Menlo",
         "Monaco",
@@ -19,14 +22,23 @@ export const config: Configuration = {
       ],
     },
     extend: {
+      opacity: {
+        15: ".15",
+      },
       lineHeight: {
         0: "0",
       },
-      /*fontFamily: {
-        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
-      },*/
-      width: {
+      colors: {
+        main: "#333333",
+        secondary: "#EEEEEE",
+        light: "#999999",
+      },
+      spacing: {
+        4.5: "1.125rem",
+        5.5: "1.375rem",
+        18: "4.5rem",
         72: "18rem",
+        76: "19rem",
       },
       animation: {
         move: "move 6s linear infinite",

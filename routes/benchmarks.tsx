@@ -157,7 +157,7 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
         }}
       />
       <div class={tw`bg-gray-50 min-h-full`}>
-        <Header subtitle="Continuous Benchmarks" widerContent={true} />
+        <Header />
         <div class={tw`mb-12`}>
           <div
             class={tw`max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 mt-8 pb-8`}
@@ -476,7 +476,7 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
             </div>
           </div>
         </div>
-        <Footer simple />
+        <Footer />
       </div>
     </>
   );

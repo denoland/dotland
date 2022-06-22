@@ -42,7 +42,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             `bg-gray-50 overflow-x-hidden border-b border-gray-200 relative`}
         >
           <Background />
-          <Header main />
+          <Header />
           <div
             class={tw
               `relative max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center`}
@@ -385,7 +385,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
         </div>
         <DenoInProductionSection />
         <div class={tw`mt-20`}>
-          <Footer simple />
+          <Footer />
         </div>
       </div>
     </div>

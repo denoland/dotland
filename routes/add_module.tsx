@@ -46,7 +46,7 @@ export default function AddModulePage() {
         `}
       </script>
       <div class={tw`bg-gray`}>
-        <Header subtitle="Third Party Modules" widerContent={true} />
+        <Header selected="Third Party Modules" />
         <form
           class={tw`max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8`}
           // @ts-ignore onSubmit does support strings
@@ -277,7 +277,7 @@ export default function AddModulePage() {
             </div>
           </section>
         </form>
-        <Footer simple />
+        <Footer />
       </div>
     </>
   );

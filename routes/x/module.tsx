@@ -83,8 +83,8 @@ export default function Registry({ params, url, data }: PageProps<Data>) {
       </Head>
       <div class={tw`bg-gray-50 min-h-full`}>
         <Header
-          subtitle={name === "std" ? "Standard Library" : "Third Party Modules"}
-          widerContent
+          selected={name === "std" ? "Standard Library" : "Third Party Modules"}
+          background
         />
         <div
           class={tw
@@ -135,7 +135,7 @@ export default function Registry({ params, url, data }: PageProps<Data>) {
             })()}
           </div>
         </div>
-        <Footer simple />
+        <Footer />
       </div>
     </>
   );

@@ -39,7 +39,7 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
         <title>Third Party Modules | Deno</title>
       </Head>
       <div class={tw`bg-gray`}>
-        <Header subtitle="Third Party Modules" widerContent={true} />
+        <Header selected="Third Party Modules" background />
         <div>
           <div class={tw`max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8`}>
             <dt class={tw`text-lg leading-6 font-medium text-gray-900`}>
@@ -341,7 +341,7 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
               : null}
           </div>
         </div>
-        <Footer simple />
+        <Footer />
       </div>
     </>
   );
