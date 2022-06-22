@@ -19,7 +19,7 @@ import {
 } from "@/util/manual_utils.ts";
 import VersionSelect from "@/islands/VersionSelect.tsx";
 
-import VERSIONS from "@/data/versions.json" assert { type: "json" };
+import VERSIONS from "@/versions.json" assert { type: "json" };
 
 interface Data {
   tableOfContents: TableOfContents;

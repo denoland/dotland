@@ -12,7 +12,7 @@ import { Header } from "@/components/Header.tsx";
 import { HelloBar } from "@/components/HelloBar.tsx";
 import { Background } from "@/components/HeroBackground.tsx";
 
-import versions from "@/data/versions.json" assert { type: "json" };
+import versions from "@/versions.json" assert { type: "json" };
 
 export default function Home() {
   const complexExampleProgram =
