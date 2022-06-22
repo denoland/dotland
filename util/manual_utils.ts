@@ -1,9 +1,20 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
+<<<<<<< HEAD
 const githubBasepath = "https://cdn.jsdelivr.net/gh/denocn/deno_docs@";
 const docpath = "https://github.com/denocn/deno_docs/blob/";
 import VERSIONS from "../versions.json" assert { type: "json" };
 import { getSourceURL } from "./registry_utils.ts";
+=======
+import compareVersions from "$tiny-version-compare";
+import { getSourceURL } from "./registry_utils.ts";
+import VERSIONS from "@/versions.json" assert { type: "json" };
+
+const githubBasepath = "https://raw.githubusercontent.com/denoland/manual/";
+const oldDocpath = "https://github.com/denoland/deno/blob/";
+const docpath = "https://github.com/denoland/manual/blob/";
+
+>>>>>>> 7c963b672e5c109e7cfe740789c57191ea77287b
 export const versions = VERSIONS.cli;
 
 export interface TableOfContents {

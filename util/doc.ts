@@ -1,5 +1,5 @@
 import type { ModuleIndexWithDoc } from "$doc_components/module_index.tsx";
-import type { DocNode } from "https://deno.land/x/deno_doc@v0.34.0/lib/types.d.ts";
+import type { DocNode } from "$deno_doc/types.d.ts";
 import { getIndex } from "$doc_components/doc.ts";
 import { fileTypeFromURL } from "./registry_utils.ts";
 export type { DocNode };

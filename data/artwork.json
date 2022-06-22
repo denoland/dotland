@@ -297,5 +297,17 @@
       "twitter": "dcdunkan"
     },
     "license": "MIT"
+  },
+  {
+    "date": "2022-06-21",
+    "image": "/images/artwork/snow_den.png",
+    "title": "Snow Den",
+    "alt": "Deno sitting in a snow den",
+    "artist": {
+      "name": "Arc'blroth",
+      "profile_image": "https://avatars.githubusercontent.com/u/45273859",
+      "github": "Arc-blroth"
+    },
+    "license": "CC-BY-SA-4.0"
   }
 ]

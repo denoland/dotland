@@ -1,7 +1,7 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-import { ComponentChildren, h } from "$fresh/runtime.ts";
+import { ComponentChildren, h } from "preact";
 import { tw } from "@twind";
 
 export function InlineCode(

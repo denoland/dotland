@@ -3,9 +3,12 @@
     "@/": "./",
     "@twind": "./util/twind.ts",
 
-    "$fresh/": "https://raw.githubusercontent.com/lucacasonato/fresh/4bb07f4bcebfc205692e53bb61a1e2447d589c8e/",
-    "twind": "https://esm.sh/twind@0.16.16",
-    "twind/": "https://esm.sh/twind@0.16.16/",
+    "$fresh/": "https://deno.land/x/fresh@1.0.0-rc.2/",
+    "preact": "https://esm.sh/preact@10.8.1",
+    "preact/": "https://esm.sh/preact@10.8.1/",
+    "preact-render-to-string": "https://esm.sh/preact-render-to-string@5.1.20?deps=preact@10.8.1",
+    "twind": "https://esm.sh/twind@0.16.17",
+    "twind/": "https://esm.sh/twind@0.16.17/",
     "$prism": "https://esm.sh/prismjs@1.27.0",
     "$prism/": "https://esm.sh/prismjs@1.27.0/",
     "$twas": "https://esm.sh/twas@2.1.2",
@@ -20,6 +23,7 @@
     "$ga4": "https://raw.githubusercontent.com/denoland/ga4/main/mod.ts",
     "$ga": "https://deno.land/x/g_a@0.1.2/mod.ts",
     "$oak_commons": "https://deno.land/x/oak_commons@0.1.1/negotiation.ts",
-    "$doc_components/": "https://deno.land/x/deno_doc_components@0.1.1/"
+    "$doc_components/": "./doc_components/",
+    "$deno_doc/": "https://deno.land/x/deno_doc@v0.34.0/lib/"
   }
 }

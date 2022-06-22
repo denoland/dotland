@@ -2,9 +2,14 @@
 
 import { assertEquals } from "$std/testing/asserts.ts";
 import { ServerContext } from "$fresh/server.ts";
-import manifest from "../fresh.gen.ts";
-const handleRequest = async (req: Request) =>
-  (await ServerContext.fromManifest(manifest)).handler()(req, {
+
+import manifest from "@/fresh.gen.ts";
+import options from "@/options.ts";
+
+const serverCtx = await ServerContext.fromManifest(manifest, options);
+const handler = serverCtx.handler();
+const handleRequest = (req: Request) =>
+  handler(req, {
     localAddr: {
       transport: "tcp",
       hostname: "127.0.0.1",
