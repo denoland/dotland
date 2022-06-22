@@ -9,7 +9,7 @@ import { Footer } from "@/components/Footer.tsx";
 import { Header } from "@/components/Header.tsx";
 import * as Icons from "@/components/Icons.tsx";
 
-import artworks from "../artwork.json" assert { type: "json" };
+import artworks from "@/data/artwork.json" assert { type: "json" };
 
 const ARTWORKS: Artwork[] = artworks.sort((a, b) => a.date > b.date ? -1 : 1);
 
@@ -46,7 +46,7 @@ export default function ArtworkPage() {
           <p class={tw`mt-4 text-lg`}>
             Do you have a piece to display here?{" "}
             <a
-              href="https://github.com/denoland/dotland/blob/main/artwork.json"
+              href="https://github.com/denoland/dotland/blob/main/data/artwork.json"
               class={tw`link`}
             >
               Add it!

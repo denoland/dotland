@@ -17,10 +17,9 @@ import {
   TableOfContents,
   versions,
 } from "@/util/manual_utils.ts";
-
-import versionMeta from "../versions.json" assert { type: "json" };
 import VersionSelect from "@/islands/VersionSelect.tsx";
-import { MagnifyingGlass } from "../components/Icons.tsx";
+
+import VERSIONS from "@/data/versions.json" assert { type: "json" };
 
 interface Data {
   tableOfContents: TableOfContents;
@@ -67,9 +66,9 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
   })();
   const pageTitle = tableOfContentsMap.get(path) || "";
 
-  const stdVersion = ((versionMeta.cli_to_std as Record<string, string>)[
+  const stdVersion = ((VERSIONS.cli_to_std as Record<string, string>)[
     version
-  ]) ?? versionMeta.std[0];
+  ]) ?? VERSIONS.std[0];
 
   const isPreview = isPreviewVersion(version);
 
