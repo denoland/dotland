@@ -62,13 +62,13 @@ export function Footer() {
         />
         <div class={tw`flex space-x-4.5`}>
           <a href="https://github.com/denoland">
-            <Icons.GitHub />
+            <Icons.GitHub class="text-[#666666]" />
           </a>
           <a href="https://discord.gg/deno">
-            <Icons.Discord />
+            <Icons.Discord class="text-[#666666]" />
           </a>
           <a href="https://twitter.com/deno_land">
-            <Icons.Twitter />
+            <Icons.Twitter class="text-[#666666]" />
           </a>
         </div>
       </nav>
