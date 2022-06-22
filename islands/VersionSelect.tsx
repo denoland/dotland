@@ -1,5 +1,8 @@
+// Copyright 2022 the Deno authors. All rights reserved. MIT license.
+
 /** @jsx h */
-import { h, IS_BROWSER } from "$fresh/runtime.ts";
+import { h } from "preact";
+import { IS_BROWSER } from "$fresh/runtime.ts";
 import { tw } from "@twind";
 
 export default function VersionSelect({ versions, selectedVersion }: {

@@ -1,8 +1,7 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { apply, Configuration, setup, tw } from "twind";
+import { apply, Configuration, setup } from "twind";
+export * from "twind";
 export { css } from "twind/css";
-
-export { apply, setup, tw };
 export const config: Configuration = {
   darkMode: "class",
   mode: "silent",

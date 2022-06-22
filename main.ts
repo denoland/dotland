@@ -8,19 +8,25 @@
 /// <reference lib="deno.ns" />
 /// <reference lib="deno.unstable" />
 
-import { ServerContext } from "$fresh/server.ts";
-import { Fragment, h } from "$fresh/runtime.ts";
+import {
+  InnerRenderFunction,
+  RenderContext,
+  ServerContext,
+} from "$fresh/server.ts";
+import { Fragment, h } from "preact";
 import { serve } from "$std/http/server.ts";
 import { router } from "$router";
 import { withLog } from "./util/ga_utils.ts";
-import { setup } from "$doc_components/services.ts";
+import { setup as dcSetup } from "$doc_components/services.ts";
+import { virtualSheet } from "twind/sheets";
+import { config, setup } from "@twind";
 
 import manifest from "./fresh.gen.ts";
 
 import { routes as completionsV2Routes } from "./completions_v2.ts";
 
 const docland = "https://doc.deno.land/";
-await setup({
+await dcSetup({
   resolveHref(current, symbol) {
     // FIXME(bartlomieju): special casing for std here is not ideal
     if (symbol && current.startsWith("/std")) {
@@ -44,7 +50,20 @@ await setup({
   runtime: { Fragment, h },
 });
 
-const ctx = await ServerContext.fromManifest(manifest);
+const sheet = virtualSheet();
+sheet.reset();
+setup({ ...config, sheet });
+
+function render(ctx: RenderContext, render: InnerRenderFunction) {
+  const snapshot = ctx.state.get("twind") as unknown[] | null;
+  sheet.reset(snapshot || undefined);
+  render();
+  ctx.styles.splice(0, ctx.styles.length, ...(sheet).target);
+  const newSnapshot = sheet.reset();
+  ctx.state.set("twind", newSnapshot);
+}
+
+const ctx = await ServerContext.fromManifest(manifest, { render });
 
 const innerHandler = withLog(ctx.handler());
 const handler = router(completionsV2Routes, innerHandler);
