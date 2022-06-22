@@ -1,7 +1,8 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-import { h } from "$fresh/runtime.ts";
+import { h } from "preact";
+
 import { tw } from "@twind";
 import * as Icons from "./Icons.tsx";
 

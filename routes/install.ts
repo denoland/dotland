@@ -1,6 +1,6 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-import { RouteConfig } from "$fresh/runtime.ts";
+import { RouteConfig } from "$fresh/server.ts";
 
 export function handler(req: Request) {
   return Response.redirect(
