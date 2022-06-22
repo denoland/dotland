@@ -8,14 +8,15 @@ import {
 } from "$std/testing/asserts.ts";
 import { ServerContext } from "$fresh/server.ts";
 import { router } from "$router";
-import manifest from "../fresh.gen.ts";
-import { routes as completionsV2Routes } from "../completions_v2.ts";
 
-const handleRequest = async (req: Request) =>
-  router(
-    completionsV2Routes,
-    (await ServerContext.fromManifest(manifest)).handler(),
-  )(req, {
+import manifest from "@/fresh.gen.ts";
+import options from "@/options.ts";
+import { routes as completionsV2Routes } from "@/completions_v2.ts";
+
+const serverCtx = await ServerContext.fromManifest(manifest, options);
+const handler = router(completionsV2Routes, serverCtx.handler());
+const handleRequest = (req: Request) =>
+  handler(req, {
     localAddr: {
       transport: "tcp",
       hostname: "127.0.0.1",

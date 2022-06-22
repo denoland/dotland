@@ -7,10 +7,11 @@ import {
 } from "$std/testing/asserts.ts";
 import { extractAltLineNumberReference } from "@/util/registry_utils.ts";
 import { ServerContext } from "$fresh/server.ts";
-import { Fragment, h } from "$fresh/runtime.ts";
+import { Fragment, h } from "preact";
 import { setup } from "$doc_components/services.ts";
 
-import manifest from "../fresh.gen.ts";
+import manifest from "@/fresh.gen.ts";
+import options from "@/options.ts";
 
 const docland = "https://doc.deno.land/";
 await setup({
@@ -31,8 +32,10 @@ await setup({
   runtime: { Fragment, h },
 });
 
-const handleRequest = async (req: Request) =>
-  (await ServerContext.fromManifest(manifest)).handler()(req, {
+const serverCtx = await ServerContext.fromManifest(manifest, options);
+const handler = serverCtx.handler();
+const handleRequest = (req: Request) =>
+  handler(req, {
     localAddr: {
       transport: "tcp",
       hostname: "127.0.0.1",

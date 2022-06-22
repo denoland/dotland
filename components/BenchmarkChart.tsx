@@ -2,7 +2,7 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h } from "$fresh/runtime.ts";
+import { Fragment, h } from "preact";
 
 import { Column, formatLogScale, logScale } from "@/util/benchmark_utils.ts";
 

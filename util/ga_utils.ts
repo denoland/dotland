@@ -1,6 +1,6 @@
 /* Copyright 2020 the Deno authors. All rights reserved. MIT license. */
+import type { ConnInfo } from "$std/http/server.ts";
 import { accepts } from "$oak_commons";
-import type { ConnInfo } from "https://deno.land/std@0.112.0/http/server.ts";
 import { createReporter, Reporter } from "$ga";
 import type { Event } from "$ga4";
 import {
