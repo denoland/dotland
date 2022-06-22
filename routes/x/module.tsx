@@ -90,6 +90,15 @@ export default function Registry({ params, url, data }: PageProps<Data>) {
         />
         <div
           class={tw
+            `max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8 pt-4 bg-gray-200`}
+        >
+          <TopPanel
+            version={version!}
+            {...{ name, path, isStd, url, ...data }}
+          />
+        </div>
+        <div
+          class={tw
             `max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8 pt-4`}
         >
           <Breadcrumbs
@@ -140,6 +149,105 @@ export default function Registry({ params, url, data }: PageProps<Data>) {
         <Footer simple />
       </div>
     </>
+  );
+}
+
+function TopPanel({
+  name,
+  version,
+  path,
+  isStd,
+  url,
+
+  versions,
+  versionMeta,
+  moduleMeta,
+  versionDeps,
+  rawFile,
+  readmeFile,
+  dirEntries,
+  repositoryURL,
+  sourceURL,
+  readmeCanonicalPath,
+  readmeURL,
+  readmeRepositoryURL,
+  doc,
+}: {
+  name: string;
+  version: string;
+  path: string;
+  isStd: boolean;
+  url: URL;
+} & Data) {
+  const externalDependencies = versionDeps === null
+    ? null
+    : listExternalDependencies(
+      versionDeps.graph,
+      `https://deno.land/x/${name}@${version}${path}`,
+    );
+
+  return (
+    <div class={tw`grid grid-cols-2 gap-4`}>
+      <div>
+        <div class={tw`text-xl font-bold`}>
+          {name}
+        </div>
+        <div class={tw`text-sm`}>
+          {moduleMeta && emojify(moduleMeta.description ?? "")}
+        </div>
+      </div>
+      <div>
+        <div class={tw`grid grid-cols-2 gap-4`}>
+          {versionMeta === undefined
+            ? (
+              <div>
+                <div class={tw`w-4/5 sm:w-full bg-gray-100 h-3 my-2`}></div>
+                <div
+                  class={tw
+                    `w-4/5 sm:w-2/3 bg-gray-100 h-3 my-2 block sm:hidden md:block`}
+                >
+                </div>
+                <div class={tw`mt-3 flex items-center py-0.5`}>
+                  <Icons.GitHub class="mr-2 w-5 h-5 inline text-gray-200" />
+                  <div class={tw`w-4/5 sm:w-2/3 bg-gray-100 h-4`}></div>
+                </div>
+                <div class={tw`mt-2 flex items-center py-0.5`}>
+                  <Icons.Star class="mr-2" title="GitHub Stars" />
+                  <div class={tw`w-1/6 sm:w-1/5 bg-gray-100 h-4`}></div>
+                </div>
+              </div>
+            )
+            : versionMeta === null || moduleMeta === null
+            ? null
+            : (
+              <div>
+                <div class={tw`mt-3 flex items-center`}>
+                  <Icons.GitHub class="mr-2 w-5 h-5 inline text-gray-700" />
+                  <a
+                    class={tw`link`}
+                    href={`https://github.com/${versionMeta.uploadOptions.repository}`}
+                  >
+                    {versionMeta.uploadOptions.repository}
+                  </a>
+                </div>
+                <div class={tw`mt-2 flex items-center`}>
+                  <Icons.Star class="mr-2" title="GitHub Stars" />
+                  <div>{moduleMeta.star_count}</div>
+                </div>
+              </div>
+            )}
+          <div>
+            <VersionSelector
+              versions={versions!.versions}
+              selectedVersion={version}
+              name={name}
+              isStd={isStd}
+              path={path}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
