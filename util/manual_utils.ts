@@ -2,7 +2,7 @@
 
 import compareVersions from "$tiny-version-compare";
 import { getSourceURL } from "./registry_utils.ts";
-import VERSIONS from "@/data/versions.json" assert { type: "json" };
+import VERSIONS from "@/versions.json" assert { type: "json" };
 
 const githubBasepath = "https://raw.githubusercontent.com/denoland/manual/";
 const oldDocpath = "https://github.com/denoland/deno/blob/";
