@@ -9,7 +9,7 @@ import { Footer } from "@/components/Footer.tsx";
 import { Header } from "@/components/Header.tsx";
 import * as Icons from "@/components/Icons.tsx";
 
-import translations from "@/translations.json" assert { type: "json" };
+import translations from "@/data/translations.json" assert { type: "json" };
 
 const TRANSLATIONS: Translation[] = translations.sort((a, b) =>
   a.language < b.language ? -1 : 1
