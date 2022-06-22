@@ -1,0 +1,8 @@
+{
+  "imports": {
+    "twind": "https://esm.sh/twind@0.16.16?pin=v78",
+    "twind/colors": "https://esm.sh/twind@0.16.16/colors?pin=v78",
+    "twind/css": "https://esm.sh/twind@0.16.16/css?pin=v78",
+    "twind/sheets": "https://esm.sh/twind@0.16.16/sheets?pin=v78"
+  }
+}
