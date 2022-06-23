@@ -2,14 +2,6 @@
 
 import { apply, css, type Directive, tw } from "./deps.ts";
 
-const anchorStyles = css({
-  ":global": {
-    ":target, :target > *": apply`bg-gray(200 dark:800)`,
-  },
-  "margin-left": "-1em",
-  "padding-right": "0.5em",
-});
-
 const codeStyles = css({
   ":not(pre) > code": apply
     `font-mono text-sm py-1 px-1.5 rounded text-black bg-gray-100 dark:(text-white bg-gray-800)`,
@@ -54,8 +46,6 @@ const syntaxHighlightingStyles = css({
 });
 
 const styles = {
-  anchor: apply
-    `opacity-0 group-hover:opacity-100 absolute bg-transparent text-gray-600 dark:text-gray-400 ${anchorStyles}`,
   boolean: none,
   classBody: apply`flex flex-col space-y-4`,
   classMethod: none,
@@ -114,14 +104,16 @@ const styles = {
     "& > input:checked ~ label > svg": apply`rotate-0`,
   }),
   panelTitle: apply`block p-2 border(b gray(400 dark:600)) cursor-pointer`,
-  section: apply`text-2xl border(b gray(400 dark:600)) p-2 mt-1 mb-3`,
+  section: apply`text-sm font-bold py-1`,
+  moduleDoc: apply`space-y-6`,
   stringLiteral: none,
   subSection: apply`text-xl p-2 mx-2.5 mt-1 mb-2.5`,
   symbolClass: apply`text-green(800 dark:400) font-bold hover:underline`,
   symbolEnum: apply`text-green(700 dark:500) font-bold hover:underline`,
   symbolFunction: apply`text-cyan(800 dark:400) font-bold hover:underline`,
   symbolInterface: apply`text-cyan(900 dark:300) font-bold hover:underline`,
-  symbolListCell: apply`block lg:table-cell py-1 px-2 align-top`,
+  symbolListCellSymbol: apply`block lg:table-cell py-1 pr-3 text-[#232323] font-bold children:(w-52 block)`,
+  symbolListCellDoc: apply`block lg:table-cell py-1 text-sm text-[#9CA0AA]`,
   symbolListRow: apply`block lg:table-row`,
   symbolListTable: apply`block lg:table`,
   symbolNamespace: apply`text-yellow(800 dark:400) font-bold hover:underline`,

@@ -21,35 +21,22 @@ import {
 
 export const TARGET_RE = /(\s|[\[\]])/g;
 
-function Anchor({ children: name }: { children: Child<string> }) {
-  return (
-    <a
-      href={`#${name}`}
-      class={style("anchor")}
-      aria-label="Anchor"
-      tabIndex={-1}
-    >
-    </a>
-  );
-}
-
 function Entry<Node extends DocNode>(
-  { children, style: entryStyle, ...context }: {
+  { children, ...context }: {
     children: Child<[label: string, node: Node]>;
-    style: StyleKey;
   } & MarkdownContext,
 ) {
   const [label, node] = take(children, true);
   return (
     <tr class={style("symbolListRow")}>
-      <td class={style("symbolListCell")}>
-        <span class={style(entryStyle)}>
+      <td class={style("symbolListCellSymbol")}>
+        <span>
           <DocLink {...context}>{label}</DocLink>
           {maybe(isAbstract(node), <Tag color="yellow">abstract</Tag>)}
           {maybe(isDeprecated(node), <Tag color="gray">👎 deprecated</Tag>)}
         </span>
       </td>
-      <td class={tw`block lg:table-cell ${style("symbolListCell")}`}>
+      <td class={style("symbolListCellDoc")}>
         <MarkdownSummary {...context}>
           {getDocSummary(node)}
         </MarkdownSummary>
@@ -73,11 +60,21 @@ export function DocLink(
   return <a href={href}>{label}</a>;
 }
 
+const colors = {
+  "Classes": "#2FA850",
+  "Functions": "#026BEB",
+  "Interfaces": "#D4A068",
+  "Type Aliases": "",
+  "Namespaces": "",
+  "Enums": "",
+  "Variables": "",
+} as const;
+type sectionTitle = keyof typeof colors;
+
 function Section<Node extends DocNode>(
-  { children, title, style: entryStyle, ...markdownContext }: {
+  { children, title, ...markdownContext }: {
     children: Child<DocNodeTupleArray<Node>>;
-    title: string;
-    style: StyleKey;
+    title: sectionTitle;
   } & MarkdownContext,
 ) {
   const tuples = take(children, true, true);
@@ -87,9 +84,7 @@ function Section<Node extends DocNode>(
       return null;
     }
     displayed.add(label);
-    return (
-      <Entry style={entryStyle} {...markdownContext}>{[label, node]}</Entry>
-    );
+    return <Entry {...markdownContext}>{[label, node]}</Entry>;
   });
   return (
     <div>
@@ -99,13 +94,14 @@ function Section<Node extends DocNode>(
   );
 }
 
-function SectionTitle({ children }: { children: Child<string> }) {
+function SectionTitle({ children }: { children: Child<sectionTitle> }) {
   const name = take(children);
   const id = name.replaceAll(TARGET_RE, "_");
   return (
-    <h2 class={style("section")} id={id}>
-      <Anchor>{id}</Anchor>
-      {name}
+    <h2 class={tw`text-[${colors[name]}] ${style("section")}`} id={id}>
+      <a href={`#${name}`} aria-label="Anchor">
+        {name}
+      </a>
     </h2>
   );
 }
@@ -122,64 +118,45 @@ export function ModuleDoc(
     <article class={style("main")}>
       {maybe(
         !(library || url.endsWith(".d.ts")),
-        <div>
-          <h1 class={style("section")}>Usage</h1>
-          <Usage url={url} />
-          {collection.moduleDoc && (
-            <JsDocModule url={url}>{collection.moduleDoc}</JsDocModule>
-          )}
+        <div class={style("moduleDoc")}>
+          <div>
+            <Usage url={url} />
+            {collection.moduleDoc && (
+              <JsDocModule url={url}>{collection.moduleDoc}</JsDocModule>
+            )}
+          </div>
           {collection.namespace && (
-            <Section
-              title="Namespaces"
-              style="entryNamespace"
-              {...markdownContext}
-            >
+            <Section title="Namespaces" {...markdownContext}>
               {collection.namespace}
             </Section>
           )}
           {collection.class && (
-            <Section title="Classes" style="entryClass" {...markdownContext}>
+            <Section title="Classes" {...markdownContext}>
               {collection.class}
             </Section>
           )}
           {collection.enum && (
-            <Section title="Enums" style="entryEnum" {...markdownContext}>
+            <Section title="Enums" {...markdownContext}>
               {collection.enum}
             </Section>
           )}
           {collection.variable && (
-            <Section
-              title="Variables"
-              style="entryVariable"
-              {...markdownContext}
-            >
+            <Section title="Variables" {...markdownContext}>
               {collection.variable}
             </Section>
           )}
           {collection.function && (
-            <Section
-              title="Functions"
-              style="entryFunction"
-              {...markdownContext}
-            >
+            <Section title="Functions" {...markdownContext}>
               {collection.function}
             </Section>
           )}
           {collection.interface && (
-            <Section
-              title="Interfaces"
-              style="entryInterface"
-              {...markdownContext}
-            >
+            <Section title="Interfaces" {...markdownContext}>
               {collection.interface}
             </Section>
           )}
           {collection.typeAlias && (
-            <Section
-              title="Type Aliases"
-              style="entryTypeAlias"
-              {...markdownContext}
-            >
+            <Section title="Type Aliases" {...markdownContext}>
               {collection.typeAlias}
             </Section>
           )}

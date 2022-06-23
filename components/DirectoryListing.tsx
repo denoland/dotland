@@ -97,7 +97,7 @@ export function DirectoryListing(props: {
             />
           )
           : (
-            <div class={tw`bg-white dark:(bg-gray-900 text-white)`}>
+            <div class={tw`bg-white dark:(bg-gray-900 text-white) p-4`}>
               {props.index.index && (
                 <ModulePathIndex
                   base={basePath}
