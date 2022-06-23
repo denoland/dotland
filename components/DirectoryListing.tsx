@@ -97,7 +97,7 @@ export function DirectoryListing(props: {
             />
           )
           : (
-            <div class={tw`bg-white dark:(bg-gray-900 text-white) p-4`}>
+            <div class={tw`bg-white dark:(bg-gray-900 text-white) p-4 space-y-12`}>
               {props.index.index && (
                 <ModulePathIndex
                   base={basePath}
@@ -107,7 +107,6 @@ export function DirectoryListing(props: {
                   {props.index.index}
                 </ModulePathIndex>
               )}
-              {props.index.index && props.index.indexModule && <hr class={tw`my-4 border-gray-300 border`} />}
               {props.index.indexModule && (
                 <ModuleDoc url={`${baseURL}${props.index.indexModule}`}>
                   {props.index.nodes}
