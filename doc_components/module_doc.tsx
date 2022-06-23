@@ -122,7 +122,9 @@ export function ModuleDoc(
           <div class={tw`space-y-3`}>
             <Usage url={url} />
             {collection.moduleDoc && (
-              <JsDocModule url={url} markdownStyle="usage">{collection.moduleDoc}</JsDocModule>
+              <JsDocModule url={url} markdownStyle="usage">
+                {collection.moduleDoc}
+              </JsDocModule>
             )}
           </div>
           {collection.namespace && (
