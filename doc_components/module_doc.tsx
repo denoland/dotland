@@ -99,7 +99,7 @@ function SectionTitle({ children }: { children: Child<sectionTitle> }) {
   const id = name.replaceAll(TARGET_RE, "_");
   return (
     <h2 class={tw`text-[${colors[name]}] ${style("section")}`} id={id}>
-      <a href={`#${name}`} aria-label="Anchor">
+      <a href={`#${id}`} aria-label="Anchor">
         {name}
       </a>
     </h2>
