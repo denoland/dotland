@@ -3,7 +3,7 @@
 import { getSourceURL } from "./registry_utils.ts";
 import VERSIONS from "@/versions.json" assert { type: "json" };
 
-const githubBasepath = "https://raw.githubusercontent.com/denocn/deno_docs/";
+const githubBasepath = "https://cdn.jsdelivr.net/gh/denocn/deno_docs@";
 const docpath = "https://github.com/denocn/deno_docs/blob/";
 
 export const versions = VERSIONS.cli;
