@@ -1,15 +1,11 @@
 # Deno 中文网站
 
-[![ci](https://github.com/justjavac/deno_website2/actions/workflows/ci.yml/badge.svg)](https://github.com/justjavac/deno_website2/actions)
-
 Deno 中文网站的源码。
 
-网站包含 2 部分：
+我们希望为 Deno 的模块提供漂亮且语义化的 URL。例如: https://denoland-cn.deno.dev/std/http/server.ts
 
-1. 部署在 Deno Deploy 上的 worker
-2. 部署在 Vercel 上的 Next.js
-
-## 其他翻译
+我们通过 HTTP 的 "Accept:" 头来判断客户端是否 是否需要 HTML。 如果它确实需要 HTML，我们只需渲染 html，否则我们 代理来自 S3
+存储桶的文件内容。
 
 - 中文手册 [denocn/deno_docs](https://github.com/denocn/deno_docs)
 

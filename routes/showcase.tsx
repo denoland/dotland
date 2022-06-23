@@ -2,13 +2,14 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, Head } from "$fresh/runtime.ts";
+import { Fragment, h } from "preact";
+import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
 import { Footer } from "@/components/Footer.tsx";
 import { Header } from "@/components/Header.tsx";
 import * as Icons from "@/components/Icons.tsx";
 
-import projects from "@/showcase.json" assert { type: "json" };
+import projects from "@/data/showcase.json" assert { type: "json" };
 
 const PROJECTS: Project[] = projects;
 
@@ -41,7 +42,7 @@ export default function ShowcasePage() {
           <p class={tw`mt-4 text-lg`}>
             Do you have a project using Deno?{" "}
             <a
-              href="https://github.com/denoland/dotland/blob/main/showcase.json"
+              href="https://github.com/denoland/dotland/blob/main/data/showcase.json"
               class={tw`link`}
             >
               Add it!
