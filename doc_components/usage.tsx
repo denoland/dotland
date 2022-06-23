@@ -70,7 +70,7 @@ export function Usage(
   } = parseUsage(url, name, isType);
   const fnName = `cis${guid++}`;
   return (
-    <div class={style("markdown")}>
+    <div class={style("usage")}>
       <pre>
         <span
           dangerouslySetInnerHTML={{
