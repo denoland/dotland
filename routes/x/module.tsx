@@ -185,7 +185,12 @@ function TopPanel({
     <div class={tw`flex flex-row flex-wrap justify-between items-center gap-4`}>
       <div>
         <div class={tw`text-xl font-bold`}>
-          {name}
+          <Breadcrumbs
+            name={name}
+            version={version}
+            path={path}
+            isStd={isStd}
+          />
         </div>
         <div class={tw`text-sm`}>
           {moduleMeta && emojify(moduleMeta.description ?? "")}
@@ -394,28 +399,22 @@ function Breadcrumbs({
   const segments = path.split("/").splice(1);
   return (
     <p class={tw`text-gray-500`}>
-      <a href="/" class={tw`link`}>
-        deno.land
-      </a>{" "}
-      / {!isStd && (
+      {!isStd && (
         <>
           <a href="/x" class={tw`link`}>
-            x
+            /x
           </a>{" "}
           /{" "}
         </>
       )}
       <a class={tw`link`} href={getBasePath({ isStd, name, version })}>
-        {name}
-        {version ? `@${version}` : ""}
+        {name} /{" "}
       </a>
       {path?.length > 0 &&
         segments.map((p, i) => {
           const link = segments.slice(0, i + 1).join("/");
           return (
             <Fragment key={i}>
-              {" "}
-              /{" "}
               <a
                 href={`${getBasePath({ isStd, name, version })}${
                   link ? `/${link}` : ""
@@ -424,6 +423,7 @@ function Breadcrumbs({
               >
                 {p}
               </a>
+              {i !== segments.length - 1 ? " / " : ""}
             </Fragment>
           );
         })}
