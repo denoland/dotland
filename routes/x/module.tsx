@@ -174,12 +174,13 @@ function TopPanel({
   isStd: boolean;
   url: URL;
 } & Data) {
-  const externalDependencies = versionDeps === null
-    ? null
-    : listExternalDependencies(
-      versionDeps.graph,
-      `https://deno.land/x/${name}@${version}${path}`,
-    );
+  console.log(dirEntries);
+  // const externalDependencies = versionDeps === null
+  //   ? null
+  //   : listExternalDependencies(
+  //     versionDeps.graph,
+  //     `https://deno.land/x/${name}@${version}${path}`,
+  //   );
 
   return (
     <div class={tw`flex flex-row flex-wrap justify-between items-center gap-4`}>
@@ -190,6 +191,7 @@ function TopPanel({
             version={version}
             path={path}
             isStd={isStd}
+            isDirectory={dirEntries?.length > 0}
           />
         </div>
         <div class={tw`text-sm`}>
@@ -390,11 +392,13 @@ function Breadcrumbs({
   version,
   path,
   isStd,
+  isDirectory,
 }: {
   name: string;
   version: string | undefined;
   path: string;
   isStd: boolean;
+  isDirectory: boolean;
 }) {
   const segments = path.split("/").splice(1);
   return (
@@ -423,7 +427,7 @@ function Breadcrumbs({
               >
                 {p}
               </a>
-              {i !== segments.length - 1 ? " / " : ""}
+              {isDirectory ? " / " : ""}
             </Fragment>
           );
         })}
