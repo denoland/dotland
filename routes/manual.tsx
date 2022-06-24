@@ -341,6 +341,15 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
           </main>
         </div>
       </div>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+        (function() {
+          document.querySelectorAll(".toc-active").forEach(el=>{el.scrollIntoView({block:"center"});});
+        })();
+      `,
+        }}
+      />
     </div>
   );
 }
