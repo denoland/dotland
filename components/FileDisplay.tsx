@@ -48,7 +48,11 @@ export function FileDisplay(props: {
           }`}
       >
         <div class={tw`flex items-center`}>
-          {isReadme(filename) && <Icons.LightOpenBook />}
+          {isReadme(filename) && (
+            <span class={tw`hidden sm:inline-block`}>
+              <Icons.LightOpenBook />
+            </span>
+          )}
           <span class={tw`font-medium`}>
             {props.canonicalPath === props.url.pathname
               ? filename
@@ -68,13 +72,15 @@ export function FileDisplay(props: {
             )}
             {props.repositoryURL &&
               (
-                <a href={props.repositoryURL} class={tw`link ml-4`}>
+                <a href={props.repositoryURL} class={tw`link ml-2 sm:ml-4`}>
                   Repository
                 </a>
               )}
           </div>
           {hasToggle && (
-            <div class={tw`inline-block ml-4 inline-flex shadow-sm rounded-md`}>
+            <div
+              class={tw`inline-flex ml-4 flex-nowrap shadow-sm rounded-md`}
+            >
               <a
                 href={searchDoc.href}
                 class={tw
