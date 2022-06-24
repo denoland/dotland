@@ -27,9 +27,9 @@ export default function VersionSelect({ versions, selectedVersion }: {
             {selectedVersion}
           </option>
         )}
-        {Object.keys(versions).map((tag) => (
+        {Object.keys(versions).map((tag, index) => (
           <option key={tag} value={tag}>
-            {tag}
+            {tag} {index === 0 ? "(latest)" : ""}
           </option>
         ))}
       </select>
