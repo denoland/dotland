@@ -88,14 +88,16 @@ export default function Registry({ params, url, data }: PageProps<Data>) {
           subtitle={name === "std" ? "Standard Library" : "Third Party Modules"}
           widerContent
         />
-        <div
-          class={tw
-            `max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8 pt-4 bg-gray-200`}
-        >
-          <TopPanel
-            version={version!}
-            {...{ name, path, isStd, url, ...data }}
-          />
+        <div class={tw`bg-gray-200`}>
+          <div
+            class={tw
+              `max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8 pt-4`}
+          >
+            <TopPanel
+              version={version!}
+              {...{ name, path, isStd, url, ...data }}
+            />
+          </div>
         </div>
         <div
           class={tw
