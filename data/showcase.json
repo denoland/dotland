@@ -75,5 +75,11 @@
     "image": "/images/showcase/euromillionsgenerator.png",
     "title": "Euro Millions Key Generator",
     "link": "https://euromillionsgenerator.com/"
+  },
+  {
+    "image": "/images/showcase/pbkit.png",
+    "title": "pbkit",
+    "link": "https://pbkit.dev/",
+    "github": "pbkit/pbkit"
   }
 ]
