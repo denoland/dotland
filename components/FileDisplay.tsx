@@ -118,9 +118,11 @@ export function FileDisplay(props: {
           case "jsx":
             if (!codeview && props.docNodes) {
               return (
-                <ModuleDoc url={props.url.href}>
-                  {props.docNodes}
-                </ModuleDoc>
+                <div class={tw`p-4`}>
+                  <ModuleDoc url={props.url.href}>
+                    {props.docNodes}
+                  </ModuleDoc>
+                </div>
               );
             }
           /* falls through */
