@@ -58,12 +58,19 @@ export function Footer() {
               "Blog": "https://deno.com/blog",
               "Jobs": "https://deno.com/jobs",
               "Pricing": "https://deno.com/deploy/pricing",
-              "Status": "https://status.deno.com",
               "News": "https://deno.news",
             }}
           />
         </div>
         <div class={tw`space-y-5`}>
+          <iframe
+            src="https://denostatus.com/embed-status/light-sm"
+            width="230"
+            height="61"
+            frameBorder="0"
+            scrolling="no"
+            style="border: none;"
+          />
           <span class={tw`text-xs text-gray-400`}>
             Copyright © 2022 Deno Company<br />All rights reserved.
           </span>
