@@ -279,242 +279,103 @@ function ModuleView({
   const basePath = getBasePath({ isStd, name, version });
   const canonicalPath = `${basePath}${path}`;
 
-  const externalDependencies = versionDeps === null
-    ? null
-    : listExternalDependencies(
-      versionDeps.graph,
-      `https://deno.land/x/${name}@${version}${path}`,
-    );
-
-  function SidePanel() {
-    return (
-      <div class={tw`relative sm:static row-start-1 md:row-start-auto`}>
-        <div
-          class={tw
-            `sticky top-4 col-span-1 flex flex-col sm:flex-row md:flex-col gap-4`}
-        >
-          <div
-            class={tw
-              `max-w-sm w-full shadow-sm rounded-lg border border-gray-200 overflow-hidden`}
-          >
-            <div class={tw`bg-gray-50 p-4`}>
-              <div class={tw`text-xl font-bold`}>{name}</div>
-              {versionMeta === undefined
-                ? (
-                  <>
-                    <div class={tw`w-4/5 sm:w-full bg-gray-100 h-3 my-2`}></div>
-                    <div
-                      class={tw
-                        `w-4/5 sm:w-2/3 bg-gray-100 h-3 my-2 block sm:hidden md:block`}
-                    >
-                    </div>
-                    <div class={tw`mt-3 flex items-center py-0.5`}>
-                      <Icons.GitHub class="mr-2 w-5 h-5 inline text-gray-200" />
-                      <div class={tw`w-4/5 sm:w-2/3 bg-gray-100 h-4`}></div>
-                    </div>
-                    <div class={tw`mt-2 flex items-center py-0.5`}>
-                      <Icons.Star class="mr-2" title="GitHub Stars" />
-                      <div class={tw`w-1/6 sm:w-1/5 bg-gray-100 h-4`}></div>
-                    </div>
-                  </>
-                )
-                : versionMeta === null || moduleMeta === null
-                ? null
-                : (
-                  <>
-                    <div class={tw`text-sm`}>
-                      {emojify(moduleMeta.description ?? "")}
-                    </div>
-                    <div class={tw`mt-3 flex items-center`}>
-                      <Icons.GitHub class="mr-2 w-5 h-5 inline text-gray-700" />
-                      <a
-                        class={tw`link`}
-                        href={`https://github.com/${versionMeta.uploadOptions.repository}`}
-                      >
-                        {versionMeta.uploadOptions.repository}
-                      </a>
-                    </div>
-                    <div class={tw`mt-2 flex items-center`}>
-                      <Icons.Star class="mr-2" title="GitHub Stars" />
-                      <div>{moduleMeta.star_count}</div>
-                    </div>
-                  </>
-                )}
-              <div class={tw`mt-3 w-full`}>
-                <VersionSelector
-                  versions={versions!.versions}
-                  selectedVersion={version}
-                  name={name}
-                  isStd={isStd}
-                  path={path}
-                />
-              </div>
-            </div>
-          </div>
-
-          <div
-            class={tw
-              `max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4`}
-          >
-            <p class={tw`text-md font-semibold mb-2`}>Version Info</p>
-            {versionMeta === null
-              ? null
-              : (
-                <div class={tw`mt-2 flex text-sm items-center`}>
-                  <Icons.Tag title="Tagged at" />
-                  <div title={versionMeta.uploadedAt.toLocaleString()}>
-                    {twas(versionMeta.uploadedAt.getTime())}
-                  </div>
-                </div>
-              )}
-          </div>
-          {externalDependencies !== null && (
+  return (
+    <div>
+      {(() => {
+        if (!versionMeta?.directoryListing.find((d) => d.path === path)) {
+          return (
+            <ErrorMessage title="404 - Not Found">
+              This file or directory could not be found.
+            </ErrorMessage>
+          );
+        } else if (dirEntries === null && rawFile === null) {
+          // No files
+          return (
             <div
               class={tw
-                `max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4`}
+                `rounded-lg overflow-hidden border border-gray-200 bg-white`}
             >
-              <p class={tw`text-md font-semibold mb-2`}>
-                External Dependencies
-              </p>
-              {externalDependencies && (
-                <>
-                  <div class={tw`mt-2 overflow-x-auto`}>
-                    {externalDependencies.map((url) => (
-                      <p key={url}>
-                        {url.startsWith("https://deno.land/")
-                          ? (
-                            <a
-                              href={url.replace("https://deno.land", "")}
-                              class={tw`link text-sm truncate`}
-                            >
-                              {url}
-                            </a>
-                          )
-                          : (
-                            <a href={url} class={tw`link text-sm truncate`}>
-                              {url}
-                            </a>
-                          )}
-                      </p>
-                    ))}
-                  </div>
-                  <div class={tw`text-sm mt-2 italic`}>
-                    {externalDependencies.length === 0
-                      ? "No external dependencies 🎉"
-                      : externalDependencies.length +
-                        (externalDependencies.length === 1
-                          ? " external dependency"
-                          : " external dependencies")}
-                  </div>
-                </>
+              {versionMeta && (
+                <DirectoryListing
+                  name={name}
+                  version={version}
+                  path={path}
+                  dirListing={versionMeta.directoryListing}
+                  repositoryURL={repositoryURL}
+                  url={url}
+                  index={doc as Index}
+                />
+              )}
+              <div class={tw`w-full p-4 text-gray-400 italic`}>No files.</div>
+            </div>
+          );
+        } else if (rawFile instanceof Error) {
+          return (
+            <div
+              class={tw
+                `rounded-lg overflow-hidden border border-gray-200 bg-white`}
+            >
+              {versionMeta && (
+                <DirectoryListing
+                  name={name}
+                  version={version}
+                  path={path}
+                  dirListing={versionMeta.directoryListing}
+                  repositoryURL={repositoryURL}
+                  url={url}
+                  index={doc as Index}
+                />
+              )}
+              <div class={tw`w-full p-4 text-gray-400 italic`}>
+                {rawFile.message}
+              </div>
+            </div>
+          );
+        } else {
+          return (
+            <div class={tw`flex flex-col gap-4`}>
+              {versionMeta && dirEntries && (
+                <DirectoryListing
+                  name={name}
+                  version={version}
+                  path={path}
+                  dirListing={versionMeta.directoryListing}
+                  repositoryURL={repositoryURL}
+                  url={url}
+                  index={doc as Index}
+                />
+              )}
+              {rawFile !== null && (
+                <FileDisplay
+                  raw={rawFile.content}
+                  filetypeOverride={rawFile.highlight ? undefined : "text"}
+                  canonicalPath={canonicalPath}
+                  sourceURL={sourceURL}
+                  repositoryURL={repositoryURL}
+                  baseURL={basePath}
+                  stdVersion={stdVersion}
+                  url={url}
+                  docNodes={doc as DocNode[]}
+                />
+              )}
+              {typeof readmeFile === "string" &&
+                typeof readmeURL === "string" &&
+                typeof readmeCanonicalPath === "string" && (
+                <FileDisplay
+                  raw={readmeFile}
+                  canonicalPath={readmeCanonicalPath}
+                  sourceURL={readmeURL}
+                  repositoryURL={readmeRepositoryURL}
+                  baseURL={basePath}
+                  stdVersion={stdVersion}
+                  url={url}
+                  docNodes={doc as DocNode[]}
+                />
               )}
             </div>
-          )}
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div class={tw`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4`}>
-      <div class={tw`col-span-1 md:col-span-2 lg:col-span-3`}>
-        {(() => {
-          if (!versionMeta?.directoryListing.find((d) => d.path === path)) {
-            return (
-              <ErrorMessage title="404 - Not Found">
-                This file or directory could not be found.
-              </ErrorMessage>
-            );
-          } else if (dirEntries === null && rawFile === null) {
-            // No files
-            return (
-              <div
-                class={tw
-                  `rounded-lg overflow-hidden border border-gray-200 bg-white`}
-              >
-                {versionMeta && (
-                  <DirectoryListing
-                    name={name}
-                    version={version}
-                    path={path}
-                    dirListing={versionMeta.directoryListing}
-                    repositoryURL={repositoryURL}
-                    url={url}
-                    index={doc as Index}
-                  />
-                )}
-                <div class={tw`w-full p-4 text-gray-400 italic`}>No files.</div>
-              </div>
-            );
-          } else if (rawFile instanceof Error) {
-            return (
-              <div
-                class={tw
-                  `rounded-lg overflow-hidden border border-gray-200 bg-white`}
-              >
-                {versionMeta && (
-                  <DirectoryListing
-                    name={name}
-                    version={version}
-                    path={path}
-                    dirListing={versionMeta.directoryListing}
-                    repositoryURL={repositoryURL}
-                    url={url}
-                    index={doc as Index}
-                  />
-                )}
-                <div class={tw`w-full p-4 text-gray-400 italic`}>
-                  {rawFile.message}
-                </div>
-              </div>
-            );
-          } else {
-            return (
-              <div class={tw`flex flex-col gap-4`}>
-                {versionMeta && dirEntries && (
-                  <DirectoryListing
-                    name={name}
-                    version={version}
-                    path={path}
-                    dirListing={versionMeta.directoryListing}
-                    repositoryURL={repositoryURL}
-                    url={url}
-                    index={doc as Index}
-                  />
-                )}
-                {rawFile !== null && (
-                  <FileDisplay
-                    raw={rawFile.content}
-                    filetypeOverride={rawFile.highlight ? undefined : "text"}
-                    canonicalPath={canonicalPath}
-                    sourceURL={sourceURL}
-                    repositoryURL={repositoryURL}
-                    baseURL={basePath}
-                    stdVersion={stdVersion}
-                    url={url}
-                    docNodes={doc as DocNode[]}
-                  />
-                )}
-                {typeof readmeFile === "string" &&
-                  typeof readmeURL === "string" &&
-                  typeof readmeCanonicalPath === "string" && (
-                  <FileDisplay
-                    raw={readmeFile}
-                    canonicalPath={readmeCanonicalPath}
-                    sourceURL={readmeURL}
-                    repositoryURL={readmeRepositoryURL}
-                    baseURL={basePath}
-                    stdVersion={stdVersion}
-                    url={url}
-                    docNodes={doc as DocNode[]}
-                  />
-                )}
-              </div>
-            );
-          }
-        })()}
-      </div>
-      <SidePanel />
+          );
+        }
+      })()}
     </div>
   );
 }
