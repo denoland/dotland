@@ -94,9 +94,6 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
       <script
         dangerouslySetInnerHTML={{
           __html: `
-        window.onload = function() {
-          document.querySelectorAll(".toc-active").forEach(el=>{el.scrollIntoView({block:"center"});});
-        }
         docsearch({
           container: "#manualSearch",
           appId: "DMFING7U5D",
@@ -344,6 +341,16 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
           </main>
         </div>
       </div>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+        (function() {
+          console.log("Hallo");
+          document.querySelectorAll(".toc-active").forEach(el=>{el.scrollIntoView({block:"center"});});
+        })();
+      `,
+        }}
+      />
     </div>
   );
 }
