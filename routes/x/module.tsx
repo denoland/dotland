@@ -174,7 +174,6 @@ function TopPanel({
   isStd: boolean;
   url: URL;
 } & Data) {
-  console.log(dirEntries);
   // const externalDependencies = versionDeps === null
   //   ? null
   //   : listExternalDependencies(
