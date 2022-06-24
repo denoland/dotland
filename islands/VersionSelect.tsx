@@ -10,7 +10,7 @@ export default function VersionSelect({ versions, selectedVersion }: {
   selectedVersion: string;
 }) {
   return (
-    <div class={tw`max-w-xs rounded-md shadow-sm w-full`}>
+    <div class={tw`rounded-md shadow-sm w-full`}>
       <select
         class={tw
           `block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5`}
