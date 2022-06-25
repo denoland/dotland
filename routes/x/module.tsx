@@ -83,21 +83,15 @@ export default function Registry({ params, url, data }: PageProps<Data>) {
       <Head>
         <title>{name + (version ? `@${version}` : "") + " | Deno"}</title>
       </Head>
-      <div class={tw`bg-gray-50 min-h-full`}>
+      <div class={tw`bg-[#FFFFFFE5] min-h-full`}>
         <Header
           subtitle={name === "std" ? "Standard Library" : "Third Party Modules"}
           widerContent
         />
-        <div class={tw`bg-gray-100 border-b-1`}>
-          <div
-            class={tw`max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 py-8`}
-          >
-            <TopPanel
-              version={version!}
-              {...{ name, path, isStd, url, ...data }}
-            />
-          </div>
-        </div>
+        <TopPanel
+          version={version!}
+          {...{ name, path, isStd, ...data }}
+        />
         <div
           class={tw
             `max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8 pt-4`}
@@ -152,27 +146,16 @@ function TopPanel({
   version,
   path,
   isStd,
-  url,
 
   versions,
   versionMeta,
   moduleMeta,
   versionDeps,
-  rawFile,
-  readmeFile,
-  dirEntries,
-  repositoryURL,
-  sourceURL,
-  readmeCanonicalPath,
-  readmeURL,
-  readmeRepositoryURL,
-  doc,
 }: {
   name: string;
   version: string;
   path: string;
   isStd: boolean;
-  url: URL;
 } & Data) {
   // const externalDependencies = versionDeps === null
   //   ? null
@@ -182,71 +165,78 @@ function TopPanel({
   //   );
 
   return (
-    <div class={tw`flex flex-row flex-wrap justify-between items-center gap-4`}>
-      <div>
-        <div class={tw`text-xl font-bold`}>
-          <Breadcrumbs
-            name={name}
-            version={version}
-            path={path}
-            isStd={isStd}
-            isDirectory={dirEntries?.length > 0}
-          />
-        </div>
-        <div class={tw`text-sm`}>
-          {moduleMeta && emojify(moduleMeta.description ?? "")}
-        </div>
-      </div>
-      <div class={tw`flex flex-row flex-wrap items-center gap-4`}>
-        {versionMeta === undefined
-          ? (
-            <div>
-              <div class={tw`w-4/5 sm:w-full bg-gray-100 h-3 my-2`}></div>
-              <div
-                class={tw
-                  `w-4/5 sm:w-2/3 bg-gray-100 h-3 my-2 block sm:hidden md:block`}
-              >
-              </div>
-              <div class={tw`mt-3 flex items-center py-0.5`}>
-                <Icons.GitHub class="mr-2 w-5 h-5 inline text-gray-200" />
-                <div class={tw`w-4/5 sm:w-2/3 bg-gray-100 h-4`}></div>
-              </div>
-              <div class={tw`mt-2 flex items-center py-0.5`}>
-                <Icons.Star class="mr-2" title="GitHub Stars" />
-                <div class={tw`w-1/6 sm:w-1/5 bg-gray-100 h-4`}></div>
-              </div>
+    <div class={tw`bg-[#F8F7F6] border-b-1`}>
+      <div
+        class={tw
+          `max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 py-8 md:h-36 flex items-center`}
+      >
+        <div
+          class={tw
+            `flex flex-row flex-wrap justify-between items-center w-full gap-4`}
+        >
+          <div>
+            <Breadcrumbs
+              name={name}
+              version={version}
+              path={path}
+              isStd={isStd}
+            />
+            <div class={tw`text-sm`}>
+              {moduleMeta && emojify(moduleMeta.description ?? "")}
             </div>
-          )
-          : versionMeta === null || moduleMeta === null
-          ? null
-          : (
-            <div
-              class={tw
-                `flex flex-row flex-auto justify-center items-center gap-4 border-1 rounded-md py-2 px-5`}
-            >
-              <div class={tw`flex items-center`}>
-                <Icons.GitHub class="mr-2 w-5 h-5 inline text-gray-700" />
-                <a
-                  class={tw`link`}
-                  href={`https://github.com/${versionMeta.uploadOptions.repository}`}
+          </div>
+          <div class={tw`flex flex-row flex-wrap items-center gap-4`}>
+            {versionMeta === undefined
+              ? (
+                <div>
+                  <div class={tw`w-4/5 sm:w-full bg-gray-100 h-3 my-2`}></div>
+                  <div
+                    class={tw
+                      `w-4/5 sm:w-2/3 bg-gray-100 h-3 my-2 block sm:hidden md:block`}
+                  >
+                  </div>
+                  <div class={tw`mt-3 flex items-center py-0.5`}>
+                    <Icons.GitHub class="mr-2 w-5 h-5 inline text-gray-200" />
+                    <div class={tw`w-4/5 sm:w-2/3 bg-gray-100 h-4`}></div>
+                  </div>
+                  <div class={tw`mt-2 flex items-center py-0.5`}>
+                    <Icons.Star class="mr-2" title="GitHub Stars" />
+                    <div class={tw`w-1/6 sm:w-1/5 bg-gray-100 h-4`}></div>
+                  </div>
+                </div>
+              )
+              : versionMeta === null || moduleMeta === null
+              ? null
+              : (
+                <div
+                  class={tw
+                    `flex flex-row flex-auto justify-center items-center gap-4 border-1 rounded-md py-2 px-5`}
                 >
-                  {versionMeta.uploadOptions.repository}
-                </a>
-              </div>
-              <div class={tw`flex items-center`}>
-                <Icons.Star class="mr-2" title="GitHub Stars" />
-                <div>{moduleMeta.star_count}</div>
-              </div>
+                  <div class={tw`flex items-center`}>
+                    <Icons.GitHub class="mr-2 w-5 h-5 inline text-gray-700" />
+                    <a
+                      class={tw`link`}
+                      href={`https://github.com/${versionMeta.uploadOptions.repository}`}
+                    >
+                      {versionMeta.uploadOptions.repository}
+                    </a>
+                  </div>
+                  <div class={tw`flex items-center`}>
+                    <Icons.Star class="mr-2" title="GitHub Stars" />
+                    <div>{moduleMeta.star_count}</div>
+                  </div>
+                </div>
+              )}
+            <div class={tw`flex-auto`}>
+              <VersionSelector
+                versions={versions!.versions}
+                selectedVersion={version}
+                name={name}
+                isStd={isStd}
+                path={path}
+              />
             </div>
-          )}
-        <div class={tw`flex-auto`}>
-          <VersionSelector
-            versions={versions!.versions}
-            selectedVersion={version}
-            name={name}
-            isStd={isStd}
-            path={path}
-          />
+          </div>
         </div>
       </div>
     </div>
@@ -391,45 +381,41 @@ function Breadcrumbs({
   version,
   path,
   isStd,
-  isDirectory,
 }: {
   name: string;
   version: string | undefined;
   path: string;
   isStd: boolean;
-  isDirectory: boolean;
 }) {
   const segments = path.split("/").splice(1);
+  segments.unshift(name + (version ? `@${version}` : ""));
+  if (!isStd) {
+    segments.unshift("x");
+  }
+
+  let seg = "";
+  const out: [string, string][] = [];
+  for (const segment of segments) {
+    seg += "/" + segment;
+    out.push([segment, seg]);
+  }
+
   return (
-    <p class={tw`text-gray-500`}>
-      {!isStd && (
-        <>
-          <a href="/x" class={tw`link`}>
-            /x
-          </a>{" "}
-          /{" "}
-        </>
-      )}
-      <a class={tw`link`} href={getBasePath({ isStd, name, version })}>
-        {name} /{" "}
-      </a>
-      {path?.length > 0 &&
-        segments.map((p, i) => {
-          const link = segments.slice(0, i + 1).join("/");
-          return (
-            <Fragment key={i}>
-              <a
-                href={`${getBasePath({ isStd, name, version })}${
-                  link ? `/${link}` : ""
-                }`}
-                class={tw`link`}
-              >
-                {p}
-              </a>
-              {isDirectory ? " / " : ""}
-            </Fragment>
-          );
-        })}
+    <p class={tw`text-xl leading-6 font-bold`}>
+      {out.map(([seg, url], i) => {
+        return (
+          <Fragment key={i}>
+            {i !== 0 && "/"}
+            {i === (segments.length - 1)
+              ? <span class={tw`text-black`}>{seg}</span>
+              : (
+                <a href={url} class={tw`link`}>
+                  {seg}
+                </a>
+              )}
+          </Fragment>
+        );
+      })}
     </p>
   );
 }
@@ -449,9 +435,6 @@ function VersionSelector({
 }) {
   return (
     <div class={tw`w-full`}>
-      <label htmlFor="version" class={tw`sr-only`}>
-        Version
-      </label>
       <VersionSelect
         versions={Object.fromEntries(
           versions.map((

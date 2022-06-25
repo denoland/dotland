@@ -18,13 +18,26 @@ export const config: Configuration = {
       ],
     },
     extend: {
+      colors: {
+        default: "#232323",
+        ultralight: "#F8F7F6",
+        "light-border": "#EEEEEE",
+        "dark-border": "#DDDDDD",
+
+        "tag-blue-bg": "#056CF025",
+        "tag-blue": "#056CF0",
+      },
+      opacity: {
+        15: ".15",
+      },
       lineHeight: {
         0: "0",
       },
       /*fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
       },*/
-      width: {
+      spacing: {
+        22: "5.5rem",
         72: "18rem",
       },
       animation: {

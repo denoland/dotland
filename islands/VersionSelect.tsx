@@ -4,16 +4,32 @@
 import { h } from "preact";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { tw } from "@twind";
+import { Tag } from "@/components/Tag.tsx";
 
 export default function VersionSelect({ versions, selectedVersion }: {
   versions: Record<string, string>;
   selectedVersion: string;
 }) {
+  const selectedIsLatest = selectedVersion === Object.keys(versions)[0];
   return (
-    <div class={tw`rounded-md shadow-sm w-full`}>
+    <div class={tw`h-10 relative`}>
+      <label htmlFor="version" class={tw`sr-only`}>
+        Version
+      </label>
+      {selectedIsLatest && (
+        <div
+          class={tw
+            `inline flex absolute pointer-events-none w-full h-full items-center justify-end pr-8`}
+        >
+          <Tag color="blue">Latest</Tag>
+        </div>
+      )}
       <select
+        id="version"
         class={tw
-          `block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5`}
+          `rounded-md block border-dark-border form-select leading-none font-semibold ${
+            selectedIsLatest ? "pr-22" : ""
+          } bg-transparent w-full h-full sm:text-sm sm:leading-5`}
         value={selectedVersion}
         onChange={(e) => {
           if (e.currentTarget.value !== selectedVersion) {
@@ -29,7 +45,7 @@ export default function VersionSelect({ versions, selectedVersion }: {
         )}
         {Object.keys(versions).map((tag, index) => (
           <option key={tag} value={tag}>
-            {tag} {index === 0 ? "(latest)" : ""}
+            {tag}
           </option>
         ))}
       </select>
