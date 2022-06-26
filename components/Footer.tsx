@@ -59,6 +59,7 @@ export function Footer() {
               "Jobs": "https://deno.com/jobs",
               "Pricing": "https://deno.com/deploy/pricing",
               "News": "https://deno.news",
+              "Privacy Policy": "https://deno.com/deploy/docs/privacy-policy",
             }}
           />
         </div>
