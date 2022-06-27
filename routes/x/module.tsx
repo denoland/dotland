@@ -186,47 +186,26 @@ function TopPanel({
             </div>
           </div>
           <div class={tw`flex flex-row flex-wrap items-center gap-4`}>
-            {versionMeta === undefined
-              ? (
-                <div>
-                  <div class={tw`w-4/5 sm:w-full bg-gray-100 h-3 my-2`}></div>
-                  <div
-                    class={tw
-                      `w-4/5 sm:w-2/3 bg-gray-100 h-3 my-2 block sm:hidden md:block`}
+            {versionMeta && moduleMeta && (
+              <div
+                class={tw
+                  `flex flex-row flex-auto justify-center items-center gap-4 border-1 rounded-md py-2 px-5`}
+              >
+                <div class={tw`flex items-center`}>
+                  <Icons.GitHub class="mr-2 w-5 h-5 inline text-gray-700" />
+                  <a
+                    class={tw`link`}
+                    href={`https://github.com/${versionMeta.uploadOptions.repository}`}
                   >
-                  </div>
-                  <div class={tw`mt-3 flex items-center py-0.5`}>
-                    <Icons.GitHub class="mr-2 w-5 h-5 inline text-gray-200" />
-                    <div class={tw`w-4/5 sm:w-2/3 bg-gray-100 h-4`}></div>
-                  </div>
-                  <div class={tw`mt-2 flex items-center py-0.5`}>
-                    <Icons.Star class="mr-2" title="GitHub Stars" />
-                    <div class={tw`w-1/6 sm:w-1/5 bg-gray-100 h-4`}></div>
-                  </div>
+                    {versionMeta.uploadOptions.repository}
+                  </a>
                 </div>
-              )
-              : versionMeta === null || moduleMeta === null
-              ? null
-              : (
-                <div
-                  class={tw
-                    `flex flex-row flex-auto justify-center items-center gap-4 border-1 rounded-md py-2 px-5`}
-                >
-                  <div class={tw`flex items-center`}>
-                    <Icons.GitHub class="mr-2 w-5 h-5 inline text-gray-700" />
-                    <a
-                      class={tw`link`}
-                      href={`https://github.com/${versionMeta.uploadOptions.repository}`}
-                    >
-                      {versionMeta.uploadOptions.repository}
-                    </a>
-                  </div>
-                  <div class={tw`flex items-center`}>
-                    <Icons.Star class="mr-2" title="GitHub Stars" />
-                    <div>{moduleMeta.star_count}</div>
-                  </div>
+                <div class={tw`flex items-center`}>
+                  <Icons.Star class="mr-2" title="GitHub Stars" />
+                  <div>{moduleMeta.star_count}</div>
                 </div>
-              )}
+              </div>
+            )}
             <div class={tw`flex-auto`}>
               <VersionSelector
                 versions={versions!.versions}
