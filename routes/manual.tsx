@@ -356,9 +356,9 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
               <div class={tw`pt-1`}>
                 <Markdown
                   source={data.content
-                    .replace(/\.md/g, "")
-                    .replace(/\$STD_VERSION/g, stdVersion)
-                    .replace(/\$CLI_VERSION/g, version)}
+                    .replaceAll(".md", "")
+                    .replaceAll("$STD_VERSION", stdVersion)
+                    .replaceAll("$CLI_VERSION", version)}
                   baseUrl={sourceURL}
                 />
               </div>
