@@ -16,6 +16,12 @@ function render(ctx: RenderContext, render: InnerRenderFunction) {
   render();
   ctx.styles.splice(0, ctx.styles.length, ...(sheet).target);
   const newSnapshot = sheet.reset();
+  ctx.styles.push(`/*${JSON.stringify(newSnapshot[1])}*/`);
+  ctx.styles.push(
+    `/*${
+      JSON.stringify([...(newSnapshot[3] as Map<string, string>).entries()])
+    }*/`,
+  );
   ctx.state.set("twind", newSnapshot);
 }
 
