@@ -165,7 +165,7 @@ function TopPanel({
   //   );
 
   return (
-    <div class={tw`bg-[#F8F7F6] border-b-1`}>
+    <div class={tw`bg-ultralight border-b-1`}>
       <div
         class={tw
           `max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 py-8 md:h-36 flex items-center`}
