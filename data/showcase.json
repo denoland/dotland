@@ -75,5 +75,17 @@
     "image": "/images/showcase/euromillionsgenerator.png",
     "title": "Euro Millions Key Generator",
     "link": "https://euromillionsgenerator.com/"
+  },
+  {
+    "image": "/images/showcase/pbkit.png",
+    "title": "pbkit",
+    "link": "https://pbkit.dev/",
+    "github": "pbkit/pbkit"
+  },
+  {
+    "image": "/images/showcase/ter.png",
+    "title": "Ter",
+    "link": "https://ter.deno.dev/",
+    "github": "kkga/ter"
   }
 ]

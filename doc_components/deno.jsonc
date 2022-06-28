@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "dom.asynciterable",
+      "deno.ns"
+    ],
+    "types": [
+      "./jsx.d.ts"
+    ]
+  },
+  "importMap": "./import-map.json",
+  "tasks": {
+    "fmt": "deno fmt --ignore=./_showcase/data",
+    "showcase": "deno run --check --watch --allow-net --allow-read=./_showcase/data _showcase/main.tsx",
+    "test": "deno test"
+  }
+}

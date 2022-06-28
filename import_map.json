@@ -3,7 +3,7 @@
     "@/": "./",
     "@twind": "./util/twind.ts",
 
-    "$fresh/": "https://deno.land/x/fresh@1.0.0-rc.2/",
+    "$fresh/": "https://fresh.deno.dev/@1.0.0-rc.4/",
     "preact": "https://esm.sh/preact@10.8.1",
     "preact/": "https://esm.sh/preact@10.8.1/",
     "preact-render-to-string": "https://esm.sh/preact-render-to-string@5.1.20?deps=preact@10.8.1",
@@ -23,7 +23,7 @@
     "$ga4": "https://raw.githubusercontent.com/denoland/ga4/main/mod.ts",
     "$ga": "https://deno.land/x/g_a@0.1.2/mod.ts",
     "$oak_commons": "https://deno.land/x/oak_commons@0.1.1/negotiation.ts",
-    "$doc_components/": "https://deno.land/x/deno_doc_components@0.1.1/",
+    "$doc_components/": "./doc_components/",
     "$deno_doc/": "https://deno.land/x/deno_doc@v0.34.0/lib/"
   }
 }
