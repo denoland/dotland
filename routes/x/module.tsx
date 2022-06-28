@@ -189,7 +189,7 @@ function TopPanel({
             {versionMeta && moduleMeta && (
               <div
                 class={tw
-                  `flex flex-row flex-auto justify-center items-center gap-4 border border-dark-border rounded-md py-2 px-5`}
+                  `flex flex-row flex-auto justify-center items-center gap-4 border border-dark-border rounded-md bg-white py-2 px-5`}
               >
                 <div class={tw`flex items-center`}>
                   <Icons.GitHub class="mr-2 w-5 h-5 inline text-gray-700" />

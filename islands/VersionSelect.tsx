@@ -27,9 +27,9 @@ export default function VersionSelect({ versions, selectedVersion }: {
       <select
         id="version"
         class={tw
-          `rounded-md block border border-dark-border appearance-none form-select-bg font-semibold ${
+          `rounded-md block border border-dark-border appearance-none bg-white form-select-bg font-semibold ${
             selectedIsLatest ? "pr-22" : "pr-10"
-          } py-2 pl-3 bg-transparent w-full h-full leading-none sm:(text-sm leading-5) focus:(outline-none border-[#a4cafe])`}
+          } py-2 pl-3 w-full h-full leading-none sm:(text-sm leading-5) focus:(outline-none border-[#a4cafe])`}
         value={selectedVersion}
         onChange={(e) => {
           if (e.currentTarget.value !== selectedVersion) {
