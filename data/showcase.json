@@ -81,5 +81,11 @@
     "title": "pbkit",
     "link": "https://pbkit.dev/",
     "github": "pbkit/pbkit"
+  },
+  {
+    "image": "/images/showcase/ter.png",
+    "title": "Ter",
+    "link": "https://ter.deno.dev/",
+    "github": "kkga/ter"
   }
 ]

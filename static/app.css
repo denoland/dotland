@@ -4,43 +4,6 @@ html {
 	scroll-behavior: smooth;
 }
 
-.form-select {
-	background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3e%3cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke='%239fa6b2' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
-	-webkit-appearance:none;
-	-moz-appearance:none;
-	appearance:none;
-	-webkit-print-color-adjust:exact;
-	color-adjust:exact;
-	background-repeat:no-repeat;
-	background-color:#fff;
-	border-color:#d2d6dc;
-	border-width:1px;
-	border-radius:.375rem;
-	padding:.5rem 2.5rem .5rem .75rem;
-	line-height:1.5;
-	background-position:right .5rem center;
-	background-size:1.5em 1.5em
-}
-.form-select::-ms-expand {
-	color:#9fa6b2;
-	border:none
-}
-@media not print {
-	.form-select::-ms-expand {
-		display:none
-	}
-}
-@media print and (-ms-high-contrast:active),print and (-ms-high-contrast:none) {
-	.form-select {
-		padding-right:.75rem
-	}
-}
-.form-select:focus {
-	outline:none;
-	box-shadow:0 0 0 3px rgba(164,202,254,.45);
-	border-color:#a4cafe
-}
-
 /* Manual */
 
 #manualSidebarToggle:checked + #manualSidebar {
