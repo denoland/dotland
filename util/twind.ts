@@ -1,7 +1,9 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { apply, Configuration, cssomSheet, setup, Sheet } from "twind";
 export * from "twind";
-export { css } from "twind/css";
+import { css } from "twind/css";
+export { css };
+
 export const config: Configuration = {
   darkMode: "class",
   mode: "silent",
@@ -18,13 +20,26 @@ export const config: Configuration = {
       ],
     },
     extend: {
+      colors: {
+        default: "#232323",
+        ultralight: "#F8F7F6",
+        "light-border": "#EEEEEE",
+        "dark-border": "#DDDDDD",
+
+        "tag-blue-bg": "#056CF025",
+        "tag-blue": "#056CF0",
+      },
+      opacity: {
+        15: ".15",
+      },
       lineHeight: {
         0: "0",
       },
       /*fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
       },*/
-      width: {
+      spacing: {
+        22: "5.5rem",
         72: "18rem",
       },
       animation: {
@@ -35,6 +50,13 @@ export const config: Configuration = {
   plugins: {
     link: apply
       `text-blue-500 transition duration-75 ease-in-out hover:text-blue-400`,
+    "form-select-bg": css({
+      "background-image":
+        `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3e%3cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke='%239fa6b2' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e")`,
+      "background-position": "right .5rem center",
+      "background-size": "1.5em 1.5em",
+      "background-repeat": "no-repeat",
+    }),
   },
 };
 
