@@ -189,7 +189,7 @@ function TopPanel({
             {versionMeta && moduleMeta && (
               <div
                 class={tw
-                  `flex flex-row flex-auto justify-center items-center gap-4 border-1 rounded-md py-2 px-5`}
+                  `flex flex-row flex-auto justify-center items-center gap-4 border border-dark-border rounded-md py-2 px-5`}
               >
                 <div class={tw`flex items-center`}>
                   <Icons.GitHub class="mr-2 w-5 h-5 inline text-gray-700" />
@@ -425,7 +425,7 @@ function VersionSelector({
       {versions[0] !== selectedVersion && (
         <a
           class={tw
-            `mt-2 w-full inline-flex justify-center py-1 px-2 border border-red-300 rounded-md bg-white text-sm leading-5 font-medium text-red-500 hover:text-red-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-red transition duration-150 ease-in-out`}
+            `mt-2 w-full inline-flex justify-center py-1 px-2 border border-red-300 rounded-md text-sm leading-5 font-medium text-red-500 hover:text-red-400 focus:(outline-none border-blue-300 shadow-outline-red) transition duration-150 ease-in-out`}
           aria-label="Go to latest version"
           href={`/${isStd ? "" : "x/"}${name}@${versions[0]}${path}`}
         >
