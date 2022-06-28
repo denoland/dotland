@@ -87,5 +87,11 @@
     "title": "Ter",
     "link": "https://ter.deno.dev/",
     "github": "kkga/ter"
+  },
+  {
+    "image": "/images/showcase/sdns.png",
+    "title": "Serverless DNS",
+    "link": "https://rdns.deno.dev/",
+    "github": "serverless-dns/serverless-dns"
   }
 ]
