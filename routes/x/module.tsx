@@ -199,15 +199,17 @@ function TopPanel({
                 </div>
               </div>
             )}
-            <div class={tw`flex-auto`}>
-              <VersionSelector
-                versions={versions!.versions}
-                selectedVersion={version}
-                name={name}
-                isStd={isStd}
-                path={path}
-              />
-            </div>
+            {versions && (
+              <div class={tw`flex-auto`}>
+                <VersionSelector
+                  versions={versions!.versions}
+                  selectedVersion={version}
+                  name={name}
+                  isStd={isStd}
+                  path={path}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
