@@ -46,10 +46,17 @@ export function Header({
 
           <div
             class={tw
-              `h-9 flex items-center justify-between select-none w-full lg:w-auto gap-3 sm:gap-4 md:gap-6 lg:gap-8`}
+              `h-9 flex items-center justify-between select-none w-full lg:w-auto gap-3 md:gap-6 lg:gap-8`}
           >
-            <a href="/">
-              <img src="/logo.svg" alt="" />
+            <a
+              href="/"
+              class={tw`h-8 w-8 block ${
+                css({
+                  "flex-shrink": "0",
+                })
+              }`}
+            >
+              <img class={tw`h-full w-full`} src="/logo.svg" alt="" />
             </a>
 
             {!main && <Search />}
