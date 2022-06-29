@@ -83,19 +83,15 @@ export default function Registry({ params, url, data }: PageProps<Data>) {
       <Head>
         <title>{name + (version ? `@${version}` : "") + " | Deno"}</title>
       </Head>
-      <div class={tw`bg-[#FFFFFFE5] min-h-full`}>
+      <div class={tw`bg-primary min-h-full`}>
         <Header
           selected={name === "std" ? "Standard Library" : "Third Party Modules"}
-          background
         />
         <TopPanel
           version={version!}
           {...{ name, path, isStd, ...data }}
         />
-        <div
-          class={tw
-            `max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8 pt-4`}
-        >
+        <div class={tw`section-x-inset-xl py-2 pb-8 pt-4`}>
           <div class={tw`mt-8`}>
             {(() => {
               if (data.versions === null) {
@@ -166,10 +162,7 @@ function TopPanel({
 
   return (
     <div class={tw`bg-ultralight border-b-1`}>
-      <div
-        class={tw
-          `max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 py-8 md:h-36 flex items-center`}
-      >
+      <div class={tw`section-x-inset-xl py-8 md:h-36 flex items-center`}>
         <div
           class={tw
             `flex flex-row flex-wrap justify-between items-center w-full gap-4`}

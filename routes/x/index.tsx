@@ -41,9 +41,9 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
         <title>Third Party Modules | Deno</title>
       </Head>
       <div class={tw`bg-gray`}>
-        <Header selected="Third Party Modules" background />
+        <Header selected="Third Party Modules" />
         <div>
-          <div class={tw`max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8`}>
+          <div class={tw`section-x-inset-lg mt-8`}>
             <dt class={tw`text-lg leading-6 font-medium text-gray-900`}>
               What is deno.land/x?
             </dt>
@@ -85,7 +85,7 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
           </div>
           <form
             method="get"
-            class={tw`max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8`}
+            class={tw`section-x-inset-lg mt-8`}
           >
             <label htmlFor="query" class={tw`font-medium sr-only`}>
               Search

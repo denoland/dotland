@@ -49,7 +49,7 @@ export default function AddModulePage() {
       <div class={tw`bg-gray`}>
         <Header selected="Third Party Modules" />
         <form
-          class={tw`max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8`}
+          class={tw`section-x-inset-lg mt-8`}
           // @ts-ignore onSubmit does support strings
           onSubmit="(async (e) => {
           e.preventDefault();
