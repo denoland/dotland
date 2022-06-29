@@ -45,7 +45,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           <Header main />
           <div
             class={tw
-              `relative max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center`}
+              `relative section-x-inset-sm pt-12 pb-20 flex flex-col items-center`}
           >
             <h1
               class={tw
@@ -77,7 +77,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             </a>
           </div>
         </div>
-        <div class={tw`max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20`}>
+        <div class={tw`section-x-inset-sm mt-20`}>
           <p class={tw`my-4 text-gray-700`}>
             Deno is a simple, modern and secure runtime for JavaScript,
             TypeScript, and WebAssembly that uses V8 and is built in Rust.
@@ -136,7 +136,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             </li>
           </ol>
         </div>
-        <div class={tw`max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20`}>
+        <div class={tw`section-x-inset-sm mt-20`}>
           <a class={tw`hover:underline`} href="#installation">
             <h3 class={tw`font-bold text-xl`} id="installation">
               Installation
@@ -144,7 +144,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           </a>
           <InstallSection />
         </div>
-        <div class={tw`max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20`}>
+        <div class={tw`section-x-inset-sm mt-20`}>
           <a class={tw`hover:underline`} href="#getting-started">
             <h3 class={tw`font-bold text-xl`} id="getting-started">
               Getting Started
@@ -157,14 +157,14 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           />
           <p class={tw`my-4 text-gray-700`}>Or a more complex one:</p>
         </div>
-        <div class={tw`max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8`}>
+        <div class={tw`section-x-inset-sm`}>
           <CodeBlock
             code={complexExampleProgram}
             language="typescript"
             disablePrefixes
           />
         </div>
-        <div class={tw`max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8`}>
+        <div class={tw`section-x-inset-sm`}>
           <p class={tw`my-4 text-gray-700`}>
             You can find a more in depth introduction, examples, and environment
             setup guides in{" "}
@@ -174,7 +174,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             .
           </p>
         </div>
-        <div class={tw`max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20`}>
+        <div class={tw`section-x-inset-sm mt-20`}>
           <a class={tw`hover:underline`} href="#runtime-documentation">
             <h3 class={tw`font-bold text-xl`} id="runtime-documentation">
               Runtime Documentation
@@ -202,7 +202,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             Deno provides.
           </p>
         </div>
-        <div class={tw`max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20`}>
+        <div class={tw`section-x-inset-sm mt-20`}>
           <a class={tw`hover:underline`} href="#standard-modules">
             <h3 class={tw`font-bold text-xl`} id="standard-modules">
               Standard Modules
@@ -227,7 +227,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             compatible with Deno.
           </p>
         </div>
-        <div class={tw`max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20`}>
+        <div class={tw`section-x-inset-sm mt-20`}>
           <a class={tw`hover:underline`} href="#third-party-modules">
             <h3 class={tw`font-bold text-xl`} id="third-party-modules">
               Third Party Modules
@@ -279,7 +279,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             .
           </p>
         </div>
-        <div class={tw`max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20`}>
+        <div class={tw`section-x-inset-sm mt-20`}>
           <a class={tw`hover:underline`} href="#toolchain">
             <h3 class={tw`font-bold text-xl`} id="toolchain">
               Built-in Toolchain
@@ -330,7 +330,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             .
           </p>
         </div>
-        <div class={tw`max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20`}>
+        <div class={tw`section-x-inset-sm mt-20`}>
           <a class={tw`hover:underline`} href="#examples">
             <h3 class={tw`font-bold text-xl`} id="examples">
               Examples
@@ -385,7 +385,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
         </div>
         <DenoInProductionSection />
         <div class={tw`mt-20`}>
-          <Footer simple />
+          <Footer />
         </div>
       </div>
     </div>
@@ -412,7 +412,7 @@ function DenoInProductionSection() {
   }];
 
   return (
-    <div class={tw`max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20`}>
+    <div class={tw`section-x-inset-sm mt-20`}>
       <a class={tw`hover:underline`} href="#deno-in-production">
         <h3 class={tw`font-bold text-xl`} id="deno-in-production">
           Deno in Production
