@@ -27,6 +27,7 @@ export function Footer() {
               entries={{
                 "Develop Locally": "https://deno.land",
                 "Develop Globally": "https://deno.com/deploy",
+                "Compare to Node.js": "https://deno.land/manual/node",
                 "Benchmarks": "https://deno.land/benchmarks",
               }}
             />
