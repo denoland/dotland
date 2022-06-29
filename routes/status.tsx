@@ -20,10 +20,7 @@ export default function StatusPage({ data }: PageProps<Build | Error>) {
       </Head>
       <div class={tw`bg-gray-50 min-h-full`}>
         <Header />
-        <div
-          class={tw
-            `max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 mt-8 pb-8 mb-16`}
-        >
+        <div class={tw`section-x-inset-md mt-8 pb-8 mb-16`}>
           <div>
             <h3 class={tw`text-lg leading-6 font-medium text-gray-900`}>
               模块发布状态

@@ -6,9 +6,12 @@ export { css };
 
 export const config: Configuration = {
   darkMode: "class",
-  mode: "silent",
+  //mode: "silent",
   theme: {
     fontFamily: {
+      /*sans: [
+        "Inter",
+      ],*/
       mono: [
         "Menlo",
         "Monaco",
@@ -21,6 +24,10 @@ export const config: Configuration = {
     },
     extend: {
       colors: {
+        primary: "#FFFFFFE5",
+        secondary: "#E5E7EB",
+        main: "#333333",
+        light: "#999999",
         default: "#232323",
         ultralight: "#F8F7F6",
         "light-border": "#EEEEEE",
@@ -35,12 +42,13 @@ export const config: Configuration = {
       lineHeight: {
         0: "0",
       },
-      /*fontFamily: {
-        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
-      },*/
       spacing: {
+        4.5: "1.125rem",
+        5.5: "1.375rem",
+        18: "4.5rem",
         22: "5.5rem",
         72: "18rem",
+        76: "19rem",
       },
       animation: {
         move: "move 6s linear infinite",
@@ -50,6 +58,8 @@ export const config: Configuration = {
   plugins: {
     link: apply
       `text-blue-500 transition duration-75 ease-in-out hover:text-blue-400`,
+    "section-x-inset": (parts) =>
+      apply`max-w-screen-${parts[0]} mx-auto px-4 sm:px-6 md:px-8`,
     "form-select-bg": css({
       "background-image":
         `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3e%3cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke='%239fa6b2' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e")`,
