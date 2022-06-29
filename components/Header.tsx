@@ -56,7 +56,7 @@ export function Header({
                 })
               }`}
             >
-              <img class={tw`h-full w-full`} src="/logo.svg" alt="" />
+              <img class={tw`h-full w-full`} src="/logo.svg" alt="Deno Logo" />
             </a>
 
             {!main && <Search />}

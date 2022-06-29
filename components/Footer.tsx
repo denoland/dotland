@@ -18,7 +18,7 @@ export function Footer() {
         >
           <div class={tw`hidden lg:block`}>
             <a href="https://deno.land">
-              <img class={tw`h-6 w-auto`} src="/logo.svg" alt="" />
+              <img class={tw`h-6 w-6`} src="/logo.svg" alt="Deno Logo" />
             </a>
           </div>
           <div class={tw`flex flex-col gap-5 lg:(flex-row gap-16)`}>
@@ -81,19 +81,19 @@ export function Footer() {
               class={tw
                 `flex flex-row justify-between items-center lg:(flex-col space-y-5 items-start)`}
             >
-              <span class={tw`text-xs text-gray-400 leading-none`}>
+              <span class={tw`text-xs text-gray-400 leading-tight`}>
                 Copyright © 2022 Deno Company{" "}
                 <span class={tw`whitespace-nowrap`}>All rights reserved.</span>
               </span>
-              <div class={tw`flex gap-3`}>
+              <div class={tw`flex gap-3 text-[#666666]`}>
                 <a href="https://github.com/denoland">
-                  <Icons.GitHub class="text-[#666666]" />
+                  <Icons.GitHub />
                 </a>
                 <a href="https://discord.gg/deno">
-                  <Icons.Discord class="text-[#666666]" />
+                  <Icons.Discord />
                 </a>
                 <a href="https://twitter.com/deno_land">
-                  <Icons.Twitter class="text-[#666666]" />
+                  <Icons.Twitter />
                 </a>
               </div>
             </div>
