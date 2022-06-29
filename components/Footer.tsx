@@ -13,7 +13,8 @@ export function Footer() {
     >
       <div class={tw`section-x-inset-xl py-6 lg:py-18 w-full`}>
         <nav
-          class={tw`flex flex-col gap-6 w-full lg:(flex-row gap-0 justify-between) leading-tight`}
+          class={tw
+            `flex flex-col gap-6 w-full lg:(flex-row gap-0 justify-between) leading-tight`}
         >
           <div class={tw`hidden lg:block`}>
             <a href="https://deno.land">
@@ -79,10 +80,10 @@ export function Footer() {
               class={tw
                 `flex flex-row justify-between items-center lg:(flex-col space-y-5 items-start)`}
             >
-            <span class={tw`text-xs text-gray-400 leading-none`}>
-              Copyright © 2022 Deno Company{" "}
-              <span class={tw`whitespace-nowrap`}>All rights reserved.</span>
-            </span>
+              <span class={tw`text-xs text-gray-400 leading-none`}>
+                Copyright © 2022 Deno Company{" "}
+                <span class={tw`whitespace-nowrap`}>All rights reserved.</span>
+              </span>
               <div class={tw`flex gap-3`}>
                 <a href="https://github.com/denoland">
                   <Icons.GitHub class="text-[#666666]" />
@@ -108,7 +109,10 @@ function FooterSection(
   return (
     <div>
       <span class={tw`font-semibold`}>{props.title}</span>
-      <div class={tw`text-[#454545] flex flex-wrap mt-2 gap-x-2.5 gap-y-1.5 lg:(flex-col mt-4 gap-x-0 gap-y-2.5)`}>
+      <div
+        class={tw
+          `text-[#454545] flex flex-wrap mt-2 gap-x-2.5 gap-y-1.5 lg:(flex-col mt-4 gap-x-0 gap-y-2.5)`}
+      >
         {Object.entries(props.entries).map(([name, link]) => {
           return <a href={link} class={tw`whitespace-nowrap block`}>{name}</a>;
         })}
