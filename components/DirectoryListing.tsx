@@ -22,7 +22,7 @@ export function DirectoryListing(props: {
 }) {
   const isStd = props.url.pathname.startsWith("/std");
   const basePath = getBasePath({
-    isStd: isStd,
+    isStd,
     name: props.name,
     version: props.version,
   });

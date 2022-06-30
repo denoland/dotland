@@ -38,8 +38,7 @@ import { ErrorMessage } from "@/components/ErrorMessage.tsx";
 import { type DocNode, getDocs, type Index } from "@/util/doc.ts";
 import * as Icons from "@/components/Icons.tsx";
 import VersionSelect from "@/islands/VersionSelect.tsx";
-import { DirListing } from "../../util/registry_utils.ts";
-import { Dir, File } from "@/components/Icons.tsx";
+import { ModulePathIndexPanel } from "$doc_components/module_path_index_panel.tsx";
 
 // 100kb
 const MAX_SYNTAX_HIGHLIGHT_FILE_SIZE = 100 * 1024;
@@ -125,36 +124,18 @@ export default function Registry({ params, url, data }: PageProps<Data>) {
               } else {
                 return (
                   <div class={tw`flex gap-x-14`}>
-                    <div class={tw`w-72 flex-shrink-0`}>
-                      <input
-                        type="text"
-                        class={tw
-                          `rounded-lg border border-[#DDDDDD] text-sm w-full py-2.5 pl-4`}
-                        placeholder="Jump to..."
-                      />
-                      <div class={tw`mt-4`}>
-                        {[{
-                          type: "dir",
-                          path: "/foo",
-                          index: false,
-                        }, {
-                          type: "file",
-                          path: "/test.ts",
-                          index: true,
-                        }].map((file) => {
-                          return (
-                            <div
-                              class={tw`flex gap-1 p-2 rounded-lg w-full ${
-                                file.index ? "bg-gray-100 font-bold" : ""
-                              }`}
-                            >
-                              {file.type === "dir" ? <Dir /> : <File />}
-                              {file.path ?? "/"}
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
+                    <ModulePathIndexPanel
+                      base={getBasePath({
+                        isStd,
+                        name,
+                        version,
+                      })}
+                      path={path || "/"}
+                      skipMods={!!(data.doc as Index).indexModule}
+                    >
+                      {(data.doc as Index).index}
+                    </ModulePathIndexPanel>
+
                     <ModuleView
                       version={version!}
                       {...{ name, path, isStd, url, ...data }}
