@@ -144,7 +144,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
               起步
             </h3>
           </a>
-          <p class={tw`my-4 text-gray-700`}>Try running a simple program:</p>
+          <p class={tw`my-4 text-gray-700`}>尝试运行一个简单的 Deno 程序：</p>
           <CodeBlock
             code="deno run https://deno.land/std/examples/welcome.ts"
             language="bash"
@@ -256,62 +256,60 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
         <div class={tw`section-x-inset-sm mt-20`}>
           <a class={tw`hover:underline`} href="#toolchain">
             <h3 class={tw`font-bold text-xl`} id="toolchain">
-              Built-in Toolchain
+              内置工具链
             </h3>
           </a>
           <p class={tw`my-4 text-gray-700`}>
-            Deno comes with a robust{" "}
+            Deno 附带了{" "}
             <a class={tw`link`} href="/manual/tools">
-              set of tools
+              一套强大的工具
             </a>
-            , so you can spend less time searching and evaluating third party
-            modules, and more time writing code and being productive. Here are a
-            few examples.
+            ，因此您可以花更少的时间搜索和评估第三方模块，而将更多的时间用于编写代码和提高工作效率。下面是一些示例。
           </p>
           <p class={tw`my-4 text-gray-700`}>
             <a class={tw`link`} href="/manual/tools/linter">
               Lint
             </a>{" "}
-            all JS/TS files in the current directory and subdirectories:
+            当前目录和子目录中的所有 JS/TS 文件：
           </p>
           <p>
             <CodeBlock code={"deno lint\nChecked 54 files"} language="bash" />
           </p>
           <p class={tw`my-4 text-gray-700`}>
             <a class={tw`link`} href="/manual/tools/formatter">
-              Format
+              格式化
             </a>{" "}
-            all supported files in the current directory and subdirectories:
+            当前目录和子目录中所有支持的文件：
           </p>
           <p>
             <CodeBlock code={"deno fmt\nChecked 46 files"} language="bash" />
           </p>
           <p class={tw`my-4 text-gray-700`}>
-            Run a{" "}
+            运行{" "}
             <a class={tw`link`} href="/manual/testing">
-              test
+              测试
             </a>
-            :
+            ：
           </p>
           <p>
             <CodeBlock code={denoTestExample} language="bash" />
           </p>
           <p class={tw`my-4 text-gray-700`}>
-            For the full list of tools and their options, see{" "}
+            有关工具及其选项的完整列表，请参阅{" "}
             <a href="/manual/tools" class={tw`link`}>
-              here
+              这里
             </a>
-            .
+            。
           </p>
         </div>
         <div class={tw`section-x-inset-sm mt-20`}>
           <a class={tw`hover:underline`} href="#examples">
             <h3 class={tw`font-bold text-xl`} id="examples">
-              Examples
+              示例
             </h3>
           </a>
           <p class={tw`my-4 text-gray-700`}>
-            Here are some examples that you can use to get started immediately.
+            下面是一些可用的示例。
           </p>
           <ol class={tw`ml-8 list-disc text-gray-700`}>
             <li>
@@ -350,7 +348,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             </li>
           </ol>
           <p class={tw`my-4 text-gray-700`}>
-            For more examples, check out{" "}
+            有关更多示例，请查看{" "}
             <a class={tw`link`} href="https://examples.deno.land">
               examples.deno.land
             </a>
