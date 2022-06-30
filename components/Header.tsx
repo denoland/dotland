@@ -4,7 +4,7 @@
 /** @jsxFrag Fragment */
 import { Fragment, h } from "preact";
 
-import { css, tw } from "@twind";
+import { apply, css, tw } from "@twind";
 import * as Icons from "./Icons.tsx";
 import { Head } from "$fresh/src/runtime/head.ts";
 
@@ -75,34 +75,32 @@ export function Header({
               `hidden flex-col mx-2 mt-5 gap-y-4 lg:(flex flex-row items-center mx-0 mt-0) font-medium`}
           >
             {entries.map(({ href, content }) => {
-              if (content === selected) {
-                return (
-                  <a
-                    href={href}
-                    class={tw`lg:ml-8 text-black ${
-                      css({
-                        "text-decoration-line": "underline",
-                        "text-underline-offset": "6px",
-                        "text-decoration-thickness": "2px",
-                      })
-                    }`}
-                  >
-                    {content}
-                  </a>
-                );
-              } else {
-                return (
-                  <a href={href} class={tw`lg:ml-8 text-main`}>
-                    {content}
-                  </a>
-                );
-              }
+              return (
+                <a
+                  href={href}
+                  class={tw
+                    `lg:ml-4 px-2 rounded-md leading-loose hover:(bg-gray-100 text-main) ${apply
+                      `${
+                        content === selected
+                          ? css({
+                            "text-decoration-line": "underline",
+                            "text-underline-offset": "6px",
+                            "text-decoration-thickness": "2px",
+                          })
+                          : ""
+                      } ${
+                        content === selected ? "text-black" : "text-gray-500"
+                      }`}`}
+                >
+                  {content}
+                </a>
+              );
             })}
 
             <a
               href="https://deno.com/deploy"
               class={tw
-                `h-9 lg:ml-5 bg-secondary rounded-md px-4 flex items-center`}
+                `h-9 lg:ml-5 bg-secondary rounded-md px-4 flex items-center hover:bg-[#D5D7DB]`}
             >
               Deploy
             </a>
@@ -156,7 +154,7 @@ function Search() {
 
       <button
         class={tw
-          `pl-4 w-80 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light focus:(outline-none)`}
+          `pl-4 w-80 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light focus:outline-none`}
         // @ts-ignore onClick does support strings
         onClick="document.querySelector('#search button').click()"
       >
