@@ -115,7 +115,11 @@ function FooterSection(
           `text-[#454545] flex flex-wrap mt-2 gap-x-2.5 gap-y-1.5 lg:(flex-col mt-4 gap-x-0 gap-y-2.5)`}
       >
         {Object.entries(props.entries).map(([name, link]) => {
-          return <a href={link} class={tw`whitespace-nowrap block hover:underline`}>{name}</a>;
+          return (
+            <a href={link} class={tw`whitespace-nowrap block hover:underline`}>
+              {name}
+            </a>
+          );
         })}
       </div>
     </div>
