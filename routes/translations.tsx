@@ -29,7 +29,7 @@ export default function TranslationsPage() {
         <title>翻译 | Deno</title>
       </Head>
       <Header />
-      <div class={tw`max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 mt-8 mb-24`}>
+      <div class={tw`section-x-inset-xl mt-8 mb-24`}>
         <div class={tw`max-w-screen-lg mx-auto`}>
           <h4 class={tw`text-4xl font-bold tracking-tight`}>翻译</h4>
           <p class={tw`mt-4 text-lg`}>

@@ -41,9 +41,9 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
         <title>第三方模块 | Deno</title>
       </Head>
       <div class={tw`bg-gray`}>
-        <Header subtitle="第三方模块" widerContent={true} />
+        <Header selected="第三方模块" />
         <div>
-          <div class={tw`max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8`}>
+          <div class={tw`section-x-inset-lg mt-8`}>
             <dt class={tw`text-lg leading-6 font-medium text-gray-900`}>
               deno.js.cn/x 是什么？
             </dt>
@@ -83,7 +83,7 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
           </div>
           <form
             method="get"
-            class={tw`max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8`}
+            class={tw`section-x-inset-lg mt-8`}
           >
             <label htmlFor="query" class={tw`font-medium sr-only`}>
               搜索
@@ -340,7 +340,7 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
               : null}
           </div>
         </div>
-        <Footer simple />
+        <Footer />
       </div>
     </>
   );
