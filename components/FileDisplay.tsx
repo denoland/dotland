@@ -169,16 +169,14 @@ export function FileDisplay(props: {
               );
             } else {
               return (
-                <div class={tw`px-4`}>
-                  <Markdown
-                    source={props.stdVersion === undefined
-                      ? props.raw!
-                      : props.raw!.replace(
-                        /\$STD_VERSION/g,
-                        props.stdVersion ?? "",
-                      )}
-                  />
-                </div>
+                <Markdown
+                  source={props.stdVersion === undefined
+                    ? props.raw!
+                    : props.raw!.replace(
+                      /\$STD_VERSION/g,
+                      props.stdVersion ?? "",
+                    )}
+                />
               );
             }
           }

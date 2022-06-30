@@ -9,7 +9,6 @@ import { style } from "./styles.ts";
 import { type Child, take } from "./utils.ts";
 import * as Icons from "@/components/Icons.tsx";
 import { ModuleIndexWithDoc } from "./module_path_index.tsx";
-import { h } from "https://esm.sh/v86/preact@10.8.1/deno/preact.js";
 
 export function findItems(
   path: string,
@@ -48,16 +47,16 @@ function Folder({ children, base, parent }: {
   );
 }
 
-function Module({ children, base, parent }: {
+function Module({ children, base, parent, isIndex }: {
   children: Child<string>;
   base: string;
   parent: string;
+  isIndex?: boolean;
 }) {
   const modulePath = take(children);
   const url = `${base}${modulePath}`;
   const href = services.resolveHref(url);
   const label = modulePath.slice(parent === "/" ? 1 : parent.length + 1);
-  const isIndex = false; // TODO
   return (
     <a
       class={tw`flex gap-1 p-2 rounded-lg w-full ${
@@ -67,15 +66,17 @@ function Module({ children, base, parent }: {
     >
       <Icons.File />
       {label}
+      {isIndex && (
+        <span class={tw`text-[#6C6E78] font-light`}>(default module)</span>
+      )}
     </a>
   );
 }
 
 export function ModulePathIndexPanel(
-  { children, path = "/", base, skipMods = false }: {
+  { children, path = "/", base }: {
     children: Child<ModuleIndexWithDoc>;
     base: string;
-    skipMods?: boolean;
     path?: string;
   },
 ) {
@@ -87,20 +88,18 @@ export function ModulePathIndexPanel(
     </Folder>
   ));
 
-  if (!skipMods) {
-    const moduleIndex = getIndex(modules);
-    if (moduleIndex) {
+  const moduleIndex = getIndex(modules);
+  if (moduleIndex) {
+    items.push(
+      <Module base={base} parent={path} isIndex={true}>{moduleIndex}</Module>,
+    );
+  }
+  modules.sort();
+  for (const module of modules) {
+    if (module !== moduleIndex) {
       items.push(
-        <Module base={base} parent={path}>{moduleIndex}</Module>,
+        <Module base={base} parent={path}>{module}</Module>,
       );
-    }
-    modules.sort();
-    for (const module of modules) {
-      if (module !== moduleIndex) {
-        items.push(
-          <Module base={base} parent={path}>{module}</Module>,
-        );
-      }
     }
   }
   if (items.length === 0) {
