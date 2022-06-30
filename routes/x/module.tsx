@@ -529,10 +529,16 @@ export const handler: Handlers<Data> = {
             console.error("Failed to fetch dependency information:", e);
             return null;
           }),
-          getDocs(params.name, version!, path).catch((e) => {
-            console.error("Failed to fetch documentation:", e);
-            return null;
-          }),
+          () => {
+            if (isStd) {
+              return getDocs(params.name, version!, path).catch((e) => {
+                console.error("Failed to fetch documentation:", e);
+                return null;
+              });
+            } else {
+              return Promise.resolve(null);
+            }
+          },
         ]);
 
       const sourceURL = getSourceURL(params.name, version, path);
