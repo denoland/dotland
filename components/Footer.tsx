@@ -26,7 +26,7 @@ export function Footer() {
               title="Why Deno?"
               entries={{
                 "Develop Locally": "https://deno.land",
-                "Develop Globally": "https://deno.com/deploy",
+                "Deploy Globally": "https://deno.com/deploy",
                 "Compare to Node.js": "https://deno.land/manual/node",
                 "Benchmarks": "https://deno.land/benchmarks",
               }}
@@ -44,7 +44,7 @@ export function Footer() {
               entries={{
                 "CLI Manual": "https://deno.land/manual",
                 "CLI Runtime API": "https://doc.deno.land/deno/stable",
-                "Deploy Manual": "https://deno.com/deploy/docs",
+                "Deploy Docs": "https://deno.com/deploy/docs",
                 "Standard Library": "https://deno.land/std",
                 "Third-Party Modules": "https://deno.land/x",
               }}
