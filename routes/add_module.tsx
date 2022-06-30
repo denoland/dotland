@@ -47,7 +47,7 @@ export default function AddModulePage() {
         `}
       </script>
       <div class={tw`bg-gray`}>
-        <Header selected="Third Party Modules" />
+        <Header selected="第三方模块" />
         <form
           class={tw`section-x-inset-lg mt-8`}
           // @ts-ignore onSubmit does support strings

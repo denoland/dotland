@@ -167,7 +167,7 @@ function Search() {
             class={tw
               `ml-1.5 py-2.5 h-9 flex-auto text-light text-sm leading-4 font-medium text-left`}
           >
-            Search...
+            搜索...
           </div>
           <div class={tw`mx-4`}>
             ⌘K

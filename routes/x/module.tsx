@@ -85,7 +85,7 @@ export default function Registry({ params, url, data }: PageProps<Data>) {
       </Head>
       <div class={tw`bg-primary min-h-full`}>
         <Header
-          selected={name === "std" ? "Standard Library" : "Third Party Modules"}
+          selected={name === "std" ? "标准库" : "第三方模块"}
         />
         <TopPanel
           version={version!}
