@@ -41,11 +41,7 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
         <title>第三方模块 | Deno</title>
       </Head>
       <div class={tw`bg-gray`}>
-<<<<<<< HEAD
-        <Header subtitle="第三方模块" widerContent={true} />
-=======
-        <Header selected="Third Party Modules" />
->>>>>>> 7d0fbed0c03c306bc7044d7c289747fc2a3c00fa
+        <Header selected="第三方模块" />
         <div>
           <div class={tw`section-x-inset-lg mt-8`}>
             <dt class={tw`text-lg leading-6 font-medium text-gray-900`}>

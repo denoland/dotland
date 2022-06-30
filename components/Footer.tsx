@@ -7,68 +7,6 @@ import * as Icons from "./Icons.tsx";
 
 export function Footer() {
   return (
-<<<<<<< HEAD
-    <div class={simple ? undefined : "bg-gray-50 border-t border-gray-200"}>
-      <div
-        class={tw
-          `max-w-screen-xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8`}
-      >
-        <nav class={tw`-mx-5 -my-2 flex flex-wrap justify-center`}>
-          <FooterItem href="/manual">
-            参考手册
-          </FooterItem>
-          <FooterItem href="https://doc.deno.js.cn/deno/stable">
-            API
-          </FooterItem>
-          <FooterItem href="/std">
-            标准库
-          </FooterItem>
-          <FooterItem href="/x">
-            第三方模块
-          </FooterItem>
-          <FooterItem href="/benchmarks">
-            性能
-          </FooterItem>
-          <FooterItem href="/artwork">
-            艺术作品
-          </FooterItem>
-          <FooterItem href="https://deno.com/blog">
-            博客
-          </FooterItem>
-          <FooterItem href="/translations">
-            翻译
-          </FooterItem>
-          <FooterItem href="/showcase">
-            案例展示
-          </FooterItem>
-          <FooterItem href="https://deno.news/">
-            Deno News
-          </FooterItem>
-        </nav>
-        <div class={tw`mt-9 flex justify-center`}>
-          <a
-            href="https://github.com/denoland"
-            class={tw`text-gray-400 hover:text-gray-500`}
-          >
-            <span class={tw`sr-only`}>GitHub</span>
-            <Icons.GitHub />
-          </a>
-          <a
-            href="https://discord.gg/deno"
-            class={tw`ml-6 text-gray-400 hover:text-gray-500`}
-          >
-            <span class={tw`sr-only`}>Discord</span>
-            <Icons.Discord />
-          </a>
-          <a
-            href="https://twitter.com/deno_land"
-            class={tw`ml-6 text-gray-400 hover:text-gray-500`}
-          >
-            <span class={tw`sr-only`}>Twitter</span>
-            <Icons.Twitter />
-          </a>
-        </div>
-=======
     <div
       class={tw
         `border-t border-secondary bg-[#F9F9F9] text-sm flex justify-center`}
@@ -94,7 +32,7 @@ export function Footer() {
               }}
             />
             <FooterSection
-              title="Products"
+              title="产品"
               entries={{
                 "Deno CLI": "https://deno.land",
                 "Deno Deploy": "https://deno.com/deploy",
@@ -112,7 +50,7 @@ export function Footer() {
               }}
             />
             <FooterSection
-              title="Community"
+              title="社区"
               entries={{
                 "Artworks": "https://deno.land/artwork",
                 "Translations": "https://deno.land/translations",
@@ -120,7 +58,7 @@ export function Footer() {
               }}
             />
             <FooterSection
-              title="Company"
+              title="公司"
               entries={{
                 "Blog": "https://deno.com/blog",
                 "Jobs": "https://deno.com/jobs",
@@ -145,7 +83,7 @@ export function Footer() {
             >
               <span class={tw`text-xs text-gray-400 leading-tight`}>
                 Copyright © 2022 Deno Company{" "}
-                <span class={tw`whitespace-nowrap`}>All rights reserved.</span>
+                <span class={tw`whitespace-nowrap`}>保留所有权利。</span>
               </span>
               <div class={tw`flex gap-3 text-[#666666]`}>
                 <a href="https://github.com/denoland">
@@ -161,7 +99,6 @@ export function Footer() {
             </div>
           </div>
         </nav>
->>>>>>> 7d0fbed0c03c306bc7044d7c289747fc2a3c00fa
       </div>
     </div>
   );

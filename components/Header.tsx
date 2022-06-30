@@ -9,24 +9,14 @@ import * as Icons from "./Icons.tsx";
 import { Head } from "$fresh/src/runtime/head.ts";
 
 const entries = [
-<<<<<<< HEAD
-  { href: "/manual", content: "参考手册" },
-  { href: "https://deno.com/blog", content: "博客" },
-=======
-  { href: "/manual", content: "Manual" },
->>>>>>> 7d0fbed0c03c306bc7044d7c289747fc2a3c00fa
+  { href: "/manual", content: "手册" },
   {
     href: "https://doc.deno.land/deno/stable",
     content: "API",
   },
-<<<<<<< HEAD
   { href: "/std", content: "标准库" },
   { href: "/x", content: "第三方模块" },
-=======
-  { href: "/std", content: "Standard Library" },
-  { href: "/x", content: "Third Party Modules" },
-  { href: "https://deno.com/blog", content: "Blog" },
->>>>>>> 7d0fbed0c03c306bc7044d7c289747fc2a3c00fa
+  { href: "https://deno.com/blog", content: "博客" },
 ] as const;
 
 export function Header({
@@ -99,33 +89,6 @@ export function Header({
                   >
                     {content}
                   </a>
-<<<<<<< HEAD
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-        <label
-          class={tw`-mr-2 flex items-center lg:hidden`}
-          htmlFor="menuToggle"
-        >
-          <div
-            class={tw
-              `inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:(text-gray-500 bg-gray-100) focus:(outline-none bg-gray-100 text-gray-500) transition duration-150 ease-in-out`}
-          >
-            <Icons.Menu title="菜单 | Deno" />
-          </div>
-        </label>
-        <div class={tw`hidden lg:flex md:ml-10 items-end`}>
-          <a
-            href="https://deno.com/deploy"
-            class={tw
-              `font-medium py-2 px-3 rounded-lg border-2 border-gray-700 bg-transparent text-gray-700 hover:border-gray-900 hover:bg-gray-900 hover:text-gray-50 transition duration-150 ease-in-out`}
-          >
-            Deploy
-          </a>
-          {entries.map(({ href, content }) => (
-=======
                 );
               } else {
                 return (
@@ -136,7 +99,6 @@ export function Header({
               }
             })}
 
->>>>>>> 7d0fbed0c03c306bc7044d7c289747fc2a3c00fa
             <a
               href="https://deno.com/deploy"
               class={tw
