@@ -85,21 +85,15 @@ export default function Registry({ params, url, data }: PageProps<Data>) {
       <Head>
         <title>{name + (version ? `@${version}` : "") + " | Deno"}</title>
       </Head>
-      <div class={tw`min-h-full`}>
+      <div class={tw`bg-primary min-h-full`}>
         <Header
-          subtitle={name === "std" ? "Standard Library" : "Third Party Modules"}
-          widerContent
+          selected={name === "std" ? "Standard Library" : "Third Party Modules"}
         />
-        <div
-          class={tw
-            `max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8 pt-4`}
-        >
-          <Breadcrumbs
-            name={name}
-            version={version}
-            path={path}
-            isStd={isStd}
-          />
+        <TopPanel
+          version={version!}
+          {...{ name, path, isStd, ...data }}
+        />
+        <div class={tw`section-x-inset-xl py-2 pb-8 pt-4`}>
           <div class={tw`mt-8`}>
             {(() => {
               if (data.versions === null) {
@@ -130,18 +124,128 @@ export default function Registry({ params, url, data }: PageProps<Data>) {
                 );
               } else {
                 return (
-                  <ModuleView
-                    version={version!}
-                    {...{ name, path, isStd, url, ...data }}
-                  />
+                  <div class={tw`flex gap-x-14`}>
+                    <div class={tw`w-72 flex-shrink-0`}>
+                      <input
+                        type="text"
+                        class={tw
+                          `rounded-lg border border-[#DDDDDD] text-sm w-full py-2.5 pl-4`}
+                        placeholder="Jump to..."
+                      />
+                      <div class={tw`mt-4`}>
+                        {[{
+                          type: "dir",
+                          path: "/foo",
+                          index: false,
+                        }, {
+                          type: "file",
+                          path: "/test.ts",
+                          index: true,
+                        }].map((file) => {
+                          return (
+                            <div
+                              class={tw`flex gap-1 p-2 rounded-lg w-full ${
+                                file.index ? "bg-gray-100 font-bold" : ""
+                              }`}
+                            >
+                              {file.type === "dir" ? <Dir /> : <File />}
+                              {file.path ?? "/"}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    <ModuleView
+                      version={version!}
+                      {...{ name, path, isStd, url, ...data }}
+                    />
+                  </div>
                 );
               }
             })()}
           </div>
         </div>
-        <Footer simple />
+        <Footer />
       </div>
     </>
+  );
+}
+
+function TopPanel({
+  name,
+  version,
+  path,
+  isStd,
+
+  versions,
+  versionMeta,
+  moduleMeta,
+  versionDeps,
+}: {
+  name: string;
+  version: string;
+  path: string;
+  isStd: boolean;
+} & Data) {
+  // const externalDependencies = versionDeps === null
+  //   ? null
+  //   : listExternalDependencies(
+  //     versionDeps.graph,
+  //     `https://deno.land/x/${name}@${version}${path}`,
+  //   );
+
+  return (
+    <div class={tw`bg-ultralight border-b-1`}>
+      <div class={tw`section-x-inset-xl py-8 md:h-36 flex items-center`}>
+        <div
+          class={tw
+            `flex flex-row flex-wrap justify-between items-center w-full gap-4`}
+        >
+          <div>
+            <Breadcrumbs
+              name={name}
+              version={version}
+              path={path}
+              isStd={isStd}
+            />
+            <div class={tw`text-sm`}>
+              {moduleMeta && emojify(moduleMeta.description ?? "")}
+            </div>
+          </div>
+          <div class={tw`flex flex-row flex-wrap items-center gap-4`}>
+            {versionMeta && moduleMeta && (
+              <div
+                class={tw
+                  `flex flex-row flex-auto justify-center items-center gap-4 border border-dark-border rounded-md bg-white py-2 px-5`}
+              >
+                <div class={tw`flex items-center`}>
+                  <Icons.GitHub class="mr-2 w-5 h-5 inline text-gray-700" />
+                  <a
+                    class={tw`link`}
+                    href={`https://github.com/${versionMeta.uploadOptions.repository}`}
+                  >
+                    {versionMeta.uploadOptions.repository}
+                  </a>
+                </div>
+                <div class={tw`flex items-center`}>
+                  <Icons.Star class="mr-2" title="GitHub Stars" />
+                  <div>{moduleMeta.star_count}</div>
+                </div>
+              </div>
+            )}
+            <div class={tw`flex-auto`}>
+              <VersionSelector
+                versions={versions!.versions}
+                selectedVersion={version}
+                name={name}
+                isStd={isStd}
+                path={path}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -152,10 +256,7 @@ function ModuleView({
   isStd,
   url,
 
-  versions,
   versionMeta,
-  moduleMeta,
-  versionDeps,
   rawFile,
   readmeFile,
   dirEntries,
@@ -177,272 +278,103 @@ function ModuleView({
   const basePath = getBasePath({ isStd, name, version });
   const canonicalPath = `${basePath}${path}`;
 
-  const externalDependencies = versionDeps === null
-    ? null
-    : listExternalDependencies(
-      versionDeps.graph,
-      `https://deno.land/x/${name}@${version}${path}`,
-    );
-
-  function SidePanel() {
-    return (
-      <div class={tw`relative sm:static row-start-1 md:row-start-auto`}>
-        <div
-          class={tw
-            `sticky top-4 col-span-1 flex flex-col sm:flex-row md:flex-col gap-4`}
-        >
-          <div
-            class={tw
-              `max-w-sm w-full shadow-sm rounded-lg border border-gray-200 overflow-hidden`}
-          >
-            <div class={tw`bg-gray-50 p-4`}>
-              <div class={tw`text-xl font-bold`}>{name}</div>
-              {versionMeta === undefined
-                ? (
-                  <>
-                    <div class={tw`w-4/5 sm:w-full bg-gray-100 h-3 my-2`}></div>
-                    <div
-                      class={tw
-                        `w-4/5 sm:w-2/3 bg-gray-100 h-3 my-2 block sm:hidden md:block`}
-                    >
-                    </div>
-                    <div class={tw`mt-3 flex items-center py-0.5`}>
-                      <Icons.GitHub class="mr-2 w-5 h-5 inline text-gray-200" />
-                      <div class={tw`w-4/5 sm:w-2/3 bg-gray-100 h-4`}></div>
-                    </div>
-                    <div class={tw`mt-2 flex items-center py-0.5`}>
-                      <Icons.Star class="mr-2" title="GitHub Stars" />
-                      <div class={tw`w-1/6 sm:w-1/5 bg-gray-100 h-4`}></div>
-                    </div>
-                  </>
-                )
-                : versionMeta === null || moduleMeta === null
-                ? null
-                : (
-                  <>
-                    <div class={tw`text-sm`}>
-                      {emojify(moduleMeta.description ?? "")}
-                    </div>
-                    <div class={tw`mt-3 flex items-center`}>
-                      <Icons.GitHub class="mr-2 w-5 h-5 inline text-gray-700" />
-                      <a
-                        class={tw`link`}
-                        href={`https://github.com/${versionMeta.uploadOptions.repository}`}
-                      >
-                        {versionMeta.uploadOptions.repository}
-                      </a>
-                    </div>
-                    <div class={tw`mt-2 flex items-center`}>
-                      <Icons.Star class="mr-2" title="GitHub Stars" />
-                      <div>{moduleMeta.star_count}</div>
-                    </div>
-                  </>
-                )}
-              <div class={tw`mt-3 w-full`}>
-                <VersionSelector
-                  versions={versions!.versions}
-                  selectedVersion={version}
-                  name={name}
-                  isStd={isStd}
-                  path={path}
-                />
-              </div>
-            </div>
-          </div>
-
-          <div
-            class={tw
-              `max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4`}
-          >
-            <p class={tw`text-md font-semibold mb-2`}>Version Info</p>
-            {versionMeta === null
-              ? null
-              : (
-                <div class={tw`mt-2 flex text-sm items-center`}>
-                  <Icons.Tag title="Tagged at" />
-                  <div title={versionMeta.uploadedAt.toLocaleString()}>
-                    {twas(versionMeta.uploadedAt.getTime())}
-                  </div>
-                </div>
-              )}
-          </div>
-          {externalDependencies !== null && (
+  return (
+    <div>
+      {(() => {
+        if (!versionMeta?.directoryListing.find((d) => d.path === path)) {
+          return (
+            <ErrorMessage title="404 - Not Found">
+              This file or directory could not be found.
+            </ErrorMessage>
+          );
+        } else if (dirEntries === null && rawFile === null) {
+          // No files
+          return (
             <div
               class={tw
-                `max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4`}
+                `rounded-lg overflow-hidden border border-gray-200 bg-white`}
             >
-              <p class={tw`text-md font-semibold mb-2`}>
-                External Dependencies
-              </p>
-              {externalDependencies && (
-                <>
-                  <div class={tw`mt-2 overflow-x-auto`}>
-                    {externalDependencies.map((url) => (
-                      <p key={url}>
-                        {url.startsWith("https://deno.land/")
-                          ? (
-                            <a
-                              href={url.replace("https://deno.land", "")}
-                              class={tw`link text-sm truncate`}
-                            >
-                              {url}
-                            </a>
-                          )
-                          : (
-                            <a href={url} class={tw`link text-sm truncate`}>
-                              {url}
-                            </a>
-                          )}
-                      </p>
-                    ))}
-                  </div>
-                  <div class={tw`text-sm mt-2 italic`}>
-                    {externalDependencies.length === 0
-                      ? "No external dependencies 🎉"
-                      : externalDependencies.length +
-                        (externalDependencies.length === 1
-                          ? " external dependency"
-                          : " external dependencies")}
-                  </div>
-                </>
+              {versionMeta && (
+                <DirectoryListing
+                  name={name}
+                  version={version}
+                  path={path}
+                  dirListing={versionMeta.directoryListing}
+                  repositoryURL={repositoryURL}
+                  url={url}
+                  index={doc as Index}
+                />
+              )}
+              <div class={tw`w-full p-4 text-gray-400 italic`}>No files.</div>
+            </div>
+          );
+        } else if (rawFile instanceof Error) {
+          return (
+            <div
+              class={tw
+                `rounded-lg overflow-hidden border border-gray-200 bg-white`}
+            >
+              {versionMeta && (
+                <DirectoryListing
+                  name={name}
+                  version={version}
+                  path={path}
+                  dirListing={versionMeta.directoryListing}
+                  repositoryURL={repositoryURL}
+                  url={url}
+                  index={doc as Index}
+                />
+              )}
+              <div class={tw`w-full p-4 text-gray-400 italic`}>
+                {rawFile.message}
+              </div>
+            </div>
+          );
+        } else {
+          return (
+            <div class={tw`flex flex-col gap-4`}>
+              {versionMeta && dirEntries && (
+                <DirectoryListing
+                  name={name}
+                  version={version}
+                  path={path}
+                  dirListing={versionMeta.directoryListing}
+                  repositoryURL={repositoryURL}
+                  url={url}
+                  index={doc as Index}
+                />
+              )}
+              {rawFile !== null && (
+                <FileDisplay
+                  raw={rawFile.content}
+                  filetypeOverride={rawFile.highlight ? undefined : "text"}
+                  canonicalPath={canonicalPath}
+                  sourceURL={sourceURL}
+                  repositoryURL={repositoryURL}
+                  baseURL={basePath}
+                  stdVersion={stdVersion}
+                  url={url}
+                  docNodes={doc as DocNode[]}
+                />
+              )}
+              {typeof readmeFile === "string" &&
+                typeof readmeURL === "string" &&
+                typeof readmeCanonicalPath === "string" && (
+                <FileDisplay
+                  raw={readmeFile}
+                  canonicalPath={readmeCanonicalPath}
+                  sourceURL={readmeURL}
+                  repositoryURL={readmeRepositoryURL}
+                  baseURL={basePath}
+                  stdVersion={stdVersion}
+                  url={url}
+                  docNodes={doc as DocNode[]}
+                />
               )}
             </div>
-          )}
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div class={tw`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4`}>
-      <div class={tw`col-span-1`}>
-        <input
-          type="text"
-          class={tw
-            `rounded-lg border border-[#DDDDDD] text-sm w-full py-2.5 pl-4`}
-          placeholder="Jump to..."
-        />
-        <div class={tw`mt-4`}>
-          {[{
-            type: "dir",
-            path: "/foo",
-            index: false,
-          }, {
-            type: "file",
-            path: "/test.ts",
-            index: true,
-          }].map((file) => {
-            return (
-              <div
-                class={tw`flex gap-1 p-2 rounded-lg w-full ${
-                  file.index ? "bg-gray-100 font-bold" : ""
-                }`}
-              >
-                {file.type === "dir" ? <Dir /> : <File />}
-                {file.path ?? "/"}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-      <div class={tw`col-span-1 md:col-span-2 lg:col-span-3`}>
-        {(() => {
-          if (!versionMeta?.directoryListing.find((d) => d.path === path)) {
-            return (
-              <ErrorMessage title="404 - Not Found">
-                This file or directory could not be found.
-              </ErrorMessage>
-            );
-          } else if (dirEntries === null && rawFile === null) {
-            // No files
-            return (
-              <div
-                class={tw
-                  `rounded-lg overflow-hidden border border-gray-200 bg-white`}
-              >
-                {versionMeta && (
-                  <DirectoryListing
-                    name={name}
-                    version={version}
-                    path={path}
-                    dirListing={versionMeta.directoryListing}
-                    repositoryURL={repositoryURL}
-                    url={url}
-                    index={doc as Index}
-                  />
-                )}
-                <div class={tw`w-full p-4 text-gray-400 italic`}>No files.</div>
-              </div>
-            );
-          } else if (rawFile instanceof Error) {
-            return (
-              <div
-                class={tw
-                  `rounded-lg overflow-hidden border border-gray-200 bg-white`}
-              >
-                {versionMeta && (
-                  <DirectoryListing
-                    name={name}
-                    version={version}
-                    path={path}
-                    dirListing={versionMeta.directoryListing}
-                    repositoryURL={repositoryURL}
-                    url={url}
-                    index={doc as Index}
-                  />
-                )}
-                <div class={tw`w-full p-4 text-gray-400 italic`}>
-                  {rawFile.message}
-                </div>
-              </div>
-            );
-          } else {
-            return (
-              <div class={tw`flex flex-col gap-4`}>
-                {versionMeta && dirEntries && (
-                  <DirectoryListing
-                    name={name}
-                    version={version}
-                    path={path}
-                    dirListing={versionMeta.directoryListing}
-                    repositoryURL={repositoryURL}
-                    url={url}
-                    index={doc as Index}
-                  />
-                )}
-                {rawFile !== null && (
-                  <FileDisplay
-                    raw={rawFile.content}
-                    filetypeOverride={rawFile.highlight ? undefined : "text"}
-                    canonicalPath={canonicalPath}
-                    sourceURL={sourceURL}
-                    repositoryURL={repositoryURL}
-                    baseURL={basePath}
-                    stdVersion={stdVersion}
-                    url={url}
-                    docNodes={doc as DocNode[]}
-                  />
-                )}
-                {typeof readmeFile === "string" &&
-                  typeof readmeURL === "string" &&
-                  typeof readmeCanonicalPath === "string" && (
-                  <FileDisplay
-                    raw={readmeFile}
-                    canonicalPath={readmeCanonicalPath}
-                    sourceURL={readmeURL}
-                    repositoryURL={readmeRepositoryURL}
-                    baseURL={basePath}
-                    stdVersion={stdVersion}
-                    url={url}
-                    docNodes={doc as DocNode[]}
-                  />
-                )}
-              </div>
-            );
-          }
-        })()}
-      </div>
-      <SidePanel />
+          );
+        }
+      })()}
     </div>
   );
 }
@@ -459,41 +391,34 @@ function Breadcrumbs({
   isStd: boolean;
 }) {
   const segments = path.split("/").splice(1);
+  segments.unshift(name + (version ? `@${version}` : ""));
+  if (!isStd) {
+    segments.unshift("x");
+  }
+
+  let seg = "";
+  const out: [string, string][] = [];
+  for (const segment of segments) {
+    seg += "/" + segment;
+    out.push([segment, seg]);
+  }
+
   return (
-    <p class={tw`text-gray-500`}>
-      <a href="/" class={tw`link`}>
-        deno.land
-      </a>{" "}
-      / {!isStd && (
-        <>
-          <a href="/x" class={tw`link`}>
-            x
-          </a>{" "}
-          /{" "}
-        </>
-      )}
-      <a class={tw`link`} href={getBasePath({ isStd, name, version })}>
-        {name}
-        {version ? `@${version}` : ""}
-      </a>
-      {path?.length > 0 &&
-        segments.map((p, i) => {
-          const link = segments.slice(0, i + 1).join("/");
-          return (
-            <Fragment key={i}>
-              {" "}
-              /{" "}
-              <a
-                href={`${getBasePath({ isStd, name, version })}${
-                  link ? `/${link}` : ""
-                }`}
-                class={tw`link`}
-              >
-                {p}
-              </a>
-            </Fragment>
-          );
-        })}
+    <p class={tw`text-xl leading-6 font-bold`}>
+      {out.map(([seg, url], i) => {
+        return (
+          <Fragment key={i}>
+            {i !== 0 && "/"}
+            {i === (segments.length - 1)
+              ? <span class={tw`text-black`}>{seg}</span>
+              : (
+                <a href={url} class={tw`link`}>
+                  {seg}
+                </a>
+              )}
+          </Fragment>
+        );
+      })}
     </p>
   );
 }
@@ -512,10 +437,7 @@ function VersionSelector({
   path: string;
 }) {
   return (
-    <div class={tw`gap-2 w-full`}>
-      <label htmlFor="version" class={tw`sr-only`}>
-        Version
-      </label>
+    <div class={tw`w-full`}>
       <VersionSelect
         versions={Object.fromEntries(
           versions.map((
@@ -527,7 +449,7 @@ function VersionSelector({
       {versions[0] !== selectedVersion && (
         <a
           class={tw
-            `mt-2 w-full inline-flex justify-center py-1 px-2 border border-red-300 rounded-md bg-white text-sm leading-5 font-medium text-red-500 hover:text-red-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-red transition duration-150 ease-in-out`}
+            `mt-2 w-full inline-flex justify-center py-1 px-2 bg-white border border-red-300 rounded-md text-sm leading-5 font-medium text-red-500 hover:text-red-400 focus:(outline-none border-blue-300 shadow-outline-red) transition duration-150 ease-in-out`}
           aria-label="Go to latest version"
           href={`/${isStd ? "" : "x/"}${name}@${versions[0]}${path}`}
         >

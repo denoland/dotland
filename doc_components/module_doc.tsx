@@ -61,13 +61,13 @@ export function DocLink(
 }
 
 const colors = {
+  "Namespaces": "#D25646",
   "Classes": "#2FA850",
+  "Enums": "#22abb0",
+  "Variables": "#7E57C0",
   "Functions": "#026BEB",
   "Interfaces": "#D4A068",
-  "Type Aliases": "",
-  "Namespaces": "",
-  "Enums": "",
-  "Variables": "",
+  "Type Aliases": "#A4478C",
 } as const;
 type sectionTitle = keyof typeof colors;
 
@@ -99,7 +99,7 @@ function SectionTitle({ children }: { children: Child<sectionTitle> }) {
   const id = name.replaceAll(TARGET_RE, "_");
   return (
     <h2 class={tw`text-[${colors[name]}] ${style("section")}`} id={id}>
-      <a href={`#${name}`} aria-label="Anchor">
+      <a href={`#${id}`} aria-label="Anchor">
         {name}
       </a>
     </h2>
@@ -119,10 +119,12 @@ export function ModuleDoc(
       {maybe(
         !(library || url.endsWith(".d.ts")),
         <div class={style("moduleDoc")}>
-          <div>
+          <div class={tw`space-y-3`}>
             <Usage url={url} />
             {collection.moduleDoc && (
-              <JsDocModule url={url}>{collection.moduleDoc}</JsDocModule>
+              <JsDocModule url={url} markdownStyle="usage">
+                {collection.moduleDoc}
+              </JsDocModule>
             )}
           </div>
           {collection.namespace && (

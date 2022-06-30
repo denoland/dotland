@@ -80,6 +80,8 @@ const styles = {
   main: apply`md:(col-span-3)`,
   markdown: apply
     `p-4 flex flex-col space-y-4 text-justify ${markdownStyles} ${codeStyles} ${syntaxHighlightingStyles}`,
+  usage: apply
+    `flex flex-col space-y-4 text-justify ${markdownStyles} ${codeStyles} ${syntaxHighlightingStyles}`,
   markdownSummary: apply`text-gray(600 dark:400) ${
     css({
       "p": apply`inline-block`,
@@ -112,7 +114,8 @@ const styles = {
   symbolEnum: apply`text-green(700 dark:500) font-bold hover:underline`,
   symbolFunction: apply`text-cyan(800 dark:400) font-bold hover:underline`,
   symbolInterface: apply`text-cyan(900 dark:300) font-bold hover:underline`,
-  symbolListCellSymbol: apply`block lg:table-cell py-1 pr-3 text-[#232323] font-bold children:(w-52 block)`,
+  symbolListCellSymbol: apply
+    `block lg:table-cell py-1 pr-3 text-[#232323] font-bold children:(w-52 block)`,
   symbolListCellDoc: apply`block lg:table-cell py-1 text-sm text-[#9CA0AA]`,
   symbolListRow: apply`block lg:table-row`,
   symbolListTable: apply`block lg:table`,

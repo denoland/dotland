@@ -124,5 +124,8 @@ export function ModulePathIndex(
       }
     }
   }
+  if (items.length === 0) {
+    return <></>;
+  }
   return <table class={style("modulePathIndexTable")}>{items}</table>;
 }

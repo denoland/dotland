@@ -4,16 +4,15 @@
 import { ComponentChildren, h } from "preact";
 import { tw } from "@twind";
 
-export function InlineCode(
-  props: { children: ComponentChildren; id?: string },
+export function Tag(
+  props: { children: ComponentChildren; color: string },
 ) {
   return (
-    <code
+    <div
       class={tw
-        `py-1 px-2 font-mono bg-gray-100 text-sm break-word rounded-[6px]`}
-      id={props.id}
+        `inline py-1 px-2 rounded-full bg-tag-${props.color}-bg text-tag-${props.color} leading-none font-medium text-xs`}
     >
       {props.children}
-    </code>
+    </div>
   );
 }
