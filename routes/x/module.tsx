@@ -317,6 +317,7 @@ function ModuleView({
               )}
               {rawFile !== null && (
                 <FileDisplay
+                  isStd={isStd}
                   raw={rawFile.content}
                   filetypeOverride={rawFile.highlight ? undefined : "text"}
                   canonicalPath={canonicalPath}
@@ -332,6 +333,7 @@ function ModuleView({
                 typeof readmeURL === "string" &&
                 typeof readmeCanonicalPath === "string" && (
                 <FileDisplay
+                  isStd={isStd}
                   raw={readmeFile}
                   canonicalPath={readmeCanonicalPath}
                   sourceURL={readmeURL}

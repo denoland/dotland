@@ -16,6 +16,7 @@ import { ModuleDoc } from "$doc_components/module_doc.tsx";
 import type { DocNode } from "@/util/doc.ts";
 
 export function FileDisplay(props: {
+  isStd: boolean;
   raw?: string;
   canonicalPath: string;
   sourceURL: string;
@@ -122,7 +123,7 @@ export function FileDisplay(props: {
           case "typescript":
           case "tsx":
           case "jsx":
-            if (!codeview && props.docNodes) {
+            if (!codeview && props.docNodes && props.isStd) {
               return (
                 <div class={tw`p-4`}>
                   <ModuleDoc url={props.url.href}>
