@@ -8,7 +8,7 @@ import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
 import { Handlers } from "$fresh/server.ts";
 import twas from "$twas";
-import { basename, dirname } from "$std/path/mod.ts";
+import { dirname } from "$std/path/mod.ts";
 import { emojify } from "$emoji";
 import { accepts } from "$oak_commons";
 import {
@@ -308,7 +308,7 @@ function ModuleView({
     );
   } else {
     return (
-      <div class={tw`flex flex-col gap-4`}>
+      <div class={tw`flex flex-col gap-4 w-full overflow-auto`}>
         {versionMeta && dirEntries && (
           <DirectoryListing
             name={name}
