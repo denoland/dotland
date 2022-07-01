@@ -82,7 +82,7 @@ export function Footer() {
                 `flex flex-row justify-between items-center lg:(flex-col space-y-5 items-start)`}
             >
               <span class={tw`text-xs text-gray-400 leading-tight`}>
-                Copyright © 2022 Deno Land Inc{" "}
+                Copyright © 2022 Deno Land Inc.{" "}
                 <span class={tw`whitespace-nowrap`}>All rights reserved.</span>
               </span>
               <div class={tw`flex gap-3 text-[#666666]`}>
