@@ -10,7 +10,11 @@ export function HelloBar(props: {
 }) {
   return (
     <div class={tw`text-center bg-black text-white p-1`}>
-      <a href={props.to} target="_blank" class={tw`inline-block p-1 hover:text-underline`}>
+      <a
+        href={props.to}
+        target="_blank"
+        class={tw`inline-block p-1 hover:text-underline`}
+      >
         {props.children}
       </a>
     </div>
