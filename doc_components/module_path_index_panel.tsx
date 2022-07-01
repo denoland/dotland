@@ -47,20 +47,22 @@ function Folder({ children, base, parent }: {
   );
 }
 
-function Module({ children, base, parent, isIndex }: {
+function Module({ children, base, parent, current, isIndex }: {
   children: Child<string>;
   base: string;
   parent: string;
+  current?: string;
   isIndex?: boolean;
 }) {
   const modulePath = take(children);
   const url = `${base}${modulePath}`;
   const href = services.resolveHref(url);
   const label = modulePath.slice(parent === "/" ? 1 : parent.length + 1);
+  const active = current ? current == modulePath : isIndex;
   return (
     <a
       class={tw`flex gap-1 p-2 rounded-lg w-full ${
-        isIndex ? "bg-gray-100 font-bold" : ""
+        active ? "bg-gray-100 font-bold" : ""
       }`}
       href={href}
     >
@@ -74,10 +76,11 @@ function Module({ children, base, parent, isIndex }: {
 }
 
 export function ModulePathIndexPanel(
-  { children, path = "/", base }: {
+  { children, path = "/", base, current }: {
     children: Child<ModuleIndexWithDoc>;
     base: string;
     path?: string;
+    current: string;
   },
 ) {
   const { index } = take(children);
@@ -90,15 +93,20 @@ export function ModulePathIndexPanel(
 
   const moduleIndex = getIndex(modules);
   if (moduleIndex) {
+    if (current === path) {
+      current = moduleIndex;
+    }
     items.push(
-      <Module base={base} parent={path} isIndex={true}>{moduleIndex}</Module>,
+      <Module base={base} parent={path} current={current} isIndex>
+        {moduleIndex}
+      </Module>,
     );
   }
   modules.sort();
   for (const module of modules) {
     if (module !== moduleIndex) {
       items.push(
-        <Module base={base} parent={path}>{module}</Module>,
+        <Module base={base} parent={path} current={current}>{module}</Module>,
       );
     }
   }

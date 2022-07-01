@@ -8,6 +8,7 @@ import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
 import { Handlers } from "$fresh/server.ts";
 import twas from "$twas";
+import { basename, dirname } from "$std/path/mod.ts";
 import { emojify } from "$emoji";
 import { accepts } from "$oak_commons";
 import {
@@ -58,7 +59,7 @@ interface Data {
   readmeCanonicalPath: string | null;
   readmeURL: string | null;
   readmeRepositoryURL: string | undefined | null;
-  doc: DocNode[] | Index | null;
+  doc: [Index, DocNode[] | null] | null;
 }
 
 type Params = {
@@ -122,16 +123,19 @@ export default function Registry({ params, url, data }: PageProps<Data>) {
             } else {
               return (
                 <div class={tw`flex gap-x-14`}>
-                  <ModulePathIndexPanel
-                    base={getBasePath({
-                      isStd,
-                      name,
-                      version,
-                    })}
-                    path={path || "/"}
-                  >
-                    {(data.doc as Index).index}
-                  </ModulePathIndexPanel>
+                  {data.doc && (
+                    <ModulePathIndexPanel
+                      base={getBasePath({
+                        isStd,
+                        name,
+                        version,
+                      })}
+                      path={(data.doc[1] ? dirname(path) : path) || "/"}
+                      current={path}
+                    >
+                      {data.doc[0].index}
+                    </ModulePathIndexPanel>
+                  )}
 
                   <ModuleView
                     version={version!}
@@ -275,7 +279,7 @@ function ModuleView({
             dirListing={versionMeta.directoryListing}
             repositoryURL={repositoryURL}
             url={url}
-            index={doc as Index}
+            index={doc![0]}
           />
         )}
         <div class={tw`w-full p-4 text-gray-400 italic`}>No files.</div>
@@ -294,7 +298,7 @@ function ModuleView({
             dirListing={versionMeta.directoryListing}
             repositoryURL={repositoryURL}
             url={url}
-            index={doc as Index}
+            index={doc![0]}
           />
         )}
         <div class={tw`w-full p-4 text-gray-400 italic`}>
@@ -313,7 +317,7 @@ function ModuleView({
             dirListing={versionMeta.directoryListing}
             repositoryURL={repositoryURL}
             url={url}
-            index={doc as Index}
+            index={doc![0]}
           />
         )}
         {rawFile !== null && (
@@ -326,7 +330,7 @@ function ModuleView({
             baseURL={basePath}
             stdVersion={stdVersion}
             url={url}
-            docNodes={doc as DocNode[]}
+            docNodes={doc![1]}
           />
         )}
         {typeof readmeFile === "string" &&
@@ -340,7 +344,7 @@ function ModuleView({
             baseURL={basePath}
             stdVersion={stdVersion}
             url={url}
-            docNodes={doc as DocNode[]}
+            docNodes={doc![1]}
           />
         )}
       </div>
