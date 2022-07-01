@@ -82,13 +82,8 @@ export function Footer() {
                 `flex flex-row justify-between items-center lg:(flex-col space-y-5 items-start)`}
             >
               <span class={tw`text-xs text-gray-400 leading-tight`}>
-<<<<<<< HEAD
-                Copyright © 2022 Deno Company{" "}
-                <span class={tw`whitespace-nowrap`}>保留所有权利。</span>
-=======
                 Copyright © 2022 Deno Land Inc{" "}
                 <span class={tw`whitespace-nowrap`}>All rights reserved.</span>
->>>>>>> 236fdd98b3a4079652227bae9807e928f3bb2a73
               </span>
               <div class={tw`flex gap-3 text-[#666666]`}>
                 <a href="https://github.com/denoland">
