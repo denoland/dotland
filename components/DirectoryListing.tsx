@@ -87,7 +87,7 @@ export function DirectoryListing(props: {
           </div>
         </div>
 
-        {dirview || (props.index === null)
+        {dirview || (props.index === null) || !isStd
           ? (
             <DirectoryView
               dirListing={props.dirListing}

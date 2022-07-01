@@ -214,15 +214,17 @@ function TopPanel({
                 </div>
               </div>
             )}
-            <div class={tw`flex-auto`}>
-              <VersionSelector
-                versions={versions!.versions}
-                selectedVersion={version}
-                name={name}
-                isStd={isStd}
-                path={path}
-              />
-            </div>
+            {versions && (
+              <div class={tw`flex-auto`}>
+                <VersionSelector
+                  versions={versions!.versions}
+                  selectedVersion={version}
+                  name={name}
+                  isStd={isStd}
+                  path={path}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -322,6 +324,7 @@ function ModuleView({
         )}
         {rawFile !== null && (
           <FileDisplay
+            isStd={isStd}
             raw={rawFile.content}
             filetypeOverride={rawFile.highlight ? undefined : "text"}
             canonicalPath={canonicalPath}
@@ -337,6 +340,7 @@ function ModuleView({
           typeof readmeURL === "string" &&
           typeof readmeCanonicalPath === "string" && (
           <FileDisplay
+            isStd={isStd}
             raw={readmeFile}
             canonicalPath={readmeCanonicalPath}
             sourceURL={readmeURL}
@@ -529,10 +533,16 @@ export const handler: Handlers<Data> = {
             console.error("Failed to fetch dependency information:", e);
             return null;
           }),
-          getDocs(params.name, version!, path).catch((e) => {
-            console.error("Failed to fetch documentation:", e);
-            return null;
-          }),
+          (() => {
+            if (isStd) {
+              return getDocs(params.name, version!, path).catch((e) => {
+                console.error("Failed to fetch documentation:", e);
+                return null;
+              });
+            } else {
+              return Promise.resolve(null);
+            }
+          })(),
         ]);
 
       const sourceURL = getSourceURL(params.name, version, path);

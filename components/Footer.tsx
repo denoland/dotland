@@ -26,7 +26,7 @@ export function Footer() {
               title="Why Deno?"
               entries={{
                 "Develop Locally": "https://deno.land",
-                "Develop Globally": "https://deno.com/deploy",
+                "Deploy Globally": "https://deno.com/deploy",
                 "Compare to Node.js": "https://deno.land/manual/node",
                 "Benchmarks": "https://deno.land/benchmarks",
               }}
@@ -44,7 +44,7 @@ export function Footer() {
               entries={{
                 "CLI Manual": "https://deno.land/manual",
                 "CLI Runtime API": "https://doc.deno.land/deno/stable",
-                "Deploy Manual": "https://deno.com/deploy/docs",
+                "Deploy Docs": "https://deno.com/deploy/docs",
                 "Standard Library": "https://deno.land/std",
                 "Third-Party Modules": "https://deno.land/x",
               }}
@@ -82,7 +82,7 @@ export function Footer() {
                 `flex flex-row justify-between items-center lg:(flex-col space-y-5 items-start)`}
             >
               <span class={tw`text-xs text-gray-400 leading-tight`}>
-                Copyright © 2022 Deno Company{" "}
+                Copyright © 2022 Deno Land Inc.{" "}
                 <span class={tw`whitespace-nowrap`}>All rights reserved.</span>
               </span>
               <div class={tw`flex gap-3 text-[#666666]`}>
@@ -115,7 +115,11 @@ function FooterSection(
           `text-[#454545] flex flex-wrap mt-2 gap-x-2.5 gap-y-1.5 lg:(flex-col mt-4 gap-x-0 gap-y-2.5)`}
       >
         {Object.entries(props.entries).map(([name, link]) => {
-          return <a href={link} class={tw`whitespace-nowrap block`}>{name}</a>;
+          return (
+            <a href={link} class={tw`whitespace-nowrap block hover:underline`}>
+              {name}
+            </a>
+          );
         })}
       </div>
     </div>
