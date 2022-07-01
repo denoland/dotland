@@ -22,9 +22,11 @@ const entries = [
 export function Header({
   selected,
   main,
+  manual,
 }: {
   selected?: (typeof entries)[number]["content"];
   main?: boolean;
+  manual?: boolean;
 }) {
   return (
     <div
@@ -34,7 +36,11 @@ export function Header({
           : "",
       )}
     >
-      <div class={tw`section-x-inset-xl py-5.5`}>
+      <div
+        class={tw`section-x-inset-xl py-5.5 ${
+          manual ? "mx-0! max-w-none!" : ""
+        }`}
+      >
         <nav class={tw`flex justify-between flex-col lg:flex-row`}>
           <input
             type="checkbox"
@@ -61,10 +67,7 @@ export function Header({
 
             {!main && <Search />}
 
-            <label
-              class={tw`lg:hidden checked:bg-red-100`}
-              for="menuToggle"
-            >
+            <label htmlFor="menuToggle" class={tw`lg:hidden`}>
               <Icons.Menu />
               <Icons.Cross class={tw`hidden`} />
             </label>

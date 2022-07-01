@@ -81,12 +81,31 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
         </title>
         <link rel="canonical" href={`https://deno.land/manual${path}`} />
       </Head>
-      <Header selected="Manual" />
+      <Header selected="Manual" manual />
 
       <div class={tw`flex`}>
+        <input
+          type="checkbox"
+          id="ToCToggle"
+          class={tw
+            `hidden checked:siblings:flex checked:sibling:children:(first-child:hidden last-child:block)`}
+          autoComplete="off"
+        />
+
+        <label
+          htmlFor="ToCToggle"
+          class={tw
+            `md:hidden z-10 fixed bottom-5 right-3 rounded-full bg-white p-3 border border-light-border`}
+        >
+          <Icons.Menu />
+          <Icons.Cross class={tw`hidden`} />
+        </label>
+
+        <div class={tw`hidden fixed top-0 w-full h-screen bg-[#4B5563BF]`} />
+
         <div
           class={tw
-            `w-72 border-r border-gray-200 bg-gray-50 h-screen sticky top-0 flex-shrink-0 overflow-y-auto`}
+            `hidden w-60 fixed md:(block sticky) lg:w-72 border-r border-gray-200 bg-gray-50 h-screen top-0 flex-shrink-0 overflow-y-auto flex-col`}
         >
           <div class={tw`bg-gray-100 p-4 border-b border-gray-200`}>
             <VersionSelect
@@ -110,7 +129,8 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             />
           )}
           <div
-            class={tw`section-x-inset-md pb-12 sm:pb-20 justify-self-center`}
+            class={tw
+              `section-x-inset-md pb-12 sm:pb-20 justify-self-center flex-1`}
           >
             <a
               href={getDocURL(version, path)}
