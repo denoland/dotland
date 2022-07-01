@@ -22,7 +22,7 @@ export function DirectoryListing(props: {
 }) {
   const isStd = props.url.pathname.startsWith("/std");
   const basePath = getBasePath({
-    isStd: isStd,
+    isStd,
     name: props.name,
     version: props.version,
   });
@@ -87,7 +87,7 @@ export function DirectoryListing(props: {
           </div>
         </div>
 
-        {dirview || (props.index === null)
+        {dirview || (props.index === null) || !isStd
           ? (
             <DirectoryView
               dirListing={props.dirListing}
