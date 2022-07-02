@@ -123,7 +123,7 @@ export default function Registry({ params, url, data }: PageProps<Data>) {
             } else {
               return (
                 <div class={tw`flex gap-x-14`}>
-                  {data.doc && (
+                  {data.doc && (data.doc[0].indexModule || data.doc[1]) && (
                     <ModulePathIndexPanel
                       base={getBasePath({
                         isStd,

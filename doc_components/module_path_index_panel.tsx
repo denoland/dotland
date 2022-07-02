@@ -61,12 +61,12 @@ function Module({ children, base, parent, current, isIndex }: {
   const active = current ? current == modulePath : isIndex;
   return (
     <a
-      class={tw`flex gap-1 p-2 rounded-lg w-full ${
+      class={tw`flex gap-1 ml-2.5 p-2 rounded-lg w-full ${
         active ? "bg-gray-100 font-bold" : ""
       }`}
       href={href}
     >
-      <Icons.File />
+      {/*TODO: <Icons.File />*/}
       {label}
       {isIndex && (
         <span class={tw`text-[#6C6E78] font-light`}>(default module)</span>
@@ -114,7 +114,7 @@ export function ModulePathIndexPanel(
     return <></>;
   }
   return (
-    <div class={tw`w-72 flex-shrink-0`}>
+    <div class={tw`hidden lg:block w-72 flex-shrink-0`}>
       {
         /*<input
         type="text"
