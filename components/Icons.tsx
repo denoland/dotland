@@ -351,36 +351,3 @@ export function Tag(props: { title?: string }) {
     </svg>
   );
 }
-
-export function File() {
-  return (
-    <svg
-      class={tw`m-2`}
-      xmlns="http://www.w3.org/2000/svg"
-      width="6"
-      height="10"
-      viewBox="0 0 6 10"
-      fill="none"
-    >
-      <path d="M0.5 10L5.5 5L0.5 0V10Z" fill="#6C6E78" />
-    </svg>
-  );
-}
-
-export function Dir() {
-  return (
-    <svg
-      class={tw`m-2`}
-      width="14"
-      height="12"
-      viewBox="0 0 14 12"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M12.6 1.80002H7L5.6 0.400024H1.4C0.63 0.400024 0.00699999 1.03002 0.00699999 1.80002L0 10.2C0 10.97 0.63 11.6 1.4 11.6H12.6C13.37 11.6 14 10.97 14 10.2V3.20002C14 2.43002 13.37 1.80002 12.6 1.80002ZM12.6 10.2H1.4V3.20002H12.6V10.2Z"
-        fill="#6C6E78"
-      />
-    </svg>
-  );
-}
