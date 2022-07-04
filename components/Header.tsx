@@ -126,7 +126,7 @@ function Search() {
       <Head>
         <link
           rel="preconnect"
-          href="https://BH4D9OD16A-dsn.algolia.net"
+          href="https://DMFING7U5D-dsn.algolia.net"
           crossOrigin="true"
         />
         <link
