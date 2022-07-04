@@ -300,7 +300,7 @@ function ModuleView({
             dirListing={versionMeta.directoryListing}
             repositoryURL={repositoryURL}
             url={url}
-            index={doc![0]}
+            index={doc?.[0] ?? null}
           />
         )}
         <div class={tw`w-full p-4 text-gray-400 italic`}>
@@ -319,7 +319,7 @@ function ModuleView({
             dirListing={versionMeta.directoryListing}
             repositoryURL={repositoryURL}
             url={url}
-            index={doc![0]}
+            index={doc?.[0] ?? null}
           />
         )}
         {rawFile !== null && (
@@ -333,7 +333,7 @@ function ModuleView({
             baseURL={basePath}
             stdVersion={stdVersion}
             url={url}
-            docNodes={doc![1]}
+            docNodes={doc?.[1] ?? null}
           />
         )}
         {typeof readmeFile === "string" &&
@@ -348,7 +348,7 @@ function ModuleView({
             baseURL={basePath}
             stdVersion={stdVersion}
             url={url}
-            docNodes={doc![1]}
+            docNodes={doc?.[1] ?? null}
           />
         )}
       </div>

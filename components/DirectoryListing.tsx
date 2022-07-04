@@ -18,7 +18,7 @@ export function DirectoryListing(props: {
   path: string;
   repositoryURL?: string | null;
   url: URL;
-  index: Index;
+  index: Index | null;
 }) {
   const isStd = props.url.pathname.startsWith("/std");
   const basePath = getBasePath({
