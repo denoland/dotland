@@ -43,7 +43,6 @@ export async function getModuleIndex(
     throw new Error(`Unexpected result fetching module index.`);
   }
   const index = await response.json();
-  console.log(index);
   const indexModule = getIndex(index.index[path || "/"]);
   if (indexModule) {
     return {
