@@ -1,7 +1,6 @@
 import type { ModuleIndexWithDoc } from "$doc_components/module_index.tsx";
 import type { DocNode } from "$deno_doc/types.d.ts";
 import { getIndex } from "$doc_components/doc.ts";
-import { dirname } from "$std/path/mod.ts";
 import { fileTypeFromURL } from "./registry_utils.ts";
 export type { DocNode };
 
@@ -16,18 +15,33 @@ export async function getDocs(
   name: string,
   version: string,
   path: string,
-): Promise<[index: Index, docs: DocNode[] | null]> {
+): Promise<DocNode[] | Index> {
   const type = fileTypeFromURL(path);
   if (
     type === "javascript" || type === "typescript" ||
     type === "tsx" || type === "jsx"
   ) {
-    return Promise.all([
-      getModuleIndex(name, version, dirname(path)),
-      getDocNodes(name, version, path),
-    ]);
+    return getDocNodes(name, version, path);
   } else { // TODO: check if it is a directory
-    return [await getModuleIndex(name, version, path), null];
+    const index = await getModuleIndex(name, version, path);
+    const indexModule = getIndex(index.index[path || "/"]);
+    if (indexModule) {
+      return {
+        index,
+        indexModule,
+        nodes: await getDocNodes(
+          name,
+          version,
+          indexModule,
+        ),
+      };
+    } else {
+      return {
+        index,
+        indexModule: undefined,
+        nodes: [],
+      };
+    }
   }
 }
 
@@ -35,32 +49,14 @@ export async function getModuleIndex(
   module: string,
   version: string,
   path: string,
-): Promise<Index> {
+): Promise<ModuleIndexWithDoc> {
   const response = await fetch(
     `${API_URL}${module}/${version}/index${path}`,
   );
   if (response.status !== 200) {
     throw new Error(`Unexpected result fetching module index.`);
   }
-  const index = await response.json();
-  const indexModule = getIndex(index.index[path || "/"]);
-  if (indexModule) {
-    return {
-      index,
-      indexModule,
-      nodes: await getDocNodes(
-        module,
-        version,
-        indexModule,
-      ),
-    };
-  } else {
-    return {
-      index,
-      indexModule: undefined,
-      nodes: [],
-    };
-  }
+  return await response.json();
 }
 
 export async function getEntries(
