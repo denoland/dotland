@@ -8,6 +8,7 @@ import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
 import { Handlers } from "$fresh/server.ts";
 import twas from "$twas";
+import { dirname } from "$std/path/mod.ts";
 import { emojify } from "$emoji";
 import { accepts } from "$oak_commons";
 import {
@@ -38,6 +39,7 @@ import { ErrorMessage } from "@/components/ErrorMessage.tsx";
 import { type DocNode, getDocs, type Index } from "@/util/doc.ts";
 import * as Icons from "@/components/Icons.tsx";
 import VersionSelect from "@/islands/VersionSelect.tsx";
+import { ModulePathIndexPanel } from "$doc_components/module_path_index_panel.tsx";
 
 // 100kb
 const MAX_SYNTAX_HIGHLIGHT_FILE_SIZE = 100 * 1024;
@@ -57,7 +59,7 @@ interface Data {
   readmeCanonicalPath: string | null;
   readmeURL: string | null;
   readmeRepositoryURL: string | undefined | null;
-  doc: DocNode[] | Index | null;
+  doc: [Index, DocNode[] | null] | null;
 }
 
 type Params = {
@@ -91,45 +93,58 @@ export default function Registry({ params, url, data }: PageProps<Data>) {
           version={version!}
           {...{ name, path, isStd, ...data }}
         />
-        <div class={tw`section-x-inset-xl py-2 pb-8 pt-4`}>
-          <div class={tw`mt-8`}>
-            {(() => {
-              if (data.versions === null) {
-                return (
-                  <ErrorMessage title="404 - Not Found">
-                    This module does not exist.
-                  </ErrorMessage>
-                );
-              } else if (
-                data.versions.latest === null &&
-                data.versions.versions.length === 0
-              ) {
-                return (
-                  <ErrorMessage title="No uploaded versions">
-                    This module name has been reserved for a repository, but no
-                    versions have been uploaded yet. Modules that do not upload
-                    a version within 30 days of registration will be removed.
-                    {" "}
-                    {data.versions.isLegacy &&
-                      "If you are the owner of this module, please re-add the GitHub repository with deno.land/x (by following the instructions at https://deno.land/x#add), and publish a new version."}
-                  </ErrorMessage>
-                );
-              } else if (!data.versions.versions.includes(version!)) {
-                return (
-                  <ErrorMessage title="404 - Not Found">
-                    This version does not exist for this module.
-                  </ErrorMessage>
-                );
-              } else {
-                return (
+        <div class={tw`section-x-inset-xl pb-8 pt-12`}>
+          {(() => {
+            if (data.versions === null) {
+              return (
+                <ErrorMessage title="404 - Not Found">
+                  This module does not exist.
+                </ErrorMessage>
+              );
+            } else if (
+              data.versions.latest === null &&
+              data.versions.versions.length === 0
+            ) {
+              return (
+                <ErrorMessage title="No uploaded versions">
+                  This module name has been reserved for a repository, but no
+                  versions have been uploaded yet. Modules that do not upload a
+                  version within 30 days of registration will be removed.{" "}
+                  {data.versions.isLegacy &&
+                    "If you are the owner of this module, please re-add the GitHub repository with deno.land/x (by following the instructions at https://deno.land/x#add), and publish a new version."}
+                </ErrorMessage>
+              );
+            } else if (!data.versions.versions.includes(version!)) {
+              return (
+                <ErrorMessage title="404 - Not Found">
+                  This version does not exist for this module.
+                </ErrorMessage>
+              );
+            } else {
+              return (
+                <div class={tw`flex gap-x-14`}>
+                  {data.doc && (data.doc[0].indexModule || data.doc[1]) && (
+                    <ModulePathIndexPanel
+                      base={getBasePath({
+                        isStd,
+                        name,
+                        version,
+                      })}
+                      path={(data.doc[1] ? dirname(path) : path) || "/"}
+                      current={path}
+                    >
+                      {data.doc[0].index}
+                    </ModulePathIndexPanel>
+                  )}
+
                   <ModuleView
                     version={version!}
                     {...{ name, path, isStd, url, ...data }}
                   />
-                );
-              }
-            })()}
-          </div>
+                </div>
+              );
+            }
+          })()}
         </div>
         <Footer />
       </div>
@@ -224,10 +239,7 @@ function ModuleView({
   isStd,
   url,
 
-  versions,
   versionMeta,
-  moduleMeta,
-  versionDeps,
   rawFile,
   readmeFile,
   dirEntries,
@@ -249,107 +261,99 @@ function ModuleView({
   const basePath = getBasePath({ isStd, name, version });
   const canonicalPath = `${basePath}${path}`;
 
-  return (
-    <div>
-      {(() => {
-        if (!versionMeta?.directoryListing.find((d) => d.path === path)) {
-          return (
-            <ErrorMessage title="404 - Not Found">
-              This file or directory could not be found.
-            </ErrorMessage>
-          );
-        } else if (dirEntries === null && rawFile === null) {
-          // No files
-          return (
-            <div
-              class={tw
-                `rounded-lg overflow-hidden border border-gray-200 bg-white`}
-            >
-              {versionMeta && (
-                <DirectoryListing
-                  name={name}
-                  version={version}
-                  path={path}
-                  dirListing={versionMeta.directoryListing}
-                  repositoryURL={repositoryURL}
-                  url={url}
-                  index={doc as Index}
-                />
-              )}
-              <div class={tw`w-full p-4 text-gray-400 italic`}>No files.</div>
-            </div>
-          );
-        } else if (rawFile instanceof Error) {
-          return (
-            <div
-              class={tw
-                `rounded-lg overflow-hidden border border-gray-200 bg-white`}
-            >
-              {versionMeta && (
-                <DirectoryListing
-                  name={name}
-                  version={version}
-                  path={path}
-                  dirListing={versionMeta.directoryListing}
-                  repositoryURL={repositoryURL}
-                  url={url}
-                  index={doc as Index}
-                />
-              )}
-              <div class={tw`w-full p-4 text-gray-400 italic`}>
-                {rawFile.message}
-              </div>
-            </div>
-          );
-        } else {
-          return (
-            <div class={tw`flex flex-col gap-4`}>
-              {versionMeta && dirEntries && (
-                <DirectoryListing
-                  name={name}
-                  version={version}
-                  path={path}
-                  dirListing={versionMeta.directoryListing}
-                  repositoryURL={repositoryURL}
-                  url={url}
-                  index={doc as Index}
-                />
-              )}
-              {rawFile !== null && (
-                <FileDisplay
-                  isStd={isStd}
-                  raw={rawFile.content}
-                  filetypeOverride={rawFile.highlight ? undefined : "text"}
-                  canonicalPath={canonicalPath}
-                  sourceURL={sourceURL}
-                  repositoryURL={repositoryURL}
-                  baseURL={basePath}
-                  stdVersion={stdVersion}
-                  url={url}
-                  docNodes={doc as DocNode[]}
-                />
-              )}
-              {typeof readmeFile === "string" &&
-                typeof readmeURL === "string" &&
-                typeof readmeCanonicalPath === "string" && (
-                <FileDisplay
-                  isStd={isStd}
-                  raw={readmeFile}
-                  canonicalPath={readmeCanonicalPath}
-                  sourceURL={readmeURL}
-                  repositoryURL={readmeRepositoryURL}
-                  baseURL={basePath}
-                  stdVersion={stdVersion}
-                  url={url}
-                  docNodes={doc as DocNode[]}
-                />
-              )}
-            </div>
-          );
-        }
-      })()}
-    </div>
-  );
+  if (!versionMeta?.directoryListing.find((d) => d.path === path)) {
+    return (
+      <ErrorMessage title="404 - Not Found">
+        This file or directory could not be found.
+      </ErrorMessage>
+    );
+  } else if (dirEntries === null && rawFile === null) {
+    // No files
+    return (
+      <div
+        class={tw`rounded-lg overflow-hidden border border-gray-200 bg-white`}
+      >
+        {versionMeta && (
+          <DirectoryListing
+            name={name}
+            version={version}
+            path={path}
+            dirListing={versionMeta.directoryListing}
+            repositoryURL={repositoryURL}
+            url={url}
+            index={doc![0]}
+          />
+        )}
+        <div class={tw`w-full p-4 text-gray-400 italic`}>No files.</div>
+      </div>
+    );
+  } else if (rawFile instanceof Error) {
+    return (
+      <div
+        class={tw`rounded-lg overflow-hidden border border-gray-200 bg-white`}
+      >
+        {versionMeta && (
+          <DirectoryListing
+            name={name}
+            version={version}
+            path={path}
+            dirListing={versionMeta.directoryListing}
+            repositoryURL={repositoryURL}
+            url={url}
+            index={doc![0]}
+          />
+        )}
+        <div class={tw`w-full p-4 text-gray-400 italic`}>
+          {rawFile.message}
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div class={tw`flex flex-col gap-4 w-full overflow-auto`}>
+        {versionMeta && dirEntries && (
+          <DirectoryListing
+            name={name}
+            version={version}
+            path={path}
+            dirListing={versionMeta.directoryListing}
+            repositoryURL={repositoryURL}
+            url={url}
+            index={doc![0]}
+          />
+        )}
+        {rawFile !== null && (
+          <FileDisplay
+            isStd={isStd}
+            raw={rawFile.content}
+            filetypeOverride={rawFile.highlight ? undefined : "text"}
+            canonicalPath={canonicalPath}
+            sourceURL={sourceURL}
+            repositoryURL={repositoryURL}
+            baseURL={basePath}
+            stdVersion={stdVersion}
+            url={url}
+            docNodes={doc![1]}
+          />
+        )}
+        {typeof readmeFile === "string" &&
+          typeof readmeURL === "string" &&
+          typeof readmeCanonicalPath === "string" && (
+          <FileDisplay
+            isStd={isStd}
+            raw={readmeFile}
+            canonicalPath={readmeCanonicalPath}
+            sourceURL={readmeURL}
+            repositoryURL={readmeRepositoryURL}
+            baseURL={basePath}
+            stdVersion={stdVersion}
+            url={url}
+            docNodes={doc![1]}
+          />
+        )}
+      </div>
+    );
+  }
 }
 
 function Breadcrumbs({
