@@ -40,9 +40,11 @@ export function Header({
             type="checkbox"
             id="menuToggle"
             class={tw
-              `hidden checked:siblings:flex checked:sibling:children:last-child:children:(first-child:hidden last-child:block) ${css({
-                "touch-action": "manipulation",
-              })}`}
+              `hidden checked:siblings:flex checked:sibling:children:last-child:children:(first-child:hidden last-child:block) ${
+                css({
+                  "touch-action": "manipulation",
+                })
+              }`}
             autoComplete="off"
           />
 
