@@ -700,6 +700,19 @@ export function getBasePath({
   }`;
 }
 
+export function getModulePath(
+  name: string,
+  version: string | undefined,
+  path: string | undefined,
+) {
+  const isStd = name === "std";
+  return getBasePath({
+    isStd,
+    name,
+    version,
+  }) + path;
+}
+
 export const S3_BUCKET =
   "http://deno-registry2-prod-storagebucket-b3a31d16.s3-website-us-east-1.amazonaws.com/";
 

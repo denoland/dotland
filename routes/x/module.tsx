@@ -17,6 +17,7 @@ import {
   getBasePath,
   getDirEntries,
   getModule,
+  getModulePath,
   getRawFile,
   getReadme,
   getRepositoryURL,
@@ -52,7 +53,6 @@ interface Data {
   dirEntries: DirEntry[] | null;
   readme: Readme | null;
   repositoryURL: string;
-
   showCode: boolean;
   data: Doc | RawFile | Error | null;
 }
@@ -67,11 +67,11 @@ export default function Registry({ params, url, data }: PageProps<MaybeData>) {
   let {
     name,
     version,
-    path: xPath,
+    path: maybePath,
   } = params as Params;
   version &&= decodeURIComponent(version);
 
-  const path = xPath ? "/" + xPath : "";
+  const path = maybePath ? "/" + maybePath : "";
   const isStd = name === "std";
 
   return (
@@ -164,15 +164,12 @@ function TopPanel({
               </div>
             )}
             {versions && (
-              <div class={tw`flex-auto`}>
-                <VersionSelector
-                  versions={versions!.versions}
-                  selectedVersion={version}
-                  name={name}
-                  isStd={isStd}
-                  path={path}
-                />
-              </div>
+              <VersionSelector
+                versions={versions!.versions}
+                selectedVersion={version}
+                name={name}
+                path={path}
+              />
             )}
           </div>
         </div>
@@ -325,35 +322,33 @@ function VersionSelector({
   versions,
   selectedVersion,
   name,
-  isStd,
   path,
 }: {
   versions: string[];
   selectedVersion: string;
   name: string;
-  isStd: boolean;
   path: string;
 }) {
   return (
-    <div class={tw`w-full`}>
-      <VersionSelect
-        versions={Object.fromEntries(
-          versions.map((
-            ver,
-          ) => [ver, `/${isStd ? "" : "x/"}${name}@${ver}${path}`]),
+    <div class={tw`flex-auto`}>
+      <div class={tw`w-full`}>
+        <VersionSelect
+          versions={Object.fromEntries(
+            versions.map((ver) => [ver, getModulePath(name, ver, path)]),
+          )}
+          selectedVersion={selectedVersion}
+        />
+        {versions[0] !== selectedVersion && (
+          <a
+            class={tw
+              `mt-2 w-full inline-flex justify-center py-1 px-2 bg-white border border-red-300 rounded-md text-sm leading-5 font-medium text-red-500 hover:text-red-400 focus:(outline-none border-blue-300 shadow-outline-red) transition duration-150 ease-in-out`}
+            aria-label="Go to latest version "
+            href={getModulePath(name, versions[0], path)}
+          >
+            Go to latest
+          </a>
         )}
-        selectedVersion={selectedVersion}
-      />
-      {versions[0] !== selectedVersion && (
-        <a
-          class={tw
-            `mt-2 w-full inline-flex justify-center py-1 px-2 bg-white border border-red-300 rounded-md text-sm leading-5 font-medium text-red-500 hover:text-red-400 focus:(outline-none border-blue-300 shadow-outline-red) transition duration-150 ease-in-out`}
-          aria-label="Go to latest version"
-          href={`/${isStd ? "" : "x/"}${name}@${versions[0]}${path}`}
-        >
-          Go to latest
-        </a>
-      )}
+      </div>
     </div>
   );
 }
@@ -363,12 +358,12 @@ export const handler: Handlers<MaybeData> = {
     let {
       name,
       version,
-      path: xPath,
+      path: maybePath,
     } = params as Params;
     const url = new URL(req.url);
     const isHTML = accepts(req, "application/*", "text/html") === "text/html";
 
-    const path = xPath ? "/" + xPath : "";
+    const path = maybePath ? "/" + maybePath : "";
     const isStd = name === "std";
 
     if (!version) {
@@ -392,7 +387,7 @@ export const handler: Handlers<MaybeData> = {
 
       return new Response(undefined, {
         headers: {
-          Location: `/${isStd ? name : "x/" + name}@${versions!.latest}${path}`,
+          Location: getModulePath(name, versions!.latest, path),
           "x-deno-warning": `Implicitly using latest version (${
             versions!.latest
           }) for ${url.href}`,
@@ -490,9 +485,7 @@ export const handler: Handlers<MaybeData> = {
         dirEntries,
         readme,
         repositoryURL,
-
         showCode: !doc,
-
         data: doc ?? file,
       });
     } else {

@@ -36,9 +36,8 @@ export async function getDocs(
       doc,
     };
   } else { // TODO: check if it is a directory
-    const index = await getModuleIndex(name, version, path);
     return {
-      index,
+      index: await getModuleIndex(name, version, path),
       doc: null,
     };
   }
@@ -74,27 +73,6 @@ export async function getModuleIndex(
       nodes: [],
     };
   }
-}
-
-export async function getEntries(
-  module: string,
-  version: string,
-  modules: string[],
-): Promise<Record<string, DocNode[]>> {
-  const response = await fetch(
-    `${API_URL}${module}/${version}/doc`,
-    {
-      method: "POST",
-      body: JSON.stringify(modules),
-      headers: {
-        "content-type": "application/json",
-      },
-    },
-  );
-  if (response.status !== 200) {
-    throw new Error(`Unexpected result fetching doc nodes.`);
-  }
-  return response.json();
 }
 
 export async function getDocNodes(
