@@ -8,6 +8,7 @@ import { Markdown } from "./Markdown.tsx";
 import {
   fileNameFromURL,
   fileTypeFromURL,
+  filetypeIsJS,
   isReadme,
 } from "@/util/registry_utils.ts";
 import * as Icons from "./Icons.tsx";
@@ -76,8 +77,7 @@ export function FileDisplay(props: {
                 </a>
               )}
           </div>
-          {(filetype === "javascript" || filetype === "typescript" ||
-            filetype === "tsx" || filetype === "jsx") &&
+          {filetypeIsJS(filetype) &&
             (
               <div class={tw`ml-4`}>
                 <a href={doc.href} class={tw`link`}>Documentation</a>

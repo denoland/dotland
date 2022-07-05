@@ -4,19 +4,29 @@ export const CDN_ENDPOINT = "https://cdn.deno.land/";
 const API_ENDPOINT = "https://api.deno.land/";
 
 export interface CommonProps {
+  /** data of a version */
   versionMeta: VersionMetaInfo;
+  /** misc info of a module */
   moduleMeta: Module | null;
+  /** files and directories in module */
   dirEntries: DirEntry[] | null;
 
   isStd: boolean;
+  /** module name */
   name: string;
+  /** module version */
   version: string;
+  /** path in module */
   path: string;
 
+  /** readme for current path */
   readme: Readme | null;
 
+  /** url of the repo */
   repositoryURL: string;
+  /** base path of the module (/x/[name]@[version]) */
   basePath: string;
+  /** request URL */
   url: URL;
 }
 
@@ -40,6 +50,11 @@ export function getDirEntries(
     })
     .sort((a, b) => a.name.codePointAt(0)! - b.name.codePointAt(0)!);
   return files.length === 0 ? null : files;
+}
+
+export function filetypeIsJS(filetype: string | undefined): boolean {
+  return filetype === "javascript" || filetype === "typescript" ||
+    filetype === "tsx" || filetype === "jsx";
 }
 
 // 100kb

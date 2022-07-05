@@ -2,7 +2,7 @@ import type { ModuleIndexWithDoc } from "$doc_components/module_index.tsx";
 import type { DocNode } from "$deno_doc/types.d.ts";
 import { getIndex } from "$doc_components/doc.ts";
 import { dirname } from "$std/path/mod.ts";
-import { fileTypeFromURL } from "./registry_utils.ts";
+import { fileTypeFromURL, filetypeIsJS } from "./registry_utils.ts";
 export type { DocNode };
 
 const API_URL = "https://apiland.deno.dev/v2/modules/";
@@ -23,10 +23,7 @@ export async function getDocs(
   path: string,
 ): Promise<Doc> {
   const type = fileTypeFromURL(path);
-  if (
-    type === "javascript" || type === "typescript" ||
-    type === "tsx" || type === "jsx"
-  ) {
+  if (filetypeIsJS(type)) {
     const [index, doc] = await Promise.all([
       getModuleIndex(name, version, dirname(path)),
       getDocNodes(name, version, path),
