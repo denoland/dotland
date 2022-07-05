@@ -368,7 +368,7 @@ export const handler: Handlers<MaybeData> = {
 
     if (!version) {
       const versions = await getVersionList(name);
-      if (!versions || !versions.latest) {
+      if (!versions?.latest) {
         if (isHTML) {
           return render!({ versions });
         } else {
@@ -426,19 +426,18 @@ export const handler: Handlers<MaybeData> = {
       return Response.redirect(url, 302);
     }
 
-    version = decodeURIComponent(version);
+    version = decodeURIComponent(version!);
 
     const versions = await getVersionList(params.name).catch((e) => {
       console.error("Failed to fetch versions:", e);
       return null;
     });
 
-    const canRenderView = !(versions === null) &&
-      !(versions.latest === null && versions.versions.length === 0) &&
-      !(!versions.versions.includes(version!));
+    const canRenderView = versions && versions.latest &&
+      versions.versions.includes(version);
 
     if (canRenderView) {
-      const code = url.searchParams.has("code") || !isStd;
+      const code = url.searchParams.has("code") || !isStd; // TODO(@crowlKats): remove isStd check once performance is adequate
 
       const [versionMeta, moduleMeta, versionDeps, doc] = await Promise
         .all([
@@ -449,11 +448,12 @@ export const handler: Handlers<MaybeData> = {
         ]);
 
       const dirEntries = getDirEntries(versionMeta, path);
-      const basePath = getBasePath({ isStd, name, version });
-      const canonicalPath = basePath + path;
-      const repositoryURL = dirEntries
-        ? getRepositoryURL(versionMeta, path, "tree")
-        : getRepositoryURL(versionMeta, path);
+      const canonicalPath = getModulePath(name, version, path);
+      const repositoryURL = getRepositoryURL(
+        versionMeta,
+        path,
+        dirEntries ? "tree" : undefined,
+      );
 
       const [readme, file] = await Promise.all([
         getReadme(
