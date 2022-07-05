@@ -390,13 +390,9 @@ export const handler: Handlers<MaybeData> = {
         }
       }
 
-      url.pathname = `/${isStd ? name : "x/" + name}@${
-        versions!.latest
-      }${path}`;
-
       return new Response(undefined, {
         headers: {
-          Location: url.href,
+          Location: `/${isStd ? name : "x/" + name}@${versions!.latest}${path}`,
           "x-deno-warning": `Implicitly using latest version (${
             versions!.latest
           }) for ${url.href}`,
