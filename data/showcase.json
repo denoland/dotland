@@ -87,5 +87,10 @@
     "title": "Ter",
     "link": "https://ter.deno.dev/",
     "github": "kkga/ter"
-  }
+  },
+  {
+    "image": "/images/showcase/edrys.png",
+    "title": "Edyrs",
+    "link": "https://edrys.org"
+  },
 ]
