@@ -12,22 +12,35 @@ export interface Index {
   nodes: DocNode[];
 }
 
+export interface Doc {
+  index: Index;
+  doc: DocNode[] | null;
+}
+
 export async function getDocs(
   name: string,
   version: string,
   path: string,
-): Promise<[index: Index, docs: DocNode[] | null]> {
+): Promise<Doc> {
   const type = fileTypeFromURL(path);
   if (
     type === "javascript" || type === "typescript" ||
     type === "tsx" || type === "jsx"
   ) {
-    return Promise.all([
+    const [index, doc] = await Promise.all([
       getModuleIndex(name, version, dirname(path)),
       getDocNodes(name, version, path),
     ]);
+    return {
+      index,
+      doc,
+    };
   } else { // TODO: check if it is a directory
-    return [await getModuleIndex(name, version, path), null];
+    const index = await getModuleIndex(name, version, path);
+    return {
+      index,
+      doc: null,
+    };
   }
 }
 
@@ -43,7 +56,6 @@ export async function getModuleIndex(
     throw new Error(`Unexpected result fetching module index.`);
   }
   const index = await response.json();
-  console.log(index);
   const indexModule = getIndex(index.index[path || "/"]);
   if (indexModule) {
     return {

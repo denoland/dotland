@@ -10,7 +10,7 @@ export function ErrorMessage(props: {
   children: ComponentChildren;
 }) {
   return (
-    <div class={tw`rounded-md bg-red-50 border border-red-200 p-4`}>
+    <div class={tw`rounded-md bg-red-50 border border-red-200 p-4 w-full`}>
       <div class={tw`flex`}>
         <div class={tw`flex-shrink-0`}>
           <Icons.Error />
