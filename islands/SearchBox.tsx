@@ -17,13 +17,25 @@ export default function SearchBox() {
     "QFPCRZC6WX",
     "2ed789b2981acd210267b27f03ab47da",
   );
-  const index = client.initIndex("deno_modules");
 
   useEffect(() => {
-    index.search(input, {
-      filters: "kind:function",
-    }).then((x) => {
-      console.log(x);
+    const queries = [{
+      indexName: "deno_modules",
+      query: input,
+      params: {
+        hitsPerPage: 3,
+        filters: "kind:function",
+      },
+    }, {
+      indexName: "deno_manual",
+      query: input,
+      params: {
+        hitsPerPage: 3,
+      },
+    }];
+
+    client.multipleQueries(queries).then(({ results }) => {
+      console.log(results);
     });
   }, [input]);
 
