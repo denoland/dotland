@@ -105,7 +105,7 @@ function FileDoc({
       <div class={tw`flex justify-between mb-8`}>
         <div>{/* TODO: add module name */}</div>
         <a
-          href={sourceURL + "?code"}
+          href={`${sourceURL}?code`}
           class={tw`rounded-md border border-dark-border p-2`}
         >
           <Icons.SourceFile />
