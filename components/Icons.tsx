@@ -384,3 +384,30 @@ export function Dir() {
     </svg>
   );
 }
+
+export function SourceFile() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="15"
+      height="15"
+      viewBox="0 0 15 15"
+      fill="none"
+    >
+      <path
+        d="M2.66699 14.1667H12.0003C12.3539 14.1667 12.6931 14.0262 12.9431 13.7762C13.1932 13.5261 13.3337 13.187 13.3337 12.8333V4.50001L9.66699 0.833344H4.00033C3.6467 0.833344 3.30756 0.973819 3.05752 1.22387C2.80747 1.47392 2.66699 1.81305 2.66699 2.16668V4.83334"
+        stroke="#232323"
+        stroke-width="1.4"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M6.00016 11.5L8.00016 9.50001L6.00016 7.50001M3.3335 7.50001L1.3335 9.50001L3.3335 11.5M9.3335 0.833344V4.83334H13.3335L9.3335 0.833344Z"
+        stroke="#232323"
+        stroke-width="1.4"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+}
