@@ -7,6 +7,7 @@ import { Fragment, h } from "preact";
 import { apply, css, tw } from "@twind";
 import * as Icons from "./Icons.tsx";
 import { Head } from "$fresh/src/runtime/head.ts";
+import SearchBox from "../islands/SearchBox.tsx";
 
 const entries = [
   { href: "/manual", content: "Manual" },
@@ -152,26 +153,7 @@ function Search() {
         }}
       />
 
-      <button
-        class={tw
-          `pl-4 w-80 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light focus:outline-none`}
-        // @ts-ignore onClick does support strings
-        onClick="document.querySelector('#search button').click()"
-      >
-        <div class={tw`flex items-center pointer-events-none`}>
-          <Icons.MagnifyingGlass />
-          {/*<input class={tw`ml-1.5 py-2.5 h-9 flex-auto bg-transparent placeholder:text-light text-default text-sm leading-4 font-medium appearance-none`} type="text" placeholder="Search..." />*/}
-          <div
-            class={tw
-              `ml-1.5 py-2.5 h-9 flex-auto text-light text-sm leading-4 font-medium text-left`}
-          >
-            Search...
-          </div>
-          <div class={tw`mx-4`}>
-            ⌘K
-          </div>
-        </div>
-      </button>
+      <SearchBox />
     </>
   );
 }

@@ -21,7 +21,8 @@ import * as $15 from "./routes/std.tsx";
 import * as $16 from "./routes/translations.tsx";
 import * as $17 from "./routes/x/index.tsx";
 import * as $18 from "./routes/x/module.tsx";
-import * as $$0 from "./islands/VersionSelect.tsx";
+import * as $$0 from "./islands/SearchBox.tsx";
+import * as $$1 from "./islands/VersionSelect.tsx";
 
 const manifest = {
   routes: {
@@ -46,7 +47,8 @@ const manifest = {
     "./routes/x/module.tsx": $18,
   },
   islands: {
-    "./islands/VersionSelect.tsx": $$0,
+    "./islands/SearchBox.tsx": $$0,
+    "./islands/VersionSelect.tsx": $$1,
   },
   baseUrl: import.meta.url,
 };
