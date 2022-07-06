@@ -206,10 +206,10 @@ export function Instagram() {
   );
 }
 
-export function MagnifyingGlass() {
+export function MagnifyingGlass(props: {class?: string;}) {
   return (
     <svg
-      class={tw`h-5 w-5`}
+      class={tw`h-5 w-5 ${props.class ?? ""}`}
       fill="currentColor"
       viewBox="0 0 20 20"
     >
