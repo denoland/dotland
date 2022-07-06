@@ -12,7 +12,12 @@ import {
   isReadme,
   VersionMetaInfo,
 } from "./registry_utils.ts";
-import { assert, assertEquals, assertNotEquals } from "$std/testing/asserts.ts";
+import {
+  assert,
+  assertEquals,
+  assertNotEquals,
+  assertRejects,
+} from "$std/testing/asserts.ts";
 
 Deno.test("source url", () => {
   assertEquals(
@@ -102,7 +107,7 @@ Deno.test("getRepositoryURL", () => {
 Deno.test("getVersionMeta", {
   sanitizeResources: false,
 }, async () => {
-  assertEquals(await getVersionMeta("ltest2", "0.0.7"), null);
+  await assertRejects(() => getVersionMeta("ltest2", "0.0.7"));
   assertEquals(await getVersionMeta("ltest2", "0.0.8"), versionMeta);
 });
 

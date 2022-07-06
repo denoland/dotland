@@ -11,7 +11,7 @@ export function Markdown(
   const html = render(source, { allowIframes: false, baseUrl });
   return (
     <div
-      class={tw`p-8 markdown-body`}
+      class={tw`py-8 px-4 markdown-body`}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );
