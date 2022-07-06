@@ -206,7 +206,7 @@ export function Instagram() {
   );
 }
 
-export function MagnifyingGlass(props: {class?: string;}) {
+export function MagnifyingGlass(props: { class?: string }) {
   return (
     <svg
       class={tw`h-5 w-5 ${props.class ?? ""}`}

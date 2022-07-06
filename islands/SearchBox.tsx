@@ -4,7 +4,7 @@
 import { h } from "preact";
 import algoliasearch from "$algolia";
 import { tw } from "twind";
-import { useState, useEffect } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import * as Icons from "@/components/Icons.tsx";
 
 /** Search Deno documentation, symbols, or modules. */
@@ -13,13 +13,16 @@ export default function SearchBox() {
   const [input, setInput] = useState("");
   const [results, setResults] = useState([]);
 
-  const client = algoliasearch("QFPCRZC6WX", "2ed789b2981acd210267b27f03ab47da");
+  const client = algoliasearch(
+    "QFPCRZC6WX",
+    "2ed789b2981acd210267b27f03ab47da",
+  );
   const index = client.initIndex("deno_modules");
 
   useEffect(() => {
-    index.searchForFacetValues('kind', input, {
-      filters: 'kind:function'
-    }).then((x)  => {
+    index.search(input, {
+      filters: "kind:function",
+    }).then((x) => {
       console.log(x);
     });
   }, [input]);
@@ -46,12 +49,19 @@ export default function SearchBox() {
         </div>
       </button>
 
-      <div class={tw`grid place-content-center bg-blue-100 inset-0 absolute z-10`}>
+      <div
+        class={tw`grid place-content-center bg-blue-100 inset-0 absolute z-10`}
+      >
         <div class={tw`bg-[#F3F3F3] rounded-md`}>
           <div class={tw`text-3xl m-2 flex bg-white`}>
             <Icons.MagnifyingGlass class="w-10! h-10!" />
-            <input type="text" onInput={(e) => setInput(e.currentTarget.value)} value={input} class={tw`w-80 ml-3 bg-transparent`} placeholder="Search manual, symbols, and modules" />
-
+            <input
+              type="text"
+              onInput={(e) => setInput(e.currentTarget.value)}
+              value={input}
+              class={tw`w-80 ml-3 bg-transparent`}
+              placeholder="Search manual, symbols, and modules"
+            />
           </div>
 
           <div class={tw`m-4`}>
