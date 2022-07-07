@@ -156,7 +156,7 @@ function Search() {
 
       <button
         class={tw
-          `pl-4 w-80 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light focus:outline-none`}
+          `pl-4 w-80 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light`}
         // @ts-ignore onClick does support strings
         onClick="document.querySelector('#search button').click()"
       >
