@@ -1,17 +1,60 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-import { h } from "preact";
+/** @jsxFrag Fragment */
+import { ComponentChildren, Fragment, h } from "preact";
 import algoliasearch from "$algolia";
-import { tw } from "twind";
+import { css, tw } from "@twind";
 import { useEffect, useState } from "preact/hooks";
 import * as Icons from "@/components/Icons.tsx";
+
+const kinds = [
+  "All",
+  "Manual",
+  "Modules",
+  "Symbols",
+] as const;
+
+const symbolKinds = {
+  "Namespaces": "namespace",
+  "Classes": "class",
+  "Enums": "enum",
+  "Variables": "variable",
+  "Functions": "function",
+  "Interfaces": "interface",
+  "Type Aliases": "typeAlias",
+} as const;
 
 /** Search Deno documentation, symbols, or modules. */
 export default function SearchBox() {
   const [showModal, setShowModal] = useState(false);
   const [input, setInput] = useState("");
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState<{
+    manual?: Array<{
+      name: string;
+      url: string;
+      description: string;
+    }>;
+    modules?: Array<any>;
+    symbols?: Array<{
+      kind: string;
+      name: string;
+      url: string;
+      description: string;
+    }>;
+  }>({});
+  const [kind, setKind] = useState<typeof kinds[number]>("All");
+  const [symbolKindsToggle, setSymbolKindsToggle] = useState<
+    Record<(keyof typeof symbolKinds), boolean>
+  >({
+    "Namespaces": true,
+    "Classes": true,
+    "Enums": true,
+    "Variables": true,
+    "Functions": true,
+    "Interfaces": true,
+    "Type Aliases": true,
+  });
 
   const client = algoliasearch(
     "QFPCRZC6WX",
@@ -19,12 +62,16 @@ export default function SearchBox() {
   );
 
   useEffect(() => {
+    // TODO: select queries depending on kind
     const queries = [{
       indexName: "deno_modules",
       query: input,
       params: {
         hitsPerPage: 3,
-        filters: "kind:function",
+        filters: Object.entries(symbolKindsToggle)
+          .filter(([_, v]) => kind === "Symbols" ? v : true)
+          .map(([k]) => "kind:" + symbolKinds[k as keyof typeof symbolKinds])
+          .join(" OR "),
       },
     }, {
       indexName: "deno_manual",
@@ -34,13 +81,28 @@ export default function SearchBox() {
       },
     }];
 
-    client.multipleQueries(queries).then(({ results }) => {
-      console.log(results);
+    client.multipleQueries(queries).then(({ results: [module, manual] }) => {
+      console.log(module);
+      setResults({
+        manual: manual.hits.map((hit: any) => ({
+          name: hit.anchor,
+          url: hit.url,
+          description: hit.content,
+        })),
+        symbols: module.hits.map((hit: any) => (
+          {
+            kind: hit.kind,
+            name: hit.name,
+            url: hit.location.filename,
+            description: hit.location.filename,
+          }
+        )),
+      });
     });
-  }, [input]);
+  }, [input, kind, symbolKindsToggle]);
 
   return (
-    <div>
+    <>
       <button
         class={tw
           `pl-4 w-80 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light focus:outline-none`}
@@ -48,7 +110,6 @@ export default function SearchBox() {
       >
         <div class={tw`flex items-center pointer-events-none`}>
           <Icons.MagnifyingGlass />
-          {/*<input class={tw`ml-1.5 py-2.5 h-9 flex-auto bg-transparent placeholder:text-light text-default text-sm leading-4 font-medium appearance-none`} type="text" placeholder="Search..." />*/}
           <div
             class={tw
               `ml-1.5 py-2.5 h-9 flex-auto text-light text-sm leading-4 font-medium text-left`}
@@ -62,25 +123,123 @@ export default function SearchBox() {
       </button>
 
       <div
-        class={tw`grid place-content-center bg-blue-100 inset-0 absolute z-10`}
+        class={tw
+          `flex justify-center items-center bg-[#999999BF] inset-0 fixed z-10`}
       >
-        <div class={tw`bg-[#F3F3F3] rounded-md`}>
-          <div class={tw`text-3xl m-2 flex bg-white`}>
-            <Icons.MagnifyingGlass class="w-10! h-10!" />
+        <div
+          class={tw
+            `bg-[#F3F3F3] shadow-xl p-3 h-screen w-screen lg:(rounded-md h-1/2 w-1/2)`}
+        >
+          <label
+            class={tw
+              `text-xl flex bg-white border border-dark-border rounded-md p-2`}
+          >
+            <Icons.MagnifyingGlass class="w-10! h-10! text-main" />
             <input
               type="text"
               onInput={(e) => setInput(e.currentTarget.value)}
               value={input}
-              class={tw`w-80 ml-3 bg-transparent`}
+              class={tw`w-full ml-3 bg-transparent focus:outline-none`}
               placeholder="Search manual, symbols, and modules"
             />
-          </div>
+          </label>
 
-          <div class={tw`m-4`}>
-            {results}
+          <div class={tw`flex gap-3 ml-2 mt-3 mb-2`}>
+            {kinds.map((k) => (
+              <div
+                class={tw
+                  `px-2 rounded-md leading-loose hover:(bg-gray-200 text-main) ${
+                    k === kind
+                      ? css({
+                        "text-decoration-line": "underline",
+                        "text-underline-offset": "6px",
+                        "text-decoration-thickness": "2px",
+                      })
+                      : ""
+                  } ${k === kind ? "text-black" : "text-gray-500"}`}
+                onClick={() => setKind(k)}
+              >
+                {k}
+              </div>
+            ))}
+          </div>
+          {kind === "Symbols" &&
+            (
+              <div class={tw`flex gap-3`}>
+                {(Object.keys(symbolKinds) as (keyof typeof symbolKinds)[]).map(
+                  (symbolKind) => (
+                    <label>
+                      <input
+                        type="checkbox"
+                        class={tw`mr-1`}
+                        onChange={() => {
+                          console.log(symbolKindsToggle);
+                          setSymbolKindsToggle((prev) => {
+                            return {
+                              ...prev,
+                              [symbolKind]: !prev[symbolKind],
+                            };
+                          });
+                        }}
+                        checked={symbolKindsToggle[symbolKind]}
+                      />
+                      {symbolKind}
+                    </label>
+                  ),
+                )}
+              </div>
+            )}
+          <hr />
+
+          <div class={tw`mt-4 space-y-4 overflow-y-auto`}>
+            {results.manual && (
+              <Section title="Manual" isAll={kind === "All"}>
+                {results.manual.map((res) => <Result {...res} />)}
+              </Section>
+            )}
+            {results.symbols && (
+              <Section title="Symbols" isAll={kind === "All"}>
+                {results.symbols.map((res) => <Result {...res} />)}
+              </Section>
+            )}
           </div>
         </div>
       </div>
+    </>
+  );
+}
+
+function Section({
+  title,
+  isAll,
+  children,
+}: {
+  title: string;
+  isAll: boolean;
+  children: ComponentChildren;
+}) {
+  return (
+    <div>
+      {isAll && <div class={tw`ml-1.5 mb-2`}>{title}</div>}
+      <div class={tw`space-y-2`}>
+        {children}
+      </div>
     </div>
+  );
+}
+
+function Result({
+  url,
+  name,
+  description,
+}: { name: string; url: string; description: string }) {
+  return (
+    <a
+      href={url}
+      class={tw`block bg-white border border-dark-border rounded-md p-2`}
+    >
+      <span class={tw`text-lg font-semibold`}>{name}</span>
+      <div class={tw`truncate`}>{description}</div>
+    </a>
   );
 }
