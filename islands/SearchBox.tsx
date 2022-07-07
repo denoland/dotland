@@ -11,7 +11,7 @@ import * as Icons from "@/components/Icons.tsx";
 const kinds = [
   "All",
   "Manual",
-  "Modules",
+  //"Modules",
   "Symbols",
 ] as const;
 
@@ -85,33 +85,40 @@ export default function SearchBox() {
 
   useEffect(() => {
     // TODO: select queries depending on kind
-    const queries = [{
-      indexName: "deno_modules",
-      query: input,
-      params: {
-        hitsPerPage: 3,
-        filters: Object.entries(symbolKindsToggle)
-          .filter(([_, v]) => kind === "Symbols" ? v : true)
-          .map(([k]) => "kind:" + symbolKinds[k as keyof typeof symbolKinds])
-          .join(" OR "),
-      },
-    }, {
-      indexName: "deno_manual",
-      query: input,
-      params: {
-        hitsPerPage: 3,
-      },
-    }];
+    const queries = [];
 
-    client.multipleQueries(queries).then(({ results: [module, manual] }) => {
-      console.log(module);
+    if (kind === "Manual" || kind === "All") {
+      queries.push({
+        indexName: "deno_manual",
+        query: input,
+        params: {
+          hitsPerPage: kind === "All" ? 5 : 10,
+        },
+      });
+    }
+
+    if (kind === "Symbols" || kind === "All") {
+      queries.push({
+        indexName: "deno_modules",
+        query: input,
+        params: {
+          hitsPerPage: kind === "All" ? 5 : 10,
+          filters: Object.entries(symbolKindsToggle)
+            .filter(([_, v]) => kind === "Symbols" ? v : true)
+            .map(([k]) => "kind:" + symbolKinds[k as keyof typeof symbolKinds])
+            .join(" OR "),
+        },
+      });
+    }
+
+    client.multipleQueries(queries).then(({ results }) => {
       setResults({
-        manual: manual.hits.map((hit: any) => ({
+        manual: results.find((res) => res.index === "deno_manual")?.hits.map((hit: any) => ({
           name: hit.anchor,
           url: hit.url,
           description: hit.content,
         })),
-        symbols: module.hits.map((hit: any) => (
+        symbols: results.find((res) => res.index === "deno_modules")?.hits.map((hit: any) => (
           {
             kind: hit.kind,
             name: hit.name,
@@ -214,7 +221,7 @@ export default function SearchBox() {
             )}
           <hr />
 
-          <div class={tw`mt-4 space-y-4 overflow-y-auto`}>
+          <div class={tw`mt-4 space-y-4 overflow-y-auto h-64`}>
             {results.manual && (
               <Section title="Manual" isAll={kind === "All"}>
                 {results.manual.map((res) => <Result {...res} />)}
