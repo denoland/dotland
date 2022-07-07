@@ -60,7 +60,7 @@ export function Header({
               <img class={tw`h-full w-full`} src="/logo.svg" alt="Deno Logo" />
             </a>
 
-            {!main && <Search />}
+            {!main && <SearchBox />}
 
             <label
               class={tw`lg:hidden checked:bg-red-100`}
@@ -117,43 +117,5 @@ export function Header({
         </nav>
       </div>
     </div>
-  );
-}
-
-function Search() {
-  // TODO: implement this properly with an island
-  return (
-    <>
-      <Head>
-        <link
-          rel="preconnect"
-          href="https://DMFING7U5D-dsn.algolia.net"
-          crossOrigin="true"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"
-        />
-      </Head>
-      <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3" />
-      <div id="search" class={tw`hidden`} />
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-        docsearch({
-          container: "#search",
-          appId: "DMFING7U5D",
-          indexName: "deno_manual",
-          apiKey: "577997f9f7a4b0100d359afde8065583",
-          searchParameters: {
-            distinct: 1,
-          },
-        });
-      `,
-        }}
-      />
-
-      <SearchBox />
-    </>
   );
 }

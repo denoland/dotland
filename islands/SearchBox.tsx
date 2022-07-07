@@ -62,6 +62,28 @@ export default function SearchBox() {
   );
 
   useEffect(() => {
+    document.getElementById("searchModal")!.style.display = showModal
+      ? "flex"
+      : "none";
+  }, [showModal]);
+
+  useEffect(() => {
+    const keyboardHandler = (e: KeyboardEvent) => {
+      if (e.metaKey && e.key === "k") {
+        setShowModal(true);
+      }
+      if (e.key === "Escape") {
+        console.log("escape pressed");
+        setShowModal(false);
+      }
+    };
+    globalThis.addEventListener("keydown", keyboardHandler);
+    return function cleanup() {
+      globalThis.removeEventListener("keydown", keyboardHandler);
+    };
+  });
+
+  useEffect(() => {
     // TODO: select queries depending on kind
     const queries = [{
       indexName: "deno_modules",
@@ -123,8 +145,9 @@ export default function SearchBox() {
       </button>
 
       <div
+        id="searchModal"
         class={tw
-          `flex justify-center items-center bg-[#999999BF] inset-0 fixed z-10`}
+          `hidden justify-center items-center bg-[#999999BF] inset-0 fixed z-10`}
       >
         <div
           class={tw
