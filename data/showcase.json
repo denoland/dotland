@@ -87,5 +87,11 @@
     "title": "Ter",
     "link": "https://ter.deno.dev/",
     "github": "kkga/ter"
+  },
+  {
+    "image": "/images/showcase/jsland.png",
+    "title": "Js.Land",
+    "link": "https://js.land/",
+    "github": "RedVanJosh/Js.Land"
   }
 ]
