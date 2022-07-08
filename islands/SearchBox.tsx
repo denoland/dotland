@@ -7,6 +7,7 @@ import algoliasearch from "$algolia";
 import { css, tw } from "@twind";
 import { useEffect, useState } from "preact/hooks";
 import * as Icons from "@/components/Icons.tsx";
+import { InlineCode } from "@/components/InlineCode.tsx";
 
 const kinds = [
   "All",
@@ -38,9 +39,9 @@ export default function SearchBox() {
     modules?: Array<any>;
     symbols?: Array<{
       kind: string;
-      name: string;
+      name: ComponentChildren;
       url: string;
-      description: string;
+      description?: string;
     }>;
   }>({});
   const [kind, setKind] = useState<typeof kinds[number]>("All");
@@ -84,7 +85,6 @@ export default function SearchBox() {
   });
 
   useEffect(() => {
-    // TODO: select queries depending on kind
     const queries = [];
 
     if (kind === "Manual" || kind === "All") {
@@ -113,19 +113,30 @@ export default function SearchBox() {
 
     client.multipleQueries(queries).then(({ results }) => {
       setResults({
-        manual: results.find((res) => res.index === "deno_manual")?.hits.map((hit: any) => ({
+        manual: results.find((res) => res.index === "deno_manual")?.hits.map((
+          hit: any,
+        ) => ({
           name: hit.anchor,
           url: hit.url,
           description: hit.content,
         })),
-        symbols: results.find((res) => res.index === "deno_modules")?.hits.map((hit: any) => (
-          {
-            kind: hit.kind,
-            name: hit.name,
-            url: hit.location.filename,
-            description: hit.location.filename,
-          }
-        )),
+        symbols: results.find((res) => res.index === "deno_modules")?.hits.map(
+          (hit: any) => {
+            let location = new URL(hit.location.filename).pathname;
+            location = location.replace(/^(\/x\/)|\//, "");
+            return {
+              kind: hit.kind,
+              name: (
+                <span>
+                  {hit.kind} <InlineCode>{hit.name}</InlineCode> from{" "}
+                  <span class={tw`text-blue-500`}>{location}</span>
+                </span>
+              ),
+              url: hit.location.filename,
+              description: hit.jsDoc?.doc,
+            };
+          },
+        ),
       });
     });
   }, [input, kind, symbolKindsToggle]);
@@ -158,11 +169,11 @@ export default function SearchBox() {
       >
         <div
           class={tw
-            `bg-[#F3F3F3] shadow-xl p-3 h-screen w-screen lg:(rounded-md h-1/2 w-1/2)`}
+            `bg-[#F3F3F3] shadow-xl p-3 h-screen w-screen lg:(rounded-md h-2/3 w-1/2) flex flex-col`}
         >
           <label
             class={tw
-              `text-xl flex bg-white border border-dark-border rounded-md p-2`}
+              `text-xl flex bg-white border border-dark-border rounded-md p-2 flex-shrink-0`}
           >
             <Icons.MagnifyingGlass class="w-10! h-10! text-main" />
             <input
@@ -174,7 +185,7 @@ export default function SearchBox() {
             />
           </label>
 
-          <div class={tw`flex gap-3 ml-2 mt-3 mb-2`}>
+          <div class={tw`flex gap-3 ml-2 mt-3 mb-2 flex-shrink-0`}>
             {kinds.map((k) => (
               <div
                 class={tw
@@ -221,7 +232,7 @@ export default function SearchBox() {
             )}
           <hr />
 
-          <div class={tw`mt-4 space-y-4 overflow-y-auto h-64`}>
+          <div class={tw`mt-4 space-y-4 overflow-y-auto flex-grow`}>
             {results.manual && (
               <Section title="Manual" isAll={kind === "All"}>
                 {results.manual.map((res) => <Result {...res} />)}
@@ -262,14 +273,14 @@ function Result({
   url,
   name,
   description,
-}: { name: string; url: string; description: string }) {
+}: { name: ComponentChildren; url: string; description?: ComponentChildren }) {
   return (
     <a
       href={url}
       class={tw`block bg-white border border-dark-border rounded-md p-2`}
     >
       <span class={tw`text-lg font-semibold`}>{name}</span>
-      <div class={tw`truncate`}>{description}</div>
+      {description && <div class={tw`truncate`}>{description}</div>}
     </a>
   );
 }
