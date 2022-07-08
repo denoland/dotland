@@ -67,6 +67,7 @@ export function DocView({
                     base={basePath}
                     path={path || "/"}
                     skipMods={!!index.indexModule}
+                    sourceHref={url.href + "?code"}
                   >
                     {index.index}
                   </ModulePathIndex>

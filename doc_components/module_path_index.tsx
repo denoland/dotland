@@ -8,6 +8,7 @@ import { MarkdownSummary } from "./markdown.tsx";
 import { runtime, services } from "./services.ts";
 import { style } from "./styles.ts";
 import { type Child, take } from "./utils.ts";
+import * as Icons from "./Icons.tsx";
 
 type DocMap = Record<string, JsDoc>;
 
@@ -57,10 +58,11 @@ function Folder({ children, base, parent, indexModule, docs }: {
   const label = `${folderName.slice(parent === "/" ? 1 : parent.length + 1)}/`;
   return (
     <tr class={style("modulePathIndexRow")}>
-      <td class={style("modulePathIndexCell")}>
+      <td class={style("modulePathIndexLinkCell")}>
+        <Icons.Dir class={style("modulePathIndexLinkCellIcon")} />
         <a href={href} class={style("link")}>{label}</a>
       </td>
-      <td class={style("modulePathIndexCell")}>
+      <td class={style("modulePathIndexDocCell")}>
         <MarkdownSummary url={url}>{summary}</MarkdownSummary>
       </td>
     </tr>
@@ -80,10 +82,11 @@ function Module({ children, base, parent, docs }: {
   const label = modulePath.slice(parent === "/" ? 1 : parent.length + 1);
   return (
     <tr class={style("modulePathIndexRow")}>
-      <td class={style("modulePathIndexCell")}>
+      <td class={style("modulePathIndexLinkCell")}>
+        <Icons.SourceFile class={style("modulePathIndexLinkCellIcon")} />
         <a href={href} class={style("link")}>{label}</a>
       </td>
-      <td class={style("modulePathIndexCell")}>
+      <td class={style("modulePathIndexDocCell")}>
         <MarkdownSummary url={url}>{summary}</MarkdownSummary>
       </td>
     </tr>
@@ -91,16 +94,18 @@ function Module({ children, base, parent, docs }: {
 }
 
 export function ModulePathIndex(
-  { children, path = "/", base, skipMods = false }: {
+  { children, path = "/", base, skipMods = false, sourceHref }: {
     children: Child<ModuleIndexWithDoc>;
     base: string;
     skipMods?: boolean;
     path?: string;
+    sourceHref: string;
   },
 ) {
   const { index, docs } = take(children);
   const [folders, modules] = findItems(path, index);
   const items = [];
+  folders.sort();
   for (const [folder, indexModule] of folders) {
     items.push(
       <Folder base={base} docs={docs} parent={path} indexModule={indexModule}>
@@ -127,5 +132,18 @@ export function ModulePathIndex(
   if (items.length === 0) {
     return <></>;
   }
-  return <table class={style("modulePathIndexTable")}>{items}</table>;
+  return (
+    <div class={style("modulePathIndex")}>
+      <div class={style("modulePathIndexHeader")}>
+        <div class={style("modulePathIndexHeaderTitle")}>
+          <Icons.Index />
+          <span class={style("modulePathIndexHeaderTitleSpan")}>Index</span>
+        </div>
+        <a href={sourceHref} class={style("modulePathIndexSource")}>
+          <Icons.SourceFile />
+        </a>
+      </div>
+      <table class={style("modulePathIndexTable")}>{items}</table>
+    </div>
+  );
 }
