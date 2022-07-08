@@ -74,8 +74,8 @@ const styles = {
   fnName: none,
   keyword: none,
   indent: apply`ml-4`,
-  link: apply`text-blue(800 dark:300) hover:underline`,
-  linkPadRight: apply`pr-4 text-blue(800 dark:300) hover:underline`,
+  link: apply`text([#056CF0] dark:blue-300) hover:(underline text-blue-500)`,
+  linkPadRight: apply`pr-4 text([#056CF0] dark:300) hover:(underline text-blue-500)`,
   linkType: apply`underline`,
   main: apply`md:(col-span-3)`,
   markdown: apply
