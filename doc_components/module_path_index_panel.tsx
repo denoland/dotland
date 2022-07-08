@@ -61,13 +61,16 @@ function Module({ children, base, parent, current, isIndex }: {
   const active = current ? current == modulePath : isIndex;
   return (
     <a
-      class={style("modulePathIndexPanelModule") + (active ? style("modulePathIndexPanelModuleActive") : "")}
+      class={style("modulePathIndexPanelModule") +
+        (active ? style("modulePathIndexPanelModuleActive") : "")}
       href={href}
     >
       {/*TODO: <Icons.File />*/}
       {label}
       {isIndex && (
-        <span class={style("modulePathIndexPanelModuleIndex")}>(default module)</span>
+        <span class={style("modulePathIndexPanelModuleIndex")}>
+          (default module)
+        </span>
       )}
     </a>
   );
@@ -113,14 +116,16 @@ export function ModulePathIndexPanel(
   }
   return (
     <div class={style("modulePathIndexPanel")}>
-      {/*<input
+      {
+        /*<input
         type="text"
         class={tw
           `rounded-lg border border-[#DDDDDD] text-sm w-full py-2.5 pl-4`}
         placeholder="Jump to..."
       />
       <div class={tw`mt-4`}>
-      </div>*/}
+      </div>*/
+      }
       {items}
     </div>
   );
