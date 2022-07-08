@@ -8,7 +8,7 @@ import { MarkdownSummary } from "./markdown.tsx";
 import { runtime, services } from "./services.ts";
 import { style } from "./styles.ts";
 import { type Child, take } from "./utils.ts";
-import * as Icons from "../components/Icons.tsx";
+import * as Icons from "./Icons.tsx";
 
 type DocMap = Record<string, JsDoc>;
 

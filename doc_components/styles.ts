@@ -111,6 +111,11 @@ const styles = {
   modulePathIndexDocCell: apply
     `block lg:(table-cell pl-0 pt-2.5 mt-0) pl-11 pr-5.5 pb-2.5 -mt-2 text-[#9CA0AA]`,
   modulePathIndexSymbolCell: apply`block lg:table-cell pl-5 pr-2 py-1`,
+  modulePathIndexPanel: apply`hidden lg:block w-72 flex-shrink-0`,
+  modulePathIndexPanelFolder: apply`flex gap-1 p-2 rounded-lg w-full`,
+  modulePathIndexPanelModule: apply`flex gap-1 ml-2.5 p-2 rounded-lg w-full`,
+  modulePathIndexPanelModuleActive: apply`bg-gray-100 font-bold`,
+  modulePathIndexPanelModuleIndex: apply`text-[#6C6E78] font-light`,
   none,
   numberLiteral: none,
   panel: css({
