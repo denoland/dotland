@@ -109,7 +109,7 @@ const styles = {
     `block lg:table-cell pl-5 pr-3 py-2.5 font-semibold`,
   modulePathIndexLinkCellIcon: apply`inline my-1.5 mr-3`,
   modulePathIndexDocCell: apply
-    `block lg:(table-cell pl-0 pt-2.5 mt-0) pl-5 pr-5.5 pb-2.5 -mt-2 text-[#9CA0AA]`,
+    `block lg:(table-cell pl-0 pt-2.5 mt-0) pl-11 pr-5.5 pb-2.5 -mt-2 text-[#9CA0AA]`,
   modulePathIndexSymbolCell: apply`block lg:table-cell pl-5 pr-2 py-1`,
   none,
   numberLiteral: none,
