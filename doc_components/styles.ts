@@ -95,9 +95,20 @@ const styles = {
   moduleIndexModuleCell: apply
     `block pl-2 py-0.5 lg:(table-cell w-48 pl-4 pr-2 py-1.5)`,
   moduleIndexPanelCell: apply`block lg:table-cell ${panelStyles}`,
-  modulePathIndexTable: apply`block lg:table`,
-  modulePathIndexRow: apply`block lg:table-row`,
-  modulePathIndexCell: apply`block lg:table-cell px-2 py-1`,
+  modulePathIndex: apply`rounded-lg w-full border border-secondary`,
+  modulePathIndexHeader: apply`flex justify-between items-center`,
+  modulePathIndexHeaderTitle: apply
+    `ml-5 font-semibold text-lg flex items-center`,
+  modulePathIndexHeaderTitleSpan: apply`ml-2 leading-none`,
+  modulePathIndexSource: apply
+    `rounded-md border border-dark-border p-2 my-3.5 mr-5`,
+  modulePathIndexTable: apply`block lg:table w-full`,
+  modulePathIndexRow: apply`block lg:table-row odd:bg-ultralight`,
+  modulePathIndexLinkCell: apply
+    `block lg:table-cell pl-5 pr-3 py-2.5 font-semibold`,
+  modulePathIndexLinkCellIcon: apply`inline my-1.5 mr-3`,
+  modulePathIndexDocCell: apply
+    `block lg:(table-cell pl-0 pt-2.5 mt-0) pl-5 pr-5.5 pb-2.5 -mt-2 text-[#9CA0AA]`,
   modulePathIndexSymbolCell: apply`block lg:table-cell pl-5 pr-2 py-1`,
   none,
   numberLiteral: none,

@@ -41,7 +41,7 @@ function Folder({ children, base, parent }: {
   const label = `${folderName.slice(parent === "/" ? 1 : parent.length + 1)}/`;
   return (
     <a class={tw`flex gap-1 p-2 rounded-lg w-full`} href={href}>
-      <Icons.Dir />
+      <Icons.Dir class={tw`m-2`} />
       {label}
     </a>
   );
