@@ -1,5 +1,10 @@
 [
   {
+    "image": "/images/showcase/fastvault-banner.png",
+    "title": "Fastvault",
+    "link": "https://fastvault.deno.dev/"
+  },
+  {
     "image": "/images/showcase/netlify.png",
     "title": "Netlify Edge Functions",
     "link": "https://www.netlify.com/products/#netlify-edge-functions"
