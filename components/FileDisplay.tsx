@@ -27,10 +27,10 @@ export function FileDisplay(props: {
   const filetype = props.filetypeOverride ?? fileTypeFromURL(props.sourceURL);
   const filename = fileNameFromURL(props.sourceURL);
 
-  const doc = new URL(props.url);
+  let doc = new URL(props.url);
   doc.searchParams.delete("code");
   if (!props.isStd) {
-    doc.pathname = "https://doc.deno.land/" + doc.href;
+    doc = new URL("https://doc.deno.land/" + doc.href);
   }
 
   const isRaw = props.url.searchParams.has("raw");

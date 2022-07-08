@@ -26,10 +26,10 @@ export function DirectoryListing(props: {
     version: props.version,
   });
 
-  const doc = new URL(props.url);
+  let doc = new URL(props.url);
   doc.searchParams.delete("code");
   if (!isStd) {
-    doc.pathname = "https://doc.deno.land/" + doc.href;
+    doc = new URL("https://doc.deno.land/" + doc.href);
   }
 
   return (
