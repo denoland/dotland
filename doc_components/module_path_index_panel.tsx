@@ -7,7 +7,7 @@ import { getIndex } from "./doc.ts";
 import { runtime, services } from "./services.ts";
 import { style } from "./styles.ts";
 import { type Child, take } from "./utils.ts";
-import * as Icons from "@/components/Icons.tsx";
+import * as Icons from "./Icons.tsx";
 import { ModuleIndexWithDoc } from "./module_path_index.tsx";
 
 export function findItems(
@@ -40,7 +40,7 @@ function Folder({ children, base, parent }: {
   const href = services.resolveHref(url);
   const label = `${folderName.slice(parent === "/" ? 1 : parent.length + 1)}/`;
   return (
-    <a class={tw`flex gap-1 p-2 rounded-lg w-full`} href={href}>
+    <a class={style("modulePathIndexPanelFolder")} href={href}>
       <Icons.Dir class={tw`m-2`} />
       {label}
     </a>
@@ -61,15 +61,13 @@ function Module({ children, base, parent, current, isIndex }: {
   const active = current ? current == modulePath : isIndex;
   return (
     <a
-      class={tw`flex gap-1 ml-2.5 p-2 rounded-lg w-full ${
-        active ? "bg-gray-100 font-bold" : ""
-      }`}
+      class={style("modulePathIndexPanelModule") + (active ? style("modulePathIndexPanelModuleActive") : "")}
       href={href}
     >
       {/*TODO: <Icons.File />*/}
       {label}
       {isIndex && (
-        <span class={tw`text-[#6C6E78] font-light`}>(default module)</span>
+        <span class={style("modulePathIndexPanelModuleIndex")}>(default module)</span>
       )}
     </a>
   );
@@ -114,17 +112,15 @@ export function ModulePathIndexPanel(
     return <></>;
   }
   return (
-    <div class={tw`hidden lg:block w-72 flex-shrink-0`}>
-      {
-        /*<input
+    <div class={style("modulePathIndexPanel")}>
+      {/*<input
         type="text"
         class={tw
           `rounded-lg border border-[#DDDDDD] text-sm w-full py-2.5 pl-4`}
         placeholder="Jump to..."
       />
       <div class={tw`mt-4`}>
-      </div>*/
-      }
+      </div>*/}
       {items}
     </div>
   );
