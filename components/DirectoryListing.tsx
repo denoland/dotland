@@ -28,6 +28,9 @@ export function DirectoryListing(props: {
 
   const doc = new URL(props.url);
   doc.searchParams.delete("code");
+  if (!isStd) {
+    doc.pathname = "https://doc.deno.land/" + doc.href;
+  }
 
   return (
     <div class={tw`flex flex-col overflow-x-auto`}>

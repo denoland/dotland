@@ -29,6 +29,9 @@ export function FileDisplay(props: {
 
   const doc = new URL(props.url);
   doc.searchParams.delete("code");
+  if (!props.isStd) {
+    doc.pathname = "https://doc.deno.land/" + doc.href;
+  }
 
   const isRaw = props.url.searchParams.has("raw");
   const raw = new URL(props.url);
