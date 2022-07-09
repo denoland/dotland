@@ -43,12 +43,15 @@ export const config: Configuration = {
         0: "0",
       },
       spacing: {
+        1.75: "0.4375rem",
         4.5: "1.125rem",
         5.5: "1.375rem",
         18: "4.5rem",
         22: "5.5rem",
         72: "18rem",
         76: "19rem",
+        88: "22rem",
+        136: "34rem",
       },
       animation: {
         move: "move 6s linear infinite",
