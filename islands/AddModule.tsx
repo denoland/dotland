@@ -1,9 +1,14 @@
 /** @jsx h */
-import { h } from "preact";
-import { useState } from "preact/hooks";
+/** @jsxFrag Fragment */
+import { Fragment, h } from "preact";
+import { useEffect, useRef, useState } from "preact/hooks";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { tw } from "@twind";
 import * as Icons from "@/components/Icons.tsx";
+import { getVersionList } from "@/util/registry_utils.ts";
+import confetti from "$canvas-confetti";
+
+const NAME_REGEX = /^[a-z0-9_]{3,40}$/;
 
 export default function AddModule() {
   const [name, setName] = useState("");
@@ -12,6 +17,54 @@ export default function AddModule() {
     (subdirectory
       ? ("?" + new URLSearchParams([["subdir", subdirectory]]).toString())
       : "");
+
+  const confettiRef = useRef(null);
+  const [available, setAvailable] = useState(false);
+  const [registered, setRegistered] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      if (name === "" || !NAME_REGEX.test(name)) {
+        setAvailable(false);
+      } else {
+        await getVersionList(name)
+          .then((e) => !e)
+          .catch(() => false)
+          .then(setAvailable);
+      }
+    })();
+  }, [name]);
+
+  useEffect(() => {
+    if (!available) {
+      return;
+    }
+
+    const id = setInterval(async () => {
+      await getVersionList(name)
+        .then((e) => !!e)
+        .catch(() => false)
+        .then((registered) => {
+          setRegistered(registered);
+          if (registered) {
+            confetti.create(confettiRef.current, {
+              resize: true,
+            })({
+              particleCount: 1000,
+              ticks: 500,
+              spread: 180,
+              startVelocity: 80,
+              disableForReducedMotion: true,
+              origin: {
+                y: 0,
+              },
+            });
+          }
+        });
+    }, 500);
+
+    return () => clearInterval(id);
+  }, [available, name]);
 
   return (
     <div class={tw`space-y-12`}>
@@ -22,7 +75,7 @@ export default function AddModule() {
         >
           <Icons.NameTag />
         </div>
-        <div>
+        <div class={tw`w-full`}>
           <h2 class={tw`text-default font-semibold text-xl leading-none`}>
             Module name
           </h2>
@@ -31,12 +84,21 @@ export default function AddModule() {
           </p>
           <input
             type="text"
-            pattern="^[a-z0-9_]{3,40}$"
             placeholder="Module Name"
-            class={tw`w-full lg:w-136 h-10 py-3 px-4 bg-[#F3F3F3] rounded-md`}
+            class={tw`w-full lg:w-136 h-10 py-3 px-4 rounded-md ${
+              !available
+                ? "text-[#F00C08] border border-[#F00C08] bg-transparent"
+                : "bg-[#F3F3F3]"
+            }`}
             value={name}
             onInput={(e) => setName(e.currentTarget.value)}
+            disabled={!IS_BROWSER}
           />
+          {!available && (
+            <p class={tw`mt-1.5 text-[#F00C08] text-sm`}>
+              Invalid Name/Name has been taken!
+            </p>
+          )}
         </div>
       </div>
 
@@ -47,7 +109,7 @@ export default function AddModule() {
         >
           <Icons.Gear />
         </div>
-        <div>
+        <div class={tw`w-full`}>
           <h2 class={tw`text-default font-semibold text-xl leading-none`}>
             Advanced options
           </h2>
@@ -66,6 +128,7 @@ export default function AddModule() {
                 `w-full lg:w-136 h-10 py-3 px-4 bg-[#F3F3F3] rounded-md mt-2`}
               value={subdirectory}
               onInput={(e) => setSubdirectory(e.currentTarget.value)}
+              disabled={!IS_BROWSER}
             />
           </label>
         </div>
@@ -76,12 +139,27 @@ export default function AddModule() {
           class={tw
             `hidden lg:block p-1.75 rounded-full bg-[#20B44B] mr-4.5 mt-1.5`}
         >
-          <Icons.TriangleWithRoundedCorners />
+          <Icons.Webhook />
         </div>
         <div class={tw`space-y-5`}>
           <div>
             <h2 class={tw`text-default font-semibold text-xl leading-none`}>
               Add the webhook
+              {available && !registered &&
+                (
+                  <div
+                    class={tw
+                      `inline-flex ml-2 py-1 px-3 bg-[#4B505A] rounded-md text-white text-sm leading-tight font-medium items-center`}
+                  >
+                    <Icons.Spinner />
+                    <span class={tw`ml-2`}>Waiting...</span>
+                  </div>
+                )}
+
+              <canvas
+                class={tw`inset-0 fixed w-screen h-screen pointer-events-none`}
+                ref={confettiRef}
+              />
             </h2>
             <p class={tw`text-[#6C6E78]`}>
               You can now add the webhook to your repository.
@@ -94,7 +172,7 @@ export default function AddModule() {
             <div class={tw`space-x-2 flex items-center text-sm`}>
               <div
                 class={tw
-                  `bg-[#20B44B1A] py-1 px-2 rounded-md font-medium text-[#20B44B]`}
+                  `py-1 px-2 rounded-md font-medium bg-[#9CA0AA] text-white`}
               >
                 Payload URL
               </div>
@@ -117,48 +195,84 @@ export default function AddModule() {
             </button>
           </div>
 
-          <ol class={tw`list-decimal list-inside leading-8`}>
-            <li>Navigate to the repository you want to add.</li>
-            <li>
-              Go to the <span class={tw`font-bold`}>Settings</span> tab.
-            </li>
-            <li>
-              Click on the <span class={tw`font-bold`}>Webhooks</span> tab.
-            </li>
-            <li>
-              Click on the <span class={tw`font-bold`}>Add webhook</span>{" "}
-              button.
-            </li>
-            <li>
-              Enter the above URL in the{" "}
-              <span class={tw`font-bold`}>payload URL</span> field.
-            </li>
-            <li>
-              Select <span class={tw`font-bold`}>application/json</span>{" "}
-              as the content type.
-            </li>
-            <li>
-              Select<span class={tw`font-bold`}>
-                Let me select individual events.
-              </span>
-            </li>
-            <li>
-              Select only the{" "}
-              <span class={tw`font-bold`}>Branch or tag creation</span> event.
-            </li>
-            <li>
-              Press <span class={tw`font-bold`}>Add webhook</span>.
-            </li>
-          </ol>
+          {registered
+            ? (
+              <div>
+                <div
+                  class={tw
+                    `py-3.5 px-4 text-[#20B44B] border border-[#20B44B] rounded-lg w-full lg:w-136 flex items-center`}
+                >
+                  <Icons.StatusOK />
+                  <span class={tw`ml-2.5 font-medium`}>
+                    Module successfully registered!
+                  </span>
+                </div>
+                <p class={tw`mt-3`}>
+                  To upload a version, create a new{" "}
+                  <span class={tw`font-semibold`}>tag</span>/<span
+                    class={tw`font-semibold`}
+                  >
+                    release
+                  </span>{" "}
+                  in the repository.
+                </p>
+              </div>
+            )
+            : (
+              <>
+                <ol class={tw`list-decimal list-inside leading-8`}>
+                  <li>Navigate to the repository you want to add.</li>
+                  <li>
+                    Go to the <span class={tw`font-semibold`}>Settings</span>
+                    {" "}
+                    tab.
+                  </li>
+                  <li>
+                    Click on the <span class={tw`font-semibold`}>Webhooks</span>
+                    {" "}
+                    tab.
+                  </li>
+                  <li>
+                    Click on the{" "}
+                    <span class={tw`font-semibold`}>Add webhook</span> button.
+                  </li>
+                  <li>
+                    Enter the above URL in the{" "}
+                    <span class={tw`font-semibold`}>payload URL</span> field.
+                  </li>
+                  <li>
+                    Select{" "}
+                    <span class={tw`font-semibold`}>application/json</span>{" "}
+                    as the content type.
+                  </li>
+                  <li>
+                    Select<span class={tw`font-semibold`}>
+                      Let me select individual events.
+                    </span>
+                  </li>
+                  <li>
+                    Select only the{" "}
+                    <span class={tw`font-semibold`}>
+                      Branch or tag creation
+                    </span>{" "}
+                    event.
+                  </li>
+                  <li>
+                    Press <span class={tw`font-semibold`}>Add webhook</span>.
+                  </li>
+                </ol>
 
-          <video
-            class={tw`rounded-lg border border-dark-border w-full lg:w-136`}
-            src={"/images/add_webhook.mp4"}
-            autoPlay
-            muted
-            loop
-            playsInline
-          />
+                <video
+                  class={tw
+                    `rounded-lg border border-dark-border w-full lg:w-136`}
+                  src={"/images/add_webhook.mp4"}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
+              </>
+            )}
         </div>
       </div>
     </div>

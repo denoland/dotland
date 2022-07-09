@@ -438,7 +438,7 @@ export function Gear() {
   );
 }
 
-export function TriangleWithRoundedCorners() {
+export function Webhook() {
   return (
     <svg
       width="16"
@@ -487,6 +487,62 @@ export function Copy() {
       <path
         d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7L2.75566 2.7V8.7H8.75566Z"
         fill="#232323"
+      />
+    </svg>
+  );
+}
+
+export function Spinner() {
+  return (
+    <svg
+      class={tw`inline animate-spin`}
+      width="12"
+      height="13"
+      viewBox="0 0 12 13"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g clip-path="url(#clip0_935_1385)">
+        <path
+          d="M6 11.5C8.76142 11.5 11 9.26142 11 6.5C11 3.73858 8.76142 1.5 6 1.5C3.23858 1.5 1 3.73858 1 6.5C1 9.26142 3.23858 11.5 6 11.5Z"
+          stroke="white"
+          stroke-width="2"
+        />
+        <path
+          d="M2 6.5C2 5.43913 2.42143 4.42172 3.17157 3.67157C3.92172 2.92143 4.93913 2.5 6 2.5V0.5C2.6865 0.5 0 3.1865 0 6.5H2ZM3 9.1455C2.35411 8.41578 1.9983 7.4745 2 6.5H0C0 8.021 0.5675 9.412 1.5 10.469L3 9.1455Z"
+          fill="#4B505A"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_935_1385">
+          <rect
+            width="12"
+            height="12"
+            fill="white"
+            transform="translate(0 0.5)"
+          />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+}
+
+export function StatusOK() {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 18 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle opacity="0.1" cx="9" cy="9" r="9" fill="#20B44B" />
+      <path
+        d="M5.5 9.22727L7.6875 11.5L12.5 6.5"
+        stroke="#2FA850"
+        stroke-width="1.4"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       />
     </svg>
   );
