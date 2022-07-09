@@ -61,6 +61,7 @@ type Params = {
   name: string;
   version?: string;
   path: string;
+  symbol?: string;
 };
 
 export default function Registry({ params, url, data }: PageProps<MaybeData>) {
@@ -495,5 +496,5 @@ export const handler: Handlers<MaybeData> = {
 };
 
 export const config: RouteConfig = {
-  routeOverride: "/x/:name{@:version}?/:path*",
+  routeOverride: "/x/:name{@:version}?/:path(.*?)?{/~/:symbol}?",
 };
