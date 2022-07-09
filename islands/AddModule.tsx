@@ -47,7 +47,7 @@ export default function AddModule() {
         .then((registered) => {
           setRegistered(registered);
           if (registered) {
-            confetti.create(confettiRef.current, {
+            confetti.create(confettiRef.current!, {
               resize: true,
             })({
               particleCount: 1000,
