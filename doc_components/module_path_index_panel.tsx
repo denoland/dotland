@@ -62,7 +62,7 @@ function Module({ children, base, parent, current, isIndex }: {
   return (
     <a
       class={style("modulePathIndexPanelModule") +
-        (active ? style("modulePathIndexPanelModuleActive") : "")}
+        (active ? " " + style("modulePathIndexPanelModuleActive") : "")}
       href={href}
     >
       {/*TODO: <Icons.File />*/}
