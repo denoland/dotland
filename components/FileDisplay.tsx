@@ -1,41 +1,43 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx runtime.h */
-/** @jsxFrag runtime.Fragment */
-import { runtime } from "$doc_components/services.ts";
+/** @jsx h */
+import { h } from "preact";
 import { tw } from "@twind";
 import { RawCodeBlock } from "./CodeBlock.tsx";
 import { Markdown } from "./Markdown.tsx";
 import {
   fileNameFromURL,
   fileTypeFromURL,
+  filetypeIsJS,
   isReadme,
 } from "@/util/registry_utils.ts";
 import * as Icons from "./Icons.tsx";
-import { ModuleDoc } from "$doc_components/module_doc.tsx";
-import type { DocNode } from "@/util/doc.ts";
 
 export function FileDisplay(props: {
   isStd: boolean;
+  version: string;
   raw?: string;
   canonicalPath: string;
   sourceURL: string;
   baseURL: string;
   filetypeOverride?: string;
   repositoryURL?: string | null;
-  stdVersion?: string;
   url: URL;
-  docNodes: DocNode[] | null;
 }) {
   const filetype = props.filetypeOverride ?? fileTypeFromURL(props.sourceURL);
   const filename = fileNameFromURL(props.sourceURL);
-  const hasToggle = (filetype === "markdown" || (props.docNodes !== null));
 
-  const codeview = props.url.searchParams.has("codeview");
-  const searchDoc = new URL(props.url);
-  searchDoc.searchParams.delete("codeview");
-  const searchCode = new URL(props.url);
-  searchCode.searchParams.set("codeview", "");
+  let doc = new URL(props.url);
+  doc.searchParams.delete("code");
+  if (!props.isStd) {
+    doc = new URL("https://doc.deno.land/" + doc.href);
+  }
+
+  const isRaw = props.url.searchParams.has("raw");
+  const raw = new URL(props.url);
+  raw.searchParams.set("raw", "");
+  const preview = new URL(props.url);
+  preview.searchParams.delete("raw");
 
   return (
     <div
@@ -45,7 +47,7 @@ export function FileDisplay(props: {
       <div
         class={tw
           `bg-gray-100 border-b border-gray-200 py-2 flex justify-between ${
-            hasToggle ? "pl-4 pr-2" : "px-4"
+            filetype === "markdown" ? "pl-4 pr-2" : "px-4"
           }`}
       >
         <div class={tw`flex items-center`}>
@@ -78,36 +80,31 @@ export function FileDisplay(props: {
                 </a>
               )}
           </div>
-          {hasToggle && (
+          {filetypeIsJS(filetype) &&
+            (
+              <div class={tw`ml-4`}>
+                <a href={doc.href} class={tw`link`}>Documentation</a>
+              </div>
+            )}
+          {filetype === "markdown" && (
             <div
               class={tw`inline-flex ml-4 flex-nowrap shadow-sm rounded-md`}
             >
               <a
-                href={searchDoc.href}
+                href={preview.href}
                 class={tw
                   `relative inline-flex items-center px-1.5 py-1.5 rounded-l-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50 ${
-                    !codeview ? "bg-white" : "bg-gray-100"
+                    !isRaw ? "bg-white" : "bg-gray-100"
                   }`}
               >
-                {filetype === "markdown"
-                  ? (
-                    <>
-                      <span class={tw`sr-only`}>Preview</span>
-                      <Icons.Page />
-                    </>
-                  )
-                  : (
-                    <>
-                      <span class={tw`sr-only`}>Documentation</span>
-                      <Icons.OpenBook />
-                    </>
-                  )}
+                <span class={tw`sr-only`}>Preview</span>
+                <Icons.Page />
               </a>
               <a
-                href={searchCode.href}
+                href={raw.href}
                 class={tw
                   `-ml-px relative inline-flex items-center px-1.5 py-1.5 rounded-r-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50 ${
-                    codeview ? "bg-white" : "bg-gray-100"
+                    isRaw ? "bg-white" : "bg-gray-100"
                   }`}
               >
                 <span class={tw`sr-only`}>Code</span>
@@ -123,16 +120,6 @@ export function FileDisplay(props: {
           case "typescript":
           case "tsx":
           case "jsx":
-            if (!codeview && props.docNodes && props.isStd) {
-              return (
-                <div class={tw`p-4`}>
-                  <ModuleDoc url={props.url.href}>
-                    {props.docNodes}
-                  </ModuleDoc>
-                </div>
-              );
-            }
-          /* falls through */
           case "json":
           case "yaml":
           case "rust":
@@ -159,7 +146,7 @@ export function FileDisplay(props: {
               />
             );
           case "markdown": {
-            if (codeview) {
+            if (isRaw) {
               return (
                 <RawCodeBlock
                   code={props.raw!}
@@ -170,14 +157,13 @@ export function FileDisplay(props: {
               );
             } else {
               return (
-                <Markdown
-                  source={props.stdVersion === undefined
-                    ? props.raw!
-                    : props.raw!.replace(
-                      /\$STD_VERSION/g,
-                      props.stdVersion ?? "",
-                    )}
-                />
+                <div class={tw`px-4`}>
+                  <Markdown
+                    source={props.isStd
+                      ? props.raw!
+                      : props.raw!.replace(/\$STD_VERSION/g, props.version)}
+                  />
+                </div>
               );
             }
           }
