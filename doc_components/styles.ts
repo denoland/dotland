@@ -125,6 +125,8 @@ const styles = {
   panelTitle: apply`block p-2 border(b gray(400 dark:600)) cursor-pointer`,
   section: apply`text-sm font-bold py-1`,
   moduleDoc: apply`space-y-6`,
+  moduleDocHeader: apply`flex justify-between mb-8`,
+  moduleDocHeaderButton: apply`rounded-md border border-dark-border p-2`,
   stringLiteral: none,
   subSection: apply`text-xl p-2 mx-2.5 mt-1 mb-2.5`,
   symbolClass: apply`text-green(800 dark:400) font-bold hover:underline`,
