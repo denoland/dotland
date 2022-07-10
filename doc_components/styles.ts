@@ -98,7 +98,7 @@ const styles = {
   moduleIndexPanelCell: apply`block lg:table-cell ${panelStyles}`,
   modulePathIndex: apply`rounded-lg w-full border border-secondary`,
   modulePathIndexHeader: apply`flex justify-between items-center py-3.5 pr-5`,
-  SymbolDocHeader: apply`flex justify-between items-center py-3.5 pr-5`,
+  SymbolDocHeader: apply`flex justify-between items-center py-3.5`,
   modulePathIndexHeaderTitle: apply
     `ml-5 font-semibold text-lg flex items-center`,
   modulePathIndexHeaderTitleSpan: apply`ml-2 leading-none`,

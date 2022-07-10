@@ -6,7 +6,7 @@ export { css };
 
 export const config: Configuration = {
   darkMode: "class",
-  mode: "silent",
+  //mode: "silent",
   theme: {
     fontFamily: {
       /*sans: [
