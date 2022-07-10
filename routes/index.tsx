@@ -25,9 +25,12 @@ export default function Home({ data }: PageProps<Data>) {
   }/http/server.ts";
 serve(req => new Response("Hello World\\n"));`;
 
-  const denoTestExample =
-    `deno test https://deno.land/std@0.132.0/testing/chai_example.ts
-running 3 tests from https://deno.land/std@0.132.0/testing/chai_example.ts
+  const denoTestExample = `deno test https://deno.land/std@${
+    versions.std[0]
+  }/testing/chai_example.ts
+running 3 tests from https://deno.land/std@${
+    versions.std[0]
+  }/testing/chai_example.ts
 test we can make chai assertions ... ok (8ms)
 test we can make chai expectations ... ok (2ms)
 test we can use chai should style ... ok (4ms)
