@@ -20,14 +20,13 @@ import options from "./options.ts";
 
 import { routes as completionsV2Routes } from "./completions_v2.ts";
 
-const docland = "https://doc.deno.land/";
 await setup({
   resolveHref(current, symbol) {
     // FIXME(bartlomieju): special casing for std here is not ideal
     if (symbol && current.startsWith("/std")) {
       current = `https://deno.land${current}`;
     }
-    return symbol ? `${docland}${current}/~/${symbol}` : current;
+    return symbol ? `${current}/~/${symbol}` : current;
   },
   lookupHref(
     current: string,
@@ -39,8 +38,11 @@ await setup({
       current = `https://deno.land${current}`;
     }
     return namespace
-      ? `${docland}${current}/~/${namespace}.${symbol}`
-      : `${docland}${current}/~/${symbol}`;
+      ? `${current}/~/${namespace}.${symbol}`
+      : `${current}/~/${symbol}`;
+  },
+  resolveSourceHref(url, line) {
+    return line ? `${url}?code#L${line}` : `${url}?code`;
   },
   runtime: { Fragment, h },
 });

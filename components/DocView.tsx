@@ -2,7 +2,7 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
+import { ComponentChildren, Fragment, h } from "preact";
 import { tw } from "@twind";
 import { type CommonProps, getBasePath } from "@/util/registry_utils.ts";
 import { type Doc, type DocNode } from "@/util/doc.ts";
@@ -11,10 +11,12 @@ import { ModuleDoc } from "$doc_components/module_doc.tsx";
 import { ModulePathIndex } from "$doc_components/module_path_index.tsx";
 import { ModulePathIndexPanel } from "$doc_components/module_path_index_panel.tsx";
 import { FileDisplay } from "./FileDisplay.tsx";
+import { SymbolDoc } from "../doc_components/symbol_doc.tsx";
 
 export function DocView({
   doc,
   index,
+  symbol,
 
   isStd,
   name,
@@ -46,27 +48,27 @@ export function DocView({
       <div class={tw`space-y-12 flex flex-col gap-4 w-full overflow-auto`}>
         {doc
           ? (
-            <ModuleDoc url={url.href} sourceHref={baseURL + path + "?code"}>
+            <ModuleOrSymbolDoc url={url.href} symbol={symbol}>
               {doc}
-            </ModuleDoc>
+            </ModuleOrSymbolDoc>
           )
           : (
             <div class={tw`space-y-12`}>
               {index.indexModule
                 ? (
-                  <ModuleDoc
-                    url={baseURL + index.indexModule}
-                    sourceHref={baseURL + path + "?code"}
+                  <ModuleOrSymbolDoc
+                    url={url.href}
+                    indexModule={baseURL + index.indexModule}
                   >
                     {index.nodes}
-                  </ModuleDoc>
+                  </ModuleOrSymbolDoc>
                 )
                 : (
                   <ModulePathIndex
                     base={basePath}
                     path={path || "/"}
                     skipMods={!!index.indexModule}
-                    sourceHref={url.href + "?code"}
+                    sourceUrl={url.href}
                   >
                     {index.index}
                   </ModulePathIndex>
@@ -89,4 +91,32 @@ export function DocView({
       </div>
     </>
   );
+}
+
+function ModuleOrSymbolDoc({
+  symbol,
+  children,
+  url,
+  indexModule,
+}: {
+  symbol?: string;
+  url: string;
+  children: DocNode[];
+  indexModule?: string;
+}) {
+  if (symbol) {
+    const itemNodes = children.filter(({ name }) => name === symbol);
+    url = url.split("/~/")[0];
+    return (
+      <SymbolDoc url={url} namespace={undefined}>
+        {itemNodes}
+      </SymbolDoc>
+    );
+  } else {
+    return (
+      <ModuleDoc url={indexModule ?? url} sourceUrl={url}>
+        {children}
+      </ModuleDoc>
+    );
+  }
 }

@@ -359,6 +359,7 @@ export const handler: Handlers<MaybeData> = {
       name,
       version,
       path: maybePath,
+      symbol,
     } = params as Params;
     const url = new URL(req.url);
     const isHTML = accepts(req, "application/*", "text/html") === "text/html";
@@ -446,6 +447,9 @@ export const handler: Handlers<MaybeData> = {
           getVersionDeps(name, version),
           !code ? getDocs(name, version, path) : null,
         ]);
+      if (doc) {
+        doc.symbol = symbol;
+      }
 
       const dirEntries = getDirEntries(versionMeta, path);
       const canonicalPath = getModulePath(name, version, path);

@@ -42,6 +42,7 @@ export interface Configuration {
    * Implementors should return a string which will be used as the `href` value
    * for a link. */
   resolveHref?: (url: string, symbol?: string) => string;
+  resolveSourceHref?: (url: string, line?: number) => string;
   /** The JSX runtime that should be used. */
   runtime?: JsxRuntime;
   /** If provided, the twind {@linkcode twSetup setup} will be performed. */
@@ -91,7 +92,10 @@ export const theme: ThemeConfiguration = {
 };
 
 const runtimeConfig: Required<
-  Pick<Configuration, "resolveHref" | "lookupHref" | "runtime">
+  Pick<
+    Configuration,
+    "resolveHref" | "lookupHref" | "resolveSourceHref" | "runtime"
+  >
 > = {
   resolveHref(current, symbol) {
     return symbol ? `/${current}` : `/${current}/~/${symbol}`;
@@ -100,6 +104,9 @@ const runtimeConfig: Required<
     return namespace
       ? `/${current}/~/${namespace}.${symbol}`
       : `/${current}/~/${symbol}`;
+  },
+  resolveSourceHref(url, line) {
+    return line ? `${url}#L${line}` : url;
   },
   runtime: {
     Fragment() {
@@ -151,5 +158,9 @@ export const services = {
     symbol: string,
   ) => string | undefined {
     return runtimeConfig.lookupHref;
+  },
+
+  get resolveSourceHref(): (url: string, line?: number) => string {
+    return runtimeConfig.resolveSourceHref;
   },
 };

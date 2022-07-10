@@ -14,12 +14,13 @@ import { CodeBlockFn } from "./functions.tsx";
 import { CodeBlockInterface } from "./interfaces.tsx";
 import { JsDoc, Tag } from "./jsdoc.tsx";
 import { type MarkdownContext } from "./markdown.tsx";
-import { runtime } from "./services.ts";
+import { runtime, services } from "./services.ts";
 import { style } from "./styles.ts";
 import { CodeBlockTypeAlias } from "./type_aliases.tsx";
 import { Usage } from "./usage.tsx";
 import { type Child, maybe, take } from "./utils.ts";
 import { CodeBlockVariable } from "./variables.tsx";
+import * as Icons from "./Icons.tsx";
 
 function CodeBlock(
   { children, ...markdownContext }:
@@ -114,12 +115,20 @@ export function SymbolDoc(
   const docNodes = [...take(children, true)];
   docNodes.sort(byKind);
   const jsDoc = docNodes.map(({ jsDoc }) => jsDoc).find((jsDoc) => !!jsDoc);
-  const [{ name }] = docNodes;
+  const [{ name, location }] = docNodes;
   const title = namespace ? `${namespace}.${name}` : name;
   const markdownContext = { url, namespace };
   return (
     <article class={style("main")}>
-      <h1 class={style("title")}>{title}</h1>
+      <div class={style("SymbolDocHeader")}>
+        <h1 class={style("title")}>{title}</h1>
+        <a
+          href={services.resolveSourceHref(location.filename, location.line)}
+          class={style("sourceButton")}
+        >
+          <Icons.SourceFile />
+        </a>
+      </div>
       {maybe(
         !(url.endsWith(".d.ts") || library),
         <Usage url={url} name={title} isType={isTypeOnly(docNodes)} />,
