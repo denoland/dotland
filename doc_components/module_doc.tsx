@@ -18,6 +18,7 @@ import {
   maybe,
   take,
 } from "./utils.ts";
+import * as Icons from "./Icons.tsx";
 
 export const TARGET_RE = /(\s|[\[\]])/g;
 
@@ -107,63 +108,75 @@ function SectionTitle({ children }: { children: Child<sectionTitle> }) {
 }
 
 export function ModuleDoc(
-  { children, library = false, ...markdownContext }: {
+  { children, library = false, sourceHref, ...markdownContext }: {
     children: Child<DocNode[]>;
     library?: boolean;
+    sourceHref: string;
   } & MarkdownContext,
 ) {
   const { url } = markdownContext;
   const collection = asCollection(take(children, true));
   return (
-    <article class={style("main")}>
-      {maybe(
-        !(library || url.endsWith(".d.ts")),
-        <div class={style("moduleDoc")}>
-          <div class={tw`space-y-3`}>
-            <Usage url={url} />
-            {collection.moduleDoc && (
-              <JsDocModule url={url} markdownStyle="usage">
-                {collection.moduleDoc}
-              </JsDocModule>
+    <div>
+      <div class={style("moduleDocHeader")}>
+        <div>{/* TODO: add module name */}</div>
+        <a
+          href={sourceHref}
+          class={style("moduleDocHeaderButton")}
+        >
+          <Icons.SourceFile />
+        </a>
+      </div>
+      <article class={style("main")}>
+        {maybe(
+          !(library || url.endsWith(".d.ts")),
+          <div class={style("moduleDoc")}>
+            <div class={tw`space-y-3`}>
+              <Usage url={url} />
+              {collection.moduleDoc && (
+                <JsDocModule url={url} markdownStyle="usage">
+                  {collection.moduleDoc}
+                </JsDocModule>
+              )}
+            </div>
+            {collection.namespace && (
+              <Section title="Namespaces" {...markdownContext}>
+                {collection.namespace}
+              </Section>
             )}
-          </div>
-          {collection.namespace && (
-            <Section title="Namespaces" {...markdownContext}>
-              {collection.namespace}
-            </Section>
-          )}
-          {collection.class && (
-            <Section title="Classes" {...markdownContext}>
-              {collection.class}
-            </Section>
-          )}
-          {collection.enum && (
-            <Section title="Enums" {...markdownContext}>
-              {collection.enum}
-            </Section>
-          )}
-          {collection.variable && (
-            <Section title="Variables" {...markdownContext}>
-              {collection.variable}
-            </Section>
-          )}
-          {collection.function && (
-            <Section title="Functions" {...markdownContext}>
-              {collection.function}
-            </Section>
-          )}
-          {collection.interface && (
-            <Section title="Interfaces" {...markdownContext}>
-              {collection.interface}
-            </Section>
-          )}
-          {collection.typeAlias && (
-            <Section title="Type Aliases" {...markdownContext}>
-              {collection.typeAlias}
-            </Section>
-          )}
-        </div>,
-      )}
-    </article>
+            {collection.class && (
+              <Section title="Classes" {...markdownContext}>
+                {collection.class}
+              </Section>
+            )}
+            {collection.enum && (
+              <Section title="Enums" {...markdownContext}>
+                {collection.enum}
+              </Section>
+            )}
+            {collection.variable && (
+              <Section title="Variables" {...markdownContext}>
+                {collection.variable}
+              </Section>
+            )}
+            {collection.function && (
+              <Section title="Functions" {...markdownContext}>
+                {collection.function}
+              </Section>
+            )}
+            {collection.interface && (
+              <Section title="Interfaces" {...markdownContext}>
+                {collection.interface}
+              </Section>
+            )}
+            {collection.typeAlias && (
+              <Section title="Type Aliases" {...markdownContext}>
+                {collection.typeAlias}
+              </Section>
+            )}
+          </div>,
+        )}
+      </article>
+    </div>
   );
 }
