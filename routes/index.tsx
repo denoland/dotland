@@ -11,10 +11,15 @@ import { InlineCode } from "@/components/InlineCode.tsx";
 import { Header } from "@/components/Header.tsx";
 import { HelloBar } from "@/components/HelloBar.tsx";
 import { Background } from "@/components/HeroBackground.tsx";
+import { Handlers, PageProps } from "$fresh/server.ts";
 
 import versions from "@/versions.json" assert { type: "json" };
 
-export default function Home() {
+interface Data {
+  isFirefox: boolean;
+}
+
+export default function Home({ data }: PageProps<Data>) {
   const complexExampleProgram =
     `import { serve } from "https://deno.land/std/http/server.ts";
 serve(req => new Response("Hello World\\n"));`;
@@ -41,7 +46,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           class={tw
             `bg-gray-50 overflow-x-hidden border-b border-gray-200 relative`}
         >
-          <Background />
+          {!data.isFirefox && <Background />}
           <Header main />
           <div
             class={tw
@@ -504,3 +509,13 @@ function InstallSection() {
     </>
   );
 }
+
+export const handler: Handlers<Data> = {
+  GET(req, { render }) {
+    return render!({
+      isFirefox:
+        req.headers.get("user-agent")?.toLowerCase().includes("firefox") ??
+          false,
+    });
+  },
+};
