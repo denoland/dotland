@@ -34,13 +34,6 @@ await setup({
     _symbol: string,
   ): string | undefined {
     return undefined;
-    // FIXME(bartlomieju): special casing for std here is not ideal
-    /*if (current.startsWith("/std")) {
-      current = `https://deno.land${current}`;
-    }
-    return namespace
-      ? `${current}?s=${namespace}.${symbol}`
-      : `${current}?s=${symbol}`;*/
   },
   resolveSourceHref(url, line) {
     return line ? `${url}?code#L${line}` : `${url}?code`;
