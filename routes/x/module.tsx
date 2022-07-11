@@ -299,13 +299,13 @@ function Breadcrumbs({
   }
 
   return (
-    <p class={tw`text-xl leading-6 font-bold`}>
+    <p class={tw`text-xl leading-6 font-bold text-[#9CA0AA]`}>
       {out.map(([seg, url], i) => {
         return (
           <Fragment key={i}>
             {i !== 0 && "/"}
             {i === (segments.length - 1)
-              ? <span class={tw`text-black`}>{seg}</span>
+              ? <span class={tw`text-default`}>{seg}</span>
               : (
                 <a href={url} class={tw`link`}>
                   {seg}
@@ -448,7 +448,7 @@ export const handler: Handlers<MaybeData> = {
           !code ? getDocs(name, version, path) : null,
         ]);
       if (doc) {
-        doc.symbol = symbol;
+        doc.symbol = url.searchParams.get("symbol") ?? undefined;
       }
 
       const dirEntries = getDirEntries(versionMeta, path);
@@ -499,5 +499,5 @@ export const handler: Handlers<MaybeData> = {
 };
 
 export const config: RouteConfig = {
-  routeOverride: "/x/:name{@:version}?/:path(.*?)?{/~/:symbol}?",
+  routeOverride: "/x/:name{@:version}?/:path*",
 };

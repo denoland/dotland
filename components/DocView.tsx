@@ -106,7 +106,6 @@ function ModuleOrSymbolDoc({
 }) {
   if (symbol) {
     const itemNodes = children.filter(({ name }) => name === symbol);
-    url = url.split("/~/")[0];
     return (
       <SymbolDoc url={url} namespace={undefined}>
         {itemNodes}

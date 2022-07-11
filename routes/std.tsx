@@ -24,6 +24,4 @@ export const handler: Handlers = {
   },
 };
 
-export const config: RouteConfig = {
-  routeOverride: "/std{@:version}?/:path(.*?)?{/~/:symbol}?",
-};
+export const config: RouteConfig = { routeOverride: "/std{@:version}?/:path*" };
