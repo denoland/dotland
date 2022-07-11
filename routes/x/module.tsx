@@ -448,7 +448,7 @@ export const handler: Handlers<MaybeData> = {
           !code ? getDocs(name, version, path) : null,
         ]);
       if (doc) {
-        doc.symbol = url.searchParams.get("symbol") ?? undefined;
+        doc.symbol = url.searchParams.get("s") ?? undefined;
       }
 
       const dirEntries = getDirEntries(versionMeta, path);

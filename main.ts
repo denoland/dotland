@@ -26,20 +26,21 @@ await setup({
     if (symbol && current.startsWith("/std")) {
       current = `https://deno.land${current}`;
     }
-    return symbol ? `${current}?symbol=${symbol}` : current;
+    return symbol ? `${current}?s=${symbol}` : current;
   },
   lookupHref(
-    current: string,
-    namespace: string | undefined,
-    symbol: string,
+    _current: string,
+    _namespace: string | undefined,
+    _symbol: string,
   ): string | undefined {
+    return undefined;
     // FIXME(bartlomieju): special casing for std here is not ideal
-    if (current.startsWith("/std")) {
+    /*if (current.startsWith("/std")) {
       current = `https://deno.land${current}`;
     }
     return namespace
-      ? `${current}?symbol=${namespace}.${symbol}`
-      : `${current}?symbol=${symbol}`;
+      ? `${current}?s=${namespace}.${symbol}`
+      : `${current}?s=${symbol}`;*/
   },
   resolveSourceHref(url, line) {
     return line ? `${url}?code#L${line}` : `${url}?code`;
