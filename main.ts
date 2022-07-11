@@ -26,7 +26,7 @@ await setup({
     if (symbol && current.startsWith("/std")) {
       current = `https://deno.land${current}`;
     }
-    return symbol ? `${current}/~/${symbol}` : current;
+    return symbol ? `${current}?symbol=${symbol}` : current;
   },
   lookupHref(
     current: string,
@@ -38,8 +38,8 @@ await setup({
       current = `https://deno.land${current}`;
     }
     return namespace
-      ? `${current}/~/${namespace}.${symbol}`
-      : `${current}/~/${symbol}`;
+      ? `${current}?symbol=${namespace}.${symbol}`
+      : `${current}?symbol=${symbol}`;
   },
   resolveSourceHref(url, line) {
     return line ? `${url}?code#L${line}` : `${url}?code`;
