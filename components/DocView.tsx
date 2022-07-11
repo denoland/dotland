@@ -29,6 +29,7 @@ export function DocView({
   url,
 }: Doc & CommonProps) {
   const baseURL = `https://deno.land${basePath}`;
+  url.search = "";
 
   return (
     <>
