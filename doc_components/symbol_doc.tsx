@@ -120,7 +120,7 @@ export function SymbolDoc(
   const markdownContext = { url, namespace };
   return (
     <article class={style("main")}>
-      <div class={style("SymbolDocHeader")}>
+      <div class={style("symbolDocHeader")}>
         <h1 class={style("title")}>{title}</h1>
         <a
           href={services.resolveSourceHref(location.filename, location.line)}

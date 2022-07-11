@@ -89,6 +89,8 @@ const styles = {
       "a": apply`text-blue(700 dark:400) hover:underline`,
     })
   }`,
+  moduleDoc: apply`space-y-6`,
+  moduleDocHeader: apply`flex justify-between mb-8`,
   moduleIndexTable: apply`block w-full lg:(table table-fixed)`,
   moduleIndexTableBody: apply`block w-full lg:table-row-group`,
   moduleIndexRow: apply`block lg:table-row`,
@@ -98,7 +100,6 @@ const styles = {
   moduleIndexPanelCell: apply`block lg:table-cell ${panelStyles}`,
   modulePathIndex: apply`rounded-lg w-full border border-secondary`,
   modulePathIndexHeader: apply`flex justify-between items-center py-3.5 pr-5`,
-  SymbolDocHeader: apply`flex justify-between items-center py-3.5`,
   modulePathIndexHeaderTitle: apply
     `ml-5 font-semibold text-lg flex items-center`,
   modulePathIndexHeaderTitleSpan: apply`ml-2 leading-none`,
@@ -123,8 +124,7 @@ const styles = {
   }),
   panelTitle: apply`block p-2 border(b gray(400 dark:600)) cursor-pointer`,
   section: apply`text-sm font-bold py-1`,
-  moduleDoc: apply`space-y-6`,
-  moduleDocHeader: apply`flex justify-between mb-8`,
+  symbolDocHeader: apply`flex justify-between items-center py-3.5`,
   sourceButton: apply`rounded-md border border-dark-border p-2`,
   stringLiteral: none,
   subSection: apply`text-xl p-2 mx-2.5 mt-1 mb-2.5`,
