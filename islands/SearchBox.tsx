@@ -145,7 +145,7 @@ export default function SearchBox() {
     <>
       <button
         class={tw
-          `pl-4 w-80 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light focus:outline-none`}
+          `pl-4 w-80 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light`}
         onClick={() => setShowModal(true)}
       >
         <div class={tw`flex items-center pointer-events-none`}>
@@ -180,7 +180,7 @@ export default function SearchBox() {
               type="text"
               onInput={(e) => setInput(e.currentTarget.value)}
               value={input}
-              class={tw`w-full ml-3 bg-transparent focus:outline-none`}
+              class={tw`w-full ml-3 bg-transparent`}
               placeholder="Search manual, symbols, and modules"
             />
           </label>
