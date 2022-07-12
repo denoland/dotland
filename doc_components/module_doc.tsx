@@ -108,10 +108,10 @@ function SectionTitle({ children }: { children: Child<sectionTitle> }) {
 }
 
 export function ModuleDoc(
-  { children, library = false, sourceHref, ...markdownContext }: {
+  { children, library = false, sourceUrl, ...markdownContext }: {
     children: Child<DocNode[]>;
     library?: boolean;
-    sourceHref: string;
+    sourceUrl: string;
   } & MarkdownContext,
 ) {
   const { url } = markdownContext;
@@ -121,8 +121,8 @@ export function ModuleDoc(
       <div class={style("moduleDocHeader")}>
         <div>{/* TODO: add module name */}</div>
         <a
-          href={sourceHref}
-          class={style("moduleDocHeaderButton")}
+          href={services.resolveSourceHref(sourceUrl)}
+          class={style("sourceButton")}
         >
           <Icons.SourceFile />
         </a>

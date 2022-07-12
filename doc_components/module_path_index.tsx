@@ -94,12 +94,12 @@ function Module({ children, base, parent, docs }: {
 }
 
 export function ModulePathIndex(
-  { children, path = "/", base, skipMods = false, sourceHref }: {
+  { children, path = "/", base, skipMods = false, sourceUrl }: {
     children: Child<ModuleIndexWithDoc>;
     base: string;
     skipMods?: boolean;
     path?: string;
-    sourceHref: string;
+    sourceUrl: string;
   },
 ) {
   const { index, docs } = take(children);
@@ -139,7 +139,10 @@ export function ModulePathIndex(
           <Icons.Index />
           <span class={style("modulePathIndexHeaderTitleSpan")}>Index</span>
         </div>
-        <a href={sourceHref} class={style("modulePathIndexSource")}>
+        <a
+          href={services.resolveSourceHref(sourceUrl)}
+          class={style("sourceButton")}
+        >
           <Icons.SourceFile />
         </a>
       </div>

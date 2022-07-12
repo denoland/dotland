@@ -15,6 +15,7 @@ export interface Index {
 export interface Doc {
   index: Index;
   doc: DocNode[] | null;
+  symbol?: string;
 }
 
 export async function getDocs(

@@ -89,6 +89,8 @@ const styles = {
       "a": apply`text-blue(700 dark:400) hover:underline`,
     })
   }`,
+  moduleDoc: apply`space-y-6`,
+  moduleDocHeader: apply`flex justify-between mb-8`,
   moduleIndexTable: apply`block w-full lg:(table table-fixed)`,
   moduleIndexTableBody: apply`block w-full lg:table-row-group`,
   moduleIndexRow: apply`block lg:table-row`,
@@ -97,12 +99,10 @@ const styles = {
     `block pl-2 py-0.5 lg:(table-cell w-48 pl-4 pr-2 py-1.5)`,
   moduleIndexPanelCell: apply`block lg:table-cell ${panelStyles}`,
   modulePathIndex: apply`rounded-lg w-full border border-secondary`,
-  modulePathIndexHeader: apply`flex justify-between items-center`,
+  modulePathIndexHeader: apply`flex justify-between items-center py-3.5 pr-5`,
   modulePathIndexHeaderTitle: apply
     `ml-5 font-semibold text-lg flex items-center`,
   modulePathIndexHeaderTitleSpan: apply`ml-2 leading-none`,
-  modulePathIndexSource: apply
-    `rounded-md border border-dark-border p-2 my-3.5 mr-5`,
   modulePathIndexTable: apply`block lg:table w-full`,
   modulePathIndexRow: apply`block lg:table-row odd:bg-ultralight`,
   modulePathIndexLinkCell: apply
@@ -124,9 +124,8 @@ const styles = {
   }),
   panelTitle: apply`block p-2 border(b gray(400 dark:600)) cursor-pointer`,
   section: apply`text-sm font-bold py-1`,
-  moduleDoc: apply`space-y-6`,
-  moduleDocHeader: apply`flex justify-between mb-8`,
-  moduleDocHeaderButton: apply`rounded-md border border-dark-border p-2`,
+  symbolDocHeader: apply`flex justify-between items-center py-3.5`,
+  sourceButton: apply`rounded-md border border-dark-border p-2`,
   stringLiteral: none,
   subSection: apply`text-xl p-2 mx-2.5 mt-1 mb-2.5`,
   symbolClass: apply`text-green(800 dark:400) font-bold hover:underline`,
