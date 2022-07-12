@@ -1,4 +1,4 @@
-import type { ModuleIndexWithDoc } from "$doc_components/module_index.tsx";
+import type { ModuleIndexWithDoc } from "$doc_components/module_path_index.tsx";
 import type { DocNode } from "$deno_doc/types.d.ts";
 import { getIndex } from "$doc_components/doc.ts";
 import { dirname } from "$std/path/mod.ts";
