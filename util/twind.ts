@@ -1,5 +1,5 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { apply, Configuration, cssomSheet, setup, Sheet } from "twind";
+import { apply, Configuration, setup, Sheet } from "twind";
 export * from "twind";
 import { css } from "twind/css";
 export { css };
@@ -76,8 +76,10 @@ if (IS_BROWSER) {
   const mappings = JSON.parse(rules.pop()!.slice(2, -2));
   const precedences = JSON.parse(rules.pop()!.slice(2, -2));
   const state = [precedences, new Set(rules), new Map(mappings), true];
+  const target = el.sheet!;
   const sheet: Sheet = {
-    ...cssomSheet({ target: el.sheet! }),
+    target,
+    insert: (rule, index) => target.insertRule(rule, index),
     init(cb) {
       return cb(state.shift());
     },
