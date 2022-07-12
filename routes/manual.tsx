@@ -421,22 +421,24 @@ function ToC({
   return (
     <div class={tw`pt-2 pb-8 h-0 flex-1 flex flex-col overflow-y-auto`}>
       <nav class={tw`flex-1 px-4`}>
-        <ol class={tw`list-decimal list-inside font-semibold nested`}>
+        <ol class={tw`list-decimal list-inside font-semibold` + " nested"}>
           {Object.entries(tableOfContents).map(([slug, entry]) => {
             return (
               <li key={slug} class={tw`my-2`}>
                 <a
                   href={`/manual${version ? `@${version}` : ""}/${slug}`}
                   class={tw`${
-                    path === `/${slug}`
-                      ? "text-blue-600 hover:text-blue-500 toc-active"
-                      : "text-gray-900 hover:text-gray-600"
-                  } font-bold`}
+                          path === `/${slug}`
+                            ? "text-blue-600 hover:text-blue-500"
+                            : "text-gray-900 hover:text-gray-600"
+                        } font-bold` + path === `/${slug}`
+                    ? " toc-active"
+                    : ""}
                 >
                   {entry.name}
                 </a>
                 {entry.children && (
-                  <ol class={tw`pl-4 list-decimal nested`}>
+                  <ol class={tw`pl-4 list-decimal` + " nested"}>
                     {Object.entries(entry.children).map(
                       (
                         [childSlug, name],

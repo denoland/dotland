@@ -11,7 +11,7 @@ export default function NotFoundPage() {
   return (
     <div
       class={tw
-        `width-full min-h-screen overflow-x-hidden relative flex justify-between flex-col flex-wrap`}
+        `w-full min-h-screen overflow-x-hidden relative flex justify-between flex-col flex-wrap`}
     >
       <Head>
         <title>Not Found | Deno</title>

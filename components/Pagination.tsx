@@ -19,7 +19,7 @@ interface Props extends PaginationProps {
 function getNavButtonStyles(disabled: boolean) {
   return `relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md bg-white ${
     !disabled
-      ? "text-gray-700 hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700"
+      ? "text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 active:bg-gray-100 active:text-gray-700"
       : "text-gray-500 cursor-default"
   } transition ease-in-out duration-150`;
 }
@@ -98,7 +98,7 @@ export function Pagination(
                     class={tw
                       `relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium ${
                         hasPrevious
-                          ? "text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500"
+                          ? "text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 active:bg-gray-100 active:text-gray-500"
                           : "text-gray-300 cursor-default"
                       } transition ease-in-out duration-150`}
                     aria-label="Previous"
@@ -112,7 +112,7 @@ export function Pagination(
                         currentPage === 1
                           ? "bg-gray-100 font-semibold text-gray-800"
                           : "bg-white font-medium text-gray-700"
-                      } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
+                      } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
                   >
                     1
                   </a>
@@ -126,7 +126,7 @@ export function Pagination(
                               currentPage === 2
                                 ? "bg-gray-100 font-semibold text-gray-800"
                                 : "bg-white font-medium text-gray-700"
-                            } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
+                            } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
                         >
                           2
                         </a>
@@ -153,7 +153,7 @@ export function Pagination(
                         currentPage === centerPage - 1
                           ? "bg-gray-100 font-semibold text-gray-800"
                           : "bg-white font-medium text-gray-700"
-                      } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
+                      } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
                   >
                     {centerPage - 1}
                   </a>
@@ -164,7 +164,7 @@ export function Pagination(
                         currentPage === centerPage
                           ? "bg-gray-100 font-semibold text-gray-800"
                           : "bg-white font-medium text-gray-700"
-                      } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
+                      } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
                   >
                     {centerPage}
                   </a>
@@ -175,7 +175,7 @@ export function Pagination(
                         currentPage === centerPage + 1
                           ? "bg-gray-100 font-semibold text-gray-800"
                           : "bg-white font-medium text-gray-700"
-                      } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
+                      } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
                   >
                     {centerPage + 1}
                   </a>
@@ -189,7 +189,7 @@ export function Pagination(
                               currentPage === pageCount - 1
                                 ? "bg-gray-100 font-semibold text-gray-800"
                                 : "bg-white font-medium text-gray-700"
-                            } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
+                            } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
                         >
                           {pageCount - 1}
                         </a>
@@ -216,7 +216,7 @@ export function Pagination(
                         currentPage === pageCount
                           ? "bg-gray-100 font-semibold text-gray-800"
                           : "bg-white font-medium text-gray-700"
-                      } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
+                      } hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
                   >
                     {pageCount}
                   </a>
@@ -226,7 +226,7 @@ export function Pagination(
                     class={tw
                       `-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium ${
                         hasNext
-                          ? "text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500"
+                          ? "text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 active:bg-gray-100 active:text-gray-500"
                           : "text-gray-300 cursor-default"
                       } transition ease-in-out duration-150`}
                     aria-label="Previous"

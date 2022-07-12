@@ -379,7 +379,7 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                   role="checkbox"
                   tabIndex={0}
                   class={tw
-                    `bg-gray-900 relative inline-block flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full transition-colors ease-in-out duration-200 focus:outline-none focus:shadow-outline`}
+                    `bg-gray-900 relative inline-block flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full transition-colors ease-in-out duration-200 focus:outline-none`}
                 >
                   <span
                     aria-hidden="true"
