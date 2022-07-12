@@ -209,10 +209,10 @@ export default function SearchBox() {
               <div class={tw`flex gap-3`}>
                 {(Object.keys(symbolKinds) as (keyof typeof symbolKinds)[]).map(
                   (symbolKind) => (
-                    <label>
+                    <label class={tw`bg-red-900`}>
                       <input
                         type="checkbox"
-                        class={tw`mr-1 bg-red-900`}
+                        class={tw`mr-1`}
                         onChange={() => {
                           console.log(symbolKindsToggle);
                           setSymbolKindsToggle((prev) => {
