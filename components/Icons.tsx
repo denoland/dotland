@@ -1,6 +1,7 @@
 /** @jsx h */
 import { h } from "preact";
 import { tw } from "@twind";
+export * from "$doc_components/Icons.tsx";
 
 export function GitHub(props: { class?: string }) {
   return (
@@ -347,6 +348,21 @@ export function Tag(props: { title?: string }) {
         d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
         clipRule="evenodd"
       />
+    </svg>
+  );
+}
+
+export function File() {
+  return (
+    <svg
+      class={tw`m-2`}
+      xmlns="http://www.w3.org/2000/svg"
+      width="6"
+      height="10"
+      viewBox="0 0 6 10"
+      fill="none"
+    >
+      <path d="M0.5 10L5.5 5L0.5 0V10Z" fill="#6C6E78" />
     </svg>
   );
 }
