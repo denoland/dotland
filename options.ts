@@ -8,7 +8,11 @@ import { virtualSheet } from "twind/sheets";
 
 const sheet = virtualSheet();
 sheet.reset();
-setup({ ...config, sheet });
+setup({
+  ...config,
+  sheet,
+  mode: Deno.env.get("DENO_DEPLOYMENT_ID") ? "silent" : undefined,
+});
 
 function render(ctx: RenderContext, render: InnerRenderFunction) {
   const snapshot = ctx.state.get("twind") as unknown[] | null;
