@@ -209,7 +209,7 @@ export default function SearchBox() {
               <div class={tw`flex gap-3`}>
                 {(Object.keys(symbolKinds) as (keyof typeof symbolKinds)[]).map(
                   (symbolKind) => (
-                    <label class={tw`bg-red-900`}>
+                    <label>
                       <input
                         type="checkbox"
                         class={tw`mr-1`}
