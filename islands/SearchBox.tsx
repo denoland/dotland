@@ -212,7 +212,7 @@ export default function SearchBox() {
                     <label>
                       <input
                         type="checkbox"
-                        class={tw`mr-1`}
+                        class={tw`mr-1 bg-red-900`}
                         onChange={() => {
                           console.log(symbolKindsToggle);
                           setSymbolKindsToggle((prev) => {
