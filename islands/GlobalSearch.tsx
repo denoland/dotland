@@ -66,7 +66,6 @@ export default function GlobalSearch() {
         setShowModal(true);
       }
       if (e.key === "Escape") {
-        console.log("escape pressed");
         setShowModal(false);
       }
     };
@@ -295,7 +294,9 @@ function SymbolResult({ doc }: { doc: DocNode }) {
       <KindIcon />
       <div class={tw`ml-2`}>
         <div class={tw`space-x-2 py-1`}>
-          <span class={tw`text-[${colors[doc.kind][0]}]`}>{doc.kind}</span>
+          <span class={tw`text-[${colors[doc.kind][0]}]`}>
+            {doc.kind.replace("A", " a")}
+          </span>
           <span class={tw`font-semibold`}>{doc.name}</span>
           <span class={tw`italic text-sm text-[#9CA0AA] leading-6`}>from</span>
           <span>{location}</span>
