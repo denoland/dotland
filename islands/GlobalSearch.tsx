@@ -143,23 +143,32 @@ export default function GlobalSearch() {
         >
           <div
             class={tw
-              `bg-white mt-24 mx-auto rounded-md w-2/3 max-h-[80vh] border border-[#E8E7E5] flex flex-col`}
+              `bg-white w-full h-screen lg:(mt-24 mx-auto rounded-md w-2/3 max-h-[80vh] border border-[#E8E7E5]) flex flex-col`}
             onClick={(e) => e.stopPropagation()}
           >
             <div class={tw`pt-6 px-6 border-b border-[#E8E7E5]`}>
-              <label
-                class={tw
-                  `pl-4 h-10 w-full bg-[#F3F3F3] rounded-md flex items-center text-light`}
-              >
-                <Icons.MagnifyingGlass />
-                <input
-                  class={tw`ml-1.5 py-3 leading-4 bg-transparent w-full`}
-                  type="text"
-                  onInput={(e) => setInput(e.currentTarget.value)}
-                  value={input}
-                  placeholder="Search manual, symbols and modules..."
-                />
-              </label>
+              <div class={tw`flex`}>
+                <label
+                  class={tw
+                    `pl-4 h-10 w-full bg-[#F3F3F3] rounded-md flex items-center text-light`}
+                >
+                  <Icons.MagnifyingGlass />
+                  <input
+                    class={tw`ml-1.5 py-3 leading-4 bg-transparent w-full`}
+                    type="text"
+                    onInput={(e) => setInput(e.currentTarget.value)}
+                    value={input}
+                    placeholder="Search manual, symbols and modules..."
+                  />
+                </label>
+
+                <div
+                  class={tw`lg:hidden ml-3 -mr-2 flex items-center`}
+                  onClick={() => setShowModal(false)}
+                >
+                  <Icons.Cross />
+                </div>
+              </div>
 
               <div class={tw`flex gap-3 mt-2`}>
                 {kinds.map((k) => (
@@ -205,10 +214,10 @@ export default function GlobalSearch() {
                   {(Object.keys(symbolKinds) as (keyof typeof symbolKinds)[])
                     .map(
                       (symbolKind) => (
-                        <label>
+                        <label class={tw`whitespace-nowrap inline-block`}>
                           <input
                             type="checkbox"
-                            class={tw`mr-1`}
+                            class={tw`mr-1 not-checked:siblings:text-[#6C6E78]`}
                             onChange={() => {
                               console.log(symbolKindsToggle);
                               setSymbolKindsToggle((prev) => {
@@ -220,7 +229,9 @@ export default function GlobalSearch() {
                             }}
                             checked={symbolKindsToggle[symbolKind]}
                           />
-                          {symbolKind}
+                          <span class={tw`text-sm leading-none`}>
+                            {symbolKind}
+                          </span>
                         </label>
                       ),
                     )}
