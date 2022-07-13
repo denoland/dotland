@@ -118,43 +118,43 @@ export default function SearchBox() {
     }
 
     client.multipleQueries(queries).then(
-      // deno-lint-ignore no-explicit-any
-      ({ results }: { results: { index: string; hits: any }[] }) => {
+      ({ results }) => {
         setResults({
-          manual: results.find((res: { index: string }) =>
-            res.index === "deno_manual"
-          )?.hits.map((
-            hit: {
-              anchor: string;
-              url: string;
-              content: string;
-            },
-          ) => ({
-            name: hit.anchor,
-            url: hit.url,
-            description: hit.content,
-          })),
-          symbols: results.find((res: { index: string }) =>
-            res.index === "deno_modules"
-          )?.hits.map(
-            (hit: DocNode) => {
-              let location = new URL(hit.location.filename).pathname;
-              location = location.replace(/^(\/x\/)|\//, "");
-              return {
-                kind: hit.kind,
-                name: (
-                  <span>
-                    {hit.kind} <InlineCode>{hit.name}</InlineCode> from{" "}
-                    <span class={tw`text-blue-500 text-sm break-all`}>
-                      {location}
-                    </span>
-                  </span>
-                ),
-                url: hit.location.filename,
-                description: hit.jsDoc?.doc,
-              };
-            },
+          manual: results.find((res) => res.index! === "deno_manual")?.hits.map(
+            // @ts-ignore Algolia typings are messy
+            (
+              hit: {
+                anchor: string;
+                url: string;
+                content: string;
+              },
+            ) => ({
+              name: hit.anchor,
+              url: hit.url,
+              description: hit.content,
+            }),
           ),
+          symbols: results.find((res) => res.index! === "deno_modules")?.hits
+            .map(
+              // @ts-ignore Algolia typings are messy
+              (hit: DocNode) => {
+                let location = new URL(hit.location.filename).pathname;
+                location = location.replace(/^(\/x\/)|\//, "");
+                return {
+                  kind: hit.kind,
+                  name: (
+                    <span>
+                      {hit.kind} <InlineCode>{hit.name}</InlineCode> from{" "}
+                      <span class={tw`text-blue-500 text-sm break-all`}>
+                        {location}
+                      </span>
+                    </span>
+                  ),
+                  url: hit.location.filename,
+                  description: hit.jsDoc?.doc,
+                };
+              },
+            ),
         });
       },
     );
