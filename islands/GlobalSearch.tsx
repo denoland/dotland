@@ -28,7 +28,7 @@ const symbolKinds = {
 } as const;
 
 /** Search Deno documentation, symbols, or modules. */
-export default function SearchBox() {
+export default function GlobalSearch() {
   const [showModal, setShowModal] = useState(true);
   const [input, setInput] = useState("");
   const [results, setResults] = useState<{

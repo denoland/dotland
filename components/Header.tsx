@@ -6,8 +6,7 @@ import { Fragment, h } from "preact";
 
 import { apply, css, tw } from "@twind";
 import * as Icons from "./Icons.tsx";
-import { Head } from "$fresh/src/runtime/head.ts";
-import SearchBox from "../islands/SearchBox.tsx";
+import GlobalSearch from "../islands/GlobalSearch.tsx";
 
 const entries = [
   { href: "/manual", content: "Manual" },
@@ -60,7 +59,7 @@ export function Header({
               <img class={tw`h-full w-full`} src="/logo.svg" alt="Deno Logo" />
             </a>
 
-            {!main && <SearchBox />}
+            {!main && <GlobalSearch />}
 
             <label
               tabIndex={0}
