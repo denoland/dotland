@@ -1,14 +1,15 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { ComponentChildren, Fragment, h } from "preact";
+/** @jsx runtime.h */
+/** @jsxFrag runtime.Fragment */
+import { runtime } from "$doc_components/services.ts";
 import algoliasearch from "$algolia";
 import { css, tw } from "@twind";
 import { useEffect, useState } from "preact/hooks";
 import * as Icons from "@/components/Icons.tsx";
-import { InlineCode } from "@/components/InlineCode.tsx";
 import type { DocNode } from "$deno_doc/types.d.ts";
+import { colors, docNodeKindMap } from "$doc_components/symbol_kind.tsx";
+import { ComponentChildren } from "preact";
 
 const kinds = [
   "All",
@@ -29,25 +30,16 @@ const symbolKinds = {
 
 /** Search Deno documentation, symbols, or modules. */
 export default function GlobalSearch() {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
   const [input, setInput] = useState("");
   const [results, setResults] = useState<{
     manual?: Array<{
-      name: string;
+      anchor: string;
       url: string;
-      description: string;
+      content: string;
     }>;
-    modules?: Array<{
-      name: string;
-      url: string;
-      description: string;
-    }>;
-    symbols?: Array<{
-      kind: string;
-      name: ComponentChildren;
-      url: string;
-      description?: string;
-    }>;
+    modules?: Array<unknown>;
+    symbols?: Array<DocNode>;
   }>({});
   const [kind, setKind] = useState<typeof kinds[number]>("All");
   const [symbolKindsToggle, setSymbolKindsToggle] = useState<
@@ -69,7 +61,7 @@ export default function GlobalSearch() {
 
   useEffect(() => {
     document.getElementById("searchModal")!.style.display = showModal
-      ? "flex"
+      ? "block"
       : "none";
   }, [showModal]);
 
@@ -120,41 +112,10 @@ export default function GlobalSearch() {
     client.multipleQueries(queries).then(
       ({ results }) => {
         setResults({
-          manual: results.find((res) => res.index! === "deno_manual")?.hits.map(
-            // @ts-ignore Algolia typings are messy
-            (
-              hit: {
-                anchor: string;
-                url: string;
-                content: string;
-              },
-            ) => ({
-              name: hit.anchor,
-              url: hit.url,
-              description: hit.content,
-            }),
-          ),
-          symbols: results.find((res) => res.index! === "deno_modules")?.hits
-            .map(
-              // @ts-ignore Algolia typings are messy
-              (hit: DocNode) => {
-                let location = new URL(hit.location.filename).pathname;
-                location = location.replace(/^(\/x\/)|\//, "");
-                return {
-                  kind: hit.kind,
-                  name: (
-                    <span>
-                      {hit.kind} <InlineCode>{hit.name}</InlineCode> from{" "}
-                      <span class={tw`text-blue-500 text-sm break-all`}>
-                        {location}
-                      </span>
-                    </span>
-                  ),
-                  url: hit.location.filename,
-                  description: hit.jsDoc?.doc,
-                };
-              },
-            ),
+          // @ts-ignore algolia typings are annoying
+          manual: results.find((res) => res.index! === "deno_manual")?.hits,
+          // @ts-ignore algolia typings are annoying
+          symbols: results.find((res) => res.index! === "deno_modules")?.hits,
         });
       },
     );
@@ -183,59 +144,70 @@ export default function GlobalSearch() {
 
       <div
         id="searchModal"
-        class={tw
-          `hidden justify-center items-center bg-[#999999BF] inset-0 fixed z-10`}
+        class={tw`hidden bg-[#00000033] inset-0 fixed z-10`}
         onClick={() => setShowModal(false)}
       >
         <div
           class={tw
-            `bg-[#F3F3F3] shadow-xl p-3 h-screen w-screen lg:(rounded-md h-3/4 w-2/3) flex flex-col`}
+            `bg-white mt-24 mx-auto rounded-md w-2/3 max-h-[80vh] border border-[#E8E7E5] flex flex-col`}
           onClick={(e) => e.stopPropagation()}
         >
-          <div class={tw`flex-shrink-0 flex`}>
+          <div class={tw`pt-6 px-6 border-b border-[#E8E7E5]`}>
             <label
               class={tw
-                `text-xl flex bg-white border border-dark-border rounded-md p-2 w-full`}
+                `pl-4 h-10 w-full bg-[#F3F3F3] rounded-md flex items-center text-light`}
             >
-              <Icons.MagnifyingGlass class="w-10! h-10! text-main" />
+              <Icons.MagnifyingGlass />
               <input
+                class={tw`ml-1.5 py-3 leading-4 bg-transparent w-full`}
                 type="text"
                 onInput={(e) => setInput(e.currentTarget.value)}
                 value={input}
-                class={tw`w-full ml-3 bg-transparent`}
-                placeholder="Search manual, symbols, and modules"
+                placeholder="Search manual, symbols and modules..."
               />
             </label>
-            <button
-              class={tw`lg:hidden pl-2`}
-              onClick={() => setShowModal(false)}
-            >
-              <Icons.Cross />
-            </button>
+
+            <div class={tw`flex gap-3 mt-2`}>
+              {kinds.map((k) => (
+                <div
+                  class={tw
+                    `px-2 rounded-md leading-relaxed hover:(bg-gray-100 text-main) ${
+                      // TODO: use border instead
+                      k === kind
+                        ? css({
+                          "text-decoration-line": "underline",
+                          "text-underline-offset": "6px",
+                          "text-decoration-thickness": "2px",
+                        })
+                        : ""} ${k === kind ? "text-black" : "text-gray-500"}`}
+                  onClick={() => setKind(k)}
+                >
+                  {k}
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div class={tw`flex gap-3 ml-2 mt-3 mb-2 flex-shrink-0`}>
-            {kinds.map((k) => (
-              <div
-                class={tw
-                  `px-2 rounded-md leading-loose hover:(bg-gray-200 text-main) ${
-                    k === kind
-                      ? css({
-                        "text-decoration-line": "underline",
-                        "text-underline-offset": "6px",
-                        "text-decoration-thickness": "2px",
-                      })
-                      : ""
-                  } ${k === kind ? "text-black" : "text-gray-500"}`}
-                onClick={() => setKind(k)}
-              >
-                {k}
-              </div>
-            ))}
+          <div class={tw`overflow-y-auto`}>
+            {results.manual && (
+              <Section title="Manual" isAll={kind === "All"}>
+                {results.manual.map((res) => <ManualResult {...res} />)}
+              </Section>
+            )}
+            {results.symbols && (
+              <Section title="Symbols" isAll={kind === "All"}>
+                {results.symbols.map((doc) => <SymbolResult doc={doc} />)}
+              </Section>
+            )}
+            <div class={tw`${kind === "All" ? "h-6" : "h-3.5"}`} />
           </div>
+
           {kind === "Symbols" &&
             (
-              <div class={tw`flex mb-1.5 gap-1 flex-col lg:(gap-3 flex-row)`}>
+              <div
+                class={tw
+                  `bg-ultralight border-t border-[#E8E7E5] py-5 px-6 space-x-3`}
+              >
                 {(Object.keys(symbolKinds) as (keyof typeof symbolKinds)[]).map(
                   (symbolKind) => (
                     <label>
@@ -259,20 +231,6 @@ export default function GlobalSearch() {
                 )}
               </div>
             )}
-          <hr />
-
-          <div class={tw`mt-4 space-y-4 overflow-y-auto flex-grow`}>
-            {results.manual && (
-              <Section title="Manual" isAll={kind === "All"}>
-                {results.manual.map((res) => <Result {...res} />)}
-              </Section>
-            )}
-            {results.symbols && (
-              <Section title="Symbols" isAll={kind === "All"}>
-                {results.symbols.map((res) => <Result {...res} />)}
-              </Section>
-            )}
-          </div>
         </div>
       </div>
     </>
@@ -289,27 +247,62 @@ function Section({
   children: ComponentChildren;
 }) {
   return (
-    <div>
-      {isAll && <div class={tw`ml-1.5 mb-2`}>{title}</div>}
-      <div class={tw`space-y-2`}>
+    <div class={tw`pt-3`}>
+      {isAll && (
+        <div
+          class={tw`mx-6 my-1 text-[#9CA0AA] text-sm leading-6 font-semibold`}
+        >
+          {title}
+        </div>
+      )}
+      <div class={tw`children:(px-6 py-1.5 even:bg-ultralight)`}>
         {children}
       </div>
     </div>
   );
 }
 
-function Result({
+function ManualResult({
+  anchor,
   url,
-  name,
-  description,
-}: { name: ComponentChildren; url: string; description?: ComponentChildren }) {
+  content,
+}: { anchor: string; url: string; content: string }) {
   return (
-    <a
-      href={url}
-      class={tw`block bg-white border border-dark-border rounded-md p-2`}
-    >
-      <span class={tw`text-lg font-semibold`}>{name}</span>
-      {description && <div class={tw`truncate`}>{description}</div>}
+    <a href={url} class={tw`block`}>
+      <div class={tw`font-semibold`}>
+        {anchor}
+      </div>
+      <div class={tw`text-sm text-[#6C6E78]`}>
+        {content}
+      </div>
+    </a>
+  );
+}
+
+function SymbolResult({ doc }: { doc: DocNode }) {
+  let location = new URL(doc.location.filename).pathname;
+  location = location.replace(/^(\/x\/)|\//, "");
+  const KindIcon = docNodeKindMap[doc.kind];
+
+  return (
+    <a href={doc.location.filename} class={tw`flex items-center`}>
+      <KindIcon />
+      <div class={tw`ml-2`}>
+        <div class={tw`space-x-2 py-1`}>
+          <span class={tw`text-[${colors[doc.kind][0]}]`}>{doc.kind}</span>
+          <span class={tw`font-semibold`}>{doc.name}</span>
+          <span class={tw`italic text-sm text-[#9CA0AA] leading-6`}>from</span>
+          <span>{location}</span>
+        </div>
+        {doc.jsDoc?.doc && (
+          <div
+            class={tw
+              `text-sm text-[#6C6E78] h-5 overflow-ellipsis overflow-hidden mr-24`}
+          >
+            {doc.jsDoc!.doc}
+          </div>
+        )}
+      </div>
     </a>
   );
 }

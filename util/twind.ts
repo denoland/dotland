@@ -1,7 +1,9 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { apply, Configuration, setup, Sheet } from "twind";
+import { apply, Configuration, setup as twSetup, Sheet } from "twind";
+import { setup } from "$doc_components/services.ts";
 export * from "twind";
 import { css } from "twind/css";
+import { Fragment, h } from "preact";
 export { css };
 
 export const config: Configuration = {
@@ -85,5 +87,8 @@ if (IS_BROWSER) {
     },
   };
   config.sheet = sheet;
-  setup(config);
+  twSetup(config);
+  setup({
+    runtime: { Fragment, h },
+  });
 }
