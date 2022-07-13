@@ -136,110 +136,109 @@ export default function GlobalSearch() {
         </div>
       </button>
 
-      {showModal && (
+      <dialog
+        class={tw`bg-[#00000033] inset-0 fixed z-10 p-0 m-0 h-screen`}
+        onClick={() => setShowModal(false)}
+        open={showModal}
+      >
         <div
-          class={tw`bg-[#00000033] inset-0 fixed z-10`}
-          onClick={() => setShowModal(false)}
+          class={tw
+            `bg-white w-full h-screen lg:(mt-24 mx-auto rounded-md w-2/3 max-h-[80vh] border border-[#E8E7E5]) flex flex-col`}
+          onClick={(e) => e.stopPropagation()}
         >
-          <div
-            class={tw
-              `bg-white w-full h-screen lg:(mt-24 mx-auto rounded-md w-2/3 max-h-[80vh] border border-[#E8E7E5]) flex flex-col`}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div class={tw`pt-6 px-6 border-b border-[#E8E7E5]`}>
-              <div class={tw`flex`}>
-                <label
-                  class={tw
-                    `pl-4 h-10 w-full bg-[#F3F3F3] rounded-md flex items-center text-light`}
-                >
-                  <Icons.MagnifyingGlass />
-                  <input
-                    class={tw`ml-1.5 py-3 leading-4 bg-transparent w-full`}
-                    type="text"
-                    onInput={(e) => setInput(e.currentTarget.value)}
-                    value={input}
-                    placeholder="Search manual, symbols and modules..."
-                  />
-                </label>
+          <div class={tw`pt-6 px-6 border-b border-[#E8E7E5]`}>
+            <div class={tw`flex`}>
+              <label
+                class={tw
+                  `pl-4 h-10 w-full bg-[#F3F3F3] rounded-md flex items-center text-light`}
+              >
+                <Icons.MagnifyingGlass />
+                <input
+                  class={tw`ml-1.5 py-3 leading-4 bg-transparent w-full`}
+                  type="text"
+                  onInput={(e) => setInput(e.currentTarget.value)}
+                  value={input}
+                  placeholder="Search manual, symbols and modules..."
+                />
+              </label>
 
-                <div
-                  class={tw`lg:hidden ml-3 -mr-2 flex items-center`}
-                  onClick={() => setShowModal(false)}
-                >
-                  <Icons.Cross />
-                </div>
-              </div>
-
-              <div class={tw`flex gap-3 mt-2`}>
-                {kinds.map((k) => (
-                  <div
-                    class={tw
-                      `px-2 rounded-md leading-relaxed hover:(bg-gray-100 text-main) ${
-                        // TODO: use border instead
-                        k === kind
-                          ? css({
-                            "text-decoration-line": "underline",
-                            "text-underline-offset": "6px",
-                            "text-decoration-thickness": "2px",
-                          })
-                          : ""} ${k === kind ? "text-black" : "text-gray-500"}`}
-                    onClick={() => setKind(k)}
-                  >
-                    {k}
-                  </div>
-                ))}
+              <div
+                class={tw`lg:hidden ml-3 -mr-2 flex items-center`}
+                onClick={() => setShowModal(false)}
+              >
+                <Icons.Cross />
               </div>
             </div>
 
-            <div class={tw`overflow-y-auto`}>
-              {results.manual && (
-                <Section title="Manual" isAll={kind === "All"}>
-                  {results.manual.map((res) => <ManualResult {...res} />)}
-                </Section>
-              )}
-              {results.symbols && (
-                <Section title="Symbols" isAll={kind === "All"}>
-                  {results.symbols.map((doc) => <SymbolResult doc={doc} />)}
-                </Section>
-              )}
-              <div class={tw`${kind === "All" ? "h-6" : "h-3.5"}`} />
-            </div>
-
-            {kind === "Symbols" &&
-              (
+            <div class={tw`flex gap-3 mt-2`}>
+              {kinds.map((k) => (
                 <div
                   class={tw
-                    `bg-ultralight border-t border-[#E8E7E5] py-5 px-6 space-x-3`}
+                    `px-2 rounded-md leading-relaxed hover:(bg-gray-100 text-main) ${
+                      // TODO: use border instead
+                      k === kind
+                        ? css({
+                          "text-decoration-line": "underline",
+                          "text-underline-offset": "6px",
+                          "text-decoration-thickness": "2px",
+                        })
+                        : ""} ${k === kind ? "text-black" : "text-gray-500"}`}
+                  onClick={() => setKind(k)}
                 >
-                  {(Object.keys(symbolKinds) as (keyof typeof symbolKinds)[])
-                    .map(
-                      (symbolKind) => (
-                        <label class={tw`whitespace-nowrap inline-block`}>
-                          <input
-                            type="checkbox"
-                            class={tw`mr-1 not-checked:siblings:text-[#6C6E78]`}
-                            onChange={() => {
-                              console.log(symbolKindsToggle);
-                              setSymbolKindsToggle((prev) => {
-                                return {
-                                  ...prev,
-                                  [symbolKind]: !prev[symbolKind],
-                                };
-                              });
-                            }}
-                            checked={symbolKindsToggle[symbolKind]}
-                          />
-                          <span class={tw`text-sm leading-none`}>
-                            {symbolKind}
-                          </span>
-                        </label>
-                      ),
-                    )}
+                  {k}
                 </div>
-              )}
+              ))}
+            </div>
           </div>
+
+          <div class={tw`overflow-y-auto`}>
+            {results.manual && (
+              <Section title="Manual" isAll={kind === "All"}>
+                {results.manual.map((res) => <ManualResult {...res} />)}
+              </Section>
+            )}
+            {results.symbols && (
+              <Section title="Symbols" isAll={kind === "All"}>
+                {results.symbols.map((doc) => <SymbolResult doc={doc} />)}
+              </Section>
+            )}
+            <div class={tw`${kind === "All" ? "h-6" : "h-3.5"}`} />
+          </div>
+
+          {kind === "Symbols" &&
+            (
+              <div
+                class={tw
+                  `bg-ultralight border-t border-[#E8E7E5] py-5 px-6 space-x-3`}
+              >
+                {(Object.keys(symbolKinds) as (keyof typeof symbolKinds)[])
+                  .map(
+                    (symbolKind) => (
+                      <label class={tw`whitespace-nowrap inline-block`}>
+                        <input
+                          type="checkbox"
+                          class={tw`mr-1 not-checked:siblings:text-[#6C6E78]`}
+                          onChange={() => {
+                            console.log(symbolKindsToggle);
+                            setSymbolKindsToggle((prev) => {
+                              return {
+                                ...prev,
+                                [symbolKind]: !prev[symbolKind],
+                              };
+                            });
+                          }}
+                          checked={symbolKindsToggle[symbolKind]}
+                        />
+                        <span class={tw`text-sm leading-none`}>
+                          {symbolKind}
+                        </span>
+                      </label>
+                    ),
+                  )}
+              </div>
+            )}
         </div>
-      )}
+      </dialog>
     </>
   );
 }
