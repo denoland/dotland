@@ -4,12 +4,21 @@
 /** @jsxFrag runtime.Fragment */
 import { runtime } from "$doc_components/services.ts";
 import algoliasearch from "$algolia";
+import { IS_BROWSER } from "$fresh/runtime.ts";
 import { css, tw } from "@twind";
 import { useEffect, useState } from "preact/hooks";
 import * as Icons from "@/components/Icons.tsx";
 import type { DocNode } from "$deno_doc/types.d.ts";
 import { colors, docNodeKindMap } from "$doc_components/symbol_kind.tsx";
 import { ComponentChildren } from "preact";
+
+// Lazy load a <dialog> polyfill.
+// @ts-expect-error HTMLDialogElement is not just a type!
+if (IS_BROWSER && window.HTMLDialogElement === "undefined") {
+  await import(
+    "https://raw.githubusercontent.com/GoogleChrome/dialog-polyfill/5033aac1b74c44f36cde47be3d11f4756f3f8fda/dist/dialog-polyfill.esm.js"
+  );
+}
 
 const kinds = [
   "All",
