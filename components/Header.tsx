@@ -6,7 +6,7 @@ import { Fragment, h } from "preact";
 
 import { apply, css, tw } from "@twind";
 import * as Icons from "./Icons.tsx";
-import GlobalSearch from "../islands/GlobalSearch.tsx";
+import GlobalSearch from "@/islands/GlobalSearch.tsx";
 
 const entries = [
   { href: "/manual", content: "Manual" },
