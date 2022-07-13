@@ -22,7 +22,7 @@ export async function getDocs(
   name: string,
   version: string,
   path: string,
-): Promise<Doc> {
+): Promise<Doc | null> {
   const type = fileTypeFromURL(path);
   if (filetypeIsJS(type)) {
     const [index, doc] = await Promise.all([
@@ -34,10 +34,14 @@ export async function getDocs(
       doc,
     };
   } else { // TODO: check if it is a directory
-    return {
-      index: await getModuleIndex(name, version, path),
-      doc: null,
-    };
+    try {
+      return {
+        index: await getModuleIndex(name, version, path),
+        doc: null,
+      };
+    } catch {
+      return null;
+    }
   }
 }
 
