@@ -88,8 +88,13 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           </p>
           <ol class={tw`ml-8 list-disc text-gray-700`}>
             <li>
+<<<<<<< HEAD
               提供符合 Web 平台标准的{" "}
               <a class={tw`link`} href="/manual/runtime/web_platform_apis.md">
+=======
+              Provides{" "}
+              <a class={tw`link`} href="/manual/runtime/web_platform_apis">
+>>>>>>> 87b84c9bbd3dfe1b1556c91a44a2bf37a889a5d5
                 web platform functionality
               </a>{" "}
               。

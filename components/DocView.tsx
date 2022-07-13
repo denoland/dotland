@@ -11,7 +11,7 @@ import { ModuleDoc } from "$doc_components/module_doc.tsx";
 import { ModulePathIndex } from "$doc_components/module_path_index.tsx";
 import { ModulePathIndexPanel } from "$doc_components/module_path_index_panel.tsx";
 import { FileDisplay } from "./FileDisplay.tsx";
-import { SymbolDoc } from "../doc_components/symbol_doc.tsx";
+import { SymbolDoc } from "$doc_components/symbol_doc.tsx";
 
 export function DocView({
   doc,
