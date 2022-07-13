@@ -29,7 +29,7 @@ const symbolKinds = {
 
 /** Search Deno documentation, symbols, or modules. */
 export default function GlobalSearch() {
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [input, setInput] = useState("");
   const [results, setResults] = useState<{
     manual?: Array<{
