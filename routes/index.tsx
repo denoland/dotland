@@ -90,7 +90,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           <ol class={tw`ml-8 list-disc text-gray-700`}>
             <li>
               Provides{" "}
-              <a class={tw`link`} href="/manual/runtime/web_platform_apis.md">
+              <a class={tw`link`} href="/manual/runtime/web_platform_apis">
                 web platform functionality
               </a>{" "}
               and adopts web platform standards.
