@@ -191,7 +191,7 @@ export default function GlobalSearch() {
             </div>
           </div>
 
-          <div class={tw`overflow-y-auto`}>
+          <div class={tw`overflow-y-auto flex-grow-1`}>
             {results.manual && (
               <Section title="Manual" isAll={kind === "All"}>
                 {results.manual.map((res) => <ManualResult {...res} />)}
