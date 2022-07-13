@@ -28,7 +28,7 @@ const symbolKinds = {
 
 /** Search Deno documentation, symbols, or modules. */
 export default function SearchBox() {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
   const [input, setInput] = useState("");
   const [results, setResults] = useState<{
     manual?: Array<{
@@ -71,6 +71,7 @@ export default function SearchBox() {
   useEffect(() => {
     const keyboardHandler = (e: KeyboardEvent) => {
       if (e.metaKey && e.key === "k") {
+        e.preventDefault();
         setShowModal(true);
       }
       if (e.key === "Escape") {
@@ -129,7 +130,7 @@ export default function SearchBox() {
               name: (
                 <span>
                   {hit.kind} <InlineCode>{hit.name}</InlineCode> from{" "}
-                  <span class={tw`text-blue-500`}>{location}</span>
+                  <span class={tw`text-blue-500 text-sm break-all`}>{location}</span>
                 </span>
               ),
               url: hit.location.filename,
@@ -166,24 +167,31 @@ export default function SearchBox() {
         id="searchModal"
         class={tw
           `hidden justify-center items-center bg-[#999999BF] inset-0 fixed z-10`}
+        onClick={() => setShowModal(false)}
       >
         <div
           class={tw
-            `bg-[#F3F3F3] shadow-xl p-3 h-screen w-screen lg:(rounded-md h-2/3 w-1/2) flex flex-col`}
+            `bg-[#F3F3F3] shadow-xl p-3 h-screen w-screen lg:(rounded-md h-3/4 w-2/3) flex flex-col`}
+          onClick={e => e.stopPropagation()}
         >
-          <label
-            class={tw
-              `text-xl flex bg-white border border-dark-border rounded-md p-2 flex-shrink-0`}
-          >
-            <Icons.MagnifyingGlass class="w-10! h-10! text-main" />
-            <input
-              type="text"
-              onInput={(e) => setInput(e.currentTarget.value)}
-              value={input}
-              class={tw`w-full ml-3 bg-transparent`}
-              placeholder="Search manual, symbols, and modules"
-            />
-          </label>
+          <div class={tw`flex-shrink-0 flex`}>
+            <label
+              class={tw
+                `text-xl flex bg-white border border-dark-border rounded-md p-2 w-full`}
+            >
+              <Icons.MagnifyingGlass class="w-10! h-10! text-main" />
+              <input
+                type="text"
+                onInput={(e) => setInput(e.currentTarget.value)}
+                value={input}
+                class={tw`w-full ml-3 bg-transparent`}
+                placeholder="Search manual, symbols, and modules"
+              />
+            </label>
+            <button class={tw`lg:hidden pl-2`} onClick={() => setShowModal(false)}>
+              <Icons.Cross />
+            </button>
+          </div>
 
           <div class={tw`flex gap-3 ml-2 mt-3 mb-2 flex-shrink-0`}>
             {kinds.map((k) => (
@@ -206,7 +214,7 @@ export default function SearchBox() {
           </div>
           {kind === "Symbols" &&
             (
-              <div class={tw`flex gap-3`}>
+              <div class={tw`flex mb-1.5 gap-1 flex-col lg:(gap-3 flex-row)`}>
                 {(Object.keys(symbolKinds) as (keyof typeof symbolKinds)[]).map(
                   (symbolKind) => (
                     <label>
