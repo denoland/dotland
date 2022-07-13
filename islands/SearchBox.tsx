@@ -8,6 +8,7 @@ import { css, tw } from "@twind";
 import { useEffect, useState } from "preact/hooks";
 import * as Icons from "@/components/Icons.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
+import type { DocNode } from "$deno_doc/types.d.ts";
 
 const kinds = [
   "All",
@@ -36,7 +37,11 @@ export default function SearchBox() {
       url: string;
       description: string;
     }>;
-    modules?: Array<any>;
+    modules?: Array<{
+      name: string;
+      url: string;
+      description: string;
+    }>;
     symbols?: Array<{
       kind: string;
       name: ComponentChildren;
@@ -112,34 +117,47 @@ export default function SearchBox() {
       });
     }
 
-    client.multipleQueries(queries).then(({ results }) => {
-      setResults({
-        manual: results.find((res) => res.index === "deno_manual")?.hits.map((
-          hit: any,
-        ) => ({
-          name: hit.anchor,
-          url: hit.url,
-          description: hit.content,
-        })),
-        symbols: results.find((res) => res.index === "deno_modules")?.hits.map(
-          (hit: any) => {
-            let location = new URL(hit.location.filename).pathname;
-            location = location.replace(/^(\/x\/)|\//, "");
-            return {
-              kind: hit.kind,
-              name: (
-                <span>
-                  {hit.kind} <InlineCode>{hit.name}</InlineCode> from{" "}
-                  <span class={tw`text-blue-500 text-sm break-all`}>{location}</span>
-                </span>
-              ),
-              url: hit.location.filename,
-              description: hit.jsDoc?.doc,
-            };
-          },
-        ),
-      });
-    });
+    client.multipleQueries(queries).then(
+      // deno-lint-ignore no-explicit-any
+      ({ results }: { results: { index: string; hits: any }[] }) => {
+        setResults({
+          manual: results.find((res: { index: string }) =>
+            res.index === "deno_manual"
+          )?.hits.map((
+            hit: {
+              anchor: string;
+              url: string;
+              content: string;
+            },
+          ) => ({
+            name: hit.anchor,
+            url: hit.url,
+            description: hit.content,
+          })),
+          symbols: results.find((res: { index: string }) =>
+            res.index === "deno_modules"
+          )?.hits.map(
+            (hit: DocNode) => {
+              let location = new URL(hit.location.filename).pathname;
+              location = location.replace(/^(\/x\/)|\//, "");
+              return {
+                kind: hit.kind,
+                name: (
+                  <span>
+                    {hit.kind} <InlineCode>{hit.name}</InlineCode> from{" "}
+                    <span class={tw`text-blue-500 text-sm break-all`}>
+                      {location}
+                    </span>
+                  </span>
+                ),
+                url: hit.location.filename,
+                description: hit.jsDoc?.doc,
+              };
+            },
+          ),
+        });
+      },
+    );
   }, [input, kind, symbolKindsToggle]);
 
   return (
@@ -172,7 +190,7 @@ export default function SearchBox() {
         <div
           class={tw
             `bg-[#F3F3F3] shadow-xl p-3 h-screen w-screen lg:(rounded-md h-3/4 w-2/3) flex flex-col`}
-          onClick={e => e.stopPropagation()}
+          onClick={(e) => e.stopPropagation()}
         >
           <div class={tw`flex-shrink-0 flex`}>
             <label
@@ -188,7 +206,10 @@ export default function SearchBox() {
                 placeholder="Search manual, symbols, and modules"
               />
             </label>
-            <button class={tw`lg:hidden pl-2`} onClick={() => setShowModal(false)}>
+            <button
+              class={tw`lg:hidden pl-2`}
+              onClick={() => setShowModal(false)}
+            >
               <Icons.Cross />
             </button>
           </div>
