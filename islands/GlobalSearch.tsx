@@ -150,7 +150,7 @@ export default function GlobalSearch() {
             <div class={tw`flex`}>
               <label
                 class={tw
-                  `pl-4 h-10 w-full bg-[#F3F3F3] rounded-md flex items-center text-light`}
+                  `pl-4 h-10 w-full flex-shrink-1 bg-[#F3F3F3] rounded-md flex items-center text-light`}
               >
                 <Icons.MagnifyingGlass />
                 <input
