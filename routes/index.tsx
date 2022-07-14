@@ -88,11 +88,10 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           </p>
           <ol class={tw`ml-8 list-disc text-gray-700`}>
             <li>
-              提供符合 Web 平台标准的{" "}
-              <a class={tw`link`} href="/manual/runtime/web_platform_apis.md">
-                web platform functionality
-              </a>{" "}
-              。
+              提供符合{" "}
+              <a class={tw`link`} href="/manual/runtime/web_platform_apis">
+                Web 平台标准的函数集
+              </a>。
             </li>
             <li>
               默认安全。除非显式开启，否则没有文件、网络、环境变量的访问权限。
