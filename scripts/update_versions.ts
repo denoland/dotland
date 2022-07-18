@@ -12,6 +12,9 @@ const versionsFilePath = "versions.json";
 const latestCliTag = await getLatestTagForRepo("deno");
 const latestStdTag = await getLatestTagForRepo("deno_std");
 
+$.log(`cli tag: ${latestCliTag}`);
+$.log(`std tag: ${latestStdTag}`);
+
 const versions = JSON.parse(
   await Deno.readTextFile(versionsFilePath),
 ) as VersionsData;
@@ -41,6 +44,7 @@ if (Deno.args.includes("--create-pr")) {
 }
 
 async function getLatestTagForRepo(name: string) {
+  $.logStep(`Fetching latest release for ${name}...`);
   const gitHubAPIHeaders = {
     accept: "application/vnd.github.v3+json",
   } as const;
