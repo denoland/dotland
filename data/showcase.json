@@ -98,5 +98,11 @@
     "image": "/images/showcase/andbounds.png",
     "title": "ANDBOUNDS Inc.",
     "link": "https://andbounds.com/"
+  },
+  {
+    "image": "/images/showcase/profilator.png",
+    "title": "GitHub Profilator",
+    "link": "https://profilator.deno.dev/",
+    "github": "Bellisario/profilator"
   }
 ]
