@@ -111,6 +111,11 @@
     "link": "https://andbounds.com/"
   },
   {
+    "image": "/images/showcase/ycrm.png",
+    "title": "YCRM",
+    "link": "https://ycrm.xyz/"
+  },
+  {
     "image": "/images/showcase/profilator.png",
     "title": "GitHub Profilator",
     "link": "https://profilator.deno.dev/",
