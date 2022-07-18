@@ -63,7 +63,11 @@ export function Header({
 
             <label
               tabIndex={0}
-              class={tw`lg:hidden checked:bg-red-100`}
+              class={tw`lg:hidden checked:bg-red-100  ${
+                css({
+                  "touch-action": "manipulation",
+                })
+              }`}
               for="menuToggle"
               // @ts-ignore onKeyDown does support strings
               onKeyDown="if (event.code === 'Space' || event.code === 'Enter') { this.click(); event.preventDefault(); }"
