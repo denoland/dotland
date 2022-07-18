@@ -89,6 +89,11 @@
     "github": "kkga/ter"
   },
   {
+    "image": "/images/showcase/edrys.png",
+    "title": "Edyrs",
+    "link": "https://edrys.org"
+  },
+  {
     "image": "/images/showcase/sdns.png",
     "title": "Serverless DNS",
     "link": "https://rdns.deno.dev/",
