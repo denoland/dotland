@@ -11,10 +11,15 @@ import { InlineCode } from "@/components/InlineCode.tsx";
 import { Header } from "@/components/Header.tsx";
 import { HelloBar } from "@/components/HelloBar.tsx";
 import { Background } from "@/components/HeroBackground.tsx";
+import { Handlers, PageProps } from "$fresh/server.ts";
 
 import versions from "@/versions.json" assert { type: "json" };
 
-export default function Home() {
+interface Data {
+  isFirefox: boolean;
+}
+
+export default function Home({ data }: PageProps<Data>) {
   const complexExampleProgram =
     `import { serve } from "https://deno.land/std/http/server.ts";
 serve(req => new Response("Hello World\\n"));`;
@@ -30,8 +35,8 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
 
   return (
     <div>
-      <HelloBar to="https://deno.news/archive/45-deno-raises-21m">
-        Check out Deno News issue #45!
+      <HelloBar to="https://deno.news/archive/46-fresh-wasmbuild-and-v1232">
+        Check out Deno News issue #46!
       </HelloBar>
       <Head>
         <title>Deno - A modern runtime for JavaScript and TypeScript</title>
@@ -41,7 +46,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           class={tw
             `bg-gray-50 overflow-x-hidden border-b border-gray-200 relative`}
         >
-          <Background />
+          {!data.isFirefox && <Background />}
           <Header main />
           <div
             class={tw
@@ -85,7 +90,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           <ol class={tw`ml-8 list-disc text-gray-700`}>
             <li>
               Provides{" "}
-              <a class={tw`link`} href="/manual/runtime/web_platform_apis.md">
+              <a class={tw`link`} href="/manual/runtime/web_platform_apis">
                 web platform functionality
               </a>{" "}
               and adopts web platform standards.
@@ -534,3 +539,13 @@ function InstallSection() {
     </>
   );
 }
+
+export const handler: Handlers<Data> = {
+  GET(req, { render }) {
+    return render!({
+      isFirefox:
+        req.headers.get("user-agent")?.toLowerCase().includes("firefox") ??
+          false,
+    });
+  },
+};

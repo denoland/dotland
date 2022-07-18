@@ -62,8 +62,11 @@ export function Header({
             {!main && <Search />}
 
             <label
+              tabIndex={0}
               class={tw`lg:hidden checked:bg-red-100`}
               for="menuToggle"
+              // @ts-ignore onKeyDown does support strings
+              onKeyDown="if (event.code === 'Space' || event.code === 'Enter') { this.click(); event.preventDefault(); }"
             >
               <Icons.Menu />
               <Icons.Cross class={tw`hidden`} />
@@ -154,7 +157,7 @@ function Search() {
 
       <button
         class={tw
-          `pl-4 w-80 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light focus:outline-none`}
+          `pl-4 w-80 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light`}
         // @ts-ignore onClick does support strings
         onClick="document.querySelector('#search button').click()"
       >
