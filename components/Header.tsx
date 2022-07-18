@@ -1,167 +1,180 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-import { h } from "preact";
+/** @jsxFrag Fragment */
+import { Fragment, h } from "preact";
 
-import { tw } from "@twind";
+import { apply, css, tw } from "@twind";
 import * as Icons from "./Icons.tsx";
+import { Head } from "$fresh/src/runtime/head.ts";
 
 const entries = [
   { href: "/manual", content: "Manual" },
-  { href: "https://deno.com/blog", content: "Blog" },
   {
     href: "https://doc.deno.land/deno/stable",
     content: "API",
   },
   { href: "/std", content: "Standard Library" },
   { href: "/x", content: "Third Party Modules" },
+  { href: "https://deno.com/blog", content: "Blog" },
 ] as const;
 
 export function Header({
-  subtitle,
-  widerContent,
+  selected,
   main,
 }: {
-  subtitle?: string;
-  widerContent?: boolean;
+  selected?: (typeof entries)[number]["content"];
   main?: boolean;
 }) {
   return (
-    <div class={tw`relative py-6 z-10`}>
-      <nav
-        class={tw
-          `mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 ${
-            widerContent ? "max-w-screen-xl" : "max-w-screen-lg lg:p-0"
-          }`}
-      >
-        <a class={tw`flex items-center`} href="/">
-          <img class={tw`h-10 w-auto sm:h-12 my-2`} src="/logo.svg" alt="" />
-          <div class={tw`ml-5 flex flex-col justify-center`}>
-            {!main &&
-              (
-                <div
-                  class={tw
-                    `font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight`}
-                >
-                  Deno
-                </div>
-              )}
-            {subtitle &&
-              (
-                <div
-                  class={tw
-                    `font-normal text-sm sm:text-lg leading-tight tracking-tight`}
-                >
-                  {subtitle}
-                </div>
-              )}
-          </div>
-        </a>
-        <input
-          type="checkbox"
-          class={tw`hidden checked:sibling:block`}
-          id="menuToggle"
-          autoComplete="off"
-        />
-        <div
-          class={tw
-            `hidden absolute top-0 inset-x-0 p-2 transition transform origin-top-right lg:hidden`}
-        >
-          <div class={tw`rounded-lg shadow-md`}>
-            <div class={tw`rounded-lg bg-white shadow-xs overflow-hidden`}>
-              <div class={tw`px-5 pt-4 flex items-center justify-between`}>
-                <a href="/" class={tw`flex items-center`}>
-                  <img
-                    class={tw`h-10 w-auto sm:h-12 my-2`}
-                    src="/logo.svg"
-                    alt=""
-                  />
-                  <div class={tw`ml-5 flex flex-col justify-center`}>
-                    <div
-                      class={tw
-                        `font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight`}
-                    >
-                      Deno
-                    </div>
-                    {subtitle &&
-                      (
-                        <div
-                          class={tw
-                            `font-normal text-sm sm:text-lg leading-tight tracking-tight`}
-                        >
-                          {subtitle}
-                        </div>
-                      )}
-                  </div>
-                </a>{" "}
-                <label class={tw`-mr-2`} htmlFor="menuToggle">
-                  <div
-                    class={tw
-                      `inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:(text-gray-500 bg-gray-100) focus:(outline-none bg-gray-100 text-gray-500) transition duration-150 ease-in-out`}
-                  >
-                    <Icons.Cross />
-                  </div>
-                </label>
-              </div>
-              <div class={tw`px-2 pt-4 pb-3`}>
-                <a
-                  href="https://deno.com/deploy"
-                  class={tw
-                    `block px-3 py-2 rounded-md text-base font-medium rounded-lg border-2 border-gray-700 bg-transparent text-gray-700 hover:border-gray-900 hover:bg-gray-900 hover:text-gray-50 focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out`}
-                >
-                  Deploy
-                </a>
-                {entries.map(({ href, content }) => (
-                  <a
-                    href={href}
-                    class={tw
-                      `block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) transition duration-150 ease-in-out`}
-                  >
-                    {content}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-        <label
-          class={tw`-mr-2 flex items-center lg:hidden`}
-          htmlFor="menuToggle"
-        >
+    <div
+      class={tw(
+        !main
+          ? "bg-primary border-b border-light-border backdrop-blur-3xl"
+          : "",
+      )}
+    >
+      <div class={tw`section-x-inset-xl py-5.5`}>
+        <nav class={tw`flex justify-between flex-col lg:flex-row`}>
+          <input
+            type="checkbox"
+            id="menuToggle"
+            class={tw
+              `hidden checked:siblings:flex checked:sibling:children:last-child:children:(first-child:hidden last-child:block)`}
+            autoComplete="off"
+          />
+
           <div
             class={tw
-              `inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:(text-gray-500 bg-gray-100) focus:(outline-none bg-gray-100 text-gray-500) transition duration-150 ease-in-out`}
+              `h-9 flex items-center justify-between select-none w-full lg:w-auto gap-3 md:gap-6 lg:gap-8`}
           >
-            <Icons.Menu title="Menu | Deno" />
-          </div>
-        </label>
-        <div class={tw`hidden lg:flex md:ml-10 items-end`}>
-          <a
-            href="https://deno.com/deploy"
-            class={tw
-              `font-medium py-2 px-3 rounded-lg border-2 border-gray-700 bg-transparent text-gray-700 hover:border-gray-900 hover:bg-gray-900 hover:text-gray-50 transition duration-150 ease-in-out`}
-          >
-            Deploy
-          </a>
-          {entries.map(({ href, content }) => (
             <a
-              href={href}
-              class={tw
-                `ml-10 my-auto font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out`}
+              href="/"
+              class={tw`h-8 w-8 block ${
+                css({
+                  "flex-shrink": "0",
+                })
+              }`}
             >
-              {content}
+              <img class={tw`h-full w-full`} src="/logo.svg" alt="Deno Logo" />
             </a>
-          ))}
-          <a
-            href="https://github.com/denoland"
+
+            {!main && <Search />}
+
+            <label
+              tabIndex={0}
+              class={tw`lg:hidden checked:bg-red-100`}
+              for="menuToggle"
+              // @ts-ignore onKeyDown does support strings
+              onKeyDown="if (event.code === 'Space' || event.code === 'Enter') { this.click(); event.preventDefault(); }"
+            >
+              <Icons.Menu />
+              <Icons.Cross class={tw`hidden`} />
+            </label>
+          </div>
+
+          <div
             class={tw
-              `ml-10 my-auto text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out leading-0`}
+              `hidden flex-col mx-2 mt-5 gap-y-4 lg:(flex flex-row items-center mx-0 mt-0) font-medium`}
           >
-            <span class={tw`sr-only`}>GitHub</span>
-            <Icons.GitHub class="inline" />
-          </a>
-        </div>
-      </nav>
+            {entries.map(({ href, content }) => {
+              return (
+                <a
+                  href={href}
+                  class={tw
+                    `lg:ml-4 px-2 rounded-md leading-loose hover:(bg-gray-100 text-main) ${apply
+                      `${
+                        content === selected
+                          ? css({
+                            "text-decoration-line": "underline",
+                            "text-underline-offset": "6px",
+                            "text-decoration-thickness": "2px",
+                          })
+                          : ""
+                      } ${
+                        content === selected ? "text-black" : "text-gray-500"
+                      }`}`}
+                >
+                  {content}
+                </a>
+              );
+            })}
+
+            <a
+              href="https://deno.com/deploy"
+              class={tw
+                `h-9 lg:ml-5 bg-secondary rounded-md px-4 flex items-center hover:bg-[#D5D7DB]`}
+            >
+              Deploy
+            </a>
+
+            <a
+              href="https://github.com/denoland"
+              class={tw`lg:ml-5 my-auto hidden lg:block`}
+            >
+              <span class={tw`sr-only`}>GitHub</span>
+              <Icons.GitHub class="inline" />
+            </a>
+          </div>
+        </nav>
+      </div>
     </div>
+  );
+}
+
+function Search() {
+  // TODO: implement this properly with an island
+  return (
+    <>
+      <Head>
+        <link
+          rel="preconnect"
+          href="https://DMFING7U5D-dsn.algolia.net"
+          crossOrigin="true"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"
+        />
+      </Head>
+      <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3" />
+      <div id="search" class={tw`hidden`} />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+        docsearch({
+          container: "#search",
+          appId: "DMFING7U5D",
+          indexName: "deno_manual",
+          apiKey: "577997f9f7a4b0100d359afde8065583",
+          searchParameters: {
+            distinct: 1,
+          },
+        });
+      `,
+        }}
+      />
+
+      <button
+        class={tw
+          `pl-4 w-80 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light`}
+        // @ts-ignore onClick does support strings
+        onClick="document.querySelector('#search button').click()"
+      >
+        <div class={tw`flex items-center pointer-events-none`}>
+          <Icons.MagnifyingGlass />
+          {/*<input class={tw`ml-1.5 py-2.5 h-9 flex-auto bg-transparent placeholder:text-light text-default text-sm leading-4 font-medium appearance-none`} type="text" placeholder="Search..." />*/}
+          <div
+            class={tw
+              `ml-1.5 py-2.5 h-9 flex-auto text-light text-sm leading-4 font-medium text-left`}
+          >
+            Search...
+          </div>
+          <div class={tw`mx-4`}>
+            ⌘K
+          </div>
+        </div>
+      </button>
+    </>
   );
 }

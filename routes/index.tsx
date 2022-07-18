@@ -11,10 +11,15 @@ import { InlineCode } from "@/components/InlineCode.tsx";
 import { Header } from "@/components/Header.tsx";
 import { HelloBar } from "@/components/HelloBar.tsx";
 import { Background } from "@/components/HeroBackground.tsx";
+import { Handlers, PageProps } from "$fresh/server.ts";
 
 import versions from "@/versions.json" assert { type: "json" };
 
-export default function Home() {
+interface Data {
+  isFirefox: boolean;
+}
+
+export default function Home({ data }: PageProps<Data>) {
   const complexExampleProgram =
     `import { serve } from "https://deno.land/std/http/server.ts";
 serve(req => new Response("Hello World\\n"));`;
@@ -30,8 +35,8 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
 
   return (
     <div>
-      <HelloBar to="https://deno.news/archive/45-deno-raises-21m">
-        Check out Deno News issue #45!
+      <HelloBar to="https://deno.news/archive/46-fresh-wasmbuild-and-v1232">
+        Check out Deno News issue #46!
       </HelloBar>
       <Head>
         <title>Deno - A modern runtime for JavaScript and TypeScript</title>
@@ -41,11 +46,11 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           class={tw
             `bg-gray-50 overflow-x-hidden border-b border-gray-200 relative`}
         >
-          <Background />
+          {!data.isFirefox && <Background />}
           <Header main />
           <div
             class={tw
-              `relative max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center`}
+              `relative section-x-inset-sm pt-12 pb-20 flex flex-col items-center`}
           >
             <h1
               class={tw
@@ -77,7 +82,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             </a>
           </div>
         </div>
-        <div class={tw`max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20`}>
+        <div class={tw`section-x-inset-sm mt-20`}>
           <p class={tw`my-4 text-gray-700`}>
             Deno is a simple, modern and secure runtime for JavaScript,
             TypeScript, and WebAssembly that uses V8 and is built in Rust.
@@ -85,7 +90,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           <ol class={tw`ml-8 list-disc text-gray-700`}>
             <li>
               Provides{" "}
-              <a class={tw`link`} href="/manual/runtime/web_platform_apis.md">
+              <a class={tw`link`} href="/manual/runtime/web_platform_apis">
                 web platform functionality
               </a>{" "}
               and adopts web platform standards.
@@ -136,7 +141,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             </li>
           </ol>
         </div>
-        <div class={tw`max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20`}>
+        <div class={tw`section-x-inset-sm mt-20`}>
           <a class={tw`hover:underline`} href="#installation">
             <h3 class={tw`font-bold text-xl`} id="installation">
               Installation
@@ -144,7 +149,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           </a>
           <InstallSection />
         </div>
-        <div class={tw`max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20`}>
+        <div class={tw`section-x-inset-sm mt-20`}>
           <a class={tw`hover:underline`} href="#getting-started">
             <h3 class={tw`font-bold text-xl`} id="getting-started">
               Getting Started
@@ -157,14 +162,14 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           />
           <p class={tw`my-4 text-gray-700`}>Or a more complex one:</p>
         </div>
-        <div class={tw`max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8`}>
+        <div class={tw`section-x-inset-sm`}>
           <CodeBlock
             code={complexExampleProgram}
             language="typescript"
             disablePrefixes
           />
         </div>
-        <div class={tw`max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8`}>
+        <div class={tw`section-x-inset-sm`}>
           <p class={tw`my-4 text-gray-700`}>
             You can find a more in depth introduction, examples, and environment
             setup guides in{" "}
@@ -174,7 +179,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             .
           </p>
         </div>
-        <div class={tw`max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20`}>
+        <div class={tw`section-x-inset-sm mt-20`}>
           <a class={tw`hover:underline`} href="#runtime-documentation">
             <h3 class={tw`font-bold text-xl`} id="runtime-documentation">
               Runtime Documentation
@@ -202,7 +207,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             Deno provides.
           </p>
         </div>
-        <div class={tw`max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20`}>
+        <div class={tw`section-x-inset-sm mt-20`}>
           <a class={tw`hover:underline`} href="#standard-modules">
             <h3 class={tw`font-bold text-xl`} id="standard-modules">
               Standard Modules
@@ -227,7 +232,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             compatible with Deno.
           </p>
         </div>
-        <div class={tw`max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20`}>
+        <div class={tw`section-x-inset-sm mt-20`}>
           <a class={tw`hover:underline`} href="#third-party-modules">
             <h3 class={tw`font-bold text-xl`} id="third-party-modules">
               Third Party Modules
@@ -279,7 +284,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             .
           </p>
         </div>
-        <div class={tw`max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20`}>
+        <div class={tw`section-x-inset-sm mt-20`}>
           <a class={tw`hover:underline`} href="#toolchain">
             <h3 class={tw`font-bold text-xl`} id="toolchain">
               Built-in Toolchain
@@ -330,7 +335,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             .
           </p>
         </div>
-        <div class={tw`max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20`}>
+        <div class={tw`section-x-inset-sm mt-20`}>
           <a class={tw`hover:underline`} href="#examples">
             <h3 class={tw`font-bold text-xl`} id="examples">
               Examples
@@ -385,7 +390,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
         </div>
         <DenoInProductionSection />
         <div class={tw`mt-20`}>
-          <Footer simple />
+          <Footer />
         </div>
       </div>
     </div>
@@ -412,7 +417,7 @@ function DenoInProductionSection() {
   }];
 
   return (
-    <div class={tw`max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 mt-20`}>
+    <div class={tw`section-x-inset-sm mt-20`}>
       <a class={tw`hover:underline`} href="#deno-in-production">
         <h3 class={tw`font-bold text-xl`} id="deno-in-production">
           Deno in Production
@@ -534,3 +539,13 @@ function InstallSection() {
     </>
   );
 }
+
+export const handler: Handlers<Data> = {
+  GET(req, { render }) {
+    return render!({
+      isFirefox:
+        req.headers.get("user-agent")?.toLowerCase().includes("firefox") ??
+          false,
+    });
+  },
+};

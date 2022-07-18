@@ -80,7 +80,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
         </title>
         <link
           rel="preconnect"
-          href="https://BH4D9OD16A-dsn.algolia.net"
+          href="https://DMFING7U5D-dsn.algolia.net"
           crossOrigin="true"
         />
         <link
@@ -286,10 +286,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                 })()}
               />
             )}
-            <div
-              class={tw
-                `max-w-screen-md mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-20`}
-            >
+            <div class={tw`section-x-inset-md pb-12 sm:pb-20`}>
               <a
                 href={getDocURL(version, path)}
                 class={tw
