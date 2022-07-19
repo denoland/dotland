@@ -20,13 +20,17 @@ interface Data {
 }
 
 export default function Home({ data }: PageProps<Data>) {
-  const complexExampleProgram =
-    `import { serve } from "https://deno.land/std/http/server.ts";
+  const complexExampleProgram = `import { serve } from "https://deno.land/std@${
+    versions.std[0]
+  }/http/server.ts";
 serve(req => new Response("Hello World\\n"));`;
 
-  const denoTestExample =
-    `deno test https://deno.land/std@0.132.0/testing/chai_example.ts
-running 3 tests from https://deno.land/std@0.132.0/testing/chai_example.ts
+  const denoTestExample = `deno test https://deno.land/std@${
+    versions.std[0]
+  }/testing/chai_example.ts
+running 3 tests from https://deno.land/std@${
+    versions.std[0]
+  }/testing/chai_example.ts
 test we can make chai assertions ... ok (8ms)
 test we can make chai expectations ... ok (2ms)
 test we can use chai should style ... ok (4ms)
@@ -157,7 +161,9 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           </a>
           <p class={tw`my-4 text-gray-700`}>Try running a simple program:</p>
           <CodeBlock
-            code="deno run https://deno.land/std/examples/welcome.ts"
+            code={`deno run https://deno.land/std@${
+              versions.std[0]
+            }/examples/welcome.ts`}
             language="bash"
           />
           <p class={tw`my-4 text-gray-700`}>Or a more complex one:</p>
