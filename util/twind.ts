@@ -5,12 +5,11 @@ import { css } from "twind/css";
 export { css };
 
 export const config: Configuration = {
-  preflight: {
-    body: apply`text-default ${
-      css({
-        "scroll-behavior": "smooth",
-      })
-    }`,
+  preflight(preflight) {
+    delete preflight["img,video"];
+    return css(preflight, {
+      body: apply`text-default scroll-smooth`,
+    });
   },
   darkMode: "class",
   theme: {
