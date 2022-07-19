@@ -367,6 +367,11 @@ export const handler: Handlers<MaybeData> = {
     const path = maybePath ? "/" + maybePath : "";
     const isStd = name === "std";
 
+    if (isStd && url.pathname.startsWith("/x")) {
+      url.pathname = url.pathname.slice(2);
+      return Response.redirect(url, 301);
+    }
+
     if (!version) {
       const versions = await getVersionList(name);
       if (!versions?.latest) {
