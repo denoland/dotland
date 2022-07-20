@@ -115,5 +115,10 @@
     "title": "GitHub Profilator",
     "link": "https://profilator.deno.dev/",
     "github": "Bellisario/profilator"
+  },
+  {
+    "image": "/images/showcase/localseostudio.png",
+    "title": "Local SEO Studio",
+    "link": "https://localseo.studio/"
   }
 ]
