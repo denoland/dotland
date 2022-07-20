@@ -11,17 +11,26 @@ import { InlineCode } from "@/components/InlineCode.tsx";
 import { Header } from "@/components/Header.tsx";
 import { HelloBar } from "@/components/HelloBar.tsx";
 import { Background } from "@/components/HeroBackground.tsx";
+import { Handlers, PageProps } from "$fresh/server.ts";
 
 import versions from "@/versions.json" assert { type: "json" };
 
-export default function Home() {
-  const complexExampleProgram =
-    `import { serve } from "https://deno.land/std/http/server.ts";
+interface Data {
+  isFirefox: boolean;
+}
+
+export default function Home({ data }: PageProps<Data>) {
+  const complexExampleProgram = `import { serve } from "https://deno.land/std@${
+    versions.std[0]
+  }/http/server.ts";
 serve(req => new Response("Hello World\\n"));`;
 
-  const denoTestExample =
-    `deno test https://deno.land/std@0.132.0/testing/chai_example.ts
-running 3 tests from https://deno.land/std@0.132.0/testing/chai_example.ts
+  const denoTestExample = `deno test https://deno.land/std@${
+    versions.std[0]
+  }/testing/chai_example.ts
+running 3 tests from https://deno.land/std@${
+    versions.std[0]
+  }/testing/chai_example.ts
 test we can make chai assertions ... ok (8ms)
 test we can make chai expectations ... ok (2ms)
 test we can use chai should style ... ok (4ms)
@@ -41,7 +50,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           class={tw
             `bg-gray-50 overflow-x-hidden border-b border-gray-200 relative`}
         >
-          <Background />
+          {!data.isFirefox && <Background />}
           <Header main />
           <div
             class={tw
@@ -85,7 +94,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           <ol class={tw`ml-8 list-disc text-gray-700`}>
             <li>
               Provides{" "}
-              <a class={tw`link`} href="/manual/runtime/web_platform_apis.md">
+              <a class={tw`link`} href="/manual/runtime/web_platform_apis">
                 web platform functionality
               </a>{" "}
               and adopts web platform standards.
@@ -152,7 +161,9 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           </a>
           <p class={tw`my-4 text-gray-700`}>Try running a simple program:</p>
           <CodeBlock
-            code="deno run https://deno.land/std/examples/welcome.ts"
+            code={`deno run https://deno.land/std@${
+              versions.std[0]
+            }/examples/welcome.ts`}
             language="bash"
           />
           <p class={tw`my-4 text-gray-700`}>Or a more complex one:</p>
@@ -534,3 +545,13 @@ function InstallSection() {
     </>
   );
 }
+
+export const handler: Handlers<Data> = {
+  GET(req, { render }) {
+    return render!({
+      isFirefox:
+        req.headers.get("user-agent")?.toLowerCase().includes("firefox") ??
+          false,
+    });
+  },
+};

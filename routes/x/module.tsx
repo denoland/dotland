@@ -3,10 +3,9 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { Fragment, h } from "preact";
-import { PageProps, RouteConfig } from "$fresh/server.ts";
+import { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
-import { Handlers } from "$fresh/server.ts";
 import twas from "$twas";
 import { emojify } from "$emoji";
 import { accepts } from "$oak_commons";
@@ -61,6 +60,7 @@ type Params = {
   name: string;
   version?: string;
   path: string;
+  symbol?: string;
 };
 
 export default function Registry({ params, url, data }: PageProps<MaybeData>) {
@@ -299,13 +299,13 @@ function Breadcrumbs({
   }
 
   return (
-    <p class={tw`text-xl leading-6 font-bold`}>
+    <p class={tw`text-xl leading-6 font-bold text-[#9CA0AA]`}>
       {out.map(([seg, url], i) => {
         return (
           <Fragment key={i}>
             {i !== 0 && "/"}
             {i === (segments.length - 1)
-              ? <span class={tw`text-black`}>{seg}</span>
+              ? <span class={tw`text-default`}>{seg}</span>
               : (
                 <a href={url} class={tw`link`}>
                   {seg}
@@ -359,6 +359,7 @@ export const handler: Handlers<MaybeData> = {
       name,
       version,
       path: maybePath,
+      symbol,
     } = params as Params;
     const url = new URL(req.url);
     const isHTML = accepts(req, "application/*", "text/html") === "text/html";
@@ -446,6 +447,9 @@ export const handler: Handlers<MaybeData> = {
           getVersionDeps(name, version),
           !code ? getDocs(name, version, path) : null,
         ]);
+      if (doc) {
+        doc.symbol = url.searchParams.get("s") ?? undefined;
+      }
 
       const dirEntries = getDirEntries(versionMeta, path);
       const canonicalPath = getModulePath(name, version, path);

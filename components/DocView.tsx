@@ -2,7 +2,7 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
+import { ComponentChildren, Fragment, h } from "preact";
 import { tw } from "@twind";
 import { type CommonProps, getBasePath } from "@/util/registry_utils.ts";
 import { type Doc, type DocNode } from "@/util/doc.ts";
@@ -11,11 +11,12 @@ import { ModuleDoc } from "$doc_components/module_doc.tsx";
 import { ModulePathIndex } from "$doc_components/module_path_index.tsx";
 import { ModulePathIndexPanel } from "$doc_components/module_path_index_panel.tsx";
 import { FileDisplay } from "./FileDisplay.tsx";
-import * as Icons from "./Icons.tsx";
+import { SymbolDoc } from "$doc_components/symbol_doc.tsx";
 
 export function DocView({
   doc,
   index,
+  symbol,
 
   isStd,
   name,
@@ -28,6 +29,7 @@ export function DocView({
   url,
 }: Doc & CommonProps) {
   const baseURL = `https://deno.land${basePath}`;
+  url.search = "";
 
   return (
     <>
@@ -47,27 +49,27 @@ export function DocView({
       <div class={tw`space-y-12 flex flex-col gap-4 w-full overflow-auto`}>
         {doc
           ? (
-            <FileDoc url={url.href} sourceURL={baseURL + path}>
+            <ModuleOrSymbolDoc url={url.href} symbol={symbol}>
               {doc}
-            </FileDoc>
+            </ModuleOrSymbolDoc>
           )
           : (
             <div class={tw`space-y-12`}>
               {index.indexModule
                 ? (
-                  <FileDoc
-                    url={baseURL + index.indexModule}
-                    sourceURL={baseURL + path}
+                  <ModuleOrSymbolDoc
+                    url={url.href}
+                    indexModule={baseURL + index.indexModule}
                   >
                     {index.nodes}
-                  </FileDoc>
+                  </ModuleOrSymbolDoc>
                 )
                 : (
                   <ModulePathIndex
                     base={basePath}
                     path={path || "/"}
                     skipMods={!!index.indexModule}
-                    sourceHref={url.href + "?code"}
+                    sourceUrl={url.href}
                   >
                     {index.index}
                   </ModulePathIndex>
@@ -92,29 +94,29 @@ export function DocView({
   );
 }
 
-function FileDoc({
+function ModuleOrSymbolDoc({
+  symbol,
   children,
   url,
-  sourceURL,
+  indexModule,
 }: {
-  sourceURL: string;
-  children: DocNode[];
+  symbol?: string;
   url: string;
+  children: DocNode[];
+  indexModule?: string;
 }) {
-  return (
-    <div>
-      <div class={tw`flex justify-between mb-8`}>
-        <div>{/* TODO: add module name */}</div>
-        <a
-          href={`${sourceURL}?code`}
-          class={tw`rounded-md border border-dark-border p-2`}
-        >
-          <Icons.SourceFile />
-        </a>
-      </div>
-      <ModuleDoc url={url}>
+  if (symbol) {
+    const itemNodes = children.filter(({ name }) => name === symbol);
+    return (
+      <SymbolDoc url={url} namespace={undefined}>
+        {itemNodes}
+      </SymbolDoc>
+    );
+  } else {
+    return (
+      <ModuleDoc url={indexModule ?? url} sourceUrl={url}>
         {children}
       </ModuleDoc>
-    </div>
-  );
+    );
+  }
 }
