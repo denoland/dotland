@@ -46,7 +46,7 @@ export function Header({
 
           <div
             class={tw
-              `h-9 flex items-center justify-between select-none w-full lg:w-auto gap-3 md:gap-6 lg:gap-8`}
+              `h-9 flex flex-1 items-center justify-between lg:justify-start select-none w-full lg:w-min gap-3 md:gap-6 lg:gap-8`}
           >
             <a
               href="/"
