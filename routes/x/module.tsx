@@ -10,51 +10,21 @@ import twas from "$twas";
 import { emojify } from "$emoji";
 import { accepts } from "$oak_commons";
 import {
-  DirEntry,
   extractAltLineNumberReference,
   fetchSource,
-  getBasePath,
-  getDirEntries,
-  getModule,
   getModulePath,
-  getRawFile,
-  getReadme,
   getRepositoryURL,
-  getVersionDeps,
   getVersionList,
-  getVersionMeta,
-  listExternalDependencies,
-  Module,
-  RawFile,
-  Readme,
   S3_BUCKET,
-  VersionDeps,
-  VersionInfo,
-  VersionMetaInfo,
 } from "@/util/registry_utils.ts";
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { ErrorMessage } from "@/components/ErrorMessage.tsx";
 import { DocView } from "@/components/DocView.tsx";
 import * as Icons from "@/components/Icons.tsx";
-import { type Doc, getDocs } from "@/util/doc.ts";
 import VersionSelect from "@/islands/VersionSelect.tsx";
 import { CodeView } from "@/components/CodeView.tsx";
-
-type MaybeData = { versions: VersionInfo | null } | Data;
-
-interface Data {
-  versions: VersionInfo | null;
-
-  versionMeta: VersionMetaInfo;
-  moduleMeta: Module;
-  versionDeps: VersionDeps | null;
-  dirEntries: DirEntry[] | null;
-  readme: Readme | null;
-  repositoryURL: string;
-  showCode: boolean;
-  data: Doc | RawFile | Error | null;
-}
+import { DocPage } from "@/util/registry_utils.ts";
 
 type Params = {
   name: string;
@@ -63,7 +33,7 @@ type Params = {
   symbol?: string;
 };
 
-export default function Registry({ params, url, data }: PageProps<MaybeData>) {
+export default function Registry({ params, url, data }: PageProps<DocPage>) {
   let {
     name,
     version,
@@ -85,13 +55,13 @@ export default function Registry({ params, url, data }: PageProps<MaybeData>) {
         />
         <TopPanel
           version={version!}
-          {...{ name, path, isStd, ...(data as Data) }}
+          {...{ name, path, isStd, data }}
         />
         <div class={tw`section-x-inset-xl pb-20 pt-10`}>
           <div class={tw`flex gap-x-14`}>
             <ModuleView
               version={version!}
-              {...{ name, path, isStd, url, ...(data as Data) }}
+              {...{ name, path, isStd, url, data }}
             />
           </div>
         </div>
@@ -106,24 +76,14 @@ function TopPanel({
   version,
   path,
   isStd,
-
-  versions,
-  versionMeta,
-  moduleMeta,
-  versionDeps,
+  data,
 }: {
   name: string;
   version: string;
   path: string;
   isStd: boolean;
-} & Data) {
-  // const externalDependencies = versionDeps === null
-  //   ? null
-  //   : listExternalDependencies(
-  //     versionDeps.graph,
-  //     `https://deno.land/x/${name}@${version}${path}`,
-  //   );
-
+  data: DocPage;
+}) {
   return (
     <div class={tw`bg-ultralight border-b-1`}>
       <div class={tw`section-x-inset-xl py-8 md:h-36 flex items-center`}>
@@ -139,11 +99,11 @@ function TopPanel({
               isStd={isStd}
             />
             <div class={tw`text-sm`}>
-              {moduleMeta && emojify(moduleMeta.description ?? "")}
+              {data.description && emojify(data.description)}
             </div>
           </div>
           <div class={tw`flex flex-row flex-wrap items-center gap-4`}>
-            {versionMeta && moduleMeta && (
+            {data.upload_options && (
               <div
                 class={tw
                   `flex flex-row flex-auto justify-center items-center gap-4 border border-dark-border rounded-md bg-white py-2 px-5`}
@@ -152,25 +112,23 @@ function TopPanel({
                   <Icons.GitHub class="mr-2 w-5 h-5 inline text-gray-700" />
                   <a
                     class={tw`link`}
-                    href={`https://github.com/${versionMeta.uploadOptions.repository}`}
+                    href={`https://github.com/${data.upload_options.repository}`}
                   >
-                    {versionMeta.uploadOptions.repository}
+                    {data.upload_options.repository}
                   </a>
                 </div>
                 <div class={tw`flex items-center`}>
                   <Icons.Star class="mr-2" title="GitHub Stars" />
-                  <div>{moduleMeta.star_count}</div>
+                  <div>{data.star_count}</div>
                 </div>
               </div>
             )}
-            {versions && (
-              <VersionSelector
-                versions={versions!.versions}
-                selectedVersion={version}
-                name={name}
-                path={path}
-              />
-            )}
+            <VersionSelector
+              versions={data.versions}
+              selectedVersion={version}
+              name={name}
+              path={path}
+            />
           </div>
         </div>
       </div>
@@ -184,16 +142,6 @@ function ModuleView({
   path,
   isStd,
   url,
-
-  versions,
-
-  versionMeta,
-  moduleMeta,
-  readme,
-  dirEntries,
-  repositoryURL,
-
-  showCode,
   data,
 }: {
   name: string;
@@ -201,31 +149,29 @@ function ModuleView({
   path: string;
   isStd: boolean;
   url: URL;
-} & Data) {
-  const basePath = getBasePath({ isStd, name, version });
-
-  if (versions === null) {
+  data: DocPage;
+}) {
+  if (false) {
     return (
       <ErrorMessage title="404 - Not Found">
         This module does not exist.
       </ErrorMessage>
     );
-  } else if (versions.latest === null && versions.versions.length === 0) {
+  } else if (data.versions.length === 0) {
     return (
       <ErrorMessage title="No uploaded versions">
         This module name has been reserved for a repository, but no versions
         have been uploaded yet. Modules that do not upload a version within 30
-        days of registration will be removed. {versions.isLegacy &&
-          "If you are the owner of this module, please re-add the GitHub repository with deno.land/x (by following the instructions at https://deno.land/x#add), and publish a new version."}
+        days of registration will be removed.
       </ErrorMessage>
     );
-  } else if (!versions.versions.includes(version!)) {
+  } else if (!data.versions.includes(version)) {
     return (
       <ErrorMessage title="404 - Not Found">
         This version does not exist for this module.
       </ErrorMessage>
     );
-  } else if (!versionMeta?.directoryListing.find((d) => d.path === path)) {
+  } else if (false) {
     return (
       <ErrorMessage title="404 - Not Found">
         This file or directory could not be found.
@@ -233,22 +179,23 @@ function ModuleView({
     );
   }
 
-  if (showCode) {
+  const repositoryURL = getRepositoryURL(
+    data.upload_options,
+    path,
+    data.kind === "index" ? "tree" : undefined,
+  );
+
+  if (url.searchParams.has("code") || !isStd || data.kind === "file") {
     return (
       <CodeView
         {...{
-          rawFile: data as RawFile,
-          dirEntries,
-          repositoryURL,
-          versionMeta,
-          moduleMeta,
           isStd,
           name,
           version,
           path,
-          readme,
-          basePath,
           url,
+          data,
+          repositoryURL,
         }}
       />
     );
@@ -256,18 +203,13 @@ function ModuleView({
     return (
       <DocView
         {...{
-          ...(data as Doc),
-          dirEntries,
-          repositoryURL,
-          versionMeta,
-          moduleMeta,
           isStd,
           name,
           version,
           path,
-          readme,
-          basePath,
           url,
+          data,
+          repositoryURL,
         }}
       />
     );
@@ -353,25 +295,31 @@ function VersionSelector({
   );
 }
 
-export const handler: Handlers<MaybeData> = {
+export const handler: Handlers<DocPage> = {
   async GET(req, { params, render }) {
     let {
       name,
       version,
       path: maybePath,
-      symbol,
     } = params as Params;
     const url = new URL(req.url);
     const isHTML = accepts(req, "application/*", "text/html") === "text/html";
 
     const path = maybePath ? "/" + maybePath : "";
-    const isStd = name === "std";
+
+    const symbol = url.searchParams.get("s");
+    const resURL = new URL(
+      `https://apiland-z93wcqeeb15g.deno.dev/v2/modules/${name}/${version}/page/${maybePath}`,
+    );
+    if (symbol) {
+      resURL.searchParams.set("symbol", symbol);
+    }
+    const res: DocPage = await fetch(resURL).then((res) => res.json());
 
     if (!version) {
-      const versions = await getVersionList(name);
-      if (!versions?.latest) {
+      if (!res.latest_version) {
         if (isHTML) {
-          return render!({ versions });
+          return render!(res);
         } else {
           return new Response(
             `The module '${name}' has no latest version`,
@@ -388,10 +336,9 @@ export const handler: Handlers<MaybeData> = {
 
       return new Response(undefined, {
         headers: {
-          Location: getModulePath(name, versions!.latest, path),
-          "x-deno-warning": `Implicitly using latest version (${
-            versions!.latest
-          }) for ${url.href}`,
+          Location: getModulePath(name, res.latest_version, path),
+          "x-deno-warning":
+            `Implicitly using latest version (${res.latest_version}) for ${url.href}`,
           "Access-Control-Allow-Origin": "*",
         },
         status: 302,
@@ -400,7 +347,7 @@ export const handler: Handlers<MaybeData> = {
 
     if (!isHTML) {
       const remoteUrl =
-        `${S3_BUCKET}${name}/versions/${version}/raw/${params.path}`;
+        `${S3_BUCKET}${name}/versions/${version}/raw/${maybePath}`;
       const resp = await fetchSource(remoteUrl);
 
       if (
@@ -438,62 +385,9 @@ export const handler: Handlers<MaybeData> = {
       versions.versions.includes(version);
 
     if (canRenderView) {
-      const code = url.searchParams.has("code") || !isStd; // TODO(@crowlKats): remove isStd check once performance is adequate
-
-      const [versionMeta, moduleMeta, versionDeps, doc] = await Promise
-        .all([
-          getVersionMeta(name, version),
-          getModule(name),
-          getVersionDeps(name, version),
-          !code ? getDocs(name, version, path) : null,
-        ]);
-      if (doc) {
-        doc.symbol = url.searchParams.get("s") ?? undefined;
-      }
-
-      const dirEntries = getDirEntries(versionMeta, path);
-      const canonicalPath = getModulePath(name, version, path);
-      const repositoryURL = getRepositoryURL(
-        versionMeta,
-        path,
-        dirEntries ? "tree" : undefined,
-      );
-
-      const [readme, file] = await Promise.all([
-        getReadme(
-          name,
-          version,
-          path,
-          canonicalPath,
-          versionMeta,
-          dirEntries,
-        ),
-        // if code view is requested or docs are not available, fetch the file
-        !doc
-          ? getRawFile(
-            name,
-            version,
-            path,
-            canonicalPath,
-            versionMeta,
-          )
-          : null,
-      ]);
-
-      return render!({
-        versions,
-
-        versionMeta,
-        moduleMeta,
-        versionDeps,
-        dirEntries,
-        readme,
-        repositoryURL,
-        showCode: !doc,
-        data: doc ?? file,
-      });
+      return render!(res);
     } else {
-      return render!({ versions });
+      return render!(res);
     }
   },
 };

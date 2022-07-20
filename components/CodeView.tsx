@@ -6,23 +6,22 @@ import { tw } from "@twind";
 import { FileDisplay } from "./FileDisplay.tsx";
 import { DirectoryListing } from "./DirectoryListing.tsx";
 import { CommonProps, RawFile } from "@/util/registry_utils.ts";
+import { DocPageFile, DocPageIndex } from "@/util/registry_utils.ts";
 
 export function CodeView({
-  rawFile,
-
   isStd,
   name,
   version,
   path,
-
-  readme,
-  repositoryURL,
-  basePath,
   url,
-  versionMeta,
-  dirEntries,
-}: { rawFile: RawFile | null } & CommonProps) {
-  if ((dirEntries === null && rawFile === null) || rawFile instanceof Error) {
+
+  repositoryURL,
+
+  data,
+}: CommonProps & {
+  data: DocPageIndex | DocPageFile;
+}) {
+  if (data.kind === "index" && data.items.length === 0) {
     // No files
     return (
       <div
@@ -32,7 +31,7 @@ export function CodeView({
           name={name}
           version={version}
           path={path}
-          dirListing={versionMeta.directoryListing}
+          items={versionMeta.directoryListing}
           repositoryURL={repositoryURL}
           url={url}
         />
@@ -44,30 +43,33 @@ export function CodeView({
   } else {
     return (
       <div class={tw`flex flex-col gap-4 w-full overflow-auto`}>
-        {dirEntries && (
-          <DirectoryListing
-            name={name}
-            version={version}
-            path={path}
-            dirListing={versionMeta.directoryListing}
-            repositoryURL={repositoryURL}
-            url={url}
-          />
-        )}
-        {rawFile !== null && (
-          <FileDisplay
-            isStd={isStd}
-            version={version}
-            raw={rawFile.content}
-            filetypeOverride={rawFile.highlight ? undefined : "text"}
-            canonicalPath={rawFile.canonicalPath}
-            sourceURL={rawFile.url}
-            repositoryURL={repositoryURL}
-            baseURL={basePath}
-            url={url}
-          />
-        )}
-        {readme && (
+        {data.kind === "index"
+          ? (
+            <DirectoryListing
+              name={name}
+              version={version}
+              path={path}
+              items={data.items}
+              repositoryURL={repositoryURL}
+              url={url}
+            />
+          )
+          : (
+            <FileDisplay
+              isStd={isStd}
+              version={version}
+              raw={rawFile.content}
+              filetypeOverride={rawFile.highlight ? undefined : "text"}
+              canonicalPath={rawFile.canonicalPath}
+              sourceURL={rawFile.url}
+              repositoryURL={repositoryURL}
+              baseURL={basePath}
+              url={url}
+            />
+          )}
+
+        {{
+          /*readme && (
           <FileDisplay
             isStd={isStd}
             version={version}
@@ -78,7 +80,8 @@ export function CodeView({
             baseURL={basePath}
             url={url}
           />
-        )}
+        )*/
+        }}
       </div>
     );
   }
