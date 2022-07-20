@@ -145,7 +145,7 @@ export default function GlobalSearch() {
       </button>
 
       <dialog
-        class={tw`bg-[#00000033] inset-0 fixed z-10 p-0 m-0 h-screen`}
+        class={tw`bg-[#00000033] inset-0 fixed z-10 p-0 m-0 w-full h-screen`}
         onClick={() => setShowModal(false)}
         open={showModal}
       >
@@ -158,15 +158,17 @@ export default function GlobalSearch() {
             <div class={tw`flex`}>
               <label
                 class={tw
-                  `pl-4 h-10 w-full flex-shrink-1 bg-[#F3F3F3] rounded-md flex items-center text-light`}
+                  `pl-4 h-10 w-full flex-shrink-1 bg-[#F3F3F3] rounded-md flex items-center text-light group`}
               >
                 <Icons.MagnifyingGlass />
                 <input
-                  class={tw`ml-1.5 py-3 leading-4 bg-transparent w-full`}
+                  class={tw
+                    `ml-1.5 py-3 leading-4 bg-transparent w-full text-main placeholder:text-[#9CA0AA]`}
                   type="text"
                   onInput={(e) => setInput(e.currentTarget.value)}
                   value={input}
                   placeholder="Search manual, symbols and modules..."
+                  autoFocus
                 />
               </label>
 
@@ -315,7 +317,7 @@ function SymbolResult({ doc }: { doc: DocNode }) {
             class={tw
               `text-sm text-[#6C6E78] h-5 overflow-ellipsis overflow-hidden mr-24`}
           >
-            {doc.jsDoc!.doc}
+            {doc.jsDoc.doc.split("\n")[0]}
           </div>
         )}
       </div>
