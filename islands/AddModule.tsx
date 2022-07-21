@@ -86,7 +86,7 @@ export default function AddModule() {
             type="text"
             placeholder="Module Name"
             class={tw`w-full lg:w-136 h-10 py-3 px-4 rounded-md ${
-              !available
+              name && !available
                 ? "text-[#F00C08] border border-[#F00C08] bg-transparent"
                 : "bg-[#F3F3F3]"
             }`}
@@ -94,7 +94,7 @@ export default function AddModule() {
             onInput={(e) => setName(e.currentTarget.value)}
             disabled={!IS_BROWSER}
           />
-          {!available && (
+          {name && !available && (
             <p class={tw`mt-1.5 text-[#F00C08] text-sm`}>
               Invalid Name/Name has been taken!
             </p>
