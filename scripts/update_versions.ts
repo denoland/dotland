@@ -45,12 +45,11 @@ if (Deno.args.includes("--create-pr")) {
 
 async function getLatestTagForRepo(name: string) {
   $.logStep(`Fetching latest release for ${name}...`);
-  const gitHubAPIHeaders = {
-    accept: "application/vnd.github.v3+json",
-  } as const;
   const latestRelease = await $.request(
     `https://api.github.com/repos/denoland/${name}/releases/latest`,
-  ).header(gitHubAPIHeaders).json<{ tag_name: string }>();
+  )
+    .header("accept", "application/vnd.github.v3+json")
+    .json<{ tag_name: string }>();
   return latestRelease.tag_name;
 }
 
@@ -66,7 +65,7 @@ async function tryCreatePr() {
   // commit and push
   const branchName = `bump_version${latestCliTag}`;
   const commitMessage = `Updated files for ${latestCliTag}`;
-  await $`git branch ${branchName}`;
+  await $`git checkout -b ${branchName}`;
   await $`git commit -m ${commitMessage}`;
   $.logStep("Pushing branch...");
   await $`git push -u origin HEAD`;
