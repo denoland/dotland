@@ -246,7 +246,7 @@ export default function AddModule() {
                     as the content type.
                   </li>
                   <li>
-                    Select<span class={tw`font-semibold`}>
+                    Select{" "}<span class={tw`font-semibold`}>
                       Let me select individual events.
                     </span>
                   </li>
