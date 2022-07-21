@@ -1,9 +1,7 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { apply, Configuration, setup as twSetup, Sheet } from "twind";
-import { setup } from "$doc_components/services.ts";
 export * from "twind";
 import { css } from "twind/css";
-import { Fragment, h } from "preact";
 export { css };
 
 export const config: Configuration = {
@@ -58,8 +56,8 @@ export const config: Configuration = {
     },
   },
   plugins: {
-    link: apply
-      `text-[#056CF0] transition duration-75 ease-in-out hover:text-blue-500`,
+    link:
+      apply`text-[#056CF0] transition duration-75 ease-in-out hover:text-blue-500`,
     "section-x-inset": (parts) =>
       apply`max-w-screen-${parts[0]} mx-auto px-4 sm:px-6 md:px-8`,
     "form-select-bg": css({
@@ -69,6 +67,8 @@ export const config: Configuration = {
       "background-size": "1.5em 1.5em",
       "background-repeat": "no-repeat",
     }),
+    "symbolKind":
+      apply`rounded-full w-6 h-6 inline-flex items-center justify-center font-medium text-xs leading-none flex-shrink-0`,
   },
 };
 
@@ -88,7 +88,4 @@ if (IS_BROWSER) {
   };
   config.sheet = sheet;
   twSetup(config);
-  setup({
-    runtime: { Fragment, h },
-  });
 }

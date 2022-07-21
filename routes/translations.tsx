@@ -44,8 +44,7 @@ export default function TranslationsPage() {
           </p>
         </div>
         <div
-          class={tw
-            `my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end`}
+          class={tw`my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end`}
         >
           {TRANSLATIONS.map((language, i) => (
             <LanguageItem key={i} language={language} />

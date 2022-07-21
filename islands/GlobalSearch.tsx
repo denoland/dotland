@@ -1,15 +1,15 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx runtime.h */
-/** @jsxFrag runtime.Fragment */
-import { runtime } from "$doc_components/services.ts";
+/** @jsx h */
+/** @jsxFrag Fragment */
+import { Fragment, h } from "preact";
 import algoliasearch from "$algolia";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { css, tw } from "@twind";
 import { useEffect, useState } from "preact/hooks";
 import * as Icons from "@/components/Icons.tsx";
 import type { DocNode } from "$deno_doc/types.d.ts";
-import { colors, docNodeKindMap } from "$doc_components/symbol_kind.tsx";
+import { colors, docNodeKindMap } from "@/components/symbol_kind.tsx";
 import { ComponentChildren } from "preact";
 
 // Lazy load a <dialog> polyfill.
@@ -126,15 +126,13 @@ export default function GlobalSearch() {
   return (
     <>
       <button
-        class={tw
-          `pl-4 w-80 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light`}
+        class={tw`pl-4 w-80 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light`}
         onClick={() => setShowModal(true)}
       >
         <div class={tw`flex items-center pointer-events-none`}>
           <Icons.MagnifyingGlass />
           <div
-            class={tw
-              `ml-1.5 py-2.5 h-9 flex-auto text-light text-sm leading-4 font-medium text-left`}
+            class={tw`ml-1.5 py-2.5 h-9 flex-auto text-light text-sm leading-4 font-medium text-left`}
           >
             Search...
           </div>
@@ -150,20 +148,17 @@ export default function GlobalSearch() {
         open={showModal}
       >
         <div
-          class={tw
-            `bg-white w-full h-screen lg:(mt-24 mx-auto rounded-md w-2/3 max-h-[80vh] border border-[#E8E7E5]) flex flex-col`}
+          class={tw`bg-white w-full h-screen lg:(mt-24 mx-auto rounded-md w-2/3 max-h-[80vh] border border-[#E8E7E5]) flex flex-col`}
           onClick={(e) => e.stopPropagation()}
         >
           <div class={tw`pt-6 px-6 border-b border-[#E8E7E5]`}>
             <div class={tw`flex`}>
               <label
-                class={tw
-                  `pl-4 h-10 w-full flex-shrink-1 bg-[#F3F3F3] rounded-md flex items-center text-light group`}
+                class={tw`pl-4 h-10 w-full flex-shrink-1 bg-[#F3F3F3] rounded-md flex items-center text-light group`}
               >
                 <Icons.MagnifyingGlass />
                 <input
-                  class={tw
-                    `ml-1.5 py-3 leading-4 bg-transparent w-full text-main placeholder:text-[#9CA0AA]`}
+                  class={tw`ml-1.5 py-3 leading-4 bg-transparent w-full text-main placeholder:text-[#9CA0AA]`}
                   type="text"
                   onInput={(e) => setInput(e.currentTarget.value)}
                   value={input}
@@ -183,16 +178,15 @@ export default function GlobalSearch() {
             <div class={tw`flex gap-3 mt-2`}>
               {kinds.map((k) => (
                 <div
-                  class={tw
-                    `px-2 rounded-md leading-relaxed hover:(bg-gray-100 text-main) ${
-                      // TODO: use border instead
-                      k === kind
-                        ? css({
-                          "text-decoration-line": "underline",
-                          "text-underline-offset": "6px",
-                          "text-decoration-thickness": "2px",
-                        })
-                        : ""} ${k === kind ? "text-black" : "text-gray-500"}`}
+                  class={tw`px-2 rounded-md leading-relaxed hover:(bg-gray-100 text-main) ${
+                    // TODO: use border instead
+                    k === kind
+                      ? css({
+                        "text-decoration-line": "underline",
+                        "text-underline-offset": "6px",
+                        "text-decoration-thickness": "2px",
+                      })
+                      : ""} ${k === kind ? "text-black" : "text-gray-500"}`}
                   onClick={() => setKind(k)}
                 >
                   {k}
@@ -218,8 +212,7 @@ export default function GlobalSearch() {
           {kind === "Symbols" &&
             (
               <div
-                class={tw
-                  `bg-ultralight border-t border-[#E8E7E5] py-5 px-6 space-x-3`}
+                class={tw`bg-ultralight border-t border-[#E8E7E5] py-5 px-6 space-x-3`}
               >
                 {(Object.keys(symbolKinds) as (keyof typeof symbolKinds)[])
                   .map(
@@ -301,9 +294,9 @@ function SymbolResult({ doc }: { doc: DocNode }) {
   const KindIcon = docNodeKindMap[doc.kind];
 
   return (
-    <a href={doc.location.filename} class={tw`flex items-center`}>
+    <a href={doc.location.filename} class={tw`flex items-center gap-4`}>
       <KindIcon />
-      <div class={tw`ml-2`}>
+      <div>
         <div class={tw`space-x-2 py-1`}>
           <span class={tw`text-[${colors[doc.kind][0]}]`}>
             {doc.kind.replace("A", " a")}
@@ -314,8 +307,7 @@ function SymbolResult({ doc }: { doc: DocNode }) {
         </div>
         {doc.jsDoc?.doc && (
           <div
-            class={tw
-              `text-sm text-[#6C6E78] h-5 overflow-ellipsis overflow-hidden mr-24`}
+            class={tw`text-sm text-[#6C6E78] h-5 overflow-ellipsis overflow-hidden mr-24`}
           >
             {doc.jsDoc.doc.split("\n")[0]}
           </div>

@@ -41,14 +41,12 @@ export function FileDisplay(props: {
 
   return (
     <div
-      class={tw
-        `shadow-sm rounded-lg border border-gray-200 overflow-hidden bg-white`}
+      class={tw`shadow-sm rounded-lg border border-gray-200 overflow-hidden bg-white`}
     >
       <div
-        class={tw
-          `bg-gray-100 border-b border-gray-200 py-2 flex justify-between ${
-            filetype === "markdown" ? "pl-4 pr-2" : "px-4"
-          }`}
+        class={tw`bg-gray-100 border-b border-gray-200 py-2 flex justify-between ${
+          filetype === "markdown" ? "pl-4 pr-2" : "px-4"
+        }`}
       >
         <div class={tw`flex items-center`}>
           {isReadme(filename) && (
@@ -92,20 +90,18 @@ export function FileDisplay(props: {
             >
               <a
                 href={preview.href}
-                class={tw
-                  `relative inline-flex items-center px-1.5 py-1.5 rounded-l-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50 ${
-                    !isRaw ? "bg-white" : "bg-gray-100"
-                  }`}
+                class={tw`relative inline-flex items-center px-1.5 py-1.5 rounded-l-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50 ${
+                  !isRaw ? "bg-white" : "bg-gray-100"
+                }`}
               >
                 <span class={tw`sr-only`}>Preview</span>
                 <Icons.Page />
               </a>
               <a
                 href={raw.href}
-                class={tw
-                  `-ml-px relative inline-flex items-center px-1.5 py-1.5 rounded-r-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50 ${
-                    isRaw ? "bg-white" : "bg-gray-100"
-                  }`}
+                class={tw`-ml-px relative inline-flex items-center px-1.5 py-1.5 rounded-r-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50 ${
+                  isRaw ? "bg-white" : "bg-gray-100"
+                }`}
               >
                 <span class={tw`sr-only`}>Code</span>
                 <Icons.Code />
