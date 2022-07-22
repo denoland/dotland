@@ -1,4 +1,4 @@
-Contact: mailto:engineering@deno.com
+Contact: mailto:security@deno.com
 Acknowledgments: https://github.com/denoland/deno/graphs/contributors
 Preferred-Languages: en
 Canonical: https://deno.land/.well-known/security.txt
