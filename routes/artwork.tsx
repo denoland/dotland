@@ -54,7 +54,8 @@ export default function ArtworkPage() {
           </p>
         </div>
         <div
-          class={tw`my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end`}
+          class={tw
+            `my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end`}
         >
           {ARTWORKS.map((artwork, i) => <Item key={i} artwork={artwork} />)}
         </div>

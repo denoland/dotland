@@ -46,7 +46,8 @@ export default function StatusPage({ data }: PageProps<Build | Error>) {
                       Repository
                     </dt>
                     <dd
-                      class={tw`mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2`}
+                      class={tw
+                        `mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2`}
                     >
                       <a
                         href={`https://github.com/${data.options.repository}`}
@@ -58,25 +59,29 @@ export default function StatusPage({ data }: PageProps<Build | Error>) {
                     </dd>
                   </div>
                   <div
-                    class={tw`mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5`}
+                    class={tw
+                      `mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5`}
                   >
                     <dt class={tw`text-sm leading-5 font-medium text-gray-500`}>
                       Version
                     </dt>
                     <dd
-                      class={tw`mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2`}
+                      class={tw
+                        `mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2`}
                     >
                       {data.options.version}
                     </dd>
                   </div>
                   <div
-                    class={tw`mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5`}
+                    class={tw
+                      `mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5`}
                   >
                     <dt class={tw`text-sm leading-5 font-medium text-gray-500`}>
                       Source
                     </dt>
                     <dd
-                      class={tw`mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2`}
+                      class={tw
+                        `mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2`}
                     >
                       <a
                         href={`https://github.com/${data.options.repository}/tree/${data.options.ref}/${
@@ -89,13 +94,15 @@ export default function StatusPage({ data }: PageProps<Build | Error>) {
                     </dd>
                   </div>
                   <div
-                    class={tw`mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5`}
+                    class={tw
+                      `mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5`}
                   >
                     <dt class={tw`text-sm leading-5 font-medium text-gray-500`}>
                       Status
                     </dt>
                     <dd
-                      class={tw`mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2`}
+                      class={tw
+                        `mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2`}
                     >
                       <div class={tw`flex`}>
                         <div class={tw`mr-2`}>

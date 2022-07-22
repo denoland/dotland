@@ -128,7 +128,8 @@ function TopPanel({
     <div class={tw`bg-ultralight border-b-1`}>
       <div class={tw`section-x-inset-xl py-8 md:h-36 flex items-center`}>
         <div
-          class={tw`flex flex-row flex-wrap justify-between items-center w-full gap-4`}
+          class={tw
+            `flex flex-row flex-wrap justify-between items-center w-full gap-4`}
         >
           <div>
             <Breadcrumbs
@@ -144,7 +145,8 @@ function TopPanel({
           <div class={tw`flex flex-row flex-wrap items-center gap-4`}>
             {versionMeta && moduleMeta && (
               <div
-                class={tw`flex flex-row flex-auto justify-center items-center gap-4 border border-dark-border rounded-md bg-white py-2 px-5`}
+                class={tw
+                  `flex flex-row flex-auto justify-center items-center gap-4 border border-dark-border rounded-md bg-white py-2 px-5`}
               >
                 <div class={tw`flex items-center`}>
                   <Icons.GitHub class="mr-2 w-5 h-5 inline text-gray-700" />
@@ -338,7 +340,8 @@ function VersionSelector({
         />
         {versions[0] !== selectedVersion && (
           <a
-            class={tw`mt-2 w-full inline-flex justify-center py-1 px-2 bg-white border border-red-300 rounded-md text-sm leading-5 font-medium text-red-500 hover:text-red-400 focus:(outline-none border-blue-300 shadow-outline-red) transition duration-150 ease-in-out`}
+            class={tw
+              `mt-2 w-full inline-flex justify-center py-1 px-2 bg-white border border-red-300 rounded-md text-sm leading-5 font-medium text-red-500 hover:text-red-400 focus:(outline-none border-blue-300 shadow-outline-red) transition duration-150 ease-in-out`}
             aria-label="Go to latest version "
             href={getModulePath(name, versions[0], path)}
           >

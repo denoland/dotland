@@ -9,7 +9,8 @@ export function Tag(
 ) {
   return (
     <div
-      class={tw`inline py-1 px-2 rounded-full bg-tag-${props.color}-bg text-tag-${props.color} leading-none font-medium text-xs`}
+      class={tw
+        `inline py-1 px-2 rounded-full bg-tag-${props.color}-bg text-tag-${props.color} leading-none font-medium text-xs`}
     >
       {props.children}
     </div>

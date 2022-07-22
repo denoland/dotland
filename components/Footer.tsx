@@ -8,11 +8,13 @@ import * as Icons from "./Icons.tsx";
 export function Footer() {
   return (
     <div
-      class={tw`border-t border-secondary bg-[#F9F9F9] text-sm flex justify-center`}
+      class={tw
+        `border-t border-secondary bg-[#F9F9F9] text-sm flex justify-center`}
     >
       <div class={tw`section-x-inset-xl py-6 lg:py-18 w-full`}>
         <nav
-          class={tw`flex flex-col gap-6 w-full lg:(flex-row gap-0 justify-between) leading-tight`}
+          class={tw
+            `flex flex-col gap-6 w-full lg:(flex-row gap-0 justify-between) leading-tight`}
         >
           <div class={tw`hidden lg:block`}>
             <a href="https://deno.land">
@@ -76,7 +78,8 @@ export function Footer() {
               class={tw`w-full lg:w-60 focus:outline-none`}
             />
             <div
-              class={tw`flex flex-row justify-between items-center lg:(flex-col space-y-5 items-start)`}
+              class={tw
+                `flex flex-row justify-between items-center lg:(flex-col space-y-5 items-start)`}
             >
               <span class={tw`text-xs text-gray-400 leading-tight`}>
                 Copyright © 2022 Deno Land Inc.{" "}
@@ -108,7 +111,8 @@ function FooterSection(
     <div>
       <span class={tw`font-semibold`}>{props.title}</span>
       <div
-        class={tw`text-[#454545] flex flex-wrap mt-2 gap-x-2.5 gap-y-1.5 lg:(flex-col mt-4 gap-x-0 gap-y-2.5)`}
+        class={tw
+          `text-[#454545] flex flex-wrap mt-2 gap-x-2.5 gap-y-1.5 lg:(flex-col mt-4 gap-x-0 gap-y-2.5)`}
       >
         {Object.entries(props.entries).map(([name, link]) => {
           return (
