@@ -37,16 +37,20 @@ const symbolKinds = {
   "Type Aliases": "typeAlias",
 } as const;
 
+interface ManualSearchResult {
+  anchor: string;
+  hierarchy: Record<string, string>;
+  url: string;
+  content: string;
+}
+
 /** Search Deno documentation, symbols, or modules. */
 export default function GlobalSearch() {
   const [showModal, setShowModal] = useState(false);
   const [input, setInput] = useState("");
+
   const [results, setResults] = useState<{
-    manual?: Array<{
-      anchor: string;
-      url: string;
-      content: string;
-    }>;
+    manual?: Array<ManualSearchResult>;
     modules?: Array<unknown>;
     symbols?: Array<DocNode>;
   }>({});
@@ -91,8 +95,9 @@ export default function GlobalSearch() {
           {
             anchor: "introduction",
             url: "https://deno.land/manual#introduction",
+            hierarchy: { lvl0: "Manual", lvl1: "Introduction" },
             content:
-              "Deno is a JavaScript, TypeScript, and WebAssembly runtime with secure defaults and a great developer experience.\nIt's built on V8, Rust, and Tokio.",
+              "Deno (/ˈdiːnoʊ/, pronounced dee-no) is a JavaScript, TypeScript, and WebAssembly runtime with secure defaults and a great developer experience.",
           },
         ],
         symbols: undefined,
@@ -113,27 +118,27 @@ export default function GlobalSearch() {
       });
     }
 
-    if (kind === "Symbols" || kind === "All") {
-      queries.push({
-        indexName: "deno_modules",
-        query: input,
-        params: {
-          hitsPerPage: kind === "All" ? 5 : 10,
-          filters: Object.entries(symbolKindsToggle)
-            .filter(([_, v]) => kind === "Symbols" ? v : true)
-            .map(([k]) => "kind:" + symbolKinds[k as keyof typeof symbolKinds])
-            .join(" OR "),
-        },
-      });
-    }
+    // if (kind === "Symbols" || kind === "All") {
+    //   queries.push({
+    //     indexName: "deno_modules",
+    //     query: input,
+    //     params: {
+    //       hitsPerPage: kind === "All" ? 5 : 10,
+    //       filters: Object.entries(symbolKindsToggle)
+    //         .filter(([_, v]) => kind === "Symbols" ? v : true)
+    //         .map(([k]) => "kind:" + symbolKinds[k as keyof typeof symbolKinds])
+    //         .join(" OR "),
+    //     },
+    //   });
+    // }
 
     client.multipleQueries(queries).then(
       ({ results }) => {
         setResults({
           // @ts-ignore algolia typings are annoying
-          manual: results.find((res) => res.index! === "deno_manual")?.hits,
+          manual: results.find((res) => res.index === "deno_manual")?.hits,
           // @ts-ignore algolia typings are annoying
-          symbols: results.find((res) => res.index! === "deno_modules")?.hits,
+          symbols: results.find((res) => res.index === "deno_modules")?.hits,
         });
       },
     );
@@ -287,15 +292,17 @@ function Section({
   );
 }
 
-function ManualResult({
-  anchor,
-  url,
-  content,
-}: { anchor: string; url: string; content: string }) {
+function ManualResult({ hierarchy, url, content }: ManualSearchResult) {
+  const title = [];
+  for (const [id, entry] of Object.entries(hierarchy)) {
+    if (id === "lvl0" || !entry) continue;
+    title.push(entry);
+  }
+  console.log(title, hierarchy);
   return (
     <a href={url} class={tw`block`}>
-      <div class={tw`font-semibold`}>
-        {anchor}
+      <div>
+        <ManualResultTitle title={title} />
       </div>
       <div
         class={tw`text-sm text-[#6C6E78] h-10 overflow-ellipsis overflow-hidden`}
@@ -304,6 +311,20 @@ function ManualResult({
       </div>
     </a>
   );
+}
+
+function ManualResultTitle(props: { title: string[] }) {
+  const parts = [];
+  for (const [i, part] of props.title.entries()) {
+    const isLast = i === props.title.length - 1;
+    parts.push(
+      <span class={isLast ? tw`font-semibold` : undefined} key={i}>
+        {part}
+      </span>,
+    );
+    if (!isLast) parts.push(<span key={i + "separator"}>{" > "}</span>);
+  }
+  return <div class={tw`flex gap-1`}>{parts}</div>;
 }
 
 function SymbolResult({ doc }: { doc: DocNode }) {
