@@ -103,19 +103,23 @@ export function RawCodeBlock({
 
                 if (token.types.includes("string")) {
                   try {
-                    const res = new URL(token.content.slice(1, -1), url);
+                    const urlContent = token.content.slice(1, -1);
+                    const res = new URL(
+                      urlContent,
+                      filetypeIsJS(fileTypeFromURL(urlContent))
+                        ? url
+                        : undefined,
+                    );
 
-                    if (filetypeIsJS(fileTypeFromURL(res.pathname))) {
-                      return (
-                        <a
-                          className={tw`hover:underline` + " token " +
-                            token.types.join(" ")}
-                          href={res.href + "?code"}
-                        >
-                          {token.content}
-                        </a>
-                      );
-                    }
+                    return (
+                      <a
+                        className={tw`hover:underline` + " token " +
+                          token.types.join(" ")}
+                        href={res.href + "?code"}
+                      >
+                        {token.content}
+                      </a>
+                    );
                   } catch (e) {
                     // ignore
                   }
