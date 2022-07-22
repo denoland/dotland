@@ -70,8 +70,7 @@ export default function AddModule() {
     <div class={tw`space-y-12`}>
       <div class={tw`flex items-start`}>
         <div
-          class={tw
-            `hidden lg:block p-1.75 rounded-full bg-tag-blue mr-4.5 mt-1.5`}
+          class={tw`hidden lg:block p-1.75 rounded-full bg-tag-blue mr-4.5 mt-1.5`}
         >
           <Icons.NameTag />
         </div>
@@ -104,8 +103,7 @@ export default function AddModule() {
 
       <div class={tw`flex items-start`}>
         <div
-          class={tw
-            `hidden lg:block p-1.75 rounded-full bg-[#9CA0AA] mr-4.5 mt-1.5`}
+          class={tw`hidden lg:block p-1.75 rounded-full bg-[#9CA0AA] mr-4.5 mt-1.5`}
         >
           <Icons.Gear />
         </div>
@@ -124,8 +122,7 @@ export default function AddModule() {
               type="text"
               pattern="^([^(/)])(.*/$)"
               placeholder="/"
-              class={tw
-                `w-full lg:w-136 h-10 py-3 px-4 bg-[#F3F3F3] rounded-md mt-2`}
+              class={tw`w-full lg:w-136 h-10 py-3 px-4 bg-[#F3F3F3] rounded-md mt-2`}
               value={subdirectory}
               onInput={(e) => setSubdirectory(e.currentTarget.value)}
               disabled={!IS_BROWSER}
@@ -136,8 +133,7 @@ export default function AddModule() {
 
       <div class={tw`flex items-start`}>
         <div
-          class={tw
-            `hidden lg:block p-1.75 rounded-full bg-[#20B44B] mr-4.5 mt-1.5`}
+          class={tw`hidden lg:block p-1.75 rounded-full bg-[#20B44B] mr-4.5 mt-1.5`}
         >
           <Icons.Webhook />
         </div>
@@ -148,8 +144,7 @@ export default function AddModule() {
               {available && !registered &&
                 (
                   <div
-                    class={tw
-                      `inline-flex ml-2 py-1 px-3 bg-[#4B505A] rounded-md text-white text-sm leading-tight font-medium items-center`}
+                    class={tw`inline-flex ml-2 py-1 px-3 bg-[#4B505A] rounded-md text-white text-sm leading-tight font-medium items-center`}
                   >
                     <Icons.Spinner />
                     <span class={tw`ml-2`}>Waiting...</span>
@@ -166,13 +161,11 @@ export default function AddModule() {
             </p>
           </div>
           <div
-            class={tw
-              `w-full lg:w-136 py-3 px-3 bg-[#F3F3F3] rounded-md flex items-center justify-between`}
+            class={tw`w-full lg:w-136 py-3 px-3 bg-[#F3F3F3] rounded-md flex items-center justify-between`}
           >
             <div class={tw`space-x-2 flex items-center text-sm`}>
               <div
-                class={tw
-                  `py-1 px-2 rounded-md font-medium bg-[#9CA0AA] text-white`}
+                class={tw`py-1 px-2 rounded-md font-medium bg-[#9CA0AA] text-white`}
               >
                 Payload URL
               </div>
@@ -199,8 +192,7 @@ export default function AddModule() {
             ? (
               <div>
                 <div
-                  class={tw
-                    `py-3.5 px-4 text-[#20B44B] border border-[#20B44B] rounded-lg w-full lg:w-136 flex items-center`}
+                  class={tw`py-3.5 px-4 text-[#20B44B] border border-[#20B44B] rounded-lg w-full lg:w-136 flex items-center`}
                 >
                   <Icons.StatusOK />
                   <span class={tw`ml-2.5 font-medium`}>
@@ -264,8 +256,7 @@ export default function AddModule() {
                 </ol>
 
                 <video
-                  class={tw
-                    `rounded-lg border border-dark-border w-full lg:w-136`}
+                  class={tw`rounded-lg border border-dark-border w-full lg:w-136`}
                   src={"/images/add_webhook.mp4"}
                   autoPlay
                   muted
