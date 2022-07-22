@@ -110,7 +110,7 @@ export function RawCodeBlock({
                         <a
                           className={tw`hover:underline` + " token " +
                             token.types.join(" ")}
-                          href={res}
+                          href={res.href + "?code"}
                         >
                           {token.content}
                         </a>
