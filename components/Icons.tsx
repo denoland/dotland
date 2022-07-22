@@ -1,7 +1,6 @@
 /** @jsx h */
 import { h } from "preact";
 import { tw } from "@twind";
-export * from "$doc_components/Icons.tsx";
 
 export function GitHub(props: { class?: string }) {
   return (
