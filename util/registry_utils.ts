@@ -498,9 +498,17 @@ export interface DocPageFile extends DocPageBase {
   kind: "file";
 }
 
+export interface DocPageInvalidVersion {
+  kind: "invalid-version";
+  module: string;
+  description?: string;
+  versions: string[];
+  latest_version: string;
+}
 /** Stores as kind `doc_page` in datastore. */
 export type DocPage =
   | DocPageSymbol
   | DocPageModule
   | DocPageIndex
-  | DocPageFile;
+  | DocPageFile
+  | DocPageInvalidVersion;

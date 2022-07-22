@@ -165,7 +165,7 @@ function ModuleView({
         days of registration will be removed.
       </ErrorMessage>
     );
-  } else if (!data.versions.includes(version)) {
+  } else if (data.kind === "invalid-version") {
     return (
       <ErrorMessage title="404 - Not Found">
         This version does not exist for this module.
@@ -309,7 +309,7 @@ export const handler: Handlers<DocPage> = {
 
     const symbol = url.searchParams.get("s");
     const resURL = new URL(
-      `https://apiland-z93wcqeeb15g.deno.dev/v2/modules/${name}/${version}/page/${maybePath}`,
+      `https://apiland.deno.dev/v2/modules/${name}/${version}/page/${maybePath}`,
     );
     if (symbol) {
       resURL.searchParams.set("symbol", symbol);
