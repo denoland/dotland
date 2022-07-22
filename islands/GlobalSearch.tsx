@@ -70,6 +70,9 @@ export default function GlobalSearch() {
 
   useEffect(() => {
     const keyboardHandler = (e: KeyboardEvent) => {
+      if (e.target !== document.body) {
+        return;
+      }
       if (((e.metaKey || e.ctrlKey) && e.key === "k") || e.key === "/") {
         e.preventDefault();
         setShowModal(true);
