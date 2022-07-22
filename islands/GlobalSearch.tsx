@@ -281,7 +281,9 @@ function ManualResult({
       <div class={tw`font-semibold`}>
         {anchor}
       </div>
-      <div class={tw`text-sm text-[#6C6E78]`}>
+      <div
+        class={tw`text-sm text-[#6C6E78] h-10 overflow-ellipsis overflow-hidden`}
+      >
         {content}
       </div>
     </a>
