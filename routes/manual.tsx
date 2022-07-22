@@ -127,8 +127,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             >
               <div class={tw`absolute top-0 right-0 -mr-14 p-1`}>
                 <label
-                  class={tw
-                    `flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600`}
+                  class={tw`flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600`}
                   aria-label="Close sidebar"
                   htmlFor="manualSidebarToggle"
                 >
@@ -147,8 +146,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                   />
                   <div class={tw`mx-4 flex flex-col justify-center`}>
                     <div
-                      class={tw
-                        `font-bold text-gray-900 leading-6 text-2xl tracking-tight`}
+                      class={tw`font-bold text-gray-900 leading-6 text-2xl tracking-tight`}
                     >
                       Deno Manual
                     </div>
@@ -181,8 +179,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                 <img src="/logo.svg" alt="logo" class={tw`w-auto h-12`} />
                 <div class={tw`mx-4 flex flex-col justify-center`}>
                   <div
-                    class={tw
-                      `font-bold text-gray-900 leading-6 text-2xl tracking-tight`}
+                    class={tw`font-bold text-gray-900 leading-6 text-2xl tracking-tight`}
                   >
                     Deno Manual
                   </div>
@@ -212,8 +209,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
               <img src="/logo.svg" alt="logo" class={tw`w-auto h-10`} />
             </a>
             <div
-              class={tw
-                `border-l border-r border-gray-200 flex-1 px-4 flex justify-between`}
+              class={tw`border-l border-r border-gray-200 flex-1 px-4 flex justify-between`}
             >
               <div class={tw`flex-1 flex`}>
                 <div class={tw`w-full flex justify-between h-full`}>
@@ -221,8 +217,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                     Search
                   </label>
                   <button
-                    class={tw
-                      `w-full text-gray-400 focus-within:text-gray-600 flex items-center`}
+                    class={tw`w-full text-gray-400 focus-within:text-gray-600 flex items-center`}
                     // @ts-ignore onClick does support strings
                     onClick="document.querySelector('#manualSearch button').click()"
                   >
@@ -241,8 +236,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
               </div>
             </div>
             <label
-              class={tw
-                `focus:outline-none focus:bg-gray-100 md:hidden flex items-center`}
+              class={tw`focus:outline-none focus:bg-gray-100 md:hidden flex items-center`}
               htmlFor="manualSidebarToggle"
             >
               <div class={tw`px-4 text-gray-500 focus:text-gray-600`}>
@@ -257,15 +251,13 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
           >
             <div class={tw`h-16 bg-white shadow hidden md:block`}>
               <div
-                class={tw
-                  `max-w-screen-md mx-auto px-12 w-full flex justify-between h-full`}
+                class={tw`max-w-screen-md mx-auto px-12 w-full flex justify-between h-full`}
               >
                 <label htmlFor="search_field" class={tw`sr-only`}>
                   Search
                 </label>
                 <button
-                  class={tw
-                    `w-full text-gray-400 focus-within:text-gray-600 flex items-center`}
+                  class={tw`w-full text-gray-400 focus-within:text-gray-600 flex items-center`}
                   // @ts-ignore onClick does support strings
                   onClick="document.querySelector('#manualSearch button').click()"
                 >
@@ -289,10 +281,9 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             <div class={tw`section-x-inset-md pb-12 sm:pb-20`}>
               <a
                 href={getDocURL(version, path)}
-                class={tw
-                  `text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right ${
-                    path.split("/").length === 2 ? "mt-11" : "mt-9"
-                  } mr-4`}
+                class={tw`text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right ${
+                  path.split("/").length === 2 ? "mt-11" : "mt-9"
+                } mr-4`}
               >
                 <span class={tw`sr-only`}>GitHub</span>
                 <Icons.GitHub class="inline" />
@@ -327,8 +318,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                         `manual@${version}`,
                       )
                       : pageList[pageIndex + 1].path}
-                    class={tw
-                      `text-gray-900 hover:text-gray-600 font-normal float-right`}
+                    class={tw`text-gray-900 hover:text-gray-600 font-normal float-right`}
                   >
                     {pageList[pageIndex + 1].name} →
                   </a>
