@@ -146,7 +146,7 @@ export function CodeBlock(
       code={code}
       language={language}
       disablePrefixes={disablePrefixes}
-      class={tw`p-4`}
+      class={tw`p-4 bg-gray-100 rounded-lg`}
       url={url}
     />
   );
