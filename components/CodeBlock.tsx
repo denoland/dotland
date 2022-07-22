@@ -7,6 +7,7 @@ import { tw } from "@twind";
 import { Prism } from "@/util/prism_utils.ts";
 import { escape as htmlEscape } from "$he";
 import { normalizeTokens } from "@/util/prism_utils.ts";
+import { fileTypeFromURL, filetypeIsJS } from "../util/registry_utils.ts";
 
 export interface CodeBlockProps {
   code: string;
@@ -28,6 +29,7 @@ export interface CodeBlockProps {
     | "wasm"
     | "makefile"
     | "dockerfile";
+  url: URL;
 }
 
 export function RawCodeBlock({
@@ -36,6 +38,7 @@ export function RawCodeBlock({
   class: extraClassName,
   disablePrefixes,
   enableLineRef = false,
+  url,
 }: CodeBlockProps & {
   class?: string;
   enableLineRef?: boolean;
@@ -97,6 +100,22 @@ export function RawCodeBlock({
                 if (token.empty) {
                   return <br />;
                 }
+
+
+                if (token.types.includes("string")) {
+                  try {
+                    const res = new URL(token.content.slice(1, -1), url);
+
+                    if (filetypeIsJS(fileTypeFromURL(res.pathname))) {
+                      return (
+                        <a className={tw`hover:underline` + " token " + token.types.join(" ")} href={res}>
+                          {token.content}
+                        </a>
+                      );
+                    }
+                  } catch (e) {
+                  }
+                }
                 return (
                   <span className={"token " + token.types.join(" ")}>
                     {token.content}
@@ -111,13 +130,14 @@ export function RawCodeBlock({
   );
 }
 
-export function CodeBlock({ code, language, disablePrefixes }: CodeBlockProps) {
+export function CodeBlock({ code, language, disablePrefixes, url }: CodeBlockProps) {
   return (
     <RawCodeBlock
       code={code}
       language={language}
       disablePrefixes={disablePrefixes}
       class={tw`p-4`}
+      url={url}
     />
   );
 }

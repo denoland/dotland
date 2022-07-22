@@ -134,6 +134,7 @@ export function FileDisplay(props: {
                 language={filetype}
                 enableLineRef={true}
                 class={tw`p-2 sm:px-3 md:px-4`}
+                url={props.url}
               />
             );
           case "html":
@@ -143,6 +144,7 @@ export function FileDisplay(props: {
                 language="markdown"
                 enableLineRef={true}
                 class={tw`p-2 sm:px-3 md:px-4`}
+                url={props.url}
               />
             );
           case "markdown": {
@@ -153,6 +155,7 @@ export function FileDisplay(props: {
                   language="markdown"
                   enableLineRef={true}
                   class={tw`p-2 sm:px-3 md:px-4`}
+                  url={props.url}
                 />
               );
             } else {
@@ -176,6 +179,7 @@ export function FileDisplay(props: {
                 language="text"
                 enableLineRef={true}
                 class={tw`p-2 sm:px-3 md:px-4`}
+                url={props.url}
               />
             );
         }

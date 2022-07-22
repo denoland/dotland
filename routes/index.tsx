@@ -19,7 +19,7 @@ interface Data {
   isFirefox: boolean;
 }
 
-export default function Home({ data }: PageProps<Data>) {
+export default function Home({ data, url }: PageProps<Data>) {
   const complexExampleProgram = `import { serve } from "https://deno.land/std@${
     versions.std[0]
   }/http/server.ts";
@@ -151,7 +151,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
               Installation
             </h3>
           </a>
-          <InstallSection />
+          <InstallSection url={url} />
         </div>
         <div class={tw`section-x-inset-sm mt-20`}>
           <a class={tw`hover:underline`} href="#getting-started">
@@ -165,6 +165,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
               versions.std[0]
             }/examples/welcome.ts`}
             language="bash"
+            url={url}
           />
           <p class={tw`my-4 text-gray-700`}>Or a more complex one:</p>
         </div>
@@ -173,6 +174,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             code={complexExampleProgram}
             language="typescript"
             disablePrefixes
+            url={url}
           />
         </div>
         <div class={tw`section-x-inset-sm`}>
@@ -312,7 +314,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             all JS/TS files in the current directory and subdirectories:
           </p>
           <p>
-            <CodeBlock code={"deno lint\nChecked 54 files"} language="bash" />
+            <CodeBlock code={"deno lint\nChecked 54 files"} language="bash"             url={url} />
           </p>
           <p class={tw`my-4 text-gray-700`}>
             <a class={tw`link`} href="/manual/tools/formatter">
@@ -321,7 +323,8 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             all supported files in the current directory and subdirectories:
           </p>
           <p>
-            <CodeBlock code={"deno fmt\nChecked 46 files"} language="bash" />
+            <CodeBlock code={"deno fmt\nChecked 46 files"} language="bash"            url={url}
+            />
           </p>
           <p class={tw`my-4 text-gray-700`}>
             Run a{" "}
@@ -331,7 +334,8 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             :
           </p>
           <p>
-            <CodeBlock code={denoTestExample} language="bash" />
+            <CodeBlock code={denoTestExample} language="bash"            url={url}
+            />
           </p>
           <p class={tw`my-4 text-gray-700`}>
             For the full list of tools and their options, see{" "}
@@ -453,13 +457,15 @@ function DenoInProductionSection() {
   );
 }
 
-function InstallSection() {
+function InstallSection({url}: {url: URL}) {
   const shell = (
     <div key="shell" class={tw`my-4 text-gray-700`}>
       <p class={tw`py-2`}>Shell (Mac, Linux):</p>
       <CodeBlock
         language="bash"
         code="curl -fsSL https://deno.land/install.sh | sh"
+        url={url}
+
       />
     </div>
   );
@@ -471,7 +477,8 @@ function InstallSection() {
         </a>{" "}
         (Mac):
       </p>
-      <CodeBlock language="bash" code="brew install deno" />
+      <CodeBlock language="bash" code="brew install deno"             url={url}
+      />
     </div>
   );
   const powershell = (
@@ -480,6 +487,8 @@ function InstallSection() {
       <CodeBlock
         language="bash"
         code="iwr https://deno.land/install.ps1 -useb | iex"
+        url={url}
+
       />
     </div>
   );
@@ -491,7 +500,8 @@ function InstallSection() {
         </a>{" "}
         (Windows):
       </p>
-      <CodeBlock language="bash" code="choco install deno" />
+      <CodeBlock language="bash" code="choco install deno"             url={url}
+      />
     </div>
   );
   const scoop = (
@@ -502,7 +512,8 @@ function InstallSection() {
         </a>{" "}
         (Windows):
       </p>
-      <CodeBlock language="bash" code="scoop install deno" />
+      <CodeBlock language="bash" code="scoop install deno"             url={url}
+      />
     </div>
   );
   const cargo = (
@@ -514,7 +525,8 @@ function InstallSection() {
         </a>
         :
       </p>
-      <CodeBlock language="bash" code="cargo install deno --locked" />
+      <CodeBlock language="bash" code="cargo install deno --locked"             url={url}
+      />
     </div>
   );
 
