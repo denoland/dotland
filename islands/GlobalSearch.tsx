@@ -85,21 +85,6 @@ export default function GlobalSearch() {
   });
 
   useEffect(() => {
-    if (input === "") {
-      setResults({
-        manual: [
-          {
-            anchor: "introduction",
-            url: "https://deno.land/manual#introduction",
-            content:
-              "Deno is a JavaScript, TypeScript, and WebAssembly runtime with secure defaults and a great developer experience.\nIt's built on V8, Rust, and Tokio.",
-          },
-        ],
-        symbols: undefined,
-      });
-      return;
-    }
-
     const queries = [];
 
     if (kind === "Manual" || kind === "All") {
