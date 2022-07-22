@@ -2,7 +2,7 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
+import { ComponentChildren, Fragment, h } from "preact";
 import { tw } from "@twind";
 import { type CommonProps, getBasePath } from "@/util/registry_utils.ts";
 import { type Doc, type DocNode } from "@/util/doc.ts";
