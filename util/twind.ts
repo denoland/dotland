@@ -1,5 +1,5 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { apply, Configuration, setup as twSetup, Sheet } from "twind";
+import { apply, Configuration, cssomSheet, setup, Sheet } from "twind";
 export * from "twind";
 import { css } from "twind/css";
 export { css };
@@ -67,8 +67,6 @@ export const config: Configuration = {
       "background-size": "1.5em 1.5em",
       "background-repeat": "no-repeat",
     }),
-    "symbolKind":
-      apply`rounded-full w-6 h-6 inline-flex items-center justify-center font-medium text-xs leading-none flex-shrink-0`,
   },
 };
 
@@ -78,14 +76,12 @@ if (IS_BROWSER) {
   const mappings = JSON.parse(rules.pop()!.slice(2, -2));
   const precedences = JSON.parse(rules.pop()!.slice(2, -2));
   const state = [precedences, new Set(rules), new Map(mappings), true];
-  const target = el.sheet!;
   const sheet: Sheet = {
-    target,
-    insert: (rule, index) => target.insertRule(rule, index),
+    ...cssomSheet({ target: el.sheet! }),
     init(cb) {
       return cb(state.shift());
     },
   };
   config.sheet = sheet;
-  twSetup(config);
+  setup(config);
 }
