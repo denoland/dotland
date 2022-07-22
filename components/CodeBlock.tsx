@@ -43,8 +43,8 @@ export function RawCodeBlock({
   class?: string;
   enableLineRef?: boolean;
 }) {
-  const codeDivClasses = tw
-    `text-gray-300 text-right select-none inline-block mr-2 sm:mr-3`;
+  const codeDivClasses =
+    tw`text-gray-300 text-right select-none inline-block mr-2 sm:mr-3`;
   const newLang = language === "shell"
     ? "bash"
     : language === "text"
@@ -101,19 +101,23 @@ export function RawCodeBlock({
                   return <br />;
                 }
 
-
                 if (token.types.includes("string")) {
                   try {
                     const res = new URL(token.content.slice(1, -1), url);
 
                     if (filetypeIsJS(fileTypeFromURL(res.pathname))) {
                       return (
-                        <a className={tw`hover:underline` + " token " + token.types.join(" ")} href={res}>
+                        <a
+                          className={tw`hover:underline` + " token " +
+                            token.types.join(" ")}
+                          href={res}
+                        >
                           {token.content}
                         </a>
                       );
                     }
                   } catch (e) {
+                    // ignore
                   }
                 }
                 return (
@@ -130,7 +134,9 @@ export function RawCodeBlock({
   );
 }
 
-export function CodeBlock({ code, language, disablePrefixes, url }: CodeBlockProps) {
+export function CodeBlock(
+  { code, language, disablePrefixes, url }: CodeBlockProps,
+) {
   return (
     <RawCodeBlock
       code={code}
