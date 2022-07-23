@@ -71,7 +71,7 @@ Deno.test({
   sanitizeResources: false, // TODO(@crowlKats): this shouldnt be required, something wrong with fetch resource consumption
   async fn() {
     const res = await handleRequest(
-      new Request("https://deno.land/std@0.127.0/version.ts?codeview", {
+      new Request("https://deno.land/std@0.127.0/version.ts?code", {
         headers: { Accept: BROWSER_ACCEPT },
       }),
     );
@@ -85,7 +85,7 @@ Deno.test({
   name: "/std/version.ts with Deno CLI Accept responds with redirect",
   async fn() {
     const res = await handleRequest(
-      new Request("https://deno.land/x/std/version.ts", {
+      new Request("https://deno.land/std/version.ts", {
         headers: { Accept: DENO_CLI_ACCEPT },
       }),
     );
@@ -94,6 +94,19 @@ Deno.test({
     assert(res.headers.get("X-Deno-Warning")?.includes("latest"));
     assert(res.headers.get("X-Deno-Warning")?.includes("/std/version.ts"));
     assertEquals(res.headers.get("Access-Control-Allow-Origin"), "*");
+    await res.text();
+  },
+});
+
+Deno.test({
+  name: "/x/std/version.ts redirects to /std/version.ts",
+  async fn() {
+    const res = await handleRequest(
+      new Request("https://deno.land/x/std/version.ts"),
+    );
+    assertEquals(res.status, 301);
+    assert(res.headers.get("Location")?.includes("/std/version.ts"));
+    assert(!res.headers.get("Location")?.includes("/x/"));
     await res.text();
   },
 });
@@ -126,7 +139,7 @@ Deno.test({
     assertEquals(res.status, 302);
     assert(
       res.headers.get("Location")?.includes(
-        "/std@0.127.0/fs/mod.ts?codeview=#L5",
+        "/std@0.127.0/fs/mod.ts?code=#L5",
       ),
     );
     await res.text();

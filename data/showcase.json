@@ -87,5 +87,38 @@
     "title": "Ter",
     "link": "https://ter.deno.dev/",
     "github": "kkga/ter"
+  },
+  {
+    "image": "/images/showcase/edrys.png",
+    "title": "Edyrs",
+    "link": "https://edrys.org"
+  },
+  {
+    "image": "/images/showcase/sdns.png",
+    "title": "Serverless DNS",
+    "link": "https://rdns.deno.dev/",
+    "github": "serverless-dns/serverless-dns"
+  },
+  {
+    "image": "/images/showcase/jsland.png",
+    "title": "Js.Land",
+    "link": "https://js.land/",
+    "github": "RedVanJosh/Js.Land"
+  },
+  {
+    "image": "/images/showcase/andbounds.png",
+    "title": "ANDBOUNDS Inc.",
+    "link": "https://andbounds.com/"
+  },
+  {
+    "image": "/images/showcase/profilator.png",
+    "title": "GitHub Profilator",
+    "link": "https://profilator.deno.dev/",
+    "github": "Bellisario/profilator"
+  },
+  {
+    "image": "/images/showcase/localseostudio.png",
+    "title": "Local SEO Studio",
+    "link": "https://localseo.studio/"
   }
 ]

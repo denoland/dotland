@@ -9,8 +9,12 @@ export function HelloBar(props: {
   children: ComponentChildren;
 }) {
   return (
-    <div class={tw`text-center bg-black text-white`}>
-      <a href={props.to} target="_blank" class={tw`h-full w-full block p-2`}>
+    <div class={tw`text-center bg-black text-white p-1`}>
+      <a
+        href={props.to}
+        target="_blank"
+        class={tw`inline-block p-1 hover:text-underline`}
+      >
         {props.children}
       </a>
     </div>

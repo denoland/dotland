@@ -56,8 +56,8 @@ export const config: Configuration = {
     },
   },
   plugins: {
-    link: apply
-      `text-blue-500 transition duration-75 ease-in-out hover:text-blue-400`,
+    link:
+      apply`text-[#056CF0] transition duration-75 ease-in-out hover:text-blue-500`,
     "section-x-inset": (parts) =>
       apply`max-w-screen-${parts[0]} mx-auto px-4 sm:px-6 md:px-8`,
     "form-select-bg": css({
