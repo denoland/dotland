@@ -87,15 +87,13 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
         <input
           type="checkbox"
           id="ToCToggle"
-          class={tw
-            `hidden checked:siblings:flex checked:sibling:children:(first-child:hidden last-child:block)`}
+          class={tw`hidden checked:siblings:flex checked:sibling:children:(first-child:hidden last-child:block)`}
           autoComplete="off"
         />
 
         <label
           htmlFor="ToCToggle"
-          class={tw
-            `md:hidden z-10 fixed bottom-5 right-3 rounded-full bg-white p-3 border border-light-border`}
+          class={tw`md:hidden z-10 fixed bottom-5 right-3 rounded-full bg-white p-3 border border-light-border`}
         >
           <Icons.Menu />
           <Icons.Cross class={tw`hidden`} />
@@ -104,8 +102,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
         <div class={tw`hidden fixed top-0 w-full h-screen bg-[#4B5563BF]`} />
 
         <div
-          class={tw
-            `hidden w-60 fixed md:(block sticky) lg:w-72 border-r border-gray-200 bg-gray-50 h-screen top-0 flex-shrink-0 overflow-y-auto flex-col`}
+          class={tw`hidden w-60 fixed md:(block sticky) lg:w-72 border-r border-gray-200 bg-gray-50 h-screen top-0 flex-shrink-0 overflow-y-auto flex-col`}
         >
           <div class={tw`bg-gray-100 p-4 border-b border-gray-200`}>
             <VersionSelect
@@ -129,15 +126,13 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             />
           )}
           <div
-            class={tw
-              `section-x-inset-md pb-12 sm:pb-20 justify-self-center flex-1`}
+            class={tw`section-x-inset-md pb-12 sm:pb-20 justify-self-center flex-1`}
           >
             <a
               href={getDocURL(version, path)}
-              class={tw
-                `text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right ${
-                  path.split("/").length === 2 ? "mt-11" : "mt-9"
-                } mr-4`}
+              class={tw`text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right ${
+                path.split("/").length === 2 ? "mt-11" : "mt-9"
+              } mr-4`}
             >
               <span class={tw`sr-only`}>GitHub</span>
               <Icons.GitHub class="inline" />
@@ -172,8 +167,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                       `manual@${version}`,
                     )
                     : pageList[pageIndex + 1].path}
-                  class={tw
-                    `text-gray-900 hover:text-gray-600 font-normal float-right`}
+                  class={tw`text-gray-900 hover:text-gray-600 font-normal float-right`}
                 >
                   {pageList[pageIndex + 1].name} →
                 </a>
