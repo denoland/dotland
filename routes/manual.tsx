@@ -83,40 +83,40 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
       </Head>
       <Header selected="Manual" manual />
 
-      <div class={tw`flex`}>
-        <input
-          type="checkbox"
-          id="ToCToggle"
-          class={tw`hidden checked:siblings:flex checked:sibling:children:(first-child:hidden last-child:block)`}
-          autoComplete="off"
-        />
+      <div class={tw`flex flex-col lg:flex-row`}>
+        <div>
+          <input
+            type="checkbox"
+            id="ToCToggle"
+            class={tw`hidden checked:siblings:flex checked:sibling:(border-0 children:first-child:rotate-90)`}
+            autoComplete="off"
+          />
 
-        <label
-          htmlFor="ToCToggle"
-          class={tw`md:hidden z-10 fixed bottom-5 right-3 rounded-full bg-white p-3 border border-light-border`}
-        >
-          <Icons.Menu />
-          <Icons.Cross class={tw`hidden`} />
-        </label>
+          <label
+            htmlFor="ToCToggle"
+            class={tw`lg:hidden ml-3.5 py-2 px-1.5 flex items-center gap-2 font-medium border-b border-gray-200`}
+          >
+            <Icons.ThinArrowRight />
+            Menu
+          </label>
 
-        <div class={tw`hidden fixed top-0 w-full h-screen bg-[#4B5563BF]`} />
-
-        <div
-          class={tw`hidden w-60 fixed md:(block sticky) lg:w-72 border-r border-gray-200 bg-gray-50 h-screen top-0 flex-shrink-0 overflow-y-auto flex-col`}
-        >
-          <div class={tw`bg-gray-100 p-4 border-b border-gray-200`}>
-            <VersionSelect
-              versions={Object.fromEntries(
-                versions.map((ver) => [ver, `/manual@${ver}${path}`]),
-              )}
-              selectedVersion={version}
+          <div
+            class={tw`hidden w-full bg-gray-50 top-0 flex-shrink-0 overflow-y-auto flex-col border-y border-gray-200 lg:(block w-72 border-0 border-r h-screen)`}
+          >
+            <div class={tw`bg-gray-100 p-4 border-b border-gray-200`}>
+              <VersionSelect
+                versions={Object.fromEntries(
+                  versions.map((ver) => [ver, `/manual@${ver}${path}`]),
+                )}
+                selectedVersion={version}
+              />
+            </div>
+            <ToC
+              tableOfContents={data.tableOfContents}
+              version={params.version}
+              path={path}
             />
           </div>
-          <ToC
-            tableOfContents={data.tableOfContents}
-            version={params.version}
-            path={path}
-          />
         </div>
 
         <main class={tw`focus:outline-none w-full flex flex-col`} tabIndex={0}>
