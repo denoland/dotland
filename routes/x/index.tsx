@@ -91,8 +91,7 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
             <input
               name="query"
               id="query"
-              class={tw
-                `block w-full px-4 py-2 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1`}
+              class={tw`block w-full px-4 py-2 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1`}
               type="text"
               placeholder={!data.resp
                 ? "搜索"
@@ -101,28 +100,24 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
             />
           </form>
           <div
-            class={tw
-              `sm:max-w-screen-lg sm:mx-auto sm:px-6 md:px-8 pb-4 sm:pb-12`}
+            class={tw`sm:max-w-screen-lg sm:mx-auto sm:px-6 md:px-8 pb-4 sm:pb-12`}
           >
             {data.resp === null
               ? (
                 <div
-                  class={tw
-                    `p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate`}
+                  class={tw`p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate`}
                 >
                   加载模块失败
                 </div>
               )
               : (
                 <div
-                  class={tw
-                    `bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4`}
+                  class={tw`bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4`}
                 >
                   {data.resp.results.length == 0
                     ? (
                       <div
-                        class={tw
-                          `p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500`}
+                        class={tw`p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500`}
                       >
                         没有找到模块。如果想要我们知道您正在寻找哪个模块，可以在这个
                         <a
@@ -174,8 +169,7 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
           </div>
           <div
             id="info"
-            class={tw
-              `max-w-screen-xl mx-auto pt-4 pb-8 sm:pt-8 px-4 sm:px-6 lg:pt-12 lg:px-8`}
+            class={tw`max-w-screen-xl mx-auto pt-4 pb-8 sm:pt-8 px-4 sm:px-6 lg:pt-12 lg:px-8`}
           >
             <dl class={tw`md:grid md:grid-cols-2 md:gap-8`}>
               <div>
@@ -226,8 +220,7 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
                     <span class={tw`block w-full rounded-md shadow-sm mt-4`}>
                       <a
                         href="/add_module"
-                        class={tw
-                          `w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out`}
+                        class={tw`w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out`}
                       >
                         Publish a module
                       </a>
@@ -292,8 +285,7 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
             </dl>
           </div>
           <div
-            class={tw
-              `max-w-screen-lg mx-auto pt-4 pb-8 sm:pt-8 sm:pb-12 px-4 sm:px-6 lg:pt-12 lg:pb-16 lg:px-8`}
+            class={tw`max-w-screen-lg mx-auto pt-4 pb-8 sm:pt-8 sm:pb-12 px-4 sm:px-6 lg:pt-12 lg:pb-16 lg:px-8`}
           >
             <h4 class={tw`font-semibold text-2xl`} id="stats">
               Stats
@@ -304,8 +296,7 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
                   <div>
                     <h5 class={tw`font-medium text-lg`}>New modules</h5>
                     <div
-                      class={tw
-                        `bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2`}
+                      class={tw`bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2`}
                     >
                       <ModuleList
                         modules={data.stats.recently_added_modules.map((v) => ({
@@ -320,8 +311,7 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
                   <div>
                     <h5 class={tw`font-medium text-lg`}>Recently updated</h5>
                     <div
-                      class={tw
-                        `bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2`}
+                      class={tw`bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2`}
                     >
                       <ModuleList
                         modules={data.stats.recently_uploaded_versions.map((
@@ -364,21 +354,18 @@ function ModuleList({
           <li class={i !== 0 ? "border-t border-gray-200" : ""} key={i}>
             <a
               href={link}
-              class={tw
-                `block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out`}
+              class={tw`block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out`}
             >
               <div class={tw`flex items-center px-4 sm:px-6 py-2`}>
                 <div class={tw`min-w-0 flex-1 flex items-center`}>
                   <div class={tw`min-w-0 flex-1`}>
                     <div
-                      class={tw
-                        `text-sm leading-5 font-medium text-blue-500 truncate`}
+                      class={tw`text-sm leading-5 font-medium text-blue-500 truncate`}
                     >
                       {meta.name}
                     </div>
                     <div
-                      class={tw
-                        `mt-1 flex items-center text-sm leading-5 text-gray-500`}
+                      class={tw`mt-1 flex items-center text-sm leading-5 text-gray-500`}
                     >
                       <span class={tw`truncate`}>
                         {meta.description
@@ -392,8 +379,7 @@ function ModuleList({
                     </div>
                     {meta.date && (
                       <div
-                        class={tw
-                          `mt-1 flex items-center text-sm leading-5 text-gray-400`}
+                        class={tw`mt-1 flex items-center text-sm leading-5 text-gray-400`}
                       >
                         <span
                           class={tw`truncate`}

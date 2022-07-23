@@ -39,14 +39,12 @@ export function Header({
           <input
             type="checkbox"
             id="menuToggle"
-            class={tw
-              `hidden checked:siblings:flex checked:sibling:children:last-child:children:(first-child:hidden last-child:block)`}
+            class={tw`hidden checked:siblings:flex checked:sibling:children:last-child:children:(first-child:hidden last-child:block)`}
             autoComplete="off"
           />
 
           <div
-            class={tw
-              `h-9 flex items-center justify-between select-none w-full lg:w-auto gap-3 md:gap-6 lg:gap-8`}
+            class={tw`h-9 flex items-center justify-between select-none w-full lg:w-auto gap-3 md:gap-6 lg:gap-8`}
           >
             <a
               href="/"
@@ -78,26 +76,21 @@ export function Header({
           </div>
 
           <div
-            class={tw
-              `hidden flex-col mx-2 mt-5 gap-y-4 lg:(flex flex-row items-center mx-0 mt-0) font-medium`}
+            class={tw`hidden flex-col mx-2 mt-5 gap-y-4 lg:(flex flex-row items-center mx-0 mt-0) font-medium`}
           >
             {entries.map(({ href, content }) => {
               return (
                 <a
                   href={href}
-                  class={tw
-                    `lg:ml-4 px-2 rounded-md leading-loose hover:(bg-gray-100 text-main) ${apply
-                      `${
-                        content === selected
-                          ? css({
-                            "text-decoration-line": "underline",
-                            "text-underline-offset": "6px",
-                            "text-decoration-thickness": "2px",
-                          })
-                          : ""
-                      } ${
-                        content === selected ? "text-black" : "text-gray-500"
-                      }`}`}
+                  class={tw`lg:ml-4 px-2 rounded-md leading-loose hover:(bg-gray-100 text-main) ${apply`${
+                    content === selected
+                      ? css({
+                        "text-decoration-line": "underline",
+                        "text-underline-offset": "6px",
+                        "text-decoration-thickness": "2px",
+                      })
+                      : ""
+                  } ${content === selected ? "text-black" : "text-gray-500"}`}`}
                 >
                   {content}
                 </a>
@@ -106,8 +99,7 @@ export function Header({
 
             <a
               href="https://deno.com/deploy"
-              class={tw
-                `h-9 lg:ml-5 bg-secondary rounded-md px-4 flex items-center hover:bg-[#D5D7DB]`}
+              class={tw`h-9 lg:ml-5 bg-secondary rounded-md px-4 flex items-center hover:bg-[#D5D7DB]`}
             >
               Deploy
             </a>
@@ -160,8 +152,7 @@ function Search() {
       />
 
       <button
-        class={tw
-          `pl-4 w-80 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light`}
+        class={tw`pl-4 w-80 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light`}
         // @ts-ignore onClick does support strings
         onClick="document.querySelector('#search button').click()"
       >
@@ -169,8 +160,7 @@ function Search() {
           <Icons.MagnifyingGlass />
           {/*<input class={tw`ml-1.5 py-2.5 h-9 flex-auto bg-transparent placeholder:text-light text-default text-sm leading-4 font-medium appearance-none`} type="text" placeholder="Search..." />*/}
           <div
-            class={tw
-              `ml-1.5 py-2.5 h-9 flex-auto text-light text-sm leading-4 font-medium text-left`}
+            class={tw`ml-1.5 py-2.5 h-9 flex-auto text-light text-sm leading-4 font-medium text-left`}
           >
             搜索...
           </div>
