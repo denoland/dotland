@@ -490,7 +490,7 @@ export function fileTypeFromURL(filename: string): string | undefined {
     return "markdown";
   } else if (f.match(`\\.${orgExtension}$`)) {
     return "org";
-  } else if (f.match(/\.(png|jpe?g|svg)/)) {
+  } else if (f.match(/\.(png|jpe?g|svg|webm|webp|avif)/)) {
     return "image";
   }
 }
