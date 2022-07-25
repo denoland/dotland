@@ -103,6 +103,7 @@ export function RawCodeBlock({
 
                 if (token.types.includes("string")) {
                   try {
+                    const quote = token.content[0];
                     const urlContent = token.content.slice(1, -1);
                     const res = new URL(
                       urlContent,
@@ -112,13 +113,19 @@ export function RawCodeBlock({
                     );
 
                     return (
-                      <a
-                        className={tw`hover:underline` + " token " +
+                      <span
+                        className={"token " +
                           token.types.join(" ")}
-                        href={res.href + "?code"}
                       >
-                        {token.content}
-                      </a>
+                        {quote}
+                        <a
+                          className={tw`hover:underline`}
+                          href={res.href + "?code"}
+                        >
+                          {urlContent}
+                        </a>
+                        {quote}
+                      </span>
                     );
                   } catch (e) {
                     // ignore
