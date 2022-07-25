@@ -126,7 +126,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             />
           )}
           <div
-            class={tw`section-x-inset-md pb-12 sm:pb-20 justify-self-center flex-1`}
+            class={tw`section-x-inset-md pb-12 sm:pb-20 w-full justify-self-center flex-shrink-1`}
           >
             <a
               href={getDocURL(version, path)}
