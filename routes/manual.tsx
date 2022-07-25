@@ -8,6 +8,7 @@ import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
 import { Handlers } from "$fresh/server.ts";
 import { Header } from "@/components/Header.tsx";
+import { Footer } from "@/components/Footer.tsx";
 import { Markdown } from "@/components/Markdown.tsx";
 import * as Icons from "@/components/Icons.tsx";
 import {
@@ -83,7 +84,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
       </Head>
       <Header selected="Manual" />
 
-      <div class={tw`flex flex-col lg:flex-row`}>
+      <div class={tw`flex flex-col gap-12 lg:flex-row section-x-inset-xl mt-12 mb-16`}>
         <div>
           <input
             type="checkbox"
@@ -101,16 +102,14 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
           </label>
 
           <div
-            class={tw`hidden w-full bg-gray-50 top-0 flex-shrink-0 overflow-y-auto flex-col border-y border-gray-200 lg:(block sticky w-72 border-0 border-r h-screen)`}
+            class={tw`hidden w-full flex-shrink-0 overflow-y-auto flex-col gap-4 lg:(flex w-72 h-min)`}
           >
-            <div class={tw`bg-gray-100 p-4 border-b border-gray-200`}>
-              <VersionSelect
-                versions={Object.fromEntries(
-                  versions.map((ver) => [ver, `/manual@${ver}${path}`]),
-                )}
-                selectedVersion={version}
-              />
-            </div>
+            <VersionSelect
+              versions={Object.fromEntries(
+                versions.map((ver) => [ver, `/manual@${ver}${path}`]),
+              )}
+              selectedVersion={version}
+            />
             <ToC
               tableOfContents={data.tableOfContents}
               version={params.version}
@@ -126,16 +125,13 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             />
           )}
           <div
-            class={tw`section-x-inset-md pb-12 sm:pb-20 w-full justify-self-center flex-shrink-1`}
+            class={tw`w-full justify-self-center flex-shrink-1`}
           >
             <a
               href={getDocURL(version, path)}
-              class={tw`text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out float-right ${
-                path.split("/").length === 2 ? "mt-11" : "mt-9"
-              } mr-4`}
+              class={tw`float-right py-2.5 px-4.5 rounded-md bg-[#F3F3F3] leading-none font-medium`}
             >
-              <span class={tw`sr-only`}>GitHub</span>
-              <Icons.GitHub class="inline" />
+              Edit
             </a>
 
             <Markdown
@@ -145,8 +141,8 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
               baseUrl={sourceURL}
             />
 
-            <div class={tw`mt-4 pt-4 border-t border-gray-200`}>
-              {pageList[pageIndex - 1] !== undefined && (
+            <div class={tw`mt-14`}>
+              {pageList[pageIndex - 1] && (
                 <a
                   href={params.version
                     ? pageList[pageIndex - 1].path.replace(
@@ -154,12 +150,16 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                       `manual@${version}`,
                     )
                     : pageList[pageIndex - 1].path}
-                  class={tw`text-gray-900 hover:text-gray-600 font-normal`}
+                  class={tw`font-normal inline-flex items-center px-4 py-3 rounded-lg border border-dark-border gap-4`}
                 >
-                  ← {pageList[pageIndex - 1].name}
+                  <Icons.ThinArrowRight class={tw`rotate-180`} />
+                  <div>
+                    <span class={tw`block text-sm leading-none text-[#9CA0AA]`}>Prev</span>
+                    <span class={tw`block font-medium`}>{pageList[pageIndex - 1].name}</span>
+                  </div>
                 </a>
               )}
-              {pageList[pageIndex + 1] !== undefined && (
+              {pageList[pageIndex + 1] && (
                 <a
                   href={params.version
                     ? pageList[pageIndex + 1].path.replace(
@@ -167,15 +167,21 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                       `manual@${version}`,
                     )
                     : pageList[pageIndex + 1].path}
-                  class={tw`text-gray-900 hover:text-gray-600 font-normal float-right`}
+                  class={tw`font-normal inline-flex items-center px-4 py-3 rounded-lg border border-dark-border gap-4 float-right text-right`}
                 >
-                  {pageList[pageIndex + 1].name} →
+                  <div>
+                    <span class={tw`block text-sm leading-none text-[#9CA0AA]`}>Prev</span>
+                    <span class={tw`block font-medium`}>{pageList[pageIndex + 1].name}</span>
+                  </div>
+                  <Icons.ThinArrowRight />
                 </a>
               )}
             </div>
           </div>
         </main>
       </div>
+
+      <Footer />
 
       <script
         dangerouslySetInnerHTML={{
@@ -232,11 +238,11 @@ function ToC({
   path: string;
 }) {
   return (
-    <nav class={tw`pt-2 pb-8 px-4`}>
+    <nav>
       <ol class={tw`list-decimal list-inside font-semibold nested`}>
         {Object.entries(tableOfContents).map(([slug, entry]) => {
           return (
-            <li key={slug} class={tw`my-2`}>
+            <li key={slug} class={tw`pl-3 py-2 rounded-md ${path === `/${slug}` ? "bg-ultralight" : ""}`}>
               <a
                 href={`/manual${version ? `@${version}` : ""}/${slug}`}
                 class={tw`${
@@ -253,7 +259,7 @@ function ToC({
                     (
                       [childSlug, name],
                     ) => (
-                      <li key={`${slug}/${childSlug}`} class={tw`my-0.5`}>
+                      <li key={`${slug}/${childSlug}`} class={tw`pl-3 py-2 rounded-md ${path === `/${slug}/${childSlug}` ? "bg-ultralight" : ""}`}>
                         <a
                           href={`/manual${
                             version ? `@${version}` : ""

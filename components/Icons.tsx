@@ -287,10 +287,10 @@ export function WarningTriangle() {
   );
 }
 
-export function ThinArrowRight() {
+export function ThinArrowRight(props: { class?: string }) {
   return (
     <svg
-      class={tw`w-5 h-5 text-gray-500`}
+      class={tw`w-5 h-5 text-gray-500 ${props.class ?? ""}`}
       fill="none"
       strokeLinecap="round"
       strokeLinejoin="round"
