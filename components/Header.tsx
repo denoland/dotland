@@ -34,7 +34,9 @@ export function Header({
           : "",
       )}
     >
-      <div class={tw`section-x-inset-xl py-5.5`}>
+      <div
+        class={tw`section-x-inset-xl py-5.5`}
+      >
         <nav class={tw`flex justify-between flex-col lg:flex-row`}>
           <input
             type="checkbox"
@@ -61,7 +63,7 @@ export function Header({
 
             <label
               tabIndex={0}
-              class={tw`lg:hidden checked:bg-red-100  ${
+              class={tw`lg:hidden ${
                 css({
                   "touch-action": "manipulation",
                 })
