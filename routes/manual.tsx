@@ -101,7 +101,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
           </label>
 
           <div
-            class={tw`hidden w-full bg-gray-50 top-0 flex-shrink-0 overflow-y-auto flex-col border-y border-gray-200 lg:(block w-72 border-0 border-r h-screen)`}
+            class={tw`hidden w-full bg-gray-50 top-0 flex-shrink-0 overflow-y-auto flex-col border-y border-gray-200 lg:(block sticky w-72 border-0 border-r h-screen)`}
           >
             <div class={tw`bg-gray-100 p-4 border-b border-gray-200`}>
               <VersionSelect
