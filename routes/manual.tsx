@@ -84,7 +84,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
       </Head>
       <Header selected="Manual" />
 
-      <div class={tw`flex flex-col gap-12 lg:flex-row section-x-inset-xl mt-12 mb-16`}>
+      <div class={tw`flex flex-col items-start gap-12 lg:flex-row section-x-inset-xl mt-12 mb-16`}>
         <div>
           <input
             type="checkbox"
