@@ -113,6 +113,13 @@ export function Header({
               <span class={tw`sr-only`}>GitHub</span>
               <Icons.GitHub class="inline" />
             </a>
+            <a
+              href="https://discord.gg/deno"
+              class={tw`lg:ml-5 my-auto hidden lg:block`}
+            >
+              <span class={tw`sr-only`}>Discord</span>
+              <Icons.Discord class="inline" />
+            </a>
           </div>
         </nav>
       </div>
