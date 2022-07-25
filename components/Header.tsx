@@ -22,11 +22,9 @@ const entries = [
 export function Header({
   selected,
   main,
-  manual,
 }: {
   selected?: (typeof entries)[number]["content"];
   main?: boolean;
-  manual?: boolean;
 }) {
   return (
     <div
@@ -37,9 +35,7 @@ export function Header({
       )}
     >
       <div
-        class={tw`section-x-inset-xl py-5.5 ${
-          manual ? "mx-0! max-w-none!" : ""
-        }`}
+        class={tw`section-x-inset-xl py-5.5`}
       >
         <nav class={tw`flex justify-between flex-col lg:flex-row`}>
           <input
