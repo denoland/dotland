@@ -177,15 +177,18 @@ export default function AddModule() {
                 </span>
               </span>
             </div>
-            <button
-              class={tw`rounded p-1.5 border border-[#D2D2DC]`}
-              onClick={() =>
-                navigator.clipboard.writeText(
-                  "https://api.deno.land/webhook/gh/" + urlValue,
-                )}
-            >
-              <Icons.Copy />
-            </button>
+            {available &&
+              (
+                <button
+                  class={tw`rounded p-1.5 border border-[#D2D2DC]`}
+                  onClick={() =>
+                    navigator.clipboard.writeText(
+                      "https://api.deno.land/webhook/gh/" + urlValue,
+                    )}
+                >
+                  <Icons.Copy />
+                </button>
+              )}
           </div>
 
           {registered
