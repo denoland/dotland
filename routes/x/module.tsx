@@ -421,7 +421,7 @@ export const handler: Handlers<MaybeData> = {
       return resp;
     }
 
-    const ln = extractAltLineNumberReference(url.href);
+    const ln = extractAltLineNumberReference(url.pathname);
     if (ln) {
       url.pathname = ln.rest;
       url.searchParams.set("code", "");
