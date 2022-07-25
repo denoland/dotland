@@ -23,16 +23,26 @@ export default function AddModule() {
   const [registered, setRegistered] = useState(false);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     (async () => {
       if (name === "" || !NAME_REGEX.test(name)) {
         setAvailable(false);
       } else {
-        await getVersionList(name)
+        await getVersionList(name, controller.signal)
           .then((e) => !e)
           .catch(() => false)
-          .then(setAvailable);
+          .then((e) => {
+            if (controller.signal.aborted) {
+              return;
+            }
+
+            setAvailable(e);
+          });
       }
     })();
+
+    return () => controller.abort();
   }, [name]);
 
   useEffect(() => {
