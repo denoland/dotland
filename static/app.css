@@ -1,14 +1,6 @@
 /* Copyright 2022 the Deno authors. All rights reserved. MIT license. */
 
-html {
-	scroll-behavior: smooth;
-}
-
 /* Manual */
-
-#manualSidebarToggle:checked + #manualSidebar {
-	display: block;
-}
 
 ol.nested {
 	counter-reset: item;

@@ -5,6 +5,9 @@ import { css } from "twind/css";
 export { css };
 
 export const config: Configuration = {
+  preflight: {
+    body: apply`text-default scroll-smooth`,
+  },
   darkMode: "class",
   //mode: "silent",
   theme: {

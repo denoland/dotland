@@ -84,7 +84,9 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
       </Head>
       <Header selected="Manual" />
 
-      <div class={tw`flex flex-col items-start gap-12 lg:flex-row section-x-inset-xl mt-12 mb-16`}>
+      <div
+        class={tw`flex flex-col items-start gap-12 lg:flex-row section-x-inset-xl mt-12 mb-16`}
+      >
         <div>
           <input
             type="checkbox"
@@ -154,8 +156,12 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                 >
                   <Icons.ThinArrowRight class={tw`rotate-180`} />
                   <div>
-                    <span class={tw`block text-sm leading-none text-[#9CA0AA]`}>Prev</span>
-                    <span class={tw`block font-medium`}>{pageList[pageIndex - 1].name}</span>
+                    <span class={tw`block text-sm leading-none text-[#9CA0AA]`}>
+                      Prev
+                    </span>
+                    <span class={tw`block font-medium`}>
+                      {pageList[pageIndex - 1].name}
+                    </span>
                   </div>
                 </a>
               )}
@@ -170,8 +176,12 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                   class={tw`font-normal inline-flex items-center px-4 py-3 rounded-lg border border-dark-border gap-4 float-right text-right`}
                 >
                   <div>
-                    <span class={tw`block text-sm leading-none text-[#9CA0AA]`}>Prev</span>
-                    <span class={tw`block font-medium`}>{pageList[pageIndex + 1].name}</span>
+                    <span class={tw`block text-sm leading-none text-[#9CA0AA]`}>
+                      Prev
+                    </span>
+                    <span class={tw`block font-medium`}>
+                      {pageList[pageIndex + 1].name}
+                    </span>
                   </div>
                   <Icons.ThinArrowRight />
                 </a>
@@ -242,32 +252,40 @@ function ToC({
       <ol class={tw`list-decimal list-inside font-semibold nested`}>
         {Object.entries(tableOfContents).map(([slug, entry]) => {
           return (
-            <li key={slug} class={tw`pl-3 py-2 rounded-md ${path === `/${slug}` ? "bg-ultralight" : ""}`}>
+            <li
+              key={slug}
+              class={tw`pl-3 py-2 rounded-md ${
+                path === `/${slug}`
+                  ? "text-tag-blue hover:text-blue-500 bg-ultralight"
+                  : "hover:text-gray-600"
+              }`}
+            >
               <a
                 href={`/manual${version ? `@${version}` : ""}/${slug}`}
-                class={tw`${
-                  path === `/${slug}`
-                    ? "text-blue-600 hover:text-blue-500 toc-active"
-                    : "text-gray-900 hover:text-gray-600"
-                } font-bold`}
+                class={tw`${path === `/${slug}` ? "toc-active" : ""} font-bold`}
               >
                 {entry.name}
               </a>
               {entry.children && (
-                <ol class={tw`pl-4 list-decimal nested`}>
+                <ol class={tw`list-decimal font-normal nested`}>
                   {Object.entries(entry.children).map(
                     (
                       [childSlug, name],
                     ) => (
-                      <li key={`${slug}/${childSlug}`} class={tw`pl-3 py-2 rounded-md ${path === `/${slug}/${childSlug}` ? "bg-ultralight" : ""}`}>
+                      <li
+                        key={`${slug}/${childSlug}`}
+                        class={tw`pl-8 py-1 rounded-md ${
+                          path === `/${slug}/${childSlug}`
+                            ? "text-tag-blue hover:text-blue-500 bg-ultralight"
+                            : "hover:text-gray-600"
+                        }`}
+                      >
                         <a
                           href={`/manual${
                             version ? `@${version}` : ""
                           }/${slug}/${childSlug}`}
                           class={tw`${
-                            path === `/${slug}/${childSlug}`
-                              ? "text-blue-600 hover:text-blue-500 toc-active"
-                              : "text-gray-900 hover:text-gray-600"
+                            path === `/${slug}/${childSlug}` ? "toc-active" : ""
                           } font-normal`}
                         >
                           {name}
