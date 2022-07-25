@@ -108,6 +108,7 @@ export default function GlobalSearch() {
         query: input,
         params: {
           hitsPerPage: kind === "All" ? 5 : 10,
+          attributesToRetrieve: ["anchor", "url", "content", "hierarchy"],
         },
       });
     }
