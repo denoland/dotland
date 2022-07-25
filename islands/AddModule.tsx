@@ -40,11 +40,16 @@ export default function AddModule() {
       return;
     }
 
+    const controller = new AbortController();
+
     const id = setInterval(async () => {
-      await getVersionList(name)
+      await getVersionList(name, controller.signal)
         .then((e) => !!e)
         .catch(() => false)
         .then((registered) => {
+          if (controller.signal.aborted) {
+            return;
+          }
           setRegistered(registered);
           if (registered) {
             confetti.create(confettiRef.current!, {
@@ -63,7 +68,10 @@ export default function AddModule() {
         });
     }, 500);
 
-    return () => clearInterval(id);
+    return () => {
+      controller.abort();
+      clearInterval(id);
+    }
   }, [available, name]);
 
   return (

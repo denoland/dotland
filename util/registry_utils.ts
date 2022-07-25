@@ -322,12 +322,14 @@ export interface VersionInfo {
 
 export async function getVersionList(
   module: string,
+  signal?: AbortSignal,
 ): Promise<VersionInfo | null> {
   const url = `${CDN_ENDPOINT}${module}/meta/versions.json`;
   const res = await fetch(url, {
     headers: {
       accept: "application/json",
     },
+    signal,
   });
   if (res.status === 403 || res.status === 404) {
     await res.body?.cancel();
