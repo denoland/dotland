@@ -8,7 +8,7 @@ ol.nested {
 ol.nested li {
 	display: block;
 }
-ol.nested li:before {
+ol.nested li > a:before {
 	font-feature-settings: "kern" 1, "tnum" 1;
 	-webkit-font-feature-settings: "kern" 1, "tnum" 1;
 	-ms-font-feature-settings: "kern" 1, "tnum" 1;

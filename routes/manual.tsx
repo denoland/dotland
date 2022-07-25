@@ -252,17 +252,10 @@ function ToC({
       <ol class={tw`list-decimal list-inside font-semibold nested`}>
         {Object.entries(tableOfContents).map(([slug, entry]) => {
           return (
-            <li
-              key={slug}
-              class={tw`pl-3 py-2 rounded-md ${
-                path === `/${slug}`
-                  ? "text-tag-blue hover:text-blue-500 bg-ultralight"
-                  : "hover:text-gray-600"
-              }`}
-            >
+            <li key={slug}>
               <a
                 href={`/manual${version ? `@${version}` : ""}/${slug}`}
-                class={tw`${path === `/${slug}` ? "toc-active" : ""} font-bold`}
+                class={tw`pl-3 py-2 rounded-md block ${path === `/${slug}` ? "link bg-ultralight toc-active" : "hover:text-gray-600"} font-bold`}
               >
                 {entry.name}
               </a>
@@ -272,21 +265,10 @@ function ToC({
                     (
                       [childSlug, name],
                     ) => (
-                      <li
-                        key={`${slug}/${childSlug}`}
-                        class={tw`pl-8 py-1 rounded-md ${
-                          path === `/${slug}/${childSlug}`
-                            ? "text-tag-blue hover:text-blue-500 bg-ultralight"
-                            : "hover:text-gray-600"
-                        }`}
-                      >
+                      <li key={`${slug}/${childSlug}`}>
                         <a
-                          href={`/manual${
-                            version ? `@${version}` : ""
-                          }/${slug}/${childSlug}`}
-                          class={tw`${
-                            path === `/${slug}/${childSlug}` ? "toc-active" : ""
-                          } font-normal`}
+                          href={`/manual${version ? `@${version}` : ""}/${slug}/${childSlug}`}
+                          class={tw`pl-8 py-1 rounded-md block ${path === `/${slug}/${childSlug}` ? "link bg-ultralight toc-active" : "hover:text-gray-600"} font-normal`}
                         >
                           {name}
                         </a>
