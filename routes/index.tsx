@@ -434,12 +434,8 @@ function InstallSection({ url }: { url: URL }) {
       <p class={tw`py-2`}>Shell (Mac, Linux):</p>
       <CodeBlock
         language="bash"
-<<<<<<< HEAD
         code="curl -fsSL https://x.deno.js.cn/install.sh | sh"
-=======
-        code="curl -fsSL https://deno.land/install.sh | sh"
         url={url}
->>>>>>> 4a43445e76ab76dc42cba28bd99fb069e8b1fd86
       />
     </div>
   );
@@ -459,12 +455,8 @@ function InstallSection({ url }: { url: URL }) {
       <p class={tw`mb-2`}>PowerShell (Windows):</p>
       <CodeBlock
         language="bash"
-<<<<<<< HEAD
         code="iwr https://x.deno.js.cn/install.ps1 -useb | iex"
-=======
-        code="iwr https://deno.land/install.ps1 -useb | iex"
         url={url}
->>>>>>> 4a43445e76ab76dc42cba28bd99fb069e8b1fd86
       />
     </div>
   );
