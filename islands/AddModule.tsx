@@ -71,7 +71,7 @@ export default function AddModule() {
     return () => {
       controller.abort();
       clearInterval(id);
-    }
+    };
   }, [available, name]);
 
   return (
