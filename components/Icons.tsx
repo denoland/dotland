@@ -1,7 +1,6 @@
 /** @jsx h */
 import { h } from "preact";
 import { tw } from "@twind";
-export * from "$doc_components/Icons.tsx";
 
 export function GitHub(props: { class?: string }) {
   return (
@@ -153,31 +152,55 @@ export function Cross(props: { class?: string }) {
 export function ArrowLeft() {
   return (
     <svg
-      class={tw`h-5 w-5`}
-      viewBox="0 0 20 20"
-      fill="currentColor"
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        fillRule="evenodd"
-        d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-        clipRule="evenodd"
+        d="M9.5 2L4.5 7L9.5 12"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       />
     </svg>
   );
 }
 
-export function ArrowRight() {
+export function ArrowRight(props: { class?: string }) {
   return (
     <svg
-      class={tw`h-5 w-5`}
-      viewBox="0 0 20 20"
-      fill="currentColor"
+      class={tw(props.class ?? "")}
+      xmlns="http://www.w3.org/2000/svg"
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+      fill="none"
     >
       <path
-        fillRule="evenodd"
-        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-        clipRule="evenodd"
+        d="M4.5 12L9.5 7L4.5 2"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       />
+    </svg>
+  );
+}
+
+export function TriangleRight(props: { class?: string }) {
+  return (
+    <svg
+      class={tw(props.class ?? "")}
+      xmlns="http://www.w3.org/2000/svg"
+      width="10"
+      height="10"
+      viewBox="0 0 10 10"
+      fill="none"
+    >
+      <path d="M2.5 10L7.5 5L2.5 0V10Z" fill="currentColor" />
     </svg>
   );
 }
@@ -207,18 +230,17 @@ export function Instagram() {
   );
 }
 
-export function MagnifyingGlass() {
+export function MagnifyingGlass(props: { class?: string }) {
   return (
     <svg
-      class={tw`h-5 w-5`}
+      class={tw`h-5 w-5 ${props.class ?? ""}`}
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
       fill="currentColor"
-      viewBox="0 0 20 20"
     >
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-      />
+      <path d="M14.2716 13.1684L11.3313 10.2281C12.0391 9.28573 12.4213 8.13865 12.42 6.96C12.42 3.94938 9.97062 1.5 6.96 1.5C3.94938 1.5 1.5 3.94938 1.5 6.96C1.5 9.97062 3.94938 12.42 6.96 12.42C8.13865 12.4213 9.28573 12.0391 10.2281 11.3313L13.1684 14.2716C13.3173 14.4046 13.5114 14.4756 13.711 14.47C13.9105 14.4645 14.1004 14.3827 14.2415 14.2415C14.3827 14.1004 14.4645 13.9105 14.47 13.711C14.4756 13.5114 14.4046 13.3173 14.2716 13.1684ZM3.06 6.96C3.06 6.18865 3.28873 5.43463 3.71727 4.79328C4.14581 4.15192 4.7549 3.65205 5.46753 3.35687C6.18017 3.06169 6.96433 2.98446 7.72085 3.13494C8.47738 3.28542 9.17229 3.65686 9.71772 4.20228C10.2631 4.74771 10.6346 5.44262 10.7851 6.19915C10.9355 6.95567 10.8583 7.73983 10.5631 8.45247C10.2679 9.1651 9.76808 9.77419 9.12672 10.2027C8.48537 10.6313 7.73135 10.86 6.96 10.86C5.92604 10.8588 4.93478 10.4475 4.20365 9.71635C3.47253 8.98522 3.06124 7.99396 3.06 6.96Z" />
     </svg>
   );
 }
@@ -283,22 +305,6 @@ export function WarningTriangle() {
       stroke="currentColor"
     >
       <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-    </svg>
-  );
-}
-
-export function ThinArrowRight() {
-  return (
-    <svg
-      class={tw`w-5 h-5 text-gray-500`}
-      fill="none"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path d="M9 5l7 7-7 7" />
     </svg>
   );
 }

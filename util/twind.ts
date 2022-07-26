@@ -1,10 +1,13 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { apply, Configuration, cssomSheet, setup, Sheet } from "twind";
+import { apply, Configuration, setup as twSetup, Sheet } from "twind";
 export * from "twind";
 import { css } from "twind/css";
 export { css };
 
 export const config: Configuration = {
+  preflight: {
+    body: apply`text-default scroll-smooth`,
+  },
   darkMode: "class",
   //mode: "silent",
   theme: {
@@ -56,10 +59,12 @@ export const config: Configuration = {
     },
   },
   plugins: {
-    link: apply
-      `text-[#056CF0] transition duration-75 ease-in-out hover:text-blue-500`,
+    link:
+      apply`text-[#056CF0] transition duration-75 ease-in-out hover:text-blue-500`,
     "section-x-inset": (parts) =>
-      apply`max-w-screen-${parts[0]} mx-auto px-4 sm:px-6 md:px-8`,
+      parts[0] === "none"
+        ? apply`max-w-none mx-0 px-0`
+        : apply`max-w-screen-${parts[0]} mx-auto px-4 sm:px-6 md:px-8`,
     "form-select-bg": css({
       "background-image":
         `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3e%3cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke='%239fa6b2' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e")`,
@@ -67,6 +72,8 @@ export const config: Configuration = {
       "background-size": "1.5em 1.5em",
       "background-repeat": "no-repeat",
     }),
+    "symbolKind":
+      apply`rounded-full w-6 h-6 inline-flex items-center justify-center font-medium text-xs leading-none flex-shrink-0`,
   },
 };
 
@@ -76,12 +83,14 @@ if (IS_BROWSER) {
   const mappings = JSON.parse(rules.pop()!.slice(2, -2));
   const precedences = JSON.parse(rules.pop()!.slice(2, -2));
   const state = [precedences, new Set(rules), new Map(mappings), true];
+  const target = el.sheet!;
   const sheet: Sheet = {
-    ...cssomSheet({ target: el.sheet! }),
+    target,
+    insert: (rule, index) => target.insertRule(rule, index),
     init(cb) {
       return cb(state.shift());
     },
   };
   config.sheet = sheet;
-  setup(config);
+  twSetup(config);
 }
