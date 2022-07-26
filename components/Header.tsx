@@ -34,7 +34,9 @@ export function Header({
           : "",
       )}
     >
-      <div class={tw`section-x-inset-xl py-5.5`}>
+      <div
+        class={tw`section-x-inset-xl py-5.5`}
+      >
         <nav class={tw`flex justify-between flex-col lg:flex-row`}>
           <input
             type="checkbox"
@@ -61,7 +63,7 @@ export function Header({
 
             <label
               tabIndex={0}
-              class={tw`lg:hidden checked:bg-red-100  ${
+              class={tw`lg:hidden ${
                 css({
                   "touch-action": "manipulation",
                 })
@@ -110,6 +112,13 @@ export function Header({
             >
               <span class={tw`sr-only`}>GitHub</span>
               <Icons.GitHub class="inline" />
+            </a>
+            <a
+              href="https://discord.gg/deno"
+              class={tw`lg:ml-5 my-auto hidden lg:block`}
+            >
+              <span class={tw`sr-only`}>Discord</span>
+              <Icons.Discord class="inline" />
             </a>
           </div>
         </nav>
