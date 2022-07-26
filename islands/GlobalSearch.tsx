@@ -23,7 +23,7 @@ if (IS_BROWSER && window.HTMLDialogElement === "undefined") {
 const kinds = [
   "All",
   "Manual",
-  //"Modules",
+  "Modules",
   "Symbols",
 ] as const;
 
@@ -44,6 +44,12 @@ interface ManualSearchResult {
   content: string;
 }
 
+interface ModuleSearchResult {
+  name: string;
+  description: string;
+  content: string;
+}
+
 /** Search Deno documentation, symbols, or modules. */
 export default function GlobalSearch() {
   const [showModal, setShowModal] = useState(false);
@@ -51,7 +57,7 @@ export default function GlobalSearch() {
 
   const [results, setResults] = useState<{
     manual?: Array<ManualSearchResult>;
-    modules?: Array<unknown>;
+    modules?: Array<ModuleSearchResult>;
     symbols?: Array<DocNode>;
   }>({});
   const [kind, setKind] = useState<typeof kinds[number]>("All");
@@ -122,6 +128,16 @@ export default function GlobalSearch() {
       });
     }
 
+    if (kind === "Modules" || kind === "All") {
+      queries.push({
+        indexName: "modules",
+        query: input,
+        params: {
+          hitsPerPage: kind === "All" ? 5 : 10,
+        },
+      });
+    }
+
     client.multipleQueries(queries).then(
       ({ results }) => {
         setResults({
@@ -129,6 +145,8 @@ export default function GlobalSearch() {
           manual: results.find((res) => res.index === "deno_manual")?.hits,
           // @ts-ignore algolia typings are annoying
           symbols: results.find((res) => res.index === "deno_modules")?.hits,
+          // @ts-ignore algolia typings are annoying
+          modules: results.find((res) => res.index === "modules")?.hits,
         });
       },
     );
@@ -234,6 +252,18 @@ export default function GlobalSearch() {
                   </div>
                 )}
                 {results.symbols.map((doc) => <SymbolResult doc={doc} />)}
+              </Section>
+            )}
+            {results.modules && (
+              <Section title="Modules" isAll={kind === "All"}>
+                {results.modules && results.modules.length === 0 && (
+                  <div class={tw`text-gray-500 italic`}>
+                    Your search did not yield any results in the symbol index.
+                  </div>
+                )}
+                {results.modules.map((module) => (
+                  <ModuleResult module={module} />
+                ))}
               </Section>
             )}
             <div class={tw`${kind === "All" ? "h-6" : "h-3.5"}`} />
@@ -359,6 +389,19 @@ function SymbolResult({ doc }: { doc: DocNode }) {
             {doc.jsDoc.doc.split("\n")[0]}
           </div>
         )}
+      </div>
+    </a>
+  );
+}
+
+function ModuleResult({ module }: { module: ModuleSearchResult }) {
+  return (
+    <a href={`https://deno.land/x/${module.name}`} class={tw`block`}>
+      <div class={tw`font-semibold`}>{module.name}</div>
+      <div
+        class={tw`text-sm text-[#6C6E78] max-h-10 overflow-ellipsis overflow-hidden`}
+      >
+        {module.description}
       </div>
     </a>
   );
