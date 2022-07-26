@@ -89,48 +89,35 @@ export default function GlobalSearch() {
   });
 
   useEffect(() => {
-    if (input === "") {
-      setResults({
-        manual: [
-          {
-            anchor: "introduction",
-            url: "https://deno.land/manual#introduction",
-            hierarchy: { lvl0: "Manual", lvl1: "Introduction" },
-            content:
-              "Deno (/ˈdiːnoʊ/, pronounced dee-no) is a JavaScript, TypeScript, and WebAssembly runtime with secure defaults and a great developer experience.",
-          },
-        ],
-        symbols: undefined,
-      });
-      return;
-    }
+    if (!showModal) return;
 
     const queries = [];
 
     if (kind === "Manual" || kind === "All") {
       queries.push({
         indexName: "deno_manual",
-        query: input,
+        query: input || "Introduction",
         params: {
           hitsPerPage: kind === "All" ? 5 : 10,
           attributesToRetrieve: ["anchor", "url", "content", "hierarchy"],
+          filters: "type:content",
         },
       });
     }
 
-    // if (kind === "Symbols" || kind === "All") {
-    //   queries.push({
-    //     indexName: "deno_modules",
-    //     query: input,
-    //     params: {
-    //       hitsPerPage: kind === "All" ? 5 : 10,
-    //       filters: Object.entries(symbolKindsToggle)
-    //         .filter(([_, v]) => kind === "Symbols" ? v : true)
-    //         .map(([k]) => "kind:" + symbolKinds[k as keyof typeof symbolKinds])
-    //         .join(" OR "),
-    //     },
-    //   });
-    // }
+    if (kind === "Symbols" || kind === "All") {
+      queries.push({
+        indexName: "deno_modules",
+        query: input || "serve",
+        params: {
+          hitsPerPage: kind === "All" ? 5 : 10,
+          filters: Object.entries(symbolKindsToggle)
+            .filter(([_, v]) => kind === "Symbols" ? v : true)
+            .map(([k]) => "kind:" + symbolKinds[k as keyof typeof symbolKinds])
+            .join(" OR "),
+        },
+      });
+    }
 
     client.multipleQueries(queries).then(
       ({ results }) => {
@@ -142,7 +129,11 @@ export default function GlobalSearch() {
         });
       },
     );
-  }, [input, kind, symbolKindsToggle]);
+  }, [showModal, input, kind, symbolKindsToggle]);
+
+  useEffect(() => {
+    if (showModal) document.getElementById("search-input")?.focus();
+  }, [showModal]);
 
   return (
     <>
@@ -175,11 +166,12 @@ export default function GlobalSearch() {
           <div class={tw`pt-6 px-6 border-b border-[#E8E7E5]`}>
             <div class={tw`flex`}>
               <label
-                class={tw`pl-4 h-10 w-full flex-shrink-1 bg-[#F3F3F3] rounded-md flex items-center text-light group`}
+                class={tw`pl-4 h-10 w-full flex-shrink-1 bg-[#F3F3F3] rounded-md flex items-center text-light focus-within:outline-black`}
               >
                 <Icons.MagnifyingGlass />
                 <input
-                  class={tw`ml-1.5 py-3 leading-4 bg-transparent w-full text-main placeholder:text-[#9CA0AA]`}
+                  id="search-input"
+                  class={tw`ml-1.5 py-3 leading-4 bg-transparent w-full text-main placeholder:text-[#9CA0AA] outline-none`}
                   type="text"
                   onInput={(e) => setInput(e.currentTarget.value)}
                   value={input}
@@ -198,7 +190,7 @@ export default function GlobalSearch() {
 
             <div class={tw`flex gap-3 mt-2`}>
               {kinds.map((k) => (
-                <div
+                <button
                   class={tw`px-2 rounded-md leading-relaxed hover:(bg-gray-100 text-main) ${
                     // TODO: use border instead
                     k === kind
@@ -211,7 +203,7 @@ export default function GlobalSearch() {
                   onClick={() => setKind(k)}
                 >
                   {k}
-                </div>
+                </button>
               ))}
             </div>
           </div>
@@ -219,11 +211,21 @@ export default function GlobalSearch() {
           <div class={tw`overflow-y-auto flex-grow-1`}>
             {results.manual && (
               <Section title="Manual" isAll={kind === "All"}>
+                {results.manual && results.manual.length === 0 && (
+                  <div class={tw`text-gray-500 italic`}>
+                    Your search did not yield any results in the manual.
+                  </div>
+                )}
                 {results.manual.map((res) => <ManualResult {...res} />)}
               </Section>
             )}
             {results.symbols && (
               <Section title="Symbols" isAll={kind === "All"}>
+                {results.symbols && results.symbols.length === 0 && (
+                  <div class={tw`text-gray-500 italic`}>
+                    Your search did not yield any results in the symbol index.
+                  </div>
+                )}
                 {results.symbols.map((doc) => <SymbolResult doc={doc} />)}
               </Section>
             )}
@@ -298,14 +300,13 @@ function ManualResult({ hierarchy, url, content }: ManualSearchResult) {
     if (id === "lvl0" || !entry) continue;
     title.push(entry);
   }
-  console.log(title, hierarchy);
   return (
     <a href={url} class={tw`block`}>
       <div>
         <ManualResultTitle title={title} />
       </div>
       <div
-        class={tw`text-sm text-[#6C6E78] h-10 overflow-ellipsis overflow-hidden`}
+        class={tw`text-sm text-[#6C6E78] max-h-10 overflow-ellipsis overflow-hidden`}
       >
         {content}
       </div>
@@ -331,9 +332,9 @@ function SymbolResult({ doc }: { doc: DocNode }) {
   let location = new URL(doc.location.filename).pathname;
   location = location.replace(/^(\/x\/)|\//, "");
   const KindIcon = docNodeKindMap[doc.kind];
-
+  const href = `${doc.location.filename}?s=${doc.name}`;
   return (
-    <a href={doc.location.filename} class={tw`flex items-center gap-4`}>
+    <a href={href} class={tw`flex items-center gap-4`}>
       <KindIcon />
       <div>
         <div class={tw`space-x-2 py-1`}>
