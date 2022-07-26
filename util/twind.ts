@@ -62,7 +62,9 @@ export const config: Configuration = {
     link:
       apply`text-[#056CF0] transition duration-75 ease-in-out hover:text-blue-500`,
     "section-x-inset": (parts) =>
-      apply`max-w-screen-${parts[0]} mx-auto px-4 sm:px-6 md:px-8`,
+      parts[0] === "none"
+        ? apply`max-w-none mx-0 px-0`
+        : apply`max-w-screen-${parts[0]} mx-auto px-4 sm:px-6 md:px-8`,
     "form-select-bg": css({
       "background-image":
         `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3e%3cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke='%239fa6b2' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e")`,

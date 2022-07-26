@@ -82,113 +82,126 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
         </title>
         <link rel="canonical" href={`https://deno.land/manual${path}`} />
       </Head>
-      <Header selected="Manual" />
+      <Header selected="Manual" manual />
 
-      <div
-        class={tw`flex flex-col items-start gap-12 lg:flex-row section-x-inset-xl mt-12 mb-16`}
-      >
-        <div>
-          <input
-            type="checkbox"
-            id="ToCToggle"
-            class={tw`hidden checked:siblings:flex checked:sibling:(border-0 children:first-child:rotate-90)`}
-            autoComplete="off"
-          />
+      <div>
+        <input
+          type="checkbox"
+          id="ToCToggle"
+          class={tw`hidden checked:siblings:last-child:children:first-child:flex checked:sibling:(border-0 children:children:first-child:rotate-90)`}
+          autoComplete="off"
+        />
 
-          <label
-            htmlFor="ToCToggle"
-            class={tw`lg:hidden ml-3.5 py-2 px-1.5 flex items-center gap-2 font-medium border-b border-gray-200`}
-          >
+        <label
+          htmlFor="ToCToggle"
+          class={tw`lg:hidden block pl-5 py-2.5 font-medium border-b border-dark-border`}
+        >
+          <div class={tw`flex gap-2 items-center px-1.5`}>
             <Icons.ThinArrowRight />
             Menu
-          </label>
-
-          <div
-            class={tw`hidden w-full flex-shrink-0 overflow-y-auto flex-col gap-4 lg:(flex w-72 h-min)`}
-          >
-            <VersionSelect
-              versions={Object.fromEntries(
-                versions.map((ver) => [ver, `/manual@${ver}${path}`]),
-              )}
-              selectedVersion={version}
-            />
-            <ToC
-              tableOfContents={data.tableOfContents}
-              version={params.version}
-              path={path}
-            />
           </div>
-        </div>
+        </label>
 
-        <main class={tw`focus:outline-none w-full flex flex-col`} tabIndex={0}>
-          {isPreview && (
-            <UserContributionBanner
-              href={new URL(`/manual/${params.path}`, url).href}
-            />
-          )}
+        <div
+          class={tw`flex flex-col lg:(flex-row gap-12 section-x-inset-xl) mb-16`}
+        >
           <div
-            class={tw`w-full justify-self-center flex-shrink-1`}
+            class={tw`hidden w-full border-b border-dark-border lg:(mt-8 sticky top-0 h-screen box-border border-none flex w-72 flex-shrink-0)`}
           >
-            <a
-              href={getDocURL(version, path)}
-              class={tw`float-right py-2.5 px-4.5 rounded-md bg-[#F3F3F3] leading-none font-medium`}
+            <div
+              class={tw`w-full flex-shrink-0 overflow-y-auto flex-col space-y-4 py-4 section-x-inset-xl lg:(flex section-x-inset-none)`}
             >
-              Edit
-            </a>
-
-            <Markdown
-              source={data.content
-                .replace(/\$STD_VERSION/g, stdVersion)
-                .replace(/\$CLI_VERSION/g, version)}
-              baseUrl={sourceURL}
-            />
-
-            <div class={tw`mt-14`}>
-              {pageList[pageIndex - 1] && (
-                <a
-                  href={params.version
-                    ? pageList[pageIndex - 1].path.replace(
-                      "manual",
-                      `manual@${version}`,
-                    )
-                    : pageList[pageIndex - 1].path}
-                  class={tw`font-normal inline-flex items-center px-4 py-3 rounded-lg border border-dark-border gap-4`}
-                >
-                  <Icons.ThinArrowRight class={tw`rotate-180`} />
-                  <div>
-                    <span class={tw`block text-sm leading-none text-[#9CA0AA]`}>
-                      Prev
-                    </span>
-                    <span class={tw`block font-medium`}>
-                      {pageList[pageIndex - 1].name}
-                    </span>
-                  </div>
-                </a>
-              )}
-              {pageList[pageIndex + 1] && (
-                <a
-                  href={params.version
-                    ? pageList[pageIndex + 1].path.replace(
-                      "manual",
-                      `manual@${version}`,
-                    )
-                    : pageList[pageIndex + 1].path}
-                  class={tw`font-normal inline-flex items-center px-4 py-3 rounded-lg border border-dark-border gap-4 float-right text-right`}
-                >
-                  <div>
-                    <span class={tw`block text-sm leading-none text-[#9CA0AA]`}>
-                      Prev
-                    </span>
-                    <span class={tw`block font-medium`}>
-                      {pageList[pageIndex + 1].name}
-                    </span>
-                  </div>
-                  <Icons.ThinArrowRight />
-                </a>
-              )}
+              <VersionSelect
+                versions={Object.fromEntries(
+                  versions.map((ver) => [ver, `/manual@${ver}${path}`]),
+                )}
+                selectedVersion={version}
+              />
+              <ToC
+                tableOfContents={data.tableOfContents}
+                version={params.version}
+                path={path}
+              />
             </div>
           </div>
-        </main>
+
+          <main
+            class={tw`focus:outline-none w-full flex flex-col mt-8 section-x-inset-xl lg:(mt-12 section-x-inset-none)`}
+            tabIndex={0}
+          >
+            {isPreview && (
+              <UserContributionBanner
+                href={new URL(`/manual/${params.path}`, url).href}
+              />
+            )}
+            <div
+              class={tw`w-full justify-self-center flex-shrink-1`}
+            >
+              <a
+                href={getDocURL(version, path)}
+                class={tw`float-right py-2.5 px-4.5 rounded-md bg-[#F3F3F3] leading-none font-medium`}
+              >
+                Edit
+              </a>
+
+              <Markdown
+                source={data.content
+                  .replace(/\$STD_VERSION/g, stdVersion)
+                  .replace(/\$CLI_VERSION/g, version)}
+                baseUrl={sourceURL}
+              />
+
+              <div class={tw`mt-14`}>
+                {pageList[pageIndex - 1] && (
+                  <a
+                    href={params.version
+                      ? pageList[pageIndex - 1].path.replace(
+                        "manual",
+                        `manual@${version}`,
+                      )
+                      : pageList[pageIndex - 1].path}
+                    class={tw`font-normal inline-flex items-center px-4 py-3 rounded-lg border border-dark-border gap-4`}
+                  >
+                    <Icons.ThinArrowRight class={tw`rotate-180`} />
+                    <div>
+                      <span
+                        class={tw`block text-sm leading-none text-[#9CA0AA]`}
+                      >
+                        Prev
+                      </span>
+                      <span class={tw`block font-medium`}>
+                        {pageList[pageIndex - 1].name}
+                      </span>
+                    </div>
+                  </a>
+                )}
+                {pageList[pageIndex + 1] && (
+                  <a
+                    href={params.version
+                      ? pageList[pageIndex + 1].path.replace(
+                        "manual",
+                        `manual@${version}`,
+                      )
+                      : pageList[pageIndex + 1].path}
+                    class={tw`font-normal inline-flex items-center px-4 py-3 rounded-lg border border-dark-border gap-4 float-right text-right`}
+                  >
+                    <div>
+                      <span
+                        class={tw`block text-sm leading-none text-[#9CA0AA]`}
+                      >
+                        Prev
+                      </span>
+                      <span class={tw`block font-medium`}>
+                        {pageList[pageIndex + 1].name}
+                      </span>
+                    </div>
+                    <Icons.ThinArrowRight />
+                  </a>
+                )}
+              </div>
+            </div>
+          </main>
+        </div>
       </div>
 
       <Footer />
@@ -255,7 +268,11 @@ function ToC({
             <li key={slug}>
               <a
                 href={`/manual${version ? `@${version}` : ""}/${slug}`}
-                class={tw`pl-3 py-2 rounded-md block ${path === `/${slug}` ? "link bg-ultralight toc-active" : "hover:text-gray-600"} font-bold`}
+                class={tw`pl-3 py-2 rounded-md block ${
+                  path === `/${slug}`
+                    ? "link bg-ultralight toc-active"
+                    : "hover:text-gray-600"
+                } font-bold`}
               >
                 {entry.name}
               </a>
@@ -267,8 +284,14 @@ function ToC({
                     ) => (
                       <li key={`${slug}/${childSlug}`}>
                         <a
-                          href={`/manual${version ? `@${version}` : ""}/${slug}/${childSlug}`}
-                          class={tw`pl-8 py-1 rounded-md block ${path === `/${slug}/${childSlug}` ? "link bg-ultralight toc-active" : "hover:text-gray-600"} font-normal`}
+                          href={`/manual${
+                            version ? `@${version}` : ""
+                          }/${slug}/${childSlug}`}
+                          class={tw`pl-8 py-1 rounded-md block ${
+                            path === `/${slug}/${childSlug}`
+                              ? "link bg-ultralight toc-active"
+                              : "hover:text-gray-600"
+                          } font-normal`}
                         >
                           {name}
                         </a>
