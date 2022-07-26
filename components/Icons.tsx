@@ -170,7 +170,7 @@ export function ArrowLeft() {
   );
 }
 
-export function ArrowRight(props: { class?: string; }) {
+export function ArrowRight(props: { class?: string }) {
   return (
     <svg
       class={tw(props.class ?? "")}
@@ -187,6 +187,21 @@ export function ArrowRight(props: { class?: string; }) {
         stroke-linecap="round"
         stroke-linejoin="round"
       />
+    </svg>
+  );
+}
+
+export function TriangleRight(props: { class?: string }) {
+  return (
+    <svg
+      class={tw(props.class ?? "")}
+      xmlns="http://www.w3.org/2000/svg"
+      width="10"
+      height="10"
+      viewBox="0 0 10 10"
+      fill="none"
+    >
+      <path d="M2.5 10L7.5 5L2.5 0V10Z" fill="currentColor" />
     </svg>
   );
 }

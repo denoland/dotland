@@ -103,13 +103,13 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
         </label>
 
         <div
-          class={tw`flex flex-col lg:(flex-row gap-12 section-x-inset-xl) mb-16`}
+          class={tw`flex flex-col mt-12 mb-16 lg:(flex-row gap-12 section-x-inset-xl)`}
         >
           <div
-            class={tw`hidden w-full border-b border-dark-border lg:(mt-8 sticky top-0 h-screen box-border border-none flex w-72 flex-shrink-0)`}
+            class={tw`hidden w-full border-b border-dark-border lg:(box-border border-none block w-72 flex-shrink-0)`}
           >
             <div
-              class={tw`w-full flex-shrink-0 overflow-y-auto flex-col space-y-4 py-4 section-x-inset-xl lg:(flex section-x-inset-none)`}
+              class={tw`w-full space-y-4 section-x-inset-xl lg:section-x-inset-none`}
             >
               <VersionSelect
                 versions={Object.fromEntries(
@@ -126,7 +126,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
           </div>
 
           <main
-            class={tw`focus:outline-none w-full flex flex-col mt-8 section-x-inset-xl lg:(mt-12 section-x-inset-none)`}
+            class={tw`focus:outline-none w-full flex flex-col section-x-inset-xl lg:section-x-inset-none`}
             tabIndex={0}
           >
             {isPreview && (
@@ -252,18 +252,32 @@ function ToC({
         {Object.entries(tableOfContents).map(([slug, entry]) => {
           return (
             <li key={slug}>
-              <a
-                href={`/manual${version ? `@${version}` : ""}/${slug}`}
-                class={tw`pl-3 py-2 rounded-md block ${
+              <input
+                type="checkbox"
+                id={slug}
+                class={tw`hidden checked:siblings:even:children:first-child:rotate-90 checked:siblings:last-child:block`}
+                checked={path.startsWith(`/${slug}/`)}
+                disabled={!entry.children}
+              />
+
+              <label
+                htmlFor={slug}
+                class={tw`flex items-center gap-2 px-2.5 py-2 rounded-md block ${
                   path === `/${slug}`
                     ? "link bg-ultralight toc-active"
                     : "hover:text-gray-600"
                 } font-bold`}
               >
-                {entry.name}
-              </a>
+                <Icons.TriangleRight
+                  class={entry.children ? "" : "invisible"}
+                />
+                <a href={`/manual${version ? `@${version}` : ""}/${slug}`}>
+                  {entry.name}
+                </a>
+              </label>
+
               {entry.children && (
-                <ol class={tw`list-decimal font-normal nested`}>
+                <ol class={tw`list-decimal font-normal nested hidden`}>
                   {Object.entries(entry.children).map(
                     (
                       [childSlug, name],
@@ -273,7 +287,7 @@ function ToC({
                           href={`/manual${
                             version ? `@${version}` : ""
                           }/${slug}/${childSlug}`}
-                          class={tw`pl-8 py-1 rounded-md block ${
+                          class={tw`pl-8 pr-2.5 py-1 rounded-md block ${
                             path === `/${slug}/${childSlug}`
                               ? "link bg-ultralight toc-active"
                               : "hover:text-gray-600"
