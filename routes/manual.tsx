@@ -103,10 +103,10 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
         </label>
 
         <div
-          class={tw`flex flex-col mt-12 mb-16 lg:(flex-row gap-12 section-x-inset-xl)`}
+          class={tw`flex flex-col mt-0 mb-16 lg:(flex-row mt-12 gap-12 section-x-inset-xl)`}
         >
           <div
-            class={tw`hidden w-full border-b border-dark-border lg:(box-border border-none block w-72 flex-shrink-0)`}
+            class={tw`hidden pb-2 w-full border-b border-dark-border lg:(pb-0 border-none block w-72 flex-shrink-0)`}
           >
             <div
               class={tw`w-full space-y-4 section-x-inset-xl lg:section-x-inset-none`}
@@ -126,7 +126,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
           </div>
 
           <main
-            class={tw`focus:outline-none w-full flex flex-col section-x-inset-xl lg:section-x-inset-none`}
+            class={tw`focus:outline-none w-full flex flex-col section-x-inset-xl mt-7 lg:(section-x-inset-none mt-0)`}
             tabIndex={0}
           >
             {isPreview && (
