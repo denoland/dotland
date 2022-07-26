@@ -243,6 +243,18 @@ export default function GlobalSearch() {
                 {results.manual.map((res) => <ManualResult {...res} />)}
               </Section>
             )}
+            {results.modules && (
+              <Section title="Modules" isAll={kind === "All"}>
+                {results.modules && results.modules.length === 0 && (
+                  <div class={tw`text-gray-500 italic`}>
+                    Your search did not yield any results in the modules index.
+                  </div>
+                )}
+                {results.modules.map((module) => (
+                  <ModuleResult module={module} />
+                ))}
+              </Section>
+            )}
             {results.symbols && (
               <Section title="Symbols" isAll={kind === "All"}>
                 {results.symbols && results.symbols.length === 0 && (
@@ -251,18 +263,6 @@ export default function GlobalSearch() {
                   </div>
                 )}
                 {results.symbols.map((doc) => <SymbolResult doc={doc} />)}
-              </Section>
-            )}
-            {results.modules && (
-              <Section title="Modules" isAll={kind === "All"}>
-                {results.modules && results.modules.length === 0 && (
-                  <div class={tw`text-gray-500 italic`}>
-                    Your search did not yield any results in the symbol index.
-                  </div>
-                )}
-                {results.modules.map((module) => (
-                  <ModuleResult module={module} />
-                ))}
               </Section>
             )}
             <div class={tw`${kind === "All" ? "h-6" : "h-3.5"}`} />
