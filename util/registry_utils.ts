@@ -431,6 +431,13 @@ export function extractAltLineNumberReference(
 
 import type { DocNode, DocNodeKind, JsDoc } from "$deno_doc/types.d.ts";
 
+/** Defines a "tag" which can be displayed when rending a module or part of a
+ * module. */
+export interface ModuleTag {
+  kind: "popularity";
+  value: string;
+}
+
 export interface DocPageBase {
   kind: string;
   module: string;
@@ -447,6 +454,7 @@ export interface DocPageBase {
   };
   /** @deprecated */
   star_count?: number;
+  tags?: ModuleTag[];
 }
 
 interface DocPageDirItem {
@@ -472,6 +480,7 @@ interface DocPageModuleItem {
   kind: "module";
   path: string;
   items: SymbolItem[];
+  default?: true;
 }
 
 export type DocPageNavItem = DocPageModuleItem | DocPageDirItem;
@@ -498,6 +507,11 @@ export interface DocPageFile extends DocPageBase {
   kind: "file";
 }
 
+export interface DocPageRedirect {
+  kind: "redirect";
+  path: string;
+}
+
 export interface DocPageInvalidVersion {
   kind: "invalid-version";
   module: string;
@@ -505,10 +519,12 @@ export interface DocPageInvalidVersion {
   versions: string[];
   latest_version: string;
 }
+
 /** Stores as kind `doc_page` in datastore. */
 export type DocPage =
   | DocPageSymbol
   | DocPageModule
   | DocPageIndex
   | DocPageFile
-  | DocPageInvalidVersion;
+  | DocPageInvalidVersion
+  | DocPageRedirect;

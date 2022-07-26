@@ -309,7 +309,7 @@ export const handler: Handlers<DocPage> = {
 
     const symbol = url.searchParams.get("s");
     const resURL = new URL(
-      `https://apiland.deno.dev/v2/modules/${name}/${version}/page/${maybePath}`,
+      `https://apiland.deno.dev/v2/modules/${name}/${version || "__latest__"}/page/${maybePath}`,
     );
     if (symbol) {
       resURL.searchParams.set("symbol", symbol);
