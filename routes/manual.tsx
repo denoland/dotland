@@ -81,65 +81,8 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
         </title>
         <link rel="canonical" href={`https://deno.land/manual${path}`} />
       </Head>
-      <Header selected="Manual" />
+      <Header selected="手册" />
 
-<<<<<<< HEAD
-        <div class={tw`md:hidden hidden`} id="manualSidebar">
-          <div class={tw`fixed inset-0 flex z-40`}>
-            <div class={tw`fixed inset-0`}>
-              <label
-                class={tw`absolute inset-0 bg-gray-600 opacity-75`}
-                htmlFor="manualSidebarToggle"
-              />
-            </div>
-            <div
-              class={tw`relative flex-1 flex flex-col max-w-xs w-full bg-white`}
-            >
-              <div class={tw`absolute top-0 right-0 -mr-14 p-1`}>
-                <label
-                  class={tw`flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600`}
-                  aria-label="Close sidebar"
-                  htmlFor="manualSidebarToggle"
-                >
-                  <Icons.Cross />
-                </label>
-              </div>
-              <div class={tw`bg-gray-100 pb-4 pt-4 border-b border-gray-200`}>
-                <a
-                  href="/"
-                  class={tw`flex items-center flex-shrink-0 px-4`}
-                >
-                  <img
-                    src="/logo.svg"
-                    alt="logo"
-                    class={tw`w-auto h-12`}
-                  />
-                  <div class={tw`mx-4 flex flex-col justify-center`}>
-                    <div
-                      class={tw`font-bold text-gray-900 leading-6 text-2xl tracking-tight`}
-                    >
-                      Deno 手册
-                    </div>
-                  </div>
-                </a>
-                <Version
-                  version={version}
-                  versions={versions}
-                  path={path}
-                />
-              </div>
-              <ToC
-                tableOfContents={data.tableOfContents}
-                version={params.version}
-                path={path}
-              />
-            </div>
-            <div class={tw`flex-shrink-0 w-14`}>
-              {/*<!-- Dummy element to force sidebar to shrink to fit close icon -->*/}
-            </div>
-          </div>
-        </div>
-=======
       <div class={tw`flex flex-col lg:flex-row`}>
         <div>
           <input
@@ -148,31 +91,13 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             class={tw`hidden checked:siblings:flex checked:sibling:(border-0 children:first-child:rotate-90)`}
             autoComplete="off"
           />
->>>>>>> dc6889ced79f601a06101b6501d0a379e855029d
 
           <label
             htmlFor="ToCToggle"
             class={tw`lg:hidden ml-3.5 py-2 px-1.5 flex items-center gap-2 font-medium border-b border-gray-200`}
           >
-<<<<<<< HEAD
-            <div class={tw`bg-gray-100 pb-4 pt-4 border-b border-gray-200`}>
-              <a href="/" class={tw`flex items-center flex-shrink-0 px-4`}>
-                <img src="/logo.svg" alt="logo" class={tw`w-auto h-12`} />
-                <div class={tw`mx-4 flex flex-col justify-center`}>
-                  <div
-                    class={tw`font-bold text-gray-900 leading-6 text-2xl tracking-tight`}
-                  >
-                    Deno 手册
-                  </div>
-                </div>
-              </a>
-              <Version
-                version={version}
-                versions={versions}
-                path={path}
-=======
             <Icons.ThinArrowRight />
-            Menu
+            菜单
           </label>
 
           <div
@@ -184,7 +109,6 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                   versions.map((ver) => [ver, `/manual@${ver}${path}`]),
                 )}
                 selectedVersion={version}
->>>>>>> dc6889ced79f601a06101b6501d0a379e855029d
               />
             </div>
             <ToC
@@ -213,68 +137,6 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
               <span class={tw`sr-only`}>GitHub</span>
               <Icons.GitHub class="inline" />
             </a>
-<<<<<<< HEAD
-            <div
-              class={tw`border-l border-r border-gray-200 flex-1 px-4 flex justify-between`}
-            >
-              <div class={tw`flex-1 flex`}>
-                <div class={tw`w-full flex justify-between h-full`}>
-                  <label htmlFor="search_field" class={tw`sr-only`}>
-                    搜索
-                  </label>
-                  <button
-                    class={tw`w-full text-gray-400 focus-within:text-gray-600 flex items-center`}
-                    // @ts-ignore onClick does support strings
-                    onClick="document.querySelector('#manualSearch button').click()"
-                  >
-                    <div class={tw`flex items-center pointer-events-none`}>
-                      <Icons.MagnifyingGlass />
-                    </div>
-                    <div class={tw`pl-6`}>
-                      <span class={tw`inline sm:hidden`}>搜索文章</span>
-                      <span class={tw`hidden sm:inline`}>
-                        搜索文章 (按 <InlineCode>/</InlineCode>{"  "}搜索)
-                      </span>
-                    </div>
-                  </button>
-                </div>
-              </div>
-            </div>
-            <label
-              class={tw`focus:outline-none focus:bg-gray-100 md:hidden flex items-center`}
-              htmlFor="manualSidebarToggle"
-            >
-              <div class={tw`px-4 text-gray-500 focus:text-gray-600`}>
-                <Icons.Menu />
-              </div>
-            </label>
-          </div>
-
-          <main
-            class={tw`flex-1 relative z-0 overflow-y-auto focus:outline-none`}
-            tabIndex={0}
-          >
-            <div class={tw`h-16 bg-white shadow hidden md:block`}>
-              <div
-                class={tw`max-w-screen-md mx-auto px-12 w-full flex justify-between h-full`}
-              >
-                <label htmlFor="search_field" class={tw`sr-only`}>
-                  搜索
-                </label>
-                <button
-                  class={tw`w-full text-gray-400 focus-within:text-gray-600 flex items-center`}
-                  // @ts-ignore onClick does support strings
-                  onClick="document.querySelector('#manualSearch button').click()"
-                >
-                  <div class={tw`flex items-center pointer-events-none`}>
-                    <Icons.MagnifyingGlass />
-                  </div>
-                  <div class={tw`pl-6`}>
-                    搜索文章 (按 <InlineCode>/</InlineCode> 搜索)
-                  </div>
-                </button>
-              </div>
-=======
 
             <Markdown
               source={data.content
@@ -310,7 +172,6 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                   {pageList[pageIndex + 1].name} →
                 </a>
               )}
->>>>>>> dc6889ced79f601a06101b6501d0a379e855029d
             </div>
           </div>
         </main>
