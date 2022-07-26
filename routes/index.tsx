@@ -39,9 +39,6 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
 
   return (
     <div>
-      <HelloBar to="https://deno.news/archive/47-v124-ffi-and-more-fresh-resources">
-        Check out Deno News issue #47!
-      </HelloBar>
       <Head>
         <title>Deno - A modern runtime for JavaScript and TypeScript</title>
       </Head>
