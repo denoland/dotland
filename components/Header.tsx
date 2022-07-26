@@ -6,7 +6,7 @@ import { Fragment, h } from "preact";
 
 import { apply, css, tw } from "@twind";
 import * as Icons from "./Icons.tsx";
-import { Head } from "$fresh/src/runtime/head.ts";
+import GlobalSearch from "@/islands/GlobalSearch.tsx";
 
 const entries = [
   { href: "/manual", content: "手册" },
@@ -22,14 +22,18 @@ const entries = [
 export function Header({
   selected,
   main,
+  manual,
 }: {
   selected?: (typeof entries)[number]["content"];
   main?: boolean;
+  manual?: boolean;
 }) {
   return (
     <div
       class={tw(
-        !main
+        manual
+          ? "lg:border-b border-light-border"
+          : !main
           ? "bg-primary border-b border-light-border backdrop-blur-3xl"
           : "",
       )}
@@ -46,7 +50,7 @@ export function Header({
           />
 
           <div
-            class={tw`h-9 flex items-center justify-between select-none w-full lg:w-auto gap-3 md:gap-6 lg:gap-8`}
+            class={tw`h-9 flex flex-1 items-center justify-between lg:justify-start select-none w-full lg:w-min gap-3 md:gap-6 lg:gap-8`}
           >
             <a
               href="/"
@@ -59,7 +63,7 @@ export function Header({
               <img class={tw`h-full w-full`} src="/logo.svg" alt="Deno Logo" />
             </a>
 
-            {!main && <Search />}
+            {!main && <GlobalSearch />}
 
             <label
               tabIndex={0}
@@ -126,6 +130,7 @@ export function Header({
     </div>
   );
 }
+<<<<<<< HEAD
 
 function Search() {
   // TODO: implement this properly with an island
@@ -181,3 +186,5 @@ function Search() {
     </>
   );
 }
+=======
+>>>>>>> f583ec6b6d86b36e49f16a229223ee7ce3f7223f
