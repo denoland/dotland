@@ -16,7 +16,6 @@ const entries = [
   },
   { href: "/std", content: "Standard Library" },
   { href: "/x", content: "Third Party Modules" },
-  { href: "https://deno.com/blog", content: "Blog" },
 ] as const;
 
 export function Header({
@@ -63,7 +62,7 @@ export function Header({
               <img class={tw`h-full w-full`} src="/logo.svg" alt="Deno Logo" />
             </a>
 
-            {!main && <GlobalSearch />}
+            <GlobalSearch />
 
             <label
               tabIndex={0}
