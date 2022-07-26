@@ -22,14 +22,18 @@ const entries = [
 export function Header({
   selected,
   main,
+  manual,
 }: {
   selected?: (typeof entries)[number]["content"];
   main?: boolean;
+  manual?: boolean;
 }) {
   return (
     <div
       class={tw(
-        !main
+        manual
+          ? "lg:border-b border-light-border"
+          : !main
           ? "bg-primary border-b border-light-border backdrop-blur-3xl"
           : "",
       )}
