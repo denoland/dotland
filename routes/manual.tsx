@@ -97,7 +97,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
           class={tw`lg:hidden block pl-5 py-2.5 font-medium border-b border-dark-border`}
         >
           <div class={tw`flex gap-2 items-center px-1.5`}>
-            <Icons.ThinArrowRight />
+            <Icons.ArrowRight />
             Menu
           </div>
         </label>
@@ -160,18 +160,11 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                         `manual@${version}`,
                       )
                       : pageList[pageIndex - 1].path}
-                    class={tw`font-normal inline-flex items-center px-4 py-3 rounded-lg border border-dark-border gap-4`}
+                    class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-dark-border gap-1.5`}
                   >
-                    <Icons.ThinArrowRight class={tw`rotate-180`} />
+                    <Icons.ArrowLeft />
                     <div>
-                      <span
-                        class={tw`block text-sm leading-none text-[#9CA0AA]`}
-                      >
-                        Prev
-                      </span>
-                      <span class={tw`block font-medium`}>
-                        {pageList[pageIndex - 1].name}
-                      </span>
+                      {pageList[pageIndex - 1].name}
                     </div>
                   </a>
                 )}
@@ -183,19 +176,12 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                         `manual@${version}`,
                       )
                       : pageList[pageIndex + 1].path}
-                    class={tw`font-normal inline-flex items-center px-4 py-3 rounded-lg border border-dark-border gap-4 float-right text-right`}
+                    class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-dark-border gap-1.5 float-right text-right`}
                   >
                     <div>
-                      <span
-                        class={tw`block text-sm leading-none text-[#9CA0AA]`}
-                      >
-                        Prev
-                      </span>
-                      <span class={tw`block font-medium`}>
-                        {pageList[pageIndex + 1].name}
-                      </span>
+                      {pageList[pageIndex + 1].name}
                     </div>
-                    <Icons.ThinArrowRight />
+                    <Icons.ArrowRight />
                   </a>
                 )}
               </div>

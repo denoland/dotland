@@ -153,14 +153,18 @@ export function Cross(props: { class?: string }) {
 export function ArrowLeft() {
   return (
     <svg
-      class={tw`h-5 w-5`}
-      viewBox="0 0 20 20"
-      fill="currentColor"
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        fillRule="evenodd"
-        d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-        clipRule="evenodd"
+        d="M9.5 2L4.5 7L9.5 12"
+        stroke="#232323"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       />
     </svg>
   );
@@ -169,14 +173,18 @@ export function ArrowLeft() {
 export function ArrowRight() {
   return (
     <svg
-      class={tw`h-5 w-5`}
-      viewBox="0 0 20 20"
-      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+      fill="none"
     >
       <path
-        fillRule="evenodd"
-        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-        clipRule="evenodd"
+        d="M4.5 12L9.5 7L4.5 2"
+        stroke="#232323"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       />
     </svg>
   );
@@ -283,22 +291,6 @@ export function WarningTriangle() {
       stroke="currentColor"
     >
       <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-    </svg>
-  );
-}
-
-export function ThinArrowRight(props: { class?: string }) {
-  return (
-    <svg
-      class={tw`w-5 h-5 text-gray-500 ${props.class ?? ""}`}
-      fill="none"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path d="M9 5l7 7-7 7" />
     </svg>
   );
 }
