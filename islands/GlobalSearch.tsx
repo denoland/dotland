@@ -47,7 +47,6 @@ interface ManualSearchResult {
 interface ModuleSearchResult {
   name: string;
   description: string;
-  content: string;
 }
 
 /** Search Deno documentation, symbols, or modules. */
