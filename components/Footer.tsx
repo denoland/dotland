@@ -82,15 +82,15 @@ export function Footer() {
                 Copyright © 2022 Deno Land Inc.{" "}
                 <span class={tw`whitespace-nowrap`}>All rights reserved.</span>
               </span>
-              <div class={tw`flex gap-3 text-[#666666]`}>
+              <div class={tw`flex gap-3 text-main`}>
                 <a href="https://github.com/denoland">
-                  <Icons.GitHub />
+                  <Icons.GitHub class="hover:text-main-highlight" />
                 </a>
                 <a href="https://discord.gg/deno">
-                  <Icons.Discord />
+                  <Icons.Discord class="hover:text-main-highlight" />
                 </a>
                 <a href="https://twitter.com/deno_land">
-                  <Icons.Twitter />
+                  <Icons.Twitter class="hover:text-main-highlight" />
                 </a>
               </div>
             </div>

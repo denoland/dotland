@@ -30,6 +30,7 @@ export const config: Configuration = {
         primary: "#FFFFFFE5",
         secondary: "#E5E7EB",
         main: "#333333",
+        "default-highlight": "#333333C0",
         light: "#999999",
         default: "#232323",
         ultralight: "#F8F7F6",
@@ -60,7 +61,7 @@ export const config: Configuration = {
   },
   plugins: {
     link:
-      apply`text-[#056CF0] transition duration-75 ease-in-out hover:text-blue-500`,
+      apply`text-[#056CF0] transition duration-75 ease-in-out hover:text-blue-400`,
     "section-x-inset": (parts) =>
       parts[0] === "none"
         ? apply`max-w-none mx-0 px-0`
