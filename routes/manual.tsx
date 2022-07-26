@@ -266,7 +266,7 @@ function ToC({
                   path === `/${slug}`
                     ? "link bg-ultralight toc-active"
                     : "hover:text-gray-600"
-                } font-bold`}
+                } font-semibold`}
               >
                 <Icons.TriangleRight
                   class={entry.children ? "" : "invisible"}
