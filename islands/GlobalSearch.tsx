@@ -166,7 +166,11 @@ export default function GlobalSearch() {
           <div class={tw`pt-6 px-6 border-b border-[#E8E7E5]`}>
             <div class={tw`flex`}>
               <label
-                class={tw`pl-4 h-10 w-full flex-shrink-1 bg-[#F3F3F3] rounded-md flex items-center text-light focus-within:outline-black`}
+                class={tw`pl-4 h-10 w-full flex-shrink-1 bg-[#F3F3F3] rounded-md flex items-center text-light focus-within:${
+                  css({
+                    "outline": "solid",
+                  })
+                }`}
               >
                 <Icons.MagnifyingGlass />
                 <input
