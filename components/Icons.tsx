@@ -161,7 +161,7 @@ export function ArrowLeft() {
     >
       <path
         d="M9.5 2L4.5 7L9.5 12"
-        stroke="#232323"
+        stroke="currentColor"
         stroke-width="1.5"
         stroke-linecap="round"
         stroke-linejoin="round"
@@ -170,9 +170,10 @@ export function ArrowLeft() {
   );
 }
 
-export function ArrowRight() {
+export function ArrowRight(props: { class?: string; }) {
   return (
     <svg
+      class={tw(props.class ?? "")}
       xmlns="http://www.w3.org/2000/svg"
       width="14"
       height="14"
@@ -181,7 +182,7 @@ export function ArrowRight() {
     >
       <path
         d="M4.5 12L9.5 7L4.5 2"
-        stroke="#232323"
+        stroke="currentColor"
         stroke-width="1.5"
         stroke-linecap="round"
         stroke-linejoin="round"
