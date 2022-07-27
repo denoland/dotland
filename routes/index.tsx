@@ -9,7 +9,6 @@ import { CodeBlock } from "@/components/CodeBlock.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
 import { Header } from "@/components/Header.tsx";
-import { HelloBar } from "@/components/HelloBar.tsx";
 import { Background } from "@/components/HeroBackground.tsx";
 import { Handlers, PageProps } from "$fresh/server.ts";
 
@@ -39,9 +38,6 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
 
   return (
     <div>
-      <HelloBar to="https://deno.news/archive/47-v124-ffi-and-more-fresh-resources">
-        Check out Deno News issue #47!
-      </HelloBar>
       <Head>
         <title>Deno - 现代的 JavaScript 和 TypeScript 运行时</title>
       </Head>

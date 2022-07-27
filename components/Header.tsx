@@ -6,7 +6,7 @@ import { Fragment, h } from "preact";
 
 import { apply, css, tw } from "@twind";
 import * as Icons from "./Icons.tsx";
-import { Head } from "$fresh/src/runtime/head.ts";
+import GlobalSearch from "@/islands/GlobalSearch.tsx";
 
 const entries = [
   { href: "/manual", content: "手册" },
@@ -22,14 +22,18 @@ const entries = [
 export function Header({
   selected,
   main,
+  manual,
 }: {
   selected?: (typeof entries)[number]["content"];
   main?: boolean;
+  manual?: boolean;
 }) {
   return (
     <div
       class={tw(
-        !main
+        manual
+          ? "lg:border-b border-light-border"
+          : !main
           ? "bg-primary border-b border-light-border backdrop-blur-3xl"
           : "",
       )}
@@ -46,7 +50,7 @@ export function Header({
           />
 
           <div
-            class={tw`h-9 flex items-center justify-between select-none w-full lg:w-auto gap-3 md:gap-6 lg:gap-8`}
+            class={tw`h-9 flex flex-1 items-center justify-between lg:justify-start select-none w-full lg:w-min gap-3 md:gap-6 lg:gap-8`}
           >
             <a
               href="/"
@@ -59,7 +63,7 @@ export function Header({
               <img class={tw`h-full w-full`} src="/logo.svg" alt="Deno Logo" />
             </a>
 
-            {!main && <Search />}
+            {!main && <GlobalSearch />}
 
             <label
               tabIndex={0}
@@ -124,60 +128,5 @@ export function Header({
         </nav>
       </div>
     </div>
-  );
-}
-
-function Search() {
-  // TODO: implement this properly with an island
-  return (
-    <>
-      <Head>
-        <link
-          rel="preconnect"
-          href="https://DMFING7U5D-dsn.algolia.net"
-          crossOrigin="true"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"
-        />
-      </Head>
-      <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3" />
-      <div id="search" class={tw`hidden`} />
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-        docsearch({
-          container: "#search",
-          appId: "DMFING7U5D",
-          indexName: "deno_manual",
-          apiKey: "577997f9f7a4b0100d359afde8065583",
-          searchParameters: {
-            distinct: 1,
-          },
-        });
-      `,
-        }}
-      />
-
-      <button
-        class={tw`pl-4 w-80 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light`}
-        // @ts-ignore onClick does support strings
-        onClick="document.querySelector('#search button').click()"
-      >
-        <div class={tw`flex items-center pointer-events-none`}>
-          <Icons.MagnifyingGlass />
-          {/*<input class={tw`ml-1.5 py-2.5 h-9 flex-auto bg-transparent placeholder:text-light text-default text-sm leading-4 font-medium appearance-none`} type="text" placeholder="Search..." />*/}
-          <div
-            class={tw`ml-1.5 py-2.5 h-9 flex-auto text-light text-sm leading-4 font-medium text-left`}
-          >
-            搜索...
-          </div>
-          <div class={tw`mx-4`}>
-            ⌘K
-          </div>
-        </div>
-      </button>
-    </>
   );
 }
