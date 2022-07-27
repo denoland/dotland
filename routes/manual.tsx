@@ -139,7 +139,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             >
               <a
                 href={getDocURL(version, path)}
-                class={tw`float-right py-2.5 px-4.5 rounded-md bg-[#F3F3F3] leading-none font-medium`}
+                class={tw`float-right py-2.5 px-4.5 rounded-md bg-[#F3F3F3] hover:bg-dark-border leading-none font-medium`}
               >
                 Edit
               </a>
@@ -160,7 +160,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                         `manual@${version}`,
                       )
                       : pageList[pageIndex - 1].path}
-                    class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-dark-border gap-1.5`}
+                    class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-dark-border gap-1.5 hover:bg-light-border`}
                   >
                     <Icons.ArrowLeft />
                     <div>
@@ -176,7 +176,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                         `manual@${version}`,
                       )
                       : pageList[pageIndex + 1].path}
-                    class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-dark-border gap-1.5 float-right text-right`}
+                    class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-dark-border gap-1.5 float-right text-right hover:bg-light-border`}
                   >
                     <div>
                       {pageList[pageIndex + 1].name}
@@ -265,7 +265,7 @@ function ToC({
                 class={tw`flex items-center gap-2 px-2.5 py-2 rounded-md block ${
                   path === `/${slug}`
                     ? "link bg-ultralight toc-active"
-                    : "hover:text-gray-600"
+                    : "hover:text-gray-500"
                 } font-semibold`}
               >
                 <Icons.TriangleRight
@@ -290,7 +290,7 @@ function ToC({
                           class={tw`pl-8 pr-2.5 py-1 rounded-md block ${
                             path === `/${slug}/${childSlug}`
                               ? "link bg-ultralight toc-active"
-                              : "hover:text-gray-600"
+                              : "hover:text-gray-500"
                           } font-normal`}
                         >
                           {name}
