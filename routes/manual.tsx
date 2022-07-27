@@ -256,7 +256,7 @@ function ToC({
                 type="checkbox"
                 id={slug}
                 class={tw`hidden checked:siblings:even:children:first-child:rotate-90 checked:siblings:last-child:block`}
-                checked={path.startsWith(`/${slug}/`)}
+                checked={path === `/${slug}` || path.startsWith(`/${slug}/`)}
                 disabled={!entry.children}
               />
 
