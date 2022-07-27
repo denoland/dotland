@@ -156,7 +156,7 @@ export function FileDisplay(props: {
               );
             } else {
               return (
-                <div class={tw`px-4`}>
+                <div class={tw`p-8`}>
                   <Markdown
                     source={props.isStd
                       ? props.raw!
