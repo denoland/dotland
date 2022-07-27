@@ -24,6 +24,7 @@
     "$ga": "https://deno.land/x/g_a@0.1.2/mod.ts",
     "$oak_commons": "https://deno.land/x/oak_commons@0.1.1/negotiation.ts",
     "$doc_components/": "../doc_components/",
-    "$deno_doc/": "https://deno.land/x/deno_doc@v0.34.0/lib/"
+    "$deno_doc/": "https://deno.land/x/deno_doc@v0.34.0/lib/",
+    "$algolia": "https://esm.sh/algoliasearch@4.13.1"
   }
 }
