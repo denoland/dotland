@@ -73,8 +73,8 @@ export default function GlobalSearch() {
   });
 
   const client = algoliasearch(
-    "W2N54PBNC9",
-    "17af110e5b3997da22994cc12de063cf",
+    "QFPCRZC6WX",
+    "2ed789b2981acd210267b27f03ab47da",
   );
 
   useEffect(() => {
