@@ -152,13 +152,18 @@ export default function GlobalSearch() {
   }, [showModal, input, kind, symbolKindsToggle]);
 
   useEffect(() => {
-    if (showModal) document.getElementById("search-input")?.focus();
+    if (showModal) {
+      document.body.style.overflow = "hidden";
+      document.getElementById("search-input")?.focus();
+    } else {
+      document.body.style.overflow = "initial";
+    }
   }, [showModal]);
 
   return (
     <>
       <button
-        class={tw`pl-4 w-80 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light`}
+        class={tw`pl-4 w-80 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light hover:bg-light-border`}
         onClick={() => setShowModal(true)}
       >
         <div class={tw`flex items-center pointer-events-none`}>

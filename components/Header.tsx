@@ -16,7 +16,6 @@ const entries = [
   },
   { href: "/std", content: "标准库" },
   { href: "/x", content: "第三方模块" },
-  { href: "https://deno.com/blog", content: "博客" },
 ] as const;
 
 export function Header({
@@ -63,7 +62,7 @@ export function Header({
               <img class={tw`h-full w-full`} src="/logo.svg" alt="Deno Logo" />
             </a>
 
-            {!main && <GlobalSearch />}
+            <GlobalSearch />
 
             <label
               tabIndex={0}
@@ -111,18 +110,18 @@ export function Header({
             </a>
 
             <a
-              href="https://github.com/denoland"
+              href="https://github.com/denoland/deno"
               class={tw`lg:ml-5 my-auto hidden lg:block`}
             >
               <span class={tw`sr-only`}>GitHub</span>
-              <Icons.GitHub class="inline" />
+              <Icons.GitHub class="inline text-main hover:text-main-highlight" />
             </a>
             <a
               href="https://discord.gg/deno"
               class={tw`lg:ml-5 my-auto hidden lg:block`}
             >
               <span class={tw`sr-only`}>Discord</span>
-              <Icons.Discord class="inline" />
+              <Icons.Discord class="inline text-main hover:text-main-highlight" />
             </a>
           </div>
         </nav>
