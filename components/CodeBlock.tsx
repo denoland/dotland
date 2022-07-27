@@ -4,10 +4,9 @@
 import { h } from "preact";
 
 import { tw } from "@twind";
-import { Prism } from "@/util/prism_utils.ts";
 import { escape as htmlEscape } from "$he";
-import { normalizeTokens } from "@/util/prism_utils.ts";
-import { fileTypeFromURL, filetypeIsJS } from "../util/registry_utils.ts";
+import { Prism, normalizeTokens } from "@/util/prism_utils.ts";
+import { fileTypeFromURL, filetypeIsJS } from "@/util/registry_utils.ts";
 
 export interface CodeBlockProps {
   code: string;

@@ -80,20 +80,18 @@ export function DocView({
           }
         })()}
 
-        {{
-          /*readme && (
+        {data.kind === "index" && data.readme && (
           <FileDisplay
             isStd={isStd}
             version={version}
-            raw={readme.content}
-            canonicalPath={readme.canonicalPath}
-            sourceURL={readme.url}
-            repositoryURL={readme.repositoryURL}
+            raw={data.readme.content}
+            canonicalPath={data.readme.canonicalPath}
+            sourceURL={data.readme.url}
+            repositoryURL={data.readme.repositoryURL}
             baseURL={basePath}
             url={url}
           />
-        )*/
-        }}
+        )}
       </div>
     </>
   );

@@ -14,7 +14,7 @@ import {
   fetchSource,
   getModulePath,
   getRepositoryURL,
-  getVersionList,
+  getReadme,
   S3_BUCKET,
 } from "@/util/registry_utils.ts";
 import { Header } from "@/components/Header.tsx";
@@ -33,7 +33,9 @@ type Params = {
   symbol?: string;
 };
 
-export default function Registry({ params, url, data }: PageProps<DocPage>) {
+export default function Registry(
+  { params, url, data }: PageProps<DocPage | null>,
+) {
   let {
     name,
     version,
@@ -53,18 +55,28 @@ export default function Registry({ params, url, data }: PageProps<DocPage>) {
         <Header
           selected={name === "std" ? "Standard Library" : "Third Party Modules"}
         />
-        <TopPanel
-          version={version!}
-          {...{ name, path, isStd, data }}
-        />
-        <div class={tw`section-x-inset-xl pb-20 pt-10`}>
-          <div class={tw`flex gap-x-14`}>
-            <ModuleView
-              version={version!}
-              {...{ name, path, isStd, url, data }}
-            />
-          </div>
-        </div>
+        {data === null
+          ? (
+            <div class={tw`section-x-inset-xl pb-20 pt-10`}>
+              <ErrorMessage title="404 - Not Found">
+                This module does not exist.
+              </ErrorMessage>
+            </div>
+          )
+          : (
+            <>
+              <TopPanel
+                version={version!}
+                {...{ name, path, isStd, data }}
+              />
+              <div class={tw`section-x-inset-xl pb-20 pt-10 flex gap-x-14`}>
+                <ModuleView
+                  version={version!}
+                  {...{ name, path, isStd, url, data }}
+                />
+              </div>
+            </>
+          )}
         <Footer />
       </div>
     </>
@@ -104,7 +116,7 @@ function TopPanel({
           <div
             class={tw`flex flex-col items-stretch gap-4 w-full md:(flex-row w-auto items-center)`}
           >
-            {data.upload_options && (
+            {data.kind !== "invalid-version" && (
               <div
                 class={tw`flex flex-row flex-auto justify-center items-center gap-4 border border-dark-border rounded-md bg-white py-2 px-5`}
               >
@@ -151,13 +163,7 @@ function ModuleView({
   url: URL;
   data: DocPage;
 }) {
-  if (false) {
-    return (
-      <ErrorMessage title="404 - Not Found">
-        This module does not exist.
-      </ErrorMessage>
-    );
-  } else if (data.versions.length === 0) {
+  if (data.versions.length === 0) {
     return (
       <ErrorMessage title="No uploaded versions">
         This module name has been reserved for a repository, but no versions
@@ -171,7 +177,7 @@ function ModuleView({
         This version does not exist for this module.
       </ErrorMessage>
     );
-  } else if (false) {
+  } else if (data.kind === "notfound") {
     return (
       <ErrorMessage title="404 - Not Found">
         This file or directory could not be found.
@@ -185,7 +191,7 @@ function ModuleView({
     data.kind === "index" ? "tree" : undefined,
   );
 
-  if (url.searchParams.has("code") || !isStd || data.kind === "file") {
+  if (url.searchParams.has("code") || !true || data.kind === "file") {
     return (
       <CodeView
         {...{
@@ -292,28 +298,40 @@ function VersionSelector({
   );
 }
 
-export const handler: Handlers<DocPage> = {
+export const handler: Handlers<DocPage | null> = {
   async GET(req, { params, render }) {
-    let {
-      name,
-      version,
-      path: maybePath,
-    } = params as Params;
+    const { name, version, path } = params as Params;
     const url = new URL(req.url);
     const isHTML = accepts(req, "application/*", "text/html") === "text/html";
 
-    const path = maybePath ? "/" + maybePath : "";
-
     const symbol = url.searchParams.get("s");
     const resURL = new URL(
-      `https://apiland.deno.dev/v2/modules/${name}/${version || "__latest__"}/page/${maybePath}`,
+      `https://apiland.deno.dev/v2/modules/${name}/${
+        version || "__latest__"
+      }/page/${path}`,
     );
     if (symbol) {
       resURL.searchParams.set("symbol", symbol);
     }
-    const res: DocPage = await fetch(resURL).then((res) => res.json());
+    const res: DocPage | null = await fetch(resURL).then((res) => {
+      if (res.status === 404) {
+        return null;
+      } else {
+        return res.json();
+      }
+    });
 
-    if (isStd && url.pathname.startsWith("/x")) {
+    if (res === null) {
+      if (isHTML) {
+        return render(null);
+      } else {
+        return new Response(`The module '${name}' does not exist`, {
+          status: 404,
+        });
+      }
+    }
+
+    if (name === "std" && url.pathname.startsWith("/x")) {
       url.pathname = url.pathname.slice(2);
       return Response.redirect(url, 301);
     }
@@ -338,7 +356,11 @@ export const handler: Handlers<DocPage> = {
 
       return new Response(undefined, {
         headers: {
-          Location: getModulePath(name, res.latest_version, path),
+          Location: getModulePath(
+            name,
+            res.latest_version,
+            path ? ("/" + path) : undefined,
+          ),
           "x-deno-warning":
             `Implicitly using latest version (${res.latest_version}) for ${url.href}`,
           "Access-Control-Allow-Origin": "*",
@@ -348,8 +370,7 @@ export const handler: Handlers<DocPage> = {
     }
 
     if (!isHTML) {
-      const remoteUrl =
-        `${S3_BUCKET}${name}/versions/${version}/raw/${maybePath}`;
+      const remoteUrl = `${S3_BUCKET}${name}/versions/${version}/raw/${path}`;
       const resp = await fetchSource(remoteUrl);
 
       if (
@@ -376,21 +397,16 @@ export const handler: Handlers<DocPage> = {
       return Response.redirect(url, 302);
     }
 
-    version = decodeURIComponent(version!);
-
-    const versions = await getVersionList(params.name).catch((e) => {
-      console.error("Failed to fetch versions:", e);
-      return null;
-    });
-
-    const canRenderView = versions && versions.latest &&
-      versions.versions.includes(version);
-
-    if (canRenderView) {
-      return render!(res);
-    } else {
-      return render!(res);
+    if (res.kind === "index") {
+      res.readme = await getReadme(
+        name,
+        version,
+        res.items,
+        res.upload_options,
+      );
     }
+
+    return render!(res);
   },
 };
 

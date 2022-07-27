@@ -38,11 +38,16 @@ export interface Readme {
 export async function getReadme(
   name: string,
   version: string,
-  canonicalPath: string,
-  versionMeta: VersionMetaInfo,
   items: IndexItem[],
-): Promise<Readme | null> {
-  const readmeEntry = items.find((item) => isReadme(item.path.split("/").at(-1)!));
+  uploadOptions: {
+    type: string;
+    repository: string;
+    ref: string;
+  },
+): Promise<Readme | undefined> {
+  const readmeEntry = items.find((item) =>
+    isReadme(item.path.split("/").at(-1)!)
+  );
 
   if (readmeEntry) {
     const url = getSourceURL(name, version, readmeEntry.path);
@@ -57,24 +62,28 @@ export async function getReadme(
       ) {
         console.error(new Error(`${res.status}: ${res.statusText}`));
       }
-      return null;
+      return undefined;
     }
     if (readmeEntry.size! < MAX_SYNTAX_HIGHLIGHT_FILE_SIZE) {
       return {
         content: await res.text(),
         url,
         repositoryURL: getRepositoryURL(
-          versionMeta,
+          uploadOptions,
           readmeEntry.path,
         ),
-        canonicalPath: canonicalPath + "/" + readmeEntry.name,
+        canonicalPath: getBasePath({
+          isStd: name === "std",
+          name,
+          version,
+        }) + readmeEntry.path,
       };
     } else {
       await res.body!.cancel();
-      return null;
+      return undefined;
     }
   } else {
-    return null;
+    return undefined;
   }
 }
 
@@ -90,7 +99,6 @@ export async function getRawFile(
   version: string,
   path: string,
   canonicalPath: string,
-  versionMeta: VersionMetaInfo,
 ): Promise<RawFile | Error | null> {
   const url = getSourceURL(name, version, path);
 
@@ -106,10 +114,7 @@ export async function getRawFile(
     }
     return null;
   }
-
-  const size = versionMeta.directoryListing.find(
-    (entry) => entry.path === path,
-  )!.size!;
+  const size = Number(res.headers.get("content-size")!);
 
   if (size < MAX_SYNTAX_HIGHLIGHT_FILE_SIZE) {
     return {
@@ -384,7 +389,7 @@ export function getModulePath(
     isStd,
     name,
     version,
-  }) + path;
+  }) + (path ?? "");
 }
 
 export const S3_BUCKET =
@@ -498,18 +503,18 @@ export interface DocPageModule extends DocPageBase {
   docNodes: DocNode[];
 }
 
+export interface DocPagePathNotFound extends DocPageBase {
+  kind: "notfound";
+}
+
 export interface DocPageIndex extends DocPageBase {
   kind: "index";
   items: IndexItem[];
+  readme?: Readme;
 }
 
 export interface DocPageFile extends DocPageBase {
   kind: "file";
-}
-
-export interface DocPageRedirect {
-  kind: "redirect";
-  path: string;
 }
 
 export interface DocPageInvalidVersion {
@@ -527,4 +532,4 @@ export type DocPage =
   | DocPageIndex
   | DocPageFile
   | DocPageInvalidVersion
-  | DocPageRedirect;
+  | DocPagePathNotFound;

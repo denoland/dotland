@@ -3,9 +3,8 @@
 /** @jsx h */
 import { h } from "preact";
 import { tw } from "@twind";
-import { getBasePath, isReadme } from "@/util/registry_utils.ts";
+import { getBasePath, isReadme, type IndexItem } from "@/util/registry_utils.ts";
 import * as Icons from "./Icons.tsx";
-import { IndexItem } from "../util/registry_utils.ts";
 
 export function DirectoryListing(props: {
   items: IndexItem[];
