@@ -152,7 +152,12 @@ export default function GlobalSearch() {
   }, [showModal, input, kind, symbolKindsToggle]);
 
   useEffect(() => {
-    if (showModal) document.getElementById("search-input")?.focus();
+    if (showModal) {
+      document.body.style.overflow = "hidden";
+      document.getElementById("search-input")?.focus();
+    } else {
+      document.body.style.overflow = "initial";
+    }
   }, [showModal]);
 
   return (
