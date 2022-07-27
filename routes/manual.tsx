@@ -82,11 +82,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
         </title>
         <link rel="canonical" href={`https://deno.land/manual${path}`} />
       </Head>
-<<<<<<< HEAD
-      <Header selected="手册" />
-=======
-      <Header selected="Manual" manual />
->>>>>>> f583ec6b6d86b36e49f16a229223ee7ce3f7223f
+      <Header selected="手册" manual />
 
       <div>
         <input
@@ -96,25 +92,15 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
           autoComplete="off"
         />
 
-<<<<<<< HEAD
-          <label
-            htmlFor="ToCToggle"
-            class={tw`lg:hidden ml-3.5 py-2 px-1.5 flex items-center gap-2 font-medium border-b border-gray-200`}
-          >
-            <Icons.ThinArrowRight />
-            菜单
-          </label>
-=======
         <label
           htmlFor="ToCToggle"
           class={tw`lg:hidden block pl-5 py-2.5 font-medium border-b border-dark-border`}
         >
           <div class={tw`flex gap-2 items-center px-1.5`}>
             <Icons.ArrowRight class="text-[#9CA0AA]" />
-            Menu
+            菜单
           </div>
         </label>
->>>>>>> f583ec6b6d86b36e49f16a229223ee7ce3f7223f
 
         <div
           class={tw`flex flex-col mt-0 mb-16 lg:(flex-row mt-12 gap-12 section-x-inset-xl)`}
