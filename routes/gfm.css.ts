@@ -11,6 +11,9 @@ const css = `${CSS}
 .markdown-body ol {
   list-style: numeric
 }
+.markdown-body table {
+  width: fit-content;
+}
 `;
 
 export const handler: Handlers = {
