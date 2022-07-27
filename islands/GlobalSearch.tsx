@@ -296,13 +296,13 @@ export default function GlobalSearch() {
                   <Icons.ArrowLeft />
                 </button>
                 <span class={tw`text-[#9CA0AA]`}>
-                  Page <span class={tw`font-medium`}>{page - 1}</span> of{" "}
+                  Page <span class={tw`font-medium`}>{page + 1}</span> of{" "}
                   <span class={tw`font-medium`}>{totalPages}</span>
                 </span>
                 <button
                   class={tw`p-1 border border-dark-border rounded-md not-disabled:hover:bg-light-border disabled:(text-[#D2D2DC] cursor-not-allowed)`}
                   onClick={() => setPage((page) => page + 1)}
-                  disabled={(page - 1) === totalPages}
+                  disabled={(page + 1) === totalPages}
                 >
                   <Icons.ArrowRight />
                 </button>
