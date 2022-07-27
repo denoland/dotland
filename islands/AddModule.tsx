@@ -10,24 +10,46 @@ import confetti from "$canvas-confetti";
 
 const NAME_REGEX = /^[a-z0-9_]{3,40}$/;
 
+interface ModuleState {
+  name: string;
+  available: boolean | "pending";
+  registered: boolean;
+}
+
 export default function AddModule() {
-  const [name, setName] = useState("");
   const [subdirectory, setSubdirectory] = useState("");
+  const confettiRef = useRef(null);
+  const [moduleState, setModuleState] = useState<ModuleState>({
+    name: "",
+    available: "pending",
+    registered: false,
+  });
+  const setModuleStateIfSameName = (state: ModuleState) => {
+    setModuleState((previousValue) => {
+      if (state.name !== previousValue.name) {
+        return previousValue;
+      } else {
+        return state;
+      }
+    });
+  };
+  const { name, available, registered } = moduleState;
+
   const urlValue = name +
     (subdirectory
       ? ("?" + new URLSearchParams([["subdir", subdirectory]]).toString())
       : "");
-
-  const confettiRef = useRef(null);
-  const [available, setAvailable] = useState(false);
-  const [registered, setRegistered] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
 
     (async () => {
       if (name === "" || !NAME_REGEX.test(name)) {
-        setAvailable(false);
+        setModuleStateIfSameName({
+          name,
+          available: false,
+          registered,
+        });
       } else {
         await getVersionList(name, controller.signal)
           .then((e) => !e)
@@ -37,7 +59,11 @@ export default function AddModule() {
               return;
             }
 
-            setAvailable(e);
+            setModuleStateIfSameName({
+              name,
+              available: e,
+              registered,
+            });
           });
       }
     })();
@@ -46,7 +72,7 @@ export default function AddModule() {
   }, [name]);
 
   useEffect(() => {
-    if (!available) {
+    if (available === "pending" || !available) {
       return;
     }
 
@@ -60,7 +86,11 @@ export default function AddModule() {
           if (controller.signal.aborted) {
             return;
           }
-          setRegistered(registered);
+          setModuleStateIfSameName({
+            name,
+            available,
+            registered,
+          });
           if (registered) {
             confetti.create(confettiRef.current!, {
               resize: true,
@@ -108,7 +138,13 @@ export default function AddModule() {
                 : "bg-[#F3F3F3]"
             }`}
             value={name}
-            onInput={(e) => setName(e.currentTarget.value)}
+            onInput={(e) => {
+              setModuleState({
+                name: e.currentTarget.value,
+                available: "pending",
+                registered: false,
+              });
+            }}
             disabled={!IS_BROWSER}
           />
           {name && !available && (
