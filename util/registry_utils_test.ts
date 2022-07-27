@@ -290,5 +290,8 @@ Deno.test("extractLinkUrl", () => {
   assertEquals(extractLinkUrl(`"https://example.com/foo.ts"`, ""), undefined);
 
   // Doesn't link relative path if the base url is not script
-  assertEquals(extractLinkUrl(`"./foo.ts"`, "https://deno.land/README.md"), undefined);
+  assertEquals(
+    extractLinkUrl(`"./foo.ts"`, "https://deno.land/README.md"),
+    undefined,
+  );
 });
