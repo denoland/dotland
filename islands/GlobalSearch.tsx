@@ -60,7 +60,7 @@ export default function GlobalSearch() {
     symbols?: Array<DocNode>;
   }>({});
   const [kind, setKind] = useState<typeof kinds[number]>("All");
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [symbolKindsToggle, setSymbolKindsToggle] = useState<
     Record<(keyof typeof symbolKinds), boolean>
@@ -108,7 +108,7 @@ export default function GlobalSearch() {
         indexName: "deno_manual",
         query: input || "Introduction",
         params: {
-          page,
+          page: page,
           hitsPerPage: kind === "All" ? 5 : 10,
           attributesToRetrieve: ["anchor", "url", "content", "hierarchy"],
           filters: "type:content",
@@ -121,7 +121,7 @@ export default function GlobalSearch() {
         indexName: "deno_modules",
         query: input || "serve",
         params: {
-          page,
+          page: page,
           hitsPerPage: kind === "All" ? 5 : 10,
           filters: Object.entries(symbolKindsToggle)
             .filter(([_, v]) => kind === "Symbols" ? v : true)
@@ -136,7 +136,7 @@ export default function GlobalSearch() {
         indexName: "modules",
         query: input,
         params: {
-          page,
+          page: page,
           hitsPerPage: kind === "All" ? 5 : 10,
         },
       });
@@ -236,7 +236,10 @@ export default function GlobalSearch() {
                         "text-decoration-thickness": "2px",
                       })
                       : ""} ${k === kind ? "text-black" : "text-gray-500"}`}
-                  onClick={() => setKind(k)}
+                  onClick={() => {
+                    setKind(k);
+                    setPage(0);
+                  }}
                 >
                   {k}
                 </button>
@@ -288,18 +291,18 @@ export default function GlobalSearch() {
                 <button
                   class={tw`p-1 border border-dark-border rounded-md not-disabled:hover:bg-light-border disabled:(text-[#D2D2DC] cursor-not-allowed)`}
                   onClick={() => setPage((page) => page - 1)}
-                  disabled={page === 1}
+                  disabled={page === 0}
                 >
                   <Icons.ArrowLeft />
                 </button>
                 <span class={tw`text-[#9CA0AA]`}>
-                  Page <span class={tw`font-medium`}>{page}</span> of{" "}
+                  Page <span class={tw`font-medium`}>{page - 1}</span> of{" "}
                   <span class={tw`font-medium`}>{totalPages}</span>
                 </span>
                 <button
                   class={tw`p-1 border border-dark-border rounded-md not-disabled:hover:bg-light-border disabled:(text-[#D2D2DC] cursor-not-allowed)`}
                   onClick={() => setPage((page) => page + 1)}
-                  disabled={page === totalPages}
+                  disabled={(page - 1) === totalPages}
                 >
                   <Icons.ArrowRight />
                 </button>
