@@ -145,11 +145,11 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
               </a>
 
               <Markdown
-                  source={data.content
-                    .replaceAll(".md", "")
-                    .replaceAll("$STD_VERSION", stdVersion)
-                    .replaceAll("$CLI_VERSION", version)}
-                  baseUrl={sourceURL}
+                source={data.content
+                  .replace(/(\[.+\]\(.+)\.md\)/g, "$1)")
+                  .replaceAll("$STD_VERSION", stdVersion)
+                  .replaceAll("$CLI_VERSION", version)}
+                baseUrl={sourceURL}
               />
 
               <div class={tw`mt-14`}>
