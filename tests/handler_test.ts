@@ -7,11 +7,35 @@ import {
 } from "$std/testing/asserts.ts";
 import { extractAltLineNumberReference } from "@/util/registry_utils.ts";
 import { ServerContext } from "$fresh/server.ts";
+import { Fragment, h } from "preact";
+import { setup } from "$doc_components/services.ts";
 
-import manifest from "../fresh.gen.ts";
+import manifest from "@/fresh.gen.ts";
+import options from "@/options.ts";
 
-const handleRequest = async (req: Request) =>
-  (await ServerContext.fromManifest(manifest)).handler()(req, {
+const docland = "https://doc.deno.land/";
+await setup({
+  resolveHref(current, symbol) {
+    return symbol
+      ? `${docland}https://deno.land${current}/~/${symbol}`
+      : current;
+  },
+  lookupHref(
+    current: string,
+    namespace: string | undefined,
+    symbol: string,
+  ): string | undefined {
+    return namespace
+      ? `${docland}${current}/~/${namespace}.${symbol}`
+      : `${docland}${current}/~/${symbol}`;
+  },
+  runtime: { Fragment, h },
+});
+
+const serverCtx = await ServerContext.fromManifest(manifest, options);
+const handler = serverCtx.handler();
+const handleRequest = (req: Request) =>
+  handler(req, {
     localAddr: {
       transport: "tcp",
       hostname: "127.0.0.1",
@@ -47,7 +71,7 @@ Deno.test({
   sanitizeResources: false, // TODO(@crowlKats): this shouldnt be required, something wrong with fetch resource consumption
   async fn() {
     const res = await handleRequest(
-      new Request("https://deno.land/std@0.127.0/version.ts", {
+      new Request("https://deno.land/std@0.127.0/version.ts?code", {
         headers: { Accept: BROWSER_ACCEPT },
       }),
     );
@@ -61,7 +85,7 @@ Deno.test({
   name: "/std/version.ts with Deno CLI Accept responds with redirect",
   async fn() {
     const res = await handleRequest(
-      new Request("https://deno.land/x/std/version.ts", {
+      new Request("https://deno.land/std/version.ts", {
         headers: { Accept: DENO_CLI_ACCEPT },
       }),
     );
@@ -70,6 +94,19 @@ Deno.test({
     assert(res.headers.get("X-Deno-Warning")?.includes("latest"));
     assert(res.headers.get("X-Deno-Warning")?.includes("/std/version.ts"));
     assertEquals(res.headers.get("Access-Control-Allow-Origin"), "*");
+    await res.text();
+  },
+});
+
+Deno.test({
+  name: "/x/std/version.ts redirects to /std/version.ts",
+  async fn() {
+    const res = await handleRequest(
+      new Request("https://deno.land/x/std/version.ts"),
+    );
+    assertEquals(res.status, 301);
+    assert(res.headers.get("Location")?.includes("/std/version.ts"));
+    assert(!res.headers.get("Location")?.includes("/x/"));
     await res.text();
   },
 });
@@ -92,7 +129,7 @@ Deno.test({
 
 Deno.test({
   name:
-    "/std@0.127.0/fs/mod.ts:5:3 with Accept: 'text/html' responds with line number redirect",
+    "/std@0.127.0/fs/mod.ts:5:3 with Accept: 'text/html' responds with codeview and line number redirect",
   async fn() {
     const res = await handleRequest(
       new Request("https://deno.land/std@0.127.0/fs/mod.ts:5:3", {
@@ -100,7 +137,11 @@ Deno.test({
       }),
     );
     assertEquals(res.status, 302);
-    assert(res.headers.get("Location")?.includes("/std@0.127.0/fs/mod.ts#L5"));
+    assert(
+      res.headers.get("Location")?.includes(
+        "/std@0.127.0/fs/mod.ts?code=#L5",
+      ),
+    );
     await res.text();
   },
 });

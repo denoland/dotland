@@ -1,8 +1,8 @@
 // Copyright Deno Land Inc. All Rights Reserved. Proprietary and confidential.
 
 /** @jsx h */
-import { h } from "$fresh/runtime.ts";
-import { tw } from "twind";
+import { h } from "preact";
+import { tw } from "@twind";
 
 export function Background() {
   return (

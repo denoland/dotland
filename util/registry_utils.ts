@@ -3,6 +3,179 @@
 export const CDN_ENDPOINT = "https://cdn.deno.land/";
 const API_ENDPOINT = "https://api.deno.land/";
 
+export interface CommonProps {
+  /** data of a version */
+  versionMeta: VersionMetaInfo;
+  /** misc info of a module */
+  moduleMeta: Module | null;
+  /** files and directories in module */
+  dirEntries: DirEntry[] | null;
+
+  isStd: boolean;
+  /** module name */
+  name: string;
+  /** module version */
+  version: string;
+  /** path in module */
+  path: string;
+
+  /** readme for current path */
+  readme: Readme | null;
+
+  /** url of the repo */
+  repositoryURL: string;
+  /** base path of the module (/x/[name]@[version]) */
+  basePath: string;
+  /** request URL */
+  url: URL;
+}
+
+export function getDirEntries(
+  versionMeta: VersionMetaInfo,
+  path: string,
+): DirEntry[] | null {
+  const files = versionMeta.directoryListing
+    .filter(
+      (f) =>
+        f.path.startsWith(path + "/") &&
+        f.path.split("/").length - 2 === path.split("/").length - 1,
+    )
+    .map<DirEntry>((f) => {
+      const [name] = f.path.slice(path.length + 1).split("/");
+      return {
+        name,
+        size: f.size,
+        type: f.type,
+      };
+    })
+    .sort((a, b) => a.name.codePointAt(0)! - b.name.codePointAt(0)!);
+  return files.length === 0 ? null : files;
+}
+
+export function filetypeIsJS(filetype: string | undefined): boolean {
+  return filetype === "javascript" || filetype === "typescript" ||
+    filetype === "tsx" || filetype === "jsx";
+}
+
+// 100kb
+export const MAX_SYNTAX_HIGHLIGHT_FILE_SIZE = 100 * 1024;
+// 500kb
+export const MAX_FILE_SIZE = 500 * 1024;
+
+export interface Readme {
+  content: string;
+  canonicalPath: string;
+  url: string;
+  repositoryURL: string;
+}
+
+export async function getReadme(
+  name: string,
+  version: string,
+  path: string,
+  canonicalPath: string,
+  versionMeta: VersionMetaInfo,
+  dirEntries: DirEntry[] | null,
+): Promise<Readme | null> {
+  const readmeEntry = path === ""
+    ? findRootReadme(versionMeta.directoryListing)
+    : dirEntries?.find((d) => isReadme(d.name));
+
+  if (readmeEntry) {
+    const url = getSourceURL(name, version, path + "/" + readmeEntry.name);
+
+    const res = await fetch(url);
+    if (!res.ok) {
+      await res.body?.cancel();
+      if (
+        res.status !== 400 &&
+        res.status !== 403 &&
+        res.status !== 404
+      ) {
+        console.error(new Error(`${res.status}: ${res.statusText}`));
+      }
+      return null;
+    }
+    if (readmeEntry.size! < MAX_SYNTAX_HIGHLIGHT_FILE_SIZE) {
+      return {
+        content: await res.text(),
+        url,
+        repositoryURL: getRepositoryURL(
+          versionMeta,
+          path + "/" + readmeEntry.name,
+        ),
+        canonicalPath: canonicalPath + "/" + readmeEntry.name,
+      };
+    } else {
+      await res.body!.cancel();
+      return null;
+    }
+  } else {
+    return null;
+  }
+}
+
+export interface RawFile {
+  content: string;
+  highlight: boolean;
+  url: string;
+  canonicalPath: string;
+}
+
+export async function getRawFile(
+  name: string,
+  version: string,
+  path: string,
+  canonicalPath: string,
+  versionMeta: VersionMetaInfo,
+): Promise<RawFile | Error | null> {
+  const url = getSourceURL(name, version, path);
+
+  if (
+    versionMeta.directoryListing.filter((d) =>
+      d.path === path && d.type == "file"
+    ).length !== 0
+  ) {
+    const res = await fetch(url, { method: "GET" });
+    if (!res.ok) {
+      await res.body?.cancel();
+      if (
+        res.status !== 400 &&
+        res.status !== 403 &&
+        res.status !== 404
+      ) {
+        console.error(new Error(`${res.status}: ${res.statusText}`));
+      }
+      return null;
+    }
+
+    const size = versionMeta.directoryListing.find(
+      (entry) => entry.path === path,
+    )!.size!;
+
+    if (size < MAX_SYNTAX_HIGHLIGHT_FILE_SIZE) {
+      return {
+        content: await res.text(),
+        highlight: true,
+        url,
+        canonicalPath,
+      };
+    } else if (size < MAX_FILE_SIZE) {
+      return {
+        content: await res.text(),
+        highlight: false,
+        url,
+        canonicalPath,
+      };
+    } else {
+      await res.body!.cancel();
+      return new Error("Max display filesize exceeded");
+    }
+  } else {
+    return null;
+  }
+}
+
 export interface DirEntry {
   name: string;
   type: "file" | "dir" | "symlink";
@@ -31,21 +204,16 @@ export function getRepositoryURL(
   meta: VersionMetaInfo,
   path: string,
   type = "blob",
-): string | undefined {
-  switch (meta.uploadOptions.type) {
-    case "github":
-      return `https://github.com/${
-        pathJoin(
-          meta.uploadOptions.repository,
-          type,
-          meta.uploadOptions.ref,
-          meta.uploadOptions.subdir ?? "",
-          path,
-        )
-      }`;
-    default:
-      return undefined;
-  }
+): string {
+  return `https://github.com/${
+    pathJoin(
+      meta.uploadOptions.repository,
+      type,
+      meta.uploadOptions.ref,
+      meta.uploadOptions.subdir ?? "",
+      path,
+    )
+  }`;
 }
 
 export interface VersionMetaInfo {
@@ -70,7 +238,7 @@ export interface DirListing {
 export async function getVersionMeta(
   module: string,
   version: string,
-): Promise<VersionMetaInfo | null> {
+): Promise<VersionMetaInfo> {
   const url = `${CDN_ENDPOINT}${module}/versions/${
     encodeURIComponent(
       version,
@@ -83,7 +251,7 @@ export async function getVersionMeta(
   });
   if (res.status === 403 || res.status === 404) {
     await res.body?.cancel();
-    return null;
+    throw new Error("Version Meta Not Found");
   }
   if (res.status !== 200) {
     throw Error(
@@ -93,7 +261,7 @@ export async function getVersionMeta(
   }
 
   const meta = await res.json();
-  if (!meta) return null;
+  if (!meta) throw new Error("Version Meta missing");
 
   return {
     uploadedAt: new Date(meta.uploaded_at),
@@ -224,7 +392,7 @@ export async function listModules(
   };
 }
 
-export async function getModule(name: string): Promise<Module | null> {
+export async function getModule(name: string): Promise<Module> {
   const url = `${API_ENDPOINT}modules/${encodeURIComponent(name)}`;
   const res = await fetch(url, {
     headers: {
@@ -233,7 +401,7 @@ export async function getModule(name: string): Promise<Module | null> {
   });
   if (res.status === 404) {
     await res.body?.cancel();
-    return null;
+    throw new Error("Module Not Found");
   }
   if (res.status !== 200) {
     throw Error(
@@ -332,30 +500,18 @@ export function fileNameFromURL(url: string): string {
   return segments[segments.length - 1];
 }
 
-export function denoDocAvailableForURL(filename: string): boolean {
-  const filetype = fileTypeFromURL(filename);
-  switch (filetype) {
-    case "javascript":
-    case "typescript":
-    case "jsx":
-    case "tsx":
-      return true;
-    default:
-      return false;
-  }
-}
-
+const ROOT_README_REGEX = new RegExp(
+  `^\\/(docs\\/|\\.github\\/)?${readmeBaseRegex}$`,
+  "i",
+);
 export function findRootReadme(
-  directoryListing: DirListing[] | undefined,
+  directoryListing: DirListing[],
 ): DirEntry | undefined {
   const listing =
-    directoryListing?.filter((d) =>
-      new RegExp(`^\\/(docs\\/|\\.github\\/)?${readmeBaseRegex}$`, "i").test(
-        d.path,
-      )
-    ).sort((a, b) => {
-      return a.path.length - b.path.length;
-    })[0];
+    directoryListing.filter((d) => ROOT_README_REGEX.test(d.path)).sort((
+      a,
+      b,
+    ) => a.path.length - b.path.length)[0];
 
   return listing
     ? {
@@ -366,8 +522,9 @@ export function findRootReadme(
     : undefined;
 }
 
+const README_REGEX = new RegExp(`^${readmeBaseRegex}$`, "i");
 export function isReadme(filename: string): boolean {
-  return new RegExp(`^${readmeBaseRegex}$`, "i").test(filename);
+  return README_REGEX.test(filename);
 }
 
 export type Dep = { name: string; children: Dep[] };
@@ -556,6 +713,19 @@ export function getBasePath({
   return `${isStd ? "" : "/x"}/${name}${
     version ? `@${encodeURIComponent(version)}` : ""
   }`;
+}
+
+export function getModulePath(
+  name: string,
+  version: string | undefined,
+  path: string | undefined,
+) {
+  const isStd = name === "std";
+  return getBasePath({
+    isStd,
+    name,
+    version,
+  }) + path;
 }
 
 export const S3_BUCKET =

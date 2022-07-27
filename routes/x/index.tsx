@@ -2,8 +2,10 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, Head, PageProps } from "$fresh/runtime.ts";
-import { tw } from "twind";
+import { Fragment, h } from "preact";
+import { PageProps } from "$fresh/server.ts";
+import { Head } from "$fresh/runtime.ts";
+import { tw } from "@twind";
 import { Handlers } from "$fresh/server.ts";
 import twas from "$twas";
 import { emojify } from "$emoji";
@@ -11,6 +13,7 @@ import { emojify } from "$emoji";
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
+import * as Icons from "@/components/Icons.tsx";
 
 import {
   getStats,
@@ -38,9 +41,9 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
         <title>Third Party Modules | Deno</title>
       </Head>
       <div class={tw`bg-gray`}>
-        <Header subtitle="Third Party Modules" widerContent={true} />
+        <Header selected="Third Party Modules" />
         <div>
-          <div class={tw`max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8`}>
+          <div class={tw`section-x-inset-lg mt-8`}>
             <dt class={tw`text-lg leading-6 font-medium text-gray-900`}>
               What is deno.land/x?
             </dt>
@@ -82,7 +85,7 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
           </div>
           <form
             method="get"
-            class={tw`max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8`}
+            class={tw`section-x-inset-lg mt-8`}
           >
             <label htmlFor="query" class={tw`font-medium sr-only`}>
               Search
@@ -90,8 +93,7 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
             <input
               name="query"
               id="query"
-              class={tw
-                `block w-full px-4 py-2 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1`}
+              class={tw`block w-full px-4 py-2 leading-normal bg-white border border-gray-200 rounded-lg outline-none shadow hover:shadow-sm focus:shadow-sm appearance-none focus:border-gray-300 hover:border-gray-300 mt-1`}
               type="text"
               placeholder={!data.resp
                 ? "Search"
@@ -100,28 +102,24 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
             />
           </form>
           <div
-            class={tw
-              `sm:max-w-screen-lg sm:mx-auto sm:px-6 md:px-8 pb-4 sm:pb-12`}
+            class={tw`sm:max-w-screen-lg sm:mx-auto sm:px-6 md:px-8 pb-4 sm:pb-12`}
           >
             {data.resp === null
               ? (
                 <div
-                  class={tw
-                    `p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate`}
+                  class={tw`p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500 truncate`}
                 >
                   Failed to load modules
                 </div>
               )
               : (
                 <div
-                  class={tw
-                    `bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4`}
+                  class={tw`bg-white sm:shadow border border-gray-200 overflow-hidden sm:rounded-md mt-4`}
                 >
                   {data.resp.results.length == 0
                     ? (
                       <div
-                        class={tw
-                          `p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500`}
+                        class={tw`p-4 text-center sm:text-left text-sm leading-5 font-medium text-gray-500`}
                       >
                         No modules found. Please let us know what you're looking
                         for by{" "}
@@ -174,8 +172,7 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
           </div>
           <div
             id="info"
-            class={tw
-              `max-w-screen-xl mx-auto pt-4 pb-8 sm:pt-8 px-4 sm:px-6 lg:pt-12 lg:px-8`}
+            class={tw`max-w-screen-xl mx-auto pt-4 pb-8 sm:pt-8 px-4 sm:px-6 lg:pt-12 lg:px-8`}
           >
             <dl class={tw`md:grid md:grid-cols-2 md:gap-8`}>
               <div>
@@ -226,8 +223,7 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
                     <span class={tw`block w-full rounded-md shadow-sm mt-4`}>
                       <a
                         href="/add_module"
-                        class={tw
-                          `w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out`}
+                        class={tw`w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out`}
                       >
                         Publish a module
                       </a>
@@ -292,8 +288,7 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
             </dl>
           </div>
           <div
-            class={tw
-              `max-w-screen-lg mx-auto pt-4 pb-8 sm:pt-8 sm:pb-12 px-4 sm:px-6 lg:pt-12 lg:pb-16 lg:px-8`}
+            class={tw`max-w-screen-lg mx-auto pt-4 pb-8 sm:pt-8 sm:pb-12 px-4 sm:px-6 lg:pt-12 lg:pb-16 lg:px-8`}
           >
             <h4 class={tw`font-semibold text-2xl`} id="stats">
               Stats
@@ -304,8 +299,7 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
                   <div>
                     <h5 class={tw`font-medium text-lg`}>New modules</h5>
                     <div
-                      class={tw
-                        `bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2`}
+                      class={tw`bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2`}
                     >
                       <ModuleList
                         modules={data.stats.recently_added_modules.map((v) => ({
@@ -320,8 +314,7 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
                   <div>
                     <h5 class={tw`font-medium text-lg`}>Recently updated</h5>
                     <div
-                      class={tw
-                        `bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2`}
+                      class={tw`bg-white sm:shadow border border-gray-200 overflow-hidden rounded-md mt-2`}
                     >
                       <ModuleList
                         modules={data.stats.recently_uploaded_versions.map((
@@ -340,7 +333,7 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
               : null}
           </div>
         </div>
-        <Footer simple />
+        <Footer />
       </div>
     </>
   );
@@ -364,21 +357,18 @@ function ModuleList({
           <li class={i !== 0 ? "border-t border-gray-200" : ""} key={i}>
             <a
               href={link}
-              class={tw
-                `block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out`}
+              class={tw`block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out`}
             >
               <div class={tw`flex items-center px-4 sm:px-6 py-2`}>
                 <div class={tw`min-w-0 flex-1 flex items-center`}>
                   <div class={tw`min-w-0 flex-1`}>
                     <div
-                      class={tw
-                        `text-sm leading-5 font-medium text-blue-500 truncate`}
+                      class={tw`text-sm leading-5 font-medium text-blue-500 truncate`}
                     >
                       {meta.name}
                     </div>
                     <div
-                      class={tw
-                        `mt-1 flex items-center text-sm leading-5 text-gray-500`}
+                      class={tw`mt-1 flex items-center text-sm leading-5 text-gray-500`}
                     >
                       <span class={tw`truncate`}>
                         {meta.description
@@ -392,8 +382,7 @@ function ModuleList({
                     </div>
                     {meta.date && (
                       <div
-                        class={tw
-                          `mt-1 flex items-center text-sm leading-5 text-gray-400`}
+                        class={tw`mt-1 flex items-center text-sm leading-5 text-gray-400`}
                       >
                         <span
                           class={tw`truncate`}
@@ -412,31 +401,11 @@ function ModuleList({
                     <div class={tw`text-gray-400`}>
                       {meta.starCount}
                     </div>
-                    <svg
-                      class={tw`ml-1 text-gray-400 w-5 h-5`}
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <title>
-                        star
-                      </title>
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                      </path>
-                    </svg>
+                    <Icons.Star class="ml-1 text-gray-400" title="star" />
                   </div>
                 )}
                 <div>
-                  <svg
-                    class={tw`h-5 w-5 text-gray-400`}
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
+                  <Icons.ArrowRight />
                 </div>
               </div>
             </a>

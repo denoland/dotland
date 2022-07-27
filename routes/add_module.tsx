@@ -2,8 +2,9 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { ComponentChildren, Fragment, h, Head } from "$fresh/runtime.ts";
-import { tw } from "twind";
+import { Fragment, h } from "preact";
+import { Head } from "$fresh/runtime.ts";
+import { tw } from "@twind";
 import { CDN_ENDPOINT } from "@/util/registry_utils.ts";
 import { Header } from "@/components/Header.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
@@ -46,9 +47,9 @@ export default function AddModulePage() {
         `}
       </script>
       <div class={tw`bg-gray`}>
-        <Header subtitle="Third Party Modules" widerContent={true} />
+        <Header selected="Third Party Modules" />
         <form
-          class={tw`max-w-screen-lg mx-auto px-4 sm:px-6 md:px-8 mt-8`}
+          class={tw`section-x-inset-lg mt-8`}
           // @ts-ignore onSubmit does support strings
           onSubmit="(async (e) => {
           e.preventDefault();
@@ -72,8 +73,7 @@ export default function AddModulePage() {
         >
           <section class={tw`inset-y-0 px-10 flex`}>
             <div
-              class={tw
-                `flex flex-col space-y-4 my-auto px-4 md:px-16 lg:px-24 xl:px-32`}
+              class={tw`flex flex-col space-y-4 my-auto px-4 md:px-16 lg:px-24 xl:px-32`}
             >
               <div class={tw`my-auto py-10`}>
                 <ModuleStep title="Adding a module">
@@ -106,8 +106,7 @@ export default function AddModulePage() {
                     <input
                       id="modulename"
                       pattern="^[a-z0-9_]{3,40}$"
-                      class={tw
-                        `block w-full px-4 py-2 mt-3 mb-1 leading-normal bg-white border border-gray-300 rounded-lg outline-none shadow-sm appearance-none focus:border-gray-500 hover:border-gray-400 invalid:(border-red-300 hover:border-red-300 focus:border-red-300)`}
+                      class={tw`block w-full px-4 py-2 mt-3 mb-1 leading-normal bg-white border border-gray-300 rounded-lg outline-none shadow-sm appearance-none focus:border-gray-500 hover:border-gray-400 invalid:(border-red-300 hover:border-red-300 focus:border-red-300)`}
                       type="text"
                       placeholder="Module Name"
                       autoComplete="off"
@@ -179,8 +178,7 @@ export default function AddModulePage() {
                     </label>
                     <input
                       id="subdirectory"
-                      class={tw
-                        `block w-full px-4 py-2 mt-2 mb-1 leading-normal bg-white border border-gray-300 rounded-lg outline-none shadow-sm appearance-none focus:border-gray-500 hover:border-gray-400 valid:(border-green-300 hover:border-green-300 focus:border-green-300) invalid:(border-red-300 hover:border-red-300 focus:border-red-300)`}
+                      class={tw`block w-full px-4 py-2 mt-2 mb-1 leading-normal bg-white border border-gray-300 rounded-lg outline-none shadow-sm appearance-none focus:border-gray-500 hover:border-gray-400 valid:(border-green-300 hover:border-green-300 focus:border-green-300) invalid:(border-red-300 hover:border-red-300 focus:border-red-300)`}
                       type="text"
                       placeholder="Subdirectory"
                       pattern="^([^(/)])(.*\/$)"
@@ -250,8 +248,7 @@ export default function AddModulePage() {
                   <div class={tw`rounded-md shadow-sm mt-12`}>
                     <button
                       role="submit"
-                      class={tw
-                        `w-full flex justify-center py-3 border border-gray-300 text-md font-medium rounded-lg text-gray-700 bg-gray-100 hover:text-gray-800 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out`}
+                      class={tw`w-full flex justify-center py-3 border border-gray-300 text-md font-medium rounded-lg text-gray-700 bg-gray-100 hover:text-gray-800 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out`}
                     >
                       Submit
                     </button>
@@ -259,16 +256,14 @@ export default function AddModulePage() {
 
                   <div
                     id="addModuleSuccess"
-                    class={tw
-                      `mt-2 p-2 bg-gray-50 rounded-md border text-green-800 border-green-200 hidden`}
+                    class={tw`mt-2 p-2 bg-gray-50 rounded-md border text-green-800 border-green-200 hidden`}
                   >
                     Module successfully registered! To upload a version, create
                     a new tag / release in the repository.
                   </div>
                   <div
                     id="addModulePending"
-                    class={tw
-                      `mt-2 p-2 bg-gray-50 rounded-md border text-gray-800 border-gray-200 hidden`}
+                    class={tw`mt-2 p-2 bg-gray-50 rounded-md border text-gray-800 border-gray-200 hidden`}
                   >
                     Waiting to receive initial WebHook event from GitHub...
                   </div>
@@ -277,7 +272,7 @@ export default function AddModulePage() {
             </div>
           </section>
         </form>
-        <Footer simple />
+        <Footer />
       </div>
     </>
   );

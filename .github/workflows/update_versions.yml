@@ -1,0 +1,28 @@
+name: update_versions
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: update versions.json
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.DENOBOT_PAT }}
+
+      - name: Install deno
+        uses: denoland/setup-deno@v1
+
+      - name: Build and Create PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.DENOBOT_PAT }}
+          GH_WORKFLOW_ACTOR: ${{ github.actor }}
+        run: |
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git config user.name "${{ github.actor }}"
+          deno run -A scripts/update_versions.ts --create-pr
