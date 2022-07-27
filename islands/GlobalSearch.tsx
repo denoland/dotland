@@ -21,9 +21,9 @@ if (IS_BROWSER && window.HTMLDialogElement === "undefined") {
 }
 
 const kinds = [
-  "All",
-  "Manual",
-  "Modules",
+  "全部",
+  "手册",
+  "模块",
   "Symbols",
 ] as const;
 
@@ -59,7 +59,7 @@ export default function GlobalSearch() {
     modules?: Array<ModuleSearchResult>;
     symbols?: Array<DocNode>;
   }>({});
-  const [kind, setKind] = useState<typeof kinds[number]>("All");
+  const [kind, setKind] = useState<typeof kinds[number]>("全部");
   const [symbolKindsToggle, setSymbolKindsToggle] = useState<
     Record<(keyof typeof symbolKinds), boolean>
   >({
@@ -101,24 +101,24 @@ export default function GlobalSearch() {
 
     const queries = [];
 
-    if (kind === "Manual" || kind === "All") {
+    if (kind === "手册" || kind === "全部") {
       queries.push({
         indexName: "deno_manual",
         query: input || "Introduction",
         params: {
-          hitsPerPage: kind === "All" ? 5 : 10,
+          hitsPerPage: kind === "全部" ? 5 : 10,
           attributesToRetrieve: ["anchor", "url", "content", "hierarchy"],
           filters: "type:content",
         },
       });
     }
 
-    if (kind === "Symbols" || kind === "All") {
+    if (kind === "Symbols" || kind === "全部") {
       queries.push({
         indexName: "deno_modules",
         query: input || "serve",
         params: {
-          hitsPerPage: kind === "All" ? 5 : 10,
+          hitsPerPage: kind === "全部" ? 5 : 10,
           filters: Object.entries(symbolKindsToggle)
             .filter(([_, v]) => kind === "Symbols" ? v : true)
             .map(([k]) => "kind:" + symbolKinds[k as keyof typeof symbolKinds])
@@ -127,12 +127,12 @@ export default function GlobalSearch() {
       });
     }
 
-    if (kind === "Modules" || kind === "All") {
+    if (kind === "模块" || kind === "全部") {
       queries.push({
         indexName: "modules",
         query: input,
         params: {
-          hitsPerPage: kind === "All" ? 5 : 10,
+          hitsPerPage: kind === "全部" ? 5 : 10,
         },
       });
     }
@@ -171,7 +171,7 @@ export default function GlobalSearch() {
           <div
             class={tw`ml-1.5 py-2.5 h-9 flex-auto text-light text-sm leading-4 font-medium text-left`}
           >
-            Search...
+            搜索...
           </div>
           <div class={tw`mx-4`}>
             ⌘K
@@ -204,7 +204,7 @@ export default function GlobalSearch() {
                   type="text"
                   onInput={(e) => setInput(e.currentTarget.value)}
                   value={input}
-                  placeholder="Search manual, symbols and modules..."
+                  placeholder="搜索手册、符号、模块..."
                   autoFocus
                 />
               </label>
@@ -239,7 +239,7 @@ export default function GlobalSearch() {
 
           <div class={tw`overflow-y-auto flex-grow-1`}>
             {results.manual && (
-              <Section title="Manual" isAll={kind === "All"}>
+              <Section title="手册" isAll={kind === "全部"}>
                 {results.manual && results.manual.length === 0 && (
                   <div class={tw`text-gray-500 italic`}>
                     Your search did not yield any results in the manual.
@@ -249,7 +249,7 @@ export default function GlobalSearch() {
               </Section>
             )}
             {results.modules && (
-              <Section title="Modules" isAll={kind === "All"}>
+              <Section title="模块" isAll={kind === "全部"}>
                 {results.modules && results.modules.length === 0 && (
                   <div class={tw`text-gray-500 italic`}>
                     Your search did not yield any results in the modules index.
@@ -261,7 +261,7 @@ export default function GlobalSearch() {
               </Section>
             )}
             {results.symbols && (
-              <Section title="Symbols" isAll={kind === "All"}>
+              <Section title="Symbols" isAll={kind === "全部"}>
                 {results.symbols && results.symbols.length === 0 && (
                   <div class={tw`text-gray-500 italic`}>
                     Your search did not yield any results in the symbol index.
@@ -270,7 +270,7 @@ export default function GlobalSearch() {
                 {results.symbols.map((doc) => <SymbolResult doc={doc} />)}
               </Section>
             )}
-            <div class={tw`${kind === "All" ? "h-6" : "h-3.5"}`} />
+            <div class={tw`${kind === "全部" ? "h-6" : "h-3.5"}`} />
           </div>
 
           {kind === "Symbols" &&
