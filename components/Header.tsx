@@ -110,7 +110,7 @@ export function Header({
             </a>
 
             <a
-              href="https://github.com/denoland"
+              href="https://github.com/denoland/deno"
               class={tw`lg:ml-5 my-auto hidden lg:block`}
             >
               <span class={tw`sr-only`}>GitHub</span>
