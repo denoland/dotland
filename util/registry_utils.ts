@@ -281,7 +281,6 @@ export async function getBuild(id: string): Promise<Build | Error> {
 
 const markdownExtension = "(?:markdown|mdown|mkdn|mdwn|mkd|md)";
 const orgExtension = "org";
-const readmeBaseRegex = `readme(?:\\.(${markdownExtension}|${orgExtension}))?`;
 
 export function fileTypeFromURL(filename: string): string | undefined {
   const f = filename.toLowerCase();
@@ -327,7 +326,7 @@ export function fileNameFromURL(url: string): string {
   return segments[segments.length - 1];
 }
 
-const README_REGEX = new RegExp(`^${readmeBaseRegex}$`, "i");
+const README_REGEX = new RegExp(`^readme(?:\\.(${markdownExtension}|${orgExtension}))?$`, "i");
 export function isReadme(filename: string): boolean {
   return README_REGEX.test(filename);
 }

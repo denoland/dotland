@@ -191,7 +191,7 @@ function ModuleView({
     data.kind === "index" ? "tree" : undefined,
   );
 
-  if (url.searchParams.has("code") || !true || data.kind === "file") {
+  if (url.searchParams.has("code") || !isStd || data.kind === "file") {
     return (
       <CodeView
         {...{
