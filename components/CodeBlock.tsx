@@ -7,7 +7,11 @@ import { tw } from "@twind";
 import { Prism } from "@/util/prism_utils.ts";
 import { escape as htmlEscape } from "$he";
 import { normalizeTokens } from "@/util/prism_utils.ts";
-import { fileTypeFromURL, filetypeIsJS } from "../util/registry_utils.ts";
+import {
+  extractLinkUrl,
+  fileTypeFromURL,
+  filetypeIsJS,
+} from "../util/registry_utils.ts";
 
 export interface CodeBlockProps {
   code: string;
@@ -102,16 +106,12 @@ export function RawCodeBlock({
                 }
 
                 if (token.types.includes("string")) {
-                  try {
-                    const quote = token.content[0];
-                    const urlContent = token.content.slice(1, -1);
-                    const res = new URL(
-                      urlContent,
-                      filetypeIsJS(fileTypeFromURL(urlContent))
-                        ? url
-                        : undefined,
-                    );
-
+                  const result = extractLinkUrl(
+                    token.content,
+                    url.origin + url.pathname,
+                  );
+                  if (result) {
+                    const [href, specifier, quote] = result;
                     return (
                       <span
                         className={"token " +
@@ -120,15 +120,13 @@ export function RawCodeBlock({
                         {quote}
                         <a
                           className={tw`hover:underline`}
-                          href={res.href + "?code"}
+                          href={href + "?code"}
                         >
-                          {urlContent}
+                          {specifier}
                         </a>
                         {quote}
                       </span>
                     );
-                  } catch (e) {
-                    // ignore
                   }
                 }
                 return (

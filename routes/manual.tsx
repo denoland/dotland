@@ -211,28 +211,19 @@ function UserContributionBanner({
   href: string;
 }) {
   return (
-    <div class={tw`bg-yellow-300 sticky top-0`}>
-      <div class={tw`max-w-screen-xl mx-auto py-4 px-3 sm:px-6 lg:px-8`}>
-        <div class={tw`flex items-center justify-between flex-wrap`}>
-          <div class={tw`w-0 flex-1 flex items-center`}>
-            <p class={tw`ml-3 font-medium text-gray-900`}>
-              <span>
-                You are viewing documentation generated from a{"  "}
-                <b class={tw`font-bold`}>user contribution</b>{"  "}
-                or an upcoming release. The contents of this document may not
-                have been reviewed by the Deno team.{" "}
-              </span>
+    <div
+      class={tw`bg-yellow-300 sticky top-0 rounded-md mb-6 py-4 px-3 sm:px-6 lg:px-8 font-medium text-gray-900`}
+    >
+      <span>
+        You are viewing documentation generated from a{"  "}
+        <b class={tw`font-bold`}>user contribution</b>{"  "}
+        or an upcoming release. The contents of this document may not have been
+        reviewed by the Deno team.{" "}
+      </span>
 
-              <a
-                class={tw`underline cursor-pointer text-gray-900`}
-                href={href}
-              >
-                Click here to view the documentation for the latest release.
-              </a>
-            </p>
-          </div>
-        </div>
-      </div>
+      <a class={tw`underline cursor-pointer`} href={href}>
+        Click here to view the documentation for the latest release.
+      </a>
     </div>
   );
 }
