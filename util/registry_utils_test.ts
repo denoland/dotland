@@ -1,6 +1,7 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 import {
+  extractLinkUrl,
   fileNameFromURL,
   fileTypeFromURL,
   findRootReadme,
@@ -241,4 +242,56 @@ Deno.test("isReadme", () => {
   for (const [path, expectedToBeReadme] of tests) {
     assertEquals([path, isReadme(path)], [path, expectedToBeReadme]);
   }
+});
+
+Deno.test("extractLinkUrl", () => {
+  assertEquals(
+    extractLinkUrl(`"https://deno.land/std/foo/bar.ts"`, "")![0],
+    "https://deno.land/std/foo/bar.ts",
+  );
+  assertEquals(
+    extractLinkUrl(`"https://deno.land/std/foo/bar.js"`, "")![0],
+    "https://deno.land/std/foo/bar.js",
+  );
+  assertEquals(
+    extractLinkUrl(`"https://deno.land/std/foo/bar.tsx"`, "")![0],
+    "https://deno.land/std/foo/bar.tsx",
+  );
+  assertEquals(
+    extractLinkUrl(`"https://deno.land/std/foo/bar.jsx"`, "")![0],
+    "https://deno.land/std/foo/bar.jsx",
+  );
+  assertEquals(
+    extractLinkUrl(`"https://deno.land/std/foo/bar.mts"`, "")![0],
+    "https://deno.land/std/foo/bar.mts",
+  );
+  assertEquals(
+    extractLinkUrl(`"https://deno.land/std/foo/bar.cts"`, "")![0],
+    "https://deno.land/std/foo/bar.cts",
+  );
+  assertEquals(
+    extractLinkUrl(`"https://deno.land/std/foo/bar.mjs"`, "")![0],
+    "https://deno.land/std/foo/bar.mjs",
+  );
+  assertEquals(
+    extractLinkUrl(`"https://deno.land/std/foo/bar.cjs"`, "")![0],
+    "https://deno.land/std/foo/bar.cjs",
+  );
+  assertEquals(
+    extractLinkUrl(`"./qux.ts"`, "https://deno.land/std/foo/bar/baz.ts")![0],
+    "https://deno.land/std/foo/bar/qux.ts",
+  );
+  assertEquals(
+    extractLinkUrl(`"../quux.ts"`, "https://deno.land/std/foo/bar/baz.ts")![0],
+    "https://deno.land/std/foo/quux.ts",
+  );
+
+  // Doesn't link to the external site's url
+  assertEquals(extractLinkUrl(`"https://example.com/foo.ts"`, ""), undefined);
+
+  // Doesn't link relative path if the base url is not script
+  assertEquals(
+    extractLinkUrl(`"./foo.ts"`, "https://deno.land/README.md"),
+    undefined,
+  );
 });
