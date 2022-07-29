@@ -2,7 +2,7 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { ComponentChildren, Fragment, h } from "preact";
+import { Fragment, h } from "preact";
 import { tw } from "@twind";
 import { type CommonProps, getBasePath } from "@/util/registry_utils.ts";
 import { type Doc, type DocNode } from "@/util/doc.ts";
@@ -11,7 +11,7 @@ import { ModuleDoc } from "$doc_components/module_doc.tsx";
 import { ModulePathIndex } from "$doc_components/module_path_index.tsx";
 import { ModulePathIndexPanel } from "$doc_components/module_path_index_panel.tsx";
 import { FileDisplay } from "./FileDisplay.tsx";
-import { SymbolDoc } from "../doc_components/symbol_doc.tsx";
+import { SymbolDoc } from "$doc_components/symbol_doc.tsx";
 
 export function DocView({
   doc,

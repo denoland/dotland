@@ -7,6 +7,11 @@ import { tw } from "@twind";
 import { Prism } from "@/util/prism_utils.ts";
 import { escape as htmlEscape } from "$he";
 import { normalizeTokens } from "@/util/prism_utils.ts";
+import {
+  extractLinkUrl,
+  fileTypeFromURL,
+  filetypeIsJS,
+} from "../util/registry_utils.ts";
 
 export interface CodeBlockProps {
   code: string;
@@ -28,6 +33,7 @@ export interface CodeBlockProps {
     | "wasm"
     | "makefile"
     | "dockerfile";
+  url: URL;
 }
 
 export function RawCodeBlock({
@@ -36,12 +42,13 @@ export function RawCodeBlock({
   class: extraClassName,
   disablePrefixes,
   enableLineRef = false,
+  url,
 }: CodeBlockProps & {
   class?: string;
   enableLineRef?: boolean;
 }) {
-  const codeDivClasses = tw
-    `text-gray-300 text-right select-none inline-block mr-2 sm:mr-3`;
+  const codeDivClasses =
+    tw`text-gray-300 text-right select-none inline-block mr-2 sm:mr-3`;
   const newLang = language === "shell"
     ? "bash"
     : language === "text"
@@ -96,6 +103,31 @@ export function RawCodeBlock({
                 if (token.empty) {
                   return <br />;
                 }
+
+                if (token.types.includes("string")) {
+                  const result = extractLinkUrl(
+                    token.content,
+                    url.origin + url.pathname,
+                  );
+                  if (result) {
+                    const [href, specifier, quote] = result;
+                    return (
+                      <span
+                        className={"token " +
+                          token.types.join(" ")}
+                      >
+                        {quote}
+                        <a
+                          className={tw`hover:underline`}
+                          href={href + "?code"}
+                        >
+                          {specifier}
+                        </a>
+                        {quote}
+                      </span>
+                    );
+                  }
+                }
                 return (
                   <span className={"token " + token.types.join(" ")}>
                     {token.content}
@@ -110,13 +142,16 @@ export function RawCodeBlock({
   );
 }
 
-export function CodeBlock({ code, language, disablePrefixes }: CodeBlockProps) {
+export function CodeBlock(
+  { code, language, disablePrefixes, url }: CodeBlockProps,
+) {
   return (
     <RawCodeBlock
       code={code}
       language={language}
       disablePrefixes={disablePrefixes}
-      class={tw`p-4`}
+      class={tw`p-4 bg-gray-100 rounded-lg`}
+      url={url}
     />
   );
 }

@@ -125,11 +125,10 @@ function TopPanel({
   //   );
 
   return (
-    <div class={tw`bg-ultralight border-b-1`}>
-      <div class={tw`section-x-inset-xl py-8 md:h-36 flex items-center`}>
+    <div class={tw`bg-ultralight border-b border-light-border`}>
+      <div class={tw`section-x-inset-xl py-5 flex items-center`}>
         <div
-          class={tw
-            `flex flex-row flex-wrap justify-between items-center w-full gap-4`}
+          class={tw`flex flex-row flex-wrap justify-between items-center w-full gap-4`}
         >
           <div>
             <Breadcrumbs
@@ -142,11 +141,12 @@ function TopPanel({
               {moduleMeta && emojify(moduleMeta.description ?? "")}
             </div>
           </div>
-          <div class={tw`flex flex-row flex-wrap items-center gap-4`}>
+          <div
+            class={tw`flex flex-col items-stretch gap-4 w-full md:(flex-row w-auto items-center)`}
+          >
             {versionMeta && moduleMeta && (
               <div
-                class={tw
-                  `flex flex-row flex-auto justify-center items-center gap-4 border border-dark-border rounded-md bg-white py-2 px-5`}
+                class={tw`flex flex-row flex-auto justify-center items-center gap-4 border border-dark-border rounded-md bg-white py-2 px-5`}
               >
                 <div class={tw`flex items-center`}>
                   <Icons.GitHub class="mr-2 w-5 h-5 inline text-gray-700" />
@@ -330,26 +330,23 @@ function VersionSelector({
   path: string;
 }) {
   return (
-    <div class={tw`flex-auto`}>
-      <div class={tw`w-full`}>
-        <VersionSelect
-          versions={Object.fromEntries(
-            versions.map((ver) => [ver, getModulePath(name, ver, path)]),
-          )}
-          selectedVersion={selectedVersion}
-        />
-        {versions[0] !== selectedVersion && (
-          <a
-            class={tw
-              `mt-2 w-full inline-flex justify-center py-1 px-2 bg-white border border-red-300 rounded-md text-sm leading-5 font-medium text-red-500 hover:text-red-400 focus:(outline-none border-blue-300 shadow-outline-red) transition duration-150 ease-in-out`}
-            aria-label="Go to latest version "
-            href={getModulePath(name, versions[0], path)}
-          >
-            Go to latest
-          </a>
+    <>
+      <VersionSelect
+        versions={Object.fromEntries(
+          versions.map((ver) => [ver, getModulePath(name, ver, path)]),
         )}
-      </div>
-    </div>
+        selectedVersion={selectedVersion}
+      />
+      {versions[0] !== selectedVersion && (
+        <a
+          class={tw`py-2.5 px-4.5 text-white bg-tag-blue hover:bg-blue-500 rounded-md leading-none`}
+          aria-label="Go to latest version"
+          href={getModulePath(name, versions[0], path)}
+        >
+          Go to Latest
+        </a>
+      )}
+    </>
   );
 }
 
@@ -366,6 +363,11 @@ export const handler: Handlers<MaybeData> = {
 
     const path = maybePath ? "/" + maybePath : "";
     const isStd = name === "std";
+
+    if (isStd && url.pathname.startsWith("/x")) {
+      url.pathname = url.pathname.slice(2);
+      return Response.redirect(url, 301);
+    }
 
     if (!version) {
       const versions = await getVersionList(name);
@@ -419,7 +421,7 @@ export const handler: Handlers<MaybeData> = {
       return resp;
     }
 
-    const ln = extractAltLineNumberReference(url.href);
+    const ln = extractAltLineNumberReference(url.pathname);
     if (ln) {
       url.pathname = ln.rest;
       url.searchParams.set("code", "");
