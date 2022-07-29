@@ -6,7 +6,11 @@ export { css };
 
 export const config: Configuration = {
   preflight: {
-    body: apply`text-default scroll-smooth`,
+    body: apply`text-default ${
+      css({
+        "scroll-behaviour": "smooth",
+      })
+    }`,
   },
   darkMode: "class",
   //mode: "silent",

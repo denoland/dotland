@@ -111,6 +111,11 @@
     "link": "https://andbounds.com/"
   },
   {
+    "image": "/images/showcase/ycrm.png",
+    "title": "YCRM",
+    "link": "https://ycrm.xyz/"
+  },
+  {
     "image": "/images/showcase/profilator.png",
     "title": "GitHub Profilator",
     "link": "https://profilator.deno.dev/",
@@ -120,5 +125,10 @@
     "image": "/images/showcase/localseostudio.png",
     "title": "Local SEO Studio",
     "link": "https://localseo.studio/"
+  },
+  {
+    "image": "/images/showcase/cargo.png",
+    "title": "Cargo Web Framework",
+    "link": "https://cargo.wtf/"
   }
 ]
