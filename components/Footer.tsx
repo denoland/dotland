@@ -84,13 +84,13 @@ export function Footer() {
               </span>
               <div class={tw`flex gap-3 text-main`}>
                 <a href="https://github.com/denoland">
-                  <Icons.GitHub class="hover:text-main-highlight" />
+                  <Icons.GitHub class="hover:text-default-highlight" />
                 </a>
                 <a href="https://discord.gg/deno">
-                  <Icons.Discord class="hover:text-main-highlight" />
+                  <Icons.Discord class="hover:text-default-highlight" />
                 </a>
                 <a href="https://twitter.com/deno_land">
-                  <Icons.Twitter class="hover:text-main-highlight" />
+                  <Icons.Twitter class="hover:text-default-highlight" />
                 </a>
               </div>
             </div>

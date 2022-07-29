@@ -70,9 +70,8 @@ export function RawCodeBlock({
 
   return (
     <pre
-      className={tw`text-sm gfm-highlight highlight-source-${newLang} flex ${
-        extraClassName ?? ""
-      }`}
+      className={tw`text-sm flex ${extraClassName ?? ""}` +
+        ` gfm-highlight highlight-source-${newLang}`}
       data-color-mode="light"
       data-light-theme="light"
     >
@@ -81,7 +80,7 @@ export function RawCodeBlock({
           <div className={codeDivClasses}>
             {tokens.map((_, i) => (
               <a
-                className={tw`text-gray-500 token text-right block`}
+                className={tw`text-gray-500 text-right block` + " token"}
                 tab-index={-1}
                 href={`#L${i + 1}`}
               >

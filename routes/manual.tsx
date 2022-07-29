@@ -239,25 +239,24 @@ function ToC({
 }) {
   return (
     <nav>
-      <ol class={tw`list-decimal list-inside font-semibold nested`}>
+      <ol class={tw`list-decimal list-inside font-semibold` + " nested"}>
         {Object.entries(tableOfContents).map(([slug, entry]) => {
+          const active = path === `/${slug}`;
           return (
             <li key={slug}>
               <input
                 type="checkbox"
                 id={slug}
                 class={tw`hidden checked:siblings:even:children:first-child:rotate-90 checked:siblings:last-child:block`}
-                checked={path === `/${slug}` || path.startsWith(`/${slug}/`)}
+                checked={active || path.startsWith(`/${slug}/`)}
                 disabled={!entry.children}
               />
 
               <label
                 htmlFor={slug}
                 class={tw`flex items-center gap-2 px-2.5 py-2 rounded-md block ${
-                  path === `/${slug}`
-                    ? "link bg-ultralight toc-active"
-                    : "hover:text-gray-500"
-                } font-semibold`}
+                  active ? "link bg-ultralight" : "hover:text-gray-500"
+                } font-semibold` + (active ? " toc-active" : "")}
               >
                 <Icons.TriangleRight
                   class={entry.children ? "" : "invisible"}
@@ -268,26 +267,29 @@ function ToC({
               </label>
 
               {entry.children && (
-                <ol class={tw`list-decimal font-normal nested hidden`}>
+                <ol class={tw`list-decimal font-normal hidden` + " nested"}>
                   {Object.entries(entry.children).map(
                     (
                       [childSlug, name],
-                    ) => (
-                      <li key={`${slug}/${childSlug}`}>
-                        <a
-                          href={`/manual${
-                            version ? `@${version}` : ""
-                          }/${slug}/${childSlug}`}
-                          class={tw`pl-8 pr-2.5 py-1 rounded-md block ${
-                            path === `/${slug}/${childSlug}`
-                              ? "link bg-ultralight toc-active"
-                              : "hover:text-gray-500"
-                          } font-normal`}
-                        >
-                          {name}
-                        </a>
-                      </li>
-                    ),
+                    ) => {
+                      const active = path === `/${slug}/${childSlug}`;
+                      return (
+                        <li key={`${slug}/${childSlug}`}>
+                          <a
+                            href={`/manual${
+                              version ? `@${version}` : ""
+                            }/${slug}/${childSlug}`}
+                            class={tw`pl-8 pr-2.5 py-1 rounded-md block ${
+                              active
+                                ? "link bg-ultralight"
+                                : "hover:text-gray-500"
+                            } font-normal` + (active ? " toc-active" : "")}
+                          >
+                            {name}
+                          </a>
+                        </li>
+                      );
+                    },
                   )}
                 </ol>
               )}
