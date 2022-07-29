@@ -217,7 +217,9 @@ export default function AddModule() {
           <div
             class={tw`w-full lg:w-136 space-x-2 py-3 px-3 bg-[#F3F3F3] rounded-md flex items-center justify-between whitespace-nowrap`}
           >
-            <div class={tw`w-full space-x-2 flex items-center text-sm flex-shrink-1`}>
+            <div
+              class={tw`w-full space-x-2 flex items-center text-sm flex-shrink-1`}
+            >
               <div
                 class={tw`py-1 px-2 rounded-md font-medium bg-[#9CA0AA] text-white`}
               >
