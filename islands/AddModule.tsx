@@ -215,23 +215,19 @@ export default function AddModule() {
             </p>
           </div>
           <div
-            class={tw`w-full lg:w-136 space-x-2 py-3 px-3 bg-[#F3F3F3] rounded-md flex items-center justify-between whitespace-nowrap`}
+            class={tw`w-full lg:w-136 py-3 px-3 bg-[#F3F3F3] rounded-md flex items-center justify-between space-x-2 text-sm whitespace-nowrap`}
           >
             <div
-              class={tw`w-full space-x-2 flex items-center text-sm flex-shrink-1`}
+              class={tw`py-1 px-2 rounded-md font-medium bg-[#9CA0AA] text-white`}
             >
-              <div
-                class={tw`py-1 px-2 rounded-md font-medium bg-[#9CA0AA] text-white`}
+              Payload URL
+            </div>
+            <div class={tw`overflow-x-auto w-full`}>
+              https://api.deno.land/webhook/gh/<span
+                class={tw`font-semibold`}
               >
-                Payload URL
-              </div>
-              <div class={tw`w-full overflow-x-auto flex-shrink-1`}>
-                https://api.deno.land/webhook/gh/<span
-                  class={tw`font-semibold`}
-                >
-                  {urlValue}
-                </span>
-              </div>
+                {urlValue}
+              </span>
             </div>
             {available &&
               (

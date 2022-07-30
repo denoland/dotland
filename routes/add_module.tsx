@@ -16,7 +16,7 @@ export default function AddModulePage() {
       <Head>
         <title>Third Party Modules | Deno</title>
       </Head>
-      <div class={tw`bg-gray`}>
+      <div>
         <Header selected="Third Party Modules" />
         <div
           class={tw`section-x-inset-xl mt-16 mb-28 flex items-center flex-col gap-12 lg:(items-start flex-row gap-36)`}
