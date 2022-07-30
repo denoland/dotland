@@ -160,7 +160,7 @@ export default function ThirdPartyRegistryList(
             <div
               class={tw`px-5 py-4 border-t border-dark-border bg-ultralight flex items-center justify-between`}
             >
-              {data?.results.length && (
+              {!!data?.results.length && (
                 <Pagination
                   {...{
                     currentPage: page,
