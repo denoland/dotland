@@ -232,7 +232,7 @@ export default function AddModule() {
             {available &&
               (
                 <button
-                  class={tw`rounded p-1.5 border border-[#D2D2DC]`}
+                  class={tw`rounded p-1.5 border border-[#D2D2DC] hover:bg-dark-border`}
                   onClick={() =>
                     navigator.clipboard.writeText(
                       "https://api.deno.land/webhook/gh/" + urlValue,
