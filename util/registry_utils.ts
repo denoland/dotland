@@ -153,6 +153,7 @@ export function getRepositoryURL(
   meta: {
     repository: string;
     ref: string;
+    subdir?: string;
   },
   path: string,
   type = "blob",
@@ -489,6 +490,7 @@ export interface DocPageBase {
     type: string;
     repository: string;
     ref: string;
+    subdir?: string;
   };
   /** @deprecated */
   star_count?: number;
