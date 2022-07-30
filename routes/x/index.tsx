@@ -38,7 +38,7 @@ export default function ThirdPartyRegistryList(
 
         <div class={tw`section-x-inset-lg mt-16 mb-24 space-y-15`}>
           <div class={tw`flex items-start gap-14`}>
-            <div class={tw`space-y-4`}>
+            <div class={tw`space-y-4 w-full`}>
               <h1 class={tw`font-bold text-3xl text-black`}>
                 Deno Third Party Modules
               </h1>
@@ -56,7 +56,7 @@ export default function ThirdPartyRegistryList(
                 language="typescript"
                 disablePrefixes
                 url={url}
-                class="inline-block"
+                class="lg:inline-block"
               />
 
               <div class={tw`space-x-2`}>
@@ -98,7 +98,7 @@ export default function ThirdPartyRegistryList(
                 placeholder={data?.totalCount
                   ? `Search through ${data.totalCount} modules...`
                   : "Search..."}
-                class={tw`w-88 py-2.5 px-4 rounded-md border border-dark-border text-default placeholder:text-gray-400`}
+                class={tw`w-full lg:w-88 py-2.5 px-4 rounded-md border border-dark-border text-default placeholder:text-gray-400`}
                 value={query}
               />
             </form>
