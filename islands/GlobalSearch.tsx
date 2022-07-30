@@ -207,7 +207,7 @@ export default function GlobalSearch() {
                 <Icons.MagnifyingGlass />
                 <input
                   id="search-input"
-                  class={tw`ml-1.5 py-3 leading-4 bg-transparent w-full text-main placeholder:text-[#9CA0AA] outline-none`}
+                  class={tw`ml-1.5 py-3 leading-4 bg-transparent w-full text-main placeholder:text-gray-400 outline-none`}
                   type="text"
                   onInput={(e) => setInput(e.currentTarget.value)}
                   value={input}
@@ -295,7 +295,7 @@ export default function GlobalSearch() {
                 >
                   <Icons.ArrowLeft />
                 </button>
-                <span class={tw`text-[#9CA0AA]`}>
+                <span class={tw`text-gray-400`}>
                   Page <span class={tw`font-medium`}>{page + 1}</span> of{" "}
                   <span class={tw`font-medium`}>{totalPages}</span>
                 </span>
@@ -357,7 +357,7 @@ function Section({
     <div class={tw`pt-3`}>
       {isAll && (
         <div
-          class={tw`mx-6 my-1 text-[#9CA0AA] text-sm leading-6 font-semibold`}
+          class={tw`mx-6 my-1 text-gray-400 text-sm leading-6 font-semibold`}
         >
           {title}
         </div>
@@ -417,7 +417,7 @@ function SymbolResult({ doc }: { doc: DocNode }) {
             {doc.kind.replace("A", " a")}
           </span>
           <span class={tw`font-semibold`}>{doc.name}</span>
-          <span class={tw`italic text-sm text-[#9CA0AA] leading-6`}>from</span>
+          <span class={tw`italic text-sm text-gray-400 leading-6`}>from</span>
           <span>{location}</span>
         </div>
         {doc.jsDoc?.doc && (

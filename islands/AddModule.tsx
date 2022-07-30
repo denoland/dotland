@@ -157,7 +157,7 @@ export default function AddModule() {
 
       <div class={tw`flex items-start`}>
         <div
-          class={tw`hidden lg:block p-1.75 rounded-full bg-[#9CA0AA] mr-4.5 mt-1.5`}
+          class={tw`hidden lg:block p-1.75 rounded-full bg-gray-400 mr-4.5 mt-1.5`}
         >
           <Icons.Gear />
         </div>
@@ -170,7 +170,7 @@ export default function AddModule() {
           </p>
           <label>
             <span class={tw`font-medium`}>
-              Subdirectory <span class={tw`text-[#9CA0AA]`}>(optional)</span>
+              Subdirectory <span class={tw`text-gray-400`}>(optional)</span>
             </span>
             <input
               type="text"
@@ -218,7 +218,7 @@ export default function AddModule() {
             class={tw`w-full lg:w-136 py-3 px-3 bg-[#F3F3F3] rounded-md flex items-center justify-between space-x-2 text-sm whitespace-nowrap`}
           >
             <div
-              class={tw`py-1 px-2 rounded-md font-medium bg-[#9CA0AA] text-white`}
+              class={tw`py-1 px-2 rounded-md font-medium bg-gray-400 text-white`}
             >
               Payload URL
             </div>
