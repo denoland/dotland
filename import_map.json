@@ -25,6 +25,7 @@
     "$oak_commons": "https://deno.land/x/oak_commons@0.1.1/negotiation.ts",
     "$doc_components/": "../doc_components/",
     "$deno_doc/": "https://deno.land/x/deno_doc@v0.34.0/lib/",
+    "$canvas-confetti": "https://esm.sh/canvas-confetti@1.5.1",
     "$algolia": "https://esm.sh/algoliasearch@4.13.1"
   }
 }

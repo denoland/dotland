@@ -176,12 +176,14 @@ export interface VersionInfo {
 
 export async function getVersionList(
   module: string,
+  signal?: AbortSignal,
 ): Promise<VersionInfo | null> {
   const url = `${CDN_ENDPOINT}${module}/meta/versions.json`;
   const res = await fetch(url, {
     headers: {
       accept: "application/json",
     },
+    signal,
   });
   if (res.status === 403 || res.status === 404) {
     await res.body?.cancel();
@@ -431,6 +433,38 @@ export function extractAltLineNumberReference(
     rest: matches[1],
     line: parseInt(matches[2]),
   };
+}
+
+/** Matches to https://example.com/foo.ts type string */
+const RE_IS_DENO_LAND_SCRIPT =
+  /^https:\/\/deno\.land\/.*\.(ts|js|tsx|jsx|mts|cts|mjs|cjs)$/;
+const RE_IS_SCRIPT = /\.(ts|js|tsx|jsx|mts|cts|mjs|cjs)$/;
+/** Matches to ./path/to/foo.ts type string */
+const RE_IS_RELATIVE_PATH_SCRIPT =
+  /^\.\.?\/.*\.(ts|js|tsx|jsx|mts|cts|mjs|cjs)$/;
+
+/** Tries to extract link target url from the given target specifier and baseUrl.
+ * The return value is 3-tuple of the link url, the specifier, and the quote character.
+ * Returns undefined if the target isn't url. */
+export function extractLinkUrl(
+  target: string,
+  baseUrl: string,
+): [string, string, string] | undefined {
+  const quote = target[0];
+  const specifier = target.slice(1, -1);
+  if (RE_IS_DENO_LAND_SCRIPT.test(specifier)) {
+    return [specifier, specifier, quote];
+  } else if (
+    RE_IS_RELATIVE_PATH_SCRIPT.test(specifier) &&
+    RE_IS_SCRIPT.test(baseUrl)
+  ) {
+    try {
+      return [new URL(specifier, baseUrl).href, specifier, quote];
+    } catch {
+      return undefined;
+    }
+  }
+  return undefined;
 }
 
 import type { DocNode, DocNodeKind, JsDoc } from "$deno_doc/types.d.ts";

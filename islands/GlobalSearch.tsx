@@ -60,6 +60,8 @@ export default function GlobalSearch() {
     symbols?: Array<DocNode>;
   }>({});
   const [kind, setKind] = useState<typeof kinds[number]>("All");
+  const [page, setPage] = useState<number>(0);
+  const [totalPages, setTotalPages] = useState<number>(1);
   const [symbolKindsToggle, setSymbolKindsToggle] = useState<
     Record<(keyof typeof symbolKinds), boolean>
   >({
@@ -106,6 +108,7 @@ export default function GlobalSearch() {
         indexName: "deno_manual",
         query: input || "Introduction",
         params: {
+          page: page,
           hitsPerPage: kind === "All" ? 5 : 10,
           attributesToRetrieve: ["anchor", "url", "content", "hierarchy"],
           filters: "type:content",
@@ -118,6 +121,7 @@ export default function GlobalSearch() {
         indexName: "deno_modules",
         query: input || "serve",
         params: {
+          page: page,
           hitsPerPage: kind === "All" ? 5 : 10,
           filters: Object.entries(symbolKindsToggle)
             .filter(([_, v]) => kind === "Symbols" ? v : true)
@@ -132,6 +136,7 @@ export default function GlobalSearch() {
         indexName: "modules",
         query: input,
         params: {
+          page: page,
           hitsPerPage: kind === "All" ? 5 : 10,
         },
       });
@@ -139,6 +144,8 @@ export default function GlobalSearch() {
 
     client.multipleQueries(queries).then(
       ({ results }) => {
+        // @ts-ignore algolia typings are annoying
+        setTotalPages(results.find((res) => res.nbPages)?.nbPages ?? 1);
         setResults({
           // @ts-ignore algolia typings are annoying
           manual: results.find((res) => res.index === "deno_manual")?.hits,
@@ -149,7 +156,7 @@ export default function GlobalSearch() {
         });
       },
     );
-  }, [showModal, input, kind, symbolKindsToggle]);
+  }, [showModal, input, kind, symbolKindsToggle, page]);
 
   useEffect(() => {
     if (showModal) {
@@ -185,7 +192,7 @@ export default function GlobalSearch() {
         open={showModal}
       >
         <div
-          class={tw`bg-white w-full h-screen lg:(mt-24 mx-auto rounded-md w-2/3 max-h-[80vh] border border-[#E8E7E5]) flex flex-col`}
+          class={tw`bg-white w-full h-screen flex flex-col overflow-hidden lg:(mt-24 mx-auto rounded-md w-2/3 max-h-[80vh] border border-[#E8E7E5])`}
           onClick={(e) => e.stopPropagation()}
         >
           <div class={tw`pt-6 px-6 border-b border-[#E8E7E5]`}>
@@ -229,7 +236,10 @@ export default function GlobalSearch() {
                         "text-decoration-thickness": "2px",
                       })
                       : ""} ${k === kind ? "text-black" : "text-gray-500"}`}
-                  onClick={() => setKind(k)}
+                  onClick={() => {
+                    setKind(k);
+                    setPage(0);
+                  }}
                 >
                   {k}
                 </button>
@@ -273,37 +283,61 @@ export default function GlobalSearch() {
             <div class={tw`${kind === "All" ? "h-6" : "h-3.5"}`} />
           </div>
 
-          {kind === "Symbols" &&
-            (
-              <div
-                class={tw`bg-ultralight border-t border-[#E8E7E5] py-5 px-6 space-x-3`}
-              >
-                {(Object.keys(symbolKinds) as (keyof typeof symbolKinds)[])
-                  .map(
-                    (symbolKind) => (
-                      <label class={tw`whitespace-nowrap inline-block`}>
-                        <input
-                          type="checkbox"
-                          class={tw`mr-1 not-checked:siblings:text-[#6C6E78]`}
-                          onChange={() => {
-                            console.log(symbolKindsToggle);
-                            setSymbolKindsToggle((prev) => {
-                              return {
-                                ...prev,
-                                [symbolKind]: !prev[symbolKind],
-                              };
-                            });
-                          }}
-                          checked={symbolKindsToggle[symbolKind]}
-                        />
-                        <span class={tw`text-sm leading-none`}>
-                          {symbolKind}
-                        </span>
-                      </label>
-                    ),
-                  )}
+          {kind !== "All" && (
+            <div
+              class={tw`bg-ultralight border-t border-[#E8E7E5] py-3 px-6 flex items-center justify-between`}
+            >
+              <div class={tw`py-2 flex items-center space-x-3`}>
+                <button
+                  class={tw`p-1 border border-dark-border rounded-md not-disabled:hover:bg-light-border disabled:(text-[#D2D2DC] cursor-not-allowed)`}
+                  onClick={() => setPage((page) => page - 1)}
+                  disabled={page === 0}
+                >
+                  <Icons.ArrowLeft />
+                </button>
+                <span class={tw`text-[#9CA0AA]`}>
+                  Page <span class={tw`font-medium`}>{page + 1}</span> of{" "}
+                  <span class={tw`font-medium`}>{totalPages}</span>
+                </span>
+                <button
+                  class={tw`p-1 border border-dark-border rounded-md not-disabled:hover:bg-light-border disabled:(text-[#D2D2DC] cursor-not-allowed)`}
+                  onClick={() => setPage((page) => page + 1)}
+                  disabled={(page + 1) === totalPages}
+                >
+                  <Icons.ArrowRight />
+                </button>
               </div>
-            )}
+
+              {kind === "Symbols" &&
+                (
+                  <div class={tw`space-x-3`}>
+                    {(Object.keys(symbolKinds) as (keyof typeof symbolKinds)[])
+                      .map(
+                        (symbolKind) => (
+                          <label class={tw`whitespace-nowrap inline-block`}>
+                            <input
+                              type="checkbox"
+                              class={tw`mr-1 not-checked:siblings:text-[#6C6E78]`}
+                              onChange={() => {
+                                setSymbolKindsToggle((prev) => {
+                                  return {
+                                    ...prev,
+                                    [symbolKind]: !prev[symbolKind],
+                                  };
+                                });
+                              }}
+                              checked={symbolKindsToggle[symbolKind]}
+                            />
+                            <span class={tw`text-sm leading-none`}>
+                              {symbolKind}
+                            </span>
+                          </label>
+                        ),
+                      )}
+                  </div>
+                )}
+            </div>
+          )}
         </div>
       </dialog>
     </>

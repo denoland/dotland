@@ -102,7 +102,7 @@ export function DirectoryView(props: {
       <table class={tw`min-w-full table-fixed w-full`}>
         <colgroup>
           <col class={tw`w-9 md:w-12`} />
-          <col class={tw`w-max-content`} />
+          <col class={tw`max-w-max`} />
           <col style={{ width: "5.5rem" }} />
         </colgroup>
         <tbody class={tw`bg-white`}>
