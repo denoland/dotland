@@ -8,17 +8,16 @@ export const config: Configuration = {
   preflight: {
     body: apply`text-default ${
       css({
-        "scroll-behaviour": "smooth",
+        "scroll-behavior": "smooth",
       })
     }`,
   },
   darkMode: "class",
-  //mode: "silent",
   theme: {
     fontFamily: {
-      /*sans: [
+      sans: [
         "Inter",
-      ],*/
+      ],
       mono: [
         "Menlo",
         "Monaco",
@@ -82,6 +81,16 @@ export const config: Configuration = {
     }),
     "symbolKind":
       apply`rounded-full w-6 h-6 inline-flex items-center justify-center font-medium text-xs leading-none flex-shrink-0`,
+    "divide-incl-y": (parts) =>
+      css({
+        "& > *": {
+          "&:first-child": {
+            "border-top-width": (parts[0] ?? 1) + "px",
+          },
+          "border-top-width": "0px",
+          "border-bottom-width": (parts[0] ?? 1) + "px",
+        },
+      }),
   },
 };
 
