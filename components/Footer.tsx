@@ -12,7 +12,7 @@ export function Footer() {
     >
       <div class={tw`section-x-inset-xl py-7 lg:py-18 w-full`}>
         <nav
-          class={tw`flex flex-col gap-7 w-full leading-tight lg:(flex-row gap-0 justify-between)`}
+          class={tw`flex flex-col gap-7 w-full leading-tight lg:(flex-row gap-0 items-start justify-between)`}
         >
           <a href="https://deno.land" class={tw`flex items-center gap-2`}>
             <img class={tw`h-6 w-6`} src="/logo.svg" alt="Deno Logo" />
