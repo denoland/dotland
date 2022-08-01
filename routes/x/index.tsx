@@ -34,7 +34,11 @@ export default function ThirdPartyRegistryList(
       <div>
         <Header selected="Third Party Modules" />
 
-        <img src="/images/module_banner.png" alt="Deno in Space" />
+        <img
+          src="/images/module_banner.png"
+          alt="Deno in Space"
+          class={tw`hidden md:block`}
+        />
 
         <div class={tw`section-x-inset-lg mt-16 mb-24 space-y-15`}>
           <div class={tw`flex items-start gap-14`}>
