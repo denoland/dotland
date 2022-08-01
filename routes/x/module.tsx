@@ -28,9 +28,8 @@ import { DocPage } from "@/util/registry_utils.ts";
 
 type Params = {
   name: string;
-  version?: string;
+  version: string;
   path: string;
-  symbol?: string;
 };
 
 export default function Registry(
@@ -304,6 +303,11 @@ export const handler: Handlers<DocPage | null> = {
     const url = new URL(req.url);
     const isHTML = accepts(req, "application/*", "text/html") === "text/html";
 
+    if (name === "std" && url.pathname.startsWith("/x")) {
+      url.pathname = url.pathname.slice(2);
+      return Response.redirect(url, 301);
+    }
+
     const symbol = url.searchParams.get("s");
     const resURL = new URL(
       `https://apiland.deno.dev/v2/modules/${name}/${
@@ -313,15 +317,13 @@ export const handler: Handlers<DocPage | null> = {
     if (symbol) {
       resURL.searchParams.set("symbol", symbol);
     }
-    const res: DocPage | null = await fetch(resURL).then((res) => {
-      if (res.status === 404) {
-        return null;
-      } else {
-        return res.json();
-      }
-    });
 
-    if (res === null) {
+    let data: DocPage;
+
+    const res = await fetch(resURL, {
+      redirect: "manual",
+    });
+    if (res.status === 404) {
       if (isHTML) {
         return render(null);
       } else {
@@ -329,44 +331,40 @@ export const handler: Handlers<DocPage | null> = {
           status: 404,
         });
       }
-    }
-
-    if (name === "std" && url.pathname.startsWith("/x")) {
-      url.pathname = url.pathname.slice(2);
-      return Response.redirect(url, 301);
-    }
-
-    if (!version) {
-      if (!res.latest_version) {
-        if (isHTML) {
-          return render!(res);
-        } else {
-          return new Response(
-            `The module '${name}' has no latest version`,
-            {
-              status: 404,
-              headers: {
-                "content-type": "text/plain",
-                "Access-Control-Allow-Origin": "*",
-              },
-            },
-          );
-        }
-      }
-
+    } else if (res.status === 302) {
+      const latestVersion = res.headers.get("X-Deno-Latest-Version")!;
       return new Response(undefined, {
         headers: {
           Location: getModulePath(
             name,
-            res.latest_version,
+            latestVersion,
             path ? ("/" + path) : undefined,
           ),
           "x-deno-warning":
-            `Implicitly using latest version (${res.latest_version}) for ${url.href}`,
+            `Implicitly using latest version (${latestVersion}) for ${url.href}`,
           "Access-Control-Allow-Origin": "*",
         },
         status: 302,
       });
+    } else {
+      data = await res.json();
+    }
+
+    if (!data.latest_version) {
+      if (isHTML) {
+        return render!(data);
+      } else {
+        return new Response(
+          `The module '${name}' has no latest version`,
+          {
+            status: 404,
+            headers: {
+              "content-type": "text/plain",
+              "Access-Control-Allow-Origin": "*",
+            },
+          },
+        );
+      }
     }
 
     if (!isHTML) {
@@ -397,17 +395,17 @@ export const handler: Handlers<DocPage | null> = {
       return Response.redirect(url, 302);
     }
 
-    if (res.kind === "index") {
-      res.readme = await getReadme(
+    if (data.kind === "index") {
+      data.readme = await getReadme(
         name,
         version,
-        res.items,
-        res.upload_options,
+        data.items,
+        data.upload_options,
       );
     }
 
-    return render!(res);
-  },
+    return render!(data);
+  }
 };
 
 export const config: RouteConfig = {
