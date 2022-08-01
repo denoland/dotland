@@ -54,11 +54,13 @@ export default function GlobalSearch() {
   const [showModal, setShowModal] = useState(false);
   const [input, setInput] = useState("");
 
-  const [results, setResults] = useState<{
-    manual?: Array<ManualSearchResult>;
-    modules?: Array<ModuleSearchResult>;
-    symbols?: Array<DocNode>;
-  }>({});
+  const [results, setResults] = useState<
+    {
+      manual?: Array<ManualSearchResult>;
+      modules?: Array<ModuleSearchResult>;
+      symbols?: Array<DocNode>;
+    } | null
+  >(null);
   const [kind, setKind] = useState<typeof kinds[number]>("All");
   const [page, setPage] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(1);
@@ -100,6 +102,8 @@ export default function GlobalSearch() {
 
   useEffect(() => {
     if (!showModal) return;
+
+    setResults(null);
 
     const queries = [];
 
@@ -248,42 +252,57 @@ export default function GlobalSearch() {
           </div>
 
           <div class={tw`overflow-y-auto flex-grow-1`}>
-            {results.manual && (
-              <Section title="Manual" isAll={kind === "All"}>
-                {results.manual && results.manual.length === 0 && (
-                  <div class={tw`text-gray-500 italic`}>
-                    Your search did not yield any results in the manual.
-                  </div>
-                )}
-                {results.manual.map((res) => <ManualResult {...res} />)}
-              </Section>
-            )}
-            {results.modules && (
-              <Section title="Modules" isAll={kind === "All"}>
-                {results.modules && results.modules.length === 0 && (
-                  <div class={tw`text-gray-500 italic`}>
-                    Your search did not yield any results in the modules index.
-                  </div>
-                )}
-                {results.modules.map((module) => (
-                  <ModuleResult module={module} />
-                ))}
-              </Section>
-            )}
-            {results.symbols && (
-              <Section title="Symbols" isAll={kind === "All"}>
-                {results.symbols && results.symbols.length === 0 && (
-                  <div class={tw`text-gray-500 italic`}>
-                    Your search did not yield any results in the symbol index.
-                  </div>
-                )}
-                {results.symbols.map((doc) => <SymbolResult doc={doc} />)}
-              </Section>
-            )}
-            <div class={tw`${kind === "All" ? "h-6" : "h-3.5"}`} />
+            {results
+              ? (
+                <>
+                  {results.manual && (
+                    <Section title="Manual" isAll={kind === "All"}>
+                      {results.manual && results.manual.length === 0 && (
+                        <div class={tw`text-gray-500 italic`}>
+                          Your search did not yield any results in the manual.
+                        </div>
+                      )}
+                      {results.manual.map((res) => <ManualResult {...res} />)}
+                    </Section>
+                  )}
+                  {results.modules && (
+                    <Section title="Modules" isAll={kind === "All"}>
+                      {results.modules && results.modules.length === 0 && (
+                        <div class={tw`text-gray-500 italic`}>
+                          Your search did not yield any results in the modules
+                          index.
+                        </div>
+                      )}
+                      {results.modules.map((module) => (
+                        <ModuleResult module={module} />
+                      ))}
+                    </Section>
+                  )}
+                  {results.symbols && (
+                    <Section title="Symbols" isAll={kind === "All"}>
+                      {results.symbols && results.symbols.length === 0 && (
+                        <div class={tw`text-gray-500 italic`}>
+                          Your search did not yield any results in the symbol
+                          index.
+                        </div>
+                      )}
+                      {results.symbols.map((doc) => <SymbolResult doc={doc} />)}
+                    </Section>
+                  )}
+                  <div class={tw`${kind === "All" ? "h-6" : "h-3.5"}`} />
+                </>
+              )
+              : (
+                <div
+                  class={tw`w-full h-full flex justify-center items-center gap-1.5 text-gray-400`}
+                >
+                  <Icons.Spinner />
+                  <span>Searching...</span>
+                </div>
+              )}
           </div>
 
-          {kind !== "All" && (
+          {kind !== "All" && results && (
             <div
               class={tw`bg-ultralight border-t border-[#E8E7E5] py-3 px-6 flex items-center justify-between`}
             >
@@ -376,14 +395,17 @@ function ManualResult({ hierarchy, url, content }: ManualSearchResult) {
     title.push(entry);
   }
   return (
-    <a href={url} class={tw`block`}>
+    <a href={url} class={tw`flex items-center gap-4`}>
+      <div class={tw`p-1.5 rounded-full bg-gray-200`}>
+        <Icons.Manual />
+      </div>
       <div>
         <ManualResultTitle title={title} />
-      </div>
-      <div
-        class={tw`text-sm text-[#6C6E78] max-h-10 overflow-ellipsis overflow-hidden`}
-      >
-        {content}
+        <div
+          class={tw`text-sm text-[#6C6E78] max-h-10 overflow-ellipsis overflow-hidden`}
+        >
+          {content}
+        </div>
       </div>
     </a>
   );
@@ -434,12 +456,20 @@ function SymbolResult({ doc }: { doc: DocNode }) {
 
 function ModuleResult({ module }: { module: ModuleSearchResult }) {
   return (
-    <a href={`https://deno.land/x/${module.name}`} class={tw`block`}>
-      <div class={tw`font-semibold`}>{module.name}</div>
-      <div
-        class={tw`text-sm text-[#6C6E78] max-h-10 overflow-ellipsis overflow-hidden`}
-      >
-        {module.description}
+    <a
+      href={`https://deno.land/x/${module.name}`}
+      class={tw`flex items-center gap-4`}
+    >
+      <div class={tw`p-1.5 rounded-full bg-gray-200`}>
+        <Icons.Module />
+      </div>
+      <div>
+        <div class={tw`font-semibold`}>{module.name}</div>
+        <div
+          class={tw`text-sm text-[#6C6E78] max-h-10 overflow-ellipsis overflow-hidden`}
+        >
+          {module.description}
+        </div>
       </div>
     </a>
   );
