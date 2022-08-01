@@ -71,11 +71,11 @@ export function Footer() {
           <div class={tw`space-y-5 w-60`}>
             <iframe
               src="https://denostatus.com/embed-status/light-sm"
-              height="42"
+              height="41"
               frameBorder="0"
               scrolling="no"
               style="border: none;"
-              class={tw`w-full focus:outline-none`}
+              class={tw`w-full rounded-lg focus:outline-none`}
             />
 
             <div class={tw`space-y-2.5 lg:space-y-4.5`}>
