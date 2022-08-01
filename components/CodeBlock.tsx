@@ -5,7 +5,7 @@ import { h } from "preact";
 
 import { tw } from "@twind";
 import { escape as htmlEscape } from "$he";
-import { Prism, normalizeTokens } from "@/util/prism_utils.ts";
+import { normalizeTokens, Prism } from "@/util/prism_utils.ts";
 import {
   extractLinkUrl,
   fileTypeFromURL,

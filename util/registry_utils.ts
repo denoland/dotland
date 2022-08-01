@@ -329,7 +329,10 @@ export function fileNameFromURL(url: string): string {
   return segments[segments.length - 1];
 }
 
-const README_REGEX = new RegExp(`^readme(?:\\.(${markdownExtension}|${orgExtension}))?$`, "i");
+const README_REGEX = new RegExp(
+  `^readme(?:\\.(${markdownExtension}|${orgExtension}))?$`,
+  "i",
+);
 export function isReadme(filename: string): boolean {
   return README_REGEX.test(filename);
 }

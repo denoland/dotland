@@ -13,8 +13,8 @@ import {
   extractAltLineNumberReference,
   fetchSource,
   getModulePath,
-  getRepositoryURL,
   getReadme,
+  getRepositoryURL,
   S3_BUCKET,
 } from "@/util/registry_utils.ts";
 import { Header } from "@/components/Header.tsx";
@@ -405,7 +405,7 @@ export const handler: Handlers<DocPage | null> = {
     }
 
     return render!(data);
-  }
+  },
 };
 
 export const config: RouteConfig = {
