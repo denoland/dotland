@@ -92,6 +92,7 @@ export default function AddModule() {
             registered,
           });
           if (registered) {
+            clearInterval(id);
             confetti.create(confettiRef.current!, {
               resize: true,
             })({
