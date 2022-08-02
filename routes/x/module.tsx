@@ -323,7 +323,7 @@ export const handler: Handlers<DocPage | null> = {
     const res = await fetch(resURL, {
       redirect: "manual",
     });
-    if (res.status === 404) {
+    if (res.status === 404) { // module doesnt exist
       if (isHTML) {
         return render(null);
       } else {
@@ -331,7 +331,7 @@ export const handler: Handlers<DocPage | null> = {
           status: 404,
         });
       }
-    } else if (res.status === 302) {
+    } else if (res.status === 302) { // implicit latest
       const latestVersion = res.headers.get("X-Deno-Latest-Version")!;
       return new Response(undefined, {
         headers: {
@@ -345,6 +345,18 @@ export const handler: Handlers<DocPage | null> = {
           "Access-Control-Allow-Origin": "*",
         },
         status: 302,
+      });
+    } else if (res.status === 301) { // path is directory and there is an index module
+      const newPath = res.headers.get("X-Deno-Module-Path")!;
+      return new Response(undefined, {
+        headers: {
+          Location: getModulePath(
+            name,
+            version,
+            newPath,
+          ),
+        },
+        status: 301,
       });
     } else {
       data = await res.json();

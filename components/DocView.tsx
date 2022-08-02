@@ -40,8 +40,8 @@ export function DocView({
       {(data.kind === "module" || data.kind === "symbol") && (
         <ModulePathIndexPanel
           base={basePath}
-          path={false ? path : dirname(path)}
-          current={false ? undefined : path}
+          path={dirname(path)}
+          current={path}
           currentSymbol={data.kind === "symbol" ? data.name : undefined}
         >
           {data.nav}
@@ -69,9 +69,7 @@ export function DocView({
             case "module":
               return (
                 <ModuleDoc
-                  url={false
-                    ? (`https://deno.land${basePath}` + indexModule)
-                    : url.href}
+                  url={url.href}
                   sourceUrl={url.href}
                 >
                   {data.docNodes}
