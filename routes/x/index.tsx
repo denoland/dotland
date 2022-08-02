@@ -5,7 +5,7 @@
 import { Fragment, h } from "preact";
 import { PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
-import { tw } from "@twind";
+import { css, tw } from "@twind";
 import { Handlers } from "$fresh/server.ts";
 import { emojify } from "$emoji";
 
@@ -96,15 +96,24 @@ export default function ThirdPartyRegistryList(
               method="get"
             >
               <span class={tw`font-semibold`}>Explore Modules</span>
-              <input
-                type="text"
-                name="query"
-                placeholder={data?.totalCount
-                  ? `Search through ${data.totalCount} modules...`
-                  : "Search..."}
-                class={tw`w-full lg:w-88 py-2.5 px-4 rounded-md border border-dark-border text-default placeholder:text-gray-400`}
-                value={query}
-              />
+              <label
+                class={tw`px-4 h-9 w-full md:w-88 bg-white rounded-md flex items-center gap-1.5 box-content border border-dark-border text-gray-400 focus-within:${
+                  css({
+                    "outline": "solid",
+                  })
+                }`}
+              >
+                <input
+                  type="text"
+                  name="query"
+                  placeholder={data?.totalCount
+                    ? `Search through ${data.totalCount} modules...`
+                    : "Search..."}
+                  class={tw`w-full bg-transparent text-default placeholder:text-gray-400 outline-none`}
+                  value={query}
+                />
+                <Icons.MagnifyingGlass />
+              </label>
             </form>
 
             <ul class={tw`divide-y`}>

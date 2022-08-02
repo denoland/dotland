@@ -17,6 +17,7 @@ export const config: Configuration = {
     fontFamily: {
       sans: [
         "Inter",
+        "sans-serif",
       ],
       mono: [
         "Menlo",
