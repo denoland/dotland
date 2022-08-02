@@ -6,15 +6,18 @@ export { css };
 
 export const config: Configuration = {
   preflight: {
-    body: apply`text-default scroll-smooth`,
+    body: apply`text-default ${
+      css({
+        "scroll-behavior": "smooth",
+      })
+    }`,
   },
   darkMode: "class",
-  //mode: "silent",
   theme: {
     fontFamily: {
-      /*sans: [
+      sans: [
         "Inter",
-      ],*/
+      ],
       mono: [
         "Menlo",
         "Monaco",
@@ -47,12 +50,15 @@ export const config: Configuration = {
         0: "0",
       },
       spacing: {
+        1.75: "0.4375rem",
         4.5: "1.125rem",
         5.5: "1.375rem",
         18: "4.5rem",
         22: "5.5rem",
         72: "18rem",
         76: "19rem",
+        88: "22rem",
+        136: "34rem",
       },
       animation: {
         move: "move 6s linear infinite",
@@ -75,6 +81,16 @@ export const config: Configuration = {
     }),
     "symbolKind":
       apply`rounded-full w-6 h-6 inline-flex items-center justify-center font-medium text-xs leading-none flex-shrink-0`,
+    "divide-incl-y": (parts) =>
+      css({
+        "& > *": {
+          "&:first-child": {
+            "border-top-width": (parts[0] ?? 1) + "px",
+          },
+          "border-top-width": "0px",
+          "border-bottom-width": (parts[0] ?? 1) + "px",
+        },
+      }),
   },
 };
 
