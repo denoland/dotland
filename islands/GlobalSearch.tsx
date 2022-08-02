@@ -255,51 +255,55 @@ export default function GlobalSearch() {
 
             <div class={tw`overflow-y-auto flex-grow-1`}>
               {results
-              ? (
-                <>
-                  {results.manual && (
-                <Section title="Manual" isAll={kind === "All"}>
-                  {results.manual && results.manual.length === 0 && (
-                    <div class={tw`text-gray-500 italic`}>
-                      Your search did not yield any results in the manual.
-                    </div>
-                  )}
-                  {results.manual.map((res) => <ManualResult {...res} />)}
-                </Section>
-              )}
-              {results.modules && (
-                <Section title="Modules" isAll={kind === "All"}>
-                  {results.modules && results.modules.length === 0 && (
-                    <div class={tw`text-gray-500 italic`}>
-                      Your search did not yield any results in the modules
-                      index.
-                    </div>
-                  )}
-                  {results.modules.map((module) => (
-                    <ModuleResult module={module} />
-                  ))}
-                </Section>
-              )}
-              {results.symbols && (
-                <Section title="Symbols" isAll={kind === "All"}>
-                  {results.symbols && results.symbols.length === 0 && (
-                    <div class={tw`text-gray-500 italic`}>
-                      Your search did not yield any results in the symbol index.
-                    </div>
-                  )}
-                  {results.symbols.map((doc) => <SymbolResult doc={doc} />)}
-                </Section>
-              )}
-              <div class={tw`${kind === "All" ? "h-6" : "h-3.5"}`} /></>
-              )
-              : (
-                <div
-                  class={tw`w-full h-full flex justify-center items-center gap-1.5 text-gray-400`}
-                >
-                  <Icons.Spinner />
-                  <span>Searching...</span>
-                </div>
-              )}
+                ? (
+                  <>
+                    {results.manual && (
+                      <Section title="Manual" isAll={kind === "All"}>
+                        {results.manual && results.manual.length === 0 && (
+                          <div class={tw`text-gray-500 italic`}>
+                            Your search did not yield any results in the manual.
+                          </div>
+                        )}
+                        {results.manual.map((res) => <ManualResult {...res} />)}
+                      </Section>
+                    )}
+                    {results.modules && (
+                      <Section title="Modules" isAll={kind === "All"}>
+                        {results.modules && results.modules.length === 0 && (
+                          <div class={tw`text-gray-500 italic`}>
+                            Your search did not yield any results in the modules
+                            index.
+                          </div>
+                        )}
+                        {results.modules.map((module) => (
+                          <ModuleResult module={module} />
+                        ))}
+                      </Section>
+                    )}
+                    {results.symbols && (
+                      <Section title="Symbols" isAll={kind === "All"}>
+                        {results.symbols && results.symbols.length === 0 && (
+                          <div class={tw`text-gray-500 italic`}>
+                            Your search did not yield any results in the symbol
+                            index.
+                          </div>
+                        )}
+                        {results.symbols.map((doc) => (
+                          <SymbolResult doc={doc} />
+                        ))}
+                      </Section>
+                    )}
+                    <div class={tw`${kind === "All" ? "h-6" : "h-3.5"}`} />
+                  </>
+                )
+                : (
+                  <div
+                    class={tw`w-full h-full flex justify-center items-center gap-1.5 text-gray-400`}
+                  >
+                    <Icons.Spinner />
+                    <span>Searching...</span>
+                  </div>
+                )}
             </div>
 
             {kind !== "All" && results && (
