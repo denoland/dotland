@@ -63,6 +63,7 @@ export function Footer() {
                 "Blog": "https://deno.com/blog",
                 "Pricing": "https://deno.com/deploy/pricing",
                 "News": "https://deno.news",
+                "Merch": "https://merch.deno.com",
                 "Privacy Policy": "https://deno.com/deploy/docs/privacy-policy",
               }}
             />
