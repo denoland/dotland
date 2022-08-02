@@ -381,7 +381,7 @@ function Section({
           {title}
         </div>
       )}
-      <div class={tw`children:(px-6 py-1.5 even:bg-ultralight)`}>
+      <div class={tw`children:(flex items-center gap-4 px-6 py-1.5 hover:bg-ultralight even:(bg-ultralight hover:bg-light-border))`}>
         {children}
       </div>
     </div>
@@ -395,7 +395,7 @@ function ManualResult({ hierarchy, url, content }: ManualSearchResult) {
     title.push(entry);
   }
   return (
-    <a href={url} class={tw`flex items-center gap-4`}>
+    <a href={url}>
       <div class={tw`p-1.5 rounded-full bg-gray-200`}>
         <Icons.Manual />
       </div>
@@ -431,7 +431,7 @@ function SymbolResult({ doc }: { doc: DocNode }) {
   const KindIcon = docNodeKindMap[doc.kind];
   const href = `${doc.location.filename}?s=${doc.name}`;
   return (
-    <a href={href} class={tw`flex items-center gap-4`}>
+    <a href={href}>
       <KindIcon />
       <div>
         <div class={tw`space-x-2 py-1`}>
@@ -456,10 +456,7 @@ function SymbolResult({ doc }: { doc: DocNode }) {
 
 function ModuleResult({ module }: { module: ModuleSearchResult }) {
   return (
-    <a
-      href={`https://deno.land/x/${module.name}`}
-      class={tw`flex items-center gap-4`}
-    >
+    <a href={`https://deno.land/x/${module.name}`}>
       <div class={tw`p-1.5 rounded-full bg-gray-200`}>
         <Icons.Module />
       </div>
