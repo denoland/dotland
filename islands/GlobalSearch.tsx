@@ -381,7 +381,9 @@ function Section({
           {title}
         </div>
       )}
-      <div class={tw`children:(flex items-center gap-4 px-6 py-1.5 hover:bg-ultralight even:(bg-ultralight hover:bg-light-border))`}>
+      <div
+        class={tw`children:(flex items-center gap-4 px-6 py-1.5 hover:bg-ultralight even:(bg-ultralight hover:bg-light-border))`}
+      >
         {children}
       </div>
     </div>
