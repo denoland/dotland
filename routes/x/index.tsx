@@ -36,9 +36,7 @@ export interface Data {
   hitsPerPage: number;
 }
 
-export default function ThirdPartyRegistryList(
-  { url, data }: PageProps<Data>,
-) {
+export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
   return (
     <>
       <Head>
