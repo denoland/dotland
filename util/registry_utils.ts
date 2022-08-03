@@ -38,7 +38,11 @@ export interface Readme {
 export async function getReadme(
   name: string,
   version: string,
-  items: IndexItem[],
+  items: Array<{
+    kind: string;
+    path: string;
+    size: number;
+  }>,
   uploadOptions: {
     type: string;
     repository: string;
@@ -99,21 +103,10 @@ export async function getRawFile(
   version: string,
   path: string,
   canonicalPath: string,
-): Promise<RawFile | Error | null> {
+): Promise<RawFile | Error> {
   const url = getSourceURL(name, version, path);
 
   const res = await fetch(url, { method: "GET" });
-  if (!res.ok) {
-    await res.body?.cancel();
-    if (
-      res.status !== 400 &&
-      res.status !== 403 &&
-      res.status !== 404
-    ) {
-      console.error(new Error(`${res.status}: ${res.statusText}`));
-    }
-    return null;
-  }
   const size = Number(res.headers.get("content-size")!);
 
   if (size < MAX_SYNTAX_HIGHLIGHT_FILE_SIZE) {
@@ -480,7 +473,25 @@ export interface ModuleTag {
   value: string;
 }
 
-export interface DocPageBase {
+/** Stored as kind `module_entry` in datastore. */
+export interface ModuleEntry {
+  path: string;
+  type: "file" | "dir";
+  size: number;
+  /** For `"dir"` entries, indicates if there is a _default_ module that should
+   * be used within the directory. */
+  default?: string;
+  /** For `"dir"` entries, an array of child sub-directory paths. */
+  dirs?: string[];
+  /** For `"file`" entries, indicates if the entry id can be queried for doc
+   * nodes. */
+  docable?: boolean;
+  /** For `"dir"` entries, an array of docable child paths that are not
+   * "ignored". */
+  index?: string[];
+}
+
+export interface PageBase {
   kind: string;
   module: string;
   description?: string;
@@ -528,34 +539,34 @@ interface DocPageModuleItem {
 
 export type DocPageNavItem = DocPageModuleItem | DocPageDirItem;
 
-export interface DocPageSymbol extends DocPageBase {
+export interface DocPageSymbol extends PageBase {
   kind: "symbol";
   nav: DocPageNavItem[];
   name: string;
   docNodes: DocNode[];
 }
 
-export interface DocPageModule extends DocPageBase {
+export interface DocPageModule extends PageBase {
   kind: "module";
   nav: DocPageNavItem[];
   docNodes: DocNode[];
 }
 
-export interface DocPagePathNotFound extends DocPageBase {
-  kind: "notfound";
-}
-
-export interface DocPageIndex extends DocPageBase {
+export interface DocPageIndex extends PageBase {
   kind: "index";
   items: IndexItem[];
   readme?: Readme;
 }
 
-export interface DocPageFile extends DocPageBase {
+export interface DocPageFile extends PageBase {
   kind: "file";
 }
 
-export interface DocPageInvalidVersion {
+export interface PagePathNotFound extends PageBase {
+  kind: "notfound";
+}
+
+export interface PageInvalidVersion {
   kind: "invalid-version";
   module: string;
   description?: string;
@@ -569,5 +580,25 @@ export type DocPage =
   | DocPageModule
   | DocPageIndex
   | DocPageFile
-  | DocPageInvalidVersion
-  | DocPagePathNotFound;
+  | PageInvalidVersion
+  | PagePathNotFound;
+
+export interface CodePageFile extends PageBase {
+  kind: "file";
+  size: number;
+  /** Indicates if the page is docable or not. */
+  docable?: boolean;
+  file: RawFile | Error;
+}
+
+export interface CodePageDir extends PageBase {
+  kind: "dir";
+  entries: ModuleEntry[];
+  readme?: Readme;
+}
+
+export type CodePage =
+  | CodePageFile
+  | CodePageDir
+  | PageInvalidVersion
+  | PagePathNotFound;

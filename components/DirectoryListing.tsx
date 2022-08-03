@@ -3,15 +3,11 @@
 /** @jsx h */
 import { h } from "preact";
 import { tw } from "@twind";
-import {
-  getBasePath,
-  type IndexItem,
-  isReadme,
-} from "@/util/registry_utils.ts";
+import { getBasePath, type ModuleEntry, isReadme } from "@/util/registry_utils.ts";
 import * as Icons from "./Icons.tsx";
 
 export function DirectoryListing(props: {
-  items: IndexItem[];
+  items: ModuleEntry[];
   name: string;
   version: string;
   path: string;
@@ -67,20 +63,20 @@ export function DirectoryListing(props: {
 const HIDDEN_REGEX = /^\/\..*$/;
 
 export function DirectoryView(props: {
-  items: IndexItem[];
+  items: ModuleEntry[];
   path: string;
   url: URL;
   baseURL: string;
 }) {
-  const show: IndexItem[] = [];
-  const hidden: IndexItem[] = [];
+  const show: ModuleEntry[] = [];
+  const hidden: ModuleEntry[] = [];
 
   // prioritize dirs and ignore order of other kinds,
   // and secondarily order by path alphabetically
   props.items.sort((a, b) =>
-    ((a.kind === "dir" && b.kind !== "dir")
+    ((a.type === "dir" && b.type !== "dir")
       ? -1
-      : (b.kind === "dir" ? 1 : 0)) || a.path.localeCompare(b.path)
+      : (b.type === "dir" ? 1 : 0)) || a.path.localeCompare(b.path)
   );
 
   for (const item of props.items) {
@@ -91,7 +87,7 @@ export function DirectoryView(props: {
     }
   }
 
-  const buildEntryURL = (path: string, item: IndexItem): string => {
+  const buildEntryURL = (path: string, item: ModuleEntry): string => {
     return `${props.baseURL}${item.path}?code`;
   };
 
@@ -173,7 +169,7 @@ function TableRow({
   isLastItem,
   isHidden,
 }: {
-  item: IndexItem;
+  item: ModuleEntry;
   key: number;
   href: string;
   isLastItem: boolean;
@@ -191,13 +187,12 @@ function TableRow({
         <a
           href={href}
           class={tw`px-2 sm:pl-3 md:pl-4 py-1 w-full block ${
-            item.kind === "dir" ? "text-blue-300" : "text-gray-300"
+            item.type === "dir" ? "text-blue-300" : "text-gray-300"
           }`}
           tabIndex={-1}
         >
           {(() => {
-            switch (item.kind) {
-              case "module":
+            switch (item.type) {
               case "file":
                 if (isReadme(display)) {
                   return <Icons.OpenBook />;

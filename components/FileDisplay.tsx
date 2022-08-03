@@ -19,7 +19,6 @@ export function FileDisplay(props: {
   raw?: string;
   canonicalPath: string;
   sourceURL: string;
-  baseURL: string;
   filetypeOverride?: string;
   repositoryURL?: string | null;
   url: URL;

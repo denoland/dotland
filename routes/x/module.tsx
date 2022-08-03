@@ -10,9 +10,13 @@ import twas from "$twas";
 import { emojify } from "$emoji";
 import { accepts } from "$oak_commons";
 import {
+  CodePage,
+  CodePageFile,
+  DocPage,
   extractAltLineNumberReference,
   fetchSource,
   getModulePath,
+  getRawFile,
   getReadme,
   getRepositoryURL,
   S3_BUCKET,
@@ -24,7 +28,6 @@ import { DocView } from "@/components/DocView.tsx";
 import * as Icons from "@/components/Icons.tsx";
 import VersionSelect from "@/islands/VersionSelect.tsx";
 import { CodeView } from "@/components/CodeView.tsx";
-import { DocPage } from "@/util/registry_utils.ts";
 
 type Params = {
   name: string;
@@ -32,9 +35,14 @@ type Params = {
   path: string;
 };
 
-export default function Registry(
-  { params, url, data }: PageProps<DocPage | null>,
-) {
+type Data =
+  | { data: DocPage; isCode: false }
+  | { data: CodePage; isCode: true };
+type MaybeData =
+  | Data
+  | null;
+
+export default function Registry({ params, url, data }: PageProps<MaybeData>) {
   let {
     name,
     version,
@@ -66,7 +74,7 @@ export default function Registry(
             <>
               <TopPanel
                 version={version!}
-                {...{ name, path, isStd, data }}
+                {...{ name, path, isStd, ...data }}
               />
               <div class={tw`section-x-inset-xl pb-20 pt-10 flex gap-x-14`}>
                 <ModuleView
@@ -93,8 +101,7 @@ function TopPanel({
   version: string;
   path: string;
   isStd: boolean;
-  data: DocPage;
-}) {
+} & Data) {
   return (
     <div class={tw`bg-ultralight border-b border-light-border`}>
       <div class={tw`section-x-inset-xl py-5 flex items-center`}>
@@ -160,9 +167,9 @@ function ModuleView({
   path: string;
   isStd: boolean;
   url: URL;
-  data: DocPage;
+  data: Data;
 }) {
-  if (data.versions.length === 0) {
+  if (data.data.versions.length === 0) {
     return (
       <ErrorMessage title="No uploaded versions">
         This module name has been reserved for a repository, but no versions
@@ -170,13 +177,13 @@ function ModuleView({
         days of registration will be removed.
       </ErrorMessage>
     );
-  } else if (data.kind === "invalid-version") {
+  } else if (data.data.kind === "invalid-version") {
     return (
       <ErrorMessage title="404 - Not Found">
         This version does not exist for this module.
       </ErrorMessage>
     );
-  } else if (data.kind === "notfound") {
+  } else if (data.data.kind === "notfound") {
     return (
       <ErrorMessage title="404 - Not Found">
         This file or directory could not be found.
@@ -185,12 +192,12 @@ function ModuleView({
   }
 
   const repositoryURL = getRepositoryURL(
-    data.upload_options,
+    data.data.upload_options,
     path,
-    data.kind === "index" ? "tree" : undefined,
+    data.data.kind === "index" ? "tree" : undefined,
   );
 
-  if (url.searchParams.has("code") || !isStd || data.kind === "file") {
+  if (data.isCode) {
     return (
       <CodeView
         {...{
@@ -199,7 +206,7 @@ function ModuleView({
           version,
           path,
           url,
-          data,
+          data: data.data,
           repositoryURL,
         }}
       />
@@ -213,7 +220,7 @@ function ModuleView({
           version,
           path,
           url,
-          data,
+          data: data.data,
           repositoryURL,
         }}
       />
@@ -297,7 +304,7 @@ function VersionSelector({
   );
 }
 
-export const handler: Handlers<DocPage | null> = {
+export const handler: Handlers<MaybeData> = {
   async GET(req, { params, render }) {
     const { name, version, path } = params as Params;
     const url = new URL(req.url);
@@ -308,17 +315,19 @@ export const handler: Handlers<DocPage | null> = {
       return Response.redirect(url, 301);
     }
 
+    const isCode = url.searchParams.has("code");
+
     const symbol = url.searchParams.get("s");
     const resURL = new URL(
-      `https://apiland.deno.dev/v2/modules/${name}/${
+      `https://apiland.deno.dev/v2/pages/${isCode ? "code" : "doc"}/${name}/${
         version || "__latest__"
-      }/page/${path}`,
+      }/${path}`,
     );
-    if (symbol) {
+    if (symbol && !isCode) {
       resURL.searchParams.set("symbol", symbol);
     }
 
-    let data: DocPage;
+    let data: DocPage | CodePage;
 
     const res = await fetch(resURL, {
       redirect: "manual",
@@ -346,7 +355,7 @@ export const handler: Handlers<DocPage | null> = {
         },
         status: 302,
       });
-    } else if (res.status === 301) { // path is directory and there is an index module
+    } else if (res.status === 301) { // path is directory and there is an index module and its doc
       const newPath = res.headers.get("X-Deno-Module-Path")!;
       return new Response(undefined, {
         headers: {
@@ -364,7 +373,7 @@ export const handler: Handlers<DocPage | null> = {
 
     if (!data.latest_version) {
       if (isHTML) {
-        return render!(data);
+        return render!({ data, isCode } as any);
       } else {
         return new Response(
           `The module '${name}' has no latest version`,
@@ -407,16 +416,22 @@ export const handler: Handlers<DocPage | null> = {
       return Response.redirect(url, 302);
     }
 
-    if (data.kind === "index") {
+    if (data.kind === "index" || data.kind === "dir") {
       data.readme = await getReadme(
         name,
         version,
-        data.items,
+        data.kind === "index" ? data.items : data.entries,
         data.upload_options,
+      );
+    } else if (isCode && data.kind === "file") {
+      (data as CodePageFile).file = await getRawFile(
+        name,
+        version,
+        path,
       );
     }
 
-    return render!(data);
+    return render!({ data, isCode } as any);
   },
 };
 
