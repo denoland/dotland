@@ -271,7 +271,7 @@ export function Pagination(
     if (query) {
       params.set("query", query);
     }
-    params.set("page", n.toString());
+    params.set("page", (n + 1).toString());
     return "/x?" + params.toString();
   }
 
@@ -280,14 +280,14 @@ export function Pagination(
       <div
         class={tw`p-3.5 rounded-lg border border-dark-border px-2.5 py-1.5 flex items-center gap-2.5 bg-white`}
       >
-        <MaybeA disabled={!(page > 1)} href={toPage(page - 1)}>
+        <MaybeA disabled={page === 0} href={toPage(page - 1)}>
           <Icons.ArrowLeft />
         </MaybeA>
         <div class={tw`leading-none`}>
-          Page <span class={tw`font-medium`}>{page}</span> of{" "}
+          Page <span class={tw`font-medium`}>{page + 1}</span> of{" "}
           <span class={tw`font-medium`}>{nbPages}</span>
         </div>
-        <MaybeA disabled={page >= nbPages} href={toPage(page + 1)}>
+        <MaybeA disabled={(page + 1) >= nbPages} href={toPage(page + 1)}>
           <Icons.ArrowRight />
         </MaybeA>
       </div>
@@ -295,11 +295,11 @@ export function Pagination(
       <div class={tw`text-sm text-[#6C6E78]`}>
         Showing{" "}
         <span class={tw`font-medium`}>
-          {(page - 1) * hitsPerPage + 1}
+          {page * hitsPerPage + 1}
         </span>{" "}
         to{" "}
         <span class={tw`font-medium`}>
-          {(page - 1) * hitsPerPage + hits.length}
+          {page * hitsPerPage + hits.length}
         </span>{" "}
         of{" "}
         <span class={tw`font-medium`}>
@@ -331,8 +331,6 @@ export const handler: Handlers<Data> = {
       page,
       hitsPerPage: 20,
     });
-
-    res.page++; // 1-based pagination is easier to handle
 
     return render!(res);
   },
