@@ -40,7 +40,7 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
       <Head>
         <title>第三方模块 | Deno</title>
       </Head>
-      <div class={tw`bg-gray`}>
+      <div>
         <Header selected="第三方模块" />
         <div>
           <div class={tw`section-x-inset-lg mt-8`}>
@@ -64,9 +64,9 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
               <a
                 href="/add_module"
                 class={tw`
-                  py-2 px-8 border border-gray-300 text-md font-medium rounded-md
+                  py-2 px-8 border border-gray-300 font-medium rounded-md
                   text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50
-                  focus:outline-none focus:shadow-outline-blue focus:border-blue-300
+                  focus:outline-none focus:border-blue-300
                   active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out
                   `}
               >
@@ -220,7 +220,7 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
                     <span class={tw`block w-full rounded-md shadow-sm mt-4`}>
                       <a
                         href="/add_module"
-                        class={tw`w-full flex justify-center py-2 px-4 border border-gray-300 text-md font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out`}
+                        class={tw`w-full flex justify-center py-2 px-4 border border-gray-300 font-medium rounded-md text-gray-700 bg-gray-100 hover:text-gray-500 hover:bg-gray-50 focus:outline-none focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition duration-150 ease-in-out`}
                       >
                         Publish a module
                       </a>
