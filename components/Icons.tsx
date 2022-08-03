@@ -662,3 +662,33 @@ export function Manual() {
     </svg>
   );
 }
+
+export function LongArrowRight(props: { class?: string }) {
+  return (
+    <svg
+      class={tw(props.class ?? "")}
+      xmlns="http://www.w3.org/2000/svg"
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+      fill="none"
+    >
+      <g clip-path="url(#clip0_2067_129)">
+        <path
+          d="M10.2006 10.7994C10.0058 10.9942 9.68993 10.9947 9.49451 10.8003L9.40285 10.7092C9.20655 10.514 9.20624 10.1964 9.40215 10.0008L11.8284 7.5785H0.499999C0.223857 7.5785 0 7.35465 0 7.0785V6.92148C0 6.64534 0.223858 6.42148 0.5 6.42148H11.8284L9.40258 3.9957C9.20654 3.79967 9.20743 3.48156 9.40456 3.28663L9.49452 3.19767C9.69009 3.00427 10.0052 3.00515 10.1996 3.19964L13.6464 6.64644C13.8417 6.8417 13.8417 7.15828 13.6464 7.35355L10.2006 10.7994Z"
+          fill="currentColor"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_2067_129">
+          <rect
+            width="14"
+            height="14"
+            fill="white"
+            transform="matrix(1 0 0 -1 0 14)"
+          />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+}

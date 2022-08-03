@@ -299,7 +299,7 @@ function Breadcrumbs({
   }
 
   return (
-    <p class={tw`text-xl leading-6 font-bold text-[#9CA0AA]`}>
+    <p class={tw`text-xl leading-6 font-bold text-gray-400`}>
       {out.map(([seg, url], i) => {
         return (
           <Fragment key={i}>
