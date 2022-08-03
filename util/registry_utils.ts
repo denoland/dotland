@@ -201,7 +201,7 @@ export async function getVersionList(
 
 export interface Module {
   name: string;
-  description: string;
+  description?: string;
   star_count: string;
 }
 

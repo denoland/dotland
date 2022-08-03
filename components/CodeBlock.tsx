@@ -33,6 +33,7 @@ export interface CodeBlockProps {
     | "makefile"
     | "dockerfile";
   url: URL;
+  class?: string;
 }
 
 export function RawCodeBlock({
@@ -43,7 +44,6 @@ export function RawCodeBlock({
   enableLineRef = false,
   url,
 }: CodeBlockProps & {
-  class?: string;
   enableLineRef?: boolean;
 }) {
   const codeDivClasses =
@@ -141,16 +141,11 @@ export function RawCodeBlock({
   );
 }
 
-export function CodeBlock(
-  { code, language, disablePrefixes, url }: CodeBlockProps,
-) {
+export function CodeBlock(props: CodeBlockProps) {
   return (
     <RawCodeBlock
-      code={code}
-      language={language}
-      disablePrefixes={disablePrefixes}
-      class={tw`p-4 bg-gray-100 rounded-lg`}
-      url={url}
+      {...props}
+      class={tw`p-4 bg-ultralight rounded-lg ${props.class ?? ""}`}
     />
   );
 }
