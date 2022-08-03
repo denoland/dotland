@@ -54,14 +54,6 @@ export default function GlobalSearch() {
   const [showModal, setShowModal] = useState(false);
   const [input, setInput] = useState("");
 
-<<<<<<< HEAD
-  const [results, setResults] = useState<{
-    manual?: Array<ManualSearchResult>;
-    modules?: Array<ModuleSearchResult>;
-    symbols?: Array<DocNode>;
-  }>({});
-  const [kind, setKind] = useState<typeof kinds[number]>("全部");
-=======
   const [results, setResults] = useState<
     {
       manual?: Array<ManualSearchResult>;
@@ -69,10 +61,9 @@ export default function GlobalSearch() {
       symbols?: Array<DocNode>;
     } | null
   >(null);
-  const [kind, setKind] = useState<typeof kinds[number]>("All");
+  const [kind, setKind] = useState<typeof kinds[number]>("全部");
   const [page, setPage] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(1);
->>>>>>> fa9fac7a8ed9b78e38561b6f035867a1311c13b7
   const [symbolKindsToggle, setSymbolKindsToggle] = useState<
     Record<(keyof typeof symbolKinds), boolean>
   >({
@@ -121,12 +112,8 @@ export default function GlobalSearch() {
         indexName: "deno_manual",
         query: input || "Introduction",
         params: {
-<<<<<<< HEAD
-          hitsPerPage: kind === "全部" ? 5 : 10,
-=======
           page: page,
-          hitsPerPage: kind === "All" ? 5 : 10,
->>>>>>> fa9fac7a8ed9b78e38561b6f035867a1311c13b7
+          hitsPerPage: kind === "全部" ? 5 : 10,
           attributesToRetrieve: ["anchor", "url", "content", "hierarchy"],
           filters: "type:content",
         },
@@ -138,12 +125,8 @@ export default function GlobalSearch() {
         indexName: "deno_modules",
         query: input || "serve",
         params: {
-<<<<<<< HEAD
-          hitsPerPage: kind === "全部" ? 5 : 10,
-=======
           page: page,
-          hitsPerPage: kind === "All" ? 5 : 10,
->>>>>>> fa9fac7a8ed9b78e38561b6f035867a1311c13b7
+          hitsPerPage: kind === "全部" ? 5 : 10,
           filters: Object.entries(symbolKindsToggle)
             .filter(([_, v]) => kind === "Symbols" ? v : true)
             .map(([k]) => "kind:" + symbolKinds[k as keyof typeof symbolKinds])
@@ -157,12 +140,8 @@ export default function GlobalSearch() {
         indexName: "modules",
         query: input,
         params: {
-<<<<<<< HEAD
-          hitsPerPage: kind === "全部" ? 5 : 10,
-=======
           page: page,
-          hitsPerPage: kind === "All" ? 5 : 10,
->>>>>>> fa9fac7a8ed9b78e38561b6f035867a1311c13b7
+          hitsPerPage: kind === "全部" ? 5 : 10,
         },
       });
     }
@@ -218,28 +197,6 @@ export default function GlobalSearch() {
           onClick={() => setShowModal(false)}
           open={showModal}
         >
-<<<<<<< HEAD
-          <div class={tw`pt-6 px-6 border-b border-[#E8E7E5]`}>
-            <div class={tw`flex`}>
-              <label
-                class={tw`pl-4 h-10 w-full flex-shrink-1 bg-[#F3F3F3] rounded-md flex items-center text-light focus-within:${
-                  css({
-                    "outline": "solid",
-                  })
-                }`}
-              >
-                <Icons.MagnifyingGlass />
-                <input
-                  id="search-input"
-                  class={tw`ml-1.5 py-3 leading-4 bg-transparent w-full text-main placeholder:text-[#9CA0AA] outline-none`}
-                  type="text"
-                  onInput={(e) => setInput(e.currentTarget.value)}
-                  value={input}
-                  placeholder="搜索手册、符号、模块..."
-                  autoFocus
-                />
-              </label>
-=======
           <div
             class={tw`bg-white w-full h-screen flex flex-col overflow-hidden lg:(mt-24 mx-auto rounded-md w-2/3 max-h-[80vh] border border-[#E8E7E5])`}
             onClick={(e) => e.stopPropagation()}
@@ -260,11 +217,10 @@ export default function GlobalSearch() {
                     type="text"
                     onInput={(e) => setInput(e.currentTarget.value)}
                     value={input}
-                    placeholder="Search manual, symbols and modules..."
+                    placeholder="搜索手册、符号、模块..."
                     autoFocus
                   />
                 </label>
->>>>>>> fa9fac7a8ed9b78e38561b6f035867a1311c13b7
 
                 <div
                   class={tw`lg:hidden ml-3 -mr-2 flex items-center`}
@@ -302,7 +258,7 @@ export default function GlobalSearch() {
                 ? (
                   <>
                     {results.manual && (
-                      <Section title="Manual" isAll={kind === "All"}>
+                      <Section title="Manual" isAll={kind === "全部"}>
                         {results.manual && results.manual.length === 0 && (
                           <div class={tw`text-gray-500 italic`}>
                             Your search did not yield any results in the manual.
@@ -312,7 +268,7 @@ export default function GlobalSearch() {
                       </Section>
                     )}
                     {results.modules && (
-                      <Section title="Modules" isAll={kind === "All"}>
+                      <Section title="Modules" isAll={kind === "全部"}>
                         {results.modules && results.modules.length === 0 && (
                           <div class={tw`text-gray-500 italic`}>
                             Your search did not yield any results in the modules
@@ -325,7 +281,7 @@ export default function GlobalSearch() {
                       </Section>
                     )}
                     {results.symbols && (
-                      <Section title="Symbols" isAll={kind === "All"}>
+                      <Section title="Symbols" isAll={kind === "全部"}>
                         {results.symbols && results.symbols.length === 0 && (
                           <div class={tw`text-gray-500 italic`}>
                             Your search did not yield any results in the symbol
@@ -337,7 +293,7 @@ export default function GlobalSearch() {
                         ))}
                       </Section>
                     )}
-                    <div class={tw`${kind === "All" ? "h-6" : "h-3.5"}`} />
+                    <div class={tw`${kind === "全部" ? "h-6" : "h-3.5"}`} />
                   </>
                 )
                 : (
@@ -350,48 +306,7 @@ export default function GlobalSearch() {
                 )}
             </div>
 
-<<<<<<< HEAD
-          <div class={tw`overflow-y-auto flex-grow-1`}>
-            {results.manual && (
-              <Section title="手册" isAll={kind === "全部"}>
-                {results.manual && results.manual.length === 0 && (
-                  <div class={tw`text-gray-500 italic`}>
-                    Your search did not yield any results in the manual.
-                  </div>
-                )}
-                {results.manual.map((res) => <ManualResult {...res} />)}
-              </Section>
-            )}
-            {results.modules && (
-              <Section title="模块" isAll={kind === "全部"}>
-                {results.modules && results.modules.length === 0 && (
-                  <div class={tw`text-gray-500 italic`}>
-                    Your search did not yield any results in the modules index.
-                  </div>
-                )}
-                {results.modules.map((module) => (
-                  <ModuleResult module={module} />
-                ))}
-              </Section>
-            )}
-            {results.symbols && (
-              <Section title="Symbols" isAll={kind === "全部"}>
-                {results.symbols && results.symbols.length === 0 && (
-                  <div class={tw`text-gray-500 italic`}>
-                    Your search did not yield any results in the symbol index.
-                  </div>
-                )}
-                {results.symbols.map((doc) => <SymbolResult doc={doc} />)}
-              </Section>
-            )}
-            <div class={tw`${kind === "全部" ? "h-6" : "h-3.5"}`} />
-          </div>
-
-          {kind === "Symbols" &&
-            (
-=======
-            {kind !== "All" && results && (
->>>>>>> fa9fac7a8ed9b78e38561b6f035867a1311c13b7
+            {kind !== "全部" && results && (
               <div
                 class={tw`bg-ultralight border-t border-[#E8E7E5] py-3 px-6 flex items-center justify-between`}
               >
