@@ -2,12 +2,14 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
+import { ComponentProps, Fragment, h } from "preact";
 import { PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import { css, tw } from "@twind";
 import { Handlers } from "$fresh/server.ts";
 import { emojify } from "$emoji";
+import algoliasearch from "$algolia";
+import "https://deno.land/x/xhr@0.2.0/mod.ts";
 
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
@@ -15,17 +17,28 @@ import { InlineCode } from "@/components/InlineCode.tsx";
 import * as Icons from "@/components/Icons.tsx";
 import { CodeBlock } from "@/components/CodeBlock.tsx";
 
-import { listModules, ModulesList } from "@/util/registry_utils.ts";
-import { Pagination } from "@/components/Pagination.tsx";
+const client = algoliasearch(
+  "QFPCRZC6WX",
+  "2ed789b2981acd210267b27f03ab47da",
+);
+const index = client.initIndex("modules");
 
-const PER_PAGE = 20;
+export interface Data {
+  hits: Array<{
+    popularity_score: number;
+    description?: string;
+    name: string;
+  }>;
+  nbHits: number;
+  page: number;
+  nbPages: number;
+  query: string;
+  hitsPerPage: number;
+}
 
 export default function ThirdPartyRegistryList(
-  { url, data }: PageProps<ModulesList | null>,
+  { url, data }: PageProps<Data>,
 ) {
-  const page = parseInt(url.searchParams.get("page") || "1");
-  const query = url.searchParams.get("query") || "";
-
   return (
     <>
       <Head>
@@ -106,19 +119,17 @@ export default function ThirdPartyRegistryList(
                 <input
                   type="text"
                   name="query"
-                  placeholder={data?.totalCount
-                    ? `Search through ${data.totalCount} modules...`
-                    : "Search..."}
+                  placeholder={`Search through ${data.nbHits} modules...`}
                   class={tw`w-full bg-transparent text-default placeholder:text-gray-400 outline-none`}
-                  value={query}
+                  value={data.query}
                 />
                 <Icons.MagnifyingGlass />
               </label>
             </form>
 
             <ul class={tw`divide-y`}>
-              {data?.results.length
-                ? data.results.map((result) => (
+              {data.hits.length
+                ? data.hits.map((result) => (
                   <li class={tw`border-dark-border`}>
                     <a
                       href={"/x/" + result.name}
@@ -140,15 +151,6 @@ export default function ThirdPartyRegistryList(
                       </div>
 
                       <div class={tw`flex items-center gap-4`}>
-                        {result.star_count !== undefined && (
-                          <div class={tw`flex items-center text-gray-400`}>
-                            <div>
-                              {result.star_count}
-                            </div>
-                            <Icons.Star class="ml-1" title="star" />
-                          </div>
-                        )}
-
                         <Icons.ArrowRight class="text-gray-400" />
                       </div>
                     </a>
@@ -173,16 +175,7 @@ export default function ThirdPartyRegistryList(
             <div
               class={tw`px-5 py-4 border-t border-dark-border bg-ultralight flex items-center justify-between`}
             >
-              {!!data?.results.length && (
-                <Pagination
-                  {...{
-                    currentPage: page,
-                    perPage: PER_PAGE,
-                    data,
-                    query,
-                  }}
-                />
-              )}
+              {!!data.hits.length && <Pagination {...data} />}
             </div>
           </div>
 
@@ -270,14 +263,77 @@ export default function ThirdPartyRegistryList(
   );
 }
 
-export const handler: Handlers<ModulesList | null> = {
+export function Pagination(
+  { query, page, hitsPerPage, hits, nbHits, nbPages }: Data,
+) {
+  function toPage(n: number): string {
+    const params = new URLSearchParams();
+    if (query) {
+      params.set("query", query);
+    }
+    params.set("page", n.toString());
+    return "/x?" + params.toString();
+  }
+
+  return (
+    <>
+      <div
+        class={tw`p-3.5 rounded-lg border border-dark-border px-2.5 py-1.5 flex items-center gap-2.5 bg-white`}
+      >
+        <MaybeA disabled={!(page > 1)} href={toPage(page - 1)}>
+          <Icons.ArrowLeft />
+        </MaybeA>
+        <div class={tw`leading-none`}>
+          Page <span class={tw`font-medium`}>{page}</span> of{" "}
+          <span class={tw`font-medium`}>{nbPages}</span>
+        </div>
+        <MaybeA disabled={page >= nbPages} href={toPage(page + 1)}>
+          <Icons.ArrowRight />
+        </MaybeA>
+      </div>
+
+      <div class={tw`text-sm text-[#6C6E78]`}>
+        Showing{" "}
+        <span class={tw`font-medium`}>
+          {(page - 1) * hitsPerPage + 1}
+        </span>{" "}
+        to{" "}
+        <span class={tw`font-medium`}>
+          {(page - 1) * hitsPerPage + hits.length}
+        </span>{" "}
+        of{" "}
+        <span class={tw`font-medium`}>
+          {nbHits}
+        </span>
+      </div>
+    </>
+  );
+}
+
+function MaybeA(
+  props:
+    | ({ disabled: true } & ComponentProps<"div">)
+    | ({ disabled: false } & ComponentProps<"a">),
+) {
+  if (props.disabled) {
+    return <div {...props} class={tw`text-[#D2D2DC] cursor-not-allowed`} />;
+  } else {
+    return <a {...props} class={tw`hover:text-light`} />;
+  }
+}
+
+export const handler: Handlers<Data> = {
   async GET(req, { render }) {
     const url = new URL(req.url);
-    const page = parseInt(url.searchParams.get("page") || "1");
+    const page = parseInt(url.searchParams.get("page") || "1") - 1;
     const query = url.searchParams.get("query") || "";
+    const res: Data = await index.search(query, {
+      page,
+      hitsPerPage: 20,
+    });
 
-    const resp = await listModules(page, PER_PAGE, query);
+    res.page++; // 1-based pagination is easier to handle
 
-    return render!(resp);
+    return render!(res);
   },
 };

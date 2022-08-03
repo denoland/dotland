@@ -350,50 +350,6 @@ export interface Module {
   star_count: string;
 }
 
-export interface SearchResult extends Module {
-  search_score: string;
-}
-
-export interface ModulesList {
-  results: SearchResult[];
-  totalCount: number;
-}
-
-export async function listModules(
-  page: number,
-  limit: number,
-  query: string,
-): Promise<ModulesList | null> {
-  const url = `${API_ENDPOINT}modules?page=${page}&limit=${limit}&query=${
-    encodeURIComponent(
-      query,
-    )
-  }`;
-  const res = await fetch(url, {
-    headers: {
-      accept: "application/json",
-    },
-  });
-  if (res.status !== 200) {
-    throw Error(
-      `Got an error (${res.status}) while getting the module list:\n${await res
-        .text()}`,
-    );
-  }
-  const data = await res.json();
-  if (!data.success) {
-    throw Error(
-      `Got an error (${data.info}) while getting the module list:\n${await res
-        .text()}`,
-    );
-  }
-
-  return {
-    totalCount: (query ? limit : data.data.total_count),
-    results: data.data.results,
-  };
-}
-
 export async function getModule(name: string): Promise<Module> {
   const url = `${API_ENDPOINT}modules/${encodeURIComponent(name)}`;
   const res = await fetch(url, {
