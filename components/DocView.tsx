@@ -12,6 +12,7 @@ import { ModulePathIndexPanel } from "$doc_components/module_path_index_panel.ts
 import { FileDisplay } from "./FileDisplay.tsx";
 import { SymbolDoc } from "$doc_components/symbol_doc.tsx";
 import {
+  DocPageFile,
   DocPageIndex,
   DocPageModule,
   DocPageSymbol,
@@ -26,7 +27,7 @@ export function DocView({
 
   data,
 }: CommonProps & {
-  data: DocPageSymbol | DocPageModule | DocPageIndex;
+  data: DocPageSymbol | DocPageModule | DocPageIndex | DocPageFile;
 }) {
   const basePath = getBasePath({
     isStd,
@@ -75,6 +76,8 @@ export function DocView({
                   {data.docNodes}
                 </ModuleDoc>
               );
+            case "file":
+              return <div></div>;
           }
         })()}
 
@@ -86,7 +89,6 @@ export function DocView({
             canonicalPath={data.readme.canonicalPath}
             sourceURL={data.readme.url}
             repositoryURL={data.readme.repositoryURL}
-            baseURL={basePath}
             url={url}
           />
         )}

@@ -3,7 +3,11 @@
 /** @jsx h */
 import { h } from "preact";
 import { tw } from "@twind";
-import { getBasePath, type ModuleEntry, isReadme } from "@/util/registry_utils.ts";
+import {
+  getBasePath,
+  isReadme,
+  type ModuleEntry,
+} from "@/util/registry_utils.ts";
 import * as Icons from "./Icons.tsx";
 
 export function DirectoryListing(props: {

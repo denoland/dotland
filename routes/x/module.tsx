@@ -11,7 +11,6 @@ import { emojify } from "$emoji";
 import { accepts } from "$oak_commons";
 import {
   CodePage,
-  CodePageFile,
   DocPage,
   extractAltLineNumberReference,
   fetchSource,
@@ -96,6 +95,7 @@ function TopPanel({
   path,
   isStd,
   data,
+  isCode,
 }: {
   name: string;
   version: string;
@@ -114,6 +114,7 @@ function TopPanel({
               version={version}
               path={path}
               isStd={isStd}
+              isCode={isCode}
             />
             <div class={tw`text-sm`}>
               {data.description && emojify(data.description)}
@@ -233,11 +234,13 @@ function Breadcrumbs({
   version,
   path,
   isStd,
+  isCode,
 }: {
   name: string;
   version: string | undefined;
   path: string;
   isStd: boolean;
+  isCode: boolean;
 }) {
   const segments = path.split("/").splice(1);
   segments.unshift(name + (version ? `@${version}` : ""));
@@ -255,6 +258,9 @@ function Breadcrumbs({
   return (
     <p class={tw`text-xl leading-6 font-bold text-gray-400`}>
       {out.map(([seg, url], i) => {
+        if (isCode) {
+          url += "?code";
+        }
         return (
           <Fragment key={i}>
             {i !== 0 && "/"}
@@ -327,7 +333,7 @@ export const handler: Handlers<MaybeData> = {
       resURL.searchParams.set("symbol", symbol);
     }
 
-    let data: DocPage | CodePage;
+    let data: Data;
 
     const res = await fetch(resURL, {
       redirect: "manual",
@@ -368,12 +374,12 @@ export const handler: Handlers<MaybeData> = {
         status: 301,
       });
     } else {
-      data = await res.json();
+      data = { data: await res.json(), isCode };
     }
 
-    if (!data.latest_version) {
+    if (!data.data.latest_version) {
       if (isHTML) {
-        return render!({ data, isCode } as any);
+        return render!(data);
       } else {
         return new Response(
           `The module '${name}' has no latest version`,
@@ -416,22 +422,22 @@ export const handler: Handlers<MaybeData> = {
       return Response.redirect(url, 302);
     }
 
-    if (data.kind === "index" || data.kind === "dir") {
-      data.readme = await getReadme(
+    if (data.data.kind === "index" || data.data.kind === "dir") {
+      data.data.readme = await getReadme(
         name,
         version,
-        data.kind === "index" ? data.items : data.entries,
-        data.upload_options,
+        data.data.kind === "index" ? data.data.items : data.data.entries,
+        data.data.upload_options,
       );
-    } else if (isCode && data.kind === "file") {
-      (data as CodePageFile).file = await getRawFile(
+    } else if (data.isCode && data.data.kind === "file") {
+      data.data.file = await getRawFile(
         name,
         version,
-        path,
+        path ? `/${path}` : "",
       );
     }
 
-    return render!({ data, isCode } as any);
+    return render!(data);
   },
 };
 

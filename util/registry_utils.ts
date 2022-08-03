@@ -102,9 +102,9 @@ export async function getRawFile(
   name: string,
   version: string,
   path: string,
-  canonicalPath: string,
 ): Promise<RawFile | Error> {
   const url = getSourceURL(name, version, path);
+  const canonicalPath = getModulePath(name, version, path);
 
   const res = await fetch(url, { method: "GET" });
   const size = Number(res.headers.get("content-size")!);
@@ -473,24 +473,6 @@ export interface ModuleTag {
   value: string;
 }
 
-/** Stored as kind `module_entry` in datastore. */
-export interface ModuleEntry {
-  path: string;
-  type: "file" | "dir";
-  size: number;
-  /** For `"dir"` entries, indicates if there is a _default_ module that should
-   * be used within the directory. */
-  default?: string;
-  /** For `"dir"` entries, an array of child sub-directory paths. */
-  dirs?: string[];
-  /** For `"file`" entries, indicates if the entry id can be queried for doc
-   * nodes. */
-  docable?: boolean;
-  /** For `"dir"` entries, an array of docable child paths that are not
-   * "ignored". */
-  index?: string[];
-}
-
 export interface PageBase {
   kind: string;
   module: string;
@@ -591,9 +573,17 @@ export interface CodePageFile extends PageBase {
   file: RawFile | Error;
 }
 
+export interface CodePageDirEntry {
+  path: string;
+  kind: "file" | "dir";
+  size: number;
+  /** Indicates if the page is docable or not. */
+  docable?: boolean;
+}
+
 export interface CodePageDir extends PageBase {
   kind: "dir";
-  entries: ModuleEntry[];
+  entries: CodePageDirEntry[];
   readme?: Readme;
 }
 

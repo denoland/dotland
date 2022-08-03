@@ -25,7 +25,6 @@ export function CodeView({
 }: CommonProps & {
   data: CodePageFile | CodePageDir;
 }) {
-
   return (
     <div class={tw`flex flex-col gap-4 w-full overflow-auto`}>
       {data.kind === "dir"
