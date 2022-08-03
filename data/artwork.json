@@ -309,5 +309,19 @@
       "github": "Arc-blroth"
     },
     "license": "CC-BY-SA-4.0"
+  },
+  {
+    "date": "2022-08-03",
+    "image": "/images/artwork/snow_den.png",
+    "title": "Saudi Deno",
+    "alt": "Deno with ghutrah (غُترَة).",
+    "artist": {
+      "name": "Hamad Binqali",
+      "profile_image": "https://raw.githubusercontent.com/X7md/x7md/main/deno_logo.svg",
+      "github": "x7md",
+      "twitter": "x7mdNet",
+      "web": "https://x7md.net"
+    },
+    "license": "MIT"
   }
 ]
