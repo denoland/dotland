@@ -51,8 +51,8 @@ export default function ThirdPartyRegistryList(
                 <span class={tw`font-semibold text-default`}>deno.land/x</span>
                 {" "}
                 is a hosting service for Deno scripts. It caches releases of
-                open source modules stored on GitHub and serves them at one easy
-                to remember domain.
+                open-source modules stored on GitHub and serves them at an
+                easy-to-remember domain.
               </p>
 
               <CodeBlock
