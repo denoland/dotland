@@ -6,12 +6,12 @@ import { tw } from "@twind";
 import {
   getBasePath,
   isReadme,
-  type ModuleEntry,
+  type CodePageDirEntry,
 } from "@/util/registry_utils.ts";
 import * as Icons from "./Icons.tsx";
 
 export function DirectoryListing(props: {
-  items: ModuleEntry[];
+  items: CodePageDirEntry[];
   name: string;
   version: string;
   path: string;
@@ -67,20 +67,20 @@ export function DirectoryListing(props: {
 const HIDDEN_REGEX = /^\/\..*$/;
 
 export function DirectoryView(props: {
-  items: ModuleEntry[];
+  items: CodePageDirEntry[];
   path: string;
   url: URL;
   baseURL: string;
 }) {
-  const show: ModuleEntry[] = [];
-  const hidden: ModuleEntry[] = [];
+  const show: CodePageDirEntry[] = [];
+  const hidden: CodePageDirEntry[] = [];
 
   // prioritize dirs and ignore order of other kinds,
   // and secondarily order by path alphabetically
   props.items.sort((a, b) =>
-    ((a.type === "dir" && b.type !== "dir")
+    ((a.kind === "dir" && b.kind !== "dir")
       ? -1
-      : (b.type === "dir" ? 1 : 0)) || a.path.localeCompare(b.path)
+      : (b.kind === "dir" ? 1 : 0)) || a.path.localeCompare(b.path)
   );
 
   for (const item of props.items) {
@@ -91,7 +91,7 @@ export function DirectoryView(props: {
     }
   }
 
-  const buildEntryURL = (path: string, item: ModuleEntry): string => {
+  const buildEntryURL = (path: string, item: CodePageDirEntry): string => {
     return `${props.baseURL}${item.path}?code`;
   };
 
@@ -173,7 +173,7 @@ function TableRow({
   isLastItem,
   isHidden,
 }: {
-  item: ModuleEntry;
+  item: CodePageDirEntry;
   key: number;
   href: string;
   isLastItem: boolean;
@@ -191,12 +191,12 @@ function TableRow({
         <a
           href={href}
           class={tw`px-2 sm:pl-3 md:pl-4 py-1 w-full block ${
-            item.type === "dir" ? "text-blue-300" : "text-gray-300"
+            item.kind === "dir" ? "text-blue-300" : "text-gray-300"
           }`}
           tabIndex={-1}
         >
           {(() => {
-            switch (item.type) {
+            switch (item.kind) {
               case "file":
                 if (isReadme(display)) {
                   return <Icons.OpenBook />;
