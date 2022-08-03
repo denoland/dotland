@@ -15,10 +15,6 @@ export const config: Configuration = {
   darkMode: "class",
   theme: {
     fontFamily: {
-      sans: [
-        "Inter",
-        "sans-serif",
-      ],
       mono: [
         "Menlo",
         "Monaco",

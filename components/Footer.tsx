@@ -84,7 +84,8 @@ export function Footer() {
                 <span class={tw`whitespace-nowrap`}>All rights reserved.</span>
               </span>
               <a class={tw`block text-[#7B61FF]`} href="https://deno.com/jobs">
-                {"We are hiring, join us -->"}
+                We are hiring, join
+                us<Icons.LongArrowRight class="inline ml-1.5" />
               </a>
             </div>
 
