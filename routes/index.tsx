@@ -232,58 +232,6 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           </p>
         </div>
         <div class={tw`section-x-inset-sm mt-20`}>
-          <a class={tw`hover:underline`} href="#third-party-modules">
-            <h3 class={tw`font-bold text-xl`} id="third-party-modules">
-              Third Party Modules
-            </h3>
-          </a>
-          <p class={tw`my-4 text-gray-700`}>
-            Deno can import modules from any location on the web, like GitHub, a
-            personal webserver, or a CDN like{" "}
-            <a href="https://www.skypack.dev" class={tw`link`}>
-              Skypack
-            </a>
-            ,{" "}
-            <a href="https://jspm.io" class={tw`link`}>
-              jspm.io
-            </a>
-            ,{" "}
-            <a href="https://www.jsdelivr.com/" class={tw`link`}>
-              jsDelivr
-            </a>{" "}
-            or{" "}
-            <a href="https://esm.sh/" class={tw`link`}>
-              esm.sh
-            </a>
-            .
-          </p>
-          <p class={tw`my-4 text-gray-700`}>
-            To make it easier to consume third party modules Deno provides some
-            built in tooling like{" "}
-            <a class={tw`link`} href="/manual/tools/dependency_inspector">
-              <InlineCode>deno info</InlineCode>
-            </a>{" "}
-            and{" "}
-            <a class={tw`link`} href="/manual/tools/documentation_generator">
-              <InlineCode>deno doc</InlineCode>
-            </a>
-            . deno.land also provides a web UI for viewing module documentation.
-            It is available at{" "}
-            <a href="https://doc.deno.land" class={tw`link`}>
-              doc.deno.land
-            </a>
-            .
-          </p>
-          <p class={tw`my-4 text-gray-700`}>
-            deno.land also provides a simple public hosting service for ES
-            modules that work with Deno. It can be found at{" "}
-            <a class={tw`link`} href="/x">
-              deno.land/x
-            </a>
-            .
-          </p>
-        </div>
-        <div class={tw`section-x-inset-sm mt-20`}>
           <a class={tw`hover:underline`} href="#toolchain">
             <h3 class={tw`font-bold text-xl`} id="toolchain">
               Built-in Toolchain
