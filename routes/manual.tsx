@@ -97,13 +97,8 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
           class={tw`lg:hidden block pl-5 py-2.5 font-medium border-b border-dark-border`}
         >
           <div class={tw`flex gap-2 items-center px-1.5`}>
-<<<<<<< HEAD
-            <Icons.ArrowRight class="text-[#9CA0AA]" />
-            菜单
-=======
             <Icons.ArrowRight class="text-gray-400" />
-            Menu
->>>>>>> d453a811bafef36cedc0570d0bc8359d6bbc7f05
+            菜单
           </div>
         </label>
 
