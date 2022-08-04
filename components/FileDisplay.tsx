@@ -158,6 +158,7 @@ export function FileDisplay(props: {
               return (
                 <div class={tw`p-8`}>
                   <Markdown
+                    baseUrl={props.baseURL}
                     source={props.isStd
                       ? props.raw!
                       : props.raw!.replace(/\$STD_VERSION/g, props.version)}
