@@ -15,9 +15,6 @@ export const config: Configuration = {
   darkMode: "class",
   theme: {
     fontFamily: {
-      sans: [
-        "Inter",
-      ],
       mono: [
         "Menlo",
         "Monaco",
@@ -42,17 +39,16 @@ export const config: Configuration = {
 
         "tag-blue-bg": "#056CF025",
         "tag-blue": "#056CF0",
+        "tag-blue2": "#448bef",
       },
       opacity: {
         15: ".15",
-      },
-      lineHeight: {
-        0: "0",
       },
       spacing: {
         1.75: "0.4375rem",
         4.5: "1.125rem",
         5.5: "1.375rem",
+        15: "3.75rem",
         18: "4.5rem",
         22: "5.5rem",
         72: "18rem",

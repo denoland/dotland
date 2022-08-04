@@ -346,7 +346,7 @@ export async function getVersionList(
 
 export interface Module {
   name: string;
-  description: string;
+  description?: string;
   star_count: string;
 }
 
@@ -668,39 +668,6 @@ export function listExternalDependencies(
       url.replace("https://deno.land/x/std", "https://deno.land/std")
     );
   } else return undefined;
-}
-
-export interface Stats {
-  recently_added_modules: Array<Module & { created_at: string }>;
-  recently_uploaded_versions: Array<{
-    name: string;
-    version: string;
-    created_at: string;
-  }>;
-}
-
-export async function getStats(): Promise<Stats | null> {
-  const url = `${API_ENDPOINT}stats`;
-  const res = await fetch(url, {
-    headers: {
-      accept: "application/json",
-    },
-  });
-  if (res.status !== 200) {
-    throw Error(
-      `Got an error (${res.status}) while getting the stats:\n${await res
-        .text()}`,
-    );
-  }
-  const data = await res.json();
-  if (!data.success) {
-    throw Error(
-      `Got an error (${data.info}) while getting the stats:\n${await res
-        .text()}`,
-    );
-  }
-
-  return data.data;
 }
 
 export function getBasePath({
