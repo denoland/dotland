@@ -210,6 +210,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           </p>
         </div>
         <div class={tw`section-x-inset-sm mt-20`}>
+<<<<<<< HEAD
           <a class={tw`hover:underline`} href="#third-party-modules">
             <h3 class={tw`font-bold text-xl`} id="third-party-modules">
               第三方模块
@@ -257,6 +258,8 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           </p>
         </div>
         <div class={tw`section-x-inset-sm mt-20`}>
+=======
+>>>>>>> 690de3477ab3240bf24b6e915052aa08bafec4f7
           <a class={tw`hover:underline`} href="#toolchain">
             <h3 class={tw`font-bold text-xl`} id="toolchain">
               内置工具链
