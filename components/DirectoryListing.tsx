@@ -4,9 +4,9 @@
 import { h } from "preact";
 import { tw } from "@twind";
 import {
+  type CodePageDirEntry,
   getBasePath,
   isReadme,
-  type CodePageDirEntry,
 } from "@/util/registry_utils.ts";
 import * as Icons from "./Icons.tsx";
 

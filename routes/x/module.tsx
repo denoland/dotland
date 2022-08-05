@@ -27,6 +27,7 @@ import { DocView } from "@/components/DocView.tsx";
 import * as Icons from "@/components/Icons.tsx";
 import VersionSelect from "@/islands/VersionSelect.tsx";
 import { CodeView } from "@/components/CodeView.tsx";
+import { PopularityTag } from "@/components/PopularityTag.tsx";
 
 type Params = {
   name: string;
@@ -102,6 +103,9 @@ function TopPanel({
   path: string;
   isStd: boolean;
 } & Data) {
+  const popularityTag = data.kind !== "invalid-version"
+    ? data.tags?.find((tag) => tag.kind === "popularity")
+    : undefined;
   return (
     <div class={tw`bg-ultralight border-b border-light-border`}>
       <div class={tw`section-x-inset-xl py-5 flex items-center`}>
@@ -136,10 +140,12 @@ function TopPanel({
                     {data.upload_options.repository}
                   </a>
                 </div>
-                <div class={tw`flex items-center`}>
-                  <Icons.Star class="mr-2" title="GitHub Stars" />
-                  <div>{data.star_count}</div>
-                </div>
+                {popularityTag &&
+                  (
+                    <div class={tw`flex items-center`}>
+                      <PopularityTag>{popularityTag.value}</PopularityTag>
+                    </div>
+                  )}
               </div>
             )}
             <VersionSelector
