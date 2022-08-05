@@ -210,56 +210,6 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           </p>
         </div>
         <div class={tw`section-x-inset-sm mt-20`}>
-<<<<<<< HEAD
-          <a class={tw`hover:underline`} href="#third-party-modules">
-            <h3 class={tw`font-bold text-xl`} id="third-party-modules">
-              第三方模块
-            </h3>
-          </a>
-          <p class={tw`my-4 text-gray-700`}>
-            Deno 可以从网络上的任何位置导入模块，例如 GitHub、个人网站或 CDN，例如{" "}
-            <a href="https://www.skypack.dev" class={tw`link`}>
-              Skypack
-            </a>
-            、{" "}
-            <a href="https://jspm.io" class={tw`link`}>
-              jspm.io
-            </a>
-            、{" "}
-            <a href="https://www.jsdelivr.com/" class={tw`link`}>
-              jsDelivr
-            </a>{" "}
-            或{" "}
-            <a href="https://esm.sh/" class={tw`link`}>
-              esm.sh
-            </a>
-            。
-          </p>
-          <p class={tw`my-4 text-gray-700`}>
-            为了更方便地使用第三方模块，Deno 提供了一些内置的工具，如
-            <a class={tw`link`} href="/manual/tools/dependency_inspector">
-              <InlineCode>deno info</InlineCode>
-            </a>{" "}
-            和{" "}
-            <a
-              class={tw`link`}
-              href="/manual/tools/documentation_generator"
-            >
-              <InlineCode>deno doc</InlineCode>
-            </a>。deno.js.cn 还提供了一个 web UI 用来在线查看模块文档。可以通过{" "}
-            <a href="https://doc.deno.js.cn" class={tw`link`}>
-              doc.deno.js.cn
-            </a>{" "}
-            访问。
-          </p>
-          <p class={tw`my-4 text-gray-700`}>
-            deno.land 还为用于 Deno 的 ES 模块提供简单的公共托管服务。 位于{" "}
-            <a class={tw`link`} href="/x">deno.js.cn/x</a>。
-          </p>
-        </div>
-        <div class={tw`section-x-inset-sm mt-20`}>
-=======
->>>>>>> 690de3477ab3240bf24b6e915052aa08bafec4f7
           <a class={tw`hover:underline`} href="#toolchain">
             <h3 class={tw`font-bold text-xl`} id="toolchain">
               内置工具链
