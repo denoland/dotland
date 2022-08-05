@@ -47,19 +47,47 @@ export default function ThirdPartyRegistryList(
                 Deno 第三方模块
               </h1>
 
-              <p class={tw`leading-5 text-[#6C6E78]`}>
-                <span class={tw`font-semibold text-default`}>deno.js.cn/x</span>
-                {" "}
-                是 Deno 模块的托管服务。它缓存 GitHub 上的开源模块的 Release 代码，并在一个易于记忆的域名中提供它们。
-              </p>
-
-              <CodeBlock
-                code='import { start } from "https://deno.land/x/fresh@1.0.0/server.ts";'
-                language="typescript"
-                disablePrefixes
-                url={url}
-                class="lg:inline-block"
-              />
+              <div class={tw`leading-5 text-[#6C6E78] space-y-3`}>
+                <p>
+                  <span class={tw`font-semibold text-default`}>
+                    deno.js.cn/x
+                  </span>{" "}
+                  是 Deno 脚本的托管服务。它缓存 GitHub 上的开源模块的 Release 代码，并在一个易于记忆的域名中提供它们。
+                </p>
+                <p>
+                  Deno 可以从网络上的任何位置导入模块，例如 GitHub、个人网站或 CDN，例如{" "}
+                  <a href="https://esm.sh/" class={tw`link`}>
+                    esm.sh
+                  </a>
+                  ，
+                  <a href="https://www.skypack.dev" class={tw`link`}>
+                    Skypack
+                  </a>
+                  ，
+                  <a href="https://jspm.io" class={tw`link`}>
+                    jspm.io
+                  </a>{" "}
+                  或{" "}
+                  <a href="https://www.jsdelivr.com/" class={tw`link`}>
+                    jsDelivr
+                  </a>
+                  .
+                </p>
+                <p>
+                  为了更方便地使用第三方模块，Deno 提供了一些内置的工具，如{" "}
+                  <a class={tw`link`} href="/manual/tools/dependency_inspector">
+                    <InlineCode>deno info</InlineCode>
+                  </a>{" "}
+                  和{" "}
+                  <a
+                    class={tw`link`}
+                    href="/manual/tools/documentation_generator"
+                  >
+                    <InlineCode>deno doc</InlineCode>
+                  </a>
+                  。
+                </p>
+              </div>
 
               <div class={tw`space-x-2`}>
                 <a
