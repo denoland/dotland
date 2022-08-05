@@ -31,7 +31,7 @@ export function PopularityTag(
   }
 
   return (
-    <div class={tw`text-${color} flex justify-center items-center gap-1.5`}>
+    <div class={tw`text-${color} flex items-center gap-1.5`}>
       <div class={tw`flex gap-0.5`}>
         {Array.from({ length: stars }, () => <Icons.HollowStar />)}
       </div>
