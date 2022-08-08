@@ -570,6 +570,11 @@ export interface PagePathNotFound extends PageBase {
   kind: "notfound";
 }
 
+export interface PageNoVersions {
+  kind: "no-versions";
+  module: string;
+}
+
 export interface PageInvalidVersion {
   kind: "invalid-version";
   module: string;
@@ -585,6 +590,7 @@ export type DocPage =
   | DocPageIndex
   | DocPageFile
   | PageInvalidVersion
+  | PageNoVersions
   | PagePathNotFound;
 
 export interface CodePageFile extends PageBase {
@@ -613,4 +619,5 @@ export type CodePage =
   | CodePageFile
   | CodePageDir
   | PageInvalidVersion
+  | PageNoVersions
   | PagePathNotFound;

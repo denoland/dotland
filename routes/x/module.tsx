@@ -103,7 +103,10 @@ function TopPanel({
   path: string;
   isStd: boolean;
 } & Data) {
-  const popularityTag = data.kind !== "invalid-version"
+  const hasPageBase = data.kind !== "invalid-version" &&
+    data.kind !== "no-versions";
+
+  const popularityTag = hasPageBase
     ? data.tags?.find((tag) => tag.kind === "popularity")
     : undefined;
   return (
@@ -121,13 +124,14 @@ function TopPanel({
               isCode={isCode}
             />
             <div class={tw`text-sm`}>
-              {data.description && emojify(data.description)}
+              {data.kind !== "no-versions" && data.description &&
+                emojify(data.description)}
             </div>
           </div>
           <div
             class={tw`flex flex-col items-stretch gap-4 w-full md:(flex-row w-auto items-center)`}
           >
-            {data.kind !== "invalid-version" && (
+            {hasPageBase && (
               <div
                 class={tw`flex flex-row flex-auto justify-center items-center gap-4 border border-dark-border rounded-md bg-white py-2 px-5`}
               >
@@ -148,12 +152,14 @@ function TopPanel({
                   )}
               </div>
             )}
-            <VersionSelector
-              versions={data.versions}
-              selectedVersion={version}
-              name={name}
-              path={path}
-            />
+            {data.kind !== "no-versions" && (
+              <VersionSelector
+                versions={data.versions}
+                selectedVersion={version}
+                name={name}
+                path={path}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -176,7 +182,7 @@ function ModuleView({
   url: URL;
   data: Data;
 }) {
-  if (data.data.versions.length === 0) {
+  if (data.data.kind === "no-versions") {
     return (
       <ErrorMessage title="No uploaded versions">
         This module name has been reserved for a repository, but no versions
@@ -428,7 +434,7 @@ export const handler: Handlers<MaybeData> = {
       data = { data: await res.json(), isCode };
     }
 
-    if (!data.data.latest_version) {
+    if (data.data.kind === "no-versions") {
       return render!(data);
     }
 
