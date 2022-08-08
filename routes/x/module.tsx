@@ -18,7 +18,7 @@ import {
   getRawFile,
   getReadme,
   getRepositoryURL,
-  S3_BUCKET,
+  getVersionList,
 } from "@/util/registry_utils.ts";
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
@@ -320,11 +320,60 @@ export const handler: Handlers<MaybeData> = {
   async GET(req, { params, render }) {
     const { name, version, path } = params as Params;
     const url = new URL(req.url);
-    const isHTML = accepts(req, "application/*", "text/html") === "text/html";
 
     if (name === "std" && url.pathname.startsWith("/x")) {
       url.pathname = url.pathname.slice(2);
       return Response.redirect(url, 301);
+    }
+
+    const isHTML = accepts(req, "application/*", "text/html") === "text/html";
+    if (!isHTML) {
+      const versions = await getVersionList(params.name);
+
+      if (versions === null) {
+        return new Response(`The module '${name}' does not exist`, {
+          status: 404,
+        });
+      } else if (versions.latest === null) {
+        return new Response(
+          `The module '${name}' has no latest version`,
+          {
+            status: 404,
+            headers: {
+              "content-type": "text/plain",
+              "Access-Control-Allow-Origin": "*",
+            },
+          },
+        );
+      } else if (!version) {
+        return new Response(undefined, {
+          headers: {
+            Location: getModulePath(
+              name,
+              versions.latest,
+              path ? ("/" + path) : undefined,
+            ),
+            "x-deno-warning":
+              `Implicitly using latest version (${versions.latest}) for ${url.href}`,
+            "Access-Control-Allow-Origin": "*",
+          },
+          status: 302,
+        });
+      }
+      if (!versions.versions.includes(version)) {
+        return new Response(
+          `The version '${version}' does not exist in the module '${name}'`,
+          {
+            status: 404,
+            headers: {
+              "content-type": "text/plain",
+              "Access-Control-Allow-Origin": "*",
+            },
+          },
+        );
+      } else {
+        return fetchSource(name, version, path);
+      }
     }
 
     const isCode = url.searchParams.has("code");
@@ -345,28 +394,24 @@ export const handler: Handlers<MaybeData> = {
       redirect: "manual",
     });
     if (res.status === 404) { // module doesnt exist
-      if (isHTML) {
-        return render(null);
-      } else {
-        return new Response(`The module '${name}' does not exist`, {
-          status: 404,
-        });
-      }
+      return render(null);
     } else if (res.status === 302) { // implicit latest
       const latestVersion = res.headers.get("X-Deno-Latest-Version")!;
-      return new Response(undefined, {
-        headers: {
-          Location: getModulePath(
+      console.log(getModulePath(
+        name,
+        latestVersion,
+        path ? ("/" + path) : undefined,
+      ));
+      return Response.redirect(
+        new URL(
+          getModulePath(
             name,
             latestVersion,
             path ? ("/" + path) : undefined,
           ),
-          "x-deno-warning":
-            `Implicitly using latest version (${latestVersion}) for ${url.href}`,
-          "Access-Control-Allow-Origin": "*",
-        },
-        status: 302,
-      });
+          url,
+        ),
+      );
     } else if (res.status === 301) { // path is directory and there is an index module and its doc
       const newPath = res.headers.get("X-Deno-Module-Path")!;
       return new Response(undefined, {
@@ -384,40 +429,7 @@ export const handler: Handlers<MaybeData> = {
     }
 
     if (!data.data.latest_version) {
-      if (isHTML) {
-        return render!(data);
-      } else {
-        return new Response(
-          `The module '${name}' has no latest version`,
-          {
-            status: 404,
-            headers: {
-              "content-type": "text/plain",
-              "Access-Control-Allow-Origin": "*",
-            },
-          },
-        );
-      }
-    }
-
-    if (!isHTML) {
-      const remoteUrl = `${S3_BUCKET}${name}/versions/${version}/raw/${path}`;
-      const resp = await fetchSource(remoteUrl);
-
-      if (
-        remoteUrl.endsWith(".jsx") &&
-        !resp.headers.get("content-type")?.includes("javascript")
-      ) {
-        resp.headers.set("content-type", "application/javascript");
-      } else if (
-        remoteUrl.endsWith(".tsx") &&
-        !resp.headers.get("content-type")?.includes("typescript")
-      ) {
-        resp.headers.set("content-type", "application/typescript");
-      }
-
-      resp.headers.set("Access-Control-Allow-Origin", "*");
-      return resp;
+      return render!(data);
     }
 
     const ln = extractAltLineNumberReference(url.pathname);

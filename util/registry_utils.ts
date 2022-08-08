@@ -393,11 +393,16 @@ export function getModulePath(
 export const S3_BUCKET =
   "http://deno-registry2-prod-storagebucket-b3a31d16.s3-website-us-east-1.amazonaws.com/";
 
-export async function fetchSource(remoteUrl: string): Promise<Response> {
+export async function fetchSource(
+  name: string,
+  version: string,
+  path: string,
+): Promise<Response> {
+  const url = `${S3_BUCKET}${name}/versions/${version}/raw/${path}`;
   let lastErr;
   for (let i = 0; i < 3; i++) {
     try {
-      const resp = await fetch(remoteUrl);
+      const resp = await fetch(url);
       if (resp.status === 403 || resp.status === 404) {
         await resp.body?.cancel();
         return new Response("404 Not Found", { status: 404 });
@@ -406,6 +411,21 @@ export async function fetchSource(remoteUrl: string): Promise<Response> {
         await resp.body?.cancel();
         throw new TypeError("non 2xx status code returned");
       }
+
+      if (
+        path.endsWith(".jsx") &&
+        !resp.headers.get("content-type")?.includes("javascript")
+      ) {
+        resp.headers.set("content-type", "application/javascript");
+      } else if (
+        path.endsWith(".tsx") &&
+        !resp.headers.get("content-type")?.includes("typescript")
+      ) {
+        resp.headers.set("content-type", "application/typescript");
+      }
+
+      resp.headers.set("Access-Control-Allow-Origin", "*");
+
       return new Response(resp.body, {
         headers: resp.headers,
         status: resp.status,

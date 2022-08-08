@@ -5,6 +5,7 @@ import {
   fileNameFromURL,
   fileTypeFromURL,
   getSourceURL,
+  getVersionList,
   isReadme,
 } from "./registry_utils.ts";
 import { assertEquals } from "$std/testing/asserts.ts";
@@ -14,6 +15,14 @@ Deno.test("source url", () => {
     getSourceURL("ltest2", "0.0.8", "/README.md"),
     "https://cdn.deno.land/ltest2/versions/0.0.8/raw/README.md",
   );
+});
+
+Deno.test("getVersionList", async () => {
+  const versionList = await getVersionList("ltest2");
+  assert(versionList);
+  assertEquals(versionList?.isLegacy, undefined);
+  assertEquals(versionList?.latest, versionList?.versions[0]);
+  assert(versionList?.versions.length >= 2);
 });
 
 Deno.test("fileTypeFromURL", () => {
