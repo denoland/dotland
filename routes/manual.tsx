@@ -261,7 +261,8 @@ function ToC({
                 <Icons.TriangleRight
                   onKeyDown="if (event.code === 'Space' || event.code === 'Enter') { this.parentElement.click(); event.preventDefault(); }"
                   tabindex={0}
-                  class={"cursor-pointer" + (entry.children ? "" : " invisible")}
+                  class={"cursor-pointer" +
+                    (entry.children ? "" : " invisible")}
                 />
                 <a href={`/manual${version ? `@${version}` : ""}/${slug}`}>
                   {entry.name}
