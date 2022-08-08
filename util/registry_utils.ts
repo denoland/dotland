@@ -1,6 +1,5 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-export const CDN_ENDPOINT = "https://cdn.deno.land/";
 const API_ENDPOINT = "https://api.deno.land/";
 
 export interface CommonProps {
@@ -134,7 +133,7 @@ export function getSourceURL(
   version: string,
   path: string,
 ): string {
-  return encodeURI(`${CDN_ENDPOINT}${module}/versions/${version}/raw${path}`);
+  return encodeURI(`${S3_BUCKET}${module}/versions/${version}/raw${path}`);
 }
 
 function pathJoin(...parts: string[]) {
@@ -172,7 +171,7 @@ export async function getVersionList(
   module: string,
   signal?: AbortSignal,
 ): Promise<VersionInfo | null> {
-  const url = `${CDN_ENDPOINT}${module}/meta/versions.json`;
+  const url = `${S3_BUCKET}${module}/meta/versions.json`;
   const res = await fetch(url, {
     headers: {
       accept: "application/json",
