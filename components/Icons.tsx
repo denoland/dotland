@@ -190,10 +190,15 @@ export function ArrowRight(props: { class?: string }) {
   );
 }
 
-export function TriangleRight(props: { class?: string }) {
+export function TriangleRight(
+  props: { class?: string; tabindex?: number; onKeyDown?: string },
+) {
   return (
     <svg
       class={tw(props.class ?? "")}
+      tabindex={props?.tabindex}
+      // @ts-ignore onKeyDown does support strings
+      onKeyDown={props?.onKeyDown}
       xmlns="http://www.w3.org/2000/svg"
       width="10"
       height="10"

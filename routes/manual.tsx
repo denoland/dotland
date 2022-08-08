@@ -259,6 +259,8 @@ function ToC({
                 } font-semibold` + (active ? " toc-active" : "")}
               >
                 <Icons.TriangleRight
+                  onKeyDown="if (event.code === 'Space' || event.code === 'Enter') { this.parentElement.click(); event.preventDefault(); }"
+                  tabindex={0}
                   class={entry.children ? "" : "invisible"}
                 />
                 <a href={`/manual${version ? `@${version}` : ""}/${slug}`}>
