@@ -397,7 +397,7 @@ export async function fetchSource(
   version: string,
   path: string,
 ): Promise<Response> {
-  const url = `${S3_BUCKET}${name}/versions/${version}/raw/${path}`;
+  const url = getSourceURL(name, version, path);
   let lastErr;
   for (let i = 0; i < 3; i++) {
     try {
