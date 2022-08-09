@@ -116,9 +116,9 @@ function TopPanel({
     <div class={tw`bg-ultralight border-b border-light-border`}>
       <div class={tw`section-x-inset-xl py-5 flex items-center`}>
         <div
-          class={tw`flex flex-row flex-wrap justify-between items-center w-full gap-4`}
+          class={tw`flex flex-col md:(flex-row items-center) justify-between w-full gap-4`}
         >
-          <div>
+          <div class={tw`overflow-hidden`}>
             <Breadcrumbs
               name={name}
               version={version}
@@ -126,19 +126,25 @@ function TopPanel({
               isStd={isStd}
               isCode={isCode}
             />
-            <div class={tw`text-sm`}>
-              {data.kind !== "no-versions" && data.description &&
-                emojify(data.description)}
-            </div>
+
+            {data.kind !== "no-versions" && data.description &&
+              (
+                <div
+                  class={tw`text-sm lg:truncate`}
+                  title={emojify(data.description)}
+                >
+                  {emojify(data.description)}
+                </div>
+              )}
           </div>
           <div
-            class={tw`flex flex-col items-stretch gap-4 w-full md:(flex-row w-auto items-center)`}
+            class={tw`flex flex-col items-stretch gap-4 w-full md:w-auto lg:(flex-row justify-between) flex-shrink-0`}
           >
             {hasPageBase && (
               <div
-                class={tw`flex flex-row flex-auto justify-center items-center gap-4 border border-dark-border rounded-md bg-white py-2 px-5`}
+                class={tw`flex flex-row justify-between md:justify-center items-center gap-4 border border-dark-border rounded-md bg-white py-2 px-5`}
               >
-                <div class={tw`flex items-center`}>
+                <div class={tw`flex items-center whitespace-nowrap`}>
                   <Icons.GitHub class="mr-2 w-5 h-5 inline text-gray-700" />
                   <a
                     class={tw`link`}
