@@ -382,7 +382,7 @@ export const handler: Handlers<MaybeData> = {
       }
     }
 
-    const isCode = url.searchParams.has("code");
+    const isCode = url.searchParams.has("code") || name !== "std";
 
     const symbol = url.searchParams.get("s");
     const resURL = new URL(
