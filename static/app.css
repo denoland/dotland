@@ -153,3 +153,12 @@ ul.tree li:last-child:before {
 .markdown-body ul {
     list-style: disc;
 }
+
+
+.pinkLink {
+	color: #ff007f;
+}
+
+.pinkLink:hover {
+	color: #ff0080a1;
+}

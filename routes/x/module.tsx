@@ -6,7 +6,6 @@ import { Fragment, h } from "preact";
 import { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
-import twas from "$twas";
 import { emojify } from "$emoji";
 import { accepts } from "$oak_commons";
 import {
@@ -40,6 +39,8 @@ import * as Icons from "@/components/Icons.tsx";
 import { type Doc, getDocs } from "@/util/doc.ts";
 import VersionSelect from "@/islands/VersionSelect.tsx";
 import { CodeView } from "@/components/CodeView.tsx";
+import { getGithubFirstSponsorIfPresent } from "@/util/github_utils.ts"
+
 
 type MaybeData = { versions: VersionInfo | null } | Data;
 
@@ -51,6 +52,7 @@ interface Data {
   versionDeps: VersionDeps | null;
   dirEntries: DirEntry[] | null;
   readme: Readme | null;
+  githubSponsorUsername: string | null;
   repositoryURL: string;
   showCode: boolean;
   data: Doc | RawFile | Error | null;
@@ -83,10 +85,14 @@ export default function Registry({ params, url, data }: PageProps<MaybeData>) {
         <Header
           selected={name === "std" ? "Standard Library" : "Third Party Modules"}
         />
+
+
         <TopPanel
           version={version!}
           {...{ name, path, isStd, ...(data as Data) }}
         />
+
+       
         <div class={tw`section-x-inset-xl pb-20 pt-10`}>
           <div class={tw`flex gap-x-14`}>
             <ModuleView
@@ -110,10 +116,10 @@ function TopPanel({
   versions,
   versionMeta,
   moduleMeta,
-  versionDeps,
+  githubSponsorUsername
 }: {
   name: string;
-  version: string;
+  version: string | undefined;
   path: string;
   isStd: boolean;
 } & Data) {
@@ -123,7 +129,9 @@ function TopPanel({
   //     versionDeps.graph,
   //     `https://deno.land/x/${name}@${version}${path}`,
   //   );
-
+  if(!version) {
+    version = "";
+  }
   return (
     <div class={tw`bg-ultralight border-b border-light-border`}>
       <div class={tw`section-x-inset-xl py-5 flex items-center`}>
@@ -171,11 +179,41 @@ function TopPanel({
                 path={path}
               />
             )}
+
+            {versionMeta.uploadOptions.type == "github" && (
+              showGithubSponors(githubSponsorUsername)
+            )}
+
           </div>
         </div>
       </div>
     </div>
   );
+}
+
+function showGithubSponors(githubSponsorUsername:string | null) {
+  //console.log("showUsername", githubSponsorUsername);
+  if(githubSponsorUsername) {
+    return (
+      <div
+          class={tw`flex flex-row flex-auto justify-center items-center gap-4 border border-dark-border rounded-md bg-white py-2 px-5`}
+        >
+        <div class={tw`flex items-center`}>
+          <Icons.Heart class="mr-2"/>
+            <a
+              class={tw`link`}
+              href={`https://github.com/sponsors/${githubSponsorUsername}`}
+              target="_blank"
+            >
+             <span class="pinkLink">
+               Sponsor
+             </span>
+          </a>
+        </div>
+      </div>
+    )
+  }
+  return "";
 }
 
 function ModuleView({
@@ -461,7 +499,7 @@ export const handler: Handlers<MaybeData> = {
         dirEntries ? "tree" : undefined,
       );
 
-      const [readme, file] = await Promise.all([
+      const [readme, file, githubSponsorUsername] = await Promise.all([
         getReadme(
           name,
           version,
@@ -480,6 +518,7 @@ export const handler: Handlers<MaybeData> = {
             versionMeta,
           )
           : null,
+          await getGithubFirstSponsorIfPresent(name, version, versionMeta),
       ]);
 
       return render!({
@@ -490,6 +529,7 @@ export const handler: Handlers<MaybeData> = {
         versionDeps,
         dirEntries,
         readme,
+        githubSponsorUsername,
         repositoryURL,
         showCode: !doc,
         data: doc ?? file,
