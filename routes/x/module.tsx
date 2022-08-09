@@ -10,8 +10,11 @@ import twas from "$twas";
 import { emojify } from "$emoji";
 import { accepts } from "$oak_commons";
 import {
-  CodePage,
-  DocPage,
+  type CodePage,
+  type DocPage,
+  type DocPageIndex,
+  type DocPageModule,
+  type DocPageSymbol,
   extractAltLineNumberReference,
   fetchSource,
   getModulePath,
@@ -233,7 +236,7 @@ function ModuleView({
           version,
           path,
           url,
-          data: data.data,
+          data: data.data as DocPageSymbol | DocPageModule | DocPageIndex,
           repositoryURL,
         }}
       />
@@ -382,7 +385,7 @@ export const handler: Handlers<MaybeData> = {
       }
     }
 
-    const isCode = url.searchParams.has("code") || name !== "std";
+    const isCode = url.searchParams.has("code");
 
     const symbol = url.searchParams.get("s");
     const resURL = new URL(
@@ -436,6 +439,11 @@ export const handler: Handlers<MaybeData> = {
 
     if (data.data.kind === "no-versions") {
       return render!(data);
+    }
+
+    if (!data.isCode && data.data.kind === "file") {
+      url.searchParams.set("code", "");
+      return Response.redirect(url, 301);
     }
 
     const ln = extractAltLineNumberReference(url.pathname);
