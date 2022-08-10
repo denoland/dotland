@@ -109,7 +109,7 @@ export default function GlobalSearch() {
 
     if (kind === "Manual" || kind === "All") {
       queries.push({
-        indexName: "deno_manual",
+        indexName: "manual",
         query: input || "Introduction",
         params: {
           page: page,
@@ -122,7 +122,7 @@ export default function GlobalSearch() {
 
     if (kind === "Symbols" || kind === "All") {
       queries.push({
-        indexName: "deno_modules",
+        indexName: "doc_nodes",
         query: input || "serve",
         params: {
           page: page,
