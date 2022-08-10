@@ -152,9 +152,9 @@ export default function GlobalSearch() {
         setTotalPages(results.find((res) => res.nbPages)?.nbPages ?? 1);
         setResults({
           // @ts-ignore algolia typings are annoying
-          manual: results.find((res) => res.index === "deno_manual")?.hits,
+          manual: results.find((res) => res.index === "manual")?.hits,
           // @ts-ignore algolia typings are annoying
-          symbols: results.find((res) => res.index === "deno_modules")?.hits,
+          symbols: results.find((res) => res.index === "doc_nodes")?.hits,
           // @ts-ignore algolia typings are annoying
           modules: results.find((res) => res.index === "modules")?.hits,
         });
