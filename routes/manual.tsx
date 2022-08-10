@@ -251,7 +251,7 @@ function ToC({
                 onToggle={`event.currentTarget.firstChild.firstChild.setAttribute("aria-label", (event.currentTarget.open ? "close" : "open") + " section ${entry.name}")`}
               >
                 <summary
-                  class={tw`flex items-center gap-2 px-2.5 py-2 rounded-md block ${
+                  class={tw`flex items-center gap-2 px-2.5 py-2 rounded-md ${
                     active ? "link bg-ultralight" : "hover:text-gray-500"
                   } font-semibold` + (active ? " toc-active" : "")}
                 >

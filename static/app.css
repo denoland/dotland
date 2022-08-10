@@ -17,6 +17,13 @@ ol.nested li a:before {
 	counter-increment: item;
 }
 
+details > summary {
+	list-style: none;
+}
+details > summary::-webkit-details-marker {
+	display: none;
+}
+
 details[open].rotate-svg svg {
 	transform: rotate(90deg);
 }

@@ -11,6 +11,7 @@ export const config: Configuration = {
         "scroll-behavior": "smooth",
       })
     }`,
+
   },
   darkMode: "class",
   theme: {
