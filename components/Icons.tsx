@@ -191,7 +191,12 @@ export function ArrowRight(props: { class?: string }) {
 }
 
 export function TriangleRight(
-  props: { class?: string; tabindex?: number; onKeyDown?: string; "aria-label"?: string },
+  props: {
+    class?: string;
+    tabindex?: number;
+    onKeyDown?: string;
+    "aria-label"?: string;
+  },
 ) {
   return (
     <svg
