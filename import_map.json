@@ -20,8 +20,6 @@
     "$he": "https://esm.sh/he@1.2.0",
     "$pretty_bytes": "https://deno.land/x/pretty_bytes@v1.0.5/mod.ts",
     "$router": "https://crux.land/router@0.0.12",
-    "$ga4": "https://raw.githubusercontent.com/denoland/ga4/main/mod.ts",
-    "$ga": "https://deno.land/x/g_a@0.1.2/mod.ts",
     "$oak_commons": "https://deno.land/x/oak_commons@0.1.1/negotiation.ts",
     "$doc_components/": "https://raw.githubusercontent.com/denoland/doc_components/cbcaaaf00508c9bd64c3c2ebb4d9899659168a44/",
     "$deno_doc/": "https://deno.land/x/deno_doc@v0.34.0/lib/",

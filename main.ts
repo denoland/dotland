@@ -12,7 +12,6 @@ import { ServerContext } from "$fresh/server.ts";
 import { Fragment, h } from "preact";
 import { serve } from "$std/http/server.ts";
 import { router } from "$router";
-import { withLog } from "./util/ga_utils.ts";
 import { setup } from "$doc_components/services.ts";
 
 import manifest from "./fresh.gen.ts";
@@ -43,7 +42,6 @@ await setup({
 
 const ctx = await ServerContext.fromManifest(manifest, options);
 
-const innerHandler = withLog(ctx.handler());
-const handler = router(completionsV2Routes, innerHandler);
+const handler = router(completionsV2Routes, ctx.handler());
 
 serve(handler);
