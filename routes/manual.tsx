@@ -244,14 +244,19 @@ function ToC({
           const active = path === `/${slug}`;
           return (
             <li key={slug}>
-              <details open={active} class="rotate-svg">
+              <details
+                open={active}
+                class="rotate-svg"
+                // @ts-ignore onToggle does support strings
+                onToggle={`event.currentTarget.firstChild.firstChild.setAttribute("aria-label", (event.currentTarget.open ? "close" : "open") + " section ${entry.name}")`}
+              >
                 <summary
                   class={tw`flex items-center gap-2 px-2.5 py-2 rounded-md block ${
                     active ? "link bg-ultralight" : "hover:text-gray-500"
                   } font-semibold` + (active ? " toc-active" : "")}
                 >
                   <Icons.TriangleRight
-                    aria-label={`toggle section ${entry.name}`}
+                    aria-label={`open section ${entry.name}`}
                     onKeyDown="if (event.code === 'Space' || event.code === 'Enter') { this.parentElement.click(); event.preventDefault(); }"
                     tabindex={0}
                     class={"cursor-pointer" +
