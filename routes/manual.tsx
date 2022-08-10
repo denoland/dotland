@@ -244,59 +244,52 @@ function ToC({
           const active = path === `/${slug}`;
           return (
             <li key={slug}>
-              <input
-                type="checkbox"
-                id={slug}
-                class={tw`hidden checked:siblings:even:children:first-child:rotate-90 checked:siblings:last-child:block`}
-                checked={active || path.startsWith(`/${slug}/`)}
-                disabled={!entry.children}
-              />
+              <details open={active} class="rotate-svg">
+                <summary
+                  class={tw`flex items-center gap-2 px-2.5 py-2 rounded-md block ${
+                    active ? "link bg-ultralight" : "hover:text-gray-500"
+                  } font-semibold` + (active ? " toc-active" : "")}
+                >
+                  <Icons.TriangleRight
+                    aria-label={`toggle section ${entry.name}`}
+                    onKeyDown="if (event.code === 'Space' || event.code === 'Enter') { this.parentElement.click(); event.preventDefault(); }"
+                    tabindex={0}
+                    class={"cursor-pointer" +
+                      (entry.children ? "" : " invisible")}
+                  />
+                  <a href={`/manual${version ? `@${version}` : ""}/${slug}`}>
+                    {entry.name}
+                  </a>
+                </summary>
 
-              <label
-                htmlFor={slug}
-                class={tw`flex items-center gap-2 px-2.5 py-2 rounded-md block ${
-                  active ? "link bg-ultralight" : "hover:text-gray-500"
-                } font-semibold` + (active ? " toc-active" : "")}
-              >
-                <Icons.TriangleRight
-                  aria-label="open section"
-                  onKeyDown="if (event.code === 'Space' || event.code === 'Enter') { this.parentElement.click(); event.preventDefault(); }"
-                  tabindex={0}
-                  class={"cursor-pointer" +
-                    (entry.children ? "" : " invisible")}
-                />
-                <a href={`/manual${version ? `@${version}` : ""}/${slug}`}>
-                  {entry.name}
-                </a>
-              </label>
-
-              {entry.children && (
-                <ol class={tw`list-decimal font-normal hidden` + " nested"}>
-                  {Object.entries(entry.children).map(
-                    (
-                      [childSlug, name],
-                    ) => {
-                      const active = path === `/${slug}/${childSlug}`;
-                      return (
-                        <li key={`${slug}/${childSlug}`}>
-                          <a
-                            href={`/manual${
-                              version ? `@${version}` : ""
-                            }/${slug}/${childSlug}`}
-                            class={tw`pl-8 pr-2.5 py-1 rounded-md block ${
-                              active
-                                ? "link bg-ultralight"
-                                : "hover:text-gray-500"
-                            } font-normal` + (active ? " toc-active" : "")}
-                          >
-                            {name}
-                          </a>
-                        </li>
-                      );
-                    },
-                  )}
-                </ol>
-              )}
+                {entry.children && (
+                  <ol class={tw`list-decimal font-normal` + " nested"}>
+                    {Object.entries(entry.children).map(
+                      (
+                        [childSlug, name],
+                      ) => {
+                        const active = path === `/${slug}/${childSlug}`;
+                        return (
+                          <li key={`${slug}/${childSlug}`}>
+                            <a
+                              href={`/manual${
+                                version ? `@${version}` : ""
+                              }/${slug}/${childSlug}`}
+                              class={tw`pl-8 pr-2.5 py-1 rounded-md block ${
+                                active
+                                  ? "link bg-ultralight"
+                                  : "hover:text-gray-500"
+                              } font-normal` + (active ? " toc-active" : "")}
+                            >
+                              {name}
+                            </a>
+                          </li>
+                        );
+                      },
+                    )}
+                  </ol>
+                )}
+              </details>
             </li>
           );
         })}
