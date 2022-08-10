@@ -191,10 +191,11 @@ export function ArrowRight(props: { class?: string }) {
 }
 
 export function TriangleRight(
-  props: { class?: string; tabindex?: number; onKeyDown?: string },
+  props: { class?: string; tabindex?: number; onKeyDown?: string; "aria-label"?: string },
 ) {
   return (
     <svg
+      aria-label={props["aria-label"]}
       class={tw(props.class ?? "")}
       tabindex={props?.tabindex}
       // @ts-ignore onKeyDown does support strings
