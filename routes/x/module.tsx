@@ -153,7 +153,7 @@ function TopPanel({
                     {data.upload_options.repository}
                   </a>
                 </div>
-                {popularityTag &&
+                {popularityTag && name !== "std" &&
                   (
                     <div class={tw`flex items-center`}>
                       <PopularityTag>{popularityTag.value}</PopularityTag>
