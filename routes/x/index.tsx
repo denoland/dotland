@@ -17,8 +17,7 @@ import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
 import * as Icons from "@/components/Icons.tsx";
-import { CodeBlock } from "@/components/CodeBlock.tsx";
-import { PopularityTag } from "../../components/PopularityTag.tsx";
+import { PopularityTag } from "@/components/PopularityTag.tsx";
 
 const client = algoliasearch(
   "QFPCRZC6WX",
