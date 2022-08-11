@@ -281,6 +281,20 @@ export default function ThirdPartyRegistryList(
 
             <div class={tw`space-y-3`}>
               <h2 class={tw`text-xl leading-6 font-semibold`}>
+                A module is name-squatting or its just made as a joke, can I
+                have it?
+              </h2>
+              <p class={tw`text-[#6C6E78] leading-5`}>
+                if there is a module that has been deemed as "low quality" or
+                for purposes of name-squatting, and a new version has not been
+                released to in over 90 days (ignoring versions released to
+                bypass this rule), the module can be claimed via request to
+                modules@deno.com.
+              </p>
+            </div>
+
+            <div class={tw`space-y-3`}>
+              <h2 class={tw`text-xl leading-6 font-semibold`}>
                 I can't find a specific module. Help!
               </h2>
               <a
