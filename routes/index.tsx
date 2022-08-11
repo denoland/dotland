@@ -433,40 +433,6 @@ function InstallSection({ url }: { url: URL }) {
       />
     </div>
   );
-  const chocolatey = (
-    <div key="chocolatey" class={tw`my-4 text-gray-700`}>
-      <p class={tw`mb-2`}>
-        <a href="https://chocolatey.org/packages/deno" class={tw`link`}>
-          Chocolatey
-        </a>{" "}
-        (Windows):
-      </p>
-      <CodeBlock language="bash" code="choco install deno" url={url} />
-    </div>
-  );
-  const scoop = (
-    <div key="scoop" class={tw`my-4 text-gray-700`}>
-      <p class={tw`mb-2`}>
-        <a href="https://scoop.sh/" class={tw`link`}>
-          Scoop
-        </a>{" "}
-        (Windows):
-      </p>
-      <CodeBlock language="bash" code="scoop install deno" url={url} />
-    </div>
-  );
-  const cargo = (
-    <div key="cargo" class={tw`my-4 text-gray-700`}>
-      <p class={tw`py-2`}>
-        Build and install from source using{" "}
-        <a href="https://crates.io/crates/deno" class={tw`link`}>
-          Cargo
-        </a>
-        :
-      </p>
-      <CodeBlock language="bash" code="cargo install deno --locked" url={url} />
-    </div>
-  );
 
   return (
     <>
@@ -482,9 +448,6 @@ function InstallSection({ url }: { url: URL }) {
       {shell}
       {powershell}
       {homebrew}
-      {chocolatey}
-      {scoop}
-      {cargo}
       <p class={tw`my-4 text-gray-700`}>
         See{" "}
         <a class={tw`link`} href="https://github.com/denoland/deno_install">
