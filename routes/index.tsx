@@ -276,27 +276,90 @@ function Logos() {
   }];
 
   return (
-    <ol
-      class={tw`flex flex-col md:flex-row gap-x-8 gap-y-2 flex-wrap list-none`}
-    >
-      {companies.map(({ name, logo, url }) => (
-        <li class={tw`mb-2 md:mb-0`} key={url}>
-          <a
-            class={tw`flex items-center gap-2 flex-nowrap opacity-75 hover:opacity-100 transition-opacity`}
-            href={url}
-            target="_blank"
-          >
-            <img
-              class={tw`w-5.5`}
-              src={`https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/${logo}`}
-              alt={name}
-              title={name}
-            />{" "}
-            <span class={tw`font-medium text-xl leading-none`}>{name}</span>
-          </a>
-        </li>
-      ))}
-    </ol>
+    <div class={tw`section-x-inset-sm mt-20`}>
+      <a class={tw`hover:underline`} href="#deno-in-production">
+        <h3 class={tw`font-bold text-xl`} id="deno-in-production">
+          Deno in Production
+        </h3>
+      </a>
+      <ol class={tw`pl-1 md:pl-0 md:flex flex-wrap gap-8 mt-5 list-none`}>
+        {companies.map(({ name, logo, url }) => (
+          <li class={tw`mb-2 md:mb-0`} key={url}>
+            <a
+              class={tw`flex items-center gap-2 flex-nowrap opacity-70 hover:opacity-100`}
+              href={url}
+              target="_blank"
+            >
+              <img
+                class={tw`w-5`}
+                src={`https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/${logo}`}
+                alt={name}
+                title={name}
+              />{" "}
+              <span class={tw`font-medium text-lg`}>{name}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}
+
+function InstallSection({ url }: { url: URL }) {
+  const shell = (
+    <div key="shell" class={tw`my-4 text-gray-700`}>
+      <p class={tw`py-2`}>Shell (Mac, Linux):</p>
+      <CodeBlock
+        language="bash"
+        code="curl -fsSL https://deno.land/install.sh | sh"
+        url={url}
+      />
+    </div>
+  );
+  const homebrew = (
+    <div key="homebrew" class={tw`my-4 text-gray-700`}>
+      <p class={tw`mb-2`}>
+        <a href="https://formulae.brew.sh/formula/deno" class={tw`link`}>
+          Homebrew
+        </a>{" "}
+        (Mac):
+      </p>
+      <CodeBlock language="bash" code="brew install deno" url={url} />
+    </div>
+  );
+  const powershell = (
+    <div key="powershell" class={tw`my-4 text-gray-700`}>
+      <p class={tw`mb-2`}>PowerShell (Windows):</p>
+      <CodeBlock
+        language="bash"
+        code="iwr https://deno.land/install.ps1 -useb | iex"
+        url={url}
+      />
+    </div>
+  );
+
+  return (
+    <>
+      <p class={tw`my-4 text-gray-700`}>
+        Deno ships as a single executable with no dependencies. You can install
+        it using the installers below, or download a release binary from the
+        {" "}
+        <a href="https://github.com/denoland/deno/releases" class={tw`link`}>
+          releases page
+        </a>
+        .
+      </p>
+      {shell}
+      {powershell}
+      {homebrew}
+      <p class={tw`my-4 text-gray-700`}>
+        See{" "}
+        <a class={tw`link`} href="https://github.com/denoland/deno_install">
+          deno_install
+        </a>{" "}
+        for more installation options.
+      </p>
+    </>
   );
 }
 
