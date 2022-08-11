@@ -62,21 +62,51 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
                 Deno Third Party Modules
               </h1>
 
-              <p class={tw`leading-5 text-[#6C6E78]`}>
-                <span class={tw`font-semibold text-default`}>deno.land/x</span>
-                {" "}
-                is a hosting service for Deno scripts. It caches releases of
-                open-source modules stored on GitHub and serves them at an
-                easy-to-remember domain.
-              </p>
-
-              <CodeBlock
-                code='import { start } from "https://deno.land/x/fresh@1.0.0/server.ts";'
-                language="typescript"
-                disablePrefixes
-                url={url}
-                class="lg:inline-block"
-              />
+              <div class={tw`leading-5 text-[#6C6E78] space-y-3`}>
+                <p>
+                  <span class={tw`font-semibold text-default`}>
+                    deno.land/x
+                  </span>{" "}
+                  is a hosting service for Deno scripts. It caches releases of
+                  open-source modules stored on GitHub and serves them at an
+                  easy-to-remember domain.
+                </p>
+                <p>
+                  Deno can import modules from any location on the web, like
+                  GitHub, a personal webserver, or a CDN like{" "}
+                  <a href="https://esm.sh/" class={tw`link`}>
+                    esm.sh
+                  </a>
+                  ,{" "}
+                  <a href="https://www.skypack.dev" class={tw`link`}>
+                    Skypack
+                  </a>
+                  ,{" "}
+                  <a href="https://jspm.io" class={tw`link`}>
+                    jspm.io
+                  </a>{" "}
+                  or{" "}
+                  <a href="https://www.jsdelivr.com/" class={tw`link`}>
+                    jsDelivr
+                  </a>
+                  .
+                </p>
+                <p>
+                  To make it easier to consume third party modules Deno provides
+                  some built in tooling like{" "}
+                  <a class={tw`link`} href="/manual/tools/dependency_inspector">
+                    <InlineCode>deno info</InlineCode>
+                  </a>{" "}
+                  and{" "}
+                  <a
+                    class={tw`link`}
+                    href="/manual/tools/documentation_generator"
+                  >
+                    <InlineCode>deno doc</InlineCode>
+                  </a>
+                  .
+                </p>
+              </div>
 
               <div class={tw`space-x-2`}>
                 <a
