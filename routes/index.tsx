@@ -409,6 +409,7 @@ function InstallSection({ url }: { url: URL }) {
       />
     </div>
   );
+<<<<<<< HEAD
   const chocolatey = (
     <div key="chocolatey" class={tw`my-4 text-gray-700`}>
       <p class={tw`mb-2`}>
@@ -443,6 +444,8 @@ function InstallSection({ url }: { url: URL }) {
       <CodeBlock language="bash" code="cargo install deno --locked" url={url} />
     </div>
   );
+=======
+>>>>>>> fc2586ee2a87bd516fd95ec995adb471b9343b12
 
   return (
     <>
@@ -456,9 +459,6 @@ function InstallSection({ url }: { url: URL }) {
       {shell}
       {powershell}
       {homebrew}
-      {chocolatey}
-      {scoop}
-      {cargo}
       <p class={tw`my-4 text-gray-700`}>
         查看{" "}
         <a class={tw`link`} href="https://github.com/denocn/deno_install">
