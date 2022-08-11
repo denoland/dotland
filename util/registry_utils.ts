@@ -726,3 +726,9 @@ export function extractLinkUrl(
   }
   return undefined;
 }
+
+/** Defines a tag related to how popular a module is. */
+export interface PopularityModuleTag {
+  kind: "popularity";
+  value: "top_1_percent" | "top_5_percent" | "top_10_percent";
+}

@@ -11,11 +11,14 @@ import { emojify } from "$emoji";
 import algoliasearch from "$algolia";
 import "https://deno.land/x/xhr@0.2.0/mod.ts";
 
+import { PopularityModuleTag } from "@/util/registry_utils.ts";
+
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
 import * as Icons from "@/components/Icons.tsx";
 import { CodeBlock } from "@/components/CodeBlock.tsx";
+import { PopularityTag } from "../../components/PopularityTag.tsx";
 
 const client = algoliasearch(
   "QFPCRZC6WX",
@@ -28,6 +31,7 @@ export interface Data {
     popularity_score: number;
     description?: string;
     name: string;
+    popularity_tag?: PopularityModuleTag["value"];
   }>;
   nbHits: number;
   page: number;
@@ -148,7 +152,10 @@ export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
                         </div>
                       </div>
 
-                      <div class={tw`flex items-center gap-4`}>
+                      <div class={tw`flex items-center gap-2`}>
+                        {result.popularity_tag && (
+                          <PopularityTag>{result.popularity_tag}</PopularityTag>
+                        )}
                         <Icons.ArrowRight class="text-gray-400" />
                       </div>
                     </a>
