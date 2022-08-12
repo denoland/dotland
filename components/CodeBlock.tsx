@@ -67,78 +67,76 @@ export function RawCodeBlock({
 
   const tokens = normalizeTokens(Prism.tokenize(code, grammar));
 
-  return (
-    <pre
-      className={tw`text-sm flex ${extraClassName ?? ""}` +
-        ` gfm-highlight highlight-source-${newLang}`}
-      data-color-mode="light"
-      data-light-theme="light"
-    >
-      {enableLineRef &&
-        (
-          <div className={codeDivClasses}>
-            {tokens.map((_, i) => (
-              <a
-                className={tw`text-gray-500 text-right block` + " token"}
-                tab-index={-1}
-                href={`#L${i + 1}`}
-              >
-                {i + 1}
-              </a>
-            ))}
-          </div>
-        )}
-      {!disablePrefixes && (newLang === "bash") &&
-        (
-          <code>
-            <div className={codeDivClasses}>$</div>
-          </code>
-        )}
-      <div className={tw`block w-full overflow-y-auto`}>
-        {tokens.map((line, i) => {
-          return (
-            <span id={"L" + (i + 1)} className={tw`block`}>
-              {line.map((token) => {
-                if (token.empty) {
-                  return <br />;
-                }
+  return <pre
+    className={tw`text-sm flex ${extraClassName ?? ""}` +
+      ` gfm-highlight highlight-source-${newLang}`}
+    data-color-mode="light"
+    data-light-theme="light"
+  >
+    {enableLineRef &&
+      (
+        <div className={codeDivClasses}>
+          {tokens.map((_, i) => (
+            <a
+              className={tw`text-gray-500 text-right block` + " token"}
+              tab-index={-1}
+              href={`#L${i + 1}`}
+            >
+              {i + 1}
+            </a>
+          ))}
+        </div>
+      )}
+    {!disablePrefixes && (newLang === "bash") &&
+      (
+        <code>
+          <div className={codeDivClasses}>$</div>
+        </code>
+      )}
+    <div className={tw`block w-full overflow-y-auto`}>
+      {tokens.map((line, i) => {
+        return (
+          <span id={"L" + (i + 1)} className={tw`block`}>
+            {line.map((token) => {
+              if (token.empty) {
+                return <br />;
+              }
 
-                if (token.types.includes("string")) {
-                  const result = extractLinkUrl(
-                    token.content,
-                    url.origin + url.pathname,
-                  );
-                  if (result) {
-                    const [href, specifier, quote] = result;
-                    return (
-                      <span
-                        className={"token " +
-                          token.types.join(" ")}
-                      >
-                        {quote}
-                        <a
-                          className={tw`hover:underline`}
-                          href={href + "?code"}
-                        >
-                          {specifier}
-                        </a>
-                        {quote}
-                      </span>
-                    );
-                  }
-                }
-                return (
-                  <span className={"token " + token.types.join(" ")}>
-                    {token.content}
-                  </span>
+              if (token.types.includes("string")) {
+                const result = extractLinkUrl(
+                  token.content,
+                  url.origin + url.pathname,
                 );
-              })}
-            </span>
-          );
-        })}
-      </div>
-    </pre>
-  );
+                if (result) {
+                  const [href, specifier, quote] = result;
+                  return (
+                    <span
+                      className={"token " +
+                        token.types.join(" ")}
+                    >
+                      {quote}
+                      <a
+                        className={tw`hover:underline`}
+                        href={href + "?code"}
+                      >
+                        {specifier}
+                      </a>
+                      {quote}
+                    </span>
+                  );
+                }
+              }
+              return (
+                <span className={"token " + token.types.join(" ")}>
+                  {token.content}
+                </span>
+              );
+            })}
+          </span>
+        );
+      })}
+    </div>
+  </pre>
 }
 
 export function CodeBlock(props: CodeBlockProps) {
