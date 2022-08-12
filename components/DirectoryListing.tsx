@@ -4,19 +4,18 @@
 import { h } from "preact";
 import { tw } from "@twind";
 import {
-  type DirListing,
-  type Entry,
+  type CodePageDirEntry,
   getBasePath,
   isReadme,
 } from "@/util/registry_utils.ts";
 import * as Icons from "./Icons.tsx";
 
 export function DirectoryListing(props: {
-  dirListing: DirListing[];
+  items: CodePageDirEntry[];
   name: string;
-  version: string | undefined;
+  version: string;
   path: string;
-  repositoryURL?: string | null;
+  repositoryURL: string;
   url: URL;
 }) {
   const isStd = props.url.pathname.startsWith("/std");
@@ -45,14 +44,9 @@ export function DirectoryListing(props: {
             <span class={tw`ml-2 font-medium`}>{props.path || "/"}</span>
           </div>
           <div class={tw`inline-flex items-center`}>
-            <div>
-              {props.repositoryURL &&
-                (
-                  <a href={props.repositoryURL} class={tw`link ml-4`}>
-                    Repository
-                  </a>
-                )}
-            </div>
+            <a href={props.repositoryURL} class={tw`link ml-4`}>
+              Repository
+            </a>
             <div class={tw`ml-4`}>
               <a href={doc.href} class={tw`link`}>Documentation</a>
             </div>
@@ -60,7 +54,7 @@ export function DirectoryListing(props: {
         </div>
 
         <DirectoryView
-          dirListing={props.dirListing}
+          items={props.items}
           path={props.path}
           url={props.url}
           baseURL={basePath}
@@ -70,47 +64,35 @@ export function DirectoryListing(props: {
   );
 }
 
+const HIDDEN_REGEX = /^\/\..*$/;
+
 export function DirectoryView(props: {
-  dirListing: DirListing[];
+  items: CodePageDirEntry[];
   path: string;
   url: URL;
   baseURL: string;
 }) {
-  const children = props.dirListing
-    .filter((d) => d.path.startsWith(props.path + "/"))
-    .sort((a, b) => a.path.localeCompare(b.path))
-    .map((d) => {
-      const parts = d.path.substring(props.path.length + 1).split("/");
-      return {
-        name: parts[parts.length - 1],
-        path: parts.length === 1
-          ? undefined
-          : parts.slice(0, parts.length - 1).join("/"),
-        size: d.size,
-        type: d.type,
-      };
-    });
+  const show: CodePageDirEntry[] = [];
+  const hidden: CodePageDirEntry[] = [];
 
-  const query = props.url.searchParams.get("query") ?? "";
+  // prioritize dirs and ignore order of other kinds,
+  // and secondarily order by path alphabetically
+  props.items.sort((a, b) =>
+    ((a.kind === "dir" && b.kind !== "dir")
+      ? -1
+      : (b.kind === "dir" ? 1 : 0)) || a.path.localeCompare(b.path)
+  );
 
-  const display = query.length > 1
-    ? children.filter(
-      (d: Entry) =>
-        (d.path?.toLowerCase().includes(query.toLowerCase()) ||
-          d.name.toLowerCase().includes(query.toLowerCase())) &&
-        d.type === "file",
-    )
-    : children.filter((d: Entry) => d.path === undefined);
-  const displayItems = query.length > 0 ? display : display
-    .filter((d: Entry): boolean => !d.name.match(/^\..*$/))
-    .sort((a: Entry, b: Entry) => a.type.localeCompare(b.type));
-  const hiddenItems = query.length > 0 ? [] : display
-    .filter((d: Entry) => !!d.name.match(/^\..*$/))
-    .sort((a: Entry, b: Entry) => a.type.localeCompare(b.type));
-  const buildEntryURL = (path: string, entry: Entry): string => {
-    return `${props.baseURL}${path}/${
-      entry.path ? entry.path + "/" : ""
-    }${entry.name}?code`;
+  for (const item of props.items) {
+    if (HIDDEN_REGEX.test(item.path)) {
+      hidden.push(item);
+    } else {
+      show.push(item);
+    }
+  }
+
+  const buildEntryURL = (path: string, item: CodePageDirEntry): string => {
+    return `${props.baseURL}${item.path}?code`;
   };
 
   return (
@@ -128,19 +110,15 @@ export function DirectoryView(props: {
           <col style={{ width: "5.5rem" }} />
         </colgroup>
         <tbody class={tw`bg-white`}>
-          {displayItems.map((entry: Entry, i: number) => {
-            const isLastItem = displayItems.length - 1 === i;
-            return (
-              <TableRow
-                key={i}
-                entry={entry}
-                href={buildEntryURL(props.path, entry)}
-                isLastItem={isLastItem}
-                isHiddenItem={false}
-              />
-            );
-          })}
-          {hiddenItems.length > 0 &&
+          {show.map((item, i) => (
+            <TableRow
+              key={i}
+              item={item}
+              href={buildEntryURL(props.path, item)}
+              isLastItem={show.length - 1 === i}
+            />
+          ))}
+          {hidden.length > 0 &&
             (
               <tr
                 id="hiddenItemsTr"
@@ -154,12 +132,12 @@ export function DirectoryView(props: {
                     >
                       <span>
                         {`Close hidden ${
-                          hiddenItems.length === 1 ? "item" : "items"
+                          hidden.length === 1 ? "item" : "items"
                         }`}
                       </span>
                       <span>
-                        {`Show hidden ${hiddenItems.length} ${
-                          hiddenItems.length === 1 ? "item" : "items"
+                        {`Show hidden ${hidden.length} ${
+                          hidden.length === 1 ? "item" : "items"
                         }`}
                       </span>
                     </div>
@@ -167,18 +145,15 @@ export function DirectoryView(props: {
                 </td>
               </tr>
             )}
-          {hiddenItems.map((entry: Entry, i: number) => {
-            const isLastItem = hiddenItems.length - 1 === i;
-            return (
-              <TableRow
-                key={i}
-                entry={entry}
-                href={buildEntryURL(props.path, entry)}
-                isLastItem={isLastItem}
-                isHiddenItem={true}
-              />
-            );
-          })}
+          {hidden.map((item, i) => (
+            <TableRow
+              key={i}
+              item={item}
+              href={buildEntryURL(props.path, item)}
+              isLastItem={hidden.length - 1 === i}
+              isHidden
+            />
+          ))}
         </tbody>
       </table>
     </div>
@@ -192,39 +167,38 @@ function bytesToSize(bytes: number) {
   return (bytes / Math.pow(1024, i)).toFixed(0) + " " + sizes[i];
 }
 
-interface TableRowProps {
-  key: number;
-  entry: Entry;
-  href: string;
-  isLastItem: boolean;
-  isHiddenItem: boolean;
-}
-
 function TableRow({
-  entry,
+  item,
   href,
   isLastItem,
-  isHiddenItem,
-}: TableRowProps) {
+  isHidden,
+}: {
+  item: CodePageDirEntry;
+  key: number;
+  href: string;
+  isLastItem: boolean;
+  isHidden?: boolean;
+}) {
+  const display = item.path.split("/").at(-1)!;
   return (
     <tr
       class={tw`table-row hover:bg-gray-100${
         !isLastItem ? " border-b border-gray-200" : ""
       }`}
-      name={isHiddenItem ? "hidden" : ""}
+      name={isHidden ? "hidden" : ""}
     >
       <td class={tw`whitespace-no-wrap text-sm leading-5 text-gray-400`}>
         <a
           href={href}
           class={tw`px-2 sm:pl-3 md:pl-4 py-1 w-full block ${
-            entry.type === "dir" ? "text-blue-300" : "text-gray-300"
+            item.kind === "dir" ? "text-blue-300" : "text-gray-300"
           }`}
           tabIndex={-1}
         >
           {(() => {
-            switch (entry.type) {
+            switch (item.kind) {
               case "file":
-                if (isReadme(entry.name)) {
+                if (isReadme(display)) {
                   return <Icons.OpenBook />;
                 }
                 return <Icons.Page />;
@@ -236,12 +210,7 @@ function TableRow({
       </td>
       <td class={tw`whitespace-no-wrap text-sm text-blue-500 leading-5`}>
         <a href={href} class={tw`pl-2 py-1 w-full block truncate`}>
-          {entry.path && <span class={tw`font-light`}>{entry.path}/</span>}
-          <span
-            class={isReadme(entry.name) || entry.path ? "font-medium" : ""}
-          >
-            {entry.name}
-          </span>
+          {display}
         </a>
       </td>
       <td
@@ -252,7 +221,7 @@ function TableRow({
           class={tw`px-4 py-1 pl-1 w-full h-full block`}
           tabIndex={-1}
         >
-          {entry.size && bytesToSize(entry.size)}
+          {bytesToSize(item.size)}
         </a>
       </td>
     </tr>
