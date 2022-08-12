@@ -8,7 +8,7 @@ import {
   getVersionList,
   isReadme,
 } from "./registry_utils.ts";
-import { assertEquals } from "$std/testing/asserts.ts";
+import { assert, assertEquals } from "$std/testing/asserts.ts";
 
 Deno.test("source url", () => {
   assertEquals(
