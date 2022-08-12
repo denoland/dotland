@@ -397,7 +397,11 @@ export async function fetchSource(
   version: string,
   path: string,
 ): Promise<Response> {
-  const url = getSourceURL(name, version, path.startsWith("/") ? path : `/${path}`);
+  const url = getSourceURL(
+    name,
+    version,
+    path.startsWith("/") ? path : `/${path}`,
+  );
 
   let lastErr;
   for (let i = 0; i < 3; i++) {
