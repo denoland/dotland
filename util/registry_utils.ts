@@ -171,7 +171,7 @@ export async function getVersionList(
   module: string,
   signal?: AbortSignal,
 ): Promise<VersionInfo | null> {
-  const url = `${S3_BUCKET}${module}/meta/versions.json`;
+  const url = `https://cdn.deno.land/${module}/meta/versions.json`;
   const res = await fetch(url, {
     headers: {
       accept: "application/json",
