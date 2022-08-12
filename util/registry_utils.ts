@@ -390,7 +390,7 @@ export function getModulePath(
 }
 
 export const S3_BUCKET =
-  "https://deno-registry2-prod-storagebucket-b3a31d16.s3.amazonaws.com/";
+  "http://deno-registry2-prod-storagebucket-b3a31d16.s3-website-us-east-1.amazonaws.com/";
 
 export async function fetchSource(
   name: string,
