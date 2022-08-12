@@ -9,6 +9,7 @@ import { CodeBlock } from "@/components/CodeBlock.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
 import { Header } from "@/components/Header.tsx";
+import { HelloBar } from "@/components/HelloBar.tsx";
 import { Background } from "@/components/HeroBackground.tsx";
 import { Handlers, PageProps } from "$fresh/server.ts";
 
@@ -38,6 +39,9 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
 
   return (
     <div>
+      <HelloBar to="https://deno.news/archive/48-announcing-deno-merch">
+        Check out Deno News issue #48!
+      </HelloBar>
       <Head>
         <title>Deno - A modern runtime for JavaScript and TypeScript</title>
       </Head>
