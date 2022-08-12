@@ -62,12 +62,14 @@ export function DocView({
               );
             case "symbol":
               return (
+                // @ts-ignore it works.
                 <SymbolDoc url={url.href} namespace={undefined}>
                   {data.docNodes}
                 </SymbolDoc>
               );
             case "module":
               return (
+                // @ts-ignore it works.
                 <ModuleDoc
                   url={url.href}
                   sourceUrl={url.href}
