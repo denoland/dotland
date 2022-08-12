@@ -171,7 +171,7 @@ export async function getVersionList(
   module: string,
   signal?: AbortSignal,
 ): Promise<VersionInfo | null> {
-  const url = `https://cdn.deno.land/${module}/meta/versions.json`;
+  const url = `${S3_BUCKET}${module}/meta/versions.json`;
   const res = await fetch(url, {
     headers: {
       accept: "application/json",
@@ -390,7 +390,7 @@ export function getModulePath(
 }
 
 export const S3_BUCKET =
-  "http://deno-registry2-prod-storagebucket-b3a31d16.s3-website-us-east-1.amazonaws.com/";
+  "https://deno-registry2-prod-storagebucket-b3a31d16.s3.amazonaws.com/";
 
 export async function fetchSource(
   name: string,
