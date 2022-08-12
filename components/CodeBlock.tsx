@@ -3,11 +3,13 @@
 /** @jsx h */
 import { h } from "preact";
 import { tw } from "@twind";
-import { Prism } from "@/util/prism_utils.ts";
 import { escape as htmlEscape } from "$he";
-import * as Icons from "@/components/Icons.tsx";
-import { normalizeTokens } from "@/util/prism_utils.ts";
-import { extractLinkUrl } from "@/util/registry_utils.ts";
+import { normalizeTokens, Prism } from "@/util/prism_utils.ts";
+import {
+  extractLinkUrl,
+  fileTypeFromURL,
+  filetypeIsJS,
+} from "@/util/registry_utils.ts";
 
 export interface CodeBlockProps {
   code: string;
@@ -64,12 +66,13 @@ export function RawCodeBlock({
 
   const tokens = normalizeTokens(Prism.tokenize(code, grammar));
 
-  return <pre
-    className={tw`text-sm flex ${extraClassName ?? ""}` +
-      ` gfm-highlight highlight-source-${newLang}`}
-    data-color-mode="light"
-    data-light-theme="light"
-  >
+  return (
+    <pre
+      className={tw`text-sm flex ${extraClassName ?? ""}` +
+        ` gfm-highlight highlight-source-${newLang}`}
+      data-color-mode="light"
+      data-light-theme="light"
+    >
       {enableLineRef &&
         (
           <div className={codeDivClasses}>
@@ -133,7 +136,8 @@ export function RawCodeBlock({
           );
         })}
       </div>
-  </pre>;
+    </pre>
+  );
 }
 
 export function CodeBlock({
