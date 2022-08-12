@@ -397,7 +397,8 @@ export async function fetchSource(
   version: string,
   path: string,
 ): Promise<Response> {
-  const url = getSourceURL(name, version, path);
+  const url = getSourceURL(name, version, path.startsWith("/") ? path : `/${path}`);
+
   let lastErr;
   for (let i = 0; i < 3; i++) {
     try {
@@ -411,22 +412,24 @@ export async function fetchSource(
         throw new TypeError("non 2xx status code returned");
       }
 
+      const headers = new Headers(resp.headers);
+
       if (
         path.endsWith(".jsx") &&
-        !resp.headers.get("content-type")?.includes("javascript")
+        !headers.get("content-type")?.includes("javascript")
       ) {
-        resp.headers.set("content-type", "application/javascript");
+        headers.set("content-type", "application/javascript");
       } else if (
         path.endsWith(".tsx") &&
-        !resp.headers.get("content-type")?.includes("typescript")
+        !headers.get("content-type")?.includes("typescript")
       ) {
-        resp.headers.set("content-type", "application/typescript");
+        headers.set("content-type", "application/typescript");
       }
 
-      resp.headers.set("Access-Control-Allow-Origin", "*");
+      headers.set("Access-Control-Allow-Origin", "*");
 
       return new Response(resp.body, {
-        headers: resp.headers,
+        headers,
         status: resp.status,
       });
     } catch (err) {
