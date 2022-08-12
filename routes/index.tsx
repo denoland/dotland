@@ -409,43 +409,6 @@ function InstallSection({ url }: { url: URL }) {
       />
     </div>
   );
-<<<<<<< HEAD
-  const chocolatey = (
-    <div key="chocolatey" class={tw`my-4 text-gray-700`}>
-      <p class={tw`mb-2`}>
-        <a href="https://chocolatey.org/packages/deno" class={tw`link`}>
-          Chocolatey
-        </a>{" "}
-        (Windows)：
-      </p>
-      <CodeBlock language="bash" code="choco install deno" url={url} />
-    </div>
-  );
-  const scoop = (
-    <div key="scoop" class={tw`my-4 text-gray-700`}>
-      <p class={tw`mb-2`}>
-        <a href="https://scoop.sh/" class={tw`link`}>
-          Scoop
-        </a>{" "}
-        (Windows)：
-      </p>
-      <CodeBlock language="bash" code="scoop install deno" url={url} />
-    </div>
-  );
-  const cargo = (
-    <div key="cargo" class={tw`my-4 text-gray-700`}>
-      <p class={tw`py-2`}>
-        使用
-        <a href="https://crates.io/crates/deno" class={tw`link`}>
-          Cargo
-        </a>{" "}
-        从源码构建并安装：
-      </p>
-      <CodeBlock language="bash" code="cargo install deno --locked" url={url} />
-    </div>
-  );
-=======
->>>>>>> fc2586ee2a87bd516fd95ec995adb471b9343b12
 
   return (
     <>
