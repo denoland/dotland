@@ -17,14 +17,14 @@ export default function NotFoundPage() {
       </Head>
       <div class={tw`flex-top`}>
         <Header />
-        <header class={tw`text-center px-8 py-[10vh] z-[3]`}>
+        <header class={tw`text-center px-8 pt-[24vh] pb-[10vh] z-[3]`}>
           <h1
             class={tw`font-extrabold text-5xl leading-10 tracking-tight text-gray-900`}
           >
             404
           </h1>
           <h2
-            class={tw`mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900`}
+            class={tw`mt-4 font-light text-2xl text-center leading-tight text-gray-500`}
           >
             Couldn't find what you're looking for.
           </h2>
