@@ -57,7 +57,7 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
                 <div class={tw`flex gap-2 mt-6`}>
                   <button
                     href="https://deno.com/deploy"
-                    class={tw`flex h-10 items-center gap-2 rounded-md px-6 bg-default text-white border-1 border-gray-200 hover:bg-white hover:text-default hover:border-gray-500`}
+                    class={tw`flex h-10 items-center gap-2 rounded-md px-6 bg-default text-white border-1 border-gray-200 hover:bg-white hover:text-default hover:border-gray-500 transition-colors`}
                   >
                     <svg
                       width="19"
@@ -75,7 +75,7 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
                   </button>
                   <a
                     href="/manual"
-                    class={tw`flex h-10 items-center rounded-md px-6 bg-white border-1 border-gray-200 hover:border-gray-500`}
+                    class={tw`flex h-10 items-center rounded-md px-6 bg-white border-1 border-gray-200 hover:border-gray-500 transition-colors`}
                   >
                     Docs
                   </a>
@@ -89,7 +89,7 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
           <div class={tw`w-[750px] mx-auto flex flex-col gap-4`}>
             <h2 class={tw`text-xl font-medium`}>Installation</h2>
             <CodeBlock
-              class="border-2 border-fresh bg-[#F3FBF5]"
+              class="border-2 border-fresh !bg-[#F3FBF5]"
               code={data.isWin
                 ? `iwr https://deno.land/install.ps1 -useb | iex`
                 : `curl -fsSL https://deno.land/install.sh | sh`}
@@ -172,7 +172,7 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
           </div>
 
           {/* getting started */}
-          <div class={tw`w-[750px] mx-auto mt-20 flex flex-col gap-4`}>
+          <div class={tw`w-[750px] mx-auto my-20 flex flex-col gap-4`}>
             <h2 class={tw`text-xl font-medium`}>Getting started</h2>
             <CodeBlock
               code={[
@@ -187,7 +187,7 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
             >
               <a
                 href="https://dash.deno.com/playground/example-helloworld"
-                class={tw`rounded-md px-4.5 py-2.5 inline-flex items-center gap-1.5 border-1 boder-transparent leading-none font-medium text-white bg-tag-blue hover:bg-white hover:text-tag-blue hover:border-tag-blue`}
+                class={tw`rounded-md px-4.5 py-2.5 inline-flex items-center gap-1.5 border-1 boder-transparent leading-none font-medium text-white bg-primary hover:bg-white hover:text-primary hover:border-primary transition-colors`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -230,7 +230,7 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
 
 function Li({ children }: { children: VNode | string | (VNode | string)[] }) {
   return (
-    <li class={tw`flex items-center gap-2`}>
+    <li class={tw`flex items-center gap-2 text-default`}>
       <svg
         class={tw`flex-0`}
         width="24"

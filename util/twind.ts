@@ -27,17 +27,17 @@ export const config: Configuration = {
     },
     extend: {
       colors: {
-        primary: "#FFFFFFE5",
+        primary: "#056CF0",
         secondary: "#E5E7EB",
         main: "#333333",
         "default-highlight": "#333333C0",
         light: "#999999",
         default: "#232323",
         fresh: "#0CBB3F",
+        symbol: "#7B61FF",
         ultralight: "#F8F7F6",
         "light-border": "#EEEEEE",
         "dark-border": "#DDDDDD",
-        "symbol": "#7B61FF",
 
         "tag-blue-bg": "#056CF025",
         "tag-blue": "#056CF0",

@@ -79,7 +79,7 @@ export default function Registry({ params, url, data }: PageProps<MaybeData>) {
       <Head>
         <title>{name + (version ? `@${version}` : "") + " | Deno"}</title>
       </Head>
-      <div class={tw`bg-primary min-h-full`}>
+      <div class={tw`min-h-full`}>
         <Header
           selected={name === "std" ? "Standard Library" : "Third Party Modules"}
         />

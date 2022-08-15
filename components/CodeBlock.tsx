@@ -33,7 +33,7 @@ export interface CodeBlockProps {
     | "wasm"
     | "makefile"
     | "dockerfile";
-  url: URL;
+  url?: URL;
   class?: string;
   children?: VNode | string | (VNode | string)[];
 }
@@ -106,7 +106,7 @@ export function RawCodeBlock({
                   return <br />;
                 }
 
-                if (token.types.includes("string")) {
+                if (token.types.includes("string") && url) {
                   const result = extractLinkUrl(
                     token.content,
                     url.origin + url.pathname,

@@ -33,7 +33,7 @@ export function Header({
         manual
           ? "lg:border-b border-light-border"
           : !main
-          ? "bg-primary border-b border-light-border backdrop-blur-3xl"
+          ? "bg-white border-b border-light-border backdrop-blur-3xl"
           : "fixed w-screen top-0 left-0 z-50",
       )}
     >
