@@ -113,7 +113,7 @@ Deno.test({
 
 Deno.test({
   name:
-    "/std@v0.127.0/version.ts with Deno CLI Accept responds with raw typescript",
+    "/std@0.127.0/version.ts with Deno CLI Accept responds with raw typescript",
   async fn() {
     const res = await handleRequest(
       new Request("https://deno.land/std@0.127.0/version.ts", {
