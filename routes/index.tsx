@@ -44,7 +44,7 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
           <div
             class={tw`w-screen h-screen flex items-center justify-center`}
           >
-            <div class={tw`w-[960px] flex items-center justify-between`}>
+            <div class={tw`w-[900px] flex items-center justify-between`}>
               <div>
                 <h2 class={tw`text-symbol text-[25px] leading-none`}>
                   A modern runtime for
@@ -57,7 +57,7 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
                 <div class={tw`flex gap-2 mt-6`}>
                   <button
                     href="https://deno.com/deploy"
-                    class={tw`flex h-10 items-center gap-2 rounded-md px-6 bg-default text-white border-1 border-gray-200 hover:bg-white hover:text-default hover:border-gray-500 transition-colors`}
+                    class={tw`flex h-10 items-center gap-2 rounded-md px-5 bg-default text-white border-1 border-gray-200 hover:bg-white hover:text-default hover:border-gray-500 transition-colors`}
                   >
                     <svg
                       width="19"
@@ -72,10 +72,13 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
                       />
                     </svg>
                     Install Deno
+                    <span class={tw`opacity-60 font-medium text-sm`}>
+                      {versions.cli[0]}
+                    </span>
                   </button>
                   <a
                     href="/manual"
-                    class={tw`flex h-10 items-center rounded-md px-6 bg-white border-1 border-gray-200 hover:border-gray-500 transition-colors`}
+                    class={tw`flex h-10 items-center rounded-md px-5 bg-white border-1 border-gray-200 hover:border-gray-500 transition-colors`}
                   >
                     Docs
                   </a>
@@ -214,7 +217,7 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
 
         {/* logos */}
         <div
-          class={tw`relative bg-white flex flex-col w-screen h-44 items-center justify-center gap-4`}
+          class={tw`relative bg-white flex flex-col w-screen h-48 items-center justify-center gap-4`}
         >
           <h2 class={tw`text-gray-400 leading-none`}>
             Deno in Production
@@ -391,10 +394,10 @@ function InstallSection({ url }: { url: URL }) {
 
 export const handler: Handlers<Data> = {
   GET(req, { render }) {
-    const ua = req.headers.get("user-agent");
+    const ua = req.headers.get("user-agent") ?? "";
     return render!({
-      isWin: ua?.indexOf("Win") === 0,
-      isFirefox: ua?.toLowerCase().includes("firefox") ??
+      isWin: ua.indexOf("Windows ") >= 0,
+      isFirefox: ua.toLowerCase().includes("firefox") ??
         false,
     });
   },
