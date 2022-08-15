@@ -34,7 +34,7 @@ export function Header({
           ? "lg:border-b border-light-border"
           : !main
           ? "bg-primary border-b border-light-border backdrop-blur-3xl"
-          : "",
+          : "fixed w-screen top-0 left-0 z-50",
       )}
     >
       <div
@@ -49,17 +49,18 @@ export function Header({
           />
 
           <div
-            class={tw`h-9 flex flex-1 items-center justify-between lg:justify-start select-none w-full lg:w-min gap-3 md:gap-6 lg:gap-8`}
+            class={tw`h-9 flex flex-1 items-center justify-between lg:justify-start select-none w-full lg:w-min gap-2 md:gap-4 lg:gap-6`}
           >
             <a
               href="/"
-              class={tw`h-8 w-8 block ${
+              class={tw`flex gap-2 items-center h-8 ${
                 css({
                   "flex-shrink": "0",
                 })
               }`}
             >
-              <img class={tw`h-full w-full`} src="/logo.svg" alt="Deno Logo" />
+              <img class={tw`w-8 h-8`} src="/logo.svg" alt="Deno Logo" />
+              {main && <strong class={tw`text-xl`}>Deno</strong>}
             </a>
 
             <GlobalSearch />
@@ -104,7 +105,9 @@ export function Header({
 
             <a
               href="https://deno.com/deploy"
-              class={tw`h-9 lg:ml-5 bg-secondary rounded-md px-4 flex items-center hover:bg-[#D5D7DB]`}
+              class={tw`h-9 lg:ml-5 bg-${
+                main ? "white" : "secondary"
+              } rounded-md px-4 flex items-center hover:bg-[#D5D7DB]`}
             >
               Deploy
             </a>

@@ -1,7 +1,7 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-import { h } from "preact";
+import { h, VNode } from "preact";
 
 import { tw } from "@twind";
 import { Prism } from "@/util/prism_utils.ts";
@@ -35,6 +35,7 @@ export interface CodeBlockProps {
     | "dockerfile";
   url: URL;
   class?: string;
+  children?: VNode | string | (VNode | string)[];
 }
 
 export function RawCodeBlock({
@@ -44,6 +45,7 @@ export function RawCodeBlock({
   disablePrefixes,
   enableLineRef = false,
   url,
+  children,
 }: CodeBlockProps & {
   enableLineRef?: boolean;
 }) {
@@ -137,6 +139,7 @@ export function RawCodeBlock({
             </span>
           );
         })}
+        {children && <div class={tw`mt-5`}>{children}</div>}
       </div>
     </pre>
   );
@@ -146,7 +149,7 @@ export function CodeBlock(props: CodeBlockProps) {
   return (
     <RawCodeBlock
       {...props}
-      class={tw`p-4 bg-ultralight rounded-lg ${props.class ?? ""}`}
+      class={tw`p-5 bg-ultralight rounded-lg ${props.class ?? ""}`}
     />
   );
 }

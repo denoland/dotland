@@ -33,9 +33,11 @@ export const config: Configuration = {
         "default-highlight": "#333333C0",
         light: "#999999",
         default: "#232323",
+        fresh: "#0CBB3F",
         ultralight: "#F8F7F6",
         "light-border": "#EEEEEE",
         "dark-border": "#DDDDDD",
+        "symbol": "#7B61FF",
 
         "tag-blue-bg": "#056CF025",
         "tag-blue": "#056CF0",
@@ -63,7 +65,7 @@ export const config: Configuration = {
   },
   plugins: {
     link:
-      apply`text-[#056CF0] transition duration-75 ease-in-out hover:text-blue-400`,
+      apply`text-[#056CF0] transition duration-75 ease-in-out hover:underline`,
     "section-x-inset": (parts) =>
       parts[0] === "none"
         ? apply`max-w-none mx-0 px-0`

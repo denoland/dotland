@@ -174,7 +174,7 @@ export default function GlobalSearch() {
   return (
     <>
       <button
-        class={tw`pl-4 w-80 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light hover:bg-light-border disabled:invisible`}
+        class={tw`pl-4 w-64 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light hover:bg-light-border disabled:invisible`}
         onClick={() => setShowModal(true)}
         disabled={!IS_BROWSER}
       >
