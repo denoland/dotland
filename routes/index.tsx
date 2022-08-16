@@ -2,18 +2,18 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, VNode } from "preact";
+import { type ComponentChildren, Fragment, h } from "preact";
 import { Head } from "$fresh/runtime.ts";
+import type { Handlers, PageProps } from "$fresh/server.ts";
 import { tw } from "@twind";
 import { CodeBlock } from "@/components/CodeBlock.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
-import { Header } from "@/components/Header.tsx";
 import { LinkWithArrow } from "@/components/LinkWithArrow.tsx";
 import * as Icons from "@/components/Icons.tsx";
 import Frameworks from "@/islands/Frameworks.tsx";
+import InstallationBlock from "@/islands/InstallationBlock.tsx";
 import MainHeader from "@/islands/MainHeader.tsx";
-import { Handlers, PageProps } from "$fresh/server.ts";
 
 import versions from "@/versions.json" assert { type: "json" };
 
@@ -94,32 +94,25 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
 
           {/* installation */}
           <div
-            class={tw`w-[750px] mx-auto flex flex-col gap-4`}
+            class={tw`wrapper flex flex-col gap-4`}
             id="installation"
           >
-            <h2 class={tw`text-xl font-medium`}>Installation</h2>
-            <CodeBlock
-              class="border-2 border-fresh !bg-[#F3FBF5]"
-              code={data.isWin
-                ? `iwr https://deno.land/install.ps1 -useb | iex`
-                : `curl -fsSL https://deno.land/install.sh | sh`}
-              language="bash"
-              url={url}
-            >
-            </CodeBlock>
+            <InstallationBlock uaIsWin={data.isWin} />
             <p>
               Other{" "}
               <LinkWithArrow
                 class={tw`text-primary`}
-                href="/installation"
+                href="https://github.com/denoland/deno_install#deno_install"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Installation Methods
               </LinkWithArrow>
             </p>
           </div>
 
-          {/* desc */}
-          <div class={tw`w-[750px] mx-auto mt-20`}>
+          {/* intro */}
+          <div class={tw`wrapper mt-20`}>
             <h2 class={tw`text-xl`}>
               <strong>Deno</strong>{" "}
               is a simple, modern and secure runtime for JavaScript, TypeScript,
@@ -182,7 +175,7 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
           </div>
 
           {/* getting started */}
-          <div class={tw`w-[750px] mx-auto my-20 flex flex-col gap-4`}>
+          <div class={tw`wrapper my-20 flex flex-col gap-4`}>
             <h2 class={tw`text-xl font-medium`}>Getting started</h2>
             <CodeBlock
               code={[
@@ -238,7 +231,7 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
   );
 }
 
-function Li({ children }: { children: VNode | string | (VNode | string)[] }) {
+function Li({ children }: { children: ComponentChildren }) {
   return (
     <li class={tw`flex items-center gap-2 text-default`}>
       <svg
@@ -301,101 +294,6 @@ function Logos() {
         </li>
       ))}
     </ol>
-  );
-}
-
-function InstallSection({ url }: { url: URL }) {
-  const shell = (
-    <div key="shell" class={tw`my-4 text-gray-700`}>
-      <p class={tw`py-2`}>Shell (Mac, Linux):</p>
-      <CodeBlock
-        language="bash"
-        code="curl -fsSL https://deno.land/install.sh | sh"
-        url={url}
-      />
-    </div>
-  );
-  const homebrew = (
-    <div key="homebrew" class={tw`my-4 text-gray-700`}>
-      <p class={tw`mb-2`}>
-        <a href="https://formulae.brew.sh/formula/deno" class={tw`link`}>
-          Homebrew
-        </a>{" "}
-        (Mac):
-      </p>
-      <CodeBlock language="bash" code="brew install deno" url={url} />
-    </div>
-  );
-  const powershell = (
-    <div key="powershell" class={tw`my-4 text-gray-700`}>
-      <p class={tw`mb-2`}>PowerShell (Windows):</p>
-      <CodeBlock
-        language="bash"
-        code="iwr https://deno.land/install.ps1 -useb | iex"
-        url={url}
-      />
-    </div>
-  );
-  const chocolatey = (
-    <div key="chocolatey" class={tw`my-4 text-gray-700`}>
-      <p class={tw`mb-2`}>
-        <a href="https://chocolatey.org/packages/deno" class={tw`link`}>
-          Chocolatey
-        </a>{" "}
-        (Windows):
-      </p>
-      <CodeBlock language="bash" code="choco install deno" url={url} />
-    </div>
-  );
-  const scoop = (
-    <div key="scoop" class={tw`my-4 text-gray-700`}>
-      <p class={tw`mb-2`}>
-        <a href="https://scoop.sh/" class={tw`link`}>
-          Scoop
-        </a>{" "}
-        (Windows):
-      </p>
-      <CodeBlock language="bash" code="scoop install deno" url={url} />
-    </div>
-  );
-  const cargo = (
-    <div key="cargo" class={tw`my-4 text-gray-700`}>
-      <p class={tw`py-2`}>
-        Build and install from source using{" "}
-        <a href="https://crates.io/crates/deno" class={tw`link`}>
-          Cargo
-        </a>
-        :
-      </p>
-      <CodeBlock language="bash" code="cargo install deno --locked" url={url} />
-    </div>
-  );
-
-  return (
-    <>
-      <p class={tw`my-4 text-gray-700`}>
-        Deno ships as a single executable with no dependencies. You can install
-        it using the installers below, or download a release binary from the
-        {" "}
-        <a href="https://github.com/denoland/deno/releases" class={tw`link`}>
-          releases page
-        </a>
-        .
-      </p>
-      {shell}
-      {powershell}
-      {homebrew}
-      {chocolatey}
-      {scoop}
-      {cargo}
-      <p class={tw`my-4 text-gray-700`}>
-        See{" "}
-        <a class={tw`link`} href="https://github.com/denoland/deno_install">
-          deno_install
-        </a>{" "}
-        for more installation options.
-      </p>
-    </>
   );
 }
 

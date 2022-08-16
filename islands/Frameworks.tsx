@@ -11,7 +11,7 @@ export default function Frameworks() {
 
   return (
     <div class={tw`relative bg-ultralight`}>
-      <div class={tw`w-[750px] mx-auto py-16`}>
+      <div class={tw`wrapper py-16`}>
         <hgroup class={tw`flex flex-col w-full flex items-center`}>
           <h2 class={tw`text-2xl font-semibold`}>
             How to build a website with Deno

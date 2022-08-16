@@ -9,11 +9,13 @@ export function LinkWithArrow({
   class: className,
   href,
   target,
+  rel,
   children,
 }: {
   class?: string;
   href: string;
   target?: string;
+  rel?: string;
   children: ComponentChildren;
 }) {
   return (
@@ -21,10 +23,11 @@ export function LinkWithArrow({
       class={tw`group inline-flex gap-1.5 items-center ${className ?? ""}`}
       href={href}
       target={target}
+      rel={rel}
     >
       {children}{" "}
       <Icons.LongArrowRight
-        class={tw`relative left-0 opacity-90 group-hover:opacity-100 group-hover:left-1 transition-all duration-450 ease-in-out`}
+        class={tw`relative left-0 opacity-90 group-hover:opacity-100 group-hover:left-1 transition-all ease-in-out`}
       />
     </a>
   );

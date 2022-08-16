@@ -718,3 +718,31 @@ export function ExternalLink(props: { class?: string }) {
     </svg>
   );
 }
+
+export function SelectCaret(props: { class?: string }) {
+  return (
+    <svg
+      class={tw(props.class ?? "")}
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M4 4.85714L7 2L10 4.85714"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M10 9.14288L7 12L4 9.14288"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+}
