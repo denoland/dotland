@@ -11,7 +11,7 @@ export default function Frameworks() {
 
   return (
     <div class={tw`relative bg-ultralight`}>
-      <div class={tw`wrapper py-16`}>
+      <div class={tw`section-x-inset max-w-[750px] py-16`}>
         <hgroup class={tw`flex flex-col w-full flex items-center`}>
           <h2 class={tw`text-2xl font-semibold`}>
             How to build a website with Deno
@@ -140,7 +140,7 @@ type FWProps = {
 function FWCard(props: FWProps) {
   return (
     <div
-      class={tw`w-[50%] bg-white p-5 border-2 ${
+      class={tw`w-[50%] bg-white p-4 md:p-5 border-2 ${
         props.active
           ? "border-primary scale-100 opacity-100"
           : "border-gray-200 scale-95 opacity-90"
@@ -155,7 +155,7 @@ function FWCard(props: FWProps) {
       <p class={tw`text-gray-400 leading-none mt-1.5`}>
         {props.description}
       </p>
-      <p class={tw`leading-none mt-1`}>
+      <p class={tw`hidden md:block leading-none mt-1`}>
         <a
           class={`link`}
           href={props.url}
@@ -166,7 +166,7 @@ function FWCard(props: FWProps) {
         </a>
       </p>
       <ul
-        class={tw`mt-4`}
+        class={tw`hidden md:block mt-4`}
       >
         {props.showcases.map((showcase) => (
           <li

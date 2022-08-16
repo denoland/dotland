@@ -64,7 +64,6 @@ export const config: Configuration = {
   plugins: {
     link:
       apply`text-[#056CF0] transition duration-75 ease-in-out hover:underline`,
-    wrapper: apply`w-[750px] mx-auto`,
     "section-x-inset": (parts) =>
       parts[0] === "none"
         ? apply`max-w-none mx-0 px-0`

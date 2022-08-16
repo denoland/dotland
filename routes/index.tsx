@@ -33,7 +33,7 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
           style="filter: blur(900px);"
         >
           <img
-            class={tw`w-screen absolute bottom-0`}
+            class={tw`h-screen w-auto md:(w-screen h-auto) absolute bottom-0`}
             src="/office_illustration_lighter.png"
           />
         </div>
@@ -45,12 +45,18 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
           <div
             class={tw`w-screen h-[calc(100vh-70px)] min-h-[480px] flex items-center justify-center`}
           >
-            <div class={tw`w-[900px] flex items-center justify-between`}>
-              <div>
-                <h2 class={tw`text-symbol text-[25px] leading-none`}>
+            <div
+              class={tw`md:w-[720px] lg:w-[900px] flex items-start md:items-center justify-between`}
+            >
+              <div class={tw`flex flex-col items-center md:items-start`}>
+                <h2
+                  class={tw`text-symbol text-[22px] lg:text-[25px] leading-none`}
+                >
                   A modern runtime for
                 </h2>
-                <h1 class={tw`mt-2 text-[54px] font-bold leading-[1.1]`}>
+                <h1
+                  class={tw`mt-2 text-center md:text-left text-[50px] lg:text-[54px] font-bold leading-[1.1]`}
+                >
                   Javascript <br />
                   Typescript <br />
                   WebAssembly
@@ -87,13 +93,16 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
                   </a>
                 </div>
               </div>
-              <img class={tw`w-[480px]`} src="/office_illustration.png" />
+              <img
+                class={tw`hidden md:inline-block w-[360px] md:w-[480px]`}
+                src="/office_illustration.png"
+              />
             </div>
           </div>
 
           {/* installation */}
           <div
-            class={tw`wrapper flex flex-col gap-4`}
+            class={tw`section-x-inset max-w-[750px] flex flex-col gap-4`}
             id="installation"
           >
             <InstallationBlock uaIsWin={data.isWin} />
@@ -111,7 +120,7 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
           </div>
 
           {/* intro */}
-          <div class={tw`wrapper mt-20`}>
+          <div class={tw`section-x-inset max-w-[750px] mt-20`}>
             <h2 class={tw`text-xl`}>
               <strong>Deno</strong>{" "}
               is a simple, modern and secure runtime for JavaScript, TypeScript,
@@ -174,7 +183,9 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
           </div>
 
           {/* getting started */}
-          <div class={tw`wrapper my-20 flex flex-col gap-4`}>
+          <div
+            class={tw`section-x-inset max-w-[750px] my-20 flex flex-col gap-4`}
+          >
             <h2 class={tw`text-xl font-medium`}>Getting started</h2>
             <CodeBlock
               code={[
@@ -207,7 +218,7 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
 
         {/* logos */}
         <div
-          class={tw`relative bg-white flex flex-col w-screen h-44 items-center justify-center gap-4`}
+          class={tw`section-x-inset relative bg-white flex flex-col w-screen py-16 items-start md:items-center justify-center gap-4`}
         >
           <h2 class={tw`text-gray-400 leading-none`}>
             Deno in Production
@@ -225,7 +236,7 @@ function Li({ children }: { children: ComponentChildren }) {
   return (
     <li class={tw`flex items-center gap-2 text-default`}>
       <svg
-        class={tw`flex-0`}
+        class={tw`flex-none`}
         width="24"
         height="24"
         viewBox="0 0 20 20"
@@ -265,7 +276,9 @@ function Logos() {
   }];
 
   return (
-    <ol class={tw`flex flex-wrap gap-8 list-none`}>
+    <ol
+      class={tw`flex flex-col md:flex-row gap-x-8 gap-y-2 flex-wrap list-none`}
+    >
       {companies.map(({ name, logo, url }) => (
         <li class={tw`mb-2 md:mb-0`} key={url}>
           <a
