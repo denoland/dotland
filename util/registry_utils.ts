@@ -1,6 +1,9 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
+const CDN_ENDPOINT = "https://cdn.deno.land/";
 const API_ENDPOINT = "https://api.deno.land/";
+export const S3_BUCKET =
+  "http://deno-registry2-prod-storagebucket-b3a31d16.s3-website-us-east-1.amazonaws.com/";
 
 export interface CommonProps {
   isStd: boolean;
@@ -53,7 +56,7 @@ export async function getReadme(
   );
 
   if (readmeEntry) {
-    const url = getSourceURL(name, version, readmeEntry.path);
+    const url = getSourceURL(name, version, readmeEntry.path, S3_BUCKET);
 
     const res = await fetch(url);
     if (!res.ok) {
@@ -102,7 +105,7 @@ export async function getRawFile(
   version: string,
   path: string,
 ): Promise<RawFile | Error> {
-  const url = getSourceURL(name, version, path);
+  const url = getSourceURL(name, version, path, S3_BUCKET);
   const canonicalPath = getModulePath(name, version, path);
 
   const res = await fetch(url, { method: "GET" });
@@ -132,8 +135,9 @@ export function getSourceURL(
   module: string,
   version: string,
   path: string,
+  endpoint: string = CDN_ENDPOINT,
 ): string {
-  return encodeURI(`${S3_BUCKET}${module}/versions/${version}/raw${path}`);
+  return encodeURI(`${endpoint}${module}/versions/${version}/raw${path}`);
 }
 
 function pathJoin(...parts: string[]) {
@@ -171,7 +175,7 @@ export async function getVersionList(
   module: string,
   signal?: AbortSignal,
 ): Promise<VersionInfo | null> {
-  const url = `https://cdn.deno.land/${module}/meta/versions.json`;
+  const url = `${CDN_ENDPOINT}${module}/meta/versions.json`;
   const res = await fetch(url, {
     headers: {
       accept: "application/json",
@@ -389,9 +393,6 @@ export function getModulePath(
   }) + (path ?? "");
 }
 
-export const S3_BUCKET =
-  "http://deno-registry2-prod-storagebucket-b3a31d16.s3-website-us-east-1.amazonaws.com/";
-
 export async function fetchSource(
   name: string,
   version: string,
@@ -401,6 +402,7 @@ export async function fetchSource(
     name,
     version,
     path.startsWith("/") ? path : `/${path}`,
+    S3_BUCKET,
   );
 
   let lastErr;

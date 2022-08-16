@@ -17,14 +17,14 @@ Deno.test("get introduction file commit hash", () => {
 Deno.test("get introduction file old repo", () => {
   assertEquals(
     getFileURL("v1.12.0", "/introduction"),
-    "http://deno-registry2-prod-storagebucket-b3a31d16.s3-website-us-east-1.amazonaws.com/deno/versions/v1.12.0/raw/docs/introduction.md",
+    "https://cdn.deno.land/deno/versions/v1.12.0/raw/docs/introduction.md",
   );
 });
 
 Deno.test("get introduction file new repo", () => {
   assertEquals(
     getFileURL("v1.12.1", "/introduction"),
-    "http://deno-registry2-prod-storagebucket-b3a31d16.s3-website-us-east-1.amazonaws.com/manual/versions/v1.12.1/raw/introduction.md",
+    "https://cdn.deno.land/manual/versions/v1.12.1/raw/introduction.md",
   );
 });
 
