@@ -12,6 +12,7 @@ import { Header } from "@/components/Header.tsx";
 import { LinkWithArrow } from "@/components/LinkWithArrow.tsx";
 import * as Icons from "@/components/Icons.tsx";
 import Frameworks from "@/islands/Frameworks.tsx";
+import MainHeader from "@/islands/MainHeader.tsx";
 import { Handlers, PageProps } from "$fresh/server.ts";
 
 import versions from "@/versions.json" assert { type: "json" };
@@ -38,12 +39,12 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
           />
         </div>
 
-        <Header main />
+        <MainHeader />
 
         <div class={tw`relative`}>
           {/* cover */}
           <div
-            class={tw`w-screen h-screen flex items-center justify-center`}
+            class={tw`w-screen h-screen min-h-[480px] flex items-center justify-center`}
           >
             <div class={tw`w-[900px] flex items-center justify-between`}>
               <div>
@@ -59,6 +60,8 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
                   <button
                     href="https://deno.com/deploy"
                     class={tw`flex h-10 items-center gap-2 rounded-md px-5 bg-default text-white border-1 border-gray-200 hover:bg-white hover:text-default hover:border-gray-500 transition-colors`}
+                    /* @ts-ignore */
+                    onClick="event.preventDefault();document.getElementById('installation').scrollIntoView({ behavior: 'smooth', block: 'center' });"
                   >
                     <svg
                       width="19"
@@ -90,7 +93,10 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
           </div>
 
           {/* installation */}
-          <div class={tw`w-[750px] mx-auto flex flex-col gap-4`}>
+          <div
+            class={tw`w-[750px] mx-auto flex flex-col gap-4`}
+            id="installation"
+          >
             <h2 class={tw`text-xl font-medium`}>Installation</h2>
             <CodeBlock
               class="border-2 border-fresh !bg-[#F3FBF5]"

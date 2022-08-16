@@ -24,7 +24,8 @@ import * as $18 from "./routes/x/module.tsx";
 import * as $$0 from "./islands/AddModule.tsx";
 import * as $$1 from "./islands/Frameworks.tsx";
 import * as $$2 from "./islands/GlobalSearch.tsx";
-import * as $$3 from "./islands/VersionSelect.tsx";
+import * as $$3 from "./islands/MainHeader.tsx";
+import * as $$4 from "./islands/VersionSelect.tsx";
 
 const manifest = {
   routes: {
@@ -52,7 +53,8 @@ const manifest = {
     "./islands/AddModule.tsx": $$0,
     "./islands/Frameworks.tsx": $$1,
     "./islands/GlobalSearch.tsx": $$2,
-    "./islands/VersionSelect.tsx": $$3,
+    "./islands/MainHeader.tsx": $$3,
+    "./islands/VersionSelect.tsx": $$4,
   },
   baseUrl: import.meta.url,
 };

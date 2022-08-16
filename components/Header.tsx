@@ -21,24 +21,22 @@ const entries = [
 export function Header({
   selected,
   main,
-  manual,
+  showLogoText,
 }: {
   selected?: (typeof entries)[number]["content"];
   main?: boolean;
-  manual?: boolean;
+  showLogoText?: boolean;
 }) {
   return (
     <div
-      class={tw(
-        manual
-          ? "lg:border-b border-light-border"
-          : !main
-          ? "bg-white border-b border-light-border backdrop-blur-3xl"
-          : "fixed w-screen top-0 left-0 z-50",
-      )}
+      class={tw`sticky top-0 z-50 border-b border-transparent transition-all duration-300 ${
+        main
+          ? ""
+          : "bg-[rgba(255,255,255,0.85)] !border-light-border header-backdrop-blur"
+      }`}
     >
       <div
-        class={tw`section-x-inset-xl py-5.5`}
+        class={tw`section-x-inset-xl py-4.5`}
       >
         <nav class={tw`flex justify-between flex-col lg:flex-row`}>
           <input
@@ -60,7 +58,7 @@ export function Header({
               }`}
             >
               <img class={tw`w-8 h-8`} src="/logo.svg" alt="Deno Logo" />
-              {main && <strong class={tw`text-xl`}>Deno</strong>}
+              {showLogoText && <strong class={tw`text-xl`}>Deno</strong>}
             </a>
 
             <GlobalSearch main={main} />
@@ -107,7 +105,7 @@ export function Header({
               href="https://deno.com/deploy"
               class={tw`h-9 lg:ml-5 bg-${
                 main
-                  ? "[rgba(255,255,255,0.95)] hover:bg-gray-100"
+                  ? "[rgba(255,255,255,0.9)] hover:bg-gray-100"
                   : "[rgba(229,231,235,0.6)] hover:bg-gray-200"
               } rounded-md px-4 flex items-center transition-colors`}
             >

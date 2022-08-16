@@ -82,7 +82,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
         </title>
         <link rel="canonical" href={`https://deno.land/manual${path}`} />
       </Head>
-      <Header selected="Manual" manual />
+      <Header selected="Manual" />
 
       <div>
         <input

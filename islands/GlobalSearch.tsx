@@ -175,7 +175,7 @@ export default function GlobalSearch({ main }: { main?: boolean }) {
     <>
       <button
         class={tw`w-64 h-9 px-3 bg-${
-          main ? "[rgba(255,255,255,0.95)]" : "default-gray"
+          main ? "[rgba(255,255,255,0.9)]" : "[rgba(229,231,235,0.6)]"
         } flex-auto flex items-center justify-between gap-1 lg:flex-none rounded-md text-light border-2 border-transparent hover:bg-white hover:border-dark-border disabled:invisible`}
         onClick={() => setShowModal(true)}
         disabled={!IS_BROWSER}

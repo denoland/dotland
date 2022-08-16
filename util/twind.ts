@@ -75,6 +75,9 @@ export const config: Configuration = {
       "background-size": "1.5em 1.5em",
       "background-repeat": "no-repeat",
     }),
+    "header-backdrop-blur": css({
+      "backdrop-filter": "saturate(180%) blur(5px)",
+    }),
     "symbolKind":
       apply`rounded-full w-6 h-6 inline-flex items-center justify-center font-medium text-xs leading-none flex-shrink-0`,
     "divide-incl-y": (parts) =>
