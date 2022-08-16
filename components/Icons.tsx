@@ -233,7 +233,7 @@ export function Instagram() {
 export function MagnifyingGlass(props: { class?: string }) {
   return (
     <svg
-      class={tw`h-5 w-5 ${props.class ?? ""}`}
+      class={tw`h-4 w-4 ${props.class ?? ""}`}
       xmlns="http://www.w3.org/2000/svg"
       width="16"
       height="16"

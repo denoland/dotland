@@ -50,7 +50,7 @@ interface ModuleSearchResult {
 }
 
 /** Search Deno documentation, symbols, or modules. */
-export default function GlobalSearch() {
+export default function GlobalSearch({ main }: { main?: boolean }) {
   const [showModal, setShowModal] = useState(false);
   const [input, setInput] = useState("");
 
@@ -174,20 +174,20 @@ export default function GlobalSearch() {
   return (
     <>
       <button
-        class={tw`pl-4 w-64 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light hover:bg-light-border disabled:invisible`}
+        class={tw`w-64 h-9 px-3 bg-${
+          main ? "[rgba(255,255,255,0.95)]" : "default-gray"
+        } flex-auto flex items-center justify-between gap-1 lg:flex-none rounded-md text-light border-2 border-transparent hover:bg-white hover:border-dark-border disabled:invisible`}
         onClick={() => setShowModal(true)}
         disabled={!IS_BROWSER}
       >
-        <div class={tw`flex items-center pointer-events-none`}>
-          <Icons.MagnifyingGlass />
-          <div
-            class={tw`ml-1.5 py-2.5 h-9 flex-auto text-light text-sm leading-4 font-medium text-left`}
-          >
-            Search...
-          </div>
-          <div class={tw`mx-4`}>
-            ⌘K
-          </div>
+        <Icons.MagnifyingGlass class={tw`!w-4.5 !h-4.5 flex-none`} />
+        <div
+          class={tw`flex-grow leading-none text-left`}
+        >
+          Search...
+        </div>
+        <div class={tw`flex-none leading-none`}>
+          ⌘K
         </div>
       </button>
 
@@ -213,7 +213,7 @@ export default function GlobalSearch() {
                   <Icons.MagnifyingGlass />
                   <input
                     id="search-input"
-                    class={tw`ml-1.5 py-3 leading-4 bg-transparent w-full text-main placeholder:text-gray-400 outline-none`}
+                    class={tw`ml-1.5 py-3 leading-4 bg-transparent w-full text-default placeholder:text-gray-400 outline-none`}
                     type="text"
                     onInput={(e) => setInput(e.currentTarget.value)}
                     value={input}
@@ -233,7 +233,7 @@ export default function GlobalSearch() {
               <div class={tw`flex gap-3 mt-2`}>
                 {kinds.map((k) => (
                   <button
-                    class={tw`px-2 rounded-md leading-relaxed hover:(bg-gray-100 text-main) ${
+                    class={tw`px-2 rounded-md leading-relaxed hover:(bg-gray-100 text-default) ${
                       // TODO: use border instead
                       k === kind
                         ? css({

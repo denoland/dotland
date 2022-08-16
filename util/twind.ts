@@ -28,14 +28,12 @@ export const config: Configuration = {
     extend: {
       colors: {
         primary: "#056CF0",
-        secondary: "#E5E7EB",
-        main: "#333333",
-        "default-highlight": "#333333C0",
         light: "#999999",
         default: "#232323",
         fresh: "#0CBB3F",
         symbol: "#7B61FF",
         ultralight: "#F8F7F6",
+        "default-gray": "#F3F3F3",
         "light-border": "#EEEEEE",
         "dark-border": "#DDDDDD",
 

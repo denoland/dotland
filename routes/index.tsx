@@ -9,6 +9,7 @@ import { CodeBlock } from "@/components/CodeBlock.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
 import { Header } from "@/components/Header.tsx";
+import { LinkWithArrow } from "@/components/LinkWithArrow.tsx";
 import * as Icons from "@/components/Icons.tsx";
 import Frameworks from "@/islands/Frameworks.tsx";
 import { Handlers, PageProps } from "$fresh/server.ts";
@@ -102,12 +103,12 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
             </CodeBlock>
             <p>
               Other{" "}
-              <a
-                class={tw`link inline-flex gap-1 items-center`}
+              <LinkWithArrow
+                class={tw`text-primary`}
                 href="/installation"
               >
-                Installation Methods <Icons.LongArrowRight />
-              </a>
+                Installation Methods
+              </LinkWithArrow>
             </p>
           </div>
 
@@ -190,7 +191,7 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
             >
               <a
                 href="https://dash.deno.com/playground/example-helloworld"
-                class={tw`rounded-md px-4.5 py-2.5 inline-flex items-center gap-1.5 border-1 boder-transparent leading-none font-medium text-white bg-primary hover:bg-white hover:text-primary hover:border-primary transition-colors`}
+                class={tw`rounded-md px-4.5 py-2.5 inline-flex items-center gap-1.5 border-1 border-transparent leading-none font-medium text-white bg-primary hover:bg-white hover:text-primary hover:border-primary transition-colors`}
                 target="_blank"
                 rel="noopener noreferrer"
               >

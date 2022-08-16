@@ -3,12 +3,13 @@
 /** @jsx h */
 import { h } from "preact";
 import { tw } from "@twind";
+import { LinkWithArrow } from "./LinkWithArrow.tsx";
 import * as Icons from "./Icons.tsx";
 
 export function Footer() {
   return (
     <div
-      class={tw`border-t border-secondary bg-[#F9F9F9] text-sm flex justify-center`}
+      class={tw`border-t border-light-border bg-ultralight text-sm flex justify-center`}
     >
       <div class={tw`section-x-inset-xl py-7 lg:py-18 w-full`}>
         <nav
@@ -84,21 +85,23 @@ export function Footer() {
                 Copyright © 2022 Deno Land Inc.{" "}
                 <span class={tw`whitespace-nowrap`}>All rights reserved.</span>
               </span>
-              <a class={tw`block text-[#7B61FF]`} href="https://deno.com/jobs">
-                We are hiring, join
-                us<Icons.LongArrowRight class="inline ml-1.5" />
-              </a>
+              <LinkWithArrow
+                class={tw`text-symbol`}
+                href="https://deno.com/jobs"
+              >
+                We are hiring, join us
+              </LinkWithArrow>
             </div>
 
-            <div class={tw`flex gap-3 text-[#6C6E78]`}>
+            <div class={tw`flex gap-3 text-gray-500 transition-colors`}>
               <a href="https://github.com/denoland">
-                <Icons.GitHub class="hover:text-default-highlight" />
+                <Icons.GitHub class="hover:text-gray-900" />
               </a>
               <a href="https://discord.gg/deno">
-                <Icons.Discord class="hover:text-default-highlight" />
+                <Icons.Discord class="hover:text-gray-900" />
               </a>
               <a href="https://twitter.com/deno_land">
-                <Icons.Twitter class="hover:text-default-highlight" />
+                <Icons.Twitter class="hover:text-gray-900" />
               </a>
             </div>
           </div>
@@ -131,10 +134,13 @@ function FooterSection(
         </div>
       </label>
       <div
-        class={tw`hidden text-[#6C6E78] flex-col flex-wrap pl-1 pb-2 mb-3 gap-2.5 lg:(flex p-0 mt-4 mb-0)`}
+        class={tw`hidden flex-col flex-wrap pl-1 pb-2 mb-3 gap-2.5 lg:(flex p-0 mt-4 mb-0)`}
       >
         {Object.entries(entries).map(([name, link]) => (
-          <a href={link} class={tw`whitespace-nowrap block hover:underline`}>
+          <a
+            href={link}
+            class={tw`whitespace-nowrap block text-gray-500 hover:underline hover:text-gray-800`}
+          >
             {name}
           </a>
         ))}

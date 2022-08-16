@@ -1,8 +1,8 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h, VNode } from "preact";
-import { css, tw } from "@twind";
-import { useEffect, useState } from "preact/hooks";
+import { h, VNode } from "preact";
+import { tw } from "@twind";
+import { useState } from "preact/hooks";
 import { CodeBlock } from "@/components/CodeBlock.tsx";
 import * as Icons from "@/components/Icons.tsx";
 
@@ -143,7 +143,7 @@ function FWCard(props: FWProps) {
       class={tw`w-[50%] bg-white p-5 border-2 ${
         props.active
           ? "border-primary scale-100 opacity-100"
-          : "border-gray-200 scale-95 opacity-85"
+          : "border-gray-200 scale-95 opacity-90"
       } rounded-lg transition-all duration-300 ease-in-out`}
       onMouseEnter={props.onMouseEnter}
     >
@@ -152,10 +152,10 @@ function FWCard(props: FWProps) {
       >
         {props.logo} {props.name}
       </h2>
-      <p class={tw`text-sm text-gray-400 leading-none mt-1.5`}>
+      <p class={tw`text-gray-400 leading-none mt-1.5`}>
         {props.description}
       </p>
-      <p class={tw`text-sm text-gray-400 leading-none mt-1`}>
+      <p class={tw`leading-none mt-1`}>
         <a
           class={`link`}
           href={props.url}
@@ -170,10 +170,10 @@ function FWCard(props: FWProps) {
       >
         {props.showcases.map((showcase) => (
           <li
-            class={tw`flex items-center gap-1.5 px-2 mx-[-8px] rounded hover:bg-ultralight`}
+            class={tw`flex items-center gap-1.5 px-2 mx-[-8px] rounded-md hover:bg-ultralight transition-colors duration-200`}
           >
             <a
-              class={tw`flex-1 leading-none py-2 text-current hover:text-primary transition-colors duration-200`}
+              class={tw`flex-1 leading-none py-2 text-gray-800 hover:text-black transition-colors duration-200`}
               href={showcase.previewUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -188,7 +188,8 @@ function FWCard(props: FWProps) {
                 rel="noopener noreferrer"
                 title="Source"
               >
-                <Icons.GitHub class="!w-4.5 !h-4.5" />
+                <span class={tw`sr-only`}>Source</span>
+                <Icons.GitHub class={tw`!w-4.5 !h-4.5`} />
               </a>
             )}
             <a
@@ -198,7 +199,8 @@ function FWCard(props: FWProps) {
               rel="noopener noreferrer"
               title="Preview"
             >
-              <Icons.ExternalLink class="!w-4 !h-4" />
+              <span class={tw`sr-only`}>Preview</span>
+              <Icons.ExternalLink class={tw`!w-4 !h-4`} />
             </a>
           </li>
         ))}

@@ -49,7 +49,7 @@ export function Header({
           />
 
           <div
-            class={tw`h-9 flex flex-1 items-center justify-between lg:justify-start select-none w-full lg:w-min gap-2 md:gap-4 lg:gap-6`}
+            class={tw`h-9 flex flex-1 items-center justify-between lg:justify-start select-none w-full lg:w-min gap-2 md:gap-4`}
           >
             <a
               href="/"
@@ -63,7 +63,7 @@ export function Header({
               {main && <strong class={tw`text-xl`}>Deno</strong>}
             </a>
 
-            <GlobalSearch />
+            <GlobalSearch main={main} />
 
             <label
               tabIndex={0}
@@ -82,13 +82,13 @@ export function Header({
           </div>
 
           <div
-            class={tw`hidden flex-col mx-2 mt-5 gap-y-4 lg:(flex flex-row items-center mx-0 mt-0) font-medium`}
+            class={tw`hidden flex-col mx-2 mt-5 gap-y-1 lg:(flex flex-row items-center mx-0 mt-0) font-medium`}
           >
             {entries.map(({ href, content }) => {
               return (
                 <a
                   href={href}
-                  class={tw`lg:ml-4 px-2 rounded-md leading-loose hover:(bg-gray-100 text-main) ${apply`${
+                  class={tw`lg:ml-1 px-3 rounded-md leading-loose hover:(bg-gray-100 text-default) ${apply`${
                     content === selected
                       ? css({
                         "text-decoration-line": "underline",
@@ -106,8 +106,10 @@ export function Header({
             <a
               href="https://deno.com/deploy"
               class={tw`h-9 lg:ml-5 bg-${
-                main ? "white" : "secondary"
-              } rounded-md px-4 flex items-center hover:bg-[#D5D7DB]`}
+                main
+                  ? "[rgba(255,255,255,0.95)] hover:bg-gray-100"
+                  : "[rgba(229,231,235,0.6)] hover:bg-gray-200"
+              } rounded-md px-4 flex items-center transition-colors`}
             >
               Deploy
             </a>
@@ -115,16 +117,18 @@ export function Header({
             <a
               href="https://github.com/denoland/deno"
               class={tw`lg:ml-5 my-auto hidden lg:block`}
+              title="GitHub"
             >
               <span class={tw`sr-only`}>GitHub</span>
-              <Icons.GitHub class="inline text-main hover:text-default-highlight" />
+              <Icons.GitHub class="inline text-gray-700 hover:text-gray-900" />
             </a>
             <a
               href="https://discord.gg/deno"
               class={tw`lg:ml-5 my-auto hidden lg:block`}
+              title="Discord"
             >
               <span class={tw`sr-only`}>Discord</span>
-              <Icons.Discord class="inline text-main hover:text-default-highlight" />
+              <Icons.Discord class="inline text-gray-700 hover:text-gray-900" />
             </a>
           </div>
         </nav>
