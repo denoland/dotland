@@ -286,17 +286,17 @@ function Logos() {
       {companies.map(({ name, logo, url }) => (
         <li class={tw`mb-2 md:mb-0`} key={url}>
           <a
-            class={tw`flex items-center gap-2 flex-nowrap opacity-70 hover:opacity-100`}
+            class={tw`flex items-center gap-2 flex-nowrap opacity-75 hover:opacity-100 transition-opacity`}
             href={url}
             target="_blank"
           >
             <img
-              class={tw`w-5`}
+              class={tw`w-5.5`}
               src={`https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/${logo}`}
               alt={name}
               title={name}
             />{" "}
-            <span class={tw`font-medium text-lg leading-none`}>{name}</span>
+            <span class={tw`font-medium text-xl leading-none`}>{name}</span>
           </a>
         </li>
       ))}

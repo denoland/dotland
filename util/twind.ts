@@ -76,6 +76,7 @@ export const config: Configuration = {
       "background-repeat": "no-repeat",
     }),
     "header-backdrop-blur": css({
+      "-webkit-backdrop-filter": "saturate(180%) blur(5px)",
       "backdrop-filter": "saturate(180%) blur(5px)",
     }),
     "symbolKind":

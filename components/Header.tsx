@@ -36,7 +36,7 @@ export function Header({
       }`}
     >
       <div
-        class={tw`section-x-inset-xl py-4.5`}
+        class={tw`section-x-inset-xl py-4`}
       >
         <nav class={tw`flex justify-between flex-col lg:flex-row`}>
           <input
@@ -86,11 +86,13 @@ export function Header({
               return (
                 <a
                   href={href}
-                  class={tw`lg:ml-1 px-3 rounded-md leading-loose hover:(bg-gray-100 text-default) ${apply`${
+                  class={tw`lg:ml-1 px-3 rounded-md leading-loose hover:(bg-${
+                    main ? "[rgba(255,255,255,0.9)]" : "[rgba(229,231,235,0.6)]"
+                  } text-default) transition-colors ${apply`${
                     content === selected
                       ? css({
                         "text-decoration-line": "underline",
-                        "text-underline-offset": "6px",
+                        "text-underline-offset": "8px",
                         "text-decoration-thickness": "2px",
                       })
                       : ""
