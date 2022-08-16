@@ -1,17 +1,13 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-import { h, VNode } from "preact";
-
+import { h } from "preact";
 import { tw } from "@twind";
 import { Prism } from "@/util/prism_utils.ts";
 import { escape as htmlEscape } from "$he";
+import * as Icons from "@/components/Icons.tsx";
 import { normalizeTokens } from "@/util/prism_utils.ts";
-import {
-  extractLinkUrl,
-  fileTypeFromURL,
-  filetypeIsJS,
-} from "../util/registry_utils.ts";
+import { extractLinkUrl } from "@/util/registry_utils.ts";
 
 export interface CodeBlockProps {
   code: string;
@@ -35,7 +31,6 @@ export interface CodeBlockProps {
     | "dockerfile";
   url?: URL;
   class?: string;
-  children?: VNode | string | (VNode | string)[];
 }
 
 export function RawCodeBlock({
@@ -45,7 +40,6 @@ export function RawCodeBlock({
   disablePrefixes,
   enableLineRef = false,
   url,
-  children,
 }: CodeBlockProps & {
   enableLineRef?: boolean;
 }) {
@@ -139,17 +133,36 @@ export function RawCodeBlock({
             </span>
           );
         })}
-        {children && <div class={tw`mt-5`}>{children}</div>}
       </div>
     </pre>
   );
 }
 
-export function CodeBlock(props: CodeBlockProps) {
+export function CodeBlock({
+  class: className,
+  playgroundUrl,
+  ...rest
+}: CodeBlockProps & {
+  playgroundUrl?: string;
+}) {
   return (
-    <RawCodeBlock
-      {...props}
-      class={tw`p-5 bg-ultralight rounded-lg ${props.class ?? ""}`}
-    />
+    <div class={tw`p-5 bg-ultralight rounded-lg ${className ?? ""}`}>
+      <RawCodeBlock
+        {...rest}
+      />
+      {playgroundUrl && (
+        <div class={tw`mt-4`}>
+          <a
+            href={playgroundUrl}
+            class={tw`rounded-md px-4.5 py-2.5 inline-flex items-center gap-1.5 border-1 border-transparent leading-none font-medium text-white bg-primary hover:bg-white hover:text-primary hover:border-primary transition-colors`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icons.Playground />
+            <div>Playground</div>
+          </a>
+        </div>
+      )}
+    </div>
   );
 }

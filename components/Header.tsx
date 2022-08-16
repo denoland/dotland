@@ -2,10 +2,9 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
-
+import { h } from "preact";
 import { apply, css, tw } from "@twind";
-import * as Icons from "./Icons.tsx";
+import * as Icons from "@/components/Icons.tsx";
 import GlobalSearch from "@/islands/GlobalSearch.tsx";
 
 const entries = [

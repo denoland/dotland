@@ -10,7 +10,6 @@ import { CodeBlock } from "@/components/CodeBlock.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
 import { LinkWithArrow } from "@/components/LinkWithArrow.tsx";
-import * as Icons from "@/components/Icons.tsx";
 import Frameworks from "@/islands/Frameworks.tsx";
 import InstallationBlock from "@/islands/InstallationBlock.tsx";
 import MainHeader from "@/islands/MainHeader.tsx";
@@ -44,7 +43,7 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
         <div class={tw`relative`}>
           {/* cover */}
           <div
-            class={tw`w-screen h-screen min-h-[480px] flex items-center justify-center`}
+            class={tw`w-screen h-[calc(100vh-70px)] min-h-[480px] flex items-center justify-center`}
           >
             <div class={tw`w-[900px] flex items-center justify-between`}>
               <div>
@@ -187,17 +186,8 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
               ].join("\n")}
               language="typescript"
               url={url}
-            >
-              <a
-                href="https://dash.deno.com/playground/example-helloworld"
-                class={tw`rounded-md px-4.5 py-2.5 inline-flex items-center gap-1.5 border-1 border-transparent leading-none font-medium text-white bg-primary hover:bg-white hover:text-primary hover:border-primary transition-colors`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Icons.Playground />
-                <div>Playground</div>
-              </a>
-            </CodeBlock>
+              playgroundUrl={"https://dash.deno.com/playground/example-helloworld"}
+            />
             <p>Run the server:</p>
             <CodeBlock
               code={"deno run --allow-net server.ts"}
@@ -217,7 +207,7 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
 
         {/* logos */}
         <div
-          class={tw`relative bg-white flex flex-col w-screen h-48 items-center justify-center gap-4`}
+          class={tw`relative bg-white flex flex-col w-screen h-44 items-center justify-center gap-4`}
         >
           <h2 class={tw`text-gray-400 leading-none`}>
             Deno in Production

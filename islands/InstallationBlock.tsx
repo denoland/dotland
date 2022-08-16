@@ -1,6 +1,6 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { h, VNode } from "preact";
+import { h } from "preact";
 import { tw } from "@twind";
 import { useState } from "preact/hooks";
 import { CodeBlock } from "@/components/CodeBlock.tsx";
@@ -14,7 +14,7 @@ export default function InstallationBlock(props: { uaIsWin: boolean }) {
       <h2 class={tw`flex items-center gap-3`}>
         <strong class={tw`text-xl font-medium`}>Installation</strong>
         <span
-          class={tw`inline-flex items-center gap-2 relative text-gray-500 leading-none hover:text-gray-900 transition-colors`}
+          class={tw`inline-flex items-center gap-2 relative text-gray-400 leading-none hover:text-gray-900 transition-colors`}
         >
           {isWin ? "Windows (PowerShell)" : "macOS, Linux, and BSD"}
           <Icons.SelectCaret />
@@ -36,8 +36,7 @@ export default function InstallationBlock(props: { uaIsWin: boolean }) {
           ? `iwr https://deno.land/install.ps1 -useb | iex`
           : `curl -fsSL https://deno.land/install.sh | sh`}
         language="bash"
-      >
-      </CodeBlock>
+      />
     </div>
   );
 }
