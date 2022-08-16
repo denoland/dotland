@@ -253,7 +253,7 @@ function AlephGettingStart() {
       <h3 class={tw`font-medium`}>Getting started</h3>
       <CodeBlock
         class={tw`!bg-white`}
-        code="deno run -A -r https://deno.land/x/aleph init my-project"
+        code="deno run -A -r https://deno.land/x/aleph/init.ts --template react"
         language="bash"
       />
       <p>
