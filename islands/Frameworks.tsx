@@ -20,7 +20,7 @@ export default function Frameworks() {
             SSR, Streaming, File-system routing, etc...
           </h3>
         </hgroup>
-        <div class={tw`flex justify-between gap-3 mb-4 mt-12`}>
+        <div class={tw`flex justify-between gap-3 mb-4 mt-8`}>
           <FWCard
             name="Fresh"
             description="The next-gen web framework."

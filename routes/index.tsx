@@ -66,7 +66,7 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
                     href="https://deno.com/deploy"
                     class={tw`flex h-10 items-center gap-2 rounded-md px-5 bg-default text-white border-1 border-gray-200 hover:bg-white hover:text-default hover:border-gray-500 transition-colors`}
                     /* @ts-ignore */
-                    onClick="event.preventDefault();document.getElementById('installation').scrollIntoView({ behavior: 'smooth', block: 'center' });"
+                    onClick="event.preventDefault();event.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });"
                   >
                     <svg
                       width="19"
@@ -120,7 +120,7 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
           </div>
 
           {/* intro */}
-          <div class={tw`section-x-inset max-w-[750px] mt-20`}>
+          <div class={tw`section-x-inset max-w-[750px] mt-16`}>
             <h2 class={tw`text-xl`}>
               <strong>Deno</strong>{" "}
               is a simple, modern and secure runtime for JavaScript, TypeScript,
@@ -184,7 +184,7 @@ export default function HomeNew({ data, url }: PageProps<Data>) {
 
           {/* getting started */}
           <div
-            class={tw`section-x-inset max-w-[750px] my-20 flex flex-col gap-4`}
+            class={tw`section-x-inset max-w-[750px] my-16 flex flex-col gap-4`}
           >
             <h2 class={tw`text-xl font-medium`}>Getting started</h2>
             <CodeBlock
