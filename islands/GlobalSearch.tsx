@@ -234,9 +234,8 @@ export default function GlobalSearch() {
                 {kinds.map((k) => (
                   <button
                     class={tw`px-2 rounded-md leading-relaxed hover:(bg-gray-100 text-main) ${
-                      k === kind
-                        ? "border-black border-b-2 rounded-none"
-                        : ""} ${k === kind ? "text-black" : "text-gray-500"}`}
+                      k === kind ? "border-black border-b-2 rounded-none" : ""
+                    } ${k === kind ? "text-black" : "text-gray-500"}`}
                     onClick={() => {
                       setKind(k);
                       setPage(0);
