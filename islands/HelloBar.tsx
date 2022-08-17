@@ -33,14 +33,14 @@ export default function HelloBar(props: {
                 {props.children}
               </a>
             </div>
-            <button
+            <div
               onClick={() => {
                 localStorage.setItem("helloBar", "closed");
                 setHelloBar(false);
               }}
             >
               <Cross />
-            </button>
+            </div>
           </div>
         )
         : <></>}
