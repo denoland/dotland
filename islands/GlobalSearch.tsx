@@ -234,13 +234,8 @@ export default function GlobalSearch() {
                 {kinds.map((k) => (
                   <button
                     class={tw`px-2 rounded-md leading-relaxed hover:(bg-gray-100 text-main) ${
-                      // TODO: use border instead
                       k === kind
-                        ? css({
-                          "text-decoration-line": "underline",
-                          "text-underline-offset": "6px",
-                          "text-decoration-thickness": "2px",
-                        })
+                        ? "border-black border-b-2 rounded-none"
                         : ""} ${k === kind ? "text-black" : "text-gray-500"}`}
                     onClick={() => {
                       setKind(k);
