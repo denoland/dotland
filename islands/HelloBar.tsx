@@ -5,6 +5,7 @@
 import { ComponentChildren, Fragment, h } from "preact";
 import { useEffect, useState } from "preact/hooks";
 import { tw } from "@twind";
+import { IS_BROWSER } from "$fresh/runtime.ts";
 import { Cross } from "@/components/Icons.tsx";
 
 export default function HelloBar(props: {
@@ -33,14 +34,15 @@ export default function HelloBar(props: {
                 {props.children}
               </a>
             </div>
-            <div
+            <button
+              disabled={IS_BROWSER}
               onClick={() => {
                 localStorage.setItem("helloBar", "closed");
                 setHelloBar(false);
               }}
             >
               <Cross />
-            </div>
+            </button>
           </div>
         )
         : <></>}
