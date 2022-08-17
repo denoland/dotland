@@ -232,19 +232,21 @@ export default function GlobalSearch() {
 
               <div class={tw`flex gap-3 mt-2`}>
                 {kinds.map((k) => (
-                  <button
-                    class={tw`px-2 rounded-md leading-relaxed hover:(bg-gray-100 text-main) ${
-                      k === kind
-                        ? "border-black border-b-2 rounded-none text-black"
-                        : "text-gray-500"
-                    }`}
-                    onClick={() => {
-                      setKind(k);
-                      setPage(0);
-                    }}
+                  <div
+                    class={tw`${k === kind ? "border-black border-b-2" : ""}`}
                   >
-                    {k}
-                  </button>
+                    <button
+                      class={tw`px-2 rounded-md leading-relaxed hover:(bg-gray-100 text-main) ${
+                        k === kind ? "text-black" : "text-gray-500"
+                      }`}
+                      onClick={() => {
+                        setKind(k);
+                        setPage(0);
+                      }}
+                    >
+                      {k}
+                    </button>
+                  </div>
                 ))}
               </div>
             </div>
