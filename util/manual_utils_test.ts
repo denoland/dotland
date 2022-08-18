@@ -17,29 +17,14 @@ Deno.test("get introduction file commit hash", () => {
 Deno.test("get introduction file old repo", () => {
   assertEquals(
     getFileURL("v1.12.0", "/introduction"),
-<<<<<<< HEAD
     "https://cdn.jsdelivr.net/gh/denocn/deno_docs@master/introduction.md",
-=======
-    "https://cdn.deno.land/deno/versions/v1.12.0/raw/docs/introduction.md",
->>>>>>> 1199e14ce5494dae6bed81dc3b81033dc3042718
   );
 });
 
 Deno.test("get introduction file new repo", () => {
   assertEquals(
     getFileURL("v1.12.1", "/introduction"),
-<<<<<<< HEAD
     "https://cdn.jsdelivr.net/gh/denocn/deno_docs@master/introduction.md",
-=======
-    "https://cdn.deno.land/manual/versions/v1.12.1/raw/introduction.md",
-  );
-});
-
-Deno.test("get edit link old repo", () => {
-  assertEquals(
-    getDocURL("v1.12.0", "/introduction"),
-    "https://github.com/denoland/deno/blob/v1.12.0/docs/introduction.md",
->>>>>>> 1199e14ce5494dae6bed81dc3b81033dc3042718
   );
 });
 
