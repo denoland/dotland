@@ -35,7 +35,7 @@ export default function HelloBar(props: {
               </a>
             </div>
             <button
-              disabled={IS_BROWSER}
+              disabled={!IS_BROWSER}
               onClick={() => {
                 localStorage.setItem("helloBar", "closed");
                 setHelloBar(false);
