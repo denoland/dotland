@@ -254,12 +254,16 @@ function ToC({
 
               <label
                 htmlFor={slug}
-                class={tw`flex items-center gap-2 px-2.5 py-2 rounded-md block ${
+                class={tw`flex items-center gap-2 px-2.5 py-2 rounded-md ${
                   active ? "link bg-ultralight" : "hover:text-gray-500"
                 } font-semibold` + (active ? " toc-active" : "")}
               >
                 <Icons.TriangleRight
-                  class={entry.children ? "" : "invisible"}
+                  aria-label={`open section ${entry.name}`}
+                  onKeyDown="if (event.code === 'Space' || event.code === 'Enter') { this.parentElement.click(); event.preventDefault(); }"
+                  tabindex={0}
+                  class={"cursor-pointer" +
+                    (entry.children ? "" : " invisible")}
                 />
                 <a href={`/manual${version ? `@${version}` : ""}/${slug}`}>
                   {entry.name}
