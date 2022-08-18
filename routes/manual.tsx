@@ -244,13 +244,16 @@ function ToC({
           const active = path === `/${slug}`;
           return (
             <li key={slug}>
-              <details
-                open={active}
-                class="rotate-svg"
-                // @ts-ignore onToggle does support strings
-                onToggle={`event.currentTarget.firstChild.firstChild.setAttribute("aria-label", (event.currentTarget.open ? "close" : "open") + " section ${entry.name}")`}
-              >
-                <summary
+              <input
+                type="checkbox"
+                id={slug}
+                class={tw`hidden checked:siblings:even:children:first-child:rotate-90 checked:siblings:last-child:block`}
+                checked={active || path.startsWith(`/${slug}/`)}
+                disabled={!entry.children}
+              />
+
+                <label
+                  htmlFor={slug}
                   class={tw`flex items-center gap-2 px-2.5 py-2 rounded-md ${
                     active ? "link bg-ultralight" : "hover:text-gray-500"
                   } font-semibold` + (active ? " toc-active" : "")}
@@ -265,36 +268,35 @@ function ToC({
                   <a href={`/manual${version ? `@${version}` : ""}/${slug}`}>
                     {entry.name}
                   </a>
-                </summary>
+                </label>
 
-                {entry.children && (
-                  <ol class={tw`list-decimal font-normal` + " nested"}>
-                    {Object.entries(entry.children).map(
-                      (
-                        [childSlug, name],
-                      ) => {
-                        const active = path === `/${slug}/${childSlug}`;
-                        return (
-                          <li key={`${slug}/${childSlug}`}>
-                            <a
-                              href={`/manual${
-                                version ? `@${version}` : ""
-                              }/${slug}/${childSlug}`}
-                              class={tw`pl-8 pr-2.5 py-1 rounded-md block ${
-                                active
-                                  ? "link bg-ultralight"
-                                  : "hover:text-gray-500"
-                              } font-normal` + (active ? " toc-active" : "")}
-                            >
-                              {name}
-                            </a>
-                          </li>
-                        );
-                      },
-                    )}
-                  </ol>
-                )}
-              </details>
+              {entry.children && (
+                <ol class={tw`list-decimal font-normal hidden` + " nested"}>
+                  {Object.entries(entry.children).map(
+                    (
+                      [childSlug, name],
+                    ) => {
+                      const active = path === `/${slug}/${childSlug}`;
+                      return (
+                        <li key={`${slug}/${childSlug}`}>
+                          <a
+                            href={`/manual${
+                              version ? `@${version}` : ""
+                            }/${slug}/${childSlug}`}
+                            class={tw`pl-8 pr-2.5 py-1 rounded-md block ${
+                              active
+                                ? "link bg-ultralight"
+                                : "hover:text-gray-500"
+                            } font-normal` + (active ? " toc-active" : "")}
+                          >
+                            {name}
+                          </a>
+                        </li>
+                      );
+                    },
+                  )}
+                </ol>
+              )}
             </li>
           );
         })}
