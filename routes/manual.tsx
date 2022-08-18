@@ -252,23 +252,23 @@ function ToC({
                 disabled={!entry.children}
               />
 
-                <label
-                  htmlFor={slug}
-                  class={tw`flex items-center gap-2 px-2.5 py-2 rounded-md ${
-                    active ? "link bg-ultralight" : "hover:text-gray-500"
-                  } font-semibold` + (active ? " toc-active" : "")}
-                >
-                  <Icons.TriangleRight
-                    aria-label={`open section ${entry.name}`}
-                    onKeyDown="if (event.code === 'Space' || event.code === 'Enter') { this.parentElement.click(); event.preventDefault(); }"
-                    tabindex={0}
-                    class={"cursor-pointer" +
-                      (entry.children ? "" : " invisible")}
-                  />
-                  <a href={`/manual${version ? `@${version}` : ""}/${slug}`}>
-                    {entry.name}
-                  </a>
-                </label>
+              <label
+                htmlFor={slug}
+                class={tw`flex items-center gap-2 px-2.5 py-2 rounded-md ${
+                  active ? "link bg-ultralight" : "hover:text-gray-500"
+                } font-semibold` + (active ? " toc-active" : "")}
+              >
+                <Icons.TriangleRight
+                  aria-label={`open section ${entry.name}`}
+                  onKeyDown="if (event.code === 'Space' || event.code === 'Enter') { this.parentElement.click(); event.preventDefault(); }"
+                  tabindex={0}
+                  class={"cursor-pointer" +
+                    (entry.children ? "" : " invisible")}
+                />
+                <a href={`/manual${version ? `@${version}` : ""}/${slug}`}>
+                  {entry.name}
+                </a>
+              </label>
 
               {entry.children && (
                 <ol class={tw`list-decimal font-normal hidden` + " nested"}>
