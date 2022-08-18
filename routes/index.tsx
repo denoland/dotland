@@ -9,6 +9,7 @@ import { CodeBlock } from "@/components/CodeBlock.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
 import { Header } from "@/components/Header.tsx";
+import { HelloBar } from "@/components/HelloBar.tsx";
 import { Background } from "@/components/HeroBackground.tsx";
 import { Handlers, PageProps } from "$fresh/server.ts";
 
@@ -38,6 +39,9 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
 
   return (
     <div>
+      <HelloBar to="https://deno.news/archive/48-announcing-deno-merch">
+        Check out Deno News issue #48!
+      </HelloBar>
       <Head>
         <title>Deno - A modern runtime for JavaScript and TypeScript</title>
       </Head>
@@ -433,40 +437,6 @@ function InstallSection({ url }: { url: URL }) {
       />
     </div>
   );
-  const chocolatey = (
-    <div key="chocolatey" class={tw`my-4 text-gray-700`}>
-      <p class={tw`mb-2`}>
-        <a href="https://chocolatey.org/packages/deno" class={tw`link`}>
-          Chocolatey
-        </a>{" "}
-        (Windows):
-      </p>
-      <CodeBlock language="bash" code="choco install deno" url={url} />
-    </div>
-  );
-  const scoop = (
-    <div key="scoop" class={tw`my-4 text-gray-700`}>
-      <p class={tw`mb-2`}>
-        <a href="https://scoop.sh/" class={tw`link`}>
-          Scoop
-        </a>{" "}
-        (Windows):
-      </p>
-      <CodeBlock language="bash" code="scoop install deno" url={url} />
-    </div>
-  );
-  const cargo = (
-    <div key="cargo" class={tw`my-4 text-gray-700`}>
-      <p class={tw`py-2`}>
-        Build and install from source using{" "}
-        <a href="https://crates.io/crates/deno" class={tw`link`}>
-          Cargo
-        </a>
-        :
-      </p>
-      <CodeBlock language="bash" code="cargo install deno --locked" url={url} />
-    </div>
-  );
 
   return (
     <>
@@ -482,9 +452,6 @@ function InstallSection({ url }: { url: URL }) {
       {shell}
       {powershell}
       {homebrew}
-      {chocolatey}
-      {scoop}
-      {cargo}
       <p class={tw`my-4 text-gray-700`}>
         See{" "}
         <a class={tw`link`} href="https://github.com/denoland/deno_install">
