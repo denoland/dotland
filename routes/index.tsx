@@ -438,22 +438,35 @@ function InstallSection({ url }: { url: URL }) {
     </div>
   );
 
+  const currentOS = Deno.build.os;
+  const getCmdBasedOnOS = () => {
+    switch (currentOS) {
+      case "windows":
+        return powershell;
+      case "darwin":
+        return [
+          homebrew,
+          shell,
+        ];
+      default:
+        return shell;
+    }
+  };
+
   return (
     <>
       <p class={tw`my-4 text-gray-700`}>
-        Deno ships as a single executable with no dependencies. You can install
-        it using the installers below, or download a release binary from the
-        {" "}
+        It seems like you're using{" "}
+        {currentOS}. To start using Deno, download it using the installer below
+        or through the release binary from the{" "}
         <a href="https://github.com/denoland/deno/releases" class={tw`link`}>
           releases page
         </a>
         .
       </p>
-      {shell}
-      {powershell}
-      {homebrew}
+      {getCmdBasedOnOS()}
       <p class={tw`my-4 text-gray-700`}>
-        See{" "}
+        Not using {currentOS}?! See{" "}
         <a class={tw`link`} href="https://github.com/denoland/deno_install">
           deno_install
         </a>{" "}
