@@ -23,7 +23,8 @@ import * as $17 from "./routes/x/index.tsx";
 import * as $18 from "./routes/x/module.tsx";
 import * as $$0 from "./islands/AddModule.tsx";
 import * as $$1 from "./islands/GlobalSearch.tsx";
-import * as $$2 from "./islands/VersionSelect.tsx";
+import * as $$2 from "./islands/HelloBar.tsx";
+import * as $$3 from "./islands/VersionSelect.tsx";
 
 const manifest = {
   routes: {
@@ -50,7 +51,8 @@ const manifest = {
   islands: {
     "./islands/AddModule.tsx": $$0,
     "./islands/GlobalSearch.tsx": $$1,
-    "./islands/VersionSelect.tsx": $$2,
+    "./islands/HelloBar.tsx": $$2,
+    "./islands/VersionSelect.tsx": $$3,
   },
   baseUrl: import.meta.url,
 };
