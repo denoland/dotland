@@ -15,7 +15,7 @@ export default function HelloBar(props: {
   const [helloBar, setHelloBar] = useState(false);
 
   useEffect(() => {
-    setHelloBar(!localStorage.getItem("helloBar"));
+    setHelloBar(localStorage.getItem("helloBar") != props.to);
   }, []);
 
   return (
@@ -37,7 +37,7 @@ export default function HelloBar(props: {
             <button
               disabled={!IS_BROWSER}
               onClick={() => {
-                localStorage.setItem("helloBar", "closed");
+                localStorage.setItem("helloBar", props.to);
                 setHelloBar(false);
               }}
             >
