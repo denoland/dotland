@@ -79,12 +79,10 @@ export default function Registry({ params, url, data }: PageProps<MaybeData>) {
                 version={version!}
                 {...{ name, path, isStd, ...data }}
               />
-              <div class={tw`section-x-inset-xl pb-20 pt-10 flex gap-x-14`}>
-                <ModuleView
-                  version={version!}
-                  {...{ name, path, isStd, url, data }}
-                />
-              </div>
+              <ModuleView
+                version={version!}
+                {...{ name, path, isStd, url, data }}
+              />
             </>
           )}
         <Footer />

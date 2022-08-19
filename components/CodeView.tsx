@@ -26,7 +26,9 @@ export function CodeView({
   data: CodePageFile | CodePageDir;
 }) {
   return (
-    <div class={tw`flex flex-col gap-4 w-full overflow-auto`}>
+    <main
+      class={tw`mt-7 mb-16 lg:mt-12 space-y-12 section-x-inset-xl w-full overflow-auto focus:outline-none`}
+    >
       {data.kind === "dir"
         ? (
           <>
@@ -67,6 +69,6 @@ export function CodeView({
               />
             )
         )}
-    </div>
+    </main>
   );
 }

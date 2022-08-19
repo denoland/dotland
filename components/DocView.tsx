@@ -16,6 +16,7 @@ import {
   DocPageModule,
   DocPageSymbol,
 } from "@/util/registry_utils.ts";
+import { SidePanelPage } from "./SidePanelPage.tsx";
 
 export function DocView({
   isStd,
@@ -36,18 +37,21 @@ export function DocView({
   url.search = "";
 
   return (
-    <>
-      {(data.kind === "module" || data.kind === "symbol") && (
-        <ModulePathIndexPanel
-          base={basePath}
-          path={dirname(path)}
-          current={path}
-          currentSymbol={data.kind === "symbol" ? data.name : undefined}
-        >
-          {data.nav}
-        </ModulePathIndexPanel>
-      )}
-      <div class={tw`space-y-12 flex flex-col gap-4 w-full overflow-auto`}>
+    <SidePanelPage
+      sidepanel={(data.kind === "module" || data.kind === "symbol")
+        ? (
+          <ModulePathIndexPanel
+            base={basePath}
+            path={dirname(path)}
+            current={path}
+            currentSymbol={data.kind === "symbol" ? data.name : undefined}
+          >
+            {data.nav}
+          </ModulePathIndexPanel>
+        )
+        : null}
+    >
+      <div class={tw`space-y-12 flex flex-col gap-4 w-full`}>
         {(() => {
           switch (data.kind) {
             case "index":
@@ -92,6 +96,6 @@ export function DocView({
           />
         )}
       </div>
-    </>
+    </SidePanelPage>
   );
 }
