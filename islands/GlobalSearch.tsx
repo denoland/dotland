@@ -222,12 +222,12 @@ export default function GlobalSearch() {
                   />
                 </label>
 
-                <div
+                <button
                   class={tw`lg:hidden ml-3 -mr-2 flex items-center`}
                   onClick={() => setShowModal(false)}
                 >
                   <Icons.Cross />
-                </div>
+                </button>
               </div>
 
               <div class={tw`flex gap-3 mt-2`}>

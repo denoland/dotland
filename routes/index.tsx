@@ -9,7 +9,7 @@ import { CodeBlock } from "@/components/CodeBlock.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
 import { Header } from "@/components/Header.tsx";
-import { HelloBar } from "@/components/HelloBar.tsx";
+import HelloBar from "@/islands/HelloBar.tsx";
 import { Background } from "@/components/HeroBackground.tsx";
 import { Handlers, PageProps } from "$fresh/server.ts";
 

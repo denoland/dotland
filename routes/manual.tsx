@@ -11,6 +11,7 @@ import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { Markdown } from "@/components/Markdown.tsx";
 import * as Icons from "@/components/Icons.tsx";
+import { SidePanelPage } from "@/components/SidePanelPage.tsx";
 import {
   getDocURL,
   getFileURL,
@@ -84,6 +85,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
       </Head>
       <Header selected="手册" manual />
 
+<<<<<<< HEAD
       <div>
         <input
           type="checkbox"
@@ -107,88 +109,81 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
         >
           <div
             class={tw`hidden pb-2 w-full border-b border-dark-border lg:(pb-0 border-none block w-72 flex-shrink-0)`}
+=======
+      <SidePanelPage
+        sidepanel={
+          <>
+            <VersionSelect
+              versions={Object.fromEntries(
+                versions.map((ver) => [ver, `/manual@${ver}${path}`]),
+              )}
+              selectedVersion={version}
+            />
+            <ToC
+              tableOfContents={data.tableOfContents}
+              version={params.version}
+              path={path}
+            />
+          </>
+        }
+      >
+        {isPreview && (
+          <UserContributionBanner
+            href={new URL(`/manual/${params.path}`, url).href}
+          />
+        )}
+        <div class={tw`w-full justify-self-center flex-shrink-1`}>
+          <a
+            href={getDocURL(version, path)}
+            class={tw`float-right py-2.5 px-4.5 rounded-md bg-[#F3F3F3] hover:bg-dark-border leading-none font-medium`}
+>>>>>>> 3dec26d7508f59054b673d9e25a15580940b17ee
           >
-            <div
-              class={tw`w-full space-y-4 section-x-inset-xl lg:section-x-inset-none`}
-            >
-              <VersionSelect
-                versions={Object.fromEntries(
-                  versions.map((ver) => [ver, `/manual@${ver}${path}`]),
-                )}
-                selectedVersion={version}
-              />
-              <ToC
-                tableOfContents={data.tableOfContents}
-                version={params.version}
-                path={path}
-              />
-            </div>
-          </div>
+            Edit
+          </a>
 
-          <main
-            class={tw`focus:outline-none w-full flex flex-col section-x-inset-xl mt-7 lg:(section-x-inset-none mt-0)`}
-            tabIndex={0}
-          >
-            {isPreview && (
-              <UserContributionBanner
-                href={new URL(`/manual/${params.path}`, url).href}
-              />
-            )}
-            <div
-              class={tw`w-full justify-self-center flex-shrink-1`}
-            >
+          <Markdown
+            source={data.content
+              .replace(/\$STD_VERSION/g, stdVersion)
+              .replace(/\$CLI_VERSION/g, version)}
+            baseUrl={sourceURL}
+          />
+
+          <div class={tw`mt-14`}>
+            {pageList[pageIndex - 1] && (
               <a
-                href={getDocURL(version, path)}
-                class={tw`float-right py-2.5 px-4.5 rounded-md bg-[#F3F3F3] hover:bg-dark-border leading-none font-medium`}
+                href={params.version
+                  ? pageList[pageIndex - 1].path.replace(
+                    "manual",
+                    `manual@${version}`,
+                  )
+                  : pageList[pageIndex - 1].path}
+                class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-dark-border gap-1.5 hover:bg-light-border`}
               >
-                Edit
+                <Icons.ArrowLeft />
+                <div>
+                  {pageList[pageIndex - 1].name}
+                </div>
               </a>
-
-              <Markdown
-                source={data.content
-                  .replace(/\$STD_VERSION/g, stdVersion)
-                  .replace(/\$CLI_VERSION/g, version)}
-                baseUrl={sourceURL}
-              />
-
-              <div class={tw`mt-14`}>
-                {pageList[pageIndex - 1] && (
-                  <a
-                    href={params.version
-                      ? pageList[pageIndex - 1].path.replace(
-                        "manual",
-                        `manual@${version}`,
-                      )
-                      : pageList[pageIndex - 1].path}
-                    class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-dark-border gap-1.5 hover:bg-light-border`}
-                  >
-                    <Icons.ArrowLeft />
-                    <div>
-                      {pageList[pageIndex - 1].name}
-                    </div>
-                  </a>
-                )}
-                {pageList[pageIndex + 1] && (
-                  <a
-                    href={params.version
-                      ? pageList[pageIndex + 1].path.replace(
-                        "manual",
-                        `manual@${version}`,
-                      )
-                      : pageList[pageIndex + 1].path}
-                    class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-dark-border gap-1.5 float-right text-right hover:bg-light-border`}
-                  >
-                    <div>
-                      {pageList[pageIndex + 1].name}
-                    </div>
-                    <Icons.ArrowRight />
-                  </a>
-                )}
-              </div>
-            </div>
-          </main>
+            )}
+            {pageList[pageIndex + 1] && (
+              <a
+                href={params.version
+                  ? pageList[pageIndex + 1].path.replace(
+                    "manual",
+                    `manual@${version}`,
+                  )
+                  : pageList[pageIndex + 1].path}
+                class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-dark-border gap-1.5 float-right text-right hover:bg-light-border`}
+              >
+                <div>
+                  {pageList[pageIndex + 1].name}
+                </div>
+                <Icons.ArrowRight />
+              </a>
+            )}
+          </div>
         </div>
-      </div>
+      </SidePanelPage>
 
       <Footer />
 
