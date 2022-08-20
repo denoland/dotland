@@ -126,12 +126,10 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
           <div class={tw`mt-14`}>
             {pageList[pageIndex - 1] && (
               <a
-                href={params.version
-                  ? pageList[pageIndex - 1].path.replace(
-                    "manual",
-                    `manual@${version}`,
-                  )
-                  : pageList[pageIndex - 1].path}
+                href={pageList[pageIndex - 1].path.replace(
+                  "manual",
+                  `manual@${version}`,
+                )}
                 class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-dark-border gap-1.5 hover:bg-light-border`}
               >
                 <Icons.ArrowLeft />
@@ -142,12 +140,10 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             )}
             {pageList[pageIndex + 1] && (
               <a
-                href={params.version
-                  ? pageList[pageIndex + 1].path.replace(
-                    "manual",
-                    `manual@${version}`,
-                  )
-                  : pageList[pageIndex + 1].path}
+                href={pageList[pageIndex + 1].path.replace(
+                  "manual",
+                  `manual@${version}`,
+                )}
                 class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-dark-border gap-1.5 float-right text-right hover:bg-light-border`}
               >
                 <div>
@@ -235,7 +231,7 @@ function ToC({
                   class={"cursor-pointer" +
                     (entry.children ? "" : " invisible")}
                 />
-                <a href={`/manual${version ? `@${version}` : ""}/${slug}`}>
+                <a href={`/manual@${version}/${slug}`}>
                   {entry.name}
                 </a>
               </label>
@@ -250,9 +246,7 @@ function ToC({
                       return (
                         <li key={`${slug}/${childSlug}`}>
                           <a
-                            href={`/manual${
-                              version ? `@${version}` : ""
-                            }/${slug}/${childSlug}`}
+                            href={`/manual@${version}/${slug}/${childSlug}`}
                             class={tw`pl-8 pr-2.5 py-1 rounded-md block ${
                               active
                                 ? "link bg-ultralight"
@@ -278,8 +272,11 @@ function ToC({
 export const handler: Handlers<Data> = {
   async GET(req, { params, render }) {
     const url = new URL(req.url);
-    if (url.pathname === "/manual") {
-      url.pathname += "/introduction";
+    if (!params.path) {
+      params.path = "introduction";
+    }
+    if (!params.version) {
+      url.pathname = `/manual@${versions[0]}/${params.path}`;
       return Response.redirect(url);
     }
     if (url.pathname.endsWith(".md")) {
@@ -287,7 +284,7 @@ export const handler: Handlers<Data> = {
       return Response.redirect(url);
     }
 
-    const version = params.version || versions[0];
+    const version = params.version;
     const sourceURL = getFileURL(
       version,
       `/${params.path}`,
