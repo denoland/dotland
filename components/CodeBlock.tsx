@@ -4,10 +4,13 @@
 import { h } from "preact";
 
 import { tw } from "@twind";
-import { Prism } from "@/util/prism_utils.ts";
 import { escape as htmlEscape } from "$he";
-import { normalizeTokens } from "@/util/prism_utils.ts";
-import { fileTypeFromURL, filetypeIsJS } from "../util/registry_utils.ts";
+import { normalizeTokens, Prism } from "@/util/prism_utils.ts";
+import {
+  extractLinkUrl,
+  fileTypeFromURL,
+  filetypeIsJS,
+} from "@/util/registry_utils.ts";
 
 export interface CodeBlockProps {
   code: string;
@@ -30,6 +33,7 @@ export interface CodeBlockProps {
     | "makefile"
     | "dockerfile";
   url: URL;
+  class?: string;
 }
 
 export function RawCodeBlock({
@@ -40,7 +44,6 @@ export function RawCodeBlock({
   enableLineRef = false,
   url,
 }: CodeBlockProps & {
-  class?: string;
   enableLineRef?: boolean;
 }) {
   const codeDivClasses =
@@ -64,20 +67,18 @@ export function RawCodeBlock({
 
   const tokens = normalizeTokens(Prism.tokenize(code, grammar));
 
-  return (
-    <pre
-      className={tw`text-sm gfm-highlight highlight-source-${newLang} flex ${
-        extraClassName ?? ""
-      }`}
-      data-color-mode="light"
-      data-light-theme="light"
-    >
+  return <pre
+    className={tw`text-sm flex ${extraClassName ?? ""}` +
+      ` gfm-highlight highlight-source-${newLang}`}
+    data-color-mode="light"
+    data-light-theme="light"
+  >
       {enableLineRef &&
         (
           <div className={codeDivClasses}>
             {tokens.map((_, i) => (
               <a
-                className={tw`text-gray-500 token text-right block`}
+                className={tw`text-gray-500 text-right block` + " token"}
                 tab-index={-1}
                 href={`#L${i + 1}`}
               >
@@ -102,16 +103,12 @@ export function RawCodeBlock({
                 }
 
                 if (token.types.includes("string")) {
-                  try {
-                    const quote = token.content[0];
-                    const urlContent = token.content.slice(1, -1);
-                    const res = new URL(
-                      urlContent,
-                      filetypeIsJS(fileTypeFromURL(urlContent))
-                        ? url
-                        : undefined,
-                    );
-
+                  const result = extractLinkUrl(
+                    token.content,
+                    url.origin + url.pathname,
+                  );
+                  if (result) {
+                    const [href, specifier, quote] = result;
                     return (
                       <span
                         className={"token " +
@@ -120,15 +117,13 @@ export function RawCodeBlock({
                         {quote}
                         <a
                           className={tw`hover:underline`}
-                          href={res.href + "?code"}
+                          href={href + "?code"}
                         >
-                          {urlContent}
+                          {specifier}
                         </a>
                         {quote}
                       </span>
                     );
-                  } catch (e) {
-                    // ignore
                   }
                 }
                 return (
@@ -141,20 +136,14 @@ export function RawCodeBlock({
           );
         })}
       </div>
-    </pre>
-  );
+  </pre>;
 }
 
-export function CodeBlock(
-  { code, language, disablePrefixes, url }: CodeBlockProps,
-) {
+export function CodeBlock(props: CodeBlockProps) {
   return (
     <RawCodeBlock
-      code={code}
-      language={language}
-      disablePrefixes={disablePrefixes}
-      class={tw`p-4 bg-gray-100 rounded-lg`}
-      url={url}
+      {...props}
+      class={tw`p-4 bg-ultralight rounded-lg ${props.class ?? ""}`}
     />
   );
 }

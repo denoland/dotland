@@ -10,16 +10,18 @@ export function Footer() {
     <div
       class={tw`border-t border-secondary bg-[#F9F9F9] text-sm flex justify-center`}
     >
-      <div class={tw`section-x-inset-xl py-6 lg:py-18 w-full`}>
+      <div class={tw`section-x-inset-xl py-7 lg:py-18 w-full`}>
         <nav
-          class={tw`flex flex-col gap-6 w-full lg:(flex-row gap-0 justify-between) leading-tight`}
+          class={tw`flex flex-col gap-7 w-full leading-tight lg:(flex-row gap-0 items-start justify-between)`}
         >
-          <div class={tw`hidden lg:block`}>
-            <a href="https://deno.land">
-              <img class={tw`h-6 w-6`} src="/logo.svg" alt="Deno Logo" />
-            </a>
-          </div>
-          <div class={tw`flex flex-col gap-5 lg:(flex-row gap-16)`}>
+          <a href="https://deno.land" class={tw`flex items-center gap-2`}>
+            <img class={tw`h-6 w-6`} src="/logo.svg" alt="Deno Logo" />
+            <Icons.Deno class="lg:hidden" />
+          </a>
+
+          <div
+            class={tw`flex flex-col gap-0 divide-incl-y lg:(flex-row gap-16 divide-incl-y-0)`}
+          >
             <FooterSection
               title="Why Deno?"
               entries={{
@@ -59,40 +61,45 @@ export function Footer() {
               title="Company"
               entries={{
                 "Blog": "https://deno.com/blog",
-                "Jobs": "https://deno.com/jobs",
                 "Pricing": "https://deno.com/deploy/pricing",
                 "News": "https://deno.news",
+                "Merch": "https://merch.deno.com",
                 "Privacy Policy": "https://deno.com/deploy/docs/privacy-policy",
               }}
             />
           </div>
-          <div class={tw`space-y-5 lg:w-60`}>
+
+          <div class={tw`space-y-5 w-60`}>
             <iframe
               src="https://denostatus.com/embed-status/light-sm"
-              height="42"
+              height="41"
               frameBorder="0"
               scrolling="no"
               style="border: none;"
-              class={tw`w-full lg:w-60 focus:outline-none`}
+              class={tw`w-full rounded-lg focus:outline-none`}
             />
-            <div
-              class={tw`flex flex-row justify-between items-center lg:(flex-col space-y-5 items-start)`}
-            >
-              <span class={tw`text-xs text-gray-400 leading-tight`}>
+
+            <div class={tw`space-y-2.5 lg:space-y-4.5`}>
+              <span class={tw`text-xs text-[#9CA0AA] leading-tight`}>
                 Copyright © 2022 Deno Land Inc.{" "}
                 <span class={tw`whitespace-nowrap`}>All rights reserved.</span>
               </span>
-              <div class={tw`flex gap-3 text-main`}>
-                <a href="https://github.com/denoland">
-                  <Icons.GitHub class="hover:text-main-highlight" />
-                </a>
-                <a href="https://discord.gg/deno">
-                  <Icons.Discord class="hover:text-main-highlight" />
-                </a>
-                <a href="https://twitter.com/deno_land">
-                  <Icons.Twitter class="hover:text-main-highlight" />
-                </a>
-              </div>
+              <a class={tw`block text-[#7B61FF]`} href="https://deno.com/jobs">
+                We are hiring, join
+                us<Icons.LongArrowRight class="inline ml-1.5" />
+              </a>
+            </div>
+
+            <div class={tw`flex gap-3 text-[#6C6E78]`}>
+              <a href="https://github.com/denoland">
+                <Icons.GitHub class="hover:text-default-highlight" />
+              </a>
+              <a href="https://discord.gg/deno">
+                <Icons.Discord class="hover:text-default-highlight" />
+              </a>
+              <a href="https://twitter.com/deno_land">
+                <Icons.Twitter class="hover:text-default-highlight" />
+              </a>
             </div>
           </div>
         </nav>
@@ -102,21 +109,35 @@ export function Footer() {
 }
 
 function FooterSection(
-  props: { title: string; entries: Record<string, string> },
+  { title, entries }: { title: string; entries: Record<string, string> },
 ) {
   return (
     <div>
-      <span class={tw`font-semibold`}>{props.title}</span>
-      <div
-        class={tw`text-[#454545] flex flex-wrap mt-2 gap-x-2.5 gap-y-1.5 lg:(flex-col mt-4 gap-x-0 gap-y-2.5)`}
+      <input
+        type="checkbox"
+        id={title}
+        class={tw`hidden checked:(siblings:last-child:flex sibling:children:last-child:children:(odd:hidden even:block))`}
+        autoComplete="off"
+      />
+      <label
+        htmlFor={title}
+        tabIndex={0}
+        class={tw`flex items-center justify-between px-1 my-3 lg:(px-0 my-0)`}
       >
-        {Object.entries(props.entries).map(([name, link]) => {
-          return (
-            <a href={link} class={tw`whitespace-nowrap block hover:underline`}>
-              {name}
-            </a>
-          );
-        })}
+        <span class={tw`text-sm font-semibold`}>{title}</span>
+        <div class={tw`lg:hidden text-[#9CA0AA]`}>
+          <Icons.Plus />
+          <Icons.Minus class="hidden" />
+        </div>
+      </label>
+      <div
+        class={tw`hidden text-[#6C6E78] flex-col flex-wrap pl-1 pb-2 mb-3 gap-2.5 lg:(flex p-0 mt-4 mb-0)`}
+      >
+        {Object.entries(entries).map(([name, link]) => (
+          <a href={link} class={tw`whitespace-nowrap block hover:underline`}>
+            {name}
+          </a>
+        ))}
       </div>
     </div>
   );

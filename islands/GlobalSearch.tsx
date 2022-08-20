@@ -54,12 +54,16 @@ export default function GlobalSearch() {
   const [showModal, setShowModal] = useState(false);
   const [input, setInput] = useState("");
 
-  const [results, setResults] = useState<{
-    manual?: Array<ManualSearchResult>;
-    modules?: Array<ModuleSearchResult>;
-    symbols?: Array<DocNode>;
-  }>({});
+  const [results, setResults] = useState<
+    {
+      manual?: Array<ManualSearchResult>;
+      modules?: Array<ModuleSearchResult>;
+      symbols?: Array<DocNode>;
+    } | null
+  >(null);
   const [kind, setKind] = useState<typeof kinds[number]>("All");
+  const [page, setPage] = useState<number>(0);
+  const [totalPages, setTotalPages] = useState<number>(1);
   const [symbolKindsToggle, setSymbolKindsToggle] = useState<
     Record<(keyof typeof symbolKinds), boolean>
   >({
@@ -99,13 +103,16 @@ export default function GlobalSearch() {
   useEffect(() => {
     if (!showModal) return;
 
+    setResults(null);
+
     const queries = [];
 
     if (kind === "Manual" || kind === "All") {
       queries.push({
-        indexName: "deno_manual",
+        indexName: "manual",
         query: input || "Introduction",
         params: {
+          page: page,
           hitsPerPage: kind === "All" ? 5 : 10,
           attributesToRetrieve: ["anchor", "url", "content", "hierarchy"],
           filters: "type:content",
@@ -115,9 +122,10 @@ export default function GlobalSearch() {
 
     if (kind === "Symbols" || kind === "All") {
       queries.push({
-        indexName: "deno_modules",
+        indexName: "doc_nodes",
         query: input || "serve",
         params: {
+          page: page,
           hitsPerPage: kind === "All" ? 5 : 10,
           filters: Object.entries(symbolKindsToggle)
             .filter(([_, v]) => kind === "Symbols" ? v : true)
@@ -132,6 +140,7 @@ export default function GlobalSearch() {
         indexName: "modules",
         query: input,
         params: {
+          page: page,
           hitsPerPage: kind === "All" ? 5 : 10,
         },
       });
@@ -139,17 +148,19 @@ export default function GlobalSearch() {
 
     client.multipleQueries(queries).then(
       ({ results }) => {
+        // @ts-ignore algolia typings are annoying
+        setTotalPages(results.find((res) => res.nbPages)?.nbPages ?? 1);
         setResults({
           // @ts-ignore algolia typings are annoying
-          manual: results.find((res) => res.index === "deno_manual")?.hits,
+          manual: results.find((res) => res.index === "manual")?.hits,
           // @ts-ignore algolia typings are annoying
-          symbols: results.find((res) => res.index === "deno_modules")?.hits,
+          symbols: results.find((res) => res.index === "doc_nodes")?.hits,
           // @ts-ignore algolia typings are annoying
           modules: results.find((res) => res.index === "modules")?.hits,
         });
       },
     );
-  }, [showModal, input, kind, symbolKindsToggle]);
+  }, [showModal, input, kind, symbolKindsToggle, page]);
 
   useEffect(() => {
     if (showModal) {
@@ -163,8 +174,9 @@ export default function GlobalSearch() {
   return (
     <>
       <button
-        class={tw`pl-4 w-80 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light hover:bg-light-border`}
+        class={tw`pl-4 w-80 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light hover:bg-light-border disabled:invisible`}
         onClick={() => setShowModal(true)}
+        disabled={!IS_BROWSER}
       >
         <div class={tw`flex items-center pointer-events-none`}>
           <Icons.MagnifyingGlass />
@@ -179,133 +191,181 @@ export default function GlobalSearch() {
         </div>
       </button>
 
-      <dialog
-        class={tw`bg-[#00000033] inset-0 fixed z-10 p-0 m-0 w-full h-screen`}
-        onClick={() => setShowModal(false)}
-        open={showModal}
-      >
-        <div
-          class={tw`bg-white w-full h-screen lg:(mt-24 mx-auto rounded-md w-2/3 max-h-[80vh] border border-[#E8E7E5]) flex flex-col`}
-          onClick={(e) => e.stopPropagation()}
+      {IS_BROWSER && (
+        <dialog
+          class={tw`bg-[#00000033] inset-0 fixed z-10 p-0 m-0 w-full h-screen`}
+          onClick={() => setShowModal(false)}
+          open={showModal}
         >
-          <div class={tw`pt-6 px-6 border-b border-[#E8E7E5]`}>
-            <div class={tw`flex`}>
-              <label
-                class={tw`pl-4 h-10 w-full flex-shrink-1 bg-[#F3F3F3] rounded-md flex items-center text-light focus-within:${
-                  css({
-                    "outline": "solid",
-                  })
-                }`}
-              >
-                <Icons.MagnifyingGlass />
-                <input
-                  id="search-input"
-                  class={tw`ml-1.5 py-3 leading-4 bg-transparent w-full text-main placeholder:text-[#9CA0AA] outline-none`}
-                  type="text"
-                  onInput={(e) => setInput(e.currentTarget.value)}
-                  value={input}
-                  placeholder="Search manual, symbols and modules..."
-                  autoFocus
-                />
-              </label>
+          <div
+            class={tw`bg-white w-full h-screen flex flex-col overflow-hidden lg:(mt-24 mx-auto rounded-md w-2/3 max-h-[80vh] border border-[#E8E7E5])`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div class={tw`pt-6 px-6 border-b border-[#E8E7E5]`}>
+              <div class={tw`flex`}>
+                <label
+                  class={tw`pl-4 h-10 w-full flex-shrink-1 bg-[#F3F3F3] rounded-md flex items-center text-light focus-within:${
+                    css({
+                      "outline": "solid",
+                    })
+                  }`}
+                >
+                  <Icons.MagnifyingGlass />
+                  <input
+                    id="search-input"
+                    class={tw`ml-1.5 py-3 leading-4 bg-transparent w-full text-main placeholder:text-gray-400 outline-none`}
+                    type="text"
+                    onInput={(e) => setInput(e.currentTarget.value)}
+                    value={input}
+                    placeholder="Search manual, symbols and modules..."
+                    autoFocus
+                  />
+                </label>
 
-              <div
-                class={tw`lg:hidden ml-3 -mr-2 flex items-center`}
-                onClick={() => setShowModal(false)}
-              >
-                <Icons.Cross />
+                <button
+                  class={tw`lg:hidden ml-3 -mr-2 flex items-center`}
+                  onClick={() => setShowModal(false)}
+                >
+                  <Icons.Cross />
+                </button>
+              </div>
+
+              <div class={tw`flex gap-3 mt-2`}>
+                {kinds.map((k) => (
+                  <button
+                    class={tw`px-2 rounded-md leading-relaxed hover:(bg-gray-100 text-main) ${
+                      // TODO: use border instead
+                      k === kind
+                        ? css({
+                          "text-decoration-line": "underline",
+                          "text-underline-offset": "6px",
+                          "text-decoration-thickness": "2px",
+                        })
+                        : ""} ${k === kind ? "text-black" : "text-gray-500"}`}
+                    onClick={() => {
+                      setKind(k);
+                      setPage(0);
+                    }}
+                  >
+                    {k}
+                  </button>
+                ))}
               </div>
             </div>
 
-            <div class={tw`flex gap-3 mt-2`}>
-              {kinds.map((k) => (
-                <button
-                  class={tw`px-2 rounded-md leading-relaxed hover:(bg-gray-100 text-main) ${
-                    // TODO: use border instead
-                    k === kind
-                      ? css({
-                        "text-decoration-line": "underline",
-                        "text-underline-offset": "6px",
-                        "text-decoration-thickness": "2px",
-                      })
-                      : ""} ${k === kind ? "text-black" : "text-gray-500"}`}
-                  onClick={() => setKind(k)}
-                >
-                  {k}
-                </button>
-              ))}
+            <div class={tw`overflow-y-auto flex-grow-1`}>
+              {results
+                ? (
+                  <>
+                    {results.manual && (
+                      <Section title="Manual" isAll={kind === "All"}>
+                        {results.manual && results.manual.length === 0 && (
+                          <div class={tw`text-gray-500 italic`}>
+                            Your search did not yield any results in the manual.
+                          </div>
+                        )}
+                        {results.manual.map((res) => <ManualResult {...res} />)}
+                      </Section>
+                    )}
+                    {results.modules && (
+                      <Section title="Modules" isAll={kind === "All"}>
+                        {results.modules && results.modules.length === 0 && (
+                          <div class={tw`text-gray-500 italic`}>
+                            Your search did not yield any results in the modules
+                            index.
+                          </div>
+                        )}
+                        {results.modules.map((module) => (
+                          <ModuleResult module={module} />
+                        ))}
+                      </Section>
+                    )}
+                    {results.symbols && (
+                      <Section title="Symbols" isAll={kind === "All"}>
+                        {results.symbols && results.symbols.length === 0 && (
+                          <div class={tw`text-gray-500 italic`}>
+                            Your search did not yield any results in the symbol
+                            index.
+                          </div>
+                        )}
+                        {results.symbols.map((doc) => (
+                          <SymbolResult doc={doc} />
+                        ))}
+                      </Section>
+                    )}
+                    <div class={tw`${kind === "All" ? "h-6" : "h-3.5"}`} />
+                  </>
+                )
+                : (
+                  <div
+                    class={tw`w-full h-full flex justify-center items-center gap-1.5 text-gray-400`}
+                  >
+                    <Icons.Spinner />
+                    <span>Searching...</span>
+                  </div>
+                )}
             </div>
-          </div>
 
-          <div class={tw`overflow-y-auto flex-grow-1`}>
-            {results.manual && (
-              <Section title="Manual" isAll={kind === "All"}>
-                {results.manual && results.manual.length === 0 && (
-                  <div class={tw`text-gray-500 italic`}>
-                    Your search did not yield any results in the manual.
-                  </div>
-                )}
-                {results.manual.map((res) => <ManualResult {...res} />)}
-              </Section>
-            )}
-            {results.modules && (
-              <Section title="Modules" isAll={kind === "All"}>
-                {results.modules && results.modules.length === 0 && (
-                  <div class={tw`text-gray-500 italic`}>
-                    Your search did not yield any results in the modules index.
-                  </div>
-                )}
-                {results.modules.map((module) => (
-                  <ModuleResult module={module} />
-                ))}
-              </Section>
-            )}
-            {results.symbols && (
-              <Section title="Symbols" isAll={kind === "All"}>
-                {results.symbols && results.symbols.length === 0 && (
-                  <div class={tw`text-gray-500 italic`}>
-                    Your search did not yield any results in the symbol index.
-                  </div>
-                )}
-                {results.symbols.map((doc) => <SymbolResult doc={doc} />)}
-              </Section>
-            )}
-            <div class={tw`${kind === "All" ? "h-6" : "h-3.5"}`} />
-          </div>
-
-          {kind === "Symbols" &&
-            (
+            {kind !== "All" && results && (
               <div
-                class={tw`bg-ultralight border-t border-[#E8E7E5] py-5 px-6 space-x-3`}
+                class={tw`bg-ultralight border-t border-[#E8E7E5] py-3 px-6 flex items-center justify-between`}
               >
-                {(Object.keys(symbolKinds) as (keyof typeof symbolKinds)[])
-                  .map(
-                    (symbolKind) => (
-                      <label class={tw`whitespace-nowrap inline-block`}>
-                        <input
-                          type="checkbox"
-                          class={tw`mr-1 not-checked:siblings:text-[#6C6E78]`}
-                          onChange={() => {
-                            console.log(symbolKindsToggle);
-                            setSymbolKindsToggle((prev) => {
-                              return {
-                                ...prev,
-                                [symbolKind]: !prev[symbolKind],
-                              };
-                            });
-                          }}
-                          checked={symbolKindsToggle[symbolKind]}
-                        />
-                        <span class={tw`text-sm leading-none`}>
-                          {symbolKind}
-                        </span>
-                      </label>
-                    ),
+                <div class={tw`py-2 flex items-center space-x-3`}>
+                  <button
+                    class={tw`p-1 border border-dark-border rounded-md not-disabled:hover:bg-light-border disabled:(text-[#D2D2DC] cursor-not-allowed)`}
+                    onClick={() => setPage((page) => page - 1)}
+                    disabled={page === 0}
+                  >
+                    <Icons.ArrowLeft />
+                  </button>
+                  <span class={tw`text-gray-400`}>
+                    Page <span class={tw`font-medium`}>{page + 1}</span> of{" "}
+                    <span class={tw`font-medium`}>{totalPages}</span>
+                  </span>
+                  <button
+                    class={tw`p-1 border border-dark-border rounded-md not-disabled:hover:bg-light-border disabled:(text-[#D2D2DC] cursor-not-allowed)`}
+                    onClick={() => setPage((page) => page + 1)}
+                    disabled={(page + 1) === totalPages}
+                  >
+                    <Icons.ArrowRight />
+                  </button>
+                </div>
+
+                {kind === "Symbols" &&
+                  (
+                    <div class={tw`space-x-3`}>
+                      {(Object.keys(
+                        symbolKinds,
+                      ) as (keyof typeof symbolKinds)[])
+                        .map(
+                          (symbolKind) => (
+                            <label class={tw`whitespace-nowrap inline-block`}>
+                              <input
+                                type="checkbox"
+                                class={tw`mr-1 not-checked:siblings:text-[#6C6E78]`}
+                                onChange={() => {
+                                  setSymbolKindsToggle((prev) => {
+                                    return {
+                                      ...prev,
+                                      [symbolKind]: !prev[symbolKind],
+                                    };
+                                  });
+                                }}
+                                checked={symbolKindsToggle[symbolKind]}
+                              />
+                              <span class={tw`text-sm leading-none`}>
+                                {symbolKind}
+                              </span>
+                            </label>
+                          ),
+                        )}
+                    </div>
                   )}
               </div>
             )}
-        </div>
-      </dialog>
+          </div>
+        </dialog>
+      )}
     </>
   );
 }
@@ -323,12 +383,14 @@ function Section({
     <div class={tw`pt-3`}>
       {isAll && (
         <div
-          class={tw`mx-6 my-1 text-[#9CA0AA] text-sm leading-6 font-semibold`}
+          class={tw`mx-6 my-1 text-gray-400 text-sm leading-6 font-semibold`}
         >
           {title}
         </div>
       )}
-      <div class={tw`children:(px-6 py-1.5 even:bg-ultralight)`}>
+      <div
+        class={tw`children:(flex items-center gap-4 px-6 py-1.5 hover:bg-ultralight even:(bg-ultralight hover:bg-light-border))`}
+      >
         {children}
       </div>
     </div>
@@ -342,14 +404,17 @@ function ManualResult({ hierarchy, url, content }: ManualSearchResult) {
     title.push(entry);
   }
   return (
-    <a href={url} class={tw`block`}>
+    <a href={url}>
+      <div class={tw`p-1.5 rounded-full bg-gray-200`}>
+        <Icons.Manual />
+      </div>
       <div>
         <ManualResultTitle title={title} />
-      </div>
-      <div
-        class={tw`text-sm text-[#6C6E78] max-h-10 overflow-ellipsis overflow-hidden`}
-      >
-        {content}
+        <div
+          class={tw`text-sm text-[#6C6E78] max-h-10 overflow-ellipsis overflow-hidden`}
+        >
+          {content}
+        </div>
       </div>
     </a>
   );
@@ -375,7 +440,7 @@ function SymbolResult({ doc }: { doc: DocNode }) {
   const KindIcon = docNodeKindMap[doc.kind];
   const href = `${doc.location.filename}?s=${doc.name}`;
   return (
-    <a href={href} class={tw`flex items-center gap-4`}>
+    <a href={href}>
       <KindIcon />
       <div>
         <div class={tw`space-x-2 py-1`}>
@@ -383,7 +448,7 @@ function SymbolResult({ doc }: { doc: DocNode }) {
             {doc.kind.replace("A", " a")}
           </span>
           <span class={tw`font-semibold`}>{doc.name}</span>
-          <span class={tw`italic text-sm text-[#9CA0AA] leading-6`}>from</span>
+          <span class={tw`italic text-sm text-gray-400 leading-6`}>from</span>
           <span>{location}</span>
         </div>
         {doc.jsDoc?.doc && (
@@ -400,12 +465,17 @@ function SymbolResult({ doc }: { doc: DocNode }) {
 
 function ModuleResult({ module }: { module: ModuleSearchResult }) {
   return (
-    <a href={`https://deno.land/x/${module.name}`} class={tw`block`}>
-      <div class={tw`font-semibold`}>{module.name}</div>
-      <div
-        class={tw`text-sm text-[#6C6E78] max-h-10 overflow-ellipsis overflow-hidden`}
-      >
-        {module.description}
+    <a href={`https://deno.land/x/${module.name}`}>
+      <div class={tw`p-1.5 rounded-full bg-gray-200`}>
+        <Icons.Module />
+      </div>
+      <div>
+        <div class={tw`font-semibold`}>{module.name}</div>
+        <div
+          class={tw`text-sm text-[#6C6E78] max-h-10 overflow-ellipsis overflow-hidden`}
+        >
+          {module.description}
+        </div>
       </div>
     </a>
   );

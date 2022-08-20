@@ -1,23 +1,14 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 import {
+  extractLinkUrl,
   fileNameFromURL,
   fileTypeFromURL,
-  findRootReadme,
-  getModule,
-  getRepositoryURL,
   getSourceURL,
   getVersionList,
-  getVersionMeta,
   isReadme,
-  VersionMetaInfo,
 } from "./registry_utils.ts";
-import {
-  assert,
-  assertEquals,
-  assertNotEquals,
-  assertRejects,
-} from "$std/testing/asserts.ts";
+import { assert, assertEquals } from "$std/testing/asserts.ts";
 
 Deno.test("source url", () => {
   assertEquals(
@@ -26,105 +17,12 @@ Deno.test("source url", () => {
   );
 });
 
-const versionMeta: VersionMetaInfo = {
-  uploadedAt: new Date("2020-08-08T12:22:43.759Z"),
-  directoryListing: [
-    {
-      path: "",
-      size: 2317,
-      type: "dir",
-    },
-    {
-      path: "/subproject",
-      size: 425,
-      type: "dir",
-    },
-    {
-      path: "/.github",
-      size: 716,
-      type: "dir",
-    },
-    {
-      path: "/.github/workflows",
-      size: 412,
-      type: "dir",
-    },
-    {
-      path: "/fixtures",
-      size: 23,
-      type: "dir",
-    },
-    {
-      path: "/mod.ts",
-      size: 87,
-      type: "file",
-    },
-    {
-      path: "/subproject/README.md",
-      size: 354,
-      type: "file",
-    },
-    {
-      path: "/subproject/mod.ts",
-      size: 71,
-      type: "file",
-    },
-    {
-      path: "/.github/workflows/ci.yml",
-      size: 412,
-      type: "file",
-    },
-    {
-      path: "/LICENSE",
-      size: 1066,
-      type: "file",
-    },
-    {
-      path: "/.github/README.md",
-      size: 304,
-      type: "file",
-    },
-    {
-      path: "/fixtures/%",
-      size: 23,
-      type: "file",
-    },
-  ],
-  uploadOptions: {
-    type: "github",
-    repository: "luca-rand/testing",
-    ref: "0.0.8",
-  },
-};
-
-Deno.test("getRepositoryURL", () => {
-  assertEquals(
-    getRepositoryURL(versionMeta, "/README.md"),
-    "https://github.com/luca-rand/testing/blob/0.0.8/README.md",
-  );
-});
-
-Deno.test("getVersionMeta", {
-  sanitizeResources: false,
-}, async () => {
-  await assertRejects(() => getVersionMeta("ltest2", "0.0.7"));
-  assertEquals(await getVersionMeta("ltest2", "0.0.8"), versionMeta);
-});
-
 Deno.test("getVersionList", async () => {
   const versionList = await getVersionList("ltest2");
   assert(versionList);
   assertEquals(versionList?.isLegacy, undefined);
   assertEquals(versionList?.latest, versionList?.versions[0]);
   assert(versionList?.versions.length >= 2);
-});
-
-Deno.test("getModule", async () => {
-  const mod = await getModule("ltest2");
-  assert(mod);
-  assertEquals(mod!.name, "ltest2");
-  assertEquals(mod!.description, "Move along, just for testing");
-  assert((+mod!.star_count) > 0);
 });
 
 Deno.test("fileTypeFromURL", () => {
@@ -171,57 +69,6 @@ Deno.test("fileNameFromURL", () => {
   assertEquals(fileNameFromURL("a/path/to/file.tsx"), "file.tsx");
 });
 
-Deno.test("findRootReadme", () => {
-  const tests: Array<[string, boolean]> = [
-    ["/README", true],
-    ["/README.md", true],
-    ["/README.org", true],
-    ["/readme.markdown", true],
-    ["/readme.org", true],
-    ["/README.mdown", true],
-    ["/readme.mkdn", true],
-    ["/readme.mdwn", true],
-    ["/README.mkd", true],
-    ["/README.mkdown", false],
-    ["/README.markdn", false],
-    ["/READTHIS.md", false],
-    ["/READTHIS.org", false],
-    ["/docs/README.md", true],
-    ["/docs/README.org", true],
-    ["/.github/README.md", true],
-    ["/.github/README.org", true],
-  ];
-
-  for (const [path, expectedToBeRootReadme] of tests) {
-    const rootReadme = findRootReadme([{ path, type: "file", size: 100 }]);
-    if (expectedToBeRootReadme) {
-      assertNotEquals(rootReadme, undefined);
-    } else {
-      assertEquals(rootReadme, undefined);
-    }
-  }
-});
-
-Deno.test("findRootReadme selection", () => {
-  {
-    const rootReadme = findRootReadme([
-      { path: "/.github/README.md", type: "file", size: 100 },
-      { path: "/docs/README.md", type: "file", size: 100 },
-      { path: "/README.md", type: "file", size: 100 },
-    ]);
-
-    assertEquals(rootReadme?.name, "README.md");
-  }
-  {
-    const rootReadme = findRootReadme([
-      { path: "/.github/README.md", type: "file", size: 100 },
-      { path: "/docs/README.md", type: "file", size: 100 },
-    ]);
-
-    assertEquals(rootReadme?.name, "docs/README.md");
-  }
-});
-
 Deno.test("isReadme", () => {
   const tests: Array<[string, boolean]> = [
     ["README", true],
@@ -241,4 +88,56 @@ Deno.test("isReadme", () => {
   for (const [path, expectedToBeReadme] of tests) {
     assertEquals([path, isReadme(path)], [path, expectedToBeReadme]);
   }
+});
+
+Deno.test("extractLinkUrl", () => {
+  assertEquals(
+    extractLinkUrl(`"https://deno.land/std/foo/bar.ts"`, "")![0],
+    "https://deno.land/std/foo/bar.ts",
+  );
+  assertEquals(
+    extractLinkUrl(`"https://deno.land/std/foo/bar.js"`, "")![0],
+    "https://deno.land/std/foo/bar.js",
+  );
+  assertEquals(
+    extractLinkUrl(`"https://deno.land/std/foo/bar.tsx"`, "")![0],
+    "https://deno.land/std/foo/bar.tsx",
+  );
+  assertEquals(
+    extractLinkUrl(`"https://deno.land/std/foo/bar.jsx"`, "")![0],
+    "https://deno.land/std/foo/bar.jsx",
+  );
+  assertEquals(
+    extractLinkUrl(`"https://deno.land/std/foo/bar.mts"`, "")![0],
+    "https://deno.land/std/foo/bar.mts",
+  );
+  assertEquals(
+    extractLinkUrl(`"https://deno.land/std/foo/bar.cts"`, "")![0],
+    "https://deno.land/std/foo/bar.cts",
+  );
+  assertEquals(
+    extractLinkUrl(`"https://deno.land/std/foo/bar.mjs"`, "")![0],
+    "https://deno.land/std/foo/bar.mjs",
+  );
+  assertEquals(
+    extractLinkUrl(`"https://deno.land/std/foo/bar.cjs"`, "")![0],
+    "https://deno.land/std/foo/bar.cjs",
+  );
+  assertEquals(
+    extractLinkUrl(`"./qux.ts"`, "https://deno.land/std/foo/bar/baz.ts")![0],
+    "https://deno.land/std/foo/bar/qux.ts",
+  );
+  assertEquals(
+    extractLinkUrl(`"../quux.ts"`, "https://deno.land/std/foo/bar/baz.ts")![0],
+    "https://deno.land/std/foo/quux.ts",
+  );
+
+  // Doesn't link to the external site's url
+  assertEquals(extractLinkUrl(`"https://example.com/foo.ts"`, ""), undefined);
+
+  // Doesn't link relative path if the base url is not script
+  assertEquals(
+    extractLinkUrl(`"./foo.ts"`, "https://deno.land/README.md"),
+    undefined,
+  );
 });

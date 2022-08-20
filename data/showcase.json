@@ -111,6 +111,11 @@
     "link": "https://andbounds.com/"
   },
   {
+    "image": "/images/showcase/ycrm.png",
+    "title": "YCRM",
+    "link": "https://ycrm.xyz/"
+  },
+  {
     "image": "/images/showcase/profilator.png",
     "title": "GitHub Profilator",
     "link": "https://profilator.deno.dev/",
@@ -120,5 +125,27 @@
     "image": "/images/showcase/localseostudio.png",
     "title": "Local SEO Studio",
     "link": "https://localseo.studio/"
+  },
+  {
+    "image": "/images/showcase/cargo.png",
+    "title": "Cargo Web Framework",
+    "link": "https://cargo.wtf/"
+  },
+  {
+    "image": "/images/showcase/budgetzen.png",
+    "title": "Budget Zen",
+    "link": "https://budgetzen.net/",
+    "github": "BrunoBernardino/budgetzen-web"
+  },
+  {
+    "image": "/images/showcase/deno-boilerplate-simple-website.png",
+    "title": "Simple Deno Website Boilerplate",
+    "link": "https://simple-deno-website-boilerplate.onbrn.com/",
+    "github": "BrunoBernardino/deno-boilerplate-simple-website"
+  },
+  {
+    "image": "/images/showcase/optimem.png",
+    "title": "Optimem App",
+    "link": "https://optimem.org/"
   }
 ]
