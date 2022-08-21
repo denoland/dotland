@@ -272,11 +272,11 @@ function ToC({
 export const handler: Handlers<Data> = {
   async GET(req, { params, render }) {
     const url = new URL(req.url);
-    if (!params.path) {
-      params.path = "introduction";
-    }
-    if (!params.version) {
-      url.pathname = `/manual@${versions[0]}/${params.path}`;
+    const { version, path } = params;
+    if (!version || !path) {
+      url.pathname = `/manual@${version || versions[0]}/${
+        path || "introduction"
+      }`;
       return Response.redirect(url);
     }
     if (url.pathname.endsWith(".md")) {
@@ -284,7 +284,6 @@ export const handler: Handlers<Data> = {
       return Response.redirect(url);
     }
 
-    const version = params.version;
     const sourceURL = getFileURL(
       version,
       `/${params.path}`,
