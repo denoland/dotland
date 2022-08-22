@@ -41,7 +41,7 @@ export default function VersionSelect({ versions, selectedVersion }: {
             {selectedVersion}
           </option>
         )}
-        {Object.keys(versions).map((tag, index) => (
+        {Object.keys(versions).map((tag) => (
           <option key={tag} value={tag}>
             {tag}
           </option>
