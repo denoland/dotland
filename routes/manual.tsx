@@ -284,10 +284,7 @@ export const handler: Handlers<Data> = {
       return Response.redirect(url);
     }
 
-    const sourceURL = getFileURL(
-      version,
-      `/${params.path}`,
-    );
+    const sourceURL = getFileURL(version, `/${params.path}`);
     const [tableOfContents, content] = await Promise.all([
       getTableOfContents(version),
       fetch(sourceURL)
