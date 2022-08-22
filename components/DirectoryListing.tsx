@@ -45,10 +45,10 @@ export function DirectoryListing(props: {
           </div>
           <div class={tw`inline-flex items-center`}>
             <a href={props.repositoryURL} class={tw`link ml-4`}>
-              Repository
+              仓库
             </a>
             <div class={tw`ml-4`}>
-              <a href={doc.href} class={tw`link`}>Documentation</a>
+              <a href={doc.href} class={tw`link`}>文档</a>
             </div>
           </div>
         </div>
