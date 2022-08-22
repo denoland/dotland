@@ -84,32 +84,6 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
         <link rel="canonical" href={`https://deno.land/manual${path}`} />
       </Head>
       <Header selected="手册" manual />
-
-<<<<<<< HEAD
-      <div>
-        <input
-          type="checkbox"
-          id="ToCToggle"
-          class={tw`hidden checked:siblings:last-child:children:first-child:flex checked:sibling:(border-0 children:children:first-child:rotate-90)`}
-          autoComplete="off"
-        />
-
-        <label
-          htmlFor="ToCToggle"
-          class={tw`lg:hidden block pl-5 py-2.5 font-medium border-b border-dark-border`}
-        >
-          <div class={tw`flex gap-2 items-center px-1.5`}>
-            <Icons.ArrowRight class="text-gray-400" />
-            菜单
-          </div>
-        </label>
-
-        <div
-          class={tw`flex flex-col mt-0 mb-16 lg:(flex-row mt-12 gap-12 section-x-inset-xl)`}
-        >
-          <div
-            class={tw`hidden pb-2 w-full border-b border-dark-border lg:(pb-0 border-none block w-72 flex-shrink-0)`}
-=======
       <SidePanelPage
         sidepanel={
           <>
@@ -136,9 +110,8 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
           <a
             href={getDocURL(version, path)}
             class={tw`float-right py-2.5 px-4.5 rounded-md bg-[#F3F3F3] hover:bg-dark-border leading-none font-medium`}
->>>>>>> 3dec26d7508f59054b673d9e25a15580940b17ee
           >
-            Edit
+            编辑
           </a>
 
           <Markdown
