@@ -11,7 +11,7 @@ export function SidePanelPage({ children, sidepanel }: {
   sidepanel?: ComponentChildren;
 }) {
   return (
-    <>
+    <div>
       {sidepanel && (
         <>
           <input
@@ -55,6 +55,6 @@ export function SidePanelPage({ children, sidepanel }: {
           {children}
         </main>
       </div>
-    </>
+    </div>
   );
 }
