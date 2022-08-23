@@ -71,7 +71,7 @@ Deno.test({
   sanitizeResources: false, // TODO(@crowlKats): this shouldnt be required, something wrong with fetch resource consumption
   async fn() {
     const res = await handleRequest(
-      new Request("https://deno.land/std@0.127.0/version.ts?code", {
+      new Request("https://deno.land/std@0.127.0/version.ts?source", {
         headers: { Accept: BROWSER_ACCEPT },
       }),
     );
@@ -129,7 +129,7 @@ Deno.test({
 
 Deno.test({
   name:
-    "/std@0.127.0/fs/mod.ts:5:3 with Accept: 'text/html' responds with codeview and line number redirect",
+    "/std@0.127.0/fs/mod.ts:5:3 with Accept: 'text/html' responds with sourceview and line number redirect",
   async fn() {
     const res = await handleRequest(
       new Request("https://deno.land/std@0.127.0/fs/mod.ts:5:3", {
@@ -139,7 +139,7 @@ Deno.test({
     assertEquals(res.status, 302);
     assert(
       res.headers.get("Location")?.includes(
-        "/std@0.127.0/fs/mod.ts?code=#L5",
+        "/std@0.127.0/fs/mod.ts?source=#L5",
       ),
     );
     await res.text();

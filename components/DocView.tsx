@@ -19,21 +19,14 @@ import {
 import { SidePanelPage } from "./SidePanelPage.tsx";
 
 export function DocView({
-  isStd,
   name,
   version,
   path,
   url,
 
   data,
-}: CommonProps & {
-  data: DocPageSymbol | DocPageModule | DocPageIndex;
-}) {
-  const basePath = getBasePath({
-    isStd,
-    name,
-    version,
-  });
+}: CommonProps<DocPageSymbol | DocPageModule | DocPageIndex>) {
+  const basePath = getBasePath(name, version);
   url.search = "";
 
   return (
@@ -51,7 +44,7 @@ export function DocView({
         )
         : null}
     >
-      <div class={tw`space-y-12 flex flex-col gap-4 w-full`}>
+      <div class={tw`w-full`}>
         {(() => {
           switch (data.kind) {
             case "index":
@@ -83,18 +76,6 @@ export function DocView({
               );
           }
         })()}
-
-        {data.kind === "index" && data.readme && (
-          <FileDisplay
-            isStd={isStd}
-            version={version}
-            raw={data.readme.content}
-            canonicalPath={data.readme.canonicalPath}
-            sourceURL={data.readme.url}
-            repositoryURL={data.readme.repositoryURL}
-            url={url}
-          />
-        )}
       </div>
     </SidePanelPage>
   );

@@ -10,18 +10,21 @@ import twas from "$twas";
 import { emojify } from "$emoji";
 import { accepts } from "$oak_commons";
 import {
-  type CodePage,
   type DocPage,
   type DocPageIndex,
   type DocPageModule,
   type DocPageSymbol,
   extractAltLineNumberReference,
   fetchSource,
+  getBasePath,
   getModulePath,
   getRawFile,
   getReadme,
   getRepositoryURL,
   getVersionList,
+  type InfoPage,
+  type ModInfoPage,
+  type SourcePage,
 } from "@/util/registry_utils.ts";
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
@@ -29,9 +32,13 @@ import { ErrorMessage } from "@/components/ErrorMessage.tsx";
 import { DocView } from "@/components/DocView.tsx";
 import * as Icons from "@/components/Icons.tsx";
 import VersionSelect from "@/islands/VersionSelect.tsx";
-import { CodeView } from "@/components/CodeView.tsx";
+import { SourceView } from "@/components/SourceView.tsx";
 import { PopularityTag } from "@/components/PopularityTag.tsx";
+import { SidePanelPage } from "@/components/SidePanelPage.tsx";
+import { Tag } from "@/components/Tag.tsx";
+import { Readme } from "@/components/FileDisplay.tsx";
 
+type Views = "doc" | "source" | "info";
 type Params = {
   name: string;
   version: string;
@@ -39,8 +46,9 @@ type Params = {
 };
 
 type Data =
-  | { data: DocPage; isCode: false }
-  | { data: CodePage; isCode: true };
+  | { data: DocPage; view: "doc" }
+  | { data: SourcePage; view: "source" }
+  | { data: InfoPage; view: "info" };
 type MaybeData =
   | Data
   | null;
@@ -75,10 +83,16 @@ export default function Registry({ params, url, data }: PageProps<MaybeData>) {
           )
           : (
             <>
-              <TopPanel
-                version={version!}
-                {...{ name, path, isStd, ...data }}
-              />
+              {data.data.kind !== "modinfo" && (
+                <TopPanel
+                  version={version!}
+                  {...{
+                    name,
+                    path,
+                    ...data,
+                  }}
+                />
+              )}
               <ModuleView
                 version={version!}
                 {...{ name, path, isStd, url, data }}
@@ -95,14 +109,12 @@ function TopPanel({
   name,
   version,
   path,
-  isStd,
   data,
-  isCode,
+  view,
 }: {
   name: string;
   version: string;
   path: string;
-  isStd: boolean;
 } & Data) {
   const hasPageBase = data.kind !== "invalid-version" &&
     data.kind !== "no-versions";
@@ -117,13 +129,7 @@ function TopPanel({
           class={tw`flex flex-col md:(flex-row items-center) justify-between w-full gap-4`}
         >
           <div class={tw`overflow-hidden`}>
-            <Breadcrumbs
-              name={name}
-              version={version}
-              path={path}
-              isStd={isStd}
-              isCode={isCode}
-            />
+            <Breadcrumbs name={name} path={path} view={view} />
 
             {data.kind !== "no-versions" && data.description &&
               (
@@ -142,8 +148,8 @@ function TopPanel({
               <div
                 class={tw`flex flex-row justify-between md:justify-center items-center gap-4 border border-dark-border rounded-md bg-white py-2 px-5`}
               >
-                <div class={tw`flex items-center whitespace-nowrap`}>
-                  <Icons.GitHub class="mr-2 w-5 h-5 inline text-gray-700" />
+                <div class={tw`flex items-center whitespace-nowrap gap-2`}>
+                  <Icons.GitHub class="w-5 h-5 inline text-gray-700" />
                   <a
                     class={tw`link`}
                     href={`https://github.com/${data.upload_options.repository}`}
@@ -214,9 +220,11 @@ function ModuleView({
     data.data.kind === "index" ? "tree" : undefined,
   );
 
-  if (data.isCode) {
+  if (data.view === "info") {
+    return <InfoView version={version!} data={data.data} name={name} />;
+  } else if (data.view === "source") {
     return (
-      <CodeView
+      <SourceView
         {...{
           isStd,
           name,
@@ -247,26 +255,25 @@ function ModuleView({
 
 function Breadcrumbs({
   name,
-  version,
   path,
-  isStd,
-  isCode,
+  view,
 }: {
   name: string;
-  version: string | undefined;
   path: string;
-  isStd: boolean;
-  isCode: boolean;
+  view: Views;
 }) {
   const segments = path.split("/").splice(1);
-  segments.unshift(name + (version ? `@${version}` : ""));
-  if (!isStd) {
+  segments.unshift(name);
+  if (name !== "std") {
     segments.unshift("x");
   }
 
   let seg = "";
   const out: [string, string][] = [];
   for (const segment of segments) {
+    if (segment === "") {
+      continue;
+    }
     seg += "/" + segment;
     out.push([segment, seg]);
   }
@@ -274,8 +281,8 @@ function Breadcrumbs({
   return (
     <p class={tw`text-xl leading-6 font-bold text-gray-400`}>
       {out.map(([seg, url], i) => {
-        if (isCode) {
-          url += "?code";
+        if (view === "source") {
+          url += "?source";
         }
         return (
           <Fragment key={i}>
@@ -323,6 +330,139 @@ function VersionSelector({
         </a>
       )}
     </>
+  );
+}
+
+function InfoView(
+  { name, data, version }: {
+    name: string;
+    version: string;
+    data: ModInfoPage;
+  },
+) {
+  const popularityTag = data.tags?.find((tag) => tag.kind === "popularity");
+  return (
+    <SidePanelPage
+      sidepanel={
+        <div class={tw`space-y-6 children:space-y-2`}>
+          <div class={tw`overflow-hidden space-y-0!`}>
+            <Breadcrumbs name={name} path="/" view="info" />
+
+            {data.description &&
+              (
+                <div
+                  class={tw`text-sm lg:truncate`}
+                  title={emojify(data.description)}
+                >
+                  {emojify(data.description)}
+                </div>
+              )}
+          </div>
+
+          <div>
+            <a
+              href={getBasePath(name, version) + "?doc"}
+              class={tw`rounded-md px-4.5 py-2.5 inline-flex items-center gap-1.5 leading-none font-medium text-white bg-default hover:bg-light`}
+            >
+              <Icons.Manual />
+              <div>View Documentation</div>
+            </a>
+            <a
+              href={getBasePath(name, version) + "?source"}
+              class={tw`rounded-md px-4.5 py-2.5 inline-flex items-center gap-1.5 leading-none font-medium text-default bg-[#F3F3F3] hover:bg-dark-border`}
+            >
+              <Icons.Source />
+              <div>View Source</div>
+            </a>
+          </div>
+
+          {data.upload_options && (
+            <div>
+              <div class={tw`text-gray-400 font-medium text-sm leading-4`}>
+                Repository
+              </div>
+              <div
+                class={tw`inline-flex justify-between md:justify-center items-center gap-1.5 border border-dark-border rounded-md bg-white py-2 px-4 whitespace-nowrap`}
+              >
+                <Icons.GitHub class="w-5 h-5 inline text-gray-700" />
+                <a
+                  class={tw`link`}
+                  href={`https://github.com/${data.upload_options.repository}`}
+                >
+                  {data.upload_options.repository}
+                </a>
+              </div>
+            </div>
+          )}
+
+          <div class={tw`space-y-2.5!`}>
+            <div class={tw`text-gray-400 font-medium text-sm leading-4`}>
+              Attributes
+            </div>
+            {popularityTag && name !== "std" && (
+              <PopularityTag>{popularityTag.value}</PopularityTag>
+            )}
+            {data.upload_options?.repository.split("/")[0] == "denoland" && (
+              <div class={tw`flex items-center gap-1.5`}>
+                <Icons.CheckmarkVerified />
+                <span class={tw`text-tag-blue font-medium leading-none`}>
+                  By Deno Team
+                </span>
+              </div>
+            )}
+            {data.config && (
+              <div class={tw`flex items-center gap-1.5`}>
+                <Icons.Logo />
+                <span class={tw`text-gray-600 font-medium leading-none`}>
+                  Includes deno.json
+                </span>
+              </div>
+            )}
+          </div>
+
+          <div>
+            <div class={tw`text-gray-400 font-medium text-sm leading-4`}>
+              Current version released
+            </div>
+            <div title={data.uploaded_at}>
+              {twas(new Date(data.uploaded_at))}
+            </div>
+          </div>
+
+          <div>
+            <div class={tw`text-gray-400 font-medium text-sm leading-4`}>
+              Versions
+            </div>
+            <ol
+              class={tw`border border-secondary rounded-lg list-none overflow-y-scroll h-80`}
+            >
+              {data.versions.map((version) => (
+                <li class={tw`odd:(bg-ultralight rounded-md)`}>
+                  <a
+                    class={tw`flex px-5 py-2 font-medium link`}
+                    href={getBasePath(name, version)}
+                  >
+                    <span class={tw`block w-full truncate`}>{version}</span>
+                    {version === data.latest_version && (
+                      <Tag color="blue">Latest</Tag>
+                    )}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      }
+    >
+      {data.readmeFile && (
+        <Readme
+          isStd={name === "std"}
+          version={version}
+          raw={data.readmeFile.content}
+          sourceURL={data.readmeFile.url}
+        />
+      )}
+    </SidePanelPage>
   );
 }
 
@@ -386,15 +526,25 @@ export const handler: Handlers<MaybeData> = {
       }
     }
 
-    const isCode = url.searchParams.has("code");
+    let view: Views;
+    if (url.searchParams.has("source")) {
+      view = "source";
+    } else if (url.searchParams.has("doc")) {
+      view = "doc";
+    } else if (!path) {
+      view = "info";
+    } else {
+      view = "doc";
+    }
 
-    const symbol = url.searchParams.get("s");
     const resURL = new URL(
-      `https://apiland.deno.dev/v2/pages/${isCode ? "code" : "doc"}/${name}/${
+      `https://apiland.deno.dev/v2/pages/mod/${view}/${name}/${
         version || "__latest__"
       }/${path}`,
     );
-    if (symbol && !isCode) {
+
+    const symbol = url.searchParams.get("s");
+    if (symbol && view === "doc") {
       resURL.searchParams.set("symbol", symbol);
     }
 
@@ -435,39 +585,30 @@ export const handler: Handlers<MaybeData> = {
         status: 301,
       });
     } else {
-      data = { data: await res.json(), isCode };
+      data = { data: await res.json(), view };
     }
 
     if (data.data.kind === "no-versions") {
       return render!(data);
     }
 
-    if (!data.isCode && data.data.kind === "file") {
-      url.searchParams.set("code", "");
+    if (data.view === "doc" && data.data.kind === "file") {
+      url.searchParams.set("source", "");
       return Response.redirect(url, 301);
     }
 
     const ln = extractAltLineNumberReference(url.pathname);
     if (ln) {
       url.pathname = ln.rest;
-      url.searchParams.set("code", "");
+      url.searchParams.set("source", "");
       url.hash = "L" + ln.line;
       return Response.redirect(url, 302);
     }
 
-    if (data.data.kind === "index" || data.data.kind === "dir") {
-      data.data.readme = await getReadme(
-        name,
-        version,
-        data.data.kind === "index" ? data.data.items : data.data.entries,
-        data.data.upload_options,
-      );
-    } else if (data.isCode && data.data.kind === "file") {
-      data.data.file = await getRawFile(
-        name,
-        version,
-        path ? `/${path}` : "",
-      );
+    if (data.data.kind === "modinfo" && data.data.readme) {
+      data.data.readmeFile = await getReadme(name, version, data.data.readme);
+    } else if (data.view === "source" && data.data.kind === "file") {
+      data.data.file = await getRawFile(name, version, path ? `/${path}` : "");
     }
 
     return render!(data);

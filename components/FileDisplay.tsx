@@ -26,11 +26,8 @@ export function FileDisplay(props: {
   const filetype = props.filetypeOverride ?? fileTypeFromURL(props.sourceURL);
   const filename = fileNameFromURL(props.sourceURL);
 
-  let doc = new URL(props.url);
-  doc.searchParams.delete("code");
-  if (!props.isStd) {
-    doc = new URL("https://doc.deno.land/" + doc.href);
-  }
+  const doc = new URL(props.url);
+  doc.searchParams.delete("source");
 
   const isRaw = props.url.searchParams.has("raw");
   const raw = new URL(props.url);
@@ -137,9 +134,9 @@ export function FileDisplay(props: {
               <RawCodeBlock
                 code={props.raw!}
                 language="markdown"
-                enableLineRef={true}
                 class={tw`p-2 sm:px-3 md:px-4`}
                 url={props.url}
+                enableLineRef
               />
             );
           case "markdown": {
@@ -148,9 +145,9 @@ export function FileDisplay(props: {
                 <RawCodeBlock
                   code={props.raw!}
                   language="markdown"
-                  enableLineRef={true}
                   class={tw`p-2 sm:px-3 md:px-4`}
                   url={props.url}
+                  enableLineRef
                 />
               );
             } else {
@@ -172,13 +169,35 @@ export function FileDisplay(props: {
               <RawCodeBlock
                 code={props.raw!}
                 language="text"
-                enableLineRef={true}
                 class={tw`p-2 sm:px-3 md:px-4`}
                 url={props.url}
+                enableLineRef
               />
             );
         }
       })()}
+    </div>
+  );
+}
+
+export function Readme(props: {
+  isStd: boolean;
+  version: string;
+  raw?: string;
+  sourceURL: string;
+}) {
+  const filename = fileNameFromURL(props.sourceURL);
+  return (
+    <div class={tw`space-y-6`}>
+      <div class={tw`flex items-center gap-2`}>
+        <Icons.Book />
+        <span class={tw`text-xl leading-none font-semibold`}>{filename}</span>
+      </div>
+      <Markdown
+        source={props.isStd
+          ? props.raw!
+          : props.raw!.replace(/\$STD_VERSION/g, props.version)}
+      />
     </div>
   );
 }

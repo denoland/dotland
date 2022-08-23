@@ -4,31 +4,24 @@
 import { h } from "preact";
 import { tw } from "@twind";
 import {
-  type CodePageDirEntry,
   getBasePath,
   isReadme,
+  type SourcePageDirEntry,
 } from "@/util/registry_utils.ts";
 import * as Icons from "./Icons.tsx";
 
 export function DirectoryListing(props: {
-  items: CodePageDirEntry[];
+  items: SourcePageDirEntry[];
   name: string;
   version: string;
   path: string;
   repositoryURL: string;
   url: URL;
 }) {
-  const isStd = props.url.pathname.startsWith("/std");
-  const basePath = getBasePath({
-    isStd,
-    name: props.name,
-    version: props.version,
-  });
-
-  let doc = new URL(props.url);
-  doc.searchParams.delete("code");
-  if (!isStd) {
-    doc = new URL("https://doc.deno.land/" + doc.href);
+  const doc = new URL(props.url);
+  doc.searchParams.delete("source");
+  if (props.path === "") {
+    doc.searchParams.set("doc", "");
   }
 
   return (
@@ -57,7 +50,7 @@ export function DirectoryListing(props: {
           items={props.items}
           path={props.path}
           url={props.url}
-          baseURL={basePath}
+          baseURL={getBasePath(props.name, props.version)}
         />
       </div>
     </div>
@@ -67,13 +60,13 @@ export function DirectoryListing(props: {
 const HIDDEN_REGEX = /^\/\..*$/;
 
 export function DirectoryView(props: {
-  items: CodePageDirEntry[];
+  items: SourcePageDirEntry[];
   path: string;
   url: URL;
   baseURL: string;
 }) {
-  const show: CodePageDirEntry[] = [];
-  const hidden: CodePageDirEntry[] = [];
+  const show: SourcePageDirEntry[] = [];
+  const hidden: SourcePageDirEntry[] = [];
 
   // prioritize dirs and ignore order of other kinds,
   // and secondarily order by path alphabetically
@@ -91,8 +84,8 @@ export function DirectoryView(props: {
     }
   }
 
-  const buildEntryURL = (path: string, item: CodePageDirEntry): string => {
-    return `${props.baseURL}${item.path}?code`;
+  const buildEntryURL = (path: string, item: SourcePageDirEntry): string => {
+    return `${props.baseURL}${item.path}?source`;
   };
 
   return (
@@ -173,7 +166,7 @@ function TableRow({
   isLastItem,
   isHidden,
 }: {
-  item: CodePageDirEntry;
+  item: SourcePageDirEntry;
   key: number;
   href: string;
   isLastItem: boolean;
