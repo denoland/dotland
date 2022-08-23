@@ -55,7 +55,7 @@ export const handler: Handlers<MaybeData> = {
     }
 
     const isHTML = accepts(req, "application/*", "text/html") === "text/html";
-    if (!isHTML) return handlerRaw(req, params);
+    if (!isHTML) return handlerRaw(req, params as Params);
 
     const isCode = url.searchParams.has("code");
 
