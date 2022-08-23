@@ -415,7 +415,7 @@ function InfoView(
               <div class={tw`flex items-center gap-1.5`}>
                 <Icons.Logo />
                 <span class={tw`text-gray-600 font-medium leading-none`}>
-                  Includes deno.json
+                  Includes Deno configuration
                 </span>
               </div>
             )}
