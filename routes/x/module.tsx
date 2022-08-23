@@ -31,6 +31,19 @@ import VersionSelect from "@/islands/VersionSelect.tsx";
 import { CodeView } from "@/components/CodeView.tsx";
 import { PopularityTag } from "@/components/PopularityTag.tsx";
 
+type Params = {
+  name: string;
+  version: string;
+  path: string;
+};
+
+type Data =
+  | { data: DocPage; isCode: false }
+  | { data: CodePage; isCode: true };
+type MaybeData =
+  | Data
+  | null;
+
 export const handler: Handlers<MaybeData> = {
   async GET(req, { params, render }) {
     const { name, version, path } = params as Params;
@@ -169,18 +182,6 @@ async function handlerRaw(
 
   return fetchSource(name, version, path);
 }
-type Params = {
-  name: string;
-  version: string;
-  path: string;
-};
-
-type Data =
-  | { data: DocPage; isCode: false }
-  | { data: CodePage; isCode: true };
-type MaybeData =
-  | Data
-  | null;
 
 export default function Registry({ params, url, data }: PageProps<MaybeData>) {
   let {
