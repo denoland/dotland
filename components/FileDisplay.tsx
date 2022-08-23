@@ -185,6 +185,7 @@ export function Readme(props: {
   version: string;
   raw?: string;
   sourceURL: string;
+  baseURL: string;
 }) {
   const filename = fileNameFromURL(props.sourceURL);
   return (
@@ -197,6 +198,7 @@ export function Readme(props: {
         source={props.isStd
           ? props.raw!
           : props.raw!.replace(/\$STD_VERSION/g, props.version)}
+        baseUrl={props.baseURL}
       />
     </div>
   );

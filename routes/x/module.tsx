@@ -22,6 +22,7 @@ import {
   getReadme,
   getRepositoryURL,
   getVersionList,
+  getSourceURL,
   type InfoPage,
   type ModInfoPage,
   type SourcePage,
@@ -460,6 +461,7 @@ function InfoView(
           version={version}
           raw={data.readmeFile.content}
           sourceURL={data.readmeFile.url}
+          baseURL={getSourceURL(name, version, "/")}
         />
       )}
     </SidePanelPage>
