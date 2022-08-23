@@ -6,7 +6,6 @@ import { Fragment, h } from "preact";
 import { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
-import twas from "$twas";
 import { emojify } from "$emoji";
 import { accepts } from "$oak_commons";
 import {
@@ -44,6 +43,145 @@ type Data =
 type MaybeData =
   | Data
   | null;
+
+export const handler: Handlers<MaybeData> = {
+  async GET(req, { params, render }) {
+    const { name, version, path } = params as Params;
+    const url = new URL(req.url);
+
+    if (name === "std" && url.pathname.startsWith("/x")) {
+      url.pathname = url.pathname.slice(2);
+      return Response.redirect(url, 301);
+    }
+
+    const isHTML = accepts(req, "application/*", "text/html") === "text/html";
+    if (!isHTML) return handlerRaw(req, params as Params);
+
+    const isCode = url.searchParams.has("code");
+
+    const symbol = url.searchParams.get("s");
+    const resURL = new URL(
+      `https://apiland.deno.dev/v2/pages/${isCode ? "code" : "doc"}/${name}/${
+        version || "__latest__"
+      }/${path}`,
+    );
+    if (symbol && !isCode) {
+      resURL.searchParams.set("symbol", symbol);
+    }
+
+    let data: Data;
+
+    const res = await fetch(resURL, {
+      redirect: "manual",
+    });
+    if (res.status === 404) { // module doesnt exist
+      return render(null);
+    } else if (res.status === 302) { // implicit latest
+      const latestVersion = res.headers.get("X-Deno-Latest-Version")!;
+      console.log(getModulePath(
+        name,
+        latestVersion,
+        path ? ("/" + path) : undefined,
+      ));
+      return Response.redirect(
+        new URL(
+          getModulePath(
+            name,
+            latestVersion,
+            path ? ("/" + path) : undefined,
+          ),
+          url,
+        ),
+      );
+    } else if (res.status === 301) { // path is directory and there is an index module and its doc
+      const newPath = res.headers.get("X-Deno-Module-Path")!;
+      return new Response(undefined, {
+        headers: {
+          Location: getModulePath(
+            name,
+            version,
+            newPath,
+          ),
+        },
+        status: 301,
+      });
+    } else {
+      data = { data: await res.json(), isCode };
+    }
+
+    if (data.data.kind === "no-versions") {
+      return render!(data);
+    }
+
+    if (!data.isCode && data.data.kind === "file") {
+      url.searchParams.set("code", "");
+      return Response.redirect(url, 301);
+    }
+
+    const ln = extractAltLineNumberReference(url.pathname);
+    if (ln) {
+      url.pathname = ln.rest;
+      url.searchParams.set("code", "");
+      url.hash = "L" + ln.line;
+      return Response.redirect(url, 302);
+    }
+
+    if (data.data.kind === "index" || data.data.kind === "dir") {
+      data.data.readme = await getReadme(
+        name,
+        version,
+        data.data.kind === "index" ? data.data.items : data.data.entries,
+        data.data.upload_options,
+      );
+    } else if (data.isCode && data.data.kind === "file") {
+      data.data.file = await getRawFile(
+        name,
+        version,
+        path ? `/${path}` : "",
+      );
+    }
+
+    return render!(data);
+  },
+};
+
+const RAW_HEADERS = { "Access-Control-Allow-Origin": "*" };
+
+// Note: this function is _very_ hot. It is called for every download of a /x/
+// module. We need to be careful about what we do here. This code must not rely
+// on any services other than S3.
+async function handlerRaw(
+  req: Request,
+  { name, version, path }: Params,
+): Promise<Response> {
+  if (version === "") {
+    const versions = await getVersionList(name);
+    if (versions === null) {
+      return new Response(`The module '${name}' does not exist`, {
+        status: 404,
+        headers: RAW_HEADERS,
+      });
+    }
+    if (versions.latest === null) {
+      return new Response(`The module '${name}' has no latest version.`, {
+        status: 404,
+        headers: RAW_HEADERS,
+      });
+    }
+    if (path) path = `/${path}`;
+    return new Response(undefined, {
+      status: 302,
+      headers: {
+        ...RAW_HEADERS,
+        Location: getModulePath(name, versions.latest, path),
+        "x-deno-warning":
+          `Implicitly using latest version (${versions.latest}) for ${req.url}`,
+      },
+    });
+  }
+
+  return fetchSource(name, version, path);
+}
 
 export default function Registry({ params, url, data }: PageProps<MaybeData>) {
   let {
@@ -325,154 +463,6 @@ function VersionSelector({
     </>
   );
 }
-
-export const handler: Handlers<MaybeData> = {
-  async GET(req, { params, render }) {
-    const { name, version, path } = params as Params;
-    const url = new URL(req.url);
-
-    if (name === "std" && url.pathname.startsWith("/x")) {
-      url.pathname = url.pathname.slice(2);
-      return Response.redirect(url, 301);
-    }
-
-    const isHTML = accepts(req, "application/*", "text/html") === "text/html";
-    if (!isHTML) {
-      const versions = await getVersionList(params.name);
-
-      if (versions === null) {
-        return new Response(`The module '${name}' does not exist`, {
-          status: 404,
-        });
-      } else if (versions.latest === null) {
-        return new Response(
-          `The module '${name}' has no latest version`,
-          {
-            status: 404,
-            headers: {
-              "content-type": "text/plain",
-              "Access-Control-Allow-Origin": "*",
-            },
-          },
-        );
-      } else if (!version) {
-        return new Response(undefined, {
-          headers: {
-            Location: getModulePath(
-              name,
-              versions.latest,
-              path ? ("/" + path) : undefined,
-            ),
-            "x-deno-warning":
-              `Implicitly using latest version (${versions.latest}) for ${url.href}`,
-            "Access-Control-Allow-Origin": "*",
-          },
-          status: 302,
-        });
-      }
-      if (!versions.versions.includes(version)) {
-        return new Response(
-          `The version '${version}' does not exist in the module '${name}'`,
-          {
-            status: 404,
-            headers: {
-              "content-type": "text/plain",
-              "Access-Control-Allow-Origin": "*",
-            },
-          },
-        );
-      } else {
-        return fetchSource(name, version, path);
-      }
-    }
-
-    const isCode = url.searchParams.has("code");
-
-    const symbol = url.searchParams.get("s");
-    const resURL = new URL(
-      `https://apiland.deno.dev/v2/pages/${isCode ? "code" : "doc"}/${name}/${
-        version || "__latest__"
-      }/${path}`,
-    );
-    if (symbol && !isCode) {
-      resURL.searchParams.set("symbol", symbol);
-    }
-
-    let data: Data;
-
-    const res = await fetch(resURL, {
-      redirect: "manual",
-    });
-    if (res.status === 404) { // module doesnt exist
-      return render(null);
-    } else if (res.status === 302) { // implicit latest
-      const latestVersion = res.headers.get("X-Deno-Latest-Version")!;
-      console.log(getModulePath(
-        name,
-        latestVersion,
-        path ? ("/" + path) : undefined,
-      ));
-      return Response.redirect(
-        new URL(
-          getModulePath(
-            name,
-            latestVersion,
-            path ? ("/" + path) : undefined,
-          ),
-          url,
-        ),
-      );
-    } else if (res.status === 301) { // path is directory and there is an index module and its doc
-      const newPath = res.headers.get("X-Deno-Module-Path")!;
-      return new Response(undefined, {
-        headers: {
-          Location: getModulePath(
-            name,
-            version,
-            newPath,
-          ),
-        },
-        status: 301,
-      });
-    } else {
-      data = { data: await res.json(), isCode };
-    }
-
-    if (data.data.kind === "no-versions") {
-      return render!(data);
-    }
-
-    if (!data.isCode && data.data.kind === "file") {
-      url.searchParams.set("code", "");
-      return Response.redirect(url, 301);
-    }
-
-    const ln = extractAltLineNumberReference(url.pathname);
-    if (ln) {
-      url.pathname = ln.rest;
-      url.searchParams.set("code", "");
-      url.hash = "L" + ln.line;
-      return Response.redirect(url, 302);
-    }
-
-    if (data.data.kind === "index" || data.data.kind === "dir") {
-      data.data.readme = await getReadme(
-        name,
-        version,
-        data.data.kind === "index" ? data.data.items : data.data.entries,
-        data.data.upload_options,
-      );
-    } else if (data.isCode && data.data.kind === "file") {
-      data.data.file = await getRawFile(
-        name,
-        version,
-        path ? `/${path}` : "",
-      );
-    }
-
-    return render!(data);
-  },
-};
 
 export const config: RouteConfig = {
   routeOverride: "/x/:name{@:version}?/:path*",
