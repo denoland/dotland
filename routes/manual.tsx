@@ -8,7 +8,7 @@ import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
 import { Handlers } from "$fresh/server.ts";
 import { Header } from "@/components/Header.tsx";
-import { Footer } from "@/components/Footer.tsx";
+import { Footer } from "$deno_components/footer.tsx";
 import { Markdown } from "@/components/Markdown.tsx";
 import * as Icons from "@/components/Icons.tsx";
 import { SidePanelPage } from "@/components/SidePanelPage.tsx";

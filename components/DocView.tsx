@@ -6,11 +6,11 @@ import { Fragment, h } from "preact";
 import { tw } from "@twind";
 import { type CommonProps, getBasePath } from "@/util/registry_utils.ts";
 import { dirname } from "$std/path/mod.ts";
-import { ModuleDoc } from "$doc_components/module_doc.tsx";
-import { ModulePathIndex } from "$doc_components/module_path_index.tsx";
-import { ModulePathIndexPanel } from "$doc_components/module_path_index_panel.tsx";
 import { FileDisplay } from "./FileDisplay.tsx";
-import { SymbolDoc } from "$doc_components/symbol_doc.tsx";
+import { ModuleDoc } from "$deno_components/doc/module_doc.tsx";
+import { ModulePathIndex } from "$deno_components/doc/module_path_index.tsx";
+import { ModulePathIndexPanel } from "$deno_components/doc/module_path_index_panel.tsx";
+import { SymbolDoc } from "$deno_components/doc/symbol_doc.tsx";
 import {
   DocPageIndex,
   DocPageModule,

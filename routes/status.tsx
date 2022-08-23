@@ -7,7 +7,7 @@ import { Head } from "$fresh/runtime.ts";
 import { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
 import { tw } from "@twind";
 import { Header } from "@/components/Header.tsx";
-import { Footer } from "@/components/Footer.tsx";
+import { Footer } from "$deno_components/footer.tsx";
 import { Build, getBuild } from "@/util/registry_utils.ts";
 import { ErrorMessage } from "@/components/ErrorMessage.tsx";
 import * as Icons from "@/components/Icons.tsx";

@@ -8,7 +8,7 @@ import {
 import { extractAltLineNumberReference } from "@/util/registry_utils.ts";
 import { ServerContext } from "$fresh/server.ts";
 import { Fragment, h } from "preact";
-import { setup } from "$doc_components/services.ts";
+import { setup } from "$deno_components/services.ts";
 
 import manifest from "@/fresh.gen.ts";
 import options from "@/options.ts";

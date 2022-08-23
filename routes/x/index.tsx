@@ -10,7 +10,7 @@ import { Handlers } from "$fresh/server.ts";
 import { emojify } from "$emoji";
 
 import { Header } from "@/components/Header.tsx";
-import { Footer } from "@/components/Footer.tsx";
+import { Footer } from "$deno_components/footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
 import * as Icons from "@/components/Icons.tsx";
 import { CodeBlock } from "@/components/CodeBlock.tsx";

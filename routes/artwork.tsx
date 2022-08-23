@@ -5,7 +5,7 @@
 import { Fragment, h } from "preact";
 import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
-import { Footer } from "@/components/Footer.tsx";
+import { Footer } from "$deno_components/footer.tsx";
 import { Header } from "@/components/Header.tsx";
 import * as Icons from "@/components/Icons.tsx";
 

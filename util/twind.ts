@@ -41,9 +41,6 @@ export const config: Configuration = {
         "tag-blue": "#056CF0",
         "tag-blue2": "#448bef",
       },
-      opacity: {
-        15: ".15",
-      },
       spacing: {
         1.75: "0.4375rem",
         4.5: "1.125rem",

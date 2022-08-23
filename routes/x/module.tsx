@@ -24,13 +24,13 @@ import {
   getVersionList,
 } from "@/util/registry_utils.ts";
 import { Header } from "@/components/Header.tsx";
-import { Footer } from "@/components/Footer.tsx";
 import { ErrorMessage } from "@/components/ErrorMessage.tsx";
 import { DocView } from "@/components/DocView.tsx";
 import * as Icons from "@/components/Icons.tsx";
 import VersionSelect from "@/islands/VersionSelect.tsx";
 import { CodeView } from "@/components/CodeView.tsx";
 import { PopularityTag } from "@/components/PopularityTag.tsx";
+import { Footer } from "$deno_components/footer.tsx";
 
 type Params = {
   name: string;

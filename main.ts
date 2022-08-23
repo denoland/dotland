@@ -13,7 +13,7 @@ import { Fragment, h } from "preact";
 import { serve } from "$std/http/server.ts";
 import { router } from "$router";
 import { withLog } from "./util/ga_utils.ts";
-import { setup } from "$doc_components/services.ts";
+import { setup } from "$deno_components/services.ts";
 
 import manifest from "./fresh.gen.ts";
 import options from "./options.ts";

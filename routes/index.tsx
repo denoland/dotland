@@ -6,7 +6,7 @@ import { Fragment, h } from "preact";
 import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
 import { CodeBlock } from "@/components/CodeBlock.tsx";
-import { Footer } from "@/components/Footer.tsx";
+import { Footer } from "$deno_components/footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
 import { Header } from "@/components/Header.tsx";
 import HelloBar from "@/islands/HelloBar.tsx";
