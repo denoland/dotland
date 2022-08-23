@@ -7,8 +7,8 @@ import { tw } from "@twind";
 import { FileDisplay } from "./FileDisplay.tsx";
 import { DirectoryListing } from "./DirectoryListing.tsx";
 import {
-  CodePageDir,
-  CodePageFile,
+  SourcePageDir,
+  SourcePageFile,
   CommonProps,
 } from "@/util/registry_utils.ts";
 
@@ -22,7 +22,7 @@ export function SourceView({
   repositoryURL,
 
   data,
-}: CommonProps<CodePageFile | CodePageDir>) {
+}: CommonProps<SourcePageFile | SourcePageDir>) {
   return (
     <main
       class={tw`mt-7 mb-16 lg:mt-12 space-y-12 section-x-inset-xl w-full overflow-auto focus:outline-none`}
