@@ -198,7 +198,7 @@ export function Readme(props: {
         source={props.isStd
           ? props.raw!
           : props.raw!.replace(/\$STD_VERSION/g, props.version)}
-        baseUrl={props.baseURL}
+        baseURL={props.baseURL}
       />
     </div>
   );
