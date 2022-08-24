@@ -340,8 +340,39 @@ function InfoView(
     data: ModInfoPage;
   },
 ) {
-  const popularityTag = data.tags?.find((tag) => tag.kind === "popularity");
   data.description &&= emojify(data.description);
+
+  const attributes = [];
+
+  const popularityTag = data.tags?.find((tag) => tag.kind === "popularity");
+  if (popularityTag && name !== "std") {
+    attributes.push(
+      <PopularityTag>{popularityTag.value}</PopularityTag>,
+    );
+  }
+
+  if (data.upload_options?.repository.split("/")[0] == "denoland") {
+    attributes.push(
+      <div class={tw`flex items-center gap-1.5`}>
+        <Icons.CheckmarkVerified />
+        <span class={tw`text-tag-blue font-medium leading-none`}>
+          By Deno Team
+        </span>
+      </div>,
+    );
+  }
+
+  if (data.config) {
+    attributes.push(
+      <div class={tw`flex items-center gap-1.5`}>
+        <Icons.Logo />
+        <span class={tw`text-gray-600 font-medium leading-none`}>
+          Includes Deno configuration
+        </span>
+      </div>,
+    );
+  }
+
   return (
     <SidePanelPage
       sidepanel={
@@ -384,30 +415,14 @@ function InfoView(
             </div>
           </div>
 
-          <div class={tw`space-y-2.5!`}>
-            <div class={tw`text-gray-400 font-medium text-sm leading-4`}>
-              Attributes
+          {attributes.length !== 0 && (
+            <div class={tw`space-y-2.5!`}>
+              <div class={tw`text-gray-400 font-medium text-sm leading-4`}>
+                Attributes
+              </div>
+              {attributes}
             </div>
-            {popularityTag && name !== "std" && (
-              <PopularityTag>{popularityTag.value}</PopularityTag>
-            )}
-            {data.upload_options?.repository.split("/")[0] == "denoland" && (
-              <div class={tw`flex items-center gap-1.5`}>
-                <Icons.CheckmarkVerified />
-                <span class={tw`text-tag-blue font-medium leading-none`}>
-                  By Deno Team
-                </span>
-              </div>
-            )}
-            {data.config && (
-              <div class={tw`flex items-center gap-1.5`}>
-                <Icons.Logo />
-                <span class={tw`text-gray-600 font-medium leading-none`}>
-                  Includes Deno configuration
-                </span>
-              </div>
-            )}
-          </div>
+          )}
 
           {data.upload_options && (
             <div>
@@ -464,16 +479,24 @@ function InfoView(
         </div>
       }
     >
-      {data.readmeFile && (
-        <div class={tw`p-6 rounded-xl border border-dark-border`}>
-          <Markdown
-            source={name === "std"
-              ? data.readmeFile.content!
-              : data.readmeFile.content!.replace(/\$STD_VERSION/g, version)}
-            baseURL={getSourceURL(name, version, "/")}
-          />
-        </div>
-      )}
+      <div class={tw`p-6 rounded-xl border border-dark-border`}>
+        {data.readmeFile
+          ? (
+            <Markdown
+              source={name === "std"
+                ? data.readmeFile.content!
+                : data.readmeFile.content!.replace(/\$STD_VERSION/g, version)}
+              baseURL={getSourceURL(name, version, "/")}
+            />
+          )
+          : (
+            <div
+              class={tw`flex items-center justify-center italic text-gray-400 -m-2`}
+            >
+              No readme found.
+            </div>
+          )}
+      </div>
     </SidePanelPage>
   );
 }
