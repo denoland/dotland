@@ -36,8 +36,7 @@ import VersionSelect from "@/islands/VersionSelect.tsx";
 import { SourceView } from "@/components/SourceView.tsx";
 import { PopularityTag } from "@/components/PopularityTag.tsx";
 import { SidePanelPage } from "@/components/SidePanelPage.tsx";
-import { Tag } from "@/components/Tag.tsx";
-import { Readme } from "@/components/FileDisplay.tsx";
+import { Markdown } from "@/components/Markdown.tsx";
 
 type Views = "doc" | "source" | "info";
 type Params = {
@@ -342,62 +341,48 @@ function InfoView(
   },
 ) {
   const popularityTag = data.tags?.find((tag) => tag.kind === "popularity");
+  data.description &&= emojify(data.description);
   return (
     <SidePanelPage
       sidepanel={
         <div class={tw`space-y-6 children:space-y-2`}>
-          <div class={tw`overflow-hidden space-y-0!`}>
-            <div class={tw`py-1 flex items-center gap-2.5`}>
-              <Breadcrumbs name={name} path="/" view="info" />
-              <Tag color="blue">{version}</Tag>
-            </div>
-
-            {data.description &&
-              (
-                <div
-                  class={tw`text-sm lg:truncate`}
-                  title={emojify(data.description)}
-                >
-                  {emojify(data.description)}
+          <div class={tw`space-y-4!`}>
+            <div class={tw`space-y-2`}>
+              <div class={tw`flex items-center gap-2.5`}>
+                <Breadcrumbs name={name} path="/" view="info" />
+                <div class={tw`tag bg-default-15 text-gray-600 font-semibold!`}>
+                  {version}
                 </div>
-              )}
-          </div>
-
-          <div>
-            <a
-              href={getBasePath(name, version) + "?doc"}
-              class={tw`rounded-md px-4.5 py-2.5 inline-flex items-center gap-1.5 leading-none font-medium text-white bg-default hover:bg-light`}
-            >
-              <Icons.Manual />
-              <div>View Documentation</div>
-            </a>
-            <a
-              href={getBasePath(name, version) + "?source"}
-              class={tw`rounded-md px-4.5 py-2.5 inline-flex items-center gap-1.5 leading-none font-medium text-default bg-[#F3F3F3] hover:bg-dark-border`}
-            >
-              <Icons.Source />
-              <div>View Source</div>
-            </a>
-          </div>
-
-          {data.upload_options && (
-            <div>
-              <div class={tw`text-gray-400 font-medium text-sm leading-4`}>
-                Repository
               </div>
-              <div
-                class={tw`inline-flex justify-between md:justify-center items-center gap-1.5 border border-dark-border rounded-md bg-white py-2 px-4 whitespace-nowrap`}
-              >
-                <Icons.GitHub class="w-5 h-5 inline text-gray-700" />
-                <a
-                  class={tw`link`}
-                  href={`https://github.com/${data.upload_options.repository}`}
-                >
-                  {data.upload_options.repository}
-                </a>
-              </div>
+
+              {data.description &&
+                (
+                  <div class={tw`text-sm`} title={data.description}>
+                    {data.description}
+                  </div>
+                )}
             </div>
-          )}
+
+            <div
+              class={tw`space-y-3 children:(flex items-center gap-1.5 leading-none font-medium)`}
+            >
+              <span>
+                <Icons.Manual />
+                <a href={getBasePath(name, version) + "?doc"} class={tw`link`}>
+                  View Documentation
+                </a>
+              </span>
+              <span>
+                <Icons.Source />
+                <a
+                  href={getBasePath(name, version) + "?source"}
+                  class={tw`link`}
+                >
+                  View Source
+                </a>
+              </span>
+            </div>
+          </div>
 
           <div class={tw`space-y-2.5!`}>
             <div class={tw`text-gray-400 font-medium text-sm leading-4`}>
@@ -424,6 +409,23 @@ function InfoView(
             )}
           </div>
 
+          {data.upload_options && (
+            <div>
+              <div class={tw`text-gray-400 font-medium text-sm leading-4`}>
+                Repository
+              </div>
+              <div class={tw`flex items-center gap-1.5 whitespace-nowrap`}>
+                <Icons.GitHub class="w-5 h-5 inline text-gray-700" />
+                <a
+                  class={tw`link`}
+                  href={`https://github.com/${data.upload_options.repository}`}
+                >
+                  {data.upload_options.repository}
+                </a>
+              </div>
+            </div>
+          )}
+
           <div>
             <div class={tw`text-gray-400 font-medium text-sm leading-4`}>
               Current version released
@@ -440,15 +442,19 @@ function InfoView(
             <ol
               class={tw`border border-secondary rounded-lg list-none overflow-y-scroll h-80`}
             >
-              {data.versions.map((version) => (
+              {data.versions.map((listVersion) => (
                 <li class={tw`odd:(bg-ultralight rounded-md)`}>
                   <a
-                    class={tw`flex px-5 py-2 font-medium link`}
-                    href={getBasePath(name, version)}
+                    class={tw`flex px-5 py-2 link ${
+                      listVersion === version ? "font-bold" : "font-medium"
+                    }`}
+                    href={getBasePath(name, listVersion)}
                   >
-                    <span class={tw`block w-full truncate`}>{version}</span>
-                    {version === data.latest_version && (
-                      <Tag color="blue">Latest</Tag>
+                    <span class={tw`block w-full truncate`}>{listVersion}</span>
+                    {listVersion === data.latest_version && (
+                      <div class={tw`tag bg-tag-blue-bg text-tag-blue`}>
+                        Latest
+                      </div>
                     )}
                   </a>
                 </li>
@@ -459,13 +465,14 @@ function InfoView(
       }
     >
       {data.readmeFile && (
-        <Readme
-          isStd={name === "std"}
-          version={version}
-          raw={data.readmeFile.content}
-          sourceURL={data.readmeFile.url}
-          baseURL={getSourceURL(name, version, "/")}
-        />
+        <div class={tw`p-6 rounded-xl border border-dark-border`}>
+          <Markdown
+            source={name === "std"
+              ? data.readmeFile.content!
+              : data.readmeFile.content!.replace(/\$STD_VERSION/g, version)}
+            baseURL={getSourceURL(name, version, "/")}
+          />
+        </div>
       )}
     </SidePanelPage>
   );

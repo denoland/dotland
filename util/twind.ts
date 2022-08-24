@@ -33,6 +33,7 @@ export const config: Configuration = {
         "default-highlight": "#333333C0",
         light: "#999999",
         default: "#232323",
+        "default-15": "#23232326",
         ultralight: "#F8F7F6",
         "light-border": "#EEEEEE",
         "dark-border": "#DDDDDD",
@@ -87,6 +88,7 @@ export const config: Configuration = {
           "border-bottom-width": (parts[0] ?? 1) + "px",
         },
       }),
+    tag: apply`inline py-1 px-2 rounded-full leading-none font-medium text-xs`,
   },
 };
 

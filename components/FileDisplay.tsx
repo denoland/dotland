@@ -179,27 +179,3 @@ export function FileDisplay(props: {
     </div>
   );
 }
-
-export function Readme(props: {
-  isStd: boolean;
-  version: string;
-  raw?: string;
-  sourceURL: string;
-  baseURL: string;
-}) {
-  const filename = fileNameFromURL(props.sourceURL);
-  return (
-    <div class={tw`space-y-6`}>
-      <div class={tw`flex items-center gap-2`}>
-        <Icons.Book />
-        <span class={tw`text-xl leading-none font-semibold`}>{filename}</span>
-      </div>
-      <Markdown
-        source={props.isStd
-          ? props.raw!
-          : props.raw!.replace(/\$STD_VERSION/g, props.version)}
-        baseURL={props.baseURL}
-      />
-    </div>
-  );
-}
