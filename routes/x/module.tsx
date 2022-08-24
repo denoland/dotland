@@ -451,7 +451,7 @@ function InfoView(
               Versions
             </div>
             <ol
-              class={tw`border border-secondary rounded-lg list-none overflow-y-scroll h-80`}
+              class={tw`border border-secondary rounded-lg list-none overflow-y-scroll max-h-80`}
             >
               {data.versions.map((listVersion) => (
                 <li class={tw`odd:(bg-ultralight rounded-md)`}>
