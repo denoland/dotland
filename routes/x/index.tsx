@@ -13,7 +13,6 @@ import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
 import * as Icons from "@/components/Icons.tsx";
-import { CodeBlock } from "@/components/CodeBlock.tsx";
 
 import { listModules, ModulesList } from "@/util/registry_utils.ts";
 import { Pagination } from "@/components/Pagination.tsx";

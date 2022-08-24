@@ -120,7 +120,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
               .replace(/(\[.+\]\(.+)\.md(\))/g, "$1$2")
               .replaceAll("$STD_VERSION", stdVersion)
               .replaceAll("$CLI_VERSION", version)}
-            baseUrl={sourceURL}
+            baseURL={sourceURL}
           />
 
           <div class={tw`mt-14`}>

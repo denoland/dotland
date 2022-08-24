@@ -6,11 +6,7 @@ import { h } from "preact";
 import { tw } from "@twind";
 import { escape as htmlEscape } from "$he";
 import { normalizeTokens, Prism } from "@/util/prism_utils.ts";
-import {
-  extractLinkUrl,
-  fileTypeFromURL,
-  filetypeIsJS,
-} from "@/util/registry_utils.ts";
+import { extractLinkUrl } from "@/util/registry_utils.ts";
 
 export interface CodeBlockProps {
   code: string;
@@ -117,7 +113,7 @@ export function RawCodeBlock({
                         {quote}
                         <a
                           className={tw`hover:underline`}
-                          href={href + "?code"}
+                          href={href + "?source"}
                         >
                           {specifier}
                         </a>

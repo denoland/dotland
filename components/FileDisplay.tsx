@@ -26,11 +26,8 @@ export function FileDisplay(props: {
   const filetype = props.filetypeOverride ?? fileTypeFromURL(props.sourceURL);
   const filename = fileNameFromURL(props.sourceURL);
 
-  let doc = new URL(props.url);
-  doc.searchParams.delete("code");
-  if (!props.isStd) {
-    doc = new URL("https://doc.deno.land/" + doc.href);
-  }
+  const doc = new URL(props.url);
+  doc.searchParams.delete("source");
 
   const isRaw = props.url.searchParams.has("raw");
   const raw = new URL(props.url);
@@ -137,9 +134,9 @@ export function FileDisplay(props: {
               <RawCodeBlock
                 code={props.raw!}
                 language="markdown"
-                enableLineRef={true}
                 class={tw`p-2 sm:px-3 md:px-4`}
                 url={props.url}
+                enableLineRef
               />
             );
           case "markdown": {
@@ -148,9 +145,9 @@ export function FileDisplay(props: {
                 <RawCodeBlock
                   code={props.raw!}
                   language="markdown"
-                  enableLineRef={true}
                   class={tw`p-2 sm:px-3 md:px-4`}
                   url={props.url}
+                  enableLineRef
                 />
               );
             } else {
@@ -172,9 +169,9 @@ export function FileDisplay(props: {
               <RawCodeBlock
                 code={props.raw!}
                 language="text"
-                enableLineRef={true}
                 class={tw`p-2 sm:px-3 md:px-4`}
                 url={props.url}
+                enableLineRef
               />
             );
         }
