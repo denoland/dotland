@@ -152,7 +152,9 @@ function TopPanel({
                   <Icons.GitHub class="w-5 h-5 inline text-gray-700" />
                   <a
                     class={tw`link`}
-                    href={`https://github.com/${data.upload_options!.repository}`}
+                    href={`https://github.com/${
+                      data.upload_options!.repository
+                    }`}
                   >
                     {data.upload_options!.repository}
                   </a>
