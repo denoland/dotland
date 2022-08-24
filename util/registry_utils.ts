@@ -372,7 +372,10 @@ export async function fetchSource(
       const resp = await fetch(url);
       if (resp.status === 403 || resp.status === 404) {
         await resp.body?.cancel();
-        return new Response("404 Not Found", { status: 404 });
+        return new Response("404 Not Found", {
+          status: 404,
+          headers: { "Access-Control-Allow-Origin": "*" },
+        });
       }
       if (!resp.ok) {
         await resp.body?.cancel();
