@@ -269,7 +269,12 @@ function TopPanel({
           class={tw`flex flex-col md:(flex-row items-center) justify-between w-full gap-4`}
         >
           <div class={tw`overflow-hidden`}>
-            <Breadcrumbs name={name} path={path} view={view} />
+            <Breadcrumbs
+              name={name}
+              version={version}
+              path={path}
+              view={view}
+            />
 
             {data.kind !== "no-versions" && data.description &&
               (
@@ -396,9 +401,11 @@ function ModuleView({
 function Breadcrumbs({
   name,
   path,
+  version,
   view,
 }: {
   name: string;
+  version: string;
   path: string;
   view: Views;
 }) {
@@ -409,12 +416,16 @@ function Breadcrumbs({
   }
 
   let seg = "";
-  const out: [string, string][] = [];
+  const out: [segment: string, url: string][] = [];
   for (const segment of segments) {
     if (segment === "") {
       continue;
+    } else if (segment === name) {
+      seg += `/${segment}@${version}`;
+    } else if (segment !== "") {
+      seg += "/" + segment;
     }
-    seg += "/" + segment;
+
     out.push([segment, seg]);
   }
 
@@ -516,7 +527,12 @@ function InfoView(
           <div class={tw`space-y-4!`}>
             <div class={tw`space-y-2`}>
               <div class={tw`flex items-center gap-2.5 w-full`}>
-                <Breadcrumbs name={name} path="/" view="info" />
+                <Breadcrumbs
+                  name={name}
+                  version={version}
+                  path="/"
+                  view="info"
+                />
                 <div class={tw`tag bg-default-15 text-gray-600 font-semibold!`}>
                   {version}
                 </div>
