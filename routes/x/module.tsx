@@ -279,7 +279,7 @@ function Breadcrumbs({
   }
 
   return (
-    <p class={tw`text-xl leading-6 font-bold text-gray-400`}>
+    <p class={tw`text-xl leading-6 font-bold text-gray-400 truncate`}>
       {out.map(([seg, url], i) => {
         if (view === "source") {
           url += "?source";
@@ -287,13 +287,9 @@ function Breadcrumbs({
         return (
           <Fragment key={i}>
             {i !== 0 && "/"}
-            {i === (segments.length - 1)
-              ? <span class={tw`text-default`}>{seg}</span>
-              : (
-                <a href={url} class={tw`link`}>
-                  {seg}
-                </a>
-              )}
+            <a href={url} class={tw`link`} title={seg}>
+              {seg}
+            </a>
           </Fragment>
         );
       })}
@@ -379,7 +375,7 @@ function InfoView(
         <div class={tw`space-y-6 children:space-y-2`}>
           <div class={tw`space-y-4!`}>
             <div class={tw`space-y-2`}>
-              <div class={tw`flex items-center gap-2.5`}>
+              <div class={tw`flex items-center gap-2.5 w-full`}>
                 <Breadcrumbs name={name} path="/" view="info" />
                 <div class={tw`tag bg-default-15 text-gray-600 font-semibold!`}>
                   {version}
@@ -430,9 +426,9 @@ function InfoView(
                 Repository
               </div>
               <div class={tw`flex items-center gap-1.5 whitespace-nowrap`}>
-                <Icons.GitHub class="w-5 h-5 inline text-gray-700" />
+                <Icons.GitHub class="w-5 h-5 text-gray-700 flex-none" />
                 <a
-                  class={tw`link`}
+                  class={tw`link truncate`}
                   href={`https://github.com/${data.upload_options.repository}`}
                 >
                   {data.upload_options.repository}
