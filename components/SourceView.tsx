@@ -7,9 +7,9 @@ import { tw } from "@twind";
 import { FileDisplay } from "./FileDisplay.tsx";
 import { DirectoryListing } from "./DirectoryListing.tsx";
 import {
+  CommonProps,
   SourcePageDir,
   SourcePageFile,
-  CommonProps,
 } from "@/util/registry_utils.ts";
 
 export function SourceView({

@@ -21,8 +21,8 @@ import {
   getRawFile,
   getReadme,
   getRepositoryURL,
-  getVersionList,
   getSourceURL,
+  getVersionList,
   type InfoPage,
   type ModInfoPage,
   type SourcePage,
@@ -347,7 +347,10 @@ function InfoView(
       sidepanel={
         <div class={tw`space-y-6 children:space-y-2`}>
           <div class={tw`overflow-hidden space-y-0!`}>
-            <Breadcrumbs name={name} path="/" view="info" />
+            <div class={tw`py-1 flex items-center gap-2.5`}>
+              <Breadcrumbs name={name} path="/" view="info" />
+              <Tag color="blue">{version}</Tag>
+            </div>
 
             {data.description &&
               (
