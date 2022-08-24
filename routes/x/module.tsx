@@ -152,9 +152,9 @@ function TopPanel({
                   <Icons.GitHub class="w-5 h-5 inline text-gray-700" />
                   <a
                     class={tw`link`}
-                    href={`https://github.com/${data.upload_options.repository}`}
+                    href={`https://github.com/${data.upload_options!.repository}`}
                   >
-                    {data.upload_options.repository}
+                    {data.upload_options!.repository}
                   </a>
                 </div>
                 {popularityTag && name !== "std" && (
@@ -215,7 +215,7 @@ function ModuleView({
   }
 
   const repositoryURL = getRepositoryURL(
-    data.data.upload_options,
+    data.data.upload_options!,
     path,
     data.data.kind === "index" ? "tree" : undefined,
   );
@@ -420,22 +420,20 @@ function InfoView(
             </div>
           )}
 
-          {data.upload_options && (
-            <div>
-              <div class={tw`text-gray-400 font-medium text-sm leading-4`}>
-                Repository
-              </div>
-              <div class={tw`flex items-center gap-1.5 whitespace-nowrap`}>
-                <Icons.GitHub class="w-5 h-5 text-gray-700 flex-none" />
-                <a
-                  class={tw`link truncate`}
-                  href={`https://github.com/${data.upload_options.repository}`}
-                >
-                  {data.upload_options.repository}
-                </a>
-              </div>
+          <div>
+            <div class={tw`text-gray-400 font-medium text-sm leading-4`}>
+              Repository
             </div>
-          )}
+            <div class={tw`flex items-center gap-1.5 whitespace-nowrap`}>
+              <Icons.GitHub class="w-5 h-5 text-gray-700 flex-none" />
+              <a
+                class={tw`link truncate`}
+                href={`https://github.com/${data.upload_options!.repository}`}
+              >
+                {data.upload_options!.repository}
+              </a>
+            </div>
+          </div>
 
           <div>
             <div class={tw`text-gray-400 font-medium text-sm leading-4`}>
