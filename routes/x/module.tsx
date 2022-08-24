@@ -193,44 +193,6 @@ async function handlerRaw(
   return fetchSource(name, version, path);
 }
 
-const RAW_HEADERS = { "Access-Control-Allow-Origin": "*" };
-
-// Note: this function is _very_ hot. It is called for every download of a /x/
-// module. We need to be careful about what we do here. This code must not rely
-// on any services other than S3.
-async function handlerRaw(
-  req: Request,
-  { name, version, path }: Params,
-): Promise<Response> {
-  if (version === "") {
-    const versions = await getVersionList(name);
-    if (versions === null) {
-      return new Response(`The module '${name}' does not exist`, {
-        status: 404,
-        headers: RAW_HEADERS,
-      });
-    }
-    if (versions.latest === null) {
-      return new Response(`The module '${name}' has no latest version.`, {
-        status: 404,
-        headers: RAW_HEADERS,
-      });
-    }
-    if (path) path = `/${path}`;
-    return new Response(undefined, {
-      status: 302,
-      headers: {
-        ...RAW_HEADERS,
-        Location: getModulePath(name, versions.latest, path),
-        "x-deno-warning":
-          `Implicitly using latest version (${versions.latest}) for ${req.url}`,
-      },
-    });
-  }
-
-  return fetchSource(name, version, path);
-}
-
 export default function Registry({ params, url, data }: PageProps<MaybeData>) {
   let {
     name,
