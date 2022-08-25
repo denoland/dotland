@@ -53,7 +53,7 @@ export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
         <img
           src="/images/module_banner.png"
           alt="Deno in Space"
-          class={tw`hidden md:block`}
+          class={tw`w-full hidden md:block`}
         />
 
         <div class={tw`section-x-inset-lg mt-16 mb-24 space-y-15`}>
