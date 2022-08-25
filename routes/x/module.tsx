@@ -16,7 +16,6 @@ import {
   type DocPageSymbol,
   extractAltLineNumberReference,
   fetchSource,
-  getBasePath,
   getModulePath,
   getRawFile,
   getReadme,
@@ -434,6 +433,8 @@ function Breadcrumbs({
       {out.map(([seg, url], i) => {
         if (view === "source") {
           url += "?source";
+        } else if (view === "doc" && seg === name) {
+          url += "?doc";
         }
         return (
           <Fragment key={i}>
@@ -551,14 +552,17 @@ function InfoView(
             >
               <span>
                 <Icons.Manual />
-                <a href={getBasePath(name, version) + "?doc"} class={tw`link`}>
+                <a
+                  href={getModulePath(name, version) + "?doc"}
+                  class={tw`link`}
+                >
                   View Documentation
                 </a>
               </span>
               <span>
                 <Icons.Source />
                 <a
-                  href={getBasePath(name, version) + "?source"}
+                  href={getModulePath(name, version) + "?source"}
                   class={tw`link`}
                 >
                   View Source
@@ -613,7 +617,7 @@ function InfoView(
                     class={tw`flex px-5 py-2 link ${
                       listVersion === version ? "font-bold" : "font-medium"
                     }`}
-                    href={getBasePath(name, listVersion)}
+                    href={getModulePath(name, listVersion)}
                   >
                     <span class={tw`block w-full truncate`}>{listVersion}</span>
                     {listVersion === data.latest_version && (
@@ -634,8 +638,8 @@ function InfoView(
           ? (
             <Markdown
               source={name === "std"
-                ? data.readmeFile.content!
-                : data.readmeFile.content!.replace(/\$STD_VERSION/g, version)}
+                ? data.readmeFile
+                : data.readmeFile.replace(/\$STD_VERSION/g, version)}
               baseURL={getSourceURL(name, version, "/")}
             />
           )

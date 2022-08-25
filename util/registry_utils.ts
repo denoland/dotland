@@ -22,26 +22,16 @@ export interface CommonProps<T> {
   data: T;
 }
 
-export function filetypeIsJS(filetype: string | undefined): boolean {
-  return filetype === "javascript" || filetype === "typescript" ||
-    filetype === "tsx" || filetype === "jsx";
-}
-
 // 100kb
 export const MAX_SYNTAX_HIGHLIGHT_FILE_SIZE = 100 * 1024;
 // 500kb
 export const MAX_FILE_SIZE = 500 * 1024;
 
-export interface Readme {
-  content: string;
-  url: string;
-}
-
 export async function getReadme(
   name: string,
   version: string,
   entry: ModuleEntry,
-): Promise<Readme | undefined> {
+): Promise<string | undefined> {
   const url = getSourceURL(name, version, entry.path, S3_BUCKET);
 
   const res = await fetch(url);
@@ -57,10 +47,7 @@ export async function getReadme(
     return undefined;
   }
   if (entry.size < MAX_SYNTAX_HIGHLIGHT_FILE_SIZE) {
-    return {
-      content: await res.text(),
-      url,
-    };
+    return await res.text();
   } else {
     await res.body!.cancel();
     return undefined;
@@ -71,7 +58,6 @@ export interface RawFile {
   content: string;
   highlight: boolean;
   url: string;
-  canonicalPath: string;
 }
 
 export async function getRawFile(
@@ -80,7 +66,6 @@ export async function getRawFile(
   path: string,
 ): Promise<RawFile | Error> {
   const url = getSourceURL(name, version, path, S3_BUCKET);
-  const canonicalPath = getModulePath(name, version, path);
 
   const res = await fetch(url, { method: "GET" });
   const size = Number(res.headers.get("content-size")!);
@@ -90,14 +75,12 @@ export async function getRawFile(
       content: await res.text(),
       highlight: true,
       url,
-      canonicalPath,
     };
   } else if (size < MAX_FILE_SIZE) {
     return {
       content: await res.text(),
       highlight: false,
       url,
-      canonicalPath,
     };
   } else {
     await res.body!.cancel();
@@ -252,9 +235,6 @@ export async function getBuild(id: string): Promise<Build | Error> {
   return data.data.build;
 }
 
-const markdownExtension = "(?:markdown|mdown|mkdn|mdwn|mkd|md)";
-const orgExtension = "org";
-
 export function fileTypeFromURL(filename: string): string | undefined {
   const f = filename.toLowerCase();
   if (f.endsWith(".ts")) {
@@ -285,73 +265,23 @@ export function fileTypeFromURL(filename: string): string | undefined {
     return "yaml";
   } else if (f.endsWith(".htm") || f.endsWith(".html")) {
     return "html";
-  } else if (f.match(`\\.${markdownExtension}$`)) {
+  } else if (f.match(`\\.(?:markdown|mdown|mkdn|mdwn|mkd|md)$`)) {
     return "markdown";
-  } else if (f.match(`\\.${orgExtension}$`)) {
+  } else if (f.match(`\\.org$`)) {
     return "org";
   } else if (f.match(/\.(png|jpe?g|svg)/)) {
     return "image";
   }
 }
 
-export function fileNameFromURL(url: string): string {
-  const segments = decodeURI(url).split("/");
-  return segments[segments.length - 1];
-}
-
-const README_REGEX = new RegExp(
-  `^readme(?:\\.(${markdownExtension}|${orgExtension}))?$`,
-  "i",
-);
-export function isReadme(filename: string): boolean {
-  return README_REGEX.test(filename);
-}
-
-export interface Stats {
-  recently_added_modules: Array<Module & { created_at: string }>;
-  recently_uploaded_versions: Array<{
-    name: string;
-    version: string;
-    created_at: string;
-  }>;
-}
-
-export async function getStats(): Promise<Stats | null> {
-  const url = `${API_ENDPOINT}stats`;
-  const res = await fetch(url, {
-    headers: {
-      accept: "application/json",
-    },
-  });
-  if (res.status !== 200) {
-    throw Error(
-      `Got an error (${res.status}) while getting the stats:\n${await res
-        .text()}`,
-    );
-  }
-  const data = await res.json();
-  if (!data.success) {
-    throw Error(
-      `Got an error (${data.info}) while getting the stats:\n${await res
-        .text()}`,
-    );
-  }
-
-  return data.data;
-}
-
-export function getBasePath(name: string, version?: string): string {
-  return `${name === "std" ? "" : "/x"}/${name}${
-    version ? `@${encodeURIComponent(version)}` : ""
-  }`;
-}
-
 export function getModulePath(
   name: string,
-  version: string | undefined,
-  path: string | undefined,
+  version?: string,
+  path?: string,
 ) {
-  return getBasePath(name, version) + (path ?? "");
+  return `${name === "std" ? "" : "/x"}/${name}${
+    version ? `@${encodeURIComponent(version)}` : ""
+  }${path ?? ""}`;
 }
 
 export async function fetchSource(
@@ -576,7 +506,7 @@ export interface ModInfoPage {
   defaultExport?: boolean;
   /** The file entry for the module that is a README to be rendered. */
   readme?: ModuleEntry;
-  readmeFile?: Readme;
+  readmeFile?: string;
   /** The file entry for the module that has a detectable deno configuration. */
   config?: ModuleEntry;
   /** The file entry for an import map specified within the detectable config
