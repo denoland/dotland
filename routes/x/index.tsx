@@ -2,30 +2,46 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
+import { ComponentProps, Fragment, h } from "preact";
 import { PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import { css, tw } from "@twind";
 import { Handlers } from "$fresh/server.ts";
 import { emojify } from "$emoji";
+import algoliasearch from "$algolia";
+import { createFetchRequester } from "$algolia/requester-fetch";
+
+import { PopularityModuleTag } from "@/util/registry_utils.ts";
 
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
 import * as Icons from "@/components/Icons.tsx";
-import { CodeBlock } from "@/components/CodeBlock.tsx";
+import { PopularityTag } from "@/components/PopularityTag.tsx";
 
-import { listModules, ModulesList } from "@/util/registry_utils.ts";
-import { Pagination } from "@/components/Pagination.tsx";
+const requester = createFetchRequester();
+const client = algoliasearch(
+  "QFPCRZC6WX",
+  "2ed789b2981acd210267b27f03ab47da",
+  { requester },
+);
+const index = client.initIndex("modules");
 
-const PER_PAGE = 20;
+export interface Data {
+  hits: Array<{
+    popularity_score: number;
+    description?: string;
+    name: string;
+    popularity_tag?: PopularityModuleTag["value"];
+  }>;
+  nbHits: number;
+  page: number;
+  nbPages: number;
+  query: string;
+  hitsPerPage: number;
+}
 
-export default function ThirdPartyRegistryList(
-  { url, data }: PageProps<ModulesList | null>,
-) {
-  const page = parseInt(url.searchParams.get("page") || "1");
-  const query = url.searchParams.get("query") || "";
-
+export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
   return (
     <>
       <Head>
@@ -37,7 +53,7 @@ export default function ThirdPartyRegistryList(
         <img
           src="/images/module_banner.png"
           alt="Deno in Space"
-          class={tw`hidden md:block`}
+          class={tw`w-full hidden md:block`}
         />
 
         <div class={tw`section-x-inset-lg mt-16 mb-24 space-y-15`}>
@@ -136,19 +152,17 @@ export default function ThirdPartyRegistryList(
                 <input
                   type="text"
                   name="query"
-                  placeholder={data?.totalCount
-                    ? `Search through ${data.totalCount} modules...`
-                    : "Search..."}
+                  placeholder={`Search through ${data.nbHits} modules...`}
                   class={tw`w-full bg-transparent text-default placeholder:text-gray-400 outline-none`}
-                  value={query}
+                  value={data.query}
                 />
                 <Icons.MagnifyingGlass />
               </label>
             </form>
 
             <ul class={tw`divide-y`}>
-              {data?.results.length
-                ? data.results.map((result) => (
+              {data.hits.length
+                ? data.hits.map((result) => (
                   <li class={tw`border-dark-border`}>
                     <a
                       href={"/x/" + result.name}
@@ -169,16 +183,10 @@ export default function ThirdPartyRegistryList(
                         </div>
                       </div>
 
-                      <div class={tw`flex items-center gap-4`}>
-                        {result.star_count !== undefined && (
-                          <div class={tw`flex items-center text-gray-400`}>
-                            <div>
-                              {result.star_count}
-                            </div>
-                            <Icons.Star class="ml-1" title="star" />
-                          </div>
+                      <div class={tw`flex items-center gap-2`}>
+                        {result.popularity_tag && (
+                          <PopularityTag>{result.popularity_tag}</PopularityTag>
                         )}
-
                         <Icons.ArrowRight class="text-gray-400" />
                       </div>
                     </a>
@@ -203,16 +211,7 @@ export default function ThirdPartyRegistryList(
             <div
               class={tw`px-5 py-4 border-t border-dark-border bg-ultralight flex items-center justify-between`}
             >
-              {!!data?.results.length && (
-                <Pagination
-                  {...{
-                    currentPage: page,
-                    perPage: PER_PAGE,
-                    data,
-                    query,
-                  }}
-                />
-              )}
+              {!!data.hits.length && <Pagination {...data} />}
             </div>
           </div>
 
@@ -314,14 +313,76 @@ export default function ThirdPartyRegistryList(
   );
 }
 
-export const handler: Handlers<ModulesList | null> = {
+export function Pagination(
+  { query, page, hitsPerPage, hits, nbHits, nbPages }: Data,
+) {
+  function toPage(n: number): string {
+    const params = new URLSearchParams();
+    if (query) {
+      params.set("query", query);
+    }
+    params.set("page", (n + 1).toString());
+    return "/x?" + params.toString();
+  }
+
+  return (
+    <>
+      <div
+        class={tw`p-3.5 rounded-lg border border-dark-border px-2.5 py-1.5 flex items-center gap-2.5 bg-white`}
+      >
+        <MaybeA disabled={page === 0} href={toPage(page - 1)}>
+          <Icons.ArrowLeft />
+        </MaybeA>
+        <div class={tw`leading-none`}>
+          Page <span class={tw`font-medium`}>{page + 1}</span> of{" "}
+          <span class={tw`font-medium`}>{nbPages}</span>
+        </div>
+        <MaybeA disabled={(page + 1) >= nbPages} href={toPage(page + 1)}>
+          <Icons.ArrowRight />
+        </MaybeA>
+      </div>
+
+      <div class={tw`text-sm text-[#6C6E78]`}>
+        Showing{" "}
+        <span class={tw`font-medium`}>
+          {page * hitsPerPage + 1}
+        </span>{" "}
+        to{" "}
+        <span class={tw`font-medium`}>
+          {page * hitsPerPage + hits.length}
+        </span>{" "}
+        of{" "}
+        <span class={tw`font-medium`}>
+          {nbHits}
+        </span>
+      </div>
+    </>
+  );
+}
+
+function MaybeA(
+  props:
+    | ({ disabled: true } & ComponentProps<"div">)
+    | ({ disabled: false } & ComponentProps<"a">),
+) {
+  if (props.disabled) {
+    return <div {...props} class={tw`text-[#D2D2DC] cursor-not-allowed`} />;
+  } else {
+    return <a {...props} class={tw`hover:text-light`} />;
+  }
+}
+
+export const handler: Handlers<Data> = {
   async GET(req, { render }) {
     const url = new URL(req.url);
-    const page = parseInt(url.searchParams.get("page") || "1");
+    const page = parseInt(url.searchParams.get("page") || "1") - 1;
     const query = url.searchParams.get("query") || "";
+    const res: Data = await index.search(query, {
+      page,
+      hitsPerPage: 20,
+      filters: "third_party:true",
+    });
 
-    const resp = await listModules(page, PER_PAGE, query);
-
-    return render!(resp);
+    return render!(res);
   },
 };

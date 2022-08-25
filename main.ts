@@ -22,10 +22,6 @@ import { routes as completionsV2Routes } from "./completions_v2.ts";
 
 await setup({
   resolveHref(current, symbol) {
-    // FIXME(bartlomieju): special casing for std here is not ideal
-    if (symbol && current.startsWith("/std")) {
-      current = `https://deno.land${current}`;
-    }
     return symbol ? `${current}?s=${symbol}` : current;
   },
   lookupHref(
@@ -36,7 +32,7 @@ await setup({
     return undefined;
   },
   resolveSourceHref(url, line) {
-    return line ? `${url}?code#L${line}` : `${url}?code`;
+    return line ? `${url}?source#L${line}` : `${url}?source`;
   },
   runtime: { Fragment, h },
 });

@@ -109,7 +109,7 @@ export default function GlobalSearch() {
 
     if (kind === "Manual" || kind === "All") {
       queries.push({
-        indexName: "deno_manual",
+        indexName: "manual",
         query: input || "Introduction",
         params: {
           page: page,
@@ -122,7 +122,7 @@ export default function GlobalSearch() {
 
     if (kind === "Symbols" || kind === "All") {
       queries.push({
-        indexName: "deno_modules",
+        indexName: "doc_nodes",
         query: input || "serve",
         params: {
           page: page,
@@ -152,9 +152,9 @@ export default function GlobalSearch() {
         setTotalPages(results.find((res) => res.nbPages)?.nbPages ?? 1);
         setResults({
           // @ts-ignore algolia typings are annoying
-          manual: results.find((res) => res.index === "deno_manual")?.hits,
+          manual: results.find((res) => res.index === "manual")?.hits,
           // @ts-ignore algolia typings are annoying
-          symbols: results.find((res) => res.index === "deno_modules")?.hits,
+          symbols: results.find((res) => res.index === "doc_nodes")?.hits,
           // @ts-ignore algolia typings are annoying
           modules: results.find((res) => res.index === "modules")?.hits,
         });
@@ -222,12 +222,12 @@ export default function GlobalSearch() {
                   />
                 </label>
 
-                <div
+                <button
                   class={tw`lg:hidden ml-3 -mr-2 flex items-center`}
                   onClick={() => setShowModal(false)}
                 >
                   <Icons.Cross />
-                </div>
+                </button>
               </div>
 
               <div class={tw`flex gap-3 mt-2`}>

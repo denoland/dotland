@@ -4,7 +4,6 @@
 import { h } from "preact";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { tw } from "@twind";
-import { Tag } from "@/components/Tag.tsx";
 
 export default function VersionSelect({ versions, selectedVersion }: {
   versions: Record<string, string>;
@@ -20,7 +19,7 @@ export default function VersionSelect({ versions, selectedVersion }: {
         <div
           class={tw`flex absolute pointer-events-none select-none w-full h-full items-center justify-end pr-8`}
         >
-          <Tag color="blue">Latest</Tag>
+          <div class={tw`tag bg-tag-blue-bg text-tag-blue`}>Latest</div>
         </div>
       )}
       <select
@@ -41,7 +40,7 @@ export default function VersionSelect({ versions, selectedVersion }: {
             {selectedVersion}
           </option>
         )}
-        {Object.keys(versions).map((tag, index) => (
+        {Object.keys(versions).map((tag) => (
           <option key={tag} value={tag}>
             {tag}
           </option>
