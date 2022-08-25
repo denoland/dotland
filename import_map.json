@@ -26,6 +26,7 @@
     "$doc_components/": "https://deno.land/x/deno_doc_components@0.2.0/",
     "$deno_doc/": "https://deno.land/x/deno_doc@v0.34.0/lib/",
     "$canvas-confetti": "https://esm.sh/canvas-confetti@1.5.1",
-    "$algolia": "https://esm.sh/algoliasearch@4.13.1"
+    "$algolia": "https://esm.sh/algoliasearch@4.13.1",
+    "$algolia/requester-fetch": "https://esm.sh/@algolia/requester-fetch@4.14.2?pin=v90"
   }
 }

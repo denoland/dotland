@@ -9,7 +9,7 @@ import { css, tw } from "@twind";
 import { Handlers } from "$fresh/server.ts";
 import { emojify } from "$emoji";
 import algoliasearch from "$algolia";
-import "https://deno.land/x/xhr@0.2.0/mod.ts";
+import { createFetchRequester } from "@algolia/requester-fetch";
 
 import { PopularityModuleTag } from "@/util/registry_utils.ts";
 
@@ -19,9 +19,11 @@ import { InlineCode } from "@/components/InlineCode.tsx";
 import * as Icons from "@/components/Icons.tsx";
 import { PopularityTag } from "@/components/PopularityTag.tsx";
 
+const requester = createFetchRequester();
 const client = algoliasearch(
   "QFPCRZC6WX",
   "2ed789b2981acd210267b27f03ab47da",
+  { requester },
 );
 const index = client.initIndex("modules");
 
