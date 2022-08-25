@@ -47,10 +47,10 @@ export function SourceView({
                 version={version}
                 raw={data.file.content}
                 filetypeOverride={data.file.highlight ? undefined : "text"}
-                canonicalPath={data.file.canonicalPath}
                 sourceURL={data.file.url}
                 repositoryURL={repositoryURL}
                 url={url}
+                docable={data.docable}
               />
             )
         )}

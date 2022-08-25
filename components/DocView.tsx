@@ -4,12 +4,11 @@
 /** @jsxFrag Fragment */
 import { Fragment, h } from "preact";
 import { tw } from "@twind";
-import { type CommonProps, getBasePath } from "@/util/registry_utils.ts";
+import { type CommonProps, getModulePath } from "@/util/registry_utils.ts";
 import { dirname } from "$std/path/mod.ts";
 import { ModuleDoc } from "$doc_components/module_doc.tsx";
 import { ModulePathIndex } from "$doc_components/module_path_index.tsx";
 import { ModulePathIndexPanel } from "$doc_components/module_path_index_panel.tsx";
-import { FileDisplay } from "./FileDisplay.tsx";
 import { SymbolDoc } from "$doc_components/symbol_doc.tsx";
 import {
   DocPageIndex,
@@ -26,7 +25,7 @@ export function DocView({
 
   data,
 }: CommonProps<DocPageSymbol | DocPageModule | DocPageIndex>) {
-  const basePath = getBasePath(name, version);
+  const basePath = getModulePath(name, version);
   url.search = "";
 
   return (
