@@ -2,11 +2,9 @@
 
 import {
   extractLinkUrl,
-  fileNameFromURL,
   fileTypeFromURL,
   getSourceURL,
   getVersionList,
-  isReadme,
 } from "./registry_utils.ts";
 import { assert, assertEquals } from "$std/testing/asserts.ts";
 
@@ -61,32 +59,6 @@ Deno.test("fileTypeFromURL", () => {
   ];
   for (const [name, expectedType] of tests) {
     assertEquals(fileTypeFromURL(name), expectedType);
-  }
-});
-
-Deno.test("fileNameFromURL", () => {
-  assertEquals(fileNameFromURL("a/path/to/%5Bfile%5D.txt"), "[file].txt");
-  assertEquals(fileNameFromURL("a/path/to/file.tsx"), "file.tsx");
-});
-
-Deno.test("isReadme", () => {
-  const tests: Array<[string, boolean]> = [
-    ["README", true],
-    ["README.md", true],
-    ["README.org", true],
-    ["readme.markdown", true],
-    ["readme.org", true],
-    ["README.mdown", true],
-    ["readme.mkdn", true],
-    ["readme.mdwn", true],
-    ["README.mkd", true],
-    ["README.mkdown", false],
-    ["README.markdn", false],
-    ["READTHIS.md", false],
-    ["READTHIS.org", false],
-  ];
-  for (const [path, expectedToBeReadme] of tests) {
-    assertEquals([path, isReadme(path)], [path, expectedToBeReadme]);
   }
 });
 

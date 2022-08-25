@@ -32,7 +32,7 @@ await setup({
     return undefined;
   },
   resolveSourceHref(url, line) {
-    return line ? `${url}?code#L${line}` : `${url}?code`;
+    return line ? `${url}?source#L${line}` : `${url}?source`;
   },
   runtime: { Fragment, h },
 });

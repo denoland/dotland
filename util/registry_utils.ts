@@ -5,7 +5,7 @@ const API_ENDPOINT = "https://api.deno.land/";
 export const S3_BUCKET =
   "http://deno-registry2-prod-storagebucket-b3a31d16.s3-website-us-east-1.amazonaws.com/";
 
-export interface CommonProps {
+export interface CommonProps<T> {
   isStd: boolean;
   /** module name */
   name: string;
@@ -18,11 +18,8 @@ export interface CommonProps {
 
   /** url of the repo */
   repositoryURL: string;
-}
 
-export function filetypeIsJS(filetype: string | undefined): boolean {
-  return filetype === "javascript" || filetype === "typescript" ||
-    filetype === "tsx" || filetype === "jsx";
+  data: T;
 }
 
 // 100kb
@@ -30,65 +27,29 @@ export const MAX_SYNTAX_HIGHLIGHT_FILE_SIZE = 100 * 1024;
 // 500kb
 export const MAX_FILE_SIZE = 500 * 1024;
 
-export interface Readme {
-  content: string;
-  canonicalPath: string;
-  url: string;
-  repositoryURL: string;
-}
-
 export async function getReadme(
   name: string,
   version: string,
-  items: Array<{
-    kind: string;
-    path: string;
-    size: number;
-  }>,
-  uploadOptions: {
-    type: string;
-    repository: string;
-    ref: string;
-  },
-): Promise<Readme | undefined> {
-  const readmeEntry = items.find((item) =>
-    isReadme(item.path.split("/").at(-1)!)
-  );
+  entry: ModuleEntry,
+): Promise<string | undefined> {
+  const url = getSourceURL(name, version, entry.path, S3_BUCKET);
 
-  if (readmeEntry) {
-    const url = getSourceURL(name, version, readmeEntry.path, S3_BUCKET);
-
-    const res = await fetch(url);
-    if (!res.ok) {
-      await res.body?.cancel();
-      if (
-        res.status !== 400 &&
-        res.status !== 403 &&
-        res.status !== 404
-      ) {
-        console.error(new Error(`${res.status}: ${res.statusText}`));
-      }
-      return undefined;
+  const res = await fetch(url);
+  if (!res.ok) {
+    await res.body?.cancel();
+    if (
+      res.status !== 400 &&
+      res.status !== 403 &&
+      res.status !== 404
+    ) {
+      console.error(new Error(`${res.status}: ${res.statusText}`));
     }
-    if (readmeEntry.size! < MAX_SYNTAX_HIGHLIGHT_FILE_SIZE) {
-      return {
-        content: await res.text(),
-        url,
-        repositoryURL: getRepositoryURL(
-          uploadOptions,
-          readmeEntry.path,
-        ),
-        canonicalPath: getBasePath({
-          isStd: name === "std",
-          name,
-          version,
-        }) + readmeEntry.path,
-      };
-    } else {
-      await res.body!.cancel();
-      return undefined;
-    }
+    return undefined;
+  }
+  if (entry.size < MAX_SYNTAX_HIGHLIGHT_FILE_SIZE) {
+    return await res.text();
   } else {
+    await res.body!.cancel();
     return undefined;
   }
 }
@@ -97,7 +58,6 @@ export interface RawFile {
   content: string;
   highlight: boolean;
   url: string;
-  canonicalPath: string;
 }
 
 export async function getRawFile(
@@ -106,7 +66,6 @@ export async function getRawFile(
   path: string,
 ): Promise<RawFile | Error> {
   const url = getSourceURL(name, version, path, S3_BUCKET);
-  const canonicalPath = getModulePath(name, version, path);
 
   const res = await fetch(url, { method: "GET" });
   const size = Number(res.headers.get("content-size")!);
@@ -116,14 +75,12 @@ export async function getRawFile(
       content: await res.text(),
       highlight: true,
       url,
-      canonicalPath,
     };
   } else if (size < MAX_FILE_SIZE) {
     return {
       content: await res.text(),
       highlight: false,
       url,
-      canonicalPath,
     };
   } else {
     await res.body!.cancel();
@@ -278,9 +235,6 @@ export async function getBuild(id: string): Promise<Build | Error> {
   return data.data.build;
 }
 
-const markdownExtension = "(?:markdown|mdown|mkdn|mdwn|mkd|md)";
-const orgExtension = "org";
-
 export function fileTypeFromURL(filename: string): string | undefined {
   const f = filename.toLowerCase();
   if (f.endsWith(".ts")) {
@@ -311,86 +265,23 @@ export function fileTypeFromURL(filename: string): string | undefined {
     return "yaml";
   } else if (f.endsWith(".htm") || f.endsWith(".html")) {
     return "html";
-  } else if (f.match(`\\.${markdownExtension}$`)) {
+  } else if (f.match(`\\.(?:markdown|mdown|mkdn|mdwn|mkd|md)$`)) {
     return "markdown";
-  } else if (f.match(`\\.${orgExtension}$`)) {
+  } else if (f.match(`\\.org$`)) {
     return "org";
   } else if (f.match(/\.(png|jpe?g|svg)/)) {
     return "image";
   }
 }
 
-export function fileNameFromURL(url: string): string {
-  const segments = decodeURI(url).split("/");
-  return segments[segments.length - 1];
-}
-
-const README_REGEX = new RegExp(
-  `^readme(?:\\.(${markdownExtension}|${orgExtension}))?$`,
-  "i",
-);
-export function isReadme(filename: string): boolean {
-  return README_REGEX.test(filename);
-}
-
-export interface Stats {
-  recently_added_modules: Array<Module & { created_at: string }>;
-  recently_uploaded_versions: Array<{
-    name: string;
-    version: string;
-    created_at: string;
-  }>;
-}
-
-export async function getStats(): Promise<Stats | null> {
-  const url = `${API_ENDPOINT}stats`;
-  const res = await fetch(url, {
-    headers: {
-      accept: "application/json",
-    },
-  });
-  if (res.status !== 200) {
-    throw Error(
-      `Got an error (${res.status}) while getting the stats:\n${await res
-        .text()}`,
-    );
-  }
-  const data = await res.json();
-  if (!data.success) {
-    throw Error(
-      `Got an error (${data.info}) while getting the stats:\n${await res
-        .text()}`,
-    );
-  }
-
-  return data.data;
-}
-
-export function getBasePath({
-  isStd,
-  name,
-  version,
-}: {
-  isStd: boolean;
-  name: string;
-  version?: string;
-}): string {
-  return `${isStd ? "" : "/x"}/${name}${
-    version ? `@${encodeURIComponent(version)}` : ""
-  }`;
-}
-
 export function getModulePath(
   name: string,
-  version: string | undefined,
-  path: string | undefined,
+  version?: string,
+  path?: string,
 ) {
-  const isStd = name === "std";
-  return getBasePath({
-    isStd,
-    name,
-    version,
-  }) + (path ?? "");
+  return `${name === "std" ? "" : "/x"}/${name}${
+    version ? `@${encodeURIComponent(version)}` : ""
+  }${path ?? ""}`;
 }
 
 export async function fetchSource(
@@ -411,7 +302,10 @@ export async function fetchSource(
       const resp = await fetch(url);
       if (resp.status === 403 || resp.status === 404) {
         await resp.body?.cancel();
-        return new Response("404 Not Found", { status: 404 });
+        return new Response("404 Not Found", {
+          status: 404,
+          headers: { "Access-Control-Allow-Origin": "*" },
+        });
       }
       if (!resp.ok) {
         await resp.body?.cancel();
@@ -494,6 +388,24 @@ export function extractLinkUrl(
 
 import type { DocNode, DocNodeKind, JsDoc } from "$deno_doc/types.d.ts";
 
+/** Stored as kind `module_entry` in datastore. */
+export interface ModuleEntry {
+  path: string;
+  type: "file" | "dir";
+  size: number;
+  /** For `"dir"` entries, indicates if there is a _default_ module that should
+   * be used within the directory. */
+  default?: string;
+  /** For `"dir"` entries, an array of child sub-directory paths. */
+  dirs?: string[];
+  /** For `"file`" entries, indicates if the entry id can be queried for doc
+   * nodes. */
+  docable?: boolean;
+  /** For `"dir"` entries, an array of docable child paths that are not
+   * "ignored". */
+  index?: string[];
+}
+
 /** Defines a tag related to how popular a module is. */
 export interface PopularityModuleTag {
   kind: "popularity";
@@ -505,7 +417,6 @@ export interface PopularityModuleTag {
 export type ModuleTag = PopularityModuleTag;
 
 export interface PageBase {
-  kind: string;
   module: string;
   description?: string;
   version: string;
@@ -568,12 +479,50 @@ export interface DocPageModule extends PageBase {
 export interface DocPageIndex extends PageBase {
   kind: "index";
   items: IndexItem[];
-  readme?: Readme;
 }
 
 export interface DocPageFile extends PageBase {
   kind: "file";
 }
+
+interface ModInfoDependency {
+  kind: "denoland" | "esm" | "github" | "skypack" | "other";
+  package: string;
+  version: string;
+}
+
+export interface ModInfoPage {
+  kind: "modinfo";
+  module: string;
+  description?: string;
+  version: string;
+  versions: string[];
+  latest_version: string;
+  /** An array of dependencies identified for the module. */
+  dependencies?: ModInfoDependency[];
+  /** The default module for the module. */
+  defaultModule?: ModuleEntry;
+  /** A flag that indicates if the default module has a default export. */
+  defaultExport?: boolean;
+  /** The file entry for the module that is a README to be rendered. */
+  readme?: ModuleEntry;
+  readmeFile?: string;
+  /** The file entry for the module that has a detectable deno configuration. */
+  config?: ModuleEntry;
+  /** The file entry for an import map specified within the detectable config
+   * file. */
+  importMap?: ModuleEntry;
+  uploaded_at: string;
+  upload_options: {
+    type: string;
+    repository: string;
+    ref: string;
+    subdir?: string;
+  };
+  tags?: ModuleTag[];
+}
+
+export type InfoPage = ModInfoPage | PageInvalidVersion | PageNoVersions;
 
 export interface PagePathNotFound extends PageBase {
   kind: "notfound";
@@ -602,7 +551,7 @@ export type DocPage =
   | PageNoVersions
   | PagePathNotFound;
 
-export interface CodePageFile extends PageBase {
+export interface SourcePageFile extends PageBase {
   kind: "file";
   size: number;
   /** Indicates if the page is docable or not. */
@@ -610,7 +559,7 @@ export interface CodePageFile extends PageBase {
   file: RawFile | Error;
 }
 
-export interface CodePageDirEntry {
+export interface SourcePageDirEntry {
   path: string;
   kind: "file" | "dir";
   size: number;
@@ -618,15 +567,14 @@ export interface CodePageDirEntry {
   docable?: boolean;
 }
 
-export interface CodePageDir extends PageBase {
+export interface SourcePageDir extends PageBase {
   kind: "dir";
-  entries: CodePageDirEntry[];
-  readme?: Readme;
+  entries: SourcePageDirEntry[];
 }
 
-export type CodePage =
-  | CodePageFile
-  | CodePageDir
+export type SourcePage =
+  | SourcePageFile
+  | SourcePageDir
   | PageInvalidVersion
   | PageNoVersions
   | PagePathNotFound;

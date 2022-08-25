@@ -7,12 +7,12 @@ import { tw } from "@twind";
 import { FileDisplay } from "./FileDisplay.tsx";
 import { DirectoryListing } from "./DirectoryListing.tsx";
 import {
-  CodePageDir,
-  CodePageFile,
   CommonProps,
+  SourcePageDir,
+  SourcePageFile,
 } from "@/util/registry_utils.ts";
 
-export function CodeView({
+export function SourceView({
   isStd,
   name,
   version,
@@ -22,34 +22,21 @@ export function CodeView({
   repositoryURL,
 
   data,
-}: CommonProps & {
-  data: CodePageFile | CodePageDir;
-}) {
+}: CommonProps<SourcePageFile | SourcePageDir>) {
   return (
-    <div class={tw`flex flex-col gap-4 w-full overflow-auto`}>
+    <main
+      class={tw`mt-7 mb-16 lg:mt-12 space-y-12 section-x-inset-xl w-full overflow-auto focus:outline-none`}
+    >
       {data.kind === "dir"
         ? (
-          <>
-            <DirectoryListing
-              name={name}
-              version={version}
-              path={path}
-              items={data.entries}
-              repositoryURL={repositoryURL}
-              url={url}
-            />
-            {data.readme && (
-              <FileDisplay
-                isStd={isStd}
-                version={version}
-                raw={data.readme.content}
-                canonicalPath={data.readme.canonicalPath}
-                sourceURL={data.readme.url}
-                repositoryURL={data.readme.repositoryURL}
-                url={url}
-              />
-            )}
-          </>
+          <DirectoryListing
+            name={name}
+            version={version}
+            path={path}
+            items={data.entries}
+            repositoryURL={repositoryURL}
+            url={url}
+          />
         )
         : (
           data.file instanceof Error
@@ -60,13 +47,13 @@ export function CodeView({
                 version={version}
                 raw={data.file.content}
                 filetypeOverride={data.file.highlight ? undefined : "text"}
-                canonicalPath={data.file.canonicalPath}
                 sourceURL={data.file.url}
                 repositoryURL={repositoryURL}
                 url={url}
+                docable={data.docable}
               />
             )
         )}
-    </div>
+    </main>
   );
 }

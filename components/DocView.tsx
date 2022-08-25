@@ -4,50 +4,46 @@
 /** @jsxFrag Fragment */
 import { Fragment, h } from "preact";
 import { tw } from "@twind";
-import { type CommonProps, getBasePath } from "@/util/registry_utils.ts";
+import { type CommonProps, getModulePath } from "@/util/registry_utils.ts";
 import { dirname } from "$std/path/mod.ts";
 import { ModuleDoc } from "$doc_components/module_doc.tsx";
 import { ModulePathIndex } from "$doc_components/module_path_index.tsx";
 import { ModulePathIndexPanel } from "$doc_components/module_path_index_panel.tsx";
-import { FileDisplay } from "./FileDisplay.tsx";
 import { SymbolDoc } from "$doc_components/symbol_doc.tsx";
 import {
   DocPageIndex,
   DocPageModule,
   DocPageSymbol,
 } from "@/util/registry_utils.ts";
+import { SidePanelPage } from "./SidePanelPage.tsx";
 
 export function DocView({
-  isStd,
   name,
   version,
   path,
   url,
 
   data,
-}: CommonProps & {
-  data: DocPageSymbol | DocPageModule | DocPageIndex;
-}) {
-  const basePath = getBasePath({
-    isStd,
-    name,
-    version,
-  });
+}: CommonProps<DocPageSymbol | DocPageModule | DocPageIndex>) {
+  const basePath = getModulePath(name, version);
   url.search = "";
 
   return (
-    <>
-      {(data.kind === "module" || data.kind === "symbol") && (
-        <ModulePathIndexPanel
-          base={basePath}
-          path={dirname(path)}
-          current={path}
-          currentSymbol={data.kind === "symbol" ? data.name : undefined}
-        >
-          {data.nav}
-        </ModulePathIndexPanel>
-      )}
-      <div class={tw`space-y-12 flex flex-col gap-4 w-full overflow-auto`}>
+    <SidePanelPage
+      sidepanel={(data.kind === "module" || data.kind === "symbol")
+        ? (
+          <ModulePathIndexPanel
+            base={basePath}
+            path={dirname(path)}
+            current={path}
+            currentSymbol={data.kind === "symbol" ? data.name : undefined}
+          >
+            {data.nav}
+          </ModulePathIndexPanel>
+        )
+        : null}
+    >
+      <div class={tw`w-full`}>
         {(() => {
           switch (data.kind) {
             case "index":
@@ -79,19 +75,7 @@ export function DocView({
               );
           }
         })()}
-
-        {data.kind === "index" && data.readme && (
-          <FileDisplay
-            isStd={isStd}
-            version={version}
-            raw={data.readme.content}
-            canonicalPath={data.readme.canonicalPath}
-            sourceURL={data.readme.url}
-            repositoryURL={data.readme.repositoryURL}
-            url={url}
-          />
-        )}
       </div>
-    </>
+    </SidePanelPage>
   );
 }

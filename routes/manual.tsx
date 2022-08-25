@@ -11,6 +11,7 @@ import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { Markdown } from "@/components/Markdown.tsx";
 import * as Icons from "@/components/Icons.tsx";
+import { SidePanelPage } from "@/components/SidePanelPage.tsx";
 import {
   getDocURL,
   getFileURL,
@@ -31,7 +32,7 @@ interface Data {
 
 export default function Manual({ params, url, data }: PageProps<Data>) {
   const { version } = data;
-  const path = params.path ? `/${params.path}` : "/introduction";
+  const path = `/${params.path}`;
 
   const pageList = (() => {
     const tempList: { path: string; name: string }[] = [];
@@ -84,111 +85,76 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
       </Head>
       <Header selected="Manual" manual />
 
-      <div>
-        <input
-          type="checkbox"
-          id="ToCToggle"
-          class={tw`hidden checked:siblings:last-child:children:first-child:flex checked:sibling:(border-0 children:children:first-child:rotate-90)`}
-          autoComplete="off"
-        />
-
-        <label
-          htmlFor="ToCToggle"
-          class={tw`lg:hidden block pl-5 py-2.5 font-medium border-b border-dark-border`}
-        >
-          <div class={tw`flex gap-2 items-center px-1.5`}>
-            <Icons.ArrowRight class="text-gray-400" />
-            Menu
-          </div>
-        </label>
-
-        <div
-          class={tw`flex flex-col mt-0 mb-16 lg:(flex-row mt-12 gap-12 section-x-inset-xl)`}
-        >
-          <div
-            class={tw`hidden pb-2 w-full border-b border-dark-border lg:(pb-0 border-none block w-72 flex-shrink-0)`}
+      <SidePanelPage
+        sidepanel={
+          <>
+            <VersionSelect
+              versions={Object.fromEntries(
+                versions.map((ver) => [ver, `/manual@${ver}${path}`]),
+              )}
+              selectedVersion={version}
+            />
+            <ToC
+              tableOfContents={data.tableOfContents}
+              version={params.version}
+              path={path}
+            />
+          </>
+        }
+      >
+        {isPreview && (
+          <UserContributionBanner
+            href={new URL(`/manual/${params.path}`, url).href}
+          />
+        )}
+        <div class={tw`w-full justify-self-center flex-shrink-1`}>
+          <a
+            href={getDocURL(version, path)}
+            class={tw`float-right py-2.5 px-4.5 rounded-md bg-[#F3F3F3] hover:bg-dark-border leading-none font-medium`}
           >
-            <div
-              class={tw`w-full space-y-4 section-x-inset-xl lg:section-x-inset-none`}
-            >
-              <VersionSelect
-                versions={Object.fromEntries(
-                  versions.map((ver) => [ver, `/manual@${ver}${path}`]),
-                )}
-                selectedVersion={version}
-              />
-              <ToC
-                tableOfContents={data.tableOfContents}
-                version={params.version}
-                path={path}
-              />
-            </div>
-          </div>
+            Edit
+          </a>
 
-          <main
-            class={tw`focus:outline-none w-full flex flex-col section-x-inset-xl mt-7 lg:(section-x-inset-none mt-0)`}
-            tabIndex={0}
-          >
-            {isPreview && (
-              <UserContributionBanner
-                href={new URL(`/manual/${params.path}`, url).href}
-              />
-            )}
-            <div
-              class={tw`w-full justify-self-center flex-shrink-1`}
-            >
+          <Markdown
+            source={data.content
+              .replace(/(\[.+\]\(.+)\.md(\))/g, "$1$2")
+              .replaceAll("$STD_VERSION", stdVersion)
+              .replaceAll("$CLI_VERSION", version)}
+            baseURL={sourceURL}
+          />
+
+          <div class={tw`mt-14`}>
+            {pageList[pageIndex - 1] && (
               <a
-                href={getDocURL(version, path)}
-                class={tw`float-right py-2.5 px-4.5 rounded-md bg-[#F3F3F3] hover:bg-dark-border leading-none font-medium`}
+                href={pageList[pageIndex - 1].path.replace(
+                  "manual",
+                  `manual@${version}`,
+                )}
+                class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-dark-border gap-1.5 hover:bg-light-border`}
               >
-                Edit
+                <Icons.ArrowLeft />
+                <div>
+                  {pageList[pageIndex - 1].name}
+                </div>
               </a>
-
-              <Markdown
-                source={data.content
-                  .replace(/\$STD_VERSION/g, stdVersion)
-                  .replace(/\$CLI_VERSION/g, version)}
-                baseUrl={sourceURL}
-              />
-
-              <div class={tw`mt-14`}>
-                {pageList[pageIndex - 1] && (
-                  <a
-                    href={params.version
-                      ? pageList[pageIndex - 1].path.replace(
-                        "manual",
-                        `manual@${version}`,
-                      )
-                      : pageList[pageIndex - 1].path}
-                    class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-dark-border gap-1.5 hover:bg-light-border`}
-                  >
-                    <Icons.ArrowLeft />
-                    <div>
-                      {pageList[pageIndex - 1].name}
-                    </div>
-                  </a>
+            )}
+            {pageList[pageIndex + 1] && (
+              <a
+                href={pageList[pageIndex + 1].path.replace(
+                  "manual",
+                  `manual@${version}`,
                 )}
-                {pageList[pageIndex + 1] && (
-                  <a
-                    href={params.version
-                      ? pageList[pageIndex + 1].path.replace(
-                        "manual",
-                        `manual@${version}`,
-                      )
-                      : pageList[pageIndex + 1].path}
-                    class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-dark-border gap-1.5 float-right text-right hover:bg-light-border`}
-                  >
-                    <div>
-                      {pageList[pageIndex + 1].name}
-                    </div>
-                    <Icons.ArrowRight />
-                  </a>
-                )}
-              </div>
-            </div>
-          </main>
+                class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-dark-border gap-1.5 float-right text-right hover:bg-light-border`}
+              >
+                <div>
+                  {pageList[pageIndex + 1].name}
+                </div>
+                <Icons.ArrowRight />
+              </a>
+            )}
+          </div>
         </div>
-      </div>
+      </SidePanelPage>
 
       <Footer />
 
@@ -254,14 +220,18 @@ function ToC({
 
               <label
                 htmlFor={slug}
-                class={tw`flex items-center gap-2 px-2.5 py-2 rounded-md block ${
+                class={tw`flex items-center gap-2 px-2.5 py-2 rounded-md ${
                   active ? "link bg-ultralight" : "hover:text-gray-500"
                 } font-semibold` + (active ? " toc-active" : "")}
               >
                 <Icons.TriangleRight
-                  class={entry.children ? "" : "invisible"}
+                  aria-label={`open section ${entry.name}`}
+                  onKeyDown="if (event.code === 'Space' || event.code === 'Enter') { this.parentElement.click(); event.preventDefault(); }"
+                  tabindex={0}
+                  class={"cursor-pointer" +
+                    (entry.children ? "" : " invisible")}
                 />
-                <a href={`/manual${version ? `@${version}` : ""}/${slug}`}>
+                <a href={`/manual@${version}/${slug}`}>
                   {entry.name}
                 </a>
               </label>
@@ -276,9 +246,7 @@ function ToC({
                       return (
                         <li key={`${slug}/${childSlug}`}>
                           <a
-                            href={`/manual${
-                              version ? `@${version}` : ""
-                            }/${slug}/${childSlug}`}
+                            href={`/manual@${version}/${slug}/${childSlug}`}
                             class={tw`pl-8 pr-2.5 py-1 rounded-md block ${
                               active
                                 ? "link bg-ultralight"
@@ -304,16 +272,19 @@ function ToC({
 export const handler: Handlers<Data> = {
   async GET(req, { params, render }) {
     const url = new URL(req.url);
+    const { version, path } = params;
+    if (!version || !path) {
+      url.pathname = `/manual@${version || versions[0]}/${
+        path || "introduction"
+      }`;
+      return Response.redirect(url);
+    }
     if (url.pathname.endsWith(".md")) {
       url.pathname = url.pathname.slice(0, -3);
       return Response.redirect(url);
     }
 
-    const version = params.version || versions[0];
-    const sourceURL = getFileURL(
-      version,
-      params.path ? `/${params.path}` : "/introduction",
-    );
+    const sourceURL = getFileURL(version, `/${params.path}`);
     const [tableOfContents, content] = await Promise.all([
       getTableOfContents(version),
       fetch(sourceURL)

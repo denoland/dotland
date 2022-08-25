@@ -25,7 +25,7 @@ export function PopularityTag(
       break;
     case "top_1_percent":
       stars = 3;
-      color = "[#0CBB3F]";
+      color = "[#7B61FF]";
       value = "Extremely Popular";
       break;
   }
