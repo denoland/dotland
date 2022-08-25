@@ -39,7 +39,7 @@ export interface Data {
   hitsPerPage: number;
 }
 
-export default function ThirdPartyRegistryList({ url, data }: PageProps<Data>) {
+export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
   return (
     <>
       <Head>
@@ -364,6 +364,7 @@ export const handler: Handlers<Data> = {
     const res: Data = await index.search(query, {
       page,
       hitsPerPage: 20,
+      filters: "third_party:true",
     });
 
     return render!(res);
