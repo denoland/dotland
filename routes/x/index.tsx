@@ -285,11 +285,11 @@ export default function ThirdPartyRegistryList(
                 have it?
               </h2>
               <p class={tw`text-[#6C6E78] leading-5`}>
-                if there is a module that has been deemed as "low quality" or
-                for purposes of name-squatting, and a new version has not been
-                released to in over 90 days (ignoring versions released to
-                bypass this rule), the module can be claimed via request to
-                modules@deno.com.
+                Name squatting is not allowed on the deno.land/x/. If you feel
+                that a module is not currently usable, has not been legitimately
+                under development for more than 90 days, and you have a concrete
+                proposal to publish a well-maintained module in its place,
+                please contact support.
               </p>
             </div>
 
