@@ -54,7 +54,7 @@ export function Discord(props: { class?: string }) {
   );
 }
 
-export function Twitter(props: { class?: string }) { // TODO
+export function Twitter(props: { class?: string }) { // Size not normalized
   return (
     <svg
       class={tw`h-6 w-6 ${props.class ?? ""}`}
@@ -66,10 +66,10 @@ export function Twitter(props: { class?: string }) { // TODO
   );
 }
 
-export function Instagram(props: { class?: string }) { // TODO
+export function Instagram(props: { class?: string }) { // Size not normalized
   return (
     <svg
-      class={tw`h-6 w-6  ${props.class ?? ""}`}
+      class={tw`h-6 w-6 ${props.class ?? ""}`}
       fill="currentColor"
       viewBox="0 0 24 24"
     >
@@ -78,7 +78,7 @@ export function Instagram(props: { class?: string }) { // TODO
   );
 }
 
-export function Cross(props: { class?: string }) { // TODO
+export function Cross(props: { class?: string }) { // Size not normalized
   return (
     <svg
       class={tw`h-6 w-6 ${props.class ?? ""}`}
@@ -448,7 +448,7 @@ export function Spinner(props: { class?: string }) {
   );
 }
 
-export function StatusOK(props: { class?: string }) {
+export function StatusOK(props: { class?: string }) { // Size not normalized
   return (
     <svg
       class={tw(props.class ?? "")}
@@ -469,7 +469,7 @@ export function StatusOK(props: { class?: string }) {
   );
 }
 
-export function StatusError(props: { class?: string }) {
+export function StatusError(props: { class?: string }) { // Size not normalized
   return (
     <svg
       class={tw(props.class ?? "")}
