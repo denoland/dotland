@@ -432,7 +432,7 @@ function InstallSection({ url }: { url: URL }) {
       <p class={tw`mb-2`}>PowerShell (Windows):</p>
       <CodeBlock
         language="bash"
-        code="iwr https://deno.land/install.ps1 -useb | iex"
+        code="irm https://deno.land/install.ps1 | iex"
         url={url}
       />
     </div>
