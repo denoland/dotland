@@ -39,8 +39,8 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
 
   return (
     <div>
-      <HelloBar to="https://deno.news/archive/48-announcing-deno-merch">
-        Check out Deno News issue #48!
+      <HelloBar to="https://deno.news/archive/49-big-changes-for-deno-starting-with-v125">
+        Check out Deno News issue #49!
       </HelloBar>
       <Head>
         <title>Deno - A modern runtime for JavaScript and TypeScript</title>
