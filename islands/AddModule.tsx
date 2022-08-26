@@ -250,7 +250,7 @@ export default function AddModule() {
                 <div
                   class={tw`py-3.5 px-4 text-[#20B44B] border border-[#20B44B] rounded-lg w-full lg:w-136 flex items-center`}
                 >
-                  <Icons.StatusOK />
+                  <Icons.StatusOK class="h-6 w-auto" />
                   <span class={tw`ml-2.5 font-medium`}>
                     Module successfully registered!
                   </span>

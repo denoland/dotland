@@ -73,7 +73,7 @@ function LanguageItem({ language }: { language: Translation }) {
           class={tw`text-gray-500 hover:text-gray-700`}
         >
           <span class={tw`sr-only`}>GitHub</span>
-          <Icons.GitHub />
+          <Icons.GitHub class="h-5 w-auto" />
         </a>
       </div>
     </div>

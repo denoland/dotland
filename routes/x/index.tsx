@@ -187,7 +187,7 @@ export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
                         {result.popularity_tag && (
                           <PopularityTag>{result.popularity_tag}</PopularityTag>
                         )}
-                        <Icons.ArrowRight class="text-gray-400" />
+                        <Icons.ChevronRight class="text-gray-400" />
                       </div>
                     </a>
                   </li>
@@ -287,7 +287,7 @@ export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
                 class={tw`rounded-md leading-none font-medium bg-tag-blue px-4.5 py-2.5 inline-flex items-center text-white gap-1.5 hover:bg-[#3587EF]`}
               >
                 <div>Open an issue here</div>
-                <Icons.ArrowRight />
+                <Icons.ChevronRight />
               </a>
             </div>
           </div>
@@ -317,14 +317,14 @@ export function Pagination(
         class={tw`p-3.5 rounded-lg border border-dark-border px-2.5 py-1.5 flex items-center gap-2.5 bg-white`}
       >
         <MaybeA disabled={page === 0} href={toPage(page - 1)}>
-          <Icons.ArrowLeft />
+          <Icons.ChevronLeft />
         </MaybeA>
         <div class={tw`leading-none`}>
           Page <span class={tw`font-medium`}>{page + 1}</span> of{" "}
           <span class={tw`font-medium`}>{nbPages}</span>
         </div>
         <MaybeA disabled={(page + 1) >= nbPages} href={toPage(page + 1)}>
-          <Icons.ArrowRight />
+          <Icons.ChevronRight />
         </MaybeA>
       </div>
 

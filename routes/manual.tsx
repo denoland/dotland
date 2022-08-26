@@ -132,7 +132,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                 )}
                 class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-dark-border gap-1.5 hover:bg-light-border`}
               >
-                <Icons.ArrowLeft />
+                <Icons.ChevronLeft />
                 <div>
                   {pageList[pageIndex - 1].name}
                 </div>
@@ -149,7 +149,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                 <div>
                   {pageList[pageIndex + 1].name}
                 </div>
-                <Icons.ArrowRight />
+                <Icons.ChevronRight />
               </a>
             )}
           </div>
@@ -228,8 +228,8 @@ function ToC({
                   aria-label={`open section ${entry.name}`}
                   onKeyDown="if (event.code === 'Space' || event.code === 'Enter') { this.parentElement.click(); event.preventDefault(); }"
                   tabindex={0}
-                  class={"cursor-pointer" +
-                    (entry.children ? "" : " invisible")}
+                  class={"h-2.5 w-auto cursor-pointer " +
+                    (entry.children ? "" : "invisible")}
                 />
                 <a href={`/manual@${version}/${slug}`}>
                   {entry.name}

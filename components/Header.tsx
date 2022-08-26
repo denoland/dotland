@@ -114,14 +114,14 @@ export function Header({
               class={tw`lg:ml-5 my-auto hidden lg:block`}
             >
               <span class={tw`sr-only`}>GitHub</span>
-              <Icons.GitHub class="inline text-main hover:text-default-highlight" />
+              <Icons.GitHub class="h-5 w-auto text-main hover:text-default-highlight" />
             </a>
             <a
               href="https://discord.gg/deno"
               class={tw`lg:ml-5 my-auto hidden lg:block`}
             >
               <span class={tw`sr-only`}>Discord</span>
-              <Icons.Discord class="inline text-main hover:text-default-highlight" />
+              <Icons.Discord class="h-5 w-auto text-main hover:text-default-highlight" />
             </a>
           </div>
         </nav>

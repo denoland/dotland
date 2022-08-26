@@ -75,7 +75,7 @@ function Item({ project }: { project: Project }) {
             class={tw`ml-2 text-gray-500 hover:text-gray-700`}
           >
             <span class={tw`sr-only`}>GitHub</span>
-            <Icons.GitHub class="inline float-right" />
+            <Icons.GitHub class="h-5 w-auto inline float-right" />
           </a>
         )}
       </div>

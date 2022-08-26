@@ -4,6 +4,7 @@
 import { h } from "preact";
 import { tw } from "@twind";
 import * as Icons from "./Icons.tsx";
+import { ArrowRight } from "./Icons.tsx";
 
 export function Footer() {
   return (
@@ -85,12 +86,13 @@ export function Footer() {
                 <span class={tw`whitespace-nowrap`}>All rights reserved.</span>
               </span>
               <a class={tw`block text-[#7B61FF]`} href="https://deno.com/jobs">
-                We are hiring, join
-                us<Icons.LongArrowRight class="inline ml-1.5" />
+                We are hiring, join us<Icons.ArrowRight class="inline ml-1.5" />
               </a>
             </div>
 
-            <div class={tw`flex gap-3 text-[#6C6E78]`}>
+            <div
+              class={tw`flex gap-3 text-[#6C6E78] children:children:(h-4.5 w-auto)`}
+            >
               <a href="https://github.com/denoland">
                 <Icons.GitHub class="hover:text-default-highlight" />
               </a>
