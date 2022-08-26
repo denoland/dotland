@@ -36,11 +36,11 @@ export function FileDisplay(props: {
           class={tw`flex items-center gap-3 children:(border border-dark-border rounded p-2 hover:bg-ultralight)`}
         >
           <a href={props.repositoryURL} title="Repository URL">
-            <Icons.GitHub class="h-4 w-4" />
+            <Icons.GitHub class="h-4 w-auto" />
           </a>
           {props.docable && (
             <a href={doc.href} title="Documentation">
-              <Icons.Manual class="h-4" />
+              <Icons.Docs class="h-4 w-auto" />
             </a>
           )}
         </div>

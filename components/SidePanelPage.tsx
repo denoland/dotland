@@ -26,7 +26,7 @@ export function SidePanelPage({ children, sidepanel }: {
             class={tw`lg:hidden block pl-5 py-2.5 font-medium border-b border-dark-border`}
           >
             <div class={tw`flex gap-2 items-center px-1.5`}>
-              <Icons.ArrowRight class="text-gray-400" />
+              <Icons.ChevronRight class="text-gray-400" />
               Menu
             </div>
           </label>

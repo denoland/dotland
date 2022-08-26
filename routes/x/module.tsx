@@ -293,7 +293,7 @@ function TopPanel({
                 class={tw`flex flex-row justify-between md:justify-center items-center gap-4 border border-dark-border rounded-md bg-white py-2 px-5`}
               >
                 <div class={tw`flex items-center whitespace-nowrap gap-2`}>
-                  <Icons.GitHub class="w-5 h-5 inline text-gray-700" />
+                  <Icons.GitHub class="h-5 w-auto inline text-gray-700" />
                   <a
                     class={tw`link`}
                     href={`https://github.com/${data.upload_options.repository}`}
@@ -502,7 +502,7 @@ function InfoView(
   if (data.upload_options.repository.split("/")[0] == "denoland") {
     attributes.push(
       <div class={tw`flex items-center gap-1.5`}>
-        <Icons.CheckmarkVerified />
+        <Icons.CheckmarkVerified class="h-4 w-auto" />
         <span class={tw`text-tag-blue font-medium leading-none`}>
           By Deno Team
         </span>
@@ -551,7 +551,7 @@ function InfoView(
               class={tw`space-y-3 children:(flex items-center gap-1.5 leading-none font-medium)`}
             >
               <span>
-                <Icons.Manual />
+                <Icons.Docs />
                 <a
                   href={getModulePath(name, version) + "?doc"}
                   class={tw`link`}

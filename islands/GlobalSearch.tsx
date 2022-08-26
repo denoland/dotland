@@ -316,7 +316,7 @@ export default function GlobalSearch() {
                     onClick={() => setPage((page) => page - 1)}
                     disabled={page === 0}
                   >
-                    <Icons.ArrowLeft />
+                    <Icons.ChevronLeft />
                   </button>
                   <span class={tw`text-gray-400`}>
                     Page <span class={tw`font-medium`}>{page + 1}</span> of{" "}
@@ -327,7 +327,7 @@ export default function GlobalSearch() {
                     onClick={() => setPage((page) => page + 1)}
                     disabled={(page + 1) === totalPages}
                   >
-                    <Icons.ArrowRight />
+                    <Icons.ChevronRight />
                   </button>
                 </div>
 
@@ -406,7 +406,7 @@ function ManualResult({ hierarchy, url, content }: ManualSearchResult) {
   return (
     <a href={url}>
       <div class={tw`p-1.5 rounded-full bg-gray-200`}>
-        <Icons.Manual />
+        <Icons.Docs />
       </div>
       <div>
         <ManualResultTitle title={title} />

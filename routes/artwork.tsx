@@ -104,39 +104,29 @@ function Item({ artwork }: { artwork: Artwork }) {
             </span>
           </div>
         </div>
-        <div class={tw`flex justify-start items-center ml-4`}>
+        <div
+          class={tw`flex justify-start items-center ml-4 gap-2 children:children:(text-gray-500 hover:text-gray-700 h-5 w-auto)`}
+        >
           {artwork.artist.web && (
-            <a
-              href={artwork.artist.web}
-              class={tw`ml-2 text-gray-500 hover:text-gray-700`}
-            >
+            <a href={artwork.artist.web}>
               <span class={tw`sr-only`}>Website</span>
               <Icons.Globe />
             </a>
           )}
           {artwork.artist.twitter && (
-            <a
-              href={`https://twitter.com/${artwork.artist.twitter}`}
-              class={tw`ml-2 text-gray-500 hover:text-gray-700`}
-            >
+            <a href={`https://twitter.com/${artwork.artist.twitter}`}>
               <span class={tw`sr-only`}>Twitter</span>
               <Icons.Twitter />
             </a>
           )}
           {artwork.artist.github && (
-            <a
-              href={`https://github.com/${artwork.artist.github}`}
-              class={tw`ml-2 text-gray-500 hover:text-gray-700`}
-            >
+            <a href={`https://github.com/${artwork.artist.github}`}>
               <span class={tw`sr-only`}>GitHub</span>
               <Icons.GitHub />
             </a>
           )}
           {artwork.artist.instagram && (
-            <a
-              href={`https://www.instagram.com/${artwork.artist.instagram}`}
-              class={tw`ml-2 text-gray-500 hover:text-gray-700`}
-            >
+            <a href={`https://www.instagram.com/${artwork.artist.instagram}`}>
               <span class={tw`sr-only`}>Instagram</span>
               <Icons.Instagram />
             </a>

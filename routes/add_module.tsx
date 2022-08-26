@@ -47,7 +47,7 @@ export default function AddModulePage() {
               href="/x"
               class={tw`inline-flex rounded-md bg-light-border py-3 px-4 items-center`}
             >
-              <Icons.ArrowLeft />
+              <Icons.ChevronLeft />
               <span class={tw`ml-1.5`}>Browse Modules</span>
             </a>
           </div>

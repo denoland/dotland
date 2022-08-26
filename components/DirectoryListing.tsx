@@ -30,17 +30,17 @@ export function DirectoryListing(props: {
         class={tw`py-3 px-5 flex justify-between items-center`}
       >
         <div class={tw`flex items-center gap-2`}>
-          <Icons.Index class="text-gray-500" />
+          <Icons.Index class="h-4 w-auto text-gray-500" />
           <span class={tw`text-lg leading-5 font-semibold`}>Directory</span>
         </div>
         <div
           class={tw`flex items-center gap-3 children:(border border-dark-border rounded p-2 hover:bg-ultralight)`}
         >
           <a href={props.repositoryURL} title="Repository URL">
-            <Icons.GitHub class="h-4 w-4" />
+            <Icons.GitHub class="h-4 w-auto" />
           </a>
           <a href={doc.href} title="Documentation">
-            <Icons.Manual class="h-4" />
+            <Icons.Docs class="h-4 w-auto" />
           </a>
         </div>
       </div>

@@ -120,7 +120,7 @@ export default function StatusPage({ data }: PageProps<Build | Error>) {
                       {data.message && (
                         <div class={tw`flex mt-2`}>
                           <div class={tw`mr-2`}>
-                            <Icons.ArrowRight />
+                            <Icons.ChevronRight />
                           </div>
                           <div>{data.message}</div>
                         </div>
