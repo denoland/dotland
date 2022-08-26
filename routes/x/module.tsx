@@ -293,7 +293,7 @@ function TopPanel({
                 class={tw`flex flex-row justify-between md:justify-center items-center gap-4 border border-dark-border rounded-md bg-white py-2 px-5`}
               >
                 <div class={tw`flex items-center whitespace-nowrap gap-2`}>
-                  <Icons.GitHub class="h-5 w-auto inline text-gray-700" />
+                  <Icons.GitHub class="h-4 w-auto text-gray-700 flex-none" />
                   <a
                     class={tw`link`}
                     href={`https://github.com/${data.upload_options.repository}`}
@@ -585,7 +585,7 @@ function InfoView(
               Repository
             </div>
             <div class={tw`flex items-center gap-1.5 whitespace-nowrap`}>
-              <Icons.GitHub class="w-5 h-5 text-gray-700 flex-none" />
+              <Icons.GitHub class="h-4 w-auto text-gray-700 flex-none" />
               <a
                 class={tw`link truncate`}
                 href={`https://github.com/${data.upload_options.repository}`}

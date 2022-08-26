@@ -11,11 +11,9 @@ export function ErrorMessage(props: {
 }) {
   return (
     <div class={tw`rounded-md bg-red-50 border border-red-200 p-4 w-full`}>
-      <div class={tw`flex`}>
-        <div class={tw`flex-shrink-0`}>
-          <Icons.Error />
-        </div>
-        <div class={tw`ml-3`}>
+      <div class={tw`flex gap-3`}>
+        <Icons.StatusError />
+        <div>
           <h3 class={tw`text-sm leading-5 font-medium text-red-800`}>
             {props.title}
           </h3>
