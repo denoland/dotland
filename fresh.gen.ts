@@ -6,21 +6,22 @@ import * as $0 from "./routes/_404.tsx";
 import * as $1 from "./routes/_app.tsx";
 import * as $2 from "./routes/add_module.tsx";
 import * as $3 from "./routes/artwork.tsx";
-import * as $4 from "./routes/benchmarks.tsx";
-import * as $5 from "./routes/completions/config.ts";
-import * as $6 from "./routes/completions/v1.ts";
-import * as $7 from "./routes/gfm.css.ts";
-import * as $8 from "./routes/index.tsx";
-import * as $9 from "./routes/install.ts";
-import * as $10 from "./routes/legacy_redirects/posts.ts";
-import * as $11 from "./routes/legacy_redirects/v1.ts";
-import * as $12 from "./routes/manual.tsx";
-import * as $13 from "./routes/showcase.tsx";
-import * as $14 from "./routes/status.tsx";
-import * as $15 from "./routes/std.tsx";
-import * as $16 from "./routes/translations.tsx";
-import * as $17 from "./routes/x/index.tsx";
-import * as $18 from "./routes/x/module.tsx";
+import * as $4 from "./routes/badge.ts";
+import * as $5 from "./routes/benchmarks.tsx";
+import * as $6 from "./routes/completions/config.ts";
+import * as $7 from "./routes/completions/v1.ts";
+import * as $8 from "./routes/gfm.css.ts";
+import * as $9 from "./routes/index.tsx";
+import * as $10 from "./routes/install.ts";
+import * as $11 from "./routes/legacy_redirects/posts.ts";
+import * as $12 from "./routes/legacy_redirects/v1.ts";
+import * as $13 from "./routes/manual.tsx";
+import * as $14 from "./routes/showcase.tsx";
+import * as $15 from "./routes/status.tsx";
+import * as $16 from "./routes/std.tsx";
+import * as $17 from "./routes/translations.tsx";
+import * as $18 from "./routes/x/index.tsx";
+import * as $19 from "./routes/x/module.tsx";
 import * as $$0 from "./islands/AddModule.tsx";
 import * as $$1 from "./islands/GlobalSearch.tsx";
 import * as $$2 from "./islands/HelloBar.tsx";
@@ -32,21 +33,22 @@ const manifest = {
     "./routes/_app.tsx": $1,
     "./routes/add_module.tsx": $2,
     "./routes/artwork.tsx": $3,
-    "./routes/benchmarks.tsx": $4,
-    "./routes/completions/config.ts": $5,
-    "./routes/completions/v1.ts": $6,
-    "./routes/gfm.css.ts": $7,
-    "./routes/index.tsx": $8,
-    "./routes/install.ts": $9,
-    "./routes/legacy_redirects/posts.ts": $10,
-    "./routes/legacy_redirects/v1.ts": $11,
-    "./routes/manual.tsx": $12,
-    "./routes/showcase.tsx": $13,
-    "./routes/status.tsx": $14,
-    "./routes/std.tsx": $15,
-    "./routes/translations.tsx": $16,
-    "./routes/x/index.tsx": $17,
-    "./routes/x/module.tsx": $18,
+    "./routes/badge.ts": $4,
+    "./routes/benchmarks.tsx": $5,
+    "./routes/completions/config.ts": $6,
+    "./routes/completions/v1.ts": $7,
+    "./routes/gfm.css.ts": $8,
+    "./routes/index.tsx": $9,
+    "./routes/install.ts": $10,
+    "./routes/legacy_redirects/posts.ts": $11,
+    "./routes/legacy_redirects/v1.ts": $12,
+    "./routes/manual.tsx": $13,
+    "./routes/showcase.tsx": $14,
+    "./routes/status.tsx": $15,
+    "./routes/std.tsx": $16,
+    "./routes/translations.tsx": $17,
+    "./routes/x/index.tsx": $18,
+    "./routes/x/module.tsx": $19,
   },
   islands: {
     "./islands/AddModule.tsx": $$0,
