@@ -312,6 +312,7 @@ function TopPanel({
                 selectedVersion={version}
                 name={name}
                 path={path}
+                view={view}
               />
             )}
           </div>
@@ -454,17 +455,24 @@ function VersionSelector({
   selectedVersion,
   name,
   path,
+  view,
 }: {
   versions: string[];
   selectedVersion: string;
   name: string;
   path: string;
+  view: Views;
 }) {
+  const searchParam = view === "source"
+    ? "?source"
+    : (path === "" ? "?doc" : "");
   return (
     <>
       <VersionSelect
         versions={Object.fromEntries(
-          versions.map((ver) => [ver, getModulePath(name, ver, path)]),
+          versions.map((
+            ver,
+          ) => [ver, getModulePath(name, ver, path) + searchParam]),
         )}
         selectedVersion={selectedVersion}
       />
@@ -472,7 +480,7 @@ function VersionSelector({
         <a
           class={tw`py-2.5 px-4.5 text-white bg-tag-blue hover:bg-blue-500 rounded-md leading-none`}
           aria-label="Go to latest version"
-          href={getModulePath(name, versions[0], path)}
+          href={getModulePath(name, versions[0], path) + searchParam}
         >
           Go to Latest
         </a>
