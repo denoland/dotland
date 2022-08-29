@@ -4,6 +4,7 @@
 /** @jsxFrag Fragment */
 import { Fragment, h } from "preact";
 import algoliasearch from "$algolia";
+import { createFetchRequester } from "$algolia/requester-fetch";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { css, tw } from "@twind";
 import { useEffect, useState } from "preact/hooks";
@@ -76,9 +77,11 @@ export default function GlobalSearch() {
     "Type Aliases": true,
   });
 
+  const requester = createFetchRequester();
   const client = algoliasearch(
     "QFPCRZC6WX",
     "2ed789b2981acd210267b27f03ab47da",
+    { requester },
   );
 
   useEffect(() => {
