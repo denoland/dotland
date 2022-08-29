@@ -110,18 +110,12 @@ export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
               </div>
 
               <div class={tw`space-x-2`}>
-                <a
-                  href="/add_module"
-                  class={tw`rounded-md px-4.5 py-2.5 inline-flex items-center gap-1.5 leading-none font-medium text-white bg-tag-blue hover:bg-[#3587EF]`}
-                >
+                <a href="/add_module" class={tw`button-primary`}>
                   <Icons.Plus />
-                  <div>Publish a module</div>
+                  <span>Publish a module</span>
                 </a>
 
-                <a
-                  href="#Q&A"
-                  class={tw`px-4.5 py-2.5 rounded-md font-medium leading-none bg-[#F3F3F3] hover:bg-dark-border`}
-                >
+                <a href="#Q&A" class={tw`button-alternate`}>
                   Learn more
                 </a>
               </div>
@@ -284,9 +278,9 @@ export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
               </h2>
               <a
                 href="https://github.com/denoland/wanted_modules/issues"
-                class={tw`rounded-md leading-none font-medium bg-tag-blue px-4.5 py-2.5 inline-flex items-center text-white gap-1.5 hover:bg-[#3587EF]`}
+                class={tw`button-primary`}
               >
-                <div>Open an issue here</div>
+                <span>Open an issue here</span>
                 <Icons.ChevronRight />
               </a>
             </div>

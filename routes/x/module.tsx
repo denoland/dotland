@@ -478,7 +478,7 @@ function VersionSelector({
       />
       {versions[0] !== selectedVersion && (
         <a
-          class={tw`py-2.5 px-4.5 text-white bg-tag-blue hover:bg-blue-500 rounded-md leading-none`}
+          class={tw`button-primary`}
           aria-label="Go to latest version"
           href={getModulePath(name, versions[0], path) + searchParam}
         >

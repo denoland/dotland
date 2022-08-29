@@ -43,12 +43,9 @@ export default function AddModulePage() {
                 For this purpose we use GitHub webhooks.
               </p>
             </div>
-            <a
-              href="/x"
-              class={tw`inline-flex rounded-md bg-light-border py-3 px-4 items-center`}
-            >
+            <a href="/x" class={tw`button-alternate`}>
               <Icons.ChevronLeft />
-              <span class={tw`ml-1.5`}>Browse Modules</span>
+              <span>Browse Modules</span>
             </a>
           </div>
           <AddModule />
