@@ -88,6 +88,53 @@ export const config: Configuration = {
         },
       }),
     tag: apply`inline py-1 px-2 rounded-full leading-none font-medium text-xs`,
+    button: ([kind]) => {
+      let bg = "";
+      let text = "";
+      let bgHover = "";
+      let border = false;
+
+      switch (kind) {
+        case "primary": {
+          bg = "tag-blue";
+          text = "white";
+          bgHover = "[#3587EF]";
+          break;
+        }
+        case "secondary": {
+          bg = "default";
+          text = "white";
+          bgHover = "";
+          break;
+        }
+        case "alternate": {
+          bg = "[#F3F3F3]";
+          text = "default";
+          bgHover = "dark-border";
+          break;
+        }
+        case "outline": {
+          bg = "white";
+          text = "default";
+          bgHover = "ultralight";
+          border = true;
+          break;
+        }
+        case "danger": {
+          bg = "white";
+          text = "[#F00C08]";
+          bgHover = "ultralight";
+          border = true;
+          break;
+        }
+      }
+
+      return apply`inline-flex items-center gap-2 py-2.5 px-4.5 rounded-md bg-${bg} hover:bg-${bgHover} text-${text} leading-none font-medium ${
+        border ? "border border-dark-border" : ""
+      }`;
+    },
+    "icon-button":
+      apply`border border-dark-border rounded p-2 hover:bg-ultralight`,
   },
 };
 

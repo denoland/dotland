@@ -83,28 +83,26 @@ export function Header({
           <div
             class={tw`hidden flex-col mx-2 mt-5 gap-y-4 lg:(flex flex-row items-center mx-0 mt-0) font-medium`}
           >
-            {entries.map(({ href, content }) => {
-              return (
-                <a
-                  href={href}
-                  class={tw`lg:ml-4 px-2 rounded-md leading-loose hover:(bg-gray-100 text-main) ${apply`${
-                    content === selected
-                      ? css({
-                        "text-decoration-line": "underline",
-                        "text-underline-offset": "6px",
-                        "text-decoration-thickness": "2px",
-                      })
-                      : ""
-                  } ${content === selected ? "text-black" : "text-gray-500"}`}`}
-                >
-                  {content}
-                </a>
-              );
-            })}
+            {entries.map(({ href, content }) => (
+              <a
+                href={href}
+                class={tw`lg:ml-4 px-2 rounded-md leading-loose hover:(bg-gray-100 text-main) ${apply`${
+                  content === selected
+                    ? css({
+                      "text-decoration-line": "underline",
+                      "text-underline-offset": "6px",
+                      "text-decoration-thickness": "2px",
+                    })
+                    : ""
+                } ${content === selected ? "text-black" : "text-gray-500"}`}`}
+              >
+                {content}
+              </a>
+            ))}
 
             <a
               href="https://deno.com/deploy"
-              class={tw`h-9 lg:ml-5 bg-secondary rounded-md px-4 flex items-center hover:bg-[#D5D7DB]`}
+              class={tw`button-outline lg:ml-5`}
             >
               Deploy
             </a>
