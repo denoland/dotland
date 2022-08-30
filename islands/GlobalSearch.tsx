@@ -109,7 +109,7 @@ export default function GlobalSearch() {
 
     if (kind === "Manual" || kind === "All") {
       queries.push({
-        indexName: "manual_new",
+        indexName: "manual",
         query: input || "Introduction",
         params: {
           page: page,
@@ -151,7 +151,7 @@ export default function GlobalSearch() {
         setTotalPages(results.find((res) => res.nbPages)?.nbPages ?? 1);
         setResults({
           // @ts-ignore algolia typings are annoying
-          manual: results.find((res) => res.index === "manual_new")?.hits,
+          manual: results.find((res) => res.index === "manual")?.hits,
           // @ts-ignore algolia typings are annoying
           symbols: results.find((res) => res.index === "doc_nodes")?.hits,
           // @ts-ignore algolia typings are annoying
