@@ -4,12 +4,18 @@
 /** @jsxFrag Fragment */
 import { Fragment, h } from "preact";
 import algoliasearch from "$algolia";
+import type {
+  MultipleQueriesQuery,
+  SearchResponse,
+} from "$algolia/client-search";
+import { createFetchRequester } from "$algolia/requester-fetch";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { css, tw } from "@twind";
 import { useEffect, useState } from "preact/hooks";
 import * as Icons from "@/components/Icons.tsx";
 import type { DocNode } from "$deno_doc/types.d.ts";
 import { colors, docNodeKindMap } from "@/components/symbol_kind.tsx";
+import { searchClick } from "@/util/search_insights_utils.ts";
 import { ComponentChildren } from "preact";
 
 // Lazy load a <dialog> polyfill.
@@ -20,12 +26,18 @@ if (IS_BROWSER && window.HTMLDialogElement === "undefined") {
   );
 }
 
+const MODULE_INDEX = "modules";
+const SYMBOL_INDEX = "doc_nodes";
+const MANUAL_INDEX = "manual";
+
 const kinds = [
   "All",
   "Manual",
   "Modules",
   "Symbols",
 ] as const;
+
+type SearchKinds = typeof kinds[number];
 
 const symbolKinds = {
   "Namespaces": "namespace",
@@ -36,6 +48,8 @@ const symbolKinds = {
   "Interfaces": "interface",
   "Type Aliases": "typeAlias",
 } as const;
+
+type SymbolKinds = keyof typeof symbolKinds;
 
 interface ManualSearchResult {
   docPath: string;
@@ -49,23 +63,46 @@ interface ModuleSearchResult {
   description: string;
 }
 
+interface SearchResults<ResultItem> {
+  queryID?: string;
+  hits: (ResultItem & { objectID: string })[];
+  hitsPerPage: number;
+  page: number;
+}
+
+interface Results {
+  manual?: SearchResults<ManualSearchResult>;
+  modules?: SearchResults<ModuleSearchResult>;
+  symbols?: SearchResults<DocNode>;
+}
+
+function toSearchResults<ResultItem>(
+  // deno-lint-ignore no-explicit-any
+  response: SearchResponse<any>[],
+  index: string,
+): SearchResults<ResultItem> | undefined {
+  const result = response.find((res) => res.index === index);
+  if (result) {
+    const { queryID, hits, hitsPerPage, page } = result;
+    return { queryID, hits, hitsPerPage, page };
+  }
+}
+
+function getPosition(results: SearchResults<unknown>, index: number): number {
+  return (results.hitsPerPage * results.page) + index + 1;
+}
+
 /** Search Deno documentation, symbols, or modules. */
-export default function GlobalSearch() {
+export default function GlobalSearch({ userToken }: { userToken?: string }) {
   const [showModal, setShowModal] = useState(false);
   const [input, setInput] = useState("");
 
-  const [results, setResults] = useState<
-    {
-      manual?: Array<ManualSearchResult>;
-      modules?: Array<ModuleSearchResult>;
-      symbols?: Array<DocNode>;
-    } | null
-  >(null);
-  const [kind, setKind] = useState<typeof kinds[number]>("All");
+  const [results, setResults] = useState<Results | null>(null);
+  const [kind, setKind] = useState<SearchKinds>("All");
   const [page, setPage] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [symbolKindsToggle, setSymbolKindsToggle] = useState<
-    Record<(keyof typeof symbolKinds), boolean>
+    Record<SymbolKinds, boolean>
   >({
     "Namespaces": true,
     "Classes": true,
@@ -76,9 +113,11 @@ export default function GlobalSearch() {
     "Type Aliases": true,
   });
 
+  const requester = createFetchRequester();
   const client = algoliasearch(
     "QFPCRZC6WX",
     "2ed789b2981acd210267b27f03ab47da",
+    { requester },
   );
 
   useEffect(() => {
@@ -105,15 +144,16 @@ export default function GlobalSearch() {
 
     setResults(null);
 
-    const queries = [];
+    const queries: MultipleQueriesQuery[] = [];
 
     if (kind === "Manual" || kind === "All") {
       queries.push({
-        indexName: "manual",
+        indexName: MANUAL_INDEX,
         query: input || "Introduction",
         params: {
           page: page,
           hitsPerPage: kind === "All" ? 5 : 10,
+          clickAnalytics: true,
           filters: "kind:paragraph",
         },
       });
@@ -121,11 +161,12 @@ export default function GlobalSearch() {
 
     if (kind === "Symbols" || kind === "All") {
       queries.push({
-        indexName: "doc_nodes",
+        indexName: SYMBOL_INDEX,
         query: input || "serve",
         params: {
           page: page,
           hitsPerPage: kind === "All" ? 5 : 10,
+          clickAnalytics: true,
           filters: Object.entries(symbolKindsToggle)
             .filter(([_, v]) => kind === "Symbols" ? v : true)
             .map(([k]) => "kind:" + symbolKinds[k as keyof typeof symbolKinds])
@@ -136,11 +177,12 @@ export default function GlobalSearch() {
 
     if (kind === "Modules" || kind === "All") {
       queries.push({
-        indexName: "modules",
+        indexName: MODULE_INDEX,
         query: input,
         params: {
           page: page,
           hitsPerPage: kind === "All" ? 5 : 10,
+          clickAnalytics: true,
         },
       });
     }
@@ -150,12 +192,9 @@ export default function GlobalSearch() {
         // @ts-ignore algolia typings are annoying
         setTotalPages(results.find((res) => res.nbPages)?.nbPages ?? 1);
         setResults({
-          // @ts-ignore algolia typings are annoying
-          manual: results.find((res) => res.index === "manual")?.hits,
-          // @ts-ignore algolia typings are annoying
-          symbols: results.find((res) => res.index === "doc_nodes")?.hits,
-          // @ts-ignore algolia typings are annoying
-          modules: results.find((res) => res.index === "modules")?.hits,
+          manual: toSearchResults(results, MANUAL_INDEX),
+          symbols: toSearchResults(results, SYMBOL_INDEX),
+          modules: toSearchResults(results, MODULE_INDEX),
         });
       },
     );
@@ -258,37 +297,56 @@ export default function GlobalSearch() {
                   <>
                     {results.manual && (
                       <Section title="Manual" isAll={kind === "All"}>
-                        {results.manual && results.manual.length === 0 && (
+                        {results.manual && results.manual.hits.length === 0 && (
                           <div class={tw`text-gray-500 italic`}>
                             Your search did not yield any results in the manual.
                           </div>
                         )}
-                        {results.manual.map((res) => <ManualResult {...res} />)}
+                        {results.manual.hits.map((res, i) => (
+                          <ManualResult
+                            {...res}
+                            userToken={userToken}
+                            queryID={results.manual!.queryID}
+                            position={getPosition(results.manual!, i)}
+                          />
+                        ))}
                       </Section>
                     )}
                     {results.modules && (
                       <Section title="Modules" isAll={kind === "All"}>
-                        {results.modules && results.modules.length === 0 && (
-                          <div class={tw`text-gray-500 italic`}>
-                            Your search did not yield any results in the modules
-                            index.
-                          </div>
-                        )}
-                        {results.modules.map((module) => (
-                          <ModuleResult module={module} />
+                        {results.modules && results.modules.hits.length === 0 &&
+                          (
+                            <div class={tw`text-gray-500 italic`}>
+                              Your search did not yield any results in the
+                              modules index.
+                            </div>
+                          )}
+                        {results.modules.hits.map((module, i) => (
+                          <ModuleResult
+                            module={module}
+                            userToken={userToken}
+                            queryID={results.modules!.queryID}
+                            position={getPosition(results.modules!, i)}
+                          />
                         ))}
                       </Section>
                     )}
                     {results.symbols && (
                       <Section title="Symbols" isAll={kind === "All"}>
-                        {results.symbols && results.symbols.length === 0 && (
-                          <div class={tw`text-gray-500 italic`}>
-                            Your search did not yield any results in the symbol
-                            index.
-                          </div>
-                        )}
-                        {results.symbols.map((doc) => (
-                          <SymbolResult doc={doc} />
+                        {results.symbols && results.symbols.hits.length === 0 &&
+                          (
+                            <div class={tw`text-gray-500 italic`}>
+                              Your search did not yield any results in the
+                              symbol index.
+                            </div>
+                          )}
+                        {results.symbols.hits.map((doc, i) => (
+                          <SymbolResult
+                            doc={doc}
+                            userToken={userToken}
+                            queryID={results.symbols!.queryID}
+                            position={getPosition(results.symbols!, i)}
+                          />
                         ))}
                       </Section>
                     )}
@@ -396,10 +454,29 @@ function Section({
   );
 }
 
-function ManualResult({ hierarchy, docPath, content }: ManualSearchResult) {
+function ManualResult(
+  { hierarchy, docPath, content, objectID, userToken, queryID, position }:
+    & ManualSearchResult
+    & {
+      objectID: string;
+      userToken?: string;
+      queryID?: string;
+      position?: number;
+    },
+) {
   const title = Object.values(hierarchy).filter(Boolean);
   return (
-    <a href={docPath}>
+    <a
+      href={docPath}
+      onClick={() =>
+        searchClick(
+          userToken,
+          MANUAL_INDEX,
+          queryID,
+          objectID,
+          position,
+        )}
+    >
       <div class={tw`p-1.5 rounded-full bg-gray-200`}>
         <Icons.Docs />
       </div>
@@ -429,13 +506,30 @@ function ManualResultTitle(props: { title: string[] }) {
   return <div class={tw`space-x-1`}>{parts}</div>;
 }
 
-function SymbolResult({ doc }: { doc: DocNode }) {
+function SymbolResult(
+  { doc, userToken, queryID, position }: {
+    doc: DocNode & { objectID: string };
+    userToken?: string;
+    queryID?: string;
+    position?: number;
+  },
+) {
   let location = new URL(doc.location.filename).pathname;
   location = location.replace(/^(\/x\/)|\//, "");
   const KindIcon = docNodeKindMap[doc.kind];
   const href = `${doc.location.filename}?s=${doc.name}`;
   return (
-    <a href={href}>
+    <a
+      href={href}
+      onClick={() =>
+        searchClick(
+          userToken,
+          SYMBOL_INDEX,
+          queryID,
+          doc.objectID,
+          position,
+        )}
+    >
       <KindIcon />
       <div>
         <div class={tw`space-x-2 py-1`}>
@@ -458,9 +552,26 @@ function SymbolResult({ doc }: { doc: DocNode }) {
   );
 }
 
-function ModuleResult({ module }: { module: ModuleSearchResult }) {
+function ModuleResult(
+  { module, userToken, queryID, position }: {
+    module: ModuleSearchResult & { objectID: string };
+    userToken?: string;
+    queryID?: string;
+    position?: number;
+  },
+) {
   return (
-    <a href={`https://deno.land/x/${module.name}`}>
+    <a
+      href={`https://deno.land/x/${module.name}`}
+      onClick={() =>
+        searchClick(
+          userToken,
+          MODULE_INDEX,
+          queryID,
+          module.objectID,
+          position,
+        )}
+    >
       <div class={tw`p-1.5 rounded-full bg-gray-200`}>
         <Icons.Module />
       </div>

@@ -1,8 +1,7 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
+import { h } from "preact";
 
 import { apply, css, tw } from "@twind";
 import * as Icons from "./Icons.tsx";
@@ -18,14 +17,18 @@ const entries = [
   { href: "/x", content: "Third Party Modules" },
 ] as const;
 
+type ContentTypes = (typeof entries)[number]["content"];
+
 export function Header({
   selected,
   main,
   manual,
+  userToken,
 }: {
-  selected?: (typeof entries)[number]["content"];
+  selected?: ContentTypes;
   main?: boolean;
   manual?: boolean;
+  userToken: string;
 }) {
   return (
     <div
@@ -62,7 +65,7 @@ export function Header({
               <img class={tw`h-full w-full`} src="/logo.svg" alt="Deno Logo" />
             </a>
 
-            <GlobalSearch />
+            <GlobalSearch userToken={userToken} />
 
             <label
               tabIndex={0}
