@@ -119,7 +119,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
 
           <Markdown
             source={data.content
-              .replace(/(\[.+\]\(.+)\.md(\))/g, "$1$2")
+              .replace(/(\[.+\]\((?!https?:).+)\.md(\))/g, "$1$2")
               .replaceAll("$STD_VERSION", stdVersion)
               .replaceAll("$CLI_VERSION", version)}
             baseURL={sourceURL}
