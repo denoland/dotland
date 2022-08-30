@@ -68,7 +68,10 @@ export const handler: Handlers<PageData, State> = {
       return Response.redirect(url, 301);
     }
 
-    const isHTML = accepts(req, "application/*", "text/html") === "text/html";
+    const isHTML = accepts(req, "application/*", "text/html") === "text/html" ||
+      // Assume prefetch requests also want HTML, even if they send the wrong
+      // accept header. See https://github.com/denoland/dotland/issues/2431
+      req.headers.get("Sec-Purpose") === "prefetch";
     if (!isHTML) return handlerRaw(req, params as Params);
 
     let view: Views;

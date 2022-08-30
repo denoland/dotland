@@ -82,6 +82,23 @@ Deno.test({
 });
 
 Deno.test({
+  name: "/std@0.127.0 as Chrome prefetch responds with html",
+  async fn() {
+    const res = await handleRequest(
+      new Request("https://deno.land/std@0.127.0", {
+        headers: {
+          Accept: "application/signed-exchange;v=b3;q=0.7,*/*;q=0.8",
+          "Sec-Purpose": "prefetch",
+        },
+      }),
+    );
+    assert(res.headers.get("Content-Type")?.includes("text/html"));
+    const text = await res.text();
+    assertStringIncludes(text, "<title>std@0.127.0 | Deno</title>");
+  },
+});
+
+Deno.test({
   name: "/std/version.ts with Deno CLI Accept responds with redirect",
   async fn() {
     const res = await handleRequest(
