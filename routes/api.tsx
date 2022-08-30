@@ -16,14 +16,22 @@ import { type LibDocPage } from "@/util/registry_utils.ts";
 import { ErrorMessage } from "@/components/ErrorMessage.tsx";
 import { LibraryCategoryPanel } from "$doc_components/doc/library_category_panel.tsx";
 import { SymbolDoc } from "$doc_components/doc/symbol_doc.tsx";
+import { type State } from "@/routes/_middleware.ts";
 
-export default function API({ params, url, data }: PageProps<LibDocPage>) {
+interface Data {
+  data: LibDocPage;
+  userToken: string;
+}
+
+export default function API(
+  { params, url, data: { data, userToken } }: PageProps<Data>,
+) {
   return (
     <>
       <Head>
         <title>API | Deno</title>
       </Head>
-      <Header selected="API" manual />
+      <Header selected="API" userToken={userToken} manual />
 
       {data.kind === "libraryInvalidVersion"
         ? (
@@ -73,8 +81,8 @@ export default function API({ params, url, data }: PageProps<LibDocPage>) {
   );
 }
 
-export const handler: Handlers<LibDocPage> = {
-  async GET(req, { params, render }) {
+export const handler: Handlers<Data, State> = {
+  async GET(req, { params, render, state: { userToken } }) {
     const url = new URL(req.url);
 
     if (!params.version) {
@@ -94,7 +102,7 @@ export const handler: Handlers<LibDocPage> = {
     const res = await fetch(resURL);
     const data = await res.json();
 
-    return render!(data);
+    return render!({ data, userToken });
   },
 };
 
