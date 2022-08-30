@@ -38,9 +38,9 @@ const symbolKinds = {
 } as const;
 
 interface ManualSearchResult {
-  anchor: string;
+  docPath: string;
   hierarchy: Record<string, string>;
-  url: string;
+  anchor: string;
   content: string;
 }
 
@@ -109,13 +109,12 @@ export default function GlobalSearch() {
 
     if (kind === "Manual" || kind === "All") {
       queries.push({
-        indexName: "manual",
+        indexName: "manual_new",
         query: input || "Introduction",
         params: {
           page: page,
           hitsPerPage: kind === "All" ? 5 : 10,
-          attributesToRetrieve: ["anchor", "url", "content", "hierarchy"],
-          filters: "type:content",
+          filters: "kind:paragraph",
         },
       });
     }
@@ -152,7 +151,7 @@ export default function GlobalSearch() {
         setTotalPages(results.find((res) => res.nbPages)?.nbPages ?? 1);
         setResults({
           // @ts-ignore algolia typings are annoying
-          manual: results.find((res) => res.index === "manual")?.hits,
+          manual: results.find((res) => res.index === "manual_new")?.hits,
           // @ts-ignore algolia typings are annoying
           symbols: results.find((res) => res.index === "doc_nodes")?.hits,
           // @ts-ignore algolia typings are annoying
@@ -397,14 +396,10 @@ function Section({
   );
 }
 
-function ManualResult({ hierarchy, url, content }: ManualSearchResult) {
-  const title = [];
-  for (const [id, entry] of Object.entries(hierarchy)) {
-    if (id === "lvl0" || !entry) continue;
-    title.push(entry);
-  }
+function ManualResult({ hierarchy, docPath, content }: ManualSearchResult) {
+  const title = Object.values(hierarchy).filter(Boolean);
   return (
-    <a href={url}>
+    <a href={docPath}>
       <div class={tw`p-1.5 rounded-full bg-gray-200`}>
         <Icons.Docs />
       </div>
@@ -431,7 +426,7 @@ function ManualResultTitle(props: { title: string[] }) {
     );
     if (!isLast) parts.push(<span key={i + "separator"}>{" > "}</span>);
   }
-  return <div class={tw`flex gap-1`}>{parts}</div>;
+  return <div class={tw`space-x-1`}>{parts}</div>;
 }
 
 function SymbolResult({ doc }: { doc: DocNode }) {
