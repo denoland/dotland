@@ -18,6 +18,7 @@ import { Footer } from "@/components/Footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
 import * as Icons from "@/components/Icons.tsx";
 import { PopularityTag } from "@/components/PopularityTag.tsx";
+import { type State } from "@/routes/_middleware.ts";
 
 const requester = createFetchRequester();
 const client = algoliasearch(
@@ -28,17 +29,20 @@ const client = algoliasearch(
 const index = client.initIndex("modules");
 
 export interface Data {
-  hits: Array<{
-    popularity_score: number;
-    description?: string;
-    name: string;
-    popularity_tag?: PopularityModuleTag["value"];
-  }>;
-  nbHits: number;
-  page: number;
-  nbPages: number;
-  query: string;
-  hitsPerPage: number;
+  userToken: string;
+  search: {
+    hits: Array<{
+      popularity_score: number;
+      description?: string;
+      name: string;
+      popularity_tag?: PopularityModuleTag["value"];
+    }>;
+    nbHits: number;
+    page: number;
+    nbPages: number;
+    query: string;
+    hitsPerPage: number;
+  };
 }
 
 export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
@@ -48,7 +52,7 @@ export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
         <title>Third Party Modules | Deno</title>
       </Head>
       <div>
-        <Header selected="Third Party Modules" />
+        <Header selected="Third Party Modules" userToken={data.userToken} />
 
         <img
           src="/images/module_banner.png"
@@ -146,17 +150,17 @@ export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
                 <input
                   type="text"
                   name="query"
-                  placeholder={`Search through ${data.nbHits} modules...`}
+                  placeholder={`Search through ${data.search.nbHits} modules...`}
                   class={tw`w-full bg-transparent text-default placeholder:text-gray-400 outline-none`}
-                  value={data.query}
+                  value={data.search.query}
                 />
                 <Icons.MagnifyingGlass />
               </label>
             </form>
 
             <ul class={tw`divide-y`}>
-              {data.hits.length
-                ? data.hits.map((result) => (
+              {data.search.hits.length
+                ? data.search.hits.map((result) => (
                   <li class={tw`border-dark-border`}>
                     <a
                       href={"/x/" + result.name}
@@ -205,7 +209,7 @@ export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
             <div
               class={tw`px-5 py-4 border-t border-dark-border bg-ultralight flex items-center justify-between`}
             >
-              {!!data.hits.length && <Pagination {...data} />}
+              {!!data.search.hits.length && <Pagination {...data} />}
             </div>
           </div>
 
@@ -294,7 +298,7 @@ export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
 }
 
 export function Pagination(
-  { query, page, hitsPerPage, hits, nbHits, nbPages }: Data,
+  { search: { query, page, hitsPerPage, hits, nbHits, nbPages } }: Data,
 ) {
   function toPage(n: number): string {
     const params = new URLSearchParams();
@@ -352,16 +356,19 @@ function MaybeA(
   }
 }
 
-export const handler: Handlers<Data> = {
-  async GET(req, { render }) {
+export const handler: Handlers<Data, State> = {
+  async GET(req, { render, state: { userToken } }) {
     const url = new URL(req.url);
     const page = parseInt(url.searchParams.get("page") || "1") - 1;
     const query = url.searchParams.get("query") || "";
-    const res: Data = await index.search(query, {
-      page,
-      hitsPerPage: 20,
-      filters: "third_party:true",
-    });
+    const res: Data = {
+      userToken,
+      search: await index.search(query, {
+        page,
+        hitsPerPage: 20,
+        filters: "third_party:true",
+      }),
+    };
 
     return render!(res);
   },

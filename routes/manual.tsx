@@ -21,6 +21,7 @@ import {
   versions,
 } from "@/util/manual_utils.ts";
 import VersionSelect from "@/islands/VersionSelect.tsx";
+import { type State } from "@/routes/_middleware.ts";
 
 import VERSIONS from "@/versions.json" assert { type: "json" };
 
@@ -28,6 +29,7 @@ interface Data {
   tableOfContents: TableOfContents;
   content: string;
   version: string;
+  userToken: string;
 }
 
 export default function Manual({ params, url, data }: PageProps<Data>) {
@@ -83,7 +85,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
         </title>
         <link rel="canonical" href={`https://deno.land/manual${path}`} />
       </Head>
-      <Header selected="Manual" manual />
+      <Header selected="Manual" manual userToken={data.userToken} />
 
       <SidePanelPage
         sidepanel={
@@ -270,8 +272,8 @@ function ToC({
   );
 }
 
-export const handler: Handlers<Data> = {
-  async GET(req, { params, render }) {
+export const handler: Handlers<Data, State> = {
+  async GET(req, { params, render, state: { userToken } }) {
     const url = new URL(req.url);
     const { version, path } = params;
     if (!version || !path) {
@@ -304,7 +306,7 @@ export const handler: Handlers<Data> = {
         }),
     ]);
 
-    return render!({ tableOfContents, content, version });
+    return render!({ tableOfContents, content, version, userToken });
   },
 };
 

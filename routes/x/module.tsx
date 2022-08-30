@@ -36,6 +36,7 @@ import { SourceView } from "@/components/SourceView.tsx";
 import { PopularityTag } from "@/components/PopularityTag.tsx";
 import { SidePanelPage } from "@/components/SidePanelPage.tsx";
 import { Markdown } from "@/components/Markdown.tsx";
+import { type State } from "@/routes/_middleware.ts";
 
 type Views = "doc" | "source" | "info";
 type Params = {
@@ -52,8 +53,13 @@ type MaybeData =
   | Data
   | null;
 
-export const handler: Handlers<MaybeData> = {
-  async GET(req, { params, render }) {
+interface PageData {
+  data: MaybeData;
+  userToken: string;
+}
+
+export const handler: Handlers<PageData, State> = {
+  async GET(req, { params, render, state: { userToken } }) {
     const { name, version, path } = params as Params;
     const url = new URL(req.url);
 
@@ -93,7 +99,7 @@ export const handler: Handlers<MaybeData> = {
       redirect: "manual",
     });
     if (res.status === 404) { // module doesnt exist
-      return render(null);
+      return render({ data: null, userToken });
     } else if (res.status === 302) { // implicit latest
       const latestVersion = res.headers.get("X-Deno-Latest-Version")!;
       console.log(getModulePath(
@@ -128,7 +134,7 @@ export const handler: Handlers<MaybeData> = {
     }
 
     if (data.data.kind === "no-versions") {
-      return render!(data);
+      return render!({ data, userToken });
     }
 
     if (data.view === "doc" && data.data.kind === "file") {
@@ -150,7 +156,7 @@ export const handler: Handlers<MaybeData> = {
       data.data.file = await getRawFile(name, version, path ? `/${path}` : "");
     }
 
-    return render!(data);
+    return render!({ data, userToken });
   },
 };
 
@@ -192,7 +198,9 @@ async function handlerRaw(
   return fetchSource(name, version, path);
 }
 
-export default function Registry({ params, url, data }: PageProps<MaybeData>) {
+export default function Registry(
+  { params, url, data: { data, userToken } }: PageProps<PageData>,
+) {
   let {
     name,
     version,
@@ -211,6 +219,7 @@ export default function Registry({ params, url, data }: PageProps<MaybeData>) {
       <div class={tw`bg-primary min-h-full`}>
         <Header
           selected={name === "std" ? "Standard Library" : "Third Party Modules"}
+          userToken={userToken}
         />
         {data === null
           ? (
