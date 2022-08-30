@@ -339,23 +339,29 @@ function ModuleView({
 }) {
   if (data.data.kind === "no-versions") {
     return (
-      <ErrorMessage title="No uploaded versions">
-        This module name has been reserved for a repository, but no versions
-        have been uploaded yet. Modules that do not upload a version within 30
-        days of registration will be removed.
-      </ErrorMessage>
+      <div class={tw`section-x-inset-xl py-12`}>
+        <ErrorMessage title="No uploaded versions">
+          This module name has been reserved for a repository, but no versions
+          have been uploaded yet. Modules that do not upload a version within 30
+          days of registration will be removed.
+        </ErrorMessage>
+      </div>
     );
   } else if (data.data.kind === "invalid-version") {
     return (
-      <ErrorMessage title="404 - Not Found">
-        This version does not exist for this module.
-      </ErrorMessage>
+      <div class={tw`section-x-inset-xl py-12`}>
+        <ErrorMessage title="404 - Not Found">
+          This version does not exist for this module.
+        </ErrorMessage>
+      </div>
     );
   } else if (data.data.kind === "notfound") {
     return (
-      <ErrorMessage title="404 - Not Found">
-        This file or directory could not be found.
-      </ErrorMessage>
+      <div class={tw`section-x-inset-xl py-12`}>
+        <ErrorMessage title="404 - Not Found">
+          This file or directory could not be found.
+        </ErrorMessage>
+      </div>
     );
   }
 
