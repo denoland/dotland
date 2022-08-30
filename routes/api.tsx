@@ -76,7 +76,7 @@ export default function API(
           >
             {data.kind === "librarySymbol" && (
               // @ts-ignore it works.
-              <SymbolDoc url={url.href} namespace={undefined}>
+              <SymbolDoc url={url.href} namespace={undefined} library>
                 {data.docNodes}
               </SymbolDoc>
             )}
