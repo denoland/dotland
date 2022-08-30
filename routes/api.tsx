@@ -13,9 +13,9 @@ import { ManualOrAPI, SidePanelPage } from "@/components/SidePanelPage.tsx";
 import { versions } from "@/util/manual_utils.ts";
 import VersionSelect from "@/islands/VersionSelect.tsx";
 import { type LibDocPage } from "@/util/registry_utils.ts";
+import { ErrorMessage } from "@/components/ErrorMessage.tsx";
 import { LibraryCategoryPanel } from "$doc_components/doc/library_category_panel.tsx";
 import { SymbolDoc } from "$doc_components/doc/symbol_doc.tsx";
-import { ErrorMessage } from "../components/ErrorMessage.tsx";
 
 export default function API({ params, url, data }: PageProps<LibDocPage>) {
   return (
