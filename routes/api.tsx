@@ -49,7 +49,14 @@ export default function API(
                 <div>
                   <VersionSelect
                     versions={Object.fromEntries(
-                      versions.map((ver) => [ver, `/api@${ver}`]),
+                      versions.map((
+                        ver,
+                      ) => [
+                        ver,
+                        `/api@${ver}` + (data.kind === "librarySymbol"
+                          ? ("?s=" + data.name)
+                          : ""),
+                      ]),
                     )}
                     selectedVersion={params.version}
                   />
