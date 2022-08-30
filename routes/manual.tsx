@@ -91,12 +91,14 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
         sidepanel={
           <>
             <ManualOrAPI current="Manual" version={version} />
-            <VersionSelect
-              versions={Object.fromEntries(
-                versions.map((ver) => [ver, `/manual@${ver}${path}`]),
-              )}
-              selectedVersion={version}
-            />
+            <div class={tw`space-y-3 children:w-full`}>
+              <VersionSelect
+                versions={Object.fromEntries(
+                  versions.map((ver) => [ver, `/manual@${ver}${path}`]),
+                )}
+                selectedVersion={version}
+              />
+            </div>
             <ToC
               tableOfContents={data.tableOfContents}
               version={params.version}

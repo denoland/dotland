@@ -270,6 +270,11 @@ function TopPanel({
   const popularityTag = hasPageBase
     ? data.tags?.find((tag) => tag.kind === "popularity")
     : undefined;
+
+  const searchParam = view === "source"
+    ? "?source"
+    : (path === "" ? "?doc" : "");
+
   return (
     <div class={tw`bg-ultralight border-b border-light-border`}>
       <div class={tw`section-x-inset-xl py-5 flex items-center`}>
@@ -316,12 +321,13 @@ function TopPanel({
               </div>
             )}
             {data.kind !== "no-versions" && (
-              <VersionSelector
-                versions={data.versions}
+              <VersionSelect
+                versions={Object.fromEntries(
+                  data.versions.map((
+                    ver,
+                  ) => [ver, getModulePath(name, ver, path) + searchParam]),
+                )}
                 selectedVersion={version}
-                name={name}
-                path={path}
-                view={view}
               />
             )}
           </div>
@@ -462,45 +468,6 @@ function Breadcrumbs({
         );
       })}
     </p>
-  );
-}
-
-function VersionSelector({
-  versions,
-  selectedVersion,
-  name,
-  path,
-  view,
-}: {
-  versions: string[];
-  selectedVersion: string;
-  name: string;
-  path: string;
-  view: Views;
-}) {
-  const searchParam = view === "source"
-    ? "?source"
-    : (path === "" ? "?doc" : "");
-  return (
-    <>
-      <VersionSelect
-        versions={Object.fromEntries(
-          versions.map((
-            ver,
-          ) => [ver, getModulePath(name, ver, path) + searchParam]),
-        )}
-        selectedVersion={selectedVersion}
-      />
-      {versions[0] !== selectedVersion && (
-        <a
-          class={tw`button-primary`}
-          aria-label="Go to latest version"
-          href={getModulePath(name, versions[0], path) + searchParam}
-        >
-          Go to Latest
-        </a>
-      )}
-    </>
   );
 }
 

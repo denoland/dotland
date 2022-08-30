@@ -46,7 +46,7 @@ export default function API(
             sidepanel={
               <>
                 <ManualOrAPI current="Runtime APIs" version={params.version} />
-                <div>
+                <div class={tw`space-y-3 children:w-full`}>
                   <VersionSelect
                     versions={Object.fromEntries(
                       versions.map((
