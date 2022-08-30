@@ -11,15 +11,23 @@ import { Footer } from "@/components/Footer.tsx";
 import { Build, getBuild } from "@/util/registry_utils.ts";
 import { ErrorMessage } from "@/components/ErrorMessage.tsx";
 import * as Icons from "@/components/Icons.tsx";
+import { type State } from "@/routes/_middleware.ts";
 
-export default function StatusPage({ data }: PageProps<Build | Error>) {
+interface Data {
+  data: Build | Error;
+  userToken: string;
+}
+
+export default function StatusPage(
+  { data: { data, userToken } }: PageProps<Data>,
+) {
   return (
     <>
       <Head>
         <title>Publish Status | Deno</title>
       </Head>
       <div class={tw`bg-gray-50 min-h-full`}>
-        <Header />
+        <Header userToken={userToken} />
         <div class={tw`section-x-inset-md mt-8 pb-8 mb-16`}>
           <div>
             <h3 class={tw`text-lg leading-6 font-medium text-gray-900`}>
@@ -137,9 +145,9 @@ export default function StatusPage({ data }: PageProps<Build | Error>) {
   );
 }
 
-export const handler: Handlers<Build | Error> = {
-  async GET(req, { params, render }) {
-    return render!(await getBuild(params.id));
+export const handler: Handlers<Data, State> = {
+  async GET(_, { params, render, state: { userToken } }) {
+    return render!({ data: await getBuild(params.id), userToken });
   },
 };
 
