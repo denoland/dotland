@@ -498,13 +498,15 @@ function VersionSelector({
   );
 }
 
-function InfoView(
-  { name, data, version }: {
-    name: string;
-    version: string;
-    data: ModInfoPage;
-  },
-) {
+function InfoView({
+  name,
+  version,
+  data,
+}: {
+  name: string;
+  version: string;
+  data: ModInfoPage;
+}) {
   data.description &&= emojify(data.description);
 
   const attributes = [];
@@ -530,8 +532,8 @@ function InfoView(
   if (data.config) {
     attributes.push(
       <div class={tw`flex items-center gap-1.5`}>
-        <Icons.Logo />
-        <span class={tw`text-gray-600 font-medium leading-none`}>
+        <Icons.Logo class={tw`w-4 h-4`} />
+        <span class={tw`text-sm text-gray-600 font-medium leading-none`}>
           Includes Deno configuration
         </span>
       </div>,
@@ -542,26 +544,33 @@ function InfoView(
     <SidePanelPage
       sidepanel={
         <div class={tw`space-y-6 children:space-y-2`}>
-          <div class={tw`space-y-4!`}>
+          <div class={tw`space-y-5!`}>
             <div class={tw`space-y-2`}>
               <div class={tw`flex items-center gap-2.5 w-full`}>
-                <Breadcrumbs
-                  name={name}
-                  version={version}
-                  path="/"
-                  view="info"
-                />
-                <div class={tw`tag bg-default-15 text-gray-600 font-semibold!`}>
+                <h2
+                  class={tw`text-2xl leading-6 font-semibold text-gray-400 truncate`}
+                >
+                  <a
+                    href={name === "std" ? "/std" : `/x/${name}`}
+                    class={tw`link`}
+                    title={name}
+                  >
+                    {name}
+                  </a>
+                </h2>
+                <p class={tw`tag bg-default-15 text-gray-700`}>
                   {version}
-                </div>
+                </p>
               </div>
 
-              {data.description &&
-                (
-                  <div class={tw`text-sm`} title={data.description}>
-                    {data.description}
-                  </div>
-                )}
+              {data.description && (
+                <div
+                  class={tw`text-gray-700 leading-tight`}
+                  title={data.description}
+                >
+                  {data.description}
+                </div>
+              )}
             </div>
 
             <div
