@@ -22,7 +22,6 @@ export function DocView({
   version,
   path,
   url,
-
   data,
 }: CommonProps<DocPageSymbol | DocPageModule | DocPageIndex>) {
   const basePath = getModulePath(name, version);

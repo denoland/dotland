@@ -9,11 +9,16 @@ import { tw } from "@twind";
 import twas from "$twas";
 import { emojify } from "$emoji";
 import { accepts } from "$oak_commons";
+import type {
+  DocPage,
+  DocPageIndex,
+  DocPageModule,
+  DocPageSymbol,
+  InfoPage,
+  ModInfoPage,
+  SourcePage,
+} from "@/util/registry_utils.ts";
 import {
-  type DocPage,
-  type DocPageIndex,
-  type DocPageModule,
-  type DocPageSymbol,
   extractAltLineNumberReference,
   fetchSource,
   getModulePath,
@@ -22,9 +27,6 @@ import {
   getRepositoryURL,
   getSourceURL,
   getVersionList,
-  type InfoPage,
-  type ModInfoPage,
-  type SourcePage,
 } from "@/util/registry_utils.ts";
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
@@ -274,32 +276,43 @@ function TopPanel({
     <div class={tw`bg-ultralight border-b border-light-border`}>
       <div class={tw`section-x-inset-xl py-5 flex items-center`}>
         <div
-          class={tw`flex flex-col md:(flex-row items-center) justify-between w-full gap-4`}
+          class={tw`flex flex-col md:(flex-row items-center) justify-between w-full gap-8 md:gap-32`}
         >
           <div class={tw`overflow-hidden`}>
-            <Breadcrumbs
-              name={name}
-              version={version}
-              path={path}
-              view={view}
-            />
-
-            {data.kind !== "no-versions" && data.description &&
-              (
-                <div
-                  class={tw`text-sm lg:truncate`}
-                  title={emojify(data.description)}
+            <h2
+              class={tw`flex items-center gap-2 text-2xl leading-6 font-semibold text-gray-400 truncate`}
+            >
+              <a
+                href={name === "std" ? "/std" : `/x/${name}`}
+                class={tw`link`}
+                title={name}
+              >
+                {name}
+              </a>
+              {popularityTag && name !== "std" && (
+                <span
+                  class={tw`bg-white px-3 py-[7px] border boder-gray-100 rounded-full`}
                 >
-                  {emojify(data.description)}
-                </div>
+                  <PopularityTag>{popularityTag.value}</PopularityTag>
+                </span>
               )}
+            </h2>
+
+            {data.kind !== "no-versions" && data.description && (
+              <div
+                class={tw`mt-1 text-gray-600 lg:truncate`}
+                title={emojify(data.description)}
+              >
+                {emojify(data.description)}
+              </div>
+            )}
           </div>
           <div
-            class={tw`flex flex-col items-stretch gap-4 w-full md:w-auto lg:(flex-row justify-between) flex-shrink-0`}
+            class={tw`flex flex-col items-stretch gap-2 w-full md:w-auto lg:(flex-row justify-between) flex-shrink-0`}
           >
             {hasPageBase && (
               <div
-                class={tw`flex flex-row justify-between md:justify-center items-center gap-4 border border-dark-border rounded-md bg-white py-2 px-5`}
+                class={tw`flex flex-row justify-between md:justify-center items-center gap-4 border border-dark-border rounded-md bg-white py-2 px-4`}
               >
                 <div class={tw`flex items-center whitespace-nowrap gap-2`}>
                   <Icons.GitHub class="h-4 w-auto text-gray-700 flex-none" />
@@ -310,9 +323,6 @@ function TopPanel({
                     {data.upload_options.repository}
                   </a>
                 </div>
-                {popularityTag && name !== "std" && (
-                  <PopularityTag>{popularityTag.value}</PopularityTag>
-                )}
               </div>
             )}
             {data.kind !== "no-versions" && (
@@ -375,8 +385,16 @@ function ModuleView({
   );
 
   if (data.view === "info") {
-    return <InfoView version={version!} data={data.data} name={name} />;
-  } else if (data.view === "source") {
+    return (
+      <InfoView
+        version={version!}
+        data={data.data}
+        name={name}
+      />
+    );
+  }
+
+  if (data.view === "source") {
     return (
       <SourceView
         {...{
@@ -390,72 +408,20 @@ function ModuleView({
         }}
       />
     );
-  } else {
-    return (
-      <DocView
-        {...{
-          isStd,
-          name,
-          version,
-          path,
-          url,
-          data: data.data as DocPageSymbol | DocPageModule | DocPageIndex,
-          repositoryURL,
-        }}
-      />
-    );
-  }
-}
-
-function Breadcrumbs({
-  name,
-  path,
-  version,
-  view,
-}: {
-  name: string;
-  version: string;
-  path: string;
-  view: Views;
-}) {
-  const segments = path.split("/").splice(1);
-  segments.unshift(name);
-  if (name !== "std") {
-    segments.unshift("x");
-  }
-
-  let seg = "";
-  const out: [segment: string, url: string][] = [];
-  for (const segment of segments) {
-    if (segment === "") {
-      continue;
-    } else if (segment === name) {
-      seg += `/${segment}@${version}`;
-    } else if (segment !== "") {
-      seg += "/" + segment;
-    }
-
-    out.push([segment, seg]);
   }
 
   return (
-    <p class={tw`text-xl leading-6 font-bold text-gray-400 truncate`}>
-      {out.map(([seg, url], i) => {
-        if (view === "source") {
-          url += "?source";
-        } else if (view === "doc" && seg === name) {
-          url += "?doc";
-        }
-        return (
-          <Fragment key={i}>
-            {i !== 0 && "/"}
-            <a href={url} class={tw`link`} title={seg}>
-              {seg}
-            </a>
-          </Fragment>
-        );
-      })}
-    </p>
+    <DocView
+      {...{
+        isStd,
+        name,
+        version,
+        path,
+        url,
+        data: data.data as DocPageSymbol | DocPageModule | DocPageIndex,
+        repositoryURL,
+      }}
+    />
   );
 }
 
@@ -546,7 +512,7 @@ function InfoView({
         <div class={tw`space-y-6 children:space-y-2`}>
           <div class={tw`space-y-5!`}>
             <div class={tw`space-y-2`}>
-              <div class={tw`flex items-center gap-2.5 w-full`}>
+              <div class={tw`flex items-center gap-2 w-full`}>
                 <h2
                   class={tw`text-2xl leading-6 font-semibold text-gray-400 truncate`}
                 >
@@ -558,7 +524,7 @@ function InfoView({
                     {name}
                   </a>
                 </h2>
-                <p class={tw`tag bg-default-15 text-gray-700`}>
+                <p class={tw`tag bg-gray-200 text-gray-700`}>
                   {version}
                 </p>
               </div>
