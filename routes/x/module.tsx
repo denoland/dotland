@@ -37,6 +37,7 @@ import { PopularityTag } from "@/components/PopularityTag.tsx";
 import { SidePanelPage } from "@/components/SidePanelPage.tsx";
 import { Markdown } from "@/components/Markdown.tsx";
 import { type State } from "@/routes/_middleware.ts";
+import { searchView } from "../../util/search_insights_utils.ts";
 
 type Views = "doc" | "source" | "info";
 type Params = {
@@ -243,7 +244,7 @@ export default function Registry(
               )}
               <ModuleView
                 version={version!}
-                {...{ name, path, isStd, url, data }}
+                {...{ name, path, isStd, url, userToken, data }}
               />
             </>
           )}
@@ -337,6 +338,7 @@ function ModuleView({
   path,
   isStd,
   url,
+  userToken,
   data,
 }: {
   name: string;
@@ -344,6 +346,7 @@ function ModuleView({
   path: string;
   isStd: boolean;
   url: URL;
+  userToken?: string;
   data: Data;
 }) {
   if (data.data.kind === "no-versions") {
@@ -375,6 +378,7 @@ function ModuleView({
   );
 
   if (data.view === "info") {
+    searchView(userToken, "modules", data.data.module);
     return <InfoView version={version!} data={data.data} name={name} />;
   } else if (data.view === "source") {
     return (
