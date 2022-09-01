@@ -323,5 +323,20 @@
       "web": "https://x7md.net"
     },
     "license": "MIT"
+  },
+  {
+    "date": "2022-08-30",
+    "image": "/images/artwork/deno_minecraft.jpg",
+    "title": "Deno in Minecraft",
+    "alt": "Colorful Deno logo made in Minecraft",
+    "artist": {
+      "name": "Jason J. Gardner",
+      "profile_image": "https://avatars.githubusercontent.com/u/1903667",
+      "github": "jasonjgardner",
+      "instagram": "jasonjgardner",
+      "twitter": "JasonGardner",
+      "web": "https://jasongardner.dev"
+    },
+    "license": "MIT"
   }
 ]
