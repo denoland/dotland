@@ -17,14 +17,14 @@ Deno.test("get introduction file commit hash", () => {
 Deno.test("get introduction file old repo", () => {
   assertEquals(
     getFileURL("v1.12.0", "/introduction"),
-    "https://cdn.deno.land/deno/versions/v1.12.0/raw/docs/introduction.md",
+    "https://cdn2.deno.land/deno/versions/v1.12.0/raw/docs/introduction.md",
   );
 });
 
 Deno.test("get introduction file new repo", () => {
   assertEquals(
     getFileURL("v1.12.1", "/introduction"),
-    "https://cdn.deno.land/manual/versions/v1.12.1/raw/introduction.md",
+    "https://cdn2.deno.land/manual/versions/v1.12.1/raw/introduction.md",
   );
 });
 

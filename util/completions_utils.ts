@@ -2,7 +2,7 @@ import twas from "$twas";
 // @deno-types="$fuse/fuse.d.ts"
 import Fuse from "$fuse/fuse.esm.js";
 import { prettyBytes } from "$pretty_bytes";
-import { S3_BUCKET } from "./registry_utils.ts";
+import { CDN_ENDPOINT } from "./registry_utils.ts";
 
 interface ApiModuleData {
   name: string;
@@ -134,7 +134,9 @@ export async function fetchMeta(pkg: string, ver: string): Promise<MetaJson> {
     packageMeta.set(pkg, new Map());
   }
   const versionsMeta = packageMeta.get(pkg)!;
-  const res = await fetch(`${S3_BUCKET}${pkg}/versions/${ver}/meta/meta.json`);
+  const res = await fetch(
+    `${CDN_ENDPOINT}${pkg}/versions/${ver}/meta/meta.json`,
+  );
   if (res.status === 200) {
     versionsMeta.set(ver, await res.json());
   } else {
@@ -150,7 +152,7 @@ export async function fetchMeta(pkg: string, ver: string): Promise<MetaJson> {
 
 /** Fetch the version data for a specific package/module from the S3 bucket. */
 export async function fetchVersions(pkg: string): Promise<MetaVersionJson> {
-  const res = await fetch(`${S3_BUCKET}${pkg}/meta/versions.json`);
+  const res = await fetch(`${CDN_ENDPOINT}${pkg}/meta/versions.json`);
   if (res.status === 200) {
     versions.set(pkg, await res.json());
   } else {
