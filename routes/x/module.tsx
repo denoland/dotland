@@ -37,7 +37,7 @@ import { PopularityTag } from "@/components/PopularityTag.tsx";
 import { SidePanelPage } from "@/components/SidePanelPage.tsx";
 import { Markdown } from "@/components/Markdown.tsx";
 import { type State } from "@/routes/_middleware.ts";
-import { searchView } from "../../util/search_insights_utils.ts";
+import { searchView } from "@/util/search_insights_utils.ts";
 
 type Views = "doc" | "source" | "info";
 type Params = {
