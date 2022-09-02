@@ -91,7 +91,11 @@ export function getSourceURL(
   version: string,
   path: string,
 ): string {
-  return encodeURI(`${CDN_ENDPOINT}${module}/versions/${version}/raw${path}`);
+  const r = encodeURI(
+    `${CDN_ENDPOINT}${module}/versions/${version}/raw${path}`,
+  );
+  console.log(`${module} @ ${version} :: ${path} => ${r}`);
+  return r;
 }
 
 function pathJoin(...parts: string[]) {
