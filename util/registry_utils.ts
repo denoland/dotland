@@ -1,9 +1,7 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-const CDN_ENDPOINT = "https://cdn.deno.land/";
+export const CDN_ENDPOINT = "https://cdn2.deno.land/";
 const API_ENDPOINT = "https://api.deno.land/";
-export const S3_BUCKET =
-  "http://deno-registry2-prod-storagebucket-b3a31d16.s3-website-us-east-1.amazonaws.com/";
 
 export interface CommonProps<T> {
   isStd: boolean;
@@ -32,7 +30,7 @@ export async function getReadme(
   version: string,
   entry: ModuleEntry,
 ): Promise<string | undefined> {
-  const url = getSourceURL(name, version, entry.path, S3_BUCKET);
+  const url = getSourceURL(name, version, entry.path);
 
   const res = await fetch(url);
   if (!res.ok) {
@@ -65,7 +63,7 @@ export async function getRawFile(
   version: string,
   path: string,
 ): Promise<RawFile | Error> {
-  const url = getSourceURL(name, version, path, S3_BUCKET);
+  const url = getSourceURL(name, version, path);
 
   const res = await fetch(url, { method: "GET" });
   const size = Number(res.headers.get("content-size")!);
@@ -92,9 +90,8 @@ export function getSourceURL(
   module: string,
   version: string,
   path: string,
-  endpoint: string = CDN_ENDPOINT,
 ): string {
-  return encodeURI(`${endpoint}${module}/versions/${version}/raw${path}`);
+  return encodeURI(`${CDN_ENDPOINT}${module}/versions/${version}/raw${path}`);
 }
 
 function pathJoin(...parts: string[]) {
@@ -293,7 +290,6 @@ export async function fetchSource(
     name,
     version,
     path.startsWith("/") ? path : `/${path}`,
-    S3_BUCKET,
   );
 
   let lastErr;

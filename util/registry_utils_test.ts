@@ -11,7 +11,7 @@ import { assert, assertEquals } from "$std/testing/asserts.ts";
 Deno.test("source url", () => {
   assertEquals(
     getSourceURL("ltest2", "0.0.8", "/README.md"),
-    "https://cdn.deno.land/ltest2/versions/0.0.8/raw/README.md",
+    "https://cdn2.deno.land/ltest2/versions/0.0.8/raw/README.md",
   );
 });
 
