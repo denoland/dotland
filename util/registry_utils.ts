@@ -91,7 +91,8 @@ export function getSourceURL(
   version: string,
   path: string,
 ): string {
-  return encodeURI(`${CDN_ENDPOINT}${module}/versions/${version}/raw${path}`);
+  return `${CDN_ENDPOINT}${encodeURIComponent(module)}` +
+    `/versions/${encodeURIComponent(version)}/raw${encodeURI(path)}`;
 }
 
 function pathJoin(...parts: string[]) {
