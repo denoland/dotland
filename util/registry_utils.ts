@@ -1,6 +1,6 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-export const CDN_ENDPOINT = "https://cdn2.deno.land/";
+export const CDN_ENDPOINT = "https://cdn.deno.land/";
 const API_ENDPOINT = "https://api.deno.land/";
 
 export interface CommonProps<T> {
