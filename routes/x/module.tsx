@@ -555,7 +555,9 @@ function InfoView(
                   path="/"
                   view="info"
                 />
-                <div class={tw`tag-label bg-default-15 text-gray-600 font-semibold!`}>
+                <div
+                  class={tw`tag-label bg-default-15 text-gray-600 font-semibold!`}
+                >
                   {version}
                 </div>
               </div>
