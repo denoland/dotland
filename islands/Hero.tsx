@@ -6,7 +6,12 @@ import { tw } from "@twind";
 type TerminalEvent = [number, string, string];
 
 export default function Hero() {
+  let passed = 0;
   const refIdRef = useRef(0);
+  const [typed, setTyped] = useState(0);
+  const [text, setText] = useState("");
+  const wrapperElement = useRef<HTMLDivElement>(null);
+  
   const loop = (timestamp: number) => {
     const pulled = timeline.filter((i) => {
       return i[0] * 1000 <= timestamp && i[0] * 1000 > passed;
@@ -77,9 +82,6 @@ Checked 1 file
     return [[time, item[1], item[2]]];
   });
 
-  let passed = 0;
-  const [text, setText] = useState("");
-  const wrapperElement = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (wrapperElement.current !== null) {
@@ -95,8 +97,6 @@ Checked 1 file
       )
     );
   }
-
-  const [typed, setTyped] = useState(0);
 
   const offsetRight = typed % 2 === 0 ? { x: 0, y: -5 } : { x: 0, y: 0 };
   const offsetLeft = typed % 2 === 1 ? { x: 0, y: -5 } : { x: 0, y: 0 };
