@@ -11,7 +11,7 @@ export default function Hero() {
   const [typed, setTyped] = useState(0);
   const [text, setText] = useState("");
   const wrapperElement = useRef<HTMLDivElement>(null);
-  
+
   const loop = (timestamp: number) => {
     const pulled = timeline.filter((i) => {
       return i[0] * 1000 <= timestamp && i[0] * 1000 > passed;
@@ -81,7 +81,6 @@ Checked 1 file
 
     return [[time, item[1], item[2]]];
   });
-
 
   useEffect(() => {
     if (wrapperElement.current !== null) {
