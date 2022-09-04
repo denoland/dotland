@@ -27,7 +27,7 @@ export default function Hero() {
     return () => cancelAnimationFrame(refIdRef.current);
   }, []);
 
-  const userinput = '<span class="gray">$</span> ';
+  const userinput = `<span class="${tw`text-gray-400`}">$ </span>`;
   const events: TerminalEvent[] = [
     [0.1, "o", userinput],
     [0.5, "i", "deno run https://deno.land/std/examples/welcome.ts\r"],
@@ -40,11 +40,12 @@ export default function Hero() {
     [
       0.5,
       "o",
-      `<span class="red">no-unused-vars</span> \`b\` is never used
+      `<span class="${tw`text-red-500`}">no-unused-vars</span> \`b\` is never used
 function sum(a, b) {
-            <span class="red">^</span>
+                <span class="${tw`text-red-500`}">^</span>
 at error.js:1:16
 Checked 1 file
+
 `,
     ],
     [0.1, "o", userinput],
