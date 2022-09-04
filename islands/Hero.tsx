@@ -81,6 +81,12 @@ Checked 1 file
   const [text, setText] = useState("");
   const wrapperElement = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    if (wrapperElement.current !== null) {
+      wrapperElement.current.scrollTop = wrapperElement.current.scrollHeight;
+    }
+  }, [text]);
+
   function print(str: string) {
     setText((prev) =>
       prev + str.replace(
@@ -88,12 +94,6 @@ Checked 1 file
         "<br>",
       )
     );
-    if (wrapperElement.current !== null) {
-      wrapperElement.current.scrollTop = wrapperElement.current.scrollHeight;
-    }
-  }
-  function println(str: string) {
-    print(str + "<br />");
   }
 
   const [typed, setTyped] = useState(0);
