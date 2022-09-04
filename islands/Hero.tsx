@@ -33,7 +33,7 @@ export default function Hero() {
     [0.5, "i", "deno run https://deno.land/std/examples/welcome.ts\r"],
     [0.1, "o", "Welcome to Deno!\r\r"],
     [0.1, "o", userinput],
-    [0.5, "i", "cat add.js\r"],
+    [2.5, "i", "cat add.js\r"],
     [0.1, "o", "function sum(a, b) {\r  return a // TODO\r}\r\r"],
     [0.1, "o", userinput],
     [0.5, "i", "deno lint add.js\r"],
@@ -48,6 +48,17 @@ Checked 1 file
 
 `,
     ],
+    [0.1, "o", userinput],
+    [2.5, "i", "deno compile hello.ts\r"],
+    [0.1, "o", `<span class="${tw`text-green-500`}">Check</span> hello.ts\r`],
+    [0.1, "o", `<span class="${tw`text-green-500`}">Compile</span> hello.ts\r`],
+    [0.1, "o", `<span class="${tw`text-green-500`}">Emit</span> hello\r\r`],
+    [0.5, "o", userinput],
+    [1.5, "i", "ls\r"],
+    [0.1, "o", `hello           hello.ts\r\r`],
+    [0.1, "o", userinput],
+    [1.5, "i", "./hello\r"],
+    [0.1, "o", `Hello, World!\r\r`],
     [0.1, "o", userinput],
   ];
 
