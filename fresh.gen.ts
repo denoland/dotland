@@ -12,21 +12,23 @@ import * as $6 from "./routes/benchmarks.tsx";
 import * as $7 from "./routes/completions/config.ts";
 import * as $8 from "./routes/completions/v1.ts";
 import * as $9 from "./routes/gfm.css.ts";
-import * as $10 from "./routes/index.tsx";
-import * as $11 from "./routes/install.ts";
-import * as $12 from "./routes/legacy_redirects/posts.ts";
-import * as $13 from "./routes/legacy_redirects/v1.ts";
-import * as $14 from "./routes/manual.tsx";
-import * as $15 from "./routes/showcase.tsx";
-import * as $16 from "./routes/status.tsx";
-import * as $17 from "./routes/std.tsx";
-import * as $18 from "./routes/translations.tsx";
-import * as $19 from "./routes/x/index.tsx";
-import * as $20 from "./routes/x/module.tsx";
+import * as $10 from "./routes/hero_preview.tsx";
+import * as $11 from "./routes/index.tsx";
+import * as $12 from "./routes/install.ts";
+import * as $13 from "./routes/legacy_redirects/posts.ts";
+import * as $14 from "./routes/legacy_redirects/v1.ts";
+import * as $15 from "./routes/manual.tsx";
+import * as $16 from "./routes/showcase.tsx";
+import * as $17 from "./routes/status.tsx";
+import * as $18 from "./routes/std.tsx";
+import * as $19 from "./routes/translations.tsx";
+import * as $20 from "./routes/x/index.tsx";
+import * as $21 from "./routes/x/module.tsx";
 import * as $$0 from "./islands/AddModule.tsx";
 import * as $$1 from "./islands/GlobalSearch.tsx";
 import * as $$2 from "./islands/HelloBar.tsx";
-import * as $$3 from "./islands/VersionSelect.tsx";
+import * as $$3 from "./islands/Hero.tsx";
+import * as $$4 from "./islands/VersionSelect.tsx";
 
 const manifest = {
   routes: {
@@ -40,23 +42,25 @@ const manifest = {
     "./routes/completions/config.ts": $7,
     "./routes/completions/v1.ts": $8,
     "./routes/gfm.css.ts": $9,
-    "./routes/index.tsx": $10,
-    "./routes/install.ts": $11,
-    "./routes/legacy_redirects/posts.ts": $12,
-    "./routes/legacy_redirects/v1.ts": $13,
-    "./routes/manual.tsx": $14,
-    "./routes/showcase.tsx": $15,
-    "./routes/status.tsx": $16,
-    "./routes/std.tsx": $17,
-    "./routes/translations.tsx": $18,
-    "./routes/x/index.tsx": $19,
-    "./routes/x/module.tsx": $20,
+    "./routes/hero_preview.tsx": $10,
+    "./routes/index.tsx": $11,
+    "./routes/install.ts": $12,
+    "./routes/legacy_redirects/posts.ts": $13,
+    "./routes/legacy_redirects/v1.ts": $14,
+    "./routes/manual.tsx": $15,
+    "./routes/showcase.tsx": $16,
+    "./routes/status.tsx": $17,
+    "./routes/std.tsx": $18,
+    "./routes/translations.tsx": $19,
+    "./routes/x/index.tsx": $20,
+    "./routes/x/module.tsx": $21,
   },
   islands: {
     "./islands/AddModule.tsx": $$0,
     "./islands/GlobalSearch.tsx": $$1,
     "./islands/HelloBar.tsx": $$2,
-    "./islands/VersionSelect.tsx": $$3,
+    "./islands/Hero.tsx": $$3,
+    "./islands/VersionSelect.tsx": $$4,
   },
   baseUrl: import.meta.url,
 };
