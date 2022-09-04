@@ -87,7 +87,7 @@ export const config: Configuration = {
           "border-bottom-width": (parts[0] ?? 1) + "px",
         },
       }),
-    tag: apply`inline py-1 px-2 rounded-full leading-none font-medium text-xs`,
+    "tag-label": apply`inline py-1 px-2 rounded-full leading-none font-medium text-xs`,
     button: ([kind]) => {
       let bg = "";
       let text = "";

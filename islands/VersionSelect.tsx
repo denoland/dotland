@@ -19,7 +19,7 @@ export default function VersionSelect({ versions, selectedVersion }: {
         <div
           class={tw`flex absolute pointer-events-none select-none w-full h-full items-center justify-end pr-8`}
         >
-          <div class={tw`tag bg-tag-blue-bg text-tag-blue`}>Latest</div>
+          <div class={tw`tag-label bg-tag-blue-bg text-tag-blue`}>Latest</div>
         </div>
       )}
       <select

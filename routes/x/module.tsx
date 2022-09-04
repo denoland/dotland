@@ -555,7 +555,7 @@ function InfoView(
                   path="/"
                   view="info"
                 />
-                <div class={tw`tag bg-default-15 text-gray-600 font-semibold!`}>
+                <div class={tw`tag-label bg-default-15 text-gray-600 font-semibold!`}>
                   {version}
                 </div>
               </div>
@@ -642,7 +642,7 @@ function InfoView(
                   >
                     <span class={tw`block w-full truncate`}>{listVersion}</span>
                     {listVersion === data.latest_version && (
-                      <div class={tw`tag bg-tag-blue-bg text-tag-blue`}>
+                      <div class={tw`tag-label bg-tag-blue-bg text-tag-blue`}>
                         Latest
                       </div>
                     )}
