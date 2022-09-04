@@ -66,14 +66,16 @@ Checked 1 file
   });
 
   let passed = 0;
-  const [ text, setText ] = useState("");
-  const wrapperElement = useRef<HTMLDivElement>(null)
+  const [text, setText] = useState("");
+  const wrapperElement = useRef<HTMLDivElement>(null);
 
   function print(str: string) {
-    setText((prev) => prev + str.replace(
-      /\r/g,
-      "<br>",
-    ));
+    setText((prev) =>
+      prev + str.replace(
+        /\r/g,
+        "<br>",
+      )
+    );
     if (wrapperElement.current !== null) {
       wrapperElement.current.scrollTop = wrapperElement.current.scrollHeight;
     }
@@ -269,11 +271,11 @@ Checked 1 file
                   line-height: 1.2;
                 "
           >
-            <span id="output" dangerouslySetInnerHTML={{__html: text}}></span>
+            <span id="output" dangerouslySetInnerHTML={{ __html: text }}></span>
             <span class="caret"></span>
           </div>
         </foreignObject>
-      </g>      
+      </g>
     </svg>
   );
 }
