@@ -299,7 +299,7 @@ function TopPanel({
           >
             {hasPageBase && (
               <div
-                class={tw`flex flex-row justify-between md:justify-center items-center gap-4 border border-dark-border rounded-md bg-white py-2 px-5`}
+                class={tw`flex flex-row justify-between md:justify-center items-center gap-4 border border-border rounded-md bg-white py-2 px-5`}
               >
                 <div class={tw`flex items-center whitespace-nowrap gap-2`}>
                   <Icons.GitHub class="h-4 w-auto text-gray-700 flex-none" />
@@ -650,7 +650,7 @@ function InfoView(
         </div>
       }
     >
-      <div class={tw`p-6 rounded-xl border border-dark-border`}>
+      <div class={tw`p-6 rounded-xl border border-border`}>
         {data.readmeFile
           ? (
             <Markdown

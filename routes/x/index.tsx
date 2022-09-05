@@ -134,14 +134,14 @@ export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
             }
           </div>
 
-          <div class={tw`border border-dark-border rounded-lg overflow-hidden`}>
+          <div class={tw`border border-border rounded-lg overflow-hidden`}>
             <form
-              class={tw`px-5 py-4 flex items-center justify-between border-b border-dark-border bg-ultralight leading-none`}
+              class={tw`px-5 py-4 flex items-center justify-between border-b border-border bg-ultralight leading-none`}
               method="get"
             >
               <span class={tw`font-semibold`}>Explore Modules</span>
               <label
-                class={tw`px-4 h-9 w-full md:w-88 bg-white rounded-md flex items-center gap-1.5 box-content border border-dark-border text-gray-400 focus-within:${
+                class={tw`px-4 h-9 w-full md:w-88 bg-white rounded-md flex items-center gap-1.5 box-content border border-border text-gray-400 focus-within:${
                   css({
                     "outline": "solid",
                   })
@@ -161,7 +161,7 @@ export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
             <ul class={tw`divide-y`}>
               {data.search.hits.length
                 ? data.search.hits.map((result) => (
-                  <li class={tw`border-dark-border`}>
+                  <li class={tw`border-border`}>
                     <a
                       href={"/x/" + result.name}
                       class={tw`flex items-center justify-between px-5 py-3 gap-6 hover:bg-ultralight`}
@@ -207,7 +207,7 @@ export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
             </ul>
 
             <div
-              class={tw`px-5 py-4 border-t border-dark-border bg-ultralight flex items-center justify-between`}
+              class={tw`px-5 py-4 border-t border-border bg-ultralight flex items-center justify-between`}
             >
               {!!data.search.hits.length && <Pagination {...data} />}
             </div>
@@ -312,7 +312,7 @@ export function Pagination(
   return (
     <>
       <div
-        class={tw`p-3.5 rounded-lg border border-dark-border px-2.5 py-1.5 flex items-center gap-2.5 bg-white`}
+        class={tw`p-3.5 rounded-lg border border-border px-2.5 py-1.5 flex items-center gap-2.5 bg-white`}
       >
         <MaybeA disabled={page === 0} href={toPage(page - 1)}>
           <Icons.ChevronLeft />

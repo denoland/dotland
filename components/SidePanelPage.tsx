@@ -23,7 +23,7 @@ export function SidePanelPage({ children, sidepanel }: {
 
           <label
             htmlFor="SidePanelToggle"
-            class={tw`lg:hidden block pl-5 py-2.5 font-medium border-b border-dark-border`}
+            class={tw`lg:hidden block pl-5 py-2.5 font-medium border-b border-border`}
           >
             <div class={tw`flex gap-2 items-center px-1.5`}>
               <Icons.ChevronRight class="text-gray-400" />
@@ -38,7 +38,7 @@ export function SidePanelPage({ children, sidepanel }: {
       >
         {sidepanel && (
           <div
-            class={tw`hidden pb-2 w-full border-b border-dark-border lg:(pb-0 border-none block w-72 flex-shrink-0)`}
+            class={tw`hidden pb-2 w-full border-b border-border lg:(pb-0 border-none block w-72 flex-shrink-0)`}
           >
             <div
               class={tw`w-full space-y-4 section-x-inset-xl lg:section-x-inset-none`}
