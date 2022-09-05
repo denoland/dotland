@@ -4,6 +4,43 @@ const INSIGHTS_ENDPOINT = "https://insights.algolia.io/1/events";
 const ALGOLIA_API_KEY = "2ed789b2981acd210267b27f03ab47da";
 const ALGOLIA_APPLICATION_ID = "QFPCRZC6WX";
 
+export function searchView(
+  userToken: string | undefined,
+  index: string,
+  objectID: string,
+): void {
+  if (!userToken) {
+    return;
+  }
+  queueMicrotask(async () => {
+    const event = {
+      eventType: "view",
+      eventName: `${index} page view`,
+      index,
+      userToken,
+      timestamp: Date.now(),
+      objectIDs: [objectID],
+    };
+    const body = JSON.stringify({ events: [event] });
+    const res = await fetch(INSIGHTS_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "x-algolia-api-key": ALGOLIA_API_KEY,
+        "x-algolia-application-id": ALGOLIA_APPLICATION_ID,
+        "content-type": "application/json",
+      },
+      body,
+    });
+    if (res.status !== 200) {
+      console.error(
+        "failed to post view event:",
+        res.status,
+        res.statusText,
+      );
+    }
+  });
+}
+
 /**
  * Report the search click event to algolia.
  *

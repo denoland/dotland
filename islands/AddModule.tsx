@@ -233,7 +233,7 @@ export default function AddModule() {
             {available &&
               (
                 <button
-                  class={tw`rounded p-1.5 border border-[#D2D2DC] hover:bg-dark-border`}
+                  class={tw`rounded p-1.5 border border-[#D2D2DC] hover:bg-border`}
                   onClick={() =>
                     navigator.clipboard.writeText(
                       "https://api.deno.land/webhook/gh/" + urlValue,
@@ -312,7 +312,7 @@ export default function AddModule() {
                 </ol>
 
                 <video
-                  class={tw`rounded-lg border border-dark-border w-full lg:w-136`}
+                  class={tw`rounded-lg border border-border w-full lg:w-136`}
                   src={"/images/add_webhook.mp4"}
                   autoPlay
                   muted

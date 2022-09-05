@@ -369,7 +369,7 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
               >
                 <div class={tw`py-2 flex items-center space-x-3`}>
                   <button
-                    class={tw`p-1 border border-dark-border rounded-md not-disabled:hover:bg-light-border disabled:(text-[#D2D2DC] cursor-not-allowed)`}
+                    class={tw`p-1 border border-border rounded-md not-disabled:hover:bg-light-border disabled:(text-[#D2D2DC] cursor-not-allowed)`}
                     onClick={() => setPage((page) => page - 1)}
                     disabled={page === 0}
                   >
@@ -380,7 +380,7 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
                     <span class={tw`font-medium`}>{totalPages}</span>
                   </span>
                   <button
-                    class={tw`p-1 border border-dark-border rounded-md not-disabled:hover:bg-light-border disabled:(text-[#D2D2DC] cursor-not-allowed)`}
+                    class={tw`p-1 border border-border rounded-md not-disabled:hover:bg-light-border disabled:(text-[#D2D2DC] cursor-not-allowed)`}
                     onClick={() => setPage((page) => page + 1)}
                     disabled={(page + 1) === totalPages}
                   >

@@ -35,7 +35,7 @@ export const config: Configuration = {
         "default-15": "#23232326",
         ultralight: "#F8F7F6",
         "light-border": "#EEEEEE",
-        "dark-border": "#DDDDDD",
+        border: "#DDDDDD",
 
         "tag-blue-bg": "#056CF025",
         "tag-blue": "#056CF0",
@@ -87,7 +87,8 @@ export const config: Configuration = {
           "border-bottom-width": (parts[0] ?? 1) + "px",
         },
       }),
-    tag: apply`inline py-1 px-2 rounded-full leading-none font-medium text-xs`,
+    "tag-label":
+      apply`inline py-1 px-2 rounded-full leading-none font-medium text-xs`,
     button: ([kind]) => {
       let bg = "";
       let text = "";
@@ -110,7 +111,7 @@ export const config: Configuration = {
         case "alternate": {
           bg = "[#F3F3F3]";
           text = "default";
-          bgHover = "dark-border";
+          bgHover = "border";
           break;
         }
         case "outline": {
@@ -130,11 +131,10 @@ export const config: Configuration = {
       }
 
       return apply`inline-flex items-center gap-2 py-2.5 px-4.5 rounded-md bg-${bg} hover:bg-${bgHover} text-${text} leading-none font-medium ${
-        border ? "border border-dark-border" : ""
+        border ? "border border-border" : ""
       }`;
     },
-    "icon-button":
-      apply`border border-dark-border rounded p-2 hover:bg-ultralight`,
+    "icon-button": apply`border border-border rounded p-2 hover:bg-ultralight`,
   },
 };
 

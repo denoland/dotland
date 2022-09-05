@@ -37,6 +37,7 @@ import { PopularityTag } from "@/components/PopularityTag.tsx";
 import { SidePanelPage } from "@/components/SidePanelPage.tsx";
 import { Markdown } from "@/components/Markdown.tsx";
 import { type State } from "@/routes/_middleware.ts";
+import { searchView } from "@/util/search_insights_utils.ts";
 
 type Views = "doc" | "source" | "info";
 type Params = {
@@ -243,7 +244,7 @@ export default function Registry(
               )}
               <ModuleView
                 version={version!}
-                {...{ name, path, isStd, url, data }}
+                {...{ name, path, isStd, url, userToken, data }}
               />
             </>
           )}
@@ -304,7 +305,7 @@ function TopPanel({
           >
             {hasPageBase && (
               <div
-                class={tw`flex flex-row justify-between md:justify-center items-center gap-4 border border-dark-border rounded-md bg-white py-2 px-5`}
+                class={tw`flex flex-row justify-between md:justify-center items-center gap-4 border border-border rounded-md bg-white py-2 px-5`}
               >
                 <div class={tw`flex items-center whitespace-nowrap gap-2`}>
                   <Icons.GitHub class="h-4 w-auto text-gray-700 flex-none" />
@@ -343,6 +344,7 @@ function ModuleView({
   path,
   isStd,
   url,
+  userToken,
   data,
 }: {
   name: string;
@@ -350,6 +352,7 @@ function ModuleView({
   path: string;
   isStd: boolean;
   url: URL;
+  userToken?: string;
   data: Data;
 }) {
   if (data.data.kind === "no-versions") {
@@ -387,6 +390,7 @@ function ModuleView({
   );
 
   if (data.view === "info") {
+    searchView(userToken, "modules", data.data.module);
     return <InfoView version={version!} data={data.data} name={name} />;
   } else if (data.view === "source") {
     return (
@@ -524,7 +528,9 @@ function InfoView(
                   path="/"
                   view="info"
                 />
-                <div class={tw`tag bg-default-15 text-gray-600 font-semibold!`}>
+                <div
+                  class={tw`tag-label bg-default-15 text-gray-600 font-semibold!`}
+                >
                   {version}
                 </div>
               </div>
@@ -611,7 +617,7 @@ function InfoView(
                   >
                     <span class={tw`block w-full truncate`}>{listVersion}</span>
                     {listVersion === data.latest_version && (
-                      <div class={tw`tag bg-tag-blue-bg text-tag-blue`}>
+                      <div class={tw`tag-label bg-tag-blue-bg text-tag-blue`}>
                         Latest
                       </div>
                     )}
@@ -623,7 +629,7 @@ function InfoView(
         </div>
       }
     >
-      <div class={tw`p-6 rounded-xl border border-dark-border`}>
+      <div class={tw`p-6 rounded-xl border border-border`}>
         {data.readmeFile
           ? (
             <Markdown

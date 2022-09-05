@@ -115,14 +115,14 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
         <div class={tw`w-full justify-self-center flex-shrink-1`}>
           <a
             href={getDocURL(version, path)}
-            class={tw`float-right py-2.5 px-4.5 rounded-md bg-[#F3F3F3] hover:bg-dark-border leading-none font-medium`}
+            class={tw`float-right py-2.5 px-4.5 rounded-md bg-[#F3F3F3] hover:bg-border leading-none font-medium`}
           >
             Edit
           </a>
 
           <Markdown
             source={data.content
-              .replace(/(\[.+\]\(.+)\.md(\))/g, "$1$2")
+              .replace(/(\[.+\]\((?!https?:).+)\.md(\))/g, "$1$2")
               .replaceAll("$STD_VERSION", stdVersion)
               .replaceAll("$CLI_VERSION", version)}
             baseURL={sourceURL}
@@ -135,7 +135,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                   "manual",
                   `manual@${version}`,
                 )}
-                class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-dark-border gap-1.5 hover:bg-light-border`}
+                class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-border gap-1.5 hover:bg-light-border`}
               >
                 <Icons.ChevronLeft />
                 <div>
@@ -149,7 +149,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                   "manual",
                   `manual@${version}`,
                 )}
-                class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-dark-border gap-1.5 float-right text-right hover:bg-light-border`}
+                class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-border gap-1.5 float-right text-right hover:bg-light-border`}
               >
                 <div>
                   {pageList[pageIndex + 1].name}
