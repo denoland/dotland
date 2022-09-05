@@ -2,7 +2,7 @@
   "imports": {
     "@/": "./",
     "@twind": "./util/twind.ts",
-
+    "https://deno.land/std@0.154.0/": "https://deno.land/std@0.153.0/",
     "$fresh/": "https://fresh.deno.dev/@1.0.0-rc.4/",
     "preact": "https://esm.sh/preact@10.8.1",
     "preact/": "https://esm.sh/preact@10.8.1/",
