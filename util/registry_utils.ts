@@ -62,11 +62,11 @@ export async function getRawFile(
   name: string,
   version: string,
   path: string,
+  size: number,
 ): Promise<RawFile | Error> {
   const url = getSourceURL(name, version, path);
 
   const res = await fetch(url, { method: "GET" });
-  const size = Number(res.headers.get("content-size")!);
 
   if (size < MAX_SYNTAX_HIGHLIGHT_FILE_SIZE) {
     return {
