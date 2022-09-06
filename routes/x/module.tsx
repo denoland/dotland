@@ -154,7 +154,12 @@ export const handler: Handlers<PageData, State> = {
     if (data.data.kind === "modinfo" && data.data.readme) {
       data.data.readmeFile = await getReadme(name, version, data.data.readme);
     } else if (data.view === "source" && data.data.kind === "file") {
-      data.data.file = await getRawFile(name, version, path ? `/${path}` : "", data.data.size);
+      data.data.file = await getRawFile(
+        name,
+        version,
+        path ? `/${path}` : "",
+        data.data.size,
+      );
     }
 
     return render!({ data, userToken });
