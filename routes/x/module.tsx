@@ -226,7 +226,8 @@ export default function Registry(
           ? (
             <div class={tw`section-x-inset-xl pb-20 pt-10`}>
               <ErrorMessage title="404 - Not Found">
-                This module does not exist.
+                This {url.searchParams.has("s") ? "symbol" : "module"}{" "}
+                does not exist.
               </ErrorMessage>
             </div>
           )
