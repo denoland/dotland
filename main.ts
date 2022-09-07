@@ -22,7 +22,13 @@ import { routes as completionsV2Routes } from "./completions_v2.ts";
 
 await setup({
   resolveHref(current, symbol) {
-    return symbol ? `${current}?s=${symbol}` : current;
+    if (symbol) {
+      const url = new URL(current);
+      url.searchParams.set("s", symbol);
+      return url.href;
+    } else {
+      return current;
+    }
   },
   lookupHref(
     _current: string,

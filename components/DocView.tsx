@@ -26,7 +26,6 @@ export function DocView({
   data,
 }: CommonProps<DocPageSymbol | DocPageModule | DocPageIndex>) {
   const basePath = getModulePath(name, version);
-  url.search = "";
 
   return (
     <SidePanelPage

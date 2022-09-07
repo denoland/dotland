@@ -64,6 +64,7 @@ export default function API(
                     <input
                       type="checkbox"
                       checked={url.searchParams.has("unstable")}
+                      // @ts-ignore onChange does support strings
                       onChange="const search = new URLSearchParams(location.search); if (event.currentTarget.checked) { search.set('unstable', '') } else { search.delete('unstable') } location.search = search.toString() "
                     />
                     <span>Show Unstable API</span>
@@ -71,7 +72,7 @@ export default function API(
                 </div>
                 {
                   <LibraryCategoryPanel
-                    base={url.pathname}
+                    base={url.href}
                     currentSymbol={data.kind === "librarySymbol"
                       ? data.name
                       : undefined}
