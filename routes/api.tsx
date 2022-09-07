@@ -46,7 +46,7 @@ export default function API(
             sidepanel={
               <>
                 <ManualOrAPI current="Runtime APIs" version={params.version} />
-                <div class={tw`space-y-3 children:w-full`}>
+                <div class={tw`space-y-2.5 children:w-full`}>
                   <VersionSelect
                     versions={Object.fromEntries(
                       versions.map((
@@ -60,6 +60,14 @@ export default function API(
                     )}
                     selectedVersion={params.version}
                   />
+                  <label class={tw`flex items-center gap-1.5`}>
+                    <input
+                      type="checkbox"
+                      checked={url.searchParams.has("unstable")}
+                      onChange="const search = new URLSearchParams(location.search); if (event.currentTarget.checked) { search.set('unstable', '') } else { search.delete('unstable') } location.search = search.toString() "
+                    />
+                    <span>Show Unstable API</span>
+                  </label>
                 </div>
                 {
                   <LibraryCategoryPanel
@@ -98,7 +106,9 @@ export const handler: Handlers<Data, State> = {
     }
 
     const resURL = new URL(
-      `https://apiland.deno.dev/v2/pages/lib/doc/deno_stable/${params.version}`,
+      `https://apiland.deno.dev/v2/pages/lib/doc/${
+        url.searchParams.has("unstable") ? "deno_unstable" : "deno_stable"
+      }/${params.version}`,
     );
 
     const symbol = url.searchParams.get("s");
