@@ -72,7 +72,7 @@ export default function API(
                 </div>
                 {
                   <LibraryCategoryPanel
-                    base={url.href}
+                    base={url.pathname}
                     currentSymbol={data.kind === "librarySymbol"
                       ? data.name
                       : undefined}
