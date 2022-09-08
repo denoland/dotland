@@ -196,7 +196,7 @@ async function handlerRaw(
         ...RAW_HEADERS,
         Location: getModulePath(name, versions.latest, path),
         "x-deno-warning":
-          `Implicitly using latest version (${versions.latest}) for ${req.url}`,
+          `Implicitly using version (${versions.latest}) for ${req.url}`,
       },
     });
   }
