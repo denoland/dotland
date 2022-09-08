@@ -154,7 +154,12 @@ export const handler: Handlers<PageData, State> = {
     if (data.data.kind === "modinfo" && data.data.readme) {
       data.data.readmeFile = await getReadme(name, version, data.data.readme);
     } else if (data.view === "source" && data.data.kind === "file") {
-      data.data.file = await getRawFile(name, version, path ? `/${path}` : "");
+      data.data.file = await getRawFile(
+        name,
+        version,
+        path ? `/${path}` : "",
+        data.data.size,
+      );
     }
 
     return render!({ data, userToken });
@@ -226,7 +231,8 @@ export default function Registry(
           ? (
             <div class={tw`section-x-inset-xl pb-20 pt-10`}>
               <ErrorMessage title="404 - Not Found">
-                This module does not exist.
+                This {url.searchParams.has("s") ? "symbol" : "module"}{" "}
+                does not exist.
               </ErrorMessage>
             </div>
           )
@@ -636,7 +642,7 @@ function InfoView(
               source={name === "std"
                 ? data.readmeFile
                 : data.readmeFile.replace(/\$STD_VERSION/g, version)}
-              baseURL={getSourceURL(name, version, "/")}
+              baseURL={getSourceURL(name, version, data.readme!.path)}
             />
           )
           : (
