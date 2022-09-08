@@ -77,7 +77,7 @@ export function Footer() {
               frameBorder="0"
               scrolling="no"
               style="border: none;"
-              class={tw`w-full rounded-lg focus:outline-none`}
+              class={tw`w-full rounded-[0.59rem] focus:outline-none bg-white`}
             />
 
             <div class={tw`space-y-2.5 lg:space-y-4.5`}>
