@@ -91,7 +91,6 @@ Deno.test({
     );
     assertEquals(res.status, 302);
     assert(res.headers.get("Location")?.includes("@"));
-    assert(res.headers.get("X-Deno-Warning")?.includes("latest"));
     assert(res.headers.get("X-Deno-Warning")?.includes("/std/version.ts"));
     assertEquals(res.headers.get("Access-Control-Allow-Origin"), "*");
     await res.text();
