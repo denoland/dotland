@@ -147,5 +147,10 @@
     "image": "/images/showcase/optimem.png",
     "title": "Optimem App",
     "link": "https://optimem.org/"
+  },
+  {
+    "image": "/images/showcase/denoblog.png",
+    "title": "Deno markdown blog",
+    "link": "https://deno-markdown-blog.deno.dev/"
   }
 ]
