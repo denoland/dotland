@@ -35,7 +35,7 @@ export default function API(
 
       {data.kind === "libraryInvalidVersion"
         ? (
-          <div class={tw`section-x-inset-xl py-12`}>
+          <div class={tw`section-x-inset-xl pb-20 pt-10 py-12`}>
             <ErrorMessage title="404 - Not Found">
               This version does not exist.
             </ErrorMessage>
@@ -84,10 +84,18 @@ export default function API(
             }
           >
             {data.kind === "librarySymbol" && (
-              // @ts-ignore it works.
-              <SymbolDoc url={url.href} namespace={undefined} library>
-                {data.docNodes}
-              </SymbolDoc>
+              data.docNodes.length === 0
+                ? (
+                  <ErrorMessage title="404 - Not Found">
+                    This symbol does not exist.
+                  </ErrorMessage>
+                )
+                : (
+                  // @ts-ignore it works.
+                  <SymbolDoc url={url.href} namespace={undefined} library>
+                    {data.docNodes}
+                  </SymbolDoc>
+                )
             )}
           </SidePanelPage>
         )}
