@@ -278,6 +278,20 @@ export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
 
             <div class={tw`space-y-3`}>
               <h2 class={tw`text-xl leading-6 font-semibold`}>
+                A module is name-squatting or its just made as a joke, can I
+                have it?
+              </h2>
+              <p class={tw`text-[#6C6E78] leading-5`}>
+                Name squatting is not allowed on the deno.land/x/. If you feel
+                that a module is not currently usable, has not been legitimately
+                under development for more than 90 days, and you have a concrete
+                proposal to publish a well-maintained module in its place,
+                please contact support.
+              </p>
+            </div>
+
+            <div class={tw`space-y-3`}>
+              <h2 class={tw`text-xl leading-6 font-semibold`}>
                 I can't find a specific module. Help!
               </h2>
               <a
