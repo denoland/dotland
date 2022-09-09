@@ -14,10 +14,8 @@ export const versions = VERSIONS.cli;
 export interface TableOfContents {
   [slug: string]: {
     name: string;
-    children?: {
-      [slug: string]: string;
-    };
-  };
+    children?: TableOfContents;
+  } | string;
 }
 
 // Returns true if the version is of the 0.x release line, or between 1.0.0 and
