@@ -222,6 +222,7 @@ function ToCEntry({
 }) {
   const name = typeof entry === "string" ? entry : entry.name;
   const active = path === `/${slug}`;
+  const hasChildren = typeof entry === "object" && entry.children;
   return (
     <li key={slug}>
       <input
@@ -229,12 +230,12 @@ function ToCEntry({
         id={slug}
         class={tw`hidden checked:siblings:even:children:first-child:rotate-90 checked:siblings:last-child:block`}
         checked={active || path.startsWith(`/${slug}/`)}
-        disabled={!(typeof entry === "object" && entry.children)}
+        disabled={!hasChildren}
       />
 
       <label
         htmlFor={slug}
-        class={tw`flex items-center gap-2 ${
+        class={tw`flex! items-center gap-2 ${
           outermost
             ? "px-2.5 py-2 font-semibold"
             : `pl-${depth * 6} pr-2.5 py-1 font-normal`
@@ -246,16 +247,16 @@ function ToCEntry({
           onKeyDown="if (event.code === 'Space' || event.code === 'Enter') { this.parentElement.click(); event.preventDefault(); }"
           tabindex={0}
           class={"h-2.5 w-auto cursor-pointer " +
-            ((typeof entry === "object" && entry.children) ? "" : "invisible")}
+            (hasChildren ? "" : "invisible")}
         />
         <a href={`/manual@${version}/${slug}`}>
           {name}
         </a>
       </label>
 
-      {typeof entry === "object" && entry.children && (
+      {hasChildren && (
         <ol class={tw`list-decimal font-normal hidden` + " nested"}>
-          {Object.entries(entry.children).map(([childSlug, entry]) => (
+          {Object.entries(entry.children!).map(([childSlug, entry]) => (
             <ToCEntry
               slug={`${slug}/${childSlug}`}
               entry={entry}
