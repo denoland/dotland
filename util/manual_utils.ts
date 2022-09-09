@@ -1,12 +1,13 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 import compareVersions from "$tiny-version-compare";
+import { join } from "$std/path/mod.ts";
 import { getSourceURL } from "./registry_utils.ts";
 import VERSIONS from "@/versions.json" assert { type: "json" };
 
 const githubBasepath = "https://raw.githubusercontent.com/denoland/manual/";
-const oldDocpath = "https://github.com/denoland/deno/blob/";
-const docpath = "https://github.com/denoland/manual/blob/";
+const oldSourcepath = "https://github.com/denoland/deno/blob/";
+const sourcepath = "https://github.com/denoland/manual/blob/";
 
 export const versions = VERSIONS.cli;
 
@@ -27,6 +28,10 @@ function isOldVersion(version: string) {
 }
 
 export function basepath(version: string) {
+  const manualPath = Deno.env.get("MANUAL_PATH");
+  if (manualPath) {
+    return "file://" + join(Deno.cwd(), manualPath);
+  }
   if (isPreviewVersion(version)) {
     return githubBasepath + version;
   }
@@ -55,10 +60,10 @@ export function getFileURL(version: string, path: string): string {
 
 export function getDocURL(version: string, path: string): string {
   if (isOldVersion(version)) {
-    return `${oldDocpath}${version}/docs${path}.md`;
+    return `${oldSourcepath}${version}/docs${path}.md`;
   }
 
-  return `${docpath}${version}${path}.md`;
+  return `${sourcepath}${version}${path}.md`;
 }
 
 export function isPreviewVersion(version: string): boolean {
