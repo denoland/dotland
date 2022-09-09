@@ -237,7 +237,7 @@ function ToCEntry({
         class={tw`flex items-center gap-2 ${
           outermost
             ? "px-2.5 py-2 font-semibold"
-            : `pl-${depth * 8} pr-2.5 py-1 font-normal`
+            : `pl-${depth * 6} pr-2.5 py-1 font-normal`
         } rounded-md ${active ? "link bg-ultralight" : "hover:text-gray-500"}` +
           (active ? " toc-active" : "")}
       >
