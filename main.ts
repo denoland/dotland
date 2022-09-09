@@ -21,11 +21,18 @@ import options from "./options.ts";
 import { routes as completionsV2Routes } from "./completions_v2.ts";
 
 await setup({
-  resolveHref(current, symbol) {
-    return symbol ? `${current}?s=${symbol}` : current;
+  resolveHref(current: URL, symbol?: string) {
+    if (symbol) {
+      console.log(current);
+      const url = new URL(current);
+      url.searchParams.set("s", symbol);
+      return url.href;
+    } else {
+      return current.href;
+    }
   },
   lookupHref(
-    _current: string,
+    _current: URL,
     _namespace: string | undefined,
     _symbol: string,
   ): string | undefined {

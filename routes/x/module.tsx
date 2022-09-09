@@ -642,7 +642,7 @@ function InfoView(
               source={name === "std"
                 ? data.readmeFile
                 : data.readmeFile.replace(/\$STD_VERSION/g, version)}
-              baseURL={getSourceURL(name, version, data.readme!.path)}
+              mediaBaseUrl={getSourceURL(name, version, data.readme!.path)}
             />
           )
           : (

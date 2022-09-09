@@ -26,7 +26,6 @@ export function DocView({
   data,
 }: CommonProps<DocPageSymbol | DocPageModule | DocPageIndex>) {
   const basePath = getModulePath(name, version);
-  url.search = "";
   const replace: [string, string] | undefined = name === "std"
     ? ["$STD_VERSION", version]
     : undefined;
@@ -36,7 +35,7 @@ export function DocView({
       sidepanel={(data.kind === "module" || data.kind === "symbol")
         ? (
           <ModuleIndexPanel
-            base={basePath}
+            base={new URL(url, basePath)}
             path={dirname(path)}
             current={path}
             currentSymbol={data.kind === "symbol" ? data.name : undefined}
@@ -52,7 +51,7 @@ export function DocView({
             case "index":
               return (
                 <ModuleIndex
-                  url={basePath}
+                  url={new URL(url, basePath)}
                   path={path || "/"}
                   sourceUrl={url.href}
                   replace={replace}
@@ -64,7 +63,7 @@ export function DocView({
               return (
                 // @ts-ignore it works.
                 <SymbolDoc
-                  url={url.href}
+                  url={url}
                   namespace={undefined}
                   replace={replace}
                 >
@@ -75,7 +74,7 @@ export function DocView({
               return (
                 // @ts-ignore it works.
                 <ModuleDoc
-                  url={url.href}
+                  url={url}
                   sourceUrl={url.href}
                   replace={replace}
                 >

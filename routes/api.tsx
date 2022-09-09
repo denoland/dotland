@@ -53,9 +53,7 @@ export default function API(
                         ver,
                       ) => [
                         ver,
-                        `/api@${ver}` + (data.kind === "librarySymbol"
-                          ? ("?s=" + data.name)
-                          : ""),
+                        `/api@${ver}?${url.searchParams}`,
                       ]),
                     )}
                     selectedVersion={params.version}
@@ -72,7 +70,7 @@ export default function API(
                 </div>
                 {
                   <LibraryCategoryPanel
-                    base={url.pathname}
+                    base={url}
                     currentSymbol={data.kind === "librarySymbol"
                       ? data.name
                       : undefined}
@@ -92,7 +90,7 @@ export default function API(
                 )
                 : (
                   // @ts-ignore it works.
-                  <SymbolDoc url={url.href} namespace={undefined} library>
+                  <SymbolDoc url={url} namespace={undefined} library>
                     {data.docNodes}
                   </SymbolDoc>
                 )
