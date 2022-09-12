@@ -13,7 +13,6 @@ import { IS_BROWSER } from "$fresh/runtime.ts";
 import { css, tw } from "@twind";
 import { useEffect, useState } from "preact/hooks";
 import * as Icons from "@/components/Icons.tsx";
-import type { DocNode } from "$deno_doc/types.d.ts";
 import { colors, docNodeKindMap } from "@/components/symbol_kind.tsx";
 import { islandSearchClick } from "@/util/search_insights_utils.ts";
 import { ComponentChildren } from "preact";
@@ -27,7 +26,7 @@ if (IS_BROWSER && window.HTMLDialogElement === "undefined") {
 }
 
 const MODULE_INDEX = "modules";
-const SYMBOL_INDEX = "doc_nodes";
+const SYMBOL_INDEX = "doc_nodes_new";
 const MANUAL_INDEX = "manual";
 
 const kinds = [
@@ -70,10 +69,37 @@ interface SearchResults<ResultItem> {
   page: number;
 }
 
+/** Represents the search record being returned for a symbol. */
+interface SymbolItem {
+  name: string;
+  sourceId: string;
+  path?: string;
+  doc?: string;
+  category?: string;
+  tags?: string[];
+  source: number;
+  popularity_score: number;
+  kind:
+    | "namespace"
+    | "enum"
+    | "variable"
+    | "function"
+    | "interface"
+    | "typeAlias"
+    | "moduleDoc"
+    | "import";
+  version: string;
+  location: {
+    filename: string;
+    line: number;
+    col: number;
+  };
+}
+
 interface Results {
   manual?: SearchResults<ManualSearchResult>;
   modules?: SearchResults<ModuleSearchResult>;
-  symbols?: SearchResults<DocNode>;
+  symbols?: SearchResults<SymbolItem>;
 }
 
 function toSearchResults<ResultItem>(
@@ -338,12 +364,13 @@ export default function GlobalSearch() {
                               symbol index.
                             </div>
                           )}
-                        {results.symbols.hits.map((doc, i) => (
+                        {results.symbols.hits.map((symbolItem, i) => (
                           <SymbolResult
-                            doc={doc}
                             queryID={results.symbols!.queryID}
                             position={getPosition(results.symbols!, i)}
-                          />
+                          >
+                            {symbolItem}
+                          </SymbolResult>
                         ))}
                       </Section>
                     )}
@@ -496,40 +523,89 @@ function ManualResultTitle(props: { title: string[] }) {
   return <div class={tw`space-x-1`}>{parts}</div>;
 }
 
+/** Given a symbol item, return an href that will link to that symbol. */
+function getSymbolItemHref(
+  { sourceId, name, version, path }: SymbolItem,
+): string {
+  if (sourceId.startsWith("lib/")) {
+    return `/api?s=${name}`;
+  } else if (sourceId === "mod/std") {
+    return `/std@${version}${path}${name ? `?s=${name}` : ""}`;
+  } else {
+    const mod = sourceId.slice(4);
+    return `/x/${mod}@${version}${path}${name ? `?s=${name}` : ""}`;
+  }
+}
+
+function Source(
+  { children: { sourceId, version, path } }: { children: SymbolItem },
+) {
+  if (sourceId.startsWith("lib/")) {
+    return (
+      <span class={tw`italic text-sm text-gray-400 leading-6`}>
+        built-in to Deno
+      </span>
+    );
+  } else {
+    const mod = sourceId.slice(4);
+    return (
+      <span>
+        <span class={tw`italic text-sm text-gray-400 leading-6`}>
+          from
+        </span>{" "}
+        {mod}@{version}
+        {path}
+      </span>
+    );
+  }
+}
+
+function SymbolDescription(
+  { children: { doc, tags } }: { children: SymbolItem },
+) {
+  if (!doc && !tags) {
+    return null;
+  }
+  const tagItems = tags?.map((tag) => (
+    <span class={tw`p-1 rounded-xl border-2 mr-2`}>{tag}</span>
+  ));
+  return (
+    <div
+      class={tw`text-sm text-[#6C6E78] mr-24`}
+    >
+      {tagItems && tagItems.length
+        ? <div class={tw`mb-2`}>{tagItems}</div>
+        : null}
+      {doc?.split("\n\n")[0]}
+    </div>
+  );
+}
+
 function SymbolResult(
-  { doc, queryID, position }: {
-    doc: DocNode & { objectID: string };
+  { children: item, queryID, position }: {
+    children: SymbolItem & { objectID: string };
     queryID?: string;
     position?: number;
   },
 ) {
-  let location = new URL(doc.location.filename).pathname;
-  location = location.replace(/^(\/x\/)|\//, "");
-  const KindIcon = docNodeKindMap[doc.kind];
-  const href = `${doc.location.filename}?s=${doc.name}`;
+  const KindIcon = docNodeKindMap[item.kind];
+  const href = getSymbolItemHref(item);
   return (
     <a
       href={href}
       onClick={() =>
-        islandSearchClick(SYMBOL_INDEX, queryID, doc.objectID, position)}
+        islandSearchClick(SYMBOL_INDEX, queryID, item.objectID, position)}
     >
       <KindIcon />
       <div>
         <div class={tw`space-x-2 py-1`}>
-          <span class={tw`text-[${colors[doc.kind][0]}]`}>
-            {doc.kind.replace("A", " a")}
+          <span class={tw`text-[${colors[item.kind][0]}]`}>
+            {item.kind.replace("A", " a")}
           </span>
-          <span class={tw`font-semibold`}>{doc.name}</span>
-          <span class={tw`italic text-sm text-gray-400 leading-6`}>from</span>
-          <span>{location}</span>
+          <span class={tw`font-semibold`}>{item.name}</span>
+          <Source>{item}</Source>
         </div>
-        {doc.jsDoc?.doc && (
-          <div
-            class={tw`text-sm text-[#6C6E78] h-5 overflow-ellipsis overflow-hidden mr-24`}
-          >
-            {doc.jsDoc.doc.split("\n")[0]}
-          </div>
-        )}
+        <SymbolDescription>{item}</SymbolDescription>
       </div>
     </a>
   );
