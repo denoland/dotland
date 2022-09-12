@@ -82,20 +82,23 @@ export default function API(
               </>
             }
           >
-            {data.kind === "librarySymbol" ? (
-              data.docNodes.length === 0
-                ? (
-                  <ErrorMessage title="404 - Not Found">
-                    This symbol does not exist.
-                  </ErrorMessage>
-                )
-                : (
-                  // @ts-ignore it works.
-                  <SymbolDoc url={url} namespace={undefined} library>
-                    {data.docNodes}
-                  </SymbolDoc>
-                )
-            ) : <LibraryIndex url={url} sourceUrl="">{data.items}</LibraryIndex>}
+            {data.kind === "librarySymbol"
+              ? (
+                data.docNodes.length === 0
+                  ? (
+                    <ErrorMessage title="404 - Not Found">
+                      This symbol does not exist.
+                    </ErrorMessage>
+                  )
+                  : (
+                    // @ts-ignore it works.
+                    <SymbolDoc url={url} namespace={undefined} library>
+                      {data.docNodes}
+                    </SymbolDoc>
+                  )
+              )
+              : <LibraryIndex url={url} sourceUrl="">{data.items}
+              </LibraryIndex>}
           </SidePanelPage>
         )}
 
