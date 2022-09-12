@@ -13,7 +13,6 @@ import { setup } from "$doc_components/services.ts";
 import manifest from "@/fresh.gen.ts";
 import options from "@/options.ts";
 
-const docland = "https://doc.deno.land/";
 await setup({
   resolveHref(current: URL, symbol?: string) {
     if (symbol) {
