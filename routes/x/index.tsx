@@ -164,13 +164,28 @@ export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
                   <li class={tw`border-border`}>
                     <a
                       href={"/x/" + result.name}
-                      class={tw`flex items-center justify-between px-5 py-3 gap-6 hover:bg-ultralight`}
+                      class={tw`flex items-center px-5 py-3 gap-2 hover:bg-ultralight`}
                     >
-                      <div>
+                      <div
+                        class={tw`grid w-full ${
+                          css({
+                            "grid-template-columns": "auto min-content",
+                          })
+                        } gap-x-6`}
+                      >
                         <div class={tw`text-tag-blue font-semibold`}>
                           {result.name}
                         </div>
-                        <div class={tw`text-gray-400`}>
+                        <div
+                          class={tw`self-center justify-self-end md:row-span-2`}
+                        >
+                          {result.popularity_tag && (
+                            <PopularityTag class="hidden md:block">
+                              {result.popularity_tag}
+                            </PopularityTag>
+                          )}
+                        </div>
+                        <div class={tw`col-span-2 md:col-span-1 text-gray-400`}>
                           {result.description
                             ? emojify(result.description)
                             : (
@@ -181,12 +196,7 @@ export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
                         </div>
                       </div>
 
-                      <div class={tw`flex items-center gap-2`}>
-                        {result.popularity_tag && (
-                          <PopularityTag>{result.popularity_tag}</PopularityTag>
-                        )}
-                        <Icons.ChevronRight class="text-gray-400" />
-                      </div>
+                      <Icons.ChevronRight class="text-gray-400 flex-shrink-0" />
                     </a>
                   </li>
                 ))
