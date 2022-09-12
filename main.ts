@@ -23,7 +23,6 @@ import { routes as completionsV2Routes } from "./completions_v2.ts";
 await setup({
   resolveHref(current: URL, symbol?: string) {
     if (symbol) {
-      console.log(current);
       const url = new URL(current);
       url.searchParams.set("s", symbol);
       return url.href;

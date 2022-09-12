@@ -14,7 +14,8 @@ import { versions } from "@/util/manual_utils.ts";
 import VersionSelect from "@/islands/VersionSelect.tsx";
 import { type LibDocPage } from "@/util/registry_utils.ts";
 import { ErrorMessage } from "@/components/ErrorMessage.tsx";
-import { LibraryCategoryPanel } from "$doc_components/doc/library_category_panel.tsx";
+import { LibraryIndexPanel } from "$doc_components/doc/library_index_panel.tsx";
+import { LibraryIndex } from "$doc_components/doc/library_index.tsx";
 import { SymbolDoc } from "$doc_components/doc/symbol_doc.tsx";
 import { type State } from "@/routes/_middleware.ts";
 
@@ -69,19 +70,19 @@ export default function API(
                   </label>
                 </div>
                 {
-                  <LibraryCategoryPanel
+                  <LibraryIndexPanel
                     base={url}
                     currentSymbol={data.kind === "librarySymbol"
                       ? data.name
                       : undefined}
                   >
                     {data.items}
-                  </LibraryCategoryPanel>
+                  </LibraryIndexPanel>
                 }
               </>
             }
           >
-            {data.kind === "librarySymbol" && (
+            {data.kind === "librarySymbol" ? (
               data.docNodes.length === 0
                 ? (
                   <ErrorMessage title="404 - Not Found">
@@ -94,7 +95,7 @@ export default function API(
                     {data.docNodes}
                   </SymbolDoc>
                 )
-            )}
+            ) : <LibraryIndex url={url} sourceUrl="">{data.items}</LibraryIndex>}
           </SidePanelPage>
         )}
 
