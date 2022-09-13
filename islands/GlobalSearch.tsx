@@ -215,7 +215,6 @@ export default function GlobalSearch() {
 
     client.multipleQueries(queries).then(
       ({ results }) => {
-        // @ts-ignore algolia typings are annoying
         setTotalPages(results.find((res) => res.nbPages)?.nbPages ?? 1);
         setResults({
           manual: toSearchResults(results, MANUAL_INDEX),
