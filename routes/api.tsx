@@ -97,8 +97,14 @@ export default function API(
                     </SymbolDoc>
                   )
               )
-              : <LibraryIndex url={url} sourceUrl="">{data.items}
-              </LibraryIndex>}
+              : (
+                <LibraryIndex
+                  url={url}
+                  sourceUrl={`https://github.com/denoland/deno/releases/download/${data.version}/lib.deno.d.ts`}
+                >
+                  {data.items}
+                </LibraryIndex>
+              )}
           </SidePanelPage>
         )}
 

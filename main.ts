@@ -38,6 +38,9 @@ await setup({
     return undefined;
   },
   resolveSourceHref(url, line) {
+    if (!url.startsWith("https://deno.land")) {
+      return url;
+    }
     return line ? `${url}?source#L${line}` : `${url}?source`;
   },
   runtime: { Fragment, h },
