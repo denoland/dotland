@@ -63,11 +63,7 @@ export function DocView({
             case "symbol":
               return (
                 // @ts-ignore it works.
-                <SymbolDoc
-                  url={url}
-                  namespace={undefined}
-                  replace={replace}
-                >
+                <SymbolDoc url={url} name={data.name} replace={replace}>
                   {data.docNodes}
                 </SymbolDoc>
               );

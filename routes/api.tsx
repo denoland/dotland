@@ -92,7 +92,7 @@ export default function API(
                   )
                   : (
                     // @ts-ignore it works.
-                    <SymbolDoc url={url} namespace={undefined} library>
+                    <SymbolDoc url={url} name={data.name} library>
                       {data.docNodes}
                     </SymbolDoc>
                   )
