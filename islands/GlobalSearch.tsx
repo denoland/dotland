@@ -2,7 +2,7 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
+import { type ComponentChildren, Fragment, h } from "preact";
 import algoliasearch from "$algolia";
 import type {
   MultipleQueriesQuery,
@@ -15,7 +15,6 @@ import { useEffect, useState } from "preact/hooks";
 import * as Icons from "@/components/Icons.tsx";
 import { colors, docNodeKindMap } from "@/components/symbol_kind.tsx";
 import { islandSearchClick } from "@/util/search_insights_utils.ts";
-import { ComponentChildren } from "preact";
 
 // Lazy load a <dialog> polyfill.
 // @ts-expect-error HTMLDialogElement is not just a type!
@@ -559,6 +558,27 @@ function Source(
   }
 }
 
+const tagColors = {
+  purple: ["[#7B61FF1A]", "[#7B61FF]"],
+  cyan: ["[#0CAFC619]", "[#0CAFC6]"],
+  gray: ["gray-100", "gray-400"],
+} as const;
+
+type TagColors = keyof typeof tagColors;
+
+function Tag(
+  { children, color }: { children: ComponentChildren; color: TagColors },
+) {
+  const [bg, text] = tagColors[color];
+  return (
+    <div
+      class={tw`bg-${bg} text-${text} py-1 px-2 inline-block rounded-full font-medium text-sm leading-none mr-2 font-sans`}
+    >
+      {children}
+    </div>
+  );
+}
+
 function SymbolDescription(
   { children: { doc, tags } }: { children: SymbolItem },
 ) {
@@ -566,7 +586,7 @@ function SymbolDescription(
     return null;
   }
   const tagItems = tags?.map((tag) => (
-    <span class={tw`p-1 rounded-xl border-2 mr-2`}>{tag}</span>
+    <Tag color={tag.startsWith("allow") ? "cyan" : "gray"}>{tag}</Tag>
   ));
   return (
     <div
