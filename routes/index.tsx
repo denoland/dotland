@@ -12,12 +12,10 @@ import { Header } from "@/components/Header.tsx";
 import HelloBar from "@/islands/HelloBar.tsx";
 import { Background } from "@/components/HeroBackground.tsx";
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { type State } from "@/routes/_middleware.ts";
 
 import versions from "@/versions.json" assert { type: "json" };
 
 interface Data {
-  userToken: string;
   isFirefox: boolean;
 }
 
@@ -52,7 +50,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
           class={tw`bg-gray-50 overflow-x-hidden border-b border-gray-200 relative`}
         >
           {!data.isFirefox && <Background />}
-          <Header main userToken={data.userToken} />
+          <Header main />
           <div
             class={tw`relative section-x-inset-sm pt-12 pb-20 flex flex-col items-center`}
           >
@@ -465,10 +463,9 @@ function InstallSection({ url }: { url: URL }) {
   );
 }
 
-export const handler: Handlers<Data, State> = {
-  GET(req, { render, state: { userToken } }) {
+export const handler: Handlers<Data> = {
+  GET(req, { render }) {
     return render!({
-      userToken,
       isFirefox:
         req.headers.get("user-agent")?.toLowerCase().includes("firefox") ??
           false,

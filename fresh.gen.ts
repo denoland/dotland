@@ -4,19 +4,19 @@
 
 import * as $0 from "./routes/_404.tsx";
 import * as $1 from "./routes/_app.tsx";
-import * as $2 from "./routes/_middleware.ts";
-import * as $3 from "./routes/add_module.tsx";
-import * as $4 from "./routes/artwork.tsx";
-import * as $5 from "./routes/badge.ts";
-import * as $6 from "./routes/benchmarks.tsx";
-import * as $7 from "./routes/completions/config.ts";
-import * as $8 from "./routes/completions/v1.ts";
-import * as $9 from "./routes/gfm.css.ts";
-import * as $10 from "./routes/index.tsx";
-import * as $11 from "./routes/install.ts";
-import * as $12 from "./routes/legacy_redirects/posts.ts";
-import * as $13 from "./routes/legacy_redirects/v1.ts";
-import * as $14 from "./routes/manual.tsx";
+import * as $2 from "./routes/add_module.tsx";
+import * as $3 from "./routes/artwork.tsx";
+import * as $4 from "./routes/badge.ts";
+import * as $5 from "./routes/benchmarks.tsx";
+import * as $6 from "./routes/completions/config.ts";
+import * as $7 from "./routes/completions/v1.ts";
+import * as $8 from "./routes/gfm.css.ts";
+import * as $9 from "./routes/index.tsx";
+import * as $10 from "./routes/install.ts";
+import * as $11 from "./routes/legacy_redirects/posts.ts";
+import * as $12 from "./routes/legacy_redirects/v1.ts";
+import * as $13 from "./routes/manual.tsx";
+import * as $14 from "./routes/search_event.ts";
 import * as $15 from "./routes/showcase.tsx";
 import * as $16 from "./routes/status.tsx";
 import * as $17 from "./routes/std.tsx";
@@ -32,19 +32,19 @@ const manifest = {
   routes: {
     "./routes/_404.tsx": $0,
     "./routes/_app.tsx": $1,
-    "./routes/_middleware.ts": $2,
-    "./routes/add_module.tsx": $3,
-    "./routes/artwork.tsx": $4,
-    "./routes/badge.ts": $5,
-    "./routes/benchmarks.tsx": $6,
-    "./routes/completions/config.ts": $7,
-    "./routes/completions/v1.ts": $8,
-    "./routes/gfm.css.ts": $9,
-    "./routes/index.tsx": $10,
-    "./routes/install.ts": $11,
-    "./routes/legacy_redirects/posts.ts": $12,
-    "./routes/legacy_redirects/v1.ts": $13,
-    "./routes/manual.tsx": $14,
+    "./routes/add_module.tsx": $2,
+    "./routes/artwork.tsx": $3,
+    "./routes/badge.ts": $4,
+    "./routes/benchmarks.tsx": $5,
+    "./routes/completions/config.ts": $6,
+    "./routes/completions/v1.ts": $7,
+    "./routes/gfm.css.ts": $8,
+    "./routes/index.tsx": $9,
+    "./routes/install.ts": $10,
+    "./routes/legacy_redirects/posts.ts": $11,
+    "./routes/legacy_redirects/v1.ts": $12,
+    "./routes/manual.tsx": $13,
+    "./routes/search_event.ts": $14,
     "./routes/showcase.tsx": $15,
     "./routes/status.tsx": $16,
     "./routes/std.tsx": $17,
