@@ -36,7 +36,11 @@ import { SourceView } from "@/components/SourceView.tsx";
 import { PopularityTag } from "@/components/PopularityTag.tsx";
 import { SidePanelPage } from "@/components/SidePanelPage.tsx";
 import { Markdown } from "@/components/Markdown.tsx";
-import { searchView } from "@/util/search_insights_utils.ts";
+import {
+  getUserToken,
+  searchView,
+  ssrSearchClick,
+} from "@/util/search_insights_utils.ts";
 
 type Views = "doc" | "source" | "info";
 type Params = {
@@ -58,7 +62,7 @@ interface PageData {
 }
 
 export const handler: Handlers<PageData> = {
-  async GET(req, { params, render }) {
+  async GET(req, { params, render, remoteAddr }) {
     const { name, version, path } = params as Params;
     const url = new URL(req.url);
 
@@ -90,6 +94,18 @@ export const handler: Handlers<PageData> = {
     const symbol = url.searchParams.get("s");
     if (symbol && view === "doc") {
       resURL.searchParams.set("symbol", symbol);
+    }
+
+    const queryId = url.searchParams.get("qid");
+    const position = url.searchParams.get("pos");
+    if (queryId && position && remoteAddr.transport === "tcp") {
+      ssrSearchClick(
+        await getUserToken(req.headers, remoteAddr.hostname),
+        "modules",
+        queryId,
+        name,
+        parseInt(position, 10),
+      );
     }
 
     let data: Data;

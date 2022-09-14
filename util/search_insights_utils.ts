@@ -13,7 +13,7 @@ export interface SearchClickEvent {
   timestamp: number;
   queryID: string;
   objectIDs: string[];
-  positions: string[];
+  positions: number[];
 }
 
 export async function getUserToken(
@@ -90,6 +90,26 @@ export function searchClick(userToken: string, event: SearchClickEvent): void {
         res.statusText,
       );
     }
+  });
+}
+
+/** Generate a search click event for a SSR search click and dispatch it to
+ * algolia. */
+export function ssrSearchClick(
+  userToken: string,
+  index: string,
+  queryID: string,
+  objectID: string,
+  position: number,
+) {
+  searchClick(userToken, {
+    eventType: "click",
+    eventName: `${index} search click`,
+    index,
+    timestamp: Date.now(),
+    queryID,
+    objectIDs: [objectID],
+    positions: [position],
   });
 }
 

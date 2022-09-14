@@ -27,20 +27,82 @@ const client = algoliasearch(
 );
 const index = client.initIndex("modules");
 
+interface SearchHit {
+  popularity_score: number;
+  description?: string;
+  name: string;
+  popularity_tag?: PopularityModuleTag["value"];
+}
+
 export interface Data {
   search: {
-    hits: Array<{
-      popularity_score: number;
-      description?: string;
-      name: string;
-      popularity_tag?: PopularityModuleTag["value"];
-    }>;
+    hits: SearchHit[];
     nbHits: number;
     page: number;
     nbPages: number;
     query: string;
+    queryID?: string;
     hitsPerPage: number;
   };
+}
+
+function getPosition(
+  results: { hitsPerPage: number; page: number },
+  index: number,
+): number {
+  return (results.hitsPerPage * results.page) + index + 1;
+}
+
+function ModuleHit(
+  { children: result, pos, queryID }: {
+    children: SearchHit;
+    pos: number;
+    queryID?: string;
+  },
+) {
+  const search = new URLSearchParams();
+  search.set("pos", pos.toFixed(0));
+  search.set("qid", queryID ?? "");
+  return (
+    <li class={tw`border-border`}>
+      <a
+        href={`/x/${result.name}?${search.toString()}`}
+        class={tw`flex items-center px-5 py-3 gap-2 hover:bg-ultralight`}
+      >
+        <div
+          class={tw`grid w-full ${
+            css({
+              "grid-template-columns": "auto min-content",
+            })
+          } gap-x-6`}
+        >
+          <div class={tw`text-tag-blue font-semibold`}>
+            {result.name}
+          </div>
+          <div
+            class={tw`self-center justify-self-end md:row-span-2`}
+          >
+            {result.popularity_tag && (
+              <PopularityTag class="hidden md:block">
+                {result.popularity_tag}
+              </PopularityTag>
+            )}
+          </div>
+          <div class={tw`col-span-2 md:col-span-1 text-gray-400`}>
+            {result.description
+              ? emojify(result.description)
+              : (
+                <span class={tw`italic font-semibold`}>
+                  No description
+                </span>
+              )}
+          </div>
+        </div>
+
+        <Icons.ChevronRight class="text-gray-400 flex-shrink-0" />
+      </a>
+    </li>
+  );
 }
 
 export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
@@ -158,45 +220,13 @@ export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
 
             <ul class={tw`divide-y`}>
               {data.search.hits.length
-                ? data.search.hits.map((result) => (
-                  <li class={tw`border-border`}>
-                    <a
-                      href={"/x/" + result.name}
-                      class={tw`flex items-center px-5 py-3 gap-2 hover:bg-ultralight`}
-                    >
-                      <div
-                        class={tw`grid w-full ${
-                          css({
-                            "grid-template-columns": "auto min-content",
-                          })
-                        } gap-x-6`}
-                      >
-                        <div class={tw`text-tag-blue font-semibold`}>
-                          {result.name}
-                        </div>
-                        <div
-                          class={tw`self-center justify-self-end md:row-span-2`}
-                        >
-                          {result.popularity_tag && (
-                            <PopularityTag class="hidden md:block">
-                              {result.popularity_tag}
-                            </PopularityTag>
-                          )}
-                        </div>
-                        <div class={tw`col-span-2 md:col-span-1 text-gray-400`}>
-                          {result.description
-                            ? emojify(result.description)
-                            : (
-                              <span class={tw`italic font-semibold`}>
-                                No description
-                              </span>
-                            )}
-                        </div>
-                      </div>
-
-                      <Icons.ChevronRight class="text-gray-400 flex-shrink-0" />
-                    </a>
-                  </li>
+                ? data.search.hits.map((result, i) => (
+                  <ModuleHit
+                    pos={getPosition(data.search, i)}
+                    queryID={data.search.queryID}
+                  >
+                    {result}
+                  </ModuleHit>
                 ))
                 : (
                   <div
@@ -387,6 +417,7 @@ export const handler: Handlers<Data> = {
       search: await index.search(query, {
         page,
         hitsPerPage: 20,
+        clickAnalytics: true,
         filters: "third_party:true",
       }),
     };
