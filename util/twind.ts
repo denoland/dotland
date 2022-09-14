@@ -9,7 +9,6 @@ export const config: Configuration = {
     delete preflight["img,video"];
     return css(preflight, {
       html: { scrollBehavior: "smooth" },
-    }, {
       body: apply`text-default`,
     });
   },
