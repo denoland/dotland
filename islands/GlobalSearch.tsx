@@ -523,10 +523,12 @@ function ManualResultTitle(props: { title: string[] }) {
 
 /** Given a symbol item, return an href that will link to that symbol. */
 function getSymbolItemHref(
-  { sourceId, name, version, path }: SymbolItem,
+  { sourceId, name, version, path, tags }: SymbolItem,
 ): string {
   if (sourceId.startsWith("lib/")) {
-    return `/api?s=${name}`;
+    return tags && tags.includes("unstable")
+      ? `/api?unstable=&s=${name}`
+      : `/api?s=${name}`;
   } else if (sourceId === "mod/std") {
     return `/std@${version}${path}${name ? `?s=${name}` : ""}`;
   } else {
