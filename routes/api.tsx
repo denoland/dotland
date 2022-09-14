@@ -14,8 +14,8 @@ import { versions } from "@/util/manual_utils.ts";
 import VersionSelect from "@/islands/VersionSelect.tsx";
 import { type LibDocPage } from "@/util/registry_utils.ts";
 import { ErrorMessage } from "@/components/ErrorMessage.tsx";
-import { LibraryIndexPanel } from "$doc_components/doc/library_index_panel.tsx";
-import { LibraryIndex } from "$doc_components/doc/library_index.tsx";
+import { LibraryDocPanel } from "$doc_components/doc/library_doc_panel.tsx";
+import { LibraryDoc } from "$doc_components/doc/library_doc.tsx";
 import { SymbolDoc } from "$doc_components/doc/symbol_doc.tsx";
 import { type State } from "@/routes/_middleware.ts";
 
@@ -70,14 +70,14 @@ export default function API(
                   </label>
                 </div>
                 {
-                  <LibraryIndexPanel
+                  <LibraryDocPanel
                     base={url}
                     currentSymbol={data.kind === "librarySymbol"
                       ? data.name
                       : undefined}
                   >
                     {data.items}
-                  </LibraryIndexPanel>
+                  </LibraryDocPanel>
                 }
               </>
             }
@@ -98,12 +98,17 @@ export default function API(
                   )
               )
               : (
-                <LibraryIndex
+                <LibraryDoc
                   url={url}
                   sourceUrl={`https://github.com/denoland/deno/releases/download/${data.version}/lib.deno.d.ts`}
+                  jsDoc={!url.searchParams.has("unstable")
+                    ? "There are APIs that are built into the Deno CLI that are beyond those that are built-ins for JavaScript. They are a combination of web platform APIs Deno has implemented and Deno specific APIs." +
+                    "\n\nWe try to keep non-standard, Deno specific, APIs in the {@linkcode Deno} namespace. We have grouped the APIs into the following functional categories."
+                    : "There are APIs that are built into the Deno CLI that are beyond those that are built-ins for JavaScript, including APIs that are unstable or experimental. In order to use APIs marked as unstable, you will need to use `--unstable` on the command line to make them available. All the APIs are a combination of web platform APIs Deno has implemented and Deno specific APIs." +
+                    "\n\nWe try to keep non-standard, Deno specific, APIs in the {@linkcode Deno} namespace. We have grouped the APIs into the following functional categories."}
                 >
                   {data.items}
-                </LibraryIndex>
+                </LibraryDoc>
               )}
           </SidePanelPage>
         )}
