@@ -226,8 +226,7 @@ function ToCEntry({
           outermost
             ? "px-2.5 py-2 font-semibold"
             : `pl-${depth * 6} pr-2.5 py-1 font-normal`
-        } rounded-md ${active ? "link bg-ultralight" : "hover:text-gray-500"}` +
-          (active ? " toc-active" : "")}
+        } rounded-md ${active ? "link bg-ultralight" : "hover:text-gray-500"}`}
       >
         <Icons.TriangleRight
           aria-label={`open section ${name}`}
