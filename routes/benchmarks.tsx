@@ -10,7 +10,6 @@ import { Handlers } from "$fresh/server.ts";
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
-import { type State } from "@/routes/_middleware.ts";
 
 import {
   BenchmarkRun,
@@ -28,7 +27,6 @@ type ShowData = { dataFile: string; range: number[]; search: string };
 interface Data {
   show: ShowData;
   rawData: BenchmarkRun[];
-  userToken: string;
 }
 
 // TODO(lucacasonato): add anchor points to headers
@@ -161,7 +159,7 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
         }}
       />
       <div class={tw`bg-gray-50 min-h-full`}>
-        <Header userToken={data.userToken} />
+        <Header />
         <div class={tw`mb-12`}>
           <div
             class={tw`section-x-inset-md mt-8 pb-8`}
@@ -495,8 +493,8 @@ function SourceLink({
   );
 }
 
-export const handler: Handlers<Data, State> = {
-  async GET(req, { render, state: { userToken } }) {
+export const handler: Handlers<Data> = {
+  async GET(req, { render }) {
     const url = new URL(req.url);
     const showAll = url.searchParams.has("all");
     let show: ShowData = {
@@ -534,6 +532,6 @@ export const handler: Handlers<Data, State> = {
       `https://denoland.github.io/benchmark_data/${show.dataFile}`,
     );
 
-    return render!({ show, rawData: await res.json(), userToken });
+    return render!({ show, rawData: await res.json() });
   },
 };

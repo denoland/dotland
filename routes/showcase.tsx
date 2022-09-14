@@ -8,8 +8,6 @@ import { tw } from "@twind";
 import { Footer } from "@/components/Footer.tsx";
 import { Header } from "@/components/Header.tsx";
 import * as Icons from "@/components/Icons.tsx";
-import { Handlers, PageProps } from "$fresh/server.ts";
-import { type State } from "@/routes/_middleware.ts";
 
 import projects from "@/data/showcase.json" assert { type: "json" };
 
@@ -26,13 +24,13 @@ interface Data {
   userToken: string;
 }
 
-export default function ShowcasePage({ data: { userToken } }: PageProps<Data>) {
+export default function ShowcasePage() {
   return (
     <>
       <Head>
         <title>Showcase | Deno</title>
       </Head>
-      <Header userToken={userToken} />
+      <Header />
       <div class={tw`section-x-inset-xl mt-8 mb-24`}>
         <div class={tw`max-w-screen-lg mx-auto`}>
           <h4 class={tw`text-4xl font-bold tracking-tight`}>Showcase</h4>
@@ -88,9 +86,3 @@ function Item({ project }: { project: Project }) {
     </div>
   );
 }
-
-export const handler: Handlers<Data, State> = {
-  GET(_, { render, state: { userToken } }) {
-    return render!({ userToken });
-  },
-};

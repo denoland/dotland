@@ -9,23 +9,15 @@ import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import AddModule from "@/islands/AddModule.tsx";
 import * as Icons from "@/components/Icons.tsx";
-import { Handlers, PageProps } from "$fresh/server.ts";
-import { type State } from "@/routes/_middleware.ts";
 
-interface Data {
-  userToken: string;
-}
-
-export default function AddModulePage(
-  { data: { userToken } }: PageProps<Data>,
-) {
+export default function AddModulePage() {
   return (
     <>
       <Head>
         <title>Third Party Modules | Deno</title>
       </Head>
       <div>
-        <Header selected="Third Party Modules" userToken={userToken} />
+        <Header selected="Third Party Modules" />
         <div
           class={tw`section-x-inset-xl mt-16 mb-28 flex items-center flex-col gap-12 lg:(items-start flex-row gap-36)`}
         >
@@ -63,9 +55,3 @@ export default function AddModulePage(
     </>
   );
 }
-
-export const handler: Handlers<Data, State> = {
-  GET(_, { render, state: { userToken } }) {
-    return render!({ userToken });
-  },
-};

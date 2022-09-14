@@ -19,16 +19,10 @@ const entries = [
 
 type ContentTypes = (typeof entries)[number]["content"];
 
-export function Header({
-  selected,
-  main,
-  manual,
-  userToken,
-}: {
+export function Header({ selected, main, manual }: {
   selected?: ContentTypes;
   main?: boolean;
   manual?: boolean;
-  userToken: string;
 }) {
   return (
     <div
@@ -65,7 +59,7 @@ export function Header({
               <img class={tw`h-full w-full`} src="/logo.svg" alt="Deno Logo" />
             </a>
 
-            <GlobalSearch userToken={userToken} />
+            <GlobalSearch />
 
             <label
               tabIndex={0}

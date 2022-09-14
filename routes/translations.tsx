@@ -8,8 +8,6 @@ import { tw } from "@twind";
 import { Footer } from "@/components/Footer.tsx";
 import { Header } from "@/components/Header.tsx";
 import * as Icons from "@/components/Icons.tsx";
-import { Handlers, PageProps } from "$fresh/server.ts";
-import { type State } from "@/routes/_middleware.ts";
 
 import translations from "@/data/translations.json" assert { type: "json" };
 
@@ -24,19 +22,13 @@ interface Translation {
   repository: string;
 }
 
-interface Data {
-  userToken: string;
-}
-
-export default function TranslationsPage(
-  { data: { userToken } }: PageProps<Data>,
-) {
+export default function TranslationsPage() {
   return (
     <>
       <Head>
         <title>Translations | Deno</title>
       </Head>
-      <Header userToken={userToken} />
+      <Header />
       <div class={tw`section-x-inset-xl mt-8 mb-24`}>
         <div class={tw`max-w-screen-lg mx-auto`}>
           <h4 class={tw`text-4xl font-bold tracking-tight`}>Translations</h4>
@@ -87,9 +79,3 @@ function LanguageItem({ language }: { language: Translation }) {
     </div>
   );
 }
-
-export const handler: Handlers<Data, State> = {
-  GET(_, { render, state: { userToken } }) {
-    return render!({ userToken });
-  },
-};

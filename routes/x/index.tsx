@@ -18,7 +18,6 @@ import { Footer } from "@/components/Footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
 import * as Icons from "@/components/Icons.tsx";
 import { PopularityTag } from "@/components/PopularityTag.tsx";
-import { type State } from "@/routes/_middleware.ts";
 
 const requester = createFetchRequester();
 const client = algoliasearch(
@@ -29,7 +28,6 @@ const client = algoliasearch(
 const index = client.initIndex("modules");
 
 export interface Data {
-  userToken: string;
   search: {
     hits: Array<{
       popularity_score: number;
@@ -52,7 +50,7 @@ export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
         <title>Third Party Modules | Deno</title>
       </Head>
       <div>
-        <Header selected="Third Party Modules" userToken={data.userToken} />
+        <Header selected="Third Party Modules" />
 
         <img
           src="/images/module_banner.png"
@@ -380,13 +378,12 @@ function MaybeA(
   }
 }
 
-export const handler: Handlers<Data, State> = {
-  async GET(req, { render, state: { userToken } }) {
+export const handler: Handlers<Data> = {
+  async GET(req, { render }) {
     const url = new URL(req.url);
     const page = parseInt(url.searchParams.get("page") || "1") - 1;
     const query = url.searchParams.get("query") || "";
     const res: Data = {
-      userToken,
       search: await index.search(query, {
         page,
         hitsPerPage: 20,

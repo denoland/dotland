@@ -6,14 +6,8 @@ import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
-import { Handler, PageProps } from "$fresh/server.ts";
-import { type State } from "@/routes/_middleware.ts";
 
-interface Data {
-  userToken: string;
-}
-
-export default function NotFoundPage({ data: { userToken } }: PageProps<Data>) {
+export default function NotFoundPage() {
   return (
     <div
       class={tw`w-full min-h-screen overflow-x-hidden relative flex justify-between flex-col flex-wrap`}
@@ -22,7 +16,7 @@ export default function NotFoundPage({ data: { userToken } }: PageProps<Data>) {
         <title>Not Found | Deno</title>
       </Head>
       <div class={tw`flex-top`}>
-        <Header userToken={userToken} />
+        <Header />
         <header class={tw`text-center px-8 py-[10vh] z-[3]`}>
           <h1
             class={tw`font-extrabold text-5xl leading-10 tracking-tight text-gray-900`}
@@ -56,10 +50,3 @@ export default function NotFoundPage({ data: { userToken } }: PageProps<Data>) {
     </div>
   );
 }
-
-export const handler: Handler<Data, State> = (
-  _,
-  { render, state: { userToken } },
-) => {
-  return render!({ userToken });
-};
