@@ -559,7 +559,6 @@ function Source(
 }
 
 const tagColors = {
-  purple: ["[#7B61FF1A]", "[#7B61FF]"],
   cyan: ["[#0CAFC619]", "[#0CAFC6]"],
   gray: ["gray-100", "gray-400"],
 } as const;
