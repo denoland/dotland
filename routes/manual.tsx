@@ -161,18 +161,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
           </div>
         </div>
       </SidePanelPage>
-
       <Footer />
-
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-        (function() {
-          document.querySelectorAll(".toc-active").forEach(el=>{el.scrollIntoView({block:"center"});});
-        })();
-      `,
-        }}
-      />
     </>
   );
 }
