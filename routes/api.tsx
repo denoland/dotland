@@ -21,6 +21,11 @@ import { SymbolDoc } from "$doc_components/doc/symbol_doc.tsx";
 export default function API(
   { params, url, data }: PageProps<LibDocPage>,
 ) {
+  const replacer: [string, string][] = [[
+    "**UNSTABLE**: New API, yet to be vetted.\n",
+    "",
+  ]];
+
   return (
     <>
       <Head>
@@ -86,7 +91,12 @@ export default function API(
                   )
                   : (
                     // @ts-ignore it works.
-                    <SymbolDoc url={url} name={data.name} library>
+                    <SymbolDoc
+                      url={url}
+                      name={data.name}
+                      replacers={replacer}
+                      library
+                    >
                       {data.docNodes}
                     </SymbolDoc>
                   )
@@ -100,6 +110,7 @@ export default function API(
                       "\n\nWe try to keep non-standard, Deno specific, APIs in the {@linkcode Deno} namespace. We have grouped the APIs into the following functional categories."
                     : "There are APIs that are built into the Deno CLI that are beyond those that are built-ins for JavaScript, including APIs that are unstable or experimental. In order to use APIs marked as unstable, you will need to use `--unstable` on the command line to make them available. All the APIs are a combination of web platform APIs Deno has implemented and Deno specific APIs." +
                       "\n\nWe try to keep non-standard, Deno specific, APIs in the {@linkcode Deno} namespace. We have grouped the APIs into the following functional categories."}
+                  replacers={replacer}
                 >
                   {data.items}
                 </LibraryDoc>

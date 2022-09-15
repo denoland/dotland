@@ -25,8 +25,8 @@ export function DocView({
 
   data,
 }: CommonProps<DocPageSymbol | DocPageModule | DocPageIndex>) {
-  const replace: [string, string] | undefined = name === "std"
-    ? ["$STD_VERSION", version]
+  const replacer: [string, string][] | undefined = name === "std"
+    ? [["$STD_VERSION", version]]
     : undefined;
   const baseUrl = new URL(url);
   baseUrl.pathname = getModulePath(name, version);
@@ -55,7 +55,7 @@ export function DocView({
                   url={baseUrl}
                   path={path || "/"}
                   sourceUrl={url.href}
-                  replace={replace}
+                  replacers={replacer}
                 >
                   {data.items}
                 </ModuleIndex>
@@ -63,7 +63,7 @@ export function DocView({
             case "symbol":
               return (
                 // @ts-ignore it works.
-                <SymbolDoc url={url} name={data.name} replace={replace}>
+                <SymbolDoc url={url} name={data.name} replacers={replacer}>
                   {data.docNodes}
                 </SymbolDoc>
               );
@@ -73,7 +73,7 @@ export function DocView({
                 <ModuleDoc
                   url={url}
                   sourceUrl={url.href}
-                  replace={replace}
+                  replacers={replacer}
                 >
                   {data.docNodes}
                 </ModuleDoc>
