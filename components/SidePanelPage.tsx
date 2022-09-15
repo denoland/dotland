@@ -49,7 +49,7 @@ export function SidePanelPage({ children, sidepanel }: {
         )}
 
         <main
-          class={tw`focus:outline-none w-full flex flex-col section-x-inset-xl mt-7 lg:(section-x-inset-none mt-0)`}
+          class={tw`focus:outline-none min-w-0 w-full flex flex-col section-x-inset-xl mt-7 lg:(section-x-inset-none mt-0)`}
           tabIndex={0}
         >
           {children}
