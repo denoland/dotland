@@ -17,22 +17,16 @@ import { ErrorMessage } from "@/components/ErrorMessage.tsx";
 import { LibraryDocPanel } from "$doc_components/doc/library_doc_panel.tsx";
 import { LibraryDoc } from "$doc_components/doc/library_doc.tsx";
 import { SymbolDoc } from "$doc_components/doc/symbol_doc.tsx";
-import { type State } from "@/routes/_middleware.ts";
-
-interface Data {
-  data: LibDocPage;
-  userToken: string;
-}
 
 export default function API(
-  { params, url, data: { data, userToken } }: PageProps<Data>,
+  { params, url, data }: PageProps<LibDocPage>,
 ) {
   return (
     <>
       <Head>
         <title>API | Deno</title>
       </Head>
-      <Header selected="API" userToken={userToken} manual />
+      <Header selected="API" manual />
 
       {data.kind === "libraryInvalidVersion"
         ? (
@@ -103,9 +97,9 @@ export default function API(
                   sourceUrl={`https://github.com/denoland/deno/releases/download/${data.version}/lib.deno.d.ts`}
                   jsDoc={!url.searchParams.has("unstable")
                     ? "There are APIs that are built into the Deno CLI that are beyond those that are built-ins for JavaScript. They are a combination of web platform APIs Deno has implemented and Deno specific APIs." +
-                    "\n\nWe try to keep non-standard, Deno specific, APIs in the {@linkcode Deno} namespace. We have grouped the APIs into the following functional categories."
+                      "\n\nWe try to keep non-standard, Deno specific, APIs in the {@linkcode Deno} namespace. We have grouped the APIs into the following functional categories."
                     : "There are APIs that are built into the Deno CLI that are beyond those that are built-ins for JavaScript, including APIs that are unstable or experimental. In order to use APIs marked as unstable, you will need to use `--unstable` on the command line to make them available. All the APIs are a combination of web platform APIs Deno has implemented and Deno specific APIs." +
-                    "\n\nWe try to keep non-standard, Deno specific, APIs in the {@linkcode Deno} namespace. We have grouped the APIs into the following functional categories."}
+                      "\n\nWe try to keep non-standard, Deno specific, APIs in the {@linkcode Deno} namespace. We have grouped the APIs into the following functional categories."}
                 >
                   {data.items}
                 </LibraryDoc>
@@ -118,8 +112,8 @@ export default function API(
   );
 }
 
-export const handler: Handlers<Data, State> = {
-  async GET(req, { params, render, state: { userToken } }) {
+export const handler: Handlers<LibDocPage> = {
+  async GET(req, { params, render }) {
     const url = new URL(req.url);
 
     if (!params.version) {
@@ -141,7 +135,7 @@ export const handler: Handlers<Data, State> = {
     const res = await fetch(resURL);
     const data = await res.json();
 
-    return render!({ data, userToken });
+    return render!(data);
   },
 };
 
