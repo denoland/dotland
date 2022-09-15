@@ -11,7 +11,7 @@ import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { Markdown } from "@/components/Markdown.tsx";
 import * as Icons from "@/components/Icons.tsx";
-import { SidePanelPage } from "@/components/SidePanelPage.tsx";
+import { ManualOrAPI, SidePanelPage } from "@/components/SidePanelPage.tsx";
 import {
   getDocURL,
   getFileURL,
@@ -94,12 +94,15 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
       <SidePanelPage
         sidepanel={
           <>
-            <VersionSelect
-              versions={Object.fromEntries(
-                versions.map((ver) => [ver, `/manual@${ver}${path}`]),
-              )}
-              selectedVersion={version}
-            />
+            <ManualOrAPI current="Manual" version={version} />
+            <div class={tw`space-y-3 children:w-full`}>
+              <VersionSelect
+                versions={Object.fromEntries(
+                  versions.map((ver) => [ver, `/manual@${ver}${path}`]),
+                )}
+                selectedVersion={version}
+              />
+            </div>
             <ToC
               tableOfContents={data.tableOfContents}
               version={params.version}

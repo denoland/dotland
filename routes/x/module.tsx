@@ -290,6 +290,11 @@ function TopPanel({
   const popularityTag = hasPageBase
     ? data.tags?.find((tag) => tag.kind === "popularity")
     : undefined;
+
+  const searchParam = view === "source"
+    ? "?source"
+    : (path === "" ? "?doc" : "");
+
   return (
     <div class={tw`bg-ultralight border-b border-light-border`}>
       <div class={tw`section-x-inset-xl py-5 flex items-center`}>
@@ -336,12 +341,13 @@ function TopPanel({
               </div>
             )}
             {data.kind !== "no-versions" && (
-              <VersionSelector
-                versions={data.versions}
+              <VersionSelect
+                versions={Object.fromEntries(
+                  data.versions.map((
+                    ver,
+                  ) => [ver, getModulePath(name, ver, path) + searchParam]),
+                )}
                 selectedVersion={version}
-                name={name}
-                path={path}
-                view={view}
               />
             )}
           </div>
@@ -370,23 +376,29 @@ function ModuleView({
 }) {
   if (data.data.kind === "no-versions") {
     return (
-      <ErrorMessage title="No uploaded versions">
-        This module name has been reserved for a repository, but no versions
-        have been uploaded yet. Modules that do not upload a version within 30
-        days of registration will be removed.
-      </ErrorMessage>
+      <div class={tw`section-x-inset-xl py-12`}>
+        <ErrorMessage title="No uploaded versions">
+          This module name has been reserved for a repository, but no versions
+          have been uploaded yet. Modules that do not upload a version within 30
+          days of registration will be removed.
+        </ErrorMessage>
+      </div>
     );
   } else if (data.data.kind === "invalid-version") {
     return (
-      <ErrorMessage title="404 - Not Found">
-        This version does not exist for this module.
-      </ErrorMessage>
+      <div class={tw`section-x-inset-xl py-12`}>
+        <ErrorMessage title="404 - Not Found">
+          This version does not exist for this module.
+        </ErrorMessage>
+      </div>
     );
   } else if (data.data.kind === "notfound") {
     return (
-      <ErrorMessage title="404 - Not Found">
-        This file or directory could not be found.
-      </ErrorMessage>
+      <div class={tw`section-x-inset-xl py-12`}>
+        <ErrorMessage title="404 - Not Found">
+          This file or directory could not be found.
+        </ErrorMessage>
+      </div>
     );
   }
 
@@ -479,45 +491,6 @@ function Breadcrumbs({
         );
       })}
     </p>
-  );
-}
-
-function VersionSelector({
-  versions,
-  selectedVersion,
-  name,
-  path,
-  view,
-}: {
-  versions: string[];
-  selectedVersion: string;
-  name: string;
-  path: string;
-  view: Views;
-}) {
-  const searchParam = view === "source"
-    ? "?source"
-    : (path === "" ? "?doc" : "");
-  return (
-    <>
-      <VersionSelect
-        versions={Object.fromEntries(
-          versions.map((
-            ver,
-          ) => [ver, getModulePath(name, ver, path) + searchParam]),
-        )}
-        selectedVersion={selectedVersion}
-      />
-      {versions[0] !== selectedVersion && (
-        <a
-          class={tw`button-primary`}
-          aria-label="Go to latest version"
-          href={getModulePath(name, versions[0], path) + searchParam}
-        >
-          Go to Latest
-        </a>
-      )}
-    </>
   );
 }
 

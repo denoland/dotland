@@ -9,10 +9,7 @@ import GlobalSearch from "@/islands/GlobalSearch.tsx";
 
 const entries = [
   { href: "/manual", content: "Manual" },
-  {
-    href: "https://doc.deno.land/deno/stable",
-    content: "API",
-  },
+  { href: "/api", content: "API" },
   { href: "/std", content: "Standard Library" },
   { href: "/x", content: "Third Party Modules" },
 ] as const;

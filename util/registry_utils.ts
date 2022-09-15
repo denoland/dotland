@@ -440,7 +440,8 @@ interface DocPageDirItem {
 interface SymbolItem {
   name: string;
   kind: DocNodeKind;
-  jsDoc?: JsDoc;
+  category?: string;
+  jsDoc?: JsDoc | null;
 }
 
 export interface IndexItem {
@@ -547,6 +548,38 @@ export type DocPage =
   | PageInvalidVersion
   | PageNoVersions
   | PagePathNotFound;
+
+interface DocPageLibraryBase {
+  kind: string;
+  name: string;
+  version: string;
+  versions: string[];
+  latest_version: string;
+}
+
+export interface DocPageLibrary extends DocPageLibraryBase {
+  kind: "library";
+  items: SymbolItem[];
+}
+
+export interface DocPageLibrarySymbol extends DocPageLibraryBase {
+  kind: "librarySymbol";
+  items: SymbolItem[];
+  name: string;
+  docNodes: DocNode[];
+}
+
+export interface DocPageLibraryInvalidVersion {
+  kind: "libraryInvalidVersion";
+  name: string;
+  versions: string[];
+  latest_version: string;
+}
+
+export type LibDocPage =
+  | DocPageLibrary
+  | DocPageLibrarySymbol
+  | DocPageLibraryInvalidVersion;
 
 export interface SourcePageFile extends PageBase {
   kind: "file";
