@@ -36,8 +36,11 @@ import { SourceView } from "@/components/SourceView.tsx";
 import { PopularityTag } from "@/components/PopularityTag.tsx";
 import { SidePanelPage } from "@/components/SidePanelPage.tsx";
 import { Markdown } from "@/components/Markdown.tsx";
-import { type State } from "@/routes/_middleware.ts";
-import { searchView } from "@/util/search_insights_utils.ts";
+import {
+  getUserToken,
+  searchView,
+  ssrSearchClick,
+} from "@/util/search_insights_utils.ts";
 
 type Views = "doc" | "source" | "info";
 type Params = {
@@ -56,11 +59,10 @@ type MaybeData =
 
 interface PageData {
   data: MaybeData;
-  userToken: string;
 }
 
-export const handler: Handlers<PageData, State> = {
-  async GET(req, { params, render, state: { userToken } }) {
+export const handler: Handlers<PageData> = {
+  async GET(req, { params, render, remoteAddr }) {
     const { name, version, path } = params as Params;
     const url = new URL(req.url);
 
@@ -94,13 +96,25 @@ export const handler: Handlers<PageData, State> = {
       resURL.searchParams.set("symbol", symbol);
     }
 
+    const queryId = url.searchParams.get("qid");
+    const position = url.searchParams.get("pos");
+    if (queryId && position && remoteAddr.transport === "tcp") {
+      ssrSearchClick(
+        await getUserToken(req.headers, remoteAddr.hostname),
+        "modules",
+        queryId,
+        name,
+        parseInt(position, 10),
+      );
+    }
+
     let data: Data;
 
     const res = await fetch(resURL, {
       redirect: "manual",
     });
     if (res.status === 404) { // module doesnt exist
-      return render({ data: null, userToken });
+      return render({ data: null });
     } else if (res.status === 302) { // implicit latest
       const latestVersion = res.headers.get("X-Deno-Latest-Version")!;
       console.log(getModulePath(
@@ -135,7 +149,7 @@ export const handler: Handlers<PageData, State> = {
     }
 
     if (data.data.kind === "no-versions") {
-      return render!({ data, userToken });
+      return render!({ data });
     }
 
     if (data.view === "doc" && data.data.kind === "file") {
@@ -162,7 +176,7 @@ export const handler: Handlers<PageData, State> = {
       );
     }
 
-    return render!({ data, userToken });
+    return render!({ data });
   },
 };
 
@@ -205,7 +219,7 @@ async function handlerRaw(
 }
 
 export default function Registry(
-  { params, url, data: { data, userToken } }: PageProps<PageData>,
+  { params, url, data: { data } }: PageProps<PageData>,
 ) {
   let {
     name,
@@ -225,7 +239,6 @@ export default function Registry(
       <div class={tw`bg-primary min-h-full`}>
         <Header
           selected={name === "std" ? "Standard Library" : "Third Party Modules"}
-          userToken={userToken}
         />
         {data === null
           ? (
@@ -250,7 +263,7 @@ export default function Registry(
               )}
               <ModuleView
                 version={version!}
-                {...{ name, path, isStd, url, userToken, data }}
+                {...{ name, path, isStd, url, data }}
               />
             </>
           )}

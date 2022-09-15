@@ -15,7 +15,7 @@ import { useEffect, useState } from "preact/hooks";
 import * as Icons from "@/components/Icons.tsx";
 import type { DocNode } from "$deno_doc/types.d.ts";
 import { colors, docNodeKindMap } from "@/components/symbol_kind.tsx";
-import { searchClick } from "@/util/search_insights_utils.ts";
+import { islandSearchClick } from "@/util/search_insights_utils.ts";
 import { ComponentChildren } from "preact";
 
 // Lazy load a <dialog> polyfill.
@@ -93,7 +93,7 @@ function getPosition(results: SearchResults<unknown>, index: number): number {
 }
 
 /** Search Deno documentation, symbols, or modules. */
-export default function GlobalSearch({ userToken }: { userToken?: string }) {
+export default function GlobalSearch() {
   const [showModal, setShowModal] = useState(false);
   const [input, setInput] = useState("");
 
@@ -305,7 +305,6 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
                         {results.manual.hits.map((res, i) => (
                           <ManualResult
                             {...res}
-                            userToken={userToken}
                             queryID={results.manual!.queryID}
                             position={getPosition(results.manual!, i)}
                           />
@@ -324,7 +323,6 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
                         {results.modules.hits.map((module, i) => (
                           <ModuleResult
                             module={module}
-                            userToken={userToken}
                             queryID={results.modules!.queryID}
                             position={getPosition(results.modules!, i)}
                           />
@@ -343,7 +341,6 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
                         {results.symbols.hits.map((doc, i) => (
                           <SymbolResult
                             doc={doc}
-                            userToken={userToken}
                             queryID={results.symbols!.queryID}
                             position={getPosition(results.symbols!, i)}
                           />
@@ -455,11 +452,10 @@ function Section({
 }
 
 function ManualResult(
-  { hierarchy, docPath, content, objectID, userToken, queryID, position }:
+  { hierarchy, docPath, content, objectID, queryID, position }:
     & ManualSearchResult
     & {
       objectID: string;
-      userToken?: string;
       queryID?: string;
       position?: number;
     },
@@ -469,13 +465,7 @@ function ManualResult(
     <a
       href={docPath}
       onClick={() =>
-        searchClick(
-          userToken,
-          MANUAL_INDEX,
-          queryID,
-          objectID,
-          position,
-        )}
+        islandSearchClick(MANUAL_INDEX, queryID, objectID, position)}
     >
       <div class={tw`p-1.5 rounded-full bg-gray-200`}>
         <Icons.Docs />
@@ -507,9 +497,8 @@ function ManualResultTitle(props: { title: string[] }) {
 }
 
 function SymbolResult(
-  { doc, userToken, queryID, position }: {
+  { doc, queryID, position }: {
     doc: DocNode & { objectID: string };
-    userToken?: string;
     queryID?: string;
     position?: number;
   },
@@ -522,13 +511,7 @@ function SymbolResult(
     <a
       href={href}
       onClick={() =>
-        searchClick(
-          userToken,
-          SYMBOL_INDEX,
-          queryID,
-          doc.objectID,
-          position,
-        )}
+        islandSearchClick(SYMBOL_INDEX, queryID, doc.objectID, position)}
     >
       <KindIcon />
       <div>
@@ -553,9 +536,8 @@ function SymbolResult(
 }
 
 function ModuleResult(
-  { module, userToken, queryID, position }: {
+  { module, queryID, position }: {
     module: ModuleSearchResult & { objectID: string };
-    userToken?: string;
     queryID?: string;
     position?: number;
   },
@@ -564,13 +546,7 @@ function ModuleResult(
     <a
       href={`https://deno.land/x/${module.name}`}
       onClick={() =>
-        searchClick(
-          userToken,
-          MODULE_INDEX,
-          queryID,
-          module.objectID,
-          position,
-        )}
+        islandSearchClick(MODULE_INDEX, queryID, module.objectID, position)}
     >
       <div class={tw`p-1.5 rounded-full bg-gray-200`}>
         <Icons.Module />

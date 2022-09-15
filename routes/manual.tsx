@@ -21,7 +21,6 @@ import {
   versions,
 } from "@/util/manual_utils.ts";
 import VersionSelect from "@/islands/VersionSelect.tsx";
-import { type State } from "@/routes/_middleware.ts";
 
 import VERSIONS from "@/versions.json" assert { type: "json" };
 
@@ -29,7 +28,6 @@ interface Data {
   tableOfContents: TableOfContents;
   content: string;
   version: string;
-  userToken: string;
 }
 
 export default function Manual({ params, url, data }: PageProps<Data>) {
@@ -91,7 +89,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
         </title>
         <link rel="canonical" href={`https://deno.land/manual${path}`} />
       </Head>
-      <Header selected="Manual" manual userToken={data.userToken} />
+      <Header selected="Manual" manual />
 
       <SidePanelPage
         sidepanel={
@@ -166,18 +164,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
           </div>
         </div>
       </SidePanelPage>
-
       <Footer />
-
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-        (function() {
-          document.querySelectorAll(".toc-active").forEach(el=>{el.scrollIntoView({block:"center"});});
-        })();
-      `,
-        }}
-      />
     </>
   );
 }
@@ -242,8 +229,7 @@ function ToCEntry({
           outermost
             ? "px-2.5 py-2 font-semibold"
             : `pl-${depth * 6} pr-2.5 py-1 font-normal`
-        } rounded-md ${active ? "link bg-ultralight" : "hover:text-gray-500"}` +
-          (active ? " toc-active" : "")}
+        } rounded-md ${active ? "link bg-ultralight" : "hover:text-gray-500"}`}
       >
         <Icons.TriangleRight
           aria-label={`open section ${name}`}
@@ -301,8 +287,8 @@ function ToC({
   );
 }
 
-export const handler: Handlers<Data, State> = {
-  async GET(req, { params, render, state: { userToken } }) {
+export const handler: Handlers<Data> = {
+  async GET(req, { params, render }) {
     const url = new URL(req.url);
     const { version, path } = params;
     if (!version || !path) {
@@ -335,7 +321,7 @@ export const handler: Handlers<Data, State> = {
         }),
     ]);
 
-    return render!({ tableOfContents, content, version, userToken });
+    return render!({ tableOfContents, content, version });
   },
 };
 

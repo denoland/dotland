@@ -8,7 +8,8 @@ export const config: Configuration = {
   preflight(preflight) {
     delete preflight["img,video"];
     return css(preflight, {
-      body: apply`text-default scroll-smooth`,
+      html: { scrollBehavior: "smooth" },
+      body: apply`text-default`,
     });
   },
   darkMode: "class",
