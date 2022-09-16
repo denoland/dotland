@@ -26,7 +26,7 @@ if (IS_BROWSER && window.HTMLDialogElement === "undefined") {
 }
 
 const MODULE_INDEX = "modules";
-const SYMBOL_INDEX = "doc_nodes_new";
+const SYMBOL_INDEX = "doc_nodes";
 const MANUAL_INDEX = "manual";
 
 const kinds = [
