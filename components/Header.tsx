@@ -60,7 +60,7 @@ export function Header({ selected, main, manual }: {
 
             <label
               tabIndex={0}
-              class={tw`lg:hidden ${
+              class={tw`cursor-pointer lg:hidden ${
                 css({
                   "touch-action": "manipulation",
                 })
