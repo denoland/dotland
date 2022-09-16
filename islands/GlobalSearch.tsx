@@ -606,7 +606,7 @@ function SymbolResult(
       <KindIcon />
       <div class={tw`w-full`}>
         <div
-          class={tw`flex flex-col py-1 md:(flex-row items-center justify-between gap-2 mb-0)`}
+          class={tw`flex flex-col py-1 md:(flex-row items-center justify-between gap-2)`}
         >
           <div class={tw`space-x-2`}>
             <span class={tw`text-[${colors[item.kind][0]}]`}>
