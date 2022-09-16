@@ -583,27 +583,6 @@ function Tag(
   );
 }
 
-function SymbolDescription(
-  { children: { doc, tags } }: { children: SymbolItem },
-) {
-  if (!doc && !tags) {
-    return null;
-  }
-  const tagItems = tags?.map((tag) => (
-    <Tag color={tag.startsWith("allow") ? "cyan" : "gray"}>{tag}</Tag>
-  ));
-  return (
-    <div
-      class={tw`text-sm text-[#6C6E78] mr-24`}
-    >
-      {tagItems && tagItems.length
-        ? <div class={tw`mb-2`}>{tagItems}</div>
-        : null}
-      {doc?.split("\n\n")[0]}
-    </div>
-  );
-}
-
 function SymbolResult(
   { children: item, queryID, position, denoVersion }: {
     children: SymbolItem & { objectID: string };
@@ -614,6 +593,10 @@ function SymbolResult(
 ) {
   const KindIcon = docNodeKindMap[item.kind];
   const href = getSymbolItemHref(item, denoVersion);
+  const tagItems = item.tags?.map((tag) => (
+    <Tag color={tag.startsWith("allow") ? "cyan" : "gray"}>{tag}</Tag>
+  ));
+
   return (
     <a
       href={href}
@@ -621,15 +604,25 @@ function SymbolResult(
         islandSearchClick(SYMBOL_INDEX, queryID, item.objectID, position)}
     >
       <KindIcon />
-      <div>
-        <div class={tw`space-x-2 py-1`}>
-          <span class={tw`text-[${colors[item.kind][0]}]`}>
-            {item.kind.replace("A", " a")}
-          </span>
-          <span class={tw`font-semibold`}>{item.name}</span>
-          <Source>{item}</Source>
+      <div class={tw`w-full`}>
+        <div
+          class={tw`flex flex-col py-1 md:(flex-row items-center justify-between gap-2 mb-0)`}
+        >
+          <div class={tw`space-x-2`}>
+            <span class={tw`text-[${colors[item.kind][0]}]`}>
+              {item.kind.replace("A", " a")}
+            </span>
+            <span class={tw`font-semibold`}>{item.name}</span>
+            <Source>{item}</Source>
+          </div>
+          {tagItems && tagItems.length && <div class={tw`mr-3`}>{tagItems}
+          </div>}
         </div>
-        <SymbolDescription>{item}</SymbolDescription>
+        {item.doc && (
+          <div class={tw`text-sm text-[#6C6E78]`}>
+            {item.doc.split("\n\n")[0]}
+          </div>
+        )}
       </div>
     </a>
   );
