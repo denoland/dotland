@@ -15,6 +15,7 @@ import { useEffect, useState } from "preact/hooks";
 import * as Icons from "@/components/Icons.tsx";
 import { colors, docNodeKindMap } from "@/components/symbol_kind.tsx";
 import { islandSearchClick } from "@/util/search_insights_utils.ts";
+import versions from "@/versions.json" assert { type: "json" };
 
 // Lazy load a <dialog> polyfill.
 // @ts-expect-error HTMLDialogElement is not just a type!
@@ -118,7 +119,7 @@ function getPosition(results: SearchResults<unknown>, index: number): number {
 }
 
 /** Search Deno documentation, symbols, or modules. */
-export default function GlobalSearch() {
+export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
   const [showModal, setShowModal] = useState(false);
   const [input, setInput] = useState("");
 
@@ -366,6 +367,7 @@ export default function GlobalSearch() {
                           <SymbolResult
                             queryID={results.symbols!.queryID}
                             position={getPosition(results.symbols!, i)}
+                            denoVersion={denoVersion}
                           >
                             {symbolItem}
                           </SymbolResult>
@@ -524,11 +526,12 @@ function ManualResultTitle(props: { title: string[] }) {
 /** Given a symbol item, return an href that will link to that symbol. */
 function getSymbolItemHref(
   { sourceId, name, version, path, tags }: SymbolItem,
+  denoVersion: string,
 ): string {
   if (sourceId.startsWith("lib/")) {
     return tags && tags.includes("unstable")
-      ? `/api?unstable=&s=${name}`
-      : `/api?s=${name}`;
+      ? `/api@${denoVersion}?unstable&s=${name}`
+      : `/api@${denoVersion}?s=${name}`;
   } else if (sourceId === "mod/std") {
     return `/std@${version}${path}${name ? `?s=${name}` : ""}`;
   } else {
@@ -602,14 +605,15 @@ function SymbolDescription(
 }
 
 function SymbolResult(
-  { children: item, queryID, position }: {
+  { children: item, queryID, position, denoVersion }: {
     children: SymbolItem & { objectID: string };
     queryID?: string;
     position?: number;
+    denoVersion: string;
   },
 ) {
   const KindIcon = docNodeKindMap[item.kind];
-  const href = getSymbolItemHref(item);
+  const href = getSymbolItemHref(item, denoVersion);
   return (
     <a
       href={href}
