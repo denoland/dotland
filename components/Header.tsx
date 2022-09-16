@@ -6,6 +6,7 @@ import { h } from "preact";
 import { apply, css, tw } from "@twind";
 import * as Icons from "./Icons.tsx";
 import GlobalSearch from "@/islands/GlobalSearch.tsx";
+import versions from "@/versions.json" assert { type: "json" };
 
 const entries = [
   { href: "/manual", content: "Manual" },
@@ -56,7 +57,7 @@ export function Header({ selected, main, manual }: {
               <img class={tw`h-full w-full`} src="/logo.svg" alt="Deno Logo" />
             </a>
 
-            <GlobalSearch />
+            <GlobalSearch denoVersion={versions.cli[0]} />
 
             <label
               tabIndex={0}
