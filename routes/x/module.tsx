@@ -117,11 +117,6 @@ export const handler: Handlers<PageData> = {
       return render({ data: null });
     } else if (res.status === 302) { // implicit latest
       const latestVersion = res.headers.get("X-Deno-Latest-Version")!;
-      console.log(getModulePath(
-        name,
-        latestVersion,
-        path ? ("/" + path) : undefined,
-      ));
       return Response.redirect(
         new URL(
           getModulePath(

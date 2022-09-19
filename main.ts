@@ -9,6 +9,7 @@
 /// <reference lib="deno.unstable" />
 
 import { ServerContext } from "$fresh/server.ts";
+import { render as gfm } from "$gfm";
 import { Fragment, h } from "preact";
 import { serve } from "$std/http/server.ts";
 import { router } from "$router";
@@ -42,6 +43,9 @@ await setup({
       return url;
     }
     return line ? `${url}?source#L${line}` : `${url}?source`;
+  },
+  markdownToHTML(markdown) {
+    return gfm(markdown, { allowIframes: false });
   },
   runtime: { Fragment, h },
 });
