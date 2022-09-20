@@ -516,8 +516,8 @@ function InfoView(
     attributes.push(
       <div class={tw`flex items-center gap-1.5`}>
         <Icons.CheckmarkVerified class="h-4 w-auto" />
-        <span class={tw`text-tag-blue font-medium leading-none`}>
-          By Deno Team
+        <span class={tw`text-gray-600 font-medium leading-none`}>
+          Official Deno project
         </span>
       </div>,
     );
