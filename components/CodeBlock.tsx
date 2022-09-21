@@ -1,5 +1,6 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
+// deno-fmt-ignore-file
 /** @jsx h */
 import { h } from "preact";
 
@@ -146,6 +147,7 @@ export function RawCodeBlock({
       (
         <button
           className={tw`opacity-0 group-hover:opacity-100 rounded border border-[#D2D2DC] p-1.5 self-start`}
+          // @ts-ignore onClick does support strings
           onClick={`navigator?.clipboard?.writeText('${code.trim()}');`}
         >
           <Icons.Copy />
