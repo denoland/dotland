@@ -11,11 +11,10 @@ import type {
 import { createFetchRequester } from "$algolia/requester-fetch";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { css, tw } from "@twind";
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useRef, useState } from "preact/hooks";
 import * as Icons from "@/components/Icons.tsx";
 import { colors, docNodeKindMap } from "@/components/symbol_kind.tsx";
 import { islandSearchClick } from "@/util/search_insights_utils.ts";
-import versions from "@/versions.json" assert { type: "json" };
 
 // Lazy load a <dialog> polyfill.
 // @ts-expect-error HTMLDialogElement is not just a type!
@@ -118,6 +117,11 @@ function getPosition(results: SearchResults<unknown>, index: number): number {
   return (results.hitsPerPage * results.page) + index + 1;
 }
 
+const requester = createFetchRequester();
+const client = algoliasearch("QFPCRZC6WX", "2ed789b2981acd210267b27f03ab47da", {
+  requester,
+});
+
 /** Search Deno documentation, symbols, or modules. */
 export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
   const [showModal, setShowModal] = useState(false);
@@ -138,13 +142,8 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
     "Interfaces": true,
     "Type Aliases": true,
   });
-
-  const requester = createFetchRequester();
-  const client = algoliasearch(
-    "QFPCRZC6WX",
-    "2ed789b2981acd210267b27f03ab47da",
-    { requester },
-  );
+  const searchTimeoutId = useRef<number | null>(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const keyboardHandler = (e: KeyboardEvent) => {
@@ -168,7 +167,10 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
   useEffect(() => {
     if (!showModal) return;
 
-    setResults(null);
+    setLoading(true);
+    if (searchTimeoutId.current === null) {
+      searchTimeoutId.current = setTimeout(() => setResults(null), 500);
+    }
 
     const queries: MultipleQueriesQuery[] = [];
 
@@ -213,16 +215,27 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
       });
     }
 
+    let cancelled = false;
+
     client.multipleQueries(queries).then(
       ({ results }) => {
+        // Ignore results from previous queries
+        if (cancelled) return;
+        if (searchTimeoutId.current !== null) {
+          clearTimeout(searchTimeoutId.current);
+          searchTimeoutId.current = null;
+        }
         setTotalPages(results.find((res) => res.nbPages)?.nbPages ?? 1);
         setResults({
           manual: toSearchResults(results, MANUAL_INDEX),
           symbols: toSearchResults(results, SYMBOL_INDEX),
           modules: toSearchResults(results, MODULE_INDEX),
         });
+        setLoading(false);
       },
     );
+
+    return () => cancelled = true;
   }, [showModal, input, kind, symbolKindsToggle, page]);
 
   useEffect(() => {
@@ -267,7 +280,7 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
             <div class={tw`pt-6 px-6 border-b border-[#E8E7E5]`}>
               <div class={tw`flex`}>
                 <label
-                  class={tw`pl-4 h-10 w-full flex-shrink-1 bg-[#F3F3F3] rounded-md flex items-center text-light focus-within:${
+                  class={tw`px-4 h-10 w-full flex-shrink-1 bg-[#F3F3F3] rounded-md flex items-center text-light focus-within:${
                     css({
                       "outline": "solid",
                     })
@@ -283,6 +296,7 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
                     placeholder="Search manual, symbols and modules..."
                     autoFocus
                   />
+                  {loading && <Icons.Spinner />}
                 </label>
 
                 <button
