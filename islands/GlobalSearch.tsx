@@ -143,6 +143,7 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
     "Type Aliases": true,
   });
   const searchTimeoutId = useRef<number | null>(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const keyboardHandler = (e: KeyboardEvent) => {
@@ -166,6 +167,7 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
   useEffect(() => {
     if (!showModal) return;
 
+    setLoading(true);
     if (searchTimeoutId.current === null) {
       searchTimeoutId.current = setTimeout(() => setResults(null), 500);
     }
@@ -229,6 +231,7 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
           symbols: toSearchResults(results, SYMBOL_INDEX),
           modules: toSearchResults(results, MODULE_INDEX),
         });
+        setLoading(false);
       },
     );
 
@@ -277,7 +280,7 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
             <div class={tw`pt-6 px-6 border-b border-[#E8E7E5]`}>
               <div class={tw`flex`}>
                 <label
-                  class={tw`pl-4 h-10 w-full flex-shrink-1 bg-[#F3F3F3] rounded-md flex items-center text-light focus-within:${
+                  class={tw`px-4 h-10 w-full flex-shrink-1 bg-[#F3F3F3] rounded-md flex items-center text-light focus-within:${
                     css({
                       "outline": "solid",
                     })
@@ -293,6 +296,7 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
                     placeholder="Search manual, symbols and modules..."
                     autoFocus
                   />
+                  {loading && <Icons.Spinner />}
                 </label>
 
                 <button
