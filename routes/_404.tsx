@@ -2,8 +2,8 @@
 
 /** @jsx h */
 import { h } from "preact";
-import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
+import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
 
@@ -12,9 +12,7 @@ export default function NotFoundPage() {
     <div
       class={tw`w-full min-h-screen overflow-x-hidden relative flex justify-between flex-col flex-wrap`}
     >
-      <Head>
-        <title>Not Found | Deno</title>
-      </Head>
+      <ContentMeta title="Not Found" />
       <div class={tw`flex-top`}>
         <Header />
         <header class={tw`text-center px-8 py-[10vh] z-[3]`}>

@@ -4,7 +4,6 @@
 /** @jsxFrag Fragment */
 import { Fragment, h } from "preact";
 import { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
 import twas from "$twas";
 import { emojify } from "$emoji";
@@ -16,6 +15,7 @@ import {
   type DocPageSymbol,
   extractAltLineNumberReference,
   fetchSource,
+  getDocAsDescription,
   getModulePath,
   getRawFile,
   getReadme,
@@ -26,6 +26,7 @@ import {
   type ModInfoPage,
   type SourcePage,
 } from "@/util/registry_utils.ts";
+import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { ErrorMessage } from "@/components/ErrorMessage.tsx";
@@ -59,6 +60,57 @@ type MaybeData =
 
 interface PageData {
   data: MaybeData;
+}
+
+function getTitle(
+  module: string,
+  version: string | undefined,
+  data: MaybeData,
+): string {
+  if (!data) {
+    return "Third Party";
+  }
+  const title = [version ? `${module}@${version}` : module];
+  if (
+    data.view === "source" &&
+    (data.data.kind === "dir" || data.data.kind === "file")
+  ) {
+    title.unshift(data.data.path);
+  }
+  if (
+    data.view === "doc" &&
+    (data.data.kind === "module" || data.data.kind === "file" ||
+      data.data.kind === "index" || data.data.kind === "symbol")
+  ) {
+    title.unshift(data.data.path);
+    if (data.data.kind === "symbol") {
+      title.unshift(data.data.name);
+    }
+  }
+  return title.join(" | ");
+}
+
+function getDescription(data: MaybeData): string | undefined {
+  if (data) {
+    if (
+      (data.view === "info" && data.data.kind === "modinfo") ||
+      (data.view === "source" &&
+        (data.data.kind === "dir" || data.data.kind === "file")) ||
+      (data.view === "doc" &&
+        (data.data.kind === "index" || data.data.kind === "file"))
+    ) {
+      if (data.data.description) {
+        return emojify(data.data.description);
+      }
+    } else if (data.view === "doc") {
+      if (data.data.kind === "module") {
+        return getDocAsDescription(data.data.docNodes, true);
+      }
+      if (data.data.kind === "symbol") {
+        return getDocAsDescription(data.data.docNodes);
+      }
+    }
+  }
 }
 
 export const handler: Handlers<PageData> = {
@@ -233,9 +285,11 @@ export default function Registry(
 
   return (
     <>
-      <Head>
-        <title>{name + (version ? `@${version}` : "") + " | Deno"}</title>
-      </Head>
+      <ContentMeta
+        title={getTitle(name, version, data)}
+        description={getDescription(data)}
+        keywords={["deno", "third party", "module", name]}
+      />
       <div class={tw`bg-primary min-h-full`}>
         <Header
           selected={name === "std" ? "Standard Library" : "Third Party Modules"}

@@ -13,13 +13,6 @@ export default function App({ Component }: AppProps) {
       <Head>
         <link rel="icon" href="/favicon.ico" sizes="32x32" />
         <link rel="icon" href="/logo.svg" type="image/svg+xml" />
-        <meta name="twitter:site" content="@deno_land" />
-        <meta name="twitter:creator" content="@deno_land" />
-        <meta name="robots" content="index, follow" />
-        <meta
-          name="keywords"
-          content="Deno, DenoLand, Development, JavaScript, TypeScript"
-        />
         <link rel="stylesheet" href="/fonts/inter/inter.css" />
         <link rel="manifest" href="/site.webmanifest" />
 

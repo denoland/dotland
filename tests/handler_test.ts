@@ -65,7 +65,7 @@ Deno.test({
     const text = await res.text();
     assertStringIncludes(
       text,
-      "<title>Deno - A modern runtime for JavaScript and TypeScript</title>",
+      "<title>Deno — A modern runtime for JavaScript and TypeScript</title>",
     );
   },
 });
