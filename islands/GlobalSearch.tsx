@@ -124,6 +124,7 @@ const client = algoliasearch("QFPCRZC6WX", "2ed789b2981acd210267b27f03ab47da", {
 
 /** Search Deno documentation, symbols, or modules. */
 export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
+  const dialog = useRef<HTMLDialogElement>(null);
   const [showModal, setShowModal] = useState(false);
   const [input, setInput] = useState("");
 
@@ -147,15 +148,13 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
 
   useEffect(() => {
     const keyboardHandler = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && showModal) setShowModal(false);
       if (e.target !== document.body) {
         return;
       }
       if (((e.metaKey || e.ctrlKey) && e.key === "k") || e.key === "/") {
         e.preventDefault();
         setShowModal(true);
-      }
-      if (e.key === "Escape") {
-        setShowModal(false);
       }
     };
     globalThis.addEventListener("keydown", keyboardHandler);
@@ -270,6 +269,7 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
       {IS_BROWSER && (
         <dialog
           class={tw`bg-[#00000033] inset-0 fixed z-10 p-0 m-0 w-full h-screen`}
+          ref={dialog}
           onClick={() => setShowModal(false)}
           open={showModal}
         >
