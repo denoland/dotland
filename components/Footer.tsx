@@ -44,7 +44,7 @@ export function Footer() {
               title="Sources"
               entries={{
                 "CLI Manual": "https://deno.land/manual",
-                "CLI Runtime API": "https://doc.deno.land/deno/stable",
+                "CLI Runtime API": "https://deno.land/api",
                 "Deploy Docs": "https://deno.com/deploy/docs",
                 "Standard Library": "https://deno.land/std",
                 "Third-Party Modules": "https://deno.land/x",
