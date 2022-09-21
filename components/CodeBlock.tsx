@@ -74,7 +74,7 @@ export function RawCodeBlock({
   }
 
   return <pre
-    className={tw`text-sm flex ${extraClassName ?? ""}` +
+    className={tw`group text-sm flex ${extraClassName ?? ""}` +
       ` gfm-highlight highlight-source-${newLang} ${flexCenter}`}
     data-color-mode="light"
     data-light-theme="light"
@@ -145,7 +145,7 @@ export function RawCodeBlock({
       {enableCopyButton &&
       (
         <button
-          className={tw`rounded border border-[#D2D2DC] p-1.5 self-start`}
+          className={tw`opacity-0 group-hover:opacity-100 rounded border border-[#D2D2DC] p-1.5 self-start`}
           onClick={`navigator?.clipboard?.writeText('${code.trim()}');`}
         >
           <Icons.Copy />
