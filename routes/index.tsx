@@ -420,6 +420,7 @@ function InstallSection({ url }: { url: URL }) {
         language="bash"
         code="curl -fsSL https://deno.land/install.sh | sh"
         url={url}
+        enableCopyButton={true}
       />
     </div>
   );
@@ -431,7 +432,12 @@ function InstallSection({ url }: { url: URL }) {
         </a>{" "}
         (Mac):
       </p>
-      <CodeBlock language="bash" code="brew install deno" url={url} />
+      <CodeBlock
+        language="bash"
+        code="brew install deno"
+        url={url}
+        enableCopyButton={true}
+      />
     </div>
   );
   const powershell = (
@@ -441,6 +447,7 @@ function InstallSection({ url }: { url: URL }) {
         language="bash"
         code="irm https://deno.land/install.ps1 | iex"
         url={url}
+        enableCopyButton={true}
       />
     </div>
   );
