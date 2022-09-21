@@ -14,9 +14,11 @@ import { Background } from "@/components/HeroBackground.tsx";
 import { Handlers, PageProps } from "$fresh/server.ts";
 
 import versions from "@/versions.json" assert { type: "json" };
+import { getCookies } from "https://deno.land/std@0.143.0/http/cookie.ts";
 
 interface Data {
   isFirefox: boolean;
+  hellobarClosedTo: string;
 }
 
 export default function Home({ data, url }: PageProps<Data>) {
@@ -37,11 +39,16 @@ test we can use chai should style ... ok (4ms)
 
 test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms)`;
 
+  const hellobarTo =
+    "https://deno.news/archive/50-the-javascript-trademark-fresh-11-and-deno-on";
   return (
     <div>
-      <HelloBar to="https://deno.news/archive/50-the-javascript-trademark-fresh-11-and-deno-on">
-        Check out Deno News issue #50!
-      </HelloBar>
+      {hellobarTo !== data.hellobarClosedTo &&
+        (
+          <HelloBar to={hellobarTo}>
+            Check out Deno News issue #50!
+          </HelloBar>
+        )}
       <Head>
         <title>Deno - A modern runtime for JavaScript and TypeScript</title>
       </Head>
@@ -465,10 +472,12 @@ function InstallSection({ url }: { url: URL }) {
 
 export const handler: Handlers<Data> = {
   GET(req, { render }) {
+    const cookies = getCookies(req.headers);
     return render!({
       isFirefox:
         req.headers.get("user-agent")?.toLowerCase().includes("firefox") ??
           false,
+      hellobarClosedTo: cookies.hellobar ?? "",
     });
   },
 };
