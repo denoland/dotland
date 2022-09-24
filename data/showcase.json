@@ -147,5 +147,11 @@
     "image": "/images/showcase/optimem.png",
     "title": "Optimem App",
     "link": "https://optimem.org/"
+  },
+  
+  {
+    "image": "https://raw.githubusercontent.com/mohan-chinnappan-n/cli-dx/master/deno/img/deno-sf-query-1.webm.gif",
+    "title": "Salesforce Query App",
+    "link": "https://mohanc-sf.deno.dev/"
   }
 ]
