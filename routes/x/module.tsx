@@ -125,7 +125,12 @@ export const handler: Handlers<PageData> = {
 
     console.log("accept:", req.headers.get("accept"));
     console.log("ua:", req.headers.get("user-agent"));
-    const isHTML = accepts(req, "application/*", "text/html") === "text/html";
+    // Deno CLI and bots both present with an `Accept: */*` header, where as
+    // browsers will prefer HTML. Because of this, we have to try to infer a bot
+    // from the UA in order to serve the HTML page.
+    const isHTML = accepts(req, "application/*", "text/html") === "text/html" ||
+      (req.headers.get("accept") === "*/*" &&
+        req.headers.get("user-agent")?.includes("bot"));
     console.log("isHTML", isHTML);
     if (!isHTML) return handlerRaw(req, params as Params);
 
