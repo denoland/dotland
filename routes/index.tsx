@@ -40,13 +40,13 @@ test we can use chai should style ... ok (4ms)
 test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms)`;
 
   const hellobarTo =
-    "https://deno.news/archive/50-the-javascript-trademark-fresh-11-and-deno-on";
+    "https://deno.news/archive/51-announcing-the-new-slack-platform-powered-by";
   return (
     <div>
       {hellobarTo !== data.hellobarClosedTo &&
         (
           <HelloBar to={hellobarTo}>
-            Check out Deno News issue #50!
+            Check out Deno News issue #51!
           </HelloBar>
         )}
       <Head>
