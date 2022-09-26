@@ -15,7 +15,8 @@ export default function AddModulePage() {
     <>
       <ContentMeta
         title="Third Party Modules"
-        description="Register a module with deno.land/x."
+        description="Register a module with the third party
+          registry."
         creator="@deno_land"
         keywords={["deno", "registry", "modules", "javascript", "typescript"]}
       />
