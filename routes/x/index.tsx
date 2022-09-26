@@ -4,7 +4,6 @@
 /** @jsxFrag Fragment */
 import { ComponentProps, Fragment, h } from "preact";
 import { PageProps } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
 import { css, tw } from "@twind";
 import { Handlers } from "$fresh/server.ts";
 import { emojify } from "$emoji";
@@ -13,6 +12,7 @@ import { createFetchRequester } from "$algolia/requester-fetch";
 
 import { PopularityModuleTag } from "@/util/registry_utils.ts";
 
+import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
@@ -108,9 +108,12 @@ function ModuleHit(
 export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
   return (
     <>
-      <Head>
-        <title>Third Party Modules | Deno</title>
-      </Head>
+      <ContentMeta
+        title="Third Party Modules"
+        description="A hosting service for Deno scripts."
+        creator="@deno_land"
+        keywords={["deno", "third party", "module", "registry"]}
+      />
       <div>
         <Header selected="Third Party Modules" />
 

@@ -4,8 +4,8 @@
 /** @jsxFrag Fragment */
 import { Fragment, h } from "preact";
 import { PageProps } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
+import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Handlers } from "$fresh/server.ts";
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
@@ -138,11 +138,21 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
 
   return (
     <>
-      <Head>
-        <title>
-          Benchmarks {dataRangeTitle ? `(${dataRangeTitle}) ` : " "}| Deno
-        </title>
-      </Head>
+      <ContentMeta
+        title={`Benchmarks${dataRangeTitle ? ` (${dataRangeTitle})` : ""}`}
+        creator="@deno_land"
+        description="As part of Deno's continuous integration and testing
+          pipeline we measure the performance of certain key metrics of the 
+          runtime. You can view these benchmarks here."
+        keywords={[
+          "deno",
+          "benchmark",
+          "performance",
+          "v8",
+          "javascript",
+          "typescript",
+        ]}
+      />
       <script src="https://cdn.jsdelivr.net/npm/apexcharts" />
       <script
         id="data"

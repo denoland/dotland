@@ -383,6 +383,41 @@ export function extractLinkUrl(
   return undefined;
 }
 
+function docAsDescription(doc: string) {
+  return doc.split("\n\n")[0].slice(0, 199);
+}
+
+/** For a LibDocPage, attempt to extract a description to be used with the
+ * content meta for the page. */
+export function getLibDocPageDescription(data: LibDocPage): string | undefined {
+  if (data.kind === "librarySymbol") {
+    for (const docNode of data.docNodes) {
+      if (docNode.jsDoc?.doc) {
+        return docAsDescription(docNode.jsDoc.doc);
+      }
+    }
+  }
+}
+
+export function getDocAsDescription(
+  docNodes: DocNode[],
+  modDoc = false,
+): string | undefined {
+  for (const docNode of docNodes) {
+    if (modDoc) {
+      if (docNode.kind === "moduleDoc") {
+        if (docNode.jsDoc.doc) {
+          return docAsDescription(docNode.jsDoc.doc);
+        } else {
+          return;
+        }
+      }
+    } else if (docNode.jsDoc?.doc) {
+      return docAsDescription(docNode.jsDoc.doc);
+    }
+  }
+}
+
 import type { DocNode, DocNodeKind, JsDoc } from "$deno_doc/types.d.ts";
 
 /** Stored as kind `module_entry` in datastore. */

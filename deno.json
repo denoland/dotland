@@ -1,6 +1,7 @@
 {
   "tasks": {
-    "start": "deno run -A --watch=routes/,static/ dev.ts"
+    "start": "deno run -A --watch=routes/,static/ dev.ts",
+    "test": "deno test --allow-net --allow-read --allow-env --allow-hrtime"
   },
   "compilerOptions": {
     "types": [
