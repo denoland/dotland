@@ -123,7 +123,10 @@ export const handler: Handlers<PageData> = {
       return Response.redirect(url, 301);
     }
 
+    console.log("accept:", req.headers.get("accept"));
+    console.log("ua:", req.headers.get("user-agent"));
     const isHTML = accepts(req, "application/*", "text/html") === "text/html";
+    console.log("isHTML", isHTML);
     if (!isHTML) return handlerRaw(req, params as Params);
 
     let view: Views;
