@@ -81,7 +81,10 @@ Deno.test({
     );
     assert(res.headers.get("Content-Type")?.includes("text/html"));
     const text = await res.text();
-    assertStringIncludes(text, "<title>std@0.127.0 | Deno</title>");
+    assertStringIncludes(
+      text,
+      "<title>/version.ts | std@0.127.0 | Deno</title>",
+    );
   },
 });
 
