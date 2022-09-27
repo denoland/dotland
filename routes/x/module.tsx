@@ -174,21 +174,12 @@ export const handler: Handlers<PageData> = {
       return render({ data: null });
     } else if (res.status === 302) { // implicit latest
       const latestVersion = res.headers.get("X-Deno-Latest-Version")!;
-      console.log(getModulePath(
+      url.pathname = getModulePath(
         name,
         latestVersion,
         path ? ("/" + path) : undefined,
-      ));
-      return Response.redirect(
-        new URL(
-          getModulePath(
-            name,
-            latestVersion,
-            path ? ("/" + path) : undefined,
-          ),
-          url,
-        ),
       );
+      return Response.redirect(url);
     } else if (res.status === 301) { // path is directory and there is an index module and its doc
       const newPath = res.headers.get("X-Deno-Module-Path")!;
       return new Response(undefined, {
