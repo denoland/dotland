@@ -17,6 +17,15 @@ const DEFAULT_KEYWORDS = [
 
 type OgType = "website" | "article";
 
+const OgImagePath = {
+  "generic": "https://deno.land/og-image.png",
+  "manual": "https://deno.land/og-manual.png",
+  "api": "https://deno.land/og-api.png",
+  "std": "https://deno.land/og-std.png",
+  "modules": "https://deno.land/og-modules.png",
+};
+type OgImageType = keyof typeof OgImagePath;
+
 /** A component which provides a unified way of setting the header meta data
  * in a structured way. */
 export function ContentMeta(
@@ -26,6 +35,7 @@ export function ContentMeta(
     creator,
     keywords = DEFAULT_KEYWORDS,
     ogType = "website",
+    ogImage = "generic",
     noIndex = false,
     noAppendTitle = false,
   }: {
@@ -34,6 +44,7 @@ export function ContentMeta(
     creator?: string;
     keywords?: string[];
     ogType?: OgType;
+    ogImage?: OgImageType;
     noIndex?: boolean;
     noAppendTitle?: boolean;
   },
@@ -55,6 +66,7 @@ export function ContentMeta(
       <meta property="og:type" content={ogType} />
       <meta property="og:site_name" content="Deno" />
       <meta property="og:locale" content="en_US" />
+      <meta property="og:image" content={OgImagePath[ogImage]} />
 
       <meta name="robots" content={noIndex ? "noindex" : "index, follow"} />
       <meta name="keywords" content={keywords.join(", ")} />
