@@ -112,6 +112,7 @@ export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
         title="Third Party Modules"
         description="A hosting service for Deno scripts."
         creator="@deno_land"
+        ogImage="modules"
         keywords={["deno", "third party", "module", "registry"]}
       />
       <div>

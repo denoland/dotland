@@ -89,6 +89,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
         description={getDescription(data.content)}
         creator="@deno_land"
         ogType="article"
+        ogImage="manual"
         keywords={[
           "deno",
           "manual",

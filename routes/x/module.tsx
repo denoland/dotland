@@ -284,6 +284,7 @@ export default function Registry(
       <ContentMeta
         title={getTitle(name, version, data)}
         description={getDescription(data)}
+        ogImage={isStd ? "std" : "modules"}
         keywords={["deno", "third party", "module", name]}
       />
       <div class={tw`bg-primary min-h-full`}>

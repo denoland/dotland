@@ -37,6 +37,7 @@ export default function API(
           : "Runtime APIs"}
         description={getLibDocPageDescription(data)}
         creator="@deno_land"
+        ogImage="api"
         keywords={["deno", "api", "built-in", "typescript", "javascript"]}
       />
       <Header selected="API" manual />
