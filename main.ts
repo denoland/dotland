@@ -12,6 +12,7 @@ import { ServerContext } from "$fresh/server.ts";
 import { Fragment, h } from "preact";
 import { serve } from "$std/http/server.ts";
 import { router } from "$router";
+import { lookupSymbol } from "./util/doc_utils.ts";
 import { withLog } from "./util/ga_utils.ts";
 import { setup } from "$doc_components/services.ts";
 
@@ -31,11 +32,11 @@ await setup({
     }
   },
   lookupHref(
-    _current: URL,
-    _namespace: string | undefined,
-    _symbol: string,
+    current: URL,
+    namespace: string | undefined,
+    symbol: string,
   ): string | undefined {
-    return undefined;
+    return lookupSymbol(current, namespace, symbol);
   },
   resolveSourceHref(url, line) {
     if (!url.startsWith("https://deno.land")) {
