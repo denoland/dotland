@@ -496,17 +496,28 @@ interface DocPageModuleItem {
 
 export type DocPageNavItem = DocPageModuleItem | DocPageDirItem;
 
+type DeclarationKind = "private" | "export" | "declare";
+
+export interface SymbolIndexItem {
+  name: string;
+  kind: DocNodeKind;
+  declarationKind: DeclarationKind;
+  filename: string;
+}
+
 export interface DocPageSymbol extends PageBase {
   kind: "symbol";
   nav: DocPageNavItem[];
   name: string;
   docNodes: DocNode[];
+  symbols: SymbolIndexItem[];
 }
 
 export interface DocPageModule extends PageBase {
   kind: "module";
   nav: DocPageNavItem[];
   docNodes: DocNode[];
+  symbols: SymbolIndexItem[];
 }
 
 export interface DocPageIndex extends PageBase {
