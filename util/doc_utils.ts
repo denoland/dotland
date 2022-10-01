@@ -36,19 +36,29 @@ export function lookupSymbol(
     while (parts.length) {
       const name = [...parts, symbol].join(".");
       if (currentSymbols.has(name)) {
-        return `${current.pathname}?s=${name}`;
+        const target = new URL(current);
+        target.searchParams.set("s", name);
+        return target.href;
       }
       parts.pop();
     }
   }
   if (currentSymbols.has(symbol)) {
-    return `${current.pathname}?s=${symbol}`;
+    const target = new URL(current);
+    target.searchParams.set("s", symbol);
+    return target.href;
   }
   if (currentImports.has(symbol)) {
     const src = currentImports.get(symbol)!;
+    const srcURL = new URL(src);
     if (src.startsWith("https://deno.land/")) {
-      const srcURL = new URL(src);
-      return `${srcURL.pathname}?s=${symbol}`;
+      srcURL.searchParams.set("s", symbol);
+      return srcURL.href;
+    } else {
+      // other sources, we will attempt to send them to docland for
+      // documentation
+      srcURL.pathname += `/~/${symbol}`;
+      return `https://doc.deno.land/${srcURL.toString()}`;
     }
   }
 }
