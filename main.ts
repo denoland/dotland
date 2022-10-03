@@ -28,7 +28,9 @@ await setup({
       url.searchParams.set("s", symbol);
       return url.href;
     } else {
-      return current.href;
+      const url = new URL(current);
+      url.searchParams.delete("s");
+      return url.href;
     }
   },
   lookupHref(
