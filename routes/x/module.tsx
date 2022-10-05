@@ -8,6 +8,7 @@ import { tw } from "@twind";
 import twas from "$twas";
 import { emojify } from "$emoji";
 import { accepts } from "$oak_commons";
+import { setSymbols } from "@/util/doc_utils.ts";
 import {
   type DocPage,
   type DocPageIndex,
@@ -224,7 +225,12 @@ export const handler: Handlers<PageData> = {
       );
     }
 
-    return render!({ data });
+    await setSymbols(
+      (data.data.kind === "module" || data.data.kind === "symbol")
+        ? data.data.symbols
+        : undefined,
+    );
+    return render({ data });
   },
 };
 

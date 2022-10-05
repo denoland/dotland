@@ -10,6 +10,7 @@ import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { ManualOrAPI, SidePanelPage } from "@/components/SidePanelPage.tsx";
+import { setSymbols } from "@/util/doc_utils.ts";
 import { versions } from "@/util/manual_utils.ts";
 import VersionSelect from "@/islands/VersionSelect.tsx";
 import {
@@ -154,6 +155,7 @@ export const handler: Handlers<LibDocPage> = {
 
     const res = await fetch(resURL);
     const data = await res.json();
+    await setSymbols();
 
     return render!(data);
   },
