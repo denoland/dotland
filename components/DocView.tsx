@@ -4,7 +4,6 @@
 /** @jsxFrag Fragment */
 import { h } from "preact";
 import { tw } from "@twind";
-import { setSymbols } from "@/util/doc_utils.ts";
 import { type CommonProps, getModulePath } from "@/util/registry_utils.ts";
 import { dirname } from "$std/path/mod.ts";
 import { ModuleDoc } from "$doc_components/doc/module_doc.tsx";
@@ -31,11 +30,6 @@ export function DocView({
     : undefined;
   const baseUrl = new URL(url);
   baseUrl.pathname = getModulePath(name, version);
-  setSymbols(
-    (data.kind === "module" || data.kind === "symbol")
-      ? data.symbols
-      : undefined,
-  );
 
   return (
     <SidePanelPage
