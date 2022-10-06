@@ -16,6 +16,7 @@ import {
   type DocPageSymbol,
   extractAltLineNumberReference,
   fetchSource,
+  getCanonicalUrl,
   getDocAsDescription,
   getModulePath,
   getRawFile,
@@ -285,11 +286,17 @@ export default function Registry(
   const path = maybePath ? "/" + maybePath : "";
   const isStd = name === "std";
 
+  let canonical: URL | undefined;
+  if (data && "latest_version" in data.data) {
+    canonical = getCanonicalUrl(url, data.data.latest_version);
+  }
+
   return (
     <>
       <ContentMeta
         title={getTitle(name, version, data)}
         description={getDescription(data)}
+        canonical={canonical}
         ogImage={isStd ? "std" : "modules"}
         keywords={["deno", "third party", "module", name]}
       />
