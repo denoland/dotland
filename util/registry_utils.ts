@@ -389,7 +389,8 @@ function docAsDescription(doc: string) {
 
 export function getCanonicalUrl(url: URL, latestVersion: string) {
   const canonical = new URL(url);
-  canonical.host = "deno.land:80";
+  canonical.hostname = "deno.land";
+  canonical.port = "";
   canonical.protocol = "https:";
   canonical.pathname = canonical.pathname.replace(
     /@[^/]+/,
