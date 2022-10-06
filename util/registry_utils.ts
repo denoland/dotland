@@ -387,6 +387,17 @@ function docAsDescription(doc: string) {
   return doc.split("\n\n")[0].slice(0, 199);
 }
 
+export function getCanonicalUrl(url: URL, latestVersion: string) {
+  const canonical = new URL(url);
+  canonical.host = "deno.land:80";
+  canonical.protocol = "https:";
+  canonical.pathname = canonical.pathname.replace(
+    /@[^/]+/,
+    `@${latestVersion}`,
+  );
+  return canonical;
+}
+
 /** For a LibDocPage, attempt to extract a description to be used with the
  * content meta for the page. */
 export function getLibDocPageDescription(data: LibDocPage): string | undefined {

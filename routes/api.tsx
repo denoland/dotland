@@ -14,6 +14,7 @@ import { setSymbols } from "@/util/doc_utils.ts";
 import { versions } from "@/util/manual_utils.ts";
 import VersionSelect from "@/islands/VersionSelect.tsx";
 import {
+  getCanonicalUrl,
   getLibDocPageDescription,
   type LibDocPage,
 } from "@/util/registry_utils.ts";
@@ -30,6 +31,8 @@ export default function API(
     "",
   ]];
 
+  const canonical = getCanonicalUrl(url, data.latest_version);
+
   return (
     <>
       <ContentMeta
@@ -37,6 +40,7 @@ export default function API(
           ? `${data.name} | Runtime APIs`
           : "Runtime APIs"}
         description={getLibDocPageDescription(data)}
+        canonical={canonical}
         creator="@deno_land"
         ogImage="api"
         keywords={["deno", "api", "built-in", "typescript", "javascript"]}
