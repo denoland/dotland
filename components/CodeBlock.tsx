@@ -63,13 +63,12 @@ export function RawCodeBlock({
 
   const tokens = normalizeTokens(Prism.tokenize(code, grammar));
 
-  return (
-    <pre
-      className={tw`text-sm flex ${extraClassName ?? ""}` +
-        ` gfm-highlight highlight-source-${newLang}`}
-      data-color-mode="light"
-      data-light-theme="light"
-    >
+  return <pre
+    className={tw`text-sm flex ${extraClassName ?? ""}` +
+      ` gfm-highlight highlight-source-${newLang}`}
+    data-color-mode="light"
+    data-light-theme="light"
+  >
       {enableLineRef &&
         (
           <div className={codeDivClasses}>
@@ -133,8 +132,7 @@ export function RawCodeBlock({
           );
         })}
       </div>
-    </pre>
-  );
+  </pre>;
 }
 
 export function CodeBlock(props: CodeBlockProps) {

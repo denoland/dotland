@@ -22,12 +22,17 @@ import options from "./options.ts";
 import { routes as completionsV2Routes } from "./completions_v2.ts";
 
 await setup({
-  resolveHref(current: URL, symbol?: string) {
+  resolveHref(current: URL, symbol?: string, property?: string) {
     const url = new URL(current);
     if (symbol) {
       url.searchParams.set("s", symbol);
     } else {
       url.searchParams.delete("s");
+    }
+    if (property) {
+      url.searchParams.set("p", property);
+    } else {
+      url.searchParams.delete("p");
     }
     return url.href;
   },

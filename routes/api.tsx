@@ -105,6 +105,7 @@ export default function API(
                       url={url}
                       name={data.name}
                       replacers={replacer}
+                      property={url.searchParams.get("p") ?? undefined}
                       library
                     >
                       {data.docNodes}
