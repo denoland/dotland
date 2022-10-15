@@ -261,7 +261,7 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
             Search...
           </div>
           <div class={tw`mx-4`}>
-            ⌘K
+            Ctrl+K / ⌘K
           </div>
         </div>
       </button>
