@@ -387,6 +387,9 @@ function docAsDescription(doc: string) {
   return doc.split("\n\n")[0].slice(0, 199);
 }
 
+/** Search parameters which are considered part of a canonical URL.  */
+const CANONICAL_SEARCH_PARAMS = ["s", "source", "doc", "unstable"];
+
 export function getCanonicalUrl(url: URL, latestVersion: string) {
   const canonical = new URL(url);
   canonical.hostname = "deno.land";
@@ -396,6 +399,12 @@ export function getCanonicalUrl(url: URL, latestVersion: string) {
     /@[^/]+/,
     `@${latestVersion}`,
   );
+  canonical.search = "";
+  for (const param of CANONICAL_SEARCH_PARAMS) {
+    if (url.searchParams.has(param)) {
+      canonical.searchParams.set(param, url.searchParams.get(param)!);
+    }
+  }
   return canonical;
 }
 
