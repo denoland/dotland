@@ -157,6 +157,8 @@ export const handler: Handlers<PageData> = {
 
     const queryId = url.searchParams.get("qid");
     const position = url.searchParams.get("pos");
+    url.searchParams.delete("qid");
+    url.searchParams.delete("pos");
     if (queryId && position && remoteAddr.transport === "tcp") {
       ssrSearchClick(
         await getUserToken(req.headers, remoteAddr.hostname),
