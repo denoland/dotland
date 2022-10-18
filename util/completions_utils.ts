@@ -1,5 +1,3 @@
-// Copyright 2022 the Deno authors. All rights reserved. MIT license.
-
 import twas from "$twas";
 // @deno-types="$fuse/fuse.d.ts"
 import Fuse from "$fuse/fuse.esm.js";

@@ -1,5 +1,7 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
+/** @jsx h */
+import { h } from "preact";
 import { PageProps, RouteConfig } from "$fresh/server.ts";
 import { Handlers } from "$fresh/server.ts";
 import Registry, { handler as xHandler } from "./x/module.tsx";
