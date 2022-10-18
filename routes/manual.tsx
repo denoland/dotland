@@ -1,8 +1,5 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
 import { PageProps, RouteConfig } from "$fresh/server.ts";
 import { tw } from "@twind";
 import { Handlers } from "$fresh/server.ts";

@@ -1,7 +1,5 @@
 // Copyright 2021-2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-import { h } from "preact";
 import { tw } from "@twind";
 
 export const colors = {

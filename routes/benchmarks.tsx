@@ -1,8 +1,5 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
 import { PageProps } from "$fresh/server.ts";
 import { tw } from "@twind";
 import { ContentMeta } from "@/components/ContentMeta.tsx";
@@ -142,7 +139,7 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
         title={`Benchmarks${dataRangeTitle ? ` (${dataRangeTitle})` : ""}`}
         creator="@deno_land"
         description="As part of Deno's continuous integration and testing
-          pipeline we measure the performance of certain key metrics of the 
+          pipeline we measure the performance of certain key metrics of the
           runtime. You can view these benchmarks here."
         keywords={[
           "deno",

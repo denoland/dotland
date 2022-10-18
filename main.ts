@@ -9,7 +9,6 @@
 /// <reference lib="deno.unstable" />
 
 import { ServerContext } from "$fresh/server.ts";
-import { Fragment, h } from "preact";
 import { serve } from "$std/http/server.ts";
 import { router } from "$router";
 import { lookupSymbol } from "./util/doc_utils.ts";
@@ -44,7 +43,6 @@ await setup({
     }
     return line ? `${url}?source#L${line}` : `${url}?source`;
   },
-  runtime: { Fragment, h },
 });
 
 const ctx = await ServerContext.fromManifest(manifest, options);

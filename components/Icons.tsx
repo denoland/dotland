@@ -1,5 +1,5 @@
-/** @jsx h */
-import { h } from "preact";
+// Copyright 2022 the Deno authors. All rights reserved. MIT license.
+
 import { tw } from "@twind";
 
 // Most icons are normalized to 14x14.

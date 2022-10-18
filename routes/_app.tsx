@@ -1,8 +1,5 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { h } from "preact";
 import { AppProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";

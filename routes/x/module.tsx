@@ -1,8 +1,5 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
 import { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
 import { tw } from "@twind";
 import twas from "$twas";
@@ -548,12 +545,12 @@ function Breadcrumbs({
           url += "?doc";
         }
         return (
-          <Fragment key={i}>
+          <>
             {i !== 0 && "/"}
             <a href={url} class={tw`link`} title={seg}>
               {seg}
             </a>
-          </Fragment>
+          </>
         );
       })}
     </p>

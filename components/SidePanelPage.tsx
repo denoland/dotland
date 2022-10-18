@@ -1,8 +1,6 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { type ComponentChildren, Fragment, h } from "preact";
+import { type ComponentChildren } from "preact";
 import { tw } from "@twind";
 import * as Icons from "@/components/Icons.tsx";
 

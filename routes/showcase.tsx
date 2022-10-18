@@ -1,8 +1,5 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
 import { tw } from "@twind";
 import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Footer } from "@/components/Footer.tsx";

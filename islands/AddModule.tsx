@@ -1,6 +1,5 @@
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
+// Copyright 2022 the Deno authors. All rights reserved. MIT license.
+
 import { useEffect, useRef, useState } from "preact/hooks";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { tw } from "@twind";

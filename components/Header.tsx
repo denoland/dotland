@@ -1,8 +1,5 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-import { h } from "preact";
-
 import { apply, css, tw } from "@twind";
 import * as Icons from "./Icons.tsx";
 import GlobalSearch from "@/islands/GlobalSearch.tsx";

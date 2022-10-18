@@ -1,7 +1,6 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-import { ComponentChildren, h } from "preact";
+import { ComponentChildren } from "preact";
 import { useState } from "preact/hooks";
 import { tw } from "@twind";
 import { IS_BROWSER } from "$fresh/runtime.ts";

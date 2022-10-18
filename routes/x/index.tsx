@@ -1,8 +1,6 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { ComponentProps, Fragment, h } from "preact";
+import { ComponentProps } from "preact";
 import { PageProps } from "$fresh/server.ts";
 import { css, tw } from "@twind";
 import { Handlers } from "$fresh/server.ts";

@@ -1,7 +1,5 @@
-// Copyright Deno Land Inc. All Rights Reserved. Proprietary and confidential.
+// Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-import { h } from "preact";
 import { tw } from "@twind";
 
 export function Background() {

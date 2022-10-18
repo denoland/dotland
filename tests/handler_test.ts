@@ -7,7 +7,6 @@ import {
 } from "$std/testing/asserts.ts";
 import { extractAltLineNumberReference } from "@/util/registry_utils.ts";
 import { ServerContext } from "$fresh/server.ts";
-import { Fragment, h } from "preact";
 import { setup } from "$doc_components/services.ts";
 
 import manifest from "@/fresh.gen.ts";
@@ -33,7 +32,6 @@ await setup({
   resolveSourceHref(url, line) {
     return line ? `${url}?source#L${line}` : `${url}?source`;
   },
-  runtime: { Fragment, h },
 });
 
 const serverCtx = await ServerContext.fromManifest(manifest, options);
