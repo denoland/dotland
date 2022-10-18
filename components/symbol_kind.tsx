@@ -1,8 +1,6 @@
 // Copyright 2021-2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-import { h } from "preact";
-import { tw } from "@twind";
+import { tw } from "twind";
 
 export const colors = {
   "namespace": ["#D25646", "#D256461A"],
