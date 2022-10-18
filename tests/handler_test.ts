@@ -10,7 +10,8 @@ import { ServerContext } from "$fresh/server.ts";
 import { setup } from "$doc_components/services.ts";
 
 import manifest from "@/fresh.gen.ts";
-import options from "@/options.ts";
+import twindPlugin from "$fresh/plugins/twind.ts";
+import twindConfig from "../twind.config.ts";
 
 await setup({
   resolveHref(current: URL, symbol?: string) {
@@ -34,7 +35,9 @@ await setup({
   },
 });
 
-const serverCtx = await ServerContext.fromManifest(manifest, options);
+const serverCtx = await ServerContext.fromManifest(manifest, {
+  plugins: [twindPlugin(twindConfig)],
+});
 const handler = serverCtx.handler();
 const handleRequest = (req: Request) =>
   handler(req, {
