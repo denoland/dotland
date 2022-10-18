@@ -45,7 +45,9 @@ await setup({
   },
 });
 
-const ctx = await ServerContext.fromManifest(manifest, { plugins: [twindPlugin(twindConfig)] });
+const ctx = await ServerContext.fromManifest(manifest, {
+  plugins: [twindPlugin(twindConfig)],
+});
 
 const innerHandler = withLog(ctx.handler());
 const handler = router(completionsV2Routes, innerHandler);
