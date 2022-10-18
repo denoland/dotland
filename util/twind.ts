@@ -1,9 +1,10 @@
-import { Options } from "$fresh/plugins/twind.ts";
+import { IS_BROWSER } from "$fresh/runtime.ts";
+import { apply, Configuration, setup as twSetup, Sheet } from "twind";
+export * from "twind";
 import { css } from "twind/css";
-import { apply } from "twind";
+export { css };
 
-export default {
-  selfURL: import.meta.url,
+export const config: Configuration = {
   preflight(preflight) {
     delete preflight["img,video"];
     return css(preflight, {
@@ -136,4 +137,22 @@ export default {
     },
     "icon-button": apply`border border-border rounded p-2 hover:bg-ultralight`,
   },
-} as Options;
+};
+
+if (IS_BROWSER) {
+  const el = document.getElementById("__FRSH_STYLE") as HTMLStyleElement;
+  const rules = el.innerText.split("\n");
+  const mappings = JSON.parse(rules.pop()!.slice(2, -2));
+  const precedences = JSON.parse(rules.pop()!.slice(2, -2));
+  const state = [precedences, new Set(rules), new Map(mappings), true];
+  const target = el.sheet!;
+  const sheet: Sheet = {
+    target,
+    insert: (rule, index) => target.insertRule(rule, index),
+    init(cb) {
+      return cb(state.shift());
+    },
+  };
+  config.sheet = sheet;
+  twSetup(config);
+}

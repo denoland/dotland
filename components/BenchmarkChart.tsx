@@ -1,5 +1,9 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
+/** @jsx h */
+/** @jsxFrag Fragment */
+import { Fragment, h } from "preact";
+
 import { Column, formatLogScale, logScale } from "@/util/benchmark_utils.ts";
 
 export interface BenchmarkChartProps {

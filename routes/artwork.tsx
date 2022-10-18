@@ -1,5 +1,9 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
+/** @jsx h */
+/** @jsxFrag Fragment */
+import { Fragment, h } from "preact";
+import { tw } from "@twind";
 import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { Header } from "@/components/Header.tsx";
@@ -37,21 +41,23 @@ export default function ArtworkPage() {
         keywords={["deno", "community", "artwork", "logo"]}
       />
       <Header />
-      <div class="section-x-inset-xl mt-8 mb-24">
-        <div class="max-w-screen-lg mx-auto">
-          <h4 class="text-4xl font-bold tracking-tight">Artwork</h4>
+      <div class={tw`section-x-inset-xl mt-8 mb-24`}>
+        <div class={tw`max-w-screen-lg mx-auto`}>
+          <h4 class={tw`text-4xl font-bold tracking-tight`}>Artwork</h4>
 
-          <p class="mt-4 text-lg">
+          <p class={tw`mt-4 text-lg`}>
             Do you have a piece to display here?{" "}
             <a
               href="https://github.com/denoland/dotland/blob/main/data/artwork.json"
-              class="link"
+              class={tw`link`}
             >
               Add it!
             </a>
           </p>
         </div>
-        <div class="my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end">
+        <div
+          class={tw`my-16 flex flex-row flex-wrap gap-16 justify-evenly items-end`}
+        >
           {ARTWORKS.map((artwork, i) => <Item key={i} artwork={artwork} />)}
         </div>
       </div>
@@ -62,66 +68,68 @@ export default function ArtworkPage() {
 
 function Item({ artwork }: { artwork: Artwork }) {
   return (
-    <div class="p-2 mx-1 mb-5">
-      <div class="flex justify-center">
+    <div class={tw`p-2 mx-1 mb-5`}>
+      <div class={tw`flex justify-center`}>
         <img
           src={artwork.image}
           alt={artwork.alt}
-          class="rounded-md max-h-56"
+          class={tw`rounded-md max-h-56`}
         />
       </div>
-      <div class="mt-3 text-xl font-semibold text-center">
+      <div class={tw`mt-3 text-xl font-semibold text-center`}>
         {artwork.link
           ? (
             <a
               href={artwork.link}
-              class="hover:text-gray-700 hover:underline"
+              class={tw`hover:text-gray-700 hover:underline`}
             >
               {artwork.title}
             </a>
           )
           : artwork.title}
       </div>
-      <div class="mt-3 flex justify-between items-center">
-        <div class="flex justify-start items-center">
+      <div class={tw`mt-3 flex justify-between items-center`}>
+        <div class={tw`flex justify-start items-center`}>
           {artwork.artist.profile_image
             ? (
               <img
                 src={artwork.artist.profile_image}
                 alt={artwork.artist.name}
-                class="rounded-full w-12 h-12"
+                class={tw`rounded-full w-12 h-12`}
               />
             )
-            : <div class="rounded-full w-12 h-12 bg-gray-200" />}
-          <div class="ml-4 flex flex-col justify-center">
-            <div class="text-xl leading-tight">{artwork.artist.name}</div>
-            <span class="text-gray-600 leading-tight">
+            : <div class={tw`rounded-full w-12 h-12 bg-gray-200`} />}
+          <div class={tw`ml-4 flex flex-col justify-center`}>
+            <div class={tw`text-xl leading-tight`}>{artwork.artist.name}</div>
+            <span class={tw`text-gray-600 leading-tight`}>
               {artwork.license}
             </span>
           </div>
         </div>
-        <div class="flex justify-start items-center ml-4 gap-2 children:children:(text-gray-500 hover:text-gray-700 h-5 w-auto)">
+        <div
+          class={tw`flex justify-start items-center ml-4 gap-2 children:children:(text-gray-500 hover:text-gray-700 h-5 w-auto)`}
+        >
           {artwork.artist.web && (
             <a href={artwork.artist.web}>
-              <span class="sr-only">Website</span>
+              <span class={tw`sr-only`}>Website</span>
               <Icons.Globe />
             </a>
           )}
           {artwork.artist.twitter && (
             <a href={`https://twitter.com/${artwork.artist.twitter}`}>
-              <span class="sr-only">Twitter</span>
+              <span class={tw`sr-only`}>Twitter</span>
               <Icons.Twitter />
             </a>
           )}
           {artwork.artist.github && (
             <a href={`https://github.com/${artwork.artist.github}`}>
-              <span class="sr-only">GitHub</span>
+              <span class={tw`sr-only`}>GitHub</span>
               <Icons.GitHub />
             </a>
           )}
           {artwork.artist.instagram && (
             <a href={`https://www.instagram.com/${artwork.artist.instagram}`}>
-              <span class="sr-only">Instagram</span>
+              <span class={tw`sr-only`}>Instagram</span>
               <Icons.Instagram />
             </a>
           )}

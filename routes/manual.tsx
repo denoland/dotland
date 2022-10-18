@@ -1,7 +1,10 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
+/** @jsx h */
+/** @jsxFrag Fragment */
+import { Fragment, h } from "preact";
 import { PageProps, RouteConfig } from "$fresh/server.ts";
-import { tw } from "twind";
+import { tw } from "@twind";
 import { Handlers } from "$fresh/server.ts";
 import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
@@ -101,7 +104,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
         sidepanel={
           <>
             <ManualOrAPI current="Manual" version={version} />
-            <div class="space-y-3 children:w-full">
+            <div class={tw`space-y-3 children:w-full`}>
               <VersionSelect
                 versions={Object.fromEntries(
                   versions.map((ver) => [ver, `/manual@${ver}${path}`]),
@@ -122,10 +125,10 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             href={new URL(`/manual/${params.path}`, url).href}
           />
         )}
-        <div class="w-full justify-self-center flex-shrink-1">
+        <div class={tw`w-full justify-self-center flex-shrink-1`}>
           <a
             href={getDocURL(version, path)}
-            class="float-right py-2.5 px-4.5 rounded-md bg-[#F3F3F3] hover:bg-border leading-none font-medium"
+            class={tw`float-right py-2.5 px-4.5 rounded-md bg-[#F3F3F3] hover:bg-border leading-none font-medium`}
           >
             Edit
           </a>
@@ -138,14 +141,14 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             baseURL={sourceURL}
           />
 
-          <div class="mt-14">
+          <div class={tw`mt-14`}>
             {pageList[pageIndex - 1] && (
               <a
                 href={pageList[pageIndex - 1].path.replace(
                   "manual",
                   `manual@${version}`,
                 )}
-                class="font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-border gap-1.5 hover:bg-light-border"
+                class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-border gap-1.5 hover:bg-light-border`}
               >
                 <Icons.ChevronLeft />
                 <div>
@@ -159,7 +162,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                   "manual",
                   `manual@${version}`,
                 )}
-                class="font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-border gap-1.5 float-right text-right hover:bg-light-border"
+                class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-border gap-1.5 float-right text-right hover:bg-light-border`}
               >
                 <div>
                   {pageList[pageIndex + 1].name}
@@ -181,15 +184,17 @@ function UserContributionBanner({
   href: string;
 }) {
   return (
-    <div class="bg-yellow-300 sticky top-0 rounded-md mb-6 py-4 px-3 sm:px-6 lg:px-8 font-medium text-gray-900">
+    <div
+      class={tw`bg-yellow-300 sticky top-0 rounded-md mb-6 py-4 px-3 sm:px-6 lg:px-8 font-medium text-gray-900`}
+    >
       <span>
         You are viewing documentation generated from a{"  "}
-        <b class="font-bold">user contribution</b>{"  "}
+        <b class={tw`font-bold`}>user contribution</b>{"  "}
         or an upcoming release. The contents of this document may not have been
         reviewed by the Deno team.{" "}
       </span>
 
-      <a class="underline cursor-pointer" href={href}>
+      <a class={tw`underline cursor-pointer`} href={href}>
         Click here to view the documentation for the latest release.
       </a>
     </div>
@@ -222,7 +227,7 @@ function ToCEntry({
       <input
         type="checkbox"
         id={slug}
-        class="hidden checked:siblings:even:children:first-child:rotate-90 checked:siblings:last-child:block"
+        class={tw`hidden checked:siblings:even:children:first-child:rotate-90 checked:siblings:last-child:block`}
         checked={active || path.startsWith(`/${slug}/`)}
         disabled={!hasChildren}
       />
