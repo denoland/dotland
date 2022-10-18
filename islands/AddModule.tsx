@@ -117,7 +117,7 @@ export default function AddModule() {
   return (
     <div class="space-y-12">
       <div class="flex items-start">
-        <div class="hidden lg:block p-1.75 rounded-full bg-tag-blue mr-4.5 mt-1.5">
+        <div class="hidden lg:block p-1.75 rounded-full bg-primary mr-4.5 mt-1.5">
           <Icons.NameTag />
         </div>
         <div class="w-full">
@@ -132,8 +132,8 @@ export default function AddModule() {
             placeholder="Module Name"
             class={tw`w-full lg:w-136 h-10 py-3 px-4 rounded-md ${
               name && !available
-                ? "text-[#F00C08] border border-[#F00C08] bg-transparent"
-                : "bg-[#F3F3F3]"
+                ? "text-danger border border-danger bg-transparent"
+                : "bg-grayDefault"
             }`}
             value={name}
             onInput={(e) => {
@@ -146,7 +146,7 @@ export default function AddModule() {
             disabled={!IS_BROWSER}
           />
           {name && !available && (
-            <p class="mt-1.5 text-[#F00C08] text-sm">
+            <p class="mt-1.5 text-danger text-sm">
               Invalid Name/Name has been taken!
             </p>
           )}
@@ -172,7 +172,7 @@ export default function AddModule() {
               type="text"
               pattern="^([^(/)])(.*/$)"
               placeholder="/"
-              class="w-full lg:w-136 h-10 py-3 px-4 bg-[#F3F3F3] rounded-md mt-2"
+              class="w-full lg:w-136 h-10 py-3 px-4 bg-grayDefault rounded-md mt-2"
               value={subdirectory}
               onInput={(e) => setSubdirectory(e.currentTarget.value)}
               disabled={!IS_BROWSER}
@@ -182,7 +182,7 @@ export default function AddModule() {
       </div>
 
       <div class="flex items-start">
-        <div class="hidden lg:block p-1.75 rounded-full bg-[#20B44B] mr-4.5 mt-1.5">
+        <div class="hidden lg:block p-1.75 rounded-full bg-fresh mr-4.5 mt-1.5">
           <Icons.Webhook />
         </div>
         <div class="space-y-5">
@@ -206,7 +206,7 @@ export default function AddModule() {
               You can now add the webhook to your repository.
             </p>
           </div>
-          <div class="w-full lg:w-136 py-3 px-3 bg-[#F3F3F3] rounded-md flex items-center justify-between space-x-2 text-sm whitespace-nowrap">
+          <div class="w-full lg:w-136 py-3 px-3 bg-grayDefault rounded-md flex items-center justify-between space-x-2 text-sm whitespace-nowrap">
             <div class="py-1 px-2 rounded-md font-medium bg-gray-400 text-white">
               Payload URL
             </div>

@@ -75,7 +75,7 @@ function ModuleHit(
             })
           } gap-x-6`}
         >
-          <div class="text-tag-blue font-semibold">
+          <div class="text-primary font-semibold">
             {result.name}
           </div>
           <div class="self-center justify-self-end md:row-span-2">
@@ -185,14 +185,6 @@ export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
                 </a>
               </div>
             </div>
-
-            {
-              /*<div class={tw`px-9 py-6 rounded-xl border border-dark-border`}>
-              <span class={tw`text-[#6C6E78] leading-5 whitespace-nowrap`}>
-                modules registered
-              </span>
-            </div>*/
-            }
           </div>
 
           <div class="border border-border rounded-lg overflow-hidden">
@@ -398,7 +390,7 @@ function MaybeA(
   if (props.disabled) {
     return <div {...props} class="text-[#D2D2DC] cursor-not-allowed" />;
   } else {
-    return <a {...props} class="hover:text-light" />;
+    return <a {...props} class="hover:text-gray-400" />;
   }
 }
 

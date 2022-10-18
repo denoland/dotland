@@ -125,7 +125,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
         <div class="w-full justify-self-center flex-shrink-1">
           <a
             href={getDocURL(version, path)}
-            class="float-right py-2.5 px-4.5 rounded-md bg-[#F3F3F3] hover:bg-border leading-none font-medium"
+            class="float-right py-2.5 px-4.5 rounded-md bg-grayDefault hover:bg-border leading-none font-medium"
           >
             Edit
           </a>
@@ -145,7 +145,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                   "manual",
                   `manual@${version}`,
                 )}
-                class="font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-border gap-1.5 hover:bg-light-border"
+                class="font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-border gap-1.5 hover:bg-grayDefault"
               >
                 <Icons.ChevronLeft />
                 <div>
@@ -159,7 +159,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                   "manual",
                   `manual@${version}`,
                 )}
-                class="font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-border gap-1.5 float-right text-right hover:bg-light-border"
+                class="font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-border gap-1.5 hover:bg-grayDefault float-right text-right"
               >
                 <div>
                   {pageList[pageIndex + 1].name}

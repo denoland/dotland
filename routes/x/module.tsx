@@ -299,7 +299,7 @@ export default function Registry(
         ogImage={isStd ? "std" : "modules"}
         keywords={["deno", "third party", "module", name]}
       />
-      <div class="bg-primary min-h-full">
+      <div class="min-h-full">
         <Header
           selected={name === "std" ? "Standard Library" : "Third Party Modules"}
         />
@@ -359,7 +359,7 @@ function TopPanel({
     : (path === "" ? "?doc" : "");
 
   return (
-    <div class="bg-ultralight border-b border-light-border">
+    <div class="bg-ultralight border-b border-grayDefault">
       <div class="section-x-inset-xl py-5 flex items-center">
         <div class="flex flex-col md:(flex-row items-center) justify-between w-full gap-4">
           <div class="overflow-hidden">
@@ -573,7 +573,7 @@ function InfoView(
     attributes.push(
       <div class="flex items-center gap-1.5">
         <Icons.CheckmarkVerified class="h-4 w-auto" />
-        <span class="text-tag-blue font-medium leading-none">
+        <span class="text-primary font-medium leading-none">
           By Deno Team
         </span>
       </div>,
@@ -604,7 +604,7 @@ function InfoView(
                   path="/"
                   view="info"
                 />
-                <div class="tag-label bg-default-15 text-gray-600 font-semibold!">
+                <div class="tag-label bg-[#23232326] text-gray-600 font-semibold!">
                   {version}
                 </div>
               </div>
@@ -676,7 +676,7 @@ function InfoView(
             <div class="text-gray-400 font-medium text-sm leading-4">
               Versions
             </div>
-            <ol class="border border-secondary rounded-lg list-none overflow-y-scroll max-h-80">
+            <ol class="border border-gray-200 rounded-lg list-none overflow-y-scroll max-h-80">
               {data.versions.map((listVersion) => (
                 <li class="odd:(bg-ultralight rounded-md)">
                   <a
@@ -687,7 +687,7 @@ function InfoView(
                   >
                     <span class="block w-full truncate">{listVersion}</span>
                     {listVersion === data.latest_version && (
-                      <div class="tag-label bg-tag-blue-bg text-tag-blue">
+                      <div class="tag-label bg-[#056CF025] text-tag-blue">
                         Latest
                       </div>
                     )}

@@ -60,10 +60,10 @@ export function ManualOrAPI(
   { current, version }: { current: keyof typeof entries; version: string },
 ) {
   return (
-    <div class="border-b border-light-border flex gap-1">
+    <div class="border-b border-border flex gap-1">
       {(["Manual", "Runtime APIs"] as const).map((key) => (
         <a
-          class="-mb-px px-2.5 font-medium leading-none rounded-md hover:(bg-gray-100 text-main)"
+          class="-mb-px px-2.5 font-medium leading-none rounded-md hover:bg-grayDefault"
           href={`${entries[key]}@${version}`}
         >
           <div
