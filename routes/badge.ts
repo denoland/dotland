@@ -1,3 +1,5 @@
+// Copyright 2022 the Deno authors. All rights reserved. MIT license.
+
 import { type Handlers, type RouteConfig } from "$fresh/server.ts";
 
 export const handler: Handlers = {
