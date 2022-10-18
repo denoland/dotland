@@ -2,7 +2,7 @@
   "imports": {
     "@/": "./",
     "https://deno.land/std@0.154.0/": "https://deno.land/std@0.153.0/",
-    "$fresh/": "https://deno.land/x/fresh@1.1.2/",
+    "$fresh/": "https://raw.githubusercontent.com/denoland/fresh/fbe0340447695e883afdcc1cf893c96e2ae3adbb/",
     "preact": "https://esm.sh/preact@10.11.0",
     "preact/": "https://esm.sh/preact@10.11.0/",
     "preact-render-to-string": "https://esm.sh/*preact-render-to-string@5.2.4",
