@@ -10,10 +10,13 @@ import { ServerContext } from "$fresh/server.ts";
 import { router } from "$router";
 
 import manifest from "@/fresh.gen.ts";
-import options from "@/options.ts";
+import twindPlugin from "$fresh/plugins/twind.ts";
+import twindConfig from "../twind.config.ts";
 import { routes as completionsV2Routes } from "@/completions_v2.ts";
 
-const serverCtx = await ServerContext.fromManifest(manifest, options);
+const serverCtx = await ServerContext.fromManifest(manifest, {
+  plugins: [twindPlugin(twindConfig)],
+});
 const handler = router(completionsV2Routes, serverCtx.handler());
 const handleRequest = (req: Request) =>
   handler(req, {

@@ -1,10 +1,6 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
 import { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
-import { tw } from "@twind";
 import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
@@ -28,16 +24,16 @@ export default function StatusPage(
         creator="@deno_land"
         keywords={["deno", "module", "registry", "status"]}
       />
-      <div class={tw`bg-gray-50 min-h-full`}>
+      <div class="bg-gray-50 min-h-full">
         <Header />
-        <div class={tw`section-x-inset-md mt-8 pb-8 mb-16`}>
+        <div class="section-x-inset-md mt-8 pb-8 mb-16">
           <div>
-            <h3 class={tw`text-lg leading-6 font-medium text-gray-900`}>
+            <h3 class="text-lg leading-6 font-medium text-gray-900">
               Module publishing status
             </h3>
             {!(data instanceof Error) &&
               (
-                <p class={tw`max-w-2xl text-sm leading-5 text-gray-500`}>
+                <p class="max-w-2xl text-sm leading-5 text-gray-500">
                   deno.land/x{data ? "/" + data.options.moduleName : ""}
                 </p>
               )}
@@ -49,66 +45,52 @@ export default function StatusPage(
               </ErrorMessage>
             )
             : (
-              <div class={tw`mt-5 border-t border-gray-200 pt-5`}>
+              <div class="mt-5 border-t border-gray-200 pt-5">
                 <dl>
-                  <div class={tw`sm:grid sm:grid-cols-3 sm:gap-4`}>
-                    <dt class={tw`text-sm leading-5 font-medium text-gray-500`}>
+                  <div class="sm:grid sm:grid-cols-3 sm:gap-4">
+                    <dt class="text-sm leading-5 font-medium text-gray-500">
                       Repository
                     </dt>
-                    <dd
-                      class={tw`mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2`}
-                    >
+                    <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                       <a
                         href={`https://github.com/${data.options.repository}`}
-                        class={tw`link`}
+                        class="link"
                       >
                         <Icons.GitHub />
                         {data.options.repository}
                       </a>
                     </dd>
                   </div>
-                  <div
-                    class={tw`mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5`}
-                  >
-                    <dt class={tw`text-sm leading-5 font-medium text-gray-500`}>
+                  <div class="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                    <dt class="text-sm leading-5 font-medium text-gray-500">
                       Version
                     </dt>
-                    <dd
-                      class={tw`mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2`}
-                    >
+                    <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                       {data.options.version}
                     </dd>
                   </div>
-                  <div
-                    class={tw`mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5`}
-                  >
-                    <dt class={tw`text-sm leading-5 font-medium text-gray-500`}>
+                  <div class="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                    <dt class="text-sm leading-5 font-medium text-gray-500">
                       Source
                     </dt>
-                    <dd
-                      class={tw`mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2`}
-                    >
+                    <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                       <a
                         href={`https://github.com/${data.options.repository}/tree/${data.options.ref}/${
                           data.options.subdir ?? ""
                         }`}
-                        class={tw`link`}
+                        class="link"
                       >
                         View on GitHub
                       </a>
                     </dd>
                   </div>
-                  <div
-                    class={tw`mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5`}
-                  >
-                    <dt class={tw`text-sm leading-5 font-medium text-gray-500`}>
+                  <div class="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                    <dt class="text-sm leading-5 font-medium text-gray-500">
                       Status
                     </dt>
-                    <dd
-                      class={tw`mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2`}
-                    >
-                      <div class={tw`flex`}>
-                        <div class={tw`mr-2`}>
+                    <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                      <div class="flex">
+                        <div class="mr-2">
                           {(() => {
                             switch (data.status) {
                               case "queued":
@@ -128,8 +110,8 @@ export default function StatusPage(
                         </div>
                       </div>
                       {data.message && (
-                        <div class={tw`flex mt-2`}>
-                          <div class={tw`mr-2`}>
+                        <div class="flex mt-2">
+                          <div class="mr-2">
                             <Icons.ChevronRight />
                           </div>
                           <div>{data.message}</div>
