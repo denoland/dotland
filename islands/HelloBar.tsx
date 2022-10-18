@@ -2,7 +2,6 @@
 
 import { ComponentChildren } from "preact";
 import { useState } from "preact/hooks";
-import { tw } from "@twind";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { Cross } from "@/components/Icons.tsx";
 
@@ -13,14 +12,12 @@ export default function HelloBar(props: {
   const [open, setOpen] = useState(true);
   return open
     ? (
-      <div
-        class={tw`text-center bg-black text-white p-1 flex items-center justify-between flex-wrap`}
-      >
-        <div class={tw`flex-grow text-center`}>
+      <div class="text-center bg-black text-white p-1 flex items-center justify-between flex-wrap">
+        <div class="flex-grow text-center">
           <a
             href={props.to}
             target="_blank"
-            class={tw`inline-block p-1 hover:text-underline`}
+            class="inline-block p-1 hover:text-underline"
           >
             {props.children}
           </a>

@@ -1,7 +1,7 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 import { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
-import { tw } from "@twind";
+import { tw } from "twind";
 import twas from "$twas";
 import { emojify } from "$emoji";
 import { accepts } from "$oak_commons";
@@ -299,13 +299,13 @@ export default function Registry(
         ogImage={isStd ? "std" : "modules"}
         keywords={["deno", "third party", "module", name]}
       />
-      <div class={tw`bg-primary min-h-full`}>
+      <div class="bg-primary min-h-full">
         <Header
           selected={name === "std" ? "Standard Library" : "Third Party Modules"}
         />
         {data === null
           ? (
-            <div class={tw`section-x-inset-xl pb-20 pt-10`}>
+            <div class="section-x-inset-xl pb-20 pt-10">
               <ErrorMessage title="404 - Not Found">
                 This {url.searchParams.has("s") ? "symbol" : "module"}{" "}
                 does not exist.
@@ -359,12 +359,10 @@ function TopPanel({
     : (path === "" ? "?doc" : "");
 
   return (
-    <div class={tw`bg-ultralight border-b border-light-border`}>
-      <div class={tw`section-x-inset-xl py-5 flex items-center`}>
-        <div
-          class={tw`flex flex-col md:(flex-row items-center) justify-between w-full gap-4`}
-        >
-          <div class={tw`overflow-hidden`}>
+    <div class="bg-ultralight border-b border-light-border">
+      <div class="section-x-inset-xl py-5 flex items-center">
+        <div class="flex flex-col md:(flex-row items-center) justify-between w-full gap-4">
+          <div class="overflow-hidden">
             <Breadcrumbs
               name={name}
               version={version}
@@ -375,24 +373,20 @@ function TopPanel({
             {data.kind !== "no-versions" && data.description &&
               (
                 <div
-                  class={tw`text-sm lg:truncate`}
+                  class="text-sm lg:truncate"
                   title={emojify(data.description)}
                 >
                   {emojify(data.description)}
                 </div>
               )}
           </div>
-          <div
-            class={tw`flex flex-col items-stretch gap-4 w-full md:w-auto lg:(flex-row justify-between) flex-shrink-0`}
-          >
+          <div class="flex flex-col items-stretch gap-4 w-full md:w-auto lg:(flex-row justify-between) flex-shrink-0">
             {hasPageBase && (
-              <div
-                class={tw`flex flex-row justify-between md:justify-center items-center gap-4 border border-border rounded-md bg-white py-2 px-5`}
-              >
-                <div class={tw`flex items-center whitespace-nowrap gap-2`}>
+              <div class="flex flex-row justify-between md:justify-center items-center gap-4 border border-border rounded-md bg-white py-2 px-5">
+                <div class="flex items-center whitespace-nowrap gap-2">
                   <Icons.GitHub class="h-4 w-auto text-gray-700 flex-none" />
                   <a
-                    class={tw`link`}
+                    class="link"
                     href={`https://github.com/${data.upload_options.repository}`}
                   >
                     {data.upload_options.repository}
@@ -439,7 +433,7 @@ function ModuleView({
 }) {
   if (data.data.kind === "no-versions") {
     return (
-      <div class={tw`section-x-inset-xl py-12`}>
+      <div class="section-x-inset-xl py-12">
         <ErrorMessage title="No uploaded versions">
           This module name has been reserved for a repository, but no versions
           have been uploaded yet. Modules that do not upload a version within 30
@@ -449,7 +443,7 @@ function ModuleView({
     );
   } else if (data.data.kind === "invalid-version") {
     return (
-      <div class={tw`section-x-inset-xl py-12`}>
+      <div class="section-x-inset-xl py-12">
         <ErrorMessage title="404 - Not Found">
           This version does not exist for this module.
         </ErrorMessage>
@@ -457,7 +451,7 @@ function ModuleView({
     );
   } else if (data.data.kind === "notfound") {
     return (
-      <div class={tw`section-x-inset-xl py-12`}>
+      <div class="section-x-inset-xl py-12">
         <ErrorMessage title="404 - Not Found">
           This file or directory could not be found.
         </ErrorMessage>
@@ -537,7 +531,7 @@ function Breadcrumbs({
   }
 
   return (
-    <p class={tw`text-xl leading-6 font-bold text-gray-400 truncate`}>
+    <p class="text-xl leading-6 font-bold text-gray-400 truncate">
       {out.map(([seg, url], i) => {
         if (view === "source") {
           url += "?source";
@@ -547,7 +541,7 @@ function Breadcrumbs({
         return (
           <>
             {i !== 0 && "/"}
-            <a href={url} class={tw`link`} title={seg}>
+            <a href={url} class="link" title={seg}>
               {seg}
             </a>
           </>
@@ -577,9 +571,9 @@ function InfoView(
 
   if (data.upload_options.repository.split("/")[0] == "denoland") {
     attributes.push(
-      <div class={tw`flex items-center gap-1.5`}>
+      <div class="flex items-center gap-1.5">
         <Icons.CheckmarkVerified class="h-4 w-auto" />
-        <span class={tw`text-tag-blue font-medium leading-none`}>
+        <span class="text-tag-blue font-medium leading-none">
           By Deno Team
         </span>
       </div>,
@@ -588,9 +582,9 @@ function InfoView(
 
   if (data.config) {
     attributes.push(
-      <div class={tw`flex items-center gap-1.5`}>
+      <div class="flex items-center gap-1.5">
         <Icons.Logo />
-        <span class={tw`text-gray-600 font-medium leading-none`}>
+        <span class="text-gray-600 font-medium leading-none">
           Includes Deno configuration
         </span>
       </div>,
@@ -600,39 +594,35 @@ function InfoView(
   return (
     <SidePanelPage
       sidepanel={
-        <div class={tw`space-y-6 children:space-y-2`}>
-          <div class={tw`space-y-4!`}>
-            <div class={tw`space-y-2`}>
-              <div class={tw`flex items-center gap-2.5 w-full`}>
+        <div class="space-y-6 children:space-y-2">
+          <div class="space-y-4!">
+            <div class="space-y-2">
+              <div class="flex items-center gap-2.5 w-full">
                 <Breadcrumbs
                   name={name}
                   version={version}
                   path="/"
                   view="info"
                 />
-                <div
-                  class={tw`tag-label bg-default-15 text-gray-600 font-semibold!`}
-                >
+                <div class="tag-label bg-default-15 text-gray-600 font-semibold!">
                   {version}
                 </div>
               </div>
 
               {data.description &&
                 (
-                  <div class={tw`text-sm`} title={data.description}>
+                  <div class="text-sm" title={data.description}>
                     {data.description}
                   </div>
                 )}
             </div>
 
-            <div
-              class={tw`space-y-3 children:(flex items-center gap-1.5 leading-none font-medium)`}
-            >
+            <div class="space-y-3 children:(flex items-center gap-1.5 leading-none font-medium)">
               <span>
                 <Icons.Docs />
                 <a
                   href={getModulePath(name, version) + "?doc"}
-                  class={tw`link`}
+                  class="link"
                 >
                   View Documentation
                 </a>
@@ -641,7 +631,7 @@ function InfoView(
                 <Icons.Source />
                 <a
                   href={getModulePath(name, version) + "?source"}
-                  class={tw`link`}
+                  class="link"
                 >
                   View Source
                 </a>
@@ -650,8 +640,8 @@ function InfoView(
           </div>
 
           {attributes.length !== 0 && (
-            <div class={tw`space-y-2.5!`}>
-              <div class={tw`text-gray-400 font-medium text-sm leading-4`}>
+            <div class="space-y-2.5!">
+              <div class="text-gray-400 font-medium text-sm leading-4">
                 Attributes
               </div>
               {attributes}
@@ -659,13 +649,13 @@ function InfoView(
           )}
 
           <div>
-            <div class={tw`text-gray-400 font-medium text-sm leading-4`}>
+            <div class="text-gray-400 font-medium text-sm leading-4">
               Repository
             </div>
-            <div class={tw`flex items-center gap-1.5 whitespace-nowrap`}>
+            <div class="flex items-center gap-1.5 whitespace-nowrap">
               <Icons.GitHub class="h-4 w-auto text-gray-700 flex-none" />
               <a
-                class={tw`link truncate`}
+                class="link truncate"
                 href={`https://github.com/${data.upload_options.repository}`}
               >
                 {data.upload_options.repository}
@@ -674,7 +664,7 @@ function InfoView(
           </div>
 
           <div>
-            <div class={tw`text-gray-400 font-medium text-sm leading-4`}>
+            <div class="text-gray-400 font-medium text-sm leading-4">
               Current version released
             </div>
             <div title={data.uploaded_at}>
@@ -683,23 +673,21 @@ function InfoView(
           </div>
 
           <div>
-            <div class={tw`text-gray-400 font-medium text-sm leading-4`}>
+            <div class="text-gray-400 font-medium text-sm leading-4">
               Versions
             </div>
-            <ol
-              class={tw`border border-secondary rounded-lg list-none overflow-y-scroll max-h-80`}
-            >
+            <ol class="border border-secondary rounded-lg list-none overflow-y-scroll max-h-80">
               {data.versions.map((listVersion) => (
-                <li class={tw`odd:(bg-ultralight rounded-md)`}>
+                <li class="odd:(bg-ultralight rounded-md)">
                   <a
                     class={tw`flex px-5 py-2 link ${
                       listVersion === version ? "font-bold" : "font-medium"
                     }`}
                     href={getModulePath(name, listVersion)}
                   >
-                    <span class={tw`block w-full truncate`}>{listVersion}</span>
+                    <span class="block w-full truncate">{listVersion}</span>
                     {listVersion === data.latest_version && (
-                      <div class={tw`tag-label bg-tag-blue-bg text-tag-blue`}>
+                      <div class="tag-label bg-tag-blue-bg text-tag-blue">
                         Latest
                       </div>
                     )}
@@ -711,7 +699,7 @@ function InfoView(
         </div>
       }
     >
-      <div class={tw`p-6 rounded-xl border border-border`}>
+      <div class="p-6 rounded-xl border border-border">
         {data.readmeFile
           ? (
             <Markdown
@@ -722,9 +710,7 @@ function InfoView(
             />
           )
           : (
-            <div
-              class={tw`flex items-center justify-center italic text-gray-400 -m-2`}
-            >
+            <div class="flex items-center justify-center italic text-gray-400 -m-2">
               No readme found.
             </div>
           )}

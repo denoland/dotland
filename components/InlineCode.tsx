@@ -1,14 +1,13 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-import { ComponentChildren } from "preact";
-import { tw } from "@twind";
+import { type ComponentChildren } from "preact";
 
 export function InlineCode(
   props: { children: ComponentChildren; id?: string },
 ) {
   return (
     <code
-      class={tw`py-1 px-2 font-mono bg-gray-100 text-sm break-words rounded-[6px]`}
+      class="py-1 px-2 font-mono bg-gray-100 text-sm break-words rounded-[6px]"
       id={props.id}
     >
       {props.children}
