@@ -7,11 +7,11 @@ import {
 } from "$std/testing/asserts.ts";
 import { extractAltLineNumberReference } from "@/util/registry_utils.ts";
 import { ServerContext } from "$fresh/server.ts";
+import { Fragment, h } from "preact";
 import { setup } from "$doc_components/services.ts";
 
 import manifest from "@/fresh.gen.ts";
-import twindPlugin from "$fresh/plugins/twind.ts";
-import twindConfig from "../twind.config.ts";
+import options from "@/options.ts";
 
 await setup({
   resolveHref(current: URL, symbol?: string) {
@@ -33,11 +33,10 @@ await setup({
   resolveSourceHref(url, line) {
     return line ? `${url}?source#L${line}` : `${url}?source`;
   },
+  runtime: { Fragment, h },
 });
 
-const serverCtx = await ServerContext.fromManifest(manifest, {
-  plugins: [twindPlugin(twindConfig)],
-});
+const serverCtx = await ServerContext.fromManifest(manifest, options);
 const handler = serverCtx.handler();
 const handleRequest = (req: Request) =>
   handler(req, {

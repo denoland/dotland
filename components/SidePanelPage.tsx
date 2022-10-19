@@ -1,7 +1,9 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-import { type ComponentChildren } from "preact";
-import { tw } from "twind";
+/** @jsx h */
+/** @jsxFrag Fragment */
+import { type ComponentChildren, Fragment, h } from "preact";
+import { tw } from "@twind";
 import * as Icons from "@/components/Icons.tsx";
 
 export function SidePanelPage({ children, sidepanel }: {
@@ -15,15 +17,15 @@ export function SidePanelPage({ children, sidepanel }: {
           <input
             type="checkbox"
             id="SidePanelToggle"
-            class="hidden checked:siblings:last-child:children:first-child:flex checked:sibling:(border-0 children:children:first-child:rotate-90)"
+            class={tw`hidden checked:siblings:last-child:children:first-child:flex checked:sibling:(border-0 children:children:first-child:rotate-90)`}
             autoComplete="off"
           />
 
           <label
             htmlFor="SidePanelToggle"
-            class="lg:hidden block pl-5 py-2.5 font-medium border-b border-border"
+            class={tw`lg:hidden block pl-5 py-2.5 font-medium border-b border-border`}
           >
-            <div class="flex gap-2 items-center px-1.5">
+            <div class={tw`flex gap-2 items-center px-1.5`}>
               <Icons.ChevronRight class="text-gray-400" />
               Menu
             </div>
@@ -31,17 +33,23 @@ export function SidePanelPage({ children, sidepanel }: {
         </>
       )}
 
-      <div class="flex flex-col mt-0 mb-16 lg:(flex-row mt-12 gap-12 section-x-inset-xl)">
+      <div
+        class={tw`flex flex-col mt-0 mb-16 lg:(flex-row mt-12 gap-12 section-x-inset-xl)`}
+      >
         {sidepanel && (
-          <div class="hidden pb-2 w-full border-b border-border lg:(pb-0 border-none block w-72 flex-shrink-0)">
-            <div class="w-full space-y-5 section-x-inset-xl lg:section-x-inset-none">
+          <div
+            class={tw`hidden pb-2 w-full border-b border-border lg:(pb-0 border-none block w-72 flex-shrink-0)`}
+          >
+            <div
+              class={tw`w-full space-y-5 section-x-inset-xl lg:section-x-inset-none`}
+            >
               {sidepanel}
             </div>
           </div>
         )}
 
         <main
-          class="focus:outline-none min-w-0 w-full flex flex-col section-x-inset-xl mt-7 lg:(section-x-inset-none mt-0)"
+          class={tw`focus:outline-none min-w-0 w-full flex flex-col section-x-inset-xl mt-7 lg:(section-x-inset-none mt-0)`}
           tabIndex={0}
         >
           {children}
@@ -60,10 +68,10 @@ export function ManualOrAPI(
   { current, version }: { current: keyof typeof entries; version: string },
 ) {
   return (
-    <div class="border-b border-light-border flex gap-1">
+    <div class={tw`border-b border-light-border flex gap-1`}>
       {(["Manual", "Runtime APIs"] as const).map((key) => (
         <a
-          class="-mb-px px-2.5 font-medium leading-none rounded-md hover:(bg-gray-100 text-main)"
+          class={tw`-mb-px px-2.5 font-medium leading-none rounded-md hover:(bg-gray-100 text-main)`}
           href={`${entries[key]}@${version}`}
         >
           <div
