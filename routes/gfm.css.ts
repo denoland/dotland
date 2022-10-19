@@ -1,3 +1,5 @@
+// Copyright 2022 the Deno authors. All rights reserved. MIT license.
+
 import { CSS } from "$gfm";
 import { Handlers } from "$fresh/server.ts";
 
