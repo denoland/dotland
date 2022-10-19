@@ -1,6 +1,9 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-import { tw } from "twind";
+/** @jsx h */
+import { h } from "preact";
+
+import { tw } from "@twind";
 import { escape as htmlEscape } from "$he";
 import { normalizeTokens, Prism } from "@/util/prism_utils.ts";
 import { extractLinkUrl } from "@/util/registry_utils.ts";
@@ -87,10 +90,10 @@ export function RawCodeBlock({
             <div className={codeDivClasses}>$</div>
           </code>
         )}
-      <div className="block w-full overflow-y-auto">
+      <div className={tw`block w-full overflow-y-auto`}>
         {tokens.map((line, i) => {
           return (
-            <span id={"L" + (i + 1)} className="block">
+            <span id={"L" + (i + 1)} className={tw`block`}>
               {line.map((token) => {
                 if (token.empty) {
                   return <br />;
@@ -110,7 +113,7 @@ export function RawCodeBlock({
                       >
                         {quote}
                         <a
-                          className="hover:underline"
+                          className={tw`hover:underline`}
                           href={href + "?source"}
                         >
                           {specifier}

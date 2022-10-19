@@ -4,12 +4,9 @@ import { assertEquals } from "$std/testing/asserts.ts";
 import { ServerContext } from "$fresh/server.ts";
 
 import manifest from "@/fresh.gen.ts";
-import twindPlugin from "$fresh/plugins/twind.ts";
-import twindConfig from "../twind.config.ts";
+import options from "@/options.ts";
 
-const serverCtx = await ServerContext.fromManifest(manifest, {
-  plugins: [twindPlugin(twindConfig)],
-});
+const serverCtx = await ServerContext.fromManifest(manifest, options);
 const handler = serverCtx.handler();
 const handleRequest = (req: Request) =>
   handler(req, {
