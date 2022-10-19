@@ -1,6 +1,8 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-import { type ComponentChildren } from "preact";
+/** @jsx h */
+/** @jsxFrag Fragment */
+import { type ComponentChildren, Fragment, h } from "preact";
 import algoliasearch from "$algolia";
 import type {
   MultipleQueriesQuery,
@@ -8,8 +10,7 @@ import type {
 } from "$algolia/client-search";
 import { createFetchRequester } from "$algolia/requester-fetch";
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { tw } from "twind";
-import { css } from "twind/css";
+import { css, tw } from "@twind";
 import { useEffect, useRef, useState } from "preact/hooks";
 import * as Icons from "@/components/Icons.tsx";
 import { colors, docNodeKindMap } from "@/components/symbol_kind.tsx";
@@ -248,16 +249,18 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
   return (
     <>
       <button
-        class="pl-4 w-80 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light hover:bg-light-border disabled:invisible"
+        class={tw`pl-4 w-80 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light hover:bg-light-border disabled:invisible`}
         onClick={() => setShowModal(true)}
         disabled={!IS_BROWSER}
       >
-        <div class="flex items-center pointer-events-none">
+        <div class={tw`flex items-center pointer-events-none`}>
           <Icons.MagnifyingGlass />
-          <div class="ml-1.5 py-2.5 h-9 flex-auto text-light text-sm leading-4 font-medium text-left">
+          <div
+            class={tw`ml-1.5 py-2.5 h-9 flex-auto text-light text-sm leading-4 font-medium text-left`}
+          >
             Search...
           </div>
-          <div class="mx-4">
+          <div class={tw`mx-4`}>
             ⌘K
           </div>
         </div>
@@ -265,17 +268,17 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
 
       {IS_BROWSER && (
         <dialog
-          class="bg-[#00000033] inset-0 fixed z-10 p-0 m-0 w-full h-screen"
+          class={tw`bg-[#00000033] inset-0 fixed z-10 p-0 m-0 w-full h-screen`}
           ref={dialog}
           onClick={() => setShowModal(false)}
           open={showModal}
         >
           <div
-            class="bg-white w-full h-screen flex flex-col overflow-hidden lg:(mt-24 mx-auto rounded-md w-2/3 max-h-[80vh] border border-[#E8E7E5])"
+            class={tw`bg-white w-full h-screen flex flex-col overflow-hidden lg:(mt-24 mx-auto rounded-md w-2/3 max-h-[80vh] border border-[#E8E7E5])`}
             onClick={(e) => e.stopPropagation()}
           >
-            <div class="pt-6 px-6 border-b border-[#E8E7E5]">
-              <div class="flex">
+            <div class={tw`pt-6 px-6 border-b border-[#E8E7E5]`}>
+              <div class={tw`flex`}>
                 <label
                   class={tw`px-4 h-10 w-full flex-shrink-1 bg-[#F3F3F3] rounded-md flex items-center text-light focus-within:${
                     css({
@@ -286,7 +289,7 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
                   <Icons.MagnifyingGlass />
                   <input
                     id="search-input"
-                    class="ml-1.5 py-3 leading-4 bg-transparent w-full text-main placeholder:text-gray-400 outline-none"
+                    class={tw`ml-1.5 py-3 leading-4 bg-transparent w-full text-main placeholder:text-gray-400 outline-none`}
                     type="text"
                     onInput={(e) => setInput(e.currentTarget.value)}
                     value={input}
@@ -297,14 +300,14 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
                 </label>
 
                 <button
-                  class="lg:hidden ml-3 -mr-2 flex items-center"
+                  class={tw`lg:hidden ml-3 -mr-2 flex items-center`}
                   onClick={() => setShowModal(false)}
                 >
                   <Icons.Cross />
                 </button>
               </div>
 
-              <div class="flex gap-3 mt-2">
+              <div class={tw`flex gap-3 mt-2`}>
                 {kinds.map((k) => (
                   <button
                     class={tw`px-2 rounded-md leading-relaxed hover:(bg-gray-100 text-main) ${
@@ -327,14 +330,14 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
               </div>
             </div>
 
-            <div class="overflow-y-auto flex-grow-1">
+            <div class={tw`overflow-y-auto flex-grow-1`}>
               {results
                 ? (
                   <>
                     {results.manual && (
                       <Section title="Manual" isAll={kind === "All"}>
                         {results.manual && results.manual.hits.length === 0 && (
-                          <div class="text-gray-500 italic">
+                          <div class={tw`text-gray-500 italic`}>
                             Your search did not yield any results in the manual.
                           </div>
                         )}
@@ -351,7 +354,7 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
                       <Section title="Modules" isAll={kind === "All"}>
                         {results.modules && results.modules.hits.length === 0 &&
                           (
-                            <div class="text-gray-500 italic">
+                            <div class={tw`text-gray-500 italic`}>
                               Your search did not yield any results in the
                               modules index.
                             </div>
@@ -369,7 +372,7 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
                       <Section title="Symbols" isAll={kind === "All"}>
                         {results.symbols && results.symbols.hits.length === 0 &&
                           (
-                            <div class="text-gray-500 italic">
+                            <div class={tw`text-gray-500 italic`}>
                               Your search did not yield any results in the
                               symbol index.
                             </div>
@@ -389,7 +392,9 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
                   </>
                 )
                 : (
-                  <div class="w-full h-full flex justify-center items-center gap-1.5 text-gray-400">
+                  <div
+                    class={tw`w-full h-full flex justify-center items-center gap-1.5 text-gray-400`}
+                  >
                     <Icons.Spinner />
                     <span>Searching...</span>
                   </div>
@@ -397,21 +402,23 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
             </div>
 
             {kind !== "All" && results && (
-              <div class="bg-ultralight border-t border-[#E8E7E5] py-3 px-6 flex items-center justify-between">
-                <div class="py-2 flex items-center space-x-3">
+              <div
+                class={tw`bg-ultralight border-t border-[#E8E7E5] py-3 px-6 flex items-center justify-between`}
+              >
+                <div class={tw`py-2 flex items-center space-x-3`}>
                   <button
-                    class="p-1 border border-border rounded-md not-disabled:hover:bg-light-border disabled:(text-[#D2D2DC] cursor-not-allowed)"
+                    class={tw`p-1 border border-border rounded-md not-disabled:hover:bg-light-border disabled:(text-[#D2D2DC] cursor-not-allowed)`}
                     onClick={() => setPage((page) => page - 1)}
                     disabled={page === 0}
                   >
                     <Icons.ChevronLeft />
                   </button>
-                  <span class="text-gray-400">
-                    Page <span class="font-medium">{page + 1}</span> of{" "}
-                    <span class="font-medium">{totalPages}</span>
+                  <span class={tw`text-gray-400`}>
+                    Page <span class={tw`font-medium`}>{page + 1}</span> of{" "}
+                    <span class={tw`font-medium`}>{totalPages}</span>
                   </span>
                   <button
-                    class="p-1 border border-border rounded-md not-disabled:hover:bg-light-border disabled:(text-[#D2D2DC] cursor-not-allowed)"
+                    class={tw`p-1 border border-border rounded-md not-disabled:hover:bg-light-border disabled:(text-[#D2D2DC] cursor-not-allowed)`}
                     onClick={() => setPage((page) => page + 1)}
                     disabled={(page + 1) === totalPages}
                   >
@@ -421,16 +428,16 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
 
                 {kind === "Symbols" &&
                   (
-                    <div class="space-x-3">
+                    <div class={tw`space-x-3`}>
                       {(Object.keys(
                         symbolKinds,
                       ) as (keyof typeof symbolKinds)[])
                         .map(
                           (symbolKind) => (
-                            <label class="whitespace-nowrap inline-block">
+                            <label class={tw`whitespace-nowrap inline-block`}>
                               <input
                                 type="checkbox"
-                                class="mr-1 not-checked:siblings:text-[#6C6E78]"
+                                class={tw`mr-1 not-checked:siblings:text-[#6C6E78]`}
                                 onChange={() => {
                                   setSymbolKindsToggle((prev) => {
                                     return {
@@ -441,7 +448,7 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
                                 }}
                                 checked={symbolKindsToggle[symbolKind]}
                               />
-                              <span class="text-sm leading-none">
+                              <span class={tw`text-sm leading-none`}>
                                 {symbolKind}
                               </span>
                             </label>
@@ -468,13 +475,17 @@ function Section({
   children: ComponentChildren;
 }) {
   return (
-    <div class="pt-3">
+    <div class={tw`pt-3`}>
       {isAll && (
-        <div class="mx-6 my-1 text-gray-400 text-sm leading-6 font-semibold">
+        <div
+          class={tw`mx-6 my-1 text-gray-400 text-sm leading-6 font-semibold`}
+        >
           {title}
         </div>
       )}
-      <div class="children:(flex items-center gap-4 px-6 py-1.5 hover:bg-ultralight even:(bg-ultralight hover:bg-light-border))">
+      <div
+        class={tw`children:(flex items-center gap-4 px-6 py-1.5 hover:bg-ultralight even:(bg-ultralight hover:bg-light-border))`}
+      >
         {children}
       </div>
     </div>
@@ -497,12 +508,14 @@ function ManualResult(
       onClick={() =>
         islandSearchClick(MANUAL_INDEX, queryID, objectID, position)}
     >
-      <div class="p-1.5 rounded-full bg-gray-200">
+      <div class={tw`p-1.5 rounded-full bg-gray-200`}>
         <Icons.Docs />
       </div>
       <div>
         <ManualResultTitle title={title} />
-        <div class="text-sm text-[#6C6E78] max-h-10 overflow-ellipsis overflow-hidden">
+        <div
+          class={tw`text-sm text-[#6C6E78] max-h-10 overflow-ellipsis overflow-hidden`}
+        >
           {content}
         </div>
       </div>
@@ -521,7 +534,7 @@ function ManualResultTitle(props: { title: string[] }) {
     );
     if (!isLast) parts.push(<span key={i + "separator"}>{" > "}</span>);
   }
-  return <div class="space-x-1">{parts}</div>;
+  return <div class={tw`space-x-1`}>{parts}</div>;
 }
 
 /** Given a symbol item, return an href that will link to that symbol. */
@@ -546,7 +559,7 @@ function Source(
 ) {
   if (sourceId.startsWith("lib/")) {
     return (
-      <span class="italic text-sm text-gray-400 leading-6">
+      <span class={tw`italic text-sm text-gray-400 leading-6`}>
         built-in to Deno
       </span>
     );
@@ -554,7 +567,7 @@ function Source(
     const mod = sourceId.slice(4);
     return (
       <span>
-        <span class="italic text-sm text-gray-400 leading-6">
+        <span class={tw`italic text-sm text-gray-400 leading-6`}>
           from
         </span>{" "}
         {mod}@{version}
@@ -605,19 +618,22 @@ function SymbolResult(
         islandSearchClick(SYMBOL_INDEX, queryID, item.objectID, position)}
     >
       <KindIcon />
-      <div class="w-full">
-        <div class="flex flex-col py-1 md:(flex-row items-center justify-between gap-2)">
-          <div class="space-x-2">
+      <div class={tw`w-full`}>
+        <div
+          class={tw`flex flex-col py-1 md:(flex-row items-center justify-between gap-2)`}
+        >
+          <div class={tw`space-x-2`}>
             <span class={tw`text-[${colors[item.kind][0]}]`}>
               {item.kind.replace("A", " a")}
             </span>
-            <span class="font-semibold">{item.name}</span>
+            <span class={tw`font-semibold`}>{item.name}</span>
             <Source>{item}</Source>
           </div>
-          {tagItems && tagItems.length && <div class="mr-3">{tagItems}</div>}
+          {tagItems && tagItems.length && <div class={tw`mr-3`}>{tagItems}
+          </div>}
         </div>
         {item.doc && (
-          <div class="text-sm text-[#6C6E78]">
+          <div class={tw`text-sm text-[#6C6E78]`}>
             {item.doc.split("\n\n")[0]}
           </div>
         )}
@@ -639,12 +655,14 @@ function ModuleResult(
       onClick={() =>
         islandSearchClick(MODULE_INDEX, queryID, module.objectID, position)}
     >
-      <div class="p-1.5 rounded-full bg-gray-200">
+      <div class={tw`p-1.5 rounded-full bg-gray-200`}>
         <Icons.Module />
       </div>
       <div>
-        <div class="font-semibold">{module.name}</div>
-        <div class="text-sm text-[#6C6E78] max-h-10 overflow-ellipsis overflow-hidden">
+        <div class={tw`font-semibold`}>{module.name}</div>
+        <div
+          class={tw`text-sm text-[#6C6E78] max-h-10 overflow-ellipsis overflow-hidden`}
+        >
           {module.description}
         </div>
       </div>
