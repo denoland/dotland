@@ -65,7 +65,7 @@ Deno.test({
     const json = await res.json();
     assertEquals(json.kind, "markdown");
     assert(json.value.startsWith("**oak**\n\n"));
-    assertStringIncludes(json.value, "[code](https://deno.land/x/oak)");
+    assertStringIncludes(json.value, "[docs](https://deno.land/x/oak)");
   },
 });
 
@@ -105,7 +105,7 @@ Deno.test({
     const json = await res.json();
     assertEquals(json.kind, "markdown");
     assert(json.value.startsWith("**oak @ v10.0.0**\n\n"));
-    assertStringIncludes(json.value, "[code](https://deno.land/x/oak@v10.0.0)");
+    assertStringIncludes(json.value, "[docs](https://deno.land/x/oak@v10.0.0)");
   },
 });
 
