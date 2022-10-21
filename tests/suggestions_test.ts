@@ -147,7 +147,7 @@ Deno.test({
     const json = await res.json();
     assertEquals(
       json.value,
-      "[docs](https://doc.deno.land/https://deno.land/x/oak@v10.0.0/mod.ts) | [code](https://deno.land/x/oak@v10.0.0/mod.ts) | size: 2.21 kB\n",
+      "[docs](https://deno.land/x/oak@v10.0.0/mod.ts) | [code](https://deno.land/x/oak@v10.0.0/mod.ts?source) | size: 2.21 kB\n",
     );
   },
 });
@@ -160,8 +160,9 @@ Deno.test({
     );
     assertEquals(res.status, 200);
     const json = await res.json();
+    console.log(json.value);
     assert(json.value.startsWith(
-      "**Deno `std` library @ 0.119.0**\n\nA collection of modules to assist with common tasks in Deno.\n\n[code](https://deno.land/std@0.119.0) | published: ",
+      "**Deno `std` library @ 0.119.0**\n\nA collection of modules to assist with common tasks in Deno.\n\n[docs](https://deno.land/std@0.119.0) | published: ",
     ));
   },
 });
