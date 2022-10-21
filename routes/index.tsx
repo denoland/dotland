@@ -39,7 +39,7 @@ export default function Home({ data }: PageProps<Data>) {
 
         <div class={tw`colorWash px-36 py-20`}>
           <div class={tw`w-136 text-white space-y-6`}>
-            <p>Meet Deno</p>
+            <p class={tw`font-semibold text-3xl leading-none`}>Meet Deno</p>
             <p class={tw`font-semibold text-[5rem] leading-none`}>
               The easiest, fastest, and most secure JavaScript runtime.
             </p>
