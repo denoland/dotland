@@ -160,7 +160,6 @@ Deno.test({
     );
     assertEquals(res.status, 200);
     const json = await res.json();
-    console.log(json.value);
     assert(json.value.startsWith(
       "**Deno `std` library @ 0.119.0**\n\nA collection of modules to assist with common tasks in Deno.\n\n[docs](https://deno.land/std@0.119.0) | published: ",
     ));
@@ -177,7 +176,7 @@ Deno.test({
     const json = await res.json();
     assertEquals(
       json.value,
-      "**testing**\n\nUtilities for making testing easier and consistent in Deno\n\n[code](https://deno.land/std@0.119.0/testing) | size: 110 kB",
+      "**testing**\n\nUtilities for making testing easier and consistent in Deno\n\n[docs](https://deno.land/std@0.119.0/testing) | size: 110 kB",
     );
   },
 });
