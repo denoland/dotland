@@ -1,46 +1,24 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
+import { h } from "preact";
 import { tw } from "@twind";
-import { CodeBlock } from "@/components/CodeBlock.tsx";
 import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Footer } from "@/components/Footer.tsx";
-import { InlineCode } from "@/components/InlineCode.tsx";
 import { Header } from "@/components/Header.tsx";
 import HelloBar from "@/islands/HelloBar.tsx";
-import { Background } from "@/components/HeroBackground.tsx";
 import { Handlers, PageProps } from "$fresh/server.ts";
 
-import versions from "@/versions.json" assert { type: "json" };
 import { getCookies } from "https://deno.land/std@0.143.0/http/cookie.ts";
 
 interface Data {
-  isFirefox: boolean;
   hellobarClosedTo: string;
 }
 
-export default function Home({ data, url }: PageProps<Data>) {
-  const complexExampleProgram = `import { serve } from "https://deno.land/std@${
-    versions.std[0]
-  }/http/server.ts";
-serve(req => new Response("Hello World\\n"));`;
-
-  const denoTestExample = `deno test https://deno.land/std@${
-    versions.std[0]
-  }/testing/chai_example.ts
-running 3 tests from https://deno.land/std@${
-    versions.std[0]
-  }/testing/chai_example.ts
-test we can make chai assertions ... ok (8ms)
-test we can make chai expectations ... ok (2ms)
-test we can use chai should style ... ok (4ms)
-
-test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms)`;
-
+export default function Home({ data }: PageProps<Data>) {
   const hellobarTo =
     "https://deno.news/archive/52-deno-126-isolate-clouds-and-the-edge";
+
   return (
     <div>
       <ContentMeta
@@ -56,431 +34,279 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
             Check out Deno News issue #52!
           </HelloBar>
         )}
-      <div class={tw`bg-white`}>
-        <div
-          class={tw`bg-gray-50 overflow-x-hidden border-b border-gray-200 relative`}
-        >
-          {!data.isFirefox && <Background />}
-          <Header main />
-          <div
-            class={tw`relative section-x-inset-sm pt-12 pb-20 flex flex-col items-center`}
-          >
-            <h1
-              class={tw`font-extrabold text-5xl leading-10 tracking-tight text-gray-900`}
-            >
-              Deno
-            </h1>
-            <h2
-              class={tw`mt-4 sm:mt-5 font-light text-2xl text-center leading-tight text-gray-900`}
-            >
-              A <strong class={tw`font-semibold`}>modern</strong> runtime for
-              {" "}
-              <strong class={tw`font-semibold`}>JavaScript</strong> and{" "}
-              <strong class={tw`font-semibold`}>TypeScript</strong>
-            </h2>
-            <a
-              href="/#installation"
-              class={tw`rounded-full mt-8 px-8 py-2 transition-colors duration-75 ease-in-out bg-blue-500 hover:bg-blue-400 text-white text-lg shadow-lg`}
-            >
-              Install
-            </a>
-            <a
-              href="https://github.com/denoland/deno/releases/latest"
-              class={tw`mt-4`}
-            >
-              {versions.cli[0]}
-            </a>
+      <div>
+        <Header />
+
+        <div class={tw`colorWash px-36 py-20`}>
+          <div class={tw`w-136 text-white space-y-6`}>
+            <p>Meet Deno</p>
+            <p class={tw`font-semibold text-[5rem] leading-none`}>
+              The easiest, fastest, and most secure JavaScript runtime.
+            </p>
+            <div class={tw`space-x-7`}>
+              <a class={tw`button-primary`} href="">Installation</a>
+              <a class={tw`button-primary`} href="">Documentation</a>
+            </div>
           </div>
         </div>
-        <div class={tw`section-x-inset-sm mt-20`}>
-          <p class={tw`my-4 text-gray-700`}>
-            Deno is a simple, modern and secure runtime for JavaScript,
-            TypeScript, and WebAssembly that uses V8 and is built in Rust.
-          </p>
-          <ol class={tw`ml-8 list-disc text-gray-700`}>
-            <li>
-              Provides{" "}
-              <a class={tw`link`} href="/manual/runtime/web_platform_apis">
-                web platform functionality
-              </a>{" "}
-              and adopts web platform standards.
-            </li>
-            <li>
-              Secure by default. No file, network, or environment access, unless
-              explicitly enabled.
-            </li>
-            <li>
-              Supports{" "}
-              <a class={tw`link`} href="/manual/typescript">TypeScript</a>{" "}
-              out of the box.
-            </li>
-            <li>Ships only a single executable file.</li>
-            <li>
-              Has{" "}
-              <a class={tw`link`} href="/manual/tools">
-                built-in development tooling
-              </a>{" "}
-              like a dependency inspector (
-              <a class={tw`link`} href="/manual/tools/dependency_inspector">
-                <InlineCode>deno info</InlineCode>
-              </a>
-              ) and a code formatter (
-              <a class={tw`link`} href="/manual/tools/formatter">
-                <InlineCode>deno fmt</InlineCode>
-              </a>
-              ).
-            </li>
-            <li>
-              Has a set of reviewed (audited) standard modules that are
-              guaranteed to work with Deno:{" "}
-              <a
-                href="https://doc.deno.land/https://deno.land/std"
-                class={tw`link`}
-              >
-                deno.land/std
-              </a>.
-            </li>
-            <li>
-              Has a number of{" "}
-              <a
-                href="https://github.com/denoland/deno/wiki#companies-interested-in-deno"
-                class={tw`link`}
-              >
-                companies interested in using and exploring Deno.
-              </a>
-            </li>
-          </ol>
+
+        <div
+          class={tw`py-4 bg-mainBlue text-3xl text-white text-center font-semibold`}
+        >
+          NPM compatibility Announcement
         </div>
-        <div class={tw`section-x-inset-sm mt-20`}>
-          <a class={tw`hover:underline`} href="#installation">
-            <h3 class={tw`font-bold text-xl`} id="installation">
-              Installation
-            </h3>
-          </a>
-          <InstallSection url={url} />
+
+        <div class={tw`section-x-inset-xl pt-28 pb-24`}>
+          <h2 class={tw`text-center font-bold text-7xl text-darkBlue`}>
+            The best developer experience
+          </h2>
+          <p class={tw`text-center font-semibold text-2xl text-normalBlue`}>
+            Without the learning curve…
+          </p>
+
+          <div class={tw`mt-28 space-y-32`}>
+            <div class={tw`flex items-center justify-between gap-16`}>
+              <div class={tw`w-72 space-y-3 flex-none`}>
+                <h3 class={tw`font-bold text-4xl text-darkBlue`}>
+                  Avoid installing dependencies
+                </h3>
+                <p class={tw`text-2xl text-normalBlue`}>
+                  Dive right into the code and skip the setup.
+                </p>
+              </div>
+              <div class={tw`featurePad`}>
+                <img
+                  class={tw`w-full`}
+                  src="/images/Dependencies_Placeholder.png"
+                  alt="Dependencies"
+                />
+              </div>
+            </div>
+
+            <div class={tw`flex items-center justify-between gap-16`}>
+              <div class={tw`featurePad`}>
+                <img
+                  class={tw`w-full`}
+                  src="/images/Chart_Placeholder.png"
+                  alt="Web APIs"
+                />
+              </div>
+              <div class={tw`w-72 space-y-3 flex-none`}>
+                <h3 class={tw`font-bold text-4xl text-darkBlue`}>
+                  Web-standard APIs
+                </h3>
+                <p class={tw`text-2xl text-normalBlue`}>
+                  A runtime that resembles the web, using browser APIs that work
+                  on the server.
+                </p>
+              </div>
+            </div>
+
+            <div class={tw`flex items-center justify-between gap-22`}>
+              <div class={tw`space-y-5`}>
+                <h3 class={tw`font-bold text-4xl text-darkBlue`}>
+                  TypeScript out of the box
+                </h3>
+                <p class={tw`text-2xl text-normalBlue`}>
+                  First-class support for TypeScript – no need to spend hours
+                  configuring things that break as soon as you update a
+                  dependency.
+                </p>
+              </div>
+              <div class={tw`space-y-5`}>
+                <h3 class={tw`font-bold text-4xl text-darkBlue`}>
+                  Great all-in-one tooling
+                </h3>
+                <p class={tw`text-2xl text-normalBlue`}>
+                  Built in linter, code formatter, ability to build a
+                  self-contained executable, test runner, IDE integration, and
+                  more.
+                </p>
+              </div>
+              <div class={tw`space-y-5`}>
+                <h3 class={tw`font-bold text-4xl text-darkBlue`}>
+                  Hassle-free deployment
+                </h3>
+                <p class={tw`text-2xl text-normalBlue`}>
+                  Launch to Deno Deploy with one line of code and zero server
+                  configuration, or host with other platforms of your choice.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class={tw`section-x-inset-sm mt-20`}>
-          <a class={tw`hover:underline`} href="#getting-started">
-            <h3 class={tw`font-bold text-xl`} id="getting-started">
-              Getting Started
-            </h3>
-          </a>
-          <p class={tw`my-4 text-gray-700`}>Try running a simple program:</p>
-          <CodeBlock
-            code={`deno run https://deno.land/std@${
-              versions.std[0]
-            }/examples/welcome.ts`}
-            language="bash"
-            url={url}
-          />
-          <p class={tw`my-4 text-gray-700`}>Or a more complex one:</p>
+
+        <div class={tw`pt-28 pb-24 colorWash`}>
+          <div class={tw`section-x-inset-lg space-y-11`}>
+            <p class={tw`text-white font-semibold text-6xl text-center`}>
+              “I love working with Deno because it’s the best CLI on Earth and
+              the best thing since sliced bread.”
+            </p>
+            <p class={tw`text-white text-2xl text-center`}>
+              Firstname Lastname, Title Company
+            </p>
+          </div>
         </div>
-        <div class={tw`section-x-inset-sm`}>
-          <CodeBlock
-            code={complexExampleProgram}
-            language="typescript"
-            disablePrefixes
-            url={url}
-          />
+
+        <div class={tw`section-x-inset-xl pt-28 pb-24`}>
+          <h2 class={tw`text-center font-bold text-7xl text-darkBlue`}>
+            Built to perform at your speed.
+          </h2>
+          <p class={tw`text-center font-semibold text-2xl text-normalBlue`}>
+            Designed from the ground-up for high-performance.
+          </p>
+
+          <div class={tw`mt-28 space-y-32`}>
+            <div class={tw`flex items-center justify-between gap-16`}>
+              <div class={tw`w-72 space-y-3 flex-none`}>
+                <h3 class={tw`font-bold text-4xl text-darkBlue`}>
+                  Best in class HTTP server speeds
+                </h3>
+                <p class={tw`text-2xl text-normalBlue`}>
+                  The fastest JavaScript web server ever built.
+                </p>
+              </div>
+              <div class={tw`featurePad`}>
+                <img
+                  class={tw`w-full`}
+                  src="/images/benchmark.png"
+                  alt="HTTP Benchmark"
+                />
+              </div>
+            </div>
+
+            <div class={tw`flex items-center justify-between gap-16`}>
+              <div class={tw`featurePad`}>
+              </div>
+              <div class={tw`w-72 space-y-3 flex-none`}>
+                <h3 class={tw`font-bold text-4xl text-darkBlue`}>
+                  Powered by Chrome's V8
+                </h3>
+                <p class={tw`text-2xl text-normalBlue`}>
+                  Built on top of the fastest and most complete JavaScript
+                  engine.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class={tw`section-x-inset-sm`}>
-          <p class={tw`my-4 text-gray-700`}>
-            You can find a more in depth introduction, examples, and environment
-            setup guides in{" "}
-            <a class={tw`link`} href="/manual">
-              the manual
-            </a>
-            .
-          </p>
+
+        <div class={tw`pt-28 pb-24 colorWash`}>
+          <div class={tw`section-x-inset-lg space-y-11`}>
+            <p class={tw`text-white font-semibold text-6xl text-center`}>
+              “I love working with Deno because it’s the best CLI on Earth and
+              the best thing since sliced bread.”
+            </p>
+            <p class={tw`text-white text-2xl text-center`}>
+              Firstname Lastname, Title Company
+            </p>
+          </div>
         </div>
-        <div class={tw`section-x-inset-sm mt-20`}>
-          <a class={tw`hover:underline`} href="#runtime-documentation">
-            <h3 class={tw`font-bold text-xl`} id="runtime-documentation">
-              Runtime Documentation
-            </h3>
-          </a>
-          <p class={tw`my-4 text-gray-700`}>
-            The basic runtime documentation for Deno can be found on{" "}
-            <a href="https://doc.deno.land/deno/stable" class={tw`link`}>
-              doc.deno.land
-            </a>
-            .
+
+        <div class={tw`section-x-inset-xl pt-28 pb-24`}>
+          <h2 class={tw`text-center font-bold text-7xl text-darkBlue`}>
+            Secure by default.
+          </h2>
+          <p class={tw`text-center font-semibold text-2xl text-normalBlue`}>
+            Take total control over your workflow.
           </p>
-          <p class={tw`my-4 text-gray-700`}>
-            Deno comes with{" "}
-            <a class={tw`link`} href="/manual">
-              a manual
-            </a>{" "}
-            which contains more in depth explanations about the more complex
-            functions of the runtime, an introduction to the concepts that Deno
-            is built on, details about the internals of Deno, how to embed Deno
-            in your own application and how to extend Deno using Rust plugins.
-          </p>
-          <p class={tw`my-4 text-gray-700`}>
-            The manual also contains information about the built in tools that
-            Deno provides.
-          </p>
+
+          <div class={tw`mt-28 space-y-32`}>
+            <div class={tw`flex items-center justify-between gap-16`}>
+              <div class={tw`w-72 space-y-3 flex-none`}>
+                <h3 class={tw`font-bold text-4xl text-darkBlue`}>
+                  Run untrusted code
+                </h3>
+                <p class={tw`text-2xl text-normalBlue`}>
+                  By default Deno provides no I/O access and is appropriate for
+                  running untrusted code and auditing new third-party code.
+                </p>
+              </div>
+              <div class={tw`featurePad`}></div>
+            </div>
+
+            <div class={tw`flex items-center justify-between gap-22`}>
+              <div class={tw`space-y-5`}>
+                <h3 class={tw`font-bold text-4xl text-darkBlue`}>
+                  Fine grained permission checks
+                </h3>
+                <p class={tw`text-2xl text-normalBlue`}>
+                  Provide an allow-list to access only certain file system
+                  directories, network hosts, and environment variables.
+                </p>
+              </div>
+              <div class={tw`space-y-5`}>
+                <h3 class={tw`font-bold text-4xl text-darkBlue`}>
+                  Safer NPM packages
+                </h3>
+                <p class={tw`text-2xl text-normalBlue`}>
+                  Install and run npm packages without having to audit them
+                  first.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class={tw`section-x-inset-sm mt-20`}>
-          <a class={tw`hover:underline`} href="#standard-modules">
-            <h3 class={tw`font-bold text-xl`} id="standard-modules">
-              Standard Modules
-            </h3>
-          </a>
-          <p class={tw`my-4 text-gray-700`}>
-            Next to the Deno runtime, Deno also provides a list of audited
-            standard modules that are reviewed by the Deno maintainers and are
-            guaranteed to work with a specific Deno version. These live in the
-            {" "}
-            <a href="https://github.com/denoland/deno_std" class={tw`link`}>
-              denoland/deno_std
-            </a>{" "}
-            repository.
-          </p>
-          <p class={tw`my-4 text-gray-700`}>
-            These standard modules are hosted at{" "}
-            <a class={tw`link`} href="/std">
-              deno.land/std
-            </a>{" "}
-            and are distributed via URLs like all other ES modules that are
-            compatible with Deno.
-          </p>
+
+        <div class={tw`pt-28 pb-24 colorWash`}>
+          <div class={tw`section-x-inset-2xl space-y-11`}>
+            <p class={tw`text-white font-semibold text-3xl text-center`}>
+              Used by a large community of developers<br />and leading
+              technology companies:
+            </p>
+            <p class={tw`text-white font-bold text-7xl text-center`}>
+              Over 300k Monthly Actives
+            </p>
+            <ul class={tw`flex justify-center gap-18`}>
+              {companies.map((company) => (
+                <li key={company.url}>
+                  <a
+                    class={tw`flex items-center gap-2 flex-nowrap opacity-70 hover:opacity-100`}
+                    href={company.url}
+                    target="_blank"
+                  >
+                    <img
+                      class={tw`w-11`}
+                      src={`https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/${company.logo}`}
+                      alt={company.name}
+                      title={company.name}
+                    />{" "}
+                    <span class={tw`font-medium text-4xl`}>{company.name}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-        <div class={tw`section-x-inset-sm mt-20`}>
-          <a class={tw`hover:underline`} href="#toolchain">
-            <h3 class={tw`font-bold text-xl`} id="toolchain">
-              Built-in Toolchain
-            </h3>
-          </a>
-          <p class={tw`my-4 text-gray-700`}>
-            Deno comes with a robust{" "}
-            <a class={tw`link`} href="/manual/tools">
-              set of tools
-            </a>
-            , so you can spend less time searching and evaluating third party
-            modules, and more time writing code and being productive. Here are a
-            few examples.
-          </p>
-          <p class={tw`my-4 text-gray-700`}>
-            <a class={tw`link`} href="/manual/tools/linter">
-              Lint
-            </a>{" "}
-            all JS/TS files in the current directory and subdirectories:
-          </p>
-          <p>
-            <CodeBlock
-              code={"deno lint\nChecked 54 files"}
-              language="bash"
-              url={url}
-            />
-          </p>
-          <p class={tw`my-4 text-gray-700`}>
-            <a class={tw`link`} href="/manual/tools/formatter">
-              Format
-            </a>{" "}
-            all supported files in the current directory and subdirectories:
-          </p>
-          <p>
-            <CodeBlock
-              code={"deno fmt\nChecked 46 files"}
-              language="bash"
-              url={url}
-            />
-          </p>
-          <p class={tw`my-4 text-gray-700`}>
-            Run a{" "}
-            <a class={tw`link`} href="/manual/testing">
-              test
-            </a>
-            :
-          </p>
-          <p>
-            <CodeBlock code={denoTestExample} language="bash" url={url} />
-          </p>
-          <p class={tw`my-4 text-gray-700`}>
-            For the full list of tools and their options, see{" "}
-            <a href="/manual/tools" class={tw`link`}>
-              here
-            </a>
-            .
-          </p>
-        </div>
-        <div class={tw`section-x-inset-sm mt-20`}>
-          <a class={tw`hover:underline`} href="#examples">
-            <h3 class={tw`font-bold text-xl`} id="examples">
-              Examples
-            </h3>
-          </a>
-          <p class={tw`my-4 text-gray-700`}>
-            Here are some examples that you can use to get started immediately.
-          </p>
-          <ol class={tw`ml-8 list-disc text-gray-700`}>
-            <li>
-              <a href="https://examples.deno.land/hello-world" class={tw`link`}>
-                Hello World
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://examples.deno.land/import-export"
-                class={tw`link`}
-              >
-                Importing & Exporting
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://examples.deno.land/dependency-management"
-                class={tw`link`}
-              >
-                Dependency Management
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://examples.deno.land/http-requests"
-                class={tw`link`}
-              >
-                HTTP Requests
-              </a>
-            </li>
-            <li>
-              <a href="https://examples.deno.land/http-server" class={tw`link`}>
-                HTTP Server: Hello World
-              </a>
-            </li>
-          </ol>
-          <p class={tw`my-4 text-gray-700`}>
-            For more examples, check out{" "}
-            <a class={tw`link`} href="https://examples.deno.land">
-              examples.deno.land
-            </a>
-            .
-          </p>
-        </div>
-        <DenoInProductionSection />
-        <div class={tw`mt-20`}>
-          <Footer />
-        </div>
+
+        <Footer />
       </div>
     </div>
   );
 }
 
-function DenoInProductionSection() {
-  const companies = [{
-    name: "Slack",
-    logo: "slack.svg",
-    url: "https://slack.com",
-  }, {
-    name: "Netlify",
-    logo: "netlify.svg",
-    url: "https://netlify.com",
-  }, {
-    name: "GitHub",
-    logo: "github.svg",
-    url: "https://github.com",
-  }, {
-    name: "Supabase",
-    logo: "supabase.svg",
-    url: "https://supabase.com",
-  }];
-
-  return (
-    <div class={tw`section-x-inset-sm mt-20`}>
-      <a class={tw`hover:underline`} href="#deno-in-production">
-        <h3 class={tw`font-bold text-xl`} id="deno-in-production">
-          Deno in Production
-        </h3>
-      </a>
-      <ol class={tw`pl-1 md:pl-0 md:flex flex-wrap gap-8 mt-5 list-none`}>
-        {companies.map(({ name, logo, url }) => (
-          <li class={tw`mb-2 md:mb-0`} key={url}>
-            <a
-              class={tw`flex items-center gap-2 flex-nowrap opacity-70 hover:opacity-100`}
-              href={url}
-              target="_blank"
-            >
-              <img
-                class={tw`w-5`}
-                src={`https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/${logo}`}
-                alt={name}
-                title={name}
-              />{" "}
-              <span class={tw`font-medium text-lg`}>{name}</span>
-            </a>
-          </li>
-        ))}
-      </ol>
-    </div>
-  );
-}
-
-function InstallSection({ url }: { url: URL }) {
-  const shell = (
-    <div key="shell" class={tw`my-4 text-gray-700`}>
-      <p class={tw`py-2`}>Shell (Mac, Linux):</p>
-      <CodeBlock
-        language="bash"
-        code="curl -fsSL https://deno.land/install.sh | sh"
-        url={url}
-      />
-    </div>
-  );
-  const homebrew = (
-    <div key="homebrew" class={tw`my-4 text-gray-700`}>
-      <p class={tw`mb-2`}>
-        <a href="https://formulae.brew.sh/formula/deno" class={tw`link`}>
-          Homebrew
-        </a>{" "}
-        (Mac):
-      </p>
-      <CodeBlock language="bash" code="brew install deno" url={url} />
-    </div>
-  );
-  const powershell = (
-    <div key="powershell" class={tw`my-4 text-gray-700`}>
-      <p class={tw`mb-2`}>PowerShell (Windows):</p>
-      <CodeBlock
-        language="bash"
-        code="irm https://deno.land/install.ps1 | iex"
-        url={url}
-      />
-    </div>
-  );
-
-  return (
-    <>
-      <p class={tw`my-4 text-gray-700`}>
-        Deno ships as a single executable with no dependencies. You can install
-        it using the installers below, or download a release binary from the
-        {" "}
-        <a href="https://github.com/denoland/deno/releases" class={tw`link`}>
-          releases page
-        </a>
-        .
-      </p>
-      {shell}
-      {powershell}
-      {homebrew}
-      <p class={tw`my-4 text-gray-700`}>
-        See{" "}
-        <a class={tw`link`} href="https://github.com/denoland/deno_install">
-          deno_install
-        </a>{" "}
-        for more installation options.
-      </p>
-    </>
-  );
-}
+const companies = [{
+  name: "Slack",
+  logo: "slack.svg",
+  url: "https://slack.com",
+}, {
+  name: "Netlify",
+  logo: "netlify.svg",
+  url: "https://netlify.com",
+}, {
+  name: "GitHub",
+  logo: "github.svg",
+  url: "https://github.com",
+}, {
+  name: "Supabase",
+  logo: "supabase.svg",
+  url: "https://supabase.com",
+}];
 
 export const handler: Handlers<Data> = {
   GET(req, { render }) {
     const cookies = getCookies(req.headers);
     return render!({
-      isFirefox:
-        req.headers.get("user-agent")?.toLowerCase().includes("firefox") ??
-          false,
       hellobarClosedTo: cookies.hellobar ?? "",
     });
   },

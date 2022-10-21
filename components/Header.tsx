@@ -17,9 +17,8 @@ const entries = [
 
 type ContentTypes = (typeof entries)[number]["content"];
 
-export function Header({ selected, main, manual }: {
+export function Header({ selected, manual }: {
   selected?: ContentTypes;
-  main?: boolean;
   manual?: boolean;
 }) {
   return (
@@ -27,9 +26,7 @@ export function Header({ selected, main, manual }: {
       class={tw(
         manual
           ? "lg:border-b border-light-border"
-          : !main
-          ? "bg-primary border-b border-light-border backdrop-blur-3xl"
-          : "",
+          : "bg-primary border-b border-light-border",
       )}
     >
       <div
