@@ -38,7 +38,7 @@ export function SidePanelPage({ children, sidepanel }: {
       >
         {sidepanel && (
           <div
-            class={tw`hidden pb-2 w-full border-b border-border lg:(pb-0 border-none block w-72 flex-shrink-0)`}
+            class={tw`hidden pb-2 w-full border-b border-border lg:(pb-0 border-none block w-72 flex-shrink-0 sticky top-7 self-start)`}
           >
             <div
               class={tw`w-full space-y-5 section-x-inset-xl lg:section-x-inset-none`}
