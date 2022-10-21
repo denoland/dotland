@@ -309,10 +309,10 @@ export function toPathDocs(
       { size: 0, type: "file", path: "" };
   const { size, type } = listing;
   return type === "file"
-    ? `[docs](https://doc.deno.land/https://deno.land/x/${pkg}@${ver}/${path}) | [code](https://deno.land/x/${pkg}@${ver}/${path}) | size: ${
+    ? `[docs](https://deno.land/x/${pkg}@${ver}/${path}) | [code](https://deno.land/x/${pkg}@${ver}/${path}?source) | size: ${
       prettyBytes(size)
     }\n`
-    : `[code](https://deno.land/x/${pkg}@${ver}/${path}) | size: ${
+    : `[docs](https://deno.land/x/${pkg}@${ver}/${path}) | size: ${
       prettyBytes(size)
     }`;
 }
