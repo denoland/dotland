@@ -74,7 +74,7 @@ async function detailsXPkg(
   const body = {
     kind: "markdown",
     value:
-      `**${pkgData.name}**\n\n${pkgData.description}\n\n[code](https://deno.land/x/${pkg})${
+      `**${pkgData.name}**\n\n${pkgData.description}\n\n[docs](https://deno.land/x/${pkg})${
         pkgData.stars ? ` | stars: _${pkgData.stars}_` : ""
       }\n\n`,
   };

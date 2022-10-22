@@ -65,7 +65,7 @@ Deno.test({
     const json = await res.json();
     assertEquals(json.kind, "markdown");
     assert(json.value.startsWith("**oak**\n\n"));
-    assertStringIncludes(json.value, "[code](https://deno.land/x/oak)");
+    assertStringIncludes(json.value, "[docs](https://deno.land/x/oak)");
   },
 });
 
@@ -105,7 +105,7 @@ Deno.test({
     const json = await res.json();
     assertEquals(json.kind, "markdown");
     assert(json.value.startsWith("**oak @ v10.0.0**\n\n"));
-    assertStringIncludes(json.value, "[code](https://deno.land/x/oak@v10.0.0)");
+    assertStringIncludes(json.value, "[docs](https://deno.land/x/oak@v10.0.0)");
   },
 });
 
@@ -147,7 +147,7 @@ Deno.test({
     const json = await res.json();
     assertEquals(
       json.value,
-      "[docs](https://doc.deno.land/https://deno.land/x/oak@v10.0.0/mod.ts) | [code](https://deno.land/x/oak@v10.0.0/mod.ts) | size: 2.21 kB\n",
+      "[docs](https://deno.land/x/oak@v10.0.0/mod.ts) | [code](https://deno.land/x/oak@v10.0.0/mod.ts?source) | size: 2.21 kB\n",
     );
   },
 });
@@ -161,7 +161,7 @@ Deno.test({
     assertEquals(res.status, 200);
     const json = await res.json();
     assert(json.value.startsWith(
-      "**Deno `std` library @ 0.119.0**\n\nA collection of modules to assist with common tasks in Deno.\n\n[code](https://deno.land/std@0.119.0) | published: ",
+      "**Deno `std` library @ 0.119.0**\n\nA collection of modules to assist with common tasks in Deno.\n\n[docs](https://deno.land/std@0.119.0) | published: ",
     ));
   },
 });
@@ -176,7 +176,7 @@ Deno.test({
     const json = await res.json();
     assertEquals(
       json.value,
-      "**testing**\n\nUtilities for making testing easier and consistent in Deno\n\n[code](https://deno.land/std@0.119.0/testing) | size: 110 kB",
+      "**testing**\n\nUtilities for making testing easier and consistent in Deno\n\n[docs](https://deno.land/std@0.119.0/testing) | size: 110 kB",
     );
   },
 });

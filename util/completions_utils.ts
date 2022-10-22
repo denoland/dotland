@@ -309,10 +309,10 @@ export function toPathDocs(
       { size: 0, type: "file", path: "" };
   const { size, type } = listing;
   return type === "file"
-    ? `[docs](https://doc.deno.land/https://deno.land/x/${pkg}@${ver}/${path}) | [code](https://deno.land/x/${pkg}@${ver}/${path}) | size: ${
+    ? `[docs](https://deno.land/x/${pkg}@${ver}/${path}) | [code](https://deno.land/x/${pkg}@${ver}/${path}?source) | size: ${
       prettyBytes(size)
     }\n`
-    : `[code](https://deno.land/x/${pkg}@${ver}/${path}) | size: ${
+    : `[docs](https://deno.land/x/${pkg}@${ver}/${path}) | size: ${
       prettyBytes(size)
     }`;
 }
@@ -321,7 +321,7 @@ export function toStdVersionDocs(
   ver: string,
   meta: MetaJson,
 ): string {
-  return `**Deno \`std\` library @ ${ver}**\n\nA collection of modules to assist with common tasks in Deno.\n\n[code](https://deno.land/std@${ver}) | published: _${
+  return `**Deno \`std\` library @ ${ver}**\n\nA collection of modules to assist with common tasks in Deno.\n\n[docs](https://deno.land/std@${ver}) | published: _${
     twas(new Date(meta.uploaded_at))
   }_\n\n`;
 }
@@ -341,10 +341,10 @@ export function toStdPathDocs(
     ? `**${mod}**\n\n${stdDescriptions[mod] ?? ""}\n\n`
     : "";
   const body = type === "file"
-    ? `[docs](https://doc.deno.land/https://deno.land/std@${ver}/${path}) | [code](https://deno.land/std@${ver}/${path}) | size: ${
+    ? `[docs](https://deno.land/std@${ver}/${path}) | [code](https://deno.land/std@${ver}/${path}?source) | size: ${
       prettyBytes(size)
     }\n`
-    : `[code](https://deno.land/std@${ver}/${path}) | size: ${
+    : `[docs](https://deno.land/std@${ver}/${path}) | size: ${
       prettyBytes(size)
     }`;
   return `${leading}${body}`;
@@ -355,7 +355,7 @@ export function toVersionDocs(
   ver: string,
   meta: MetaJson,
 ): string {
-  return `**${pkgData.name} @ ${ver}**\n\n${pkgData.description}\n\n[code](https://deno.land/x/${pkgData.name}@${ver}) | published: _${
+  return `**${pkgData.name} @ ${ver}**\n\n${pkgData.description}\n\n[docs](https://deno.land/x/${pkgData.name}@${ver}) | published: _${
     twas(new Date(meta.uploaded_at))
   }_${pkgData.stars ? ` | stars: _${pkgData.stars}_` : ""}\n\n`;
 }
