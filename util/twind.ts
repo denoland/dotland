@@ -45,8 +45,9 @@ export const config: Configuration = {
         mainBlue: "#0094FF",
         normalBlue: "#0A4BAB",
         darkBlue: "#000059",
-        lightBlue: "#A7DAFF",
-        veryLightBlue: "#F3FEFF",
+        lightBlue: "#54ADCF",
+        veryLightBlue: "#A7DAFF",
+        lightWhiteBlue: "#F3FEFF",
       },
       opacity: {
         15: ".15",
@@ -70,11 +71,7 @@ export const config: Configuration = {
   },
   plugins: {
     colorWash: apply`bg-gradient-to-r from-darkBlue to-mainBlue`,
-    featurePad: apply`p-8 border border-lightBlue rounded-xl bg-veryLightBlue ${
-      css({
-        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.15)",
-      })
-    }`,
+    featurePad: apply`p-8 border border-veryLightBlue rounded-md bg-lightWhiteBlue`,
 
     link:
       apply`text-[#056CF0] transition duration-75 ease-in-out hover:text-blue-400`,

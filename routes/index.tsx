@@ -257,7 +257,7 @@ export default function Home({ data }: PageProps<Data>) {
             <p class={tw`text-white font-bold text-7xl text-center`}>
               Over 300k Monthly Actives
             </p>
-            <ul class={tw`flex justify-center gap-18`}>
+            <ul class={tw`flex justify-center gap-18 text-white`}>
               {companies.map((company) => (
                 <li key={company.url}>
                   <a

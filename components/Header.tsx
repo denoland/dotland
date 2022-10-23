@@ -22,17 +22,9 @@ export function Header({ selected, manual }: {
   manual?: boolean;
 }) {
   return (
-    <div
-      class={tw(
-        manual
-          ? "lg:border-b border-light-border"
-          : "bg-primary border-b border-light-border",
-      )}
-    >
-      <div
-        class={tw`section-x-inset-xl py-5.5`}
-      >
-        <nav class={tw`flex justify-between flex-col lg:flex-row`}>
+    <div class={tw`${manual ? "lg:border-b" : "border-b"} border-light-border`}>
+      <div class={tw`section-x-inset-2xl py-5.5 h-full`}>
+        <nav class={tw`flex justify-between flex-col lg:flex-row h-full`}>
           <input
             type="checkbox"
             id="menuToggle"

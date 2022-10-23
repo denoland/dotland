@@ -573,8 +573,6 @@ export function Logo(props: { class?: string }) { // Size not normalized
   return (
     <svg
       class={tw(props.class ?? "")}
-      width="30"
-      height="30"
       viewBox="0 0 30 30"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -618,8 +616,6 @@ export function Deno(props: { class?: string }) { // Size not normalized
   return (
     <svg
       class={tw(props.class ?? "")}
-      width="51"
-      height="14"
       viewBox="0 0 51 14"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
