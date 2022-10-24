@@ -19,8 +19,6 @@ import { setup } from "$doc_components/services.ts";
 import manifest from "./fresh.gen.ts";
 import options from "./options.ts";
 
-import { routes as completionsV2Routes } from "./completions_v2.ts";
-
 await setup({
   resolveHref(current: URL, symbol?: string) {
     const url = new URL(current);
@@ -49,7 +47,6 @@ await setup({
 
 const ctx = await ServerContext.fromManifest(manifest, options);
 
-const innerHandler = withLog(ctx.handler());
-const handler = router(completionsV2Routes, innerHandler);
+const handler = withLog(ctx.handler());
 
 serve(handler);

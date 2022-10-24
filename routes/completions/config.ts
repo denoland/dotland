@@ -20,6 +20,7 @@ interface RegistryConfig {
 }
 
 const MAX_AGE_1_DAY = "max-age=86400";
+const APILAND_URL = "https://apiland-mjpgnf3grrk0.deno.dev";
 
 /** This is the v2 registry configuration which provides documentation
  * endpoints and allows incremental completion/search of variables. */
@@ -31,18 +32,21 @@ const configV2: RegistryConfig = {
       variables: [
         {
           key: "module",
-          documentation: "/_api/details/x/${module}",
-          url: "/_api/x/${module}",
+          documentation: APILAND_URL + "/completions/resolve/${module}",
+          url: APILAND_URL + "/completions/items/${module}",
         },
         {
           key: "version",
-          documentation: "/_api/details/x/${module}/${{version}}",
-          url: "/_api/x/${module}/${{version}}",
+          documentation: APILAND_URL +
+            "/completions/resolve/${module}/${{version}}",
+          url: APILAND_URL + "/completions/items/${module}/${{version}}",
         },
         {
           key: "path",
-          documentation: "/_api/details/x/${module}/${{version}}/${path}",
-          url: "/_api/x/${module}/${{version}}/${path}",
+          documentation: APILAND_URL +
+            "/completions/resolve/${module}/${{version}}/${path}",
+          url: APILAND_URL +
+            "/completions/items/${module}/${{version}}/${path}",
         },
       ],
     },
@@ -51,13 +55,14 @@ const configV2: RegistryConfig = {
       variables: [
         {
           key: "module",
-          documentation: "/_api/details/x/${module}",
-          url: "/_api/x/${module}",
+          documentation: APILAND_URL + "/completions/resolve/${module}",
+          url: APILAND_URL + "/completions/items/${module}",
         },
         {
           key: "path",
-          documentation: "/_api/details/x/${module}/_latest/${path}",
-          url: "/_api/x/${module}/_latest/${path}",
+          documentation: APILAND_URL +
+            "/completions/resolve/${module}/__latest__/${path}",
+          url: APILAND_URL + "/completions/items/${module}/__latest__/${path}",
         },
       ],
     },
@@ -66,13 +71,14 @@ const configV2: RegistryConfig = {
       variables: [
         {
           key: "version",
-          documentation: "/_api/details/std/${{version}}",
-          url: "/_api/x/std/${{version}}",
+          documentation: APILAND_URL + "/completions/resolve/std/${{version}}",
+          url: APILAND_URL + "/completions/items/std/${{version}}",
         },
         {
           key: "path",
-          documentation: "/_api/details/std/${{version}}/${path}",
-          url: "/_api/x/std/${{version}}/${path}",
+          documentation: APILAND_URL +
+            "/completions/resolve/std/${{version}}/${path}",
+          url: APILAND_URL + "/completions/items/std/${{version}}/${path}",
         },
       ],
     },
@@ -81,8 +87,9 @@ const configV2: RegistryConfig = {
       variables: [
         {
           key: "path",
-          documentation: "/_api/details/std/_latest/${path}",
-          url: "/_api/x/std/_latest/${path}",
+          documentation: APILAND_URL +
+            "/completions/resolve/std/__latest__/${path}",
+          url: APILAND_URL + "/completions/items/std/__latest__/${path}",
         },
       ],
     },
