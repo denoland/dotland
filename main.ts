@@ -11,7 +11,6 @@
 import { ServerContext } from "$fresh/server.ts";
 import { Fragment, h } from "preact";
 import { serve } from "$std/http/server.ts";
-import { router } from "$router";
 import { lookupSymbol } from "./util/doc_utils.ts";
 import { withLog } from "./util/ga_utils.ts";
 import { setup } from "$doc_components/services.ts";
