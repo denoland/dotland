@@ -76,7 +76,6 @@ export default function Home({ data }: PageProps<Data>) {
               </div>
               <div class={tw`featurePad`}>
                 <img
-                  class={tw`w-full`}
                   src="/images/Dependencies_Placeholder.png"
                   alt="Dependencies"
                 />
@@ -84,12 +83,8 @@ export default function Home({ data }: PageProps<Data>) {
             </div>
 
             <div class={tw`flex items-center justify-between gap-16`}>
-              <div class={tw`featurePad`}>
-                <img
-                  class={tw`w-full`}
-                  src="/images/Chart_Placeholder.png"
-                  alt="Web APIs"
-                />
+              <div class={tw`featurePad py-12 px-20`}>
+                <img src="/images/web_compatibility.png" alt="Web APIs" />
               </div>
               <div class={tw`w-72 space-y-3 flex-none`}>
                 <h3 class={tw`font-bold text-4xl text-darkBlue`}>
@@ -166,12 +161,8 @@ export default function Home({ data }: PageProps<Data>) {
                   The fastest JavaScript web server ever built.
                 </p>
               </div>
-              <div class={tw`featurePad`}>
-                <img
-                  class={tw`w-full`}
-                  src="/images/benchmark.png"
-                  alt="HTTP Benchmark"
-                />
+              <div class={tw`featurePad p-18`}>
+                <img src="/images/benchmark.png" alt="HTTP Benchmark" />
               </div>
             </div>
 
