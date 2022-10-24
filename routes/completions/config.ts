@@ -20,7 +20,7 @@ interface RegistryConfig {
 }
 
 const MAX_AGE_1_DAY = "max-age=86400";
-const APILAND_URL = "https://apiland-8vkh4yhxnpf0.deno.dev";
+const APILAND_URL = "https://apiland-c2dqkxqmen5g.deno.dev";
 
 /** This is the v2 registry configuration which provides documentation
  * endpoints and allows incremental completion/search of variables. */
