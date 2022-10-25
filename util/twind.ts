@@ -71,9 +71,12 @@ export const config: Configuration = {
   },
   plugins: {
     colorWash: apply`bg-gradient-to-r from-darkBlue to-mainBlue`,
-    featurePad: apply`p-8 rounded-2xl bg-lightWhiteBlue children:w-full ${css({
-      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-    })}`,
+    featurePad:
+      apply`p-8 w-2/3 flex-none rounded-2xl bg-lightWhiteBlue children:w-full ${
+        css({
+          boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+        })
+      }`,
 
     link:
       apply`text-[#056CF0] transition duration-75 ease-in-out hover:text-blue-400`,

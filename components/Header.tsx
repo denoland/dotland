@@ -23,7 +23,7 @@ export function Header({ selected, manual }: {
 }) {
   return (
     <div class={tw`${manual ? "lg:border-b" : "border-b"} border-light-border`}>
-      <div class={tw`section-x-inset-2xl py-5.5 h-full`}>
+      <div class={tw`section-x-inset-2xl py-5 h-full`}>
         <nav class={tw`flex justify-between flex-col lg:flex-row h-full`}>
           <input
             type="checkbox"

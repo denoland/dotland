@@ -1,13 +1,14 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 /** @jsx h */
-import { h } from "preact";
+import { type ComponentChildren, h } from "preact";
 import { tw } from "@twind";
 import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { Header } from "@/components/Header.tsx";
 import HelloBar from "@/islands/HelloBar.tsx";
 import { Handlers, PageProps } from "$fresh/server.ts";
+import * as Icons from "@/components/Icons.tsx";
 
 import { getCookies } from "https://deno.land/std@0.143.0/http/cookie.ts";
 
@@ -51,27 +52,34 @@ export default function Home({ data }: PageProps<Data>) {
         </div>
 
         <div
-          class={tw`py-4 bg-mainBlue text-3xl text-white text-center font-semibold`}
+          class={tw`py-3 bg-mainBlue text-2xl text-white text-center font-semibold`}
         >
           NPM compatibility Announcement
         </div>
 
-        <div class={tw`section-x-inset-xl pt-28 pb-24`}>
-          <h2 class={tw`text-center font-bold text-7xl text-darkBlue`}>
+        <div class={tw`section-x-inset-xl pt-18 pb-24`}>
+          <div
+            class={tw`block colorWash rounded-full w-44 py-4 text-white font-semibold text-3xl text-center mx-auto mb-8`}
+          >
+            Easy
+          </div>
+          <h2
+            class={tw`text-center font-bold text-6xl text-darkBlue leading-snug`}
+          >
             The best developer experience
           </h2>
           <p class={tw`text-center font-semibold text-2xl text-normalBlue`}>
             Without the learning curve…
           </p>
 
-          <div class={tw`mt-28 space-y-32`}>
-            <div class={tw`flex items-center justify-between gap-16`}>
-              <div class={tw`w-72 space-y-3 flex-none`}>
+          <div class={tw`mt-20 space-y-32`}>
+            <div class={tw`flex items-center justify-between gap-18`}>
+              <div class={tw`space-y-3`}>
                 <h3 class={tw`font-bold text-4xl text-darkBlue`}>
                   Avoid installing dependencies
                 </h3>
                 <p class={tw`text-2xl text-normalBlue`}>
-                  Dive right into the code and skip the setup.
+                  Dive right into the code<br />and skip the setup.
                 </p>
               </div>
               <div class={tw`featurePad`}>
@@ -82,11 +90,11 @@ export default function Home({ data }: PageProps<Data>) {
               </div>
             </div>
 
-            <div class={tw`flex items-center justify-between gap-16`}>
+            <div class={tw`flex items-center justify-between gap-18`}>
               <div class={tw`featurePad py-12 px-20`}>
                 <img src="/images/web_compatibility.png" alt="Web APIs" />
               </div>
-              <div class={tw`w-72 space-y-3 flex-none`}>
+              <div class={tw`space-y-3`}>
                 <h3 class={tw`font-bold text-4xl text-darkBlue`}>
                   Web-standard APIs
                 </h3>
@@ -99,6 +107,7 @@ export default function Home({ data }: PageProps<Data>) {
 
             <div class={tw`flex items-center justify-between gap-22`}>
               <div class={tw`space-y-5`}>
+                <Icons.Logo class="w-15" />
                 <h3 class={tw`font-bold text-4xl text-darkBlue`}>
                   TypeScript out of the box
                 </h3>
@@ -109,6 +118,7 @@ export default function Home({ data }: PageProps<Data>) {
                 </p>
               </div>
               <div class={tw`space-y-5`}>
+                <Icons.Logo class="w-15" />
                 <h3 class={tw`font-bold text-4xl text-darkBlue`}>
                   Great all-in-one tooling
                 </h3>
@@ -119,6 +129,7 @@ export default function Home({ data }: PageProps<Data>) {
                 </p>
               </div>
               <div class={tw`space-y-5`}>
+                <Icons.Logo class="w-15" />
                 <h3 class={tw`font-bold text-4xl text-darkBlue`}>
                   Hassle-free deployment
                 </h3>
@@ -131,29 +142,29 @@ export default function Home({ data }: PageProps<Data>) {
           </div>
         </div>
 
-        <div class={tw`pt-28 pb-24 colorWash`}>
-          <div class={tw`section-x-inset-lg space-y-11`}>
-            <p class={tw`text-white font-semibold text-6xl text-center`}>
-              “I love working with Deno because it’s the best CLI on Earth and
-              the best thing since sliced bread.”
-            </p>
-            <p class={tw`text-white text-2xl text-center`}>
-              Firstname Lastname, Title Company
-            </p>
-          </div>
-        </div>
+        <Quote author="Firstname Lastname, Title Company">
+          “I love working with Deno because it’s the best CLI on Earth and the
+          best thing since sliced bread.”
+        </Quote>
 
-        <div class={tw`section-x-inset-xl pt-28 pb-24`}>
-          <h2 class={tw`text-center font-bold text-7xl text-darkBlue`}>
+        <div class={tw`section-x-inset-xl pt-18 pb-24`}>
+          <div
+            class={tw`block colorWash rounded-full w-44 py-4 text-white font-semibold text-3xl text-center mx-auto mb-8`}
+          >
+            Fast
+          </div>
+          <h2
+            class={tw`text-center font-bold text-6xl text-darkBlue leading-snug`}
+          >
             Built to perform at your speed.
           </h2>
           <p class={tw`text-center font-semibold text-2xl text-normalBlue`}>
             Designed from the ground-up for high-performance.
           </p>
 
-          <div class={tw`mt-28 space-y-32`}>
-            <div class={tw`flex items-center justify-between gap-16`}>
-              <div class={tw`w-72 space-y-3 flex-none`}>
+          <div class={tw`mt-20 space-y-32`}>
+            <div class={tw`flex items-center justify-between gap-18`}>
+              <div class={tw`space-y-3`}>
                 <h3 class={tw`font-bold text-4xl text-darkBlue`}>
                   Best in class HTTP server speeds
                 </h3>
@@ -166,10 +177,10 @@ export default function Home({ data }: PageProps<Data>) {
               </div>
             </div>
 
-            <div class={tw`flex items-center justify-between gap-16`}>
+            <div class={tw`flex items-center justify-between gap-18`}>
               <div class={tw`featurePad`}>
               </div>
-              <div class={tw`w-72 space-y-3 flex-none`}>
+              <div class={tw`space-y-3`}>
                 <h3 class={tw`font-bold text-4xl text-darkBlue`}>
                   Powered by Chrome's V8
                 </h3>
@@ -182,29 +193,29 @@ export default function Home({ data }: PageProps<Data>) {
           </div>
         </div>
 
-        <div class={tw`pt-28 pb-24 colorWash`}>
-          <div class={tw`section-x-inset-lg space-y-11`}>
-            <p class={tw`text-white font-semibold text-6xl text-center`}>
-              “I love working with Deno because it’s the best CLI on Earth and
-              the best thing since sliced bread.”
-            </p>
-            <p class={tw`text-white text-2xl text-center`}>
-              Firstname Lastname, Title Company
-            </p>
-          </div>
-        </div>
+        <Quote author="Firstname Lastname, Title Company">
+          “I love working with Deno because it’s the best CLI on Earth and the
+          best thing since sliced bread.”
+        </Quote>
 
-        <div class={tw`section-x-inset-xl pt-28 pb-24`}>
-          <h2 class={tw`text-center font-bold text-7xl text-darkBlue`}>
+        <div class={tw`section-x-inset-xl pt-18 pb-24`}>
+          <div
+            class={tw`block colorWash rounded-full w-44 py-4 text-white font-semibold text-3xl text-center mx-auto mb-8`}
+          >
+            Secure
+          </div>
+          <h2
+            class={tw`text-center font-bold text-6xl text-darkBlue leading-snug`}
+          >
             Secure by default.
           </h2>
           <p class={tw`text-center font-semibold text-2xl text-normalBlue`}>
             Take total control over your workflow.
           </p>
 
-          <div class={tw`mt-28 space-y-32`}>
-            <div class={tw`flex items-center justify-between gap-16`}>
-              <div class={tw`w-72 space-y-3 flex-none`}>
+          <div class={tw`mt-20 space-y-32`}>
+            <div class={tw`flex items-center justify-between gap-18`}>
+              <div class={tw`space-y-3`}>
                 <h3 class={tw`font-bold text-4xl text-darkBlue`}>
                   Run untrusted code
                 </h3>
@@ -216,21 +227,26 @@ export default function Home({ data }: PageProps<Data>) {
               <div class={tw`featurePad`}></div>
             </div>
 
-            <div class={tw`flex items-center justify-between gap-22`}>
-              <div class={tw`space-y-5`}>
-                <h3 class={tw`font-bold text-4xl text-darkBlue`}>
-                  Fine grained permission checks
+            <div
+              class={tw`grid items-center justify-between gap-22 grid-cols-2`}
+            >
+              <div class={tw`grid gap-5`}>
+                <Icons.Logo class="w-15 col-start-1" />
+                <h3 class={tw`col-start-2 font-bold text-4xl text-darkBlue`}>
+                  Fine grained<br />permission checks
                 </h3>
-                <p class={tw`text-2xl text-normalBlue`}>
+                <p class={tw`col-start-2 text-2xl text-normalBlue`}>
                   Provide an allow-list to access only certain file system
                   directories, network hosts, and environment variables.
                 </p>
               </div>
-              <div class={tw`space-y-5`}>
-                <h3 class={tw`font-bold text-4xl text-darkBlue`}>
-                  Safer NPM packages
+
+              <div class={tw`grid gap-5`}>
+                <Icons.Logo class="w-15 col-start-1" />
+                <h3 class={tw`col-start-2 font-bold text-4xl text-darkBlue`}>
+                  Safer NPM<br />packages
                 </h3>
-                <p class={tw`text-2xl text-normalBlue`}>
+                <p class={tw`col-start-2 text-2xl text-normalBlue`}>
                   Install and run npm packages without having to audit them
                   first.
                 </p>
@@ -272,6 +288,23 @@ export default function Home({ data }: PageProps<Data>) {
 
         <Footer />
       </div>
+    </div>
+  );
+}
+
+function Quote(
+  { children, author }: { children: ComponentChildren; author: string },
+) {
+  return (
+    <div class={tw`pt-28 pb-24 colorWash`}>
+      <figure class={tw`section-x-inset-lg space-y-11 text-center`}>
+        <blockquote class={tw`text-white font-semibold text-6xl leading-tight`}>
+          {children}
+        </blockquote>
+        <figcaption class={tw`text-white text-2xl`}>
+          {author}
+        </figcaption>
+      </figure>
     </div>
   );
 }
