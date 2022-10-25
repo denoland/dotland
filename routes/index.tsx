@@ -2,7 +2,7 @@
 
 /** @jsx h */
 import { type ComponentChildren, h } from "preact";
-import { tw } from "@twind";
+import { tw, css } from "@twind";
 import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { Header } from "@/components/Header.tsx";
@@ -38,7 +38,9 @@ export default function Home({ data }: PageProps<Data>) {
       <div>
         <Header />
 
-        <div class={tw`colorWash px-36 py-20`}>
+        <div class={tw`px-36 py-20 ${css({
+          background: 'url("/images/cover.png") 68% 23%/120% no-repeat, linear-gradient(to right, #000059, #0094FF)',
+        })}`}>
           <div class={tw`w-136 text-white space-y-6`}>
             <p class={tw`font-semibold text-3xl leading-none`}>Meet Deno</p>
             <p class={tw`font-semibold text-[5rem] leading-none`}>
