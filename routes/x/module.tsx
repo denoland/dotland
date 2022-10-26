@@ -4,11 +4,11 @@
 /** @jsxFrag Fragment */
 import { Fragment, h } from "preact";
 import { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
 import twas from "$twas";
 import { emojify } from "$emoji";
 import { accepts } from "$oak_commons";
+import { setSymbols } from "@/util/doc_utils.ts";
 import {
   type DocPage,
   type DocPageIndex,
@@ -16,6 +16,8 @@ import {
   type DocPageSymbol,
   extractAltLineNumberReference,
   fetchSource,
+  getCanonicalUrl,
+  getDocAsDescription,
   getModulePath,
   getRawFile,
   getReadme,
@@ -26,6 +28,7 @@ import {
   type ModInfoPage,
   type SourcePage,
 } from "@/util/registry_utils.ts";
+import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { ErrorMessage } from "@/components/ErrorMessage.tsx";
@@ -61,6 +64,57 @@ interface PageData {
   data: MaybeData;
 }
 
+function getTitle(
+  module: string,
+  version: string | undefined,
+  data: MaybeData,
+): string {
+  if (!data) {
+    return "Third Party";
+  }
+  const title = [version ? `${module}@${version}` : module];
+  if (
+    data.view === "source" &&
+    (data.data.kind === "dir" || data.data.kind === "file")
+  ) {
+    title.unshift(data.data.path);
+  }
+  if (
+    data.view === "doc" &&
+    (data.data.kind === "module" || data.data.kind === "file" ||
+      data.data.kind === "index" || data.data.kind === "symbol")
+  ) {
+    title.unshift(data.data.path);
+    if (data.data.kind === "symbol") {
+      title.unshift(data.data.name);
+    }
+  }
+  return title.join(" | ");
+}
+
+function getDescription(data: MaybeData): string | undefined {
+  if (data) {
+    if (
+      (data.view === "info" && data.data.kind === "modinfo") ||
+      (data.view === "source" &&
+        (data.data.kind === "dir" || data.data.kind === "file")) ||
+      (data.view === "doc" &&
+        (data.data.kind === "index" || data.data.kind === "file"))
+    ) {
+      if (data.data.description) {
+        return emojify(data.data.description);
+      }
+    } else if (data.view === "doc") {
+      if (data.data.kind === "module") {
+        return getDocAsDescription(data.data.docNodes, true);
+      }
+      if (data.data.kind === "symbol") {
+        return getDocAsDescription(data.data.docNodes);
+      }
+    }
+  }
+}
+
 export const handler: Handlers<PageData> = {
   async GET(req, { params, render, remoteAddr }) {
     const { name, version, path } = params as Params;
@@ -71,7 +125,12 @@ export const handler: Handlers<PageData> = {
       return Response.redirect(url, 301);
     }
 
-    const isHTML = accepts(req, "application/*", "text/html") === "text/html";
+    // Deno CLI and bots both present with an `Accept: */*` header, where as
+    // browsers will prefer HTML. Because of this, we have to try to infer a bot
+    // from the UA in order to serve the HTML page.
+    const isHTML = accepts(req, "application/*", "text/html") === "text/html" ||
+      (req.headers.get("accept") === "*/*" &&
+        req.headers.get("user-agent")?.includes("bot"));
     if (!isHTML) return handlerRaw(req, params as Params);
 
     let view: Views;
@@ -98,6 +157,8 @@ export const handler: Handlers<PageData> = {
 
     const queryId = url.searchParams.get("qid");
     const position = url.searchParams.get("pos");
+    url.searchParams.delete("qid");
+    url.searchParams.delete("pos");
     if (queryId && position && remoteAddr.transport === "tcp") {
       ssrSearchClick(
         await getUserToken(req.headers, remoteAddr.hostname),
@@ -117,21 +178,12 @@ export const handler: Handlers<PageData> = {
       return render({ data: null });
     } else if (res.status === 302) { // implicit latest
       const latestVersion = res.headers.get("X-Deno-Latest-Version")!;
-      console.log(getModulePath(
+      url.pathname = getModulePath(
         name,
         latestVersion,
         path ? ("/" + path) : undefined,
-      ));
-      return Response.redirect(
-        new URL(
-          getModulePath(
-            name,
-            latestVersion,
-            path ? ("/" + path) : undefined,
-          ),
-          url,
-        ),
       );
+      return Response.redirect(url);
     } else if (res.status === 301) { // path is directory and there is an index module and its doc
       const newPath = res.headers.get("X-Deno-Module-Path")!;
       return new Response(undefined, {
@@ -176,7 +228,12 @@ export const handler: Handlers<PageData> = {
       );
     }
 
-    return render!({ data });
+    await setSymbols(
+      (data.data.kind === "module" || data.data.kind === "symbol")
+        ? data.data.symbols
+        : undefined,
+    );
+    return render({ data });
   },
 };
 
@@ -231,11 +288,20 @@ export default function Registry(
   const path = maybePath ? "/" + maybePath : "";
   const isStd = name === "std";
 
+  let canonical: URL | undefined;
+  if (data && "latest_version" in data.data) {
+    canonical = getCanonicalUrl(url, data.data.latest_version);
+  }
+
   return (
     <>
-      <Head>
-        <title>{name + (version ? `@${version}` : "") + " | Deno"}</title>
-      </Head>
+      <ContentMeta
+        title={getTitle(name, version, data)}
+        description={getDescription(data)}
+        canonical={canonical}
+        ogImage={isStd ? "std" : "modules"}
+        keywords={["deno", "third party", "module", name]}
+      />
       <div class={tw`bg-primary min-h-full`}>
         <Header
           selected={name === "std" ? "Standard Library" : "Third Party Modules"}

@@ -1,5 +1,6 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
+// deno-fmt-ignore-file
 /** @jsx h */
 import { h } from "preact";
 
@@ -7,6 +8,7 @@ import { tw } from "@twind";
 import { escape as htmlEscape } from "$he";
 import { normalizeTokens, Prism } from "@/util/prism_utils.ts";
 import { extractLinkUrl } from "@/util/registry_utils.ts";
+import * as Icons from "./Icons.tsx";
 
 export interface CodeBlockProps {
   code: string;
@@ -30,6 +32,7 @@ export interface CodeBlockProps {
     | "dockerfile";
   url: URL;
   class?: string;
+  enableCopyButton?: boolean;
 }
 
 export function RawCodeBlock({
@@ -38,6 +41,7 @@ export function RawCodeBlock({
   class: extraClassName,
   disablePrefixes,
   enableLineRef = false,
+  enableCopyButton = false,
   url,
 }: CodeBlockProps & {
   enableLineRef?: boolean;
@@ -63,12 +67,20 @@ export function RawCodeBlock({
 
   const tokens = normalizeTokens(Prism.tokenize(code, grammar));
 
-  return <pre
-    className={tw`text-sm flex ${extraClassName ?? ""}` +
-      ` gfm-highlight highlight-source-${newLang}`}
-    data-color-mode="light"
-    data-light-theme="light"
-  >
+  // The copy button is bigger than a single line, so if the copy button
+  // is enabled we need to center the content.
+  let flexCenter = "";
+  if (enableCopyButton && tokens.length == 1) {
+    flexCenter = "items-center";
+  }
+  
+  return (
+    <pre
+      className={tw`group text-sm flex ${extraClassName ?? ""}` +
+        ` gfm-highlight highlight-source-${newLang} ${flexCenter}`}
+      data-color-mode="light"
+      data-light-theme="light"
+    >
       {enableLineRef &&
         (
           <div className={codeDivClasses}>
@@ -132,7 +144,18 @@ export function RawCodeBlock({
           );
         })}
       </div>
-  </pre>;
+      {enableCopyButton &&
+      (
+        <button
+          className={tw`opacity-0 group-hover:opacity-100 rounded border border-[#D2D2DC] p-1.5 self-start`}
+          // @ts-ignore onClick does support strings
+          onClick={`navigator?.clipboard?.writeText('${code.trim()}');`}
+        >
+          <Icons.Copy />
+        </button>
+      )}
+    </pre>
+  );
 }
 
 export function CodeBlock(props: CodeBlockProps) {

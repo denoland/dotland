@@ -383,6 +383,62 @@ export function extractLinkUrl(
   return undefined;
 }
 
+function docAsDescription(doc: string) {
+  return doc.split("\n\n")[0].slice(0, 199);
+}
+
+/** Search parameters which are considered part of a canonical URL.  */
+const CANONICAL_SEARCH_PARAMS = ["s", "source", "doc", "unstable"];
+
+export function getCanonicalUrl(url: URL, latestVersion: string) {
+  const canonical = new URL(url);
+  canonical.hostname = "deno.land";
+  canonical.port = "";
+  canonical.protocol = "https:";
+  canonical.pathname = canonical.pathname.replace(
+    /@[^/]+/,
+    `@${latestVersion}`,
+  );
+  canonical.search = "";
+  for (const param of CANONICAL_SEARCH_PARAMS) {
+    if (url.searchParams.has(param)) {
+      canonical.searchParams.set(param, url.searchParams.get(param)!);
+    }
+  }
+  return canonical;
+}
+
+/** For a LibDocPage, attempt to extract a description to be used with the
+ * content meta for the page. */
+export function getLibDocPageDescription(data: LibDocPage): string | undefined {
+  if (data.kind === "librarySymbol") {
+    for (const docNode of data.docNodes) {
+      if (docNode.jsDoc?.doc) {
+        return docAsDescription(docNode.jsDoc.doc);
+      }
+    }
+  }
+}
+
+export function getDocAsDescription(
+  docNodes: DocNode[],
+  modDoc = false,
+): string | undefined {
+  for (const docNode of docNodes) {
+    if (modDoc) {
+      if (docNode.kind === "moduleDoc") {
+        if (docNode.jsDoc.doc) {
+          return docAsDescription(docNode.jsDoc.doc);
+        } else {
+          return;
+        }
+      }
+    } else if (docNode.jsDoc?.doc) {
+      return docAsDescription(docNode.jsDoc.doc);
+    }
+  }
+}
+
 import type { DocNode, DocNodeKind, JsDoc } from "$deno_doc/types.d.ts";
 
 /** Stored as kind `module_entry` in datastore. */
@@ -461,17 +517,28 @@ interface DocPageModuleItem {
 
 export type DocPageNavItem = DocPageModuleItem | DocPageDirItem;
 
+type DeclarationKind = "private" | "export" | "declare";
+
+export interface SymbolIndexItem {
+  name: string;
+  kind: DocNodeKind;
+  declarationKind: DeclarationKind;
+  filename: string;
+}
+
 export interface DocPageSymbol extends PageBase {
   kind: "symbol";
   nav: DocPageNavItem[];
   name: string;
   docNodes: DocNode[];
+  symbols: SymbolIndexItem[];
 }
 
 export interface DocPageModule extends PageBase {
   kind: "module";
   nav: DocPageNavItem[];
   docNodes: DocNode[];
+  symbols: SymbolIndexItem[];
 }
 
 export interface DocPageIndex extends PageBase {

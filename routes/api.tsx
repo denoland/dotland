@@ -4,15 +4,20 @@
 /** @jsxFrag Fragment */
 import { Fragment, h } from "preact";
 import { PageProps, RouteConfig } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
 import { Handlers } from "$fresh/server.ts";
+import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { ManualOrAPI, SidePanelPage } from "@/components/SidePanelPage.tsx";
+import { setSymbols } from "@/util/doc_utils.ts";
 import { versions } from "@/util/manual_utils.ts";
 import VersionSelect from "@/islands/VersionSelect.tsx";
-import { type LibDocPage } from "@/util/registry_utils.ts";
+import {
+  getCanonicalUrl,
+  getLibDocPageDescription,
+  type LibDocPage,
+} from "@/util/registry_utils.ts";
 import { ErrorMessage } from "@/components/ErrorMessage.tsx";
 import { LibraryDocPanel } from "$doc_components/doc/library_doc_panel.tsx";
 import { LibraryDoc } from "$doc_components/doc/library_doc.tsx";
@@ -26,11 +31,20 @@ export default function API(
     "",
   ]];
 
+  const canonical = getCanonicalUrl(url, data.latest_version);
+
   return (
     <>
-      <Head>
-        <title>API | Deno</title>
-      </Head>
+      <ContentMeta
+        title={data.kind === "librarySymbol"
+          ? `${data.name} | Runtime APIs`
+          : "Runtime APIs"}
+        description={getLibDocPageDescription(data)}
+        canonical={canonical}
+        creator="@deno_land"
+        ogImage="api"
+        keywords={["deno", "api", "built-in", "typescript", "javascript"]}
+      />
       <Header selected="API" manual />
 
       {data.kind === "libraryInvalidVersion"
@@ -145,6 +159,7 @@ export const handler: Handlers<LibDocPage> = {
 
     const res = await fetch(resURL);
     const data = await res.json();
+    await setSymbols();
 
     return render!(data);
   },

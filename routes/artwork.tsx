@@ -3,12 +3,11 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { Fragment, h } from "preact";
-import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
+import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { Header } from "@/components/Header.tsx";
 import * as Icons from "@/components/Icons.tsx";
-import { Handlers, PageProps } from "$fresh/server.ts";
 
 import artworks from "@/data/artwork.json" assert { type: "json" };
 
@@ -36,9 +35,11 @@ interface Artist {
 export default function ArtworkPage() {
   return (
     <>
-      <Head>
-        <title>Artwork | Deno</title>
-      </Head>
+      <ContentMeta
+        title="Artwork"
+        description="Community created Deno artwork and logos."
+        keywords={["deno", "community", "artwork", "logo"]}
+      />
       <Header />
       <div class={tw`section-x-inset-xl mt-8 mb-24`}>
         <div class={tw`max-w-screen-lg mx-auto`}>
