@@ -5,7 +5,6 @@ import { h } from "preact";
 import { PageProps, RouteConfig } from "$fresh/server.ts";
 import { Handlers } from "$fresh/server.ts";
 import Registry, { handler as xHandler } from "./x/module.tsx";
-import { type State } from "@/routes/_middleware.ts";
 
 export default function RegistryPage(props: PageProps) {
   props.params.name = "std";
@@ -15,7 +14,7 @@ export default function RegistryPage(props: PageProps) {
   return <Registry {...props} />;
 }
 
-export const handler: Handlers<unknown, State> = {
+export const handler: Handlers<unknown> = {
   GET(req, ctx) {
     ctx.params.name = "std";
     if (ctx.params.version?.startsWith("v")) {

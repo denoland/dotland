@@ -4,13 +4,12 @@
 /** @jsxFrag Fragment */
 import { Fragment, h } from "preact";
 import { PageProps } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
+import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Handlers } from "$fresh/server.ts";
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
-import { type State } from "@/routes/_middleware.ts";
 
 import {
   BenchmarkRun,
@@ -28,7 +27,6 @@ type ShowData = { dataFile: string; range: number[]; search: string };
 interface Data {
   show: ShowData;
   rawData: BenchmarkRun[];
-  userToken: string;
 }
 
 // TODO(lucacasonato): add anchor points to headers
@@ -140,11 +138,21 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
 
   return (
     <>
-      <Head>
-        <title>
-          Benchmarks {dataRangeTitle ? `(${dataRangeTitle}) ` : " "}| Deno
-        </title>
-      </Head>
+      <ContentMeta
+        title={`Benchmarks${dataRangeTitle ? ` (${dataRangeTitle})` : ""}`}
+        creator="@deno_land"
+        description="As part of Deno's continuous integration and testing
+          pipeline we measure the performance of certain key metrics of the 
+          runtime. You can view these benchmarks here."
+        keywords={[
+          "deno",
+          "benchmark",
+          "performance",
+          "v8",
+          "javascript",
+          "typescript",
+        ]}
+      />
       <script src="https://cdn.jsdelivr.net/npm/apexcharts" />
       <script
         id="data"
@@ -161,7 +169,7 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
         }}
       />
       <div class={tw`bg-gray-50 min-h-full`}>
-        <Header userToken={data.userToken} />
+        <Header />
         <div class={tw`mb-12`}>
           <div
             class={tw`section-x-inset-md mt-8 pb-8`}
@@ -495,8 +503,8 @@ function SourceLink({
   );
 }
 
-export const handler: Handlers<Data, State> = {
-  async GET(req, { render, state: { userToken } }) {
+export const handler: Handlers<Data> = {
+  async GET(req, { render }) {
     const url = new URL(req.url);
     const showAll = url.searchParams.has("all");
     let show: ShowData = {
@@ -534,6 +542,6 @@ export const handler: Handlers<Data, State> = {
       `https://denoland.github.io/benchmark_data/${show.dataFile}`,
     );
 
-    return render!({ show, rawData: await res.json(), userToken });
+    return render!({ show, rawData: await res.json() });
   },
 };

@@ -44,7 +44,7 @@ export function Footer() {
               title="Sources"
               entries={{
                 "CLI Manual": "https://deno.land/manual",
-                "CLI Runtime API": "https://doc.deno.land/deno/stable",
+                "CLI Runtime API": "https://deno.land/api",
                 "Deploy Docs": "https://deno.com/deploy/docs",
                 "Standard Library": "https://deno.land/std",
                 "Third-Party Modules": "https://deno.land/x",
@@ -77,7 +77,7 @@ export function Footer() {
               frameBorder="0"
               scrolling="no"
               style="border: none;"
-              class={tw`w-full rounded-lg focus:outline-none`}
+              class={tw`w-full rounded-[0.59rem] focus:outline-none`}
             />
 
             <div class={tw`space-y-2.5 lg:space-y-4.5`}>

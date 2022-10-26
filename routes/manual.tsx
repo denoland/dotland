@@ -4,15 +4,16 @@
 /** @jsxFrag Fragment */
 import { Fragment, h } from "preact";
 import { PageProps, RouteConfig } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
 import { Handlers } from "$fresh/server.ts";
+import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { Markdown } from "@/components/Markdown.tsx";
 import * as Icons from "@/components/Icons.tsx";
-import { SidePanelPage } from "@/components/SidePanelPage.tsx";
+import { ManualOrAPI, SidePanelPage } from "@/components/SidePanelPage.tsx";
 import {
+  getDescription,
   getDocURL,
   getFileURL,
   getTableOfContents,
@@ -21,7 +22,6 @@ import {
   versions,
 } from "@/util/manual_utils.ts";
 import VersionSelect from "@/islands/VersionSelect.tsx";
-import { type State } from "@/routes/_middleware.ts";
 
 import VERSIONS from "@/versions.json" assert { type: "json" };
 
@@ -29,7 +29,6 @@ interface Data {
   tableOfContents: TableOfContents;
   content: string;
   version: string;
-  userToken: string;
 }
 
 export default function Manual({ params, url, data }: PageProps<Data>) {
@@ -39,15 +38,17 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
   const pageList = (() => {
     const tempList: { path: string; name: string }[] = [];
 
-    Object.entries(data.tableOfContents).forEach(([slug, entry]) => {
-      tempList.push({ path: `/manual/${slug}`, name: entry.name });
-
-      if (entry.children) {
-        Object.entries(entry.children).map(([childSlug, name]) =>
-          tempList.push({ path: `/manual/${slug}/${childSlug}`, name })
-        );
+    function tocGen(toc: TableOfContents, parentSlug: string) {
+      for (const [childSlug, entry] of Object.entries(toc)) {
+        const slug = `${parentSlug}/${childSlug}`;
+        const name = typeof entry === "string" ? entry : entry.name;
+        tempList.push({ path: slug, name });
+        if (typeof entry === "object" && entry.children) {
+          tocGen(entry.children, slug);
+        }
       }
-    });
+    }
+    tocGen(data.tableOfContents, "/manual");
 
     return tempList;
   })();
@@ -58,14 +59,18 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
 
   const tableOfContentsMap = (() => {
     const map = new Map<string, string>();
-    Object.entries(data.tableOfContents).forEach(([slug, entry]) => {
-      if (entry.children) {
-        Object.entries(entry.children).forEach(([childSlug, name]) => {
-          map.set(`/${slug}/${childSlug}`, name);
-        });
+
+    function tocGen(toc: TableOfContents, parentSlug: string) {
+      for (const [childSlug, entry] of Object.entries(toc)) {
+        const slug = `${parentSlug}/${childSlug}`;
+        const name = typeof entry === "string" ? entry : entry.name;
+        map.set(slug, name);
+        if (typeof entry === "object" && entry.children) {
+          tocGen(entry.children, slug);
+        }
       }
-      map.set(`/${slug}`, entry.name);
-    });
+    }
+    tocGen(data.tableOfContents, "");
 
     return map;
   })();
@@ -79,23 +84,34 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
 
   return (
     <>
-      <Head>
-        <title>
-          {pageTitle === "" ? "Manual | Deno" : `${pageTitle} | Manual | Deno`}
-        </title>
-        <link rel="canonical" href={`https://deno.land/manual${path}`} />
-      </Head>
-      <Header selected="Manual" manual userToken={data.userToken} />
+      <ContentMeta
+        title={pageTitle ? `${pageTitle} | Manual` : "Manual"}
+        description={getDescription(data.content)}
+        creator="@deno_land"
+        ogType="article"
+        ogImage="manual"
+        keywords={[
+          "deno",
+          "manual",
+          "documentation",
+          "javascript",
+          "typescript",
+        ]}
+      />
+      <Header selected="Manual" manual />
 
       <SidePanelPage
         sidepanel={
           <>
-            <VersionSelect
-              versions={Object.fromEntries(
-                versions.map((ver) => [ver, `/manual@${ver}${path}`]),
-              )}
-              selectedVersion={version}
-            />
+            <ManualOrAPI current="Manual" version={version} />
+            <div class={tw`space-y-3 children:w-full`}>
+              <VersionSelect
+                versions={Object.fromEntries(
+                  versions.map((ver) => [ver, `/manual@${ver}${path}`]),
+                )}
+                selectedVersion={version}
+              />
+            </div>
             <ToC
               tableOfContents={data.tableOfContents}
               version={params.version}
@@ -157,18 +173,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
           </div>
         </div>
       </SidePanelPage>
-
       <Footer />
-
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-        (function() {
-          document.querySelectorAll(".toc-active").forEach(el=>{el.scrollIntoView({block:"center"});});
-        })();
-      `,
-        }}
-      />
     </>
   );
 }
@@ -196,6 +201,74 @@ function UserContributionBanner({
   );
 }
 
+function ToCEntry({
+  slug,
+  entry,
+  version,
+  path,
+  outermost,
+  depth,
+}: {
+  slug: string;
+  entry: {
+    name: string;
+    children?: TableOfContents;
+  } | string;
+  version: string | undefined;
+  path: string;
+  outermost?: boolean;
+  depth: number;
+}) {
+  const name = typeof entry === "string" ? entry : entry.name;
+  const active = path === `/${slug}`;
+  const hasChildren = typeof entry === "object" && entry.children;
+  return (
+    <li key={slug}>
+      <input
+        type="checkbox"
+        id={slug}
+        class={tw`hidden checked:siblings:even:children:first-child:rotate-90 checked:siblings:last-child:block`}
+        checked={active || path.startsWith(`/${slug}/`)}
+        disabled={!hasChildren}
+      />
+
+      <label
+        htmlFor={slug}
+        class={tw`flex! items-center gap-2 ${
+          outermost
+            ? "px-2.5 py-2 font-semibold"
+            : `pl-${depth * 6} pr-2.5 py-1 font-normal`
+        } rounded-md ${active ? "link bg-ultralight" : "hover:text-gray-500"}`}
+      >
+        <Icons.TriangleRight
+          aria-label={`open section ${name}`}
+          onKeyDown="if (event.code === 'Space' || event.code === 'Enter') { this.parentElement.click(); event.preventDefault(); }"
+          tabindex={0}
+          class={"h-2.5 w-auto cursor-pointer " +
+            (hasChildren ? "" : "invisible")}
+        />
+        <a href={`/manual@${version}/${slug}`}>
+          {name}
+        </a>
+      </label>
+
+      {hasChildren && (
+        <ol class={tw`list-decimal font-normal hidden` + " nested"}>
+          {Object.entries(entry.children!).map(([childSlug, entry]) => (
+            <ToCEntry
+              slug={`${slug}/${childSlug}`}
+              entry={entry}
+              version={version}
+              path={path}
+              depth={depth + 1}
+            />
+          ))}
+        </ol>
+      )}
+    </li>
+  );
+}
+
 function ToC({
   tableOfContents,
   version,
@@ -208,71 +281,23 @@ function ToC({
   return (
     <nav>
       <ol class={tw`list-decimal list-inside font-semibold` + " nested"}>
-        {Object.entries(tableOfContents).map(([slug, entry]) => {
-          const active = path === `/${slug}`;
-          return (
-            <li key={slug}>
-              <input
-                type="checkbox"
-                id={slug}
-                class={tw`hidden checked:siblings:even:children:first-child:rotate-90 checked:siblings:last-child:block`}
-                checked={active || path.startsWith(`/${slug}/`)}
-                disabled={!entry.children}
-              />
-
-              <label
-                htmlFor={slug}
-                class={tw`flex items-center gap-2 px-2.5 py-2 rounded-md ${
-                  active ? "link bg-ultralight" : "hover:text-gray-500"
-                } font-semibold` + (active ? " toc-active" : "")}
-              >
-                <Icons.TriangleRight
-                  aria-label={`open section ${entry.name}`}
-                  onKeyDown="if (event.code === 'Space' || event.code === 'Enter') { this.parentElement.click(); event.preventDefault(); }"
-                  tabindex={0}
-                  class={"h-2.5 w-auto cursor-pointer " +
-                    (entry.children ? "" : "invisible")}
-                />
-                <a href={`/manual@${version}/${slug}`}>
-                  {entry.name}
-                </a>
-              </label>
-
-              {entry.children && (
-                <ol class={tw`list-decimal font-normal hidden` + " nested"}>
-                  {Object.entries(entry.children).map(
-                    (
-                      [childSlug, name],
-                    ) => {
-                      const active = path === `/${slug}/${childSlug}`;
-                      return (
-                        <li key={`${slug}/${childSlug}`}>
-                          <a
-                            href={`/manual@${version}/${slug}/${childSlug}`}
-                            class={tw`pl-8 pr-2.5 py-1 rounded-md block ${
-                              active
-                                ? "link bg-ultralight"
-                                : "hover:text-gray-500"
-                            } font-normal` + (active ? " toc-active" : "")}
-                          >
-                            {name}
-                          </a>
-                        </li>
-                      );
-                    },
-                  )}
-                </ol>
-              )}
-            </li>
-          );
-        })}
+        {Object.entries(tableOfContents).map(([slug, entry]) => (
+          <ToCEntry
+            slug={slug}
+            entry={entry}
+            version={version}
+            path={path}
+            outermost
+            depth={0}
+          />
+        ))}
       </ol>
     </nav>
   );
 }
 
-export const handler: Handlers<Data, State> = {
-  async GET(req, { params, render, state: { userToken } }) {
+export const handler: Handlers<Data> = {
+  async GET(req, { params, render }) {
     const url = new URL(req.url);
     const { version, path } = params;
     if (!version || !path) {
@@ -305,7 +330,7 @@ export const handler: Handlers<Data, State> = {
         }),
     ]);
 
-    return render!({ tableOfContents, content, version, userToken });
+    return render!({ tableOfContents, content, version });
   },
 };
 

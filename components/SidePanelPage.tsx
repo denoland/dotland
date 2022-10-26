@@ -41,7 +41,7 @@ export function SidePanelPage({ children, sidepanel }: {
             class={tw`hidden pb-2 w-full border-b border-border lg:(pb-0 border-none block w-72 flex-shrink-0)`}
           >
             <div
-              class={tw`w-full space-y-4 section-x-inset-xl lg:section-x-inset-none`}
+              class={tw`w-full space-y-5 section-x-inset-xl lg:section-x-inset-none`}
             >
               {sidepanel}
             </div>
@@ -49,12 +49,40 @@ export function SidePanelPage({ children, sidepanel }: {
         )}
 
         <main
-          class={tw`focus:outline-none w-full flex flex-col section-x-inset-xl mt-7 lg:(section-x-inset-none mt-0)`}
+          class={tw`focus:outline-none min-w-0 w-full flex flex-col section-x-inset-xl mt-7 lg:(section-x-inset-none mt-0)`}
           tabIndex={0}
         >
           {children}
         </main>
       </div>
+    </div>
+  );
+}
+
+const entries = {
+  "Manual": "/manual",
+  "Runtime APIs": "/api",
+} as const;
+
+export function ManualOrAPI(
+  { current, version }: { current: keyof typeof entries; version: string },
+) {
+  return (
+    <div class={tw`border-b border-light-border flex gap-1`}>
+      {(["Manual", "Runtime APIs"] as const).map((key) => (
+        <a
+          class={tw`-mb-px px-2.5 font-medium leading-none rounded-md hover:(bg-gray-100 text-main)`}
+          href={`${entries[key]}@${version}`}
+        >
+          <div
+            class={tw`pt-2 ${
+              key === current ? "border-b-2 border-black pb-1.5" : "pb-2"
+            }`}
+          >
+            {key}
+          </div>
+        </a>
+      ))}
     </div>
   );
 }

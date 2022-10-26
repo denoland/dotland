@@ -2,7 +2,7 @@
 
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
+import { type ComponentChildren, Fragment, h } from "preact";
 import algoliasearch from "$algolia";
 import type {
   MultipleQueriesQuery,
@@ -11,12 +11,10 @@ import type {
 import { createFetchRequester } from "$algolia/requester-fetch";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { css, tw } from "@twind";
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useRef, useState } from "preact/hooks";
 import * as Icons from "@/components/Icons.tsx";
-import type { DocNode } from "$deno_doc/types.d.ts";
 import { colors, docNodeKindMap } from "@/components/symbol_kind.tsx";
-import { searchClick } from "@/util/search_insights_utils.ts";
-import { ComponentChildren } from "preact";
+import { islandSearchClick } from "@/util/search_insights_utils.ts";
 
 // Lazy load a <dialog> polyfill.
 // @ts-expect-error HTMLDialogElement is not just a type!
@@ -70,10 +68,37 @@ interface SearchResults<ResultItem> {
   page: number;
 }
 
+/** Represents the search record being returned for a symbol. */
+interface SymbolItem {
+  name: string;
+  sourceId: string;
+  path?: string;
+  doc?: string;
+  category?: string;
+  tags?: string[];
+  source: number;
+  popularity_score: number;
+  kind:
+    | "namespace"
+    | "enum"
+    | "variable"
+    | "function"
+    | "interface"
+    | "typeAlias"
+    | "moduleDoc"
+    | "import";
+  version: string;
+  location: {
+    filename: string;
+    line: number;
+    col: number;
+  };
+}
+
 interface Results {
   manual?: SearchResults<ManualSearchResult>;
   modules?: SearchResults<ModuleSearchResult>;
-  symbols?: SearchResults<DocNode>;
+  symbols?: SearchResults<SymbolItem>;
 }
 
 function toSearchResults<ResultItem>(
@@ -92,8 +117,14 @@ function getPosition(results: SearchResults<unknown>, index: number): number {
   return (results.hitsPerPage * results.page) + index + 1;
 }
 
+const requester = createFetchRequester();
+const client = algoliasearch("QFPCRZC6WX", "2ed789b2981acd210267b27f03ab47da", {
+  requester,
+});
+
 /** Search Deno documentation, symbols, or modules. */
-export default function GlobalSearch({ userToken }: { userToken?: string }) {
+export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
+  const dialog = useRef<HTMLDialogElement>(null);
   const [showModal, setShowModal] = useState(false);
   const [input, setInput] = useState("");
 
@@ -112,25 +143,18 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
     "Interfaces": true,
     "Type Aliases": true,
   });
-
-  const requester = createFetchRequester();
-  const client = algoliasearch(
-    "QFPCRZC6WX",
-    "2ed789b2981acd210267b27f03ab47da",
-    { requester },
-  );
+  const searchTimeoutId = useRef<number | null>(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const keyboardHandler = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && showModal) setShowModal(false);
       if (e.target !== document.body) {
         return;
       }
       if (((e.metaKey || e.ctrlKey) && e.key === "k") || e.key === "/") {
         e.preventDefault();
         setShowModal(true);
-      }
-      if (e.key === "Escape") {
-        setShowModal(false);
       }
     };
     globalThis.addEventListener("keydown", keyboardHandler);
@@ -142,7 +166,10 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
   useEffect(() => {
     if (!showModal) return;
 
-    setResults(null);
+    setLoading(true);
+    if (searchTimeoutId.current === null) {
+      searchTimeoutId.current = setTimeout(() => setResults(null), 500);
+    }
 
     const queries: MultipleQueriesQuery[] = [];
 
@@ -187,17 +214,27 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
       });
     }
 
+    let cancelled = false;
+
     client.multipleQueries(queries).then(
       ({ results }) => {
-        // @ts-ignore algolia typings are annoying
+        // Ignore results from previous queries
+        if (cancelled) return;
+        if (searchTimeoutId.current !== null) {
+          clearTimeout(searchTimeoutId.current);
+          searchTimeoutId.current = null;
+        }
         setTotalPages(results.find((res) => res.nbPages)?.nbPages ?? 1);
         setResults({
           manual: toSearchResults(results, MANUAL_INDEX),
           symbols: toSearchResults(results, SYMBOL_INDEX),
           modules: toSearchResults(results, MODULE_INDEX),
         });
+        setLoading(false);
       },
     );
+
+    return () => cancelled = true;
   }, [showModal, input, kind, symbolKindsToggle, page]);
 
   useEffect(() => {
@@ -232,6 +269,7 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
       {IS_BROWSER && (
         <dialog
           class={tw`bg-[#00000033] inset-0 fixed z-10 p-0 m-0 w-full h-screen`}
+          ref={dialog}
           onClick={() => setShowModal(false)}
           open={showModal}
         >
@@ -242,7 +280,7 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
             <div class={tw`pt-6 px-6 border-b border-[#E8E7E5]`}>
               <div class={tw`flex`}>
                 <label
-                  class={tw`pl-4 h-10 w-full flex-shrink-1 bg-[#F3F3F3] rounded-md flex items-center text-light focus-within:${
+                  class={tw`px-4 h-10 w-full flex-shrink-1 bg-[#F3F3F3] rounded-md flex items-center text-light focus-within:${
                     css({
                       "outline": "solid",
                     })
@@ -258,6 +296,7 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
                     placeholder="Search manual, symbols and modules..."
                     autoFocus
                   />
+                  {loading && <Icons.Spinner />}
                 </label>
 
                 <button
@@ -305,7 +344,6 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
                         {results.manual.hits.map((res, i) => (
                           <ManualResult
                             {...res}
-                            userToken={userToken}
                             queryID={results.manual!.queryID}
                             position={getPosition(results.manual!, i)}
                           />
@@ -324,7 +362,6 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
                         {results.modules.hits.map((module, i) => (
                           <ModuleResult
                             module={module}
-                            userToken={userToken}
                             queryID={results.modules!.queryID}
                             position={getPosition(results.modules!, i)}
                           />
@@ -340,13 +377,14 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
                               symbol index.
                             </div>
                           )}
-                        {results.symbols.hits.map((doc, i) => (
+                        {results.symbols.hits.map((symbolItem, i) => (
                           <SymbolResult
-                            doc={doc}
-                            userToken={userToken}
                             queryID={results.symbols!.queryID}
                             position={getPosition(results.symbols!, i)}
-                          />
+                            denoVersion={denoVersion}
+                          >
+                            {symbolItem}
+                          </SymbolResult>
                         ))}
                       </Section>
                     )}
@@ -455,11 +493,10 @@ function Section({
 }
 
 function ManualResult(
-  { hierarchy, docPath, content, objectID, userToken, queryID, position }:
+  { hierarchy, docPath, anchor, content, objectID, queryID, position }:
     & ManualSearchResult
     & {
       objectID: string;
-      userToken?: string;
       queryID?: string;
       position?: number;
     },
@@ -467,15 +504,9 @@ function ManualResult(
   const title = Object.values(hierarchy).filter(Boolean);
   return (
     <a
-      href={docPath}
+      href={`${docPath}#${anchor}`}
       onClick={() =>
-        searchClick(
-          userToken,
-          MANUAL_INDEX,
-          queryID,
-          objectID,
-          position,
-        )}
+        islandSearchClick(MANUAL_INDEX, queryID, objectID, position)}
     >
       <div class={tw`p-1.5 rounded-full bg-gray-200`}>
         <Icons.Docs />
@@ -506,45 +537,104 @@ function ManualResultTitle(props: { title: string[] }) {
   return <div class={tw`space-x-1`}>{parts}</div>;
 }
 
+/** Given a symbol item, return an href that will link to that symbol. */
+function getSymbolItemHref(
+  { sourceId, name, version, path, tags }: SymbolItem,
+  denoVersion: string,
+): string {
+  if (sourceId.startsWith("lib/")) {
+    return tags && tags.includes("unstable")
+      ? `/api@${denoVersion}?unstable&s=${name}`
+      : `/api@${denoVersion}?s=${name}`;
+  } else if (sourceId === "mod/std") {
+    return `/std@${version}${path}${name ? `?s=${name}` : ""}`;
+  } else {
+    const mod = sourceId.slice(4);
+    return `/x/${mod}@${version}${path}${name ? `?s=${name}` : ""}`;
+  }
+}
+
+function Source(
+  { children: { sourceId, version, path } }: { children: SymbolItem },
+) {
+  if (sourceId.startsWith("lib/")) {
+    return (
+      <span class={tw`italic text-sm text-gray-400 leading-6`}>
+        built-in to Deno
+      </span>
+    );
+  } else {
+    const mod = sourceId.slice(4);
+    return (
+      <span>
+        <span class={tw`italic text-sm text-gray-400 leading-6`}>
+          from
+        </span>{" "}
+        {mod}@{version}
+        {path}
+      </span>
+    );
+  }
+}
+
+const tagColors = {
+  cyan: ["[#0CAFC619]", "[#0CAFC6]"],
+  gray: ["gray-100", "gray-400"],
+} as const;
+
+type TagColors = keyof typeof tagColors;
+
+function Tag(
+  { children, color }: { children: ComponentChildren; color: TagColors },
+) {
+  const [bg, text] = tagColors[color];
+  return (
+    <div
+      class={tw`bg-${bg} text-${text} py-1 px-2 inline-block rounded-full font-medium text-sm leading-none mr-2 font-sans`}
+    >
+      {children}
+    </div>
+  );
+}
+
 function SymbolResult(
-  { doc, userToken, queryID, position }: {
-    doc: DocNode & { objectID: string };
-    userToken?: string;
+  { children: item, queryID, position, denoVersion }: {
+    children: SymbolItem & { objectID: string };
     queryID?: string;
     position?: number;
+    denoVersion: string;
   },
 ) {
-  let location = new URL(doc.location.filename).pathname;
-  location = location.replace(/^(\/x\/)|\//, "");
-  const KindIcon = docNodeKindMap[doc.kind];
-  const href = `${doc.location.filename}?s=${doc.name}`;
+  const KindIcon = docNodeKindMap[item.kind];
+  const href = getSymbolItemHref(item, denoVersion);
+  const tagItems = item.tags?.map((tag) => (
+    <Tag color={tag.startsWith("allow") ? "cyan" : "gray"}>{tag}</Tag>
+  ));
+
   return (
     <a
       href={href}
       onClick={() =>
-        searchClick(
-          userToken,
-          SYMBOL_INDEX,
-          queryID,
-          doc.objectID,
-          position,
-        )}
+        islandSearchClick(SYMBOL_INDEX, queryID, item.objectID, position)}
     >
       <KindIcon />
-      <div>
-        <div class={tw`space-x-2 py-1`}>
-          <span class={tw`text-[${colors[doc.kind][0]}]`}>
-            {doc.kind.replace("A", " a")}
-          </span>
-          <span class={tw`font-semibold`}>{doc.name}</span>
-          <span class={tw`italic text-sm text-gray-400 leading-6`}>from</span>
-          <span>{location}</span>
+      <div class={tw`w-full`}>
+        <div
+          class={tw`flex flex-col py-1 md:(flex-row items-center justify-between gap-2)`}
+        >
+          <div class={tw`space-x-2`}>
+            <span class={tw`text-[${colors[item.kind][0]}]`}>
+              {item.kind.replace("A", " a")}
+            </span>
+            <span class={tw`font-semibold`}>{item.name}</span>
+            <Source>{item}</Source>
+          </div>
+          {tagItems && tagItems.length && <div class={tw`mr-3`}>{tagItems}
+          </div>}
         </div>
-        {doc.jsDoc?.doc && (
-          <div
-            class={tw`text-sm text-[#6C6E78] h-5 overflow-ellipsis overflow-hidden mr-24`}
-          >
-            {doc.jsDoc.doc.split("\n")[0]}
+        {item.doc && (
+          <div class={tw`text-sm text-[#6C6E78]`}>
+            {item.doc.split("\n\n")[0]}
           </div>
         )}
       </div>
@@ -553,9 +643,8 @@ function SymbolResult(
 }
 
 function ModuleResult(
-  { module, userToken, queryID, position }: {
+  { module, queryID, position }: {
     module: ModuleSearchResult & { objectID: string };
-    userToken?: string;
     queryID?: string;
     position?: number;
   },
@@ -564,13 +653,7 @@ function ModuleResult(
     <a
       href={`https://deno.land/x/${module.name}`}
       onClick={() =>
-        searchClick(
-          userToken,
-          MODULE_INDEX,
-          queryID,
-          module.objectID,
-          position,
-        )}
+        islandSearchClick(MODULE_INDEX, queryID, module.objectID, position)}
     >
       <div class={tw`p-1.5 rounded-full bg-gray-200`}>
         <Icons.Module />

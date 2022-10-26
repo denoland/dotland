@@ -7,7 +7,7 @@ import * as Icons from "./Icons.tsx";
 import type { PopularityModuleTag } from "@/util/registry_utils.ts";
 
 export function PopularityTag(
-  props: { children: PopularityModuleTag["value"] },
+  props: { children: PopularityModuleTag["value"]; class?: string },
 ) {
   let stars: number;
   let color: string;
@@ -35,7 +35,7 @@ export function PopularityTag(
       <div class={tw`flex gap-0.5`}>
         {Array.from({ length: stars }, () => <Icons.HollowStar />)}
       </div>
-      <span class={tw`text-sm leading-none font-medium`}>
+      <span class={tw`text-sm leading-none font-medium ${props.class ?? ""}`}>
         {value}
       </span>
     </div>

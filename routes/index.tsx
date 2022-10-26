@@ -3,22 +3,22 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { Fragment, h } from "preact";
-import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
 import { CodeBlock } from "@/components/CodeBlock.tsx";
+import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
 import { Header } from "@/components/Header.tsx";
 import HelloBar from "@/islands/HelloBar.tsx";
 import { Background } from "@/components/HeroBackground.tsx";
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { type State } from "@/routes/_middleware.ts";
 
 import versions from "@/versions.json" assert { type: "json" };
+import { getCookies } from "https://deno.land/std@0.143.0/http/cookie.ts";
 
 interface Data {
-  userToken: string;
   isFirefox: boolean;
+  hellobarClosedTo: string;
 }
 
 export default function Home({ data, url }: PageProps<Data>) {
@@ -39,20 +39,29 @@ test we can use chai should style ... ok (4ms)
 
 test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms)`;
 
+  const hellobarTo =
+    "https://deno.news/archive/52-deno-126-isolate-clouds-and-the-edge";
   return (
     <div>
-      <HelloBar to="https://deno.news/archive/49-big-changes-for-deno-starting-with-v125">
-        Check out Deno News issue #49!
-      </HelloBar>
-      <Head>
-        <title>Deno - A modern runtime for JavaScript and TypeScript</title>
-      </Head>
+      <ContentMeta
+        title="Deno — A modern runtime for JavaScript and TypeScript"
+        description="Deno is a simple, modern runtime for JavaScript and
+          TypeScript that uses V8 and is built in Rust."
+        creator="@deno_land"
+        noAppendTitle
+      />
+      {hellobarTo !== data.hellobarClosedTo &&
+        (
+          <HelloBar to={hellobarTo}>
+            Check out Deno News issue #52!
+          </HelloBar>
+        )}
       <div class={tw`bg-white`}>
         <div
           class={tw`bg-gray-50 overflow-x-hidden border-b border-gray-200 relative`}
         >
           {!data.isFirefox && <Background />}
-          <Header main userToken={data.userToken} />
+          <Header main />
           <div
             class={tw`relative section-x-inset-sm pt-12 pb-20 flex flex-col items-center`}
           >
@@ -415,6 +424,7 @@ function InstallSection({ url }: { url: URL }) {
         language="bash"
         code="curl -fsSL https://deno.land/install.sh | sh"
         url={url}
+        enableCopyButton
       />
     </div>
   );
@@ -426,7 +436,12 @@ function InstallSection({ url }: { url: URL }) {
         </a>{" "}
         (Mac):
       </p>
-      <CodeBlock language="bash" code="brew install deno" url={url} />
+      <CodeBlock
+        language="bash"
+        code="brew install deno"
+        url={url}
+        enableCopyButton
+      />
     </div>
   );
   const powershell = (
@@ -436,6 +451,7 @@ function InstallSection({ url }: { url: URL }) {
         language="bash"
         code="irm https://deno.land/install.ps1 | iex"
         url={url}
+        enableCopyButton
       />
     </div>
   );
@@ -465,13 +481,14 @@ function InstallSection({ url }: { url: URL }) {
   );
 }
 
-export const handler: Handlers<Data, State> = {
-  GET(req, { render, state: { userToken } }) {
+export const handler: Handlers<Data> = {
+  GET(req, { render }) {
+    const cookies = getCookies(req.headers);
     return render!({
-      userToken,
       isFirefox:
         req.headers.get("user-agent")?.toLowerCase().includes("firefox") ??
           false,
+      hellobarClosedTo: cookies.hellobar ?? "",
     });
   },
 };

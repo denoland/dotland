@@ -153,5 +153,9 @@
     "title": "Deno markdown blog",
     "link": "https://deno-markdown-blog.deno.dev/",
     "github":"officialrajdeepsingh/deno-markdown-blog"
+  }, {
+    "image": "/images/showcase/fast-favicon.png",
+    "title": "fast favicon",
+    "link": "https://favi.deno.dev/"
   }
 ]
