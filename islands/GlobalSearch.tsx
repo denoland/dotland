@@ -493,7 +493,7 @@ function Section({
 }
 
 function ManualResult(
-  { hierarchy, docPath, content, objectID, queryID, position }:
+  { hierarchy, docPath, anchor, content, objectID, queryID, position }:
     & ManualSearchResult
     & {
       objectID: string;
@@ -504,7 +504,7 @@ function ManualResult(
   const title = Object.values(hierarchy).filter(Boolean);
   return (
     <a
-      href={docPath}
+      href={`${docPath}#${anchor}`}
       onClick={() =>
         islandSearchClick(MANUAL_INDEX, queryID, objectID, position)}
     >

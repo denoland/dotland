@@ -11,31 +11,29 @@
 import { ServerContext } from "$fresh/server.ts";
 import { Fragment, h } from "preact";
 import { serve } from "$std/http/server.ts";
-import { router } from "$router";
+import { lookupSymbol } from "./util/doc_utils.ts";
 import { withLog } from "./util/ga_utils.ts";
 import { setup } from "$doc_components/services.ts";
 
 import manifest from "./fresh.gen.ts";
 import options from "./options.ts";
 
-import { routes as completionsV2Routes } from "./completions_v2.ts";
-
 await setup({
   resolveHref(current: URL, symbol?: string) {
+    const url = new URL(current);
     if (symbol) {
-      const url = new URL(current);
       url.searchParams.set("s", symbol);
-      return url.href;
     } else {
-      return current.href;
+      url.searchParams.delete("s");
     }
+    return url.href;
   },
   lookupHref(
-    _current: URL,
-    _namespace: string | undefined,
-    _symbol: string,
+    current: URL,
+    namespace: string | undefined,
+    symbol: string,
   ): string | undefined {
-    return undefined;
+    return lookupSymbol(current, namespace, symbol);
   },
   resolveSourceHref(url, line) {
     if (!url.startsWith("https://deno.land")) {
@@ -48,7 +46,6 @@ await setup({
 
 const ctx = await ServerContext.fromManifest(manifest, options);
 
-const innerHandler = withLog(ctx.handler());
-const handler = router(completionsV2Routes, innerHandler);
+const handler = withLog(ctx.handler());
 
 serve(handler);

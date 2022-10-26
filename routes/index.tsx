@@ -3,9 +3,9 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { Fragment, h } from "preact";
-import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
 import { CodeBlock } from "@/components/CodeBlock.tsx";
+import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
 import { Header } from "@/components/Header.tsx";
@@ -40,18 +40,22 @@ test we can use chai should style ... ok (4ms)
 test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms)`;
 
   const hellobarTo =
-    "https://deno.news/archive/50-the-javascript-trademark-fresh-11-and-deno-on";
+    "https://deno.news/archive/52-deno-126-isolate-clouds-and-the-edge";
   return (
     <div>
+      <ContentMeta
+        title="Deno — A modern runtime for JavaScript and TypeScript"
+        description="Deno is a simple, modern runtime for JavaScript and
+          TypeScript that uses V8 and is built in Rust."
+        creator="@deno_land"
+        noAppendTitle
+      />
       {hellobarTo !== data.hellobarClosedTo &&
         (
           <HelloBar to={hellobarTo}>
-            Check out Deno News issue #50!
+            Check out Deno News issue #52!
           </HelloBar>
         )}
-      <Head>
-        <title>Deno - A modern runtime for JavaScript and TypeScript</title>
-      </Head>
       <div class={tw`bg-white`}>
         <div
           class={tw`bg-gray-50 overflow-x-hidden border-b border-gray-200 relative`}

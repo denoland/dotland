@@ -73,13 +73,14 @@ export function RawCodeBlock({
   if (enableCopyButton && tokens.length == 1) {
     flexCenter = "items-center";
   }
-
-  return <pre
-    className={tw`group text-sm flex ${extraClassName ?? ""}` +
-      ` gfm-highlight highlight-source-${newLang} ${flexCenter}`}
-    data-color-mode="light"
-    data-light-theme="light"
-  >
+  
+  return (
+    <pre
+      className={tw`group text-sm flex ${extraClassName ?? ""}` +
+        ` gfm-highlight highlight-source-${newLang} ${flexCenter}`}
+      data-color-mode="light"
+      data-light-theme="light"
+    >
       {enableLineRef &&
         (
           <div className={codeDivClasses}>
@@ -153,7 +154,8 @@ export function RawCodeBlock({
           <Icons.Copy />
         </button>
       )}
-  </pre>;
+    </pre>
+  );
 }
 
 export function CodeBlock(props: CodeBlockProps) {

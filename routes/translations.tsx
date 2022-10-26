@@ -3,8 +3,8 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { Fragment, h } from "preact";
-import { Head } from "$fresh/runtime.ts";
 import { tw } from "@twind";
+import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { Header } from "@/components/Header.tsx";
 import * as Icons from "@/components/Icons.tsx";
@@ -25,9 +25,11 @@ interface Translation {
 export default function TranslationsPage() {
   return (
     <>
-      <Head>
-        <title>Translations | Deno</title>
-      </Head>
+      <ContentMeta
+        title="Translations"
+        description="Deno docs is available in the following languages."
+        keywords={["deno", "documentation", "translation"]}
+      />
       <Header />
       <div class={tw`section-x-inset-xl mt-8 mb-24`}>
         <div class={tw`max-w-screen-lg mx-auto`}>
