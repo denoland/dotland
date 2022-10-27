@@ -2,7 +2,7 @@
 
 /** @jsx h */
 import { type ComponentChildren, h } from "preact";
-import { tw, css } from "@twind";
+import { css, tw } from "@twind";
 import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { Header } from "@/components/Header.tsx";
@@ -38,9 +38,14 @@ export default function Home({ data }: PageProps<Data>) {
       <div>
         <Header />
 
-        <div class={tw`px-36 py-20 ${css({
-          background: 'url("/images/cover.png") 68% 23%/120% no-repeat, linear-gradient(to right, #000059, #0094FF)',
-        })}`}>
+        <div
+          class={tw`px-36 py-20 ${
+            css({
+              background:
+                'url("/images/cover.png") 68% 23%/120% no-repeat, linear-gradient(to right, #000059, #0094FF)',
+            })
+          }`}
+        >
           <div class={tw`w-136 text-white space-y-6`}>
             <p class={tw`font-semibold text-3xl leading-none`}>Meet Deno</p>
             <p class={tw`font-semibold text-[5rem] leading-none`}>
@@ -146,9 +151,13 @@ export default function Home({ data }: PageProps<Data>) {
           </div>
         </div>
 
-        <Quote author="Firstname Lastname, Title Company">
-          “I love working with Deno because it’s the best CLI on Earth and the
-          best thing since sliced bread.”
+        <Quote
+          author="Stack Overflow"
+          href="https://survey.stackoverflow.co/2022/#most-loved-dreaded-and-wanted-webframe-love-dread"
+          size="5xl"
+        >
+          Voted one of the most loved web technologies
+          <br />in a survey of over 70,000 developers
         </Quote>
 
         <div class={tw`section-x-inset-xl pt-18 pb-24`}>
@@ -197,9 +206,15 @@ export default function Home({ data }: PageProps<Data>) {
           </div>
         </div>
 
-        <Quote author="Firstname Lastname, Title Company">
-          “I love working with Deno because it’s the best CLI on Earth and the
-          best thing since sliced bread.”
+        <Quote
+          author="Slack"
+          href="https://deno.com/blog/slack-open-beta"
+          size="4xl"
+        >
+          What stood out first and foremost to our team was their laser focus on
+          security. Deno’s secure architecture means developers get built-in
+          granular controls, like the ability to execute code with limited
+          access to the file system or external domains.
         </Quote>
 
         <div class={tw`section-x-inset-xl pt-18 pb-24`}>
@@ -297,16 +312,31 @@ export default function Home({ data }: PageProps<Data>) {
 }
 
 function Quote(
-  { children, author }: { children: ComponentChildren; author: string },
+  { children, size, author, href }: {
+    children: ComponentChildren;
+    size: string;
+    author: string;
+    href: string;
+  },
 ) {
   return (
-    <div class={tw`pt-28 pb-24 colorWash`}>
-      <figure class={tw`section-x-inset-lg space-y-11 text-center`}>
-        <blockquote class={tw`text-white font-semibold text-6xl leading-tight`}>
+    <div class={tw`pt-24 pb-20 colorWash`}>
+      <figure class={tw`section-x-inset-xl space-y-11 text-center`}>
+        <blockquote
+          class={tw`text-white font-semibold text-${size} leading-tight`}
+        >
           {children}
         </blockquote>
         <figcaption class={tw`text-white text-2xl`}>
-          {author}
+          {author} –{" "}
+          <cite>
+            <a
+              href={href}
+              class={tw`text-white hover:(text-yellow-400 underline)`}
+            >
+              {href}
+            </a>
+          </cite>
         </figcaption>
       </figure>
     </div>
