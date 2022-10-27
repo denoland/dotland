@@ -338,5 +338,19 @@
       "web": "https://jasongardner.dev"
     },
     "license": "MIT"
+  },
+  {
+    "date": "2022-09-06",
+    "image": "/images/artwork/deno_inVR_withUsasaki.png",
+    "title": "Kawaii Deno in VR",
+    "alt": "Deno is kawaii with Usasaki-san",
+    "artist": {
+      "name": "Lina Tsukusu",
+      "profile_image": "https://avatars.githubusercontent.com/u/45692394",
+      "github": "neverclear86",
+      "twitter": "TsukusuLina",
+      "web": "https://www.youtube.com/channel/UCxkOLgdNumvVIQqn5ps_bJA"
+    },
+    "license": "MIT"
   }
 ]

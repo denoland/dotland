@@ -8,7 +8,6 @@
 
 import { ServerContext } from "$fresh/server.ts";
 import { serve } from "$std/http/server.ts";
-import { router } from "$router";
 import { lookupSymbol } from "./util/doc_utils.ts";
 import { withLog } from "./util/ga_utils.ts";
 import { setup } from "$doc_components/services.ts";
@@ -17,8 +16,6 @@ import twindPlugin from "$fresh/plugins/twind.ts";
 import twindConfig from "./twind.config.ts";
 
 import manifest from "./fresh.gen.ts";
-
-import { routes as completionsV2Routes } from "./completions_v2.ts";
 
 await setup({
   resolveHref(current: URL, symbol?: string) {
@@ -49,7 +46,6 @@ const ctx = await ServerContext.fromManifest(manifest, {
   plugins: [twindPlugin(twindConfig)],
 });
 
-const innerHandler = withLog(ctx.handler());
-const handler = router(completionsV2Routes, innerHandler);
+const handler = withLog(ctx.handler());
 
 serve(handler);
