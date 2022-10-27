@@ -13,7 +13,7 @@ import { PopularityModuleTag } from "@/util/registry_utils.ts";
 
 import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
-import { Footer } from "@/components/Footer.tsx";
+import { Footer } from "$doc_components/footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
 import * as Icons from "@/components/Icons.tsx";
 import { PopularityTag } from "@/components/PopularityTag.tsx";

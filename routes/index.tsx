@@ -2,7 +2,7 @@
 
 import { CodeBlock } from "@/components/CodeBlock.tsx";
 import { ContentMeta } from "@/components/ContentMeta.tsx";
-import { Footer } from "@/components/Footer.tsx";
+import { Footer } from "$doc_components/footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
 import { Header } from "@/components/Header.tsx";
 import HelloBar from "@/islands/HelloBar.tsx";

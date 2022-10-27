@@ -26,7 +26,6 @@ import {
 } from "@/util/registry_utils.ts";
 import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
-import { Footer } from "@/components/Footer.tsx";
 import { ErrorMessage } from "@/components/ErrorMessage.tsx";
 import { DocView } from "@/components/DocView.tsx";
 import * as Icons from "@/components/Icons.tsx";
@@ -40,6 +39,7 @@ import {
   searchView,
   ssrSearchClick,
 } from "@/util/search_insights_utils.ts";
+import { Footer } from "$doc_components/footer.tsx";
 
 type Views = "doc" | "source" | "info";
 type Params = {

@@ -4,7 +4,7 @@ import { PageProps } from "$fresh/server.ts";
 import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Handlers } from "$fresh/server.ts";
 import { Header } from "@/components/Header.tsx";
-import { Footer } from "@/components/Footer.tsx";
+import { Footer } from "$doc_components/footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
 
 import {
