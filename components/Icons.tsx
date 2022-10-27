@@ -1,13 +1,11 @@
-/** @jsx h */
-import { h } from "preact";
-import { tw } from "@twind";
+// Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 // Most icons are normalized to 14x14.
 
 export function GitHub(props: { class?: string }) {
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="14"
       height="14"
       viewBox="0 0 14 14"
@@ -32,7 +30,7 @@ export function GitHub(props: { class?: string }) {
 export function Discord(props: { class?: string }) {
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="14"
       height="14"
       viewBox="0 0 14 14"
@@ -57,7 +55,7 @@ export function Discord(props: { class?: string }) {
 export function Twitter(props: { class?: string }) { // Size not normalized
   return (
     <svg
-      class={tw`h-6 w-6 ${props.class ?? ""}`}
+      class={`h-6 w-6 ${props.class ?? ""}`}
       fill="currentColor"
       viewBox="0 0 24 24"
     >
@@ -69,7 +67,7 @@ export function Twitter(props: { class?: string }) { // Size not normalized
 export function Instagram(props: { class?: string }) { // Size not normalized
   return (
     <svg
-      class={tw`h-6 w-6 ${props.class ?? ""}`}
+      class={`h-6 w-6 ${props.class ?? ""}`}
       fill="currentColor"
       viewBox="0 0 24 24"
     >
@@ -81,7 +79,7 @@ export function Instagram(props: { class?: string }) { // Size not normalized
 export function Cross(props: { class?: string }) { // Size not normalized
   return (
     <svg
-      class={tw`h-6 w-6 ${props.class ?? ""}`}
+      class={`h-6 w-6 ${props.class ?? ""}`}
       stroke="currentColor"
       fill="none"
       viewBox="0 0 24 24"
@@ -99,7 +97,7 @@ export function Cross(props: { class?: string }) { // Size not normalized
 export function ChevronLeft(props: { class?: string }) {
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="14"
       height="14"
       viewBox="0 0 14 14"
@@ -119,7 +117,7 @@ export function ChevronLeft(props: { class?: string }) {
 export function ChevronRight(props: { class?: string }) {
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="14"
       height="14"
       viewBox="0 0 14 14"
@@ -147,7 +145,7 @@ export function TriangleRight(
   return (
     <svg
       aria-label={props["aria-label"]}
-      class={tw(props.class ?? "")}
+      class={props.class}
       tabindex={props?.tabindex}
       // @ts-ignore onKeyDown does support strings
       onKeyDown={props?.onKeyDown}
@@ -165,7 +163,7 @@ export function TriangleRight(
 export function ArrowRight(props: { class?: string }) {
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="14"
       height="14"
       viewBox="0 0 14 14"
@@ -183,7 +181,7 @@ export function ArrowRight(props: { class?: string }) {
 export function Globe(props: { class?: string }) {
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="14"
       height="14"
       viewBox="0 0 14 14"
@@ -208,7 +206,7 @@ export function Globe(props: { class?: string }) {
 export function MagnifyingGlass(props: { class?: string }) {
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="14"
       height="14"
       viewBox="0 0 14 14"
@@ -233,7 +231,7 @@ export function MagnifyingGlass(props: { class?: string }) {
 export function Menu(props: { class?: string }) { // Size not normalized
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="21"
       height="14"
       viewBox="0 0 21 14"
@@ -271,7 +269,7 @@ export function Menu(props: { class?: string }) { // Size not normalized
 export function HollowStar(props: { class?: string }) {
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="14"
       height="14"
       viewBox="0 0 14 14"
@@ -298,7 +296,7 @@ export function HollowStar(props: { class?: string }) {
 export function NameTag(props: { class?: string }) { // Size not normalized
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="16"
       height="17"
       viewBox="0 0 16 17"
@@ -330,7 +328,7 @@ export function NameTag(props: { class?: string }) { // Size not normalized
 export function Gear(props: { class?: string }) { // Size not normalized
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="16"
       height="17"
       viewBox="0 0 16 17"
@@ -362,7 +360,7 @@ export function Gear(props: { class?: string }) { // Size not normalized
 export function Webhook(props: { class?: string }) { // Size not normalized
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="16"
       height="17"
       viewBox="0 0 16 17"
@@ -400,7 +398,7 @@ export function Webhook(props: { class?: string }) { // Size not normalized
 export function Copy(props: { class?: string }) {
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="14"
       height="14"
       viewBox="0 0 14 14"
@@ -425,7 +423,7 @@ export function Copy(props: { class?: string }) {
 export function Spinner(props: { class?: string }) {
   return (
     <svg
-      class={tw`animate-spin ${props.class ?? ""}`}
+      class={`animate-spin ${props.class ?? ""}`}
       width="14"
       height="14"
       viewBox="0 0 14 14"
@@ -451,7 +449,7 @@ export function Spinner(props: { class?: string }) {
 export function StatusOK(props: { class?: string }) { // Size not normalized
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="20"
       height="20"
       viewBox="0 0 20 20"
@@ -472,7 +470,7 @@ export function StatusOK(props: { class?: string }) { // Size not normalized
 export function StatusError(props: { class?: string }) { // Size not normalized
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="20"
       height="20"
       viewBox="0 0 20 20"
@@ -501,7 +499,7 @@ export function StatusError(props: { class?: string }) { // Size not normalized
 export function CheckmarkVerified(props: { class?: string }) {
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="14"
       height="14"
       viewBox="0 0 14 14"
@@ -526,7 +524,7 @@ export function CheckmarkVerified(props: { class?: string }) {
 export function Plus(props: { class?: string }) {
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="14"
       height="14"
       viewBox="0 0 14 14"
@@ -552,7 +550,7 @@ export function Plus(props: { class?: string }) {
 export function Minus(props: { class?: string }) {
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="14"
       height="14"
       viewBox="0 0 14 14"
@@ -572,7 +570,7 @@ export function Minus(props: { class?: string }) {
 export function Logo(props: { class?: string }) { // Size not normalized
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="30"
       height="30"
       viewBox="0 0 30 30"
@@ -617,7 +615,7 @@ export function Logo(props: { class?: string }) { // Size not normalized
 export function Deno(props: { class?: string }) { // Size not normalized
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="51"
       height="14"
       viewBox="0 0 51 14"
@@ -647,7 +645,7 @@ export function Deno(props: { class?: string }) { // Size not normalized
 export function Module(props: { class?: string }) { // Size not normalized
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="14"
       height="15"
       viewBox="0 0 14 15"
@@ -673,7 +671,7 @@ export function Module(props: { class?: string }) { // Size not normalized
 export function Docs(props: { class?: string }) {
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="14"
       height="14"
       viewBox="0 0 14 14"
@@ -691,7 +689,7 @@ export function Docs(props: { class?: string }) {
 export function Index(props: { class?: string }) {
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="14"
       height="14"
       viewBox="0 0 14 14"
@@ -711,7 +709,7 @@ export function Index(props: { class?: string }) {
 export function Folder(props: { class?: string }) {
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="14"
       height="14"
       viewBox="0 0 14 14"
@@ -736,7 +734,7 @@ export function Folder(props: { class?: string }) {
 export function Source(props: { class?: string }) {
   return (
     <svg
-      class={tw(props.class ?? "")}
+      class={props.class}
       width="14"
       height="14"
       viewBox="0 0 14 14"
@@ -766,7 +764,7 @@ export function Source(props: { class?: string }) {
 export function Clock() {
   return (
     <svg
-      class={tw`w-5 h-5 text-gray-500`}
+      class="w-5 h-5 text-gray-500"
       fill="none"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -782,7 +780,7 @@ export function Clock() {
 export function Reload() {
   return (
     <svg
-      class={tw`w-5 h-5 text-yellow-400`}
+      class="w-5 h-5 text-yellow-400"
       fill="none"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -798,7 +796,7 @@ export function Reload() {
 export function Checkmark() {
   return (
     <svg
-      class={tw`w-5 h-5 text-green-500`}
+      class="w-5 h-5 text-green-500"
       fill="none"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -814,7 +812,7 @@ export function Checkmark() {
 export function WarningTriangle() {
   return (
     <svg
-      class={tw`w-5 h-5 text-red-500`}
+      class="w-5 h-5 text-red-500"
       fill="none"
       strokeLinecap="round"
       strokeLinejoin="round"

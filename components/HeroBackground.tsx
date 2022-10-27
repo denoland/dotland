@@ -1,14 +1,10 @@
-// Copyright Deno Land Inc. All Rights Reserved. Proprietary and confidential.
-
-/** @jsx h */
-import { h } from "preact";
-import { tw } from "@twind";
+// Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 export function Background() {
   return (
-    <div class={tw`pointer-events-none`}>
-      <BlueGradient class={tw`absolute inset-0`} />
-      <RedGradient class={tw`absolute inset-0 left-10`} />
+    <div class="pointer-events-none">
+      <BlueGradient class="absolute inset-0" />
+      <RedGradient class="absolute inset-0 left-10" />
     </div>
   );
 }

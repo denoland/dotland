@@ -1,8 +1,5 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-import { ComponentChildren, h } from "preact";
-import { tw } from "@twind";
 import * as Icons from "./Icons.tsx";
 import type { PopularityModuleTag } from "@/util/registry_utils.ts";
 
@@ -31,11 +28,11 @@ export function PopularityTag(
   }
 
   return (
-    <div class={tw`text-${color} flex items-center gap-1.5 whitespace-nowrap`}>
-      <div class={tw`flex gap-0.5`}>
+    <div class={`text-${color} flex items-center gap-1.5 whitespace-nowrap`}>
+      <div class="flex gap-0.5">
         {Array.from({ length: stars }, () => <Icons.HollowStar />)}
       </div>
-      <span class={tw`text-sm leading-none font-medium ${props.class ?? ""}`}>
+      <span class={`text-sm leading-none font-medium ${props.class ?? ""}`}>
         {value}
       </span>
     </div>
