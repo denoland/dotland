@@ -1,28 +1,18 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-import { h } from "preact";
-import { tw } from "@twind";
 import * as Icons from "./Icons.tsx";
-import { ArrowRight } from "./Icons.tsx";
 
 export function Footer() {
   return (
-    <div
-      class={tw`border-t border-secondary bg-[#F9F9F9] text-sm flex justify-center`}
-    >
-      <div class={tw`section-x-inset-xl py-7 lg:py-18 w-full`}>
-        <nav
-          class={tw`flex flex-col gap-7 w-full leading-tight lg:(flex-row gap-0 items-start justify-between)`}
-        >
-          <a href="https://deno.land" class={tw`flex items-center gap-2`}>
-            <img class={tw`h-6 w-6`} src="/logo.svg" alt="Deno Logo" />
+    <div class="border-t border-grayDefault bg-ultralight text-sm flex justify-center">
+      <div class="section-x-inset-xl py-7 lg:py-18 w-full">
+        <nav class="flex flex-col gap-7 w-full leading-tight lg:(flex-row gap-0 items-start justify-between)">
+          <a href="https://deno.land" class="flex items-center gap-2">
+            <img class="h-6 w-6" src="/logo.svg" alt="Deno Logo" />
             <Icons.Deno class="lg:hidden" />
           </a>
 
-          <div
-            class={tw`flex flex-col gap-0 divide-incl-y lg:(flex-row gap-16 divide-incl-y-0)`}
-          >
+          <div class="flex flex-col gap-0 divide-incl-y lg:(flex-row gap-16 divide-incl-y-0)">
             <FooterSection
               title="Why Deno?"
               entries={{
@@ -44,7 +34,7 @@ export function Footer() {
               title="Sources"
               entries={{
                 "CLI Manual": "https://deno.land/manual",
-                "CLI Runtime API": "https://doc.deno.land/deno/stable",
+                "CLI Runtime API": "https://deno.land/api",
                 "Deploy Docs": "https://deno.com/deploy/docs",
                 "Standard Library": "https://deno.land/std",
                 "Third-Party Modules": "https://deno.land/x",
@@ -70,37 +60,35 @@ export function Footer() {
             />
           </div>
 
-          <div class={tw`space-y-5 w-60`}>
+          <div class="space-y-5 w-60">
             <iframe
               src="https://denostatus.com/embed-status/light-sm"
               height="41"
               frameBorder="0"
               scrolling="no"
               style="border: none;"
-              class={tw`w-full rounded-[0.59rem] focus:outline-none`}
+              class="w-full rounded-[0.59rem] focus:outline-none"
             />
 
-            <div class={tw`space-y-2.5 lg:space-y-4.5`}>
-              <span class={tw`text-xs text-[#9CA0AA] leading-tight`}>
+            <div class="space-y-2.5 lg:space-y-4.5">
+              <span class="text-xs text-[#9CA0AA] leading-tight">
                 Copyright © 2022 Deno Land Inc.{" "}
-                <span class={tw`whitespace-nowrap`}>All rights reserved.</span>
+                <span class="whitespace-nowrap">All rights reserved.</span>
               </span>
-              <a class={tw`block text-[#7B61FF]`} href="https://deno.com/jobs">
+              <a class="block text-symbol" href="https://deno.com/jobs">
                 We are hiring, join us<Icons.ArrowRight class="inline ml-1.5" />
               </a>
             </div>
 
-            <div
-              class={tw`flex gap-3 text-[#6C6E78] children:children:(h-4.5 w-auto)`}
-            >
+            <div class="flex gap-3 text-[#6C6E78] children:children:(h-4.5 w-auto)">
               <a href="https://github.com/denoland">
-                <Icons.GitHub class="hover:text-default-highlight" />
+                <Icons.GitHub class="text-gray-500 hover:text-black" />
               </a>
               <a href="https://discord.gg/deno">
-                <Icons.Discord class="hover:text-default-highlight" />
+                <Icons.Discord class="text-gray-500 hover:text-black" />
               </a>
               <a href="https://twitter.com/deno_land">
-                <Icons.Twitter class="hover:text-default-highlight" />
+                <Icons.Twitter class="text-gray-500 hover:text-black" />
               </a>
             </div>
           </div>
@@ -118,25 +106,23 @@ function FooterSection(
       <input
         type="checkbox"
         id={title}
-        class={tw`hidden checked:(siblings:last-child:flex sibling:children:last-child:children:(odd:hidden even:block))`}
+        class="hidden checked:(siblings:last-child:flex sibling:children:last-child:children:(odd:hidden even:block))"
         autoComplete="off"
       />
       <label
         htmlFor={title}
         tabIndex={0}
-        class={tw`flex items-center justify-between px-1 my-3 lg:(px-0 my-0)`}
+        class="flex items-center justify-between px-1 my-3 lg:(px-0 my-0)"
       >
-        <span class={tw`text-sm font-semibold`}>{title}</span>
-        <div class={tw`lg:hidden text-[#9CA0AA]`}>
+        <span class="text-sm font-semibold">{title}</span>
+        <div class="lg:hidden text-[#9CA0AA]">
           <Icons.Plus />
           <Icons.Minus class="hidden" />
         </div>
       </label>
-      <div
-        class={tw`hidden text-[#6C6E78] flex-col flex-wrap pl-1 pb-2 mb-3 gap-2.5 lg:(flex p-0 mt-4 mb-0)`}
-      >
+      <div class="hidden text-[#6C6E78] flex-col flex-wrap pl-1 pb-2 mb-3 gap-2.5 lg:(flex p-0 mt-4 mb-0)">
         {Object.entries(entries).map(([name, link]) => (
-          <a href={link} class={tw`whitespace-nowrap block hover:underline`}>
+          <a href={link} class="whitespace-nowrap block hover:underline">
             {name}
           </a>
         ))}

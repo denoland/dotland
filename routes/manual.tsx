@@ -1,18 +1,15 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
 import { PageProps, RouteConfig } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
-import { tw } from "@twind";
 import { Handlers } from "$fresh/server.ts";
+import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "@/components/Footer.tsx";
 import { Markdown } from "@/components/Markdown.tsx";
 import * as Icons from "@/components/Icons.tsx";
 import { ManualOrAPI, SidePanelPage } from "@/components/SidePanelPage.tsx";
 import {
+  getDescription,
   getDocURL,
   getFileURL,
   getTableOfContents,
@@ -83,19 +80,27 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
 
   return (
     <>
-      <Head>
-        <title>
-          {pageTitle === "" ? "Manual | Deno" : `${pageTitle} | Manual | Deno`}
-        </title>
-        <link rel="canonical" href={`https://deno.land/manual${path}`} />
-      </Head>
+      <ContentMeta
+        title={pageTitle ? `${pageTitle} | Manual` : "Manual"}
+        description={getDescription(data.content)}
+        creator="@deno_land"
+        ogType="article"
+        ogImage="manual"
+        keywords={[
+          "deno",
+          "manual",
+          "documentation",
+          "javascript",
+          "typescript",
+        ]}
+      />
       <Header selected="Manual" manual />
 
       <SidePanelPage
         sidepanel={
           <>
             <ManualOrAPI current="Manual" version={version} />
-            <div class={tw`space-y-3 children:w-full`}>
+            <div class="space-y-3 children:w-full">
               <VersionSelect
                 versions={Object.fromEntries(
                   versions.map((ver) => [ver, `/manual@${ver}${path}`]),
@@ -116,10 +121,10 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             href={new URL(`/manual/${params.path}`, url).href}
           />
         )}
-        <div class={tw`w-full justify-self-center flex-shrink-1`}>
+        <div class="w-full justify-self-center flex-shrink-1">
           <a
             href={getDocURL(version, path)}
-            class={tw`float-right py-2.5 px-4.5 rounded-md bg-[#F3F3F3] hover:bg-border leading-none font-medium`}
+            class="float-right py-2.5 px-4.5 rounded-md bg-grayDefault hover:bg-border leading-none font-medium"
           >
             Edit
           </a>
@@ -132,14 +137,14 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             baseURL={sourceURL}
           />
 
-          <div class={tw`mt-14`}>
+          <div class="mt-14">
             {pageList[pageIndex - 1] && (
               <a
                 href={pageList[pageIndex - 1].path.replace(
                   "manual",
                   `manual@${version}`,
                 )}
-                class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-border gap-1.5 hover:bg-light-border`}
+                class="font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-border gap-1.5 hover:bg-grayDefault"
               >
                 <Icons.ChevronLeft />
                 <div>
@@ -153,7 +158,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
                   "manual",
                   `manual@${version}`,
                 )}
-                class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-border gap-1.5 float-right text-right hover:bg-light-border`}
+                class="font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-border gap-1.5 hover:bg-grayDefault float-right text-right"
               >
                 <div>
                   {pageList[pageIndex + 1].name}
@@ -175,17 +180,15 @@ function UserContributionBanner({
   href: string;
 }) {
   return (
-    <div
-      class={tw`bg-yellow-300 sticky top-0 rounded-md mb-6 py-4 px-3 sm:px-6 lg:px-8 font-medium text-gray-900`}
-    >
+    <div class="bg-yellow-300 sticky top-0 rounded-md mb-6 py-4 px-3 sm:px-6 lg:px-8 font-medium text-gray-900">
       <span>
         You are viewing documentation generated from a{"  "}
-        <b class={tw`font-bold`}>user contribution</b>{"  "}
+        <b class="font-bold">user contribution</b>{"  "}
         or an upcoming release. The contents of this document may not have been
         reviewed by the Deno team.{" "}
       </span>
 
-      <a class={tw`underline cursor-pointer`} href={href}>
+      <a class="underline cursor-pointer" href={href}>
         Click here to view the documentation for the latest release.
       </a>
     </div>
@@ -218,14 +221,14 @@ function ToCEntry({
       <input
         type="checkbox"
         id={slug}
-        class={tw`hidden checked:siblings:even:children:first-child:rotate-90 checked:siblings:last-child:block`}
+        class="hidden checked:siblings:even:children:first-child:rotate-90 checked:siblings:last-child:block"
         checked={active || path.startsWith(`/${slug}/`)}
         disabled={!hasChildren}
       />
 
       <label
         htmlFor={slug}
-        class={tw`flex! items-center gap-2 ${
+        class={`flex! items-center gap-2 ${
           outermost
             ? "px-2.5 py-2 font-semibold"
             : `pl-${depth * 6} pr-2.5 py-1 font-normal`
@@ -244,7 +247,7 @@ function ToCEntry({
       </label>
 
       {hasChildren && (
-        <ol class={tw`list-decimal font-normal hidden` + " nested"}>
+        <ol class="list-decimal font-normal hidden  nested">
           {Object.entries(entry.children!).map(([childSlug, entry]) => (
             <ToCEntry
               slug={`${slug}/${childSlug}`}
@@ -271,7 +274,7 @@ function ToC({
 }) {
   return (
     <nav>
-      <ol class={tw`list-decimal list-inside font-semibold` + " nested"}>
+      <ol class="list-decimal list-inside font-semibold nested">
         {Object.entries(tableOfContents).map(([slug, entry]) => (
           <ToCEntry
             slug={slug}
