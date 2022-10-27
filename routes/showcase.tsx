@@ -1,7 +1,7 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 import { ContentMeta } from "@/components/ContentMeta.tsx";
-import { Footer } from "$deno_components/footer.tsx";
+import { Footer } from "$doc_components/footer.tsx";
 import { Header } from "@/components/Header.tsx";
 import * as Icons from "@/components/Icons.tsx";
 

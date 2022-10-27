@@ -4,7 +4,7 @@ import { PageProps, RouteConfig } from "$fresh/server.ts";
 import { Handlers } from "$fresh/server.ts";
 import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
-import { Footer } from "$deno_components/footer.tsx";
+import { Footer } from "$doc_components/footer.tsx";
 import { Markdown } from "@/components/Markdown.tsx";
 import * as Icons from "@/components/Icons.tsx";
 import { ManualOrAPI, SidePanelPage } from "@/components/SidePanelPage.tsx";

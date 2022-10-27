@@ -7,7 +7,7 @@ import {
 } from "$std/testing/asserts.ts";
 import { extractAltLineNumberReference } from "@/util/registry_utils.ts";
 import { ServerContext } from "$fresh/server.ts";
-import { setup } from "$deno_components/services.ts";
+import { setup } from "$doc_components/services.ts";
 
 import manifest from "@/fresh.gen.ts";
 import twindPlugin from "$fresh/plugins/twind.ts";

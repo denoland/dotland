@@ -39,7 +39,7 @@ import {
   searchView,
   ssrSearchClick,
 } from "@/util/search_insights_utils.ts";
-import { Footer } from "$deno_components/footer.tsx";
+import { Footer } from "$doc_components/footer.tsx";
 
 type Views = "doc" | "source" | "info";
 type Params = {

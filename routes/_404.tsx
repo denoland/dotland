@@ -2,7 +2,7 @@
 
 import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
-import { Footer } from "$deno_components/footer.tsx";
+import { Footer } from "$doc_components/footer.tsx";
 
 export default function NotFoundPage() {
   return (

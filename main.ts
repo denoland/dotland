@@ -10,7 +10,7 @@ import { ServerContext } from "$fresh/server.ts";
 import { serve } from "$std/http/server.ts";
 import { lookupSymbol } from "./util/doc_utils.ts";
 import { withLog } from "./util/ga_utils.ts";
-import { setup } from "$deno_components/services.ts";
+import { setup } from "$doc_components/services.ts";
 
 import twindPlugin from "$fresh/plugins/twind.ts";
 import twindConfig from "./twind.config.ts";
