@@ -1,7 +1,6 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 import { PageProps, RouteConfig } from "$fresh/server.ts";
-import { tw } from "twind";
 import { Handlers } from "$fresh/server.ts";
 import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
@@ -229,7 +228,7 @@ function ToCEntry({
 
       <label
         htmlFor={slug}
-        class={tw`flex! items-center gap-2 ${
+        class={`flex! items-center gap-2 ${
           outermost
             ? "px-2.5 py-2 font-semibold"
             : `pl-${depth * 6} pr-2.5 py-1 font-normal`
@@ -248,7 +247,7 @@ function ToCEntry({
       </label>
 
       {hasChildren && (
-        <ol class={tw`list-decimal font-normal hidden` + " nested"}>
+        <ol class="list-decimal font-normal hidden  nested">
           {Object.entries(entry.children!).map(([childSlug, entry]) => (
             <ToCEntry
               slug={`${slug}/${childSlug}`}
@@ -275,7 +274,7 @@ function ToC({
 }) {
   return (
     <nav>
-      <ol class={tw`list-decimal list-inside font-semibold` + " nested"}>
+      <ol class="list-decimal list-inside font-semibold nested">
         {Object.entries(tableOfContents).map(([slug, entry]) => (
           <ToCEntry
             slug={slug}

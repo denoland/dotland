@@ -1,7 +1,6 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-import { type ComponentChildren } from "preact";
-import { tw } from "twind";
+import type { ComponentChildren } from "preact";
 import * as Icons from "@/components/Icons.tsx";
 
 export function SidePanelPage({ children, sidepanel }: {
@@ -67,7 +66,7 @@ export function ManualOrAPI(
           href={`${entries[key]}@${version}`}
         >
           <div
-            class={tw`pt-2 ${
+            class={`pt-2 ${
               key === current ? "border-b-2 border-black pb-1.5" : "pb-2"
             }`}
           >

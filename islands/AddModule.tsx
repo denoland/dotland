@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "preact/hooks";
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { tw } from "twind";
 import * as Icons from "@/components/Icons.tsx";
 import { getVersionList } from "@/util/registry_utils.ts";
 import confetti from "$canvas-confetti";
@@ -130,7 +129,7 @@ export default function AddModule() {
           <input
             type="text"
             placeholder="Module Name"
-            class={tw`w-full lg:w-136 h-10 py-3 px-4 rounded-md ${
+            class={`w-full lg:w-136 h-10 py-3 px-4 rounded-md ${
               name && !available
                 ? "text-[#F00C08] border border-[#F00C08] bg-transparent"
                 : "bg-[#F3F3F3]"
