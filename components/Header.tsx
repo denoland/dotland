@@ -24,9 +24,9 @@ export function Header({ selected, main, manual }: {
     <div
       class={tw(
         manual
-          ? "lg:border-b border-light-border"
+          ? "lg:border-b border-border"
           : !main
-          ? "bg-primary border-b border-light-border backdrop-blur-3xl"
+          ? "bg-[#FFFFFFE5] border-b border-border backdrop-blur-3xl"
           : "",
       )}
     >
@@ -73,7 +73,7 @@ export function Header({ selected, main, manual }: {
             {entries.map(({ href, content }) => (
               <a
                 href={href}
-                class={tw`lg:ml-4 px-2 rounded-md leading-loose hover:(bg-gray-100 text-main) ${apply`${
+                class={tw`lg:ml-4 px-2 rounded-md leading-loose hover:(bg-grayDefault) ${apply`${
                   content === selected
                     ? css({
                       "text-decoration-line": "underline",
@@ -99,14 +99,14 @@ export function Header({ selected, main, manual }: {
               class="lg:ml-5 my-auto hidden lg:block"
             >
               <span class="sr-only">GitHub</span>
-              <Icons.GitHub class="h-5 w-auto text-main hover:text-default-highlight" />
+              <Icons.GitHub class="h-5 w-auto text-gray-600 hover:text-black" />
             </a>
             <a
               href="https://discord.gg/deno"
               class="lg:ml-5 my-auto hidden lg:block"
             >
               <span class="sr-only">Discord</span>
-              <Icons.Discord class="h-5 w-auto text-main hover:text-default-highlight" />
+              <Icons.Discord class="h-5 w-auto text-gray-600 hover:text-black" />
             </a>
           </div>
         </nav>

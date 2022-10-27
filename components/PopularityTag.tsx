@@ -17,12 +17,12 @@ export function PopularityTag(
       break;
     case "top_5_percent":
       stars = 2;
-      color = "tag-blue";
+      color = "primary";
       value = "Very Popular";
       break;
     case "top_1_percent":
       stars = 3;
-      color = "[#7B61FF]";
+      color = "symbol";
       value = "Extremely Popular";
       break;
   }

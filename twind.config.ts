@@ -26,23 +26,14 @@ export default {
     },
     extend: {
       colors: {
-        primary: "#FFFFFFE5",
-        secondary: "#E5E7EB",
-        main: "#333333",
-        "default-highlight": "#333333C0",
-        light: "#999999",
         default: "#232323",
-        "default-15": "#23232326",
-        ultralight: "#F8F7F6",
-        "light-border": "#EEEEEE",
+        fresh: "#0CBB3F",
+        primary: "#056CF0",
+        symbol: "#7B61FF",
+        danger: "#F00C08",
         border: "#DDDDDD",
-
-        "tag-blue-bg": "#056CF025",
-        "tag-blue": "#056CF0",
-        "tag-blue2": "#448bef",
-      },
-      opacity: {
-        15: ".15",
+        grayDefault: "#F3F3F3",
+        ultralight: "#F8F7F6",
       },
       spacing: {
         1.75: "0.4375rem",
@@ -63,7 +54,7 @@ export default {
   },
   plugins: {
     link:
-      apply`text-[#056CF0] transition duration-75 ease-in-out hover:text-blue-400`,
+      apply`text-primary transition duration-75 ease-in-out hover:text-blue-400`,
     "section-x-inset": (parts) =>
       parts[0] === "none"
         ? apply`max-w-none mx-0 px-0`
@@ -97,7 +88,7 @@ export default {
 
       switch (kind) {
         case "primary": {
-          bg = "tag-blue";
+          bg = "primary";
           text = "white";
           bgHover = "[#3587EF]";
           break;
@@ -109,7 +100,7 @@ export default {
           break;
         }
         case "alternate": {
-          bg = "[#F3F3F3]";
+          bg = "grayDefault";
           text = "default";
           bgHover = "border";
           break;
@@ -123,7 +114,7 @@ export default {
         }
         case "danger": {
           bg = "white";
-          text = "[#F00C08]";
+          text = "danger";
           bgHover = "ultralight";
           border = true;
           break;

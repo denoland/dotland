@@ -4,7 +4,7 @@ import * as Icons from "./Icons.tsx";
 
 export function Footer() {
   return (
-    <div class="border-t border-secondary bg-[#F9F9F9] text-sm flex justify-center">
+    <div class="border-t border-grayDefault bg-ultralight text-sm flex justify-center">
       <div class="section-x-inset-xl py-7 lg:py-18 w-full">
         <nav class="flex flex-col gap-7 w-full leading-tight lg:(flex-row gap-0 items-start justify-between)">
           <a href="https://deno.land" class="flex items-center gap-2">
@@ -75,20 +75,20 @@ export function Footer() {
                 Copyright © 2022 Deno Land Inc.{" "}
                 <span class="whitespace-nowrap">All rights reserved.</span>
               </span>
-              <a class="block text-[#7B61FF]" href="https://deno.com/jobs">
+              <a class="block text-symbol" href="https://deno.com/jobs">
                 We are hiring, join us<Icons.ArrowRight class="inline ml-1.5" />
               </a>
             </div>
 
             <div class="flex gap-3 text-[#6C6E78] children:children:(h-4.5 w-auto)">
               <a href="https://github.com/denoland">
-                <Icons.GitHub class="hover:text-default-highlight" />
+                <Icons.GitHub class="text-gray-500 hover:text-black" />
               </a>
               <a href="https://discord.gg/deno">
-                <Icons.Discord class="hover:text-default-highlight" />
+                <Icons.Discord class="text-gray-500 hover:text-black" />
               </a>
               <a href="https://twitter.com/deno_land">
-                <Icons.Twitter class="hover:text-default-highlight" />
+                <Icons.Twitter class="text-gray-500 hover:text-black" />
               </a>
             </div>
           </div>

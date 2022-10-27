@@ -6,6 +6,7 @@ import { Header } from "@/components/Header.tsx";
 import * as Icons from "@/components/Icons.tsx";
 
 import projects from "@/data/showcase.json" assert { type: "json" };
+import { StatusOK } from "../components/Icons.tsx";
 
 const PROJECTS: Project[] = projects;
 
