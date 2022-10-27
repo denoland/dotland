@@ -1,6 +1,6 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-import { type ComponentChildren } from "preact";
+import type { ComponentChildren } from "preact";
 
 export function InlineCode(
   props: { children: ComponentChildren; id?: string },

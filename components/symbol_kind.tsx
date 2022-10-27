@@ -1,7 +1,5 @@
 // Copyright 2021-2022 the Deno authors. All rights reserved. MIT license.
 
-import { tw } from "twind";
-
 export const colors = {
   "namespace": ["#D25646", "#D256461A"],
   "class": ["#20B44B", "#2FA8501A"],
@@ -31,7 +29,7 @@ export const docNodeKindOrder = Object.keys(colors);
 export function Namespace() {
   const [text, bg] = colors["namespace"];
   return (
-    <div class={tw`bg-[${bg}] text-[${text}] symbolKind`}>
+    <div class={`bg-[${bg}] text-[${text}] symbolKind`}>
       N
     </div>
   );
@@ -41,7 +39,7 @@ export function Class() {
   const [text, bg] = colors["class"];
   return (
     <div
-      class={tw`bg-[${bg}] text-[${text}] symbolKind`}
+      class={`bg-[${bg}] text-[${text}] symbolKind`}
       title="Class"
     >
       c
@@ -53,7 +51,7 @@ export function Enum() {
   const [text, bg] = colors["enum"];
   return (
     <div
-      class={tw`bg-[${bg}] text-[${text}] symbolKind`}
+      class={`bg-[${bg}] text-[${text}] symbolKind`}
       title="Enum"
     >
       E
@@ -65,7 +63,7 @@ export function Variable() {
   const [text, bg] = colors["variable"];
   return (
     <div
-      class={tw`bg-[${bg}] text-[${text}] symbolKind`}
+      class={`bg-[${bg}] text-[${text}] symbolKind`}
       title="Variable"
     >
       v
@@ -77,7 +75,7 @@ export function Function() {
   const [text, bg] = colors["function"];
   return (
     <div
-      class={tw`bg-[${bg}] text-[${text}] symbolKind`}
+      class={`bg-[${bg}] text-[${text}] symbolKind`}
       title="Function"
     >
       f
@@ -89,7 +87,7 @@ export function Interface() {
   const [text, bg] = colors["interface"];
   return (
     <div
-      class={tw`bg-[${bg}] text-[${text}] symbolKind`}
+      class={`bg-[${bg}] text-[${text}] symbolKind`}
       title="Interface"
     >
       I
@@ -101,7 +99,7 @@ export function TypeAlias() {
   const [text, bg] = colors["typeAlias"];
   return (
     <div
-      class={tw`bg-[${bg}] text-[${text}] symbolKind`}
+      class={`bg-[${bg}] text-[${text}] symbolKind`}
       title="Type Alias"
     >
       T

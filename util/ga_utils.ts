@@ -180,8 +180,6 @@ function ga4(
     }
 
     await report.send();
-  }).catch((err) => {
-    console.error(`Internal error: ${err}`);
   });
 }
 

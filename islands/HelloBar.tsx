@@ -1,6 +1,6 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-import { ComponentChildren } from "preact";
+import type { ComponentChildren } from "preact";
 import { useState } from "preact/hooks";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { Cross } from "@/components/Icons.tsx";

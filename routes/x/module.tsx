@@ -1,7 +1,6 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 import { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
-import { tw } from "twind";
 import twas from "$twas";
 import { emojify } from "$emoji";
 import { accepts } from "$oak_commons";
@@ -680,7 +679,7 @@ function InfoView(
               {data.versions.map((listVersion) => (
                 <li class="odd:(bg-ultralight rounded-md)">
                   <a
-                    class={tw`flex px-5 py-2 link ${
+                    class={`flex px-5 py-2 link ${
                       listVersion === version ? "font-bold" : "font-medium"
                     }`}
                     href={getModulePath(name, listVersion)}

@@ -1,7 +1,5 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-import { tw } from "twind";
-
 // Most icons are normalized to 14x14.
 
 export function GitHub(props: { class?: string }) {
@@ -57,7 +55,7 @@ export function Discord(props: { class?: string }) {
 export function Twitter(props: { class?: string }) { // Size not normalized
   return (
     <svg
-      class={tw`h-6 w-6 ${props.class ?? ""}`}
+      class={`h-6 w-6 ${props.class ?? ""}`}
       fill="currentColor"
       viewBox="0 0 24 24"
     >
@@ -69,7 +67,7 @@ export function Twitter(props: { class?: string }) { // Size not normalized
 export function Instagram(props: { class?: string }) { // Size not normalized
   return (
     <svg
-      class={tw`h-6 w-6 ${props.class ?? ""}`}
+      class={`h-6 w-6 ${props.class ?? ""}`}
       fill="currentColor"
       viewBox="0 0 24 24"
     >
@@ -81,7 +79,7 @@ export function Instagram(props: { class?: string }) { // Size not normalized
 export function Cross(props: { class?: string }) { // Size not normalized
   return (
     <svg
-      class={tw`h-6 w-6 ${props.class ?? ""}`}
+      class={`h-6 w-6 ${props.class ?? ""}`}
       stroke="currentColor"
       fill="none"
       viewBox="0 0 24 24"
@@ -415,7 +413,7 @@ export function Copy(props: { class?: string }) {
 export function Spinner(props: { class?: string }) {
   return (
     <svg
-      class={tw`animate-spin ${props.class ?? ""}`}
+      class={`animate-spin ${props.class ?? ""}`}
       width="14"
       height="14"
       viewBox="0 0 14 14"
