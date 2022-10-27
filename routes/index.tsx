@@ -62,8 +62,7 @@ export default function Home({ data }: PageProps<Data>) {
           class={tw`flex items-center justify-center py-3 bg-mainBlue text-2xl text-white text-center font-semibold bg-gradient-to-r from-yellow-500 via-red-500 to-pink-600`}
           href="deno.com/blog"
         >
-          NPM compatibility Announcement
-          <Icons.ArrowRight class="inline-block ml-3.5 h-6 w-auto" />
+          NPM compatibility is now live! Click here to get started
         </a>
 
         <div class={tw`section-x-inset-xl pt-18 pb-24`}>
