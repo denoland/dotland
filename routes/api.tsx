@@ -17,7 +17,7 @@ import { ErrorMessage } from "@/components/ErrorMessage.tsx";
 import { LibraryDocPanel } from "$doc_components/doc/library_doc_panel.tsx";
 import { LibraryDoc } from "$doc_components/doc/library_doc.tsx";
 import { SymbolDoc } from "$doc_components/doc/symbol_doc.tsx";
-import { Footer } from "$doc_components/Footer.tsx";
+import { Footer } from "$doc_components/footer.tsx";
 
 export default function API(
   { params, url, data }: PageProps<LibDocPage>,
