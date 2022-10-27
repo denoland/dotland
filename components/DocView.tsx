@@ -1,16 +1,11 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
-import { tw } from "@twind";
-import { type CommonProps, getBasePath } from "@/util/registry_utils.ts";
+import { type CommonProps, getModulePath } from "@/util/registry_utils.ts";
 import { dirname } from "$std/path/mod.ts";
-import { FileDisplay } from "./FileDisplay.tsx";
-import { ModuleDoc } from "$deno_components/doc/module_doc.tsx";
-import { ModulePathIndex } from "$deno_components/doc/module_path_index.tsx";
-import { ModulePathIndexPanel } from "$deno_components/doc/module_path_index_panel.tsx";
-import { SymbolDoc } from "$deno_components/doc/symbol_doc.tsx";
+import { ModuleDoc } from "$doc_components/doc/module_doc.tsx";
+import { ModuleIndex } from "$doc_components/doc/module_index.tsx";
+import { ModuleIndexPanel } from "$doc_components/doc/module_index_panel.tsx";
+import { SymbolDoc } from "$doc_components/doc/symbol_doc.tsx";
 import {
   DocPageIndex,
   DocPageModule,
@@ -19,55 +14,52 @@ import {
 import { SidePanelPage } from "./SidePanelPage.tsx";
 
 export function DocView({
-  isStd,
   name,
   version,
   path,
   url,
 
   data,
-}: CommonProps & {
-  data: DocPageSymbol | DocPageModule | DocPageIndex;
-}) {
-  const basePath = getBasePath({
-    isStd,
-    name,
-    version,
-  });
-  url.search = "";
+}: CommonProps<DocPageSymbol | DocPageModule | DocPageIndex>) {
+  const replacer: [string, string][] | undefined = name === "std"
+    ? [["$STD_VERSION", version]]
+    : undefined;
+  const baseUrl = new URL(url);
+  baseUrl.pathname = getModulePath(name, version);
 
   return (
     <SidePanelPage
       sidepanel={(data.kind === "module" || data.kind === "symbol")
         ? (
-          <ModulePathIndexPanel
-            base={basePath}
+          <ModuleIndexPanel
+            base={baseUrl}
             path={dirname(path)}
             current={path}
             currentSymbol={data.kind === "symbol" ? data.name : undefined}
           >
             {data.nav}
-          </ModulePathIndexPanel>
+          </ModuleIndexPanel>
         )
         : null}
     >
-      <div class={tw`space-y-12 flex flex-col gap-4 w-full`}>
+      <div class="w-full">
         {(() => {
           switch (data.kind) {
             case "index":
               return (
-                <ModulePathIndex
-                  base={basePath}
+                <ModuleIndex
+                  url={baseUrl}
                   path={path || "/"}
                   sourceUrl={url.href}
+                  replacers={replacer}
                 >
                   {data.items}
-                </ModulePathIndex>
+                </ModuleIndex>
               );
             case "symbol":
               return (
                 // @ts-ignore it works.
-                <SymbolDoc url={url.href} namespace={undefined}>
+                <SymbolDoc url={url} name={data.name} replacers={replacer}>
                   {data.docNodes}
                 </SymbolDoc>
               );
@@ -75,26 +67,15 @@ export function DocView({
               return (
                 // @ts-ignore it works.
                 <ModuleDoc
-                  url={url.href}
+                  url={url}
                   sourceUrl={url.href}
+                  replacers={replacer}
                 >
                   {data.docNodes}
                 </ModuleDoc>
               );
           }
         })()}
-
-        {data.kind === "index" && data.readme && (
-          <FileDisplay
-            isStd={isStd}
-            version={version}
-            raw={data.readme.content}
-            canonicalPath={data.readme.canonicalPath}
-            sourceURL={data.readme.url}
-            repositoryURL={data.readme.repositoryURL}
-            url={url}
-          />
-        )}
       </div>
     </SidePanelPage>
   );

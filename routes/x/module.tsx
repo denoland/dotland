@@ -1,37 +1,47 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
 import { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
-import { tw } from "@twind";
 import twas from "$twas";
 import { emojify } from "$emoji";
 import { accepts } from "$oak_commons";
+import { setSymbols } from "@/util/doc_utils.ts";
 import {
-  type CodePage,
   type DocPage,
   type DocPageIndex,
   type DocPageModule,
   type DocPageSymbol,
   extractAltLineNumberReference,
   fetchSource,
+  getCanonicalUrl,
+  getDocAsDescription,
   getModulePath,
   getRawFile,
   getReadme,
   getRepositoryURL,
+  getSourceURL,
   getVersionList,
+  type InfoPage,
+  type ModInfoPage,
+  type SourcePage,
 } from "@/util/registry_utils.ts";
+import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
 import { ErrorMessage } from "@/components/ErrorMessage.tsx";
 import { DocView } from "@/components/DocView.tsx";
 import * as Icons from "@/components/Icons.tsx";
 import VersionSelect from "@/islands/VersionSelect.tsx";
-import { CodeView } from "@/components/CodeView.tsx";
+import { SourceView } from "@/components/SourceView.tsx";
 import { PopularityTag } from "@/components/PopularityTag.tsx";
+import { SidePanelPage } from "@/components/SidePanelPage.tsx";
+import { Markdown } from "@/components/Markdown.tsx";
+import {
+  getUserToken,
+  searchView,
+  ssrSearchClick,
+} from "@/util/search_insights_utils.ts";
 import { Footer } from "$deno_components/footer.tsx";
 
+type Views = "doc" | "source" | "info";
 type Params = {
   name: string;
   version: string;
@@ -39,13 +49,231 @@ type Params = {
 };
 
 type Data =
-  | { data: DocPage; isCode: false }
-  | { data: CodePage; isCode: true };
+  | { data: DocPage; view: "doc" }
+  | { data: SourcePage; view: "source" }
+  | { data: InfoPage; view: "info" };
 type MaybeData =
   | Data
   | null;
 
-export default function Registry({ params, url, data }: PageProps<MaybeData>) {
+interface PageData {
+  data: MaybeData;
+}
+
+function getTitle(
+  module: string,
+  version: string | undefined,
+  data: MaybeData,
+): string {
+  if (!data) {
+    return "Third Party";
+  }
+  const title = [version ? `${module}@${version}` : module];
+  if (
+    data.view === "source" &&
+    (data.data.kind === "dir" || data.data.kind === "file")
+  ) {
+    title.unshift(data.data.path);
+  }
+  if (
+    data.view === "doc" &&
+    (data.data.kind === "module" || data.data.kind === "file" ||
+      data.data.kind === "index" || data.data.kind === "symbol")
+  ) {
+    title.unshift(data.data.path);
+    if (data.data.kind === "symbol") {
+      title.unshift(data.data.name);
+    }
+  }
+  return title.join(" | ");
+}
+
+function getDescription(data: MaybeData): string | undefined {
+  if (data) {
+    if (
+      (data.view === "info" && data.data.kind === "modinfo") ||
+      (data.view === "source" &&
+        (data.data.kind === "dir" || data.data.kind === "file")) ||
+      (data.view === "doc" &&
+        (data.data.kind === "index" || data.data.kind === "file"))
+    ) {
+      if (data.data.description) {
+        return emojify(data.data.description);
+      }
+    } else if (data.view === "doc") {
+      if (data.data.kind === "module") {
+        return getDocAsDescription(data.data.docNodes, true);
+      }
+      if (data.data.kind === "symbol") {
+        return getDocAsDescription(data.data.docNodes);
+      }
+    }
+  }
+}
+
+export const handler: Handlers<PageData> = {
+  async GET(req, { params, render, remoteAddr }) {
+    const { name, version, path } = params as Params;
+    const url = new URL(req.url);
+
+    if (name === "std" && url.pathname.startsWith("/x")) {
+      url.pathname = url.pathname.slice(2);
+      return Response.redirect(url, 301);
+    }
+
+    // Deno CLI and bots both present with an `Accept: */*` header, where as
+    // browsers will prefer HTML. Because of this, we have to try to infer a bot
+    // from the UA in order to serve the HTML page.
+    const isHTML = accepts(req, "application/*", "text/html") === "text/html" ||
+      (req.headers.get("accept") === "*/*" &&
+        req.headers.get("user-agent")?.includes("bot"));
+    if (!isHTML) return handlerRaw(req, params as Params);
+
+    let view: Views;
+    if (url.searchParams.has("source")) {
+      view = "source";
+    } else if (url.searchParams.has("doc")) {
+      view = "doc";
+    } else if (!path) {
+      view = "info";
+    } else {
+      view = "doc";
+    }
+
+    const resURL = new URL(
+      `https://apiland.deno.dev/v2/pages/mod/${view}/${name}/${
+        version || "__latest__"
+      }/${path}`,
+    );
+
+    const symbol = url.searchParams.get("s");
+    if (symbol && view === "doc") {
+      resURL.searchParams.set("symbol", symbol);
+    }
+
+    const queryId = url.searchParams.get("qid");
+    const position = url.searchParams.get("pos");
+    url.searchParams.delete("qid");
+    url.searchParams.delete("pos");
+    if (queryId && position && remoteAddr.transport === "tcp") {
+      ssrSearchClick(
+        await getUserToken(req.headers, remoteAddr.hostname),
+        "modules",
+        queryId,
+        name,
+        parseInt(position, 10),
+      );
+    }
+
+    let data: Data;
+
+    const res = await fetch(resURL, {
+      redirect: "manual",
+    });
+    if (res.status === 404) { // module doesnt exist
+      return render({ data: null });
+    } else if (res.status === 302) { // implicit latest
+      const latestVersion = res.headers.get("X-Deno-Latest-Version")!;
+      url.pathname = getModulePath(
+        name,
+        latestVersion,
+        path ? ("/" + path) : undefined,
+      );
+      return Response.redirect(url);
+    } else if (res.status === 301) { // path is directory and there is an index module and its doc
+      const newPath = res.headers.get("X-Deno-Module-Path")!;
+      return new Response(undefined, {
+        headers: {
+          Location: getModulePath(
+            name,
+            version,
+            newPath,
+          ),
+        },
+        status: 301,
+      });
+    } else {
+      data = { data: await res.json(), view };
+    }
+
+    if (data.data.kind === "no-versions") {
+      return render!({ data });
+    }
+
+    if (data.view === "doc" && data.data.kind === "file") {
+      url.searchParams.set("source", "");
+      return Response.redirect(url, 301);
+    }
+
+    const ln = extractAltLineNumberReference(url.pathname);
+    if (ln) {
+      url.pathname = ln.rest;
+      url.searchParams.set("source", "");
+      url.hash = "L" + ln.line;
+      return Response.redirect(url, 302);
+    }
+
+    if (data.data.kind === "modinfo" && data.data.readme) {
+      data.data.readmeFile = await getReadme(name, version, data.data.readme);
+    } else if (data.view === "source" && data.data.kind === "file") {
+      data.data.file = await getRawFile(
+        name,
+        version,
+        path ? `/${path}` : "",
+        data.data.size,
+      );
+    }
+
+    await setSymbols(
+      (data.data.kind === "module" || data.data.kind === "symbol")
+        ? data.data.symbols
+        : undefined,
+    );
+    return render({ data });
+  },
+};
+
+const RAW_HEADERS = { "Access-Control-Allow-Origin": "*" };
+
+// Note: this function is _very_ hot. It is called for every download of a /x/
+// module. We need to be careful about what we do here. This code must not rely
+// on any services other than S3.
+async function handlerRaw(
+  req: Request,
+  { name, version, path }: Params,
+): Promise<Response> {
+  if (version === "") {
+    const versions = await getVersionList(name);
+    if (versions === null) {
+      return new Response(`The module '${name}' does not exist`, {
+        status: 404,
+        headers: RAW_HEADERS,
+      });
+    }
+    if (versions.latest === null) {
+      return new Response(`The module '${name}' has no latest version.`, {
+        status: 404,
+        headers: RAW_HEADERS,
+      });
+    }
+    if (path) path = `/${path}`;
+    return new Response(undefined, {
+      status: 302,
+      headers: {
+        ...RAW_HEADERS,
+        Location: getModulePath(name, versions.latest, path),
+        "x-deno-warning":
+          `Implicitly using latest version (${versions.latest}) for ${req.url}`,
+      },
+    });
+  }
+
+  return fetchSource(name, version, path);
+}
+
+export default function Registry(
+  { params, url, data: { data } }: PageProps<PageData>,
+) {
   let {
     name,
     version,
@@ -56,29 +284,45 @@ export default function Registry({ params, url, data }: PageProps<MaybeData>) {
   const path = maybePath ? "/" + maybePath : "";
   const isStd = name === "std";
 
+  let canonical: URL | undefined;
+  if (data && "latest_version" in data.data) {
+    canonical = getCanonicalUrl(url, data.data.latest_version);
+  }
+
   return (
     <>
-      <Head>
-        <title>{name + (version ? `@${version}` : "") + " | Deno"}</title>
-      </Head>
-      <div class={tw`bg-primary min-h-full`}>
+      <ContentMeta
+        title={getTitle(name, version, data)}
+        description={getDescription(data)}
+        canonical={canonical}
+        ogImage={isStd ? "std" : "modules"}
+        keywords={["deno", "third party", "module", name]}
+      />
+      <div class="min-h-full">
         <Header
           selected={name === "std" ? "Standard Library" : "Third Party Modules"}
         />
         {data === null
           ? (
-            <div class={tw`section-x-inset-xl pb-20 pt-10`}>
+            <div class="section-x-inset-xl pb-20 pt-10">
               <ErrorMessage title="404 - Not Found">
-                This module does not exist.
+                This {url.searchParams.has("s") ? "symbol" : "module"}{" "}
+                does not exist.
               </ErrorMessage>
             </div>
           )
           : (
             <>
-              <TopPanel
-                version={version!}
-                {...{ name, path, isStd, ...data }}
-              />
+              {data.data.kind !== "modinfo" && (
+                <TopPanel
+                  version={version!}
+                  {...{
+                    name,
+                    path,
+                    ...data,
+                  }}
+                />
+              )}
               <ModuleView
                 version={version!}
                 {...{ name, path, isStd, url, data }}
@@ -95,14 +339,12 @@ function TopPanel({
   name,
   version,
   path,
-  isStd,
   data,
-  isCode,
+  view,
 }: {
   name: string;
   version: string;
   path: string;
-  isStd: boolean;
 } & Data) {
   const hasPageBase = data.kind !== "invalid-version" &&
     data.kind !== "no-versions";
@@ -110,42 +352,40 @@ function TopPanel({
   const popularityTag = hasPageBase
     ? data.tags?.find((tag) => tag.kind === "popularity")
     : undefined;
+
+  const searchParam = view === "source"
+    ? "?source"
+    : (path === "" ? "?doc" : "");
+
   return (
-    <div class={tw`bg-ultralight border-b border-light-border`}>
-      <div class={tw`section-x-inset-xl py-5 flex items-center`}>
-        <div
-          class={tw`flex flex-col md:(flex-row items-center) justify-between w-full gap-4`}
-        >
-          <div class={tw`overflow-hidden`}>
+    <div class="bg-ultralight border-b border-grayDefault">
+      <div class="section-x-inset-xl py-5 flex items-center">
+        <div class="flex flex-col md:(flex-row items-center) justify-between w-full gap-4">
+          <div class="overflow-hidden">
             <Breadcrumbs
               name={name}
               version={version}
               path={path}
-              isStd={isStd}
-              isCode={isCode}
+              view={view}
             />
 
             {data.kind !== "no-versions" && data.description &&
               (
                 <div
-                  class={tw`text-sm lg:truncate`}
+                  class="text-sm lg:truncate"
                   title={emojify(data.description)}
                 >
                   {emojify(data.description)}
                 </div>
               )}
           </div>
-          <div
-            class={tw`flex flex-col items-stretch gap-4 w-full md:w-auto lg:(flex-row justify-between) flex-shrink-0`}
-          >
+          <div class="flex flex-col items-stretch gap-4 w-full md:w-auto lg:(flex-row justify-between) flex-shrink-0">
             {hasPageBase && (
-              <div
-                class={tw`flex flex-row justify-between md:justify-center items-center gap-4 border border-dark-border rounded-md bg-white py-2 px-5`}
-              >
-                <div class={tw`flex items-center whitespace-nowrap`}>
-                  <Icons.GitHub class="mr-2 w-5 h-5 inline text-gray-700" />
+              <div class="flex flex-row justify-between md:justify-center items-center gap-4 border border-border rounded-md bg-white py-2 px-5">
+                <div class="flex items-center whitespace-nowrap gap-2">
+                  <Icons.GitHub class="h-4 w-auto text-gray-700 flex-none" />
                   <a
-                    class={tw`link`}
+                    class="link"
                     href={`https://github.com/${data.upload_options.repository}`}
                   >
                     {data.upload_options.repository}
@@ -157,11 +397,13 @@ function TopPanel({
               </div>
             )}
             {data.kind !== "no-versions" && (
-              <VersionSelector
-                versions={data.versions}
+              <VersionSelect
+                versions={Object.fromEntries(
+                  data.versions.map((
+                    ver,
+                  ) => [ver, getModulePath(name, ver, path) + searchParam]),
+                )}
                 selectedVersion={version}
-                name={name}
-                path={path}
               />
             )}
           </div>
@@ -177,6 +419,7 @@ function ModuleView({
   path,
   isStd,
   url,
+  userToken,
   data,
 }: {
   name: string;
@@ -184,27 +427,34 @@ function ModuleView({
   path: string;
   isStd: boolean;
   url: URL;
+  userToken?: string;
   data: Data;
 }) {
   if (data.data.kind === "no-versions") {
     return (
-      <ErrorMessage title="No uploaded versions">
-        This module name has been reserved for a repository, but no versions
-        have been uploaded yet. Modules that do not upload a version within 30
-        days of registration will be removed.
-      </ErrorMessage>
+      <div class="section-x-inset-xl py-12">
+        <ErrorMessage title="No uploaded versions">
+          This module name has been reserved for a repository, but no versions
+          have been uploaded yet. Modules that do not upload a version within 30
+          days of registration will be removed.
+        </ErrorMessage>
+      </div>
     );
   } else if (data.data.kind === "invalid-version") {
     return (
-      <ErrorMessage title="404 - Not Found">
-        This version does not exist for this module.
-      </ErrorMessage>
+      <div class="section-x-inset-xl py-12">
+        <ErrorMessage title="404 - Not Found">
+          This version does not exist for this module.
+        </ErrorMessage>
+      </div>
     );
   } else if (data.data.kind === "notfound") {
     return (
-      <ErrorMessage title="404 - Not Found">
-        This file or directory could not be found.
-      </ErrorMessage>
+      <div class="section-x-inset-xl py-12">
+        <ErrorMessage title="404 - Not Found">
+          This file or directory could not be found.
+        </ErrorMessage>
+      </div>
     );
   }
 
@@ -214,9 +464,12 @@ function ModuleView({
     data.data.kind === "index" ? "tree" : undefined,
   );
 
-  if (data.isCode) {
+  if (data.view === "info") {
+    searchView(userToken, "modules", data.data.module);
+    return <InfoView version={version!} data={data.data} name={name} />;
+  } else if (data.view === "source") {
     return (
-      <CodeView
+      <SourceView
         {...{
           isStd,
           name,
@@ -247,232 +500,223 @@ function ModuleView({
 
 function Breadcrumbs({
   name,
-  version,
   path,
-  isStd,
-  isCode,
+  version,
+  view,
 }: {
   name: string;
-  version: string | undefined;
+  version: string;
   path: string;
-  isStd: boolean;
-  isCode: boolean;
+  view: Views;
 }) {
   const segments = path.split("/").splice(1);
-  segments.unshift(name + (version ? `@${version}` : ""));
-  if (!isStd) {
+  segments.unshift(name);
+  if (name !== "std") {
     segments.unshift("x");
   }
 
   let seg = "";
-  const out: [string, string][] = [];
+  const out: [segment: string, url: string][] = [];
   for (const segment of segments) {
-    seg += "/" + segment;
+    if (segment === "") {
+      continue;
+    } else if (segment === name) {
+      seg += `/${segment}@${version}`;
+    } else if (segment !== "") {
+      seg += "/" + segment;
+    }
+
     out.push([segment, seg]);
   }
 
   return (
-    <p class={tw`text-xl leading-6 font-bold text-gray-400`}>
+    <p class="text-xl leading-6 font-bold text-gray-400 truncate">
       {out.map(([seg, url], i) => {
-        if (isCode) {
-          url += "?code";
+        if (view === "source") {
+          url += "?source";
+        } else if (view === "doc" && seg === name) {
+          url += "?doc";
         }
         return (
-          <Fragment key={i}>
+          <>
             {i !== 0 && "/"}
-            {i === (segments.length - 1)
-              ? <span class={tw`text-default`}>{seg}</span>
-              : (
-                <a href={url} class={tw`link`}>
-                  {seg}
-                </a>
-              )}
-          </Fragment>
+            <a href={url} class="link" title={seg}>
+              {seg}
+            </a>
+          </>
         );
       })}
     </p>
   );
 }
 
-function VersionSelector({
-  versions,
-  selectedVersion,
-  name,
-  path,
-}: {
-  versions: string[];
-  selectedVersion: string;
-  name: string;
-  path: string;
-}) {
+function InfoView(
+  { name, data, version }: {
+    name: string;
+    version: string;
+    data: ModInfoPage;
+  },
+) {
+  data.description &&= emojify(data.description);
+
+  const attributes = [];
+
+  const popularityTag = data.tags?.find((tag) => tag.kind === "popularity");
+  if (popularityTag && name !== "std") {
+    attributes.push(
+      <PopularityTag>{popularityTag.value}</PopularityTag>,
+    );
+  }
+
+  if (data.upload_options.repository.split("/")[0] == "denoland") {
+    attributes.push(
+      <div class="flex items-center gap-1.5">
+        <Icons.CheckmarkVerified class="h-4 w-auto" />
+        <span class="text-primary font-medium leading-none">
+          By Deno Team
+        </span>
+      </div>,
+    );
+  }
+
+  if (data.config) {
+    attributes.push(
+      <div class="flex items-center gap-1.5">
+        <Icons.Logo />
+        <span class="text-gray-600 font-medium leading-none">
+          Includes Deno configuration
+        </span>
+      </div>,
+    );
+  }
+
   return (
-    <>
-      <VersionSelect
-        versions={Object.fromEntries(
-          versions.map((ver) => [ver, getModulePath(name, ver, path)]),
-        )}
-        selectedVersion={selectedVersion}
-      />
-      {versions[0] !== selectedVersion && (
-        <a
-          class={tw`py-2.5 px-4.5 text-white bg-tag-blue hover:bg-blue-500 rounded-md leading-none`}
-          aria-label="Go to latest version"
-          href={getModulePath(name, versions[0], path)}
-        >
-          Go to Latest
-        </a>
-      )}
-    </>
+    <SidePanelPage
+      sidepanel={
+        <div class="space-y-6 children:space-y-2">
+          <div class="space-y-4!">
+            <div class="space-y-2">
+              <div class="flex items-center gap-2.5 w-full">
+                <Breadcrumbs
+                  name={name}
+                  version={version}
+                  path="/"
+                  view="info"
+                />
+                <div class="tag-label bg-[#23232326] text-gray-600 font-semibold!">
+                  {version}
+                </div>
+              </div>
+
+              {data.description &&
+                (
+                  <div class="text-sm" title={data.description}>
+                    {data.description}
+                  </div>
+                )}
+            </div>
+
+            <div class="space-y-3 children:(flex items-center gap-1.5 leading-none font-medium)">
+              <span>
+                <Icons.Docs />
+                <a
+                  href={getModulePath(name, version) + "?doc"}
+                  class="link"
+                >
+                  View Documentation
+                </a>
+              </span>
+              <span>
+                <Icons.Source />
+                <a
+                  href={getModulePath(name, version) + "?source"}
+                  class="link"
+                >
+                  View Source
+                </a>
+              </span>
+            </div>
+          </div>
+
+          {attributes.length !== 0 && (
+            <div class="space-y-2.5!">
+              <div class="text-gray-400 font-medium text-sm leading-4">
+                Attributes
+              </div>
+              {attributes}
+            </div>
+          )}
+
+          <div>
+            <div class="text-gray-400 font-medium text-sm leading-4">
+              Repository
+            </div>
+            <div class="flex items-center gap-1.5 whitespace-nowrap">
+              <Icons.GitHub class="h-4 w-auto text-gray-700 flex-none" />
+              <a
+                class="link truncate"
+                href={`https://github.com/${data.upload_options.repository}`}
+              >
+                {data.upload_options.repository}
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <div class="text-gray-400 font-medium text-sm leading-4">
+              Current version released
+            </div>
+            <div title={data.uploaded_at}>
+              {twas(new Date(data.uploaded_at))}
+            </div>
+          </div>
+
+          <div>
+            <div class="text-gray-400 font-medium text-sm leading-4">
+              Versions
+            </div>
+            <ol class="border border-gray-200 rounded-lg list-none overflow-y-scroll max-h-80">
+              {data.versions.map((listVersion) => (
+                <li class="odd:(bg-ultralight rounded-md)">
+                  <a
+                    class={`flex px-5 py-2 link ${
+                      listVersion === version ? "font-bold" : "font-medium"
+                    }`}
+                    href={getModulePath(name, listVersion)}
+                  >
+                    <span class="block w-full truncate">{listVersion}</span>
+                    {listVersion === data.latest_version && (
+                      <div class="tag-label bg-[#056CF025] text-tag-blue">
+                        Latest
+                      </div>
+                    )}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      }
+    >
+      <div class="p-6 rounded-xl border border-border">
+        {data.readmeFile
+          ? (
+            <Markdown
+              source={name === "std"
+                ? data.readmeFile
+                : data.readmeFile.replace(/\$STD_VERSION/g, version)}
+              baseURL={getSourceURL(name, version, "/")}
+            />
+          )
+          : (
+            <div class="flex items-center justify-center italic text-gray-400 -m-2">
+              No readme found.
+            </div>
+          )}
+      </div>
+    </SidePanelPage>
   );
 }
-
-export const handler: Handlers<MaybeData> = {
-  async GET(req, { params, render }) {
-    const { name, version, path } = params as Params;
-    const url = new URL(req.url);
-
-    if (name === "std" && url.pathname.startsWith("/x")) {
-      url.pathname = url.pathname.slice(2);
-      return Response.redirect(url, 301);
-    }
-
-    const isHTML = accepts(req, "application/*", "text/html") === "text/html";
-    if (!isHTML) {
-      const versions = await getVersionList(params.name);
-
-      if (versions === null) {
-        return new Response(`The module '${name}' does not exist`, {
-          status: 404,
-        });
-      } else if (versions.latest === null) {
-        return new Response(
-          `The module '${name}' has no latest version`,
-          {
-            status: 404,
-            headers: {
-              "content-type": "text/plain",
-              "Access-Control-Allow-Origin": "*",
-            },
-          },
-        );
-      } else if (!version) {
-        return new Response(undefined, {
-          headers: {
-            Location: getModulePath(
-              name,
-              versions.latest,
-              path ? ("/" + path) : undefined,
-            ),
-            "x-deno-warning":
-              `Implicitly using latest version (${versions.latest}) for ${url.href}`,
-            "Access-Control-Allow-Origin": "*",
-          },
-          status: 302,
-        });
-      }
-      if (!versions.versions.includes(version)) {
-        return new Response(
-          `The version '${version}' does not exist in the module '${name}'`,
-          {
-            status: 404,
-            headers: {
-              "content-type": "text/plain",
-              "Access-Control-Allow-Origin": "*",
-            },
-          },
-        );
-      } else {
-        return fetchSource(name, version, path);
-      }
-    }
-
-    const isCode = url.searchParams.has("code");
-
-    const symbol = url.searchParams.get("s");
-    const resURL = new URL(
-      `https://apiland.deno.dev/v2/pages/${isCode ? "code" : "doc"}/${name}/${
-        version || "__latest__"
-      }/${path}`,
-    );
-    if (symbol && !isCode) {
-      resURL.searchParams.set("symbol", symbol);
-    }
-
-    let data: Data;
-
-    const res = await fetch(resURL, {
-      redirect: "manual",
-    });
-    if (res.status === 404) { // module doesnt exist
-      return render(null);
-    } else if (res.status === 302) { // implicit latest
-      const latestVersion = res.headers.get("X-Deno-Latest-Version")!;
-      console.log(getModulePath(
-        name,
-        latestVersion,
-        path ? ("/" + path) : undefined,
-      ));
-      return Response.redirect(
-        new URL(
-          getModulePath(
-            name,
-            latestVersion,
-            path ? ("/" + path) : undefined,
-          ),
-          url,
-        ),
-      );
-    } else if (res.status === 301) { // path is directory and there is an index module and its doc
-      const newPath = res.headers.get("X-Deno-Module-Path")!;
-      return new Response(undefined, {
-        headers: {
-          Location: getModulePath(
-            name,
-            version,
-            newPath,
-          ),
-        },
-        status: 301,
-      });
-    } else {
-      data = { data: await res.json(), isCode };
-    }
-
-    if (data.data.kind === "no-versions") {
-      return render!(data);
-    }
-
-    if (!data.isCode && data.data.kind === "file") {
-      url.searchParams.set("code", "");
-      return Response.redirect(url, 301);
-    }
-
-    const ln = extractAltLineNumberReference(url.pathname);
-    if (ln) {
-      url.pathname = ln.rest;
-      url.searchParams.set("code", "");
-      url.hash = "L" + ln.line;
-      return Response.redirect(url, 302);
-    }
-
-    if (data.data.kind === "index" || data.data.kind === "dir") {
-      data.data.readme = await getReadme(
-        name,
-        version,
-        data.data.kind === "index" ? data.data.items : data.data.entries,
-        data.data.upload_options,
-      );
-    } else if (data.isCode && data.data.kind === "file") {
-      data.data.file = await getRawFile(
-        name,
-        version,
-        path ? `/${path}` : "",
-      );
-    }
-
-    return render!(data);
-  },
-};
 
 export const config: RouteConfig = {
   routeOverride: "/x/:name{@:version}?/:path*",

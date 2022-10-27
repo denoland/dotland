@@ -15,6 +15,8 @@ To accomplish this, we look at the "Accept:" HTTP header to see if the client
 wants HTML or not. If it does want HTML, we simply render the html, else we
 proxy the file contents from S3 buckets.
 
+For questions or problems regarding modules, please e-mail modules@deno.com.
+
 ## Image License
 
 These Deno images are distributed under the MIT license (public domain and free
