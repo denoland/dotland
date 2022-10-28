@@ -66,9 +66,7 @@ export default function Home({ data }: PageProps<Data>) {
         </a>
 
         <div class="section-x-inset-xl pt-18 pb-24">
-          <div
-            class="block colorWash rounded-full w-44 py-4 text-white font-semibold text-3xl text-center mx-auto mb-8"
-          >
+          <div class="block colorWash rounded-full w-44 py-4 text-white font-semibold text-3xl text-center mx-auto mb-8">
             Easy
           </div>
           <h2 class="text-center font-bold text-6xl text-darkBlue leading-snug">
@@ -158,9 +156,7 @@ export default function Home({ data }: PageProps<Data>) {
         </Quote>
 
         <div class="section-x-inset-xl pt-18 pb-24">
-          <div
-            class="block colorWash rounded-full w-44 py-4 text-white font-semibold text-3xl text-center mx-auto mb-8"
-          >
+          <div class="block colorWash rounded-full w-44 py-4 text-white font-semibold text-3xl text-center mx-auto mb-8">
             Fast
           </div>
           <h2 class="text-center font-bold text-6xl text-darkBlue leading-snug">
@@ -213,9 +209,7 @@ export default function Home({ data }: PageProps<Data>) {
         </Quote>
 
         <div class="section-x-inset-xl pt-18 pb-24">
-          <div
-            class="block colorWash rounded-full w-44 py-4 text-white font-semibold text-3xl text-center mx-auto mb-8"
-          >
+          <div class="block colorWash rounded-full w-44 py-4 text-white font-semibold text-3xl text-center mx-auto mb-8">
             Secure
           </div>
           <h2 class="text-center font-bold text-6xl text-darkBlue leading-snug">
