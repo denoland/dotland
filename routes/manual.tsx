@@ -314,7 +314,7 @@ export const handler: Handlers<Data> = {
             path: slug,
             name,
           });
-          if (typeof entry !== "string" && entry.redirectFrom) {
+          if (typeof entry === "object" && entry.redirectFrom) {
             for (const redirect of entry.redirectFrom) {
               redirectList[redirect] = slug;
             }
