@@ -315,7 +315,9 @@ export const handler: Handlers<Data> = {
             name,
           });
           if (typeof entry !== "string" && entry.redirectFrom) {
-            redirectList[entry.redirectFrom] = slug;
+            for (const redirect of entry.redirectFrom) {
+              redirectList[redirect] = slug;
+            }
           }
           if (typeof entry === "object" && entry.children) {
             tocGen(entry.children, slug);

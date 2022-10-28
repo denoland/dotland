@@ -15,7 +15,7 @@ export interface TableOfContents {
   [slug: string]: {
     name: string;
     children?: TableOfContents;
-    redirectFrom?: string;
+    redirectFrom?: string[];
   } | string;
 }
 
