@@ -1,14 +1,10 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
 import { PageProps } from "$fresh/server.ts";
-import { tw } from "@twind";
 import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Handlers } from "$fresh/server.ts";
 import { Header } from "@/components/Header.tsx";
-import { Footer } from "@/components/Footer.tsx";
+import { Footer } from "$doc_components/footer.tsx";
 import { InlineCode } from "@/components/InlineCode.tsx";
 
 import {
@@ -46,9 +42,9 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
   function IOMaybeNormalized({ normalized }: { normalized: boolean }) {
     return (
       <div>
-        <div class={tw`mt-8`}>
+        <div class="mt-8">
           <a href="#http-server-throughput" id="http-server-throughput">
-            <h5 class={tw`text-lg font-medium tracking-tight hover:underline`}>
+            <h5 class="text-lg font-medium tracking-tight hover:underline">
               HTTP Server Throughput
             </h5>
           </a>
@@ -59,11 +55,11 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
             yLabel="1k req/sec"
             yTickFormat={formatReqSec}
           />
-          <p class={tw`mt-1`}>
+          <p class="mt-1">
             Tests HTTP server performance. 10 keep-alive connections do as many
             hello-world requests as possible. Bigger is better.
           </p>
-          <ul class={tw`ml-8 list-disc my-2`}>
+          <ul class="ml-8 list-disc my-2">
             <li>
               <SourceLink path="cli/bench/deno_tcp.ts" name="deno_tcp" />{" "}
               is a fake http server that doesn't parse HTTP. It is comparable to
@@ -82,13 +78,13 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                 name="node_http"
               />
             </li>
-            <li class={tw`break-words`}>
+            <li class="break-words">
               core_http_bin_ops and core_http_json_ops are two versions of a
               minimal fake HTTP server. It blindly reads and writes fixed HTTP
               packets. It is comparable to deno_tcp and node_tcp. This is a
               standalone executable that uses{" "}
               <a
-                class={tw`link`}
+                class="link"
                 href="https://crates.io/crates/deno_core"
               >
                 the deno rust crate
@@ -114,9 +110,9 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
             </li>
           </ul>
         </div>
-        <div class={tw`mt-8`}>
+        <div class="mt-8">
           <a href="#http-latency" id="http-latency">
-            <h5 class={tw`text-lg font-medium tracking-tight hover:underline`}>
+            <h5 class="text-lg font-medium tracking-tight hover:underline">
               HTTP Latency
             </h5>
           </a>{" "}
@@ -127,7 +123,7 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
             yLabel="milliseconds"
             yTickFormat={formatMsec}
           />
-          <p class={tw`mt-1`}>
+          <p class="mt-1">
             Max latency during the same test used above for requests/second.
             Smaller is better.
           </p>
@@ -142,7 +138,7 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
         title={`Benchmarks${dataRangeTitle ? ` (${dataRangeTitle})` : ""}`}
         creator="@deno_land"
         description="As part of Deno's continuous integration and testing
-          pipeline we measure the performance of certain key metrics of the 
+          pipeline we measure the performance of certain key metrics of the
           runtime. You can view these benchmarks here."
         keywords={[
           "deno",
@@ -168,41 +164,39 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
       `,
         }}
       />
-      <div class={tw`bg-gray-50 min-h-full`}>
+      <div class="bg-gray-50 min-h-full">
         <Header />
-        <div class={tw`mb-12`}>
-          <div
-            class={tw`section-x-inset-md mt-8 pb-8`}
-          >
-            <img src="/images/deno_logo_4.gif" class={tw`mb-12 w-32 h-32`} />
-            <h4 class={tw`text-2xl font-bold tracking-tight`}>About</h4>
-            <p class={tw`mt-4`}>
+        <div class="mb-12">
+          <div class="section-x-inset-md mt-8 pb-8">
+            <img src="/images/deno_logo_4.gif" class="mb-12 w-32 h-32" />
+            <h4 class="text-2xl font-bold tracking-tight">About</h4>
+            <p class="mt-4">
               As part of Deno's continuous integration and testing pipeline we
               measure the performance of certain key metrics of the runtime. You
               can view these benchmarks here.
             </p>
-            <p class={tw`mt-4`}>
+            <p class="mt-4">
               You are currently viewing data for{" "}
               {showAll ? "all" : "the most recent"} commits to the{" "}
               <a href="https://github.com/denoland/deno">main</a>{" "}
               branch. You can also view{" "}
               <a
-                class={tw`link`}
+                class="link"
                 href={!showAll ? "/benchmarks?all" : "/benchmarks"}
               >
                 {!showAll ? "all" : "the most recent"}
               </a>{" "}
               commits.
             </p>
-            <div class={tw`mt-12 pt-4`}>
-              <h4 class={tw`text-2xl font-bold tracking-tight`}>
+            <div class="mt-12 pt-4">
+              <h4 class="text-2xl font-bold tracking-tight">
                 Runtime Metrics
               </h4>
-              <p class={tw`mt-2`}>
+              <p class="mt-2">
                 In this section we measure various metrics of the following
                 scripts:
               </p>
-              <ul class={tw`ml-8 list-disc my-2`}>
+              <ul class="ml-8 list-disc my-2">
                 <li>
                   <SourceLink
                     path="cli/tests/testdata/003_relative_import.ts"
@@ -252,11 +246,9 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                   />
                 </li>
               </ul>
-              <div class={tw`mt-8`}>
+              <div class="mt-8">
                 <a href="#execution-time" id="execution-time">
-                  <h5
-                    class={tw`text-lg font-medium tracking-tight hover:underline`}
-                  >
+                  <h5 class="text-lg font-medium tracking-tight hover:underline">
                     Execution time
                   </h5>
                 </a>
@@ -267,7 +259,7 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                   yLabel="seconds"
                   yTickFormat={formatLogScale}
                 />
-                <p class={tw`mt-1`}>
+                <p class="mt-1">
                   Log scale. This shows how much time total it takes to run a
                   script. For deno to execute typescript, it must first compile
                   it to JS. A warm startup is when deno has a cached JS output
@@ -276,11 +268,9 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                   scratch.
                 </p>
               </div>
-              <div class={tw`mt-8`}>
+              <div class="mt-8">
                 <a href="#thread-count" id="thread-count">
-                  <h5
-                    class={tw`text-lg font-medium tracking-tight hover:underline`}
-                  >
+                  <h5 class="text-lg font-medium tracking-tight hover:underline">
                     Thread count
                   </h5>
                 </a>
@@ -290,15 +280,13 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                   )}
                   yLabel="threads"
                 />
-                <p class={tw`mt-1`}>
+                <p class="mt-1">
                   How many threads various programs use. Smaller is better.
                 </p>
               </div>
-              <div class={tw`mt-8`}>
+              <div class="mt-8">
                 <a href="#syscall-count" id="syscall-count">
-                  <h5
-                    class={tw`text-lg font-medium tracking-tight hover:underline`}
-                  >
+                  <h5 class="text-lg font-medium tracking-tight hover:underline">
                     Syscall count
                   </h5>
                 </a>{" "}
@@ -308,16 +296,14 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                   )}
                   yLabel="syscalls"
                 />
-                <p class={tw`mt-1`}>
+                <p class="mt-1">
                   How many total syscalls are performed when executing a given
                   script. Smaller is better.
                 </p>
               </div>
-              <div class={tw`mt-8`}>
+              <div class="mt-8">
                 <a href="#max-memory-usage" id="max-memory-usage">
-                  <h5
-                    class={tw`text-lg font-medium tracking-tight hover:underline`}
-                  >
+                  <h5 class="text-lg font-medium tracking-tight hover:underline">
                     Max memory usage
                   </h5>
                 </a>{" "}
@@ -328,20 +314,18 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                   yLabel="megabytes"
                   yTickFormat={formatMB}
                 />
-                <p class={tw`mt-1`}>
+                <p class="mt-1">
                   Max memory usage during execution. Smaller is better.
                 </p>
               </div>
             </div>
-            <div class={tw`mt-20`}>
-              <h4 class={tw`text-2xl font-bold tracking-tight`}>
+            <div class="mt-20">
+              <h4 class="text-2xl font-bold tracking-tight">
                 TypeScript Performance
               </h4>
-              <div class={tw`mt-8`}>
+              <div class="mt-8">
                 <a href="#type-checking" id="type-checking">
-                  <h5
-                    class={tw`text-lg font-medium tracking-tight hover:underline`}
-                  >
+                  <h5 class="text-lg font-medium tracking-tight hover:underline">
                     Type Checking
                   </h5>
                 </a>
@@ -352,7 +336,7 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                   yLabel="seconds"
                   yTickFormat={formatLogScale}
                 />
-                <p class={tw`mt-1`}>
+                <p class="mt-1">
                   In both cases,{" "}
                   <InlineCode>std/examples/chat/server_test.ts</InlineCode>{" "}
                   is cached by Deno. The workload contains 20 unique TypeScript
@@ -368,29 +352,29 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                 </p>
               </div>
             </div>
-            <div class={tw`mt-20`}>
-              <h4 class={tw`text-2xl font-bold tracking-tight`}>I/O</h4>
+            <div class="mt-20">
+              <h4 class="text-2xl font-bold tracking-tight">I/O</h4>
               <input
                 type="checkbox"
-                class={tw`hidden`}
+                class="hidden"
                 id="normalizedToggle"
                 autoComplete="off"
               />
               <label
-                class={tw`mt-4 flex cursor-pointer`}
+                class="mt-4 flex cursor-pointer"
                 htmlFor="normalizedToggle"
               >
                 <span
                   role="checkbox"
                   tabIndex={0}
-                  class={tw`bg-gray-900 relative inline-block flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full transition-colors ease-in-out duration-200 focus:outline-none`}
+                  class="bg-gray-900 relative inline-block flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full transition-colors ease-in-out duration-200 focus:outline-none"
                 >
                   <span
                     aria-hidden="true"
-                    class={tw`inline-block h-5 w-5 rounded-full bg-white shadow transform transition ease-in-out duration-200`}
+                    class="inline-block h-5 w-5 rounded-full bg-white shadow transform transition ease-in-out duration-200"
                   />
                 </span>
-                <span class={tw`ml-2 text-gray-900`}>
+                <span class="ml-2 text-gray-900">
                   Show normalized benchmarks
                 </span>
               </label>
@@ -401,13 +385,11 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
               <IOMaybeNormalized normalized={false} />
               <IOMaybeNormalized normalized={true} />
             </div>
-            <div class={tw`mt-20`}>
-              <h4 class={tw`text-2xl font-bold tracking-tight`}>Size</h4>
-              <div class={tw`mt-8`}>
+            <div class="mt-20">
+              <h4 class="text-2xl font-bold tracking-tight">Size</h4>
+              <div class="mt-8">
                 <a href="#executable-size" id="executable-size">
-                  <h5
-                    class={tw`text-lg font-medium tracking-tight hover:underline`}
-                  >
+                  <h5 class="text-lg font-medium tracking-tight hover:underline">
                     File sizes
                   </h5>
                 </a>
@@ -416,16 +398,14 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                   yLabel={"megabytes"}
                   yTickFormat={formatMB}
                 />
-                <p class={tw`mt-1`}>
+                <p class="mt-1">
                   We track the size of various files here. "deno" is the release
                   binary.
                 </p>
               </div>
-              <div class={tw`mt-8`}>
+              <div class="mt-8">
                 <a href="#bundle-size" id="bundle-size">
-                  <h5
-                    class={tw`text-lg font-medium tracking-tight hover:underline`}
-                  >
+                  <h5 class="text-lg font-medium tracking-tight hover:underline">
                     Bundle size
                   </h5>
                 </a>{" "}
@@ -434,23 +414,21 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                   yLabel="kilobytes"
                   yTickFormat={formatKB}
                 />
-                <p class={tw`mt-1`}>Size of different bundled scripts.</p>
-                <ul class={tw`ml-8 list-disc my-2`}>
+                <p class="mt-1">Size of different bundled scripts.</p>
+                <ul class="ml-8 list-disc my-2">
                   <li>
-                    <a class={tw`link`} href="/std/http/file_server.ts">
+                    <a class="link" href="/std/http/file_server.ts">
                       file_server
                     </a>
                   </li>
                   <li>
-                    <a class={tw`link`} href="/std/examples/gist.ts">gist</a>
+                    <a class="link" href="/std/examples/gist.ts">gist</a>
                   </li>
                 </ul>
               </div>
-              <div class={tw`mt-8`}>
+              <div class="mt-8">
                 <a href="#cargo-deps" id="cargo-deps">
-                  <h5
-                    class={tw`text-lg font-medium tracking-tight hover:underline`}
-                  >
+                  <h5 class="text-lg font-medium tracking-tight hover:underline">
                     Cargo Dependencies
                   </h5>
                 </a>{" "}
@@ -460,16 +438,16 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                 />
               </div>
             </div>
-            <div class={tw`mt-20`}>
-              <h4 class={tw`text-2xl font-bold tracking-tight`}>
+            <div class="mt-20">
+              <h4 class="text-2xl font-bold tracking-tight">
                 Language Server
               </h4>
-              <div class={tw`mt-8`}>
+              <div class="mt-8">
                 <BenchmarkChart
                   columns={benchData.lspExecTime}
                   yLabel="milliseconds"
                 />
-                <p class={tw`mt-1`}>
+                <p class="mt-1">
                   We track the performance of the Deno language server under
                   different scenarios to help gauge the overall performance of
                   the language server.
@@ -496,7 +474,7 @@ function SourceLink({
   return (
     <a
       href={`https://github.com/denoland/${repo}/blob/main/${path}`}
-      class={tw`link`}
+      class="link"
     >
       {name}
     </a>
