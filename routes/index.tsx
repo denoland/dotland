@@ -289,7 +289,7 @@ function ImageSubSection(
         </p>
       </div>
       <div
-        class={`p-8 w-[70%] box-border flex-none rounded-2xl bg-lightWhiteBlue ${
+        class={tw`p-8 w-[70%] box-border flex-none rounded-2xl bg-lightWhiteBlue ${
           css({
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
           })
