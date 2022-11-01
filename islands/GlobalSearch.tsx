@@ -315,7 +315,7 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
                           "text-underline-offset": "6px",
                           "text-decoration-thickness": "2px",
                         })
-                        : ""} ${k === kind ? "text-black" : "text-gray-500"}`}
+                        : ""} ${k === kind ? "text-default" : "text-gray-500"}`}
                     onClick={() => {
                       setKind(k);
                       setPage(0);

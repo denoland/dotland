@@ -54,9 +54,6 @@ export default {
         88: "22rem",
         136: "34rem",
       },
-      borderRadius: {
-        "2.5xl": "1.25rem",
-      },
       animation: {
         move: "move 6s linear infinite",
       },

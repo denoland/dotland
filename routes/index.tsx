@@ -39,20 +39,26 @@ export default function Home({ data }: PageProps<Data>) {
         <Header />
 
         <div
-          class={tw`px-36 py-20 ${
+          class={tw`px-8 pt-12 pb-28 lg:(px-36 py-20) ${
             css({
               background:
                 'url("/images/cover.png") 68% 23%/120% no-repeat, linear-gradient(to right, #000059, #0094FF)',
             })
           }`}
         >
-          <div class="w-136 text-white space-y-6">
-            <p class="font-semibold text-3xl leading-none">Meet Deno</p>
-            <p class="font-bold text-[5rem] leading-none">
-              The easiest, fastest, and most secure JavaScript runtime.
-            </p>
-            <div class="space-x-7">
-              <a class="button-primary" href="">Installation</a>
+          <div class="text-white lg:w-136">
+            <div class="space-y-2.5 lg:space-y-5.5">
+              <p class="font-semibold text-xl lg:text-3xl leading-none">
+                Meet Deno
+              </p>
+              <p class="font-bold text-5xl lg:text-[5rem] leading-none">
+                The easiest, fastest, and most secure JavaScript runtime.
+              </p>
+            </div>
+            <div class="mt-6 lg:(mt-16 space-x-7)">
+              <a class="hidden lg:inline button-primary" href="">
+                Installation
+              </a>
               <a class="button-primary" href="">Documentation</a>
             </div>
           </div>
@@ -74,49 +80,49 @@ export default function Home({ data }: PageProps<Data>) {
             src="/images/Dependencies_Placeholder.png"
             alt="Dependencies"
             header="Avoid installing dependencies"
+            reverse
           >
-            Dive right into the code<br />and skip the setup.
+            Dive right into the code and skip the setup.
           </ImageSubSection>
 
           <ImageSubSection
             src="/images/web_compatibility.png"
             alt="Web APIs"
             header="Web-standard APIs"
-            reverse
           >
             A runtime that resembles the web, using browser APIs that work on
             the server.
           </ImageSubSection>
 
-          <div class="flex items-center justify-between gap-[8%]">
-            <div class="space-y-5">
+          <div class="flex items-center justify-between flex-col gap-11 lg:(flex-row gap-[8%])">
+            <div class="space-y-4 lg:space-y-5">
               <Icons.Logo class="w-15" />
-              <h3 class="font-bold text-4xl text-darkBlue">
+              <h3 class="font-bold text-darkBlue text-2xl lg:text-4xl">
                 TypeScript out of the box
               </h3>
-              <p class="text-2xl text-normalBlue">
+              <p class="text-normalBlue lg:text-2xl">
                 First-class support for TypeScript – no need to spend hours
                 configuring things that break as soon as you update a
                 dependency.
               </p>
             </div>
-            <div class="space-y-5">
+            <div class="space-y-4 lg:space-y-5">
               <Icons.Logo class="w-15" />
-              <h3 class="font-bold text-4xl text-darkBlue">
+              <h3 class="font-bold text-darkBlue text-2xl lg:text-4xl">
                 Great all-in-one tooling
               </h3>
-              <p class="text-2xl text-normalBlue">
+              <p class="text-normalBlue lg:text-2xl">
                 Built in linter, code formatter, ability to build a
                 self-contained executable, test runner, IDE integration, and
                 more.
               </p>
             </div>
-            <div class="space-y-5">
+            <div class="space-y-4 lg:space-y-5">
               <Icons.Logo class="w-15" />
-              <h3 class="font-bold text-4xl text-darkBlue">
+              <h3 class="font-bold text-darkBlue text-2xl lg:text-4xl">
                 Hassle-free deployment
               </h3>
-              <p class="text-2xl text-normalBlue">
+              <p class="text-normalBlue lg:text-2xl">
                 Launch to Deno Deploy with one line of code and zero server
                 configuration, or host with other platforms of your choice.
               </p>
@@ -127,7 +133,8 @@ export default function Home({ data }: PageProps<Data>) {
         <Quote
           author="Stack Overflow"
           href="https://survey.stackoverflow.co/2022/#most-loved-dreaded-and-wanted-webframe-love-dread"
-          size="5xl"
+          size="2xl"
+          lgSize="5xl"
         >
           Voted one of the most loved web technologies
           <br />in a survey of over 70,000 developers
@@ -142,6 +149,7 @@ export default function Home({ data }: PageProps<Data>) {
             src="/images/benchmark.png"
             alt="HTTP Benchmark"
             header="Best in class HTTP server speeds"
+            reverse
           >
             The fastest JavaScript web server ever built.
           </ImageSubSection>
@@ -150,7 +158,6 @@ export default function Home({ data }: PageProps<Data>) {
             src=""
             alt=""
             header="Powered by Chrome's V8"
-            reverse
           >
             Built on top of the fastest and most complete JavaScript engine.
           </ImageSubSection>
@@ -159,12 +166,12 @@ export default function Home({ data }: PageProps<Data>) {
         <Quote
           author="Slack"
           href="https://deno.com/blog/slack-open-beta"
-          size="4xl"
+          size="xl"
+          lgSize="4xl"
         >
           What stood out first and foremost to our team was their laser focus on
-          security. Deno’s secure architecture means developers get built-in
-          granular controls, like the ability to execute code with limited
-          access to the file system or external domains.
+          security... like the ability to execute code with limited access to
+          the file system or external domains.
         </Quote>
 
         <Section
@@ -172,7 +179,7 @@ export default function Home({ data }: PageProps<Data>) {
           header="Secure by default."
           subheader="Take total control over your workflow."
         >
-          <ImageSubSection src="" alt="" header="Run untrusted code">
+          <ImageSubSection src="" alt="" header="Run untrusted code" reverse>
             By default Deno provides no I/O access and is appropriate for
             running untrusted code and auditing new third-party code.
           </ImageSubSection>
@@ -247,18 +254,18 @@ function Section(
   },
 ) {
   return (
-    <div class="section-x-inset-xl pt-18 pb-24">
-      <div class="colorWash rounded-2.5xl w-44 py-4 text-white font-semibold text-2xl leading-none text-center mx-auto">
+    <div class="section-x-inset-xl pt-12 pb-18 lg:(pt-18 pb-24)">
+      <div class="colorWash rounded-full text-white font-semibold leading-none text-center py-3 w-24 text-lg lg:(py-4 w-44 text-2xl mx-auto)">
         {type}
       </div>
-      <h2 class="text-center font-bold text-6xl text-darkBlue leading-none my-5">
+      <h2 class="font-bold text-darkBlue leading-none mt-5 mb-4 text-3xl lg:(my-5 text-6xl text-center)">
         {header}
       </h2>
-      <p class="text-center font-semibold text-2xl text-normalBlue">
+      <p class="font-semibold text-normalBlue text-xl lg:(text-2xl text-center)">
         {subheader}
       </p>
 
-      <div class="mt-20 space-y-28">
+      <div class="mt-14 space-y-14 lg:(mt-20 space-y-28)">
         {children}
       </div>
     </div>
@@ -276,20 +283,12 @@ function ImageSubSection(
 ) {
   return (
     <div
-      class={`flex items-center justify-between gap-12 flex-row${
+      class={`flex items-center justify-between gap-5 flex-col lg:(gap-12 flex-row${
         reverse ? "-reverse" : ""
-      }`}
+      })`}
     >
-      <div class="space-y-3">
-        <h3 class="font-bold text-4xl text-darkBlue">
-          {header}
-        </h3>
-        <p class="text-2xl text-normalBlue">
-          {children}
-        </p>
-      </div>
       <div
-        class={tw`p-8 w-[70%] box-border flex-none rounded-2xl bg-lightWhiteBlue ${
+        class={tw`p-2 w-full rounded-lg lg:(p-8 w-[70%] rounded-2xl) box-border flex-none bg-lightWhiteBlue ${
           css({
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
           })
@@ -297,27 +296,36 @@ function ImageSubSection(
       >
         <img class="w-full" src={src} alt={alt} />
       </div>
+      <div class="space-y-3">
+        <h3 class="font-bold text-darkBlue text-3xl lg:text-4xl">
+          {header}
+        </h3>
+        <p class="text-normalBlue text-lg lg:text-2xl">
+          {children}
+        </p>
+      </div>
     </div>
   );
 }
 
 function Quote(
-  { children, size, author, href }: {
+  { children, size, lgSize, author, href }: {
     children: ComponentChildren;
     size: string;
+    lgSize: string;
     author: string;
     href: string;
   },
 ) {
   return (
-    <div class="pt-24 pb-20 colorWash">
-      <figure class="section-x-inset-xl space-y-11 text-center">
+    <div class="colorWash pt-18 pb-14 lg:(pt-24 pb-20)">
+      <figure class="section-x-inset-xl space-y-8 lg:space-y-11 text-center">
         <blockquote
-          class={`text-white font-semibold text-${size} leading-tight`}
+          class={`text-white font-semibold text-${size} lg:text-${lgSize} leading-tight`}
         >
           {children}
         </blockquote>
-        <figcaption class="text-white text-2xl">
+        <figcaption class="text-white lg:text-2xl">
           {author} –{" "}
           <cite>
             <a
