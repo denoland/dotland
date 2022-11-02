@@ -36,7 +36,7 @@ test we can use chai should style ... ok (4ms)
 test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms)`;
 
   const hellobarTo =
-    "https://deno.news/archive/52-deno-126-isolate-clouds-and-the-edge";
+    "https://deno.news/archive/53-deno-127-fresh-guides-and-a-haunted-script";
   return (
     <div>
       <ContentMeta
@@ -49,7 +49,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (27ms
       {hellobarTo !== data.hellobarClosedTo &&
         (
           <HelloBar to={hellobarTo}>
-            Check out Deno News issue #52!
+            Check out Deno News issue #53!
           </HelloBar>
         )}
       <div class="bg-white">
