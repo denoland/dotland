@@ -52,7 +52,7 @@ export default function Home({ data }: PageProps<Data>) {
                 Meet Deno
               </p>
               <p class="font-bold text-5xl lg:text-[5rem] leading-none">
-                The easiest, fastest, and most secure JavaScript runtime.
+                The easiest and most secure JavaScript runtime.
               </p>
             </div>
             <div class="mt-6 lg:(mt-16 space-x-7)">
