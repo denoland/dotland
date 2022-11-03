@@ -47,7 +47,7 @@ Deno.test("get edit link new repo", () => {
   );
 });
 
-Deno.test("tocGen", async () => {
+Deno.test("tocGen", () => {
   const toc = {
     "basics": {
       "name": "Basics",
@@ -87,7 +87,9 @@ Deno.test("tocGen", async () => {
       "name": "Help",
     },
   };
-  let map = tocGen(toc, "foo");
-  // TODO Leo add tests here.
-  console.log(map);
+  const map = tocGen(toc, "foo");
+  assertEquals(map, new Map([
+    ["foo/basics", "Basics"],
+    ["foo/help", "Help"],
+  ]));
 });
