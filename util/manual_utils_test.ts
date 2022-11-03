@@ -1,10 +1,10 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 import {
+  generateToC,
   getDocURL,
   getFileURL,
   getTableOfContents,
-  tocGen,
 } from "./manual_utils.ts";
 import { assert, assertEquals } from "$std/testing/asserts.ts";
 
@@ -64,7 +64,10 @@ Deno.test("tocGen", () => {
           },
         },
         "standard_library": "Standard Library",
-        "linking_to_external_code": "Using Third Party Modules",
+        "linking_to_external_code": {
+          "name": "Using Third Party Modules",
+          "redirectFrom": ["/linking_to_external_code"],
+        },
         "permissions": "Permissions",
         "connecting_to_databases": "Connecting to Databases",
         "env_variables": "Environment Variables",
@@ -87,12 +90,9 @@ Deno.test("tocGen", () => {
       "name": "Help",
     },
   };
-  const map = tocGen(toc, "foo");
+  const { redirectList } = generateToC(toc, "foo");
   assertEquals(
-    map,
-    new Map([
-      ["foo/basics", "Basics"],
-      ["foo/help", "Help"],
-    ]),
+    redirectList,
+    { "/linking_to_external_code": "foo/basics/linking_to_external_code" },
   );
 });

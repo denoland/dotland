@@ -9,13 +9,13 @@ import { Markdown } from "@/components/Markdown.tsx";
 import * as Icons from "@/components/Icons.tsx";
 import { ManualOrAPI, SidePanelPage } from "@/components/SidePanelPage.tsx";
 import {
+  generateToC,
   getDescription,
   getDocURL,
   getFileURL,
   getTableOfContents,
   isPreviewVersion,
   TableOfContents,
-  tocGen,
   versions,
 } from "@/util/manual_utils.ts";
 import VersionSelect from "@/islands/VersionSelect.tsx";
@@ -38,8 +38,8 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
   );
   const sourceURL = getFileURL(version, path);
 
-  const tableOfContentsMap = tocGen(data.tableOfContents, "");
-  const pageTitle = tableOfContentsMap.get(path) || "";
+  const pageTitle =
+    data.pageList.find((entry) => entry.path === url.pathname)?.name || "";
 
   const stdVersion = ((VERSIONS.cli_to_std as Record<string, string>)[
     version
@@ -287,32 +287,10 @@ export const handler: Handlers<Data> = {
         }),
     ]);
 
-    const { pageList, redirectList } = (() => {
-      const tempList: { path: string; name: string }[] = [];
-      const redirectList: Record<string, string> = {};
-
-      function tocGen(toc: TableOfContents, parentSlug: string) {
-        for (const [childSlug, entry] of Object.entries(toc)) {
-          const slug = `${parentSlug}/${childSlug}`;
-          const name = typeof entry === "string" ? entry : entry.name;
-          tempList.push({
-            path: slug,
-            name,
-          });
-          if (typeof entry === "object" && entry.redirectFrom) {
-            for (const redirect of entry.redirectFrom) {
-              redirectList[redirect] = slug;
-            }
-          }
-          if (typeof entry === "object" && entry.children) {
-            tocGen(entry.children, slug);
-          }
-        }
-      }
-      tocGen(tableOfContents, `/manual@${version}`);
-
-      return { pageList: tempList, redirectList };
-    })();
+    const { pageList, redirectList } = generateToC(
+      tableOfContents,
+      `/manual@${version}`,
+    );
 
     const slashPath = "/" + params.path;
     if (slashPath in redirectList) {
