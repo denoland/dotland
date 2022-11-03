@@ -88,8 +88,11 @@ Deno.test("tocGen", () => {
     },
   };
   const map = tocGen(toc, "foo");
-  assertEquals(map, new Map([
-    ["foo/basics", "Basics"],
-    ["foo/help", "Help"],
-  ]));
+  assertEquals(
+    map,
+    new Map([
+      ["foo/basics", "Basics"],
+      ["foo/help", "Help"],
+    ]),
+  );
 });
