@@ -15,6 +15,7 @@ import {
   getTableOfContents,
   isPreviewVersion,
   TableOfContents,
+  tocGen,
   versions,
 } from "@/util/manual_utils.ts";
 import VersionSelect from "@/islands/VersionSelect.tsx";
@@ -37,23 +38,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
   );
   const sourceURL = getFileURL(version, path);
 
-  const tableOfContentsMap = (() => {
-    const map = new Map<string, string>();
-
-    function tocGen(toc: TableOfContents, parentSlug: string) {
-      for (const [childSlug, entry] of Object.entries(toc)) {
-        const slug = `${parentSlug}/${childSlug}`;
-        const name = typeof entry === "string" ? entry : entry.name;
-        map.set(slug, name);
-        if (typeof entry === "object" && entry.children) {
-          tocGen(entry.children, slug);
-        }
-      }
-    }
-    tocGen(data.tableOfContents, "");
-
-    return map;
-  })();
+  const tableOfContentsMap = tocGen(data.tableOfContents, "");
   const pageTitle = tableOfContentsMap.get(path) || "";
 
   const stdVersion = ((VERSIONS.cli_to_std as Record<string, string>)[

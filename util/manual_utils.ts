@@ -77,3 +77,19 @@ export function getDescription(content: string): string | undefined {
 export function isPreviewVersion(version: string): boolean {
   return VERSIONS.cli.find((v) => v === version) === undefined;
 }
+
+export function tocGen(
+  toc: TableOfContents,
+  parentSlug: string,
+): Map<string, string> {
+  const map = new Map<string, string>();
+  for (const [childSlug, entry] of Object.entries(toc)) {
+    const slug = `${parentSlug}/${childSlug}`;
+    const name = typeof entry === "string" ? entry : entry.name;
+    map.set(slug, name);
+    if (typeof entry === "object" && entry.children) {
+      tocGen(entry.children, slug);
+    }
+  }
+  return map;
+}
