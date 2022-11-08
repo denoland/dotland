@@ -60,7 +60,7 @@ export default {
     },
   },
   plugins: {
-    colorWash: apply`bg-gradient-to-r from-darkBlue to-mainBlue`,
+    colorWash: apply`bg-gradient-to-r from-darkBlue to-mainBlue bg-no-repeat`,
 
     link:
       apply`text-primary transition duration-75 ease-in-out hover:text-blue-400`,

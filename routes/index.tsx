@@ -94,7 +94,7 @@ export default function Home({ data }: PageProps<Data>) {
             additionalContent={
               <img
                 src="/images/typing_deno.png"
-                class="absolute h-44 -bottom-12 -right-9"
+                class="absolute hidden lg:(block h-44 -bottom-12 -right-9)"
               />
             }
             replaceImg={<ScrollInGif />}
@@ -210,7 +210,7 @@ export default function Home({ data }: PageProps<Data>) {
             additionalContent={
               <img
                 src="/images/lying_deno.png"
-                class="absolute w-32 -top-12 -right-9"
+                class="absolute hidden lg:(block w-32 -top-12 -right-9)"
               />
             }
             reverse
@@ -280,6 +280,9 @@ export default function Home({ data }: PageProps<Data>) {
   );
 }
 
+const gradientLabelBeforeAfter =
+  "absolute z-10 inset-0 rounded-full border-transparent box-border border-[3px] lg:border-4";
+
 function Section(
   { type, header, subheader, children }: {
     type: string;
@@ -290,8 +293,29 @@ function Section(
 ) {
   return (
     <div class="section-x-inset-xl pt-12 pb-18 lg:(pt-18 pb-24)">
-      <div class="colorWash rounded-full text-white font-semibold leading-none text-center py-3 w-24 text-lg lg:(py-4 w-44 text-2xl mx-auto)">
-        {type}
+      <div
+        class={tw`colorWash rounded-full relative border-0 font-semibold leading-none text-center py-2 w-22 text-lg lg:(py-3 w-32 text-2xl mx-auto) before:(${gradientLabelBeforeAfter} background-clip-border ${
+          css({
+            content: '""',
+          })
+        }) after:(${gradientLabelBeforeAfter} bg-white ${
+          css({
+            content: '""',
+            "background-clip": "content-box",
+          })
+        })`}
+      >
+        <span
+          class={tw`relative z-20 background-clip-text text-transparent ${
+            css({
+              background: "inherit",
+              "background-clip": "text",
+              "-webkit-background-clip": "text",
+            })
+          }`}
+        >
+          {type}
+        </span>
       </div>
       <h2 class="font-bold text-darkBlue leading-none mt-5 mb-4 text-3xl lg:(my-5 text-6xl text-center)">
         {header}

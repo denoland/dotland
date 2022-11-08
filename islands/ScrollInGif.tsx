@@ -20,7 +20,7 @@ export default function ScrollInGif() {
     };
   }, [imgRef]);
 
-  return scrolledIn
+  return false
     ? <img src="/images/kitty-cat-sandwich.gif" />
     : <img ref={imgRef} src="/images/benchmark.png" />;
 }
