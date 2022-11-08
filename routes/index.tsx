@@ -294,9 +294,10 @@ function Section(
   return (
     <div class="section-x-inset-xl pt-12 pb-18 lg:(pt-18 pb-24)">
       <div
-        class={tw`colorWash rounded-full relative border-0 font-semibold leading-none text-center py-2 w-22 text-lg lg:(py-3 w-32 text-2xl mx-auto) before:(${gradientLabelBeforeAfter} background-clip-border ${
+        class={tw`colorWash rounded-full relative border-0 py-2 w-22 lg:(py-2.5 w-36 mx-auto) before:(${gradientLabelBeforeAfter} ${
           css({
             content: '""',
+            "background-clip": "border-box",
           })
         }) after:(${gradientLabelBeforeAfter} bg-white ${
           css({
@@ -306,7 +307,7 @@ function Section(
         })`}
       >
         <span
-          class={tw`relative z-20 background-clip-text text-transparent ${
+          class={tw`relative block z-20 text-transparent font-semibold leading-none text-center text-lg lg:text-[1.75rem] ${
             css({
               background: "inherit",
               "background-clip": "text",
