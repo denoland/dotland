@@ -96,10 +96,12 @@ export default function Home({ data }: PageProps<Data>) {
 
           <div class="flex items-center justify-between flex-col gap-11 lg:(flex-row gap-[8%])">
             <div class="space-y-4 lg:space-y-5">
-              <Icons.Logo class="w-15" />
-              <h3 class="font-bold text-darkBlue text-2xl lg:text-4xl">
-                TypeScript out of the box
-              </h3>
+              <div class="flex flex-row-reverse justify-between items-end gap-3 lg:(flex-col items-start gap-5)">
+                <Icons.Logo class="flex-none w-11 lg:w-15" />
+                <h3 class="font-bold text-darkBlue text-[1.375rem] lg:text-4xl">
+                  TypeScript out of the box
+                </h3>
+              </div>
               <p class="text-normalBlue lg:text-2xl">
                 First-class support for TypeScript – no need to spend hours
                 configuring things that break as soon as you update a
@@ -107,10 +109,12 @@ export default function Home({ data }: PageProps<Data>) {
               </p>
             </div>
             <div class="space-y-4 lg:space-y-5">
-              <Icons.Logo class="w-15" />
-              <h3 class="font-bold text-darkBlue text-2xl lg:text-4xl">
-                Great all-in-one tooling
-              </h3>
+              <div class="flex flex-row-reverse justify-between items-end gap-3 lg:(flex-col items-start gap-5)">
+                <Icons.Logo class="flex-none w-11 lg:w-15" />
+                <h3 class="font-bold text-darkBlue text-[1.375rem] lg:text-4xl">
+                  Great all-in-one tooling
+                </h3>
+              </div>
               <p class="text-normalBlue lg:text-2xl">
                 Built in linter, code formatter, ability to build a
                 self-contained executable, test runner, IDE integration, and
@@ -118,10 +122,12 @@ export default function Home({ data }: PageProps<Data>) {
               </p>
             </div>
             <div class="space-y-4 lg:space-y-5">
-              <Icons.Logo class="w-15" />
-              <h3 class="font-bold text-darkBlue text-2xl lg:text-4xl">
-                Hassle-free deployment
-              </h3>
+              <div class="flex flex-row-reverse justify-between items-end gap-3 lg:(flex-col items-start gap-5)">
+                <Icons.Logo class="flex-none w-11 lg:w-15" />
+                <h3 class="font-bold text-darkBlue text-[1.375rem] lg:text-4xl">
+                  Hassle-free deployment
+                </h3>
+              </div>
               <p class="text-normalBlue lg:text-2xl">
                 Launch to Deno Deploy with one line of code and zero server
                 configuration, or host with other platforms of your choice.
