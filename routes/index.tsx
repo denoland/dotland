@@ -307,7 +307,7 @@ function Section(
         })`}
       >
         <span
-          class={tw`relative block z-20 text-transparent font-semibold leading-none text-center text-lg lg:text-[1.75rem] ${
+          class={tw`relative block z-20 text-transparent font-semibold leading-tight text-center text-lg lg:text-[1.75rem] ${
             css({
               background: "inherit",
               "background-clip": "text",
