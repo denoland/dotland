@@ -9,6 +9,7 @@ import HelloBar from "@/islands/HelloBar.tsx";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import * as Icons from "@/components/Icons.tsx";
 import { Footer } from "$doc_components/footer.tsx";
+import ScrollInGif from "@/islands/ScrollInGif.tsx";
 
 import { getCookies } from "https://deno.land/std@0.143.0/http/cookie.ts";
 
@@ -42,9 +43,19 @@ export default function Home({ data }: PageProps<Data>) {
           class={tw`px-8 pt-12 pb-28 lg:(px-36 py-20) ${
             css({
               background:
-                'url("/images/cover.png") 68% 23%/120% no-repeat, linear-gradient(to right, #000059, #0094FF)',
+                'url("/images/cover_image/sm.png") left / cover no-repeat',
             })
-          }`}
+          } md:(${
+            css({
+              background:
+                'url("/images/cover_image/lg.png") center / cover no-repeat',
+            })
+          }) xl:(${
+            css({
+              background:
+                'url("/images/cover_image/xl.png") center / cover no-repeat',
+            })
+          })`}
         >
           <div class="text-white lg:w-136">
             <div class="space-y-2.5 lg:space-y-5.5">
@@ -80,6 +91,13 @@ export default function Home({ data }: PageProps<Data>) {
             src="/images/Dependencies_Placeholder.png"
             alt="Dependencies"
             header="Avoid installing dependencies"
+            additionalContent={
+              <img
+                src="/images/typing_deno.png"
+                class="absolute h-44 -bottom-12 -right-9"
+              />
+            }
+            replaceImg={<ScrollInGif />}
             reverse
           >
             Dive right into the code and skip the setup.
@@ -185,7 +203,18 @@ export default function Home({ data }: PageProps<Data>) {
           header="Secure by default."
           subheader="Take total control over your workflow."
         >
-          <ImageSubSection src="" alt="" header="Run untrusted code" reverse>
+          <ImageSubSection
+            src="/images/benchmark.png"
+            alt=""
+            header="Run untrusted code"
+            additionalContent={
+              <img
+                src="/images/lying_deno.png"
+                class="absolute w-32 -top-12 -right-9"
+              />
+            }
+            reverse
+          >
             By default Deno provides no I/O access and is appropriate for
             running untrusted code and auditing new third-party code.
           </ImageSubSection>
@@ -279,11 +308,13 @@ function Section(
 }
 
 function ImageSubSection(
-  { src, alt, header, children, reverse }: {
+  { src, alt, header, additionalContent, replaceImg, children, reverse }: {
     src: string;
     alt: string;
     header: string;
     children: ComponentChildren;
+    additionalContent?: ComponentChildren;
+    replaceImg?: ComponentChildren;
     reverse?: boolean;
   },
 ) {
@@ -294,13 +325,14 @@ function ImageSubSection(
       })`}
     >
       <div
-        class={tw`p-2 w-full rounded-lg lg:(p-8 w-[70%] rounded-2xl) box-border flex-none bg-lightWhiteBlue ${
+        class={tw`relative p-2 w-full rounded-lg lg:(p-4 w-[70%] rounded-2xl) box-border flex-none bg-lightWhiteBlue ${
           css({
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
           })
-        }`}
+        } children:last-child:w-full`}
       >
-        <img class="w-full" src={src} alt={alt} />
+        {additionalContent}
+        {replaceImg ?? <img src={src} alt={alt} />}
       </div>
       <div class="space-y-3">
         <h3 class="font-bold text-darkBlue text-3xl lg:text-4xl">
