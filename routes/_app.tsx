@@ -12,6 +12,12 @@ export default function App({ Component }: AppProps) {
         <link rel="stylesheet" href="/fonts/inter/inter.css" />
         <link rel="manifest" href="/site.webmanifest" />
 
+        {/* needed for the dialog on safari to handle visibility of modal based on the `open` prop */}
+        <link
+            rel="stylesheet"
+            href="https://esm.sh/dialog-polyfill@0.5.6/dialog-polyfill.css"
+          />
+
         <link rel="stylesheet" href="/app.css" />
         <link rel="stylesheet" href="/gfm.css" />
       </Head>
