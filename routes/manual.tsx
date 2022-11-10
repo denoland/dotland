@@ -34,7 +34,8 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
   const path = `/${params.path}`;
 
   const pageIndex = pageList.findIndex((page) =>
-    page.path === `/manual${path}`
+    // page.path is in the form /manual@v{1.8.2}/{path}
+    page.path.startsWith("/manual") && page.path.endsWith(path)
   );
   const sourceURL = getFileURL(version, path);
 
