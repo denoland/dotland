@@ -248,7 +248,7 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
   return (
     <>
       <button
-        class="pl-4 w-80 bg-grayDefault flex-auto lg:flex-none rounded-md text-gray-400 hover:bg-border disabled:invisible"
+        class="pl-4 bg-grayDefault flex-grow lg:(w-80 flex-none) rounded-md text-gray-400 hover:bg-border disabled:invisible"
         onClick={() => setShowModal(true)}
         disabled={!IS_BROWSER}
       >

@@ -1,12 +1,21 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-import { apply, tw } from "twind";
+import { tw } from "twind";
 import { css } from "twind/css";
 import * as Icons from "./Icons.tsx";
 import GlobalSearch from "@/islands/GlobalSearch.tsx";
 import versions from "@/versions.json" assert { type: "json" };
 
-const entries = [
+interface HrefEntry {
+  content: string;
+  href: string;
+}
+interface ChildrenEntry {
+  content: string;
+  children: HrefEntry[];
+}
+
+const entries: Array<HrefEntry | ChildrenEntry> = [
   {
     content: "Modules",
     children: [
@@ -73,34 +82,62 @@ export function Header({ selected, manual }: {
           </div>
 
           <div class="hidden flex-col mx-2 mt-5 gap-x-5 gap-y-4 font-medium lg:(flex flex-row items-center mx-0 mt-0)">
-            <div class="space-x-3.5 select-none">
-              {entries.map(({ href, content, children }) => (
-                <div class={`inline-block leading-loose children:first-child:(block px-2 rounded-md) hover:children:(first-child:(${children ? "shadow" : ""} bg-azure2) even:(${children ? "children:first-child:shadow" : ""} block))`}>
-                  {href
-                    ? <a href={href}>{content}</a>
-                    : <span>{content}</span>}
+            <div class="leading-loose divide-incl-y lg:(space-x-3.5 select-none children:inline-block divide-incl-y-0)">
+              {entries.map((entry) => {
+                if ("children" in entry) {
+                  return (
+                    <div class="lg:hover:children:(first-child:(shadow bg-azure2) last-child:block)">
+                      <label
+                        htmlFor={entry.content}
+                        tabIndex={0}
+                        class="rounded-md flex items-center justify-between px-1 my-3 lg:(px-2 my-0)"
+                      >
+                        <span>{entry.content}</span>
+                        <div class="lg:hidden text-[#9CA0AA]">
+                          <Icons.Plus />
+                          <Icons.Minus class="hidden" />
+                        </div>
+                      </label>
 
-                  {children && (
-                    <div class="hidden absolute bottom">
-                      <div class="rounded-md overflow-hidden bg-azure2 divide-y divide-white px-4">
-                        {children.map(({
-                          href,
-                          content,
-                        }) => (
-                          <div class="py-2">
-                            <a
-                              class="leading-none! hover:bg-border"
-                              href={href}
-                            >
-                              {content}
-                            </a>
-                          </div>
-                        ))}
+                      <input
+                        type="checkbox"
+                        id={entry.content}
+                        class="hidden checked:(siblings:last-child:block siblings:first-child:children:last-child:children:(odd:hidden even:block))"
+                        autoComplete="off"
+                      />
+
+                      <div class="hidden lg:(absolute bottom children:shadow)">
+                        <div class="pl-1 pb-2 mb-3 space-y-1.5 lg:(py-0 m-0 space-y-0 rounded-md overflow-hidden bg-azure2 divide-y divide-white px-4)">
+                          {entry.children.map(({
+                            href,
+                            content,
+                          }) => (
+                            <div class="pl-1 lg:(flex pl-0 py-1)">
+                              <a
+                                class="whitespace-nowrap py-1 block w-full leading-none! hover:lg:bg-border"
+                                href={href}
+                              >
+                                {content}
+                              </a>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  )}
-                </div>
-              ))}
+                  );
+                } else {
+                  return (
+                    <div>
+                      <a
+                        class="block w-full px-1 my-3 lg:(w-auto m-0 px-2 rounded-md hover:bg-azure2)"
+                        href={entry.href}
+                      >
+                        {entry.content}
+                      </a>
+                    </div>
+                  );
+                }
+              })}
             </div>
 
             <GlobalSearch denoVersion={versions.cli[0]} />

@@ -129,26 +129,29 @@ export default function Home({ data }: PageProps<Data>) {
 
           <div class="flex items-center justify-between flex-col gap-11 lg:(flex-row gap-[8%])">
             {[{
+              Icon: Icons.OutOfTheBox,
               title: "TypeScript out of the box",
               body:
                 "First-class support for TypeScript – no need to spend hours configuring things that break as soon as you update a dependency.",
             }, {
+              Icon: Icons.Tooling,
               title: "Great all-in-one tooling",
               body:
                 "Built in linter, code formatter, ability to build a self-contained executable, test runner, IDE integration, and more.",
             }, {
+              Icon: Icons.HassleFree,
               title: "Hassle-free deployment",
               body:
                 "Launch to Deno Deploy with one line of code and zero server configuration, or host with other platforms of your choice.",
-            }].map((entry) => (
+            }].map(({ Icon, title, body }) => (
               <div class="flex items-start flex-row-reverse gap-8 lg:(flex-col gap-9)">
-                <Icons.Logo class="flex-none w-[3.25rem] lg:w-18" />
+                <Icon class="flex-none w-[3.25rem] lg:w-18" />
                 <div class="inline space-y-3 lg:space-y-4">
                   <h3 class="font-bold text-default text-[1.375rem] lg:text-4xl">
-                    {entry.title}
+                    {title}
                   </h3>
                   <p class="text-normalBlue lg:text-2xl">
-                    {entry.body}
+                    {body}
                   </p>
                 </div>
               </div>
@@ -234,7 +237,7 @@ export default function Home({ data }: PageProps<Data>) {
 
           <div class="grid items-center justify-between gap-18 lg:(gap-22 grid-flow-col)">
             <div class="grid gap-5">
-              <Icons.Logo class="w-[3.25rem] lg:w-18 col-start-1" />
+              <Icons.Permissions class="w-[3.25rem] lg:w-18 col-start-1" />
               <h3 class="col-start-2 font-bold text-4xl text-default">
                 Fine grained<br />permission checks
               </h3>
@@ -245,7 +248,7 @@ export default function Home({ data }: PageProps<Data>) {
             </div>
 
             <div class="grid gap-5">
-              <Icons.Logo class="w-[3.25rem] lg:w-18 col-start-1" />
+              <Icons.Secure class="w-[3.25rem] lg:w-18 col-start-1" />
               <h3 class="col-start-2 font-bold text-4xl text-default">
                 Safer NPM<br />packages
               </h3>
