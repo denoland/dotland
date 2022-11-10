@@ -12,7 +12,7 @@ export default function HelloBar(props: {
   const [open, setOpen] = useState(true);
   return open
     ? (
-      <div class="text-center bg-black text-white p-1 flex items-center justify-between flex-wrap">
+      <div class="text-center bg-darkBlue text-mainBlue p-1 flex items-center justify-between flex-wrap">
         <div class="flex-grow text-center">
           <a
             href={props.to}

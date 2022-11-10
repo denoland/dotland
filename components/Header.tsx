@@ -32,7 +32,7 @@ export function Header({ selected, manual }: {
 }) {
   return (
     <div class={`${manual ? "lg:border-b" : "border-b"} border-border`}>
-      <div class="section-x-inset-2xl py-5 h-full">
+      <div class="section-x-inset-2xl py-4.5 h-full">
         <nav class="flex justify-between flex-col lg:flex-row h-full">
           <input
             type="checkbox"
@@ -43,7 +43,7 @@ export function Header({ selected, manual }: {
 
           <div class="h-9 flex flex-1 items-center justify-between lg:justify-start select-none w-full lg:w-min gap-3 md:gap-6 lg:gap-8">
             <a href="/" class="flex items-center flex-none gap-4">
-              <Icons.Logo class="h-8 flex-none" />
+              <Icons.Logo class="h-10 flex-none" />
               <Icons.Deno class="h-6 flex-none" />
             </a>
 
@@ -66,23 +66,29 @@ export function Header({ selected, manual }: {
           <div class="hidden flex-col mx-2 mt-5 gap-x-5 gap-y-4 font-medium lg:(flex flex-row items-center mx-0 mt-0)">
             <div class="space-x-3.5 select-none">
               {entries.map(({ href, content, children }) => (
-                <div
-                  class={`inline-block leading-loose children:first-child:(block px-2 rounded-t-md ${
-                    !children ? "rounded-b-md" : ""
-                  }) hover:children:(bg-grayDefault even:block) text-gray-500`}
-                >
-                  {href ? <a href={href}>{content}</a> : <span>{content}</span>}
+                <div class="inline-block text-gray-500 leading-loose children:first-child:(block px-2 rounded-md) hover:children:even:block">
+                  {href
+                    ? <a href={href} class="hover:bg-grayDefault">{content}</a>
+                    : <span class="hover:bg-grayDefault">{content}</span>}
 
                   {children && (
-                    <div class="hidden rounded-b-md rounded-tr-md absolute bottom overflow-hidden">
-                      {children.map(({
-                        href,
-                        content,
-                      }) => (
-                        <a class="block px-3 hover:bg-border" href={href}>
-                          {content}
-                        </a>
-                      ))}
+                    <div class="hidden absolute bottom">
+                      <div class="h-10 bg-red-100"></div>
+                      <div class="rounded-md overflow-hidden bg-grayDefault divide-y divide-white px-4">
+                        {children.map(({
+                          href,
+                          content,
+                        }) => (
+                          <div class="py-5">
+                            <a
+                              class="leading-none! hover:bg-border"
+                              href={href}
+                            >
+                              {content}
+                            </a>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>

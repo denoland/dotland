@@ -17,10 +17,13 @@ interface Data {
   hellobarClosedTo: string;
 }
 
-export default function Home({ data }: PageProps<Data>) {
-  const hellobarTo =
-    "https://deno.news/archive/52-deno-126-isolate-clouds-and-the-edge";
+const announcement = {
+  major: false,
+  href: "https://deno.com/blog",
+  text: "NPM compatibility is now live! Click here to get started",
+} as const;
 
+export default function Home({ data }: PageProps<Data>) {
   return (
     <div>
       <ContentMeta
@@ -30,10 +33,10 @@ export default function Home({ data }: PageProps<Data>) {
         creator="@deno_land"
         noAppendTitle
       />
-      {hellobarTo !== data.hellobarClosedTo &&
+      {announcement.href !== data.hellobarClosedTo && !announcement.major &&
         (
-          <HelloBar to={hellobarTo}>
-            Check out Deno News issue #52!
+          <HelloBar to={announcement.href}>
+            {announcement.text}
           </HelloBar>
         )}
       <div>
@@ -42,18 +45,17 @@ export default function Home({ data }: PageProps<Data>) {
         <div
           class={tw`px-8 pt-12 pb-28 lg:(px-36 py-20) ${
             css({
-              background:
-                'url("/images/cover_image/sm.png") left / cover no-repeat',
+              background: 'url("/images/lp/cover.png") left / cover no-repeat',
             })
           } md:(${
             css({
               background:
-                'url("/images/cover_image/lg.png") center / cover no-repeat',
+                'url("/images/lp/cover@lg.png") center / cover no-repeat',
             })
           }) xl:(${
             css({
               background:
-                'url("/images/cover_image/xl.png") center / cover no-repeat',
+                'url("/images/lp/cover@xl.png") center / cover no-repeat',
             })
           })`}
         >
@@ -70,17 +72,20 @@ export default function Home({ data }: PageProps<Data>) {
               <a class="hidden lg:inline button-primary" href="">
                 Installation
               </a>
-              <a class="button-primary" href="">Documentation</a>
+              <a class="button-primary" href="/manual">Documentation</a>
             </div>
           </div>
         </div>
 
-        <a
-          class="flex items-center justify-center py-3 bg-mainBlue text-2xl text-white text-center font-semibold bg-gradient-to-r from-yellow-500 via-red-500 to-pink-600"
-          href="deno.com/blog"
-        >
-          NPM compatibility is now live! Click here to get started
-        </a>
+        {announcement.major &&
+          (
+            <a
+              class="flex items-center justify-center py-3 bg-mainBlue text-2xl text-white text-center font-semibold bg-gradient-to-r from-yellow-500 via-red-500 to-pink-600"
+              href={announcement.href}
+            >
+              {announcement.text}
+            </a>
+          )}
 
         <Section
           type="Easy"
@@ -88,24 +93,34 @@ export default function Home({ data }: PageProps<Data>) {
           subheader="Without the learning curve…"
         >
           <ImageSubSection
-            src="/images/Dependencies_Placeholder.png"
-            alt="Dependencies"
+            image={<ScrollInGif />}
             header="Avoid installing dependencies"
             additionalContent={
               <img
-                src="/images/typing_deno.png"
-                class="absolute hidden lg:(block h-44 -bottom-12 -right-9)"
+                src="/images/lp/typing_deno.png"
+                class="absolute hidden lg:(block h-64 -bottom-20 -right-12)"
               />
             }
-            replaceImg={<ScrollInGif />}
             reverse
           >
             Dive right into the code and skip the setup.
           </ImageSubSection>
 
           <ImageSubSection
-            src="/images/web_compatibility.png"
-            alt="Web APIs"
+            image={
+              <>
+                <img
+                  class="lg:hidden"
+                  src="/images/lp/web_compatibility.png"
+                  alt="Web APIs"
+                />
+                <img
+                  class="hidden lg:block"
+                  src="/images/lp/web_compatibility@lg.png"
+                  alt="Web APIs"
+                />
+              </>
+            }
             header="Web-standard APIs"
           >
             A runtime that resembles the web, using browser APIs that work on
@@ -113,44 +128,31 @@ export default function Home({ data }: PageProps<Data>) {
           </ImageSubSection>
 
           <div class="flex items-center justify-between flex-col gap-11 lg:(flex-row gap-[8%])">
-            <div class="space-y-4 lg:space-y-5">
-              <div class="flex flex-row-reverse justify-between items-end gap-3 lg:(flex-col items-start gap-5)">
-                <Icons.Logo class="flex-none w-11 lg:w-15" />
-                <h3 class="font-bold text-darkBlue text-[1.375rem] lg:text-4xl">
-                  TypeScript out of the box
-                </h3>
+            {[{
+              title: "TypeScript out of the box",
+              body:
+                "First-class support for TypeScript – no need to spend hours configuring things that break as soon as you update a dependency.",
+            }, {
+              title: "Great all-in-one tooling",
+              body:
+                "Built in linter, code formatter, ability to build a self-contained executable, test runner, IDE integration, and more.",
+            }, {
+              title: "Hassle-free deployment",
+              body:
+                "Launch to Deno Deploy with one line of code and zero server configuration, or host with other platforms of your choice.",
+            }].map((entry) => (
+              <div class="flex items-start flex-row-reverse gap-8 lg:(flex-col gap-9)">
+                <Icons.Logo class="flex-none w-[3.25rem] lg:w-18" />
+                <div class="inline space-y-3 lg:space-y-4">
+                  <h3 class="font-bold text-darkBlue text-[1.375rem] lg:text-4xl">
+                    {entry.title}
+                  </h3>
+                  <p class="text-normalBlue lg:text-2xl">
+                    {entry.body}
+                  </p>
+                </div>
               </div>
-              <p class="text-normalBlue lg:text-2xl">
-                First-class support for TypeScript – no need to spend hours
-                configuring things that break as soon as you update a
-                dependency.
-              </p>
-            </div>
-            <div class="space-y-4 lg:space-y-5">
-              <div class="flex flex-row-reverse justify-between items-end gap-3 lg:(flex-col items-start gap-5)">
-                <Icons.Logo class="flex-none w-11 lg:w-15" />
-                <h3 class="font-bold text-darkBlue text-[1.375rem] lg:text-4xl">
-                  Great all-in-one tooling
-                </h3>
-              </div>
-              <p class="text-normalBlue lg:text-2xl">
-                Built in linter, code formatter, ability to build a
-                self-contained executable, test runner, IDE integration, and
-                more.
-              </p>
-            </div>
-            <div class="space-y-4 lg:space-y-5">
-              <div class="flex flex-row-reverse justify-between items-end gap-3 lg:(flex-col items-start gap-5)">
-                <Icons.Logo class="flex-none w-11 lg:w-15" />
-                <h3 class="font-bold text-darkBlue text-[1.375rem] lg:text-4xl">
-                  Hassle-free deployment
-                </h3>
-              </div>
-              <p class="text-normalBlue lg:text-2xl">
-                Launch to Deno Deploy with one line of code and zero server
-                configuration, or host with other platforms of your choice.
-              </p>
-            </div>
+            ))}
           </div>
         </Section>
 
@@ -170,8 +172,20 @@ export default function Home({ data }: PageProps<Data>) {
           subheader="Designed from the ground-up for high-performance."
         >
           <ImageSubSection
-            src="/images/benchmark.png"
-            alt="HTTP Benchmark"
+            image={
+              <>
+                <img
+                  class="lg:hidden"
+                  src="/images/lp/benchmark.png"
+                  alt="HTTP Benchmark"
+                />
+                <img
+                  class="hidden lg:block"
+                  src="/images/lp/benchmark@lg.png"
+                  alt="HTTP Benchmark"
+                />
+              </>
+            }
             header="Best in class HTTP server speeds"
             reverse
           >
@@ -179,9 +193,9 @@ export default function Home({ data }: PageProps<Data>) {
           </ImageSubSection>
 
           <ImageSubSection
-            src=""
-            alt=""
+            image={<img src="/images/lp/v8.png" alt="" />}
             header="Powered by Chrome's V8"
+            noBackground
           >
             Built on top of the fastest and most complete JavaScript engine.
           </ImageSubSection>
@@ -204,13 +218,12 @@ export default function Home({ data }: PageProps<Data>) {
           subheader="Take total control over your workflow."
         >
           <ImageSubSection
-            src="/images/benchmark.png"
-            alt=""
+            image={<img src="" alt="" />}
             header="Run untrusted code"
             additionalContent={
               <img
-                src="/images/lying_deno.png"
-                class="absolute hidden lg:(block w-32 -top-12 -right-9)"
+                src="/images/lp/armor_deno.png"
+                class="absolute hidden lg:(block w-52 -top-14 -right-24)"
               />
             }
             reverse
@@ -219,9 +232,9 @@ export default function Home({ data }: PageProps<Data>) {
             running untrusted code and auditing new third-party code.
           </ImageSubSection>
 
-          <div class="grid items-center justify-between gap-22 grid-cols-2">
+          <div class="grid items-center justify-between gap-18 lg:(gap-22 grid-flow-col)">
             <div class="grid gap-5">
-              <Icons.Logo class="w-15 col-start-1" />
+              <Icons.Logo class="w-[3.25rem] lg:w-18 col-start-1" />
               <h3 class="col-start-2 font-bold text-4xl text-darkBlue">
                 Fine grained<br />permission checks
               </h3>
@@ -232,7 +245,7 @@ export default function Home({ data }: PageProps<Data>) {
             </div>
 
             <div class="grid gap-5">
-              <Icons.Logo class="w-15 col-start-1" />
+              <Icons.Logo class="w-[3.25rem] lg:w-18 col-start-1" />
               <h3 class="col-start-2 font-bold text-4xl text-darkBlue">
                 Safer NPM<br />packages
               </h3>
@@ -333,13 +346,19 @@ function Section(
 }
 
 function ImageSubSection(
-  { src, alt, header, additionalContent, replaceImg, children, reverse }: {
-    src: string;
-    alt: string;
+  {
+    image,
+    header,
+    additionalContent,
+    children,
+    noBackground,
+    reverse,
+  }: {
+    image: ComponentChildren;
     header: string;
     children: ComponentChildren;
     additionalContent?: ComponentChildren;
-    replaceImg?: ComponentChildren;
+    noBackground?: boolean;
     reverse?: boolean;
   },
 ) {
@@ -350,16 +369,22 @@ function ImageSubSection(
       })`}
     >
       <div
-        class={tw`relative p-2 w-full rounded-lg lg:(p-4 w-[70%] rounded-2xl) box-border flex-none bg-lightWhiteBlue ${
-          css({
-            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-          })
-        } children:last-child:w-full`}
+        class={`relative w-full rounded-lg lg:(w-[70%] rounded-2xl) box-border flex-none ${
+          !noBackground
+            ? tw`bg-lightWhiteBlue ${
+              css({
+                boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+              })
+            }`
+            : ""
+        }`}
       >
         {additionalContent}
-        {replaceImg ?? <img src={src} alt={alt} />}
+        <div class="w-full children:w-full overflow-hidden rounded-lg lg:rounded-2xl">
+          {image}
+        </div>
       </div>
-      <div class="space-y-3">
+      <div class="space-y-3 p-1.5 lg:p-0">
         <h3 class="font-bold text-darkBlue text-3xl lg:text-4xl">
           {header}
         </h3>

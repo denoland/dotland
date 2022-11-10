@@ -37,10 +37,13 @@ export default {
 
         mainBlue: "#0094FF",
         normalBlue: "#0A4BAB",
-        darkBlue: "#000059",
+        darkBlue: "#12124b",
         lightBlue: "#54ADCF",
         veryLightBlue: "#A7DAFF",
         lightWhiteBlue: "#E1F8FF",
+
+        colorWashFrom: "#002585",
+        colorWashTo: "#209DEE",
       },
       spacing: {
         1.75: "0.4375rem",
@@ -60,7 +63,8 @@ export default {
     },
   },
   plugins: {
-    colorWash: apply`bg-gradient-to-r from-darkBlue to-mainBlue bg-no-repeat`,
+    colorWash:
+      apply`bg-gradient-to-r from-colorWashFrom to-colorWashTo bg-no-repeat`,
 
     link:
       apply`text-primary transition duration-75 ease-in-out hover:text-blue-400`,
