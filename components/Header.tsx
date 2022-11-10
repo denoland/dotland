@@ -22,6 +22,15 @@ const entries = [
     ],
   },
   { href: "https://deno.com/deploy", content: "Deploy" },
+  {
+    content: "Communities",
+    children: [
+      { href: "https://discord.gg/deno", content: "Join our Discord" },
+      { href: "https://github.com/denoland", content: "GitHub" },
+      { href: "https://twitter.com/deno_land", content: "Twitter" },
+      { href: "https://www.youtube.com/c/Deno_land", content: "YouTube" },
+    ],
+  },
 ];
 
 type ContentTypes = (typeof entries)[number]["content"];
@@ -66,20 +75,19 @@ export function Header({ selected, manual }: {
           <div class="hidden flex-col mx-2 mt-5 gap-x-5 gap-y-4 font-medium lg:(flex flex-row items-center mx-0 mt-0)">
             <div class="space-x-3.5 select-none">
               {entries.map(({ href, content, children }) => (
-                <div class="inline-block text-gray-500 leading-loose children:first-child:(block px-2 rounded-md) hover:children:even:block">
+                <div class={`inline-block leading-loose children:first-child:(block px-2 rounded-md) hover:children:(first-child:(${children ? "shadow" : ""} bg-azure2) even:(${children ? "children:first-child:shadow" : ""} block))`}>
                   {href
-                    ? <a href={href} class="hover:bg-grayDefault">{content}</a>
-                    : <span class="hover:bg-grayDefault">{content}</span>}
+                    ? <a href={href}>{content}</a>
+                    : <span>{content}</span>}
 
                   {children && (
                     <div class="hidden absolute bottom">
-                      <div class="h-10 bg-red-100"></div>
-                      <div class="rounded-md overflow-hidden bg-grayDefault divide-y divide-white px-4">
+                      <div class="rounded-md overflow-hidden bg-azure2 divide-y divide-white px-4">
                         {children.map(({
                           href,
                           content,
                         }) => (
-                          <div class="py-5">
+                          <div class="py-2">
                             <a
                               class="leading-none! hover:bg-border"
                               href={href}

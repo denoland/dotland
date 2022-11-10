@@ -26,7 +26,7 @@ export default {
     },
     extend: {
       colors: {
-        default: "#232323",
+        default: "#12124B",
         fresh: "#0CBB3F",
         primary: "#056CF0",
         symbol: "#7B61FF",
@@ -37,10 +37,8 @@ export default {
 
         mainBlue: "#0094FF",
         normalBlue: "#0A4BAB",
-        darkBlue: "#12124b",
-        lightBlue: "#54ADCF",
-        veryLightBlue: "#A7DAFF",
-        lightWhiteBlue: "#E1F8FF",
+        azure: "#E1F8FF",
+        azure2: "#E1ECF2",
 
         colorWashFrom: "#002585",
         colorWashTo: "#209DEE",

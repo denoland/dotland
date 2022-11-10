@@ -18,7 +18,7 @@ interface Data {
 }
 
 const announcement = {
-  major: false,
+  major: true,
   href: "https://deno.com/blog",
   text: "NPM compatibility is now live! Click here to get started",
 } as const;
@@ -80,7 +80,7 @@ export default function Home({ data }: PageProps<Data>) {
         {announcement.major &&
           (
             <a
-              class="flex items-center justify-center py-3 bg-mainBlue text-2xl text-white text-center font-semibold bg-gradient-to-r from-yellow-500 via-red-500 to-pink-600"
+              class="flex items-center justify-center py-3 px-4 bg-mainBlue text-2xl text-white text-center font-semibold bg-gradient-to-r from-yellow-500 via-red-500 to-pink-600"
               href={announcement.href}
             >
               {announcement.text}
@@ -144,7 +144,7 @@ export default function Home({ data }: PageProps<Data>) {
               <div class="flex items-start flex-row-reverse gap-8 lg:(flex-col gap-9)">
                 <Icons.Logo class="flex-none w-[3.25rem] lg:w-18" />
                 <div class="inline space-y-3 lg:space-y-4">
-                  <h3 class="font-bold text-darkBlue text-[1.375rem] lg:text-4xl">
+                  <h3 class="font-bold text-default text-[1.375rem] lg:text-4xl">
                     {entry.title}
                   </h3>
                   <p class="text-normalBlue lg:text-2xl">
@@ -235,7 +235,7 @@ export default function Home({ data }: PageProps<Data>) {
           <div class="grid items-center justify-between gap-18 lg:(gap-22 grid-flow-col)">
             <div class="grid gap-5">
               <Icons.Logo class="w-[3.25rem] lg:w-18 col-start-1" />
-              <h3 class="col-start-2 font-bold text-4xl text-darkBlue">
+              <h3 class="col-start-2 font-bold text-4xl text-default">
                 Fine grained<br />permission checks
               </h3>
               <p class="col-start-2 text-2xl text-normalBlue">
@@ -246,7 +246,7 @@ export default function Home({ data }: PageProps<Data>) {
 
             <div class="grid gap-5">
               <Icons.Logo class="w-[3.25rem] lg:w-18 col-start-1" />
-              <h3 class="col-start-2 font-bold text-4xl text-darkBlue">
+              <h3 class="col-start-2 font-bold text-4xl text-default">
                 Safer NPM<br />packages
               </h3>
               <p class="col-start-2 text-2xl text-normalBlue">
@@ -331,7 +331,7 @@ function Section(
           {type}
         </span>
       </div>
-      <h2 class="font-bold text-darkBlue leading-none mt-5 mb-4 text-3xl lg:(my-5 text-6xl text-center)">
+      <h2 class="font-bold text-default leading-none mt-5 mb-4 text-3xl lg:(my-5 text-6xl text-center)">
         {header}
       </h2>
       <p class="font-semibold text-normalBlue text-xl lg:(text-2xl text-center)">
@@ -371,7 +371,7 @@ function ImageSubSection(
       <div
         class={`relative w-full rounded-lg lg:(w-[70%] rounded-2xl) box-border flex-none ${
           !noBackground
-            ? tw`bg-lightWhiteBlue ${
+            ? tw`bg-azure ${
               css({
                 boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               })
@@ -385,7 +385,7 @@ function ImageSubSection(
         </div>
       </div>
       <div class="space-y-3 p-1.5 lg:p-0">
-        <h3 class="font-bold text-darkBlue text-3xl lg:text-4xl">
+        <h3 class="font-bold text-default text-3xl lg:text-4xl">
           {header}
         </h3>
         <p class="text-normalBlue text-lg lg:text-2xl">

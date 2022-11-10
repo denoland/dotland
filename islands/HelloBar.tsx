@@ -12,12 +12,12 @@ export default function HelloBar(props: {
   const [open, setOpen] = useState(true);
   return open
     ? (
-      <div class="text-center bg-darkBlue text-mainBlue p-1 flex items-center justify-between flex-wrap">
+      <div class="text-center bg-default text-mainBlue py-1 px-2 gap-1 flex items-center justify-between">
         <div class="flex-grow text-center">
           <a
             href={props.to}
             target="_blank"
-            class="inline-block p-1 hover:text-underline"
+            class="inline-block font-semibold p-1 hover:text-underline"
           >
             {props.children}
           </a>
