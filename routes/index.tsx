@@ -45,7 +45,8 @@ export default function Home({ data }: PageProps<Data>) {
         <div
           class={tw`px-8 pt-12 pb-28 lg:(px-36 pt-24 pb-40) ${
             css({
-              background: 'url("/images/lp/cover.png") left / cover no-repeat, linear-gradient(90deg, #002585, #209DEE)',
+              background:
+                'url("/images/lp/cover.png") left / cover no-repeat, linear-gradient(90deg, #002585, #209DEE)',
             })
           } md:(${
             css({
@@ -59,16 +60,17 @@ export default function Home({ data }: PageProps<Data>) {
             })
           })`}
         >
-          <div class="text-white lg:w-[40rem]">
+          <div class="text-white space-y-6 lg:(space-y-16 w-[40rem])">
             <div class="space-y-2.5 lg:space-y-8">
               <p class="font-semibold text-xl lg:text-3xl leading-none">
                 Meet Deno
               </p>
               <p class="font-bold text-5xl lg:text-7xl leading-none">
-                The easiest, and&nbsp;most secure JavaScript runtime.
+                The easiest,<br />and&nbsp;most secure{" "}
+                <br class="hidden sm:block lg:hidden" />JavaScript runtime.
               </p>
             </div>
-            <div class="mt-6 lg:(mt-16 space-x-7)">
+            <div class="lg:space-x-7">
               <a
                 class="hidden lg:inline-flex button-primary"
                 href="/manual/getting_started/installation"
@@ -164,12 +166,12 @@ export default function Home({ data }: PageProps<Data>) {
               ),
             }].map(({ Icon, title, body }) => (
               <div class="flex items-start flex-row-reverse gap-8 lg:(flex-col gap-9)">
-                <Icon class="flex-none w-[3.25rem] lg:w-18" />
+                <Icon class="flex-none w-[3.25rem] md:w-16 lg:w-18" />
                 <div class="inline space-y-3 lg:space-y-4">
-                  <h3 class="font-bold text-default text-[1.375rem] lg:text-4xl">
+                  <h3 class="font-bold text-default text-[1.375rem] md:text-3xl lg:text-4xl">
                     {title}
                   </h3>
-                  <p class="text-normalBlue font-medium lg:text-2xl">
+                  <p class="text-normalBlue font-medium md:text-xl lg:text-2xl">
                     {body}
                   </p>
                 </div>
@@ -284,13 +286,13 @@ export default function Home({ data }: PageProps<Data>) {
               ),
               Icon: Icons.Secure,
             }].map(({ title, body, Icon }) => (
-              <div class="flex items-start gap-8 flex-row-reverse lg:flex-row">
-                <Icon class="mt-1.5 flex-none w-[3.25rem] lg:w-18" />
+              <div class="flex justify-between items-start gap-8 flex-row-reverse lg:flex-row">
+                <Icon class="mt-1.5 flex-none w-[3.25rem] md:w-16 lg:w-18" />
                 <div class="space-y-3 lg:space-y-5">
-                  <h3 class="font-bold text-[1.375rem] lg:text-4xl text-default">
+                  <h3 class="font-bold text-[1.375rem] md:text-3xl lg:text-4xl text-default">
                     {title}
                   </h3>
-                  <p class="font-medium lg:text-2xl text-normalBlue">
+                  <p class="text-normalBlue font-medium md:text-xl lg:text-2xl">
                     {body}
                   </p>
                 </div>
@@ -300,7 +302,7 @@ export default function Home({ data }: PageProps<Data>) {
         </Section>
 
         <div class="colorWash pt-11 pb-12 lg:(pt-28 pb-24)">
-          <div class="section-x-inset-2xl lg:text-center">
+          <div class="section-x-inset-2xl md:text-center">
             <p class="text-white font-semibold text-xl pr-18 lg:(text-3xl pr-0)">
               Used by a large community of developers and leading
               technology&nbsp;companies:
@@ -308,7 +310,7 @@ export default function Home({ data }: PageProps<Data>) {
             <p class="text-white font-bold mt-4 mb-10 text-4xl lg:(mt-7 mb-13 text-7xl)">
               Over 300k Monthly&nbsp;Actives
             </p>
-            <div class="grid grid-cols-2 justify-center items-center text-white gap-6 lg:(gap-18 grid-cols-none grid-flow-col)">
+            <div class="grid grid-cols-2 justify-center items-center text-white gap-6 md:(gap-18 grid-cols-none grid-flow-col)">
               {companies.map((company) => (
                 <div key={company.url}>
                   <a
@@ -349,7 +351,7 @@ function Section(
   return (
     <div class="section-x-inset-xl pt-12 pb-18 lg:(pt-18 pb-24)">
       <div
-        class={tw`colorWash rounded-full relative border-0 py-2 w-22 lg:(py-2.5 w-36 mx-auto) before:(${gradientLabelBeforeAfter} ${
+        class={tw`colorWash rounded-full relative border-0 py-2 w-22 md:(py-2.5 w-36 mx-auto) before:(${gradientLabelBeforeAfter} ${
           css({
             content: '""',
             "background-clip": "border-box",
@@ -362,7 +364,7 @@ function Section(
         })`}
       >
         <span
-          class={tw`relative block z-20 text-transparent font-semibold leading-tight text-center text-lg lg:text-[1.75rem] ${
+          class={tw`relative block z-20 text-transparent font-semibold leading-tight text-center text-lg md:text-[1.75rem] ${
             css({
               background: "inherit",
               "background-clip": "text",
@@ -373,14 +375,14 @@ function Section(
           {type}
         </span>
       </div>
-      <h2 class="font-bold text-default leading-none mt-5 mb-4 text-3xl lg:(my-5 text-6xl text-center)">
+      <h2 class="font-bold text-default leading-none mt-5 mb-4 text-3xl md:(my-5 text-5xl text-center) lg:text-6xl">
         {header}
       </h2>
-      <p class="font-semibold text-normalBlue text-xl lg:(text-2xl text-center)">
+      <p class="font-semibold text-normalBlue text-xl md:(text-2xl text-center)">
         {subheader}
       </p>
 
-      <div class="mt-14 space-y-14 lg:(mt-20 space-y-28)">
+      <div class="mt-14 space-y-14 md:space-y-20 lg:(mt-20 space-y-28)">
         {children}
       </div>
     </div>
@@ -406,12 +408,12 @@ function ImageSubSection(
 ) {
   return (
     <div
-      class={`flex items-center justify-between gap-5 flex-col lg:(gap-12 flex-row${
+      class={`flex items-center justify-between gap-5 flex-col md:gap-10 lg:(gap-12 flex-row${
         reverse ? "-reverse" : ""
       })`}
     >
       <div
-        class={`relative w-full rounded-lg lg:(w-[70%] rounded-2xl) box-border flex-none ${
+        class={`relative w-full rounded-lg md:rounded-2xl lg:w-[70%] box-border flex-none ${
           !noBackground
             ? tw`bg-azure ${
               css({
@@ -422,15 +424,15 @@ function ImageSubSection(
         }`}
       >
         {additionalContent}
-        <div class="w-full children:w-full overflow-hidden rounded-lg lg:rounded-2xl">
+        <div class="w-full children:w-full overflow-hidden rounded-lg md:rounded-2xl">
           {image}
         </div>
       </div>
       <div class="space-y-3 p-1.5 lg:p-0">
-        <h3 class="font-bold text-default text-3xl lg:text-4xl">
+        <h3 class="font-bold text-default text-3xl md:text-4xl">
           {header}
         </h3>
-        <p class="text-normalBlue font-medium text-lg lg:text-2xl">
+        <p class="text-normalBlue font-medium text-lg md:text-2xl">
           {children}
         </p>
       </div>
