@@ -174,7 +174,7 @@ export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
                 </p>
               </div>
 
-              <div class="space-x-2">
+              <div class="space-x-3">
                 <a href="/add_module" class="button-primary">
                   <Icons.Plus />
                   <span>Publish a module</span>

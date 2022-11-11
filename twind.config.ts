@@ -132,7 +132,7 @@ export default {
         }
       }
 
-      return apply`inline-flex items-center gap-2 py-2.5 px-4.5 rounded-md bg-${bg} hover:bg-${bgHover} text-${text} leading-none font-medium ${
+      return apply`inline-flex items-center gap-2 h-12 px-5 rounded-md bg-${bg} hover:bg-${bgHover} text-${text} leading-tight font-medium ${
         border ? "border border-border" : ""
       }`;
     },

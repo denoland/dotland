@@ -113,7 +113,7 @@ export function Header({ selected, manual }: {
                             href,
                             content,
                           }) => (
-                            <div class="pl-1 lg:(flex pl-0 py-1)">
+                            <div class="pl-1 lg:(flex pl-0 py-2)">
                               <a
                                 class="whitespace-nowrap py-1 block w-full leading-none! hover:lg:bg-border"
                                 href={href}
