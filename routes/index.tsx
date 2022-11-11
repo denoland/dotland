@@ -69,7 +69,10 @@ export default function Home({ data }: PageProps<Data>) {
               </p>
             </div>
             <div class="mt-6 lg:(mt-16 space-x-7)">
-              <a class="hidden lg:inline-flex button-primary" href="/manual/getting_started/installation">
+              <a
+                class="hidden lg:inline-flex button-primary"
+                href="/manual/getting_started/installation"
+              >
                 Installation
               </a>
               <a class="button-primary" href="/manual">Documentation</a>
@@ -132,18 +135,33 @@ export default function Home({ data }: PageProps<Data>) {
             {[{
               Icon: Icons.OutOfTheBox,
               title: "TypeScript out of the box",
-              body:
-                <>First-class support for TypeScript – no need to spend hours configuring things that break as soon as you update a&nbsp;dependency.</>,
+              body: (
+                <>
+                  First-class support for TypeScript – no need to spend hours
+                  configuring things that break as soon as you update
+                  a&nbsp;dependency.
+                </>
+              ),
             }, {
               Icon: Icons.Tooling,
               title: "Great all-in-one tooling",
-              body:
-                <>Built in linter, code formatter, ability to build a self-contained executable, test runner, IDE integration, and&nbsp;more.</>,
+              body: (
+                <>
+                  Built in linter, code formatter, ability to build a
+                  self-contained executable, test runner, IDE integration,
+                  and&nbsp;more.
+                </>
+              ),
             }, {
               Icon: Icons.HassleFree,
               title: "Hassle-free deployment",
-              body:
-                <>Launch to Deno Deploy with one line of code and zero server configuration, or host with other platforms of your&nbsp;choice.</>,
+              body: (
+                <>
+                  Launch to Deno Deploy with one line of code and zero server
+                  configuration, or host with other platforms of
+                  your&nbsp;choice.
+                </>
+              ),
             }].map(({ Icon, title, body }) => (
               <div class="flex items-start flex-row-reverse gap-8 lg:(flex-col gap-9)">
                 <Icon class="flex-none w-[3.25rem] lg:w-18" />
@@ -234,7 +252,8 @@ export default function Home({ data }: PageProps<Data>) {
             reverse
           >
             By default Deno provides no I/O access and is appropriate for
-            running untrusted code and auditing new third&#8288;-&#8288;party&nbsp;code.
+            running untrusted code and auditing new
+            third&#8288;-&#8288;party&nbsp;code.
           </ImageSubSection>
 
           <div class="grid items-center justify-between gap-18 lg:(gap-22 grid-flow-col)">
@@ -255,7 +274,8 @@ export default function Home({ data }: PageProps<Data>) {
                 Safer NPM&nbsp;packages
               </h3>
               <p class="col-start-2 font-medium lg:text-2xl text-normalBlue">
-                Install and run npm packages without having to audit them&nbsp;first.
+                Install and run npm packages without having to audit
+                them&nbsp;first.
               </p>
             </div>
           </div>
@@ -264,7 +284,8 @@ export default function Home({ data }: PageProps<Data>) {
         <div class="colorWash pt-11 pb-12 lg:(pt-28 pb-24)">
           <div class="section-x-inset-2xl lg:text-center">
             <p class="text-white font-semibold text-xl pr-18 lg:(text-3xl pr-0)">
-              Used by a large community of developers and leading technology&nbsp;companies:
+              Used by a large community of developers and leading
+              technology&nbsp;companies:
             </p>
             <p class="text-white font-bold mt-4 mb-10 text-4xl lg:(mt-7 mb-13 text-7xl)">
               Over 300k Monthly&nbsp;Actives
@@ -279,7 +300,7 @@ export default function Home({ data }: PageProps<Data>) {
                   >
                     <img
                       class="h-7 lg:(h-auto h-12)"
-                      src={`/images/lp/companies/${company.name.toLowerCase()}.png`}
+                      src={`/images/lp/companies/${company.name.toLowerCase()}.svg`}
                       alt={company.name}
                       title={company.name}
                     />

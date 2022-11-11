@@ -2,6 +2,7 @@
 
 import { tw } from "twind";
 import { css } from "twind/css";
+import type { JSX } from "preact";
 import * as Icons from "./Icons.tsx";
 import GlobalSearch from "@/islands/GlobalSearch.tsx";
 import versions from "@/versions.json" assert { type: "json" };
@@ -9,6 +10,7 @@ import versions from "@/versions.json" assert { type: "json" };
 interface HrefEntry {
   content: string;
   href: string;
+  icon?: (props: { class?: string }) => JSX.Element;
 }
 interface ChildrenEntry {
   content: string;
@@ -35,10 +37,26 @@ const entries: Array<HrefEntry | ChildrenEntry> = [
   {
     content: "Communities",
     children: [
-      { href: "https://discord.gg/deno", content: "Join our Discord" },
-      { href: "https://github.com/denoland", content: "GitHub" },
-      { href: "https://twitter.com/deno_land", content: "Twitter" },
-      { href: "https://www.youtube.com/c/Deno_land", content: "YouTube" },
+      {
+        href: "https://discord.gg/deno",
+        content: "Join our Discord",
+        icon: Icons.Discord,
+      },
+      {
+        href: "https://github.com/denoland",
+        content: "GitHub",
+        icon: Icons.GitHub,
+      },
+      {
+        href: "https://twitter.com/deno_land",
+        content: "Twitter",
+        icon: Icons.Twitter,
+      },
+      {
+        href: "https://www.youtube.com/c/Deno_land",
+        content: "YouTube",
+        icon: Icons.YouTube,
+      },
     ],
   },
 ];
@@ -61,7 +79,11 @@ export function Header({ selected, manual }: {
           />
 
           <div class="h-9 flex flex-1 items-center justify-between lg:justify-start select-none w-full lg:w-min gap-3 md:gap-6 lg:gap-8">
-            <a href="/" class="flex items-center flex-none gap-4" aria-label="Landing Page">
+            <a
+              href="/"
+              class="flex items-center flex-none gap-4"
+              aria-label="Landing Page"
+            >
               <Icons.Logo class="h-10 flex-none" />
               <Icons.Deno class="h-6 flex-none" />
             </a>
@@ -112,12 +134,16 @@ export function Header({ selected, manual }: {
                           {entry.children.map(({
                             href,
                             content,
+                            icon,
                           }) => (
                             <div class="text-sm font-semibold lg:(text-base font-normal flex)">
                               <a
-                                class="whitespace-nowrap py-1.5 lg:py-3.5  pl-1 lg:px-4 py-3 block w-full leading-tight! hover:lg:bg-azure2"
+                                class="flex gap-2 items-center whitespace-nowrap py-1.5 pl-1 py-3 lg:(py-3.5 px-4) w-full leading-tight! hover:lg:bg-azure2"
                                 href={href}
                               >
+                                {icon?.({
+                                  class: "w-5! text-mainBlue flex-none",
+                                })}
                                 {content}
                               </a>
                             </div>
