@@ -187,7 +187,8 @@ export default function Home({ data }: PageProps<Data>) {
           lgSize="5xl"
         >
           Voted one of the most loved web technologies
-          <br />in a survey of over 70,000 developers
+          <br class="hidden lg:block" />in a survey of over
+          70,000&nbsp;developers
         </Quote>
 
         <Section
