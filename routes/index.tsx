@@ -43,7 +43,7 @@ export default function Home({ data }: PageProps<Data>) {
         <Header />
 
         <div
-          class={tw`px-8 pt-12 pb-28 lg:(px-36 py-20) ${
+          class={tw`px-8 pt-12 pb-28 lg:(px-36 pt-24 pb-40) ${
             css({
               background: 'url("/images/lp/cover.png") left / cover no-repeat',
             })
@@ -59,13 +59,13 @@ export default function Home({ data }: PageProps<Data>) {
             })
           })`}
         >
-          <div class="text-white lg:w-136">
-            <div class="space-y-2.5 lg:space-y-5.5">
+          <div class="text-white lg:w-[40rem]">
+            <div class="space-y-2.5 lg:space-y-8">
               <p class="font-semibold text-xl lg:text-3xl leading-none">
                 Meet Deno
               </p>
-              <p class="font-bold text-5xl lg:text-[5rem] leading-none">
-                The easiest and most secure JavaScript runtime.
+              <p class="font-bold text-5xl lg:text-7xl leading-none">
+                The easiest, and&nbsp;most secure JavaScript runtime.
               </p>
             </div>
             <div class="mt-6 lg:(mt-16 space-x-7)">
@@ -83,7 +83,7 @@ export default function Home({ data }: PageProps<Data>) {
         {announcement.major &&
           (
             <a
-              class="flex items-center justify-center py-3 px-4 bg-mainBlue text-2xl text-white text-center font-semibold bg-gradient-to-r from-yellow-500 via-red-500 to-pink-600"
+              class="block items-center justify-center py-3 px-4 text-2xl text-white text-center font-semibold bg-[#FF5C38]"
               href={announcement.href}
             >
               {announcement.text}
@@ -256,28 +256,46 @@ export default function Home({ data }: PageProps<Data>) {
             third&#8288;-&#8288;party&nbsp;code.
           </ImageSubSection>
 
-          <div class="grid items-center justify-between gap-18 lg:(gap-22 grid-flow-col)">
-            <div class="grid gap-3 lg:gap-5">
-              <Icons.Permissions class="w-[3.25rem] lg:w-18 col-start-1" />
-              <h3 class="col-start-2 font-bold text-[1.375rem] lg:text-4xl text-default">
-                Fine grained permission&nbsp;checks
-              </h3>
-              <p class="col-start-2 font-medium lg:text-2xl text-normalBlue">
-                Provide an allow-list to access only certain file system
-                directories, network hosts, and environment&nbsp;variables.
-              </p>
-            </div>
-
-            <div class="grid gap-3 lg:gap-5">
-              <Icons.Secure class="w-[3.25rem] lg:w-18 col-start-1" />
-              <h3 class="col-start-2 font-bold text-[1.375rem] lg:text-4xl text-default">
-                Safer NPM&nbsp;packages
-              </h3>
-              <p class="col-start-2 font-medium lg:text-2xl text-normalBlue">
-                Install and run npm packages without having to audit
-                them&nbsp;first.
-              </p>
-            </div>
+          <div class="grid items-center justify-between gap-18 lg:(gap-22 grid-cols-2)">
+            {[{
+              title: (
+                <>
+                  Fine grained<br />permission&nbsp;checks
+                </>
+              ),
+              body: (
+                <>
+                  Provide an allow-list to access only certain file system
+                  directories, network hosts, and environment&nbsp;variables.
+                </>
+              ),
+              Icon: Icons.Permissions,
+            }, {
+              title: (
+                <>
+                  Safer NPM <br class="hidden lg:block" />packages
+                </>
+              ),
+              body: (
+                <>
+                  Install and run npm packages without having to audit
+                  them&nbsp;first.
+                </>
+              ),
+              Icon: Icons.Secure,
+            }].map(({ title, body, Icon }) => (
+              <div class="flex items-start gap-8 flex-row-reverse lg:flex-row">
+                <Icon class="mt-1.5 flex-none w-[3.25rem] lg:w-18" />
+                <div class="space-y-3 lg:space-y-5">
+                  <h3 class="font-bold text-[1.375rem] lg:text-4xl text-default">
+                    {title}
+                  </h3>
+                  <p class="font-medium lg:text-2xl text-normalBlue">
+                    {body}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </Section>
 
@@ -299,7 +317,7 @@ export default function Home({ data }: PageProps<Data>) {
                     target="_blank"
                   >
                     <img
-                      class="h-7 lg:(h-auto h-12)"
+                      class="h-7 lg:h-12"
                       src={`/images/lp/companies/${company.name.toLowerCase()}.svg`}
                       alt={company.name}
                       title={company.name}
@@ -431,24 +449,21 @@ function Quote(
 ) {
   return (
     <div class="colorWash pt-18 pb-14 lg:(pt-24 pb-20)">
-      <figure class="section-x-inset-xl space-y-8 lg:space-y-11 lg:text-center">
+      <div class="section-x-inset-xl space-y-8 lg:space-y-11 lg:text-center">
         <blockquote
           class={`text-white font-semibold text-${size} lg:text-${lgSize} leading-tight`}
         >
           {children}
         </blockquote>
-        <figcaption class="text-white lg:text-2xl">
-          {author} –{" "}
-          <cite>
-            <a
-              href={href}
-              class="text-white hover:(text-yellow-400 underline)"
-            >
-              {href}
-            </a>
-          </cite>
-        </figcaption>
-      </figure>
+        <a class="inline-block mx-auto lg:mx-none" href={href}>
+          <img
+            class="h-7 lg:h-10"
+            src={`/images/lp/companies/${author.toLowerCase()}.svg`}
+            alt={author}
+            title={author}
+          />
+        </a>
+      </div>
     </div>
   );
 }
