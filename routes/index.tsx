@@ -150,7 +150,7 @@ export default function Home({ data }: PageProps<Data>) {
                   <h3 class="font-bold text-default text-[1.375rem] lg:text-4xl">
                     {title}
                   </h3>
-                  <p class="text-normalBlue lg:text-2xl">
+                  <p class="text-normalBlue font-medium lg:text-2xl">
                     {body}
                   </p>
                 </div>
@@ -208,7 +208,7 @@ export default function Home({ data }: PageProps<Data>) {
           author="Slack"
           href="https://deno.com/blog/slack-open-beta"
           size="xl"
-          lgSize="4xl"
+          lgSize="[2.75rem]"
         >
           What stood out first and foremost to our team was their laser focus on
           security... like the ability to execute code with limited access to
@@ -241,7 +241,7 @@ export default function Home({ data }: PageProps<Data>) {
               <h3 class="col-start-2 font-bold text-4xl text-default">
                 Fine grained<br />permission checks
               </h3>
-              <p class="col-start-2 text-2xl text-normalBlue">
+              <p class="col-start-2 font-medium text-2xl text-normalBlue">
                 Provide an allow-list to access only certain file system
                 directories, network hosts, and environment variables.
               </p>
@@ -252,7 +252,7 @@ export default function Home({ data }: PageProps<Data>) {
               <h3 class="col-start-2 font-bold text-4xl text-default">
                 Safer NPM<br />packages
               </h3>
-              <p class="col-start-2 text-2xl text-normalBlue">
+              <p class="col-start-2 font-medium text-2xl text-normalBlue">
                 Install and run npm packages without having to audit them first.
               </p>
             </div>
@@ -391,7 +391,7 @@ function ImageSubSection(
         <h3 class="font-bold text-default text-3xl lg:text-4xl">
           {header}
         </h3>
-        <p class="text-normalBlue font-semibold text-lg lg:text-2xl">
+        <p class="text-normalBlue font-medium text-lg lg:text-2xl">
           {children}
         </p>
       </div>
