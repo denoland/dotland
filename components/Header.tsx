@@ -21,6 +21,7 @@ const entries: Array<HrefEntry | ChildrenEntry> = [
     children: [
       { href: "/std", content: "Standard Library" },
       { href: "/x", content: "Third Party Modules" },
+      { href: "/manual/node", content: "NPM" },
     ],
   },
   {

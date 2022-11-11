@@ -19,7 +19,7 @@ interface Data {
 
 const announcement = {
   major: true,
-  href: "https://deno.com/blog",
+  href: "/manual/node",
   text: "NPM compatibility is now live! Click here to get started",
 } as const;
 
