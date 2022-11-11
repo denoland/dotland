@@ -61,7 +61,7 @@ export function Header({ selected, manual }: {
           />
 
           <div class="h-9 flex flex-1 items-center justify-between lg:justify-start select-none w-full lg:w-min gap-3 md:gap-6 lg:gap-8">
-            <a href="/" class="flex items-center flex-none gap-4">
+            <a href="/" class="flex items-center flex-none gap-4" aria-label="Landing Page">
               <Icons.Logo class="h-10 flex-none" />
               <Icons.Deno class="h-6 flex-none" />
             </a>
@@ -87,7 +87,7 @@ export function Header({ selected, manual }: {
               {entries.map((entry) => {
                 if ("children" in entry) {
                   return (
-                    <div class="lg:hover:children:(first-child:(shadow bg-azure2) last-child:block)">
+                    <div class="lg:hover:children:(first-child:(shadow bg-azure) last-child:block)">
                       <label
                         htmlFor={entry.content}
                         tabIndex={0}
@@ -108,14 +108,14 @@ export function Header({ selected, manual }: {
                       />
 
                       <div class="hidden lg:(absolute bottom children:shadow)">
-                        <div class="pl-1 pb-2 mb-3 space-y-1.5 lg:(py-0 m-0 space-y-0 rounded-md overflow-hidden bg-azure2 divide-y divide-white px-4)">
+                        <div class="pb-2 mb-3 space-y-1.5 lg:(py-0 m-0 space-y-0 rounded-md overflow-hidden bg-azure divide-y divide-white)">
                           {entry.children.map(({
                             href,
                             content,
                           }) => (
-                            <div class="pl-1 lg:(flex pl-0 py-2)">
+                            <div class="text-sm font-semibold lg:(text-base font-normal flex)">
                               <a
-                                class="whitespace-nowrap py-1 block w-full leading-none! hover:lg:bg-border"
+                                class="whitespace-nowrap py-1.5 lg:py-3.5  pl-1 lg:px-4 py-3 block w-full leading-tight! hover:lg:bg-azure2"
                                 href={href}
                               >
                                 {content}
@@ -130,7 +130,7 @@ export function Header({ selected, manual }: {
                   return (
                     <div>
                       <a
-                        class="block w-full px-1 my-3 lg:(w-auto m-0 px-2 rounded-md hover:bg-azure2)"
+                        class="block w-full px-1 my-3 lg:(w-auto m-0 px-2 rounded-md hover:bg-azure)"
                         href={entry.href}
                       >
                         {entry.content}

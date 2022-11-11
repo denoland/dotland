@@ -38,7 +38,7 @@ export default {
         mainBlue: "#0094FF",
         normalBlue: "#0A4BAB",
         azure: "#E1F8FF",
-        azure2: "#E1ECF2",
+        azure2: "#BEECFD",
 
         colorWashFrom: "#002585",
         colorWashTo: "#209DEE",

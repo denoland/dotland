@@ -99,6 +99,7 @@ export default function Home({ data }: PageProps<Data>) {
               <img
                 src="/images/lp/typing_deno.png"
                 class="absolute hidden lg:(block h-64 -bottom-20 -right-12)"
+                aria-hidden
               />
             }
             reverse
@@ -132,17 +133,17 @@ export default function Home({ data }: PageProps<Data>) {
               Icon: Icons.OutOfTheBox,
               title: "TypeScript out of the box",
               body:
-                "First-class support for TypeScript – no need to spend hours configuring things that break as soon as you update a dependency.",
+                <>First-class support for TypeScript – no need to spend hours configuring things that break as soon as you update a&nbsp;dependency.</>,
             }, {
               Icon: Icons.Tooling,
               title: "Great all-in-one tooling",
               body:
-                "Built in linter, code formatter, ability to build a self-contained executable, test runner, IDE integration, and more.",
+                <>Built in linter, code formatter, ability to build a self-contained executable, test runner, IDE integration, and&nbsp;more.</>,
             }, {
               Icon: Icons.HassleFree,
               title: "Hassle-free deployment",
               body:
-                "Launch to Deno Deploy with one line of code and zero server configuration, or host with other platforms of your choice.",
+                <>Launch to Deno Deploy with one line of code and zero server configuration, or host with other platforms of your&nbsp;choice.</>,
             }].map(({ Icon, title, body }) => (
               <div class="flex items-start flex-row-reverse gap-8 lg:(flex-col gap-9)">
                 <Icon class="flex-none w-[3.25rem] lg:w-18" />
@@ -192,7 +193,7 @@ export default function Home({ data }: PageProps<Data>) {
             header="Best in class HTTP server speeds"
             reverse
           >
-            The fastest JavaScript web server ever built.
+            The fastest JavaScript web server ever&nbsp;built.
           </ImageSubSection>
 
           <ImageSubSection
@@ -227,66 +228,65 @@ export default function Home({ data }: PageProps<Data>) {
               <img
                 src="/images/lp/armor_deno.png"
                 class="absolute hidden lg:(block w-52 -top-14 -right-24)"
+                aria-hidden
               />
             }
             reverse
           >
             By default Deno provides no I/O access and is appropriate for
-            running untrusted code and auditing new third-party code.
+            running untrusted code and auditing new third&#8288;-&#8288;party&nbsp;code.
           </ImageSubSection>
 
           <div class="grid items-center justify-between gap-18 lg:(gap-22 grid-flow-col)">
-            <div class="grid gap-5">
+            <div class="grid gap-3 lg:gap-5">
               <Icons.Permissions class="w-[3.25rem] lg:w-18 col-start-1" />
-              <h3 class="col-start-2 font-bold text-4xl text-default">
-                Fine grained<br />permission checks
+              <h3 class="col-start-2 font-bold text-[1.375rem] lg:text-4xl text-default">
+                Fine grained permission&nbsp;checks
               </h3>
-              <p class="col-start-2 font-medium text-2xl text-normalBlue">
+              <p class="col-start-2 font-medium lg:text-2xl text-normalBlue">
                 Provide an allow-list to access only certain file system
-                directories, network hosts, and environment variables.
+                directories, network hosts, and environment&nbsp;variables.
               </p>
             </div>
 
-            <div class="grid gap-5">
+            <div class="grid gap-3 lg:gap-5">
               <Icons.Secure class="w-[3.25rem] lg:w-18 col-start-1" />
-              <h3 class="col-start-2 font-bold text-4xl text-default">
-                Safer NPM<br />packages
+              <h3 class="col-start-2 font-bold text-[1.375rem] lg:text-4xl text-default">
+                Safer NPM&nbsp;packages
               </h3>
-              <p class="col-start-2 font-medium text-2xl text-normalBlue">
-                Install and run npm packages without having to audit them first.
+              <p class="col-start-2 font-medium lg:text-2xl text-normalBlue">
+                Install and run npm packages without having to audit them&nbsp;first.
               </p>
             </div>
           </div>
         </Section>
 
-        <div class="pt-28 pb-24 colorWash">
-          <div class="section-x-inset-2xl space-y-11">
-            <p class="text-white font-semibold text-3xl text-center">
-              Used by a large community of developers<br />and leading
-              technology companies:
+        <div class="colorWash pt-11 pb-12 lg:(pt-28 pb-24)">
+          <div class="section-x-inset-2xl lg:text-center">
+            <p class="text-white font-semibold text-xl pr-18 lg:(text-3xl pr-0)">
+              Used by a large community of developers and leading technology&nbsp;companies:
             </p>
-            <p class="text-white font-bold text-7xl text-center">
-              Over 300k Monthly Actives
+            <p class="text-white font-bold mt-4 mb-10 text-4xl lg:(mt-7 mb-13 text-7xl)">
+              Over 300k Monthly&nbsp;Actives
             </p>
-            <ul class="flex justify-center gap-18 text-white">
+            <div class="grid grid-cols-2 justify-center items-center text-white gap-6 lg:(gap-18 grid-cols-none grid-flow-col)">
               {companies.map((company) => (
-                <li key={company.url}>
+                <div key={company.url}>
                   <a
-                    class="flex items-center gap-2 flex-nowrap opacity-70 hover:opacity-100"
+                    class="lg:(opacity-70 hover:opacity-100)"
                     href={company.url}
                     target="_blank"
                   >
                     <img
-                      class="w-11"
-                      src={`https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/${company.logo}`}
+                      class="h-7 lg:(h-auto h-12)"
+                      src={`/images/lp/companies/${company.name.toLowerCase()}.png`}
                       alt={company.name}
                       title={company.name}
-                    />{" "}
-                    <span class="font-medium text-4xl">{company.name}</span>
+                    />
                   </a>
-                </li>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
 
@@ -410,7 +410,7 @@ function Quote(
 ) {
   return (
     <div class="colorWash pt-18 pb-14 lg:(pt-24 pb-20)">
-      <figure class="section-x-inset-xl space-y-8 lg:space-y-11 text-center">
+      <figure class="section-x-inset-xl space-y-8 lg:space-y-11 lg:text-center">
         <blockquote
           class={`text-white font-semibold text-${size} lg:text-${lgSize} leading-tight`}
         >
@@ -434,19 +434,15 @@ function Quote(
 
 const companies = [{
   name: "Slack",
-  logo: "slack.svg",
   url: "https://slack.com",
 }, {
   name: "Netlify",
-  logo: "netlify.svg",
   url: "https://netlify.com",
 }, {
   name: "GitHub",
-  logo: "github.svg",
   url: "https://github.com",
 }, {
   name: "Supabase",
-  logo: "supabase.svg",
   url: "https://supabase.com",
 }];
 
