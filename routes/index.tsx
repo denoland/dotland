@@ -391,7 +391,7 @@ function ImageSubSection(
         <h3 class="font-bold text-default text-3xl lg:text-4xl">
           {header}
         </h3>
-        <p class="text-normalBlue text-lg lg:text-2xl">
+        <p class="text-normalBlue font-semibold text-lg lg:text-2xl">
           {children}
         </p>
       </div>
