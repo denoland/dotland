@@ -45,17 +45,17 @@ export default function Home({ data }: PageProps<Data>) {
         <div
           class={tw`px-8 pt-12 pb-28 lg:(px-36 pt-24 pb-40) ${
             css({
-              background: 'url("/images/lp/cover.png") left / cover no-repeat',
+              background: 'url("/images/lp/cover.png") left / cover no-repeat, linear-gradient(90deg, #002585, #209DEE)',
             })
           } md:(${
             css({
               background:
-                'url("/images/lp/cover@lg.png") center / cover no-repeat',
+                'url("/images/lp/cover@lg.png") center / cover no-repeat, linear-gradient(90deg, #002585, #209DEE)',
             })
           }) xl:(${
             css({
               background:
-                'url("/images/lp/cover@xl.png") center / cover no-repeat',
+                'url("/images/lp/cover@xl.png") center / cover no-repeat, linear-gradient(90deg, #002585, #209DEE)',
             })
           })`}
         >
