@@ -69,7 +69,7 @@ export default function Home({ data }: PageProps<Data>) {
               </p>
             </div>
             <div class="mt-6 lg:(mt-16 space-x-7)">
-              <a class="hidden lg:inline button-primary" href="">
+              <a class="hidden lg:inline button-primary" href="/manual/getting_started/installation">
                 Installation
               </a>
               <a class="button-primary" href="/manual">Documentation</a>
