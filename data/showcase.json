@@ -149,13 +149,9 @@
     "link": "https://optimem.org/"
   },
   {
-    "image": "https://raw.githubusercontent.com/mohan-chinnappan-n/cli-dx/master/deno/img/deno-sf-land-1.png",
-    "title": "Salesforce Query App",
-    "link": "https://mohanc-sf.deno.dev/"
-  },
-  {
-    "image": "/images/showcase/fast-favicon.png",
-    "title": "fast favicon",
-    "link": "https://favi.deno.dev/"
+    "image": "/images/showcase/denoblog.png",
+    "title": "Deno markdown blog",
+    "link": "https://deno-markdown-blog.deno.dev/",
+    "github": "officialrajdeepsingh/deno-markdown-blog"
   }
 ]
