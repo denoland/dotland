@@ -15,6 +15,7 @@ export interface TableOfContents {
   [slug: string]: {
     name: string;
     children?: TableOfContents;
+    redirectFrom?: string[];
   } | string;
 }
 
@@ -75,4 +76,31 @@ export function getDescription(content: string): string | undefined {
 
 export function isPreviewVersion(version: string): boolean {
   return VERSIONS.cli.find((v) => v === version) === undefined;
+}
+
+export function generateToC(toc: TableOfContents, parentSlug: string) {
+  const tempList: { path: string; name: string }[] = [];
+  const redirectList: Record<string, string> = {};
+
+  function tocGen(tocInner: TableOfContents, parentSlugInner: string) {
+    for (const [childSlug, entry] of Object.entries(tocInner)) {
+      const slug = `${parentSlugInner}/${childSlug}`;
+      const name = typeof entry === "string" ? entry : entry.name;
+      tempList.push({
+        path: slug,
+        name,
+      });
+      if (typeof entry === "object" && entry.redirectFrom) {
+        for (const redirect of entry.redirectFrom) {
+          redirectList[redirect] = slug;
+        }
+      }
+      if (typeof entry === "object" && entry.children) {
+        tocGen(entry.children, slug);
+      }
+    }
+  }
+  tocGen(toc, parentSlug);
+
+  return { pageList: tempList, redirectList };
 }
