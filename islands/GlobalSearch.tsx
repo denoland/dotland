@@ -1,8 +1,6 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
+import type { ComponentChildren } from "preact";
 import algoliasearch from "$algolia";
 import type {
   MultipleQueriesQuery,
@@ -10,13 +8,12 @@ import type {
 } from "$algolia/client-search";
 import { createFetchRequester } from "$algolia/requester-fetch";
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { css, tw } from "@twind";
-import { useEffect, useState } from "preact/hooks";
+import { tw } from "twind";
+import { css } from "twind/css";
+import { useEffect, useRef, useState } from "preact/hooks";
 import * as Icons from "@/components/Icons.tsx";
-import type { DocNode } from "$deno_doc/types.d.ts";
 import { colors, docNodeKindMap } from "@/components/symbol_kind.tsx";
-import { searchClick } from "@/util/search_insights_utils.ts";
-import { ComponentChildren } from "preact";
+import { islandSearchClick } from "@/util/search_insights_utils.ts";
 
 // Lazy load a <dialog> polyfill.
 // @ts-expect-error HTMLDialogElement is not just a type!
@@ -70,10 +67,37 @@ interface SearchResults<ResultItem> {
   page: number;
 }
 
+/** Represents the search record being returned for a symbol. */
+interface SymbolItem {
+  name: string;
+  sourceId: string;
+  path?: string;
+  doc?: string;
+  category?: string;
+  tags?: string[];
+  source: number;
+  popularity_score: number;
+  kind:
+    | "namespace"
+    | "enum"
+    | "variable"
+    | "function"
+    | "interface"
+    | "typeAlias"
+    | "moduleDoc"
+    | "import";
+  version: string;
+  location: {
+    filename: string;
+    line: number;
+    col: number;
+  };
+}
+
 interface Results {
   manual?: SearchResults<ManualSearchResult>;
   modules?: SearchResults<ModuleSearchResult>;
-  symbols?: SearchResults<DocNode>;
+  symbols?: SearchResults<SymbolItem>;
 }
 
 function toSearchResults<ResultItem>(
@@ -92,8 +116,14 @@ function getPosition(results: SearchResults<unknown>, index: number): number {
   return (results.hitsPerPage * results.page) + index + 1;
 }
 
+const requester = createFetchRequester();
+const client = algoliasearch("QFPCRZC6WX", "2ed789b2981acd210267b27f03ab47da", {
+  requester,
+});
+
 /** Search Deno documentation, symbols, or modules. */
-export default function GlobalSearch({ userToken }: { userToken?: string }) {
+export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
+  const dialog = useRef<HTMLDialogElement>(null);
   const [showModal, setShowModal] = useState(false);
   const [input, setInput] = useState("");
 
@@ -112,25 +142,18 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
     "Interfaces": true,
     "Type Aliases": true,
   });
-
-  const requester = createFetchRequester();
-  const client = algoliasearch(
-    "QFPCRZC6WX",
-    "2ed789b2981acd210267b27f03ab47da",
-    { requester },
-  );
+  const searchTimeoutId = useRef<number | null>(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const keyboardHandler = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && showModal) setShowModal(false);
       if (e.target !== document.body) {
         return;
       }
       if (((e.metaKey || e.ctrlKey) && e.key === "k") || e.key === "/") {
         e.preventDefault();
         setShowModal(true);
-      }
-      if (e.key === "Escape") {
-        setShowModal(false);
       }
     };
     globalThis.addEventListener("keydown", keyboardHandler);
@@ -142,7 +165,10 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
   useEffect(() => {
     if (!showModal) return;
 
-    setResults(null);
+    setLoading(true);
+    if (searchTimeoutId.current === null) {
+      searchTimeoutId.current = setTimeout(() => setResults(null), 500);
+    }
 
     const queries: MultipleQueriesQuery[] = [];
 
@@ -187,17 +213,27 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
       });
     }
 
+    let cancelled = false;
+
     client.multipleQueries(queries).then(
       ({ results }) => {
-        // @ts-ignore algolia typings are annoying
+        // Ignore results from previous queries
+        if (cancelled) return;
+        if (searchTimeoutId.current !== null) {
+          clearTimeout(searchTimeoutId.current);
+          searchTimeoutId.current = null;
+        }
         setTotalPages(results.find((res) => res.nbPages)?.nbPages ?? 1);
         setResults({
           manual: toSearchResults(results, MANUAL_INDEX),
           symbols: toSearchResults(results, SYMBOL_INDEX),
           modules: toSearchResults(results, MODULE_INDEX),
         });
+        setLoading(false);
       },
     );
+
+    return () => cancelled = true;
   }, [showModal, input, kind, symbolKindsToggle, page]);
 
   useEffect(() => {
@@ -212,18 +248,16 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
   return (
     <>
       <button
-        class={tw`pl-4 w-80 bg-[#F3F3F3] flex-auto lg:flex-none rounded-md text-light hover:bg-light-border disabled:invisible`}
+        class="pl-4 w-80 bg-grayDefault flex-auto lg:flex-none rounded-md text-gray-400 hover:bg-border disabled:invisible"
         onClick={() => setShowModal(true)}
         disabled={!IS_BROWSER}
       >
-        <div class={tw`flex items-center pointer-events-none`}>
+        <div class="flex items-center pointer-events-none">
           <Icons.MagnifyingGlass />
-          <div
-            class={tw`ml-1.5 py-2.5 h-9 flex-auto text-light text-sm leading-4 font-medium text-left`}
-          >
+          <div class="ml-1.5 py-2.5 h-9 flex-auto text-sm leading-4 font-medium text-left">
             Search...
           </div>
-          <div class={tw`mx-4`}>
+          <div class="mx-4">
             ⌘K
           </div>
         </div>
@@ -231,18 +265,19 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
 
       {IS_BROWSER && (
         <dialog
-          class={tw`bg-[#00000033] inset-0 fixed z-10 p-0 m-0 w-full h-screen`}
+          class="bg-[#00000033] inset-0 fixed z-10 p-0 m-0 w-full h-screen"
+          ref={dialog}
           onClick={() => setShowModal(false)}
           open={showModal}
         >
           <div
-            class={tw`bg-white w-full h-screen flex flex-col overflow-hidden lg:(mt-24 mx-auto rounded-md w-2/3 max-h-[80vh] border border-[#E8E7E5])`}
+            class="bg-white w-full h-screen flex flex-col overflow-hidden lg:(mt-24 mx-auto rounded-md w-2/3 max-h-[80vh] border border-[#E8E7E5])"
             onClick={(e) => e.stopPropagation()}
           >
-            <div class={tw`pt-6 px-6 border-b border-[#E8E7E5]`}>
-              <div class={tw`flex`}>
+            <div class="pt-6 px-6 border-b border-[#E8E7E5]">
+              <div class="flex">
                 <label
-                  class={tw`pl-4 h-10 w-full flex-shrink-1 bg-[#F3F3F3] rounded-md flex items-center text-light focus-within:${
+                  class={tw`px-4 h-10 w-full flex-shrink-1 bg-grayDefault rounded-md flex items-center placeholder:text-gray-400 focus-within:${
                     css({
                       "outline": "solid",
                     })
@@ -251,27 +286,28 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
                   <Icons.MagnifyingGlass />
                   <input
                     id="search-input"
-                    class={tw`ml-1.5 py-3 leading-4 bg-transparent w-full text-main placeholder:text-gray-400 outline-none`}
+                    class="ml-1.5 py-3 leading-4 bg-transparent w-full placeholder:text-gray-400 outline-none"
                     type="text"
                     onInput={(e) => setInput(e.currentTarget.value)}
                     value={input}
                     placeholder="Search manual, symbols and modules..."
                     autoFocus
                   />
+                  {loading && <Icons.Spinner />}
                 </label>
 
                 <button
-                  class={tw`lg:hidden ml-3 -mr-2 flex items-center`}
+                  class="lg:hidden ml-3 -mr-2 flex items-center"
                   onClick={() => setShowModal(false)}
                 >
                   <Icons.Cross />
                 </button>
               </div>
 
-              <div class={tw`flex gap-3 mt-2`}>
+              <div class="flex gap-3 mt-2">
                 {kinds.map((k) => (
                   <button
-                    class={tw`px-2 rounded-md leading-relaxed hover:(bg-gray-100 text-main) ${
+                    class={tw`px-2 rounded-md leading-relaxed hover:(bg-grayDefault) ${
                       // TODO: use border instead
                       k === kind
                         ? css({
@@ -291,21 +327,20 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
               </div>
             </div>
 
-            <div class={tw`overflow-y-auto flex-grow-1`}>
+            <div class="overflow-y-auto flex-grow-1">
               {results
                 ? (
                   <>
                     {results.manual && (
                       <Section title="Manual" isAll={kind === "All"}>
                         {results.manual && results.manual.hits.length === 0 && (
-                          <div class={tw`text-gray-500 italic`}>
+                          <div class="text-gray-500 italic">
                             Your search did not yield any results in the manual.
                           </div>
                         )}
                         {results.manual.hits.map((res, i) => (
                           <ManualResult
                             {...res}
-                            userToken={userToken}
                             queryID={results.manual!.queryID}
                             position={getPosition(results.manual!, i)}
                           />
@@ -316,7 +351,7 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
                       <Section title="Modules" isAll={kind === "All"}>
                         {results.modules && results.modules.hits.length === 0 &&
                           (
-                            <div class={tw`text-gray-500 italic`}>
+                            <div class="text-gray-500 italic">
                               Your search did not yield any results in the
                               modules index.
                             </div>
@@ -324,7 +359,6 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
                         {results.modules.hits.map((module, i) => (
                           <ModuleResult
                             module={module}
-                            userToken={userToken}
                             queryID={results.modules!.queryID}
                             position={getPosition(results.modules!, i)}
                           />
@@ -335,18 +369,19 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
                       <Section title="Symbols" isAll={kind === "All"}>
                         {results.symbols && results.symbols.hits.length === 0 &&
                           (
-                            <div class={tw`text-gray-500 italic`}>
+                            <div class="text-gray-500 italic">
                               Your search did not yield any results in the
                               symbol index.
                             </div>
                           )}
-                        {results.symbols.hits.map((doc, i) => (
+                        {results.symbols.hits.map((symbolItem, i) => (
                           <SymbolResult
-                            doc={doc}
-                            userToken={userToken}
                             queryID={results.symbols!.queryID}
                             position={getPosition(results.symbols!, i)}
-                          />
+                            denoVersion={denoVersion}
+                          >
+                            {symbolItem}
+                          </SymbolResult>
                         ))}
                       </Section>
                     )}
@@ -354,9 +389,7 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
                   </>
                 )
                 : (
-                  <div
-                    class={tw`w-full h-full flex justify-center items-center gap-1.5 text-gray-400`}
-                  >
+                  <div class="w-full h-full flex justify-center items-center gap-1.5 text-gray-400">
                     <Icons.Spinner />
                     <span>Searching...</span>
                   </div>
@@ -364,23 +397,21 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
             </div>
 
             {kind !== "All" && results && (
-              <div
-                class={tw`bg-ultralight border-t border-[#E8E7E5] py-3 px-6 flex items-center justify-between`}
-              >
-                <div class={tw`py-2 flex items-center space-x-3`}>
+              <div class="bg-ultralight border-t border-[#E8E7E5] py-3 px-6 flex items-center justify-between">
+                <div class="py-2 flex items-center space-x-3">
                   <button
-                    class={tw`p-1 border border-border rounded-md not-disabled:hover:bg-light-border disabled:(text-[#D2D2DC] cursor-not-allowed)`}
+                    class="p-1 border border-border rounded-md not-disabled:hover:bg-border disabled:(text-[#D2D2DC] cursor-not-allowed)"
                     onClick={() => setPage((page) => page - 1)}
                     disabled={page === 0}
                   >
                     <Icons.ChevronLeft />
                   </button>
-                  <span class={tw`text-gray-400`}>
-                    Page <span class={tw`font-medium`}>{page + 1}</span> of{" "}
-                    <span class={tw`font-medium`}>{totalPages}</span>
+                  <span class="text-gray-400">
+                    Page <span class="font-medium">{page + 1}</span> of{" "}
+                    <span class="font-medium">{totalPages}</span>
                   </span>
                   <button
-                    class={tw`p-1 border border-border rounded-md not-disabled:hover:bg-light-border disabled:(text-[#D2D2DC] cursor-not-allowed)`}
+                    class="p-1 border border-border rounded-md not-disabled:hover:bg-border disabled:(text-[#D2D2DC] cursor-not-allowed)"
                     onClick={() => setPage((page) => page + 1)}
                     disabled={(page + 1) === totalPages}
                   >
@@ -390,16 +421,16 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
 
                 {kind === "Symbols" &&
                   (
-                    <div class={tw`space-x-3`}>
+                    <div class="space-x-3">
                       {(Object.keys(
                         symbolKinds,
                       ) as (keyof typeof symbolKinds)[])
                         .map(
                           (symbolKind) => (
-                            <label class={tw`whitespace-nowrap inline-block`}>
+                            <label class="whitespace-nowrap inline-block">
                               <input
                                 type="checkbox"
-                                class={tw`mr-1 not-checked:siblings:text-[#6C6E78]`}
+                                class="mr-1 not-checked:siblings:text-[#6C6E78]"
                                 onChange={() => {
                                   setSymbolKindsToggle((prev) => {
                                     return {
@@ -410,7 +441,7 @@ export default function GlobalSearch({ userToken }: { userToken?: string }) {
                                 }}
                                 checked={symbolKindsToggle[symbolKind]}
                               />
-                              <span class={tw`text-sm leading-none`}>
+                              <span class="text-sm leading-none">
                                 {symbolKind}
                               </span>
                             </label>
@@ -437,17 +468,13 @@ function Section({
   children: ComponentChildren;
 }) {
   return (
-    <div class={tw`pt-3`}>
+    <div class="pt-3">
       {isAll && (
-        <div
-          class={tw`mx-6 my-1 text-gray-400 text-sm leading-6 font-semibold`}
-        >
+        <div class="mx-6 my-1 text-gray-400 text-sm leading-6 font-semibold">
           {title}
         </div>
       )}
-      <div
-        class={tw`children:(flex items-center gap-4 px-6 py-1.5 hover:bg-ultralight even:(bg-ultralight hover:bg-light-border))`}
-      >
+      <div class="children:(flex items-center gap-4 px-6 py-1.5 hover:bg-ultralight even:(bg-ultralight hover:bg-border))">
         {children}
       </div>
     </div>
@@ -455,11 +482,10 @@ function Section({
 }
 
 function ManualResult(
-  { hierarchy, docPath, content, objectID, userToken, queryID, position }:
+  { hierarchy, docPath, anchor, content, objectID, queryID, position }:
     & ManualSearchResult
     & {
       objectID: string;
-      userToken?: string;
       queryID?: string;
       position?: number;
     },
@@ -467,24 +493,16 @@ function ManualResult(
   const title = Object.values(hierarchy).filter(Boolean);
   return (
     <a
-      href={docPath}
+      href={`${docPath}#${anchor}`}
       onClick={() =>
-        searchClick(
-          userToken,
-          MANUAL_INDEX,
-          queryID,
-          objectID,
-          position,
-        )}
+        islandSearchClick(MANUAL_INDEX, queryID, objectID, position)}
     >
-      <div class={tw`p-1.5 rounded-full bg-gray-200`}>
+      <div class="p-1.5 rounded-full bg-gray-200">
         <Icons.Docs />
       </div>
       <div>
         <ManualResultTitle title={title} />
-        <div
-          class={tw`text-sm text-[#6C6E78] max-h-10 overflow-ellipsis overflow-hidden`}
-        >
+        <div class="text-sm text-[#6C6E78] max-h-10 overflow-ellipsis overflow-hidden">
           {content}
         </div>
       </div>
@@ -503,48 +521,104 @@ function ManualResultTitle(props: { title: string[] }) {
     );
     if (!isLast) parts.push(<span key={i + "separator"}>{" > "}</span>);
   }
-  return <div class={tw`space-x-1`}>{parts}</div>;
+  return <div class="space-x-1">{parts}</div>;
+}
+
+/** Given a symbol item, return an href that will link to that symbol. */
+function getSymbolItemHref(
+  { sourceId, name, version, path, tags }: SymbolItem,
+  denoVersion: string,
+): string {
+  if (sourceId.startsWith("lib/")) {
+    return tags && tags.includes("unstable")
+      ? `/api@${denoVersion}?unstable&s=${name}`
+      : `/api@${denoVersion}?s=${name}`;
+  } else if (sourceId === "mod/std") {
+    return `/std@${version}${path}${name ? `?s=${name}` : ""}`;
+  } else {
+    const mod = sourceId.slice(4);
+    return `/x/${mod}@${version}${path}${name ? `?s=${name}` : ""}`;
+  }
+}
+
+function Source(
+  { children: { sourceId, version, path } }: { children: SymbolItem },
+) {
+  if (sourceId.startsWith("lib/")) {
+    return (
+      <span class="italic text-sm text-gray-400 leading-6">
+        built-in to Deno
+      </span>
+    );
+  } else {
+    const mod = sourceId.slice(4);
+    return (
+      <span>
+        <span class="italic text-sm text-gray-400 leading-6">
+          from
+        </span>{" "}
+        {mod}@{version}
+        {path}
+      </span>
+    );
+  }
+}
+
+const tagColors = {
+  cyan: ["[#0CAFC619]", "[#0CAFC6]"],
+  gray: ["gray-100", "gray-400"],
+} as const;
+
+type TagColors = keyof typeof tagColors;
+
+function Tag(
+  { children, color }: { children: ComponentChildren; color: TagColors },
+) {
+  const [bg, text] = tagColors[color];
+  return (
+    <div
+      class={tw`bg-${bg} text-${text} py-1 px-2 inline-block rounded-full font-medium text-sm leading-none mr-2 font-sans`}
+    >
+      {children}
+    </div>
+  );
 }
 
 function SymbolResult(
-  { doc, userToken, queryID, position }: {
-    doc: DocNode & { objectID: string };
-    userToken?: string;
+  { children: item, queryID, position, denoVersion }: {
+    children: SymbolItem & { objectID: string };
     queryID?: string;
     position?: number;
+    denoVersion: string;
   },
 ) {
-  let location = new URL(doc.location.filename).pathname;
-  location = location.replace(/^(\/x\/)|\//, "");
-  const KindIcon = docNodeKindMap[doc.kind];
-  const href = `${doc.location.filename}?s=${doc.name}`;
+  const KindIcon = docNodeKindMap[item.kind];
+  const href = getSymbolItemHref(item, denoVersion);
+  const tagItems = item.tags?.map((tag) => (
+    <Tag color={tag.startsWith("allow") ? "cyan" : "gray"}>{tag}</Tag>
+  ));
+
   return (
     <a
       href={href}
       onClick={() =>
-        searchClick(
-          userToken,
-          SYMBOL_INDEX,
-          queryID,
-          doc.objectID,
-          position,
-        )}
+        islandSearchClick(SYMBOL_INDEX, queryID, item.objectID, position)}
     >
       <KindIcon />
-      <div>
-        <div class={tw`space-x-2 py-1`}>
-          <span class={tw`text-[${colors[doc.kind][0]}]`}>
-            {doc.kind.replace("A", " a")}
-          </span>
-          <span class={tw`font-semibold`}>{doc.name}</span>
-          <span class={tw`italic text-sm text-gray-400 leading-6`}>from</span>
-          <span>{location}</span>
+      <div class="w-full">
+        <div class="flex flex-col py-1 md:(flex-row items-center justify-between gap-2)">
+          <div class="space-x-2">
+            <span class={tw`text-[${colors[item.kind][0]}]`}>
+              {item.kind.replace("A", " a")}
+            </span>
+            <span class="font-semibold">{item.name}</span>
+            <Source>{item}</Source>
+          </div>
+          {tagItems && tagItems.length && <div class="mr-3">{tagItems}</div>}
         </div>
-        {doc.jsDoc?.doc && (
-          <div
-            class={tw`text-sm text-[#6C6E78] h-5 overflow-ellipsis overflow-hidden mr-24`}
-          >
-            {doc.jsDoc.doc.split("\n")[0]}
+        {item.doc && (
+          <div class="text-sm text-[#6C6E78]">
+            {item.doc.split("\n\n")[0]}
           </div>
         )}
       </div>
@@ -553,9 +627,8 @@ function SymbolResult(
 }
 
 function ModuleResult(
-  { module, userToken, queryID, position }: {
+  { module, queryID, position }: {
     module: ModuleSearchResult & { objectID: string };
-    userToken?: string;
     queryID?: string;
     position?: number;
   },
@@ -564,22 +637,14 @@ function ModuleResult(
     <a
       href={`https://deno.land/x/${module.name}`}
       onClick={() =>
-        searchClick(
-          userToken,
-          MODULE_INDEX,
-          queryID,
-          module.objectID,
-          position,
-        )}
+        islandSearchClick(MODULE_INDEX, queryID, module.objectID, position)}
     >
-      <div class={tw`p-1.5 rounded-full bg-gray-200`}>
+      <div class="p-1.5 rounded-full bg-gray-200">
         <Icons.Module />
       </div>
       <div>
-        <div class={tw`font-semibold`}>{module.name}</div>
-        <div
-          class={tw`text-sm text-[#6C6E78] max-h-10 overflow-ellipsis overflow-hidden`}
-        >
+        <div class="font-semibold">{module.name}</div>
+        <div class="text-sm text-[#6C6E78] max-h-10 overflow-ellipsis overflow-hidden">
           {module.description}
         </div>
       </div>

@@ -7,32 +7,37 @@ import {
 } from "$std/testing/asserts.ts";
 import { extractAltLineNumberReference } from "@/util/registry_utils.ts";
 import { ServerContext } from "$fresh/server.ts";
-import { Fragment, h } from "preact";
 import { setup } from "$doc_components/services.ts";
 
 import manifest from "@/fresh.gen.ts";
-import options from "@/options.ts";
+import twindPlugin from "$fresh/plugins/twind.ts";
+import twindConfig from "../twind.config.ts";
 
-const docland = "https://doc.deno.land/";
 await setup({
-  resolveHref(current, symbol) {
-    return symbol
-      ? `${docland}https://deno.land${current}/~/${symbol}`
-      : current;
+  resolveHref(current: URL, symbol?: string) {
+    if (symbol) {
+      const url = new URL(current);
+      url.searchParams.set("s", symbol);
+      return url.href;
+    } else {
+      return current.href;
+    }
   },
   lookupHref(
-    current: string,
-    namespace: string | undefined,
-    symbol: string,
+    _current: URL,
+    _namespace: string | undefined,
+    _symbol: string,
   ): string | undefined {
-    return namespace
-      ? `${docland}${current}/~/${namespace}.${symbol}`
-      : `${docland}${current}/~/${symbol}`;
+    return undefined;
   },
-  runtime: { Fragment, h },
+  resolveSourceHref(url, line) {
+    return line ? `${url}?source#L${line}` : `${url}?source`;
+  },
 });
 
-const serverCtx = await ServerContext.fromManifest(manifest, options);
+const serverCtx = await ServerContext.fromManifest(manifest, {
+  plugins: [twindPlugin(twindConfig)],
+});
 const handler = serverCtx.handler();
 const handleRequest = (req: Request) =>
   handler(req, {
@@ -61,7 +66,7 @@ Deno.test({
     const text = await res.text();
     assertStringIncludes(
       text,
-      "<title>Deno - A modern runtime for JavaScript and TypeScript</title>",
+      "<title>Deno — A modern runtime for JavaScript and TypeScript</title>",
     );
   },
 });
@@ -77,7 +82,10 @@ Deno.test({
     );
     assert(res.headers.get("Content-Type")?.includes("text/html"));
     const text = await res.text();
-    assertStringIncludes(text, "<title>std@0.127.0 | Deno</title>");
+    assertStringIncludes(
+      text,
+      "<title>/version.ts | std@0.127.0 | Deno</title>",
+    );
   },
 });
 
