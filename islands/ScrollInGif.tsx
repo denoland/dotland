@@ -2,7 +2,13 @@
 
 import { useEffect, useRef, useState } from "preact/hooks";
 
-export default function ScrollInGif() {
+export default function ScrollInGif({
+  src,
+  alt,
+}: {
+  src: string;
+  alt: string;
+}) {
   const imgRef = useRef(null);
   const [scrolledIn, setScrolledIn] = useState(false);
 
@@ -20,7 +26,7 @@ export default function ScrollInGif() {
     };
   }, [imgRef]);
 
-  return false
-    ? <img src="/images/kitty-cat-sandwich.gif" />
-    : <img ref={imgRef} src="/images/benchmark.png" />;
+  return scrolledIn
+    ? <img class="py-11 px-10" ref={imgRef} src={src + ".gif"} alt={alt} />
+    : <img class="py-11 px-10" ref={imgRef} src={src + ".png"} alt={alt} aria-hidden />;
 }

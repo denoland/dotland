@@ -98,7 +98,7 @@ export default function Home({ data }: PageProps<Data>) {
           subheader="Without the learning curve…"
         >
           <ImageSubSection
-            image={<ScrollInGif />}
+            image={<ScrollInGif src="/images/lp/dependencies" alt="" />}
             header="Avoid installing dependencies"
             additionalContent={
               <img
@@ -116,12 +116,12 @@ export default function Home({ data }: PageProps<Data>) {
             image={
               <>
                 <img
-                  class="lg:hidden"
+                  class="py-7 pl-5 pr-7 lg:hidden"
                   src="/images/lp/web_compatibility.png"
                   alt="Web APIs"
                 />
                 <img
-                  class="hidden lg:block"
+                  class="py-12 pl-16 pr-22 hidden lg:block"
                   src="/images/lp/web_compatibility@lg.png"
                   alt="Web APIs"
                 />
@@ -200,12 +200,12 @@ export default function Home({ data }: PageProps<Data>) {
             image={
               <>
                 <img
-                  class="lg:hidden"
+                  class="py-9 px-5.5 lg:hidden"
                   src="/images/lp/benchmark.png"
                   alt="HTTP Benchmark"
                 />
                 <img
-                  class="hidden lg:block"
+                  class="pt-18 pb-22 px-12 hidden lg:block"
                   src="/images/lp/benchmark@lg.png"
                   alt="HTTP Benchmark"
                 />
@@ -243,12 +243,12 @@ export default function Home({ data }: PageProps<Data>) {
           subheader="Take total control over your workflow."
         >
           <ImageSubSection
-            image={<img src="" alt="" />}
+            image={<ScrollInGif src="/images/lp/secure" alt="" />}
             header="Run untrusted code"
             additionalContent={
               <img
                 src="/images/lp/armor_deno.png"
-                class="absolute hidden lg:(block w-52 -top-14 -right-24)"
+                class="absolute hidden lg:(block w-52 -bottom-14 -right-10)"
                 aria-hidden
               />
             }
