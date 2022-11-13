@@ -130,7 +130,7 @@ export function Header({ selected, manual }: {
                       />
 
                       <div
-                        class={tw`hidden lg:(absolute -bottom-[20px] w-full children:bg-azure3 ${
+                        class={tw`hidden lg:(absolute -bottom-[20px] pt-[5px] w-full children:bg-azure3 ${
                           css({
                             filter:
                               "drop-shadow(0px 1.5px 2px rgba(0, 0, 0, 0.3))",
