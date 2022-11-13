@@ -27,6 +27,21 @@ export default function ScrollInGif({
   }, [imgRef]);
 
   return scrolledIn
-    ? <img class="p-3.5 lg:(py-11 px-10)" ref={imgRef} src={src + ".gif"} alt={alt} />
-    : <img class="p-3.5 lg:(py-11 px-10)" ref={imgRef} src={src + ".png"} alt={alt} aria-hidden />;
+    ? (
+      <img
+        class="p-3.5 lg:(py-11 px-10)"
+        ref={imgRef}
+        src={src + ".gif"}
+        alt={alt}
+      />
+    )
+    : (
+      <img
+        class="p-3.5 lg:(py-11 px-10)"
+        ref={imgRef}
+        src={src + ".png"}
+        alt={alt}
+        aria-hidden
+      />
+    );
 }

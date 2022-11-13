@@ -109,7 +109,7 @@ export function Header({ selected, manual }: {
               {entries.map((entry) => {
                 if ("children" in entry) {
                   return (
-                    <div class="lg:hover:children:(first-child:(shadow bg-azure) last-child:block)">
+                    <div class="lg:(relative inline-block hover:children:(first-child:(shadow bg-azure3) last-child:block))">
                       <label
                         htmlFor={entry.content}
                         tabIndex={0}
@@ -129,14 +129,29 @@ export function Header({ selected, manual }: {
                         autoComplete="off"
                       />
 
-                      <div class="hidden lg:(absolute bottom children:shadow)">
-                        <div class="pb-2 mb-3 space-y-1.5 lg:(py-0 m-0 space-y-0 rounded-md overflow-hidden bg-azure divide-y divide-white)">
+                      <div
+                        class={tw`hidden lg:(absolute -bottom-[20px] w-full children:bg-azure3 ${
+                          css({
+                            filter:
+                              "drop-shadow(0px 1.5px 2px rgba(0, 0, 0, 0.3))",
+                          })
+                        })`}
+                      >
+                        <div
+                          class={tw`hidden lg:block w-full h-[15px] ${
+                            css({
+                              "clip-path":
+                                "polygon(calc(50% - 15px * 2 / 3) 15px,50% 0,calc(50% + 15px * 2 / 3) 15px)",
+                            })
+                          }`}
+                        />
+                        <div class="pb-2 pl-2 mb-3 space-y-1.5 lg:(absolute pl-0 py-2 -mt-px mb-0 space-y-0 rounded-md overflow-hidden divide-y divide-white)">
                           {entry.children.map(({
                             href,
                             content,
                             icon,
                           }) => (
-                            <div class="text-sm font-semibold lg:(text-base font-normal flex)">
+                            <div class="text-sm font-semibold lg:(top-1 text-base font-normal flex)">
                               <a
                                 class="flex gap-2 items-center whitespace-nowrap py-1.5 pl-1 py-3 lg:(py-3.5 px-4) w-full leading-tight! hover:lg:bg-azure2"
                                 href={href}
@@ -156,7 +171,7 @@ export function Header({ selected, manual }: {
                   return (
                     <div>
                       <a
-                        class="block w-full px-1 my-3 lg:(w-auto m-0 px-2 rounded-md hover:bg-azure)"
+                        class="block w-full px-1 my-3 lg:(w-auto m-0 px-2 rounded-md hover:bg-azure3)"
                         href={entry.href}
                       >
                         {entry.content}
