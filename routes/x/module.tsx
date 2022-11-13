@@ -680,7 +680,9 @@ function InfoView(
                 <li class="odd:(bg-ultralight rounded-md)">
                   <a
                     class={`flex px-5 py-2 link ${
-                      listVersion === version ? "font-bold" : "font-medium"
+                      listVersion === version
+                        ? "text-primary font-bold"
+                        : "text-default font-normal"
                     }`}
                     href={getModulePath(name, listVersion)}
                   >

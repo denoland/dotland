@@ -9,6 +9,7 @@ import { Markdown } from "@/components/Markdown.tsx";
 import * as Icons from "@/components/Icons.tsx";
 import { ManualOrAPI, SidePanelPage } from "@/components/SidePanelPage.tsx";
 import {
+  generateToC,
   getDescription,
   getDocURL,
   getFileURL,
@@ -23,54 +24,23 @@ import VERSIONS from "@/versions.json" assert { type: "json" };
 
 interface Data {
   tableOfContents: TableOfContents;
+  pageList: { path: string; name: string }[];
   content: string;
   version: string;
 }
 
 export default function Manual({ params, url, data }: PageProps<Data>) {
-  const { version } = data;
+  const { version, pageList } = data;
   const path = `/${params.path}`;
 
-  const pageList = (() => {
-    const tempList: { path: string; name: string }[] = [];
-
-    function tocGen(toc: TableOfContents, parentSlug: string) {
-      for (const [childSlug, entry] of Object.entries(toc)) {
-        const slug = `${parentSlug}/${childSlug}`;
-        const name = typeof entry === "string" ? entry : entry.name;
-        tempList.push({ path: slug, name });
-        if (typeof entry === "object" && entry.children) {
-          tocGen(entry.children, slug);
-        }
-      }
-    }
-    tocGen(data.tableOfContents, "/manual");
-
-    return tempList;
-  })();
   const pageIndex = pageList.findIndex((page) =>
-    page.path === `/manual${path}`
+    // page.path is in the form /manual@v{1.8.2}/{path}
+    page.path.startsWith("/manual") && page.path.endsWith(path)
   );
   const sourceURL = getFileURL(version, path);
 
-  const tableOfContentsMap = (() => {
-    const map = new Map<string, string>();
-
-    function tocGen(toc: TableOfContents, parentSlug: string) {
-      for (const [childSlug, entry] of Object.entries(toc)) {
-        const slug = `${parentSlug}/${childSlug}`;
-        const name = typeof entry === "string" ? entry : entry.name;
-        map.set(slug, name);
-        if (typeof entry === "object" && entry.children) {
-          tocGen(entry.children, slug);
-        }
-      }
-    }
-    tocGen(data.tableOfContents, "");
-
-    return map;
-  })();
-  const pageTitle = tableOfContentsMap.get(path) || "";
+  const pageTitle =
+    data.pageList.find((entry) => entry.path === url.pathname)?.name || "";
 
   const stdVersion = ((VERSIONS.cli_to_std as Record<string, string>)[
     version
@@ -140,10 +110,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
           <div class="mt-14">
             {pageList[pageIndex - 1] && (
               <a
-                href={pageList[pageIndex - 1].path.replace(
-                  "manual",
-                  `manual@${version}`,
-                )}
+                href={pageList[pageIndex - 1].path}
                 class="font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-border gap-1.5 hover:bg-grayDefault"
               >
                 <Icons.ChevronLeft />
@@ -154,10 +121,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             )}
             {pageList[pageIndex + 1] && (
               <a
-                href={pageList[pageIndex + 1].path.replace(
-                  "manual",
-                  `manual@${version}`,
-                )}
+                href={pageList[pageIndex + 1].path}
                 class="font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-border gap-1.5 hover:bg-grayDefault float-right text-right"
               >
                 <div>
@@ -324,7 +288,18 @@ export const handler: Handlers<Data> = {
         }),
     ]);
 
-    return render!({ tableOfContents, content, version });
+    const { pageList, redirectList } = generateToC(
+      tableOfContents,
+      `/manual@${version}`,
+    );
+
+    const slashPath = "/" + params.path;
+    if (slashPath in redirectList) {
+      url.pathname = redirectList[slashPath];
+      return Response.redirect(url, 301);
+    }
+
+    return render!({ tableOfContents, content, version, pageList });
   },
 };
 
