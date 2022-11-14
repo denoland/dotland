@@ -214,7 +214,12 @@ export default function Home({ data }: PageProps<Data>) {
             header="Best in class HTTP server speeds"
             reverse
           >
-            The fastest JavaScript web server ever&nbsp;built.
+            The fastest JavaScript web server ever built.
+            <br />
+            (<a href="https://github.com/denoland/deno/blob/v1.28.0/cli/bench/http/deno_http_flash.js">
+              HTTP hello&#8288;-&#8288;world
+            </a>{" "}
+            using wrk on&nbsp;mac&#8288;)
           </ImageSubSection>
 
           <ImageSubSection
@@ -309,7 +314,7 @@ export default function Home({ data }: PageProps<Data>) {
               technology&nbsp;companies:
             </p>
             <p class="text-white font-bold mt-4 mb-10 text-4xl lg:(mt-7 mb-13 text-7xl)">
-              Over 300k Monthly&nbsp;Actives
+              Over 200k Monthly&nbsp;Actives
             </p>
             <div class="grid grid-cols-2 justify-center items-center text-white gap-6 md:(gap-18 grid-cols-none grid-flow-col)">
               {companies.map((company) => (
