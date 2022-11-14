@@ -42,7 +42,7 @@ export default function Home({ data }: PageProps<Data>) {
       <div>
         <Header />
 
-        <div class="relative colorWash px-8 pt-12 pb-28 lg:(px-36 pt-24 pb-40) -z-10">
+        <div class="relative colorWash px-8 pt-12 pb-28 lg:(px-36 pt-24 pb-40)">
           <picture>
             <source
               srcset="/images/lp/cover@xl.avif"
