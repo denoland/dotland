@@ -42,34 +42,49 @@ export default function Home({ data }: PageProps<Data>) {
       <div>
         <Header />
 
-        <div
-          class={tw`px-8 pt-12 pb-28 lg:(px-36 pt-24 pb-40) ${
-            css({
-              background: "image-set(" +
-                'url("/images/lp/cover.avif") type("image/avif"),' +
-                'url("/images/lp/cover.webp") type("image/webp"),' +
-                'url("/images/lp/cover.jpg") type("image/jpeg")' +
-                ") left / cover no-repeat",
-            })
-          } md:(${
-            css({
-              background: "image-set(" +
-                'url("/images/lp/cover@lg.avif") type("image/avif"),' +
-                'url("/images/lp/cover@lg.webp") type("image/webp"),' +
-                'url("/images/lp/cover@lg.jpg") type("image/jpeg")' +
-                ") left / cover no-repeat",
-            })
-          }) xl:(${
-            css({
-              background: "image-set(" +
-                'url("/images/lp/cover@xl.avif") type("image/avif"),' +
-                'url("/images/lp/cover@xl.webp") type("image/webp"),' +
-                'url("/images/lp/cover@xl.jpg") type("image/jpeg")' +
-                ") left / cover no-repeat",
-            })
-          })`}
-        >
-          <div class="text-white space-y-6 lg:(space-y-16 w-[40rem])">
+        <div class="relative px-8 pt-12 pb-28 lg:(px-36 pt-24 pb-40)">
+          <picture>
+            <source
+              srcSet="/images/lp/cover@xl.avif"
+              type="image/avif"
+              media="(min-width: 1024px)"
+            />
+            <source
+              srcSet="/images/lp/cover@xl.webp"
+              type="image/webp"
+              media="(min-width: 1024px)"
+            />
+            <source
+              srcSet="/images/lp/cover@xl.jpg"
+              type="image/jpg"
+              media="(min-width: 1024px)"
+            />
+
+            <source
+              srcSet="/images/lp/cover@lg.avif"
+              type="image/avif"
+              media="(min-width: 768px)"
+            />
+            <source
+              srcSet="/images/lp/cover@lg.webp"
+              type="image/webp"
+              media="(min-width: 768px)"
+            />
+            <source
+              srcSet="/images/lp/cover@lg.jpg"
+              type="image/jpg"
+              media="(min-width: 768px)"
+            />
+
+            <source srcSet="/images/lp/cover.avif" type="image/avif" />
+            <source srcSet="/images/lp/cover.webp" type="image/webp" />
+            <img
+              class="object-cover w-full h-full absolute inset-0"
+              src="/images/lp/cover.jpg"
+              alt="Background Image"
+            />
+          </picture>
+          <div class="relative text-white space-y-6 lg:(space-y-16 w-[40rem])">
             <div class="space-y-2.5 lg:space-y-8">
               <p class="font-semibold text-xl lg:text-3xl leading-none">
                 Meet Deno
@@ -123,34 +138,37 @@ export default function Home({ data }: PageProps<Data>) {
 
           <ImageSubSection
             image={
-              <>
-                <picture class="py-7 pl-5 pr-7 lg:hidden">
-                  <source
-                    src="/images/lp/web_compatibility.avif"
-                    type="image/avif"
-                  />
-                  <source
-                    src="/images/lp/web_compatibility.webp"
-                    type="image/webp"
-                  />
-                  <img src="/images/lp/web_compatibility.png" alt="Web APIs" />
-                </picture>
+              <picture>
+                <source
+                  srcSet="/images/lp/web_compatibility@lg.avif"
+                  type="image/avif"
+                  media="(min-width: 1024px)"
+                />
+                <source
+                  srcSet="/images/lp/web_compatibility@lg.webp"
+                  type="image/webp"
+                  media="(min-width: 1024px)"
+                />
+                <source
+                  srcSet="/images/lp/web_compatibility@lg.png"
+                  type="image/png"
+                  media="(min-width: 1024px)"
+                />
 
-                <picture class="py-12 pl-16 pr-22 hidden lg:block">
-                  <source
-                    src="/images/lp/web_compatibility@lg.avif"
-                    type="image/avif"
-                  />
-                  <source
-                    src="/images/lp/web_compatibility@lg.webp"
-                    type="image/webp"
-                  />
-                  <img
-                    src="/images/lp/web_compatibility@lg.png"
-                    alt="Web APIs"
-                  />
-                </picture>
-              </>
+                <source
+                  srcSet="/images/lp/web_compatibility.avif"
+                  type="image/avif"
+                />
+                <source
+                  srcSet="/images/lp/web_compatibility.webp"
+                  type="image/webp"
+                />
+                <img
+                  class="py-7 pl-5 pr-7 lg:(py-12 pl-16 pr-22)"
+                  src="/images/lp/web_compatibility.png"
+                  alt="Web APIs"
+                />
+              </picture>
             }
             header="Web-standard APIs"
           >
@@ -223,25 +241,37 @@ export default function Home({ data }: PageProps<Data>) {
         >
           <ImageSubSection
             image={
-              <>
-                <picture class="py-9 px-5.5 lg:hidden">
-                  <source src="/images/lp/benchmark.avif" type="image/avif" />
-                  <source src="/images/lp/benchmark.webp" type="image/webp" />
-                  <img src="/images/lp/benchmark.png" alt="HTTP Benchmark" />
-                </picture>
+              <picture>
+                <source
+                  srcSet="/images/lp/benchmark@lg.avif"
+                  type="image/avif"
+                  media="(min-width: 1024px)"
+                />
+                <source
+                  srcSet="/images/lp/benchmark@lg.webp"
+                  type="image/webp"
+                  media="(min-width: 1024px)"
+                />
+                <source
+                  srcSet="/images/lp/benchmark@lg.png"
+                  type="image/png"
+                  media="(min-width: 1024px)"
+                />
 
-                <picture class="pt-18 pb-22 px-12 hidden lg:block">
-                  <source
-                    src="/images/lp/benchmark@lg.avif"
-                    type="image/avif"
-                  />
-                  <source
-                    src="/images/lp/benchmark@lg.webp"
-                    type="image/webp"
-                  />
-                  <img src="/images/lp/benchmark@lg.png" alt="HTTP Benchmark" />
-                </picture>
-              </>
+                <source
+                  srcSet="/images/lp/benchmark.avif"
+                  type="image/avif"
+                />
+                <source
+                  srcSet="/images/lp/benchmark.webp"
+                  type="image/webp"
+                />
+                <img
+                  class="py-9 px-5.5 lg:(pt-18 pb-22 px-12)"
+                  src="/images/lp/benchmark.png"
+                  alt="HTTP Benchmark"
+                />
+              </picture>
             }
             header="Best in class HTTP server speeds"
             reverse
@@ -257,8 +287,8 @@ export default function Home({ data }: PageProps<Data>) {
           <ImageSubSection
             image={
               <picture>
-                <source src="/images/lp/v8.avif" type="image/avif" />
-                <source src="/images/lp/v8.webp" type="image/webp" />
+                <source srcSet="/images/lp/v8.avif" type="image/avif" />
+                <source srcSet="/images/lp/v8.webp" type="image/webp" />
                 <img src="/images/lp/v8.png" alt="" />
               </picture>
             }
