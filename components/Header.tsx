@@ -109,60 +109,62 @@ export function Header({ selected, manual }: {
               {entries.map((entry) => {
                 if ("children" in entry) {
                   return (
-                    <div class="lg:(relative inline-block hover:children:(first-child:(shadow bg-azure3) last-child:block))">
+                    <div>
                       <input
                         type="checkbox"
                         id={entry.content}
-                        class="hidden checked:(siblings:last-child:block sibling:children:last-child:children:(odd:hidden even:block))"
+                        class="hidden checked:(sibling:children:last-child:block sibling:children:first-child:children:last-child:children:(odd:hidden even:block))"
                         autoComplete="off"
                       />
 
-                      <label
-                        htmlFor={entry.content}
-                        tabIndex={0}
-                        class="rounded-md flex items-center justify-between px-1 my-3 lg:(px-2 my-0)"
-                      >
-                        <span>{entry.content}</span>
-                        <div class="lg:hidden text-[#9CA0AA]">
-                          <Icons.Plus />
-                          <Icons.Minus class="hidden" />
-                        </div>
-                      </label>
+                      <div class="lg:(relative inline-block hover:children:(first-child:(shadow bg-azure3) last-child:block))">
+                        <label
+                          htmlFor={entry.content}
+                          tabIndex={0}
+                          class="rounded-md flex items-center justify-between px-1 my-3 lg:(px-2 my-0)"
+                        >
+                          <span>{entry.content}</span>
+                          <div class="lg:hidden text-[#9CA0AA]">
+                            <Icons.Plus />
+                            <Icons.Minus class="hidden" />
+                          </div>
+                        </label>
 
-                      <div
-                        class={tw`hidden lg:(absolute -bottom-[20px] pt-[5px] w-full children:bg-azure3 ${
-                          css({
-                            filter:
-                              "drop-shadow(0px 1.5px 2px rgba(0, 0, 0, 0.3))",
-                          })
-                        })`}
-                      >
                         <div
-                          class={tw`hidden lg:block w-full h-[15px] ${
+                          class={tw`hidden lg:(absolute -bottom-[20px] pt-[5px] w-full children:bg-azure3 ${
                             css({
-                              "clip-path":
-                                "polygon(calc(50% - 15px * 2 / 3) 15px,50% 0,calc(50% + 15px * 2 / 3) 15px)",
+                              filter:
+                                "drop-shadow(0px 1.5px 2px rgba(0, 0, 0, 0.3))",
                             })
-                          }`}
-                        />
-                        <div class="pb-2 pl-2 mb-3 space-y-1.5 lg:(absolute pl-0 py-2 -mt-px mb-0 space-y-0 rounded-md overflow-hidden divide-y divide-white)">
-                          {entry.children.map(({
-                            href,
-                            content,
-                            icon,
-                          }) => (
-                            <div class="text-sm font-semibold lg:(top-1 text-base font-normal flex)">
-                              <a
-                                class="flex gap-2 items-center whitespace-nowrap py-1.5 pl-1 py-3 lg:(py-3.5 px-4) w-full leading-tight! hover:lg:bg-azure2"
-                                href={href}
-                              >
-                                {icon?.({
-                                  class: "w-5! text-mainBlue flex-none",
-                                })}
-                                {content}
-                              </a>
-                            </div>
-                          ))}
+                          })`}
+                        >
+                          <div
+                            class={tw`hidden lg:block w-full h-[15px] ${
+                              css({
+                                "clip-path":
+                                  "polygon(calc(50% - 15px * 2 / 3) 15px,50% 0,calc(50% + 15px * 2 / 3) 15px)",
+                              })
+                            }`}
+                          />
+                          <div class="pb-2 pl-2 mb-3 space-y-1.5 lg:(absolute pl-0 py-2 -mt-px mb-0 space-y-0 rounded-md overflow-hidden divide-y divide-white)">
+                            {entry.children.map(({
+                              href,
+                              content,
+                              icon,
+                            }) => (
+                              <div class="text-sm font-semibold lg:(top-1 text-base font-normal flex)">
+                                <a
+                                  class="flex gap-2 items-center whitespace-nowrap py-1.5 pl-1 py-3 lg:(py-3.5 px-4) w-full leading-tight! hover:lg:bg-azure2"
+                                  href={href}
+                                >
+                                  {icon?.({
+                                    class: "w-5! text-mainBlue flex-none",
+                                  })}
+                                  {content}
+                                </a>
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </div>
