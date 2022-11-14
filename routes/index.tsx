@@ -125,15 +125,30 @@ export default function Home({ data }: PageProps<Data>) {
             image={
               <>
                 <picture class="py-7 pl-5 pr-7 lg:hidden">
-                  <source src="/images/lp/web_compatibility.avif" type="image/avif" />
-                  <source src="/images/lp/web_compatibility.webp" type="image/webp" />
+                  <source
+                    src="/images/lp/web_compatibility.avif"
+                    type="image/avif"
+                  />
+                  <source
+                    src="/images/lp/web_compatibility.webp"
+                    type="image/webp"
+                  />
                   <img src="/images/lp/web_compatibility.png" alt="Web APIs" />
                 </picture>
 
                 <picture class="py-12 pl-16 pr-22 hidden lg:block">
-                  <source src="/images/lp/web_compatibility@lg.avif" type="image/avif" />
-                  <source src="/images/lp/web_compatibility@lg.webp" type="image/webp" />
-                  <img src="/images/lp/web_compatibility@lg.png" alt="Web APIs" />
+                  <source
+                    src="/images/lp/web_compatibility@lg.avif"
+                    type="image/avif"
+                  />
+                  <source
+                    src="/images/lp/web_compatibility@lg.webp"
+                    type="image/webp"
+                  />
+                  <img
+                    src="/images/lp/web_compatibility@lg.png"
+                    alt="Web APIs"
+                  />
                 </picture>
               </>
             }
@@ -216,8 +231,14 @@ export default function Home({ data }: PageProps<Data>) {
                 </picture>
 
                 <picture class="pt-18 pb-22 px-12 hidden lg:block">
-                  <source src="/images/lp/benchmark@lg.avif" type="image/avif" />
-                  <source src="/images/lp/benchmark@lg.webp" type="image/webp" />
+                  <source
+                    src="/images/lp/benchmark@lg.avif"
+                    type="image/avif"
+                  />
+                  <source
+                    src="/images/lp/benchmark@lg.webp"
+                    type="image/webp"
+                  />
                   <img src="/images/lp/benchmark@lg.png" alt="HTTP Benchmark" />
                 </picture>
               </>
