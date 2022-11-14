@@ -109,7 +109,7 @@ export function Header({ selected, manual }: {
               {entries.map((entry) => {
                 if ("children" in entry) {
                   return (
-                    <div class="lg:(relative inline-block hover:children:(first-child:(shadow bg-azure3) last-child:block))">
+                    <div class="lg:(relative inline-block hover:children:(first-child:(shadow bg-azure3) last-child:block)) z-10">
                       <label
                         htmlFor={entry.content}
                         tabIndex={0}
