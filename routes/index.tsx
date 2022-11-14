@@ -45,39 +45,39 @@ export default function Home({ data }: PageProps<Data>) {
         <div class="relative colorWash px-8 pt-12 pb-28 lg:(px-36 pt-24 pb-40)">
           <picture>
             <source
-              srcset="/images/lp/cover@xl.avif 1x"
+              srcset="/images/lp/cover@xl.avif"
               type="image/avif"
               media="(min-width: 1024px)"
             />
             <source
-              srcset="/images/lp/cover@xl.webp 1x"
+              srcset="/images/lp/cover@xl.webp"
               type="image/webp"
               media="(min-width: 1024px)"
             />
             <source
-              srcset="/images/lp/cover@xl.jpg 1x"
+              srcset="/images/lp/cover@xl.jpg"
               type="image/jpg"
               media="(min-width: 1024px)"
             />
 
             <source
-              srcset="/images/lp/cover@lg.avif 1x"
+              srcset="/images/lp/cover@lg.avif"
               type="image/avif"
               media="(min-width: 768px)"
             />
             <source
-              srcset="/images/lp/cover@lg.webp 1x"
+              srcset="/images/lp/cover@lg.webp"
               type="image/webp"
               media="(min-width: 768px)"
             />
             <source
-              srcset="/images/lp/cover@lg.jpg 1x"
+              srcset="/images/lp/cover@lg.jpg"
               type="image/jpg"
               media="(min-width: 768px)"
             />
 
-            <source srcset="/images/lp/cover.avif 1x" type="image/avif" />
-            <source srcset="/images/lp/cover.webp 1x" type="image/webp" />
+            <source srcset="/images/lp/cover.avif" type="image/avif" />
+            <source srcset="/images/lp/cover.webp" type="image/webp" />
             <img
               class="object-cover w-full h-full absolute inset-0"
               src="/images/lp/cover.jpg"
@@ -140,27 +140,27 @@ export default function Home({ data }: PageProps<Data>) {
             image={
               <picture>
                 <source
-                  srcset="/images/lp/web_compatibility@lg.avif 1x"
+                  srcset="/images/lp/web_compatibility@lg.avif"
                   type="image/avif"
                   media="(min-width: 1024px)"
                 />
                 <source
-                  srcset="/images/lp/web_compatibility@lg.webp 1x"
+                  srcset="/images/lp/web_compatibility@lg.webp"
                   type="image/webp"
                   media="(min-width: 1024px)"
                 />
                 <source
-                  srcset="/images/lp/web_compatibility@lg.png 1x"
+                  srcset="/images/lp/web_compatibility@lg.png"
                   type="image/png"
                   media="(min-width: 1024px)"
                 />
 
                 <source
-                  srcset="/images/lp/web_compatibility.avif 1x"
+                  srcset="/images/lp/web_compatibility.avif"
                   type="image/avif"
                 />
                 <source
-                  srcset="/images/lp/web_compatibility.webp 1x"
+                  srcset="/images/lp/web_compatibility.webp"
                   type="image/webp"
                 />
                 <img
@@ -243,27 +243,27 @@ export default function Home({ data }: PageProps<Data>) {
             image={
               <picture>
                 <source
-                  srcset="/images/lp/benchmark@lg.avif 1x"
+                  srcset="/images/lp/benchmark@lg.avif"
                   type="image/avif"
                   media="(min-width: 1024px)"
                 />
                 <source
-                  srcset="/images/lp/benchmark@lg.webp 1x"
+                  srcset="/images/lp/benchmark@lg.webp"
                   type="image/webp"
                   media="(min-width: 1024px)"
                 />
                 <source
-                  srcset="/images/lp/benchmark@lg.png 1x"
+                  srcset="/images/lp/benchmark@lg.png"
                   type="image/png"
                   media="(min-width: 1024px)"
                 />
 
                 <source
-                  srcset="/images/lp/benchmark.avif 1x"
+                  srcset="/images/lp/benchmark.avif"
                   type="image/avif"
                 />
                 <source
-                  srcset="/images/lp/benchmark.webp 1x"
+                  srcset="/images/lp/benchmark.webp"
                   type="image/webp"
                 />
                 <img
@@ -287,8 +287,8 @@ export default function Home({ data }: PageProps<Data>) {
           <ImageSubSection
             image={
               <picture>
-                <source srcset="/images/lp/v8.avif 1x" type="image/avif" />
-                <source srcset="/images/lp/v8.webp 1x" type="image/webp" />
+                <source srcset="/images/lp/v8.avif" type="image/avif" />
+                <source srcset="/images/lp/v8.webp" type="image/webp" />
                 <img src="/images/lp/v8.png" alt="" />
               </picture>
             }
