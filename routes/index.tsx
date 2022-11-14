@@ -286,8 +286,7 @@ export default function Home({ data }: PageProps<Data>) {
               ),
               body: (
                 <>
-                  Install and run npm packages without having to audit
-                  them&nbsp;first.
+                  Install and run npm packages with less worry.
                 </>
               ),
               Icon: Icons.Secure,
