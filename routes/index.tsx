@@ -45,18 +45,27 @@ export default function Home({ data }: PageProps<Data>) {
         <div
           class={tw`px-8 pt-12 pb-28 lg:(px-36 pt-24 pb-40) ${
             css({
-              background:
-                'url("/images/lp/cover.png") left / cover no-repeat, linear-gradient(90deg, #002585, #209DEE)',
+              background: "image-set(" +
+                'url("/images/lp/cover.avif") type("image/avif"),' +
+                'url("/images/lp/cover.webp") type("image/webp"),' +
+                'url("/images/lp/cover.jpg") type("image/jpeg")' +
+                ") left / cover no-repeat",
             })
           } md:(${
             css({
-              background:
-                'url("/images/lp/cover@lg.png") center / cover no-repeat, linear-gradient(90deg, #002585, #209DEE)',
+              background: "image-set(" +
+                'url("/images/lp/cover@lg.avif") type("image/avif"),' +
+                'url("/images/lp/cover@lg.webp") type("image/webp"),' +
+                'url("/images/lp/cover@lg.jpg") type("image/jpeg")' +
+                ") left / cover no-repeat",
             })
           }) xl:(${
             css({
-              background:
-                'url("/images/lp/cover@xl.png") center / cover no-repeat, linear-gradient(90deg, #002585, #209DEE)',
+              background: "image-set(" +
+                'url("/images/lp/cover@xl.avif") type("image/avif"),' +
+                'url("/images/lp/cover@xl.webp") type("image/webp"),' +
+                'url("/images/lp/cover@xl.jpg") type("image/jpeg")' +
+                ") left / cover no-repeat",
             })
           })`}
         >
@@ -103,7 +112,7 @@ export default function Home({ data }: PageProps<Data>) {
             additionalContent={
               <img
                 src="/images/lp/typing_deno.png"
-                class="absolute hidden lg:(block h-64 -bottom-20 -right-12)"
+                class="absolute hidden lg:(block h-40 -bottom-7 right-2)"
                 aria-hidden
               />
             }
@@ -115,16 +124,17 @@ export default function Home({ data }: PageProps<Data>) {
           <ImageSubSection
             image={
               <>
-                <img
-                  class="py-7 pl-5 pr-7 lg:hidden"
-                  src="/images/lp/web_compatibility.png"
-                  alt="Web APIs"
-                />
-                <img
-                  class="py-12 pl-16 pr-22 hidden lg:block"
-                  src="/images/lp/web_compatibility@lg.png"
-                  alt="Web APIs"
-                />
+                <picture class="py-7 pl-5 pr-7 lg:hidden">
+                  <source src="/images/lp/web_compatibility.avif" type="image/avif" />
+                  <source src="/images/lp/web_compatibility.webp" type="image/webp" />
+                  <img src="/images/lp/web_compatibility.png" alt="Web APIs" />
+                </picture>
+
+                <picture class="py-12 pl-16 pr-22 hidden lg:block">
+                  <source src="/images/lp/web_compatibility@lg.avif" type="image/avif" />
+                  <source src="/images/lp/web_compatibility@lg.webp" type="image/webp" />
+                  <img src="/images/lp/web_compatibility@lg.png" alt="Web APIs" />
+                </picture>
               </>
             }
             header="Web-standard APIs"
@@ -199,16 +209,17 @@ export default function Home({ data }: PageProps<Data>) {
           <ImageSubSection
             image={
               <>
-                <img
-                  class="py-9 px-5.5 lg:hidden"
-                  src="/images/lp/benchmark.png"
-                  alt="HTTP Benchmark"
-                />
-                <img
-                  class="pt-18 pb-22 px-12 hidden lg:block"
-                  src="/images/lp/benchmark@lg.png"
-                  alt="HTTP Benchmark"
-                />
+                <picture class="py-9 px-5.5 lg:hidden">
+                  <source src="/images/lp/benchmark.avif" type="image/avif" />
+                  <source src="/images/lp/benchmark.webp" type="image/webp" />
+                  <img src="/images/lp/benchmark.png" alt="HTTP Benchmark" />
+                </picture>
+
+                <picture class="pt-18 pb-22 px-12 hidden lg:block">
+                  <source src="/images/lp/benchmark@lg.avif" type="image/avif" />
+                  <source src="/images/lp/benchmark@lg.webp" type="image/webp" />
+                  <img src="/images/lp/benchmark@lg.png" alt="HTTP Benchmark" />
+                </picture>
               </>
             }
             header="Best in class HTTP server speeds"
@@ -223,7 +234,13 @@ export default function Home({ data }: PageProps<Data>) {
           </ImageSubSection>
 
           <ImageSubSection
-            image={<img src="/images/lp/v8.png" alt="" />}
+            image={
+              <picture>
+                <source src="/images/lp/v8.avif" type="image/avif" />
+                <source src="/images/lp/v8.webp" type="image/webp" />
+                <img src="/images/lp/v8.png" alt="" />
+              </picture>
+            }
             header="Powered by Chrome's V8"
             noBackground
           >
@@ -253,7 +270,7 @@ export default function Home({ data }: PageProps<Data>) {
             additionalContent={
               <img
                 src="/images/lp/armor_deno.png"
-                class="absolute hidden lg:(block w-52 -bottom-14 -right-10)"
+                class="absolute hidden lg:(block w-44 -bottom-10 -right-8)"
                 aria-hidden
               />
             }
@@ -286,7 +303,7 @@ export default function Home({ data }: PageProps<Data>) {
               ),
               body: (
                 <>
-                  Install and run npm packages with less worry.
+                  Install and run npm packages with less&nbsp;worry.
                 </>
               ),
               Icon: Icons.Secure,
@@ -429,7 +446,7 @@ function ImageSubSection(
         }`}
       >
         {additionalContent}
-        <div class="w-full children:w-full overflow-hidden rounded-lg md:rounded-2xl">
+        <div class="w-full children:w-full children:children:w-full overflow-hidden rounded-lg md:rounded-2xl">
           {image}
         </div>
       </div>
