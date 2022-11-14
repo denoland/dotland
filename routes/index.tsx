@@ -309,7 +309,7 @@ export default function Home({ data }: PageProps<Data>) {
               technology&nbsp;companies:
             </p>
             <p class="text-white font-bold mt-4 mb-10 text-4xl lg:(mt-7 mb-13 text-7xl)">
-              Over 300k Monthly&nbsp;Actives
+              Over 200k Monthly&nbsp;Actives
             </p>
             <div class="grid grid-cols-2 justify-center items-center text-white gap-6 md:(gap-18 grid-cols-none grid-flow-col)">
               {companies.map((company) => (
