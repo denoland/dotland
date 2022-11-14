@@ -65,10 +65,10 @@ export default function Home({ data }: PageProps<Data>) {
               <p class="font-semibold text-xl lg:text-3xl leading-none">
                 Meet Deno
               </p>
-              <p class="font-bold text-5xl lg:text-7xl leading-none">
-                The easiest,<br />and&nbsp;most secure{" "}
+              <h1 class="font-bold text-5xl lg:text-7xl leading-none">
+                The easiest,<br />most secure{" "}
                 <br class="hidden sm:block lg:hidden" />JavaScript runtime.
-              </p>
+              </h1>
             </div>
             <div class="lg:space-x-7">
               <a
