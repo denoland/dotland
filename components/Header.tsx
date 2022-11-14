@@ -53,7 +53,7 @@ const entries: Array<HrefEntry | ChildrenEntry> = [
         icon: Icons.Twitter,
       },
       {
-        href: "https://www.youtube.com/c/Deno_land",
+        href: "https://www.youtube.com/c/deno_land",
         content: "YouTube",
         icon: Icons.YouTube,
       },
