@@ -214,7 +214,12 @@ export default function Home({ data }: PageProps<Data>) {
             header="Best in class HTTP server speeds"
             reverse
           >
-            The fastest JavaScript web server ever built. (<a href="https://github.com/denoland/deno/blob/v1.28.0/cli/bench/http/deno_http_flash.js"HTTP hello-world</a> using wrk on mac)
+            The fastest JavaScript web server ever built.
+            <br />
+            (<a href="https://github.com/denoland/deno/blob/v1.28.0/cli/bench/http/deno_http_flash.js">
+              HTTP hello&#8288;-&#8288;world
+            </a>{" "}
+            using wrk on&nbsp;mac&#8288;)
           </ImageSubSection>
 
           <ImageSubSection
