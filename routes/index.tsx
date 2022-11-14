@@ -278,7 +278,10 @@ export default function Home({ data }: PageProps<Data>) {
           >
             The fastest JavaScript web server ever built.
             <br />
-            (<a class="text-mainBlue hover:underline" href="https://github.com/denoland/deno/blob/v1.28.0/cli/bench/http/deno_http_flash.js">
+            (<a
+              class="text-mainBlue hover:underline"
+              href="https://github.com/denoland/deno/blob/v1.28.0/cli/bench/http/deno_http_flash.js"
+            >
               HTTP hello&#8288;-&#8288;world
             </a>{" "}
             using wrk on&nbsp;mac&#8288;)
@@ -295,7 +298,8 @@ export default function Home({ data }: PageProps<Data>) {
             header="Powered by Chrome's V8"
             noBackground
           >
-            Built on top of the fastest and&nbsp;most complete JavaScript&nbsp;engine.
+            Built on top of the fastest and&nbsp;most complete
+            JavaScript&nbsp;engine.
           </ImageSubSection>
         </Section>
 
