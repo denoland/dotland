@@ -94,9 +94,9 @@ export default function Home({ data }: PageProps<Data>) {
                 <br class="hidden sm:block lg:hidden" />JavaScript runtime.
               </h1>
             </div>
-            <div class="lg:space-x-7">
+            <div class="flex gap-8">
               <a
-                class="hidden lg:inline-flex button-primary"
+                class="button-primary"
                 href="/manual/getting_started/installation"
               >
                 Installation
