@@ -582,7 +582,7 @@ function InfoView(
   if (data.config) {
     attributes.push(
       <div class="flex items-center gap-1.5">
-        <Icons.Logo />
+        <Icons.Logo class="w-4 h-4" />
         <span class="text-gray-600 font-medium leading-none">
           Includes Deno configuration
         </span>
