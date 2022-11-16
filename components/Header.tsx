@@ -109,7 +109,14 @@ export function Header({ selected, manual }: {
               {entries.map((entry) => {
                 if ("children" in entry) {
                   return (
-                    <div class="lg:(relative inline-block hover:children:(first-child:(shadow bg-azure3) last-child:block)) z-10">
+                    <div class="lg:(relative inline-block hover:children:(even:(shadow bg-azure3) last-child:block)) z-10">
+                      <input
+                        type="checkbox"
+                        id={entry.content}
+                        class="hidden checked:(siblings:last-child:block sibling:children:last-child:children:(odd:hidden even:block))"
+                        autoComplete="off"
+                      />
+
                       <label
                         htmlFor={entry.content}
                         tabIndex={0}
@@ -121,13 +128,6 @@ export function Header({ selected, manual }: {
                           <Icons.Minus class="hidden" />
                         </div>
                       </label>
-
-                      <input
-                        type="checkbox"
-                        id={entry.content}
-                        class="hidden checked:(siblings:last-child:block siblings:first-child:children:last-child:children:(odd:hidden even:block))"
-                        autoComplete="off"
-                      />
 
                       <div
                         class={tw`hidden lg:(absolute -bottom-[20px] pt-[5px] w-full children:bg-azure3 ${
