@@ -42,25 +42,49 @@ export default function Home({ data }: PageProps<Data>) {
       <div>
         <Header />
 
-        <div
-          class={tw`px-8 pt-12 pb-28 lg:(px-36 pt-24 pb-40) ${
-            css({
-              background:
-                'url("/images/lp/cover.png") left / cover no-repeat, linear-gradient(90deg, #002585, #209DEE)',
-            })
-          } md:(${
-            css({
-              background:
-                'url("/images/lp/cover@lg.png") center / cover no-repeat, linear-gradient(90deg, #002585, #209DEE)',
-            })
-          }) xl:(${
-            css({
-              background:
-                'url("/images/lp/cover@xl.png") center / cover no-repeat, linear-gradient(90deg, #002585, #209DEE)',
-            })
-          })`}
-        >
-          <div class="text-white space-y-6 lg:(space-y-16 w-[40rem])">
+        <div class="relative colorWash px-8 pt-12 pb-28 lg:(px-36 pt-24 pb-40)">
+          <picture>
+            <source
+              srcset="/images/lp/cover@xl.avif"
+              type="image/avif"
+              media="(min-width: 1024px)"
+            />
+            <source
+              srcset="/images/lp/cover@xl.webp"
+              type="image/webp"
+              media="(min-width: 1024px)"
+            />
+            <source
+              srcset="/images/lp/cover@xl.jpg"
+              type="image/jpg"
+              media="(min-width: 1024px)"
+            />
+
+            <source
+              srcset="/images/lp/cover@lg.avif"
+              type="image/avif"
+              media="(min-width: 768px)"
+            />
+            <source
+              srcset="/images/lp/cover@lg.webp"
+              type="image/webp"
+              media="(min-width: 768px)"
+            />
+            <source
+              srcset="/images/lp/cover@lg.jpg"
+              type="image/jpg"
+              media="(min-width: 768px)"
+            />
+
+            <source srcset="/images/lp/cover.avif" type="image/avif" />
+            <source srcset="/images/lp/cover.webp" type="image/webp" />
+            <img
+              class="object-cover w-full h-full absolute inset-0"
+              src="/images/lp/cover.jpg"
+              alt="Background Image"
+            />
+          </picture>
+          <div class="relative text-white space-y-6 lg:(space-y-16 w-[40rem])">
             <div class="space-y-2.5 lg:space-y-8">
               <p class="font-semibold text-xl lg:text-3xl leading-none">
                 Meet Deno
@@ -70,9 +94,9 @@ export default function Home({ data }: PageProps<Data>) {
                 <br class="hidden sm:block lg:hidden" />JavaScript runtime.
               </h1>
             </div>
-            <div class="lg:space-x-7">
+            <div class="inline-flex gap-4 flex-col lg:(gap-7 flex-row)">
               <a
-                class="hidden lg:inline-flex button-primary"
+                class="button-primary justify-center"
                 href="/manual/getting_started/installation"
               >
                 Installation
@@ -103,7 +127,7 @@ export default function Home({ data }: PageProps<Data>) {
             additionalContent={
               <img
                 src="/images/lp/typing_deno.png"
-                class="absolute hidden lg:(block h-64 -bottom-20 -right-12)"
+                class="absolute hidden lg:(block h-40 -bottom-7 right-2)"
                 aria-hidden
               />
             }
@@ -114,18 +138,37 @@ export default function Home({ data }: PageProps<Data>) {
 
           <ImageSubSection
             image={
-              <>
+              <picture>
+                <source
+                  srcset="/images/lp/web_compatibility@lg.avif"
+                  type="image/avif"
+                  media="(min-width: 1024px)"
+                />
+                <source
+                  srcset="/images/lp/web_compatibility@lg.webp"
+                  type="image/webp"
+                  media="(min-width: 1024px)"
+                />
+                <source
+                  srcset="/images/lp/web_compatibility@lg.png"
+                  type="image/png"
+                  media="(min-width: 1024px)"
+                />
+
+                <source
+                  srcset="/images/lp/web_compatibility.avif"
+                  type="image/avif"
+                />
+                <source
+                  srcset="/images/lp/web_compatibility.webp"
+                  type="image/webp"
+                />
                 <img
-                  class="py-7 pl-5 pr-7 lg:hidden"
+                  class="py-7 pl-5 pr-7 lg:(py-12 pl-16 pr-22)"
                   src="/images/lp/web_compatibility.png"
                   alt="Web APIs"
                 />
-                <img
-                  class="py-12 pl-16 pr-22 hidden lg:block"
-                  src="/images/lp/web_compatibility@lg.png"
-                  alt="Web APIs"
-                />
-              </>
+              </picture>
             }
             header="Web-standard APIs"
           >
@@ -133,7 +176,7 @@ export default function Home({ data }: PageProps<Data>) {
             the server.
           </ImageSubSection>
 
-          <div class="flex items-center justify-between flex-col gap-11 lg:(flex-row gap-[8%])">
+          <div class="flex justify-between flex-col gap-11 lg:(flex-row gap-[8%])">
             {[{
               Icon: Icons.OutOfTheBox,
               title: "TypeScript out of the box",
@@ -186,7 +229,7 @@ export default function Home({ data }: PageProps<Data>) {
           size="2xl"
           lgSize="5xl"
         >
-          Voted one of the most loved web technologies
+          Voted one of the most loved web technologies{" "}
           <br class="hidden lg:block" />in a survey of over
           70,000&nbsp;developers
         </Quote>
@@ -198,36 +241,65 @@ export default function Home({ data }: PageProps<Data>) {
         >
           <ImageSubSection
             image={
-              <>
+              <picture>
+                <source
+                  srcset="/images/lp/benchmark@lg.avif"
+                  type="image/avif"
+                  media="(min-width: 1024px)"
+                />
+                <source
+                  srcset="/images/lp/benchmark@lg.webp"
+                  type="image/webp"
+                  media="(min-width: 1024px)"
+                />
+                <source
+                  srcset="/images/lp/benchmark@lg.png"
+                  type="image/png"
+                  media="(min-width: 1024px)"
+                />
+
+                <source
+                  srcset="/images/lp/benchmark.avif"
+                  type="image/avif"
+                />
+                <source
+                  srcset="/images/lp/benchmark.webp"
+                  type="image/webp"
+                />
                 <img
-                  class="py-9 px-5.5 lg:hidden"
+                  class="py-9 px-5.5 lg:(pt-18 pb-22 px-12)"
                   src="/images/lp/benchmark.png"
                   alt="HTTP Benchmark"
                 />
-                <img
-                  class="pt-18 pb-22 px-12 hidden lg:block"
-                  src="/images/lp/benchmark@lg.png"
-                  alt="HTTP Benchmark"
-                />
-              </>
+              </picture>
             }
             header="Best in class HTTP server speeds"
             reverse
           >
             The fastest JavaScript web server ever built.
             <br />
-            (<a href="https://github.com/denoland/deno/blob/v1.28.0/cli/bench/http/deno_http_flash.js">
+            (<a
+              class="text-mainBlue hover:underline"
+              href="https://github.com/denoland/deno/blob/v1.28.0/cli/bench/http/deno_http_flash.js"
+            >
               HTTP hello&#8288;-&#8288;world
             </a>{" "}
             using wrk on&nbsp;mac&#8288;)
           </ImageSubSection>
 
           <ImageSubSection
-            image={<img src="/images/lp/v8.png" alt="" />}
+            image={
+              <picture>
+                <source srcset="/images/lp/v8.avif" type="image/avif" />
+                <source srcset="/images/lp/v8.webp" type="image/webp" />
+                <img src="/images/lp/v8.png" alt="" />
+              </picture>
+            }
             header="Powered by Chrome's V8"
             noBackground
           >
-            Built on top of the fastest and most complete JavaScript engine.
+            Built on top of the fastest and&nbsp;most complete
+            JavaScript&nbsp;engine.
           </ImageSubSection>
         </Section>
 
@@ -253,7 +325,7 @@ export default function Home({ data }: PageProps<Data>) {
             additionalContent={
               <img
                 src="/images/lp/armor_deno.png"
-                class="absolute hidden lg:(block w-52 -bottom-14 -right-10)"
+                class="absolute hidden lg:(block w-44 -bottom-10 -right-8)"
                 aria-hidden
               />
             }
@@ -286,7 +358,7 @@ export default function Home({ data }: PageProps<Data>) {
               ),
               body: (
                 <>
-                  Install and run npm packages with less worry.
+                  Install and run npm packages with less&nbsp;worry.
                 </>
               ),
               Icon: Icons.Secure,
@@ -429,7 +501,7 @@ function ImageSubSection(
         }`}
       >
         {additionalContent}
-        <div class="w-full children:w-full overflow-hidden rounded-lg md:rounded-2xl">
+        <div class="w-full children:w-full children:children:w-full overflow-hidden rounded-lg md:rounded-2xl">
           {image}
         </div>
       </div>
@@ -460,7 +532,7 @@ function Quote(
         <blockquote
           class={`text-white font-semibold text-${size} lg:text-${lgSize} leading-tight`}
         >
-          {children}
+          "{children}"
         </blockquote>
         <a class="inline-block mx-auto lg:mx-none" href={href}>
           <img
