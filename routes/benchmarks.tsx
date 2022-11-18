@@ -199,25 +199,25 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
               <ul class="ml-8 list-disc my-2">
                 <li>
                   <SourceLink
-                    path="cli/tests/testdata/003_relative_import.ts"
+                    path="cli/tests/testdata/run/003_relative_import.ts"
                     name="cold_relative_import"
                   />
                 </li>
                 <li>
                   <SourceLink
-                    path="cli/tests/testdata/text_decoder_perf.js"
+                    path="cli/tests/testdata/benches/text_decoder_perf.js"
                     name="text_decoder"
                   />
                 </li>
                 <li>
                   <SourceLink
-                    path="cli/tests/testdata/error_001.ts"
+                    path="cli/tests/testdata/run/error_001.ts"
                     name="error_001"
                   />
                 </li>
                 <li>
                   <SourceLink
-                    path="cli/tests/testdata/002_hello.ts"
+                    path="cli/tests/testdata/run/002_hello.ts"
                     name="cold_hello"
                   />
                 </li>
@@ -229,7 +229,7 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                 </li>
                 <li>
                   <SourceLink
-                    path="cli/tests/testdata/003_relative_import.ts"
+                    path="cli/tests/testdata/run/003_relative_import.ts"
                     name="relative_import"
                   />
                 </li>
@@ -241,7 +241,7 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                 </li>
                 <li>
                   <SourceLink
-                    path="cli/tests/testdata/002_hello.ts"
+                    path="cli/tests/testdata/run/002_hello.ts"
                     name="hello"
                   />
                 </li>
