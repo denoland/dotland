@@ -35,4 +35,4 @@ jobs:
           deno-version: v1.x
 
       - name: Run Tests
-        run: deno test --allow-net --allow-read --allow-env --allow-hrtime
+        run: deno task test

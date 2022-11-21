@@ -1,12 +1,13 @@
 {
   "imports": {
     "@/": "./",
-    "@twind": "./util/twind.ts",
-
-    "$fresh/": "https://fresh.deno.dev/@1.0.0-rc.4/",
-    "preact": "https://esm.sh/preact@10.8.1",
-    "preact/": "https://esm.sh/preact@10.8.1/",
-    "preact-render-to-string": "https://esm.sh/preact-render-to-string@5.1.20?deps=preact@10.8.1",
+    "https://deno.land/std@0.154.0/": "https://deno.land/std@0.153.0/",
+    "$fresh/": "https://raw.githubusercontent.com/denoland/fresh/885d71d8239eaa58c5bba8f9b573d141edacdb2c/",
+    "preact": "https://esm.sh/preact@10.11.0",
+    "preact/": "https://esm.sh/preact@10.11.0/",
+    "preact-render-to-string": "https://esm.sh/*preact-render-to-string@5.2.4",
+    "@preact/signals": "https://esm.sh/*@preact/signals@1.0.3",
+    "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.0.1",
     "twind": "https://esm.sh/twind@0.16.17",
     "twind/": "https://esm.sh/twind@0.16.17/",
     "$prism": "https://esm.sh/prismjs@1.27.0",
@@ -19,14 +20,14 @@
     "$fuse/": "https://deno.land/x/fuse@v6.4.1/dist/",
     "$he": "https://esm.sh/he@1.2.0?pin=v87",
     "$pretty_bytes": "https://deno.land/x/pretty_bytes@v1.0.5/mod.ts",
-    "$router": "https://crux.land/router@0.0.12",
     "$ga4": "https://raw.githubusercontent.com/denoland/ga4/main/mod.ts",
     "$ga": "https://deno.land/x/g_a@0.1.2/mod.ts",
     "$oak_commons": "https://deno.land/x/oak_commons@0.1.1/negotiation.ts",
-    "$doc_components/": "https://raw.githubusercontent.com/denoland/doc_components/ea07d5dde7d769b409cdcdc7b45c8319a1bfbf90/",
+    "$doc_components/": "https://raw.githubusercontent.com/denoland/doc_components/e696f6ee892ec9755310955d0b8ddea0a13b984c/",
     "$deno_doc/": "https://deno.land/x/deno_doc@v0.34.0/lib/",
     "$canvas-confetti": "https://esm.sh/canvas-confetti@1.5.1",
     "$algolia": "https://esm.sh/algoliasearch@4.13.1",
+    "$algolia/client-search": "https://esm.sh/@algolia/client-search@4.14.2?pin=v90",
     "$algolia/requester-fetch": "https://esm.sh/@algolia/requester-fetch@4.14.2?pin=v90"
   }
 }

@@ -1,8 +1,5 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-import { h } from "preact";
-import { tw } from "@twind";
 import { RawCodeBlock } from "./CodeBlock.tsx";
 import { Markdown } from "./Markdown.tsx";
 import { fileTypeFromURL } from "@/util/registry_utils.ts";
@@ -24,23 +21,23 @@ export function FileDisplay(props: {
   doc.searchParams.delete("source");
 
   return (
-    <div class={tw`border border-gray-200 rounded-lg`}>
-      <div
-        class={tw`py-3 px-5 flex justify-between items-center border-b border-gray-200`}
-      >
-        <div class={tw`flex items-center gap-2`}>
+    <div class="border border-gray-200 rounded-lg">
+      <div class="py-3 px-5 flex justify-between items-center border-b border-gray-200">
+        <div class="flex items-center gap-2">
           <Icons.Source class="text-gray-500" />
-          <span class={tw`text-lg leading-5 font-semibold`}>File</span>
+          <span class="text-lg leading-5 font-semibold">File</span>
         </div>
-        <div
-          class={tw`flex items-center gap-3 children:(border border-dark-border rounded p-2 hover:bg-ultralight)`}
-        >
-          <a href={props.repositoryURL} title="Repository URL">
-            <Icons.GitHub class="h-4 w-4" />
+        <div class="flex items-center gap-3">
+          <a
+            href={props.repositoryURL}
+            title="Repository URL"
+            class="icon-button"
+          >
+            <Icons.GitHub class="h-4 w-auto" />
           </a>
           {props.docable && (
-            <a href={doc.href} title="Documentation">
-              <Icons.Manual class="h-4" />
+            <a href={doc.href} title="Documentation" class="icon-button">
+              <Icons.Docs class="h-4 w-auto" />
             </a>
           )}
         </div>
@@ -66,7 +63,7 @@ export function FileDisplay(props: {
                   code={props.raw!}
                   language={filetype}
                   enableLineRef={true}
-                  class={tw`p-2 sm:px-3 md:px-4`}
+                  class="p-2 sm:px-3 md:px-4"
                   url={props.url}
                 />
               );
@@ -75,14 +72,14 @@ export function FileDisplay(props: {
                 <RawCodeBlock
                   code={props.raw!}
                   language="markdown"
-                  class={tw`p-2 sm:px-3 md:px-4`}
+                  class="p-2 sm:px-3 md:px-4"
                   url={props.url}
                   enableLineRef
                 />
               );
             case "markdown": {
               return (
-                <div class={tw`p-6`}>
+                <div class="p-6">
                   <Markdown
                     source={props.isStd
                       ? props.raw!
@@ -92,13 +89,13 @@ export function FileDisplay(props: {
               );
             }
             case "image":
-              return <img class={tw`w-full`} src={props.sourceURL} />;
+              return <img class="w-full" src={props.sourceURL} />;
             default:
               return (
                 <RawCodeBlock
                   code={props.raw!}
                   language="text"
-                  class={tw`p-2 sm:px-3 md:px-4`}
+                  class="p-2 sm:px-3 md:px-4"
                   url={props.url}
                   enableLineRef
                 />

@@ -1,10 +1,7 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { ComponentChildren, Fragment, h } from "preact";
-import { useEffect, useState } from "preact/hooks";
-import { tw } from "@twind";
+import type { ComponentChildren } from "preact";
+import { useState } from "preact/hooks";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { Cross } from "@/components/Icons.tsx";
 
@@ -12,40 +9,32 @@ export default function HelloBar(props: {
   to: string;
   children: ComponentChildren;
 }) {
-  const [helloBar, setHelloBar] = useState(false);
-
-  useEffect(() => {
-    setHelloBar(localStorage.getItem("helloBar") != props.to);
-  }, []);
-
-  return (
-    <div>
-      {helloBar
-        ? (
-          <div
-            class={tw`text-center bg-black text-white p-1 flex items-center justify-between flex-wrap`}
+  const [open, setOpen] = useState(true);
+  return open
+    ? (
+      <div class="text-center bg-default text-mainBlue py-1 px-2 gap-1 flex items-center justify-between">
+        <div class="flex-grow text-center">
+          <a
+            href={props.to}
+            target="_blank"
+            class="inline-block font-semibold p-1 hover:text-underline"
           >
-            <div class={tw`flex-grow text-center`}>
-              <a
-                href={props.to}
-                target="_blank"
-                class={tw`inline-block p-1 hover:text-underline`}
-              >
-                {props.children}
-              </a>
-            </div>
-            <button
-              disabled={!IS_BROWSER}
-              onClick={() => {
-                localStorage.setItem("helloBar", props.to);
-                setHelloBar(false);
-              }}
-            >
-              <Cross />
-            </button>
-          </div>
-        )
-        : <></>}
-    </div>
-  );
+            {props.children}
+          </a>
+        </div>
+        <button
+          disabled={!IS_BROWSER}
+          onClick={() => {
+            setOpen(false);
+            const url = new URL("/api/closehellobar", location.href);
+            url.searchParams.set("to", props.to);
+            fetch(url.href, { method: "POST", credentials: "same-origin" })
+              .catch(() => {});
+          }}
+        >
+          <Cross />
+        </button>
+      </div>
+    )
+    : <div></div>;
 }
