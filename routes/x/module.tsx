@@ -362,7 +362,10 @@ function TopPanel({
       <div class="section-x-inset-xl py-5 flex items-center">
         <div class="flex flex-col md:(flex-row items-center) justify-between w-full gap-4">
           <div class="overflow-hidden">
-            <a class="inline-flex items-center gap-1.5 font-medium text-xs text-gray-500 hover:text-default" href={getModulePath(name, version)}>
+            <a
+              class="inline-flex items-center gap-1.5 font-medium text-xs text-gray-500 hover:text-default"
+              href={getModulePath(name, version)}
+            >
               <Icons.ChevronLeft />
               <span>Module</span>
             </a>
