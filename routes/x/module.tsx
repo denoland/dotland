@@ -362,6 +362,13 @@ function TopPanel({
       <div class="section-x-inset-xl py-5 flex items-center">
         <div class="flex flex-col md:(flex-row items-center) justify-between w-full gap-4">
           <div class="overflow-hidden">
+            <a
+              class="inline-flex items-center gap-1.5 font-medium text-xs text-gray-500 hover:text-default"
+              href={getModulePath(name, version)}
+            >
+              <Icons.ChevronLeft />
+              <span>Module</span>
+            </a>
             <Breadcrumbs
               name={name}
               version={version}
@@ -530,7 +537,7 @@ function Breadcrumbs({
   }
 
   return (
-    <p class="text-xl leading-6 font-bold text-gray-400 truncate">
+    <p class="text-xl leading-6 font-bold text-gray-400 truncate space-x-1">
       {out.map(([seg, url], i) => {
         if (view === "source") {
           url += "?source";
@@ -539,8 +546,8 @@ function Breadcrumbs({
         }
         return (
           <>
-            {i !== 0 && "/"}
-            <a href={url} class="link" title={seg}>
+            {i !== 0 && <span class="inline-block">/</span>}
+            <a href={url} class="inline-block link" title={seg}>
               {seg}
             </a>
           </>
