@@ -120,7 +120,7 @@ export function Header({ selected, manual }: {
                       <label
                         htmlFor={entry.content}
                         tabIndex={0}
-                        class="rounded-md flex items-center justify-between px-1 my-3 lg:(px-2 my-0)"
+                        class="rounded-md flex items-center justify-between px-1 my-3 lg:(px-2 my-0 pointer-events-none)"
                       >
                         <span>{entry.content}</span>
                         <div class="lg:hidden text-[#9CA0AA]">
