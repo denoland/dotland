@@ -145,6 +145,8 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
   const searchTimeoutId = useRef<number | null>(null);
   const [loading, setLoading] = useState(false);
 
+  const [macintosh, setMacintosh] = useState(true);
+
   useEffect(() => {
     const keyboardHandler = (e: KeyboardEvent) => {
       if (e.key === "Escape" && showModal) setShowModal(false);
@@ -245,6 +247,10 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
     }
   }, [showModal]);
 
+  useEffect(() => {
+    setMacintosh(window.navigator.platform.includes("Mac"));
+  }, []);
+
   return (
     <>
       <button
@@ -258,7 +264,7 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
             Search...
           </div>
           <div class="mx-4">
-            ⌘K
+            {macintosh ? <div>⌘ + k</div> : <div>Ctrl + k</div>}
           </div>
         </div>
       </button>
