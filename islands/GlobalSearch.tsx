@@ -264,7 +264,7 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
             Search...
           </div>
           <div class="mx-4">
-            {macintosh ? <div>⌘ + k</div> : <div>Ctrl + k</div>}
+            {macintosh ? <div>⌘ K</div> : <div>Ctrl K</div>}
           </div>
         </div>
       </button>
