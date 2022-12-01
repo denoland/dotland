@@ -42,66 +42,68 @@ export default function Home({ data }: PageProps<Data>) {
       <div>
         <Header />
 
-        <div class="relative colorWash px-8 pt-12 pb-28 lg:(px-36 pt-24 pb-40)">
-          <picture>
-            <source
-              srcset="/images/lp/cover@xl.avif"
-              type="image/avif"
-              media="(min-width: 1024px)"
-            />
-            <source
-              srcset="/images/lp/cover@xl.webp"
-              type="image/webp"
-              media="(min-width: 1024px)"
-            />
-            <source
-              srcset="/images/lp/cover@xl.jpg"
-              type="image/jpg"
-              media="(min-width: 1024px)"
-            />
+        <div class="relative colorWash pt-12 pb-28 lg:(pt-24 pb-40)">
+          <div class="section-x-inset-xl">
+            <picture>
+              <source
+                srcSet="/images/lp/cover@xl.avif"
+                type="image/avif"
+                media="(min-width: 1024px)"
+              />
+              <source
+                srcSet="/images/lp/cover@xl.webp"
+                type="image/webp"
+                media="(min-width: 1024px)"
+              />
+              <source
+                srcSet="/images/lp/cover@xl.jpg"
+                type="image/jpg"
+                media="(min-width: 1024px)"
+              />
 
-            <source
-              srcset="/images/lp/cover@lg.avif"
-              type="image/avif"
-              media="(min-width: 768px)"
-            />
-            <source
-              srcset="/images/lp/cover@lg.webp"
-              type="image/webp"
-              media="(min-width: 768px)"
-            />
-            <source
-              srcset="/images/lp/cover@lg.jpg"
-              type="image/jpg"
-              media="(min-width: 768px)"
-            />
+              <source
+                srcSet="/images/lp/cover@lg.avif"
+                type="image/avif"
+                media="(min-width: 768px)"
+              />
+              <source
+                srcSet="/images/lp/cover@lg.webp"
+                type="image/webp"
+                media="(min-width: 768px)"
+              />
+              <source
+                srcSet="/images/lp/cover@lg.jpg"
+                type="image/jpg"
+                media="(min-width: 768px)"
+              />
 
-            <source srcset="/images/lp/cover.avif" type="image/avif" />
-            <source srcset="/images/lp/cover.webp" type="image/webp" />
-            <img
-              class="object-cover w-full h-full absolute inset-0"
-              src="/images/lp/cover.jpg"
-              alt="Background Image"
-            />
-          </picture>
-          <div class="relative text-white space-y-6 lg:(space-y-16 w-[40rem])">
-            <div class="space-y-2.5 lg:space-y-8">
-              <p class="font-semibold text-xl lg:text-3xl leading-none">
-                Meet Deno
-              </p>
-              <h1 class="font-bold text-5xl lg:text-7xl leading-none">
-                The easiest,<br />most secure{" "}
-                <br class="hidden sm:block lg:hidden" />JavaScript runtime.
-              </h1>
-            </div>
-            <div class="inline-flex gap-4 flex-col lg:(gap-7 flex-row)">
-              <a
-                class="button-primary justify-center"
-                href="/manual/getting_started/installation"
-              >
-                Installation
-              </a>
-              <a class="button-primary" href="/manual">Documentation</a>
+              <source srcSet="/images/lp/cover.avif" type="image/avif" />
+              <source srcSet="/images/lp/cover.webp" type="image/webp" />
+              <img
+                class="object-cover w-full h-full absolute inset-0"
+                src="/images/lp/cover.jpg"
+                alt="Background Image"
+              />
+            </picture>
+            <div class="relative text-white space-y-6 lg:(space-y-16 w-[40rem])">
+              <div class="space-y-2.5 lg:space-y-8">
+                <p class="font-semibold text-xl lg:text-3xl leading-none">
+                  Meet Deno
+                </p>
+                <h1 class="font-bold text-5xl lg:text-7xl leading-none">
+                  The easiest,<br />most secure{" "}
+                  <br class="hidden sm:block lg:hidden" />JavaScript runtime.
+                </h1>
+              </div>
+              <div class="inline-flex gap-4 flex-col lg:(gap-7 flex-row)">
+                <a
+                  class="button-primary justify-center"
+                  href="/manual/getting_started/installation"
+                >
+                  Installation
+                </a>
+                <a class="button-primary" href="/manual">Documentation</a>
+              </div>
             </div>
           </div>
         </div>
