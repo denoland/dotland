@@ -40,6 +40,7 @@ import {
   ssrSearchClick,
 } from "@/util/search_insights_utils.ts";
 import { Footer } from "$doc_components/footer.tsx";
+import { processProperty } from "$doc_components/doc/utils.ts";
 
 type Views = "doc" | "source" | "info";
 type Params = {
@@ -319,6 +320,7 @@ export default function Registry(
                   {...{
                     name,
                     path,
+                    url,
                     ...data,
                   }}
                 />
@@ -341,10 +343,12 @@ function TopPanel({
   path,
   data,
   view,
+  url,
 }: {
   name: string;
   version: string;
   path: string;
+  url: URL;
 } & Data) {
   const hasPageBase = data.kind !== "invalid-version" &&
     data.kind !== "no-versions";
@@ -374,6 +378,7 @@ function TopPanel({
               version={version}
               path={path}
               view={view}
+              search={url.searchParams}
             />
 
             {data.kind !== "no-versions" && data.description &&
@@ -510,11 +515,13 @@ function Breadcrumbs({
   path,
   version,
   view,
+  search,
 }: {
   name: string;
   version: string;
   path: string;
   view: Views;
+  search?: URLSearchParams;
 }) {
   const segments = path.split("/").splice(1);
   segments.unshift(name);
@@ -523,7 +530,11 @@ function Breadcrumbs({
   }
 
   let seg = "";
-  const out: [segment: string, url: string][] = [];
+  const out: [
+    segment: string,
+    url: string,
+    separator: "/" | "#" | "." | ">",
+  ][] = [];
   for (const segment of segments) {
     if (segment === "") {
       continue;
@@ -533,12 +544,26 @@ function Breadcrumbs({
       seg += "/" + segment;
     }
 
-    out.push([segment, seg]);
+    out.push([segment, seg, "/"]);
+  }
+
+  const symbol = search?.get("s");
+  if (symbol) {
+    const parts = symbol.split(".");
+    for (let i = 0; i < parts.length; i++) {
+      out.push([parts[i], "", i === 0 ? ">" : "."]);
+    }
+
+    const property = search?.get("p");
+    if (property) {
+      const [processedProperty, isPrototype] = processProperty(property);
+      out.push([processedProperty, "", isPrototype ? "#" : "."]);
+    }
   }
 
   return (
-    <p class="text-xl leading-6 font-bold text-gray-400 truncate space-x-1">
-      {out.map(([seg, url], i) => {
+    <p class="text-xl leading-6 font-bold text-gray-400 truncate space-x-1 children:inline-block">
+      {out.map(([seg, url, separator], i) => {
         if (view === "source") {
           url += "?source";
         } else if (view === "doc" && seg === name) {
@@ -546,8 +571,8 @@ function Breadcrumbs({
         }
         return (
           <>
-            {i !== 0 && <span class="inline-block">/</span>}
-            <a href={url} class="inline-block link" title={seg}>
+            {i !== 0 && <span>{separator}</span>}
+            <a href={url} class="link" title={seg}>
               {seg}
             </a>
           </>
