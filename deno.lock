@@ -114,7 +114,6 @@
     "https://deno.land/x/dax@0.7.0/src/result.ts": "c0cd24e377548990f3de240606bd1a205c0428c0252bd7c5ef9be92a93d54ffc",
     "https://deno.land/x/dax@0.7.0/src/shell.ts": "cdab0db18654d2bf5058e8d220cdbefc308c6b2549bb56e8d01aea5ce5a7b60a",
     "https://deno.land/x/which@0.2.1/mod.ts": "2e076cb85aea9798662b355fb613d27eebcc78dfc8934ece4ae932f6303f6ca8",
-    "https://raw.githubusercontent.com/denoland/automation/0.12.0/github_actions.ts": "3c4b334a94cfb0f6838d9cf30041ad3316c744ffc75cae7b5aad54b61b6c15de",
-    "https://raw.githubusercontent.com/denoland/doc_components/cbcaaaf00508c9bd64c3c2ebb4d9899659168a44/jsx.d.ts": "3860591313e8efa773446e746564bbba0c3c5b50a2955dcea1f22bbee68841ea"
+    "https://raw.githubusercontent.com/denoland/automation/0.12.0/github_actions.ts": "3c4b334a94cfb0f6838d9cf30041ad3316c744ffc75cae7b5aad54b61b6c15de"
   }
 }
