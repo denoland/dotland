@@ -550,14 +550,19 @@ function Breadcrumbs({
   const symbol = search?.get("s");
   if (symbol) {
     const parts = symbol.split(".");
+    let segParts = "";
     for (let i = 0; i < parts.length; i++) {
-      out.push([parts[i], "", i === 0 ? ">" : "."]);
+      segParts += (i === 0 ? "" : ".") + parts[i];
+      seg += (i === 0 ? "" : "?s=") + segParts;
+
+      out.push([parts[i], seg, i === 0 ? ">" : "."]);
     }
 
     const property = search?.get("p");
     if (property) {
       const [processedProperty, isPrototype] = processProperty(property);
-      out.push([processedProperty, "", isPrototype ? "#" : "."]);
+      seg += `&p=${property}`;
+      out.push([processedProperty, seg, isPrototype ? "#" : "."]);
     }
   }
 
