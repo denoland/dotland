@@ -1,8 +1,5 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
 import { Head } from "$fresh/runtime.ts";
 
 const DEFAULT_TITLE = "Deno";
@@ -49,6 +46,7 @@ export function ContentMeta(
   {
     title = DEFAULT_TITLE,
     description,
+    canonical,
     creator,
     keywords = DEFAULT_KEYWORDS,
     ogType = "website",
@@ -58,6 +56,7 @@ export function ContentMeta(
   }: {
     title: string;
     description?: string;
+    canonical?: URL;
     creator?: string;
     keywords?: string[];
     ogType?: OgType;
@@ -77,6 +76,8 @@ export function ContentMeta(
       <title>{title}</title>
       <meta name="twitter:title" content={title} />
       <meta property="og:title" content={title} />
+
+      {canonical && <link rel="canonical" href={canonical.toString()} />}
 
       {description && (
         <>

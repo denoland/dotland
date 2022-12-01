@@ -1,18 +1,15 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
 import { PageProps, RouteConfig } from "$fresh/server.ts";
-import { tw } from "@twind";
 import { Handlers } from "$fresh/server.ts";
 import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
-import { Footer } from "@/components/Footer.tsx";
+import { Footer } from "$doc_components/footer.tsx";
 import { Markdown } from "@/components/Markdown.tsx";
 import * as Icons from "@/components/Icons.tsx";
 import { ManualOrAPI, SidePanelPage } from "@/components/SidePanelPage.tsx";
 import {
+  generateToC,
   getDescription,
   getDocURL,
   getFileURL,
@@ -27,54 +24,23 @@ import VERSIONS from "@/versions.json" assert { type: "json" };
 
 interface Data {
   tableOfContents: TableOfContents;
+  pageList: { path: string; name: string }[];
   content: string;
   version: string;
 }
 
 export default function Manual({ params, url, data }: PageProps<Data>) {
-  const { version } = data;
+  const { version, pageList } = data;
   const path = `/${params.path}`;
 
-  const pageList = (() => {
-    const tempList: { path: string; name: string }[] = [];
-
-    function tocGen(toc: TableOfContents, parentSlug: string) {
-      for (const [childSlug, entry] of Object.entries(toc)) {
-        const slug = `${parentSlug}/${childSlug}`;
-        const name = typeof entry === "string" ? entry : entry.name;
-        tempList.push({ path: slug, name });
-        if (typeof entry === "object" && entry.children) {
-          tocGen(entry.children, slug);
-        }
-      }
-    }
-    tocGen(data.tableOfContents, "/manual");
-
-    return tempList;
-  })();
   const pageIndex = pageList.findIndex((page) =>
-    page.path === `/manual${path}`
+    // page.path is in the form /manual@v{1.8.2}/{path}
+    page.path.startsWith("/manual") && page.path.endsWith(path)
   );
   const sourceURL = getFileURL(version, path);
 
-  const tableOfContentsMap = (() => {
-    const map = new Map<string, string>();
-
-    function tocGen(toc: TableOfContents, parentSlug: string) {
-      for (const [childSlug, entry] of Object.entries(toc)) {
-        const slug = `${parentSlug}/${childSlug}`;
-        const name = typeof entry === "string" ? entry : entry.name;
-        map.set(slug, name);
-        if (typeof entry === "object" && entry.children) {
-          tocGen(entry.children, slug);
-        }
-      }
-    }
-    tocGen(data.tableOfContents, "");
-
-    return map;
-  })();
-  const pageTitle = tableOfContentsMap.get(path) || "";
+  const pageTitle =
+    data.pageList.find((entry) => entry.path === url.pathname)?.name || "";
 
   const stdVersion = ((VERSIONS.cli_to_std as Record<string, string>)[
     version
@@ -104,7 +70,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
         sidepanel={
           <>
             <ManualOrAPI current="Manual" version={version} />
-            <div class={tw`space-y-3 children:w-full`}>
+            <div class="space-y-3 children:w-full">
               <VersionSelect
                 versions={Object.fromEntries(
                   versions.map((ver) => [ver, `/manual@${ver}${path}`]),
@@ -125,10 +91,10 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             href={new URL(`/manual/${params.path}`, url).href}
           />
         )}
-        <div class={tw`w-full justify-self-center flex-shrink-1`}>
+        <div class="w-full justify-self-center flex-shrink-1">
           <a
             href={getDocURL(version, path)}
-            class={tw`float-right py-2.5 px-4.5 rounded-md bg-[#F3F3F3] hover:bg-border leading-none font-medium`}
+            class="float-right py-2.5 px-4.5 rounded-md bg-grayDefault hover:bg-border leading-none font-medium"
           >
             Edit
           </a>
@@ -141,14 +107,11 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             baseURL={sourceURL}
           />
 
-          <div class={tw`mt-14`}>
+          <div class="mt-14">
             {pageList[pageIndex - 1] && (
               <a
-                href={pageList[pageIndex - 1].path.replace(
-                  "manual",
-                  `manual@${version}`,
-                )}
-                class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-border gap-1.5 hover:bg-light-border`}
+                href={pageList[pageIndex - 1].path}
+                class="font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-border gap-1.5 hover:bg-grayDefault"
               >
                 <Icons.ChevronLeft />
                 <div>
@@ -158,11 +121,8 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             )}
             {pageList[pageIndex + 1] && (
               <a
-                href={pageList[pageIndex + 1].path.replace(
-                  "manual",
-                  `manual@${version}`,
-                )}
-                class={tw`font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-border gap-1.5 float-right text-right hover:bg-light-border`}
+                href={pageList[pageIndex + 1].path}
+                class="font-medium inline-flex items-center px-4.5 py-2.5 rounded-lg border border-border gap-1.5 hover:bg-grayDefault float-right text-right"
               >
                 <div>
                   {pageList[pageIndex + 1].name}
@@ -184,17 +144,15 @@ function UserContributionBanner({
   href: string;
 }) {
   return (
-    <div
-      class={tw`bg-yellow-300 sticky top-0 rounded-md mb-6 py-4 px-3 sm:px-6 lg:px-8 font-medium text-gray-900`}
-    >
+    <div class="bg-yellow-300 sticky top-0 rounded-md mb-6 py-4 px-3 sm:px-6 lg:px-8 font-medium text-gray-900">
       <span>
         You are viewing documentation generated from a{"  "}
-        <b class={tw`font-bold`}>user contribution</b>{"  "}
+        <b class="font-bold">user contribution</b>{"  "}
         or an upcoming release. The contents of this document may not have been
         reviewed by the Deno team.{" "}
       </span>
 
-      <a class={tw`underline cursor-pointer`} href={href}>
+      <a class="underline cursor-pointer" href={href}>
         Click here to view the documentation for the latest release.
       </a>
     </div>
@@ -227,14 +185,14 @@ function ToCEntry({
       <input
         type="checkbox"
         id={slug}
-        class={tw`hidden checked:siblings:even:children:first-child:rotate-90 checked:siblings:last-child:block`}
+        class="hidden checked:siblings:even:children:first-child:rotate-90 checked:siblings:last-child:block"
         checked={active || path.startsWith(`/${slug}/`)}
         disabled={!hasChildren}
       />
 
       <label
         htmlFor={slug}
-        class={tw`flex! items-center gap-2 ${
+        class={`flex! items-center gap-2 ${
           outermost
             ? "px-2.5 py-2 font-semibold"
             : `pl-${depth * 6} pr-2.5 py-1 font-normal`
@@ -244,7 +202,7 @@ function ToCEntry({
           aria-label={`open section ${name}`}
           onKeyDown="if (event.code === 'Space' || event.code === 'Enter') { this.parentElement.click(); event.preventDefault(); }"
           tabindex={0}
-          class={"h-2.5 w-auto cursor-pointer " +
+          class={"h-2.5 w-auto cursor-pointer outline-none select-none " +
             (hasChildren ? "" : "invisible")}
         />
         <a href={`/manual@${version}/${slug}`}>
@@ -253,7 +211,7 @@ function ToCEntry({
       </label>
 
       {hasChildren && (
-        <ol class={tw`list-decimal font-normal hidden` + " nested"}>
+        <ol class="list-decimal font-normal hidden  nested">
           {Object.entries(entry.children!).map(([childSlug, entry]) => (
             <ToCEntry
               slug={`${slug}/${childSlug}`}
@@ -280,7 +238,7 @@ function ToC({
 }) {
   return (
     <nav>
-      <ol class={tw`list-decimal list-inside font-semibold` + " nested"}>
+      <ol class="list-decimal list-inside font-semibold nested">
         {Object.entries(tableOfContents).map(([slug, entry]) => (
           <ToCEntry
             slug={slug}
@@ -330,7 +288,18 @@ export const handler: Handlers<Data> = {
         }),
     ]);
 
-    return render!({ tableOfContents, content, version });
+    const { pageList, redirectList } = generateToC(
+      tableOfContents,
+      `/manual@${version}`,
+    );
+
+    const slashPath = "/" + params.path;
+    if (slashPath in redirectList) {
+      url.pathname = redirectList[slashPath];
+      return Response.redirect(url, 301);
+    }
+
+    return render!({ tableOfContents, content, version, pageList });
   },
 };
 

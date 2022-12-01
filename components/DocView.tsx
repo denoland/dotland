@@ -1,9 +1,5 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { h } from "preact";
-import { tw } from "@twind";
 import { type CommonProps, getModulePath } from "@/util/registry_utils.ts";
 import { dirname } from "$std/path/mod.ts";
 import { ModuleDoc } from "$doc_components/doc/module_doc.tsx";
@@ -46,7 +42,7 @@ export function DocView({
         )
         : null}
     >
-      <div class={tw`w-full`}>
+      <div class="w-full">
         {(() => {
           switch (data.kind) {
             case "index":

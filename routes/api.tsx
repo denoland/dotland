@@ -1,19 +1,15 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
 import { PageProps, RouteConfig } from "$fresh/server.ts";
-import { tw } from "@twind";
 import { Handlers } from "$fresh/server.ts";
 import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
-import { Footer } from "@/components/Footer.tsx";
 import { ManualOrAPI, SidePanelPage } from "@/components/SidePanelPage.tsx";
 import { setSymbols } from "@/util/doc_utils.ts";
 import { versions } from "@/util/manual_utils.ts";
 import VersionSelect from "@/islands/VersionSelect.tsx";
 import {
+  getCanonicalUrl,
   getLibDocPageDescription,
   type LibDocPage,
 } from "@/util/registry_utils.ts";
@@ -21,6 +17,7 @@ import { ErrorMessage } from "@/components/ErrorMessage.tsx";
 import { LibraryDocPanel } from "$doc_components/doc/library_doc_panel.tsx";
 import { LibraryDoc } from "$doc_components/doc/library_doc.tsx";
 import { SymbolDoc } from "$doc_components/doc/symbol_doc.tsx";
+import { Footer } from "$doc_components/footer.tsx";
 
 export default function API(
   { params, url, data }: PageProps<LibDocPage>,
@@ -30,6 +27,8 @@ export default function API(
     "",
   ]];
 
+  const canonical = getCanonicalUrl(url, data.latest_version);
+
   return (
     <>
       <ContentMeta
@@ -37,6 +36,7 @@ export default function API(
           ? `${data.name} | Runtime APIs`
           : "Runtime APIs"}
         description={getLibDocPageDescription(data)}
+        canonical={canonical}
         creator="@deno_land"
         ogImage="api"
         keywords={["deno", "api", "built-in", "typescript", "javascript"]}
@@ -45,7 +45,7 @@ export default function API(
 
       {data.kind === "libraryInvalidVersion"
         ? (
-          <div class={tw`section-x-inset-xl pb-20 pt-10 py-12`}>
+          <div class="section-x-inset-xl pb-20 pt-10 py-12">
             <ErrorMessage title="404 - Not Found">
               This version does not exist.
             </ErrorMessage>
@@ -56,7 +56,7 @@ export default function API(
             sidepanel={
               <>
                 <ManualOrAPI current="Runtime APIs" version={params.version} />
-                <div class={tw`space-y-2.5 children:w-full`}>
+                <div class="space-y-2.5 children:w-full">
                   <VersionSelect
                     versions={Object.fromEntries(
                       versions.map((
@@ -68,7 +68,7 @@ export default function API(
                     )}
                     selectedVersion={params.version}
                   />
-                  <label class={tw`flex items-center gap-1.5`}>
+                  <label class="flex items-center gap-1.5">
                     <input
                       type="checkbox"
                       checked={url.searchParams.has("unstable")}

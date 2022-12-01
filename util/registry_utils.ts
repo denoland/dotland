@@ -387,6 +387,27 @@ function docAsDescription(doc: string) {
   return doc.split("\n\n")[0].slice(0, 199);
 }
 
+/** Search parameters which are considered part of a canonical URL.  */
+const CANONICAL_SEARCH_PARAMS = ["s", "source", "doc", "unstable"];
+
+export function getCanonicalUrl(url: URL, latestVersion: string) {
+  const canonical = new URL(url);
+  canonical.hostname = "deno.land";
+  canonical.port = "";
+  canonical.protocol = "https:";
+  canonical.pathname = canonical.pathname.replace(
+    /@[^/]+/,
+    `@${latestVersion}`,
+  );
+  canonical.search = "";
+  for (const param of CANONICAL_SEARCH_PARAMS) {
+    if (url.searchParams.has(param)) {
+      canonical.searchParams.set(param, url.searchParams.get(param)!);
+    }
+  }
+  return canonical;
+}
+
 /** For a LibDocPage, attempt to extract a description to be used with the
  * content meta for the page. */
 export function getLibDocPageDescription(data: LibDocPage): string | undefined {
