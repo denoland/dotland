@@ -57,6 +57,11 @@ const entries: Array<HrefEntry | ChildrenEntry> = [
         content: "YouTube",
         icon: Icons.YouTube,
       },
+      {
+        href: "https://fosstodon.org/@deno_land",
+        content: "Mastodon",
+        icon: Icons.Mastodon,
+      },
     ],
   },
 ];
