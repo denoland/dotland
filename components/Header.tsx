@@ -183,21 +183,6 @@ export function Header({ selected, manual }: {
             </div>
 
             <GlobalSearch denoVersion={versions.cli[0]} />
-
-            <a
-              href="https://github.com/denoland/deno"
-              class="my-auto hidden lg:block"
-            >
-              <span class="sr-only">GitHub</span>
-              <Icons.GitHub class="h-5 w-auto text-gray-600 hover:text-default" />
-            </a>
-            <a
-              href="https://discord.gg/deno"
-              class="my-auto hidden lg:block"
-            >
-              <span class="sr-only">Discord</span>
-              <Icons.Discord class="h-5 w-auto text-gray-600 hover:text-default" />
-            </a>
           </div>
         </nav>
       </div>
