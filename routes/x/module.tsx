@@ -553,7 +553,7 @@ function Breadcrumbs({
     let segParts = "";
     for (let i = 0; i < parts.length; i++) {
       segParts += (i === 0 ? "" : ".") + parts[i];
-      seg += (i === 0 ? "" : "?s=") + segParts;
+      seg += (i === 0 ? "?s=" : "") + segParts;
 
       out.push([parts[i], seg, i === 0 ? ">" : "."]);
     }
