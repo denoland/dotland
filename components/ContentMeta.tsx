@@ -1,8 +1,5 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
 import { Head } from "$fresh/runtime.ts";
 
 const DEFAULT_TITLE = "Deno";
@@ -75,6 +72,7 @@ export function ContentMeta(
     <Head>
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@deno_land" />
+      <link rel="me" href="https://fosstodon.org/@deno_land" />
 
       <title>{title}</title>
       <meta name="twitter:title" content={title} />

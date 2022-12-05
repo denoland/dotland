@@ -1,10 +1,6 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 // deno-fmt-ignore-file
-/** @jsx h */
-import { h } from "preact";
-
-import { tw } from "@twind";
 import { escape as htmlEscape } from "$he";
 import { normalizeTokens, Prism } from "@/util/prism_utils.ts";
 import { extractLinkUrl } from "@/util/registry_utils.ts";
@@ -46,8 +42,7 @@ export function RawCodeBlock({
 }: CodeBlockProps & {
   enableLineRef?: boolean;
 }) {
-  const codeDivClasses =
-    tw`text-gray-300 text-right select-none inline-block mr-2 sm:mr-3`;
+  const codeDivClasses = "text-gray-300 text-right select-none inline-block mr-2 sm:mr-3";
   const newLang = language === "shell"
     ? "bash"
     : language === "text"
@@ -73,20 +68,20 @@ export function RawCodeBlock({
   if (enableCopyButton && tokens.length == 1) {
     flexCenter = "items-center";
   }
-  
+
   return (
     <pre
-      className={tw`group text-sm flex ${extraClassName ?? ""}` +
-        ` gfm-highlight highlight-source-${newLang} ${flexCenter}`}
+      class={
+        `group text-sm flex ${extraClassName ?? ""} gfm-highlight highlight-source-${newLang} ${flexCenter}`}
       data-color-mode="light"
       data-light-theme="light"
     >
       {enableLineRef &&
         (
-          <div className={codeDivClasses}>
+          <div class={codeDivClasses}>
             {tokens.map((_, i) => (
               <a
-                className={tw`text-gray-500 text-right block` + " token"}
+                class="text-gray-500 text-right block token"
                 tab-index={-1}
                 href={`#L${i + 1}`}
               >
@@ -98,13 +93,13 @@ export function RawCodeBlock({
       {!disablePrefixes && (newLang === "bash") &&
         (
           <code>
-            <div className={codeDivClasses}>$</div>
+            <div class={codeDivClasses}>$</div>
           </code>
         )}
-      <div className={tw`block w-full overflow-y-auto`}>
+      <div class="block w-full overflow-y-auto">
         {tokens.map((line, i) => {
           return (
-            <span id={"L" + (i + 1)} className={tw`block`}>
+            <span id={"L" + (i + 1)} class="block">
               {line.map((token) => {
                 if (token.empty) {
                   return <br />;
@@ -119,12 +114,12 @@ export function RawCodeBlock({
                     const [href, specifier, quote] = result;
                     return (
                       <span
-                        className={"token " +
+                        class={"token " +
                           token.types.join(" ")}
                       >
                         {quote}
                         <a
-                          className={tw`hover:underline`}
+                          class="hover:underline"
                           href={href + "?source"}
                         >
                           {specifier}
@@ -135,7 +130,7 @@ export function RawCodeBlock({
                   }
                 }
                 return (
-                  <span className={"token " + token.types.join(" ")}>
+                  <span class={"token " + token.types.join(" ")}>
                     {token.content}
                   </span>
                 );
@@ -147,7 +142,7 @@ export function RawCodeBlock({
       {enableCopyButton &&
       (
         <button
-          className={tw`opacity-0 group-hover:opacity-100 rounded border border-[#D2D2DC] p-1.5 self-start`}
+          class="opacity-0 group-hover:opacity-100 rounded border border-[#D2D2DC] p-1.5 self-start"
           // @ts-ignore onClick does support strings
           onClick={`navigator?.clipboard?.writeText('${code.trim()}');`}
         >
@@ -162,7 +157,7 @@ export function CodeBlock(props: CodeBlockProps) {
   return (
     <RawCodeBlock
       {...props}
-      class={tw`p-4 bg-ultralight rounded-lg ${props.class ?? ""}`}
+      class={`p-4 bg-ultralight rounded-lg ${props.class ?? ""}`}
     />
   );
 }

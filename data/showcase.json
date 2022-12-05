@@ -162,5 +162,15 @@
     "image": "/images/showcase/wricord.png",
     "title": "Wricord",
     "link": "https://wricord.com"
+  },
+  {
+    "image": "/images/showcase/balello.png",
+    "title": "Balello",
+    "link": "https://balello.com"
+  },
+  {
+    "image": "/images/showcase/neolace.png",
+    "title": "Neolace",
+    "link": "https://www.neolace.com/"
   }
 ]
