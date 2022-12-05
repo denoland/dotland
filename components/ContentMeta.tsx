@@ -72,6 +72,7 @@ export function ContentMeta(
     <Head>
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@deno_land" />
+      <link rel="me" href="https://fosstodon.org/@deno_land" />
 
       <title>{title}</title>
       <meta name="twitter:title" content={title} />

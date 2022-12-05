@@ -26,7 +26,7 @@ export default {
     },
     extend: {
       colors: {
-        default: "#232323",
+        default: "#12124B",
         fresh: "#0CBB3F",
         primary: "#056CF0",
         symbol: "#7B61FF",
@@ -34,6 +34,15 @@ export default {
         border: "#DDDDDD",
         grayDefault: "#F3F3F3",
         ultralight: "#F8F7F6",
+
+        mainBlue: "#0094FF",
+        normalBlue: "#0A4BAB",
+        azure: "#E1F8FF",
+        azure2: "#BEECFD",
+        azure3: "#E1ECF2",
+
+        colorWashFrom: "#002585",
+        colorWashTo: "#209DEE",
       },
       spacing: {
         1.75: "0.4375rem",
@@ -53,12 +62,17 @@ export default {
     },
   },
   plugins: {
+    colorWash:
+      apply`bg-gradient-to-r from-colorWashFrom to-colorWashTo bg-no-repeat`,
+
     link:
       apply`text-primary transition duration-75 ease-in-out hover:text-blue-400`,
     "section-x-inset": (parts) =>
       parts[0] === "none"
         ? apply`max-w-none mx-0 px-0`
-        : apply`max-w-screen-${parts[0]} mx-auto px-4 sm:px-6 md:px-8`,
+        : apply`max-w-screen-${
+          parts[0]
+        } mx-auto px-6 md:px-8 lg:px-10 xl:px-14`,
     "form-select-bg": css({
       "background-image":
         `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3e%3cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke='%239fa6b2' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e")`,
@@ -121,7 +135,7 @@ export default {
         }
       }
 
-      return apply`inline-flex items-center gap-2 py-2.5 px-4.5 rounded-md bg-${bg} hover:bg-${bgHover} text-${text} leading-none font-medium ${
+      return apply`inline-flex items-center gap-2 h-12 px-5 rounded-md bg-${bg} hover:bg-${bgHover} text-${text} leading-tight font-medium ${
         border ? "border border-border" : ""
       }`;
     },

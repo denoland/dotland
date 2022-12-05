@@ -40,6 +40,7 @@ import {
   ssrSearchClick,
 } from "@/util/search_insights_utils.ts";
 import { Footer } from "$doc_components/footer.tsx";
+import { processProperty } from "$doc_components/doc/utils.ts";
 
 type Views = "doc" | "source" | "info";
 type Params = {
@@ -319,6 +320,7 @@ export default function Registry(
                   {...{
                     name,
                     path,
+                    url,
                     ...data,
                   }}
                 />
@@ -341,10 +343,12 @@ function TopPanel({
   path,
   data,
   view,
+  url,
 }: {
   name: string;
   version: string;
   path: string;
+  url: URL;
 } & Data) {
   const hasPageBase = data.kind !== "invalid-version" &&
     data.kind !== "no-versions";
@@ -362,11 +366,19 @@ function TopPanel({
       <div class="section-x-inset-xl py-5 flex items-center">
         <div class="flex flex-col md:(flex-row items-center) justify-between w-full gap-4">
           <div class="overflow-hidden">
+            <a
+              class="inline-flex items-center gap-1.5 font-medium text-xs text-gray-500 hover:text-default"
+              href={getModulePath(name, version)}
+            >
+              <Icons.ChevronLeft />
+              <span>Module</span>
+            </a>
             <Breadcrumbs
               name={name}
               version={version}
               path={path}
               view={view}
+              search={url.searchParams}
             />
 
             {data.kind !== "no-versions" && data.description &&
@@ -503,11 +515,13 @@ function Breadcrumbs({
   path,
   version,
   view,
+  search,
 }: {
   name: string;
   version: string;
   path: string;
   view: Views;
+  search?: URLSearchParams;
 }) {
   const segments = path.split("/").splice(1);
   segments.unshift(name);
@@ -516,7 +530,11 @@ function Breadcrumbs({
   }
 
   let seg = "";
-  const out: [segment: string, url: string][] = [];
+  const out: [
+    segment: string,
+    url: string,
+    separator: "/" | "#" | "." | ">",
+  ][] = [];
   for (const segment of segments) {
     if (segment === "") {
       continue;
@@ -526,12 +544,31 @@ function Breadcrumbs({
       seg += "/" + segment;
     }
 
-    out.push([segment, seg]);
+    out.push([segment, seg, "/"]);
+  }
+
+  const symbol = search?.get("s");
+  if (symbol) {
+    const parts = symbol.split(".");
+    let segParts = "";
+    for (let i = 0; i < parts.length; i++) {
+      segParts += (i === 0 ? "" : ".") + parts[i];
+      seg += (i === 0 ? "?s=" : "") + segParts;
+
+      out.push([parts[i], seg, i === 0 ? ">" : "."]);
+    }
+
+    const property = search?.get("p");
+    if (property) {
+      const [processedProperty, isPrototype] = processProperty(property);
+      seg += `&p=${property}`;
+      out.push([processedProperty, seg, isPrototype ? "#" : "."]);
+    }
   }
 
   return (
-    <p class="text-xl leading-6 font-bold text-gray-400 truncate">
-      {out.map(([seg, url], i) => {
+    <p class="text-xl leading-6 font-bold text-gray-400 space-x-1 children:inline-block">
+      {out.map(([seg, url, separator], i) => {
         if (view === "source") {
           url += "?source";
         } else if (view === "doc" && seg === name) {
@@ -539,7 +576,7 @@ function Breadcrumbs({
         }
         return (
           <>
-            {i !== 0 && "/"}
+            {i !== 0 && <span>{separator}</span>}
             <a href={url} class="link" title={seg}>
               {seg}
             </a>
@@ -582,7 +619,7 @@ function InfoView(
   if (data.config) {
     attributes.push(
       <div class="flex items-center gap-1.5">
-        <Icons.Logo />
+        <Icons.Logo class="w-4 h-4" />
         <span class="text-gray-600 font-medium leading-none">
           Includes Deno configuration
         </span>
