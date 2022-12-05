@@ -145,6 +145,8 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
   const searchTimeoutId = useRef<number | null>(null);
   const [loading, setLoading] = useState(false);
 
+  const [macintosh, setMacintosh] = useState(true);
+
   useEffect(() => {
     const keyboardHandler = (e: KeyboardEvent) => {
       if (e.key === "Escape" && showModal) setShowModal(false);
@@ -245,10 +247,14 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
     }
   }, [showModal]);
 
+  useEffect(() => {
+    setMacintosh(window.navigator.platform.includes("Mac"));
+  }, []);
+
   return (
     <>
       <button
-        class="pl-4 w-80 bg-grayDefault flex-auto lg:flex-none rounded-md text-gray-400 hover:bg-border disabled:invisible"
+        class="pl-4 bg-azure3 flex-grow lg:(w-80 flex-none) rounded-md text-default hover:bg-azure2 disabled:invisible"
         onClick={() => setShowModal(true)}
         disabled={!IS_BROWSER}
       >
@@ -258,7 +264,7 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
             Search...
           </div>
           <div class="mx-4">
-            ⌘K
+            {macintosh ? <div>⌘ K</div> : <div>Ctrl K</div>}
           </div>
         </div>
       </button>
@@ -315,7 +321,7 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
                           "text-underline-offset": "6px",
                           "text-decoration-thickness": "2px",
                         })
-                        : ""} ${k === kind ? "text-black" : "text-gray-500"}`}
+                        : ""} ${k === kind ? "text-default" : "text-gray-500"}`}
                     onClick={() => {
                       setKind(k);
                       setPage(0);

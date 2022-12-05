@@ -202,7 +202,7 @@ function ToCEntry({
           aria-label={`open section ${name}`}
           onKeyDown="if (event.code === 'Space' || event.code === 'Enter') { this.parentElement.click(); event.preventDefault(); }"
           tabindex={0}
-          class={"h-2.5 w-auto cursor-pointer " +
+          class={"h-2.5 w-auto cursor-pointer outline-none select-none " +
             (hasChildren ? "" : "invisible")}
         />
         <a href={`/manual@${version}/${slug}`}>

@@ -23,7 +23,7 @@
     "$ga4": "https://raw.githubusercontent.com/denoland/ga4/main/mod.ts",
     "$ga": "https://deno.land/x/g_a@0.1.2/mod.ts",
     "$oak_commons": "https://deno.land/x/oak_commons@0.1.1/negotiation.ts",
-    "$doc_components/": "https://raw.githubusercontent.com/denoland/doc_components/e2a55a3d9c162f281d85b5f34dc7d3525cc7976f/",
+    "$doc_components/": "https://deno.land/x/deno_doc_components@0.4.0/",
     "$deno_doc/": "https://deno.land/x/deno_doc@v0.34.0/lib/",
     "$canvas-confetti": "https://esm.sh/canvas-confetti@1.5.1",
     "$algolia": "https://esm.sh/algoliasearch@4.13.1",

@@ -63,6 +63,7 @@ function globalSymbolHref(current: URL, symbol: string) {
     target.pathname = "/api";
     target.search = "";
     target.searchParams.set("s", symbol);
+    target.searchParams.delete("p");
     if (lib === "deno-unstable") {
       target.searchParams.set("unstable", "");
     }
@@ -85,6 +86,7 @@ export function lookupSymbol(
         if (currentSymbols.has(name)) {
           const target = new URL(current);
           target.searchParams.set("s", name);
+          target.searchParams.delete("p");
           return target.href;
         }
       } else {
@@ -98,6 +100,7 @@ export function lookupSymbol(
   if (currentSymbols.has(symbol)) {
     const target = new URL(current);
     target.searchParams.set("s", symbol);
+    target.searchParams.delete("p");
     return target.href;
   }
   if (currentImports.has(symbol)) {

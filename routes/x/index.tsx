@@ -124,7 +124,7 @@ export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
         <div class="section-x-inset-lg mt-16 mb-24 space-y-15">
           <div class="flex items-start gap-14">
             <div class="space-y-4 w-full">
-              <h1 class="font-bold text-3xl text-black">
+              <h1 class="font-bold text-3xl text-default">
                 Deno Third Party Modules
               </h1>
 
@@ -174,7 +174,7 @@ export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
                 </p>
               </div>
 
-              <div class="space-x-2">
+              <div class="space-x-3">
                 <a href="/add_module" class="button-primary">
                   <Icons.Plus />
                   <span>Publish a module</span>
@@ -241,7 +241,7 @@ export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
           </div>
 
           <div id="Q&A" class="space-y-6">
-            <h1 class="font-bold text-3xl text-black">Q&A</h1>
+            <h1 class="font-bold text-3xl text-default">Q&A</h1>
 
             <div class="space-y-3">
               <h2 class="text-xl leading-6 font-semibold">
