@@ -3,6 +3,8 @@
 export const CDN_ENDPOINT = "https://cdn.deno.land/";
 const API_ENDPOINT = "https://api.deno.land/";
 
+import { patterns } from "apiland/consts.ts";
+
 export interface CommonProps<T> {
   isStd: boolean;
   /** module name */
@@ -550,10 +552,21 @@ export interface DocPageFile extends PageBase {
   kind: "file";
 }
 
-interface ModInfoDependency {
-  kind: "denoland" | "esm" | "github" | "skypack" | "other";
-  package: string;
-  version: string;
+type DependencySources = keyof typeof patterns | "other";
+
+/** Stored as kind `module_dependency` in datastore. */
+export interface ModuleDependency {
+  /** The source for the module. If the module is not a recognized source, then
+   * `"other"` is used and the `pkg` field will be set to the "raw" URL. */
+  src: DependencySources;
+  /** The optional "organization" associated with dependency. For example with
+   * npm or GitHub style dependency, the organization that the `pkg` belongs
+   * to. */
+  org?: string;
+  /** The package or module name associated with the dependency. */
+  pkg: string;
+  /** The optional version or tag associated with the dependency. */
+  ver?: string;
 }
 
 export interface ModInfoPage {
@@ -564,7 +577,7 @@ export interface ModInfoPage {
   versions: string[];
   latest_version: string;
   /** An array of dependencies identified for the module. */
-  dependencies?: ModInfoDependency[];
+  dependencies?: ModuleDependency[];
   /** The default module for the module. */
   defaultModule?: ModuleEntry;
   /** A flag that indicates if the default module has a default export. */
