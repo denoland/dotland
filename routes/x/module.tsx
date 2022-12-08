@@ -505,6 +505,7 @@ function ModuleView({
           url,
           data: {
             ...data.data,
+            // deno-lint-ignore no-explicit-any
             file: data.file as any,
           },
           repositoryURL,
