@@ -11,8 +11,8 @@ import VersionSelect from "@/islands/VersionSelect.tsx";
 import {
   getCanonicalUrl,
   getLibDocPageDescription,
-  type LibDocPage,
 } from "@/util/registry_utils.ts";
+import type { LibDocPage } from "$apiland_types";
 import { ErrorMessage } from "@/components/ErrorMessage.tsx";
 import { LibraryDocPanel } from "$doc_components/doc/library_doc_panel.tsx";
 import { LibraryDoc } from "$doc_components/doc/library_doc.tsx";

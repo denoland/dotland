@@ -4,12 +4,17 @@ import { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
 import twas from "$twas";
 import { emojify } from "$emoji";
 import { accepts } from "$oak_commons";
+import type {
+  DocPage,
+  DocPageIndex,
+  DocPageModule,
+  DocPageSymbol,
+  InfoPage,
+  ModInfoPage,
+  SourcePage,
+} from "$apiland_types";
 import { setSymbols } from "@/util/doc_utils.ts";
 import {
-  type DocPage,
-  type DocPageIndex,
-  type DocPageModule,
-  type DocPageSymbol,
   extractAltLineNumberReference,
   fetchSource,
   getCanonicalUrl,
@@ -20,9 +25,7 @@ import {
   getRepositoryURL,
   getSourceURL,
   getVersionList,
-  type InfoPage,
-  type ModInfoPage,
-  type SourcePage,
+  type RawFile,
 } from "@/util/registry_utils.ts";
 import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
@@ -51,8 +54,8 @@ type Params = {
 
 type Data =
   | { data: DocPage; view: "doc" }
-  | { data: SourcePage; view: "source" }
-  | { data: InfoPage; view: "info" };
+  | { data: SourcePage; view: "source"; file?: RawFile | Error }
+  | { data: InfoPage; view: "info"; readmeFile?: string };
 type MaybeData =
   | Data
   | null;
@@ -214,10 +217,12 @@ export const handler: Handlers<PageData> = {
       return Response.redirect(url, 302);
     }
 
-    if (data.data.kind === "modinfo" && data.data.readme) {
-      data.data.readmeFile = await getReadme(name, version, data.data.readme);
+    if (
+      data.view === "info" && data.data.kind === "modinfo" && data.data.readme
+    ) {
+      data.readmeFile = await getReadme(name, version, data.data.readme);
     } else if (data.view === "source" && data.data.kind === "file") {
-      data.data.file = await getRawFile(
+      data.file = await getRawFile(
         name,
         version,
         path ? `/${path}` : "",
@@ -351,7 +356,7 @@ function TopPanel({
   url: URL;
 } & Data) {
   const hasPageBase = data.kind !== "invalid-version" &&
-    data.kind !== "no-versions";
+    data.kind !== "no-versions" && data.kind !== "redirect";
 
   const popularityTag = hasPageBase
     ? data.tags?.find((tag) => tag.kind === "popularity")
@@ -381,7 +386,8 @@ function TopPanel({
               search={url.searchParams}
             />
 
-            {data.kind !== "no-versions" && data.description &&
+            {data.kind !== "no-versions" && data.kind !== "redirect" &&
+              data.description &&
               (
                 <div
                   class="text-sm lg:truncate"
@@ -408,7 +414,7 @@ function TopPanel({
                 )}
               </div>
             )}
-            {data.kind !== "no-versions" && (
+            {data.kind !== "no-versions" && data.kind !== "redirect" && (
               <VersionSelect
                 versions={Object.fromEntries(
                   data.versions.map((
@@ -468,6 +474,8 @@ function ModuleView({
         </ErrorMessage>
       </div>
     );
+  } else if (data.data.kind === "redirect") {
+    throw "Unexpected Apiland Redirect: " + data.data.path;
   }
 
   const repositoryURL = getRepositoryURL(
@@ -478,7 +486,14 @@ function ModuleView({
 
   if (data.view === "info") {
     searchView(userToken, "modules", data.data.module);
-    return <InfoView version={version!} data={data.data} name={name} />;
+    return (
+      <InfoView
+        version={version!}
+        data={data.data}
+        readmeFile={data.readmeFile}
+        name={name}
+      />
+    );
   } else if (data.view === "source") {
     return (
       <SourceView
@@ -488,7 +503,11 @@ function ModuleView({
           version,
           path,
           url,
-          data: data.data,
+          data: {
+            ...data.data,
+            // deno-lint-ignore no-explicit-any
+            file: data.file as any,
+          },
           repositoryURL,
         }}
       />
@@ -588,10 +607,11 @@ function Breadcrumbs({
 }
 
 function InfoView(
-  { name, data, version }: {
+  { name, data, version, readmeFile }: {
     name: string;
     version: string;
     data: ModInfoPage;
+    readmeFile?: string;
   },
 ) {
   data.description &&= emojify(data.description);
@@ -738,12 +758,12 @@ function InfoView(
       }
     >
       <div class="p-6 rounded-xl border border-border">
-        {data.readmeFile
+        {readmeFile
           ? (
             <Markdown
               source={name === "std"
-                ? data.readmeFile
-                : data.readmeFile.replace(/\$STD_VERSION/g, version)}
+                ? readmeFile
+                : readmeFile.replace(/\$STD_VERSION/g, version)}
               baseURL={getSourceURL(name, version, "/")}
             />
           )
