@@ -11,8 +11,8 @@ import type {
   DocPageSymbol,
   InfoPage,
   ModInfoPage,
-  SourcePage,
   ModuleDependency,
+  SourcePage,
 } from "$apiland_types";
 import { setSymbols } from "@/util/doc_utils.ts";
 import {
