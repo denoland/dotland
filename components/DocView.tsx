@@ -6,11 +6,11 @@ import { ModuleDoc } from "$doc_components/doc/module_doc.tsx";
 import { ModuleIndex } from "$doc_components/doc/module_index.tsx";
 import { ModuleIndexPanel } from "$doc_components/doc/module_index_panel.tsx";
 import { SymbolDoc } from "$doc_components/doc/symbol_doc.tsx";
-import {
+import type {
   DocPageIndex,
   DocPageModule,
   DocPageSymbol,
-} from "@/util/registry_utils.ts";
+} from "$apiland_types";
 import { SidePanelPage } from "./SidePanelPage.tsx";
 
 export function DocView({
