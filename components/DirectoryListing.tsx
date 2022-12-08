@@ -1,9 +1,7 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-import {
-  getModulePath,
-  type SourcePageDirEntry,
-} from "@/util/registry_utils.ts";
+import { getModulePath } from "@/util/registry_utils.ts";
+import type { SourcePageDirEntry } from "$apiland_types";
 import * as Icons from "./Icons.tsx";
 
 export function DirectoryListing(props: {
