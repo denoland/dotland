@@ -4,6 +4,7 @@ import { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
 import twas from "$twas";
 import { emojify } from "$emoji";
 import { accepts } from "$oak_commons";
+import { moduleDependencyToURLAndDisplay } from "$apiland/util.ts";
 import type {
   DocPage,
   DocPageIndex,
@@ -11,6 +12,7 @@ import type {
   DocPageSymbol,
   InfoPage,
   ModInfoPage,
+  ModuleDependency,
   SourcePage,
 } from "$apiland_types";
 import { setSymbols } from "@/util/doc_utils.ts";
@@ -647,6 +649,18 @@ function InfoView(
     );
   }
 
+  const dependencies: Record<string, ModuleDependency[]> = {};
+
+  if (data.dependencies) {
+    for (const dependency of data.dependencies) {
+      if (!dependencies[dependency.src]) {
+        dependencies[dependency.src] = [];
+      }
+
+      dependencies[dependency.src].push(dependency);
+    }
+  }
+
   return (
     <SidePanelPage
       sidepanel={
@@ -727,6 +741,37 @@ function InfoView(
               {twas(new Date(data.uploaded_at))}
             </div>
           </div>
+
+          {Object.keys(dependencies).length !== 0 && (
+            <div class="space-y-2">
+              <div class="text-gray-400  text-sm leading-4">
+                Dependencies
+              </div>
+              {Object.entries(dependencies).sort(([kindA], [kindB]) =>
+                kindA.localeCompare(kindB)
+              ).map(([kind, dependencies]) => (
+                <div>
+                  <>
+                    <div class="font-medium">{kind}</div>
+                    <div class="children:(block max-w-full mr-2 link truncate)">
+                      {dependencies.sort((depA, depB) =>
+                        depA.pkg.localeCompare(depB.pkg)
+                      ).map((dep) => {
+                        const [url, name] = moduleDependencyToURLAndDisplay(
+                          dep,
+                        );
+                        if (url) {
+                          return <a title={name} href={url}>{name}</a>;
+                        } else {
+                          return <span title={name}>{name}</span>;
+                        }
+                      })}
+                    </div>
+                  </>
+                </div>
+              ))}
+            </div>
+          )}
 
           <div>
             <div class="text-gray-400 font-medium text-sm leading-4">
