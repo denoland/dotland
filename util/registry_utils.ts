@@ -1,6 +1,6 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-import type { DocNode } from "$deno_doc/types.d.ts";
+import type { DocNode } from "deno_doc/types";
 import type { LibDocPage, ModuleEntry } from "$apiland_types";
 
 export const CDN_ENDPOINT = "https://cdn.deno.land/";
