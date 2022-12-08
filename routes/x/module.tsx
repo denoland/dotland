@@ -648,7 +648,7 @@ function InfoView(
     );
   }
 
-  let dependencies: Record<string, ModuleDependency[]> = {};
+  const dependencies: Record<string, ModuleDependency[]> = {};
 
   if (data.dependencies) {
     for (const dependency of data.dependencies) {
@@ -659,8 +659,6 @@ function InfoView(
       dependencies[dependency.src].push(dependency);
     }
   }
-
-  console.log(dependencies);
 
   return (
     <SidePanelPage
