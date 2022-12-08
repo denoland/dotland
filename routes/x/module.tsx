@@ -752,7 +752,7 @@ function InfoView(
                 <div>
                   <>
                     <div class="font-medium">{kind}</div>
-                    <div class="children:(inline-block max-w-full mr-2 link truncate)">
+                    <div class="children:(block max-w-full mr-2 link truncate)">
                       {dependencies.sort((depA, depB) =>
                         depA.pkg.localeCompare(depB.pkg)
                       ).map((dep) => {
