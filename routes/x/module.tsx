@@ -4,6 +4,7 @@ import { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
 import twas from "$twas";
 import { emojify } from "$emoji";
 import { accepts } from "$oak_commons";
+import { moduleDependencyToURLAndDisplay } from "$apiland/util.ts";
 import type {
   DocPage,
   DocPageIndex,
@@ -756,7 +757,9 @@ function InfoView(
                       {dependencies.sort((depA, depB) =>
                         depA.pkg.localeCompare(depB.pkg)
                       ).map((dep) => {
-                        const [url, name] = generateURL(dep);
+                        const [url, name] = moduleDependencyToURLAndDisplay(
+                          dep,
+                        );
                         if (url) {
                           return <a title={name} href={url}>{name}</a>;
                         } else {
@@ -817,110 +820,6 @@ function InfoView(
       </div>
     </SidePanelPage>
   );
-}
-
-function generateURL(
-  dep: ModuleDependency,
-): [name: string | undefined, url: string] {
-  switch (dep.src) {
-    case "std": {
-      const ver = dep.ver ? `@${dep.ver}` : "";
-      return [`/std${ver}`, `std${ver}`];
-    }
-    case "deno.land/x": {
-      const ver = dep.ver ? `@${dep.ver}` : "";
-      return [`/x/${dep.pkg}${ver}`, `${dep.pkg}${ver}`];
-    }
-    case "cdn.deno.land": {
-      return [
-        `https://cdn.deno.land${dep.pkg}/versions/${dep.ver!}/raw`,
-        `${dep.pkg}@${dep.ver!}`,
-      ];
-    }
-
-    // npm
-    case "esm.sh": {
-      const path = `${dep.org ? `${dep.org}/` : ""}${dep.pkg}${
-        dep.ver ? `@${dep.ver}` : ""
-      }`;
-      return [`https://esm.sh/${path}`, path];
-    }
-    case "unpkg.com": {
-      const path = `${dep.org ? `${dep.org}/` : ""}${dep.pkg}${
-        dep.ver ? `@${dep.ver}` : ""
-      }`;
-      return [`https://unpkg.com/${path}`, path];
-    }
-
-    // Too many different cases without enough information to reconstruct,
-    // so we don't link and use a common style for naming
-    case "jsdeliver.net":
-    case "skypack.dev":
-    case "jspm.dev": {
-      const path = `${dep.org ? `${dep.org}/` : ""}${dep.pkg}${
-        dep.ver ? `@${dep.ver}` : ""
-      }`;
-      return [undefined, path];
-    }
-
-    // github
-    case "gist.github.com": {
-      const url = `https://gist.github.com/${dep.org!}/${dep.pkg}`;
-      return [url, `${dep.org!}/${dep.pkg}`];
-    }
-    case "github.com": {
-      const url = `https://github.com/${dep.org!}/${dep.pkg}/tree/${dep.ver!}`;
-      return [url, `${dep.org!}/${dep.pkg}/${dep.ver!}`];
-    }
-    case "ghuc.cc": {
-      const path = `${dep.org!}/${dep.pkg}${dep.ver ? `@${dep.ver}` : ""}`;
-      return [`https://ghuc.cc/${path}`, path];
-    }
-    case "pax.deno.dev": {
-      const path = `${dep.org!}/${dep.pkg}${dep.ver ? `@${dep.ver}` : ""}`;
-      return [`https://pax.deno.dev/${path}`, path];
-    }
-    case "lib.deno.dev": {
-      const ver = dep.ver ? `@${dep.ver}` : "";
-      return [`https://lib.deno.dev/${dep.pkg}${ver}`, `${dep.pkg}${ver}`];
-    }
-    case "ghc.deno.dev": {
-      const path = `${dep.org!}/${dep.pkg}${dep.ver ? `@${dep.ver}` : ""}`;
-      return [`https://ghc.deno.dev/${path}`, path];
-    }
-    case "denopkg.com": {
-      const path = `${dep.org ? `${dep.org}/` : ""}${dep.pkg}${
-        dep.ver ? `@${dep.ver}` : ""
-      }`;
-      return [`https://denopkg.com/${path}`, path];
-    }
-
-    // others
-    case "denolib.com": {
-      const path = `${dep.org ? `${dep.org}/` : ""}${dep.pkg}${
-        dep.ver ? `@${dep.ver}` : ""
-      }`;
-      return [`https://denolib.com/${path}`, path];
-    }
-    case "crux.land": {
-      const path = `${dep.pkg}@${dep.ver!}`;
-      return [`https://crux.land/${path}`, path];
-    }
-    case "nest.land": {
-      const path = `${dep.pkg}@${dep.ver}`;
-      return [`https://x.nest.land/${path}`, path];
-    }
-    case "googleapis": {
-      const path = `${dep.pkg}:${dep.ver!}`;
-      return [`https://googleapis.deno.dev/v1/${path}`, path];
-    }
-    case "aws-api": {
-      const path = `${dep.ver!}/services/${dep.pkg}`;
-      return [`https://aws-api.deno.dev/${path}`, path];
-    }
-    case "other":
-      return [dep.pkg, dep.pkg];
-  }
 }
 
 export const config: RouteConfig = {
