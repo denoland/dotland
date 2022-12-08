@@ -741,33 +741,6 @@ function InfoView(
             </div>
           </div>
 
-          <div>
-            <div class="text-gray-400 font-medium text-sm leading-4">
-              Versions
-            </div>
-            <ol class="border border-gray-200 rounded-lg list-none overflow-y-scroll max-h-80">
-              {data.versions.map((listVersion) => (
-                <li class="odd:(bg-ultralight rounded-md)">
-                  <a
-                    class={`flex px-5 py-2 link ${
-                      listVersion === version
-                        ? "text-primary font-bold"
-                        : "text-default font-normal"
-                    }`}
-                    href={getModulePath(name, listVersion)}
-                  >
-                    <span class="block w-full truncate">{listVersion}</span>
-                    {listVersion === data.latest_version && (
-                      <div class="tag-label bg-[#056CF025] text-tag-blue">
-                        Latest
-                      </div>
-                    )}
-                  </a>
-                </li>
-              ))}
-            </ol>
-          </div>
-
           {Object.keys(dependencies).length !== 0 && (
             <div class="space-y-2">
               <div class="text-gray-400  text-sm leading-4">
@@ -796,6 +769,33 @@ function InfoView(
               ))}
             </div>
           )}
+
+          <div>
+            <div class="text-gray-400 font-medium text-sm leading-4">
+              Versions
+            </div>
+            <ol class="border border-gray-200 rounded-lg list-none overflow-y-scroll max-h-80">
+              {data.versions.map((listVersion) => (
+                <li class="odd:(bg-ultralight rounded-md)">
+                  <a
+                    class={`flex px-5 py-2 link ${
+                      listVersion === version
+                        ? "text-primary font-bold"
+                        : "text-default font-normal"
+                    }`}
+                    href={getModulePath(name, listVersion)}
+                  >
+                    <span class="block w-full truncate">{listVersion}</span>
+                    {listVersion === data.latest_version && (
+                      <div class="tag-label bg-[#056CF025] text-tag-blue">
+                        Latest
+                      </div>
+                    )}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       }
     >
