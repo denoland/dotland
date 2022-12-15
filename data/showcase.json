@@ -159,6 +159,18 @@
     "link": "https://favi.deno.dev/"
   },
   {
+    "image": "/images/showcase/denoblog.png",
+    "title": "Deno markdown blog",
+    "link": "https://deno-markdown-blog.deno.dev/",
+    "github": "officialrajdeepsingh/deno-markdown-blog"
+  },
+  {
+    "image": "/images/showcase/minimalist-blog.png",
+    "title": "Minimalist blog template",
+    "link": "https://minimalist-blog-x8c5ngg3kzt0.deno.dev/",
+    "github": "officialrajdeepsingh/Minimalist-blog"
+  },
+  {
     "image": "/images/showcase/wricord.png",
     "title": "Wricord",
     "link": "https://wricord.com"
