@@ -2,11 +2,8 @@
 
 import { FileDisplay } from "./FileDisplay.tsx";
 import { DirectoryListing } from "./DirectoryListing.tsx";
-import {
-  CommonProps,
-  SourcePageDir,
-  SourcePageFile,
-} from "@/util/registry_utils.ts";
+import type { CommonProps, RawFile } from "@/util/registry_utils.ts";
+import type { SourcePageDir, SourcePageFile } from "$apiland_types";
 
 export function SourceView({
   isStd,
@@ -18,7 +15,10 @@ export function SourceView({
   repositoryURL,
 
   data,
-}: CommonProps<SourcePageFile | SourcePageDir>) {
+}: CommonProps<
+  | (SourcePageFile & { file: RawFile | Error })
+  | (SourcePageDir & { file: undefined })
+>) {
   return (
     <main class="mt-7 mb-16 lg:mt-12 space-y-12 section-x-inset-xl w-full overflow-auto focus:outline-none">
       {data.kind === "dir"

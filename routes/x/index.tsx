@@ -8,8 +8,7 @@ import { Handlers } from "$fresh/server.ts";
 import { emojify } from "$emoji";
 import algoliasearch from "$algolia";
 import { createFetchRequester } from "$algolia/requester-fetch";
-
-import { PopularityModuleTag } from "@/util/registry_utils.ts";
+import type { PopularityModuleTag } from "$apiland_types";
 
 import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";

@@ -1,7 +1,7 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
 import * as Icons from "./Icons.tsx";
-import type { PopularityModuleTag } from "@/util/registry_utils.ts";
+import type { PopularityModuleTag } from "$apiland_types";
 
 export function PopularityTag(
   props: { children: PopularityModuleTag["value"]; class?: string },

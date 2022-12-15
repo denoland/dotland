@@ -1,6 +1,6 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-import { type SymbolIndexItem } from "./registry_utils.ts";
+import type { SymbolIndexItem } from "$apiland_types";
 
 interface GlobalSymbolItem {
   name: string;

@@ -271,7 +271,7 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
 
       {IS_BROWSER && (
         <dialog
-          class="bg-[#00000033] inset-0 fixed z-10 p-0 m-0 w-full h-screen"
+          class="bg-[#00000033] inset-0 fixed z-50 p-0 m-0 w-full h-screen"
           ref={dialog}
           onClick={() => setShowModal(false)}
           open={showModal}
