@@ -1,5 +1,8 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
+import type { DocNode } from "deno_doc/types";
+import type { LibDocPage, ModuleEntry } from "$apiland_types";
+
 export const CDN_ENDPOINT = "https://cdn.deno.land/";
 const API_ENDPOINT = "https://api.deno.land/";
 
@@ -267,7 +270,7 @@ export function fileTypeFromURL(filename: string): string | undefined {
     return "markdown";
   } else if (f.match(`\\.org$`)) {
     return "org";
-  } else if (f.match(/\.(png|jpe?g|svg)/)) {
+  } else if (f.match(/\.(png|jpe?g|svg|webm|webp|avif)/)) {
     return "image";
   }
 }
@@ -383,228 +386,58 @@ export function extractLinkUrl(
   return undefined;
 }
 
-import type { DocNode, DocNodeKind, JsDoc } from "$deno_doc/types.d.ts";
-
-/** Stored as kind `module_entry` in datastore. */
-export interface ModuleEntry {
-  path: string;
-  type: "file" | "dir";
-  size: number;
-  /** For `"dir"` entries, indicates if there is a _default_ module that should
-   * be used within the directory. */
-  default?: string;
-  /** For `"dir"` entries, an array of child sub-directory paths. */
-  dirs?: string[];
-  /** For `"file`" entries, indicates if the entry id can be queried for doc
-   * nodes. */
-  docable?: boolean;
-  /** For `"dir"` entries, an array of docable child paths that are not
-   * "ignored". */
-  index?: string[];
+function docAsDescription(doc: string) {
+  return doc.split("\n\n")[0].slice(0, 199);
 }
 
-/** Defines a tag related to how popular a module is. */
-export interface PopularityModuleTag {
-  kind: "popularity";
-  value: "top_1_percent" | "top_5_percent" | "top_10_percent";
+/** Search parameters which are considered part of a canonical URL.  */
+const CANONICAL_SEARCH_PARAMS = ["s", "source", "doc", "unstable"];
+
+export function getCanonicalUrl(url: URL, latestVersion: string) {
+  const canonical = new URL(url);
+  canonical.hostname = "deno.land";
+  canonical.port = "";
+  canonical.protocol = "https:";
+  canonical.pathname = canonical.pathname.replace(
+    /@[^/]+/,
+    `@${latestVersion}`,
+  );
+  canonical.search = "";
+  for (const param of CANONICAL_SEARCH_PARAMS) {
+    if (url.searchParams.has(param)) {
+      canonical.searchParams.set(param, url.searchParams.get(param)!);
+    }
+  }
+  return canonical;
 }
 
-/** Defines a "tag" which can be displayed when rending a module or part of a
- * module. */
-export type ModuleTag = PopularityModuleTag;
-
-export interface PageBase {
-  module: string;
-  description?: string;
-  version: string;
-  path: string;
-  versions: string[];
-  latest_version: string;
-  uploaded_at: string;
-  upload_options: {
-    type: string;
-    repository: string;
-    ref: string;
-    subdir?: string;
-  };
-  /** @deprecated */
-  star_count?: number;
-  tags?: ModuleTag[];
+/** For a LibDocPage, attempt to extract a description to be used with the
+ * content meta for the page. */
+export function getLibDocPageDescription(data: LibDocPage): string | undefined {
+  if (data.kind === "librarySymbol") {
+    for (const docNode of data.docNodes) {
+      if (docNode.jsDoc?.doc) {
+        return docAsDescription(docNode.jsDoc.doc);
+      }
+    }
+  }
 }
 
-interface DocPageDirItem {
-  kind: "dir";
-  path: string;
+export function getDocAsDescription(
+  docNodes: DocNode[],
+  modDoc = false,
+): string | undefined {
+  for (const docNode of docNodes) {
+    if (modDoc) {
+      if (docNode.kind === "moduleDoc") {
+        if (docNode.jsDoc.doc) {
+          return docAsDescription(docNode.jsDoc.doc);
+        } else {
+          return;
+        }
+      }
+    } else if (docNode.jsDoc?.doc) {
+      return docAsDescription(docNode.jsDoc.doc);
+    }
+  }
 }
-
-interface SymbolItem {
-  name: string;
-  kind: DocNodeKind;
-  category?: string;
-  jsDoc?: JsDoc | null;
-}
-
-export interface IndexItem {
-  kind: "dir" | "module" | "file";
-  path: string;
-  size: number;
-  ignored: boolean;
-  doc?: string;
-}
-
-interface DocPageModuleItem {
-  kind: "module";
-  path: string;
-  items: SymbolItem[];
-  default?: true;
-}
-
-export type DocPageNavItem = DocPageModuleItem | DocPageDirItem;
-
-export interface DocPageSymbol extends PageBase {
-  kind: "symbol";
-  nav: DocPageNavItem[];
-  name: string;
-  docNodes: DocNode[];
-}
-
-export interface DocPageModule extends PageBase {
-  kind: "module";
-  nav: DocPageNavItem[];
-  docNodes: DocNode[];
-}
-
-export interface DocPageIndex extends PageBase {
-  kind: "index";
-  items: IndexItem[];
-}
-
-export interface DocPageFile extends PageBase {
-  kind: "file";
-}
-
-interface ModInfoDependency {
-  kind: "denoland" | "esm" | "github" | "skypack" | "other";
-  package: string;
-  version: string;
-}
-
-export interface ModInfoPage {
-  kind: "modinfo";
-  module: string;
-  description?: string;
-  version: string;
-  versions: string[];
-  latest_version: string;
-  /** An array of dependencies identified for the module. */
-  dependencies?: ModInfoDependency[];
-  /** The default module for the module. */
-  defaultModule?: ModuleEntry;
-  /** A flag that indicates if the default module has a default export. */
-  defaultExport?: boolean;
-  /** The file entry for the module that is a README to be rendered. */
-  readme?: ModuleEntry;
-  readmeFile?: string;
-  /** The file entry for the module that has a detectable deno configuration. */
-  config?: ModuleEntry;
-  /** The file entry for an import map specified within the detectable config
-   * file. */
-  importMap?: ModuleEntry;
-  uploaded_at: string;
-  upload_options: {
-    type: string;
-    repository: string;
-    ref: string;
-    subdir?: string;
-  };
-  tags?: ModuleTag[];
-}
-
-export type InfoPage = ModInfoPage | PageInvalidVersion | PageNoVersions;
-
-export interface PagePathNotFound extends PageBase {
-  kind: "notfound";
-}
-
-export interface PageNoVersions {
-  kind: "no-versions";
-  module: string;
-}
-
-export interface PageInvalidVersion {
-  kind: "invalid-version";
-  module: string;
-  description?: string;
-  versions: string[];
-  latest_version: string;
-}
-
-/** Stores as kind `doc_page` in datastore. */
-export type DocPage =
-  | DocPageSymbol
-  | DocPageModule
-  | DocPageIndex
-  | DocPageFile
-  | PageInvalidVersion
-  | PageNoVersions
-  | PagePathNotFound;
-
-interface DocPageLibraryBase {
-  kind: string;
-  name: string;
-  version: string;
-  versions: string[];
-  latest_version: string;
-}
-
-export interface DocPageLibrary extends DocPageLibraryBase {
-  kind: "library";
-  items: SymbolItem[];
-}
-
-export interface DocPageLibrarySymbol extends DocPageLibraryBase {
-  kind: "librarySymbol";
-  items: SymbolItem[];
-  name: string;
-  docNodes: DocNode[];
-}
-
-export interface DocPageLibraryInvalidVersion {
-  kind: "libraryInvalidVersion";
-  name: string;
-  versions: string[];
-  latest_version: string;
-}
-
-export type LibDocPage =
-  | DocPageLibrary
-  | DocPageLibrarySymbol
-  | DocPageLibraryInvalidVersion;
-
-export interface SourcePageFile extends PageBase {
-  kind: "file";
-  size: number;
-  /** Indicates if the page is docable or not. */
-  docable?: boolean;
-  file: RawFile | Error;
-}
-
-export interface SourcePageDirEntry {
-  path: string;
-  kind: "file" | "dir";
-  size: number;
-  /** Indicates if the page is docable or not. */
-  docable?: boolean;
-}
-
-export interface SourcePageDir extends PageBase {
-  kind: "dir";
-  entries: SourcePageDirEntry[];
-}
-
-export type SourcePage =
-  | SourcePageFile
-  | SourcePageDir
-  | PageInvalidVersion
-  | PageNoVersions
-  | PagePathNotFound;

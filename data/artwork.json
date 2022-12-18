@@ -338,5 +338,33 @@
       "web": "https://jasongardner.dev"
     },
     "license": "MIT"
+  },
+  {
+    "date": "2022-09-06",
+    "image": "/images/artwork/deno_inVR_withUsasaki.png",
+    "title": "Kawaii Deno in VR",
+    "alt": "Deno is kawaii with Usasaki-san",
+    "artist": {
+      "name": "Lina Tsukusu",
+      "profile_image": "https://avatars.githubusercontent.com/u/45692394",
+      "github": "neverclear86",
+      "twitter": "TsukusuLina",
+      "web": "https://www.youtube.com/channel/UCxkOLgdNumvVIQqn5ps_bJA"
+    },
+    "license": "MIT"
+  },
+  {
+    "date": "2022-10-29",
+    "image": "/images/artwork/ogdeno.png",
+    "title": "OG Deno",
+    "alt": "OG Deno from the GamDeno Cyber",
+    "artist": {
+      "name": "Andrew Weisbeck",
+      "profile_image": "https://avatars.githubusercontent.com/u/87398426",
+      "github": "GeauxWeisbeck4",
+      "twitter": "GeauxWeisbeck4",
+      "web": "https://geauxweisbeck4.deno.dev"
+    },
+    "license": "MIT"
   }
 ]

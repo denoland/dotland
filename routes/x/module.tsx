@@ -1,33 +1,36 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h } from "preact";
 import { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
-import { Head } from "$fresh/runtime.ts";
-import { tw } from "@twind";
 import twas from "$twas";
 import { emojify } from "$emoji";
 import { accepts } from "$oak_commons";
+import { moduleDependencyToURLAndDisplay } from "$apiland/util.ts";
+import type {
+  DocPage,
+  DocPageIndex,
+  DocPageModule,
+  DocPageSymbol,
+  InfoPage,
+  ModInfoPage,
+  ModuleDependency,
+  SourcePage,
+} from "$apiland_types";
+import { setSymbols } from "@/util/doc_utils.ts";
 import {
-  type DocPage,
-  type DocPageIndex,
-  type DocPageModule,
-  type DocPageSymbol,
   extractAltLineNumberReference,
   fetchSource,
+  getCanonicalUrl,
+  getDocAsDescription,
   getModulePath,
   getRawFile,
   getReadme,
   getRepositoryURL,
   getSourceURL,
   getVersionList,
-  type InfoPage,
-  type ModInfoPage,
-  type SourcePage,
+  type RawFile,
 } from "@/util/registry_utils.ts";
+import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
-import { Footer } from "@/components/Footer.tsx";
 import { ErrorMessage } from "@/components/ErrorMessage.tsx";
 import { DocView } from "@/components/DocView.tsx";
 import * as Icons from "@/components/Icons.tsx";
@@ -41,6 +44,8 @@ import {
   searchView,
   ssrSearchClick,
 } from "@/util/search_insights_utils.ts";
+import { Footer } from "$doc_components/footer.tsx";
+import { processProperty } from "$doc_components/doc/utils.ts";
 
 type Views = "doc" | "source" | "info";
 type Params = {
@@ -51,14 +56,65 @@ type Params = {
 
 type Data =
   | { data: DocPage; view: "doc" }
-  | { data: SourcePage; view: "source" }
-  | { data: InfoPage; view: "info" };
+  | { data: SourcePage; view: "source"; file?: RawFile | Error }
+  | { data: InfoPage; view: "info"; readmeFile?: string };
 type MaybeData =
   | Data
   | null;
 
 interface PageData {
   data: MaybeData;
+}
+
+function getTitle(
+  module: string,
+  version: string | undefined,
+  data: MaybeData,
+): string {
+  if (!data) {
+    return "Third Party";
+  }
+  const title = [version ? `${module}@${version}` : module];
+  if (
+    data.view === "source" &&
+    (data.data.kind === "dir" || data.data.kind === "file")
+  ) {
+    title.unshift(data.data.path);
+  }
+  if (
+    data.view === "doc" &&
+    (data.data.kind === "module" || data.data.kind === "file" ||
+      data.data.kind === "index" || data.data.kind === "symbol")
+  ) {
+    title.unshift(data.data.path);
+    if (data.data.kind === "symbol") {
+      title.unshift(data.data.name);
+    }
+  }
+  return title.join(" | ");
+}
+
+function getDescription(data: MaybeData): string | undefined {
+  if (data) {
+    if (
+      (data.view === "info" && data.data.kind === "modinfo") ||
+      (data.view === "source" &&
+        (data.data.kind === "dir" || data.data.kind === "file")) ||
+      (data.view === "doc" &&
+        (data.data.kind === "index" || data.data.kind === "file"))
+    ) {
+      if (data.data.description) {
+        return emojify(data.data.description);
+      }
+    } else if (data.view === "doc") {
+      if (data.data.kind === "module") {
+        return getDocAsDescription(data.data.docNodes, true);
+      }
+      if (data.data.kind === "symbol") {
+        return getDocAsDescription(data.data.docNodes);
+      }
+    }
+  }
 }
 
 export const handler: Handlers<PageData> = {
@@ -71,7 +127,12 @@ export const handler: Handlers<PageData> = {
       return Response.redirect(url, 301);
     }
 
-    const isHTML = accepts(req, "application/*", "text/html") === "text/html";
+    // Deno CLI and bots both present with an `Accept: */*` header, where as
+    // browsers will prefer HTML. Because of this, we have to try to infer a bot
+    // from the UA in order to serve the HTML page.
+    const isHTML = accepts(req, "application/*", "text/html") === "text/html" ||
+      (req.headers.get("accept") === "*/*" &&
+        req.headers.get("user-agent")?.includes("bot"));
     if (!isHTML) return handlerRaw(req, params as Params);
 
     let view: Views;
@@ -98,6 +159,8 @@ export const handler: Handlers<PageData> = {
 
     const queryId = url.searchParams.get("qid");
     const position = url.searchParams.get("pos");
+    url.searchParams.delete("qid");
+    url.searchParams.delete("pos");
     if (queryId && position && remoteAddr.transport === "tcp") {
       ssrSearchClick(
         await getUserToken(req.headers, remoteAddr.hostname),
@@ -117,21 +180,12 @@ export const handler: Handlers<PageData> = {
       return render({ data: null });
     } else if (res.status === 302) { // implicit latest
       const latestVersion = res.headers.get("X-Deno-Latest-Version")!;
-      console.log(getModulePath(
+      url.pathname = getModulePath(
         name,
         latestVersion,
         path ? ("/" + path) : undefined,
-      ));
-      return Response.redirect(
-        new URL(
-          getModulePath(
-            name,
-            latestVersion,
-            path ? ("/" + path) : undefined,
-          ),
-          url,
-        ),
       );
+      return Response.redirect(url);
     } else if (res.status === 301) { // path is directory and there is an index module and its doc
       const newPath = res.headers.get("X-Deno-Module-Path")!;
       return new Response(undefined, {
@@ -165,10 +219,12 @@ export const handler: Handlers<PageData> = {
       return Response.redirect(url, 302);
     }
 
-    if (data.data.kind === "modinfo" && data.data.readme) {
-      data.data.readmeFile = await getReadme(name, version, data.data.readme);
+    if (
+      data.view === "info" && data.data.kind === "modinfo" && data.data.readme
+    ) {
+      data.readmeFile = await getReadme(name, version, data.data.readme);
     } else if (data.view === "source" && data.data.kind === "file") {
-      data.data.file = await getRawFile(
+      data.file = await getRawFile(
         name,
         version,
         path ? `/${path}` : "",
@@ -176,7 +232,12 @@ export const handler: Handlers<PageData> = {
       );
     }
 
-    return render!({ data });
+    await setSymbols(
+      (data.data.kind === "module" || data.data.kind === "symbol")
+        ? data.data.symbols
+        : undefined,
+    );
+    return render({ data });
   },
 };
 
@@ -231,18 +292,27 @@ export default function Registry(
   const path = maybePath ? "/" + maybePath : "";
   const isStd = name === "std";
 
+  let canonical: URL | undefined;
+  if (data && "latest_version" in data.data) {
+    canonical = getCanonicalUrl(url, data.data.latest_version);
+  }
+
   return (
     <>
-      <Head>
-        <title>{name + (version ? `@${version}` : "") + " | Deno"}</title>
-      </Head>
-      <div class={tw`bg-primary min-h-full`}>
+      <ContentMeta
+        title={getTitle(name, version, data)}
+        description={getDescription(data)}
+        canonical={canonical}
+        ogImage={isStd ? "std" : "modules"}
+        keywords={["deno", "third party", "module", name]}
+      />
+      <div class="min-h-full">
         <Header
           selected={name === "std" ? "Standard Library" : "Third Party Modules"}
         />
         {data === null
           ? (
-            <div class={tw`section-x-inset-xl pb-20 pt-10`}>
+            <div class="section-x-inset-xl pb-20 pt-10">
               <ErrorMessage title="404 - Not Found">
                 This {url.searchParams.has("s") ? "symbol" : "module"}{" "}
                 does not exist.
@@ -257,6 +327,7 @@ export default function Registry(
                   {...{
                     name,
                     path,
+                    url,
                     ...data,
                   }}
                 />
@@ -279,13 +350,15 @@ function TopPanel({
   path,
   data,
   view,
+  url,
 }: {
   name: string;
   version: string;
   path: string;
+  url: URL;
 } & Data) {
   const hasPageBase = data.kind !== "invalid-version" &&
-    data.kind !== "no-versions";
+    data.kind !== "no-versions" && data.kind !== "redirect";
 
   const popularityTag = hasPageBase
     ? data.tags?.find((tag) => tag.kind === "popularity")
@@ -296,40 +369,43 @@ function TopPanel({
     : (path === "" ? "?doc" : "");
 
   return (
-    <div class={tw`bg-ultralight border-b border-light-border`}>
-      <div class={tw`section-x-inset-xl py-5 flex items-center`}>
-        <div
-          class={tw`flex flex-col md:(flex-row items-center) justify-between w-full gap-4`}
-        >
-          <div class={tw`overflow-hidden`}>
+    <div class="bg-ultralight border-b border-grayDefault">
+      <div class="section-x-inset-xl py-5 flex items-center">
+        <div class="flex flex-col md:(flex-row items-center) justify-between w-full gap-4">
+          <div class="overflow-hidden">
+            <a
+              class="inline-flex items-center gap-1.5 font-medium text-xs text-gray-500 hover:text-default"
+              href={getModulePath(name, version)}
+            >
+              <Icons.ChevronLeft />
+              <span>Module</span>
+            </a>
             <Breadcrumbs
               name={name}
               version={version}
               path={path}
               view={view}
+              search={url.searchParams}
             />
 
-            {data.kind !== "no-versions" && data.description &&
+            {data.kind !== "no-versions" && data.kind !== "redirect" &&
+              data.description &&
               (
                 <div
-                  class={tw`text-sm lg:truncate`}
+                  class="text-sm lg:truncate"
                   title={emojify(data.description)}
                 >
                   {emojify(data.description)}
                 </div>
               )}
           </div>
-          <div
-            class={tw`flex flex-col items-stretch gap-4 w-full md:w-auto lg:(flex-row justify-between) flex-shrink-0`}
-          >
+          <div class="flex flex-col items-stretch gap-4 w-full md:w-auto lg:(flex-row justify-between) flex-shrink-0">
             {hasPageBase && (
-              <div
-                class={tw`flex flex-row justify-between md:justify-center items-center gap-4 border border-border rounded-md bg-white py-2 px-5`}
-              >
-                <div class={tw`flex items-center whitespace-nowrap gap-2`}>
+              <div class="flex flex-row justify-between md:justify-center items-center gap-4 border border-border rounded-md bg-white py-2 px-5">
+                <div class="flex items-center whitespace-nowrap gap-2">
                   <Icons.GitHub class="h-4 w-auto text-gray-700 flex-none" />
                   <a
-                    class={tw`link`}
+                    class="link"
                     href={`https://github.com/${data.upload_options.repository}`}
                   >
                     {data.upload_options.repository}
@@ -340,7 +416,7 @@ function TopPanel({
                 )}
               </div>
             )}
-            {data.kind !== "no-versions" && (
+            {data.kind !== "no-versions" && data.kind !== "redirect" && (
               <VersionSelect
                 versions={Object.fromEntries(
                   data.versions.map((
@@ -376,7 +452,7 @@ function ModuleView({
 }) {
   if (data.data.kind === "no-versions") {
     return (
-      <div class={tw`section-x-inset-xl py-12`}>
+      <div class="section-x-inset-xl py-12">
         <ErrorMessage title="No uploaded versions">
           This module name has been reserved for a repository, but no versions
           have been uploaded yet. Modules that do not upload a version within 30
@@ -386,7 +462,7 @@ function ModuleView({
     );
   } else if (data.data.kind === "invalid-version") {
     return (
-      <div class={tw`section-x-inset-xl py-12`}>
+      <div class="section-x-inset-xl py-12">
         <ErrorMessage title="404 - Not Found">
           This version does not exist for this module.
         </ErrorMessage>
@@ -394,12 +470,14 @@ function ModuleView({
     );
   } else if (data.data.kind === "notfound") {
     return (
-      <div class={tw`section-x-inset-xl py-12`}>
+      <div class="section-x-inset-xl py-12">
         <ErrorMessage title="404 - Not Found">
           This file or directory could not be found.
         </ErrorMessage>
       </div>
     );
+  } else if (data.data.kind === "redirect") {
+    throw "Unexpected Apiland Redirect: " + data.data.path;
   }
 
   const repositoryURL = getRepositoryURL(
@@ -410,7 +488,14 @@ function ModuleView({
 
   if (data.view === "info") {
     searchView(userToken, "modules", data.data.module);
-    return <InfoView version={version!} data={data.data} name={name} />;
+    return (
+      <InfoView
+        version={version!}
+        data={data.data}
+        readmeFile={data.readmeFile}
+        name={name}
+      />
+    );
   } else if (data.view === "source") {
     return (
       <SourceView
@@ -420,7 +505,11 @@ function ModuleView({
           version,
           path,
           url,
-          data: data.data,
+          data: {
+            ...data.data,
+            // deno-lint-ignore no-explicit-any
+            file: data.file as any,
+          },
           repositoryURL,
         }}
       />
@@ -447,11 +536,13 @@ function Breadcrumbs({
   path,
   version,
   view,
+  search,
 }: {
   name: string;
   version: string;
   path: string;
   view: Views;
+  search?: URLSearchParams;
 }) {
   const segments = path.split("/").splice(1);
   segments.unshift(name);
@@ -460,7 +551,11 @@ function Breadcrumbs({
   }
 
   let seg = "";
-  const out: [segment: string, url: string][] = [];
+  const out: [
+    segment: string,
+    url: string,
+    separator: "/" | "#" | "." | ">",
+  ][] = [];
   for (const segment of segments) {
     if (segment === "") {
       continue;
@@ -470,24 +565,43 @@ function Breadcrumbs({
       seg += "/" + segment;
     }
 
-    out.push([segment, seg]);
+    out.push([segment, seg, "/"]);
+  }
+
+  const symbol = search?.get("s");
+  if (symbol) {
+    const parts = symbol.split(".");
+    let segParts = "";
+    for (let i = 0; i < parts.length; i++) {
+      segParts += (i === 0 ? "" : ".") + parts[i];
+      seg += (i === 0 ? "?s=" : "") + segParts;
+
+      out.push([parts[i], seg, i === 0 ? ">" : "."]);
+    }
+
+    const property = search?.get("p");
+    if (property) {
+      const [processedProperty, isPrototype] = processProperty(property);
+      seg += `&p=${property}`;
+      out.push([processedProperty, seg, isPrototype ? "#" : "."]);
+    }
   }
 
   return (
-    <p class={tw`text-xl leading-6 font-bold text-gray-400 truncate`}>
-      {out.map(([seg, url], i) => {
+    <p class="text-xl leading-6 font-bold text-gray-400 space-x-1 children:inline-block">
+      {out.map(([seg, url, separator], i) => {
         if (view === "source") {
           url += "?source";
         } else if (view === "doc" && seg === name) {
           url += "?doc";
         }
         return (
-          <Fragment key={i}>
-            {i !== 0 && "/"}
-            <a href={url} class={tw`link`} title={seg}>
+          <>
+            {i !== 0 && <span>{separator}</span>}
+            <a href={url} class="link" title={seg}>
               {seg}
             </a>
-          </Fragment>
+          </>
         );
       })}
     </p>
@@ -495,10 +609,11 @@ function Breadcrumbs({
 }
 
 function InfoView(
-  { name, data, version }: {
+  { name, data, version, readmeFile }: {
     name: string;
     version: string;
     data: ModInfoPage;
+    readmeFile?: string;
   },
 ) {
   data.description &&= emojify(data.description);
@@ -514,9 +629,9 @@ function InfoView(
 
   if (data.upload_options.repository.split("/")[0] == "denoland") {
     attributes.push(
-      <div class={tw`flex items-center gap-1.5`}>
+      <div class="flex items-center gap-1.5">
         <Icons.CheckmarkVerified class="h-4 w-auto" />
-        <span class={tw`text-gray-600 font-medium leading-none`}>
+        <span class="text-gray-600 font-medium leading-none">
           Official Deno project
         </span>
       </div>,
@@ -525,51 +640,59 @@ function InfoView(
 
   if (data.config) {
     attributes.push(
-      <div class={tw`flex items-center gap-1.5`}>
-        <Icons.Logo />
-        <span class={tw`text-gray-600 font-medium leading-none`}>
+      <div class="flex items-center gap-1.5">
+        <Icons.Logo class="w-4 h-4" />
+        <span class="text-gray-600 font-medium leading-none">
           Includes Deno configuration
         </span>
       </div>,
     );
   }
 
+  const dependencies: Record<string, ModuleDependency[]> = {};
+
+  if (data.dependencies) {
+    for (const dependency of data.dependencies) {
+      if (!dependencies[dependency.src]) {
+        dependencies[dependency.src] = [];
+      }
+
+      dependencies[dependency.src].push(dependency);
+    }
+  }
+
   return (
     <SidePanelPage
       sidepanel={
-        <div class={tw`space-y-6 children:space-y-2`}>
-          <div class={tw`space-y-4!`}>
-            <div class={tw`space-y-2`}>
-              <div class={tw`flex items-center gap-2.5 w-full`}>
+        <div class="space-y-6 children:space-y-2">
+          <div class="space-y-4!">
+            <div class="space-y-2">
+              <div class="flex items-center gap-2.5 w-full">
                 <Breadcrumbs
                   name={name}
                   version={version}
                   path="/"
                   view="info"
                 />
-                <div
-                  class={tw`tag-label bg-default-15 text-gray-600 font-semibold!`}
-                >
+                <div class="tag-label bg-[#23232326] text-gray-600 font-semibold!">
                   {version}
                 </div>
               </div>
 
               {data.description &&
                 (
-                  <div class={tw`text-sm`} title={data.description}>
+                  <div class="text-sm" title={data.description}>
                     {data.description}
                   </div>
                 )}
             </div>
 
-            <div
-              class={tw`space-y-3 children:(flex items-center gap-1.5 leading-none font-medium)`}
-            >
+            <div class="space-y-3 children:(flex items-center gap-1.5 leading-none font-medium)">
               <span>
                 <Icons.Docs />
                 <a
                   href={getModulePath(name, version) + "?doc"}
-                  class={tw`link`}
+                  class="link"
                 >
                   View Documentation
                 </a>
@@ -578,7 +701,7 @@ function InfoView(
                 <Icons.Source />
                 <a
                   href={getModulePath(name, version) + "?source"}
-                  class={tw`link`}
+                  class="link"
                 >
                   View Source
                 </a>
@@ -587,8 +710,8 @@ function InfoView(
           </div>
 
           {attributes.length !== 0 && (
-            <div class={tw`space-y-2.5!`}>
-              <div class={tw`text-gray-400 font-medium text-sm leading-4`}>
+            <div class="space-y-2.5!">
+              <div class="text-gray-400 font-medium text-sm leading-4">
                 Attributes
               </div>
               {attributes}
@@ -596,13 +719,13 @@ function InfoView(
           )}
 
           <div>
-            <div class={tw`text-gray-400 font-medium text-sm leading-4`}>
+            <div class="text-gray-400 font-medium text-sm leading-4">
               Repository
             </div>
-            <div class={tw`flex items-center gap-1.5 whitespace-nowrap`}>
+            <div class="flex items-center gap-1.5 whitespace-nowrap">
               <Icons.GitHub class="h-4 w-auto text-gray-700 flex-none" />
               <a
-                class={tw`link truncate`}
+                class="link truncate"
                 href={`https://github.com/${data.upload_options.repository}`}
               >
                 {data.upload_options.repository}
@@ -611,7 +734,7 @@ function InfoView(
           </div>
 
           <div>
-            <div class={tw`text-gray-400 font-medium text-sm leading-4`}>
+            <div class="text-gray-400 font-medium text-sm leading-4">
               Current version released
             </div>
             <div title={data.uploaded_at}>
@@ -619,24 +742,55 @@ function InfoView(
             </div>
           </div>
 
+          {Object.keys(dependencies).length !== 0 && (
+            <div class="space-y-2">
+              <div class="text-gray-400  text-sm leading-4">
+                Dependencies
+              </div>
+              {Object.entries(dependencies).sort(([kindA], [kindB]) =>
+                kindA.localeCompare(kindB)
+              ).map(([kind, dependencies]) => (
+                <div>
+                  <>
+                    <div class="font-medium">{kind}</div>
+                    <div class="children:(block max-w-full mr-2 link truncate)">
+                      {dependencies.sort((depA, depB) =>
+                        depA.pkg.localeCompare(depB.pkg)
+                      ).map((dep) => {
+                        const [url, name] = moduleDependencyToURLAndDisplay(
+                          dep,
+                        );
+                        if (url) {
+                          return <a title={name} href={url}>{name}</a>;
+                        } else {
+                          return <span title={name}>{name}</span>;
+                        }
+                      })}
+                    </div>
+                  </>
+                </div>
+              ))}
+            </div>
+          )}
+
           <div>
-            <div class={tw`text-gray-400 font-medium text-sm leading-4`}>
+            <div class="text-gray-400 font-medium text-sm leading-4">
               Versions
             </div>
-            <ol
-              class={tw`border border-secondary rounded-lg list-none overflow-y-scroll max-h-80`}
-            >
+            <ol class="border border-gray-200 rounded-lg list-none overflow-y-scroll max-h-80">
               {data.versions.map((listVersion) => (
-                <li class={tw`odd:(bg-ultralight rounded-md)`}>
+                <li class="odd:(bg-ultralight rounded-md)">
                   <a
-                    class={tw`flex px-5 py-2 link ${
-                      listVersion === version ? "font-bold" : "font-medium"
+                    class={`flex px-5 py-2 link ${
+                      listVersion === version
+                        ? "text-primary font-bold"
+                        : "text-default font-normal"
                     }`}
                     href={getModulePath(name, listVersion)}
                   >
-                    <span class={tw`block w-full truncate`}>{listVersion}</span>
+                    <span class="block w-full truncate">{listVersion}</span>
                     {listVersion === data.latest_version && (
-                      <div class={tw`tag-label bg-tag-blue-bg text-tag-blue`}>
+                      <div class="tag-label bg-[#056CF025] text-tag-blue">
                         Latest
                       </div>
                     )}
@@ -648,20 +802,18 @@ function InfoView(
         </div>
       }
     >
-      <div class={tw`p-6 rounded-xl border border-border`}>
-        {data.readmeFile
+      <div class="p-6 rounded-xl border border-border">
+        {readmeFile
           ? (
             <Markdown
               source={name === "std"
-                ? data.readmeFile
-                : data.readmeFile.replace(/\$STD_VERSION/g, version)}
+                ? readmeFile
+                : readmeFile.replace(/\$STD_VERSION/g, version)}
               baseURL={getSourceURL(name, version, "/")}
             />
           )
           : (
-            <div
-              class={tw`flex items-center justify-center italic text-gray-400 -m-2`}
-            >
+            <div class="flex items-center justify-center italic text-gray-400 -m-2">
               No readme found.
             </div>
           )}

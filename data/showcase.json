@@ -147,5 +147,42 @@
     "image": "/images/showcase/optimem.png",
     "title": "Optimem App",
     "link": "https://optimem.org/"
+  },
+  {
+    "image": "https://raw.githubusercontent.com/mohan-chinnappan-n/cli-dx/master/deno/img/deno-sf-land-1.png",
+    "title": "Salesforce Query App",
+    "link": "https://mohanc-sf.deno.dev/"
+  },
+  {
+    "image": "/images/showcase/fast-favicon.png",
+    "title": "fast favicon",
+    "link": "https://favi.deno.dev/"
+  },
+  {
+    "image": "/images/showcase/denoblog.png",
+    "title": "Deno markdown blog",
+    "link": "https://deno-markdown-blog.deno.dev/",
+    "github": "officialrajdeepsingh/deno-markdown-blog"
+  },
+  {
+    "image": "/images/showcase/minimalist-blog.png",
+    "title": "Minimalist blog template",
+    "link": "https://minimalist-blog-x8c5ngg3kzt0.deno.dev/",
+    "github": "officialrajdeepsingh/Minimalist-blog"
+  },
+  {
+    "image": "/images/showcase/wricord.png",
+    "title": "Wricord",
+    "link": "https://wricord.com"
+  },
+  {
+    "image": "/images/showcase/balello.png",
+    "title": "Balello",
+    "link": "https://balello.com"
+  },
+  {
+    "image": "/images/showcase/neolace.png",
+    "title": "Neolace",
+    "link": "https://www.neolace.com/"
   }
 ]
