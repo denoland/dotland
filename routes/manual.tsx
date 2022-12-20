@@ -274,7 +274,9 @@ export const handler: Handlers<Data> = {
       getTableOfContents(version),
       fetch(sourceURL)
         .then(async (res) => {
-          if (res.status !== 200) {
+          if (res.status === 404 || res.status === 403) {
+            return "# 404 - Not Found\nWhoops, the page does not seem to exist.";
+          } else if (res.status !== 200) {
             await res.body?.cancel();
             throw Error(
               `Got an error (${res.status}) while getting the documentation file (${sourceURL}).`,
@@ -284,7 +286,7 @@ export const handler: Handlers<Data> = {
         })
         .catch((e) => {
           console.error("Failed to fetch content:", e);
-          return "# 404 - Not Found\nWhoops, the page does not seem to exist.";
+          return "# 500 - Internal Server Error\nSomething went wrong.";
         }),
     ]);
 

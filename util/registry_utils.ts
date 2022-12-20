@@ -308,8 +308,9 @@ export async function fetchSource(
         });
       }
       if (!resp.ok) {
-        await resp.body?.cancel();
-        throw new TypeError("non 2xx status code returned");
+        throw new TypeError(`non 2xx status code returned: ${resp.status}`, {
+          cause: await resp.text(),
+        });
       }
 
       const headers = new Headers(resp.headers);
