@@ -629,10 +629,10 @@ function InfoView(
 
   if (data.upload_options.repository.split("/")[0] == "denoland") {
     attributes.push(
-      <div class="flex items-center gap-1.5">
+      <div class="flex items-center gap-1.5 text-gray-600">
         <Icons.CheckmarkVerified class="h-4 w-auto" />
-        <span class="text-primary font-medium leading-none">
-          By Deno Team
+        <span class="font-medium leading-none">
+          Official Deno project
         </span>
       </div>,
     );
