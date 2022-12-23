@@ -588,7 +588,7 @@ function Breadcrumbs({
   }
 
   return (
-    <p class="text-xl leading-6 font-bold text-gray-400 space-x-1 children:inline-block">
+    <p class="text-xl leading-6 font-bold text-gray-400 space-x-1 truncate">
       {out.map(([seg, url, separator], i) => {
         if (view === "source") {
           url += "?source";
