@@ -12,7 +12,6 @@ import { tw } from "twind";
 import { css } from "twind/css";
 import { useEffect, useRef, useState } from "preact/hooks";
 import * as Icons from "@/components/Icons.tsx";
-import { colors, docNodeKindMap } from "@/components/symbol_kind.tsx";
 import { islandSearchClick } from "@/util/search_insights_utils.ts";
 
 // Lazy load a <dialog> polyfill.
@@ -24,29 +23,15 @@ if (IS_BROWSER && window.HTMLDialogElement === "undefined") {
 }
 
 const MODULE_INDEX = "modules";
-const SYMBOL_INDEX = "doc_nodes";
 const MANUAL_INDEX = "manual";
 
 const kinds = [
   "All",
   "Manual",
   "Modules",
-  "Symbols",
 ] as const;
 
 type SearchKinds = typeof kinds[number];
-
-const symbolKinds = {
-  "Namespaces": "namespace",
-  "Classes": "class",
-  "Enums": "enum",
-  "Variables": "variable",
-  "Functions": "function",
-  "Interfaces": "interface",
-  "Type Aliases": "typeAlias",
-} as const;
-
-type SymbolKinds = keyof typeof symbolKinds;
 
 interface ManualSearchResult {
   docPath: string;
@@ -67,37 +52,9 @@ interface SearchResults<ResultItem> {
   page: number;
 }
 
-/** Represents the search record being returned for a symbol. */
-interface SymbolItem {
-  name: string;
-  sourceId: string;
-  path?: string;
-  doc?: string;
-  category?: string;
-  tags?: string[];
-  source: number;
-  popularity_score: number;
-  kind:
-    | "namespace"
-    | "enum"
-    | "variable"
-    | "function"
-    | "interface"
-    | "typeAlias"
-    | "moduleDoc"
-    | "import";
-  version: string;
-  location: {
-    filename: string;
-    line: number;
-    col: number;
-  };
-}
-
 interface Results {
   manual?: SearchResults<ManualSearchResult>;
   modules?: SearchResults<ModuleSearchResult>;
-  symbols?: SearchResults<SymbolItem>;
 }
 
 function toSearchResults<ResultItem>(
@@ -121,8 +78,8 @@ const client = algoliasearch("QFPCRZC6WX", "2ed789b2981acd210267b27f03ab47da", {
   requester,
 });
 
-/** Search Deno documentation, symbols, or modules. */
-export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
+/** Search Deno documentation or modules. */
+export default function GlobalSearch() {
   const dialog = useRef<HTMLDialogElement>(null);
   const [showModal, setShowModal] = useState(false);
   const [input, setInput] = useState("");
@@ -131,17 +88,6 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
   const [kind, setKind] = useState<SearchKinds>("All");
   const [page, setPage] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(1);
-  const [symbolKindsToggle, setSymbolKindsToggle] = useState<
-    Record<SymbolKinds, boolean>
-  >({
-    "Namespaces": true,
-    "Classes": true,
-    "Enums": true,
-    "Variables": true,
-    "Functions": true,
-    "Interfaces": true,
-    "Type Aliases": true,
-  });
   const searchTimeoutId = useRef<number | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -187,22 +133,6 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
       });
     }
 
-    if (kind === "Symbols" || kind === "All") {
-      queries.push({
-        indexName: SYMBOL_INDEX,
-        query: input || "serve",
-        params: {
-          page: page,
-          hitsPerPage: kind === "All" ? 5 : 10,
-          clickAnalytics: true,
-          filters: Object.entries(symbolKindsToggle)
-            .filter(([_, v]) => kind === "Symbols" ? v : true)
-            .map(([k]) => "kind:" + symbolKinds[k as keyof typeof symbolKinds])
-            .join(" OR "),
-        },
-      });
-    }
-
     if (kind === "Modules" || kind === "All") {
       queries.push({
         indexName: MODULE_INDEX,
@@ -228,7 +158,6 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
         setTotalPages(results.find((res) => res.nbPages)?.nbPages ?? 1);
         setResults({
           manual: toSearchResults(results, MANUAL_INDEX),
-          symbols: toSearchResults(results, SYMBOL_INDEX),
           modules: toSearchResults(results, MODULE_INDEX),
         });
         setLoading(false);
@@ -236,7 +165,7 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
     );
 
     return () => cancelled = true;
-  }, [showModal, input, kind, symbolKindsToggle, page]);
+  }, [showModal, input, kind, page]);
 
   useEffect(() => {
     if (showModal) {
@@ -296,7 +225,7 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
                     type="text"
                     onInput={(e) => setInput(e.currentTarget.value)}
                     value={input}
-                    placeholder="Search manual, symbols and modules..."
+                    placeholder="Search manual and modules..."
                     autoFocus
                   />
                   {loading && <Icons.Spinner />}
@@ -371,26 +300,6 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
                         ))}
                       </Section>
                     )}
-                    {results.symbols && (
-                      <Section title="Symbols" isAll={kind === "All"}>
-                        {results.symbols && results.symbols.hits.length === 0 &&
-                          (
-                            <div class="text-gray-500 italic">
-                              Your search did not yield any results in the
-                              symbol index.
-                            </div>
-                          )}
-                        {results.symbols.hits.map((symbolItem, i) => (
-                          <SymbolResult
-                            queryID={results.symbols!.queryID}
-                            position={getPosition(results.symbols!, i)}
-                            denoVersion={denoVersion}
-                          >
-                            {symbolItem}
-                          </SymbolResult>
-                        ))}
-                      </Section>
-                    )}
                     <div class={tw`${kind === "All" ? "h-6" : "h-3.5"}`} />
                   </>
                 )
@@ -424,37 +333,6 @@ export default function GlobalSearch({ denoVersion }: { denoVersion: string }) {
                     <Icons.ChevronRight />
                   </button>
                 </div>
-
-                {kind === "Symbols" &&
-                  (
-                    <div class="space-x-3">
-                      {(Object.keys(
-                        symbolKinds,
-                      ) as (keyof typeof symbolKinds)[])
-                        .map(
-                          (symbolKind) => (
-                            <label class="whitespace-nowrap inline-block">
-                              <input
-                                type="checkbox"
-                                class="mr-1 not-checked:siblings:text-[#6C6E78]"
-                                onChange={() => {
-                                  setSymbolKindsToggle((prev) => {
-                                    return {
-                                      ...prev,
-                                      [symbolKind]: !prev[symbolKind],
-                                    };
-                                  });
-                                }}
-                                checked={symbolKindsToggle[symbolKind]}
-                              />
-                              <span class="text-sm leading-none">
-                                {symbolKind}
-                              </span>
-                            </label>
-                          ),
-                        )}
-                    </div>
-                  )}
               </div>
             )}
           </div>
@@ -528,108 +406,6 @@ function ManualResultTitle(props: { title: string[] }) {
     if (!isLast) parts.push(<span key={i + "separator"}>{" > "}</span>);
   }
   return <div class="space-x-1">{parts}</div>;
-}
-
-/** Given a symbol item, return an href that will link to that symbol. */
-function getSymbolItemHref(
-  { sourceId, name, version, path, tags }: SymbolItem,
-  denoVersion: string,
-): string {
-  if (sourceId.startsWith("lib/")) {
-    return tags && tags.includes("unstable")
-      ? `/api@${denoVersion}?unstable&s=${name}`
-      : `/api@${denoVersion}?s=${name}`;
-  } else if (sourceId === "mod/std") {
-    return `/std@${version}${path}${name ? `?s=${name}` : ""}`;
-  } else {
-    const mod = sourceId.slice(4);
-    return `/x/${mod}@${version}${path}${name ? `?s=${name}` : ""}`;
-  }
-}
-
-function Source(
-  { children: { sourceId, version, path } }: { children: SymbolItem },
-) {
-  if (sourceId.startsWith("lib/")) {
-    return (
-      <span class="italic text-sm text-gray-400 leading-6">
-        built-in to Deno
-      </span>
-    );
-  } else {
-    const mod = sourceId.slice(4);
-    return (
-      <span>
-        <span class="italic text-sm text-gray-400 leading-6">
-          from
-        </span>{" "}
-        {mod}@{version}
-        {path}
-      </span>
-    );
-  }
-}
-
-const tagColors = {
-  cyan: ["[#0CAFC619]", "[#0CAFC6]"],
-  gray: ["gray-100", "gray-400"],
-} as const;
-
-type TagColors = keyof typeof tagColors;
-
-function Tag(
-  { children, color }: { children: ComponentChildren; color: TagColors },
-) {
-  const [bg, text] = tagColors[color];
-  return (
-    <div
-      class={tw`bg-${bg} text-${text} py-1 px-2 inline-block rounded-full font-medium text-sm leading-none mr-2 font-sans`}
-    >
-      {children}
-    </div>
-  );
-}
-
-function SymbolResult(
-  { children: item, queryID, position, denoVersion }: {
-    children: SymbolItem & { objectID: string };
-    queryID?: string;
-    position?: number;
-    denoVersion: string;
-  },
-) {
-  const KindIcon = docNodeKindMap[item.kind];
-  const href = getSymbolItemHref(item, denoVersion);
-  const tagItems = item.tags?.map((tag) => (
-    <Tag color={tag.startsWith("allow") ? "cyan" : "gray"}>{tag}</Tag>
-  ));
-
-  return (
-    <a
-      href={href}
-      onClick={() =>
-        islandSearchClick(SYMBOL_INDEX, queryID, item.objectID, position)}
-    >
-      <KindIcon />
-      <div class="w-full">
-        <div class="flex flex-col py-1 md:(flex-row items-center justify-between gap-2)">
-          <div class="space-x-2">
-            <span class={tw`text-[${colors[item.kind][0]}]`}>
-              {item.kind.replace("A", " a")}
-            </span>
-            <span class="font-semibold">{item.name}</span>
-            <Source>{item}</Source>
-          </div>
-          {tagItems && tagItems.length && <div class="mr-3">{tagItems}</div>}
-        </div>
-        {item.doc && (
-          <div class="text-sm text-[#6C6E78]">
-            {item.doc.split("\n\n")[0]}
-          </div>
-        )}
-      </div>
-    </a>
-  );
 }
 
 function ModuleResult(
