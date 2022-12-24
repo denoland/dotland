@@ -5,7 +5,6 @@ import { css } from "twind/css";
 import type { JSX } from "preact";
 import * as Icons from "./Icons.tsx";
 import GlobalSearch from "@/islands/GlobalSearch.tsx";
-import versions from "@/versions.json" assert { type: "json" };
 
 interface HrefEntry {
   content: string;
@@ -187,7 +186,7 @@ export function Header({ selected, manual }: {
               })}
             </div>
 
-            <GlobalSearch denoVersion={versions.cli[0]} />
+            <GlobalSearch />
           </div>
         </nav>
       </div>
