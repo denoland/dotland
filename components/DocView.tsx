@@ -24,7 +24,7 @@ export function DocView({
   const replacer: [string, string][] = name === "std"
     ? [["$STD_VERSION", version]]
     : [];
-  replacer.push(["$GIT_TAG", version]);
+  replacer.push(["$MODULE_VERSION", version]);
 
   const baseUrl = new URL(url);
   baseUrl.pathname = getModulePath(name, version);

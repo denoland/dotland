@@ -809,7 +809,7 @@ function InfoView(
               source={(name === "std"
                 ? readmeFile
                 : readmeFile.replace(/\$STD_VERSION/g, version)).replace(
-                  /\$GIT_TAG/g,
+                  /\$MODULE_VERSION/g,
                   version,
                 )}
               baseURL={getSourceURL(name, version, "/")}

@@ -84,7 +84,7 @@ export function FileDisplay(props: {
                     source={(props.isStd
                       ? props.raw!
                       : props.raw!.replace(/\$STD_VERSION/g, props.version))
-                      .replace(/\$GIT_TAG/g, props.version)}
+                      .replace(/\$MODULE_VERSION/g, props.version)}
                   />
                 </div>
               );
