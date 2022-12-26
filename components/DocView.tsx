@@ -21,9 +21,11 @@ export function DocView({
 
   data,
 }: CommonProps<DocPageSymbol | DocPageModule | DocPageIndex>) {
-  const replacer: [string, string][] | undefined = name === "std"
+  const replacer: [string, string][] = name === "std"
     ? [["$STD_VERSION", version]]
-    : undefined;
+    : [];
+  replacer.push(["$MODULE_VERSION", version]);
+
   const baseUrl = new URL(url);
   baseUrl.pathname = getModulePath(name, version);
 

@@ -806,9 +806,12 @@ function InfoView(
         {readmeFile
           ? (
             <Markdown
-              source={name === "std"
+              source={(name === "std"
                 ? readmeFile
-                : readmeFile.replace(/\$STD_VERSION/g, version)}
+                : readmeFile.replace(/\$STD_VERSION/g, version)).replace(
+                  /\$MODULE_VERSION/g,
+                  version,
+                )}
               baseURL={getSourceURL(name, version, "/")}
             />
           )

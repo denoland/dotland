@@ -81,9 +81,10 @@ export function FileDisplay(props: {
               return (
                 <div class="p-6">
                   <Markdown
-                    source={props.isStd
+                    source={(props.isStd
                       ? props.raw!
-                      : props.raw!.replace(/\$STD_VERSION/g, props.version)}
+                      : props.raw!.replace(/\$STD_VERSION/g, props.version))
+                      .replace(/\$MODULE_VERSION/g, props.version)}
                   />
                 </div>
               );
