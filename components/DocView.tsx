@@ -52,7 +52,7 @@ export function DocView({
                 <ModuleIndex
                   url={baseUrl}
                   path={path || "/"}
-                  sourceUrl={url.href}
+                  sourceUrl={`${url.origin}${url.pathname}?source`}
                   replacers={replacer}
                 >
                   {data.items}
