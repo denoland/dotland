@@ -38,7 +38,7 @@ const entries: Array<HrefEntry | ChildrenEntry> = [
     children: [
       {
         href: "https://discord.gg/deno",
-        content: "Join our Discord",
+        content: "Discord",
         icon: Icons.Discord,
       },
       {
