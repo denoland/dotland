@@ -104,7 +104,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
               .replace(/(\[.+\]\((?!https?:).+)\.md(\))/g, "$1$2")
               .replaceAll("$STD_VERSION", stdVersion)
               .replaceAll("$CLI_VERSION", version)}
-            baseURL={sourceURL}
+            mediaBaseURL={sourceURL}
           />
 
           <div class="mt-14">

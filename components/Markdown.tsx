@@ -3,9 +3,17 @@
 import { render } from "$gfm";
 
 export function Markdown(
-  { source, baseURL }: { source: string; baseURL?: string },
+  { source, baseURL, mediaBaseURL }: {
+    source: string;
+    baseURL?: string;
+    mediaBaseURL?: string;
+  },
 ) {
-  const html = render(source, { allowIframes: false, baseUrl: baseURL });
+  const html = render(source, {
+    allowIframes: false,
+    baseUrl: baseURL,
+    mediaBaseUrl: mediaBaseURL,
+  });
   return (
     <div
       class="markdown-body"
