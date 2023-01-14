@@ -366,5 +366,20 @@
       "web": "https://geauxweisbeck4.deno.dev"
     },
     "license": "MIT"
+  },
+  {
+    "date": "2023-01-14",
+    "image": "/images/artwork/HypnoDeno.gif",
+    "title": "Hypno Deno",
+    "alt": "Hypnotic, spiraling Deno logo animation",
+    "artist": {
+      "name": "Jason J. Gardner",
+      "profile_image": "https://avatars.githubusercontent.com/u/1903667",
+      "github": "jasonjgardner",
+      "instagram": "jasonjgardner",
+      "twitter": "JasonGardner",
+      "web": "https://jasongardner.dev"
+    },
+    "license": "CC-BY-SA-4.0"
   }
 ]
