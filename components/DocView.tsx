@@ -28,6 +28,8 @@ export function DocView({
 
   const baseUrl = new URL(url);
   baseUrl.pathname = getModulePath(name, version);
+  baseUrl.searchParams.delete("doc");
+  baseUrl.searchParams.set("source", "");
 
   return (
     <SidePanelPage
@@ -52,7 +54,7 @@ export function DocView({
                 <ModuleIndex
                   url={baseUrl}
                   path={path || "/"}
-                  sourceUrl={`${url.origin}${url.pathname}?source`}
+                  sourceUrl={baseUrl.href}
                   replacers={replacer}
                 >
                   {data.items}
