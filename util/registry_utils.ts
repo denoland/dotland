@@ -1,4 +1,4 @@
-// Copyright 2022 the Deno authors. All rights reserved. MIT license.
+// Copyright 2022-2023 the Deno authors. All rights reserved. MIT license.
 
 import type { DocNode } from "deno_doc/types";
 import type { LibDocPage, ModuleEntry } from "$apiland_types";

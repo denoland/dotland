@@ -1,4 +1,4 @@
-// Copyright 2022 the Deno authors. All rights reserved. MIT license.
+// Copyright 2022-2023 the Deno authors. All rights reserved. MIT license.
 
 import $ from "https://deno.land/x/dax@0.7.0/mod.ts";
 

@@ -1,4 +1,4 @@
-// Copyright 2022 the Deno authors. All rights reserved. MIT license.
+// Copyright 2022-2023 the Deno authors. All rights reserved. MIT license.
 
 const INSIGHTS_ENDPOINT = "https://insights.algolia.io/1/events";
 export const DOTLAND_EVENTS_ENDPOINT = "/search/events";

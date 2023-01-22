@@ -1,4 +1,4 @@
-// Copyright 2022 the Deno authors. All rights reserved. MIT license.
+// Copyright 2022-2023 the Deno authors. All rights reserved. MIT license.
 
 import { getModulePath } from "@/util/registry_utils.ts";
 import type { SourcePageDirEntry } from "$apiland_types";

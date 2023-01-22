@@ -1,4 +1,4 @@
-// Copyright 2022 the Deno authors. All rights reserved. MIT license.
+// Copyright 2022-2023 the Deno authors. All rights reserved. MIT license.
 // Taken from https://github.com/FormidableLabs/prism-react-renderer/blob/master/src/utils/normalizeTokens.js
 
 import { assertEquals } from "$std/testing/asserts.ts";
