@@ -1,4 +1,4 @@
-// Copyright 2022 the Deno authors. All rights reserved. MIT license.
+// Copyright 2022-2023 the Deno authors. All rights reserved. MIT license.
 
 // Most icons are normalized to 14x14.
 
