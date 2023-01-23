@@ -28,6 +28,7 @@ import {
   getSourceURL,
   getVersionList,
   type RawFile,
+  shouldTranspile,
 } from "@/util/registry_utils.ts";
 import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
@@ -276,7 +277,13 @@ async function handlerRaw(
     });
   }
 
-  return fetchSource(name, version, path);
+  return fetchSource(
+    name,
+    version,
+    path,
+    shouldTranspile(path, req.headers),
+    req.url,
+  );
 }
 
 export default function Registry(

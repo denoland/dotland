@@ -2,6 +2,7 @@
 
 import type { DocNode } from "deno_doc/types";
 import type { LibDocPage, ModuleEntry } from "$apiland_types";
+import { emit } from "$emit";
 
 export const CDN_ENDPOINT = "https://cdn.deno.land/";
 const API_ENDPOINT = "https://api.deno.land/";
@@ -289,6 +290,8 @@ export async function fetchSource(
   name: string,
   version: string,
   path: string,
+  shouldTranspile = false,
+  requestUrl?: string,
 ): Promise<Response> {
   const url = getSourceURL(
     name,
@@ -315,6 +318,22 @@ export async function fetchSource(
 
       const headers = new Headers(resp.headers);
 
+      if (shouldTranspile) {
+        const source = await resp.text();
+        const transpiled = await transpile(
+          source,
+          requestUrl,
+          Object.fromEntries(resp.headers),
+        );
+        headers.set("content-type", "application/javascript");
+        headers.set("Access-Control-Allow-Origin", "*");
+
+        return new Response(transpiled, {
+          headers,
+          status: resp.status,
+        });
+      }
+
       if (
         path.endsWith(".jsx") &&
         !headers.get("content-type")?.includes("javascript")
@@ -340,6 +359,60 @@ export async function fetchSource(
     }
   }
   throw lastErr;
+}
+
+/** Returns whether TypeScript should be transpiled to JavaScript. */
+export function shouldTranspile(path: string, requestHeaders: Headers) {
+  console.log(path, requestHeaders);
+  return !path.endsWith(".js") &&
+    (requestHeaders.get("accept")?.includes("javascript") ||
+      requestHeaders.get("accept") === "*/*");
+}
+
+/**
+ * Transpile TypeScript to JavaScript.
+ * @param content TypeScript code.
+ * @param targetSpecifire URL of the source code. Used in source maps.
+ * @param headers Used to determine file type.
+ * @returns JavaScript code.
+ */
+export async function transpile(
+  content: string,
+  targetSpecifire = "file:///src",
+  headers: Record<string, string>,
+) {
+  const result = await emit(new URL(targetSpecifire), {
+    load(specifier) {
+      if (specifier === targetSpecifire) {
+        return Promise.resolve({
+          kind: "module",
+          specifier,
+          content,
+          headers,
+        });
+      }
+      return Promise.resolve({
+        kind: "module",
+        specifier,
+        content: "",
+        headers: { "content-type": "application/javascript; charset=utf-8" },
+      });
+    },
+  });
+  return result[targetSpecifire];
+}
+
+/**
+ * The expensive Wasm instantiation of the https://deno.land/x/emit library
+ * is deferred until the first transpile by default. Calling this function will
+ * force Wasm instantiation, making subsequent `transpile()` calls faster.
+ */
+export async function tryInstantiateEmitLibWasm() {
+  try {
+    await transpile("", undefined, {});
+  } catch {
+    // noop
+  }
 }
 
 const ALT_LINENUMBER_MATCHER = /(.*):(\d+):\d+$/;

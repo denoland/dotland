@@ -10,6 +10,7 @@ import { ServerContext } from "$fresh/server.ts";
 import { serve } from "$std/http/server.ts";
 import { lookupSymbol } from "./util/doc_utils.ts";
 import { withLog } from "./util/ga_utils.ts";
+import { tryInstantiateEmitLibWasm } from "./util/registry_utils.ts";
 import { setup } from "$doc_components/services.ts";
 
 import twindPlugin from "$fresh/plugins/twind.ts";
@@ -52,5 +53,9 @@ const ctx = await ServerContext.fromManifest(manifest, {
 });
 
 const handler = withLog(ctx.handler());
+
+// Initialize Wasm in the emit module in the background
+// so as not to interfere with server processing.
+tryInstantiateEmitLibWasm();
 
 serve(handler);
