@@ -41,7 +41,7 @@ export default function API(
         ogImage="api"
         keywords={["deno", "api", "built-in", "typescript", "javascript"]}
       />
-      <Header selected="API" manual />
+      <Header manual />
 
       {data.kind === "libraryInvalidVersion"
         ? (
