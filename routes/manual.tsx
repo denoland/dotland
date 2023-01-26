@@ -64,7 +64,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
           "typescript",
         ]}
       />
-      <Header selected="Manual" manual />
+      <Header manual />
 
       <SidePanelPage
         sidepanel={

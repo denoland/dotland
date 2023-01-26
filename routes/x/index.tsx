@@ -112,7 +112,7 @@ export default function ThirdPartyRegistryList({ data }: PageProps<Data>) {
         keywords={["deno", "third party", "module", "registry"]}
       />
       <div>
-        <Header selected="Third Party Modules" />
+        <Header />
 
         <img
           src="/images/module_banner.png"
