@@ -171,6 +171,14 @@ Deno.test("transpile", async () => {
       'import "https://esm.sh/foo";\nimport "npm:foo"',
     );
   }
+  {
+    // JSX Pragma
+    const transpiled = await transpile(
+      " /** @jsx h */ <div></div>",
+      "https://deno.land/path/to/file.tsx",
+    );
+    assertStringIncludes(transpiled, 'h("div", null);');
+  }
 });
 
 Deno.test("extractLinkUrl", () => {
