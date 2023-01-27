@@ -291,7 +291,7 @@ export async function fetchSource(
   version: string,
   path: string,
   shouldTranspile = false,
-  requestUrl?: string,
+  requestUrl: string,
 ): Promise<Response> {
   const url = getSourceURL(
     name,
@@ -323,7 +323,6 @@ export async function fetchSource(
         const transpiled = await transpile(
           source,
           requestUrl,
-          Object.fromEntries(resp.headers),
         );
         headers.set("content-type", "application/javascript");
         headers.set("Access-Control-Allow-Origin", "*");
@@ -363,8 +362,10 @@ export async function fetchSource(
 
 /** Returns whether TypeScript should be transpiled to JavaScript. */
 export function shouldTranspile(path: string, requestHeaders: Headers) {
-  console.log(path, requestHeaders);
-  return !path.endsWith(".js") &&
+  return (path.endsWith(".ts") || path.endsWith(".mts") ||
+    path.endsWith(".jsx") || path.endsWith(".tsx")) &&
+    !requestHeaders.get("user-agent")?.includes("Deno/") &&
+    !requestHeaders.get("accept")?.includes("application/typescript") &&
     (requestHeaders.get("accept")?.includes("javascript") ||
       requestHeaders.get("accept") === "*/*");
 }
@@ -378,8 +379,7 @@ export function shouldTranspile(path: string, requestHeaders: Headers) {
  */
 export async function transpile(
   content: string,
-  targetSpecifire = "file:///src",
-  headers: Record<string, string>,
+  targetSpecifire: string,
 ) {
   const result = await emit(new URL(targetSpecifire), {
     load(specifier) {
@@ -388,7 +388,7 @@ export async function transpile(
           kind: "module",
           specifier,
           content,
-          headers,
+          headers: {},
         });
       }
       return Promise.resolve({
@@ -409,7 +409,7 @@ export async function transpile(
  */
 export async function tryInstantiateEmitLibWasm() {
   try {
-    await transpile("", undefined, {});
+    await transpile("", "file:///src.ts");
   } catch {
     // noop
   }

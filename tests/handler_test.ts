@@ -56,7 +56,11 @@ const handleRequest = (req: Request) =>
 /** This is taken directly from a recent version of Chromium */
 const BROWSER_ACCEPT =
   "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9";
+const BROWSER_JS_ACCEPT = "*/*";
 const DENO_CLI_ACCEPT = "*/*";
+const BROWSER_USER_AGENT =
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36";
+const DENO_USER_AGENT = "Deno/1.29.4";
 
 Deno.test({
   name: "/ responds with html",
@@ -125,10 +129,29 @@ Deno.test({
   async fn() {
     const res = await handleRequest(
       new Request("https://deno.land/std@0.127.0/version.ts", {
-        headers: { Accept: DENO_CLI_ACCEPT },
+        headers: { Accept: DENO_CLI_ACCEPT, "User-Agent": DENO_USER_AGENT },
       }),
     );
     assert(res.headers.get("Content-Type")?.includes("application/typescript"));
+    assertEquals(res.headers.get("Access-Control-Allow-Origin"), "*");
+    const text = await res.text();
+    assertStringIncludes(text, "/** Version of the Deno standard modules");
+  },
+});
+
+Deno.test({
+  name:
+    "/std@0.127.0/version.ts with Accept: '*/*' and browser's User-Agent Accept responds with transpiled javascript",
+  async fn() {
+    const res = await handleRequest(
+      new Request("https://deno.land/std@0.127.0/version.ts", {
+        headers: {
+          Accept: BROWSER_JS_ACCEPT,
+          "User-Agent": BROWSER_USER_AGENT,
+        },
+      }),
+    );
+    assert(res.headers.get("Content-Type")?.includes("application/javascript"));
     assertEquals(res.headers.get("Access-Control-Allow-Origin"), "*");
     const text = await res.text();
     assertStringIncludes(text, "/** Version of the Deno standard modules");

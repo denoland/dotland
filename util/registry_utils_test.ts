@@ -5,8 +5,16 @@ import {
   fileTypeFromURL,
   getSourceURL,
   getVersionList,
+  shouldTranspile,
+  transpile,
+  tryInstantiateEmitLibWasm,
 } from "./registry_utils.ts";
-import { assert, assertEquals } from "$std/testing/asserts.ts";
+import {
+  assert,
+  assertEquals,
+  assertFalse,
+  assertStringIncludes,
+} from "$std/testing/asserts.ts";
 
 Deno.test("source url", () => {
   assertEquals(
@@ -59,6 +67,109 @@ Deno.test("fileTypeFromURL", () => {
   ];
   for (const [name, expectedType] of tests) {
     assertEquals(fileTypeFromURL(name), expectedType);
+  }
+});
+
+Deno.test("shouldTranspile", () => {
+  const DENO_USER_AGENT = "Deno/1.29.4";
+
+  // don't transpile js file
+  assertFalse(shouldTranspile(
+    "https://deno.land/x/path/to/file.js",
+    new Headers({ Accept: "*/*" }),
+  ));
+  assertFalse(shouldTranspile(
+    "https://deno.land/x/path/to/file.mjs",
+    new Headers({ Accept: "*/*" }),
+  ));
+
+  // don't transpile unknown extension
+  assertFalse(shouldTranspile(
+    "https://deno.land/x/path/to/file.foo",
+    new Headers({ Accept: "*/*" }),
+  ));
+
+  // don't transpile if Deno's User-Agent
+  assertFalse(shouldTranspile(
+    "https://deno.land/x/path/to/file.ts",
+    new Headers({ "User-Agent": DENO_USER_AGENT, Accept: "*/*" }),
+  ));
+
+  // don't transpile if `Accept: application/typescript`
+  assertFalse(shouldTranspile(
+    "https://deno.land/x/path/to/file.ts",
+    new Headers({ Accept: "application/typescript" }),
+  ));
+
+  // transpile if `Accept: application/javascript`
+  assert(shouldTranspile(
+    "https://deno.land/x/path/to/file.ts",
+    new Headers({ Accept: "application/javascript" }),
+  ));
+
+  // transpile if `Accept: */*`
+  assert(shouldTranspile(
+    "https://deno.land/x/path/to/file.ts",
+    new Headers({ Accept: "*/*" }),
+  ));
+
+  // don't transpile if unknown Accept header
+  assertFalse(shouldTranspile(
+    "https://deno.land/x/path/to/file.ts",
+    new Headers({ Accept: "foo/bar" }),
+  ));
+});
+
+Deno.test("tryInstantiateEmitLibWasm", async () => {
+  // Check if no errors occur
+  console.time("tryInstantiateEmitLibWasm");
+  await tryInstantiateEmitLibWasm();
+  console.timeEnd("tryInstantiateEmitLibWasm");
+});
+
+Deno.test("transpile", async () => {
+  {
+    // ts file
+    const transpiled = await transpile(
+      "export const a: string = 1;",
+      "https://deno.land/path/to/file.ts",
+    );
+    assertStringIncludes(transpiled, "export const a = 1;");
+  }
+  {
+    // mts file
+    const transpiled = await transpile(
+      "export function foo(arg: Foo) {}",
+      "https://deno.land/path/to/file.mts",
+    );
+    assertStringIncludes(transpiled, "export function foo(arg) {}");
+  }
+  {
+    // jsx file
+    const transpiled = await transpile(
+      "<div></div>",
+      "https://deno.land/path/to/file.jsx",
+    );
+    assertStringIncludes(transpiled, 'React.createElement("div", null);');
+  }
+  {
+    // tsx file
+    const transpiled = await transpile(
+      "<div></div>",
+      "https://deno.land/path/to/file.tsx",
+    );
+    assertStringIncludes(transpiled, 'React.createElement("div", null);');
+  }
+  {
+    // Don't raise an error even if there is no import statement extension
+    const transpiled = await transpile(
+      'import "https://esm.sh/foo"; import "npm:foo";',
+      "https://deno.land/path/to/file.ts",
+    );
+    assertStringIncludes(
+      transpiled,
+      'import "https://esm.sh/foo";\nimport "npm:foo"',
+    );
   }
 });
 
