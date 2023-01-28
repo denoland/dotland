@@ -1,20 +1,14 @@
 // Copyright 2022-2023 the Deno authors. All rights reserved. MIT license.
 
 import { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
+import type { Build } from "$apiland_types";
 import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "$doc_components/footer.tsx";
-import { Build, getBuild } from "@/util/registry_utils.ts";
 import { ErrorMessage } from "@/components/ErrorMessage.tsx";
 import * as Icons from "@/components/Icons.tsx";
 
-interface Data {
-  data: Build | Error;
-}
-
-export default function StatusPage(
-  { data: { data } }: PageProps<Data>,
-) {
+export default function StatusPage({ data, params }: PageProps<Build | null>) {
   return (
     <>
       <ContentMeta
@@ -31,20 +25,15 @@ export default function StatusPage(
             <h3 class="text-lg leading-6 font-medium text-gray-900">
               Module publishing status
             </h3>
-            {!(data instanceof Error) &&
+            {data &&
               (
                 <p class="max-w-2xl text-sm leading-5 text-gray-500">
-                  deno.land/x{data ? "/" + data.options.moduleName : ""}
+                  deno.land/x{data ? "/" + data.module : ""}
                 </p>
               )}
           </div>
-          {(data instanceof Error)
+          {data
             ? (
-              <ErrorMessage title="Failed to load build ID">
-                {data.message}
-              </ErrorMessage>
-            )
-            : (
               <div class="mt-5 border-t border-gray-200 pt-5">
                 <dl>
                   <div class="sm:grid sm:grid-cols-3 sm:gap-4">
@@ -53,11 +42,11 @@ export default function StatusPage(
                     </dt>
                     <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                       <a
-                        href={`https://github.com/${data.options.repository}`}
+                        href={`https://github.com/${data.upload_options.repository}`}
                         class="link"
                       >
                         <Icons.GitHub />
-                        {data.options.repository}
+                        {data.upload_options.repository}
                       </a>
                     </dd>
                   </div>
@@ -66,7 +55,7 @@ export default function StatusPage(
                       Version
                     </dt>
                     <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                      {data.options.version}
+                      {data.version}
                     </dd>
                   </div>
                   <div class="mt-8 sm:grid sm:mt-5 sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
@@ -75,8 +64,8 @@ export default function StatusPage(
                     </dt>
                     <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                       <a
-                        href={`https://github.com/${data.options.repository}/tree/${data.options.ref}/${
-                          data.options.subdir ?? ""
+                        href={`https://github.com/${data.upload_options.repository}/tree/${data.upload_options.ref}/${
+                          data.upload_options.subdir ?? ""
                         }`}
                         class="link"
                       >
@@ -99,7 +88,7 @@ export default function StatusPage(
                                 return <Icons.Reload />;
                               case "success":
                                 return <Icons.Checkmark />;
-                              case "failure":
+                              case "error":
                                 return <Icons.WarningTriangle />;
                             }
                           })()}
@@ -121,6 +110,11 @@ export default function StatusPage(
                   </div>
                 </dl>
               </div>
+            )
+            : (
+              <ErrorMessage title="404 - Not Found">
+                Build ID '{params.id}' does not exist
+              </ErrorMessage>
             )}
         </div>
         <Footer />
@@ -129,9 +123,14 @@ export default function StatusPage(
   );
 }
 
-export const handler: Handlers<Data> = {
+export const handler: Handlers<Build | null> = {
   async GET(_, { params, render }) {
-    return render!({ data: await getBuild(params.id) });
+    const res = await fetch("https://apiland.deno.dev/v2/builds/" + params.id);
+    if (res.status !== 200) {
+      return render!(null);
+    } else {
+      return render!(await res.json());
+    }
   },
 };
 
