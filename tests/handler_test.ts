@@ -30,8 +30,13 @@ await setup({
   ): string | undefined {
     return undefined;
   },
-  resolveSourceHref(url, line) {
-    return line ? `${url}?source#L${line}` : `${url}?source`;
+  resolveSourceHref(currentUrl, line) {
+    const url = new URL(currentUrl);
+    url.search = "?source";
+    if (line != null) {
+      url.hash = `#L${line}`;
+    }
+    return url.href;
   },
 });
 

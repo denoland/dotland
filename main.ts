@@ -39,11 +39,16 @@ await setup({
   ): string | undefined {
     return lookupSymbol(current, namespace, symbol);
   },
-  resolveSourceHref(url, line) {
-    if (!url.startsWith("https://deno.land")) {
-      return url;
+  resolveSourceHref(currentUrl, line) {
+    const url = new URL(currentUrl);
+    if (url.origin !== "https://deno.land") {
+      return currentUrl;
     }
-    return line ? `${url}?source#L${line}` : `${url}?source`;
+    url.search = "?source";
+    if (line != null) {
+      url.hash = `#L${line}`;
+    }
+    return url.href;
   },
 });
 
