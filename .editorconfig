@@ -1,6 +1,6 @@
 root=true
 
-[*.js, *.ts, *.jsx, *.tsx]
+[*.{js,ts,jsx,tsx}]
 charset = utf-8
 
 end_of_line = lf
