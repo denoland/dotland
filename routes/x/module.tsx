@@ -314,9 +314,7 @@ export default function Registry(
         keywords={["deno", "third party", "module", name]}
       />
       <div class="min-h-full">
-        <Header
-          selected={name === "std" ? "Standard Library" : "Third Party Modules"}
-        />
+        <Header />
         {data === null
           ? (
             <div class="section-x-inset-xl pb-20 pt-10">

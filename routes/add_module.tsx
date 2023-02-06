@@ -17,7 +17,7 @@ export default function AddModulePage() {
         keywords={["deno", "registry", "modules", "javascript", "typescript"]}
       />
       <div>
-        <Header selected="Third Party Modules" />
+        <Header />
         <div class="section-x-inset-xl mt-16 mb-28 flex items-center flex-col gap-12 lg:(items-start flex-row gap-36)">
           <div class="text-base w-full lg:w-88 flex-shrink-0 space-y-5">
             <h1 class="font-bold text-3xl leading-none">Adding a module</h1>

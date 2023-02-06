@@ -5,7 +5,6 @@ import type { LibDocPage, ModuleEntry } from "$apiland_types";
 import { emit } from "$emit";
 
 export const CDN_ENDPOINT = "https://cdn.deno.land/";
-const API_ENDPOINT = "https://api.deno.land/";
 
 export interface CommonProps<T> {
   isStd: boolean;
@@ -152,89 +151,6 @@ export async function getVersionList(
     );
   }
   return res.json();
-}
-
-export interface Module {
-  name: string;
-  description?: string;
-  star_count: string;
-}
-
-export interface SearchResult extends Module {
-  search_score: string;
-}
-
-export interface ModulesList {
-  results: SearchResult[];
-  totalCount: number;
-}
-
-export async function listModules(
-  page: number,
-  limit: number,
-  query: string,
-): Promise<ModulesList | null> {
-  const url = `${API_ENDPOINT}modules?page=${page}&limit=${limit}&query=${
-    encodeURIComponent(
-      query,
-    )
-  }`;
-  const res = await fetch(url, {
-    headers: {
-      accept: "application/json",
-    },
-  });
-  if (res.status !== 200) {
-    throw Error(
-      `Got an error (${res.status}) while getting the module list:\n${await res
-        .text()}`,
-    );
-  }
-  const data = await res.json();
-  if (!data.success) {
-    throw Error(
-      `Got an error (${data.info}) while getting the module list:\n${await res
-        .text()}`,
-    );
-  }
-
-  return {
-    totalCount: (query ? limit : data.data.total_count),
-    results: data.data.results,
-  };
-}
-
-export interface Build {
-  id: string;
-  options: {
-    moduleName: string;
-    type: string;
-    repository: string;
-    ref: string;
-    version: string;
-    subdir?: string;
-  };
-  status: string;
-  message?: string;
-}
-
-export async function getBuild(id: string): Promise<Build | Error> {
-  const url = `${API_ENDPOINT}builds/${id}`;
-  const res = await fetch(url, { headers: { accept: "application/json" } });
-  if (res.status !== 200) {
-    return Error(
-      `Got an error (${res.status}) while getting the build info:\n${await res
-        .text()}`,
-    );
-  }
-  const data = await res.json();
-  if (!data.success) {
-    return Error(
-      `Got an error (${data.info}) while getting the build info:\n${await res
-        .text()}`,
-    );
-  }
-  return data.data.build;
 }
 
 export function fileTypeFromURL(filename: string): string | undefined {
