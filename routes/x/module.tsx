@@ -15,7 +15,7 @@ import type {
   ModuleDependency,
   SourcePage,
 } from "$apiland_types";
-import { setSymbols } from "@/util/doc_utils.ts";
+import { setSymbols } from "@/utils/doc_utils.ts";
 import {
   extractAltLineNumberReference,
   fetchSource,
@@ -28,7 +28,7 @@ import {
   getSourceURL,
   getVersionList,
   type RawFile,
-} from "@/util/registry_utils.ts";
+} from "@/utils/registry_utils.ts";
 import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
 import { ErrorMessage } from "@/components/ErrorMessage.tsx";
@@ -43,7 +43,7 @@ import {
   getUserToken,
   searchView,
   ssrSearchClick,
-} from "@/util/search_insights_utils.ts";
+} from "@/utils/search_insights_utils.ts";
 import { Footer } from "$doc_components/footer.tsx";
 import { processProperty } from "$doc_components/doc/utils.ts";
 

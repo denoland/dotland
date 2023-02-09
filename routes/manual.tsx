@@ -17,7 +17,7 @@ import {
   isPreviewVersion,
   TableOfContents,
   versions,
-} from "@/util/manual_utils.ts";
+} from "@/utils/manual_utils.ts";
 import VersionSelect from "@/islands/VersionSelect.tsx";
 
 import VERSIONS from "@/versions.json" assert { type: "json" };

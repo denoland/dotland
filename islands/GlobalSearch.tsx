@@ -12,7 +12,7 @@ import { tw } from "twind";
 import { css } from "twind/css";
 import { useEffect, useRef, useState } from "preact/hooks";
 import * as Icons from "@/components/Icons.tsx";
-import { islandSearchClick } from "@/util/search_insights_utils.ts";
+import { islandSearchClick } from "@/utils/search_insights_utils.ts";
 
 // Lazy load a <dialog> polyfill.
 // @ts-expect-error HTMLDialogElement is not just a type!

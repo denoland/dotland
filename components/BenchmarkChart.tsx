@@ -1,6 +1,6 @@
 // Copyright 2022-2023 the Deno authors. All rights reserved. MIT license.
 
-import { Column, formatLogScale, logScale } from "@/util/benchmark_utils.ts";
+import { Column, formatLogScale, logScale } from "@/utils/benchmark_utils.ts";
 
 export interface BenchmarkChartProps {
   yTickFormat?: (n: number) => string;
