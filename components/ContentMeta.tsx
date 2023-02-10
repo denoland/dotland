@@ -16,24 +16,24 @@ type OgType = "website" | "article";
 
 const OgImagePath = {
   "generic": {
-    img: "https://deno.land/og-image.png",
+    img: "https://deno.land/og/image.png",
     alt: "A logo of a sauropod in the rain and the word Deno",
   },
   "manual": {
-    img: "https://deno.land/og-manual.png",
+    img: "https://deno.land/og/manual.png",
     alt: "A logo of a sauropod reading a book and the title Deno Manual",
   },
   "api": {
-    img: "https://deno.land/og-api.png",
+    img: "https://deno.land/og/api.png",
     alt: "A logo of a sauropod reading a book and the title Deno API Reference",
   },
   "std": {
-    img: "https://deno.land/og-std.png",
+    img: "https://deno.land/og/std.png",
     alt:
       "A logo of a sauropod holding a stack of books and the title Deno Standard Library",
   },
   "modules": {
-    img: "https://deno.land/og-modules.png",
+    img: "https://deno.land/og/modules.png",
     alt:
       "A logo of a sauropod looking at some blocks on a table and the title Deno Modules",
   },
