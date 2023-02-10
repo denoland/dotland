@@ -2,7 +2,7 @@
 
 import { FileDisplay } from "./FileDisplay.tsx";
 import { DirectoryListing } from "./DirectoryListing.tsx";
-import type { CommonProps, RawFile } from "@/util/registry_utils.ts";
+import type { CommonProps, RawFile } from "@/utils/registry_utils.ts";
 import type { SourcePageDir, SourcePageFile } from "$apiland_types";
 
 export function SourceView({

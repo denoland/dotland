@@ -1,6 +1,6 @@
 // Copyright 2022-2023 the Deno authors. All rights reserved. MIT license.
 
-import { getModulePath } from "@/util/registry_utils.ts";
+import { getModulePath } from "@/utils/registry_utils.ts";
 import type { SourcePageDirEntry } from "$apiland_types";
 import * as Icons from "./Icons.tsx";
 

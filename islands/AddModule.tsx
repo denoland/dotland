@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import * as Icons from "@/components/Icons.tsx";
-import { getVersionList } from "@/util/registry_utils.ts";
+import { getVersionList } from "@/utils/registry_utils.ts";
 import confetti from "$canvas-confetti";
 
 const NAME_REGEX = /^[a-z0-9_]{3,40}$/;

@@ -5,7 +5,7 @@ import {
   DOTLAND_EVENTS_ENDPOINT,
   getUserToken,
   searchClick,
-} from "@/util/search_insights_utils.ts";
+} from "@/utils/search_insights_utils.ts";
 
 function assert(cond: unknown, msg = "Assertion failed"): asserts cond {
   if (!cond) {

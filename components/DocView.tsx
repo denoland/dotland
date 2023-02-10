@@ -1,6 +1,6 @@
 // Copyright 2022-2023 the Deno authors. All rights reserved. MIT license.
 
-import { type CommonProps, getModulePath } from "@/util/registry_utils.ts";
+import { type CommonProps, getModulePath } from "@/utils/registry_utils.ts";
 import { dirname } from "$std/path/mod.ts";
 import { ModuleDoc } from "$doc_components/doc/module_doc.tsx";
 import { ModuleIndex } from "$doc_components/doc/module_index.tsx";
