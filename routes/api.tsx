@@ -5,13 +5,13 @@ import { Handlers } from "$fresh/server.ts";
 import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
 import { ManualOrAPI, SidePanelPage } from "@/components/SidePanelPage.tsx";
-import { setSymbols } from "@/util/doc_utils.ts";
-import { versions } from "@/util/manual_utils.ts";
+import { setSymbols } from "@/utils/doc_utils.ts";
+import { versions } from "@/utils/manual_utils.ts";
 import VersionSelect from "@/islands/VersionSelect.tsx";
 import {
   getCanonicalUrl,
   getLibDocPageDescription,
-} from "@/util/registry_utils.ts";
+} from "@/utils/registry_utils.ts";
 import type { LibDocPage } from "$apiland_types";
 import { ErrorMessage } from "@/components/ErrorMessage.tsx";
 import { LibraryDocPanel } from "$doc_components/doc/library_doc_panel.tsx";

@@ -2,7 +2,7 @@
 
 import { RawCodeBlock } from "./CodeBlock.tsx";
 import { Markdown } from "./Markdown.tsx";
-import { fileTypeFromURL } from "@/util/registry_utils.ts";
+import { fileTypeFromURL } from "@/utils/registry_utils.ts";
 import * as Icons from "./Icons.tsx";
 
 export function FileDisplay(props: {

@@ -2,8 +2,8 @@
 
 // deno-fmt-ignore-file
 import { escape as htmlEscape } from "$he";
-import { normalizeTokens, Prism } from "@/util/prism_utils.ts";
-import { extractLinkUrl } from "@/util/registry_utils.ts";
+import { normalizeTokens, Prism } from "@/utils/prism_utils.ts";
+import { extractLinkUrl } from "@/utils/registry_utils.ts";
 import * as Icons from "./Icons.tsx";
 
 export interface CodeBlockProps {
