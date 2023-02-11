@@ -11,7 +11,7 @@ import { serve } from "$std/http/server.ts";
 import { lookupSymbol } from "./utils/doc_utils.ts";
 import { withLog } from "./utils/ga_utils.ts";
 import { setup } from "$doc_components/services.ts";
-import { tryInstantiateEmitLibWasm } from "./util/registry_utils.ts";
+import { tryInstantiateEmitLibWasm } from "./utils/registry_utils.ts";
 
 import twindPlugin from "$fresh/plugins/twind.ts";
 import twindConfig from "./twind.config.ts";
