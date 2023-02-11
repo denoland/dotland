@@ -22,4 +22,4 @@ For questions or problems regarding modules, please e-mail modules@deno.com.
 These Deno images are distributed under the MIT license (public domain and free
 for use).
 
-- [A graphic for the v1 blog post by @hashrock](https://deno.land/v1.jpg)
+- [A graphic for the v1 blog post by @hashrock](https://deno.land/images/artwork/v1.png)

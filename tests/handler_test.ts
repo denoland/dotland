@@ -5,7 +5,7 @@ import {
   assertEquals,
   assertStringIncludes,
 } from "$std/testing/asserts.ts";
-import { extractAltLineNumberReference } from "@/util/registry_utils.ts";
+import { extractAltLineNumberReference } from "@/utils/registry_utils.ts";
 import { ServerContext } from "$fresh/server.ts";
 import { setup } from "$doc_components/services.ts";
 

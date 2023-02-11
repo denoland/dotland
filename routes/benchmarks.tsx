@@ -15,7 +15,7 @@ import {
   formatMsec,
   formatReqSec,
   reshape,
-} from "@/util/benchmark_utils.ts";
+} from "@/utils/benchmark_utils.ts";
 import { BenchmarkChart } from "@/components/BenchmarkChart.tsx";
 
 type ShowData = { dataFile: string; range: number[]; search: string };
@@ -103,7 +103,7 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
             </li>
             <li>
               <SourceLink
-                path="test_util/src/test_server.rs"
+                path="test_utils/src/test_server.rs"
                 name="hyper"
               />{" "}
               is a Rust HTTP server and represents an upper bound.
