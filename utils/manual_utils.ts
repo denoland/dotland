@@ -1,6 +1,6 @@
 // Copyright 2022-2023 the Deno authors. All rights reserved. MIT license.
 
-import { compare } from "$std/semver/mod.ts";
+import compareVersions from "$tiny-version-compare";
 import { join } from "$std/path/mod.ts";
 import { getSourceURL } from "./registry_utils.ts";
 import VERSIONS from "@/versions.json" assert { type: "json" };
@@ -23,7 +23,7 @@ export interface TableOfContents {
 // 1.12.0 inclusive. During this time the manual was part of the main repo. It
 // is now a separate repo.
 function isOldVersion(version: string) {
-  return compare(version, "v1.12.0") !== 1;
+  return compareVersions(version, "v1.12.0") !== 1;
 }
 
 export function basepath(version: string) {
