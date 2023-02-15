@@ -4,9 +4,6 @@
     "test": "deno test --allow-net --allow-read --allow-env --allow-hrtime"
   },
   "compilerOptions": {
-    "types": [
-      "https://raw.githubusercontent.com/denoland/doc_components/cbcaaaf00508c9bd64c3c2ebb4d9899659168a44/jsx.d.ts"
-    ],
     "jsx": "react-jsx",
     "jsxImportSource": "preact"
   },
