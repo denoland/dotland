@@ -102,8 +102,8 @@ export default {
 
       switch (kind) {
         case "primary": {
-          bg = "primary";
-          text = "white";
+          bg = "yellow-300";
+          text = "black";
           bgHover = "[#3587EF]";
           break;
         }

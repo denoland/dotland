@@ -164,3 +164,8 @@ ul.tree li:last-child:before {
 .markdown-body ul {
     list-style: disc;
 }
+
+.dot{
+	/* background-color: #ffffff; */
+	background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='black' fill-opacity='0.4' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='2'/%3E%3Ccircle cx='13' cy='13' r='2'/%3E%3C/g%3E%3C/svg%3E");
+}

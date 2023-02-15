@@ -2,5 +2,8 @@
   "deno.enable": true,
   "deno.lint": true,
   "deno.unstable": false,
-  "editor.defaultFormatter": "denoland.vscode-deno"
+  "editor.defaultFormatter": "denoland.vscode-deno",
+  "[svg]": {
+    "editor.defaultFormatter": "jock.svg"
+  }
 }

@@ -42,52 +42,14 @@ export default function Home({ data }: PageProps<Data>) {
       <div>
         <Header />
 
-        <div class="relative colorWash pt-12 pb-28 lg:(pt-24 pb-40)">
+        <div
+          class="relative pt-12 pb-28 lg:(pt-24 pb-40) bg-no-repeat bg-contain"
+          style="background-image: url(/images/abstract-graphic.svg);background-size: 600px; background-position: 80% 50%;"
+        >
           <div class="section-x-inset-xl">
-            <picture>
-              <source
-                srcSet="/images/lp/cover@xl.avif"
-                type="image/avif"
-                media="(min-width: 1024px)"
-              />
-              <source
-                srcSet="/images/lp/cover@xl.webp"
-                type="image/webp"
-                media="(min-width: 1024px)"
-              />
-              <source
-                srcSet="/images/lp/cover@xl.jpg"
-                type="image/jpg"
-                media="(min-width: 1024px)"
-              />
-
-              <source
-                srcSet="/images/lp/cover@lg.avif"
-                type="image/avif"
-                media="(min-width: 768px)"
-              />
-              <source
-                srcSet="/images/lp/cover@lg.webp"
-                type="image/webp"
-                media="(min-width: 768px)"
-              />
-              <source
-                srcSet="/images/lp/cover@lg.jpg"
-                type="image/jpg"
-                media="(min-width: 768px)"
-              />
-
-              <source srcSet="/images/lp/cover.avif" type="image/avif" />
-              <source srcSet="/images/lp/cover.webp" type="image/webp" />
-              <img
-                class="object-cover w-full h-full absolute inset-0"
-                src="/images/lp/cover.jpg"
-                alt="Background Image"
-              />
-            </picture>
-            <div class="relative text-white space-y-6 lg:(space-y-16 w-[40rem])">
+            <div class="relative text-black space-y-6 lg:(space-y-16 w-[40rem])">
               <div class="space-y-2.5 lg:space-y-8">
-                <p class="font-semibold text-xl lg:text-3xl leading-none">
+                <p class="font-semibold text-xl lg:text-3xl leading-none inline-block dot px-4 py-3">
                   Meet Deno
                 </p>
                 <h1 class="font-bold text-5xl lg:text-7xl leading-none">
@@ -97,12 +59,14 @@ export default function Home({ data }: PageProps<Data>) {
               </div>
               <div class="inline-flex gap-4 flex-col lg:(gap-7 flex-row)">
                 <a
-                  class="button-primary justify-center"
+                  class="button-primary bg-black shadow-xl text-white justify-center"
                   href="/manual/getting_started/installation"
                 >
                   Installation
                 </a>
-                <a class="button-primary" href="/manual">Documentation</a>
+                <a class="button-primary shadow-xl" href="/manual">
+                  Documentation
+                </a>
               </div>
             </div>
           </div>
@@ -111,7 +75,7 @@ export default function Home({ data }: PageProps<Data>) {
         {announcement.major &&
           (
             <a
-              class="block items-center justify-center py-3 px-4 text-2xl text-white text-center font-semibold bg-[#FF5C38]"
+              class="block items-center justify-center py-3 px-4 text-black text-center font-semibold bg-yellow-400"
               href={announcement.href}
             >
               {announcement.text}
@@ -430,26 +394,10 @@ function Section(
   return (
     <div class="section-x-inset-xl pt-12 pb-18 lg:(pt-18 pb-24)">
       <div
-        class={tw`colorWash rounded-full relative border-0 py-2 w-22 md:(py-2.5 w-36 mx-auto) before:(${gradientLabelBeforeAfter} ${
-          css({
-            content: '""',
-            "background-clip": "border-box",
-          })
-        }) after:(${gradientLabelBeforeAfter} bg-white ${
-          css({
-            content: '""',
-            "background-clip": "content-box",
-          })
-        })`}
+        class={tw`border-yellow-300 border border-2 rounded-full relative py-2 w-22 md:(py-2.5 w-36 mx-auto)`}
       >
         <span
-          class={tw`relative block z-20 text-transparent font-semibold leading-tight text-center text-lg md:text-[1.75rem] ${
-            css({
-              background: "inherit",
-              "background-clip": "text",
-              "-webkit-background-clip": "text",
-            })
-          }`}
+          class={tw`text-black relative block z-20 font-semibold leading-tight text-center md:text-[1.75rem]`}
         >
           {type}
         </span>
