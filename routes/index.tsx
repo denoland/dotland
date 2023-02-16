@@ -71,39 +71,43 @@ export default function Home({ data }: PageProps<Data>) {
               </div> */
               }
             </div>
-            <div class="flex gap-8 items-center">
-              <div class="bg-white w-72 rounded-lg shadow p-8 space-y-4 border border-1 border-gray-300">
-                <div class="text-4xl font-bold">CLI</div>
+            <div class="flex items-center">
+              <div class="flex gap-8">
+                <div class="bg-white w-72 rounded-lg shadow p-8 space-y-4 border border-1 border-gray-300">
+                  <div class="text-4xl font-bold">CLI</div>
 
-                <div class="text-gray-700">
-                  JavaScript, TypeScript, and WebAssembly runtime with secure
-                  defaults and a great developer experience.
+                  <div class="text-gray-700">
+                    JavaScript, TypeScript, and WebAssembly runtime with secure
+                    defaults and a great developer experience.
+                  </div>
+                  <div>
+                    <a
+                      class="button-primary bg-black hover:bg-gray-900 text-white justify-center "
+                      href="/manual/getting_started/installation"
+                    >
+                      Installation
+                    </a>
+
+                    <a
+                      class="button-primary bg-white hover:bg-gray-100 border border-1 text-black justify-center ml-4"
+                      href="/manual"
+                    >
+                      Docs
+                    </a>
+                  </div>
                 </div>
-                <div>
-                  <a
-                    class="button-primary bg-black hover:bg-gray-900 text-white justify-center "
-                    href="/manual/getting_started/installation"
-                  >
-                    Installation
+                <div class="bg-white w-72 rounded-lg shadow p-8 space-y-4 border border-1 border-gray-300 flex flex-col items-start">
+                  <div class="flex-1 space-y-4">
+                    <div class="text-4xl font-bold">Deploy</div>
+
+                    <div class="text-gray-700">
+                      Serverless JavaScript hosting with zero config, worldwide.
+                    </div>
+                  </div>
+                  <a class="button-primary hover:bg-yellow-400" href="/manual">
+                    Sign up
                   </a>
-
-                  <a
-                    class="button-primary bg-white hover:bg-gray-100 border border-1 text-black justify-center ml-4"
-                    href="/manual"
-                  >
-                    Docs
-                  </a>
                 </div>
-              </div>
-              <div class="bg-white w-72 rounded-lg shadow p-8 space-y-4 border border-1 border-gray-300">
-                <div class="text-4xl font-bold">Deploy</div>
-
-                <div class="text-gray-700">
-                  Serverless JavaScript hosting with zero config, worldwide.
-                </div>
-                <a class="button-primary hover:bg-yellow-400" href="/manual">
-                  Sign up
-                </a>
               </div>
             </div>
           </div>
