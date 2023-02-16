@@ -46,8 +46,8 @@ export default function Home({ data }: PageProps<Data>) {
           class="relative pt-12 pb-28 lg:(pt-24 pb-40) bg-no-repeat bg-contain"
           style="background-image: url(/images/abstract-graphic.svg);background-size: 600px; background-position: 80% 50%;"
         >
-          <div class="section-x-inset-xl">
-            <div class="relative text-black space-y-6 lg:(space-y-16 w-[40rem])">
+          <div class="section-x-inset-xl flex gap-32">
+            <div class="relative text-black space-y-6 lg:(space-y-16 w-[40rem]) flex-1">
               <div class="space-y-2.5 lg:space-y-8">
                 <p class="font-semibold text-xl lg:text-3xl leading-none inline-block dot px-4 py-3">
                   Meet Deno
@@ -57,7 +57,8 @@ export default function Home({ data }: PageProps<Data>) {
                   <br class="hidden sm:block lg:hidden" />JavaScript runtime.
                 </h1>
               </div>
-              <div class="inline-flex gap-4 flex-col lg:(gap-7 flex-row)">
+              {
+                /* <div class="inline-flex gap-4 flex-col lg:(gap-7 flex-row)">
                 <a
                   class="button-primary bg-black shadow-xl text-white justify-center"
                   href="/manual/getting_started/installation"
@@ -66,6 +67,42 @@ export default function Home({ data }: PageProps<Data>) {
                 </a>
                 <a class="button-primary shadow-xl" href="/manual">
                   Documentation
+                </a>
+              </div> */
+              }
+            </div>
+            <div class="flex gap-8 items-center">
+              <div class="bg-white w-72 rounded-lg shadow p-8 space-y-4 border border-1 border-gray-300">
+                <div class="text-4xl font-bold">CLI</div>
+
+                <div class="text-gray-700">
+                  JavaScript, TypeScript, and WebAssembly runtime with secure
+                  defaults and a great developer experience.
+                </div>
+                <div>
+                  <a
+                    class="button-primary bg-black hover:bg-gray-900 text-white justify-center "
+                    href="/manual/getting_started/installation"
+                  >
+                    Installation
+                  </a>
+
+                  <a
+                    class="button-primary bg-white hover:bg-gray-100 border border-1 text-black justify-center ml-4"
+                    href="/manual"
+                  >
+                    Docs
+                  </a>
+                </div>
+              </div>
+              <div class="bg-white w-72 rounded-lg shadow p-8 space-y-4 border border-1 border-gray-300">
+                <div class="text-4xl font-bold">Deploy</div>
+
+                <div class="text-gray-700">
+                  Serverless JavaScript hosting with zero config, worldwide.
+                </div>
+                <a class="button-primary hover:bg-yellow-400" href="/manual">
+                  Sign up
                 </a>
               </div>
             </div>
