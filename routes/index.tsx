@@ -44,14 +44,11 @@ export default function Home({ data }: PageProps<Data>) {
 
         <div
           class="relative pt-12 pb-28 lg:(pt-24 pb-40) bg-no-repeat bg-contain"
-          style="background-image: url(/images/abstract-graphic.svg);background-size: 600px; background-position: 80% 50%;"
+          style="background-image: url(/images/abstract-graphic.svg);background-size: 1000px; background-position: 130% 90%;"
         >
           <div class="section-x-inset-xl flex gap-32">
             <div class="relative text-black space-y-6 lg:(space-y-16 w-[40rem]) flex-1">
-              <div class="space-y-2.5 lg:space-y-8">
-                <p class="font-semibold text-xl lg:text-3xl leading-none inline-block dot px-4 py-3">
-                  Meet Deno
-                </p>
+              <div class="space-y-2.5 py-16 lg:space-y-8">
                 <h1 class="font-bold text-5xl lg:text-7xl leading-none">
                   The easiest,<br />most secure{" "}
                   <br class="hidden sm:block lg:hidden" />JavaScript runtime.
