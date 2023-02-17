@@ -104,7 +104,7 @@ export default function Home({ data }: PageProps<Data>) {
                       Serverless JavaScript hosting with zero config, worldwide.
                     </div>
                   </div>
-                  <a class="button-primary hover:bg-yellow-400" href="/manual">
+                  <a class="button-primary hover:bg-blue-400" href="/manual">
                     Sign up
                   </a>
                 </div>
@@ -116,7 +116,7 @@ export default function Home({ data }: PageProps<Data>) {
         {announcement.major &&
           (
             <a
-              class="block items-center justify-center py-3 px-4 text-black text-center font-semibold bg-yellow-400"
+              class="block items-center justify-center py-3 px-4 text-white text-center font-semibold bg-blue-800"
               href={announcement.href}
             >
               {announcement.text}
@@ -435,7 +435,7 @@ function Section(
   return (
     <div class="section-x-inset-xl pt-12 pb-18 lg:(pt-18 pb-24)">
       <div
-        class={tw`border-yellow-300 border border-2 rounded-full relative py-2 w-22 md:(py-2.5 w-36 mx-auto)`}
+        class={tw`border-blue-300 border border-2 rounded-full relative py-2 w-22 md:(py-2.5 w-36 mx-auto)`}
       >
         <span
           class={tw`text-black relative block z-20 font-semibold leading-tight text-center md:text-[1.75rem]`}

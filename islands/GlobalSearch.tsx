@@ -183,7 +183,7 @@ export default function GlobalSearch() {
   return (
     <>
       <button
-        class="pl-4 bg-yellow-100 flex-grow lg:(w-80 flex-none) rounded-md text-default hover:bg-azure2 disabled:invisible"
+        class="pl-4 bg-azure3 flex-grow lg:(w-80 flex-none) rounded-md text-default hover:bg-azure2 disabled:invisible"
         onClick={() => setShowModal(true)}
         disabled={!IS_BROWSER}
       >
