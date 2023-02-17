@@ -20,7 +20,7 @@ interface Data {
 const announcement = {
   major: true,
   href: "/manual/node",
-  text: "npm compatibility has landed! Click here to get started",
+  text: "NPM compatibility has landed! Click here to get started",
 } as const;
 
 export default function Home({ data }: PageProps<Data>) {
@@ -44,7 +44,7 @@ export default function Home({ data }: PageProps<Data>) {
 
         <div
           class="relative pt-12 pb-28 lg:(pt-24 pb-40) bg-no-repeat bg-contain"
-          style="background-image: url(/images/abstract-graphic.svg);background-size: 1000px; background-position: 130% 90%;"
+          style="background-image: url(/images/abstract-graphic.svg); background-size: 1000px; background-position: 100% 90%;"
         >
           <div class="section-x-inset-xl flex gap-32">
             <div class="relative text-gray-900 space-y-6 lg:(space-y-16 w-[40rem]) flex-1">
@@ -113,7 +113,7 @@ export default function Home({ data }: PageProps<Data>) {
         {announcement.major &&
           (
             <a
-              class="block items-center justify-center py-3 px-4 text-white text-center font-semibold bg-gray-900"
+              class="block items-center justify-center py-3 px-4 text-white text-center font-semibold bg-gray-500"
               href={announcement.href}
             >
               {announcement.text}
