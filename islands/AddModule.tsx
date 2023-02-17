@@ -3,14 +3,12 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import * as Icons from "@/components/Icons.tsx";
-import { getVersionList } from "@/utils/registry_utils.ts";
 import confetti from "$canvas-confetti";
-
-const NAME_REGEX = /^[a-z0-9_]{3,40}$/;
+import { getVersionList, validateModuleName } from "@/utils/registry_utils.ts";
 
 interface ModuleState {
   name: string;
-  available: boolean | "pending";
+  available: boolean | "pending" | "invalid";
   registered: boolean;
 }
 
@@ -42,27 +40,14 @@ export default function AddModule() {
     const controller = new AbortController();
 
     (async () => {
-      if (name === "" || !NAME_REGEX.test(name)) {
+      const available = await validateModuleName(name, controller);
+
+      if (!controller.signal.aborted) {
         setModuleStateIfSameName({
           name,
-          available: false,
+          available,
           registered,
         });
-      } else {
-        await getVersionList(name, controller.signal)
-          .then((e) => !e)
-          .catch(() => false)
-          .then((e) => {
-            if (controller.signal.aborted) {
-              return;
-            }
-
-            setModuleStateIfSameName({
-              name,
-              available: e,
-              registered,
-            });
-          });
       }
     })();
 
@@ -70,7 +55,7 @@ export default function AddModule() {
   }, [name]);
 
   useEffect(() => {
-    if (available === "pending" || !available) {
+    if (available === "pending" || available === false) {
       return;
     }
 
@@ -144,10 +129,21 @@ export default function AddModule() {
             }}
             disabled={!IS_BROWSER}
           />
-          {name && !available && (
+          {name && available === false && (
             <p class="mt-1.5 text-danger text-sm">
-              Invalid Name/Name has been taken!
+              This name has already been taken!
             </p>
+          )}
+          {name && available === "invalid" && (
+            <div>
+              <p class="mt-1.5 text-danger text-sm">
+                This module name is invalid.
+              </p>
+              <p class="text-sm text-[#6C6E78] mb-4">
+                A valid name can be 3-40 characters and only contain lower case
+                characters, numbers and `_`.
+              </p>
+            </div>
           )}
         </div>
       </div>
@@ -188,7 +184,7 @@ export default function AddModule() {
           <div>
             <h2 class="text-default font-semibold text-xl leading-none">
               Add the webhook
-              {available && !registered &&
+              {available === true && !registered &&
                 (
                   <div class="inline-flex ml-2 py-1 px-3 bg-[#4B505A] rounded-md text-white text-sm leading-tight font-medium items-center">
                     <Icons.Spinner />
@@ -214,7 +210,7 @@ export default function AddModule() {
                 {urlValue}
               </span>
             </div>
-            {available &&
+            {available === true &&
               (
                 <button
                   class="rounded p-1.5 border border-[#D2D2DC] hover:bg-border"

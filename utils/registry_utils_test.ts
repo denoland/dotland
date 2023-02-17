@@ -8,6 +8,7 @@ import {
   shouldTranspile,
   transpile,
   tryInstantiateEmitLibWasm,
+  validateModuleName,
 } from "./registry_utils.ts";
 import {
   assert,
@@ -230,5 +231,28 @@ Deno.test("extractLinkUrl", () => {
   assertEquals(
     extractLinkUrl(`"./foo.ts"`, "https://deno.land/README.md"),
     undefined,
+  );
+});
+
+Deno.test("validateModuleName", async () => {
+  const controller = new AbortController();
+  controller.abort();
+
+  assertEquals(
+    await validateModuleName("hello-world", controller),
+    "invalid",
+  );
+
+  assertEquals(
+    await validateModuleName("hello", controller),
+    false,
+  );
+
+  assertEquals(
+    await validateModuleName(
+      "defuniq" + parseInt(`${Math.random() * 1000}`),
+      new AbortController(),
+    ),
+    true,
   );
 });

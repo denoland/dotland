@@ -4,6 +4,7 @@ import type { DocNode } from "deno_doc/types";
 import type { LibDocPage, ModuleEntry } from "$apiland_types";
 import { emit } from "$emit";
 
+const NAME_REGEX = /^[a-z0-9_]{3,40}$/;
 export const CDN_ENDPOINT = "https://cdn.deno.land/";
 
 export interface CommonProps<T> {
@@ -429,5 +430,18 @@ export function getDocAsDescription(
     } else if (docNode.jsDoc?.doc) {
       return docAsDescription(docNode.jsDoc.doc);
     }
+  }
+}
+
+export async function validateModuleName(
+  name: string,
+  controller: AbortController,
+) {
+  if (name === "" || !NAME_REGEX.test(name)) {
+    return "invalid";
+  } else {
+    return await getVersionList(name, controller.signal)
+      .then((e) => !e)
+      .catch(() => false);
   }
 }
