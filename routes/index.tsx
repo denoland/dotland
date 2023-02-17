@@ -20,7 +20,7 @@ interface Data {
 const announcement = {
   major: true,
   href: "/manual/node",
-  text: "NPM compatibility is now live! Click here to get started",
+  text: "npm compatibility has landed! Click here to get started",
 } as const;
 
 export default function Home({ data }: PageProps<Data>) {
@@ -47,7 +47,7 @@ export default function Home({ data }: PageProps<Data>) {
           style="background-image: url(/images/abstract-graphic.svg);background-size: 1000px; background-position: 130% 90%;"
         >
           <div class="section-x-inset-xl flex gap-32">
-            <div class="relative text-black space-y-6 lg:(space-y-16 w-[40rem]) flex-1">
+            <div class="relative text-gray-900 space-y-6 lg:(space-y-16 w-[40rem]) flex-1">
               <div class="space-y-2.5 py-16 lg:space-y-8">
                 <h1 class="font-bold text-5xl lg:text-7xl leading-none">
                   The easiest,<br />most secure{" "}
@@ -71,7 +71,7 @@ export default function Home({ data }: PageProps<Data>) {
             <div class="flex items-center">
               <div class="flex gap-8">
                 <div class="bg-white w-72 rounded-lg shadow p-8 space-y-4 border border-1 border-gray-300">
-                  <div class="text-4xl font-bold">Open source</div>
+                  <div class="text-4xl font-bold">Open Source</div>
 
                   <div class="text-gray-700">
                     JavaScript, TypeScript, and WebAssembly runtime with secure
@@ -113,7 +113,7 @@ export default function Home({ data }: PageProps<Data>) {
         {announcement.major &&
           (
             <a
-              class="block items-center justify-center py-3 px-4 text-white text-center font-semibold bg-blue-800"
+              class="block items-center justify-center py-3 px-4 text-white text-center font-semibold bg-gray-900"
               href={announcement.href}
             >
               {announcement.text}
