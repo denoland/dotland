@@ -74,7 +74,7 @@ export default function Home({ data }: PageProps<Data>) {
             <div class="flex items-center">
               <div class="flex gap-8">
                 <div class="bg-white w-72 rounded-lg shadow p-8 space-y-4 border border-1 border-gray-300">
-                  <div class="text-4xl font-bold">CLI</div>
+                  <div class="text-4xl font-bold">Open source</div>
 
                   <div class="text-gray-700">
                     JavaScript, TypeScript, and WebAssembly runtime with secure
@@ -85,7 +85,7 @@ export default function Home({ data }: PageProps<Data>) {
                       class="button-primary bg-black hover:bg-gray-900 text-white justify-center "
                       href="/manual/getting_started/installation"
                     >
-                      Installation
+                      Install
                     </a>
 
                     <a
@@ -98,7 +98,7 @@ export default function Home({ data }: PageProps<Data>) {
                 </div>
                 <div class="bg-white w-72 rounded-lg shadow p-8 space-y-4 border border-1 border-gray-300 flex flex-col items-start">
                   <div class="flex-1 space-y-4">
-                    <div class="text-4xl font-bold">Deploy</div>
+                    <div class="text-4xl font-bold">Cloud</div>
 
                     <div class="text-gray-700">
                       Serverless JavaScript hosting with zero config, worldwide.
