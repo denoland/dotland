@@ -23,7 +23,11 @@ export interface TableOfContents {
 // 1.12.0 inclusive. During this time the manual was part of the main repo. It
 // is now a separate repo.
 function isOldVersion(version: string) {
-  return compare(version, "v1.12.0") !== 1;
+  try {
+    return compare(version, "v1.12.0") !== 1;
+  } catch {
+    return true;
+  }
 }
 
 export function basepath(version: string) {
