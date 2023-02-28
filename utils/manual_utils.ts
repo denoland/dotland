@@ -19,7 +19,7 @@ export interface TableOfContents {
   } | string;
 }
 
-export function collectToC(toc: TableOfContents, base: string = ""): string[] {
+export function collectToC(toc: TableOfContents, base = ""): string[] {
   const out = [];
   for (const [path, content] of Object.entries(toc)) {
     out.push(base + path);
