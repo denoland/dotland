@@ -42,7 +42,7 @@ interface ManualSearchResult {
 
 interface ModuleSearchResult {
   name: string;
-  description: string;
+  description?: string;
 }
 
 interface SearchResults<ResultItem> {
@@ -78,13 +78,90 @@ const client = algoliasearch("QFPCRZC6WX", "2ed789b2981acd210267b27f03ab47da", {
   requester,
 });
 
+const defaultResult: Results = {
+  manual: {
+    hits: [
+      {
+        hierarchy: {
+          lvl0: "Introduction",
+        },
+        anchor: "introduction",
+        content:
+          "Deno ( /ˈdiːnoʊ/ , pronounced  dee-no ) is a JavaScript, TypeScript, and WebAssembly runtime with secure defaults and a great developer experience.",
+        docPath: "/manual/introduction",
+        objectID: "/manual/introduction-1",
+      },
+      {
+        hierarchy: {
+          lvl0: "Introduction",
+          lvl1: "Philosophy",
+        },
+        anchor: "philosophy",
+        content:
+          "Deno aims to be a productive and secure scripting environment for the modern programmer.",
+        docPath: "/manual/introduction",
+        objectID: "/manual/introduction-4",
+      },
+      {
+        hierarchy: {
+          lvl0: "Linking to External Code",
+          lvl1: "Integrity Checking",
+          lvl2: "Integrity Checking & Lock Files",
+          lvl3: "Introduction",
+        },
+        anchor: "introduction",
+        content:
+          "Let's say your module depends on remote module  https://some.url/a.ts . When you compile your module for the first time  a.ts  is retrieved, compiled and cached. It will remain this way until you run your module on a new machine (say in production) or reload the cache (through  deno cache --reload  for example). But what happens if the content in the remote url  https://some.url/a.ts  is changed? This could lead to your production module running with different dependency code than your local module. Deno's solution to avoid this is to use integrity checking and lock files.",
+        docPath: "/manual/linking_to_external_code/integrity_checking",
+        objectID: "/manual/linking_to_external_code/integrity_checking-2",
+      },
+    ],
+    hitsPerPage: 5,
+    page: 0,
+    queryID: "272178dd9aba9cfd7b4ee37bec7480ef",
+  },
+
+  modules: {
+    hits: [
+      {
+        description: "Deno standard library",
+        name: "std",
+        objectID: "std",
+      },
+      {
+        name: "std/wasi",
+        objectID: "std/wasi",
+      },
+      {
+        description:
+          "Generators and validators for UUIDs for versions v1, v4 and v5.",
+        name: "std/uuid",
+        objectID: "std/uuid",
+      },
+      {
+        description:
+          "**Deprecated**. Use `TextLineStream` from `std/steams` for line-by-line text reading instead.",
+        name: "std/textproto",
+        objectID: "std/textproto",
+      },
+      {
+        name: "std/testing",
+        objectID: "std/testing",
+      },
+    ],
+    hitsPerPage: 5,
+    page: 0,
+    queryID: "956a1d1b7da52478637d695df50a4abd",
+  },
+};
+
 /** Search Deno documentation or modules. */
 export default function GlobalSearch() {
   const dialog = useRef<HTMLDialogElement>(null);
   const [showModal, setShowModal] = useState(false);
   const [input, setInput] = useState("");
 
-  const [results, setResults] = useState<Results | null>(null);
+  const [results, setResults] = useState<Results | null>(defaultResult);
   const [kind, setKind] = useState<SearchKinds>("All");
   const [page, setPage] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(1);
@@ -113,9 +190,29 @@ export default function GlobalSearch() {
   useEffect(() => {
     if (!showModal) return;
 
+    if (input === "") {
+      switch (kind) {
+        case "Manual": {
+          setResults({
+            manual: defaultResult.manual,
+          });
+
+          return;
+        }
+        case "All": {
+          setResults(defaultResult);
+
+          return;
+        }
+      }
+    }
+
     setLoading(true);
     if (searchTimeoutId.current === null) {
-      searchTimeoutId.current = setTimeout(() => setResults(null), 500);
+      searchTimeoutId.current = setTimeout(
+        () => setResults(defaultResult),
+        500,
+      );
     }
 
     const queries: MultipleQueriesQuery[] = [];
