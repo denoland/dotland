@@ -19,6 +19,17 @@ export interface TableOfContents {
   } | string;
 }
 
+export function collectToC(toc: TableOfContents, base: string = ""): string[] {
+  const out = [];
+  for (const [path, content] of Object.entries(toc)) {
+    out.push(base + path);
+    if (typeof content !== "string" && content.children) {
+      out.push(...collectToC(content.children, base + path + "/"));
+    }
+  }
+  return out;
+}
+
 // Returns true if the version is of the 0.x release line, or between 1.0.0 and
 // 1.12.0 inclusive. During this time the manual was part of the main repo. It
 // is now a separate repo.

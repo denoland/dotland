@@ -20,13 +20,14 @@ import * as $13 from "./routes/install.ts";
 import * as $14 from "./routes/legacy_redirects/posts.ts";
 import * as $15 from "./routes/legacy_redirects/v1.ts";
 import * as $16 from "./routes/manual.tsx";
-import * as $17 from "./routes/search_event.ts";
-import * as $18 from "./routes/showcase.tsx";
-import * as $19 from "./routes/status.tsx";
-import * as $20 from "./routes/std.tsx";
-import * as $21 from "./routes/translations.tsx";
-import * as $22 from "./routes/x/index.tsx";
-import * as $23 from "./routes/x/module.tsx";
+import * as $17 from "./routes/manual_full.tsx";
+import * as $18 from "./routes/search_event.ts";
+import * as $19 from "./routes/showcase.tsx";
+import * as $20 from "./routes/status.tsx";
+import * as $21 from "./routes/std.tsx";
+import * as $22 from "./routes/translations.tsx";
+import * as $23 from "./routes/x/index.tsx";
+import * as $24 from "./routes/x/module.tsx";
 import * as $$0 from "./islands/AddModule.tsx";
 import * as $$1 from "./islands/GlobalSearch.tsx";
 import * as $$2 from "./islands/HelloBar.tsx";
@@ -52,13 +53,14 @@ const manifest = {
     "./routes/legacy_redirects/posts.ts": $14,
     "./routes/legacy_redirects/v1.ts": $15,
     "./routes/manual.tsx": $16,
-    "./routes/search_event.ts": $17,
-    "./routes/showcase.tsx": $18,
-    "./routes/status.tsx": $19,
-    "./routes/std.tsx": $20,
-    "./routes/translations.tsx": $21,
-    "./routes/x/index.tsx": $22,
-    "./routes/x/module.tsx": $23,
+    "./routes/manual_full.tsx": $17,
+    "./routes/search_event.ts": $18,
+    "./routes/showcase.tsx": $19,
+    "./routes/status.tsx": $20,
+    "./routes/std.tsx": $21,
+    "./routes/translations.tsx": $22,
+    "./routes/x/index.tsx": $23,
+    "./routes/x/module.tsx": $24,
   },
   islands: {
     "./islands/AddModule.tsx": $$0,
