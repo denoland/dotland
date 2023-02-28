@@ -20,7 +20,7 @@ import * as $13 from "./routes/install.ts";
 import * as $14 from "./routes/legacy_redirects/posts.ts";
 import * as $15 from "./routes/legacy_redirects/v1.ts";
 import * as $16 from "./routes/manual.tsx";
-import * as $17 from "./routes/manual_full.tsx";
+import * as $17 from "./routes/manual_page.tsx";
 import * as $18 from "./routes/search_event.ts";
 import * as $19 from "./routes/showcase.tsx";
 import * as $20 from "./routes/status.tsx";
@@ -53,7 +53,7 @@ const manifest = {
     "./routes/legacy_redirects/posts.ts": $14,
     "./routes/legacy_redirects/v1.ts": $15,
     "./routes/manual.tsx": $16,
-    "./routes/manual_full.tsx": $17,
+    "./routes/manual_page.tsx": $17,
     "./routes/search_event.ts": $18,
     "./routes/showcase.tsx": $19,
     "./routes/status.tsx": $20,
