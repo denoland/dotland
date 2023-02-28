@@ -78,6 +78,10 @@ const client = algoliasearch("QFPCRZC6WX", "2ed789b2981acd210267b27f03ab47da", {
   requester,
 });
 
+/**
+ * This is generated manually by copying the first few entries from the algolia
+ * dashboard with a search of " "
+ */
 const defaultResult: Results = {
   manual: {
     hits: [
