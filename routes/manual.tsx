@@ -138,7 +138,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
   );
 }
 
-function UserContributionBanner({
+export function UserContributionBanner({
   href,
 }: {
   href: string;
