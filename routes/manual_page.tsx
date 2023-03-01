@@ -76,10 +76,6 @@ export const handler: Handlers<Data> = {
       url.pathname = `/manual@${version || versions[0]}/page`;
       return Response.redirect(url);
     }
-    if (url.pathname.endsWith(".md")) {
-      url.pathname = url.pathname.slice(0, -3);
-      return Response.redirect(url);
-    }
 
     const tableOfContent = collectToC(await getTableOfContents(version));
 
