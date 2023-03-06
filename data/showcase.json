@@ -184,5 +184,10 @@
     "image": "/images/showcase/neolace.png",
     "title": "Neolace",
     "link": "https://www.neolace.com/"
+  },
+  {
+    "image": "/images/showcase/socialcards.png",
+    "title": "Create social cards",
+    "link": "https://socialcards.dev/"
   }
 ]
