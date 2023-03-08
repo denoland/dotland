@@ -398,7 +398,9 @@ export default function Home({ data }: PageProps<Data>) {
                     target="_blank"
                   >
                     <img
-                      class="h-7 lg:h-12"
+                      class={company.name === "Netlify"
+                        ? "h-11 lg:h-20"
+                        : "h-7 lg:h-12"}
                       src={`/images/lp/companies/${company.name.toLowerCase()}.svg`}
                       alt={company.name}
                       title={company.name}
