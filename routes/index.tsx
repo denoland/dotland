@@ -412,6 +412,59 @@ export default function Home({ data }: PageProps<Data>) {
           </div>
         </div>
 
+        <Section
+          type="Frameworks"
+          header="Start building immediately."
+          subheader="With modern tooling that delivers a performant user experience, which can be deployed anywhere."
+        >
+          <div class="flex justify-between flex-col gap-11 lg:(flex-row gap-[8%])">
+            {[{
+              Icon: Icons.Fresh,
+              title: "Fresh",
+              url: "https://fresh.deno.dev",
+              body: (
+                <>
+                  Fresh is a next-gen web framework built for speed,
+                  reliability, and simplicity.
+                </>
+              ),
+            }, {
+              Icon: Icons.SaaSkit,
+              title: "SaaSkit",
+              url: "https://deno.com/saaskit",
+              body: (
+                <>
+                  Start your SaaS fast with this template that includes user
+                  logins, authentication, billing, and more.
+                </>
+              ),
+            }, {
+              Icon: Icons.Lume,
+              title: "Lume",
+              url: "https://lume.land",
+              body: (
+                <>
+                  The fast & flexible static site generator that supports any
+                  template engine.
+                </>
+              ),
+            }].map(({ Icon, title, body, url }) => (
+              <div class="flex items-start flex-row-reverse gap-8 lg:(flex-col gap-9)">
+                <a href={url} target="_blank">
+                  <Icon class="flex-none w-[3.25rem] md:w-16 lg:w-18" />
+                </a>
+                <div class="inline space-y-3 lg:space-y-4">
+                  <h3 class="font-bold text-default text-[1.375rem] md:text-3xl lg:text-4xl">
+                    <a href={url} target="_blank">{title}</a>
+                  </h3>
+                  <p class="text-normalBlue font-medium md:text-xl lg:text-2xl">
+                    {body}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Section>
         <Footer />
       </div>
     </div>

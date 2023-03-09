@@ -1099,7 +1099,7 @@ export function HassleFree(props: { class?: string }) { // Size not normalized
           .hasslefree-cls-4 {
             fill: #050055;
           }
-  
+
           .hasslefree-cls-5 {
             fill: #000059;
           }
@@ -1354,27 +1354,27 @@ export function OutOfTheBox(props: { class?: string }) { // Size not normalized
           .outofthebox-cls-1 {
             fill: none;
           }
-        
+
           .outofthebox-cls-2 {
             clip-path: url(#clippath);
           }
-        
+
           .outofthebox-cls-3 {
             fill: #040651;
           }
-        
+
           .outofthebox-cls-4 {
             fill: #050055;
           }
-        
+
           .outofthebox-cls-5 {
             fill: #000059;
           }
-        
+
           .outofthebox-cls-6 {
             fill: #fff;
           }
-        
+
           .outofthebox-cls-7 {
             fill: #6e6eff;
           }
@@ -1550,31 +1550,31 @@ export function Permissions(props: { class?: string }) { // Size not normalized
           .permissions-cls-1 {
             fill: none;
           }
-        
+
           .permissions-cls-2 {
             clip-path: url(#clippath);
           }
-        
+
           .permissions-cls-3 {
             fill: #040651;
           }
-        
+
           .permissions-cls-4 {
             fill: #050055;
           }
-        
+
           .permissions-cls-5, .permissions-cls-6, .permissions-cls-7 {
             fill: #fff;
           }
-        
+
           .permissions-cls-8 {
             fill: #6e6eff;
           }
-        
+
           .permissions-cls-6, .permissions-cls-7 {
             fill-rule: evenodd;
           }
-        
+
           .permissions-cls-7 {
             stroke: #040651;
             stroke-miterlimit: 10;
@@ -1705,47 +1705,47 @@ export function Secure(props: { class?: string }) { // Size not normalized
           .secure-cls-1, .secure-cls-2 {
             fill: none;
           }
-        
+
           .secure-cls-3 {
             clip-path: url(#clippath);
           }
-        
+
           .secure-cls-4 {
             fill: #040651;
           }
-        
+
           .secure-cls-5 {
             fill: #050055;
           }
-        
+
           .secure-cls-6 {
             fill: #000059;
           }
-        
+
           .secure-cls-7, .secure-cls-8, .secure-cls-9, .secure-cls-10, .secure-cls-11 {
             fill: #fff;
           }
-        
+
           .secure-cls-12 {
             fill: #6e6eff;
           }
-        
+
           .secure-cls-8, .secure-cls-9, .secure-cls-10, .secure-cls-11, .secure-cls-2 {
             stroke: #050055;
           }
-        
+
           .secure-cls-8, .secure-cls-10, .secure-cls-2 {
             stroke-width: 3.45px;
           }
-        
+
           .secure-cls-9 {
             stroke-width: 3.45px;
           }
-        
+
           .secure-cls-10 {
             stroke-linecap: round;
           }
-        
+
           .secure-cls-11 {
             stroke-width: 3.17px;
           }
@@ -1882,6 +1882,89 @@ export function Secure(props: { class?: string }) { // Size not normalized
           />
         </g>
       </g>
+    </svg>
+  );
+}
+
+export function Lume(props: { class?: string }) { // Size not normalized
+  return (
+    <svg
+      viewBox="0 0 36 49"
+      height="49"
+      width="36"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g fill="none" fill-rule="evenodd">
+        <path
+          d="m14.05 0 2.574 1.42 4.759 3.42c.617.648.916 1.326 1.042 2.365.055.452.052.848-.004 1.278a9.466 9.466 0 0 1 1.513-1.83l.169-.156 1.646-1.501v2.228c0 2.338.581 3.886 1.974 5.922l1.577 2.258c1.518 2.324 2.214 4.626 1.975 7.672l1.24-2.249.991 1.101c1.16 1.844 1.097 4.592-.098 8.28l-.075.225 2.47-3.552.186 2.643c.151 6.658-2.392 12.356-6.967 15.867-3.074 2.358-6.334 3.675-11.418 3.606C6.594 48.85-1.4 39.31.205 27.895l.052-.347.8-5.098 1.132 5.035c.015.067.033.135.053.202l.033.101.017.045-.025-.196c-.471-3.942.175-6.488 1.863-9.247l.1-.162.091-.144.163-.253.58-.891.237-.37c.758-1.198 1.215-2.088 1.586-3.186l.056-.167.214-.66c-.864-2.023.101-4.5 1.966-6.057l3.232-1.931c.27-.374.572-.768.907-1.19l.17-.213.545-.674c-.062-.234-.038-1.065.072-2.492Z"
+          fill="#FFF"
+          fill-rule="nonzero"
+        >
+        </path>
+        <path
+          d="M14.199 3.784c-1.485 6.035 6.11 4.932 6.11 13.765 2.484-2.854.479-6.7 4.456-10.325 0 3.028 1.046 4.892 2.23 6.6l.256.364.11.154.22.309.33.463.218.311c1.694 2.451 3.084 5.231 1.492 11.31 1.415-.867 2.432-2.295 3.052-4.283 1.25 1.988.784 5.521-1.401 10.6 1.923-.811 3.051-1.933 3.734-3.505.149 6.572-2.426 11.954-6.735 15.179a270.622 270.622 0 0 0-.512-8.499c-.352-4.58-1.152-7.022-2.77-9.35-1.617-2.328-3.42-3.076-5.955-3.427-2.534-.35-5.042.199-7.815 1.642-2.772 1.444-4.579 4.377-3.782 6.055.797 1.678 3.366 2.76 6.364 2.658 2.997-.1 5.094-1.169 5.87-1.457.775-.29 1.101.64.509.948-.396.205-1.096.57-2.102 1.095.392 2.206.589 4.46.589 6.763 0 2.064-.037 4.347-.11 6.85-.31.01-.624.014-.94.01C7.302 47.874-.528 38.886 1.229 27.7c.261 1.163 1.22 2.53 2.593 3.1-1.534-6.93-.28-9.657 1.333-12.195l.212-.33.216-.33c.829-1.268 1.695-2.575 2.295-4.425-.31 3.12 0 4.855 1.505 6.667.888-2.639 4.163-4.847 2.897-8.093-1.267-3.245-1.146-4.507 1.919-8.311Zm-.039 22.864a.749.749 0 1 1 0 1.498.749.749 0 0 1 0-1.498Zm-3.904-.65a.749.749 0 1 1 0 1.497.749.749 0 0 1 0-1.497Zm.4-19.362c-.814.83-.637 3.25.299 5.375.936 2.124-.299 3.723-1.622 5.69.23-2.618-.01-3.24-1.135-5.254-1.124-2.014.416-4.68 2.458-5.811Zm8.005-2.838c1.905 1.655 2.58 1.82 2.788 3.525.206 1.705-.717 2.496-.348 4.722-3.891-3.196-.838-4.334-2.44-8.247ZM14.383.788c1.369 1.622 2.182 1.197 3.075 3.272.893 2.074-.225 2.545.539 5.04C13.5 5.23 16.29 4.916 14.383.786Z"
+          fill="#141B1F"
+        >
+        </path>
+      </g>
+    </svg>
+  );
+}
+
+export function Fresh(props: { class?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
+      <path
+        d="M34.092 8.845C38.929 20.652 34.092 27 30 30.5c1 3.5-2.986 4.222-4.5 2.5-4.457 1.537-13.512 1.487-20-5C2 24.5 4.73 16.714 14 11.5c8-4.5 16-7 20.092-2.655Z"
+        fill="#FFDB1E"
+      />
+      <path
+        d="M14 11.5c6.848-4.497 15.025-6.38 18.368-3.47C37.5 12.5 21.5 22.612 15.5 25c-6.5 2.587-3 8.5-6.5 8.5-3 0-2.5-4-5.183-7.75C2.232 23.535 6.16 16.648 14 11.5Z"
+        fill="#fff"
+        stroke="#FFDB1E"
+      />
+      <path
+        d="M28.535 8.772c4.645 1.25-.365 5.695-4.303 8.536-3.732 2.692-6.606 4.21-7.923 4.83-.366.173-1.617-2.252-1.617-1 0 .417-.7 2.238-.934 2.326-1.365.512-4.223 1.29-5.835 1.29-3.491 0-1.923-4.754 3.014-9.122.892-.789 1.478-.645 2.283-.645-.537-.773-.534-.917.403-1.546C17.79 10.64 23 8.77 25.212 8.42c.366.014.82.35.82.629.41-.14 2.095-.388 2.503-.278Z"
+        fill="#FFE600"
+      />
+      <path
+        d="M14.297 16.49c.985-.747 1.644-1.01 2.099-2.526.566.121.841-.08 1.29-.701.324.466 1.657.608 2.453.701-.715.451-1.057.852-1.452 2.106-1.464-.611-3.167-.302-4.39.42Z"
+        fill="#fff"
+      />
+    </svg>
+  );
+}
+
+export function SaaSkit(props: { class?: string }) {
+  return (
+    <svg
+      id="a"
+      data-name="Layer 3"
+      xmlns="http://www.w3.org/2000/svg"
+      width="40"
+      height="40"
+      viewBox="0 0 120 120"
+    >
+      <defs>
+        <linearGradient
+          id="b"
+          x1="59.88"
+          y1="2.56"
+          x2="59.88"
+          y2="117.83"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0" stop-color="#040404" />
+          <stop offset="1" stop-color="#111566" />
+        </linearGradient>
+      </defs>
+      <circle cx="59.88" cy="59.88" r="59.88" style="fill: url(#b);" />
+      <text
+        transform="translate(29.49 88.88)"
+        style="fill: #fff; font-family: ArchivoRoman-Black, Archivo; font-size: 83.14px; font-variation-settings: &apos;wght&apos; 900, &apos;wdth&apos; 100; font-weight: 800;"
+      >
+        <tspan x="0" y="0">S</tspan>
+      </text>
     </svg>
   );
 }
