@@ -196,19 +196,6 @@
     "license": "MIT"
   },
   {
-    "date": "2020-06-28",
-    "image": "/images/artwork/deno_paper.png",
-    "title": "Paper Deno",
-    "alt": "a Deno logo made out of paper",
-    "artist": {
-      "name": "heymi",
-      "profile_image": "https://avatars0.githubusercontent.com/u/59769089",
-      "github": "heymicodes",
-      "web": "https://heymi.fr"
-    },
-    "license": "MIT"
-  },
-  {
     "date": "2020-10-02",
     "image": "/images/artwork/jurassicDeno.jpg",
     "title": "Jurassic Deno",
