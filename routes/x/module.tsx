@@ -306,7 +306,7 @@ export default function Registry(
         ogImage={isStd ? "std" : "modules"}
         keywords={["deno", "third party", "module", name]}
       />
-      <div class="min-h-full">
+      <div class="min-h-full bg-white">
         <Header />
         {data === null
           ? (
