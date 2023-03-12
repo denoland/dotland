@@ -176,7 +176,7 @@ export default function Benchmarks(props: PageProps<{ show: ShowData }>) {
               >
                 {!showAll ? "all" : "the most recent"}
               </a>{" "}
-              commits.
+              commits or append ?-n to this page's URL to view results for the last n commits.
             </p>
             <div class="mt-12 pt-4">
               <h4 class="text-2xl font-bold tracking-tight">
