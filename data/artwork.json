@@ -368,5 +368,19 @@
       "web": "https://jasongardner.dev"
     },
     "license": "CC-BY-SA-4.0"
+  },
+  {
+    "date": "2023-03-11",
+    "image": "/images/artwork/deno_acrylic.jpg",
+    "title": "Deno in Acrylic",
+    "alt": "A green Deno on a black background in acrylic paint.",
+    "artist": {
+      "name": "Taylor Young",
+      "profile_image": "https://avatars.githubusercontent.com/u/539320",
+      "github": "DigitalDesignDj",
+      "twitter": "tdy721",
+      "web": "https://hyprtxt.deno.dev"
+    },
+    "license": "MIT"
   }
 ]
