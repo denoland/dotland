@@ -1,143 +1,109 @@
-// Copyright 2022 the Deno authors. All rights reserved. MIT license.
+// Copyright 2022-2023 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-import { h } from "../deps.ts";
 import { RawCodeBlock } from "./CodeBlock.tsx";
 import { Markdown } from "./Markdown.tsx";
-import {
-  fileNameFromURL,
-  fileTypeFromURL,
-  isReadme,
-} from "../util/registry_utils.ts";
+import { fileTypeFromURL } from "@/utils/registry_utils.ts";
+import * as Icons from "./Icons.tsx";
 
 export function FileDisplay(props: {
+  isStd: boolean;
+  version: string;
   raw?: string;
-  canonicalPath: string;
   sourceURL: string;
-  baseURL: string;
   filetypeOverride?: string;
-  repositoryURL?: string | null;
-  documentationURL?: string | null;
-  stdVersion?: string;
-  pathname: string;
+  repositoryURL: string;
+  url: URL;
+  docable?: boolean;
 }) {
   const filetype = props.filetypeOverride ?? fileTypeFromURL(props.sourceURL);
-  const filename = fileNameFromURL(props.sourceURL);
+
+  const doc = new URL(props.url);
+  doc.searchParams.delete("source");
 
   return (
-    <div class="shadow-sm rounded-lg border border-gray-200 overflow-hidden bg-white">
-      <div class="bg-gray-100 border-b border-gray-200 py-2 px-4 flex justify-between">
-        <div class="flex items-center">
-          {isReadme(filename) && (
-            <svg
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              class="w-6 h-6 text-gray-400 inline-block mr-2"
-            >
-              <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z">
-              </path>
-            </svg>
-          )}
-          <span class="font-medium">
-            {props.canonicalPath === props.pathname
-              ? filename
-              : (
-                <a href={props.canonicalPath} class="link">
-                  {filename}
-                </a>
-              )}
-          </span>
+    <div class="border border-gray-200 rounded-lg">
+      <div class="py-3 px-5 flex justify-between items-center border-b border-gray-200">
+        <div class="flex items-center gap-2">
+          <Icons.Source class="text-gray-500" />
+          <span class="text-lg leading-5 font-semibold">File</span>
         </div>
-        <div>
-          {props.sourceURL && (
-            <a href={props.sourceURL} class="link ml-4">
-              Raw
+        <div class="flex items-center gap-3">
+          <a
+            href={props.repositoryURL}
+            title="Repository URL"
+            class="icon-button"
+          >
+            <Icons.GitHub class="h-4 w-auto" />
+          </a>
+          {props.docable && (
+            <a href={doc.href} title="Documentation" class="icon-button">
+              <Icons.Docs class="h-4 w-auto" />
             </a>
           )}
-          {props.repositoryURL &&
-            (
-              <a href={props.repositoryURL} class="link ml-4">
-                Repository
-              </a>
-            )}
         </div>
       </div>
-      {props.documentationURL && (
-        <a
-          href={props.documentationURL}
-          class="bg-gray-100 border-b border-gray-200 py-1 px-4 flex align-middle justify-between link group"
-        >
-          <span>
-            <svg
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              class="w-6 h-6 text-gray-400 inline-block mr-2 group-hover:text-blue-300 transition duration-100 ease-in-out"
-            >
-              <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z">
-              </path>
-            </svg>
-          </span>
-          View Documentation
-        </a>
-      )}
-      {(() => {
-        switch (filetype) {
-          case "javascript":
-          case "typescript":
-          case "tsx":
-          case "jsx":
-          case "json":
-          case "yaml":
-          case "rust":
-          case "toml":
-          case "python":
-          case "wasm":
-          case "makefile":
-          case "dockerfile":
-            return (
-              <RawCodeBlock
-                code={props.raw!}
-                language={filetype}
-                enableLineRef={true}
-                class="p-2 sm:px-3 md:px-4"
-              />
-            );
-          case "html":
-            return (
-              <RawCodeBlock
-                code={props.raw!}
-                language="markdown"
-                enableLineRef={true}
-                class="p-2 sm:px-3 md:px-4"
-              />
-            );
-          case "markdown": {
-            return (
-              <div class="px-4">
-                <Markdown
-                  source={props.stdVersion === undefined
-                    ? props.raw!
-                    : props.raw!.replace(
-                      /\$STD_VERSION/g,
-                      props.stdVersion ?? "",
-                    )}
+
+      <div>
+        {(() => {
+          switch (filetype) {
+            case "javascript":
+            case "typescript":
+            case "tsx":
+            case "jsx":
+            case "json":
+            case "yaml":
+            case "rust":
+            case "toml":
+            case "python":
+            case "wasm":
+            case "makefile":
+            case "dockerfile":
+              return (
+                <RawCodeBlock
+                  code={props.raw!}
+                  language={filetype}
+                  enableLineRef={true}
+                  class="p-2 sm:px-3 md:px-4"
+                  url={props.url}
                 />
-              </div>
-            );
+              );
+            case "html":
+              return (
+                <RawCodeBlock
+                  code={props.raw!}
+                  language="markdown"
+                  class="p-2 sm:px-3 md:px-4"
+                  url={props.url}
+                  enableLineRef
+                />
+              );
+            case "markdown": {
+              return (
+                <div class="p-6">
+                  <Markdown
+                    source={(props.isStd
+                      ? props.raw!
+                      : props.raw!.replace(/\$STD_VERSION/g, props.version))
+                      .replace(/\$MODULE_VERSION/g, props.version)}
+                  />
+                </div>
+              );
+            }
+            case "image":
+              return <img class="w-full" src={props.sourceURL} />;
+            default:
+              return (
+                <RawCodeBlock
+                  code={props.raw!}
+                  language="text"
+                  class="p-2 sm:px-3 md:px-4"
+                  url={props.url}
+                  enableLineRef
+                />
+              );
           }
-          case "image":
-            return <img class="w-full" src={props.sourceURL} />;
-          default:
-            return (
-              <RawCodeBlock
-                code={props.raw!}
-                language="text"
-                enableLineRef={true}
-                class="p-2 sm:px-3 md:px-4"
-              />
-            );
-        }
-      })()}
+        })()}
+      </div>
     </div>
   );
 }

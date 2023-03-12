@@ -1,14 +1,13 @@
-// Copyright 2022 the Deno authors. All rights reserved. MIT license.
+// Copyright 2022-2023 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-import { ComponentChildren, h } from "../deps.ts";
+import type { ComponentChildren } from "preact";
 
 export function InlineCode(
   props: { children: ComponentChildren; id?: string },
 ) {
   return (
     <code
-      class="py-1 px-2 font-mono bg-gray-100 text-sm break-all rounded-[6px]"
+      class="py-1 px-2 font-mono bg-gray-100 text-sm break-words rounded-[6px]"
       id={props.id}
     >
       {props.children}

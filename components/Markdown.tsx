@@ -1,15 +1,22 @@
-// Copyright 2022 the Deno authors. All rights reserved. MIT license.
+// Copyright 2022-2023 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-import { gfm, h } from "../deps.ts";
+import { render } from "$gfm";
 
 export function Markdown(
-  { source, baseUrl }: { source: string; baseUrl?: string },
+  { source, baseURL, mediaBaseURL }: {
+    source: string;
+    baseURL?: string;
+    mediaBaseURL?: string;
+  },
 ) {
-  const html = gfm(source, { allowIframes: false, baseUrl });
+  const html = render(source, {
+    allowIframes: false,
+    baseUrl: baseURL,
+    mediaBaseUrl: mediaBaseURL,
+  });
   return (
     <div
-      class="py-8 px-4 markdown-body"
+      class="markdown-body"
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );

@@ -1,0 +1,828 @@
+// Copyright 2022-2023 the Deno authors. All rights reserved. MIT license.
+
+import { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
+import twas from "$twas";
+import { emojify } from "$emoji";
+import { accepts } from "$oak_commons";
+import { moduleDependencyToURLAndDisplay } from "$apiland/util.ts";
+import type {
+  DocPage,
+  DocPageIndex,
+  DocPageModule,
+  DocPageSymbol,
+  InfoPage,
+  ModInfoPage,
+  ModuleDependency,
+  SourcePage,
+} from "$apiland_types";
+import { setSymbols } from "@/utils/doc_utils.ts";
+import {
+  extractAltLineNumberReference,
+  fetchSource,
+  getCanonicalUrl,
+  getDocAsDescription,
+  getModulePath,
+  getRawFile,
+  getReadme,
+  getRepositoryURL,
+  getSourceURL,
+  getVersionList,
+  type RawFile,
+} from "@/utils/registry_utils.ts";
+import { ContentMeta } from "@/components/ContentMeta.tsx";
+import { Header } from "@/components/Header.tsx";
+import { ErrorMessage } from "@/components/ErrorMessage.tsx";
+import { DocView } from "@/components/DocView.tsx";
+import * as Icons from "@/components/Icons.tsx";
+import VersionSelect from "@/islands/VersionSelect.tsx";
+import { SourceView } from "@/components/SourceView.tsx";
+import { PopularityTag } from "@/components/PopularityTag.tsx";
+import { SidePanelPage } from "@/components/SidePanelPage.tsx";
+import { Markdown } from "@/components/Markdown.tsx";
+import {
+  getUserToken,
+  searchView,
+  ssrSearchClick,
+} from "@/utils/search_insights_utils.ts";
+import { Footer } from "$doc_components/footer.tsx";
+import { processProperty } from "$doc_components/doc/utils.ts";
+
+type Views = "doc" | "source" | "info";
+type Params = {
+  name: string;
+  version: string;
+  path: string;
+};
+
+type Data =
+  | { data: DocPage; view: "doc" }
+  | { data: SourcePage; view: "source"; file?: RawFile | Error }
+  | { data: InfoPage; view: "info"; readmeFile?: string };
+type MaybeData =
+  | Data
+  | null;
+
+interface PageData {
+  data: MaybeData;
+}
+
+function getTitle(
+  module: string,
+  version: string | undefined,
+  data: MaybeData,
+): string {
+  if (!data) {
+    return "Third Party";
+  }
+  const title = [version ? `${module}@${version}` : module];
+  if (
+    data.view === "source" &&
+    (data.data.kind === "dir" || data.data.kind === "file")
+  ) {
+    title.unshift(data.data.path);
+  }
+  if (
+    data.view === "doc" &&
+    (data.data.kind === "module" || data.data.kind === "file" ||
+      data.data.kind === "index" || data.data.kind === "symbol")
+  ) {
+    title.unshift(data.data.path);
+    if (data.data.kind === "symbol") {
+      title.unshift(data.data.name);
+    }
+  }
+  return title.join(" | ");
+}
+
+function getDescription(data: MaybeData): string | undefined {
+  if (data) {
+    if (
+      (data.view === "info" && data.data.kind === "modinfo") ||
+      (data.view === "source" &&
+        (data.data.kind === "dir" || data.data.kind === "file")) ||
+      (data.view === "doc" &&
+        (data.data.kind === "index" || data.data.kind === "file"))
+    ) {
+      if (data.data.description) {
+        return emojify(data.data.description);
+      }
+    } else if (data.view === "doc") {
+      if (data.data.kind === "module") {
+        return getDocAsDescription(data.data.docNodes, true);
+      }
+      if (data.data.kind === "symbol") {
+        return getDocAsDescription(data.data.docNodes);
+      }
+    }
+  }
+}
+
+export const handler: Handlers<PageData> = {
+  async GET(req, { params, render, remoteAddr }) {
+    const { name, version, path } = params as Params;
+    const url = new URL(req.url);
+
+    if (name === "std" && url.pathname.startsWith("/x")) {
+      url.pathname = url.pathname.slice(2);
+      return Response.redirect(url, 301);
+    }
+
+    // Deno CLI and bots both present with an `Accept: */*` header, where as
+    // browsers will prefer HTML. Because of this, we have to try to infer a bot
+    // from the UA in order to serve the HTML page.
+    const isHTML = accepts(req, "application/*", "text/html") === "text/html" ||
+      (req.headers.get("accept") === "*/*" &&
+        req.headers.get("user-agent")?.includes("bot"));
+    if (!isHTML) return handlerRaw(req, params as Params);
+
+    let view: Views;
+    if (url.searchParams.has("source")) {
+      view = "source";
+    } else if (url.searchParams.has("doc")) {
+      view = "doc";
+    } else if (!path) {
+      view = "info";
+    } else {
+      view = "doc";
+    }
+
+    const resURL = new URL(
+      `https://apiland.deno.dev/v2/pages/mod/${view}/${name}/${
+        version || "__latest__"
+      }/${path}`,
+    );
+
+    const symbol = url.searchParams.get("s");
+    if (symbol && view === "doc") {
+      resURL.searchParams.set("symbol", symbol);
+    }
+
+    const queryId = url.searchParams.get("qid");
+    const position = url.searchParams.get("pos");
+    url.searchParams.delete("qid");
+    url.searchParams.delete("pos");
+    if (queryId && position && remoteAddr.transport === "tcp") {
+      ssrSearchClick(
+        await getUserToken(req.headers, remoteAddr.hostname),
+        "modules",
+        queryId,
+        name,
+        parseInt(position, 10),
+      );
+    }
+
+    let data: Data;
+
+    const res = await fetch(resURL, {
+      redirect: "manual",
+    });
+    if (res.status === 404) { // module doesnt exist
+      return render({ data: null });
+    } else if (res.status === 302) { // implicit latest
+      const latestVersion = res.headers.get("X-Deno-Latest-Version")!;
+      url.pathname = getModulePath(
+        name,
+        latestVersion,
+        path ? ("/" + path) : undefined,
+      );
+      return Response.redirect(url);
+    } else if (res.status === 301) { // path is directory and there is an index module and its doc
+      const newPath = res.headers.get("X-Deno-Module-Path")!;
+      return new Response(undefined, {
+        headers: {
+          Location: getModulePath(
+            name,
+            version,
+            newPath,
+          ),
+        },
+        status: 301,
+      });
+    } else {
+      data = { data: await res.json(), view };
+    }
+
+    if (data.data.kind === "no-versions") {
+      return render!({ data });
+    }
+
+    if (data.view === "doc" && data.data.kind === "file") {
+      url.searchParams.set("source", "");
+      return Response.redirect(url, 301);
+    }
+
+    const ln = extractAltLineNumberReference(url.pathname);
+    if (ln) {
+      url.pathname = ln.rest;
+      url.searchParams.set("source", "");
+      url.hash = "L" + ln.line;
+      return Response.redirect(url, 302);
+    }
+
+    if (
+      data.view === "info" && data.data.kind === "modinfo" && data.data.readme
+    ) {
+      data.readmeFile = await getReadme(name, version, data.data.readme);
+    } else if (data.view === "source" && data.data.kind === "file") {
+      data.file = await getRawFile(
+        name,
+        version,
+        path ? `/${path}` : "",
+        data.data.size,
+      );
+    }
+
+    await setSymbols(
+      (data.data.kind === "module" || data.data.kind === "symbol")
+        ? data.data.symbols
+        : undefined,
+    );
+    return render({ data });
+  },
+};
+
+const RAW_HEADERS = { "Access-Control-Allow-Origin": "*" };
+
+// Note: this function is _very_ hot. It is called for every download of a /x/
+// module. We need to be careful about what we do here. This code must not rely
+// on any services other than S3.
+async function handlerRaw(
+  req: Request,
+  { name, version, path }: Params,
+): Promise<Response> {
+  if (version === "") {
+    const versions = await getVersionList(name);
+    if (versions === null) {
+      return new Response(`The module '${name}' does not exist`, {
+        status: 404,
+        headers: RAW_HEADERS,
+      });
+    }
+    if (versions.latest === null) {
+      return new Response(`The module '${name}' has no latest version.`, {
+        status: 404,
+        headers: RAW_HEADERS,
+      });
+    }
+    if (path) path = `/${path}`;
+    return new Response(undefined, {
+      status: 302,
+      headers: {
+        ...RAW_HEADERS,
+        Location: getModulePath(name, versions.latest, path),
+        "x-deno-warning":
+          `Implicitly using latest version (${versions.latest}) for ${req.url}`,
+      },
+    });
+  }
+
+  return fetchSource(name, version, path);
+}
+
+export default function Registry(
+  { params, url, data: { data } }: PageProps<PageData>,
+) {
+  let {
+    name,
+    version,
+    path: maybePath,
+  } = params as Params;
+  version &&= decodeURIComponent(version);
+
+  const path = maybePath ? "/" + maybePath : "";
+  const isStd = name === "std";
+
+  let canonical: URL | undefined;
+  if (data && "latest_version" in data.data) {
+    canonical = getCanonicalUrl(url, data.data.latest_version);
+  }
+
+  return (
+    <>
+      <ContentMeta
+        title={getTitle(name, version, data)}
+        description={getDescription(data)}
+        canonical={canonical}
+        ogImage={isStd ? "std" : "modules"}
+        keywords={["deno", "third party", "module", name]}
+      />
+      <div class="min-h-full bg-white">
+        <Header />
+        {data === null
+          ? (
+            <div class="section-x-inset-xl pb-20 pt-10">
+              <ErrorMessage title="404 - Not Found">
+                This {url.searchParams.has("s") ? "symbol" : "module"}{" "}
+                does not exist.
+              </ErrorMessage>
+            </div>
+          )
+          : (
+            <>
+              {data.data.kind !== "modinfo" && (
+                <TopPanel
+                  version={version!}
+                  {...{
+                    name,
+                    path,
+                    url,
+                    ...data,
+                  }}
+                />
+              )}
+              <ModuleView
+                version={version!}
+                {...{ name, path, isStd, url, data }}
+              />
+            </>
+          )}
+        <Footer />
+      </div>
+    </>
+  );
+}
+
+function TopPanel({
+  name,
+  version,
+  path,
+  data,
+  view,
+  url,
+}: {
+  name: string;
+  version: string;
+  path: string;
+  url: URL;
+} & Data) {
+  const hasPageBase = data.kind !== "invalid-version" &&
+    data.kind !== "no-versions" && data.kind !== "redirect";
+
+  const popularityTag = hasPageBase
+    ? data.tags?.find((tag) => tag.kind === "popularity")
+    : undefined;
+
+  const searchParam = view === "source"
+    ? "?source"
+    : (path === "" ? "?doc" : "");
+
+  return (
+    <div class="bg-ultralight border-b border-grayDefault">
+      <div class="section-x-inset-xl py-5 flex items-center">
+        <div class="flex flex-col md:(flex-row items-center) justify-between w-full gap-4">
+          <div class="overflow-hidden">
+            <a
+              class="inline-flex items-center gap-1.5 font-medium text-xs text-gray-500 hover:text-default"
+              href={getModulePath(name, version)}
+            >
+              <Icons.ChevronLeft />
+              <span>Module</span>
+            </a>
+            <Breadcrumbs
+              name={name}
+              version={version}
+              path={path}
+              view={view}
+              search={url.searchParams}
+            />
+
+            {data.kind !== "no-versions" && data.kind !== "redirect" &&
+              data.description &&
+              (
+                <div
+                  class="text-sm lg:truncate"
+                  title={emojify(data.description)}
+                >
+                  {emojify(data.description)}
+                </div>
+              )}
+          </div>
+          <div class="flex flex-col items-stretch gap-4 w-full md:w-auto lg:(flex-row justify-between) flex-shrink-0">
+            {hasPageBase && (
+              <div class="flex flex-row justify-between md:justify-center items-center gap-4 border border-border rounded-md bg-white py-2 px-5">
+                <div class="flex items-center whitespace-nowrap gap-2">
+                  <Icons.GitHub class="h-4 w-auto text-gray-700 flex-none" />
+                  <a
+                    class="link"
+                    href={`https://github.com/${data.upload_options.repository}`}
+                  >
+                    {data.upload_options.repository}
+                  </a>
+                </div>
+                {popularityTag && name !== "std" && (
+                  <PopularityTag>{popularityTag.value}</PopularityTag>
+                )}
+              </div>
+            )}
+            {data.kind !== "no-versions" && data.kind !== "redirect" && (
+              <VersionSelect
+                versions={Object.fromEntries(
+                  data.versions.map((
+                    ver,
+                  ) => [ver, getModulePath(name, ver, path) + searchParam]),
+                )}
+                selectedVersion={version}
+              />
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ModuleView({
+  name,
+  version,
+  path,
+  isStd,
+  url,
+  userToken,
+  data,
+}: {
+  name: string;
+  version: string;
+  path: string;
+  isStd: boolean;
+  url: URL;
+  userToken?: string;
+  data: Data;
+}) {
+  if (data.data.kind === "no-versions") {
+    return (
+      <div class="section-x-inset-xl py-12">
+        <ErrorMessage title="No uploaded versions">
+          This module name has been reserved for a repository, but no versions
+          have been uploaded yet. Modules that do not upload a version within 30
+          days of registration will be removed.
+        </ErrorMessage>
+      </div>
+    );
+  } else if (data.data.kind === "invalid-version") {
+    return (
+      <div class="section-x-inset-xl py-12">
+        <ErrorMessage title="404 - Not Found">
+          This version does not exist for this module.
+        </ErrorMessage>
+      </div>
+    );
+  } else if (data.data.kind === "notfound") {
+    return (
+      <div class="section-x-inset-xl py-12">
+        <ErrorMessage title="404 - Not Found">
+          This file or directory could not be found.
+        </ErrorMessage>
+      </div>
+    );
+  } else if (data.data.kind === "redirect") {
+    throw "Unexpected Apiland Redirect: " + data.data.path;
+  }
+
+  const repositoryURL = getRepositoryURL(
+    data.data.upload_options,
+    path,
+    data.data.kind === "index" ? "tree" : undefined,
+  );
+
+  if (data.view === "info") {
+    searchView(userToken, "modules", data.data.module);
+    return (
+      <InfoView
+        version={version!}
+        data={data.data}
+        readmeFile={data.readmeFile}
+        name={name}
+      />
+    );
+  } else if (data.view === "source") {
+    return (
+      <SourceView
+        {...{
+          isStd,
+          name,
+          version,
+          path,
+          url,
+          data: {
+            ...data.data,
+            // deno-lint-ignore no-explicit-any
+            file: data.file as any,
+          },
+          repositoryURL,
+        }}
+      />
+    );
+  } else {
+    return (
+      <DocView
+        {...{
+          isStd,
+          name,
+          version,
+          path,
+          url,
+          data: data.data as DocPageSymbol | DocPageModule | DocPageIndex,
+          repositoryURL,
+        }}
+      />
+    );
+  }
+}
+
+function Breadcrumbs({
+  name,
+  path,
+  version,
+  view,
+  search,
+}: {
+  name: string;
+  version: string;
+  path: string;
+  view: Views;
+  search?: URLSearchParams;
+}) {
+  const segments = path.split("/").splice(1);
+  segments.unshift(name);
+  if (name !== "std") {
+    segments.unshift("x");
+  }
+
+  let seg = "";
+  const out: [
+    segment: string,
+    url: string,
+    separator: "/" | "#" | "." | ">",
+  ][] = [];
+  for (const segment of segments) {
+    if (segment === "") {
+      continue;
+    } else if (segment === name) {
+      seg += `/${segment}@${version}`;
+    } else if (segment !== "") {
+      seg += "/" + segment;
+    }
+
+    out.push([segment, seg, "/"]);
+  }
+
+  const symbol = search?.get("s");
+  if (symbol) {
+    const parts = symbol.split(".");
+    let segParts = "";
+    for (let i = 0; i < parts.length; i++) {
+      segParts += (i === 0 ? "" : ".") + parts[i];
+      seg += (i === 0 ? "?s=" : "") + segParts;
+
+      out.push([parts[i], seg, i === 0 ? ">" : "."]);
+    }
+
+    const property = search?.get("p");
+    if (property) {
+      const [processedProperty, isPrototype] = processProperty(property);
+      seg += `&p=${property}`;
+      out.push([processedProperty, seg, isPrototype ? "#" : "."]);
+    }
+  }
+
+  return (
+    <p class="text-xl leading-6 font-bold text-gray-400 space-x-1 children:inline-block">
+      {out.map(([seg, url, separator], i) => {
+        if (view === "source") {
+          url += "?source";
+        } else if (view === "doc" && seg === name) {
+          url += "?doc";
+        }
+        return (
+          <>
+            {i !== 0 && <span>{separator}</span>}
+            <a href={url} class="link" title={seg}>
+              {seg}
+            </a>
+          </>
+        );
+      })}
+    </p>
+  );
+}
+
+function InfoView(
+  { name, data, version, readmeFile }: {
+    name: string;
+    version: string;
+    data: ModInfoPage;
+    readmeFile?: string;
+  },
+) {
+  data.description &&= emojify(data.description);
+
+  const attributes = [];
+
+  const popularityTag = data.tags?.find((tag) => tag.kind === "popularity");
+  if (popularityTag && name !== "std") {
+    attributes.push(
+      <PopularityTag>{popularityTag.value}</PopularityTag>,
+    );
+  }
+
+  if (data.upload_options.repository.split("/")[0] == "denoland") {
+    attributes.push(
+      <div class="flex items-center gap-1.5 text-gray-600">
+        <Icons.CheckmarkVerified class="h-4 w-auto" />
+        <span class="font-medium leading-none">
+          Official Deno project
+        </span>
+      </div>,
+    );
+  }
+
+  if (data.config) {
+    attributes.push(
+      <div class="flex items-center gap-1.5">
+        <Icons.Logo class="w-4 h-4" />
+        <span class="text-gray-600 font-medium leading-none">
+          Includes Deno configuration
+        </span>
+      </div>,
+    );
+  }
+
+  const dependencies: Record<string, ModuleDependency[]> = {};
+
+  if (data.dependencies) {
+    for (const dependency of data.dependencies) {
+      if (!dependencies[dependency.src]) {
+        dependencies[dependency.src] = [];
+      }
+
+      dependencies[dependency.src].push(dependency);
+    }
+  }
+
+  return (
+    <SidePanelPage
+      sidepanel={
+        <div class="space-y-6 children:space-y-2">
+          <div class="space-y-4!">
+            <div class="space-y-2">
+              <div class="flex items-center gap-2.5 w-full">
+                <Breadcrumbs
+                  name={name}
+                  version={version}
+                  path="/"
+                  view="info"
+                />
+                <div class="tag-label bg-[#23232326] text-gray-600 font-semibold!">
+                  {version}
+                </div>
+              </div>
+
+              {data.description &&
+                (
+                  <div class="text-sm" title={data.description}>
+                    {data.description}
+                  </div>
+                )}
+            </div>
+
+            <div class="space-y-3 children:(flex items-center gap-1.5 leading-none font-medium)">
+              <span>
+                <Icons.Docs />
+                <a
+                  href={getModulePath(name, version) + "?doc"}
+                  class="link"
+                >
+                  View Documentation
+                </a>
+              </span>
+              <span>
+                <Icons.Source />
+                <a
+                  href={getModulePath(name, version) + "?source"}
+                  class="link"
+                >
+                  View Source
+                </a>
+              </span>
+            </div>
+          </div>
+
+          {attributes.length !== 0 && (
+            <div class="space-y-2.5!">
+              <div class="text-gray-400 font-medium text-sm leading-4">
+                Attributes
+              </div>
+              {attributes}
+            </div>
+          )}
+
+          <div>
+            <div class="text-gray-400 font-medium text-sm leading-4">
+              Repository
+            </div>
+            <div class="flex items-center gap-1.5 whitespace-nowrap">
+              <Icons.GitHub class="h-4 w-auto text-gray-700 flex-none" />
+              <a
+                class="link truncate"
+                href={`https://github.com/${data.upload_options.repository}`}
+              >
+                {data.upload_options.repository}
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <div class="text-gray-400 font-medium text-sm leading-4">
+              Current version released
+            </div>
+            <div title={data.uploaded_at}>
+              {twas(new Date(data.uploaded_at))}
+            </div>
+          </div>
+
+          {Object.keys(dependencies).length !== 0 && (
+            <div class="space-y-2">
+              <div class="text-gray-400  text-sm leading-4">
+                Dependencies
+              </div>
+              {Object.entries(dependencies).sort(([kindA], [kindB]) =>
+                kindA.localeCompare(kindB)
+              ).map(([kind, dependencies]) => (
+                <div>
+                  <>
+                    <div class="font-medium">{kind}</div>
+                    <div class="children:(block max-w-full mr-2 link truncate)">
+                      {dependencies.sort((depA, depB) =>
+                        depA.pkg.localeCompare(depB.pkg)
+                      ).map((dep) => {
+                        const [url, name] = moduleDependencyToURLAndDisplay(
+                          dep,
+                        );
+                        if (url) {
+                          return <a title={name} href={url}>{name}</a>;
+                        } else {
+                          return <span title={name}>{name}</span>;
+                        }
+                      })}
+                    </div>
+                  </>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div>
+            <div class="text-gray-400 font-medium text-sm leading-4">
+              Versions
+            </div>
+            <ol class="border border-gray-200 rounded-lg list-none overflow-y-scroll max-h-80">
+              {data.versions.map((listVersion) => (
+                <li class="odd:(bg-ultralight rounded-md)">
+                  <a
+                    class={`flex px-5 py-2 link ${
+                      listVersion === version
+                        ? "text-primary font-bold"
+                        : "text-default font-normal"
+                    }`}
+                    href={getModulePath(name, listVersion)}
+                  >
+                    <span class="block w-full truncate">{listVersion}</span>
+                    {listVersion === data.latest_version && (
+                      <div class="tag-label bg-[#056CF025] text-tag-blue">
+                        Latest
+                      </div>
+                    )}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      }
+    >
+      <div class="p-6 rounded-xl border border-border">
+        {readmeFile
+          ? (
+            <Markdown
+              source={(name === "std"
+                ? readmeFile
+                : readmeFile.replace(/\$STD_VERSION/g, version)).replace(
+                  /\$MODULE_VERSION/g,
+                  version,
+                )}
+              baseURL={getSourceURL(name, version, "/")}
+            />
+          )
+          : (
+            <div class="flex items-center justify-center italic text-gray-400 -m-2">
+              No readme found.
+            </div>
+          )}
+      </div>
+    </SidePanelPage>
+  );
+}
+
+export const config: RouteConfig = {
+  routeOverride: "/x/:name{@:version}?/:path*",
+};

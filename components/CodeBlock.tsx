@@ -1,43 +1,10 @@
-// Copyright 2022 the Deno authors. All rights reserved. MIT license.
+// Copyright 2022-2023 the Deno authors. All rights reserved. MIT license.
 
-/** @jsx h */
-/** @jsxFrag Fragment */
-import { Fragment, h, htmlEscape, Prism } from "../deps.ts";
-import { normalizeTokens } from "../util/prism_utils.ts";
-
-import "https://esm.sh/prismjs@1.25.0/components/prism-bash?no-check";
-//import "https://esm.sh/prismjs@1.25.0/components/prism-batch?no-check";
-import "https://esm.sh/prismjs@1.25.0/components/prism-css?no-check";
-//import "https://esm.sh/prismjs@1.25.0/components/prism-css-extras?no-check";
-//import "https://esm.sh/prismjs@1.25.0/components/prism-editorconfig?no-check";
-import "https://esm.sh/prismjs@1.25.0/components/prism-diff?no-check";
-//import "https://esm.sh/prismjs@1.25.0/components/prism-docker?no-check";
-//import "https://esm.sh/prismjs@1.25.0/components/prism-git?no-check";
-//import "https://esm.sh/prismjs@1.25.0/components/prism-ignore?no-check";
-import "https://esm.sh/prismjs@1.25.0/components/prism-javascript?no-check";
-//import "https://esm.sh/prismjs@1.25.0/components/prism-js-extras?no-check";
-//import "https://esm.sh/prismjs@1.25.0/components/prism-js-templates?no-check";
-//import "https://esm.sh/prismjs@1.25.0/components/prism-jsdoc?no-check";
-import "https://esm.sh/prismjs@1.25.0/components/prism-json?no-check";
-import "https://esm.sh/prismjs@1.25.0/components/prism-jsx?no-check";
-//import "https://esm.sh/prismjs@1.25.0/components/prism-markdown?no-check";
-import "https://esm.sh/prismjs@1.25.0/components/prism-rust?no-check";
-//import "https://esm.sh/prismjs@1.25.0/components/prism-toml?no-check";
-import "https://esm.sh/prismjs@1.25.0/components/prism-tsx?no-check";
-import "https://esm.sh/prismjs@1.25.0/components/prism-typescript?no-check";
-import "https://esm.sh/prismjs@1.25.0/components/prism-yaml?no-check";
-
-// Modifies the color of 'variable' token
-// to avoid poor contrast
-// ref: https://github.com/denoland/dotland/issues/1724
-/*
-for (const style of light.styles) {
-  if (style.types.includes("variable")) {
-    // Chrome suggests this color instead of rgb(156, 220, 254);
-    style.style.color = "rgb(61, 88, 101)";
-  }
-}
-*/
+// deno-fmt-ignore-file
+import { escape as htmlEscape } from "$he";
+import { normalizeTokens, Prism } from "@/utils/prism_utils.ts";
+import { extractLinkUrl } from "@/utils/registry_utils.ts";
+import * as Icons from "./Icons.tsx";
 
 export interface CodeBlockProps {
   code: string;
@@ -59,6 +26,9 @@ export interface CodeBlockProps {
     | "wasm"
     | "makefile"
     | "dockerfile";
+  url: URL;
+  class?: string;
+  enableCopyButton?: boolean;
 }
 
 export function RawCodeBlock({
@@ -67,12 +37,12 @@ export function RawCodeBlock({
   class: extraClassName,
   disablePrefixes,
   enableLineRef = false,
+  enableCopyButton = false,
+  url,
 }: CodeBlockProps & {
-  class?: string;
   enableLineRef?: boolean;
 }) {
-  const codeDivClasses =
-    "text-gray-300 text-right select-none inline-block mr-2 sm:mr-3";
+  const codeDivClasses = "text-gray-300 text-right select-none inline-block mr-2 sm:mr-3";
   const newLang = language === "shell"
     ? "bash"
     : language === "text"
@@ -92,66 +62,102 @@ export function RawCodeBlock({
 
   const tokens = normalizeTokens(Prism.tokenize(code, grammar));
 
+  // The copy button is bigger than a single line, so if the copy button
+  // is enabled we need to center the content.
+  let flexCenter = "";
+  if (enableCopyButton && tokens.length == 1) {
+    flexCenter = "items-center";
+  }
+
   return (
-    <div
+    <pre
+      class={
+        `group text-sm flex ${extraClassName ?? ""} gfm-highlight highlight-source-${newLang} ${flexCenter}`}
       data-color-mode="light"
       data-light-theme="light"
-      class="markdown-body "
     >
-      <pre
-        class={`highlight highlight-source-${newLang} flex ${
-          extraClassName ?? ""
-        }`}
-      >
-        {enableLineRef &&
-          (
-            <div class={codeDivClasses}>
-              {tokens.map((_, i) => (
-                <div
-                  class="token text-right"
-                  onClick={`location.hash = "#L${i + 1}"`}
-                >
-                  {i + 1}
-                </div>
-              ))}
-            </div>
-          )}
-        {!disablePrefixes && (newLang === "bash") &&
-          (
-            <code>
-              <div class={codeDivClasses}>$</div>
-            </code>
-          )}
-        <div class="block w-full overflow-y-auto">
-          {tokens.map((line, i) => {
-            return (
-              <span id={"L" + (i + 1)} class="block">
-                {line.map((token) => {
-                  if (token.empty) {
-                    return <br />;
-                  }
-                  return (
-                    <span class={"token " + token.types.join(" ")}>
-                      {token.content}
-                    </span>
+      {enableLineRef &&
+        (
+          <div class={codeDivClasses}>
+            {tokens.map((_, i) => (
+              <a
+                class="text-gray-500 text-right block token"
+                tab-index={-1}
+                href={`#L${i + 1}`}
+              >
+                {i + 1}
+              </a>
+            ))}
+          </div>
+        )}
+      {!disablePrefixes && (newLang === "bash") &&
+        (
+          <code>
+            <div class={codeDivClasses}>$</div>
+          </code>
+        )}
+      <div class="block w-full overflow-y-auto">
+        {tokens.map((line, i) => {
+          return (
+            <span id={"L" + (i + 1)} class="block">
+              {line.map((token) => {
+                if (token.empty) {
+                  return <br />;
+                }
+
+                if (token.types.includes("string")) {
+                  const result = extractLinkUrl(
+                    token.content,
+                    url.origin + url.pathname,
                   );
-                })}
-              </span>
-            );
-          })}
-        </div>
-      </pre>
-    </div>
+                  if (result) {
+                    const [href, specifier, quote] = result;
+                    return (
+                      <span
+                        class={"token " +
+                          token.types.join(" ")}
+                      >
+                        {quote}
+                        <a
+                          class="hover:underline"
+                          href={href + "?source"}
+                        >
+                          {specifier}
+                        </a>
+                        {quote}
+                      </span>
+                    );
+                  }
+                }
+                return (
+                  <span class={"token " + token.types.join(" ")}>
+                    {token.content}
+                  </span>
+                );
+              })}
+            </span>
+          );
+        })}
+      </div>
+      {enableCopyButton &&
+      (
+        <button
+          class="opacity-0 group-hover:opacity-100 rounded border border-[#D2D2DC] p-1.5 self-start"
+          // @ts-ignore onClick does support strings
+          onClick={`navigator?.clipboard?.writeText('${code.trim()}');`}
+        >
+          <Icons.Copy />
+        </button>
+      )}
+    </pre>
   );
 }
 
-export function CodeBlock({ code, language, disablePrefixes }: CodeBlockProps) {
+export function CodeBlock(props: CodeBlockProps) {
   return (
     <RawCodeBlock
-      code={code}
-      language={language}
-      disablePrefixes={disablePrefixes}
-      class="p-4"
+      {...props}
+      class={`p-4 bg-ultralight rounded-lg ${props.class ?? ""}`}
     />
   );
 }

@@ -1,10 +1,12 @@
 {
   "tasks": {
-    "dev": "deno run --watch --no-check --allow-read --allow-env --allow-net main.ts"
+    "start": "deno run -A --watch=routes/,static/ dev.ts",
+    "test": "deno test --allow-net --allow-read --allow-env --allow-hrtime"
   },
-  "fmt": {
-    "files": {
-      "exclude": [".git"]
-    }
-  }
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact"
+  },
+  "lock": false,
+  "importMap": "./import_map.json"
 }
