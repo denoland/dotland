@@ -186,7 +186,8 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
               >
                 {!showAll ? "all" : "the most recent"}
               </a>{" "}
-              commits.
+              commits or append e.g. ?-100 to this page's URL to view results
+              for the last 100 commits.
             </p>
             <div class="mt-12 pt-4">
               <h4 class="text-2xl font-bold tracking-tight">
