@@ -176,6 +176,11 @@ export const handler: Handlers<PageData> = {
     const res = await fetch(resURL, {
       redirect: "manual",
     });
+
+    if (res.status === 504) {
+      console.error(`/x/${name} Timed out`);
+    }
+
     if (res.status === 404) { // module doesnt exist
       return render({ data: null });
     } else if (res.status === 302) { // implicit latest
