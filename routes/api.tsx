@@ -155,6 +155,9 @@ export const handler: Handlers<LibDocPage> = {
     }
 
     const res = await fetch(resURL);
+    if (res.status === 504) {
+      console.error("/api Timed out");
+    }
     const data = await res.json();
     await setSymbols();
 
