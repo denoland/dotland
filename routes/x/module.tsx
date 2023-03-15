@@ -204,6 +204,10 @@ export const handler: Handlers<PageData> = {
         status: 301,
       });
     } else {
+      if (res.status !== 200) {
+        console.error(`/x/${name} Status ${res.status}`);
+      }
+
       data = { data: await res.json(), view };
     }
 
