@@ -367,6 +367,10 @@ function TopPanel({
   const hasPageBase = data.kind !== "invalid-version" &&
     data.kind !== "no-versions" && data.kind !== "redirect";
 
+  if (hasPageBase && data.upload_options?.repository === undefined) {
+    console.error(name, version, path, data, view, url);
+  }
+
   const popularityTag = hasPageBase
     ? data.tags?.find((tag) => tag.kind === "popularity")
     : undefined;
