@@ -19,7 +19,7 @@ interface Data {
 
 const announcement = {
   major: true,
-  href: "/saaskit",
+  href: "https://deno.com/saaskit",
   text:
     "Announcing Deno SaaSKit: a modern, open-source template to start your SaaS today.",
 } as const;
