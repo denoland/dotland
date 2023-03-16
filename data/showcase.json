@@ -190,5 +190,10 @@
     "image": "/images/showcase/socialcards.png",
     "title": "Create social cards",
     "link": "https://socialcards.dev/"
+  },
+  {
+    "image": "/images/showcase/var.png",
+    "title": "var - CLI tool for storing and retrieving variables",
+    "link": "https://var.rocks/"
   }
 ]
