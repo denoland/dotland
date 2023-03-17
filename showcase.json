@@ -31,5 +31,10 @@
     "title": "Lume",
     "link": "https://lume.land/",
     "github": "lumeland/lume"
+  },
+  {
+    "image": "/images/showcase/var.png",
+    "title": "var - CLI tool for variables",
+    "link": "https://var.rocks/"
   }
 ]
