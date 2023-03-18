@@ -377,7 +377,7 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
               <div class="mt-8">
                 <a href="#max-worker-memory-usage" id="max-worker-memory-usage">
                   <h5 class="text-lg font-medium tracking-tight hover:underline">
-                    Max worker memory usage
+                    Max memory usage (Web Worker)
                   </h5>
                 </a>{" "}
                 <BenchmarkChart
