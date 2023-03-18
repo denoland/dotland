@@ -190,5 +190,10 @@
     "image": "/images/showcase/socialcards.png",
     "title": "Create social cards",
     "link": "https://socialcards.dev/"
+  },
+  {
+    "image": "/images/showcase/var.png",
+    "title": "var",
+    "link": "https://var.rocks/"
   }
 ]
