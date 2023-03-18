@@ -270,6 +270,28 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                 </p>
               </div>
               <div class="mt-8">
+                <a href="#worker-execution-time" id="worker-execution-time">
+                  <h5 class="text-lg font-medium tracking-tight hover:underline">
+                    Worker execution time
+                  </h5>
+                </a>
+                <BenchmarkChart
+                  columns={benchData.execTimeWorker.filter(({ name }) =>
+                    !typescriptBenches.includes(name)
+                  )}
+                  yLabel="seconds"
+                  yTickFormat={formatLogScale}
+                />
+                <p class="mt-1">
+                  Log scale. This shows how much time total it takes to run a
+                  script. For deno to execute typescript, it must first compile
+                  it to JS. A warm startup is when deno has a cached JS output
+                  already, so it should be fast because it bypasses the TS
+                  compiler. A cold startup is when deno must compile from
+                  scratch.
+                </p>
+              </div>
+              <div class="mt-8">
                 <a href="#thread-count" id="thread-count">
                   <h5 class="text-lg font-medium tracking-tight hover:underline">
                     Thread count
@@ -303,6 +325,23 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                 </p>
               </div>
               <div class="mt-8">
+                <a href="#syscall-worker-count" id="syscall-worker-count">
+                  <h5 class="text-lg font-medium tracking-tight hover:underline">
+                    Syscall worker count
+                  </h5>
+                </a>{" "}
+                <BenchmarkChart
+                  columns={benchData.syscallCountWorker.filter(({ name }) =>
+                    !typescriptBenches.includes(name)
+                  )}
+                  yLabel="syscalls"
+                />
+                <p class="mt-1">
+                  How many total syscalls are performed when executing a given
+                  script. Smaller is better.
+                </p>
+              </div>
+              <div class="mt-8">
                 <a href="#max-memory-usage" id="max-memory-usage">
                   <h5 class="text-lg font-medium tracking-tight hover:underline">
                     Max memory usage
@@ -310,6 +349,23 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                 </a>{" "}
                 <BenchmarkChart
                   columns={benchData.maxMemory.filter(({ name }) =>
+                    !typescriptBenches.includes(name)
+                  )}
+                  yLabel="megabytes"
+                  yTickFormat={formatMB}
+                />
+                <p class="mt-1">
+                  Max memory usage during execution. Smaller is better.
+                </p>
+              </div>
+              <div class="mt-8">
+                <a href="#max-worker-memory-usage" id="max-worker-memory-usage">
+                  <h5 class="text-lg font-medium tracking-tight hover:underline">
+                    Max worker memory usage
+                  </h5>
+                </a>{" "}
+                <BenchmarkChart
+                  columns={benchData.maxMemoryWorker.filter(({ name }) =>
                     !typescriptBenches.includes(name)
                   )}
                   yLabel="megabytes"
@@ -405,27 +461,19 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                 </p>
               </div>
               <div class="mt-8">
-                <a href="#bundle-size" id="bundle-size">
+                <a href="#snapshot-size" id="snapshot-size">
                   <h5 class="text-lg font-medium tracking-tight hover:underline">
-                    Bundle size
+                    Snapshot file sizes
                   </h5>
-                </a>{" "}
+                </a>
                 <BenchmarkChart
-                  columns={benchData.bundleSize}
-                  yLabel="kilobytes"
-                  yTickFormat={formatKB}
+                  columns={benchData.snapshotSize}
+                  yLabel={"megabytes"}
+                  yTickFormat={formatMB}
                 />
-                <p class="mt-1">Size of different bundled scripts.</p>
-                <ul class="ml-8 list-disc my-2">
-                  <li>
-                    <a class="link" href="/std/http/file_server.ts">
-                      file_server
-                    </a>
-                  </li>
-                  <li>
-                    <a class="link" href="/std/examples/gist.ts">gist</a>
-                  </li>
-                </ul>
+                <p class="mt-1">
+                  We track the size of various snapshot files here.
+                </p>
               </div>
               <div class="mt-8">
                 <a href="#cargo-deps" id="cargo-deps">
@@ -436,6 +484,7 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                 <BenchmarkChart
                   columns={benchData.cargoDeps}
                   yLabel="dependencies"
+                  yTickFormat={(n) => Math.round(n).toString()}
                 />
               </div>
             </div>

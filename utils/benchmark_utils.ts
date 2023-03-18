@@ -122,9 +122,10 @@ function linearRegression(data: Array<number | null>): number[] {
 function createColumns(
   data: BenchmarkRun[],
   benchmarkName: BenchmarkName,
+  filter: (key: string) => boolean = () => true,
 ): Column[] {
   const varieties = getBenchmarkVarieties(data, benchmarkName);
-  return varieties.map((variety) => ({
+  return varieties.filter(filter).map((variety) => ({
     name: variety,
     data: data.map((d) => {
       if (d[benchmarkName] != null) {
@@ -160,11 +161,14 @@ function createColumns1(
   ];
 }
 
-function createBinarySizeColumns(data: BenchmarkRun[]): Column[] {
+function createBinarySizeColumns(
+  data: BenchmarkRun[],
+  filter: (key: string) => boolean,
+): Column[] {
   const propName = "binary_size";
   const last = data[data.length - 1]!;
   const binarySizeNames = Object.keys(last[propName]!);
-  return binarySizeNames.map((name) => ({
+  return binarySizeNames.filter(filter).map((name) => ({
     name,
     data: data.map((d) => {
       const binarySizeData = d["binary_size"];
@@ -197,10 +201,13 @@ function createThreadCountColumns(data: BenchmarkRun[]): Column[] {
   }));
 }
 
-function createSyscallCountColumns(data: BenchmarkRun[]): Column[] {
+function createSyscallCountColumns(
+  data: BenchmarkRun[],
+  filter: (key: string) => boolean,
+): Column[] {
   const propName = "syscall_count";
   const syscallCountNames = Object.keys(data[data.length - 1][propName]!);
-  return syscallCountNames.map((name) => ({
+  return syscallCountNames.filter(filter).map((name) => ({
     name,
     data: data.map((d) => {
       const syscallCountData = d[propName];
@@ -300,6 +307,7 @@ function extractProxyFields(data: BenchmarkRun[]): void {
 
 export interface BenchmarkData {
   execTime: Column[];
+  execTimeWorker: Column[];
   throughput: Column[];
   reqPerSec: Column[];
   normalizedReqPerSec: Column[];
@@ -307,10 +315,12 @@ export interface BenchmarkData {
   maxLatency: Column[];
   normalizedMaxLatency: Column[];
   maxMemory: Column[];
+  maxMemoryWorker: Column[];
   binarySize: Column[];
+  snapshotSize: Column[];
   threadCount: Column[];
   syscallCount: Column[];
-  bundleSize: Column[];
+  syscallCountWorker: Column[];
   cargoDeps: Column[];
   sha1List: string[];
   lspExecTime: Column[];
@@ -326,18 +336,49 @@ export function reshape(data: BenchmarkRun[]): BenchmarkData {
   const normalizedMaxLatency = createNormalizedColumns(data, "max_latency");
 
   return {
-    execTime: createColumns(data, "benchmark"),
+    execTime: createColumns(
+      data,
+      "benchmark",
+      (key) => !key.startsWith("workers"),
+    ),
+    execTimeWorker: createColumns(
+      data,
+      "benchmark",
+      (key) => key.startsWith("workers"),
+    ),
     throughput: createColumns(data, "throughput"),
     reqPerSec: createColumns(data, "req_per_sec"),
     normalizedReqPerSec,
     proxy: createColumns(data, "req_per_sec_proxy"),
     maxLatency: createColumns(data, "max_latency"),
     normalizedMaxLatency,
-    maxMemory: createColumns(data, "max_memory"),
-    binarySize: createBinarySizeColumns(data),
+    maxMemory: createColumns(
+      data,
+      "max_memory",
+      (key) => !key.startsWith("workers"),
+    ),
+    maxMemoryWorker: createColumns(
+      data,
+      "max_memory",
+      (key) => key.startsWith("workers"),
+    ),
+    binarySize: createBinarySizeColumns(
+      data,
+      (key) => !key.includes("SNAPSHOT"),
+    ),
+    snapshotSize: createBinarySizeColumns(
+      data,
+      (key) => key.includes("SNAPSHOT"),
+    ),
     threadCount: createThreadCountColumns(data),
-    syscallCount: createSyscallCountColumns(data),
-    bundleSize: createColumns(data, "bundle_size"),
+    syscallCount: createSyscallCountColumns(
+      data,
+      (name) => !name.startsWith("workers"),
+    ),
+    syscallCountWorker: createSyscallCountColumns(
+      data,
+      (name) => name.startsWith("workers"),
+    ),
     cargoDeps: createColumns1(data, "cargo_deps"),
     sha1List: data.map((d) => d.sha1),
     lspExecTime: createColumns(data, "lsp_exec_time"),
