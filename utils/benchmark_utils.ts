@@ -185,7 +185,10 @@ function createBinarySizeColumns(
   }));
 }
 
-function createThreadCountColumns(data: BenchmarkRun[], filter: (key: string) => boolean): Column[] {
+function createThreadCountColumns(
+  data: BenchmarkRun[],
+  filter: (key: string) => boolean,
+): Column[] {
   const propName = "thread_count";
   const last = data[data.length - 1];
   const threadCountNames = Object.keys(last[propName]!);
@@ -371,8 +374,14 @@ export function reshape(data: BenchmarkRun[]): BenchmarkData {
       data,
       (key) => key.includes("SNAPSHOT"),
     ),
-    threadCount: createThreadCountColumns(data, (name) => !name.startsWith("workers")),
-    threadCountWorker: createThreadCountColumns(data, (name) => name.startsWith("workers")),
+    threadCount: createThreadCountColumns(
+      data,
+      (name) => !name.startsWith("workers"),
+    ),
+    threadCountWorker: createThreadCountColumns(
+      data,
+      (name) => name.startsWith("workers"),
+    ),
     syscallCount: createSyscallCountColumns(
       data,
       (name) => !name.startsWith("workers"),
