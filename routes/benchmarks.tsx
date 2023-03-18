@@ -272,7 +272,7 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
               <div class="mt-8">
                 <a href="#worker-execution-time" id="worker-execution-time">
                   <h5 class="text-lg font-medium tracking-tight hover:underline">
-                    Worker execution time
+                    Execution time (Web Workers)
                   </h5>
                 </a>
                 <BenchmarkChart
