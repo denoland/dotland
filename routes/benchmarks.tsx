@@ -308,6 +308,22 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                 </p>
               </div>
               <div class="mt-8">
+                <a href="#worker-thread-count" id="worker-thread-count">
+                  <h5 class="text-lg font-medium tracking-tight hover:underline">
+                    Worker thread count
+                  </h5>
+                </a>
+                <BenchmarkChart
+                  columns={benchData.threadCountWorker.filter(({ name }) =>
+                    !typescriptBenches.includes(name)
+                  )}
+                  yLabel="threads"
+                />
+                <p class="mt-1">
+                  How many threads various programs use. Smaller is better.
+                </p>
+              </div>
+              <div class="mt-8">
                 <a href="#syscall-count" id="syscall-count">
                   <h5 class="text-lg font-medium tracking-tight hover:underline">
                     Syscall count
