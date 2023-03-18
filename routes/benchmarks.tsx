@@ -310,7 +310,7 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
               <div class="mt-8">
                 <a href="#worker-thread-count" id="worker-thread-count">
                   <h5 class="text-lg font-medium tracking-tight hover:underline">
-                    Worker thread count
+                    Thread count (Web Workers)
                   </h5>
                 </a>
                 <BenchmarkChart
