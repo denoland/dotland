@@ -343,7 +343,7 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
               <div class="mt-8">
                 <a href="#syscall-worker-count" id="syscall-worker-count">
                   <h5 class="text-lg font-medium tracking-tight hover:underline">
-                    Syscall worker count
+                    Syscall count (Web Worker)
                   </h5>
                 </a>{" "}
                 <BenchmarkChart
