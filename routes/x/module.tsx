@@ -177,6 +177,11 @@ export const handler: Handlers<PageData> = {
     const res = await fetch(resURL, {
       redirect: "manual",
     });
+
+    if (res.status === 504) {
+      console.error(`/x/${name} Timed out`);
+    }
+
     if (res.status === 404) { // module doesnt exist
       return render({ data: null });
     } else if (res.status === 302) { // implicit latest
@@ -200,6 +205,10 @@ export const handler: Handlers<PageData> = {
         status: 301,
       });
     } else {
+      if (res.status !== 200) {
+        console.error(`/x/${name} Status ${res.status}`);
+      }
+
       data = { data: await res.json(), view };
     }
 
@@ -313,7 +322,7 @@ export default function Registry(
         ogImage={isStd ? "std" : "modules"}
         keywords={["deno", "third party", "module", name]}
       />
-      <div class="min-h-full">
+      <div class="min-h-full bg-white">
         <Header />
         {data === null
           ? (
@@ -364,6 +373,10 @@ function TopPanel({
 } & Data) {
   const hasPageBase = data.kind !== "invalid-version" &&
     data.kind !== "no-versions" && data.kind !== "redirect";
+
+  if (hasPageBase && data.upload_options?.repository === undefined) {
+    console.error(name, version, path, data, view, url);
+  }
 
   const popularityTag = hasPageBase
     ? data.tags?.find((tag) => tag.kind === "popularity")

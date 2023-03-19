@@ -183,11 +183,17 @@
   {
     "image": "/images/showcase/neolace.png",
     "title": "Neolace",
-    "link": "https://www.neolace.com/"
+    "link": "https://www.neolace.com/",
+    "github": "neolace-dev/neolace"
   },
   {
     "image": "/images/showcase/socialcards.png",
     "title": "Create social cards",
     "link": "https://socialcards.dev/"
+  },
+  {
+    "image": "/images/showcase/var.png",
+    "title": "var",
+    "link": "https://var.rocks/"
   }
 ]
