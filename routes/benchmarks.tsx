@@ -256,6 +256,7 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                   columns={benchData.execTime.filter(({ name }) =>
                     !typescriptBenches.includes(name)
                   )}
+                  yTickFormat={(n) => n.toFixed(3)}
                   yLabel="seconds"
                 />
                 <p class="mt-1">
@@ -276,6 +277,7 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                   columns={benchData.execTimeWorker.filter(({ name }) =>
                     !typescriptBenches.includes(name)
                   )}
+                  yTickFormat={(n) => n.toFixed(3)}
                   yLabel="seconds"
                 />
                 <p class="mt-1">
