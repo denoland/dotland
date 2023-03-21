@@ -388,38 +388,6 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
               </div>
             </div>
             <div class="mt-20">
-              <h4 class="text-2xl font-bold tracking-tight">
-                TypeScript Performance
-              </h4>
-              <div class="mt-8">
-                <a href="#type-checking" id="type-checking">
-                  <h5 class="text-lg font-medium tracking-tight hover:underline">
-                    Type Checking
-                  </h5>
-                </a>
-                <BenchmarkChart
-                  columns={benchData.execTime.filter(({ name }) =>
-                    typescriptBenches.includes(name)
-                  )}
-                  yLabel="seconds"
-                />
-                <p class="mt-1">
-                  In both cases,{" "}
-                  <InlineCode>std/examples/chat/server_test.ts</InlineCode>{" "}
-                  is cached by Deno. The workload contains 20 unique TypeScript
-                  modules. With <em>check</em>{" "}
-                  a full TypeScript type check is performed, while{" "}
-                  <em>no_check</em> uses the <InlineCode>--no-check</InlineCode>
-                  {" "}
-                  flag to skip a full type check. <em>bundle</em>{" "}
-                  does a full type check and generates a single file output,
-                  while <em>bundle_no_check</em> uses the{" "}
-                  <InlineCode>--no-check</InlineCode>{" "}
-                  flag to skip a full type check.
-                </p>
-              </div>
-            </div>
-            <div class="mt-20">
               <h4 class="text-2xl font-bold tracking-tight">I/O</h4>
               <input
                 type="checkbox"
