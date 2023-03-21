@@ -10,7 +10,6 @@ import { InlineCode } from "@/components/InlineCode.tsx";
 import {
   BenchmarkRun,
   formatKB,
-  formatLogScale,
   formatMB,
   formatMsec,
   formatReqSec,
@@ -258,15 +257,13 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                     !typescriptBenches.includes(name)
                   )}
                   yLabel="seconds"
-                  yTickFormat={formatLogScale}
                 />
                 <p class="mt-1">
-                  Log scale. This shows how much time total it takes to run a
-                  script. For deno to execute typescript, it must first compile
-                  it to JS. A warm startup is when deno has a cached JS output
-                  already, so it should be fast because it bypasses the TS
-                  compiler. A cold startup is when deno must compile from
-                  scratch.
+                  This shows how much time total it takes to run a script. For
+                  deno to execute typescript, it must first compile it to JS. A
+                  warm startup is when deno has a cached JS output already, so
+                  it should be fast because it bypasses the TS compiler. A cold
+                  startup is when deno must compile from scratch.
                 </p>
               </div>
               <div class="mt-8">
@@ -280,15 +277,13 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                     !typescriptBenches.includes(name)
                   )}
                   yLabel="seconds"
-                  yTickFormat={formatLogScale}
                 />
                 <p class="mt-1">
-                  Log scale. This shows how much time total it takes to run a
-                  script. For deno to execute typescript, it must first compile
-                  it to JS. A warm startup is when deno has a cached JS output
-                  already, so it should be fast because it bypasses the TS
-                  compiler. A cold startup is when deno must compile from
-                  scratch.
+                  This shows how much time total it takes to run a script. For
+                  deno to execute typescript, it must first compile it to JS. A
+                  warm startup is when deno has a cached JS output already, so
+                  it should be fast because it bypasses the TS compiler. A cold
+                  startup is when deno must compile from scratch.
                 </p>
               </div>
               <div class="mt-8">
@@ -407,7 +402,6 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                     typescriptBenches.includes(name)
                   )}
                   yLabel="seconds"
-                  yTickFormat={formatLogScale}
                 />
                 <p class="mt-1">
                   In both cases,{" "}
