@@ -182,36 +182,19 @@ function ToCEntry({
   const hasChildren = typeof entry === "object" && entry.children;
   return (
     <li key={slug}>
-      <input
-        type="checkbox"
-        id={slug}
-        class="hidden checked:siblings:even:children:first-child:rotate-90 checked:siblings:last-child:block"
-        checked={active || path.startsWith(`/${slug}/`)}
-        disabled={!hasChildren}
-      />
-
-      <label
-        htmlFor={slug}
+      <a
+        href={`/manual@${version}/${slug}`}
         class={`flex! items-center gap-2 ${
           outermost
             ? "px-2.5 py-2 font-semibold"
             : `pl-${depth * 6} pr-2.5 py-1 font-normal`
         } rounded-md ${active ? "link bg-ultralight" : "hover:text-gray-500"}`}
       >
-        <Icons.TriangleRight
-          aria-label={`open section ${name}`}
-          onKeyDown="if (event.code === 'Space' || event.code === 'Enter') { this.parentElement.click(); event.preventDefault(); }"
-          tabindex={0}
-          class={"h-2.5 w-auto cursor-pointer outline-none select-none " +
-            (hasChildren ? "" : "invisible")}
-        />
-        <a href={`/manual@${version}/${slug}`}>
-          {name}
-        </a>
-      </label>
+        {name}
+      </a>
 
       {hasChildren && (
-        <ol class="list-decimal font-normal hidden  nested">
+        <ol class="list-decimal font-normal nested">
           {Object.entries(entry.children!).map(([childSlug, entry]) => (
             <ToCEntry
               slug={`${slug}/${childSlug}`}
