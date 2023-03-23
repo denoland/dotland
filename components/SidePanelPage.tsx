@@ -33,7 +33,7 @@ export function SidePanelPage({ children, sidepanel }: {
       <div class="flex flex-col mt-0 mb-16 lg:(flex-row mt-12 gap-12 section-x-inset-xl)">
         {sidepanel && (
           <div class="hidden pb-2 w-full border-b border-border lg:(pb-0 border-none block w-72 flex-shrink-0)">
-            <div class="w-full space-y-5 section-x-inset-xl lg:section-x-inset-none">
+            <div class="w-full space-y-8 section-x-inset-xl lg:section-x-inset-none">
               {sidepanel}
             </div>
           </div>
@@ -62,7 +62,7 @@ export function ManualOrAPI(
     <div class="border-b border-border flex gap-1">
       {(["Manual", "Runtime APIs"] as const).map((key) => (
         <a
-          class="-mb-px px-2.5 font-medium leading-none rounded-md hover:bg-grayDefault"
+          class="-mb-px px-2.5 font-medium leading-none rounded-md hover:bg-grayDefault text-sm"
           href={`${entries[key]}@${version}`}
         >
           <div

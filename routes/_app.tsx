@@ -17,7 +17,16 @@ export default function App({ Component }: AppProps) {
           rel="stylesheet"
           href="https://esm.sh/dialog-polyfill@0.5.6/dialog-polyfill.css"
         />
-
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lexend:wght@400;500&display=swap"
+        />
         <link rel="stylesheet" href="/app.css" />
         <link rel="stylesheet" href="/gfm.css" />
       </Head>

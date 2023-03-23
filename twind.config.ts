@@ -2,6 +2,19 @@ import { Options } from "$fresh/plugins/twind.ts";
 import { css } from "twind/css";
 import { apply } from "twind";
 
+const slate = {
+  50: "#f8fafc",
+  100: "#f1f5f9",
+  200: "#e2e8f0",
+  300: "#cbd5e1",
+  400: "#94a3b8",
+  500: "#64748b",
+  600: "#475569",
+  700: "#334155",
+  800: "#1e293b",
+  900: "#0f172a",
+} as const;
+
 export default {
   selfURL: import.meta.url,
   preflight(preflight) {
@@ -23,6 +36,8 @@ export default {
         '"Courier New"',
         "monospace",
       ],
+      sans: ["Inter", "sans-serif"],
+      display: ["Lexend", "sans-serif"],
     },
     extend: {
       colors: {
@@ -40,6 +55,7 @@ export default {
         azure: "#E1F8FF",
         azure2: "#BEECFD",
         azure3: "#E1ECF2",
+        slate,
 
         colorWashFrom: "#002585",
         colorWashTo: "#209DEE",

@@ -69,8 +69,8 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
       <SidePanelPage
         sidepanel={
           <>
-            <ManualOrAPI current="Manual" version={version} />
             <div class="space-y-3 children:w-full">
+              <ManualOrAPI current="Manual" version={version} />
               <VersionSelect
                 versions={Object.fromEntries(
                   versions.map((ver) => [ver, `/manual@${ver}${path}`]),
@@ -184,17 +184,27 @@ function ToCEntry({
     <li key={slug}>
       <a
         href={`/manual@${version}/${slug}`}
-        class={`flex! items-center gap-2 ${
+        class={`flex! items-center gap-2 relative text-sm ${
           outermost
-            ? "px-2.5 py-2 font-semibold"
-            : `pl-${depth * 6} pr-2.5 py-1 font-normal`
-        } rounded-md ${active ? "link bg-ultralight" : "hover:text-gray-500"}`}
+            ? "font-display font-medium dark:text-white"
+            : `pl-${depth * 6} pr-2.5 py-1 before:bg-sky-500`
+        } rounded-md ${active ? "link font-semibold" : "hover:text-gray-500"} ${
+          active
+            ? "text-mainBlue"
+            : outermost
+            ? "text-gray-900"
+            : "text-gray-500"
+        }`}
       >
+        {!outermost && active && (
+          <div class="absolute left-0 top-1/2 w-1.5 h-1.5 -mt-0.5 -ml-1 rounded bg-mainBlue">
+          </div>
+        )}
         {name}
       </a>
 
       {hasChildren && (
-        <ol class="list-decimal font-normal nested">
+        <ul class="font-normal nested mt-2 space-y-2 border-l-2 border-slate-100 dark:border-slate-800 lg:mt-4 lg:space-y-3 lg:border-slate-200">
           {Object.entries(entry.children!).map(([childSlug, entry]) => (
             <ToCEntry
               slug={`${slug}/${childSlug}`}
@@ -204,7 +214,7 @@ function ToCEntry({
               depth={depth + 1}
             />
           ))}
-        </ol>
+        </ul>
       )}
     </li>
   );
@@ -221,7 +231,7 @@ function ToC({
 }) {
   return (
     <nav>
-      <ol class="list-decimal list-inside font-semibold nested">
+      <ul class="list-inside font-semibold nested space-y-9">
         {Object.entries(tableOfContents).map(([slug, entry]) => (
           <ToCEntry
             slug={slug}
@@ -232,7 +242,7 @@ function ToC({
             depth={0}
           />
         ))}
-      </ol>
+      </ul>
     </nav>
   );
 }
