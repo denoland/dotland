@@ -193,7 +193,6 @@ export function withLog(
   return async (req, con) => {
     let err: unknown;
     let res!: Response;
-    const start = performance.now();
     try {
       res = await handler(req, con);
     } catch (e) {
@@ -203,9 +202,6 @@ export function withLog(
         "500 Internal Server Error\nPlease try again later.",
         { status: 500 },
       );
-    } finally {
-      ga(req, con, res, start, err);
-      ga4(req, con, res, start, err);
     }
     return res;
   };
