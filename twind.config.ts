@@ -75,6 +75,12 @@ export default {
       animation: {
         move: "move 6s linear infinite",
       },
+      screens: {
+        "8xl": "88rem",
+      },
+      maxWidth: {
+        "8xl": "88rem",
+      },
     },
   },
   plugins: {
