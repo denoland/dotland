@@ -83,12 +83,12 @@ const gaForHumans = createReporter({
   },
 });
 
-const ga: Reporter = async (...args) => {
+export const ga: Reporter = async (...args) => {
   await Promise.all([gaForBots(...args), gaForHumans(...args)]);
 };
 
 // Create GA4 reporter.
-function ga4(
+export function ga4(
   request: Request,
   conn: ConnInfo,
   response: Response,
