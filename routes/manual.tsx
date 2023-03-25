@@ -69,8 +69,8 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
       <SidePanelPage
         sidepanel={
           <>
-            <div class="sticky top-[4.5rem] -ml-0.5 h-[calc(100vh-4.5rem)] overflow-y-auto overflow-x-hidden py-16 pl-0.5">
-              <div class="space-y-3 children:w-full">
+            <div class="sticky pr-[3rem] top-[4.5rem] -ml-0.5 h-[calc(100vh-4.5rem)] overflow-y-auto overflow-x-hidden py-16 pl-0.5">
+              <div class="space-y-3 children:w-full mb-12">
                 <ManualOrAPI current="Manual" version={version} />
                 <VersionSelect
                   versions={Object.fromEntries(

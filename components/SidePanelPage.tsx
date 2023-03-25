@@ -30,7 +30,7 @@ export function SidePanelPage({ children, sidepanel }: {
         </>
       )}
 
-      <div class="flex flex-col mt-0 mb-16 lg:(flex-row gap-12 section-x-inset-8xl)">
+      <div class="flex flex-col mt-0 mb-16 lg:(flex-row gap-12 max-w-8xl mx-auto)">
         {sidepanel && (
           <div class="sticky top-0 hidden pb-2 w-full h-[calc(100vh-4.5rem)] border-b border-border lg:(pb-0 border-none block w-72 flex-shrink-0)">
             <div class="w-full space-y-8 section-x-inset-xl lg:section-x-inset-none">
@@ -40,7 +40,7 @@ export function SidePanelPage({ children, sidepanel }: {
         )}
 
         <main
-          class="focus:outline-none min-w-0 w-full flex flex-col section-x-inset-xl mt-7 lg:(section-x-inset-none mt-0)"
+          class="focus:outline-none min-w-0 w-full flex flex-col section-x-inset-xl mt-7 lg:(section-x-inset-none mt-16)"
           tabIndex={0}
         >
           {children}
