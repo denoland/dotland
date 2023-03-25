@@ -285,19 +285,13 @@ async function handlerRaw(
     });
   }
 
-  performance.mark("fetchSourceStart");
+  const start = performance.now();
   const res = await fetchSource(name, version, path);
-  performance.mark("fetchSourceEnd");
-
-  const fetchSourcePerf = performance.measure(
-    "fetchSource",
-    "fetchSourceStart",
-    "fetchSourceEnd",
-  );
+  const end = performance.now();
 
   res.headers.set(
     "Server-Timing",
-    `fetchSource;dur=${fetchSourcePerf.duration.toPrecision(3)}`,
+    `fetchSource;dur=${(end - start).toPrecision(3)}`,
   );
 
   return res;
