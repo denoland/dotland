@@ -285,7 +285,22 @@ async function handlerRaw(
     });
   }
 
-  return fetchSource(name, version, path);
+  performance.mark("fetchSourceStart");
+  const res = await fetchSource(name, version, path);
+  performance.mark("fetchSourceEnd");
+
+  const fetchSourcePerf = performance.measure(
+    "fetchSource",
+    "fetchSourceStart",
+    "fetchSourceEnd",
+  );
+
+  res.headers.set(
+    "Server-Timing",
+    `fetchSource;dur=${fetchSourcePerf.duration.toPrecision(3)}`,
+  );
+
+  return res;
 }
 
 export default function Registry(

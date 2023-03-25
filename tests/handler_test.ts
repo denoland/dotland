@@ -90,6 +90,23 @@ Deno.test({
 });
 
 Deno.test({
+  name: "/std@0.127.0/version.ts responds with Server-Timing header",
+  sanitizeResources: false,
+  async fn() {
+    const res = await handleRequest(
+      new Request("https://deno.land/std@0.127.0/version.ts?source", {
+        headers: { Accept: DENO_CLI_ACCEPT },
+      }),
+    );
+    const serverTiming = res.headers.get("Server-Timing");
+    console.log({ serverTiming });
+    assert(serverTiming?.includes("fetchSource"));
+    const text = await res.text();
+    assertStringIncludes(text, "/** Version of the Deno standard modules");
+  },
+});
+
+Deno.test({
   name: "/std/version.ts with Deno CLI Accept responds with redirect",
   async fn() {
     const res = await handleRequest(
