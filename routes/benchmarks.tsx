@@ -10,7 +10,6 @@ import { InlineCode } from "@/components/InlineCode.tsx";
 import {
   BenchmarkRun,
   formatKB,
-  formatLogScale,
   formatMB,
   formatMsec,
   formatReqSec,
@@ -257,16 +256,15 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                   columns={benchData.execTime.filter(({ name }) =>
                     !typescriptBenches.includes(name)
                   )}
+                  yTickFormat={(n) => n.toFixed(3)}
                   yLabel="seconds"
-                  yTickFormat={formatLogScale}
                 />
                 <p class="mt-1">
-                  Log scale. This shows how much time total it takes to run a
-                  script. For deno to execute typescript, it must first compile
-                  it to JS. A warm startup is when deno has a cached JS output
-                  already, so it should be fast because it bypasses the TS
-                  compiler. A cold startup is when deno must compile from
-                  scratch.
+                  This shows how much time total it takes to run a script. For
+                  deno to execute typescript, it must first compile it to JS. A
+                  warm startup is when deno has a cached JS output already, so
+                  it should be fast because it bypasses the TS compiler. A cold
+                  startup is when deno must compile from scratch.
                 </p>
               </div>
               <div class="mt-8">
@@ -279,16 +277,15 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                   columns={benchData.execTimeWorker.filter(({ name }) =>
                     !typescriptBenches.includes(name)
                   )}
+                  yTickFormat={(n) => n.toFixed(3)}
                   yLabel="seconds"
-                  yTickFormat={formatLogScale}
                 />
                 <p class="mt-1">
-                  Log scale. This shows how much time total it takes to run a
-                  script. For deno to execute typescript, it must first compile
-                  it to JS. A warm startup is when deno has a cached JS output
-                  already, so it should be fast because it bypasses the TS
-                  compiler. A cold startup is when deno must compile from
-                  scratch.
+                  This shows how much time total it takes to run a script. For
+                  deno to execute typescript, it must first compile it to JS. A
+                  warm startup is when deno has a cached JS output already, so
+                  it should be fast because it bypasses the TS compiler. A cold
+                  startup is when deno must compile from scratch.
                 </p>
               </div>
               <div class="mt-8">
@@ -389,39 +386,6 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
                 />
                 <p class="mt-1">
                   Max memory usage during execution. Smaller is better.
-                </p>
-              </div>
-            </div>
-            <div class="mt-20">
-              <h4 class="text-2xl font-bold tracking-tight">
-                TypeScript Performance
-              </h4>
-              <div class="mt-8">
-                <a href="#type-checking" id="type-checking">
-                  <h5 class="text-lg font-medium tracking-tight hover:underline">
-                    Type Checking
-                  </h5>
-                </a>
-                <BenchmarkChart
-                  columns={benchData.execTime.filter(({ name }) =>
-                    typescriptBenches.includes(name)
-                  )}
-                  yLabel="seconds"
-                  yTickFormat={formatLogScale}
-                />
-                <p class="mt-1">
-                  In both cases,{" "}
-                  <InlineCode>std/examples/chat/server_test.ts</InlineCode>{" "}
-                  is cached by Deno. The workload contains 20 unique TypeScript
-                  modules. With <em>check</em>{" "}
-                  a full TypeScript type check is performed, while{" "}
-                  <em>no_check</em> uses the <InlineCode>--no-check</InlineCode>
-                  {" "}
-                  flag to skip a full type check. <em>bundle</em>{" "}
-                  does a full type check and generates a single file output,
-                  while <em>bundle_no_check</em> uses the{" "}
-                  <InlineCode>--no-check</InlineCode>{" "}
-                  flag to skip a full type check.
                 </p>
               </div>
             </div>
