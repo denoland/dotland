@@ -26,7 +26,6 @@ const css = `${CSS}
   font-family: Inter, sans-serif;
   color: #334155;
   line-height: 1.75;
-  -webkit-font-smoothing: antialiased;
 }
 .markdown-body h2 {
   font-size: 1.5em;

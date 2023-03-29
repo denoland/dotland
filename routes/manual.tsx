@@ -93,7 +93,7 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
             href={new URL(`/manual/${params.path}`, url).href}
           />
         )}
-        <div class="w-full justify-self-center flex-shrink-1">
+        <div class="w-full justify-self-center flex-shrink-1 antialiased">
           <a
             href={getDocURL(version, path)}
             class="float-right py-2.5 px-4.5 rounded-md bg-grayDefault hover:bg-border leading-none font-medium"
