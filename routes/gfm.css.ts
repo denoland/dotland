@@ -20,7 +20,23 @@ const css = `${CSS}
   font-family: Lexend, sans-serif;
   font-weight: 200;
   border-bottom: none;
+  color: #0f172a;
 }
+.markdown-body {
+  font-family: Inter, sans-serif;
+  color: #334155;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+.markdown-body h2 {
+  font-size: 1.5em;
+}
+.markdown-body h3 {
+  font-size: 1.25em;
+  margin-top: 1.6em;
+  line-height: 1.6;
+}
+
 :root{
   --color-prettylights-syntax-comment: #8b949e;
   --color-prettylights-syntax-constant: #79c0ff;
