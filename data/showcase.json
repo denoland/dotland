@@ -195,5 +195,10 @@
     "image": "/images/showcase/var.png",
     "title": "var",
     "link": "https://var.rocks/"
+  },
+  {
+    "image": "/images/showcase/plark.png",
+    "title": "Plark - AI Website Builder",
+    "link": "https://plark.com/"
   }
 ]
