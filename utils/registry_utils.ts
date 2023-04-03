@@ -213,6 +213,7 @@ export async function fetchSource(
     path.startsWith("/") ? path : `/${path}`,
   );
 
+  const serverHeaders = [];
   let lastErr;
   for (let i = 0; i < 3; i++) {
     try {
@@ -230,7 +231,16 @@ export async function fetchSource(
         });
       }
 
+      resp.headers.get("server-timing")
+        ? serverHeaders.push(
+          `attempt;val=${i + 1},${resp.headers.get("server-timing")}`,
+        )
+        : null;
       const headers = new Headers(resp.headers);
+
+      if (serverHeaders.length > 0) {
+        headers.set("server-timing", serverHeaders.join(","));
+      }
 
       if (
         path.endsWith(".jsx") &&
