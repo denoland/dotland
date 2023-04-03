@@ -144,7 +144,11 @@ export const handler: Handlers<LibDocPage> = {
     }
 
     const id = crypto.randomUUID();
-    console.log(`req_id=${id} req_url=${url} req_ip=${(remoteAddr as Deno.NetAddr).hostname} apiland_url=${resURL}`);
+    console.log(
+      `req_id=${id} req_url=${url} req_ip=${
+        (remoteAddr as Deno.NetAddr).hostname
+      } apiland_url=${resURL}`,
+    );
     const time = performance.now();
 
     const resURL = new URL(
@@ -153,7 +157,11 @@ export const handler: Handlers<LibDocPage> = {
       }/${params.version}`,
     );
 
-    console.log(`req_id=${id} apiland_duration=${performance.now() - time} apiland_status=${res.status}`);
+    console.log(
+      `req_id=${id} apiland_duration=${
+        performance.now() - time
+      } apiland_status=${res.status}`,
+    );
 
     const symbol = url.searchParams.get("s");
     if (symbol) {
