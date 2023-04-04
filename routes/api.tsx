@@ -135,12 +135,23 @@ export default function API(
 }
 
 export const handler: Handlers<LibDocPage> = {
-  async GET(req, { params, render }) {
+  async GET(req, { params, render, remoteAddr }) {
     const url = new URL(req.url);
 
     if (!params.version) {
       url.pathname = `/api@${versions[0]}`;
       return Response.redirect(url, 302);
+    }
+
+    const resURL = new URL(
+      `https://apiland.deno.dev/v2/pages/lib/doc/${
+        url.searchParams.has("unstable") ? "deno_unstable" : "deno_stable"
+      }/${params.version}`,
+    );
+
+    const symbol = url.searchParams.get("s");
+    if (symbol) {
+      resURL.searchParams.set("symbol", symbol);
     }
 
     const id = crypto.randomUUID();
@@ -151,11 +162,7 @@ export const handler: Handlers<LibDocPage> = {
     );
     const time = performance.now();
 
-    const resURL = new URL(
-      `https://apiland.deno.dev/v2/pages/lib/doc/${
-        url.searchParams.has("unstable") ? "deno_unstable" : "deno_stable"
-      }/${params.version}`,
-    );
+    const res = await fetch(resURL);
 
     console.log(
       `req_id=${id} apiland_duration=${
@@ -163,12 +170,6 @@ export const handler: Handlers<LibDocPage> = {
       } apiland_status=${res.status}`,
     );
 
-    const symbol = url.searchParams.get("s");
-    if (symbol) {
-      resURL.searchParams.set("symbol", symbol);
-    }
-
-    const res = await fetch(resURL);
     if (res.status === 504) {
       console.error("/api Timed out");
     }
