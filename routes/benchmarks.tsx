@@ -137,8 +137,8 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
             columns={normalized
               ? benchData.normalizedMsgPerSec
               : benchData.msgPerSec}
-            yLabel="milliseconds"
-            yTickFormat={formatMsec}
+            yLabel="1k msg/sec"
+            yTickFormat={formatReqSec}
           />
           <p class="mt-1">
             Tests WebSocket server performance. 100 concurrent connections do as
