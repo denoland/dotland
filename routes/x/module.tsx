@@ -174,9 +174,23 @@ export const handler: Handlers<PageData> = {
 
     let data: Data;
 
+    const id = crypto.randomUUID();
+    console.log(
+      `req_id=${id} req_url=${url} req_ip=${
+        (remoteAddr as Deno.NetAddr).hostname
+      } apiland_url=${resURL}`,
+    );
+    const time = performance.now();
+
     const res = await fetch(resURL, {
       redirect: "manual",
     });
+
+    console.log(
+      `req_id=${id} apiland_duration=${
+        performance.now() - time
+      } apiland_status=${res.status}`,
+    );
 
     if (res.status === 504) {
       console.error(`/x/${name} Timed out`);

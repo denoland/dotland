@@ -135,7 +135,7 @@ export default function API(
 }
 
 export const handler: Handlers<LibDocPage> = {
-  async GET(req, { params, render }) {
+  async GET(req, { params, render, remoteAddr }) {
     const url = new URL(req.url);
 
     if (!params.version) {
@@ -154,7 +154,22 @@ export const handler: Handlers<LibDocPage> = {
       resURL.searchParams.set("symbol", symbol);
     }
 
+    const id = crypto.randomUUID();
+    console.log(
+      `req_id=${id} req_url=${url} req_ip=${
+        (remoteAddr as Deno.NetAddr).hostname
+      } apiland_url=${resURL}`,
+    );
+    const time = performance.now();
+
     const res = await fetch(resURL);
+
+    console.log(
+      `req_id=${id} apiland_duration=${
+        performance.now() - time
+      } apiland_status=${res.status}`,
+    );
+
     if (res.status === 504) {
       console.error("/api Timed out");
     }
