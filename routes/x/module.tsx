@@ -134,7 +134,7 @@ export const handler: Handlers<PageData> = {
     const isHTML = accepts(req, "application/*", "text/html") === "text/html" ||
       (req.headers.get("accept") === "*/*" &&
         req.headers.get("user-agent")?.includes("bot"));
-    if (!isHTML) return handlerRaw(req, url, params as Params);
+    if (!isHTML) return handlerRaw(req, url, remoteAddr, params as Params);
 
     let view: Views;
     if (url.searchParams.has("source")) {
@@ -273,6 +273,7 @@ const RAW_HEADERS = { "Access-Control-Allow-Origin": "*" };
 async function handlerRaw(
   req: Request,
   url: URL,
+  remoteAddr: Deno.Addr,
   { name, version, path }: Params,
 ): Promise<Response> {
   if (version === "") {
