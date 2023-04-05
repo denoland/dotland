@@ -314,7 +314,7 @@ async function handlerRaw(
   const dur = performance.now() - time;
 
   console.log(
-    `req_id=${id} apiland_duration=${dur} fetchsource_status=${res.status}`,
+    `req_id=${id} fetchsource_duration=${dur} fetchsource_status=${res.status}`,
   );
 
   res.headers.append("Server-Timing", `fetchSource;dur=${Math.ceil(dur)}`);
