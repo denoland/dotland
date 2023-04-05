@@ -156,9 +156,9 @@ export const handler: Handlers<LibDocPage> = {
 
     const id = crypto.randomUUID();
     console.log(
-      `req_id=${id} req_url=${url} req_ip=${
+      `req_id=${id} req_url='${url}' req_ip=${
         (remoteAddr as Deno.NetAddr).hostname
-      } apiland_url=${resURL}`,
+      } apiland_url='${resURL}'`,
     );
     const time = performance.now();
 

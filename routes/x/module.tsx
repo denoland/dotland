@@ -134,7 +134,7 @@ export const handler: Handlers<PageData> = {
     const isHTML = accepts(req, "application/*", "text/html") === "text/html" ||
       (req.headers.get("accept") === "*/*" &&
         req.headers.get("user-agent")?.includes("bot"));
-    if (!isHTML) return handlerRaw(req, params as Params);
+    if (!isHTML) return handlerRaw(req, url, params as Params);
 
     let view: Views;
     if (url.searchParams.has("source")) {
@@ -176,9 +176,9 @@ export const handler: Handlers<PageData> = {
 
     const id = crypto.randomUUID();
     console.log(
-      `req_id=${id} req_url=${url} req_ip=${
+      `req_id=${id} req_url='${url}' req_ip=${
         (remoteAddr as Deno.NetAddr).hostname
-      } apiland_url=${resURL}`,
+      } apiland_url='${resURL}'`,
     );
     const time = performance.now();
 
@@ -272,6 +272,7 @@ const RAW_HEADERS = { "Access-Control-Allow-Origin": "*" };
 // on any services other than S3.
 async function handlerRaw(
   req: Request,
+  url: URL,
   { name, version, path }: Params,
 ): Promise<Response> {
   if (version === "") {
@@ -300,14 +301,22 @@ async function handlerRaw(
     });
   }
 
-  const start = performance.now();
-  const res = await fetchSource(name, version, path);
-  const end = performance.now();
-
-  res.headers.append(
-    "Server-Timing",
-    `fetchSource;dur=${Math.ceil(end - start)}`,
+  const id = crypto.randomUUID();
+  console.log(
+    `req_id=${id} req_url='${url}' req_ip=${
+      (remoteAddr as Deno.NetAddr).hostname
+    } fetchsource_module=${name} fetchsource_version=${version} fetchsource_path=${path}`,
   );
+  const time = performance.now();
+
+  const res = await fetchSource(name, version, path);
+  const dur = performance.now() - time;
+
+  console.log(
+    `req_id=${id} apiland_duration=${dur} fetchsource_status=${res.status}`,
+  );
+
+  res.headers.append("Server-Timing", `fetchSource;dur=${Math.ceil(dur)}`);
 
   return res;
 }
