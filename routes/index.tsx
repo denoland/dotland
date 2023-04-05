@@ -449,11 +449,11 @@ export default function Home({ data }: PageProps<Data>) {
                 </>
               ),
             }].map(({ Icon, title, body, url }) => (
-              <div class="flex items-start flex-row-reverse gap-8 lg:(flex-col gap-9)">
-                <a href={url} target="_blank">
+              <div class="flex justify-between items-start flex-row-reverse gap-8 lg:(flex-col gap-9)">
+                <a href={url} target="_blank" class="lg:mx-auto">
                   <Icon class="flex-none w-[3.25rem] md:w-16 lg:w-18" />
                 </a>
-                <div class="inline space-y-3 lg:space-y-4">
+                <div class="inline space-y-3 lg:(space-y-4 text-center)">
                   <h3 class="font-bold text-default text-[1.375rem] md:text-3xl lg:text-4xl">
                     <a href={url} target="_blank">{title}</a>
                   </h3>
@@ -475,7 +475,7 @@ const gradientLabelBeforeAfter =
   "absolute z-10 inset-0 rounded-full border-transparent box-border border-[3px] lg:border-4";
 
 function Section(
-  { type, header, subheader, children }: {
+  { type, header, subheader, children, childrenCentered }: {
     type: string;
     header: string;
     subheader: string;
@@ -485,7 +485,7 @@ function Section(
   return (
     <div class="section-x-inset-xl pt-12 pb-18 lg:(pt-18 pb-24)">
       <div
-        class={tw`colorWash rounded-full relative border-0 py-2 w-22 md:(py-2.5 w-36 mx-auto) before:(${gradientLabelBeforeAfter} ${
+        class={tw`colorWash rounded-full relative border-0 py-2 w-36 md:(py-2.5 w-52 mx-auto) before:(${gradientLabelBeforeAfter} ${
           css({
             content: '""',
             "background-clip": "border-box",
@@ -512,7 +512,7 @@ function Section(
       <h2 class="font-bold text-default leading-none mt-5 mb-4 text-3xl md:(my-5 text-5xl text-center) lg:text-6xl">
         {header}
       </h2>
-      <p class="font-semibold text-normalBlue text-xl md:(text-2xl text-center)">
+      <p class="font-semibold text-normalBlue text-xl md:(text-2xl text-center) lg:(px-72)">
         {subheader}
       </p>
 
