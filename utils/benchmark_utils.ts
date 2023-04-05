@@ -35,6 +35,7 @@ export interface BenchmarkRun {
   thread_count?: BenchmarkVariantsResultSet;
   throughput?: BenchmarkVariantsResultSet;
   lsp_exec_time?: BenchmarkVariantsResultSet;
+  ws_msg_per_sec?: BenchmarkVariantsResultSet;
 }
 
 export type BenchmarkName = Exclude<keyof BenchmarkRun, "created_at" | "sha1">;
@@ -328,6 +329,8 @@ export interface BenchmarkData {
   cargoDeps: Column[];
   sha1List: string[];
   lspExecTime: Column[];
+  msgPerSec: Column[];
+  normalizedMsgPerSec: Column[];
 }
 
 export function reshape(data: BenchmarkRun[]): BenchmarkData {
@@ -338,6 +341,7 @@ export function reshape(data: BenchmarkRun[]): BenchmarkData {
 
   const normalizedReqPerSec = createNormalizedColumns(data, "req_per_sec");
   const normalizedMaxLatency = createNormalizedColumns(data, "max_latency");
+  const normalizedMsgPerSec = createNormalizedColumns(data, "ws_msg_per_sec");
 
   return {
     execTime: createColumns(
@@ -353,6 +357,8 @@ export function reshape(data: BenchmarkRun[]): BenchmarkData {
     throughput: createColumns(data, "throughput"),
     reqPerSec: createColumns(data, "req_per_sec"),
     normalizedReqPerSec,
+    msgPerSec: createColumns(data, "ws_msg_per_sec"),
+    normalizedMsgPerSec,
     proxy: createColumns(data, "req_per_sec_proxy"),
     maxLatency: createColumns(data, "max_latency"),
     normalizedMaxLatency,

@@ -120,11 +120,29 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
               ? benchData.normalizedMaxLatency
               : benchData.maxLatency}
             yLabel="milliseconds"
-            yTickFormat={formatMsec}
+            yTickFormat={formatReqSec}
           />
           <p class="mt-1">
             Max latency during the same test used above for requests/second.
             Smaller is better.
+          </p>
+        </div>
+        <div class="mt-8">
+          <a href="#ws-echo-throughput" id="ws-echo-throughput">
+            <h5 class="text-lg font-medium tracking-tight hover:underline">
+              WebSocket Server Throughput
+            </h5>
+          </a>{" "}
+          <BenchmarkChart
+            columns={normalized
+              ? benchData.normalizedMsgPerSec
+              : benchData.msgPerSec}
+            yLabel="1k msg/sec"
+            yTickFormat={formatReqSec}
+          />
+          <p class="mt-1">
+            Tests WebSocket server performance. 100 concurrent connections do as
+            many echo requests as possible. Bigger is better.
           </p>
         </div>
       </div>
