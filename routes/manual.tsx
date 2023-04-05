@@ -5,6 +5,8 @@ import { Handlers } from "$fresh/server.ts";
 import { ContentMeta } from "@/components/ContentMeta.tsx";
 import { Header } from "@/components/Header.tsx";
 import { Footer } from "$doc_components/footer.tsx";
+import { Head } from "$fresh/runtime.ts";
+
 import { Markdown } from "@/components/Markdown.tsx";
 import * as Icons from "@/components/Icons.tsx";
 import { ManualOrAPI, SidePanelPage } from "@/components/SidePanelPage.tsx";
@@ -65,11 +67,17 @@ export default function Manual({ params, url, data }: PageProps<Data>) {
         ]}
       />
       <Header manual />
+      <Head>
+        <script src="/manual.js"></script>
+      </Head>
 
       <SidePanelPage
         sidepanel={
           <>
-            <div class="sticky pr-[3rem] top-[4.5rem] -ml-0.5 h-[calc(100vh-4.5rem)] overflow-y-auto overflow-x-hidden py-16 pl-0.5">
+            <div
+              id="SidePanelScrollContainer"
+              class="sticky pr-[3rem] top-[4.5rem] -ml-0.5 h-[calc(100vh-4.5rem)] overflow-y-auto overflow-x-hidden py-16 pl-0.5"
+            >
               <div class="space-y-3 children:w-full mb-12">
                 <ManualOrAPI current="Manual" version={version} />
                 <VersionSelect
