@@ -475,7 +475,7 @@ const gradientLabelBeforeAfter =
   "absolute z-10 inset-0 rounded-full border-transparent box-border border-[3px] lg:border-4";
 
 function Section(
-  { type, header, subheader, children, childrenCentered }: {
+  { type, header, subheader, children }: {
     type: string;
     header: string;
     subheader: string;
