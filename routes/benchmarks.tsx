@@ -119,7 +119,7 @@ export default function Benchmarks({ url, data }: PageProps<Data>) {
             columns={normalized
               ? benchData.normalizedMaxLatency
               : benchData.maxLatency}
-            yLabel="1k req/sec"
+            yLabel="milliseconds"
             yTickFormat={formatReqSec}
           />
           <p class="mt-1">
