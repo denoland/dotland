@@ -143,32 +143,14 @@ export default function Home({ data }: PageProps<Data>) {
             image={
               <picture>
                 <source
-                  srcset="/images/lp/web_compatibility@lg.avif"
-                  type="image/avif"
-                  media="(min-width: 1024px)"
-                />
-                <source
-                  srcset="/images/lp/web_compatibility@lg.webp"
-                  type="image/webp"
-                  media="(min-width: 1024px)"
-                />
-                <source
-                  srcset="/images/lp/web_compatibility@lg.png"
-                  type="image/png"
+                  srcset="/images/lp/web_compatibility@lg.svg"
+                  type="image/svg+xml"
                   media="(min-width: 1024px)"
                 />
 
-                <source
-                  srcset="/images/lp/web_compatibility.avif"
-                  type="image/avif"
-                />
-                <source
-                  srcset="/images/lp/web_compatibility.webp"
-                  type="image/webp"
-                />
                 <img
                   class="py-7 pl-5 pr-7 lg:(py-12 pl-16 pr-22)"
-                  src="/images/lp/web_compatibility.png"
+                  src="/images/lp/web_compatibility.svg"
                   alt="Web APIs"
                 />
               </picture>
