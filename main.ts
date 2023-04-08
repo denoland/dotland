@@ -18,10 +18,19 @@ import twindConfig from "./twind.config.ts";
 import manifest from "./fresh.gen.ts";
 
 await setup({
-  resolveHref(current: URL, symbol?: string, property?: string) {
+  resolveHref(
+    current: URL,
+    symbol?: string,
+    namespace?: string,
+    property?: string,
+  ) {
     const url = new URL(current);
     if (symbol) {
-      url.searchParams.set("s", symbol);
+      let s = symbol;
+      if (namespace) {
+        s = `${namespace}.${s}`;
+      }
+      url.searchParams.set("s", s);
     } else {
       url.searchParams.delete("s");
     }
