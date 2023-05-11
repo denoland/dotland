@@ -1,6 +1,11 @@
 // Copyright 2022-2023 the Deno authors. All rights reserved. MIT license.
 
-import { render } from "$gfm";
+import { Marked, render } from "$gfm";
+import { mangle } from "$marked-mangle";
+import { markedSmartypants } from "$marked-smartypants";
+
+Marked.marked.use(mangle());
+Marked.marked.use(markedSmartypants());
 
 export function Markdown(
   { source, baseURL, mediaBaseURL }: {
