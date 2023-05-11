@@ -31,4 +31,5 @@
     "$algolia/requester-fetch": "https://esm.sh/@algolia/requester-fetch@4.14.3",
     "$marked-mangle": "https://esm.sh/marked-mangle@1.0.1",
     "$marked-smartypants": "https://esm.sh/marked-smartypants@1.0.1"
+  }
 }
