@@ -29,7 +29,6 @@
     "$algolia": "https://esm.sh/algoliasearch@4.14.3",
     "$algolia/client-search": "https://esm.sh/@algolia/client-search@4.14.3",
     "$algolia/requester-fetch": "https://esm.sh/@algolia/requester-fetch@4.14.3",
-    "$marked-smartypants": "https://esm.sh/marked-smartypants@1.0.1",
-    "$marked-mangle": "https://esm.sh/marked-mangle@1.0.1"
-  }
+    "$marked-mangle": "https://esm.sh/marked-mangle@1.0.1",
+    "$marked-smartypants": "https://esm.sh/marked-smartypants@1.0.1"
 }
