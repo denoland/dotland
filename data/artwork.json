@@ -382,5 +382,17 @@
       "web": "https://hyprtxt.deno.dev"
     },
     "license": "MIT"
+  },
+  {
+    "date": "2023-05-12",
+    "image": "/images/artwork/deno_cooky.png",
+    "title": "Deno Cooky",
+    "alt": "A coooky image of Deno",
+    "artist": {
+      "name": "DaimonGh0st",
+      "profile_image": "https://i.ibb.co/7QwGNYP/profile.jpg",
+      "instagram": "eugea103_"
+    },
+    "license": "MIT"
   }
 ]
