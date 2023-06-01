@@ -60,6 +60,6 @@ const ctx = await ServerContext.fromManifest(manifest, {
   plugins: [twindPlugin(twindConfig)],
 });
 
-const handler = withLog(ctx.handler());
+const handler = ctx.handler();
 
 serve(handler);
