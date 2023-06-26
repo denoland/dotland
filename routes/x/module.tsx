@@ -726,7 +726,7 @@ function InfoView(
 
               {data.description &&
                 (
-                  <div class="text-sm" title={data.description}>
+                  <div class="text-sm break-words" title={data.description}>
                     {data.description}
                   </div>
                 )}
