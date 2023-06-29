@@ -2,8 +2,6 @@
 
 ## This repository has been archived as the source code has been moved to be closed-source only instead. For any issues, please open an issue on https://github.com/denoland/website_feedback.
 
-
-
 [![Build Status](https://github.com/denoland/dotland/workflows/ci/badge.svg?branch=main&event=push)](https://github.com/denoland/dotland/actions)
 
 This is the code for https://deno.land/
